@@ -13,14 +13,14 @@ namespace howto_bouncing_sprites
 {
     public partial class Form1 : Form
     {
+        // The sprites.
+        private BallSprite[] Sprites;
+        private Size FormSize;
+
         public Form1()
         {
             InitializeComponent();
         }
-
-        // The sprites.
-        private BallSprite[] Sprites;
-        private Size FormSize;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -30,9 +30,7 @@ namespace howto_bouncing_sprites
             Sprites = new BallSprite[num_balls];
             for (int i = 0; i < num_balls; i++)
             {
-                Sprites[i] = new BallSprite(10, 40,
-                    ClientSize.Width, ClientSize.Height,
-                    2, 10);
+                Sprites[i] = new BallSprite(10, 40, ClientSize.Width, ClientSize.Height, 2, 10);
             }
 
             // Save the form's size.
@@ -47,11 +45,10 @@ namespace howto_bouncing_sprites
             this.UpdateStyles();
         }
 
-        // Move the balls and refresh.
-        private void tmrMoveBall_Tick(object sender, EventArgs e)
+        // Force all threads to end.
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            foreach (BallSprite sprite in Sprites) sprite.Move();
-            Refresh();
+            Environment.Exit(0);
         }
 
         // Redraw.
@@ -59,13 +56,20 @@ namespace howto_bouncing_sprites
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             e.Graphics.Clear(BackColor);
-            foreach (BallSprite sprite in Sprites) sprite.Draw(e.Graphics);
+            foreach (BallSprite sprite in Sprites)
+            {
+                sprite.Draw(e.Graphics);
+            }
         }
 
-        // Force all threads to end.
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        // Move the balls and refresh.
+        private void tmrMoveBall_Tick(object sender, EventArgs e)
         {
-            Environment.Exit(0);
+            foreach (BallSprite sprite in Sprites)
+            {
+                sprite.Move();
+            }
+            Refresh();
         }
     }
 }

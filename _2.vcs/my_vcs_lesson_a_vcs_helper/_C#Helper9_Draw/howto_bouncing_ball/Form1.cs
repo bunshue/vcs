@@ -14,16 +14,16 @@ namespace howto_bouncing_ball
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         // Some drawing parameters.
         private const int BallWidth = 50;
         private const int BallHeight = 50;
         private int BallX, BallY;   // Position.
         private int BallVx, BallVy; // Velocity.
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
 
         // Initialize some random stuff.
         private void Form1_Load(object sender, EventArgs e)
@@ -44,6 +44,15 @@ namespace howto_bouncing_ball
             this.UpdateStyles();
         }
 
+        // Draw the ball at its current location.
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            e.Graphics.Clear(BackColor);
+            e.Graphics.FillEllipse(Brushes.Blue, BallX, BallY, BallWidth, BallHeight);
+            e.Graphics.DrawEllipse(Pens.Black, BallX, BallY, BallWidth, BallHeight);
+        }
+
         // Update the ball's position, bouncing if necessary.
         private void tmrMoveBall_Tick(object sender, EventArgs e)
         {
@@ -52,7 +61,8 @@ namespace howto_bouncing_ball
             {
                 BallVx = -BallVx;
                 Boing();
-            } else if (BallX + BallWidth > ClientSize.Width)
+            }
+            else if (BallX + BallWidth > ClientSize.Width)
             {
                 BallVx = -BallVx;
                 Boing();
@@ -63,7 +73,8 @@ namespace howto_bouncing_ball
             {
                 BallVy = -BallVy;
                 Boing();
-            } else if (BallY + BallHeight > ClientSize.Height)
+            }
+            else if (BallY + BallHeight > ClientSize.Height)
             {
                 BallVy = -BallVy;
                 Boing();
@@ -75,20 +86,10 @@ namespace howto_bouncing_ball
         // Play the boing sound file resource.
         private void Boing()
         {
-            using (SoundPlayer player = new SoundPlayer(
-                Properties.Resources.boing))
+            using (SoundPlayer player = new SoundPlayer(Properties.Resources.boing))
             {
-                player.Play();
+                //player.Play();
             }
-        }
-
-        // Draw the ball at its current location.
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            e.Graphics.Clear(BackColor);
-            e.Graphics.FillEllipse(Brushes.Blue, BallX, BallY, BallWidth, BallHeight);
-            e.Graphics.DrawEllipse(Pens.Black, BallX, BallY, BallWidth, BallHeight);
         }
     }
 }

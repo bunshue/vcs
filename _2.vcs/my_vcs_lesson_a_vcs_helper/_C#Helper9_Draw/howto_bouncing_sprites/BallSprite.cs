@@ -77,10 +77,9 @@ namespace howto_bouncing_sprites
         // Play the boing sound file resource.
         private static void Boing()
         {
-            using (SoundPlayer player = new SoundPlayer(
-                Properties.Resources.boing))
+            using (SoundPlayer player = new SoundPlayer(Properties.Resources.boing))
             {
-                player.Play();
+                //player.Play();
             }
         }
 
@@ -98,3 +97,4 @@ namespace howto_bouncing_sprites
         }
     }
 }
+

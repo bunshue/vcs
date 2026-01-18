@@ -14,15 +14,15 @@ namespace howto_bouncing_balls
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         // Some drawing parameters.
         private Rectangle[] BallLocation;
         private Point[] BallVelocity;
         private Size FormSize;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
 
         // Initialize some random stuff.
         private void Form1_Load(object sender, EventArgs e)
@@ -56,6 +56,24 @@ namespace howto_bouncing_balls
                 ControlStyles.DoubleBuffer,
                 true);
             this.UpdateStyles();
+        }
+
+        // Force all threads to end.
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        // Draw the ball at its current location.
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            e.Graphics.Clear(BackColor);
+            for (int i = 0; i < BallLocation.Length; i++)
+            {
+                e.Graphics.FillEllipse(Brushes.Blue, BallLocation[i]);
+                e.Graphics.DrawEllipse(Pens.Black, BallLocation[i]);
+            }
         }
 
         // Move the balls and refresh.
@@ -92,36 +110,17 @@ namespace howto_bouncing_balls
                     BallLocation[ball_num].Width,
                     BallLocation[ball_num].Height);
             }
-
             Refresh();
-        }
-
-        // Draw the ball at its current location.
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            e.Graphics.Clear(BackColor);
-            for (int i = 0; i < BallLocation.Length; i++)
-            {
-                e.Graphics.FillEllipse(Brushes.Blue, BallLocation[i]);
-                e.Graphics.DrawEllipse(Pens.Black, BallLocation[i]);
-            }
-        }
-
-        // Force all threads to end.
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Environment.Exit(0);
         }
 
         // Play the boing sound file resource.
         private static void Boing()
         {
-            using (SoundPlayer player = new SoundPlayer(
-                Properties.Resources.boing))
+            using (SoundPlayer player = new SoundPlayer(Properties.Resources.boing))
             {
-                player.Play();
+                //player.Play();
             }
         }
     }
 }
+
