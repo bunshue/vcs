@@ -18,7 +18,12 @@ namespace vcs_Draw_Curve1
             InitializeComponent();
         }
 
-        private void Form1_Paint(object sender, PaintEventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            pictureBox1.Paint +=new PaintEventHandler(pictureBox1_Paint);
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             this.Text = "畫曲線  DrawCurve： 張力 = " + Tension.ToString();
 
@@ -60,16 +65,19 @@ namespace vcs_Draw_Curve1
             {
                 e.Graphics.DrawEllipse(Pens.Black, pt[i].X - 2, pt[i].Y - 2, 4, 4);
             }
+
+
+        }
+
+
+
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
         }
 
         private void Form1_Resize(object sender, EventArgs e)
         {
             this.Invalidate();
-        }
-
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -80,7 +88,9 @@ namespace vcs_Draw_Curve1
                 Tension = 0;
             }
             this.Text = "畫曲線  DrawCurve： 張力 = " + Tension.ToString();
-            this.Invalidate();
+            //this.Invalidate();
+            this.pictureBox1.Invalidate();
         }
+
     }
 }

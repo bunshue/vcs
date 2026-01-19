@@ -19,18 +19,27 @@ namespace vcs_Draw_Curve2
             InitializeComponent();
         }
 
-        private void Form1_Paint(object sender, PaintEventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            pictureBox1.Paint += new PaintEventHandler(pictureBox1_Paint);
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             Point[] pt = new Point[3]; // 定義 三個點
-            pt[0] = new Point(100, this.ClientSize.Height / 2);
+            pt[0] = new Point(100, this.pictureBox1.ClientSize.Height / 2);
             //pt[1] = new Point(300, 100);
-            pt[2] = new Point(this.ClientSize.Width - 100, this.ClientSize.Height / 2);
+            pt[2] = new Point(this.pictureBox1.ClientSize.Width - 100, this.pictureBox1.ClientSize.Height / 2);
 
-            for (int i = 0; i < ClientSize.Height; i = i + 10)
+            for (int i = 0; i < this.pictureBox1.ClientSize.Height; i = i + 10)
             {
-                pt[1] = new Point(this.ClientSize.Width / 2, i);
+                pt[1] = new Point(this.pictureBox1.ClientSize.Width / 2, i);
                 e.Graphics.DrawCurve(Pens.Black, pt, Tension); // 曲線的繪出
             }
+        }
+
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -40,7 +49,7 @@ namespace vcs_Draw_Curve2
             {
                 Tension_D = -Tension_D;
             }
-            this.Invalidate();
+            this.pictureBox1.Invalidate();
         }
     }
 }
