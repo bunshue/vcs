@@ -42,6 +42,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.bt_clear1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -207,11 +208,22 @@
             this.label5.TabIndex = 90;
             this.label5.Text = "label5";
             // 
+            // bt_clear1
+            // 
+            this.bt_clear1.Location = new System.Drawing.Point(382, 12);
+            this.bt_clear1.Name = "bt_clear1";
+            this.bt_clear1.Size = new System.Drawing.Size(50, 25);
+            this.bt_clear1.TabIndex = 91;
+            this.bt_clear1.Text = "Clear";
+            this.bt_clear1.UseVisualStyleBackColor = true;
+            this.bt_clear1.Click += new System.EventHandler(this.bt_clear1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(444, 361);
+            this.Controls.Add(this.bt_clear1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -257,6 +269,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button bt_clear1;
     }
 }
 

@@ -41,8 +41,6 @@ namespace vcs_Draw_Line
 
         }
 
-
-
         // The mouse is up. See whether we're over an end point or segment.
         private void picCanvas_MouseMove_NotDown(object sender, MouseEventArgs e)
         {
@@ -126,7 +124,10 @@ namespace vcs_Draw_Line
         // Snap to the nearest grid point.
         private void SnapToGrid(ref int x, ref int y)
         {
-            if (!chkSnapToGrid.Checked) return;
+            if (!chkSnapToGrid.Checked)
+            {
+                return;
+            }
             x = grid_gap * (int)Math.Round((double)x / grid_gap);
             y = grid_gap * (int)Math.Round((double)y / grid_gap);
         }
@@ -283,16 +284,13 @@ namespace vcs_Draw_Line
             {
                 // See if we're over the segment.
                 PointF closest;
-                if (FindDistanceToSegmentSquared(
-                    mouse_pt, Pt1[i], Pt2[i], out closest)
-                        < over_dist_squared)
+                if (FindDistanceToSegmentSquared(mouse_pt, Pt1[i], Pt2[i], out closest) < over_dist_squared)
                 {
                     // We're over this segment.
                     segment_number = i;
                     return true;
                 }
             }
-
             segment_number = -1;
             return false;
         }
@@ -362,17 +360,13 @@ namespace vcs_Draw_Line
             // Draw the end points.
             foreach (Point pt in Pt1)
             {
-                Rectangle rect = new Rectangle(
-                    pt.X - object_radius, pt.Y - object_radius,
-                    2 * object_radius + 1, 2 * object_radius + 1);
+                Rectangle rect = new Rectangle(pt.X - object_radius, pt.Y - object_radius, 2 * object_radius + 1, 2 * object_radius + 1);
                 e.Graphics.FillEllipse(Brushes.White, rect);
                 e.Graphics.DrawEllipse(Pens.Black, rect);
             }
             foreach (Point pt in Pt2)
             {
-                Rectangle rect = new Rectangle(
-                    pt.X - object_radius, pt.Y - object_radius,
-                    2 * object_radius + 1, 2 * object_radius + 1);
+                Rectangle rect = new Rectangle(pt.X - object_radius, pt.Y - object_radius, 2 * object_radius + 1, 2 * object_radius + 1);
                 e.Graphics.FillEllipse(Brushes.White, rect);
                 e.Graphics.DrawEllipse(Pens.Black, rect);
             }
@@ -401,9 +395,7 @@ namespace vcs_Draw_Line
             }
             else
             {
-                Bitmap bm = new Bitmap(
-                    picCanvas.ClientSize.Width, 
-                    picCanvas.ClientSize.Height);
+                Bitmap bm = new Bitmap(picCanvas.ClientSize.Width, picCanvas.ClientSize.Height);
                 for (int x = 0; x < picCanvas.ClientSize.Width; x += grid_gap)
                 {
                     for (int y = 0; y < picCanvas.ClientSize.Height; y += grid_gap)
@@ -411,10 +403,8 @@ namespace vcs_Draw_Line
                         bm.SetPixel(x, y, Color.Black);
                     }
                 }
-
                 picCanvas.BackgroundImage = bm;
             }
         }
-
     }
 }

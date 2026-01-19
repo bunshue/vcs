@@ -96,12 +96,6 @@ namespace vcs_MousePaint
         bool dragging4 = false; // 是否拖拉中
         //pictureBox4 連續貝茲線與控制點 SP
 
-        //pictureBox5 直線連線 ST
-        Point[] pt = new Point[300];
-        int pt_index = -1;
-        bool flag_mouse_down = false;
-        //pictureBox5 直線連線 SP
-
         public Form1()
         {
             InitializeComponent();
@@ -203,7 +197,7 @@ namespace vcs_MousePaint
             label2.Text = "累計畫矩形";
             label3.Text = "貝茲線與控制點";
             label4.Text = "連續貝茲線與控制點";
-            label5.Text = "直線連線";
+            label5.Text = "";
             richTextBox1.Size = new Size(W - 200, H * 2 + 60);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -609,8 +603,6 @@ namespace vcs_MousePaint
             // 解除 端點或控制點 的點選狀況
             mp_Selected4 = -1;
             dragging4 = false;
-
-
         }
 
         private void pictureBox4_Paint(object sender, PaintEventArgs e)
@@ -637,19 +629,10 @@ namespace vcs_MousePaint
             e.Graphics.DrawRectangle(Pens.Black, mpList4[4].p.X - 10, mpList4[4].p.Y - 10, 20, 20);
             e.Graphics.DrawRectangle(Pens.Black, mpList4[5].p.X - 10, mpList4[5].p.Y - 10, 20, 20);
             e.Graphics.DrawEllipse(Pens.Black, mpList4[6].p.X - 10, mpList4[6].p.Y - 10, 20, 20);
-
         }
 
         private void pictureBox5_MouseDown(object sender, MouseEventArgs e)
         {
-            flag_mouse_down = true;
-
-            if (pt_index < (pt.Length - 1)) // 如果一維陣列內的 100 個位置還沒裝滿
-            {
-                pt_index++;  // 一維陣列 的索引往前
-                pt[pt_index] = new Point(e.X, e.Y); // 存入 滑鼠游標位置
-                this.pictureBox5.Invalidate(); // 要求表單重畫
-            }
         }
 
         private void pictureBox5_MouseMove(object sender, MouseEventArgs e)
@@ -659,45 +642,10 @@ namespace vcs_MousePaint
 
         private void pictureBox5_MouseUp(object sender, MouseEventArgs e)
         {
-            flag_mouse_down = false;
         }
 
         private void pictureBox5_Paint(object sender, PaintEventArgs e)
         {
-            /*
-            for (int i = 0; i <= pt_index; i++)
-            {
-                e.Graphics.DrawImage(img,
-                pt[i].X - img.Width / 2, pt[i].Y - img.Height / 2, //影像左上角在表單的位置
-                img.Width, img.Height); //影像的寬高
-            }
-            */
-            //richTextBox1.Text += "index " + pt_index.ToString() + "\n";
-
-            if (pt_index < 1)
-            {
-                return;
-            }
-
-            Point[] pt2 = new Point[pt_index + 1];
-            int i;
-            for (i = 0; i <= pt_index; i++)
-            {
-                pt2[i] = pt[i];
-            }
-
-            e.Graphics.DrawLines(new Pen(Color.Red, 2), pt2);
-
-            /*
-            //richTextBox1.Text += "idx = " + pt_index.ToString() + "\n";
-                //Point[] pt2 = new Point[pt_index + 1];
-                int i;
-                for (i = 0; i <= pt_index; i++)
-                {
-                    //richTextBox1.Text += "draw i = " + i.ToString() + "\n";
-                    e.Graphics.DrawEllipse(new Pen(Color.Red, 1), pt[i].X, pt[i].Y, 20, 20);
-                }
-            */
         }
     }
 }

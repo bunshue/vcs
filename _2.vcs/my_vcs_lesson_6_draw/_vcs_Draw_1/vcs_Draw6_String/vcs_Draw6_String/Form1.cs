@@ -47,56 +47,41 @@ namespace vcs_Draw6_String
             int dy;
 
             //button
-            x_st = 1100;
+            x_st = 1260;
             y_st = 40;
-            dx = 150;
-            dy = 60;
+            dx = 200 + 10;
+            dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button4.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button9.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button16.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button17.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button18.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button19.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 7);
 
-            button5.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button6.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button7.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button8.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button9.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            bt_save.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            bt_exit.Location = new Point(x_st + dx * 2, y_st + dy * 8);
 
-            button10.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button12.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button13.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button14.Location = new Point(x_st + dx * 4, y_st + dy * 2);
-
-            button15.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button17.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button18.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button19.Location = new Point(x_st + dx * 4, y_st + dy * 3);
-
-            button20.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button21.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button23.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            button24.Location = new Point(x_st + dx * 4, y_st + dy * 4);
-
-            button25.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button26.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button28.Location = new Point(x_st + dx * 3, y_st + dy * 5);
-            button29.Location = new Point(x_st + dx * 4, y_st + dy * 5);
-
-            button30.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button31.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-
-            //bt_clear.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            bt_save.Location = new Point(x_st + dx * 3, y_st + dy * 8);
-            bt_exit.Location = new Point(x_st + dx * 4, y_st + dy * 8);
-
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 10);
-            richTextBox1.Size = new Size(richTextBox1.Size.Width - 100, this.Height - richTextBox1.Location.Y + 200);
+            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            richTextBox1.Size = new Size(400, 360);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -827,6 +812,11 @@ namespace vcs_Draw6_String
 
         private void button19_Click(object sender, EventArgs e)
         {
+            //發光效果文字
+            using (Font fnt = new Font("Arial", 40, FontStyle.Bold))//定義字體
+            {
+                this.pictureBox1.Image = (Bitmap)ImageLightEffect("發光效果文字", fnt, Color.Yellow, Color.Red, 10);//呼叫自定義方法ImageLightEffect
+            }
         }
 
         public static Image ImageLightEffect(string Str, Font F, Color ColorFore, Color ColorBack, int BlurConsideration)
@@ -867,31 +857,6 @@ namespace vcs_Draw6_String
 
         private void button20_Click(object sender, EventArgs e)
         {
-            //發光效果文字
-            using (Font fnt = new Font("Arial", 40, FontStyle.Bold))//定義字體
-            {
-                this.pictureBox1.Image = (Bitmap)ImageLightEffect("發光效果文字", fnt, Color.Yellow, Color.Red, 10);//呼叫自定義方法ImageLightEffect
-            }
-        }
-
-        private void button21_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button22_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button24_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button25_Click(object sender, EventArgs e)
-        {
             //顯示豎排文字
 
             int W = pictureBox1.Width;
@@ -914,7 +879,7 @@ namespace vcs_Draw6_String
             g.DrawString("顯示豎排文字", new Font("標楷體", 20), new SolidBrush(Color.Black), 0, 0, new StringFormat(StringFormatFlags.DirectionVertical));
         }
 
-        private void button26_Click(object sender, EventArgs e)
+        private void button21_Click(object sender, EventArgs e)
         {
             //依字體大小調整圖片大小
             string show_word = "群曜醫電";
@@ -949,15 +914,17 @@ namespace vcs_Draw6_String
             }
             finally
             {
-                if (null != g) g.Dispose();
+                if (null != g)
+                {
+                    g.Dispose();
+                }
                 //if (null != newBitmap) newBitmap.Dispose();
             }
         }
 
-        private void button27_Click(object sender, EventArgs e)
+        private void button22_Click(object sender, EventArgs e)
         {
             //量測字的大小 MeasureString
-
 
             int W = pictureBox1.Width;
             int H = pictureBox1.Height;
@@ -982,20 +949,9 @@ namespace vcs_Draw6_String
             richTextBox1.Text += "字串寬高 : " + stringSize2.ToSize() + "\n";
 
             richTextBox1.Text += "其實量得也不準\n";
-
-
         }
 
-        private void button28_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button29_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button30_Click(object sender, EventArgs e)
+        private void button23_Click(object sender, EventArgs e)
         {
             //寫出直排的字串
 
@@ -1015,12 +971,6 @@ namespace vcs_Draw6_String
             float Y = 100;
 
             g.DrawString(text, f, Brushes.Red, X, Y, stringFormat);  // 繪出文字字串
-
-        }
-
-        private void button31_Click(object sender, EventArgs e)
-        {
-
         }
 
         void save_image_to_drive()
