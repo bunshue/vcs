@@ -5,7 +5,7 @@ using System.Text;
 
 using System.Drawing;
 
-namespace vcs_Draw6_Rectangle2
+namespace vcs_MousePaint
 {
     public static class GraphicsExtensions
     {

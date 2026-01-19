@@ -50,6 +50,39 @@ namespace vcs_MousePaint
         private int EndY;
         //pictureBox1 左鍵畫一橢圓, 右鍵畫一橢圓 SP
 
+        //pictureBox2 累計畫矩形 ST
+
+        // Parameters for drawing the dashed rectangle.
+        private float Offset = 0;
+        private float OffsetDelta = 2;
+        private float[] DashPattern = { 5, 5 };
+
+        // Previously selected rectangles.
+        private List<Rectangle> Rectangles = new List<Rectangle>();
+
+        // The rectangle we are selecting.
+        private Rectangle NewRectangle;
+
+        // Variables used to select a new rectangle.
+        private int StartX2, StartY2, EndX2, EndY2;
+        private bool SelectingRectangle = false;
+
+        // The rectangles' colors.
+        private Brush[] RectangleBrushes =
+        {
+            Brushes.Red,
+            Brushes.Green,
+            Brushes.Blue,
+            Brushes.Lime,
+            Brushes.Orange,
+            Brushes.Fuchsia,
+            Brushes.Yellow,
+            Brushes.LightGreen,
+            Brushes.LightBlue,
+            Brushes.Cyan,
+        };
+
+        //pictureBox2 累計畫矩形 SP
 
         //pictureBox3 貝茲線與控制點 ST
         List<MovingPoint> mpList3 = new List<MovingPoint>(); // 可移動點的動態陣列
@@ -62,6 +95,12 @@ namespace vcs_MousePaint
         int mp_Selected4 = -1;  // 動態陣列 的第幾個 被選到
         bool dragging4 = false; // 是否拖拉中
         //pictureBox4 連續貝茲線與控制點 SP
+
+        //pictureBox5 直線連線 ST
+        Point[] pt = new Point[300];
+        int pt_index = -1;
+        bool flag_mouse_down = false;
+        //pictureBox5 直線連線 SP
 
         public Form1()
         {
@@ -90,6 +129,7 @@ namespace vcs_MousePaint
                 pts[i] = new Point(w / 2 + (int)(r * Math.Cos(Math.PI * angle * i / 180)), h / 2 + (int)(r * Math.Sin(Math.PI * angle * i / 180)));
             }
             //pictureBox0 拖曳圓點 SP
+
 
             //pictureBox3 貝茲線與控制點 ST
             MovingPoint mp3;
@@ -160,10 +200,10 @@ namespace vcs_MousePaint
             label5.Location = new Point(x_st + dx * 2, y_st + dy * 1 - dd);
             label0.Text = "拖曳正六邊形的頂點 / 拖曳圓點";
             label1.Text = "左鍵畫一橢圓, 右鍵畫一橢圓";
-            label2.Text = "";
+            label2.Text = "累計畫矩形";
             label3.Text = "貝茲線與控制點";
             label4.Text = "連續貝茲線與控制點";
-            label5.Text = "";
+            label5.Text = "直線連線";
             richTextBox1.Size = new Size(W - 200, H * 2 + 60);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -402,9 +442,99 @@ namespace vcs_MousePaint
             }
         }
 
+        //pictureBox2 累計畫矩形 ST
+        private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
+        {
+            // Save the current point.
+            StartX2 = e.X;
+            StartY2 = e.Y;
+            EndX2 = e.X;
+            EndY2 = e.Y;
+
+            // Make a new selection rectangle.
+            NewRectangle = new Rectangle(
+                Math.Min(StartX2, EndX2),
+                Math.Min(StartY2, EndY2),
+                Math.Abs(StartX2 - EndX2),
+                Math.Abs(StartY2 - EndY2));
+
+            // Start marching.
+            SelectingRectangle = true;
+            timer2.Enabled = true;
+        }
+
+        private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!SelectingRectangle)
+            {
+                return;
+            }
+
+            // Save the current point.
+            EndX2 = e.X;
+            EndY2 = e.Y;
+
+            // Make a new selection rectangle.
+            NewRectangle = new Rectangle(
+                Math.Min(StartX2, EndX2),
+                Math.Min(StartY2, EndY2),
+                Math.Abs(StartX2 - EndX2),
+                Math.Abs(StartY2 - EndY2));
+
+            // Redraw.
+            Refresh();
+        }
+
+        private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (!SelectingRectangle)
+            {
+                return;
+            }
+            SelectingRectangle = false;
+            timer2.Enabled = false;
+            if ((StartX2 == EndX2) || (StartY2 == EndY2))
+            {
+                return;
+            }
+
+            // Save the newly selected rectangle.
+            Rectangles.Add(new Rectangle(
+                Math.Min(StartX2, EndX2),
+                Math.Min(StartY2, EndY2),
+                Math.Abs(StartX2 - EndX2),
+                Math.Abs(StartY2 - EndY2)));
+
+            // Redraw.
+            Refresh();
+        }
+
         private void pictureBox2_Paint(object sender, PaintEventArgs e)
         {
+            Offset += OffsetDelta;
+
+            // Draw previously selected rectangles.
+            for (int i = 0; i < Rectangles.Count; i++)
+            {
+                e.Graphics.FillRectangle(
+                    RectangleBrushes[i % RectangleBrushes.Length],
+                    Rectangles[i]);
+                e.Graphics.DrawRectangle(Pens.Black, Rectangles[i]);
+            }
+
+            // Draw the new rectangle.
+            if (SelectingRectangle)
+            {
+                e.Graphics.DrawRectangle(NewRectangle, Color.Yellow,
+                    Color.Red, 2f, Offset, DashPattern);
+            }
         }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            Refresh();
+        }
+        //pictureBox2 累計畫矩形 SP
 
         private void pictureBox3_MouseDown(object sender, MouseEventArgs e)
         {
@@ -510,8 +640,64 @@ namespace vcs_MousePaint
 
         }
 
+        private void pictureBox5_MouseDown(object sender, MouseEventArgs e)
+        {
+            flag_mouse_down = true;
+
+            if (pt_index < (pt.Length - 1)) // 如果一維陣列內的 100 個位置還沒裝滿
+            {
+                pt_index++;  // 一維陣列 的索引往前
+                pt[pt_index] = new Point(e.X, e.Y); // 存入 滑鼠游標位置
+                this.pictureBox5.Invalidate(); // 要求表單重畫
+            }
+        }
+
+        private void pictureBox5_MouseMove(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void pictureBox5_MouseUp(object sender, MouseEventArgs e)
+        {
+            flag_mouse_down = false;
+        }
+
         private void pictureBox5_Paint(object sender, PaintEventArgs e)
         {
+            /*
+            for (int i = 0; i <= pt_index; i++)
+            {
+                e.Graphics.DrawImage(img,
+                pt[i].X - img.Width / 2, pt[i].Y - img.Height / 2, //影像左上角在表單的位置
+                img.Width, img.Height); //影像的寬高
+            }
+            */
+            //richTextBox1.Text += "index " + pt_index.ToString() + "\n";
+
+            if (pt_index < 1)
+            {
+                return;
+            }
+
+            Point[] pt2 = new Point[pt_index + 1];
+            int i;
+            for (i = 0; i <= pt_index; i++)
+            {
+                pt2[i] = pt[i];
+            }
+
+            e.Graphics.DrawLines(new Pen(Color.Red, 2), pt2);
+
+            /*
+            //richTextBox1.Text += "idx = " + pt_index.ToString() + "\n";
+                //Point[] pt2 = new Point[pt_index + 1];
+                int i;
+                for (i = 0; i <= pt_index; i++)
+                {
+                    //richTextBox1.Text += "draw i = " + i.ToString() + "\n";
+                    e.Graphics.DrawEllipse(new Pen(Color.Red, 1), pt[i].X, pt[i].Y, 20, 20);
+                }
+            */
         }
     }
 }
@@ -533,4 +719,15 @@ namespace vcs_MousePaint
 
 */
 
+
+// Start selecting a rectangle.
+// Continue selecting a rectangle.
+// Finish selecting a rectangle.
+
+
+
+/*
+                Bitmap bmp = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\BMW.jfif");
+                    e.Graphics.DrawImage(bmp, pt[i].X, pt[i].Y, 100, 100);
+*/
 

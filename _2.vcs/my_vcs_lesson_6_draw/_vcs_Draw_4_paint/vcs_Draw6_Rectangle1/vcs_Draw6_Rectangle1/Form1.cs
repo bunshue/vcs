@@ -23,6 +23,11 @@ namespace vcs_Draw6_Rectangle1
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.DoubleBuffered = true;
 
             //創建一個bitmap
             theImage = new Bitmap(this.ClientRectangle.Width, this.ClientRectangle.Height);
@@ -36,10 +41,8 @@ namespace vcs_Draw6_Rectangle1
             PenStyle.EndCap = System.Drawing.Drawing2D.LineCap.Round;
             PenStyle.Color = foreColor;
 
-
             //PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel;
             PenStyle.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
-
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -63,14 +66,12 @@ namespace vcs_Draw6_Rectangle1
                 this.Form1_Paint(this, new PaintEventArgs(this.CreateGraphics(), this.ClientRectangle));
                 g.DrawRectangle(new Pen(foreColor, 1), startPoint.X, startPoint.Y, e.X - startPoint.X, e.Y - startPoint.Y);
             }
-
         }
 
         private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
             isDrawing = false;
             ig.DrawRectangle(new Pen(foreColor, 1), startPoint.X, startPoint.Y, e.X - startPoint.X, e.Y - startPoint.Y);
-
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -89,5 +90,6 @@ namespace vcs_Draw6_Rectangle1
         {
             this.Form1_Paint(this, new PaintEventArgs(this.CreateGraphics(), this.ClientRectangle));
         }
+
     }
 }
