@@ -33,6 +33,32 @@ namespace vcs_ChangeLanguage
             MultiLanguage.LoadLanguage(this, str);
 
             //public static void LoadLanguage(Form form, string FormName)
+
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 20;
+            y_st = 20;
+            dx = 240;
+            dy = 460;
+
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            richTextBox1.Size = new Size(250, 500);
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void change_language1_Click(object sender, EventArgs e)
@@ -61,6 +87,36 @@ namespace vcs_ChangeLanguage
             richTextBox1.Text += str + "\n";
 
             MultiLanguage.LoadLanguage(this, str);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            /*
+            string str = MultiLanguage.GetDefaultLanguage();
+            richTextBox1.Text += str + "\n";
+            MultiLanguage.LoadLanguage(this, str);
+            */
+
+            string defaultLanguage = "ChineseSimplified";
+            XmlReader reader = new XmlTextReader("../../Languages/DefaultLanguage.xml");
+            XmlDocument doc = new XmlDocument();
+            doc.Load(reader);
+            XmlNode root = doc.DocumentElement;
+            //选取DefaultLangugae节点
+            XmlNode node = root.SelectSingleNode("DefaultLanguage");
+            if (node != null)
+            {
+                //取出节点中的内容
+                defaultLanguage = node.InnerText;
+                richTextBox1.Text += "aaaaa : " + defaultLanguage + "\n";
+            }
+            reader.Close();
+            //reader.Dispose();
+            //return defaultLanguage;
+            richTextBox1.Text += "bbbbb : " + defaultLanguage + "\n";
+
+
+
         }
     }
 

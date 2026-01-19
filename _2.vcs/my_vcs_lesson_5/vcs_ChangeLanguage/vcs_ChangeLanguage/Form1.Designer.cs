@@ -38,6 +38,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.change_language2 = new System.Windows.Forms.Button();
             this.change_language3 = new System.Windows.Forms.Button();
+            this.bt_clear = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -143,11 +145,34 @@
             this.change_language3.UseVisualStyleBackColor = true;
             this.change_language3.Click += new System.EventHandler(this.change_language3_Click);
             // 
+            // bt_clear
+            // 
+            this.bt_clear.Location = new System.Drawing.Point(526, 35);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(75, 39);
+            this.bt_clear.TabIndex = 10;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button5.Location = new System.Drawing.Point(272, 352);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(139, 76);
+            this.button5.TabIndex = 11;
+            this.button5.Text = "測試";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(755, 530);
+            this.ClientSize = new System.Drawing.Size(755, 542);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.change_language3);
             this.Controls.Add(this.change_language2);
             this.Controls.Add(this.label1);
@@ -178,6 +203,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button change_language2;
         private System.Windows.Forms.Button change_language3;
+        private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Button button5;
     }
 }
 

@@ -112,6 +112,12 @@ namespace vcs_test_all_00_Usually
             int w = this.Width;
             int h = this.Height;
             this.Location = new Point((W - w) / 2, (H - h) / 2);
+
+            /*
+            //設定執行後的表單起始位置
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new System.Drawing.Point(0, 0);
+            */
         }
 
         void show_item_location()
@@ -610,4 +616,24 @@ namespace vcs_test_all_00_Usually
             protocol_Tls12 = (SecurityProtocolType)3072;
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+
+
 

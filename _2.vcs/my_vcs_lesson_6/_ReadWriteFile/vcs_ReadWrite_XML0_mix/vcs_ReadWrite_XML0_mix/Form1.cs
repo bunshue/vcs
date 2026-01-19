@@ -82,16 +82,17 @@ namespace vcs_ReadWrite_XML0_mix
         private void button0_Click(object sender, EventArgs e)
         {
             //XML讀取
-            //read_xml.xml
 
             string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\vcs_ReadWrite_XML0.xml";
 
-            //XDocument doc = XDocument.Load(Server.MapPath("html5Reader/ReaderData.xml")); 
-            StringBuilder sb = new StringBuilder();
             XmlDocument dc = new XmlDocument();
+            //XDocument doc = XDocument.Load(filename); 
             dc.Load(filename);
 
             XmlNodeList xnl = dc.SelectNodes("chapter");
+            richTextBox1.Text += "Count = " + xnl.Count.ToString() + "\n";
+
+            StringBuilder sb = new StringBuilder();
             sb.Append("<ul>");
             readxml(xnl, sb);
             sb.Append("</ul>");
@@ -105,6 +106,8 @@ namespace vcs_ReadWrite_XML0_mix
             richTextBox1.Text += "rrrrrr len = " + xmlnl.Count.ToString() + "\n";
             foreach (XmlNode xl in xmlnl)
             {
+                richTextBox1.Text += "aaaaa\n";
+
                 if (xl.ChildNodes.Count == 0)
                 {
                     sb_.Append("<li><a>" + xl.Attributes["value"].Value + "</a></li>");
