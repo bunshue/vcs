@@ -35,9 +35,9 @@
             // 
             // picCanvas
             // 
-            this.picCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.picCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.picCanvas.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.picCanvas.Location = new System.Drawing.Point(12, 32);
             this.picCanvas.Name = "picCanvas";
@@ -69,6 +69,7 @@
             this.Controls.Add(this.picCanvas);
             this.Name = "Form1";
             this.Text = "vcs_Draw_Line";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picCanvas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

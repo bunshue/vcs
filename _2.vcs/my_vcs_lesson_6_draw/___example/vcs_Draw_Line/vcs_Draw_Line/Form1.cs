@@ -13,11 +13,6 @@ namespace vcs_Draw_Line
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         // The grid spacing.
         const int grid_gap = 8;
 
@@ -35,6 +30,18 @@ namespace vcs_Draw_Line
         // Points for the new line.
         private bool IsDrawing = false;
         private Point NewPt1, NewPt2;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+
 
         // The mouse is up. See whether we're over an end point or segment.
         private void picCanvas_MouseMove_NotDown(object sender, MouseEventArgs e)
@@ -408,5 +415,6 @@ namespace vcs_Draw_Line
                 picCanvas.BackgroundImage = bm;
             }
         }
+
     }
 }
