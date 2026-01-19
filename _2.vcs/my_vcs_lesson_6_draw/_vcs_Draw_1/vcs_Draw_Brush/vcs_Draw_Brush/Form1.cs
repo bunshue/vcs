@@ -519,8 +519,109 @@ namespace vcs_Draw_Brush
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //彩色曲線
 
+            Bitmap bitmap1 = new Bitmap(600, 600);
+            Graphics g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            Point[] ColorPoints = null;
+
+            Random rand = new Random();
+            ColorPoints = new Point[20];
+            for (int i = 0; i < ColorPoints.Length; i++)
+            {
+                ColorPoints[i] = new Point(i * 15, rand.Next(5, 110));
+            }
+
+            RectangleF world_rect = new RectangleF(0, 0, 100, 100);
+            RectangleF device_rect = new RectangleF(5, 5,
+                pictureBox1.ClientSize.Width - 10,
+                pictureBox1.ClientSize.Height - 10);
+            SetTransformation(g, world_rect, device_rect, false, true);
+
+            // Draw the axes.
+            using (Pen pen = new Pen(Color.Black, 0))
+            {
+                for (int y = 10; y < 100; y += 10)
+                    g.DrawLine(pen, -2, y, 2, y);
+                g.DrawLine(pen, 0, 0, 0, 100);
+
+                for (int x = 10; x < 100; x += 10)
+                    g.DrawLine(pen, x, -2, x, 2);
+                g.DrawLine(pen, 0, 0, 100, 0);
+            }
+
+            // Make a brush for the curve.
+            using (LinearGradientBrush brush =
+                new LinearGradientBrush(world_rect,
+                    Color.Red, Color.Blue, 270))
+            {
+                ColorBlend blend = new ColorBlend();
+                blend.Colors = new Color[]
+                {
+                    Color.Red, Color.Red,
+                    Color.Orange, Color.Orange,
+                    Color.Yellow, Color.Yellow,
+                    Color.Green, Color.Green,
+                    Color.Blue, Color.Blue,
+                };
+                blend.Positions =
+                    new float[]
+                    {
+                        0.0f, 0.2f,
+                        0.2f, 0.4f,
+                        0.4f, 0.6f, 
+                        0.6f, 0.8f,
+                        0.8f, 1.0f,
+                    };
+                brush.InterpolationColors = blend;
+
+                // Make a thick pen defined by the brush.
+                using (Pen pen = new Pen(brush, 3))
+                {
+                    pen.LineJoin = LineJoin.Bevel;
+
+                    // Draw the curve.
+                    rand = new Random();
+
+                    g.DrawCurve(pen, ColorPoints);     //曲線
+
+                    //g.DrawLines(pen, ColorPoints);     //直線
+
+                    //// Draw a vertical line on the edge to show the colors.
+                    //g.DrawLine(pen, 100, 0, 100, 100);
+                }
+            }
+            pictureBox1.Image = bitmap1;
         }
+
+        // Map from world coordinates to device coordinates.
+        private void SetTransformation(Graphics gr, RectangleF world_rect, RectangleF device_rect, bool invert_x, bool invert_y)
+        {
+            PointF[] device_points =
+            {
+                new PointF(device_rect.Left, device_rect.Top),      // Upper left.
+                new PointF(device_rect.Right, device_rect.Top),     // Upper right.
+                new PointF(device_rect.Left, device_rect.Bottom),   // Lower left.
+            };
+
+            if (invert_x)
+            {
+                device_points[0].X = device_rect.Right;
+                device_points[1].X = device_rect.Left;
+                device_points[2].X = device_rect.Right;
+            }
+            if (invert_y)
+            {
+                device_points[0].Y = device_rect.Bottom;
+                device_points[1].Y = device_rect.Bottom;
+                device_points[2].Y = device_rect.Top;
+            }
+
+            gr.Transform = new Matrix(world_rect, device_points);
+        }
+
 
         private void button20_Click(object sender, EventArgs e)
         {

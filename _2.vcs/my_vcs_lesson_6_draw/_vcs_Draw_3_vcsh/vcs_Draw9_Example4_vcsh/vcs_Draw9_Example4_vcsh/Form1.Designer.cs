@@ -37,7 +37,6 @@
             this.bt_clear = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_hit_curve = new System.Windows.Forms.PictureBox();
-            this.pictureBox_color_curve = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnGo = new System.Windows.Forms.Button();
             this.picHidden = new System.Windows.Forms.PictureBox();
@@ -91,7 +90,6 @@
             this.label41 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hit_curve)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_color_curve)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picHidden)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picColors)).BeginInit();
@@ -169,16 +167,6 @@
             this.pictureBox_hit_curve.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_hit_curve_Paint);
             this.pictureBox_hit_curve.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox_hit_curve_MouseClick);
             this.pictureBox_hit_curve.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_hit_curve_MouseMove);
-            // 
-            // pictureBox_color_curve
-            // 
-            this.pictureBox_color_curve.BackColor = System.Drawing.Color.LightGreen;
-            this.pictureBox_color_curve.Location = new System.Drawing.Point(171, 438);
-            this.pictureBox_color_curve.Name = "pictureBox_color_curve";
-            this.pictureBox_color_curve.Size = new System.Drawing.Size(254, 238);
-            this.pictureBox_color_curve.TabIndex = 76;
-            this.pictureBox_color_curve.TabStop = false;
-            this.pictureBox_color_curve.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_color_curve_Paint);
             // 
             // groupBox1
             // 
@@ -657,7 +645,6 @@
             this.ClientSize = new System.Drawing.Size(1370, 688);
             this.Controls.Add(this.label41);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.pictureBox_color_curve);
             this.Controls.Add(this.pictureBox_hit_curve);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.bt_exit);
@@ -669,7 +656,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hit_curve)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_color_curve)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picHidden)).EndInit();
@@ -689,7 +675,6 @@
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.PictureBox pictureBox_hit_curve;
-        private System.Windows.Forms.PictureBox pictureBox_color_curve;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox picHidden;
         private System.Windows.Forms.Label label21;

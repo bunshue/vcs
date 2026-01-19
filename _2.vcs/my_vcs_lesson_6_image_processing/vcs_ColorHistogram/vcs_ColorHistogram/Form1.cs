@@ -823,15 +823,6 @@ namespace vcs_ColorHistogram
             groupBox_control.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 20);
             groupBox_selection.Size = new Size(250, 170);
             groupBox_selection.Location = new Point(x_st + dx * 4 - 30, y_st + dy * 2 + 20);
-            groupBox_color.Size = new Size(290, 64);
-            groupBox_color.Location = new Point(x_st + dx * 6 + 30, y_st + dy * 2 + 130);
-
-            hScrollBar1.Size = new Size(200, 22);
-            hScrollBar1.Location = new Point(x_st + dx * 9 + 40, y_st + dy * 2 + 130);
-            hScrollBar2.Size = new Size(200, 22);
-            hScrollBar2.Location = new Point(x_st + dx * 9 + 40, y_st + dy * 2 + 130+23);
-            hScrollBar3.Size = new Size(200, 22);
-            hScrollBar3.Location = new Point(x_st + dx * 9 + 40, y_st + dy * 2 + 130+46);
 
             //button
             x_st = 20;
@@ -866,21 +857,6 @@ namespace vcs_ColorHistogram
             rb_selection1.Location = new Point(x_st + dx * 2 + 30, y_st + dy * 0);
             rb_selection2.Location = new Point(x_st + dx * 2 + 30, y_st + dy * 1);
             rb_selection3.Location = new Point(x_st + dx * 2 + 30, y_st + dy * 2);
-
-            x_st = 10;
-            y_st = 8;
-            dx = 55;
-            dy = 24;
-
-            lb_rgb_r.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            lb_rgb_g.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            lb_rgb_b.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-
-            lb_yuv_y.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            lb_yuv_u.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            lb_yuv_v.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            panel1.Size = new Size(100, 50);
-            panel1.Location = new Point(x_st + dx * 3 + 10, y_st + dy * 0 + 3);
 
             //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -1359,23 +1335,6 @@ namespace vcs_ColorHistogram
             return Color.FromArgb(Red, Green, Blue);
         }
 
-        private void timer_rgb_Tick(object sender, EventArgs e)
-        {
-            Point pt = new Point(Control.MousePosition.X, Control.MousePosition.Y);
-            Color cl = GetColor(pt);
-            panel1.BackColor = cl;
-            lb_rgb_r.Text = cl.R.ToString();
-            lb_rgb_g.Text = cl.G.ToString();
-            lb_rgb_b.Text = cl.B.ToString();
-
-            RGB pp = new RGB(cl.R, cl.G, cl.B);
-            YUV yyy = new YUV();
-            yyy = RGBToYUV(pp);
-            lb_yuv_y.Text = ((int)yyy.Y).ToString();
-            lb_yuv_u.Text = ((int)yyy.U).ToString();
-            lb_yuv_v.Text = ((int)yyy.V).ToString();
-        }
-
         private void button0_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "SetPixel 彩色轉灰階\n";
@@ -1435,52 +1394,6 @@ namespace vcs_ColorHistogram
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //顏色比例
-
-            int ratio_r = hScrollBar1.Value;
-            int ratio_g = hScrollBar2.Value;
-            int ratio_b = hScrollBar3.Value;
-
-            Bitmap bmp = (Bitmap)pictureBox0.Image;    //原圖
-
-            int W = bmp.Width;
-            int H = bmp.Height;
-
-            richTextBox1.Text += "圖片寬度 : " + W.ToString() + "\n";
-            richTextBox1.Text += "圖片高度 : " + H.ToString() + "\n";
-
-            int i;
-            int j;
-
-            for (j = 0; j < H; j++)
-            {
-                for (i = 0; i < W; i++)
-                {
-                    Color cc = bmp.GetPixel(i, j);
-                    //bmp.SetPixel(i, j, Color.FromArgb(255, cc.R, cc.B, 0));
-                    int R_old = cc.R;
-                    int G_old = cc.G;
-                    int B_old = cc.B;
-                    int R_new = R_old * ratio_r / 100;
-                    int G_new = G_old * ratio_g / 100;
-                    int B_new = B_old * ratio_b / 100;
-
-                    R_new -= 50;
-                    if (R_new < 0)
-                        R_new = 0;
-
-                    B_new += 50;
-                    if (B_new > 255)
-                        B_new = 255;
-
-                    bmp.SetPixel(i, j, Color.FromArgb(255, R_new, G_new, B_new));
-                }
-            }
-            //Graphics g = Graphics.FromImage(bmp);
-            //g.DrawRectangle(Pens.Red, 5, 5, this.ClientSize.Width - 10, this.ClientSize.Height - 10);
-
-            pictureBox1.Image = bmp;
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -1521,3 +1434,23 @@ namespace vcs_ColorHistogram
         }
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+

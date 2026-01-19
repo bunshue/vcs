@@ -40,8 +40,6 @@ namespace vcs_Draw9_Example4_vcsh
         private List<Point> Hits = new List<Point>();
         private List<Point> Misses = new List<Point>();
 
-        private Point[] ColorPoints = null;
-
         //for unique progressbar ST
         // Groups of controls to use as progress bars.
         private Control[] Labels;
@@ -73,15 +71,6 @@ namespace vcs_Draw9_Example4_vcsh
             // Make a GraphicsPath for the curve.
             Path = new GraphicsPath();
             Path.AddCurve(Points);
-
-            Random rand = new Random();
-            ColorPoints = new Point[20];
-            for (int i = 0; i < ColorPoints.Length; i++)
-            {
-                ColorPoints[i] = new Point(
-                    i * 15,
-                    rand.Next(5, 110));
-            }
 
             //for unique progressbar ST
 
@@ -115,10 +104,6 @@ namespace vcs_Draw9_Example4_vcsh
 
         void show_item_location()
         {
-            //設定執行後的表單起始位置
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(0, 0);
-
             int x_st;
             int y_st;
             int dx;
@@ -267,99 +252,6 @@ namespace vcs_Draw9_Example4_vcsh
                 diameter, diameter);
             gr.FillEllipse(brush, rect);
             gr.DrawEllipse(pen, rect);
-        }
-
-        private void pictureBox_color_curve_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.DrawString("彩色曲線", new Font("標楷體", 25), new SolidBrush(Color.Blue), new PointF(30, 10));
-
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-
-            RectangleF world_rect = new RectangleF(0, 0, 100, 100);
-            RectangleF device_rect = new RectangleF(5, 5,
-                pictureBox_color_curve.ClientSize.Width - 10,
-                pictureBox_color_curve.ClientSize.Height - 10);
-            SetTransformation(e.Graphics, world_rect, device_rect, false, true);
-
-            // Draw the axes.
-            using (Pen pen = new Pen(Color.Black, 0))
-            {
-                for (int y = 10; y < 100; y += 10)
-                    e.Graphics.DrawLine(pen, -2, y, 2, y);
-                e.Graphics.DrawLine(pen, 0, 0, 0, 100);
-
-                for (int x = 10; x < 100; x += 10)
-                    e.Graphics.DrawLine(pen, x, -2, x, 2);
-                e.Graphics.DrawLine(pen, 0, 0, 100, 0);
-            }
-
-            // Make a brush for the curve.
-            using (LinearGradientBrush brush =
-                new LinearGradientBrush(world_rect,
-                    Color.Red, Color.Blue, 270))
-            {
-                ColorBlend blend = new ColorBlend();
-                blend.Colors = new Color[]
-                {
-                    Color.Red, Color.Red,
-                    Color.Orange, Color.Orange,
-                    Color.Yellow, Color.Yellow,
-                    Color.Green, Color.Green,
-                    Color.Blue, Color.Blue,
-                };
-                blend.Positions =
-                    new float[]
-                    {
-                        0.0f, 0.2f,
-                        0.2f, 0.4f,
-                        0.4f, 0.6f, 
-                        0.6f, 0.8f,
-                        0.8f, 1.0f,
-                    };
-                brush.InterpolationColors = blend;
-
-                // Make a thick pen defined by the brush.
-                using (Pen pen = new Pen(brush, 3))
-                {
-                    pen.LineJoin = LineJoin.Bevel;
-
-                    // Draw the curve.
-                    Random rand = new Random();
-
-                    e.Graphics.DrawCurve(pen, ColorPoints);     //曲線
-
-                    //e.Graphics.DrawLines(pen, ColorPoints);     //直線
-
-                    //// Draw a vertical line on the edge to show the colors.
-                    //e.Graphics.DrawLine(pen, 100, 0, 100, 100);
-                }
-            }
-        }
-
-        // Map from world coordinates to device coordinates.
-        private void SetTransformation(Graphics gr, RectangleF world_rect, RectangleF device_rect, bool invert_x, bool invert_y)
-        {
-            PointF[] device_points =
-            {
-                new PointF(device_rect.Left, device_rect.Top),      // Upper left.
-                new PointF(device_rect.Right, device_rect.Top),     // Upper right.
-                new PointF(device_rect.Left, device_rect.Bottom),   // Lower left.
-            };
-
-            if (invert_x)
-            {
-                device_points[0].X = device_rect.Right;
-                device_points[1].X = device_rect.Left;
-                device_points[2].X = device_rect.Right;
-            }
-            if (invert_y)
-            {
-                device_points[0].Y = device_rect.Bottom;
-                device_points[1].Y = device_rect.Bottom;
-                device_points[2].Y = device_rect.Top;
-            }
-
-            gr.Transform = new Matrix(world_rect, device_points);
         }
 
         //for unique progressbar ST
