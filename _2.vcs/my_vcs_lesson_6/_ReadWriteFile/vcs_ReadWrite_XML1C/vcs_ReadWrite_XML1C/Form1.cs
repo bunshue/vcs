@@ -13,60 +13,11 @@ using System.Xml;
 using System.Xml.Linq;  //for XDocument, XElement
 // XElement物件預設是以序列的方式處理xml資料，可以直接根據xml資料的階層結構，透過XElement物件建立資料
 
-
 /*
 遠端讀檔
-
 本地存檔
-
 開啟檔案的 也順便存一份在本地 用作基本比較
 */
-
-/*
-C#操作XML方法详解
-
-XmlDocument xml=new XmlDocument();	//初始化一个xml实例
- 
-//导入指定xml文件
-xml.Load(filename);
-
-//保存XML文件
-xml.Save(filename);
- 
-//指定一个节点
-XmlNode root=xml.SelectSingleNode("/root");
- 
-//获取节点下所有直接子节点
-XmlNodeList childlist=root.ChildNodes;
- 
-//判断该节点下是否有子节点
-root.HasChildNodes;
- 
-//获取同名同级节点集合
-XmlNodeList nodelist=xml.SelectNodes("/Root/News");
- 
-//生成一个新节点
-XmlElement node=xml.CreateElement("News");
- 
-//将节点加到指定节点下，作为其子节点
-root.AppendChild(node);
- 
-//将节点加到指定节点下某个子节点前
-root.InsertBefore(node,root.ChildeNodes[i]);
- 
-//为指定节点的新建属性并赋值
-node.SetAttribute("id","11111");
- 
-//为指定节点添加子节点
-root.AppendChild(node);
- 
-//获取指定节点的指定属性值
-string id=node.Attributes["id"].Value;
- 
-//获取指定节点中的文本
-string content=node.InnerText;
-*/
-
 
 namespace vcs_ReadWrite_XML1C
 {

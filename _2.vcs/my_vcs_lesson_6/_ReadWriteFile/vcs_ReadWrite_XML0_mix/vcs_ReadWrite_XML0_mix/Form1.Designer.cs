@@ -292,7 +292,6 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(150, 60);
             this.button20.TabIndex = 37;
-            this.button20.Text = "將XmlDocument轉化為string";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 

@@ -367,10 +367,21 @@ namespace vcs_Draw_Bitmap
 
         private void button9_Click(object sender, EventArgs e)
         {
+            int W = 760;
+            int H = 384;
+            Bitmap bitmap1 = new Bitmap(W, H, PixelFormat.Format32bppArgb);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.Black);
+
             //step2_sc.png
             string filename = @"D:\_git\vcs\_1.data\______test_files1\step2_sc.png";
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);
-            pictureBox1.Image = bitmap1;
+            Bitmap bmp = (Bitmap)Bitmap.FromFile(filename);
+            richTextBox1.Text += bmp.Width.ToString() + " X " + bmp.Height.ToString() + "\n";
+            g.DrawImage(bmp, 0, 0, W, H);
+
+            bitmap1.Save("aaaaab.png", ImageFormat.Png);
+
+            pictureBox1.Image = bitmap1;        
         }
 
         private void button10_Click(object sender, EventArgs e)

@@ -228,8 +228,14 @@ namespace vcs_ReadWrite_XML2
 
         private void button20_Click(object sender, EventArgs e)
         {
-            //讀取XML
-            //C#讀取XML中元素和屬性值的實現代碼
+            //讀取XML中的元素和屬性值
+
+            /*
+            第1層 學校
+            第2層 年級
+            第3層 班級
+            第4層 老師/學生
+            */
 
             string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\school.xml";
             XmlDocument doc = new XmlDocument();
@@ -237,6 +243,11 @@ namespace vcs_ReadWrite_XML2
 
             //學校  使用xpath表達式選擇文檔中所有的schoo的子節點
             XmlNodeList schoolNodeList = doc.SelectNodes("/school");
+
+            richTextBox1.Text += "取得子節點school個數 : " + schoolNodeList.Count.ToString() + "\n";
+            richTextBox1.Text += "子節點名稱 : " + schoolNodeList[0].Name + "\n";
+            richTextBox1.Text += "取得子節點school的name屬性 : " + schoolNodeList[0].Attributes["name"].Value + "\n";
+
             if (schoolNodeList != null)
             {
                 foreach (XmlNode schoolNode in schoolNodeList)
@@ -245,37 +256,49 @@ namespace vcs_ReadWrite_XML2
                     string schoolName = schoolNode.Attributes["name"].Value;
                     richTextBox1.Text += "學校：" + schoolName + "\n";
 
-                    #region 年級
+                    // 年級
                     //通過SelectSingleNode方法獲得當前節點下的grades子節點
                     XmlNode gradesNode = schoolNode.SelectSingleNode("grades");
                     if (gradesNode != null)
                     {
                         //通過ChildNodes屬性獲得grades的所有一級子節點
                         XmlNodeList gradeNodeList = gradesNode.ChildNodes;
+
+                        richTextBox1.Text += "取得子節點grades個數 : " + gradeNodeList.Count.ToString() + "\n";
+
                         if (gradeNodeList != null)
                         {
                             foreach (XmlNode gradeNode in gradeNodeList)
                             {
+                                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
                                 richTextBox1.Text += "\t年級：" + gradeNode.Attributes["name"].Value + "   ID:" + gradeNode.Attributes["id"].Value + "\n";
 
-                                #region 班級
+                                // 班級
                                 //通過SelectSingleNode方法獲得當前節點下的classes子節點
                                 XmlNode classesNode = gradeNode.SelectSingleNode("classes");
                                 if (classesNode != null)
                                 {
                                     //通過ChildNodes屬性獲得classes的所有一級子節點
                                     XmlNodeList classNodeList = classesNode.ChildNodes;
+
+                                    richTextBox1.Text += "取得子節點classes個數 : " + classNodeList.Count.ToString() + "\n";
+
                                     if (classNodeList != null)
                                     {
                                         foreach (XmlNode classNode in classNodeList)
                                         {
                                             richTextBox1.Text += "  班級：" + classNode.Attributes["name"].Value + "    ID:" + classNode.Attributes["id"].Value + "\n";
 
-                                            #region 老師
+                                            // 老師
                                             XmlNode teachersNode = classNode.SelectSingleNode("teachers");
+
                                             if (teachersNode != null)
                                             {
                                                 XmlNodeList teacherNodeList = teachersNode.ChildNodes;
+
+                                                richTextBox1.Text += "取得子節點teachers個數 : " + teacherNodeList.Count.ToString() + "\n";
+
                                                 if (teacherNodeList != null)
                                                 {
                                                     foreach (XmlNode teacherNode in teacherNodeList)
@@ -289,13 +312,17 @@ namespace vcs_ReadWrite_XML2
                                                     }
                                                 }
                                             }
-                                            #endregion  老師
+                                            // 老師
 
-                                            #region 所有學生
+                                            // 所有學生
                                             XmlNode studentsNode = classNode.SelectSingleNode("students");
+
                                             if (studentsNode != null)
                                             {
                                                 XmlNodeList studentNodeList = studentsNode.ChildNodes;
+
+                                                richTextBox1.Text += "取得子節點students個數 : " + studentNodeList.Count.ToString() + "\n";
+
                                                 if (studentNodeList != null)
                                                 {
                                                     foreach (XmlNode studentNode in studentNodeList)
@@ -318,23 +345,71 @@ namespace vcs_ReadWrite_XML2
                                                         }
                                                     }
                                                 }
-                                            #endregion 所有學生
+                                                // 所有學生
                                             }
                                         }
                                     }
-                                #endregion 班級
+                                    // 班級
                                 }
                             }
+                            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
                         }
-                    #endregion  年級
+                        // 年級
                     }
                 }
             }
         }
 
+        private void button21_Click(object sender, EventArgs e)
+        {
+            //將XmlDocument轉化為string
+
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\school.xml";
+
+            //將XmlDocument轉化為string函數
+            //讀取普通XML
+            XmlDocument doc = new XmlDocument();
+            //載入要讀取的XML
+            doc.Load(filename);
+
+            //獲得根節點
+            XmlElement books = doc.DocumentElement;
+
+            //獲得子節點 返回節點的集合
+            XmlNodeList xnl = books.ChildNodes;
+
+            foreach (XmlNode item in xnl)
+            {
+                richTextBox1.Text += item.InnerText + "\n";
+            }
+
+            //將XmlDocument轉化為string
+            string result = ConvertXmlToString(doc);
+            richTextBox1.Text += "result:\n" + result + "\n";
+        }
+
+        /// <summary>  
+        /// 將XmlDocument轉化為string
+        /// </summary>  
+        /// <param name="xmlDoc"></param>  
+        /// <returns></returns>  
+        public string ConvertXmlToString(XmlDocument xmlDoc)
+        {
+            MemoryStream stream = new MemoryStream();
+            XmlTextWriter writer = new XmlTextWriter(stream, null);
+            writer.Formatting = Formatting.Indented;
+            xmlDoc.Save(writer);
+            StreamReader sr = new StreamReader(stream, System.Text.Encoding.UTF8);
+            stream.Position = 0;
+            string xmlString = sr.ReadToEnd();
+            sr.Close();
+            stream.Close();
+            return xmlString;
+        }
+
         //XML To TreeView ST
         //讀取XML文檔 →獲取XML根元素→ 遞歸添加根元素的子元素(因為樹形的結構和XML很像)
-        private void button21_Click(object sender, EventArgs e)
+        private void button22_Click(object sender, EventArgs e)
         {
             //讀取XML至TreeView
             string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\school.xml";
@@ -376,7 +451,7 @@ namespace vcs_ReadWrite_XML2
         }
         //XML To TreeView SP
 
-        private void button22_Click(object sender, EventArgs e)
+        private void button23_Click(object sender, EventArgs e)
         {
             //讀取XML至TreeView b
 
@@ -425,11 +500,6 @@ namespace vcs_ReadWrite_XML2
                 count++;
             }
             return count;
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void button24_Click(object sender, EventArgs e)

@@ -84,41 +84,41 @@ namespace vcs_ReadWrite_XML0_mix
             //XML讀取
 
             string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\vcs_ReadWrite_XML0.xml";
+            XmlDocument doc = new XmlDocument();
+            doc.Load(filename);
 
-            XmlDocument dc = new XmlDocument();
-            //XDocument doc = XDocument.Load(filename); 
-            dc.Load(filename);
+            //學校  使用xpath表達式選擇文檔中所有的schoo的子節點
+            XmlNodeList chapterNodeList = doc.SelectNodes("/chapter");
 
-            XmlNodeList xnl = dc.SelectNodes("chapter");
-            richTextBox1.Text += "Count = " + xnl.Count.ToString() + "\n";
+            richTextBox1.Text += "取得子節點chapter個數 : " + chapterNodeList.Count.ToString() + "\n";
+            richTextBox1.Text += "子節點名稱 : " + chapterNodeList[0].Name + "\n";
+            //richTextBox1.Text += "取得子節點chapter的name屬性 : " + chapterNodeList[0].Attributes["name"].Value + "\n";
 
-            StringBuilder sb = new StringBuilder();
-            sb.Append("<ul>");
-            readxml(xnl, sb);
-            sb.Append("</ul>");
+            if (chapterNodeList != null)
+            {
+                richTextBox1.Text += "aaaaaaaaaaaaaa\n";
+                readxml(chapterNodeList);
+                richTextBox1.Text += "bbbbbbbbbbbbbb\n";
 
-            richTextBox1.Text += sb.ToString() + "\n";
-            //this.html.InnerHtml = sb.ToString(); 
+            }
+            return;
         }
 
-        private void readxml(XmlNodeList xmlnl, StringBuilder sb_)
+        private void readxml(XmlNodeList xmlnl)
         {
             richTextBox1.Text += "rrrrrr len = " + xmlnl.Count.ToString() + "\n";
             foreach (XmlNode xl in xmlnl)
             {
-                richTextBox1.Text += "aaaaa\n";
-
                 if (xl.ChildNodes.Count == 0)
                 {
-                    sb_.Append("<li><a>" + xl.Attributes["value"].Value + "</a></li>");
-                    richTextBox1.Text += "11111";
+                    richTextBox1.Text += "無子節點, 直接印出\n";
+                    richTextBox1.Text += xl.Attributes["value"].Value + "\n";
                 }
                 else
                 {
-                    sb_.Append("<li><a>" + xl.Attributes["value"].Value + "</a><ul>");
-                    readxml(xl.ChildNodes, sb_);
-                    sb_.Append("</ul></li>");
-                    richTextBox1.Text += "22222";
+                    richTextBox1.Text += xl.Attributes["value"].Value + "\n";
+                    richTextBox1.Text += "有子節點, 重覆呼叫\n";
+                    readxml(xl.ChildNodes);
                 }
             }
         }
@@ -259,7 +259,7 @@ namespace vcs_ReadWrite_XML0_mix
     }
     */
         }
- 
+
         private void button1_Click(object sender, EventArgs e)
         {
             //XML文件的創建、讀取和寫入
@@ -526,6 +526,8 @@ namespace vcs_ReadWrite_XML0_mix
         private void button13_Click(object sender, EventArgs e)
         {
             //讀取帶屬性的XML
+
+            // NG, no file
 
             XmlDocument doc = new XmlDocument();
             doc.Load("Order.xml");
@@ -808,6 +810,52 @@ namespace vcs_ReadWrite_XML0_mix
             filename = "new_file2.xml";
             xml.Save(filename);
             */
+
+
+            /*
+            C#操作XML方法详解
+
+            XmlDocument xml=new XmlDocument();	//初始化一个xml实例
+ 
+            //导入指定xml文件
+            xml.Load(filename);
+
+            //保存XML文件
+            xml.Save(filename);
+ 
+            //指定一个节点
+            XmlNode root=xml.SelectSingleNode("/root");
+ 
+            //获取节点下所有直接子节点
+            XmlNodeList childlist=root.ChildNodes;
+ 
+            //判断该节点下是否有子节点
+            root.HasChildNodes;
+ 
+            //获取同名同级节点集合
+            XmlNodeList nodelist=xml.SelectNodes("/Root/News");
+ 
+            //生成一个新节点
+            XmlElement node=xml.CreateElement("News");
+ 
+            //将节点加到指定节点下，作为其子节点
+            root.AppendChild(node);
+ 
+            //将节点加到指定节点下某个子节点前
+            root.InsertBefore(node,root.ChildeNodes[i]);
+ 
+            //为指定节点的新建属性并赋值
+            node.SetAttribute("id","11111");
+ 
+            //为指定节点添加子节点
+            root.AppendChild(node);
+ 
+            //获取指定节点的指定属性值
+            string id=node.Attributes["id"].Value;
+ 
+            //获取指定节点中的文本
+            string content=node.InnerText;
+            */
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -928,61 +976,19 @@ namespace vcs_ReadWrite_XML0_mix
 
         private void button20_Click(object sender, EventArgs e)
         {
-            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\school.xml";
-
-            //將XmlDocument轉化為string函數
-            //讀取普通XML
-            XmlDocument doc = new XmlDocument();
-            //載入要讀取的XML
-            doc.Load(filename);
-
-            //獲得根節點
-            XmlElement books = doc.DocumentElement;
-
-            //獲得子節點 返回節點的集合
-            XmlNodeList xnl = books.ChildNodes;
-
-            foreach (XmlNode item in xnl)
-            {
-                richTextBox1.Text += item.InnerText + "\n";
-            }
-
-            //將XmlDocument轉化為string
-            string result = ConvertXmlToString(doc);
-            richTextBox1.Text += "result:\n" + result + "\n";
-        }
-
-        /// <summary>  
-        /// 將XmlDocument轉化為string
-        /// </summary>  
-        /// <param name="xmlDoc"></param>  
-        /// <returns></returns>  
-        public string ConvertXmlToString(XmlDocument xmlDoc)
-        {
-            MemoryStream stream = new MemoryStream();
-            XmlTextWriter writer = new XmlTextWriter(stream, null);
-            writer.Formatting = Formatting.Indented;
-            xmlDoc.Save(writer);
-            StreamReader sr = new StreamReader(stream, System.Text.Encoding.UTF8);
-            stream.Position = 0;
-            string xmlString = sr.ReadToEnd();
-            sr.Close();
-            stream.Close();
-            return xmlString;
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
             //XMLHelper的使用
             //class已OK
-
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
         }
 
-        //C# XML創建和解析
+        //XML創建和解析
         private void button23_Click(object sender, EventArgs e)
         {
             XMLApply xml = new XMLApply();
@@ -1011,19 +1017,13 @@ namespace vcs_ReadWrite_XML0_mix
             string filename = Application.StartupPath + "\\xml_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xml";
             xdoc.Save(filename);
             richTextBox1.Text += "已存檔 : " + filename + "\n";
-
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
             //XML Read
-            //C#讀取XML文檔的方法
-            //C#讀取XML文檔的方法
-
             //這裡介紹一種讀取XML文檔的方法,示例中用的是 XmlTextReader 函數,每執行 Read() 一次,讀取一行.
-
         }
-
 
         public void ReadConfig(string XmlConfigFile)
         {
@@ -1738,5 +1738,3 @@ namespace vcs_ReadWrite_XML0_mix
 
     }
 }
-
-

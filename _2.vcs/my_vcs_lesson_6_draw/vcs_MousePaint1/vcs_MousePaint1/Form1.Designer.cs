@@ -1,4 +1,4 @@
-﻿namespace vcs_MousePaint2
+﻿namespace vcs_MousePaint1
 {
     partial class Form1
     {
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.bt_clear = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -42,9 +43,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.bt_clear1 = new System.Windows.Forms.Button();
-            this.bt_clear4 = new System.Windows.Forms.Button();
-            this.bt_info4 = new System.Windows.Forms.Button();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -94,7 +93,6 @@
             this.pictureBox2.TabIndex = 70;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox2_Paint);
-            this.pictureBox2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseClick);
             this.pictureBox2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseDown);
             this.pictureBox2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseMove);
             this.pictureBox2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseUp);
@@ -211,44 +209,16 @@
             this.label5.TabIndex = 90;
             this.label5.Text = "label5";
             // 
-            // bt_clear1
+            // timer2
             // 
-            this.bt_clear1.Location = new System.Drawing.Point(382, 12);
-            this.bt_clear1.Name = "bt_clear1";
-            this.bt_clear1.Size = new System.Drawing.Size(50, 25);
-            this.bt_clear1.TabIndex = 91;
-            this.bt_clear1.Text = "Clear";
-            this.bt_clear1.UseVisualStyleBackColor = true;
-            this.bt_clear1.Click += new System.EventHandler(this.bt_clear1_Click);
-            // 
-            // bt_clear4
-            // 
-            this.bt_clear4.Location = new System.Drawing.Point(382, 43);
-            this.bt_clear4.Name = "bt_clear4";
-            this.bt_clear4.Size = new System.Drawing.Size(50, 25);
-            this.bt_clear4.TabIndex = 92;
-            this.bt_clear4.Text = "Clear";
-            this.bt_clear4.UseVisualStyleBackColor = true;
-            this.bt_clear4.Click += new System.EventHandler(this.bt_clear4_Click);
-            // 
-            // bt_info4
-            // 
-            this.bt_info4.Location = new System.Drawing.Point(382, 74);
-            this.bt_info4.Name = "bt_info4";
-            this.bt_info4.Size = new System.Drawing.Size(50, 25);
-            this.bt_info4.TabIndex = 93;
-            this.bt_info4.Text = "Info";
-            this.bt_info4.UseVisualStyleBackColor = true;
-            this.bt_info4.Click += new System.EventHandler(this.bt_info4_Click);
+            this.timer2.Interval = 250;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(444, 361);
-            this.Controls.Add(this.bt_info4);
-            this.Controls.Add(this.bt_clear4);
-            this.Controls.Add(this.bt_clear1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -294,9 +264,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button bt_clear1;
-        private System.Windows.Forms.Button bt_clear4;
-        private System.Windows.Forms.Button bt_info4;
+        private System.Windows.Forms.Timer timer2;
     }
 }
 

@@ -15,15 +15,10 @@ using System.Security.Cryptography; //for HashAlgorithm
 using System.Diagnostics;   //for Process
 using System.Threading;
 
-
 namespace vcs_Mix03_draw_image
 {
     public partial class Form1 : Form
     {
-        //Point一維陣列
-        Point[] pts = new Point[6];    //一維陣列內有6個Point
-        int find_point_index = -1;
-
         public Form1()
         {
             InitializeComponent();
@@ -35,16 +30,6 @@ namespace vcs_Mix03_draw_image
 
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             pictureBox1.Image = Image.FromFile(filename);
-
-            int x_st = 400;
-            int y_st = 80;
-            int dy = 50;
-            pts[0] = new Point(x_st + 0, y_st + dy * 0);
-            pts[1] = new Point(x_st + 0, y_st + dy * 1);
-            pts[2] = new Point(x_st + 0, y_st + dy * 2);
-            pts[3] = new Point(x_st + 0, y_st + dy * 3);
-            pts[4] = new Point(x_st + 0, y_st + dy * 4);
-            pts[5] = new Point(x_st + 0, y_st + dy * 5);
         }
 
         /*
@@ -90,11 +75,11 @@ namespace vcs_Mix03_draw_image
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
             pictureBox1.Size = new Size(600, 600);
-            pictureBox1.Location = new Point(x_st + dx * 2 + 180, y_st + dy * 0);
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             richTextBox1.Size = new Size(300, 640);
-            richTextBox1.Location = new Point(x_st + dx * 7 - 40, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 6 - 40, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-            this.Size = new Size(1450, 710);
+            this.Size = new Size(1290, 710);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -330,13 +315,10 @@ namespace vcs_Mix03_draw_image
                 curvePoints[i].Y = i * 2;
             }
 
-
             // Draw lines between original points to screen.
             g.DrawLines(Pens.Red, curvePoints);   //畫直線
             // Draw curve to screen.
             //gc.DrawCurve(redPen, curvePoints); //畫曲線
-
-
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -382,88 +364,6 @@ namespace vcs_Mix03_draw_image
         private void button19_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-        }
-
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.DrawString("點選表單中的紅點", new Font("標楷體", 16), new SolidBrush(Color.Black), pts[0].X - 65, pts[0].Y - 50);
-            //e.Graphics.DrawRectangle(Pens.Red, 100, 100, 300, 300);
-            foreach (Point pt in pts)
-            {
-                e.Graphics.FillEllipse(Brushes.Red, pt.X - 10, pt.Y - 10, 20, 20);
-            }
-        }
-
-        bool flag_mouse_down = false;
-        private void Form1_MouseDown(object sender, MouseEventArgs e)
-        {
-            Point pt = FindPointAt(e.X, e.Y);
-            if (pt == new Point(9999, 9999))
-            {
-                richTextBox1.Text += "找不到\n";
-            }
-            else
-            {
-                flag_mouse_down = true;
-                richTextBox1.Text += "找到 : (" + pt.X.ToString() + ", " + pt.Y.ToString() + ")\n";
-                int index = get_index(pt);
-                richTextBox1.Text += index.ToString() + "\n";
-                find_point_index = index;
-            }
-        }
-
-        private Point FindPointAt(int X, int Y)
-        {
-            foreach (Point pt in pts)
-            {
-                float dx = pt.X - X;
-                float dy = pt.Y - Y;
-                if (dx * dx + dy * dy <= 20 * 20)
-                {
-                    return pt;
-                }
-            }
-            return new Point(9999, 9999);
-        }
-
-        int get_index(Point point)
-        {
-            int len = pts.Length;
-            int index = 0;
-            for (index = 0; index < len; index++)
-            {
-                if (point == pts[index])
-                {
-                    return index;
-                }
-            }
-            return -1;
-        }
-
-        private void Form1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (flag_mouse_down == true)
-            {
-                update_pts(find_point_index, e.Location);
-                this.Invalidate();
-            }
-        }
-
-        private void Form1_MouseUp(object sender, MouseEventArgs e)
-        {
-            flag_mouse_down = false;
-        }
-
-        void update_pts(int index, Point point)
-        {
-            int len = pts.Length;
-            if ((index < 0) || index >= len)
-            {
-                richTextBox1.Text += index.ToString();
-                //richTextBox1.Text += "XXXXXXX\n";
-                return;
-            }
-            pts[index] = point;
         }
     }
 }
