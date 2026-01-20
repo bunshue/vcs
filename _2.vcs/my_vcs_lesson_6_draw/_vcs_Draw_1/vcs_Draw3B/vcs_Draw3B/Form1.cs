@@ -81,30 +81,24 @@ namespace vcs_Draw3B
             ball1 = new ClassBall(new Point(this.pictureBox_ball.ClientSize.Width / 2, this.pictureBox_ball.ClientSize.Height / 2),
                                 new Point(3, 5),
                                 new Size(this.pictureBox_ball.ClientSize.Width, this.pictureBox_ball.ClientSize.Height),
-                                30,
-                                Color.Red);
+                                30, Color.Red);
 
             ball2 = new ClassBall(new Point(this.pictureBox_ball.ClientSize.Width / 4, this.pictureBox_ball.ClientSize.Height / 4),
                                 new Point(-3, 5),
                                 new Size(this.pictureBox_ball.ClientSize.Width, this.pictureBox_ball.ClientSize.Height),
-                                30,
-                                Color.Blue);
+                                30, Color.Blue);
 
             ball3 = new ClassBall(new Point(this.pictureBox_ball.ClientSize.Width / 4, this.pictureBox_ball.ClientSize.Height / 2),
                                 new Point(3, -8),
                                 new Size(this.pictureBox_ball.ClientSize.Width, this.pictureBox_ball.ClientSize.Height),
-                                30,
-                                Color.Green);
+                                30, Color.Green);
             //三顆跳跳球 SP
 
             //箱中球 ST
             // 設定 箱子的位置與寬高
             boxRect = new Rectangle(20, 20, 200, 150);
             // 新增 一個箱中球 物件
-            ball = new BallInABox(new Point(100, 100),
-                         new Point(2, 3),
-                         boxRect,
-                         20);
+            ball = new BallInABox(new Point(100, 100), new Point(2, 3), boxRect, 20);
             //箱中球 SP
 
             //雙圓旋轉 ST
@@ -138,8 +132,7 @@ namespace vcs_Draw3B
             pictureBox_ball.Size = new Size(W, H);
             pictureBox_ball_in_box.Size = new Size(W, H);
             pictureBox_double_circle.Size = new Size(W, H);
-
-            pictureBox_progressbar.Size = new Size(600, 100);
+            pictureBox_progressbar.Size = new Size(280, 60);
             pictureBox_rectangle.Size = new Size(600, 350);
 
             x_st = 10;
@@ -152,20 +145,20 @@ namespace vcs_Draw3B
             pictureBox_polygon.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox_round.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 4 + 30, y_st + dy * 0);
+            pictureBox_progressbar.Location = new Point(x_st + dx * 4 + 30, y_st + dy * 0 + 380);
 
             pictureBox_double_circle.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             pictureBox_ball.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             pictureBox_ball_in_box.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             pictureBox_ellipse.Location = new Point(x_st + dx * 3 - 20, y_st + dy * 1);
 
-            pictureBox_progressbar.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 80 - 100);
-            pictureBox_rectangle.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 100);
+            pictureBox_rectangle.Location = new Point(x_st + dx * 0, y_st + dy * 2 - 20);
 
-            richTextBox1.Size = new Size(950, 450);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            richTextBox1.Size = new Size(300, 300);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 2);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1640, 1100);
+            this.Size = new Size(1640, 980);
             this.Text = "vcs_Draw3B";
         }
 
@@ -459,8 +452,9 @@ namespace vcs_Draw3B
             if (Complete_progressbar > 100)
             {
                 //dispose
-                g_progressbar.Dispose();
-                timer_progressbar.Stop();
+                //g_progressbar.Dispose();
+                //timer_progressbar.Stop();
+                Complete_progressbar = 0;
             }
         }
 

@@ -24,7 +24,7 @@ namespace vcs_MousePaint1
         Pen p1 = new Pen(Color.Green, 1);
         Pen p2 = new Pen(Color.Blue, 1);
         Point[] pts = new Point[N];
-        int Epsilon = 100; // 滑鼠 是否 點選到點 的距離 判斷 (避免 開根號)
+        int EPSILON = 100; // 滑鼠 是否 點選到點 的距離 判斷 (避免 開根號)
         //pictureBox0 拖曳圓點 SP
 
         //pictureBox1 左鍵畫一橢圓, 右鍵畫一橢圓 ST
@@ -148,32 +148,32 @@ namespace vcs_MousePaint1
 
             //pictureBox4 連續貝茲線與控制點 ST
             MovingPoint mp4;
-            mp4 = new MovingPoint(new Point(100, 200));
+            mp4 = new MovingPoint(new Point(50, 200));
             mpList4.Add(mp4); // 第一個控制點
 
-            mp4 = new MovingPoint(new Point(200, 100));
+            mp4 = new MovingPoint(new Point(100, 100));
             mpList4.Add(mp4); // 第二個控制點
 
-            mp4 = new MovingPoint(new Point(300, 300));
+            mp4 = new MovingPoint(new Point(150, 300));
             mpList4.Add(mp4); // 第三個控制點
 
-            mp4 = new MovingPoint(new Point(400, 200));
+            mp4 = new MovingPoint(new Point(200, 200));
             mpList4.Add(mp4); // 第四個控制點
 
-            mp4 = new MovingPoint(new Point(500, 100));
+            mp4 = new MovingPoint(new Point(250, 100));
             mpList4.Add(mp4); // 第五個控制點
 
-            mp4 = new MovingPoint(new Point(600, 300));
+            mp4 = new MovingPoint(new Point(300, 300));
             mpList4.Add(mp4); // 第六個控制點
 
-            mp4 = new MovingPoint(new Point(700, 200));
+            mp4 = new MovingPoint(new Point(350, 200));
             mpList4.Add(mp4); // 第七個控制點
             //pictureBox4 連續貝茲線與控制點 SP
 
             //pictureBox5 拖曳圖片框中的紅點 ST
-            int x_st = 50;
+            int x_st = 100;
             int y_st = 80;
-            int dy = 30;
+            int dy = 50;
             pts5[0] = new Point(x_st + 0, y_st + dy * 0);
             pts5[1] = new Point(x_st + 0, y_st + dy * 1);
             pts5[2] = new Point(x_st + 0, y_st + dy * 2);
@@ -239,7 +239,7 @@ namespace vcs_MousePaint1
         {
             for (int i = 0; i < pts.Length; i++)
             {
-                if (CheckSelected(pts[i], e.Location) == true)
+                if (CheckSelected0(pts[i], e.Location) == true)
                 {
                     pt_selected = i;
                     flag_dragging = true;
@@ -278,11 +278,11 @@ namespace vcs_MousePaint1
         }
 
         // 檢查是否選到這個點
-        bool CheckSelected(Point pt1, Point pt2)
+        bool CheckSelected0(Point pt1, Point pt2)
         {
             //distance是距離的平方
             int distance = (pt1.X - pt2.X) * (pt1.X - pt2.X) + (pt1.Y - pt2.Y) * (pt1.Y - pt2.Y);
-            if (distance <= Epsilon)
+            if (distance <= EPSILON)
             {
                 return true;
             }
@@ -660,9 +660,9 @@ namespace vcs_MousePaint1
             else
             {
                 flag_pictureBox5_mouse_down = true;
-                richTextBox1.Text += "找到 : (" + pt.X.ToString() + ", " + pt.Y.ToString() + ")\n";
+                richTextBox1.Text += "找到 : (" + pt.X.ToString() + ", " + pt.Y.ToString() + ")\t";
                 int index = get_index(pt);
-                richTextBox1.Text += index.ToString() + "\n";
+                richTextBox1.Text += "索引 : " + index.ToString() + "\n";
                 find_point_index = index;
             }
         }
@@ -673,7 +673,7 @@ namespace vcs_MousePaint1
             {
                 float dx = pt.X - X;
                 float dy = pt.Y - Y;
-                if (dx * dx + dy * dy <= 20 * 20)
+                if (dx * dx + dy * dy <= EPSILON)
                 {
                     return pt;
                 }
@@ -684,8 +684,7 @@ namespace vcs_MousePaint1
         int get_index(Point point)
         {
             int len = pts5.Length;
-            int index = 0;
-            for (index = 0; index < len; index++)
+            for (int index = 0; index < len; index++)
             {
                 if (point == pts5[index])
                 {
@@ -758,7 +757,7 @@ namespace vcs_MousePaint1
 
 
 /*
-                Bitmap bmp = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\BMW.jfif");
-                    e.Graphics.DrawImage(bmp, pt[i].X, pt[i].Y, 100, 100);
+Bitmap bmp = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\BMW.jfif");
+e.Graphics.DrawImage(bmp, pt[i].X, pt[i].Y, 100, 100);
 */
 

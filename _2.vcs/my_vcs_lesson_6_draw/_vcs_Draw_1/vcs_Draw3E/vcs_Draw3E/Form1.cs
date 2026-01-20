@@ -139,9 +139,9 @@ namespace vcs_Draw3E
         {
             label0.Text = "DrawCurve： 張力 = " + Tension0.ToString();
 
-            int Cx = 100;  // 基準點
-            int Cy = 200;
-            int D = 60; // 偏移值
+            int Cx = 60;  // 基準點
+            int Cy = 100;
+            int D = 40; // 偏移值
 
             Point[] pt = new Point[4]; // 定義 四個點
             pt[0] = new Point(Cx - D, Cy + D);
@@ -162,7 +162,7 @@ namespace vcs_Draw3E
             //this.Text = "畫封閉的曲線  DrawClosedCurve： 張力 = " + Tension0.ToString();
             //int Cx = 300;  // 基準點
             //int Cy = 200;
-            Cx += 200;
+            Cx += 120;
 
             //int D = 60; // 偏移值
 
@@ -194,9 +194,9 @@ namespace vcs_Draw3E
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             Point[] pt = new Point[3]; // 定義 三個點
-            pt[0] = new Point(100, this.pictureBox1.ClientSize.Height / 2);
+            pt[0] = new Point(30, this.pictureBox1.ClientSize.Height / 2);
             //pt[1] = new Point(300, 100);
-            pt[2] = new Point(this.pictureBox1.ClientSize.Width - 100, this.pictureBox1.ClientSize.Height / 2);
+            pt[2] = new Point(this.pictureBox1.ClientSize.Width - 30, this.pictureBox1.ClientSize.Height / 2);
 
             for (int i = 0; i < this.pictureBox1.ClientSize.Height; i = i + 10)
             {

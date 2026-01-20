@@ -25,7 +25,10 @@ namespace vcs_MousePaint1
                 dy = y - p.Y;
                 return true;
             }
-            else return false;
+            else
+            {
+                return false;
+            }
         }
 
         // 更新 點的座標

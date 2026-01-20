@@ -38,17 +38,51 @@ namespace vcs_Draw2
             int dx;
             int dy;
 
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 10;
+            dy = 60 + 10;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+
+            bt_reset.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            bt_save.Location = new Point(x_st + dx * 2 + 100, y_st + dy * 4);
+
             int width = 600;
             int height = 600;
-
             pictureBox1.Size = new Size(width, height);
-            pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
             pictureBox_pen.Size = new Size(width / 2, height / 2);
-            pictureBox_pen.Location = new Point(730, 10);
+            pictureBox_pen.Location = new Point(x_st + dx * 6, y_st + dy * 0);
 
-            panel_word.Size = new Size(1200, 200);
-            panel_word.Location = new Point(10, height + 20);
+            richTextBox1.Size = new Size(300, 300);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 5);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.pictureBox_pen.Controls.Add(groupBox2);
             this.pictureBox_pen.Controls.Add(groupBox3);
@@ -100,50 +134,7 @@ namespace vcs_Draw2
             y_st = (H - h) / 2;
             groupBox4.Location = new Point(x_st, y_st);
 
-            //button
-            x_st = 1040;
-            y_st = 10;
-            dx = 200 + 10;
-            dy = 60 + 10;
-
-            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-
-            button6.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button7.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button8.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button9.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-
-            button12.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button13.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button14.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button15.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button16.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button17.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-
-            button18.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button19.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button20.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button21.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button22.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            button23.Location = new Point(x_st + dx * 3, y_st + dy * 5);
-
-            bt_reset.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            bt_save.Location = new Point(x_st + dx * 3, y_st + dy * 6);
-
-            richTextBox1.Size = new Size(400, 300);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-            //pictureBox1.Location = new Point(10, 10);
-
-            this.Size = new Size(1900, 880);
+            this.Size = new Size(1600, 750);
             this.Text = "vcs_Draw2";
         }
 
@@ -560,6 +551,23 @@ namespace vcs_Draw2
 
         private void button5_Click(object sender, EventArgs e)
         {
+            float size = 2.0f;
+
+            Graphics g = pictureBox1.CreateGraphics();//建立控制元件的Graphics類
+            g.Clear(Color.White);//以指定的顏色清除控制元件背景
+            Brush Var_Back = Brushes.Black;//設定畫刷
+            FontFamily Var_FontFamily = new FontFamily("標楷體");//設定字體樣式
+            string Var_Str = size.ToString() + "\n海納百川，\n有容乃大；\n壁立千仞，\n無欲則剛。";//設定字串
+
+            GraphicsPath Var_Path = new GraphicsPath();//實例化GraphicsPath對像
+            Var_Path.AddString(Var_Str, Var_FontFamily, (int)FontStyle.Regular, 50, new Point(0, 0), new StringFormat());//在路徑中新增文字
+            PointF[] Var_PointS = Var_Path.PathPoints;//取得路徑中的點
+            Byte[] Car_Types = Var_Path.PathTypes;//取得對應點的類型
+
+            Matrix Var_Matrix = new Matrix((float)size, 0.0F, 0.0F, (float)size, 0.0F, 0.0F);//設定仿射矩陣
+            Var_Matrix.TransformPoints(Var_PointS);
+            GraphicsPath Var_New_Path = new GraphicsPath(Var_PointS, Car_Types);
+            g.FillPath(Var_Back, Var_New_Path);
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -1186,32 +1194,6 @@ namespace vcs_Draw2
         private void pictureBox_pen_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawLine(pen, 20, 20, this.pictureBox_pen.ClientSize.Width - 20, this.pictureBox_pen.ClientSize.Height - 20);
-        }
-
-        float size = 1;
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            size += 0.3f;
-            if (size > 3)
-            {
-                size = 1;
-            }
-
-            Graphics g = panel_word.CreateGraphics();//建立控制元件的Graphics類
-            g.Clear(Color.White);//以指定的顏色清除控制元件背景
-            Brush Var_Back = Brushes.Black;//設定畫刷
-            FontFamily Var_FontFamily = new FontFamily("標楷體");//設定字體樣式
-            string Var_Str = size.ToString() + " 海納百川，有容乃大；壁立千仞，無欲則剛。";//設定字串
-
-            GraphicsPath Var_Path = new GraphicsPath();//實例化GraphicsPath對像
-            Var_Path.AddString(Var_Str, Var_FontFamily, (int)FontStyle.Regular, 50, new Point(0, 0), new StringFormat());//在路徑中新增文字
-            PointF[] Var_PointS = Var_Path.PathPoints;//取得路徑中的點
-            Byte[] Car_Types = Var_Path.PathTypes;//取得對應點的類型
-
-            Matrix Var_Matrix = new Matrix((float)size, 0.0F, 0.0F, (float)size, 0.0F, 0.0F);//設定仿射矩陣
-            Var_Matrix.TransformPoints(Var_PointS);
-            GraphicsPath Var_New_Path = new GraphicsPath(Var_PointS, Car_Types);
-            g.FillPath(Var_Back, Var_New_Path);
         }
     }
 }

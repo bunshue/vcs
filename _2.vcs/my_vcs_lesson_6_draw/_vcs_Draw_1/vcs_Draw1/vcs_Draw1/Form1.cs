@@ -1030,7 +1030,7 @@ namespace vcs_Draw1
             Brush bb = new SolidBrush(Color.Red);
             string ct = "輸出文字";
 
-            x_st = 530+100;
+            x_st = 530 + 100;
             y_st = 220;
 
             g.DrawString(ct, f, b, x_st, y_st);
@@ -1872,14 +1872,6 @@ namespace vcs_Draw1
 
             Rectangle intersect = Rectangle.Intersect(rect1, rect2); //交集區域
             g.FillRectangle(Brushes.Yellow, intersect);    //交集 畫黃色
-
-
-
-
-
-
-
-
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -1889,12 +1881,6 @@ namespace vcs_Draw1
             //pictureBox1.Image = null;
 
             richTextBox1.Clear();
-            g = this.CreateGraphics();
-            g.Clear(Color.Gray);
-            g = panel1.CreateGraphics();
-            g.Clear(Color.Gray);
-            g = pictureBox1.CreateGraphics();
-            g.Clear(Color.Gray);
         }
 
         void reset_bitmap1(int W, int H)
@@ -1911,45 +1897,10 @@ namespace vcs_Draw1
             return;
         }
 
-        //The Paint Event Handler
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
-        {
-            try
-            {
-                // Draw the selection rectangle.
-                using (Pen pen = new Pen(Color.Red, 2))
-                {
-                    //Rectangle rect = SelectionRectangle(true);
-                    e.Graphics.DrawRectangle(pen, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
-
-                    pen.Color = Color.Green;
-                    pen.DashPattern = new float[] { 5, 5 };
-                    e.Graphics.DrawRectangle(pen, 5, 5, pictureBox1.Size.Width - 10, pictureBox1.Size.Height - 10);
-                }
-            }
-            catch
-            {
-            }
-        }
-
         private void button21_Click(object sender, EventArgs e)
-        {
-            pictureBox1.Location = new Point(0, 200);
-
-            g = this.CreateGraphics();
-            int w = 550;
-            int h = 170;
-
-            DrawTest(g, w, h);
-        }
-
-        private void button22_Click(object sender, EventArgs e)
         {
             pictureBox1.Size = new Size(550, 170);
             pictureBox1.Location = new Point(50, 50);
-
-            panel1.Size = new Size(550, 170);
-            panel1.Location = new Point(50, 250);
 
             g = pictureBox1.CreateGraphics();
             int w = pictureBox1.ClientSize.Width;
@@ -1958,16 +1909,12 @@ namespace vcs_Draw1
             DrawTest(g, w, h);
         }
 
+        private void button22_Click(object sender, EventArgs e)
+        {
+        }
+
         private void button23_Click(object sender, EventArgs e)
         {
-            panel1.Size = new Size(550, 170);
-            panel1.Location = new Point(50, 50);
-
-            g = panel1.CreateGraphics();
-            int w = panel1.ClientSize.Width;
-            int h = panel1.ClientSize.Height;
-
-            DrawTest(g, w, h);
         }
 
         private void DrawTest(Graphics g, int w, int h)
@@ -2765,6 +2712,17 @@ namespace vcs_Draw1
             flag_mouse_down = 0;
         }
 
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            Pen pen = new Pen(Color.Red, 10);
+            //Rectangle rect = SelectionRectangle(true);
+            e.Graphics.DrawRectangle(pen, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
+
+            pen.Color = Color.Green;
+            pen.DashPattern = new float[] { 5, 5 };
+            e.Graphics.DrawRectangle(pen, 5, 5, pictureBox1.Size.Width - 10, pictureBox1.Size.Height - 10);
+        }
+
         void show_button_text(object sender)
         {
             richTextBox1.Text += ((Button)sender).Text + "\n";
@@ -2845,9 +2803,3 @@ bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0, 0, 0));
  */
 
 
-
-
-
-
-
-//button17

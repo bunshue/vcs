@@ -61,7 +61,7 @@ namespace vcs_MousePaint2
 
         //pictureBox5 對齊網格 ST
         // The grid spacing.
-        const int grid_gap = 8;
+        const int grid_gap = 32;
 
         // The "size" of an object for mouse over purposes.
         private const int object_radius = 3;
@@ -126,7 +126,7 @@ namespace vcs_MousePaint2
             label4.Location = new Point(x_st + dx * 1, y_st + dy * 1 - dd);
             label5.Location = new Point(x_st + dx * 2, y_st + dy * 1 - dd);
             label0.Text = "直線連線";
-            label1.Text = "";
+            label1.Text = "點選多點畫曲線";
             label2.Text = "點選4點畫貝茲線";
             label3.Text = "畫直線與圓的交點";
             label4.Text = "";
@@ -244,11 +244,20 @@ namespace vcs_MousePaint2
 
             // Draw the curve.
             e.Graphics.DrawCurve(Pens.Red, Points.ToArray());
-
         }
 
         private void bt_clear1_Click(object sender, EventArgs e)
         {
+            int len = Points.Count;
+            richTextBox1.Text += "資料長度 : " + len.ToString() + "\n";
+
+            foreach (Point pt in Points)
+            {
+                richTextBox1.Text += pt.ToString() + "\n";
+
+            }
+
+
             // Start a new point list.
             Points = new List<Point>();
             Refresh();
@@ -273,6 +282,14 @@ namespace vcs_MousePaint2
 
             // Redraw.
             pictureBox2.Refresh();
+
+            if (NextPoint > 3)
+            {
+                richTextBox1.Text += Points2[0].ToString() + "\n";
+                richTextBox1.Text += Points2[1].ToString() + "\n";
+                richTextBox1.Text += Points2[2].ToString() + "\n";
+                richTextBox1.Text += Points2[3].ToString() + "\n\n";
+            }
         }
 
         private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
@@ -295,6 +312,7 @@ namespace vcs_MousePaint2
             e.Graphics.Clear(pictureBox2.BackColor);
             if (NextPoint >= 4)
             {
+                richTextBox1.Text += "畫貝茲線2\n";
                 // Draw the curve.
                 e.Graphics.DrawBezier(Pens.Red, Points2[0], Points2[1], Points2[2], Points2[3]);
             }

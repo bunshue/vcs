@@ -358,7 +358,7 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(200, 60);
             this.button21.TabIndex = 38;
-            this.button21.Text = "畫在Form上";
+            this.button21.Text = "DrawTest";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -369,7 +369,6 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(200, 60);
             this.button22.TabIndex = 39;
-            this.button22.Text = "畫在PictureBox上";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -380,7 +379,6 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(200, 60);
             this.button23.TabIndex = 40;
-            this.button23.Text = "畫在Panel上";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 

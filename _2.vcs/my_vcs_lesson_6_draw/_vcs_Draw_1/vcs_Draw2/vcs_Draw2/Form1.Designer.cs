@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button9 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -48,7 +47,6 @@
             this.button15 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.button19 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
@@ -76,8 +74,6 @@
             this.rb_color1 = new System.Windows.Forms.RadioButton();
             this.rb_color3 = new System.Windows.Forms.RadioButton();
             this.rb_color2 = new System.Windows.Forms.RadioButton();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.panel_word = new System.Windows.Forms.Panel();
             this.bt_reset = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_pen)).BeginInit();
@@ -156,6 +152,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 23;
+            this.button5.Text = "畫字範例";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -289,13 +286,6 @@
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(415, 258);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 100);
-            this.panel1.TabIndex = 44;
-            // 
             // button19
             // 
             this.button19.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -331,9 +321,9 @@
             // bt_save
             // 
             this.bt_save.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_save.Location = new System.Drawing.Point(745, 362);
+            this.bt_save.Location = new System.Drawing.Point(507, 258);
             this.bt_save.Name = "bt_save";
-            this.bt_save.Size = new System.Drawing.Size(102, 42);
+            this.bt_save.Size = new System.Drawing.Size(80, 40);
             this.bt_save.TabIndex = 47;
             this.bt_save.Text = "Save";
             this.bt_save.UseVisualStyleBackColor = true;
@@ -383,7 +373,9 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(764, 412);
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.Pink;
+            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(415, 467);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 100);
             this.flowLayoutPanel1.TabIndex = 61;
@@ -392,7 +384,8 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.LightGreen;
-            this.pictureBox1.Location = new System.Drawing.Point(415, 361);
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(421, 359);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.TabIndex = 15;
@@ -599,25 +592,12 @@
             this.rb_color2.UseVisualStyleBackColor = true;
             this.rb_color2.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // panel_word
-            // 
-            this.panel_word.Location = new System.Drawing.Point(417, 571);
-            this.panel_word.Name = "panel_word";
-            this.panel_word.Size = new System.Drawing.Size(708, 102);
-            this.panel_word.TabIndex = 67;
-            // 
             // bt_reset
             // 
             this.bt_reset.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_reset.Location = new System.Drawing.Point(637, 362);
+            this.bt_reset.Location = new System.Drawing.Point(421, 258);
             this.bt_reset.Name = "bt_reset";
-            this.bt_reset.Size = new System.Drawing.Size(102, 42);
+            this.bt_reset.Size = new System.Drawing.Size(80, 40);
             this.bt_reset.TabIndex = 68;
             this.bt_reset.Text = "Reset";
             this.bt_reset.UseVisualStyleBackColor = true;
@@ -627,11 +607,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1144, 702);
+            this.ClientSize = new System.Drawing.Size(984, 661);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.bt_reset);
-            this.Controls.Add(this.panel_word);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -647,7 +626,6 @@
             this.Controls.Add(this.bt_save);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.button17);
             this.Controls.Add(this.button16);
             this.Controls.Add(this.button15);
@@ -704,7 +682,6 @@
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button17;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button bt_clear;
@@ -731,8 +708,6 @@
         private System.Windows.Forms.RadioButton rb_color1;
         private System.Windows.Forms.RadioButton rb_color3;
         private System.Windows.Forms.RadioButton rb_color2;
-        private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Panel panel_word;
         private System.Windows.Forms.Button bt_reset;
     }
 }
