@@ -67,6 +67,14 @@
             this.button54 = new System.Windows.Forms.Button();
             this.button53 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.printDialog1 = new System.Windows.Forms.PrintDialog();
+            this.colorDialog_forecolor = new System.Windows.Forms.ColorDialog();
+            this.colorDialog_backcolor = new System.Windows.Forms.ColorDialog();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox0.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -77,11 +85,12 @@
             // 
             // richTextBox1
             // 
+            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox1.Location = new System.Drawing.Point(581, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.richTextBox1.Text = "春雁\t王恭\n春风一夜到衡阳，楚水燕山万里长。\n莫道春来便归去，江南虽好是他乡。\n\n\n\n";
             // 
             // bt_clear
             // 
@@ -120,6 +129,7 @@
             this.button00.Name = "button00";
             this.button00.Size = new System.Drawing.Size(150, 50);
             this.button00.TabIndex = 4;
+            this.button00.Text = "選取資料夾";
             this.button00.UseVisualStyleBackColor = true;
             this.button00.Click += new System.EventHandler(this.button00_Click);
             // 
@@ -246,6 +256,7 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(150, 50);
             this.button20.TabIndex = 4;
+            this.button20.Text = "把richTextBox的資料寫進檔案";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -256,6 +267,7 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(150, 50);
             this.button21.TabIndex = 2;
+            this.button21.Text = "儲存檔案對話方塊1";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -266,6 +278,7 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(150, 50);
             this.button22.TabIndex = 3;
+            this.button22.Text = "儲存檔案對話方塊2";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -310,6 +323,7 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(150, 50);
             this.button30.TabIndex = 4;
+            this.button30.Text = "色彩對話方塊";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
@@ -320,6 +334,7 @@
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(150, 50);
             this.button31.TabIndex = 2;
+            this.button31.Text = "設定部分背景顏色";
             this.button31.UseVisualStyleBackColor = true;
             this.button31.Click += new System.EventHandler(this.button31_Click);
             // 
@@ -330,6 +345,7 @@
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(150, 50);
             this.button32.TabIndex = 3;
+            this.button32.Text = "設定前景色/背景色";
             this.button32.UseVisualStyleBackColor = true;
             this.button32.Click += new System.EventHandler(this.button32_Click);
             // 
@@ -374,6 +390,7 @@
             this.button40.Name = "button40";
             this.button40.Size = new System.Drawing.Size(150, 50);
             this.button40.TabIndex = 4;
+            this.button40.Text = "設定字型";
             this.button40.UseVisualStyleBackColor = true;
             this.button40.Click += new System.EventHandler(this.button40_Click);
             // 
@@ -384,6 +401,7 @@
             this.button41.Name = "button41";
             this.button41.Size = new System.Drawing.Size(150, 50);
             this.button41.TabIndex = 2;
+            this.button41.Text = "設定部分字型顏色";
             this.button41.UseVisualStyleBackColor = true;
             this.button41.Click += new System.EventHandler(this.button41_Click);
             // 
@@ -438,6 +456,7 @@
             this.button50.Name = "button50";
             this.button50.Size = new System.Drawing.Size(150, 50);
             this.button50.TabIndex = 4;
+            this.button50.Text = "設定印表機";
             this.button50.UseVisualStyleBackColor = true;
             this.button50.Click += new System.EventHandler(this.button50_Click);
             // 
@@ -485,11 +504,26 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // printDialog1
+            // 
+            this.printDialog1.UseEXDialog = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Location = new System.Drawing.Point(577, 129);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(64, 24);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(904, 681);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -508,6 +542,7 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -552,6 +587,14 @@
         private System.Windows.Forms.Button button54;
         private System.Windows.Forms.Button button53;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.FontDialog fontDialog1;
+        private System.Windows.Forms.PrintDialog printDialog1;
+        private System.Windows.Forms.ColorDialog colorDialog_forecolor;
+        private System.Windows.Forms.ColorDialog colorDialog_backcolor;
+        private System.Windows.Forms.Label label1;
     }
 }
 

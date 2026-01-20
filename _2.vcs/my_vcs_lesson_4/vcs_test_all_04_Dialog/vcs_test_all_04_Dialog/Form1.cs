@@ -21,6 +21,31 @@ namespace vcs_test_all_04_Dialog
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            label1.Text = "春雁	王恭\n春风一夜到衡阳，楚水燕山万里长。\n莫道春来便归去，江南虽好是他乡。";
+
+            //設定前景色, 使用自定義色彩
+            // Use dark custom colors for the foreground dialog.
+            int[] fg_colors = {
+                0x808080, 0xFF0000, 0xFF8000, 0xFFFF00, 0x00FF00,
+                0x00FFFF, 0x0000FF, 0xFF00FF, 0x000000, 0xC00000,
+                0x804000, 0xC0C000, 0x008000, 0x00C0C0, 0x0000C0,
+                0x800080 };
+            colorDialog_forecolor.CustomColors = fg_colors;
+            // Make the background dialog open with the custom colors displayed.
+            colorDialog_forecolor.FullOpen = false;
+
+            //設定背景色, 使用自定義色彩
+            // Use light custom colors for the background dialog.
+            int[] bg_colors = {
+                0xFFFFFF, 0xFFC0C0, 0xFFE0C0, 0xFFFFC0, 0xC0FFC0,
+                0xC0FFFF, 0xC0C0FF, 0xFFC0FF, 0xE0E0E0, 0xFF8080,
+                0xFFC080, 0xFFFF80, 0x80FF80, 0x80FFFF, 0x8080FF,
+                0xFF80FF
+            };
+            colorDialog_backcolor.CustomColors = bg_colors;
+            // Make the background dialog open with the custom colors displayed.
+            colorDialog_backcolor.FullOpen = true;
         }
 
         void show_item_location()
@@ -56,10 +81,11 @@ namespace vcs_test_all_04_Dialog
             groupBox2.Font = new Font("Arial", 11);
             groupBox3.Font = new Font("Arial", 11);
             groupBox4.Font = new Font("Arial", 11);
-            groupBox5.Font = new Font("Arial", 11);                 
+            groupBox5.Font = new Font("Arial", 11);
 
-            richTextBox1.Size = new Size(400, 660);
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            label1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            richTextBox1.Size = new Size(400, 660 - 80);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 80);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             x_st = 10;
@@ -113,6 +139,22 @@ namespace vcs_test_all_04_Dialog
 
         private void button00_Click(object sender, EventArgs e)
         {
+            //選取資料夾
+            folderBrowserDialog1.SelectedPath = @"D:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";
+                richTextBox1.Text += "RootFolder: " + folderBrowserDialog1.RootFolder + "\n";
+                richTextBox1.Text += "Container: " + folderBrowserDialog1.Container + "\n";
+                richTextBox1.Text += "Description: " + folderBrowserDialog1.Description + "\n";
+                richTextBox1.Text += "ShowNewFolderButton: " + folderBrowserDialog1.ShowNewFolderButton + "\n";
+                richTextBox1.Text += "Site: " + folderBrowserDialog1.Site + "\n";
+                richTextBox1.Text += "Tag: " + folderBrowserDialog1.Tag + "\n";
+            }
+            else
+            {
+                richTextBox1.Text = "未選取資料夾\n";
+            }
         }
 
         private void button01_Click(object sender, EventArgs e)
@@ -261,15 +303,109 @@ namespace vcs_test_all_04_Dialog
 
         private void button20_Click(object sender, EventArgs e)
         {
+            //saveFileDialog1
+            saveFileDialog1.Title = "測試把資料寫進檔案";
+            //saveFileDialog1.ShowHelp = true;
+            saveFileDialog1.FileName = "";
+            saveFileDialog1.Filter = "文字檔|*.*|C#文件|*.cs|所有檔|*.*";   //限定檔案格式
+            //saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog1.FilterIndex = 1;
+            saveFileDialog1.RestoreDirectory = true;
+
+            //saveFileDialog1.InitialDirectory = "c:\\";
+            //saveFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
+            saveFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1\";
+            saveFileDialog1.RestoreDirectory = true;
+            saveFileDialog1.FileName = "test_write_a_file.txt";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.Text += "get filename : " + saveFileDialog1.FileName + "\n";
+                //richTextBox1.Text += "length : " + saveFileDialog1.FileName.Length.ToString() + "\n";
+
+                //StreamReader sr = new StreamReader(saveFileDialog1.FileName);
+                //StreamReader sr = new StreamReader(fileName, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
+
+                FileStream filestream = File.Open(saveFileDialog1.FileName, FileMode.Create);
+                StreamWriter str_writer = new StreamWriter(filestream);
+
+                str_writer.WriteLine(richTextBox1.Text);
+                // Dispose StreamWriter
+                str_writer.Dispose();
+                // Close FileStream
+                filestream.Close();
+
+                richTextBox1.Text += "儲存資料完畢111，檔案：" + saveFileDialog1.FileName + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "未選取檔案\n";
+            }
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
+            //儲存檔案對話方塊
+            string save_filename;
+            //開啟檔案對話方塊
+            saveFileDialog1.DefaultExt = "*.txt";
+            saveFileDialog1.Filter = "文字檔(*.txt)|*.txt | Word檔(*.doc)|*.doc | Excel檔(*.xls)|*.xls | 所有檔案(*.*)|*.*";   //要在對話方塊中顯示的檔篩選器
+            //saveFileDialog1.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif";
+            saveFileDialog1.FilterIndex = 1;                  //預設上述種類的第幾項，由1開始。
+            saveFileDialog1.RestoreDirectory = true;          //控制對話方塊在關閉之前是否恢復目前的目錄
+            saveFileDialog1.Title = "另存為";                 //將顯示在對話方塊標題列中的字元
+            saveFileDialog1.FileName = "file_to_save.txt";    //預設儲存的檔名
+            saveFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1";  //預設儲存的路徑
+            //saveFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                save_filename = saveFileDialog1.FileName;
+
+                //法一
+                //richTextBox1.SaveFile(save_filename, RichTextBoxStreamType.PlainText);    //將richTextBox的資料寫入到指定的文字檔
+
+                //法二
+                //StreamWriter sw = new StreamWriter(file);                                 //覆蓋舊檔
+                StreamWriter sw = new StreamWriter(save_filename, true);                    //附加在檔案後面
+                //StreamWriter sw = new StreamWriter(save_filename, true, Encoding.UTF8);   //設定編碼方式
+                sw.Write(richTextBox1.Text);
+                sw.Close();
+            }
+            else
+            {
+                MessageBox.Show("Save File FAIL");
+            }
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
-
+            SaveFileDialog sFd = new SaveFileDialog();
+            sFd.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
+            sFd.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";     //限定檔案格式
+            sFd.Title = "限定選擇純文字檔，從目前目錄開始尋找檔案";
+            sFd.FileName = "SaveDataToFile.txt";     //預設檔名
+            sFd.ShowDialog();
+            if (sFd.FileName != "")
+            {
+                //MessageBox.Show("OPEN FILE OK");
+                using (StreamWriter sw = File.CreateText(sFd.FileName))
+                {
+                    // Print Header
+                    string header = "";
+                    header = "AAA";
+                    header += "BBB";
+                    header += "CCC";
+                    header += "DDD";
+                    header += "EEE";
+                    sw.WriteLine(header);
+                    sw.Close();
+                    MessageBox.Show("Save file OK, 檔名：" + sFd.FileName);
+                }
+            }
+            else
+            {
+                MessageBox.Show("OPEN FILE FAIL");
+            }
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -284,14 +420,49 @@ namespace vcs_test_all_04_Dialog
 
         private void button30_Click(object sender, EventArgs e)
         {
+            //色彩對話方塊 選擇背景色
+            colorDialog1.Color = richTextBox1.BackColor;    //顏色對話框的預設顏色
+            colorDialog1.AllowFullOpen = true;  //可以使用該對話框定義自定義顏色
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.BackColor = colorDialog1.Color;
+                button30.BackColor = colorDialog1.Color;
+            }
         }
 
         private void button31_Click(object sender, EventArgs e)
         {
+            //設定部分背景顏色
+            colorDialog1.AllowFullOpen = true;  //可以使用該對話框定義自定義顏色
+            colorDialog1.AnyColor = true;      			//顯示基本顏色集中可用的所有顏色
+            colorDialog1.FullOpen = true;      //創建自定義顏色的控件在對話框打開時是可見的
+            colorDialog1.SolidColorOnly = false;			//不限制只選擇純色
+            if (colorDialog1.ShowDialog() == DialogResult.OK)   //彈出對話框
+            {
+                richTextBox1.SelectionBackColor = colorDialog1.Color;
+            }
         }
 
         private void button32_Click(object sender, EventArgs e)
         {
+            //設定前景色/背景色
+
+            //設定前景色, 使用自定義色彩
+            colorDialog_forecolor.Color = this.ForeColor;
+
+            if (colorDialog_forecolor.ShowDialog() == DialogResult.OK)
+            {
+                this.ForeColor = colorDialog_forecolor.Color;
+            }
+
+            //設定背景色, 使用自定義色彩
+            colorDialog_backcolor.Color = this.BackColor;
+
+            if (colorDialog_backcolor.ShowDialog() == DialogResult.OK)
+            {
+                this.BackColor = colorDialog_backcolor.Color;
+                button32.BackColor = colorDialog_backcolor.Color;
+            }
         }
 
         private void button33_Click(object sender, EventArgs e)
@@ -304,10 +475,39 @@ namespace vcs_test_all_04_Dialog
 
         private void button40_Click(object sender, EventArgs e)
         {
+            //設定字型
+            fontDialog1.AllowVerticalFonts = true;//指示對話框既顯示垂直字體又顯示水平字體
+            fontDialog1.FixedPitchOnly = true; 			//只允許選擇固定間距字體
+            fontDialog1.ShowApply = true;      		//包含應用按鈕
+            fontDialog1.ShowEffects = true;    //允許指定刪除線、下畫線和文本顏色選項的控件
+            fontDialog1.ShowColor = true;
+            fontDialog1.ShowHelp = true;
+
+            fontDialog1.Font = label1.Font;           //字型對話框的預設字型
+            fontDialog1.Color = label1.ForeColor;     //字型對話框的預設顏色
+
+            if (fontDialog1.ShowDialog() == DialogResult.OK)    //開啟字型對話方塊
+            {
+                label1.Font = fontDialog1.Font;       //以在字型對話方塊內所指定的字型來指定給label1
+                label1.ForeColor = fontDialog1.Color; //以在字型對話方塊內所指定的顏色來指定給label1
+                richTextBox1.Font = fontDialog1.Font;       //以在字型對話方塊內所指定的字型來指定給richTextBox1
+                richTextBox1.ForeColor = fontDialog1.Color; //以在字型對話方塊內所指定的顏色來指定給richTextBox1
+            }
         }
 
         private void button41_Click(object sender, EventArgs e)
         {
+            //設定部分字型顏色
+            fontDialog1.ShowApply = true;
+            fontDialog1.ShowColor = true;
+            fontDialog1.ShowEffects = true;
+            fontDialog1.ShowHelp = true;
+            if (fontDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.SelectionFont = fontDialog1.Font;
+                richTextBox1.SelectionColor = fontDialog1.Color;
+                //richTextBox1.SelectionBackColor
+            }
         }
 
         private void button42_Click(object sender, EventArgs e)
@@ -327,7 +527,23 @@ namespace vcs_test_all_04_Dialog
 
         private void button50_Click(object sender, EventArgs e)
         {
-
+            //設定印表機
+            printDialog1.AllowCurrentPage = true;       //顯示當前頁
+            printDialog1.AllowPrintToFile = true;       //允許選擇打印到文件
+            printDialog1.AllowSelection = true;         //啟用“選擇”單選按鈕
+            printDialog1.AllowSomePages = true;         //啟用“頁”單選按鈕
+            //printDialog1.Document = printDocument1;   //指定設置的PrintDocument對象
+            //printDialog1.PrinterSettings = printDocument1.PrinterSettings;    //打印頁的默認設置
+            printDialog1.PrintToFile = false;           //不選擇“打印到文件”
+            printDialog1.ShowHelp = true;               //顯示“幫助”按鈕
+            printDialog1.ShowNetwork = true;            //可以選擇網絡打印機
+            if (printDialog1.ShowDialog() == DialogResult.OK)
+            {
+                //printDocument1.Print();    //打印
+            }
+            else
+            {
+            }
         }
 
         private void button51_Click(object sender, EventArgs e)
@@ -351,9 +567,6 @@ namespace vcs_test_all_04_Dialog
         }
     }
 }
-
-
-
 
 /*
 
@@ -421,18 +634,11 @@ richTextBox1.Text += "----------------------------------------------------------
                 fs.Close();
             }
 
-
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-
 
 openFileDialog1.Filter = "點陣圖 (*.bmp)|*.bmp|JPEG (*.JPG)|*.JPG|" + "GIF(*.GIF)|*.GIF|All File (*.*)|*.*";
 
 saveFileDialog1.Filter = "點陣圖 (*.bmp)|*.bmp|JPEG (*.JPG)|*.JPG|" + "GIF(*.GIF)| *. GIF|All File (*.*)|*.*";
-
-
-
-
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 

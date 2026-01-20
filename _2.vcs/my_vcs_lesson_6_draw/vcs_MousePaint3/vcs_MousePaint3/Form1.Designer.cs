@@ -1,4 +1,4 @@
-﻿namespace vcs_MousePaint2
+﻿namespace vcs_MousePaint3
 {
     partial class Form1
     {
@@ -42,10 +42,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.bt_clear1 = new System.Windows.Forms.Button();
-            this.bt_clear4 = new System.Windows.Forms.Button();
-            this.bt_info4 = new System.Windows.Forms.Button();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -151,7 +147,6 @@
             this.pictureBox5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox5_MouseDown);
             this.pictureBox5.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox5_MouseMove);
             this.pictureBox5.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox5_MouseUp);
-            this.pictureBox5.Resize += new System.EventHandler(this.pictureBox5_Resize);
             // 
             // label0
             // 
@@ -213,56 +208,11 @@
             this.label5.TabIndex = 90;
             this.label5.Text = "label5";
             // 
-            // bt_clear1
-            // 
-            this.bt_clear1.Location = new System.Drawing.Point(382, 12);
-            this.bt_clear1.Name = "bt_clear1";
-            this.bt_clear1.Size = new System.Drawing.Size(50, 25);
-            this.bt_clear1.TabIndex = 91;
-            this.bt_clear1.Text = "Clear";
-            this.bt_clear1.UseVisualStyleBackColor = true;
-            this.bt_clear1.Click += new System.EventHandler(this.bt_clear1_Click);
-            // 
-            // bt_clear4
-            // 
-            this.bt_clear4.Location = new System.Drawing.Point(382, 43);
-            this.bt_clear4.Name = "bt_clear4";
-            this.bt_clear4.Size = new System.Drawing.Size(50, 25);
-            this.bt_clear4.TabIndex = 92;
-            this.bt_clear4.Text = "Clear";
-            this.bt_clear4.UseVisualStyleBackColor = true;
-            this.bt_clear4.Click += new System.EventHandler(this.bt_clear4_Click);
-            // 
-            // bt_info4
-            // 
-            this.bt_info4.Location = new System.Drawing.Point(382, 74);
-            this.bt_info4.Name = "bt_info4";
-            this.bt_info4.Size = new System.Drawing.Size(50, 25);
-            this.bt_info4.TabIndex = 93;
-            this.bt_info4.Text = "Info";
-            this.bt_info4.UseVisualStyleBackColor = true;
-            this.bt_info4.Click += new System.EventHandler(this.bt_info4_Click);
-            // 
-            // checkBox5
-            // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(359, 111);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(72, 16);
-            this.checkBox5.TabIndex = 94;
-            this.checkBox5.Text = "對齊網格";
-            this.checkBox5.UseVisualStyleBackColor = true;
-            this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(444, 361);
-            this.Controls.Add(this.checkBox5);
-            this.Controls.Add(this.bt_info4);
-            this.Controls.Add(this.bt_clear4);
-            this.Controls.Add(this.bt_clear1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -308,10 +258,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button bt_clear1;
-        private System.Windows.Forms.Button bt_clear4;
-        private System.Windows.Forms.Button bt_info4;
-        private System.Windows.Forms.CheckBox checkBox5;
     }
 }
 
