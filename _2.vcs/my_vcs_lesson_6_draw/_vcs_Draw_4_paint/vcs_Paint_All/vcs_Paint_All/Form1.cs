@@ -16,6 +16,20 @@ namespace vcs_Paint_All
 {
     public partial class Form1 : Form
     {
+        //picture0
+        private bool Drawing = false;
+        private List<Point> Points = new List<Point>();
+        //picture0
+
+
+        //picture1
+        Bitmap bmp;
+        Pen p;
+        float x, y;
+
+
+        //picture1
+
         public Form1()
         {
             InitializeComponent();
@@ -26,6 +40,15 @@ namespace vcs_Paint_All
             show_item_location();
 
             this.DoubleBuffered = true;
+
+            //picture1
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+            bmp = new Bitmap(W, H);
+            pictureBox1.BackColor = Color.White;
+            p = new Pen(Color.Black, 2);  //指定畫筆的顏色與粗細
+            //picture1
+
         }
 
         void show_item_location()
@@ -64,6 +87,7 @@ namespace vcs_Paint_All
             richTextBox1.Size = new Size(W - 200, H * 2 + 60);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            bt_clear1.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_clear1.Size.Width, pictureBox1.Location.Y + pictureBox1.Size.Height - bt_clear1.Size.Height);
             this.Size = new Size(1740, 940);
         }
 
@@ -80,26 +104,67 @@ namespace vcs_Paint_All
 
         private void pictureBox0_MouseDown(object sender, MouseEventArgs e)
         {
+            Drawing = true;
+            Points = new List<Point>();
+            Points.Add(e.Location);
+            Refresh();
         }
 
         private void pictureBox0_MouseMove(object sender, MouseEventArgs e)
         {
+            if (!Drawing)
+            {
+                return;
+            }
+
+            if (Points.Count > 0)
+            {
+                Point last_point = Points[Points.Count - 1];
+                if ((last_point.X != e.X) || (last_point.Y != e.Y))
+                {
+                    Points.Add(e.Location);
+                }
+            }
+            else
+            {
+                Points.Add(e.Location);
+            }
+            Refresh();
         }
 
         private void pictureBox0_MouseUp(object sender, MouseEventArgs e)
         {
+            Drawing = false;
         }
 
         private void pictureBox0_Paint(object sender, PaintEventArgs e)
         {
+            if (Points.Count > 1)
+            {
+                e.Graphics.DrawLines(Pens.Black, Points.ToArray());
+            }
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
+            x = e.X;
+            y = e.Y;
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
+            //宣告畫布的來源是bmp圖案物件
+            Graphics g = Graphics.FromImage(bmp);
+            //如果按下滑鼠左鍵時
+            if (e.Button == MouseButtons.Left)
+            {
+                //隨指標移動不斷在畫布上(圖案物件)畫短點直線
+                g.DrawLine(p, x, y, e.X, e.Y);
+                //用圖片方塊pictureBox1來顯示畫布(圖案物件)的內容
+                pictureBox1.Image = bmp;
+                x = e.X;
+                y = e.Y;
+            }
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
@@ -177,6 +242,13 @@ namespace vcs_Paint_All
 
         private void pictureBox5_Paint(object sender, PaintEventArgs e)
         {
+        }
+
+        private void bt_clear1_Click(object sender, EventArgs e)
+        {
+            Graphics g = Graphics.FromImage(bmp);
+            g.Clear(Color.White);    // 清除畫布，背景為白色
+            pictureBox1.Image = bmp;
         }
     }
 }

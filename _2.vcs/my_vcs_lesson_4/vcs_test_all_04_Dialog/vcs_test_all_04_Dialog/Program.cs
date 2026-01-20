@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace vcs_Paint5
+namespace vcs_test_all_04_Dialog
 {
     static class Program
     {

@@ -1,11 +1,51 @@
 ﻿
 
+可以累計點數，緩慢畫出的方法
 
-            Array.Copy(array_data, 0, array_data, offset, array_data.Length - offset);
-            Array.Copy(array_data, offset, array_data, 0, array_data.Length - offset);
+Points1 為 已知點數
+
+        //公用變數
+        List<PointF> Points1 = new List<PointF>();
+        List<PointF> Points2 = new List<PointF>();
+
+                Points1.Add(e.Location);
+
+使用timer
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            int len = Points1.Count;
+            Points2.Add(Points1[cnt]);
+            pictureBox2.Invalidate();
+
+            cnt++;
+            if (cnt >= len)
+            {
+                timer2.Enabled = false;
+
+            }
+        }
+        
+呼叫pictureBox2重畫
+
+        private void pictureBox2_Paint(object sender, PaintEventArgs e)
+        {
+            if (Points2.Count > 1)
+            {
+                e.Graphics.DrawCurve(Pens.Red, Points2.ToArray());
+            }
+
+        }
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
 
+Array.Copy(array_data, 0, array_data, offset, array_data.Length - offset);
+Array.Copy(array_data, offset, array_data, 0, array_data.Length - offset);
 
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
 製作透明表單
 
@@ -14,19 +54,15 @@
 
 設定表單背景色 與 透明色即可 表單上的影像 畫圖 符合條件的 都會變透明
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            this.BackColor = Color.White;
-            this.TransparencyKey = Color.White;
-            this.FormBorderStyle = FormBorderStyle.None;
-        }
-        
-        
+private void Form1_Load(object sender, EventArgs e)
+{
+    this.BackColor = Color.White;
+    this.TransparencyKey = Color.White;
+    this.FormBorderStyle = FormBorderStyle.None;
+}
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-
 
 StartPiont = (200, 100)
 CutArea = (0,0,300,300)
@@ -1021,76 +1057,6 @@ richTextBox1.Text += "----------------------------------------------------------
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-
-
-richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-
-
-            openFileDialog1.Title = "單選檔案";
-            //openFileDialog1.ShowHelp = true;
-            openFileDialog1.FileName = "";              //預設開啟的檔名
-            openFileDialog1.DefaultExt = "*.txt";
-            openFileDialog1.Filter = "文字檔(*.txt)|*.txt|Word檔(*.doc)|*.txt|Excel檔(*.xls)|*.txt|所有檔案(*.*)|*.*";   //存檔類型
-            openFileDialog1.Filter = "文字檔|*.*|C#文件|*.cs|所有檔|*.*";   //限定檔案格式
-            openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
-            openFileDialog1.RestoreDirectory = true;
-            //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
-            openFileDialog1.Multiselect = false;    //單選
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                richTextBox1.Text += "已選取檔案: " + openFileDialog1.FileName + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "未選取檔案\n";
-            }
-
-
-另外
-
-            OpenFileDialog P_OpenFileDialog = new OpenFileDialog();
-            if (P_OpenFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                filename = P_OpenFileDialog.FileName;
-                FileStream fs = File.Open(filename, FileMode.Open);
-                StreamReader sr = new StreamReader(fs);
-                try
-                {
-                    // Read File text
-                    for (int ii = 0; ii < 5; ii++)
-                    {
-                        context = sr.ReadLine();
-                        richTextBox1.Text += "Line " + ii.ToString() + ", context : " + context + "\n";
-
-                        string[] strArray = context.Split('\t');
-                        for (int i = 0; i < strArray.Length; i++)
-                        {
-                            richTextBox1.Text += strArray[i] + "\n";
-                        }
-                    }
-
-                    //this.Disp_Message("開啟檔案 : " + filename, 0);
-                    //this.Disp_Message("讀取檔案成功 !!", 1);
-                    MessageBox.Show("Open File : " + filename);
-                    MessageBox.Show("Read File Successfully !!");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.ToString());
-                    //this.Disp_Message("開啟檔案 : " + filename, 0);
-                    //this.Disp_Message("讀取檔案失敗 !!", 2);
-                    MessageBox.Show("Open File : " + filename);
-                    MessageBox.Show("Read File Fail !!");
-                }
-                sr.Dispose();
-                fs.Close();
-            }
-
-
-richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
 
             string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\excel_20210602_131921.xls";

@@ -59,11 +59,9 @@ namespace vcs_ColorDialog
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
 
-            label1.Location = new Point(x_st + dx * 1, y_st + dy * 0+20);
+            label1.Location = new Point(x_st + dx * 1, y_st + dy * 0 + 20);
             richTextBox1.Size = new Size(600, 400);
             richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -102,11 +100,6 @@ namespace vcs_ColorDialog
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
             //設定前景色, 使用自定義色彩
@@ -116,10 +109,7 @@ namespace vcs_ColorDialog
             {
                 this.ForeColor = colorDialog_forecolor.Color;
             }
-        }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
             //設定背景色, 使用自定義色彩
             colorDialog_backcolor.Color = this.BackColor;
 
@@ -127,7 +117,6 @@ namespace vcs_ColorDialog
             {
                 this.BackColor = colorDialog_backcolor.Color;
                 button3.BackColor = colorDialog_backcolor.Color;
-                button4.BackColor = colorDialog_backcolor.Color;
             }
         }
     }

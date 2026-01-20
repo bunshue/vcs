@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6A644F1A-A620-49DB-A19B-3C97E1F4534A}</ProjectGuid>
+    <ProjectGuid>{7A1FCC8B-CAA7-49E9-B6C6-F7967B0F0135}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_OpenFileDialog</RootNamespace>
-    <AssemblyName>vcs_OpenFileDialog</AssemblyName>
+    <RootNamespace>vcs_test_all_04_Dialog</RootNamespace>
+    <AssemblyName>vcs_test_all_04_Dialog</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

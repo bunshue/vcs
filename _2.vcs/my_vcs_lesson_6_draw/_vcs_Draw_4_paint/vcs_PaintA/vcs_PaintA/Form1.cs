@@ -51,7 +51,6 @@ namespace vcs_PaintA
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             pictureBox1.Size = new Size(800, 600);
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             pictureBox1.BackColor = Color.Pink;
@@ -63,7 +62,6 @@ namespace vcs_PaintA
             this.Size = new Size(1200, 750);
         }
 
-
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
@@ -73,14 +71,16 @@ namespace vcs_PaintA
         private void SelectTool(ToolTypes tool)
         {
             // If we have selected an invalid line, discard it.
-            if ((SelectedTool == ToolTypes.Line) &&
-                (LinePoints.Count == 1))
+            if ((SelectedTool == ToolTypes.Line) && (LinePoints.Count == 1))
+            {
                 LinePoints = new List<PointF>();
+            }
 
             // If we have selected an invalid polygon, discard it.
-            if ((SelectedTool == ToolTypes.Polygon) &&
-                (PolygonPoints.Count < 3))
+            if ((SelectedTool == ToolTypes.Polygon) && (PolygonPoints.Count < 3))
+            {
                 PolygonPoints = new List<PointF>();
+            }
 
             // Select the new tool.
             SelectedTool = tool;
@@ -121,16 +121,8 @@ namespace vcs_PaintA
             SelectTool(ToolTypes.Polygon);
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         // Return points where the segment enters and leaves the polygon.
-        private PointF[] ClipLineWithPolygon(
-            out bool starts_outside_polygon,
-            PointF point1, PointF point2,
-            List<PointF> polygon_points)
+        private PointF[] ClipLineWithPolygon(out bool starts_outside_polygon, PointF point1, PointF point2, List<PointF> polygon_points)
         {
             // Make lists to hold points of
             // intersection and their t values.
@@ -140,9 +132,7 @@ namespace vcs_PaintA
             // Add the segment's starting point.
             intersections.Add(point1);
             t_values.Add(0f);
-            starts_outside_polygon =
-                !PointIsInPolygon(point1.X, point1.Y,
-                    polygon_points.ToArray());
+            starts_outside_polygon = !PointIsInPolygon(point1.X, point1.Y, polygon_points.ToArray());
 
             // Examine the polygon's edges.
             for (int i1 = 0; i1 < polygon_points.Count; i1++)
@@ -154,11 +144,8 @@ namespace vcs_PaintA
                 bool lines_intersect, segments_intersect;
                 PointF intersection, close_p1, close_p2;
                 float t1, t2;
-                FindIntersection(point1, point2,
-                    polygon_points[i1], polygon_points[i2],
-                    out lines_intersect, out segments_intersect,
-                    out intersection, out close_p1, out close_p2,
-                    out t1, out t2);
+                FindIntersection(point1, point2, polygon_points[i1], polygon_points[i2],
+                    out lines_intersect, out segments_intersect, out intersection, out close_p1, out close_p2, out t1, out t2);
 
                 // See if the segment intersects the edge.
                 if (segments_intersect)
@@ -222,12 +209,23 @@ namespace vcs_PaintA
             segments_intersect = ((t1 >= 0) && (t1 <= 1) && (t2 >= 0) && (t2 <= 1));
 
             // Find the closest points on the segments.
-            if (t1 < 0) t1 = 0;
-            else if (t1 > 1) t1 = 1;
+            if (t1 < 0)
+            {
+                t1 = 0;
+            }
+            else if (t1 > 1)
+            {
+                t1 = 1;
+            }
 
-            if (t2 < 0) t2 = 0;
-            else if (t2 > 1) t2 = 1;
-
+            if (t2 < 0)
+            {
+                t2 = 0;
+            }
+            else if (t2 > 1)
+            {
+                t2 = 1;
+            }
             close_p1 = new PointF(p1.X + dx12 * t1, p1.Y + dy12 * t1);
             close_p2 = new PointF(p3.X + dx34 * t2, p3.Y + dy34 * t2);
         }
@@ -240,8 +238,7 @@ namespace vcs_PaintA
             int max_point = polygon_points.Length - 1;
             float total_angle = GetAngle(
                 polygon_points[max_point].X, polygon_points[max_point].Y,
-                X, Y,
-                polygon_points[0].X, polygon_points[0].Y);
+                X, Y, polygon_points[0].X, polygon_points[0].Y);
 
             // Add the angles from the point
             // to each other pair of vertices.
@@ -249,8 +246,7 @@ namespace vcs_PaintA
             {
                 total_angle += GetAngle(
                     polygon_points[i].X, polygon_points[i].Y,
-                    X, Y,
-                    polygon_points[i + 1].X, polygon_points[i + 1].Y);
+                    X, Y, polygon_points[i + 1].X, polygon_points[i + 1].Y);
             }
 
             // The total angle should be 2 * PI or -2 * PI if
@@ -263,8 +259,7 @@ namespace vcs_PaintA
         // Return a value between PI and -PI.
         // Note that the value is the opposite of what you might
         // expect because Y coordinates increase downward.
-        public static float GetAngle(float Ax, float Ay,
-            float Bx, float By, float Cx, float Cy)
+        public static float GetAngle(float Ax, float Ay, float Bx, float By, float Cx, float Cy)
         {
             // Get the dot product.
             float dot_product = DotProduct(Ax, Ay, Bx, By, Cx, Cy);
@@ -278,8 +273,7 @@ namespace vcs_PaintA
 
         // Return the dot product AB · BC.
         // Note that AB · BC = |AB| * |BC| * Cos(theta).
-        private static float DotProduct(float Ax, float Ay,
-            float Bx, float By, float Cx, float Cy)
+        private static float DotProduct(float Ax, float Ay, float Bx, float By, float Cx, float Cy)
         {
             // Get the vectors' coordinates.
             float BAx = Ax - Bx;
@@ -298,8 +292,7 @@ namespace vcs_PaintA
         // For two vectors in the X-Y plane, the result is a
         // vector with X and Y components 0 so the Z component
         // gives the vector's length and direction.
-        public static float CrossProductLength(float Ax, float Ay,
-            float Bx, float By, float Cx, float Cy)
+        public static float CrossProductLength(float Ax, float Ay, float Bx, float By, float Cx, float Cy)
         {
             // Get the vectors' coordinates.
             float BAx = Ax - Bx;
@@ -313,15 +306,17 @@ namespace vcs_PaintA
 
         private void DrawPoint(Graphics gr, PointF point)
         {
-            RectangleF rect = new RectangleF(
-                point.X - 3, point.Y - 3, 6, 6);
+            RectangleF rect = new RectangleF(point.X - 3, point.Y - 3, 6, 6);
             gr.FillEllipse(Brushes.White, rect);
             gr.DrawEllipse(Pens.Black, rect);
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (SelectedTool == ToolTypes.None) return;
+            if (SelectedTool == ToolTypes.None)
+            {
+                return;
+            }
 
             // See which tool is selected.
             if (SelectedTool == ToolTypes.Line)
@@ -330,21 +325,25 @@ namespace vcs_PaintA
 
                 // If we have both line points, stop.
                 if (LinePoints.Count == 2)
+                {
                     SelectTool(ToolTypes.None);
+                }
             }
             else
             {
                 // If this is the right mouse button, stop.
                 if (e.Button == MouseButtons.Right)
+                {
                     SelectTool(ToolTypes.None);
+                }
                 else
+                {
                     PolygonPoints.Add(e.Location);
+                }
             }
 
             // Redraw to show the new point.
             pictureBox1.Refresh();
-
-
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
@@ -354,8 +353,6 @@ namespace vcs_PaintA
                 MouseLocation = e.Location;
                 pictureBox1.Refresh();
             }
-
-
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
@@ -372,56 +369,58 @@ namespace vcs_PaintA
             if (SelectedTool == ToolTypes.Polygon)
             {
                 if (PolygonPoints.Count > 1)
-                    e.Graphics.DrawLines(Pens.Blue,
-                        PolygonPoints.ToArray());
+                {
+                    e.Graphics.DrawLines(Pens.Blue, PolygonPoints.ToArray());
+                }
                 if (PolygonPoints.Count > 0)
-                    e.Graphics.DrawLine(Pens.Green,
-                        PolygonPoints[PolygonPoints.Count - 1],
-                        MouseLocation);
+                {
+                    e.Graphics.DrawLine(Pens.Green, PolygonPoints[PolygonPoints.Count - 1], MouseLocation);
+                }
             }
             else if (PolygonPoints.Count > 2)
             {
-                e.Graphics.FillPolygon(Brushes.LightBlue,
-                    PolygonPoints.ToArray());
-                e.Graphics.DrawPolygon(Pens.Blue,
-                    PolygonPoints.ToArray());
+                e.Graphics.FillPolygon(Brushes.LightBlue, PolygonPoints.ToArray());
+                e.Graphics.DrawPolygon(Pens.Blue, PolygonPoints.ToArray());
             }
 
             // Draw the clipped line segment.
-            if ((SelectedTool == ToolTypes.None) &&
-                (PolygonPoints.Count > 2) &&
-                (LinePoints.Count == 2))
+            if ((SelectedTool == ToolTypes.None) && (PolygonPoints.Count > 2) && (LinePoints.Count == 2))
             {
                 bool draw;
-                PointF[] intersections = ClipLineWithPolygon(
-                    out draw, LinePoints[0], LinePoints[1], PolygonPoints);
+                PointF[] intersections = ClipLineWithPolygon(out draw, LinePoints[0], LinePoints[1], PolygonPoints);
 
                 using (Pen pen = new Pen(Color.Pink, 5))
                 {
                     for (int i = 0; i < intersections.Length - 1; i++)
                     {
-                        if (draw) pen.Color = Color.Pink;
-                        else pen.Color = Color.Yellow;
+                        if (draw)
+                        {
+                            pen.Color = Color.Pink;
+                        }
+                        else
+                        {
+                            pen.Color = Color.Yellow;
+                        }
                         draw = !draw;
 
-                        e.Graphics.DrawLine(pen,
-                            intersections[i], intersections[i + 1]);
+                        e.Graphics.DrawLine(pen, intersections[i], intersections[i + 1]);
                     }
                     foreach (PointF point in intersections)
+                    {
                         DrawPoint(e.Graphics, point);
+                    }
                 }
             }
 
             // Draw the line if we have one.
             if (LinePoints.Count == 2)
-                e.Graphics.DrawLine(Pens.Red,
-                    LinePoints[0], LinePoints[1]);
+            {
+                e.Graphics.DrawLine(Pens.Red, LinePoints[0], LinePoints[1]);
+            }
             else if (LinePoints.Count == 1)
-                e.Graphics.DrawLine(Pens.Green,
-                    LinePoints[0], MouseLocation);
-
-
+            {
+                e.Graphics.DrawLine(Pens.Green, LinePoints[0], MouseLocation);
+            }
         }
-
     }
 }
