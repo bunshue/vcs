@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_test_all_04_Font2.Properties {
+namespace vcs_RadioButton.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace vcs_test_all_04_Font2.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("vcs_test_all_04_Font2.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("vcs_RadioButton.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,56 +57,6 @@ namespace vcs_test_all_04_Font2.Properties {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
-        /// </summary>
-        internal static System.Drawing.Bitmap clear {
-            get {
-                object obj = ResourceManager.GetObject("clear", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
-        /// </summary>
-        internal static System.Drawing.Bitmap minus {
-            get {
-                object obj = ResourceManager.GetObject("minus", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
-        /// </summary>
-        internal static System.Drawing.Bitmap open_folder {
-            get {
-                object obj = ResourceManager.GetObject("open_folder", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
-        /// </summary>
-        internal static System.Drawing.Bitmap plus {
-            get {
-                object obj = ResourceManager.GetObject("plus", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
-        /// </summary>
-        internal static System.Drawing.Bitmap x {
-            get {
-                object obj = ResourceManager.GetObject("x", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

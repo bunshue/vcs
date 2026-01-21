@@ -39,6 +39,7 @@
             this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.chkLunch = new System.Windows.Forms.CheckBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.bt_clear = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -53,7 +54,7 @@
             this.groupBox1.Controls.Add(this.chkBreakfast);
             this.groupBox1.Location = new System.Drawing.Point(12, 11);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(226, 95);
+            this.groupBox1.Size = new System.Drawing.Size(108, 95);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -113,7 +114,7 @@
             this.groupBox2.Controls.Add(this.chkLunch);
             this.groupBox2.Location = new System.Drawing.Point(12, 112);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(226, 95);
+            this.groupBox2.Size = new System.Drawing.Size(108, 95);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             // 
@@ -167,15 +168,27 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(253, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(337, 499);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 5;
             this.richTextBox1.Text = "";
+            // 
+            // bt_clear
+            // 
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(263, 18);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(80, 40);
+            this.bt_clear.TabIndex = 67;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(602, 523);
+            this.ClientSize = new System.Drawing.Size(484, 461);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -203,6 +216,7 @@
         private System.Windows.Forms.RadioButton radioButton6;
         private System.Windows.Forms.CheckBox chkLunch;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button bt_clear;
     }
 }
 

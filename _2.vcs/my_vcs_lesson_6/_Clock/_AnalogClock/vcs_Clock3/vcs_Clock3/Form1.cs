@@ -48,7 +48,6 @@ namespace vcs_Clock3
             //create graphics
             g = Graphics.FromImage(bmp);
 
-
             //get time
             int ms = DateTime.Now.Millisecond;
             int ss = DateTime.Now.Second;

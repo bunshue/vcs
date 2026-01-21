@@ -57,30 +57,8 @@
             this.button23 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox_pen = new System.Windows.Forms.PictureBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.rb_cap1 = new System.Windows.Forms.RadioButton();
-            this.rb_cap2 = new System.Windows.Forms.RadioButton();
-            this.rb_cap3 = new System.Windows.Forms.RadioButton();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.rb_style1 = new System.Windows.Forms.RadioButton();
-            this.rb_style2 = new System.Windows.Forms.RadioButton();
-            this.rb_style3 = new System.Windows.Forms.RadioButton();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.rb_width3 = new System.Windows.Forms.RadioButton();
-            this.rb_width2 = new System.Windows.Forms.RadioButton();
-            this.rb_width1 = new System.Windows.Forms.RadioButton();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.rb_color1 = new System.Windows.Forms.RadioButton();
-            this.rb_color3 = new System.Windows.Forms.RadioButton();
-            this.rb_color2 = new System.Windows.Forms.RadioButton();
             this.bt_reset = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_pen)).BeginInit();
-            this.groupBox4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -98,6 +76,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(200, 60);
             this.button9.TabIndex = 18;
+            this.button9.Text = "畫筆的設定 顏色 寬度 樣式 端點樣式";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -391,207 +370,6 @@
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
             // 
-            // pictureBox_pen
-            // 
-            this.pictureBox_pen.BackColor = System.Drawing.Color.Pink;
-            this.pictureBox_pen.Location = new System.Drawing.Point(621, 6);
-            this.pictureBox_pen.Name = "pictureBox_pen";
-            this.pictureBox_pen.Size = new System.Drawing.Size(350, 350);
-            this.pictureBox_pen.TabIndex = 62;
-            this.pictureBox_pen.TabStop = false;
-            this.pictureBox_pen.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_pen_Paint);
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.rb_cap1);
-            this.groupBox4.Controls.Add(this.rb_cap2);
-            this.groupBox4.Controls.Add(this.rb_cap3);
-            this.groupBox4.Location = new System.Drawing.Point(868, 93);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(99, 88);
-            this.groupBox4.TabIndex = 66;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "帽緣樣式";
-            // 
-            // rb_cap1
-            // 
-            this.rb_cap1.AutoSize = true;
-            this.rb_cap1.Checked = true;
-            this.rb_cap1.Location = new System.Drawing.Point(6, 21);
-            this.rb_cap1.Name = "rb_cap1";
-            this.rb_cap1.Size = new System.Drawing.Size(40, 16);
-            this.rb_cap1.TabIndex = 2;
-            this.rb_cap1.TabStop = true;
-            this.rb_cap1.Text = "Flat";
-            this.rb_cap1.UseVisualStyleBackColor = true;
-            this.rb_cap1.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
-            // 
-            // rb_cap2
-            // 
-            this.rb_cap2.AutoSize = true;
-            this.rb_cap2.Location = new System.Drawing.Point(5, 43);
-            this.rb_cap2.Name = "rb_cap2";
-            this.rb_cap2.Size = new System.Drawing.Size(90, 16);
-            this.rb_cap2.TabIndex = 1;
-            this.rb_cap2.Text = "RoundAnchor";
-            this.rb_cap2.UseVisualStyleBackColor = true;
-            this.rb_cap2.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
-            // 
-            // rb_cap3
-            // 
-            this.rb_cap3.AutoSize = true;
-            this.rb_cap3.Location = new System.Drawing.Point(6, 65);
-            this.rb_cap3.Name = "rb_cap3";
-            this.rb_cap3.Size = new System.Drawing.Size(90, 16);
-            this.rb_cap3.TabIndex = 0;
-            this.rb_cap3.Text = "SquareAnchor";
-            this.rb_cap3.UseVisualStyleBackColor = true;
-            this.rb_cap3.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.rb_style1);
-            this.groupBox3.Controls.Add(this.rb_style2);
-            this.groupBox3.Controls.Add(this.rb_style3);
-            this.groupBox3.Location = new System.Drawing.Point(700, 247);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(99, 88);
-            this.groupBox3.TabIndex = 65;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "樣式";
-            // 
-            // rb_style1
-            // 
-            this.rb_style1.AutoSize = true;
-            this.rb_style1.Checked = true;
-            this.rb_style1.Location = new System.Drawing.Point(6, 21);
-            this.rb_style1.Name = "rb_style1";
-            this.rb_style1.Size = new System.Drawing.Size(47, 16);
-            this.rb_style1.TabIndex = 2;
-            this.rb_style1.TabStop = true;
-            this.rb_style1.Text = "Solid";
-            this.rb_style1.UseVisualStyleBackColor = true;
-            this.rb_style1.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
-            // 
-            // rb_style2
-            // 
-            this.rb_style2.AutoSize = true;
-            this.rb_style2.Location = new System.Drawing.Point(5, 43);
-            this.rb_style2.Name = "rb_style2";
-            this.rb_style2.Size = new System.Drawing.Size(46, 16);
-            this.rb_style2.TabIndex = 1;
-            this.rb_style2.Text = "Dash";
-            this.rb_style2.UseVisualStyleBackColor = true;
-            this.rb_style2.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
-            // 
-            // rb_style3
-            // 
-            this.rb_style3.AutoSize = true;
-            this.rb_style3.Location = new System.Drawing.Point(6, 65);
-            this.rb_style3.Name = "rb_style3";
-            this.rb_style3.Size = new System.Drawing.Size(40, 16);
-            this.rb_style3.TabIndex = 0;
-            this.rb_style3.Text = "Dot";
-            this.rb_style3.UseVisualStyleBackColor = true;
-            this.rb_style3.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.rb_width3);
-            this.groupBox2.Controls.Add(this.rb_width2);
-            this.groupBox2.Controls.Add(this.rb_width1);
-            this.groupBox2.Location = new System.Drawing.Point(640, 135);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(99, 94);
-            this.groupBox2.TabIndex = 64;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "粗細";
-            // 
-            // rb_width3
-            // 
-            this.rb_width3.AutoSize = true;
-            this.rb_width3.Location = new System.Drawing.Point(6, 66);
-            this.rb_width3.Name = "rb_width3";
-            this.rb_width3.Size = new System.Drawing.Size(35, 16);
-            this.rb_width3.TabIndex = 2;
-            this.rb_width3.Text = "10";
-            this.rb_width3.UseVisualStyleBackColor = true;
-            this.rb_width3.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
-            // 
-            // rb_width2
-            // 
-            this.rb_width2.AutoSize = true;
-            this.rb_width2.Location = new System.Drawing.Point(7, 44);
-            this.rb_width2.Name = "rb_width2";
-            this.rb_width2.Size = new System.Drawing.Size(29, 16);
-            this.rb_width2.TabIndex = 1;
-            this.rb_width2.Text = "5";
-            this.rb_width2.UseVisualStyleBackColor = true;
-            this.rb_width2.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
-            // 
-            // rb_width1
-            // 
-            this.rb_width1.AutoSize = true;
-            this.rb_width1.Checked = true;
-            this.rb_width1.Location = new System.Drawing.Point(7, 22);
-            this.rb_width1.Name = "rb_width1";
-            this.rb_width1.Size = new System.Drawing.Size(29, 16);
-            this.rb_width1.TabIndex = 0;
-            this.rb_width1.TabStop = true;
-            this.rb_width1.Text = "1";
-            this.rb_width1.UseVisualStyleBackColor = true;
-            this.rb_width1.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.rb_color1);
-            this.groupBox5.Controls.Add(this.rb_color3);
-            this.groupBox5.Controls.Add(this.rb_color2);
-            this.groupBox5.Location = new System.Drawing.Point(747, 28);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(99, 100);
-            this.groupBox5.TabIndex = 63;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "顏色";
-            // 
-            // rb_color1
-            // 
-            this.rb_color1.AutoSize = true;
-            this.rb_color1.Checked = true;
-            this.rb_color1.ForeColor = System.Drawing.Color.Red;
-            this.rb_color1.Location = new System.Drawing.Point(16, 24);
-            this.rb_color1.Name = "rb_color1";
-            this.rb_color1.Size = new System.Drawing.Size(47, 16);
-            this.rb_color1.TabIndex = 12;
-            this.rb_color1.TabStop = true;
-            this.rb_color1.Text = "紅色";
-            this.rb_color1.UseVisualStyleBackColor = true;
-            this.rb_color1.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
-            // 
-            // rb_color3
-            // 
-            this.rb_color3.AutoSize = true;
-            this.rb_color3.ForeColor = System.Drawing.Color.Blue;
-            this.rb_color3.Location = new System.Drawing.Point(16, 70);
-            this.rb_color3.Name = "rb_color3";
-            this.rb_color3.Size = new System.Drawing.Size(47, 16);
-            this.rb_color3.TabIndex = 14;
-            this.rb_color3.Text = "藍色";
-            this.rb_color3.UseVisualStyleBackColor = true;
-            this.rb_color3.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
-            // 
-            // rb_color2
-            // 
-            this.rb_color2.AutoSize = true;
-            this.rb_color2.ForeColor = System.Drawing.Color.Lime;
-            this.rb_color2.Location = new System.Drawing.Point(16, 47);
-            this.rb_color2.Name = "rb_color2";
-            this.rb_color2.Size = new System.Drawing.Size(47, 16);
-            this.rb_color2.TabIndex = 13;
-            this.rb_color2.Text = "綠色";
-            this.rb_color2.UseVisualStyleBackColor = true;
-            this.rb_color2.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
-            // 
             // bt_reset
             // 
             this.bt_reset.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -607,15 +385,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 661);
+            this.ClientSize = new System.Drawing.Size(684, 661);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.bt_reset);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox5);
-            this.Controls.Add(this.pictureBox_pen);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.button23);
             this.Controls.Add(this.button22);
@@ -647,15 +420,6 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_pen)).EndInit();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -691,23 +455,6 @@
         private System.Windows.Forms.Button button22;
         private System.Windows.Forms.Button button23;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.PictureBox pictureBox_pen;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.RadioButton rb_cap1;
-        private System.Windows.Forms.RadioButton rb_cap2;
-        private System.Windows.Forms.RadioButton rb_cap3;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.RadioButton rb_style1;
-        private System.Windows.Forms.RadioButton rb_style2;
-        private System.Windows.Forms.RadioButton rb_style3;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton rb_width3;
-        private System.Windows.Forms.RadioButton rb_width2;
-        private System.Windows.Forms.RadioButton rb_width1;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.RadioButton rb_color1;
-        private System.Windows.Forms.RadioButton rb_color3;
-        private System.Windows.Forms.RadioButton rb_color2;
         private System.Windows.Forms.Button bt_reset;
     }
 }

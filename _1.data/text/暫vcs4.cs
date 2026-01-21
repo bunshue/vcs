@@ -86,7 +86,19 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+this.DoubleBuffered = true;//避免闪烁
 
+Graphics g = e.Graphics;      //定义g为该窗体控件的画布　
+
+// Graphics g = this.CreateGraphics(); //避免使用此方法，会出现闪烁
+// Graphics g = this.CreateGraphics(); //避免使用此方法，会出现闪烁
+
+绘制圆润指针、曲线
+g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;//使画出的指针、线条更平滑、高质量
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
             //same
             //Image img = Image.FromFile(filename);

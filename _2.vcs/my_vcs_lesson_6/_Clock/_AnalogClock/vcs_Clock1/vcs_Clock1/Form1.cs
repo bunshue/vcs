@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-//參考 http://weisico.com/program/2018/0531/350.html
-
 namespace vcs_Clock1
 {
     public partial class Form1 : Form
@@ -16,17 +14,25 @@ namespace vcs_Clock1
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             this.DoubleBuffered = true;//避免闪烁  方法一
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Invalidate();
+            this.pictureBox1.Invalidate();
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            Graphics g = e.Graphics;      //定义g为该窗体控件的画布　
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;      //定义g为该窗体控件的画布
             // Graphics g = this.CreateGraphics(); //避免使用此方法，会出现闪烁
 
             //解决闪烁
@@ -105,3 +111,4 @@ namespace vcs_Clock1
         }
     }
 }
+

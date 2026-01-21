@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_test_all_04_Font2.Properties {
+namespace vcs_RadioButton.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

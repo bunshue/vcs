@@ -28,7 +28,6 @@ namespace vcs_Draw2
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
-
         }
 
         void show_item_location()
@@ -72,67 +71,15 @@ namespace vcs_Draw2
             bt_reset.Location = new Point(x_st + dx * 2, y_st + dy * 4);
             bt_save.Location = new Point(x_st + dx * 2 + 100, y_st + dy * 4);
 
-            int width = 600;
-            int height = 600;
+            richTextBox1.Size = new Size(200, 340);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            int width = 920;
+            int height = 680;
             pictureBox1.Size = new Size(width, height);
             pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
-            pictureBox_pen.Size = new Size(width / 2, height / 2);
-            pictureBox_pen.Location = new Point(x_st + dx * 6, y_st + dy * 0);
-
-            richTextBox1.Size = new Size(300, 300);
-            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 5);
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-            this.pictureBox_pen.Controls.Add(groupBox2);
-            this.pictureBox_pen.Controls.Add(groupBox3);
-            this.pictureBox_pen.Controls.Add(groupBox4);
-            this.pictureBox_pen.Controls.Add(groupBox5);
-            groupBox2.BringToFront();
-            groupBox3.BringToFront();
-            groupBox4.BringToFront();
-            groupBox5.BringToFront();
-
-            int W;
-            int H;
-            int w;
-            int h;
-
-            //上
-            W = pictureBox_pen.Size.Width;
-            H = pictureBox_pen.Size.Height;
-            w = groupBox5.Size.Width;
-            h = groupBox5.Size.Height;
-            x_st = (W - w) / 2;
-            y_st = 10;
-            groupBox5.Location = new Point(x_st, y_st);
-
-            //下
-            W = pictureBox_pen.Size.Width;
-            H = pictureBox_pen.Size.Height;
-            w = groupBox3.Size.Width;
-            h = groupBox3.Size.Height;
-            x_st = (W - w) / 2;
-            y_st = H - h - 10;
-            groupBox3.Location = new Point(x_st, y_st);
-
-            //左
-            W = pictureBox_pen.Size.Width;
-            H = pictureBox_pen.Size.Height;
-            w = groupBox2.Size.Width;
-            h = groupBox2.Size.Height;
-            x_st = 10;
-            y_st = (H - h) / 2;
-            groupBox2.Location = new Point(x_st, y_st);
-
-            //右
-            W = pictureBox_pen.Size.Width;
-            H = pictureBox_pen.Size.Height;
-            w = groupBox4.Size.Width;
-            h = groupBox4.Size.Height;
-            x_st = W - w - 10;
-            y_st = (H - h) / 2;
-            groupBox4.Location = new Point(x_st, y_st);
 
             this.Size = new Size(1600, 750);
             this.Text = "vcs_Draw2";
@@ -142,9 +89,8 @@ namespace vcs_Draw2
         {
             int width = 780;
             int height = 600;
-
             pictureBox1.Size = new Size(width, height);
-            pictureBox1.Location = new Point(0, 0);
+            //pictureBox1.Location = new Point(0, 0);
 
             bitmap1 = new Bitmap(width, height);
 
@@ -252,9 +198,8 @@ namespace vcs_Draw2
         {
             int width = 780;
             int height = 600;
-
             pictureBox1.Size = new Size(width, height);
-            pictureBox1.Location = new Point(0, 0);
+            //pictureBox1.Location = new Point(0, 0);
 
             bitmap1 = new Bitmap(width, height);
 
@@ -296,9 +241,8 @@ namespace vcs_Draw2
         {
             int width = 780;
             int height = 950;
-
             pictureBox1.Size = new Size(width, height);
-            pictureBox1.Location = new Point(0, 0);
+            //pictureBox1.Location = new Point(0, 0);
 
             bitmap1 = new Bitmap(width, height);
 
@@ -489,9 +433,8 @@ namespace vcs_Draw2
         {
             int width = 780;
             int height = 600;
-
             pictureBox1.Size = new Size(width, height);
-            pictureBox1.Location = new Point(0, 0);
+            //pictureBox1.Location = new Point(0, 0);
 
             bitmap1 = new Bitmap(width, height);
 
@@ -591,9 +534,6 @@ namespace vcs_Draw2
             g.FillEllipse(semiTransBrush, 140, 190, 186, 130);
 
             pictureBox1.Image = bitmap1;
-            pictureBox1.Location = new Point(50, 50);
-
-
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -624,7 +564,6 @@ namespace vcs_Draw2
             g.DrawString("牡丹亭", new Font("標楷體", 30), new SolidBrush(Color.FromArgb(60, 0, 0, 255)), new PointF(20, 220));
 
             pictureBox1.Image = bitmap1;
-            pictureBox1.Location = new Point(50, 50);
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -658,6 +597,32 @@ namespace vcs_Draw2
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //畫筆的設定 顏色 寬度 樣式 端點樣式
+
+            Graphics g = pictureBox1.CreateGraphics();
+
+            Pen pen = new Pen(Color.Red, 1);
+            // 顏色選項
+            pen.Color = Color.Red;
+            pen.Color = Color.Green;
+            pen.Color = Color.Blue;
+
+            // 粗細選項
+            pen.Width = 1;
+            pen.Width = 5;
+            pen.Width = 10;
+
+            // 樣式選項
+            pen.DashStyle = DashStyle.Solid; //實線
+            pen.DashStyle = DashStyle.Dash; //虛線
+            pen.DashStyle = DashStyle.Dot; //點線
+
+            // 端點樣式選項
+            pen.EndCap = LineCap.Flat; // 扁平線條端點
+            pen.EndCap = LineCap.RoundAnchor; //圓形錨點端點
+            pen.EndCap = LineCap.SquareAnchor; //方形錨點線條端點
+
+            g.DrawLine(pen, 20, 20, this.pictureBox1.ClientSize.Width - 20, this.pictureBox1.ClientSize.Height - 20);
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -672,9 +637,10 @@ namespace vcs_Draw2
         private void button12_Click(object sender, EventArgs e)
         {
             flowLayoutPanel1.Visible = true;
-            flowLayoutPanel1.Location = new Point(0, 0);
-            flowLayoutPanel1.Size = new Size(960, 640 + 200);
+            flowLayoutPanel1.Location = new Point(460, 40);
+            flowLayoutPanel1.Size = new Size(960, 600);
             flowLayoutPanel1.BackColor = Color.Pink;
+            flowLayoutPanel1.BringToFront();
 
             // Display the names and samples of the HatchStyle values.
             // Get a list of the HatchStyles.
@@ -837,7 +803,6 @@ namespace vcs_Draw2
             g.FillEllipse(myBrush5, x_st + dx * 4, y_st + dy * 0, w, w);
             g.DrawString("Divot", Font, Brushes.Black, x_st + dx * 4, y_st + dy * 0 + w + 10);
 
-
             HatchBrush myBrush6 = new HatchBrush(HatchStyle.Horizontal, Color.Yellow, Color.Blue);
             g.FillEllipse(myBrush6, x_st + dx * 0, y_st + dy * 1, w, w);
             g.DrawString("Horizontal", Font, Brushes.Black, x_st + dx * 0, y_st + dy * 1 + w + 10);
@@ -857,7 +822,6 @@ namespace vcs_Draw2
             HatchBrush myBrush10 = new HatchBrush(HatchStyle.Shingle, Color.Yellow, Color.Blue);
             g.FillEllipse(myBrush10, x_st + dx * 4, y_st + dy * 1, w, w);
             g.DrawString("Shingle", Font, Brushes.Black, x_st + dx * 4, y_st + dy * 1 + w + 10);
-
 
             HatchBrush myBrush11 = new HatchBrush(HatchStyle.SolidDiamond, Color.Yellow, Color.Blue);
             g.FillEllipse(myBrush11, x_st + dx * 0, y_st + dy * 2, w, w);
@@ -942,7 +906,7 @@ namespace vcs_Draw2
             int height = 600;
 
             pictureBox1.Size = new Size(width, height);
-            pictureBox1.Location = new Point(0, 0);
+            //pictureBox1.Location = new Point(0, 0);
             bitmap1 = new Bitmap(width, height);
             g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
             g.Clear(Color.Pink);
@@ -1055,9 +1019,6 @@ namespace vcs_Draw2
             pt[2].X = radius * 2;
             pt[2].Y = radius / 2;
             g.DrawLines(new Pen(Brushes.Red, linewidth), pt);
-
-
-
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -1091,10 +1052,10 @@ namespace vcs_Draw2
                 }
             }
             else
+            {
                 richTextBox1.Text += "無圖可存\n";
+            }
         }
-
-
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
@@ -1146,54 +1107,6 @@ namespace vcs_Draw2
             {
                 g.DrawLine(p, new Point(i * 100, 0), new Point(i * 100, pictureBox1.ClientSize.Height - 1));
             }
-        }
-
-        //畫筆的設定
-        Pen pen = new Pen(Color.Red, 1);
-        private void radioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            RadioButton radioButton = (RadioButton)sender;
-            if (radioButton.Checked == false)
-                return;
-
-            // 顏色選項
-            if (radioButton == rb_color1)
-                pen.Color = Color.Red;
-            else if (radioButton == rb_color2)
-                pen.Color = Color.Green;
-            else if (radioButton == rb_color3)
-                pen.Color = Color.Blue;
-
-            // 粗細選項
-            else if (radioButton == rb_width1)
-                pen.Width = 1;
-            else if (radioButton == rb_width2)
-                pen.Width = 5;
-            else if (radioButton == rb_width3)
-                pen.Width = 10;
-
-            // 樣式選項
-            else if (radioButton == rb_style1)
-                pen.DashStyle = DashStyle.Solid; //實線
-            else if (radioButton == rb_style2)
-                pen.DashStyle = DashStyle.Dash; //虛線
-            else if (radioButton == rb_style3)
-                pen.DashStyle = DashStyle.Dot; //點線
-
-            // 端點樣式選項
-            else if (radioButton == rb_cap1)
-                pen.EndCap = LineCap.Flat; // 扁平線條端點
-            else if (radioButton == rb_cap2)
-                pen.EndCap = LineCap.RoundAnchor; //圓形錨點端點
-            else if (radioButton == rb_cap3)
-                pen.EndCap = LineCap.SquareAnchor; //方形錨點線條端點
-
-            this.pictureBox_pen.Invalidate();
-        }
-
-        private void pictureBox_pen_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.DrawLine(pen, 20, 20, this.pictureBox_pen.ClientSize.Width - 20, this.pictureBox_pen.ClientSize.Height - 20);
         }
     }
 }
