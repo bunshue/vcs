@@ -121,6 +121,7 @@ namespace vcs_test_all_01_DateTime
 
             groupBox6.Location = new Point(x_st + dx * 2, y_st + dy * 0);//特殊曆法
             groupBox13.Location = new Point(x_st + dx * 2, y_st + dy * 2 - 30);//月相
+            lb_time2.Location = new Point(x_st + dx * 2, y_st + dy * 5 + 10);
 
             groupBox9.Location = new Point(x_st + dx * 2, y_st + dy * 7 + 50);//Timer顯示時間
 
@@ -1719,6 +1720,20 @@ namespace vcs_test_all_01_DateTime
             mesg += utc_offset.DateTime.ToShortDateString() + "\n";
 
             lb_time.Text = mesg;
+
+            //------------------------------------------------------------  # 60個
+
+            DateTime get_time1 = Convert.ToDateTime(DateTime.Now.ToString());
+            DateTime sta_ontime1 = Convert.ToDateTime(Convert.ToDateTime("2028-07-14 20:00:00"));
+
+            lb_time2.Text = "距離2028年洛杉磯奧運會開幕還有\n";
+
+            lb_time2.Text += DateAndTime.DateDiff("yyyy", get_time1, sta_ontime1, FirstDayOfWeek.Sunday, FirstWeekOfYear.FirstFourDays).ToString() + " 年\n";
+            lb_time2.Text += DateAndTime.DateDiff("m", get_time1, sta_ontime1, FirstDayOfWeek.Sunday, FirstWeekOfYear.FirstFourDays).ToString() + " 月\n";
+            lb_time2.Text += DateAndTime.DateDiff("d", get_time1, sta_ontime1, FirstDayOfWeek.Sunday, FirstWeekOfYear.FirstFourDays).ToString() + " 日\n";
+            lb_time2.Text += DateAndTime.DateDiff("h", get_time1, sta_ontime1, FirstDayOfWeek.Sunday, FirstWeekOfYear.FirstFourDays).ToString() + " 時\n";
+            lb_time2.Text += DateAndTime.DateDiff("n", get_time1, sta_ontime1, FirstDayOfWeek.Sunday, FirstWeekOfYear.FirstFourDays).ToString() + " 分\n";
+            lb_time2.Text += DateAndTime.DateDiff("s", get_time1, sta_ontime1, FirstDayOfWeek.Sunday, FirstWeekOfYear.FirstFourDays).ToString() + " 秒\n";
         }
 
         void get_system_time_zone()

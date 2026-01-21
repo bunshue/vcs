@@ -68,6 +68,7 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lb_time2 = new System.Windows.Forms.Label();
             this.groupBox6.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.groupBox13.SuspendLayout();
@@ -487,11 +488,22 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // lb_time2
+            // 
+            this.lb_time2.AutoSize = true;
+            this.lb_time2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_time2.Location = new System.Drawing.Point(424, 505);
+            this.lb_time2.Name = "lb_time2";
+            this.lb_time2.Size = new System.Drawing.Size(52, 21);
+            this.lb_time2.TabIndex = 58;
+            this.lb_time2.Text = "距今";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(875, 681);
+            this.Controls.Add(this.lb_time2);
             this.Controls.Add(this.groupBox13);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox6);
@@ -527,6 +539,7 @@
             this.groupBox13.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -571,6 +584,7 @@
         private System.Windows.Forms.Button btn_moon_ok;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label lb_time;
+        private System.Windows.Forms.Label lb_time2;
     }
 }
 
