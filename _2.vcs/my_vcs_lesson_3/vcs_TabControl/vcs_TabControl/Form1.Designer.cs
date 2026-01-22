@@ -51,9 +51,22 @@
             this.bt_info = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tabPage12 = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tabPage13 = new System.Windows.Forms.TabPage();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblAddTab = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage9.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabControl2.SuspendLayout();
+            this.tabPage11.SuspendLayout();
+            this.tabPage12.SuspendLayout();
+            this.tabPage13.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -292,27 +305,128 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(140, 360);
+            this.richTextBox1.Location = new System.Drawing.Point(873, 7);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(712, 263);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 8;
             this.richTextBox1.Text = "";
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(777, 590);
+            this.bt_clear.Location = new System.Drawing.Point(888, 21);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(75, 33);
             this.bt_clear.TabIndex = 9;
-            this.bt_clear.Text = "Info";
+            this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
+            // tabControl2
+            // 
+            this.tabControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl2.Controls.Add(this.tabPage11);
+            this.tabControl2.Controls.Add(this.tabPage12);
+            this.tabControl2.Controls.Add(this.tabPage13);
+            this.tabControl2.Location = new System.Drawing.Point(260, 378);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(398, 162);
+            this.tabControl2.TabIndex = 10;
+            this.tabControl2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl2_DrawItem);
+            this.tabControl2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabControl2_MouseDown);
+            // 
+            // tabPage11
+            // 
+            this.tabPage11.Controls.Add(this.label3);
+            this.tabPage11.Location = new System.Drawing.Point(4, 22);
+            this.tabPage11.Name = "tabPage11";
+            this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage11.Size = new System.Drawing.Size(390, 136);
+            this.tabPage11.TabIndex = 0;
+            this.tabPage11.Text = "Breakfast";
+            this.tabPage11.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(61, 47);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(200, 12);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Place controls for ordering breakfast here.";
+            // 
+            // tabPage12
+            // 
+            this.tabPage12.Controls.Add(this.label4);
+            this.tabPage12.Location = new System.Drawing.Point(4, 22);
+            this.tabPage12.Name = "tabPage12";
+            this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage12.Size = new System.Drawing.Size(390, 136);
+            this.tabPage12.TabIndex = 1;
+            this.tabPage12.Text = "Lunch";
+            this.tabPage12.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(70, 47);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(184, 12);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Place controls for ordering lunch here.";
+            // 
+            // tabPage13
+            // 
+            this.tabPage13.Controls.Add(this.label5);
+            this.tabPage13.Location = new System.Drawing.Point(4, 22);
+            this.tabPage13.Name = "tabPage13";
+            this.tabPage13.Size = new System.Drawing.Size(390, 136);
+            this.tabPage13.TabIndex = 2;
+            this.tabPage13.Text = "Dinner";
+            this.tabPage13.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(69, 47);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(188, 12);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Place controls for ordering dinner here.";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label6.Location = new System.Drawing.Point(260, 347);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(209, 24);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "客製化TabPage頁面";
+            // 
+            // lblAddTab
+            // 
+            this.lblAddTab.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAddTab.AutoSize = true;
+            this.lblAddTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblAddTab.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lblAddTab.Location = new System.Drawing.Point(632, 374);
+            this.lblAddTab.Name = "lblAddTab";
+            this.lblAddTab.Size = new System.Drawing.Size(18, 18);
+            this.lblAddTab.TabIndex = 12;
+            this.lblAddTab.Text = "+";
+            this.lblAddTab.Click += new System.EventHandler(this.lblAddTab_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(875, 635);
+            this.ClientSize = new System.Drawing.Size(1174, 635);
+            this.Controls.Add(this.lblAddTab);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.tabControl2);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.bt_info);
@@ -327,6 +441,13 @@
             this.tabPage9.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabControl2.ResumeLayout(false);
+            this.tabPage11.ResumeLayout(false);
+            this.tabPage11.PerformLayout();
+            this.tabPage12.ResumeLayout(false);
+            this.tabPage12.PerformLayout();
+            this.tabPage13.ResumeLayout(false);
+            this.tabPage13.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -357,6 +478,15 @@
         private System.Windows.Forms.Button bt_info;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabPage tabPage11;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TabPage tabPage12;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TabPage tabPage13;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblAddTab;
     }
 }
 

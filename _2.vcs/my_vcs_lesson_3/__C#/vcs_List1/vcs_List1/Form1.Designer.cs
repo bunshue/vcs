@@ -64,9 +64,9 @@
             this.button27 = new System.Windows.Forms.Button();
             this.button28 = new System.Windows.Forms.Button();
             this.groupBox_mouse_points = new System.Windows.Forms.GroupBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.bt_points_mouse = new System.Windows.Forms.Button();
             this.bt_clear_points_mouse = new System.Windows.Forms.Button();
+            this.bt_points_mouse = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -446,7 +446,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(200, 60);
             this.button27.TabIndex = 29;
-            this.button27.Text = "讀取一個檔案到List";
+            this.button27.Text = "類別做成的List做排序";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
@@ -473,16 +473,16 @@
             this.groupBox_mouse_points.TabStop = false;
             this.groupBox_mouse_points.Text = "蒐集滑鼠點數";
             // 
-            // pictureBox1
+            // bt_clear_points_mouse
             // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(6, 57);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
-            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+            this.bt_clear_points_mouse.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear_points_mouse.Location = new System.Drawing.Point(72, 21);
+            this.bt_clear_points_mouse.Name = "bt_clear_points_mouse";
+            this.bt_clear_points_mouse.Size = new System.Drawing.Size(60, 30);
+            this.bt_clear_points_mouse.TabIndex = 13;
+            this.bt_clear_points_mouse.Text = "clear";
+            this.bt_clear_points_mouse.UseVisualStyleBackColor = true;
+            this.bt_clear_points_mouse.Click += new System.EventHandler(this.bt_clear_points_mouse_Click);
             // 
             // bt_points_mouse
             // 
@@ -495,16 +495,16 @@
             this.bt_points_mouse.UseVisualStyleBackColor = true;
             this.bt_points_mouse.Click += new System.EventHandler(this.bt_points_mouse_Click);
             // 
-            // bt_clear_points_mouse
+            // pictureBox1
             // 
-            this.bt_clear_points_mouse.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear_points_mouse.Location = new System.Drawing.Point(72, 21);
-            this.bt_clear_points_mouse.Name = "bt_clear_points_mouse";
-            this.bt_clear_points_mouse.Size = new System.Drawing.Size(60, 30);
-            this.bt_clear_points_mouse.TabIndex = 13;
-            this.bt_clear_points_mouse.Text = "clear";
-            this.bt_clear_points_mouse.UseVisualStyleBackColor = true;
-            this.bt_clear_points_mouse.Click += new System.EventHandler(this.bt_clear_points_mouse_Click);
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(6, 57);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
             // 
             // Form1
             // 

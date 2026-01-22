@@ -764,10 +764,44 @@ namespace vcs_List1
             }
         }
 
+        public class Student
+        {
+            public string Name;
+            public int Score;
+            public Student(string name, int score)
+            {
+                this.Name = name;
+                this.Score = score;
+            }
+        }
+
         private void button27_Click(object sender, EventArgs e)
         {
-            //讀取一個檔案到List
+            //類別做成的List做排序
 
+            List<Student> students = new List<Student>(){ new Student("Student A", 90),
+                                                          new Student("Student B", 75),
+                                                          new Student("Student C", 83),
+                                                          new Student("Student D", 94),
+                                                          new Student("Student E", 60),
+                                                          new Student("Student F", 56),
+                                                          new Student("Student G", 30),
+                                                          new Student("Student I", 73),
+                                                          new Student("Student J", 68),
+                                                          new Student("Student K", 46)};
+            foreach (var stu in students)
+            {
+                richTextBox1.Text += "Name : " + stu.Name + ", Score : " + stu.Score + "\n";
+            }
+
+            students.Sort((x, y) => { return -x.Score.CompareTo(y.Score); });
+
+            richTextBox1.Text += "排序後\n";
+
+            foreach (var stu in students)
+            {
+                richTextBox1.Text += "Name : " + stu.Name + ", Score : " + stu.Score + "\n";
+            }
         }
 
         private void button28_Click(object sender, EventArgs e)
@@ -832,8 +866,6 @@ namespace vcs_List1
             points_mouse = new List<PointF>();
             this.pictureBox1.Invalidate();
         }
-
-
     }
 }
 

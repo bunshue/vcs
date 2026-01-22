@@ -13,17 +13,12 @@ namespace MatrixScreen
             //set text color
             Console.ForegroundColor = ConsoleColor.Green;
 
-            //random number
             Random rand = new Random();
 
-            //string pattern to print
             String str = "";
 
             Console.Write("Press ENTER to start...");
             Console.ReadKey();
-
-            //loop to display string pattern
-            //you can change the no. of times the loop execute
             for (int i = 0; i < 20000; i++)
             {
                 //create new string pattern
@@ -43,12 +38,8 @@ namespace MatrixScreen
                         }
                     }
                 }
-
-                //print str pattern
                 Console.WriteLine(str);
             }
-
-            //end of loop
             Console.WriteLine("End of screen...");
             Console.Write("Press any key to exit...");
             Console.ReadKey();

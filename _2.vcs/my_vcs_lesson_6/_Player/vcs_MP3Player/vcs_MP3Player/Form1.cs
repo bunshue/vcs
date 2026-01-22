@@ -78,6 +78,9 @@ namespace vcs_MP3Player
         {
             if (!flag)
             {
+                openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1\_mp3";  //預設開啟的路徑
+                openFileDialog1.Filter = "mp3檔(*.mp3)|*.mp3|wave檔(*.wav)|*.wav";   //存檔類型
+                openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     axWindowsMediaPlayer1.URL = openFileDialog1.FileName;

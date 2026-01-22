@@ -65,13 +65,13 @@ namespace vcs_Console_1
             string value = "第三行 綠暗綠";
             Console.WriteLine(value.PadRight(Console.WindowWidth - value.Length)); //設置一整行的背景色
 
-            Console.Write("Press any key to continue"); //無換行
             Console.Write("Press any key to continue");//無換行
             Console.WriteLine("Press any key");//有換行
-            Console.WriteLine("Press any key");//有換行
+
+            //以下都是讓畫面等一下, Hold住畫面
             Console.ReadLine();
-            Console.ReadKey();
-            Console.Read();
+            //Console.ReadKey();
+            //Console.Read();
         }
 
         public static void TraverseTree(string root)
@@ -155,7 +155,9 @@ namespace vcs_Console_1
                 // Push the subdirectories onto the stack for traversal.
                 // This could also be done before handing the files.
                 foreach (string str in subDirs)
+                {
                     dirs.Push(str);
+                }
             }
         }
 
@@ -168,7 +170,9 @@ namespace vcs_Console_1
             {
                 string[] fileEntries = Directory.GetFiles(targetDirectory);
                 foreach (string fileName in fileEntries)
+                {
                     ProcessFile(fileName);
+                }
 
                 // Recurse into subdirectories of this directory.
                 string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
