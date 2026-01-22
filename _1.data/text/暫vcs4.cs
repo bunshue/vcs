@@ -1,4 +1,22 @@
 ﻿
+/*
+
+記住目前的設定值，下次程式開啟時，可以拿來用。
+
+方案總管/Properties/Settings settings/
+加入：
+名稱 Argbs
+型別 System.Int32[]
+範圍 User
+
+目前找不到設定型態的位置，只好到Settings settings檔案改成以下：
+<Setting Name="Argbs" Type="System.Int32[]" Scope="User">
+
+*/
+
+
+
+
 
 可以累計點數，緩慢畫出的方法
 

@@ -16,6 +16,13 @@ namespace vcs_test_all_04_Dialog
     {
         FontFamily old_font_name;
 
+        // The size used for each color patch.
+        const int PatchWidth = 50, PatchHeight = 50;
+        const int PatchMargin = 2;
+        const int NumRows = 6, NumCols = 8;
+
+        int[] argbs = new int[48];
+
         public Form1()
         {
             InitializeComponent();
@@ -57,6 +64,76 @@ namespace vcs_test_all_04_Dialog
             colorDialog_backcolor.CustomColors = bg_colors;
             // Make the background dialog open with the custom colors displayed.
             colorDialog_backcolor.FullOpen = true;
+
+            //6060
+
+            // Make the PictureBox the right size.
+            pictureBox1.ClientSize =
+                new Size(
+                    NumCols * PatchWidth + (NumCols - 1) * PatchMargin,
+                    NumRows * PatchHeight + (NumRows - 1) * PatchMargin);
+
+            Color[] colors =
+            {
+                Color.White,
+                Color.FromArgb(255, 255, 192, 192),
+                Color.FromArgb(255, 255, 224, 192),
+                Color.FromArgb(255, 255, 255, 192),
+                Color.FromArgb(255, 192, 255, 192),
+                Color.FromArgb(255, 192, 255, 255),
+                Color.FromArgb(255, 192, 192, 255),
+                Color.FromArgb(255, 255, 192, 255),
+
+                Color.FromArgb(255, 224, 224, 224),
+                Color.FromArgb(255, 255, 128, 128),
+                Color.FromArgb(255, 255, 192, 128),
+                Color.FromArgb(255, 255, 255, 128),
+                Color.FromArgb(255, 128, 255, 128),
+                Color.FromArgb(255, 128, 255, 255),
+                Color.FromArgb(255, 128, 128, 255),
+                Color.FromArgb(255, 255, 128, 255),
+
+                Color.FromArgb(255, 192, 192, 192),
+                Color.Red,
+                Color.FromArgb(255, 255, 128, 0),
+                Color.Yellow,
+                Color.FromArgb(255, 0, 192, 0),
+                Color.Cyan,
+                Color.Blue,
+                Color.FromArgb(255, 255, 0, 255),
+
+                Color.Gray,
+                Color.FromArgb(255, 192, 0, 0),
+                Color.FromArgb(255, 192, 64, 0),
+                Color.FromArgb(255, 192, 192, 0),
+                Color.Green,
+                Color.FromArgb(255, 0, 192, 192),
+                Color.FromArgb(255, 0, 0, 192),
+                Color.FromArgb(255, 192, 0, 192),
+
+                Color.FromArgb(255, 64, 64, 64),
+                Color.FromArgb(255, 128, 0, 0),
+                Color.FromArgb(255, 128, 64, 0),
+                Color.FromArgb(255, 128, 128, 0),
+                Color.FromArgb(255, 0, 128, 0),
+                Color.FromArgb(255, 0, 128, 128),
+                Color.FromArgb(255, 0, 0, 128),
+                Color.FromArgb(255, 128, 0, 128),
+
+                Color.Black,
+                Color.FromArgb(255, 64, 0, 0),
+                Color.FromArgb(255, 96, 32, 0),
+                Color.FromArgb(255, 64, 64, 0),
+                Color.FromArgb(255, 0, 64, 0),
+                Color.FromArgb(255, 0, 64, 64),
+                Color.FromArgb(255, 0, 0, 64),
+                Color.FromArgb(255, 64, 0, 64),
+            };
+
+            for (int i = 0; i < colors.Length; i++)
+            {
+                argbs[i] = colors[i].ToArgb();
+            }
         }
 
         void show_item_location()
@@ -78,25 +155,24 @@ namespace vcs_test_all_04_Dialog
             groupBox2.Size = new Size(W, H);
             groupBox3.Size = new Size(W, H);
             groupBox4.Size = new Size(W, H);
-            groupBox5.Size = new Size(W, H);
 
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             groupBox3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             groupBox4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            groupBox5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            pictureBox1.Size = new Size(460, 300);
 
             groupBox0.Font = new Font("Arial", 11);
             groupBox1.Font = new Font("Arial", 11);
             groupBox2.Font = new Font("Arial", 11);
             groupBox3.Font = new Font("Arial", 11);
-            groupBox4.Font = new Font("Arial", 11);
-            groupBox5.Font = new Font("Arial", 11);
+            groupBox4.Font = new Font("Arial", 9);
 
             label1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            richTextBox1.Size = new Size(400, 320);
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            richTextBox1.Size = new Size(300, 320);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 1);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             bt_open_folder.Location = new Point(x_st + dx * 3, y_st + dy * 1 - 105);
             bt_open_folder.BackgroundImage = Properties.Resources.open_folder;
@@ -145,12 +221,6 @@ namespace vcs_test_all_04_Dialog
             button42.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button43.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button44.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
-            button50.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button51.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button52.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button53.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button54.Location = new Point(x_st + dx * 0, y_st + dy * 4);
 
             this.Size = new Size(1210, 740);
             this.Text = "vcs_test_all_04_Dialog";
@@ -546,11 +616,6 @@ namespace vcs_test_all_04_Dialog
 
         private void button44_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button50_Click(object sender, EventArgs e)
-        {
             //設定印表機
             printDialog1.AllowCurrentPage = true;       //顯示當前頁
             printDialog1.AllowPrintToFile = true;       //允許選擇打印到文件
@@ -568,26 +633,6 @@ namespace vcs_test_all_04_Dialog
             else
             {
             }
-        }
-
-        private void button51_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button52_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button53_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button54_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void bt_open_folder_Click(object sender, EventArgs e)
@@ -697,6 +742,45 @@ namespace vcs_test_all_04_Dialog
             //設置字體
             label1.Font = f;
             tb_font_size.Text = label1.Font.Size.ToString();
+        }
+
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            // See which color was clicked.
+            int row = (int)(e.Y / (PatchHeight + PatchMargin));
+            int col = (int)(e.X / (PatchWidth + PatchMargin));
+            int index = row * NumCols + col;
+
+            // Let the user pick a color.
+            colorDialog1.Color = Color.FromArgb(argbs[index]);
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                // The user clicked OK. Save the selected color.
+                argbs[index] = colorDialog1.Color.ToArgb();
+                pictureBox1.Refresh();
+            }
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            int max_x = PatchWidth * NumCols;
+            int x = 0;
+            int y = 0;
+            foreach (int argb in argbs)
+            {
+                Color color = Color.FromArgb(argb);
+                richTextBox1.Text += "get color " + color.ToString() + "\n";
+                using (SolidBrush br = new SolidBrush(color))
+                {
+                    e.Graphics.FillRectangle(br, x, y, PatchWidth, PatchHeight);
+                }
+                x += PatchWidth + PatchMargin;
+                if (x > max_x)
+                {
+                    x = 0;
+                    y += PatchHeight + PatchMargin;
+                }
+            }
         }
     }
 }

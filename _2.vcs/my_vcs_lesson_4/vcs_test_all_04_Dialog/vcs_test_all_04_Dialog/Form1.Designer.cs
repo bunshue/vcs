@@ -60,12 +60,6 @@
             this.button42 = new System.Windows.Forms.Button();
             this.button44 = new System.Windows.Forms.Button();
             this.button43 = new System.Windows.Forms.Button();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.button50 = new System.Windows.Forms.Button();
-            this.button51 = new System.Windows.Forms.Button();
-            this.button52 = new System.Windows.Forms.Button();
-            this.button54 = new System.Windows.Forms.Button();
-            this.button53 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
@@ -81,12 +75,13 @@
             this.tb_font_size = new System.Windows.Forms.TextBox();
             this.bt_plus = new System.Windows.Forms.Button();
             this.bt_minus = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox0.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -387,7 +382,7 @@
             this.groupBox4.Size = new System.Drawing.Size(180, 320);
             this.groupBox4.TabIndex = 12;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "FontDialog";
+            this.groupBox4.Text = "FontDialog / PrintDialog";
             // 
             // button40
             // 
@@ -428,6 +423,7 @@
             this.button44.Name = "button44";
             this.button44.Size = new System.Drawing.Size(150, 50);
             this.button44.TabIndex = 6;
+            this.button44.Text = "設定印表機";
             this.button44.UseVisualStyleBackColor = true;
             this.button44.Click += new System.EventHandler(this.button44_Click);
             // 
@@ -440,71 +436,6 @@
             this.button43.TabIndex = 5;
             this.button43.UseVisualStyleBackColor = true;
             this.button43.Click += new System.EventHandler(this.button43_Click);
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.button50);
-            this.groupBox5.Controls.Add(this.button51);
-            this.groupBox5.Controls.Add(this.button52);
-            this.groupBox5.Controls.Add(this.button54);
-            this.groupBox5.Controls.Add(this.button53);
-            this.groupBox5.Location = new System.Drawing.Point(384, 338);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(180, 320);
-            this.groupBox5.TabIndex = 13;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "PrintDialog";
-            // 
-            // button50
-            // 
-            this.button50.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button50.Location = new System.Drawing.Point(17, 18);
-            this.button50.Name = "button50";
-            this.button50.Size = new System.Drawing.Size(150, 50);
-            this.button50.TabIndex = 4;
-            this.button50.Text = "設定印表機";
-            this.button50.UseVisualStyleBackColor = true;
-            this.button50.Click += new System.EventHandler(this.button50_Click);
-            // 
-            // button51
-            // 
-            this.button51.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button51.Location = new System.Drawing.Point(17, 74);
-            this.button51.Name = "button51";
-            this.button51.Size = new System.Drawing.Size(150, 50);
-            this.button51.TabIndex = 2;
-            this.button51.UseVisualStyleBackColor = true;
-            this.button51.Click += new System.EventHandler(this.button51_Click);
-            // 
-            // button52
-            // 
-            this.button52.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button52.Location = new System.Drawing.Point(17, 130);
-            this.button52.Name = "button52";
-            this.button52.Size = new System.Drawing.Size(150, 50);
-            this.button52.TabIndex = 3;
-            this.button52.UseVisualStyleBackColor = true;
-            this.button52.Click += new System.EventHandler(this.button52_Click);
-            // 
-            // button54
-            // 
-            this.button54.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button54.Location = new System.Drawing.Point(17, 242);
-            this.button54.Name = "button54";
-            this.button54.Size = new System.Drawing.Size(150, 50);
-            this.button54.TabIndex = 6;
-            this.button54.UseVisualStyleBackColor = true;
-            this.button54.Click += new System.EventHandler(this.button54_Click);
-            // 
-            // button53
-            // 
-            this.button53.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button53.Location = new System.Drawing.Point(17, 186);
-            this.button53.Name = "button53";
-            this.button53.Size = new System.Drawing.Size(150, 50);
-            this.button53.TabIndex = 5;
-            this.button53.UseVisualStyleBackColor = true;
-            this.button53.Click += new System.EventHandler(this.button53_Click);
             // 
             // openFileDialog1
             // 
@@ -579,11 +510,23 @@
             this.bt_minus.UseVisualStyleBackColor = true;
             this.bt_minus.Click += new System.EventHandler(this.bt_minus_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(384, 356);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(300, 300);
+            this.pictureBox1.TabIndex = 21;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 681);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.tb_font_size);
             this.Controls.Add(this.bt_plus);
             this.Controls.Add(this.bt_minus);
@@ -591,7 +534,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -607,7 +549,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -647,12 +589,6 @@
         private System.Windows.Forms.Button button42;
         private System.Windows.Forms.Button button44;
         private System.Windows.Forms.Button button43;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Button button50;
-        private System.Windows.Forms.Button button51;
-        private System.Windows.Forms.Button button52;
-        private System.Windows.Forms.Button button54;
-        private System.Windows.Forms.Button button53;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
@@ -668,6 +604,7 @@
         private System.Windows.Forms.TextBox tb_font_size;
         private System.Windows.Forms.Button bt_plus;
         private System.Windows.Forms.Button bt_minus;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
