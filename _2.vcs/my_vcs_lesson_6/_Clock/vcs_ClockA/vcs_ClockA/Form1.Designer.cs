@@ -65,6 +65,7 @@
             this.timeOption1.TabIndex = 10;
             this.timeOption1.Text = "五分鐘";
             this.timeOption1.UseVisualStyleBackColor = true;
+            this.timeOption1.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // timeOption2
             // 
@@ -75,6 +76,7 @@
             this.timeOption2.TabIndex = 8;
             this.timeOption2.Text = "三分鐘";
             this.timeOption2.UseVisualStyleBackColor = true;
+            this.timeOption2.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // timeOption3
             // 
@@ -87,6 +89,7 @@
             this.timeOption3.TabStop = true;
             this.timeOption3.Text = "一分鐘";
             this.timeOption3.UseVisualStyleBackColor = true;
+            this.timeOption3.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // clockText
             // 

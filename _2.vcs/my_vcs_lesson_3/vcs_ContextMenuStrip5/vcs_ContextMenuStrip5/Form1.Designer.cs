@@ -135,18 +135,18 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(103, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(151, 6);
             // 
             // ToolStripMenuItem_Exit
             // 
             this.ToolStripMenuItem_Exit.Name = "ToolStripMenuItem_Exit";
-            this.ToolStripMenuItem_Exit.Size = new System.Drawing.Size(106, 22);
+            this.ToolStripMenuItem_Exit.Size = new System.Drawing.Size(154, 22);
             this.ToolStripMenuItem_Exit.Text = "E&xit";
             this.ToolStripMenuItem_Exit.Click += new System.EventHandler(this.ToolStripMenuItem_Exit_Click);
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(810, 24);
+            this.richTextBox1.Location = new System.Drawing.Point(427, 96);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 2;
@@ -219,13 +219,13 @@
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(119, 22);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(232, 22);
             this.toolStripMenuItem7.Text = "離開";
             this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(607, 24);
+            this.button1.Location = new System.Drawing.Point(351, 261);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(135, 64);
             this.button1.TabIndex = 4;
@@ -236,7 +236,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(831, 44);
+            this.bt_clear.Location = new System.Drawing.Point(448, 116);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(60, 32);
             this.bt_clear.TabIndex = 37;
@@ -258,7 +258,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(940, 642);
+            this.ClientSize = new System.Drawing.Size(684, 461);
             this.Controls.Add(this.label_description);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button1);

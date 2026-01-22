@@ -3502,6 +3502,9 @@ namespace _vcs_MakePicture
             x_st += w;
             g.FillRectangle(new SolidBrush(Color.Black), new Rectangle(x_st, y_st, w, h));
 
+
+            //g.FillRectangle(new SolidBrush(Color.Gray), new Rectangle(0, height * 8 / 10, width, height * 2 / 10));
+
             pictureBox1.Image = bitmap1;
 
         }

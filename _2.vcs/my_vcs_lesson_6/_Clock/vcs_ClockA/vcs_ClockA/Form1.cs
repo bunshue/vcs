@@ -23,12 +23,18 @@ namespace vcs_ClockA
 
         private void startButton_Click(object sender, EventArgs e)
         {
-            if (timeOption1.Checked)
+            if (timeOption1.Checked == true)
+            {
                 clockText.Text = "300";
-            else if (timeOption2.Checked)
+            }
+            else if (timeOption2.Checked == true)
+            {
                 clockText.Text = "180";
-            else if (timeOption3.Checked)
+            }
+            else if (timeOption3.Checked == true)
+            {
                 clockText.Text = "60";
+            }
             else
             {
                 MessageBox.Show("您尚未選定倒數的時間長短");
@@ -52,13 +58,34 @@ namespace vcs_ClockA
                 clockText.Text = newTime.ToString();
 
                 if (timeOption1.Checked)
+                {
                     progressBar1.Value = (300 - newTime) * 100 / 300;
+                }
                 else if (timeOption2.Checked)
+                {
                     progressBar1.Value = (180 - newTime) * 100 / 180;
+                }
                 else if (timeOption3.Checked)
+                {
                     progressBar1.Value = (60 - newTime) * 100 / 60;
+                }
+            }
+        }
+
+        private void radioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (timeOption1.Checked == true)
+            {
+                clockText.Text = "300";
+            }
+            else if (timeOption2.Checked == true)
+            {
+                clockText.Text = "180";
+            }
+            else if (timeOption3.Checked == true)
+            {
+                clockText.Text = "60";
             }
         }
     }
 }
-

@@ -90,7 +90,7 @@ namespace vcs_ContextMenuStrip5
                 //contextMenuStrip2.Show(this, e.Location);//顯示ContextMenu
                 contextMenuStrip2.Show(this.pictureBox1, e.Location); //顯示ContextMenu
                 return;
-            }           
+            }
         }
 
         private void ToolStripMenuItem_AA_Click(object sender, EventArgs e)
@@ -119,36 +119,43 @@ namespace vcs_ContextMenuStrip5
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            toolStripMenuItem1.Checked = !toolStripMenuItem1.Checked;
             richTextBox1.Text += "你按了\t" + toolStripMenuItem1.Text + "\n";
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
+            toolStripMenuItem2.Checked = !toolStripMenuItem2.Checked;
             richTextBox1.Text += "你按了\t" + toolStripMenuItem2.Text + "\n";
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
+            toolStripMenuItem3.Checked = !toolStripMenuItem3.Checked;
             richTextBox1.Text += "你按了\t" + toolStripMenuItem3.Text + "\n";
         }
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
+            toolStripMenuItem4.Checked = !toolStripMenuItem4.Checked;
             richTextBox1.Text += "你按了\t" + toolStripMenuItem4.Text + "\n";
         }
 
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
         {
+            toolStripMenuItem5.Checked = !toolStripMenuItem5.Checked;
             richTextBox1.Text += "你按了\t" + toolStripMenuItem5.Text + "\n";
         }
 
         private void toolStripMenuItem6_Click(object sender, EventArgs e)
         {
+            toolStripMenuItem6.Checked = !toolStripMenuItem6.Checked;
             richTextBox1.Text += "你按了\t" + toolStripMenuItem6.Text + "\n";
         }
 
         private void toolStripMenuItem7_Click(object sender, EventArgs e)
         {
+            toolStripMenuItem7.Checked = !toolStripMenuItem7.Checked;
             richTextBox1.Text += "你按了\t" + toolStripMenuItem7.Text + "\n";
             this.Close();
         }
@@ -167,4 +174,3 @@ namespace vcs_ContextMenuStrip5
         }
     }
 }
-
