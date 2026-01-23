@@ -32,8 +32,7 @@ namespace vcs_Clock6
         {
             this.FormBorderStyle = FormBorderStyle.None;//設定無邊框
 
-            // Attach the context menu.
-            // (You could do this at design time.)
+            //表單 連結 ContextMenuStrip (快捷功能表 / 右鍵選單)
             ContextMenuStrip = contextMenuStrip1;
 
             // Set the size to 200x200.
@@ -60,9 +59,7 @@ namespace vcs_Clock6
                 // Create and send a WM_NCLBUTTONDOWN message.
                 const int WM_NCLBUTTONDOWN = 0x00A1;
                 const int HTCAPTION = 2;
-                Message msg =
-                    Message.Create(this.Handle, WM_NCLBUTTONDOWN,
-                        new IntPtr(HTCAPTION), IntPtr.Zero);
+                Message msg = Message.Create(this.Handle, WM_NCLBUTTONDOWN, new IntPtr(HTCAPTION), IntPtr.Zero);
                 this.DefWndProc(ref msg);
             }
         }
@@ -75,9 +72,7 @@ namespace vcs_Clock6
             e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
 
             // Translate to center the drawing.
-            e.Graphics.TranslateTransform(
-                ClientSize.Width / 2,
-                ClientSize.Height / 2);
+            e.Graphics.TranslateTransform(ClientSize.Width / 2, ClientSize.Height / 2);
 
             // Draw the face including tick marks.
             DrawClockFace(e.Graphics);
@@ -99,9 +94,7 @@ namespace vcs_Clock6
             using (Pen thick_pen = new Pen(Color.Blue, 4))
             {
                 // Outline.
-                gr.DrawEllipse(thick_pen,
-                    -ClientSize.Width / 2, -ClientSize.Height / 2,
-                    ClientSize.Width, ClientSize.Height);
+                gr.DrawEllipse(thick_pen, -ClientSize.Width / 2, -ClientSize.Height / 2, ClientSize.Width, ClientSize.Height);
 
                 // Get scale factors.
                 float outer_x_factor = 0.45f * ClientSize.Width;
@@ -118,21 +111,15 @@ namespace vcs_Clock6
                     double angle = Math.PI * minute / 30.0;
                     float cos_angle = (float)Math.Cos(angle);
                     float sin_angle = (float)Math.Sin(angle);
-                    PointF outer_pt = new PointF(
-                        outer_x_factor * cos_angle,
-                        outer_y_factor * sin_angle);
+                    PointF outer_pt = new PointF(outer_x_factor * cos_angle, outer_y_factor * sin_angle);
                     if (minute % 5 == 0)
                     {
-                        PointF inner_pt = new PointF(
-                            big_x_factor * cos_angle,
-                            big_y_factor * sin_angle);
+                        PointF inner_pt = new PointF(big_x_factor * cos_angle, big_y_factor * sin_angle);
                         gr.DrawLine(thick_pen, inner_pt, outer_pt);
                     }
                     else
                     {
-                        PointF inner_pt = new PointF(
-                            inner_x_factor * cos_angle,
-                            inner_y_factor * sin_angle);
+                        PointF inner_pt = new PointF(inner_x_factor * cos_angle, inner_y_factor * sin_angle);
                         gr.DrawLine(Pens.Blue, inner_pt, outer_pt);
                     }
                 }
@@ -145,16 +132,13 @@ namespace vcs_Clock6
             // Display the time digitally.
             if (ShowDigital)
             {
-                using (Font font = new Font("Times New Roman",
-                    ClientSize.Height / 10, GraphicsUnit.Pixel))
+                using (Font font = new Font("Times New Roman", ClientSize.Height / 10, GraphicsUnit.Pixel))
                 {
                     using (StringFormat string_format = new StringFormat())
                     {
                         string_format.Alignment = StringAlignment.Center;
                         string_format.LineAlignment = StringAlignment.Center;
-                        gr.DrawString(DateTime.Now.ToLongTimeString(),
-                            font, Brushes.Blue, 0, -font.Height,
-                            string_format);
+                        gr.DrawString(DateTime.Now.ToLongTimeString(), font, Brushes.Blue, 0, -font.Height, string_format);
                     }
                 }
             }
@@ -197,8 +181,7 @@ namespace vcs_Clock6
                 // Draw the second hand.
                 float second_x_factor = 0.4f * ClientSize.Width;
                 float second_y_factor = 0.4f * ClientSize.Height;
-                double second_angle = -Math.PI / 2 +
-                    2 * Math.PI * (int)(now.Second) / 60.0;
+                double second_angle = -Math.PI / 2 + 2 * Math.PI * (int)(now.Second) / 60.0;
                 PointF second_pt = new PointF(
                     (float)(second_x_factor * Math.Cos(second_angle)),
                     (float)(second_y_factor * Math.Sin(second_angle)));
@@ -245,7 +228,9 @@ namespace vcs_Clock6
                 ctxSize200x200
             };
             foreach (ToolStripMenuItem item in items)
+            {
                 item.Checked = (item == menu_item);
+            }
         }
 
         // Exit.

@@ -21,6 +21,8 @@ namespace vcs_Clock
 {
     public partial class Form1 : Form
     {
+        bool flag_always_show = false;
+
         //移動無邊框窗體 ST
         private const int WM_NCHITTEST = 0x84;
         private const int HTCLIENT = 0x1;
@@ -52,6 +54,9 @@ namespace vcs_Clock
             //this.WindowState = FormWindowState.Minimized;
             //this.ShowInTaskbar = false;
 
+            //pictureBox1 連結 ContextMenuStrip (快捷功能表 / 右鍵選單)
+            pictureBox1.ContextMenuStrip = contextMenuStrip1;
+
             int x_st = 30;
             int y_st = 30;
             int w = 100;
@@ -73,6 +78,11 @@ namespace vcs_Clock
         private void timer1_Tick(object sender, EventArgs e)
         {
             this.pictureBox1.Invalidate();
+
+            if (flag_always_show == true)
+            {
+                return;
+            }
 
             show_seconds++;
             if (show_seconds > 10)
@@ -162,6 +172,42 @@ namespace vcs_Clock
             e.Graphics.DrawString(hh.ToString("D2"), new Font("標楷體", 55, FontStyle.Bold), Brushes.White, x_st, y_st + dy);
             e.Graphics.DrawString(mm.ToString("D2"), new Font("標楷體", 55, FontStyle.Bold), Brushes.White, x_st + (w + dx) * 1, y_st + dy);
             e.Graphics.DrawString(ss.ToString("D2"), new Font("標楷體", 55, FontStyle.Bold), Brushes.White, x_st + (w + dx) * 2, y_st + dy);
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem menu_item = sender as ToolStripMenuItem;
+
+            //位置
+            ToolStripMenuItem[] items =
+            {
+                toolStripMenuItem1a,
+                toolStripMenuItem1b,
+                toolStripMenuItem1c,
+                toolStripMenuItem1d
+            };
+            foreach (ToolStripMenuItem item in items)
+            {
+                item.Checked = (item == menu_item);
+            }
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            //數位時鐘
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            //總是顯示
+            toolStripMenuItem3.Checked = !toolStripMenuItem3.Checked;
+            flag_always_show = toolStripMenuItem3.Checked;
+            show_seconds = 0;
+        }
+
+        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

@@ -1,4 +1,14 @@
 ﻿
+Binary格式讀出一個檔案到拜列
+
+            FileStream fs = new FileStream(oldpath, FileMode.Open);
+            BinaryReader br = new BinaryReader(fs);
+            byte[] bytes = br.ReadBytes((int)fs.Length);
+            br.Close();
+            fs.Close();
+
+
+
 /*
 
 記住目前的設定值，下次程式開啟時，可以拿來用。

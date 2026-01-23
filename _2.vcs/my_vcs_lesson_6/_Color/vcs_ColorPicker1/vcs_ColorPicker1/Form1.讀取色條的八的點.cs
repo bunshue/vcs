@@ -19,6 +19,14 @@ namespace vcs_ColorPicker1
         Font f;
         Bitmap bmp;
 
+        bool flag_no_update = false;
+        bool flag_recording_point1 = false;
+        bool flag_recording_point2 = false;
+        int record_time1 = 0;
+        int record_time2 = 0;
+        Point pt_st;
+        Point pt_sp;
+
         public Form1()
         {
             InitializeComponent();
@@ -40,7 +48,7 @@ namespace vcs_ColorPicker1
 
             this.FormBorderStyle = FormBorderStyle.None;
 
-            this.Size = new Size(240, 80);
+            this.Size = new Size(240, 300);
 
             g = this.CreateGraphics();
         }
@@ -169,18 +177,89 @@ namespace vcs_ColorPicker1
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (flag_no_update == true)
+            {
+                return;
+            }
+
             Point pt = new Point(Control.MousePosition.X, Control.MousePosition.Y);
             Color cl = GetColor(pt);
-            if (cl_old != cl)
+            //if (cl_old != cl)
             {
-                this.Size = new Size(240, 80);
+                //this.Size = new Size(240, 80);
                 cnt = 0;
                 g.Clear(BackColor);
+                g.DrawRectangle(new Pen(Color.Gray, 20), 0, 0, this.ClientSize.Width, this.ClientSize.Height);
 
                 g.DrawString(cl.R.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Red), new PointF(5, 0));
                 g.DrawString(cl.G.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Lime), new PointF(5 + 75, 0));
                 g.DrawString(cl.B.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(5 + 150, 0));
 
+                if ((flag_recording_point1 == true) && (flag_recording_point2 == false))
+                {
+                    g.DrawRectangle(new Pen(Color.Red, 20), 0, 0, this.ClientSize.Width, this.ClientSize.Height);
+                }
+                if ((flag_recording_point1 == true) && (flag_recording_point2 == true))
+                {
+                    g.DrawRectangle(new Pen(Color.Green, 20), 0, 0, this.ClientSize.Width, this.ClientSize.Height);
+                }
+
+                if (flag_recording_point1 == false)
+                {
+                if ((cl.R > 230) && (cl.G > 230) && (cl.B > 230))
+                {
+                    record_time1++;
+                        g.DrawRectangle(new Pen(Color.FromArgb((record_time1 * 12) % 256, 255, 0, 0), 20), 0, 0, this.ClientSize.Width, this.ClientSize.Height);
+                        if (record_time1 >= 20)
+                    {
+                        flag_recording_point1 = true;
+                        pt_st = new Point(Control.MousePosition.X, Control.MousePosition.Y);
+                    }
+                }
+                    else
+                    {
+                        record_time1 = 0;
+                    }
+                }
+                if (flag_recording_point2 == false)
+                {
+                if ((cl.R <20) && (cl.G <20) && (cl.B <20))
+                {
+                    record_time2++;
+                        g.DrawRectangle(new Pen(Color.FromArgb((record_time2 * 12) % 256, 0, 255, 0), 20), 0, 0, this.ClientSize.Width, this.ClientSize.Height);
+                        if (record_time2 >= 20)
+                    {
+                        flag_recording_point2 = true;
+                        pt_sp = new Point(Control.MousePosition.X, Control.MousePosition.Y);
+                        }
+                    }
+                    else
+                    {
+                        record_time2 = 0;
+                    }
+                }
+
+                if ((flag_recording_point1 == true) && (flag_recording_point2 == true))
+                {
+                    int x_st = pt_st.X;
+                    int dx = (pt_sp.X - pt_st.X) / 7;
+                    int dy = 36;
+                    g.Clear(BackColor);
+                    g.DrawRectangle(new Pen(Color.Green, 20), 0, 0, this.ClientSize.Width, this.ClientSize.Height);
+
+                    for (int i = 0; i < 8; i++)
+                    {
+                        Point p = new Point(x_st + dx * i, pt_st.Y);
+                        Color c = GetColor(p);
+                        g.DrawString(c.R.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Red), new PointF(5, 0 + i * dy));
+                        g.DrawString(c.G.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Lime), new PointF(5 + 75, 0 + i * dy));
+                        g.DrawString(c.B.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(5 + 150, 0 + i * dy));
+                    }
+                    flag_no_update = true;
+                }
+
+
+                /*
                 cl_old = cl;
 
                 int rr = cl.R;
@@ -194,7 +273,9 @@ namespace vcs_ColorPicker1
                 g.DrawString(((int)yy.Y).ToString(), new Font("Consolas", 30), new SolidBrush(Color.Yellow), new PointF(5, 35));
                 g.DrawString(((int)yy.U).ToString(), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(5 + 75, 35));
                 g.DrawString(((int)yy.V).ToString(), new Font("Consolas", 30), new SolidBrush(Color.Red), new PointF(5 + 150, 35));
+                */
             }
+            /*
             else
             {
                 cnt++;
@@ -205,11 +286,18 @@ namespace vcs_ColorPicker1
                     g.DrawString(DateTime.Now.ToString("HH:mm:ss"), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(20, 5));
                 }
             }
+            */
         }
 
         private void Form1_DoubleClick(object sender, EventArgs e)
         {
-            Application.Exit();
+            //Application.Exit();
+
+            flag_no_update = false;
+            flag_recording_point1 = false;
+            flag_recording_point2 = false;
+            record_time1 = 0;
+            record_time2 = 0;
         }
 
         //***********************

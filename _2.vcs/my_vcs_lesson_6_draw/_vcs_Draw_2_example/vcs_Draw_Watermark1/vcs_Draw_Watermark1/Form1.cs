@@ -77,7 +77,6 @@ namespace vcs_Draw_Watermark1
             //讀取圖檔, 多一層Image結構
             string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Image image = Image.FromFile(filename1);
-
             pictureBox1.Image = image;
 
             string filename2 = @"D:\_git\vcs\_1.data\______test_files1\_material\ims-small-logo.png";
@@ -86,131 +85,43 @@ namespace vcs_Draw_Watermark1
 
         private void button0_Click(object sender, EventArgs e)
         {
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            Image image = Image.FromFile(filename1);
+            //pictureBox1.Image = image;
 
+            Bitmap bitmap1 = new Bitmap(filename1);
+            //bitmap1.SetResolution(3, 3);
+
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.FromName("white"));
+
+            g.InterpolationMode = InterpolationMode.High;
+            g.SmoothingMode = SmoothingMode.HighQuality;
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //讀取圖檔, 多一層Image結構
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Image image = Image.FromFile(filename);
-
-            image = AddTextToImg(image, "牡丹亭");
-
-            pictureBox1.Image = image;
-        }
-
-        //圖片加水印
-        public static Image AddTextToImg(Image image, string text)
-        {
-            Bitmap bitmap1 = new Bitmap(image, image.Width, image.Height);
-            Graphics g = Graphics.FromImage(bitmap1);
-
-            float fontSize = 12.0f; //字體大小
-            float textWidth = text.Length * fontSize; //文本的長度
-            //下面定義一個矩形區域，以後在這個矩形裡畫上白底黑字
-            float rectX = 0;
-            float rectY = 0;
-            float rectWidth = text.Length * (fontSize + 8);
-            float rectHeight = fontSize + 8;
-            //聲明矩形域
-            RectangleF textArea = new RectangleF(rectX, rectY, rectWidth, rectHeight);
-
-            Font f = new Font("標楷體", fontSize); //定義字體
-            Brush whiteBrush = new SolidBrush(Color.White); //白筆刷，畫文字用
-            Brush blackBrush = new SolidBrush(Color.Black); //黑筆刷，畫背景用
-
-            g.FillRectangle(blackBrush, rectX, rectY, rectWidth, rectHeight);
-
-            g.DrawString(text, f, whiteBrush, textArea);
-            MemoryStream ms = new MemoryStream();
-            //保存為Jpg類型
-            bitmap1.Save(ms, ImageFormat.Jpeg);
-
-            Image h_hovercImg = Image.FromStream(ms);
-
-            g.Dispose();
-            bitmap1.Dispose();
-            return h_hovercImg;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            pictureBox1.Image.Dispose();
-
-            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            string filename2 = @"tmp_picture1add.jpg";
-            string text = "牡丹亭";
-            int alpha = 255;
-            int fontsize = 30;
-
-            AddWaterText(filename1, filename2, text, alpha, fontsize);
-        }
-
-        /// <summary>
-        /// 圖片加水印文字
-        /// </summary>
-        /// <param name="oldpath">舊圖片地址</param>
-        /// <param name="newpath">新圖片地址</param>
-        /// <param name="text">水印文字</param>
-        /// <param name="Alpha">透明度</param>
-        /// <param name="fontsize">字體大小</param>
-        void AddWaterText(string oldpath, string newpath, string text, int Alpha, int fontsize)
-        {
-            text = text + "版權所有";
-            FileStream fs = new FileStream(oldpath, FileMode.Open);
-            BinaryReader br = new BinaryReader(fs);
-            byte[] bytes = br.ReadBytes((int)fs.Length);
-            br.Close();
-            fs.Close();
-            MemoryStream ms = new MemoryStream(bytes);
-
-            Image imgPhoto = Image.FromStream(ms);
-            int imgPhotoWidth = imgPhoto.Width;
-            int imgPhotoHeight = imgPhoto.Height;
-
-            Bitmap bitmap1 = new Bitmap(imgPhotoWidth, imgPhotoHeight, PixelFormat.Format24bppRgb);
-
-            bitmap1.SetResolution(72, 72);
-            Graphics g = Graphics.FromImage(bitmap1);
-            //gif背景色
-            g.Clear(Color.FromName("white"));
-            g.InterpolationMode = InterpolationMode.High;
-            g.SmoothingMode = SmoothingMode.HighQuality;
-            g.DrawImage(imgPhoto, new Rectangle(0, 0, imgPhotoWidth, imgPhotoHeight), 0, 0, imgPhotoWidth, imgPhotoHeight, GraphicsUnit.Pixel);
-            Font font = null;
-            SizeF crSize = new SizeF();
-            font = new Font("宋體", fontsize, FontStyle.Bold);
-            //測量指定區域 www.2cto.com
-            crSize = g.MeasureString(text, font);
-            float y = imgPhotoHeight - crSize.Height;
-            float x = imgPhotoWidth - crSize.Width;
-            StringFormat StrFormat = new StringFormat();
-            StrFormat.Alignment = StringAlignment.Center;
-
-            //畫兩次制造透明效果
-            SolidBrush semiTransBrush2 = new SolidBrush(Color.FromArgb(Alpha, 56, 56, 56));
-            g.DrawString(text, font, semiTransBrush2, x + 1, y + 1);
-
-            g.DrawRectangle(Pens.Red, 10, 10, 100, 100);
-
-            SolidBrush semiTransBrush = new SolidBrush(Color.FromArgb(Alpha, 176, 176, 176));
-            g.DrawString(text, font, semiTransBrush, x, y);
-            bitmap1.Save(newpath, ImageFormat.Jpeg);
-            //g.Dispose();
-            imgPhoto.Dispose();
-            pictureBox1.Image = bitmap1;
-            //bitmap1.Dispose();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Graphics g = this.pictureBox1.CreateGraphics();
-            addWatermarkText1(g, 10, "lion-mouse", "WM_TOP_LEFT", 150, 150);
-        }
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
-        static void addWatermarkText1(Graphics g, int fontsize, string _watermarkText, string _watermarkPosition, int _width, int _height)
-        {
+            Bitmap bitmap1 = new Bitmap(filename1);
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            int fontsize = 20;
+            string _watermarkText = "lion-mouse";
+            string _watermarkPosition = "WM_TOP_LEFT";
+            int _width = 150;
+            int _height = 150;
+
             int[] sizes = new int[] { 32, 14, 12, 10, 8, 6, 4 };
             Font crFont = null;
             SizeF crSize = new SizeF();
@@ -252,10 +163,18 @@ namespace vcs_Draw_Watermark1
 
             semiTransBrush2.Dispose();
             semiTransBrush.Dispose();
+
+            pictureBox1.Image = bitmap1;
         }
 
-        static void addWatermarkText2(Graphics g, string type, int fontsize, string _watermarkText)
+        private void button4_Click(object sender, EventArgs e)
         {
+            Graphics g = this.pictureBox1.CreateGraphics();
+
+            string type = "Top";
+            int fontsize = 20;
+            string _watermarkText = "mouse";
+
             //1、先畫矩形
             RectangleF drawRect;
             Color color;
@@ -285,18 +204,6 @@ namespace vcs_Draw_Watermark1
             semiTransBrush.Dispose();
         }
 
-        /*
-        和第一種方法比起來，第二種方法更直觀，更短小精悍，
-        只需要在你需要添加水印的圖片上計算好固定坐標然後先畫一個矩形，
-        然後把水印漢字畫在矩形內，這樣不管水印漢字如何變化都可以在圖片固定位置居中。
-        */
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            Graphics g = this.pictureBox1.CreateGraphics();
-            addWatermarkText2(g, "Top", 20, "mouse");
-        }
-
         private void button5_Click(object sender, EventArgs e)
         {
         }
@@ -304,13 +211,11 @@ namespace vcs_Draw_Watermark1
         private void button6_Click(object sender, EventArgs e)
         {
             Bitmap bitmap1 = new Bitmap(pictureBox1.Image);
+            Bitmap watermark_bm = new Bitmap(pictureBox2.Image);
 
-            using (Bitmap watermark_bm = new Bitmap(pictureBox2.Image))
-            {
-                int x = (bitmap1.Width - watermark_bm.Width) / 2;
-                int y = (bitmap1.Height - watermark_bm.Height) / 2;
-                DrawWatermark1(watermark_bm, bitmap1, x, y);
-            }
+            int x = (bitmap1.Width - watermark_bm.Width) / 2;
+            int y = (bitmap1.Height - watermark_bm.Height) / 2;
+            DrawWatermark1(watermark_bm, bitmap1, x, y);
 
             pictureBox1.Image = bitmap1;
         }
@@ -343,13 +248,11 @@ namespace vcs_Draw_Watermark1
         private void button7_Click(object sender, EventArgs e)
         {
             Bitmap bitmap1 = new Bitmap(pictureBox1.Image);
+            Bitmap bitmap2 = new Bitmap(pictureBox2.Image);
 
-            using (Bitmap bitmap2 = new Bitmap(pictureBox2.Image))
-            {
-                int x = (bitmap1.Width - bitmap2.Width) / 2;
-                int y = (bitmap1.Height - bitmap2.Height) / 2;
-                DrawWatermark2(bitmap2, bitmap1, x, y);
-            }
+            int x = (bitmap1.Width - bitmap2.Width) / 2;
+            int y = (bitmap1.Height - bitmap2.Height) / 2;
+            DrawWatermark2(bitmap2, bitmap1, x, y);
 
             pictureBox1.Image = bitmap1;
         }
@@ -371,11 +274,11 @@ namespace vcs_Draw_Watermark1
             bitmap1.MakeTransparent(bitmap1.GetPixel(0, 0));
 
             // Draw the image using the ColorMatrix.
-            using (Graphics g = Graphics.FromImage(result_bm))
-            {
-                Rectangle rect = new Rectangle(x, y, bitmap1.Width, bitmap1.Height);
-                g.DrawImage(bitmap1, rect, 0, 0, bitmap1.Width, bitmap1.Height, GraphicsUnit.Pixel, image_attributes);
-            }
+            Graphics g = Graphics.FromImage(result_bm);
+
+            Rectangle rect = new Rectangle(x, y, bitmap1.Width, bitmap1.Height);
+            g.DrawImage(bitmap1, rect, 0, 0, bitmap1.Width, bitmap1.Height, GraphicsUnit.Pixel, image_attributes);
+
         }
     }
 }
