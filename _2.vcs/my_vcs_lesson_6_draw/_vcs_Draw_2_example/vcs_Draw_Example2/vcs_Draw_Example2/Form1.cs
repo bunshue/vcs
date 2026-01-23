@@ -141,64 +141,10 @@ namespace vcs_Draw_Example2
             ucOscilloscope1.Size = new Size(1024, 200);
             ucOscilloscope1.BackColor = Color.Pink;
 
-            int W = 250;
-            int H = 250;
-            x_st = 10;
-            //y_st = 800;
-            dx = W + 10;
-            pictureBox_random0.Location = new Point(x_st + dx * 0, y_st + dy * 9 - 10);
-            pictureBox_random1.Location = new Point(x_st + dx * 1, y_st + dy * 9 - 10);
-            pictureBox_random2.Location = new Point(x_st + dx * 2, y_st + dy * 9 - 10);
-            pictureBox_random3.Location = new Point(x_st + dx * 3, y_st + dy * 9 - 10);
-            pictureBox_random0.Size = new Size(W, H);
-            pictureBox_random1.Size = new Size(W, H);
-            pictureBox_random2.Size = new Size(W, H);
-            pictureBox_random3.Size = new Size(W, H);
-            pictureBox_random0.BackColor = Color.Pink;
-            pictureBox_random1.BackColor = Color.Pink;
-            pictureBox_random2.BackColor = Color.Pink;
-            pictureBox_random3.BackColor = Color.Pink;
-
-            pictureBox_wave.Location = new Point(10, 890);
-            pictureBox_wave.Size = new Size(1024, 180);
-            pictureBox_wave.BackColor = Color.Pink;
-
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            bt_exit_setup();
-        }
-
-        void bt_exit_setup()
-        {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
-
-            Button bt_exit = new Button();  // 實例化按鈕
-            bt_exit.Size = new Size(w, h);
-            bt_exit.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            g.DrawLine(p, 0, 0, w - 1, h - 1);
-            g.DrawLine(p, w - 1, 0, 0, h - 1);
-            bt_exit.Image = bmp;
-
-            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
-            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_exit); // 將按鈕加入表單
-            bt_exit.BringToFront();     //移到最上層
-        }
-
-        private void bt_exit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
+            this.Size = new Size(1920, 1080);
+            this.Text = "vcs_Draw_Example2";
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -851,8 +797,6 @@ namespace vcs_Draw_Example2
 
             }
             plotXY(data_x, data_y);
-
-
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -872,8 +816,6 @@ namespace vcs_Draw_Example2
 
             }
             plotXY(data_x, data_y);
-
-
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -4318,224 +4260,6 @@ namespace vcs_Draw_Example2
 
             pictureBox1.Image = bitmap1;
         }
-
-        private double rad(double d)
-        {
-            return d * Math.PI / 180.0;
-        }
-
-        private double sind(double d)
-        {
-            return Math.Sin(d * Math.PI / 180.0);
-        }
-
-        private double cosd(double d)
-        {
-            return Math.Cos(d * Math.PI / 180.0);
-        }
-
-        int x_st = 0;
-        int y_st = 0;
-
-        private void pictureBox_wave_Paint(object sender, PaintEventArgs e)
-        {
-            int W = 1024;
-            int H = 256;
-            int i;
-
-            // Create pens.
-            Pen redPen = new Pen(Color.Red, 4);
-            Point[] curvePoints = new Point[W];    //一維陣列內有 W 個Point
-
-            //畫紅色的分布
-            for (i = 0; i < W; i++)
-            {
-                y_st = 256 * 1 - (int)(128 * (sind(x_st + i) + 1));
-                //curvePoints[i].X = x_st;
-                //curvePoints[i].Y = y_st;
-                //richTextBox1.Text += y_st.ToString() + " ";
-                //curvePoints[i].Y = 2 * i;
-
-                if (y_st > 255)
-                    y_st = 255;
-                else if (y_st < 0)
-                    y_st = 0;
-                Pen p = new Pen(Color.Red, 1);
-                p.Color = Color.FromArgb(y_st, y_st, y_st);
-                e.Graphics.DrawLine(p, i, 0, i, 256);
-            }
-            //e.Graphics.DrawLines(redPen, curvePoints);   //畫直線
-            x_st -= 5;
-
-            for (i = 0; i < W; i++)
-            {
-                //richTextBox1.Text += c
-            }
-        }
-
-        private void timer_wave_Tick(object sender, EventArgs e)
-        {
-            pictureBox_wave.Invalidate();
-        }
-
-        private int RetrievRandomCorners(int minCorners, int maxCorners)
-        {
-            return new Random(Guid.NewGuid().GetHashCode()).Next(minCorners, maxCorners);
-        }
-
-        void draw_random_pattern(int type, int minCorners, int maxCorners, PictureBox pbox)
-        {
-            int width = pbox.Width;
-            int height = pbox.Height;
-            int numX = 10;
-            int numY = 10;
-            float perX = width * 1f / numX;
-            float perY = height * 1f / numY;
-            Bitmap bitmap1 = new Bitmap(width, height);
-            Graphics g = Graphics.FromImage(bitmap1);
-
-            g.CompositingQuality = CompositingQuality.HighQuality;
-            g.SmoothingMode = SmoothingMode.HighQuality;
-            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-
-            g.FillRectangle(Brushes.Black, new Rectangle(0, 0, width, height));
-
-            int lastCorners = minCorners;
-            for (int i = 0; i < numX; i++)
-            {
-                for (int j = 0; j < numY; j++)
-                {
-                    long tick = DateTime.Now.Ticks;
-                    Random random = new Random((int)(tick & 0xffffffff) | (int)(tick >> 32));
-                    int corners = random.Next(minCorners, maxCorners);
-                    if (Math.Abs(corners - lastCorners) < (maxCorners - minCorners) / 2)
-                    {
-                        corners = RetrievRandomCorners(minCorners, maxCorners);
-                    }
-                    lastCorners = corners;
-
-                    if (type == 0)
-                    {
-                        //this.Text = "竹葉";
-                        PointF[] points = Stone.CreateStone(new Point((int)(perX * j), (int)(perY * i)), (int)(perX * 1.4f), (int)(perX * 0.009f), corners);
-                        g.FillClosedCurve(Brushes.Green, points, FillMode.Winding);
-                    }
-                    else if (type == 1)
-                    {
-                        //this.Text = "長葉草";
-                        PointF[] points = Stone.CreateStone(new Point((int)(perX * j), (int)(perY * i)), (int)(perX * 0.88f), (int)(perX * 0.01f), corners);
-                        g.FillClosedCurve(Brushes.Green, points, FillMode.Winding);
-                    }
-                    else if (type == 2)
-                    {
-                        //this.Text = "雜亂石頭";
-                        PointF[] points = Stone.CreateStone(new Point((int)(perX * j), (int)(perY * i)), (int)(perX * 0.4f), (int)(perX * 0.396f), corners);
-                        g.FillClosedCurve(Brushes.Gray, points, FillMode.Winding);
-                    }
-                    else if (type == 3)
-                    {
-                        //this.Text = "天上繁星";
-                        PointF[] points = Stone.CreateStone(new Point((int)(perX * j), (int)(perY * i)), (int)(perX * 0.18f), (int)(perX * 0.06f), corners);
-                        g.FillClosedCurve(Brushes.White, points, FillMode.Winding);
-                    }
-                    else
-                    {
-                        //this.Text = "未選取";
-                        return;
-                    }
-                }
-            }
-            pbox.Image = bitmap1;
-        }
-
-        void draw_random_pattern0()
-        {
-            //this.Text = "竹葉";
-            int type = 0;
-            int minCorners = 3;
-            int maxCorners = 4;
-
-            draw_random_pattern(type, minCorners, maxCorners, pictureBox_random0);
-        }
-
-        void draw_random_pattern1()
-        {
-            //this.Text = "長葉草";
-            int type = 1;
-            int minCorners = 20;
-            int maxCorners = 38;
-
-            draw_random_pattern(type, minCorners, maxCorners, pictureBox_random1);
-        }
-
-        void draw_random_pattern2()
-        {
-            //this.Text = "雜亂石頭";
-            int type = 2;
-            int minCorners = 3;
-            int maxCorners = 4;
-
-            draw_random_pattern(type, minCorners, maxCorners, pictureBox_random2);
-        }
-
-        void draw_random_pattern3()
-        {
-            //this.Text = "天上繁星";
-            int type = 3;
-            int minCorners = 3;
-            int maxCorners = 4;
-
-            draw_random_pattern(type, minCorners, maxCorners, pictureBox_random3);
-        }
-
-
-
-        private void timer_random_pattern_Tick(object sender, EventArgs e)
-        {
-            //模擬雜亂無章的現實場景
-            draw_random_pattern0();
-            draw_random_pattern1();
-            draw_random_pattern2();
-            draw_random_pattern3();
-        }
-    }
-
-    public static class Stone
-    {
-        public static PointF[] CreateStone(Point center, int outerRadius, int inner_radius, int arms)
-        {
-            int center_x = center.X;
-            int center_y = center.Y;
-            PointF[] points = new PointF[arms * 2];
-            double offset = Math.PI / 2;
-            double arc = 2 * Math.PI / arms;
-            double half = arc / 2;
-            double angle = 0;
-            for (int i = 0; i < arms; i++)
-            {
-                Random randomOuter = new Random((int)DateTime.Now.Ticks);
-                outerRadius = outerRadius - randomOuter.Next((int)(inner_radius * 0.06 * new Random().Next(-20, 20) / 30d), (int)(inner_radius * 0.08));
-                //outerRadius = outerRadius - randomOuter.Next((int)(inner_radius * 0.16 * new Random().Next(-20, 20) / 30d), (int)(inner_radius * 0.18));
-                Random randomInner = new Random(Guid.NewGuid().GetHashCode());
-                inner_radius = inner_radius + randomInner.Next((int)(inner_radius * 0.02 * new Random().Next(-100, 100) / 150d), (int)(inner_radius * 0.08));
-                //inner_radius = inner_radius + randomInner.Next((int)(inner_radius * 0.02 * new Random().Next(-100, 100) / 150d), (int)(inner_radius * 0.22));
-
-                if (inner_radius > outerRadius)
-                {
-                    int temp = outerRadius;
-                    outerRadius = inner_radius;
-                    inner_radius = temp;
-                }
-                double angleTemp = arc * randomInner.Next(-5, 5) / 10d;
-                angle = i * arc;
-                angle += angleTemp;
-                points[i * 2].X = (float)(center_x + Math.Cos(angle - offset) * outerRadius);
-                points[i * 2].Y = (float)(center_y + Math.Sin(angle - offset) * outerRadius);
-                points[i * 2 + 1].X = (float)(center_x + Math.Cos(angle + half - offset) * inner_radius);
-                points[i * 2 + 1].Y = (float)(center_y + Math.Sin(angle + half - offset) * inner_radius);
-            }
-            return points;
-        }
     }
 
     class WAVReader //wav 文件讀取類
@@ -4679,3 +4403,4 @@ namespace vcs_Draw_Example2
         }
     }
 }
+

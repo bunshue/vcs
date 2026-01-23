@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button9 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -58,20 +57,8 @@
             this.bt_save = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.bt_reset = new System.Windows.Forms.Button();
-            this.pictureBox_wave = new System.Windows.Forms.PictureBox();
-            this.timer_wave = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox_random3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox_random2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox_random1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox_random0 = new System.Windows.Forms.PictureBox();
-            this.timer_random_pattern = new System.Windows.Forms.Timer(this.components);
             this.ucOscilloscope1 = new vcs_Draw_Example2.UCOscilloscope();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_wave)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random0)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -383,64 +370,6 @@
             this.bt_reset.UseVisualStyleBackColor = true;
             this.bt_reset.Click += new System.EventHandler(this.bt_reset_Click);
             // 
-            // pictureBox_wave
-            // 
-            this.pictureBox_wave.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox_wave.Location = new System.Drawing.Point(116, 10);
-            this.pictureBox_wave.Name = "pictureBox_wave";
-            this.pictureBox_wave.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox_wave.TabIndex = 108;
-            this.pictureBox_wave.TabStop = false;
-            this.pictureBox_wave.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_wave_Paint);
-            // 
-            // timer_wave
-            // 
-            this.timer_wave.Enabled = true;
-            this.timer_wave.Interval = 50;
-            this.timer_wave.Tick += new System.EventHandler(this.timer_wave_Tick);
-            // 
-            // pictureBox_random3
-            // 
-            this.pictureBox_random3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox_random3.Location = new System.Drawing.Point(328, 116);
-            this.pictureBox_random3.Name = "pictureBox_random3";
-            this.pictureBox_random3.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox_random3.TabIndex = 115;
-            this.pictureBox_random3.TabStop = false;
-            // 
-            // pictureBox_random2
-            // 
-            this.pictureBox_random2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox_random2.Location = new System.Drawing.Point(222, 116);
-            this.pictureBox_random2.Name = "pictureBox_random2";
-            this.pictureBox_random2.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox_random2.TabIndex = 114;
-            this.pictureBox_random2.TabStop = false;
-            // 
-            // pictureBox_random1
-            // 
-            this.pictureBox_random1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox_random1.Location = new System.Drawing.Point(116, 116);
-            this.pictureBox_random1.Name = "pictureBox_random1";
-            this.pictureBox_random1.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox_random1.TabIndex = 113;
-            this.pictureBox_random1.TabStop = false;
-            // 
-            // pictureBox_random0
-            // 
-            this.pictureBox_random0.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox_random0.Location = new System.Drawing.Point(10, 116);
-            this.pictureBox_random0.Name = "pictureBox_random0";
-            this.pictureBox_random0.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox_random0.TabIndex = 112;
-            this.pictureBox_random0.TabStop = false;
-            // 
-            // timer_random_pattern
-            // 
-            this.timer_random_pattern.Enabled = true;
-            this.timer_random_pattern.Interval = 1000;
-            this.timer_random_pattern.Tick += new System.EventHandler(this.timer_random_pattern_Tick);
-            // 
             // ucOscilloscope1
             // 
             this.ucOscilloscope1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -459,12 +388,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1475, 842);
-            this.Controls.Add(this.pictureBox_random3);
-            this.Controls.Add(this.pictureBox_random2);
-            this.Controls.Add(this.pictureBox_random1);
-            this.Controls.Add(this.pictureBox_random0);
             this.Controls.Add(this.ucOscilloscope1);
-            this.Controls.Add(this.pictureBox_wave);
             this.Controls.Add(this.bt_reset);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.bt_save);
@@ -498,11 +422,6 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_wave)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random0)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -538,14 +457,7 @@
         private System.Windows.Forms.Button bt_save;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button bt_reset;
-        private System.Windows.Forms.PictureBox pictureBox_wave;
-        private System.Windows.Forms.Timer timer_wave;
         private UCOscilloscope ucOscilloscope1;
-        private System.Windows.Forms.PictureBox pictureBox_random3;
-        private System.Windows.Forms.PictureBox pictureBox_random2;
-        private System.Windows.Forms.PictureBox pictureBox_random1;
-        private System.Windows.Forms.PictureBox pictureBox_random0;
-        private System.Windows.Forms.Timer timer_random_pattern;
     }
 }
 

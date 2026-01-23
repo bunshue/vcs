@@ -26,7 +26,7 @@ namespace vcs_Draw_Watermark1
         {
             show_item_location();
 
-            bt_reset_Click(sender, e);
+            reset_picturebox();
         }
 
         void show_item_location()
@@ -47,14 +47,10 @@ namespace vcs_Draw_Watermark1
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
 
-            bt_reset.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-
-            pictureBox1.Size = new Size(800, 700);
+            pictureBox1.Size = new Size(640, 480);
             pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
 
             pictureBox2.Size = new Size(400, 120);
             pictureBox2.Location = new Point(x_st + dx * 5, y_st + dy * 0);
@@ -63,7 +59,7 @@ namespace vcs_Draw_Watermark1
             richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 2);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1520, 760);
+            this.Size = new Size(1520, 900);
             this.Text = "vcs_Draw_Watermark1";
         }
 
@@ -72,7 +68,7 @@ namespace vcs_Draw_Watermark1
             richTextBox1.Clear();
         }
 
-        private void bt_reset_Click(object sender, EventArgs e)
+        void reset_picturebox()
         {
             //讀取圖檔, 多一層Image結構
             string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
@@ -83,33 +79,12 @@ namespace vcs_Draw_Watermark1
             pictureBox2.Image = Image.FromFile(filename2);
         }
 
+        private void bt_reset_Click(object sender, EventArgs e)
+        {
+            reset_picturebox();
+        }
+
         private void button0_Click(object sender, EventArgs e)
-        {
-            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-            Image image = Image.FromFile(filename1);
-            //pictureBox1.Image = image;
-
-            Bitmap bitmap1 = new Bitmap(filename1);
-            //bitmap1.SetResolution(3, 3);
-
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.FromName("white"));
-
-            g.InterpolationMode = InterpolationMode.High;
-            g.SmoothingMode = SmoothingMode.HighQuality;
-
-            pictureBox1.Image = bitmap1;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button3_Click(object sender, EventArgs e)
         {
             string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
@@ -167,7 +142,7 @@ namespace vcs_Draw_Watermark1
             pictureBox1.Image = bitmap1;
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             Graphics g = this.pictureBox1.CreateGraphics();
 
@@ -204,11 +179,7 @@ namespace vcs_Draw_Watermark1
             semiTransBrush.Dispose();
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button6_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             Bitmap bitmap1 = new Bitmap(pictureBox1.Image);
             Bitmap watermark_bm = new Bitmap(pictureBox2.Image);
@@ -245,7 +216,7 @@ namespace vcs_Draw_Watermark1
             }
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
             Bitmap bitmap1 = new Bitmap(pictureBox1.Image);
             Bitmap bitmap2 = new Bitmap(pictureBox2.Image);
@@ -278,7 +249,42 @@ namespace vcs_Draw_Watermark1
 
             Rectangle rect = new Rectangle(x, y, bitmap1.Width, bitmap1.Height);
             g.DrawImage(bitmap1, rect, 0, 0, bitmap1.Width, bitmap1.Height, GraphicsUnit.Pixel, image_attributes);
+        }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
         }
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            Image image = Image.FromFile(filename1);
+            //pictureBox1.Image = image;
+
+            Bitmap bitmap1 = new Bitmap(filename1);
+            //bitmap1.SetResolution(3, 3);
+
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.FromName("white"));
+
+            g.InterpolationMode = InterpolationMode.High;
+            g.SmoothingMode = SmoothingMode.HighQuality;
+
+            pictureBox1.Image = bitmap1;
+*/

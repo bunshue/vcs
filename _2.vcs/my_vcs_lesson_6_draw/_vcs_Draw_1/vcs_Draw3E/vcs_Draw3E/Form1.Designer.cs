@@ -76,6 +76,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.timer_random_pattern = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -284,7 +285,7 @@
             // timer2
             // 
             this.timer2.Enabled = true;
-            this.timer2.Interval = 10;
+            this.timer2.Interval = 50;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // timer5
@@ -500,6 +501,12 @@
             this.label14.TabIndex = 99;
             this.label14.Text = "label14";
             // 
+            // timer_random_pattern
+            // 
+            this.timer_random_pattern.Enabled = true;
+            this.timer_random_pattern.Interval = 1000;
+            this.timer_random_pattern.Tick += new System.EventHandler(this.timer_random_pattern_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -610,6 +617,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Timer timer_random_pattern;
     }
 }
 

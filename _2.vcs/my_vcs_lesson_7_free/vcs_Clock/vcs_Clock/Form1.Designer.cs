@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -89,7 +90,7 @@
             // toolStripMenuItem1a
             // 
             this.toolStripMenuItem1a.Name = "toolStripMenuItem1a";
-            this.toolStripMenuItem1a.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem1a.Size = new System.Drawing.Size(98, 22);
             this.toolStripMenuItem1a.Tag = "";
             this.toolStripMenuItem1a.Text = "左上";
             this.toolStripMenuItem1a.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
@@ -99,7 +100,7 @@
             this.toolStripMenuItem1b.Checked = true;
             this.toolStripMenuItem1b.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripMenuItem1b.Name = "toolStripMenuItem1b";
-            this.toolStripMenuItem1b.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem1b.Size = new System.Drawing.Size(98, 22);
             this.toolStripMenuItem1b.Tag = "";
             this.toolStripMenuItem1b.Text = "右上";
             this.toolStripMenuItem1b.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
@@ -107,7 +108,7 @@
             // toolStripMenuItem1c
             // 
             this.toolStripMenuItem1c.Name = "toolStripMenuItem1c";
-            this.toolStripMenuItem1c.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem1c.Size = new System.Drawing.Size(98, 22);
             this.toolStripMenuItem1c.Tag = "";
             this.toolStripMenuItem1c.Text = "左下";
             this.toolStripMenuItem1c.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
@@ -115,7 +116,7 @@
             // toolStripMenuItem1d
             // 
             this.toolStripMenuItem1d.Name = "toolStripMenuItem1d";
-            this.toolStripMenuItem1d.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem1d.Size = new System.Drawing.Size(98, 22);
             this.toolStripMenuItem1d.Tag = "";
             this.toolStripMenuItem1d.Text = "右下";
             this.toolStripMenuItem1d.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
@@ -152,6 +153,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(455, 434);
             this.Controls.Add(this.pictureBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
