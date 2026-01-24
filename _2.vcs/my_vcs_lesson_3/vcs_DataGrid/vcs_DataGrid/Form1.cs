@@ -7,7 +7,7 @@ using System.Data;
 using hisonic.WinForm.HisonicControl;
 using hisonic.WinForm.HisonicControl.CourseGrid;
 
-namespace testcontrol
+namespace vcs_DataGrid
 {
     /// <summary>
     /// Form1 的摘要說明。

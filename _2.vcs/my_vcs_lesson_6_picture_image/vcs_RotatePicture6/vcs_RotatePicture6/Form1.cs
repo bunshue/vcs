@@ -134,41 +134,6 @@ namespace vcs_RotatePicture6
             TotalAngle = CurrentAngle;
         }
 
-        // Save the file with the appropriate format.
-        // Throw a NotSupportedException if the file
-        // has an unknown extension.
-        public void SaveBitmapUsingExtension(Bitmap bm,
-            string filename)
-        {
-            string extension = Path.GetExtension(filename);
-            switch (extension.ToLower())
-            {
-                case ".bmp":
-                    bm.Save(filename, ImageFormat.Bmp);
-                    break;
-                case ".exif":
-                    bm.Save(filename, ImageFormat.Exif);
-                    break;
-                case ".gif":
-                    bm.Save(filename, ImageFormat.Gif);
-                    break;
-                case ".jpg":
-                case ".jpeg":
-                    bm.Save(filename, ImageFormat.Jpeg);
-                    break;
-                case ".png":
-                    bm.Save(filename, ImageFormat.Png);
-                    break;
-                case ".tif":
-                case ".tiff":
-                    bm.Save(filename, ImageFormat.Tiff);
-                    break;
-                default:
-                    throw new NotSupportedException(
-                        "Unknown file extension " + extension);
-            }
-        }
-
         // Return a bitmap rotated around its center.
         private Bitmap RotateBitmap(Bitmap bm, float angle)
         {
@@ -233,6 +198,3 @@ namespace vcs_RotatePicture6
 
     }
 }
-
-//另存新檔
-//SaveBitmapUsingExtension(RotatedBitmap, sfdFile.FileName);

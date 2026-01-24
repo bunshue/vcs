@@ -477,7 +477,10 @@ namespace vcs_RichTextBox1
 
         private void button11_Click(object sender, EventArgs e)
         {
-
+            //RTB部分著色
+            richTextBox1.SelectionStart = 30;
+            richTextBox1.SelectionLength = 60;
+            richTextBox1.SelectionBackColor = Color.Red;
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -737,12 +740,13 @@ namespace vcs_RichTextBox1
 
         private void bt_analyze_Click(object sender, EventArgs e)
         {
+            int len = richTextBox1.Lines.Length;
+
             richTextBox2.Text += "分析RichTextBox1的內容\n";
-            richTextBox2.Text += "RichTextBox1, lines = " + richTextBox1.Lines.Length.ToString() + "\t";
-            richTextBox2.Text += "content : \n";
-            for (int i = 0; i < richTextBox1.Lines.Length; i++)
+            richTextBox2.Text += "RichTextBox1, 行數 : " + len.ToString() + "\t內容 :\n";
+            for (int i = 0; i < len; i++)
             {
-                richTextBox2.Text += "i = " + i.ToString() + "\t" + richTextBox1.Lines[i].Trim() + "\tlen = \t" + richTextBox1.Lines[i].Trim().Length.ToString() + "\n";
+                richTextBox2.Text += "i = " + i.ToString() + "\t" + richTextBox1.Lines[i].Trim().Length.ToString() + "\t" + richTextBox1.Lines[i].Trim() + "\n";
             }
         }
 

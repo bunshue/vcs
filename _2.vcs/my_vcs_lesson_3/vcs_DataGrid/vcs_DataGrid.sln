@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testcontrol", "testcontrol.csproj", "{A6F1555B-19EE-4D34-B9BB-BB0E01FFF34C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_DataGrid", "vcs_DataGrid\vcs_DataGrid.csproj", "{A6F1555B-19EE-4D34-B9BB-BB0E01FFF34C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

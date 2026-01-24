@@ -81,10 +81,9 @@ namespace vcs_ImageProcessing2_CCRR
             bt_lanczos2.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 10);
             bt_lanczos3.Location = new Point(x_st + dx * 0, y_st + dy * 3 + 10);
 
-            bt_restore.Location = new Point(x_st + dx * 6 - 50, y_st + dy * 0);
-
-            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox1.Size = new Size(800, 800);
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_restore.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_restore.Size.Width, pictureBox1.Location.Y + pictureBox1.Size.Height - bt_restore.Size.Height);
 
             richTextBox1.Size = new Size(300, 800);
             richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
@@ -100,6 +99,7 @@ namespace vcs_ImageProcessing2_CCRR
 
         private void bt_restore_Click(object sender, EventArgs e)
         {
+            pictureBox1.Size = new Size(800, 800);
             Restore_Picture();
         }
 
@@ -794,9 +794,21 @@ namespace vcs_ImageProcessing2_CCRR
 
         }
 
+        //連續旋轉一張圖片 ST
+        float angle = 0;
         private void button12_Click(object sender, EventArgs e)
         {
+            //連續旋轉一張圖片
+            angle += 15;
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Image image = Image.FromFile(filename);
+
+            Image image_rotated = image.GetRotateImage(angle);
+
+            pictureBox1.Image = image_rotated;
+            pictureBox1.Size = new Size(image_rotated.Width, image_rotated.Height);
         }
+        //連續旋轉一張圖片 SP
 
         private void button13_Click(object sender, EventArgs e)
         {
@@ -994,7 +1006,6 @@ namespace vcs_ImageProcessing2_CCRR
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             Bitmap bitmap2 = Zoom2_copy(bitmap1);
             pictureBox1.Image = bitmap2;
-            ///bitmap2.Save("ims02.duplicate.bmp", ImageFormat.Bmp);
         }
 
         private void bt_lanczos3_Click(object sender, EventArgs e)
@@ -1008,4 +1019,49 @@ namespace vcs_ImageProcessing2_CCRR
             pictureBox1.Image = bitmap1;
         }
     }
+
+    public static class ImageEx
+    {
+        public static Image GetRotateImage(this Image img, float angle)
+        {
+            angle = angle % 360;//弧度轉換
+            double radian = angle * Math.PI / 180.0;
+            double cos = Math.Cos(radian);
+            double sin = Math.Sin(radian);
+            //原圖的寬和高
+            int w = img.Width;
+            int h = img.Height;
+            int W = (int)(Math.Max(Math.Abs(w * cos - h * sin), Math.Abs(w * cos + h * sin)));
+            int H = (int)(Math.Max(Math.Abs(w * sin - h * cos), Math.Abs(w * sin + h * cos)));
+
+            Console.WriteLine("W = " + W.ToString() + ", H = " + H.ToString());
+
+            //目標位圖
+            Image dsImage = new Bitmap(W, H, img.PixelFormat);
+            using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(dsImage))
+            {
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Bilinear;
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                g.Clear(Color.White);
+                //計算偏移量
+                Point Offset = new Point((W - w) / 2, (H - h) / 2);
+                //構造圖像顯示區域：讓圖像的中心與窗口的中心點一致
+                Rectangle rect = new Rectangle(Offset.X, Offset.Y, w, h);
+                Point center = new Point(rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
+                g.TranslateTransform(center.X, center.Y);
+                g.RotateTransform(360 - angle);
+                //恢復圖像在水平和垂直方向的平移
+                g.TranslateTransform(-center.X, -center.Y);
+                g.DrawImage(img, rect);
+                //重至繪圖的所有變換
+                g.ResetTransform();
+                g.Save();
+            }
+            return dsImage;
+        }
+    }
 }
+
+
+//bitmap2.Save("ims02.duplicate.bmp", ImageFormat.Bmp);
+
