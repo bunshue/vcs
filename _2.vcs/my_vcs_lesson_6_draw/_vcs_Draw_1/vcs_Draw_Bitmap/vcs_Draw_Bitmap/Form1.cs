@@ -352,17 +352,6 @@ namespace vcs_Draw_Bitmap
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //Bitmap存圖
-
-            string filename = "\\tmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            bitmap1.Save(filename, ImageFormat.Bmp);
-            //bitmap1.Save(filename, ImageFormat.Jpeg);
-            /*            
-            轉換圖片格式
-            Bitmap bm = new Bitmap(舊檔名);
-            bm.Save(新檔名, 新格式);	//格式為 ImageFormat.Bmp...
-            */
-            richTextBox1.Text += "存檔完成, 檔名：" + filename + "\n";
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -815,6 +804,84 @@ namespace vcs_Draw_Bitmap
 
         private void button19_Click(object sender, EventArgs e)
         {
+            //Bitmap存圖
+
+            string filename = "\\tmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            bitmap1.Save(filename, ImageFormat.Bmp);
+            //bitmap1.Save(filename, ImageFormat.Jpeg);
+            /*            
+            轉換圖片格式
+            Bitmap bm = new Bitmap(舊檔名);
+            bm.Save(新檔名, 新格式);	//格式為 ImageFormat.Bmp...
+            */
+            richTextBox1.Text += "存檔完成, 檔名：" + filename + "\n";
+
+            //6060
+
+            //把PictureBox/Form上的東西匯出至檔案
+            //Control就有一個 DrawToBitmap 的Method可以用
+
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+
+            Bitmap bm = new Bitmap(W, H);
+            pictureBox1.DrawToBitmap(bm, new Rectangle(0, 0, W, H));   //匯出全部, 可以在此選擇匯出區域
+
+            filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            string filename1 = filename + ".jpg";
+            string filename2 = filename + ".bmp";
+            string filename3 = filename + ".png";
+
+            try
+            {
+                bm.Save(@filename1, ImageFormat.Jpeg);
+                bm.Save(@filename2, ImageFormat.Bmp);
+                bm.Save(@filename3, ImageFormat.Png);
+
+                richTextBox1.Text += "存檔成功\n";
+                richTextBox1.Text += "已存檔 : " + filename1 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename3 + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+            }
+
+            //6060
+
+            //把PictureBox/Form上的東西匯出至檔案
+            //Control就有一個 DrawToBitmap 的Method可以用
+
+            int width = pictureBox1.Width;
+            int height = pictureBox1.Height;
+
+            bm = new Bitmap(width, height);
+            //pictureBox1.DrawToBitmap(bm, new Rectangle(0, 0, width, height));   //匯出全部, 可以在此選擇匯出區域
+            this.DrawToBitmap(bm, this.Bounds);
+
+            filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            filename1 = filename + ".jpg";
+            filename2 = filename + ".bmp";
+            filename3 = filename + ".png";
+
+            try
+            {
+                bm.Save(@filename1, ImageFormat.Jpeg);
+                bm.Save(@filename2, ImageFormat.Bmp);
+                bm.Save(@filename3, ImageFormat.Png);
+
+                richTextBox1.Text += "存檔成功\n";
+                richTextBox1.Text += "已存檔 : " + filename1 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename3 + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+            }
+
+
         }
 
         int cnt = 0;
@@ -935,3 +1002,40 @@ namespace vcs_Draw_Bitmap
             g.DrawImage(bmp, 0, 450, W, H / 2);
  * 
 */
+
+
+
+/*
+            //img.Save(Response.OutputStream, ImageFormat.Jpeg);;
+
+            //bmp.Save ( Response.OutputStream , System.Drawing.Imaging.ImageFormat.Jpeg);
+            //bmp.Save ( Response.OutputStream , System.Drawing.Imaging.ImageFormat.Jpeg);
+            //bmp.Dispose();
+ * 
+            //該位圖對象以“GIF”格式輸出
+            //objBitMap.Save(Response.OutputStream, ImageFormat.Gif);
+
+
+            //Bg.Save(Response.OutputStream, ImageFormat.Gif);
+
+            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            bitmap1.Save(filename, ImageFormat.Bmp);
+
+string filename2 = Application.StartupPath + "\\jpg_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            bitmap1.Save(filename2, ImageFormat.Jpeg);
+
+
+            //使用指定參數輸出
+            //image.Save(Response.OutputStream, myImageCodecInfo, myEncoderParameters);
+
+            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            bitmap1.Save(filename, ImageFormat.Bmp);
+            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
+            bitmap1.Save(filename, ImageFormat.Png);
+*/
+
+
+
+
+
+

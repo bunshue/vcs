@@ -151,9 +151,9 @@
             // bt_restore
             // 
             this.bt_restore.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_restore.Location = new System.Drawing.Point(274, 112);
+            this.bt_restore.Location = new System.Drawing.Point(297, 51);
             this.bt_restore.Name = "bt_restore";
-            this.bt_restore.Size = new System.Drawing.Size(70, 60);
+            this.bt_restore.Size = new System.Drawing.Size(60, 40);
             this.bt_restore.TabIndex = 10;
             this.bt_restore.Text = "恢復";
             this.bt_restore.UseVisualStyleBackColor = true;

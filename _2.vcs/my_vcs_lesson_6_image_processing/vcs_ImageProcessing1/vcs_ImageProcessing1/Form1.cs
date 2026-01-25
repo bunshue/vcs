@@ -91,10 +91,10 @@ namespace vcs_ImageProcessing1
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            bt_restore.Location = new Point(x_st + dx * 1, y_st + dy * 10);
 
-            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox1.Size = new Size(1200, 1000);
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_restore.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_restore.Size.Width, pictureBox1.Location.Y + pictureBox1.Size.Height - bt_restore.Size.Height);
 
             richTextBox1.Size = new Size(360, 1000);
             richTextBox1.Location = new Point(x_st + dx * 11 + 0, y_st + dy * 0);
@@ -856,7 +856,6 @@ namespace vcs_ImageProcessing1
         }
     }
 }
-
 
 /*
 IntPtr ptr = bmpData.Scan0;　 // 獲取bmpData的內存起始位置

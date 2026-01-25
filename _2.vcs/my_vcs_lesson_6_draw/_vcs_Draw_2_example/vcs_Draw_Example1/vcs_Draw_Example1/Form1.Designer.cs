@@ -106,6 +106,7 @@
             this.bt_long2 = new System.Windows.Forms.Button();
             this.bt_long1 = new System.Windows.Forms.Button();
             this.bt_long0 = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -194,7 +195,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(135, 45);
             this.button5.TabIndex = 23;
-            this.button5.Text = "格線";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -205,7 +205,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(135, 45);
             this.button6.TabIndex = 22;
-            this.button6.Text = "開圖檔、寫字、存檔";
+            this.button6.Text = "開圖檔、寫字";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -249,7 +249,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(135, 45);
             this.button11.TabIndex = 26;
-            this.button11.Text = "OV亮度";
+            this.button11.Text = "Gamma 2.2曲線";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -369,7 +369,6 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(135, 45);
             this.button18.TabIndex = 45;
-            this.button18.Text = "把PictureBox上的東西匯出至檔案";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -380,7 +379,6 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(135, 45);
             this.button19.TabIndex = 46;
-            this.button19.Text = "把Form上的東西匯出至檔案";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -940,11 +938,23 @@
             this.bt_long0.UseVisualStyleBackColor = true;
             this.bt_long0.Click += new System.EventHandler(this.bt_long0_Click);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(855, 119);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(48, 16);
+            this.checkBox1.TabIndex = 108;
+            this.checkBox1.Text = "格線";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 761);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.bt_reset);
             this.Controls.Add(this.bt_save);
             this.Controls.Add(this.groupBox1);
@@ -1098,6 +1108,7 @@
         private System.Windows.Forms.Button bt_long9;
         private System.Windows.Forms.Button bt_long8;
         private System.Windows.Forms.Button bt_long7;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 
