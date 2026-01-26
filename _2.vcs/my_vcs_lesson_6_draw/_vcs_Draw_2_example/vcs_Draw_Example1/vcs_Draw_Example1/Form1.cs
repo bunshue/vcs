@@ -27,6 +27,9 @@ namespace vcs_Draw_Example1
         SolidBrush sb;
         Bitmap bitmap1;
 
+        private List<Point> Points = new List<Point>();
+
+
         public Form1()
         {
             InitializeComponent();
@@ -123,6 +126,8 @@ namespace vcs_Draw_Example1
             button48.Location = new Point(x_st + dx * 4, y_st + dy * 8);
             button49.Location = new Point(x_st + dx * 4, y_st + dy * 9);
 
+            groupBox3.Size = new Size(580, 80);
+            groupBox3.Location = new Point(x_st + dx * 0, y_st + dy * 10+10);
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
             groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 14 + 20);
 
@@ -147,6 +152,25 @@ namespace vcs_Draw_Example1
             richTextBox1.Size = new Size(480, 250);
             richTextBox1.Location = new Point(x_st + dx * 9, y_st + dy * 13);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            y_st += 10;
+            bt_2d_array0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_2d_array1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_2d_array2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_2d_array3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            bt_long0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_long1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_long2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_long3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            bt_long4.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            bt_long5.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            bt_long6.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_long7.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            bt_long8.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            bt_long9.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            bt_long10.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            bt_long11.Location = new Point(x_st + dx * 5, y_st + dy * 1);
+
 
             this.Size = new Size(1800, 960);
             this.Text = "vcs_Draw_Example1";
@@ -710,14 +734,8 @@ namespace vcs_Draw_Example1
                 //richTextBox1.Text += "(" + pattern_recursive[i].X.ToString() + ", " + pattern_recursive[i].Y.ToString() + "),\n";
             }
 
-            int W = pictureBox1.Width;
-            int H = pictureBox1.Height;
-            Bitmap bitmap1 = new Bitmap(W, H);
-            Graphics g = Graphics.FromImage(bitmap1);
             Pen bluePen = new Pen(Color.Blue, 8);
             Pen redPen = new Pen(Color.Red, 8);
-
-            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
             int step = 20;
             int offset_x = 450;
             int offset_y = 300;
@@ -743,10 +761,7 @@ namespace vcs_Draw_Example1
             {
                 g.DrawLines(bluePen, points_draw1.ToArray());  //畫直線
             }
-
             pictureBox1.Image = bitmap1;
-
-            g.Dispose();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -921,7 +936,6 @@ namespace vcs_Draw_Example1
             Font font = new Font(this.Font.Name, 40);
             g.DrawString("牡丹亭", font, brush, P);
             font.Dispose();
-            g.Dispose();
             pictureBox1.Image = bitmap1;
         }
 
@@ -2747,8 +2761,7 @@ namespace vcs_Draw_Example1
         //Pie Chart 1 ST
         private void button20_Click(object sender, EventArgs e)
         {
-            //Pie Chart 1
-            //pictureBox1.Size = new Size(400, 400);
+            // Pie Chart 1, 10片
             // Brushes used to fill pie slices.
             Brush[] SliceBrushes =
             {
@@ -2777,20 +2790,21 @@ namespace vcs_Draw_Example1
                 Values[i] = (float)(5 + 35 * rand.NextDouble());
             }
 
-            //ResizeRedraw = true;
-
             // Draw the pie chart.
 
-            Graphics g = pictureBox1.CreateGraphics();
-
+            //Graphics g = pictureBox1.CreateGraphics();
             g.Clear(BackColor);
-            if ((pictureBox1.Size.Width < 20) || (pictureBox1.Size.Height < 20)) return;
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
-            Rectangle rect = new Rectangle(10, 10, pictureBox1.Size.Width - 20, pictureBox1.Size.Height - 20);
 
-            richTextBox1.Text += "W = " + pictureBox1.Size.Width.ToString() + ", H = " + pictureBox1.Size.Height.ToString() + "\n";
+            int x_st = 10;
+            int y_st = 10;
+            int W = 400;
+            int H = 400;
+            Rectangle rect = new Rectangle(10, 10, W - 20, W - 20);
+
             DrawLabeledPieChart(g, rect, -90, SliceBrushes, SlicePens, Values, "0.0", Font, Brushes.Black);
+            pictureBox1.Image = bitmap1;
         }
 
         // Draw a pie chart.
@@ -2852,11 +2866,6 @@ namespace vcs_Draw_Example1
         {
             //Pie Chart 2
 
-            int W = 230;
-            int H = 230;
-
-            //pictureBox1.Size = new Size(W * 2, H * 5 / 4);
-
             // Brushes used to fill pie slices.
             Brush[] SliceBrushes =
             {
@@ -2914,21 +2923,19 @@ namespace vcs_Draw_Example1
             const int top_margin = 30;
             const int left_margin = 15;
             g.Clear(BackColor);
-            if ((pictureBox1.Size.Width < 2 * top_margin) || (pictureBox1.Size.Height < 2 * top_margin))
-                return;
 
+            if ((pictureBox1.Size.Width < 2 * top_margin) || (pictureBox1.Size.Height < 2 * top_margin))
+            {
+                return;
+            }
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
             int circle_width = pictureBox1.Size.Height - 2 * top_margin;
             int annotation_width = (pictureBox1.Size.Width - circle_width) / 2 - 2 * left_margin;
             int annotation_height = pictureBox1.Size.Height - 2 * left_margin;
-            Rectangle left_rect = new Rectangle(
-                left_margin, left_margin, annotation_width, annotation_height);
-            Rectangle ellipse_rect = new Rectangle(
-                left_rect.Right + left_margin, top_margin, circle_width, circle_width);
-            Rectangle right_rect = new Rectangle(
-                ellipse_rect.Right + left_margin, left_rect.Top,
-                left_rect.Width, left_rect.Height);
+            Rectangle left_rect = new Rectangle(left_margin, left_margin, annotation_width, annotation_height);
+            Rectangle ellipse_rect = new Rectangle(left_rect.Right + left_margin, top_margin, circle_width, circle_width);
+            Rectangle right_rect = new Rectangle(ellipse_rect.Right + left_margin, left_rect.Top, left_rect.Width, left_rect.Height);
             using (Font annotation_font = new Font("Times New Roman", 12))
             {
                 DrawAnnotatedPieChart(g,
@@ -3000,8 +3007,7 @@ namespace vcs_Draw_Example1
                     double label_angle = Math.PI * (start_angle + sweep_angle / 2) / 180;
                     float x = cx + (float)(radius * Math.Cos(label_angle));
                     float y = cy + (float)(radius * Math.Sin(label_angle));
-                    g.DrawString(values[i].ToString(label_format),
-                        label_font, label_brush, x, y, string_format);
+                    g.DrawString(values[i].ToString(label_format), label_font, label_brush, x, y, string_format);
 
                     // Draw a radial line to connect to the annotation.
                     float x1 = cx + (float)(annotation_rx1 * Math.Cos(label_angle));
@@ -3076,7 +3082,9 @@ namespace vcs_Draw_Example1
             Graphics g = pictureBox1.CreateGraphics();
             g.Clear(BackColor);
             if ((pictureBox1.Size.Width < 20) || (pictureBox1.Size.Height < 20))
+            {
                 return;
+            }
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
             Rectangle rect = new Rectangle(10, 10, pictureBox1.Size.Width - 20, pictureBox1.Size.Height - 20);
@@ -3101,15 +3109,10 @@ namespace vcs_Draw_Example1
         }
         //Pie Chart 3 SP
 
-
         //Pie Chart 4 ST
         private void button23_Click(object sender, EventArgs e)
         {
             //Pie Chart 4
-            int W = 230;
-            int H = 230;
-
-            //pictureBox1.Size = new Size(W * 2, H * 2);
 
             // Draw pie slices.
 
@@ -3195,16 +3198,24 @@ namespace vcs_Draw_Example1
         private void button25_Click(object sender, EventArgs e)
         {
             //餅圖
-            Bitmap bitmap1 = new Bitmap(350, 200);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
-            Rectangle outline = new Rectangle(10, 5, 300, 100);
+
+            int x_st = 10;
+            int y_st = 10;
+            int W = 300;
+            int H = 180;
+
+            Rectangle outline = new Rectangle(x_st, y_st, W, H);
+
+            // 外框
             g.DrawEllipse(new Pen(Color.Black, 8.0f), outline);
+            // 第1片
             g.FillPie(new SolidBrush(Color.Red), outline, -20f, 120f);
-            //這些角度的大小可以由數據庫中的對比數據計算決定
-            g.FillPie(new SolidBrush(Color.Yellow), outline, 100f, 120f);
+            // 第2片
+            g.FillPie(new SolidBrush(Color.Green), outline, 100f, 120f);
+            // 第3片
             g.FillPie(new SolidBrush(Color.Blue), outline, 220f, 100f);
-            g.FillPie(new SolidBrush(Color.Green), outline, 320f, 40f);
+            // 第4片
+            g.FillPie(new SolidBrush(Color.Yellow), outline, 320f, 40f);
 
             pictureBox1.Image = bitmap1;
         }
@@ -3212,26 +3223,15 @@ namespace vcs_Draw_Example1
         private void button26_Click(object sender, EventArgs e)
         {
             //畫餅圖
-            Draw_PieDiagram();
-        }
-
-        //畫餅圖
-        void Draw_PieDiagram()
-        {
-            Bitmap bmp = new Bitmap(400, 300);	//創建一個長度為400，寬帶為400的Bitmap實例
-            Graphics g;
-            g = Graphics.FromImage(bmp);
-            g.Clear(Color.Snow);
             string[] sitem = { "很好", "好", "一般", "差" };
             int[] num = { 1000, 69, 90, 20 };
-            int cnt, i, len;
-            float s;
+            int cnt = 0;
+            int i = 0;
+            int len = num.Length;
+            float s = 0;
             float[] nflt;
-            string header;
-            header = "";
-            cnt = 0;
-            s = 0;
-            len = num.Length;
+            string header = "";
+
             //nflt.Length = len;
             nflt = new float[len];
             for (i = 0; i < len; i++)
@@ -3274,7 +3274,7 @@ namespace vcs_Draw_Example1
             }
             Pen p = new Pen(Color.Black, 1);
             g.DrawRectangle(p, 1, 1, 398, 298);
-            pictureBox1.Image = bmp;
+            pictureBox1.Image = bitmap1;
         }
 
         public Color Return_Color(int i)
@@ -3570,9 +3570,6 @@ namespace vcs_Draw_Example1
         private void button28_Click(object sender, EventArgs e)
         {
             //畫柱狀圖
-            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height, PixelFormat.Format24bppRgb);
-            Graphics g = Graphics.FromImage(bitmap1);
-            //Graphics g = this.CreateGraphics();
             g.Clear(Color.White);
 
             Font f = new Font("宋體", 24, FontStyle.Regular);
@@ -3700,29 +3697,21 @@ namespace vcs_Draw_Example1
             g.DrawString("通過人數", font2, pen3.Brush, 30 + 42 * 6, 440);
 
             pictureBox1.Image = bitmap1;
-            g.Dispose();
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
             //畫棒圖
 
-            //創建一個長度為400，寬帶為400的Bitmap實例
-            Bitmap bmp = new Bitmap(400, 300);
-            Graphics g;
-            g = Graphics.FromImage(bmp);
             g.Clear(Color.Snow);
             string[] sitem = { "很好", "好", "一般", "差" };
             int[] num = { 1000, 69, 90, 2000 };
-            int cnt, i, len, iBarWidth;
-            float scale;
+            int cnt = 0;
+            int i = 0;
+            int iBarWidth = 40;
+            float scale = 1;
             float[] nflt;
-            string header;
-            header = "";
-            cnt = 0;
-            iBarWidth = 40;
-            scale = 1;
-            len = num.Length;
+            int len = num.Length;
             //nflt.Length = len;
             nflt = new float[len];
             for (i = 0; i < len; i++)
@@ -3736,7 +3725,7 @@ namespace vcs_Draw_Example1
                 //nflt[i] = scale * num[i]/cnt;
             }
 
-            header = "調查統計結果一覽圖";
+            string header = "調查統計結果一覽圖";
             g.DrawString(header, new Font("宋體", 12, FontStyle.Bold), Brushes.Black, new Point(75, 10));
             Point myRec = new Point(300, 40);
             Point myDec = new Point(320, 40);
@@ -3761,9 +3750,9 @@ namespace vcs_Draw_Example1
 
                 //s = s + nflt[i];   
             }
-            Pen p = new Pen(Color.Black, 1);
-            g.DrawRectangle(p, 1, 1, 398, 298);
-            pictureBox1.Image = bmp;
+            g.DrawRectangle(Pens.Black, 1, 1, 398, 298);
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button30_Click(object sender, EventArgs e)
@@ -3774,10 +3763,6 @@ namespace vcs_Draw_Example1
             //數據初始化   
             string[] month = new string[12] { "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月" };
             float[] d = new float[12] { 20.5F, 60, 10.8F, 15.6F, 30, 70.9F, 50.3F, 30.7F, 70, 50.4F, 30.8F, 20 };
-            //畫圖初始化   
-            Bitmap bitmap1 = new Bitmap(500, 500);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
 
             PointF cPt = new PointF(40, 420);//中心點
             PointF[] xPt = new PointF[3]
@@ -3830,16 +3815,11 @@ namespace vcs_Draw_Example1
                 }
             }
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button31_Click(object sender, EventArgs e)
         {
             //畫折線圖
-
-            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height, PixelFormat.Format24bppRgb);
-            Graphics g = Graphics.FromImage(bitmap1);
-            //Graphics g = this.CreateGraphics();
             g.Clear(Color.White);
 
             Font f = new Font("宋體", 24, FontStyle.Regular);
@@ -3862,7 +3842,6 @@ namespace vcs_Draw_Example1
             Point p4 = new Point(620, 370);
             g.DrawLine(MyPen, p1, p2);
             g.DrawLine(MyPen, p3, p4);
-
 
             //繪製折線
             Pen pen1 = new Pen(Color.Red, 2);
@@ -3947,17 +3926,11 @@ namespace vcs_Draw_Example1
             g.DrawString("通過人數", font2, pen2.Brush, 30 + 42 * 6, 440);
 
             pictureBox1.Image = bitmap1;
-            g.Dispose();
         }
 
         private void button32_Click(object sender, EventArgs e)
         {
             //折線圖
-            Pic();
-        }
-
-        private void Pic()
-        {
             //測試數據
             DataTable table = new DataTable("Data");
             DataRow Dr;
@@ -4145,7 +4118,6 @@ namespace vcs_Draw_Example1
                 default:
                     objColor = Color.Blue;
                     break;
-
             }
             return objColor;
         }
@@ -4187,9 +4159,8 @@ namespace vcs_Draw_Example1
         private void button36_Click(object sender, EventArgs e)
         {
             //繪製正弦曲線
-            Bitmap bitmap1 = new Bitmap(360, 120);
-            Graphics g = Graphics.FromImage(bitmap1);
             g.Clear(Color.White);
+
             g.SmoothingMode = SmoothingMode.AntiAlias;
             Rectangle r1 = new Rectangle(0, 0, 360, 20);
             Rectangle r2 = new Rectangle(0, 20, 360, 40);
@@ -4308,11 +4279,8 @@ namespace vcs_Draw_Example1
             bitmap1 = MyDc.DrawingImg();
 
             Graphics g = Graphics.FromImage(MyDc.DrawingImg());
-
             //显示图形
             pictureBox1.Image = bitmap1;
-
-            g.Dispose();
         }
 
         private void button39_Click(object sender, EventArgs e)
@@ -4332,7 +4300,7 @@ namespace vcs_Draw_Example1
 
             //显示图形
 
-            //g.Dispose();
+            //pictureBox1.Image = bitmap1;
 
             //Response.Write("<br>" + MyDc.intData.ToString());
         }
@@ -4817,7 +4785,6 @@ namespace vcs_Draw_Example1
             //填充藍色眼睛
             g.FillPie(blue, new Rectangle(headDiameter + headDiameter / 2 - eyeRadius, headDiameter - eyeRadius, eyeRadius * 2, eyeRadius * 2), 0, 360);
 
-            g.Dispose();
             pictureBox1.Image = image;
         }
 
@@ -5074,7 +5041,6 @@ namespace vcs_Draw_Example1
             g.DrawLine(Pens.Black, new2, new3);
             g.DrawLine(Pens.Black, new3, new4);
             g.DrawLine(Pens.Black, new4, new1);
-            g.Dispose();
 
             pictureBox1.Image = bitmap1;
         }
@@ -5591,10 +5557,7 @@ namespace vcs_Draw_Example1
             }
 
             f.Dispose();
-            g.Dispose();
             bitmap1.Dispose();
-
-
         }
 
         private void bt_long6_Click(object sender, EventArgs e)
@@ -5836,6 +5799,1281 @@ namespace vcs_Draw_Example1
                 g.DrawLine(p, new Point(i * 100, 0), new Point(i * 100, pictureBox1.ClientSize.Height - 1));
             }
         }
+
+        private double rad(double d)
+        {
+            return d * Math.PI / 180.0;
+        }
+
+        private double sind(double d)
+        {
+            return Math.Sin(d * Math.PI / 180.0);
+        }
+
+        private double cosd(double d)
+        {
+            return Math.Cos(d * Math.PI / 180.0);
+        }
+
+        int COLUMN = 360 + 1 + 360;
+        int ROW = 360 + 1 + 360;
+
+        private double F1(int x, int y)
+        {
+            return cosd(x) + cosd(y);   //z=cox(x) + cos(y)
+        }
+
+        void draw_contour(int cx, int cy)
+        {
+            int i, j;
+            //                                  R   C
+            double[,] brightness = new double[ROW, COLUMN];    //Row = 19, Column = 8
+            int[,] brightness2 = new int[ROW, COLUMN];    //Row = 19, Column = 8
+
+            //richTextBox1.Text += "assign value\n";
+
+            double stepx = 360.0 / ((COLUMN - 1) / 2);
+            double stepy = 360.0 / ((ROW - 1) / 2);
+
+            double max = 0;
+            double min = 100;
+            double vv = 0;
+
+            //richTextBox1.Text += "stepx = " + stepx.ToString() + "\tstepy = " + stepy.ToString() + "\n";
+
+            for (j = 0; j < ROW; j++)
+            {
+                for (i = 0; i < COLUMN; i++)
+                {
+                    vv = F1(i - cx, j - cy);
+
+                    brightness[j, i] = vv;
+                    if (vv > max)
+                        max = vv;
+                    else if (vv < min)
+                        min = vv;
+
+                    //對應到0~255
+                    brightness2[j, i] = (int)((vv + 2.0) * 64);
+                    if (brightness2[j, i] == 256)
+                    {
+                        brightness2[j, i] = 255;
+                    }
+                    brightness2[j, i] = (brightness2[j, i] / 5) * 5;
+                }
+            }
+            //richTextBox1.Text += "max = " + max.ToString() + "\tmin = " + min.ToString() + "\n";
+
+            /*
+            richTextBox1.Text += "print value\n";
+            for (j = 0; j < ROW; j++)
+            {
+                for (i = 0; i < COL; i++)
+                {
+                    richTextBox1.Text += gray[j, i].ToString("D2") + "\t";
+                }
+                richTextBox1.Text += "\n";
+            }
+            richTextBox1.Text += "\n";
+            */
+
+            /*
+            for (j = 0; j < ROW; j++)
+            {
+                for (i = 0; i < COL; i++)
+                {
+                    //richTextBox1.Text += brightness[j, i].ToString("D2") + "\t";
+                    //richTextBox1.Text += brightness[j, i].ToString() + "\t";
+                    richTextBox1.Text += ((int)(brightness[j, i] * 100)).ToString("D2") + "\t";
+                }
+                richTextBox1.Text += "\n";
+            }
+            richTextBox1.Text += "\n";
+            */
+
+            //逐點製作圖檔
+
+            Bitmap bitmap1 = new Bitmap(COLUMN, ROW);
+
+            for (j = 0; j < ROW; j++)
+            {
+                for (i = 0; i < COLUMN; i++)
+                {
+                    if (((i % 100) == 0) && ((j % 50) == 0))
+                    {
+                        //bitmap1.SetPixel(i, j, Color.Red);
+                        brightness2[j, i] = 255;
+                    }
+                    bitmap1.SetPixel(i, j, Color.FromArgb(255, (byte)(brightness2[j, i]), (byte)(brightness2[j, i]), (byte)(brightness2[j, i])));
+                }
+            }
+
+            /*
+            Graphics g = Graphics.FromImage(bitmap1);
+            Pen p = new Pen(Color.Red, 5);
+            Point point1a = new Point(0, 360);
+            Point point2a = new Point(720, 360);
+            g.DrawLine(p, point1a, point2a);
+
+            point1a = new Point(360, 0);
+            point2a = new Point(360, 720);
+            g.DrawLine(p, point1a, point2a);
+            */
+
+            pictureBox1.Image = bitmap1;
+            //pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+        }
+
+        private void bt_2d_array0_Click(object sender, EventArgs e)
+        {
+            //z=cos(x)+cos(y)
+            draw_contour(cx, cy);
+            timer2.Enabled = true;
+        }
+
+        void fillup_data1(int[,] gray)
+        {
+            /*
+            int i;
+            int j;
+
+            int ROW = gray.GetUpperBound(0) + 1;//獲取指定維度的上限，在 上一個1就是列數
+            int COL = gray.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
+            int length = gray.Length;//獲取整個二維陣列的長度，即所有元 的個數
+            richTextBox1.Text += "ROW = " + ROW.ToString() + "\n";
+            richTextBox1.Text += "COL = " + COL.ToString() + "\n";
+            richTextBox1.Text += "length = " + length.ToString() + "\n";
+
+            richTextBox1.Text += "assign value\n";
+
+            for (j = 0; j < ROW; j++)
+            {
+                for (i = 0; i < COL; i++)
+                {
+                    gray[j, i] = i * 10 + j;
+                }
+            }
+
+            return;
+            */
+
+            gray[0, 0] = 8;
+            gray[1, 0] = 7;
+            gray[2, 0] = 8;
+            gray[3, 0] = 10;
+            gray[4, 0] = 27;
+            gray[5, 0] = 85;
+            gray[6, 0] = 126;
+            gray[7, 0] = 134;
+            gray[8, 0] = 138;
+            gray[9, 0] = 140;
+            gray[10, 0] = 142;
+            gray[11, 0] = 143;
+            gray[12, 0] = 144;
+            gray[13, 0] = 144;
+            gray[14, 0] = 146;
+            gray[15, 0] = 146;
+            gray[16, 0] = 146;
+            gray[17, 0] = 146;
+            gray[18, 0] = 145;
+            gray[19, 0] = 144;
+            gray[20, 0] = 141;
+            gray[21, 0] = 140;
+            gray[22, 0] = 138;
+            gray[23, 0] = 135;
+            gray[24, 0] = 130;
+            gray[25, 0] = 98;
+            gray[26, 0] = 28;
+            gray[27, 0] = 9;
+            gray[28, 0] = 7;
+            gray[29, 0] = 8;
+            gray[30, 0] = 9;
+            gray[0, 1] = 7;
+            gray[1, 1] = 8;
+            gray[2, 1] = 11;
+            gray[3, 1] = 36;
+            gray[4, 1] = 105;
+            gray[5, 1] = 130;
+            gray[6, 1] = 135;
+            gray[7, 1] = 139;
+            gray[8, 1] = 142;
+            gray[9, 1] = 144;
+            gray[10, 1] = 146;
+            gray[11, 1] = 147;
+            gray[12, 1] = 149;
+            gray[13, 1] = 150;
+            gray[14, 1] = 151;
+            gray[15, 1] = 151;
+            gray[16, 1] = 151;
+            gray[17, 1] = 150;
+            gray[18, 1] = 149;
+            gray[19, 1] = 148;
+            gray[20, 1] = 146;
+            gray[21, 1] = 144;
+            gray[22, 1] = 142;
+            gray[23, 1] = 139;
+            gray[24, 1] = 136;
+            gray[25, 1] = 131;
+            gray[26, 1] = 96;
+            gray[27, 1] = 25;
+            gray[28, 1] = 9;
+            gray[29, 1] = 7;
+            gray[30, 1] = 8;
+            gray[0, 2] = 7;
+            gray[1, 2] = 9;
+            gray[2, 2] = 31;
+            gray[3, 2] = 107;
+            gray[4, 2] = 130;
+            gray[5, 2] = 135;
+            gray[6, 2] = 139;
+            gray[7, 2] = 143;
+            gray[8, 2] = 145;
+            gray[9, 2] = 148;
+            gray[10, 2] = 150;
+            gray[11, 2] = 151;
+            gray[12, 2] = 153;
+            gray[13, 2] = 154;
+            gray[14, 2] = 155;
+            gray[15, 2] = 155;
+            gray[16, 2] = 155;
+            gray[17, 2] = 154;
+            gray[18, 2] = 154;
+            gray[19, 2] = 152;
+            gray[20, 2] = 150;
+            gray[21, 2] = 149;
+            gray[22, 2] = 147;
+            gray[23, 2] = 144;
+            gray[24, 2] = 140;
+            gray[25, 2] = 136;
+            gray[26, 2] = 130;
+            gray[27, 2] = 92;
+            gray[28, 2] = 26;
+            gray[29, 2] = 9;
+            gray[30, 2] = 7;
+            gray[0, 3] = 8;
+            gray[1, 3] = 18;
+            gray[2, 3] = 91;
+            gray[3, 3] = 127;
+            gray[4, 3] = 134;
+            gray[5, 3] = 139;
+            gray[6, 3] = 142;
+            gray[7, 3] = 145;
+            gray[8, 3] = 148;
+            gray[9, 3] = 151;
+            gray[10, 3] = 153;
+            gray[11, 3] = 154;
+            gray[12, 3] = 156;
+            gray[13, 3] = 157;
+            gray[14, 3] = 158;
+            gray[15, 3] = 157;
+            gray[16, 3] = 158;
+            gray[17, 3] = 157;
+            gray[18, 3] = 157;
+            gray[19, 3] = 156;
+            gray[20, 3] = 154;
+            gray[21, 3] = 152;
+            gray[22, 3] = 150;
+            gray[23, 3] = 147;
+            gray[24, 3] = 143;
+            gray[25, 3] = 139;
+            gray[26, 3] = 134;
+            gray[27, 3] = 128;
+            gray[28, 3] = 97;
+            gray[29, 3] = 22;
+            gray[30, 3] = 7;
+            gray[0, 4] = 11;
+            gray[1, 4] = 59;
+            gray[2, 4] = 122;
+            gray[3, 4] = 131;
+            gray[4, 4] = 136;
+            gray[5, 4] = 141;
+            gray[6, 4] = 145;
+            gray[7, 4] = 148;
+            gray[8, 4] = 151;
+            gray[9, 4] = 153;
+            gray[10, 4] = 155;
+            gray[11, 4] = 156;
+            gray[12, 4] = 158;
+            gray[13, 4] = 159;
+            gray[14, 4] = 159;
+            gray[15, 4] = 159;
+            gray[16, 4] = 159;
+            gray[17, 4] = 159;
+            gray[18, 4] = 159;
+            gray[19, 4] = 158;
+            gray[20, 4] = 157;
+            gray[21, 4] = 155;
+            gray[22, 4] = 152;
+            gray[23, 4] = 149;
+            gray[24, 4] = 146;
+            gray[25, 4] = 142;
+            gray[26, 4] = 138;
+            gray[27, 4] = 132;
+            gray[28, 4] = 125;
+            gray[29, 4] = 66;
+            gray[30, 4] = 10;
+            gray[0, 5] = 26;
+            gray[1, 5] = 105;
+            gray[2, 5] = 126;
+            gray[3, 5] = 133;
+            gray[4, 5] = 138;
+            gray[5, 5] = 143;
+            gray[6, 5] = 146;
+            gray[7, 5] = 150;
+            gray[8, 5] = 152;
+            gray[9, 5] = 155;
+            gray[10, 5] = 156;
+            gray[11, 5] = 158;
+            gray[12, 5] = 159;
+            gray[13, 5] = 160;
+            gray[14, 5] = 161;
+            gray[15, 5] = 161;
+            gray[16, 5] = 161;
+            gray[17, 5] = 161;
+            gray[18, 5] = 160;
+            gray[19, 5] = 160;
+            gray[20, 5] = 158;
+            gray[21, 5] = 156;
+            gray[22, 5] = 154;
+            gray[23, 5] = 152;
+            gray[24, 5] = 148;
+            gray[25, 5] = 143;
+            gray[26, 5] = 139;
+            gray[27, 5] = 133;
+            gray[28, 5] = 127;
+            gray[29, 5] = 107;
+            gray[30, 5] = 22;
+            gray[0, 6] = 62;
+            gray[1, 6] = 119;
+            gray[2, 6] = 127;
+            gray[3, 6] = 134;
+            gray[4, 6] = 139;
+            gray[5, 6] = 144;
+            gray[6, 6] = 147;
+            gray[7, 6] = 151;
+            gray[8, 6] = 154;
+            gray[9, 6] = 156;
+            gray[10, 6] = 157;
+            gray[11, 6] = 159;
+            gray[12, 6] = 160;
+            gray[13, 6] = 161;
+            gray[14, 6] = 162;
+            gray[15, 6] = 162;
+            gray[16, 6] = 162;
+            gray[17, 6] = 162;
+            gray[18, 6] = 162;
+            gray[19, 6] = 161;
+            gray[20, 6] = 159;
+            gray[21, 6] = 157;
+            gray[22, 6] = 156;
+            gray[23, 6] = 153;
+            gray[24, 6] = 149;
+            gray[25, 6] = 145;
+            gray[26, 6] = 141;
+            gray[27, 6] = 135;
+            gray[28, 6] = 129;
+            gray[29, 6] = 122;
+            gray[30, 6] = 51;
+            gray[0, 7] = 94;
+            gray[1, 7] = 120;
+            gray[2, 7] = 128;
+            gray[3, 7] = 135;
+            gray[4, 7] = 140;
+            gray[5, 7] = 145;
+            gray[6, 7] = 148;
+            gray[7, 7] = 152;
+            gray[8, 7] = 154;
+            gray[9, 7] = 156;
+            gray[10, 7] = 158;
+            gray[11, 7] = 159;
+            gray[12, 7] = 161;
+            gray[13, 7] = 162;
+            gray[14, 7] = 164;
+            gray[15, 7] = 166;
+            gray[16, 7] = 166;
+            gray[17, 7] = 165;
+            gray[18, 7] = 164;
+            gray[19, 7] = 162;
+            gray[20, 7] = 161;
+            gray[21, 7] = 159;
+            gray[22, 7] = 155;
+            gray[23, 7] = 153;
+            gray[24, 7] = 149;
+            gray[25, 7] = 147;
+            gray[26, 7] = 141;
+            gray[27, 7] = 135;
+            gray[28, 7] = 130;
+            gray[29, 7] = 123;
+            gray[30, 7] = 80;
+            gray[0, 8] = 108;
+            gray[1, 8] = 121;
+            gray[2, 8] = 129;
+            gray[3, 8] = 136;
+            gray[4, 8] = 141;
+            gray[5, 8] = 146;
+            gray[6, 8] = 149;
+            gray[7, 8] = 153;
+            gray[8, 8] = 155;
+            gray[9, 8] = 156;
+            gray[10, 8] = 158;
+            gray[11, 8] = 160;
+            gray[12, 8] = 162;
+            gray[13, 8] = 165;
+            gray[14, 8] = 168;
+            gray[15, 8] = 169;
+            gray[16, 8] = 168;
+            gray[17, 8] = 168;
+            gray[18, 8] = 167;
+            gray[19, 8] = 164;
+            gray[20, 8] = 161;
+            gray[21, 8] = 160;
+            gray[22, 8] = 157;
+            gray[23, 8] = 153;
+            gray[24, 8] = 149;
+            gray[25, 8] = 145;
+            gray[26, 8] = 140;
+            gray[27, 8] = 135;
+            gray[28, 8] = 129;
+            gray[29, 8] = 124;
+            gray[30, 8] = 100;
+            gray[0, 9] = 111;
+            gray[1, 9] = 121;
+            gray[2, 9] = 130;
+            gray[3, 9] = 136;
+            gray[4, 9] = 142;
+            gray[5, 9] = 146;
+            gray[6, 9] = 150;
+            gray[7, 9] = 153;
+            gray[8, 9] = 155;
+            gray[9, 9] = 157;
+            gray[10, 9] = 158;
+            gray[11, 9] = 160;
+            gray[12, 9] = 163;
+            gray[13, 9] = 168;
+            gray[14, 9] = 169;
+            gray[15, 9] = 171;
+            gray[16, 9] = 170;
+            gray[17, 9] = 169;
+            gray[18, 9] = 168;
+            gray[19, 9] = 166;
+            gray[20, 9] = 162;
+            gray[21, 9] = 160;
+            gray[22, 9] = 158;
+            gray[23, 9] = 154;
+            gray[24, 9] = 150;
+            gray[25, 9] = 147;
+            gray[26, 9] = 143;
+            gray[27, 9] = 137;
+            gray[28, 9] = 132;
+            gray[29, 9] = 126;
+            gray[30, 9] = 114;
+            gray[0, 10] = 112;
+            gray[1, 10] = 121;
+            gray[2, 10] = 129;
+            gray[3, 10] = 136;
+            gray[4, 10] = 142;
+            gray[5, 10] = 146;
+            gray[6, 10] = 150;
+            gray[7, 10] = 152;
+            gray[8, 10] = 155;
+            gray[9, 10] = 157;
+            gray[10, 10] = 158;
+            gray[11, 10] = 160;
+            gray[12, 10] = 164;
+            gray[13, 10] = 168;
+            gray[14, 10] = 171;
+            gray[15, 10] = 172;
+            gray[16, 10] = 172;
+            gray[17, 10] = 169;
+            gray[18, 10] = 167;
+            gray[19, 10] = 166;
+            gray[20, 10] = 163;
+            gray[21, 10] = 160;
+            gray[22, 10] = 158;
+            gray[23, 10] = 154;
+            gray[24, 10] = 152;
+            gray[25, 10] = 148;
+            gray[26, 10] = 143;
+            gray[27, 10] = 139;
+            gray[28, 10] = 133;
+            gray[29, 10] = 126;
+            gray[30, 10] = 118;
+            gray[0, 11] = 111;
+            gray[1, 11] = 121;
+            gray[2, 11] = 129;
+            gray[3, 11] = 135;
+            gray[4, 11] = 141;
+            gray[5, 11] = 145;
+            gray[6, 11] = 149;
+            gray[7, 11] = 151;
+            gray[8, 11] = 154;
+            gray[9, 11] = 156;
+            gray[10, 11] = 158;
+            gray[11, 11] = 159;
+            gray[12, 11] = 164;
+            gray[13, 11] = 168;
+            gray[14, 11] = 170;
+            gray[15, 11] = 172;
+            gray[16, 11] = 171;
+            gray[17, 11] = 169;
+            gray[18, 11] = 167;
+            gray[19, 11] = 166;
+            gray[20, 11] = 162;
+            gray[21, 11] = 160;
+            gray[22, 11] = 158;
+            gray[23, 11] = 155;
+            gray[24, 11] = 152;
+            gray[25, 11] = 148;
+            gray[26, 11] = 144;
+            gray[27, 11] = 138;
+            gray[28, 11] = 132;
+            gray[29, 11] = 126;
+            gray[30, 11] = 118;
+            gray[0, 12] = 111;
+            gray[1, 12] = 120;
+            gray[2, 12] = 128;
+            gray[3, 12] = 135;
+            gray[4, 12] = 140;
+            gray[5, 12] = 145;
+            gray[6, 12] = 148;
+            gray[7, 12] = 150;
+            gray[8, 12] = 153;
+            gray[9, 12] = 155;
+            gray[10, 12] = 157;
+            gray[11, 12] = 158;
+            gray[12, 12] = 162;
+            gray[13, 12] = 166;
+            gray[14, 12] = 168;
+            gray[15, 12] = 170;
+            gray[16, 12] = 170;
+            gray[17, 12] = 167;
+            gray[18, 12] = 166;
+            gray[19, 12] = 165;
+            gray[20, 12] = 161;
+            gray[21, 12] = 159;
+            gray[22, 12] = 157;
+            gray[23, 12] = 155;
+            gray[24, 12] = 151;
+            gray[25, 12] = 148;
+            gray[26, 12] = 144;
+            gray[27, 12] = 138;
+            gray[28, 12] = 131;
+            gray[29, 12] = 124;
+            gray[30, 12] = 117;
+            gray[0, 13] = 110;
+            gray[1, 13] = 120;
+            gray[2, 13] = 127;
+            gray[3, 13] = 134;
+            gray[4, 13] = 139;
+            gray[5, 13] = 144;
+            gray[6, 13] = 147;
+            gray[7, 13] = 150;
+            gray[8, 13] = 152;
+            gray[9, 13] = 155;
+            gray[10, 13] = 156;
+            gray[11, 13] = 157;
+            gray[12, 13] = 158;
+            gray[13, 13] = 163;
+            gray[14, 13] = 165;
+            gray[15, 13] = 166;
+            gray[16, 13] = 166;
+            gray[17, 13] = 166;
+            gray[18, 13] = 165;
+            gray[19, 13] = 162;
+            gray[20, 13] = 159;
+            gray[21, 13] = 158;
+            gray[22, 13] = 156;
+            gray[23, 13] = 151;
+            gray[24, 13] = 148;
+            gray[25, 13] = 145;
+            gray[26, 13] = 142;
+            gray[27, 13] = 138;
+            gray[28, 13] = 131;
+            gray[29, 13] = 124;
+            gray[30, 13] = 116;
+            gray[0, 14] = 110;
+            gray[1, 14] = 119;
+            gray[2, 14] = 127;
+            gray[3, 14] = 133;
+            gray[4, 14] = 139;
+            gray[5, 14] = 143;
+            gray[6, 14] = 147;
+            gray[7, 14] = 149;
+            gray[8, 14] = 151;
+            gray[9, 14] = 153;
+            gray[10, 14] = 154;
+            gray[11, 14] = 155;
+            gray[12, 14] = 156;
+            gray[13, 14] = 159;
+            gray[14, 14] = 162;
+            gray[15, 14] = 163;
+            gray[16, 14] = 164;
+            gray[17, 14] = 163;
+            gray[18, 14] = 161;
+            gray[19, 14] = 159;
+            gray[20, 14] = 157;
+            gray[21, 14] = 156;
+            gray[22, 14] = 153;
+            gray[23, 14] = 150;
+            gray[24, 14] = 147;
+            gray[25, 14] = 144;
+            gray[26, 14] = 141;
+            gray[27, 14] = 136;
+            gray[28, 14] = 130;
+            gray[29, 14] = 123;
+            gray[30, 14] = 115;
+            gray[0, 15] = 109;
+            gray[1, 15] = 118;
+            gray[2, 15] = 125;
+            gray[3, 15] = 132;
+            gray[4, 15] = 138;
+            gray[5, 15] = 142;
+            gray[6, 15] = 145;
+            gray[7, 15] = 148;
+            gray[8, 15] = 150;
+            gray[9, 15] = 152;
+            gray[10, 15] = 153;
+            gray[11, 15] = 154;
+            gray[12, 15] = 155;
+            gray[13, 15] = 156;
+            gray[14, 15] = 157;
+            gray[15, 15] = 158;
+            gray[16, 15] = 158;
+            gray[17, 15] = 158;
+            gray[18, 15] = 158;
+            gray[19, 15] = 157;
+            gray[20, 15] = 156;
+            gray[21, 15] = 153;
+            gray[22, 15] = 151;
+            gray[23, 15] = 149;
+            gray[24, 15] = 146;
+            gray[25, 15] = 143;
+            gray[26, 15] = 139;
+            gray[27, 15] = 134;
+            gray[28, 15] = 129;
+            gray[29, 15] = 122;
+            gray[30, 15] = 113;
+            gray[0, 16] = 107;
+            gray[1, 16] = 116;
+            gray[2, 16] = 124;
+            gray[3, 16] = 131;
+            gray[4, 16] = 136;
+            gray[5, 16] = 140;
+            gray[6, 16] = 144;
+            gray[7, 16] = 146;
+            gray[8, 16] = 148;
+            gray[9, 16] = 150;
+            gray[10, 16] = 152;
+            gray[11, 16] = 153;
+            gray[12, 16] = 154;
+            gray[13, 16] = 154;
+            gray[14, 16] = 154;
+            gray[15, 16] = 155;
+            gray[16, 16] = 156;
+            gray[17, 16] = 156;
+            gray[18, 16] = 156;
+            gray[19, 16] = 155;
+            gray[20, 16] = 154;
+            gray[21, 16] = 152;
+            gray[22, 16] = 149;
+            gray[23, 16] = 148;
+            gray[24, 16] = 145;
+            gray[25, 16] = 141;
+            gray[26, 16] = 138;
+            gray[27, 16] = 133;
+            gray[28, 16] = 127;
+            gray[29, 16] = 119;
+            gray[30, 16] = 106;
+            gray[0, 17] = 104;
+            gray[1, 17] = 114;
+            gray[2, 17] = 122;
+            gray[3, 17] = 128;
+            gray[4, 17] = 134;
+            gray[5, 17] = 138;
+            gray[6, 17] = 142;
+            gray[7, 17] = 144;
+            gray[8, 17] = 147;
+            gray[9, 17] = 148;
+            gray[10, 17] = 150;
+            gray[11, 17] = 151;
+            gray[12, 17] = 152;
+            gray[13, 17] = 153;
+            gray[14, 17] = 153;
+            gray[15, 17] = 153;
+            gray[16, 17] = 153;
+            gray[17, 17] = 153;
+            gray[18, 17] = 153;
+            gray[19, 17] = 152;
+            gray[20, 17] = 151;
+            gray[21, 17] = 150;
+            gray[22, 17] = 148;
+            gray[23, 17] = 146;
+            gray[24, 17] = 143;
+            gray[25, 17] = 140;
+            gray[26, 17] = 136;
+            gray[27, 17] = 131;
+            gray[28, 17] = 124;
+            gray[29, 17] = 116;
+            gray[30, 17] = 95;
+            gray[0, 18] = 97;
+            gray[1, 18] = 111;
+            gray[2, 18] = 119;
+            gray[3, 18] = 126;
+            gray[4, 18] = 131;
+            gray[5, 18] = 136;
+            gray[6, 18] = 139;
+            gray[7, 18] = 142;
+            gray[8, 18] = 144;
+            gray[9, 18] = 146;
+            gray[10, 18] = 148;
+            gray[11, 18] = 148;
+            gray[12, 18] = 150;
+            gray[13, 18] = 150;
+            gray[14, 18] = 151;
+            gray[15, 18] = 151;
+            gray[16, 18] = 151;
+            gray[17, 18] = 151;
+            gray[18, 18] = 151;
+            gray[19, 18] = 150;
+            gray[20, 18] = 149;
+            gray[21, 18] = 147;
+            gray[22, 18] = 146;
+            gray[23, 18] = 143;
+            gray[24, 18] = 140;
+            gray[25, 18] = 136;
+            gray[26, 18] = 133;
+            gray[27, 18] = 129;
+            gray[28, 18] = 122;
+            gray[29, 18] = 114;
+            gray[30, 18] = 77;
+            gray[0, 19] = 74;
+            gray[1, 19] = 107;
+            gray[2, 19] = 115;
+            gray[3, 19] = 122;
+            gray[4, 19] = 128;
+            gray[5, 19] = 132;
+            gray[6, 19] = 136;
+            gray[7, 19] = 140;
+            gray[8, 19] = 141;
+            gray[9, 19] = 143;
+            gray[10, 19] = 144;
+            gray[11, 19] = 145;
+            gray[12, 19] = 147;
+            gray[13, 19] = 148;
+            gray[14, 19] = 148;
+            gray[15, 19] = 148;
+            gray[16, 19] = 149;
+            gray[17, 19] = 148;
+            gray[18, 19] = 148;
+            gray[19, 19] = 147;
+            gray[20, 19] = 146;
+            gray[21, 19] = 145;
+            gray[22, 19] = 143;
+            gray[23, 19] = 141;
+            gray[24, 19] = 137;
+            gray[25, 19] = 134;
+            gray[26, 19] = 130;
+            gray[27, 19] = 125;
+            gray[28, 19] = 119;
+            gray[29, 19] = 110;
+            gray[30, 19] = 43;
+            gray[0, 20] = 34;
+            gray[1, 20] = 99;
+            gray[2, 20] = 111;
+            gray[3, 20] = 118;
+            gray[4, 20] = 123;
+            gray[5, 20] = 129;
+            gray[6, 20] = 133;
+            gray[7, 20] = 136;
+            gray[8, 20] = 139;
+            gray[9, 20] = 139;
+            gray[10, 20] = 140;
+            gray[11, 20] = 141;
+            gray[12, 20] = 143;
+            gray[13, 20] = 145;
+            gray[14, 20] = 145;
+            gray[15, 20] = 146;
+            gray[16, 20] = 145;
+            gray[17, 20] = 145;
+            gray[18, 20] = 145;
+            gray[19, 20] = 144;
+            gray[20, 20] = 143;
+            gray[21, 20] = 141;
+            gray[22, 20] = 140;
+            gray[23, 20] = 137;
+            gray[24, 20] = 134;
+            gray[25, 20] = 131;
+            gray[26, 20] = 127;
+            gray[27, 20] = 121;
+            gray[28, 20] = 115;
+            gray[29, 20] = 89;
+            gray[30, 20] = 15;
+            gray[0, 21] = 11;
+            gray[1, 21] = 69;
+            gray[2, 21] = 104;
+            gray[3, 21] = 112;
+            gray[4, 21] = 119;
+            gray[5, 21] = 124;
+            gray[6, 21] = 129;
+            gray[7, 21] = 132;
+            gray[8, 21] = 134;
+            gray[9, 21] = 135;
+            gray[10, 21] = 136;
+            gray[11, 21] = 137;
+            gray[12, 21] = 139;
+            gray[13, 21] = 140;
+            gray[14, 21] = 141;
+            gray[15, 21] = 142;
+            gray[16, 21] = 142;
+            gray[17, 21] = 142;
+            gray[18, 21] = 142;
+            gray[19, 21] = 140;
+            gray[20, 21] = 139;
+            gray[21, 21] = 138;
+            gray[22, 21] = 136;
+            gray[23, 21] = 134;
+            gray[24, 21] = 131;
+            gray[25, 21] = 127;
+            gray[26, 21] = 122;
+            gray[27, 21] = 116;
+            gray[28, 21] = 109;
+            gray[29, 21] = 42;
+            gray[30, 21] = 8;
+            gray[0, 22] = 6;
+            gray[1, 22] = 22;
+            gray[2, 22] = 87;
+            gray[3, 22] = 106;
+            gray[4, 22] = 113;
+            gray[5, 22] = 118;
+            gray[6, 22] = 123;
+            gray[7, 22] = 127;
+            gray[8, 22] = 130;
+            gray[9, 22] = 130;
+            gray[10, 22] = 132;
+            gray[11, 22] = 133;
+            gray[12, 22] = 135;
+            gray[13, 22] = 136;
+            gray[14, 22] = 137;
+            gray[15, 22] = 137;
+            gray[16, 22] = 137;
+            gray[17, 22] = 138;
+            gray[18, 22] = 137;
+            gray[19, 22] = 137;
+            gray[20, 22] = 135;
+            gray[21, 22] = 134;
+            gray[22, 22] = 131;
+            gray[23, 22] = 129;
+            gray[24, 22] = 126;
+            gray[25, 22] = 122;
+            gray[26, 22] = 117;
+            gray[27, 22] = 111;
+            gray[28, 22] = 74;
+            gray[29, 22] = 12;
+            gray[30, 22] = 5;
+        }
+
+
+        private void bt_2d_array1_Click(object sender, EventArgs e)
+        {
+            //畫二維矩陣 + 輪廓
+            g.Clear(Color.White);
+
+            Pen p = new Pen(Color.Red, 10);  // 設定畫筆為紅色、粗細為 10 點。
+            SolidBrush sb = new SolidBrush(Color.Blue);
+
+            int[,] gray = new int[31, 23];
+
+            fillup_data1(gray);
+
+            int dd = 20;
+            int xx;
+            int yy;
+            int width = dd * 31;
+            int height = dd * 23;
+
+            byte aa = 255;
+            byte rr = 0;
+            byte gg = 0;
+            byte bb = 0;
+
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //Color p = Color.FromName("SlateBlue");
+                    /*
+                    Color p ;
+                    p.A = (byte)(xx % 255);
+                    p.R = (byte)(xx % 127 + 127);
+                    p.G = (byte)(xx % 127);
+                    p.B = (byte)(xx % 63);
+                    */
+
+                    //獲取像素的ＲＧＢ顏色值
+                    //srcColor = srcBitmap.GetPixel(x, y);
+                    //byte temp = (byte)(srcColor.R * .299 + srcColor.G * .587 + srcColor.B * .114);
+
+                    //byte temp = (byte)((byte)(xx % 255) + (byte)(xx % 127 + 127) + (byte)(xx % 63));
+
+                    //設置像素的ＲＧＢ顏色值
+                    rr = (byte)gray[xx / dd, yy / dd];
+                    gg = (byte)gray[xx / dd, yy / dd];
+                    bb = (byte)gray[xx / dd, yy / dd];
+                    bitmap1.SetPixel(xx, yy, Color.FromArgb(aa, rr, gg, bb));
+                }
+            }
+
+            //以上為 畫二維矩陣
+            //以下為 畫輪廓
+
+            //二值化 把邊框畫出來 ST
+
+            int row = gray.Rank;//獲取行數
+            int col1 = gray.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
+            int col2 = gray.GetUpperBound(0) + 1;//獲取指定維度的上限，在 上一個1就是列數
+            int num1 = gray.Length;//獲取整個二維陣列的長度，即所有元 的個數
+
+            richTextBox1.Text += "row = " + row.ToString() + "\n";
+            richTextBox1.Text += "col1 = " + col1.ToString() + "\n";
+            richTextBox1.Text += "col2 = " + col2.ToString() + "\n";
+            richTextBox1.Text += "num1 = " + num1.ToString() + "\n";
+
+            int total_rows = gray.GetUpperBound(0) + 1;
+            richTextBox1.Text += "total_rows = " + total_rows.ToString() + "\n";
+
+            int w = gray.GetUpperBound(0) + 1;
+            int h = gray.GetLength(1);
+            int i;
+            int j;
+
+            //二值化
+            for (j = 0; j < h; j++)
+            {
+                for (i = 0; i < w; i++)
+                {
+                    //richTextBox1.Text += gray[i, j] + "\t";
+
+
+                    if (gray[i, j] > 150)
+                        gray[i, j] = 220;
+                    else
+                        gray[i, j] = 30;
+                }
+                //richTextBox1.Text += "\n";
+            }
+            //richTextBox1.Text += "\n";
+
+            //中間挖空
+            int[,] gray_new2 = new int[w, h];
+            for (j = 0; j < h; j++)
+            {
+                for (i = 0; i < w; i++)
+                {
+                    gray_new2[i, j] = gray[i, j];
+
+                    //不在邊界的點
+                    if ((i > 0) && (i < (w - 1)) && (j > 0) && (j < (h - 1)))
+                    {
+                        if (gray[i, j] < 200)
+                            continue;
+
+                        //四鄰皆有者
+                        if ((gray[i + 1, j] >= 200) && (gray[i - 1, j] >= 200) && (gray[i, j + 1] >= 200) && (gray[i, j - 1] >= 200))
+                        {
+                            gray_new2[i, j] = 0;
+                        }
+                    }
+                }
+            }
+
+            find_connected_points(gray_new2);
+
+            richTextBox1.Text += "point array:\n";
+            richTextBox1.Text += "len = " + Points.Count.ToString() + "\n";
+
+            p = new Pen(Color.Red, 10);     // 設定畫筆為紅色、粗細為 10 點。
+            sb = new SolidBrush(Color.Blue);
+
+            int len = Points.Count;
+            int ratio = 20;
+            for (i = 0; i < len - 1; i++)
+            {
+                g.DrawLine(new Pen(Color.Red, 5), Points[i].X * ratio, Points[i].Y * ratio, Points[i + 1].X * ratio, Points[i + 1].Y * ratio);
+
+                //richTextBox1.Text += (Points[i].X * ratio).ToString() + " " + (Points[i].Y * ratio).ToString() + " " + (Points[i + 1].X * ratio).ToString() + " " + (Points[i + 1].Y * ratio).ToString() + "\n";
+
+            }
+            //二值化 把邊框畫出來 SP
+
+            pictureBox1.Image = bitmap1;
+        }
+
+        void find_connected_points(int[,] array)
+        {
+            Points.Clear();
+
+            int row = array.Rank;//獲取行數
+            int col1 = array.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
+            int col2 = array.GetUpperBound(0) + 1;//獲取指定維度的上限，在 上一個1就是列數
+            int num1 = array.Length;//獲取整個二維陣列的長度，即所有元 的個數
+
+            richTextBox1.Text += "row = " + row.ToString() + "\n";
+            richTextBox1.Text += "col1 = " + col1.ToString() + "\n";
+            richTextBox1.Text += "col2 = " + col2.ToString() + "\n";
+            richTextBox1.Text += "num1 = " + num1.ToString() + "\n";
+
+            int total_rows = array.GetUpperBound(0) + 1;
+            richTextBox1.Text += "total_rows = " + total_rows.ToString() + "\n";
+
+            int w = array.GetUpperBound(0) + 1;
+            int h = array.GetLength(1);
+            int i;
+            int j;
+            for (j = 0; j < h; j++)
+            {
+                for (i = 0; i < w; i++)
+                {
+                    richTextBox1.Text += array[i, j] + "\t";
+
+                }
+                richTextBox1.Text += "\n";
+            }
+            richTextBox1.Text += "\n";
+
+            int i_st = 0;
+            int j_st = 0;
+            int total_points = 0;
+            for (j = 0; j < h; j++)
+            {
+                for (i = 0; i < w; i++)
+                {
+
+                    if (array[i, j] >= 200)
+                    {
+                        total_points++;
+                    }
+                }
+            }
+            richTextBox1.Text += "共找到 : " + total_points.ToString() + " 點\n";
+
+
+            bool flag_got_break = false;
+            for (j = 0; j < h; j++)
+            {
+                for (i = 0; i < w; i++)
+                {
+
+                    if (array[i, j] >= 200)
+                    {
+                        richTextBox1.Text += "找到 i = " + i.ToString() + ", j = " + j.ToString() + "\n";
+                        i_st = i;
+                        j_st = j;
+                        flag_got_break = true;
+                        break;
+                    }
+
+
+                }
+                if (flag_got_break == true)
+                    break;
+            }
+            richTextBox1.Text += "找到起始點 i_st = " + i_st.ToString() + ", j_st = " + j_st.ToString() + "\n";
+
+            int i_next = i_st;
+            int j_next = j_st;
+            Points.Add(new Point(i_next, j_next));
+
+            for (i = 0; i < total_points; i++)
+            {
+                i_st = i_next;
+                j_st = j_next;
+                FindNeighborPoint(array, i_st, j_st, out i_next, out j_next);
+                Points.Add(new Point(i_next, j_next));
+                richTextBox1.Text += "i_next = " + i_next.ToString() + "\t" + "j_next = " + j_next.ToString() + "\n";
+                array[i_next, j_next] = 0;
+            }
+        }
+
+        void FindNeighborPoint(int[,] array, int i_st, int j_st, out int i_next, out int j_next)
+        {
+            //int i;
+            int len = array.Length;
+            i_next = int.MaxValue;
+            j_next = int.MinValue;
+
+            int i = 0;
+            int j = 0;
+
+            //richTextBox1.Text += "1111 i_st = " + i_st.ToString() + ", j_st = " + j_st.ToString() + "\n";
+            //richTextBox1.Text += "2222 i = " + i.ToString() + ", j = " + j.ToString() + "\n";
+
+            int w = array.GetUpperBound(0) + 1;
+            int h = array.GetLength(1);
+
+
+            //richTextBox1.Text += "上";
+            i = i_st;
+            j = j_st - 1;
+
+            if ((i < 0) || (j < 0) || (i >= w) || (j >= h))
+            {
+
+            }
+            else if (array[i, j] >= 200)
+            {
+                richTextBox1.Text += "找到";
+                i_next = i;
+                j_next = j;
+                return;
+            }
+            //richTextBox1.Text += "\n";
+
+            //richTextBox1.Text += "右上";
+            i = i_st + 1;
+            j = j_st - 1;
+            if ((i < 0) || (j < 0) || (i >= w) || (j >= h))
+            {
+
+            }
+            else if (array[i, j] >= 200)
+            {
+                richTextBox1.Text += "找到\n";
+                i_next = i;
+                j_next = j;
+                return;
+
+            }
+            //richTextBox1.Text += "\n";
+
+            //richTextBox1.Text += "右";
+            i = i_st + 1;
+            j = j_st;
+            if ((i < 0) || (j < 0) || (i >= w) || (j >= h))
+            {
+
+            }
+            else if (array[i, j] >= 200)
+            {
+                richTextBox1.Text += "找到\n";
+                i_next = i;
+                j_next = j;
+                return;
+
+            }
+            //richTextBox1.Text += "\n";
+
+            //richTextBox1.Text += "右下";
+            i = i_st + 1;
+            j = j_st + 1;
+            if ((i < 0) || (j < 0) || (i >= w) || (j >= h))
+            {
+
+            }
+            else if (array[i, j] >= 200)
+            {
+                richTextBox1.Text += "找到\n";
+                i_next = i;
+                j_next = j;
+                return;
+
+            }
+            //richTextBox1.Text += "\n";
+
+            //richTextBox1.Text += "下";
+            i = i_st;
+            j = j_st + 1;
+            if ((i < 0) || (j < 0) || (i >= w) || (j >= h))
+            {
+
+            }
+            else if (array[i, j] >= 200)
+            {
+                richTextBox1.Text += "找到\n";
+                i_next = i;
+                j_next = j;
+                return;
+
+            }
+            //richTextBox1.Text += "\n";
+
+            //richTextBox1.Text += "左下";
+            i = i_st - 1;
+            j = j_st + 1;
+            if ((i < 0) || (j < 0) || (i >= w) || (j >= h))
+            {
+
+            }
+            else if (array[i, j] >= 200)
+            {
+                richTextBox1.Text += "找到\n";
+                i_next = i;
+                j_next = j;
+                return;
+
+            }
+            //richTextBox1.Text += "\n";
+
+            //richTextBox1.Text += "左";
+            i = i_st - 1;
+            j = j_st;
+            if ((i < 0) || (j < 0) || (i >= w) || (j >= h))
+            {
+
+            }
+            else if (array[i, j] >= 200)
+            {
+                richTextBox1.Text += "找到\n";
+                i_next = i;
+                j_next = j;
+                return;
+
+            }
+            //richTextBox1.Text += "\n";
+
+            //richTextBox1.Text += "左上";
+            i = i_st - 1;
+            j = j_st - 1;
+            if ((i < 0) || (j < 0) || (i >= w) || (j >= h))
+            {
+
+            }
+            else if (array[i, j] >= 200)
+            {
+                richTextBox1.Text += "找到\n";
+                i_next = i;
+                j_next = j;
+                return;
+
+            }
+            //richTextBox1.Text += "\n";
+
+        }
+
+        private void bt_2d_array2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_2d_array3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        int dd = 20;
+        int cx = 360;
+        int cy = 360;
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            cx += dd;
+            cy += dd;
+            if (cx > 721)
+                cx = dd;
+            if (cy > 721)
+                cy = dd;
+            draw_contour(cx, cy);
+        }
+
+
     }
 
     /// <summary>
@@ -6022,7 +7260,6 @@ namespace vcs_Draw_Example1
             bm.Save(target, ImageFormat.Gif);
             //回收資源
             bm.Dispose();
-            g.Dispose();
         }
     }
 
@@ -6109,7 +7346,6 @@ namespace vcs_Draw_Example1
 
             //資源回收
             bm.Dispose();
-            g.Dispose();
         }
     }
     public class ChartUtil
@@ -6854,3 +8090,24 @@ g.DrawImage(bitmap1, Cx, Cy, W / 2, -H / 2);
 g.DrawImage(bitmap1, Cx, Cy, -W / 2, -H / 2);
 */
 
+
+/*
+
+ddddd
+
+            //畫圖初始化   
+            //Bitmap bitmap1 = new Bitmap(500, 500);
+            //Graphics g = Graphics.FromImage(bitmap1);
+            //g.Clear(Color.White);
+
+//創建一個長度為400，寬帶為400的Bitmap實例
+//Bitmap bmp = new Bitmap(400, 300);
+//Graphics g;
+//g = Graphics.FromImage(bmp);
+
+ * 
+ * 
+ * 
+            g.Dispose();  // dispose後, 就不能再使用了
+
+*/

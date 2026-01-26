@@ -107,10 +107,17 @@
             this.bt_long1 = new System.Windows.Forms.Button();
             this.bt_long0 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.bt_2d_array3 = new System.Windows.Forms.Button();
+            this.bt_2d_array2 = new System.Windows.Forms.Button();
+            this.bt_2d_array1 = new System.Windows.Forms.Button();
+            this.bt_2d_array0 = new System.Windows.Forms.Button();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -658,7 +665,7 @@
             // cb_magnifying
             // 
             this.cb_magnifying.AutoSize = true;
-            this.cb_magnifying.Location = new System.Drawing.Point(373, 547);
+            this.cb_magnifying.Location = new System.Drawing.Point(1078, 300);
             this.cb_magnifying.Name = "cb_magnifying";
             this.cb_magnifying.Size = new System.Drawing.Size(60, 16);
             this.cb_magnifying.TabIndex = 52;
@@ -669,7 +676,7 @@
             // cb_snake
             // 
             this.cb_snake.AutoSize = true;
-            this.cb_snake.Location = new System.Drawing.Point(259, 547);
+            this.cb_snake.Location = new System.Drawing.Point(964, 300);
             this.cb_snake.Name = "cb_snake";
             this.cb_snake.Size = new System.Drawing.Size(48, 16);
             this.cb_snake.TabIndex = 49;
@@ -680,7 +687,7 @@
             // cb_manual
             // 
             this.cb_manual.AutoSize = true;
-            this.cb_manual.Location = new System.Drawing.Point(153, 547);
+            this.cb_manual.Location = new System.Drawing.Point(858, 300);
             this.cb_manual.Name = "cb_manual";
             this.cb_manual.Size = new System.Drawing.Size(58, 16);
             this.cb_manual.TabIndex = 44;
@@ -713,7 +720,7 @@
             // 
             this.groupBox2.Controls.Add(this.rb2);
             this.groupBox2.Controls.Add(this.rb1);
-            this.groupBox2.Location = new System.Drawing.Point(22, 523);
+            this.groupBox2.Location = new System.Drawing.Point(727, 276);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(71, 70);
             this.groupBox2.TabIndex = 78;
@@ -803,7 +810,7 @@
             this.groupBox1.Controls.Add(this.bt_long2);
             this.groupBox1.Controls.Add(this.bt_long1);
             this.groupBox1.Controls.Add(this.bt_long0);
-            this.groupBox1.Location = new System.Drawing.Point(12, 599);
+            this.groupBox1.Location = new System.Drawing.Point(12, 622);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(861, 125);
             this.groupBox1.TabIndex = 107;
@@ -949,11 +956,72 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.bt_2d_array3);
+            this.groupBox3.Controls.Add(this.bt_2d_array2);
+            this.groupBox3.Controls.Add(this.bt_2d_array1);
+            this.groupBox3.Controls.Add(this.bt_2d_array0);
+            this.groupBox3.Location = new System.Drawing.Point(12, 532);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(850, 79);
+            this.groupBox3.TabIndex = 109;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "二維陣列畫圖";
+            // 
+            // bt_2d_array3
+            // 
+            this.bt_2d_array3.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_2d_array3.Location = new System.Drawing.Point(433, 20);
+            this.bt_2d_array3.Name = "bt_2d_array3";
+            this.bt_2d_array3.Size = new System.Drawing.Size(135, 45);
+            this.bt_2d_array3.TabIndex = 50;
+            this.bt_2d_array3.UseVisualStyleBackColor = true;
+            this.bt_2d_array3.Click += new System.EventHandler(this.bt_2d_array3_Click);
+            // 
+            // bt_2d_array2
+            // 
+            this.bt_2d_array2.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_2d_array2.Location = new System.Drawing.Point(293, 21);
+            this.bt_2d_array2.Name = "bt_2d_array2";
+            this.bt_2d_array2.Size = new System.Drawing.Size(135, 45);
+            this.bt_2d_array2.TabIndex = 49;
+            this.bt_2d_array2.UseVisualStyleBackColor = true;
+            this.bt_2d_array2.Click += new System.EventHandler(this.bt_2d_array2_Click);
+            // 
+            // bt_2d_array1
+            // 
+            this.bt_2d_array1.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_2d_array1.Location = new System.Drawing.Point(152, 20);
+            this.bt_2d_array1.Name = "bt_2d_array1";
+            this.bt_2d_array1.Size = new System.Drawing.Size(135, 45);
+            this.bt_2d_array1.TabIndex = 48;
+            this.bt_2d_array1.Text = "畫二維矩陣 + 輪廓";
+            this.bt_2d_array1.UseVisualStyleBackColor = true;
+            this.bt_2d_array1.Click += new System.EventHandler(this.bt_2d_array1_Click);
+            // 
+            // bt_2d_array0
+            // 
+            this.bt_2d_array0.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_2d_array0.Location = new System.Drawing.Point(11, 21);
+            this.bt_2d_array0.Name = "bt_2d_array0";
+            this.bt_2d_array0.Size = new System.Drawing.Size(135, 45);
+            this.bt_2d_array0.TabIndex = 47;
+            this.bt_2d_array0.Text = "z=cos(x)+cos(y)";
+            this.bt_2d_array0.UseVisualStyleBackColor = true;
+            this.bt_2d_array0.Click += new System.EventHandler(this.bt_2d_array0_Click);
+            // 
+            // timer2
+            // 
+            this.timer2.Interval = 300;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 761);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.bt_reset);
             this.Controls.Add(this.bt_save);
@@ -1024,6 +1092,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1109,6 +1178,12 @@
         private System.Windows.Forms.Button bt_long8;
         private System.Windows.Forms.Button bt_long7;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button bt_2d_array3;
+        private System.Windows.Forms.Button bt_2d_array2;
+        private System.Windows.Forms.Button bt_2d_array1;
+        private System.Windows.Forms.Button bt_2d_array0;
+        private System.Windows.Forms.Timer timer2;
     }
 }
 

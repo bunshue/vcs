@@ -356,6 +356,7 @@ namespace vcs_Draw_Bitmap
 
         private void button9_Click(object sender, EventArgs e)
         {
+            return;
             int W = 760;
             int H = 384;
             Bitmap bitmap1 = new Bitmap(W, H, PixelFormat.Format32bppArgb);
@@ -368,7 +369,7 @@ namespace vcs_Draw_Bitmap
             richTextBox1.Text += bmp.Width.ToString() + " X " + bmp.Height.ToString() + "\n";
             g.DrawImage(bmp, 0, 0, W, H);
 
-            bitmap1.Save("aaaaab.png", ImageFormat.Png);
+            bitmap1.Save("step2_sc2.png", ImageFormat.Png);
 
             pictureBox1.Image = bitmap1;        
         }

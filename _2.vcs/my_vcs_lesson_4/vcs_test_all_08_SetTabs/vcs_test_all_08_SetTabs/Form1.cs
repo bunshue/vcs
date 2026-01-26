@@ -20,10 +20,12 @@ namespace vcs_test_all_08_SetTabs
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             // Set the ListBox tabs.
             SetListBoxTabs(listBox1, new int[] { 120, 170, 220 });
             SetListBoxTabs(listBox1, new int[] { 120, 170, 220 });
-            
+
             // Set the TextBox tabs.
             SetTextBoxTabs(textBox1, new int[] { 120, 170, 220 });
 
@@ -53,6 +55,36 @@ namespace vcs_test_all_08_SetTabs
 
             }
             */
+        }
+
+        void show_item_location()
+        {
+            int W = 600;
+            int H = 150;
+            int dd = 25;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = W + 10;
+            int dy = H + 10 + dd;
+
+            label0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            listBox1.Size = new Size(600, 150);
+            listBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + dd);
+
+            label1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            textBox1.Size = new Size(600, 150);
+            textBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1 + dd);
+
+            label2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            textBox2.Size = new Size(600, 150);
+            textBox2.Location = new Point(x_st + dx * 0, y_st + dy * 2 + dd);
+
+            label3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            richTextBox1.Size = new Size(600, 150);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 3 + dd);
+
+            this.Size = new Size(700, 790);
+            this.Text = "vcs_test_all_08_SetTabs";
         }
 
         // Add some data to all three controls.
@@ -113,6 +145,5 @@ namespace vcs_test_all_08_SetTabs
         {
             SendMessage(rtb.Handle, EM_SETTABSTOPS, tabs.Length, tabs);
         }
-
     }
 }

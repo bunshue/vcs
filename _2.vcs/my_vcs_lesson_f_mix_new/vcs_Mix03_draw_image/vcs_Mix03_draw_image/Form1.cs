@@ -19,6 +19,9 @@ namespace vcs_Mix03_draw_image
 {
     public partial class Form1 : Form
     {
+        Bitmap bitmap1;
+        Graphics g;
+
         public Form1()
         {
             InitializeComponent();
@@ -27,6 +30,9 @@ namespace vcs_Mix03_draw_image
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            bitmap1 = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
+            g = Graphics.FromImage(bitmap1);
 
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             pictureBox1.Image = Image.FromFile(filename);
@@ -74,12 +80,16 @@ namespace vcs_Mix03_draw_image
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+
             pictureBox1.Size = new Size(600, 600);
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+
             richTextBox1.Size = new Size(300, 640);
             richTextBox1.Location = new Point(x_st + dx * 6 - 40, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
             this.Size = new Size(1290, 710);
+            this.Text = "vcs_Mix03_draw_image";
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -92,11 +102,56 @@ namespace vcs_Mix03_draw_image
             richTextBox1.Text += ((Button)sender).Text + "\n";
         }
 
+        //測試矩陣旋轉 ST
+        PointF RotationMatrix(PointF pt)
+        {
+            double theta = Math.PI / 6;
+            float xx = (float)(Math.Cos(theta) * pt.X - Math.Sin(theta) * pt.Y);
+            float yy = (float)(Math.Sin(theta) * pt.X + Math.Cos(theta) * pt.Y);
+
+            return new PointF(xx, yy);
+        }
+
+        struct PointS
+        {
+            float X;
+            float Y;
+        }
+
         private void button0_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //測試矩陣旋轉
 
+            Graphics g = pictureBox1.CreateGraphics();				//實例化pictureBox1控件的Graphics類
+            g.Clear(Color.White);
+            Pen p = new Pen(Color.Red, 5);
+            Point point1a = new Point(100, 100);
+            Point point2a = new Point(500, 500);
+            g.DrawLine(p, point1a, point2a);
+
+            p = new Pen(Color.Green, 5);
+
+            point1a = new Point(100, 100);
+            PointF point1aa = RotationMatrix(point1a);
+            point2a = new Point(500, 500);
+            PointF point2aa = RotationMatrix(point2a);
+            g.DrawLine(p, point1aa, point2aa);
+            richTextBox1.Text += "point1aa=" + point1aa + "\n";
+            richTextBox1.Text += "point2aa=" + point2aa + "\n";
+
+            //PointS pts1 = new PointS(100, 100);
+
+            //pictureBox1.Image = bitmap1;
+
+            //Point一個點
+            Point point = new Point(10, 20);    //宣告一個Point變數
+            point.X = 30;   //改值
+            point.Y = 40;
+            point = new Point(35, 45);          //同時更改XY兩個整數屬性的值
         }
+
+        //測試矩陣旋轉 SP
 
         List<String> filenames = new List<String>();
         //多層 且指明副檔名

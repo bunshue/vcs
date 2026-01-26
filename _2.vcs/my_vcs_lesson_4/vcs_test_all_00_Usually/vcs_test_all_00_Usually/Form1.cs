@@ -549,7 +549,6 @@ namespace vcs_test_all_00_Usually
             pbox.Location = new Point(PBOX_DEFAULT_POSITION_X, PBOX_DEFAULT_POSITION_Y);
             pbox.BackColor = Color.White;
             //pbox.SizeMode = PictureBoxSizeMode.Zoom;
-            pbox.BringToFront();
 
             //讀取圖檔
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
@@ -560,6 +559,7 @@ namespace vcs_test_all_00_Usually
             pbox.MouseUp += new MouseEventHandler(pbox_MouseUp);        // 加入事件
 
             this.Controls.Add(pbox);	// 將控件加入表單
+            pbox.BringToFront();
             button10.Enabled = false;
         }
 

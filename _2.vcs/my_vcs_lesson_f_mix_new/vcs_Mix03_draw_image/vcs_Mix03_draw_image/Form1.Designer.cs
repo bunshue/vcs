@@ -82,6 +82,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(160, 60);
             this.button0.TabIndex = 105;
+            this.button0.Text = "測試矩陣旋轉";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -320,6 +321,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+
         }
 
         #endregion

@@ -11,7 +11,7 @@ using System.IO;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 
-//C#圖片加水印
+//圖片加水印
 
 namespace vcs_Draw_Watermark1
 {
@@ -52,14 +52,11 @@ namespace vcs_Draw_Watermark1
             pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
 
-            pictureBox2.Size = new Size(400, 120);
-            pictureBox2.Location = new Point(x_st + dx * 5, y_st + dy * 0);
-
-            richTextBox1.Size = new Size(400, 560);
-            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 2);
+            richTextBox1.Size = new Size(400, 660);
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1520, 900);
+            this.Size = new Size(1520, 720);
             this.Text = "vcs_Draw_Watermark1";
         }
 
@@ -74,9 +71,6 @@ namespace vcs_Draw_Watermark1
             string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Image image = Image.FromFile(filename1);
             pictureBox1.Image = image;
-
-            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\_material\ims-small-logo.png";
-            pictureBox2.Image = Image.FromFile(filename2);
         }
 
         private void bt_reset_Click(object sender, EventArgs e)
@@ -147,8 +141,7 @@ namespace vcs_Draw_Watermark1
             Graphics g = this.pictureBox1.CreateGraphics();
 
             string type = "Top";
-            int fontsize = 20;
-            string _watermarkText = "mouse";
+            string _watermarkText = "牡丹亭";
 
             //1、先畫矩形
             RectangleF drawRect;
@@ -167,13 +160,10 @@ namespace vcs_Draw_Watermark1
             }
 
             //2、在基於矩形畫水印文字
-            Font crFont = null;
-
+            Font crFont = new Font("微軟雅黑", 20, FontStyle.Bold);
+            SolidBrush semiTransBrush = new SolidBrush(color);  //添加水印
             StringFormat StrFormat = new StringFormat();
             StrFormat.Alignment = StringAlignment.Center;
-
-            crFont = new Font("微軟雅黑", fontsize, FontStyle.Bold);
-            SolidBrush semiTransBrush = new SolidBrush(color);  //添加水印
             g.DrawString(_watermarkText, crFont, semiTransBrush, drawRect, StrFormat);
 
             semiTransBrush.Dispose();
@@ -181,8 +171,13 @@ namespace vcs_Draw_Watermark1
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //要加上浮水印的圖片
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\_material\ims-small-logo.png";
+            Image image_watermark = Image.FromFile(filename2);
+
             Bitmap bitmap1 = new Bitmap(pictureBox1.Image);
-            Bitmap watermark_bm = new Bitmap(pictureBox2.Image);
+
+            Bitmap watermark_bm = new Bitmap(image_watermark);
 
             int x = (bitmap1.Width - watermark_bm.Width) / 2;
             int y = (bitmap1.Height - watermark_bm.Height) / 2;
@@ -218,8 +213,12 @@ namespace vcs_Draw_Watermark1
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //要加上浮水印的圖片
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\_material\ims-small-logo.png";
+            Image image_watermark = Image.FromFile(filename2);
+
             Bitmap bitmap1 = new Bitmap(pictureBox1.Image);
-            Bitmap bitmap2 = new Bitmap(pictureBox2.Image);
+            Bitmap bitmap2 = new Bitmap(image_watermark);
 
             int x = (bitmap1.Width - bitmap2.Width) / 2;
             int y = (bitmap1.Height - bitmap2.Height) / 2;
