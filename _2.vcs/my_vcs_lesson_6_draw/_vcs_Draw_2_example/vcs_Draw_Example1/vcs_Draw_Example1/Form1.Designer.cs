@@ -665,7 +665,7 @@
             // cb_magnifying
             // 
             this.cb_magnifying.AutoSize = true;
-            this.cb_magnifying.Location = new System.Drawing.Point(1078, 300);
+            this.cb_magnifying.Location = new System.Drawing.Point(855, 218);
             this.cb_magnifying.Name = "cb_magnifying";
             this.cb_magnifying.Size = new System.Drawing.Size(60, 16);
             this.cb_magnifying.TabIndex = 52;
@@ -676,7 +676,7 @@
             // cb_snake
             // 
             this.cb_snake.AutoSize = true;
-            this.cb_snake.Location = new System.Drawing.Point(964, 300);
+            this.cb_snake.Location = new System.Drawing.Point(855, 196);
             this.cb_snake.Name = "cb_snake";
             this.cb_snake.Size = new System.Drawing.Size(48, 16);
             this.cb_snake.TabIndex = 49;
@@ -687,7 +687,7 @@
             // cb_manual
             // 
             this.cb_manual.AutoSize = true;
-            this.cb_manual.Location = new System.Drawing.Point(858, 300);
+            this.cb_manual.Location = new System.Drawing.Point(855, 172);
             this.cb_manual.Name = "cb_manual";
             this.cb_manual.Size = new System.Drawing.Size(58, 16);
             this.cb_manual.TabIndex = 44;

@@ -64,7 +64,7 @@ namespace vcs_Draw_Example1
         {
             //設定執行後的表單起始位置
             this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(0, 0);
+            this.Location = new Point(10, 10);
 
             int x_st = 10;
             int y_st = 10;
@@ -2740,7 +2740,7 @@ namespace vcs_Draw_Example1
             g = Graphics.FromImage(bitmap1);
 
             //使用ClearType字體功能
-            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
             g.FillRectangle(new SolidBrush(backColor), rect);
             g.DrawString(text, font, Brushes.Black, rect, format);
             return bitmap1;
@@ -3354,7 +3354,7 @@ namespace vcs_Draw_Example1
         public void AreaValue()
         {
             string temTextSize = "";//儲存最長的名稱
-            Font LSfont = new System.Drawing.Font("細明體", 8);//設定說明文字的字體
+            Font LSfont = new Font("細明體", 8);//設定說明文字的字體
             AreaText = new string[XText.Length];//實例化一個臨時數組
             for (int i = 0; i < AreaText.Length; i++)//取得名稱
             {
@@ -3447,7 +3447,7 @@ namespace vcs_Draw_Example1
         {
             AreaValue();//儲存最長的名稱
             mypen = new Pen(Color.Black, 1);//設定畫筆的顏色及大小
-            Font LSfont = new System.Drawing.Font("細明體", 8);//設定說明文字的字體樣式
+            Font LSfont = new Font("細明體", 8);//設定說明文字的字體樣式
             SolidBrush Zbrush = new SolidBrush(Color.Black);//設定存放說明文字邊框的畫刷
             SolidBrush ATbrush = new SolidBrush(Color.Khaki);//設定存放說明文字方塊的背景畫刷
             //初始化變數
