@@ -63,7 +63,6 @@ namespace vcs_ImageProcessingH
             label0.Location = new Point(x_st + dx * 0 + 100, y_st + dy * 0);
             label1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             label2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            label3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             label4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             label5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             label6.Location = new Point(x_st + dx * 3, y_st + dy * 1);
@@ -71,14 +70,12 @@ namespace vcs_ImageProcessingH
             label0.Text = "原圖";
             label1.Text = "Gamma";
             label2.Text = "Gamma";
-            label3.Text = "亮度";
             label4.Text = "Threshold";
             label5.Text = "二值化對比";
             label6.Text = "亮度";
 
             trackBar_gamma1.Location = new Point(x_st + dx * 1, y_st + dy * 0 + dd1);
             trackBar_gamma2.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd1);
-            trackBar_brightness.Location = new Point(x_st + dx * 0, y_st + dy * 1 + dd1);
             trackBar_threshold.Location = new Point(x_st + dx * 1, y_st + dy * 1 + dd1);
             trackBar_binary.Location = new Point(x_st + dx * 2, y_st + dy * 1 + dd1);
             trackBar_transparent.Location = new Point(x_st + dx * 3, y_st + dy * 1 + dd1);
@@ -119,8 +116,6 @@ namespace vcs_ImageProcessingH
             trackBar_gamma1.MouseUp += new MouseEventHandler(trackBar_gamma1_MouseUp);
             trackBar_gamma2.MouseMove += new MouseEventHandler(trackBar_gamma2_MouseMove);
             trackBar_gamma2.MouseUp += new MouseEventHandler(trackBar_gamma2_MouseUp);
-            trackBar_brightness.MouseMove += new MouseEventHandler(trackBar_brightness_MouseMove);
-            trackBar_brightness.MouseUp += new MouseEventHandler(trackBar_brightness_MouseUp);
             trackBar_threshold.MouseMove += new MouseEventHandler(trackBar_threshold_MouseMove);
             trackBar_threshold.MouseUp += new MouseEventHandler(trackBar_threshold_MouseUp);
             trackBar_binary.MouseMove += new MouseEventHandler(trackBar_binary_MouseMove);
@@ -188,18 +183,6 @@ namespace vcs_ImageProcessingH
         {
             float gamma = (float)(trackBar_gamma2.Value) / 10;
             pictureBox2.Image = apply_gamma2(filename, gamma);
-        }
-
-        void trackBar_brightness_MouseMove(object sender, MouseEventArgs e)
-        {
-            float brightness = (float)(trackBar_brightness.Value) / 10;
-            label3.Text = "亮度 = " + brightness.ToString();
-        }
-
-        void trackBar_brightness_MouseUp(object sender, MouseEventArgs e)
-        {
-            float brightness = (float)(trackBar_brightness.Value) / 10;
-            pictureBox3.Image = apply_brightness(filename, brightness);
         }
 
         void trackBar_threshold_MouseMove(object sender, MouseEventArgs e)
@@ -276,7 +259,6 @@ namespace vcs_ImageProcessingH
         }
 
         float gamma = 0.1f;
-        float brightness = 0.1f;
         float threshold = 0.01f;
         int binary = 20;
         private void timer1_Tick(object sender, EventArgs e)
@@ -285,11 +267,6 @@ namespace vcs_ImageProcessingH
             if (gamma > 2.5f)
                 gamma = 0.1f;
             pictureBox1.Image = apply_gamma1(filename, gamma);
-
-            brightness += 0.3f;
-            if (brightness > 2.5f)
-                brightness = 0.1f;
-            pictureBox2.Image = apply_brightness(filename, brightness);
 
             threshold += 0.06f;
             if (threshold > 1.0f)
@@ -328,45 +305,6 @@ namespace vcs_ImageProcessingH
             using (Graphics g = Graphics.FromImage(bm))
             {
                 g.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
-            }
-
-            // Return the result.
-            return bm;
-        }
-
-        private Bitmap apply_brightness(string filename, float brightness)
-        {
-            label3.Text = "Brightness = " + brightness.ToString();
-
-            Image image = Image.FromFile(filename);
-
-            // Make the ColorMatrix.
-            float b = brightness;
-            ColorMatrix cm = new ColorMatrix(new float[][]
-                {
-                    new float[] {b, 0, 0, 0, 0},
-                    new float[] {0, b, 0, 0, 0},
-                    new float[] {0, 0, b, 0, 0},
-                    new float[] {0, 0, 0, 1, 0},
-                    new float[] {0, 0, 0, 0, 1},
-                });
-            ImageAttributes attributes = new ImageAttributes();
-            attributes.SetColorMatrix(cm);
-
-            // Draw the image onto the new bitmap while applying the new ColorMatrix.
-            Point[] points =
-            {
-                new Point(0, 0),
-                new Point(image.Width, 0),
-                new Point(0, image.Height),
-            };
-            Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
-
-            // Make the result bitmap.
-            Bitmap bm = new Bitmap(image.Width, image.Height);
-            using (Graphics gr = Graphics.FromImage(bm))
-            {
-                gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
             }
 
             // Return the result.
@@ -546,7 +484,6 @@ namespace vcs_ImageProcessingH
                 timer1.Enabled = true;
                 trackBar_gamma1.Visible = false;
                 trackBar_gamma2.Visible = false;
-                trackBar_brightness.Visible = false;
                 trackBar_threshold.Visible = false;
                 trackBar_binary.Visible = false;
                 trackBar_transparent.Visible = false;
@@ -557,7 +494,6 @@ namespace vcs_ImageProcessingH
                 timer1.Enabled = false;
                 trackBar_gamma1.Visible = true;
                 trackBar_gamma2.Visible = true;
-                trackBar_brightness.Visible = true;
                 trackBar_threshold.Visible = true;
                 trackBar_binary.Visible = true;
                 trackBar_transparent.Visible = true;

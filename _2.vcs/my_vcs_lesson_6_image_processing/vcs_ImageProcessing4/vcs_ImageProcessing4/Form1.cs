@@ -1030,17 +1030,11 @@ new Point(100, 400)};// destination for lower-left point of original
         private void button16_Click(object sender, EventArgs e)
         {
             reset_pictureBox();
-
-            //轉成灰階
-            pictureBox1.Image = ConvertToGrayscale_CM(filename);
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
             reset_pictureBox();
-
-            //透明度
-            pictureBox1.Image = ConvertToTransparency(filename);
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -1172,63 +1166,6 @@ new Point(100, 400)};// destination for lower-left point of original
                     bitmap2.SetPixel(x, y, Color.FromArgb(luma, luma, luma)); // 寫入 像素値
                 }
             }
-            return bitmap2;
-        }
-
-        // 使用色彩矩陣來調整影像色彩
-        public Bitmap ConvertToGrayscale_CM(string filename)
-        {
-            Bitmap bitmap1 = new Bitmap(filename);
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            Bitmap bitmap2 = new Bitmap(W, H);
-
-            Graphics g = Graphics.FromImage(bitmap2); // 從點陣圖 建立 新的畫布
-
-            // 定義含有 RGBA 空間座標的 5 x 5 矩陣
-            // (R, G, B, A, 1) 乘上 此矩陣
-            ColorMatrix cm = new ColorMatrix(
-                   new float[][]{ new float[]{0.3f, 0.3f, 0.3f, 0, 0},
-                                  new float[]{0.6f, 0.6f, 0.6f, 0, 0},
-                                  new float[]{0.1f, 0.1f, 0.1f, 0, 0},
-                                  new float[]{  0,    0,    0,  1, 0},
-                                  new float[]{  0,    0,    0,  0, 1}});
-
-            // ImageAttributes 類別的多個方法會使用色彩矩陣來調整影像色彩
-            ImageAttributes ia = new ImageAttributes();
-
-            // 設定預設分類的色彩調整矩陣。
-            ia.SetColorMatrix(cm);
-            g.DrawImage(bitmap1, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
-            g.Dispose();
-
-            return bitmap2;
-        }
-
-        float alpha = 0f;
-        public Bitmap ConvertToTransparency(string filename)
-        {
-            alpha += 0.1f;
-            if (alpha >= 1)
-                alpha = 0;
-            Bitmap bitmap1 = new Bitmap(filename);
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            Bitmap bitmap2 = new Bitmap(W, H);
-
-            Graphics g = Graphics.FromImage(bitmap2);
-
-            ImageAttributes ia = new ImageAttributes();
-
-            ColorMatrix cm = new ColorMatrix();
-
-            cm.Matrix33 = alpha; // 透明度
-
-            ia.SetColorMatrix(cm);
-
-            g.DrawImage(bitmap1, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
-            g.Dispose();
-
             return bitmap2;
         }
 
