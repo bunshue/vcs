@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Imaging;   //for ColorMatrix, ImageAttributes
+using System.Drawing.Imaging;  // for ColorMatrix, ImageAttributes
+using System.Drawing.Drawing2D;  // for SmoothingMode
 
 namespace vcs_Draw_ColorMatrix
 {
@@ -54,14 +55,25 @@ namespace vcs_Draw_ColorMatrix
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+
             pictureBox1.Size = new Size(800, 600);
-            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
             richTextBox1.Size = new Size(300, 600);
-            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1400, 760);
+            this.Size = new Size(1610, 760);
             this.Text = "vcs_Draw_ColorMatrix";
         }
 
@@ -351,24 +363,14 @@ namespace vcs_Draw_ColorMatrix
             g.DrawImage(bmp, dest2, 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
 
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
-        {
             //SetColorMatrixExample
 
             // Create a rectangle image with all colors set to 128 (medium gray).
+            //建立一個矩形全灰色影像
             /*
             Bitmap myBitmap = new Bitmap(50, 50, PixelFormat.Format32bppArgb);
             Graphics g = Graphics.FromImage(myBitmap);
@@ -382,7 +384,10 @@ namespace vcs_Draw_ColorMatrix
             string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
             Image myImage = Image.FromFile("Rectangle1.jpg");
-            e.Graphics.DrawImage(myImage, 20, 20);
+            g.DrawImage(myImage, 20, 20);
+
+
+            //建立 ColorMatrix，並將其 Matrix 位置設定為 1.75，強調影像的紅色元件。
 
             ColorMatrix myColorMatrix = new ColorMatrix();
 
@@ -401,15 +406,385 @@ namespace vcs_Draw_ColorMatrix
             // w
             myColorMatrix.Matrix44 = 1.00f;
 
-            // Create an ImageAttributes object and set the color matrix.
+            // 建立 ImageAttributes 物件，並呼叫 SetColorMatrix 方法。
             ImageAttributes imageAttr = new ImageAttributes();
             imageAttr.SetColorMatrix(myColorMatrix);
 
             // Draw the image using the color matrix.
             Rectangle rect = new Rectangle(100, 20, 200, 200);
-            e.Graphics.DrawImage(myImage, rect, 0, 0, 200, 200, GraphicsUnit.Pixel, imageAttr);
+            g.DrawImage(myImage, rect, 0, 0, 200, 200, GraphicsUnit.Pixel, imageAttr);
+
+            pictureBox1.Image = bitmap1;
         }
 
+        private void button9_Click(object sender, EventArgs e)
+        {
+            int W = 640;
+            int H = 480;
+            Bitmap bitmap1 = new Bitmap(W, H);
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_game\airplane.bmp";
+            Bitmap bmp = new Bitmap(filename);
+
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.Pink);
+
+            // ColorMatrix, 設定 Alpha = 0.5
+            ColorMatrix color_matrix = new ColorMatrix();
+            color_matrix.Matrix33 = 0.5f;  // 設定Alpha = 0.5
+            //color_matrix.Matrix33 = 1.0f;  // 設定Alpha = 0.5
+
+            // Make an ImageAttributes that uses the ColorMatrix.
+            ImageAttributes image_attributes = new ImageAttributes();
+            image_attributes.SetColorMatrices(color_matrix, null);
+
+            // Make pixels that are the same color as the
+            // one in the upper left transparent.
+            // 設定邊角點的顏色為透明色
+            // bmp.MakeTransparent(bmp.GetPixel(5, 60));
+
+            int x_st = 50;
+            int y_st = 50;
+            Rectangle rect = new Rectangle(x_st, y_st, bmp.Width / 2, bmp.Height / 2);
+            g.DrawImage(bmp, rect, 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, image_attributes);
+            g.DrawRectangle(Pens.Green, rect);
+
+            pictureBox1.Image = bitmap1;
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_game\airplane.bmp";
+            Bitmap bitmap1 = new Bitmap(filename);
+
+            bitmap1 = MakeGrayscale(bitmap1);
+
+            pictureBox1.Image = bitmap1;
+        }
+
+        //#region 圖片去色（圖片黑白化）
+        /// <summary>
+        /// 圖片去色（圖片黑白化）
+        /// </summary>
+        /// <param name="original">一個需要處理的圖片</param>
+        /// <returns></returns>
+        public static Bitmap MakeGrayscale(Bitmap original)
+        {
+            //create a blank bitmap the same size as original
+            Bitmap bitmap1 = new Bitmap(original.Width, original.Height);
+
+            //get a graphics object from the new image
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.SmoothingMode = SmoothingMode.HighQuality;
+            //create the grayscale ColorMatrix
+            ColorMatrix colorMatrix = new ColorMatrix(new float[][] 
+                              {
+                                 new float[] {.3f, .3f, .3f, 0, 0},
+                                 new float[] {.59f, .59f, .59f, 0, 0},
+                                 new float[] {.11f, .11f, .11f, 0, 0},
+                                 new float[] {0, 0, 0, 1, 0},
+                                 new float[] {0, 0, 0, 0, 1}
+                              });
+
+            //create some image attributes
+            ImageAttributes attributes = new ImageAttributes();
+
+            //set the color matrix attribute
+            attributes.SetColorMatrix(colorMatrix);
+
+            //draw the original image on the new image
+            //using the grayscale color matrix
+            g.DrawImage(original, new Rectangle(0, 0, original.Width, original.Height), 0, 0, original.Width, original.Height, GraphicsUnit.Pixel, attributes);
+
+            //dispose the Graphics object
+            g.Dispose();
+            return bitmap1;
+        }
+        //#endregion
+
+
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //Sepia 效果
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            richTextBox1.Text += "Sepia 效果1\n";
+            Bitmap bmp = image_processing24(filename);
+            pictureBox1.Image = bmp;
+        }
+
+        private Bitmap image_processing24(string filename)
+        {
+            //lb_main_mesg.Text = "Sepia 效果1";
+            Application.DoEvents();
+
+            Bitmap bitmap1 = new Bitmap(filename);
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            //Bitmap bitmap2 = new Bitmap(W, H);
+
+            // Make the ColorMatrix.
+            ColorMatrix cm = new ColorMatrix(new float[][]
+            {
+                new float[] {0.393f, 0.349f, 0.272f, 0, 0},
+                new float[] {0.769f, 0.686f, 0.534f, 0, 0},
+                new float[] {0.189f, 0.168f, 0.131f, 0, 0},
+                new float[] { 0, 0, 0, 1, 0},
+                new float[] { 0, 0, 0, 0, 1}
+            });
+            //ColorMatrix cm = new ColorMatrix(new float[][]
+            //{
+            //    new float[] {0.300f, 0.066f, 0.300f, 0, 0},
+            //    new float[] {0.500f, 0.350f, 0.600f, 0, 0},
+            //    new float[] {0.100f, 0.000f, 0.200f, 0, 0},
+            //    new float[] { 0, 0, 0, 1, 0},
+            //    new float[] { 0, 0, 0, 0, 1}
+            //});
+            ImageAttributes attributes = new ImageAttributes();
+            attributes.SetColorMatrix(cm);
+
+            // Draw the image onto the new bitmap while applying the new ColorMatrix.
+            Point[] points =
+            {
+                new Point(0, 0),
+                new Point(bitmap1.Width - 1, 0),
+                new Point(0, bitmap1.Height - 1),
+            };
+            Rectangle rect = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
+
+            // Make the result bitmap.
+            Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
+            using (Graphics gr = Graphics.FromImage(bitmap2))
+            {
+                gr.DrawImage(bitmap1, points, rect, GraphicsUnit.Pixel, attributes);
+            }
+            return bitmap2;
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //單色圖片1 30
+            richTextBox1.Text += "單色圖片1\n";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            //單色圖片30
+            //單色圖片 1
+            // Convert the image into red, green, and blue monochrome.
+            Image image = Image.FromFile(filename);
+            pictureBox1.Image = ScaleColorComponents(image, 1, 0, 0, 1);//R
+            //pictureBox1.Image = ScaleColorComponents(image, 0, 1, 0, 1);//G
+            //pictureBox1.Image = ScaleColorComponents(image, 0, 0, 1, 1);//B
+        }
+
+        // Scale an image's color components.
+        private Bitmap ScaleColorComponents(Image image, float r, float g, float b, float a)
+        {
+            // Make the ColorMatrix.
+            ColorMatrix cm = new ColorMatrix(new float[][]
+                {
+                    new float[] {r, 0, 0, 0, 0},
+                    new float[] {0, g, 0, 0, 0},
+                    new float[] {0, 0, b, 0, 0},
+                    new float[] {0, 0, 0, a, 0},
+                    new float[] {0, 0, 0, 0, 1},
+                });
+            ImageAttributes attributes = new ImageAttributes();
+            attributes.SetColorMatrix(cm);
+
+            // Draw the image onto the new bitmap while applying the new ColorMatrix.
+            Point[] points =
+            {
+                new Point(0, 0),
+                new Point(image.Width - 1, 0),
+                new Point(0, image.Height - 1),
+            };
+            Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
+
+            // Make the result bitmap.
+            Bitmap bm = new Bitmap(image.Width, image.Height);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
+            }
+            return bm;
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            //彩虹化圖片28
+            richTextBox1.Text += "彩虹化圖片\n";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            Bitmap bmp = image_processing28(filename);
+            pictureBox1.Image = bmp;
+        }
+
+        private Bitmap image_processing28(string filename)
+        {
+            //lb_main_mesg.Text = "彩虹化圖片";
+            Application.DoEvents();
+
+            filename = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
+
+            Bitmap bitmap1 = new Bitmap(filename);
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            Bitmap bitmap2 = new Bitmap(W, H);
+
+            using (Graphics gr = Graphics.FromImage(bitmap2))
+            {
+                // Define target colors.
+                Color[] color =
+                {
+                    //Color.Red, Color.Orange, Color.Yellow,
+                    //Color.Green, Color.Blue, Color.Indigo,
+                    //Color.Violet,
+
+                    Color.Red, Color.OrangeRed, Color.Yellow,
+                    Color.Green, Color.Blue, Color.Indigo,
+                    Color.Fuchsia,
+                };
+                const float scale = 2.0f;
+
+                // Draw.
+                for (int i = 0; i < color.Length; i++)
+                {
+                    // Create the ColorMatrix.
+                    ColorMatrix cm = new ColorMatrix(new float[][]
+                    {
+                        new float[] {color[i].R / 255f * scale, 0, 0, 0, 0},
+                        new float[] {0, color[i].G / 255f * scale, 0, 0, 0},
+                        new float[] {0, 0, color[i].B / 255f * scale, 0, 0},
+                        new float[] {0, 0, 0, 1, 0},
+                        new float[] {0, 0, 0, 0, 1},
+                    });
+                    ImageAttributes attr = new ImageAttributes();
+                    attr.SetColorMatrix(cm);
+
+                    // Draw the next part of the image.
+                    int x = (int)(i * bitmap1.Width / color.Length);
+                    Point[] points =
+                    {
+                        new Point(x, 0),
+                        new Point(W, 0),
+                        new Point(x, H),
+                    };
+                    Rectangle rect = new Rectangle(x, 0, W - x, H);
+                    gr.DrawImage(bitmap1, points, rect, GraphicsUnit.Pixel, attr);
+                }
+            }
+            return bitmap2;
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            //單色處理29
+            richTextBox1.Text += "單色處理\n";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            Bitmap bmp = image_processing29(filename);
+            pictureBox1.Image = bmp;
+        }
+
+        private Bitmap image_processing29(string filename)
+        {
+            //lb_main_mesg.Text = "單色處理";
+            Application.DoEvents();
+
+            Bitmap bitmap1 = new Bitmap(filename);
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            //Bitmap bitmap2 = new Bitmap(W, H);
+
+            // Make the ColorMatrix.
+            ColorMatrix cm = new ColorMatrix(new float[][]
+            {
+                new float[] {0.299f, 0.299f, 0.299f, 0, 0},
+                new float[] {0.587f, 0.587f, 0.587f, 0, 0},
+                new float[] {0.114f, 0.114f, 0.114f, 0, 0},
+                new float[] { 0, 0, 0, 1, 0},
+                new float[] { 0, 0, 0, 0, 1}
+            });
+            ImageAttributes attributes = new ImageAttributes();
+            attributes.SetColorMatrix(cm);
+
+            // Draw the image onto the new bitmap while applying the new ColorMatrix.
+            Point[] points =
+            {
+                new Point(0, 0),
+                new Point(W - 1, 0),
+                new Point(0, H - 1),
+            };
+            Rectangle rect = new Rectangle(0, 0, W, H);
+
+            // Make the result bitmap.
+            Bitmap bm = new Bitmap(W, H);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.DrawImage(bitmap1, points, rect, GraphicsUnit.Pixel, attributes);
+            }
+            return bm;
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            return;
+
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw\data\color_chart.bmp";
+            Bitmap image = new Bitmap(filename);
+            ImageAttributes imageAttributes = new ImageAttributes();
+            int width = image.Width;
+            int height = image.Height;
+            float degrees = 60f;
+            double r = degrees * System.Math.PI / 180; // degrees to radians
+
+            float[][] colorMatrixElements = { 
+        new float[] {(float)System.Math.Cos(r),  (float)System.Math.Sin(r),  0,  0, 0},
+        new float[] {(float)-System.Math.Sin(r),  (float)-System.Math.Cos(r),  0,  0, 0},
+        new float[] {0,  0,  2,  0, 0},
+        new float[] {0,  0,  0,  1, 0},
+        new float[] {0, 0, 0, 0, 1}};
+
+            ColorMatrix colorMatrix = new ColorMatrix(colorMatrixElements);
+
+            imageAttributes.SetColorMatrix(
+               colorMatrix,
+               ColorMatrixFlag.Default,
+               ColorAdjustType.Bitmap);
+
+            e.Graphics.DrawImage(image, 10, 10, width, height);
+
+            e.Graphics.DrawImage(
+               image,
+               new Rectangle(10, 300, width, height),  // destination rectangle 
+                0, 0,        // upper-left corner of source rectangle 
+                width,       // width of source rectangle
+                height,      // height of source rectangle
+                GraphicsUnit.Pixel,
+               imageAttributes);
+        }
     }
 }
-

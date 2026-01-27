@@ -44,14 +44,6 @@
             this.bt_edge_detection4 = new System.Windows.Forms.Button();
             this.bt_edge_detection3 = new System.Windows.Forms.Button();
             this.groupBox0 = new System.Windows.Forms.GroupBox();
-            this.bt_image_process_p31 = new System.Windows.Forms.Button();
-            this.bt_image_process_p30 = new System.Windows.Forms.Button();
-            this.bt_image_process_p29 = new System.Windows.Forms.Button();
-            this.bt_image_process_p28 = new System.Windows.Forms.Button();
-            this.bt_image_process_p27 = new System.Windows.Forms.Button();
-            this.bt_image_process_p26 = new System.Windows.Forms.Button();
-            this.bt_image_process_p25 = new System.Windows.Forms.Button();
-            this.bt_image_process_p24 = new System.Windows.Forms.Button();
             this.bt_image_process_p23 = new System.Windows.Forms.Button();
             this.bt_image_process_p22 = new System.Windows.Forms.Button();
             this.bt_image_process_p21 = new System.Windows.Forms.Button();
@@ -248,14 +240,6 @@
             // 
             // groupBox0
             // 
-            this.groupBox0.Controls.Add(this.bt_image_process_p31);
-            this.groupBox0.Controls.Add(this.bt_image_process_p30);
-            this.groupBox0.Controls.Add(this.bt_image_process_p29);
-            this.groupBox0.Controls.Add(this.bt_image_process_p28);
-            this.groupBox0.Controls.Add(this.bt_image_process_p27);
-            this.groupBox0.Controls.Add(this.bt_image_process_p26);
-            this.groupBox0.Controls.Add(this.bt_image_process_p25);
-            this.groupBox0.Controls.Add(this.bt_image_process_p24);
             this.groupBox0.Controls.Add(this.bt_image_process_p23);
             this.groupBox0.Controls.Add(this.bt_image_process_p22);
             this.groupBox0.Controls.Add(this.bt_image_process_p21);
@@ -287,88 +271,13 @@
             this.groupBox0.TabStop = false;
             this.groupBox0.Text = "影像處理 像素法";
             // 
-            // bt_image_process_p31
-            // 
-            this.bt_image_process_p31.Location = new System.Drawing.Point(366, 299);
-            this.bt_image_process_p31.Name = "bt_image_process_p31";
-            this.bt_image_process_p31.Size = new System.Drawing.Size(110, 40);
-            this.bt_image_process_p31.TabIndex = 67;
-            this.bt_image_process_p31.Text = "依序顯示各項功能";
-            this.bt_image_process_p31.UseVisualStyleBackColor = true;
-            this.bt_image_process_p31.Click += new System.EventHandler(this.bt_image_process_p31_Click);
-            // 
-            // bt_image_process_p30
-            // 
-            this.bt_image_process_p30.Location = new System.Drawing.Point(366, 259);
-            this.bt_image_process_p30.Name = "bt_image_process_p30";
-            this.bt_image_process_p30.Size = new System.Drawing.Size(110, 40);
-            this.bt_image_process_p30.TabIndex = 66;
-            this.bt_image_process_p30.UseVisualStyleBackColor = true;
-            this.bt_image_process_p30.Click += new System.EventHandler(this.bt_image_process_p30_Click);
-            // 
-            // bt_image_process_p29
-            // 
-            this.bt_image_process_p29.Location = new System.Drawing.Point(366, 219);
-            this.bt_image_process_p29.Name = "bt_image_process_p29";
-            this.bt_image_process_p29.Size = new System.Drawing.Size(110, 40);
-            this.bt_image_process_p29.TabIndex = 65;
-            this.bt_image_process_p29.UseVisualStyleBackColor = true;
-            this.bt_image_process_p29.Click += new System.EventHandler(this.bt_image_process_p29_Click);
-            // 
-            // bt_image_process_p28
-            // 
-            this.bt_image_process_p28.Location = new System.Drawing.Point(366, 177);
-            this.bt_image_process_p28.Name = "bt_image_process_p28";
-            this.bt_image_process_p28.Size = new System.Drawing.Size(110, 40);
-            this.bt_image_process_p28.TabIndex = 64;
-            this.bt_image_process_p28.UseVisualStyleBackColor = true;
-            this.bt_image_process_p28.Click += new System.EventHandler(this.bt_image_process_p28_Click);
-            // 
-            // bt_image_process_p27
-            // 
-            this.bt_image_process_p27.Location = new System.Drawing.Point(366, 139);
-            this.bt_image_process_p27.Name = "bt_image_process_p27";
-            this.bt_image_process_p27.Size = new System.Drawing.Size(110, 40);
-            this.bt_image_process_p27.TabIndex = 63;
-            this.bt_image_process_p27.UseVisualStyleBackColor = true;
-            this.bt_image_process_p27.Click += new System.EventHandler(this.bt_image_process_p27_Click);
-            // 
-            // bt_image_process_p26
-            // 
-            this.bt_image_process_p26.Location = new System.Drawing.Point(366, 99);
-            this.bt_image_process_p26.Name = "bt_image_process_p26";
-            this.bt_image_process_p26.Size = new System.Drawing.Size(110, 40);
-            this.bt_image_process_p26.TabIndex = 62;
-            this.bt_image_process_p26.UseVisualStyleBackColor = true;
-            this.bt_image_process_p26.Click += new System.EventHandler(this.bt_image_process_p26_Click);
-            // 
-            // bt_image_process_p25
-            // 
-            this.bt_image_process_p25.Location = new System.Drawing.Point(366, 58);
-            this.bt_image_process_p25.Name = "bt_image_process_p25";
-            this.bt_image_process_p25.Size = new System.Drawing.Size(110, 40);
-            this.bt_image_process_p25.TabIndex = 61;
-            this.bt_image_process_p25.Text = "單色圖片2 31";
-            this.bt_image_process_p25.UseVisualStyleBackColor = true;
-            this.bt_image_process_p25.Click += new System.EventHandler(this.bt_image_process_p25_Click);
-            // 
-            // bt_image_process_p24
-            // 
-            this.bt_image_process_p24.Location = new System.Drawing.Point(366, 17);
-            this.bt_image_process_p24.Name = "bt_image_process_p24";
-            this.bt_image_process_p24.Size = new System.Drawing.Size(110, 40);
-            this.bt_image_process_p24.TabIndex = 60;
-            this.bt_image_process_p24.Text = "單色圖片1 30";
-            this.bt_image_process_p24.UseVisualStyleBackColor = true;
-            this.bt_image_process_p24.Click += new System.EventHandler(this.bt_image_process_p24_Click);
-            // 
             // bt_image_process_p23
             // 
             this.bt_image_process_p23.Location = new System.Drawing.Point(250, 300);
             this.bt_image_process_p23.Name = "bt_image_process_p23";
             this.bt_image_process_p23.Size = new System.Drawing.Size(110, 40);
             this.bt_image_process_p23.TabIndex = 59;
-            this.bt_image_process_p23.Text = "單色處理29";
+            this.bt_image_process_p23.Text = "依序顯示各項功能";
             this.bt_image_process_p23.UseVisualStyleBackColor = true;
             this.bt_image_process_p23.Click += new System.EventHandler(this.bt_image_process_p23_Click);
             // 
@@ -378,7 +287,7 @@
             this.bt_image_process_p22.Name = "bt_image_process_p22";
             this.bt_image_process_p22.Size = new System.Drawing.Size(110, 40);
             this.bt_image_process_p22.TabIndex = 58;
-            this.bt_image_process_p22.Text = "彩虹化圖片28";
+            this.bt_image_process_p22.Text = "單色圖片2 31";
             this.bt_image_process_p22.UseVisualStyleBackColor = true;
             this.bt_image_process_p22.Click += new System.EventHandler(this.bt_image_process_p22_Click);
             // 
@@ -517,7 +426,6 @@
             this.bt_image_process_p8.Name = "bt_image_process_p8";
             this.bt_image_process_p8.Size = new System.Drawing.Size(110, 40);
             this.bt_image_process_p8.TabIndex = 44;
-            this.bt_image_process_p8.Text = "Sejpia 1";
             this.bt_image_process_p8.UseVisualStyleBackColor = true;
             this.bt_image_process_p8.Click += new System.EventHandler(this.bt_image_process_p8_Click);
             // 
@@ -892,14 +800,6 @@
         private System.Windows.Forms.Button bt_image_process_p8;
         private System.Windows.Forms.Button bt_image_process_p16;
         private System.Windows.Forms.Button bt_image_process_p15;
-        private System.Windows.Forms.Button bt_image_process_p31;
-        private System.Windows.Forms.Button bt_image_process_p30;
-        private System.Windows.Forms.Button bt_image_process_p29;
-        private System.Windows.Forms.Button bt_image_process_p28;
-        private System.Windows.Forms.Button bt_image_process_p27;
-        private System.Windows.Forms.Button bt_image_process_p26;
-        private System.Windows.Forms.Button bt_image_process_p25;
-        private System.Windows.Forms.Button bt_image_process_p24;
         private System.Windows.Forms.Button bt_image_process_p23;
         private System.Windows.Forms.Button bt_image_process_p22;
         private System.Windows.Forms.Button bt_image_process_p21;

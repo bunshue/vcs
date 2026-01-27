@@ -11,7 +11,6 @@ using System.IO;
 using System.Threading;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;   //for BitmapData
-
 using System.Runtime.InteropServices;   //for Marshal
 using System.Diagnostics;   //for Stopwatch
 
@@ -109,14 +108,6 @@ namespace vcs_ImageProcessing3
             bt_image_process_p21.Location = new Point(x_st + dx * 1, y_st + dy * 5);
             bt_image_process_p22.Location = new Point(x_st + dx * 1, y_st + dy * 6);
             bt_image_process_p23.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            bt_image_process_p24.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            bt_image_process_p25.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            bt_image_process_p26.Location = new Point(x_st + dx * 1, y_st + dy * 10);
-            bt_image_process_p27.Location = new Point(x_st + dx * 1, y_st + dy * 11);
-            bt_image_process_p28.Location = new Point(x_st + dx * 1, y_st + dy * 12);
-            bt_image_process_p29.Location = new Point(x_st + dx * 1, y_st + dy * 13);
-            bt_image_process_p30.Location = new Point(x_st + dx * 1, y_st + dy * 14);
-            bt_image_process_p31.Location = new Point(x_st + dx * 1, y_st + dy * 15);
 
             bt_image_process_m0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_image_process_m1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -1077,9 +1068,6 @@ namespace vcs_ImageProcessing3
 
         private void bt_image_process_p8_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Sepia 效果1\n";
-            Bitmap bmp = image_processing24(filename);
-            pictureBox1.Image = bmp;
         }
 
         private void bt_image_process_p9_Click(object sender, EventArgs e)
@@ -1174,68 +1162,35 @@ namespace vcs_ImageProcessing3
 
         private void bt_image_process_p22_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "彩虹化圖片\n";
-            Bitmap bmp = image_processing28(filename);
+            richTextBox1.Text += "單色圖片2\n";
+            Bitmap bmp = image_processing31(filename);
             pictureBox1.Image = bmp;
         }
 
         private void bt_image_process_p23_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "單色處理\n";
-            Bitmap bmp = image_processing29(filename);
-            pictureBox1.Image = bmp;
-        }
+            //依序顯示各項功能
 
-        private void bt_image_process_p24_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "單色圖片1\n";
-            //單色圖片30
-            //單色圖片 1
-            // Convert the image into red, green, and blue monochrome.
-            Image image = Image.FromFile(filename);
-            pictureBox1.Image = ScaleColorComponents(image, 1, 0, 0, 1);//R
-            //pictureBox1.Image = ScaleColorComponents(image, 0, 1, 0, 1);//G
-            //pictureBox1.Image = ScaleColorComponents(image, 0, 0, 1, 1);//B
-        }
+            //關掉所有控件 
+            remove_all_controls();
 
-        // Scale an image's color components.
-        private Bitmap ScaleColorComponents(Image image, float r, float g, float b, float a)
-        {
-            // Make the ColorMatrix.
-            ColorMatrix cm = new ColorMatrix(new float[][]
-                {
-                    new float[] {r, 0, 0, 0, 0},
-                    new float[] {0, g, 0, 0, 0},
-                    new float[] {0, 0, b, 0, 0},
-                    new float[] {0, 0, 0, a, 0},
-                    new float[] {0, 0, 0, 0, 1},
-                });
-            ImageAttributes attributes = new ImageAttributes();
-            attributes.SetColorMatrix(cm);
+            int W = Screen.PrimaryScreen.Bounds.Width;
+            int H = Screen.PrimaryScreen.Bounds.Height;
+            int w = W * 7 / 10;
+            int h = H * 7 / 10;
+            pictureBox1.Size = new Size(w, h);
+            pictureBox1.Location = new Point((W - w) / 2, (H - h) / 2);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
 
-            // Draw the image onto the new bitmap while applying the new ColorMatrix.
-            Point[] points =
-            {
-                new Point(0, 0),
-                new Point(image.Width - 1, 0),
-                new Point(0, image.Height - 1),
-            };
-            Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
+            // 實例化控件
+            lb_main_mesg.Text = "原圖";
+            lb_main_mesg.Font = new Font("標楷體", 24);
+            lb_main_mesg.ForeColor = Color.Red;
+            lb_main_mesg.Location = new Point((W - w) / 2, (H - h) / 2 - 40);
+            lb_main_mesg.AutoSize = true;
+            this.Controls.Add(lb_main_mesg);     // 將控件加入表單
 
-            // Make the result bitmap.
-            Bitmap bm = new Bitmap(image.Width, image.Height);
-            using (Graphics gr = Graphics.FromImage(bm))
-            {
-                gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
-            }
-            return bm;
-        }
-
-        private void bt_image_process_p25_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "單色圖片2\n";
-            Bitmap bmp = image_processing31(filename);
-            pictureBox1.Image = bmp;
+            timer1.Enabled = true;
         }
 
         private Bitmap image_processing31(string filename)
@@ -1279,52 +1234,6 @@ namespace vcs_ImageProcessing3
             return bitmap2r;//紅圖
             //return bitmap2g;//綠圖
             //return bitmap2b;//藍圖
-        }
-
-        private void bt_image_process_p26_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void bt_image_process_p27_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void bt_image_process_p28_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void bt_image_process_p29_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void bt_image_process_p30_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void bt_image_process_p31_Click(object sender, EventArgs e)
-        {
-            //依序顯示各項功能
-
-            //關掉所有控件 
-            remove_all_controls();
-
-            int W = Screen.PrimaryScreen.Bounds.Width;
-            int H = Screen.PrimaryScreen.Bounds.Height;
-            int w = W * 7 / 10;
-            int h = H * 7 / 10;
-            pictureBox1.Size = new Size(w, h);
-            pictureBox1.Location = new Point((W - w) / 2, (H - h) / 2);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-
-            // 實例化控件
-            lb_main_mesg.Text = "原圖";
-            lb_main_mesg.Font = new Font("標楷體", 24);
-            lb_main_mesg.ForeColor = Color.Red;
-            lb_main_mesg.Location = new Point((W - w) / 2, (H - h) / 2 - 40);
-            lb_main_mesg.AutoSize = true;
-            this.Controls.Add(lb_main_mesg);     // 將控件加入表單
-
-            timer1.Enabled = true;
         }
 
         void remove_all_controls()
@@ -1373,12 +1282,12 @@ namespace vcs_ImageProcessing3
                 case 18: pictureBox1.Image = image_processing18(filename); break;
                 case 19: pictureBox1.Image = image_processing19(filename); break;
                 case 20: pictureBox1.Image = image_processing20(filename); break;
-                case 24: pictureBox1.Image = image_processing24(filename); break;
+                //case 24: pictureBox1.Image = image_processing24(filename); break;
                 case 25: pictureBox1.Image = image_processing25(filename); break;
                 case 26: pictureBox1.Image = image_processing26(filename); break;
                 case 27: pictureBox1.Image = image_processing27(filename); break;
-                case 28: pictureBox1.Image = image_processing28(filename); break;
-                case 29: pictureBox1.Image = image_processing29(filename); break;
+                //case 28: pictureBox1.Image = image_processing28(filename); break;
+                //case 29: pictureBox1.Image = image_processing29(filename); break;
                 case 31: pictureBox1.Image = image_processing31(filename); break;
                 default: break;
             }
@@ -2292,54 +2201,6 @@ namespace vcs_ImageProcessing3
             return bitmap1;
         }
 
-        private Bitmap image_processing24(string filename)
-        {
-            lb_main_mesg.Text = "Sepia 效果1";
-            Application.DoEvents();
-
-            Bitmap bitmap1 = new Bitmap(filename);
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            //Bitmap bitmap2 = new Bitmap(W, H);
-
-            // Make the ColorMatrix.
-            ColorMatrix cm = new ColorMatrix(new float[][]
-            {
-                new float[] {0.393f, 0.349f, 0.272f, 0, 0},
-                new float[] {0.769f, 0.686f, 0.534f, 0, 0},
-                new float[] {0.189f, 0.168f, 0.131f, 0, 0},
-                new float[] { 0, 0, 0, 1, 0},
-                new float[] { 0, 0, 0, 0, 1}
-            });
-            //ColorMatrix cm = new ColorMatrix(new float[][]
-            //{
-            //    new float[] {0.300f, 0.066f, 0.300f, 0, 0},
-            //    new float[] {0.500f, 0.350f, 0.600f, 0, 0},
-            //    new float[] {0.100f, 0.000f, 0.200f, 0, 0},
-            //    new float[] { 0, 0, 0, 1, 0},
-            //    new float[] { 0, 0, 0, 0, 1}
-            //});
-            ImageAttributes attributes = new ImageAttributes();
-            attributes.SetColorMatrix(cm);
-
-            // Draw the image onto the new bitmap while applying the new ColorMatrix.
-            Point[] points =
-            {
-                new Point(0, 0),
-                new Point(bitmap1.Width - 1, 0),
-                new Point(0, bitmap1.Height - 1),
-            };
-            Rectangle rect = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
-
-            // Make the result bitmap.
-            Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
-            using (Graphics gr = Graphics.FromImage(bitmap2))
-            {
-                gr.DrawImage(bitmap1, points, rect, GraphicsUnit.Pixel, attributes);
-            }
-            return bitmap2;
-        }
-
         private Bitmap image_processing25(string filename)
         {
             lb_main_mesg.Text = "Sepia 效果2";
@@ -2530,103 +2391,6 @@ namespace vcs_ImageProcessing3
                 }
             }
             return bitmap2;
-        }
-
-        private Bitmap image_processing28(string filename)
-        {
-            lb_main_mesg.Text = "彩虹化圖片";
-            Application.DoEvents();
-
-            filename = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
-
-            Bitmap bitmap1 = new Bitmap(filename);
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            Bitmap bitmap2 = new Bitmap(W, H);
-
-            using (Graphics gr = Graphics.FromImage(bitmap2))
-            {
-                // Define target colors.
-                Color[] color =
-                {
-                    //Color.Red, Color.Orange, Color.Yellow,
-                    //Color.Green, Color.Blue, Color.Indigo,
-                    //Color.Violet,
-
-                    Color.Red, Color.OrangeRed, Color.Yellow,
-                    Color.Green, Color.Blue, Color.Indigo,
-                    Color.Fuchsia,
-                };
-                const float scale = 2.0f;
-
-                // Draw.
-                for (int i = 0; i < color.Length; i++)
-                {
-                    // Create the ColorMatrix.
-                    ColorMatrix cm = new ColorMatrix(new float[][]
-                    {
-                        new float[] {color[i].R / 255f * scale, 0, 0, 0, 0},
-                        new float[] {0, color[i].G / 255f * scale, 0, 0, 0},
-                        new float[] {0, 0, color[i].B / 255f * scale, 0, 0},
-                        new float[] {0, 0, 0, 1, 0},
-                        new float[] {0, 0, 0, 0, 1},
-                    });
-                    ImageAttributes attr = new ImageAttributes();
-                    attr.SetColorMatrix(cm);
-
-                    // Draw the next part of the image.
-                    int x = (int)(i * bitmap1.Width / color.Length);
-                    Point[] points =
-                    {
-                        new Point(x, 0),
-                        new Point(W, 0),
-                        new Point(x, H),
-                    };
-                    Rectangle rect = new Rectangle(x, 0, W - x, H);
-                    gr.DrawImage(bitmap1, points, rect, GraphicsUnit.Pixel, attr);
-                }
-            }
-            return bitmap2;
-        }
-
-        private Bitmap image_processing29(string filename)
-        {
-            lb_main_mesg.Text = "單色處理";
-            Application.DoEvents();
-
-            Bitmap bitmap1 = new Bitmap(filename);
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            //Bitmap bitmap2 = new Bitmap(W, H);
-
-            // Make the ColorMatrix.
-            ColorMatrix cm = new ColorMatrix(new float[][]
-            {
-                new float[] {0.299f, 0.299f, 0.299f, 0, 0},
-                new float[] {0.587f, 0.587f, 0.587f, 0, 0},
-                new float[] {0.114f, 0.114f, 0.114f, 0, 0},
-                new float[] { 0, 0, 0, 1, 0},
-                new float[] { 0, 0, 0, 0, 1}
-            });
-            ImageAttributes attributes = new ImageAttributes();
-            attributes.SetColorMatrix(cm);
-
-            // Draw the image onto the new bitmap while applying the new ColorMatrix.
-            Point[] points =
-            {
-                new Point(0, 0),
-                new Point(W - 1, 0),
-                new Point(0, H - 1),
-            };
-            Rectangle rect = new Rectangle(0, 0, W, H);
-
-            // Make the result bitmap.
-            Bitmap bm = new Bitmap(W, H);
-            using (Graphics gr = Graphics.FromImage(bm))
-            {
-                gr.DrawImage(bitmap1, points, rect, GraphicsUnit.Pixel, attributes);
-            }
-            return bm;
         }
 
         private void bt_image_process_m0_Click(object sender, EventArgs e)

@@ -7,10 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;
-using System.Drawing.Imaging;
-using System.Drawing.Drawing2D;
-
 //圖片加水印
 
 namespace vcs_Draw_Watermark1
@@ -53,7 +49,7 @@ namespace vcs_Draw_Watermark1
             bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
 
             richTextBox1.Size = new Size(400, 660);
-            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1520, 720);
@@ -213,41 +209,6 @@ namespace vcs_Draw_Watermark1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //要加上浮水印的圖片
-            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\_material\ims-small-logo.png";
-            Image image_watermark = Image.FromFile(filename2);
-
-            Bitmap bitmap1 = new Bitmap(pictureBox1.Image);
-            Bitmap bitmap2 = new Bitmap(image_watermark);
-
-            int x = (bitmap1.Width - bitmap2.Width) / 2;
-            int y = (bitmap1.Height - bitmap2.Height) / 2;
-            DrawWatermark2(bitmap2, bitmap1, x, y);
-
-            pictureBox1.Image = bitmap1;
-        }
-
-        // Copy the watermark image over the result image.
-        private void DrawWatermark2(Bitmap bitmap1, Bitmap result_bm, int x, int y)
-        {
-            // Make a ColorMatrix that multiplies
-            // the alpha component by 0.5.
-            ColorMatrix color_matrix = new ColorMatrix();
-            color_matrix.Matrix33 = 0.5f;
-
-            // Make an ImageAttributes that uses the ColorMatrix.
-            ImageAttributes image_attributes = new ImageAttributes();
-            image_attributes.SetColorMatrices(color_matrix, null);
-
-            // Make pixels that are the same color as the
-            // one in the upper left transparent.
-            bitmap1.MakeTransparent(bitmap1.GetPixel(0, 0));
-
-            // Draw the image using the ColorMatrix.
-            Graphics g = Graphics.FromImage(result_bm);
-
-            Rectangle rect = new Rectangle(x, y, bitmap1.Width, bitmap1.Height);
-            g.DrawImage(bitmap1, rect, 0, 0, bitmap1.Width, bitmap1.Height, GraphicsUnit.Pixel, image_attributes);
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -255,7 +216,6 @@ namespace vcs_Draw_Watermark1
         }
     }
 }
-
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個

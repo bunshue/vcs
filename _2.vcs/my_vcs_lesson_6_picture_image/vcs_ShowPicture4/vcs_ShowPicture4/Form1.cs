@@ -160,122 +160,112 @@ namespace vcs_ShowPicture4
             //原理: 使用 ImageAttrributes 類的 SetColorMatrix() 方法設置顏色,
             //調整矩陣實現淡出的效果. 此類還可以對顏色進行校正, 調暗, 調亮和移除等
 
-            try
+            Graphics g = this.panel1.CreateGraphics();
+            g.Clear(Color.Gray);
+            int width = MyBitmap.Width;
+            int height = MyBitmap.Height;
+            ImageAttributes attributes = new ImageAttributes();
+            ColorMatrix matrix = new ColorMatrix();
+            //創建淡入顏色矩陣
+            matrix.Matrix00 = (float)0.0;
+            matrix.Matrix01 = (float)0.0;
+            matrix.Matrix02 = (float)0.0;
+            matrix.Matrix03 = (float)0.0;
+            matrix.Matrix04 = (float)0.0;
+            matrix.Matrix10 = (float)0.0;
+            matrix.Matrix11 = (float)0.0;
+            matrix.Matrix12 = (float)0.0;
+            matrix.Matrix13 = (float)0.0;
+            matrix.Matrix14 = (float)0.0;
+            matrix.Matrix20 = (float)0.0;
+            matrix.Matrix21 = (float)0.0;
+            matrix.Matrix22 = (float)0.0;
+            matrix.Matrix23 = (float)0.0;
+            matrix.Matrix24 = (float)0.0;
+            matrix.Matrix30 = (float)0.0;
+            matrix.Matrix31 = (float)0.0;
+            matrix.Matrix32 = (float)0.0;
+            matrix.Matrix33 = (float)0.0;
+            matrix.Matrix34 = (float)0.0;
+            matrix.Matrix40 = (float)0.0;
+            matrix.Matrix41 = (float)0.0;
+            matrix.Matrix42 = (float)0.0;
+            matrix.Matrix43 = (float)0.0;
+            matrix.Matrix44 = (float)0.0;
+            matrix.Matrix33 = (float)1.0;
+            matrix.Matrix44 = (float)1.0;
+            //從0到1進行修改色彩變換矩陣主對角線上的數值
+            //使三種基準色的飽和度漸增
+            Single count = (float)0.0;
+            while (count < 1.0)
             {
-                Graphics g = this.panel1.CreateGraphics();
-                g.Clear(Color.Gray);
-                int width = MyBitmap.Width;
-                int height = MyBitmap.Height;
-                ImageAttributes attributes = new ImageAttributes();
-                ColorMatrix matrix = new ColorMatrix();
-                //創建淡入顏色矩陣
-                matrix.Matrix00 = (float)0.0;
-                matrix.Matrix01 = (float)0.0;
-                matrix.Matrix02 = (float)0.0;
-                matrix.Matrix03 = (float)0.0;
-                matrix.Matrix04 = (float)0.0;
-                matrix.Matrix10 = (float)0.0;
-                matrix.Matrix11 = (float)0.0;
-                matrix.Matrix12 = (float)0.0;
-                matrix.Matrix13 = (float)0.0;
-                matrix.Matrix14 = (float)0.0;
-                matrix.Matrix20 = (float)0.0;
-                matrix.Matrix21 = (float)0.0;
-                matrix.Matrix22 = (float)0.0;
-                matrix.Matrix23 = (float)0.0;
-                matrix.Matrix24 = (float)0.0;
-                matrix.Matrix30 = (float)0.0;
-                matrix.Matrix31 = (float)0.0;
-                matrix.Matrix32 = (float)0.0;
-                matrix.Matrix33 = (float)0.0;
-                matrix.Matrix34 = (float)0.0;
-                matrix.Matrix40 = (float)0.0;
-                matrix.Matrix41 = (float)0.0;
-                matrix.Matrix42 = (float)0.0;
-                matrix.Matrix43 = (float)0.0;
-                matrix.Matrix44 = (float)0.0;
-                matrix.Matrix33 = (float)1.0;
-                matrix.Matrix44 = (float)1.0;
-                //從0到1進行修改色彩變換矩陣主對角線上的數值
-                //使三種基準色的飽和度漸增
-                Single count = (float)0.0;
-                while (count < 1.0)
-                {
-                    matrix.Matrix00 = count;
-                    matrix.Matrix11 = count;
-                    matrix.Matrix22 = count;
-                    matrix.Matrix33 = count;
-                    attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-                    g.DrawImage(MyBitmap, new Rectangle(0, 0, width, height),
-                    0, 0, width, height, GraphicsUnit.Pixel, attributes);
-                    System.Threading.Thread.Sleep(200);
-                    count = (float)(count + 0.02);
-                }
+                this.Text = count.ToString();
+                matrix.Matrix00 = count;
+                matrix.Matrix11 = count;
+                matrix.Matrix22 = count;
+                matrix.Matrix33 = count;
+                attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+                g.DrawImage(MyBitmap, new Rectangle(0, 0, width, height),
+                0, 0, width, height, GraphicsUnit.Pixel, attributes);
+                System.Threading.Thread.Sleep(200);
+                count = (float)(count + 0.02);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "信息提示");
-            }
+            this.Text = count.ToString() + " 完成";
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            try
+            Graphics g = this.panel1.CreateGraphics();
+            g.Clear(Color.Gray);
+            int width = MyBitmap.Width;
+            int height = MyBitmap.Height;
+            ImageAttributes attributes = new ImageAttributes();
+            ColorMatrix matrix = new ColorMatrix();
+            //創建淡出顏色矩陣
+            matrix.Matrix00 = (float)0.0;
+            matrix.Matrix01 = (float)0.0;
+            matrix.Matrix02 = (float)0.0;
+            matrix.Matrix03 = (float)0.0;
+            matrix.Matrix04 = (float)0.0;
+            matrix.Matrix10 = (float)0.0;
+            matrix.Matrix11 = (float)0.0;
+            matrix.Matrix12 = (float)0.0;
+            matrix.Matrix13 = (float)0.0;
+            matrix.Matrix14 = (float)0.0;
+            matrix.Matrix20 = (float)0.0;
+            matrix.Matrix21 = (float)0.0;
+            matrix.Matrix22 = (float)0.0;
+            matrix.Matrix23 = (float)0.0;
+            matrix.Matrix24 = (float)0.0;
+            matrix.Matrix30 = (float)0.0;
+            matrix.Matrix31 = (float)0.0;
+            matrix.Matrix32 = (float)0.0;
+            matrix.Matrix33 = (float)0.0;
+            matrix.Matrix34 = (float)0.0;
+            matrix.Matrix40 = (float)0.0;
+            matrix.Matrix41 = (float)0.0;
+            matrix.Matrix42 = (float)0.0;
+            matrix.Matrix43 = (float)0.0;
+            matrix.Matrix44 = (float)0.0;
+            matrix.Matrix33 = (float)1.0;
+            matrix.Matrix44 = (float)1.0;
+            //從1到0進行修改色彩變換矩陣主對角線上的數值
+            //依次減少每種色彩分量
+            Single count = (float)1.0;
+            while (count > 0.0)
             {
-                Graphics g = this.panel1.CreateGraphics();
-                g.Clear(Color.Gray);
-                int width = MyBitmap.Width;
-                int height = MyBitmap.Height;
-                ImageAttributes attributes = new ImageAttributes();
-                ColorMatrix matrix = new ColorMatrix();
-                //創建淡出顏色矩陣
-                matrix.Matrix00 = (float)0.0;
-                matrix.Matrix01 = (float)0.0;
-                matrix.Matrix02 = (float)0.0;
-                matrix.Matrix03 = (float)0.0;
-                matrix.Matrix04 = (float)0.0;
-                matrix.Matrix10 = (float)0.0;
-                matrix.Matrix11 = (float)0.0;
-                matrix.Matrix12 = (float)0.0;
-                matrix.Matrix13 = (float)0.0;
-                matrix.Matrix14 = (float)0.0;
-                matrix.Matrix20 = (float)0.0;
-                matrix.Matrix21 = (float)0.0;
-                matrix.Matrix22 = (float)0.0;
-                matrix.Matrix23 = (float)0.0;
-                matrix.Matrix24 = (float)0.0;
-                matrix.Matrix30 = (float)0.0;
-                matrix.Matrix31 = (float)0.0;
-                matrix.Matrix32 = (float)0.0;
-                matrix.Matrix33 = (float)0.0;
-                matrix.Matrix34 = (float)0.0;
-                matrix.Matrix40 = (float)0.0;
-                matrix.Matrix41 = (float)0.0;
-                matrix.Matrix42 = (float)0.0;
-                matrix.Matrix43 = (float)0.0;
-                matrix.Matrix44 = (float)0.0;
-                matrix.Matrix33 = (float)1.0;
-                matrix.Matrix44 = (float)1.0;
-                //從1到0進行修改色彩變換矩陣主對角線上的數值
-                //依次減少每種色彩分量
-                Single count = (float)1.0;
-                while (count > 0.0)
-                {
-                    matrix.Matrix00 = (float)count;
-                    matrix.Matrix11 = (float)count;
-                    matrix.Matrix22 = (float)count;
-                    matrix.Matrix33 = (float)count;
-                    attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-                    g.DrawImage(MyBitmap, new Rectangle(0, 0, width, height),
-                    0, 0, width, height, GraphicsUnit.Pixel, attributes);
-                    System.Threading.Thread.Sleep(20);
-                    count = (float)(count - 0.01);
-                }
+                this.Text = count.ToString();
+                matrix.Matrix00 = (float)count;
+                matrix.Matrix11 = (float)count;
+                matrix.Matrix22 = (float)count;
+                matrix.Matrix33 = (float)count;
+                attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+                g.DrawImage(MyBitmap, new Rectangle(0, 0, width, height),
+                0, 0, width, height, GraphicsUnit.Pixel, attributes);
+                System.Threading.Thread.Sleep(20);
+                count = (float)(count - 0.01);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "信息提示");
-            }
+            this.Text = count.ToString() + " 完成";
         }
 
         private void button7_Click(object sender, EventArgs e)

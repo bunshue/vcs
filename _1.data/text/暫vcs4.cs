@@ -1,14 +1,5 @@
 ﻿
 
-
-
-D:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw\data
-
-color_chart.bmp
-
-
-
-
             //int[] gray = new int[220];
             //g.DrawLines(Pens.Red, gray.ToArray());
 
