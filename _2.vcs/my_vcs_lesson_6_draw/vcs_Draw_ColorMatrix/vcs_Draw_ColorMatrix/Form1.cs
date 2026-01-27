@@ -13,6 +13,8 @@ namespace vcs_Draw_ColorMatrix
 {
     public partial class Form1 : Form
     {
+        Bitmap bitmap1;
+        Graphics g;
         string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
         public Form1()
@@ -23,6 +25,9 @@ namespace vcs_Draw_ColorMatrix
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            bitmap1 = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
+            g = Graphics.FromImage(bitmap1);
         }
 
         void show_item_location()
@@ -35,8 +40,8 @@ namespace vcs_Draw_ColorMatrix
             //button
             x_st = 12;
             y_st = 12;
-            dx = 170 + 10;
-            dy = 50 + 10;
+            dx = 200 + 10;
+            dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -45,8 +50,24 @@ namespace vcs_Draw_ColorMatrix
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
+            pictureBox1.Size = new Size(800, 600);
             pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+
+            richTextBox1.Size = new Size(300, 600);
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1400, 760);
+            this.Text = "vcs_Draw_ColorMatrix";
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -90,8 +111,6 @@ namespace vcs_Draw_ColorMatrix
                GraphicsUnit.Pixel,
                imageAttributes);
             pictureBox1.Image = bitmap1;
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -108,7 +127,6 @@ namespace vcs_Draw_ColorMatrix
                 gr.DrawImage(banner, 0, 200, 300, 130);
             }
             pictureBox1.Image = bm;
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -272,7 +290,6 @@ namespace vcs_Draw_ColorMatrix
                 g.Dispose();
             }
             this.pictureBox1.Image = (Image)tmp.Clone();
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -304,10 +321,95 @@ namespace vcs_Draw_ColorMatrix
             this.pictureBox1.Image = (Image)(currentBitmap.Clone());
 
             g.Dispose();
+        }
 
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //test ColorMatrix
+            //測試 ColorMatrix
 
+            float[][] m_cmArray = // 色彩調整矩陣 透明度 20%
+               {
+                  new float[] {1, 0, 0, 0,    0},
+                  new float[] {0, 1, 0, 0,    0},
+                  new float[] {0, 0, 1, 0,    0},
+                  new float[] {0, 0, 0, 0.2f, 0},
+                  new float[] {0, 0, 0, 0,    1}
+               };
+
+            ColorMatrix cm = new ColorMatrix(m_cmArray);
+            ImageAttributes ia = new ImageAttributes();
+            ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            Bitmap bmp = new Bitmap(filename);
+
+            g.DrawRectangle(Pens.Red, 100, 100, 100, 100);
+            g.DrawImage(bmp, 0, 0, bmp.Width / 2, bmp.Height / 2);
+
+            Rectangle dest2 = new Rectangle(0, 300, bmp.Width / 2, bmp.Height / 2);
+            g.DrawImage(bmp, dest2, 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
+
+            pictureBox1.Image = bitmap1;
 
         }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            //SetColorMatrixExample
+
+            // Create a rectangle image with all colors set to 128 (medium gray).
+            /*
+            Bitmap myBitmap = new Bitmap(50, 50, PixelFormat.Format32bppArgb);
+            Graphics g = Graphics.FromImage(myBitmap);
+            g.FillRectangle(new SolidBrush(Color.FromArgb(255, 128, 128, 128)),
+                new Rectangle(0, 0, 50, 50));
+            myBitmap.Save("Rectangle1.jpg");
+            */
+
+            // Open an Image file and draw it to the screen.
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+
+            Image myImage = Image.FromFile("Rectangle1.jpg");
+            e.Graphics.DrawImage(myImage, 20, 20);
+
+            ColorMatrix myColorMatrix = new ColorMatrix();
+
+            // Red
+            myColorMatrix.Matrix00 = 1.75f;
+
+            // Green
+            myColorMatrix.Matrix11 = 1.00f;
+
+            // Blue
+            myColorMatrix.Matrix22 = 1.00f;
+
+            // alpha
+            myColorMatrix.Matrix33 = 1.00f;
+
+            // w
+            myColorMatrix.Matrix44 = 1.00f;
+
+            // Create an ImageAttributes object and set the color matrix.
+            ImageAttributes imageAttr = new ImageAttributes();
+            imageAttr.SetColorMatrix(myColorMatrix);
+
+            // Draw the image using the color matrix.
+            Rectangle rect = new Rectangle(100, 20, 200, 200);
+            e.Graphics.DrawImage(myImage, rect, 0, 0, 200, 200, GraphicsUnit.Pixel, imageAttr);
+        }
+
     }
 }
 

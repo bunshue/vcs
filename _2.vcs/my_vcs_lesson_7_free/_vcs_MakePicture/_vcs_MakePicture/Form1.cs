@@ -3274,7 +3274,7 @@ namespace _vcs_MakePicture
             x_st += 150;
             g.FillEllipse(sb, new Rectangle(x_st, y_st, 100, 100));
 
-            x_st += 255-50;
+            x_st += 255 - 50;
             //y_st -= 20;
             points = new Point[4];
             points[0] = new Point(x_st + 0, y_st + 0);
@@ -3509,9 +3509,59 @@ namespace _vcs_MakePicture
 
         }
 
+        Color[] colors = 
+            {
+                Color.FromArgb(255, 94, 28, 13),
+                Color.FromArgb(255, 241, 149, 108),
+                Color.FromArgb(255, 97, 119, 171),
+                Color.FromArgb(255, 90, 103, 39),
+                Color.FromArgb(255, 164, 131, 196),
+                Color.FromArgb(255, 140, 253, 153),
+                
+                Color.FromArgb(255, 255, 116, 21),
+                Color.FromArgb(255, 7, 47, 122),
+                Color.FromArgb(255, 222, 29, 42),
+                Color.FromArgb(255, 69, 0, 68),
+                Color.FromArgb(255, 187, 255, 19),
+                Color.FromArgb(255, 255, 142, 0),
+                
+                Color.FromArgb(255, 0, 0, 142),
+                Color.FromArgb(255, 64, 173, 38),
+                Color.FromArgb(255, 203, 0, 0),
+                Color.FromArgb(255, 255, 217, 0),
+                Color.FromArgb(255, 207, 3, 124),
+                Color.FromArgb(255, 0, 148, 189),
+                
+                Color.FromArgb(255, 255, 255, 255),
+                Color.FromArgb(255, 249, 249, 249),
+                Color.FromArgb(255, 180, 180, 180),
+                Color.FromArgb(255, 117, 117, 117),
+                Color.FromArgb(255, 53, 53, 53),
+                Color.FromArgb(255, 0, 0, 0),
+            };
+
         private void button82_Click(object sender, EventArgs e)
         {
+            //標準色卡
+            int w = 80;
+            int h = 60;
+            int x_st = 0;
+            int y_st = 0;
+            int BORDER = 5;
 
+            bitmap1 = new Bitmap(w * 6 + BORDER, h * 4 + BORDER);
+
+            Graphics g = Graphics.FromImage(bitmap1);
+            Pen p = new Pen(Color.Red, 5);
+            g.Clear(Color.Pink);
+
+            for (int i = 0; i < 24; i++)
+            {
+                x_st = BORDER + w * (i % 6);
+                y_st = BORDER + h * (i / 6);
+                g.FillRectangle(new SolidBrush(colors[i]), new Rectangle(x_st, y_st, w - BORDER, h - BORDER));
+            }
+            pictureBox1.Image = bitmap1;
         }
 
         private void button83_Click(object sender, EventArgs e)

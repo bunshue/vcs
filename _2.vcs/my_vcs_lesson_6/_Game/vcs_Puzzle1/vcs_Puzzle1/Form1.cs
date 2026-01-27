@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Drawing.Imaging; //  for ColorMatrix, ImageAttributes
+using System.Drawing.Imaging; //  for ImageAttributes
 
 namespace vcs_Puzzle1
 {
@@ -25,15 +25,6 @@ namespace vcs_Puzzle1
         Random rd = new Random();
         int SplitNo = 3; //  預設小圖的個數是 3 X 3 
         float D; //  小圖的 寬高
-
-        float[][] m_cmArray = // 色彩調整矩陣 透明度 20%
-               {
-                  new float[] {1, 0, 0, 0,    0},
-                  new float[] {0, 1, 0, 0,    0},
-                  new float[] {0, 0, 1, 0,    0},
-                  new float[] {0, 0, 0, 0.2f, 0},
-                  new float[] {0, 0, 0, 0,    1}
-               };
         bool hint = false; // 是否有提示
 
         public Form1()
@@ -93,12 +84,7 @@ namespace vcs_Puzzle1
             if (hint)
             {
                 Rectangle dest2 = new Rectangle(x0, y0, 600, 600);
-
-                ColorMatrix cm = new ColorMatrix(m_cmArray);
-                ImageAttributes ia = new ImageAttributes();
-                ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-
-                e.Graphics.DrawImage(bitmap, dest2, 0, 0, 600, 600, GraphicsUnit.Pixel, ia);
+                e.Graphics.DrawImage(bitmap, dest2, 0, 0, 600, 600, GraphicsUnit.Pixel);
             }
 
             // 繪出 全部小圖

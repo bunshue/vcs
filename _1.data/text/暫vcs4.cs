@@ -1,39 +1,16 @@
 ﻿
 
-        private void PrintArray<T>(T[,] arr)
-        {
-            richTextBox1.Text += "Rank = " + arr.Rank.ToString() + "\n";
-
-            int ROW = arr.GetUpperBound(0) + 1;//獲取指定維度的上限，在 上一個1就是列數
-            int COL = arr.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
-            int length = arr.Length;//獲取整個二維陣列的長度，即所有元 的個數
-            richTextBox1.Text += "ROW = " + ROW.ToString() + "\n";
-            richTextBox1.Text += "COL = " + COL.ToString() + "\n";
-            richTextBox1.Text += "length = " + length.ToString() + "\n";
-
-            richTextBox1.Text += "L0 = " + arr.GetLength(0).ToString() + "\n";  //第0維的長度
-            richTextBox1.Text += "L1 = " + arr.GetLength(1).ToString() + "\n";  //第1維的長度
-
-            richTextBox1.Text += "t1 = " + arr.GetLowerBound(0).ToString() + "\n";  //第0維的下限 0
-            richTextBox1.Text += "t2 = " + arr.GetLowerBound(1).ToString() + "\n";  //第1維的下限 0
-            richTextBox1.Text += "t3 = " + arr.GetUpperBound(0).ToString() + "\n";  //第0維的上限
-            richTextBox1.Text += "t3 = " + arr.GetUpperBound(1).ToString() + "\n";  //第1維的上限
 
 
-            for (int r = arr.GetLowerBound(0); r <= arr.GetUpperBound(0); r++)
-            {
-                for (int c = arr.GetLowerBound(1); c <= arr.GetUpperBound(1); c++)
-                {
-                    richTextBox1.Text += arr[r, c].ToString() + "\t";
-                }
-                richTextBox1.Text += "\n";
-            }
-            richTextBox1.Text += "\n";
-        }
+D:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw\data
+
+color_chart.bmp
 
 
 
 
+            //int[] gray = new int[220];
+            //g.DrawLines(Pens.Red, gray.ToArray());
 
 
 Binary格式讀出一個檔案到拜列
@@ -45,9 +22,7 @@ Binary格式讀出一個檔案到拜列
             fs.Close();
 
 
-
 /*
-
 記住目前的設定值，下次程式開啟時，可以拿來用。
 
 方案總管/Properties/Settings settings/
