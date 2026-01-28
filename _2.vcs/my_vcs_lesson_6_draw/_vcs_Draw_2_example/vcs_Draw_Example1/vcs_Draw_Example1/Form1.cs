@@ -136,9 +136,9 @@ namespace vcs_Draw_Example1
             pictureBox1.Size = new Size(1060, 600);
             pictureBox1.BackColor = Color.White;
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+            bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
             checkBox1.Location = new Point(pictureBox1.Location.X, pictureBox1.Location.Y + pictureBox1.Size.Height - checkBox1.Size.Height);
-            bt_save.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_save.Size.Width * 2, pictureBox1.Location.Y + pictureBox1.Size.Height - bt_save.Size.Height);
-            bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y + pictureBox1.Size.Height - bt_reset.Size.Height);
+            bt_save.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_save.Size.Width, pictureBox1.Location.Y + pictureBox1.Size.Height - bt_save.Size.Height);
 
             pictureBox2.Size = new Size(360, 250);
             pictureBox2.BackColor = Color.Pink;
