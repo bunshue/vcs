@@ -67,8 +67,8 @@ namespace vcs_ImageProcessing1
             //button
             x_st = 10;
             y_st = 10;
-            dx = 140;
-            dy = 70;
+            dx = 200 + 10;
+            dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -92,51 +92,16 @@ namespace vcs_ImageProcessing1
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            pictureBox1.Size = new Size(1200, 1000);
+            pictureBox1.Size = new Size(1000, 900);
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
-            pictureBox2.Visible = false;
-            pictureBox3.Visible = false;
 
-            richTextBox1.Size = new Size(360, 1000);
-            richTextBox1.Location = new Point(x_st + dx * 11 + 0, y_st + dy * 0);
+            richTextBox1.Size = new Size(300, 900);
+            richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            bt_exit_setup();
-        }
-
-        private void bt_exit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        void bt_exit_setup()
-        {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
-
-            Button bt_exit = new Button();  // 實例化按鈕
-            bt_exit.Name = "bt_exit";
-            bt_exit.Size = new Size(w, h);
-            bt_exit.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            g.DrawLine(p, 0, 0, w - 1, h - 1);
-            g.DrawLine(p, w - 1, 0, 0, h - 1);
-            bt_exit.Image = bmp;
-
-            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
-            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_exit); // 將按鈕加入表單
-            bt_exit.BringToFront();     //移到最上層
+            this.Size = new Size(1820, 960);
+            this.Text = "vcs_ImageProcessing1";
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -148,23 +113,6 @@ namespace vcs_ImageProcessing1
         {
             pictureBox1.Image = Image.FromFile(filename);
             Application.DoEvents();
-
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
-            //button
-            x_st = 10;
-            y_st = 10;
-            dx = 140;
-            dy = 70;
-
-            pictureBox1.Size = new Size(1200, 1000);
-            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
-            pictureBox2.Visible = false;
-            pictureBox3.Visible = false;
         }
 
         //各種影像處理速度比較 ST
@@ -340,8 +288,7 @@ namespace vcs_ImageProcessing1
         private void button3_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "指針法3\n";
-            //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_image_processing\pic6_children2.png";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
             Bitmap bmp = image_process_pointer1(filename);
             pictureBox1.Image = bmp;
         }
@@ -767,192 +714,8 @@ namespace vcs_ImageProcessing1
         {
         }
 
-
-
-        public struct RGB
-        {
-            private byte _r;
-            private byte _g;
-            private byte _b;
-
-            public RGB(byte r, byte g, byte b)
-            {
-                this._r = r;
-                this._g = g;
-                this._b = b;
-            }
-
-            public byte R
-            {
-                get { return this._r; }
-                set { this._r = value; }
-            }
-
-            public byte G
-            {
-                get { return this._g; }
-                set { this._g = value; }
-            }
-
-            public byte B
-            {
-                get { return this._b; }
-                set { this._b = value; }
-            }
-
-            public bool Equals(RGB rgb)
-            {
-                return (this.R == rgb.R) && (this.G == rgb.G) && (this.B == rgb.B);
-            }
-        }
-
-        public struct YUV
-        {
-            private double _y;
-            private double _u;
-            private double _v;
-
-            public YUV(double y, double u, double v)
-            {
-                this._y = y;
-                this._u = u;
-                this._v = v;
-            }
-
-            public double Y
-            {
-                get { return this._y; }
-                set { this._y = value; }
-            }
-
-            public double U
-            {
-                get { return this._u; }
-                set { this._u = value; }
-            }
-
-            public double V
-            {
-                get { return this._v; }
-                set { this._v = value; }
-            }
-
-            public bool Equals(YUV yuv)
-            {
-                return (this.Y == yuv.Y) && (this.U == yuv.U) && (this.V == yuv.V);
-            }
-        }
-
-        public static YUV RGBToYUV(RGB rgb)
-        {
-            double y = rgb.R * .299000 + rgb.G * .587000 + rgb.B * .114000;
-            double u = rgb.R * -.168736 + rgb.G * -.331264 + rgb.B * .500000 + 128;
-            double v = rgb.R * .500000 + rgb.G * -.418688 + rgb.B * -.081312 + 128;
-
-            return new YUV(y, u, v);
-        }
-
-        void measure_gray_scale(Bitmap bmp, PictureBox pbx)
-        {
-            int w = 40;
-            int h = 40;
-            int W = w * 16;
-            int H = h * 16;
-
-            int[] Y = new int[256];
-
-            for (int i = 0; i < 256; i++)
-            {
-                int x_st = i * 2;
-                int y_st = 100;
-
-                Color p = bmp.GetPixel(x_st, y_st);
-                RGB pp = new RGB(p.R, p.G, p.B);
-                YUV yyy = new YUV();
-                yyy = RGBToYUV(pp);
-                Y[i] = (int)yyy.Y;
-            }
-
-            for (int i = 0; i < 256; i++)
-            {
-                richTextBox1.Text += Y[i].ToString("D3");
-                if (i % 16 == 15)
-                {
-                    richTextBox1.Text += "\n";
-                }
-                else
-                {
-                    richTextBox1.Text += " ";
-                }
-            }
-
-            Point[] curvePoints = new Point[256];    //一維陣列內有 256 個Point
-
-            for (int i = 0; i < 256; i++)
-            {
-                curvePoints[i].X = i;
-                curvePoints[i].Y = 255 - Y[i];
-            }
-
-            Bitmap b = new Bitmap(256 + 10, 256 + 10);
-            Graphics g = Graphics.FromImage(b);
-            g.DrawLines(Pens.Red, curvePoints);   //畫直線
-            g.DrawRectangle(Pens.Green, 0, 0, 256, 256);
-
-            pbx.Image = b;
-            pbx.Size = new Size(256 + 10, 256 + 10);
-        }
-
         private void button10_Click(object sender, EventArgs e)
         {
-            //ImageAttributes Gamma
-            pictureBox1.Size = new Size(600, 500);
-            pictureBox2.Size = new Size(256, 256);
-            pictureBox3.Size = new Size(256, 256);
-            pictureBox2.Location = new Point(pictureBox1.Location.X + pictureBox1.Width, pictureBox1.Location.Y);
-            pictureBox3.Location = new Point(pictureBox1.Location.X + pictureBox1.Width, pictureBox1.Location.Y+300);
-
-            pictureBox1.BackColor = Color.Red;
-            pictureBox2.BackColor = Color.Green;
-            pictureBox3.BackColor = Color.Blue;
-
-            pictureBox2.Visible = true;
-            pictureBox3.Visible = true;
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            Bitmap bitmap1 = new Bitmap(600, 500);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.Pink);
-
-            // 測試 gamma
-            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw\data\gray1.bmp";
-            Bitmap bmp = new Bitmap(filename);
-
-            //原圖
-            g.DrawImage(bmp, 0, 0, bmp.Width, bmp.Height);
-            measure_gray_scale(bmp, pictureBox2);
-
-            //經過Gamma處理
-            float gamma = 2.2f;  // 0 ~ 2.5, 1.0為不變
-            richTextBox1.Text += "Gamma = " + gamma.ToString() + "\n";
-
-            // 使用 ImageAttributes 設定 gamma 值
-            ImageAttributes ia = new ImageAttributes();
-            ia.SetGamma(gamma);
-
-            g.DrawImage(bmp, new Rectangle(0, 210, bmp.Width, bmp.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
-
-            g.DrawString("Gamma = 1", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(20, 20));
-            g.DrawString("Gamma = " + gamma.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(20, 20 + 210));
-
-            //量測的範圍
-            Rectangle rect = new Rectangle(0, 210, bmp.Width, bmp.Height);
-            measure_gray_scale(bitmap1.Clone(rect, PixelFormat.Format32bppArgb), pictureBox3);
-
-            pictureBox1.Image = bitmap1;
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
         }
 
         private void button11_Click(object sender, EventArgs e)

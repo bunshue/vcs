@@ -1323,6 +1323,7 @@
             this.button85.Name = "button85";
             this.button85.Size = new System.Drawing.Size(60, 60);
             this.button85.TabIndex = 88;
+            this.button85.Text = "三原色";
             this.button85.UseVisualStyleBackColor = true;
             this.button85.Click += new System.EventHandler(this.button85_Click);
             // 
