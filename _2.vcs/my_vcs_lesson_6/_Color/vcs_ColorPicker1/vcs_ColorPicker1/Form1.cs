@@ -13,7 +13,7 @@ namespace vcs_ColorPicker1
 {
     public partial class Form1 : Form
     {
-        bool flag_small_mode = true;
+        bool flag_show_alpha = false;
 
         Graphics g;
         Font f;
@@ -173,13 +173,21 @@ namespace vcs_ColorPicker1
             Color cl = GetColor(pt);
             if (cl_old != cl)
             {
-                this.Size = new Size(240, 80);
                 cnt = 0;
                 g.Clear(BackColor);
 
-                g.DrawString(cl.R.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Red), new PointF(5, 0));
-                g.DrawString(cl.G.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Lime), new PointF(5 + 75, 0));
-                g.DrawString(cl.B.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(5 + 150, 0));
+                g.DrawString(cl.R.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Red), new PointF(5, 75 * 0));
+                g.DrawString(cl.G.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Lime), new PointF(5 + 75 * 1, 0));
+                g.DrawString(cl.B.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(5 + 75 * 2, 0));
+                if (flag_show_alpha == true)
+                {
+                    this.Size = new Size(240 + 70, 80);
+                    g.DrawString(cl.A.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(5 + 75 * 3, 0));
+                }
+                else
+                {
+                    this.Size = new Size(240, 80);
+                }
 
                 cl_old = cl;
 
@@ -261,9 +269,26 @@ namespace vcs_ColorPicker1
 
         }
 
+        private void toolStripMenuItem1c_Click(object sender, EventArgs e)
+        {
+            toolStripMenuItem1c.Checked = !toolStripMenuItem1c.Checked;
+            flag_show_alpha = toolStripMenuItem1c.Checked;
+            if (flag_show_alpha == true)
+            {
+                this.Size = new Size(240 + 70, 80);
+                g = this.CreateGraphics();
+            }
+            else
+            {
+                this.Size = new Size(240, 80);
+                g = this.CreateGraphics();
+            }
+        }
+
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
     }
 }
+

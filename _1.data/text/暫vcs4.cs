@@ -1,5 +1,22 @@
 ﻿
 
+
+ImageAttributes的使用
+是在畫影像 g.DrawImage(bmp, ....)時，
+把影像套用了ImageAttributes的設定，像是gamma, color matrix
+
+所以，並不是bmp被套用設定，是bmp經過設定被畫入畫布
+
+這個新的部分，已經畫在Bitmap上，要用Bitmap.Clone方法取出為新的Bitmap位圖
+
+ImageAttributes ia = new ImageAttributes();
+ia.SetGamma
+ia.SetGamma(0.6f);
+ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);same
+ia.SetColorMatrices(cm, null);//same
+
+
             //int[] gray = new int[220];
             //g.DrawLines(Pens.Red, gray.ToArray());
 

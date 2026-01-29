@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox0 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
@@ -48,12 +47,10 @@
             this.picToned = new System.Windows.Forms.PictureBox();
             this.picOriginal = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.trackBar_gamma1 = new System.Windows.Forms.TrackBar();
             this.trackBar_gamma2 = new System.Windows.Forms.TrackBar();
             this.trackBar_threshold = new System.Windows.Forms.TrackBar();
             this.trackBar_binary = new System.Windows.Forms.TrackBar();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -65,7 +62,6 @@
             this.trackBar_transparent = new System.Windows.Forms.TrackBar();
             this.bt_save = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -74,7 +70,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picToned)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picOriginal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar_gamma1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_gamma2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_threshold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_binary)).BeginInit();
@@ -82,15 +77,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_transparent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(70, 10);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
             // 
             // pictureBox0
             // 
@@ -251,15 +237,6 @@
             this.pictureBox5.TabIndex = 22;
             this.pictureBox5.TabStop = false;
             // 
-            // trackBar_gamma1
-            // 
-            this.trackBar_gamma1.Location = new System.Drawing.Point(666, 152);
-            this.trackBar_gamma1.Maximum = 25;
-            this.trackBar_gamma1.Name = "trackBar_gamma1";
-            this.trackBar_gamma1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.trackBar_gamma1.Size = new System.Drawing.Size(300, 45);
-            this.trackBar_gamma1.TabIndex = 24;
-            // 
             // trackBar_gamma2
             // 
             this.trackBar_gamma2.Location = new System.Drawing.Point(666, 193);
@@ -294,16 +271,6 @@
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 29;
             this.richTextBox1.Text = "";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(532, 31);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 21);
-            this.label1.TabIndex = 30;
-            this.label1.Text = "label1";
             // 
             // label2
             // 
@@ -431,22 +398,18 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.trackBar_binary);
             this.Controls.Add(this.trackBar_threshold);
             this.Controls.Add(this.trackBar_gamma2);
-            this.Controls.Add(this.trackBar_gamma1);
             this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox0);
-            this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
             this.Text = "10,10";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
@@ -456,7 +419,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picToned)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picOriginal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar_gamma1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_gamma2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_threshold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_binary)).EndInit();
@@ -470,7 +432,6 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox0;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox4;
@@ -488,12 +449,10 @@
         private System.Windows.Forms.PictureBox picToned;
         private System.Windows.Forms.PictureBox picOriginal;
         private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.TrackBar trackBar_gamma1;
         private System.Windows.Forms.TrackBar trackBar_gamma2;
         private System.Windows.Forms.TrackBar trackBar_threshold;
         private System.Windows.Forms.TrackBar trackBar_binary;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;

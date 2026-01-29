@@ -1301,6 +1301,7 @@
             this.button83.Name = "button83";
             this.button83.Size = new System.Drawing.Size(60, 60);
             this.button83.TabIndex = 86;
+            this.button83.Text = "gamma 測試";
             this.button83.UseVisualStyleBackColor = true;
             this.button83.Click += new System.EventHandler(this.button83_Click);
             // 
@@ -1311,6 +1312,7 @@
             this.button84.Name = "button84";
             this.button84.Size = new System.Drawing.Size(60, 60);
             this.button84.TabIndex = 89;
+            this.button84.Text = "gamma 測試";
             this.button84.UseVisualStyleBackColor = true;
             this.button84.Click += new System.EventHandler(this.button84_Click);
             // 

@@ -3566,12 +3566,64 @@ namespace _vcs_MakePicture
 
         private void button83_Click(object sender, EventArgs e)
         {
+            //gamma測試
+            int w = 40;
+            int h = 40;
+            int W = w * 16;
+            int H = h * 16;
 
+            bitmap1 = new Bitmap(W + 1, H + 1);
+            g = Graphics.FromImage(bitmap1);
+
+            g.Clear(Color.Pink);
+            g.DrawRectangle(Pens.Red, 5, 5, W - 10, H - 10);
+
+            for (int i = 0; i < 256; i++)
+            {
+                int x_st = w * (i / 16);
+                int y_st = h * (i % 16);
+                SolidBrush sb = new SolidBrush(Color.FromArgb(255, i, i, i));
+                g.FillRectangle(sb, x_st, y_st, w, h);
+            }
+
+            for (int i = 0; i <= W; i += w)
+            {
+                //垂直線
+                g.DrawLine(Pens.Red, i, 0, i, H);
+            }
+
+            for (int j = 0; j <= H; j += h)
+            {
+                //水平線
+                g.DrawLine(Pens.Red, 0, j, W, j);
+            }
+
+            pictureBox1.Image = bitmap1;
+
+            pictureBox1.Size = new Size(640 + 50, 640 + 50);
         }
 
         private void button84_Click(object sender, EventArgs e)
         {
+            //gamma測試
+            int W = 256 * 2;
+            int H = 200;
 
+            bitmap1 = new Bitmap(W, H);
+            g = Graphics.FromImage(bitmap1);
+
+            g.Clear(Color.Pink);
+
+            for (int i = 0; i < 256; i++)
+            {
+                int x_st = i * 2;
+                int y_st = 0;
+                int w = 2;
+                int h = 200;
+                SolidBrush sb = new SolidBrush(Color.FromArgb(255, i, i, i));
+                g.FillRectangle(sb, x_st, y_st, w, h);
+            }
+            pictureBox1.Image = bitmap1;
         }
 
         private void button85_Click(object sender, EventArgs e)

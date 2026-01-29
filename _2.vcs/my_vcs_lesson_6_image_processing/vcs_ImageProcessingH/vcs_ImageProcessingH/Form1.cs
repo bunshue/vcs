@@ -61,20 +61,17 @@ namespace vcs_ImageProcessingH
 
             bt_auto.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             label0.Location = new Point(x_st + dx * 0 + 100, y_st + dy * 0);
-            label1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             label2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             label4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             label5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             label6.Location = new Point(x_st + dx * 3, y_st + dy * 1);
 
             label0.Text = "原圖";
-            label1.Text = "Gamma";
             label2.Text = "Gamma";
             label4.Text = "Threshold";
             label5.Text = "二值化對比";
             label6.Text = "亮度";
 
-            trackBar_gamma1.Location = new Point(x_st + dx * 1, y_st + dy * 0 + dd1);
             trackBar_gamma2.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd1);
             trackBar_threshold.Location = new Point(x_st + dx * 1, y_st + dy * 1 + dd1);
             trackBar_binary.Location = new Point(x_st + dx * 2, y_st + dy * 1 + dd1);
@@ -82,7 +79,6 @@ namespace vcs_ImageProcessingH
             bt_save.Location = new Point(x_st + dx * 4, y_st + dy * 1 + dd1);
 
             pictureBox0.SizeMode = PictureBoxSizeMode.Normal;
-            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox3.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox4.SizeMode = PictureBoxSizeMode.Normal;
@@ -91,7 +87,6 @@ namespace vcs_ImageProcessingH
             pictureBox6.BackColor = Color.Pink;
 
             pictureBox0.Size = new Size(W, H);
-            pictureBox1.Size = new Size(W, H);
             pictureBox2.Size = new Size(W, H);
             pictureBox3.Size = new Size(W, H);
             pictureBox4.Size = new Size(W, H);
@@ -99,7 +94,6 @@ namespace vcs_ImageProcessingH
             pictureBox6.Size = new Size(W * 3 / 2, H);
 
             pictureBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0 + dd2);
-            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0 + dd2);
             pictureBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd2);
             pictureBox3.Location = new Point(x_st + dx * 0, y_st + dy * 1 + dd2);
             pictureBox4.Location = new Point(x_st + dx * 1, y_st + dy * 1 + dd2);
@@ -112,8 +106,6 @@ namespace vcs_ImageProcessingH
 
             groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
-            trackBar_gamma1.MouseMove += new MouseEventHandler(trackBar_gamma1_MouseMove);
-            trackBar_gamma1.MouseUp += new MouseEventHandler(trackBar_gamma1_MouseUp);
             trackBar_gamma2.MouseMove += new MouseEventHandler(trackBar_gamma2_MouseMove);
             trackBar_gamma2.MouseUp += new MouseEventHandler(trackBar_gamma2_MouseUp);
             trackBar_threshold.MouseMove += new MouseEventHandler(trackBar_threshold_MouseMove);
@@ -157,20 +149,6 @@ namespace vcs_ImageProcessingH
         private void bt_exit_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        void trackBar_gamma1_MouseMove(object sender, MouseEventArgs e)
-        {
-            float gamma = (float)(trackBar_gamma1.Value) / 10;
-            label1.Text = "Gamma = " + gamma.ToString();
-        }
-
-        void trackBar_gamma1_MouseUp(object sender, MouseEventArgs e)
-        {
-            float gamma = (float)(trackBar_gamma1.Value) / 10;
-            if (gamma < 0.1)
-                gamma = 0.1f;
-            pictureBox1.Image = apply_gamma1(filename, gamma);
         }
 
         void trackBar_gamma2_MouseMove(object sender, MouseEventArgs e)
@@ -234,8 +212,8 @@ namespace vcs_ImageProcessingH
             // Prepare the ImageAttributes.
             Color low_color = Color.FromArgb(cutoff_value, cutoff_value, cutoff_value);
             Color high_color = Color.FromArgb(255, 255, 255);
-            ImageAttributes image_attr = new ImageAttributes();
-            image_attr.SetColorKey(low_color, high_color);
+            ImageAttributes ia = new ImageAttributes();
+            ia.SetColorKey(low_color, high_color);
 
             // Make the result image.
             int W = bitmap1.Width;
@@ -252,22 +230,17 @@ namespace vcs_ImageProcessingH
                 // Copy the original image onto the result
                 // image while using the ImageAttributes.
                 Rectangle dest_rect = new Rectangle(0, 0, W, H);
-                g.DrawImage(bitmap1, dest_rect, 0, 0, W, H, GraphicsUnit.Pixel, image_attr);
+                g.DrawImage(bitmap1, dest_rect, 0, 0, W, H, GraphicsUnit.Pixel, ia);
             }
             // Display the image.
             pictureBox6.Image = bitmap2;
         }
 
-        float gamma = 0.1f;
         float threshold = 0.01f;
         int binary = 20;
+        float gamma = 0.1f;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            gamma += 0.3f;
-            if (gamma > 2.5f)
-                gamma = 0.1f;
-            pictureBox1.Image = apply_gamma1(filename, gamma);
-
             threshold += 0.06f;
             if (threshold > 1.0f)
                 threshold = 0.01f;
@@ -278,37 +251,11 @@ namespace vcs_ImageProcessingH
                 binary -= 255;
             pictureBox4.Image = apply_contrast_enhancement(filename, binary);
 
+            gamma += 0.3f;
+            if (gamma > 2.5f)
+                gamma = 0.1f;
+
             pictureBox5.Image = apply_gamma2(filename, gamma);
-        }
-
-        private Bitmap apply_gamma1(string filename, float gamma)
-        {
-            label1.Text = "Gamma = " + gamma.ToString();
-
-            Image image = Image.FromFile(filename);
-
-            // Set the ImageAttributes object's gamma value.
-            ImageAttributes attributes = new ImageAttributes();
-            attributes.SetGamma(gamma);
-
-            // Draw the image onto the new bitmap while applying the new gamma value.
-            Point[] points =
-            {
-                new Point(0, 0),
-                new Point(image.Width, 0),
-                new Point(0, image.Height),
-            };
-            Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
-
-            // Make the result bitmap.
-            Bitmap bm = new Bitmap(image.Width, image.Height);
-            using (Graphics g = Graphics.FromImage(bm))
-            {
-                g.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
-            }
-
-            // Return the result.
-            return bm;
         }
 
         private Bitmap apply_threshold(string filename, float threshold)
@@ -321,8 +268,8 @@ namespace vcs_ImageProcessingH
             Bitmap bm = new Bitmap(image.Width, image.Height);
 
             // Make the ImageAttributes object and set the threshold.
-            ImageAttributes attributes = new ImageAttributes();
-            attributes.SetThreshold(threshold);
+            ImageAttributes ia = new ImageAttributes();
+            ia.SetThreshold(threshold);
 
             // Draw the image onto the new bitmap while applying the new ColorMatrix.
             Point[] points =
@@ -334,7 +281,7 @@ namespace vcs_ImageProcessingH
             Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
             using (Graphics gr = Graphics.FromImage(bm))
             {
-                gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
+                gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, ia);
             }
 
             // Return the result.
@@ -399,16 +346,19 @@ namespace vcs_ImageProcessingH
             }
 
             // 1表示無變化，就不做
-            if (val == 1.0000f) return bmp;
+            if (val == 1.0000f)
+            {
+                return bmp;
+            }
 
             try
             {
                 Bitmap b = new Bitmap(bmp.Width, bmp.Height);
                 Graphics g = Graphics.FromImage(b);
-                ImageAttributes attr = new ImageAttributes();
+                ImageAttributes ia = new ImageAttributes();
+                ia.SetGamma(val, ColorAdjustType.Bitmap);
 
-                attr.SetGamma(val, ColorAdjustType.Bitmap);
-                g.DrawImage(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, attr);
+                g.DrawImage(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
                 g.Dispose();
                 return b;
             }
@@ -442,8 +392,8 @@ namespace vcs_ImageProcessingH
                 new float[] {0, 0, 0, 1, 0},
                 new float[] {0, 0, 0, 0, 1}
             });
-            ImageAttributes attributes = new ImageAttributes();
-            attributes.SetColorMatrix(cm);
+            ImageAttributes ia = new ImageAttributes();
+            ia.SetColorMatrix(cm);
 
             // Draw the image onto the new bitmap while applying the new ColorMatrix.
             Point[] points =
@@ -458,7 +408,7 @@ namespace vcs_ImageProcessingH
             Bitmap bm = new Bitmap(image.Width, image.Height);
             using (Graphics gr = Graphics.FromImage(bm))
             {
-                gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
+                gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, ia);
             }
 
             // Return the result.
@@ -482,7 +432,6 @@ namespace vcs_ImageProcessingH
             {
                 bt_auto.Text = "手動";
                 timer1.Enabled = true;
-                trackBar_gamma1.Visible = false;
                 trackBar_gamma2.Visible = false;
                 trackBar_threshold.Visible = false;
                 trackBar_binary.Visible = false;
@@ -492,7 +441,6 @@ namespace vcs_ImageProcessingH
             {
                 bt_auto.Text = "自動";
                 timer1.Enabled = false;
-                trackBar_gamma1.Visible = true;
                 trackBar_gamma2.Visible = true;
                 trackBar_threshold.Visible = true;
                 trackBar_binary.Visible = true;
@@ -527,3 +475,17 @@ namespace vcs_ImageProcessingH
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+

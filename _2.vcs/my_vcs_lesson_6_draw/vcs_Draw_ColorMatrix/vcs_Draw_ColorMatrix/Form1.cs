@@ -16,59 +16,52 @@ namespace vcs_Draw_ColorMatrix
     {
         Bitmap bitmap1;
         Graphics g;
-        bool flag_color_matrix_valid = false;
+        bool flag_color_matrix_valid = true;
         int W = 800;
-        int H = 500;
+        int H = 700;
         string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
 
-        // 色彩調整矩陣 Sepia
+        // 色彩調整矩陣 標準
         float[][] matrix =
         {
-            new float[] {0.299f, 0.299f, 0.299f, 0, 0},
-            new float[] {0.587f, 0.587f, 0.587f, 0, 0},
-            new float[] {0.114f, 0.114f, 0.114f, 0, 0},
-            new float[] {0,      0,      0,      1, 0},
-            new float[] {0,      0,      0,      0, 1}
+            new float[] {1, 0, 0, 0, 0},
+            new float[] {0, 1, 0, 0, 0},
+            new float[] {0, 0, 1, 0, 0},
+            new float[] {0, 0, 0, 1, 0},
+            new float[] {0, 0, 0, 0, 1}
+        };
+
+        // 色彩調整矩陣 標準
+        float[][] matrix_identity =
+        {
+            new float[] {1, 0, 0, 0, 0},
+            new float[] {0, 1, 0, 0, 0},
+            new float[] {0, 0, 1, 0, 0},
+            new float[] {0, 0, 0, 1, 0},
+            new float[] {0, 0, 0, 0, 1}
+        };
+
+        // 色彩調整矩陣 Sepia
+        float[][] matrix_sepia =
+        {
+            //           紅對紅00 紅對綠01 紅對藍02
+            new float[] {0.393f,  0.349f,  0.272f,  0, 0},  // 紅
+            //           綠對紅10 綠對綠11 綠對藍12
+            new float[] {0.769f,  0.686f,  0.534f,  0, 0},  // 綠
+            //           藍對紅20 藍對綠21 藍對藍22
+            new float[] {0.189f,  0.168f,  0.131f,  0, 0},  // 藍
+            new float[] {0,       0,       0,       1, 0},
+            new float[] {0,       0,       0,       0, 1},
         };
 
         // 色彩調整矩陣 灰階1
-        float[][] matrix_gray1 =
+        float[][] matrix_gray =
         {
             new float[] {0.299f, 0.299f, 0.299f, 0, 0},
             new float[] {0.587f, 0.587f, 0.587f, 0, 0},
             new float[] {0.114f, 0.114f, 0.114f, 0, 0},
             new float[] {0,      0,      0,      1, 0},
             new float[] {0,      0,      0,      0, 1}
-        };
-
-        // 色彩調整矩陣 灰階
-        float[][] matrix_gray2 =
-        {
-            new float[] {0.299f, 0.299f, 0.299f, 0, 0},
-            new float[] {0.587f, 0.587f, 0.587f, 0, 0},
-            new float[] {0.114f, 0.114f, 0.114f, 0, 0},
-            new float[] {0,      0,      0,      1, 0},
-            new float[] {0,      0,      0,      0, 1}
-        };
-
-        // 色彩調整矩陣 灰階
-        float[][] matrix_gray3 =
-        {
-            new float[] {0.3f, 0.3f, 0.3f, 0, 0},
-            new float[] {0.6f, 0.6f, 0.6f, 0, 0},
-            new float[] {0.1f, 0.1f, 0.1f, 0, 0},
-            new float[] {0,    0,    0,    1, 0},
-            new float[] {0,    0,    0,    0, 1}
-        };
-
-        // 色彩調整矩陣 灰階
-        float[][] matrix_gray4 =
-        {
-            new float[] {0.3f,  0.3f,  0.3f,  0, 0},
-            new float[] {0.59f, 0.59f, 0.59f, 0, 0},
-            new float[] {0.11f, 0.11f, 0.11f, 0, 0},
-            new float[] {0,     0,     0,     1, 0},
-            new float[] {0,     0,     0,     0, 1}
         };
 
         public Form1()
@@ -189,7 +182,7 @@ namespace vcs_Draw_ColorMatrix
             bt_alpha.Location = new Point(xx + dx * 6, yy + dy * 2 + dd);
 
             groupBox1.Size = new Size(120, 150);
-            groupBox1.Location = new Point(xx + dx * 7+80, yy + dy * 0);
+            groupBox1.Location = new Point(xx + dx * 7 + 80, yy + dy * 0);
 
             y_st = 20;
             dy = 30;
@@ -204,28 +197,28 @@ namespace vcs_Draw_ColorMatrix
             lb_cm00.Text = "紅對紅00";
             lb_cm01.Text = "紅對綠01";
             lb_cm02.Text = "紅對藍02";
-            lb_cm03.Text = "";
-            lb_cm04.Text = "";
+            lb_cm03.Text = "x";
+            lb_cm04.Text = "x";
             lb_cm10.Text = "綠對紅10";
             lb_cm11.Text = "綠對綠11";
             lb_cm12.Text = "綠對藍12";
-            lb_cm13.Text = "";
-            lb_cm14.Text = "";
+            lb_cm13.Text = "x";
+            lb_cm14.Text = "x";
             lb_cm20.Text = "藍對紅20";
             lb_cm21.Text = "藍對綠21";
             lb_cm22.Text = "藍對藍22";
-            lb_cm23.Text = "";
-            lb_cm24.Text = "";
-            lb_cm30.Text = "";
-            lb_cm31.Text = "";
-            lb_cm32.Text = "";
+            lb_cm23.Text = "x";
+            lb_cm24.Text = "x";
+            lb_cm30.Text = "紅平移比";
+            lb_cm31.Text = "綠平移比";
+            lb_cm32.Text = "藍平移比";
             lb_cm33.Text = "全體Alpha(0~1)";
-            lb_cm34.Text = "";
-            lb_cm40.Text = "紅增減比";
-            lb_cm41.Text = "綠增減比";
-            lb_cm42.Text = "藍增減比";
-            lb_cm43.Text = "";
-            lb_cm44.Text = "";
+            lb_cm34.Text = "x";
+            lb_cm40.Text = "紅平移比";
+            lb_cm41.Text = "綠平移比";
+            lb_cm42.Text = "藍平移比";
+            lb_cm43.Text = "x";
+            lb_cm44.Text = "x";
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -235,16 +228,33 @@ namespace vcs_Draw_ColorMatrix
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //使用ColorMatrix取灰階1
+            int W = 640;
+            int H = 480;
+            Bitmap bitmap1 = new Bitmap(W, H);
 
-            //使用 color matrix
-            ColorMatrix cm = new ColorMatrix(matrix_gray1);
-            ImageAttributes ia = new ImageAttributes();
-            ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-            //ia.SetColorMatrix(cm);
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_game\airplane.bmp";
+            pictureBox2.Image = Image.FromFile(filename);
 
             Bitmap bmp = new Bitmap(filename);
+
+            Graphics g = Graphics.FromImage(bitmap1);
             g.Clear(Color.Pink);
+
+            //使用 color matrix, 設定 Alpha = 0.5
+            ColorMatrix cm = new ColorMatrix();
+            //print_ColorMatrix(cm);
+            cm.Matrix33 = 0.5f;  // 設定Alpha = 0.5
+            //cm.Matrix33 = 1.0f;  // 設定Alpha = 0.5
+            //print_ColorMatrix(cm);
+
+            ImageAttributes ia = new ImageAttributes();
+
+            ia.SetColorMatrix(cm);
+
+            // Make pixels that are the same color as the
+            // one in the upper left transparent.
+            // bmp.MakeTransparent(bmp.GetPixel(5, 60));  // 設定邊角點的顏色為透明色
+
             // 貼上使用CM轉換過的影像
             g.DrawImage(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
 
@@ -257,16 +267,10 @@ namespace vcs_Draw_ColorMatrix
             //透明度
 
             alpha += 0.1f;
-            if (alpha >= 1)
+            if (alpha > 1)
                 alpha = 0;
 
-            Bitmap bitmap1 = new Bitmap(filename);
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            Bitmap bitmap2 = new Bitmap(W, H);
-
-            Graphics g = Graphics.FromImage(bitmap2);
-
+            g.Clear(Color.Pink);
             //使用 color matrix
             ColorMatrix cm = new ColorMatrix();
             cm.Matrix33 = alpha; // 透明度
@@ -274,9 +278,10 @@ namespace vcs_Draw_ColorMatrix
             ia.SetColorMatrix(cm);
 
             // 貼上使用CM轉換過的影像
-            g.DrawImage(bitmap1, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
+            Bitmap bmp = new Bitmap(filename);
+            g.DrawImage(bmp, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
 
-            pictureBox1.Image = bitmap2;
+            pictureBox1.Image = bitmap1;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -317,20 +322,9 @@ namespace vcs_Draw_ColorMatrix
             ImageAttributes ia = new ImageAttributes();
             ia.SetColorMatrix(cm);
 
-            // Draw the image onto the new bitmap while applying the new ColorMatrix.
-            Point[] points =
-            {
-                new Point(0, 0),
-                new Point(bmp.Width, 0),
-                new Point(0, bmp.Height),
-            };
-            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-
             //貼上有調整的影像
-
             // 貼上使用CM轉換過的影像
-            g.DrawImage(bmp, points, rect, GraphicsUnit.Pixel, ia);
-            //g.DrawImage(banner, 0, 200, 300, 130);
+            g.DrawImage(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
 
             pictureBox1.Image = bitmap1;
         }
@@ -366,7 +360,6 @@ namespace vcs_Draw_ColorMatrix
             g.DrawImage(bmp, dest2, 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
 
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -381,15 +374,15 @@ namespace vcs_Draw_ColorMatrix
             Graphics gr = Graphics.FromImage(bitmap2);
             // Define target colors.
             Color[] color =
-                {
-                    //Color.Red, Color.Orange, Color.Yellow,
-                    //Color.Green, Color.Blue, Color.Indigo,
-                    //Color.Violet,
-
-                    Color.Red, Color.OrangeRed, Color.Yellow,
-                    Color.Green, Color.Blue, Color.Indigo,
-                    Color.Fuchsia,
-                };
+            {
+                //Color.Red, Color.Orange, Color.Yellow,
+                //Color.Green, Color.Blue, Color.Indigo,
+                //Color.Violet,
+                
+                Color.Red, Color.OrangeRed, Color.Yellow,
+                Color.Green, Color.Blue, Color.Indigo,
+                Color.Fuchsia,
+            };
             const float scale = 2.0f;
 
             // Draw.
@@ -411,14 +404,17 @@ namespace vcs_Draw_ColorMatrix
                 // Draw the next part of the image.
                 int x = (int)(i * bitmap1.Width / color.Length);
                 Point[] points =
-                    {
-                        new Point(x, 0),
-                        new Point(W, 0),
-                        new Point(x, H),
-                    };
+                {
+                    new Point(x, 0),
+                    new Point(W, 0),
+                    new Point(x, H),
+                };
                 Rectangle rect = new Rectangle(x, 0, W - x, H);
                 // 貼上使用CM轉換過的影像
                 gr.DrawImage(bitmap1, points, rect, GraphicsUnit.Pixel, ia);
+
+                //改用, 免用points rect
+                //g.DrawImage(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
             }
             pictureBox1.Image = bitmap2;
         }
@@ -434,113 +430,45 @@ namespace vcs_Draw_ColorMatrix
 
         private void button7_Click(object sender, EventArgs e)
         {
+            if (get_color_matrix() == false)
+            {
+                richTextBox1.Text += "取得CM失敗\n";
+                return;
+            }
+            else
+            {
+                richTextBox1.Text += "取得CM OK\n";
+            }
+            print_color_matrix(matrix);
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //SetColorMatrixExample
 
-            // Create a rectangle image with all colors set to 128 (medium gray).
-            //建立一個矩形全灰色影像
-            /*
-            Bitmap myBitmap = new Bitmap(50, 50, PixelFormat.Format32bppArgb);
-            Graphics g = Graphics.FromImage(myBitmap);
-            g.FillRectangle(new SolidBrush(Color.FromArgb(255, 128, 128, 128)),
-                new Rectangle(0, 0, 50, 50));
-            myBitmap.Save("Rectangle1.jpg");
-            */
-
-            // Open an Image file and draw it to the screen.
-            // string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-
-            Image myImage = Image.FromFile("Rectangle1.jpg");
-            g.DrawImage(myImage, 20, 20);
-
-            //建立 ColorMatrix，並將其 Matrix 位置設定為 1.75，強調影像的紅色元件。
-
-            //使用 color matrix
-            ColorMatrix cm = new ColorMatrix();
-
-            // Red
-            cm.Matrix00 = 1.75f;
-
-            // Green
-            cm.Matrix11 = 1.00f;
-
-            // Blue
-            cm.Matrix22 = 1.00f;
-
-            // alpha
-            cm.Matrix33 = 1.00f;
-
-            // w
-            cm.Matrix44 = 1.00f;
-
-            ImageAttributes ia = new ImageAttributes();
-            ia.SetColorMatrix(cm);
-
-            // Draw the image using the color matrix.
-            Rectangle rect = new Rectangle(100, 20, 200, 200);
-            // 貼上使用CM轉換過的影像
-            g.DrawImage(myImage, rect, 0, 0, 200, 200, GraphicsUnit.Pixel, ia);
-
-            pictureBox1.Image = bitmap1;
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            int W = 640;
-            int H = 480;
-            Bitmap bitmap1 = new Bitmap(W, H);
 
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_game\airplane.bmp";
-            pictureBox2.Image = Image.FromFile(filename);
-
-            Bitmap bmp = new Bitmap(filename);
-
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.Pink);
-
-            //使用 color matrix, 設定 Alpha = 0.5
-            ColorMatrix cm = new ColorMatrix();
-            cm.Matrix33 = 0.5f;  // 設定Alpha = 0.5
-            //cm.Matrix33 = 1.0f;  // 設定Alpha = 0.5
-
-            ImageAttributes ia = new ImageAttributes();
-            ia.SetColorMatrices(cm, null);
-            //ia.SetColorMatrix(cm);
-
-            // Make pixels that are the same color as the
-            // one in the upper left transparent.
-            // bmp.MakeTransparent(bmp.GetPixel(5, 60));  // 設定邊角點的顏色為透明色
-
-            int x_st = 50;
-            int y_st = 50;
-            Rectangle rect = new Rectangle(x_st, y_st, bmp.Width / 2, bmp.Height / 2);
-            // 貼上使用CM轉換過的影像
-            g.DrawImage(bmp, rect, 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
-
-            g.DrawRectangle(Pens.Green, rect);
-
-            pictureBox1.Image = bitmap1;
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            return;
+            //return;
 
-            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw\data\color_chart.bmp";
+            //string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw\data\color_chart.bmp";
+            string filename = "dddd.bmp";
             Bitmap image = new Bitmap(filename);
             int width = image.Width;
             int height = image.Height;
-            float degrees = 60f;
+            float degrees = 90f;
             double r = degrees * System.Math.PI / 180; // degrees to radians
 
             float[][] matrix =
             {
                 new float[] {(float)System.Math.Cos(r),   (float)System.Math.Sin(r),   0,  0,  0},
                 new float[] {(float)-System.Math.Sin(r),  (float)-System.Math.Cos(r),  0,  0,  0},
-                new float[] {0,  0,  2,  0,  0},
+                new float[] {0,  0,  1,  0,  0},
                 new float[] {0,  0,  0,  1,  0},
                 new float[] {0,  0,  0,  0,  1}
             };
@@ -548,6 +476,8 @@ namespace vcs_Draw_ColorMatrix
             ColorMatrix cm = new ColorMatrix(matrix);
             ImageAttributes ia = new ImageAttributes();
             ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+
+            richTextBox1.Text += "pt = " + image.GetPixel(50,50).ToString()+"\n";
 
             e.Graphics.DrawImage(image, 10, 10, width, height);
 
@@ -853,7 +783,6 @@ namespace vcs_Draw_ColorMatrix
                 return false;
             }
 
-
             matrix = new float[][] 
             {
                 //           紅對紅00 紅對綠01 紅對藍02
@@ -869,11 +798,20 @@ namespace vcs_Draw_ColorMatrix
             return flag_color_matrix_valid;
         }
 
-        private void bt_cm_apply_Click(object sender, EventArgs e)
+        void print_ColorMatrix(ColorMatrix cm)
         {
-            if (get_color_matrix() == false)
+            richTextBox1.Text += cm.Matrix00.ToString() + "\t" + cm.Matrix01.ToString() + "\t" + cm.Matrix02.ToString() + "\t" + cm.Matrix03.ToString() + "\t" + cm.Matrix04.ToString() + "\n";
+            richTextBox1.Text += cm.Matrix10.ToString() + "\t" + cm.Matrix11.ToString() + "\t" + cm.Matrix12.ToString() + "\t" + cm.Matrix13.ToString() + "\t" + cm.Matrix14.ToString() + "\n";
+            richTextBox1.Text += cm.Matrix20.ToString() + "\t" + cm.Matrix21.ToString() + "\t" + cm.Matrix22.ToString() + "\t" + cm.Matrix23.ToString() + "\t" + cm.Matrix24.ToString() + "\n";
+            richTextBox1.Text += cm.Matrix30.ToString() + "\t" + cm.Matrix31.ToString() + "\t" + cm.Matrix32.ToString() + "\t" + cm.Matrix33.ToString() + "\t" + cm.Matrix34.ToString() + "\n";
+            richTextBox1.Text += cm.Matrix40.ToString() + "\t" + cm.Matrix41.ToString() + "\t" + cm.Matrix42.ToString() + "\t" + cm.Matrix43.ToString() + "\t" + cm.Matrix44.ToString() + "\n";
+        }
+
+        void print_color_matrix(float[][] matrix)
+        {
+            if (flag_color_matrix_valid == false)
             {
-                richTextBox1.Text += "取得CM失敗\n";
+                richTextBox1.Text += "無 color matrix, 離開\n";
                 return;
             }
             else
@@ -885,93 +823,82 @@ namespace vcs_Draw_ColorMatrix
                 richTextBox1.Text += matrix[3][0] + "\t" + matrix[3][1] + "\t" + matrix[3][2] + "\t" + matrix[3][3] + "\t" + matrix[3][4] + "\n";
                 richTextBox1.Text += matrix[4][0] + "\t" + matrix[4][1] + "\t" + matrix[4][2] + "\t" + matrix[4][3] + "\t" + matrix[4][4] + "\n";
             }
+        }
 
-            //flag_color_matrix_valid = false;
+        private void bt_cm_apply_Click(object sender, EventArgs e)
+        {
+            apply_color_matrix();
+        }
+
+        void apply_color_matrix()
+        {
+            if (get_color_matrix() == false)
+            {
+                richTextBox1.Text += "取得CM失敗\n";
+                return;
+            }
+            else
+            {
+                richTextBox1.Text += "取得CM OK\n";
+            }
+
+            pictureBox2.Image = Image.FromFile(filename);
+            print_color_matrix(matrix);
 
             //使用 color matrix
             ColorMatrix cm = new ColorMatrix(matrix);
             ImageAttributes ia = new ImageAttributes();
+            //ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);same
+            //ia.SetColorMatrices(cm, null);//same
+            ia.SetGamma(0.6f);
             ia.SetColorMatrix(cm);
-
-            pictureBox2.Image = Image.FromFile(filename);
-
-            Bitmap bmp = new Bitmap(filename);
-            int W = bmp.Width;
-            int H = bmp.Height;
-
-            // Draw the image onto the new bitmap while applying the new ColorMatrix.
-            Point[] points =
-            {
-                new Point(0, 0),
-                new Point(bmp.Width - 1, 0),
-                new Point(0, bmp.Height - 1),
-            };
-            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
 
             g.Clear(Color.Pink);
             // 貼上使用CM轉換過的影像
-            g.DrawImage(bmp, points, rect, GraphicsUnit.Pixel, ia);
-
+            Bitmap bmp = new Bitmap(filename);
+            g.DrawImage(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
             pictureBox1.Image = bitmap1;
+        }
+
+        void load_color_matrix(float[][] matrix)
+        {
+            tb_cm00.Text = matrix[0][0].ToString();
+            tb_cm01.Text = matrix[0][1].ToString();
+            tb_cm02.Text = matrix[0][2].ToString();
+            tb_cm03.Text = matrix[0][3].ToString();
+            tb_cm04.Text = matrix[0][4].ToString();
+            tb_cm10.Text = matrix[1][0].ToString();
+            tb_cm11.Text = matrix[1][1].ToString();
+            tb_cm12.Text = matrix[1][2].ToString();
+            tb_cm13.Text = matrix[1][3].ToString();
+            tb_cm14.Text = matrix[1][4].ToString();
+            tb_cm20.Text = matrix[2][0].ToString();
+            tb_cm21.Text = matrix[2][1].ToString();
+            tb_cm22.Text = matrix[2][2].ToString();
+            tb_cm23.Text = matrix[2][3].ToString();
+            tb_cm24.Text = matrix[2][4].ToString();
+            tb_cm30.Text = matrix[3][0].ToString();
+            tb_cm31.Text = matrix[3][1].ToString();
+            tb_cm32.Text = matrix[3][2].ToString();
+            tb_cm33.Text = matrix[3][3].ToString();
+            tb_cm34.Text = matrix[3][4].ToString();
+            tb_cm40.Text = matrix[4][0].ToString();
+            tb_cm41.Text = matrix[4][1].ToString();
+            tb_cm42.Text = matrix[4][2].ToString();
+            tb_cm43.Text = matrix[4][3].ToString();
+            tb_cm44.Text = matrix[4][4].ToString();
         }
 
         private void bt_cm_reset_Click(object sender, EventArgs e)
         {
-            tb_cm00.Text = "1";
-            tb_cm01.Text = "0";
-            tb_cm02.Text = "0";
-            tb_cm03.Text = "0";
-            tb_cm04.Text = "0";
-            tb_cm10.Text = "0";
-            tb_cm11.Text = "1";
-            tb_cm12.Text = "0";
-            tb_cm13.Text = "0";
-            tb_cm14.Text = "0";
-            tb_cm20.Text = "0";
-            tb_cm21.Text = "0";
-            tb_cm22.Text = "1";
-            tb_cm23.Text = "0";
-            tb_cm24.Text = "0";
-            tb_cm30.Text = "0";
-            tb_cm31.Text = "0";
-            tb_cm32.Text = "0";
-            tb_cm33.Text = "1";
-            tb_cm34.Text = "0";
-            tb_cm40.Text = "0";
-            tb_cm41.Text = "0";
-            tb_cm42.Text = "0";
-            tb_cm43.Text = "0";
-            tb_cm44.Text = "1";
+            load_color_matrix(matrix_identity);
+            apply_color_matrix();
         }
 
         float brightness = 0.05f;
         private void bt_brightness_Click(object sender, EventArgs e)
         {
-            tb_cm00.Text = "1";
-            tb_cm01.Text = "0";
-            tb_cm02.Text = "0";
-            tb_cm03.Text = "0";
-            tb_cm04.Text = "0";
-            tb_cm10.Text = "0";
-            tb_cm11.Text = "1";
-            tb_cm12.Text = "0";
-            tb_cm13.Text = "0";
-            tb_cm14.Text = "0";
-            tb_cm20.Text = "0";
-            tb_cm21.Text = "0";
-            tb_cm22.Text = "1";
-            tb_cm23.Text = "0";
-            tb_cm24.Text = "0";
-            tb_cm30.Text = "0";
-            tb_cm31.Text = "0";
-            tb_cm32.Text = "0";
-            tb_cm33.Text = "1";
-            tb_cm34.Text = "0";
-            tb_cm40.Text = "0";
-            tb_cm41.Text = "0";
-            tb_cm42.Text = "0";
-            tb_cm43.Text = "0";
-            tb_cm44.Text = "1";
+            load_color_matrix(matrix_identity);
 
             tb_cm40.Text = brightness.ToString();
             tb_cm41.Text = brightness.ToString();
@@ -979,106 +906,37 @@ namespace vcs_Draw_ColorMatrix
 
             brightness += 0.05f;
             if (brightness > 0.3f)
+            {
                 brightness = -0.3f;
+            }
 
             //調整亮度, 也可以同時調整 cm00 cm11 cm22 三原色的縮放比例
         }
 
         private void bt_gray_Click(object sender, EventArgs e)
         {
-            tb_cm00.Text = "0.299";
-            tb_cm01.Text = "0.299";
-            tb_cm02.Text = "0.299";
-            tb_cm03.Text = "0";
-            tb_cm04.Text = "0";
-            tb_cm10.Text = "0.587";
-            tb_cm11.Text = "0.587";
-            tb_cm12.Text = "0.587";
-            tb_cm13.Text = "0";
-            tb_cm14.Text = "0";
-            tb_cm20.Text = "0.114";
-            tb_cm21.Text = "0.114";
-            tb_cm22.Text = "0.114";
-            tb_cm23.Text = "0";
-            tb_cm24.Text = "0";
-            tb_cm30.Text = "0";
-            tb_cm31.Text = "0";
-            tb_cm32.Text = "0";
-            tb_cm33.Text = "1";
-            tb_cm34.Text = "0";
-            tb_cm40.Text = "0";
-            tb_cm41.Text = "0";
-            tb_cm42.Text = "0";
-            tb_cm43.Text = "0";
-            tb_cm44.Text = "1";
-
-
+            load_color_matrix(matrix_gray);
+            apply_color_matrix();
         }
 
         private void bt_sepia_Click(object sender, EventArgs e)
         {
-            tb_cm00.Text = "0.393";
-            tb_cm01.Text = "0.349";
-            tb_cm02.Text = "0.272";
-            tb_cm03.Text = "0";
-            tb_cm04.Text = "0";
-            tb_cm10.Text = "0.769";
-            tb_cm11.Text = "0.686";
-            tb_cm12.Text = "0.534";
-            tb_cm13.Text = "0";
-            tb_cm14.Text = "0";
-            tb_cm20.Text = "0.189";
-            tb_cm21.Text = "0.168";
-            tb_cm22.Text = "0.131";
-            tb_cm23.Text = "0";
-            tb_cm24.Text = "0";
-            tb_cm30.Text = "0";
-            tb_cm31.Text = "0";
-            tb_cm32.Text = "0";
-            tb_cm33.Text = "1";
-            tb_cm34.Text = "0";
-            tb_cm40.Text = "0";
-            tb_cm41.Text = "0";
-            tb_cm42.Text = "0";
-            tb_cm43.Text = "0";
-            tb_cm44.Text = "1";
+            load_color_matrix(matrix_sepia);
+            apply_color_matrix();
         }
 
         float transparency = 0.3f;
         private void bt_alpha_Click(object sender, EventArgs e)
         {
-            tb_cm00.Text = "1";
-            tb_cm01.Text = "0";
-            tb_cm02.Text = "0";
-            tb_cm03.Text = "0";
-            tb_cm04.Text = "0";
-            tb_cm10.Text = "0";
-            tb_cm11.Text = "1";
-            tb_cm12.Text = "0";
-            tb_cm13.Text = "0";
-            tb_cm14.Text = "0";
-            tb_cm20.Text = "0";
-            tb_cm21.Text = "0";
-            tb_cm22.Text = "1";
-            tb_cm23.Text = "0";
-            tb_cm24.Text = "0";
-            tb_cm30.Text = "0";
-            tb_cm31.Text = "0";
-            tb_cm32.Text = "0";
-            tb_cm33.Text = "1";
-            tb_cm34.Text = "0";
-            tb_cm40.Text = "0";
-            tb_cm41.Text = "0";
-            tb_cm42.Text = "0";
-            tb_cm43.Text = "0";
-            tb_cm44.Text = "1";
+            load_color_matrix(matrix_identity);
 
             //float t = 0.60f; //Transparency
             tb_cm33.Text = transparency.ToString();
             transparency += 0.3f;
             if (transparency > 1.6)
+            {
                 transparency = 0.3f;
-
+            }
         }
 
         private void radioButton_CheckedChanged(object sender, EventArgs e)
@@ -1089,7 +947,7 @@ namespace vcs_Draw_ColorMatrix
             }
             else if (radioButton1.Checked == true)
             {
-                filename = @"D:\_git\vcs\_1.data\______test_files1\colorbar.bmp";
+                filename = @"D:\_git\vcs\_1.data\______test_files1\colorbar2.bmp";
             }
             else if (radioButton2.Checked == true)
             {
@@ -1120,10 +978,6 @@ namespace vcs_Draw_ColorMatrix
 
 
 /*
-            ColorMatrix cm = new ColorMatrix(matrix);
-            ImageAttributes ia = new ImageAttributes();
-            ia.SetColorMatrix(cm);
-
             Image tmp = Image.FromFile(filename);
 
             this.pictureBox1.Image = Image.FromFile(filename);
@@ -1132,30 +986,6 @@ namespace vcs_Draw_ColorMatrix
             Rectangle destRect = new Rectangle(0, 0, tmp.Width, tmp.Height);
             g.DrawImage(tmp, destRect, 0, 0, tmp.Width, tmp.Height, GraphicsUnit.Pixel, attr);
             this.pictureBox1.Image = (Image)tmp.Clone();
-
--------------------------
-
-            ColorMatrix cm = new ColorMatrix(matrix);
-            ImageAttributes ia = new ImageAttributes();
-            ia.SetColorMatrix(cm);
-
-            // Draw the image onto the new bitmap while applying the new ColorMatrix.
-            Point[] points =
-            {
-                new Point(0, 0),
-                new Point(image.Width, 0),
-                new Point(0, image.Height),
-            };
-            Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
-
-            Bitmap bm = new Bitmap(image.Width, image.Height);
-            Graphics gr = Graphics.FromImage(bm);
-            // 貼上使用CM轉換過的影像
-            gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, ia);
-            pictureBox1.Image = bm;
-
------------------------
-
 */
 /*
             // Sepia 公式
@@ -1187,3 +1017,19 @@ namespace vcs_Draw_ColorMatrix
 // 定義含有 RGBA 空間座標的 5 x 5 矩陣
 // (R, G, B, A, 1) 乘上 此矩陣
 
+/*
+            //建立 ColorMatrix，並將其 Matrix 位置設定為 1.75，強調影像的紅色元件。
+            ColorMatrix cm = new ColorMatrix();
+            print_ColorMatrix(cm);
+            // Red
+            cm.Matrix00 = 1.75f;
+            // Green
+            cm.Matrix11 = 1.00f;
+            // Blue
+            cm.Matrix22 = 1.00f;
+            // alpha
+            cm.Matrix33 = 1.00f;
+            // w
+            cm.Matrix44 = 1.00f;
+            print_ColorMatrix(cm);
+*/

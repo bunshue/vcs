@@ -94,7 +94,9 @@ namespace vcs_ImageProcessing1
 
             pictureBox1.Size = new Size(1200, 1000);
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            bt_restore.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_restore.Size.Width, pictureBox1.Location.Y + pictureBox1.Size.Height - bt_restore.Size.Height);
+            bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
+            pictureBox2.Visible = false;
+            pictureBox3.Visible = false;
 
             richTextBox1.Size = new Size(360, 1000);
             richTextBox1.Location = new Point(x_st + dx * 11 + 0, y_st + dy * 0);
@@ -142,15 +144,27 @@ namespace vcs_ImageProcessing1
             richTextBox1.Clear();
         }
 
-        private void bt_restore_Click(object sender, EventArgs e)
-        {
-            Restore_Picture();
-        }
-
-        void Restore_Picture()
+        private void bt_reset_Click(object sender, EventArgs e)
         {
             pictureBox1.Image = Image.FromFile(filename);
             Application.DoEvents();
+
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 140;
+            dy = 70;
+
+            pictureBox1.Size = new Size(1200, 1000);
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
+            pictureBox2.Visible = false;
+            pictureBox3.Visible = false;
         }
 
         //各種影像處理速度比較 ST
@@ -380,43 +394,6 @@ namespace vcs_ImageProcessing1
 
         private void button4_Click(object sender, EventArgs e)
         {
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-            //內存法建立彩色圖
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
             //Marshal.Copy 2 偽色彩
 
             string filename1 = @"D:\_git\vcs\_1.data\______test_files1\fakecolor.jpg";    //偽色彩處理
@@ -476,7 +453,6 @@ namespace vcs_ImageProcessing1
         }
 
         //偽彩色圖像處理 ST
-
         /// <param name="bmp">傳入的灰度圖像</param>
         /// <param name="method">使用何種方法，false強度分層法,true灰度級-彩色變換法</param>
         /// <param name="seg">強度分層中的分層數</param>
@@ -583,11 +559,7 @@ namespace vcs_ImageProcessing1
         }
         //偽彩色圖像處理 SP
 
-        private void button14_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button15_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)
         {
             //Marshal.Copy()
             //將 BitmapData 複製到 byte[] Array 陣列
@@ -633,9 +605,8 @@ namespace vcs_ImageProcessing1
             bmp.UnlockBits(bmpData);
         }
 
-        private void button16_Click(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e)
         {
-            //MemoryStream 1
             //MemoryStream 1
             richTextBox1.Text += "使用byte[]數據，生成Bitmap\n";
 
@@ -683,10 +654,9 @@ namespace vcs_ImageProcessing1
             pictureBox1.Image = bmp;
         }
 
-        private void button17_Click(object sender, EventArgs e)
+        private void button7_Click(object sender, EventArgs e)
         {
             //MemoryStream 2 圖片 轉 拜列
-            //MemoryStream 2
             richTextBox1.Text += "圖片 轉 拜列\n";
 
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
@@ -767,9 +737,8 @@ namespace vcs_ImageProcessing1
             //ms.Close();
         }
 
-        private void button18_Click(object sender, EventArgs e)
+        private void button8_Click(object sender, EventArgs e)
         {
-            //圖片 Bitmap MemoryStream 拜列 轉換
             //圖片 Bitmap MemoryStream 拜列 轉換
 
             //從圖片
@@ -792,6 +761,231 @@ namespace vcs_ImageProcessing1
 
             richTextBox1.Text += "MemoryStream(ms) 轉 拜列\n";
             Byte[] byte_data = ms.ToArray();//MemoryStream(ms) 轉 拜列
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+        }
+
+
+
+        public struct RGB
+        {
+            private byte _r;
+            private byte _g;
+            private byte _b;
+
+            public RGB(byte r, byte g, byte b)
+            {
+                this._r = r;
+                this._g = g;
+                this._b = b;
+            }
+
+            public byte R
+            {
+                get { return this._r; }
+                set { this._r = value; }
+            }
+
+            public byte G
+            {
+                get { return this._g; }
+                set { this._g = value; }
+            }
+
+            public byte B
+            {
+                get { return this._b; }
+                set { this._b = value; }
+            }
+
+            public bool Equals(RGB rgb)
+            {
+                return (this.R == rgb.R) && (this.G == rgb.G) && (this.B == rgb.B);
+            }
+        }
+
+        public struct YUV
+        {
+            private double _y;
+            private double _u;
+            private double _v;
+
+            public YUV(double y, double u, double v)
+            {
+                this._y = y;
+                this._u = u;
+                this._v = v;
+            }
+
+            public double Y
+            {
+                get { return this._y; }
+                set { this._y = value; }
+            }
+
+            public double U
+            {
+                get { return this._u; }
+                set { this._u = value; }
+            }
+
+            public double V
+            {
+                get { return this._v; }
+                set { this._v = value; }
+            }
+
+            public bool Equals(YUV yuv)
+            {
+                return (this.Y == yuv.Y) && (this.U == yuv.U) && (this.V == yuv.V);
+            }
+        }
+
+        public static YUV RGBToYUV(RGB rgb)
+        {
+            double y = rgb.R * .299000 + rgb.G * .587000 + rgb.B * .114000;
+            double u = rgb.R * -.168736 + rgb.G * -.331264 + rgb.B * .500000 + 128;
+            double v = rgb.R * .500000 + rgb.G * -.418688 + rgb.B * -.081312 + 128;
+
+            return new YUV(y, u, v);
+        }
+
+        void measure_gray_scale(Bitmap bmp, PictureBox pbx)
+        {
+            int w = 40;
+            int h = 40;
+            int W = w * 16;
+            int H = h * 16;
+
+            int[] Y = new int[256];
+
+            for (int i = 0; i < 256; i++)
+            {
+                int x_st = i * 2;
+                int y_st = 100;
+
+                Color p = bmp.GetPixel(x_st, y_st);
+                RGB pp = new RGB(p.R, p.G, p.B);
+                YUV yyy = new YUV();
+                yyy = RGBToYUV(pp);
+                Y[i] = (int)yyy.Y;
+            }
+
+            for (int i = 0; i < 256; i++)
+            {
+                richTextBox1.Text += Y[i].ToString("D3");
+                if (i % 16 == 15)
+                {
+                    richTextBox1.Text += "\n";
+                }
+                else
+                {
+                    richTextBox1.Text += " ";
+                }
+            }
+
+            Point[] curvePoints = new Point[256];    //一維陣列內有 256 個Point
+
+            for (int i = 0; i < 256; i++)
+            {
+                curvePoints[i].X = i;
+                curvePoints[i].Y = 255 - Y[i];
+            }
+
+            Bitmap b = new Bitmap(256 + 10, 256 + 10);
+            Graphics g = Graphics.FromImage(b);
+            g.DrawLines(Pens.Red, curvePoints);   //畫直線
+            g.DrawRectangle(Pens.Green, 0, 0, 256, 256);
+
+            pbx.Image = b;
+            pbx.Size = new Size(256 + 10, 256 + 10);
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //ImageAttributes Gamma
+            pictureBox1.Size = new Size(600, 500);
+            pictureBox2.Size = new Size(256, 256);
+            pictureBox3.Size = new Size(256, 256);
+            pictureBox2.Location = new Point(pictureBox1.Location.X + pictureBox1.Width, pictureBox1.Location.Y);
+            pictureBox3.Location = new Point(pictureBox1.Location.X + pictureBox1.Width, pictureBox1.Location.Y+300);
+
+            pictureBox1.BackColor = Color.Red;
+            pictureBox2.BackColor = Color.Green;
+            pictureBox3.BackColor = Color.Blue;
+
+            pictureBox2.Visible = true;
+            pictureBox3.Visible = true;
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            Bitmap bitmap1 = new Bitmap(600, 500);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.Pink);
+
+            // 測試 gamma
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw\data\gray1.bmp";
+            Bitmap bmp = new Bitmap(filename);
+
+            //原圖
+            g.DrawImage(bmp, 0, 0, bmp.Width, bmp.Height);
+            measure_gray_scale(bmp, pictureBox2);
+
+            //經過Gamma處理
+            float gamma = 2.2f;  // 0 ~ 2.5, 1.0為不變
+            richTextBox1.Text += "Gamma = " + gamma.ToString() + "\n";
+
+            // 使用 ImageAttributes 設定 gamma 值
+            ImageAttributes ia = new ImageAttributes();
+            ia.SetGamma(gamma);
+
+            g.DrawImage(bmp, new Rectangle(0, 210, bmp.Width, bmp.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
+
+            g.DrawString("Gamma = 1", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(20, 20));
+            g.DrawString("Gamma = " + gamma.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(20, 20 + 210));
+
+            //量測的範圍
+            Rectangle rect = new Rectangle(0, 210, bmp.Width, bmp.Height);
+            measure_gray_scale(bitmap1.Clone(rect, PixelFormat.Format32bppArgb), pictureBox3);
+
+            pictureBox1.Image = bitmap1;
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -817,7 +1011,6 @@ namespace vcs_ImageProcessing1
                 throw new ArgumentException("Only 8, 24 and 32 bpp images are supported.");
             }
 
-            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
             //取出原本的像素格式 bmp.PixelFormat
             richTextBox1.Text += "PixelFormat = " + bmp.PixelFormat.ToString() + "\n";
 
@@ -856,6 +1049,21 @@ namespace vcs_ImageProcessing1
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+
 
 /*
 IntPtr ptr = bmpData.Scan0;　 // 獲取bmpData的內存起始位置
@@ -943,9 +1151,6 @@ Bitmap bmp = new Bitmap(W, H, PixelFormat.Format8bppIndexed);//指定8位格式�
 */
 
 
-
-
-
 /*
 
  * Bitmap bm = BytesToImage((byte[])reader.GetValue(6));
@@ -983,7 +1188,7 @@ Bitmap bmp = new Bitmap(W, H, PixelFormat.Format8bppIndexed);//指定8位格式�
 
                 image.Save("lion.jpg", ImageFormat.Jpeg);
 
-                pictureBox4.Image = image;
+                pictureBox1.Image = image;
 
                 //Response.ClearContent();
                 //Response.ContentType = "image/png";
@@ -1043,4 +1248,3 @@ ImageLockMode.ReadWrite
 // 其中BitmapData類的Stride屬性爲每行像素所佔的字節。
 // int offset = stride - W * 3;
 // ptr += offset;//指針加上填充的空白空間
-
