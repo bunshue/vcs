@@ -193,8 +193,8 @@ namespace vcs_Draw_Bitmap
             // Copy the selected area into the bitmap.
             using (Graphics g = Graphics.FromImage(bm))
             {
-                Rectangle dest_rect = new Rectangle(0, 0, src_rect.Width, src_rect.Height);
-                g.DrawImage(bitmap1, dest_rect, src_rect, GraphicsUnit.Pixel);
+                Rectangle dst_rect = new Rectangle(0, 0, src_rect.Width, src_rect.Height);
+                g.DrawImage(bitmap1, dst_rect, src_rect, GraphicsUnit.Pixel);
             }
 
             // Copy the selection image to the clipboard.
@@ -1031,8 +1031,8 @@ namespace vcs_Draw_Bitmap
 
             g.Clear(Color.Pink);
 
-            Rectangle dest_rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-            g.DrawImage(bmp, dest_rect, 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
+            Rectangle dst_rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+            g.DrawImage(bmp, dst_rect, 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
 
             pictureBox1.Image = bitmap1;
 

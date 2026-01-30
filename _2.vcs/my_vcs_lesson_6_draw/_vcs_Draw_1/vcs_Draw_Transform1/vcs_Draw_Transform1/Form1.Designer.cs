@@ -42,7 +42,6 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.bt_clear = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
@@ -77,7 +76,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 1;
-            this.button2.Text = "縮放";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -194,16 +192,6 @@
             this.checkBox1.Text = "旋轉";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(136, 47);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(60, 16);
-            this.checkBox2.TabIndex = 14;
-            this.checkBox2.Text = "反鋸齒";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
             // bt_clear
             // 
             this.bt_clear.Location = new System.Drawing.Point(556, 49);
@@ -221,6 +209,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(200, 60);
             this.button10.TabIndex = 17;
+            this.button10.Text = "轉換範例";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -241,7 +230,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(200, 60);
             this.button12.TabIndex = 19;
-            this.button12.Text = "轉換範例";
+            this.button12.Text = "Matrix1";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -252,7 +241,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(200, 60);
             this.button13.TabIndex = 20;
-            this.button13.Text = "測試Matrix";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -263,7 +251,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(200, 60);
             this.button14.TabIndex = 21;
-            this.button14.Text = "Matrix1";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -274,7 +261,6 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(200, 60);
             this.button15.TabIndex = 22;
-            this.button15.Text = "Matrix2";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -285,7 +271,6 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(200, 60);
             this.button16.TabIndex = 23;
-            this.button16.Text = "矩陣轉置";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -296,7 +281,6 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(200, 60);
             this.button17.TabIndex = 24;
-            this.button17.Text = "矩陣轉置";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -307,6 +291,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(200, 60);
             this.button18.TabIndex = 25;
+            this.button18.Text = "測試Matrix";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -354,7 +339,6 @@
             this.Controls.Add(this.button11);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.bt_clear);
-            this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
@@ -392,7 +376,6 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
