@@ -1,5 +1,132 @@
 ﻿
 
+箭頭的畫法
+
+            Pen p = new Pen(Color.Red, 0);
+            p.EndCap = LineCap.ArrowAnchor;
+
+
+
+
+
+            Console.WriteLine("測試多型（Polymorphism）");
+            hi();
+            hi("lion-mouse");
+
+
+
+
+            Graphics g;
+
+            //新建圖檔, 初始化畫布
+            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+            pictureBox1.Image = bitmap1;
+
+            int i;
+            double gamma;
+
+            int[] data_in = new int[256];
+            int[] data_out = new int[256];
+            Point[] curvePoints = new Point[256];    //一維陣列內有 N 個Point
+
+
+            Pen gammaPen = new Pen(Color.Red, 2);
+            /*
+                                                        gamma = 2.2;
+                                                        //畫出真正的Gamma 2.2曲線
+                                                        for (i = 0; i < 256; i++)
+                                                        {
+                                                            data_in[i] = i;
+                                                            data_out[i] = (int)(Math.Pow(((double)data_in[i]) / 255, 1 / gamma) * 255);
+
+                                                            curvePoints[i].X = data_in[i] * 3;
+                                                            curvePoints[i].Y = 256 * 2 - 1 - data_out[i] * 2;
+                                                        }
+                                                        g.DrawLines(gammaPen, curvePoints);   //畫直線
+            */
+
+
+
+
+
+
+//另存新檔
+//SaveBitmapUsingExtension(RotatedBitmap, sfdFile.FileName);
+
+
+        // Save the file with the appropriate format.
+        // Throw a NotSupportedException if the file
+        // has an unknown extension.
+        public void SaveBitmapUsingExtension(Bitmap bm,
+            string filename)
+        {
+            string extension = Path.GetExtension(filename);
+            switch (extension.ToLower())
+            {
+                case ".bmp":
+                    bm.Save(filename, ImageFormat.Bmp);
+                    break;
+                case ".exif":
+                    bm.Save(filename, ImageFormat.Exif);
+                    break;
+                case ".gif":
+                    bm.Save(filename, ImageFormat.Gif);
+                    break;
+                case ".jpg":
+                case ".jpeg":
+                    bm.Save(filename, ImageFormat.Jpeg);
+                    break;
+                case ".png":
+                    bm.Save(filename, ImageFormat.Png);
+                    break;
+                case ".tif":
+                case ".tiff":
+                    bm.Save(filename, ImageFormat.Tiff);
+                    break;
+                default:
+                    throw new NotSupportedException(
+                        "Unknown file extension " + extension);
+            }
+        }
+
+
+
+
+
+
+
+
+        private void bt_save_Click(object sender, EventArgs e)
+        {
+            // Make a copy of the result image.
+            using (Bitmap bmp = (Bitmap)pictureBox0.Image.Clone())
+            {
+                bmp.MakeTransparent(Color.Magenta);
+
+                save_image_to_drive(bmp);
+            }
+        }
+
+        void save_image_to_drive(Bitmap bitmap1)
+        {
+            if (bitmap1 != null)
+            {
+                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
+                bitmap1.Save(@filename, ImageFormat.Png);
+
+                richTextBox1.Text += "已存檔 : " + filename + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "無圖可存\n";
+            }
+        }
+
+
+
+
 
 ImageAttributes的使用
 是在畫影像 g.DrawImage(bmp, ....)時，

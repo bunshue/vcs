@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Imaging;   //for ImageFormat, ImageLockMode, Encoder, ImageCodecInfo
 //using System.Drawing.Imaging;   //for ColorMatrix, ImageAttributes
-using System.Drawing.Drawing2D;  // for GraphicsPath
+using System.Drawing.Drawing2D;  // for GraphicsPath, Matrix
 using System.Reflection;    //for Assembly
 using System.Security.Cryptography; //for HashAlgorithm
 using System.Diagnostics;   //for Process
@@ -364,59 +364,7 @@ namespace vcs_Mix03_draw_image
         private void button5_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //測試Matrix
-
-            float size = 2.0f;
-
-            Matrix Var_Matrix = new Matrix((float)size, 0.0F, 0.0F, (float)size, 0.0F, 0.0F);//設定仿射矩陣
-            //Var_Matrix.TransformPoints(Var_PointS); //不會用 TransformPoints
-
-            richTextBox1.Text += Var_Matrix.ToString() + "\n";
-
-            //6060
-
-            Matrix A = new Matrix();
-            int theta = 0;
-            int Cx = 100;
-            int Cy = 100;
-            for (int i = theta; i < 180 + theta; i += 45)
-            {
-                A.Reset();
-                A.Rotate(i, MatrixOrder.Append);
-                A.Translate(Cx, Cy, MatrixOrder.Append);
-            }
-
-            //6060
-
-            Rectangle rect = new Rectangle(-2, -2, 4, 4);
-            Point[] pts = new Point[] 
-                { 
-                    new Point(0, pictureBox1.ClientSize.Height),
-                    new Point(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height), 
-                    new Point(0, 0)
-                };
-            Matrix transform = new Matrix(rect, pts);
-
-            //richTextBox1.Text += transform..Elements.ToString() + "\n";
-
-            //6060
-
-            
-
-
-
         }
-
-        // Return a rotation matrix to rotate around a point.
-        private Matrix RotateAroundPoint(float angle, Point center)
-        {
-            // Translate the point to the origin.
-            Matrix result = new Matrix();
-            result.RotateAt(angle, center);
-            return result;
-        }
-
 
         private void button6_Click(object sender, EventArgs e)
         {

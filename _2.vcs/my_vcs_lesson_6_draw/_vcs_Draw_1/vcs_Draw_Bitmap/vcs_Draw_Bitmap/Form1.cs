@@ -992,149 +992,70 @@ namespace vcs_Draw_Bitmap
 
         private void button15_Click(object sender, EventArgs e)
         {
-            //gamma 0 ~ 2.5
+            //gamma 0 ~ 2.5, [0 <-明- 1 -暗-> 2]
             float gamma = 2.2f;
-            pictureBox1.Image = apply_gamma2(filename, gamma);
+            richTextBox1.Text += "Gamma = " + gamma.ToString() + "\n";
+
+            Bitmap bmp = new Bitmap(filename);
+
+            ImageAttributes ia = new ImageAttributes();
+            ia.SetGamma(gamma, ColorAdjustType.Bitmap);
+
+            g.DrawImage(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
+
+            pictureBox1.Image = bitmap1;
         }
-
-        private Bitmap apply_gamma2(string filename, float gamma)
-        {
-            //label2.Text = "Gamma = " + gamma.ToString();
-
-            //Bitmap bitmap1 = (Bitmap)pictureBox0.Image;
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);
-            Bitmap bitmap2 = KiGamma(bitmap1, gamma);
-
-            return bitmap2;
-        }
-
-        //C#圖片處理之Gamma校正
-        //gamma值是用曲線表示的，這是一種人的眼睛對光的一種感應曲線，其中包括了物理量、身理感官及心理的感知度。
-
-        /// <summary>
-        /// Gamma校正
-        /// </summary>
-        /// <param name="bmp">輸入Bitmap</param>
-        /// <param name="val">[0 <-明- 1 -暗-> 2]</param>
-        /// <returns>輸出Bitmap</returns>
-        public static Bitmap KiGamma(Bitmap bmp, float val)
-        {
-            if (bmp == null)
-            {
-                return null;
-            }
-
-            // 1表示無變化，就不做
-            if (val == 1.0000f)
-            {
-                return bmp;
-            }
-
-            try
-            {
-                Bitmap b = new Bitmap(bmp.Width, bmp.Height);
-                Graphics g = Graphics.FromImage(b);
-                ImageAttributes ia = new ImageAttributes();
-                ia.SetGamma(val, ColorAdjustType.Bitmap);
-
-                g.DrawImage(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
-                g.Dispose();
-                return b;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-
 
         int cutoff_value = 0;
-
         private void button16_Click(object sender, EventArgs e)
         {
+            // 兩色中間設為透明
+
             pictureBox1.BackColor = Color.Lime;
-            int binary = 128;
 
-            richTextBox1.Text += "binary = " + binary.ToString() + "\n";
+            richTextBox1.Text += "亮度 " + cutoff_value.ToString() + " 到 " + (cutoff_value + 20).ToString() + ", 設定為透明\n";
 
-            cutoff_value = binary;//trackBar_transparent.Value;
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw\data\gray1.bmp";
 
-            richTextBox1.Text += "亮度 " + cutoff_value.ToString() + " 以上, 設定為透明\n";
+            Bitmap bmp = new Bitmap(filename);
 
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-            ShowImage(filename);
-
-            //pictureBox6.Image = Image.FromFile(filename);
-
-
-            //int binary = trackBar_binary.Value;
-            //pictureBox5.Image = apply_contrast_enhancement(filename, binary);
-            //pictureBox5.Image = apply_contrast_enhancement(filename, binary);
-        }
-
-        private void ShowImage(string filename)
-        {
-            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-
-            // Prepare the ImageAttributes.
+            //低顏色
             Color low_color = Color.FromArgb(cutoff_value, cutoff_value, cutoff_value);
-            Color high_color = Color.FromArgb(255, 255, 255);
+            //高顏色
+            //Color high_color = Color.FromArgb(255, 255, 255);
+            Color high_color = Color.FromArgb(cutoff_value + 20, cutoff_value + 20, cutoff_value + 20);
+
             ImageAttributes ia = new ImageAttributes();
             ia.SetColorKey(low_color, high_color);
 
-            // Make the result image.
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            Bitmap bitmap2 = new Bitmap(W, H);
+            g.Clear(Color.Pink);
 
-            // Process the image.
-            using (Graphics g = Graphics.FromImage(bitmap2))
+            Rectangle dest_rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+            g.DrawImage(bmp, dest_rect, 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
+
+            pictureBox1.Image = bitmap1;
+
+            cutoff_value += 20;
+            if (cutoff_value > 235)
             {
-                // Fill with magenta.
-                //g.Clear(Color.Magenta);
-                //g.Clear(Color.Lime);
-
-                // Copy the original image onto the result
-                // image while using the ImageAttributes.
-                Rectangle dest_rect = new Rectangle(0, 0, W, H);
-                g.DrawImage(bitmap1, dest_rect, 0, 0, W, H, GraphicsUnit.Pixel, ia);
+                cutoff_value = 0;
             }
-            // Display the image.
-            pictureBox1.Image = bitmap2;
         }
 
-
+        float threshold = 0.3f;  // 0 ~ 1.0
         private void button17_Click(object sender, EventArgs e)
         {
-            //threshold
-            //trackBar_threshold
-
-            float threshold = 0.3f;  // 0 ~ 1.0
             richTextBox1.Text += "threshold = " + threshold.ToString() + "\n";
-            pictureBox1.Image = apply_threshold(filename, threshold);
-
-
-            //float threshold = 0.01f;
 
             threshold += 0.06f;
             if (threshold > 1.0f)
+            {
                 threshold = 0.01f;
-            pictureBox1.Image = apply_threshold(filename, threshold);
+            }
 
+            Bitmap bmp = new Bitmap(filename);
 
-        }
-
-        private Bitmap apply_threshold(string filename, float threshold)
-        {
-            //label4.Text = "Threshold = " + threshold.ToString();
-
-            Image image = Image.FromFile(filename);
-
-            // Make the result bitmap.
-            Bitmap bm = new Bitmap(image.Width, image.Height);
-
-            // Make the ImageAttributes object and set the threshold.
             ImageAttributes ia = new ImageAttributes();
             ia.SetThreshold(threshold);
 
@@ -1142,65 +1063,50 @@ namespace vcs_Draw_Bitmap
             Point[] points =
             {
                 new Point(0, 0),
-                new Point(image.Width, 0),
-                new Point(0, image.Height),
+                new Point(bmp.Width, 0),
+                new Point(0, bmp.Height),
             };
-            Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
-            using (Graphics gr = Graphics.FromImage(bm))
-            {
-                gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, ia);
-            }
+            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
 
-            // Return the result.
-            return bm;
+            g.Clear(Color.Pink);
+
+            g.DrawImage(bmp, points, rect, GraphicsUnit.Pixel, ia);
+
+            pictureBox1.Image = bitmap1;
         }
 
+        //二值化對比 ST
+        int binary = 40;
         private void button18_Click(object sender, EventArgs e)
         {
             //二值化對比 0 ~ 255
 
-            int binary = 128;
-            richTextBox1.Text += "二值化對比 = " + binary.ToString() + "\n";
-
-            pictureBox1.Image = apply_contrast_enhancement(filename, binary);
-
-            /*
-            int binary = 20;
-
             binary += 13;
             if (binary > 255)
                 binary -= 255;
-            pictureBox1.Image = apply_contrast_enhancement(filename, binary);
-            */
-        }
 
-        //二值化對比 ST
-        //private Bitmap apply_threshold(string filename, float threshold)
-        private Bitmap apply_contrast_enhancement(string filename, int binary)
-        {
-            //label5.Text = "二值化對比 " + binary.ToString();
+            richTextBox1.Text += "二值化對比 = " + binary.ToString() + "\n";
 
-            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            Bitmap bmp = new Bitmap(filename);
 
-            BinaryContrast(bitmap1, 3 * binary);
+            int cutoff = binary * 3;
 
-            return bitmap1;
-        }
-
-        // Perform binary contrast enhancement on the bitmap.
-        private void BinaryContrast(Bitmap bm, int cutoff)
-        {
-            for (int y = 0; y < bm.Height; y++)
+            for (int y = 0; y < bmp.Height; y++)
             {
-                for (int x = 0; x < bm.Width; x++)
+                for (int x = 0; x < bmp.Width; x++)
                 {
-                    Color clr = bm.GetPixel(x, y);
+                    Color clr = bmp.GetPixel(x, y);
                     if (clr.R + clr.G + clr.B > cutoff)
-                        bm.SetPixel(x, y, Color.White);
+                    {
+                        bmp.SetPixel(x, y, Color.White);
+                    }
                     else
-                        bm.SetPixel(x, y, Color.Black);
+                    {
+                        bmp.SetPixel(x, y, Color.Black);
+                    }
                 }
             }
+            pictureBox1.Image = bmp;
         }
         //二值化對比 SP
 
@@ -1282,8 +1188,6 @@ namespace vcs_Draw_Bitmap
             {
                 richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
-
-
         }
 
         int cnt = 0;
@@ -1434,9 +1338,4 @@ string filename2 = Application.StartupPath + "\\jpg_" + DateTime.Now.ToString("y
             string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
             bitmap1.Save(filename, ImageFormat.Png);
 */
-
-
-
-
-
 

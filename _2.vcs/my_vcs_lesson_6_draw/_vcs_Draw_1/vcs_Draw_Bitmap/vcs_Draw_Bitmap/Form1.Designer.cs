@@ -269,7 +269,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(200, 60);
             this.button16.TabIndex = 141;
-            this.button16.Text = "亮度xx以上, 設定為透明\r\n\r\n";
+            this.button16.Text = "兩色中間設為透明";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 

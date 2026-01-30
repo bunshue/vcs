@@ -30,20 +30,17 @@ namespace vcs_Draw_Transform1
         float xratio;
         float yratio;
 
-        int W;
-        int H;
-
-        bool flag_draw_axis = true;
-        bool flag_draw_title = true;
-        //bool flag_draw_xylabel = true;
-        //bool flag_draw_xytick = true;
-
-        string title = "My VCS Test";
-
         Point[] Points = new Point[8];    //一維陣列內有 8 個Point
 
-        int N = 360;
-        Point[] data;
+        Bitmap bitmap1;
+        Graphics g;
+        SolidBrush sb1 = new SolidBrush(Color.Red);
+        SolidBrush sb2 = new SolidBrush(Color.Green);
+        SolidBrush sb3 = new SolidBrush(Color.Blue);
+
+        //string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw\data\volkswagen.png";
+        Bitmap bmp;
 
         public Form1()
         {
@@ -54,16 +51,11 @@ namespace vcs_Draw_Transform1
         {
             show_item_location();
 
-            W = pictureBox2.ClientSize.Width;
-            H = pictureBox2.ClientSize.Height;
+            bitmap1 = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
+            g = Graphics.FromImage(bitmap1);
+            pictureBox1.Image = bitmap1;
 
-            data = new Point[N];    //一維陣列內有 N 個Point
-            int i;
-            for (i = 0; i < N; i++)
-            {
-                data[i].X = i;
-                data[i].Y = 100 + (int)(100 * sind(i));
-            }
+            bmp = new Bitmap(filename);
         }
 
         void show_item_location()
@@ -89,23 +81,26 @@ namespace vcs_Draw_Transform1
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
-            button12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
-            bt_save.Location = new Point(x_st + dx * 0, y_st + dy * 13); ;
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
             pictureBox1.Size = new Size(820, 600);
-            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
 
-            pictureBox2.Size = new Size(820, 260);
-            pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0 + 620);
-
-
-            richTextBox1.Size = new Size(300, 900);
-            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            richTextBox1.Size = new Size(300, 700);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1400, 960);
+            this.Size = new Size(1600, 760);
             this.Text = "vcs_Draw_Transform1";
         }
 
@@ -115,6 +110,13 @@ namespace vcs_Draw_Transform1
 
             Graphics g = this.pictureBox1.CreateGraphics();
             g.Clear(Color.White);
+        }
+
+        private void bt_reset_Click(object sender, EventArgs e)
+        {
+            bitmap1 = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
+            g = Graphics.FromImage(bitmap1);
+            pictureBox1.Image = bitmap1;
         }
 
         //平移, 旋轉
@@ -150,8 +152,8 @@ namespace vcs_Draw_Transform1
             g.DrawLine(p, p0.X + 150, p0.Y + 400, p1.X + 150, p1.Y + 400);
             g.DrawLine(p, p0.X + 150, p0.Y + 400, p2.X + 150, p2.Y + 400);
 
-            //平移
-            g.TranslateTransform(150, 400);  //平移原點 再右移 再下移 然後再進行畫圖
+            // 平移, 右移, 下移
+            g.TranslateTransform(150, 400);
 
             if (checkBox2.Checked == true)
             {
@@ -172,8 +174,8 @@ namespace vcs_Draw_Transform1
             g.DrawLine(p, p0, p1);
             g.DrawLine(p, p0, p2);
 
-            //恢復
-            g.ResetTransform();
+            g.ResetTransform();  // 重置轉換, 恢復
+
             g.Dispose();
             p.Dispose();
         }
@@ -181,39 +183,45 @@ namespace vcs_Draw_Transform1
         //旋轉
         private void button1_Click(object sender, EventArgs e)
         {
-            int i;
-            Graphics g = this.pictureBox1.CreateGraphics();
             g.Clear(Color.White);
             Pen p = new Pen(Color.Red, 5);
 
-            //未旋轉
-            g.TranslateTransform(100, 100);   //平移原點 再右移 再下移 然後再進行畫圖
+            // 未旋轉, 平移 + 畫線
+            // Reset後, 移動原點
+            g.TranslateTransform(100, 100);// 平移, 右移, 下移
+            g.DrawString("無旋轉", new Font("標楷體", 16), new SolidBrush(Color.Red), new PointF(0, 0));
 
             g.DrawLine(p, 0, 0, 50, 0);
-            for (i = 0; i < 10; i++)
+            for (int i = 0; i < 10; i++)
             {
-                g.TranslateTransform(50, 0);   //平移原點 再右移 再下移 然後再進行畫圖
+                // 平移, 右移, 下移
+                g.TranslateTransform(50, 0);
                 //g.RotateTransform(30);
                 g.DrawLine(p, 0, 0, 50, 0);
             }
 
-            //旋轉
-            g.ResetTransform();
-            g.TranslateTransform(100, 200);   //平移原點 再右移 再下移 然後再進行畫圖
-            p.Color = Color.Green;
+            //6060
+
+            g.ResetTransform();  // 重置轉換, 恢復
+
+            // 旋轉, 平移 + 旋轉 + 畫線
+            // Reset後, 移動原點
+            g.TranslateTransform(100, 200);  // 平移, 右移, 下移
+            g.DrawString("有旋轉", new Font("標楷體", 16), new SolidBrush(Color.Green), new PointF(0, 0));
+
+            p = new Pen(Color.Green, 5);
             g.DrawLine(p, 0, 0, 50, 0);
-            for (i = 0; i < 10; i++)
+            for (int i = 0; i < 10; i++)
             {
-                g.TranslateTransform(50, 0);   //平移原點 再右移 再下移 然後再進行畫圖
+                // 平移, 右移, 下移
+                g.TranslateTransform(50, 0);
                 g.RotateTransform(30);
                 g.DrawLine(p, 0, 0, 50, 0);
             }
 
-            g.ResetTransform(); //恢復
-            g.DrawString("旋轉, 紅色是原本的, 綠色是旋轉後的", new Font("標楷體", 16), new SolidBrush(Color.Blue), new PointF(0, 0));
+            g.ResetTransform();  // 重置轉換, 恢復
 
-            g.Dispose();
-            p.Dispose();
+            pictureBox1.Image = bitmap1;
         }
 
         //縮放
@@ -221,10 +229,8 @@ namespace vcs_Draw_Transform1
         {
             Font f = new Font("標楷體", 40);
 
-            Graphics g = this.pictureBox1.CreateGraphics();
             g.Clear(Color.White);
-
-            draw_grid(g);
+            draw_grid1(g);
 
             int w = 0;
             int h = 0;
@@ -242,19 +248,22 @@ namespace vcs_Draw_Transform1
             g.ScaleTransform(-1, 1);
             g.DrawString("反向字體", f, new SolidBrush(Color.Blue), new PointF(-w * 1, h));
 
-            g.ResetTransform();
+            g.ResetTransform();  // 重置轉換, 恢復
+
             g.ScaleTransform(0.5f, 2);  //x軸比例再放大, y軸比例再放大
             g.DrawString("放大縮小2", f, new SolidBrush(Color.Blue), new PointF(0, h * 1));
             Rectangle rect2 = new Rectangle(0, h * 1, w / 4, h);
             g.DrawRectangle(p, rect2);   //用紅色筆畫矩形
 
-            g.ResetTransform();
+            g.ResetTransform();  // 重置轉換, 恢復
+
             g.ScaleTransform(2.0f, 1);  //x軸比例再放大, y軸比例再放大
             g.DrawString("放大縮小3", f, new SolidBrush(Color.Blue), new PointF(0, h * 5));
             Rectangle rect3 = new Rectangle(0, h * 5, w / 4, h);
             g.DrawRectangle(p, rect3);   //用紅色筆畫矩形
 
-            g.ResetTransform();
+            g.ResetTransform();  // 重置轉換, 恢復
+
             g.ScaleTransform(3.0f, 3);  //x軸比例再放大, y軸比例再放大
             g.DrawString("放大縮小4", f, new SolidBrush(Color.Blue), new PointF(0, h * 3));
             Rectangle rect4 = new Rectangle(0, h * 3, w / 4, h);
@@ -264,18 +273,21 @@ namespace vcs_Draw_Transform1
             w = w / 4 * 7;
             f = new Font("標楷體", 20);
             //標示放大縮小比例
-            g.ResetTransform();
+
+            g.ResetTransform();  // 重置轉換, 恢復
+
             g.DrawString("正常", f, new SolidBrush(Color.Black), new PointF(w * 1, h * 0));
             g.DrawString("X負一倍, Y不變", f, new SolidBrush(Color.Black), new PointF(w * 1, h * 1));
             g.DrawString("X一半, Y一倍", f, new SolidBrush(Color.Black), new PointF(w * 1, h * 2));
             g.DrawString("X一倍, Y不變", f, new SolidBrush(Color.Black), new PointF(w * 1, h * 6));
             g.DrawString("X三倍, Y三倍", f, new SolidBrush(Color.Black), new PointF(w * 1, h * 8));
 
-            g.Dispose();
-            f.Dispose();
+
+            pictureBox1.Image = bitmap1;
+
         }
 
-        void draw_grid(Graphics g)
+        void draw_grid1(Graphics g)
         {
             int W = this.pictureBox1.Width;
             int H = this.pictureBox1.Height;
@@ -316,7 +328,7 @@ namespace vcs_Draw_Transform1
             Bitmap bitmap2 = new Bitmap(W, H);
             Graphics g = Graphics.FromImage(bitmap2);
             Pen p = new Pen(Color.Red, 3);
-            g.Clear(Color.Pink);
+            g.Clear(Color.White);
 
             int w = bitmap1.Width;
             int h = bitmap1.Height;
@@ -325,9 +337,12 @@ namespace vcs_Draw_Transform1
             x_st = 0;
             y_st = 0;
 
-            g.TranslateTransform(305, 400); //平移原點 再右移 再下移 然後再進行畫圖
+            // 平移, 右移, 下移
+            g.TranslateTransform(305, 400);
+
             //                  貼上的位置  貼上的大小 放大縮小用
             g.DrawImage(bitmap1, x_st, y_st, w, h);
+
             g.DrawString("未旋轉", new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(305 - 100, 10));
 
             int i;
@@ -337,7 +352,9 @@ namespace vcs_Draw_Transform1
                 g.DrawImage(bitmap1, x_st, y_st, w, h);
                 g.DrawString(((i + 1) * 20).ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(305 - 50, 10));
             }
-            g.ResetTransform();
+
+            g.ResetTransform();  // 重置轉換, 恢復
+
             g.DrawImage(bitmap1, x_st + 305, y_st, w, h);
             g.DrawString("原圖平移", new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(305 + 305 - 130, 10));
 
@@ -358,7 +375,7 @@ namespace vcs_Draw_Transform1
             Bitmap bitmap2 = new Bitmap(W, H);
             Graphics g = Graphics.FromImage(bitmap2);
             Pen p = new Pen(Color.Red, 3);
-            g.Clear(Color.Pink);
+            g.Clear(Color.White);
 
             int w = bitmap1.Width;
             int h = bitmap1.Height;
@@ -367,7 +384,8 @@ namespace vcs_Draw_Transform1
             x_st = 0;
             y_st = 0;
 
-            g.TranslateTransform(305, 400 / 2); //平移原點 再右移 再下移 然後再進行畫圖
+            // 平移, 右移, 下移
+            g.TranslateTransform(305, 400 / 2);
 
             int i;
             for (i = 0; i < 18; i++)
@@ -377,7 +395,8 @@ namespace vcs_Draw_Transform1
                 //g.DrawString(((i + 1) * 20).ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(305 - 50, 10));
             }
 
-            g.TranslateTransform(0, 400);   //平移原點 再右移 再下移 然後再進行畫圖
+            // 平移, 右移, 下移
+            g.TranslateTransform(0, 400);
             for (i = 0; i < 18; i++)
             {
                 g.RotateTransform(20);//再旋轉指定的角度, 以全圖的左上角為原點, 順時鐘旋轉
@@ -385,7 +404,8 @@ namespace vcs_Draw_Transform1
                 //g.DrawString(((i + 1) * 20).ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(305 - 50, 10));
             }
 
-            g.ResetTransform();
+            g.ResetTransform();  // 重置轉換, 恢復
+
             //g.DrawImage(bitmap1, x_st + 305, y_st, w / 2, h / 2);
             //g.DrawString("原圖平移", new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(305 + 305 - 130, 10));
 
@@ -403,32 +423,20 @@ namespace vcs_Draw_Transform1
             Bitmap bitmap2 = new Bitmap(W, H);
             Graphics g = Graphics.FromImage(bitmap2);
             //Pen p = new Pen(Color.Red, 3);
-            g.Clear(Color.Pink);
+            g.Clear(Color.White);
 
             //圖片的中心, 依此中心旋轉
             int cx = W / 2;
             int cy = H / 2;
+            cx = 200;
+            cy = 200;
 
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
-            int angle = 0;
-
-            for (angle = 0; angle <= 360; angle += 20)
+            for (int angle = 0; angle <= 360; angle += 30)
             {
                 draw_bitmap_with_angle(filename, g, cx, cy, angle);
             }
-
-            /*
-            angle = 20;
-            draw_bitmap_with_angle(filename, g, cx, cy, angle);
-
-            angle = 40;
-            draw_bitmap_with_angle(filename, g, cx, cy, angle);
-
-            angle = 60;
-            draw_bitmap_with_angle(filename, g, cx, cy, angle);
-            */
-
             pictureBox1.Image = bitmap2;
         }
 
@@ -442,12 +450,12 @@ namespace vcs_Draw_Transform1
             int x_st = cx - w / 2;   //圖片未旋轉時的原點(左上角)
             int y_st = cy - h / 2;
 
-            g.ResetTransform();
+            g.ResetTransform();  // 重置轉換, 恢復
 
             if (angle == 0)
             {
-                //僅需平移
-                g.TranslateTransform(x_st, y_st);   //平移原點 再右移 再下移 然後再進行畫圖
+                // 平移, 右移, 下移
+                g.TranslateTransform(x_st, y_st);
             }
             else
             {
@@ -455,21 +463,13 @@ namespace vcs_Draw_Transform1
                 //需要旋轉
 
                 double radius = Math.Sqrt(w * w + h * h) / 2;
-
                 double theta0 = Math.Atan((double)h / (double)w);
-                //richTextBox1.Text += "theta0 = " + theta0.ToString() + " 弧度\n";
-                //richTextBox1.Text += "theta0 = " + (theta0 * 180 / Math.PI).ToString() + " 度\n";
-
                 double theta1 = theta0 + Math.PI * angle / 180;
-                //richTextBox1.Text += "theta1 = " + theta1.ToString() + " 弧度\n";
-                //richTextBox1.Text += "theta1 = " + (theta1 * 180 / Math.PI).ToString() + " 度\n";
-
                 double x1 = radius * Math.Cos(theta1);
                 double y1 = radius * Math.Sin(theta1);
-                //richTextBox1.Text += "x1 = " + x1.ToString() + "\n";
-                //richTextBox1.Text += "y1 = " + y1.ToString() + "\n";
 
-                g.TranslateTransform(x_st + w / 2 - (float)x1, y_st + h / 2 - (float)y1);   //平移原點 再右移 再下移 然後再進行畫圖
+                // 平移, 右移, 下移
+                g.TranslateTransform(x_st + w / 2 - (float)x1, y_st + h / 2 - (float)y1);
                 g.RotateTransform(angle);//再旋轉指定的角度, 以全圖的左上角為原點, 順時鐘旋轉
             }
             g.DrawImage(bitmap1, 0, 0, w, h);
@@ -478,339 +478,26 @@ namespace vcs_Draw_Transform1
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //旋轉一張圖片
+            // 影像旋轉(以中心順時針轉10度)
+            // 旋轉一張圖片, 用圖片的中心為旋轉中心
+            // 若無設定平移, 則只會以原點為旋轉中心
 
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            pictureBox1.Image = Image.FromFile(filename);
+            Bitmap bmp = new Bitmap(filename);
 
-            //#region 影像旋轉(以中心順時針轉10度)
-            //建立新的影像
-            Image rotateImage = new Bitmap(pictureBox1.Image.Width, pictureBox1.Image.Height) as Image;
-            //準備繪製新的影像
-            Graphics g = Graphics.FromImage(rotateImage);
-            //設定中心點
-            g.TranslateTransform((float)pictureBox1.Image.Width / 2, (float)pictureBox1.Image.Height / 2);
+            // 平移, 右移, 下移
+            g.TranslateTransform((float)bmp.Width / 2, (float)bmp.Height / 2);
+
             //順時針轉10度
             g.RotateTransform(10);
-            //還原中心點
-            g.TranslateTransform(-(float)pictureBox1.Image.Width / 2, -(float)pictureBox1.Image.Height / 2);
+
+            // 平移, 右移, 下移
+            g.TranslateTransform(-(float)bmp.Width / 2, -(float)bmp.Height / 2);
+
             //於座標(0,0)開始繪製來源影像
-            g.DrawImage(pictureBox1.Image, 0, 0, pictureBox1.Image.Width, pictureBox1.Image.Height);
-            g.Dispose();
-            pictureBox1.Image = rotateImage;
+            g.DrawImage(bmp, 0, 0, bmp.Width, bmp.Height);
 
-            /*
-            //儲存新的影像
-            string filename = Application.StartupPath + "\\rotate_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-            rotateImage.Save(@filename, ImageFormat.Jpeg);
-            richTextBox1.Text += "影像旋轉，存檔完成，檔名：" + filename + "\n";
-            */
-            //#endregion
-        }
-
-
-        void MakeData1a()
-        {
-            richTextBox1.Text += "製作資料\n";
-            richTextBox1.Text += "x=-180:5:180;\n";
-            richTextBox1.Text += "y=sind(x)+0.6;\n";
-
-            x.Clear();
-            y.Clear();
-            ymax = 0;
-            ymin = 0;
-
-            xmin = -180;
-            xmax = 180;
-            float i;
-            //原始x y資料
-            double yy;
-            for (i = xmin; i <= xmax; i += 5f)
-            {
-                x.Add(i);
-
-                yy = sind(i) + 0.6;
-
-                /*
-                if (i == 0)
-                    yy = 1;
-                else
-                    yy = (float)(Math.Sin(i) / i);
-                */
-                if (Math.Abs(yy) < 0.0001)
-                    yy = 0;
-                y.Add(yy);     //y = sind(x)   x=-180:1:180
-            }
-        }
-
-        void MakeData1b()
-        {
-            richTextBox1.Text += "製作資料\n";
-            richTextBox1.Text += "x=-180:5:180;\n";
-            richTextBox1.Text += "y=sind(x)+0.6;\n";
-
-            x.Clear();
-            y.Clear();
-            ymax = 0;
-            ymin = 0;
-
-            xmin = -180;
-            xmax = 180;
-            float i;
-            //原始x y資料
-            double yy;
-            for (i = xmin; i <= xmax; i += 5f)
-            {
-                //x.Add(i);
-                x.Add(i + 180);
-                //yy = sind(i)+0.6;
-                //yy = sind(i);
-                yy = sind(i) * 50 + 50;
-                /*
-                if (i == 0)
-                    yy = 1;
-                else
-                    yy = (float)(Math.Sin(i) / i);
-                */
-                if (Math.Abs(yy) < 0.0001)
-                    yy = 0;
-                y.Add(yy);     //y = sind(x)   x=-180:1:180
-            }
-        }
-
-        void DrawData1a()
-        {
-            int i;
-
-            xmargin = W * xmargin_perncent / 100;
-            ymargin = H * ymargin_perncent / 100;
-
-            //找出最大與最小的y
-            ymax = (float)y[0];
-            ymin = (float)y[0];
-            for (i = 0; i < x.Count; i++)
-            {
-                if (y[i] > ymax)
-                    ymax = (float)y[i];
-                if (y[i] < ymin)
-                    ymin = (float)y[i];
-            }
-            richTextBox1.Text += "找到 最大y = " + ymax.ToString() + "\t 最小y = " + ymin.ToString() + "\n";
-
-            xratio = (float)((W - xmargin * 2) / (float)(xmax - xmin));     //2 倍
-            yratio = (float)((H - ymargin * 2) / (float)(ymax - ymin));     //180 倍
-
-            richTextBox1.Text += "xratio = " + xratio.ToString() + "\n";
-            richTextBox1.Text += "yratio = " + yratio.ToString() + "\n";
-
-            /*
-            richTextBox1.Text += "原始x y資料\n";
-            for (i = 0; i < x.Count; i++)
-            {
-                richTextBox1.Text += x[i].ToString() + "\t" + y[i].ToString() + "\n";
-            }
-            richTextBox1.Text += "\n";
-            */
-
-
-            richTextBox1.Text += "平移x y資料\n";
-            for (i = 0; i < x.Count; i++)
-            {
-                x[i] = x[i] - xmin;
-                y[i] = y[i] - ymin;
-                //richTextBox1.Text += x[i].ToString() + "\t" + y[i].ToString() + "\n";
-            }
-            richTextBox1.Text += "\n";
-
-            richTextBox1.Text += "放大x y資料\n";
-            for (i = 0; i < x.Count; i++)
-            {
-                x[i] = x[i] * xratio;
-                y[i] = y[i] * yratio;
-                //richTextBox1.Text += x[i].ToString() + "\t" + y[i].ToString() + "\n";
-            }
-            richTextBox1.Text += "\n";
-
-            richTextBox1.Text += "y反相\n";
-            for (i = 0; i < x.Count; i++)
-            {
-                y[i] = H - y[i];
-                //richTextBox1.Text += x[i].ToString() + "\t" + y[i].ToString() + "\n";
-            }
-            richTextBox1.Text += "\n";
-
-            richTextBox1.Text += "加margin\n";
-            for (i = 0; i < x.Count; i++)
-            {
-                x[i] = x[i] + xmargin;
-                y[i] = y[i] - ymargin;
-                //richTextBox1.Text += x[i].ToString() + "\t" + y[i].ToString() + "\n";
-            }
-            richTextBox1.Text += "\n";
-
-
-
-            Graphics g = pictureBox2.CreateGraphics();
-            g.Clear(Color.White);
-            g.DrawRectangle(new Pen(Color.Red, 1), 0, 0, W - 1, H - 1);
-            g.DrawRectangle(new Pen(Color.Red, 1), xmargin, ymargin, W - xmargin * 2 - 1, H - ymargin * 2 - 1);
-
-
-            //DrawLines 直接使用 List
-            List<PointF> points = new List<PointF>();
-
-            //int i;
-            for (i = 0; i < x.Count; i++)
-            {
-                //points.Add(new PointF((float)(x[i] * xratio), H - (float)(y[i] * yratio)-H/2));
-                //points.Add(new PointF((float)(x[i] * 1 - xmin), H - (float)(y[i] * yratio - ymin) - H / 2));
-                //points.Add(new PointF((float)((x[i] - xmin) * xratio), (float)((y[i] - ymin) * 1)));
-                points.Add(new PointF((float)x[i], (float)y[i]));
-            }
-            g.DrawLines(new Pen(Color.Red, 3), points.ToArray());
-
-            /*
-            //把XY資料印出來
-            richTextBox1.Text += "X\tY\n";
-            for (i = 0; i < points.Count; i++)
-            {
-                richTextBox1.Text += points[i].X.ToString() + "\t" + points[i].Y.ToString() + "\n";
-            }
-            richTextBox1.Text += "\n";
-            */
-
-            if (flag_draw_axis == true)
-            {
-                // Create pen.
-                Pen p = new Pen(Color.Black, 3);
-
-                float x1;
-                float y1;
-                float x2;
-                float y2;
-                PointF p1;
-                PointF p2;
-
-                //x軸
-                x1 = xmargin;
-                y1 = H - (0 - ymin * yratio) - ymargin;
-                x2 = W - xmargin;
-                y2 = H - (0 - ymin * yratio) - ymargin;
-                p1 = new PointF(x1, y1);
-                p2 = new PointF(x2, y2);
-
-                g.DrawLine(p, p1, p2);
-
-                //y軸
-                x1 = (0 - xmin) * xratio + xmargin;
-                y1 = ymargin;
-                x2 = (0 - xmin) * xratio + xmargin;
-                y2 = H - ymargin;
-                p1 = new PointF(x1, y1);
-                p2 = new PointF(x2, y2);
-
-                g.DrawLine(p, p1, p2);
-
-                /*  輔助線 正中間
-                g.DrawLine(new Pen(Color.Pink, 1), 0, H / 2, W, H / 2);
-                g.DrawLine(new Pen(Color.Pink, 1), W / 2, 0, W / 2, H);
-                */
-
-            }
-
-            if (flag_draw_title == true)
-            {
-                float x_st = W / 2 - 80;
-                float y_st = ymargin / 5;
-                g.DrawString(title, new Font("標楷體", 15), new SolidBrush(Color.Green), new PointF(x_st, y_st));
-            }
-        }
-
-        void DrawData1b()
-        {
-            double x_max = x.Max();
-            double x_min = x.Min();
-            double y_max = y.Max();
-            double y_min = y.Min();
-
-            richTextBox1.Text += "x_min = " + x_min.ToString() + "\n";
-            richTextBox1.Text += "x_max = " + x_max.ToString() + "\n";
-            richTextBox1.Text += "y_min = " + y_min.ToString() + "\n";
-            richTextBox1.Text += "y_max = " + y_max.ToString() + "\n";
-
-            // Make a Bitmap.
-            Bitmap bitmap1 = new Bitmap(W, H);
-            using (Graphics g = Graphics.FromImage(bitmap1))
-            {
-                g.SmoothingMode = SmoothingMode.AntiAlias;
-                g.Clear(Color.White);
-
-                // Create pens.
-                Pen redPen = new Pen(Color.Red, 0);     //線寬大於0會讓轉換後線變粗
-                Pen bluePen = new Pen(Color.Blue, 0);
-
-                //DrawLines 直接使用 List
-                List<PointF> points = new List<PointF>();
-
-                int i;
-                for (i = 0; i < x.Count; i++)
-                {
-                    points.Add(new PointF((float)x[i], (float)y[i]));
-                }
-                g.DrawLines(redPen, points.ToArray());
-
-                float dx = (float)x_min;
-                float dy = (float)y_min;
-                float w = (float)(x_max - x_min);
-                float h = (float)(y_max - y_min);
-
-                // Scale to fit the data.
-                RectangleF rect = new RectangleF(dx, dy, w, h);
-
-                //RectangleF rect = new RectangleF(0, 0, 100, 50);
-                g.DrawRectangle(new Pen(Color.Red, 5), dx, dy, w, h);
-
-                //g.DrawString("A", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(20, 20));
-
-                // Draw lines between original points to screen.
-                //g.DrawLines(bluePen, Points);   //畫直線
-                g.DrawString("文字", new Font("標楷體", 10), new SolidBrush(Color.Blue), new PointF(30, 20));
-
-                //準備Transform
-
-                int w2;
-                int h2;
-                int dx2;
-                int dy2;
-
-                w2 = W * 8 / 10;
-                h2 = H * 8 / 10;
-                dx2 = W * 1 / 10;
-                dy2 = H * 1 / 10;
-
-                PointF[] pts = 
-                {
-                    new PointF(dx2, dy2+h2),
-                    new PointF(dx2+w2, dy2+h2),
-                    new PointF(dx2, dy2),
-                };
-                g.DrawRectangle(new Pen(Color.Green, 5), dx2, dy2, w2 - 1, h2 - 1);
-                //g.DrawRectangle(new Pen(Color.Red, 0), dx1, dy1, w1, h1);
-                //g.DrawRectangle(new Pen(Color.Red, 1), 0, 0, Points[7].X, Points[7].Y);
-
-                g.Transform = new Matrix(rect, pts);
-
-                //g.DrawRectangle(new Pen(Color.Red, 0), dx1, dy1, w1, h1);
-                //g.DrawRectangle(new Pen(Color.Red, 1), 0, 0, Points[7].X, Points[7].Y);
-
-                g.Transform = new Matrix(rect, pts);
-
-                g.DrawLines(redPen, points.ToArray());  //畫直線
-                g.DrawString("文字", new Font("標楷體", 10), new SolidBrush(Color.Red), new PointF(30, 20));
-
-                pictureBox2.Image = bitmap1;
-            }
-            return;
+            pictureBox1.Image = bitmap1;
         }
 
         private double rad(double d)
@@ -830,16 +517,304 @@ namespace vcs_Draw_Transform1
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //不使用Transform畫正弦波
-            MakeData1a();
-            DrawData1a();
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //使用Transform畫正弦波
-            MakeData1b();
-            DrawData1b();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            g.Clear(Color.White);
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            draw_grid(g);
+
+            richTextBox1.Text += "幾何圖形, 大小為2X2, 中心在原點\n";
+
+            g.ResetTransform();  // 重置轉換, 恢復
+
+            //水平垂直放大100倍, 畫在原點, 只看到右下角
+            g.ScaleTransform(100, 100);
+            DrawFigure(g, Color.Red);
+
+            // 平移, 右移, 下移
+            g.TranslateTransform(200, 200, MatrixOrder.Append);
+            DrawFigure(g, Color.Green);
+
+            float x_st = 400f;
+            float y_st = 100f;
+            int w = 200;
+            int h = 200;
+
+            RectangleF from_rect = new RectangleF(-1, -1, 2, 2);
+            PointF[] to_points =
+            {
+                new PointF(x_st, y_st),    // 左上
+                new PointF(x_st+w, y_st),  // 右上
+                new PointF(x_st, y_st+h),  // 左下
+            };
+
+            Matrix map_matrix = new Matrix(from_rect, to_points);
+            g.Transform = map_matrix;
+
+            DrawFigure(g, Color.Blue);
+
+            //原圖在 (-1,-1) w = 2 h = 2
+            //轉換到 (400,120) w = 180 h = 100  //放大又平移 且 歪曲50
+            x_st = 400;
+            y_st = 100f + 210f;
+            w = 200;
+            h = 200;
+
+            from_rect = new RectangleF(-1, -1, 2, 2);
+            to_points = new PointF[]
+            {
+                new PointF(x_st, y_st),       // 左上
+                new PointF(x_st+w, y_st),     // 右上
+                new PointF(x_st-50, y_st+h),  // 左下
+            };
+            map_matrix = new Matrix(from_rect, to_points);
+            g.Transform = map_matrix;
+
+            DrawFigure(g, Color.Cyan);
+
+            richTextBox1.Text += "右下: 原圖放大平移 且 Y軸反相\n";
+            //反相畫圖  Y軸反相
+            //原圖在 (-1,-1) w = 2 h = 2
+            //轉換到 (100,450) w = 100 h = 100  //放大又平移 且 Y軸反相
+
+            x_st = 100f;
+            y_st = 330f + 200f;
+            w = 200;
+            h = 200;
+
+            from_rect = new RectangleF(-1, -1, 2, 2);
+            to_points = new PointF[]
+            {
+                new PointF(x_st, y_st),   // Upper left.
+                new PointF(x_st+w, y_st),   // Upper right.
+                new PointF(x_st, y_st-h),   // Lower left.
+            };
+            map_matrix = new Matrix(from_rect, to_points);
+            g.Transform = map_matrix;
+            DrawFigure(g, Color.Magenta);
+
+            pictureBox1.Image = bitmap1;
+        }
+
+        //把圖畫在(-1,-1) w = 2 h = 2
+        private void DrawFigure(Graphics g, Color c)
+        {
+            int linewidth = 0;  // 線寬大於0會讓轉換後線變粗
+            Pen p = new Pen(c, linewidth);
+
+            g.DrawLine(p, -1, 1, 1, 1);//下
+            g.DrawLine(p, -1, 1, -1, -1);//左
+            g.DrawLine(p, 1, -1, 1, 1);//右
+            g.DrawLine(p, 1, -1, -1, -1);//上
+
+            g.DrawLine(p, -1, -1, 1, 1);
+            g.DrawLine(p, -1, -1, 1, 0);
+            g.DrawLine(p, -1, -1, 0, 1);
+
+            g.DrawEllipse(p, -0.05f, -0.05f, 0.1f, 0.1f);
+
+            p.Dispose();
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            //測試Matrix
+
+            float size = 2.0f;
+
+            // 建立一個矩陣物件
+            Matrix Var_Matrix = new Matrix((float)size, 0.0F, 0.0F, (float)size, 0.0F, 0.0F);//設定仿射矩陣
+            //Var_Matrix.TransformPoints(Var_PointS); //不會用 TransformPoints
+
+            richTextBox1.Text += Var_Matrix.ToString() + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            // 建立一個矩陣物件
+            Matrix A = new Matrix();
+            int theta = 0;
+            int Cx = 100;
+            int Cy = 100;
+            for (int i = theta; i < 180 + theta; i += 45)
+            {
+                A.Reset();
+                A.Rotate(i, MatrixOrder.Append);
+                A.Translate(Cx, Cy, MatrixOrder.Append);
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            Rectangle rect = new Rectangle(-2, -2, 4, 4);
+            Point[] pts = new Point[]
+            { 
+                new Point(0, pictureBox1.ClientSize.Height),
+                new Point(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height), 
+                new Point(0, 0)
+            };
+
+            // 建立一個矩陣物件
+            Matrix transform = new Matrix(rect, pts);
+
+            //richTextBox1.Text += transform..Elements.ToString() + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+        }
+
+        // Return a rotation matrix to rotate around a point.
+        private Matrix RotateAroundPoint(float angle, Point center)
+        {
+            // Translate the point to the origin.
+            // 建立一個矩陣物件
+            Matrix result = new Matrix();
+            result.RotateAt(angle, center);
+            return result;
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            // Matrix1
+
+            Rectangle rect = new Rectangle(0, 0, 200, 200);
+
+            // 畫一個基準
+            g.DrawRectangle(Pens.Red, rect);
+            g.DrawRectangle(Pens.Red, 50, 50, 50, 50);
+
+            // 有轉換
+            // 建立一個矩陣物件
+            //Matrix M = new Matrix(1, 0, 0.5f, 1, 0, 0);
+            //Matrix M = new Matrix(1, 0.5f, 0, 1, 0, 0);
+            //Matrix M = new Matrix(1, 1, 1, -1, 0, 0);
+
+            float dx = 50;
+            float dy = 50;
+            //Matrix M = new Matrix(1.2f, 0, 0, 1.8f, dx, dy);
+            Matrix M = new Matrix(1.2f, 0, 0, 1.8f, dx, dy);
+
+            //g.RotateTransform(45.0f, MatrixOrder.Prepend);  // 旋轉
+            // 平移, 右移, 下移
+            //g.TranslateTransform(-20, -70);  // 平移
+            g.Transform = M;
+
+            g.DrawString("Welcome to the United States and have a nice day.",
+                new Font("Verdana", 20),
+                new SolidBrush(Color.Blue),
+                rect);
+            g.DrawRectangle(Pens.Green, rect);
+
+            pictureBox1.Image = bitmap1;
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            // Transform
+
+            g.Clear(Color.White);
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            draw_grid(g);
+
+            Rectangle rect = new Rectangle(100, 0, 100, 100);
+
+            // 原圖
+            g.FillRectangle(sb1, rect);
+
+            // 縮旋平
+            //g.ScaleTransform(2.0f, 0.5f);  // 縮放, 水平縮放, 垂直縮放
+            //g.RotateTransform(45.0f, MatrixOrder.Append);  // 旋轉, 對原點順時針旋轉
+            g.TranslateTransform(200.0f, 100.0f, MatrixOrder.Append);  // 平移, 右移, 下移
+
+            // 使用 transform 再畫一次
+            g.FillRectangle(sb2, rect);
+
+            g.ResetTransform();  // 重置轉換, 恢復
+
+            // 重置後 再畫一次
+            rect = new Rectangle(100 + 20, 0 + 20, 100, 100);
+            g.FillRectangle(sb3, rect);
+
+            pictureBox1.Image = bitmap1;
+        }
+
+        void draw_pts(Graphics g, PointF[] pts)
+        {
+            PointF p0 = pts[0];//左上
+            PointF p1 = pts[1];//右上
+            PointF p2 = new PointF(pts[1].X, pts[1].Y + (pts[2].Y - pts[0].Y));
+            PointF p3 = pts[2];//左下
+
+            //Pen p = new Pen(Color.Red, 20);
+            g.DrawLine(new Pen(Color.Red, 20), p0, p1);//上
+            g.DrawLine(new Pen(Color.Green, 20), p1, p2);//右
+            g.DrawLine(new Pen(Color.Blue, 20), p2, p3);//下
+            g.DrawLine(new Pen(Color.Cyan, 20), p3, p0);//左
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            // 矩陣轉置, 只能 矩形範圍 轉 平行四邊形範圍
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_chicken\chicken1.bmp";
+            Bitmap bmp = new Bitmap(filename);
+
+            g.Clear(Color.White);
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            draw_grid(g);
+
+            g.FillRectangle(Brushes.Lime, 0, 100, 200, 100);
+            g.DrawEllipse(Pens.Red, 0, 100, 200, 100);
+            g.DrawImage(bmp, 60, 110, 80, 80);
+
+            //準備Transform
+            int x_st = 0;
+            int y_st = 100;
+            int w = 200;
+            int h = 100;
+            RectangleF rect = new RectangleF(x_st, y_st, w, h);
+            g.DrawRectangle(new Pen(Color.Red, 0), x_st, y_st, w, h);
+
+            x_st = 300;
+            y_st = 50;
+            w = 300;
+            h = 200;
+            int dd = 100;
+
+            g.DrawRectangle(new Pen(Color.Red, 0), x_st, y_st, w, h);
+
+            PointF[] pts = 
+            {
+                // 左上                    //右上
+                new PointF(x_st, y_st),    new PointF(x_st + w, y_st+dd),
+                new PointF(x_st, y_st + h),
+                // 左下
+            };
+            draw_pts(g, pts);
+
+            g.Transform = new Matrix(rect, pts);  // 矩陣轉置, 只能 矩形範圍 轉 平行四邊形範圍
+
+            g.FillRectangle(Brushes.Lime, 0, 100, 200, 100);
+            g.DrawEllipse(Pens.Red, 0, 100, 200, 100);
+            g.DrawImage(bmp, 60, 110, 80, 80);
+
+            pictureBox1.Image = bitmap1;
         }
 
         void MakeData2()
@@ -873,284 +848,186 @@ namespace vcs_Draw_Transform1
 
         void DrawData2()
         {
-            // Make a Bitmap.
-            Bitmap bitmap1 = new Bitmap(W, H);
-            using (Graphics g = Graphics.FromImage(bitmap1))
+            int len = Points.Length;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+            for (int i = 0; i < len; i++)
             {
-                g.SmoothingMode = SmoothingMode.AntiAlias;
-                g.Clear(Color.White);
-
-                // Create pens.
-                Pen redPen = new Pen(Color.Red, 2);     //線寬大於0會讓轉換後線變粗
-                Pen bluePen = new Pen(Color.Blue, 2);
-
-                // Draw lines between original points to screen.
-                //g.DrawLines(bluePen, Points);   //畫直線
-                g.DrawCurve(bluePen, Points);   //畫曲線
-                g.DrawString("轉換前10", new Font("標楷體", 10), new SolidBrush(Color.Blue), new PointF(22, 20));
-
-                //準備Transform
-                int w1;
-                int h1;
-                int dx1;
-                int dy1;
-
-                w1 = Points[7].X * 10 / 10;
-                h1 = Points[7].Y * 10 / 10;
-                dx1 = Points[7].X * 0 / 10;
-                dy1 = Points[7].Y * 0 / 10;
-
-                RectangleF rect = new RectangleF(dx1, dy1, w1, h1);
-                g.DrawRectangle(new Pen(Color.Red, 0), dx1, dy1, w1, h1);
-
-                int w2;
-                int h2;
-                int dx2;
-                int dy2;
-
-                w2 = W * 8 / 10;
-                h2 = H * 8 / 10;
-                dx2 = W * 1 / 10;
-                dy2 = H * 1 / 10;
-
-                PointF[] pts = 
-                {
-                    new PointF(dx2, dy2+h2),
-                    new PointF(dx2+w2, dy2+h2),
-                    new PointF(dx2, dy2),
-                };
-                g.DrawRectangle(new Pen(Color.Green, 5), dx2, dy2, w2 - 1, h2 - 1);
-                g.DrawRectangle(new Pen(Color.Red, 0), dx1, dy1, w1, h1);
-                //g.DrawRectangle(new Pen(Color.Red, 1), 0, 0, Points[7].X, Points[7].Y);
-
-                g.Transform = new Matrix(rect, pts);
-
-                //g.DrawLines(redPen, Points);   //畫直線
-                g.DrawCurve(redPen, Points);   //畫曲線
-                g.DrawString("轉換後10", new Font("標楷體", 10), new SolidBrush(Color.Red), new PointF(22, 20));
-
-                g.ResetTransform();
-                g.DrawString("恢復轉換後10", new Font("標楷體", 10), new SolidBrush(Color.Red), new PointF(100, 20));
-
-                pictureBox2.Image = bitmap1;
+                richTextBox1.Text += Points[i].ToString() + "\n";
             }
+
+            int W = 800;
+            int H = 250;
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.Clear(Color.White);
+
+            // Create pens.
+            Pen redPen = new Pen(Color.Red, 2);     //線寬大於0會讓轉換後線變粗
+            Pen bluePen = new Pen(Color.Blue, 2);
+
+            //g.DrawLines(bluePen, Points);   //畫直線
+            g.DrawCurve(bluePen, Points);   //畫曲線
+            g.DrawString("轉換前10", new Font("標楷體", 10), new SolidBrush(Color.Blue), new PointF(22, 20));
+
+            //準備Transform
+            int x_st = 0;
+            int y_st = 0;
+            int w = 70;
+            int h = 160;
+
+            //原始資料範圍
+            RectangleF rect = new RectangleF(x_st, y_st, w, h);
+            g.DrawRectangle(new Pen(Color.Red, 0), x_st, y_st, w, h);
+
+            //欲轉換資料範圍
+            x_st = W * 1 / 10;
+            y_st = H * 1 / 10;
+            w = W * 8 / 10;
+            h = H * 8 / 10;
+
+            PointF[] pts =
+            {
+                //new PointF(x_st, y_st+h),//左上
+                //new PointF(x_st+w, y_st+h),//右上
+                //new PointF(x_st, y_st),//左下
+                new PointF(x_st, y_st),//左上
+                new PointF(x_st+w, y_st),//右上
+                new PointF(x_st, y_st+h),//左下
+            };
+            g.DrawRectangle(new Pen(Color.Green, 5), x_st, y_st, w, h);
+
+            g.Transform = new Matrix(rect, pts);  // 矩陣轉置, 只能 矩形範圍 轉 平行四邊形範圍
+
+            //g.DrawLines(redPen, Points);   //畫直線
+            g.DrawCurve(redPen, Points);   //畫曲線
+            g.DrawString("轉換後10", new Font("標楷體", 10), new SolidBrush(Color.Red), new PointF(22, 20));
+
+            g.ResetTransform();  // 重置轉換, 恢復
+
+            g.DrawString("恢復轉換後10", new Font("標楷體", 10), new SolidBrush(Color.Red), new PointF(100, 20));
+
+            pictureBox1.Image = bitmap1;
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void button17_Click(object sender, EventArgs e)
         {
             MakeData2();
             DrawData2();
+
         }
 
-        private void button10_Click(object sender, EventArgs e)
+        private void button18_Click(object sender, EventArgs e)
         {
-            //畫sin, 無transform
-            richTextBox1.Text += "畫 y=100+100*sind(x), x=0:1:360 沒有transform\n";
 
-            // Create pens.
-            Pen greenPen = new Pen(Color.Green, 2);
-            Graphics g = this.pictureBox2.CreateGraphics();
-
-            // Draw lines between original points to screen.
-            g.DrawLines(greenPen, data);   //畫直線
-
-            // Draw curve to screen.
-            //g.DrawCurve(greenPen, data); //畫曲線
         }
 
-        private void button11_Click(object sender, EventArgs e)
+        private void button19_Click(object sender, EventArgs e)
         {
-            //畫sin, 有transform
-            richTextBox1.Text += "畫 y=sind(x), x=0:1:360 有transform\n";
-            // Create pens.
-            Pen redPen = new Pen(Color.Red, 3);
-            Graphics g = this.pictureBox2.CreateGraphics();
+            pictureBox1.ClientSize = new Size(960, 960 + 30);
+            richTextBox1.Visible = false;
 
+            timer1.Enabled = true;
+        }
 
-            #region 做transform
-            int x_max = 360;
-            int x_min = 0;
-            int y_max = 0;
-            int y_min = 200;
-
+        void draw_grid(Graphics g)
+        {
+            int W = this.pictureBox1.Width;
+            int H = this.pictureBox1.Height;
             int i;
-            for (i = 0; i < N; i++)
-            {
-                //data[i].X = i;
-                //data[i].Y = 100 + (int)(100 * sind(i));
-                if (data[i].Y > y_max)
-                    y_max = data[i].Y;
-                if (data[i].Y < y_min)
-                    y_min = data[i].Y;
-            }
+            int j;
 
+            for (i = 0; i <= W; i += 100)
+            {
+                g.DrawLine(Pens.Gray, i, 0, i, H);
+            }
+            for (j = 0; j <= H; j += 100)
+            {
+                g.DrawLine(Pens.Gray, 0, j, W, j);
+            }
+        }
+
+        float angle = 0;
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            return;
+
+            // 影像旋轉(以中心順時針轉10度)
+            // 旋轉一張圖片, 用圖片的中心為旋轉中心
+            // 若無設定平移, 則只會以原點為旋轉中心
+
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            // 平移, 右移, 下移
+            e.Graphics.TranslateTransform((float)bmp.Width / 2, (float)bmp.Height / 2);
+
+            //順時針轉10度
+            angle += 27f;
+            e.Graphics.RotateTransform(angle);
+
+            // 平移, 右移, 下移
+            e.Graphics.TranslateTransform(-(float)bmp.Width / 2, -(float)bmp.Height / 2);
+
+            //於座標(0,0)開始繪製來源影像
+            e.Graphics.DrawImage(bmp, 0, 0, bmp.Width, bmp.Height);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            pictureBox1.Invalidate();
+        }
+    }
+}
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+
+
+/*
+//儲存新的影像
+string filename = Application.StartupPath + "\\rotate_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+rotateImage.Save(@filename, ImageFormat.Jpeg);
+richTextBox1.Text += "影像旋轉，存檔完成，檔名：" + filename + "\n";
+*/
+
+
+
+/*
+            //矩陣轉置
+            //原始資料範圍很小, 用 矩陣轉置 方法, 可以剛好畫滿pictureBox
+
+
+            // 原始資料範圍 rect
             // Scale to fit the data.
             RectangleF rect = new RectangleF(x_min, y_min, x_max, y_max - y_min);
-
             g.DrawRectangle(redPen, x_min, y_min, x_max, y_max - y_min);
 
-            richTextBox1.Text += "rect w = " + rect.Width.ToString() + ", h = " + rect.Height.ToString() + "\n";
+            // 欲映射的pictureBox範圍
             PointF[] pts = 
                 {
-                    new PointF(0, pictureBox2.ClientSize.Height),
-                    new PointF(pictureBox2.ClientSize.Width, pictureBox2.ClientSize.Height),
+                    new PointF(0, pictureBox1.ClientSize.Height),
+                    new PointF(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height),
                     new PointF(0, 0),
                 };
 
-            richTextBox1.Text += "pts w = " + pictureBox2.ClientSize.Width.ToString() + ", h = " + pictureBox2.ClientSize.Height.ToString() + "\n";
+            //轉置
+            g.Transform = new Matrix(rect, pts);  // 矩陣轉置, 只能 矩形範圍 轉 平行四邊形範圍
 
-            g.Transform = new Matrix(rect, pts);
-            #endregion
+            //畫圖
 
-            // Draw lines between original points to screen.
-            g.DrawLines(redPen, data);   //畫直線
-
-            // Draw curve to screen.
-            //g.DrawCurve(redPen, data); //畫曲線
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-            Pen redPen = new Pen(Color.Red, 3);
-            Graphics g = this.pictureBox2.CreateGraphics();
-
-            g.SmoothingMode = SmoothingMode.AntiAlias;      // Draw smoothly.
-
-            richTextBox1.Text += "左: 原圖放大平移\n";
-            //原圖在 (-1,-1) w = 2 h = 2
-            //重置轉換
-            g.ResetTransform();
-
-            //x方向放大200倍 y方向放大100倍, 變成 (-200,-100), w = 400, h = 200
-            g.ScaleTransform(200, 100);
-
-            //平移 水平向右移200 垂直向下移200 
-            g.TranslateTransform(200, 200, MatrixOrder.Append);
-
-            // Draw.
-            DrawChart(g);
-
-
-            richTextBox1.Text += "右上: 原圖放大平移\n";
-            //原圖在 (-1,-1) w = 2 h = 2
-            //轉換到 (300,10) w = 150 h = 100  //放大又平移
-            float x_st = 500f;
-            float y_st = 10f;
-            int w = 150;
-            int h = 100;
-
-            RectangleF from_rect = new RectangleF(-1, -1, 2, 2);
-            PointF[] to_points =
-            {
-                new PointF(x_st, y_st),    // Upper left.
-                new PointF(x_st+w, y_st),    // Upper right.
-                new PointF(x_st, y_st+h),   // Lower left.
-            };
-            Matrix map_matrix = new Matrix(from_rect, to_points);
-            g.Transform = map_matrix;
-            // Draw.
-            DrawChart(g);
-
-
-            richTextBox1.Text += "右中: 原圖放大平移 且歪曲50\n";
-            //原圖在 (-1,-1) w = 2 h = 2
-            //轉換到 (400,120) w = 180 h = 100  //放大又平移 且 歪曲50
-            x_st = 500f;
-            y_st = 120f;
-            w = 180;
-            h = 100;
-
-            from_rect = new RectangleF(-1, -1, 2, 2);
-            to_points = new PointF[]
-            {
-                new PointF(x_st, y_st),    // Upper left.
-                new PointF(x_st+w, y_st),   // Upper right.
-                new PointF(x_st-50, y_st+h),    // Lower left.
-            };
-            map_matrix = new Matrix(from_rect, to_points);
-            g.Transform = map_matrix;
-            // Draw.
-            DrawChart(g);
-
-
-            richTextBox1.Text += "右下: 原圖放大平移 且 Y軸反相\n";
-            //反相畫圖  Y軸反相
-            //原圖在 (-1,-1) w = 2 h = 2
-            //轉換到 (100,450) w = 100 h = 100  //放大又平移 且 Y軸反相
-
-            x_st = 500f;
-            y_st = 330f;
-            w = 100;
-            h = 100;
-
-            from_rect = new RectangleF(-1, -1, 2, 2);
-            to_points = new PointF[]
-            {
-                new PointF(x_st, y_st),   // Upper left.
-                new PointF(x_st+w, y_st),   // Upper right.
-                new PointF(x_st, y_st-h),   // Lower left.
-            };
-            map_matrix = new Matrix(from_rect, to_points);
-            g.Transform = map_matrix;
-            // Draw.
-            DrawChart(g);
-        }
-
-        //把圖畫在(-1,-1) w = 2 h = 2
-        private void DrawChart(Graphics g)
-        {
-            using (Pen black_pen = new Pen(Color.Black, 0))
-            {
-                g.DrawLine(black_pen, -1, 1, 1, 1);     //畫出X軸
-                g.DrawLine(black_pen, -1, 1, -1, -1);   //畫出y軸
-
-                using (Pen p = new Pen(Color.Red, 0))
-                {
-                    p.EndCap = LineCap.ArrowAnchor;
-
-                    g.DrawLines(p, new PointF[]
-                    {
-                    new PointF(-1,1),
-                    new PointF(-0.7f,-0.3f),
-                    new PointF(-0.4f,0.2f),
-                    new PointF(0.1f,0f),
-                    new PointF(0.4f,0.3f),
-                    new PointF(0.7f,-0.8f)
-                    }
-                    );
-                }
-            }
-        }
-
-        private void bt_save_Click(object sender, EventArgs e)
-        {
-            if (pictureBox1.Image == null)
-            {
-                richTextBox1.Text += "無圖片, 離開\n";
-                return;
-            }
-
-
-            Image image = new Bitmap(pictureBox1.Image.Width, pictureBox1.Image.Height) as Image;
-
-            //儲存新的影像
-            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-
-            try
-            {
-                //bitmap1.Save(@file1, ImageFormat.Jpeg);
-                image.Save(filename, ImageFormat.Bmp);
-                //bitmap1.Save(@file3, ImageFormat.Png);
-
-                //richTextBox1.Text += "已存檔 : " + file1 + "\n";
-                richTextBox1.Text += "已存檔 : " + filename + "\n";
-                //richTextBox1.Text += "已存檔 : " + file3 + "\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-            }
-        }
-
-    }
-}
+*/
