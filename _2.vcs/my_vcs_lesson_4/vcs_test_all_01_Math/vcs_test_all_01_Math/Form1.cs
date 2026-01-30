@@ -146,7 +146,6 @@ namespace vcs_test_all_01_Math
         {
             richTextBox1.Text += "pi = " + Math.PI.ToString() + "\n";
             richTextBox1.Text += "e = " + Math.E.ToString() + "\n";
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -164,7 +163,6 @@ namespace vcs_test_all_01_Math
 
             richTextBox1.Text += "exp(1) = \t" + Math.Exp(1).ToString() + "\n";
             richTextBox1.Text += "exp(2) = \t" + Math.Exp(2).ToString() + "\n";
-
 
             richTextBox1.Text += "求log以a為底的b\n";
             double b = 1024;
@@ -269,7 +267,9 @@ namespace vcs_test_all_01_Math
                     return _Sqrt;
                 }
                 else
+                {
                     return 0;
+                }
             }
             else if (val.Count == 1)
             {
@@ -287,9 +287,10 @@ namespace vcs_test_all_01_Math
 
             List<double> arrays = new List<double>();
 
-            int i;
-            for (i = 0; i < sd_num.Length; i++)
+            for (int i = 0; i < sd_num.Length; i++)
+            {
                 arrays.Add(sd_num[i]);
+            }
 
             double sd;
             sd = SD2(arrays);
@@ -305,20 +306,18 @@ namespace vcs_test_all_01_Math
             //一維陣列用法：
             double[] a = new double[CNT];
 
-            int i;
             Random r = new Random();
-            for (i = 0; i < CNT; i++)
+            for (int i = 0; i < CNT; i++)
             {
                 a[i] = r.NextDouble();
             }
 
-            for (i = 0; i < CNT; i++)
+            for (int i = 0; i < CNT; i++)
             {
                 a[i] = sd_num[i];
             }
 
-            double sd;
-            sd = SD(a);
+            double sd = SD(a);
             richTextBox1.Text += "SD = " + sd.ToString() + "\n";
         }
 
@@ -370,9 +369,7 @@ namespace vcs_test_all_01_Math
             sd = SD(awb_block);
             richTextBox1.Text += "awb_block SD = " + sd.ToString() + "\n";
             */
-
         }
-
 
         private void button8_Click(object sender, EventArgs e)
         {
@@ -464,7 +461,6 @@ namespace vcs_test_all_01_Math
             richTextBox1.Text += "最大公因數 = " + gcd.ToString() + "\n";
             richTextBox1.Text += "ratio = " + (w / gcd).ToString() + " : " + (h / gcd).ToString() + "\n";
 
-
             richTextBox1.Text += "最大公因數 另法\n";
             long A = 36;
             long B = 84;
@@ -526,14 +522,28 @@ namespace vcs_test_all_01_Math
         private bool IsPrime(int num)
         {
             // Handle 1 and 2 separately.
-            if (num == 1) return false;
-            if (num == 2) return true;
-            if (num % 2 == 0) return false;
+            if (num == 1)
+            {
+                return false;
+            }
+            if (num == 2)
+            {
+                return true;
+            }
+            if (num % 2 == 0)
+            {
+                return false;
+            }
 
             // See if the number is divisible by odd values up to Sqrt(number).
             int sqrt = (int)(Math.Sqrt(num) + 1);
             for (int i = 3; i < sqrt; i++)
-                if (num % i == 0) return false;
+            {
+                if (num % i == 0)
+                {
+                    return false;
+                }
+            }
 
             // If we get here, the number is prime.
             return true;
@@ -700,8 +710,7 @@ namespace vcs_test_all_01_Math
             List<List<T>> results = new List<List<T>>();
 
             // Build the combinations recursively.
-            PermuteItems<T>(items, in_selection,
-                current_permutation, results, 0);
+            PermuteItems<T>(items, in_selection, current_permutation, results, 0);
 
             // Return the results.
             return results;
@@ -731,8 +740,7 @@ namespace vcs_test_all_01_Math
                         current_permutation[next_position] = items[i];
 
                         // Recursively fill the remaining positions.
-                        PermuteItems<T>(items, in_selection,
-                            current_permutation, results, next_position + 1);
+                        PermuteItems<T>(items, in_selection, current_permutation, results, next_position + 1);
 
                         // Remove the item from the current permutation.
                         in_selection[i] = false;
@@ -745,7 +753,10 @@ namespace vcs_test_all_01_Math
         private long Factorial(long n)
         {
             long result = 1;
-            for (int i = 2; i <= n; i++) result *= i;
+            for (int i = 2; i <= n; i++)
+            {
+                result *= i;
+            }
             return result;
         }
 
@@ -890,15 +901,10 @@ namespace vcs_test_all_01_Math
                 {
 
 
-
                 }
-
-
             }
             */
         }
-
-
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
@@ -961,7 +967,6 @@ namespace vcs_test_all_01_Math
                     denom++;
                     unit_fraction = new Fraction(1, denom);
                 }
-
                 // Remove the unit fraction.
                 result.Add(unit_fraction);
                 frac -= unit_fraction;
@@ -1036,7 +1041,10 @@ namespace vcs_test_all_01_Math
             // Make an array indicating whether numbers are prime.
             bool[] is_prime = new bool[max + 1];
             is_prime[2] = true;
-            for (int i = 3; i <= max; i += 2) is_prime[i] = true;
+            for (int i = 3; i <= max; i += 2)
+            {
+                is_prime[i] = true;
+            }
 
             // Cross out multiples of odd primes.
             for (int p = 3; p <= max; p += 2)
@@ -1046,11 +1054,17 @@ namespace vcs_test_all_01_Math
                 {
                     // Knock out multiples of p.
                     int max_q = max / p;
-                    if (max_q % 2 == 0) max_q--;    // Make it odd.
+                    if (max_q % 2 == 0)
+                    {
+                        max_q--;    // Make it odd.
+                    }
                     for (int q = max_q; q >= p; q -= 2)
                     {
                         // Only use q if it is prime.
-                        if (is_prime[q]) is_prime[p * q] = false;
+                        if (is_prime[q])
+                        {
+                            is_prime[p * q] = false;
+                        }
                     }
                 }
             }
@@ -1150,9 +1164,7 @@ namespace vcs_test_all_01_Math
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
             int N = 50;
@@ -1173,10 +1185,11 @@ namespace vcs_test_all_01_Math
         {
             decimal result = 1;
             for (decimal i = 2; i <= N; i++)
+            {
                 result *= i;
+            }
             return result;
         }
-
 
         // Calculate factorials with different data types.
         private string IntFactorial(int N)
@@ -1184,7 +1197,10 @@ namespace vcs_test_all_01_Math
             try
             {
                 int result = 1;
-                for (int i = 2; i <= N; i++) result *= i;
+                for (int i = 2; i <= N; i++)
+                {
+                    result *= i;
+                }
                 return result.ToString();
             }
             catch (Exception ex)
@@ -1197,7 +1213,10 @@ namespace vcs_test_all_01_Math
             try
             {
                 long result = 1;
-                for (long i = 2; i <= N; i++) result *= i;
+                for (long i = 2; i <= N; i++)
+                {
+                    result *= i;
+                }
                 return result.ToString();
             }
             catch (Exception ex)
@@ -1212,7 +1231,10 @@ namespace vcs_test_all_01_Math
             try
             {
                 decimal result = 1;
-                for (decimal i = 2; i <= N; i++) result *= i;
+                for (decimal i = 2; i <= N; i++)
+                {
+                    result *= i;
+                }
                 return result.ToString();
             }
             catch (Exception ex)
@@ -1224,15 +1246,27 @@ namespace vcs_test_all_01_Math
         private string FloatFactorial(float N)
         {
             float result = 1;
-            for (float i = 2; i <= N; i++) result *= i;
-            if (float.IsInfinity(result)) return "Infinity";
+            for (float i = 2; i <= N; i++)
+            {
+                result *= i;
+            }
+            if (float.IsInfinity(result))
+            {
+                return "Infinity";
+            }
             return result.ToString();
         }
         private string DoubleFactorial(double N)
         {
             double result = 1;
-            for (double i = 2; i <= N; i++) result *= i;
-            if (double.IsInfinity(result)) return "Infinity";
+            for (double i = 2; i <= N; i++)
+            {
+                result *= i;
+            }
+            if (double.IsInfinity(result))
+            {
+                return "Infinity";
+            }
             return result.ToString();
         }
         //N階乘 SP
@@ -1255,6 +1289,7 @@ namespace vcs_test_all_01_Math
             // Display the primes.
             int num_primes = 0;
             for (int i = 2; i <= max; i++)
+            {
                 if (is_prime[i])
                 {
                     if (num_primes <= 100)
@@ -1263,12 +1298,10 @@ namespace vcs_test_all_01_Math
                     }
                     num_primes++;
                 }
-
+            }
             richTextBox1.Text += "\n";
             richTextBox1.Text += "總共找到 " + num_primes.ToString() + " 個質數\n";
-
         }
-
 
         // Build a Sieve of Eratosthenes.
         private bool[] MakeSieve2(int max)
@@ -1276,7 +1309,10 @@ namespace vcs_test_all_01_Math
             // Make an array indicating whether numbers are prime.
             bool[] is_prime = new bool[max + 1];
             is_prime[2] = true;
-            for (int i = 3; i <= max; i += 2) is_prime[i] = true;
+            for (int i = 3; i <= max; i += 2)
+            {
+                is_prime[i] = true;
+            }
 
             // Cross out multiples of odd primes.
             for (int i = 3; i <= max; i += 2)
@@ -1286,7 +1322,9 @@ namespace vcs_test_all_01_Math
                 {
                     // Knock out multiples of i.
                     for (int j = i * 3; j <= max; j += i)
+                    {
                         is_prime[j] = false;
+                    }
                 }
             }
             return is_prime;
@@ -1358,7 +1396,10 @@ namespace vcs_test_all_01_Math
             Debug.Assert(values.Length < 100, "Values array should not contain more than 100 items");
 
             // If there are no values, return NaN.
-            if (values == null || values.Length < 1) return float.NaN;
+            if (values == null || values.Length < 1)
+            {
+                return float.NaN;
+            }
 
             // Calculate the average.
             return values.Average();
@@ -1374,9 +1415,6 @@ namespace vcs_test_all_01_Math
             richTextBox1.Text += "1.059463094359295264561825" + "\t真正的12次根號2\n\n";
 
             double[] tone = new double[22];
-
-            int i;
-
             double aa = Math.Pow(2, pp);
 
             tone[0] = 261.6255653f;
@@ -1405,7 +1443,7 @@ namespace vcs_test_all_01_Math
 
             tone[21] = tone[20] * aa;
 
-            for (i = 0; i < tone.Length; i++)
+            for (int i = 0; i < tone.Length; i++)
             {
                 richTextBox1.Text += "i = " + i.ToString() + "\t" + tone[i].ToString() + "\n";
                 if ((i % 7) == 6)
@@ -1460,13 +1498,15 @@ namespace vcs_test_all_01_Math
 
                 for (int i = 8; i != 0; i--)
                 {    // 巡檢每個bit  
-                    if ((crc & 0x0001) != 0)
-                    {      // 如果 LSB = 1   
-                        crc >>= 1;                    // 右移1bit 並且 XOR 0xA001  
+                    if ((crc & 0x0001) != 0)// 如果 LSB = 1
+                    {
+                        crc >>= 1;  // 右移1bit 並且 XOR 0xA001  
                         crc ^= 0xA001;
                     }
-                    else                            // 如果 LSB != 1  
-                        crc >>= 1;                    // 右移1bit
+                    else  // 如果 LSB != 1  
+                    {
+                        crc >>= 1;  // 右移1bit
+                    }
                 }
             }
             return crc;
@@ -1476,9 +1516,8 @@ namespace vcs_test_all_01_Math
         {
             richTextBox1.Text += "費氏數列\n";
 
-            int i;
             int n = 10;
-            for (i = 1; i <= n; i++)
+            for (int i = 1; i <= n; i++)
             {
                 richTextBox1.Text += "費氏數列 第 " + i.ToString() + " 項 : " + fibonacci(i) + "\n";
             }
@@ -1487,7 +1526,9 @@ namespace vcs_test_all_01_Math
         public static int fibonacci(int n)
         {
             if (n == 1 || n == 2)
+            {
                 return 1;
+            }
             return fibonacci(n - 1) + fibonacci(n - 2);
         }
 
@@ -1508,7 +1549,9 @@ namespace vcs_test_all_01_Math
                     array[j] += carry;
                     carry = array[j] / 10;
                     if (carry != 0 && j == m)
+                    {
                         m++;
+                    }
                     array[j] = array[j] % 10;
                 }
             }
@@ -1523,10 +1566,10 @@ namespace vcs_test_all_01_Math
 
         private void button34_Click(object sender, EventArgs e)
         {
-            //貸款試算
+            // 貸款試算
 
-            //  彰化銀行-貸款試算
-            //  https://www.bankchb.com/frontend/SM1-2.jsp?type=2
+            // 彰化銀行-貸款試算
+            // https://www.bankchb.com/frontend/SM1-2.jsp?type=2
 
             richTextBox1.Text += "本息平均攤還\n";
             richTextBox1.Text += "利率段式\t一段式\n";
@@ -1539,11 +1582,9 @@ namespace vcs_test_all_01_Math
             //計算每月應付本息金額之平均攤還率
             payRate = ((Math.Pow((1 + rate / 12), year * 12) * rate / 12)) / (Math.Pow((1 + rate / 12), year * 12) - 1);
 
-
             richTextBox1.Text += "貸款金額\t" + loan.ToString() + "\n";
             richTextBox1.Text += "貸款年限\t" + year.ToString() + "\n";
             richTextBox1.Text += "貸款年利率\t" + (rate * 100).ToString() + "%\n";
-
             richTextBox1.Text += "每月應付本息金額\t" + ((int)(loan * payRate + 0.5)).ToString() + "\n";
         }
 
@@ -1613,10 +1654,6 @@ namespace vcs_test_all_01_Math
     }
 }
 
-
-
-
-
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
@@ -1633,7 +1670,4 @@ namespace vcs_test_all_01_Math
 /*  可搬出
 
 */
-
-
-
 
