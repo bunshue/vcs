@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Drawing.Imaging;  // for ColorMatrix, ImageAttributes
 using System.Drawing.Drawing2D;  // for SmoothingMode
 
-namespace vcs_Draw_ColorMatrix
+namespace vcs_Draw5_Image_ImageAttributes
 {
     public partial class Form1 : Form
     {
@@ -104,20 +104,30 @@ namespace vcs_Draw_ColorMatrix
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
             pictureBox1.Size = new Size(W, H);
-            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0 + 300);
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 300);
             bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
 
             pictureBox2.Size = new Size(300, H / 2);
-            pictureBox2.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            pictureBox2.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
 
             richTextBox1.Size = new Size(300, H / 2);
-            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0 + H / 2 + 10);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0 + H / 2 + 10);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            int xx = x_st + dx * 1;
+            int xx = x_st + dx * 2;
             int yy = y_st + dy * 0;
             dx = 80 + 10;
             dy = 36 + 20;
@@ -191,8 +201,8 @@ namespace vcs_Draw_ColorMatrix
             radioButton2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             radioButton3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
 
-            this.Size = new Size(1390, 860);
-            this.Text = "vcs_Draw_ColorMatrix";
+            this.Size = new Size(1600, 880);
+            this.Text = "vcs_Draw5_Image_ImageAttributes";
 
             lb_cm00.Text = "紅對紅00";
             lb_cm01.Text = "紅對綠01";
@@ -452,9 +462,336 @@ namespace vcs_Draw_ColorMatrix
 
         }
 
+
+        public struct RGB
+        {
+            private byte _r;
+            private byte _g;
+            private byte _b;
+
+            public RGB(byte r, byte g, byte b)
+            {
+                this._r = r;
+                this._g = g;
+                this._b = b;
+            }
+
+            public byte R
+            {
+                get { return this._r; }
+                set { this._r = value; }
+            }
+
+            public byte G
+            {
+                get { return this._g; }
+                set { this._g = value; }
+            }
+
+            public byte B
+            {
+                get { return this._b; }
+                set { this._b = value; }
+            }
+
+            public bool Equals(RGB rgb)
+            {
+                return (this.R == rgb.R) && (this.G == rgb.G) && (this.B == rgb.B);
+            }
+        }
+
+        public struct YUV
+        {
+            private double _y;
+            private double _u;
+            private double _v;
+
+            public YUV(double y, double u, double v)
+            {
+                this._y = y;
+                this._u = u;
+                this._v = v;
+            }
+
+            public double Y
+            {
+                get { return this._y; }
+                set { this._y = value; }
+            }
+
+            public double U
+            {
+                get { return this._u; }
+                set { this._u = value; }
+            }
+
+            public double V
+            {
+                get { return this._v; }
+                set { this._v = value; }
+            }
+
+            public bool Equals(YUV yuv)
+            {
+                return (this.Y == yuv.Y) && (this.U == yuv.U) && (this.V == yuv.V);
+            }
+        }
+
+        public static YUV RGBToYUV(RGB rgb)
+        {
+            double y = rgb.R * .299000 + rgb.G * .587000 + rgb.B * .114000;
+            double u = rgb.R * -.168736 + rgb.G * -.331264 + rgb.B * .500000 + 128;
+            double v = rgb.R * .500000 + rgb.G * -.418688 + rgb.B * -.081312 + 128;
+
+            return new YUV(y, u, v);
+        }
+
+        Bitmap measure_gray_scale(Bitmap bmp)
+        {
+            int w = 40;
+            int h = 40;
+            int W = w * 16;
+            int H = h * 16;
+
+            int[] Y = new int[256];
+
+            for (int i = 0; i < 256; i++)
+            {
+                int x_st = i * 2;
+                int y_st = 100;
+
+                Color p = bmp.GetPixel(x_st, y_st);
+                RGB pp = new RGB(p.R, p.G, p.B);
+                YUV yyy = new YUV();
+                yyy = RGBToYUV(pp);
+                Y[i] = (int)yyy.Y;
+            }
+            /*
+            for (int i = 0; i < 256; i++)
+            {
+                richTextBox1.Text += Y[i].ToString("D3");
+                if (i % 16 == 15)
+                {
+                    richTextBox1.Text += "\n";
+                }
+                else
+                {
+                    richTextBox1.Text += " ";
+                }
+            }
+            */
+            Point[] curvePoints = new Point[256];    //一維陣列內有 256 個Point
+
+            for (int i = 0; i < 256; i++)
+            {
+                curvePoints[i].X = i;
+                curvePoints[i].Y = 255 - Y[i];
+            }
+
+            Bitmap b = new Bitmap(256 + 10, 256 + 10);
+            Graphics g = Graphics.FromImage(b);
+            g.DrawLines(Pens.Red, curvePoints);   //畫直線
+            g.DrawRectangle(Pens.Green, 0, 0, 256, 256);
+
+            return b;
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            // ImageAttributes SetGamma
+            // ImageAttributes 測試 Gamma
+            // 使用 ImageAttributes 設定 gamma 值
+
+            int BORDER = 10;
+            int W = 512 + BORDER + 256 + BORDER;
+            int H = 256 * 3 + BORDER * 3;
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.Pink);
+
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw\data\gray1.bmp";
+            Bitmap bmp = new Bitmap(filename);
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //原圖
+            int x_st = 0;
+            int y_st = 0;
+            g.DrawImage(bmp, x_st, y_st, bmp.Width, bmp.Height);
+            Bitmap b1 = measure_gray_scale(bmp);
+            x_st = 512 + BORDER;
+            g.DrawImage(b1, x_st, y_st, b1.Width, b1.Height);
+            g.DrawString("Gamma = 1", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(20, 20));
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //經過Gamma處理, gamma = 0.6
+            float gamma = 0.6f;  // 0 ~ 2.5, 1.0為不變
+            richTextBox1.Text += "Gamma = " + gamma.ToString() + "\n";
+
+            ImageAttributes ia = new ImageAttributes();
+            ia.SetGamma(gamma);
+
+            x_st = 0;
+            y_st = 256 + BORDER;
+            g.DrawImage(bmp, new Rectangle(x_st, y_st, bmp.Width, bmp.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
+            g.DrawString("Gamma = " + gamma.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st + 20, y_st + 20));
+
+            //量測的範圍
+            Rectangle rect = new Rectangle(x_st, y_st, bmp.Width, bmp.Height);
+            Bitmap b2 = measure_gray_scale(bitmap1.Clone(rect, PixelFormat.Format32bppArgb));
+            x_st = 512 + BORDER;
+            g.DrawImage(b2, x_st, y_st, b2.Width, b2.Height);
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //經過Gamma處理, gamma = 2.2
+            gamma = 2.2f;  // 0 ~ 2.5, 1.0為不變
+            richTextBox1.Text += "Gamma = " + gamma.ToString() + "\n";
+
+            ia = new ImageAttributes();
+            ia.SetGamma(gamma);
+
+            x_st = 0;
+            y_st = 256 + BORDER + 256 + BORDER;
+            g.DrawImage(bmp, new Rectangle(x_st, y_st, bmp.Width, bmp.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
+            g.DrawString("Gamma = " + gamma.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st + 20, y_st + 20));
+
+            //量測的範圍
+            rect = new Rectangle(x_st, y_st, bmp.Width, bmp.Height);
+            Bitmap b3 = measure_gray_scale(bitmap1.Clone(rect, PixelFormat.Format32bppArgb));
+            x_st = 512 + BORDER;
+            g.DrawImage(b3, x_st, y_st, b3.Width, b3.Height);
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            pictureBox1.Size = new Size(800, 520);
+            pictureBox1.Image = bitmap1;
+            richTextBox1.Text += pictureBox1.Size.ToString() + "\n";
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //ImageAttributes SetGamma
+            //gamma 0 ~ 2.5, [0 <-明- 1 -暗-> 2]
+            float gamma = 2.2f;
+            richTextBox1.Text += "Gamma = " + gamma.ToString() + "\n";
+
+            Bitmap bmp = new Bitmap(filename);
+
+            ImageAttributes ia = new ImageAttributes();
+            ia.SetGamma(gamma, ColorAdjustType.Bitmap);
+
+            g.DrawImage(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
+
+            pictureBox1.Image = bitmap1;
+
+        }
+
+        int cutoff_value = 0;
+        private void button12_Click(object sender, EventArgs e)
+        {
+            // 兩色中間設為透明
+
+            pictureBox1.BackColor = Color.Lime;
+
+            richTextBox1.Text += "亮度 " + cutoff_value.ToString() + " 到 " + (cutoff_value + 20).ToString() + ", 設定為透明\n";
+
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw\data\gray1.bmp";
+
+            Bitmap bmp = new Bitmap(filename);
+
+            //低顏色
+            Color low_color = Color.FromArgb(cutoff_value, cutoff_value, cutoff_value);
+            //高顏色
+            //Color high_color = Color.FromArgb(255, 255, 255);
+            Color high_color = Color.FromArgb(cutoff_value + 20, cutoff_value + 20, cutoff_value + 20);
+
+            ImageAttributes ia = new ImageAttributes();
+            ia.SetColorKey(low_color, high_color);
+
+            g.Clear(Color.Pink);
+
+            Rectangle dst_rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+            g.DrawImage(bmp, dst_rect, 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
+
+            pictureBox1.Image = bitmap1;
+
+            cutoff_value += 20;
+            if (cutoff_value > 235)
+            {
+                cutoff_value = 0;
+            }
+        }
+
+        float threshold = 0.3f;  // 0 ~ 1.0
+        private void button13_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "threshold = " + threshold.ToString() + "\n";
+
+            threshold += 0.06f;
+            if (threshold > 1.0f)
+            {
+                threshold = 0.01f;
+            }
+
+            Bitmap bmp = new Bitmap(filename);
+
+            ImageAttributes ia = new ImageAttributes();
+            ia.SetThreshold(threshold);
+
+            // Draw the image onto the new bitmap while applying the new ColorMatrix.
+            Point[] points =
+            {
+                new Point(0, 0),
+                new Point(bmp.Width, 0),
+                new Point(0, bmp.Height),
+            };
+            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+
+            g.Clear(Color.Pink);
+
+            g.DrawImage(bmp, points, rect, GraphicsUnit.Pixel, ia);
+
+            pictureBox1.Image = bitmap1;
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            //return;
+            return;
 
             //string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw\data\color_chart.bmp";
             string filename = "dddd.bmp";
@@ -495,6 +832,8 @@ namespace vcs_Draw_ColorMatrix
         private void bt_reset_Click(object sender, EventArgs e)
         {
             //指定畫布大小
+            pictureBox1.Size = new Size(W, H);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             bitmap1 = new Bitmap(W, H);
             g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
             g.Clear(Color.White);

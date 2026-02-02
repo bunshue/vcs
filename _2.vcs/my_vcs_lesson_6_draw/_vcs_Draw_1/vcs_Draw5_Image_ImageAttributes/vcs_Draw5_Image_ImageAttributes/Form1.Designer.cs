@@ -1,4 +1,4 @@
-﻿namespace vcs_Draw_ColorMatrix
+﻿namespace vcs_Draw5_Image_ImageAttributes
 {
     partial class Form1
     {
@@ -104,6 +104,16 @@
             this.bt_gray = new System.Windows.Forms.Button();
             this.bt_sepia = new System.Windows.Forms.Button();
             this.bt_alpha = new System.Windows.Forms.Button();
+            this.button15 = new System.Windows.Forms.Button();
+            this.button16 = new System.Windows.Forms.Button();
+            this.button17 = new System.Windows.Forms.Button();
+            this.button18 = new System.Windows.Forms.Button();
+            this.button19 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -156,7 +166,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(218, 408);
+            this.pictureBox1.Location = new System.Drawing.Point(690, 270);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.TabIndex = 34;
@@ -197,7 +207,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(451, 443);
+            this.bt_clear.Location = new System.Drawing.Point(923, 305);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(66, 40);
             this.bt_clear.TabIndex = 109;
@@ -208,7 +218,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(430, 408);
+            this.richTextBox1.Location = new System.Drawing.Point(902, 270);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 108;
@@ -248,7 +258,7 @@
             // pictureBox2
             // 
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox2.Location = new System.Drawing.Point(324, 408);
+            this.pictureBox2.Location = new System.Drawing.Point(796, 270);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(100, 100);
             this.pictureBox2.TabIndex = 123;
@@ -257,7 +267,7 @@
             // bt_reset
             // 
             this.bt_reset.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_reset.Location = new System.Drawing.Point(243, 443);
+            this.bt_reset.Location = new System.Drawing.Point(715, 305);
             this.bt_reset.Name = "bt_reset";
             this.bt_reset.Size = new System.Drawing.Size(66, 40);
             this.bt_reset.TabIndex = 228;
@@ -268,7 +278,7 @@
             // tb_cm00
             // 
             this.tb_cm00.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_cm00.Location = new System.Drawing.Point(218, 12);
+            this.tb_cm00.Location = new System.Drawing.Point(432, 12);
             this.tb_cm00.Name = "tb_cm00";
             this.tb_cm00.Size = new System.Drawing.Size(80, 36);
             this.tb_cm00.TabIndex = 229;
@@ -278,7 +288,7 @@
             // tb_cm01
             // 
             this.tb_cm01.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_cm01.Location = new System.Drawing.Point(304, 12);
+            this.tb_cm01.Location = new System.Drawing.Point(518, 12);
             this.tb_cm01.Name = "tb_cm01";
             this.tb_cm01.Size = new System.Drawing.Size(80, 36);
             this.tb_cm01.TabIndex = 230;
@@ -288,7 +298,7 @@
             // tb_cm02
             // 
             this.tb_cm02.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_cm02.Location = new System.Drawing.Point(390, 12);
+            this.tb_cm02.Location = new System.Drawing.Point(604, 12);
             this.tb_cm02.Name = "tb_cm02";
             this.tb_cm02.Size = new System.Drawing.Size(80, 36);
             this.tb_cm02.TabIndex = 231;
@@ -298,7 +308,7 @@
             // tb_cm03
             // 
             this.tb_cm03.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_cm03.Location = new System.Drawing.Point(476, 11);
+            this.tb_cm03.Location = new System.Drawing.Point(690, 11);
             this.tb_cm03.Name = "tb_cm03";
             this.tb_cm03.Size = new System.Drawing.Size(80, 36);
             this.tb_cm03.TabIndex = 232;
@@ -308,7 +318,7 @@
             // tb_cm04
             // 
             this.tb_cm04.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_cm04.Location = new System.Drawing.Point(562, 11);
+            this.tb_cm04.Location = new System.Drawing.Point(776, 11);
             this.tb_cm04.Name = "tb_cm04";
             this.tb_cm04.Size = new System.Drawing.Size(80, 36);
             this.tb_cm04.TabIndex = 233;
@@ -318,7 +328,7 @@
             // tb_cm14
             // 
             this.tb_cm14.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_cm14.Location = new System.Drawing.Point(562, 53);
+            this.tb_cm14.Location = new System.Drawing.Point(776, 53);
             this.tb_cm14.Name = "tb_cm14";
             this.tb_cm14.Size = new System.Drawing.Size(80, 36);
             this.tb_cm14.TabIndex = 238;
@@ -328,7 +338,7 @@
             // tb_cm13
             // 
             this.tb_cm13.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_cm13.Location = new System.Drawing.Point(476, 53);
+            this.tb_cm13.Location = new System.Drawing.Point(690, 53);
             this.tb_cm13.Name = "tb_cm13";
             this.tb_cm13.Size = new System.Drawing.Size(80, 36);
             this.tb_cm13.TabIndex = 237;
@@ -338,7 +348,7 @@
             // tb_cm12
             // 
             this.tb_cm12.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_cm12.Location = new System.Drawing.Point(390, 54);
+            this.tb_cm12.Location = new System.Drawing.Point(604, 54);
             this.tb_cm12.Name = "tb_cm12";
             this.tb_cm12.Size = new System.Drawing.Size(80, 36);
             this.tb_cm12.TabIndex = 236;
@@ -348,7 +358,7 @@
             // tb_cm11
             // 
             this.tb_cm11.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_cm11.Location = new System.Drawing.Point(304, 54);
+            this.tb_cm11.Location = new System.Drawing.Point(518, 54);
             this.tb_cm11.Name = "tb_cm11";
             this.tb_cm11.Size = new System.Drawing.Size(80, 36);
             this.tb_cm11.TabIndex = 235;
@@ -358,7 +368,7 @@
             // tb_cm10
             // 
             this.tb_cm10.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_cm10.Location = new System.Drawing.Point(218, 54);
+            this.tb_cm10.Location = new System.Drawing.Point(432, 54);
             this.tb_cm10.Name = "tb_cm10";
             this.tb_cm10.Size = new System.Drawing.Size(80, 36);
             this.tb_cm10.TabIndex = 234;
@@ -368,7 +378,7 @@
             // tb_cm24
             // 
             this.tb_cm24.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_cm24.Location = new System.Drawing.Point(562, 95);
+            this.tb_cm24.Location = new System.Drawing.Point(776, 95);
             this.tb_cm24.Name = "tb_cm24";
             this.tb_cm24.Size = new System.Drawing.Size(80, 36);
             this.tb_cm24.TabIndex = 243;
@@ -378,7 +388,7 @@
             // tb_cm23
             // 
             this.tb_cm23.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_cm23.Location = new System.Drawing.Point(476, 95);
+            this.tb_cm23.Location = new System.Drawing.Point(690, 95);
             this.tb_cm23.Name = "tb_cm23";
             this.tb_cm23.Size = new System.Drawing.Size(80, 36);
             this.tb_cm23.TabIndex = 242;
@@ -388,7 +398,7 @@
             // tb_cm22
             // 
             this.tb_cm22.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_cm22.Location = new System.Drawing.Point(390, 96);
+            this.tb_cm22.Location = new System.Drawing.Point(604, 96);
             this.tb_cm22.Name = "tb_cm22";
             this.tb_cm22.Size = new System.Drawing.Size(80, 36);
             this.tb_cm22.TabIndex = 241;
@@ -398,7 +408,7 @@
             // tb_cm21
             // 
             this.tb_cm21.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_cm21.Location = new System.Drawing.Point(304, 96);
+            this.tb_cm21.Location = new System.Drawing.Point(518, 96);
             this.tb_cm21.Name = "tb_cm21";
             this.tb_cm21.Size = new System.Drawing.Size(80, 36);
             this.tb_cm21.TabIndex = 240;
@@ -408,7 +418,7 @@
             // tb_cm20
             // 
             this.tb_cm20.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_cm20.Location = new System.Drawing.Point(218, 96);
+            this.tb_cm20.Location = new System.Drawing.Point(432, 96);
             this.tb_cm20.Name = "tb_cm20";
             this.tb_cm20.Size = new System.Drawing.Size(80, 36);
             this.tb_cm20.TabIndex = 239;
@@ -418,7 +428,7 @@
             // tb_cm34
             // 
             this.tb_cm34.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_cm34.Location = new System.Drawing.Point(562, 137);
+            this.tb_cm34.Location = new System.Drawing.Point(776, 137);
             this.tb_cm34.Name = "tb_cm34";
             this.tb_cm34.Size = new System.Drawing.Size(80, 36);
             this.tb_cm34.TabIndex = 248;
@@ -428,7 +438,7 @@
             // tb_cm33
             // 
             this.tb_cm33.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_cm33.Location = new System.Drawing.Point(476, 137);
+            this.tb_cm33.Location = new System.Drawing.Point(690, 137);
             this.tb_cm33.Name = "tb_cm33";
             this.tb_cm33.Size = new System.Drawing.Size(80, 36);
             this.tb_cm33.TabIndex = 247;
@@ -438,7 +448,7 @@
             // tb_cm32
             // 
             this.tb_cm32.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_cm32.Location = new System.Drawing.Point(390, 138);
+            this.tb_cm32.Location = new System.Drawing.Point(604, 138);
             this.tb_cm32.Name = "tb_cm32";
             this.tb_cm32.Size = new System.Drawing.Size(80, 36);
             this.tb_cm32.TabIndex = 246;
@@ -448,7 +458,7 @@
             // tb_cm31
             // 
             this.tb_cm31.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_cm31.Location = new System.Drawing.Point(304, 138);
+            this.tb_cm31.Location = new System.Drawing.Point(518, 138);
             this.tb_cm31.Name = "tb_cm31";
             this.tb_cm31.Size = new System.Drawing.Size(80, 36);
             this.tb_cm31.TabIndex = 245;
@@ -458,7 +468,7 @@
             // tb_cm30
             // 
             this.tb_cm30.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_cm30.Location = new System.Drawing.Point(218, 138);
+            this.tb_cm30.Location = new System.Drawing.Point(432, 138);
             this.tb_cm30.Name = "tb_cm30";
             this.tb_cm30.Size = new System.Drawing.Size(80, 36);
             this.tb_cm30.TabIndex = 244;
@@ -468,7 +478,7 @@
             // tb_cm44
             // 
             this.tb_cm44.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_cm44.Location = new System.Drawing.Point(562, 179);
+            this.tb_cm44.Location = new System.Drawing.Point(776, 179);
             this.tb_cm44.Name = "tb_cm44";
             this.tb_cm44.Size = new System.Drawing.Size(80, 36);
             this.tb_cm44.TabIndex = 253;
@@ -478,7 +488,7 @@
             // tb_cm43
             // 
             this.tb_cm43.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_cm43.Location = new System.Drawing.Point(476, 179);
+            this.tb_cm43.Location = new System.Drawing.Point(690, 179);
             this.tb_cm43.Name = "tb_cm43";
             this.tb_cm43.Size = new System.Drawing.Size(80, 36);
             this.tb_cm43.TabIndex = 252;
@@ -488,7 +498,7 @@
             // tb_cm42
             // 
             this.tb_cm42.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_cm42.Location = new System.Drawing.Point(390, 180);
+            this.tb_cm42.Location = new System.Drawing.Point(604, 180);
             this.tb_cm42.Name = "tb_cm42";
             this.tb_cm42.Size = new System.Drawing.Size(80, 36);
             this.tb_cm42.TabIndex = 251;
@@ -498,7 +508,7 @@
             // tb_cm41
             // 
             this.tb_cm41.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_cm41.Location = new System.Drawing.Point(304, 180);
+            this.tb_cm41.Location = new System.Drawing.Point(518, 180);
             this.tb_cm41.Name = "tb_cm41";
             this.tb_cm41.Size = new System.Drawing.Size(80, 36);
             this.tb_cm41.TabIndex = 250;
@@ -508,7 +518,7 @@
             // tb_cm40
             // 
             this.tb_cm40.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_cm40.Location = new System.Drawing.Point(218, 180);
+            this.tb_cm40.Location = new System.Drawing.Point(432, 180);
             this.tb_cm40.Name = "tb_cm40";
             this.tb_cm40.Size = new System.Drawing.Size(80, 36);
             this.tb_cm40.TabIndex = 249;
@@ -518,7 +528,7 @@
             // bt_cm_apply
             // 
             this.bt_cm_apply.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_cm_apply.Location = new System.Drawing.Point(659, 7);
+            this.bt_cm_apply.Location = new System.Drawing.Point(873, 7);
             this.bt_cm_apply.Name = "bt_cm_apply";
             this.bt_cm_apply.Size = new System.Drawing.Size(66, 40);
             this.bt_cm_apply.TabIndex = 254;
@@ -529,7 +539,7 @@
             // bt_cm_reset
             // 
             this.bt_cm_reset.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_cm_reset.Location = new System.Drawing.Point(659, 54);
+            this.bt_cm_reset.Location = new System.Drawing.Point(873, 54);
             this.bt_cm_reset.Name = "bt_cm_reset";
             this.bt_cm_reset.Size = new System.Drawing.Size(66, 40);
             this.bt_cm_reset.TabIndex = 255;
@@ -543,7 +553,7 @@
             this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Controls.Add(this.radioButton0);
             this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Location = new System.Drawing.Point(218, 518);
+            this.groupBox1.Location = new System.Drawing.Point(476, 380);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(167, 145);
             this.groupBox1.TabIndex = 256;
@@ -604,7 +614,7 @@
             // 
             this.lb_cm01.AutoSize = true;
             this.lb_cm01.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cm01.Location = new System.Drawing.Point(268, 236);
+            this.lb_cm01.Location = new System.Drawing.Point(482, 236);
             this.lb_cm01.Name = "lb_cm01";
             this.lb_cm01.Size = new System.Drawing.Size(46, 16);
             this.lb_cm01.TabIndex = 257;
@@ -614,7 +624,7 @@
             // 
             this.lb_cm00.AutoSize = true;
             this.lb_cm00.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cm00.Location = new System.Drawing.Point(218, 236);
+            this.lb_cm00.Location = new System.Drawing.Point(432, 236);
             this.lb_cm00.Name = "lb_cm00";
             this.lb_cm00.Size = new System.Drawing.Size(46, 16);
             this.lb_cm00.TabIndex = 258;
@@ -624,7 +634,7 @@
             // 
             this.lb_cm02.AutoSize = true;
             this.lb_cm02.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cm02.Location = new System.Drawing.Point(315, 236);
+            this.lb_cm02.Location = new System.Drawing.Point(529, 236);
             this.lb_cm02.Name = "lb_cm02";
             this.lb_cm02.Size = new System.Drawing.Size(46, 16);
             this.lb_cm02.TabIndex = 259;
@@ -634,7 +644,7 @@
             // 
             this.lb_cm03.AutoSize = true;
             this.lb_cm03.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cm03.Location = new System.Drawing.Point(366, 236);
+            this.lb_cm03.Location = new System.Drawing.Point(580, 236);
             this.lb_cm03.Name = "lb_cm03";
             this.lb_cm03.Size = new System.Drawing.Size(46, 16);
             this.lb_cm03.TabIndex = 260;
@@ -644,7 +654,7 @@
             // 
             this.lb_cm04.AutoSize = true;
             this.lb_cm04.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cm04.Location = new System.Drawing.Point(417, 236);
+            this.lb_cm04.Location = new System.Drawing.Point(631, 236);
             this.lb_cm04.Name = "lb_cm04";
             this.lb_cm04.Size = new System.Drawing.Size(46, 16);
             this.lb_cm04.TabIndex = 261;
@@ -654,7 +664,7 @@
             // 
             this.lb_cm14.AutoSize = true;
             this.lb_cm14.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cm14.Location = new System.Drawing.Point(417, 254);
+            this.lb_cm14.Location = new System.Drawing.Point(631, 254);
             this.lb_cm14.Name = "lb_cm14";
             this.lb_cm14.Size = new System.Drawing.Size(46, 16);
             this.lb_cm14.TabIndex = 266;
@@ -664,7 +674,7 @@
             // 
             this.lb_cm13.AutoSize = true;
             this.lb_cm13.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cm13.Location = new System.Drawing.Point(366, 254);
+            this.lb_cm13.Location = new System.Drawing.Point(580, 254);
             this.lb_cm13.Name = "lb_cm13";
             this.lb_cm13.Size = new System.Drawing.Size(46, 16);
             this.lb_cm13.TabIndex = 265;
@@ -674,7 +684,7 @@
             // 
             this.lb_cm12.AutoSize = true;
             this.lb_cm12.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cm12.Location = new System.Drawing.Point(315, 254);
+            this.lb_cm12.Location = new System.Drawing.Point(529, 254);
             this.lb_cm12.Name = "lb_cm12";
             this.lb_cm12.Size = new System.Drawing.Size(46, 16);
             this.lb_cm12.TabIndex = 264;
@@ -684,7 +694,7 @@
             // 
             this.lb_cm10.AutoSize = true;
             this.lb_cm10.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cm10.Location = new System.Drawing.Point(218, 254);
+            this.lb_cm10.Location = new System.Drawing.Point(432, 254);
             this.lb_cm10.Name = "lb_cm10";
             this.lb_cm10.Size = new System.Drawing.Size(46, 16);
             this.lb_cm10.TabIndex = 263;
@@ -694,7 +704,7 @@
             // 
             this.lb_cm11.AutoSize = true;
             this.lb_cm11.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cm11.Location = new System.Drawing.Point(268, 254);
+            this.lb_cm11.Location = new System.Drawing.Point(482, 254);
             this.lb_cm11.Name = "lb_cm11";
             this.lb_cm11.Size = new System.Drawing.Size(46, 16);
             this.lb_cm11.TabIndex = 262;
@@ -704,7 +714,7 @@
             // 
             this.lb_cm24.AutoSize = true;
             this.lb_cm24.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cm24.Location = new System.Drawing.Point(417, 270);
+            this.lb_cm24.Location = new System.Drawing.Point(631, 270);
             this.lb_cm24.Name = "lb_cm24";
             this.lb_cm24.Size = new System.Drawing.Size(46, 16);
             this.lb_cm24.TabIndex = 271;
@@ -714,7 +724,7 @@
             // 
             this.lb_cm23.AutoSize = true;
             this.lb_cm23.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cm23.Location = new System.Drawing.Point(366, 270);
+            this.lb_cm23.Location = new System.Drawing.Point(580, 270);
             this.lb_cm23.Name = "lb_cm23";
             this.lb_cm23.Size = new System.Drawing.Size(46, 16);
             this.lb_cm23.TabIndex = 270;
@@ -724,7 +734,7 @@
             // 
             this.lb_cm22.AutoSize = true;
             this.lb_cm22.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cm22.Location = new System.Drawing.Point(315, 270);
+            this.lb_cm22.Location = new System.Drawing.Point(529, 270);
             this.lb_cm22.Name = "lb_cm22";
             this.lb_cm22.Size = new System.Drawing.Size(46, 16);
             this.lb_cm22.TabIndex = 269;
@@ -734,7 +744,7 @@
             // 
             this.lb_cm20.AutoSize = true;
             this.lb_cm20.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cm20.Location = new System.Drawing.Point(218, 270);
+            this.lb_cm20.Location = new System.Drawing.Point(432, 270);
             this.lb_cm20.Name = "lb_cm20";
             this.lb_cm20.Size = new System.Drawing.Size(46, 16);
             this.lb_cm20.TabIndex = 268;
@@ -744,7 +754,7 @@
             // 
             this.lb_cm21.AutoSize = true;
             this.lb_cm21.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cm21.Location = new System.Drawing.Point(268, 270);
+            this.lb_cm21.Location = new System.Drawing.Point(482, 270);
             this.lb_cm21.Name = "lb_cm21";
             this.lb_cm21.Size = new System.Drawing.Size(46, 16);
             this.lb_cm21.TabIndex = 267;
@@ -754,7 +764,7 @@
             // 
             this.lb_cm34.AutoSize = true;
             this.lb_cm34.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cm34.Location = new System.Drawing.Point(417, 286);
+            this.lb_cm34.Location = new System.Drawing.Point(631, 286);
             this.lb_cm34.Name = "lb_cm34";
             this.lb_cm34.Size = new System.Drawing.Size(46, 16);
             this.lb_cm34.TabIndex = 276;
@@ -763,10 +773,10 @@
             // lb_cm33
             // 
             this.lb_cm33.AutoSize = true;
-            this.lb_cm33.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cm33.Location = new System.Drawing.Point(366, 286);
+            this.lb_cm33.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_cm33.Location = new System.Drawing.Point(580, 286);
             this.lb_cm33.Name = "lb_cm33";
-            this.lb_cm33.Size = new System.Drawing.Size(46, 16);
+            this.lb_cm33.Size = new System.Drawing.Size(35, 13);
             this.lb_cm33.TabIndex = 275;
             this.lb_cm33.Text = "label3";
             // 
@@ -774,7 +784,7 @@
             // 
             this.lb_cm32.AutoSize = true;
             this.lb_cm32.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cm32.Location = new System.Drawing.Point(315, 286);
+            this.lb_cm32.Location = new System.Drawing.Point(529, 286);
             this.lb_cm32.Name = "lb_cm32";
             this.lb_cm32.Size = new System.Drawing.Size(46, 16);
             this.lb_cm32.TabIndex = 274;
@@ -784,7 +794,7 @@
             // 
             this.lb_cm30.AutoSize = true;
             this.lb_cm30.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cm30.Location = new System.Drawing.Point(218, 286);
+            this.lb_cm30.Location = new System.Drawing.Point(432, 286);
             this.lb_cm30.Name = "lb_cm30";
             this.lb_cm30.Size = new System.Drawing.Size(46, 16);
             this.lb_cm30.TabIndex = 273;
@@ -794,7 +804,7 @@
             // 
             this.lb_cm31.AutoSize = true;
             this.lb_cm31.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cm31.Location = new System.Drawing.Point(268, 286);
+            this.lb_cm31.Location = new System.Drawing.Point(482, 286);
             this.lb_cm31.Name = "lb_cm31";
             this.lb_cm31.Size = new System.Drawing.Size(46, 16);
             this.lb_cm31.TabIndex = 272;
@@ -804,7 +814,7 @@
             // 
             this.lb_cm44.AutoSize = true;
             this.lb_cm44.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cm44.Location = new System.Drawing.Point(417, 302);
+            this.lb_cm44.Location = new System.Drawing.Point(631, 302);
             this.lb_cm44.Name = "lb_cm44";
             this.lb_cm44.Size = new System.Drawing.Size(46, 16);
             this.lb_cm44.TabIndex = 281;
@@ -814,7 +824,7 @@
             // 
             this.lb_cm43.AutoSize = true;
             this.lb_cm43.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cm43.Location = new System.Drawing.Point(366, 302);
+            this.lb_cm43.Location = new System.Drawing.Point(580, 302);
             this.lb_cm43.Name = "lb_cm43";
             this.lb_cm43.Size = new System.Drawing.Size(46, 16);
             this.lb_cm43.TabIndex = 280;
@@ -824,7 +834,7 @@
             // 
             this.lb_cm42.AutoSize = true;
             this.lb_cm42.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cm42.Location = new System.Drawing.Point(315, 302);
+            this.lb_cm42.Location = new System.Drawing.Point(529, 302);
             this.lb_cm42.Name = "lb_cm42";
             this.lb_cm42.Size = new System.Drawing.Size(46, 16);
             this.lb_cm42.TabIndex = 279;
@@ -834,7 +844,7 @@
             // 
             this.lb_cm40.AutoSize = true;
             this.lb_cm40.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cm40.Location = new System.Drawing.Point(218, 302);
+            this.lb_cm40.Location = new System.Drawing.Point(432, 302);
             this.lb_cm40.Name = "lb_cm40";
             this.lb_cm40.Size = new System.Drawing.Size(46, 16);
             this.lb_cm40.TabIndex = 278;
@@ -844,7 +854,7 @@
             // 
             this.lb_cm41.AutoSize = true;
             this.lb_cm41.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cm41.Location = new System.Drawing.Point(268, 302);
+            this.lb_cm41.Location = new System.Drawing.Point(482, 302);
             this.lb_cm41.Name = "lb_cm41";
             this.lb_cm41.Size = new System.Drawing.Size(46, 16);
             this.lb_cm41.TabIndex = 277;
@@ -853,7 +863,7 @@
             // bt_brightness
             // 
             this.bt_brightness.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_brightness.Location = new System.Drawing.Point(659, 100);
+            this.bt_brightness.Location = new System.Drawing.Point(873, 100);
             this.bt_brightness.Name = "bt_brightness";
             this.bt_brightness.Size = new System.Drawing.Size(66, 40);
             this.bt_brightness.TabIndex = 282;
@@ -864,7 +874,7 @@
             // bt_gray
             // 
             this.bt_gray.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_gray.Location = new System.Drawing.Point(659, 146);
+            this.bt_gray.Location = new System.Drawing.Point(873, 146);
             this.bt_gray.Name = "bt_gray";
             this.bt_gray.Size = new System.Drawing.Size(66, 40);
             this.bt_gray.TabIndex = 283;
@@ -875,7 +885,7 @@
             // bt_sepia
             // 
             this.bt_sepia.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_sepia.Location = new System.Drawing.Point(659, 192);
+            this.bt_sepia.Location = new System.Drawing.Point(873, 192);
             this.bt_sepia.Name = "bt_sepia";
             this.bt_sepia.Size = new System.Drawing.Size(66, 40);
             this.bt_sepia.TabIndex = 284;
@@ -886,7 +896,7 @@
             // bt_alpha
             // 
             this.bt_alpha.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_alpha.Location = new System.Drawing.Point(731, 100);
+            this.bt_alpha.Location = new System.Drawing.Point(945, 100);
             this.bt_alpha.Name = "bt_alpha";
             this.bt_alpha.Size = new System.Drawing.Size(66, 40);
             this.bt_alpha.TabIndex = 285;
@@ -894,11 +904,125 @@
             this.bt_alpha.UseVisualStyleBackColor = true;
             this.bt_alpha.Click += new System.EventHandler(this.bt_alpha_Click);
             // 
+            // button15
+            // 
+            this.button15.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button15.Location = new System.Drawing.Point(218, 342);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(200, 60);
+            this.button15.TabIndex = 286;
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
+            // button16
+            // 
+            this.button16.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button16.Location = new System.Drawing.Point(218, 408);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(200, 60);
+            this.button16.TabIndex = 287;
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
+            // 
+            // button17
+            // 
+            this.button17.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button17.Location = new System.Drawing.Point(218, 474);
+            this.button17.Name = "button17";
+            this.button17.Size = new System.Drawing.Size(200, 60);
+            this.button17.TabIndex = 288;
+            this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
+            // 
+            // button18
+            // 
+            this.button18.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button18.Location = new System.Drawing.Point(218, 540);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(200, 60);
+            this.button18.TabIndex = 289;
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
+            // 
+            // button19
+            // 
+            this.button19.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button19.Location = new System.Drawing.Point(218, 606);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(200, 60);
+            this.button19.TabIndex = 290;
+            this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
+            // 
+            // button10
+            // 
+            this.button10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button10.Location = new System.Drawing.Point(218, 12);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(200, 60);
+            this.button10.TabIndex = 291;
+            this.button10.Text = "ImageAttributes SetGamma";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // button11
+            // 
+            this.button11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button11.Location = new System.Drawing.Point(218, 78);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(200, 60);
+            this.button11.TabIndex = 292;
+            this.button11.Text = "ImageAttributes SetGamma";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // button12
+            // 
+            this.button12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button12.Location = new System.Drawing.Point(218, 144);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(200, 60);
+            this.button12.TabIndex = 293;
+            this.button12.Text = "兩色中間設為透明";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
+            // button13
+            // 
+            this.button13.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button13.Location = new System.Drawing.Point(218, 210);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(200, 60);
+            this.button13.TabIndex = 294;
+            this.button13.Text = "threshold";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
+            // button14
+            // 
+            this.button14.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button14.Location = new System.Drawing.Point(218, 276);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(200, 60);
+            this.button14.TabIndex = 295;
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(814, 671);
+            this.ClientSize = new System.Drawing.Size(1059, 671);
+            this.Controls.Add(this.button14);
+            this.Controls.Add(this.button13);
+            this.Controls.Add(this.button12);
+            this.Controls.Add(this.button11);
+            this.Controls.Add(this.button10);
+            this.Controls.Add(this.button19);
+            this.Controls.Add(this.button18);
+            this.Controls.Add(this.button17);
+            this.Controls.Add(this.button16);
+            this.Controls.Add(this.button15);
             this.Controls.Add(this.bt_alpha);
             this.Controls.Add(this.bt_sepia);
             this.Controls.Add(this.bt_gray);
@@ -1061,6 +1185,16 @@
         private System.Windows.Forms.Button bt_gray;
         private System.Windows.Forms.Button bt_sepia;
         private System.Windows.Forms.Button bt_alpha;
+        private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Button button16;
+        private System.Windows.Forms.Button button17;
+        private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button button14;
     }
 }
 

@@ -226,223 +226,7 @@ namespace vcs_Draw_Transform1
 
         private void button2_Click(object sender, EventArgs e)
         {
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //平移旋轉一張圖片1
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-
-            int W = 305 * 2;
-            int H = 400 * 2;
-
-            pictureBox1.Size = new Size(W, H);
-
-            Bitmap bitmap2 = new Bitmap(W, H);
-            Graphics g = Graphics.FromImage(bitmap2);
-            Pen p = new Pen(Color.Red, 3);
-            g.Clear(Color.White);
-
-            int w = bitmap1.Width;
-            int h = bitmap1.Height;
-            int x_st = 0;
-            int y_st = 0;
-            x_st = 0;
-            y_st = 0;
-
-            // 原點平移, 右移, 下移
-            g.TranslateTransform(305, 400);  // 原點平移, 右移, 下移
-
-            //                  貼上的位置  貼上的大小 放大縮小用
-            g.DrawImage(bitmap1, x_st, y_st, w, h);
-
-            g.DrawString("未旋轉", new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(305 - 100, 10));
-
-            int i;
-            for (i = 0; i < 9; i++)
-            {
-                g.RotateTransform(20);//再旋轉指定的角度, 以全圖的左上角為原點, 順時鐘旋轉
-                g.DrawImage(bitmap1, x_st, y_st, w, h);
-                g.DrawString(((i + 1) * 20).ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(305 - 50, 10));
-            }
-
-            g.ResetTransform();  // 重置轉換, 恢復
-
-            g.DrawImage(bitmap1, x_st + 305, y_st, w, h);
-            g.DrawString("原圖平移", new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(305 + 305 - 130, 10));
-
-            pictureBox1.Image = bitmap2;
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //平移旋轉一張圖片2
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-
-            int W = 305 * 2;
-            int H = 400 * 2;
-
-            pictureBox1.Size = new Size(W, H);
-
-            Bitmap bitmap2 = new Bitmap(W, H);
-            Graphics g = Graphics.FromImage(bitmap2);
-            Pen p = new Pen(Color.Red, 3);
-            g.Clear(Color.White);
-
-            int w = bitmap1.Width;
-            int h = bitmap1.Height;
-            int x_st = 0;
-            int y_st = 0;
-            x_st = 0;
-            y_st = 0;
-
-            // 原點平移, 右移, 下移
-            g.TranslateTransform(305, 400 / 2);  // 原點平移, 右移, 下移
-
-            int i;
-            for (i = 0; i < 18; i++)
-            {
-                g.RotateTransform(20);//再旋轉指定的角度, 以全圖的左上角為原點, 順時鐘旋轉
-                g.DrawImage(bitmap1, x_st, y_st, (w / 2), (h / 2));
-                //g.DrawString(((i + 1) * 20).ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(305 - 50, 10));
-            }
-
-            // 原點平移, 右移, 下移
-            g.TranslateTransform(0, 400);  // 原點平移, 右移, 下移
-            for (i = 0; i < 18; i++)
-            {
-                g.RotateTransform(20);//再旋轉指定的角度, 以全圖的左上角為原點, 順時鐘旋轉
-                g.DrawImage(bitmap1, x_st, y_st, (w / 2), (h / 2));
-                //g.DrawString(((i + 1) * 20).ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(305 - 50, 10));
-            }
-
-            g.ResetTransform();  // 重置轉換, 恢復
-
-            //g.DrawImage(bitmap1, x_st + 305, y_st, w / 2, h / 2);
-            //g.DrawString("原圖平移", new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(305 + 305 - 130, 10));
-
-            pictureBox1.Image = bitmap2;
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            //平移旋轉一張圖片3
-            int W = 305 * 2;
-            int H = 400 * 2;
-
-            pictureBox1.Size = new Size(W, H);
-
-            Bitmap bitmap2 = new Bitmap(W, H);
-            Graphics g = Graphics.FromImage(bitmap2);
-            //Pen p = new Pen(Color.Red, 3);
-            g.Clear(Color.White);
-
-            //圖片的中心, 依此中心旋轉
-            int cx = W / 2;
-            int cy = H / 2;
-            cx = 200;
-            cy = 200;
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-
-            for (int angle = 0; angle <= 360; angle += 30)
-            {
-                draw_bitmap_with_angle(filename, g, cx, cy, angle);
-            }
-            pictureBox1.Image = bitmap2;
-        }
-
-        void draw_bitmap_with_angle(string filename, Graphics g, int cx, int cy, int angle)
-        {
-            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-            Pen p = new Pen(Color.Red, 3);
-
-            int w = bitmap1.Width;
-            int h = bitmap1.Height;
-            int x_st = cx - w / 2;   //圖片未旋轉時的原點(左上角)
-            int y_st = cy - h / 2;
-
-            g.ResetTransform();  // 重置轉換, 恢復
-
-            if (angle == 0)
-            {
-                // 原點平移, 右移, 下移
-                g.TranslateTransform(x_st, y_st);  // 原點平移, 右移, 下移
-            }
-            else
-            {
-                //需要平移
-                //需要旋轉
-
-                double radius = Math.Sqrt(w * w + h * h) / 2;
-                double theta0 = Math.Atan((double)h / (double)w);
-                double theta1 = theta0 + Math.PI * angle / 180;
-                double x1 = radius * Math.Cos(theta1);
-                double y1 = radius * Math.Sin(theta1);
-
-                // 原點平移, 右移, 下移
-                g.TranslateTransform(x_st + w / 2 - (float)x1, y_st + h / 2 - (float)y1);
-                g.RotateTransform(angle);//再旋轉指定的角度, 以全圖的左上角為原點, 順時鐘旋轉
-            }
-            g.DrawImage(bitmap1, 0, 0, w, h);
-            g.DrawRectangle(p, 0, 0, w, h);
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            // 影像旋轉(以中心順時針轉10度)
-            // 旋轉一張圖片, 用圖片的中心為旋轉中心
-            // 若無設定平移, 則只會以原點為旋轉中心
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Bitmap bmp = new Bitmap(filename);
-
-            // 原點平移, 右移, 下移
-            g.TranslateTransform((float)bmp.Width / 2, (float)bmp.Height / 2);
-
-            //順時針轉10度
-            g.RotateTransform(10);
-
-            // 原點平移, 右移, 下移
-            g.TranslateTransform(-(float)bmp.Width / 2, -(float)bmp.Height / 2);
-
-            //於座標(0,0)開始繪製來源影像
-            g.DrawImage(bmp, 0, 0, bmp.Width, bmp.Height);
-
-            pictureBox1.Image = bitmap1;
-        }
-
-        private double rad(double d)
-        {
-            return d * Math.PI / 180.0;
-        }
-
-        private double sind(double d)
-        {
-            return Math.Sin(d * Math.PI / 180.0);
-        }
-
-        private double cosd(double d)
-        {
-            return Math.Cos(d * Math.PI / 180.0);
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
+            //轉換範例
             reset_pictureBox();
 
             richTextBox1.Text += "------------------------------\n";  // 30個
@@ -452,6 +236,7 @@ namespace vcs_Draw_Transform1
             float sy = -50f;
             int sw = 100;
             int sh = 100;
+            // 原始資料範圍 rect
             RectangleF src_rect = new RectangleF(sx, sy, sw, sh);
 
             richTextBox1.Text += "------------------------------\n";  // 30個
@@ -470,20 +255,26 @@ namespace vcs_Draw_Transform1
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            //目標矩形, 平移 + 縮放
+            // 矩陣轉置
+
+            // 目標矩形, 平移 + 縮放
+            // 欲映射的繪圖範圍
             float dx = 300f;
             float dy = 50f;
             int dw = 200;
             int dh = 200;
-            PointF[] dst_points1 =
+            PointF[] dst_points1 = new PointF[]
             {
                 new PointF(dx, dy),     // 左上
                 new PointF(dx+dw, dy),  // 右上
                 new PointF(dx, dy+dh),  // 左下
             };
 
+            // 轉置
+            // 建立一個矩陣物件
             Matrix map_matrix = new Matrix(src_rect, dst_points1);  // 設定仿射矩陣, 矩陣轉置, 只能 矩形範圍 轉 平行四邊形範圍
             g.Transform = map_matrix;
+            //richTextBox1.Text += map_matrix..Elements.ToString() + "\n";
 
             DrawFigure(g, Color.Blue);
 
@@ -694,15 +485,212 @@ namespace vcs_Draw_Transform1
             g.DrawLine(new Pen(Color.Cyan, 20), p3, p0);//左
         }
 
-        private void button11_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
+            //平移旋轉一張圖片1
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
+            int W = 305 * 2;
+            int H = 400 * 2;
+
+            pictureBox1.Size = new Size(W, H);
+
+            Bitmap bitmap2 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap2);
+            Pen p = new Pen(Color.Red, 3);
+            g.Clear(Color.White);
+
+            int w = bitmap1.Width;
+            int h = bitmap1.Height;
+            int x_st = 0;
+            int y_st = 0;
+            x_st = 0;
+            y_st = 0;
+
+            // 原點平移, 右移, 下移
+            g.TranslateTransform(305, 400);  // 原點平移, 右移, 下移
+
+            //                  貼上的位置  貼上的大小 放大縮小用
+            g.DrawImage(bitmap1, x_st, y_st, w, h);
+
+            g.DrawString("未旋轉", new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(305 - 100, 10));
+
+            int i;
+            for (i = 0; i < 9; i++)
+            {
+                g.RotateTransform(20);//再旋轉指定的角度, 以全圖的左上角為原點, 順時鐘旋轉
+                g.DrawImage(bitmap1, x_st, y_st, w, h);
+                g.DrawString(((i + 1) * 20).ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(305 - 50, 10));
+            }
+
+            g.ResetTransform();  // 重置轉換, 恢復
+
+            g.DrawImage(bitmap1, x_st + 305, y_st, w, h);
+            g.DrawString("原圖平移", new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(305 + 305 - 130, 10));
+
+            pictureBox1.Image = bitmap2;
         }
 
-        private void button12_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //平移旋轉一張圖片2
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
+            int W = 305 * 2;
+            int H = 400 * 2;
+
+            pictureBox1.Size = new Size(W, H);
+
+            Bitmap bitmap2 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap2);
+            Pen p = new Pen(Color.Red, 3);
+            g.Clear(Color.White);
+
+            int w = bitmap1.Width;
+            int h = bitmap1.Height;
+            int x_st = 0;
+            int y_st = 0;
+            x_st = 0;
+            y_st = 0;
+
+            // 原點平移, 右移, 下移
+            g.TranslateTransform(305, 400 / 2);  // 原點平移, 右移, 下移
+
+            int i;
+            for (i = 0; i < 18; i++)
+            {
+                g.RotateTransform(20);//再旋轉指定的角度, 以全圖的左上角為原點, 順時鐘旋轉
+                g.DrawImage(bitmap1, x_st, y_st, (w / 2), (h / 2));
+                //g.DrawString(((i + 1) * 20).ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(305 - 50, 10));
+            }
+
+            // 原點平移, 右移, 下移
+            g.TranslateTransform(0, 400);  // 原點平移, 右移, 下移
+            for (i = 0; i < 18; i++)
+            {
+                g.RotateTransform(20);//再旋轉指定的角度, 以全圖的左上角為原點, 順時鐘旋轉
+                g.DrawImage(bitmap1, x_st, y_st, (w / 2), (h / 2));
+                //g.DrawString(((i + 1) * 20).ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(305 - 50, 10));
+            }
+
+            g.ResetTransform();  // 重置轉換, 恢復
+
+            //g.DrawImage(bitmap1, x_st + 305, y_st, w / 2, h / 2);
+            //g.DrawString("原圖平移", new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(305 + 305 - 130, 10));
+
+            pictureBox1.Image = bitmap2;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //平移旋轉一張圖片3
+            int W = 305 * 2;
+            int H = 400 * 2;
+
+            pictureBox1.Size = new Size(W, H);
+
+            Bitmap bitmap2 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap2);
+            //Pen p = new Pen(Color.Red, 3);
+            g.Clear(Color.White);
+
+            //圖片的中心, 依此中心旋轉
+            int cx = W / 2;
+            int cy = H / 2;
+            cx = 200;
+            cy = 200;
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
+            for (int angle = 0; angle <= 360; angle += 30)
+            {
+                draw_bitmap_with_angle(filename, g, cx, cy, angle);
+            }
+            pictureBox1.Image = bitmap2;
+        }
+
+        void draw_bitmap_with_angle(string filename, Graphics g, int cx, int cy, int angle)
+        {
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            Pen p = new Pen(Color.Red, 3);
+
+            int w = bitmap1.Width;
+            int h = bitmap1.Height;
+            int x_st = cx - w / 2;   //圖片未旋轉時的原點(左上角)
+            int y_st = cy - h / 2;
+
+            g.ResetTransform();  // 重置轉換, 恢復
+
+            if (angle == 0)
+            {
+                // 原點平移, 右移, 下移
+                g.TranslateTransform(x_st, y_st);  // 原點平移, 右移, 下移
+            }
+            else
+            {
+                //需要平移
+                //需要旋轉
+
+                double radius = Math.Sqrt(w * w + h * h) / 2;
+                double theta0 = Math.Atan((double)h / (double)w);
+                double theta1 = theta0 + Math.PI * angle / 180;
+                double x1 = radius * Math.Cos(theta1);
+                double y1 = radius * Math.Sin(theta1);
+
+                // 原點平移, 右移, 下移
+                g.TranslateTransform(x_st + w / 2 - (float)x1, y_st + h / 2 - (float)y1);
+                g.RotateTransform(angle);//再旋轉指定的角度, 以全圖的左上角為原點, 順時鐘旋轉
+            }
+            g.DrawImage(bitmap1, 0, 0, w, h);
+            g.DrawRectangle(p, 0, 0, w, h);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            // 影像旋轉(以中心順時針轉10度)
+            // 旋轉一張圖片, 用圖片的中心為旋轉中心
+            // 若無設定平移, 則只會以原點為旋轉中心
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Bitmap bmp = new Bitmap(filename);
+
+            // 原點平移, 右移, 下移
+            g.TranslateTransform((float)bmp.Width / 2, (float)bmp.Height / 2);
+
+            //順時針轉10度
+            g.RotateTransform(10);
+
+            // 原點平移, 右移, 下移
+            g.TranslateTransform(-(float)bmp.Width / 2, -(float)bmp.Height / 2);
+
+            //於座標(0,0)開始繪製來源影像
+            g.DrawImage(bmp, 0, 0, bmp.Width, bmp.Height);
+
+            pictureBox1.Image = bitmap1;
+        }
+
+        private double rad(double d)
+        {
+            return d * Math.PI / 180.0;
+        }
+
+        private double sind(double d)
+        {
+            return Math.Sin(d * Math.PI / 180.0);
+        }
+
+        private double cosd(double d)
+        {
+            return Math.Cos(d * Math.PI / 180.0);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
         {
             reset_pictureBox();
 
-            // Matrix1
+            // 使用矩陣物件
 
             Rectangle rect = new Rectangle(0, 0, 200, 200);
 
@@ -720,68 +708,30 @@ namespace vcs_Draw_Transform1
             g.DrawRectangle(Pens.Green, rect);
 
             pictureBox1.Image = bitmap1;
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button18_Click(object sender, EventArgs e)
-        {
-            //測試Matrix
-
-            float size = 2.0f;
-
-            // 建立一個矩陣物件
-            Matrix Var_Matrix = new Matrix((float)size, 0.0F, 0.0F, (float)size, 0.0F, 0.0F);  // 設定仿射矩陣, 矩陣轉置, 只能 矩形範圍 轉 平行四邊形範圍
-            //Var_Matrix.TransformPoints(Var_PointS); //不會用 TransformPoints
-
-            richTextBox1.Text += Var_Matrix.ToString() + "\n";
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
+            float size = 2.0f;
             // 建立一個矩陣物件
-            Matrix A = new Matrix();
+            Matrix map_matrix = new Matrix((float)size, 0.0F, 0.0F, (float)size, 0.0F, 0.0F);  // 設定仿射矩陣, 矩陣轉置, 只能 矩形範圍 轉 平行四邊形範圍
+            //map_matrix.TransformPoints(Var_PointS); //不會用 TransformPoints
+            richTextBox1.Text += map_matrix.ToString() + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //測試Matrix
+
+            // 建立一個矩陣物件
+            Matrix mtx = new Matrix();
             int theta = 0;
             int Cx = 100;
             int Cy = 100;
             for (int i = theta; i < 180 + theta; i += 45)
             {
-                A.Reset();
-                A.Rotate(i, MatrixOrder.Append);
-                A.Translate(Cx, Cy, MatrixOrder.Append);
+                mtx.Reset();
+                mtx.Rotate(i, MatrixOrder.Append);
+                mtx.Translate(Cx, Cy, MatrixOrder.Append);
             }
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            Rectangle rect = new Rectangle(-2, -2, 4, 4);
-            Point[] pts = new Point[]
-            { 
-                new Point(0, pictureBox1.ClientSize.Height),
-                new Point(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height), 
-                new Point(0, 0)
-            };
-
-            // 建立一個矩陣物件
-            Matrix transform = new Matrix(rect, pts);  // 設定仿射矩陣, 矩陣轉置, 只能 矩形範圍 轉 平行四邊形範圍
-
-            //richTextBox1.Text += transform..Elements.ToString() + "\n";
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
         }
@@ -791,17 +741,72 @@ namespace vcs_Draw_Transform1
         {
             // Translate the point to the origin.
             // 建立一個矩陣物件
-            Matrix result = new Matrix();
-            result.RotateAt(angle, center);
-            return result;
+            Matrix mtx = new Matrix();
+            mtx.RotateAt(angle, center);
+            return mtx;
         }
 
-        private void button19_Click(object sender, EventArgs e)
+        private void button8_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button9_Click(object sender, EventArgs e)
         {
             pictureBox1.ClientSize = new Size(960, 960 + 30);
             richTextBox1.Visible = false;
 
             timer1.Enabled = true;
+        }
+
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
         }
 
         void draw_grid(Graphics g)
@@ -870,67 +875,12 @@ namespace vcs_Draw_Transform1
 */
 
 
-
-/*
-//儲存新的影像
-string filename = Application.StartupPath + "\\rotate_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-rotateImage.Save(@filename, ImageFormat.Jpeg);
-richTextBox1.Text += "影像旋轉，存檔完成，檔名：" + filename + "\n";
-*/
-
-
-
-/*
-            //矩陣轉置
-            //原始資料範圍很小, 用 矩陣轉置 方法, 可以剛好畫滿pictureBox
-
-
-            // 原始資料範圍 rect
-            // Scale to fit the data.
-            RectangleF rect = new RectangleF(x_min, y_min, x_max, y_max - y_min);
-            g.DrawRectangle(redPen, x_min, y_min, x_max, y_max - y_min);
-
-            // 欲映射的pictureBox範圍
-            PointF[] pts = 
-                {
-                    new PointF(0, pictureBox1.ClientSize.Height),
-                    new PointF(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height),
-                    new PointF(0, 0),
-                };
-
-            //轉置
-            g.Transform = new Matrix(rect, pts);  // 設定仿射矩陣, 矩陣轉置, 只能 矩形範圍 轉 平行四邊形範圍
-
-            //畫圖
-
-*/
-
-
 /*
             // 縮旋平
             //g.ScaleTransform(2.0f, 0.5f);  // 縮放, 水平縮放, 垂直縮放
             //g.RotateTransform(45.0f, MatrixOrder.Append);  // 旋轉, 對原點順時針旋轉
             //g.RotateTransform(45.0f, MatrixOrder.Prepend);  // 旋轉
             g.TranslateTransform(200.0f, 100.0f, MatrixOrder.Append);  // 原點平移, 右移, 下移
-
-
-
-
-*/
-
-
-
-//原始資料範圍
-
-//欲轉換資料範圍
-
-/*
-//量測字體大小
-            Font f = new Font("標楷體", 40);
-            string str = "放大縮小";
-
-            int w = g.MeasureString(str, f).ToSize().Width;
-            int h = g.MeasureString(str, f).ToSize().Height;
 */
 
 
@@ -946,4 +896,28 @@ richTextBox1.Text += "影像旋轉，存檔完成，檔名：" + filename + "\n"
 
             //縮放
             g.ScaleTransform(3.0f, 3);  // 縮放, 水平縮放, 垂直縮放  //x軸比例再放大, y軸比例再放大
+*/
+
+
+
+  
+/*
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.DoubleBuffer, true);
+            Graphics g = e.Graphics;
+            g.SmoothingMode = SmoothingMode.HighQuality;
+
+            foreach (Flakes s in flyFlakeList)
+            {
+                g.ResetTransform();
+                //g.TranslateTransform(-16, -16, MatrixOrder.Append);
+                g.ScaleTransform(s.Scale, s.Scale, MatrixOrder.Append);
+                g.RotateTransform(s.Rotation, MatrixOrder.Append);
+                g.TranslateTransform(s.X, s.Y, MatrixOrder.Append);
+
+                g.DrawImage(s.ShowImage, 0, 0);
+            }
+            //base.OnPaint(e);
+        }
 */

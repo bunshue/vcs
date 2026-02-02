@@ -1431,6 +1431,26 @@ namespace vcs_test_all_01_DateTime
 
         private void button15_Click(object sender, EventArgs e)
         {
+            DateTime dt = DateTime.Now;
+            richTextBox1.Text += "現在日期： " + dt.ToLongDateString() + "\n";
+            richTextBox1.Text += "現在時間： " + dt.ToLongTimeString() + "\n";
+
+            richTextBox1.Text += "当前是否公历闰年 : " + DateTime.IsLeapYear(dt.Year) + "\n";
+
+            //後一天
+            DateTime nextDay = dt.AddDays(1);
+            richTextBox1.Text += "後一天 : " + nextDay + "\n";
+
+            //前一天
+            DateTime pervDay = dt.AddDays(-1);
+            richTextBox1.Text += "前一天 : " + pervDay + "\n";
+
+            /*
+            DateTime baseDateAndTime = new DateTime(1900, 1, 6, 2, 5, 0); //#1/6/1900 2:05:00 AM#
+            DateTime newDate;
+            num = 525948.76 * (y - 1900) + sTermInfo[i - 1];
+            newDate = baseDateAndTime.AddMinutes(num);//按分钟计算
+            */
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -2294,7 +2314,6 @@ namespace vcs_test_all_01_DateTime
 
 
 /*  可搬出
-
             message += "显示中文格式的日期、星期几\n";
             message += "//该语句显示的为英文格式\n";
             message += DateTime.Now.DayOfWeek.ToString() + "\n";
@@ -2348,3 +2367,4 @@ namespace vcs_test_all_01_DateTime
 */
 
 // DateTime.Parse()  抓出來
+

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_Draw_ColorMatrix", "vcs_Draw_ColorMatrix\vcs_Draw_ColorMatrix.csproj", "{A974815A-1FFE-433B-A689-B8C21B6246D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_Draw5_Image_ImageAttributes", "vcs_Draw5_Image_ImageAttributes\vcs_Draw5_Image_ImageAttributes.csproj", "{A974815A-1FFE-433B-A689-B8C21B6246D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

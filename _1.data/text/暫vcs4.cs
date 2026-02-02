@@ -1,5 +1,21 @@
 ﻿
 
+/*
+//儲存新的影像
+string filename = Application.StartupPath + "\\rotate_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+rotateImage.Save(@filename, ImageFormat.Jpeg);
+richTextBox1.Text += "影像旋轉，存檔完成，檔名：" + filename + "\n";
+*/
+
+/*
+//量測字體大小
+            Font f = new Font("標楷體", 40);
+            string str = "放大縮小";
+            int w = g.MeasureString(str, f).ToSize().Width;
+            int h = g.MeasureString(str, f).ToSize().Height;
+*/
+
+
 箭頭的畫法
 
             Pen p = new Pen(Color.Red, 0);
@@ -357,30 +373,6 @@ using System.Diagnostics;           //for Debug
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-  
-  
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.DoubleBuffer, true);
-            Graphics g = e.Graphics;
-            g.SmoothingMode = SmoothingMode.HighQuality;
-
-            foreach (Flakes s in flyFlakeList)
-            {
-                g.ResetTransform();
-                //g.TranslateTransform(-16, -16, MatrixOrder.Append);
-                g.ScaleTransform(s.Scale, s.Scale, MatrixOrder.Append);
-                g.RotateTransform(s.Rotation, MatrixOrder.Append);
-                g.TranslateTransform(s.X, s.Y, MatrixOrder.Append);
-
-                g.DrawImage(s.ShowImage, 0, 0);
-            }
-            //base.OnPaint(e);
-        }
-
-
-
             //using System.Collections;//for Hashtable
 
             Hashtable imageList = new Hashtable();
@@ -403,12 +395,6 @@ richTextBox1.Text += "----------------------------------------------------------
             //object obj = imageList[3];
 
             pictureBox1.Image = (Image)obj;
-
-
-
-
-
-
   
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -416,34 +402,10 @@ richTextBox1.Text += "----------------------------------------------------------
 
 
 
-                DateTime baseDateAndTime = new DateTime(1900, 1, 6, 2, 5, 0); //#1/6/1900 2:05:00 AM#
-                DateTime newDate;
-                    num = 525948.76 * (y - 1900) + sTermInfo[i - 1];
-                    newDate = baseDateAndTime.AddMinutes(num);//按分钟计算
-
-
-            //後一天
-            DateTime nextDay = _date.AddDays(1);
-            //前一天
-            DateTime pervDay = _date.AddDays(-1);
-            return new ChineseCalendar(pervDay);
-
-
-
-
-        return "公元" + this._date.ToLongDateString();
-        /// 当前是否公历闰年
-                return DateTime.IsLeapYear(this._date.Year);
-
-
-
-
-
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            /*
             foreach (int argb in Properties.Settings.Default.Argbs)
             {
                 Color color = Color.FromArgb(argb);
@@ -460,9 +422,6 @@ richTextBox1.Text += "----------------------------------------------------------
                     y += PatchHeight + PatchMargin;
                 }
             }
-            */
-
-
 
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -606,9 +565,6 @@ richTextBox1.Text += "----------------------------------------------------------
             listView1.Items.Add(new ListViewItem(new String[] { "ToShortDateString", "d", dt.ToShortDateString() }));
             listView1.Items.Add(new ListViewItem(new String[] { "ToShortTimeString", "t", dt.ToShortTimeString() }));
             listView1.Items.Add(new ListViewItem(new String[] { "ToString", "G", dt.ToString() }));
-
-
-
         }
 
         private void bt3_Click(object sender, EventArgs e)
@@ -1743,7 +1699,6 @@ C#
     在方案總管中，以滑鼠右鍵按一下 [ ctlalarmclock]]，然後按一下 [視圖程式碼]。
 
     尋找 public class 陳述式。 請注意，您的控制項繼承自ctlClockLib.ctlClock。 在左大括號 ({) 陳述式底下，輸入下列程式碼。
-    C#
 
     private DateTime dteAlarmTime;
     private bool blnAlarmSet;
@@ -1806,12 +1761,10 @@ C#
 若要覆寫 ctlClock 的 timer1_Tick 方法
 
     在 [程式碼編輯器] 中，尋找 private bool blnAlarmSet; 陳述式。 緊接著在其下新增下列陳述式。
-    C#
 
 private bool blnColorTicker;
 
 在 [程式碼編輯器] 中，在類別結尾尋找右大括號 (})。 緊接在大括號之前，新增下列程式碼。
-C#
 
     protected override void timer1_Tick(object sender, System.EventArgs e)
     {
