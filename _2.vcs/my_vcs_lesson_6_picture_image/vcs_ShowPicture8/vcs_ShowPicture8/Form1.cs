@@ -50,18 +50,21 @@ namespace vcs_ShowPicture8
             if (imageObject.isTimeUp())  // 如果時間到了
             {
                 D = D + 1;
-                if (D == bitmap.Length) D = 0; // 已經 超過最後一張
+                if (D == bitmap.Length)
+                {
+                    D = 0; // 已經 超過最後一張
+                }
 
                 if (D < bitmap.Length - 1)  // 第 D 張 和 第 D + 1張
+                {
                     imageObject = new G2D_ImageFadeinFadeout2(bitmap[D], bitmap[D + 1]);
+                }
                 else // 最後一張 和 第一張
                 {
                     imageObject = new G2D_ImageFadeinFadeout2(bitmap[bitmap.Length - 1], bitmap[0]);
                 }
-
                 imageObject.Init(pos, 10000);
             }
-
         }
 
         private void pictureBox_FadeInFadeOut_Paint(object sender, PaintEventArgs e)

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D; //for SmoothingMode
 using System.Drawing.Imaging;   //for ColorAdjustType
 
-namespace vcs_ShowPicture4
+namespace vcs_ImageProcessing7
 {
     public partial class Form1 : Form
     {

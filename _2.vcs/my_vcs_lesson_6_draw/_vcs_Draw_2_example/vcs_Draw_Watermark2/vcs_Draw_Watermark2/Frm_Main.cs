@@ -117,7 +117,9 @@ namespace vcs_Draw_Watermark2
         {
             trackBar1.Enabled = false;
             if (rbPIC.Checked)
+            {
                 pbImgPreview.Image = null;
+            }
         }
 
         private void rbPIC_CheckedChanged(object sender, EventArgs e)
@@ -227,9 +229,13 @@ namespace vcs_Draw_Watermark2
             {
                 string ipath;
                 if (NewFolderPath.Length == 3)
+                {
                     ipath = NewFolderPath.Remove(NewFolderPath.LastIndexOf(":") + 1);
+                }
                 else
+                {
                     ipath = NewFolderPath;
+                }
                 string imgstype = Iname.Substring(Iname.LastIndexOf(".") + 1, Iname.Length - 1 - Iname.LastIndexOf("."));
                 if (imgstype.ToLower() == "jpeg" || imgstype.ToLower() == "jpg")
                 {
@@ -297,9 +303,13 @@ namespace vcs_Draw_Watermark2
                 }
                 string ipath;
                 if (NewFolderPath.Length == 3)
+                {
                     ipath = NewFolderPath.Remove(NewFolderPath.LastIndexOf(":") + 1);
+                }
                 else
+                {
                     ipath = NewFolderPath;
+                }
                 string imgstype = Iname.Substring(Iname.LastIndexOf(".") + 1, Iname.Length - 1 - Iname.LastIndexOf("."));
                 if (imgstype.ToLower() == "jpeg" || imgstype.ToLower() == "jpg")
                 {
@@ -363,22 +373,25 @@ namespace vcs_Draw_Watermark2
                 effect = new Bitmap(this.new_img.Width, this.new_img.Height);
             }
             Graphics _effect = Graphics.FromImage(effect);
-            float[][] matrixItems ={new float[]{1,0,0,0,0},
-                                      new float [] {0,1,0,0,0},
-                                      new float []{0,0,1,0,0},
-                                      new float []{0,0,0,0,0},
-                                      new float[]{0,0,0,trackBar1.Value/255f,1}};
-            ColorMatrix imgMatrix = new ColorMatrix(matrixItems);
-            ImageAttributes imgEffect = new ImageAttributes();
-            imgEffect.SetColorMatrix(imgMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+            float[][] matrixItems =
+            {
+                new float[]{1,0,0,0,0},
+                new float[]{0,1,0,0,0},
+                new float[]{0,0,1,0,0},
+                new float[]{0,0,0,0,0},
+                new float[]{0,0,0,trackBar1.Value/255f,1}
+            };
+            ColorMatrix cm = new ColorMatrix(matrixItems);
+            ImageAttributes ia = new ImageAttributes();
+            ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
             if (source.Width <= 368)
             {
-                _effect.DrawImage(source, new Rectangle(0, 0, 368, 75), 0, 0, 368, 75, GraphicsUnit.Pixel, imgEffect);
+                _effect.DrawImage(source, new Rectangle(0, 0, 368, 75), 0, 0, 368, 75, GraphicsUnit.Pixel, ia);
             }
             else
             {
-                _effect.DrawImage(new_img, new Rectangle(0, 0, new_img.Width, new_img.Height), 0, 0, new_img.Width, new_img.Height, GraphicsUnit.Pixel, imgEffect);
+                _effect.DrawImage(new_img, new Rectangle(0, 0, new_img.Width, new_img.Height), 0, 0, new_img.Width, new_img.Height, GraphicsUnit.Pixel, ia);
             }
             pbImgPreview.Image = effect;
         }

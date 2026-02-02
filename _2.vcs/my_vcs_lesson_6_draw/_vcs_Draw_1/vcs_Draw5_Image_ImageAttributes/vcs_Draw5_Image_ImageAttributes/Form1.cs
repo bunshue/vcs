@@ -431,7 +431,47 @@ namespace vcs_Draw5_Image_ImageAttributes
 
         private void button5_Click(object sender, EventArgs e)
         {
+            // 改變色調
 
+            //同時調整色調和亮度  R/G/B/Y 皆為 0~255
+            //紅色調整為 R/255 倍
+            //綠色調整為 G/255 倍
+            //藍色調整為 B/255 倍
+            //分別再乘上亮度 Y/128
+
+            float scale = scale = (128 + 63) / 128f;
+            float r = (128 + 127) / 255f * scale;
+            float g = (128 + 127) / 255f * scale;
+            float b = (128 + 127) / 255f * scale;
+
+            Bitmap bmp = new Bitmap(filename);
+
+            // Make the ColorMatrix.
+            ColorMatrix cm = new ColorMatrix(new float[][]
+            {
+                new float[] {r, 0, 0, 0, 0},
+                new float[] {0, g, 0, 0, 0},
+                new float[] {0, 0, b, 0, 0},
+                new float[] {0, 0, 0, 1, 0},
+                new float[] {0, 0, 0, 0, 1}
+            });
+            ImageAttributes ia = new ImageAttributes();
+            ia.SetColorMatrix(cm);
+
+            // Draw the image onto the new bitmap while applying the new ColorMatrix.
+            Point[] points =
+            {
+                new Point(0, 0),
+                new Point(bmp.Width - 1, 0),
+                new Point(0, bmp.Height - 1),
+            };
+            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+
+            Graphics gr = Graphics.FromImage(bitmap1);
+            gr.Clear(Color.Pink);
+            gr.DrawImage(bmp, points, rect, GraphicsUnit.Pixel, ia);
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button6_Click(object sender, EventArgs e)
