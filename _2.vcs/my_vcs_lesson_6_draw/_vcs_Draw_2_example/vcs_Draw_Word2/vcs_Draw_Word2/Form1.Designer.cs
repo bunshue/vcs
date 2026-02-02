@@ -1,4 +1,4 @@
-﻿namespace vcs_Draw9_Example6_vcsh_text
+﻿namespace vcs_Draw_Word2
 {
     partial class Form1
     {
@@ -39,7 +39,6 @@
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
-            this.bt_save = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox_rotate_brush = new System.Windows.Forms.PictureBox();
@@ -185,17 +184,6 @@
             this.button0.Size = new System.Drawing.Size(120, 45);
             this.button0.TabIndex = 30;
             this.button0.UseVisualStyleBackColor = true;
-            // 
-            // bt_save
-            // 
-            this.bt_save.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_save.Location = new System.Drawing.Point(1036, 419);
-            this.bt_save.Name = "bt_save";
-            this.bt_save.Size = new System.Drawing.Size(100, 40);
-            this.bt_save.TabIndex = 56;
-            this.bt_save.Text = "Save";
-            this.bt_save.UseVisualStyleBackColor = true;
-            this.bt_save.Click += new System.EventHandler(this.bt_save_Click);
             // 
             // bt_clear
             // 
@@ -509,7 +497,6 @@
             this.Controls.Add(this.pictureBox_rotate_brush);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.bt_save);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.button7);
@@ -559,7 +546,6 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button0;
-        private System.Windows.Forms.Button bt_save;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox_rotate_brush;

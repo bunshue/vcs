@@ -69,7 +69,6 @@ namespace vcs_Draw9_Example6_vcsh_math2
             dx = 140;
             dy = 55;
 
-            bt_save.Location = new Point(x_st + dx * 0 + 110, y_st + dy * 12);
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 13);
             richTextBox1.Size = new Size(210, 350);
 
@@ -204,40 +203,6 @@ namespace vcs_Draw9_Example6_vcsh_math2
             richTextBox1.Clear();
         }
 
-        void save_image_to_drive()
-        {
-            if (bitmap1 != null)
-            {
-                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                string filename1 = filename + ".jpg";
-                string filename2 = filename + ".bmp";
-                string filename3 = filename + ".png";
-
-                try
-                {
-                    bitmap1.Save(@filename1, ImageFormat.Jpeg);
-                    bitmap1.Save(@filename2, ImageFormat.Bmp);
-                    bitmap1.Save(@filename3, ImageFormat.Png);
-
-                    richTextBox1.Text += "存檔成功\n";
-                    richTextBox1.Text += "已存檔 : " + filename1 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename3 + "\n";
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                }
-            }
-            else
-                richTextBox1.Text += "無圖可存\n";
-        }
-
-        private void bt_save_Click(object sender, EventArgs e)
-        {
-            save_image_to_drive();
-        }
-
         private void pictureBox_pi1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
@@ -282,8 +247,7 @@ namespace vcs_Draw9_Example6_vcsh_math2
                         // See where this point will be after it is transformed.
                         PointF[] txt_pts = { new PointF(-0.25f, y) };
                         transform.TransformPoints(txt_pts);
-                        gr.DrawString(y.ToString(), font,
-                            Brushes.Black, txt_pts[0].X, txt_pts[0].Y, sf);
+                        gr.DrawString(y.ToString(), font, Brushes.Black, txt_pts[0].X, txt_pts[0].Y, sf);
                     }
                 } // Font
 
@@ -294,8 +258,7 @@ namespace vcs_Draw9_Example6_vcsh_math2
                 {
                     PointF[] pi_pts = { new PointF(0.5f, (float)Math.PI) };
                     transform.TransformPoints(pi_pts);
-                    gr.DrawString("π", font,
-                        Brushes.Black, pi_pts[0].X, pi_pts[0].Y, sf);
+                    gr.DrawString("π", font, Brushes.Black, pi_pts[0].X, pi_pts[0].Y, sf);
                 } // Font
             } // StringFormat
 
@@ -357,7 +320,6 @@ namespace vcs_Draw9_Example6_vcsh_math2
         }
         */
 
-
         // Draw the graph.
         private void pictureBox_pi2_Paint(object sender, PaintEventArgs e)
         {
@@ -403,8 +365,7 @@ namespace vcs_Draw9_Example6_vcsh_math2
                         // See where this point will be after it is transformed.
                         PointF[] txt_pts = { new PointF(-0.25f, y) };
                         transform.TransformPoints(txt_pts);
-                        gr.DrawString(y.ToString(), font,
-                            Brushes.Black, txt_pts[0].X, txt_pts[0].Y, sf);
+                        gr.DrawString(y.ToString(), font, Brushes.Black, txt_pts[0].X, txt_pts[0].Y, sf);
                     }
 
                     // Draw the key.
@@ -415,16 +376,13 @@ namespace vcs_Draw9_Example6_vcsh_math2
                         Brushes.Green, text_y, text_x);
                     text_x += line_space;
 
-                    gr.DrawString("Nilakantha", font,
-                        Brushes.Red, text_y, text_x);
+                    gr.DrawString("Nilakantha", font, Brushes.Red, text_y, text_x);
                     text_x += line_space;
 
-                    gr.DrawString("Newton", font,
-                        Brushes.Blue, text_y, text_x);
+                    gr.DrawString("Newton", font, Brushes.Blue, text_y, text_x);
                     text_x += line_space;
 
-                    gr.DrawString("Arcsine", font,
-                        Brushes.Black, text_y, text_x);
+                    gr.DrawString("Arcsine", font, Brushes.Black, text_y, text_x);
                     text_x += line_space;
                 } // Font
 
@@ -435,8 +393,7 @@ namespace vcs_Draw9_Example6_vcsh_math2
                 {
                     PointF[] pi_pts = { new PointF(0, (float)Math.PI) };
                     transform.TransformPoints(pi_pts);
-                    gr.DrawString("π", font,
-                        Brushes.Black, pi_pts[0].X, pi_pts[0].Y, sf);
+                    gr.DrawString("π", font, Brushes.Black, pi_pts[0].X, pi_pts[0].Y, sf);
                 } // Font
             } // StringFormat
 
@@ -444,65 +401,62 @@ namespace vcs_Draw9_Example6_vcsh_math2
             gr.Transform = transform;
 
             // Use an unscaled pen.
-            using (Pen thin_pen = new Pen(Color.Lime, 0))
+            Pen thin_pen = new Pen(Color.Lime, 0);
+            // Draw the line y = pi.
+            gr.DrawLine(thin_pen, 0, (float)Math.PI, num_terms, (float)Math.PI);
+
+            // Draw the Y axis.
+            thin_pen.Color = Color.Gray;
+            gr.DrawLine(thin_pen, 0, -1, 0, 5);
+            for (int y = 1; y <= 4; y++)
             {
-                // Draw the line y = pi.
-                gr.DrawLine(thin_pen, 0, (float)Math.PI,
-                    num_terms, (float)Math.PI);
+                gr.DrawLine(thin_pen, -0.25f, y, 0.25f, y);
+            }
 
-                // Draw the Y axis.
-                thin_pen.Color = Color.Gray;
-                gr.DrawLine(thin_pen, 0, -1, 0, 5);
-                for (int y = 1; y <= 4; y++)
-                {
-                    gr.DrawLine(thin_pen, -0.25f, y, 0.25f, y);
-                }
+            // Draw the X tic marks.
+            thin_pen.Color = Color.Gray;
+            float y0 = (float)Math.PI - 0.05f;
+            float y1 = (float)Math.PI + 0.05f;
+            for (int x = 1; x <= num_terms; x++)
+            {
+                gr.DrawLine(thin_pen, x, y0, x, y1);
+            }
 
-                // Draw the X tic marks.
-                thin_pen.Color = Color.Gray;
-                float y0 = (float)Math.PI - 0.05f;
-                float y1 = (float)Math.PI + 0.05f;
-                for (int x = 1; x <= num_terms; x++)
-                {
-                    gr.DrawLine(thin_pen, x, y0, x, y1);
-                }
+            // Draw the approximations.
+            thin_pen.Color = Color.Green;
+            PointF[] pts = new PointF[num_terms];
+            for (int i = 0; i < num_terms; i++)
+            {
+                pts[i] = new PointF(i, (float)values[i]);
+            }
+            gr.DrawCurve(thin_pen, pts);
 
-                // Draw the approximations.
-                thin_pen.Color = Color.Green;
-                PointF[] pts = new PointF[num_terms];
-                for (int i = 0; i < num_terms; i++)
-                {
-                    pts[i] = new PointF(i, (float)values[i]);
-                }
-                gr.DrawCurve(thin_pen, pts);
+            // Draw Nilakantha's approximation.
+            thin_pen.Color = Color.Red;
+            pts = new PointF[num_terms];
+            for (int i = 0; i < num_terms; i++)
+            {
+                pts[i] = new PointF(i, (float)NilakanthaPi(i));
+            }
+            gr.DrawCurve(thin_pen, pts);
 
-                // Draw Nilakantha's approximation.
-                thin_pen.Color = Color.Red;
-                pts = new PointF[num_terms];
-                for (int i = 0; i < num_terms; i++)
-                {
-                    pts[i] = new PointF(i, (float)NilakanthaPi(i));
-                }
-                gr.DrawCurve(thin_pen, pts);
+            // Draw Newton's approximation.
+            thin_pen.Color = Color.Blue;
+            pts = new PointF[num_terms];
+            for (int i = 0; i < num_terms; i++)
+            {
+                pts[i] = new PointF(i, (float)Pi(i));
+            }
+            gr.DrawCurve(thin_pen, pts);
 
-                // Draw Newton's approximation.
-                thin_pen.Color = Color.Blue;
-                pts = new PointF[num_terms];
-                for (int i = 0; i < num_terms; i++)
-                {
-                    pts[i] = new PointF(i, (float)Pi(i));
-                }
-                gr.DrawCurve(thin_pen, pts);
-
-                // Draw the arcsine approximation.
-                thin_pen.Color = Color.Black;
-                pts = new PointF[num_terms];
-                for (int i = 0; i < num_terms; i++)
-                {
-                    pts[i] = new PointF(i, (float)ArcsinePi(i));
-                }
-                gr.DrawCurve(thin_pen, pts);
-            } // Pen
+            // Draw the arcsine approximation.
+            thin_pen.Color = Color.Black;
+            pts = new PointF[num_terms];
+            for (int i = 0; i < num_terms; i++)
+            {
+                pts[i] = new PointF(i, (float)ArcsinePi(i));
+            }
+            gr.DrawCurve(thin_pen, pts);
         }
 
         /*

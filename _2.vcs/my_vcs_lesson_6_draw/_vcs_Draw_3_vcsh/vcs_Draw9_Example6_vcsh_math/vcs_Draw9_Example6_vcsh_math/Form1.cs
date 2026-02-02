@@ -84,7 +84,6 @@ namespace vcs_Draw9_Example6_vcsh_math
             dx = 140;
             dy = 55;
 
-            bt_save.Location = new Point(x_st + dx * 0 + 110, y_st + dy * 12);
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 13);
             richTextBox1.Size = new Size(210, 350);
 
@@ -257,11 +256,16 @@ namespace vcs_Draw9_Example6_vcsh_math
                     Values[x + Xmax, y + Xmax] = new Point3D(x, y, z);
 
                     // Update the min and max values.
-                    if (Zmin > z) Zmin = z;
-                    if (Zmax < z) Zmax = z;
+                    if (Zmin > z)
+                    {
+                        Zmin = z;
+                    }
+                    if (Zmax < z)
+                    {
+                        Zmax = z;
+                    }
                 }
             }
-
             // Console.WriteLine(zmin.ToString() + " <= z <= " + zmax.ToString());
         }
 
@@ -270,37 +274,30 @@ namespace vcs_Draw9_Example6_vcsh_math
         {
             // Make the Bitmap.
             Bitmap bm = new Bitmap(pbx.ClientSize.Width, pbx.ClientSize.Height);
-            using (Graphics gr = Graphics.FromImage(bm))
+            Graphics gr = Graphics.FromImage(bm);
+            gr.Clear(Color.White);
+            gr.ScaleTransform(bm.Width / Xmax / 2, -bm.Height / Xmax / 2, MatrixOrder.Append);
+            gr.TranslateTransform(bm.Width * 0.5f, bm.Height * 0.5f, MatrixOrder.Append);
+
+            // Draw axes.
+            using (Pen axis_pen = new Pen(Color.LightGray, 0))
             {
-                // Clear.
-                gr.Clear(Color.White);
-                gr.ScaleTransform(
-                    bm.Width / Xmax / 2,
-                    -bm.Height / Xmax / 2,
-                    System.Drawing.Drawing2D.MatrixOrder.Append);
-                gr.TranslateTransform(bm.Width * 0.5f, bm.Height * 0.5f,
-                    System.Drawing.Drawing2D.MatrixOrder.Append);
-
-                // Draw axes.
-                using (Pen axis_pen = new Pen(Color.LightGray, 0))
+                gr.DrawLine(axis_pen, -Xmax, 0, Xmax, 0);
+                gr.DrawLine(axis_pen, 0, -Xmax, 0, Xmax);
+                for (int i = -Xmax; i <= Xmax; i++)
                 {
-                    gr.DrawLine(axis_pen, -Xmax, 0, Xmax, 0);
-                    gr.DrawLine(axis_pen, 0, -Xmax, 0, Xmax);
-                    for (int i = -Xmax; i <= Xmax; i++)
-                    {
-                        gr.DrawLine(axis_pen, i, -0.1f, i, 0.1f);
-                        gr.DrawLine(axis_pen, -0.1f, i, 0.1f, i);
-                    }
+                    gr.DrawLine(axis_pen, i, -0.1f, i, 0.1f);
+                    gr.DrawLine(axis_pen, -0.1f, i, 0.1f, i);
                 }
+            }
 
-                // Draw level curves.
-                double dz = (Zmax - Zmin) / 20;
-                for (double z = Zmin; z <= Zmax; z += dz)
-                {
-                    // Draw this level curve;
-                    DrawLevelCurve(gr, Values, z);
-                }
-            } // using gr.
+            // Draw level curves.
+            double dz = (Zmax - Zmin) / 20;
+            for (double z = Zmin; z <= Zmax; z += dz)
+            {
+                // Draw this level curve;
+                DrawLevelCurve(gr, Values, z);
+            }
 
             // Display the result.
             pbx.Image = bm;
@@ -346,40 +343,26 @@ namespace vcs_Draw9_Example6_vcsh_math
             }
         }
 
-        // Draw the line segment of intersection
-        // between a triangle and a plane.
-        private void DrawPlaneTriangleIntersections(
-            Graphics gr, Pen pen,
-            Point3D p0, Vector3D N,
-            Point3D p1, Point3D p2, Point3D p3)
+        // Draw the line segment of intersection between a triangle and a plane.
+        private void DrawPlaneTriangleIntersections(Graphics gr, Pen pen, Point3D p0, Vector3D N, Point3D p1, Point3D p2, Point3D p3)
         {
             List<Point3D> points = new List<Point3D>();
-            IntersectPlaneAndTriangle(
-                points, p0, N, p1, p2, p3);
+            IntersectPlaneAndTriangle(points, p0, N, p1, p2, p3);
             if (points.Count == 2)
             {
                 // The triangle intersects the plane.
-                gr.DrawLine(pen,
-                    (float)points[0].X, (float)points[0].Y,
-                    (float)points[1].X, (float)points[1].Y);
+                gr.DrawLine(pen, (float)points[0].X, (float)points[0].Y, (float)points[1].X, (float)points[1].Y);
             }
             if (points.Count > 2)
             {
-                gr.DrawLine(pen,
-                    (float)points[0].X, (float)points[0].Y,
-                    (float)points[2].X, (float)points[2].Y);
-                gr.DrawLine(pen,
-                    (float)points[1].X, (float)points[1].Y,
-                    (float)points[2].X, (float)points[2].Y);
+                gr.DrawLine(pen, (float)points[0].X, (float)points[0].Y, (float)points[2].X, (float)points[2].Y);
+                gr.DrawLine(pen, (float)points[1].X, (float)points[1].Y, (float)points[2].X, (float)points[2].Y);
             }
         }
 
         // Return the line segment of intersection
         // between a triangle and a plane.
-        private void IntersectPlaneAndTriangle(
-            List<Point3D> points,
-            Point3D p0, Vector3D N,
-            Point3D p1, Point3D p2, Point3D p3)
+        private void IntersectPlaneAndTriangle(List<Point3D> points, Point3D p0, Vector3D N, Point3D p1, Point3D p2, Point3D p3)
         {
             // Find points of intersection between
             // the triangle's edges and the plane.
@@ -399,14 +382,15 @@ namespace vcs_Draw9_Example6_vcsh_math
         //
         // The plane and line intersect where:
         //      t = [N dot <p0 - p1>] / [N dot <p2 - p1>]
-        private void IntersectPlaneAndSegment(List<Point3D> points,
-            Point3D p0, Vector3D N,
-            Point3D p1, Point3D p2)
+        private void IntersectPlaneAndSegment(List<Point3D> points, Point3D p0, Vector3D N, Point3D p1, Point3D p2)
         {
             // Get the denominator. If it's 0, the plane and line are parallel.
             Vector3D v12 = p2 - p1;
             double denominator = Vector3D.DotProduct(N, v12);
-            if (Math.Abs(denominator) < -0.0001) return;
+            if (Math.Abs(denominator) < -0.0001)
+            {
+                return;
+            }
 
             // Get the numerator.
             Vector3D v10 = p0 - p1;
@@ -453,76 +437,38 @@ namespace vcs_Draw9_Example6_vcsh_math
             richTextBox1.Clear();
         }
 
-        void save_image_to_drive()
-        {
-            if (bitmap1 != null)
-            {
-                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                string filename1 = filename + ".jpg";
-                string filename2 = filename + ".bmp";
-                string filename3 = filename + ".png";
-
-                try
-                {
-                    bitmap1.Save(@filename1, ImageFormat.Jpeg);
-                    bitmap1.Save(@filename2, ImageFormat.Bmp);
-                    bitmap1.Save(@filename3, ImageFormat.Png);
-
-                    richTextBox1.Text += "存檔成功\n";
-                    richTextBox1.Text += "已存檔 : " + filename1 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename3 + "\n";
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                }
-            }
-            else
-                richTextBox1.Text += "無圖可存\n";
-        }
-
-        private void bt_save_Click(object sender, EventArgs e)
-        {
-            save_image_to_drive();
-        }
-
         void DrawHeart()
         {
             // Plot the equations.
             // Make the Bitmap.
             Bitmap bm = new Bitmap(pictureBox4.ClientSize.Width, pictureBox4.ClientSize.Height);
-            using (Graphics gr = Graphics.FromImage(bm))
+            Graphics gr = Graphics.FromImage(bm);
+
+            gr.Clear(Color.White);
+
+            Rectangle rect = new Rectangle(-2, -2, 4, 4);
+            Point[] pts = new Point[]
+            { 
+                new Point(0, pictureBox4.ClientSize.Height),
+                new Point(pictureBox4.ClientSize.Width, pictureBox4.ClientSize.Height), 
+                new Point(0, 0)
+            };
+            gr.Transform = new Matrix(rect, pts);
+
+            // Draw axes.
+            Pen axis_pen = new Pen(Color.Gray, 0);
+            gr.DrawLine(axis_pen, -2, 0, 2, 0);
+            gr.DrawLine(axis_pen, 0, -2, 0, 2);
+            for (int i = -2; i <= 2; i++)
             {
-                // Clear.
-                gr.Clear(Color.White);
+                gr.DrawLine(axis_pen, i, -0.1f, i, 0.1f);
+                gr.DrawLine(axis_pen, -0.1f, i, 0.1f, i);
+            }
 
-                Rectangle rect = new Rectangle(-2, -2, 4, 4);
-                Point[] pts = new Point[] 
-                { 
-                    new Point(0, pictureBox4.ClientSize.Height),
-                    new Point(pictureBox4.ClientSize.Width, pictureBox4.ClientSize.Height), 
-                    new Point(0, 0)
-                };
-                gr.Transform = new Matrix(rect, pts);
-
-                // Draw axes.
-                using (Pen axis_pen = new Pen(Color.Gray, 0))
-                {
-                    gr.DrawLine(axis_pen, -2, 0, 2, 0);
-                    gr.DrawLine(axis_pen, 0, -2, 0, 2);
-                    for (int i = -2; i <= 2; i++)
-                    {
-                        gr.DrawLine(axis_pen, i, -0.1f, i, 0.1f);
-                        gr.DrawLine(axis_pen, -0.1f, i, 0.1f, i);
-                    }
-                }
-
-                // Graph the equations.
-                float dx = 2f / bm.Width;
-                float dy = 2f / bm.Height;
-                PlotFunction(gr, HeartFunc, dx, dy);
-            } // using gr.
+            // Graph the equations.
+            float dx = 2f / bm.Width;
+            float dy = 2f / bm.Height;
+            PlotFunction(gr, HeartFunc, dx, dy);
 
             // Display the result.
             pictureBox5.Image = bm;
@@ -534,46 +480,38 @@ namespace vcs_Draw9_Example6_vcsh_math
         private void PlotFunction(Graphics gr, FofXY func, float dx, float dy)
         {
             // Plot the function.
-            using (Pen thin_pen = new Pen(Color.Black, 0))
+            Pen thin_pen = new Pen(Color.Black, 0);
+            // Horizontal comparisons.
+            for (float x = -2f; x <= 2f; x += dx)
             {
-                // Horizontal comparisons.
-                for (float x = -2f; x <= 2f; x += dx)
-                {
-                    float last_y = func(x, -2f);
-                    for (float y = -2f + dy; y <= 2f; y += dy)
-                    {
-                        float next_y = func(x, y);
-                        if (
-                            ((last_y <= 0f) && (next_y >= 0f)) ||
-                            ((last_y >= 0f) && (next_y <= 0f))
-                           )
-                        {
-                            // Plot this point.
-                            gr.DrawLine(thin_pen, x, y - dy, x, y);
-                        }
-                        last_y = next_y;
-                    }
-                } // Horizontal comparisons.
-
-                // Vertical comparisons.
+                float last_y = func(x, -2f);
                 for (float y = -2f + dy; y <= 2f; y += dy)
                 {
-                    float last_x = func(-2f, y);
-                    for (float x = -2f; x <= 2f; x += dx)
+                    float next_y = func(x, y);
+                    if (((last_y <= 0f) && (next_y >= 0f)) || ((last_y >= 0f) && (next_y <= 0f)))
                     {
-                        float next_x = func(x, y);
-                        if (
-                            ((last_x <= 0f) && (next_x >= 0f)) ||
-                            ((last_x >= 0f) && (next_x <= 0f))
-                           )
-                        {
-                            // Plot this point.
-                            gr.DrawLine(thin_pen, x - dx, y, x, y);
-                        }
-                        last_x = next_x;
+                        // Plot this point.
+                        gr.DrawLine(thin_pen, x, y - dy, x, y);
                     }
-                } // Vertical comparisons.
-            } // using thin_pen.
+                    last_y = next_y;
+                }
+            } // Horizontal comparisons.
+
+            // Vertical comparisons.
+            for (float y = -2f + dy; y <= 2f; y += dy)
+            {
+                float last_x = func(-2f, y);
+                for (float x = -2f; x <= 2f; x += dx)
+                {
+                    float next_x = func(x, y);
+                    if (((last_x <= 0f) && (next_x >= 0f)) || ((last_x >= 0f) && (next_x <= 0f)))
+                    {
+                        // Plot this point.
+                        gr.DrawLine(thin_pen, x - dx, y, x, y);
+                    }
+                    last_x = next_x;
+                }
+            } // Vertical comparisons.
         }
 
         // The function.
@@ -666,162 +604,131 @@ namespace vcs_Draw9_Example6_vcsh_math
         {
             // Make the Bitmap.
             Bitmap bm = new Bitmap(W, H);
-            using (Graphics gr = Graphics.FromImage(bm))
+            Graphics gr = Graphics.FromImage(bm);
+            gr.SmoothingMode = SmoothingMode.AntiAlias;
+            gr.Clear(Color.White);
+            gr.ScaleTransform(15f, -15f, MatrixOrder.Append);
+            gr.TranslateTransform(bm.Width * 0.5f, bm.Height * 0.5f, MatrixOrder.Append);
+
+            // Draw axes.
+            Pen axis_pen = new Pen(Color.LightGray, 0);
+            gr.DrawLine(axis_pen, -8, 0, 8, 0);
+            gr.DrawLine(axis_pen, 0, -8, 0, 8);
+            for (int i = -8; i <= 8; i++)
             {
-                // Clear.
-                gr.SmoothingMode = SmoothingMode.AntiAlias;
-                gr.Clear(Color.White);
-                gr.ScaleTransform(15f, -15f, System.Drawing.Drawing2D.MatrixOrder.Append);
-                gr.TranslateTransform(bm.Width * 0.5f, bm.Height * 0.5f,
-                    System.Drawing.Drawing2D.MatrixOrder.Append);
+                gr.DrawLine(axis_pen, i, -0.1f, i, 0.1f);
+                gr.DrawLine(axis_pen, -0.1f, i, 0.1f, i);
+            }
 
-                // Draw axes.
-                using (Pen axis_pen = new Pen(Color.LightGray, 0))
-                {
-                    gr.DrawLine(axis_pen, -8, 0, 8, 0);
-                    gr.DrawLine(axis_pen, 0, -8, 0, 8);
-                    for (int i = -8; i <= 8; i++)
-                    {
-                        gr.DrawLine(axis_pen, i, -0.1f, i, 0.1f);
-                        gr.DrawLine(axis_pen, -0.1f, i, 0.1f, i);
-                    }
-                }
-
-                // Graph the equation.
-                float dx = 2f / bm.Width;
-                float dy = 2f / bm.Height;
-                PlotFunction(gr, func, -8, -8, 8, 8, dx, dy);
-            } // using gr.
+            // Graph the equation.
+            float dx = 2f / bm.Width;
+            float dy = 2f / bm.Height;
+            PlotFunction(gr, func, -8, -8, 8, 8, dx, dy);
 
             return bm;
         }
 
         // Plot a function.
-        private void PlotFunction(Graphics gr, Func<float, float, float> func,
-            float xmin, float ymin, float xmax, float ymax,
-            float dx, float dy)
+        private void PlotFunction(Graphics gr, Func<float, float, float> func, float xmin, float ymin, float xmax, float ymax, float dx, float dy)
         {
             // Plot the function.
-            using (Pen thin_pen = new Pen(Color.Black, 0))
+            Pen thin_pen = new Pen(Color.Black, 0);
+            // Horizontal comparisons.
+            for (float x = xmin; x <= xmax; x += dx)
             {
-                // Horizontal comparisons.
-                for (float x = xmin; x <= xmax; x += dx)
-                {
-                    float last_y = func(x, ymin);
-                    for (float y = ymin + dy; y <= ymax; y += dy)
-                    {
-                        float next_y = func(x, y);
-                        if (
-                            ((last_y <= 0f) && (next_y >= 0f)) ||
-                            ((last_y >= 0f) && (next_y <= 0f))
-                           )
-                        {
-                            // Plot this point.
-                            gr.DrawLine(thin_pen, x, y - dy, x, y);
-                        }
-                        last_y = next_y;
-                    }
-                } // Horizontal comparisons.
-
-                // Vertical comparisons.
+                float last_y = func(x, ymin);
                 for (float y = ymin + dy; y <= ymax; y += dy)
                 {
-                    float last_x = func(xmin, y);
-                    for (float x = xmin + dx; x <= xmax; x += dx)
+                    float next_y = func(x, y);
+                    if (((last_y <= 0f) && (next_y >= 0f)) || ((last_y >= 0f) && (next_y <= 0f)))
                     {
-                        float next_x = func(x, y);
-                        if (
-                            ((last_x <= 0f) && (next_x >= 0f)) ||
-                            ((last_x >= 0f) && (next_x <= 0f))
-                           )
-                        {
-                            // Plot this point.
-                            gr.DrawLine(thin_pen, x - dx, y, x, y);
-                        }
-                        last_x = next_x;
+                        // Plot this point.
+                        gr.DrawLine(thin_pen, x, y - dy, x, y);
                     }
-                } // Vertical comparisons.
-            } // using thin_pen.
+                    last_y = next_y;
+                }
+            } // Horizontal comparisons.
+
+            // Vertical comparisons.
+            for (float y = ymin + dy; y <= ymax; y += dy)
+            {
+                float last_x = func(xmin, y);
+                for (float x = xmin + dx; x <= xmax; x += dx)
+                {
+                    float next_x = func(x, y);
+                    if (((last_x <= 0f) && (next_x >= 0f)) || ((last_x >= 0f) && (next_x <= 0f)))
+                    {
+                        gr.DrawLine(thin_pen, x - dx, y, x, y);
+                    }
+                    last_x = next_x;
+                }
+            } // Vertical comparisons.
         }
 
         Bitmap DrawGraph6()
         {
             // Make the Bitmap.
             Bitmap bm = new Bitmap(pictureBox11.ClientSize.Width, pictureBox11.ClientSize.Height);
-            using (Graphics gr = Graphics.FromImage(bm))
+            Graphics gr = Graphics.FromImage(bm);
+            gr.Clear(Color.White);
+            gr.ScaleTransform(15f, -15f, MatrixOrder.Append);
+            gr.TranslateTransform(bm.Width * 0.5f, bm.Height * 0.5f, MatrixOrder.Append);
+
+            // Draw axes.
+            using (Pen axis_pen = new Pen(Color.LightGray, 0))
             {
-                // Clear.
-                gr.Clear(Color.White);
-                gr.ScaleTransform(15f, -15f, System.Drawing.Drawing2D.MatrixOrder.Append);
-                gr.TranslateTransform(bm.Width * 0.5f, bm.Height * 0.5f,
-                    System.Drawing.Drawing2D.MatrixOrder.Append);
-
-                // Draw axes.
-                using (Pen axis_pen = new Pen(Color.LightGray, 0))
+                gr.DrawLine(axis_pen, -8, 0, 8, 0);
+                gr.DrawLine(axis_pen, 0, -8, 0, 8);
+                for (int i = -8; i <= 8; i++)
                 {
-                    gr.DrawLine(axis_pen, -8, 0, 8, 0);
-                    gr.DrawLine(axis_pen, 0, -8, 0, 8);
-                    for (int i = -8; i <= 8; i++)
-                    {
-                        gr.DrawLine(axis_pen, i, -0.1f, i, 0.1f);
-                        gr.DrawLine(axis_pen, -0.1f, i, 0.1f, i);
-                    }
+                    gr.DrawLine(axis_pen, i, -0.1f, i, 0.1f);
+                    gr.DrawLine(axis_pen, -0.1f, i, 0.1f, i);
                 }
+            }
 
-                // Graph the equation.
-                float dx = 2f / bm.Width;
-                float dy = 2f / bm.Height;
-                PlotFunction2(gr, -8, -8, 8, 8, dx, dy);
-            } // using gr.
+            // Graph the equation.
+            float dx = 2f / bm.Width;
+            float dy = 2f / bm.Height;
+            PlotFunction2(gr, -8, -8, 8, 8, dx, dy);
             return bm;
         }
 
         // Plot a function.
-        private void PlotFunction2(Graphics gr,
-            float xmin, float ymin, float xmax, float ymax,
-            float dx, float dy)
+        private void PlotFunction2(Graphics gr, float xmin, float ymin, float xmax, float ymax, float dx, float dy)
         {
             // Plot the function.
-            using (Pen thin_pen = new Pen(Color.Black, 0))
+            Pen thin_pen = new Pen(Color.Black, 0);
+            // Horizontal comparisons.
+            for (float x = xmin; x <= xmax; x += dx)
             {
-                // Horizontal comparisons.
-                for (float x = xmin; x <= xmax; x += dx)
-                {
-                    float last_y = F5a(x, ymin);
-                    for (float y = ymin + dy; y <= ymax; y += dy)
-                    {
-                        float next_y = F5a(x, y);
-                        if (
-                            ((last_y <= 0f) && (next_y >= 0f)) ||
-                            ((last_y >= 0f) && (next_y <= 0f))
-                           )
-                        {
-                            // Plot this point.
-                            gr.DrawLine(thin_pen, x, y - dy, x, y);
-                        }
-                        last_y = next_y;
-                    }
-                } // Horizontal comparisons.
-
-                // Vertical comparisons.
+                float last_y = F5a(x, ymin);
                 for (float y = ymin + dy; y <= ymax; y += dy)
                 {
-                    float last_x = F5a(xmin, y);
-                    for (float x = xmin + dx; x <= xmax; x += dx)
+                    float next_y = F5a(x, y);
+                    if (((last_y <= 0f) && (next_y >= 0f)) || ((last_y >= 0f) && (next_y <= 0f)))
                     {
-                        float next_x = F5a(x, y);
-                        if (
-                            ((last_x <= 0f) && (next_x >= 0f)) ||
-                            ((last_x >= 0f) && (next_x <= 0f))
-                           )
-                        {
-                            // Plot this point.
-                            gr.DrawLine(thin_pen, x - dx, y, x, y);
-                        }
-                        last_x = next_x;
+                        // Plot this point.
+                        gr.DrawLine(thin_pen, x, y - dy, x, y);
                     }
-                } // Vertical comparisons.
-            } // using thin_pen.
+                    last_y = next_y;
+                }
+            } // Horizontal comparisons.
+
+            // Vertical comparisons.
+            for (float y = ymin + dy; y <= ymax; y += dy)
+            {
+                float last_x = F5a(xmin, y);
+                for (float x = xmin + dx; x <= xmax; x += dx)
+                {
+                    float next_x = F5a(x, y);
+                    if (((last_x <= 0f) && (next_x >= 0f)) || ((last_x >= 0f) && (next_x <= 0f)))
+                    {
+                        // Plot this point.
+                        gr.DrawLine(thin_pen, x - dx, y, x, y);
+                    }
+                    last_x = next_x;
+                }
+            } // Vertical comparisons.
         }
 
         // The function.
@@ -836,36 +743,30 @@ namespace vcs_Draw9_Example6_vcsh_math
         {
             // Make the Bitmap.
             Bitmap bm = new Bitmap(pictureBox12.ClientSize.Width, pictureBox12.ClientSize.Height);
-            using (Graphics gr = Graphics.FromImage(bm))
+            Graphics gr = Graphics.FromImage(bm);
+            gr.Clear(Color.White);
+            gr.ScaleTransform(24f, -24f, MatrixOrder.Append);
+            gr.TranslateTransform(bm.Width * 0.5f, bm.Height * 0.4f, MatrixOrder.Append);
+
+            // Draw axes.
+            Pen axis_pen = new Pen(Color.Gray, 0);
+            gr.DrawLine(axis_pen, -6, 0, 6, 0);
+            gr.DrawLine(axis_pen, 0, -6, 0, 6);
+            for (int i = -6; i <= 6; i++)
             {
-                // Clear.
-                gr.Clear(Color.White);
-                gr.ScaleTransform(24f, -24f, System.Drawing.Drawing2D.MatrixOrder.Append);
-                gr.TranslateTransform(bm.Width * 0.5f, bm.Height * 0.4f,
-                    System.Drawing.Drawing2D.MatrixOrder.Append);
+                gr.DrawLine(axis_pen, i, -0.1f, i, 0.1f);
+                gr.DrawLine(axis_pen, -0.1f, i, 0.1f, i);
+            }
 
-                // Draw axes.
-                using (Pen axis_pen = new Pen(Color.Gray, 0))
-                {
-                    gr.DrawLine(axis_pen, -6, 0, 6, 0);
-                    gr.DrawLine(axis_pen, 0, -6, 0, 6);
-                    for (int i = -6; i <= 6; i++)
-                    {
-                        gr.DrawLine(axis_pen, i, -0.1f, i, 0.1f);
-                        gr.DrawLine(axis_pen, -0.1f, i, 0.1f, i);
-                    }
-                }
-
-                // Graph the equations.
-                float dx = 2f / bm.Width;
-                float dy = 2f / bm.Height;
-                PlotFunction12(gr, F1, dx, dy);
-                PlotFunction12(gr, F2, dx, dy);
-                PlotFunction12(gr, F3, dx, dy);
-                PlotFunction12(gr, F4, dx, dy);
-                PlotFunction12(gr, F5, dx, dy);
-                PlotFunction12(gr, F6, dx, dy);
-            } // using gr.
+            // Graph the equations.
+            float dx = 2f / bm.Width;
+            float dy = 2f / bm.Height;
+            PlotFunction12(gr, F1, dx, dy);
+            PlotFunction12(gr, F2, dx, dy);
+            PlotFunction12(gr, F3, dx, dy);
+            PlotFunction12(gr, F4, dx, dy);
+            PlotFunction12(gr, F5, dx, dy);
+            PlotFunction12(gr, F6, dx, dy);
 
             // Display the result.
             pictureBox12.Image = bm;
@@ -877,46 +778,38 @@ namespace vcs_Draw9_Example6_vcsh_math
         private void PlotFunction12(Graphics gr, FofXY3 func, float dx, float dy)
         {
             // Plot the function.
-            using (Pen thin_pen = new Pen(Color.Black, 0))
+            Pen thin_pen = new Pen(Color.Black, 0);
+            // Horizontal comparisons.
+            for (float x = -6f; x <= 6f; x += dx)
             {
-                // Horizontal comparisons.
-                for (float x = -6f; x <= 6f; x += dx)
-                {
-                    float last_y = func(x, -6f);
-                    for (float y = -6f + dy; y <= 6f; y += dy)
-                    {
-                        float next_y = func(x, y);
-                        if (
-                            ((last_y <= 0f) && (next_y >= 0f)) ||
-                            ((last_y >= 0f) && (next_y <= 0f))
-                           )
-                        {
-                            // Plot this point.
-                            gr.DrawLine(thin_pen, x, y - dy, x, y);
-                        }
-                        last_y = next_y;
-                    }
-                } // Horizontal comparisons.
-
-                // Vertical comparisons.
+                float last_y = func(x, -6f);
                 for (float y = -6f + dy; y <= 6f; y += dy)
                 {
-                    float last_x = func(-6f, y);
-                    for (float x = -6f; x <= 6f; x += dx)
+                    float next_y = func(x, y);
+                    if (((last_y <= 0f) && (next_y >= 0f)) || ((last_y >= 0f) && (next_y <= 0f)))
                     {
-                        float next_x = func(x, y);
-                        if (
-                            ((last_x <= 0f) && (next_x >= 0f)) ||
-                            ((last_x >= 0f) && (next_x <= 0f))
-                           )
-                        {
-                            // Plot this point.
-                            gr.DrawLine(thin_pen, x - dx, y, x, y);
-                        }
-                        last_x = next_x;
+                        // Plot this point.
+                        gr.DrawLine(thin_pen, x, y - dy, x, y);
                     }
-                } // Vertical comparisons.
-            } // using thin_pen.
+                    last_y = next_y;
+                }
+            } // Horizontal comparisons.
+
+            // Vertical comparisons.
+            for (float y = -6f + dy; y <= 6f; y += dy)
+            {
+                float last_x = func(-6f, y);
+                for (float x = -6f; x <= 6f; x += dx)
+                {
+                    float next_x = func(x, y);
+                    if (((last_x <= 0f) && (next_x >= 0f)) || ((last_x >= 0f) && (next_x <= 0f)))
+                    {
+                        // Plot this point.
+                        gr.DrawLine(thin_pen, x - dx, y, x, y);
+                    }
+                    last_x = next_x;
+                }
+            } // Vertical comparisons.
         }
 
         // The functions.
@@ -941,10 +834,7 @@ namespace vcs_Draw9_Example6_vcsh_math
         // Offset x => x - 2.5      Translate 2.5 to the right
         private float F3(float x, float y)
         {
-            return (float)(
-                (-y - Math.Sqrt(2.5 * 2.5 - (x - 2.5) * (x - 2.5))) +
-                Math.Sqrt(x - 2.5) - Math.Sqrt(x - 2.5)
-            );
+            return (float)((-y - Math.Sqrt(2.5 * 2.5 - (x - 2.5) * (x - 2.5))) + Math.Sqrt(x - 2.5) - Math.Sqrt(x - 2.5));
         }
         // x^2 + y^2 = 2.5^2
         // y = Sqrt(2.5^2 - x^2)
@@ -954,10 +844,7 @@ namespace vcs_Draw9_Example6_vcsh_math
         // Offset x => x + 2.5      Translate 2.5 to the left
         private float F4(float x, float y)
         {
-            return (float)(
-                (-y - Math.Sqrt(2.5 * 2.5 - (-(x + 2.5)) * (-(x + 2.5)))) +
-                Math.Sqrt(-(x + 2.5)) - Math.Sqrt(-(x + 2.5))
-            );
+            return (float)((-y - Math.Sqrt(2.5 * 2.5 - (-(x + 2.5)) * (-(x + 2.5)))) + Math.Sqrt(-(x + 2.5)) - Math.Sqrt(-(x + 2.5)));
         }
         // x^2 + y^2 = 2.5^2
         // y = Sqrt(2.5^2 - x^2)
@@ -966,10 +853,7 @@ namespace vcs_Draw9_Example6_vcsh_math
         // Offset x => x + 2.5      Translate 2.5 to the left
         private float F5(float x, float y)
         {
-            return (float)(
-                ((y + 5) - Math.Sqrt(2.5 * 2.5 - (x + 2.5) * (x + 2.5))) +
-                Math.Sqrt(x + 2.5) - Math.Sqrt(x + 2.5)
-            );
+            return (float)(((y + 5) - Math.Sqrt(2.5 * 2.5 - (x + 2.5) * (x + 2.5))) + Math.Sqrt(x + 2.5) - Math.Sqrt(x + 2.5));
         }
         // x^2 + y^2 = 2.5^2
         // y = Sqrt(2.5^2 - x^2)
@@ -978,14 +862,9 @@ namespace vcs_Draw9_Example6_vcsh_math
         // Offset x => x - 2.5      Translate 2.5 to the right
         private float F6(float x, float y)
         {
-            return (float)(
-                ((y + 5) - Math.Sqrt(2.5 * 2.5 - ((x - 2.5)) * ((x - 2.5)))) +
-                Math.Sqrt(-(x - 2.5)) - Math.Sqrt(-(x - 2.5))
-            );
+            return (float)(((y + 5) - Math.Sqrt(2.5 * 2.5 - ((x - 2.5)) * ((x - 2.5)))) + Math.Sqrt(-(x - 2.5)) - Math.Sqrt(-(x - 2.5)));
         }
 
         //畫心圖，要很久   SP
-
-
     }
 }

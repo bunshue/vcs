@@ -1237,7 +1237,16 @@ REAL = FLOAT        小數
 INTEGER = INT       整數
 TEXT/VARCHAR(n)     字串
 NULL
-無用 BLOB
+
+INTEGER	整數
+REAL	浮點數
+TEXT	字串
+BLOB	多媒體物件 ex : 圖片 音樂
+
+
+UNIQUE 唯一
+NOT NULL	不能空白
+
 """
 
 """

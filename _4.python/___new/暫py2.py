@@ -499,29 +499,17 @@ zip	41MB
 序號格式(13碼, 1英7數1英4數)
 Ex: N2201001A0001
 
-
 \\192.168.1.231\\ims_qc_database\\ims_qc_database.exe
-
 
 M:\ims_qc_database\QC\csv
 
 giphy10-ezgif.com-optimize.gif
 
-
 命令 pyinstaller -F ims_qc_database.py
 
 資料表欄位型別(4)
 
-INTEGER	整數
-REAL	浮點數
-TEXT	字串
-BLOB	多媒體物件 ex : 圖片 音樂
-
-UNIQUE 唯一
-NOT NULL	不能空白
-
 ------------------------------------------------------------
-
 
     elif k == ord('r'):
         draw = np.zeros((h,w,4), dtype='uint8')

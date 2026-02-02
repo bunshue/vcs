@@ -6,7 +6,7 @@ using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace vcs_Draw9_Example6_vcsh_text
+namespace vcs_Draw_Word2
 {
     public class FontInfo
     {

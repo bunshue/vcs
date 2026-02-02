@@ -11,7 +11,7 @@ using System.Drawing.Drawing2D; //for CompositingQuality, SmoothingMode
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Drawing.Text;      //for TextRenderingHint
 
-namespace vcs_Draw9_Example6_vcsh_text
+namespace vcs_Draw_Word2
 {
     public partial class Form1 : Form
     {
@@ -150,8 +150,6 @@ namespace vcs_Draw9_Example6_vcsh_text
             button5.Location = new Point(x_st + dx * 2, y_st + dy * 5);
             button6.Location = new Point(x_st + dx * 2, y_st + dy * 6);
             button7.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-
-            bt_save.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
             richTextBox1.Location = new Point(x_st + dx * 1 + 70, y_st + dy * 11);
             richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y - 25);
@@ -336,40 +334,6 @@ namespace vcs_Draw9_Example6_vcsh_text
         {
             bitmap1 = null;
             richTextBox1.Clear();
-        }
-
-        void save_image_to_drive()
-        {
-            if (bitmap1 != null)
-            {
-                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                string filename1 = filename + ".jpg";
-                string filename2 = filename + ".bmp";
-                string filename3 = filename + ".png";
-
-                try
-                {
-                    bitmap1.Save(@filename1, ImageFormat.Jpeg);
-                    bitmap1.Save(@filename2, ImageFormat.Bmp);
-                    bitmap1.Save(@filename3, ImageFormat.Png);
-
-                    richTextBox1.Text += "存檔成功\n";
-                    richTextBox1.Text += "已存檔 : " + filename1 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename3 + "\n";
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                }
-            }
-            else
-                richTextBox1.Text += "無圖可存\n";
-        }
-
-        private void bt_save_Click(object sender, EventArgs e)
-        {
-            save_image_to_drive();
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)

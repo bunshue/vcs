@@ -64,6 +64,18 @@ namespace vcs_Draw5_Image_ImageAttributes
             new float[] {0,      0,      0,      0, 1}
         };
 
+        // 淡入 / 淡出 效果 ST
+        G2D_ImageFadeinFadeout2 imageObject; // 淡入淡出物件
+        Bitmap[] bitmap = new Bitmap[4]; // 有四張圖
+        int D = 0; // 第 D 張
+        Point pos; // 圖的中心位置
+
+        string filename0 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_scenery\taitung1.jpg";
+        string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_scenery\taitung2.jpg";
+        string filename2 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_scenery\taitung3.jpg";
+        string filename3 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_scenery\taitung4.jpg";
+        // 淡入 / 淡出 效果 SP
+
         public Form1()
         {
             InitializeComponent();
@@ -79,6 +91,21 @@ namespace vcs_Draw5_Image_ImageAttributes
             g.SmoothingMode = SmoothingMode.HighQuality;
 
             pictureBox2.Image = Image.FromFile(filename);
+
+            // 淡入 / 淡出 效果 ST
+            bitmap[0] = new Bitmap(filename0);
+            bitmap[1] = new Bitmap(filename1);
+            bitmap[2] = new Bitmap(filename2);
+            bitmap[3] = new Bitmap(filename3);
+
+            //this.pictureBox_FadeInFadeOut.Size = new Size(bitmap[0].Width, bitmap[0].Height); // 調整pictureBox的大小
+            //this.pictureBox_FadeInFadeOut.Location = new Point(10, 10);
+            //this.ClientSize = new Size(pictureBox_FadeInFadeOut.ClientSize.Width + 20, pictureBox_FadeInFadeOut.ClientSize.Height + 20);
+
+            imageObject = new G2D_ImageFadeinFadeout2(bitmap[D], bitmap[D + 1]);  // 產生淡入淡出物件
+            pos = new Point(this.ClientSize.Width / 2, this.ClientSize.Height / 2); // 產生淡入淡出物件
+            imageObject.Init(pos, 10000);  // 10 秒
+            // 淡入 / 淡出 效果 SP
         }
 
         void show_item_location()
@@ -497,11 +524,22 @@ namespace vcs_Draw5_Image_ImageAttributes
 
         }
 
+        bool flag_do_fadein_fadeout = false;
         private void button9_Click(object sender, EventArgs e)
         {
-
+            // 淡入 / 淡出 效果
+            // 淡入淡出我的畫冊
+            if (flag_do_fadein_fadeout == false)
+            {
+                flag_do_fadein_fadeout = true;
+                timer_FadeInFadeOut.Enabled = true;
+            }
+            else
+            {
+                flag_do_fadein_fadeout = false;
+                timer_FadeInFadeOut.Enabled = false;
+            }
         }
-
 
         public struct RGB
         {
@@ -831,6 +869,11 @@ namespace vcs_Draw5_Image_ImageAttributes
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
+            if (flag_do_fadein_fadeout == true)
+            {
+                imageObject.Draw(e.Graphics); // 繪出
+            }
+
             return;
 
             //string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw\data\color_chart.bmp";
@@ -854,7 +897,7 @@ namespace vcs_Draw5_Image_ImageAttributes
             ImageAttributes ia = new ImageAttributes();
             ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
-            richTextBox1.Text += "pt = " + image.GetPixel(50,50).ToString()+"\n";
+            richTextBox1.Text += "pt = " + image.GetPixel(50, 50).ToString() + "\n";
 
             e.Graphics.DrawImage(image, 10, 10, width, height);
 
@@ -1338,6 +1381,29 @@ namespace vcs_Draw5_Image_ImageAttributes
             }
             else
             {
+            }
+        }
+
+        private void timer_FadeInFadeOut_Tick(object sender, EventArgs e)
+        {
+            this.pictureBox1.Invalidate(); // 要求重畫
+            if (imageObject.isTimeUp())  // 如果時間到了
+            {
+                D = D + 1;
+                if (D == bitmap.Length)
+                {
+                    D = 0; // 已經 超過最後一張
+                }
+
+                if (D < bitmap.Length - 1)  // 第 D 張 和 第 D + 1張
+                {
+                    imageObject = new G2D_ImageFadeinFadeout2(bitmap[D], bitmap[D + 1]);
+                }
+                else // 最後一張 和 第一張
+                {
+                    imageObject = new G2D_ImageFadeinFadeout2(bitmap[bitmap.Length - 1], bitmap[0]);
+                }
+                imageObject.Init(pos, 10000);
             }
         }
     }
