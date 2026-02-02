@@ -17,8 +17,8 @@ namespace vcs_Draw5_Image_ImageAttributes
         Bitmap bitmap1;
         Graphics g;
         bool flag_color_matrix_valid = true;
-        int W = 800;
-        int H = 700;
+        int W = 920;
+        int H = 600;
         string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
 
         // 色彩調整矩陣 標準
@@ -89,6 +89,8 @@ namespace vcs_Draw5_Image_ImageAttributes
             bitmap1 = new Bitmap(W, H);
             g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
             g.SmoothingMode = SmoothingMode.HighQuality;
+            g.Clear(Color.Pink);
+            pictureBox1.Image = bitmap1;
 
             pictureBox2.Image = Image.FromFile(filename);
 
@@ -147,11 +149,11 @@ namespace vcs_Draw5_Image_ImageAttributes
             bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
 
             pictureBox2.Size = new Size(300, H / 2);
-            pictureBox2.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            pictureBox2.Location = new Point(x_st + dx * 6 + 100, y_st + dy * 0);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
 
             richTextBox1.Size = new Size(300, H / 2);
-            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0 + H / 2 + 10);
+            richTextBox1.Location = new Point(x_st + dx * 6 + 100, y_st + dy * 0 + H / 2 + 10);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             int xx = x_st + dx * 2;
@@ -228,9 +230,6 @@ namespace vcs_Draw5_Image_ImageAttributes
             radioButton2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             radioButton3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
 
-            this.Size = new Size(1600, 880);
-            this.Text = "vcs_Draw5_Image_ImageAttributes";
-
             lb_cm00.Text = "紅對紅00";
             lb_cm01.Text = "紅對綠01";
             lb_cm02.Text = "紅對藍02";
@@ -256,6 +255,12 @@ namespace vcs_Draw5_Image_ImageAttributes
             lb_cm42.Text = "藍平移比";
             lb_cm43.Text = "x";
             lb_cm44.Text = "x";
+
+            this.Size = new Size(1700, 960);
+            this.Text = "vcs_Draw5_Image_ImageAttributes";
+            //設定執行後的表單起始位置
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((1920 - this.Size.Width) / 2, (1080 - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -680,9 +685,19 @@ namespace vcs_Draw5_Image_ImageAttributes
             // ImageAttributes 測試 Gamma
             // 使用 ImageAttributes 設定 gamma 值
 
+            int x_st = 12;
+            int y_st = 12;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+            int W = 920;
+            int H = 900;
             int BORDER = 10;
-            int W = 512 + BORDER + 256 + BORDER;
-            int H = 256 * 3 + BORDER * 3;
+
+            pictureBox1.BringToFront();
+            pictureBox1.Size = new Size(W, H);
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_reset.BringToFront();
+            bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
 
             Bitmap bitmap1 = new Bitmap(W, H);
             Graphics g = Graphics.FromImage(bitmap1);
@@ -694,8 +709,8 @@ namespace vcs_Draw5_Image_ImageAttributes
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //原圖
-            int x_st = 0;
-            int y_st = 0;
+            x_st = 0;
+            y_st = 0;
             g.DrawImage(bmp, x_st, y_st, bmp.Width, bmp.Height);
             Bitmap b1 = measure_gray_scale(bmp);
             x_st = 512 + BORDER;
@@ -744,10 +759,7 @@ namespace vcs_Draw5_Image_ImageAttributes
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            pictureBox1.Size = new Size(800, 520);
             pictureBox1.Image = bitmap1;
-            richTextBox1.Text += pictureBox1.Size.ToString() + "\n";
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -914,9 +926,19 @@ namespace vcs_Draw5_Image_ImageAttributes
 
         private void bt_reset_Click(object sender, EventArgs e)
         {
+            int x_st = 12;
+            int y_st = 12;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+            int W = 920;
+            int H = 600;
+
+            pictureBox1.Size = new Size(W, H);
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 300);
+            bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
+
             //指定畫布大小
             pictureBox1.Size = new Size(W, H);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             bitmap1 = new Bitmap(W, H);
             g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
             g.Clear(Color.White);
