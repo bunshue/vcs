@@ -665,7 +665,7 @@ namespace vcs_Draw_Bitmap
 
             bitmap1.Save("step2_sc2.png", ImageFormat.Png);
 
-            pictureBox1.Image = bitmap1;        
+            pictureBox1.Image = bitmap1;
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -688,96 +688,23 @@ namespace vcs_Draw_Bitmap
             //設置圖像的分辨率
             Graphics g = this.pictureBox1.CreateGraphics();
             Bitmap bitmap1 = new Bitmap(filename);
-            //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
+
             bitmap1.SetResolution(300f, 300f);
-            g.DrawImage(bitmap1, 0, 0);
+            bitmap1.Save("圖片0300.bmp", ImageFormat.Bmp);
+            g.DrawImage(bitmap1, 0, 0, bitmap1.Width, bitmap1.Height);
+
             bitmap1.SetResolution(1200f, 1200f);
-            g.DrawImage(bitmap1, 180, 0);
+            g.DrawImage(bitmap1, 310, 0, bitmap1.Width, bitmap1.Height);
+            bitmap1.Save("圖片1200.bmp", ImageFormat.Bmp);
 
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            bitmap1.SetResolution(3f, 3f);
+            bitmap1.Save("圖片0003.bmp", ImageFormat.Bmp);
 
-            //設置圖像分辨率
-
-            //測不太出來
-
-            //設置圖像分辨率
-
-            filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-            Bitmap bmp = new Bitmap(filename);
-            int W = bmp.Width;
-            int H = bmp.Height;
-
-            bitmap1 = new Bitmap(W * 2, H);
-
-            g = Graphics.FromImage(bitmap1);
-            g.FillRectangle(Brushes.Pink, this.ClientRectangle);
-
-            bmp.Save("圖片0.bmp", ImageFormat.Bmp);
-
-            bmp.SetResolution(3f, 3f);
-            bmp.Save("圖片30.bmp", ImageFormat.Bmp);
-
-            g.DrawImage(bmp, 0, 0, W, H);
-
-            bmp.SetResolution(1200f, 1200f);
-            bmp.Save("圖片120.bmp", ImageFormat.Bmp);
-
-            g.DrawImage(bmp, 200, 0, W, H);
             pictureBox1.Image = bitmap1;
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            //改變圖片透明度
-            int W = pictureBox1.Width;
-            int H = pictureBox1.Height;
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-            Bitmap bitmap80 = returnAlpha(bitmap1, 80);
-            Bitmap bitmap160 = returnAlpha(bitmap1, 160);
-            Bitmap bitmap220 = returnAlpha(bitmap1, 220);
-
-            bitmap80.Save(@"picture_80.bmp", ImageFormat.Bmp);
-            bitmap160.Save(@"picture_160.bmp", ImageFormat.Bmp);
-            bitmap220.Save(@"picture_220.bmp", ImageFormat.Bmp);
-
-            Bitmap bmp = new Bitmap(W, H);
-            Graphics g = Graphics.FromImage(bmp);
-            //g.Clear(Color.Pink);
-
-            g.DrawImage(bitmap80, 0, 0);
-            g.DrawImage(bitmap160, 305, 0);
-            g.DrawImage(bitmap220, 305 * 2, 0);
-
-            pictureBox1.Image = bmp;
-
-            //pictureBox1.Image = bitmap160;
-            //pictureBox1.Image = bitmap220;
-
-            richTextBox1.Text += "OK\n";
-        }
-
-        public static Bitmap returnAlpha(Bitmap bmp, int alpha)
-        {
-            Color col;
-            Bitmap bmp2 = new Bitmap(bmp);
-            int W = bmp.Width;
-            int H = bmp.Height;
-
-            for (int i = 0; i < W; i++)
-            {
-                for (int j = 0; j < H; j++)
-                {
-                    col = bmp.GetPixel(i, j);
-                    if ((col.A - alpha) >= 0)
-                    {
-                        bmp2.SetPixel(i, j, Color.FromArgb(Math.Abs(col.A - alpha), col.R, col.G, col.B));
-                        //bmp2.SetPixel(i, j, Color.FromArgb(10, col.R, col.G, col.B));
-                    }
-                }
-            }
-            return bmp2;
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -800,40 +727,9 @@ namespace vcs_Draw_Bitmap
         {
         }
 
-        //二值化對比 ST
-        int binary = 40;
         private void button18_Click(object sender, EventArgs e)
         {
-            //二值化對比 0 ~ 255
-
-            binary += 13;
-            if (binary > 255)
-                binary -= 255;
-
-            richTextBox1.Text += "二值化對比 = " + binary.ToString() + "\n";
-
-            Bitmap bmp = new Bitmap(filename);
-
-            int cutoff = binary * 3;
-
-            for (int y = 0; y < bmp.Height; y++)
-            {
-                for (int x = 0; x < bmp.Width; x++)
-                {
-                    Color clr = bmp.GetPixel(x, y);
-                    if (clr.R + clr.G + clr.B > cutoff)
-                    {
-                        bmp.SetPixel(x, y, Color.White);
-                    }
-                    else
-                    {
-                        bmp.SetPixel(x, y, Color.Black);
-                    }
-                }
-            }
-            pictureBox1.Image = bmp;
         }
-        //二值化對比 SP
 
         private void button19_Click(object sender, EventArgs e)
         {
