@@ -14,6 +14,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Imaging;   //for PixelFormat
+
 namespace MouseControl
 {
     public partial class Form1 : Form
@@ -74,7 +76,7 @@ namespace MouseControl
             notifyicon1.Text = "Clicker";
             this.Icon = notifyicon1.Icon;
             notifyicon1.Click += new EventHandler(notifyicon1_Click);
-            this.pictureBox1.Image = GenerateBitmap(System.Drawing.Color.Green, new Size(20, 20));
+            this.pictureBox1.Image = GenerateBitmap(Color.Green);
         }
 
         void notifyicon1_Click(object sender, EventArgs e)
@@ -84,9 +86,11 @@ namespace MouseControl
             Win32Native.Methods.SetForegroundWindow(this.Handle);
         }
 
-        Bitmap GenerateBitmap(Color c, Size s)
+        Bitmap GenerateBitmap(Color c)
         {
-            Bitmap bmp = new Bitmap(s.Width, s.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            int w = 64;
+            int h = 64;
+            Bitmap bmp = new Bitmap(w, h, PixelFormat.Format32bppArgb);
             Graphics g = Graphics.FromImage(bmp);
             g.Clear(c);
             g.Dispose();
@@ -115,8 +119,7 @@ namespace MouseControl
             }
             else
             {
-                Console.WriteLine(e.Keys.ToString());
-                Console.WriteLine(e.VirtualKeyCode.ToString());
+                richTextBox1.Text += "你按了 : " + e.Keys.ToString() + "\t" + e.VirtualKeyCode.ToString() + "\n";
             }
         }
 
@@ -134,6 +137,7 @@ namespace MouseControl
                 }
                 catch (Exception ex)
                 {
+                    richTextBox1.Text += "xxxxxxx\n";
                     Console.WriteLine(ex.StackTrace.ToString());
                     break;
                 }
@@ -234,7 +238,7 @@ namespace MouseControl
 
             if (isWorking)
             {
-                ChangeStateView(System.Drawing.Color.Red);
+                ChangeStateView(Color.Red);
                 MessageBox.Show("開始自動連點!\r\n本程式自動縮小。", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(AutoClicking), this.hScrollBar1.Value);
                 this.Hide();
@@ -243,14 +247,14 @@ namespace MouseControl
             else
             {
                 notifyicon1_Click(this.notifyicon1, new EventArgs());
-                ChangeStateView(System.Drawing.Color.Green);
+                ChangeStateView(Color.Green);
             }
         }
 
         void ChangeStateView(Color c)
         {
             this.pictureBox1.Image.Dispose();
-            this.pictureBox1.Image = GenerateBitmap(c, new Size(20, 20));
+            this.pictureBox1.Image = GenerateBitmap(c);
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
