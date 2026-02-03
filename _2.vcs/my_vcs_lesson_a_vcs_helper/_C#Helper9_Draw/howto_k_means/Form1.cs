@@ -28,11 +28,13 @@ namespace howto_k_means
             Brushes.Pink, Brushes.LightGreen, Brushes.LightBlue, Brushes.Yellow,
             Brushes.Orange, Brushes.Lime, Brushes.Cyan, Brushes.White,
         };
+
         private Pen[] PointPens =
         {
             Pens.Red, Pens.Green, Pens.Blue, Pens.Black,
             Pens.Red, Pens.Green, Pens.Blue, Pens.Black,
         };
+
         private Brush[] CentroidBrushes =
         {
             Brushes.Red, Brushes.Green, Brushes.Blue, Brushes.Yellow,
@@ -43,6 +45,20 @@ namespace howto_k_means
         private void Form1_Load(object sender, EventArgs e)
         {
             MaxClusters = PointBrushes.Length;
+
+            Random rand = new Random();
+
+            int W = picItems.Width;
+            int H = picItems.Height;
+            for (int i = 0; i < 3; i++)
+            {
+                int x = rand.Next(W);
+                int y = rand.Next(H);
+                richTextBox1.Text += "x = " + x.ToString() + ", y = " + y.ToString() + "\n";
+                Seeds.Add(new Point(x, y));
+            }
+            Centroids.Clear();
+            picItems.Refresh();
         }
 
         private void picItems_Paint(object sender, PaintEventArgs e)
@@ -61,15 +77,13 @@ namespace howto_k_means
             // Draw the centroids.
             for (int i = 0; i < Centroids.Count; i++)
             {
-                e.Graphics.DrawRect(Centroids[i],
-                    CentroidBrushes[i % MaxClusters], Pens.Black, RADIUS);
+                e.Graphics.DrawRect(Centroids[i], CentroidBrushes[i % MaxClusters], Pens.Black, RADIUS);
             }
 
             // Draw the seeds.
             for (int i = 0; i < Seeds.Count; i++)
             {
-                e.Graphics.DrawCross(Color.Black, Color.White,
-                    Seeds[i], 2 * RADIUS);
+                e.Graphics.DrawCross(Color.Black, Color.White, Seeds[i], 2 * RADIUS);
             }
         }
 
@@ -92,22 +106,17 @@ namespace howto_k_means
 
             // Make the points.
             Random rand = new Random();
-            double max_r = Math.Min(
-                picItems.ClientSize.Width,
-                picItems.ClientSize.Height) / 6;
+            double max_r = Math.Min(picItems.ClientSize.Width, picItems.ClientSize.Height) / 6;
             int num_points = int.Parse(txtNumPoints.Text);
             for (int i = 0; i < num_points; i++)
             {
                 int seed_num = rand.Next(Seeds.Count);
-                double r =
-                    max_r * rand.NextDouble() +
-                    max_r * rand.NextDouble();
+                double r = max_r * rand.NextDouble() + max_r * rand.NextDouble();
                 double theta = rand.Next(360);
                 float x = Seeds[seed_num].X + (float)(r * Math.Cos(theta));
                 float y = Seeds[seed_num].Y + (float)(r * Math.Sin(theta));
                 Points.Add(new PointData(x, y, 0));
             }
-
             picItems.Refresh();
         }
 
@@ -116,8 +125,7 @@ namespace howto_k_means
             double total = 0;
             foreach (PointData point_data in points)
             {
-                total += Distance2(point_data.Location,
-                    centroids[point_data.ClusterNum]);
+                total += Distance2(point_data.Location, centroids[point_data.ClusterNum]);
             }
             return total;
         }
@@ -128,6 +136,7 @@ namespace howto_k_means
             float dy = point1.Y - point2.Y;
             return dx * dx + dy * dy;
         }
+
         private double Distance(PointF point1, PointF point2)
         {
             float dx = point1.X - point2.X;
@@ -143,13 +152,11 @@ namespace howto_k_means
             int[] num_points = new int[num_clusters];
             foreach (PointData point in Points)
             {
-                double best_dist =
-                    Distance(point.Location, Centroids[0]);
+                double best_dist = Distance(point.Location, Centroids[0]);
                 int best_cluster = 0;
                 for (int i = 1; i < num_clusters; i++)
                 {
-                    double test_dist =
-                        Distance(point.Location, Centroids[i]);
+                    double test_dist = Distance(point.Location, Centroids[i]);
                     if (test_dist < best_dist)
                     {
                         best_dist = test_dist;
@@ -166,9 +173,7 @@ namespace howto_k_means
             List<PointF> new_centroids = new List<PointF>();
             for (int i = 0; i < num_clusters; i++)
             {
-                new_centroids.Add(new PointF(
-                    new_centers[i].X / num_points[i],
-                    new_centers[i].Y / num_points[i]));
+                new_centroids.Add(new PointF(new_centers[i].X / num_points[i], new_centers[i].Y / num_points[i]));
             }
 
             // See if the centroids have moved.
@@ -176,8 +181,7 @@ namespace howto_k_means
             for (int i = 0; i < num_clusters; i++)
             {
                 const float min_change = 0.5f;
-                if ((Math.Abs(Centroids[i].X - new_centroids[i].X) > min_change) ||
-                    (Math.Abs(Centroids[i].Y - new_centroids[i].Y) > min_change))
+                if ((Math.Abs(Centroids[i].X - new_centroids[i].X) > min_change) || (Math.Abs(Centroids[i].Y - new_centroids[i].Y) > min_change))
                 {
                     centroids_changed = true;
                     break;
@@ -186,11 +190,9 @@ namespace howto_k_means
             if (!centroids_changed)
             {
                 tmrUpdate.Enabled = false;
-                richTextBox1.Text += "Score: " + Score().ToString() +
-    ", # Steps: " + NumSteps.ToString() + "\n";
+                richTextBox1.Text += "Score: " + Score().ToString() + ", # Steps: " + NumSteps.ToString() + "\n";
                 return;
             }
-
             // Update the centroids.
             Centroids = new_centroids;
         }
@@ -198,17 +200,23 @@ namespace howto_k_means
         private void btnMakeClusters_Click(object sender, EventArgs e)
         {
             int num_clusters = int.Parse(txtNumClusters.Text);
-            if (Points.Count < num_clusters) return;
+            if (Points.Count < num_clusters)
+            {
+                return;
+            }
 
             // Reset the data.
             // Pick random centroids.
             Centroids = new List<PointF>();
             Points.Randomize();
             for (int i = 0; i < num_clusters; i++)
+            {
                 Centroids.Add(Points[i].Location);
+            }
             foreach (PointData point_data in Points)
+            {
                 point_data.ClusterNum = 0;
-
+            }
             NumSteps = 0;
             picItems.Refresh();
             tmrUpdate.Enabled = true;
@@ -236,9 +244,13 @@ namespace howto_k_means
         private void picItems_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
+            {
                 Seeds.Add(e.Location);
+            }
             else
+            {
                 Points.Add(new PointData(e.Location, 0));
+            }
             Centroids.Clear();
             picItems.Refresh();
         }
@@ -257,7 +269,9 @@ namespace howto_k_means
             // Divide by 10 so speed is between 1 and 20.
             int fps = hscrFps.Value / 10;
             if (fps < 1)
+            {
                 fps = 1;
+            }
             lb_fps.Text = fps.ToString();
             tmrUpdate.Interval = 1000 / fps;
         }

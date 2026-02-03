@@ -26,7 +26,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 
 def show():
-    plt.show()
+    # plt.show()
     pass
 
 
@@ -229,6 +229,7 @@ for getData in getDatas:
 
 print("------------------------------------------------------------")  # 60個
 
+""" NG
 # ch1_15.py
 from pygal.maps.world import COUNTRIES
 
@@ -242,7 +243,7 @@ from pygal.maps.world import COUNTRIES
 
 
 def getCountryCode(countryName):
-    """輸入國家名稱回傳國家代碼"""
+    # 輸入國家名稱回傳國家代碼
     for dictCode, dictName in COUNTRIES.items():  # 搜尋國家與國家代碼字典
         if dictName == countryName:
             return dictCode  # 如果找到則回傳國家代碼
@@ -316,7 +317,7 @@ from pygal.maps.world import COUNTRIES
 
 
 def getCountryCode(countryName):
-    """輸入國家名稱回傳國家代碼"""
+    # 輸入國家名稱回傳國家代碼
     for dictCode, dictName in COUNTRIES.items():  # 搜尋國家與國家代碼字典
         if dictName == countryName:
             return dictCode  # 如果找到則回傳國家代碼
@@ -350,7 +351,7 @@ from pygal.maps.world import COUNTRIES
 
 
 def getCountryCode(countryName):
-    """輸入國家名稱回傳國家代碼"""
+    # 輸入國家名稱回傳國家代碼
     for dictCode, dictName in COUNTRIES.items():  # 搜尋國家與國家代碼字典
         if dictName == countryName:
             return dictCode  # 如果找到則回傳國家代碼
@@ -382,7 +383,7 @@ worldMap.title = "World Population in 2000"
 worldMap.add("Over 1000000000", dict1)
 worldMap.add("Under 1000000000", dict2)
 worldMap.render_to_file("tmp_out1_22.svg")  # 儲存地圖檔案
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 # ch1_23.py
@@ -599,7 +600,7 @@ plt.title("Weather Report, Jan. 2017", fontsize=24)
 plt.xlabel("", fontsize=14)
 plt.ylabel("Temperature (C)", fontsize=14)
 plt.tick_params(axis="both", labelsize=12, color="red")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -618,12 +619,12 @@ plt.title("Weather Report, Jan. 2017", fontsize=24)
 plt.xlabel("", fontsize=14)
 plt.ylabel("Temperature (C)", fontsize=14)
 plt.tick_params(axis="both", labelsize=12, color="red")
-plt.show()
-
+show()
 
 print("------------------------------------------------------------")  # 60個
 
 # ch2_17.py
+
 from datetime import datetime
 
 dateObj = datetime.strptime("2017/1/1", "%Y/%m/%d")
@@ -651,7 +652,7 @@ plt.title("Weather Report, Jan. 2017", fontsize=24)
 plt.xlabel("", fontsize=14)
 plt.ylabel("Temperature (C)", fontsize=14)
 plt.tick_params(axis="both", labelsize=12, color="red")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -676,7 +677,7 @@ plt.title("Weather Report, Jan. 2017", fontsize=24)
 plt.xlabel("", fontsize=14)
 plt.ylabel("Temperature (C)", fontsize=14)
 plt.tick_params(axis="both", labelsize=12, color="red")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -701,7 +702,7 @@ plt.title("Weather Report, Jan. 2017", fontsize=24)
 plt.xlabel("", fontsize=14)
 plt.ylabel("Temperature (C)", fontsize=14)
 plt.tick_params(axis="both", labelsize=12, color="red")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -734,7 +735,7 @@ plt.title("Weather Report, Jan. 2017", fontsize=24)
 plt.xlabel("", fontsize=14)
 plt.ylabel("Temperature (C)", fontsize=14)
 plt.tick_params(axis="both", labelsize=12, color="red")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -768,7 +769,7 @@ plt.title("Weather Report, Jan. 2017", fontsize=24)
 plt.xlabel("", fontsize=14)
 plt.ylabel("Temperature (C)", fontsize=14)
 plt.tick_params(axis="both", labelsize=12, color="red")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -829,7 +830,6 @@ sh = wb.sheets()[0]
 rows = sh.nrows
 for row in range(rows):
     print(sh.row_values(row))
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1599,7 +1599,7 @@ tw = pd.Series(population, index=range(1950, 2011, 10))
 tw.plot(title="Population in Taiwan")
 plt.xlabel("Year")
 plt.ylabel("Population")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1614,7 +1614,7 @@ tw = pd.DataFrame(cities, columns=["population"], index=cities["town"])
 tw.plot(title="Population in the World")
 plt.xlabel("City")
 plt.ylabel("Population")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1629,7 +1629,7 @@ tw = pd.DataFrame(cities, columns=["population"], index=cities["town"])
 tw.plot(title="Population in the World", kind="bar")
 plt.xlabel("City")
 plt.ylabel("Population")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1644,7 +1644,7 @@ tw = pd.DataFrame(cities, columns=["population", "area"], index=cities["town"])
 
 tw.plot(title="Population in the World")
 plt.xlabel("City")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1659,7 +1659,7 @@ tw = pd.DataFrame(cities, columns=["population", "area"], index=cities["town"])
 
 tw.plot(title="Population in the World")
 plt.xlabel("City")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1683,7 +1683,7 @@ tw["population"].plot(ax=ax, rot=90)  # 繪製人口數線
 tw["area"].plot(ax=ax2, style="g-")  # 繪製面積線
 ax.legend(loc=1)  # 圖例位置在右上
 ax2.legend(loc=2)  # 圖例位置在左上
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1707,7 +1707,7 @@ tw["population"].plot(ax=ax, rot=90)  # 繪製人口數線
 tw["area"].plot(ax=ax2, style="g-")  # 繪製面積線
 ax.legend(loc=1)  # 圖例位置在右上
 ax2.legend(loc=2)  # 圖例位置在左上
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1717,7 +1717,7 @@ fruits = ["Apples", "Bananas", "Grapes", "Pears", "Oranges"]
 s = pd.Series([2300, 5000, 1200, 2500, 2900], index=fruits, name="Fruits Shop")
 explode = [0.4, 0, 0, 0.2, 0]
 s.plot.pie(explode=explode, autopct="%1.2f%%")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1739,7 +1739,7 @@ ts = pd.Series(data, index=dates)
 ts.plot(title="Data in Time Series")
 plt.xlabel("Date")
 plt.ylabel("Data")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1888,7 +1888,7 @@ iris.plot(x="sepal_len", y="sepal_wd", kind="scatter")
 plt.xlabel("Sepal Length")
 plt.ylabel("Sepal Width")
 plt.title("Iris Sepal length and width anslysis")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1901,7 +1901,7 @@ plt.plot(iris["sepal_len"], iris["sepal_wd"], "*", color="g")
 plt.xlabel("Sepal Length")
 plt.ylabel("Sepal Width")
 plt.title("Iris Sepal length and width anslysis")
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1937,7 +1937,7 @@ plt.xlabel("Sepal Length")
 plt.ylabel("Sepal Width")
 plt.title("Iris Sepal length and width anslysis")
 plt.legend()
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1952,8 +1952,7 @@ iris_mean = iris.groupby("species", as_index=False).mean()
 iris_mean.plot(kind="bar")
 # 刻度處理
 plt.xticks(iris_mean.index, iris_mean["species"], rotation=0)
-
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1968,8 +1967,7 @@ iris_mean = iris.groupby("species", as_index=False).mean()
 iris_mean.plot(kind="bar")
 # 刻度處理
 plt.xticks(iris_mean.index, iris_mean["species"], rotation=0)
-
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1984,8 +1982,7 @@ iris_mean = iris.groupby("species", as_index=False).mean()
 iris_mean.plot(kind="bar", stacked=True)
 # 刻度處理
 plt.xticks(iris_mean.index, iris_mean["species"], rotation=0)
-
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2000,8 +1997,7 @@ iris_mean = iris.groupby("species", as_index=False).mean()
 iris_mean.plot(kind="barh", stacked=True)
 # 刻度處理
 plt.yticks(iris_mean.index, iris_mean["species"], rotation=0)
-
-plt.show()
+show()
 
 print("------------------------------------------------------------")  # 60個
 
