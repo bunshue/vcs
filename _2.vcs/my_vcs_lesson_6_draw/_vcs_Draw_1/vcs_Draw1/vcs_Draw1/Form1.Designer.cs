@@ -60,7 +60,6 @@
             this.button25 = new System.Windows.Forms.Button();
             this.button24 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button27 = new System.Windows.Forms.Button();
             this.bt_save = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
@@ -203,7 +202,6 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(200, 60);
             this.button8.TabIndex = 24;
-            this.button8.Text = "在Form上印出滑鼠游標形狀";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -420,18 +418,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(100, 100);
             this.panel1.TabIndex = 44;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox1.Location = new System.Drawing.Point(386, 627);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(104, 23);
-            this.checkBox1.TabIndex = 45;
-            this.checkBox1.Text = "滑鼠畫圖";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // button27
             // 
@@ -677,7 +663,6 @@
             this.Controls.Add(this.bt_save);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button27);
-            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button24);
             this.Controls.Add(this.button26);
@@ -713,15 +698,11 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
-            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_uac)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_text)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_count)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -758,7 +739,6 @@
         private System.Windows.Forms.Button button25;
         private System.Windows.Forms.Button button24;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button button27;
         private System.Windows.Forms.Button bt_save;
         private System.Windows.Forms.Button bt_clear;

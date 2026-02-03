@@ -70,5 +70,17 @@ namespace vcs_SendTo_All.Properties {
                 this["show_audio_files_only"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool show_file_path {
+            get {
+                return ((bool)(this["show_file_path"]));
+            }
+            set {
+                this["show_file_path"] = value;
+            }
+        }
     }
 }

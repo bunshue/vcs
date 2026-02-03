@@ -876,6 +876,46 @@ namespace vcs_Draw5_Image_ImageAttributes
 
         private void button19_Click(object sender, EventArgs e)
         {
+            //原始資料
+
+            int N = 10;
+            PointF[] pts = new PointF[N];
+
+            for (int i = 0; i < N; i++)
+            {
+                pts[i].X = 50 * i;
+                pts[i].Y = 0;
+            }
+
+            Matrix matrix = new Matrix();
+
+            //float angle = 45;
+            //matrix.Rotate(angle);  // 旋轉
+            matrix.Translate(200, 100);  // 平移, 右移下移
+
+            g.Clear(Color.Pink);
+
+            for (int i = 0; i < N; i++)
+            {
+                g.FillEllipse(Brushes.Red, pts[i].X - 15, pts[i].Y - 15, 30, 30);
+            }
+
+            matrix.TransformPoints(pts);
+
+            for (int i = 0; i < N; i++)
+            {
+                g.FillEllipse(Brushes.Green, pts[i].X - 10, pts[i].Y - 10, 20, 20);
+            }
+
+            //matrix.Reset();
+            matrix.Translate(250, 150);  // 平移, 右移下移
+
+            for (int i = 0; i < N; i++)
+            {
+                g.FillEllipse(Brushes.Blue, pts[i].X - 5, pts[i].Y - 5, 10, 10);
+            }
+
+            pictureBox1.Image = bitmap1;
 
         }
 

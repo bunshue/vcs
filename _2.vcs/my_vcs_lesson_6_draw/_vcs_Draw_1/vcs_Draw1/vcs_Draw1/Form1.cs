@@ -21,8 +21,6 @@ namespace vcs_Draw1
         Bitmap bitmap1;
         Font f;
 
-        bool flag_print_mouse_cursor = false;
-
         string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
         public Form1()
@@ -119,14 +117,12 @@ namespace vcs_Draw1
             button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
             comboBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            checkBox1.Location = new Point(x_st + dx * 1 - dd * 1, y_st + dy * 10);
             bt_eraser.Location = new Point(x_st + dx * 2 - dd * 2, y_st + dy * 10);
             bt_reset.Location = new Point(x_st + dx * 3 - dd * 3, y_st + dy * 10);
             bt_save.Location = new Point(x_st + dx * 4 - dd * 4, y_st + dy * 10);
 
             richTextBox1.Size = new Size(600, 200);
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 11);
-            //richTextBox1.Size = new Size(richTextBox1.Size.Width, this.Height - richTextBox1.Location.Y + 80);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             pictureBox1.Size = new Size(400, 500);
@@ -1382,18 +1378,6 @@ namespace vcs_Draw1
 
         private void button8_Click(object sender, EventArgs e)
         {
-            if (button8.Text == "在Form上印出滑鼠游標形狀")
-            {
-                flag_print_mouse_cursor = true;
-                this.Cursor = Cursors.Hand;
-                button8.Text = "停止印出滑鼠游標形狀";
-            }
-            else
-            {
-                flag_print_mouse_cursor = false;
-                this.Cursor = Cursors.Default;
-                button8.Text = "在Form上印出滑鼠游標形狀";
-            }
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -1786,69 +1770,6 @@ namespace vcs_Draw1
 
         private void button18_Click(object sender, EventArgs e)
         {
-        }
-
-        int x_old = 0;
-        int y_old = 0;
-
-        bool flag_eraser_mode = false;
-        bool enable_erase = false;
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked == true)
-            {
-                flag_eraser_mode = true;
-                pictureBox1.Visible = false;
-                panel1.Visible = false;
-
-                g = this.CreateGraphics();
-                p = new Pen(Color.Red, 6);
-            }
-            else
-            {
-                flag_eraser_mode = false;
-                pictureBox1.Visible = true;
-                panel1.Visible = true;
-            }
-        }
-
-        private void Form1_MouseDown(object sender, MouseEventArgs e)
-        {
-            //richTextBox1.Text += "Mouse Down\n";
-            enable_erase = true;
-
-            x_old = e.X;
-            y_old = e.Y;
-        }
-
-        private void Form1_MouseUp(object sender, MouseEventArgs e)
-        {
-            //richTextBox1.Text += "Mouse Up\n";
-            enable_erase = false;
-
-            if (flag_print_mouse_cursor == true)
-            {
-                Graphics myGraphics = this.CreateGraphics();
-                Cursor.Draw(myGraphics, new Rectangle(e.X, e.Y, 10, 10));
-            }
-        }
-
-        private void Form1_MouseMove(object sender, MouseEventArgs e)
-        {
-            //this.Text = e.X.ToString() + ", " + e.Y.ToString();
-            this.Text = String.Format("X：{0}, Y：{1}", e.X, e.Y);    //格式化字串
-
-            if ((flag_eraser_mode == true) && (enable_erase == true))
-            {
-                sb = new SolidBrush(Color.Red);
-                //g.FillEllipse(sb, e.X, e.Y, 10, 10);
-
-                g.DrawLine(new Pen(Color.Red, 10), x_old, y_old, e.X, e.Y);
-
-                x_old = e.X;
-                y_old = e.Y;
-            }
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -2769,7 +2690,6 @@ namespace vcs_Draw1
         }
     }
 }
-
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個

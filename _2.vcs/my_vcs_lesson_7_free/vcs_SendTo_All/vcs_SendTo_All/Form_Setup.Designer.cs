@@ -56,12 +56,15 @@
             this.groupBox_auto_save = new System.Windows.Forms.GroupBox();
             this.rb_auto_save_off = new System.Windows.Forms.RadioButton();
             this.rb_auto_save_on = new System.Windows.Forms.RadioButton();
+            this.groupBox_show_file_content = new System.Windows.Forms.GroupBox();
+            this.cb_show_file_path = new System.Windows.Forms.CheckBox();
             this.groupBox_file.SuspendLayout();
             this.groupBox_video.SuspendLayout();
             this.groupBox_search.SuspendLayout();
             this.groupBox_search_type.SuspendLayout();
             this.groupBox_text_mode.SuspendLayout();
             this.groupBox_auto_save.SuspendLayout();
+            this.groupBox_show_file_content.SuspendLayout();
             this.SuspendLayout();
             // 
             // tb_filesize_mb
@@ -325,7 +328,7 @@
             this.groupBox_text_mode.Controls.Add(this.rb_text_mode_ascii);
             this.groupBox_text_mode.Location = new System.Drawing.Point(18, 320);
             this.groupBox_text_mode.Name = "groupBox_text_mode";
-            this.groupBox_text_mode.Size = new System.Drawing.Size(240, 56);
+            this.groupBox_text_mode.Size = new System.Drawing.Size(290, 56);
             this.groupBox_text_mode.TabIndex = 52;
             this.groupBox_text_mode.TabStop = false;
             this.groupBox_text_mode.Text = "文字模式";
@@ -334,7 +337,7 @@
             // 
             this.rb_text_mode_binary.AutoSize = true;
             this.rb_text_mode_binary.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_text_mode_binary.Location = new System.Drawing.Point(119, 21);
+            this.rb_text_mode_binary.Location = new System.Drawing.Point(131, 21);
             this.rb_text_mode_binary.Name = "rb_text_mode_binary";
             this.rb_text_mode_binary.Size = new System.Drawing.Size(100, 28);
             this.rb_text_mode_binary.TabIndex = 29;
@@ -360,7 +363,7 @@
             this.groupBox_auto_save.Controls.Add(this.rb_auto_save_on);
             this.groupBox_auto_save.Location = new System.Drawing.Point(18, 393);
             this.groupBox_auto_save.Name = "groupBox_auto_save";
-            this.groupBox_auto_save.Size = new System.Drawing.Size(240, 56);
+            this.groupBox_auto_save.Size = new System.Drawing.Size(290, 56);
             this.groupBox_auto_save.TabIndex = 53;
             this.groupBox_auto_save.TabStop = false;
             this.groupBox_auto_save.Text = "自動存檔";
@@ -369,7 +372,7 @@
             // 
             this.rb_auto_save_off.AutoSize = true;
             this.rb_auto_save_off.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_auto_save_off.Location = new System.Drawing.Point(126, 16);
+            this.rb_auto_save_off.Location = new System.Drawing.Point(133, 16);
             this.rb_auto_save_off.Name = "rb_auto_save_off";
             this.rb_auto_save_off.Size = new System.Drawing.Size(76, 28);
             this.rb_auto_save_off.TabIndex = 29;
@@ -389,11 +392,35 @@
             this.rb_auto_save_on.Text = "開啟";
             this.rb_auto_save_on.UseVisualStyleBackColor = true;
             // 
+            // groupBox_show_file_content
+            // 
+            this.groupBox_show_file_content.Controls.Add(this.cb_show_file_path);
+            this.groupBox_show_file_content.Location = new System.Drawing.Point(18, 455);
+            this.groupBox_show_file_content.Name = "groupBox_show_file_content";
+            this.groupBox_show_file_content.Size = new System.Drawing.Size(290, 56);
+            this.groupBox_show_file_content.TabIndex = 54;
+            this.groupBox_show_file_content.TabStop = false;
+            this.groupBox_show_file_content.Text = "檢視檔案內容";
+            // 
+            // cb_show_file_path
+            // 
+            this.cb_show_file_path.AutoSize = true;
+            this.cb_show_file_path.Checked = true;
+            this.cb_show_file_path.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_show_file_path.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_show_file_path.Location = new System.Drawing.Point(25, 21);
+            this.cb_show_file_path.Name = "cb_show_file_path";
+            this.cb_show_file_path.Size = new System.Drawing.Size(245, 28);
+            this.cb_show_file_path.TabIndex = 32;
+            this.cb_show_file_path.Text = "顯示檔案路徑與檔名";
+            this.cb_show_file_path.UseVisualStyleBackColor = true;
+            // 
             // Form_Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(745, 554);
+            this.Controls.Add(this.groupBox_show_file_content);
             this.Controls.Add(this.groupBox_auto_save);
             this.Controls.Add(this.groupBox_text_mode);
             this.Controls.Add(this.groupBox_search_type);
@@ -419,6 +446,8 @@
             this.groupBox_text_mode.PerformLayout();
             this.groupBox_auto_save.ResumeLayout(false);
             this.groupBox_auto_save.PerformLayout();
+            this.groupBox_show_file_content.ResumeLayout(false);
+            this.groupBox_show_file_content.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -454,5 +483,7 @@
         private System.Windows.Forms.GroupBox groupBox_auto_save;
         private System.Windows.Forms.RadioButton rb_auto_save_off;
         private System.Windows.Forms.RadioButton rb_auto_save_on;
+        private System.Windows.Forms.GroupBox groupBox_show_file_content;
+        private System.Windows.Forms.CheckBox cb_show_file_path;
     }
 }

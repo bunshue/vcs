@@ -30,11 +30,14 @@ def show():
     pass
 
 
+import requests, bs4
+import re
+import csv
+import json
+import requests
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch6\ch6_1.py
 
 # ch6_1.py
 import hashlib
@@ -47,10 +50,7 @@ print("Hash Value(16進位) = ", data.hexdigest())
 print(type(data))  # 列出data資料型態
 print(type(data.hexdigest()))  # 列出哈希值資料型態
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch6\ch6_2.py
 
 # ch6_2.py
 import hashlib
@@ -64,16 +64,13 @@ print("Hash Value(16進位) = ", data.hexdigest())
 print(type(data))  # 列出data資料型態
 print(type(data.hexdigest()))  # 列出哈希值資料型態
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch6\ch6_3.py
 
 # ch6_3.py
 import hashlib
 
 data = hashlib.md5()  # 建立data物件
-filename = "data6_3.txt"
+filename = "data/data6_3.txt"
 
 with open(filename, "rb") as fn:  # 以二進位方式讀取檔案
     btxt = fn.read()
@@ -84,10 +81,7 @@ print("Hash Value(16進位) = ", data.hexdigest())
 print(type(data))  # 列出data資料型態
 print(type(data.hexdigest()))  # 列出哈希值資料型態
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch6\ch6_4.py
 
 # ch6_4.py
 import hashlib
@@ -100,35 +94,24 @@ print("Hash Value(16進位) = ", data.hexdigest())
 print(type(data))  # 列出data資料型態
 print(type(data.hexdigest()))  # 列出哈希值資料型態
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch6\ch6_5.py
 
 # ch6_5.py
 import hashlib
 
 print(hashlib.algorithms_available)  # 列出此平台可使用的哈希演算法
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch6\ch6_6.py
 
 # ch6_6.py
 import hashlib
 
 print(hashlib.algorithms_guaranteed)  # 列出跨平台可使用的哈希演算法
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch6\ch6_7.py
-
 # ch6_7.py
-import requests
-import json
-
+""" NG
 url = "http://opendata.epa.gov.tw/webapi/Data/REWIQA/?$orderby=SiteName&$\
 skip=0&$top=1000&format=json"
 try:
@@ -139,19 +122,15 @@ except Exception as err:
 
 print(aqijsons.text)  # 列印所下載的json檔案
 
-fn = "aqi.json"  # 建立欲儲存的json檔案
+fn = "tmp_aqi.json"  # 建立欲儲存的json檔案
 with open(fn, "w") as f:
-    json.dump(aqijsons.json(), f)  # 寫入json檔案至aqi.json
-
+    json.dump(aqijsons.json(), f)  # 寫入json檔案至tmp_aqi.json
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch6\ch6_8.py
-
 # ch6_8.py
-import json
 
-fn = "aqi.json"
+fn = "tmp_aqi.json"
 with open(fn) as fnObj:
     getDatas = json.load(fnObj)  # 讀json檔案
 
@@ -165,15 +144,11 @@ for getData in getDatas:
         % (county, siteid, pm25, sitename)
     )
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch6\ch6_9.py
-
 # ch6_9.py
-import json
 
-fn = "aqi.json"
+fn = "tmp_aqi.json"
 with open(fn) as fnObj:
     getDatas = json.load(fnObj)  # 讀json檔案
 
@@ -184,15 +159,11 @@ for getData in getDatas:
         pm25 = getData["PM2.5"]  # PM2.5值
         print("站台ID =%3s  PM2.5值 =%3s  站台名稱 = %s " % (siteid, pm25, sitename))
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch6\ch6_10.py
-
 # ch6_10.py
-import requests
+
 import hashlib
-import json
 
 url = "http://opendata.epa.gov.tw/webapi/Data/REWIQA/?$orderby=SiteName&$\
 skip=0&$top=1000&format=json"
@@ -207,19 +178,14 @@ data.update(aqijsons.text.encode("utf-8"))
 hashdata = data.hexdigest()
 print("環保署PM2.5的哈希值 = ", hashdata)
 
-fn = "out6_10.txt"
+fn = "tmp_out6_10.txt"
 with open(fn, "w") as fileobj:
     fileobj.write(hashdata)
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch6\ch6_11.py
-
+"""
 # ch6_11.py
-import requests
-import os
-import json
+
 import hashlib
 
 
@@ -242,7 +208,7 @@ def cal_hashvalue():
     hashdata = data.hexdigest()
     return hashdata  # 傳回哈希值
 
-
+""" NG
 url = "http://opendata.epa.gov.tw/webapi/Data/REWIQA/?$orderby=SiteName&$\
 skip=0&$top=1000&format=json"
 try:
@@ -272,17 +238,13 @@ else:  # 如果hashvalue.txt不存在
     print("哈希值 = ", newvalue)
     save_hashvalue()  # 儲存哈希值至hashvalue.txt
     save_newaqi()  # 儲存newaqi.son
-
-
+"""
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch6\ch6_12.py
-
 # ch6_12.py
-import csv
 
-infn = "AQI_20190814010150.csv"  # 來源檔案
-outfn = "out6_12.csv"  # 目的檔案
+infn = "data/AQI_20190814010150.csv"  # 來源檔案
+outfn = "tmp_out6_12.csv"  # 目的檔案
 with open(infn) as csvRFile:  # 開啟csv檔案供讀取
     csvReader = csv.reader(csvRFile)  # 讀檔案建立Reader物件
     listReport = list(csvReader)  # 將資料轉成串列
@@ -303,15 +265,11 @@ with open(outfn, "w", newline="") as csvOFile:  # 開啟csv檔案供寫入
                 % (row[0], row[1], row[2], row[3])
             )
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch6\ch6_13.py
-
 # ch6_13.py
-import csv
 
-infn = "out6_12.csv"  # 來源檔案
+infn = "tmp_out6_12.csv"  # 來源檔案
 with open(infn) as csvRFile:  # 開啟csv檔案供讀取
     csvReader = csv.reader(csvRFile)  # 讀檔案建立Reader物件
     listReport = list(csvReader)  # 將資料轉成串列
@@ -320,11 +278,7 @@ for row in listReport:  # 使用迴圈取新的欄位
     if row[0] == "臺北市":
         print("站台ID =%3s  PM2.5值 =%3s  站台名稱 = %s " % (row[1], row[2], row[3]))
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_1.py
 
 # ch7_1.py
 from selenium import webdriver
@@ -332,10 +286,7 @@ from selenium import webdriver
 browser = webdriver.Firefox()
 print(type(browser))
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_2.py
 
 # ch7_2.py
 from selenium import webdriver
@@ -344,10 +295,7 @@ driverPath = "D:\geckodriver\geckodriver.exe"
 browser = webdriver.Firefox(executable_path=driverPath)
 print(type(browser))
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_3.py
 
 # ch7_3.py
 from selenium import webdriver
@@ -356,10 +304,7 @@ dirverPath = "D:\geckodriver\chromedriver.exe"
 browser = webdriver.Chrome(dirverPath)
 print(type(browser))
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_4.py
 
 # ch7_4.py
 from selenium import webdriver
@@ -369,10 +314,7 @@ browser = webdriver.Firefox(executable_path=driverPath)
 url = "http://aaa.24ht.com.tw"
 browser.get(url)  # 網頁下載至瀏覽器
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_4_1.py
 
 # ch7_4_1.py
 from selenium import webdriver
@@ -383,10 +325,7 @@ url = "http://aaa.24ht.com.tw"
 browser.get(url)  # 網頁下載至瀏覽器
 print(browser.page_source)  # 列印網頁原始碼
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_4_2.py
 
 # ch7_4_2.py
 from selenium import webdriver
@@ -400,14 +339,10 @@ print("網頁url    = ", browser.current_url)  # 列印網頁url
 print("網頁連線id = ", browser.session_id)  # 網頁連線id
 print("瀏覽器功能 = \n", browser.capabilities)  # 瀏覽器功能設定訊息
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_4_3.py
 
 # ch7_4_3.py
 from selenium import webdriver
-import time
 
 urls = [
     "http://aaa.24ht.com.tw",
@@ -424,10 +359,7 @@ for url in urls:
 
 browser.quit()
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_5.py
 
 # ch7_5.py
 from selenium import webdriver
@@ -440,10 +372,7 @@ browser.get(url)  # 網頁下載至瀏覽器
 tag = browser.find_element_by_id("main")
 print(tag.tag_name)
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_6.py
 
 # ch7_6.py
 from selenium import webdriver
@@ -459,10 +388,7 @@ try:
 except:
     print("沒有找到相符的元素")
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_7.py
 
 # ch7_7.py
 from selenium import webdriver
@@ -494,8 +420,6 @@ for t5 in tag5:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_7_1.py
-
 # ch7_7_1.py
 from selenium import webdriver
 
@@ -513,10 +437,7 @@ print(n3.text)
 n4 = browser.find_element_by_xpath("//body/*/h4")
 print(n4.text)
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_7_2.py
 
 # ch7_7_2.py
 from selenium import webdriver
@@ -529,10 +450,7 @@ browser.get(url)  # 網頁下載至瀏覽器
 n1 = browser.find_element_by_xpath("//p")
 print(n1.text)
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_7_3.py
 
 # ch7_7_3.py
 from selenium import webdriver
@@ -549,8 +467,6 @@ print(n1.text)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_7_4.py
-
 # ch7_7_4.py
 from selenium import webdriver
 
@@ -566,8 +482,6 @@ print(n1.text)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_7_5.py
-
 # ch7_7_5.py
 from selenium import webdriver
 
@@ -579,10 +493,7 @@ browser.get(url)  # 網頁下載至瀏覽器
 pict = browser.find_element_by_xpath("//section/img")
 print(pict.get_attribute("src"))
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_7_6.py
 
 # ch7_7_6.py
 from selenium import webdriver
@@ -605,8 +516,6 @@ print("outerHTML : ", n5.get_attribute("outerHTML"))
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_7_7.py
-
 # ch7_7_7.py
 from selenium import webdriver
 
@@ -619,10 +528,7 @@ n = browser.find_element_by_xpath("//div[@id='Traveling']//a[contains(text(),'�
 print(n.get_attribute("outerHTML"))
 print(n.get_attribute("href"))
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_7_8.py
 
 # ch7_7_8.py
 from selenium import webdriver
@@ -639,14 +545,10 @@ n = browser.find_element_by_xpath("//div[@id='Traveling']//a[contains(text(),'�
 print(n.get_attribute("outerHTML"))
 print(n.get_attribute("href"))
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_8.py
 
 # ch7_8.py
 from selenium import webdriver
-import time
 
 driverPath = "D:\geckodriver\geckodriver.exe"
 browser = webdriver.Firefox(executable_path=driverPath)
@@ -658,14 +560,10 @@ print(type(eleLink))  # 列印eleLink資料類別
 time.sleep(5)  # 暫停5秒
 eleLink.click()
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_9.py
 
 # ch7_9.py
 from selenium import webdriver
-import time
 
 driverPath = "D:\geckodriver\geckodriver.exe"
 browser = webdriver.Firefox(executable_path=driverPath)
@@ -677,14 +575,10 @@ txtBox.send_keys("王永慶")  # 輸入表單資料
 time.sleep(5)  # 暫停5秒
 txtBox.submit()  # 送出表單
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_9_1.py
 
 # ch7_9_1.py
 from selenium import webdriver
-import time
 
 driverPath = "D:\geckodriver\geckodriver.exe"
 browser = webdriver.Firefox(executable_path=driverPath)
@@ -696,16 +590,11 @@ txtBox.send_keys("王永慶")  # 輸入表單資料
 time.sleep(5)  # 暫停5秒
 txtBox.submit()  # 送出表單
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_10.py
 
 # ch7_10.py
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-import time
 
 driverPath = "D:\geckodriver\geckodriver.exe"
 browser = webdriver.Firefox(executable_path=driverPath)
@@ -722,15 +611,11 @@ ele.send_keys(Keys.PAGE_UP)  # 網頁捲動到上一頁
 time.sleep(3)
 ele.send_keys(Keys.HOME)  # 網頁捲動到最上端
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_11.py
 
 # ch7_11.py
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-import time
 
 driverPath = "D:\geckodriver\geckodriver.exe"
 browser = webdriver.Firefox(executable_path=driverPath)
@@ -742,14 +627,10 @@ browser.refresh()  # 更新網頁
 time.sleep(3)
 browser.quit()  # 關閉網頁
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_12.py
 
 # ch7_12.py
 from selenium import webdriver
-import time
 
 url = "https://www.google.com"
 email = input("請輸入你的Google Email的帳號 : ")
@@ -761,14 +642,10 @@ browser.get(url)  # 網頁下載至瀏覽器
 
 browser.find_element_by_id("gb_70").click()
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_13.py
 
 # ch7_13.py
 from selenium import webdriver
-import time
 
 url = "https://www.google.com"
 email = input("請輸入你的Google Email的帳號 : ")
@@ -782,14 +659,10 @@ browser.find_element_by_id("gb_70").click()  # 按登入鈕
 browser.find_element_by_id("identifierId").send_keys(email)  # 輸入帳號
 time.sleep(3)
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_14.py
 
 # ch7_14.py
 from selenium import webdriver
-import time
 
 url = "https://www.google.com"
 email = input("請輸入你的Google Email的帳號 : ")
@@ -807,14 +680,10 @@ time.sleep(3)
 browser.find_element_by_xpath("//span[@class='RveJvd snByac']").click()
 time.sleep(3)
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_15.py
 
 # ch7_15.py
 from selenium import webdriver
-import time
 
 url = "https://www.google.com"
 email = input("請輸入你的Google Email的帳號 : ")
@@ -836,14 +705,10 @@ time.sleep(3)
 browser.find_element_by_xpath("//input[@type='password']").send_keys(pwd)
 time.sleep(3)
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_16.py
 
 # ch7_16.py
 from selenium import webdriver
-import time
 
 url = "https://www.google.com"
 email = input("請輸入你的Google Email的帳號 : ")
@@ -869,14 +734,10 @@ time.sleep(3)
 browser.find_element_by_xpath("//span[@class='RveJvd snByac']").click()
 time.sleep(3)
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch7\ch7_17.py
 
 # ch7_17.py
 from selenium import webdriver
-import time
 
 url = "https://opendata.epa.gov.tw/data/contents/aqi/"
 
@@ -893,27 +754,18 @@ time.sleep(3)
 browser.find_element_by_link_text("CSV").click()  # 按CSV鈕
 time.sleep(3)
 
-
 print("------------------------------------------------------------")  # 60個
 
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch8\ch8_1.py
-
 # ch8_1.py
-import requests, bs4
 
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
 ptthtml = requests.get(url, cookies={"over18": "1"})
 objSoup = bs4.BeautifulSoup(ptthtml.text, "lxml")
 print("列印BeautifulSoup物件資料型態 ", type(objSoup))
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch8\ch8_2.py
-
 # ch8_2.py
-import requests, bs4
 
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
 ptthtml = requests.get(url, cookies={"over18": "1"})
@@ -926,13 +778,9 @@ for p in pttdivs:
         articles += 1
 print("本頁的文章數量 = ", articles)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch8\ch8_3.py
-
 # ch8_3.py
-import requests, bs4
 
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
 ptthtml = requests.get(url, cookies={"over18": "1"})
@@ -961,13 +809,9 @@ for article in articles:
     print("文章作者 : ", article["author"])
     print("文章連結 : ", article["href"], "\n")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch8\ch8_4.py
-
 # ch8_4.py
-import requests, bs4
 
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
 ptthtml = requests.get(url, cookies={"over18": "1"})
@@ -999,13 +843,9 @@ for article in articles:
     print("文章連結 : ", article["href"])
     print("推文數量 : ", article["push_num"], "\n")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch8\ch8_5.py
-
 # ch8_5.py
-import requests, bs4
 
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
 ptthtml = requests.get(url, cookies={"over18": "1"})
@@ -1048,13 +888,9 @@ for article in articles:
         print("文章連結 : ", article["href"])
         print("推文數量 : ", article["push_num"], "\n")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch8\ch8_6.py
-
 # ch8_6.py
-import requests, bs4
 
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
 ptthtml = requests.get(url, cookies={"over18": "1"})
@@ -1100,14 +936,9 @@ for article in articles:
         print("文章連結 : ", article["href"])
         print("推文數量 : ", article["push_num"], "\n")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch8\ch8_7.py
-
 # ch8_7.py
-import requests, bs4
-import json
 
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
 ptthtml = requests.get(url, cookies={"over18": "1"})
@@ -1136,17 +967,13 @@ for p in pttdivs:
             }
         )
 
-fn = "out8_7.json"
+fn = "tmp_out8_7.json"
 with open(fn, "w", encoding="utf-8") as fnObj:
     json.dump(articles, fnObj, ensure_ascii=False, indent=2)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch8\ch8_8.py
-
 # ch8_8.py
-import requests, bs4
 
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
 ptthtml = requests.get(url, cookies={"over18": "1"})
@@ -1156,13 +983,9 @@ div_page = objSoup.find("div", "btn-group btn-group-paging")
 print(type(div_page))
 print(div_page)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch8\ch8_8_1.py
-
 # ch8_8_1.py
-import requests, bs4
 
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
 ptthtml = requests.get(url, cookies={"over18": "1"})
@@ -1172,13 +995,9 @@ div_page = objSoup.find("div", "btn-group-paging")
 print(type(div_page))
 print(div_page)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch8\ch8_9.py
-
 # ch8_9.py
-import requests, bs4
 
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
 ptthtml = requests.get(url, cookies={"over18": "1"})
@@ -1189,14 +1008,9 @@ last_page = div_page.find_all("a")
 print(type(last_page))  # 列出last_page資料型態
 print(last_page)  # 列出last_page
 
-
 print("------------------------------------------------------------")  # 60個
 
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch8\ch8_10.py
-
 # ch8_10.py
-import requests, bs4
 
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
 ptthtml = requests.get(url, cookies={"over18": "1"})
@@ -1207,13 +1021,9 @@ last_page = div_page.find_all("a")[1]
 print(type(last_page))  # 列出last_page資料型態
 print(last_page)  # 列出last_page
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch8\ch8_11.py
-
 # ch8_11.py
-import requests, bs4
 
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
 ptthtml = requests.get(url, cookies={"over18": "1"})
@@ -1224,13 +1034,9 @@ last_page = div_page.find_all("a")[1]["href"]
 print(type(last_page))  # 列出last_page資料型態
 print(last_page)  # 列出last_page
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch8\ch8_12.py
-
 # ch8_12.py
-import requests, bs4
 
 ptturl = "https://www.ptt.cc"
 page = "/bbs/Gossiping/index.html"
@@ -1272,13 +1078,9 @@ for article in articles:
     print("文章連結 : ", article["href"])
     print("推文數量 : ", article["push_num"], "\n")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch8\ch8_13.py
-
 # ch8_13.py
-import requests, bs4
 
 url = "https://www.ptt.cc/bbs/beauty/index.html"
 ptthtml = requests.get(url, cookies={"over18": "1"})
@@ -1291,13 +1093,9 @@ for p in pttdivs:
         articles += 1
 print("本頁的文章數量 = ", articles)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch8\ch8_14.py
-
 # ch8_14.py
-import requests, bs4
 
 url = "https://www.ptt.cc/bbs/beauty/index.html"
 ptthtml = requests.get(url, cookies={"over18": "1"})
@@ -1332,13 +1130,9 @@ for article in articles:
     print("文章連結 : ", article["href"])
     print("推文數量 : ", article["push_num"], "\n")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch8\ch8_15.py
-
 # ch8_15.py
-import requests, bs4
 
 url_ppt = "https://www.ptt.cc"
 beauty = "/bbs/beauty/index.html"
@@ -1365,13 +1159,9 @@ for item in items:  # 列印標題
 mylist = list(beauty_divs)  # 轉成串列
 print("內文 : ", mylist[4].strip())  # 列印本文
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch8\ch8_16.py
-
 # ch8_16.py
-import requests, bs4
 
 url_ppt = "https://www.ptt.cc"
 beauty = "/bbs/beauty/index.html"
@@ -1400,13 +1190,9 @@ for item in items:
     print("內文   ", push_content.text)
     print("時間    :", push_time.text.strip())
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch8\ch8_17.py
-
 # ch8_17.py
-import requests, bs4, os
 
 url_ppt = "https://www.ptt.cc"
 beauty = "/bbs/beauty/index.html"
@@ -1432,7 +1218,7 @@ for photo in url_photos:
 for photo in photos:  # 列印圖片網址
     print(photo)
 
-destDir = "out8_17"
+destDir = "tmp_out8_17"
 if os.path.exists(destDir) == False:  # 如果沒有此資料夾就建立
     os.mkdir(destDir)
 print("搜尋到的圖片數量 = ", len(photos))  # 列出搜尋到的圖片數量
@@ -1445,13 +1231,9 @@ for photo in photos:  # 迴圈下載圖片與儲存
         pictFile.write(diskStorage)
     pictFile.close()  # 關閉檔案
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch8\ch8_18.py
-
 # ch8_18.py
-import requests
 
 url = "http://api.ipstack.com/www.mcut.edu.tw?access_key=Your API Key"
 urlfile = requests.get(url)
@@ -1465,13 +1247,9 @@ print("城市名 : ", ip_info["city"])
 print("緯度   : ", ip_info["latitude"])
 print("經度   : ", ip_info["longitude"])
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch8\ch8_19.py
-
 # ch8_19.py
-import requests
 
 url_head = "http://api.ipstack.com/"
 url_tail = "?access_key=Your API Key"
@@ -1487,13 +1265,9 @@ print("城市名 : ", ip_info["city"])
 print("緯度   : ", ip_info["latitude"])
 print("經度   : ", ip_info["longitude"])
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch8\ch8_20.py
-
 # ch8_20.py
-import requests, bs4, re
 
 
 def get_ip(ipstr):
@@ -1539,14 +1313,9 @@ if gossiping_span:
 else:
     print("可能是廣告信件沒有發文IP")
 
-
 print("------------------------------------------------------------")  # 60個
 
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch9\ch9_1.py
-
 # ch9_1.py
-import requests, bs4
 
 url = "https://movies.yahoo.com.tw/movie_thisweek.html"  # 本周新片的網址
 moviehtml = requests.get(url)
@@ -1563,13 +1332,9 @@ for item in items:
     print("英文片名 : ", eName)
     print()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch9\ch9_2.py
-
 # ch9_2.py
-import requests, bs4
 
 url = "https://movies.yahoo.com.tw/movie_thisweek.html"  # 本周新片的網址
 moviehtml = requests.get(url)
@@ -1588,13 +1353,9 @@ for item in items:
     print(rTime.text)  # 列印上映日期
     print()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch9\ch9_3.py
-
 # ch9_3.py
-import requests, bs4
 
 url = "https://movies.yahoo.com.tw/movie_thisweek.html"  # 本周新片的網址
 moviehtml = requests.get(url)
@@ -1615,13 +1376,9 @@ for item in items:
     print("期待度   : ", level)
     print()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch9\ch9_4.py
-
 # ch9_4.py
-import requests, bs4
 
 url = "https://movies.yahoo.com.tw/movie_thisweek.html"  # 本周新片的網址
 moviehtml = requests.get(url)
@@ -1644,13 +1401,9 @@ for item in items:
     print("內容摘要 : ", txt)
     print()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch9\ch9_5.py
-
 # ch9_5.py
-import requests, bs4, os
 
 url = "https://movies.yahoo.com.tw/movie_thisweek.html"  # 本周新片的網址
 moviehtml = requests.get(url)
@@ -1662,7 +1415,7 @@ for item in items:
     photo = item.a.img["src"]  # 取得劇照網址
     photos.append(photo)
 
-destDir = "out9_5"
+destDir = "tmp_out9_5"
 if os.path.exists(destDir) == False:  # 如果沒有此資料夾就建立
     os.mkdir(destDir)
 print("搜尋到的圖片數量 = ", len(photos))  # 列出搜尋到的圖片數量
@@ -1676,13 +1429,9 @@ for photo in photos:  # 迴圈下載圖片與儲存
         pictFile.write(diskStorage)
     pictFile.close()  # 關閉檔案
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch9\ch9_6.py
-
 # ch9_6.py
-import requests, bs4
 
 url = "https://movies.yahoo.com.tw/movie_thisweek.html"  # 本周新片的網址
 moviehtml = requests.get(url)
@@ -1701,13 +1450,9 @@ for item in items:
     print("海報網址 : ", photo)
     print()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch9\ch9_7.py
-
 # ch9_7.py
-import requests, bs4
 
 url = "https://movies.yahoo.com.tw/movie_thisweek.html"  # 本周新片的網址
 moviehtml = requests.get(url)
@@ -1733,13 +1478,9 @@ for item in items:
     print("預告片   : ", video)
     print()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch9\ch9_8.py
-
 # ch9_8.py
-import requests, bs4
 
 url = "https://movies.yahoo.com.tw/chart.html"  # 本周排行榜的網址
 moviehtml = requests.get(url)
@@ -1755,14 +1496,9 @@ for item in items:
     print("名次 : ", rank.text)
     print()
 
-
 print("------------------------------------------------------------")  # 60個
 
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch10\ch10_1.py
-
 # ch10_1.py
-import requests, bs4
 
 url = "https://tw.appledaily.com/hot/daily"
 applehtml = requests.get(url)
@@ -1778,13 +1514,9 @@ for item in items:
     print("新聞編號 : ", num)
     print(txt)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch10\ch10_2.py
-
 # ch10_2.py
-import requests, bs4
 
 url = "https://udn.com/news/cate/2/7225"  # 全球頭條新聞
 newshtml = requests.get(url)
@@ -1793,13 +1525,9 @@ items = objSoup.find("div", "area")
 print(type(items))
 print(items)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch10\ch10_3.py
-
 # ch10_3.py
-import requests, bs4
 
 url = "https://udn.com/news/cate/2/7225"  # 全球頭條新聞
 newshtml = requests.get(url)
@@ -1811,13 +1539,9 @@ for item in items:
     print(txt)
     print()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch10\ch10_4.py
-
 # ch10_4.py
-import requests, bs4
 
 url = "https://money.udn.com/money/cate/5591"  # 經濟日報新聞
 newshtml = requests.get(url)
@@ -1828,13 +1552,9 @@ for item in items:
     txt = item.a.text.strip()
     print(txt)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch10\ch10_5.py
-
 # ch10_5.py
-import requests, bs4
 
 url = "https://www.chinatimes.com/world/?chdtv"
 newshtml = requests.get(url)  # 中國時報新聞
@@ -1846,13 +1566,9 @@ for item in items:
     txt = item.h4.text
     print(txt)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch10\ch10_6.py
-
 # ch10_6.py
-import requests, bs4
 
 url = "https://www.chinatimes.com/newspapers/2602?chdtv"
 newshtml = requests.get(url)  # 工商時報熱門新聞
@@ -1865,15 +1581,7 @@ for item in items:
     txt = item.h4.text
     print(txt)
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch11\ch11_1.py
 
 # ch11_1.py
 import sqlite3
@@ -1881,10 +1589,7 @@ import sqlite3
 conn = sqlite3.connect("myData.db")
 conn.close()
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch11\ch11_2.py
 
 # ch11_2.py
 import sqlite3
@@ -1899,10 +1604,7 @@ cursor.execute(sql)  # 執行SQL指令
 cursor.close()  # 關閉
 conn.close()  # 關閉資料庫連線
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch11\ch11_3.py
 
 # ch11_3.py
 import sqlite3
@@ -1915,10 +1617,7 @@ sql = """Create table students(
 conn.execute(sql)  # 執行SQL指令
 conn.close()  # 關閉資料庫連線
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch11\ch11_3_1.py
 
 # ch11_3_1.py
 import sqlite3
@@ -1931,10 +1630,7 @@ sql = """Create table student2(
 conn.execute(sql)  # 執行SQL指令
 conn.close()  # 關閉資料庫連線
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch11\ch11_4.py
 
 # ch11_4.py
 import sqlite3
@@ -1954,10 +1650,7 @@ while True:
         break
 conn.close()  # 關閉資料庫連線
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch11\ch11_4_1.py
 
 # ch11_4_1.py
 import sqlite3
@@ -1976,10 +1669,7 @@ while True:
         break
 conn.close()  # 關閉資料庫連線
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch11\ch11_5.py
 
 # ch11_5.py
 import sqlite3
@@ -1992,10 +1682,7 @@ for record in results:
     print("gender = ", record[2])
 conn.close()  # 關閉資料庫連線
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch11\ch11_5_1.py
 
 # ch11_5_1.py
 import sqlite3
@@ -2008,10 +1695,7 @@ for record in results:
     print("gender = ", record[2])
 conn.close()  # 關閉資料庫連線
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch11\ch11_6.py
 
 # ch11_6.py
 import sqlite3
@@ -2023,10 +1707,7 @@ for student in allstudents:
     print(student)
 conn.close()  # 關閉資料庫連線
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch11\ch11_7.py
 
 # ch11_7.py
 import sqlite3
@@ -2038,28 +1719,22 @@ for student in allstudents:
     print(student)
 conn.close()  # 關閉資料庫連線
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch11\ch11_8.py
 
 # ch11_8.py
 import sqlite3
 
 conn = sqlite3.connect("myInfo.db")  # 資料庫連線
-sql = '''SELECT name, gender
+sql = """SELECT name, gender
         from students
-        where gender = "F"'''
+        where gender = 'F'"""
 results = conn.execute(sql)
 allstudents = results.fetchall()  # 結果轉成元素是元組的串列
 for student in allstudents:
     print(student)
 conn.close()  # 關閉資料庫連線
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch11\ch11_9.py
 
 # ch11_9.py
 import sqlite3
@@ -2076,11 +1751,7 @@ for student in allstudents:
     print(student)
 conn.close()  # 關閉資料庫連線
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch11\ch11_10.py
 
 # ch11_10.py
 import sqlite3
@@ -2097,15 +1768,10 @@ for student in allstudents:
     print(student)
 conn.close()  # 關閉資料庫連線
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch11\ch11_11.py
 
 # ch11_11.py
 import sqlite3
-import csv
-import matplotlib.pyplot as plt
 
 conn = sqlite3.connect("populations.db")  # 資料庫連線
 sql = """Create table population( 
@@ -2139,14 +1805,10 @@ for record in results:
 
 conn.close()  # 關閉資料庫連線
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch11\ch11_12.py
 
 # ch11_12.py
 import sqlite3
-import matplotlib.pyplot as plt
 from pylab import mpl
 
 conn = sqlite3.connect("populations.db")  # 資料庫連線
@@ -2172,15 +1834,9 @@ plt.xlabel("2019年", fontsize=14)
 plt.ylabel("人口數", fontsize=14)
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch12\ch12_1.py
-
 # ch12_1.py
-import csv
-import matplotlib.pyplot as plt
 from datetime import datetime
 
 fn = "ST43_3083_201907.csv"
@@ -2216,14 +1872,9 @@ plt.ylabel("Price", fontsize=14)
 plt.tick_params(axis="both", labelsize=12, color="red")
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch12\ch12_2.py
-
 # ch12_2.py
-import csv
-import matplotlib.pyplot as plt
 from datetime import datetime
 
 fn = "FMNPTK.csv"
@@ -2258,16 +1909,12 @@ plt.ylabel("Price", fontsize=14)
 plt.tick_params(axis="both", labelsize=12, color="red")
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch12\ch12_3.py
-
 # ch12_3.py
-import csv
 
 fn = "MI_5MINS.csv"  # 台灣證劵交易所資料
-out = "MI_30MINS.csv"  # 每30分鐘資料
+out = "tmp_MI_30MINS.csv"  # 每30分鐘資料
 with open(out, "w", newline="") as csvOut:
     csvWriter = csv.writer(csvOut)
     csvWriter.writerow(["時間", "累積成交數"])
@@ -2282,14 +1929,9 @@ with open(out, "w", newline="") as csvOut:
                 if xsec == "00":  # True時寫入時間和累積成交數
                     csvWriter.writerow([row[0], row[6]])
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch12\ch12_4.py
-
 # ch12_4.py
-import csv
-import matplotlib.pyplot as plt
 from datetime import datetime
 
 fn = "MI_30MINS.csv"
@@ -2317,13 +1959,9 @@ plt.ylabel("Accumulated deal", fontsize=14)
 plt.tick_params(axis="both", labelsize=12, color="red")
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch12\ch12_5.py
-
 # ch12_5.py
-import requests, bs4
 
 url = "https://www.google.com/search?q=TPE:1101"
 headers = {
@@ -2349,13 +1987,9 @@ for table in gcards[3].find_all("table"):
         value = row.find_all("td")[1].text
         print(key, "=", value)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch12\ch12_6.py
-
 # ch12_6.py
-import requests, bs4
 
 url = "https://tw.stock.yahoo.com/q/q?s=2330"
 
@@ -2371,10 +2005,7 @@ print("------------------------------")
 for t_info in table2:
     print(t_info.text)
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch12\ch12_7.py
 
 # ch12_7.py
 import twstock
@@ -2384,13 +2015,9 @@ stock2330 = twstock.Stock("2330")
 print("股票代號   : ", stock2330.sid)
 print("股票收盤價 : ", stock2330.price)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch12\ch12_8.py
-
 # ch12_8.py
-import matplotlib.pyplot as plt
 from pylab import mpl
 import twstock
 
@@ -2401,13 +2028,9 @@ plt.title("台積電", fontsize=24)
 plt.plot(stock2330.price)
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch12\ch12_9.py
-
 # ch12_9.py
-import matplotlib.pyplot as plt
 from pylab import mpl
 import twstock
 
@@ -2421,13 +2044,9 @@ plt.ylabel("價格", fontsize=14)
 plt.plot(stock2330.price)
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch12\ch12_10.py
-
 # ch12_10.py
-import pandas as pd
 import twstock
 
 stock2330 = twstock.realtime.get("2330")
@@ -2443,27 +2062,18 @@ df2330 = pd.DataFrame(dict2330, index=range(1, 6))
 print("台積電最佳五檔價量表")
 print(df2330)
 
-
 print("------------------------------------------------------------")  # 60個
 
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch13\ch13_1.py
-
 # ch13_1.py
-import requests
 
 url = "http://www.taiwanrate.com/"
 htmlfile = requests.get(url)
 print("HTML編碼方式 : ", htmlfile.encoding)
 print("列印網頁內容 \n", htmlfile.text)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch13\ch13_2.py
-
 # ch13_2.py
-import requests
 
 url = "http://www.taiwanrate.com/"
 htmlfile = requests.get(url)
@@ -2473,13 +2083,9 @@ print("更改編碼")
 print("HTML編碼方式 : ", htmlfile.encoding)
 print("列印網頁內容 \n", htmlfile.text)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch13\ch13_3.py
-
 # ch13_3.py
-import requests, bs4
 
 url = "http://www.taiwanrate.com/"
 htmlfile = requests.get(url)
@@ -2501,16 +2107,11 @@ while ratetd.find_next_sibling("tr"):
     ratetd = ratetd.find_next_sibling("tr")
     print(ratetd.text)  # 列出其它家銀行
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch13\ch13_4.py
-
 # ch13_4.py
-import requests, bs4
-import csv
 
-fn = "out13_4.csv"
+fn = "tmp_out13_4.csv"
 tablelist = []  # 利率表串列
 headlist = []
 ratelist = []
@@ -2544,16 +2145,11 @@ with open(fn, "w", newline="") as csvFile:  # 寫入out13_4.csv
     for row in tablelist:
         csvWriter.writerow(row)  # 一次寫一筆
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch13\ch13_5.py
-
 # ch13_5.py
-import csv
-import pandas as pd
 
-fn = "out13_4.csv"
+fn = "tmp_out13_4.csv"
 with open(fn) as csvFile:  # 開啟csv檔案
     csvReader = csv.reader(csvFile)  # 讀檔案建立Reader物件
     listReport = list(csvReader)  # 將資料轉成串列
@@ -2578,13 +2174,9 @@ df = pd.DataFrame(newReport, columns=time_period, index=bank)
 
 print(df)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch13\ch13_6.py
-
 # ch13_6.py
-import requests, bs4
 
 url = "https://www.moneydj.com/funddj/ya/YP401000.djhtm"
 htmlfile = requests.get(url)
@@ -2596,13 +2188,9 @@ heads = objhead.find_all("th")
 for head in heads:
     print(head.text.strip())
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch13\ch13_7.py
-
 # ch13_7.py
-import requests, bs4
 
 url = "https://www.moneydj.com/funddj/ya/YP401000.djhtm"
 htmlfile = requests.get(url)
@@ -2622,16 +2210,11 @@ for table in tables:  # 輸出各基金績效
     txt = rowtext.split("\n")  # 將字串轉成串列
     print(txt)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch13\ch13_8.py
-
 # ch13_8.py
-import requests, bs4
-import csv
 
-fn = "out13_8.csv"
+fn = "tmp_out13_8.csv"
 tablelist = []
 headlist = []
 url = "https://www.moneydj.com/funddj/ya/YP401000.djhtm"
@@ -2652,19 +2235,14 @@ for table in tables:  # 輸出各基金績效
     txt = rowtext.split("\n")  # 將字串轉成串列
     tablelist.append(txt)
 # 寫入csv
-with open(fn, "w", newline="") as csvFile:  # 寫入out13_8.csv
+with open(fn, "w", newline="") as csvFile:  # 寫入tmp_out13_8.csv
     csvWriter = csv.writer(csvFile)
     for row in tablelist:
         csvWriter.writerow(row)  # 一次寫一筆
 
-
 print("------------------------------------------------------------")  # 60個
 
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch14\ch14_1.py
-
 # ch14_1.py
-import requests, bs4
 
 # url = 'https://www.dcard.tw/f?latest=false'                # 這個URL也可以
 url = "https://www.dcard.tw/f"
@@ -2674,13 +2252,9 @@ items = objSoup.find_all("div", "PostList_entry_1rq5Lf")
 print(items[0].h3.text)  # 列出第1篇貼文標題
 print(items[1].h3.text)  # 列出第3篇貼文標題
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch14\ch14_2.py
-
 # ch14_2.py
-import requests, bs4
 
 # url = 'https://www.dcard.tw/f?latest=false'                # 這個URL也可以
 url = "https://www.dcard.tw/f"
@@ -2690,13 +2264,9 @@ items = objSoup.find_all("div", "PostList_entry_1rq5Lf")
 print(items[0].h3.text)  # 列出第1篇貼文標題
 print(items[1].h3.text)  # 列出第2篇貼文標題
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch14\ch14_3.py
-
 # ch14_3.py
-import requests, bs4
 
 # url = 'https://www.dcard.tw/f?latest=false'                # 這個URL也可以
 url = "https://www.dcard.tw/f"
@@ -2709,13 +2279,9 @@ try:
 except UnicodeEncodeError:
     print("UnicodeEncodeError")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch14\ch14_4.py
-
 # ch14_4.py
-import requests, bs4
 
 # url = 'https://www.dcard.tw/f?latest=false'                # 這個URL也可以
 url = "https://www.dcard.tw/f"
@@ -2733,13 +2299,9 @@ try:
 except UnicodeEncodeError:
     print("UnicodeEncodeError")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch14\ch14_5.py
-
 # ch14_5.py
-import requests, bs4
 
 # url = 'https://www.dcard.tw/f?latest=false'                # 這個URL也可以
 url = "https://www.dcard.tw/f"
@@ -2764,13 +2326,9 @@ try:
 except UnicodeEncodeError:
     print("UnicodeEncodeError")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch14\ch14_6.py
-
 # ch14_6.py
-import requests, bs4
 
 # url = 'https://www.dcard.tw/f?latest=false'                # 這個URL也可以
 url = "https://www.dcard.tw/f"
@@ -2798,13 +2356,9 @@ for item in items:
         print("UnicodeEncodeError")
     print()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch14\ch14_7.py
-
 # ch14_7.py
-import requests, bs4, json
 
 url = "https://www.dcard.tw/"
 api = "_api/posts?popular=true"
@@ -2819,13 +2373,9 @@ try:
 except UnicodeEncodeError:
     print("UnicodeEncodeError")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch14\ch14_8.py
-
 # ch14_8.py
-import requests, bs4, json
 
 url = "https://www.dcard.tw/"
 api = "_api/posts?popular=true"
@@ -2842,13 +2392,9 @@ for post in posts:
     except UnicodeEncodeError:
         print("UnicodeEncodeError")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch14\ch14_9.py
-
 # ch14_9.py
-import requests, bs4, json
 
 
 def printing():  # 列印熱門貼文
@@ -2879,14 +2425,9 @@ for i in range(num_page):  # 印第2-3組前30熱門
     printing()
     last_id = posts[-1]["id"]  # 最後一筆熱門的id
 
-
 print("------------------------------------------------------------")  # 60個
 
-
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch15\ch15_1.py
-
 # ch15_1.py
-import requests, bs4
 
 url = "http://www.xzw.com/fortune/"
 htmlfile = requests.get(url)
@@ -2902,13 +2443,9 @@ print(fortune.text)
 txt = constellation.find("dd").find("p")  # 簡略說明
 print(txt.text)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch15\ch15_2.py
-
 # ch15_2.py
-import requests, bs4
 
 url = "http://www.xzw.com/fortune/"
 htmlfile = requests.get(url)
@@ -2926,13 +2463,9 @@ for con in cons:
     txt = con.find("dd").find("p")  # 簡略說明
     print(txt.text)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : D:\_git\vcs\_4.python\__code\Python網路爬蟲_王者歸來\ch15\ch15_3.py
-
 # ch15_3.py
-import requests, bs4, os
 
 url = "http://www.xzw.com/fortune/"
 htmlfile = requests.get(url)
@@ -2946,7 +2479,7 @@ for con in cons:
     pict = con.a.img["src"]
     photos.append(pict_url + pict)
 
-destDir = "out15_3"
+destDir = "tmp_out15_3"
 if os.path.exists(destDir) == False:  # 如果沒有此資料夾就建立
     os.mkdir(destDir)
 print("搜尋到的圖片數量 = ", len(photos))  # 列出搜尋到的圖片數量
@@ -2959,7 +2492,6 @@ for photo in photos:  # 迴圈下載圖片與儲存
     for diskStorage in picture.iter_content(10240):
         pictFile.write(diskStorage)
     pictFile.close()  # 關閉檔案
-
 
 print("------------------------------------------------------------")  # 60個
 

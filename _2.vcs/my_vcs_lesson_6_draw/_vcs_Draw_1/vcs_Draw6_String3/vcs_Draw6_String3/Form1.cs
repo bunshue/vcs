@@ -62,8 +62,7 @@ namespace vcs_Draw6_String3
             e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
 
             // Draw within a rectangle excluding the margins.
-            RectangleF rect = new RectangleF(
-                TextMargin.Left, TextMargin.Top,
+            RectangleF rect = new RectangleF(TextMargin.Left, TextMargin.Top,
                 pictureBox3.ClientSize.Width - TextMargin.Left - TextMargin.Right,
                 pictureBox3.ClientSize.Height - TextMargin.Top - TextMargin.Bottom);
 
@@ -81,22 +80,20 @@ namespace vcs_Draw6_String3
             // Draw the text.
             using (Font font = new Font("Times New Roman", 10))
             {
-                if ((justification == TextJustification.Right) ||
-                    (justification == TextJustification.Center))
-                    rect = DrawParagraphs(e.Graphics, rect, font,
-                        Brushes.Green, MessageText, justification,
-                        LineSpacing, 0,
-                        ExtraParagraphSpacing);
+                if ((justification == TextJustification.Right) || (justification == TextJustification.Center))
+                {
+                    rect = DrawParagraphs(e.Graphics, rect, font, Brushes.Green, MessageText, justification,
+                        LineSpacing, 0, ExtraParagraphSpacing);
+                }
                 else
-                    rect = DrawParagraphs(e.Graphics, rect, font,
-                        Brushes.Green, MessageText, justification,
-                        LineSpacing, ParagraphIndent,
-                        ExtraParagraphSpacing);
+                {
+                    rect = DrawParagraphs(e.Graphics, rect, font, Brushes.Green, MessageText, justification,
+                        LineSpacing, ParagraphIndent, ExtraParagraphSpacing);
+                }
             }
 
             // Show the text drawing area.
-            rect = new RectangleF(
-                TextMargin.Left, TextMargin.Top,
+            rect = new RectangleF(TextMargin.Left, TextMargin.Top,
                 pictureBox3.ClientSize.Width - TextMargin.Left - TextMargin.Right,
                 pictureBox3.ClientSize.Height - TextMargin.Top - TextMargin.Bottom);
             e.Graphics.DrawRectangle(Pens.Silver, Rectangle.Round(rect));
@@ -107,10 +104,8 @@ namespace vcs_Draw6_String3
         }
 
         // Draw justified text on the Graphics object in the indicated Rectangle.
-        private RectangleF DrawParagraphs(Graphics gr, RectangleF rect,
-            Font font, Brush brush, string text,
-            TextJustification justification, float line_spacing,
-            float indent, float paragraph_spacing)
+        private RectangleF DrawParagraphs(Graphics gr, RectangleF rect, Font font, Brush brush, string text,
+            TextJustification justification, float line_spacing, float indent, float paragraph_spacing)
         {
             // Split the text into paragraphs.
             string[] paragraphs = text.Split('\n');
@@ -119,23 +114,22 @@ namespace vcs_Draw6_String3
             foreach (string paragraph in paragraphs)
             {
                 // Draw the paragraph keeping track of remaining space.
-                rect = DrawParagraph(gr, rect, font, brush, paragraph,
-                    justification, line_spacing, indent, paragraph_spacing);
+                rect = DrawParagraph(gr, rect, font, brush, paragraph, justification, line_spacing, indent, paragraph_spacing);
 
                 // See if there's any room left.
-                if (rect.Height < font.Size) break;
+                if (rect.Height < font.Size)
+                {
+                    break;
+                }
             }
-
             return rect;
         }
 
         // Draw a paragraph by lines inside the Rectangle.
         // Return a RectangleF representing any unused
         // space in the original RectangleF.
-        private RectangleF DrawParagraph(Graphics gr, RectangleF rect,
-            Font font, Brush brush, string text,
-            TextJustification justification, float line_spacing,
-            float indent, float extra_paragraph_spacing)
+        private RectangleF DrawParagraph(Graphics gr, RectangleF rect, Font font, Brush brush, string text,
+            TextJustification justification, float line_spacing, float indent, float extra_paragraph_spacing)
         {
             // Get the coordinates for the first line.
             float y = rect.Top;
@@ -175,35 +169,32 @@ namespace vcs_Draw6_String3
                 }
 
                 // See if this is the last line in the paragraph.
-                if ((end_word == words.Length) &&
-                    (justification == TextJustification.Full))
+                if ((end_word == words.Length) && (justification == TextJustification.Full))
                 {
                     // This is the last line. Don't justify it.
-                    DrawLine(gr, line, font, brush,
-                        rect.Left + indent,
-                        y,
-                        rect.Width - indent,
-                        TextJustification.Left);
+                    DrawLine(gr, line, font, brush, rect.Left + indent, y, rect.Width - indent, TextJustification.Left);
                 }
                 else
                 {
                     // This is not the last line. Justify it.
-                    DrawLine(gr, line, font, brush,
-                        rect.Left + indent,
-                        y,
-                        rect.Width - indent,
-                        justification);
+                    DrawLine(gr, line, font, brush, rect.Left + indent, y, rect.Width - indent, justification);
                 }
 
                 // Move down to draw the next line.
                 y += font.Height * line_spacing;
 
                 // Make sure there's room for another line.
-                if (font.Size > rect.Height) break;
+                if (font.Size > rect.Height)
+                {
+                    break;
+                }
 
                 // Start the next line at the next word.
                 start_word = end_word + 1;
-                if (start_word >= words.Length) break;
+                if (start_word >= words.Length)
+                {
+                    break;
+                }
 
                 // Don't indent subsequent lines in this paragraph.
                 indent = 0;
@@ -215,14 +206,15 @@ namespace vcs_Draw6_String3
             // Return a RectangleF representing any unused
             // space in the original RectangleF.
             float height = rect.Bottom - y;
-            if (height < 0) height = 0;
+            if (height < 0)
+            {
+                height = 0;
+            }
             return new RectangleF(rect.X, y, rect.Width, height);
         }
 
         // Draw a line of text.
-        private void DrawLine(Graphics gr, string line, Font font,
-            Brush brush, float x, float y, float width,
-            TextJustification justification)
+        private void DrawLine(Graphics gr, string line, Font font, Brush brush, float x, float y, float width, TextJustification justification)
         {
             // Make a rectangle to hold the text.
             RectangleF rect = new RectangleF(x, y, width, font.Height);
@@ -251,7 +243,6 @@ namespace vcs_Draw6_String3
                             sf.Alignment = StringAlignment.Center;
                             break;
                     }
-
                     gr.DrawString(line, font, brush, rect, sf);
                 }
             }
@@ -259,8 +250,7 @@ namespace vcs_Draw6_String3
 
         // Draw justified text on the Graphics object
         // in the indicated Rectangle.
-        private void DrawJustifiedLine(Graphics gr, RectangleF rect,
-            Font font, Brush brush, string text)
+        private void DrawJustifiedLine(Graphics gr, RectangleF rect, Font font, Brush brush, string text)
         {
             // Break the text into words.
             string[] words = text.Split(' ');
@@ -279,7 +269,10 @@ namespace vcs_Draw6_String3
             // Get the additional spacing between words.
             float extra_space = rect.Width - total_width;
             int num_spaces = words.Length - 1;
-            if (words.Length > 1) extra_space /= num_spaces;
+            if (words.Length > 1)
+            {
+                extra_space /= num_spaces;
+            }
 
             // Draw the words.
             float x = rect.Left;
@@ -323,11 +316,8 @@ namespace vcs_Draw6_String3
             else if (btn.Name == "button4")
                 justification = TextJustification.Full;
 
-
             // Redraw the text.
             pictureBox3.Refresh();
-
         }
-
     }
 }

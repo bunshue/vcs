@@ -25,6 +25,7 @@ namespace vcs_SendTo_All
             bool flag_show_big_files_only = Properties.Settings.Default.show_big_files_only;
             bool flag_show_video_files_only = Properties.Settings.Default.show_video_files_only;
             bool flag_show_audio_files_only = Properties.Settings.Default.show_audio_files_only;
+            bool flag_show_file_path = Properties.Settings.Default.show_file_path;
 
             if (flag_show_big_files_only == true)
             {
@@ -61,6 +62,18 @@ namespace vcs_SendTo_All
             {
                 cb_search_audio_files.Checked = false;
             }
+
+            if (flag_show_file_path == true)
+            {
+                richTextBox1.Text += "顯示檔名\n";
+                cb_show_file_path.Checked = true;
+            }
+            else
+            {
+                richTextBox1.Text += "不顯示檔名\n";
+                cb_show_file_path.Checked = false;
+            }
+
             lb_main_mesg1.Text = "AAAA";
             lb_main_mesg2.Text = "BBBB";
             tb_filesize_mb.Focus();
@@ -93,10 +106,12 @@ namespace vcs_SendTo_All
             groupBox_video.Size = new Size(W, H);
             groupBox_text_mode.Size = new Size(W, H);
             groupBox_auto_save.Size = new Size(W, H);
+            groupBox_show_file_content.Size = new Size(W, H);
             groupBox_file.Enabled = false;
             groupBox_video.Enabled = false;
             groupBox_text_mode.Enabled = false;
             groupBox_auto_save.Enabled = false;
+            //groupBox_show_file_content.Enabled = false;
 
             groupBox_search.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox_search_type.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H * 2);
@@ -104,28 +119,32 @@ namespace vcs_SendTo_All
             groupBox_video.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H * 5);
             groupBox_text_mode.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H * 6);
             groupBox_auto_save.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H * 7);
+            groupBox_show_file_content.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H * 8);
 
-            //groupBox_search
+            // groupBox_search
             rb_search_big_files.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             tb_filesize_mb.Location = new Point(x_st + dx * 1 + 40, y_st + dy * 0);
             rb_search_all_files.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
-            ///groupBox_search_type
+            // groupBox_search_type
             cb_search_video_files.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             cb_search_audio_files.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
-            ///groupBox_text_mode
+            // groupBox_text_mode
             rb_text_mode_ascii.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            rb_text_mode_binary.Location = new Point(x_st + dx * 0+120, y_st + dy * 0);
+            rb_text_mode_binary.Location = new Point(x_st + dx * 0 + 120, y_st + dy * 0);
 
-            ///groupBox_auto_save
+            // groupBox_auto_save
             rb_auto_save_on.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             rb_auto_save_off.Location = new Point(x_st + dx * 0 + 120, y_st + dy * 0);
 
-            bt_save.Location = new Point(x_st + dx * 0 + 210, y_st + dy * 12+40);
+            // groupBox_show_file_content
+            cb_show_file_path.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
-            lb_main_mesg1.Location = new Point(x_st + dx * 0, y_st + dy * 11);
-            lb_main_mesg2.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+            bt_save.Location = new Point(x_st + dx * 0 + 210, y_st + dy * 12 + 40);
+
+            lb_main_mesg1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+            lb_main_mesg2.Location = new Point(x_st + dx * 0, y_st + dy * 13);
 
             richTextBox1.Size = new Size(270, 461);
             richTextBox1.Dock = DockStyle.Right;
@@ -189,6 +208,7 @@ namespace vcs_SendTo_All
             Properties.Settings.Default.show_big_files_only = rb_search_big_files.Checked;
             Properties.Settings.Default.show_video_files_only = cb_search_video_files.Checked;
             Properties.Settings.Default.show_audio_files_only = cb_search_audio_files.Checked;
+            Properties.Settings.Default.show_file_path = cb_show_file_path.Checked;
 
             int file_size_limit = 0;
             bool conversionSuccessful = int.TryParse(tb_filesize_mb.Text, out file_size_limit);    //out為必須

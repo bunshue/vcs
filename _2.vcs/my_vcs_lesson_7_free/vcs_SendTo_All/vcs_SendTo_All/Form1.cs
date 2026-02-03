@@ -18,7 +18,7 @@ namespace vcs_SendTo_All
 {
     public partial class Form1 : Form
     {
-        int flag_operation_mode = MODE6;
+        int flag_operation_mode = MODE1;
 
         bool flag_debug_mode = true;  //debug模式
 
@@ -36,6 +36,7 @@ namespace vcs_SendTo_All
 
         bool flag_show_big_files_only = false;  //false : 顯示所有檔案, true : 僅顯示大檔
         long file_size_limit = 0;   //檔案界限
+        bool flag_show_file_path = true;  //false : 不顯示檔名, true : 顯示檔名
 
         Int64 total_size = 0;
         Int64 total_files = 0;
@@ -150,13 +151,22 @@ namespace vcs_SendTo_All
         private void Form1_Load(object sender, EventArgs e)
         {
             if (flag_operation_mode == MODE0)
+            {
                 this.Text = "顯示檔案名稱";
+            }
             else if (flag_operation_mode == MODE1)
+            {
                 this.Text = "檢視檔案內容";
+                flag_show_file_path = Properties.Settings.Default.show_file_path;
+            }
             else if (flag_operation_mode == MODE2)
+            {
                 this.Text = "簡中轉正中";
+            }
             else if (flag_operation_mode == MODE3)
+            {
                 this.Text = "計算檔案之MD5值";
+            }
             else if (flag_operation_mode == MODE6)
             {
                 //this.Text = "右鍵匯出資料夾內的檔案資料";
@@ -244,8 +254,16 @@ namespace vcs_SendTo_All
                 }
                 else if (flag_operation_mode == MODE1)
                 {
-                    //檢視檔案內容
-                    print_file_content(filename);
+                    //必須是檔案 若是資料夾 要跳過
+                    if (System.IO.File.Exists(filename) == false)            //確認檔案是否存在
+                    {
+                        richTextBox1.Text += "非檔案 : " + filename + "\n";
+                    }
+                    else
+                    {
+                        //檢視檔案內容
+                        print_file_content(filename);
+                    }
                 }
                 else if (flag_operation_mode == MODE2)
                 {
@@ -296,7 +314,7 @@ namespace vcs_SendTo_All
             bt_copy.Location = new Point(this.ClientSize.Width - bt_copy.Size.Width, 0);
             bt_save.Location = new Point(this.ClientSize.Width - bt_copy.Size.Width * 2, 0);
             bt_open_folder.Location = new Point(this.ClientSize.Width - bt_copy.Size.Width * 2, 0 + bt_refresh.Size.Height);
-            bt_refresh.Location = new Point(this.ClientSize.Width - bt_copy.Size.Width * 2, 0 + bt_refresh.Size.Height*2);
+            bt_refresh.Location = new Point(this.ClientSize.Width - bt_copy.Size.Width * 2, 0 + bt_refresh.Size.Height * 2);
             bt_clear.Location = new Point(this.ClientSize.Width - bt_copy.Size.Width, 0 + bt_setup.Size.Height);
             bt_setup.Location = new Point(this.ClientSize.Width - bt_copy.Size.Width, 0 + bt_setup.Size.Height * 2);
 
@@ -413,7 +431,10 @@ namespace vcs_SendTo_All
 
         void print_file_content(string filename)
         {
-            richTextBox1.Text += "\n#檔案 : " + filename + "\n\n";
+            if (flag_show_file_path == true)
+            {
+                richTextBox1.Text += "\n#檔案 : " + filename + "\n\n";
+            }
 
             /*
             //二進位檔轉成文字檔
@@ -617,7 +638,7 @@ namespace vcs_SendTo_All
                     richTextBox1.Text += "非 影片檔案\n";
                 }
 
-                richTextBox1.Text += mesg+"\n";
+                richTextBox1.Text += mesg + "\n";
                 str_writer.WriteLine(mesg);
 
 

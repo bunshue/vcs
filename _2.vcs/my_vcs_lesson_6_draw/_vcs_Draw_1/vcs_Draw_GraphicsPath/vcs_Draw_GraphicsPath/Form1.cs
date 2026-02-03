@@ -47,8 +47,8 @@ namespace vcs_Draw_GraphicsPath
             int dy;
 
             //button
-            x_st = 10;
-            y_st = 10;
+            x_st = 50;
+            y_st = 50;
             dx = 200 + 10;
             dy = 60 + 10;
 
@@ -83,8 +83,12 @@ namespace vcs_Draw_GraphicsPath
             richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0 + 30);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1620, 820);
+            this.Size = new Size(1680, 900);
             this.Text = "vcs_Draw_GraphicsPath";
+
+            //設定執行後的表單起始位置
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((1920 - this.Size.Width) / 2, (1080 - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -152,50 +156,40 @@ namespace vcs_Draw_GraphicsPath
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
             // Make a GraphicsPath to define the start cap.
-            using (GraphicsPath start_path = new GraphicsPath())
+            GraphicsPath start_path = new GraphicsPath();
+            start_path.AddArc(-2, 0, 4, 4, 180, 180);
+
+            // Make the start cap.
+            CustomLineCap start_cap = new CustomLineCap(null, start_path);
+            // Make a GraphicsPath to define the end cap.
+            GraphicsPath end_path = new GraphicsPath();
+            end_path.AddLine(0, 0, -2, -2);
+            end_path.AddLine(0, 0, 2, -2);
+
+            // Make the end cap.
+            CustomLineCap end_cap = new CustomLineCap(null, end_path);
+            // Make a pen that uses the custom caps.
+            Pen the_pen = new Pen(Color.Blue, 5);
+            the_pen.CustomStartCap = start_cap;
+            the_pen.CustomEndCap = end_cap;
+
+            // Draw a line.
+            g.DrawLine(the_pen, 40, 40, 200, 40);
+
+            // Draw a polygon.
+            PointF[] points = new PointF[]
             {
-                start_path.AddArc(-2, 0, 4, 4, 180, 180);
+                new PointF(40, 80),
+                new PointF(120, 100),
+                new PointF(230, 70),
+            };
+            the_pen.Color = Color.Green;
+            g.DrawLines(the_pen, points);
 
-                // Make the start cap.
-                using (CustomLineCap start_cap = new CustomLineCap(null, start_path))
-                {
-                    // Make a GraphicsPath to define the end cap.
-                    using (GraphicsPath end_path = new GraphicsPath())
-                    {
-                        end_path.AddLine(0, 0, -2, -2);
-                        end_path.AddLine(0, 0, 2, -2);
-
-                        // Make the end cap.
-                        using (CustomLineCap end_cap = new CustomLineCap(null, end_path))
-                        {
-                            // Make a pen that uses the custom caps.
-                            using (Pen the_pen = new Pen(Color.Blue, 5))
-                            {
-                                the_pen.CustomStartCap = start_cap;
-                                the_pen.CustomEndCap = end_cap;
-
-                                // Draw a line.
-                                g.DrawLine(the_pen, 40, 40, 200, 40);
-
-                                // Draw a polygon.
-                                PointF[] points = new PointF[] 
-                                {
-                                    new PointF(40, 80),
-                                    new PointF(120, 100),
-                                    new PointF(230, 70),
-                                };
-                                the_pen.Color = Color.Green;
-                                g.DrawLines(the_pen, points);
-
-                                // Draw a transformed arc.
-                                g.ScaleTransform(3, 1);
-                                the_pen.Color = Color.Red;
-                                g.DrawArc(the_pen, 20, 120, 70, 60, 180, 270);
-                            }
-                        }
-                    }
-                }
-            }
+            // Draw a transformed arc.
+            g.ScaleTransform(3, 1);
+            the_pen.Color = Color.Red;
+            g.DrawArc(the_pen, 20, 120, 70, 60, 180, 270);
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -305,14 +299,10 @@ namespace vcs_Draw_GraphicsPath
 
             g.DrawPath(Pens.Red, gp); // 繪出GraphicsPath物件
             */
-
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-
-
-
             //連接繪圖物件
             GraphicsPath gp = new GraphicsPath(); // GraphicsPath物件
             int Cx = this.pictureBox1.ClientSize.Width * 1 / 4;   // 找到視窗客戶區中心點
@@ -346,7 +336,6 @@ namespace vcs_Draw_GraphicsPath
             g.FillRegion(Brushes.Cyan, rgn); // 區域表面 繪出
             g.DrawPath(Pens.Black, gp2); // 圖形軌跡 繪出
 
-
             GraphicsPath gp3 = new GraphicsPath(); // GraphicsPath圖形軌跡物件
 
             int x = this.pictureBox1.ClientSize.Width * 3 / 4; // 視窗客戶區的正中央
@@ -373,10 +362,6 @@ namespace vcs_Draw_GraphicsPath
 
             g.FillRegion(brush, rgn2); // 區域表面 繪出
             g.DrawPath(Pens.Black, gp3); // 圖形軌跡 繪出
-
-
-
-
 
             GraphicsPath gp4 = new GraphicsPath(); // GraphicsPath物件
 
@@ -408,8 +393,6 @@ namespace vcs_Draw_GraphicsPath
             // 將 gp 內的形狀 繪出
             g.DrawPath(Pens.Black, gp4); // 繪出GraphicsPath物件
 
-
-
             GraphicsPath gp5 = new GraphicsPath(); // GraphicsPath物件
 
             int Cx5 = this.pictureBox1.ClientSize.Width / 2 + 50; // 視窗客戶區的正中央
@@ -437,8 +420,6 @@ namespace vcs_Draw_GraphicsPath
 
             // 將 gp5 內的形狀 繪出
             g.DrawPath(Pens.Red, gp5); // 繪出GraphicsPath物件
-
-
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -479,9 +460,11 @@ namespace vcs_Draw_GraphicsPath
             for (int i = 1; i < path.PointCount; i++)
             {
                 PointF end_point = path.PathPoints[i];
-                DrawTextOnSegment2(gr, brush, font, txt, ref start_ch,
-                    ref start_point, end_point, text_above_path);
-                if (start_ch >= txt.Length) break;
+                DrawTextOnSegment2(gr, brush, font, txt, ref start_ch, ref start_point, end_point, text_above_path);
+                if (start_ch >= txt.Length)
+                {
+                    break;
+                }
             }
         }
 
@@ -509,17 +492,21 @@ namespace vcs_Draw_GraphicsPath
                 }
                 last_ch++;
             }
-            if (last_ch < first_ch) return;
-            if (last_ch >= txt.Length) last_ch = txt.Length - 1;
+            if (last_ch < first_ch)
+            {
+                return;
+            }
+            if (last_ch >= txt.Length)
+            {
+                last_ch = txt.Length - 1;
+            }
             string chars_that_fit = txt.Substring(first_ch, last_ch - first_ch + 1);
 
             // Rotate and translate to position the characters.
             GraphicsState state = gr.Save();
             if (text_above_segment)
             {
-                gr.TranslateTransform(0,
-                    -gr.MeasureString(chars_that_fit, font).Height,
-                    MatrixOrder.Append);
+                gr.TranslateTransform(0, -gr.MeasureString(chars_that_fit, font).Height, MatrixOrder.Append);
             }
             float angle = (float)(180 * Math.Atan2(dy, dx) / Math.PI);
             gr.RotateTransform(angle, MatrixOrder.Append);
@@ -534,9 +521,7 @@ namespace vcs_Draw_GraphicsPath
             // Update first_ch and start_point.
             first_ch = last_ch + 1;
             float text_width = gr.MeasureString(chars_that_fit, font).Width;
-            start_point = new PointF(
-                start_point.X + dx * text_width,
-                start_point.Y + dy * text_width);
+            start_point = new PointF(start_point.X + dx * text_width, start_point.Y + dy * text_width);
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -557,7 +542,6 @@ namespace vcs_Draw_GraphicsPath
             this.Region = r;
 
             //this.Region = new Region(gp); //same
-
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -706,7 +690,7 @@ namespace vcs_Draw_GraphicsPath
 
         private void button19_Click(object sender, EventArgs e)
         {
-
+            Application.Exit();
         }
 
         private GraphicsPath CreateRound(Rectangle rectangle, int r)
@@ -804,4 +788,3 @@ namespace vcs_Draw_GraphicsPath
         }
     }
 }
-

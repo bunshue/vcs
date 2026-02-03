@@ -29,6 +29,14 @@ namespace vcs_Draw6_String2
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
+            pictureBox2.Resize += new EventHandler(pictureBox2_Resize);
+            pictureBox2.Paint += new PaintEventHandler(pictureBox2_Paint);
+        }
+
+        void show_item_location()
+        {
             label1.Location = new Point(10, 10);
             pictureBox1.Size = new Size(988, 470);
             pictureBox1.Location = new Point(10, 30);
@@ -36,11 +44,29 @@ namespace vcs_Draw6_String2
             pictureBox2.Size = new Size(988, 100);
             pictureBox2.Location = new Point(10, 540);
 
-            pictureBox2.Resize += new EventHandler(pictureBox2_Resize);
-            pictureBox2.Paint += new PaintEventHandler(pictureBox2_Paint);
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+            int dd = 40;
 
-            this.Size = new Size(1167, 693);
+            //button
+            x_st = 1020;
+            y_st = 10;
+            dx = 200 + 5;
+            dy = 60 + 5;
+
+            richTextBox1.Size = new Size(260, 470);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1300, 700);
             this.Text = "vcs_Draw6_String2";
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -129,9 +155,6 @@ namespace vcs_Draw6_String2
             format.LineAlignment = StringAlignment.Far;
             e.Graphics.DrawRectangle(_pen, rect.Left, rect.Top, rect.Width, rect.Height);
             DrawString(e.Graphics, _text, _font, _brush, rect, format, 45);
-
-
-
         }
 
         /// <summary>  
@@ -189,6 +212,8 @@ namespace vcs_Draw6_String2
 
         private SizeF ConvertSize(SizeF size, float angle)
         {
+            richTextBox1.Text += "angle = " + angle.ToString() + "\n";
+            richTextBox1.Text += "size = " + size.ToString() + "\n";
             Matrix matrix = new Matrix();
             matrix.Rotate(angle);
 
@@ -214,15 +239,22 @@ namespace vcs_Draw6_String2
             {
                 // 求取並集  
                 if (pt.X < left)
+                {
                     left = pt.X;
+                }
                 if (pt.X > right)
+                {
                     right = pt.X;
+                }
                 if (pt.Y < top)
+                {
                     top = pt.Y;
+                }
                 if (pt.Y > bottom)
+                {
                     bottom = pt.Y;
+                }
             }
-
             SizeF result = new SizeF(right - left, bottom - top);
             return result;
         }
@@ -260,7 +292,6 @@ namespace vcs_Draw6_String2
                 default:
                     break;
             }
-
             return pt;
         }
 
@@ -291,8 +322,7 @@ namespace vcs_Draw6_String2
             e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
 
             // Draw within a rectangle excluding the margins.
-            RectangleF rect = new RectangleF(
-                TextMargin.Left, TextMargin.Top,
+            RectangleF rect = new RectangleF(TextMargin.Left, TextMargin.Top,
                 pictureBox2.ClientSize.Width - TextMargin.Left - TextMargin.Right,
                 pictureBox2.ClientSize.Height - TextMargin.Top - TextMargin.Bottom);
 
