@@ -153,8 +153,6 @@ namespace vcs_Draw6_String4
                 //myImage.Save(filename, ImageFormat.Jpeg);
                 richTextBox1.Text += "本程式截圖，存檔檔名：" + filename + "\n";
                 cnt++;
-
-
             }
         }
 
@@ -188,8 +186,7 @@ namespace vcs_Draw6_String4
             PngsToGif(dirname, filename, 500, true);
 
             richTextBox1.Text += "資料夾 : " + dirname + "\n製成 : " + filename + "\n";
-            richTextBox1.Text += "完成\n\n";
-
+            richTextBox1.Text += "完成\n";
         }
 
         /// <summary>
@@ -310,58 +307,90 @@ namespace vcs_Draw6_String4
             if ((cb_font_style1.Checked == true) && (cb_font_style2.Checked == true) && (cb_font_style3.Checked == true))
             {
                 if (SelectFont == 1)
+                {
                     font = new Font("標楷體", font_size, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
+                }
                 else if (SelectFont == 2)
+                {
                     font = new Font("新細明體", font_size, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
+                }
             }
             else if ((cb_font_style1.Checked == true) && (cb_font_style2.Checked == true) && (cb_font_style3.Checked == false))
             {
                 if (SelectFont == 1)
+                {
                     font = new Font("標楷體", font_size, FontStyle.Bold | FontStyle.Italic);
+                }
                 else if (SelectFont == 2)
+                {
                     font = new Font("新細明體", font_size, FontStyle.Bold | FontStyle.Italic);
+                }
             }
             else if ((cb_font_style1.Checked == true) && (cb_font_style2.Checked == false) && (cb_font_style3.Checked == true))
             {
                 if (SelectFont == 1)
+                {
                     font = new Font("標楷體", font_size, FontStyle.Bold | FontStyle.Underline);
+                }
                 else if (SelectFont == 2)
+                {
                     font = new Font("新細明體", font_size, FontStyle.Bold | FontStyle.Underline);
+                }
             }
             else if ((cb_font_style1.Checked == false) && (cb_font_style2.Checked == true) && (cb_font_style3.Checked == true))
             {
                 if (SelectFont == 1)
+                {
                     font = new Font("標楷體", font_size, FontStyle.Italic | FontStyle.Underline);
+                }
                 else if (SelectFont == 2)
+                {
                     font = new Font("新細明體", font_size, FontStyle.Italic | FontStyle.Underline);
+                }
             }
             else if ((cb_font_style1.Checked == true) && (cb_font_style2.Checked == false) && (cb_font_style3.Checked == false))
             {
                 if (SelectFont == 1)
+                {
                     font = new Font("標楷體", font_size, FontStyle.Bold);
+                }
                 else if (SelectFont == 2)
+                {
                     font = new Font("新細明體", font_size, FontStyle.Bold);
+                }
             }
             else if ((cb_font_style1.Checked == false) && (cb_font_style2.Checked == false) && (cb_font_style3.Checked == true))
             {
                 if (SelectFont == 1)
+                {
                     font = new Font("標楷體", font_size, FontStyle.Underline);
+                }
                 else if (SelectFont == 2)
+                {
                     font = new Font("新細明體", font_size, FontStyle.Underline);
+                }
             }
             else if ((cb_font_style1.Checked == false) && (cb_font_style2.Checked == true) && (cb_font_style3.Checked == false))
             {
                 if (SelectFont == 1)
+                {
                     font = new Font("標楷體", font_size, FontStyle.Italic);
+                }
                 else if (SelectFont == 2)
+                {
                     font = new Font("新細明體", font_size, FontStyle.Italic);
+                }
             }
             else if ((cb_font_style1.Checked == false) && (cb_font_style2.Checked == false) && (cb_font_style3.Checked == false))
             {
                 if (SelectFont == 1)
+                {
                     font = new Font("標楷體", font_size, FontStyle.Regular);
+                }
                 else if (SelectFont == 2)
+                {
                     font = new Font("新細明體", font_size, FontStyle.Regular);
+                }
             }
         }
 
@@ -370,18 +399,22 @@ namespace vcs_Draw6_String4
             timer1.Interval += 5;
 
             if (moving_steps > 5)
+            {
                 moving_steps -= 5;
-
+            }
         }
 
         private void bt_speed_plus_Click(object sender, EventArgs e)
         {
             if (timer1.Interval > 5)
+            {
                 timer1.Interval -= 5;
+            }
 
             if (moving_steps < 100)
+            {
                 moving_steps += 5;
-
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -416,7 +449,6 @@ namespace vcs_Draw6_String4
             richTextBox1.Clear();
 
             /* debug
-
             string text1 = "從顧客";
             string text2 = "從顧客、競";
             string text3 = "從顧客、競爭對";
@@ -437,13 +469,8 @@ namespace vcs_Draw6_String4
                 richTextBox1.Text += tt + "\n";
                 get_string_size(tt);
             }
-
-
-
             //richTextBox1.Text += text1(0:10);
             */
-
-
         }
 
         private void bt_background_color_Click(object sender, EventArgs e)
@@ -458,7 +485,6 @@ namespace vcs_Draw6_String4
                 background_color = colorDialog1.Color;
                 //richTextBox1.SelectionBackColor = colorDialog1.Color;
             }
-
         }
 
         private void bt_open_picture_Click(object sender, EventArgs e)
@@ -529,14 +555,12 @@ namespace vcs_Draw6_String4
             int hh = 100;
             int x_st = (W - ww) / 2;
             int y_st = 0;
-
             int left = (W - ww) / 2;
 
             //原圖貼上
             //                      貼上位置x      貼上位置y      貼上大小W            貼上大小H
             //e.Graphics.DrawImage(bitmap1, x_st, y_st, bitmap1.Width * 12 / 10, bitmap1.Height * 12 / 10);
             e.Graphics.DrawImage(bitmap1, x_st, y_st, ww, hh);
-
 
             Pen pen = new Pen(Color.Red, 2);
             //Rectangle rect = SelectionRectangle(true);
@@ -547,7 +571,6 @@ namespace vcs_Draw6_String4
             //e.Graphics.DrawRectangle(pen, 5, 5, pictureBox1.Size.Width - 10, pictureBox1.Size.Height - 10);
 
             string text = textBox1.Text;
-
             /*
             richTextBox1.Text += font + "\n";
             richTextBox1.Text += font.Name + "\n";
@@ -565,16 +588,23 @@ namespace vcs_Draw6_String4
             xx -= moving_steps;
 
             if (xx < left + ww)
+            {
                 dx = 100;
+            }
             else
+            {
                 dx = 0;
-
+            }
 
             SolidBrush sb = new SolidBrush(foreground_color);
-            if ((xx + tmp_width) < (left+dx))
+            if ((xx + tmp_width) < (left + dx))
+            {
                 e.Graphics.DrawString(text, font, sb, xx - dx, yy);
+            }
             else if (xx > (left + ww))
+            {
                 e.Graphics.DrawString(text, font, sb, xx - dx, yy);
+            }
             else
             {
                 //e.Graphics.DrawString(text, font, Brushes.Red, xx - dx, yy);
@@ -584,21 +614,26 @@ namespace vcs_Draw6_String4
                 int over = left + ww - xx;
                 int left_word = over / every_word_width;
                 if (left_word == 0)
+                {
                     left_word = 1;
+                }
 
-                string left_string = text.Substring(0,left_word);
+                string left_string = text.Substring(0, left_word);
                 //richTextBox1.Text += left_word.ToString() + " ";
                 if (left_word == 1)
+                {
                     e.Graphics.DrawString(left_string, font, sb, xx - dx - 10, yy);
+                }
                 else
+                {
                     e.Graphics.DrawString(left_string, font, sb, xx - dx - 10, yy);
+                }
 
-                int dd = left_word * every_word_width + ww+40;
+                int dd = left_word * every_word_width + ww + 40;
 
                 string right_string = text.Substring(left_word, len - left_word);
                 e.Graphics.DrawString(right_string, font, sb, xx - dx + dd, yy);
-                    //string tt = text.Substring(0, i + 1);
-
+                //string tt = text.Substring(0, i + 1);
             }
 
             //e.Graphics.DrawString(text, font, sb, xx - dx, yy);
@@ -615,12 +650,24 @@ namespace vcs_Draw6_String4
                     richTextBox1.Text += "製作完成";
                     button1.BackColor = SystemColors.ControlLight;
                 }
-
             }
-
-
         }
     }
 }
 
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
 
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*
+
+*/
