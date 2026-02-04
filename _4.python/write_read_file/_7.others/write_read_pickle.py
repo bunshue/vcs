@@ -96,19 +96,18 @@ game_info = {
     "pocket": ["黃金", "鑰匙", "小刀"],
 }
 
-filename = "tmp_pickle4.dat"
-
-f = open(filename, "wb")  # 二進位開啟
-pickle.dump(game_info, f)
-f.close()
+filename = "tmp_pickle4.pickle"
+filename_obj = open(filename, "wb")  # 二進位開啟
+pickle.dump(game_info, filename_obj)
+filename_obj.close()
 
 print("------------------------------------------------------------")  # 60個
+# 3030
 
-filename = "data/data19.dat"
-
-f = open(filename, "rb")  # 二進位開啟
-game_info = pickle.load(f)
-f.close()
+filename = "tmp_pickle4.pickle"
+filename_obj = open(filename, "rb")  # 二進位開啟
+game_info = pickle.load(filename_obj)
+filename_obj.close()
 print(game_info)
 
 print("------------------------------------------------------------")  # 60個
@@ -241,8 +240,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-import pickle
-
 data1 = {"a": [1, 2.0, 4 + 6j], "b": ("string1", "Unicode string"), "c": None}
 output = open("tmp2.pkl", "wb")
 pickle.dump(data1, output)
@@ -254,17 +251,15 @@ print(data2)
 pkl_file.close()
 
 print("------------------------------------------------------------")  # 60個
-
-import pickle
-
-file_obj = open(root + "/recordmat.dat", "wb")
+""" NG
+file_obj = open("recordmat.dat", "wb")
 pickle.dump(recordmat[0], file_obj)
 file_obj.close()
 
-read_obj = open(root + "/recordmat.dat", "rb")
+read_obj = open("recordmat.dat", "rb")
 readmat = pickle.load(read_obj)
 print(shape(readmat))
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 
@@ -276,6 +271,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個

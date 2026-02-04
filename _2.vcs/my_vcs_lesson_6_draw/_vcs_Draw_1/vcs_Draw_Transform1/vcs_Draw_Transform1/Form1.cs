@@ -779,7 +779,77 @@ namespace vcs_Draw_Transform1
 
         private void button19_Click(object sender, EventArgs e)
         {
+            g.Clear(Color.Pink);
 
+            //原始資料
+            int N = 10;
+            PointF[] pts = new PointF[N];
+            for (int i = 0; i < N; i++)
+            {
+                pts[i].X = 30 * i;
+                pts[i].Y = 30 * i;
+            }
+
+            Matrix matrix = new Matrix();
+
+            for (int i = 0; i < N; i++)
+            {
+                g.FillEllipse(Brushes.Red, pts[i].X - 15, pts[i].Y - 15, 30, 30);
+            }
+            g.DrawString("原始資料", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(470, 0));
+
+            //float angle = 45;
+            //matrix.Rotate(angle);  // 旋轉
+            //matrix.Translate(100, 100);  // 平移, 右移下移
+            //matrix.Scale(1.5f, 1.5f);  //縮放, 水平 垂直
+
+            // 使用矩陣物件做轉換
+            float m11 = 1.0f;  // x軸縮放1.0倍
+            float m12 = 0.0f;  // y軸歪曲0.0倍
+            float m21 = 0.0f;  // x軸歪曲0.0倍
+            float m22 = 1.0f;  // y軸縮放1.0倍
+            float dx = 0.0f;  // x軸平移
+            float dy = 0.0f;  // y軸平移
+            Matrix matrix2 = new Matrix(m11, m12, m21, m22, dx, dy);  // 設定仿射矩陣, 矩陣轉置, 只能 矩形範圍 轉 平行四邊形範圍
+            matrix.Multiply(matrix2);
+
+            //平移倍數
+            float scaleX = 1.0f;  // x軸平移 1.0倍
+            float scaleY = 1.0f;  // x軸平移 1.5倍
+            matrix.Scale(scaleX, scaleY);
+
+            // 剪切, 歪曲
+            float shearX = 0.0f;  // x軸歪曲0.0倍
+            float shearY = 0.0f;  // y軸歪曲0.0倍
+            matrix.Shear(shearX, shearY);
+
+            matrix.TransformPoints(pts);
+
+            for (int i = 0; i < N; i++)
+            {
+                g.FillEllipse(Brushes.Green, pts[i].X - 10, pts[i].Y - 10, 20, 20);
+            }
+
+            /*
+            matrix.Reset();
+            //matrix.Translate(100, 100);  // 平移, 右移下移
+            matrix.TransformPoints(pts);
+
+            for (int i = 0; i < N; i++)
+            {
+                g.FillEllipse(Brushes.Blue, pts[i].X - 5, pts[i].Y - 5, 10, 10);
+            }
+
+            matrix.Reset();
+            matrix.Translate(100, 100);  // 平移, 右移下移
+            matrix.TransformPoints(pts);
+
+            for (int i = 0; i < N; i++)
+            {
+                g.FillEllipse(Brushes.Lime, pts[i].X - 5, pts[i].Y - 5, 10, 10);
+            }
+            */
+            pictureBox1.Image = bitmap1;
         }
 
         void draw_grid(Graphics g)

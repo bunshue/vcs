@@ -39,354 +39,7 @@ import requests
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-# ch1_1.py
-
-listNumbers = [5, 10, 20, 1]  # 串列資料
-tupleNumbers = (1, 5, 10, 9)  # 元組資料
-jsonData1 = json.dumps(listNumbers)  # 將串列資料轉成json資料
-jsonData2 = json.dumps(tupleNumbers)  # 將串列資料轉成json資料
-print("串列轉換成json的陣列", jsonData1)
-print("元組轉換成json的陣列", jsonData2)
-print("json陣列在Python的資料類型 ", type(jsonData1))
-
-print("------------------------------------------------------------")  # 60個
-
-# ch1_2.py
-
-listObj = [{"Name": "Peter", "Age": 25, "Gender": "M"}]  # 串列資料元素是字典
-jsonData = json.dumps(listObj)  # 將串列資料轉成json資料
-print("串列轉換成json的陣列", jsonData)
-print("json陣列在Python的資料類型 ", type(jsonData))
-
-print("------------------------------------------------------------")  # 60個
-
-# ch1_3.py
-
-players = {
-    "Stephen Curry": "Golden State Warriors",
-    "Kevin Durant": "Golden State Warriors",
-    "Lebron James": "Cleveland Cavaliers",
-    "James Harden": "Houston Rockets",
-    "Paul Gasol": "San Antonio Spurs",
-}
-jsonObj1 = json.dumps(players)  # 未用排序將字典轉成json物件
-jsonObj2 = json.dumps(players, sort_keys=True)  # 有用排序將字典轉成json物件
-print("未用排序將字典轉換成json的物件", jsonObj1)
-print("使用排序將字典轉換成json的物件", jsonObj2)
-print("有排序與未排序物件是否相同    ", jsonObj1 == jsonObj2)
-print("json物件在Python的資料類型 ", type(jsonObj1))
-
-print("------------------------------------------------------------")  # 60個
-
-# ch1_4.py
-
-players = {
-    "Stephen Curry": "Golden State Warriors",
-    "Kevin Durant": "Golden State Warriors",
-    "Lebron James": "Cleveland Cavaliers",
-    "James Harden": "Houston Rockets",
-    "Paul Gasol": "San Antonio Spurs",
-}
-jsonObj = json.dumps(players, sort_keys=True, indent=4)
-print(jsonObj)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch1_5.py
-
-jsonObj = '{"b":80, "a":25, "c":60}'  # json物件
-dictObj = json.loads(jsonObj)  # 轉成Python物件
-print(dictObj)
-print(type(dictObj))
-
-print("------------------------------------------------------------")  # 60個
-
-# ch1_6.py
-
-obj = '{"Asia":[{"Japan":"Tokyo"},{"China":"Beijing"}]}'
-json_obj = json.loads(obj)
-print(json_obj)
-print(json_obj["Asia"])
-print(json_obj["Asia"][0])
-print(json_obj["Asia"][1])
-print(json_obj["Asia"][0]["Japan"])
-print(json_obj["Asia"][1]["China"])
-
-print("------------------------------------------------------------")  # 60個
-
-# ch1_7.py
-
-obj = '{"Asia":\
-        [{"Japan":"Tokyo"},\
-         {"China":"Beijing"}]\
-       }'
-json_obj = json.loads(obj)
-print(json_obj)
-print(json_obj["Asia"])
-print(json_obj["Asia"][0])
-print(json_obj["Asia"][1])
-print(json_obj["Asia"][0]["Japan"])
-print(json_obj["Asia"][1]["China"])
-
-print("------------------------------------------------------------")  # 60個
-
-# ch1_8.py
-
-dictObj = {"b": 80, "a": 25, "c": 60}
-fn = "tmp_out1_8.json"
-with open(fn, "w") as fnObj:
-    json.dump(dictObj, fnObj)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch1_9.py
-
-obj = {"Asia": [{"Japan": "Tokyo"}, {"China": "Beijing"}]}
-fn = "tmp_out1_9.json"
-with open(fn, "w") as fnObj:
-    json.dump(obj, fnObj)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch1_9_1.py
-
-objlist = [{"日本": "Japan", "首都": "Tykyo"}, {"美州": "USA", "首都": "Washington"}]
-
-fn = "tmp_out1_9_1.json"
-with open(fn, "w") as fnObj:
-    json.dump(objlist, fnObj)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch1_9_2.py
-
-objlist = [{"日本": "Japan", "首都": "Tykyo"}, {"美州": "USA", "首都": "Washington"}]
-
-fn = "tmp_out1_9_2.json"
-with open(fn, "w", encoding="utf-8") as fnObj:
-    json.dump(objlist, fnObj, indent=2, ensure_ascii=False)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch1_10.py
-
-fn = "tmp_out1_9.json"
-with open(fn, "r") as fnObj:
-    data = json.load(fnObj)
-
-print(data)
-print(type(data))
-
-print("------------------------------------------------------------")  # 60個
-
-# ch1_11.py
-
-fn = "login.json"
-login = "david"
-with open(fn, "w") as fnObj:
-    json.dump(login, fnObj)
-    print("%s! 歡迎使用本系統! " % login)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch1_12.py
-
-fn = "login.json"
-with open(fn, "r") as fnObj:
-    login = json.load(fnObj)
-    print("%s! 歡迎回來使用本系統! " % login)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch1_13.py
-
-fn = "login1_13.json"
-try:
-    with open(fn) as fnObj:
-        login = json.load(fnObj)
-except Exception:
-    login = "david"
-    with open(fn, "w") as fnObj:
-        json.dump(login, fnObj)
-        print("系統已經記錄你的帳號 ")
-else:
-    print("%s 歡迎回來" % login)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch1_14.py
-
-fn = "data/populations.json"
-with open(fn) as fnObj:
-    getDatas = json.load(fnObj)  # 讀json檔案
-
-for getData in getDatas:
-    if getData["Year"] == "2000":  # 篩選2000年的數據
-        countryName = getData["Country Name"]  # 國家名稱
-        countryCode = getData["Country Code"]  # 國家代碼
-        population = int(float(getData["Numbers"]))  # 人口數據
-        print("國家代碼 =", countryCode, "國家名稱 =", countryName, "人口數 =", population)
-
-print("------------------------------------------------------------")  # 60個
-
-""" NG
-# ch1_15.py
-from pygal.maps.world import COUNTRIES
-
-for countryCode in sorted(COUNTRIES.keys()):
-    print("國家代碼 :", countryCode, "  國家名稱 = ", COUNTRIES[countryCode])
-
-print("------------------------------------------------------------")  # 60個
-
-# ch1_16.py
-from pygal.maps.world import COUNTRIES
-
-
-def getCountryCode(countryName):
-    # 輸入國家名稱回傳國家代碼
-    for dictCode, dictName in COUNTRIES.items():  # 搜尋國家與國家代碼字典
-        if dictName == countryName:
-            return dictCode  # 如果找到則回傳國家代碼
-    return None  # 找不到則回傳None
-
-
-fn = "data/populations.json"
-with open(fn) as fnObj:
-    getDatas = json.load(fnObj)  # 讀取人口數據json檔案
-
-for getData in getDatas:
-    if getData["Year"] == "2000":  # 篩選2000年的數據
-        countryName = getData["Country Name"]  # 國家名稱
-        countryCode = getCountryCode(countryName)
-        population = int(float(getData["Numbers"]))  # 人口數
-        if countryCode != None:
-            print(countryCode, ":", population)  # 國家名稱相符
-        else:
-            print(countryName, " 名稱不吻合:")  # 國家名稱不吻合
-
-print("------------------------------------------------------------")  # 60個
-
-# ch1_17.py
-import pygal.maps.world
-
-worldMap = pygal.maps.world.World()  # 建立世界地圖物件
-worldMap.title = "China in the Map"  # 世界地圖標題
-worldMap.add("China", ["cn"])  # 標記中國
-worldMap.render_to_file("tmp_out1_17.svg")  # 儲存地圖檔案
-
-
-print("------------------------------------------------------------")  # 60個
-
-# ch1_18.py
-import pygal.maps.world
-
-worldMap = pygal.maps.world.World()  # 建立世界地圖物件
-worldMap.title = "China/Japan/Thailand"  # 世界地圖標題
-worldMap.add("Asia", ["cn", "jp", "th"])  # 標記Asia
-worldMap.render_to_file("tmp_out1_18.svg")  # 儲存地圖檔案
-
-
-print("------------------------------------------------------------")  # 60個
-
-# ch1_19.py
-import pygal.maps.world
-
-worldMap = pygal.maps.world.World()  # 建立世界地圖物件
-worldMap.title = " Asia, Europe, Africa, and North America"  # 世界地圖標題
-worldMap.add("Asia", ["cn", "jp", "th"])  # 標記Asia
-worldMap.add("Europe", ["fr", "de", "it"])  # 標記Europe
-worldMap.add("Africa", ["eg", "ug", "ng"])  # 標記Africa
-worldMap.add("North America", ["ca", "us", "mx"])  # 標記北美洲
-worldMap.render_to_file("tmp_out1_19.svg")  # 儲存地圖檔案
-
-print("------------------------------------------------------------")  # 60個
-
-# ch1_20.py
-import pygal.maps.world
-
-worldMap = pygal.maps.world.World()  # 建立世界地圖物件
-worldMap.title = "Populations in China/Japan/Thailand"  # 世界地圖標題
-worldMap.add("Asia", {"cn": 1262645000, "jp": 126870000, "th": 63155029})  # 標記人口資訊
-worldMap.render_to_file("tmp_out1_20.svg")  # 儲存地圖檔案
-
-print("------------------------------------------------------------")  # 60個
-
-# ch1_21.py
-import pygal.maps.world
-from pygal.maps.world import COUNTRIES
-
-
-def getCountryCode(countryName):
-    # 輸入國家名稱回傳國家代碼
-    for dictCode, dictName in COUNTRIES.items():  # 搜尋國家與國家代碼字典
-        if dictName == countryName:
-            return dictCode  # 如果找到則回傳國家代碼
-    return None  # 找不到則回傳None
-
-
-fn = "data/populations.json"
-with open(fn) as fnObj:
-    getDatas = json.load(fnObj)  # 讀取人口數據json檔案
-
-dictData = {}  # 定義地圖使用的字典
-for getData in getDatas:
-    if getData["Year"] == "2000":  # 篩選2000年的數據
-        countryName = getData["Country Name"]  # 國家名稱
-        countryCode = getCountryCode(countryName)
-        population = int(float(getData["Numbers"]))  # 人口數
-        if countryCode != None:
-            dictData[countryCode] = population  # 代碼:人口數據加入字典
-
-worldMap = pygal.maps.world.World()
-worldMap.title = "World Population in 2000"
-worldMap.add("Year 2000", dictData)
-worldMap.render_to_file("tmp_out1_21.svg")  # 儲存地圖檔案
-
-print("------------------------------------------------------------")  # 60個
-
-# ch1_22.py
-
-import pygal.maps.world
-from pygal.maps.world import COUNTRIES
-
-
-def getCountryCode(countryName):
-    # 輸入國家名稱回傳國家代碼
-    for dictCode, dictName in COUNTRIES.items():  # 搜尋國家與國家代碼字典
-        if dictName == countryName:
-            return dictCode  # 如果找到則回傳國家代碼
-    return None  # 找不到則回傳None
-
-
-fn = "data/populations.json"
-with open(fn) as fnObj:
-    getDatas = json.load(fnObj)  # 讀取人口數據json檔案
-
-dictData = {}  # 定義地圖使用的字典
-for getData in getDatas:
-    if getData["Year"] == "2000":  # 篩選2000年的數據
-        countryName = getData["Country Name"]  # 國家名稱
-        countryCode = getCountryCode(countryName)
-        population = int(float(getData["Numbers"]))  # 人口數
-        if countryCode != None:
-            dictData[countryCode] = population  # 代碼:人口數據加入字典
-
-dict1, dict2 = {}, {}  # 定義人口數分級的字典
-for code, population in dictData.items():
-    if population > 100000000:
-        dict1[code] = population  # 人口數大於1000000000
-    else:
-        dict2[code] = population  # 人口數小於1000000000
-
-worldMap = pygal.maps.world.World()
-worldMap.title = "World Population in 2000"
-worldMap.add("Over 1000000000", dict1)
-worldMap.add("Under 1000000000", dict2)
-worldMap.render_to_file("tmp_out1_22.svg")  # 儲存地圖檔案
-"""
-print("------------------------------------------------------------")  # 60個
-
-# ch1_23.py
+# 解讀 xml
 import xmltodict
 
 with open("data/myxml.xml", encoding="utf-8") as f:
@@ -402,435 +55,6 @@ print("國外業務人數 : ", txt["深智數位"]["業務部"]["國外"]["人�
 print("國內業務主管 : ", txt["深智數位"]["業務部"]["國內"])
 
 print("------------------------------------------------------------")  # 60個
-
-# ch2_1.py
-
-fn = "data/csvReport.csv"
-with open(fn) as csvFile:  # 開啟csv檔案
-    csvReader = csv.reader(csvFile)  # 讀檔案建立Reader物件
-    listReport = list(csvReader)  # 將資料轉成串列
-print(listReport)  # 列印串列方法
-
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_2.py
-
-fn = "data/csvReport.csv"
-with open(fn) as csvFile:  # 開啟csv檔案
-    csvReader = csv.reader(csvFile)  # 讀檔案建立Reader物件csvReader
-    for row in csvReader:  # 用迴圈列出csvReader物件內容
-        print("Row %s = " % csvReader.line_num, row)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_3.py
-
-fn = "data/csvReport.csv"
-with open(fn) as csvFile:  # 開啟csv檔案
-    csvReader = csv.reader(csvFile)  # 讀檔案建立Reader物件
-    listReport = list(csvReader)  # 將資料轉成串列
-for row in listReport:  # 使用迴圈列出串列內容
-    print(row)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_4.py
-
-fn = "data/csvReport.csv"
-with open(fn) as csvFile:  # 開啟csv檔案
-    csvReader = csv.reader(csvFile)  # 讀檔案建立Reader物件
-    listReport = list(csvReader)  # 將資料轉成串列
-
-print(listReport[0][1], listReport[0][2])
-print(listReport[1][2], listReport[1][5])
-print(listReport[2][3], listReport[2][6])
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_5.py
-
-fn = "data/csvPeople.csv"
-with open(fn) as csvFile:  # 開啟csv檔案
-    csvDictReader = csv.DictReader(csvFile)  # 讀檔案建立DictReader物件
-    for row in csvDictReader:  # 列出DictReader各行內容
-        print(row)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_6.py
-
-fn = "data/csvPeople.csv"
-with open(fn) as csvFile:  # 開啟csv檔案
-    csvDictReader = csv.DictReader(csvFile)  # 讀檔案建立DictReader物件
-    for row in csvDictReader:  # 使用迴圈列出字典內容
-        print(row["first_name"], row["last_name"])
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_7.py
-
-fn = "tmp_out2_7.csv"
-with open(fn, "w", newline="") as csvFile:  # 開啟csv檔案
-    csvWriter = csv.writer(csvFile)  # 建立Writer物件
-    csvWriter.writerow(["Name", "Age", "City"])
-    csvWriter.writerow(["Hung", "35", "Taipei"])
-    csvWriter.writerow(["James", "40", "Chicago"])
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_7_1.py
-
-fn = "tmp_out2_7_1.csv"
-with open(fn, "w") as csvFile:  # 開啟csv檔案
-    csvWriter = csv.writer(csvFile)  # 建立Writer物件
-    csvWriter.writerow(["Name", "Age", "City"])
-    csvWriter.writerow(["Hung", "35", "Taipei"])
-    csvWriter.writerow(["James", "40", "Chicago"])
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_8.py
-
-infn = "data/csvReport.csv"  # 來源檔案
-outfn = "tmp_out2_8.csv"  # 目的檔案
-with open(infn) as csvRFile:  # 開啟csv檔案供讀取
-    csvReader = csv.reader(csvRFile)  # 讀檔案建立Reader物件
-    listReport = list(csvReader)  # 將資料轉成串列
-
-with open(outfn, "w", newline="") as csvOFile:  # 開啟csv檔案供寫入
-    csvWriter = csv.writer(csvOFile)  # 建立Writer物件
-    for row in listReport:  # 將串列寫入
-        csvWriter.writerow(row)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_9.py
-
-fn = "tmp_out2_9.csv"
-with open(fn, "w", newline="") as csvFile:  # 開啟csv檔案
-    csvWriter = csv.writer(csvFile, delimiter="\t")  # 建立Writer物件
-    csvWriter.writerow(["Name", "Age", "City"])
-    csvWriter.writerow(["Hung", "35", "Taipei"])
-    csvWriter.writerow(["James", "40", "Chicago"])
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_10.py
-
-fn = "tmp_out2_10.csv"
-with open(fn, "w", newline="") as csvFile:  # 開啟csv檔案
-    fields = ["Name", "Age", "City"]
-    dictWriter = csv.DictWriter(csvFile, fieldnames=fields)  # 建立Writer物件
-
-    dictWriter.writeheader()  # 寫入標題
-    dictWriter.writerow({"Name": "Hung", "Age": "35", "City": "Taipei"})
-    dictWriter.writerow({"Name": "James", "Age": "40", "City": "Chicago"})
-
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_11.py
-
-dictList = [
-    {"Name": "Hung", "Age": "35", "City": "Taipei"},  # 定義串列,元素是字典
-    {"Name": "James", "Age": "40", "City": "Chicago"},
-]
-
-fn = "tmp_out2_11.csv"
-with open(fn, "w", newline="") as csvFile:  # 開啟csv檔案
-    fields = ["Name", "Age", "City"]
-    dictWriter = csv.DictWriter(csvFile, fieldnames=fields)  # 建立Writer物件
-
-    dictWriter.writeheader()  # 寫入標題
-    for row in dictList:  # 寫入內容
-        dictWriter.writerow(row)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_12.py
-
-fn = "data/TaipeiWeatherJan.csv"
-with open(fn) as csvFile:
-    csvReader = csv.reader(csvFile)
-    headerRow = next(csvReader)  # 讀取文件下一行
-print(headerRow)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_13.py
-
-fn = "data/TaipeiWeatherJan.csv"
-with open(fn) as csvFile:
-    csvReader = csv.reader(csvFile)
-    headerRow = next(csvReader)  # 讀取文件下一行
-for i, header in enumerate(headerRow):
-    print(i, header)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_14.py
-
-fn = "data/TaipeiWeatherJan.csv"
-with open(fn) as csvFile:
-    csvReader = csv.reader(csvFile)
-    headerRow = next(csvReader)  # 讀取文件下一行
-    highTemps, lowTemps = [], []  # 設定空串列
-    for row in csvReader:
-        highTemps.append(row[1])  # 儲存最高溫
-        lowTemps.append(row[3])  # 儲存最低溫
-
-print("最高溫 : ", highTemps)
-print("最低溫 : ", lowTemps)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_15.py
-
-fn = "data/TaipeiWeatherJan.csv"
-with open(fn) as csvFile:
-    csvReader = csv.reader(csvFile)
-    headerRow = next(csvReader)  # 讀取文件下一行
-    highTemps = []  # 設定空串列
-    for row in csvReader:
-        highTemps.append(int(row[1]))  # 儲存最高溫
-
-plt.plot(highTemps)
-plt.title("Weather Report, Jan. 2017", fontsize=24)
-plt.xlabel("", fontsize=14)
-plt.ylabel("Temperature (C)", fontsize=14)
-plt.tick_params(axis="both", labelsize=12, color="red")
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_16.py
-
-fn = "data/TaipeiWeatherJan.csv"
-with open(fn) as csvFile:
-    csvReader = csv.reader(csvFile)
-    headerRow = next(csvReader)  # 讀取文件下一行
-    highTemps = []  # 設定空串列
-    for row in csvReader:
-        highTemps.append(int(row[1]))  # 儲存最高溫
-plt.figure(dpi=80, figsize=(12, 8))  # 設定繪圖區大小
-plt.plot(highTemps)
-plt.title("Weather Report, Jan. 2017", fontsize=24)
-plt.xlabel("", fontsize=14)
-plt.ylabel("Temperature (C)", fontsize=14)
-plt.tick_params(axis="both", labelsize=12, color="red")
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_17.py
-
-from datetime import datetime
-
-dateObj = datetime.strptime("2017/1/1", "%Y/%m/%d")
-print(dateObj)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_18.py
-
-from datetime import datetime
-
-fn = "data/TaipeiWeatherJan.csv"
-with open(fn) as csvFile:
-    csvReader = csv.reader(csvFile)
-    headerRow = next(csvReader)  # 讀取文件下一行
-    dates, highTemps = [], []  # 設定空串列
-    for row in csvReader:
-        highTemps.append(int(row[1]))  # 儲存最高溫
-        currentDate = datetime.strptime(row[0], "%Y/%m/%d")
-        dates.append(currentDate)
-
-plt.figure(dpi=80, figsize=(12, 8))  # 設定繪圖區大小
-plt.plot(dates, highTemps)  # 圖標增加日期刻度
-plt.title("Weather Report, Jan. 2017", fontsize=24)
-plt.xlabel("", fontsize=14)
-plt.ylabel("Temperature (C)", fontsize=14)
-plt.tick_params(axis="both", labelsize=12, color="red")
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_19.py
-
-from datetime import datetime
-
-fn = "data/TaipeiWeatherJan.csv"
-with open(fn) as csvFile:
-    csvReader = csv.reader(csvFile)
-    headerRow = next(csvReader)  # 讀取文件下一行
-    dates, highTemps = [], []  # 設定空串列
-    for row in csvReader:
-        highTemps.append(int(row[1]))  # 儲存最高溫
-        currentDate = datetime.strptime(row[0], "%Y/%m/%d")
-        dates.append(currentDate)
-
-fig = plt.figure(dpi=80, figsize=(12, 8))  # 設定繪圖區大小
-plt.plot(dates, highTemps)  # 圖標增加日期刻度
-fig.autofmt_xdate()  # 日期旋轉
-plt.title("Weather Report, Jan. 2017", fontsize=24)
-plt.xlabel("", fontsize=14)
-plt.ylabel("Temperature (C)", fontsize=14)
-plt.tick_params(axis="both", labelsize=12, color="red")
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_20.py
-
-from datetime import datetime
-
-fn = "data/TaipeiWeatherJan.csv"
-with open(fn) as csvFile:
-    csvReader = csv.reader(csvFile)
-    headerRow = next(csvReader)  # 讀取文件下一行
-    dates, highTemps = [], []  # 設定空串列
-    for row in csvReader:
-        highTemps.append(int(row[1]))  # 儲存最高溫
-        currentDate = datetime.strptime(row[0], "%Y/%m/%d")
-        dates.append(currentDate)
-
-fig = plt.figure(dpi=80, figsize=(12, 8))  # 設定繪圖區大小
-plt.plot(dates, highTemps)  # 圖標增加日期刻度
-fig.autofmt_xdate(rotation=60)  # 日期旋轉
-plt.title("Weather Report, Jan. 2017", fontsize=24)
-plt.xlabel("", fontsize=14)
-plt.ylabel("Temperature (C)", fontsize=14)
-plt.tick_params(axis="both", labelsize=12, color="red")
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_21.py
-
-from datetime import datetime
-
-fn = "data/TaipeiWeatherJan.csv"
-with open(fn) as csvFile:
-    csvReader = csv.reader(csvFile)
-    headerRow = next(csvReader)  # 讀取文件下一行
-    dates, highTemps, lowTemps = [], [], []  # 設定空串列
-    for row in csvReader:
-        try:
-            currentDate = datetime.strptime(row[0], "%Y/%m/%d")
-            highTemp = int(row[1])  # 設定最高溫
-            lowTemp = int(row[3])  # 設定最低溫
-        except Exception:
-            print("有缺值")
-        else:
-            highTemps.append(highTemp)  # 儲存最高溫
-            lowTemps.append(lowTemp)  # 儲存最低溫
-            dates.append(currentDate)  # 儲存日期
-
-fig = plt.figure(dpi=80, figsize=(12, 8))  # 設定繪圖區大小
-plt.plot(dates, highTemps)  # 繪製最高溫
-plt.plot(dates, lowTemps)  # 繪製最低溫
-fig.autofmt_xdate()  # 日期旋轉
-plt.title("Weather Report, Jan. 2017", fontsize=24)
-plt.xlabel("", fontsize=14)
-plt.ylabel("Temperature (C)", fontsize=14)
-plt.tick_params(axis="both", labelsize=12, color="red")
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_22.py
-
-from datetime import datetime
-
-fn = "data/TaipeiWeatherJan.csv"
-with open(fn) as csvFile:
-    csvReader = csv.reader(csvFile)
-    headerRow = next(csvReader)  # 讀取文件下一行
-    dates, highTemps, lowTemps = [], [], []  # 設定空串列
-    for row in csvReader:
-        try:
-            currentDate = datetime.strptime(row[0], "%Y/%m/%d")
-            highTemp = int(row[1])  # 設定最高溫
-            lowTemp = int(row[3])  # 設定最低溫
-        except Exception:
-            print("有缺值")
-        else:
-            highTemps.append(highTemp)  # 儲存最高溫
-            lowTemps.append(lowTemp)  # 儲存最低溫
-            dates.append(currentDate)  # 儲存日期
-
-fig = plt.figure(dpi=80, figsize=(12, 8))  # 設定繪圖區大小
-plt.plot(dates, highTemps)  # 繪製最高溫
-plt.plot(dates, lowTemps)  # 繪製最低溫
-plt.fill_between(dates, highTemps, lowTemps, color="y", alpha=0.2)  # 填滿區間
-fig.autofmt_xdate()  # 日期旋轉
-plt.title("Weather Report, Jan. 2017", fontsize=24)
-plt.xlabel("", fontsize=14)
-plt.ylabel("Temperature (C)", fontsize=14)
-plt.tick_params(axis="both", labelsize=12, color="red")
-show()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_23.py
-import pickle
-
-game_info = {
-    "position_X": "100",
-    "position_Y": "200",
-    "money": 300,
-    "pocket": ["黃金", "鑰匙", "小刀"],
-}
-
-fn = "tmp_ch2_23.dat"
-fn_obj = open(fn, "wb")  # 二進位開啟
-pickle.dump(game_info, fn_obj)
-fn_obj.close()
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_24.py
-
-import pickle
-
-fn = "tmp_ch2_23.dat"
-fn_obj = open(fn, "rb")  # 二進位開啟
-game_info = pickle.load(fn_obj)
-fn_obj.close()
-print(game_info)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_25.py
-
-import xlwt
-
-fn = "tmp_out2_25.xls"
-datahead = ["Phone", "TV", "Notebook"]
-price = ["35000", "18000", "28000"]
-wb = xlwt.Workbook()
-sh = wb.add_sheet("sheet1", cell_overwrite_ok=True)
-for i in range(len(datahead)):
-    sh.write(0, i, datahead[i])  # 寫入datahead list
-for j in range(len(price)):
-    sh.write(1, j, price[j])  # 寫入price list
-
-wb.save(fn)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch2_26.py
-
-import xlrd
-
-fn = "tmp_out2_25.xls"
-wb = xlrd.open_workbook(fn)
-sh = wb.sheets()[0]
-rows = sh.nrows
-for row in range(rows):
-    print(sh.row_values(row))
-
 print("------------------------------------------------------------")  # 60個
 
 # ch3_1.py
@@ -942,7 +166,7 @@ else:
     print("網頁下載失敗")
 
 print("------------------------------------------------------------")  # 60個
-"""NG
+
 # ch3_9.py
 
 url = "http://www.mcut.edu.tw/file_not_existed"  # 不存在的內容
@@ -955,6 +179,10 @@ except Exception as err:  # err是系統自訂的錯誤訊息
 print("程式結束")
 
 print("------------------------------------------------------------")  # 60個
+
+sys.exit()
+
+# 這裡NG
 
 # ch3_10.py
 
@@ -980,7 +208,7 @@ except Exception as err:  # err是系統自訂的錯誤訊息
 print("程式結束")
 
 print("------------------------------------------------------------")  # 60個
-"""
+
 # ch3_12.py
 
 url = "http://aaa.24ht.com.tw/"
@@ -990,11 +218,11 @@ htmlfile.raise_for_status()
 print("------------------------------------------------------------")  # 60個
 
 # ch3_12_1.py
-"""
+
 url = "https://www.kingstone.com.tw/new/basic/2013120504769?zone=book&lid=search&actid=WISE"
 htmlfile = requests.get(url)
 htmlfile.raise_for_status()
-"""
+
 print("------------------------------------------------------------")  # 60個
 
 # ch3_13.py
@@ -1048,12 +276,12 @@ try:
 except Exception as err:  # err是系統自訂的錯誤訊息
     print("網頁下載失敗: %s" % err)
 # 儲存網頁內容
-fn = "tmp_out3_14.txt"
-with open(fn, "wb") as file_Obj:  # 以二進位儲存
+filename = "tmp_out3_14.txt"
+with open(filename, "wb") as file_Obj:  # 以二進位儲存
     for diskStorage in htmlfile.iter_content(40960):  # Response物件處理
         size = file_Obj.write(diskStorage)  # Response物件寫入
         print(size)  # 列出每次寫入大小
-    print("以 %s 儲存網頁HTML檔案成功" % fn)
+    print("以 %s 儲存網頁HTML檔案成功" % filename)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1122,8 +350,8 @@ print("------------------------------------------------------------")  # 60個
 import urllib.request
 
 url_pict = "https://baidu.com/img/bd_logo1.png"
-fn = "baidu.png"
-pict = urllib.request.urlretrieve(url_pict, fn)
+filename = "baidu.png"
+pict = urllib.request.urlretrieve(url_pict, filename)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1394,8 +622,8 @@ url = "https://www.httpbin.org/image/jpeg"
 r = requests.get(url)
 img = r.content
 
-fn = "tmp_out3_38.jpg"
-with open(fn, "wb") as fout:
+filename = "tmp_out3_38.jpg"
+with open(filename, "wb") as fout:
     fout.write(img)
 
 print("------------------------------------------------------------")  # 60個
@@ -1408,7 +636,7 @@ r = requests.get(url, cookies=cookies)
 print(r.text)
 
 print("------------------------------------------------------------")  # 60個
-"""NG
+
 # ch3_40.py
 
 proxies = {
@@ -1417,7 +645,7 @@ proxies = {
 }
 
 r = requests.get("https://docs.python.org", proxies=proxies)
-"""
+
 print("------------------------------------------------------------")  # 60個
 
 # ch3_41.py
@@ -1863,8 +1091,8 @@ try:
 except Exception as err:
     print("下載失敗")
 
-fn = "iris.csv"  # 未來儲存鳶尾花的檔案
-with open(fn, "wb") as fileobj:  # 開啟iris.csv
+filename = "iris.csv"  # 未來儲存鳶尾花的檔案
+with open(filename, "wb") as fileobj:  # 開啟iris.csv
     for diskstorage in htmlfile.iter_content(10240):
         size = fileobj.write(diskstorage)  # 寫入
 
@@ -2024,7 +1252,7 @@ for currency in currencys:
     item += 1
 
 print("------------------------------------------------------------")  # 60個
-"""NG
+
 # ch4_33.py
 
 url = "http://www.stockq.org/market/currency.php"
@@ -2035,7 +1263,7 @@ currency = currency.drop(currency.index[[0, 1]])  # 拋棄前2 row
 currency.columns = ["貨幣", "匯率", "漲跌", "比例", "台北"]  # 建立column標題
 currency.index = range(len(currency.index))  # 建立row標題
 print(currency)
-"""
+
 print("------------------------------------------------------------")  # 60個
 
 # ch5_1.py
@@ -2536,7 +1764,7 @@ dataTag = objSoup.select(".contents_box02")  # 尋找class是contents_box02
 print("串列長度", len(dataTag))
 for i in range(len(dataTag)):  # 列出含contents_box02的串列
     print(dataTag[i])
-"""NG
+
 # 找尋開出順序與大小順序的球
 balls = dataTag[0].find_all("div", {"class": "ball_tx ball_green"})
 print("開出順序 : ", end="")
@@ -2550,7 +1778,7 @@ for i in range(6, len(balls)):  # 第7球以後是大小順序
 # 找出第二區的紅球
 redball = dataTag[0].find_all("div", {"class": "ball_red"})
 print("\n第二區   :", redball[0].text)
-"""
+
 print("------------------------------------------------------------")  # 60個
 
 # ch5_17.py
@@ -2577,9 +1805,8 @@ url = "http://ip.filefab.com/index.php"
 htmlFile = requests.get(url, headers=headers)
 soup = bs4.BeautifulSoup(htmlFile.text, "lxml")
 ip = soup.find("h1", id="ipd")
-"""NG
 print(ip.text.strip())
-"""
+
 print("------------------------------------------------------------")  # 60個
 
 
@@ -2604,3 +1831,14 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+# json 的 dump 加 indent
+# jsonObj = json.dumps(players, sort_keys=True, indent=12)
+# print(jsonObj)
+
+print("------------------------------------------------------------")  # 60個
+
+
+

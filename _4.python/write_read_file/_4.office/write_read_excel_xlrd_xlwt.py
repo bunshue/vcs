@@ -180,6 +180,26 @@ print("建立 xlsx OK, 檔案 : " + filename_w)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+filename = "tmp_out2_25.xls"
+datahead = ["Phone", "TV", "Notebook"]
+price = ["35000", "18000", "28000"]
+wb = xlwt.Workbook()
+sh = wb.add_sheet("sheet1", cell_overwrite_ok=True)
+for i in range(len(datahead)):
+    sh.write(0, i, datahead[i])  # 寫入datahead list
+for j in range(len(price)):
+    sh.write(1, j, price[j])  # 寫入price list
+
+wb.save(filename)
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "tmp_out2_25.xls"
+wb = xlrd.open_workbook(filename)
+sh = wb.sheets()[0]
+rows = sh.nrows
+for row in range(rows):
+    print(sh.row_values(row))
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
