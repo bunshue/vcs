@@ -35,93 +35,24 @@ import csv
 import json
 import bs4
 import requests
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-# 解讀 xml
-import xmltodict
-
-with open("data/myxml.xml", encoding="utf-8") as f:
-    txt = xmltodict.parse(f.read())
-print(txt, "\n")
-print(txt["深智數位"], "\n")
-print("總經理 : ", txt["深智數位"]["總經理"])
-print("總編輯 : ", txt["深智數位"]["編輯部"], "\n")
-print(txt["深智數位"]["業務部"], "\n")
-print(txt["深智數位"]["業務部"]["國外"], "\n")
-print("國外業務主管 : ", txt["深智數位"]["業務部"]["國外"]["@主管"])
-print("國外業務人數 : ", txt["深智數位"]["業務部"]["國外"]["人數"])
-print("國內業務主管 : ", txt["深智數位"]["業務部"]["國內"])
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# ch3_1.py
-
+"""
 import webbrowser
 
 webbrowser.open("http://www.mcut.edu.tw")
 
 print("------------------------------------------------------------")  # 60個
 
-# ch3_2.py
-
 import webbrowser
 
 address = "300新竹市東區南大路345號"
 webbrowser.open("http://www.google.com.tw/maps/place/" + address)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_3.py
-
-r = 6371  # 地球半徑
-x1, y1 = 22.2838, 114.1731  # 香港紅磡車站經緯度
-x2, y2 = 25.0452, 121.5168  # 台北車站經緯度
-
-d = 6371 * math.acos(
-    math.sin(math.radians(x1)) * math.sin(math.radians(x2))
-    + math.cos(math.radians(x1))
-    * math.cos(math.radians(x2))
-    * math.cos(math.radians(y1 - y2))
-)
-
-print("distance = ", d)
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 # ch3_5.py
-
-url = "http://www.mcut.edu.tw"
-htmlfile = requests.get(url)
-if htmlfile.status_code == requests.codes.ok:
-    print("取得網頁內容成功")
-else:
-    print("取得網頁內容失敗")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_4.py
-
-url = "http://www.mcut.edu.tw"
-htmlfile = requests.get(url)
-print(type(htmlfile))
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_5.py
-
-url = "http://www.mcut.edu.tw"
-htmlfile = requests.get(url)
-if htmlfile.status_code == requests.codes.ok:
-    print("取得網頁內容成功")
-else:
-    print("取得網頁內容失敗")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_6.py
 
 url = "http://www.mcut.edu.tw"
 htmlfile = requests.get(url)
@@ -130,23 +61,11 @@ if htmlfile.status_code == requests.codes.ok:
     print("網頁內容大小 = ", len(htmlfile.text))
 else:
     print("取得網頁內容失敗")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_7.py
-
-url = "http://www.mcut.edu.tw"
-htmlfile = requests.get(url)
-if htmlfile.status_code == requests.codes.ok:
-    print("取得網頁內容成功")
-else:
-    print("取得網頁內容失敗")
 print(htmlfile.text)  # 列印網頁內容
 
 print("------------------------------------------------------------")  # 60個
 
-# ch3_8.py
-
+# 測試 搜尋金庸小說 主角名字 出現次數 使用 re
 url = "http://www.mcut.edu.tw"
 htmlfile = requests.get(url)
 if htmlfile.status_code == requests.codes.ok:
@@ -166,10 +85,12 @@ else:
     print("網頁下載失敗")
 
 print("------------------------------------------------------------")  # 60個
-
-# ch3_9.py
-
-url = "http://www.mcut.edu.tw/file_not_existed"  # 不存在的內容
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+'''
+print('aa')
+url = "http://www.mcut.edu.tw/file_not_existed"  # 網站存在 但 內容不存在
 htmlfile = requests.get(url)
 try:
     htmlfile.raise_for_status()  # 異常處理
@@ -179,14 +100,10 @@ except Exception as err:  # err是系統自訂的錯誤訊息
 print("程式結束")
 
 print("------------------------------------------------------------")  # 60個
-
-sys.exit()
-
-# 這裡NG
-
+print('bb')
 # ch3_10.py
 
-url = "http://www.gzaxxc.com/file_not_existed"  # 錯誤的網址
+url = "http://www.gzaxxc.com/file_not_existed"  # 網站不存在
 htmlfile = requests.get(url)
 try:
     htmlfile.raise_for_status()  # 異常處理
@@ -197,9 +114,10 @@ print("程式結束")
 
 print("------------------------------------------------------------")  # 60個
 
+print('cc')
 # ch3_11.py
 
-url = "http://www.gzaxxc.com/file_not_existed"  # 錯誤的網址
+url = "http://www.gzaxxc.com/file_not_existed"  # 網站不存在
 try:
     htmlfile = requests.get(url)
     print("下載成功")
@@ -209,9 +127,12 @@ print("程式結束")
 
 print("------------------------------------------------------------")  # 60個
 
+
+sys.exit()
+
 # ch3_12.py
 
-url = "http://aaa.24ht.com.tw/"
+url = "http://aaa.24ht.com.tw/"  # 洪錦魁 網頁
 htmlfile = requests.get(url)
 htmlfile.raise_for_status()
 
@@ -232,7 +153,7 @@ headers = {
             AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101\
             Safari/537.36",
 }
-url = "http://aaa.24ht.com.tw/"
+url = "http://aaa.24ht.com.tw/"  # 洪錦魁 網頁
 htmlfile = requests.get(url, headers=headers)
 htmlfile.raise_for_status()
 print("偽裝瀏覽器擷取網路資料成功")
@@ -338,7 +259,7 @@ headers = {
             AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101\
             Safari/537.36",
 }
-url = "http://aaa.24ht.com.tw/"
+url = "http://aaa.24ht.com.tw/"  # 洪錦魁 網頁
 req = urllib.request.Request(url, headers=headers)
 htmlfile = urllib.request.urlopen(req)
 print(htmlfile.read().decode("utf-8"))
@@ -456,7 +377,7 @@ except error.URLError as e:
 else:
     print("擷取網路資料成功")
 # 正確網址
-url = "http://aaa.24ht.com.tw/"  # 網址正確
+url = "http://aaa.24ht.com.tw/"  # 洪錦魁 網頁  # 網址正確
 try:
     req = request.Request(url, headers=headers)
     htmlfile = request.urlopen(req)
@@ -490,7 +411,7 @@ else:
     print("擷取網路資料成功")
 print("-" * 70)
 # 錯誤2
-url = "http://aaa.24ht.com.tw/"  # 網址正確
+url = "http://aaa.24ht.com.tw/"  # 洪錦魁 網頁  # 網址正確
 try:
     htmlfile = request.urlopen(url)
 except error.HTTPError as e:
@@ -503,7 +424,7 @@ else:
     print("擷取網路資料成功")
 print("-" * 70)
 # 正確
-url = "http://aaa.24ht.com.tw/"  # 網址正確
+url = "http://aaa.24ht.com.tw/"  # 洪錦魁 網頁  # 網址正確
 try:
     req = request.Request(url, headers=headers)
     htmlfile = request.urlopen(req)
@@ -1718,7 +1639,7 @@ headers = {
             AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101\
             Safari/537.36",
 }
-url = "http://aaa.24ht.com.tw/"  # 這個伺服器會擋住網頁
+url = "http://aaa.24ht.com.tw/"  # 洪錦魁 網頁  # 這個伺服器會擋住網頁
 html = requests.get(url, headers=headers)
 print("網頁下載中 ...")
 html.raise_for_status()  # 驗證網頁是否下載成功
