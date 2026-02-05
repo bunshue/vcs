@@ -52,6 +52,9 @@
     <Compile Include="CustomTextBoxGroup2.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CustomTextBoxGroup3.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

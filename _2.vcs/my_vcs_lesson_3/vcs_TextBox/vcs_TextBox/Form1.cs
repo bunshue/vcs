@@ -12,6 +12,7 @@ namespace vcs_TextBox
     public partial class Form1 : Form
     {
         TextBox RightKeyCarte;//聲明一個自定義類CustomTextBoxGroup的對象
+        TextBox NoStiky = new CustomTextBoxGroup3();//聲明一個自定義類CustomTextBoxGroup的對象
 
         public Form1()
         {
@@ -61,6 +62,11 @@ namespace vcs_TextBox
 
             textBox8.KeyPress += new KeyPressEventHandler(textBox8_KeyPress);
             label11.Text = "TextBox只允許僅允許\n數字, Enter, Backspace, +-*/()";
+
+            lb_CustomTextBoxGroup3.Location = new Point(12, 650);
+            this.NoStiky.Parent = this;//設定自定義控件的父容器為當前窗口
+            NoStiky.Location = new Point(12, 650+30);
+            this.Controls.Add(this.NoStiky);//在當前窗體中添加自定義控件
         }
 
         void show_item_location()

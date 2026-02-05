@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ShieldPasteFunction
+namespace vcs_TextBox
 {
-    class CustomTextBoxGroup:TextBox 
+    class CustomTextBoxGroup3:TextBox 
     {
-        public CustomTextBoxGroup()
+        public CustomTextBoxGroup3()
         {
             this.Top = 63;//设定自定义控件上边缘与其容器的工作区上边缘之间的距离
             this.Left = 105;//设定自定义控件左边缘与其容器的工作区左边缘之间的距离

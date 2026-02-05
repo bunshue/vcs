@@ -60,6 +60,7 @@ namespace SelfDefiningScrollBar
             this.Controls.Add(this.richTextBox1);
             this.Name = "SelfDefiningScrollBar";
             this.Text = "為RichTextBox控制元件設定自定滾軸";
+            this.Load += new System.EventHandler(this.SelfDefiningScrollBar_Load);
             this.ResumeLayout(false);
 
         }

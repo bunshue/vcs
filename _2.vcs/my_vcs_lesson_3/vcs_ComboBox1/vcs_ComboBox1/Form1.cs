@@ -185,6 +185,13 @@ namespace vcs_ComboBox1
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
+            //用ComboBox控制元件製作類似瀏覽器的網址輸入框
+            this.comboBox9.Items.Add("http://www.yahoo.com/");//向ComboBox控件中添加網址「http://www.baidu.com/」
+            this.comboBox9.Items.Add("http://www.sina.com/");//向ComboBox控件中添加網址「http://www.sina.com.cn/」
+            this.comboBox9.Items.Add("http://www.google.com/");//向ComboBox控件中添加網址「http://www.163.com/」
+            this.comboBox9.Items.Add("http://www.microsoft.com/");//向ComboBox控件中添加網址「http://www.qq.com/」
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
         }
 
         void show_item_location()
@@ -541,6 +548,29 @@ namespace vcs_ComboBox1
             while (d.MoveNext())
             {
                 //richTextBox1.Text += "key = " + d.Entry.Key + "\t" + "value = " + d.Entry.Value + "\n";
+            }
+        }
+
+        private bool EditState = false;//定義一個全局變量標識
+        private void comboBox9_KeyDown(object sender, KeyEventArgs e)
+        {
+            EditState = (e.KeyCode != Keys.Back && e.KeyCode != Keys.Delete);//當按鍵既不是Back鍵又不是Delete鍵時
+            comboBox9.DroppedDown = true;//當有按鍵被按下時顯示下拉列表
+        }
+
+        private void comboBox9_TextChanged(object sender, EventArgs e)
+        {
+            if (EditState)//當變量的值為真時
+            {
+                string importText = comboBox9.Text;//獲得輸入的文本
+                int index = comboBox9.FindString(importText);//在ComboBox集合中查找匹配的文本
+                if (index >= 0)                        //當有查找結果時 
+                {
+                    EditState = false;                //關閉編輯狀態
+                    comboBox9.SelectedIndex = index;    //找到對應項
+                    EditState = true;                 //打開編輯狀態
+                    comboBox9.Select(importText.Length, comboBox9.Text.Length);//設定文本的選擇長度
+                }
             }
         }
     }

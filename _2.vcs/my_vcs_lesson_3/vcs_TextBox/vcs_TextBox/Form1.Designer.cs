@@ -61,6 +61,7 @@
             this.textBox_use_scrollbar = new System.Windows.Forms.TextBox();
             this.bt_clear = new System.Windows.Forms.Button();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.lb_CustomTextBoxGroup3 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -254,7 +255,7 @@
             this.richTextBox1.Size = new System.Drawing.Size(350, 105);
             this.richTextBox1.TabIndex = 18;
             this.richTextBox1.Text = "textBox4.MaxLength = 3;    //設最多只能輸入3位數\ntextBox4.ReadOnly = true;   //設為唯讀不能輸入\nte" +
-                "xtBox4.TabIndex = 0;     //設為第一個停駐焦點\ntextBox4.Focus();    //將停駐焦點移到txtDegree";
+    "xtBox4.TabIndex = 0;     //設為第一個停駐焦點\ntextBox4.Focus();    //將停駐焦點移到txtDegree";
             // 
             // textBox4
             // 
@@ -390,7 +391,7 @@
             this.textBox_use_scrollbar.Size = new System.Drawing.Size(262, 38);
             this.textBox_use_scrollbar.TabIndex = 23;
             this.textBox_use_scrollbar.Text = "TextBox加ScrollBar 1 TextBox加ScrollBar 2 TextBox加ScrollBar 3 TextBox加ScrollBar 4 T" +
-                "extBox加ScrollBar 5 TextBox加ScrollBar 6 TextBox加ScrollBar 7 TextBox加ScrollBar 8";
+    "extBox加ScrollBar 5 TextBox加ScrollBar 6 TextBox加ScrollBar 7 TextBox加ScrollBar 8";
             // 
             // bt_clear
             // 
@@ -411,11 +412,22 @@
             this.richTextBox2.TabIndex = 36;
             this.richTextBox2.Text = "";
             // 
+            // lb_CustomTextBoxGroup3
+            // 
+            this.lb_CustomTextBoxGroup3.AutoSize = true;
+            this.lb_CustomTextBoxGroup3.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_CustomTextBoxGroup3.Location = new System.Drawing.Point(321, 570);
+            this.lb_CustomTextBoxGroup3.Name = "lb_CustomTextBoxGroup3";
+            this.lb_CustomTextBoxGroup3.Size = new System.Drawing.Size(205, 21);
+            this.lb_CustomTextBoxGroup3.TabIndex = 38;
+            this.lb_CustomTextBoxGroup3.Text = "TextBox不能使用貼上";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1308, 708);
+            this.Controls.Add(this.lb_CustomTextBoxGroup3);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.textBox_use_scrollbar);
@@ -485,6 +497,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.Label lb_CustomTextBoxGroup3;
     }
 }
 

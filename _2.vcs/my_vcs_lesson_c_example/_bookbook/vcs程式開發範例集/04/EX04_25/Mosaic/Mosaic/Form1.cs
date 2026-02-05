@@ -18,12 +18,10 @@ namespace Mosaic
             InitializeComponent();
         }
 
-
         private void Form1_Load(object sender, EventArgs e)
         {
             Image myImage = System.Drawing.Image.FromFile(filename);
             this.BackgroundImage = myImage;
-
         }
 
         private void button2_Click(object sender, EventArgs e)
