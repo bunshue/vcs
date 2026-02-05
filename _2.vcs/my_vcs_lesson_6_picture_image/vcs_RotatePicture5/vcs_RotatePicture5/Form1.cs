@@ -82,8 +82,7 @@ namespace vcs_RotatePicture5
 
             // Create the real rotation transformation.
             Matrix rotate_at_center = new Matrix();
-            rotate_at_center.RotateAt(angle,
-                new PointF(bm.Width / 2f, bm.Height / 2f));
+            rotate_at_center.RotateAt(angle, new PointF(bm.Width / 2f, bm.Height / 2f));
 
             // Draw the image onto the new bitmap rotated.
             using (Graphics gr = Graphics.FromImage(result))
@@ -117,10 +116,22 @@ namespace vcs_RotatePicture5
             ymax = ymin;
             foreach (PointF point in points)
             {
-                if (xmin > point.X) xmin = point.X;
-                if (xmax < point.X) xmax = point.X;
-                if (ymin > point.Y) ymin = point.Y;
-                if (ymax < point.Y) ymax = point.Y;
+                if (xmin > point.X)
+                {
+                    xmin = point.X;
+                }
+                if (xmax < point.X)
+                {
+                    xmax = point.X;
+                }
+                if (ymin > point.Y)
+                {
+                    ymin = point.Y;
+                }
+                if (ymax < point.Y)
+                {
+                    ymax = point.Y;
+                }
             }
         }
 
@@ -129,11 +140,15 @@ namespace vcs_RotatePicture5
         {
             int wid = pictureBox1.Right + pictureBox1.Left;
             int hgt = pictureBox1.Bottom + pictureBox1.Left;
-            if (wid > 900) wid = 900;
-            if (hgt > 600) hgt = 600;
-            this.ClientSize = new Size(
-                Math.Max(wid, this.ClientSize.Width),
-                Math.Max(hgt, this.ClientSize.Height));
+            if (wid > 900)
+            {
+                wid = 900;
+            }
+            if (hgt > 600)
+            {
+                hgt = 600;
+            }
+            this.ClientSize = new Size(Math.Max(wid, this.ClientSize.Width), Math.Max(hgt, this.ClientSize.Height));
         }
 
         // Let the user click and drag to rotate.
@@ -142,7 +157,10 @@ namespace vcs_RotatePicture5
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             // Do nothing if there's no image loaded.
-            if (bitmap1 == null) return;
+            if (bitmap1 == null)
+            {
+                return;
+            }
             DragInProgress = true;
 
             // Get the initial angle from horizontal to the
@@ -155,7 +173,10 @@ namespace vcs_RotatePicture5
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             // Do nothing if there's no drag in progress.
-            if (!DragInProgress) return;
+            if (!DragInProgress)
+            {
+                return;
+            }
 
             // Get the angle from horizontal to the
             // vector between the center and the current point.
@@ -188,7 +209,5 @@ namespace vcs_RotatePicture5
             // Save the new total angle of rotation.
             TotalAngle = CurrentAngle;
         }
-
-
     }
 }

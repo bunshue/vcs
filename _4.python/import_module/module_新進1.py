@@ -391,21 +391,8 @@ send2trash.send2trash(filename)
 
 print("------------------------------------------------------------")  # 60個
 
-import pygal.maps.world
-
-worldMap = pygal.maps.world.World()  # 建立世界地圖物件
-worldMap.title = "Populations in China/Japan/Thailand"  # 世界地圖標題
-worldMap.add("Asia", {"cn": 1262645000, "jp": 126870000, "th": 63155029})  # 標記人口資訊
-worldMap.add("Europe", {"fr": 60762406, "se": 1011781, "sz": 7184798})  # 標記人口資訊
-worldMap.add("Africa", {"cd": 49626496, "eg": 67649043, "za": 44000833})  # 標記人口資訊
-worldMap.add(
-    "North America", {"us": 282162848, "mx": 99959895, "ca": 30770661}
-)  # 標記人口資訊
-worldMap.render_to_file("tmp_world_map.svg")  # 儲存地圖檔案
-
-print("------------------------------------------------------------")  # 60個
-
 print("全形 轉 半形")
+
 import unicodedata
 
 text = "「全形１２．３」「全形Ａｂｃ！（＠）」「半形片假名」「圈圈數字①②③」「符號㏊」"

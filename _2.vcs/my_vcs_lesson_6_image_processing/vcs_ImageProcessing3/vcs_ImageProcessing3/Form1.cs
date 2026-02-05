@@ -46,42 +46,42 @@ namespace vcs_ImageProcessing3
         {
             int x_st = 10;
             int y_st = 10;
-            int dx = 110 + 10;
+            int dx = 200 + 10;
             int dy = 40 + 10;
-            int W = 130;
+            int W = 200 + 20;
             int H = 380;
 
-            groupBox0.Size = new Size(W * 2, H * 2);//影像處理 像素法
+            groupBox0.Size = new Size(W * 2, H * 2 - 180);//影像處理 像素法
             groupBox1.Size = new Size(W + 10, H + 20);//影像處理 內存法
             groupBox2.Size = new Size(W + 10, H + 110);//圖像邊緣檢測
             groupBox3.Size = new Size(W * 2, 220);//動畫效果
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            groupBox1.Location = new Point(x_st + dx * 2 + 20 + 10, y_st + dy * 0);
-            groupBox2.Location = new Point(x_st + dx * 2 + 20 + 10, y_st + dy * 8);
-            groupBox3.Location = new Point(x_st + dx * 0, y_st + dy * 15 + 10);
+            groupBox1.Location = new Point(x_st + dx * 2 + 40, y_st + dy * 0);
+            groupBox2.Location = new Point(x_st + dx * 2 + 40, y_st + dy * 8);
+            groupBox3.Location = new Point(x_st + dx * 0, y_st + dy * 12);
 
-            pictureBox0.Size = new Size(300, 200);
-            pictureBox0.Location = new Point(x_st + dx * 12 + 100, y_st + dy * 0);
+            pictureBox1.Size = new Size(900, 900);
+            pictureBox1.Location = new Point(x_st + dx * 4 - 140, y_st + dy * 0);
+            bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
 
-            pictureBox1.Size = new Size(1100, 900);
-            pictureBox1.Location = new Point(x_st + dx * 3 + 60, y_st + dy * 0);
+            pictureBox0.Size = new Size(250, 200);
+            pictureBox0.Location = new Point(x_st + dx * 8 - 70, y_st + dy * 0);
 
-            richTextBox1.Size = new Size(300, 800);
-            richTextBox1.Location = new Point(x_st + dx * 12 + 100, y_st + dy * 4 + 60);
+            richTextBox1.Size = new Size(250, 600);
+            richTextBox1.Location = new Point(x_st + dx * 8 - 70, y_st + dy * 4 + 60);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-            bt_restore.Location = new Point(x_st + dx * 15 + 45, y_st + dy * 3 - 5);
 
             // 實例化控件
             lb_main_mesg.Text = "原圖";
             lb_main_mesg.Font = new Font("標楷體", 24);
             lb_main_mesg.ForeColor = Color.Red;
-            lb_main_mesg.Location = new Point(x_st + dx * 12 + 100, y_st + dy * 4 + 10);
+            lb_main_mesg.Location = new Point(x_st + dx * 8 + 100, y_st + dy * 4 + 10);
             lb_main_mesg.AutoSize = true;
             this.Controls.Add(lb_main_mesg);     // 將控件加入表單
 
             x_st = 20;
             y_st = 30;
+            dx = 200 + 10;
             dy = 40 + 5;
             bt_image_process_p0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_image_process_p1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -95,19 +95,19 @@ namespace vcs_ImageProcessing3
             bt_image_process_p9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
             bt_image_process_p10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
             bt_image_process_p11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
-            bt_image_process_p12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
-            bt_image_process_p13.Location = new Point(x_st + dx * 0, y_st + dy * 13);
-            bt_image_process_p14.Location = new Point(x_st + dx * 0, y_st + dy * 14);
-            bt_image_process_p15.Location = new Point(x_st + dx * 0, y_st + dy * 15);
 
-            bt_image_process_p16.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            bt_image_process_p17.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            bt_image_process_p18.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            bt_image_process_p19.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            bt_image_process_p20.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            bt_image_process_p21.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            bt_image_process_p22.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            bt_image_process_p23.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            bt_image_process_p12.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_image_process_p13.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            bt_image_process_p14.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            bt_image_process_p15.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            bt_image_process_p16.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            bt_image_process_p17.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            bt_image_process_p18.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            bt_image_process_p19.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            bt_image_process_p20.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            bt_image_process_p21.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            bt_image_process_p22.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            bt_image_process_p23.Location = new Point(x_st + dx * 1, y_st + dy * 11);
 
             bt_image_process_m0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_image_process_m1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -138,11 +138,14 @@ namespace vcs_ImageProcessing3
             bt_animate6.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             bt_animate7.Location = new Point(x_st + dx * 1, y_st + dy * 3);
 
-            //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
+            this.Size = new Size(1900, 960);
+            this.Text = "vcs_ImageProcessing3";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+
             bt_open_file_setup();
-            bt_exit_setup();
         }
 
         private void bt_open_file_Click(object sender, EventArgs e)
@@ -204,43 +207,12 @@ namespace vcs_ImageProcessing3
             bt_open_file.BringToFront();     //移到最上層
         }
 
-        private void bt_exit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        void bt_exit_setup()
-        {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
-
-            Button bt_exit = new Button();  // 實例化按鈕
-            bt_exit.Name = "bt_exit";
-            bt_exit.Size = new Size(w, h);
-            bt_exit.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            g.DrawLine(p, 0, 0, w - 1, h - 1);
-            g.DrawLine(p, w - 1, 0, 0, h - 1);
-            bt_exit.Image = bmp;
-
-            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
-            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_exit); // 將按鈕加入表單
-            bt_exit.BringToFront();     //移到最上層
-        }
-
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
         }
 
-        private void bt_restore_Click(object sender, EventArgs e)
+        private void bt_reset_Click(object sender, EventArgs e)
         {
             reset_pictureBox();
         }

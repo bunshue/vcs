@@ -1,7 +1,12 @@
 """
 pygal.maps.world
 
+pip install pygal
+pip install pygal_maps_world
 """
+
+import pygal.maps.world
+from pygal_maps_world.maps import COUNTRIES
 
 print("------------------------------------------------------------")  # 60個
 
@@ -94,6 +99,20 @@ worldMap.render_to_file("tmp_世界地圖人口_亞洲_中日泰.svg")  # 儲存
 print("------------------------------------------------------------")  # 60個
 
 import pygal.maps.world
+
+worldMap = pygal.maps.world.World()  # 建立世界地圖物件
+worldMap.title = "Populations in China/Japan/Thailand"  # 世界地圖標題
+worldMap.add("Asia", {"cn": 1262645000, "jp": 126870000, "th": 63155029})  # 標記人口資訊
+worldMap.add("Europe", {"fr": 60762406, "se": 1011781, "sz": 7184798})  # 標記人口資訊
+worldMap.add("Africa", {"cd": 49626496, "eg": 67649043, "za": 44000833})  # 標記人口資訊
+worldMap.add(
+    "North America", {"us": 282162848, "mx": 99959895, "ca": 30770661}
+)  # 標記人口資訊
+worldMap.render_to_file("tmp_world_map.svg")  # 儲存地圖檔案
+
+print("------------------------------------------------------------")  # 60個
+
+import pygal.maps.world
 from pygal.maps.world import COUNTRIES
 
 
@@ -116,7 +135,10 @@ for getData in getDatas:
         countryCode = getCountryCode(countryName)
         population = int(float(getData["Numbers"]))  # 人口數
         if countryCode != None:
+            print(countryCode, ":", population)  # 國家名稱相符
             dictData[countryCode] = population  # 代碼:人口數據加入字典
+        else:
+            print(countryName, " 名稱不吻合:")  # 國家名稱不吻合
 
 worldMap = pygal.maps.world.World()
 worldMap.title = "World Population in 2000"

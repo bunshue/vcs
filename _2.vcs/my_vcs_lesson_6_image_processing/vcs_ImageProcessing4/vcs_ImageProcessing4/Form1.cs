@@ -76,18 +76,23 @@ namespace vcs_ImageProcessing4
 
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox1.Size = new Size(600, 600);
+            bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
+
             pictureBox2.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             pictureBox2.Size = new Size(600, 600);
 
-            richTextBox1.Location = new Point(x_st + dx * 7 + 120, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             richTextBox1.Size = new Size(300, 600);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
+            this.Size = new Size(1700, 1000);
+            this.Text = "vcs_ImageProcessing4";
+
             bt_open_file_setup();
-            bt_exit_setup();
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_open_file_Click(object sender, EventArgs e)
@@ -149,37 +154,6 @@ namespace vcs_ImageProcessing4
             bt_open_file.BringToFront();     //移到最上層
         }
 
-        private void bt_exit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        void bt_exit_setup()
-        {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
-
-            Button bt_exit = new Button();  // 實例化按鈕
-            bt_exit.Name = "bt_exit";
-            bt_exit.Size = new Size(w, h);
-            bt_exit.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            g.DrawLine(p, 0, 0, w - 1, h - 1);
-            g.DrawLine(p, w - 1, 0, 0, h - 1);
-            bt_exit.Image = bmp;
-
-            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
-            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_exit); // 將按鈕加入表單
-            bt_exit.BringToFront();     //移到最上層
-        }
-
         void reset_pictureBox()
         {
             //讀取圖檔
@@ -191,9 +165,13 @@ namespace vcs_ImageProcessing4
             richTextBox1.Clear();
         }
 
-        private void button0_Click(object sender, EventArgs e)
+        private void bt_reset_Click(object sender, EventArgs e)
         {
             reset_pictureBox();
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
         }
 
         private void button1_Click(object sender, EventArgs e)

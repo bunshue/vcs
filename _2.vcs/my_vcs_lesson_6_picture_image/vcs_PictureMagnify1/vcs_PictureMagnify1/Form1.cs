@@ -38,29 +38,33 @@ namespace vcs_PictureMagnify1
             string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             img = new Bitmap(filename);
 
-            this.ClientSize = new Size(img.Width+200, img.Height+200);// 調整視窗客戶區寬高
+            show_item_location();
 
-            if (magnifying_type == 1)       //圓形
-            {
-                imgDouble = new Bitmap(img.Width * 2, img.Height * 2);　// 新增點陣圖物件
-                Graphics G = Graphics.FromImage(imgDouble); // 由點陣圖物件產生畫布
-                Rectangle rectDest = new Rectangle(0, 0, imgDouble.Width, imgDouble.Height);
-                Rectangle rectSrc = new Rectangle(0, 0, img.Width, img.Height);
-                G.DrawImage(img, rectDest, rectSrc, GraphicsUnit.Pixel); // 放大兩倍
-                texBrush = new TextureBrush(imgDouble);  // 兩倍影像的塗刷
-            }
-            else if (magnifying_type == 2)      //心形
-            {
-                buffer = new Bitmap(img.Width * 2, img.Height * 2);　// 新增點陣圖物件
-                Graphics G = Graphics.FromImage(buffer); // 由點陣圖物件產生畫布
-                Rectangle rectDest = new Rectangle(0, 0, buffer.Width, buffer.Height);
-                Rectangle rectSrc = new Rectangle(0, 0, img.Width, img.Height);
-                G.DrawImage(img, rectDest, rectSrc, GraphicsUnit.Pixel); // 放大兩倍
-                texBrush = new TextureBrush(buffer);  // 兩倍影像的塗刷
+        }
 
-                Cursor.Position = PointToScreen(new Point(img.Width / 2, img.Height / 2)); // 設定滑鼠游標位置
-                Cursor.Hide();  // 隱藏滑鼠游標
-            }
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 10;
+            dy = 60 + 10;
+
+            groupBox1.Size = new Size(100, 120);
+            groupBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+
+            y_st = 30;
+            dy = 30;
+            rb_magnifying_type0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            rb_magnifying_type1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            rb_magnifying_type2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+
+            this.ClientSize = new Size(img.Width + 200, img.Height + 200);// 調整視窗客戶區寬高
         }
 
         // 表單重畫事件
@@ -148,6 +152,44 @@ namespace vcs_PictureMagnify1
             if (e.KeyData == Keys.Escape)
             {
                 this.Close();  // 因為 隱藏滑鼠游標 所以以Escape結束
+            }
+        }
+
+        private void rb_magnifying_type_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rb_magnifying_type0.Checked == true)
+            {
+                magnifying_type = 0;
+
+            }
+            else if (rb_magnifying_type1.Checked == true)
+            {
+                //圓形
+                magnifying_type = 1;
+                imgDouble = new Bitmap(img.Width * 2, img.Height * 2);　// 新增點陣圖物件
+                Graphics G = Graphics.FromImage(imgDouble); // 由點陣圖物件產生畫布
+                Rectangle rectDest = new Rectangle(0, 0, imgDouble.Width, imgDouble.Height);
+                Rectangle rectSrc = new Rectangle(0, 0, img.Width, img.Height);
+                G.DrawImage(img, rectDest, rectSrc, GraphicsUnit.Pixel); // 放大兩倍
+                texBrush = new TextureBrush(imgDouble);  // 兩倍影像的塗刷
+            }
+            else if (rb_magnifying_type2.Checked == true)
+            {
+                //心形
+                magnifying_type = 2;
+                buffer = new Bitmap(img.Width * 2, img.Height * 2);　// 新增點陣圖物件
+                Graphics G = Graphics.FromImage(buffer); // 由點陣圖物件產生畫布
+                Rectangle rectDest = new Rectangle(0, 0, buffer.Width, buffer.Height);
+                Rectangle rectSrc = new Rectangle(0, 0, img.Width, img.Height);
+                G.DrawImage(img, rectDest, rectSrc, GraphicsUnit.Pixel); // 放大兩倍
+                texBrush = new TextureBrush(buffer);  // 兩倍影像的塗刷
+
+                Cursor.Position = PointToScreen(new Point(img.Width / 2, img.Height / 2)); // 設定滑鼠游標位置
+                Cursor.Hide();  // 隱藏滑鼠游標
+            }
+            else
+            {
+                magnifying_type = 0;
             }
         }
     }

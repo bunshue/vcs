@@ -64,6 +64,14 @@ namespace vcs_test_all_00_Usually
         AxWindowsMediaPlayer axWindowsMediaPlayer1;
         bool flag_repeat_mode = true;
 
+        Graphics g;
+        Pen p = new Pen(Color.Red, 3);
+        SolidBrush sb = new SolidBrush(Color.Black);
+        Font f = new Font("標楷體", 18);
+        Bitmap bitmap1;
+
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
         public Form1()
         {
             InitializeComponent();
@@ -89,10 +97,15 @@ namespace vcs_test_all_00_Usually
             pictureBox1.Image = Image.FromFile(filename);
             */
 
-            //讀取圖檔, 多一層Image結構
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Image image = Image.FromFile(filename);
-            pictureBox1.Image = image;
+            p = new Pen(Color.Red, 3);
+
+            //指定畫布大小
+            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+
+            bitmap1 = (Bitmap)Bitmap.FromFile(filename);
+            pictureBox1.Image = bitmap1;
+
 
             /*
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
@@ -104,20 +117,6 @@ namespace vcs_test_all_00_Usually
             pictureBox1.Image = Image.FromStream(fs);
             fs.Close();
             */
-            pictureBox1.ClientSize = new Size(image.Width, image.Height);
-
-            //程式開啟時顯示在畫面正中央
-            int W = Screen.PrimaryScreen.Bounds.Width;
-            int H = Screen.PrimaryScreen.Bounds.Height;
-            int w = this.Width;
-            int h = this.Height;
-            this.Location = new Point((W - w) / 2, (H - h) / 2);
-
-            /*
-            //設定執行後的表單起始位置
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(0, 0);
-            */
         }
 
         void show_item_location()
@@ -128,10 +127,10 @@ namespace vcs_test_all_00_Usually
             int dy;
 
             //button
-            x_st = 20;
-            y_st = 20;
-            dx = 160;
-            dy = 70;
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 10;
+            dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -143,15 +142,33 @@ namespace vcs_test_all_00_Usually
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button10.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button20.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 0);
 
             label1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             label2.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 30);
             label3.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 60);
             lb_main_mesg1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 90);
 
-            //控件位置
+            pictureBox1.Size = new Size(400, 450);
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
+
+            richTextBox1.Size = new Size(300, 680);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1273, 784);
+            this.Text = "vcs_test_all_00_Usually";
 
             //最大化螢幕
             //this.FormBorderStyle = FormBorderStyle.None;
@@ -162,6 +179,10 @@ namespace vcs_test_all_00_Usually
 
             //最小化按鈕的寫法
             bt_minimize_setup();
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         void bt_exit_setup()
@@ -228,6 +249,14 @@ namespace vcs_test_all_00_Usually
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        private void bt_reset_Click(object sender, EventArgs e)
+        {
+            //指定畫布大小
+            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            pictureBox1.Image = bitmap1;
         }
 
         //移動無邊框窗體 ST
@@ -539,8 +568,58 @@ namespace vcs_test_all_00_Usually
 
         }
 
-        //建立無邊框移動之pictureBox ST
         private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //建立無邊框移動之pictureBox ST
+        private void button20_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "建立無邊框移動之pictureBox\n";
 
@@ -633,7 +712,5 @@ namespace vcs_test_all_00_Usually
 /*  可搬出
 
 */
-
-
 
 

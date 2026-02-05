@@ -19,6 +19,15 @@ namespace vcs_ColorPicker1
         Font f;
         Bitmap bmp;
 
+        bool flag_measure_8_points = false;  // false : 一般模式, true : 量測8點模式
+        bool flag_no_update = false;
+        bool flag_recording_point1 = false;
+        bool flag_recording_point2 = false;
+        int record_time1 = 0;
+        int record_time2 = 0;
+        Point pt_st;
+        Point pt_sp;
+
         public Form1()
         {
             InitializeComponent();
@@ -40,7 +49,14 @@ namespace vcs_ColorPicker1
 
             this.FormBorderStyle = FormBorderStyle.None;
 
-            this.Size = new Size(240, 80);
+            if (flag_measure_8_points == false)  // 一般模式
+            {
+                this.Size = new Size(240, 80);  // 一般模式
+            }
+            else
+            {
+                this.Size = new Size(240, 300);  // 量測8點模式
+            }
 
             g = this.CreateGraphics();
         }
@@ -169,55 +185,183 @@ namespace vcs_ColorPicker1
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (flag_no_update == true)
+            {
+                return;
+            }
+
             Point pt = new Point(Control.MousePosition.X, Control.MousePosition.Y);
             Color cl = GetColor(pt);
-            if (cl_old != cl)
-            {
-                cnt = 0;
-                g.Clear(BackColor);
 
-                g.DrawString(cl.R.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Red), new PointF(5, 75 * 0));
-                g.DrawString(cl.G.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Lime), new PointF(5 + 75 * 1, 0));
-                g.DrawString(cl.B.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(5 + 75 * 2, 0));
-                if (flag_show_alpha == true)
+            if (flag_measure_8_points == false)  // 一般模式
+            {
+                if (cl_old != cl)
                 {
-                    this.Size = new Size(240 + 70, 80);
-                    g.DrawString(cl.A.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(5 + 75 * 3, 0));
+                    cnt = 0;
+                    g.Clear(BackColor);
+
+                    g.DrawString(cl.R.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Red), new PointF(5, 75 * 0));
+                    g.DrawString(cl.G.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Lime), new PointF(5 + 75 * 1, 0));
+                    g.DrawString(cl.B.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(5 + 75 * 2, 0));
+                    if (flag_show_alpha == true)
+                    {
+                        this.Size = new Size(240 + 70, 80);
+                        g.DrawString(cl.A.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(5 + 75 * 3, 0));
+                    }
+                    else
+                    {
+                        this.Size = new Size(240, 80);
+                    }
+
+                    cl_old = cl;
+
+                    int rr = cl.R;
+                    int gg = cl.G;
+                    int bb = cl.B;
+
+                    RGB pp = new RGB((byte)rr, (byte)gg, (byte)bb);
+                    YUV yy = new YUV();
+                    yy = RGBToYUV(pp);
+
+                    g.DrawString(((int)yy.Y).ToString(), new Font("Consolas", 30), new SolidBrush(Color.Yellow), new PointF(5, 35));
+                    g.DrawString(((int)yy.U).ToString(), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(5 + 75, 35));
+                    g.DrawString(((int)yy.V).ToString(), new Font("Consolas", 30), new SolidBrush(Color.Red), new PointF(5 + 150, 35));
                 }
                 else
                 {
-                    this.Size = new Size(240, 80);
+                    cnt++;
+                    if ((cnt > 25) && (cnt % 5) == 0)
+                    {
+                        this.Size = new Size(240, 55);
+                        g.Clear(BackColor);
+                        g.DrawString(DateTime.Now.ToString("HH:mm:ss"), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(20, 5));
+                    }
                 }
-
-                cl_old = cl;
-
-                int rr = cl.R;
-                int gg = cl.G;
-                int bb = cl.B;
-
-                RGB pp = new RGB((byte)rr, (byte)gg, (byte)bb);
-                YUV yy = new YUV();
-                yy = RGBToYUV(pp);
-
-                g.DrawString(((int)yy.Y).ToString(), new Font("Consolas", 30), new SolidBrush(Color.Yellow), new PointF(5, 35));
-                g.DrawString(((int)yy.U).ToString(), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(5 + 75, 35));
-                g.DrawString(((int)yy.V).ToString(), new Font("Consolas", 30), new SolidBrush(Color.Red), new PointF(5 + 150, 35));
             }
-            else
+            else  // 量測8點模式
             {
-                cnt++;
-                if ((cnt > 25) && (cnt % 5) == 0)
+                g.Clear(BackColor);
+                g.DrawRectangle(new Pen(Color.Gray, 20), 0, 0, this.ClientSize.Width, this.ClientSize.Height);
+
+                g.DrawString(cl.R.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Red), new PointF(5, 0));
+                g.DrawString(cl.G.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Lime), new PointF(5 + 75, 0));
+                g.DrawString(cl.B.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(5 + 150, 0));
+
+                if ((flag_recording_point1 == false) && (flag_recording_point2 == false))
                 {
-                    this.Size = new Size(240, 55);
-                    g.Clear(BackColor);
-                    g.DrawString(DateTime.Now.ToString("HH:mm:ss"), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(20, 5));
+                    g.DrawString("選取第一點", new Font("Consolas", 18), new SolidBrush(Color.Magenta), new PointF(15, 0 + 46));
+                    g.DrawString(cnt.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Cyan), new PointF(5 + 160, 0 + 34));
+                    g.DrawString("20", new Font("Consolas", 30), new SolidBrush(Color.Cyan), new PointF(5 + 160, 0 + 34 + 34));
                 }
+                if ((flag_recording_point1 == true) && (flag_recording_point2 == false))
+                {
+                    g.DrawString("選取第二點", new Font("Consolas", 18), new SolidBrush(Color.Magenta), new PointF(15, 0 + 46));
+                    g.DrawString(cnt.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Cyan), new PointF(5 + 160, 0 + 34));
+                    g.DrawString("20", new Font("Consolas", 30), new SolidBrush(Color.Cyan), new PointF(5 + 160, 0 + 34 + 34));
+                }
+
+                if ((flag_recording_point1 == true) && (flag_recording_point2 == false))
+                {
+                    g.DrawRectangle(new Pen(Color.Red, 20), 0, 0, this.ClientSize.Width, this.ClientSize.Height);
+                }
+                if ((flag_recording_point1 == true) && (flag_recording_point2 == true))
+                {
+                    g.DrawRectangle(new Pen(Color.Green, 20), 0, 0, this.ClientSize.Width, this.ClientSize.Height);
+                }
+
+                if (flag_recording_point1 == false)
+                {
+                    if (cl_old == cl)
+                    {
+                        cnt++;
+                    }
+                    else
+                    {
+                        cnt = 0;
+                    }
+
+                    //if ((cl.R > 230) && (cl.G > 230) && (cl.B > 230))
+                    if (cnt > 20)
+                    {
+                        record_time1++;
+                        g.DrawRectangle(new Pen(Color.FromArgb((record_time1 * 12) % 256, 255, 0, 0), 20), 0, 0, this.ClientSize.Width, this.ClientSize.Height);
+                        //if (record_time1 >= 20)
+                        {
+                            flag_recording_point1 = true;
+                            pt_st = new Point(Control.MousePosition.X, Control.MousePosition.Y);
+                            cnt = 0;
+                        }
+                    }
+                    else
+                    {
+                        record_time1 = 0;
+                    }
+                }
+
+                if ((flag_recording_point1 == true) && (flag_recording_point2 == false))
+                {
+                    if (cl_old == cl)
+                    {
+                        cnt++;
+                    }
+                    else
+                    {
+                        cnt = 0;
+                    }
+
+                    //if ((cl.R < 20) && (cl.G < 20) && (cl.B < 20))
+                    if (cnt > 20)
+                    {
+                        record_time2++;
+                        g.DrawRectangle(new Pen(Color.FromArgb((record_time2 * 12) % 256, 0, 255, 0), 20), 0, 0, this.ClientSize.Width, this.ClientSize.Height);
+                        //if (record_time2 >= 20)
+                        {
+                            flag_recording_point2 = true;
+                            pt_sp = new Point(Control.MousePosition.X, Control.MousePosition.Y);
+                        }
+                    }
+                    else
+                    {
+                        record_time2 = 0;
+                    }
+                }
+
+                if ((flag_recording_point1 == true) && (flag_recording_point2 == true))
+                {
+                    int x_st = pt_st.X;
+                    int dx = (pt_sp.X - pt_st.X) / 7;
+                    int dy = 36;
+                    g.Clear(BackColor);
+                    g.DrawRectangle(new Pen(Color.Green, 20), 0, 0, this.ClientSize.Width, this.ClientSize.Height);
+
+                    for (int i = 0; i < 8; i++)
+                    {
+                        Point p = new Point(x_st + dx * i, pt_st.Y);
+                        Color c = GetColor(p);
+                        g.DrawString(c.R.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Red), new PointF(5, 0 + i * dy));
+                        g.DrawString(c.G.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Lime), new PointF(5 + 75, 0 + i * dy));
+                        g.DrawString(c.B.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(5 + 150, 0 + i * dy));
+                    }
+                    flag_no_update = true;
+                }
+                cl_old = cl;
             }
         }
 
         private void Form1_DoubleClick(object sender, EventArgs e)
         {
-            Application.Exit();
+            if (flag_measure_8_points == false)  // 一般模式
+            {
+                Application.Exit();
+            }
+            else  // 量測8點模式
+            {
+                flag_no_update = false;
+                flag_recording_point1 = false;
+                flag_recording_point2 = false;
+                record_time1 = 0;
+                record_time2 = 0;
+            }
         }
 
         //***********************
@@ -291,4 +435,3 @@ namespace vcs_ColorPicker1
         }
     }
 }
-

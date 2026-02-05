@@ -33,22 +33,27 @@ namespace vcs_ImageProcessing5
 
         void show_item_location()
         {
-            int x_st = 12;
-            int y_st = 12;
-            int dx = 120;
-            int dy = 50;
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
 
-            btnReset.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            btnEmboss1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            btnEmboss2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            btnEmboss3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            btnBlur1.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            btnBlur2.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            btnHighPass1.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            btnHighPass2.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            btnEdge1.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            btnEdge2.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            btnEdge3.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 10;
+            dy = 60 + 10;
+
+            btnEmboss1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            btnEmboss2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            btnEmboss3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            btnBlur1.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            btnBlur2.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            btnHighPass1.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            btnHighPass2.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            btnEdge1.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            btnEdge2.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            btnEdge3.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
             btnAverage.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             btnGrayscale.Location = new Point(x_st + dx * 1, y_st + dy * 1);
@@ -78,23 +83,33 @@ namespace vcs_ImageProcessing5
             bt_image_process_b2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             bt_image_process_b3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
 
-            groupBox1.Size = new Size(120, 220);
-            groupBox2.Size = new Size(120, 420);
+            groupBox1.Size = new Size(200 + 20, 220);
+            groupBox2.Size = new Size(200 + 20, 420);
             groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 4 + 20);
+            groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 3 + 20);
 
             pictureBox1.Size = new Size(800, 600);
             pictureBox1.Location = new Point(x_st + dx * 3 + 20, y_st + dy * 0);
+            bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
 
             richTextBox1.Size = new Size(200, 600);
-            richTextBox1.Location = new Point(x_st + dx * 10 + 50, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1500, 700);
+            this.Size = new Size(1700, 880);
+            this.Text = "vcs_ImageProcessing5";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
-        // Display the original image.
-        private void btnReset_Click(object sender, EventArgs e)
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void bt_reset_Click(object sender, EventArgs e)
         {
             Bitmap bitmap1 = new Bitmap(filename);
             pictureBox1.Image = bitmap1;

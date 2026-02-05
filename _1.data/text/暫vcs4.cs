@@ -1,4 +1,27 @@
 ﻿
+//放大和縮小圖像
+//圖像縮放操作
+//調整 pbox的大小，來改變圖片大小
+//pbox的SizeMode要用Zoom
+
+            pictureBox1.Height = Convert.ToInt32(myImage.Height * Convert.ToSingle(textBox1.Text.Trim()));
+            pictureBox1.Width = Convert.ToInt32(myImage.Width * Convert.ToSingle(textBox1.Text.Trim()) * 4 / 3);
+
+
+
+
+private void Form1_Load(object sender, EventArgs e)
+{
+    //按Enter連動到button1
+    this.AcceptButton = button1;	//在表單按Enter, 等於按了button1
+    this.AcceptButton = button5;            //在表單按enter就執行button5按鈕的動作
+    //按ESC連動到button1
+    this.CancelButton = button2;
+
+    //不再TaskBar上顯示程式
+    this.ShowInTaskbar = false;
+}
+
 
 /*
 //儲存新的影像
@@ -770,17 +793,6 @@ richTextBox1.Text += "----------------------------------------------------------
                             total_B += pt.B;
                         }
                     }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            //按Enter連動到button1
-            this.AcceptButton = button1;
-            //按ESC連動到button1
-            this.CancelButton = button2;
-
-            //不再TaskBar上顯示程式
-            this.ShowInTaskbar = false;
-        }
 
 vcs 之 radioButton 可以用Image, Text設為空
 

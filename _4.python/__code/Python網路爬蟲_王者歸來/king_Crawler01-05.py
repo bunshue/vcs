@@ -35,7 +35,7 @@ import csv
 import json
 import bs4
 import requests
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
@@ -65,130 +65,61 @@ print(htmlfile.text)  # 列印網頁內容
 
 print("------------------------------------------------------------")  # 60個
 
-# 測試 搜尋金庸小說 主角名字 出現次數 使用 re
-url = "http://www.mcut.edu.tw"
-htmlfile = requests.get(url)
-if htmlfile.status_code == requests.codes.ok:
-    pattern = "hello world"  # pattern存放欲搜尋的字串
-    # 使用方法1
-    if pattern in htmlfile.text:  # 方法1
-        print("搜尋 %s 成功" % pattern)
-    else:
-        print("搜尋 %s 失敗" % pattern)
-    # 使用方法2, 如果找到放在串列name內
-    name = re.findall(pattern, htmlfile.text)  # 方法2
-    if name != None:
-        print("%s 出現 %d 次" % (pattern, len(name)))
-    else:
-        print("%s 出現 0 次" % pattern)
-else:
-    print("網頁下載失敗")
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-'''
-print('aa')
 url = "http://www.mcut.edu.tw/file_not_existed"  # 網站存在 但 內容不存在
-htmlfile = requests.get(url)
-try:
-    htmlfile.raise_for_status()  # 異常處理
-    print("下載成功")
-except Exception as err:  # err是系統自訂的錯誤訊息
-    print("網頁下載失敗: %s" % err)
-print("程式結束")
-
-print("------------------------------------------------------------")  # 60個
-print('bb')
-# ch3_10.py
-
-url = "http://www.gzaxxc.com/file_not_existed"  # 網站不存在
-htmlfile = requests.get(url)
-try:
-    htmlfile.raise_for_status()  # 異常處理
-    print("下載成功")
-except Exception as err:  # err是系統自訂的錯誤訊息
-    print("網頁下載失敗: %s" % err)
-print("程式結束")
-
-print("------------------------------------------------------------")  # 60個
-
-print('cc')
-# ch3_11.py
-
 url = "http://www.gzaxxc.com/file_not_existed"  # 網站不存在
 try:
-    htmlfile = requests.get(url)
+    print("111")
+    htmlfile = requests.get(url)  # 錯誤在這裡, 所以要寫在try-except裡面
+    print("222")
+    htmlfile.raise_for_status()  # 異常處理
+    print("333")
     print("下載成功")
 except Exception as err:  # err是系統自訂的錯誤訊息
     print("網頁下載失敗: %s" % err)
 print("程式結束")
 
 print("------------------------------------------------------------")  # 60個
-
-
-sys.exit()
 
 # ch3_12.py
 
 url = "http://aaa.24ht.com.tw/"  # 洪錦魁 網頁
-htmlfile = requests.get(url)
-htmlfile.raise_for_status()
 
 print("------------------------------------------------------------")  # 60個
 
 # ch3_12_1.py
 
 url = "https://www.kingstone.com.tw/new/basic/2013120504769?zone=book&lid=search&actid=WISE"
-htmlfile = requests.get(url)
-htmlfile.raise_for_status()
 
 print("------------------------------------------------------------")  # 60個
 
 # ch3_13.py
 
-headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64)\
-            AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101\
-            Safari/537.36",
-}
 url = "http://aaa.24ht.com.tw/"  # 洪錦魁 網頁
-htmlfile = requests.get(url, headers=headers)
-htmlfile.raise_for_status()
-print("偽裝瀏覽器擷取網路資料成功")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_13_1.py
-
-headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64)\
-            AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101\
-            Safari/537.36",
-}
 url = "https://www.kingstone.com.tw/new/basic/2013120504769?zone=book&lid=search&actid=WISE"
-htmlfile = requests.get(url, headers=headers)
-htmlfile.raise_for_status()
-print("偽裝瀏覽器擷取網路資料成功")
-
-print("------------------------------------------------------------")  # 60個
-
-# ch3_13_2.py
+url = "https://www.kingstone.com.tw/new/basic/2013120504769?zone=book&lid=search&actid=WISE"
 
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
     "AppleWebKit/537.36 (KHTML, like Gecko)"
     "Chrome/75.0.3770.142 Safari/537.36",
 }
-url = "https://www.kingstone.com.tw/new/basic/2013120504769?zone=book&lid=search&actid=WISE"
+
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64)\
+            AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101\
+            Safari/537.36",
+}
 htmlfile = requests.get(url, headers=headers)
 htmlfile.raise_for_status()
 print("偽裝瀏覽器擷取網路資料成功")
 
 print("------------------------------------------------------------")  # 60個
-
-# ch3_14.py
+print("------------------------------------------------------------")  # 60個
 
 url = "http://www.deepmind.com.tw"  # 網址
 try:
@@ -204,6 +135,8 @@ with open(filename, "wb") as file_Obj:  # 以二進位儲存
         print(size)  # 列出每次寫入大小
     print("以 %s 儲存網頁HTML檔案成功" % filename)
 
+print("------------------------------------------------------------")  # 60個
+# 使用 urllib ST
 print("------------------------------------------------------------")  # 60個
 
 # ch3_15.py
@@ -437,6 +370,9 @@ except error.URLError as e:
 else:
     print("擷取網路資料成功")
 
+
+print("------------------------------------------------------------")  # 60個
+# 使用 urllib SP
 print("------------------------------------------------------------")  # 60個
 
 # ch3_29.py
@@ -559,14 +495,14 @@ print(r.text)
 print("------------------------------------------------------------")  # 60個
 
 # ch3_40.py
-
+""" NG here
 proxies = {
     "http": "http://111.231.81.109:3128",  # ip:port
     "https": "https://111.231.81.109:1080",  # ip:port
 }
 
 r = requests.get("https://docs.python.org", proxies=proxies)
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 # ch3_41.py
@@ -1176,6 +1112,7 @@ print("------------------------------------------------------------")  # 60個
 
 # ch4_33.py
 
+""" NG here
 url = "http://www.stockq.org/market/currency.php"
 currencys = pd.read_html(url)  # 讀取全球匯率行情表
 
@@ -1184,7 +1121,7 @@ currency = currency.drop(currency.index[[0, 1]])  # 拋棄前2 row
 currency.columns = ["貨幣", "匯率", "漲跌", "比例", "台北"]  # 建立column標題
 currency.index = range(len(currency.index))  # 建立row標題
 print(currency)
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 # ch5_1.py
@@ -1686,6 +1623,7 @@ print("串列長度", len(dataTag))
 for i in range(len(dataTag)):  # 列出含contents_box02的串列
     print(dataTag[i])
 
+""" NG here
 # 找尋開出順序與大小順序的球
 balls = dataTag[0].find_all("div", {"class": "ball_tx ball_green"})
 print("開出順序 : ", end="")
@@ -1699,7 +1637,7 @@ for i in range(6, len(balls)):  # 第7球以後是大小順序
 # 找出第二區的紅球
 redball = dataTag[0].find_all("div", {"class": "ball_red"})
 print("\n第二區   :", redball[0].text)
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 # ch5_17.py
@@ -1726,8 +1664,9 @@ url = "http://ip.filefab.com/index.php"
 htmlFile = requests.get(url, headers=headers)
 soup = bs4.BeautifulSoup(htmlFile.text, "lxml")
 ip = soup.find("h1", id="ipd")
+""" NG here
 print(ip.text.strip())
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 
@@ -1754,12 +1693,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 # json 的 dump 加 indent
 # jsonObj = json.dumps(players, sort_keys=True, indent=12)
 # print(jsonObj)
 
 print("------------------------------------------------------------")  # 60個
-
-
-

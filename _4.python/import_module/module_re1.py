@@ -744,6 +744,27 @@ print("result :", txt)
 print("------------------------------------------------------------")  # 60個
 
 
+# 測試 搜尋金庸小說 主角名字 出現次數 使用 re
+
+
+filename = "D:/_git/vcs/_4.python/_data/射鵰英雄傳.txt"
+
+fp = open(filename, "r", encoding="utf-16")
+article = fp.read()
+
+pattern = "郭靖"  # pattern存放欲搜尋的字串
+
+# 如果找到放在串列name內
+name = re.findall(pattern, article)  # 方法2
+if name != None:
+    print("%s 出現 %d 次" % (pattern, len(name)))
+else:
+    print("%s 出現 0 次" % pattern)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
 # 計算單字在文章中出現的頻率
 # 只列出出現超過一次以上的單字
 

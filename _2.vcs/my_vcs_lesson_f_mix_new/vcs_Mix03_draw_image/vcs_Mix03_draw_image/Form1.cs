@@ -364,6 +364,31 @@ namespace vcs_Mix03_draw_image
         private void button5_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //放大圖片
+            //由 r X r 放大到 R X R
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
+            Bitmap bitmap2 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Graphics g = Graphics.FromImage(bitmap2);    //以記憶體圖像 bitmap2 建立 記憶體畫布g
+
+            int x_st = 255;
+            int y_st = 115;
+            int r = 100;
+            int R = 200;
+
+            Rectangle rect1 = new Rectangle(x_st - r / 2, y_st - r / 2, r, r); //要放大的區域, 來源矩形
+            Rectangle rect2 = new Rectangle(x_st - R / 2, y_st - R / 2, R, R);  //貼上的地方, 目標矩形
+
+            g.DrawImage(bitmap1, 0, 0, bitmap1.Width, bitmap1.Height);  // 貼上原圖
+            g.DrawImage(bitmap1, rect2, rect1, GraphicsUnit.Pixel);
+
+            g.DrawRectangle(Pens.Red, rect1);
+            g.DrawRectangle(Pens.Green, rect2);
+
+            pictureBox1.Image = bitmap2;
         }
 
         private void button6_Click(object sender, EventArgs e)

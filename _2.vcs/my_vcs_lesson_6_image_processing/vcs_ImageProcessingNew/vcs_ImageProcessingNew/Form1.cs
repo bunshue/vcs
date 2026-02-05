@@ -541,8 +541,8 @@ namespace vcs_ImageProcessingNew
             //button
             x_st = 10;
             y_st = 10;
-            dx = 170;
-            dy = 80;
+            dx = 200 + 10;
+            dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -564,6 +564,31 @@ namespace vcs_ImageProcessingNew
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+
+            //pictureBox1.Size = new Size(400, 450);
+            //pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
+
+            richTextBox1.Size = new Size(300, 300);
+            //richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1800, 860);
+            this.Text = "vcs_ImageProcessingNew";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void bt_reset_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -752,8 +777,9 @@ namespace vcs_ImageProcessingNew
                 {
                     int dist = (int)Math.Sqrt((i - cx) * (i - cx) + (j - cy) * (j - cy));
                     if (dist > 255)
+                    {
                         dist = 255;
-
+                    }
                     bitmap1.SetPixel(i, j, Color.FromArgb(255, dist, dist, 128));
                 }
             }
