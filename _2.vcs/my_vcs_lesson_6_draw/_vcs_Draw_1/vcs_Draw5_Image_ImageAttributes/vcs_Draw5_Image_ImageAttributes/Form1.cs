@@ -112,7 +112,6 @@ namespace vcs_Draw5_Image_ImageAttributes
             imageObject.Init(pos, 10000);  // 10 秒
             // 淡入 / 淡出 效果 SP
 
-
             //string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             //得到原始大小的圖像
@@ -271,6 +270,7 @@ namespace vcs_Draw5_Image_ImageAttributes
 
             this.Size = new Size(1700, 960);
             this.Text = "vcs_Draw5_Image_ImageAttributes";
+
             //設定執行後的表單起始位置
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point((1920 - this.Size.Width) / 2, (1080 - this.Size.Height) / 2);

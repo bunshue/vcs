@@ -96,6 +96,10 @@ namespace vcs_Draw_Bitmap
 
             this.Size = new Size(1860, 910);
             this.Text = "vcs_Draw_Bitmap";
+
+            //設定執行後的表單起始位置
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((1920 - this.Size.Width) / 2, (1080 - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)

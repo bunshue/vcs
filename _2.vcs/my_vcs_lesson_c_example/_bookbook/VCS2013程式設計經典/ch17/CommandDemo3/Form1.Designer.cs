@@ -47,16 +47,16 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(25, 117);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(484, 157);
+            this.dataGridView1.Size = new System.Drawing.Size(681, 400);
             this.dataGridView1.TabIndex = 15;
             // 
             // btnDel
             // 
             this.btnDel.Location = new System.Drawing.Point(453, 82);
-            this.btnDel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDel.Margin = new System.Windows.Forms.Padding(2);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(56, 22);
             this.btnDel.TabIndex = 14;
@@ -67,7 +67,7 @@
             // btnUpdate
             // 
             this.btnUpdate.Location = new System.Drawing.Point(453, 49);
-            this.btnUpdate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnUpdate.Margin = new System.Windows.Forms.Padding(2);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(56, 22);
             this.btnUpdate.TabIndex = 13;
@@ -78,7 +78,7 @@
             // btnAdd
             // 
             this.btnAdd.Location = new System.Drawing.Point(453, 16);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(2);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(56, 22);
             this.btnAdd.TabIndex = 12;
@@ -89,7 +89,7 @@
             // txtSalary
             // 
             this.txtSalary.Location = new System.Drawing.Point(273, 79);
-            this.txtSalary.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtSalary.Margin = new System.Windows.Forms.Padding(2);
             this.txtSalary.Name = "txtSalary";
             this.txtSalary.Size = new System.Drawing.Size(111, 22);
             this.txtSalary.TabIndex = 10;
@@ -107,7 +107,7 @@
             // txtTel
             // 
             this.txtTel.Location = new System.Drawing.Point(273, 40);
-            this.txtTel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTel.Margin = new System.Windows.Forms.Padding(2);
             this.txtTel.Name = "txtTel";
             this.txtTel.Size = new System.Drawing.Size(111, 22);
             this.txtTel.TabIndex = 8;
@@ -125,7 +125,7 @@
             // txtPosition
             // 
             this.txtPosition.Location = new System.Drawing.Point(56, 79);
-            this.txtPosition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPosition.Margin = new System.Windows.Forms.Padding(2);
             this.txtPosition.Name = "txtPosition";
             this.txtPosition.Size = new System.Drawing.Size(110, 22);
             this.txtPosition.TabIndex = 9;
@@ -143,7 +143,7 @@
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(56, 40);
-            this.txtName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtName.Margin = new System.Windows.Forms.Padding(2);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(110, 22);
             this.txtName.TabIndex = 11;
@@ -162,7 +162,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(531, 293);
+            this.ClientSize = new System.Drawing.Size(863, 560);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnDel);
             this.Controls.Add(this.btnUpdate);
@@ -175,7 +175,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);

@@ -34,12 +34,12 @@ namespace CommandDemo3
                 dataGridView1.DataSource = ds.Tables["員工"];
             }
         }
-        // 表單載入時執行此事件
+
         private void Form1_Load(object sender, EventArgs e)
         {
             ShowData();
         }
-        // 按下 [新增] 鈕時執行此事件
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             try	//使用try...catch...敘述來補捉異動資料可能發生的例外
@@ -52,7 +52,7 @@ namespace CommandDemo3
                     SqlCommand cmd = new SqlCommand(sqlStr, cn);
                     cmd.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar));
                     cmd.Parameters.Add(new SqlParameter("@position", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@tel", SqlDbType.NVarChar ));
+                    cmd.Parameters.Add(new SqlParameter("@tel", SqlDbType.NVarChar));
                     cmd.Parameters.Add(new SqlParameter("@salary", SqlDbType.Int));
                     cmd.Parameters["@name"].Value = txtName.Text;
                     cmd.Parameters["@position"].Value = txtPosition.Text;
@@ -64,10 +64,10 @@ namespace CommandDemo3
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + " 新增資料發生錯誤");
+                MessageBox.Show(ex.Message + ", 新增資料發生錯誤");
             }
         }
-        // 按下 [更新] 鈕執行此事件 
+
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             try	//使用try...catch...敘述來補捉異動資料可能發生的例外
@@ -92,10 +92,10 @@ namespace CommandDemo3
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + " 修改資料發生錯誤");
+                MessageBox.Show(ex.Message + ", 修改資料發生錯誤");
             }
         }
-        // 按下 [刪除] 鈕執行此事件
+
         private void btnDel_Click(object sender, EventArgs e)
         {
             using (SqlConnection cn = new SqlConnection())
@@ -104,7 +104,7 @@ namespace CommandDemo3
                 cn.Open();
                 string sqlStr = "DELETE FROM 員工 WHERE 姓名 = @name";
                 SqlCommand cmd = new SqlCommand(sqlStr, cn);
-                cmd.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar ));
+                cmd.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar));
                 cmd.Parameters["@name"].Value = txtName.Text;
                 cmd.ExecuteNonQuery();
             }

@@ -64,8 +64,11 @@ namespace vcs_SqlConnection1
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            dataGridView1.Size = new Size(1080, 840);
+            dataGridView1.Size = new Size(640, 480);
             dataGridView1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+
+            textBox1.Size = new Size(640, 360);
+            textBox1.Location = new Point(x_st + dx * 2, y_st + dy * 7);
 
             richTextBox1.Size = new Size(300, 498);
             richTextBox1.Location = new Point(x_st + dx * 7 + 40, y_st + dy * 4 + 60);
@@ -73,6 +76,10 @@ namespace vcs_SqlConnection1
 
             this.Size = new Size(1860, 910);
             this.Text = "vcs_SqlConnection1";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -87,7 +94,6 @@ namespace vcs_SqlConnection1
             DataSet ds = new DataSet();
             da.Fill(ds);
             dataGridView1.DataSource = ds.Tables[0];
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -95,7 +101,6 @@ namespace vcs_SqlConnection1
             using (SqlConnection cn = new SqlConnection())
             {
                 //cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\ch17DB.mdf;Integrated Security=True";
-                //cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
                 cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\VisualC#2015基礎必修課\2015範例程式\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
 
                 cn.Open();
@@ -120,35 +125,157 @@ namespace vcs_SqlConnection1
                 cmdMin = new SqlCommand("SELECT Min(薪資) FROM 員工", cn);
                 richTextBox1.Text += "最低薪為 " + cmdMin.ExecuteScalar().ToString() + "\n";
             }
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //test 2
+
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|Northwind.mdf;Integrated Security=True";
+                cn.Open();
+                if (cn.State == ConnectionState.Open)
+                {
+                    MessageBox.Show("資料庫已連接", "目前狀態");
+                }
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|Northwind.mdf;Integrated Security=True
+
+            /*
+            using (SqlConnection cn = new SqlConnection(Properties.Settings.Default.connString))
+            {
+                cn.Open();
+                MessageBox.Show("連接資料庫：" + cn.Database, "Form1狀態");
+            }
+            */
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|ch17DB.mdf;Integrated Security=True";
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM 成績單", cn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                for (int i = 0; i < dr.FieldCount; i++)
+                {
+                    textBox1.Text += dr.GetName(i) + "\t";
+                }
+                textBox1.Text += Environment.NewLine + Environment.NewLine;
+                while (dr.Read())
+                {
+                    for (int i = 0; i < dr.FieldCount; i++)
+                    {
+                        textBox1.Text += dr[i].ToString() + "\t";
+                    }
+                    textBox1.Text += Environment.NewLine;
+                }
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|ch17DB.mdf;Integrated Security=True";
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM 成績單", cn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                for (int i = 0; i < dr.FieldCount; i++)
+                {
+                    textBox1.Text += dr.GetName(i) + "\t";
+                }
+                textBox1.Text += Environment.NewLine + Environment.NewLine;
+                while (dr.Read())
+                {
+                    textBox1.Text += dr["學號"].ToString() + "\t";
+                    textBox1.Text += dr["姓名"].ToString() + "\t";
+                    textBox1.Text += dr["國文"].ToString() + "\t";
+                    textBox1.Text += dr["英文"].ToString() + "\t";
+                    textBox1.Text += dr["數學"].ToString() + "\t";
+                    textBox1.Text += Environment.NewLine;
+                }
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|ch17DB.mdf;Integrated Security=True";
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM 成績單", cn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                for (int i = 0; i < dr.FieldCount; i++)
+                {
+                    textBox1.Text += dr.GetName(i) + "\t";
+                }
+                textBox1.Text += Environment.NewLine + Environment.NewLine;
+                while (dr.Read())
+                {
+                    for (int i = 0; i < dr.FieldCount; i++)
+                    {
+                        textBox1.Text += dr.GetValue(i).ToString() + "\t";
+                    }
+                    textBox1.Text += Environment.NewLine;
+                }
+            }
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|ch17DB.mdf;Integrated Security=True";
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM 成績單", cn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                for (int i = 0; i < dr.FieldCount; i++)
+                {
+                    textBox1.Text += dr.GetName(i) + "\t";
+                }
+                textBox1.Text += Environment.NewLine + Environment.NewLine;
+                while (dr.Read())
+                {
+                    textBox1.Text += dr.GetString(0) + "\t";   //讀取學號
+                    textBox1.Text += dr.GetString(1) + "\t";   //讀取姓名
+                    textBox1.Text += dr.GetInt32(2).ToString() + "\t";   //讀取國文
+                    textBox1.Text += dr.GetInt32(3).ToString() + "\t";   //讀取英文
+                    textBox1.Text += dr.GetInt32(4).ToString() + "\t";   //讀取數學
+                    textBox1.Text += Environment.NewLine;
+                }
+            }
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|ch17DB.mdf;Integrated Security=True";
+                cn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM 成績單", cn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                for (int i = 0; i < dr.FieldCount; i++)
+                {
+                    textBox1.Text += dr.GetName(i) + "\t";
+                }
+                textBox1.Text += Environment.NewLine + Environment.NewLine;
+                while (dr.Read())
+                {
+                    textBox1.Text += dr.GetSqlString(0).ToString() + "\t";//讀取學號
+                    textBox1.Text += dr.GetSqlString(1).ToString() + "\t";//讀取姓名
+                    textBox1.Text += dr.GetSqlInt32(2).ToString() + "\t";//讀取國文
+                    textBox1.Text += dr.GetSqlInt32(3).ToString() + "\t";//讀取英文
+                    textBox1.Text += dr.GetSqlInt32(4).ToString() + "\t";//讀取數學
+                    textBox1.Text += Environment.NewLine;
+                }
+            }
         }
 
         private void button9_Click(object sender, EventArgs e)
