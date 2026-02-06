@@ -59,8 +59,7 @@ namespace vcs_PictureBox2
                 pictureBox1.Size = new Size(W, H);
                 pictureBox1.Location = new Point(0, 0);
             }
-
-            if (e.Button == MouseButtons.Right)
+            else if (e.Button == MouseButtons.Right)
             {
                 this.Text = "原始比例顯示圖片";
                 pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -209,9 +208,6 @@ namespace vcs_PictureBox2
             }
         }
 
-
-
-
         int ratio = 10;
         private void pictureBox1_MouseWheel(object sender, MouseEventArgs e)
         {
@@ -224,8 +220,6 @@ namespace vcs_PictureBox2
                     ratio = 20;
                 //this.Text = "放大 " + ratio.ToString();
                 this.Text = "放大 " + ratio.ToString() + "\t" + e.Location.ToString();
-
-
             }
             else
             {
@@ -237,16 +231,13 @@ namespace vcs_PictureBox2
 
             ww = w * ratio / 10;
             hh = h * ratio / 10;
-
             pictureBox1.Size = new Size(ww, hh);
             //pictureBox1.Location = new Point((W - ww) / 2, (H - hh) / 2);
-
         }
 
         int pictureBox1_position_x_old = 0;
         int pictureBox1_position_y_old = 0;
         bool flag_pictureBox1_mouse_down = false;
-
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             flag_pictureBox1_mouse_down = true;

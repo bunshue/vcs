@@ -170,6 +170,25 @@ namespace vcs_Mix00
         {
             show_button_text(sender);
 
+            //DriveInfo測試
+
+            DriveInfo[] allDrives = DriveInfo.GetDrives();
+
+            foreach (DriveInfo d in allDrives)
+            {
+                Console.WriteLine("磁碟名稱 {0}", d.Name);
+                Console.WriteLine("  磁碟類型: {0}", d.DriveType);
+                if (d.IsReady == true)
+                {
+                    Console.WriteLine("  檔案系統名稱: {0}", d.DriveFormat);
+                    Console.WriteLine("  目前可用空間量: \t{0, 15} bytes", d.AvailableFreeSpace);
+                    Console.WriteLine("  可用空間總量: \t{0, 15} bytes", d.TotalFreeSpace);
+                    Console.WriteLine("  可儲存空間總量: \t{0, 15} bytes ", d.TotalSize);
+                }
+            }
+            Console.Read();
+
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -537,6 +556,67 @@ namespace vcs_Mix00
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //DirectoryInfo 測試
+
+            // 建立DirectoryInfo類別的dir物件，可用來操作資料夾目錄
+            DirectoryInfo dir = new DirectoryInfo("D:\\_git\\vcs\\CSharp");
+            if (dir.Exists)
+            {	// 判斷目錄是否存在
+                Console.WriteLine("D:\\_git\\vcs\\CSharp 路徑存在, 不建立目錄");
+            }
+            else
+            {
+                Console.WriteLine("D:\\_git\\vcs\\CSharp 路徑不存在，建立目錄");
+                dir.Create();	// 建立目錄
+                dir.Refresh();	// 重新整理目錄
+            }
+            Console.WriteLine("{0}檔案資訊如下：", dir.FullName);
+            Console.WriteLine("建立時間：{0}", dir.CreationTime);
+            Console.WriteLine("存取時間：{0}", dir.LastAccessTime);
+            Console.WriteLine("資料夾名稱：{0}", dir.Name);
+            Console.WriteLine("根目錄：{0}", dir.Parent);
+            Console.WriteLine();
+            Console.Write("是否刪除 D:\\_git\\vcs\\CSharp 資料夾   1.刪除  2.不刪除->");
+            if (Console.ReadLine() == "1")
+            {
+                try
+                {
+                    dir.Delete();	       // 刪除檔案
+                    Console.WriteLine("刪除成功");
+                }
+                catch (Exception ex)   // 刪除檔案失敗會產生例外
+                {
+                    Console.WriteLine("刪除失敗");
+                    Console.WriteLine(ex.Message);  // 顯示例外訊息
+                }
+            }
+            Console.Read();
+
+
+            //6060
+
+            //Console.Write("請輸入路徑->");
+            //string fpath = Console.ReadLine();
+
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\_case1";
+
+            DirectoryInfo dir2 = new DirectoryInfo(foldername);
+            if (!dir2.Exists)	//判斷路徑是否不存在
+            {
+                Console.WriteLine("路徑不存在");
+                Console.Read();
+                return;
+            }
+            Console.WriteLine("{0}資料夾下的子資料夾如下：", dir2.FullName);
+            DirectoryInfo[] subdir = dir2.GetDirectories();
+            foreach (DirectoryInfo r in subdir)
+            {
+                Console.WriteLine("完整路徑：{0}  \t建立時間{1}", r.FullName, r.CreationTime);
+            }
+            Console.Read();
+
+
+
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -851,6 +931,41 @@ namespace vcs_Mix00
 
         private void button18_Click(object sender, EventArgs e)
         {
+            //一個檔案的英文字母出現的字數統計
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__text\war_and_peace.txt";
+
+            FileInfo f = new FileInfo(filename);
+            StreamReader sr = f.OpenText();
+
+            int[] letter = new int[26];
+            int k;
+            char ch;
+            while (sr.Peek() >= 0)
+            {
+                ch = (char)sr.Read();
+                if (ch >= 'A' && ch <= 'Z')
+                {
+                    k = (int)ch - 65;
+                    letter[k]++;
+                }
+                else if (ch >= 'a' && ch <= 'z')
+                {
+                    k = (int)ch - 97;
+                    letter[k]++;
+                }
+            }
+
+            richTextBox1.Text += "== 本檔案 英文字母出現的字數統計如下 : \n";
+            for (int i = 0; i < 26; i = i + 2)
+            {
+                if ((i % 2) == 0)
+                {
+                    richTextBox1.Text += (char)(65 + i) + ", " + (char)(97 + i) + ", " + letter[i] + "個\t";
+                    richTextBox1.Text += (char)(65 + i + 1) + ", " + (char)(97 + i + 1) + ", " + letter[i + 1] + "個\n";
+                }
+            }
+            sr.Close();
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -1206,8 +1321,8 @@ namespace vcs_Mix00
             {
                 richTextBox1.Text += "key : " + de.Key.ToString() + ", value : " + de.Value.ToString() + "\n";
 
-                //Console.WriteLine(de.Key.ToString());
-                //Console.WriteLine(de.Value.ToString());
+                //richTextBox1.Text += de.Key.ToString()+"\n";
+                //richTextBox1.Text += de.Value.ToString()+"\n";
             }
         }
         */
@@ -1222,9 +1337,9 @@ namespace vcs_Mix00
         private void button24_Click(object sender, EventArgs e)
         {
             //** 自訂格式化輸出
-            Console.WriteLine(String.Format("{0:##,##0.00}", 8567.1));
-            Console.WriteLine(String.Format("{0:###0.00}", 566.7));
-            Console.WriteLine(String.Format("{0:0.00%}", 8));
+            richTextBox1.Text += String.Format("{0:##,##0.00}", 8567.1)+"\n";
+            richTextBox1.Text += String.Format("{0:###0.00}", 566.7)+"\n";
+            richTextBox1.Text += String.Format("{0:0.00%}", 8) + "\n";
         }
 
         static string reverse(string str)
