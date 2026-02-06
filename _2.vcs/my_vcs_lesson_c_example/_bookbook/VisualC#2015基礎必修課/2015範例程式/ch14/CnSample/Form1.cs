@@ -15,13 +15,17 @@ namespace CnSample
 {
     public partial class Form1 : Form
     {
+        //宣告cnStr連線字串置於事件處理函式外，以提供給其他事件處理函式共用
+        //String cnStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\MyDB.mdf;Integrated Security=True;Connect Timeout=30";
+
+        // 設定相關資料庫連線參數
+        String cnStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\VisualC#2015基礎必修課\2015範例程式\data\MyDB.mdf;Integrated Security=True;Connect Timeout=30";
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        //宣告cnStr連線字串置於事件處理函式外，以提供給其他事件處理函式共用
-        String cnStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\MyDB.mdf;Integrated Security=True;Connect Timeout=30";
         //表單載入時執行
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -31,18 +35,20 @@ namespace CnSample
             da.Fill(ds);
             dataGridView1.DataSource = ds.Tables[0];
         }
+
         //按新增鈕執行
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            try {
+            try
+            {
                 SqlConnection cn = new SqlConnection(cnStr);
                 cn.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = "INSERT INTO 員工(員工編號,姓名,性別,薪資)VALUES(N'" +
                     txtId.Text.Replace("'", "''") + "',N'" +
                     txtName.Text.Replace("'", "''") + "',N'" +
-                    cboSex.Text + "',"+
-                    txtSalary.Text +")";
+                    cboSex.Text + "'," +
+                    txtSalary.Text + ")";
                 cmd.Connection = cn;
                 cmd.ExecuteNonQuery();
                 Form1_Load(sender, e);
@@ -52,6 +58,7 @@ namespace CnSample
                 MessageBox.Show(ex.Message);
             }
         }
+
         //按修改鈕執行
         private void btnUpdate_Click(object sender, EventArgs e)
         {
@@ -60,11 +67,11 @@ namespace CnSample
                 SqlConnection cn = new SqlConnection(cnStr);
                 cn.Open();
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "UPDATE 員工 SET 姓名=N'" + 
-                    txtName.Text.Replace("'", "''")+"', 性別=N'"+
-                    cboSex.Text +"', 薪資="+ 
-                    txtSalary.Text  +" WHERE 員工編號=N'"+
-                    txtId.Text.Replace("'", "''")+"'";
+                cmd.CommandText = "UPDATE 員工 SET 姓名=N'" +
+                    txtName.Text.Replace("'", "''") + "', 性別=N'" +
+                    cboSex.Text + "', 薪資=" +
+                    txtSalary.Text + " WHERE 員工編號=N'" +
+                    txtId.Text.Replace("'", "''") + "'";
                 cmd.Connection = cn;
                 cmd.ExecuteNonQuery();
                 Form1_Load(sender, e);
@@ -74,6 +81,7 @@ namespace CnSample
                 MessageBox.Show(ex.Message);
             }
         }
+
         //按刪除鈕執行
         private void btnDel_Click(object sender, EventArgs e)
         {
@@ -82,8 +90,7 @@ namespace CnSample
                 SqlConnection cn = new SqlConnection(cnStr);
                 cn.Open();
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "DELETE FROM 員工 WHERE 員工編號=N'" +
-                    txtId.Text.Replace("'", "''") + "'";
+                cmd.CommandText = "DELETE FROM 員工 WHERE 員工編號=N'" + txtId.Text.Replace("'", "''") + "'";
                 cmd.Connection = cn;
                 cmd.ExecuteNonQuery();
                 Form1_Load(sender, e);
@@ -95,3 +102,4 @@ namespace CnSample
         }
     }
 }
+
