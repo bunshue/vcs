@@ -12,6 +12,35 @@ using System.Drawing.Text;
 
 namespace vcs_DrawA_Radar
 {
+    public class CarData
+    {
+        public string Name;
+        public Color Color;
+        public float[] Values;
+        public PointF[] Points = null;
+
+        public CarData(string name, Color color, params float[] values)
+        {
+            Name = name;
+            Color = color;
+            Values = (float[])values.Clone();
+        }
+    }
+
+    public class AxisInfo
+    {
+        public string Name, FormatString;
+        public float Min, Max;
+
+        public AxisInfo(string name, string format_string, float min, float max)
+        {
+            Name = name;
+            FormatString = format_string;
+            Min = min;
+            Max = max;
+        }
+    }
+
     public partial class Form1 : Form
     {
         public Form1()
@@ -68,8 +97,7 @@ namespace vcs_DrawA_Radar
         }
 
         // Draw the axes.
-        private void DrawAxes(Graphics gr, float cx, float cy,
-            float rx, float ry, double dtheta)
+        private void DrawAxes(Graphics gr, float cx, float cy, float rx, float ry, double dtheta)
         {
             double theta = -Math.PI / 2;
             using (Font font = new Font("Arial", 12))
@@ -82,8 +110,7 @@ namespace vcs_DrawA_Radar
 
                     x = cx + (rx + 10) * Math.Cos(theta);
                     y = cy + (ry + 10) * Math.Sin(theta);
-                    DrawRotatedText(gr, font, Brushes.Black,
-                        AxisInfos[i].Name, x, y, theta + Math.PI / 2);
+                    DrawRotatedText(gr, font, Brushes.Black, AxisInfos[i].Name, x, y, theta + Math.PI / 2);
 
                     theta += dtheta;
                 }
@@ -91,8 +118,7 @@ namespace vcs_DrawA_Radar
         }
 
         // Draw level polygons.
-        private void DrawLevels(Graphics gr, float cx, float cy,
-            float rx, float ry, double dtheta)
+        private void DrawLevels(Graphics gr, float cx, float cy, float rx, float ry, double dtheta)
         {
             // Draw the level polygons.
             double theta = -Math.PI / 2;
@@ -115,8 +141,7 @@ namespace vcs_DrawA_Radar
         }
 
         // Draw a radar chart for each car.
-        private void DrawRadarCharts(Graphics gr, bool fill_areas,
-            float cx, float cy, float rx, float ry, double dtheta)
+        private void DrawRadarCharts(Graphics gr, bool fill_areas, float cx, float cy, float rx, float ry, double dtheta)
         {
             // Plot the data.
             foreach (CarData car_data in Cars)
@@ -126,18 +151,14 @@ namespace vcs_DrawA_Radar
         }
 
         // Draw one car's radar chart.
-        private void DrawRadarChart(CarData car_data,
-            Graphics gr, bool fill_areas,
-            float cx, float cy, float rx, float ry, double dtheta)
+        private void DrawRadarChart(CarData car_data, Graphics gr, bool fill_areas, float cx, float cy, float rx, float ry, double dtheta)
         {
             // Get this car's polygon.
             PointF[] points = new PointF[AxisInfos.Count];
             double theta = -Math.PI / 2;
             for (int i = 0; i < AxisInfos.Count; i++)
             {
-                double frac =
-                    (car_data.Values[i] - AxisInfos[i].Min) /
-                    (AxisInfos[i].Max - AxisInfos[i].Min);
+                double frac = (car_data.Values[i] - AxisInfos[i].Min) / (AxisInfos[i].Max - AxisInfos[i].Min);
                 double x = cx + frac * rx * Math.Cos(theta);
                 double y = cy + frac * ry * Math.Sin(theta);
                 points[i] = new PointF((float)x, (float)y);
@@ -163,8 +184,7 @@ namespace vcs_DrawA_Radar
         }
 
         // Draw text rotated at the indicated point.
-        private void DrawRotatedText(Graphics gr, Font font,
-            Brush brush, string text, double x, double y, double theta)
+        private void DrawRotatedText(Graphics gr, Font font, Brush brush, string text, double x, double y, double theta)
         {
             GraphicsState state = gr.Save();
             gr.ResetTransform();
@@ -181,11 +201,6 @@ namespace vcs_DrawA_Radar
             gr.Restore(state);
         }
 
-        private void pictureBox1_Resize(object sender, EventArgs e)
-        {
-            pictureBox1.Refresh();
-        }
-
         // Display a tooltip if appropriate.
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
@@ -193,25 +208,31 @@ namespace vcs_DrawA_Radar
             foreach (CarData car in Cars)
             {
                 // Skip this car if it has no points yet.
-                if (car.Points == null) continue;
+                if (car.Points == null)
+                {
+                    continue;
+                }
 
                 // Check the car's points.
                 for (int i = 0; i < car.Values.Length; i++)
                 {
                     if (PointIsClose(e.Location, car.Points[i], 8))
                     {
-                        tip_text =
-                            car.Name + " " +
-                            AxisInfos[i].Name + ": " +
-                            car.Values[i].ToString(AxisInfos[i].FormatString);
+                        tip_text = car.Name + " " + AxisInfos[i].Name + ": " + car.Values[i].ToString(AxisInfos[i].FormatString);
                         break;
                     }
-                    if (tip_text != "") break;
+                    if (tip_text != "")
+                    {
+                        break;
+                    }
                 }
             }
 
             if (tip_text != tipPoint.GetToolTip(pictureBox1))
+            {
                 tipPoint.SetToolTip(pictureBox1, tip_text);
+                richTextBox1.Text += tip_text + "\n";
+            }
         }
 
         private bool PointIsClose(PointF point1, PointF point2, float radius)
@@ -224,6 +245,51 @@ namespace vcs_DrawA_Radar
         private void chkFillAreas_CheckedChanged(object sender, EventArgs e)
         {
             pictureBox1.Refresh();
+            pictureBox_radar.Refresh();
+        }
+
+        // Display a tooltip if appropriate.
+        private void pictureBox_radar_MouseMove(object sender, MouseEventArgs e)
+        {
+            string tip_text = "";
+            foreach (CarData car in Cars)
+            {
+                // Skip this car if it has no points yet.
+                if (car.Points == null)
+                {
+                    continue;
+                }
+
+                // Check the car's points.
+                for (int i = 0; i < car.Values.Length; i++)
+                {
+                    if (PointIsClose(e.Location, car.Points[i], 8))
+                    {
+                        tip_text = car.Name + " " + AxisInfos[i].Name + ": " + car.Values[i].ToString(AxisInfos[i].FormatString);
+                        break;
+                    }
+                    if (tip_text != "")
+                    {
+                        break;
+                    }
+                }
+            }
+
+            if (tip_text != toolTip_radar.GetToolTip(pictureBox1))
+            {
+                toolTip_radar.SetToolTip(pictureBox1, tip_text);
+                richTextBox1.Text += tip_text + "\n";
+            }
+        }
+
+        private void pictureBox_radar_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            e.Graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
+            e.Graphics.Clear(pictureBox1.BackColor);
+
+            // Draw the axes.
+            DrawCharts(e.Graphics, chkFillAreas.Checked);
         }
     }
 }

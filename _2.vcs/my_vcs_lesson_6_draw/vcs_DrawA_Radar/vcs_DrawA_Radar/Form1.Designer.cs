@@ -36,7 +36,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.chkFillAreas = new System.Windows.Forms.CheckBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.pictureBox_radar = new System.Windows.Forms.PictureBox();
+            this.toolTip_radar = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_radar)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -50,7 +53,6 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
-            this.pictureBox1.Resize += new System.EventHandler(this.pictureBox1_Resize);
             // 
             // label1
             // 
@@ -95,17 +97,30 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(410, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(410, 299);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(334, 285);
             this.richTextBox1.TabIndex = 4;
             this.richTextBox1.Text = "";
             // 
+            // pictureBox_radar
+            // 
+            this.pictureBox_radar.BackColor = System.Drawing.Color.White;
+            this.pictureBox_radar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_radar.Location = new System.Drawing.Point(410, 11);
+            this.pictureBox_radar.Name = "pictureBox_radar";
+            this.pictureBox_radar.Size = new System.Drawing.Size(310, 286);
+            this.pictureBox_radar.TabIndex = 5;
+            this.pictureBox_radar.TabStop = false;
+            this.pictureBox_radar.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_radar_Paint);
+            this.pictureBox_radar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_radar_MouseMove);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(756, 314);
+            this.ClientSize = new System.Drawing.Size(756, 584);
+            this.Controls.Add(this.pictureBox_radar);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.chkFillAreas);
             this.Controls.Add(this.label3);
@@ -116,6 +131,7 @@
             this.Text = "vcs_DrawA_Radar";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_radar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -130,6 +146,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox chkFillAreas;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.PictureBox pictureBox_radar;
+        private System.Windows.Forms.ToolTip toolTip_radar;
     }
 }
 

@@ -36,9 +36,14 @@ namespace MultiForm3
                 MessageBox.Show("請輸入正確的數值資料");
                 return;
             }
+
             frmCal f = new frmCal(); //宣告並建立frmCal表單類別的f物件
+
             //使用ShowDialog()方法使 f 以強制回應形式顯示表單
             f.ShowDialog();
+
+            //使用他表單的函數的寫法
+
             //呼叫frmCal的Cal方法以計算配息方式
             richTextBox1.Text += myYear.ToString() + " 年後領回本利和：" + f.Cal(myMoney, myYear, myRate).ToString() + "\n";
         }
