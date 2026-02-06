@@ -32,9 +32,7 @@ namespace ConnectionDemo1
         private void Form1_Load(object sender, EventArgs e)
         {
             // 設定連接字串，用來連接Northwind.mdf資料庫
-            cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;" +
-                "AttachDbFilename=|DataDirectory|Northwind.mdf;" +
-                "Integrated Security=True";
+            cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|Northwind.mdf;Integrated Security=True";
             ShowConnection();  // 呼叫ShowConnection方法
         }
         // 按下開啟鈕執行此事件

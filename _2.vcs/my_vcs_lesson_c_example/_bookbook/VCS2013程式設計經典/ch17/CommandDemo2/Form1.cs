@@ -20,9 +20,9 @@ namespace CommandDemo2
         }
 
         // 建立cnstr連接字串用來連接ch17DB.mdf資料庫
-        string cnstr = @"Data Source=(LocalDB)\v11.0;" +
-                    "AttachDbFilename=|DataDirectory|ch17DB.mdf;" +
-                    "Integrated Security=True";
+        //string cnstr = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|ch17DB.mdf;Integrated Security=True";
+        //string cnstr = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|ch17DB.mdf;Integrated Security=True";
+        string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\VisualC#2015基礎必修課\2015範例程式\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
 
         void ShowData()
         {
@@ -35,11 +35,13 @@ namespace CommandDemo2
                 dataGridView1.DataSource = ds.Tables["員工"];
             }
         }
+
         // 表單載入時執行
         private void Form1_Load(object sender, EventArgs e)
         {
             ShowData();
         }
+
         // 按下 [新增] 鈕執行
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -60,6 +62,7 @@ namespace CommandDemo2
                 MessageBox.Show(ex.Message + ", 新增資料發生錯誤");
             }
         }
+
         // 按下 [更新] 鈕執行 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
@@ -80,6 +83,7 @@ namespace CommandDemo2
                 MessageBox.Show(ex.Message + ", 修改資料發生錯誤");
             }
         }
+
         // 按下 [刪除] 鈕 
         private void btnDel_Click(object sender, EventArgs e)
         {

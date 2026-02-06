@@ -19,9 +19,8 @@ namespace CommandDemo3
         }
 
         // 建立cnstr連接字串用來連接ch17DB.mdf資料庫
-        string cnstr = @"Data Source=(LocalDB)\v11.0;" +
-                    "AttachDbFilename=|DataDirectory|ch17DB.mdf;" +
-                    "Integrated Security=True";
+        //string cnstr = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|ch17DB.mdf;Integrated Security=True";
+        string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\VisualC#2015基礎必修課\2015範例程式\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
 
         // 定義ShowData()方法將員工資料表所有記錄顯示於dataGridView1上
         void ShowData()
