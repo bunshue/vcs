@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Drawing.Imaging; //  for ImageAttributes
 
 namespace vcs_Puzzle1
 {
@@ -81,7 +80,7 @@ namespace vcs_Puzzle1
             e.Graphics.DrawImage(bitmap, dest, src, GraphicsUnit.Pixel);
 
             // 如果有提示  就繪出 提示的圖
-            if (hint)
+            if (hint == true)
             {
                 Rectangle dest2 = new Rectangle(x0, y0, 600, 600);
                 e.Graphics.DrawImage(bitmap, dest2, 0, 0, 600, 600, GraphicsUnit.Pixel);

@@ -42,6 +42,7 @@
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.digitalDisplayControl1 = new Owf.Controls.DigitalDisplayControl();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -147,11 +148,23 @@
             this.toolStripMenuItem4.Text = "E&xit";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
+            // digitalDisplayControl1
+            // 
+            this.digitalDisplayControl1.BackColor = System.Drawing.Color.Transparent;
+            this.digitalDisplayControl1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.digitalDisplayControl1.DigitColor = System.Drawing.Color.Purple;
+            this.digitalDisplayControl1.DigitText = "88:88:88.88";
+            this.digitalDisplayControl1.Location = new System.Drawing.Point(12, 243);
+            this.digitalDisplayControl1.Name = "digitalDisplayControl1";
+            this.digitalDisplayControl1.Size = new System.Drawing.Size(500, 100);
+            this.digitalDisplayControl1.TabIndex = 5;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(455, 434);
+            this.Controls.Add(this.digitalDisplayControl1);
             this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
@@ -177,6 +190,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private Owf.Controls.DigitalDisplayControl digitalDisplayControl1;
     }
 }
 

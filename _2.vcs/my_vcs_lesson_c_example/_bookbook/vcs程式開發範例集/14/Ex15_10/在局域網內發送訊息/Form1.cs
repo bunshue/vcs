@@ -15,11 +15,18 @@ namespace 在局域網內發送訊息
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            sendInfo(this.textBox1.Text, this.richTextBox1.Text.Replace("\n",""));
+            sendInfo(this.textBox1.Text, this.richTextBox1.Text.Replace("\n", ""));
         }
-        private void sendInfo(string strIP,string strInfo)
+
+        private void sendInfo(string strIP, string strInfo)
         {
             System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo();
             psi.FileName = @"cmd.exe";
@@ -27,10 +34,6 @@ namespace 在局域網內發送訊息
             psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             System.Diagnostics.Process.Start(psi);
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
+

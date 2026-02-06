@@ -34,6 +34,7 @@
             this.rt = new System.Windows.Forms.RichTextBox();
             this.btClear = new System.Windows.Forms.Button();
             this.lbM = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -68,14 +69,14 @@
             // 
             this.rt.Location = new System.Drawing.Point(4, 35);
             this.rt.Name = "rt";
-            this.rt.Size = new System.Drawing.Size(807, 554);
+            this.rt.Size = new System.Drawing.Size(479, 554);
             this.rt.TabIndex = 3;
             this.rt.Text = "";
             this.rt.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // btClear
             // 
-            this.btClear.Location = new System.Drawing.Point(736, 566);
+            this.btClear.Location = new System.Drawing.Point(408, 566);
             this.btClear.Name = "btClear";
             this.btClear.Size = new System.Drawing.Size(75, 23);
             this.btClear.TabIndex = 2;
@@ -92,11 +93,20 @@
             this.lbM.TabIndex = 4;
             this.lbM.Text = "收到0條信息";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(489, 35);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(322, 554);
+            this.richTextBox1.TabIndex = 5;
+            this.richTextBox1.Text = "";
+            // 
             // GPSReadForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(823, 601);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.lbM);
             this.Controls.Add(this.btClear);
             this.Controls.Add(this.bt);
@@ -119,6 +129,7 @@
         private System.Windows.Forms.RichTextBox rt;
         private System.Windows.Forms.Button btClear;
         private System.Windows.Forms.Label lbM;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

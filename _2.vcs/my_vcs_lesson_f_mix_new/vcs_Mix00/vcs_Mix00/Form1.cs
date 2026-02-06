@@ -82,7 +82,6 @@ namespace vcs_Mix00
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -93,7 +92,6 @@ namespace vcs_Mix00
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-
             button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
@@ -104,20 +102,40 @@ namespace vcs_Mix00
             button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            button30.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button34.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button35.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button36.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
-            pictureBox1.Size = new Size(640, 480);
-            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            pictureBox1.Size = new Size(400, 400);
+            pictureBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
 
             richTextBox1.Size = new Size(320, 680);
-            richTextBox1.Location = new Point(x_st + dx * 6 + 40, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1700, 750);
+            this.Size = new Size(1620, 750);
+            this.Text = "vcs_Mix00";
+            //設定執行後的表單起始位置
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((1920 - this.Size.Width) / 2, (1080 - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        private void bt_reset_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -1337,8 +1355,8 @@ namespace vcs_Mix00
         private void button24_Click(object sender, EventArgs e)
         {
             //** 自訂格式化輸出
-            richTextBox1.Text += String.Format("{0:##,##0.00}", 8567.1)+"\n";
-            richTextBox1.Text += String.Format("{0:###0.00}", 566.7)+"\n";
+            richTextBox1.Text += String.Format("{0:##,##0.00}", 8567.1) + "\n";
+            richTextBox1.Text += String.Format("{0:###0.00}", 566.7) + "\n";
             richTextBox1.Text += String.Format("{0:0.00%}", 8) + "\n";
         }
 
@@ -1482,6 +1500,55 @@ namespace vcs_Mix00
 
         }
 
+        private void button30_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button38_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button39_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     //3Form1之外

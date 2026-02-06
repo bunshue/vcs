@@ -41,6 +41,7 @@ namespace vcs_Clock
     public partial class Form1 : Form
     {
         bool flag_always_show = false;
+        int clock_type = 0;  // 0:一般模式, 1: 數位模式
 
         [DllImport("user32.dll")]
         private static extern bool RegisterHotKey(IntPtr hWnd, int id, int modifiers, Keys vk);
@@ -124,23 +125,44 @@ namespace vcs_Clock
             //this.ShowInTaskbar = false;
 
             //pictureBox1 連結 ContextMenuStrip (快捷功能表 / 右鍵選單)
-            pictureBox1.ContextMenuStrip = contextMenuStrip1;
+            //pictureBox1.ContextMenuStrip = contextMenuStrip1;
+            //this.ContextMenuStrip = contextMenuStrip1;
 
-            int x_st = 30;
-            int y_st = 30;
-            int w = 100;
-            int h = 100;
-            int dx = 10;
+            if (clock_type == 0)
+            {
+                digitalDisplayControl1.Visible = false;
+                pictureBox1.Visible = true;
+                int x_st = 30;
+                int y_st = 30;
+                int w = 100;
+                int h = 100;
+                int dx = 10;
 
-            int W = x_st + w * 3 + dx * 2 + x_st;
-            int H = y_st + h + y_st;
+                int W = x_st + w * 3 + dx * 2 + x_st;
+                int H = y_st + h + y_st;
 
-            pictureBox1.ClientSize = new Size(W, H);
-            pictureBox1.Location = new Point(0, 0);
-            this.ClientSize = new Size(W, H);
+                pictureBox1.ClientSize = new Size(W, H);
+                pictureBox1.Location = new Point(0, 0);
+                this.ClientSize = new Size(W, H);
 
-            int SW = Screen.PrimaryScreen.Bounds.Width;
-            this.Location = new Point(SW - W, 0);
+                int SW = Screen.PrimaryScreen.Bounds.Width;
+                this.Location = new Point(SW - W, 0);
+            }
+            else
+            {
+                pictureBox1.Visible = false;
+                digitalDisplayControl1.Visible = true;
+                digitalDisplayControl1.Location = new Point(10, 10);
+                int W = digitalDisplayControl1.Width + 20;
+                int H = digitalDisplayControl1.Height + 20;
+                this.ClientSize = new Size(W, H);
+
+                int SW = Screen.PrimaryScreen.Bounds.Width;
+                this.Location = new Point(SW - W, 0);
+
+                DateTime dt = DateTime.Now;
+                digitalDisplayControl1.DigitText = dt.ToString("HH:mm:ss");
+            }
         }
 
         int show_seconds = 0;
@@ -171,6 +193,11 @@ namespace vcs_Clock
                 this.ShowInTaskbar = true;
                 this.TopMost = true;
                 show_seconds = 0;
+            }
+
+            if (clock_type == 1)
+            {
+                digitalDisplayControl1.DigitText = DateTime.Now.ToString("HH:mm:ss");
             }
         }
 
@@ -218,29 +245,32 @@ namespace vcs_Clock
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            int hh = DateTime.Now.Hour;
-            int mm = DateTime.Now.Minute;
-            int ss = DateTime.Now.Second;
-
-            int x_st = 30;
-            int y_st = 30;
-            int w = 100;
-            int h = 100;
-            int dx = 10;
-
-            e.Graphics.Clear(Color.Red);
-
-            for (int i = 0; i < 3; i++)
+            if (clock_type == 0)
             {
-                e.Graphics.FillRectangle(new SolidBrush(Color.Black), x_st + (w + dx) * i, y_st, w, h);
+                int hh = DateTime.Now.Hour;
+                int mm = DateTime.Now.Minute;
+                int ss = DateTime.Now.Second;
+
+                int x_st = 30;
+                int y_st = 30;
+                int w = 100;
+                int h = 100;
+                int dx = 10;
+
+                e.Graphics.Clear(Color.Red);
+
+                for (int i = 0; i < 3; i++)
+                {
+                    e.Graphics.FillRectangle(new SolidBrush(Color.Black), x_st + (w + dx) * i, y_st, w, h);
+                }
+
+                e.Graphics.DrawLine(new Pen(Color.Red, 6), x_st, y_st + h / 2, x_st + 380, y_st + h / 2);
+
+                int dy = 15;
+                e.Graphics.DrawString(hh.ToString("D2"), new Font("標楷體", 55, FontStyle.Bold), Brushes.White, x_st, y_st + dy);
+                e.Graphics.DrawString(mm.ToString("D2"), new Font("標楷體", 55, FontStyle.Bold), Brushes.White, x_st + (w + dx) * 1, y_st + dy);
+                e.Graphics.DrawString(ss.ToString("D2"), new Font("標楷體", 55, FontStyle.Bold), Brushes.White, x_st + (w + dx) * 2, y_st + dy);
             }
-
-            e.Graphics.DrawLine(new Pen(Color.Red, 6), x_st, y_st + h / 2, x_st + 380, y_st + h / 2);
-
-            int dy = 15;
-            e.Graphics.DrawString(hh.ToString("D2"), new Font("標楷體", 55, FontStyle.Bold), Brushes.White, x_st, y_st + dy);
-            e.Graphics.DrawString(mm.ToString("D2"), new Font("標楷體", 55, FontStyle.Bold), Brushes.White, x_st + (w + dx) * 1, y_st + dy);
-            e.Graphics.DrawString(ss.ToString("D2"), new Font("標楷體", 55, FontStyle.Bold), Brushes.White, x_st + (w + dx) * 2, y_st + dy);
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -264,6 +294,16 @@ namespace vcs_Clock
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
             //數位時鐘
+            toolStripMenuItem2.Checked = !toolStripMenuItem2.Checked;
+            if (toolStripMenuItem2.Checked == false)
+            {
+                clock_type = 0;
+            }
+            else
+            {
+                clock_type = 1;
+            }
+
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)

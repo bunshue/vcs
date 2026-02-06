@@ -31,12 +31,6 @@ namespace vcs_ImageProcessing2_CCRR
             this.UpdateStyles();
             //以上兩句是為了設置控件樣式為雙緩沖，這可以有效減少圖片閃爍的問題，關於這個大家可以自己去搜索下
 
-            //this.FormBorderStyle = FormBorderStyle.None;
-            //this.WindowState = FormWindowState.Maximized;
-            //設定執行後的表單起始位置
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(0, 0);
-
             show_item_location();
 
             pictureBox1.Image = Image.FromFile(filename);
@@ -83,13 +77,18 @@ namespace vcs_ImageProcessing2_CCRR
 
             pictureBox1.Size = new Size(800, 800);
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            bt_restore.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_restore.Size.Width, pictureBox1.Location.Y + pictureBox1.Size.Height - bt_restore.Size.Height);
+            bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
 
             richTextBox1.Size = new Size(300, 800);
             richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1600, 870);
+
+            this.Text = "vcs_ImageProcessing2_CCRR";
+            //設定執行後的表單起始位置
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((1920 - this.Size.Width) / 2, (1080 - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -97,7 +96,7 @@ namespace vcs_ImageProcessing2_CCRR
             richTextBox1.Clear();
         }
 
-        private void bt_restore_Click(object sender, EventArgs e)
+        private void bt_reset_Click(object sender, EventArgs e)
         {
             pictureBox1.Size = new Size(800, 800);
             Restore_Picture();
@@ -120,7 +119,6 @@ namespace vcs_ImageProcessing2_CCRR
             double h = 1.0 * pictureBox1.Image.Height / DPI * 25.4;
 
             richTextBox1.Text += "獲得圖片的分辨率和大小 : " + w.ToString("f2") + ":" + h.ToString("f2") + "\n";
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -706,109 +704,11 @@ namespace vcs_ImageProcessing2_CCRR
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //在PictureBox上測試旋轉圖片
-            //測試RotateTransform, TranslateTransform和ResetTransform
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-
-            int W = this.pictureBox1.Width;
-            int H = this.pictureBox1.Height;
-
-            Bitmap bitmap1 = new Bitmap(W, H);
-
-            Graphics g = Graphics.FromImage(bitmap1);
-
-            Pen p = new Pen(Color.Gray, 1);
-
-            int i;
-            for (i = 0; i <= W; i += 100)
-            {
-                g.DrawLine(p, i, 0, i, H);
-            }
-            for (i = 0; i <= H; i += 100)
-            {
-                g.DrawLine(p, 0, i, W, i);
-            }
-
-
-            Rectangle srcRect = new Rectangle(0, 0, W, H);   //擷取部分區域
-            GraphicsUnit units = GraphicsUnit.Pixel;
-            Image img = Image.FromFile(filename);
-
-
-            int x_st = 0;
-            int y_st = 0;
-            int angle = 0;
-
-            Point ulCorner = new Point(0, 0);
-            Point urCorner = new Point(W, 0);
-            Point llCorner = new Point(0, H);
-            Point[] destRect = { ulCorner, urCorner, llCorner };
-
-            x_st = 350 * 0;
-            y_st = 200;
-            angle = -10;
-            ulCorner = new Point(0, 0);
-            urCorner = new Point(W, 0);
-            llCorner = new Point(0, H);
-            destRect = new Point[] { ulCorner, urCorner, llCorner };
-
-            g.TranslateTransform(x_st, y_st);
-            g.RotateTransform(angle);//旋轉指定的角度
-            g.DrawImage(img, destRect, srcRect, units);
-            g.ResetTransform();//恢復坐標軸坐標 回 0 度
-
-
-            x_st = 350 * 1;
-            y_st = 200;
-            angle = 0;
-            ulCorner = new Point(0, 0);
-            urCorner = new Point(W, 0);
-            llCorner = new Point(0, H);
-            destRect = new Point[] { ulCorner, urCorner, llCorner };
-
-            g.TranslateTransform(x_st, y_st);
-            g.RotateTransform(angle);//旋轉指定的角度
-            g.DrawImage(img, destRect, srcRect, units);
-            g.ResetTransform();//恢復坐標軸坐標 回 0 度
-
-
-            x_st = 350 * 2;
-            y_st = 200;
-            angle = 10;
-            ulCorner = new Point(0, 0);
-            urCorner = new Point(W, 0);
-            llCorner = new Point(0, H);
-            destRect = new Point[] { ulCorner, urCorner, llCorner };
-
-            g.TranslateTransform(x_st, y_st);
-            g.RotateTransform(angle);//旋轉指定的角度
-            g.DrawImage(img, destRect, srcRect, units);
-            g.ResetTransform();//恢復坐標軸坐標 回 0 度
-
-
-
-
-
-            pictureBox1.Image = bitmap1;
-
         }
 
-        //連續旋轉一張圖片 ST
-        float angle = 0;
         private void button12_Click(object sender, EventArgs e)
         {
-            //連續旋轉一張圖片
-            angle += 15;
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Image image = Image.FromFile(filename);
-
-            Image image_rotated = image.GetRotateImage(angle);
-
-            pictureBox1.Image = image_rotated;
-            pictureBox1.Size = new Size(image_rotated.Width, image_rotated.Height);
         }
-        //連續旋轉一張圖片 SP
 
         private void button13_Click(object sender, EventArgs e)
         {
@@ -1019,49 +919,6 @@ namespace vcs_ImageProcessing2_CCRR
             pictureBox1.Image = bitmap1;
         }
     }
-
-    public static class ImageEx
-    {
-        public static Image GetRotateImage(this Image img, float angle)
-        {
-            angle = angle % 360;//弧度轉換
-            double radian = angle * Math.PI / 180.0;
-            double cos = Math.Cos(radian);
-            double sin = Math.Sin(radian);
-            //原圖的寬和高
-            int w = img.Width;
-            int h = img.Height;
-            int W = (int)(Math.Max(Math.Abs(w * cos - h * sin), Math.Abs(w * cos + h * sin)));
-            int H = (int)(Math.Max(Math.Abs(w * sin - h * cos), Math.Abs(w * sin + h * cos)));
-
-            Console.WriteLine("W = " + W.ToString() + ", H = " + H.ToString());
-
-            //目標位圖
-            Image dsImage = new Bitmap(W, H, img.PixelFormat);
-            using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(dsImage))
-            {
-                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Bilinear;
-                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-                g.Clear(Color.White);
-                //計算偏移量
-                Point Offset = new Point((W - w) / 2, (H - h) / 2);
-                //構造圖像顯示區域：讓圖像的中心與窗口的中心點一致
-                Rectangle rect = new Rectangle(Offset.X, Offset.Y, w, h);
-                Point center = new Point(rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
-                g.TranslateTransform(center.X, center.Y);
-                g.RotateTransform(360 - angle);
-                //恢復圖像在水平和垂直方向的平移
-                g.TranslateTransform(-center.X, -center.Y);
-                g.DrawImage(img, rect);
-                //重至繪圖的所有變換
-                g.ResetTransform();
-                g.Save();
-            }
-            return dsImage;
-        }
-    }
 }
 
-
 //bitmap2.Save("ims02.duplicate.bmp", ImageFormat.Bmp);
-

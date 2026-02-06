@@ -37,7 +37,6 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
-            this.bt_restore = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
@@ -52,6 +51,7 @@
             this.bt_lanczos2 = new System.Windows.Forms.Button();
             this.bt_lanczos1 = new System.Windows.Forms.Button();
             this.bt_lanczos0 = new System.Windows.Forms.Button();
+            this.bt_reset = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -151,17 +151,6 @@
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
-            // bt_restore
-            // 
-            this.bt_restore.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_restore.Location = new System.Drawing.Point(528, 112);
-            this.bt_restore.Name = "bt_restore";
-            this.bt_restore.Size = new System.Drawing.Size(70, 60);
-            this.bt_restore.TabIndex = 10;
-            this.bt_restore.Text = "恢復";
-            this.bt_restore.UseVisualStyleBackColor = true;
-            this.bt_restore.Click += new System.EventHandler(this.bt_restore_Click);
-            // 
             // button7
             // 
             this.button7.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -213,7 +202,6 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(200, 60);
             this.button11.TabIndex = 14;
-            this.button11.Text = "旋轉轉置";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -224,7 +212,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(200, 60);
             this.button12.TabIndex = 15;
-            this.button12.Text = "連續旋轉一張圖片";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -316,11 +303,23 @@
             this.bt_lanczos0.UseVisualStyleBackColor = true;
             this.bt_lanczos0.Click += new System.EventHandler(this.bt_lanczos0_Click);
             // 
+            // bt_reset
+            // 
+            this.bt_reset.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_reset.Location = new System.Drawing.Point(442, 34);
+            this.bt_reset.Name = "bt_reset";
+            this.bt_reset.Size = new System.Drawing.Size(66, 40);
+            this.bt_reset.TabIndex = 229;
+            this.bt_reset.Text = "Reset";
+            this.bt_reset.UseVisualStyleBackColor = true;
+            this.bt_reset.Click += new System.EventHandler(this.bt_reset_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1005, 626);
+            this.Controls.Add(this.bt_reset);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button14);
@@ -331,7 +330,6 @@
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
-            this.Controls.Add(this.bt_restore);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
@@ -361,7 +359,6 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button0;
-        private System.Windows.Forms.Button bt_restore;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
@@ -376,6 +373,7 @@
         private System.Windows.Forms.Button bt_lanczos2;
         private System.Windows.Forms.Button bt_lanczos1;
         private System.Windows.Forms.Button bt_lanczos0;
+        private System.Windows.Forms.Button bt_reset;
     }
 }
 

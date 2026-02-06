@@ -734,13 +734,102 @@ namespace vcs_Draw_Transform1
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //旋轉轉置
+            //在PictureBox上測試旋轉圖片
+            //測試RotateTransform, TranslateTransform和ResetTransform
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
+            int W = this.pictureBox1.Width;
+            int H = this.pictureBox1.Height;
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            Pen p = new Pen(Color.Gray, 1);
+
+            int i;
+            for (i = 0; i <= W; i += 100)
+            {
+                g.DrawLine(p, i, 0, i, H);
+            }
+            for (i = 0; i <= H; i += 100)
+            {
+                g.DrawLine(p, 0, i, W, i);
+            }
+
+            Rectangle srcRect = new Rectangle(0, 0, W, H);   //擷取部分區域
+            GraphicsUnit units = GraphicsUnit.Pixel;
+            Image img = Image.FromFile(filename);
+
+            int x_st = 0;
+            int y_st = 0;
+            int angle = 0;
+
+            Point ulCorner = new Point(0, 0);
+            Point urCorner = new Point(W, 0);
+            Point llCorner = new Point(0, H);
+            Point[] destRect = { ulCorner, urCorner, llCorner };
+
+            x_st = 350 * 0;
+            y_st = 200;
+            angle = -10;
+            ulCorner = new Point(0, 0);
+            urCorner = new Point(W, 0);
+            llCorner = new Point(0, H);
+            destRect = new Point[] { ulCorner, urCorner, llCorner };
+
+            g.TranslateTransform(x_st, y_st);
+            g.RotateTransform(angle);//旋轉指定的角度
+            g.DrawImage(img, destRect, srcRect, units);
+            g.ResetTransform();//恢復坐標軸坐標 回 0 度
+
+            x_st = 350 * 1;
+            y_st = 200;
+            angle = 0;
+            ulCorner = new Point(0, 0);
+            urCorner = new Point(W, 0);
+            llCorner = new Point(0, H);
+            destRect = new Point[] { ulCorner, urCorner, llCorner };
+
+            g.TranslateTransform(x_st, y_st);
+            g.RotateTransform(angle);//旋轉指定的角度
+            g.DrawImage(img, destRect, srcRect, units);
+            g.ResetTransform();//恢復坐標軸坐標 回 0 度
+
+            x_st = 350 * 2;
+            y_st = 200;
+            angle = 10;
+            ulCorner = new Point(0, 0);
+            urCorner = new Point(W, 0);
+            llCorner = new Point(0, H);
+            destRect = new Point[] { ulCorner, urCorner, llCorner };
+
+            g.TranslateTransform(x_st, y_st);
+            g.RotateTransform(angle);//旋轉指定的角度
+            g.DrawImage(img, destRect, srcRect, units);
+            g.ResetTransform();//恢復坐標軸坐標 回 0 度
+
+            pictureBox1.Image = bitmap1;
 
         }
 
+        //連續旋轉一張圖片 ST
+        float angle2 = 0;
         private void button11_Click(object sender, EventArgs e)
         {
+            //連續旋轉一張圖片
+            angle2 += 15;
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Image image = Image.FromFile(filename);
 
+            Image image_rotated = image.GetRotateImage(angle2);
+
+            pictureBox1.Image = image_rotated;
+            pictureBox1.Size = new Size(image_rotated.Width, image_rotated.Height);
         }
+        //連續旋轉一張圖片 SP
 
         private void button12_Click(object sender, EventArgs e)
         {
@@ -869,7 +958,7 @@ namespace vcs_Draw_Transform1
             }
         }
 
-        float angle = 0;
+        float angle1 = 0;
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             return;
@@ -883,8 +972,8 @@ namespace vcs_Draw_Transform1
             e.Graphics.TranslateTransform((float)bmp.Width / 2, (float)bmp.Height / 2);
 
             //順時針轉10度
-            angle += 27f;
-            e.Graphics.RotateTransform(angle);
+            angle1 += 27f;
+            e.Graphics.RotateTransform(angle1);
 
             // 原點平移, 右移, 下移
             e.Graphics.TranslateTransform(-(float)bmp.Width / 2, -(float)bmp.Height / 2);
@@ -896,6 +985,47 @@ namespace vcs_Draw_Transform1
         private void timer1_Tick(object sender, EventArgs e)
         {
             pictureBox1.Invalidate();
+        }
+    }
+
+    public static class ImageEx
+    {
+        public static Image GetRotateImage(this Image img, float angle)
+        {
+            angle = angle % 360;//弧度轉換
+            double radian = angle * Math.PI / 180.0;
+            double cos = Math.Cos(radian);
+            double sin = Math.Sin(radian);
+            //原圖的寬和高
+            int w = img.Width;
+            int h = img.Height;
+            int W = (int)(Math.Max(Math.Abs(w * cos - h * sin), Math.Abs(w * cos + h * sin)));
+            int H = (int)(Math.Max(Math.Abs(w * sin - h * cos), Math.Abs(w * sin + h * cos)));
+
+            Console.WriteLine("W = " + W.ToString() + ", H = " + H.ToString());
+
+            //目標位圖
+            Image dsImage = new Bitmap(W, H, img.PixelFormat);
+            using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(dsImage))
+            {
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Bilinear;
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                g.Clear(Color.White);
+                //計算偏移量
+                Point Offset = new Point((W - w) / 2, (H - h) / 2);
+                //構造圖像顯示區域：讓圖像的中心與窗口的中心點一致
+                Rectangle rect = new Rectangle(Offset.X, Offset.Y, w, h);
+                Point center = new Point(rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
+                g.TranslateTransform(center.X, center.Y);
+                g.RotateTransform(360 - angle);
+                //恢復圖像在水平和垂直方向的平移
+                g.TranslateTransform(-center.X, -center.Y);
+                g.DrawImage(img, rect);
+                //重至繪圖的所有變換
+                g.ResetTransform();
+                g.Save();
+            }
+            return dsImage;
         }
     }
 }

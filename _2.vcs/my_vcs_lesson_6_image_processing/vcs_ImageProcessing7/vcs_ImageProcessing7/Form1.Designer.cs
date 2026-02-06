@@ -102,7 +102,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 4;
-            this.button5.Text = "淡入效果";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -112,7 +111,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(200, 60);
             this.button6.TabIndex = 5;
-            this.button6.Text = "淡出效果";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 

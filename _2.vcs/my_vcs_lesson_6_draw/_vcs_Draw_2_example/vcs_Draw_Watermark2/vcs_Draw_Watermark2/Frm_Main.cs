@@ -20,8 +20,7 @@ namespace vcs_Draw_Watermark2
             InitializeComponent();
         }
 
-
-        #region 獲取系統字體
+        // 獲取系統字體
         private void GetSystemFont(ToolStripComboBox cb)
         {
             InstalledFontCollection myFont = new InstalledFontCollection();
@@ -31,10 +30,26 @@ namespace vcs_Draw_Watermark2
             }
             cb.SelectedItem = "宋體";
         }
-        #endregion
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             cbbPosition.SelectedIndex = 0;
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 10;
+            dy = 60 + 5;
         }
 
         string[] ImgArray = null;
@@ -437,4 +452,3 @@ namespace vcs_Draw_Watermark2
         }
     }
 }
-

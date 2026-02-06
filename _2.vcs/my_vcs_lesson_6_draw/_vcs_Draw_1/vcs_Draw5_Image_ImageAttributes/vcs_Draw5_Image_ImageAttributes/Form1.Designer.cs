@@ -945,6 +945,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(200, 60);
             this.button18.TabIndex = 289;
+            this.button18.Text = "淡入效果";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -955,6 +956,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(200, 60);
             this.button19.TabIndex = 290;
+            this.button19.Text = "淡出效果";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 

@@ -21,6 +21,9 @@ namespace vcs_Draw5_Image_ImageAttributes
         int H = 600;
         string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
 
+        private Bitmap SourceBitmap;
+        private Bitmap MyBitmap;
+
         // 色彩調整矩陣 標準
         float[][] matrix =
         {
@@ -108,6 +111,16 @@ namespace vcs_Draw5_Image_ImageAttributes
             pos = new Point(this.ClientSize.Width / 2, this.ClientSize.Height / 2); // 產生淡入淡出物件
             imageObject.Init(pos, 10000);  // 10 秒
             // 淡入 / 淡出 效果 SP
+
+
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
+            //得到原始大小的圖像
+            SourceBitmap = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            //得到縮放后的圖像
+            MyBitmap = new Bitmap(SourceBitmap, this.pictureBox1.Width, this.pictureBox1.Height);
+
+            pictureBox1.Image = MyBitmap;
         }
 
         void show_item_location()
@@ -871,11 +884,122 @@ namespace vcs_Draw5_Image_ImageAttributes
 
         private void button18_Click(object sender, EventArgs e)
         {
+            //淡入效果
+
+            //五. 以淡入淡出效果顯示圖像
+            //原理: 使用 ImageAttrributes 類的 SetColorMatrix() 方法設置顏色,
+            //調整矩陣實現淡出的效果. 此類還可以對顏色進行校正, 調暗, 調亮和移除等
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.Clear(Color.Gray);
+            int width = MyBitmap.Width;
+            int height = MyBitmap.Height;
+            ImageAttributes attributes = new ImageAttributes();
+            ColorMatrix matrix = new ColorMatrix();
+            //創建淡入顏色矩陣
+            matrix.Matrix00 = (float)0.0;
+            matrix.Matrix01 = (float)0.0;
+            matrix.Matrix02 = (float)0.0;
+            matrix.Matrix03 = (float)0.0;
+            matrix.Matrix04 = (float)0.0;
+            matrix.Matrix10 = (float)0.0;
+            matrix.Matrix11 = (float)0.0;
+            matrix.Matrix12 = (float)0.0;
+            matrix.Matrix13 = (float)0.0;
+            matrix.Matrix14 = (float)0.0;
+            matrix.Matrix20 = (float)0.0;
+            matrix.Matrix21 = (float)0.0;
+            matrix.Matrix22 = (float)0.0;
+            matrix.Matrix23 = (float)0.0;
+            matrix.Matrix24 = (float)0.0;
+            matrix.Matrix30 = (float)0.0;
+            matrix.Matrix31 = (float)0.0;
+            matrix.Matrix32 = (float)0.0;
+            matrix.Matrix33 = (float)0.0;
+            matrix.Matrix34 = (float)0.0;
+            matrix.Matrix40 = (float)0.0;
+            matrix.Matrix41 = (float)0.0;
+            matrix.Matrix42 = (float)0.0;
+            matrix.Matrix43 = (float)0.0;
+            matrix.Matrix44 = (float)0.0;
+            matrix.Matrix33 = (float)1.0;
+            matrix.Matrix44 = (float)1.0;
+            //從0到1進行修改色彩變換矩陣主對角線上的數值
+            //使三種基準色的飽和度漸增
+            Single count = (float)0.0;
+            while (count < 1.0)
+            {
+                this.Text = count.ToString();
+                matrix.Matrix00 = count;
+                matrix.Matrix11 = count;
+                matrix.Matrix22 = count;
+                matrix.Matrix33 = count;
+                attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+                g.DrawImage(MyBitmap, new Rectangle(0, 0, width, height),
+                0, 0, width, height, GraphicsUnit.Pixel, attributes);
+                System.Threading.Thread.Sleep(200);
+                count = (float)(count + 0.02);
+            }
+            this.Text = count.ToString() + " 完成";
 
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
+            //淡出效果
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.Clear(Color.Gray);
+            int width = MyBitmap.Width;
+            int height = MyBitmap.Height;
+            ImageAttributes attributes = new ImageAttributes();
+            ColorMatrix matrix = new ColorMatrix();
+            //創建淡出顏色矩陣
+            matrix.Matrix00 = (float)0.0;
+            matrix.Matrix01 = (float)0.0;
+            matrix.Matrix02 = (float)0.0;
+            matrix.Matrix03 = (float)0.0;
+            matrix.Matrix04 = (float)0.0;
+            matrix.Matrix10 = (float)0.0;
+            matrix.Matrix11 = (float)0.0;
+            matrix.Matrix12 = (float)0.0;
+            matrix.Matrix13 = (float)0.0;
+            matrix.Matrix14 = (float)0.0;
+            matrix.Matrix20 = (float)0.0;
+            matrix.Matrix21 = (float)0.0;
+            matrix.Matrix22 = (float)0.0;
+            matrix.Matrix23 = (float)0.0;
+            matrix.Matrix24 = (float)0.0;
+            matrix.Matrix30 = (float)0.0;
+            matrix.Matrix31 = (float)0.0;
+            matrix.Matrix32 = (float)0.0;
+            matrix.Matrix33 = (float)0.0;
+            matrix.Matrix34 = (float)0.0;
+            matrix.Matrix40 = (float)0.0;
+            matrix.Matrix41 = (float)0.0;
+            matrix.Matrix42 = (float)0.0;
+            matrix.Matrix43 = (float)0.0;
+            matrix.Matrix44 = (float)0.0;
+            matrix.Matrix33 = (float)1.0;
+            matrix.Matrix44 = (float)1.0;
+            //從1到0進行修改色彩變換矩陣主對角線上的數值
+            //依次減少每種色彩分量
+            Single count = (float)1.0;
+            while (count > 0.0)
+            {
+                this.Text = count.ToString();
+                matrix.Matrix00 = (float)count;
+                matrix.Matrix11 = (float)count;
+                matrix.Matrix22 = (float)count;
+                matrix.Matrix33 = (float)count;
+                attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+                g.DrawImage(MyBitmap, new Rectangle(0, 0, width, height),
+                0, 0, width, height, GraphicsUnit.Pixel, attributes);
+                System.Threading.Thread.Sleep(20);
+                count = (float)(count - 0.01);
+            }
+            this.Text = count.ToString() + " 完成";
+
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
