@@ -17,7 +17,7 @@ namespace vcs_SqlConnection1
         //String cnStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\MyDB.mdf;Integrated Security=True;Connect Timeout=30";
 
         // 設定相關資料庫連線參數
-        String cnStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\VisualC#2015基礎必修課\2015範例程式\data\MyDB.mdf;Integrated Security=True;Connect Timeout=30";
+        String cnStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\MyDB.mdf;Integrated Security=True;Connect Timeout=30";
 
         public Form1()
         {
@@ -27,7 +27,6 @@ namespace vcs_SqlConnection1
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
-
         }
 
         void show_item_location()
@@ -64,17 +63,18 @@ namespace vcs_SqlConnection1
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            dataGridView1.Size = new Size(640, 480);
+            dataGridView1.Size = new Size(560, 400);
             dataGridView1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
-            textBox1.Size = new Size(640, 360);
-            textBox1.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            textBox1.Size = new Size(560, 400);
+            textBox1.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            bt_clear2.Location = new Point(textBox1.Location.X + textBox1.Size.Width - bt_clear2.Size.Width, textBox1.Location.Y + textBox1.Size.Height - bt_clear2.Size.Height);
 
-            richTextBox1.Size = new Size(300, 498);
-            richTextBox1.Location = new Point(x_st + dx * 7 + 40, y_st + dy * 4 + 60);
+            richTextBox1.Size = new Size(560, 800);
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1860, 910);
+            this.Size = new Size(1700, 910);
             this.Text = "vcs_SqlConnection1";
 
             //設定執行後的表單起始位置, 正中央
@@ -85,6 +85,11 @@ namespace vcs_SqlConnection1
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        private void bt_clear2_Click(object sender, EventArgs e)
+        {
+            textBox1.Clear();
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -101,8 +106,8 @@ namespace vcs_SqlConnection1
             using (SqlConnection cn = new SqlConnection())
             {
                 //cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\ch17DB.mdf;Integrated Security=True";
-                cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\VisualC#2015基礎必修課\2015範例程式\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
-
+                //cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
+                cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
                 cn.Open();
                 SqlDataAdapter daEmployee = new SqlDataAdapter("SELECT * FROM 員工", cn);
                 DataSet ds = new DataSet();
@@ -133,33 +138,35 @@ namespace vcs_SqlConnection1
 
             using (SqlConnection cn = new SqlConnection())
             {
-                cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|Northwind.mdf;Integrated Security=True";
+                cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
+
                 cn.Open();
                 if (cn.State == ConnectionState.Open)
                 {
-                    MessageBox.Show("資料庫已連接", "目前狀態");
+                    richTextBox1.Text += "資料庫已連接\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "資料庫未連接\n";
                 }
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|Northwind.mdf;Integrated Security=True
-
-            /*
-            using (SqlConnection cn = new SqlConnection(Properties.Settings.Default.connString))
+            String cnStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
+            using (SqlConnection cn = new SqlConnection(cnStr))
             {
                 cn.Open();
                 MessageBox.Show("連接資料庫：" + cn.Database, "Form1狀態");
             }
-            */
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             using (SqlConnection cn = new SqlConnection())
             {
-                cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|ch17DB.mdf;Integrated Security=True";
+                cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf;Integrated Security=True";
                 cn.Open();
                 SqlCommand cmd = new SqlCommand("SELECT * FROM 成績單", cn);
                 SqlDataReader dr = cmd.ExecuteReader();
@@ -173,6 +180,7 @@ namespace vcs_SqlConnection1
                     for (int i = 0; i < dr.FieldCount; i++)
                     {
                         textBox1.Text += dr[i].ToString() + "\t";
+                        //textBox1.Text += dr.GetValue(i).ToString() + "\t";    //另法
                     }
                     textBox1.Text += Environment.NewLine;
                 }
@@ -183,7 +191,7 @@ namespace vcs_SqlConnection1
         {
             using (SqlConnection cn = new SqlConnection())
             {
-                cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|ch17DB.mdf;Integrated Security=True";
+                cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf;Integrated Security=True";
                 cn.Open();
                 SqlCommand cmd = new SqlCommand("SELECT * FROM 成績單", cn);
                 SqlDataReader dr = cmd.ExecuteReader();
@@ -200,82 +208,234 @@ namespace vcs_SqlConnection1
                     textBox1.Text += dr["英文"].ToString() + "\t";
                     textBox1.Text += dr["數學"].ToString() + "\t";
                     textBox1.Text += Environment.NewLine;
-                }
-            }
-        }
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-            using (SqlConnection cn = new SqlConnection())
-            {
-                cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|ch17DB.mdf;Integrated Security=True";
-                cn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM 成績單", cn);
-                SqlDataReader dr = cmd.ExecuteReader();
-                for (int i = 0; i < dr.FieldCount; i++)
-                {
-                    textBox1.Text += dr.GetName(i) + "\t";
-                }
-                textBox1.Text += Environment.NewLine + Environment.NewLine;
-                while (dr.Read())
-                {
-                    for (int i = 0; i < dr.FieldCount; i++)
-                    {
-                        textBox1.Text += dr.GetValue(i).ToString() + "\t";
-                    }
-                    textBox1.Text += Environment.NewLine;
-                }
-            }
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            using (SqlConnection cn = new SqlConnection())
-            {
-                cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|ch17DB.mdf;Integrated Security=True";
-                cn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM 成績單", cn);
-                SqlDataReader dr = cmd.ExecuteReader();
-                for (int i = 0; i < dr.FieldCount; i++)
-                {
-                    textBox1.Text += dr.GetName(i) + "\t";
-                }
-                textBox1.Text += Environment.NewLine + Environment.NewLine;
-                while (dr.Read())
-                {
+                    /*
                     textBox1.Text += dr.GetString(0) + "\t";   //讀取學號
                     textBox1.Text += dr.GetString(1) + "\t";   //讀取姓名
                     textBox1.Text += dr.GetInt32(2).ToString() + "\t";   //讀取國文
                     textBox1.Text += dr.GetInt32(3).ToString() + "\t";   //讀取英文
                     textBox1.Text += dr.GetInt32(4).ToString() + "\t";   //讀取數學
                     textBox1.Text += Environment.NewLine;
-                }
-            }
-        }
+                    */
 
-        private void button8_Click(object sender, EventArgs e)
-        {
-            using (SqlConnection cn = new SqlConnection())
-            {
-                cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|ch17DB.mdf;Integrated Security=True";
-                cn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM 成績單", cn);
-                SqlDataReader dr = cmd.ExecuteReader();
-                for (int i = 0; i < dr.FieldCount; i++)
-                {
-                    textBox1.Text += dr.GetName(i) + "\t";
-                }
-                textBox1.Text += Environment.NewLine + Environment.NewLine;
-                while (dr.Read())
-                {
+                    /*
                     textBox1.Text += dr.GetSqlString(0).ToString() + "\t";//讀取學號
                     textBox1.Text += dr.GetSqlString(1).ToString() + "\t";//讀取姓名
                     textBox1.Text += dr.GetSqlInt32(2).ToString() + "\t";//讀取國文
                     textBox1.Text += dr.GetSqlInt32(3).ToString() + "\t";//讀取英文
                     textBox1.Text += dr.GetSqlInt32(4).ToString() + "\t";//讀取數學
                     textBox1.Text += Environment.NewLine;
+                    */
                 }
             }
+        }
+
+        // 員工資料表1 ST
+        // 建立cnstr1連接字串用來連接ch17DB.mdf資料庫
+        //string cnstr1 = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|ch17DB.mdf;Integrated Security=True";
+        string cnstr1 = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
+
+        // 定義ShowData1()方法將員工資料表所有記錄顯示於dataGridView1上
+        void ShowData1()
+        {
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = cnstr1;
+                SqlDataAdapter daEmployee = new SqlDataAdapter("SELECT * FROM 員工 ORDER BY 編號 DESC", cn);
+                DataSet ds = new DataSet();
+                daEmployee.Fill(ds, "員工");
+                dataGridView1.DataSource = ds.Tables["員工"];
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //員工資料表1
+            //讀取 新增 修改 刪除
+            ShowData1();
+
+
+            //3030
+
+            //新增
+
+            string name = "david";
+            string position = "engineering";
+            string telephone = "0912345678";
+            int salary = 55555;
+
+            try  //使用try...catch...敘述來補捉異動資料可能發生的例外 
+            {
+                using (SqlConnection cn = new SqlConnection())
+                {
+                    cn.ConnectionString = cnstr1;
+                    cn.Open();
+                    string sqlStr = "INSERT INTO 員工(姓名, 職稱, 電話, 薪資) VALUES('" + name + "','" + position + "','" + telephone + "'," + salary + ")";
+                    SqlCommand Cmd = new SqlCommand(sqlStr, cn);
+                    Cmd.ExecuteNonQuery();
+                }
+                ShowData1();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ", 新增資料發生錯誤");
+            }
+
+            //3030
+
+            //修改
+
+            string position2 = "manager";
+            string telephone2 = "0987654321";
+            int salary2 = 66666;
+
+            try	//使用try...catch...敘述來補捉異動資料可能發生的例外
+            {
+                using (SqlConnection cn = new SqlConnection())
+                {
+                    cn.ConnectionString = cnstr1;
+                    cn.Open();
+                    string sqlStr = "UPDATE 員工 SET 職稱 = '" + position2 + "',電話 = '" + telephone2 + "', 薪資 = " + salary2 + " WHERE 姓名 = '" + name + "'";
+                    SqlCommand Cmd = new SqlCommand(sqlStr, cn);
+                    Cmd.ExecuteNonQuery();
+                }
+                ShowData1();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ", 修改資料發生錯誤");
+            }
+
+            //3030
+
+            //刪除
+
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = cnstr1;
+                cn.Open();
+                string sqlStr = "DELETE FROM 員工 WHERE 姓名 = '" + name + "'";
+                SqlCommand Cmd = new SqlCommand(sqlStr, cn);
+                Cmd.ExecuteNonQuery();
+            }
+            ShowData1();
+        }
+        // 員工資料表1 SP
+
+
+        // 員工資料表2 ST
+
+        // 建立cnstr2連接字串用來連接ch17DB.mdf資料庫
+        string cnstr2 = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
+
+        // 定義ShowData2()方法將員工資料表所有記錄顯示於dataGridView1上
+        void ShowData2()
+        {
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = cnstr2;
+                SqlDataAdapter daEmployee = new SqlDataAdapter("SELECT * FROM 員工 ORDER BY 編號 DESC", cn);
+                DataSet ds = new DataSet();
+                daEmployee.Fill(ds, "員工");
+                dataGridView1.DataSource = ds.Tables["員工"];
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //員工資料表2
+            //讀取 新增 修改 刪除
+
+            ShowData2();
+
+            //3030
+
+            //新增
+
+            string name = "david";
+            string position = "engineering";
+            string telephone = "0912345678";
+            int salary = 55555;
+
+            try	//使用try...catch...敘述來補捉異動資料可能發生的例外
+            {
+                using (SqlConnection cn = new SqlConnection())
+                {
+                    cn.ConnectionString = cnstr2;
+                    cn.Open();
+                    string sqlStr = "INSERT INTO 員工(姓名, 職稱, 電話, 薪資)" + "VALUES(@name, @position, @tel, @salary)";
+                    SqlCommand cmd = new SqlCommand(sqlStr, cn);
+                    cmd.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@position", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@tel", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@salary", SqlDbType.Int));
+                    cmd.Parameters["@name"].Value = name;
+                    cmd.Parameters["@position"].Value = position;
+                    cmd.Parameters["@tel"].Value = telephone;
+                    cmd.Parameters["@salary"].Value = salary;
+                    cmd.ExecuteNonQuery();
+                }
+                ShowData2();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ", 新增資料發生錯誤");
+            }
+
+
+            //3030
+
+            //修改
+
+            string position2 = "manager";
+            string telephone2 = "0987654321";
+            int salary2 = 66666;
+
+            try	//使用try...catch...敘述來補捉異動資料可能發生的例外
+            {
+                using (SqlConnection cn = new SqlConnection())
+                {
+                    cn.ConnectionString = cnstr2;
+                    cn.Open();
+                    string sqlStr = "UPDATE 員工 SET 職稱=@position," + "電話=@tel, 薪資=@salary WHERE 姓名=@name";
+                    SqlCommand cmd = new SqlCommand(sqlStr, cn);
+                    cmd.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@position", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@tel", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@salary", SqlDbType.Int));
+                    cmd.Parameters["@name"].Value = name;
+                    cmd.Parameters["@position"].Value = position2;
+                    cmd.Parameters["@tel"].Value = telephone2;
+                    cmd.Parameters["@salary"].Value = salary2;
+                    cmd.ExecuteNonQuery();
+                }
+                ShowData2();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ", 修改資料發生錯誤");
+            }
+
+            //3030
+
+            //刪除
+
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = cnstr2;
+                cn.Open();
+                string sqlStr = "DELETE FROM 員工 WHERE 姓名 = @name";
+                SqlCommand cmd = new SqlCommand(sqlStr, cn);
+                cmd.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar));
+                cmd.Parameters["@name"].Value = name;
+                cmd.ExecuteNonQuery();
+            }
+            ShowData2();
+        }
+        // 員工資料表2 SP
+
+        private void button8_Click(object sender, EventArgs e)
+        {
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -284,18 +444,142 @@ namespace vcs_SqlConnection1
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //成績單1
+            // 使用using敘述建立SqlConnection物件
+            using (SqlConnection cn = new SqlConnection())
+            {
+                // 連接ch16DB.mdf資料庫
+                cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
+
+                DataSet ds = new DataSet();  // 建立DataSet物件ds
+                // 建立SqlDataAdapter物件daScore並取出成績單資料表
+                SqlDataAdapter daScore = new SqlDataAdapter("SELECT * FROM 成績單", cn);
+                // 將成績單資料表所有記錄填入ds物件
+                daScore.Fill(ds, "成績單");
+                // 宣告DataTable物件dt，該dt內存放ds中的成績單DataTable
+                DataTable dt = ds.Tables["成績單"];
+                // 在textBox1內顯示成績單的所有欄位名稱
+                for (int i = 0; i < dt.Columns.Count; i++)
+                {
+                    textBox1.Text += dt.Columns[i].ColumnName + "\t";
+                }
+                textBox1.Text += Environment.NewLine + Environment.NewLine;
+                // 在textBox1內顯示成績單的所有記錄
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    for (int j = 0; j < dt.Columns.Count; j++)
+                    {
+                        textBox1.Text += dt.Rows[i][j].ToString() + "\t";
+                    }
+                    textBox1.Text += Environment.NewLine;
+                }
+            }
+
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
+            //成績單2
+
+            // 使用using敘述建立SqlConnection物件
+            using (SqlConnection cn = new SqlConnection())
+            {
+                // 連接ch16DB.mdf資料庫
+                cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
+
+                DataSet ds = new DataSet();  // 建立DataSet物件ds
+                // 建立SqlDataAdapter物件daScore並取出成績單資料表
+                SqlDataAdapter daScore = new SqlDataAdapter("SELECT * FROM 成績單", cn);
+                // 將成績單資料表所有記錄填入ds物件
+                daScore.Fill(ds, "成績單");
+                // 宣告DataTable物件dt，該dt內存放ds中的成績單DataTable
+                DataTable dt = ds.Tables["成績單"];
+                // 在textBox1內顯示成績單的所有欄位名稱
+                for (int i = 0; i < dt.Columns.Count; i++)
+                {
+                    textBox1.Text += dt.Columns[i].ColumnName + "\t";
+                }
+                textBox1.Text += Environment.NewLine + Environment.NewLine;
+                // 在textBox1內顯示成績單的所有記錄
+                for (int i = 0; i < dt.Rows.Count - 1; i++)
+                {
+                    textBox1.Text += dt.Rows[i]["學號"].ToString() + "\t";
+                    textBox1.Text += dt.Rows[i]["姓名"].ToString() + "\t";
+                    textBox1.Text += dt.Rows[i]["國文"].ToString() + "\t";
+                    textBox1.Text += dt.Rows[i]["英文"].ToString() + "\t";
+                    textBox1.Text += dt.Rows[i]["數學"].ToString() + "\t";
+                    textBox1.Text += Environment.NewLine;
+                }
+            }
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //成績單 搜尋1
+            string name = "david";
+            // 使用using敘述建立SqlConnection物件cn
+            using (SqlConnection cn = new SqlConnection())
+            {
+                // 連接字串指定連接ch16DB.mdf資料庫
+                cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
+
+                cn.Open();  // 連接資料庫
+                // 將輸入的姓名指定給searchName字串變數
+                string searchName = name;
+                // SELECT敘述的查詢條件為姓名等於searchName
+                string selectCmd = "SELECT * FROM 成績單 WHERE 姓名 = '" + searchName + "'";
+                // 建立SqlCommand物件cmd
+                SqlCommand cmd = new SqlCommand(selectCmd, cn);
+                // 傳回查詢結果的SqlDataRadedr物件dr
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())   // 若有該筆記錄則執行下面敘述
+                {
+                    richTextBox1.Text += "學號：" + dr["學號"].ToString() + Environment.NewLine;
+                    richTextBox1.Text += "姓名：" + dr["姓名"].ToString() + Environment.NewLine;
+                    richTextBox1.Text += "國文：" + dr["國文"].ToString() + Environment.NewLine;
+                    richTextBox1.Text += "英文：" + dr["英文"].ToString() + Environment.NewLine;
+                    richTextBox1.Text += "數學：" + dr["數學"].ToString();
+                }
+                else   // 若沒有該筆記錄則執行else下面敘述
+                {
+                    richTextBox1.Text += "找不到這個學生的成績！\n";
+                }
+            }
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //成績單 搜尋2
+
+            string name = "david";
+            // 使用using敘述建立SqlConnection物件cn
+            using (SqlConnection cn = new SqlConnection())
+            {
+                // 連接字串指定連接ch16DB.mdf資料庫
+                cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
+                cn.Open();  // 連接資料庫
+                // 將輸入的姓名指定給searchName字串變數
+                string searchName = name;
+                // SELECT敘述的查詢條件為姓名等於searchName
+                string selectCmd = "SELECT * FROM 成績單 WHERE 姓名 = '" + searchName.Replace("'", "''") + "'";
+                // 建立SqlCommand物件cmd
+                SqlCommand cmd = new SqlCommand(selectCmd, cn);
+                // 傳回查詢結果的SqlDataRadedr物件dr
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())   // 若有該筆記錄則執行下面敘述
+                {
+                    richTextBox1.Text += "學號：" + dr["學號"].ToString() + Environment.NewLine;
+                    richTextBox1.Text += "姓名：" + dr["姓名"].ToString() + Environment.NewLine;
+                    richTextBox1.Text += "國文：" + dr["國文"].ToString() + Environment.NewLine;
+                    richTextBox1.Text += "英文：" + dr["英文"].ToString() + Environment.NewLine;
+                    richTextBox1.Text += "數學：" + dr["數學"].ToString();
+                }
+                else   // 若沒有該筆記錄則執行else下面敘述
+                {
+                    richTextBox1.Text += "找不到這個學生的成績！\n";
+                }
+            }
+
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -321,6 +605,7 @@ namespace vcs_SqlConnection1
         private void button19_Click(object sender, EventArgs e)
         {
         }
+
     }
 }
 
@@ -341,3 +626,16 @@ namespace vcs_SqlConnection1
 
  */
 
+/*
+有v11.0的, 就不可以, 要改用MSSQLLocalDB
+AttachDbFilename=|DataDirectory|ch17DB.mdf  是 mdf 在 |DataDirectory|之下
+AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf 是 指定 mdf 的位置
+固定的寫法 :
+Integrated Security=True";
+其他參數 :
+Connect Timeout=30
+
+cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;       AttachDbFilename=|DataDirectory|ch17DB.mdf;                                   ;
+cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;       AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf;      ;
+cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf; ;
+*/

@@ -49,7 +49,7 @@
             // 
             this.cboTable.FormattingEnabled = true;
             this.cboTable.Location = new System.Drawing.Point(93, 22);
-            this.cboTable.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboTable.Margin = new System.Windows.Forms.Padding(2);
             this.cboTable.Name = "cboTable";
             this.cboTable.Size = new System.Drawing.Size(92, 20);
             this.cboTable.TabIndex = 1;
@@ -57,7 +57,7 @@
             // btnSelect
             // 
             this.btnSelect.Location = new System.Drawing.Point(192, 18);
-            this.btnSelect.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSelect.Margin = new System.Windows.Forms.Padding(2);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(56, 24);
             this.btnSelect.TabIndex = 2;
@@ -69,7 +69,7 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(18, 58);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 27;
             this.dataGridView1.Size = new System.Drawing.Size(492, 174);
@@ -79,12 +79,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(531, 248);
+            this.ClientSize = new System.Drawing.Size(773, 447);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.cboTable);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
