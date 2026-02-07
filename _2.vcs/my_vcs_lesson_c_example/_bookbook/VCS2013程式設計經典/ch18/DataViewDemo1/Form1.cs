@@ -25,9 +25,7 @@ namespace DataViewDemo1
         {
             using (SqlConnection cn = new SqlConnection())
             {
-                cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;" +
-                    "AttachDbFilename=|DataDirectory|ch18DB.mdf;" +
-                    "Integrated Security=True";
+                cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|ch18DB.mdf;Integrated Security=True";
                 SqlDataAdapter daScore = new SqlDataAdapter("SELECT * FROM 成績單 ORDER BY 國文 DESC", cn);
                 DataSet ds = new DataSet();
                 daScore.Fill(ds, "成績單");
@@ -37,15 +35,31 @@ namespace DataViewDemo1
             rdbChi.Checked = true;  // 國文選項按鈕預設選取
             rdbDesc.Checked = true;  // 遞增選項按鈕預設選取
         }
+
         // 按下 [確定] 鈕執行此事件 
         private void btnOk_Click(object sender, EventArgs e)
         {
             string sortStr = "";
-            if (rdbChi.Checked) sortStr += rdbChi.Text;
-            if (rdbEng.Checked) sortStr += rdbEng.Text;
-            if (rdbMath.Checked) sortStr += rdbMath.Text;
-            if (rdbDesc.Checked) sortStr += " DESC";
-            if (rdbAsc.Checked) sortStr += " ASC";
+            if (rdbChi.Checked)
+            {
+                sortStr += rdbChi.Text;
+            }
+            if (rdbEng.Checked)
+            {
+                sortStr += rdbEng.Text;
+            }
+            if (rdbMath.Checked)
+            {
+                sortStr += rdbMath.Text;
+            }
+            if (rdbDesc.Checked)
+            {
+                sortStr += " DESC";
+            }
+            if (rdbAsc.Checked)
+            {
+                sortStr += " ASC";
+            }
             dvScore.RowFilter = txtFilter.Text;
             dvScore.Sort = sortStr;
             dataGridView1.DataSource = dvScore;

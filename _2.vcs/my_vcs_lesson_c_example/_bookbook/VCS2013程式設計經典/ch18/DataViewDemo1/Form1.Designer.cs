@@ -31,15 +31,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnOk = new System.Windows.Forms.Button();
-            this.rdbChi = new System.Windows.Forms.RadioButton();
-            this.rdbEng = new System.Windows.Forms.RadioButton();
             this.rdbMath = new System.Windows.Forms.RadioButton();
-            this.rdbDesc = new System.Windows.Forms.RadioButton();
+            this.rdbEng = new System.Windows.Forms.RadioButton();
+            this.rdbChi = new System.Windows.Forms.RadioButton();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rdbAsc = new System.Windows.Forms.RadioButton();
+            this.rdbDesc = new System.Windows.Forms.RadioButton();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtFilter = new System.Windows.Forms.TextBox();
+            this.btnOk = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -50,19 +50,21 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(134, 45);
+            this.label1.Location = new System.Drawing.Point(100, 36);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(274, 24);
+            this.label1.Size = new System.Drawing.Size(218, 19);
             this.label1.TabIndex = 0;
             this.label1.Text = "碁峰大學資管甲班成績單";
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(29, 93);
+            this.dataGridView1.Location = new System.Drawing.Point(22, 74);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(528, 220);
+            this.dataGridView1.Size = new System.Drawing.Size(396, 176);
             this.dataGridView1.TabIndex = 1;
             // 
             // groupBox1
@@ -70,117 +72,131 @@
             this.groupBox1.Controls.Add(this.rdbMath);
             this.groupBox1.Controls.Add(this.rdbEng);
             this.groupBox1.Controls.Add(this.rdbChi);
-            this.groupBox1.Location = new System.Drawing.Point(588, 95);
+            this.groupBox1.Location = new System.Drawing.Point(441, 76);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(93, 113);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(70, 90);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "排序欄位";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.rdbAsc);
-            this.groupBox2.Controls.Add(this.rdbDesc);
-            this.groupBox2.Location = new System.Drawing.Point(702, 95);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(93, 113);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "排序方式";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.txtFilter);
-            this.groupBox3.Location = new System.Drawing.Point(588, 240);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(207, 75);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "篩選條件式";
-            // 
-            // btnOk
-            // 
-            this.btnOk.Location = new System.Drawing.Point(702, 45);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(93, 30);
-            this.btnOk.TabIndex = 3;
-            this.btnOk.Text = "確定";
-            this.btnOk.UseVisualStyleBackColor = true;
-            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
-            // 
-            // rdbChi
-            // 
-            this.rdbChi.AutoSize = true;
-            this.rdbChi.Location = new System.Drawing.Point(7, 25);
-            this.rdbChi.Name = "rdbChi";
-            this.rdbChi.Size = new System.Drawing.Size(58, 19);
-            this.rdbChi.TabIndex = 0;
-            this.rdbChi.TabStop = true;
-            this.rdbChi.Text = "國文";
-            this.rdbChi.UseVisualStyleBackColor = true;
-            // 
-            // rdbEng
-            // 
-            this.rdbEng.AutoSize = true;
-            this.rdbEng.Location = new System.Drawing.Point(7, 51);
-            this.rdbEng.Name = "rdbEng";
-            this.rdbEng.Size = new System.Drawing.Size(58, 19);
-            this.rdbEng.TabIndex = 1;
-            this.rdbEng.TabStop = true;
-            this.rdbEng.Text = "英文";
-            this.rdbEng.UseVisualStyleBackColor = true;
-            // 
             // rdbMath
             // 
             this.rdbMath.AutoSize = true;
-            this.rdbMath.Location = new System.Drawing.Point(7, 77);
+            this.rdbMath.Location = new System.Drawing.Point(5, 62);
+            this.rdbMath.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rdbMath.Name = "rdbMath";
-            this.rdbMath.Size = new System.Drawing.Size(58, 19);
+            this.rdbMath.Size = new System.Drawing.Size(47, 16);
             this.rdbMath.TabIndex = 2;
             this.rdbMath.TabStop = true;
             this.rdbMath.Text = "數學";
             this.rdbMath.UseVisualStyleBackColor = true;
             // 
-            // rdbDesc
+            // rdbEng
             // 
-            this.rdbDesc.AutoSize = true;
-            this.rdbDesc.Location = new System.Drawing.Point(7, 25);
-            this.rdbDesc.Name = "rdbDesc";
-            this.rdbDesc.Size = new System.Drawing.Size(58, 19);
-            this.rdbDesc.TabIndex = 0;
-            this.rdbDesc.TabStop = true;
-            this.rdbDesc.Text = "遞增";
-            this.rdbDesc.UseVisualStyleBackColor = true;
+            this.rdbEng.AutoSize = true;
+            this.rdbEng.Location = new System.Drawing.Point(5, 41);
+            this.rdbEng.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rdbEng.Name = "rdbEng";
+            this.rdbEng.Size = new System.Drawing.Size(47, 16);
+            this.rdbEng.TabIndex = 1;
+            this.rdbEng.TabStop = true;
+            this.rdbEng.Text = "英文";
+            this.rdbEng.UseVisualStyleBackColor = true;
+            // 
+            // rdbChi
+            // 
+            this.rdbChi.AutoSize = true;
+            this.rdbChi.Location = new System.Drawing.Point(5, 20);
+            this.rdbChi.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rdbChi.Name = "rdbChi";
+            this.rdbChi.Size = new System.Drawing.Size(47, 16);
+            this.rdbChi.TabIndex = 0;
+            this.rdbChi.TabStop = true;
+            this.rdbChi.Text = "國文";
+            this.rdbChi.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.rdbAsc);
+            this.groupBox2.Controls.Add(this.rdbDesc);
+            this.groupBox2.Location = new System.Drawing.Point(526, 76);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Size = new System.Drawing.Size(70, 90);
+            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "排序方式";
             // 
             // rdbAsc
             // 
             this.rdbAsc.AutoSize = true;
-            this.rdbAsc.Location = new System.Drawing.Point(7, 50);
+            this.rdbAsc.Location = new System.Drawing.Point(5, 40);
+            this.rdbAsc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rdbAsc.Name = "rdbAsc";
-            this.rdbAsc.Size = new System.Drawing.Size(58, 19);
+            this.rdbAsc.Size = new System.Drawing.Size(47, 16);
             this.rdbAsc.TabIndex = 1;
             this.rdbAsc.TabStop = true;
             this.rdbAsc.Text = "遞減";
             this.rdbAsc.UseVisualStyleBackColor = true;
             // 
+            // rdbDesc
+            // 
+            this.rdbDesc.AutoSize = true;
+            this.rdbDesc.Location = new System.Drawing.Point(5, 20);
+            this.rdbDesc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rdbDesc.Name = "rdbDesc";
+            this.rdbDesc.Size = new System.Drawing.Size(47, 16);
+            this.rdbDesc.TabIndex = 0;
+            this.rdbDesc.TabStop = true;
+            this.rdbDesc.Text = "遞增";
+            this.rdbDesc.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.txtFilter);
+            this.groupBox3.Location = new System.Drawing.Point(441, 192);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Size = new System.Drawing.Size(155, 60);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "篩選條件式";
+            // 
             // txtFilter
             // 
-            this.txtFilter.Location = new System.Drawing.Point(19, 30);
+            this.txtFilter.Location = new System.Drawing.Point(14, 24);
+            this.txtFilter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtFilter.Name = "txtFilter";
-            this.txtFilter.Size = new System.Drawing.Size(182, 25);
+            this.txtFilter.Size = new System.Drawing.Size(138, 22);
             this.txtFilter.TabIndex = 0;
+            // 
+            // btnOk
+            // 
+            this.btnOk.Location = new System.Drawing.Point(526, 36);
+            this.btnOk.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(70, 24);
+            this.btnOk.TabIndex = 3;
+            this.btnOk.Text = "確定";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(807, 340);
+            this.ClientSize = new System.Drawing.Size(858, 553);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
