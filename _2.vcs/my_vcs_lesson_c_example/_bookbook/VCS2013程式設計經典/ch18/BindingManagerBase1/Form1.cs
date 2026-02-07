@@ -23,7 +23,7 @@ namespace BindingManagerBase1
         // 使用此物件來巡覽產品資料表的記錄
         BindingManagerBase bm;
 
-       // 定義CheckBm方法, 該方法用來顯示目前記錄的位置
+        // 定義CheckBm方法, 該方法用來顯示目前記錄的位置
         // 使 第一筆 、上一筆 、下一筆 、最未筆  鈕是否可被使用
         private void Checkbm()
         {
@@ -55,8 +55,8 @@ namespace BindingManagerBase1
         {
             using (SqlConnection cn = new SqlConnection())
             {
-                cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;" +
-                    "AttachDbFilename=|DataDirectory|ch18DB.mdf;" +
+                cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
+                    @"AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch18DB.mdf;" +
                     "Integrated Security=True";
                 // 建立DataSet物件ds
                 // 在ds物件的DataTable內填入 [會員] 資料表的所有記錄
@@ -83,12 +83,14 @@ namespace BindingManagerBase1
             }
             Checkbm();
         }
+
         // 按 第一筆 鈕執行此事件，使移到第一筆記錄位置
         private void btnFirst_Click(object sender, EventArgs e)
         {
             bm.Position = 0;
             Checkbm();
         }
+
         // 按 上一筆 鈕執行此事件，使移到上一筆記錄位置
         private void btnPrev_Click(object sender, EventArgs e)
         {
@@ -98,6 +100,7 @@ namespace BindingManagerBase1
             }
             Checkbm();
         }
+
         // 按 下一筆 鈕執行此事件，使移到下一筆記錄位置
         private void btnNext_Click(object sender, EventArgs e)
         {
@@ -107,6 +110,7 @@ namespace BindingManagerBase1
             }
             Checkbm();
         }
+
         // 按 最末筆 鈕執行此事件，使移到最後一筆記錄位置
         private void btnLast_Click(object sender, EventArgs e)
         {
@@ -115,3 +119,4 @@ namespace BindingManagerBase1
         }
     }
 }
+

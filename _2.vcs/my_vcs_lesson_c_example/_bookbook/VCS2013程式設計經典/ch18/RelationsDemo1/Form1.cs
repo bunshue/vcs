@@ -23,8 +23,8 @@ namespace RelationsDemo1
         {
             using (SqlConnection cn = new SqlConnection())
             {
-                cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;" +
-                    "AttachDbFilename=|DataDirectory|Northwind.mdf;" +
+                cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
+                    @"AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\Northwind.mdf;" +
                     "Integrated Security=True";
                 DataSet ds = new DataSet();
                 SqlDataAdapter daCategory = new SqlDataAdapter("SELECT * FROM 產品類別", cn);

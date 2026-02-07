@@ -18,10 +18,11 @@ namespace StoredProcedure3
         {
             InitializeComponent();
         }
+
         // 宣告cnStr用來存放連接ch17DB.mdf的連接字串
-        string cnStr = @"Data Source=(LocalDB)\v11.0;" +
-                    "AttachDbFilename=|DataDirectory|ch18DB.mdf;" +
-                    "Integrated Security=True";
+        string cnStr = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
+            @"AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch18DB.mdf;" +
+            "Integrated Security=True";
 
         // 定義ShowData()方法
         // 此方法用來將員工資料表的所有記錄顯示於dataGridView1上
@@ -36,11 +37,13 @@ namespace StoredProcedure3
                 dataGridView1.DataSource = ds.Tables["員工"];
             }
         }
+
         // 表單載入時執行
         private void Form1_Load(object sender, EventArgs e)
         {
             ShowData();
         }
+
         // 按下 [新增] 鈕時執行
         private void btnAdd_Click(object sender, EventArgs e)
         {

@@ -45,6 +45,7 @@
             this.btnNext = new System.Windows.Forms.Button();
             this.btnLast = new System.Windows.Forms.Button();
             this.lblShow = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -110,7 +111,7 @@
             // txtId
             // 
             this.txtId.Location = new System.Drawing.Point(78, 26);
-            this.txtId.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtId.Margin = new System.Windows.Forms.Padding(2);
             this.txtId.Name = "txtId";
             this.txtId.Size = new System.Drawing.Size(76, 22);
             this.txtId.TabIndex = 0;
@@ -118,7 +119,7 @@
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(254, 26);
-            this.txtName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtName.Margin = new System.Windows.Forms.Padding(2);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(76, 22);
             this.txtName.TabIndex = 1;
@@ -126,7 +127,7 @@
             // txtTel
             // 
             this.txtTel.Location = new System.Drawing.Point(78, 65);
-            this.txtTel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTel.Margin = new System.Windows.Forms.Padding(2);
             this.txtTel.Name = "txtTel";
             this.txtTel.Size = new System.Drawing.Size(76, 22);
             this.txtTel.TabIndex = 2;
@@ -138,7 +139,7 @@
             "男",
             "女"});
             this.cboSex.Location = new System.Drawing.Point(254, 65);
-            this.cboSex.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboSex.Margin = new System.Windows.Forms.Padding(2);
             this.cboSex.Name = "cboSex";
             this.cboSex.Size = new System.Drawing.Size(76, 20);
             this.cboSex.TabIndex = 3;
@@ -146,7 +147,7 @@
             // dtpDate
             // 
             this.dtpDate.Location = new System.Drawing.Point(78, 101);
-            this.dtpDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dtpDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.Size = new System.Drawing.Size(106, 22);
             this.dtpDate.TabIndex = 4;
@@ -155,7 +156,7 @@
             // 
             this.chkIsMarry.AutoSize = true;
             this.chkIsMarry.Location = new System.Drawing.Point(254, 106);
-            this.chkIsMarry.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkIsMarry.Margin = new System.Windows.Forms.Padding(2);
             this.chkIsMarry.Name = "chkIsMarry";
             this.chkIsMarry.Size = new System.Drawing.Size(15, 14);
             this.chkIsMarry.TabIndex = 5;
@@ -164,7 +165,7 @@
             // btnFirst
             // 
             this.btnFirst.Location = new System.Drawing.Point(26, 168);
-            this.btnFirst.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnFirst.Margin = new System.Windows.Forms.Padding(2);
             this.btnFirst.Name = "btnFirst";
             this.btnFirst.Size = new System.Drawing.Size(56, 22);
             this.btnFirst.TabIndex = 6;
@@ -175,7 +176,7 @@
             // btnPrev
             // 
             this.btnPrev.Location = new System.Drawing.Point(109, 168);
-            this.btnPrev.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPrev.Margin = new System.Windows.Forms.Padding(2);
             this.btnPrev.Name = "btnPrev";
             this.btnPrev.Size = new System.Drawing.Size(56, 22);
             this.btnPrev.TabIndex = 7;
@@ -186,7 +187,7 @@
             // btnNext
             // 
             this.btnNext.Location = new System.Drawing.Point(191, 168);
-            this.btnNext.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNext.Margin = new System.Windows.Forms.Padding(2);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(56, 22);
             this.btnNext.TabIndex = 8;
@@ -197,7 +198,7 @@
             // btnLast
             // 
             this.btnLast.Location = new System.Drawing.Point(274, 168);
-            this.btnLast.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLast.Margin = new System.Windows.Forms.Padding(2);
             this.btnLast.Name = "btnLast";
             this.btnLast.Size = new System.Drawing.Size(56, 22);
             this.btnLast.TabIndex = 9;
@@ -215,11 +216,20 @@
             this.lblShow.TabIndex = 10;
             this.lblShow.Text = "lblShow";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(401, 12);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(519, 463);
+            this.richTextBox1.TabIndex = 11;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(361, 210);
+            this.ClientSize = new System.Drawing.Size(945, 515);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.lblShow);
             this.Controls.Add(this.btnLast);
             this.Controls.Add(this.btnNext);
@@ -237,7 +247,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -265,6 +275,7 @@
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnLast;
         private System.Windows.Forms.Label lblShow;
+        private System.Windows.Forms.RichTextBox richTextBox1;
 
     }
 }

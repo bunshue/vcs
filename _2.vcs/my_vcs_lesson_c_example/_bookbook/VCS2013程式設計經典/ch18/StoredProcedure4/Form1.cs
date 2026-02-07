@@ -20,8 +20,8 @@ namespace StoredProcedure4
         }
 
         // 宣告cnStr用來存放連接ch17DB.mdf的連接字串
-        string cnStr = @"Data Source=(LocalDB)\v11.0;" +
-                    "AttachDbFilename=|DataDirectory|ch18DB.mdf;" +
+        string cnStr = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
+                    @"AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch18DB.mdf;" +
                     "Integrated Security=True";
 
         // 定義ShowData()方法
@@ -37,11 +37,13 @@ namespace StoredProcedure4
                 dataGridView1.DataSource = ds.Tables["員工"];
             }
         }
+
         // 表單載入時執行
         private void Form1_Load(object sender, EventArgs e)
         {
             ShowData();
         }
+
         // 按下 [新增] 鈕時執行
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -75,6 +77,7 @@ namespace StoredProcedure4
                 MessageBox.Show(ex.Message);
             }
         }
+
         // 按下 [修改] 鈕時執行
         private void btnUpdate_Click(object sender, EventArgs e)
         {
@@ -103,6 +106,7 @@ namespace StoredProcedure4
                 MessageBox.Show(ex.Message);
             }
         }
+
         // 按下 [刪除] 鈕執行 
         private void btnDel_Click(object sender, EventArgs e)
         {

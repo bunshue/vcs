@@ -18,6 +18,12 @@ namespace StoredProcedure2
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         // 按下 [查詢] 鈕執行此事件
         private void btnOk_Click(object sender, EventArgs e)
         {
@@ -25,8 +31,8 @@ namespace StoredProcedure2
             {
                 try
                 {
-                    cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;" +
-                    "AttachDbFilename=|DataDirectory|ch18DB.mdf;" +
+                    cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
+                    @"AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch18DB.mdf;" +
                     "Integrated Security=True";
                     SqlCommand cmd = new SqlCommand();
                     cmd.Connection = cn;

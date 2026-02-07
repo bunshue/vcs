@@ -25,7 +25,7 @@ namespace DataViewDemo1
         {
             using (SqlConnection cn = new SqlConnection())
             {
-                cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|ch18DB.mdf;Integrated Security=True";
+                cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch18DB.mdf;Integrated Security=True";
                 SqlDataAdapter daScore = new SqlDataAdapter("SELECT * FROM 成績單 ORDER BY 國文 DESC", cn);
                 DataSet ds = new DataSet();
                 daScore.Fill(ds, "成績單");
