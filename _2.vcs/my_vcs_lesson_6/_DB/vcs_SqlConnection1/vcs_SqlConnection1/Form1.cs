@@ -56,15 +56,25 @@ namespace vcs_SqlConnection1
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
             dataGridView1.Size = new Size(560, 400);
-            dataGridView1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            dataGridView1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
-            richTextBox1.Size = new Size(560, 800);
-            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            richTextBox1.Size = new Size(400, 800);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1700, 910);
+            this.Size = new Size(1720, 910);
             this.Text = "vcs_SqlConnection1";
 
             //設定執行後的表單起始位置, 正中央
@@ -747,6 +757,170 @@ namespace vcs_SqlConnection1
         {
         }
 
+        private void button20_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
+                    @"AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch18DB.mdf;" +
+                    "Integrated Security=True";
+                cn.Open();
+                SqlDataAdapter daEmployee = new SqlDataAdapter("GetEmployee", cn);
+                DataSet ds = new DataSet();
+                daEmployee.Fill(ds, "員工");
+                dataGridView1.DataSource = ds.Tables["員工"];
+                SqlCommand cmd = new SqlCommand();
+
+                // 與資料庫連接
+                cmd.Connection = cn;
+                // 指定Command要執行的是預存程序
+                cmd.CommandType = CommandType.StoredProcedure;
+                // 執行GetEmployeeStatistics預存程序
+                cmd.CommandText = "GetEmployeeStatistics";
+                // 設定預存程序的參數
+                cmd.Parameters.Add(new SqlParameter("@EmpCount", SqlDbType.Int));
+                cmd.Parameters.Add(new SqlParameter("@SalarySum", SqlDbType.Int));
+                cmd.Parameters.Add(new SqlParameter("@SalaryAvg", SqlDbType.Int));
+                cmd.Parameters.Add(new SqlParameter("@SalaryMax", SqlDbType.Int));
+                cmd.Parameters.Add(new SqlParameter("@SalaryMin", SqlDbType.Int));
+                // 設定預存程序的參數為傳出型態
+                cmd.Parameters["@EmpCount"].Direction = ParameterDirection.Output;
+                cmd.Parameters["@SalarySum"].Direction = ParameterDirection.Output;
+                cmd.Parameters["@SalaryAvg"].Direction = ParameterDirection.Output;
+                cmd.Parameters["@SalaryMax"].Direction = ParameterDirection.Output;
+                cmd.Parameters["@SalaryMin"].Direction = ParameterDirection.Output;
+                // 執行預存程序
+                cmd.ExecuteNonQuery();
+
+                int intCount, intSum, intAvg, intMax, intMin;
+                // 取得傳出的預存程序
+                intCount = int.Parse(cmd.Parameters["@EmpCount"].Value.ToString());
+                intSum = int.Parse(cmd.Parameters["@SalarySum"].Value.ToString());
+                intAvg = int.Parse(cmd.Parameters["@SalaryAvg"].Value.ToString());
+                intMax = int.Parse(cmd.Parameters["@SalaryMax"].Value.ToString());
+                intMin = int.Parse(cmd.Parameters["@SalaryMin"].Value.ToString());
+
+                // 取員工資料筆數
+                richTextBox1.Text += "員工資料表共 " + intCount + " 筆記錄\n";
+                // 取薪資加總
+                richTextBox1.Text += "員工資料表薪資加總共 " + intSum + "\n";
+                // 取薪資平均
+                richTextBox1.Text += "員工資料表薪資平均為 " + intAvg + "\n";
+                // 取薪資最高薪
+                richTextBox1.Text += "最高薪為 " + intMax + "\n";
+                // 取薪資最低薪
+                richTextBox1.Text += "最低薪為 " + intMin + "\n";
+            }
+
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            //以姓名查詢員工記錄
+            string search_name = "david";
+
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
+                    @"AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch18DB.mdf;" +
+                    "Integrated Security=True";
+                cn.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandText = "GetEmployeeByName";
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("@EmpName", SqlDbType.NVarChar));
+                cmd.Parameters["@EmpName"].Value = search_name;
+                richTextBox1.Text = "";
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    for (int i = 0; i < dr.FieldCount; i++)
+                    {
+                        richTextBox1.Text += dr.GetName(i) + "：" + dr[i].ToString() + Environment.NewLine;
+                    }
+                }
+                else
+                {
+                    richTextBox1.Text = "找不到 " + search_name + " 這個員工";
+                }
+            }
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            //股票行情表成交量查詢系統
+
+            //最低成交量
+            int min_amount = 1;
+
+            //最高成交量
+            int max_amount = 10000;
+
+            using (SqlConnection cn = new SqlConnection())
+            {
+                try
+                {
+                    cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
+                    @"AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch18DB.mdf;" +
+                    "Integrated Security=True";
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = cn;
+                    cmd.CommandText = "GetStockByQty";
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@QMin", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@QMax", SqlDbType.NVarChar));
+                    cmd.Parameters["@QMin"].Value = min_amount;
+                    cmd.Parameters["@QMax"].Value = max_amount;
+                    SqlDataAdapter daStock = new SqlDataAdapter();
+                    daStock.SelectCommand = cmd;
+                    DataSet ds = new DataSet();
+                    daStock.Fill(ds, "股票行情表");
+                    dataGridView1.DataSource = ds.Tables["股票行情表"];
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+
+
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
