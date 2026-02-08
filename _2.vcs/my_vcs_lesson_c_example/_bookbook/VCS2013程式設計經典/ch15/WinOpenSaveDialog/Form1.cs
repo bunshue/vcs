@@ -16,6 +16,7 @@ namespace WinOPenSaveDialog
         {
             InitializeComponent();
         }
+
         // ==== 表單載入時執行
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -27,6 +28,7 @@ namespace WinOPenSaveDialog
             // 使colorDialog1預設出現自訂色彩區段
             colorDialog1.FullOpen = true;
         }
+
         // 執行功能表的 [字型] 指令時執行此事件處理函式
         private void 字型ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -39,6 +41,7 @@ namespace WinOPenSaveDialog
                 richTextBox1.SelectionColor = fontDialog1.Color;
             }
         }
+
         // 執行功能表的 [色彩/前景色] 指令時執行此事件處理函式
         private void 前景色ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -49,6 +52,7 @@ namespace WinOPenSaveDialog
                 richTextBox1.SelectionColor = colorDialog1.Color;
             }
         }
+
         // 執行功能表的 [色彩/背景色] 指令時執行此事件處理函式
         private void 背景色ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -59,6 +63,7 @@ namespace WinOPenSaveDialog
                 richTextBox1.SelectionBackColor = colorDialog1.Color;
             }
         }
+
         // 執行功能表的 [檔案/開啟舊檔] 指令時執行此事件處理函式
         private void 開啟舊檔ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -69,7 +74,8 @@ namespace WinOPenSaveDialog
                 richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.RichText);
             }
         }
-         // 執行功能表的 [檔案/儲存檔案] 指令時執行此事件處理函式
+
+        // 執行功能表的 [檔案/儲存檔案] 指令時執行此事件處理函式
         private void 儲存檔案ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // 打開另存新增對話方塊並判斷是否按下 [確定] 鈕 
@@ -80,12 +86,14 @@ namespace WinOPenSaveDialog
                 richTextBox1.SaveFile(saveFileDialog1.FileName, RichTextBoxStreamType.RichText);
             }
         }
+
         // 執行功能表的 [檔案/清除] 指令時執行此事件處理函式
         private void 清除ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             richTextBox1.Text = "";
         }
-        private void 結束ToolStripMenuItem_Click(object sender, EventArgs e)        
+
+        private void 結束ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }

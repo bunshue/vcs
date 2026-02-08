@@ -16,6 +16,7 @@ namespace WinPictureBox
         {
             InitializeComponent();
         }
+
         // 表單載入時執行
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -28,6 +29,7 @@ namespace WinPictureBox
             // 圖片隨控制項大小伸縮
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
         }
+
         // 當清單被選取時執行
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -36,4 +38,3 @@ namespace WinPictureBox
         }
     }
 }
-

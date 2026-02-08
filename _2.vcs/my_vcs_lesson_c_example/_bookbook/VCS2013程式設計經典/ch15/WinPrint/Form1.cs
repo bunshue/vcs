@@ -16,6 +16,7 @@ namespace WinPrint
         {
             InitializeComponent();
         }
+
         //  === 表單載入時會執行
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -25,20 +26,23 @@ namespace WinPrint
             textBox1.ScrollBars = ScrollBars.Both;
             textBox1.Font = new Font("標楷體", 12, FontStyle.Regular);
         }
+
         //  ===  版面設定按鈕被按時會執行
         private void btnSetup_Click(object sender, EventArgs e)
         {
             if (pageSetupDialog1.ShowDialog() == DialogResult.OK)
             {
                 printDocument1.DefaultPageSettings =
- 					pageSetupDialog1.PageSettings;
+                    pageSetupDialog1.PageSettings;
             }
         }
+
         //  ===  預覽列印按鈕被按時會執行
         private void btnPreview_Click(object sender, EventArgs e)
         {
             printPreviewDialog1.ShowDialog();
         }
+
         //  ===  列印按鈕被按時會執行
         private void btnPrint_Click(object sender, EventArgs e)
         {
@@ -48,16 +52,18 @@ namespace WinPrint
                 printDocument1.Print();
             }
         }
+
         //  ===  當printDocument.Print()方法被執行時會被觸發
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             Graphics prnGraph = e.Graphics;
-            Font prnFont = new Font(textBox1.Font.Name,textBox1.Font.Size, textBox1.Font.Style);
+            Font prnFont = new Font(textBox1.Font.Name, textBox1.Font.Size, textBox1.Font.Style);
             SolidBrush prnBrush = new SolidBrush(textBox1.ForeColor);
-            Single left=printDocument1.DefaultPageSettings.Margins.Left-10;
-            Single top=printDocument1.DefaultPageSettings.Margins.Top-20;
-            prnGraph.DrawString	(textBox1.Text, prnFont, prnBrush, left, top);
+            Single left = printDocument1.DefaultPageSettings.Margins.Left - 10;
+            Single top = printDocument1.DefaultPageSettings.Margins.Top - 20;
+            prnGraph.DrawString(textBox1.Text, prnFont, prnBrush, left, top);
         }
+
         //  ===  結束按鈕被按時會執行
         private void btnEnd_Click(object sender, EventArgs e)
         {
