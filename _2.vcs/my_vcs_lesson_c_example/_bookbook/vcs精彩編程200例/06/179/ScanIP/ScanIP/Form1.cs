@@ -171,7 +171,8 @@ namespace ScanIP
                 }
                 catch (Exception ex)
                 {
-                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                    //richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                    Console.Write("錯誤訊息 : " + ex.Message);
                 }
             }
         }
