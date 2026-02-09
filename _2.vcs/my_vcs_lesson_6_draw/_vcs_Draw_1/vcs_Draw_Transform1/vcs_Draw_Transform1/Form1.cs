@@ -123,6 +123,7 @@ namespace vcs_Draw_Transform1
 
         void reset_pictureBox()
         {
+            pictureBox1.Size = new Size(820, 880);
             bitmap1 = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
             g = Graphics.FromImage(bitmap1);
             g.ResetTransform();  // 重置轉換, 恢復

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Threading;
 using System.Drawing.Imaging;  // for ColorMatrix, ImageAttributes
 using System.Drawing.Drawing2D;  // for SmoothingMode
 
@@ -930,18 +931,17 @@ namespace vcs_Draw5_Image_ImageAttributes
             while (count < 1.0)
             {
                 this.Text = count.ToString();
-                matrix.Matrix00 = count;
-                matrix.Matrix11 = count;
-                matrix.Matrix22 = count;
-                matrix.Matrix33 = count;
+                matrix.Matrix00 = (float)count;
+                matrix.Matrix11 = (float)count;
+                matrix.Matrix22 = (float)count;
+                matrix.Matrix33 = (float)count;
                 attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
                 g.DrawImage(MyBitmap, new Rectangle(0, 0, width, height),
                 0, 0, width, height, GraphicsUnit.Pixel, attributes);
-                System.Threading.Thread.Sleep(200);
+                Thread.Sleep(20);
                 count = (float)(count + 0.02);
             }
             this.Text = count.ToString() + " 完成";
-
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -995,11 +995,10 @@ namespace vcs_Draw5_Image_ImageAttributes
                 attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
                 g.DrawImage(MyBitmap, new Rectangle(0, 0, width, height),
                 0, 0, width, height, GraphicsUnit.Pixel, attributes);
-                System.Threading.Thread.Sleep(20);
+                Thread.Sleep(20);
                 count = (float)(count - 0.01);
             }
             this.Text = count.ToString() + " 完成";
-
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
