@@ -25,8 +25,8 @@ namespace Linq_to_SQL1
         {
             using (SqlConnection cn = new SqlConnection())
             {
-                cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;" +
-                    "AttachDbFilename=|DataDirectory|ch20DB.mdf;" +
+                cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
+                    @"AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch20DB.mdf;" +
                     "Integrated Security=True";
                 DataContext dc = new DataContext(cn);
                 Table<Employee> emp = dc.GetTable<Employee>();
@@ -34,7 +34,6 @@ namespace Linq_to_SQL1
                              select new { p.姓名, p.編號, p.職稱, p.電話, p.薪資 };
                 dataGridView1.DataSource = result;
             }
-
         }
     }
 }

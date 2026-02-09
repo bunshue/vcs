@@ -14,11 +14,13 @@ namespace Linq_to_XML1
 {
     public partial class Form1 : Form
     {
+        XElement xmlFile = XElement.Load("person.xml");
+
         public Form1()
         {
             InitializeComponent();
         }
-        XElement xmlFile = XElement.Load("person.xml");
+
         // 表單載入時執行此事件處理函式
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -26,6 +28,7 @@ namespace Linq_to_XML1
             dataGridView1.DataSource = stu.ToList();
             lblCount.Text = "學生共 " + stu.Count().ToString() + "人";
         }
+
         // 按 [搜尋] 鈕執行此事件處理函式
         private void btnSearch_Click(object sender, EventArgs e)
         {

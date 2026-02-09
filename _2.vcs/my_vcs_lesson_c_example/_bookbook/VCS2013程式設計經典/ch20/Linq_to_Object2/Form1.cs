@@ -18,6 +18,12 @@ namespace Linq_to_Object2
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         //按 [搜尋] 鈕執行此事件處理函式 
         private void btnSearch_Click(object sender, EventArgs e)
         {
@@ -29,13 +35,14 @@ namespace Linq_to_Object2
                 var myFile = from s in f select s.FullName;
                 foreach (var s in myFile)
                 {
-                    txtFileName.Text +=s + Environment .NewLine ;
+                    txtFileName.Text += s + Environment.NewLine;
                 }
             }
             catch (Exception ex)
             {
-                txtFileName.Text ="路徑有錯";
+                txtFileName.Text = "路徑有錯";
             }
         }
     }
 }
+

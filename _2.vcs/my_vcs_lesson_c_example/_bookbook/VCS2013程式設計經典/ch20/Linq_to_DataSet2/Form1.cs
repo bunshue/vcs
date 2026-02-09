@@ -18,7 +18,9 @@ namespace Linq_to_DataSet2
         {
             InitializeComponent();
         }
+
         EmployeeDataSet ds = new EmployeeDataSet();
+
         // 表單載入時執行此事件處理函式
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -27,6 +29,7 @@ namespace Linq_to_DataSet2
             da.Fill(ds.員工);
             dataGridView1.DataSource = ds.員工;
         }
+
         // 按下 [確定] 鈕執行此事件處理函式 
         private void btnOk_Click(object sender, EventArgs e)
         {
@@ -50,6 +53,5 @@ namespace Linq_to_DataSet2
                 MessageBox.Show(ex.Message);
             }
         }
-
     }
 }

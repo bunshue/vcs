@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.Data;
 using System.Data .SqlClient ;
 
+// 使用 控制項資料繫結
+
 namespace DataBindingDemo1
 {
     public partial class Form1 : Form

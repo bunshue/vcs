@@ -14,12 +14,12 @@ namespace DataViewDemo1
 {
     public partial class Form1 : Form
     {
+        DataView dvScore;  // 宣告DataView物件dvScore
+
         public Form1()
         {
             InitializeComponent();
         }
-
-        DataView dvScore;  // 宣告DataView物件dvScore
 
         // 表單載入時執行此事件
         private void Form1_Load(object sender, EventArgs e)

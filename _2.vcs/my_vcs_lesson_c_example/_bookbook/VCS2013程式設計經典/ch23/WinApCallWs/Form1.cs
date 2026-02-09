@@ -17,12 +17,16 @@ namespace WinApCallWs
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
-                ServiceReference1.WebService1SoapClient ws =
-                    new ServiceReference1.WebService1SoapClient();
+                ServiceReference1.WebService1SoapClient ws = new ServiceReference1.WebService1SoapClient();
                 double d1, d2;
                 d1 = double.Parse(textBox1.Text);
                 d2 = double.Parse(textBox2.Text);
@@ -32,7 +36,6 @@ namespace WinApCallWs
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
     }
 }

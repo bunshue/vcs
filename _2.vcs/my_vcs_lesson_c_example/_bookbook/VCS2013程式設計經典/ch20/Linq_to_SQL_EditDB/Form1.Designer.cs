@@ -46,19 +46,19 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(29, 145);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataGridView1.Location = new System.Drawing.Point(22, 116);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(608, 195);
+            this.dataGridView1.Size = new System.Drawing.Size(456, 156);
             this.dataGridView1.TabIndex = 31;
             // 
             // btnDel
             // 
-            this.btnDel.Location = new System.Drawing.Point(562, 91);
-            this.btnDel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDel.Location = new System.Drawing.Point(422, 73);
+            this.btnDel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(75, 28);
+            this.btnDel.Size = new System.Drawing.Size(56, 22);
             this.btnDel.TabIndex = 30;
             this.btnDel.Text = "刪除";
             this.btnDel.UseVisualStyleBackColor = true;
@@ -66,10 +66,10 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(562, 58);
-            this.btnUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnUpdate.Location = new System.Drawing.Point(422, 46);
+            this.btnUpdate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(75, 28);
+            this.btnUpdate.Size = new System.Drawing.Size(56, 22);
             this.btnUpdate.TabIndex = 29;
             this.btnUpdate.Text = "修改";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -77,10 +77,10 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(562, 25);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAdd.Location = new System.Drawing.Point(422, 20);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 28);
+            this.btnAdd.Size = new System.Drawing.Size(56, 22);
             this.btnAdd.TabIndex = 28;
             this.btnAdd.Text = "新增";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -88,77 +88,81 @@
             // 
             // txtSalary
             // 
-            this.txtSalary.Location = new System.Drawing.Point(322, 82);
-            this.txtSalary.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtSalary.Location = new System.Drawing.Point(242, 66);
+            this.txtSalary.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtSalary.Name = "txtSalary";
-            this.txtSalary.Size = new System.Drawing.Size(160, 25);
+            this.txtSalary.Size = new System.Drawing.Size(121, 22);
             this.txtSalary.TabIndex = 26;
             // 
             // txtTel
             // 
-            this.txtTel.Location = new System.Drawing.Point(322, 31);
-            this.txtTel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtTel.Location = new System.Drawing.Point(242, 25);
+            this.txtTel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtTel.Name = "txtTel";
-            this.txtTel.Size = new System.Drawing.Size(160, 25);
+            this.txtTel.Size = new System.Drawing.Size(121, 22);
             this.txtTel.TabIndex = 24;
             // 
             // txtPosition
             // 
-            this.txtPosition.Location = new System.Drawing.Point(69, 82);
-            this.txtPosition.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtPosition.Location = new System.Drawing.Point(52, 66);
+            this.txtPosition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtPosition.Name = "txtPosition";
-            this.txtPosition.Size = new System.Drawing.Size(152, 25);
+            this.txtPosition.Size = new System.Drawing.Size(115, 22);
             this.txtPosition.TabIndex = 22;
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(69, 31);
-            this.txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtName.Location = new System.Drawing.Point(52, 25);
+            this.txtName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(152, 25);
+            this.txtName.Size = new System.Drawing.Size(115, 22);
             this.txtName.TabIndex = 20;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(280, 86);
+            this.label4.Location = new System.Drawing.Point(210, 69);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(37, 15);
+            this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 27;
             this.label4.Text = "薪資";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(280, 34);
+            this.label3.Location = new System.Drawing.Point(210, 27);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 15);
+            this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 25;
             this.label3.Text = "電話";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 86);
+            this.label2.Location = new System.Drawing.Point(20, 69);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 15);
+            this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 23;
             this.label2.Text = "職稱";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 34);
+            this.label1.Location = new System.Drawing.Point(20, 27);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 15);
+            this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 21;
             this.label1.Text = "姓名";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(664, 362);
+            this.ClientSize = new System.Drawing.Size(1002, 520);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnDel);
             this.Controls.Add(this.btnUpdate);
@@ -171,6 +175,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);

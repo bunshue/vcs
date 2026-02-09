@@ -26,6 +26,7 @@ namespace Linq_to_SQL4
             comboBox1.Items.Add("所有產品資料");
             comboBox1.Items.Add("單價大於等於20元的產品");
         }
+
         // 按下 [確定] 鈕執行此事件處理函式 
         private void btnOk_Click(object sender, EventArgs e)
         {

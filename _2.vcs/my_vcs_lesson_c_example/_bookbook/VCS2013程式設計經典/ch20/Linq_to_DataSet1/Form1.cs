@@ -27,10 +27,9 @@ namespace Linq_to_DataSet1
             using (SqlConnection cn = new SqlConnection())
             {
                 cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
-                   "AttachDbFilename=|DataDirectory|ch20DB.mdf;" +
-                   "Integrated Security=True";
-                SqlDataAdapter daEmployee = new SqlDataAdapter
-                ("SELECT * FROM 員工 ORDER BY 編號 DESC", cn);
+                    @"AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch20DB.mdf;" +
+                    "Integrated Security=True";
+                SqlDataAdapter daEmployee = new SqlDataAdapter("SELECT * FROM 員工 ORDER BY 編號 DESC", cn);
                 daEmployee.Fill(ds, "員工");
                 dataGridView1.DataSource = ds.Tables["員工"];
             }
@@ -62,4 +61,3 @@ namespace Linq_to_DataSet1
         }
     }
 }
-

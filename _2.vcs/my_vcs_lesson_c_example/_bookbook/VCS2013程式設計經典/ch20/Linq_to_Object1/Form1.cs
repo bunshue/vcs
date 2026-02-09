@@ -13,18 +13,20 @@ namespace Linq_to_Object1
 {
     public partial class Form1 : Form
     {
+        int[] score = new int[] { 89, 45, 100, 78, 60, 54, 37 };
+
         public Form1()
         {
             InitializeComponent();
         }
-        int[] score = new int[] { 89, 45, 100, 78, 60, 54, 37 };
+
         // 表單載入時執行此事件處理函式
         private void Form1_Load(object sender, EventArgs e)
         {
             lstScore.DataSource = score;
             lblMsg.Text = "";
-
         }
+
         // 按 [查詢] 鈕執行此事件處理函式
         private void btnSearch_Click(object sender, EventArgs e)
         {

@@ -119,4 +119,3 @@ namespace BindingManagerBase1
         }
     }
 }
-

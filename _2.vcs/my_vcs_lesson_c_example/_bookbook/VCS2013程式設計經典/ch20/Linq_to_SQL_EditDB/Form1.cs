@@ -12,12 +12,13 @@ namespace Linq_to_SQL_EditDB
 {
     public partial class Form1 : Form
     {
+        ch20DBDataContext dc = new ch20DBDataContext();
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        ch20DBDataContext dc = new ch20DBDataContext();
         // 表單載入時執行此事件處理函式
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -32,6 +33,7 @@ namespace Linq_to_SQL_EditDB
                          };
             dataGridView1.DataSource = result;
         }
+
         // 按下 [新增] 鈕執行此事件處理函式 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -51,6 +53,7 @@ namespace Linq_to_SQL_EditDB
                 MessageBox.Show(ex.Message);
             }
         }
+
         // 按下 [修改] 鈕執行此事件處理函式 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
@@ -70,6 +73,7 @@ namespace Linq_to_SQL_EditDB
                 MessageBox.Show(ex.Message);
             }
         }
+
         // 按 [刪除] 鈕執行此事件處理函式 
         private void btnDel_Click(object sender, EventArgs e)
         {

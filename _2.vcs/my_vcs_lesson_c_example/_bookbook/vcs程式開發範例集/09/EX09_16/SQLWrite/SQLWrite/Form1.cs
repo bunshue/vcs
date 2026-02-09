@@ -13,6 +13,7 @@ namespace SQLWrite
     public partial class Form1 : Form
     {
         SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09");
+
         public Form1()
         {
             InitializeComponent();
@@ -23,24 +24,26 @@ namespace SQLWrite
             ControlInfo(false);
             showinfo();
         }
+
         private void showinfo()
         {
             using (SqlDataAdapter da = new SqlDataAdapter("select * from 員工表", con))
             {
+                // DB => DA => DT => DV => DGV
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 DataView dv = new DataView(dt);
                 this.dataGridView1.DataSource = dv;
-
             }
         }
+
         private void tbADD_Click(object sender, EventArgs e)
         {
             ControlInfo(true);
             this.tbSave.Enabled = true;
             this.tbADD.Enabled = false;
-
         }
+
         private void ControlInfo(Boolean B)
         {
             foreach (Control ct in this.groupBox1.Controls)
@@ -59,6 +62,7 @@ namespace SQLWrite
                 }
             }
         }
+
         private void tbSave_Click(object sender, EventArgs e)
         {
             StringBuilder strSQL = new StringBuilder();
@@ -80,3 +84,4 @@ namespace SQLWrite
         }
     }
 }
+

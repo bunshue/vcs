@@ -81,7 +81,7 @@
             this.tbADD.Image = ((System.Drawing.Image)(resources.GetObject("tbADD.Image")));
             this.tbADD.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbADD.Name = "tbADD";
-            this.tbADD.Size = new System.Drawing.Size(51, 22);
+            this.tbADD.Size = new System.Drawing.Size(49, 22);
             this.tbADD.Text = "新增";
             this.tbADD.Click += new System.EventHandler(this.tbADD_Click);
             // 
@@ -90,7 +90,7 @@
             this.tbSave.Image = ((System.Drawing.Image)(resources.GetObject("tbSave.Image")));
             this.tbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbSave.Name = "tbSave";
-            this.tbSave.Size = new System.Drawing.Size(49, 22);
+            this.tbSave.Size = new System.Drawing.Size(51, 22);
             this.tbSave.Text = "保存";
             this.tbSave.Click += new System.EventHandler(this.tbSave_Click);
             // 
@@ -161,7 +161,7 @@
             this.tbSave});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(340, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(791, 25);
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -179,7 +179,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(340, 260);
+            this.ClientSize = new System.Drawing.Size(791, 576);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.toolStrip1);

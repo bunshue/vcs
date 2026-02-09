@@ -37,27 +37,24 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(31, 29);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(23, 23);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 15);
+            this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "檔案路徑";
             // 
             // txtInput
             // 
-            this.txtInput.Location = new System.Drawing.Point(109, 25);
-            this.txtInput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtInput.Location = new System.Drawing.Point(82, 20);
             this.txtInput.Name = "txtInput";
-            this.txtInput.Size = new System.Drawing.Size(132, 25);
+            this.txtInput.Size = new System.Drawing.Size(100, 22);
             this.txtInput.TabIndex = 1;
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(263, 19);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSearch.Location = new System.Drawing.Point(197, 15);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(100, 35);
+            this.btnSearch.Size = new System.Drawing.Size(75, 28);
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "搜尋";
             this.btnSearch.UseVisualStyleBackColor = true;
@@ -65,25 +62,26 @@
             // 
             // txtFileName
             // 
-            this.txtFileName.Location = new System.Drawing.Point(34, 79);
+            this.txtFileName.Location = new System.Drawing.Point(26, 63);
+            this.txtFileName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtFileName.Multiline = true;
             this.txtFileName.Name = "txtFileName";
             this.txtFileName.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtFileName.Size = new System.Drawing.Size(329, 153);
+            this.txtFileName.Size = new System.Drawing.Size(248, 123);
             this.txtFileName.TabIndex = 3;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(403, 256);
+            this.ClientSize = new System.Drawing.Size(596, 445);
             this.Controls.Add(this.txtFileName);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtInput);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

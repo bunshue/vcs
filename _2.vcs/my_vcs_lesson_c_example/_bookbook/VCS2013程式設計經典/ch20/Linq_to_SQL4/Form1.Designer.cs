@@ -35,20 +35,18 @@
             // 
             // txtResult
             // 
-            this.txtResult.Location = new System.Drawing.Point(35, 85);
-            this.txtResult.Margin = new System.Windows.Forms.Padding(4);
+            this.txtResult.Location = new System.Drawing.Point(26, 68);
             this.txtResult.Multiline = true;
             this.txtResult.Name = "txtResult";
             this.txtResult.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtResult.Size = new System.Drawing.Size(324, 204);
+            this.txtResult.Size = new System.Drawing.Size(244, 164);
             this.txtResult.TabIndex = 8;
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(261, 24);
-            this.btnOk.Margin = new System.Windows.Forms.Padding(4);
+            this.btnOk.Location = new System.Drawing.Point(196, 19);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(100, 35);
+            this.btnOk.Size = new System.Drawing.Size(75, 28);
             this.btnOk.TabIndex = 7;
             this.btnOk.Text = "確定";
             this.btnOk.UseVisualStyleBackColor = true;
@@ -57,20 +55,20 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(35, 31);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBox1.Location = new System.Drawing.Point(26, 25);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(193, 23);
+            this.comboBox1.Size = new System.Drawing.Size(146, 20);
             this.comboBox1.TabIndex = 6;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(398, 316);
+            this.ClientSize = new System.Drawing.Size(684, 531);
             this.Controls.Add(this.txtResult);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.comboBox1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
