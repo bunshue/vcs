@@ -16,5 +16,10 @@ namespace xCh4_1_2_11
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

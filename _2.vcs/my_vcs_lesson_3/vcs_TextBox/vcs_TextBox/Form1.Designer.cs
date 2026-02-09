@@ -62,11 +62,17 @@
             this.bt_clear = new System.Windows.Forms.Button();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.lb_CustomTextBoxGroup3 = new System.Windows.Forms.Label();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox2
@@ -255,7 +261,7 @@
             this.richTextBox1.Size = new System.Drawing.Size(350, 105);
             this.richTextBox1.TabIndex = 18;
             this.richTextBox1.Text = "textBox4.MaxLength = 3;    //設最多只能輸入3位數\ntextBox4.ReadOnly = true;   //設為唯讀不能輸入\nte" +
-    "xtBox4.TabIndex = 0;     //設為第一個停駐焦點\ntextBox4.Focus();    //將停駐焦點移到txtDegree";
+                "xtBox4.TabIndex = 0;     //設為第一個停駐焦點\ntextBox4.Focus();    //將停駐焦點移到txtDegree";
             // 
             // textBox4
             // 
@@ -391,7 +397,7 @@
             this.textBox_use_scrollbar.Size = new System.Drawing.Size(262, 38);
             this.textBox_use_scrollbar.TabIndex = 23;
             this.textBox_use_scrollbar.Text = "TextBox加ScrollBar 1 TextBox加ScrollBar 2 TextBox加ScrollBar 3 TextBox加ScrollBar 4 T" +
-    "extBox加ScrollBar 5 TextBox加ScrollBar 6 TextBox加ScrollBar 7 TextBox加ScrollBar 8";
+                "extBox加ScrollBar 5 TextBox加ScrollBar 6 TextBox加ScrollBar 7 TextBox加ScrollBar 8";
             // 
             // bt_clear
             // 
@@ -422,11 +428,68 @@
             this.lb_CustomTextBoxGroup3.TabIndex = 38;
             this.lb_CustomTextBoxGroup3.Text = "TextBox不能使用貼上";
             // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.textBox10);
+            this.groupBox6.Controls.Add(this.label13);
+            this.groupBox6.Controls.Add(this.textBox9);
+            this.groupBox6.Controls.Add(this.label12);
+            this.groupBox6.Location = new System.Drawing.Point(1030, 240);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(300, 200);
+            this.groupBox6.TabIndex = 22;
+            this.groupBox6.TabStop = false;
+            // 
+            // textBox9
+            // 
+            this.textBox9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox9.Location = new System.Drawing.Point(31, 65);
+            this.textBox9.MaxLength = 0;
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(154, 30);
+            this.textBox9.TabIndex = 19;
+            this.textBox9.Text = "ABCDEFG";
+            this.textBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox9.Enter += new System.EventHandler(this.textBox9_Enter);
+            this.textBox9.Leave += new System.EventHandler(this.textBox9_Leave);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label12.Location = new System.Drawing.Point(10, 27);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(218, 19);
+            this.label12.TabIndex = 18;
+            this.label12.Text = "TextBox 使用 Enter / Leave";
+            // 
+            // textBox10
+            // 
+            this.textBox10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox10.Location = new System.Drawing.Point(31, 154);
+            this.textBox10.MaxLength = 0;
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new System.Drawing.Size(154, 30);
+            this.textBox10.TabIndex = 21;
+            this.textBox10.Text = "ABCDEFG";
+            this.textBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label13.Location = new System.Drawing.Point(10, 119);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(280, 19);
+            this.label13.TabIndex = 20;
+            this.label13.Text = "TextBox 使用 GotFocus / LostFocus";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1308, 708);
+            this.ClientSize = new System.Drawing.Size(1365, 708);
+            this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.lb_CustomTextBoxGroup3);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox2);
@@ -457,6 +520,8 @@
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -498,6 +563,11 @@
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Label lb_CustomTextBoxGroup3;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.Label label13;
     }
 }
 

@@ -26,7 +26,7 @@ namespace Linq_to_DataSet1
         {
             using (SqlConnection cn = new SqlConnection())
             {
-                cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;" +
+                cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
                    "AttachDbFilename=|DataDirectory|ch20DB.mdf;" +
                    "Integrated Security=True";
                 SqlDataAdapter daEmployee = new SqlDataAdapter

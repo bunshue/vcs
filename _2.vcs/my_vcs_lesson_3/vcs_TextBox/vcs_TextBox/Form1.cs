@@ -36,7 +36,6 @@ namespace vcs_TextBox
 
             this.AcceptButton = button5;            //在表單按enter就執行button5按鈕的動作
 
-
             textBox4.MaxLength = 3;    //設最多只能輸入3位數
             textBox4.ReadOnly = false;   //設為唯讀不能輸入, 改了
             textBox4.TabIndex = 0;     //設為第一個停駐焦點
@@ -51,7 +50,6 @@ namespace vcs_TextBox
             goal.Location = new Point(470, 500);
             this.Controls.Add(goal);//向窗體中添加自定義TextBox控件goal
 
-
             this.RightKeyCarte = new CustomTextBoxGroup2();//實例化該類的對象
             this.RightKeyCarte.Parent = this; //設定自定義控件的父容器為當前窗口
             RightKeyCarte.Text = "禁止使用滑鼠右鍵";
@@ -59,14 +57,16 @@ namespace vcs_TextBox
 
             this.Controls.Add(this.RightKeyCarte);//在當前窗體中添加自定義控件
 
-
             textBox8.KeyPress += new KeyPressEventHandler(textBox8_KeyPress);
             label11.Text = "TextBox只允許僅允許\n數字, Enter, Backspace, +-*/()";
 
             lb_CustomTextBoxGroup3.Location = new Point(12, 650);
             this.NoStiky.Parent = this;//設定自定義控件的父容器為當前窗口
-            NoStiky.Location = new Point(12, 650+30);
+            NoStiky.Location = new Point(12, 650 + 30);
             this.Controls.Add(this.NoStiky);//在當前窗體中添加自定義控件
+
+            textBox10.GotFocus += new EventHandler(textBox10_GotFocus);
+            textBox10.LostFocus += new EventHandler(textBox10_LostFocus);
         }
 
         void show_item_location()
@@ -82,8 +82,10 @@ namespace vcs_TextBox
             dx = 200 + 5;
             dy = 60 + 5;
 
-            richTextBox2.Size = new Size(300, 600);
-            richTextBox2.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            groupBox6.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+
+            richTextBox2.Size = new Size(300, 500);
+            richTextBox2.Location = new Point(x_st + dx * 5, y_st + dy * 3 + 20);
             bt_clear.Location = new Point(richTextBox2.Location.X + richTextBox2.Size.Width - bt_clear.Size.Width, richTextBox2.Location.Y + richTextBox2.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1380, 780);
@@ -249,5 +251,48 @@ namespace vcs_TextBox
         }
         //拖曳文字內容到其他TextBox SP
 
+        private void textBox9_Enter(object sender, EventArgs e)
+        {
+            // 如果使用者利用Tab鍵移到textBox9物件時，
+            // 更換前景與背景顏色
+            if (textBox9.Text != String.Empty)
+            {
+                textBox9.ForeColor = Color.Red;
+                textBox9.BackColor = Color.Black;
+                // 移動插入點(selection pointer)到最後
+                textBox9.Select(textBox9.Text.Length, 0);
+            }
+        }
+
+        private void textBox9_Leave(object sender, EventArgs e)
+        {
+            // 如果使用者利用Tab鍵離開textBox9物件時，
+            // 更換前景與背景色
+            textBox9.ForeColor = Color.Black;
+            textBox9.BackColor = Color.White;
+            textBox9.Select(0, 0);
+        }
+
+        private void textBox10_GotFocus(object sender, EventArgs e)
+        {
+            // 如果使用者利用Tab鍵移到textBox10物件時，
+            // 更換前景與背景顏色
+            if (textBox10.Text != String.Empty)
+            {
+                textBox10.ForeColor = Color.Red;
+                textBox10.BackColor = Color.Black;
+                // 移動插入點(selection pointer)到最後
+                textBox10.Select(textBox10.Text.Length, 0);
+            }
+        }
+
+        private void textBox10_LostFocus(object sender, EventArgs e)
+        {
+            // 如果使用者利用Tab鍵離開textBox10物件時，
+            // 更換前景與背景色
+            textBox10.ForeColor = Color.Black;
+            textBox10.BackColor = Color.White;
+            textBox10.Select(0, 0);
+        }
     }
 }
