@@ -21,7 +21,7 @@ namespace WinImageList
 
         // 建立 photo 字串陣列用來存放照片的名稱
         // 陣列元素索引範圍photo[0]~photo[4]
-        string[] photo = new string[]{ "企鵝", "沙漠", "無尾熊", "菊花", "鬱金香" };
+        string[] photo = new string[] { "企鵝", "沙漠", "無尾熊", "菊花", "鬱金香" };
 
         // 定義ShowPic()方法，可在pictureBox1顯示目前的圖片
         // 在lblShow顯示目前的圖片名稱
@@ -31,6 +31,7 @@ namespace WinImageList
             pictureBox1.Image = imageList1.Images[num];
             lblShow.Text = "圖片名稱：" + photo[num];
         }
+
         // === 表單載入時執行
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -45,25 +46,28 @@ namespace WinImageList
             // 設定影像的色彩數目為Depth32Bit，以便呈現較佳的畫質
             imageList1.ColorDepth = ColorDepth.Depth32Bit;
             // 呼叫ShowPic()方法，以便在pictureBox1顯示目前的圖片
-            ShowPic(); 
+            ShowPic();
         }
+
         // ===  按 [第一張] 鈕執行
         private void btnFirst_Click(object sender, EventArgs e)
         {
             num = 0;
             ShowPic();
         }
+
         // === 按 [上一張] 鈕執行
         private void btnPrev_Click(object sender, EventArgs e)
         {
             num--;  // num圖片索引編號減1，表示顯示上一張
             // 若num圖片索引編號小於1，則另num由最後一張開始
-            if (num < 0)   
+            if (num < 0)
             {
                 num = photo.GetUpperBound(0);
             }
             ShowPic();
         }
+
         // ===  按 [下一張] 鈕執行
         private void btnNext_Click(object sender, EventArgs e)
         {
@@ -76,6 +80,7 @@ namespace WinImageList
             }
             ShowPic();
         }
+
         // === 按 [最末張] 鈕執行
         private void btnLast_Click(object sender, EventArgs e)
         {

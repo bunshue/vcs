@@ -32,11 +32,14 @@ namespace DataBindingDemo1
                 // ComboBox控制項資料繫結
                 cboId.DataSource = ds;
                 cboId.DisplayMember = "員工.編號";
+
                 // TextBox控制項資料繫結
                 txtName.DataBindings.Add("Text", ds, "員工.姓名");
                 txtTel.DataBindings.Add("Text", ds, "員工.電話");
                 txtPosition.DataBindings.Add("Text", ds, "員工.職稱");
+
                 txtSalary.DataBindings.Add("Text", ds, "員工.薪資");
+
                 // DataGridView控制項資料繫結
                 dataGridView1.DataSource = ds;
                 dataGridView1.DataMember = "員工";

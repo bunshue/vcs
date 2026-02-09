@@ -20,6 +20,7 @@ namespace DataViewDemo1
         }
 
         DataView dvScore;  // 宣告DataView物件dvScore
+
         // 表單載入時執行此事件
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -60,6 +61,7 @@ namespace DataViewDemo1
             {
                 sortStr += " ASC";
             }
+            richTextBox1.Text += "Filter : " + txtFilter.Text + "\n";
             dvScore.RowFilter = txtFilter.Text;
             dvScore.Sort = sortStr;
             dataGridView1.DataSource = dvScore;

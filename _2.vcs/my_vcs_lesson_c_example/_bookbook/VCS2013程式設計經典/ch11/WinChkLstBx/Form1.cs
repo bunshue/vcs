@@ -91,7 +91,6 @@ namespace WinChkLstBx
         {
         }
 
-
         // SetLot可用來設定num個min~max之間的亂數，並將亂數值放入choose陣列內
         void SetLot(ref  int[] choose, int min, int max, int num)
         {

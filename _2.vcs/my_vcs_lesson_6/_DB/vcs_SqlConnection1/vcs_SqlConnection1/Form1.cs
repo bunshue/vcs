@@ -532,10 +532,37 @@ namespace vcs_SqlConnection1
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //RelationsDemo
+
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
+                    @"AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\Northwind.mdf;" +
+                    "Integrated Security=True";
+
+                DataSet ds = new DataSet();
+
+                SqlDataAdapter daCategory = new SqlDataAdapter("SELECT * FROM 產品類別", cn);
+                daCategory.Fill(ds, "產品類別");
+
+                SqlDataAdapter daProduct = new SqlDataAdapter("SELECT * FROM 產品資料", cn);
+                daProduct.Fill(ds, "產品資料");
+
+                ds.Relations.Add("FK_產品資料_產品類別", ds.Tables["產品類別"].Columns["類別編號"], ds.Tables["產品資料"].Columns["類別編號"]);
+
+                dataGridView1.DataSource = ds;
+                dataGridView1.DataMember = "產品類別";
+
+                dataGridView2.DataSource = ds;
+                dataGridView2.DataMember = "產品類別.FK_產品資料_產品類別";
+            }
+
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
+            //讀取新增修改刪除
+
         }
 
         private void button9_Click(object sender, EventArgs e)
