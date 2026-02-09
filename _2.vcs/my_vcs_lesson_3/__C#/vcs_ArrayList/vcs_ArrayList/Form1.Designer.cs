@@ -58,6 +58,7 @@
             this.bt_arrayList04 = new System.Windows.Forms.Button();
             this.bt_arrayList02 = new System.Windows.Forms.Button();
             this.bt_arrayList03 = new System.Windows.Forms.Button();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -68,7 +69,7 @@
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox1.Location = new System.Drawing.Point(623, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(383, 594);
+            this.richTextBox1.Size = new System.Drawing.Size(383, 641);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -286,7 +287,7 @@
             this.groupBox2.Controls.Add(this.bt_arrayList03);
             this.groupBox2.Location = new System.Drawing.Point(348, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(260, 465);
+            this.groupBox2.Size = new System.Drawing.Size(260, 450);
             this.groupBox2.TabIndex = 19;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "ArrayList";
@@ -388,11 +389,21 @@
             this.bt_arrayList03.UseVisualStyleBackColor = true;
             this.bt_arrayList03.Click += new System.EventHandler(this.bt_arrayList03_Click);
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 12;
+            this.listBox1.Location = new System.Drawing.Point(12, 505);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(218, 124);
+            this.listBox1.TabIndex = 11;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1006, 594);
+            this.ClientSize = new System.Drawing.Size(1006, 641);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.bt_clear);
@@ -439,6 +450,7 @@
         private System.Windows.Forms.Button bt_arrayList04;
         private System.Windows.Forms.Button bt_arrayList02;
         private System.Windows.Forms.Button bt_arrayList03;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 

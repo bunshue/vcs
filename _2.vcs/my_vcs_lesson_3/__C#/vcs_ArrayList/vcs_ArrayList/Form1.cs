@@ -40,7 +40,7 @@ namespace vcs_ArrayList
 
             richTextBox1.Text += "讀出系統變數至ArrayList\n";
             pdf_filename_ArrayListData = Properties.Settings.Default.pdf_filenames;
-            show_pdf_filename_ArrayListData();
+            //show_pdf_filename_ArrayListData(); NG
         }
 
         void show_item_location()
@@ -153,11 +153,8 @@ namespace vcs_ArrayList
             ArrayList list = new ArrayList();
 
             list.Add("alive");
-
             list.Add("silver");
-
             list.Add("dog");
-
             list.Add("Ftp");
 
             //d.SetData("para", list);
@@ -169,6 +166,9 @@ namespace vcs_ArrayList
 
                 //Console.WriteLine("you will see" + s);
             }
+
+            //顯示在 listBox 上
+            listBox1.DataSource = list;
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -393,4 +393,3 @@ namespace vcs_ArrayList
         }
     }
 }
-

@@ -133,7 +133,6 @@ namespace vcs_SqlConnection1
         {
             // 資料庫連線參數, 連接字串
             String cnStr0 = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\MyDB0.mdf;Integrated Security=True;Connect Timeout=30";
-            //String cnStr0 = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\VisualC#2015基礎必修課\2015範例程式\data\MyDB.mdf;Integrated Security=True;Connect Timeout=30";
 
             using (SqlConnection cn = new SqlConnection(cnStr0))
             {
@@ -154,7 +153,7 @@ namespace vcs_SqlConnection1
                 }
             }
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //新增
 
@@ -212,8 +211,8 @@ namespace vcs_SqlConnection1
             }
             */
 
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
-            //3030
             //刪除
             /*
             id = "A008";
