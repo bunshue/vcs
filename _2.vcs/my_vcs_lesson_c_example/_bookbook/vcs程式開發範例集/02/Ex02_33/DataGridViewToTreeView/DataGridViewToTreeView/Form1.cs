@@ -23,7 +23,7 @@ namespace DataGridViewToTreeView
         //視窗加載時，顯示原有的數據
         private void Form1_Load(object sender, EventArgs e)
         {
-            #region 在DataGridView及TreeView中顯示數據
+            //#region 在DataGridView及TreeView中顯示數據
             string connString = "server=.;database=pubs;integrated security=sspi";
             SqlConnection conn = new SqlConnection(connString);
             conn.Open();
@@ -35,7 +35,7 @@ namespace DataGridViewToTreeView
 
             TreeNode treeNode = new TreeNode("使用者訊息", 0, 0);
             treeView1.Nodes.Add(treeNode);
-            #endregion
+            //#endregion
 
             //預設情況下追加節點
             追加節點ToolStripMenuItem.Checked = true;
@@ -68,7 +68,7 @@ namespace DataGridViewToTreeView
         {
             if (追加節點ToolStripMenuItem.Checked == true)
             {
-                #region 程式碼區域
+                //#region 程式碼區域
                 if (recordInfo != null && recordInfo.Length != 0)
                 {
                     //用雙重for循環搜尋數組recordInfo中的內容
@@ -107,9 +107,9 @@ namespace DataGridViewToTreeView
                         }
                     }
                 }
-
-                #endregion
+                //#endregion
             }
+
             if (清空內容ToolStripMenuItem.Checked == true)
             {
                 if (treeView1.SelectedNode.Nodes.Count != 0)
@@ -118,7 +118,7 @@ namespace DataGridViewToTreeView
                     TreeNode treeNode = new TreeNode("使用者訊息", 0, 0);
                     treeView1.Nodes.Add(treeNode);
                     treeView1.SelectedNode = treeNode;
-                    #region 程式碼區域
+                    //#region 程式碼區域
                     if (recordInfo != null && recordInfo.Length != 0)
                     {
                         //用雙重for循環搜尋數組recordInfo中的內容
@@ -157,16 +157,14 @@ namespace DataGridViewToTreeView
                             }
                         }
                     }
-
-                    #endregion
+                    //#endregion
                     追加節點ToolStripMenuItem.Checked = true;
                     清空內容ToolStripMenuItem.Checked = false;
                 }
-
             }
         }
 
-        #region 預設項的設定
+        //#region 預設項的設定
         private void 清空內容ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (追加節點ToolStripMenuItem.Checked == true)
@@ -184,7 +182,6 @@ namespace DataGridViewToTreeView
                 清空內容ToolStripMenuItem.Checked = false;
             }
         }
-
-        #endregion
+        //#endregion
     }
 }

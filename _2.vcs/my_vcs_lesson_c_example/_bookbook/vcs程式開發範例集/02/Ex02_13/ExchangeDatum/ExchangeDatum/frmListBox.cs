@@ -5,7 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Data.SqlClient;
+
 namespace ExchangeDatum
 {
     public partial class frmListBox : Form
@@ -19,6 +21,7 @@ namespace ExchangeDatum
         {
 
         }
+
         public void AddList()//²K¥[¼Æ¾Ú
         {
             SqlConnection con = new SqlConnection("server=(local);integrated security=sspi;database=db_02_1");
@@ -53,6 +56,7 @@ namespace ExchangeDatum
             }
             lbChoose.Items.Clear();
         }
+
         private void frmListBox_Load(object sender, EventArgs e)
         {
             AddList();
@@ -74,7 +78,7 @@ namespace ExchangeDatum
                 this.lbSocure.Items.Add(this.lbChoose.SelectedItem.ToString());
                 this.lbChoose.Items.Remove(this.lbChoose.SelectedItem);
             }
-
         }
     }
 }
+

@@ -566,6 +566,20 @@ namespace vcs_SqlConnection1
 
         private void button9_Click(object sender, EventArgs e)
         {
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
+                    @"AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch18DB.mdf;" +
+                    "Integrated Security=True";
+
+                // 建立DataSet物件ds
+                // 在ds物件的DataTable內填入 [會員] 資料表的所有記錄
+                DataSet ds = new DataSet();  // 建立DataSet來儲存Table
+                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM 會員", cn);
+                da.Fill(ds, "會員");  // 將DataAdapter查詢之後的結果填充至DataSet
+
+                dataGridView1.DataSource = ds.Tables["會員"];
+            }
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -907,6 +921,20 @@ namespace vcs_SqlConnection1
 
         private void button17_Click(object sender, EventArgs e)
         {
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
+                    @"AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch18DB.mdf;" +
+                    "Integrated Security=True";
+                SqlDataAdapter daEmployee = new SqlDataAdapter("SELECT * FROM 員工 ORDER BY 編號 DESC", cn);
+                DataSet ds = new DataSet();
+                daEmployee.Fill(ds, "員工");
+
+                // DataGridView控制項資料繫結
+                dataGridView1.DataSource = ds;
+                dataGridView1.DataMember = "員工";
+            }
+
         }
 
         private void button18_Click(object sender, EventArgs e)
