@@ -13,14 +13,8 @@ namespace vcs_DragPictureA
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         // The currently loaded PictureBoxes.
-        private List<PictureBox> PictureBoxes =
-            new List<PictureBox>();
+        private List<PictureBox> PictureBoxes = new List<PictureBox>();
         private const int PictureMargin = 8;
 
         // A placeholder to ensure that the Panel
@@ -34,6 +28,13 @@ namespace vcs_DragPictureA
         // Used to drag PictureBoxes.
         private PictureBox DragPic = null;
         private Point DragOffset;
+
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
 
         // Create the placeholder PictureBox.
         private void Form1_Load(object sender, EventArgs e)
@@ -57,7 +58,10 @@ namespace vcs_DragPictureA
             {
                 pic.Location = new Point(x, y);
                 x += pic.Width + PictureMargin;
-                if (ymax < pic.Height) ymax = pic.Height;
+                if (ymax < pic.Height)
+                {
+                    ymax = pic.Height;
+                }
             }
 
             // Position one placeholder PictureBox.
@@ -107,9 +111,7 @@ namespace vcs_DragPictureA
                 Point parent_point = panel1.PointToClient(screen_point);
 
                 // Display the context menu.
-                ShowContextMenu(new Point(
-                    parent_point.X,
-                    parent_point.Y));
+                ShowContextMenu(new Point(parent_point.X, parent_point.Y));
             }
         }
 
@@ -134,7 +136,10 @@ namespace vcs_DragPictureA
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
             // Ignore left mouse clicks.
-            if (e.Button != MouseButtons.Right) return;
+            if (e.Button != MouseButtons.Right)
+            {
+                return;
+            }
 
             // Display the context menu.
             ShowContextMenu(e.Location);
@@ -158,9 +163,7 @@ namespace vcs_DragPictureA
 
         private void mnuDeletePicture_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(
-                "Are you sure you want to delete this picture?",
-                "Delete Picture?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("Are you sure you want to delete this picture?", "Delete Picture?", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 panel1.Controls.Remove(PictureBoxes[ClickedIndex]);
                 PictureBoxes.RemoveAt(ClickedIndex);
@@ -230,10 +233,8 @@ namespace vcs_DragPictureA
             }
 
             // Enable and disable contect menu items.
-            mnuMoveLeft.Enabled =
-                (clicked_on_picture && (ClickedIndex > 0));
-            mnuMoveRight.Enabled =
-                (clicked_on_picture && (ClickedIndex < PictureBoxes.Count - 1));
+            mnuMoveLeft.Enabled = (clicked_on_picture && (ClickedIndex > 0));
+            mnuMoveRight.Enabled = (clicked_on_picture && (ClickedIndex < PictureBoxes.Count - 1));
             mnuDeletePicture.Enabled = clicked_on_picture;
             mnuInsertPicture.Enabled = !clicked_on_picture;
 
@@ -296,7 +297,9 @@ namespace vcs_DragPictureA
                     {
                         //richTextBox1.Text += f + "\n";
                         if (f.ToLower().EndsWith(".jpg") || f.ToLower().EndsWith(".png"))
+                        {
                             filenames.Add(f);
+                        }
                     }
                 }
                 var fnames2 = Directory.GetFiles(folder_name);
@@ -304,7 +307,9 @@ namespace vcs_DragPictureA
                 {
                     //richTextBox1.Text += f + "\n";
                     if (f.ToLower().EndsWith(".jpg") || f.ToLower().EndsWith(".png"))
+                    {
                         filenames.Add(f);
+                    }
                 }
             }
             catch (Exception ex)

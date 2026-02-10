@@ -442,7 +442,6 @@ namespace vcs_ImageViewer
 
             // 画像の描画
             DrawImage();
-
         }
 
         /// <summary>

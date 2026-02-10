@@ -7,13 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-
 using System.IO;    //for Directory
 using System.Collections;   //for ArrayList
 
 //應改成 vcs_DynamicAddRemoveControls8_MergeMap
 //切割一圖 並做成拼圖
-
 
 namespace vcs_DragPicture9
 {

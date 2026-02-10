@@ -103,7 +103,6 @@ namespace vcs_PictureBox
 
                 //the same
                 //pictureBox1.Image = Image.FromFile(openFileDialog1.FileName);
-
             }
         }
 
@@ -123,7 +122,9 @@ namespace vcs_PictureBox
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             if (pictureBox1.Image == null)
+            {
                 return;
+            }
 
             flag_mouse_down = true;
             mouse_down_position_x = e.X;
@@ -135,7 +136,9 @@ namespace vcs_PictureBox
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (pictureBox1.Image == null)
+            {
                 return;
+            }
 
             if (flag_mouse_down == true)
             {
@@ -146,13 +149,17 @@ namespace vcs_PictureBox
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             if (pictureBox1.Image == null)
+            {
                 return;
+            }
 
             mouse_up_position_x = e.X;
             mouse_up_position_y = e.Y;
 
             if ((mouse_down_position_x < 0) || (mouse_down_position_y < 0) || (mouse_up_position_x < 0) || (mouse_up_position_y < 0))
+            {
                 return;
+            }
 
             richTextBox1.Text += "MouseUp   (" + e.X.ToString() + ", " + e.Y + ") 畫矩形\n";
             //g.DrawRectangle(new Pen(Color.Black), new Rectangle(mouse_down_position_x, mouse_down_position_y, mouse_up_position_x - mouse_down_position_x, mouse_up_position_y - mouse_down_position_y));
@@ -178,18 +185,26 @@ namespace vcs_PictureBox
                     hh = mouse_up_position_y - mouse_down_position_y;
                     cropArea = new Rectangle(mouse_down_position_x, mouse_down_position_y, ww, hh);
                     if ((mouse_down_position_x + ww) > W)
+                    {
                         flag_crop_area_valid = false;
+                    }
                     if ((mouse_down_position_y + hh) > H)
+                    {
                         flag_crop_area_valid = false;
+                    }
                 }
                 else//往上
                 {
                     hh = mouse_down_position_y - mouse_up_position_y;
                     cropArea = new Rectangle(mouse_down_position_x, mouse_up_position_y, ww, hh);
                     if ((mouse_down_position_x + ww) > W)
+                    {
                         flag_crop_area_valid = false;
+                    }
                     if ((mouse_up_position_y + hh) > H)
+                    {
                         flag_crop_area_valid = false;
+                    }
                 }
             }
             else//往左
@@ -200,24 +215,36 @@ namespace vcs_PictureBox
                     hh = mouse_up_position_y - mouse_down_position_y;
                     cropArea = new Rectangle(mouse_up_position_x, mouse_down_position_y, ww, hh);
                     if ((mouse_up_position_x + ww) > W)
+                    {
                         flag_crop_area_valid = false;
+                    }
                     if ((mouse_down_position_y + hh) > H)
+                    {
                         flag_crop_area_valid = false;
+                    }
                 }
                 else//往上
                 {
                     hh = mouse_down_position_y - mouse_up_position_y;
                     cropArea = new Rectangle(mouse_up_position_x, mouse_up_position_y, ww, hh);
                     if ((mouse_up_position_x + ww) > W)
+                    {
                         flag_crop_area_valid = false;
+                    }
                     if ((mouse_up_position_y + hh) > H)
+                    {
                         flag_crop_area_valid = false;
+                    }
                 }
             }
             if (ww <= 0)
+            {
                 return;
+            }
             if (hh <= 0)
+            {
                 return;
+            }
 
             if (flag_crop_area_valid == true)
             {

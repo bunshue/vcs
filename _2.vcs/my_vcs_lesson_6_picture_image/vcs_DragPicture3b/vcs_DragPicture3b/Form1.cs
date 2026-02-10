@@ -14,6 +14,7 @@ namespace vcs_DragPicture3b
     public partial class Form1 : Form
     {
         string filename = @"D:\_git\vcs\_1.data\______test_files1\very_long_pic.jpg";
+        //string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
         private Bitmap bitmap1;
         private float CurrentScale;
@@ -53,8 +54,10 @@ namespace vcs_DragPicture3b
         private void PrepareGraphics()
         {
             // Skip it if we've been minimized.
-            if ((pictureBox1.ClientSize.Width == 0) ||
-                (pictureBox1.ClientSize.Height == 0)) return;
+            if ((pictureBox1.ClientSize.Width == 0) || (pictureBox1.ClientSize.Height == 0))
+            {
+                return;
+            }
 
             // Free old resources.
             if (VisibleGraphics != null)
@@ -65,9 +68,7 @@ namespace vcs_DragPicture3b
             }
 
             // Make the new Bitmap and Graphics.
-            VisibleImage = new Bitmap(
-                pictureBox1.ClientSize.Width,
-                pictureBox1.ClientSize.Height);
+            VisibleImage = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
             VisibleGraphics = Graphics.FromImage(VisibleImage);
             VisibleGraphics.InterpolationMode = InterpolationMode.High;
 
@@ -81,15 +82,33 @@ namespace vcs_DragPicture3b
             // Keep x and y within bounds.
             float scaled_width = CurrentScale * bitmap1.Width;
             int xmin = (int)(pictureBox1.ClientSize.Width - scaled_width);
-            if (xmin > 0) xmin = 0;
-            if (PicX < xmin) PicX = xmin;
-            else if (PicX > 0) PicX = 0;
+            if (xmin > 0)
+            {
+                xmin = 0;
+            }
+            if (PicX < xmin)
+            {
+                PicX = xmin;
+            }
+            else if (PicX > 0)
+            {
+                PicX = 0;
+            }
 
             float scaled_height = CurrentScale * bitmap1.Height;
             int ymin = (int)(pictureBox1.ClientSize.Height - scaled_height);
-            if (ymin > 0) ymin = 0;
-            if (PicY < ymin) PicY = ymin;
-            else if (PicY > 0) PicY = 0;
+            if (ymin > 0)
+            {
+                ymin = 0;
+            }
+            if (PicY < ymin)
+            {
+                PicY = ymin;
+            }
+            else if (PicY > 0)
+            {
+                PicY = 0;
+            }
         }
 
         // Draw the image at the correct scale and location.
@@ -109,13 +128,11 @@ namespace vcs_DragPicture3b
             };
 
             // Draw the whole image.
-            RectangleF source_rect = new RectangleF(
-                0, 0, bitmap1.Width, bitmap1.Height);
+            RectangleF source_rect = new RectangleF(0, 0, bitmap1.Width, bitmap1.Height);
 
             // Draw.
             VisibleGraphics.Clear(pictureBox1.BackColor);
-            VisibleGraphics.DrawImage(bitmap1,
-                dest_points, source_rect, GraphicsUnit.Pixel);
+            VisibleGraphics.DrawImage(bitmap1, dest_points, source_rect, GraphicsUnit.Pixel);
 
             // Update the display.
             pictureBox1.Refresh();
@@ -135,7 +152,10 @@ namespace vcs_DragPicture3b
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!Dragging) return;
+            if (!Dragging)
+            {
+                return;
+            }
 
             PicX += e.X - LastX;
             PicY += e.Y - LastY;
@@ -151,4 +171,3 @@ namespace vcs_DragPicture3b
         }
     }
 }
-

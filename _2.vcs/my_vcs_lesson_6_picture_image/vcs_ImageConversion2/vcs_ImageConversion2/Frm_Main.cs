@@ -33,6 +33,7 @@ namespace vcs_ImageConversion2
             tscbType.SelectedIndex = 0;             //設置第一個轉換類型被選中
             CheckForIllegalCrossThreadCalls = false;//屏蔽線程彈出的錯誤提示
         }
+
         private void toolStripButton3_Click(object sender, EventArgs e)//選擇轉換文件的按鈕
         {
             openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1\";
@@ -223,5 +224,3 @@ namespace vcs_ImageConversion2
         }
     }
 }
-
-

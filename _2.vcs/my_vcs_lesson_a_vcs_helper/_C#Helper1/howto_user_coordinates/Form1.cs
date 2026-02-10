@@ -9,11 +9,6 @@ namespace howto_user_coordinates
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         // The user's ellipses.
         private List<RectangleF> Ellipses = new List<RectangleF>();
         private List<Color> Colors = new List<Color>();
@@ -25,10 +20,21 @@ namespace howto_user_coordinates
         private const float DrawingScale = 50;
 
         // The world coordinate bounds.
-        private float Wxmin=0;
-        private float Wxmax=200;
-        private float Wymin=0;
-        private float Wymax=200;
+        private float Wxmin = 0;
+        private float Wxmax = 200;
+        private float Wymin = 0;
+        private float Wymax = 200;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Wxmax = this.pictureBox1.Width - 100;
+            Wymax = this.pictureBox1.Height - 100;
+        }
 
         private void Form1_Resize(object sender, EventArgs e)
         {
@@ -76,16 +82,8 @@ namespace howto_user_coordinates
                 if (Drawing)
                 {
                     thin_pen.Color = Color.Black;
-                    e.Graphics.DrawEllipse(thin_pen,
-                        Math.Min(StartPoint.X, EndPoint.X),
-                        Math.Min(StartPoint.Y, EndPoint.Y),
-                        Math.Abs(StartPoint.X - EndPoint.X),
-                        Math.Abs(StartPoint.Y - EndPoint.Y));
-                    e.Graphics.DrawRectangle(thin_pen,
-                        Math.Min(StartPoint.X, EndPoint.X),
-                        Math.Min(StartPoint.Y, EndPoint.Y),
-                        Math.Abs(StartPoint.X - EndPoint.X),
-                        Math.Abs(StartPoint.Y - EndPoint.Y));
+                    e.Graphics.DrawEllipse(thin_pen, Math.Min(StartPoint.X, EndPoint.X), Math.Min(StartPoint.Y, EndPoint.Y), Math.Abs(StartPoint.X - EndPoint.X), Math.Abs(StartPoint.Y - EndPoint.Y));
+                    e.Graphics.DrawRectangle(thin_pen, Math.Min(StartPoint.X, EndPoint.X), Math.Min(StartPoint.Y, EndPoint.Y), Math.Abs(StartPoint.X - EndPoint.X), Math.Abs(StartPoint.Y - EndPoint.Y));
                 }
             }
         }
@@ -103,7 +101,9 @@ namespace howto_user_coordinates
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (!Drawing)
+            {
                 return;
+            }
 
             // Get the end point.
             EndPoint = DeviceToWorld(e.Location);
@@ -112,7 +112,10 @@ namespace howto_user_coordinates
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            if (!Drawing) return;
+            if (!Drawing)
+            {
+                return;
+            }
             Drawing = false;
 
             // Get the end point.
@@ -121,14 +124,9 @@ namespace howto_user_coordinates
             // If the ellipse has non-zero size, add it to the list.
             if ((StartPoint.X != EndPoint.X) && (StartPoint.Y != EndPoint.Y))
             {
-                Ellipses.Add(new RectangleF(
-                    Math.Min(StartPoint.X, EndPoint.X),
-                    Math.Min(StartPoint.Y, EndPoint.Y),
-                    Math.Abs(StartPoint.X - EndPoint.X),
-                    Math.Abs(StartPoint.Y - EndPoint.Y)));
+                Ellipses.Add(new RectangleF(Math.Min(StartPoint.X, EndPoint.X), Math.Min(StartPoint.Y, EndPoint.Y), Math.Abs(StartPoint.X - EndPoint.X), Math.Abs(StartPoint.Y - EndPoint.Y)));
                 Colors.Add(RandomColor());
             }
-
             Refresh();
         }
 
@@ -154,15 +152,10 @@ namespace howto_user_coordinates
             Color.Purple,
             Color.SaddleBrown,
         };
+
         private Color RandomColor()
         {
             return RandomColors[rand.Next(0, RandomColors.Length)];
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            Wxmax = this.pictureBox1.Width - 100;
-            Wymax = this.pictureBox1.Height - 100;
         }
     }
 }

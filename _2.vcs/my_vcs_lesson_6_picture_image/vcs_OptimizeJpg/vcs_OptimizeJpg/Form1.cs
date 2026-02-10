@@ -15,13 +15,12 @@ namespace vcs_OptimizeJpg
     public partial class Form1 : Form
     {
         string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+        private Image image = null;
 
         public Form1()
         {
             InitializeComponent();
         }
-
-        private Image image = null;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -150,7 +149,6 @@ namespace vcs_OptimizeJpg
             {
                 richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
-
         }
     }
 }

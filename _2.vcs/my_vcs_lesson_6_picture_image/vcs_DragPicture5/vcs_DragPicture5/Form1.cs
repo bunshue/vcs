@@ -39,6 +39,7 @@ namespace vcs_DragPicture5
             pictureBox1.Width = 1200;
             pictureBox1.Height = 800;
             pictureBox1.Location = new Point(0, 0);
+            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
             pictureBox1.BackColor = SystemColors.ControlLight;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
 
@@ -187,10 +188,14 @@ namespace vcs_DragPicture5
                 Cursor = Cursors.Hand;
             }
             else
+            {
                 Cursor = Cursors.Default;
+            }
 
             if (flag_mouse_down == false)
+            {
                 return;
+            }
 
             pt_sp = e.Location; //終點座標
             //richTextBox1.Text += "Up : " + e.Location.ToString() + "\n";

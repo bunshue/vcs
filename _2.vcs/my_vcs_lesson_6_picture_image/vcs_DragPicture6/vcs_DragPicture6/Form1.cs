@@ -11,16 +11,16 @@ namespace vcs_DragPicture6
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         // The smiley image.
         private Bitmap Smiley;
 
         // The smiley image's location.
         private Rectangle SmileyLocation;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -29,8 +29,7 @@ namespace vcs_DragPicture6
             Smiley.MakeTransparent(Color.White);
 
             // Set the smiley's initial location.
-            SmileyLocation = new Rectangle(10, 10,
-                Smiley.Width, Smiley.Height);
+            SmileyLocation = new Rectangle(10, 10, Smiley.Width, Smiley.Height);
         }
 
         // Draw the picture over the background.
@@ -83,7 +82,9 @@ namespace vcs_DragPicture6
                     new_cursor = Cursors.Hand;
                 }
                 if (pictureBox1.Cursor != new_cursor)
+                {
                     pictureBox1.Cursor = new_cursor;
+                }
             }
         }
 
@@ -97,9 +98,10 @@ namespace vcs_DragPicture6
         private bool PointIsOverPicture(int x, int y)
         {
             // See if it's over the picture's bounding rectangle.
-            if ((x < SmileyLocation.Left) || (x >= SmileyLocation.Right) ||
-                (y < SmileyLocation.Top) || (y >= SmileyLocation.Bottom))
+            if ((x < SmileyLocation.Left) || (x >= SmileyLocation.Right) || (y < SmileyLocation.Top) || (y >= SmileyLocation.Bottom))
+            {
                 return false;
+            }
 
             // See if the point is above a non-transparent pixel.
             int i = x - SmileyLocation.X;
