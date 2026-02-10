@@ -17,34 +17,46 @@ namespace vcs_Draw_Polygons2
 {
     public partial class Form1 : Form
     {
+        private List<PointF> Points = new List<PointF>();
+        private PointF CurrentPoint;
+        private bool Drawing = false;
+        private int EnlargeBy = 0;
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private List<PointF> Points = new List<PointF>();
-        private PointF CurrentPoint;
-        private bool Drawing = false;
-        private int EnlargeBy = 0;
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
 
         private void picCanvas_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(picCanvas.BackColor);
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
+            e.Graphics.DrawString("左鍵點選頂點", new Font("標楷體", 30), new SolidBrush(Color.Green), new PointF(10, 10));
+            e.Graphics.DrawString("右鍵結束", new Font("標楷體", 30), new SolidBrush(Color.Green), new PointF(10, 10 + 40));
+
             if (Drawing)
             {
                 if (Points.Count >= 2)
+                {
                     e.Graphics.DrawLines(Pens.Red, Points.ToArray());
-                e.Graphics.DrawLine(Pens.Pink,
-                    Points[Points.Count - 1], CurrentPoint);
+                }
+                e.Graphics.DrawLine(Pens.Pink, Points[Points.Count - 1], CurrentPoint);
             }
             else
             {
                 if (Points.Count >= 3)
                 {
                     e.Graphics.DrawPolygon(Pens.Red, Points.ToArray());
-                    if (EnlargeBy > 0) DrawEnlargedPolygon(e.Graphics);
+                    if (EnlargeBy > 0)
+                    {
+                        DrawEnlargedPolygon(e.Graphics);
+                    }
                 }
             }
         }
@@ -63,7 +75,9 @@ namespace vcs_Draw_Polygons2
                         // Reverse the points.
                         List<PointF> pts = new List<PointF>();
                         for (int i = Points.Count - 1; i >= 0; i--)
+                        {
                             pts.Add(Points[i]);
+                        }
                         Points = pts;
                     }
                 }
@@ -83,7 +97,10 @@ namespace vcs_Draw_Polygons2
 
         private void picCanvas_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!Drawing) return;
+            if (!Drawing)
+            {
+                return;
+            }
             CurrentPoint = e.Location;
             picCanvas.Refresh();
         }
@@ -98,8 +115,7 @@ namespace vcs_Draw_Polygons2
         // Enlarge the polygon and draw it.
         private void DrawEnlargedPolygon(Graphics gr)
         {
-            List<PointF> enlarged_points =
-                GetEnlargedPolygon(Points, hscrPixels.Value);
+            List<PointF> enlarged_points = GetEnlargedPolygon(Points, hscrPixels.Value);
             gr.DrawPolygon(Pens.Green, enlarged_points.ToArray());
         }
 
@@ -113,47 +129,34 @@ namespace vcs_Draw_Polygons2
                 // Find the new location for point j.
                 // Find the points before and after j.
                 int i = (j - 1);
-                if (i < 0) i += num_points;
+                if (i < 0)
+                {
+                    i += num_points;
+                }
                 int k = (j + 1) % num_points;
 
                 // Move the points by the offset.
-                Vector v1 = new Vector(
-                    old_points[j].X - old_points[i].X,
-                    old_points[j].Y - old_points[i].Y);
+                Vector v1 = new Vector(old_points[j].X - old_points[i].X, old_points[j].Y - old_points[i].Y);
                 v1.Normalize();
                 v1 *= offset;
                 Vector n1 = new Vector(-v1.Y, v1.X);
 
-                PointF pij1 = new PointF(
-                    (float)(old_points[i].X + n1.X),
-                    (float)(old_points[i].Y + n1.Y));
-                PointF pij2 = new PointF(
-                    (float)(old_points[j].X + n1.X),
-                    (float)(old_points[j].Y + n1.Y));
+                PointF pij1 = new PointF((float)(old_points[i].X + n1.X), (float)(old_points[i].Y + n1.Y));
+                PointF pij2 = new PointF((float)(old_points[j].X + n1.X), (float)(old_points[j].Y + n1.Y));
 
-                Vector v2 = new Vector(
-                    old_points[k].X - old_points[j].X,
-                    old_points[k].Y - old_points[j].Y);
+                Vector v2 = new Vector(old_points[k].X - old_points[j].X, old_points[k].Y - old_points[j].Y);
                 v2.Normalize();
                 v2 *= offset;
                 Vector n2 = new Vector(-v2.Y, v2.X);
 
-                PointF pjk1 = new PointF(
-                    (float)(old_points[j].X + n2.X),
-                    (float)(old_points[j].Y + n2.Y));
-                PointF pjk2 = new PointF(
-                    (float)(old_points[k].X + n2.X),
-                    (float)(old_points[k].Y + n2.Y));
+                PointF pjk1 = new PointF((float)(old_points[j].X + n2.X), (float)(old_points[j].Y + n2.Y));
+                PointF pjk2 = new PointF((float)(old_points[k].X + n2.X), (float)(old_points[k].Y + n2.Y));
 
                 // See where the shifted lines ij and jk intersect.
                 bool lines_intersect, segments_intersect;
                 PointF poi, close1, close2;
-                FindIntersection(pij1, pij2, pjk1, pjk2,
-                    out lines_intersect, out segments_intersect,
-                    out poi, out close1, out close2);
-                Debug.Assert(lines_intersect,
-                    "Edges " + i + "-->" + j + " and " +
-                    j + "-->" + k + " are parallel");
+                FindIntersection(pij1, pij2, pjk1, pjk2, out lines_intersect, out segments_intersect, out poi, out close1, out close2);
+                Debug.Assert(lines_intersect, "Edges " + i + "-->" + j + " and " + j + "-->" + k + " are parallel");
 
                 enlarged_points.Add(poi);
             }
@@ -178,9 +181,7 @@ namespace vcs_Draw_Polygons2
             // Solve for t1 and t2
             float denominator = (dy12 * dx34 - dx12 * dy34);
 
-            float t1 =
-                ((p1.X - p3.X) * dy34 + (p3.Y - p1.Y) * dx34)
-                    / denominator;
+            float t1 = ((p1.X - p3.X) * dy34 + (p3.Y - p1.Y) * dx34) / denominator;
             if (float.IsInfinity(t1))
             {
                 // The lines are parallel (or close enough to it).
@@ -193,17 +194,13 @@ namespace vcs_Draw_Polygons2
             }
             lines_intersect = true;
 
-            float t2 =
-                ((p3.X - p1.X) * dy12 + (p1.Y - p3.Y) * dx12)
-                    / -denominator;
+            float t2 = ((p3.X - p1.X) * dy12 + (p1.Y - p3.Y) * dx12) / -denominator;
 
             // Find the point of intersection.
             intersection = new PointF(p1.X + dx12 * t1, p1.Y + dy12 * t1);
 
             // The segments intersect if t1 and t2 are between 0 and 1.
-            segments_intersect =
-                ((t1 >= 0) && (t1 <= 1) &&
-                 (t2 >= 0) && (t2 <= 1));
+            segments_intersect = ((t1 >= 0) && (t1 <= 1) && (t2 >= 0) && (t2 <= 1));
 
             // Find the closest points on the segments.
             if (t1 < 0)
@@ -249,9 +246,7 @@ namespace vcs_Draw_Polygons2
             float area = 0;
             for (int i = 0; i < num_points; i++)
             {
-                area +=
-                    (pts[i + 1].X - pts[i].X) *
-                    (pts[i + 1].Y + pts[i].Y) / 2;
+                area += (pts[i + 1].X - pts[i].X) * (pts[i + 1].Y + pts[i].Y) / 2;
             }
 
             // Return the result.

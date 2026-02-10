@@ -24,7 +24,6 @@ namespace vcs_MyEditor
             int width = this.ClientSize.Width;
             int height = this.ClientSize.Height - y;
             richTextBox1.Size = new Size(width, height);
-
         }
 
         private void Form1_Resize(object sender, EventArgs e)
@@ -35,7 +34,6 @@ namespace vcs_MyEditor
             int width = this.ClientSize.Width;
             int height = this.ClientSize.Height - y;
             richTextBox1.Size = new Size(width, height);
-
         }
 
         private void mOpen_Click(object sender, EventArgs e)
@@ -43,11 +41,13 @@ namespace vcs_MyEditor
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 if (openFileDialog1.FilterIndex == 1)
-                    richTextBox1.LoadFile(openFileDialog1.FileName,
-                        RichTextBoxStreamType.PlainText);
+                {
+                    richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.PlainText);
+                }
                 else
-                    richTextBox1.LoadFile(openFileDialog1.FileName,
-                        RichTextBoxStreamType.RichText);
+                {
+                    richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.RichText);
+                }
             }
         }
 
@@ -56,11 +56,13 @@ namespace vcs_MyEditor
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 if (saveFileDialog1.FilterIndex == 1)
-                    richTextBox1.SaveFile(saveFileDialog1.FileName,
-                        RichTextBoxStreamType.PlainText);
+                {
+                    richTextBox1.SaveFile(saveFileDialog1.FileName, RichTextBoxStreamType.PlainText);
+                }
                 else
-                    richTextBox1.SaveFile(saveFileDialog1.FileName,
-                        RichTextBoxStreamType.RichText);
+                {
+                    richTextBox1.SaveFile(saveFileDialog1.FileName, RichTextBoxStreamType.RichText);
+                }
             }
         }
 
@@ -77,13 +79,17 @@ namespace vcs_MyEditor
         private void mCut_Click(object sender, EventArgs e)
         {
             if (richTextBox1.SelectionLength != 0)
+            {
                 richTextBox1.Cut();
+            }
         }
 
         private void mCopy_Click(object sender, EventArgs e)
         {
             if (richTextBox1.SelectionLength != 0)
+            {
                 richTextBox1.Copy();
+            }
         }
 
         private void mPaste_Click(object sender, EventArgs e)
@@ -115,7 +121,10 @@ namespace vcs_MyEditor
             colorDialog1.AllowFullOpen = true;
             colorDialog1.FullOpen = true;
             if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
                 richTextBox1.SelectionColor = colorDialog1.Color;
+            }
         }
     }
 }
+

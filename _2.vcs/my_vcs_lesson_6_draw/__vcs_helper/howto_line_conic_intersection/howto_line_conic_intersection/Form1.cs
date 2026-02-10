@@ -13,23 +13,30 @@ namespace howto_line_conic_intersection
 {
     public partial class Form1 : Form
     {
+        private List<PointF> MousePoints = new List<PointF>();
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private List<PointF> MousePoints = new List<PointF>();
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
 
         // Save a point.
         private void picGraph_MouseClick(object sender, MouseEventArgs e)
         {
             if (MousePoints.Count == 10)
+            {
                 MousePoints = new List<PointF>();
+            }
 
             // Save the point.
             MousePoints.Add(e.Location);
             richTextBox1.Text += "滑鼠按鍵   " + e.Location.ToString() + " 共有 " + MousePoints.Count.ToString() + " 點\n";
-               
+
             // Redraw.
             DrawGraph();
         }
@@ -58,14 +65,12 @@ namespace howto_line_conic_intersection
 
                 //e.Graphics.DrawLines(Pens.Black, points.ToArray());
                 if (MousePoints.Count > 1)
+                {
                     gr.DrawLines(Pens.Black, MousePoints.ToArray());
-
-
+                }
             }
             // Display the result.
             picGraph.Image = bm;
         }
-
-
     }
 }

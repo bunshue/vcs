@@ -32,8 +32,8 @@
             this.trkTension = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rb1 = new System.Windows.Forms.RadioButton();
             this.rb2 = new System.Windows.Forms.RadioButton();
+            this.rb1 = new System.Windows.Forms.RadioButton();
             this.bt_clear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trkTension)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -81,6 +81,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "type";
             // 
+            // rb2
+            // 
+            this.rb2.AutoSize = true;
+            this.rb2.Location = new System.Drawing.Point(29, 54);
+            this.rb2.Name = "rb2";
+            this.rb2.Size = new System.Drawing.Size(52, 16);
+            this.rb2.TabIndex = 1;
+            this.rb2.Text = "type 2";
+            this.rb2.UseVisualStyleBackColor = true;
+            // 
             // rb1
             // 
             this.rb1.AutoSize = true;
@@ -92,16 +102,6 @@
             this.rb1.TabStop = true;
             this.rb1.Text = "type 1";
             this.rb1.UseVisualStyleBackColor = true;
-            // 
-            // rb2
-            // 
-            this.rb2.AutoSize = true;
-            this.rb2.Location = new System.Drawing.Point(29, 54);
-            this.rb2.Name = "rb2";
-            this.rb2.Size = new System.Drawing.Size(52, 16);
-            this.rb2.TabIndex = 1;
-            this.rb2.Text = "type 2";
-            this.rb2.UseVisualStyleBackColor = true;
             // 
             // bt_clear
             // 
@@ -125,6 +125,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "vcs_Draw_Spline";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseClick);
             ((System.ComponentModel.ISupportInitialize)(this.trkTension)).EndInit();

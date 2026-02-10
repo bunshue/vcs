@@ -64,6 +64,7 @@
             this.Controls.Add(this.picGraph);
             this.Name = "Form1";
             this.Text = "howto_line_conic_intersection";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.Resize += new System.EventHandler(this.Form1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.picGraph)).EndInit();
             this.ResumeLayout(false);

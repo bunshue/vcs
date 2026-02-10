@@ -26,7 +26,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 
 def show():
-    # plt.show()
+    plt.show()
     pass
 
 
@@ -35,7 +35,7 @@ import csv
 import json
 import bs4
 import requests
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
@@ -1123,57 +1123,25 @@ currency.index = range(len(currency.index))  # 建立row標題
 print(currency)
 """
 print("------------------------------------------------------------")  # 60個
-
-# ch5_1.py
-
-htmlFile = requests.get("http://www.deepmind.com.tw")
-objSoup = bs4.BeautifulSoup(htmlFile.text, "lxml")
-print("列印BeautifulSoup物件資料型態 ", type(objSoup))
-
-print("------------------------------------------------------------")  # 60個
-
+'''
 # ch5_2.py
 
 htmlFile = open("data/myhtml.html", encoding="utf-8")
 objSoup = bs4.BeautifulSoup(htmlFile, "lxml")
+
 print("列印BeautifulSoup物件資料型態 ", type(objSoup))
-
-print("------------------------------------------------------------")  # 60個
-
-# ch5_3.py
-
-htmlFile = open("data/myhtml.html", encoding="utf-8")
-objSoup = bs4.BeautifulSoup(htmlFile, "lxml")
 print("物件類型  = ", type(objSoup.title))
-print("列印title = ", objSoup.title)
-
-print("------------------------------------------------------------")  # 60個
-
-# ch5_4.py
-
-htmlFile = open("data/myhtml.html", encoding="utf-8")
-objSoup = bs4.BeautifulSoup(htmlFile, "lxml")
 print("列印title = ", objSoup.title)
 print("title內容 = ", objSoup.title.text)
 
-print("------------------------------------------------------------")  # 60個
-
-# ch5_5.py
-
-htmlFile = open("data/myhtml.html", encoding="utf-8")
-objSoup = bs4.BeautifulSoup(htmlFile, "lxml")
 objTag = objSoup.find("h1")
 print("資料型態       = ", type(objTag))
 print("列印Tag        = ", objTag)
 print("Text屬性內容   = ", objTag.text)
 print("String屬性內容 = ", objTag.string)
 
-print("------------------------------------------------------------")  # 60個
+# 3030
 
-# ch5_6.py
-
-htmlFile = open("data/myhtml.html", encoding="utf-8")
-objSoup = bs4.BeautifulSoup(htmlFile, "lxml")
 objTag = objSoup.find_all("h1")
 print("資料型態    = ", type(objTag))  # 列印資料型態
 print("列印Tag串列 = ", objTag)  # 列印串列
@@ -1181,22 +1149,18 @@ print("以下是列印串列元素 : ")
 for data in objTag:  # 列印串列元素內容
     print(data.text)
 
-print("------------------------------------------------------------")  # 60個
+# 3030
 
 # ch5_6_1.py
 
-htmlFile = open("data/myhtml.html", encoding="utf-8")
-objSoup = bs4.BeautifulSoup(htmlFile, "lxml")
 objTag = objSoup.find_all("h1", limit=2)
 for data in objTag:  # 列印串列元素內容
     print(data.text)
 
-print("------------------------------------------------------------")  # 60個
+# 3030
 
 # ch5_7.py
 
-htmlFile = open("data/myhtml.html", encoding="utf-8")
-objSoup = bs4.BeautifulSoup(htmlFile, "lxml")
 objTag = objSoup.find_all("h1")
 print("資料型態    = ", type(objTag))  # 列印資料型態
 print("列印Tag串列 = ", objTag)  # 列印串列
@@ -1207,22 +1171,17 @@ print("\n使用getText()方法列印串列元素 : ")
 for data in objTag:
     print(data.getText())
 
-print("------------------------------------------------------------")  # 60個
+# 3030
 
-# ch5_7_1.py
-
-htmlFile = open("data/myhtml.html", encoding="utf-8")
-objSoup = bs4.BeautifulSoup(htmlFile, "lxml")
 objTag = objSoup.find(id="author")
 print(objTag)
 print(objTag.text)
 
 print("------------------------------------------------------------")  # 60個
 
-# ch5_7_2.py
 
-htmlFile = open("data/myhtml.html", encoding="utf-8")
-objSoup = bs4.BeautifulSoup(htmlFile, "lxml")
+# 3030
+
 objTag = objSoup.find_all(id="content")
 for tag in objTag:
     print(tag)
@@ -1282,6 +1241,7 @@ print("------------------------------------------------------------")  # 60個
 
 htmlFile = open("data/myhtml.html", encoding="utf-8")
 objSoup = bs4.BeautifulSoup(htmlFile, "lxml")
+
 objTag = objSoup.select("#author")
 print("資料型態     = ", type(objTag))  # 列印資料型態
 print("串列長度     = ", len(objTag))  # 列印串列長度
@@ -1294,6 +1254,7 @@ print("------------------------------------------------------------")  # 60個
 
 htmlFile = open("data/myhtml.html", encoding="utf-8")
 objSoup = bs4.BeautifulSoup(htmlFile, "lxml")
+
 objTag = objSoup.select("#author")
 print("列出串列元素的資料型態    = ", type(objTag[0]))
 print(objTag[0])
@@ -1306,6 +1267,7 @@ print("------------------------------------------------------------")  # 60個
 
 htmlFile = open("data/myhtml.html", encoding="utf-8")
 objSoup = bs4.BeautifulSoup(htmlFile, "lxml")
+
 objTag = objSoup.select("#author")
 print(str(objTag[0].attrs))
 
@@ -1315,6 +1277,7 @@ print("------------------------------------------------------------")  # 60個
 
 htmlFile = open("data/myhtml.html", encoding="utf-8")
 objSoup = bs4.BeautifulSoup(htmlFile, "lxml")
+
 pObjTag = objSoup.select("p")
 print("含<p>標籤的串列長度 = ", len(pObjTag))
 for pObj in pObjTag:
@@ -1328,6 +1291,7 @@ print("------------------------------------------------------------")  # 60個
 
 htmlFile = open("data/myhtml.html", encoding="utf-8")
 objSoup = bs4.BeautifulSoup(htmlFile, "lxml")
+
 imgTag = objSoup.select("img")
 print("含<img>標籤的串列長度 = ", len(imgTag))
 for img in imgTag:
@@ -1339,6 +1303,7 @@ print("------------------------------------------------------------")  # 60個
 
 htmlFile = open("data/myhtml.html", encoding="utf-8")
 objSoup = bs4.BeautifulSoup(htmlFile, "lxml")
+
 imgTag = objSoup.select("img")
 print("含<img>標籤的串列長度 = ", len(imgTag))
 for img in imgTag:
@@ -1353,6 +1318,7 @@ print("------------------------------------------------------------")  # 60個
 url = "data/ch5_2_1.html"
 htmlFile = open(url, encoding="utf-8")
 objSoup = bs4.BeautifulSoup(htmlFile, "lxml")
+
 titleobj = objSoup.find_all("h2")  # h2標題
 print(titleobj[2].text)
 

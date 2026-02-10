@@ -27,6 +27,11 @@ namespace vcs_Draw_Polygons
         // The current mouse position while drawing a new polygon.
         private Point NewPoint;
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         // Start or continue drawing a new polygon.
         private void picCanvas_MouseDown(object sender, MouseEventArgs e)
         {
@@ -38,7 +43,10 @@ namespace vcs_Draw_Polygons
                 if (e.Button == MouseButtons.Right)
                 {
                     // Finish this polygon.
-                    if (NewPolygon.Count > 2) Polygons.Add(NewPolygon);
+                    if (NewPolygon.Count > 2)
+                    {
+                        Polygons.Add(NewPolygon);
+                    }
                     NewPolygon = null;
                 }
                 else
@@ -65,7 +73,10 @@ namespace vcs_Draw_Polygons
         // Move the next point in the new polygon.
         private void picCanvas_MouseMove(object sender, MouseEventArgs e)
         {
-            if (NewPolygon == null) return;
+            if (NewPolygon == null)
+            {
+                return;
+            }
             NewPoint = e.Location;
             picCanvas.Invalidate();
         }
@@ -76,6 +87,9 @@ namespace vcs_Draw_Polygons
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             e.Graphics.Clear(picCanvas.BackColor);
+
+            e.Graphics.DrawString("左鍵點選頂點", new Font("標楷體", 30), new SolidBrush(Color.Green), new PointF(10, 10));
+            e.Graphics.DrawString("右鍵結束", new Font("標楷體", 30), new SolidBrush(Color.Green), new PointF(10, 10 + 40));
 
             // Draw the old polygons.
             foreach (List<Point> polygon in Polygons)
@@ -99,9 +113,7 @@ namespace vcs_Draw_Polygons
                     using (Pen dashed_pen = new Pen(Color.Green))
                     {
                         dashed_pen.DashPattern = new float[] { 3, 3 };
-                        e.Graphics.DrawLine(dashed_pen, 
-                            NewPolygon[NewPolygon.Count - 1],
-                            NewPoint);
+                        e.Graphics.DrawLine(dashed_pen, NewPolygon[NewPolygon.Count - 1], NewPoint);
                     }
                 }
             }

@@ -24,15 +24,25 @@ namespace vcs_Draw_Spline
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
             // Draw the points.
             foreach (Point point in Points)
-                e.Graphics.FillEllipse(Brushes.Black,
-                    point.X - 3, point.Y - 3, 5, 5);
-            if (Points.Count < 2) return;
+            {
+                e.Graphics.FillEllipse(Brushes.Black, point.X - 3, point.Y - 3, 5, 5);
+            }
+
+            if (Points.Count < 2)
+            {
+                return;
+            }
 
             // Draw the curve.
             if (rb1.Checked == true)
