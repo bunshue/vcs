@@ -29,88 +29,55 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.lstScore = new System.Windows.Forms.ListBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtInput = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.lblMsg = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 20);
+            this.label1.Location = new System.Drawing.Point(25, 110);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "分數列表如下：";
             // 
-            // lstScore
-            // 
-            this.lstScore.FormattingEnabled = true;
-            this.lstScore.ItemHeight = 12;
-            this.lstScore.Location = new System.Drawing.Point(27, 48);
-            this.lstScore.Name = "lstScore";
-            this.lstScore.Size = new System.Drawing.Size(120, 88);
-            this.lstScore.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 164);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 12);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "搜尋大於等於";
-            // 
-            // txtInput
-            // 
-            this.txtInput.Location = new System.Drawing.Point(103, 161);
-            this.txtInput.Name = "txtInput";
-            this.txtInput.Size = new System.Drawing.Size(68, 22);
-            this.txtInput.TabIndex = 3;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(177, 164);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 12);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "分數";
-            // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(212, 157);
+            this.btnSearch.Location = new System.Drawing.Point(185, 145);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 27);
+            this.btnSearch.Size = new System.Drawing.Size(130, 104);
             this.btnSearch.TabIndex = 5;
             this.btnSearch.Text = "查詢";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // lblMsg
+            // richTextBox1
             // 
-            this.lblMsg.AutoSize = true;
-            this.lblMsg.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblMsg.Location = new System.Drawing.Point(25, 208);
-            this.lblMsg.Name = "lblMsg";
-            this.lblMsg.Size = new System.Drawing.Size(39, 14);
-            this.lblMsg.TabIndex = 6;
-            this.lblMsg.Text = "lblMsg";
+            this.richTextBox1.Location = new System.Drawing.Point(378, 12);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(476, 530);
+            this.richTextBox1.TabIndex = 7;
+            this.richTextBox1.Text = "";
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 12;
+            this.listBox1.Location = new System.Drawing.Point(27, 145);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(120, 88);
+            this.listBox1.TabIndex = 8;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(306, 262);
-            this.Controls.Add(this.lblMsg);
+            this.ClientSize = new System.Drawing.Size(866, 554);
+            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btnSearch);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.txtInput);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.lstScore);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -123,12 +90,9 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox lstScore;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtInput;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.Label lblMsg;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 

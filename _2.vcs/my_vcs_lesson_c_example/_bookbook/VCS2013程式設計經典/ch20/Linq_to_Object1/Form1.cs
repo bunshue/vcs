@@ -23,21 +23,22 @@ namespace Linq_to_Object1
         // 表單載入時執行此事件處理函式
         private void Form1_Load(object sender, EventArgs e)
         {
-            lstScore.DataSource = score;
-            lblMsg.Text = "";
+            listBox1.DataSource = score;
         }
 
         // 按 [查詢] 鈕執行此事件處理函式
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            var result = from s in score orderby s ascending where s > int.Parse(txtInput.Text) select s;
-            lblMsg.Text = "共 " + (result.Count()).ToString() + " 筆資料大於等於 " + txtInput.Text + "\n";
+            int sss = 75;
+            richTextBox1.Text += "搜尋 大於等於 " + sss.ToString() + " 的成績\n";
+            var result = from s in score orderby s ascending where s > sss select s;
+            richTextBox1.Text += "共 " + (result.Count()).ToString() + " 筆資料大於等於 " + sss + "\n";
             if (result.Count() > 0)
             {
-                lblMsg.Text += "大於等於 " + txtInput.Text + " 資料：";
+                richTextBox1.Text += "大於等於 " + sss + " 資料：";
                 foreach (var s in result)
                 {
-                    lblMsg.Text += s + ", ";
+                    richTextBox1.Text += s + ", ";
                 }
             }
         }

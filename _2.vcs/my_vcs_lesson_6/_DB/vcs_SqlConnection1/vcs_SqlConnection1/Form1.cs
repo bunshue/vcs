@@ -939,10 +939,165 @@ namespace vcs_SqlConnection1
 
         private void button18_Click(object sender, EventArgs e)
         {
+            //成績單+搜尋條件
+
+            DataView dvScore;  // 宣告DataView物件dvScore
+
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch18DB.mdf;Integrated Security=True";
+                SqlDataAdapter daScore = new SqlDataAdapter("SELECT * FROM 成績單 ORDER BY 國文 DESC", cn);
+                DataSet ds = new DataSet();
+                daScore.Fill(ds, "成績單");
+                dvScore = ds.Tables["成績單"].DefaultView;
+            }
+            dataGridView1.DataSource = dvScore;
+
+
+            string filter = "國文>80";  // 篩選條件, 用WHRER語法
+            string sort = "英文 DESC";  // 排序方法, 科目, ASC:遞增, DESC:遞減
+
+            richTextBox1.Text += "篩選條件 : " + filter + "\n";
+            richTextBox1.Text += "排序方法 : " + sort + "\n";
+
+            dvScore.RowFilter = filter;
+            dvScore.Sort = sort;
+
+            dataGridView1.DataSource = dvScore;
+        }
+
+        private void ShowData4(string cnstr)
+        {
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = cnstr;
+                SqlDataAdapter daEmployee = new SqlDataAdapter("GetEmployee", cn);
+                DataSet ds = new DataSet();
+                daEmployee.Fill(ds, "員工");
+                dataGridView1.DataSource = ds.Tables["員工"];
+            }
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
+            //員工資料新增修改刪除
+            //薪資資料讀取新增修改刪除
+
+            //讀取
+
+            // 宣告cnStr用來存放連接ch17DB.mdf的連接字串
+            string cnStr = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
+                @"AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch18DB.mdf;" +
+                "Integrated Security=True";
+
+            ShowData4(cnStr);
+            //return;
+
+            string name = "david";
+            string telephone = "0912345678";
+            string position = "RD";
+            int money = 12345;
+
+            //新增
+            try
+            {
+                using (SqlConnection cn = new SqlConnection())
+                {
+                    cn.ConnectionString = cnStr;
+                    cn.Open();
+
+                    SqlCommand cmd = new SqlCommand("InsertEmployee", cn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@position", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@tel", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@salary", SqlDbType.Int));
+                    cmd.Parameters["@name"].Value = name;
+                    cmd.Parameters["@position"].Value = position;
+                    cmd.Parameters["@tel"].Value = telephone;
+                    cmd.Parameters["@salary"].Value = money;
+                    cmd.ExecuteNonQuery();
+
+                    /*
+                    SqlCommand cmd = new SqlCommand("InsertEmployeeReturnEmpId", cn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@position", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@tel", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@salary", SqlDbType.Int));
+                    cmd.Parameters.Add(new SqlParameter("@RETURN_VALUE", SqlDbType.Int));
+                    cmd.Parameters["@RETURN_VALUE"].Direction = ParameterDirection.ReturnValue;
+                    cmd.Parameters["@name"].Value = name;
+                    cmd.Parameters["@position"].Value = position;
+                    cmd.Parameters["@tel"].Value = telephone;
+                    cmd.Parameters["@salary"].Value = money;
+                    cmd.ExecuteNonQuery();
+                    int EmpId = int.Parse(cmd.Parameters["@RETURN_VALUE"].Value.ToString());
+                    MessageBox.Show(name + "的員工編號是 " + EmpId.ToString(), "員工編號");
+                    */
+                }
+                ShowData4(cnStr);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
+            //修改
+
+            name = "david";
+            telephone = "0912876543";
+            position = "manager";
+            money = 54321;
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection())
+                {
+                    cn.ConnectionString = cnStr;
+                    cn.Open();
+                    SqlCommand cmd = new SqlCommand("UpdateEmployee", cn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@position", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@tel", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@salary", SqlDbType.Int));
+                    cmd.Parameters["@name"].Value = name;
+                    cmd.Parameters["@position"].Value = position;
+                    cmd.Parameters["@tel"].Value = telephone;
+                    cmd.Parameters["@salary"].Value = money;
+                    cmd.ExecuteNonQuery();
+                }
+                ShowData4(cnStr);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            //刪除
+
+            name = "david";
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection())
+                {
+                    cn.ConnectionString = cnStr;
+                    cn.Open();
+                    SqlCommand cmd = new SqlCommand("DeleteEmployee", cn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar));
+                    cmd.Parameters["@name"].Value = name;
+                    cmd.ExecuteNonQuery();
+                }
+                ShowData4(cnStr);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -1092,7 +1247,43 @@ namespace vcs_SqlConnection1
 
         private void button23_Click(object sender, EventArgs e)
         {
+            //LINQ 1
+            //建立DataSet物件ds，ds建立於所有事件處理函式之外以便所有事件一起共用
+            DataSet ds = new DataSet();
 
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
+                    @"AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch20DB.mdf;" +
+                    "Integrated Security=True";
+                SqlDataAdapter daEmployee = new SqlDataAdapter("SELECT * FROM 員工 ORDER BY 編號 DESC", cn);
+                daEmployee.Fill(ds, "員工");
+                dataGridView1.DataSource = ds.Tables["員工"];
+            }
+
+
+            int money = 25000;
+            richTextBox1.Text += "搜尋 薪資 > " + money.ToString() + " 的資料\n";
+            try
+            {
+                DataTable dtEmp = ds.Tables["員工"];
+                var emp = from p in dtEmp.AsEnumerable()
+                          where p.Field<int>("薪資") >= money
+                          orderby p.Field<int>("薪資") descending
+                          select new
+                          {
+                              員工編號 = p.Field<int>("編號"),
+                              員工姓名 = p.Field<string>("姓名"),
+                              員工電話 = p.Field<string>("電話"),
+                              員工職稱 = p.Field<string>("職稱"),
+                              員工薪資 = p.Field<int>("薪資")
+                          };
+                dataGridView1.DataSource = emp.ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void button24_Click(object sender, EventArgs e)

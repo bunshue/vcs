@@ -32,6 +32,7 @@
             this.txtInput = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtFileName = new System.Windows.Forms.TextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -63,18 +64,27 @@
             // txtFileName
             // 
             this.txtFileName.Location = new System.Drawing.Point(26, 63);
-            this.txtFileName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtFileName.Margin = new System.Windows.Forms.Padding(2);
             this.txtFileName.Multiline = true;
             this.txtFileName.Name = "txtFileName";
             this.txtFileName.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtFileName.Size = new System.Drawing.Size(248, 123);
+            this.txtFileName.Size = new System.Drawing.Size(318, 241);
             this.txtFileName.TabIndex = 3;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(349, 12);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(235, 421);
+            this.richTextBox1.TabIndex = 4;
+            this.richTextBox1.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(596, 445);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.txtFileName);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtInput);
@@ -93,6 +103,7 @@
         private System.Windows.Forms.TextBox txtInput;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtFileName;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

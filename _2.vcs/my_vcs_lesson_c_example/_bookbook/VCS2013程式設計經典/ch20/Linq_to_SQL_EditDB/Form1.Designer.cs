@@ -40,23 +40,24 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(22, 116);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView1.Location = new System.Drawing.Point(11, 110);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(456, 156);
+            this.dataGridView1.Size = new System.Drawing.Size(529, 156);
             this.dataGridView1.TabIndex = 31;
             // 
             // btnDel
             // 
             this.btnDel.Location = new System.Drawing.Point(422, 73);
-            this.btnDel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDel.Margin = new System.Windows.Forms.Padding(2);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(56, 22);
             this.btnDel.TabIndex = 30;
@@ -67,7 +68,7 @@
             // btnUpdate
             // 
             this.btnUpdate.Location = new System.Drawing.Point(422, 46);
-            this.btnUpdate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnUpdate.Margin = new System.Windows.Forms.Padding(2);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(56, 22);
             this.btnUpdate.TabIndex = 29;
@@ -78,7 +79,7 @@
             // btnAdd
             // 
             this.btnAdd.Location = new System.Drawing.Point(422, 20);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(2);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(56, 22);
             this.btnAdd.TabIndex = 28;
@@ -89,7 +90,7 @@
             // txtSalary
             // 
             this.txtSalary.Location = new System.Drawing.Point(242, 66);
-            this.txtSalary.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtSalary.Margin = new System.Windows.Forms.Padding(2);
             this.txtSalary.Name = "txtSalary";
             this.txtSalary.Size = new System.Drawing.Size(121, 22);
             this.txtSalary.TabIndex = 26;
@@ -97,7 +98,7 @@
             // txtTel
             // 
             this.txtTel.Location = new System.Drawing.Point(242, 25);
-            this.txtTel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTel.Margin = new System.Windows.Forms.Padding(2);
             this.txtTel.Name = "txtTel";
             this.txtTel.Size = new System.Drawing.Size(121, 22);
             this.txtTel.TabIndex = 24;
@@ -105,7 +106,7 @@
             // txtPosition
             // 
             this.txtPosition.Location = new System.Drawing.Point(52, 66);
-            this.txtPosition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPosition.Margin = new System.Windows.Forms.Padding(2);
             this.txtPosition.Name = "txtPosition";
             this.txtPosition.Size = new System.Drawing.Size(115, 22);
             this.txtPosition.TabIndex = 22;
@@ -113,7 +114,7 @@
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(52, 25);
-            this.txtName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtName.Margin = new System.Windows.Forms.Padding(2);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(115, 22);
             this.txtName.TabIndex = 20;
@@ -158,11 +159,20 @@
             this.label1.TabIndex = 21;
             this.label1.Text = "姓名";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(563, 12);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(427, 496);
+            this.richTextBox1.TabIndex = 32;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1002, 520);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnDel);
             this.Controls.Add(this.btnUpdate);
@@ -175,7 +185,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -199,6 +209,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
