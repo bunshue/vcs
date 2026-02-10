@@ -14,15 +14,22 @@ namespace FileCopyPlan
 {
     public partial class Form1 : Form
     {
+        private System.Threading.Thread thdAddFile; //建立一個線程
+        private string str = "";
+        FileStream FormerOpen;//實例化FileStream類
+        FileStream ToFileOpen;//實例化FileStream類
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private System.Threading.Thread thdAddFile; //建立一個線程
-        private string str = "";
-        FileStream FormerOpen;//實例化FileStream類
-        FileStream ToFileOpen;//實例化FileStream類
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            textBox1.Text = @"D:\MX-18.2_386.iso";
+            textBox2.Text = @"D:\dddddddddd3";
+        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -84,6 +91,7 @@ namespace FileCopyPlan
         /// <param progressBar="ProgressBar">ProgressBar控制元件</param> 
         public void CopyFile(string FormerFile, string toFile, int SectSize, ProgressBar progressBar1)
         {
+            richTextBox1.Text += "CopyFile\n";
             progressBar1.Value = 0;//設定進度欄的目前位置為0
             progressBar1.Minimum = 0;//設定進度欄的最小值為0
             FileStream fileToCreate = new FileStream(toFile, FileMode.Create);//建立目的文件，如果已存在將被覆蓋
@@ -123,8 +131,10 @@ namespace FileCopyPlan
                 ToFileOpen.Write(buffer, 0, (int)FormerOpen.Length);//寫放字節
                 ToFileOpen.Flush();//清空快取
             }
+
             FormerOpen.Close();//釋放所有資源
             ToFileOpen.Close();//釋放所有資源
+
             if (MessageBox.Show("複製完成") == DialogResult.OK)//顯示"複製完成"提示對話框
             {
                 progressBar1.Value = 0;//設定進度欄的當有位置為0

@@ -21,7 +21,10 @@ namespace 切換輸入法
             //取得系統中已經安裝的文字輸入法
             InputLanguageCollection mInputs = InputLanguage.InstalledInputLanguages;
             foreach (InputLanguage mInput in mInputs)
+            {
                 this.comboBox1.Items.Add(mInput.LayoutName);
+            }
+
             //取得目前輸入法訊息
             InputLanguage CurrentInput = InputLanguage.CurrentInputLanguage;
             this.textBox1.Text = CurrentInput.LayoutName;
@@ -45,7 +48,7 @@ namespace 切換輸入法
             this.textBox3.Text = CurrentInput.Culture.DisplayName;
             //取得預設的輸入法訊息
             InputLanguage dInput = InputLanguage.DefaultInputLanguage;
-            this.textBox2.Text = dInput.LayoutName;	
+            this.textBox2.Text = dInput.LayoutName;
         }
     }
 }

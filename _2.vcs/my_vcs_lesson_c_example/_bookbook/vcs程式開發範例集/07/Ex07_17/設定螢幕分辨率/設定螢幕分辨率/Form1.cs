@@ -76,12 +76,15 @@ namespace 設定螢幕分辨率
         static extern int ChangeDisplaySettings([In] ref DEVMODE lpDevMode, int dwFlags);
         int dWidth = 0;
         int dHeight = 0;
+
         private void GetDis()//取得分辨率
         {
             Size s = SystemInformation.PrimaryMonitorSize;
             dWidth = s.Width;
             dHeight = s.Height;
             lblDisInfo.Text = dWidth.ToString() + " × " + dHeight.ToString() + " 像素";
+
+            richTextBox1.Text += "目前解析度 : " + dWidth.ToString() + " × " + dHeight.ToString() + "\n";
         }
 
         private void Form1_Load(object sender, EventArgs e)

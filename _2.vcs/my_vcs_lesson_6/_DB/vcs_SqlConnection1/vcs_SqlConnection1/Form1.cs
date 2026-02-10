@@ -23,7 +23,7 @@ namespace vcs_SqlConnection1
             show_item_location();
         }
 
-        void show_item_location()
+        private void show_item_location()
         {
             int x_st;
             int y_st;
@@ -67,12 +67,10 @@ namespace vcs_SqlConnection1
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            dataGridView1.Size = new Size(560, 250);
+            dataGridView1.Size = new Size(560, 400);
             dataGridView1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            dataGridView2.Size = new Size(560, 250);
-            dataGridView2.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            dataGridView3.Size = new Size(560, 250);
-            dataGridView3.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            dataGridView2.Size = new Size(560, 400);
+            dataGridView2.Location = new Point(x_st + dx * 3, y_st + dy * 6);
 
             richTextBox1.Size = new Size(400, 800);
             richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
@@ -92,7 +90,7 @@ namespace vcs_SqlConnection1
         }
 
         // 固定查詢
-        void ShowData3(string cnstr)
+        private void ShowData3(string cnstr)
         {
             // DB => DS => dataGridView1
             using (SqlConnection cn = new SqlConnection())
@@ -395,7 +393,7 @@ namespace vcs_SqlConnection1
 
         // 員工資料表1 ST
 
-        void ShowData1(string cnstr)
+        private void ShowData1(string cnstr)
         {
             // DB => DS => dataGridView1
             using (SqlConnection cn = new SqlConnection())
@@ -541,11 +539,13 @@ namespace vcs_SqlConnection1
 
                 DataSet ds = new DataSet();
 
-                SqlDataAdapter daCategory = new SqlDataAdapter("SELECT * FROM 產品類別", cn);
-                daCategory.Fill(ds, "產品類別");
+                string sqlstr1 = "SELECT * FROM 產品類別";  // 宣告查詢字串
+                SqlDataAdapter da1 = new SqlDataAdapter(sqlstr1, cn);
+                da1.Fill(ds, "產品類別");
 
-                SqlDataAdapter daProduct = new SqlDataAdapter("SELECT * FROM 產品資料", cn);
-                daProduct.Fill(ds, "產品資料");
+                string sqlstr2 = "SELECT * FROM 產品資料";  // 宣告查詢字串
+                SqlDataAdapter da2 = new SqlDataAdapter(sqlstr2, cn);
+                da2.Fill(ds, "產品資料");
 
                 ds.Relations.Add("FK_產品資料_產品類別", ds.Tables["產品類別"].Columns["類別編號"], ds.Tables["產品資料"].Columns["類別編號"]);
 
@@ -555,13 +555,10 @@ namespace vcs_SqlConnection1
                 dataGridView2.DataSource = ds;
                 dataGridView2.DataMember = "產品類別.FK_產品資料_產品類別";
             }
-
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //讀取新增修改刪除
-
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -575,7 +572,9 @@ namespace vcs_SqlConnection1
                 // 建立DataSet物件ds
                 // 在ds物件的DataTable內填入 [會員] 資料表的所有記錄
                 DataSet ds = new DataSet();  // 建立DataSet來儲存Table
-                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM 會員", cn);
+
+                string sqlstr = "SELECT * FROM 會員";  // 宣告查詢字串
+                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
                 da.Fill(ds, "會員");  // 將DataAdapter查詢之後的結果填充至DataSet
 
                 dataGridView1.DataSource = ds.Tables["會員"];
@@ -778,7 +777,6 @@ namespace vcs_SqlConnection1
             }
         }
 
-
         private void button15_Click(object sender, EventArgs e)
         {
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\Northwind.mdf;Integrated Security=True";
@@ -821,7 +819,7 @@ namespace vcs_SqlConnection1
                 dataGridView2.DataSource = ds.Tables["客戶"];
 
                 // 產品類別
-                dataGridView3.DataSource = ds.Tables["產品類別"];
+                //dataGridView1.DataSource = ds.Tables["產品類別"];
             }
         }
 
@@ -926,33 +924,35 @@ namespace vcs_SqlConnection1
                 cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
                     @"AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch18DB.mdf;" +
                     "Integrated Security=True";
-                SqlDataAdapter daEmployee = new SqlDataAdapter("SELECT * FROM 員工 ORDER BY 編號 DESC", cn);
+
+                string sqlstr = "SELECT * FROM 員工 ORDER BY 編號 DESC";  // 宣告查詢字串
+                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
                 DataSet ds = new DataSet();
-                daEmployee.Fill(ds, "員工");
+                da.Fill(ds, "員工");
 
                 // DataGridView控制項資料繫結
                 dataGridView1.DataSource = ds;
                 dataGridView1.DataMember = "員工";
             }
-
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
             //成績單+搜尋條件
 
-            DataView dvScore;  // 宣告DataView物件dvScore
+            DataView dv;  // 宣告DataView物件dv
 
             using (SqlConnection cn = new SqlConnection())
             {
                 cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch18DB.mdf;Integrated Security=True";
-                SqlDataAdapter daScore = new SqlDataAdapter("SELECT * FROM 成績單 ORDER BY 國文 DESC", cn);
-                DataSet ds = new DataSet();
-                daScore.Fill(ds, "成績單");
-                dvScore = ds.Tables["成績單"].DefaultView;
-            }
-            dataGridView1.DataSource = dvScore;
 
+                string sqlstr = "SELECT * FROM 成績單 ORDER BY 國文 DESC";  // 宣告查詢字串
+                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
+                DataSet ds = new DataSet();
+                da.Fill(ds, "成績單");
+                dv = ds.Tables["成績單"].DefaultView;
+            }
+            dataGridView1.DataSource = dv;
 
             string filter = "國文>80";  // 篩選條件, 用WHRER語法
             string sort = "英文 DESC";  // 排序方法, 科目, ASC:遞增, DESC:遞減
@@ -960,289 +960,27 @@ namespace vcs_SqlConnection1
             richTextBox1.Text += "篩選條件 : " + filter + "\n";
             richTextBox1.Text += "排序方法 : " + sort + "\n";
 
-            dvScore.RowFilter = filter;
-            dvScore.Sort = sort;
+            dv.RowFilter = filter;
+            dv.Sort = sort;
 
-            dataGridView1.DataSource = dvScore;
-        }
-
-        private void ShowData4(string cnstr)
-        {
-            using (SqlConnection cn = new SqlConnection())
-            {
-                cn.ConnectionString = cnstr;
-                SqlDataAdapter daEmployee = new SqlDataAdapter("GetEmployee", cn);
-                DataSet ds = new DataSet();
-                daEmployee.Fill(ds, "員工");
-                dataGridView1.DataSource = ds.Tables["員工"];
-            }
+            dataGridView1.DataSource = dv;
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
-            //員工資料新增修改刪除
-            //薪資資料讀取新增修改刪除
-
-            //讀取
-
-            // 宣告cnStr用來存放連接ch17DB.mdf的連接字串
-            string cnStr = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
-                @"AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch18DB.mdf;" +
-                "Integrated Security=True";
-
-            ShowData4(cnStr);
-            //return;
-
-            string name = "david";
-            string telephone = "0912345678";
-            string position = "RD";
-            int money = 12345;
-
-            //新增
-            try
-            {
-                using (SqlConnection cn = new SqlConnection())
-                {
-                    cn.ConnectionString = cnStr;
-                    cn.Open();
-
-                    SqlCommand cmd = new SqlCommand("InsertEmployee", cn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@position", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@tel", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@salary", SqlDbType.Int));
-                    cmd.Parameters["@name"].Value = name;
-                    cmd.Parameters["@position"].Value = position;
-                    cmd.Parameters["@tel"].Value = telephone;
-                    cmd.Parameters["@salary"].Value = money;
-                    cmd.ExecuteNonQuery();
-
-                    /*
-                    SqlCommand cmd = new SqlCommand("InsertEmployeeReturnEmpId", cn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@position", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@tel", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@salary", SqlDbType.Int));
-                    cmd.Parameters.Add(new SqlParameter("@RETURN_VALUE", SqlDbType.Int));
-                    cmd.Parameters["@RETURN_VALUE"].Direction = ParameterDirection.ReturnValue;
-                    cmd.Parameters["@name"].Value = name;
-                    cmd.Parameters["@position"].Value = position;
-                    cmd.Parameters["@tel"].Value = telephone;
-                    cmd.Parameters["@salary"].Value = money;
-                    cmd.ExecuteNonQuery();
-                    int EmpId = int.Parse(cmd.Parameters["@RETURN_VALUE"].Value.ToString());
-                    MessageBox.Show(name + "的員工編號是 " + EmpId.ToString(), "員工編號");
-                    */
-                }
-                ShowData4(cnStr);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-
-            //修改
-
-            name = "david";
-            telephone = "0912876543";
-            position = "manager";
-            money = 54321;
-
-            try
-            {
-                using (SqlConnection cn = new SqlConnection())
-                {
-                    cn.ConnectionString = cnStr;
-                    cn.Open();
-                    SqlCommand cmd = new SqlCommand("UpdateEmployee", cn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@position", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@tel", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@salary", SqlDbType.Int));
-                    cmd.Parameters["@name"].Value = name;
-                    cmd.Parameters["@position"].Value = position;
-                    cmd.Parameters["@tel"].Value = telephone;
-                    cmd.Parameters["@salary"].Value = money;
-                    cmd.ExecuteNonQuery();
-                }
-                ShowData4(cnStr);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            //刪除
-
-            name = "david";
-
-            try
-            {
-                using (SqlConnection cn = new SqlConnection())
-                {
-                    cn.ConnectionString = cnStr;
-                    cn.Open();
-                    SqlCommand cmd = new SqlCommand("DeleteEmployee", cn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar));
-                    cmd.Parameters["@name"].Value = name;
-                    cmd.ExecuteNonQuery();
-                }
-                ShowData4(cnStr);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
         private void button20_Click(object sender, EventArgs e)
         {
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch18DB.mdf;Integrated Security=True";
 
-            using (SqlConnection cn = new SqlConnection())
-            {
-                // 連接資料庫
-                cn.ConnectionString = cnstr;
-                cn.Open();
-
-                string sqlstr = "GetEmployee";  // 宣告查詢字串
-                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
-
-                DataSet ds = new DataSet();  // 建立DataSet來儲存Table
-                da.Fill(ds, "員工");  // 將DataAdapter查詢之後的結果填充至DataSet
-
-                dataGridView1.DataSource = ds.Tables["員工"];
-
-                SqlCommand cmd = new SqlCommand();
-
-                // 與資料庫連接
-                cmd.Connection = cn;
-
-                // 指定Command要執行的是預存程序
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                // 執行GetEmployeeStatistics預存程序
-                cmd.CommandText = "GetEmployeeStatistics";
-
-                // 設定預存程序的參數
-                cmd.Parameters.Add(new SqlParameter("@EmpCount", SqlDbType.Int));
-                cmd.Parameters.Add(new SqlParameter("@SalarySum", SqlDbType.Int));
-                cmd.Parameters.Add(new SqlParameter("@SalaryAvg", SqlDbType.Int));
-                cmd.Parameters.Add(new SqlParameter("@SalaryMax", SqlDbType.Int));
-                cmd.Parameters.Add(new SqlParameter("@SalaryMin", SqlDbType.Int));
-
-                // 設定預存程序的參數為傳出型態
-                cmd.Parameters["@EmpCount"].Direction = ParameterDirection.Output;
-                cmd.Parameters["@SalarySum"].Direction = ParameterDirection.Output;
-                cmd.Parameters["@SalaryAvg"].Direction = ParameterDirection.Output;
-                cmd.Parameters["@SalaryMax"].Direction = ParameterDirection.Output;
-                cmd.Parameters["@SalaryMin"].Direction = ParameterDirection.Output;
-
-                // 執行預存程序
-                cmd.ExecuteNonQuery();
-
-                int intCount, intSum, intAvg, intMax, intMin;
-
-                // 取得傳出的預存程序
-                intCount = int.Parse(cmd.Parameters["@EmpCount"].Value.ToString());
-                intSum = int.Parse(cmd.Parameters["@SalarySum"].Value.ToString());
-                intAvg = int.Parse(cmd.Parameters["@SalaryAvg"].Value.ToString());
-                intMax = int.Parse(cmd.Parameters["@SalaryMax"].Value.ToString());
-                intMin = int.Parse(cmd.Parameters["@SalaryMin"].Value.ToString());
-
-                // 取員工資料筆數
-                richTextBox1.Text += "員工資料表共 " + intCount + " 筆記錄\n";
-
-                // 取薪資加總
-                richTextBox1.Text += "員工資料表薪資加總共 " + intSum + "\n";
-
-                // 取薪資平均
-                richTextBox1.Text += "員工資料表薪資平均為 " + intAvg + "\n";
-
-                // 取薪資最高薪
-                richTextBox1.Text += "最高薪為 " + intMax + "\n";
-
-                // 取薪資最低薪
-                richTextBox1.Text += "最低薪為 " + intMin + "\n";
-            }
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
-            //以姓名查詢員工記錄
-            string search_name = "小旬子";
-
-            using (SqlConnection cn = new SqlConnection())
-            {
-                // 連接資料庫
-                cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch18DB.mdf;Integrated Security=True";
-                cn.Open();
-
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = cn;
-                cmd.CommandText = "GetEmployeeByName";
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@EmpName", SqlDbType.NVarChar));
-                cmd.Parameters["@EmpName"].Value = search_name;
-                richTextBox1.Text = "";
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.Read())
-                {
-                    for (int i = 0; i < dr.FieldCount; i++)
-                    {
-                        richTextBox1.Text += dr.GetName(i) + "：" + dr[i].ToString() + "\n";
-                    }
-                }
-                else
-                {
-                    richTextBox1.Text = "找不到 " + search_name + " 這個員工";
-                }
-            }
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
-            //股票行情表成交量查詢系統
-
-            //最低成交量
-            int min_amount = 1;
-
-            //最高成交量
-            int max_amount = 10000;
-
-            using (SqlConnection cn = new SqlConnection())
-            {
-                try
-                {
-                    // 連接資料庫
-                    cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch18DB.mdf;Integrated Security=True";
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.Connection = cn;
-                    cmd.CommandText = "GetStockByQty";
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(new SqlParameter("@QMin", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@QMax", SqlDbType.NVarChar));
-                    cmd.Parameters["@QMin"].Value = min_amount;
-                    cmd.Parameters["@QMax"].Value = max_amount;
-
-                    SqlDataAdapter da = new SqlDataAdapter();
-                    da.SelectCommand = cmd;
-
-                    DataSet ds = new DataSet();  // 建立DataSet來儲存Table
-                    da.Fill(ds, "股票行情表");  // 將DataAdapter查詢之後的結果填充至DataSet
-
-                    dataGridView1.DataSource = ds.Tables["股票行情表"];
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -1256,8 +994,10 @@ namespace vcs_SqlConnection1
                 cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
                     @"AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch20DB.mdf;" +
                     "Integrated Security=True";
-                SqlDataAdapter daEmployee = new SqlDataAdapter("SELECT * FROM 員工 ORDER BY 編號 DESC", cn);
-                daEmployee.Fill(ds, "員工");
+
+                string sqlstr = "SELECT * FROM 員工 ORDER BY 編號 DESC";  // 宣告查詢字串
+                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
+                da.Fill(ds, "員工");
                 dataGridView1.DataSource = ds.Tables["員工"];
             }
 
