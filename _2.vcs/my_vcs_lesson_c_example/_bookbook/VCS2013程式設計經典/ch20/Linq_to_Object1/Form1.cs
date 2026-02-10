@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Linq;  // 使用LINQ查詢必須引用System.Linq命名空間
+using System.IO;   // 欲使用檔案處理必須引用System.IO命名空間
 
 namespace Linq_to_Object1
 {
@@ -41,6 +42,27 @@ namespace Linq_to_Object1
                     richTextBox1.Text += s + ", ";
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\_case1";
+
+            try
+            {
+                DirectoryInfo dir = new DirectoryInfo(foldername);
+                FileInfo[] f = dir.GetFiles();
+                var myFile = from s in f select s.FullName;
+                foreach (var s in myFile)
+                {
+                    richTextBox1.Text += s + Environment.NewLine;
+                }
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text = "路徑有錯";
+            }
+
         }
     }
 }
