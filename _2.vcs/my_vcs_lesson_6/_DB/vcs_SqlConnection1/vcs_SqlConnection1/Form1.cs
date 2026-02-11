@@ -932,11 +932,73 @@ namespace vcs_SqlConnection1
 
         private void button20_Click(object sender, EventArgs e)
         {
+            //SQL1
+            //从头开始提取满足指定条件的记录
 
+            //string conStr =  "Data Source=MR-PC\\YL;Database=db_TomeTwo;UID=sa;Pwd=;";//取连接字符串
+            String conStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+
+            string sql = "select * from EmployeeInfo";//构造sql语句
+            DataSet ds = new DataSet();//创建数据集
+            using (SqlConnection con = new SqlConnection(conStr))//创建数据连接
+            {
+                SqlCommand cmd = new SqlCommand(sql, con);//创建Command对象
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);//创建DataAdapter对象
+                sda.Fill(ds, "EmployeeInfo");//填充数据集
+            }
+            //从头开始提取生日小于2009-7-1之前的员工信息
+            IEnumerable<DataRow> query = ds.Tables["EmployeeInfo"].AsEnumerable().TakeWhile(itm => itm.Field<DateTime>("Birthday") < Convert.ToDateTime("2009-7-1"));
+            dataGridView1.DataSource = query.CopyToDataTable();//设置dataGridView1数据源
+
+        }
+
+
+        /// <summary>
+        /// 查询数据库信息
+        /// </summary>
+        /// <returns>方法返回DataTable对象</returns>
+        private DataTable GetStudent()
+        {
+            //String conStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+
+            //创建数据库连接字符串
+            //string P_Str_ConnectionStr = string.Format(@"server=USER-20170504OU;database=db_TomeTwo;uid=sa;pwd=");
+            //string P_Str_ConnectionStr = string.Format(@"server=USER-20170504OU;database=db_TomeTwo");
+            string P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+
+            //创建SQL查询字符串
+            string P_Str_SqlStr = string.Format(@"SELECT TOP 10 * FROM (SELECT TOP 20 * FROM tb_Grade ORDER BY 总分 DESC) AS st ORDER BY 总分 ASC");
+
+            SqlDataAdapter P_SqlDataAdapter = new SqlDataAdapter(P_Str_SqlStr, P_Str_ConnectionStr);//创建数据适配器
+            DataTable P_dt = new DataTable();//创建数据表
+            P_SqlDataAdapter.Fill(P_dt);//填充数据表
+            return P_dt;//返回数据表
+        }
+
+        /// <summary>
+        /// 查询数据库信息
+        /// </summary>
+        /// <returns>方法返回DataTable对象</returns>
+        private DataTable GetMessage()
+        {
+            //创建数据库连接字符串
+            //string P_Str_ConnectionStr = string.Format(@"server=MR-PC\YL;database=db_TomeTwo;uid=sa;pwd=");
+            string P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            //创建SQL查询字符串
+            string P_Str_SqlStr = string.Format("SELECT * FROM tb_Grade");
+            //创建数据适配器
+            SqlDataAdapter P_SqlDataAdapter = new SqlDataAdapter(P_Str_SqlStr, P_Str_ConnectionStr);
+            DataTable P_dt = new DataTable();//创建数据表
+            P_SqlDataAdapter.Fill(P_dt);//填充数据表
+            return P_dt;//返回数据表
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
+            dataGridView1.DataSource = GetMessage();//设置数据源
+
+            //查询第10到第20名的数据
+            dataGridView1.DataSource = GetStudent();//设置数据源
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -1086,12 +1148,12 @@ cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;       AttachDbFilename=D:\_
 cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf; ;
 */
 
-
-
         //宣告cnStr連線字串置於事件處理函式外，以提供給其他事件處理函式共用
         //String cnStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\MyDB.mdf;Integrated Security=True;Connect Timeout=30";
         // 設定相關資料庫連線參數
 //                    String cnStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\VisualC#2015基礎必修課\2015範例程式\data\MyDB.mdf;Integrated Security=True;Connect Timeout=30";
 
 
+//string conStr =  "Data Source=MR-PC\\YL;Database=db_TomeTwo;UID=sa;Pwd=;";//取连接字符串
+//String conStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
 

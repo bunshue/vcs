@@ -61,6 +61,7 @@ namespace RunManage
                 listView1.Items.Add(lvi);
             }
         }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             getMachineInfo();
