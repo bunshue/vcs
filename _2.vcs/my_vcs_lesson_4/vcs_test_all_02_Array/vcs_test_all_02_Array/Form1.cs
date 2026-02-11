@@ -1292,9 +1292,13 @@ namespace vcs_test_all_02_Array
             for (int i = 0; i < array_data.Length; i++)
             {
                 if (i == (array_data.Length - 1))
+                {
                     richTextBox1.Text += array_data[i].ToString();
+                }
                 else
+                {
                     richTextBox1.Text += array_data[i].ToString() + " ";
+                }
             }
             richTextBox1.Text += "\n";
         }
@@ -1369,7 +1373,7 @@ namespace vcs_test_all_02_Array
 
         private void bt_object_Click(object sender, EventArgs e)
         {
-            //物件一維陣列
+            //控件一維陣列
             TextBox[] textArray = new TextBox[] { numText1a, numText2a, numText3a, numText4a, numText5a, numText6a, numText7a, numText8a };
 
             for (int i = 0; i < 8; i++)
@@ -1424,11 +1428,15 @@ namespace vcs_test_all_02_Array
             */
             richTextBox1.Text += "coef_rows\t";
             foreach (string s in coef_rows)
+            {
                 richTextBox1.Text += s + " ";
+            }
             richTextBox1.Text += "\n";
             richTextBox1.Text += "one_row\t";
             foreach (string s in one_row)
+            {
                 richTextBox1.Text += s + " ";
+            }
             richTextBox1.Text += "\n";
 
             num_rows = coef_rows.GetUpperBound(0);
@@ -1471,11 +1479,15 @@ namespace vcs_test_all_02_Array
             */
             richTextBox1.Text += "coef_rows\t";
             foreach (string s in coef_rows)
+            {
                 richTextBox1.Text += s + " ";
+            }
             richTextBox1.Text += "\n";
             richTextBox1.Text += "one_row\t";
             foreach (string s in one_row)
+            {
                 richTextBox1.Text += s + " ";
+            }
             richTextBox1.Text += "\n";
 
             num_rows = coef_rows.GetUpperBound(0);
@@ -1493,7 +1505,6 @@ namespace vcs_test_all_02_Array
                 }
                 //arr[r, num_cols] = double.Parse(value_rows[r]);
             }
-
             return arr;
         }
         //解讀一個在TextBox的矩陣 SP

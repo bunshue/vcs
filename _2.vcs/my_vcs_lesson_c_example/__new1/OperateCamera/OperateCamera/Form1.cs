@@ -6,6 +6,7 @@ using System.Drawing.Imaging;
 using System.Text;
 using System.Windows;
 using System.Windows.Forms;
+
 using System.IO;
 using System.Windows.Media.Imaging;
 using AForge;
@@ -16,7 +17,6 @@ using AForge.Video.FFMPEG;
 
 using Size = System.Drawing.Size;
 using System.Drawing;
-
 
 namespace OperateCamera
 {
@@ -37,7 +37,7 @@ namespace OperateCamera
         public Form1()
         {
             InitializeComponent();
-            videoPath = Application.StartupPath+"\\videos\\";
+            videoPath = Application.StartupPath + "\\videos\\";
             if (!Directory.Exists(videoPath))
             {
                 Directory.CreateDirectory(videoPath);
@@ -46,23 +46,22 @@ namespace OperateCamera
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
             try
             {
                 // 枚举所有视频输入设备
                 videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
 
                 if (videoDevices.Count == 0)
+                {
                     throw new ApplicationException();
+                }
 
                 foreach (FilterInfo device in videoDevices)
                 {
                     tscbxCameras.Items.Add(device.Name);
                     videos.Add(device.Name);
                 }
-
                 tscbxCameras.SelectedIndex = 0;
-
             }
             catch (ApplicationException)
             {
@@ -74,7 +73,7 @@ namespace OperateCamera
         private void btnConnect_Click(object sender, EventArgs e)
         {
             CameraConn();
-           
+
         }
         //连接摄像头
         private void CameraConn()
@@ -102,7 +101,6 @@ namespace OperateCamera
             }
         }
 
-
         //关闭摄像头
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -128,9 +126,7 @@ namespace OperateCamera
                 {
                     BitmapSource bitmapSource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
                                     videoSourcePlayer.GetCurrentVideoFrame().GetHbitmap(),
-                                    IntPtr.Zero,
-                                     Int32Rect.Empty,
-                                    BitmapSizeOptions.FromEmptyOptions());
+                                    IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
                     PngBitmapEncoder pE = new PngBitmapEncoder();
                     pE.Frames.Add(BitmapFrame.Create(bitmapSource));
                     string picName = GetImagePath() + "\\" + "xiaosy" + ".jpg";
@@ -148,7 +144,7 @@ namespace OperateCamera
                         videoSourcePlayer.SignalToStop();
                         videoSourcePlayer.WaitForStop();
                     }
-                    
+
                     this.Close();
                 }
             }
@@ -160,8 +156,7 @@ namespace OperateCamera
 
         private string GetImagePath()
         {
-            string personImgPath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory)
-                         + Path.DirectorySeparatorChar.ToString() + "PersonImg";
+            string personImgPath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + Path.DirectorySeparatorChar.ToString() + "PersonImg";
             if (!Directory.Exists(personImgPath))
             {
                 Directory.CreateDirectory(personImgPath);
@@ -180,10 +175,10 @@ namespace OperateCamera
             int xPos = image.Width - (image.Width - 15);
             int yPos = 10;
             //写到屏幕上的时间
-           string  drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            string drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
             g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
-          
+
             ////创建文件路径
             string fileFullPath = videoPath + "V1" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"); ;
 
@@ -192,14 +187,16 @@ namespace OperateCamera
                 stopREC = true;
                 createNewFile = true;  //这里要设置为true表示要创建新文件
                 if (videoWriter != null)
+                {
                     videoWriter.Close();
+                }
             }
             else
             {
                 //开始录像
                 if (createNewFile)
                 {
-                
+
                     createNewFile = false;
                     if (videoWriter != null)
                     {
@@ -230,7 +227,7 @@ namespace OperateCamera
             {
                 stopREC = false;
                 createNewFile = true;
-               // frameRate = Convert.ToInt32(txtFrameRate.Text.Trim());
+                // frameRate = Convert.ToInt32(txtFrameRate.Text.Trim());
                 button1.Text = "停止录像";
             }
             else if (button1.Text == "停止录像")
@@ -286,6 +283,5 @@ namespace OperateCamera
                 }
             }
         }
-        
     }
 }

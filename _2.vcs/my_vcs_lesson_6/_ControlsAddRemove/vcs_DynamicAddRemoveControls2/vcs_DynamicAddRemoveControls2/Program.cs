@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_Comport3
+namespace vcs_DynamicAddRemoveControls2
 {
     static class Program
     {
