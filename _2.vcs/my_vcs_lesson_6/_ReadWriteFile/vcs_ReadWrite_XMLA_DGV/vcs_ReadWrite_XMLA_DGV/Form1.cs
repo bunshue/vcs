@@ -114,6 +114,33 @@ namespace vcs_ReadWrite_XMLA_DGV
             ds.WriteXml("tmp_person_new.xml");
             MessageBox.Show("成功的將資料更新到XML檔");
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DataSet ds = new DataSet();
+            ds.ReadXml("../../person.xml");  //將person.xml讀入至ds
+            //建立學號為學生DataTable的主鍵
+            DataColumn dc = ds.Tables["學生"].Columns["學號"];
+            ds.Tables["學生"].Constraints.Add("PK_學號", dc, true);
+            //DataRowCollection的Find方法搜尋txtSearchId主鍵資料
+            string student_id = "9096003";
+            DataRow dr = ds.Tables["學生"].Rows.Find(student_id);
+            //判斷dr是否為null
+            if (dr == null)
+            {
+                // 找不到學生記錄執行此處
+                richTextBox1.Text = "沒有學號 " + student_id + " 的學生";
+                return;
+            }
+            else
+            {
+                // 找到學生記錄執行此處
+                richTextBox1.Text += "學號：" + dr["學號"] + Environment.NewLine;
+                richTextBox1.Text += "姓名：" + dr["姓名"] + Environment.NewLine;
+                richTextBox1.Text += "電話：" + dr["電話"] + Environment.NewLine;
+                richTextBox1.Text += "信箱：" + dr["信箱"];
+            }
+        }
     }
 }
 

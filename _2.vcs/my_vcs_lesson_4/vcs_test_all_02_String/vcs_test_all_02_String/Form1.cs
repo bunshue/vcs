@@ -677,6 +677,19 @@ namespace vcs_test_all_02_String
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //顯示錢單位
+
+            string company = "aaaa";
+            double sum = 1234567;
+            double total = 2345678;
+
+            Console.WriteLine("{0}分公司營業額：{1}元\t營業率：{2:p}", company, sum.ToString("c"), sum / total);
+            Console.WriteLine("總營業額：{0}元", total.ToString("c"));
+
+            string string1 = string.Format("{0}分公司營業額：{1}元\t營業率：{2:p}", company, sum.ToString("c"), sum / total);
+            string string2 = string.Format("總營業額：{0}元", total.ToString("c"));
+            richTextBox1.Text += string1 + "\n";
+            richTextBox1.Text += string2 + "\n";
         }
 
         private void button13_Click(object sender, EventArgs e)

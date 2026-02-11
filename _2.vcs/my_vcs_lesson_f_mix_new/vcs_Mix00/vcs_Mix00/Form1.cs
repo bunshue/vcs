@@ -492,7 +492,6 @@ namespace vcs_Mix00
         private void button7_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -1500,8 +1499,56 @@ namespace vcs_Mix00
 
         }
 
+        private static void CallValue(int x, int y)
+        {
+            int z;
+            x = 20;
+            y = 30;
+            Console.WriteLine("\n方法內 交換前\t\t\t：x= {0}   y={1} ", x, y);
+            z = x;   //透過第三個變數來做x,y值作互換
+            x = y;
+            y = z;
+            Console.WriteLine("\n方法內 交換後\t\t\t：x= {0}   y={1}", x, y);
+        }
+
+        private static void CallRef(ref int x, ref int y)
+        {
+            int z;
+            x = 20;
+            y = 30;
+            Console.WriteLine("\n方法內 交換前\t\t：x= {0}   y={1} ", x, y);
+            z = x;  //透過第三個變數來做x,y值作互換
+            x = y;
+            y = z;
+            Console.WriteLine("\n方法內 交換後\t\t：x= {0}   y={1} ", x, y);
+        }
+
         private void button30_Click(object sender, EventArgs e)
         {
+            //Call by Value vs Call by Reference
+            //value
+
+            Console.WriteLine("\n  **** Call By Value 傳值呼叫 **** \n");
+            int a = 10;
+            int b = 12;
+            Console.WriteLine("\n呼叫敘述 未進入方法前\t\t：a= {0} b={1}", a, b);
+            CallValue(a, b);
+            Console.WriteLine("\n呼叫敘述 離開方法回原處時\t：a={0}  b={1}", a, b);
+            Console.Read();
+
+
+
+
+            //-------------
+            //reference
+
+            Console.WriteLine("\n  **** Call By Reference 參考呼叫 **** \n");
+            a = 10;
+            b = 12;
+            Console.WriteLine("\n呼叫敘述 未進入方法前\t：a= {0}  b={1}", a, b);
+            CallRef(ref a, ref b);
+            Console.WriteLine("\n呼叫敘述 離開方法回原處\t：a= {0}  b={1}", a, b);
+            Console.Read();
 
         }
 
