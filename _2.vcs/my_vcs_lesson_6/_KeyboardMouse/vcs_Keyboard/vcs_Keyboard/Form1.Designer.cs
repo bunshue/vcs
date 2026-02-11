@@ -388,7 +388,7 @@
             // 
             this.lb_result.AutoSize = true;
             this.lb_result.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_result.Location = new System.Drawing.Point(15, 220);
+            this.lb_result.Location = new System.Drawing.Point(15, 201);
             this.lb_result.Name = "lb_result";
             this.lb_result.Size = new System.Drawing.Size(87, 27);
             this.lb_result.TabIndex = 29;
@@ -426,7 +426,7 @@
             this.groupBox_keyboard.Controls.Add(this.label14);
             this.groupBox_keyboard.Location = new System.Drawing.Point(12, 10);
             this.groupBox_keyboard.Name = "groupBox_keyboard";
-            this.groupBox_keyboard.Size = new System.Drawing.Size(602, 266);
+            this.groupBox_keyboard.Size = new System.Drawing.Size(602, 499);
             this.groupBox_keyboard.TabIndex = 30;
             this.groupBox_keyboard.TabStop = false;
             // 
@@ -435,7 +435,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1214, 521);
+            this.ClientSize = new System.Drawing.Size(648, 521);
             this.Controls.Add(this.groupBox_keyboard);
             this.Name = "Form1";
             this.Text = "鍵盤事件";

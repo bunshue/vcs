@@ -29,7 +29,7 @@ namespace vcs_Keyboard
         void setup_keyboard()
         {
             groupBox_keyboard.Location = new Point(10, 10);
-            groupBox_keyboard.Size = new Size(600, 220);
+            groupBox_keyboard.Size = new Size(600, 500);
             groupBox_keyboard.BackColor = groupBox_keyboard_backcolor;
             groupBox_keyboard.Text = "";
 
@@ -95,5 +95,4 @@ namespace vcs_Keyboard
         }
     }
 }
-
 

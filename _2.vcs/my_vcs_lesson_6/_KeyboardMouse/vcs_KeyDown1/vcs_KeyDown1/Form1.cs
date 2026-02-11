@@ -11,13 +11,13 @@ namespace vcs_KeyDown1
 {
     public partial class Form1 : Form
     {
+        // 宣告 locX, locY用來存放坦克車開始的座標
+        int locX, locY;
+
         public Form1()
         {
             InitializeComponent();
         }
-
-        // 宣告 locX, locY用來存放坦克車開始的座標
-        int locX, locY;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -30,8 +30,7 @@ namespace vcs_KeyDown1
             picTankD.Visible = false;  // 坦克往下圖隱藏
             picTankL.Visible = false;  // 坦克往左圖隱藏
             picTankR.Visible = false;  // 坦克往右圖隱藏
-
-
+            label1.Text = "表單接受上下左右鍵";
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -83,7 +82,6 @@ namespace vcs_KeyDown1
                     }
                     break;
             }
-
             label1.Text = "(" + picTank.Location.X.ToString() + ", " + picTank.Location.Y.ToString() + ")";
         }
     }

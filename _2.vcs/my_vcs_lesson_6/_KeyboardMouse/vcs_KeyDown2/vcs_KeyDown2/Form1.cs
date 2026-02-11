@@ -31,7 +31,7 @@ namespace vcs_KeyDown2
             picTankL.Visible = false;  // 坦克往左圖隱藏
             picTankR.Visible = false;  // 坦克往右圖隱藏
 
-
+            label1.Text = "表單接受上下左右鍵";
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -83,7 +83,6 @@ namespace vcs_KeyDown2
                     }
                     break;
             }
-
             label1.Text = "(" + picTank.Location.X.ToString() + ", " + picTank.Location.Y.ToString() + ")";
         }
     }
