@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8DF345A0-2DD3-4F90-9519-2670E3A8836F}</ProjectGuid>
+    <ProjectGuid>{32D99372-980A-4BFC-80A2-6918F0B96722}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ReadXml</RootNamespace>
-    <AssemblyName>ReadXml</AssemblyName>
+    <RootNamespace>vcs_ReadWrite_XMLA_DGV</RootNamespace>
+    <AssemblyName>vcs_ReadWrite_XMLA_DGV</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

@@ -932,11 +932,52 @@ namespace vcs_SqlConnection1
 
         private void button20_Click(object sender, EventArgs e)
         {
+            //tmp1
+            using (SqlConnection cn = new SqlConnection())
+            {
+                DataSet ds = new DataSet();
 
+                cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
+                    @"AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch19DB.mdf;" +
+                    "Integrated Security=True";
+                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM 產品", cn);
+                da.Fill(ds, "產品");
+                dataGridView1.DataSource = ds.Tables["產品"];
+
+
+                // 將ds物件的所有產品資料寫入product.xml檔
+                ds.WriteXml("tmp_product.xml");
+                MessageBox.Show("產品資料成功寫入product.xml檔內");
+            }
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
+            //tmp2
+            DataSet ds = new DataSet();
+            ds.ReadXml("../../../../person.xml");  //將person.xml讀入至ds
+            //建立學號為學生DataTable的主鍵
+            DataColumn dc = ds.Tables["學生"].Columns["學號"];
+            ds.Tables["學生"].Constraints.Add("PK_學號", dc, true);
+            //DataRowCollection的Find方法搜尋txtSearchId主鍵資料
+            string student_id = "9096003";
+            DataRow dr = ds.Tables["學生"].Rows.Find(student_id);
+            //判斷dr是否為null
+            if (dr == null)
+            {
+                // 找不到學生記錄執行此處
+                richTextBox1.Text = "沒有學號 " + student_id + " 的學生";
+                return;
+            }
+            else
+            {
+                // 找到學生記錄執行此處
+                richTextBox1.Text += "學號：" + dr["學號"] + Environment.NewLine;
+                richTextBox1.Text += "姓名：" + dr["姓名"] + Environment.NewLine;
+                richTextBox1.Text += "電話：" + dr["電話"] + Environment.NewLine;
+                richTextBox1.Text += "信箱：" + dr["信箱"];
+            }
+
         }
 
         private void button22_Click(object sender, EventArgs e)
