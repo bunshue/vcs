@@ -35,9 +35,9 @@
             // 
             // btn_Select
             // 
-            this.btn_Select.Location = new System.Drawing.Point(156, 260);
+            this.btn_Select.Location = new System.Drawing.Point(104, 270);
             this.btn_Select.Name = "btn_Select";
-            this.btn_Select.Size = new System.Drawing.Size(128, 23);
+            this.btn_Select.Size = new System.Drawing.Size(173, 51);
             this.btn_Select.TabIndex = 0;
             this.btn_Select.Text = "查询已销售图书情况";
             this.btn_Select.UseVisualStyleBackColor = true;

@@ -248,7 +248,7 @@ namespace vcs_SqlConnection1
 
                 dataGridView1.DataSource = ds.Tables["員工"];
 
-                //3030
+                richTextBox1.Text += "------------------------------\n";  // 30個
 
                 SqlCommand cmdCount, cmdSum, cmdAvg, cmdMax, cmdMin;
 
@@ -788,7 +788,7 @@ namespace vcs_SqlConnection1
             string table_name = "銀行帳戶";
             ReadMDF(cnstr, table_name);
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             using (SqlConnection cn = new SqlConnection())
             {
@@ -911,19 +911,22 @@ namespace vcs_SqlConnection1
                 DataSet ds = new DataSet();
                 da.Fill(ds, "成績單");
                 dv = ds.Tables["成績單"].DefaultView;
+
+                dataGridView1.DataSource = dv;
+
+                richTextBox1.Text += "------------------------------\n";  // 30個
+
+                string filter = "國文>80";  // 篩選條件, 用WHRER語法
+                string sort = "英文 DESC";  // 排序方法, 科目, ASC:遞增, DESC:遞減
+
+                richTextBox1.Text += "篩選條件 : " + filter + "\n";
+                richTextBox1.Text += "排序方法 : " + sort + "\n";
+
+                dv.RowFilter = filter;
+                dv.Sort = sort;
+
+                dataGridView1.DataSource = dv;
             }
-            dataGridView1.DataSource = dv;
-
-            string filter = "國文>80";  // 篩選條件, 用WHRER語法
-            string sort = "英文 DESC";  // 排序方法, 科目, ASC:遞增, DESC:遞減
-
-            richTextBox1.Text += "篩選條件 : " + filter + "\n";
-            richTextBox1.Text += "排序方法 : " + sort + "\n";
-
-            dv.RowFilter = filter;
-            dv.Sort = sort;
-
-            dataGridView1.DataSource = dv;
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -943,60 +946,68 @@ namespace vcs_SqlConnection1
             using (SqlConnection con = new SqlConnection(conStr))//创建数据连接
             {
                 SqlCommand cmd = new SqlCommand(sql, con);//创建Command对象
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);//创建DataAdapter对象
-                sda.Fill(ds, "EmployeeInfo");//填充数据集
+                SqlDataAdapter da = new SqlDataAdapter(cmd);//创建DataAdapter对象
+                da.Fill(ds, "EmployeeInfo");//填充数据集
+
+                richTextBox1.Text += "------------------------------\n";  // 30個
+
+                //从头开始提取生日小于2009-7-1之前的员工信息
+                IEnumerable<DataRow> query = ds.Tables["EmployeeInfo"].AsEnumerable().TakeWhile(itm => itm.Field<DateTime>("Birthday") < Convert.ToDateTime("2009-7-1"));
+                dataGridView1.DataSource = query.CopyToDataTable();//设置dataGridView1数据源
             }
-            //从头开始提取生日小于2009-7-1之前的员工信息
-            IEnumerable<DataRow> query = ds.Tables["EmployeeInfo"].AsEnumerable().TakeWhile(itm => itm.Field<DateTime>("Birthday") < Convert.ToDateTime("2009-7-1"));
-            dataGridView1.DataSource = query.CopyToDataTable();//设置dataGridView1数据源
         }
 
-        /// <summary>
-        /// 查询数据库信息
-        /// </summary>
-        /// <returns>方法返回DataTable对象</returns>
-        private DataTable GetStudent()
+        private void button21_Click(object sender, EventArgs e)
         {
+            return;
+
+            // connection 要用 using 包起來
+
+            // 查询数据库信息
+
+            //创建数据库连接字符串
+            //string P_Str_ConnectionStr = string.Format(@"server=MR-PC\YL;database=db_TomeTwo;uid=sa;pwd=");
+            string P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+
+            //创建SQL查询字符串
+            string sqlstr = string.Format("SELECT * FROM tb_Grade");
+
+            //创建数据适配器
+            SqlDataAdapter da = new SqlDataAdapter(sqlstr, P_Str_ConnectionStr);
+            //SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);//compare
+
+            //创建数据表
+            DataTable dt = new DataTable();
+
+            da.Fill(dt);  // 填充数据表
+
+            dataGridView1.DataSource = dt;//设置数据源
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            // 查询数据库信息
+
             //String conStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
 
             //创建数据库连接字符串
             //string P_Str_ConnectionStr = string.Format(@"server=USER-20170504OU;database=db_TomeTwo;uid=sa;pwd=");
             //string P_Str_ConnectionStr = string.Format(@"server=USER-20170504OU;database=db_TomeTwo");
-            string P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
 
             //创建SQL查询字符串
-            string P_Str_SqlStr = string.Format(@"SELECT TOP 10 * FROM (SELECT TOP 20 * FROM tb_Grade ORDER BY 总分 DESC) AS st ORDER BY 总分 ASC");
+            sqlstr = string.Format(@"SELECT TOP 10 * FROM (SELECT TOP 20 * FROM tb_Grade ORDER BY 总分 DESC) AS st ORDER BY 总分 ASC");
 
-            SqlDataAdapter P_SqlDataAdapter = new SqlDataAdapter(P_Str_SqlStr, P_Str_ConnectionStr);//创建数据适配器
-            DataTable P_dt = new DataTable();//创建数据表
-            P_SqlDataAdapter.Fill(P_dt);//填充数据表
-            return P_dt;//返回数据表
-        }
-
-        /// <summary>
-        /// 查询数据库信息
-        /// </summary>
-        /// <returns>方法返回DataTable对象</returns>
-        private DataTable GetMessage()
-        {
-            //创建数据库连接字符串
-            //string P_Str_ConnectionStr = string.Format(@"server=MR-PC\YL;database=db_TomeTwo;uid=sa;pwd=");
-            string P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
-            //创建SQL查询字符串
-            string P_Str_SqlStr = string.Format("SELECT * FROM tb_Grade");
             //创建数据适配器
-            SqlDataAdapter P_SqlDataAdapter = new SqlDataAdapter(P_Str_SqlStr, P_Str_ConnectionStr);
-            DataTable P_dt = new DataTable();//创建数据表
-            P_SqlDataAdapter.Fill(P_dt);//填充数据表
-            return P_dt;//返回数据表
-        }
+            da = new SqlDataAdapter(sqlstr, P_Str_ConnectionStr);
+            //da = new SqlDataAdapter(sqlstr, cn);//compare
 
-        private void button21_Click(object sender, EventArgs e)
-        {
-            dataGridView1.DataSource = GetMessage();//设置数据源
+            //创建数据表
+            dt = new DataTable();
+
+            da.Fill(dt);//填充数据表
 
             //查询第10到第20名的数据
-            dataGridView1.DataSource = GetStudent();//设置数据源
+            dataGridView1.DataSource = dt;//设置数据源
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -1050,12 +1061,78 @@ namespace vcs_SqlConnection1
 
         private void button24_Click(object sender, EventArgs e)
         {
+            //測試登錄功能
 
+            string id_name = "david";
+            string password = "123456";
+
+            //SqlConnection sqlcon = new SqlConnection( "Data Source=MR-PC\\YL;Database=db_TomeTwo;Uid=sa;Pwd=;");//创建数据库连接对象
+            SqlConnection sqlcon = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30");//创建数据库连接对象
+
+            SqlDataAdapter sqlda = new SqlDataAdapter("select Name,Pwd from tb_Login where Name=@name and Pwd=@pwd", sqlcon);//创建数据库桥接器对象
+
+            //为SQL语句中的参数赋值
+            sqlda.SelectCommand.Parameters.Add("@name", SqlDbType.NChar, 10).Value = id_name;
+            sqlda.SelectCommand.Parameters.Add("@pwd", SqlDbType.NChar, 10).Value = password;
+            DataSet myds = new DataSet();//创建DataSet数据集对象
+            sqlda.Fill(myds);//填充数据集
+            if (myds.Tables[0].Rows.Count > 0)//判断数据集中的表中是否有行
+            {
+                MessageBox.Show("用户登录成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("用户登录失败，原因为：用户名或密码错误！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
+            // 查询数据库信息
 
+            //创建数据库连接字符串
+            //string P_Str_ConnectionStr = string.Format(@"server=MR-PC\YL;database=db_TomeTwo;uid=sa;pwd=");
+            //String P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            String P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            
+            //创建SQL查询字符串
+            string sqlstr = string.Format("SELECT * FROM tb_Book");
+
+            //创建数据适配器
+            SqlDataAdapter da = new SqlDataAdapter(sqlstr, P_Str_ConnectionStr);
+            //SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);//compare
+
+            //创建数据表
+            DataTable dt = new DataTable();
+
+            //填充数据表
+            da.Fill(dt);
+
+            dataGridView1.DataSource = dt;//设置数据源
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            // 查询销售量占前50%的图书信息
+            // 查询数据库信息
+
+            //创建数据库连接字符串
+            //string P_Str_ConnectionStr = string.Format(@"server=USER-20170504OU;database=db_TomeTwo;uid=sa;pwd=");
+            //String P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+
+            //创建SQL查询字符串
+            sqlstr = string.Format(@"SELECT TOP 50 PERCENT 书号,书名,sum(销售数量)as 合计销售数量 FROM tb_Book group by 书号,书名,作者 order by 3 desc");
+
+            //创建数据适配器
+            da = new SqlDataAdapter(sqlstr, P_Str_ConnectionStr);
+            //SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);//compare
+
+            //创建数据表
+            dt = new DataTable();
+
+            da.Fill(dt);  // 填充数据表
+
+            dataGridView1.DataSource = dt;//设置数据源
         }
 
         private void button26_Click(object sender, EventArgs e)
@@ -1100,6 +1177,24 @@ namespace vcs_SqlConnection1
 
         private void button27_Click(object sender, EventArgs e)
         {
+            //跳过满足指定条件的记录
+            //跳过生日小于2009-7-1的员工:
+
+            //string conStr = "Data Source=USER-20170504OU;Database=db_TomeTwo;UID=sa;Pwd=;";//取连接字符串
+            String conStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+
+            string sql = "select * from EmployeeInfo";//构造sql语句
+            DataSet ds = new DataSet();//创建数据集
+            using (SqlConnection con = new SqlConnection(conStr))//创建数据连接
+            {
+                SqlCommand cmd = new SqlCommand(sql, con);//创建Command对象
+                SqlDataAdapter da = new SqlDataAdapter(cmd);//创建DataAdapter对象
+                da.Fill(ds, "EmployeeInfo");//填充数据集
+            }
+            //跳过生日小于2009-7-1的员工信息
+            IEnumerable<DataRow> query = ds.Tables["EmployeeInfo"].AsEnumerable().SkipWhile(itm => itm.Field<DateTime>("Birthday") < Convert.ToDateTime("2009-7-1"));
+            dataGridView1.DataSource = query.CopyToDataTable();//设置dataGridView1数据源
+
         }
 
         private void button28_Click(object sender, EventArgs e)
