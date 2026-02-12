@@ -14,11 +14,15 @@ namespace SQLInner
     public partial class Frm_Main : Form
     {
         string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf";
-        //string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo_log.ldf";   another
 
         public Frm_Main()
         {
             InitializeComponent();
+        }
+
+        private void Frm_Main_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -31,7 +35,9 @@ namespace SQLInner
             DataSet myds = new DataSet();//创建DataSet数据集对象
             sqlda.Fill(myds);//填充数据集
             if (myds.Tables[0].Rows.Count > 0)//判断数据集中的表中是否有行
+            {
                 MessageBox.Show("用户登录成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             else
             {
                 MessageBox.Show("用户登录失败，原因为：用户名或密码错误！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);

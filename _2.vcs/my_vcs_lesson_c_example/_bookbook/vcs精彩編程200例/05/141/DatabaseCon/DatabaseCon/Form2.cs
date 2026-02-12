@@ -33,7 +33,9 @@ namespace DatabaseCon
         private void button1_Click(object sender, EventArgs e)
         {
             if (listBox1.SelectedIndices.Count == 0)
+            {
                 MessageBox.Show("请选择要连接的服务器！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             else
             {
                 this.Close();

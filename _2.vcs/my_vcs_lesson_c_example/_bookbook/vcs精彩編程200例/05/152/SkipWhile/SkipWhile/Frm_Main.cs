@@ -23,7 +23,9 @@ namespace SkipWhile
 
         private void Frm_Main_Load(object sender, EventArgs e)
         {
-            string conStr = "Data Source=USER-20170504OU;Database=db_TomeTwo;UID=sa;Pwd=;";//取连接字符串
+            //string conStr = "Data Source=USER-20170504OU;Database=db_TomeTwo;UID=sa;Pwd=;";//取连接字符串
+            String conStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+
             string sql = "select * from EmployeeInfo";//构造sql语句
             DataSet ds = new DataSet();//创建数据集
             using (SqlConnection con = new SqlConnection(conStr))//创建数据连接

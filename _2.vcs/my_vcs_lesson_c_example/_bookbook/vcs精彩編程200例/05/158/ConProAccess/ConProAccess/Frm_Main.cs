@@ -18,11 +18,17 @@ namespace ConProAccess
         string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf";
         //string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo_log.ldf";   another
 
+        public static string strCon = "";//记录数据库连接语句
+
         public Frm_Main()
         {
             InitializeComponent();
         }
-        public static string strCon = "";//记录数据库连接语句
+
+        private void Frm_Main_Load(object sender, EventArgs e)
+        {
+
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -47,6 +53,7 @@ namespace ConProAccess
                     strCon = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + textBox1.Text + ";";//连接无密码的数据库
                 }
             }
+
             OleDbConnection oledbcon = new OleDbConnection(strCon);//使用OLEDB连接对象连接数据库
             try
             {

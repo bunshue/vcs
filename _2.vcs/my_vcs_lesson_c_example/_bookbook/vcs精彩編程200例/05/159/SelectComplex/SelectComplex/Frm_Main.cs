@@ -31,8 +31,7 @@ namespace SelectComplex
             try
             {
                 dgv_Message.DataSource =//设置数据源
-                    GetStudent(txt_Name.Text, int.Parse(txt_Age.Text),
-                    txt_Address.Text);
+                    GetStudent(txt_Name.Text, int.Parse(txt_Age.Text), txt_Address.Text);
             }
             catch (Exception ex)//捕获异常
             {
@@ -46,14 +45,12 @@ namespace SelectComplex
         /// <returns>方法返回DataTable对象</returns>
         private DataTable GetStudent(string Name, int Age, string Address)
         {
-            string P_Str_ConnectionStr = string.Format(//创建数据库连接字符串
-                @"server=mr-pc\yl;database=db_TomeTwo;uid=sa;pwd=");
-            string P_Str_SqlStr = string.Format(//创建SQL查询字符串
-                @"SELECT 学生姓名,年龄,性别,家庭住址 FROM tb_Student
-            WHERE 学生姓名 LIKE '{0}%' and 年龄 LIKE '{1}%' and 家庭住址 LIKE '{2}%'",
-                Name, Age, Address);
-            SqlDataAdapter P_SqlDataAdapter = new SqlDataAdapter(//创建数据适配器
-                P_Str_SqlStr, P_Str_ConnectionStr);
+            //创建数据库连接字符串
+            string P_Str_ConnectionStr = string.Format(@"server=mr-pc\yl;database=db_TomeTwo;uid=sa;pwd=");
+            //创建SQL查询字符串
+            string P_Str_SqlStr = string.Format(@"SELECT 学生姓名,年龄,性别,家庭住址 FROM tb_Student WHERE 学生姓名 LIKE '{0}%' and 年龄 LIKE '{1}%' and 家庭住址 LIKE '{2}%'", Name, Age, Address);
+            //创建数据适配器
+            SqlDataAdapter P_SqlDataAdapter = new SqlDataAdapter(P_Str_SqlStr, P_Str_ConnectionStr);
             DataTable P_dt = new DataTable();//创建数据表
             P_SqlDataAdapter.Fill(P_dt);//填充数据表
             return P_dt;//返回数据表
@@ -65,12 +62,12 @@ namespace SelectComplex
         /// <returns>方法返回DataTable对象</returns>
         private DataTable GetMessage()
         {
-            string P_Str_ConnectionStr = string.Format(//创建数据库连接字符串
-                @"server=USER-20170504OU;database=db_TomeTwo;uid=sa;pwd=");
-            string P_Str_SqlStr = string.Format(//创建SQL查询字符串
-                "SELECT  学生姓名,年龄,性别,家庭住址 FROM tb_Student");
-            SqlDataAdapter P_SqlDataAdapter = new SqlDataAdapter(//创建数据适配器
-                P_Str_SqlStr, P_Str_ConnectionStr);
+            //创建数据库连接字符串
+            string P_Str_ConnectionStr = string.Format(@"server=USER-20170504OU;database=db_TomeTwo;uid=sa;pwd=");
+            //创建SQL查询字符串
+            string P_Str_SqlStr = string.Format("SELECT  学生姓名,年龄,性别,家庭住址 FROM tb_Student");
+            //创建数据适配器
+            SqlDataAdapter P_SqlDataAdapter = new SqlDataAdapter(P_Str_SqlStr, P_Str_ConnectionStr);
             DataTable P_dt = new DataTable();//创建数据表
             P_SqlDataAdapter.Fill(P_dt);//填充数据表
             return P_dt;//返回数据表

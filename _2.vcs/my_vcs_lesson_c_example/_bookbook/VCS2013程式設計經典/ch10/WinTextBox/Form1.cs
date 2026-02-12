@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+// 網站的快速連結 不知道是怎麼做的~~~~~~~~~~~~~~~
+
 namespace WinTextBox
 {
     public partial class Form1 : Form

@@ -22,13 +22,13 @@ namespace ByteImage
             InitializeComponent();
         }
 
-        #region 定义公共的类对象及变量
+        //#region 定义公共的类对象及变量
         SqlConnection sqlcon;       //声明数据库连接对象
         SqlDataAdapter sqlda;       //声明数据桥接器对象
         DataSet myds;               //声明数据集对象
         //定义数据库连接字符串
         string strCon = "Data Source=XIAOKE;Database=db_09;uid=sa;pwd=;";
-        #endregion
+        //#endregion
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -87,7 +87,7 @@ namespace ByteImage
             }
         }
 
-        #region 添加用户信息
+        //#region 添加用户信息
         /// <summary>
         /// 添加用户信息
         /// </summary>
@@ -119,9 +119,9 @@ namespace ByteImage
                 return false;
             }
         }
-        #endregion
+        //#endregion
 
-        #region 在DataGridView中显示用户名称
+        //#region 在DataGridView中显示用户名称
         /// <summary>
         /// 在DataGridView中显示用户名称
         /// </summary>
@@ -133,7 +133,7 @@ namespace ByteImage
             sqlda.Fill(myds);
             dataGridView1.DataSource = myds.Tables[0];
         }
-        #endregion
+        //#endregion
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {

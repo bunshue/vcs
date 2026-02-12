@@ -16,18 +16,18 @@ namespace EManageByProc
         string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_09_Data.MDF";
         //string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_09_Log.LDF";   another
 
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
-        #region 定义全局变量及对象
+        //#region 定义全局变量及对象
         string strCon = "Data Source=USER-20170504OU;Database=db_09;Uid=sa;Pwd=;";
         SqlConnection sqlcon;
         SqlCommand sqlcmd;
         SqlDataAdapter sqlda;
         DataSet myds;
-        #endregion
+        //#endregion
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
 
         //自动生成编号，并对DataGridView控件进行数据绑定
         private void Form1_Load(object sender, EventArgs e)
@@ -63,9 +63,13 @@ namespace EManageByProc
             sqlcon.Close();
             int int_returnValue = (int)returnValue.Value;
             if (int_returnValue == 0)
+            {
                 MessageBox.Show("已经存在该职工编号！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             else
+            {
                 MessageBox.Show("职工信息——添加成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             dgvInfo.DataSource = SelectEInfo("", "").Tables[0];
         }
 
@@ -134,7 +138,7 @@ namespace EManageByProc
             dgvInfo.DataSource = SelectEInfo(cboxCondition.Text, txtKeyWord.Text).Tables[0];
         }
 
-        #region 获得数据库连接
+        //#region 获得数据库连接
         /// <summary>
         /// 获得数据库连接
         /// </summary>
@@ -145,9 +149,9 @@ namespace EManageByProc
             sqlcon.Open();
             return sqlcon;
         }
-        #endregion
+        //#endregion
 
-        #region 查询职工信息
+        //#region 查询职工信息
         /// <summary>
         /// 查询职工信息
         /// </summary>
@@ -189,6 +193,6 @@ namespace EManageByProc
             sqlcon.Close();
             return myds;
         }
-        #endregion
+        //#endregion
     }
 }

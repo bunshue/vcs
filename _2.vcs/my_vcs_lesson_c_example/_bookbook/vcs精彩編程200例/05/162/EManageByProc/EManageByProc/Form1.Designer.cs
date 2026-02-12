@@ -64,7 +64,7 @@
             // 
             this.txtKeyWord.Location = new System.Drawing.Point(283, 18);
             this.txtKeyWord.Name = "txtKeyWord";
-            this.txtKeyWord.Size = new System.Drawing.Size(157, 21);
+            this.txtKeyWord.Size = new System.Drawing.Size(157, 22);
             this.txtKeyWord.TabIndex = 5;
             // 
             // label15
@@ -146,7 +146,7 @@
             // 
             this.txtEmail.Location = new System.Drawing.Point(261, 75);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(250, 21);
+            this.txtEmail.Size = new System.Drawing.Size(250, 22);
             this.txtEmail.TabIndex = 16;
             // 
             // label7
@@ -154,7 +154,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(192, 78);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(71, 12);
+            this.label7.Size = new System.Drawing.Size(68, 12);
             this.label7.TabIndex = 15;
             this.label7.Text = "Email地址：";
             // 
@@ -190,7 +190,7 @@
             // 
             this.txtQQ.Location = new System.Drawing.Point(72, 75);
             this.txtQQ.Name = "txtQQ";
-            this.txtQQ.Size = new System.Drawing.Size(114, 21);
+            this.txtQQ.Size = new System.Drawing.Size(114, 22);
             this.txtQQ.TabIndex = 14;
             // 
             // label8
@@ -198,7 +198,7 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(7, 78);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(65, 12);
+            this.label8.Size = new System.Drawing.Size(63, 12);
             this.label8.TabIndex = 13;
             this.label8.Text = "QQ  号码：";
             // 
@@ -206,7 +206,7 @@
             // 
             this.txtAddress.Location = new System.Drawing.Point(325, 47);
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(186, 21);
+            this.txtAddress.Size = new System.Drawing.Size(186, 22);
             this.txtAddress.TabIndex = 12;
             // 
             // label6
@@ -222,7 +222,7 @@
             // 
             this.txtTel.Location = new System.Drawing.Point(163, 47);
             this.txtTel.Name = "txtTel";
-            this.txtTel.Size = new System.Drawing.Size(114, 21);
+            this.txtTel.Size = new System.Drawing.Size(114, 22);
             this.txtTel.TabIndex = 10;
             // 
             // label4
@@ -238,7 +238,7 @@
             // 
             this.txtAge.Location = new System.Drawing.Point(72, 47);
             this.txtAge.Name = "txtAge";
-            this.txtAge.Size = new System.Drawing.Size(44, 21);
+            this.txtAge.Size = new System.Drawing.Size(44, 22);
             this.txtAge.TabIndex = 8;
             // 
             // label5
@@ -246,7 +246,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(7, 50);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(65, 12);
+            this.label5.Size = new System.Drawing.Size(53, 12);
             this.label5.TabIndex = 7;
             this.label5.Text = "年    龄：";
             // 
@@ -263,7 +263,7 @@
             // 
             this.txtName.Location = new System.Drawing.Point(285, 18);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(127, 21);
+            this.txtName.Size = new System.Drawing.Size(127, 22);
             this.txtName.TabIndex = 5;
             // 
             // label2
@@ -302,7 +302,7 @@
             this.txtID.Location = new System.Drawing.Point(72, 18);
             this.txtID.Name = "txtID";
             this.txtID.ReadOnly = true;
-            this.txtID.Size = new System.Drawing.Size(147, 21);
+            this.txtID.Size = new System.Drawing.Size(147, 22);
             this.txtID.TabIndex = 1;
             // 
             // label1
@@ -328,7 +328,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(531, 379);
+            this.ClientSize = new System.Drawing.Size(879, 538);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvInfo);

@@ -41,14 +41,14 @@
             // 
             this.dtPicker_Begin.Location = new System.Drawing.Point(71, 8);
             this.dtPicker_Begin.Name = "dtPicker_Begin";
-            this.dtPicker_Begin.Size = new System.Drawing.Size(149, 21);
+            this.dtPicker_Begin.Size = new System.Drawing.Size(149, 22);
             this.dtPicker_Begin.TabIndex = 0;
             // 
             // dtPicker_End
             // 
             this.dtPicker_End.Location = new System.Drawing.Point(249, 8);
             this.dtPicker_End.Name = "dtPicker_End";
-            this.dtPicker_End.Size = new System.Drawing.Size(149, 21);
+            this.dtPicker_End.Size = new System.Drawing.Size(149, 22);
             this.dtPicker_End.TabIndex = 0;
             // 
             // btn_Select
@@ -92,7 +92,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(456, 187);
+            this.ClientSize = new System.Drawing.Size(773, 521);
             this.Controls.Add(this.dgv_Message);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);

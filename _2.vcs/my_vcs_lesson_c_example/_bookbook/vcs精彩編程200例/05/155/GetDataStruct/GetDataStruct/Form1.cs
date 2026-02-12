@@ -40,13 +40,17 @@ namespace GetDataStruct
         private void toolStripTextBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
+            {
                 toolStripTextBox3.Focus();
+            }
         }
 
         private void toolStripTextBox3_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
+            {
                 toolStripButton1_Click(sender, e);
+            }
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)

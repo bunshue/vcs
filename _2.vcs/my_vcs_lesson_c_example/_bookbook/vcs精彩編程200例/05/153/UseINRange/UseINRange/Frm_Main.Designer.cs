@@ -53,7 +53,7 @@
             // 
             this.txt_End.Location = new System.Drawing.Point(206, 27);
             this.txt_End.Name = "txt_End";
-            this.txt_End.Size = new System.Drawing.Size(67, 21);
+            this.txt_End.Size = new System.Drawing.Size(67, 22);
             this.txt_End.TabIndex = 7;
             this.txt_End.Text = "600";
             // 
@@ -61,7 +61,7 @@
             // 
             this.txt_Begin.Location = new System.Drawing.Point(122, 27);
             this.txt_Begin.Name = "txt_Begin";
-            this.txt_Begin.Size = new System.Drawing.Size(55, 21);
+            this.txt_Begin.Size = new System.Drawing.Size(55, 22);
             this.txt_Begin.TabIndex = 8;
             this.txt_Begin.Text = "500";
             // 
@@ -121,12 +121,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(411, 238);
+            this.ClientSize = new System.Drawing.Size(854, 517);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgv_Message);
             this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "使用IN引入子查询限定查询范围";
+            this.Load += new System.EventHandler(this.Frm_Main_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Message)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

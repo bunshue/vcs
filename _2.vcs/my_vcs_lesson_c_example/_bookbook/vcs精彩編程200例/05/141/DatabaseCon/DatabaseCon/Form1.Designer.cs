@@ -79,7 +79,7 @@
             this.textBox3.Location = new System.Drawing.Point(257, 50);
             this.textBox3.Name = "textBox3";
             this.textBox3.PasswordChar = '*';
-            this.textBox3.Size = new System.Drawing.Size(109, 21);
+            this.textBox3.Size = new System.Drawing.Size(109, 22);
             this.textBox3.TabIndex = 7;
             // 
             // label3
@@ -95,7 +95,7 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(90, 50);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(111, 21);
+            this.textBox2.Size = new System.Drawing.Size(111, 22);
             this.textBox2.TabIndex = 5;
             // 
             // label2
@@ -121,7 +121,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(90, 23);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(245, 21);
+            this.textBox1.Size = new System.Drawing.Size(245, 22);
             this.textBox1.TabIndex = 2;
             // 
             // label1
@@ -140,7 +140,7 @@
             this.radioButton1.ForeColor = System.Drawing.Color.Blue;
             this.radioButton1.Location = new System.Drawing.Point(11, 0);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(161, 16);
+            this.radioButton1.Size = new System.Drawing.Size(152, 16);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Access或Excel数据库连接";
@@ -202,7 +202,7 @@
             this.checkBox2.Enabled = false;
             this.checkBox2.Location = new System.Drawing.Point(26, 73);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(132, 16);
+            this.checkBox2.Size = new System.Drawing.Size(126, 16);
             this.checkBox2.TabIndex = 12;
             this.checkBox2.Text = "SQL Server身份验证";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -214,7 +214,7 @@
             this.checkBox1.Enabled = false;
             this.checkBox1.Location = new System.Drawing.Point(26, 52);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(114, 16);
+            this.checkBox1.Size = new System.Drawing.Size(116, 16);
             this.checkBox1.TabIndex = 11;
             this.checkBox1.Text = "Windows身份验证";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -237,7 +237,7 @@
             this.textBox4.Location = new System.Drawing.Point(248, 98);
             this.textBox4.Name = "textBox4";
             this.textBox4.PasswordChar = '*';
-            this.textBox4.Size = new System.Drawing.Size(109, 21);
+            this.textBox4.Size = new System.Drawing.Size(109, 22);
             this.textBox4.TabIndex = 7;
             this.textBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox4_KeyPress);
             // 
@@ -255,7 +255,7 @@
             this.textBox5.Enabled = false;
             this.textBox5.Location = new System.Drawing.Point(81, 98);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(111, 21);
+            this.textBox5.Size = new System.Drawing.Size(111, 22);
             this.textBox5.TabIndex = 5;
             this.textBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox5_KeyPress);
             // 
@@ -273,7 +273,7 @@
             this.textBox6.Enabled = false;
             this.textBox6.Location = new System.Drawing.Point(78, 23);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(245, 21);
+            this.textBox6.Size = new System.Drawing.Size(245, 22);
             this.textBox6.TabIndex = 2;
             // 
             // label6
@@ -291,7 +291,7 @@
             this.radioButton2.ForeColor = System.Drawing.Color.Blue;
             this.radioButton2.Location = new System.Drawing.Point(11, 0);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(101, 16);
+            this.radioButton2.Size = new System.Drawing.Size(104, 16);
             this.radioButton2.TabIndex = 0;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "SQL数据库连接";
@@ -324,7 +324,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(389, 379);
+            this.ClientSize = new System.Drawing.Size(729, 458);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.groupBox2);

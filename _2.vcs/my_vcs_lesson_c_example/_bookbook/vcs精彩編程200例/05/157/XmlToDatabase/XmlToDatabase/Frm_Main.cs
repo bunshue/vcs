@@ -18,18 +18,17 @@ namespace XmlToDatabase
         string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf";
         //string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo_log.ldf";   another
 
-        public Frm_Main()
-        {
-            InitializeComponent();
-        }
-
         //Employee.xml 不知道寫到哪?
         static string strPath = "Employee.xml";//记录XML文件路径
         //定义数据库连接字符串
         string strCon = "Data Source=USER-20170504OU;Database=db_TomeTwo;Uid=sa;Pwd=;";
         linqtosqlDataContext linq; //创建Linq连接对象
 
-        //窗体加载时加载XML文件
+        public Frm_Main()
+        {
+            InitializeComponent();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             if (File.Exists(strPath))
@@ -56,7 +55,7 @@ namespace XmlToDatabase
             MessageBox.Show("成功将XML中的数据更新到了数据库中！");//弹出提示
         }
 
-        #region 将XML文件内容绑定到DataGridView控件
+        //#region 将XML文件内容绑定到DataGridView控件
         /// <summary>
         /// 将XML文件内容绑定到DataGridView控件
         /// </summary>
@@ -66,6 +65,6 @@ namespace XmlToDatabase
             myds.ReadXml(strPath);//读取XML结构
             dataGridView1.DataSource = myds.Tables[0];//在DataGridView中显示XML文件中的信息
         }
-        #endregion
+        //#endregion
     }
 }

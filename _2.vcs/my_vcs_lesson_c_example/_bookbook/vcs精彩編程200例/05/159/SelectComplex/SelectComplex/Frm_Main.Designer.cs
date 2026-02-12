@@ -89,7 +89,7 @@
             // 
             this.txt_Name.Location = new System.Drawing.Point(59, 186);
             this.txt_Name.Name = "txt_Name";
-            this.txt_Name.Size = new System.Drawing.Size(63, 21);
+            this.txt_Name.Size = new System.Drawing.Size(63, 22);
             this.txt_Name.TabIndex = 5;
             this.txt_Name.Text = "李";
             // 
@@ -97,7 +97,7 @@
             // 
             this.txt_Age.Location = new System.Drawing.Point(174, 185);
             this.txt_Age.Name = "txt_Age";
-            this.txt_Age.Size = new System.Drawing.Size(63, 21);
+            this.txt_Age.Size = new System.Drawing.Size(63, 22);
             this.txt_Age.TabIndex = 6;
             this.txt_Age.Text = "2";
             // 
@@ -105,7 +105,7 @@
             // 
             this.txt_Address.Location = new System.Drawing.Point(290, 185);
             this.txt_Address.Name = "txt_Address";
-            this.txt_Address.Size = new System.Drawing.Size(63, 21);
+            this.txt_Address.Size = new System.Drawing.Size(63, 22);
             this.txt_Address.TabIndex = 7;
             this.txt_Address.Text = "吉林";
             // 
@@ -113,7 +113,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(435, 213);
+            this.ClientSize = new System.Drawing.Size(806, 544);
             this.Controls.Add(this.txt_Address);
             this.Controls.Add(this.txt_Age);
             this.Controls.Add(this.txt_Name);

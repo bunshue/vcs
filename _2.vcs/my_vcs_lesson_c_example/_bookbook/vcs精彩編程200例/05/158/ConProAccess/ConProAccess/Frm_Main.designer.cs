@@ -60,7 +60,7 @@
             this.textBox2.Location = new System.Drawing.Point(90, 50);
             this.textBox2.Name = "textBox2";
             this.textBox2.PasswordChar = '*';
-            this.textBox2.Size = new System.Drawing.Size(109, 21);
+            this.textBox2.Size = new System.Drawing.Size(109, 22);
             this.textBox2.TabIndex = 7;
             // 
             // label3
@@ -86,7 +86,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(90, 23);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(245, 21);
+            this.textBox1.Size = new System.Drawing.Size(245, 22);
             this.textBox1.TabIndex = 2;
             // 
             // label1
@@ -105,7 +105,7 @@
             this.radioButton1.ForeColor = System.Drawing.Color.Blue;
             this.radioButton1.Location = new System.Drawing.Point(11, 0);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(119, 16);
+            this.radioButton1.Size = new System.Drawing.Size(114, 16);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Access数据库连接";
@@ -137,13 +137,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(389, 212);
+            this.ClientSize = new System.Drawing.Size(741, 458);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.groupBox1);
             this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "连接加密的Access数据库";
+            this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

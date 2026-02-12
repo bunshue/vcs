@@ -115,7 +115,7 @@
             // 
             this.txt_Address.Location = new System.Drawing.Point(83, 108);
             this.txt_Address.Name = "txt_Address";
-            this.txt_Address.Size = new System.Drawing.Size(383, 21);
+            this.txt_Address.Size = new System.Drawing.Size(383, 22);
             this.txt_Address.TabIndex = 17;
             // 
             // label9
@@ -131,7 +131,7 @@
             // 
             this.txt_Email.Location = new System.Drawing.Point(256, 78);
             this.txt_Email.Name = "txt_Email";
-            this.txt_Email.Size = new System.Drawing.Size(210, 21);
+            this.txt_Email.Size = new System.Drawing.Size(210, 22);
             this.txt_Email.TabIndex = 15;
             // 
             // label7
@@ -139,7 +139,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(210, 81);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(47, 12);
+            this.label7.Size = new System.Drawing.Size(44, 12);
             this.label7.TabIndex = 14;
             this.label7.Text = "Email：";
             // 
@@ -147,7 +147,7 @@
             // 
             this.txt_Phone.Location = new System.Drawing.Point(83, 78);
             this.txt_Phone.Name = "txt_Phone";
-            this.txt_Phone.Size = new System.Drawing.Size(112, 21);
+            this.txt_Phone.Size = new System.Drawing.Size(112, 22);
             this.txt_Phone.TabIndex = 13;
             // 
             // label8
@@ -163,7 +163,7 @@
             // 
             this.txt_QQ.Location = new System.Drawing.Point(352, 49);
             this.txt_QQ.Name = "txt_QQ";
-            this.txt_QQ.Size = new System.Drawing.Size(114, 21);
+            this.txt_QQ.Size = new System.Drawing.Size(114, 22);
             this.txt_QQ.TabIndex = 11;
             // 
             // label6
@@ -171,7 +171,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(325, 52);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(29, 12);
+            this.label6.Size = new System.Drawing.Size(33, 12);
             this.label6.TabIndex = 10;
             this.label6.Text = "QQ：";
             // 
@@ -179,7 +179,7 @@
             // 
             this.txt_Age2.Location = new System.Drawing.Point(273, 49);
             this.txt_Age2.Name = "txt_Age2";
-            this.txt_Age2.Size = new System.Drawing.Size(34, 21);
+            this.txt_Age2.Size = new System.Drawing.Size(34, 22);
             this.txt_Age2.TabIndex = 9;
             // 
             // label4
@@ -195,7 +195,7 @@
             // 
             this.txt_Age.Location = new System.Drawing.Point(214, 49);
             this.txt_Age.Name = "txt_Age";
-            this.txt_Age.Size = new System.Drawing.Size(34, 21);
+            this.txt_Age.Size = new System.Drawing.Size(34, 22);
             this.txt_Age.TabIndex = 7;
             // 
             // label5
@@ -232,7 +232,7 @@
             // 
             this.txt_Name.Location = new System.Drawing.Point(314, 20);
             this.txt_Name.Name = "txt_Name";
-            this.txt_Name.Size = new System.Drawing.Size(152, 21);
+            this.txt_Name.Size = new System.Drawing.Size(152, 22);
             this.txt_Name.TabIndex = 3;
             // 
             // label2
@@ -248,7 +248,7 @@
             // 
             this.txt_id.Location = new System.Drawing.Point(83, 20);
             this.txt_id.Name = "txt_id";
-            this.txt_id.Size = new System.Drawing.Size(152, 21);
+            this.txt_id.Size = new System.Drawing.Size(152, 22);
             this.txt_id.TabIndex = 1;
             // 
             // label1
@@ -276,9 +276,9 @@
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel3});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 384);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 497);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(497, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(805, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -290,20 +290,20 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(14, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(13, 17);
             this.toolStripStatusLabel1.Text = "||";
             // 
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(148, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(145, 17);
             this.toolStripStatusLabel2.Text = "吉林省明日科技有限公司  ";
             // 
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.IsLink = true;
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(170, 17);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(167, 17);
             this.toolStripStatusLabel3.Text = "http://www.mingribook.com";
             // 
             // timer1
@@ -316,7 +316,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(497, 406);
+            this.ClientSize = new System.Drawing.Size(805, 519);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.txt_Message);
             this.Controls.Add(this.groupBox1);

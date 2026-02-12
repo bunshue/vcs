@@ -15,11 +15,13 @@ namespace SQLServerDistill
         {
             InitializeComponent();
         }
+
         public Form2(string strname)
         {
             InitializeComponent();
             this.Text = strname + "±í½á¹¹";
         }
+
         private void Form2_Load(object sender, EventArgs e)
         {
 

@@ -35,7 +35,7 @@
             // 
             // btn_Edit
             // 
-            this.btn_Edit.Location = new System.Drawing.Point(394, 181);
+            this.btn_Edit.Location = new System.Drawing.Point(394, 256);
             this.btn_Edit.Name = "btn_Edit";
             this.btn_Edit.Size = new System.Drawing.Size(63, 23);
             this.btn_Edit.TabIndex = 16;
@@ -56,7 +56,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(462, 210);
+            this.ClientSize = new System.Drawing.Size(802, 527);
             this.Controls.Add(this.btn_Edit);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Frm_Main";

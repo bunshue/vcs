@@ -36,26 +36,38 @@ namespace CrossAnalyse
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox1.SelectedIndex == 0)
+            {
                 comboBox2.SelectedIndex = 0;
+            }
             else
+            {
                 comboBox2.SelectedIndex = 1;
+            }
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox2.SelectedIndex == 0)
+            {
                 comboBox1.SelectedIndex = 0;
+            }
             else
+            {
                 comboBox1.SelectedIndex = 1;
+            }
         }
 
-        #region 按指定的条件使用交叉表查询数据
+        //#region 按指定的条件使用交叉表查询数据
         /// <summary>
         /// 按指定的条件使用交叉表查询数据
         /// </summary>
         protected void bindInfo()
         {
             SqlConnection sqlcon = new SqlConnection("Data Source=USER-20170504OU;Database=db_09;Uid=sa;Pwd=");
+
+            //String P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_09.mdf;Integrated Security=True;Connect Timeout=30";
+            String P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_09.mdf;Integrated Security=True;Connect Timeout=30";
+
             SqlCommand sqlcom = new SqlCommand("proc_across_table", sqlcon);
             sqlcom.CommandType = CommandType.StoredProcedure;
             sqlcom.Parameters.Add("@TableName", SqlDbType.VarChar, 50).Value = "商品销售表";
@@ -75,6 +87,6 @@ namespace CrossAnalyse
             dataGridView1.DataSource = myds.Tables[0];
             dataGridView1.Columns[1].Width = 120;
         }
-        #endregion
+        //#endregion
     }
 }

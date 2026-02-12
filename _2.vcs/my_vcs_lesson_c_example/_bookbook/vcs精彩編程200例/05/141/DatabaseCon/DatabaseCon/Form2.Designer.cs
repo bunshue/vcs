@@ -40,7 +40,7 @@
             this.label1.ForeColor = System.Drawing.Color.Blue;
             this.label1.Location = new System.Drawing.Point(7, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(155, 12);
+            this.label1.Size = new System.Drawing.Size(158, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "当前网络上运行的SQL服务器";
             // 
@@ -78,7 +78,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(179, 222);
+            this.ClientSize = new System.Drawing.Size(609, 441);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.listBox1);

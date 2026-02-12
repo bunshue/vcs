@@ -15,7 +15,6 @@ namespace DatabaseCon
     public partial class Form1 : Form
     {
         string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_09_Data.MDF";
-        //string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_09_Log.LDF";   another
 
         public static string strCon = "";
 
@@ -91,6 +90,7 @@ namespace DatabaseCon
                 {
                     strCon = "Data Source=" + textBox6.Text + ";Database=" + comboBox1.Text + ";Uid=" + textBox5.Text + ";Pwd=" + textBox4.Text + ";";
                 }
+
                 SqlConnection sqlcon = new SqlConnection(strCon);
                 try
                 {
@@ -109,10 +109,19 @@ namespace DatabaseCon
         {
             if (radioButton1.Checked)
             {
-                textBox1.Enabled = textBox2.Enabled = textBox3.Enabled=button1.Enabled  = true;
+                textBox1.Enabled = true;
+                textBox2.Enabled = true;
+                textBox3.Enabled = true;
+                button1.Enabled = true;
                 radioButton2.Checked = false;
-                textBox4.Enabled = textBox5.Enabled = textBox6.Enabled = button2.Enabled 
-                    = checkBox1.Enabled = checkBox2.Enabled = comboBox1.Enabled = false;
+
+                textBox4.Enabled = false;
+                textBox5.Enabled = false;
+                textBox6.Enabled = false;
+                button2.Enabled = false;
+                checkBox1.Enabled = false;
+                checkBox2.Enabled = false;
+                comboBox1.Enabled = false;
             }
         }
 
@@ -121,8 +130,18 @@ namespace DatabaseCon
             if (radioButton2.Checked)
             {
                 radioButton1.Checked = false;
-                textBox1.Enabled = textBox2.Enabled = textBox3.Enabled = button1.Enabled = textBox4.Enabled = textBox5.Enabled = false;
-                textBox6.Enabled = button2.Enabled = checkBox1.Enabled = checkBox2.Enabled = comboBox1.Enabled = true;
+                textBox1.Enabled = false;
+                textBox2.Enabled = false;
+                textBox3.Enabled = false;
+                button1.Enabled = false;
+                textBox4.Enabled = false;
+                textBox5.Enabled = false;
+
+                textBox6.Enabled = true;
+                button2.Enabled = true;
+                checkBox1.Enabled = true;
+                checkBox2.Enabled = true;
+                comboBox1.Enabled = true;
             }
         }
 
@@ -165,7 +184,9 @@ namespace DatabaseCon
         private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
+            {
                 textBox4.Focus();
+            }
         }
 
         private void textBox4_KeyPress(object sender, KeyPressEventArgs e)

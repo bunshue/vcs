@@ -28,8 +28,8 @@ namespace TimeFind
 
         private void btn_Select_Click(object sender, EventArgs e)
         {
-            dgv_Message.DataSource = GetBook(//设置数据源
-                dtPicker_Begin.Value, dtPicker_End.Value);
+            //设置数据源
+            dgv_Message.DataSource = GetBook(dtPicker_Begin.Value, dtPicker_End.Value);
         }
 
         /// <summary>
@@ -38,13 +38,12 @@ namespace TimeFind
         /// <returns>方法返回DataTable对象</returns>
         private DataTable GetBook(DateTime dt1, DateTime dt2)
         {
-            string P_Str_ConnectionStr = string.Format(//创建数据库连接字符串
-                @"server=USER-20170504OU;database=db_TomeTwo;uid=sa;pwd=");
-            string P_Str_SqlStr = string.Format(//创建SQL查询字符串
-                "SELECT * FROM tb_Book WHERE 日期 BETWEEN '{0}' AND '{1}'",
-                dt1, dt2);
-            SqlDataAdapter P_SqlDataAdapter = new SqlDataAdapter(//创建数据适配器
-                P_Str_SqlStr, P_Str_ConnectionStr);
+            //创建数据库连接字符串
+            string P_Str_ConnectionStr = string.Format(@"server=USER-20170504OU;database=db_TomeTwo;uid=sa;pwd=");
+            //创建SQL查询字符串
+            string P_Str_SqlStr = string.Format("SELECT * FROM tb_Book WHERE 日期 BETWEEN '{0}' AND '{1}'", dt1, dt2);
+            //创建数据适配器
+            SqlDataAdapter P_SqlDataAdapter = new SqlDataAdapter(P_Str_SqlStr, P_Str_ConnectionStr);
             DataTable P_dt = new DataTable();//创建数据表
             P_SqlDataAdapter.Fill(P_dt);//填充数据表
             return P_dt;//返回数据表
@@ -56,12 +55,12 @@ namespace TimeFind
         /// <returns>方法返回DataTable对象</returns>
         private DataTable GetMessage()
         {
-            string P_Str_ConnectionStr = string.Format(//创建数据库连接字符串
-                @"server=MR-PC\YL;database=db_TomeTwo;uid=sa;pwd=");
-            string P_Str_SqlStr = string.Format(//创建SQL查询字符串
-                "SELECT * FROM tb_Book");
-            SqlDataAdapter P_SqlDataAdapter = new SqlDataAdapter(//创建数据适配器
-                P_Str_SqlStr, P_Str_ConnectionStr);
+            //创建数据库连接字符串
+            string P_Str_ConnectionStr = string.Format(@"server=MR-PC\YL;database=db_TomeTwo;uid=sa;pwd=");
+            //创建SQL查询字符串
+            string P_Str_SqlStr = string.Format("SELECT * FROM tb_Book");
+            //创建数据适配器
+            SqlDataAdapter P_SqlDataAdapter = new SqlDataAdapter(P_Str_SqlStr, P_Str_ConnectionStr);
             DataTable P_dt = new DataTable();//创建数据表
             P_SqlDataAdapter.Fill(P_dt);//填充数据表
             return P_dt;//返回数据表

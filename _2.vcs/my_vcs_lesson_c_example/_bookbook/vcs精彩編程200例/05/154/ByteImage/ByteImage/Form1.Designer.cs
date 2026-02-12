@@ -62,7 +62,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(77, 10);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(125, 21);
+            this.textBox1.Size = new System.Drawing.Size(125, 22);
             this.textBox1.TabIndex = 2;
             // 
             // openFileDialog1
@@ -113,7 +113,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(385, 187);
+            this.ClientSize = new System.Drawing.Size(828, 468);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dataGridView1);

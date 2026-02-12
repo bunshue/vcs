@@ -44,7 +44,6 @@ namespace SQLServerDistill
                 textBox2.Text = "";
                 textBox1.Enabled = false;
                 textBox2.Enabled = false;
-
             }
         }
 
@@ -58,6 +57,7 @@ namespace SQLServerDistill
             radioButton1.Checked = false;
             radioButton2.Checked = false;
         }
+
         // 登录服务器
         private void button2_Click(object sender, EventArgs e)
         {
@@ -74,7 +74,8 @@ namespace SQLServerDistill
                 {
                     MessageBox.Show("请选择登录方式");
                     return;
-                }//
+                }
+
                 //Windows身份验证
                 if (radioButton1.Checked == true)
                 {
@@ -91,7 +92,8 @@ namespace SQLServerDistill
                     MessageBox.Show("登录成功");
                     comboBox2.Enabled = true;
                     comboBox3.Enabled = true;
-                }// endi 
+                }
+
                 //Server身份验证
                 if (radioButton2.Checked == true)
                 {
@@ -109,15 +111,15 @@ namespace SQLServerDistill
                         MessageBox.Show("登录成功");
                         comboBox2.Enabled = true;
                         comboBox3.Enabled = true;
-
                     }
                     catch (Exception ee)
                     {
                         MessageBox.Show(ee.Message);
                     }
-                }// end block if 
-            }//
+                }
+            }
         }
+
         //提取表结构
         private void button3_Click(object sender, EventArgs e)
         {
@@ -153,6 +155,7 @@ namespace SQLServerDistill
 
             }
         }//是以何种方式登录，是Windows集成方式，不是SQlserver方式。
+
         public SqlConnection getCon(string strDatabase)
         {
             SqlConnection con = null; ;
@@ -167,10 +170,10 @@ namespace SQLServerDistill
                 string strcon = "server='" + comboBox1.Text + "';uid='" + textBox1.Text.Trim() + "';pwd='" + textBox2.Text + "';database='" + strDatabase + "'";
                 con = new SqlConnection(strcon);
                 con.Open();
-
             }
             return con;
-        }//end block 
+        }//end block
+
         public void getTables(string strDataBase, string U)
         {
             SqlConnection con = getCon(strDataBase);
@@ -184,7 +187,8 @@ namespace SQLServerDistill
             dr.Close();
             con.Close();
         }
-        //填冲数据库中的表
+
+        //填充数据库中的表
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox2.SelectedItem.ToString() != "")
