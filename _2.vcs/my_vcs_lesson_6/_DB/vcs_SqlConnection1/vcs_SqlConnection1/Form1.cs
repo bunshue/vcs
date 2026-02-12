@@ -936,7 +936,7 @@ namespace vcs_SqlConnection1
             //从头开始提取满足指定条件的记录
 
             //string conStr =  "Data Source=MR-PC\\YL;Database=db_TomeTwo;UID=sa;Pwd=;";//取连接字符串
-            String conStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            String conStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
 
             string sql = "select * from EmployeeInfo";//构造sql语句
             DataSet ds = new DataSet();//创建数据集
@@ -949,9 +949,7 @@ namespace vcs_SqlConnection1
             //从头开始提取生日小于2009-7-1之前的员工信息
             IEnumerable<DataRow> query = ds.Tables["EmployeeInfo"].AsEnumerable().TakeWhile(itm => itm.Field<DateTime>("Birthday") < Convert.ToDateTime("2009-7-1"));
             dataGridView1.DataSource = query.CopyToDataTable();//设置dataGridView1数据源
-
         }
-
 
         /// <summary>
         /// 查询数据库信息
@@ -959,12 +957,12 @@ namespace vcs_SqlConnection1
         /// <returns>方法返回DataTable对象</returns>
         private DataTable GetStudent()
         {
-            //String conStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            //String conStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
 
             //创建数据库连接字符串
             //string P_Str_ConnectionStr = string.Format(@"server=USER-20170504OU;database=db_TomeTwo;uid=sa;pwd=");
             //string P_Str_ConnectionStr = string.Format(@"server=USER-20170504OU;database=db_TomeTwo");
-            string P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            string P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
 
             //创建SQL查询字符串
             string P_Str_SqlStr = string.Format(@"SELECT TOP 10 * FROM (SELECT TOP 20 * FROM tb_Grade ORDER BY 总分 DESC) AS st ORDER BY 总分 ASC");
@@ -983,7 +981,7 @@ namespace vcs_SqlConnection1
         {
             //创建数据库连接字符串
             //string P_Str_ConnectionStr = string.Format(@"server=MR-PC\YL;database=db_TomeTwo;uid=sa;pwd=");
-            string P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            string P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
             //创建SQL查询字符串
             string P_Str_SqlStr = string.Format("SELECT * FROM tb_Grade");
             //创建数据适配器

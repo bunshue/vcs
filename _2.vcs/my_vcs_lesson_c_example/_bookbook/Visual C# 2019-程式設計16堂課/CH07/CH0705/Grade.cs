@@ -23,6 +23,7 @@ namespace CH0705
             avg = total / (float)len;   //計算平均
             WriteLine($"總分 {total} 平均 {avg:f3}");
         }
+
         static void Main(string[] args)
         {
             int[] eric = { 96, 71, 85, 51, 67 };

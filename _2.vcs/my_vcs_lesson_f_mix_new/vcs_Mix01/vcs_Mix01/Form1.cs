@@ -274,9 +274,48 @@ namespace vcs_Mix01
             }
         }
 
+        //之後 class PersonClass 在獨立成一個檔案 PersonClass.cs
+        class PersonClass
+        {
+            //自動實作屬性
+            public string Name { get; set; }
+            public byte Height { get; set; }
+
+            //定義靜態方法
+            public void showInfo(PersonClass first)
+            {
+                //指派屬性值做物件初始化
+                first = new PersonClass() { Name = "林小明", Height = 172 };
+            }
+
+            //定義靜態方法
+            public void display(ref PersonClass second)
+            {
+                //指派屬性值做物件初始化
+                second = new PersonClass { Name = "江大海", Height = 168 };
+            }
+        }
+
         private void button4_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            PersonClass pern = new PersonClass() { Name = "王小風", Height = 176 };
+
+            richTextBox1.Text += "By Value -> \n";
+            //Passing By Value - 輸出王小風
+            pern.showInfo(pern);
+
+            richTextBox1.Text += pern.Name + "\t" + pern.Height + "\n";
+            //Console.WriteLine($"{pern.Name}, " +               $"您的身高 {pern.Height}cm");
+            richTextBox1.Text += "By Reference -> \n";
+            //Passing By Reference - 輸出江大海
+            pern.display(ref pern);
+
+            richTextBox1.Text += pern.Name + "\t" + pern.Height + "\n";
+            //Console.WriteLine($"{pern.Name}, " +               $"您的身高 {pern.Height}cm");
+            //Console.ReadKey();
+
         }
 
         private void button5_Click(object sender, EventArgs e)

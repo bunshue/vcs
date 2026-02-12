@@ -36,6 +36,7 @@ namespace vcs_ArrayList
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
             label1.Text = "共有 " + ArrayListData.Count.ToString() + " 個項目";
 
             richTextBox1.Text += "讀出系統變數至ArrayList\n";
@@ -195,15 +196,18 @@ namespace vcs_ArrayList
             richTextBox1.Text += "    Values: ";
 
             foreach (Object obj in myAL)
+            {
                 richTextBox1.Text += "   " + obj.ToString() + " ";
-
+            }
             richTextBox1.Text += "\n";
         }
 
         public static void PrintValues(IEnumerable myList)
         {
             foreach (Object obj in myList)
+            {
                 Console.Write("   {0}", obj);
+            }
             Console.WriteLine();
         }
 
@@ -287,7 +291,6 @@ namespace vcs_ArrayList
             //pdf_filename_ArrayListData.Add(DateTime.Now.ToString());
             pdf_filename_ArrayListData.Insert(0, DateTime.Now.ToString()); //插入一個元素
             richTextBox1.Text += "目前ArrayList內共有 " + pdf_filename_ArrayListData.Count.ToString() + " 個項目\n";
-
         }
 
         private void bt_arrayList03_Click(object sender, EventArgs e)
@@ -295,7 +298,6 @@ namespace vcs_ArrayList
             richTextBox1.Text += "將ArrayList寫入系統變數\n";
             Properties.Settings.Default.pdf_filenames = pdf_filename_ArrayListData;
             Properties.Settings.Default.Save();
-
         }
 
         private void bt_arrayList04_Click(object sender, EventArgs e)
@@ -313,7 +315,6 @@ namespace vcs_ArrayList
             pdf_filename_ArrayListData = Properties.Settings.Default.pdf_filenames;
 
             show_pdf_filename_ArrayListData();
-
         }
 
         private void bt_arrayList05_Click(object sender, EventArgs e)
@@ -321,7 +322,6 @@ namespace vcs_ArrayList
             //檢查ArrayList
             string new_data = "2024/1/27 上午 03:41:01";
             update_pdf_filename_ArrayListData(new_data);
-
         }
 
         private void bt_arrayList06_Click(object sender, EventArgs e)
@@ -362,7 +362,6 @@ namespace vcs_ArrayList
                 richTextBox1.Text += "長檔案 : " + pdf_filename + "\n";
                 richTextBox1.Text += "短檔名 : " + pdf_filename_short.ToString() + "\n";
 
-
                 richTextBox1.Text += "加入一筆資料至ArrayList\n";
                 pdf_filename_ArrayListData.Insert(0, pdf_filename); //插入一個元素
                 richTextBox1.Text += "目前ArrayList內共有 " + pdf_filename_ArrayListData.Count.ToString() + " 個項目\n";
@@ -374,7 +373,6 @@ namespace vcs_ArrayList
             }
             //this.Focus();
             this.KeyPreview = true;
-
         }
 
         private void bt_arrayList07_Click(object sender, EventArgs e)
