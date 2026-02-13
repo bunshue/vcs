@@ -19,7 +19,7 @@ namespace SQLServerMemoryImage
         {
             InitializeComponent();
         }
-        //
+
         private void Form1_Load(object sender, EventArgs e)
         {
             string[] strSex = { "男", "女" };
@@ -28,7 +28,7 @@ namespace SQLServerMemoryImage
             this.dataGridView1.DataSource = DataBinding(strSql).DefaultView;
             this.button1.Enabled = false;
         }
-        //
+
         private void button1_Click(object sender, EventArgs e)
         {
             setValue();
@@ -36,12 +36,12 @@ namespace SQLServerMemoryImage
             string strSql = "select 員工編號,姓名,性別,籍貫,電話,部門名稱 from 員工訊息";
             this.dataGridView1.DataSource = DataBinding(strSql).DefaultView;
         }
-        //
+
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
         {
             this.openFileImage.ShowDialog();
         }
-        //
+
         private void openFileImage_FileOk(object sender, CancelEventArgs e)
         {
             try
@@ -57,14 +57,13 @@ namespace SQLServerMemoryImage
                 MessageBox.Show("您選擇的圖片不能被讀取或文件類型不對！", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 this.pictureBox1.Image = null;
             }
-
         }
-        //
+
         private void button2_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
-        //
+
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             string str = this.dataGridView1[0, e.RowIndex].Value.ToString();
@@ -88,8 +87,8 @@ namespace SQLServerMemoryImage
 
             getValue();
         }
-        //
-        #region method
+
+        //#region method
         private bool insertInfo()
         {
             try
@@ -115,7 +114,6 @@ namespace SQLServerMemoryImage
                 this.button3.Enabled = true;
                 this.button1.Enabled = false;
                 return true;
-
             }
             catch (Exception ey)
             {
@@ -123,9 +121,8 @@ namespace SQLServerMemoryImage
                 this.button2.Enabled = false;
                 return false;
             }
-
         }
-        //
+
         private void setValue()
         {
             NumID = this.textBox2.Text;
@@ -137,9 +134,8 @@ namespace SQLServerMemoryImage
             years = Convert.ToInt16(this.textBox6.Text);
             phone = this.textBox7.Text;
             part = this.textBox8.Text;
-
         }
-        //
+
         private void getValue()
         {
             this.textBox2.Text = NumID;
@@ -152,9 +148,8 @@ namespace SQLServerMemoryImage
             this.textBox6.Text = years.ToString();
             this.textBox7.Text = phone;
             this.textBox8.Text = part;
-
         }
-        //
+
         private DataTable DataBinding(string Sql)
         {
             using (SqlDataAdapter da = new SqlDataAdapter())
@@ -170,7 +165,7 @@ namespace SQLServerMemoryImage
                 return dt;
             }
         }
-        //
+
         private void clearText()
         {
             foreach (Control cl in this.groupBox1.Controls)
@@ -181,9 +176,9 @@ namespace SQLServerMemoryImage
                 }
             }
         }
-        #endregion
+        //#endregion
 
-        #region//存取器
+        //#region//存取器
         private string 員工編號;
         private string 姓名;
         private byte[] 照片;
@@ -238,8 +233,7 @@ namespace SQLServerMemoryImage
             get { return 部門名稱; }
             set { 部門名稱 = value; }
         }
-
-        #endregion
+        //#endregion
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -248,8 +242,5 @@ namespace SQLServerMemoryImage
             imgBytesIn = null;
             clearText();
         }
-
-
-
     }
 }

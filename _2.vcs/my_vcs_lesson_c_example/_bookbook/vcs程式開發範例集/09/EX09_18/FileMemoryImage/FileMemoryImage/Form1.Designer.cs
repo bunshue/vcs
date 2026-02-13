@@ -166,7 +166,7 @@
             // 
             this.textBox7.Location = new System.Drawing.Point(226, 119);
             this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(183, 21);
+            this.textBox7.Size = new System.Drawing.Size(183, 22);
             this.textBox7.TabIndex = 21;
             // 
             // label10
@@ -182,7 +182,7 @@
             // 
             this.textBox8.Location = new System.Drawing.Point(60, 119);
             this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(99, 21);
+            this.textBox8.Size = new System.Drawing.Size(99, 22);
             this.textBox8.TabIndex = 19;
             // 
             // label11
@@ -198,7 +198,7 @@
             // 
             this.textBox6.Location = new System.Drawing.Point(226, 93);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(111, 21);
+            this.textBox6.Size = new System.Drawing.Size(111, 22);
             this.textBox6.TabIndex = 17;
             // 
             // label9
@@ -214,7 +214,7 @@
             // 
             this.textBox5.Location = new System.Drawing.Point(60, 93);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(99, 21);
+            this.textBox5.Size = new System.Drawing.Size(99, 22);
             this.textBox5.TabIndex = 15;
             // 
             // label8
@@ -230,7 +230,7 @@
             // 
             this.textBox4.Location = new System.Drawing.Point(226, 68);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(111, 21);
+            this.textBox4.Size = new System.Drawing.Size(111, 22);
             this.textBox4.TabIndex = 13;
             // 
             // comboBox1
@@ -255,7 +255,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(14, 72);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(47, 12);
+            this.label7.Size = new System.Drawing.Size(44, 12);
             this.label7.TabIndex = 8;
             this.label7.Text = "性 別：";
             // 
@@ -264,7 +264,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(296, 20);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 12);
+            this.label5.Size = new System.Drawing.Size(44, 12);
             this.label5.TabIndex = 7;
             this.label5.Text = "照 片：";
             // 
@@ -283,21 +283,21 @@
             // 
             this.textBox3.Location = new System.Drawing.Point(226, 43);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(111, 21);
+            this.textBox3.Size = new System.Drawing.Size(111, 22);
             this.textBox3.TabIndex = 5;
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(60, 44);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(99, 21);
+            this.textBox2.Size = new System.Drawing.Size(99, 22);
             this.textBox2.TabIndex = 4;
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(115, 16);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(161, 21);
+            this.textBox1.Size = new System.Drawing.Size(161, 22);
             this.textBox1.TabIndex = 3;
             // 
             // label4
@@ -305,7 +305,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(183, 47);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(47, 12);
+            this.label4.Size = new System.Drawing.Size(44, 12);
             this.label4.TabIndex = 2;
             this.label4.Text = "姓 名：";
             // 
@@ -314,7 +314,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(14, 47);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 12);
+            this.label3.Size = new System.Drawing.Size(44, 12);
             this.label3.TabIndex = 1;
             this.label3.Text = "工 號：";
             // 
@@ -356,7 +356,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(480, 239);
+            this.ClientSize = new System.Drawing.Size(811, 496);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Linq;
 using System.Windows.Forms;
+
 using System.IO;
 using System.Data.SqlClient;
 
@@ -15,15 +16,10 @@ namespace FileMemoryImage
     {
         SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09");
         string strPath = "";
+
         public Form1()
         {
             InitializeComponent();
-        }
-
-        private void pictureBox1_DoubleClick(object sender, EventArgs e)
-        {
-            this.openFileImage.ShowDialog();
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -36,6 +32,11 @@ namespace FileMemoryImage
             this.comboBox3.DataSource = strHunYin;
             string[] strJianKang = { "很好", "良好", "一般" };
             this.comboBox4.DataSource = strJianKang;
+        }
+
+        private void pictureBox1_DoubleClick(object sender, EventArgs e)
+        {
+            this.openFileImage.ShowDialog();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -212,6 +213,5 @@ namespace FileMemoryImage
         {
             Application.Exit();
         }
-
     }
 }

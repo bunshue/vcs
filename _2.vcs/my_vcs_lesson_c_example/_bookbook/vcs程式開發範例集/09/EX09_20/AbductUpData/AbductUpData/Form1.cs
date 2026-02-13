@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+
 using System.Data.SqlClient;
 
 namespace AbductUpData
@@ -19,16 +20,17 @@ namespace AbductUpData
 
         SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09");
         DataTable dt = null;
-        private void tbExit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
 
         private void Form1_Load(object sender, EventArgs e)
         {
             showList();
         }
+
+        private void tbExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
         private void showList()
         {
             listView1.View = View.Details;//圖示
@@ -67,7 +69,6 @@ namespace AbductUpData
             }
         }
 
-
         private void showInfo(string strid)
         {
             using (SqlCommand cmd = new SqlCommand("select * from 員工表 where 員工編號='" + strid + "'", con))
@@ -101,8 +102,8 @@ namespace AbductUpData
                 MessageBox.Show("修改失敗");
                 return;
             }
-
         }
+
         private bool Updateinfo()
         {
             using (SqlCommand cmd = new SqlCommand())
@@ -128,6 +129,5 @@ namespace AbductUpData
             string str = this.listView1.SelectedItems[0].Text.ToString();
             showInfo(str);
         }
-
     }
 }

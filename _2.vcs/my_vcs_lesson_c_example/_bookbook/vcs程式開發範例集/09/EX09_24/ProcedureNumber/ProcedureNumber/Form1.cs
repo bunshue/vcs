@@ -6,8 +6,10 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+
 using System.Text.RegularExpressions;
 using System.Data.SqlClient;
+
 namespace ProcedureNumber
 {
     public partial class Form1 : Form
@@ -15,6 +17,11 @@ namespace ProcedureNumber
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            AutoID();
         }
 
         private void textBox3_Validating(object sender, CancelEventArgs e)
@@ -38,11 +45,6 @@ namespace ProcedureNumber
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            AutoID();
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             if (ifNull())
@@ -51,12 +53,12 @@ namespace ProcedureNumber
                 {
                     if (IDCard(this.textBox4.Text))
                     {
-
                         InsertInfo();
-
                     }
                     else
-                    { MessageBox.Show("身份證號格式不正確"); }
+                    {
+                        MessageBox.Show("身份證號格式不正確");
+                    }
                 }
             }
             else
@@ -64,7 +66,7 @@ namespace ProcedureNumber
                 MessageBox.Show("請將訊息新增完整");
             }
         }
-        //
+
         public bool IDCard(string ID)
         {
             if (!Regex.IsMatch(ID, @"^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$"))  //15ID
@@ -84,7 +86,7 @@ namespace ProcedureNumber
                 return false;
             }
         }
-        //
+
         private bool info()
         {
             for (int i = 0; i < this.textBox5.Text.Length; i++)
@@ -97,7 +99,6 @@ namespace ProcedureNumber
                         return false;
                     }
                 }
-
             }
             return true;
         }
@@ -124,10 +125,8 @@ namespace ProcedureNumber
                 if (Con is TextBox)
                 {
                     Con.Text = "";
-
                 }
             }
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -145,12 +144,12 @@ namespace ProcedureNumber
                 cmd.Connection = con;
                 string str = cmd.ExecuteScalar().ToString();
                 if (str == "")
+                {
                     this.textBox1.Text = "P1001";
+                }
                 else
                 {
-
                     this.textBox1.Text = "P" + Convert.ToString(Convert.ToInt32(str.Substring(1)) + 1);
-
                 }
             }
         }
@@ -171,6 +170,5 @@ namespace ProcedureNumber
             }
             AutoID();
         }
-
     }
 }

@@ -51,14 +51,14 @@
             // 
             this.textBox5.Location = new System.Drawing.Point(196, 55);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(78, 21);
+            this.textBox5.Size = new System.Drawing.Size(78, 22);
             this.textBox5.TabIndex = 10;
             // 
             // textBox4
             // 
             this.textBox4.Location = new System.Drawing.Point(62, 55);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(77, 21);
+            this.textBox4.Size = new System.Drawing.Size(77, 22);
             this.textBox4.TabIndex = 9;
             // 
             // label5
@@ -118,7 +118,7 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(196, 22);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(78, 21);
+            this.textBox2.Size = new System.Drawing.Size(78, 22);
             this.textBox2.TabIndex = 7;
             // 
             // textBox1
@@ -126,7 +126,7 @@
             this.textBox1.Enabled = false;
             this.textBox1.Location = new System.Drawing.Point(62, 22);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(77, 21);
+            this.textBox1.Size = new System.Drawing.Size(77, 22);
             this.textBox1.TabIndex = 6;
             // 
             // tbUpdate
@@ -135,7 +135,7 @@
             this.tbUpdate.Image = ((System.Drawing.Image)(resources.GetObject("tbUpdate.Image")));
             this.tbUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbUpdate.Name = "tbUpdate";
-            this.tbUpdate.Size = new System.Drawing.Size(67, 22);
+            this.tbUpdate.Size = new System.Drawing.Size(68, 22);
             this.tbUpdate.Text = "修改(&U)";
             this.tbUpdate.Click += new System.EventHandler(this.tbUpdate_Click);
             // 
@@ -147,7 +147,7 @@
             this.tbUpdate});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(298, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(838, 25);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -183,7 +183,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(298, 253);
+            this.ClientSize = new System.Drawing.Size(838, 480);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.toolStrip1);

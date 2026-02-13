@@ -6,19 +6,21 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+
 using System.Data.SqlClient;
 
 namespace ProcedureUpData
 {
     public partial class Form1 : Form
     {
+        DataTable dt = null;
+        SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09");
+
         public Form1()
         {
             InitializeComponent();
         }
-        DataTable dt = null;
 
-        SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09");
         private void Form1_Load(object sender, EventArgs e)
         {
             showList();
@@ -45,12 +47,13 @@ namespace ProcedureUpData
                     cmd.Connection = con;
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandText = "proc_Update";
-                    SqlParameter[] par ={ 
-                    new SqlParameter("@id",this.textBox1.Text), 
-                    new SqlParameter("@name",this.textBox2.Text),
-                    new SqlParameter("@money",this.textBox4.Text),
-                    new SqlParameter("@talk",this.textBox5.Text)
-                };
+                    SqlParameter[] par =
+                    { 
+                        new SqlParameter("@id",this.textBox1.Text), 
+                        new SqlParameter("@name",this.textBox2.Text),
+                        new SqlParameter("@money",this.textBox4.Text),
+                        new SqlParameter("@talk",this.textBox5.Text)
+                    };
                     foreach (SqlParameter parms in par)
                     {
                         cmd.Parameters.Add(parms);
@@ -59,7 +62,6 @@ namespace ProcedureUpData
                     con.Close();
                     MessageBox.Show("修改成功");
                     showList();
-
                 }
             }
             else
@@ -67,6 +69,7 @@ namespace ProcedureUpData
                 MessageBox.Show("請選擇訊息");
             }
         }
+
         private Boolean TextClear()
         {
             foreach (Control c in this.groupBox1.Controls)
@@ -74,14 +77,17 @@ namespace ProcedureUpData
                 if (c is TextBox)
                 {
                     if (c.Text == "")
-                    { return false; }
+                    {
+                        return false;
+                    }
                     else
-                    { return true; }
+                    {
+                        return true;
+                    }
                 }
             }
             return true;
         }
-
 
         private void showList()
         {
@@ -138,9 +144,7 @@ namespace ProcedureUpData
                 }
                 dr.Close();
                 con.Close();
-
             }
         }
-
     }
 }

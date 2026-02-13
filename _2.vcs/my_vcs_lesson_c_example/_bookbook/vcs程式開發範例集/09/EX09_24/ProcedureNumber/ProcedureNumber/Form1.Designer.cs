@@ -117,7 +117,7 @@
             this.textBox1.Location = new System.Drawing.Point(66, 32);
             this.textBox1.MaxLength = 6;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(115, 21);
+            this.textBox1.Size = new System.Drawing.Size(115, 22);
             this.textBox1.TabIndex = 8;
             // 
             // textBox2
@@ -125,7 +125,7 @@
             this.textBox2.Location = new System.Drawing.Point(273, 32);
             this.textBox2.MaxLength = 30;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(115, 21);
+            this.textBox2.Size = new System.Drawing.Size(115, 22);
             this.textBox2.TabIndex = 9;
             // 
             // textBox3
@@ -134,7 +134,7 @@
             this.textBox3.Location = new System.Drawing.Point(65, 59);
             this.textBox3.MaxLength = 3;
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(115, 21);
+            this.textBox3.Size = new System.Drawing.Size(115, 22);
             this.textBox3.TabIndex = 10;
             this.textBox3.Validating += new System.ComponentModel.CancelEventHandler(this.textBox3_Validating);
             // 
@@ -143,7 +143,7 @@
             this.textBox4.Location = new System.Drawing.Point(66, 86);
             this.textBox4.MaxLength = 18;
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(323, 21);
+            this.textBox4.Size = new System.Drawing.Size(323, 22);
             this.textBox4.TabIndex = 11;
             // 
             // textBox5
@@ -151,7 +151,7 @@
             this.textBox5.Location = new System.Drawing.Point(273, 59);
             this.textBox5.MaxLength = 8;
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(115, 21);
+            this.textBox5.Size = new System.Drawing.Size(115, 22);
             this.textBox5.TabIndex = 12;
             // 
             // label7
@@ -171,7 +171,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(405, 146);
+            this.ClientSize = new System.Drawing.Size(773, 443);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.textBox4);

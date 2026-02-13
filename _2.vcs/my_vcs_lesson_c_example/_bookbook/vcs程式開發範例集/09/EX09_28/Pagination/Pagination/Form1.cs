@@ -6,17 +6,25 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+
 using System.Data.SqlClient;
 
 namespace SQLDelete
 {
     public partial class Form1 : Form
     {
+        SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09");
+
         public Form1()
         {
             InitializeComponent();
         }
-        SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09");
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            showinfo();
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             using (SqlCommand cmd = new SqlCommand())
@@ -51,11 +59,6 @@ namespace SQLDelete
                 da.Fill(dt);
                 this.dataGridView1.DataSource = dt.DefaultView;
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            showinfo();
         }
     }
 }

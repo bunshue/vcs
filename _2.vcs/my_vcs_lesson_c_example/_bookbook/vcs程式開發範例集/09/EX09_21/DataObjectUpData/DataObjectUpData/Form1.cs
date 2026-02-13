@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+
 using System.Data.SqlClient;
 
 namespace DataObjectUpData
@@ -14,14 +15,11 @@ namespace DataObjectUpData
     {
         static int Num = 0;
         int Count = 0;
+        SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09");
+
         public Form1()
         {
             InitializeComponent();
-        }
-        SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09");
-        private void button6_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -33,6 +31,11 @@ namespace DataObjectUpData
                 Count = Convert.ToInt32(cmd.ExecuteScalar());
                 con.Close();
             }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
 
         private DataSet DtReslut(int i)
@@ -107,7 +110,6 @@ namespace DataObjectUpData
 
         private bool update()
         {
-
             using (SqlCommand command = new SqlCommand("update 員工表 set" +
                " 員工姓名=@員工姓名,基本工資=@基本工資,工作評價=@工作評價 where 員工編號=@員工編號 ", con))
             {
@@ -122,10 +124,12 @@ namespace DataObjectUpData
                     con.Close();
                     return true;
                 }
-                catch { return false; }
-
+                catch
+                {
+                    return false;
+                }
             }
-
         }
     }
 }
+

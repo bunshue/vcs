@@ -38,8 +38,8 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnUpdate = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,7 +47,7 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(196, 17);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(78, 21);
+            this.textBox2.Size = new System.Drawing.Size(78, 22);
             this.textBox2.TabIndex = 7;
             // 
             // textBox1
@@ -55,7 +55,7 @@
             this.textBox1.Enabled = false;
             this.textBox1.Location = new System.Drawing.Point(62, 17);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(77, 21);
+            this.textBox1.Size = new System.Drawing.Size(77, 22);
             this.textBox1.TabIndex = 6;
             // 
             // label1
@@ -71,7 +71,7 @@
             // 
             this.textBox4.Location = new System.Drawing.Point(62, 43);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(77, 21);
+            this.textBox4.Size = new System.Drawing.Size(77, 22);
             this.textBox4.TabIndex = 9;
             // 
             // label5
@@ -109,7 +109,7 @@
             // 
             this.textBox5.Location = new System.Drawing.Point(196, 43);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(78, 21);
+            this.textBox5.Size = new System.Drawing.Size(78, 22);
             this.textBox5.TabIndex = 10;
             // 
             // label2
@@ -140,16 +140,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "數據訊息";
             // 
-            // btnUpdate
-            // 
-            this.btnUpdate.Location = new System.Drawing.Point(117, 72);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
-            this.btnUpdate.TabIndex = 11;
-            this.btnUpdate.Text = "修改(&O)";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
-            // 
             // btnExit
             // 
             this.btnExit.Location = new System.Drawing.Point(199, 72);
@@ -160,11 +150,21 @@
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(117, 72);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdate.TabIndex = 11;
+            this.btnUpdate.Text = "修改(&O)";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(313, 222);
+            this.ClientSize = new System.Drawing.Size(857, 499);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";

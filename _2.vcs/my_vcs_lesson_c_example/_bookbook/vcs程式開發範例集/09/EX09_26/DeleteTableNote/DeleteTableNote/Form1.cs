@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+
 using System.Data.SqlClient;
 
 namespace DeleteTableNote
@@ -13,6 +14,7 @@ namespace DeleteTableNote
     public partial class Form1 : Form
     {
         public static string str = "";
+
         public Form1()
         {
             InitializeComponent();
@@ -51,7 +53,6 @@ namespace DeleteTableNote
                     }
                 }
             }
-
         }
 
         private void showinf()

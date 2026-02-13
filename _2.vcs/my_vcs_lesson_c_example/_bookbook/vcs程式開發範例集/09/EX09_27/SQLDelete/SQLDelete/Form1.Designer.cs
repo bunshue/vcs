@@ -41,7 +41,7 @@
             this.label1.ForeColor = System.Drawing.Color.Red;
             this.label1.Location = new System.Drawing.Point(47, 139);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(215, 12);
+            this.label1.Size = new System.Drawing.Size(218, 12);
             this.label1.TabIndex = 14;
             this.label1.Text = "在文字框中輸入有效的SQL語句修改數據";
             // 
@@ -76,7 +76,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(319, 212);
+            this.ClientSize = new System.Drawing.Size(591, 420);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);

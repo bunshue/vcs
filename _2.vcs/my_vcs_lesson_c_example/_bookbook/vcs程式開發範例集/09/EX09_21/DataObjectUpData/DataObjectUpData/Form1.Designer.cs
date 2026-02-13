@@ -77,21 +77,21 @@
             // 
             this.textBox5.Location = new System.Drawing.Point(217, 55);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(86, 21);
+            this.textBox5.Size = new System.Drawing.Size(86, 22);
             this.textBox5.TabIndex = 10;
             // 
             // textBox4
             // 
             this.textBox4.Location = new System.Drawing.Point(62, 55);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(86, 21);
+            this.textBox4.Size = new System.Drawing.Size(86, 22);
             this.textBox4.TabIndex = 9;
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(217, 22);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(86, 21);
+            this.textBox2.Size = new System.Drawing.Size(86, 22);
             this.textBox2.TabIndex = 7;
             // 
             // groupBox1
@@ -116,7 +116,7 @@
             this.textBox1.Enabled = false;
             this.textBox1.Location = new System.Drawing.Point(62, 22);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(86, 21);
+            this.textBox1.Size = new System.Drawing.Size(86, 22);
             this.textBox1.TabIndex = 6;
             // 
             // label5
@@ -192,7 +192,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(332, 159);
+            this.ClientSize = new System.Drawing.Size(849, 506);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
