@@ -53,9 +53,14 @@
             this.button1 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.label_description = new System.Windows.Forms.Label();
+            this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.剪下ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.複製ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.貼上ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.contextMenuStrip2.SuspendLayout();
+            this.contextMenuStrip3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -225,7 +230,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(351, 261);
+            this.button1.Location = new System.Drawing.Point(351, 304);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(135, 64);
             this.button1.TabIndex = 4;
@@ -254,6 +259,36 @@
             this.label_description.TabIndex = 38;
             this.label_description.Text = "說明";
             // 
+            // contextMenuStrip3
+            // 
+            this.contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.剪下ToolStripMenuItem,
+            this.複製ToolStripMenuItem,
+            this.貼上ToolStripMenuItem});
+            this.contextMenuStrip3.Name = "contextMenuStrip3";
+            this.contextMenuStrip3.Size = new System.Drawing.Size(153, 92);
+            // 
+            // 剪下ToolStripMenuItem
+            // 
+            this.剪下ToolStripMenuItem.Name = "剪下ToolStripMenuItem";
+            this.剪下ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.剪下ToolStripMenuItem.Text = "剪下 ";
+            this.剪下ToolStripMenuItem.Click += new System.EventHandler(this.剪下ToolStripMenuItem_Click);
+            // 
+            // 複製ToolStripMenuItem
+            // 
+            this.複製ToolStripMenuItem.Name = "複製ToolStripMenuItem";
+            this.複製ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.複製ToolStripMenuItem.Text = "複製";
+            this.複製ToolStripMenuItem.Click += new System.EventHandler(this.複製ToolStripMenuItem_Click);
+            // 
+            // 貼上ToolStripMenuItem
+            // 
+            this.貼上ToolStripMenuItem.Name = "貼上ToolStripMenuItem";
+            this.貼上ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.貼上ToolStripMenuItem.Text = "貼上";
+            this.貼上ToolStripMenuItem.Click += new System.EventHandler(this.貼上ToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -271,6 +306,7 @@
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.contextMenuStrip2.ResumeLayout(false);
+            this.contextMenuStrip3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -302,6 +338,10 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Label label_description;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip3;
+        private System.Windows.Forms.ToolStripMenuItem 剪下ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 複製ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 貼上ToolStripMenuItem;
     }
 }
 

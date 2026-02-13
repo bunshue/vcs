@@ -58,19 +58,25 @@ namespace vcs_List1
             button26.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button27.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             button3.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button28.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button28.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button29.Location = new Point(x_st + dx * 1, y_st + dy * 5);
             groupBox_mouse_points.Size = new Size(300, 200);
-            groupBox_mouse_points.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            groupBox_mouse_points.Location = new Point(x_st + dx * 2, y_st + dy * 3);
             pictureBox1.Size = new Size(260, 130);
             pictureBox1.Location = new Point(10, 60);
             bt_points_mouse.Location = new Point(10, 20);
             bt_clear_points_mouse.Location = new Point(100, 20);
 
-            richTextBox1.Size = new Size(500, 480);
-            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            richTextBox1.Size = new Size(500, 340);
+            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 6);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1420, 820);
+            this.Text = "vcs_List1";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -821,6 +827,40 @@ namespace vcs_List1
                 //client.Text = client.Name;
                 client.BackColor = Color.Pink;
                 richTextBox1.Text += "控件 :" + client.Name + "長度 :" + client.Text.Length.ToString() + "\n";
+            }
+        }
+
+
+        // 定義Employee員工類別
+        class Employee
+        {
+            public string EmpID { get; set; }   	// 編號屬性
+            public string EmpName { get; set; } 	// 姓名屬性
+            public string EmpSex { get; set; }     	// 性別屬性
+            public bool EmpIsMarry { get; set; }  	// 婚姻屬性
+        }
+
+        List<Employee> emp = new List<Employee>();
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+            string id = "123";
+            string name = "david";
+            string sex = "先生";
+            bool isMarry = true;
+            emp.Add(new Employee() { EmpID = id, EmpName = name, EmpSex = sex, EmpIsMarry = isMarry });
+            emp.Add(new Employee() { EmpID = id, EmpName = name, EmpSex = sex, EmpIsMarry = isMarry });
+            emp.Add(new Employee() { EmpID = id, EmpName = name, EmpSex = sex, EmpIsMarry = isMarry });
+            emp.Add(new Employee() { EmpID = id, EmpName = name, EmpSex = sex, EmpIsMarry = isMarry });
+            emp.Add(new Employee() { EmpID = id, EmpName = name, EmpSex = sex, EmpIsMarry = isMarry });
+            emp.Add(new Employee() { EmpID = id, EmpName = name, EmpSex = sex, EmpIsMarry = isMarry });
+
+            // 在txtShow文字方塊內顯示已新增的員工資料
+            richTextBox1.Text += "編號\t姓名\t性別\t是否已婚" + Environment.NewLine;
+            richTextBox1.Text += "============================" + Environment.NewLine;
+            for (int i = 0; i < emp.Count; i++)
+            {
+                richTextBox1.Text += emp[i].EmpID + "\t" + emp[i].EmpName + " \t" + emp[i].EmpSex + "\t" + emp[i].EmpIsMarry.ToString() + Environment.NewLine;
             }
         }
 

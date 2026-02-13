@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.label8 = new System.Windows.Forms.Label();
-            this.btnEnd = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.lstJob = new System.Windows.Forms.ListBox();
             this.rdbF = new System.Windows.Forms.RadioButton();
@@ -45,35 +44,26 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("新細明體", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label8.Location = new System.Drawing.Point(61, 16);
+            this.label8.Location = new System.Drawing.Point(46, 13);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(236, 28);
+            this.label8.Size = new System.Drawing.Size(186, 22);
             this.label8.TabIndex = 22;
             this.label8.Text = "會員基本登錄作業";
             // 
-            // btnEnd
-            // 
-            this.btnEnd.Location = new System.Drawing.Point(283, 280);
-            this.btnEnd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnEnd.Name = "btnEnd";
-            this.btnEnd.Size = new System.Drawing.Size(75, 32);
-            this.btnEnd.TabIndex = 21;
-            this.btnEnd.Text = "結束";
-            this.btnEnd.UseVisualStyleBackColor = true;
-            this.btnEnd.Click += new System.EventHandler(this.btnEnd_Click);
-            // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(283, 218);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAdd.Location = new System.Drawing.Point(176, 174);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(2);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 32);
+            this.btnAdd.Size = new System.Drawing.Size(88, 43);
             this.btnAdd.TabIndex = 20;
             this.btnAdd.Text = "新增";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -82,20 +72,20 @@
             // lstJob
             // 
             this.lstJob.FormattingEnabled = true;
-            this.lstJob.ItemHeight = 15;
-            this.lstJob.Location = new System.Drawing.Point(67, 218);
-            this.lstJob.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lstJob.ItemHeight = 12;
+            this.lstJob.Location = new System.Drawing.Point(50, 174);
+            this.lstJob.Margin = new System.Windows.Forms.Padding(2);
             this.lstJob.Name = "lstJob";
-            this.lstJob.Size = new System.Drawing.Size(147, 94);
+            this.lstJob.Size = new System.Drawing.Size(111, 76);
             this.lstJob.TabIndex = 19;
             // 
             // rdbF
             // 
             this.rdbF.AutoSize = true;
-            this.rdbF.Location = new System.Drawing.Point(129, 168);
-            this.rdbF.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.rdbF.Location = new System.Drawing.Point(97, 134);
+            this.rdbF.Margin = new System.Windows.Forms.Padding(2);
             this.rdbF.Name = "rdbF";
-            this.rdbF.Size = new System.Drawing.Size(43, 19);
+            this.rdbF.Size = new System.Drawing.Size(35, 16);
             this.rdbF.TabIndex = 18;
             this.rdbF.TabStop = true;
             this.rdbF.Text = "女";
@@ -104,10 +94,10 @@
             // rdbM
             // 
             this.rdbM.AutoSize = true;
-            this.rdbM.Location = new System.Drawing.Point(65, 168);
-            this.rdbM.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.rdbM.Location = new System.Drawing.Point(49, 134);
+            this.rdbM.Margin = new System.Windows.Forms.Padding(2);
             this.rdbM.Name = "rdbM";
-            this.rdbM.Size = new System.Drawing.Size(43, 19);
+            this.rdbM.Size = new System.Drawing.Size(35, 16);
             this.rdbM.TabIndex = 17;
             this.rdbM.TabStop = true;
             this.rdbM.Text = "男";
@@ -116,110 +106,125 @@
             // cboDay
             // 
             this.cboDay.FormattingEnabled = true;
-            this.cboDay.Location = new System.Drawing.Point(292, 119);
-            this.cboDay.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cboDay.Location = new System.Drawing.Point(219, 95);
+            this.cboDay.Margin = new System.Windows.Forms.Padding(2);
             this.cboDay.Name = "cboDay";
-            this.cboDay.Size = new System.Drawing.Size(59, 23);
+            this.cboDay.Size = new System.Drawing.Size(45, 20);
             this.cboDay.TabIndex = 15;
             // 
             // cboMonth
             // 
             this.cboMonth.FormattingEnabled = true;
-            this.cboMonth.Location = new System.Drawing.Point(192, 119);
-            this.cboMonth.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cboMonth.Location = new System.Drawing.Point(144, 95);
+            this.cboMonth.Margin = new System.Windows.Forms.Padding(2);
             this.cboMonth.Name = "cboMonth";
-            this.cboMonth.Size = new System.Drawing.Size(59, 23);
+            this.cboMonth.Size = new System.Drawing.Size(45, 20);
             this.cboMonth.TabIndex = 16;
             // 
             // cboYear
             // 
             this.cboYear.FormattingEnabled = true;
-            this.cboYear.Location = new System.Drawing.Point(67, 119);
-            this.cboYear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cboYear.Location = new System.Drawing.Point(50, 95);
+            this.cboYear.Margin = new System.Windows.Forms.Padding(2);
             this.cboYear.Name = "cboYear";
-            this.cboYear.Size = new System.Drawing.Size(77, 23);
+            this.cboYear.Size = new System.Drawing.Size(59, 20);
             this.cboYear.TabIndex = 14;
             // 
             // cboName
             // 
             this.cboName.FormattingEnabled = true;
-            this.cboName.Location = new System.Drawing.Point(65, 72);
-            this.cboName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cboName.Location = new System.Drawing.Point(49, 58);
+            this.cboName.Margin = new System.Windows.Forms.Padding(2);
             this.cboName.Name = "cboName";
-            this.cboName.Size = new System.Drawing.Size(121, 23);
+            this.cboName.Size = new System.Drawing.Size(92, 20);
             this.cboName.TabIndex = 13;
             this.cboName.SelectedIndexChanged += new System.EventHandler(this.cboName_SelectedIndexChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(23, 218);
+            this.label4.Location = new System.Drawing.Point(17, 174);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(37, 15);
+            this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 11;
             this.label4.Text = "職業";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 169);
+            this.label3.Location = new System.Drawing.Point(17, 135);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 15);
+            this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 10;
             this.label3.Text = "性別";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(357, 122);
+            this.label7.Location = new System.Drawing.Point(268, 98);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(22, 15);
+            this.label7.Size = new System.Drawing.Size(17, 12);
             this.label7.TabIndex = 9;
             this.label7.Text = "日";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(255, 122);
+            this.label6.Location = new System.Drawing.Point(191, 98);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(22, 15);
+            this.label6.Size = new System.Drawing.Size(17, 12);
             this.label6.TabIndex = 8;
             this.label6.Text = "月";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(151, 122);
+            this.label5.Location = new System.Drawing.Point(113, 98);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(22, 15);
+            this.label5.Size = new System.Drawing.Size(17, 12);
             this.label5.TabIndex = 7;
             this.label5.Text = "年";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(23, 122);
+            this.label2.Location = new System.Drawing.Point(17, 98);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 15);
+            this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 12;
             this.label2.Text = "生日";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 75);
+            this.label1.Location = new System.Drawing.Point(17, 60);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 15);
+            this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 6;
             this.label1.Text = "姓名";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(318, 12);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(480, 598);
+            this.richTextBox1.TabIndex = 23;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(407, 334);
+            this.ClientSize = new System.Drawing.Size(810, 622);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.btnEnd);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.lstJob);
             this.Controls.Add(this.rdbF);
@@ -235,7 +240,6 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -247,7 +251,6 @@
         #endregion
 
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button btnEnd;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.ListBox lstJob;
         private System.Windows.Forms.RadioButton rdbF;
@@ -263,6 +266,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

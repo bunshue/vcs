@@ -87,6 +87,10 @@ namespace vcs_TabControl
 
             this.Size = new Size(1200, 710);
             this.Text = "vcs_TabControl";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -339,6 +343,15 @@ namespace vcs_TabControl
             label.Text = "Tab number " + (tabControl2.TabPages.Count - 1);
             label.AutoSize = true;
             page.Controls.Add(label);
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你切換到頁面 : " + tabControl1.SelectedIndex.ToString() + "\n";
+
+            // if (tabControl1.SelectedIndex == 1)
+            // do something
+
         }
     }
 }

@@ -67,6 +67,7 @@
             this.bt_clear_points_mouse = new System.Windows.Forms.Button();
             this.bt_points_mouse = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button29 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -97,7 +98,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(868, 463);
+            this.richTextBox1.Location = new System.Drawing.Point(866, 525);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 2;
@@ -288,7 +289,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(881, 482);
+            this.bt_clear.Location = new System.Drawing.Point(879, 544);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(61, 30);
             this.bt_clear.TabIndex = 15;
@@ -453,7 +454,7 @@
             // button28
             // 
             this.button28.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button28.Location = new System.Drawing.Point(866, 277);
+            this.button28.Location = new System.Drawing.Point(660, 664);
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(200, 60);
             this.button28.TabIndex = 30;
@@ -466,7 +467,7 @@
             this.groupBox_mouse_points.Controls.Add(this.bt_clear_points_mouse);
             this.groupBox_mouse_points.Controls.Add(this.bt_points_mouse);
             this.groupBox_mouse_points.Controls.Add(this.pictureBox1);
-            this.groupBox_mouse_points.Location = new System.Drawing.Point(866, 343);
+            this.groupBox_mouse_points.Location = new System.Drawing.Point(864, 405);
             this.groupBox_mouse_points.Name = "groupBox_mouse_points";
             this.groupBox_mouse_points.Size = new System.Drawing.Size(100, 100);
             this.groupBox_mouse_points.TabIndex = 31;
@@ -506,11 +507,23 @@
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
             // 
+            // button29
+            // 
+            this.button29.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button29.Location = new System.Drawing.Point(866, 277);
+            this.button29.Name = "button29";
+            this.button29.Size = new System.Drawing.Size(200, 60);
+            this.button29.TabIndex = 32;
+            this.button29.Text = "類別做成的List";
+            this.button29.UseVisualStyleBackColor = true;
+            this.button29.Click += new System.EventHandler(this.button29_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1268, 811);
+            this.ClientSize = new System.Drawing.Size(1084, 801);
+            this.Controls.Add(this.button29);
             this.Controls.Add(this.groupBox_mouse_points);
             this.Controls.Add(this.button28);
             this.Controls.Add(this.button27);
@@ -587,6 +600,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button bt_clear_points_mouse;
         private System.Windows.Forms.Button bt_points_mouse;
+        private System.Windows.Forms.Button button29;
     }
 }
 

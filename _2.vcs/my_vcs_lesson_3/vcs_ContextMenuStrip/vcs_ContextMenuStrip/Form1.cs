@@ -38,7 +38,10 @@ namespace vcs_ContextMenuStrip
                 "加入 ContextMenuStrip\n" +
                 "點選屬性/Items/打開集合/MenuItem 按加入\n" +
                 "修改Text 及 事件\n\n" +
-                "設定寫在xxxx_MouseDown裡面\n";
+                "設定寫在xxxx_MouseDown裡面\n\n";
+
+            richTextBox1.Text += "RTB加右鍵選單\nRTB加右鍵選單\nRTB加右鍵選單\n";
+            richTextBox1.ContextMenuStrip = contextMenuStrip3;
 
             /*
             // 使用 ContextMenuStrip 方法一, 使用設定
@@ -66,6 +69,15 @@ namespace vcs_ContextMenuStrip
 
             this.Size = new Size(1250, 680);
             this.Text = "vcs_ContextMenuStrip";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -168,9 +180,19 @@ namespace vcs_ContextMenuStrip
             contextMenuStrip1.Show(button1, new Point(0, button1.Height + 5));
         }
 
-        private void bt_clear_Click(object sender, EventArgs e)
+        private void 剪下ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            richTextBox1.Cut();
+        }
 
+        private void 複製ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Copy();
+        }
+
+        private void 貼上ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Paste();
         }
     }
 }
