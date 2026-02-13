@@ -11,9 +11,6 @@ namespace LINQJoin
 {
     public partial class Frm_Main : Form
     {
-        string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf";
-        //string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo_log.ldf";   another
-
         public Frm_Main()
         {
             InitializeComponent();

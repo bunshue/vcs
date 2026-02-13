@@ -56,7 +56,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(369, 327);
+            this.ClientSize = new System.Drawing.Size(822, 552);
             this.Controls.Add(this.dgv_Message);
             this.Controls.Add(this.btn_Insert);
             this.Name = "Frm_Main";

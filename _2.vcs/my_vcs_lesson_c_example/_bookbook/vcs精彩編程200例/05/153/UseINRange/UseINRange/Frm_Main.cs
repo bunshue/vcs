@@ -13,9 +13,6 @@ namespace UseINRange
 {
     public partial class Frm_Main : Form
     {
-        string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf";
-        //string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo_log.ldf";   another
-
         public Frm_Main()
         {
             InitializeComponent();
@@ -40,7 +37,6 @@ namespace UseINRange
         private DataTable GetStudent(string Begin, string end)
         {
             //创建数据库连接字符串
-            //string P_Str_ConnectionStr = string.Format(@"server=USER-20170504OU;database=db_TomeTwo;uid=sa;pwd=");
             String P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
             //创建SQL查询字符串
             string P_Str_SqlStr = string.Format(@"SELECT 学生姓名,性别,年龄 FROM tb_Student WHERE 学生编号 IN (SELECT 学生编号 FROM tb_Grade WHERE 总分>{0} AND 总分<{1})", Begin, end);

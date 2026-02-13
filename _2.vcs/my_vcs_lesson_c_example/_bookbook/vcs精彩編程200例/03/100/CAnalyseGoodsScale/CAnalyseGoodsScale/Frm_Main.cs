@@ -25,9 +25,19 @@ namespace CAnalyseGoodsScale
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Conn();
+            using (cmd = new SqlCommand("select Sum(t_Num)  from tb_product", con))
+            {
+                SumNum = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+        }
+
         private void Conn()
         {
-            con = new SqlConnection("server=USER-20170504OU;uid=sa;pwd=;database=db_TomeOne");
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
+            con = new SqlConnection(cnstr);
             con.Open();
         }
 
@@ -69,15 +79,6 @@ namespace CAnalyseGoodsScale
                     showPic(flo[T], Bru);							//调用showPic方法绘制饼型图
                     T++;
                 }
-            }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            Conn();
-            using (cmd = new SqlCommand("select Sum(t_Num)  from tb_product", con))
-            {
-               SumNum=Convert.ToInt32(cmd.ExecuteScalar());
             }
         }
     }

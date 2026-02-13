@@ -46,7 +46,7 @@
             this.dgv_Message.Location = new System.Drawing.Point(0, 0);
             this.dgv_Message.Name = "dgv_Message";
             this.dgv_Message.RowTemplate.Height = 23;
-            this.dgv_Message.Size = new System.Drawing.Size(411, 165);
+            this.dgv_Message.Size = new System.Drawing.Size(710, 165);
             this.dgv_Message.TabIndex = 9;
             // 
             // txt_End

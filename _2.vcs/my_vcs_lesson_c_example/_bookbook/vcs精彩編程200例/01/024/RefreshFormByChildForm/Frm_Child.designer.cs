@@ -90,7 +90,7 @@
             // 
             this.phone.Location = new System.Drawing.Point(91, 84);
             this.phone.Name = "phone";
-            this.phone.Size = new System.Drawing.Size(100, 21);
+            this.phone.Size = new System.Drawing.Size(100, 22);
             this.phone.TabIndex = 2;
             this.phone.TextChanged += new System.EventHandler(this.phone_TextChanged);
             // 
@@ -107,7 +107,7 @@
             // 
             this.address.Location = new System.Drawing.Point(91, 118);
             this.address.Name = "address";
-            this.address.Size = new System.Drawing.Size(100, 21);
+            this.address.Size = new System.Drawing.Size(100, 22);
             this.address.TabIndex = 3;
             this.address.TextChanged += new System.EventHandler(this.address_TextChanged);
             // 
@@ -124,7 +124,7 @@
             // 
             this.name.Location = new System.Drawing.Point(91, 52);
             this.name.Name = "name";
-            this.name.Size = new System.Drawing.Size(100, 21);
+            this.name.Size = new System.Drawing.Size(100, 22);
             this.name.TabIndex = 1;
             this.name.TextChanged += new System.EventHandler(this.name_TextChanged);
             // 
@@ -141,7 +141,7 @@
             // 
             this.id.Location = new System.Drawing.Point(91, 20);
             this.id.Name = "id";
-            this.id.Size = new System.Drawing.Size(100, 21);
+            this.id.Size = new System.Drawing.Size(100, 22);
             this.id.TabIndex = 0;
             this.id.TextChanged += new System.EventHandler(this.id_TextChanged);
             // 
@@ -197,15 +197,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 237);
+            this.ClientSize = new System.Drawing.Size(754, 486);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.PersonalInfo);
             this.MaximizeBox = false;
             this.Name = "Frm_Child";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "子窗体";
-            this.Load += new System.EventHandler(this.Frm_Child_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Frm_Child_FormClosing);
+            this.Load += new System.EventHandler(this.Frm_Child_Load);
             this.PersonalInfo.ResumeLayout(false);
             this.PersonalInfo.PerformLayout();
             this.groupBox1.ResumeLayout(false);

@@ -19,7 +19,9 @@ namespace CollectionEnginery
         }
 
         public static SqlConnection My_con;  //定义一个SqlConnection类型的公共变量My_con，用于判断数据库是否连接成功
-        public static string M_str_sqlcon = "Data Source=USER-20170504OU;Database=CollectionEnginery;User id=sa;PWD=";
+
+        public static string M_str_sqlcon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\CollectionEnginery.mdf;Integrated Security=True;Connect Timeout=30";
+
         StreamReader SReader;
 
         #region  建立数据库连接
@@ -89,13 +91,13 @@ namespace CollectionEnginery
             string tem_str = "";//记录当前行
             string tem_code = "";//条形码号
             string tem_mark = "";//个数
-            string tem_s=" ";
+            string tem_s = " ";
             StreamReader var_SRead = new StreamReader(Application.StartupPath + "\\AddData.dat");//实例化StreamReader，并打开指定的文件
             while (true)//读取dat文件中的所有行
             {
                 tem_str = var_SRead.ReadLine();//记录dat文件指定行的数据
                 tem_code = tem_str.Substring(0, tem_str.IndexOf(Convert.ToChar(tem_s))).Trim();//获取当前行的条形码
-                tem_mark = tem_str.Substring(tem_str.IndexOf(Convert.ToChar(tem_s)), tem_str.Length - tem_str.IndexOf(Convert.ToChar(tem_s))-1).Trim();//获取当前条形码的个数
+                tem_mark = tem_str.Substring(tem_str.IndexOf(Convert.ToChar(tem_s)), tem_str.Length - tem_str.IndexOf(Convert.ToChar(tem_s)) - 1).Trim();//获取当前条形码的个数
                 for (int i = 0; i < dataGridView1.RowCount - 1; i++)//在dataGridView1控件中查找相应的条形码
                 {
                     if (dataGridView1.Rows[i].Cells[2].Value.ToString().Trim() == tem_code)//如查找到
@@ -105,12 +107,11 @@ namespace CollectionEnginery
                     }
                 }
                 if (var_SRead.EndOfStream)//如果查询到文件尾
+                {
                     break;//退出循环
+                }
             }
             var_SRead.Close();//释放所有资源
         }
-
-
-
     }
 }

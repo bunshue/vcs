@@ -15,13 +15,10 @@ namespace XmlToDatabase
 {
     public partial class Frm_Main : Form
     {
-        string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf";
-        //string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo_log.ldf";   another
-
         //Employee.xml 不知道寫到哪?
         static string strPath = "Employee.xml";//记录XML文件路径
         //定义数据库连接字符串
-        string strCon = "Data Source=USER-20170504OU;Database=db_TomeTwo;Uid=sa;Pwd=;";
+        string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
         linqtosqlDataContext linq; //创建Linq连接对象
 
         public Frm_Main()

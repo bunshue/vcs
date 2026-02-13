@@ -13,9 +13,6 @@ namespace UseInsertSelect
 {
     public partial class Frm_Main : Form
     {
-        string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf";
-        //string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo_log.ldf";   another
-
         public Frm_Main()
         {
             InitializeComponent();
@@ -38,18 +35,20 @@ namespace UseInsertSelect
         /// <returns>方法返回DataTable对象</returns>
         private void InsertData()
         {
-            string P_Str_ConnectionStr = string.Format(//创建数据库连接字符串
-                @"server=USER-20170504OU;database=db_TomeTwo;uid=sa;pwd=");
-            string P_Str_SqlStr = string.Format(//创建SQL查询字符串
+            //创建数据库连接字符串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            string P_Str_ConnectionStr = cnstr;
+            //创建SQL查询字符串
+            string P_Str_SqlStr = string.Format(
                 @"INSERT INTO tb_Student_Copy(学生姓名,学生年龄,性别,家庭住址)
 SELECT 学生姓名,年龄,性别,家庭住址 FROM tb_Student");
-            SqlConnection P_con = new SqlConnection(//创建SQL连接对象
-                P_Str_ConnectionStr);
+            //创建SQL连接对象
+            SqlConnection P_con = new SqlConnection(P_Str_ConnectionStr);
             try
             {
                 P_con.Open();//打开数据库连接
-                SqlCommand P_cmd = new SqlCommand(//创建命令对象
-                    P_Str_SqlStr, P_con);
+                //创建命令对象
+                SqlCommand P_cmd = new SqlCommand(P_Str_SqlStr, P_con);
                 if (P_cmd.ExecuteNonQuery() != 0)//写入数据并判断是否成功
                 {
                     MessageBox.Show("成功写入数据", "提示！");
@@ -65,23 +64,22 @@ SELECT 学生姓名,年龄,性别,家庭住址 FROM tb_Student");
             }
         }
 
-
         /// <summary>
         /// 查询数据库信息
         /// </summary>
         /// <returns>方法返回DataTable对象</returns>
         private DataTable GetMessage()
         {
-            string P_Str_ConnectionStr = string.Format(//创建数据库连接字符串
-                @"server=MR-PC\YL;database=db_TomeTwo;uid=sa;pwd=");
-            string P_Str_SqlStr = string.Format(//创建SQL查询字符串
-                "SELECT * FROM tb_Student_Copy");
-            SqlDataAdapter P_SqlDataAdapter = new SqlDataAdapter(//创建数据适配器
-                P_Str_SqlStr, P_Str_ConnectionStr);
+            //创建数据库连接字符串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            string P_Str_ConnectionStr = cnstr;
+            //创建SQL查询字符串
+            string P_Str_SqlStr = string.Format("SELECT * FROM tb_Student_Copy");
+            //创建数据适配器
+            SqlDataAdapter P_SqlDataAdapter = new SqlDataAdapter(P_Str_SqlStr, P_Str_ConnectionStr);
             DataTable P_dt = new DataTable();//创建数据表
             P_SqlDataAdapter.Fill(P_dt);//填充数据表
             return P_dt;//返回数据表
         }
     }
 }
-

@@ -43,7 +43,7 @@
             this.OperateDataType});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(292, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(722, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -53,7 +53,7 @@
             this.AddandDelete,
             this.ExitProject});
             this.OperateDataType.Name = "OperateDataType";
-            this.OperateDataType.Size = new System.Drawing.Size(68, 21);
+            this.OperateDataType.Size = new System.Drawing.Size(67, 20);
             this.OperateDataType.Text = "操作类型";
             // 
             // AddandDelete
@@ -61,7 +61,7 @@
             this.AddandDelete.Name = "AddandDelete";
             this.AddandDelete.ShortcutKeyDisplayString = "";
             this.AddandDelete.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.C)));
-            this.AddandDelete.Size = new System.Drawing.Size(176, 22);
+            this.AddandDelete.Size = new System.Drawing.Size(173, 22);
             this.AddandDelete.Text = "增加与删除";
             this.AddandDelete.Click += new System.EventHandler(this.AddandDelete_Click);
             // 
@@ -70,29 +70,29 @@
             this.ExitProject.Name = "ExitProject";
             this.ExitProject.ShortcutKeyDisplayString = "";
             this.ExitProject.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.X)));
-            this.ExitProject.Size = new System.Drawing.Size(176, 22);
+            this.ExitProject.Size = new System.Drawing.Size(173, 22);
             this.ExitProject.Text = "退出";
             this.ExitProject.Click += new System.EventHandler(this.ExitProject_Click);
             // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(-2, 24);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(293, 243);
+            this.dataGridView1.Size = new System.Drawing.Size(723, 441);
             this.dataGridView1.TabIndex = 3;
             // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 266);
+            this.ClientSize = new System.Drawing.Size(722, 464);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;

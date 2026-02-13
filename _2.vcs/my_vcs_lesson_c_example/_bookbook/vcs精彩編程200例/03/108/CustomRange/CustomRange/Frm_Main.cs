@@ -42,7 +42,7 @@ namespace SetPrintRange
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            String cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
 
             //创建数据库连接对象
             SqlConnection sqlcon = new SqlConnection(cnstr);
@@ -74,8 +74,7 @@ select 学生姓名,所在学院,家庭住址 from tb_Student", sqlcon);
                 intPage = Convert.ToInt32((dgv_Message.Rows.Count - 2) / intRows);
             }
             //显示页数
-            label1.Text = "共有" +
-                (dgv_Message.Rows.Count - 2) + "条数据  共" + intPage + "页";
+            label1.Text = "共有" + (dgv_Message.Rows.Count - 2) + "条数据  共" + intPage + "页";
         }
 
         //标识全部打印

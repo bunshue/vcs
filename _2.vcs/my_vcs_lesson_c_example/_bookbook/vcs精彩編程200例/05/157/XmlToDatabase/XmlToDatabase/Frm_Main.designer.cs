@@ -35,9 +35,9 @@
             // 
             // btn_Edit
             // 
-            this.btn_Edit.Location = new System.Drawing.Point(394, 256);
+            this.btn_Edit.Location = new System.Drawing.Point(372, 233);
             this.btn_Edit.Name = "btn_Edit";
-            this.btn_Edit.Size = new System.Drawing.Size(63, 23);
+            this.btn_Edit.Size = new System.Drawing.Size(85, 46);
             this.btn_Edit.TabIndex = 16;
             this.btn_Edit.Text = "更新";
             this.btn_Edit.UseVisualStyleBackColor = true;
@@ -49,7 +49,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(6, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(451, 171);
+            this.dataGridView1.Size = new System.Drawing.Size(655, 171);
             this.dataGridView1.TabIndex = 17;
             // 
             // Frm_Main

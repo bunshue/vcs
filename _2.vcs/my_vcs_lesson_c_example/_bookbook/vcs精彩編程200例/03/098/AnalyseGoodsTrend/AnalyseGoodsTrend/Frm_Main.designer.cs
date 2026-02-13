@@ -68,16 +68,16 @@
             this.panel1.Size = new System.Drawing.Size(600, 400);
             this.panel1.TabIndex = 3;
             // 
-            // Form1
+            // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(610, 443);
+            this.ClientSize = new System.Drawing.Size(946, 582);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
-            this.Name = "Form1";
+            this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "柱形图表分析商品走势";
             this.Load += new System.EventHandler(this.Form1_Load);

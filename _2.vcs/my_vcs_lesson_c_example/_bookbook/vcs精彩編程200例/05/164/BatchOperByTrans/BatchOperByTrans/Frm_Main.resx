@@ -151,14 +151,15 @@
   <data name="toolDelete.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGxSURBVDhPxZJNKINxHMd3YBdnr8tJuY5yMskUN05yoUS5
-        sOQmL23TtuQt0hQHMuSl2MgOpjm4eYui0LI9ap5tz/OwPWOeZ9F8Pc/jYjyzcvGv3+37+/x+3+//p1D8
-        x/M67fBtb+BPs307djwNGvBiNCKwsSYPoa2TEIVyEx7HR8Hp9eD1BvB2R+otYgY97teWkwTU9BQ4YXJM
-        KN5sQeLoMDUgZJsHbxwEvWSTRPTCHLjhYcQsFryYTHh376fPgFycA1tTi4cKDdjyckQ0Gjw3NyPhdoOj
-        QukBnvkZUDnZoBUKqdjiYsRdLrChwO/NlzdnuB0xI1iQB0apRCQ/H0xGBsIlpWBXk3P5EfTVwR6IliZQ
-        QoM0UfAcd+7gUasFJW6SmwP/6JD8Bp6xIZBlpYgUFiLe2YnX0xNEmSDuSALeFRuYoiIwAiSsUuF+1poM
-        ITrawVRVItbaJvjcRTREJgkurs/h7+sBk6mU8gir1SA21z81/m4dmP5eRLccePB6UgYk2gtWV0lWxE0i
-        XbpPbeDbwfx24z7rBOisLAnADwyk/0o5GNnYAL6uHm8nx38DfIV+AAYMGYXKuo3sAAAAAElFTkSuQmCC
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAG5SURBVDhPxZJBSFNxHMffYe7iWdPEk+BVhU5OQoW81Um6
+        KIiBl5ToFpZsT/QhalHIAj0ozSINdBZ6aLEO3SrFIMFiuC2Yb9t7T7e3mnsjsU/sTaE3p4kXP/C//Pn+
+        Pv/f78dfEC6C4IqX0JsFCu/PRGjZy89BF3uiSHRhvrhEdT8hFyy8z7H7aJyM04nhdGF4l4pmTNIuJ9vz
+        LywB5ekEGVEkLYoYwxIHnz6eLIh7ZjDEQdTnHjOkPpsmMzpKWpLYGxrij//9ycVHyLPT6Nfa2GlyoDc2
+        knQ4+NXZyYHfT0aJ/18QmJlEKS9DFQTz6LW1ZH0+9Hj09OKN7+tsjQ0Tu1yBZreTrKxEs9lI1Degz1n3
+        cozND+8Id3Wg2Gz5FyWJ7Moyuy0tKLlOLpUTGR8pLgk8HEG+0kCyuppsby+/11ZJaTF+yGGCLz1oNTVo
+        gkCiqortKbdVEr7dg9Z8lXT3LbK+t6TisiXw9dsXIvfvoZXYzX0k6uoIL77KZyJ3+9Ae9JN6vcROMFC8
+        vcPxYq3N5ii5TpJ3+vLZaMGHOY2Q+zFqaakpMAYGzlxnQb7ZjnH9Bvurn88n+Je/BgwZhX5n9w8AAAAA
+        SUVORK5CYII=
 </value>
   </data>
   <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -167,9 +168,9 @@
   <data name="toolExit.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABtSURBVDhPY2AYEeA/0JfomGiP/8cGoAbCDQGZjg1A9AJt
-        x4aRDYE5D9kQvJphBsIMQfYfzBC4AceOHQOzUWigq1oQ4YI1gAbGBRSFAfZYwBEDoEBEj0pcCQMchaAA
-        Q6aJ1QyPEUpSItFJlmyFAJ1Y2TN52PjFAAAAAElFTkSuQmCC
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABWSURBVDhP5ZBBCgAgCAR9fG/zWwaBYbqSHaJDA2KHdtgi
+        +gIBU0YQXpIZ9TYcmwvGXdhL0NumgJnHcdlE0hKBSt40sBw3QIQACu+Yde2uhhX7R8fh+3SdWNkzJsjs
+        VQAAAABJRU5ErkJggg==
 </value>
   </data>
 </root>

@@ -13,20 +13,18 @@ namespace SumSalary
 {
     public partial class Frm_Main : Form
     {
-        string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf";
-        //string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo_log.ldf";   another
-
         public Frm_Main()
         {
             InitializeComponent();
         }
 
-        #region 定义全局变量及对象
-        string strCon = "Data Source=MR-PC\\YL;Database=db_TomeTwo;Uid=sa;Pwd=;";//定义数据库连接字符串
+        //#region 定义全局变量及对象
+        string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+
         SqlConnection sqlcon;//声明SqlConnection对象
         SqlDataAdapter sqlda;//声明SqlDataAdapter对象
         DataSet myds;//声明DataSet数据集对象
-        #endregion
+        //#endregion
 
         //窗体加载时显示所有数据
         private void Form1_Load(object sender, EventArgs e)

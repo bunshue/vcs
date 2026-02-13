@@ -69,7 +69,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(449, 351);
+            this.ClientSize = new System.Drawing.Size(870, 531);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgv_Message);
             this.Name = "Frm_Main";

@@ -13,11 +13,8 @@ namespace EManageByProc
 {
     public partial class Form1 : Form
     {
-        string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_09_Data.MDF";
-        //string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_09_Log.LDF";   another
-
         //#region 定义全局变量及对象
-        string strCon = "Data Source=USER-20170504OU;Database=db_09;Uid=sa;Pwd=;";
+        string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_09.mdf;Integrated Security=True;Connect Timeout=30";
         SqlConnection sqlcon;
         SqlCommand sqlcmd;
         SqlDataAdapter sqlda;

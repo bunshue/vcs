@@ -127,19 +127,19 @@
             this.panel_Line.Size = new System.Drawing.Size(100, 116);
             this.panel_Line.TabIndex = 6;
             // 
-            // Form1
+            // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(480, 296);
+            this.ClientSize = new System.Drawing.Size(884, 583);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "自定义横向或纵向打印";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.Activated += new System.EventHandler(this.Form1_Activated);
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

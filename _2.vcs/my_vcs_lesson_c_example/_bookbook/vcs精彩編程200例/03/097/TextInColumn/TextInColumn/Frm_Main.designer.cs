@@ -51,16 +51,17 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // Form1
+            // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(311, 214);
+            this.ClientSize = new System.Drawing.Size(715, 504);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
-            this.Name = "Form1";
+            this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "在柱形图的指定位置显示说明文字";
+            this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.ResumeLayout(false);
 
         }

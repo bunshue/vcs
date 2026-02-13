@@ -14,14 +14,11 @@ namespace UseSelect
 {
     public partial class Frm_Main : Form
     {
-        string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf";
-        //string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo_log.ldf";   another
-
         //#region 定义公共对象及变量
         SqlConnection sqlcon;
         SqlDataAdapter sqlda;
         DataSet myds;
-        string strCon = @"Data Source =USER-20170504OU;Database=db_TomeTwo;Uid=sa;Pwd=;";
+        string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
         string strSql = "select ID as 职工编号,Name as 职工姓名,Sex as 性别,Age as 年龄,Tel as 联系电话,Address as 家庭地址,QQ as QQ号码,Email as Email地址 from tb_Employee";
         public static string FindValue = "";  //存储查询条件
         //#endregion
@@ -63,8 +60,8 @@ namespace UseSelect
             {
                 if (validateNum(txt_Age.Text) && validateNum(txt_Age2.Text))
                 {
-                    FindValue += "(Age between " + Convert.ToInt32(txt_Age.Text) +//组合SQL字符串
-                        " and " + Convert.ToInt32(txt_Age2.Text) + ") and";
+                    //组合SQL字符串
+                    FindValue += "(Age between " + Convert.ToInt32(txt_Age.Text) +                        " and " + Convert.ToInt32(txt_Age2.Text) + ") and";
                 }
                 else
                 {

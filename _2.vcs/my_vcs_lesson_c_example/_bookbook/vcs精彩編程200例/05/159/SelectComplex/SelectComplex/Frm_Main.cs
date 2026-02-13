@@ -13,9 +13,6 @@ namespace SelectComplex
 {
     public partial class Frm_Main : Form
     {
-        string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf";
-        //string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo_log.ldf";   another
-
         public Frm_Main()
         {
             InitializeComponent();
@@ -30,8 +27,8 @@ namespace SelectComplex
         {
             try
             {
-                dgv_Message.DataSource =//设置数据源
-                    GetStudent(txt_Name.Text, int.Parse(txt_Age.Text), txt_Address.Text);
+                //设置数据源
+                dgv_Message.DataSource = GetStudent(txt_Name.Text, int.Parse(txt_Age.Text), txt_Address.Text);
             }
             catch (Exception ex)//捕获异常
             {
@@ -46,7 +43,7 @@ namespace SelectComplex
         private DataTable GetStudent(string Name, int Age, string Address)
         {
             //创建数据库连接字符串
-            string P_Str_ConnectionStr = string.Format(@"server=mr-pc\yl;database=db_TomeTwo;uid=sa;pwd=");
+            string P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
             //创建SQL查询字符串
             string P_Str_SqlStr = string.Format(@"SELECT 学生姓名,年龄,性别,家庭住址 FROM tb_Student WHERE 学生姓名 LIKE '{0}%' and 年龄 LIKE '{1}%' and 家庭住址 LIKE '{2}%'", Name, Age, Address);
             //创建数据适配器
@@ -63,7 +60,7 @@ namespace SelectComplex
         private DataTable GetMessage()
         {
             //创建数据库连接字符串
-            string P_Str_ConnectionStr = string.Format(@"server=USER-20170504OU;database=db_TomeTwo;uid=sa;pwd=");
+            string P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
             //创建SQL查询字符串
             string P_Str_SqlStr = string.Format("SELECT  学生姓名,年龄,性别,家庭住址 FROM tb_Student");
             //创建数据适配器

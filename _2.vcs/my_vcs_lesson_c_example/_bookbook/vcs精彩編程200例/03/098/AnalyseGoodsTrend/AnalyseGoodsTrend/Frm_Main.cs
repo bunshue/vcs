@@ -8,10 +8,13 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Data.SqlClient;
+
 namespace AnalyseGoodsTrend
 {
     public partial class Frm_Main : Form
     {
+        string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
+
         public Frm_Main()
         {
             InitializeComponent();
@@ -19,9 +22,9 @@ namespace AnalyseGoodsTrend
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            using (SqlConnection Con = new SqlConnection("server=USER-20170504OU;uid=sa;pwd=;database=db_TomeOne"))
+            using (SqlConnection Con = new SqlConnection(cnstr))
             {
-                DataTable dt=new DataTable();
+                DataTable dt = new DataTable();
                 SqlCommand cmd = new SqlCommand("select ShowYear from tb_Stat", Con);
                 SqlDataAdapter da = new SqlDataAdapter();
                 da.SelectCommand = cmd;
@@ -35,7 +38,8 @@ namespace AnalyseGoodsTrend
         private int SumYear(int Year)
         {
             string cmdtxt2 = "SELECT SUM(Year_M1+Year_M2+Year_M3+Year_M4+Year_M5+Year_M6+Year_M7+Year_M8+Year_M9+Year_M10+Year_M11+Year_M12) AS number FROM tb_Stat WHERE ShowYear=" + Year + "";
-            using (SqlConnection Con = new SqlConnection("server=USER-20170504OU;uid=sa;pwd=;database=db_TomeOne"))
+
+            using (SqlConnection Con = new SqlConnection(cnstr))
             {
                 Con.Open();
                 SqlDataAdapter dap = new SqlDataAdapter(cmdtxt2, Con);
@@ -90,8 +94,7 @@ namespace AnalyseGoodsTrend
                 g.DrawLine(mypen1, 60, y, 540, y);
 
                 //x轴
-                String[] n = {"  一月", "  二月", "  三月", "  四月", "  五月", "  六月", "  七月",
-                     "  八月", "  九月", "  十月", "十一月", "十二月"};
+                String[] n = { "  一月", "  二月", "  三月", "  四月", "  五月", "  六月", "  七月", "  八月", "  九月", "  十月", "十一月", "十二月" };
                 x = 62;
                 for (int i = 0; i < 12; i++)
                 {
@@ -100,8 +103,7 @@ namespace AnalyseGoodsTrend
                 }
 
                 //y轴
-                String[] m = {"100%", " 90%", " 80%", " 70%", " 60%", " 50%", " 40%", " 30%",
-                     " 20%", " 10%", "  0%"};
+                String[] m = { "100%", " 90%", " 80%", " 70%", " 60%", " 50%", " 40%", " 30%", " 20%", " 10%", "  0%" };
                 y = 85;
                 for (int i = 0; i < 11; i++)
                 {
@@ -111,7 +113,8 @@ namespace AnalyseGoodsTrend
 
                 int[] Count = new int[12];
                 string cmdtxt2 = "SELECT * FROM tb_Stat WHERE ShowYear=" + Year + "";
-                SqlConnection Con = new SqlConnection("server=USER-20170504OU;uid=sa;pwd=;database=db_TomeOne");
+
+                SqlConnection Con = new SqlConnection(cnstr);
                 Con.Open();
                 SqlCommand Com = new SqlCommand(cmdtxt2, Con);
                 SqlDataAdapter da = new SqlDataAdapter();
@@ -133,7 +136,7 @@ namespace AnalyseGoodsTrend
                     x = x + 40;
                 }
                 this.panel1.BackgroundImage = image;
-              
+
             }
             catch (Exception ey)
             {

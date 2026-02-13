@@ -76,14 +76,14 @@
             // 
             this.pageSetupDialog1.Document = this.printDocument1;
             // 
-            // Form1
+            // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(490, 336);
+            this.ClientSize = new System.Drawing.Size(874, 538);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "Form1";
+            this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "批量打印学生证书";
             this.Load += new System.EventHandler(this.Form1_Load);

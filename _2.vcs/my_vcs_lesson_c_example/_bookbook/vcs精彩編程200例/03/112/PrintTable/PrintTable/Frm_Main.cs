@@ -18,8 +18,7 @@ namespace PrintTable
         }
 
         #region 定义全局变量及对象
-        string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
-        //string strCon = @"Data Source=USER-20170504OU;Database=db_TomeTwo;Uid=sa;Pwd=;";
+        string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
         public static string strID = "";
         public static string strInPeople = "";
         public static string strInProvider = "";
@@ -137,12 +136,16 @@ namespace PrintTable
             sqlcon.Close();
             int int_returnValue = (int)returnValue.Value;
             if (int_returnValue == 0)
+            {
                 MessageBox.Show("已经存在该入库编号！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             else
+            {
                 MessageBox.Show("商品入库信息——添加成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             dgvInfo.DataSource = SelectIGInfo("", "").Tables[0];
         }
-        
+
         //修改入库信息
         private void btnEdit_Click(object sender, EventArgs e)
         {
@@ -200,18 +203,16 @@ namespace PrintTable
             int printHeight = e.PageBounds.Height;//页面高度
             int left = printWidth / 2 - 305;
             int right = printWidth / 2 + 305;
-            int top = printHeight / 2-200;
+            int top = printHeight / 2 - 200;
             Brush myBrush = new SolidBrush(Color.Black);//创建Brush对象
             Pen mypen = new Pen(Color.Black);//创建Pen对象
             Font myFont = new Font("宋体", 12);//创建Font对象
-            e.Graphics.DrawString("商品入库单", new Font("宋体", 20, FontStyle.Bold),//绘制标题
-                myBrush, new Point(printWidth / 2 - 100, top));
+            //绘制标题
+            e.Graphics.DrawString("商品入库单", new Font("宋体", 20, FontStyle.Bold), myBrush, new Point(printWidth / 2 - 100, top));
             e.Graphics.DrawLine(new Pen(Color.Black, 2), 300, top + 30, 480, top + 30);//绘制线条
             e.Graphics.DrawLine(new Pen(Color.Black, 2), 300, top + 34, 480, top + 34);//绘制线条
-            e.Graphics.DrawString("吉林省明日科技有限公司", new Font("宋体", 9),
-                myBrush, new Point(left + 2, top + 25));
-            e.Graphics.DrawString("日期：" + DateTime.Now.ToLongDateString(),
-                new Font("宋体", 12), myBrush, new Point(right - 190, top + 25));
+            e.Graphics.DrawString("吉林省明日科技有限公司", new Font("宋体", 9), myBrush, new Point(left + 2, top + 25));
+            e.Graphics.DrawString("日期：" + DateTime.Now.ToLongDateString(), new Font("宋体", 12), myBrush, new Point(right - 190, top + 25));
             e.Graphics.DrawRectangle(mypen, left, top + 42, 610, 230);//绘制矩形框
             e.Graphics.DrawLine(mypen, left, top + 72, left + 610, top + 72);//绘制第一行网格线
             e.Graphics.DrawLine(mypen, left, top + 102, left + 610, top + 102);//绘制第二行网格线

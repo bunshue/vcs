@@ -32,7 +32,7 @@ namespace PrintRange
         {
             comboBox_PageSize.SelectedIndex = 0;//设置选项的索引
 
-            String cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
 
             //创建数据库连接对象
             SqlConnection sqlcon = new SqlConnection(cnstr);

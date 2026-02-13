@@ -18,23 +18,28 @@ namespace AnalyseLottery
         SqlCommand cmd;
         SqlDataAdapter da;
         DataSet ds;
+
         public Frm_Main()
         {
             InitializeComponent();
         }
 
+        private void Frm_Main_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void Conn()
         {
-            richTextBox1.Text += "Conn\n";
-            con = new SqlConnection("server=USER-20170504OU;uid=sa;pwd=;database=db_TomeOne");
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
+            con = new SqlConnection(cnstr);
             con.Open();
         }
-      
+
         private void button1_Click(object sender, EventArgs e)
         {
             string str = "select * from tb_lottery where t_year between '" + Convert.ToDateTime(this.dateTimePicker1.Text).ToShortDateString() + "' and '" + Convert.ToDateTime(this.dateTimePicker2.Text).ToShortDateString() + "' order by t_year";
             DrowInfo(str);
-
         }
 
         private void DrowInfo(string SQL)

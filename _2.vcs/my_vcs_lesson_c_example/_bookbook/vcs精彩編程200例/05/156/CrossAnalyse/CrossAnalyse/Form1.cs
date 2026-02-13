@@ -63,7 +63,8 @@ namespace CrossAnalyse
         /// </summary>
         protected void bindInfo()
         {
-            SqlConnection sqlcon = new SqlConnection("Data Source=USER-20170504OU;Database=db_09;Uid=sa;Pwd=");
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_09.mdf;Integrated Security=True;Connect Timeout=30";
+            SqlConnection sqlcon = new SqlConnection(cnstr);
 
             //String P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_09.mdf;Integrated Security=True;Connect Timeout=30";
             String P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_09.mdf;Integrated Security=True;Connect Timeout=30";

@@ -161,7 +161,7 @@
             this.toolDelete.Image = ((System.Drawing.Image)(resources.GetObject("toolDelete.Image")));
             this.toolDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolDelete.Name = "toolDelete";
-            this.toolDelete.Size = new System.Drawing.Size(52, 22);
+            this.toolDelete.Size = new System.Drawing.Size(51, 22);
             this.toolDelete.Tag = "5";
             this.toolDelete.Text = "删除";
             this.toolDelete.Click += new System.EventHandler(this.toolDelete_Click);
@@ -175,7 +175,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(596, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(963, 25);
             this.toolStrip1.TabIndex = 72;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -184,19 +184,19 @@
             this.toolExit.Image = ((System.Drawing.Image)(resources.GetObject("toolExit.Image")));
             this.toolExit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolExit.Name = "toolExit";
-            this.toolExit.Size = new System.Drawing.Size(52, 22);
+            this.toolExit.Size = new System.Drawing.Size(51, 22);
             this.toolExit.Tag = "7";
             this.toolExit.Text = "退出";
             this.toolExit.Click += new System.EventHandler(this.toolExit_Click);
             // 
-            // Form1
+            // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(596, 224);
+            this.ClientSize = new System.Drawing.Size(963, 507);
             this.Controls.Add(this.dgvPRProduceInfo);
             this.Controls.Add(this.toolStrip1);
-            this.Name = "Form1";
+            this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "使用事务批量删除生产单信息";
             this.Load += new System.EventHandler(this.Form1_Load);

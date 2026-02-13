@@ -133,7 +133,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(513, 590);
+            this.ClientSize = new System.Drawing.Size(925, 590);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label2);
@@ -146,6 +146,7 @@
             this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "利用折线图分析彩票中奖情况";
+            this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

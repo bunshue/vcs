@@ -19,8 +19,7 @@ namespace PrintStuCertificate
         }
 
         #region 定义全局变量及对象
-        string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
-        //string strCon = @"Data Source=USER-20170504OU;Database=db_TomeTwo;Uid=sa;Pwd=;";
+        string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
         public static string strName = "";
         public static string strSex = "";
         public static string strBirthday = "";
@@ -180,7 +179,7 @@ namespace PrintStuCertificate
                 MessageBox.Show("学生信息——修改成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 dgvInfo.DataSource = SelectStuInfo("", "").Tables[0];
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }

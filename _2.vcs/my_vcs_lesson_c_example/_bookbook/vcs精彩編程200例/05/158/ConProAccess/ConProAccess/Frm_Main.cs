@@ -15,9 +15,6 @@ namespace ConProAccess
 {
     public partial class Frm_Main : Form
     {
-        string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf";
-        //string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo_log.ldf";   another
-
         public static string strCon = "";//记录数据库连接语句
 
         public Frm_Main()

@@ -12,21 +12,31 @@ namespace TextInColumn
 {
     public partial class Frm_Main : Form
     {
+        SqlConnection con;
+        SqlCommand cmd;
+
         public Frm_Main()
         {
             InitializeComponent();
         }
-        SqlConnection con;
-        SqlCommand cmd;
+
+        private void Frm_Main_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
 
         }
+
         private void Conn()
         {
-            con = new SqlConnection("server=USER-20170504OU;uid=sa;pwd=;database=db_TomeOne");
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
+            con = new SqlConnection(cnstr);
             con.Open();
         }
+
         private void ShowPic()
         {
             Conn();												//打开数据库

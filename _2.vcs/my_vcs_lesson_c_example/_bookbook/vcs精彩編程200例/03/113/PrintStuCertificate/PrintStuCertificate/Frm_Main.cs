@@ -39,7 +39,7 @@ namespace PrintStuCertificate
         //窗体加载时显示所有学生信息
         private void Form1_Load(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = BindInfo("","").Tables[0];
+            dataGridView1.DataSource = BindInfo("", "").Tables[0];
         }
 
         //设置打印内容
@@ -85,8 +85,8 @@ namespace PrintStuCertificate
             e.Graphics.DrawLine(mypen, 374, 460, 567, 460);//绘制第六行网格线
             e.Graphics.DrawLine(mypen, 374, 495, 567, 495);//绘制第七行网格线
             e.Graphics.DrawLine(mypen, 374, 530, 567, 530);//绘制第八行网格线
-            e.Graphics.DrawString("吉林**大学", new Font("宋体", 16,//绘制文本内容
-                FontStyle.Bold), myBrush, 415, 270);
+            //绘制文本内容
+            e.Graphics.DrawString("吉林**大学", new Font("宋体", 16, FontStyle.Bold), myBrush, 415, 270);
             e.Graphics.DrawString("姓名", myFont, myBrush, 375, 310);//绘制文本内容
             e.Graphics.DrawString(strName, myFont, myBrush, 405, 310);//绘制文本内容
             e.Graphics.DrawString("性别", myFont, myBrush, 375, 342);//绘制文本内容
@@ -107,7 +107,9 @@ namespace PrintStuCertificate
             e.Graphics.DrawString("日期", new Font("宋体", 8), myBrush, 377, 548);//绘制文本内容
             e.Graphics.DrawString(strFZRQ, myFont, myBrush, 405, 539);//绘制文本内容
             if (imgPhoto != null)
+            {
                 e.Graphics.DrawImage(imgPhoto, 479, 303, 86, 93);//绘制照片
+            }
             //填充右侧内容
             e.Graphics.DrawLine(mypen, 632, 266, 632, 561);//绘制第一列网格线
             e.Graphics.DrawLine(mypen, 713, 266, 713, 561);//绘制第二列网格线
@@ -147,7 +149,9 @@ namespace PrintStuCertificate
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 if (row.Selected)
+                {
                     lists.Add(row.Index);
+                }
             }
             lists.Sort();
             pageSetupDialog1.PageSettings.Landscape = true;
@@ -161,19 +165,23 @@ namespace PrintStuCertificate
         /// <param name="str">查找条件</param>
         /// <param name="strKeyWord">查找关键字</param>
         /// <returns>DataSet数据集</returns>
-        private DataSet BindInfo(string str,string strKeyWord)
+        private DataSet BindInfo(string str, string strKeyWord)
         {
-            string strCon = @"Data Source=USER-20170504OU;Database=db_TomeTwo;Uid=sa;Pwd=;";
+            string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
             SqlConnection sqlcon = new SqlConnection(strCon);
             string strSql = "";
             if (str == "编号")
+            {
                 strSql = @"select ID as 学生编号,Name as 姓名,Sex as 性别,
 Birthday as 出生年月,NPlace as 籍贯,RXSJ as 入学时间,ZHUANYE as 专业,
 Photo as 员工照片 from tb_StudentInfo where ID='" + strKeyWord + "'";
+            }
             else
+            {
                 strSql = @"select ID as 学生编号,Name as 姓名,Sex as 性别,
 Birthday as 出生年月,NPlace as 籍贯,RXSJ as 入学时间,ZHUANYE as 专业,
 Photo as 员工照片 from tb_StudentInfo";
+            }
             SqlDataAdapter sqlda = new SqlDataAdapter(strSql, sqlcon);
             DataSet myds = new DataSet();
             sqlda.Fill(myds);

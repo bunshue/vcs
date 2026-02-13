@@ -12,10 +12,11 @@ namespace MultiCAnalyseHR
 {
     public partial class Frm_Main : Form
     {
-        SqlConnection con = new SqlConnection("server=USER-20170504OU;pwd=;uid=sa;database=db_TomeOne");
+        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30");
         SqlCommand cmd;
         static int ConutNum = 0;
-        static float floatNum=0.0f;
+        static float floatNum = 0.0f;
+
         public Frm_Main()
         {
             InitializeComponent();
@@ -54,6 +55,7 @@ namespace MultiCAnalyseHR
                 con.Close();												//关闭数据库连接
             }
         }
+
         private void drowPic(Graphics g, float f, string str) 							//根据要求绘制饼图
         {
             if (ConutNum == 0)											//如果ConutNum为0时执行
