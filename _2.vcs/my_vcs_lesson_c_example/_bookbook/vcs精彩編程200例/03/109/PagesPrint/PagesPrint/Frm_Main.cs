@@ -40,21 +40,30 @@ namespace PagesPrint
         private void Form1_Load(object sender, EventArgs e)
         {
             intRows = Convert.ToInt32(textBox1.Text);
-            SqlConnection sqlcon = new SqlConnection(
-@"Data Source=USER-20170504OU;Database=db_TomeTwo;Uid=sa;Pwd=;");
+
+            String cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+
+            SqlConnection sqlcon = new SqlConnection(cnstr);
+
             SqlDataAdapter sqlda = new SqlDataAdapter("select 学生姓名,所学专业,家庭住址 from tb_Student", sqlcon);
-            DataSet myds = new DataSet();
-            sqlda.Fill(myds);
-            dataGridView1.DataSource = myds.Tables[0];
+
+            DataSet ds = new DataSet();
+            sqlda.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0];
+
             //设置每列的宽度
             dataGridView1.Columns[0].Width = 57;
             dataGridView1.Columns[1].Width = 260;
             dataGridView1.Columns[2].Width = 280;
             EndRows = (dataGridView1.Rows.Count - 2) % intRows;//去掉标题和最后一行的空行
             if (EndRows > 0)
+            {
                 intPage = Convert.ToInt32((dataGridView1.Rows.Count - 2) / intRows) + 1;
+            }
             else
+            {
                 intPage = Convert.ToInt32((dataGridView1.Rows.Count - 2) / intRows);
+            }
             label2.Text = "总页数：" + intPage + "页";
         }
 
@@ -68,9 +77,13 @@ namespace PagesPrint
                     intRows = Convert.ToInt32(textBox1.Text);
                     EndRows = (dataGridView1.Rows.Count - 2) % intRows;//去掉标题和最后一行的空行
                     if (EndRows > 0)
+                    {
                         intPage = Convert.ToInt32((dataGridView1.Rows.Count - 2) / intRows) + 1;
+                    }
                     else
+                    {
                         intPage = Convert.ToInt32((dataGridView1.Rows.Count - 2) / intRows);
+                    }
                     label2.Text = "总页数：" + intPage + "页";
                 }
             }
@@ -95,20 +108,22 @@ namespace PagesPrint
             {
                 PrintPageWidth = e.PageBounds.Width;//获取打印线张的宽度
                 PrintPageHeight = e.PageBounds.Height;//获取打印线张的高度
-                e.Graphics.DrawLine(myPen, leftmargin, topmargin,//绘制边框线
-                    PrintPageWidth - leftmargin - rightmargin, topmargin);
-                e.Graphics.DrawLine(myPen, leftmargin, topmargin,//绘制边框线
-                    leftmargin, PrintPageHeight - topmargin - buttommargin);
-                e.Graphics.DrawLine(myPen, leftmargin, PrintPageHeight//绘制边框线
-                    - topmargin - buttommargin, PrintPageWidth - leftmargin 
+                //绘制边框线
+                e.Graphics.DrawLine(myPen, leftmargin, topmargin, PrintPageWidth - leftmargin - rightmargin, topmargin);
+                //绘制边框线
+                e.Graphics.DrawLine(myPen, leftmargin, topmargin, leftmargin, PrintPageHeight - topmargin - buttommargin);
+                //绘制边框线
+                e.Graphics.DrawLine(myPen, leftmargin, PrintPageHeight
+                    - topmargin - buttommargin, PrintPageWidth - leftmargin
                     - rightmargin, PrintPageHeight - topmargin - buttommargin);
-                e.Graphics.DrawLine(myPen, PrintPageWidth - leftmargin//绘制边框线
+                //绘制边框线
+                e.Graphics.DrawLine(myPen, PrintPageWidth - leftmargin
                     - rightmargin, topmargin, PrintPageWidth - leftmargin
                     - rightmargin, PrintPageHeight - topmargin - buttommargin);
                 #region 打印
                 int intPrintRows = currentpageindex * intRows;//当前页最后一条记录的索引
                 rowgap = Convert.ToInt32((PrintPageHeight - topmargin//计算行高度
-                    - buttommargin - 5 * intRows) / intRows)+3;
+                    - buttommargin - 5 * intRows) / intRows) + 3;
                 int j = 0;//记录正在打印的行数
                 for (int i = 0 + (intPrintRows - intRows); i < intPrintRows; i++)
                 {
@@ -150,3 +165,4 @@ namespace PagesPrint
         }
     }
 }
+

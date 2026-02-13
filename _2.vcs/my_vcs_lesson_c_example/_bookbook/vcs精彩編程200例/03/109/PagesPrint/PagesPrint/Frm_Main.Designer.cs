@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Main));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -38,7 +39,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
-            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -66,6 +66,16 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "分页打印设置";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(17, 47);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(245, 12);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "注意：请在输入每页打印行数之后按回车键！";
             // 
             // button2
             // 
@@ -100,7 +110,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(103, 21);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(28, 21);
+            this.textBox1.Size = new System.Drawing.Size(28, 22);
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = "30";
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
@@ -129,24 +139,14 @@
             // 
             this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(17, 47);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(245, 12);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "注意：请在输入每页打印行数之后按回车键！";
-            // 
-            // Form1
+            // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(448, 381);
+            this.ClientSize = new System.Drawing.Size(926, 514);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "Form1";
+            this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "分页打印";
             this.Load += new System.EventHandler(this.Form1_Load);

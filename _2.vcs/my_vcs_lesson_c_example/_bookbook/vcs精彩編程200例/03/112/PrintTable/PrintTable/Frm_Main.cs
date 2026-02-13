@@ -18,7 +18,8 @@ namespace PrintTable
         }
 
         #region 定义全局变量及对象
-        string strCon = @"Data Source=USER-20170504OU;Database=db_TomeTwo;Uid=sa;Pwd=;";
+        string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+        //string strCon = @"Data Source=USER-20170504OU;Database=db_TomeTwo;Uid=sa;Pwd=;";
         public static string strID = "";
         public static string strInPeople = "";
         public static string strInProvider = "";

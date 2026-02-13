@@ -166,7 +166,7 @@
             // 
             this.txtEmail.Location = new System.Drawing.Point(310, 188);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(240, 21);
+            this.txtEmail.Size = new System.Drawing.Size(240, 22);
             this.txtEmail.TabIndex = 22;
             // 
             // label28
@@ -174,7 +174,7 @@
             this.label28.AutoSize = true;
             this.label28.Location = new System.Drawing.Point(264, 191);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(47, 12);
+            this.label28.Size = new System.Drawing.Size(44, 12);
             this.label28.TabIndex = 56;
             this.label28.Text = "Email：";
             // 
@@ -182,7 +182,7 @@
             // 
             this.txtTel.Location = new System.Drawing.Point(76, 188);
             this.txtTel.Name = "txtTel";
-            this.txtTel.Size = new System.Drawing.Size(175, 21);
+            this.txtTel.Size = new System.Drawing.Size(175, 22);
             this.txtTel.TabIndex = 21;
             // 
             // label27
@@ -372,7 +372,7 @@
             // 
             this.txtGZDQ.Location = new System.Drawing.Point(465, 159);
             this.txtGZDQ.Name = "txtGZDQ";
-            this.txtGZDQ.Size = new System.Drawing.Size(85, 21);
+            this.txtGZDQ.Size = new System.Drawing.Size(85, 22);
             this.txtGZDQ.TabIndex = 20;
             // 
             // label23
@@ -388,7 +388,7 @@
             // 
             this.txtSalary.Location = new System.Drawing.Point(328, 160);
             this.txtSalary.Name = "txtSalary";
-            this.txtSalary.Size = new System.Drawing.Size(69, 21);
+            this.txtSalary.Size = new System.Drawing.Size(69, 22);
             this.txtSalary.TabIndex = 19;
             // 
             // label22
@@ -434,7 +434,7 @@
             // 
             this.txtGZNX.Location = new System.Drawing.Point(76, 160);
             this.txtGZNX.Name = "txtGZNX";
-            this.txtGZNX.Size = new System.Drawing.Size(38, 21);
+            this.txtGZNX.Size = new System.Drawing.Size(38, 22);
             this.txtGZNX.TabIndex = 17;
             // 
             // label20
@@ -450,7 +450,7 @@
             // 
             this.txtYPZW.Location = new System.Drawing.Point(445, 132);
             this.txtYPZW.Name = "txtYPZW";
-            this.txtYPZW.Size = new System.Drawing.Size(105, 21);
+            this.txtYPZW.Size = new System.Drawing.Size(105, 22);
             this.txtYPZW.TabIndex = 16;
             // 
             // label18
@@ -467,7 +467,7 @@
             this.mtxtBYSJ.Location = new System.Drawing.Point(264, 132);
             this.mtxtBYSJ.Mask = "0000-00-00";
             this.mtxtBYSJ.Name = "mtxtBYSJ";
-            this.mtxtBYSJ.Size = new System.Drawing.Size(114, 21);
+            this.mtxtBYSJ.Size = new System.Drawing.Size(114, 22);
             this.mtxtBYSJ.TabIndex = 15;
             this.mtxtBYSJ.ValidatingType = typeof(System.DateTime);
             // 
@@ -485,7 +485,7 @@
             this.mtxtRXSJ.Location = new System.Drawing.Point(76, 132);
             this.mtxtRXSJ.Mask = "0000-00-00";
             this.mtxtRXSJ.Name = "mtxtRXSJ";
-            this.mtxtRXSJ.Size = new System.Drawing.Size(114, 21);
+            this.mtxtRXSJ.Size = new System.Drawing.Size(114, 22);
             this.mtxtRXSJ.TabIndex = 14;
             this.mtxtRXSJ.ValidatingType = typeof(System.DateTime);
             // 
@@ -502,7 +502,7 @@
             // 
             this.txtWaiYu.Location = new System.Drawing.Point(421, 103);
             this.txtWaiYu.Name = "txtWaiYu";
-            this.txtWaiYu.Size = new System.Drawing.Size(129, 21);
+            this.txtWaiYu.Size = new System.Drawing.Size(129, 22);
             this.txtWaiYu.TabIndex = 13;
             // 
             // label15
@@ -518,7 +518,7 @@
             // 
             this.txtZhuanYe.Location = new System.Drawing.Point(193, 103);
             this.txtZhuanYe.Name = "txtZhuanYe";
-            this.txtZhuanYe.Size = new System.Drawing.Size(153, 21);
+            this.txtZhuanYe.Size = new System.Drawing.Size(153, 22);
             this.txtZhuanYe.TabIndex = 12;
             // 
             // label14
@@ -571,7 +571,7 @@
             // 
             this.txtBYYX.Location = new System.Drawing.Point(391, 77);
             this.txtBYYX.Name = "txtBYYX";
-            this.txtBYYX.Size = new System.Drawing.Size(159, 21);
+            this.txtBYYX.Size = new System.Drawing.Size(159, 22);
             this.txtBYYX.TabIndex = 10;
             // 
             // label12
@@ -617,7 +617,7 @@
             // 
             this.txtTiZhong.Location = new System.Drawing.Point(161, 78);
             this.txtTiZhong.Name = "txtTiZhong";
-            this.txtTiZhong.Size = new System.Drawing.Size(38, 21);
+            this.txtTiZhong.Size = new System.Drawing.Size(38, 22);
             this.txtTiZhong.TabIndex = 8;
             // 
             // label10
@@ -634,7 +634,7 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(95, 81);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(17, 12);
+            this.label8.Size = new System.Drawing.Size(19, 12);
             this.label8.TabIndex = 15;
             this.label8.Text = "cm";
             // 
@@ -642,7 +642,7 @@
             // 
             this.txtShenGao.Location = new System.Drawing.Point(54, 77);
             this.txtShenGao.Name = "txtShenGao";
-            this.txtShenGao.Size = new System.Drawing.Size(38, 21);
+            this.txtShenGao.Size = new System.Drawing.Size(38, 22);
             this.txtShenGao.TabIndex = 7;
             // 
             // label7
@@ -658,7 +658,7 @@
             // 
             this.txtAddress.Location = new System.Drawing.Point(396, 50);
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(249, 21);
+            this.txtAddress.Size = new System.Drawing.Size(249, 22);
             this.txtAddress.TabIndex = 6;
             // 
             // label6
@@ -675,7 +675,7 @@
             this.mtxtBirthday.Location = new System.Drawing.Point(210, 50);
             this.mtxtBirthday.Mask = "0000-00-00";
             this.mtxtBirthday.Name = "mtxtBirthday";
-            this.mtxtBirthday.Size = new System.Drawing.Size(114, 21);
+            this.mtxtBirthday.Size = new System.Drawing.Size(114, 22);
             this.mtxtBirthday.TabIndex = 5;
             this.mtxtBirthday.ValidatingType = typeof(System.DateTime);
             // 
@@ -692,7 +692,7 @@
             // 
             this.txtNPlace.Location = new System.Drawing.Point(516, 20);
             this.txtNPlace.Name = "txtNPlace";
-            this.txtNPlace.Size = new System.Drawing.Size(129, 21);
+            this.txtNPlace.Size = new System.Drawing.Size(129, 22);
             this.txtNPlace.TabIndex = 3;
             // 
             // label4
@@ -729,7 +729,7 @@
             // 
             this.txtName.Location = new System.Drawing.Point(233, 20);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(129, 21);
+            this.txtName.Size = new System.Drawing.Size(129, 22);
             this.txtName.TabIndex = 1;
             // 
             // label2
@@ -746,7 +746,7 @@
             this.txtID.Location = new System.Drawing.Point(54, 20);
             this.txtID.Name = "txtID";
             this.txtID.ReadOnly = true;
-            this.txtID.Size = new System.Drawing.Size(125, 21);
+            this.txtID.Size = new System.Drawing.Size(125, 22);
             this.txtID.TabIndex = 0;
             // 
             // label1
@@ -766,17 +766,17 @@
             this.dgvInfo.RowTemplate.Height = 23;
             this.dgvInfo.Size = new System.Drawing.Size(657, 209);
             this.dgvInfo.TabIndex = 29;
-            this.dgvInfo.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dgvInfo.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dgvInfo.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
-            // frmMain
+            // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(668, 649);
+            this.ClientSize = new System.Drawing.Size(1043, 649);
             this.Controls.Add(this.dgvInfo);
             this.Controls.Add(this.groupBox1);
-            this.Name = "frmMain";
+            this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "学生信息";
             this.Load += new System.EventHandler(this.Form1_Load);

@@ -103,7 +103,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(259, 47);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 12);
+            this.label2.Size = new System.Drawing.Size(83, 12);
             this.label2.TabIndex = 3;
             this.label2.Text = "(例如：1,2,3-5)";
             // 
@@ -112,7 +112,7 @@
             this.txt_Range.Enabled = false;
             this.txt_Range.Location = new System.Drawing.Point(87, 43);
             this.txt_Range.Name = "txt_Range";
-            this.txt_Range.Size = new System.Drawing.Size(166, 21);
+            this.txt_Range.Size = new System.Drawing.Size(166, 22);
             this.txt_Range.TabIndex = 2;
             // 
             // rb_Range
@@ -158,7 +158,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 358);
+            this.ClientSize = new System.Drawing.Size(757, 501);
             this.Controls.Add(this.groupBox1);
             this.MaximizeBox = false;
             this.Name = "Frm_Main";

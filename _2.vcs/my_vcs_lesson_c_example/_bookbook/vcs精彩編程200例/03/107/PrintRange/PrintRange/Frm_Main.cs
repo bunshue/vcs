@@ -12,13 +12,13 @@ namespace PrintRange
 {
     public partial class Frm_Main : Form
     {
+        public bool Aspect = true;//打印方向
+        public bool boundary = false;//是否打印分割线
+
         public Frm_Main()
         {
             InitializeComponent();
         }
-
-        public bool Aspect = true;//打印方向
-        public bool boundary = false;//是否打印分割线
 
         private void Form1_Activated(object sender, EventArgs e)
         {
@@ -31,13 +31,20 @@ namespace PrintRange
         private void Form1_Load(object sender, EventArgs e)
         {
             comboBox_PageSize.SelectedIndex = 0;//设置选项的索引
-            SqlConnection sqlcon = new SqlConnection(//创建数据库连接对象
-@"Data Source=USER-20170504OU;Database=db_TomeTwo;Uid=sa;Pwd=;");
-            SqlDataAdapter sqlda = new SqlDataAdapter(//创建适配器对象
-                "select * from tb_Employee", sqlcon);
-            DataSet myds = new DataSet();//创建数据集
-            sqlda.Fill(myds);//填充数据集
-            dataGridView1.DataSource = myds.Tables[0];//设置数据源
+
+            String cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+
+            //创建数据库连接对象
+            SqlConnection sqlcon = new SqlConnection(cnstr);
+
+            //创建适配器对象
+            SqlDataAdapter sqlda = new SqlDataAdapter("SELECT * FROM tb_Employee", sqlcon);
+
+            //创建数据集
+            DataSet ds = new DataSet();
+            sqlda.Fill(ds);//填充数据集
+
+            dataGridView1.DataSource = ds.Tables[0];//设置数据源
         }
 
         private void checkBox_Aspect_MouseDown(object sender, MouseEventArgs e)
@@ -45,6 +52,7 @@ namespace PrintRange
             //改变窗体中预览表格的方向
             int aspX = 0;//宽度
             int aspY = 0;//高度
+
             if (((CheckBox)sender).Checked == false)//如果不是纵向打印
             {
                 aspX = 136;//设置大小
@@ -66,8 +74,8 @@ namespace PrintRange
 
         private void button_Preview_Click(object sender, EventArgs e)
         {
-            PrintClass dgp = new PrintClass(//对打印信息进行设置
-                this.dataGridView1, comboBox_PageSize.SelectedIndex, checkBox_Aspect.Checked);
+            //对打印信息进行设置
+            PrintClass dgp = new PrintClass(this.dataGridView1, comboBox_PageSize.SelectedIndex, checkBox_Aspect.Checked);
             MSetUp(dgp);//记录窗体中打印信息的相关设置
             string[] header = new string[dataGridView1.ColumnCount];//创建一个与数据列相等的字符串数组
             for (int p = 0; p < dataGridView1.ColumnCount; p++)//记录所有列标题的名列

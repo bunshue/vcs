@@ -19,7 +19,8 @@ namespace PrintStuCertificate
         }
 
         #region 定义全局变量及对象
-        string strCon = @"Data Source=USER-20170504OU;Database=db_TomeTwo;Uid=sa;Pwd=;";
+        string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+        //string strCon = @"Data Source=USER-20170504OU;Database=db_TomeTwo;Uid=sa;Pwd=;";
         public static string strName = "";
         public static string strSex = "";
         public static string strBirthday = "";
@@ -103,7 +104,9 @@ namespace PrintStuCertificate
                 sqlcmd.Parameters.Add("@photo", SqlDbType.Image).Value = byteImage;
             }
             else
+            {
                 sqlcmd.Parameters.Add("@photo", SqlDbType.Image).Value = null;
+            }
             sqlcmd.Parameters.Add("@gzjl", SqlDbType.Text).Value = rtxtGZJL.Text;
             sqlcmd.Parameters.Add("@byyx", SqlDbType.VarChar, 100).Value = txtBYYX.Text;
             sqlcmd.Parameters.Add("@xueli", SqlDbType.Char, 10).Value = cboxXueLi.Text;
@@ -125,9 +128,13 @@ namespace PrintStuCertificate
             sqlcon.Close();
             int int_returnValue = (int)returnValue.Value;
             if (int_returnValue == 0)
+            {
                 MessageBox.Show("已经存在该学生编号！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             else
+            {
                 MessageBox.Show("学生信息——添加成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             dgvInfo.DataSource = SelectStuInfo("", "").Tables[0];
         }
 

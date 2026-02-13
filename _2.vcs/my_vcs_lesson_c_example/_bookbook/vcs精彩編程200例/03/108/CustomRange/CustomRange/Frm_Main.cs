@@ -42,9 +42,13 @@ namespace SetPrintRange
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            SqlConnection sqlcon = new SqlConnection(//创建数据库连接对象
-@"Data Source=USER-20170504OU;Database=db_TomeTwo;Uid=sa;Pwd=;");
-            SqlDataAdapter sqlda = new SqlDataAdapter(//创建数据适配器
+            String cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+
+            //创建数据库连接对象
+            SqlConnection sqlcon = new SqlConnection(cnstr);
+
+            //创建数据适配器
+            SqlDataAdapter sqlda = new SqlDataAdapter(
                 @"select 学生姓名,性别,家庭住址 from tb_Student
 union
 select 学生姓名,convert(varchar,年龄),家庭住址 from tb_Student
@@ -52,17 +56,25 @@ union
 select 学生姓名,convert(varchar,出生年月),家庭住址 from tb_Student
 union
 select 学生姓名,所在学院,家庭住址 from tb_Student", sqlcon);
-            DataSet myds = new DataSet();//创建数据集
-            sqlda.Fill(myds);//填充数据集
-            dgv_Message.DataSource = myds.Tables[0];//设置数据源
+
+            //创建数据集
+            DataSet ds = new DataSet();
+            sqlda.Fill(ds);//填充数据集
+            dgv_Message.DataSource = ds.Tables[0];//设置数据源
+
             EndRows = (dgv_Message.Rows.Count - 2) % intRows;//去掉标题和最后一行的空行
             if (EndRows > 0)
-                intPage = Convert.ToInt32(//计算页数
-                    (dgv_Message.Rows.Count - 2) / intRows) + 1;
+            {
+                //计算页数
+                intPage = Convert.ToInt32((dgv_Message.Rows.Count - 2) / intRows) + 1;
+            }
             else
-                intPage = Convert.ToInt32(//计算页数
-                    (dgv_Message.Rows.Count - 2) / intRows);
-            label1.Text = "共有" +//显示页数
+            {
+                //计算页数
+                intPage = Convert.ToInt32((dgv_Message.Rows.Count - 2) / intRows);
+            }
+            //显示页数
+            label1.Text = "共有" +
                 (dgv_Message.Rows.Count - 2) + "条数据  共" + intPage + "页";
         }
 
@@ -70,7 +82,9 @@ select 学生姓名,所在学院,家庭住址 from tb_Student", sqlcon);
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             if (rb_All.Checked)
+            {
                 txt_Range.Enabled = false;
+            }
         }
 
         //标识打印指定页
@@ -92,9 +106,8 @@ select 学生姓名,所在学院,家庭住址 from tb_Student", sqlcon);
                 {
                     if (txt_Range.Text == "")
                     {
-                        MessageBox.Show("请指定要打印的页码！",//弹出消息对话框
-                            "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;//退出事件
+                        MessageBox.Show("请指定要打印的页码！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
                     }
                     else if (txt_Range.Text.IndexOf(",") == -1)
                     {
@@ -104,7 +117,9 @@ select 学生姓名,所在学院,家庭住址 from tb_Student", sqlcon);
                             int intStart = Convert.ToInt32(strSubPages[0].ToString());//得到开始页码
                             int intEnd = Convert.ToInt32(strSubPages[1].ToString());//得到结束页码
                             for (int j = intStart; j <= intEnd; j++)
+                            {
                                 list.Add(j);//记录页码
+                            }
                             list.Sort();//排序
                         }
                         else
@@ -119,8 +134,10 @@ select 学生姓名,所在学院,家庭住址 from tb_Student", sqlcon);
                         {
                             int intStart = Convert.ToInt32(strPages[0].ToString());//得到开始页码
                             int intEnd = Convert.ToInt32(strPages[1].ToString());//得到结束页码
-                                for (int j = intStart; j <= intEnd; j++)
-                                    list.Add(j);//记录页码
+                            for (int j = intStart; j <= intEnd; j++)
+                            {
+                                list.Add(j);//记录页码
+                            }
                             list.Sort();//对list集合中的元素排序
                         }
                     }
@@ -168,7 +185,7 @@ select 学生姓名,所在学院,家庭住址 from tb_Student", sqlcon);
                             e.Graphics.DrawString(dgv_Message.Rows[i].Cells[1].Value.ToString(),//绘制字符串
                                 myFont, myBrush, leftmargin + columnWidth1 + 5, topmargin + j * rowgap + 5);
                             e.Graphics.DrawString(dgv_Message.Rows[i].Cells[2].Value.ToString(),//绘制字符串
-                                myFont, myBrush, leftmargin + columnWidth1 + columnWidth2 + 5, 
+                                myFont, myBrush, leftmargin + columnWidth1 + columnWidth2 + 5,
                                 topmargin + j * rowgap + 5);
                             e.Graphics.DrawLine(myPen, leftmargin, topmargin + j * rowgap + 1,//绘制线条
                                 PrintPageWidth - leftmargin - rightmargin, topmargin + j * rowgap + 1);

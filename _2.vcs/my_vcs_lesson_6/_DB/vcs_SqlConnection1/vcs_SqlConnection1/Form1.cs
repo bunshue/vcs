@@ -13,6 +13,8 @@ namespace vcs_SqlConnection1
 {
     public partial class Form1 : Form
     {
+        string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\{0};Integrated Security=True;Connect Timeout=30";
+
         public Form1()
         {
             InitializeComponent();
@@ -129,10 +131,9 @@ namespace vcs_SqlConnection1
 
         private void button0_Click(object sender, EventArgs e)
         {
-            // 資料庫連線參數, 連接字串
-            String cnStr0 = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\MyDB0.mdf;Integrated Security=True;Connect Timeout=30";
-
-            using (SqlConnection cn = new SqlConnection(cnStr0))
+            string db_filename = "MyDB0.mdf";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            using (SqlConnection cn = new SqlConnection(cnstr))
             {
                 string sqlstr = "SELECT * From 員工";  // 宣告查詢字串
                 SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
@@ -162,7 +163,7 @@ namespace vcs_SqlConnection1
 
             try
             {
-                using (SqlConnection cn = new SqlConnection(cnStr0))
+                using (SqlConnection cn = new SqlConnection(cnstr))
                 {
                     cn.Open();
                     SqlCommand cmd = new SqlCommand();
@@ -190,7 +191,7 @@ namespace vcs_SqlConnection1
 
             try
             {
-                using (SqlConnection cn = new SqlConnection(cnStr0))
+                using (SqlConnection cn = new SqlConnection(cnstr))
                 {
                     cn.Open();
                     SqlCommand cmd = new SqlCommand();
@@ -215,7 +216,7 @@ namespace vcs_SqlConnection1
 
             try
             {
-                using (SqlConnection cn = new SqlConnection(cnStr0))
+                using (SqlConnection cn = new SqlConnection(cnstr))
                 {
                     cn.Open();
                     SqlCommand cmd = new SqlCommand();
@@ -232,7 +233,8 @@ namespace vcs_SqlConnection1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
+            string db_filename = "ch17DB.mdf";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
             using (SqlConnection cn = new SqlConnection())
             {
@@ -285,7 +287,8 @@ namespace vcs_SqlConnection1
         private void button4_Click(object sender, EventArgs e)
         {
             // 成績單1
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf;Integrated Security=True";
+            string db_filename = "ch17DB.mdf";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
             using (SqlConnection cn = new SqlConnection())
             {
@@ -318,7 +321,8 @@ namespace vcs_SqlConnection1
         private void button5_Click(object sender, EventArgs e)
         {
             // 成績單2
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf;Integrated Security=True";
+            string db_filename = "ch17DB.mdf";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
             using (SqlConnection cn = new SqlConnection())
             {
@@ -391,7 +395,8 @@ namespace vcs_SqlConnection1
             //員工資料表1    讀取 新增 修改 刪除
 
             // 資料庫連線參數, 連接字串
-            string cnstr1 = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
+            string db_filename = "ch17DB.mdf";
+            string cnstr1 = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
             ShowData1(cnstr1);
 
@@ -505,7 +510,8 @@ namespace vcs_SqlConnection1
         private void button7_Click(object sender, EventArgs e)
         {
             //RelationsDemo
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\Northwind.mdf;Integrated Security=True";
+            string db_filename = "Northwind.mdf";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
             using (SqlConnection cn = new SqlConnection())
             {
@@ -542,7 +548,8 @@ namespace vcs_SqlConnection1
         private void button10_Click(object sender, EventArgs e)
         {
             //成績單3
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
+            string db_filename = "ch17DB.mdf";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
             using (SqlConnection cn = new SqlConnection())
             {
@@ -582,7 +589,8 @@ namespace vcs_SqlConnection1
         private void button11_Click(object sender, EventArgs e)
         {
             //成績單4
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
+            string db_filename = "ch17DB.mdf";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
             using (SqlConnection cn = new SqlConnection())
             {
@@ -625,9 +633,10 @@ namespace vcs_SqlConnection1
         {
             //成績單 搜尋1
 
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
+            string db_filename = "ch17DB.mdf";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
-            string name = "david";
+            string name = "阿龍";
 
             using (SqlConnection cn = new SqlConnection())
             {
@@ -649,7 +658,7 @@ namespace vcs_SqlConnection1
                     richTextBox1.Text += "姓名：" + dr["姓名"].ToString() + "\n";
                     richTextBox1.Text += "國文：" + dr["國文"].ToString() + "\n";
                     richTextBox1.Text += "英文：" + dr["英文"].ToString() + "\n";
-                    richTextBox1.Text += "數學：" + dr["數學"].ToString();
+                    richTextBox1.Text += "數學：" + dr["數學"].ToString() + "\n";
                 }
                 else   // 若沒有該筆記錄則執行else下面敘述
                 {
@@ -662,9 +671,10 @@ namespace vcs_SqlConnection1
         {
             //成績單 搜尋2
 
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
+            string db_filename = "ch17DB.mdf";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
-            string name = "david";
+            string name = "阿龍";
 
             using (SqlConnection cn = new SqlConnection())
             {
@@ -686,7 +696,7 @@ namespace vcs_SqlConnection1
                     richTextBox1.Text += "姓名：" + dr["姓名"].ToString() + "\n";
                     richTextBox1.Text += "國文：" + dr["國文"].ToString() + "\n";
                     richTextBox1.Text += "英文：" + dr["英文"].ToString() + "\n";
-                    richTextBox1.Text += "數學：" + dr["數學"].ToString();
+                    richTextBox1.Text += "數學：" + dr["數學"].ToString() + "\n";
                 }
                 else   // 若沒有該筆記錄則執行else下面敘述
                 {
@@ -698,7 +708,8 @@ namespace vcs_SqlConnection1
         private void button14_Click(object sender, EventArgs e)
         {
             // 資料庫連線參數, 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\Northwind.mdf;Integrated Security=True";
+            string db_filename = "Northwind.mdf";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
             //tt1
             using (SqlConnection cn = new SqlConnection())
@@ -734,7 +745,9 @@ namespace vcs_SqlConnection1
 
         private void button15_Click(object sender, EventArgs e)
         {
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\Northwind.mdf;Integrated Security=True";
+            string db_filename = "Northwind.mdf";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+
             //tt2
             using (SqlConnection cn = new SqlConnection())
             {
@@ -781,7 +794,8 @@ namespace vcs_SqlConnection1
         private void button16_Click(object sender, EventArgs e)
         {
             // 資料庫連線參數, 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
+            string db_filename = "ch17DB.mdf";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
             //轉帳
 
@@ -876,9 +890,8 @@ namespace vcs_SqlConnection1
 
         private void button17_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "aaaaaaaaaaaaaaa\n";
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch18DB.mdf;Integrated Security=True";
-
+            string db_filename = "ch18DB.mdf";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
             using (SqlConnection cn = new SqlConnection())
             {
                 cn.ConnectionString = cnstr;
@@ -898,9 +911,8 @@ namespace vcs_SqlConnection1
         {
             //成績單+搜尋條件
 
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch18DB.mdf;Integrated Security=True";
-
-            DataView dv;  // 宣告DataView物件dv
+            string db_filename = "ch18DB.mdf";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
             using (SqlConnection cn = new SqlConnection())
             {
@@ -908,8 +920,13 @@ namespace vcs_SqlConnection1
 
                 string sqlstr = "SELECT * FROM 成績單 ORDER BY 國文 DESC";  // 宣告查詢字串
                 SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
+
                 DataSet ds = new DataSet();
+
                 da.Fill(ds, "成績單");
+
+                DataView dv;  // 宣告DataView物件dv
+
                 dv = ds.Tables["成績單"].DefaultView;
 
                 dataGridView1.DataSource = dv;
@@ -935,18 +952,46 @@ namespace vcs_SqlConnection1
 
         private void button20_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "aaaaaaaaaaaaaaaaaa\n";
+
+            //string cnstr =  "Data Source=MR-PC\\YL;Database=db_TomeTwo;UID=sa;Pwd=;";//取连接字符串
+            string db_filename = "db_TomeTwo.mdf";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+
+            using (SqlConnection cn = new SqlConnection(cnstr))
+            {
+                string sqlstr = "SELECT * From EmployeeInfo";  // 宣告查詢字串
+                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
+
+                DataSet ds = new DataSet();  // 建立DataSet來儲存Table
+                da.Fill(ds);  // 將DataAdapter查詢之後的結果填充至DataSet
+
+                dataGridView1.DataSource = ds.Tables[0];
+
+                richTextBox1.Text += "DataSet內容\n";
+                int len = ds.Tables.Count;
+                richTextBox1.Text += "表格個數 : " + len.ToString() + "\n";
+                for (int i = 0; i < len; i++)
+                {
+                    richTextBox1.Text += "表格名稱 : " + ds.Tables[i].TableName + "\n";
+                }
+            }
+
+            return;
+
+
             //SQL1
             //从头开始提取满足指定条件的记录
 
-            //string conStr =  "Data Source=MR-PC\\YL;Database=db_TomeTwo;UID=sa;Pwd=;";//取连接字符串
-            String conStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
-
-            string sql = "select * from EmployeeInfo";//构造sql语句
-            DataSet ds = new DataSet();//创建数据集
-            using (SqlConnection con = new SqlConnection(conStr))//创建数据连接
+            using (SqlConnection cn = new SqlConnection(cnstr))//创建数据连接
             {
-                SqlCommand cmd = new SqlCommand(sql, con);//创建Command对象
+                string sql = "SELECT * from EmployeeInfo";//构造sql语句
+                SqlCommand cmd = new SqlCommand(sql, cn);//创建Command对象
+
                 SqlDataAdapter da = new SqlDataAdapter(cmd);//创建DataAdapter对象
+
+                DataSet ds = new DataSet();//创建数据集
+
                 da.Fill(ds, "EmployeeInfo");//填充数据集
 
                 richTextBox1.Text += "------------------------------\n";  // 30個
@@ -987,7 +1032,7 @@ namespace vcs_SqlConnection1
 
             // 查询数据库信息
 
-            //String conStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            //String cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
 
             //创建数据库连接字符串
             //string P_Str_ConnectionStr = string.Format(@"server=USER-20170504OU;database=db_TomeTwo;uid=sa;pwd=");
@@ -1019,7 +1064,8 @@ namespace vcs_SqlConnection1
 
         private void button23_Click(object sender, EventArgs e)
         {
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch20DB.mdf;Integrated Security=True";
+            string db_filename = "ch20DB.mdf";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
             //LINQ 1
             //建立DataSet物件ds，ds建立於所有事件處理函式之外以便所有事件一起共用
@@ -1066,10 +1112,14 @@ namespace vcs_SqlConnection1
             string id_name = "david";
             string password = "123456";
 
-            //SqlConnection sqlcon = new SqlConnection( "Data Source=MR-PC\\YL;Database=db_TomeTwo;Uid=sa;Pwd=;");//创建数据库连接对象
-            SqlConnection sqlcon = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30");//创建数据库连接对象
+            string db_filename = "db_TomeTwo.mdf";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
-            SqlDataAdapter sqlda = new SqlDataAdapter("select Name,Pwd from tb_Login where Name=@name and Pwd=@pwd", sqlcon);//创建数据库桥接器对象
+            //SqlConnection cn = new SqlConnection( "Data Source=MR-PC\\YL;Database=db_TomeTwo;Uid=sa;Pwd=;");//创建数据库连接对象
+            //SqlConnection cn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30");//创建数据库连接对象
+            SqlConnection cn = new SqlConnection(cnstr);//创建数据库连接对象
+
+            SqlDataAdapter sqlda = new SqlDataAdapter("SELECT Name,Pwd from tb_Login where Name=@name and Pwd=@pwd", cn);//创建数据库桥接器对象
 
             //为SQL语句中的参数赋值
             sqlda.SelectCommand.Parameters.Add("@name", SqlDbType.NChar, 10).Value = id_name;
@@ -1094,7 +1144,7 @@ namespace vcs_SqlConnection1
             //string P_Str_ConnectionStr = string.Format(@"server=MR-PC\YL;database=db_TomeTwo;uid=sa;pwd=");
             //String P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
             String P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
-            
+
             //创建SQL查询字符串
             string sqlstr = string.Format("SELECT * FROM tb_Book");
 
@@ -1140,17 +1190,17 @@ namespace vcs_SqlConnection1
             richTextBox1.Text += "建立資料庫, 目前只能新增表單, 需使用既有資料庫\n";
 
             //1 建立连接对象
-            SqlConnection con = new SqlConnection();
+            SqlConnection cn = new SqlConnection();
 
             //2 连接字符串(这里连接的是本地数据库，sa用户登陆，无密码)
-            //con.ConnectionString = "server=.;uid=sa;pwd=;";  // NG
-            con.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\dddd.mdf;Integrated Security=True;Connect Timeout=30";
+            //cn.ConnectionString = "server=.;uid=sa;pwd=;";  // NG
+            cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\dddd.mdf;Integrated Security=True;Connect Timeout=30";
 
             //3 建立命令执行对象
             SqlCommand cmd = new SqlCommand();
 
             //4 给命令执行对象指定连接对象
-            cmd.Connection = con;
+            cmd.Connection = cn;
 
             //5 SQL语句（指定要创建数据库的SQL句）
             //string sqlstr = "create database mydatabase2";
@@ -1159,7 +1209,7 @@ namespace vcs_SqlConnection1
             cmd.CommandText = sqlstr;
 
             //6 打开数据库连接
-            con.Open();
+            cn.Open();
 
             try  //使用try...catch...敘述來補捉異動資料可能發生的例外 
             {
@@ -1172,7 +1222,7 @@ namespace vcs_SqlConnection1
             }
 
             //8 执行完后关闭数据库连接
-            con.Close();
+            cn.Close();
         }
 
         private void button27_Click(object sender, EventArgs e)
@@ -1180,21 +1230,24 @@ namespace vcs_SqlConnection1
             //跳过满足指定条件的记录
             //跳过生日小于2009-7-1的员工:
 
-            //string conStr = "Data Source=USER-20170504OU;Database=db_TomeTwo;UID=sa;Pwd=;";//取连接字符串
-            String conStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
-
-            string sql = "select * from EmployeeInfo";//构造sql语句
-            DataSet ds = new DataSet();//创建数据集
-            using (SqlConnection con = new SqlConnection(conStr))//创建数据连接
+            //string cnstr = "Data Source=USER-20170504OU;Database=db_TomeTwo;UID=sa;Pwd=;";//取连接字符串
+            string db_filename = "db_TomeTwo.mdf";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            using (SqlConnection cn = new SqlConnection(cnstr))//创建数据连接
             {
-                SqlCommand cmd = new SqlCommand(sql, con);//创建Command对象
-                SqlDataAdapter da = new SqlDataAdapter(cmd);//创建DataAdapter对象
-                da.Fill(ds, "EmployeeInfo");//填充数据集
-            }
-            //跳过生日小于2009-7-1的员工信息
-            IEnumerable<DataRow> query = ds.Tables["EmployeeInfo"].AsEnumerable().SkipWhile(itm => itm.Field<DateTime>("Birthday") < Convert.ToDateTime("2009-7-1"));
-            dataGridView1.DataSource = query.CopyToDataTable();//设置dataGridView1数据源
+                string sql = "SELECT * from EmployeeInfo";//构造sql语句
+                SqlCommand cmd = new SqlCommand(sql, cn);//创建Command对象
 
+                SqlDataAdapter da = new SqlDataAdapter(cmd);//创建DataAdapter对象
+
+                DataSet ds = new DataSet();//创建数据集
+
+                da.Fill(ds, "EmployeeInfo");//填充数据集
+
+                //跳过生日小于2009-7-1的员工信息
+                IEnumerable<DataRow> query = ds.Tables["EmployeeInfo"].AsEnumerable().SkipWhile(itm => itm.Field<DateTime>("Birthday") < Convert.ToDateTime("2009-7-1"));
+                dataGridView1.DataSource = query.CopyToDataTable();//设置dataGridView1数据源
+            }
         }
 
         private void button28_Click(object sender, EventArgs e)
@@ -1225,7 +1278,7 @@ namespace vcs_SqlConnection1
  */
 
 // 資料庫連線參數, 連接字串
-//String cnStr0 = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\MyDB.mdf;Integrated Security=True;Connect Timeout=30";
+//string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\MyDB.mdf;Integrated Security=True;Connect Timeout=30";
 //cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\ch17DB.mdf;Integrated Security=True";
 //string cnstr1 = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|ch17DB.mdf;Integrated Security=True";
 //cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
@@ -1245,11 +1298,12 @@ cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_
 */
 
         //宣告cnStr連線字串置於事件處理函式外，以提供給其他事件處理函式共用
-        //String cnStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\MyDB.mdf;Integrated Security=True;Connect Timeout=30";
+        //string cnStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\MyDB.mdf;Integrated Security=True;Connect Timeout=30";
         // 設定相關資料庫連線參數
 //                    String cnStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\VisualC#2015基礎必修課\2015範例程式\data\MyDB.mdf;Integrated Security=True;Connect Timeout=30";
 
 
-//string conStr =  "Data Source=MR-PC\\YL;Database=db_TomeTwo;UID=sa;Pwd=;";//取连接字符串
-//String conStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+//string cnstr =  "Data Source=MR-PC\\YL;Database=db_TomeTwo;UID=sa;Pwd=;";//取连接字符串
+//string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+
 

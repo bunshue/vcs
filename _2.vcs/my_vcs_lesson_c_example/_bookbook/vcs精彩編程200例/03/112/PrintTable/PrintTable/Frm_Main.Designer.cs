@@ -147,7 +147,7 @@
             this.txtSMoney.Location = new System.Drawing.Point(292, 109);
             this.txtSMoney.Name = "txtSMoney";
             this.txtSMoney.ReadOnly = true;
-            this.txtSMoney.Size = new System.Drawing.Size(92, 21);
+            this.txtSMoney.Size = new System.Drawing.Size(92, 22);
             this.txtSMoney.TabIndex = 19;
             // 
             // label22
@@ -163,7 +163,7 @@
             // 
             this.txtGMoney.Location = new System.Drawing.Point(54, 109);
             this.txtGMoney.Name = "txtGMoney";
-            this.txtGMoney.Size = new System.Drawing.Size(60, 21);
+            this.txtGMoney.Size = new System.Drawing.Size(60, 22);
             this.txtGMoney.TabIndex = 8;
             this.txtGMoney.TextChanged += new System.EventHandler(this.txtGMoney_TextChanged);
             // 
@@ -217,7 +217,7 @@
             this.mtxtInDate.Location = new System.Drawing.Point(460, 108);
             this.mtxtInDate.Mask = "0000-00-00";
             this.mtxtInDate.Name = "mtxtInDate";
-            this.mtxtInDate.Size = new System.Drawing.Size(100, 21);
+            this.mtxtInDate.Size = new System.Drawing.Size(100, 22);
             this.mtxtInDate.TabIndex = 10;
             this.mtxtInDate.ValidatingType = typeof(System.DateTime);
             // 
@@ -257,7 +257,7 @@
             // 
             this.txtGNum.Location = new System.Drawing.Point(167, 109);
             this.txtGNum.Name = "txtGNum";
-            this.txtGNum.Size = new System.Drawing.Size(62, 21);
+            this.txtGNum.Size = new System.Drawing.Size(62, 22);
             this.txtGNum.TabIndex = 9;
             this.txtGNum.TextChanged += new System.EventHandler(this.txtGNum_TextChanged);
             // 
@@ -274,7 +274,7 @@
             // 
             this.txtGSpec.Location = new System.Drawing.Point(279, 80);
             this.txtGSpec.Name = "txtGSpec";
-            this.txtGSpec.Size = new System.Drawing.Size(162, 21);
+            this.txtGSpec.Size = new System.Drawing.Size(162, 22);
             this.txtGSpec.TabIndex = 6;
             // 
             // label15
@@ -290,7 +290,7 @@
             // 
             this.txtGName.Location = new System.Drawing.Point(76, 80);
             this.txtGName.Name = "txtGName";
-            this.txtGName.Size = new System.Drawing.Size(153, 21);
+            this.txtGName.Size = new System.Drawing.Size(153, 22);
             this.txtGName.TabIndex = 5;
             // 
             // label14
@@ -306,7 +306,7 @@
             // 
             this.txtGID.Location = new System.Drawing.Point(426, 50);
             this.txtGID.Name = "txtGID";
-            this.txtGID.Size = new System.Drawing.Size(134, 21);
+            this.txtGID.Size = new System.Drawing.Size(134, 22);
             this.txtGID.TabIndex = 4;
             // 
             // label12
@@ -322,7 +322,7 @@
             // 
             this.txtPlace.Location = new System.Drawing.Point(54, 50);
             this.txtPlace.Name = "txtPlace";
-            this.txtPlace.Size = new System.Drawing.Size(300, 21);
+            this.txtPlace.Size = new System.Drawing.Size(300, 22);
             this.txtPlace.TabIndex = 3;
             // 
             // label6
@@ -338,7 +338,7 @@
             // 
             this.txtInProvider.Location = new System.Drawing.Point(407, 20);
             this.txtInProvider.Name = "txtInProvider";
-            this.txtInProvider.Size = new System.Drawing.Size(153, 21);
+            this.txtInProvider.Size = new System.Drawing.Size(153, 22);
             this.txtInProvider.TabIndex = 2;
             // 
             // label4
@@ -354,7 +354,7 @@
             // 
             this.txtInPeople.Location = new System.Drawing.Point(243, 20);
             this.txtInPeople.Name = "txtInPeople";
-            this.txtInPeople.Size = new System.Drawing.Size(88, 21);
+            this.txtInPeople.Size = new System.Drawing.Size(88, 22);
             this.txtInPeople.TabIndex = 1;
             // 
             // label2
@@ -371,7 +371,7 @@
             this.txtID.Location = new System.Drawing.Point(54, 20);
             this.txtID.Name = "txtID";
             this.txtID.ReadOnly = true;
-            this.txtID.Size = new System.Drawing.Size(125, 21);
+            this.txtID.Size = new System.Drawing.Size(125, 22);
             this.txtID.TabIndex = 0;
             // 
             // label1
@@ -418,15 +418,15 @@
             this.printPreviewDialog1.Name = "printPreviewDialog1";
             this.printPreviewDialog1.Visible = false;
             // 
-            // Form1
+            // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(685, 502);
+            this.ClientSize = new System.Drawing.Size(1180, 542);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvInfo);
-            this.Name = "Form1";
+            this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "商品入库信息";
             this.Load += new System.EventHandler(this.Form1_Load);
