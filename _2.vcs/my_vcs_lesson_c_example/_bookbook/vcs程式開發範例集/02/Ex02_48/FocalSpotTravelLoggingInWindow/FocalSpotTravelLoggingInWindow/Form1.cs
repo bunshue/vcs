@@ -14,6 +14,12 @@ namespace FocalSpotTravelLoggingInWindow
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         // 回車切換控件焦點//要想使這個方法起到作用先將窗體的keypreview屬性改為true
         protected override void OnKeyPress(KeyPressEventArgs e)
         {
@@ -24,20 +30,5 @@ namespace FocalSpotTravelLoggingInWindow
             }
             base.OnKeyPress(e);
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-
-
-
-
-
-
-
     }
 }

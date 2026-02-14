@@ -41,7 +41,7 @@ namespace ShallDataBaseDatumListTreeView
             this.treeView1.Location = new System.Drawing.Point(1, 0);
             this.treeView1.Name = "treeView1";
             this.treeView1.SelectedImageIndex = 0;
-            this.treeView1.Size = new System.Drawing.Size(299, 201);
+            this.treeView1.Size = new System.Drawing.Size(371, 479);
             this.treeView1.TabIndex = 0;
             // 
             // imageList1
@@ -63,7 +63,7 @@ namespace ShallDataBaseDatumListTreeView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(303, 196);
+            this.ClientSize = new System.Drawing.Size(616, 491);
             this.Controls.Add(this.treeView1);
             this.Name = "Form1";
             this.Text = "將數據庫數據顯示到樹視圖中\t";

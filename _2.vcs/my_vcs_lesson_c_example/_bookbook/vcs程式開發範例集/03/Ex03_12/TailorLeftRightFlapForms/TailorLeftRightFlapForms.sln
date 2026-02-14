@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TailorLeftRightFlapForms", "TailorLeftRightFlapForms\TailorLeftRightFlapForms.csproj", "{DBE93B34-E914-4BD3-9995-A7187BA807F8}"
 EndProject
 Global

@@ -56,7 +56,7 @@ namespace RenderingShading
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(309, 174);
+            this.ClientSize = new System.Drawing.Size(683, 452);
             this.Controls.Add(this.listView1);
             this.Name = "Form1";
             this.Text = "在ListView組件中繪製底圖";

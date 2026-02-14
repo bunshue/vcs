@@ -19,7 +19,11 @@ namespace ModifiedNexusVersion
 
         SqlCommand NexusCommand;//聲明一個執行SQL語句的對象
         SqlConnection NexusConnection;//聲明一個數據庫連接對像
-        private static string ConnectString = "server=.;database=db_02;integrated security=sspi";//定義一個數據庫連接字符串
+
+        //定義一個數據庫連接字符串
+        //private static string ConnectString = "server=.;database=db_02;integrated security=sspi";
+        private static string ConnectString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+
         private void ModifiedNexusVersion_Load(object sender, EventArgs e)
         {
             treeView1.LabelEdit = true;//設置treeView1的可編輯屬性為true

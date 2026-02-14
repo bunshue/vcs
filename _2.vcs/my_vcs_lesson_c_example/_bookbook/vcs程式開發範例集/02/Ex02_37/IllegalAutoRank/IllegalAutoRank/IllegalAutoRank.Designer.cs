@@ -35,17 +35,17 @@ namespace IllegalAutoRank
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(6,5);
+            this.dataGridView1.Location = new System.Drawing.Point(6, 5);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(373,332);
+            this.dataGridView1.Size = new System.Drawing.Size(373, 332);
             this.dataGridView1.TabIndex = 0;
             // 
             // IllegalAutoRank
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F,12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(386,346);
+            this.ClientSize = new System.Drawing.Size(706, 569);
             this.Controls.Add(this.dataGridView1);
             this.Name = "IllegalAutoRank";
             this.Text = "禁用DataGridView控制元件列表頭自動排序功能";

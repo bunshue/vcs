@@ -5,18 +5,22 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
+
 namespace TailorCalendarSchemeDuty
 {
     public partial class Form1 : Form
     {
+        public int Falg;//0１表示添加//2表示修改
+        public string strFalg;//表示要修改的日期
+
         public Form1()
         {
             InitializeComponent();
         }
-        public int Falg;//0１表示添加//2表示修改
-        public string strFalg;//表示要修改的日期
+
         private void Form1_Load(object sender, EventArgs e)
         {
             monthCalendar1.TitleBackColor = System.Drawing.Color.Blue;
@@ -36,7 +40,6 @@ namespace TailorCalendarSchemeDuty
         private void Form1_DoubleClick(object sender, EventArgs e)
         {
             monthCalendar1.ShowToday = !monthCalendar1.ShowToday;
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -44,10 +47,11 @@ namespace TailorCalendarSchemeDuty
             listBox1.Items.Clear();
             getDateTime("two");//查找所有末完成的任務內容
             if (listBox1.Items.Count == 0)
-            { MessageBox.Show("現在還沒有設定任務", "信息提示"); }
-
-
+            {
+                MessageBox.Show("現在還沒有設定任務", "信息提示");
+            }
         }
+
         public string strDate;//存儲今天任務信息
         public string strName;//存儲今天任務時間
         //任務和時間查詢
@@ -128,7 +132,6 @@ namespace TailorCalendarSchemeDuty
             }
             dr.Close();
             return strDataName;
-
         }
 
         //添加任務時間
@@ -162,6 +165,7 @@ namespace TailorCalendarSchemeDuty
                 }//'
             }//
         }
+
         //任務取消提示
         private void button2_Click(object sender, EventArgs e)
         {
@@ -196,6 +200,7 @@ namespace TailorCalendarSchemeDuty
                 }//
             }//
         }// end bl
+
         //讓列表顯示任務日期
         private void button4_Click(object sender, EventArgs e)
         {
@@ -204,6 +209,7 @@ namespace TailorCalendarSchemeDuty
             if (listBox1.Items.Count == 0)
             { MessageBox.Show("現在還沒有設定任務", "信息提示"); }
         }
+
         //修改任務內容
         private void button1_Click(object sender, EventArgs e)
         {
@@ -240,6 +246,7 @@ namespace TailorCalendarSchemeDuty
 
             }// end block else
         }// end
+
         //添加任務
         private void button5_Click(object sender, EventArgs e)
         {
@@ -311,8 +318,8 @@ namespace TailorCalendarSchemeDuty
                     Falg = 0;
                 }
             }
+        }
 
-        }// 
         // 添加任務的方法
         public string strDatInsert(DateTime strDate, string strName, int intFalg)
         {
@@ -334,12 +341,14 @@ namespace TailorCalendarSchemeDuty
             com.ExecuteNonQuery();
             return com.Parameters["@strResult"].Value.ToString();
         }
+
         //已完成的任務
         private void button6_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
             getDateTime("three");
         }
+
         //修改冊除任務 
         public string strDatDelteUpdate(DateTime strDate, string strName, int intFalg, int Falg)
         {
@@ -364,11 +373,13 @@ namespace TailorCalendarSchemeDuty
             com.ExecuteNonQuery();
             return com.Parameters["@strResult"].Value.ToString();
         }
+
         //驗證日期類型
         public bool ValidateDate2(string input)
         {
             return Regex.IsMatch(input, "\\b(?<year>\\d{2,4})-(?<month>\\d{1,2})-(?<day>\\d{1,2})\\b");
         }
+
         // 用任務時間查找了
         public void getSelect(string strName, string strFalg)
         {
@@ -418,8 +429,9 @@ namespace TailorCalendarSchemeDuty
                 else
                 {
                     getSelect(listBox1.SelectedItem.ToString(), "two");
-                }//
-            }///
+                }
+            }
         }
     }
 }
+

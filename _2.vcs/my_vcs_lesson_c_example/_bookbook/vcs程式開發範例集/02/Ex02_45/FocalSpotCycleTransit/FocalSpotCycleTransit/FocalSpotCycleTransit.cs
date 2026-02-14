@@ -15,6 +15,12 @@ namespace FocalSpotCycleTransit
         {
             InitializeComponent();
         }
+
+        private void FocalSpotCycleTransit_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void AllControl_Enter(object sender, EventArgs e)
         {
             ((TextBox)sender).BackColor = Color.CornflowerBlue;//當當前控件成為活動控件時設置它的背景顏色為藍色
@@ -33,7 +39,8 @@ namespace FocalSpotCycleTransit
                 Clear_Control(this.Controls, n, 6); //進入下一個控件
             }
         }
-        #region  遍歷指定的控件
+
+        //#region  遍歷指定的控件
         /// <summary>
         /// 遍歷指定的控件
         /// </summary>
@@ -48,20 +55,20 @@ namespace FocalSpotCycleTransit
                 if (C.GetType().Name == "TextBox")  //判斷是否為TextBox控件
                 {
                     if (n == m)//當循環至最後一個控件時
+                    {
                         tem_n = 1;//設置控件標識的值為1
+                    }
                     else //當沒有循環到最後一個控件時
+                    {
                         tem_n = n + 1;//使控件的標識值遞增1
+                    }
                     if (Convert.ToInt32(((TextBox)C).Tag.ToString()) == tem_n)//當與當前控件關聯的數據對像為下一個控件時
+                    {
                         ((TextBox)C).Focus();//為當前控件設置焦點
+                    }
                 }
             }
         }
-        #endregion
-
-        private void FocalSpotCycleTransit_Load(object sender, EventArgs e)
-        {
-
-        }
-
+        //#endregion
     }
 }

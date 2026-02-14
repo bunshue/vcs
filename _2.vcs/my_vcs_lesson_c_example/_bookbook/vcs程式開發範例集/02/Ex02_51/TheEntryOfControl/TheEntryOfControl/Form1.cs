@@ -19,22 +19,24 @@ namespace TheEntryOfControl
         {
 
         }
+
         protected override void OnKeyPress(KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
-            { this.SelectNextControl(this.ActiveControl, true, true, true, true); }
+            {
+                this.SelectNextControl(this.ActiveControl, true, true, true, true);
+            }
             base.OnKeyPress(e);
         }
+
         private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
         {
-
             if (e.KeyChar != 8 && !char.IsDigit(e.KeyChar))
             {
-
                 e.Handled = true;
-
             }
         }
+
         private void textBox5_KeyUp(object sender, KeyEventArgs e)
         {
             if (textBox5.Text.Length == 2)
@@ -57,7 +59,6 @@ namespace TheEntryOfControl
                 MessageBox.Show("血型請輸入<A,AB,O,B>");
                 e.Handled = true;
             }
-
         }
 
         private void textBox7_KeyDown(object sender, KeyEventArgs e)
@@ -73,18 +74,17 @@ namespace TheEntryOfControl
         private void button1_Click(object sender, EventArgs e)
         {
             if (textBox7.Text == "")
-            { MessageBox.Show("請輸入血型"); }
-            else { MessageBox.Show("輸入成功"); }
+            {
+                MessageBox.Show("請輸入血型");
+            }
+            else
+            {
+                MessageBox.Show("輸入成功");
+            }
         }
 
         private void textBox7_TextChanged(object sender, EventArgs e)
         {
-
         }
-
     }
-
-
-
-
 }

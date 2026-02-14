@@ -6,21 +6,26 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Data.SqlClient;//宣告與數據庫有關的命名空間
 
 namespace AmendDatum
 {
     public partial class AmendDatum : Form
     {
+        SqlDataAdapter WidgetAdapter;//宣告一個數據讀取器
+        DataSet WidgetSet;//宣告一個數據集
+        SqlConnection WidgetConnection;//宣告一個數據庫連接對像
+
+        //定義一個數據庫連接字串
+        //private string ConnectString = "server=.;database=db_02;integrated security=sspi";
+        private string ConnectString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+
         public AmendDatum()
         {
             InitializeComponent();
         }
 
-        SqlDataAdapter WidgetAdapter;//宣告一個數據讀取器
-        DataSet WidgetSet;//宣告一個數據集
-        SqlConnection WidgetConnection;//宣告一個數據庫連接對像
-        private string ConnectString = "server=.;database=db_02;integrated security=sspi";//定義一個數據庫連接字串
         private void AmendDatum_Load(object sender, EventArgs e)
         {
             listView1.Dock = DockStyle.Fill;//設定listView1與其父容器的停靠模式
@@ -41,10 +46,12 @@ namespace AmendDatum
         private void listView1_AfterLabelEdit(object sender, LabelEditEventArgs e)
         {
             WidgetConnection = new SqlConnection(ConnectString);//初始化一個數據庫連接
+
             if (WidgetConnection.State == ConnectionState.Closed)//當數據庫連接處於關閉狀態時
             {
                 WidgetConnection.Open();//打開數據庫連接
             }
+
             if (e.Label != null && e.Label != "")//當選定項的文字內容存在且不為空時
             {
                 string RefreshString = "update tb_WidgetApply set 產品名稱='" + e.Label + "' where 產品編號=" + e.Item + (1).ToString();//定義一個更新數據庫的字串

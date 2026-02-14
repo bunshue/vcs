@@ -19,17 +19,22 @@ namespace RankOrStatisticDatum
         {
             getScoure("select * from tb_05");
         }
+
         public void getScoure(string strName)
         {
-            SqlConnection con = new SqlConnection("server=(local);integrated security=sspi;database=db_02");
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+
+            SqlConnection con = new SqlConnection(cnstr);//"server=(local);integrated security=sspi;database=db_02");
+
             con.Open();
+
             SqlCommand com = new SqlCommand(strName, con);
             SqlDataReader dr = com.ExecuteReader();
             listView1.View = View.Details;
             listView1.GridLines = true;
             listView1.FullRowSelect = true;
             listView1.Items.Clear();
-          
+
             while (dr.Read())
             {
                 ListViewItem lv = new ListViewItem(dr[0].ToString());
@@ -50,10 +55,6 @@ namespace RankOrStatisticDatum
         {
             getScoure("select * from tb_05 order by 銷售數量 desc");
         }
- 
-
-     
-  
-
     }
 }
+

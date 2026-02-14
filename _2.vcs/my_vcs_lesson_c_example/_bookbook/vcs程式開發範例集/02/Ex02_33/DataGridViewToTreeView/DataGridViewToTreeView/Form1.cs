@@ -9,6 +9,8 @@ using System.Windows.Forms;
 
 using System.Data.SqlClient;
 
+// 無 資料庫 pubs
+
 namespace DataGridViewToTreeView
 {
     public partial class Form1 : Form

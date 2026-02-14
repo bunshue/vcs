@@ -6,7 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Data.SqlClient;//引用與數據庫操作有關的命名空間
+
+// 無 資料庫 pubs
 
 namespace PaginationFunction
 {
@@ -16,7 +19,14 @@ namespace PaginationFunction
         {
             InitializeComponent();
         }
-        private static string ConnectString = "server=.;database=pubs;integrated security=sspi";//定義數據庫連接字符串
+
+        //定義數據庫連接字符串
+
+        // 無資料庫
+
+        //private static string ConnectString = "server=.;database=pubs;integrated security=sspi";
+        private static string ConnectString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+
         private SqlConnection PaginationConnection;//定義數據庫連接對像
         private SqlDataAdapter PaginationAdapter;//定義填充數據集對像
         private DataSet PaginationSet = new DataSet();//定義存儲數據的集合

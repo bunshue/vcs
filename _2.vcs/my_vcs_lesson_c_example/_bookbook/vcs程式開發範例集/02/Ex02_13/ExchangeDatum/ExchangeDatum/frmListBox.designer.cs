@@ -45,7 +45,7 @@ namespace ExchangeDatum
             this.lbSocure.ItemHeight = 12;
             this.lbSocure.Location = new System.Drawing.Point(12, 27);
             this.lbSocure.Name = "lbSocure";
-            this.lbSocure.Size = new System.Drawing.Size(84, 148);
+            this.lbSocure.Size = new System.Drawing.Size(200, 400);
             this.lbSocure.TabIndex = 0;
             this.lbSocure.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -53,17 +53,17 @@ namespace ExchangeDatum
             // 
             this.lbChoose.FormattingEnabled = true;
             this.lbChoose.ItemHeight = 12;
-            this.lbChoose.Location = new System.Drawing.Point(183, 27);
+            this.lbChoose.Location = new System.Drawing.Point(325, 27);
             this.lbChoose.Name = "lbChoose";
-            this.lbChoose.Size = new System.Drawing.Size(94, 148);
+            this.lbChoose.Size = new System.Drawing.Size(200, 400);
             this.lbChoose.TabIndex = 2;
             // 
             // button2
             // 
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(102, 39);
+            this.button2.Location = new System.Drawing.Point(229, 52);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(75, 36);
             this.button2.TabIndex = 3;
             this.button2.Text = ">>";
             this.button2.UseVisualStyleBackColor = true;
@@ -72,9 +72,9 @@ namespace ExchangeDatum
             // button3
             // 
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(102, 111);
+            this.button3.Location = new System.Drawing.Point(229, 166);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(75, 36);
             this.button3.TabIndex = 4;
             this.button3.Text = "<<";
             this.button3.UseVisualStyleBackColor = true;
@@ -83,7 +83,7 @@ namespace ExchangeDatum
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(177, 151);
+            this.label1.Location = new System.Drawing.Point(289, 151);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 12);
             this.label1.TabIndex = 5;
@@ -100,9 +100,9 @@ namespace ExchangeDatum
             // button1
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(102, 69);
+            this.button1.Location = new System.Drawing.Point(229, 112);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(75, 36);
             this.button1.TabIndex = 7;
             this.button1.Text = ">";
             this.button1.UseVisualStyleBackColor = true;
@@ -111,9 +111,9 @@ namespace ExchangeDatum
             // button4
             // 
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(102, 140);
+            this.button4.Location = new System.Drawing.Point(229, 219);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(75, 36);
             this.button4.TabIndex = 8;
             this.button4.Text = "<";
             this.button4.UseVisualStyleBackColor = true;
@@ -122,7 +122,7 @@ namespace ExchangeDatum
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(197, 9);
+            this.label3.Location = new System.Drawing.Point(339, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 9;
@@ -132,7 +132,7 @@ namespace ExchangeDatum
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(645, 442);
+            this.ClientSize = new System.Drawing.Size(629, 467);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button1);

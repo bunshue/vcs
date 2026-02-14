@@ -47,7 +47,7 @@ namespace FocalSpotTravelLoggingInWindow
             // 
             this.textBox1.Location = new System.Drawing.Point(80, 13);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.Size = new System.Drawing.Size(100, 22);
             this.textBox1.TabIndex = 0;
             this.textBox1.Tag = "0";
             // 
@@ -55,7 +55,7 @@ namespace FocalSpotTravelLoggingInWindow
             // 
             this.textBox2.Location = new System.Drawing.Point(267, 18);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 21);
+            this.textBox2.Size = new System.Drawing.Size(100, 22);
             this.textBox2.TabIndex = 1;
             this.textBox2.Tag = "1";
             // 
@@ -63,7 +63,7 @@ namespace FocalSpotTravelLoggingInWindow
             // 
             this.textBox3.Location = new System.Drawing.Point(83, 61);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 21);
+            this.textBox3.Size = new System.Drawing.Size(100, 22);
             this.textBox3.TabIndex = 2;
             this.textBox3.Tag = "2";
             // 
@@ -71,7 +71,7 @@ namespace FocalSpotTravelLoggingInWindow
             // 
             this.textBox4.Location = new System.Drawing.Point(267, 61);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 21);
+            this.textBox4.Size = new System.Drawing.Size(100, 22);
             this.textBox4.TabIndex = 3;
             this.textBox4.Tag = "3";
             // 
@@ -80,7 +80,7 @@ namespace FocalSpotTravelLoggingInWindow
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(-102, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 12);
+            this.label1.Size = new System.Drawing.Size(33, 12);
             this.label1.TabIndex = 4;
             this.label1.Text = "label1";
             // 
@@ -142,7 +142,7 @@ namespace FocalSpotTravelLoggingInWindow
             // 
             this.textBox5.Location = new System.Drawing.Point(80, 104);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 21);
+            this.textBox5.Size = new System.Drawing.Size(100, 22);
             this.textBox5.TabIndex = 11;
             this.textBox5.Tag = "4";
             // 
@@ -150,7 +150,7 @@ namespace FocalSpotTravelLoggingInWindow
             // 
             this.textBox6.Location = new System.Drawing.Point(267, 104);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 21);
+            this.textBox6.Size = new System.Drawing.Size(100, 22);
             this.textBox6.TabIndex = 12;
             this.textBox6.Tag = "5";
             // 
@@ -158,7 +158,7 @@ namespace FocalSpotTravelLoggingInWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(388, 146);
+            this.ClientSize = new System.Drawing.Size(762, 536);
             this.Controls.Add(this.textBox6);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.label7);

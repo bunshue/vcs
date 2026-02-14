@@ -29,14 +29,14 @@ namespace PaginationFunction
         private void InitializeComponent()
         {
             this.ListData = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.LastPage = new System.Windows.Forms.Button();
             this.NextPage = new System.Windows.Forms.Button();
             this.PreviousPage = new System.Windows.Forms.Button();
             this.FistPage = new System.Windows.Forms.Button();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ListData)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -54,6 +54,21 @@ namespace PaginationFunction
             this.ListData.RowTemplate.Height = 23;
             this.ListData.Size = new System.Drawing.Size(431, 226);
             this.ListData.TabIndex = 0;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "用戶編號";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "用戶姓名";
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "工作時間";
+            this.Column3.Name = "Column3";
             // 
             // groupBox1
             // 
@@ -108,26 +123,11 @@ namespace PaginationFunction
             this.FistPage.UseVisualStyleBackColor = true;
             this.FistPage.Click += new System.EventHandler(this.fistpage_Click);
             // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "用戶編號";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "用戶姓名";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "工作時間";
-            this.Column3.Name = "Column3";
-            // 
             // PaginationFunction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(438, 320);
+            this.ClientSize = new System.Drawing.Size(618, 565);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.ListData);
             this.Name = "PaginationFunction";

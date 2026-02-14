@@ -6,7 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Data.SqlClient;
+
+// 無 資料庫 pubs
 
 namespace UnionCellDuty
 {
@@ -17,12 +20,12 @@ namespace UnionCellDuty
             InitializeComponent();
         }
 
-        #region 声明的变量
+        //#region 声明的变量
         static string connectionString = "Data Source=.;DataBase=pubs;integrated security=sspi";
         SqlConnection conn = new SqlConnection(connectionString);
         SqlDataAdapter Adapter;
         DataSet dataSet = new DataSet();
-        #endregion
+        //#endregion
 
         private void UnionCellDuty_Load(object sender,EventArgs e)
         {
@@ -49,7 +52,7 @@ namespace UnionCellDuty
             }
         }
 
-        #region 合并列相同的内容
+        //#region 合并列相同的内容
         private void dataGridView1_CellPainting(object sender,DataGridViewCellPaintingEventArgs e)//绘制单元格事件
         {
             // 对第1列相同单元格进行合并     
@@ -95,6 +98,6 @@ namespace UnionCellDuty
                 }
             }
         }
-        #endregion
+        //#endregion
     }
 }

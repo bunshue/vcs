@@ -78,7 +78,7 @@ namespace SmoothProgressBar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(255, 203);
+            this.ClientSize = new System.Drawing.Size(488, 431);
             this.Controls.Add(this.StartOrStop);
             this.Controls.Add(this.smoothProgressBar2);
             this.Controls.Add(this.smoothProgressBar1);

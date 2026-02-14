@@ -46,7 +46,7 @@ namespace ListWaferFacility
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(460, 332);
+            this.ClientSize = new System.Drawing.Size(699, 522);
             this.Controls.Add(this.dataGridView1);
             this.Name = "ListWaferFacility";
             this.Text = "在DataGirdView控件中顯示圖片";

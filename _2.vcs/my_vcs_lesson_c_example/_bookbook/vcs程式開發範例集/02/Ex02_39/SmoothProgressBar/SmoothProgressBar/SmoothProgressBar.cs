@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using WindowsFormsControlLibrary;
 
 namespace SmoothProgressBar
@@ -15,6 +16,11 @@ namespace SmoothProgressBar
         public SmoothProgressBar()
         {
             InitializeComponent();
+        }
+
+        private void SmoothProgressBar_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -37,11 +43,6 @@ namespace SmoothProgressBar
 
             this.timer1.Interval = 1;//設置Timer組件的Tick事件的時間間隔
             this.timer1.Enabled = true;//設置Timer組件為可用狀態
-        }
-
-        private void SmoothProgressBar_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

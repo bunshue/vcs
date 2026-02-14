@@ -17,6 +17,11 @@ namespace ExchangeDatum
             InitializeComponent();
         }
 
+        private void frmListBox_Load(object sender, EventArgs e)
+        {
+            AddList();
+        }
+
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -24,7 +29,9 @@ namespace ExchangeDatum
 
         public void AddList()//添加數據
         {
-            SqlConnection con = new SqlConnection("server=(local);integrated security=sspi;database=db_02_1");
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+
+            SqlConnection con = new SqlConnection(cnstr);
             con.Open();
             SqlCommand com = new SqlCommand("select * from tb_student", con);
             SqlDataReader dr = com.ExecuteReader();
@@ -57,11 +64,6 @@ namespace ExchangeDatum
             lbChoose.Items.Clear();
         }
 
-        private void frmListBox_Load(object sender, EventArgs e)
-        {
-            AddList();
-        }
-
         private void button1_Click(object sender, EventArgs e)//單個添加到選擇的項中
         {
             if (lbSocure.SelectedIndex != -1)
@@ -81,4 +83,3 @@ namespace ExchangeDatum
         }
     }
 }
-

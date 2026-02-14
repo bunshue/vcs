@@ -33,19 +33,20 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(21, 21);
+            this.textBox1.Location = new System.Drawing.Point(18, 19);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(312, 23);
+            this.textBox1.Size = new System.Drawing.Size(268, 22);
             this.textBox1.TabIndex = 1;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(365, 66);
+            this.ClientSize = new System.Drawing.Size(415, 231);
             this.Controls.Add(this.textBox1);
             this.Name = "Form1";
             this.Text = "MDI子視窗";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

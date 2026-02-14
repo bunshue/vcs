@@ -28,21 +28,15 @@ namespace UsageBindingControlAchieveSelect
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.tbLandBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.db_02_1DataSet = new UsageBindingControlAchieveSelect.db_02_1DataSet();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.tb_LandTableAdapter = new UsageBindingControlAchieveSelect.db_02_1DataSetTableAdapters.tb_LandTableAdapter();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbLandBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.db_02_1DataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -50,37 +44,25 @@ namespace UsageBindingControlAchieveSelect
             this.groupBox1.Controls.Add(this.listBox1);
             this.groupBox1.Location = new System.Drawing.Point(9, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(97, 132);
+            this.groupBox1.Size = new System.Drawing.Size(175, 252);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "地名：";
             // 
             // listBox1
             // 
-            this.listBox1.DataSource = this.db_02_1DataSet;
-            this.listBox1.DisplayMember = "tb_Land.depname";
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 12;
             this.listBox1.Location = new System.Drawing.Point(6, 20);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(82, 100);
+            this.listBox1.Size = new System.Drawing.Size(163, 220);
             this.listBox1.TabIndex = 0;
             this.listBox1.ValueMember = "tb_Land.depname";
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged_1);
             // 
-            // tbLandBindingSource
-            // 
-            this.tbLandBindingSource.DataMember = "tb_Land";
-            this.tbLandBindingSource.DataSource = this.db_02_1DataSet;
-            // 
-            // db_02_1DataSet
-            // 
-            this.db_02_1DataSet.DataSetName = "db_02_1DataSet";
-            this.db_02_1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(164, 27);
+            this.textBox1.Location = new System.Drawing.Point(237, 29);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 22);
             this.textBox1.TabIndex = 1;
@@ -88,7 +70,7 @@ namespace UsageBindingControlAchieveSelect
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(117, 30);
+            this.label1.Location = new System.Drawing.Point(190, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 2;
@@ -97,7 +79,7 @@ namespace UsageBindingControlAchieveSelect
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(117, 70);
+            this.label2.Location = new System.Drawing.Point(190, 72);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 12);
             this.label2.TabIndex = 3;
@@ -105,14 +87,14 @@ namespace UsageBindingControlAchieveSelect
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(164, 70);
+            this.textBox2.Location = new System.Drawing.Point(237, 72);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 22);
             this.textBox2.TabIndex = 4;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(119, 109);
+            this.button1.Location = new System.Drawing.Point(192, 111);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 5;
@@ -121,7 +103,7 @@ namespace UsageBindingControlAchieveSelect
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(202, 109);
+            this.button2.Location = new System.Drawing.Point(275, 111);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 6;
@@ -129,15 +111,11 @@ namespace UsageBindingControlAchieveSelect
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // tb_LandTableAdapter
-            // 
-            this.tb_LandTableAdapter.ClearBeforeFill = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(314, 152);
+            this.ClientSize = new System.Drawing.Size(636, 480);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox2);
@@ -149,8 +127,6 @@ namespace UsageBindingControlAchieveSelect
             this.Text = "藉由綁定控制元件完成資料選擇登入";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tbLandBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.db_02_1DataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -166,9 +142,6 @@ namespace UsageBindingControlAchieveSelect
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ListBox listBox1;
-        private db_02_1DataSet db_02_1DataSet;
-        private System.Windows.Forms.BindingSource tbLandBindingSource;
-        private UsageBindingControlAchieveSelect.db_02_1DataSetTableAdapters.tb_LandTableAdapter tb_LandTableAdapter;
     }
 }
 

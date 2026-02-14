@@ -125,7 +125,7 @@ namespace TheEntryOfControl
             // 
             this.textBox1.Location = new System.Drawing.Point(222, 10);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(87, 21);
+            this.textBox1.Size = new System.Drawing.Size(87, 22);
             this.textBox1.TabIndex = 10;
             this.textBox1.Tag = "0";
             // 
@@ -134,23 +134,23 @@ namespace TheEntryOfControl
             this.textBox5.Location = new System.Drawing.Point(222, 70);
             this.textBox5.MaxLength = 2;
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(87, 21);
+            this.textBox5.Size = new System.Drawing.Size(87, 22);
             this.textBox5.TabIndex = 14;
             this.textBox5.Tag = "3";
-            this.textBox5.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox5_KeyUp);
             this.textBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox5_KeyPress);
+            this.textBox5.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox5_KeyUp);
             // 
             // textBox7
             // 
             this.textBox7.Location = new System.Drawing.Point(222, 110);
             this.textBox7.MaxLength = 2;
             this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(87, 21);
+            this.textBox7.Size = new System.Drawing.Size(87, 22);
             this.textBox7.TabIndex = 16;
             this.textBox7.Tag = "5";
-            this.textBox7.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox7_KeyPress);
             this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
             this.textBox7.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox7_KeyDown);
+            this.textBox7.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox7_KeyPress);
             // 
             // pictureBox1
             // 
@@ -191,7 +191,7 @@ namespace TheEntryOfControl
             this.maskedTextBox1.Location = new System.Drawing.Point(222, 141);
             this.maskedTextBox1.Mask = "0000-00-00";
             this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(87, 21);
+            this.maskedTextBox1.Size = new System.Drawing.Size(87, 22);
             this.maskedTextBox1.TabIndex = 20;
             this.maskedTextBox1.Tag = "4";
             this.maskedTextBox1.ValidatingType = typeof(System.DateTime);
@@ -201,7 +201,7 @@ namespace TheEntryOfControl
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(347, 197);
+            this.ClientSize = new System.Drawing.Size(661, 528);
             this.Controls.Add(this.maskedTextBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);

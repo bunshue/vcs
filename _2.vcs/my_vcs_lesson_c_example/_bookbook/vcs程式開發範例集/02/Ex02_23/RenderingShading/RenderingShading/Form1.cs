@@ -16,13 +16,14 @@ namespace RenderingShading
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
-           
+        {           
            listView1.BackgroundImageTiled = true;
             listView1.View = View.LargeIcon;
             listView1.LargeImageList = imageList1;
          //   listView1.BackgroundImage = imageList1.Images[1];
-            SqlConnection con = new SqlConnection("server=(local);integrated security=sspi;database=db_02");
+
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+            SqlConnection con = new SqlConnection(cnstr);//"server=(local);integrated security=sspi;database=db_02");
             con.Open();
             SqlCommand com = new SqlCommand("select * from tb_06", con);
             listView1.Items.Clear();
@@ -44,8 +45,6 @@ namespace RenderingShading
         private void listView1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
 
-        }
-
-        
+        }        
     }
 }

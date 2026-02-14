@@ -48,7 +48,7 @@ namespace CarryOutMultiFacility
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(425, 254);
+            this.dataGridView1.Size = new System.Drawing.Size(425, 354);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -63,7 +63,7 @@ namespace CarryOutMultiFacility
             // 
             this.groupBox1.Controls.Add(this.excision);
             this.groupBox1.Controls.Add(this.print);
-            this.groupBox1.Location = new System.Drawing.Point(6, 265);
+            this.groupBox1.Location = new System.Drawing.Point(6, 365);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(425, 54);
             this.groupBox1.TabIndex = 1;
@@ -95,11 +95,12 @@ namespace CarryOutMultiFacility
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(436, 329);
+            this.ClientSize = new System.Drawing.Size(727, 487);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "CarryOutMultiFacility";
             this.Text = "在DataGridView控制元件中完成復選功能";
+            this.Load += new System.EventHandler(this.CarryOutMultiFacility_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);

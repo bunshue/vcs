@@ -43,7 +43,7 @@ namespace ModifiedNexusVersion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(298, 266);
+            this.ClientSize = new System.Drawing.Size(579, 497);
             this.Controls.Add(this.treeView1);
             this.Name = "ModifiedNexusVersion";
             this.Text = "修改TreeView控制元件中的節點文字";

@@ -19,6 +19,7 @@ namespace TailorLeftRightFlapForms
         {
             timer1.Enabled = true;
         }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             //獲得當前屏幕的大小
@@ -45,7 +46,7 @@ namespace TailorLeftRightFlapForms
             Rectangle rect = new Rectangle();
             rect = Screen.GetWorkingArea(this);
             if (this.Left == 0)
-            { 
+            {
                 timer2.Enabled = false;
                 timer1.Enabled = true;
             }
@@ -55,7 +56,5 @@ namespace TailorLeftRightFlapForms
                 this.Top -= 1;
             }
         }
-
-      
     }
 }

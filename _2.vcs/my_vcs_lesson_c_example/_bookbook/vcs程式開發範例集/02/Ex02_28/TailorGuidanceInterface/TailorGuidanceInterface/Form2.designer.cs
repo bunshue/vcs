@@ -34,7 +34,7 @@ namespace TailorGuidanceInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(359, 93);
+            this.ClientSize = new System.Drawing.Size(454, 216);
             this.Name = "Form2";
             this.Text = "公司信息";
             this.Load += new System.EventHandler(this.Form2_Load);

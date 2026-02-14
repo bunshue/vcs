@@ -5,7 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Data.SqlClient;
+
 namespace AttachDataBaseDatumToListView
 {
     public partial class Form1 : Form
@@ -15,9 +17,16 @@ namespace AttachDataBaseDatumToListView
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection("server=(local);integrated security=sspi;database=db_02");
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+
+            SqlConnection con = new SqlConnection(cnstr);//"server=(local);integrated security=sspi;database=db_02");
             con.Open();
             SqlCommand com = new SqlCommand("select * from tb_02",con);
             SqlDataReader dr = com.ExecuteReader();
@@ -43,5 +52,6 @@ namespace AttachDataBaseDatumToListView
         {
 
         }
+
     }
 }

@@ -27,8 +27,9 @@ namespace ReadWriteEconomyEventLog
             eventLog1.Log = "NewLog1";//NewLog1日誌，
             eventLog1.Source = "ZhyScoure";//事件源名
             this.eventLog1.MachineName = ".";//表示本機
-           // this.eventLog1.Clear();   
+            // this.eventLog1.Clear();   
         }
+
         //寫入日誌
         private void button1_Click(object sender, EventArgs e)
         {
@@ -50,7 +51,6 @@ namespace ReadWriteEconomyEventLog
             {
                 MessageBox.Show("日誌不存在");
             }
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -58,8 +58,7 @@ namespace ReadWriteEconomyEventLog
             listBox1.Items.Clear();
             if (eventLog1.Entries.Count > 0)
             {
-                foreach (System.Diagnostics.EventLogEntry entry
-                   in eventLog1.Entries)
+                foreach (System.Diagnostics.EventLogEntry entry in eventLog1.Entries)
                 {
                     listBox1.Items.Add(entry.Message);
                 }
@@ -68,9 +67,7 @@ namespace ReadWriteEconomyEventLog
             {
                 MessageBox.Show("日誌中沒有記錄.");
             }
-
         }
-
-       
     }
 }
+

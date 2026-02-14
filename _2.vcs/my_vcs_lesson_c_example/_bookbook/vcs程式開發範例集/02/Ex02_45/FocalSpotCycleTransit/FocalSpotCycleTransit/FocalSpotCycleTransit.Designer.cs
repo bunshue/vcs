@@ -49,9 +49,9 @@ namespace FocalSpotCycleTransit
             this.textBox6.Size = new System.Drawing.Size(72, 22);
             this.textBox6.TabIndex = 23;
             this.textBox6.Tag = "6";
+            this.textBox6.Enter += new System.EventHandler(this.AllControl_Enter);
             this.textBox6.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AllControl_KeyDown);
             this.textBox6.Leave += new System.EventHandler(this.AllControl_Leave);
-            this.textBox6.Enter += new System.EventHandler(this.AllControl_Enter);
             // 
             // textBox5
             // 
@@ -60,9 +60,9 @@ namespace FocalSpotCycleTransit
             this.textBox5.Size = new System.Drawing.Size(72, 22);
             this.textBox5.TabIndex = 22;
             this.textBox5.Tag = "5";
+            this.textBox5.Enter += new System.EventHandler(this.AllControl_Enter);
             this.textBox5.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AllControl_KeyDown);
             this.textBox5.Leave += new System.EventHandler(this.AllControl_Leave);
-            this.textBox5.Enter += new System.EventHandler(this.AllControl_Enter);
             // 
             // textBox4
             // 
@@ -71,9 +71,9 @@ namespace FocalSpotCycleTransit
             this.textBox4.Size = new System.Drawing.Size(72, 22);
             this.textBox4.TabIndex = 21;
             this.textBox4.Tag = "4";
+            this.textBox4.Enter += new System.EventHandler(this.AllControl_Enter);
             this.textBox4.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AllControl_KeyDown);
             this.textBox4.Leave += new System.EventHandler(this.AllControl_Leave);
-            this.textBox4.Enter += new System.EventHandler(this.AllControl_Enter);
             // 
             // textBox3
             // 
@@ -82,9 +82,9 @@ namespace FocalSpotCycleTransit
             this.textBox3.Size = new System.Drawing.Size(72, 22);
             this.textBox3.TabIndex = 20;
             this.textBox3.Tag = "3";
+            this.textBox3.Enter += new System.EventHandler(this.AllControl_Enter);
             this.textBox3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AllControl_KeyDown);
             this.textBox3.Leave += new System.EventHandler(this.AllControl_Leave);
-            this.textBox3.Enter += new System.EventHandler(this.AllControl_Enter);
             // 
             // textBox2
             // 
@@ -93,9 +93,9 @@ namespace FocalSpotCycleTransit
             this.textBox2.Size = new System.Drawing.Size(72, 22);
             this.textBox2.TabIndex = 19;
             this.textBox2.Tag = "2";
+            this.textBox2.Enter += new System.EventHandler(this.AllControl_Enter);
             this.textBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AllControl_KeyDown);
             this.textBox2.Leave += new System.EventHandler(this.AllControl_Leave);
-            this.textBox2.Enter += new System.EventHandler(this.AllControl_Enter);
             // 
             // textBox1
             // 
@@ -104,9 +104,9 @@ namespace FocalSpotCycleTransit
             this.textBox1.Size = new System.Drawing.Size(72, 22);
             this.textBox1.TabIndex = 18;
             this.textBox1.Tag = "1";
+            this.textBox1.Enter += new System.EventHandler(this.AllControl_Enter);
             this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AllControl_KeyDown);
             this.textBox1.Leave += new System.EventHandler(this.AllControl_Leave);
-            this.textBox1.Enter += new System.EventHandler(this.AllControl_Enter);
             // 
             // label6
             // 
@@ -166,7 +166,7 @@ namespace FocalSpotCycleTransit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(312, 194);
+            this.ClientSize = new System.Drawing.Size(639, 493);
             this.Controls.Add(this.textBox6);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.textBox4);

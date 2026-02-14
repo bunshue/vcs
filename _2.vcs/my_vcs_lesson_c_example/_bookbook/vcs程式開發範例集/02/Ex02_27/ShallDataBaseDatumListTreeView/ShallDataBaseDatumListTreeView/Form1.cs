@@ -15,14 +15,15 @@ namespace ShallDataBaseDatumListTreeView
             InitializeComponent();
         }
 
-
-
         private void Form1_Load(object sender, EventArgs e)
         {
-
             treeView1.ShowLines = true;
             treeView1.ImageList = imageList1;
-            SqlConnection con = new SqlConnection("server=(local);integrated security=sspi;database=db_02");
+
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+
+            SqlConnection con = new SqlConnection(cnstr);//"server=(local);integrated security=sspi;database=db_02");
+
             con.Open();
             SqlCommand com = new SqlCommand("select * from tb_07", con);
             SqlDataReader dr = com.ExecuteReader();
@@ -35,7 +36,6 @@ namespace ShallDataBaseDatumListTreeView
                 newNode12.Nodes.Add("A", "商品數量：" + dr[3].ToString(), 7, 8);
                 newNode12.Nodes.Add("A", "商品價格：" + dr[2].ToString(), 9, 10);
                 newNode1.Nodes.Add(newNode12);
-
             }
             dr.Close();
             con.Close();
@@ -43,3 +43,4 @@ namespace ShallDataBaseDatumListTreeView
         }
     }
 }
+

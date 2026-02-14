@@ -37,7 +37,7 @@ namespace AmendDatum
             this.listView1.LabelEdit = true;
             this.listView1.Location = new System.Drawing.Point(5, 5);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(294, 283);
+            this.listView1.Size = new System.Drawing.Size(410, 401);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -47,7 +47,7 @@ namespace AmendDatum
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(305, 294);
+            this.ClientSize = new System.Drawing.Size(686, 563);
             this.Controls.Add(this.listView1);
             this.Name = "AmendDatum";
             this.Text = "在ListView控制元件中完成修改功能";

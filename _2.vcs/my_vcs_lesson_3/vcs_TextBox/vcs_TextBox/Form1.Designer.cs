@@ -67,12 +67,18 @@
             this.label13 = new System.Windows.Forms.Label();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.textBox12 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.groupBox7.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox2
@@ -402,7 +408,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(817, 648);
+            this.bt_clear.Location = new System.Drawing.Point(241, 629);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(60, 32);
             this.bt_clear.TabIndex = 37;
@@ -412,7 +418,7 @@
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(792, 405);
+            this.richTextBox2.Location = new System.Drawing.Point(214, 599);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.Size = new System.Drawing.Size(100, 100);
             this.richTextBox2.TabIndex = 36;
@@ -484,11 +490,60 @@
             this.label12.TabIndex = 18;
             this.label12.Text = "TextBox 使用 Enter / Leave";
             // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.textBox11);
+            this.groupBox7.Controls.Add(this.label14);
+            this.groupBox7.Controls.Add(this.label15);
+            this.groupBox7.Controls.Add(this.textBox12);
+            this.groupBox7.Location = new System.Drawing.Point(584, 426);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(231, 100);
+            this.groupBox7.TabIndex = 39;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "隱蔽密碼";
+            // 
+            // textBox11
+            // 
+            this.textBox11.Location = new System.Drawing.Point(99, 60);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.PasswordChar = '#';
+            this.textBox11.Size = new System.Drawing.Size(100, 22);
+            this.textBox11.TabIndex = 12;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(23, 62);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(48, 12);
+            this.label14.TabIndex = 11;
+            this.label14.Text = "密碼(&W)";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(23, 31);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(43, 12);
+            this.label15.TabIndex = 10;
+            this.label15.Text = "密碼(&P)";
+            // 
+            // textBox12
+            // 
+            this.textBox12.Location = new System.Drawing.Point(99, 28);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.PasswordChar = '#';
+            this.textBox12.Size = new System.Drawing.Size(100, 22);
+            this.textBox12.TabIndex = 9;
+            this.textBox12.UseSystemPasswordChar = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1210, 708);
+            this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.lb_CustomTextBoxGroup3);
             this.Controls.Add(this.bt_clear);
@@ -522,6 +577,8 @@
             this.groupBox5.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -568,6 +625,11 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox textBox12;
     }
 }
 

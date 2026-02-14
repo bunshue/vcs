@@ -6,19 +6,21 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Data.SqlClient;//聲明與數據庫操作有關的命名空間
 
 namespace ListWaferFacility
 {
     public partial class ListWaferFacility : Form
     {
+        public DataSet WaferSet = null;//定義一個數據集對像
+        private DataTable WaferTable = null;//定義一個數據表對像
+
         public ListWaferFacility()
         {
             InitializeComponent();
         }
 
-        public DataSet WaferSet = null;//定義一個數據集對像
-        private DataTable WaferTable = null;//定義一個數據表對像
         private void ListWaferFacility_Load(object sender, EventArgs e)
         {
             if (IsExistDataBase() == false)//當不存在數據庫連接時
@@ -37,7 +39,9 @@ namespace ListWaferFacility
         {
             try
             {
-                SqlConnection con = new SqlConnection("server=.;database=db_02;integrated security=sspi");//初始化一個數據庫連接對像
+                string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+
+                SqlConnection con = new SqlConnection(cnstr);//"server=.;database=db_02;integrated security=sspi");//初始化一個數據庫連接對像
                 SqlCommand WaferCommand = new SqlCommand("select 產品編號,產品名稱,產品說明,產品圖片 from tb_Photo", con);//執行SQL查詢語句
                 SqlDataAdapter WaferAdapter = new SqlDataAdapter(WaferCommand);//初始化一個數據讀取器
                 WaferSet = new DataSet();//初始化一個數據集
@@ -88,3 +92,4 @@ namespace ListWaferFacility
         }
     }
 }
+

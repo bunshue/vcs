@@ -90,20 +90,22 @@ namespace vcs_TextBox
             groupBox4.Size = new Size(W, H);
             groupBox5.Size = new Size(W, H);
             groupBox6.Size = new Size(W, H);
+            groupBox7.Size = new Size(W, H);
 
             groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 80);
 
             groupBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            groupBox7.Location = new Point(x_st + dx * 5, y_st + dy * 3);
             groupBox3.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 0);
             groupBox4.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 2 + 50);
             groupBox5.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 4 + 50 * 2);
             groupBox6.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 6 + 50 * 3);
 
-            richTextBox2.Size = new Size(300, 540);
-            richTextBox2.Location = new Point(x_st + dx * 5, y_st + dy * 2 + 50);
+            richTextBox2.Size = new Size(300, 340);
+            richTextBox2.Location = new Point(x_st + dx * 5, y_st + dy * 6);
             bt_clear.Location = new Point(richTextBox2.Location.X + richTextBox2.Size.Width - bt_clear.Size.Width, richTextBox2.Location.Y + richTextBox2.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1380, 780);
+            this.Size = new Size(1380, 800);
             this.Text = "vcs_TextBox";
 
             //設定執行後的表單起始位置, 正中央

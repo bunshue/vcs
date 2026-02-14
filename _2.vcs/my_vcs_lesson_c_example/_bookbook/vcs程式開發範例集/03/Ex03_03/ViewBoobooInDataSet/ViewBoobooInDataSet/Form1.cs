@@ -25,6 +25,7 @@ namespace ViewBoobooInDataSet
             MaxValue = (int)com.ExecuteScalar();
             con.Close();
         }
+
         public void Find(int first, int next)
         {
             SqlConnection con = new SqlConnection("server=(local);integrated security=true;database=db_03");
@@ -43,6 +44,7 @@ namespace ViewBoobooInDataSet
                 textBox1.Text = dt.Rows[0][1].ToString();
             }
         }
+
         int MaxValue = 0;//表示表中的記錄
         int State = 1;//狀態記錄
         private void button1_Click(object sender, EventArgs e)

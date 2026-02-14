@@ -19,6 +19,11 @@ namespace xCh3_3_1_11
             InitializeComponent();
         }
 
+        private void MDIParent1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void ShowNewForm(object sender, EventArgs e)
         {
             Form childForm = new Form();
