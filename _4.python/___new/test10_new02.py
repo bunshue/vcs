@@ -33,20 +33,73 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 """
+import tkinter as tk
+window = tk.Tk()
+window.title("Hello World!")
+# window.minsize(width=500, height=500) #  設定最小視窗大小, 視窗可拉大, 不可縮小
+# window.resizable(width=False, height=False)  # 設定不能調整大小
+window.mainloop()
+"""
 
-建立資料的寫法
-
+"""
+import tkinter as tk
+window = tk.Tk()
+window.title('window')
+window.geometry('500x100') #寬度*高度, 設定視窗大小
+label_1 = tk.Label(window, text='Hello World', bg='yellow', fg='#bd34eb', font=('Arial', 12))
+#label_1.grid(column=0, row=0)
+label_1.pack() # 預設位置’top’來配置標籤
+window.mainloop()
 
 """
 
+"""
+# 取得 Entry 的資料
 
-import sys
-import numpy as np
+import tkinter
 
-print("------------------------------------------------------------")  # 60個
+def add_num():
+    result.set(num1.get() + num2.get())
+    
+win = tkinter.Tk()
+win.title('加法視窗程式')
+num1=tkinter.DoubleVar()
+num2=tkinter.DoubleVar()
+result=tkinter.DoubleVar()
+
+item1=tkinter.Entry(win, width=10, textvariable=num1)
+label1=tkinter.Label(win, width=5, text='+')
+item2=tkinter.Entry(win, width=10, textvariable=num2)
+btn=tkinter.Button(win, width=5, text='=', command=add_num)
+label2=tkinter.Label(win, width=10, textvariable=result)
+item1.pack(side='left')
+label1.pack(side='left')
+item2.pack(side='left')
+btn.pack(side='left')
+label2.pack(side='left')
+win.mainloop()
+"""
+
+
+
+import tkinter as tk
+win = tk.Tk()
+win.geometry('200x100')
+radioValue = tk.IntVar()
+rdioOne = tk.Radiobutton(win, text='January',variable=radioValue, value=0)
+rdioTwo = tk.Radiobutton(win, text='Febuary',variable=radioValue, value=1)
+rdioThree = tk.Radiobutton(win, text='March',variable=radioValue, value=2)
+rdioOne.grid(column=0, row=0, sticky="W")
+rdioTwo.grid(column=0, row=1, sticky="W")
+rdioThree.grid(column=0, row=2, sticky="W")
+labelValue = tk.Label(win, textvariable=radioValue)
+labelValue.grid(column=2, row=0, sticky="E", padx=40)
+win.mainloop()
+
+
+# 建立資料的寫法
 
 cc = np.arange(-5, 5, 0.1)
-
 
 MIN = -5
 MAX = 5
@@ -126,8 +179,6 @@ import psutil
 g_cpu_cnt = psutil.cpu_count(logical=True) * 1
 print("g_cpu_cnt =", g_cpu_cnt)
 
-import os
-
 g_cpu_cnt = os.cpu_count()
 print("g_cpu_cnt =", g_cpu_cnt)
 
@@ -136,21 +187,14 @@ import multiprocessing as mp
 g_cpu_cnt = mp.cpu_count()
 print("g_cpu_cnt =", g_cpu_cnt)
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
-import os
 import re
 import platform
-import sys
 import warnings
 from enum import Enum
 from os import path
-
-import numpy as np
-import pandas as pd
 
 
 # ＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊ 数据目录 start ＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊

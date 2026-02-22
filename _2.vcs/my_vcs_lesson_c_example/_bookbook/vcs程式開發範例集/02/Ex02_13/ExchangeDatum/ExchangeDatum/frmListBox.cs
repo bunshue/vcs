@@ -81,5 +81,12 @@ namespace ExchangeDatum
                 this.lbChoose.Items.Remove(this.lbChoose.SelectedItem);
             }
         }
+
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string[] name = { "小明", "小1", "小2", "小3", "小4", "小5", "小6", "小7", "小8", "小9", "小10", "小11" };
+            listBox1.DataSource = name;
+        }
     }
 }
