@@ -1554,11 +1554,179 @@ namespace vcs_Mix00
 
         private void button31_Click(object sender, EventArgs e)
         {
-
+            //輸出標頭
+            String ch = new String('-', 58);
+            richTextBox1.Text += ch + "\n";
         }
 
         private void button32_Click(object sender, EventArgs e)
         {
+            int[] total = new int[4];
+            int[,] gdp =
+            {
+            {250872, 259564, 288579, 283280 },
+            { 3208572, 3541387, 401368, 4244227},
+            { 7804898, 8071281, 8369219, 8643443}
+            };
+
+            //GetLength()方法分別取得列(row)和欄(column)的值
+            int row = gdp.GetLength(0);
+            int column = gdp.GetLength(1);
+
+            //雙層for廻圈，外層for先讀取row數
+            for (int outer = 0; outer < row; outer++)
+            {
+                //內層for讀取column數
+                for (int inner = 0; inner < column; inner++)
+                {
+                    //欄寬14，NO表示含有千位分號但小數位數是零
+                    //Write($"{gdp[outer, inner],14:N0}");
+                }
+                richTextBox1.Text += "\n";
+                total[0] += gdp[outer, 0];//101年gdp合計
+                total[1] += gdp[outer, 1];//102年gdp合計
+                total[2] += gdp[outer, 2];//103年gdp合計
+                total[3] += gdp[outer, 3];//104年gdp合計
+            }
+            richTextBox1.Text += "\n";
+
+            for (int i = 0; i < total.Length; i++)
+            {
+                richTextBox1.Text += total[i] + "\n";
+            }
+
+            //6060
+
+            //宣告鋸齒陣列為隱含型別
+            var subject = new[]
+            {
+                new[] {"Tomas", "國文", "英文", "計算機概論" },
+                new[] {"Mary", "數學", "資料庫"},
+                new[] {"Peter", "數學","應用文", "多媒體", "程式設計"}
+            };
+
+            //外層for廻圈，取屬性subject.Length為列數
+            for (var outer = 0; outer < subject.Length; outer++)
+            {
+                //內層for廻圈，取屬性subject[outer].Length為欄數
+                for (var inner = 0; inner < subject[outer].Length; inner++)
+                {
+                    //-6表示欄寬為6，負號為靠左對齊
+                    //Write($"{subject[outer][inner],-6}");
+                }
+                //WriteLine();//
+            }
+            //ReadKey();//螢幕暫停
+
+            //三維 array
+            /*
+                        //宣告多維陣列並初始化
+                        int[,,] arr3D = new int[2, 2, 3] {
+                        { { 1, 2, 3 }, { 12, 14, 16 } },
+                        { { 21, 24, 27 }, { 30, 35, 40 } } };
+
+                        //Write("第2個表格，第2列 第2欄 元素：");
+                        //WriteLine($"{arr3D[1, 1, 1]}");
+
+                        //GetLength()方法取得多維陣列的Table, Row, Column
+                        int table = arr3D.GetLength(0);
+                        int row = arr3D.GetLength(1);
+                        int column = arr3D.GetLength(2);
+
+                        //Write($"有{table}個表格，");
+                        //Write($"是 {row} * {column} 二維表格\n");
+
+                        //3層for廻圈；第一層先讀表格(table)
+                        for (int first = 0; first < table; first++)
+                        {
+                            //WriteLine($"表格 {first + 1} -------");
+
+                            //第二層for廻圈讀列(row)
+                            for (int second = 0; second < row; second++)
+                            {
+                                //第三層for廻圈讀欄(column)
+                                for (int thrid = 0; thrid < column; thrid++)
+                                {
+                                    //依序輸出多維陣列的元素
+                                    //Write($"{arr3D[first, second, thrid],3} |");
+                                }
+
+                                //WriteLine();   //換行
+
+                            }//end second for-loop
+
+                            //WriteLine();   //換行
+
+                        }//end first for-loop
+
+                        //ReadKey();//螢幕暫停
+                    }//end Main()
+            */
+
+
+            //3030
+            /*
+            int num = 10;
+            double sum = 0;
+            double[] tall = new double[num];  // 建立tall倍精確陣列存放每位的身高
+
+            for (int i = 0; i <= tall.GetUpperBound(0); i++)
+            {
+                Console.Write("請輸入第 {0} 位身高(公分) : ", i + 1);
+                tall[i] = double.Parse(Console.ReadLine()); //輸入身高逐一存入陣列  
+            }
+
+            foreach (double height in tall)  // 計算總人數身高的加總
+                sum += height;   // 將所有陣列元素依序加總指定給sum           
+
+            //Console.WriteLine("\n=== " + i.ToString("#") + " 位平均身高:" + (sum / num).ToString("00.00"));// 顯示平均身高
+            */
+
+            //6060
+
+            //宣告陣列並初始化
+            int[] number = { 124, 65, 3314, 81, 92, 65 };
+
+            //foreach廻圈讀取陣列元素
+            foreach (int item in number)
+            {
+                //Write($"{item,4} ");
+            }
+            //WriteLine();//換行
+
+            int first = Array.IndexOf(number, 65);
+            //WriteLine($"從前方找65，索引值 {first}");
+
+            int tail = Array.LastIndexOf(number, 65);
+            //WriteLine($"從末端找65，索引值 {tail}");
+
+            int unknown = Array.IndexOf(number, 33);
+            //WriteLine($"從前方找33，索引值 {unknown}");
+
+            //6060
+
+            string[] RoleName = new string[] { "魯夫", "喬巴", "羅賓", "香吉士", "騙人布" };
+            int[] Money = new int[] { 300000000, 50, 78000000, 77000000, 30000000 };
+            // 陣列的GetUpperBound()方法可用來取得某一維度的上限
+            // 因此RoleName.GetUpperBound(0) 會傳回 4
+            for (int i = 0; i <= RoleName.GetUpperBound(0); i++)
+            {
+                // 顯示RoleName[0]~RoleName[4] 及Money[0] ~Money[4] 
+                //Console.WriteLine("{0}\t{1}", RoleName[i], Money[i]);
+                Console.WriteLine(RoleName[i] + "\t" + Money[i].ToString("#,#"));
+            }
+
+            richTextBox1.Text += "aaaaaaaaaaaaaaaaaaa\n";
+
+            string[] ng_reason = new string[] { "無資料", "鏡頭脫落", "影像有黑影", "Ring上有異物", "Ring未組裝好", "Ring裂痕", "LED脫落", "LED不亮", "LED有異物", "漏光", "其他：" };
+
+            //最大值，剛好為陣列索引上限
+            int num = ng_reason.GetUpperBound(0);
+            richTextBox1.Text += "num = " + num.ToString() + "\n";
+
+
+            //6060
+
 
         }
 
@@ -2733,3 +2901,4 @@ namespace vcs_Mix00
         }
     }
 }
+

@@ -1,4 +1,76 @@
 ﻿
+// 3030
+
+            SqlConnection con = new SqlConnection("server=(local);integrated security=sspi;database=db_02");
+            con.Open();
+            SqlCommand com = new SqlCommand("select * from tb_Land", con);
+            SqlDataReader dr = com.ExecuteReader();
+            while (dr.Read())
+            {
+                this.listBox1.Items.Add(dr[1].ToString());
+            }
+            dr.Close();
+            con.Close();
+
+    
+
+label1.Text = "目前系統時間:" + DateTime.Now.ToLongTimeString();
+
+
+string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\MyDB.mdf;Integrated Security=True;Connect Timeout=30";
+
+
+string P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+
+
+
+                //cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\ch17DB.mdf;Integrated Security=True";
+                //cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
+                //cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
+                //cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
+                cn.ConnectionString =   @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\VisualC#2015基礎必修課\2015範例程式\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
+
+
+
+
+DataTable的用法 
+                    OleDbDataAdapter OledbDat = new OleDbDataAdapter("select top 1 * from 帳單", strOledbCon);
+                    DataTable dt = new DataTable();
+                    OledbDat.Fill(dt);
+                    this.textBox1.Text = dt.Rows[0][0].ToString().Trim();
+                    this.textBox2.Text = dt.Rows[0][1].ToString().Trim();
+                    this.textBox3.Text = dt.Rows[0][3].ToString().Trim();
+                    this.textBox4.Text = dt.Rows[0][4].ToString().Trim();
+
+
+
+
+SQL Server 數據庫檔案 (.mdf)
+Microsoft SQL Server 的主資料庫檔案（Master Database File），通常與 .ldf（日誌文件）成對出現。
+
+開啟方式： Microsoft SQL Server 或 Visual Studio 的「伺服器總管」。 
+
+
+
+    
+    
+    
+    建立SQL Server資料庫連接
+    
+    
+                    string ConStr = "server=(local);user id=sa;pwd=;database=db_09.mdf";
+                SqlConnection con = new SqlConnection(ConStr);
+                string SqlStr = "select * from 帳單";
+                SqlDataAdapter ada = new SqlDataAdapter(SqlStr, con);
+                DataSet ds = new DataSet();
+                ada.Fill(ds);
+                this.dataGridView1.DataSource = ds.Tables[0].DefaultView;
+
+
+
+
+
+
 
 
 

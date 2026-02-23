@@ -10,6 +10,31 @@ print("------------------------------------------------------------")  # 60個
 
 
 
+
+tk的變數宣告
+變數宣告
+radioValue = tk.IntVar()
+num1=tkinter.DoubleVar()
+radioValue1 = tk.BooleanVar()
+var=tk.StringVar()
+
+取得變數的值
+radioValue.get()
+num1.get()
+radioValue1.get()
+var.get()
+
+tk的3種元件的位置管理方式
+pack place gird
+
+不可以pack+grid
+
+可以 place+pack 或  place+grid
+
+
+
+
+
 ------------------------------------------------------------
 
 
