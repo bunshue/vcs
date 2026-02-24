@@ -1,5 +1,14 @@
 ﻿
 
+            byte[] number = { 21, 31, 41 };
+
+            //宣告陣列並初始化
+            int[] number = { 11, 21, 78, 125 };
+
+
+
+
+
 //測試RTB
             //空陣列，儲存資料
             string[] tmp = new string[6];

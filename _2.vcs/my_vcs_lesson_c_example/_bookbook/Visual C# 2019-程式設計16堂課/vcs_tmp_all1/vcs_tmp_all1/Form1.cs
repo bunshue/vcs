@@ -236,8 +236,6 @@ namespace vcs_tmp_all1
                 //WriteLine($"無法建立:{e.ToString()}");
             }
             //ReadKey();
-
-
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -377,11 +375,43 @@ namespace vcs_tmp_all1
             {
                 //WriteLine(e.Message);
             }
-
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //richTextBox1
+            //openFileDialog1
+            //建立處理資料流的物件note
+            Stream note = null;
+            //設定OpenFileDialog的屬性-InitialDirectory設預設路徑
+            //openFileDialog1.InitialDirectory = "../../data/";
+            openFileDialog1.InitialDirectory = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\Visual C# 2019-程式設計16堂課\vcs_tmp_all1\vcs_tmp_all1\data";
+            //篩選檔案，只顯示文字檔
+            openFileDialog1.Filter = "文字檔(*.txt)|*.txt|所有檔案(*.*)|*.*";
+            //檔案類型會顯示-所有檔案
+            openFileDialog1.FilterIndex = 2;
+            //對話方塊關閉前還原目前取得的路徑
+            openFileDialog1.RestoreDirectory = true;
+            //以一般的訊息方塊來確認使用者按OK鈕 
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                //攔截例外狀況
+                try
+                {
+                    if ((note = openFileDialog1.OpenFile()) != null)
+                    {
+                        using (note)
+                        {
+                            //PlainText-代表OLE物件的純文字資料流，文字中允許有空格
+                            richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.PlainText);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //MessageBox.Show($"檔案有誤：{ex.Message}");
+                }
+            }
         }
 
         private void button10_Click(object sender, EventArgs e)
