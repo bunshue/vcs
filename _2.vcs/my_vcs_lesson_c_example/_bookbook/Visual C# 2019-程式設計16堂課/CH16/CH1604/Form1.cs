@@ -20,13 +20,15 @@ namespace CH1604
         public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             this.BackColor = Color.White;
             G = this.CreateGraphics();
         }
 
-        private void Form1_Paint(object sender,
-              PaintEventArgs e)
+        private void Form1_Paint(object sender, PaintEventArgs e)
         {
             int i;
             x_center = 150;
@@ -34,8 +36,7 @@ namespace CH1604
             hwidth = 50;
             for (i = 0; i <= 24; i++)
             {
-                R[i] = new Rectangle(x_center - hwidth,
-                   y_center - hwidth, 2 * hwidth, 2 * hwidth);
+                R[i] = new Rectangle(x_center - hwidth, y_center - hwidth, 2 * hwidth, 2 * hwidth);
                 y_center += 4;
                 hwidth += 2;
             }
@@ -43,3 +44,4 @@ namespace CH1604
         }
     }
 }
+

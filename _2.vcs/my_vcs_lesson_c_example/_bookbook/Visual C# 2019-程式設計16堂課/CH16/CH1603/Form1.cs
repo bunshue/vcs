@@ -19,23 +19,23 @@ namespace CH1603
         public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             this.BackColor = Color.White;
             G = this.CreateGraphics();
         }
 
-        private void Form1_Paint(object sender,
-              PaintEventArgs e)
+        private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            int i;
             x_center = 80;
             y_center = 80;
             hwidth = 50;
             hheight = 40;
-            for (i = 0; i <= 20; i++)
+            for (int i = 0; i <= 20; i++)
             {
-                G.DrawRectangle(myPen, x_center - hwidth,
-                   y_center - hheight, 2 * hwidth, 2 * hheight);
+                G.DrawRectangle(myPen, x_center - hwidth, y_center - hheight, 2 * hwidth, 2 * hheight);
                 x_center += 4;
                 y_center += 4;
                 hwidth += 2;

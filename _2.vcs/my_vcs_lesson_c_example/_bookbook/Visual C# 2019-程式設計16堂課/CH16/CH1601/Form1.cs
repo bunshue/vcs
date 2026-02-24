@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using System.Drawing.Drawing2D;
 
 namespace CH1601
@@ -30,21 +31,27 @@ namespace CH1601
             G = this.CreateGraphics();
         }
 
-        private void Form1_Paint(object sender,
-           PaintEventArgs e)
+        private void Form1_Paint(object sender, PaintEventArgs e)
         {
             int i, j;
             for (i = 0; i <= 9; i++)
             {
-                x[i] = x_center + radius * Math.Sin(
-                   36 * i * Math.PI / 180.0);
-                y[i] = y_center + radius * Math.Cos(
-                   36 * i * Math.PI / 180);
+                x[i] = x_center + radius * Math.Sin(36 * i * Math.PI / 180.0);
+                y[i] = y_center + radius * Math.Cos(36 * i * Math.PI / 180);
             }
             for (i = 0; i <= 9; i++)
+            {
                 for (j = 0; j <= 9; j++)
-                    G.DrawLine(myPen, (int)x[i], (int)y[i],
-                       (int)x[j], (int)y[j]);
+                {
+                    G.DrawLine(myPen, (int)x[i], (int)y[i], (int)x[j], (int)y[j]);
+                }
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
+

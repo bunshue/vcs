@@ -21,23 +21,23 @@ namespace CH1602
         public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             x_center = this.Size.Width / 2;
             y_center = this.Size.Height / 2 - 20;
             this.BackColor = Color.White;
             G = this.CreateGraphics();
         }
 
-        private void Form1_Paint(object sender,
-            PaintEventArgs e)
+        private void Form1_Paint(object sender, PaintEventArgs e)
         {
             radius = 100;
             for (int i = 0; i <= 99; i++)
             {
-                x = x_center + radius * Math.Sin(
-                   36 * i * Math.PI / 180);
-                y = y_center + radius * Math.Cos(
-                   36 * i * Math.PI / 180);
+                x = x_center + radius * Math.Sin(36 * i * Math.PI / 180);
+                y = y_center + radius * Math.Cos(36 * i * Math.PI / 180);
                 p[i] = new Point((int)x, (int)y);
                 radius -= 1;
             }

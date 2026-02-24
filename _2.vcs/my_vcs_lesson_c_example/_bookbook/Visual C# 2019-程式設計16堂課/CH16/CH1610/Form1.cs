@@ -18,18 +18,21 @@ namespace CH1610
             InitializeComponent();
         }
 
-        private void Form1_Paint(object sender,
-           PaintEventArgs pe)
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Paint(object sender, PaintEventArgs pe)
         {
             TextureBrush brush;
-            Image img = Image.FromFile(
-               @"D:\C#Lab\Sample\006.jpg");
+            Image img = Image.FromFile(@"../../006.jpg");
             Graphics gs = pe.Graphics;//宣告Graphics物件
-                                      //呼叫DrawImage()方法從表單左上角繪製圖片
+            //呼叫DrawImage()方法從表單左上角繪製圖片
             gs.DrawImage(img, 0, 0);
             brush = new TextureBrush(img, WrapMode.TileFlipXY);
-            gs.FillRectangle(brush, 0, 0, this.Size.Width,
-               this.Size.Height);
+            gs.FillRectangle(brush, 0, 0, this.Size.Width, this.Size.Height);
         }
     }
 }
+
