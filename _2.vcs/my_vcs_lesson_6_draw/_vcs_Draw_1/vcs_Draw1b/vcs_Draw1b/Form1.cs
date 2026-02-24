@@ -13,12 +13,6 @@ namespace vcs_Draw1b
 {
     public partial class Form1 : Form
     {
-        private Pen myPen = new Pen(Color.Black, 1);
-        private Graphics g;
-
-        private double[] x = new double[10];
-        private double[] y = new double[10];
-
         public Form1()
         {
             InitializeComponent();
@@ -26,15 +20,32 @@ namespace vcs_Draw1b
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.BackColor = Color.White;
-            g = this.CreateGraphics();
+            this.Size = new Size(1200, 860);
+            this.Text = "vcs_Draw1b";
+            //設定執行後的表單起始位置
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((1920 - this.Size.Width) / 2, (1080 - this.Size.Height) / 2);
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            double x_center = 100;
-            double y_center = 100;
+            Graphics g = e.Graphics;
+            Pen pen = new Pen(Color.Black, 1);
+
+            draw_grid(g);
+
+            Font f_index = new Font("Arial", 80, FontStyle.Bold);
+            SolidBrush sb = new SolidBrush(Color.FromArgb(128, 255, 0, 0));
+
+            int x_center = 110;
+            int y_center = 120;
+            g.DrawString("1", f_index, sb, new PointF(x_center, y_center));
+            g.DrawRectangle(Pens.Red, x_center, y_center, 100, 100);
+
             double radius = 100;
+
+            double[] x = new double[10];
+            double[] y = new double[10];
 
             for (int i = 0; i <= 9; i++)
             {
@@ -46,7 +57,7 @@ namespace vcs_Draw1b
             {
                 for (int j = 0; j <= 9; j++)
                 {
-                    g.DrawLine(myPen, (int)x[i], (int)y[i], (int)x[j], (int)y[j]);
+                    g.DrawLine(pen, (int)x[i], (int)y[i], (int)x[j], (int)y[j]);
                 }
             }
 
@@ -54,30 +65,36 @@ namespace vcs_Draw1b
 
             double xx;
             double yy;
-            Point[] p = new Point[100];
+            Point[] pts = new Point[100];
 
-            x_center = 300;
-            y_center = 100;
+            x_center = 380;
+            y_center = 120;
+            g.DrawString("2", f_index, sb, new PointF(x_center, y_center));
+            g.DrawRectangle(Pens.Red, x_center, y_center, 100, 100);
+
             radius = 100;
 
             for (int i = 0; i <= 99; i++)
             {
                 xx = x_center + radius * Math.Sin(36 * i * Math.PI / 180);
                 yy = y_center + radius * Math.Cos(36 * i * Math.PI / 180);
-                p[i] = new Point((int)xx, (int)yy);
+                pts[i] = new Point((int)xx, (int)yy);
                 radius -= 1;
             }
-            g.DrawLines(myPen, p);
+            g.DrawLines(pen, pts);
 
             //------------------------------------------------------------  # 60個
 
-            x_center = 80;
-            y_center = 280;
+            x_center = 550;
+            y_center = 20;
+            g.DrawString("3", f_index, sb, new PointF(x_center, y_center));
+            g.DrawRectangle(Pens.Red, x_center, y_center, 100, 100);
+
             int hwidth = 50;
             int hheight = 40;
             for (int i = 0; i <= 20; i++)
             {
-                g.DrawRectangle(myPen, (int)x_center - hwidth, (int)y_center - hheight, 2 * hwidth, 2 * hheight);
+                g.DrawRectangle(pen, x_center - hwidth, y_center - hheight, 2 * hwidth, 2 * hheight);
                 x_center += 4;
                 y_center += 4;
                 hwidth += 2;
@@ -86,39 +103,48 @@ namespace vcs_Draw1b
 
             //------------------------------------------------------------  # 60個
 
-            x_center = 350;
-            y_center = 200;
+            x_center = 850;
+            y_center = 20;
+            g.DrawString("4", f_index, sb, new PointF(x_center, y_center));
+            g.DrawRectangle(Pens.Red, x_center, y_center, 100, 100);
+
             hwidth = 50;
-            Rectangle[] R = new Rectangle[25];
+            Rectangle[] R1 = new Rectangle[25];
             for (int i = 0; i <= 24; i++)
             {
-                R[i] = new Rectangle((int)x_center - hwidth, (int)y_center - hwidth, 2 * hwidth, 2 * hwidth);
+                R1[i] = new Rectangle(x_center - hwidth, y_center - hwidth, 2 * hwidth, 2 * hwidth);
                 y_center += 4;
                 hwidth += 2;
             }
-            g.DrawRectangles(myPen, R);
+            g.DrawRectangles(pen, R1);
 
             //------------------------------------------------------------  # 60個
 
-            x_center = 500;
-            y_center = 10;
+            x_center = 120;
+            y_center = 300;
+            g.DrawString("5", f_index, sb, new PointF(x_center, y_center));
+            g.DrawRectangle(Pens.Red, x_center, y_center, 100, 100);
+
             hwidth = 10;
             for (int i = 0; i <= 40; i++)
             {
-                g.DrawEllipse(myPen, (int)x_center - hwidth, (int)y_center - hwidth, 2 * hwidth, 2 * hwidth);
+                g.DrawEllipse(pen, x_center - hwidth, y_center - hwidth, 2 * hwidth, 2 * hwidth);
                 y_center += 4;
                 hwidth += 2;
             }
 
             //------------------------------------------------------------  # 60個
 
-            x_center = 650;
-            y_center = 50;
+            x_center = 300;
+            y_center = 300;
+            g.DrawString("6", f_index, sb, new PointF(x_center, y_center));
+            g.DrawRectangle(Pens.Red, x_center, y_center, 100, 100);
+
             hwidth = 50;
             hheight = 40;
             for (int i = 0; i < +29; i++)
             {
-                g.DrawArc(myPen, (int)x_center - hwidth, (int)y_center - hheight, 2 * hwidth, 2 * hheight, 0, -180);
+                g.DrawArc(pen, x_center - hwidth, y_center - hheight, 2 * hwidth, 2 * hheight, 0, -180);
                 x_center += 4;
                 y_center += 4;
                 hwidth += 2;
@@ -129,44 +155,66 @@ namespace vcs_Draw1b
 
             HatchBrush hatchBrush1;
             Single p1, p2, p3;
+            int x_st = 500;
+            int y_st = 200;
+
+            g.DrawString("7", f_index, sb, new PointF(x_st, y_st));
+            g.DrawRectangle(Pens.Red, x_st, y_st, 100, 100);
 
             p1 = 180;
             p2 = 125;
             p3 = 160;
+
             hatchBrush1 = new HatchBrush(HatchStyle.DashedDownwardDiagonal, Color.White, Color.Red);
-            g.FillRectangle(hatchBrush1, 70, 250 - p1, 30, p1);
+            g.FillRectangle(hatchBrush1, x_st + 70, y_st + 250 - p1, 30, p1);
+
             hatchBrush1 = new HatchBrush(HatchStyle.DarkUpwardDiagonal, Color.White, Color.Blue);
-            g.FillRectangle(hatchBrush1, 120, 250 - p2, 30, p2);
+            g.FillRectangle(hatchBrush1, x_st + 120, y_st + 250 - p2, 30, p2);
+
             hatchBrush1 = new HatchBrush(HatchStyle.DiagonalCross, Color.White, Color.Green);
-            g.FillRectangle(hatchBrush1, 170, 250 - p3, 30, p3);
-            g.DrawLine(new Pen(Color.Black, 2), new Point(10, 250), new Point(280, 250));
+            g.FillRectangle(hatchBrush1, x_st + 170, y_st + 250 - p3, 30, p3);
+
+            g.DrawLine(new Pen(Color.Black, 2), new Point(x_st + 10, y_st + 250), new Point(x_st + 280, y_st + 250));
 
             //------------------------------------------------------------  # 60個
 
-            HatchBrush hatchBrush2;
-            Font myFont;
-            hatchBrush2 = new HatchBrush(HatchStyle.DashedDownwardDiagonal, Color.Black, Color.Red);
-            myFont = new Font("Arial", 25, FontStyle.Bold);
-            g.DrawString("Visual Studio", myFont, hatchBrush2, new PointF(20, 10));
+            x_st = 750;
+            y_st = 240;
+
+            g.DrawString("8", f_index, sb, new PointF(x_st, y_st));
+            g.DrawRectangle(Pens.Red, x_st, y_st, 100, 100);
+
+            HatchBrush hatchBrush2 = new HatchBrush(HatchStyle.DashedDownwardDiagonal, Color.Black, Color.Red);
+            Font f = new Font("Arial", 25, FontStyle.Bold);
+            g.DrawString("Visual Studio", f, hatchBrush2, new PointF(x_st + 20, y_st + 10));
             hatchBrush2 = new HatchBrush(HatchStyle.DarkUpwardDiagonal, Color.Black, Color.Blue);
-            myFont = new Font("Garamond", 16, FontStyle.Strikeout);
-            g.DrawString("Visual Studio I love it.", myFont, hatchBrush2, new PointF(10, 60));
+
+            f = new Font("Garamond", 16, FontStyle.Strikeout);
+            g.DrawString("Visual Studio I love it.", f, hatchBrush2, new PointF(x_st + 10, y_st + 60));
             hatchBrush2 = new HatchBrush(HatchStyle.DashedDownwardDiagonal, Color.Black, Color.Green);
-            myFont = new Font("Broadway", 22, FontStyle.Underline);
-            g.DrawString(".NET Framework", myFont, hatchBrush2, new PointF(30, 100));
+
+            f = new Font("Broadway", 22, FontStyle.Underline);
+            g.DrawString(".NET Framework", f, hatchBrush2, new PointF(x_st + 30, y_st + 100));
 
             //------------------------------------------------------------  # 60個
+
+            x_st = 800;
+            y_st = 360;
+            g.DrawString("9", f_index, sb, new PointF(x_st, y_st));
+            g.DrawRectangle(Pens.Red, x_st, y_st, 100, 100);
 
             Rectangle R2;
             LinearGradientBrush lgb2;
 
-            R2 = new Rectangle(20, 50, 80, 80);
+            R2 = new Rectangle(x_st + 20, y_st + 50, 80, 80);
             lgb2 = new LinearGradientBrush(R2, Color.Green, Color.Yellow, -45);
             g.FillPie(lgb2, R2, 30, 300);
-            R2 = new Rectangle(120, 70, 50, 50);
+
+            R2 = new Rectangle(x_st + 120, y_st + 70, 50, 50);
             lgb2 = new LinearGradientBrush(R2, Color.Green, Color.Yellow, -45);
             g.FillPie(lgb2, R2, 30, 300);
-            R2 = new Rectangle(190, 85, 30, 30);
+
+            R2 = new Rectangle(x_st + 190, y_st + 85, 30, 30);
             lgb2 = new LinearGradientBrush(R2, Color.Green, Color.Yellow, -45);
             g.FillPie(lgb2, R2, 30, 300);
 
@@ -174,28 +222,53 @@ namespace vcs_Draw1b
 
             TextureBrush textureBrush1;
             Image img = Image.FromFile(@"../../006.jpg");
-            //呼叫DrawImage()方法從表單左上角繪製圖片
-            g.DrawImage(img, 0, 0);
+            g.DrawImage(img, 1100, 400);
+
             textureBrush1 = new TextureBrush(img, WrapMode.TileFlipXY);
-            g.FillRectangle(textureBrush1, 0, 0, this.Size.Width, this.Size.Height);
+            int W = this.Size.Width;
+            int H = this.Size.Height;
+            //g.FillRectangle(textureBrush1, 0, 0, this.Size.Width, this.Size.Height);
+            //g.FillRectangle(textureBrush1, W * 4 / 5, H * 4 / 5, W / 5, H / 5);
+
+            g.FillRectangle(textureBrush1, W * 2 / 3, H * 2 / 3, W / 3, H / 3);
 
             //------------------------------------------------------------  # 60個
 
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
             TextureBrush textureBrush2;
             Rectangle sR, dR;
-            img = Image.FromFile(@"../../005.jpg");
-            //呼叫DrawImage()方法從表單左上角繪製圖片
-            g.DrawImage(img, 0, 0);
-            sR = new Rectangle(400, 80, 400, 400);
-            dR = new Rectangle(0, 0, this.Size.Width, this.Size.Height);
+            img = Image.FromFile(filename);
+            //g.DrawImage(img, 10, 10);
+
+            sR = new Rectangle(100, 100, 100, 100);//來源矩形
+            dR = new Rectangle(W * 1 / 3 - 50, H * 2 / 3 - 100, W / 3, H / 3);//目標矩形
+
             textureBrush2 = new TextureBrush(img, WrapMode.TileFlipXY);
             g.DrawImage(img, dR, sR, GraphicsUnit.Pixel);
 
             //------------------------------------------------------------  # 60個
 
-            img = Image.FromFile(@"../../007.jpg");
-            //呼叫DrawImage()方法從表單左上角繪製圖片
-            g.DrawImageUnscaled(img, 10, 10);
+            img = Image.FromFile(filename);
+            g.DrawImage(img, 0, 10 + 500);
+            g.DrawImageUnscaled(img, 250, 10 + 500);
+        }
+
+        void draw_grid(Graphics g)
+        {
+            int W = this.Width;
+            int H = this.Height;
+            int i;
+            int j;
+
+            for (i = 0; i <= W; i += 100)
+            {
+                g.DrawLine(Pens.Gray, i, 0, i, H);
+            }
+            for (j = 0; j <= H; j += 100)
+            {
+                g.DrawLine(Pens.Gray, 0, j, W, j);
+            }
         }
     }
 }
