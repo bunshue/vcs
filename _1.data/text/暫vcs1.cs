@@ -1,5 +1,67 @@
 ﻿
 
+//測試RTB
+            //空陣列，儲存資料
+            string[] tmp = new string[6];
+
+            //將取得的資料依序放入陣列
+            tmp[0] = "aaaa";
+            tmp[1] = "bbbb";
+            tmp[2] = "cccc";
+            tmp[3] = "dddd";
+            tmp[4] = "eeee";
+            tmp[5] = "ffff";
+
+            //將陣列的內容利用屬性Lines放入文字方塊中
+            richTextBox1.Lines = tmp;
+6060            
+
+            //Combobox加資料
+            //初始化cobSubject-建立陣列，再以AddRange()方法加入
+            string[] subject = { "日語入門", "多媒體導論", "資料庫", "英文會話" };
+            cobSubject.Items.AddRange(subject);
+
+6060
+
+        int kind, ticket;  //車票種類(kind)和票數(ticket)
+        string msg, msg2;  //取得RadioButton的Text屬性值
+
+        //共用物件：rabTicket處理車票，rabVarious處理票數
+        private RadioButton rabTicket;
+        private RadioButton rabVarious;
+        
+        //共用事件的寫法 使用 sender as
+        //RadioButton共用事件-車票選一般或商務
+        private void rabTicket_CheckedChanged(object sender, EventArgs e)
+        {
+            //以as運算子將參數sender接收的物件轉為RadioButton
+            RadioButton choiceTicket = sender as RadioButton;
+
+            //當控制項rabNormal、rabSpecial有一個被選取
+            if (choiceTicket.Checked)
+            {
+                //取得被選取RadioButton和Text屬性值
+                rabTicket = choiceTicket;
+                msg = rabTicket.Text;
+            }
+        }
+
+        //RadioButton共用事件-車票買1？2？3張
+        private void rabVarious_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton number = sender as RadioButton;
+
+            //當rabOne、rabTwo、rabThree有一個被選取
+            if (number.Checked)
+            {
+                //取得被選取RadioButton和Text屬性值
+                rabVarious = number;
+                msg2 = rabVarious.Text;
+            }
+        }
+
+6060
+
 
 Form.AcceptButton和Form.CancelButton属性的用法，
 这两个属性分别用于指定窗口上回车键和ESC键对应的默认按钮。
@@ -7,14 +69,14 @@ Form.AcceptButton和Form.CancelButton属性的用法，
 在某些不依赖鼠标操作的场景下，这两个属性能提供便捷的键盘交互体验。
 通过示例代码展示了如何设置这两个属性，以实现键盘触发按钮的点击事件。
 
-
+6060
 
 
             DateTime dt = DateTime.Now; //取得當前時間
             $"登入時間 {dt.ToShortTimeString()}";
 
 
-
+6060
 
             //開啟 .rtf 檔 至 RTB
             rtxtShow.LoadFile("../../../Demo01.rtf");
@@ -63,7 +125,7 @@ string P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilena
                 //cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
                 cn.ConnectionString =   @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\VisualC#2015基礎必修課\2015範例程式\data\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
 
-
+6060
 
 
 DataTable的用法 
@@ -77,6 +139,7 @@ DataTable的用法
 
 
 
+6060
 
 SQL Server 數據庫檔案 (.mdf)
 Microsoft SQL Server 的主資料庫檔案（Master Database File），通常與 .ldf（日誌文件）成對出現。
@@ -105,7 +168,7 @@ Microsoft SQL Server 的主資料庫檔案（Master Database File），通常與
 
 
 
-
+6060
 
 //放大和縮小圖像
 //圖像縮放操作
@@ -116,7 +179,7 @@ Microsoft SQL Server 的主資料庫檔案（Master Database File），通常與
             pictureBox1.Width = Convert.ToInt32(myImage.Width * Convert.ToSingle(textBox1.Text.Trim()) * 4 / 3);
 
 
-
+6060
 
 private void Form1_Load(object sender, EventArgs e)
 {
@@ -130,6 +193,7 @@ private void Form1_Load(object sender, EventArgs e)
     this.ShowInTaskbar = false;
 }
 
+6060
 
 /*
 //儲存新的影像

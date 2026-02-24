@@ -21,10 +21,12 @@ namespace CH1402
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            rtxtShow.Lines = new string[] {
-            "Irish poets learn your trade ",
-            "Sing whatever is well made ",
-            "Scorn the sort now growing up"};
+            rtxtShow.Lines = new string[]
+            {
+                "Irish poets learn your trade ",
+                "Sing whatever is well made ",
+                "Scorn the sort now growing up"
+            };
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -53,3 +55,4 @@ namespace CH1402
         }
     }
 }
+

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CH1104
+namespace vcs_tmp_all1
 {
     static class Program
     {

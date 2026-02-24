@@ -1,0 +1,93 @@
+00001 using System;
+00002 using System.Collections.Generic;
+00003 using System.Linq;
+00004 using System.Text;
+00005 using System.Threading.Tasks;
+00006 using System.IO;
+00007 
+00008 
+00009 namespace 程式碼加入行號
+00010 {
+00011     class Program
+00012     {
+00013         static void Main(string[] args)
+00014         {
+00015            string str;
+00016 		   int index=1;
+00017 
+00018            StreamReader sr = File.OpenText("Program.cs"); 
+00019 		   StreamWriter sw = File.AppendText("final.txt");
+00020 		   
+00021 		   while((str = sr.ReadLine ())!=null)
+00022 		   {
+00023 			   Console.WriteLine ("{0:D5} {1}",index,str);
+00024 			   sw.WriteLine ("{0:D5} {1}",index++,str);
+00025 		   }
+00026 		   sr.Close ();
+00027 		   sw.Close ();
+00028            Console.ReadLine();
+00029         }
+00030     }
+00031 }
+00001 using System;
+00002 using System.Collections.Generic;
+00003 using System.Linq;
+00004 using System.Text;
+00005 using System.Threading.Tasks;
+00006 using System.IO;
+00007 
+00008 
+00009 namespace 程式碼加入行號
+00010 {
+00011     class Program
+00012     {
+00013         static void Main(string[] args)
+00014         {
+00015            string str;
+00016 		   int index=1;
+00017 
+00018            StreamReader sr = File.OpenText("Program.cs"); 
+00019 		   StreamWriter sw = File.AppendText("final.txt");
+00020 		   
+00021 		   while((str = sr.ReadLine ())!=null)
+00022 		   {
+00023 			   Console.WriteLine ("{0:D5} {1}",index,str);
+00024 			   sw.WriteLine ("{0:D5} {1}",index++,str);
+00025 		   }
+00026 		   sr.Close ();
+00027 		   sw.Close ();
+00028            Console.ReadLine();
+00029         }
+00030     }
+00031 }
+00001 using System;
+00002 using System.Collections.Generic;
+00003 using System.Linq;
+00004 using System.Text;
+00005 using System.Threading.Tasks;
+00006 using System.IO;
+00007 
+00008 
+00009 namespace 程式碼加入行號
+00010 {
+00011     class Program
+00012     {
+00013         static void Main(string[] args)
+00014         {
+00015            string str;
+00016 		   int index=1;
+00017 
+00018            StreamReader sr = File.OpenText("Program.cs"); 
+00019 		   StreamWriter sw = File.AppendText("final.txt");
+00020 		   
+00021 		   while((str = sr.ReadLine ())!=null)
+00022 		   {
+00023 			   Console.WriteLine ("{0:D5} {1}",index,str);
+00024 			   sw.WriteLine ("{0:D5} {1}",index++,str);
+00025 		   }
+00026 		   sr.Close ();
+00027 		   sw.Close ();
+00028            Console.ReadLine();
+00029         }
+00030     }
+00031 }
