@@ -63,7 +63,7 @@
             this.rtxtShow.Location = new System.Drawing.Point(0, 0);
             this.rtxtShow.Margin = new System.Windows.Forms.Padding(4);
             this.rtxtShow.Name = "rtxtShow";
-            this.rtxtShow.Size = new System.Drawing.Size(192, 160);
+            this.rtxtShow.Size = new System.Drawing.Size(192, 410);
             this.rtxtShow.TabIndex = 3;
             this.rtxtShow.Text = "Pride and Prejudice";
             // 
@@ -71,12 +71,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(343, 160);
+            this.ClientSize = new System.Drawing.Size(559, 410);
             this.Controls.Add(this.btnFont);
             this.Controls.Add(this.btnColor);
             this.Controls.Add(this.rtxtShow);
             this.Name = "Form1";
             this.Text = "CH1404";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }

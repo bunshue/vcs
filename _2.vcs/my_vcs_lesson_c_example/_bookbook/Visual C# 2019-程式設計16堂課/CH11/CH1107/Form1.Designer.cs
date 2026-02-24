@@ -138,7 +138,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(412, 201);
+            this.ClientSize = new System.Drawing.Size(675, 554);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.dtpLogin);
             this.Controls.Add(this.label4);

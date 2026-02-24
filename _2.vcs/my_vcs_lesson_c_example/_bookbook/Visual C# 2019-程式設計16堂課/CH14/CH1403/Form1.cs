@@ -7,31 +7,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using System.IO;
 
 namespace CH1403
 {
     public partial class Form1 : Form
     {
+        private bool fileIsOpen;
+        private string openFileName, folderName;
+
         public Form1()
         {
             InitializeComponent();
         }
-
-        private bool fileIsOpen;
-        private string openFileName, folderName;
 
         private void Form1_Load(object sender, EventArgs e)
         {
             rtxtShow.Dock = DockStyle.Fill;
 
             //設定瀏覽資料夾對話方塊-從虛擬「桌面」為開始的資料夾
-            dlgFolderBrowser.RootFolder =
-               Environment.SpecialFolder.Desktop;
+            dlgFolderBrowser.RootFolder = Environment.SpecialFolder.Desktop;
 
             //指定要瀏覽的資料夾為D碟
-            dlgFolderBrowser.SelectedPath =
-               @"D:\USERS\LSH\Documents";
+            dlgFolderBrowser.SelectedPath = @"D:\USERS\LSH\Documents";
 
             //瀏覽資料夾的提示文字
             dlgFolderBrowser.Description = "選取要瀏覽的資料夾";
@@ -71,15 +70,13 @@ namespace CH1403
             //判斷檔案未開啟的情形下，指定位置
             if (!fileIsOpen)
             {
-                dlgOpenFile.InitialDirectory =
-                   dlgFolderBrowser.SelectedPath;
+                dlgOpenFile.InitialDirectory = dlgFolderBrowser.SelectedPath;
                 dlgOpenFile.FileName = null;
             }
 
             //開啟RTF格式檔案
             dlgOpenFile.DefaultExt = "rtf";
-            dlgOpenFile.Filter =
-               "RTF格式(*.rtf)|*.rtf|所有檔案(*.*)|*.*";
+            dlgOpenFile.Filter = "RTF格式(*.rtf)|*.rtf|所有檔案(*.*)|*.*";
 
             //顯示開啟檔案對話方塊
             DialogResult result = dlgOpenFile.ShowDialog();
@@ -96,9 +93,9 @@ namespace CH1403
                 }
                 catch (Exception exp)
                 {
-                    MessageBox.Show("發生錯誤. 訊息: " +
-                       $"{System.Environment.NewLine}" +
-                       $"{exp.ToString()}, {Environment.NewLine}");
+                    //MessageBox.Show("發生錯誤. 訊息: " +
+                    //   $"{System.Environment.NewLine}" +
+                    //   $"{exp.ToString()}, {Environment.NewLine}");
                     fileIsOpen = false;
                 }
             }

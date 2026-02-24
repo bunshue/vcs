@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Drawing.Printing;
+
 using System.IO;
+using System.Drawing.Printing;
 
 namespace CH1405
 {
@@ -17,6 +18,12 @@ namespace CH1405
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            rtxtShow.LoadFile("../../../Demo01.rtf");
+            OnPaper.DocumentName = "CH1405";
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
@@ -32,8 +39,7 @@ namespace CH1405
         }
 
         //PrintDocument的事件
-        private void OnPaper_PrintPage(object sender,
-           PrintPageEventArgs ev)
+        private void OnPaper_PrintPage(object sender, PrintPageEventArgs ev)
         {
             //1.建立繪圖物件gs和參數ev的關聯
             Graphics gs = ev.Graphics;
@@ -41,21 +47,14 @@ namespace CH1405
             Font fontPrint = new Font("Segoe Print", 14);
             int morePages = 0; //計算每份文件頁數
             int OnPageChars = 0;//計算每頁字元數
-                                //2.測量要繪製的字串
+            //2.測量要繪製的字串
             gs.MeasureString(rtxtShow.Text,
                fontPrint, ev.MarginBounds.Size,
                StringFormat.GenericTypographic,
                out OnPageChars, out morePages);
             //3.繪製邊界內的字型
-            gs.DrawString(rtxtShow.Text, fontPrint,
-               Brushes.Black, ev.MarginBounds,
-               new StringFormat());
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            rtxtShow.LoadFile("D:\\C#Lab\\Demo01.rtf");
-            OnPaper.DocumentName = "CH1405";
+            gs.DrawString(rtxtShow.Text, fontPrint, Brushes.Black, ev.MarginBounds, new StringFormat());
         }
     }
 }
+

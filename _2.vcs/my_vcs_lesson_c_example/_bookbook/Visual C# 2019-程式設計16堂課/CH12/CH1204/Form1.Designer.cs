@@ -48,10 +48,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(226, 147);
+            this.ClientSize = new System.Drawing.Size(660, 628);
             this.Controls.Add(this.lblCheck);
             this.Name = "Form1";
             this.Text = "CH1204";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using System.IO;
 
 namespace CH1502
@@ -16,6 +17,11 @@ namespace CH1502
         public Form1()
         {
             InitializeComponent();
+        }
+        
+        private void Form1_Load(object sender, EventArgs e)
+        {
+        
         }
 
         //新增檔案
@@ -58,7 +64,9 @@ namespace CH1502
                 MessageBox.Show("無此檔案");
             }
             else
+            {
                 copyFile.Delete();//刪除檔案
+            }
         }
 
         //檢視檔案內容

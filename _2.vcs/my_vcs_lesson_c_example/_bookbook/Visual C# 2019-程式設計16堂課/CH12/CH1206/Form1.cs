@@ -17,6 +17,11 @@ namespace CH1206
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Up)
@@ -49,7 +54,7 @@ namespace CH1206
                    lblTarget.Right,
                    this.lblTarget.Bottom)).ToString();
             }
-            lblMsg.Text = $"按鍵值：{e.KeyValue.ToString()}";
+            //lblMsg.Text = $"按鍵值：{e.KeyValue.ToString()}";
         }
     }
 }

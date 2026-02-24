@@ -40,7 +40,7 @@
             this.lstSubject.ItemHeight = 12;
             this.lstSubject.Location = new System.Drawing.Point(164, 46);
             this.lstSubject.Name = "lstSubject";
-            this.lstSubject.Size = new System.Drawing.Size(132, 76);
+            this.lstSubject.Size = new System.Drawing.Size(132, 280);
             this.lstSubject.TabIndex = 7;
             // 
             // lstChoice
@@ -49,7 +49,7 @@
             this.lstChoice.ItemHeight = 12;
             this.lstChoice.Location = new System.Drawing.Point(26, 46);
             this.lstChoice.Name = "lstChoice";
-            this.lstChoice.Size = new System.Drawing.Size(132, 76);
+            this.lstChoice.Size = new System.Drawing.Size(132, 280);
             this.lstChoice.TabIndex = 6;
             this.lstChoice.SelectedIndexChanged += new System.EventHandler(this.lstChoice_SelectedIndexChanged);
             // 
@@ -75,7 +75,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(323, 148);
+            this.ClientSize = new System.Drawing.Size(541, 490);
             this.Controls.Add(this.lstSubject);
             this.Controls.Add(this.lstChoice);
             this.Controls.Add(this.label2);

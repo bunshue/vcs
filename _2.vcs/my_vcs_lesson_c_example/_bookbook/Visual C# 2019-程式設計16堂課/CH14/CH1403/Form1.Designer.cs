@@ -44,7 +44,7 @@
             // 
             this.rtxtShow.Location = new System.Drawing.Point(32, 54);
             this.rtxtShow.Name = "rtxtShow";
-            this.rtxtShow.Size = new System.Drawing.Size(188, 108);
+            this.rtxtShow.Size = new System.Drawing.Size(282, 203);
             this.rtxtShow.TabIndex = 3;
             this.rtxtShow.Text = "";
             // 
@@ -55,7 +55,7 @@
             this.tsmiFile});
             this.msMain.Location = new System.Drawing.Point(0, 0);
             this.msMain.Name = "msMain";
-            this.msMain.Size = new System.Drawing.Size(264, 24);
+            this.msMain.Size = new System.Drawing.Size(438, 24);
             this.msMain.TabIndex = 4;
             this.msMain.Text = "檔案功能表";
             // 
@@ -73,14 +73,14 @@
             // tsmiOpen
             // 
             this.tsmiOpen.Name = "tsmiOpen";
-            this.tsmiOpen.Size = new System.Drawing.Size(180, 22);
+            this.tsmiOpen.Size = new System.Drawing.Size(134, 22);
             this.tsmiOpen.Text = "開啟檔案";
             this.tsmiOpen.Click += new System.EventHandler(this.tsmiOpen_Click);
             // 
             // tsmiFolder
             // 
             this.tsmiFolder.Name = "tsmiFolder";
-            this.tsmiFolder.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFolder.Size = new System.Drawing.Size(134, 22);
             this.tsmiFolder.Text = "瀏覽資料夾";
             this.tsmiFolder.Click += new System.EventHandler(this.tsmiFolder_Click);
             // 
@@ -92,7 +92,7 @@
             // tsmiEnd
             // 
             this.tsmiEnd.Name = "tsmiEnd";
-            this.tsmiEnd.Size = new System.Drawing.Size(180, 22);
+            this.tsmiEnd.Size = new System.Drawing.Size(134, 22);
             this.tsmiEnd.Text = "關閉";
             this.tsmiEnd.Click += new System.EventHandler(this.tsmiEnd_Click);
             // 
@@ -104,7 +104,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(264, 194);
+            this.ClientSize = new System.Drawing.Size(438, 446);
             this.Controls.Add(this.rtxtShow);
             this.Controls.Add(this.msMain);
             this.Name = "Form1";

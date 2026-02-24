@@ -12,11 +12,17 @@ namespace CH1104
 {
     public partial class Form1 : Form
     {
+        int a = 0, b = 0, sec = 0, min = 0;
+
         public Form1()
         {
             InitializeComponent();
         }
-        int a = 0, b = 0, sec = 0, min = 0;
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
 
         //清除按鈕 - 與碼表有關的設定值都歸零 
         private void btnClear_Click(object sender, EventArgs e)
@@ -24,7 +30,8 @@ namespace CH1104
             //將所有的值都歸零
             min = 0; sec = 0; a = 0; b = 0;
             trackTime.Value = 0;   //將追踪列的值歸零
-            txtTime.Text = $"{min}分 {sec}秒 {a}{b}";
+            //txtTime.Text = $"{min}分 {sec}秒 {a}{b}";
+            txtTime.Text = min.ToString() + " 分 " + sec.ToString() + " 秒";
         }
 
         //停止按鈕 - 以stop()方法停止計時器
@@ -65,8 +72,8 @@ namespace CH1104
                     }
                 }
             }
-            txtTime.Text = $"{min}分 {sec}秒 {a}{b}";
+            //txtTime.Text = $"{min}分 {sec}秒 {a}{b}";
+            txtTime.Text = min.ToString() + " 分 " + sec.ToString() + " 秒";
         }
     }
 }
-

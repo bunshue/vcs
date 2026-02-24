@@ -44,7 +44,7 @@
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(71, 90);
+            this.btnPrint.Location = new System.Drawing.Point(94, 144);
             this.btnPrint.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(100, 34);
@@ -57,10 +57,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(256, 159);
+            this.ClientSize = new System.Drawing.Size(580, 451);
             this.Controls.Add(this.btnPrint);
             this.Name = "Form1";
             this.Text = "CH1406";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }

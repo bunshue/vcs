@@ -106,6 +106,7 @@
             this.Controls.Add(this.rtxtShow);
             this.Name = "Form1";
             this.Text = "CH1302";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.tsMain.ResumeLayout(false);
             this.tsMain.PerformLayout();
             this.ResumeLayout(false);

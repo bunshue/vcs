@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using System.IO;   //滙入IO名稱空間
 
 namespace CH1402
@@ -30,8 +31,7 @@ namespace CH1402
         {
             //設定預設目錄, 預設欲儲存的檔案類型
             dlgSaveFile.InitialDirectory = "D:\\C#Lab";
-            dlgSaveFile.Filter =
-               "文字檔(*.txt)|*.txt|RTF格式|*.rtf";
+            dlgSaveFile.Filter = "文字檔(*.txt)|*.txt|RTF格式|*.rtf";
             //設定對話方塊的標題
             dlgSaveFile.Title = "儲存檔案";
             //設定是否在關閉之前要還原至目前的目錄
@@ -45,8 +45,7 @@ namespace CH1402
                 StreamWriter writer;
                 //設定檔案名稱
                 string filename = dlgSaveFile.FileName;
-                writer = new StreamWriter(
-                   filename, false, Encoding.Default);
+                writer = new StreamWriter(filename, false, Encoding.Default);
                 //將文字方塊內容寫入指定的檔案中
                 writer.Write(rtxtShow.Text);
                 writer.Close(); //關閉檔案

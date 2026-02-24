@@ -38,7 +38,7 @@
             this.rtxtShow.Dock = System.Windows.Forms.DockStyle.Top;
             this.rtxtShow.Location = new System.Drawing.Point(0, 0);
             this.rtxtShow.Name = "rtxtShow";
-            this.rtxtShow.Size = new System.Drawing.Size(325, 123);
+            this.rtxtShow.Size = new System.Drawing.Size(516, 123);
             this.rtxtShow.TabIndex = 3;
             this.rtxtShow.Text = "";
             // 
@@ -57,7 +57,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(325, 214);
+            this.ClientSize = new System.Drawing.Size(516, 429);
             this.Controls.Add(this.rtxtShow);
             this.Controls.Add(this.btnPrint);
             this.Name = "Form1";

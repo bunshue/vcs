@@ -12,17 +12,22 @@ namespace CH1105
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         int kind, ticket;  //車票種類(kind)和票數(ticket)
         string msg, msg2;  //取得RadioButton的Text屬性值
 
         //共用物件：rabTicket處理車票，rabVarious處理票數
         private RadioButton rabTicket;
         private RadioButton rabVarious;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        
+        private void Form1_Load(object sender, EventArgs e)
+        {
+        
+        }
 
         private void btnInfo_Click(object sender, EventArgs e)
         {

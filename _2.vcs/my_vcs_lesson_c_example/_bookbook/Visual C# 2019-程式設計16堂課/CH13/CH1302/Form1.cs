@@ -17,18 +17,22 @@ namespace CH1302
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void tsbOpen_Click(object sender, EventArgs e)
         {
-            rtxtShow.LoadFile("D:\\C#Lab\\CH13\\Demo01.rtf");
+            rtxtShow.LoadFile("../../../Demo01.rtf");
         }
 
         private void tsbSave_Click(object sender, EventArgs e)
         {
-            rtxtShow.SaveFile("D:\\C#Lab\\CH13\\change.rtf");
+            rtxtShow.SaveFile("tmp_change.rtf");
         }
 
-        private void tscobFont_SelectedIndexChanged(
-              object sender, EventArgs e)
+        private void tscobFont_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tscobFont.SelectedIndex == 0)
                 rtxtShow.Font = new Font("Arial", 12);

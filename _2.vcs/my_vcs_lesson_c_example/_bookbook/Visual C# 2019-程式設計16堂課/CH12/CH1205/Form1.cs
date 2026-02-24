@@ -17,6 +17,11 @@ namespace CH1205
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             lblShow.Text = "KeyDown事件";
@@ -25,8 +30,7 @@ namespace CH1205
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
             //屬性KeyChar取得鍵盤按下的字元
-            lblShow.Text = $"KeyPress事件, " + Environment.NewLine
-               + $"按了鍵盤 {e.KeyChar.ToString()}";
+            //lblShow.Text = $"KeyPress事件, " + Environment.NewLine + $"按了鍵盤 {e.KeyChar.ToString()}";
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)

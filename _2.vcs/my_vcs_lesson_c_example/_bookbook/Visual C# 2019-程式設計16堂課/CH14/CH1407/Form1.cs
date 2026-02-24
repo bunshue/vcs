@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using System.IO;
 using System.Drawing.Printing;
 
@@ -14,13 +15,18 @@ namespace CH1407
 {
     public partial class Form1 : Form
     {
+        private string readToPrint, allContents;
+        private Font printFont;//列印字型
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private string readToPrint, allContents;
-        private Font printFont;//列印字型
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
 
         //按下「預覽列印」按鈕
         private void btnPreview_Click(object sender, EventArgs e)
@@ -28,14 +34,12 @@ namespace CH1407
             ReadPrintFile();
             printPreview.UseAntiAlias = true;//啟用平滑字效果
             printPreview.Document = OnPaper;
-            printPreview.Document.DocumentName =
-               "CH1407-Demo02";
+            printPreview.Document.DocumentName = "CH1407-Demo02";
             dlgPreview.ShowDialog();//顯示預覽列印對話方塊
         }
 
         //列印文件的PrintPage()事件處理
-        private void OnPaper_PrintPage(object sender,
-           PrintPageEventArgs ev)
+        private void OnPaper_PrintPage(object sender, PrintPageEventArgs ev)
         {
             int charsPerPage = 0;//統計每頁字元
             int morePages = 0; //統計頁數        
@@ -46,23 +50,22 @@ namespace CH1407
                out charsPerPage, out morePages);
 
             //依據檔案內容繪製列印內容
-            gs.DrawString(readToPrint, printFont,
-               Brushes.Black, ev.MarginBounds,
-               StringFormat.GenericTypographic);
+            gs.DrawString(readToPrint, printFont, Brushes.Black, ev.MarginBounds, StringFormat.GenericTypographic);
             //移除已列印的字串
-            readToPrint =
-               readToPrint.Substring(charsPerPage);
+            readToPrint = readToPrint.Substring(charsPerPage);
             //當readToPrint大於零時，檢查是否要列印很多頁
             ev.HasMorePages = (readToPrint.Length > 0);
             if (!ev.HasMorePages)
+            {
                 readToPrint = allContents;
+            }
         }
 
         //按下「列印」按鈕
         private void btnPrint_Click(object sender, EventArgs e)
         {
             ReadPrintFile();//呼叫載入檔案方法
-                            //啟用「頁數」選項按鈕，「選取範圍」選項按鈕
+            //啟用「頁數」選項按鈕，「選取範圍」選項按鈕
             dlgPrint.AllowSomePages = true;
             dlgPrint.AllowSelection = true;
             //列印文件指定給列印對話方塊
@@ -76,11 +79,9 @@ namespace CH1407
         }
 
         //列印到最後一頁顯示訊息
-        private void OnPaper_EndPrint(object sender,
-              PrintEventArgs e)
+        private void OnPaper_EndPrint(object sender, PrintEventArgs e)
         {
-            MessageBox.Show(OnPaper.DocumentName +
-               " -- 完成列印", "列印文件");
+            MessageBox.Show(OnPaper.DocumentName + " -- 完成列印", "列印文件");
         }
 
         //利用FileStream來讀取檔案並開啟
@@ -88,13 +89,11 @@ namespace CH1407
         {
             //設定要讀取取的檔名和路徑
             string printFile = "Demo02.txt";
-            string filePath =
-               @"D:\\C#Lab\\";
+            string filePath = @"D:\\C#Lab\\";
             //讀取的檔名「Demo02.txt」為列印文件的檔名
             OnPaper.DocumentName = printFile;
             //建立檔案並以Open開啟，以using指定範圍為唯讀
-            using (FileStream stream = new FileStream(
-               filePath + printFile, FileMode.Open))
+            using (FileStream stream = new FileStream(filePath + printFile, FileMode.Open))
             using (StreamReader reader = new
             StreamReader(stream)) //指定區段為唯讀
             {
@@ -106,3 +105,4 @@ namespace CH1407
         }
     }
 }
+

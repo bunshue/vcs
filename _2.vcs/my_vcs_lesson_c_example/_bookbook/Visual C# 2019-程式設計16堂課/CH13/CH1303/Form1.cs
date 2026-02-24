@@ -17,6 +17,11 @@ namespace CH1303
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void tsslMsg_Click(object sender, EventArgs e)
         {
             picSample.Left = 0;
@@ -32,8 +37,7 @@ namespace CH1303
                 picSample.Left += 5;
                 tsspShow.Value = picSample.Left;
                 //顯示進度列目前進行的狀態
-                tsslMsg.Text = String.Concat(
-                   tsspShow.Value / 3, " % 已經完成");
+                tsslMsg.Text = String.Concat(tsspShow.Value / 3, " % 已經完成");
             }
             else
             {

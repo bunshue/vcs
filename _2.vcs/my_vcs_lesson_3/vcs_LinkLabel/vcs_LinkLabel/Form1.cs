@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Diagnostics;  // for Process
+
 namespace vcs_LinkLabel
 {
     public partial class Form1 : Form
@@ -31,18 +33,38 @@ namespace vcs_LinkLabel
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             // 連結到群曜醫電網站
-            System.Diagnostics.Process.Start("https://www.insighteyes.com/");
+            Process.Start("https://www.insighteyes.com/");
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             // 開啟郵件軟體連結 david@insighteyes.com
-            System.Diagnostics.Process.Start("mailto:david@insighteyes.com");
+            Process.Start("mailto:david@insighteyes.com");
         }
 
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://antwrp.gsfc.nasa.gov/apod/ap090628.html");
+            Process.Start("http://antwrp.gsfc.nasa.gov/apod/ap090628.html");
+        }
+
+        private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            //啟動瀏覽器，進入維基百科
+            linkLabel4.LinkColor = Color.Pink;
+            linkLabel4.ActiveLinkColor = Color.Red;
+            //被瀏覽過就改變顏色
+            linkLabel4.LinkVisited = true;
+            linkLabel4.VisitedLinkColor = Color.PowderBlue;
+            //超連結部分永遠顯示底線
+            linkLabel4.LinkBehavior = LinkBehavior.AlwaysUnderline;
+            Process.Start("https://zh.wikipedia.org/wiki/");
+
+        }
+
+        private void linkLabel5_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            //啟動小算盤應用程式
+            Process.Start("calc.exe");
         }
     }
 }

@@ -1,4 +1,37 @@
 ﻿
+
+
+Form.AcceptButton和Form.CancelButton属性的用法，
+这两个属性分别用于指定窗口上回车键和ESC键对应的默认按钮。
+
+在某些不依赖鼠标操作的场景下，这两个属性能提供便捷的键盘交互体验。
+通过示例代码展示了如何设置这两个属性，以实现键盘触发按钮的点击事件。
+
+
+
+
+            DateTime dt = DateTime.Now; //取得當前時間
+            $"登入時間 {dt.ToShortTimeString()}";
+
+
+
+
+            //開啟 .rtf 檔 至 RTB
+            rtxtShow.LoadFile("../../../Demo01.rtf");
+            //取得載入檔案的總字串長度
+            int result = rtxtShow.TextLength;
+            richTextBox1.Text += "字串長度 : " + result.ToString() + "\n";
+
+            //將 RTB 儲存至 .rtf 檔
+            rtxtShow.SaveFile("../../../tmp_Change.rtf", RichTextBoxStreamType.RichText);
+            int result = rtxtShow.TextLength;
+            richTextBox1.Text += "字串長度 : " + result.ToString() + "\n";
+
+
+
+
+
+
 // 3030
 
             SqlConnection con = new SqlConnection("server=(local);integrated security=sspi;database=db_02");

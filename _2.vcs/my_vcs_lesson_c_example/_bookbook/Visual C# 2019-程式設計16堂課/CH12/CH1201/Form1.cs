@@ -30,5 +30,10 @@ namespace CH1201
             oneChild.Text = $"我是子表單-{count.ToString()}";
             oneChild.Show();   //顯示MDI子表單
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+        
+        }
     }
 }

@@ -47,7 +47,7 @@
             this.msMain.Location = new System.Drawing.Point(0, 0);
             this.msMain.Name = "msMain";
             this.msMain.Padding = new System.Windows.Forms.Padding(8, 3, 0, 3);
-            this.msMain.Size = new System.Drawing.Size(303, 25);
+            this.msMain.Size = new System.Drawing.Size(512, 25);
             this.msMain.TabIndex = 2;
             this.msMain.Text = "menuStrip1";
             // 
@@ -66,7 +66,7 @@
             // msView
             // 
             this.msView.Name = "msView";
-            this.msView.Size = new System.Drawing.Size(180, 22);
+            this.msView.Size = new System.Drawing.Size(98, 22);
             this.msView.Text = "檢視";
             this.msView.Click += new System.EventHandler(this.msView_Click);
             // 
@@ -78,43 +78,44 @@
             // msCreate
             // 
             this.msCreate.Name = "msCreate";
-            this.msCreate.Size = new System.Drawing.Size(180, 22);
+            this.msCreate.Size = new System.Drawing.Size(98, 22);
             this.msCreate.Text = "新增";
             this.msCreate.Click += new System.EventHandler(this.msCreate_Click);
             // 
             // msCopy
             // 
             this.msCopy.Name = "msCopy";
-            this.msCopy.Size = new System.Drawing.Size(180, 22);
+            this.msCopy.Size = new System.Drawing.Size(98, 22);
             this.msCopy.Text = "複製";
             this.msCopy.Click += new System.EventHandler(this.msCopy_Click);
             // 
             // msDelete
             // 
             this.msDelete.Name = "msDelete";
-            this.msDelete.Size = new System.Drawing.Size(180, 22);
+            this.msDelete.Size = new System.Drawing.Size(98, 22);
             this.msDelete.Text = "刪除";
             this.msDelete.Click += new System.EventHandler(this.msDelete_Click);
             // 
             // txtShow
             // 
             this.txtShow.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.txtShow.Location = new System.Drawing.Point(0, 76);
+            this.txtShow.Location = new System.Drawing.Point(0, 322);
             this.txtShow.Multiline = true;
             this.txtShow.Name = "txtShow";
             this.txtShow.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtShow.Size = new System.Drawing.Size(303, 111);
+            this.txtShow.Size = new System.Drawing.Size(512, 111);
             this.txtShow.TabIndex = 3;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(303, 187);
+            this.ClientSize = new System.Drawing.Size(512, 433);
             this.Controls.Add(this.msMain);
             this.Controls.Add(this.txtShow);
             this.Name = "Form1";
             this.Text = "CH1502";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.msMain.ResumeLayout(false);
             this.msMain.PerformLayout();
             this.ResumeLayout(false);

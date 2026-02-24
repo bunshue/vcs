@@ -53,7 +53,7 @@
             this.rtxtShow.Location = new System.Drawing.Point(0, 0);
             this.rtxtShow.Margin = new System.Windows.Forms.Padding(4);
             this.rtxtShow.Name = "rtxtShow";
-            this.rtxtShow.Size = new System.Drawing.Size(324, 96);
+            this.rtxtShow.Size = new System.Drawing.Size(410, 96);
             this.rtxtShow.TabIndex = 2;
             this.rtxtShow.Text = "";
             // 
@@ -61,7 +61,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(324, 179);
+            this.ClientSize = new System.Drawing.Size(410, 304);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.rtxtShow);
             this.Name = "Form1";

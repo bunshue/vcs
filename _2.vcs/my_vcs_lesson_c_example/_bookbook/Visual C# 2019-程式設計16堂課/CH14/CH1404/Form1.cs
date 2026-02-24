@@ -17,12 +17,17 @@ namespace CH1404
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnColor_Click(object sender, EventArgs e)
         {
             dlgColor.AllowFullOpen = true;
             dlgColor.ShowHelp = true;//顯示說明按鈕
             dlgColor.AnyColor = true;//顯示所有可用基本色彩         
-                                     //使用者如果按下確定鈕變更背景色彩
+            //使用者如果按下確定鈕變更背景色彩
             if (dlgColor.ShowDialog() == DialogResult.OK)
             {
                 rtxtShow.BackColor = dlgColor.Color;
@@ -44,3 +49,4 @@ namespace CH1404
         }
     }
 }
+

@@ -65,12 +65,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(249, 166);
+            this.ClientSize = new System.Drawing.Size(592, 494);
             this.Controls.Add(this.lblTarget);
             this.Controls.Add(this.lblMsg);
             this.Controls.Add(this.lblState);
             this.Name = "Form1";
             this.Text = "CH1206";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();

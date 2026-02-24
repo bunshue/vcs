@@ -17,6 +17,11 @@ namespace CH1204
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+        
+        }
+
         private void lblCheck_MouseLeave(object sender, EventArgs e)
         {
             lblCheck.BackColor = Color.PapayaWhip;
@@ -33,8 +38,7 @@ namespace CH1204
                (lblCheck.Width / 2);
             lblCheck.Top = lblCheck.Top + e.Y -
                (lblCheck.Top / 2);
-            lblCheck.Text = $"X:{lblCheck.Left}, " +
-               $"Y:{lblCheck.Top}";
+            //lblCheck.Text = $"X:{lblCheck.Left}, " + $"Y:{lblCheck.Top}";
         }
     }
 }

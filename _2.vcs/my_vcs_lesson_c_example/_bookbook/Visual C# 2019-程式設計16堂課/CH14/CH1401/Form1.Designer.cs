@@ -38,7 +38,7 @@
             this.rtxtShow.Dock = System.Windows.Forms.DockStyle.Top;
             this.rtxtShow.Location = new System.Drawing.Point(0, 0);
             this.rtxtShow.Name = "rtxtShow";
-            this.rtxtShow.Size = new System.Drawing.Size(378, 157);
+            this.rtxtShow.Size = new System.Drawing.Size(496, 157);
             this.rtxtShow.TabIndex = 3;
             this.rtxtShow.Text = "";
             // 
@@ -57,11 +57,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(378, 262);
+            this.ClientSize = new System.Drawing.Size(496, 446);
             this.Controls.Add(this.rtxtShow);
             this.Controls.Add(this.btnOpen);
             this.Name = "Form1";
             this.Text = "CH1401";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }

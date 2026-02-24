@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using System.IO;
-using static System.Console;
+//using static System.Console;
 
 namespace CH1507
 {
@@ -17,8 +18,7 @@ namespace CH1507
             string path = @"D:\C#Lab\Demo03.txt";
             try
             {
-                objStream = new FileStream(path,
-                   FileMode.Append, FileAccess.Write);
+                objStream = new FileStream(path, FileMode.Append, FileAccess.Write);
                 //使用using敘詞，寫入完墓會自動釋放資源
                 using (objWriter = new BinaryWriter(objStream))
                 {
@@ -31,13 +31,13 @@ namespace CH1507
             }
             catch (IndexOutOfRangeException e)
             {
-                WriteLine("沒有指定檔案");
+                //WriteLine("沒有指定檔案");
             }
             catch (Exception e)
             {
-                WriteLine(e.Message);
+                //WriteLine(e.Message);
             }
-            ReadKey();
+            //ReadKey();
         }
     }
 }

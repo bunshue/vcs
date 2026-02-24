@@ -12,13 +12,13 @@ namespace CH1202
 {
     public partial class Form1 : Form
     {
+        int k = 0;
+        Color[] tint = new Color[5];
+
         public Form1()
         {
             InitializeComponent();
         }
-
-        int k = 0;
-        Color[] tint = new Color[5];
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -35,8 +35,7 @@ namespace CH1202
         }
 
         //滑鼠單擊事件
-        private void lblMouse_Click(object sender,
-              EventArgs e)
+        private void lblMouse_Click(object sender, EventArgs e)
         {
             lblMouse.Text = k.ToString();
             k += 1;
@@ -45,11 +44,11 @@ namespace CH1202
         }
 
         //滑鼠雙擊事件
-        private void lblMouse_DoubleClick(object sender,
-              EventArgs e)
+        private void lblMouse_DoubleClick(object sender, EventArgs e)
         {
             lblMouse.Text = string.Empty;
             lblMouse.BackColor = tint[k];
         }
     }
 }
+

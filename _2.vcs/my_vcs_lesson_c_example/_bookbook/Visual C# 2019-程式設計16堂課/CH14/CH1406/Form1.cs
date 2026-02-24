@@ -18,6 +18,11 @@ namespace CH1406
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnPrint_Click(object sender, EventArgs e)
         {
             //對話方塊啟用頁數核取方塊
@@ -32,14 +37,11 @@ namespace CH1406
             }
         }
 
-        private void OnPaper_PrintPage(object sender,
-              PrintPageEventArgs e)
+        private void OnPaper_PrintPage(object sender, PrintPageEventArgs e)
         {
             string text = "千江有水千月，萬里晴空萬里晴";
-            Font oneFont = new Font
-               ("標楷體", 35, FontStyle.Bold);
-            e.Graphics.DrawString(text, oneFont,
-               Brushes.Blue, 10, 10);
+            Font oneFont = new Font("標楷體", 35, FontStyle.Bold);
+            e.Graphics.DrawString(text, oneFont, Brushes.Blue, 10, 10);
         }
     }
 }

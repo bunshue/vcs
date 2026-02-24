@@ -102,7 +102,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(288, 161);
+            this.ClientSize = new System.Drawing.Size(654, 522);
             this.Controls.Add(this.trackTime);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnStop);
@@ -111,6 +111,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "CH1104";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trackTime)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

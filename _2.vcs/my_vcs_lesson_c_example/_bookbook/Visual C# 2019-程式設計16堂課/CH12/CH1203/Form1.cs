@@ -25,11 +25,9 @@ namespace CH1203
             lblMouse.TextAlign = ContentAlignment.MiddleCenter;
         }
 
-        private void Form1_MouseDown(object sender,
-           MouseEventArgs e)
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            lblMouse.Text = $"表單--X：{e.X.ToString()} " +
-               $"Y: {e.Y.ToString()}";
+            //lblMouse.Text = $"表單--X：{e.X.ToString()} " + $"Y: {e.Y.ToString()}";
         }
 
         private void Form1_MouseUp(object sender, MouseEventArgs e)
@@ -51,12 +49,10 @@ namespace CH1203
 
         private void lblMouse_MouseDown(object sender, MouseEventArgs e)
         {
-            lblMouse.Text = $"標籤--X：{e.X.ToString()} " +
-               $"Y: {e.Y.ToString()}";
+            //lblMouse.Text = $"標籤--X：{e.X.ToString()} " + $"Y: {e.Y.ToString()}";
         }
 
-        private void lblMouse_MouseUp(object sender,
-              MouseEventArgs e)
+        private void lblMouse_MouseUp(object sender, MouseEventArgs e)
         {
             lblMouse.Text = string.Empty;
             switch (e.Button)

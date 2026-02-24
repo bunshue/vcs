@@ -17,8 +17,12 @@ namespace CH1207
             InitializeComponent();
         }
 
-        private void txtName_KeyPress(object sender,
-              KeyPressEventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtName_KeyPress(object sender, KeyPressEventArgs e)
         {
             int word;
             word = (int)(e.KeyChar);
