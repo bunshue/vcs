@@ -1,4 +1,16 @@
 ﻿
+amend
+
+
+D:\\C#Lab  
+dlgFolderBrowser.SelectedPath = @"D:\USERS\LSH\Documents";
+
+
+酵母菌（Yeast）
+
+                //取得Click事件的訊息
+                tsmiFile.PerformClick();
+
 
             byte[] number = { 21, 31, 41 };
 
@@ -6,6 +18,16 @@
             int[] number = { 11, 21, 78, 125 };
 
 
+            // 一次畫一群長方形
+            hwidth = 50;
+            Rectangle[] R1 = new Rectangle[25];
+            for (int i = 0; i <= 24; i++)
+            {
+                R1[i] = new Rectangle(x_center - hwidth, y_center - hwidth, 2 * hwidth, 2 * hwidth);
+                y_center += 4;
+                hwidth += 2;
+            }
+            g.DrawRectangles(pen, R1);
 
 
 

@@ -47,7 +47,13 @@ namespace vcs_LED_Text
             pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             pictureBox3.Location = new Point(x_st + dx * 1, y_st + dy * 1);
 
-            this.ClientSize = new Size(W * 2 + 10 * 3, H * 3 + 10 * 1);
+            //this.ClientSize = new Size(W * 2 + 10 * 3, H * 3 + 10 * 1);
+
+            this.Size = new Size(1280, 900);
+            this.Text = "vcs_LED_Text";
+            //設定執行後的表單起始位置
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((1920 - this.Size.Width) / 2, (1080 - this.Size.Height) / 2);
         }
 
         private void pictureBox0_Paint(object sender, PaintEventArgs e)
@@ -81,8 +87,7 @@ namespace vcs_LED_Text
             const float led_thickness = 28;
             const float gap = 1.5f;
 
-            LedText letter = new LedText(
-                cell_width, cell_height, led_thickness, gap);
+            LedText letter = new LedText(cell_width, cell_height, led_thickness, gap);
 
             Brush bg_brush = Brushes.Black;
             Brush used_brush = Brushes.Lime;
@@ -91,9 +96,7 @@ namespace vcs_LED_Text
             Pen unused_pen = Pens.Transparent;
 
             PointF position = new PointF(margin, margin);
-            letter.DrawText(gr, bg_brush, used_brush, used_pen,
-                    unused_brush, unused_pen, position,
-                    1.2f, "!");
+            letter.DrawText(gr, bg_brush, used_brush, used_pen, unused_brush, unused_pen, position, 1.2f, "!");
         }
         private void TestColorful(Graphics gr)
         {
@@ -106,8 +109,7 @@ namespace vcs_LED_Text
             const float led_thickness = 28;
             const float gap = 5f;
 
-            LedText letter = new LedText(
-                cell_width, cell_height, led_thickness, gap);
+            LedText letter = new LedText(cell_width, cell_height, led_thickness, gap);
 
             Brush bg_brush1 = Brushes.Black;
             Brush used_brush1 = Brushes.Yellow;
@@ -116,21 +118,16 @@ namespace vcs_LED_Text
             Pen unused_pen1 = used_pen1;
 
             PointF position = new PointF(margin, margin);
-            letter.DrawText(gr, bg_brush1, used_brush1, used_pen1,
-                    unused_brush1, unused_pen1, position,
-                    1.2f, "3");
+            letter.DrawText(gr, bg_brush1, used_brush1, used_pen1, unused_brush1, unused_pen1, position, 1.2f, "3");
 
             Brush bg_brush2 = Brushes.Black;
-            Brush used_brush2 = new HatchBrush(
-                HatchStyle.HorizontalBrick, Color.Lime, Color.Green);
+            Brush used_brush2 = new HatchBrush(HatchStyle.HorizontalBrick, Color.Lime, Color.Green);
             Pen used_pen2 = new Pen(Color.LightGreen, 3);
             Brush unused_brush2 = new SolidBrush(Color.FromArgb(0, 40, 0));
             Pen unused_pen2 = Pens.Transparent;
 
             position.X += letter.CellWidth * 1.2f;
-            letter.DrawText(gr, bg_brush2, used_brush2, used_pen2,
-                    unused_brush2, unused_pen2, position,
-                    1.2f, "5");
+            letter.DrawText(gr, bg_brush2, used_brush2, used_pen2, unused_brush2, unused_pen2, position, 1.2f, "5");
         }
 
         private void TestLetters(Graphics gr)
@@ -144,8 +141,7 @@ namespace vcs_LED_Text
             const float led_thickness = 7;
             const float gap = 1.5f;
 
-            LedText letter = new LedText(
-                cell_width, cell_height, led_thickness, gap);
+            LedText letter = new LedText(cell_width, cell_height, led_thickness, gap);
 
             Brush bg_brush = Brushes.Black;
             Brush used_brush = Brushes.Lime;
@@ -154,32 +150,23 @@ namespace vcs_LED_Text
             Pen unused_pen = Pens.Transparent;
 
             PointF position = new PointF(margin, margin);
-            letter.DrawText(gr, bg_brush, used_brush, used_pen,
-                    unused_brush, unused_pen, position,
-                    1.2f, "ABCDEFGHI");
+            letter.DrawText(gr, bg_brush, used_brush, used_pen, unused_brush, unused_pen, position, 1.2f, "ABCDEFGHI");
 
             position.Y += letter.CellHeight * 1.2f;
-            letter.DrawText(gr, bg_brush, used_brush, used_pen,
-                    unused_brush, unused_pen, position,
-                    1.2f, "JKLMNOPQR");
+            letter.DrawText(gr, bg_brush, used_brush, used_pen, unused_brush, unused_pen, position, 1.2f, "JKLMNOPQR");
 
             position.Y += letter.CellHeight * 1.2f;
-            letter.DrawText(gr, bg_brush, used_brush, used_pen,
-                    unused_brush, unused_pen, position,
-                    1.2f, "STUVWXYZ0");
+            letter.DrawText(gr, bg_brush, used_brush, used_pen, unused_brush, unused_pen, position, 1.2f, "STUVWXYZ0");
 
             position.Y += letter.CellHeight * 1.2f;
-            letter.DrawText(gr, bg_brush, used_brush, used_pen,
-                    unused_brush, unused_pen, position,
-                    1.2f, "123456789");
+            letter.DrawText(gr, bg_brush, used_brush, used_pen, unused_brush, unused_pen, position, 1.2f, "123456789");
         }
 
         private void TestLeds(Graphics gr)
         {
             gr.Clear(pictureBox1.BackColor);
             gr.SmoothingMode = SmoothingMode.AntiAlias;
-            //gr.DrawRectangle(Pens.Green,
-            //    margin, margin, cell_width, cell_height);
+            //gr.DrawRectangle(Pens.Green, margin, margin, cell_width, cell_height);
 
             const float margin = 10;
             const float cell_width = 100;
@@ -187,8 +174,7 @@ namespace vcs_LED_Text
             const float led_thickness = 15;
             const float gap = 3;
 
-            LedText letter = new LedText(
-                cell_width, cell_height, led_thickness, gap);
+            LedText letter = new LedText(cell_width, cell_height, led_thickness, gap);
             PointF position = new PointF(margin, margin);
 
             PointF[] top = letter.MakeLed0(position);

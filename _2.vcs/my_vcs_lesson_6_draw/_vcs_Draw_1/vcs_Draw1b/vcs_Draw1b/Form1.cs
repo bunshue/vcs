@@ -84,45 +84,13 @@ namespace vcs_Draw1b
             g.DrawLines(pen, pts);
 
             //------------------------------------------------------------  # 60個
-
-            x_center = 550;
-            y_center = 20;
-            g.DrawString("3", f_index, sb, new PointF(x_center, y_center));
-            g.DrawRectangle(Pens.Red, x_center, y_center, 100, 100);
-
             int hwidth = 50;
             int hheight = 40;
-            for (int i = 0; i <= 20; i++)
-            {
-                g.DrawRectangle(pen, x_center - hwidth, y_center - hheight, 2 * hwidth, 2 * hheight);
-                x_center += 4;
-                y_center += 4;
-                hwidth += 2;
-                hheight += 2;
-            }
 
-            //------------------------------------------------------------  # 60個
-
-            x_center = 850;
+            x_center = 550 + 50;
             y_center = 20;
-            g.DrawString("4", f_index, sb, new PointF(x_center, y_center));
-            g.DrawRectangle(Pens.Red, x_center, y_center, 100, 100);
 
-            hwidth = 50;
-            Rectangle[] R1 = new Rectangle[25];
-            for (int i = 0; i <= 24; i++)
-            {
-                R1[i] = new Rectangle(x_center - hwidth, y_center - hwidth, 2 * hwidth, 2 * hwidth);
-                y_center += 4;
-                hwidth += 2;
-            }
-            g.DrawRectangles(pen, R1);
-
-            //------------------------------------------------------------  # 60個
-
-            x_center = 120;
-            y_center = 300;
-            g.DrawString("5", f_index, sb, new PointF(x_center, y_center));
+            g.DrawString("3", f_index, sb, new PointF(x_center, y_center));
             g.DrawRectangle(Pens.Red, x_center, y_center, 100, 100);
 
             hwidth = 10;
@@ -135,9 +103,10 @@ namespace vcs_Draw1b
 
             //------------------------------------------------------------  # 60個
 
-            x_center = 300;
-            y_center = 300;
-            g.DrawString("6", f_index, sb, new PointF(x_center, y_center));
+            x_center = 780;
+            y_center = 60;
+
+            g.DrawString("4", f_index, sb, new PointF(x_center, y_center));
             g.DrawRectangle(Pens.Red, x_center, y_center, 100, 100);
 
             hwidth = 50;
@@ -155,10 +124,10 @@ namespace vcs_Draw1b
 
             HatchBrush hatchBrush1;
             Single p1, p2, p3;
-            int x_st = 500;
-            int y_st = 200;
+            int x_st = 10;
+            int y_st = 180;
 
-            g.DrawString("7", f_index, sb, new PointF(x_st, y_st));
+            g.DrawString("5", f_index, sb, new PointF(x_st, y_st));
             g.DrawRectangle(Pens.Red, x_st, y_st, 100, 100);
 
             p1 = 180;
@@ -178,10 +147,10 @@ namespace vcs_Draw1b
 
             //------------------------------------------------------------  # 60個
 
-            x_st = 750;
-            y_st = 240;
+            x_st = 300;
+            y_st = 250;
 
-            g.DrawString("8", f_index, sb, new PointF(x_st, y_st));
+            g.DrawString("6", f_index, sb, new PointF(x_st, y_st));
             g.DrawRectangle(Pens.Red, x_st, y_st, 100, 100);
 
             HatchBrush hatchBrush2 = new HatchBrush(HatchStyle.DashedDownwardDiagonal, Color.Black, Color.Red);
@@ -198,9 +167,9 @@ namespace vcs_Draw1b
 
             //------------------------------------------------------------  # 60個
 
-            x_st = 800;
-            y_st = 360;
-            g.DrawString("9", f_index, sb, new PointF(x_st, y_st));
+            x_st = 700;
+            y_st = 200;
+            g.DrawString("7", f_index, sb, new PointF(x_st, y_st));
             g.DrawRectangle(Pens.Red, x_st, y_st, 100, 100);
 
             Rectangle R2;
@@ -220,8 +189,9 @@ namespace vcs_Draw1b
 
             //------------------------------------------------------------  # 60個
 
+            string pic_filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_ic\ic1.jpg";
             TextureBrush textureBrush1;
-            Image img = Image.FromFile(@"../../006.jpg");
+            Image img = Image.FromFile(pic_filename);
             g.DrawImage(img, 1100, 400);
 
             textureBrush1 = new TextureBrush(img, WrapMode.TileFlipXY);
@@ -289,6 +259,4 @@ namespace vcs_Draw1b
 /*  可搬出
 
 */
-
-
 
