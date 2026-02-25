@@ -17,6 +17,11 @@ namespace CH1201
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void 新增NToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //建立子表單
@@ -27,13 +32,8 @@ namespace CH1201
             //記錄子表單的數量
             int count = this.MdiChildren.Length;
             //設定子表單的標題
-            oneChild.Text = $"我是子表單-{count.ToString()}";
+            oneChild.Text = "我是子表單-{count.ToString()}";
             oneChild.Show();   //顯示MDI子表單
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-        
         }
     }
 }

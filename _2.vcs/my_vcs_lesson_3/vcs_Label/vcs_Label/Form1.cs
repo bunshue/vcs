@@ -10,6 +10,10 @@ using System.Windows.Forms;
 using System.Drawing.Text;  //for TextRenderingHint
 using System.Drawing.Drawing2D; //for MatrixOrder
 
+//label_move 滑鼠移動此標籤 要改AutoSize為False
+
+
+
 namespace vcs_Label
 {
     public partial class Form1 : Form
@@ -294,6 +298,26 @@ namespace vcs_Label
             {
                 cnt_use_top_left = 0;
             }
+        }
+
+        private void label_move_MouseEnter(object sender, EventArgs e)
+        {
+            //label_move
+            label_move.BackColor = Color.Pink;
+
+        }
+
+        private void label_move_MouseMove(object sender, MouseEventArgs e)
+        {
+            //移動滑鼠時取得座標值
+            label_move.Left = label_move.Left + e.X - (label_move.Width / 2);
+            label_move.Top = label_move.Top + e.Y - (label_move.Top / 2);
+            //label_move.Text = $"X:{label_move.Left}, " + $"Y:{label_move.Top}";
+        }
+
+        private void label_move_MouseLeave(object sender, EventArgs e)
+        {
+            label_move.BackColor = Color.PapayaWhip;
         }
     }
 }

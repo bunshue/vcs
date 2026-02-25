@@ -22,8 +22,7 @@ namespace CH1202
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            lblMsg.Text = "在標籤上按一下滑鼠鍵會出現數字\n" +
-               "，雙擊滑鼠左鍵改變背顏色";
+            lblMsg.Text = "在標籤上按一下滑鼠鍵會出現數字，\n雙擊滑鼠左鍵改變背顏色";
             tint[0] = Color.Brown;
             tint[1] = Color.Azure;
             tint[2] = Color.Chartreuse;
@@ -40,7 +39,9 @@ namespace CH1202
             lblMouse.Text = k.ToString();
             k += 1;
             if (k > 4)
+            {
                 k = 0;
+            }
         }
 
         //滑鼠雙擊事件

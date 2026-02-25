@@ -28,31 +28,41 @@ namespace CH1206
             {
                 lblState.Text = "向上";
                 if (lblTarget.Top + lblTarget.Height <= 0)
+                {
                     lblTarget.Top = lblTarget.Height;
+                }
                 else
+                {
                     lblTarget.Top -= 10;
+                }
             }
             else if (e.KeyCode == Keys.Down)
             {
                 lblState.Text = "向下";
                 if (lblTarget.Top >= this.Height)
+                {
                     lblTarget.Top = 0 - lblTarget.Height;
+                }
                 else
+                {
                     lblTarget.Top += 10;
+                }
             }
             else if (e.KeyCode == Keys.Right)
             {
                 lblState.Text = "向右";
                 if (lblTarget.Left >= this.Width)
+                {
                     lblTarget.Left = lblTarget.Width;
+                }
                 else
+                {
                     lblTarget.Left += 10;
+                }
             }
             else if (e.KeyCode == Keys.ShiftKey)
             {
-                lblState.Text = "座標：" + (new Point(
-                   lblTarget.Right,
-                   this.lblTarget.Bottom)).ToString();
+                lblState.Text = "座標：" + (new Point(lblTarget.Right, this.lblTarget.Bottom)).ToString();
             }
             //lblMsg.Text = $"按鍵值：{e.KeyValue.ToString()}";
         }

@@ -62,6 +62,7 @@
             this.label_picture1 = new System.Windows.Forms.Label();
             this.lb_use_top_left = new System.Windows.Forms.Label();
             this.timer_use_top_left = new System.Windows.Forms.Timer(this.components);
+            this.label_move = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label4
@@ -366,11 +367,27 @@
             this.timer_use_top_left.Interval = 200;
             this.timer_use_top_left.Tick += new System.EventHandler(this.timer_use_top_left_Tick);
             // 
+            // label_move
+            // 
+            this.label_move.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label_move.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label_move.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label_move.Location = new System.Drawing.Point(600, 246);
+            this.label_move.Name = "label_move";
+            this.label_move.Size = new System.Drawing.Size(200, 80);
+            this.label_move.TabIndex = 42;
+            this.label_move.Text = "滑鼠移動此標籤";
+            this.label_move.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label_move.MouseEnter += new System.EventHandler(this.label_move_MouseEnter);
+            this.label_move.MouseLeave += new System.EventHandler(this.label_move_MouseLeave);
+            this.label_move.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label_move_MouseMove);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 628);
+            this.Controls.Add(this.label_move);
             this.Controls.Add(this.lb_use_top_left);
             this.Controls.Add(this.label_picture);
             this.Controls.Add(this.label_picture1);
@@ -443,6 +460,7 @@
         private System.Windows.Forms.Label label_picture1;
         private System.Windows.Forms.Label lb_use_top_left;
         private System.Windows.Forms.Timer timer_use_top_left;
+        private System.Windows.Forms.Label label_move;
     }
 }
 

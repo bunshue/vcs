@@ -33,6 +33,7 @@ namespace vcs_ListBox1
             show_item_location();
 
             apply_listBox0();
+            apply_listBox1();
             apply_listBox2();
             apply_listBox3();
             apply_listBox456();
@@ -99,7 +100,7 @@ namespace vcs_ListBox1
             this.Size = new Size(1640, 830 + 20);
 
             label0.Text = "(0)各種方法";
-            label1.Text = "(1)";
+            label1.Text = "(1)點選+增加";
             label2.Text = "(2)多欄, 每欄40";
             label3.Text = "(3)設定Tabs";
             label4.Text = "(4)字串一維陣列";
@@ -225,6 +226,25 @@ namespace vcs_ListBox1
         void listBox0_KeyPress(object sender, KeyPressEventArgs e)
         {
             richTextBox1.Text += "P ";
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        void apply_listBox1()
+        {
+            listBox1.SelectedIndexChanged += new EventHandler(listBox1_SelectedIndexChanged);
+            string[] choice =
+            {
+                "國文", "英文", "數學", "理化", "地理",
+                "歷史", "自然科學", "生物"
+            };
+            listBox1.Items.AddRange(choice);
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //將第一個清單方塊選取的科目加到第二個清單方塊
+            listBox1.Items.Add(listBox1.SelectedItems[0].ToString());
         }
 
         //------------------------------------------------------------  # 60個
@@ -414,6 +434,3 @@ namespace vcs_ListBox1
 /*  可搬出
 
 */
-
-
-

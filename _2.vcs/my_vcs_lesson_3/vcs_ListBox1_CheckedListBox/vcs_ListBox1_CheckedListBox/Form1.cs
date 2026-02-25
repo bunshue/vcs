@@ -20,7 +20,7 @@ namespace vcs_ListBox1_CheckedListBox
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            show_item_location();
 
             string[] itemStr = { "ListBox項目1", "ListBox項目2", "ListBox項目3", "ListBox項目4", "ListBox項目5", "ListBox項目6", "ListBox項目7", "ListBox項目8", "ListBox項目9" };
             foreach (string str in itemStr)
@@ -31,6 +31,40 @@ namespace vcs_ListBox1_CheckedListBox
             listBox1.SelectedIndex = 3;
 
             label1.Text = "第四項是：" + listBox1.SelectedItem;
+
+            string[] choice =
+            {
+                "國文", "英文", "數學", "理化", "地理",
+                "歷史", "自然科學", "生物"
+            };
+            checkedListBox2.Items.AddRange(choice);
+            //單擊滑鼠左鍵就能選取控制項
+            checkedListBox2.CheckOnClick = true;
+        }
+
+        private void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 10;
+            dy = 60 + 10;
+
+            richTextBox1.Location = new Point(x_st + dx * 4 - 100, y_st + dy * 0);
+            richTextBox1.Size = new Size(300, 600);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1080, 840);
+            this.Text = "vcs_ListBox1_CheckedListBox";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -293,6 +327,22 @@ namespace vcs_ListBox1_CheckedListBox
         private void button22_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            checkedListBox2.Items.Add(textBox2.Text);//新增項目
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            checkedListBox2.Items.Remove(textBox2.Text);//移除項目
+        }
+
+        private void checkedListBox2_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            //將勾選的項目以文字方塊顯示
+            textBox2.Text = checkedListBox2.SelectedItem.ToString();
         }
     }
 }
