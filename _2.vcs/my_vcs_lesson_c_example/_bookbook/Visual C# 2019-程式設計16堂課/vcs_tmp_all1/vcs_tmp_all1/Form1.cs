@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
+//using System.Drawing.Printing;
 
 namespace vcs_tmp_all1
 {
@@ -379,7 +380,6 @@ namespace vcs_tmp_all1
 
         private void button9_Click(object sender, EventArgs e)
         {
-            //richTextBox1
             //openFileDialog1
             //建立處理資料流的物件note
             Stream note = null;
@@ -412,26 +412,172 @@ namespace vcs_tmp_all1
                     //MessageBox.Show($"檔案有誤：{ex.Message}");
                 }
             }
+
+            //6060
+
+            //openFileDialog1
+
+            //開啟檔案項目
+
+            openFileDialog1.InitialDirectory = Application.StartupPath; //從目前目錄開始尋找檔案
+
+            openFileDialog1.FileName = null;
+
+            //開啟RTF格式檔案
+            openFileDialog1.DefaultExt = "rtf";
+            openFileDialog1.Filter = "RTF格式(*.rtf)|*.rtf|所有檔案(*.*)|*.*";
+
+            //顯示開啟檔案對話方塊
+            DialogResult result = openFileDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                string openFileName = openFileDialog1.FileName;
+                try
+                {
+                    //以RichTextBox的LoadFile()方法載入檔案
+                    Stream sr = openFileDialog1.OpenFile();
+                    richTextBox1.LoadFile(sr, RichTextBoxStreamType.RichText);
+                    sr.Close();
+                }
+                catch (Exception exp)
+                {
+                    //MessageBox.Show("發生錯誤. 訊息: " +
+                    //   $"{System.Environment.NewLine}" +
+                    //   $"{exp.ToString()}, {Environment.NewLine}");
+                }
+            }
+            // 按了「取消」按鈕就回到原來的表單畫面
+            else if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //saveFileDialog1
+            richTextBox1.Lines = new string[]
+            {
+                "Irish poets learn your trade ",
+                "Sing whatever is well made ",
+                "Scorn the sort now growing up"
+            };
+
+            //設定預設目錄, 預設欲儲存的檔案類型
+            saveFileDialog1.InitialDirectory = Application.StartupPath; //從目前目錄開始尋找檔案
+            saveFileDialog1.Filter = "文字檔(*.txt)|*.txt|RTF格式|*.rtf";
+            //設定對話方塊的標題
+            saveFileDialog1.Title = "儲存檔案";
+            //設定是否在關閉之前要還原至目前的目錄
+            saveFileDialog1.RestoreDirectory = true;
+            saveFileDialog1.CreatePrompt = true;
+            saveFileDialog1.OverwritePrompt = true;
+            //假如按下儲存按鈕時
+            DialogResult result = saveFileDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                StreamWriter writer;
+                //設定檔案名稱
+                string filename = saveFileDialog1.FileName;
+                writer = new StreamWriter(filename, false, Encoding.Default);
+                //將文字方塊內容寫入指定的檔案中
+                writer.Write(richTextBox1.Text);
+                writer.Close(); //關閉檔案
+            }
+
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
+            //folderBrowserDialog1
+            //瀏覽資料夾
+
+            //設定瀏覽資料夾對話方塊-從虛擬「桌面」為開始的資料夾
+            folderBrowserDialog1.RootFolder = Environment.SpecialFolder.Desktop;
+
+            //指定要瀏覽的資料夾
+            folderBrowserDialog1.SelectedPath = Application.StartupPath; //從目前目錄開始尋找檔案
+
+            //瀏覽資料夾的提示文字
+            folderBrowserDialog1.Description = "選取要瀏覽的資料夾";
+
+            //進入FloderBrowserDialog並按確定鈕
+            DialogResult result = folderBrowserDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                //取得瀏覽資料夾對話方塊所選取的路徑
+                string folderName = folderBrowserDialog1.SelectedPath;
+                //確認沒有開啟的檔案，依預設的資料夾來開啟
+                openFileDialog1.InitialDirectory = folderName;
+                openFileDialog1.FileName = null;
+            }
+
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //colorDialog1
+            colorDialog1.AllowFullOpen = true;
+            colorDialog1.ShowHelp = true;//顯示說明按鈕
+            colorDialog1.AnyColor = true;//顯示所有可用基本色彩         
+            //使用者如果按下確定鈕變更背景色彩
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.BackColor = colorDialog1.Color;
+            }
+
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //fontDialog1
+            fontDialog1.ShowColor = true; //顯示色彩選擇
+            fontDialog1.Font = richTextBox1.Font; //取得Windows系統字型
+            fontDialog1.Color = richTextBox1.ForeColor;//取得前景色彩
+            if (fontDialog1.ShowDialog() != DialogResult.Cancel)
+            {
+                //改變文字方塊的字型
+                richTextBox1.Font = fontDialog1.Font;
+                //改變文字方塊的前景顏色
+                richTextBox1.ForeColor = fontDialog1.Color;
+            }
+
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //printDocument1
+            richTextBox1.LoadFile("../../../Demo01.rtf");
+            printDocument1.DocumentName = "AAAAAAA";
+
+            try
+            {
+                printDocument1.Print();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        //PrintDocument的事件
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            //1.建立繪圖物件gs和參數ev的關聯
+            Graphics gs = e.Graphics;
+            //設定列印字型
+            Font fontPrint = new Font("Segoe Print", 14);
+            int morePages = 0; //計算每份文件頁數
+            int OnPageChars = 0;//計算每頁字元數
+            //2.測量要繪製的字串
+            gs.MeasureString(richTextBox1.Text,
+               fontPrint, e.MarginBounds.Size,
+               StringFormat.GenericTypographic,
+               out OnPageChars, out morePages);
+            //3.繪製邊界內的字型
+            gs.DrawString(richTextBox1.Text, fontPrint, Brushes.Black, e.MarginBounds, new StringFormat());
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -512,5 +658,8 @@ namespace vcs_tmp_all1
 /*  可搬出
 
 */
+
+
+//saveFileDialog1.InitialDirectory = Application.StartupPath; //從目前目錄開始尋找檔案
 
 

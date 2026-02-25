@@ -47,7 +47,7 @@
             this.tscobFont});
             this.tsMain.Location = new System.Drawing.Point(0, 0);
             this.tsMain.Name = "tsMain";
-            this.tsMain.Size = new System.Drawing.Size(329, 29);
+            this.tsMain.Size = new System.Drawing.Size(572, 29);
             this.tsMain.TabIndex = 2;
             this.tsMain.Text = "toolStrip1";
             // 
@@ -90,10 +90,9 @@
             // 
             // rtxtShow
             // 
-            this.rtxtShow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtxtShow.Location = new System.Drawing.Point(0, 0);
+            this.rtxtShow.Location = new System.Drawing.Point(0, 32);
             this.rtxtShow.Name = "rtxtShow";
-            this.rtxtShow.Size = new System.Drawing.Size(329, 197);
+            this.rtxtShow.Size = new System.Drawing.Size(560, 428);
             this.rtxtShow.TabIndex = 3;
             this.rtxtShow.Text = "";
             // 
@@ -101,7 +100,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(329, 197);
+            this.ClientSize = new System.Drawing.Size(572, 472);
             this.Controls.Add(this.tsMain);
             this.Controls.Add(this.rtxtShow);
             this.Name = "Form1";

@@ -57,7 +57,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(580, 451);
+            this.ClientSize = new System.Drawing.Size(450, 431);
             this.Controls.Add(this.btnPrint);
             this.Name = "Form1";
             this.Text = "CH1406";

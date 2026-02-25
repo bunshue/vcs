@@ -71,7 +71,7 @@
             this.Font_menuItem});
             this.Main_menuStrip.Location = new System.Drawing.Point(0, 0);
             this.Main_menuStrip.Name = "Main_menuStrip";
-            this.Main_menuStrip.Size = new System.Drawing.Size(375, 24);
+            this.Main_menuStrip.Size = new System.Drawing.Size(492, 24);
             this.Main_menuStrip.TabIndex = 2;
             this.Main_menuStrip.Text = "設定檔案";
             // 
@@ -215,45 +215,44 @@
             // Font8MenuItem
             // 
             this.Font8MenuItem.Name = "Font8MenuItem";
-            this.Font8MenuItem.Size = new System.Drawing.Size(180, 22);
+            this.Font8MenuItem.Size = new System.Drawing.Size(88, 22);
             this.Font8MenuItem.Text = "8";
             this.Font8MenuItem.Click += new System.EventHandler(this.Font8MenuItem_Click);
             // 
             // Font10MenuItem
             // 
             this.Font10MenuItem.Name = "Font10MenuItem";
-            this.Font10MenuItem.Size = new System.Drawing.Size(180, 22);
+            this.Font10MenuItem.Size = new System.Drawing.Size(88, 22);
             this.Font10MenuItem.Text = "10";
             this.Font10MenuItem.Click += new System.EventHandler(this.Font10MenuItem_Click);
             // 
             // Font12MenuItem
             // 
             this.Font12MenuItem.Name = "Font12MenuItem";
-            this.Font12MenuItem.Size = new System.Drawing.Size(180, 22);
+            this.Font12MenuItem.Size = new System.Drawing.Size(88, 22);
             this.Font12MenuItem.Text = "12";
             this.Font12MenuItem.Click += new System.EventHandler(this.Font12MenuItem_Click);
             // 
             // Font14MenuItem
             // 
             this.Font14MenuItem.Name = "Font14MenuItem";
-            this.Font14MenuItem.Size = new System.Drawing.Size(180, 22);
+            this.Font14MenuItem.Size = new System.Drawing.Size(88, 22);
             this.Font14MenuItem.Text = "14";
             this.Font14MenuItem.Click += new System.EventHandler(this.Font14MenuItem_Click);
             // 
             // Font16MenuItem
             // 
             this.Font16MenuItem.Name = "Font16MenuItem";
-            this.Font16MenuItem.Size = new System.Drawing.Size(180, 22);
+            this.Font16MenuItem.Size = new System.Drawing.Size(88, 22);
             this.Font16MenuItem.Text = "16";
             this.Font16MenuItem.Click += new System.EventHandler(this.Font16MenuItem_Click);
             // 
             // rtxtShow
             // 
             this.rtxtShow.ContextMenuStrip = this.ctmsColor;
-            this.rtxtShow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtxtShow.Location = new System.Drawing.Point(0, 0);
+            this.rtxtShow.Location = new System.Drawing.Point(0, 27);
             this.rtxtShow.Name = "rtxtShow";
-            this.rtxtShow.Size = new System.Drawing.Size(375, 210);
+            this.rtxtShow.Size = new System.Drawing.Size(480, 492);
             this.rtxtShow.TabIndex = 3;
             this.rtxtShow.Text = "";
             // 
@@ -266,33 +265,33 @@
             this.黃色ToolStripMenuItem,
             this.紅色ToolStripMenuItem});
             this.ctmsColor.Name = "ctmsColor";
-            this.ctmsColor.Size = new System.Drawing.Size(181, 114);
+            this.ctmsColor.Size = new System.Drawing.Size(99, 92);
             // 
             // 綠色ToolStripMenuItem
             // 
             this.綠色ToolStripMenuItem.Name = "綠色ToolStripMenuItem";
-            this.綠色ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.綠色ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.綠色ToolStripMenuItem.Text = "綠色";
             this.綠色ToolStripMenuItem.Click += new System.EventHandler(this.綠色ToolStripMenuItem_Click);
             // 
             // 黑色ToolStripMenuItem
             // 
             this.黑色ToolStripMenuItem.Name = "黑色ToolStripMenuItem";
-            this.黑色ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.黑色ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.黑色ToolStripMenuItem.Text = "黑色";
             this.黑色ToolStripMenuItem.Click += new System.EventHandler(this.黑色ToolStripMenuItem_Click);
             // 
             // 黃色ToolStripMenuItem
             // 
             this.黃色ToolStripMenuItem.Name = "黃色ToolStripMenuItem";
-            this.黃色ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.黃色ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.黃色ToolStripMenuItem.Text = "黃色";
             this.黃色ToolStripMenuItem.Click += new System.EventHandler(this.黃色ToolStripMenuItem_Click);
             // 
             // 紅色ToolStripMenuItem
             // 
             this.紅色ToolStripMenuItem.Name = "紅色ToolStripMenuItem";
-            this.紅色ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.紅色ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.紅色ToolStripMenuItem.Text = "紅色";
             this.紅色ToolStripMenuItem.Click += new System.EventHandler(this.紅色ToolStripMenuItem_Click);
             // 
@@ -300,7 +299,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(375, 210);
+            this.ClientSize = new System.Drawing.Size(492, 531);
             this.Controls.Add(this.Main_menuStrip);
             this.Controls.Add(this.rtxtShow);
             this.Name = "Form1";
