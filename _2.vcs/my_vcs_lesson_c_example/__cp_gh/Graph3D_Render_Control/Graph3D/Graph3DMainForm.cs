@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Drawing.Drawing2D;
 
 using delRendererFunction = Plot3D.Graph3D.delRendererFunction;
@@ -20,6 +21,11 @@ namespace Plot3D
         public Graph3DMainForm()
         {
             InitializeComponent();
+        }
+
+        private void Graph3DMainForm_Load(object sender, EventArgs e)
+        {
+
         }
 
         protected override void OnLoad(EventArgs e)
@@ -53,17 +59,17 @@ namespace Plot3D
         {
             switch (comboDataSrc.SelectedIndex)
             {
-                case 0: 
+                case 0:
                     comboRaster.SelectedIndex = (int)eRaster.Off; // FIRST
                     comboRaster.Enabled = false; // Coord System does not work with negative values
                     SetCallback(); // AFTER
                     break;
-                case 1: 
+                case 1:
                     comboRaster.SelectedIndex = (int)eRaster.Off; // FIRST
                     comboRaster.Enabled = false; // Coord System does not work with negative values
                     SetFormula(); // AFTER 
                     break;
-                case 2: 
+                case 2:
                     comboRaster.SelectedIndex = (int)eRaster.Labels; // FIRST
                     comboRaster.Enabled = true;
                     SetFixValues(); // AFTER
@@ -96,8 +102,14 @@ namespace Plot3D
             delRendererFunction f_Callback = delegate(double X, double Y)
             {
                 double r = 0.15 * Math.Sqrt(X * X + Y * Y);
-                if (r < 1e-10) return 120;
-                else           return 120 * Math.Sin(r) / r;
+                if (r < 1e-10)
+                {
+                    return 120;
+                }
+                else
+                {
+                    return 120 * Math.Sin(r) / r;
+                }
             };
 
             // IMPORTANT: Do not set AdaptZ otherwise Z values from the function will be distorted
@@ -113,7 +125,7 @@ namespace Plot3D
         {
             String s_Formula = "12 * sin(x) * cos(y) / (sqrt(sqrt(x * x + y * y)) + 0.2)";
             CompiledFunction f_Compiled = FunctionCompiler.Compile(s_Formula);
-            
+
             delRendererFunction f_Function = delegate(double X, double Y)
             {
                 return f_Compiled(X, Y);
@@ -157,11 +169,11 @@ namespace Plot3D
             };
 
             cPoint3D[,] i_Points3D = new cPoint3D[s32_Values.GetLength(0), s32_Values.GetLength(1)];
-            for (int X=0; X<s32_Values.GetLength(0); X++)
+            for (int X = 0; X < s32_Values.GetLength(0); X++)
             {
-                for (int Y=0; Y<s32_Values.GetLength(1); Y++)
+                for (int Y = 0; Y < s32_Values.GetLength(1); Y++)
                 {
-                    i_Points3D[X,Y] = new cPoint3D(X * 100, Y * 100, s32_Values[X,Y]);
+                    i_Points3D[X, Y] = new cPoint3D(X * 100, Y * 100, s32_Values[X, Y]);
                 }
             }
 

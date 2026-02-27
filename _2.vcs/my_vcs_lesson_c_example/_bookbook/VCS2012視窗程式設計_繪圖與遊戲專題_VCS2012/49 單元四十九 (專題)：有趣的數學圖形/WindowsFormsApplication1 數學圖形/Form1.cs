@@ -22,13 +22,14 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
-            this.ClientSize = new Size(800, 600); // 定出
-            G = this.CreateGraphics();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             label1.Text = "";
+            this.ClientSize = new Size(800, 600); // 定出
+
+            G = this.CreateGraphics();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -113,10 +114,14 @@ namespace WindowsFormsApplication1
                 y2 = this.ClientSize.Height / 2 + (int)(r * Math.Sin(theta));
             }
 
-            if (First) First = !First;
+            if (First)
+            {
+                First = !First;
+            }
             else
+            {
                 G.DrawLine(MyPen, x1, y1, x2, y2);
-
+            }
             x1 = x2;
             y1 = y2;
         }
@@ -129,6 +134,6 @@ namespace WindowsFormsApplication1
             theta = 0;
             First = true;
         }
-
     }
 }
+

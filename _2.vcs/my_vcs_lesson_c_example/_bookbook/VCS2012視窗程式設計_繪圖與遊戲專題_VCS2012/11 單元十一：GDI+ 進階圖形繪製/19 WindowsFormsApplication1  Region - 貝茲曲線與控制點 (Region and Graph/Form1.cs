@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Drawing.Drawing2D;  // for GraphicsPath
 
 namespace WindowsFormsApplication1
@@ -20,7 +21,10 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             MovingPoint mp;
             mp = new MovingPoint(new Point(100, 200));
             mpList.Add(mp); // 第一個控制點
@@ -96,3 +100,4 @@ namespace WindowsFormsApplication1
         }
     }
 }
+

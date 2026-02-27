@@ -39,6 +39,10 @@ namespace WindowsApplication1
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             image[0] = null;
             image[1] = new Bitmap(Properties.Resources.A002);
             image[2] = new Bitmap(Properties.Resources.A003);
@@ -65,7 +69,9 @@ namespace WindowsApplication1
         private void button1_Click(object sender, EventArgs e)
         {
             for (int i = 0; i <= 8; i++)
+            {
                 panel[i].Tag = i;
+            }
 
             int k1, k2, t;
             for (int i = 0; i <= 20; i++)
@@ -78,21 +84,28 @@ namespace WindowsApplication1
             }
 
             for (int i = 0; i <= 8; i++)
+            {
                 panel[i].BackgroundImage = image[(int)panel[i].Tag];
+            }
 
             Count = 0;
             label1.Text = Count.ToString();
 
             for (int i = 0; i <= 8; i++)
-                panel[i].Enabled = true; 
+            {
+                panel[i].Enabled = true;
+            }
         }
 
         private void panel0_Click(object sender, EventArgs e)
         {
-            if (timer1.Enabled == true) return;
+            if (timer1.Enabled == true)
+            {
+                return;
+            }
 
             Panel x = (Panel)sender;
-            
+
             // 找出 是哪一個 Panel 被點到
             int SelectedPanelNo = 0;
             for (int i = 0; i <= 8; i++)
@@ -118,8 +131,7 @@ namespace WindowsApplication1
             int k;
             for (int i = 0; i < 24; i++)
             {
-                if (LegalMove[i].X == SelectedPanelNo &&
-                    LegalMove[i].Y == EmptyPanelNo)
+                if (LegalMove[i].X == SelectedPanelNo && LegalMove[i].Y == EmptyPanelNo)
                 {
                     Count++;
                     label1.Text = Count.ToString();
@@ -130,16 +142,30 @@ namespace WindowsApplication1
                     panelMoving.BackgroundImage = panel[FromPanelNo].BackgroundImage;
                     MovingLocation = panel[FromPanelNo].Location;
                     if (MovingLocation.X > panel[ToPanelNo].Location.X)
+                    {
                         MovingDirection.X = -MovingSpeed;
+                    }
                     else if (MovingLocation.X < panel[ToPanelNo].Location.X)
+                    {
                         MovingDirection.X = MovingSpeed;
-                    else MovingDirection.X = 0;
+                    }
+                    else
+                    {
+                        MovingDirection.X = 0;
+                    }
 
                     if (MovingLocation.Y > panel[ToPanelNo].Location.Y)
+                    {
                         MovingDirection.Y = -MovingSpeed;
+                    }
                     else if (MovingLocation.Y < panel[ToPanelNo].Location.Y)
+                    {
                         MovingDirection.Y = MovingSpeed;
-                    else MovingDirection.Y = 0;
+                    }
+                    else
+                    {
+                        MovingDirection.Y = 0;
+                    }
 
                     panelMoving.Location = new Point(MovingLocation.X, MovingLocation.Y);
                     panelMoving.Visible = true;
@@ -166,7 +192,9 @@ namespace WindowsApplication1
                 (int)panel[6].Tag == 7 && (int)panel[7].Tag == 6 && (int)panel[8].Tag == 5)
             {
                 for (int i = 0; i <= 8; i++)
+                {
                     panel[i].Enabled = false;
+                }
                 MessageBox.Show("完成了！");
             }
         }
@@ -191,7 +219,6 @@ namespace WindowsApplication1
             }
 
             panelMoving.Location = new Point(MovingLocation.X, MovingLocation.Y);
-
 
             if (MovingDirection.X == 0 && MovingDirection.Y == 0)
             {

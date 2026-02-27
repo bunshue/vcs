@@ -225,7 +225,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(329, 230);
+            this.ClientSize = new System.Drawing.Size(757, 545);
             this.Controls.Add(this.panelMoving);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -247,6 +247,7 @@
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "8 puzzle";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,26 +51,15 @@
             this.tabControl1.Size = new System.Drawing.Size(708, 498);
             this.tabControl1.TabIndex = 0;
             // 
-            // tabPage5
-            // 
-            this.tabPage5.BackColor = System.Drawing.Color.White;
-            this.tabPage5.BackgroundImage = global::WindowsApplication1.Properties.Resources.T004;
-            this.tabPage5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.tabPage5.Location = new System.Drawing.Point(4, 21);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(700, 473);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "特別角度";
-            // 
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
             this.tabPage1.BackgroundImage = global::WindowsApplication1.Properties.Resources.T001;
             this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.tabPage1.Location = new System.Drawing.Point(4, 21);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(700, 473);
+            this.tabPage1.Size = new System.Drawing.Size(700, 472);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本函數";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -80,10 +69,10 @@
             this.tabPage2.BackColor = System.Drawing.Color.White;
             this.tabPage2.BackgroundImage = global::WindowsApplication1.Properties.Resources.T007;
             this.tabPage2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.tabPage2.Location = new System.Drawing.Point(4, 21);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(700, 473);
+            this.tabPage2.Size = new System.Drawing.Size(700, 472);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "六角龜殼";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -93,9 +82,9 @@
             this.tabPage3.BackColor = System.Drawing.Color.White;
             this.tabPage3.BackgroundImage = global::WindowsApplication1.Properties.Resources.T002;
             this.tabPage3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.tabPage3.Location = new System.Drawing.Point(4, 21);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(700, 473);
+            this.tabPage3.Size = new System.Drawing.Size(700, 472);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "和差角公式";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -105,12 +94,23 @@
             this.tabPage4.BackColor = System.Drawing.Color.White;
             this.tabPage4.BackgroundImage = global::WindowsApplication1.Properties.Resources.T008;
             this.tabPage4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.tabPage4.Location = new System.Drawing.Point(4, 21);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(700, 473);
+            this.tabPage4.Size = new System.Drawing.Size(700, 472);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "兩倍角、三倍角、半角公式";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.BackColor = System.Drawing.Color.White;
+            this.tabPage5.BackgroundImage = global::WindowsApplication1.Properties.Resources.T004;
+            this.tabPage5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(700, 472);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "特別角度";
             // 
             // Form3
             // 
@@ -120,6 +120,7 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "Form3";
             this.Text = "三角函數公式表";
+            this.Load += new System.EventHandler(this.Form3_Load);
             this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 

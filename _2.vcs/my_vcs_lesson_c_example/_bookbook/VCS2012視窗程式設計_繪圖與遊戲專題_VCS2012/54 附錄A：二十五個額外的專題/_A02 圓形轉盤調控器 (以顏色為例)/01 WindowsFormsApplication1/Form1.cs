@@ -1,6 +1,4 @@
-﻿// 以滑鼠位置連到中心點的角度 來帶動 小圓的角度
-// 作者：鄞永傳老師‧xnabook@yahoo.com.tw‧2012-08 
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
+// 以滑鼠位置連到中心點的角度 來帶動 小圓的角度
 
 namespace WindowsFormsApplication1
 {
@@ -28,6 +28,10 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             this.ClientSize = new Size(600, 600);
 
             Cx = this.ClientSize.Width / 2;
@@ -41,7 +45,7 @@ namespace WindowsFormsApplication1
         {
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
-            byte R=0, G=0, B=0;
+            byte R = 0, G = 0, B = 0;
 
             // R 在 0 度、G 在 120 度、B 在 240 度
             R = GetColor(theta, 0);
@@ -63,19 +67,28 @@ namespace WindowsFormsApplication1
         byte GetColor(double t, double offset)
         {
             t = t - offset;
-            if (t < 0) t = Math.PI * 2 + t;
+            if (t < 0)
+            {
+                t = Math.PI * 2 + t;
+            }
 
             if (t >= 2 * Math.PI / 3 && t <= 4 * Math.PI / 3)
+            {
                 return 0;
+            }
             else if (t < 2 * Math.PI / 3)
+            {
                 return (byte)(255 - 255 * t / (2 * Math.PI / 3));
+            }
             else if (t > 4 * Math.PI / 3)
             {
                 t = Math.PI * 2 - t;
                 return (byte)(255 - 255 * t / (2 * Math.PI / 3));
             }
             else
+            {
                 return 0;
+            }
         }
 
         private void Form1_Resize(object sender, EventArgs e)
@@ -94,7 +107,7 @@ namespace WindowsFormsApplication1
             Sx = (float)(Cx + D_Big * Math.Cos(theta));
             Sy = (float)(Cy + D_Big * Math.Sin(theta));
 
-            double dis  = Math.Sqrt((Sx - e.X) * (Sx - e.X) + (Sy - e.Y) * (Sy - e.Y));
+            double dis = Math.Sqrt((Sx - e.X) * (Sx - e.X) + (Sy - e.Y) * (Sy - e.Y));
             if (dis <= D_Small)  //  確定有點到小圓球
             {
                 drag = true;
@@ -120,3 +133,4 @@ namespace WindowsFormsApplication1
         }
     }
 }
+

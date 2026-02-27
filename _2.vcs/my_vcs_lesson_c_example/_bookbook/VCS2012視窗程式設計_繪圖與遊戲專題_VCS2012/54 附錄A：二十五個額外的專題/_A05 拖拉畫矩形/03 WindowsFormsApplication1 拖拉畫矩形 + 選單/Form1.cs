@@ -1,5 +1,4 @@
-﻿// 作者：鄞永傳老師‧xnabook@yahoo.com.tw‧2012-08 
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -34,6 +33,11 @@ namespace WindowsFormsApplication1
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             for (int i = 0; i < pt.Count; i++) // 動態陣列全部重畫
@@ -59,7 +63,10 @@ namespace WindowsFormsApplication1
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!dragging) return; // 如果不是開始拖拉 就離開
+            if (!dragging)
+            {
+                return; // 如果不是開始拖拉 就離開
+            }
 
             Apoint p = new Apoint(); // 定義一個新的矩形
             p.point = new Point(e.X, e.Y); // 矩形的中心點

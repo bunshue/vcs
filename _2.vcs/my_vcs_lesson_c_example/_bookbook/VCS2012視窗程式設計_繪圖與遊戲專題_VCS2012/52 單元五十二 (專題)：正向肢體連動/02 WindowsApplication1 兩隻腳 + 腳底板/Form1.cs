@@ -16,7 +16,11 @@ namespace WindowsApplication1
         public Form1()
         {
             InitializeComponent();
-            seg = new Segment(200,40, Color.DarkGray);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            seg = new Segment(200, 40, Color.DarkGray);
             seg2 = new Segment(150, 30, Color.Gray);
 
             seg3 = new Segment(200, 40, Color.DarkGray);
@@ -55,7 +59,7 @@ namespace WindowsApplication1
             float angle2 = (float)(Math.Sin(cyc - Math.PI / 2) * 45 + 45); // -45 ~ 45 (往下 45)
             segB.Angle = segA.Angle + angle2;
 
-            float angle3 = (float)(Math.Sin(cyc ) * 40 - 50); // -40 ~ 40 (往上 45)
+            float angle3 = (float)(Math.Sin(cyc) * 40 - 50); // -40 ~ 40 (往上 45)
             segC.Angle = segB.Angle + angle3;
 
             segA.SetPos(new PointF(400, 100));
@@ -64,6 +68,5 @@ namespace WindowsApplication1
 
             this.Invalidate();
         }
-
     }
 }

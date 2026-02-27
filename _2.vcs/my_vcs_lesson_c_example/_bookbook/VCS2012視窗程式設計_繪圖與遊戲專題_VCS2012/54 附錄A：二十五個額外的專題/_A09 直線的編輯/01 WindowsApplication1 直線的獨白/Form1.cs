@@ -1,5 +1,4 @@
-﻿// 作者：鄞永傳老師‧xnabook@yahoo.com.tw‧2012-08 
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -32,7 +31,11 @@ namespace WindowsApplication1
         public Form1()
         {
             InitializeComponent();
+        }
 
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             Center = new Point(150, 150);  // 中心圓的位置
             Angle = 0;
             w1 = 100;  // p1 端點 離中心圓的距離
@@ -109,7 +112,7 @@ namespace WindowsApplication1
                 this.Invalidate();
                 return;
             }
-            else if (p1Moving == true) 
+            else if (p1Moving == true)
             {
                 p1.X = e.X - p1Offset.X; // p1 端點 移動
                 p1.Y = e.Y - p1Offset.Y;
@@ -130,13 +133,12 @@ namespace WindowsApplication1
                 w2 = Math.Sqrt((Center.X - p2.X) * (Center.X - p2.X) + (Center.Y - p2.Y) * (Center.Y - p2.Y));
 
                 Angle = (float)(Math.Atan2(p2.Y - Center.Y, p2.X - Center.X) - Math.PI);
-                p1.X = (int)(Center.X + w1 * Math.Cos(Angle ));
-                p1.Y = (int)(Center.Y + w1 * Math.Sin(Angle ));
+                p1.X = (int)(Center.X + w1 * Math.Cos(Angle));
+                p1.Y = (int)(Center.Y + w1 * Math.Sin(Angle));
 
                 this.Invalidate();
                 return;
             }
         }
-
     }
 }

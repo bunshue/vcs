@@ -61,6 +61,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "縮放矩陣 - X 軸放大縮小";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.ResumeLayout(false);

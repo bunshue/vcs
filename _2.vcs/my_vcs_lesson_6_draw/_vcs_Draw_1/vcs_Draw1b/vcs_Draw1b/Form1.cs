@@ -84,50 +84,13 @@ namespace vcs_Draw1b
             g.DrawLines(pen, pts);
 
             //------------------------------------------------------------  # 60個
-            int hwidth = 50;
-            int hheight = 40;
-
-            x_center = 550 + 50;
-            y_center = 20;
-
-            g.DrawString("3", f_index, sb, new PointF(x_center, y_center));
-            g.DrawRectangle(Pens.Red, x_center, y_center, 100, 100);
-
-            hwidth = 10;
-            for (int i = 0; i <= 40; i++)
-            {
-                g.DrawEllipse(pen, x_center - hwidth, y_center - hwidth, 2 * hwidth, 2 * hwidth);
-                y_center += 4;
-                hwidth += 2;
-            }
-
-            //------------------------------------------------------------  # 60個
-
-            x_center = 780;
-            y_center = 60;
-
-            g.DrawString("4", f_index, sb, new PointF(x_center, y_center));
-            g.DrawRectangle(Pens.Red, x_center, y_center, 100, 100);
-
-            hwidth = 50;
-            hheight = 40;
-            for (int i = 0; i < +29; i++)
-            {
-                g.DrawArc(pen, x_center - hwidth, y_center - hheight, 2 * hwidth, 2 * hheight, 0, -180);
-                x_center += 4;
-                y_center += 4;
-                hwidth += 2;
-                hheight += 2;
-            }
-
-            //------------------------------------------------------------  # 60個
 
             HatchBrush hatchBrush1;
             Single p1, p2, p3;
-            int x_st = 10;
-            int y_st = 180;
+            int x_st = 500;
+            int y_st = 0;
 
-            g.DrawString("5", f_index, sb, new PointF(x_st, y_st));
+            g.DrawString("3", f_index, sb, new PointF(x_st, y_st));
             g.DrawRectangle(Pens.Red, x_st, y_st, 100, 100);
 
             p1 = 180;
@@ -147,10 +110,10 @@ namespace vcs_Draw1b
 
             //------------------------------------------------------------  # 60個
 
-            x_st = 300;
-            y_st = 250;
+            x_st = 800;
+            y_st = 0;
 
-            g.DrawString("6", f_index, sb, new PointF(x_st, y_st));
+            g.DrawString("4", f_index, sb, new PointF(x_st, y_st));
             g.DrawRectangle(Pens.Red, x_st, y_st, 100, 100);
 
             HatchBrush hatchBrush2 = new HatchBrush(HatchStyle.DashedDownwardDiagonal, Color.Black, Color.Red);
@@ -167,9 +130,9 @@ namespace vcs_Draw1b
 
             //------------------------------------------------------------  # 60個
 
-            x_st = 700;
-            y_st = 200;
-            g.DrawString("7", f_index, sb, new PointF(x_st, y_st));
+            x_st = 800;
+            y_st = 150;
+            g.DrawString("5", f_index, sb, new PointF(x_st, y_st));
             g.DrawRectangle(Pens.Red, x_st, y_st, 100, 100);
 
             Rectangle R2;

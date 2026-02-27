@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Drawing; //  for Bitmap
-using System.Drawing.Drawing2D; // for Matrix
+using System.Drawing;
 using System.Windows.Forms;
+
+using System.Drawing.Drawing2D; // for Matrix
 
 namespace WindowsFormsApplication1
 {
     class G2D_ImageRotateBias
     {
-        Bitmap bitmap ;  // 貼圖
+        Bitmap bitmap;  // 貼圖
         float theta = 0; // 貼圖的旋轉角度
         bool actionTurning = false; // 是否 進入 旋轉模式
         public Point pos; // 圖形中心點
@@ -22,7 +23,6 @@ namespace WindowsFormsApplication1
         float Inertia; // 旋轉角度 慣性
         SolidBrush myBrush = new SolidBrush(Color.FromArgb(128, 255, 0, 0));  // 標示 圖形中心點
         SolidBrush myBrush2 = new SolidBrush(Color.FromArgb(128, 255, 255, 0));  // 標示 圖形中心點
-
         Timer timer1 = new Timer();
         public Point pivot; // 旋轉中心點
         Matrix aMatrix;
@@ -43,10 +43,13 @@ namespace WindowsFormsApplication1
         private void timer1_Tick(object sender, EventArgs e)
         {
             theta += Inertia;
-            //this.Invalidate();  // ..............
+            //this.Invalidate();
 
             Inertia = 0.99f * Inertia; // 旋轉慣性 愈來愈小
-            if (Inertia < 0.01f && Inertia > -0.01f) timer1.Enabled = false;
+            if (Inertia < 0.01f && Inertia > -0.01f)
+            {
+                timer1.Enabled = false;
+            }
         }
 
         public void Draw(Graphics G)
@@ -76,43 +79,62 @@ namespace WindowsFormsApplication1
             original[3] = new Point(bitmap.Width, bitmap.Height);
 
             aMatrix.TransformPoints(original);
-            int maxY=0, minY=32767, MaxX=0, minX=32767;
+            int maxY = 0, minY = 32767, MaxX = 0, minX = 32767;
             for (int i = 0; i < 4; i++)
             {
-                if (original[i].X > MaxX) MaxX = original[i].X;
-                if (original[i].X < minX) minX = original[i].X;
-                if (original[i].Y > maxY) maxY = original[i].Y;
-                if (original[i].Y < minY) minY = original[i].Y;
+                if (original[i].X > MaxX)
+                {
+                    MaxX = original[i].X;
+                }
+                if (original[i].X < minX)
+                {
+                    minX = original[i].X;
+                }
+                if (original[i].Y > maxY)
+                {
+                    maxY = original[i].Y;
+                }
+                if (original[i].Y < minY)
+                {
+                    minY = original[i].Y;
+                }
             }
 
             if (p.X <= MaxX && p.X >= minX && p.Y <= maxY && p.Y >= minY)
+            {
                 return true;
-            else return false;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         // 點 p 是否落在 目前圖形 圓心的周長內
         public bool isPointInBitmap(Point p)
         {
             Point[] original = new Point[1];
-            original[0] = new Point(bitmap.Width/2, bitmap.Height/2);
+            original[0] = new Point(bitmap.Width / 2, bitmap.Height / 2);
 
             aMatrix.TransformPoints(original);
-            double dis2 = Math.Sqrt((p.X - original[0].X) * (p.X - original[0].X) +
-                                    (p.Y - original[0].Y) * (p.Y - original[0].Y));
+            double dis2 = Math.Sqrt((p.X - original[0].X) * (p.X - original[0].X) + (p.Y - original[0].Y) * (p.Y - original[0].Y));
 
             if (dis2 < disInBitmap)
+            {
                 return true;
-            else return false;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void MouseDown(Point e)
         {
             // 滑鼠游標位置 和 圖形中心點 的距離
-            double dis = Math.Sqrt((e.X - pos.X) * (e.X - pos.X) +
-                                   (e.Y - pos.Y) * (e.Y - pos.Y));
+            double dis = Math.Sqrt((e.X - pos.X) * (e.X - pos.X) + (e.Y - pos.Y) * (e.Y - pos.Y));
             // bool MouseInBitmap = e.X < <== 因為有旋轉 所以矩形區域不管用
 
-            
             if (dis < disInPos) // 滑鼠游標在 圖形中心點 => 要移動圖形
             {
                 actionMoving = true; // 進入移動模式
@@ -161,10 +183,9 @@ namespace WindowsFormsApplication1
 
                 mx = e.X; // 記錄新的 滑鼠游標 位置
                 my = e.Y;
-                //this.Invalidate();   // ..............
+                //this.Invalidate();
             }
         }
-
 
         public void StopRotate()
         {

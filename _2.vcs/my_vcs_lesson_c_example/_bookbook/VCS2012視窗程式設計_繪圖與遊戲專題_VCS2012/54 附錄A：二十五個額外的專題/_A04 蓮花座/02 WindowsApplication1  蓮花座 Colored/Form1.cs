@@ -1,11 +1,11 @@
-﻿// 作者：鄞永傳老師‧xnabook@yahoo.com.tw‧2012-08 
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Drawing.Drawing2D;
 
 namespace WindowsApplication1
@@ -17,6 +17,11 @@ namespace WindowsApplication1
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -50,13 +55,13 @@ namespace WindowsApplication1
                           new PointF(x-1.6f*D, y + 2.5f*D),
                           new PointF(x, y),
                           };
-            gp.AddCurve(pt2, 0.5f); 
+            gp.AddCurve(pt2, 0.5f);
 
             //gp.CloseFigure(); //  封閉目前的圖形
             e.Graphics.FillPath(Brushes.Pink, gp); // 繪出GraphicsPath物件
             e.Graphics.DrawPath(Pens.Red, gp); // 繪出GraphicsPath物件
 
-            float x0 = x - 3 * D ;  
+            float x0 = x - 3 * D;
             float y0 = y - 10 * D - 10; // 低一些
             float w = 6 * D;
             float h = 20 * D;
@@ -64,15 +69,13 @@ namespace WindowsApplication1
             RectangleF rect = new RectangleF(x0, y0, w, h);
             PointF[] rect3 = new PointF[3];
 
-
-            rect3[0] = new PointF(x0 , y0);
-            rect3[1] = new PointF(x0 + w ,y0);
+            rect3[0] = new PointF(x0, y0);
+            rect3[1] = new PointF(x0 + w, y0);
             rect3[2] = new PointF(x0, y0 + h);
-
 
             Matrix myMatrix;
 
-            for (int i = -D*20; i <= D*20; i = i + D*4)
+            for (int i = -D * 20; i <= D * 20; i = i + D * 4)
             {
                 rect3[0].X = x0 + i;
                 rect3[1].X = x0 + w + i;
@@ -87,7 +90,5 @@ namespace WindowsApplication1
         {
             this.Invalidate();
         }
-
-       
     }
 }

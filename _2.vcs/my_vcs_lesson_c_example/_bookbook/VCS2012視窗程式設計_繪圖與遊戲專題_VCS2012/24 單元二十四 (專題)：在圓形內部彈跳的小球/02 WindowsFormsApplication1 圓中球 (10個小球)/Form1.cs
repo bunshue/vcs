@@ -19,7 +19,10 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             // 設定 邊界圓形的位置與寬高
             CircleRect = new Rectangle(20, 20, 400, 400);
 
@@ -34,19 +37,12 @@ namespace WindowsFormsApplication1
             {
                 x = (int)(Cx + Cd * Math.Cos(theta));
                 y = (int)(Cy + Cd * Math.Sin(theta));
-                ball = new BallInACircle(
-                             new PointF(x, y),
-                             new PointF(rd.Next(5)+1, rd.Next(6) +1),
-                             CircleRect,
-                             D,
-                             Color.Red);
+                ball = new BallInACircle(new PointF(x, y), new PointF(rd.Next(5) + 1, rd.Next(6) + 1), CircleRect, D, Color.Red);
                 balls.Add(ball);
                 theta = theta + Math.PI * 2 / 10;
             }
-
             // 調整 視窗的寬高
-            this.ClientSize = new Size(CircleRect.Width + CircleRect.X * 2,
-                                       CircleRect.Height + CircleRect.Y * 2);
+            this.ClientSize = new Size(CircleRect.Width + CircleRect.X * 2, CircleRect.Height + CircleRect.Y * 2);
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -55,16 +51,17 @@ namespace WindowsFormsApplication1
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
             // 輔助線條
-            e.Graphics.DrawLine(Pens.Silver, CircleRect.X, CircleRect.Y + CircleRect.Height / 2,
-                CircleRect.X + CircleRect.Width, CircleRect.Y + CircleRect.Height / 2);
+            e.Graphics.DrawLine(Pens.Silver, CircleRect.X, CircleRect.Y + CircleRect.Height / 2, CircleRect.X + CircleRect.Width, CircleRect.Y + CircleRect.Height / 2);
 
-            e.Graphics.DrawLine(Pens.Silver, CircleRect.X + CircleRect.Width / 2, CircleRect.Y,
-                CircleRect.X + CircleRect.Width / 2, CircleRect.Y + CircleRect.Height);
+            e.Graphics.DrawLine(Pens.Silver, CircleRect.X + CircleRect.Width / 2, CircleRect.Y, CircleRect.X + CircleRect.Width / 2, CircleRect.Y + CircleRect.Height);
 
             ball.DrawCircle(e.Graphics, Color.Blue); // 繪出 邊界圓形
+
             // 繪出 全部的圓中球
             for (int i = 0; i < balls.Count; i++)
+            {
                 balls[i].Draw(e.Graphics, Color.Red);
+            }
         }
 
         // 計時器 事件處理函數
@@ -72,10 +69,13 @@ namespace WindowsFormsApplication1
         {
             // 更新 全部小球 的位置
             for (int i = 0; i < balls.Count; i++)
+            {
                 balls[i].Update();
+            }
 
             // 小球 的碰撞處理
             for (int i = 0; i < balls.Count - 1; i++)
+            {
                 for (int j = i + 1; j < balls.Count; j++)
                 {
                     if (Collides(balls[i], balls[j]))
@@ -84,21 +84,23 @@ namespace WindowsFormsApplication1
                         Swap(balls[i], balls[j]);
                     }
                 }
-
+            }
             this.Invalidate();
         }
 
         // 碰撞測試
         bool Collides(BallInACircle A, BallInACircle B)
         {
-            Double D = Math.Sqrt(
-            (A.position.X - B.position.X) * (A.position.X - B.position.X) +
-            (A.position.Y - B.position.Y) * (A.position.Y - B.position.Y));
+            Double D = Math.Sqrt((A.position.X - B.position.X) * (A.position.X - B.position.X) + (A.position.Y - B.position.Y) * (A.position.Y - B.position.Y));
 
             if (D <= A.Ball_Width + B.Ball_Width)
+            {
                 return true;
+            }
             else
+            {
                 return false;
+            }
         }
 
         // 速度交換 

@@ -1,5 +1,4 @@
-﻿// 作者：鄞永傳老師‧xnabook@yahoo.com.tw‧2012-08 
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,7 +15,10 @@ namespace WindowsApplication1
         public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             // 中心圓的位置、旋轉角度、p1 端點 離中心圓的距離、p2 端點 離中心圓的距離
             line01 = new G2D_Line(new Point(100, 100), 0, 100, 100);
             line02 = new G2D_Line(new Point(200, 200), 0, 100, 100);
@@ -55,9 +57,7 @@ namespace WindowsApplication1
             {
                 line01.UpdateP1(line02.p2);
             }
-
             this.Invalidate();
         }
-
     }
 }

@@ -1,5 +1,4 @@
-﻿/* 作者：鄞永傳老師‧xnabook@yahoo.com.tw‧2009-09 */
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,9 +12,14 @@ namespace WindowsApplication1
     {
         Point pos = new Point(300, 300); // 手把上節點的座標位置
         WhipSegments whip01;
+
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             whip01 = new WhipSegments(15, 80, 20, Color.Red, 40, 20, Color.Blue);
 
             pos.X = this.ClientSize.Width / 2 - whip01.Handler.size.Height / 2;
@@ -73,7 +77,7 @@ namespace WindowsApplication1
 
         private void Form1_Resize(object sender, EventArgs e)
         {
-            pos = new Point(this.ClientSize.Width/4, this.ClientSize.Height/2); // 大腿上節點的座標位置
+            pos = new Point(this.ClientSize.Width / 4, this.ClientSize.Height / 2); // 大腿上節點的座標位置
             this.Invalidate();
         }
 
@@ -83,7 +87,9 @@ namespace WindowsApplication1
             {
                 whip01.Handler.SetSegType(comboBox1.SelectedIndex);
                 for (int i = 0; i < whip01.Whip.Length; i++)
+                {
                     whip01.Whip[i].SetSegType(comboBox1.SelectedIndex);
+                }
             }
         }
     }

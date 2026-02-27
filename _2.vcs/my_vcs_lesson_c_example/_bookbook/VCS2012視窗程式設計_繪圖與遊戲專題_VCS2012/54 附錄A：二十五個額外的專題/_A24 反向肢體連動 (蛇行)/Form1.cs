@@ -1,5 +1,4 @@
-﻿/* 作者：鄞永傳老師‧xnabook@yahoo.com.tw‧2009-09 */
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,7 +16,10 @@ namespace WindowsApplication1
         public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             snake01 = new DraggingSegments(10, 60, 20, Color.Red, Color.Blue);
             snake02 = new DraggingSegments(20, 30, 10, Color.Black, Color.White);
             snake03 = new DraggingSegments(20, 30, 10, Color.Black, Color.White);
@@ -57,8 +59,7 @@ namespace WindowsApplication1
             ball2.Move();
             snake02.Update(ball2.position.X, ball2.position.Y);
 
-            snake03.Update(this.ClientSize.Width- ball2.position.X,
-                this.ClientSize.Height - ball2.position.Y);
+            snake03.Update(this.ClientSize.Width - ball2.position.X, this.ClientSize.Height - ball2.position.Y);
 
             this.Invalidate();
         }

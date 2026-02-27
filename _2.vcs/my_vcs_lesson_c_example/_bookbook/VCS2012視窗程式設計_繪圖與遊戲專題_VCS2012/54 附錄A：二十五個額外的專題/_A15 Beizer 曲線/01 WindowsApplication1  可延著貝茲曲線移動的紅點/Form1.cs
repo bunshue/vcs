@@ -1,11 +1,11 @@
-﻿// 作者：鄞永傳老師‧xnabook@yahoo.com.tw‧2012-08 
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Drawing.Drawing2D;
 
 namespace WindowsApplication1
@@ -22,8 +22,11 @@ namespace WindowsApplication1
         public Form1()
         {
             InitializeComponent();
+        }
 
-            MovingPoint mp; 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            MovingPoint mp;
             mp = new MovingPoint(new Point(100, 200));
             mpList.Add(mp); // 第一個控制點
 
@@ -61,7 +64,7 @@ namespace WindowsApplication1
             gp.AddEllipse(mpList[3].p.X - 10, mpList[3].p.Y - 10, 20, 20); //加入右邊圓形端點
 
             PointF pt = BezierFormula(t);
-            e.Graphics.FillEllipse(Brushes.Red, pt.X-5, pt.Y-5, 10, 10);
+            e.Graphics.FillEllipse(Brushes.Red, pt.X - 5, pt.Y - 5, 10, 10);
 
             e.Graphics.DrawPath(Pens.Black, gp);  // 繪出GraphicsPath物件
         }

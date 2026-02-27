@@ -29,21 +29,23 @@ namespace WindowsApplication1
             point.Y = (int)(H / 2 - p.Y * D);
 
             double dist = Math.Sqrt((point.X - x) * (point.X - x) + (point.Y - y) * (point.Y - y));
-            if (dist <= D/2)
+            if (dist <= D / 2)
             {
                 dx = x - point.X;
                 dy = y - point.Y;
                 return true;
             }
-            else return false;
+            else
+            {
+                return false;
+            }
         }
 
         // 更新 點的標準座標
         public void Move(int x, int y)  // 滑鼠的位置
         {
-            p.X = ((x - dx) - W / 2.0f) / D; 
+            p.X = ((x - dx) - W / 2.0f) / D;
             p.Y = -((y - dy) - H / 2.0f) / D;
         }
-
     }
 }

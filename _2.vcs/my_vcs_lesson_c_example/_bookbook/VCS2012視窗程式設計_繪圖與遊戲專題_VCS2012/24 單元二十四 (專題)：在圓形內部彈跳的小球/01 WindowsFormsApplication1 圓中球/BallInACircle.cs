@@ -1,5 +1,4 @@
-﻿/* 作者：鄞永傳老師‧xnabook@yahoo.com.tw‧2009-09 */
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
@@ -16,19 +15,14 @@ namespace WindowsFormsApplication1
         public int Ball_Width = 10; // 球的半徑
         Random rd = new Random();
 
-        public BallInACircle(PointF position, 
-                         PointF velocity,
-                         RectangleF CircleRect, 
-                         int Ball_Width,
-                         Color color)
+        public BallInACircle(PointF position, PointF velocity, RectangleF CircleRect, int Ball_Width, Color color)
         {
             this.position = position; // 球的位置
             this.velocity = velocity; // 球的速度
             this.CircleRect = CircleRect; // 視窗寬高
             this.Ball_Width = Ball_Width; // 球的半徑
 
-            CircleCenter = new PointF(CircleRect.X + CircleRect.Width / 2,
-                CircleRect.Y + CircleRect.Height / 2);  // 邊界圓形的 中心點
+            CircleCenter = new PointF(CircleRect.X + CircleRect.Width / 2, CircleRect.Y + CircleRect.Height / 2);  // 邊界圓形的 中心點
             CircleD = CircleRect.Width / 2.0f;  // 邊界圓形的 半徑
         }
 
@@ -57,9 +51,7 @@ namespace WindowsFormsApplication1
             position.Y += velocity.Y;
 
             // 小球 離 邊界圓形中心點 的 位置
-            double dis = Math.Sqrt(
-                (position.X - CircleCenter.X) * (position.X - CircleCenter.X) +
-                (position.Y - CircleCenter.Y) * (position.Y - CircleCenter.Y));
+            double dis = Math.Sqrt((position.X - CircleCenter.X) * (position.X - CircleCenter.X) + (position.Y - CircleCenter.Y) * (position.Y - CircleCenter.Y));
 
             // 如果 小球已經出界了
             if (dis > CircleD - Ball_Width)
@@ -75,10 +67,11 @@ namespace WindowsFormsApplication1
                 velocity.Y = q2.Y - position.Y;
 
                 // 再次確定 小球 新的位置是在 邊界圓形 內
-                dis = Math.Sqrt((q2.X - CircleCenter.X) * (q2.X - CircleCenter.X) +
-                                (q2.Y - CircleCenter.Y) * (q2.Y - CircleCenter.Y));
+                dis = Math.Sqrt((q2.X - CircleCenter.X) * (q2.X - CircleCenter.X) + (q2.Y - CircleCenter.Y) * (q2.Y - CircleCenter.Y));
                 if (dis < CircleD - Ball_Width) // 在 邊界圓形 內
+                {
                     position = q2;              // 小球新的位置
+                }
                 else  // 不在 邊界圓形 內 => 就硬拉回 邊界圓形 內
                 {
                     PointF N = G2D_PointAndLine.VectorNormalize(CircleCenter, q2);

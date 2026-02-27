@@ -72,7 +72,7 @@
             this.listBox1.ItemHeight = 12;
             this.listBox1.Location = new System.Drawing.Point(0, 0);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(198, 160);
+            this.listBox1.Size = new System.Drawing.Size(198, 171);
             this.listBox1.TabIndex = 0;
             // 
             // panel2
@@ -180,11 +180,12 @@
             this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "A* 路徑搜尋 (滑鼠左鍵：加牆、滑鼠右鍵：拆牆)";
-            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
-            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);

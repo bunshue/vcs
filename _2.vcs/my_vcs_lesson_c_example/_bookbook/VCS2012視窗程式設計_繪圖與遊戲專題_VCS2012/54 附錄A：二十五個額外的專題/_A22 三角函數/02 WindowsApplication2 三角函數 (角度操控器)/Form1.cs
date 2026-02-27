@@ -19,14 +19,18 @@ namespace WindowsApplication1
         int AngleFrom = 0; // 開始的角度
         int AngleTo = 360; // 結束的角度
         bool VLine90, VLine180, VLine270, VLine360;// 角度直線
-        Form2 form2 = new Form2(); 
-        public float VLine=0;
+        Form2 form2 = new Form2();
+        public float VLine = 0;
 
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseWheel);
-            
+
             form2.Visible = false;
             form2.form1 = this;
             //form2.Show();
@@ -37,14 +41,19 @@ namespace WindowsApplication1
             if (e.Delta > 0)
             {
                 D = D + 1;
-                if (D > 100) D = 100;
+                if (D > 100)
+                {
+                    D = 100;
+                }
             }
             else if (e.Delta < 0)
             {
                 D = D - 1;
-                if (D < 5) D = 5;
+                if (D < 5)
+                {
+                    D = 5;
+                }
             }
-
             this.Invalidate();
         }
 
@@ -140,7 +149,9 @@ namespace WindowsApplication1
                         // 從 正的無窮大 到 負的無窮大
                     }
                     else
+                    {
                         e.Graphics.DrawLine(Pens.Brown, p0, p1);
+                    }
                     p0 = p1;
                 }
             }
@@ -162,7 +173,9 @@ namespace WindowsApplication1
                         // 從 負的無窮大 到 正的無窮大
                     }
                     else
+                    {
                         e.Graphics.DrawLine(Pens.Olive, p0, p1);
+                    }
                     p0 = p1;
                 }
             }
@@ -179,14 +192,15 @@ namespace WindowsApplication1
                     p.Y = 10 * (1 / (float)Math.Cos(i * Math.PI / 180));
                     p1 = GetPoint(p.X, p.Y);
 
-                    if ((p0.Y <= 0 && p1.Y >= -this.ClientSize.Height) ||
-                        (p0.Y >= -this.ClientSize.Height && p1.Y <= 0))
+                    if ((p0.Y <= 0 && p1.Y >= -this.ClientSize.Height) || (p0.Y >= -this.ClientSize.Height && p1.Y <= 0))
                     {
                         // 從 正的無窮大 到 負的無窮大
                         // 從 負的無窮大 到 正的無窮大
                     }
                     else
+                    {
                         e.Graphics.DrawLine(Pens.BlueViolet, p0, p1);
+                    }
                     p0 = p1;
                 }
             }
@@ -203,14 +217,15 @@ namespace WindowsApplication1
                     p.Y = 10 * (1 / (float)Math.Sin(i * Math.PI / 180));
                     p1 = GetPoint(p.X, p.Y);
 
-                    if ((p0.Y <= 0 && p1.Y >= -this.ClientSize.Height) ||
-                        (p0.Y >= -this.ClientSize.Height && p1.Y <= 0))
+                    if ((p0.Y <= 0 && p1.Y >= -this.ClientSize.Height) || (p0.Y >= -this.ClientSize.Height && p1.Y <= 0))
                     {
                         // 從 正的無窮大 到 負的無窮大
                         // 從 負的無窮大 到 正的無窮大
                     }
                     else
+                    {
                         e.Graphics.DrawLine(Pens.DimGray, p0, p1);
+                    }
                     p0 = p1;
                 }
             }
@@ -223,8 +238,14 @@ namespace WindowsApplication1
             rect.X = (int)(this.ClientSize.Width / 2 + p.X * D - 1) + grid.offset.X;
 
             float temp = this.ClientSize.Height / 2 - p.Y * D - 1 + grid.offset.Y;
-            if (temp > 1000) temp = 1000;
-            else if (temp < -1000) temp = -1000;
+            if (temp > 1000)
+            {
+                temp = 1000;
+            }
+            else if (temp < -1000)
+            {
+                temp = -1000;
+            }
             rect.Y = (int)(temp);  // for tan()
 
             rect.Width = 2;
@@ -237,8 +258,14 @@ namespace WindowsApplication1
             Point point = new Point();
             point.X = (int)(this.ClientSize.Width / 2 + x * D - 1) + grid.offset.X;
             float temp = (this.ClientSize.Height / 2 - y * D - 1) + grid.offset.Y;
-            if (temp > 1000) temp = 1000;
-            else if (temp < -1000) temp = -1000;
+            if (temp > 1000)
+            {
+                temp = 1000;
+            }
+            else if (temp < -1000)
+            {
+                temp = -1000;
+            }
             point.Y = (int)(temp);
             return point;
         }
@@ -340,3 +367,4 @@ namespace WindowsApplication1
         }
     }
 }
+

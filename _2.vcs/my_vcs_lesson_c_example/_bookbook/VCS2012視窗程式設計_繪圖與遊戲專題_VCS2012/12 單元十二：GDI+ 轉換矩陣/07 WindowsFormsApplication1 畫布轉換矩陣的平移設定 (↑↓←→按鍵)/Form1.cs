@@ -19,12 +19,16 @@ namespace WindowsFormsApplication1
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         // 表單重畫事件
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.TranslateTransform(pos.X, pos.Y);
             e.Graphics.DrawImage(bm, 0, 0); // 繪出圖形
-
             //e.Graphics.DrawImage(bm, pos); // 繪出圖形
         }
 
@@ -37,13 +41,21 @@ namespace WindowsFormsApplication1
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Up)   // 上
+            {
                 pos = new Point(pos.X, pos.Y - 10);
+            }
             else if (e.KeyData == Keys.Down) // 下
+            {
                 pos = new Point(pos.X, pos.Y + 10);
+            }
             else if (e.KeyData == Keys.Left) // 左
+            {
                 pos = new Point(pos.X - 10, pos.Y);
+            }
             else if (e.KeyData == Keys.Right) // 右
+            {
                 pos = new Point(pos.X + 10, pos.Y);
+            }
             this.Invalidate();
         }
     }

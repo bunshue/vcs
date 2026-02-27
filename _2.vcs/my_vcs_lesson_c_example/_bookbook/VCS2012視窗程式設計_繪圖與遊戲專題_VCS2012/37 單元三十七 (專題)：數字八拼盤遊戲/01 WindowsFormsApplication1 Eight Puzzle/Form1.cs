@@ -36,6 +36,10 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             image[0] = null;
             image[1] = new Bitmap(Properties.Resources.A002);
             image[2] = new Bitmap(Properties.Resources.A003);
@@ -62,7 +66,9 @@ namespace WindowsFormsApplication1
         private void button1_Click(object sender, EventArgs e)
         {
             for (int i = 0; i <= 8; i++)
+            {
                 panel[i].Tag = i;
+            }
 
             int k1, k2, t;
             for (int i = 0; i <= 20; i++)
@@ -75,13 +81,17 @@ namespace WindowsFormsApplication1
             }
 
             for (int i = 0; i <= 8; i++)
+            {
                 panel[i].BackgroundImage = image[(int)panel[i].Tag];
+            }
 
             Count = 0;
             label1.Text = Count.ToString();
 
             for (int i = 0; i <= 8; i++)
+            {
                 panel[i].Enabled = true;
+            }
         }
 
         private void panel0_Click(object sender, EventArgs e)
@@ -113,8 +123,7 @@ namespace WindowsFormsApplication1
             int k;
             for (int i = 0; i < 24; i++)
             {
-                if (LegalMove[i].X == SelectedPanelNo &&
-                    LegalMove[i].Y == EmptyPanelNo)
+                if (LegalMove[i].X == SelectedPanelNo && LegalMove[i].Y == EmptyPanelNo)
                 {
                     Count++;
                     label1.Text = Count.ToString();
@@ -135,9 +144,12 @@ namespace WindowsFormsApplication1
                 (int)panel[6].Tag == 7 && (int)panel[7].Tag == 6 && (int)panel[8].Tag == 5)
             {
                 for (int i = 0; i <= 8; i++)
+                {
                     panel[i].Enabled = false;
+                }
                 MessageBox.Show("完成了！");
             }
         }
     }
 }
+

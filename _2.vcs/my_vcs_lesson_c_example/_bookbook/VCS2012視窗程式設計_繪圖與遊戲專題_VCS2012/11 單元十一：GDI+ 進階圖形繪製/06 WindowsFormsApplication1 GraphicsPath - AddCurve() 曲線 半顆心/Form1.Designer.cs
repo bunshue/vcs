@@ -37,6 +37,7 @@
             this.ClientSize = new System.Drawing.Size(410, 299);
             this.Name = "Form1";
             this.Text = "GraphicsPath - AddCurve() 半顆心";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.ResumeLayout(false);

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Drawing.Drawing2D; // for Matrix, MatrixOrder
 
 namespace WindowsFormsApplication1
@@ -19,6 +20,11 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         // 表單重畫事件
@@ -44,7 +50,6 @@ namespace WindowsFormsApplication1
             e.Graphics.DrawEllipse(Pens.Red, 0 - D, 0 - D, 2 * D, 2 * D); //畫出縮放後的圓 
         }
 
-
         private void Form1_Resize(object sender, EventArgs e)
         {
             this.Invalidate();
@@ -57,3 +62,4 @@ namespace WindowsFormsApplication1
         }
     }
 }
+

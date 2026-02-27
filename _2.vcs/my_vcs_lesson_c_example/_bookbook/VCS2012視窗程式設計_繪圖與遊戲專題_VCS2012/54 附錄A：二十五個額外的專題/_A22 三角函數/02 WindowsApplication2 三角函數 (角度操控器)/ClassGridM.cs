@@ -44,11 +44,8 @@ namespace WindowsApplication1
                     G.DrawLine(myPen1, 0, i, w, i);
                 }
             }
-
             G.DrawLine(myPen2, w / 2 + offset.X, 0, w / 2 + offset.X, h);
             G.DrawLine(myPen2, 0, h / 2 + offset.Y, w, h / 2 + offset.Y);
-
         }
-
     }
 }

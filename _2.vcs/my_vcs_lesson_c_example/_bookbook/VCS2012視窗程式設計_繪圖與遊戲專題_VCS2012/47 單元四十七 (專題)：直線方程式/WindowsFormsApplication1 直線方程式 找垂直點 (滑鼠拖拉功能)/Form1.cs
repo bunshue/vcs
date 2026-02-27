@@ -32,6 +32,10 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseWheel);
             myPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
 
@@ -52,17 +56,24 @@ namespace WindowsFormsApplication1
             if (e.Delta > 0)
             {
                 D = D + 1;
-                if (D > 40) D = 40;
+                if (D > 40)
+                {
+                    D = 40;
+                }
             }
             else if (e.Delta < 0)
             {
                 D = D - 1;
-                if (D < 10) D = 10;
+                if (D < 10)
+                {
+                    D = 10;
+                }
             }
 
             foreach (ClassMovingPoint mp in mpList) // 更新 可移動點 物件 的 格子單位寬
+            {
                 mp.D = D;
-
+            }
             this.Invalidate();
         }
 
@@ -82,14 +93,12 @@ namespace WindowsFormsApplication1
             if (B == 0 || Math.Abs(-A / B) > 1.0)
             {
                 // 和上下邊界 水平線相切
-                e.Graphics.DrawLine(Pens.Blue, GetPoint(GetIntersect(A, B, C, 0, 1, (+this.ClientSize.Height / (2 * D)) + 1)),
-                                                     GetPoint(GetIntersect(A, B, C, 0, 1, (-this.ClientSize.Height / (2 * D)) - 1)));
+                e.Graphics.DrawLine(Pens.Blue, GetPoint(GetIntersect(A, B, C, 0, 1, (+this.ClientSize.Height / (2 * D)) + 1)), GetPoint(GetIntersect(A, B, C, 0, 1, (-this.ClientSize.Height / (2 * D)) - 1)));
             }
             else
             {
                 // 和左右邊界 垂直線相切
-                e.Graphics.DrawLine(Pens.Blue, GetPoint(GetIntersect(A, B, C, 1, 0, (+this.ClientSize.Width / (2 * D)) + 1)),
-                                                     GetPoint(GetIntersect(A, B, C, 1, 0, (-this.ClientSize.Width / (2 * D)) - 1)));
+                e.Graphics.DrawLine(Pens.Blue, GetPoint(GetIntersect(A, B, C, 1, 0, (+this.ClientSize.Width / (2 * D)) + 1)), GetPoint(GetIntersect(A, B, C, 1, 0, (-this.ClientSize.Width / (2 * D)) - 1)));
             }
 
             // 垂直線的斜率可從 -A/B 得到為 B/A 
@@ -172,7 +181,6 @@ namespace WindowsFormsApplication1
                 p.Y = -(a * C - A * c) / (a * B - A * b);
                 p.X = -(B * p.Y + C) / A;
             }
-
             return p;
         }
 
@@ -193,7 +201,6 @@ namespace WindowsFormsApplication1
             Point point = new Point();
             point.X = (int)(this.ClientSize.Width / 2 + p.X * D);
             point.Y = (int)(this.ClientSize.Height / 2 - p.Y * D);
-
             return point;
         }
 
@@ -282,3 +289,4 @@ namespace WindowsFormsApplication1
         }
     }
 }
+

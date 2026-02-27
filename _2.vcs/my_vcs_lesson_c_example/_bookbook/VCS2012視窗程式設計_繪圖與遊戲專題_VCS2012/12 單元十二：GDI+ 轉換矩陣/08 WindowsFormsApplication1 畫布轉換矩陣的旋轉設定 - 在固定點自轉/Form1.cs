@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Drawing.Drawing2D;  // MatrixOrder
 
 namespace WindowsFormsApplication1
@@ -14,9 +15,15 @@ namespace WindowsFormsApplication1
     {
         Bitmap bm = new Bitmap(Properties.Resources.Butterfly);
         float theta = 0; // 旋轉角度
+
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -40,3 +47,4 @@ namespace WindowsFormsApplication1
         }
     }
 }
+

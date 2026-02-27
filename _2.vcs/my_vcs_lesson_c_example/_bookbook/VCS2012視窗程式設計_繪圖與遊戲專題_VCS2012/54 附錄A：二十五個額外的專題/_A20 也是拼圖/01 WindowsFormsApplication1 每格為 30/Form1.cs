@@ -13,23 +13,24 @@ namespace WindowsFormsApplication1
     {
         int x0 = 30;  // 左上角座標定位點
         int y0 = 30;
-
         Rectangle rectRed, rectGreen, rectBlue;
         bool dragging = false;
         int dx, dy;
-
         List<G2D_DraggingRect> rectList = new List<G2D_DraggingRect>();
         G2D_DraggingRect rectSelected;
-        
+
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             this.ClientSize = new Size(720, 660);
 
             rectRed = new Rectangle(650, 60, 30, 30);
             rectGreen = new Rectangle(650, 100, 30, 30);
             rectBlue = new Rectangle(650, 140, 30, 30);
-
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -107,15 +108,15 @@ namespace WindowsFormsApplication1
 
         private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
-           dragging = false;
+            dragging = false;
 
-           //int x = (int)(Math.Round((rectSelected.rect.X - x0) / 30.0));
-           //int y = (int)(Math.Round((rectSelected.rect.Y - y0) / 30.0));
+            //int x = (int)(Math.Round((rectSelected.rect.X - x0) / 30.0));
+            //int y = (int)(Math.Round((rectSelected.rect.Y - y0) / 30.0));
 
-           int x = (int)((rectSelected.rect.X - x0) / 30);
-           int y = (int)((rectSelected.rect.Y - y0) / 30);
-           rectSelected.rect = new Rectangle(x * 30 + x0, y * 30 + y0, 30, 30);
-           this.Invalidate();
+            int x = (int)((rectSelected.rect.X - x0) / 30);
+            int y = (int)((rectSelected.rect.Y - y0) / 30);
+            rectSelected.rect = new Rectangle(x * 30 + x0, y * 30 + y0, 30, 30);
+            this.Invalidate();
         }
     }
 }

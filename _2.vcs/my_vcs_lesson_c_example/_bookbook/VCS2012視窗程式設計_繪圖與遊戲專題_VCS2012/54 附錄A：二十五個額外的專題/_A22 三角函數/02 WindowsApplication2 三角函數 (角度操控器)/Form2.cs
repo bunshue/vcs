@@ -10,7 +10,7 @@ namespace WindowsApplication1
 {
     public partial class Form2 : Form
     {
-        Point ct = new Point(250,150); // control point 紅色控制點
+        Point ct = new Point(250, 150); // control point 紅色控制點
         bool Moving = false; // 紅點 移動中
         Point current = new Point(); // 滑鼠游標 目前的座標
         double theta = 0; // 徑度
@@ -20,6 +20,10 @@ namespace WindowsApplication1
         public Form2()
         {
             InitializeComponent();
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
             this.ClientSize = new Size(320, 520);
         }
 
@@ -36,20 +40,20 @@ namespace WindowsApplication1
             e.Graphics.DrawLine(Pens.DarkGray, 150, 50, 150, 250);
 
             // 畫紅色小點
-            e.Graphics.FillEllipse(Brushes.Red, ct.X-10, ct.Y-10, 20, 20);
+            e.Graphics.FillEllipse(Brushes.Red, ct.X - 10, ct.Y - 10, 20, 20);
             e.Graphics.DrawLine(Pens.Red, 150, 150, ct.X, ct.Y);
 
             double thetaSign = -theta; // Y軸往下 所以角度的旋轉方向也不同
-            
+
             labelA1.Text = thetaSign.ToString() + " 徑度";
             textBox1.Text = Convert.ToString(thetaSign * 180 / Math.PI);
             labelA2.Text = Convert.ToString(Math.Sin(thetaSign));
             labelA3.Text = Convert.ToString(Math.Cos(thetaSign));
             labelA4.Text = Convert.ToString(Math.Tan(thetaSign));
 
-            labelA5.Text = Convert.ToString(1/Math.Tan(thetaSign)); //cot
-            labelA6.Text = Convert.ToString(1/Math.Cos(thetaSign)); //sec
-            labelA7.Text = Convert.ToString(1/Math.Sin(thetaSign)); //csc
+            labelA5.Text = Convert.ToString(1 / Math.Tan(thetaSign)); //cot
+            labelA6.Text = Convert.ToString(1 / Math.Cos(thetaSign)); //sec
+            labelA7.Text = Convert.ToString(1 / Math.Sin(thetaSign)); //csc
 
             form1.VLine = (float)(0.1 * thetaSign * 180 / Math.PI); // 徑度轉回角度再 縮小
             form1.Invalidate();
@@ -81,40 +85,60 @@ namespace WindowsApplication1
                 temp = (int)Math.Round(degree);
                 degree = temp;  // 先把 小數點 去掉
 
-                if (degree > 360) degree = degree - 360;
-                else if (degree < -360) degree = degree + 360;
+                if (degree > 360)
+                {
+                    degree = degree - 360;
+                }
+                else if (degree < -360)
+                {
+                    degree = degree + 360;
+                }
 
                 if (e.X >= 150) // 在右方
                 {
                     if (e.Y < current.Y)  // 滑鼠往上
+                    {
                         degree = degree - degree_D;
+                    }
                     else if (e.Y > current.Y)  // 滑鼠往下
+                    {
                         degree = degree + degree_D;
+                    }
                 }
                 else // 在左方 
                 {
                     if (e.Y < current.Y)  // 滑鼠往上
+                    {
                         degree = degree + degree_D;
+                    }
                     else if (e.Y > current.Y) // 滑鼠往下
+                    {
                         degree = degree - degree_D;
+                    }
                 }
-
 
                 if (e.Y <= 150) // 在上方
                 {
                     if (e.X < current.X)  // 滑鼠往左
+                    {
                         degree = degree - degree_D;
+                    }
                     else if (e.X > current.X) // 滑鼠往右
+                    {
                         degree = degree + degree_D;
+                    }
                 }
                 else // 在下方 
                 {
                     if (e.X < current.X)  // 滑鼠往左
+                    {
                         degree = degree + degree_D;
+                    }
                     else if (e.X > current.X)  // 滑鼠往右
+                    {
                         degree = degree - degree_D;
+                    }
                 }
-
                 current.X = e.X;
                 current.Y = e.Y;
                 this.Invalidate();

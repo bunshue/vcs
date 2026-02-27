@@ -1,5 +1,4 @@
-﻿/* 作者：鄞永傳老師‧xnabook@yahoo.com.tw‧2009-09 */
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
@@ -13,11 +12,8 @@ namespace WindowsFormsApplication1
         public int Ball_Width = 10; // 球的半徑
         SolidBrush myBrush = new SolidBrush(Color.Blue);
 
-        public BallInATriangle(PointF position, 
-                         PointF velocity,
-                         int Ball_Width,
-                         Color color)
-                         //PointF p1, PointF p2, PointF p3)
+        public BallInATriangle(PointF position, PointF velocity, int Ball_Width, Color color)
+        //PointF p1, PointF p2, PointF p3)
         {
             this.position = position; // 球的位置
             this.velocity = velocity; // 球的速度
@@ -36,14 +32,17 @@ namespace WindowsFormsApplication1
         // 輸入三角形的座標點 p1, p2, p3 是要做 碰撞測試
         public void Update(PointF p1, PointF p2, PointF p3)
         {
-             bool ret = G2D_PointAndLine.IsPointInTriangle(p1, p2, p3, position);
-             if (ret == false) return; // 如果小球不在三角形內 就不更新了
-             else
-             {
-                 LineTestAndBallUpdate(p1, p2);
-                 LineTestAndBallUpdate(p2, p3);
-                 LineTestAndBallUpdate(p1, p3);
-             }
+            bool ret = G2D_PointAndLine.IsPointInTriangle(p1, p2, p3, position);
+            if (ret == false)
+            {
+                return; // 如果小球不在三角形內 就不更新了
+            }
+            else
+            {
+                LineTestAndBallUpdate(p1, p2);
+                LineTestAndBallUpdate(p2, p3);
+                LineTestAndBallUpdate(p1, p3);
+            }
         }
 
         // 小球根據p1 p2 直線，測試碰撞 並且 更新座標 

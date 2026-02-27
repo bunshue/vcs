@@ -11,7 +11,7 @@ namespace WindowsApplication1
         public Size size = new Size(200, 40); // 肢節 的 寬高
         public float Angle = 0; // 角度
         Color color; // 肢節 的 顏色
-        public enum SegType {rect, ellipse, line, shortRect, shortEllipse};
+        public enum SegType { rect, ellipse, line, shortRect, shortEllipse };
         public SegType segType = SegType.rect;
 
         public Segment(int Width, int Height, Color color)
@@ -24,15 +24,25 @@ namespace WindowsApplication1
         public void SetSegType(int i)
         {
             if (i == 0)
+            {
                 this.segType = SegType.rect;
+            }
             else if (i == 1)
+            {
                 this.segType = SegType.ellipse;
+            }
             else if (i == 2)
+            {
                 this.segType = SegType.line;
+            }
             else if (i == 3)
+            {
                 this.segType = SegType.shortRect;
+            }
             else if (i == 4)
+            {
                 this.segType = SegType.shortEllipse;
+            }
         }
 
         // 設定 上節點 的座標
@@ -65,32 +75,49 @@ namespace WindowsApplication1
             Rectangle shortRect = new Rectangle(rect.X + 2 * D, rect.Y, rect.Width - 4 * D, rect.Height);
 
             if (segType == SegType.rect)
+            {
                 G.FillRectangle(brush, rect);
+            }
             else if (segType == SegType.ellipse)
+            {
                 G.FillEllipse(brush, rect);
+            }
             else if (segType == SegType.line)
+            {
                 G.DrawLine(pen, 0, 0, size.Width, 0);
+            }
             else if (segType == SegType.shortRect)
+            {
                 G.FillRectangle(brush, shortRect);
+            }
             else if (segType == SegType.shortEllipse)
+            {
                 G.FillEllipse(brush, shortRect);
-
+            }
             G.FillEllipse(Brushes.White, -D / 2, -D / 2, D, D);
             G.FillEllipse(Brushes.White, size.Width - D / 2, -D / 2, D, D);
 
             // 繪出邊框
-            
             if (segType == SegType.rect)
+            {
                 G.DrawRectangle(pen, rect);
+            }
             else if (segType == SegType.ellipse)
+            {
                 G.DrawEllipse(pen, rect);
+            }
             else if (segType == SegType.line)
-               { /* do nothing */ }
+            {
+                //do nothing
+            }
             else if (segType == SegType.shortRect)
+            {
                 G.DrawRectangle(pen, shortRect);
+            }
             else if (segType == SegType.shortEllipse)
+            {
                 G.DrawEllipse(pen, shortRect);
-
+            }
             G.DrawEllipse(pen, -D / 2, -D / 2, D, D);
             G.DrawEllipse(pen, size.Width - D / 2, -D / 2, D, D);
         }
@@ -101,8 +128,8 @@ namespace WindowsApplication1
             PointF P = new PointF();
             P.X = pin1.X + (float)(size.Width * Math.Cos(Angle * Math.PI / 180));
             P.Y = pin1.Y + (float)(size.Width * Math.Sin(Angle * Math.PI / 180));
-
             return P;
         }
     }
 }
+

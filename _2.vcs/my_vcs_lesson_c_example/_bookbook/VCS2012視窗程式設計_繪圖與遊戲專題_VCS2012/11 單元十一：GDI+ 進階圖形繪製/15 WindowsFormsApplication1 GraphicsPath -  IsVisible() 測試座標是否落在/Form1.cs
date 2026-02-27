@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Drawing.Drawing2D;  // for GraphicsPath
 
 namespace WindowsFormsApplication1
@@ -20,7 +21,10 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             int Cx = this.ClientSize.Width / 2; // 視窗客戶區的中心點
             int Cy = this.ClientSize.Height / 2;
 
@@ -56,8 +60,9 @@ namespace WindowsFormsApplication1
         {
             e.Graphics.DrawPath(myPen, gp); // 繪製心形 曲線
             if (show_Arrow)
-                e.Graphics.DrawLine(myPen2, 20, this.ClientSize.Height / 2,
-             this.ClientSize.Width - 20, this.ClientSize.Height / 2); // 繪製箭形直線
+            {
+                e.Graphics.DrawLine(myPen2, 20, this.ClientSize.Height / 2, this.ClientSize.Width - 20, this.ClientSize.Height / 2); // 繪製箭形直線
+            }
         }
 
         private void Form1_Resize(object sender, EventArgs e)

@@ -42,10 +42,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(466, 290);
+            this.ClientSize = new System.Drawing.Size(722, 506);
             this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "畫布轉換矩陣的旋轉設定 - 在固定點自轉";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.ResumeLayout(false);
 

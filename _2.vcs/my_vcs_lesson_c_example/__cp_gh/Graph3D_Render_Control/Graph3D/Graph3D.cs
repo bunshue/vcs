@@ -1,10 +1,7 @@
-﻿
-/*****************************************************************************
-
+﻿/*****************************************************************************
 This class has been written by Elmü (elmue@gmx.de)
 It is based on code from Michał Bryłka but has been completely rewritten from the ground.
 His code had several issues, bugs, misdesignes and a bad performance.
-
 *****************************************************************************/
 
 using System;
@@ -42,8 +39,8 @@ namespace Plot3D
         [FlagsAttribute]
         public enum eNormalize
         {
-            Center       = 1,
-            AdaptZ       = 2,
+            Center = 1,
+            AdaptZ = 2,
             CenterAdaptZ = Center | AdaptZ,
         }
 
@@ -65,19 +62,19 @@ namespace Plot3D
 
         #endregion
 
-        #region cMouse 
+        #region cMouse
 
         class cMouse
         {
             public eMouseAction me_Action;     // left mouse button action
-            public Point        mk_LastPos;    // last mouse location
-            public Point        mk_Offset;     // Offset for painting in OnPaint()
-            public TrackBar     mi_TrackRho;   // Rho trackbar (optional)
-            public TrackBar     mi_TrackTheta; // Theta trackbar (optional)
-            public TrackBar     mi_TrackPhi;   // Phi trackbar (optional)
-            public double       md_Rho   = VALUES_RHO  [2]; // 2 = Default value
-            public double       md_Theta = VALUES_THETA[2]; // 2 = Default value
-            public double       md_Phi   = VALUES_PHI  [2]; // 2 = Default value
+            public Point mk_LastPos;    // last mouse location
+            public Point mk_Offset;     // Offset for painting in OnPaint()
+            public TrackBar mi_TrackRho;   // Rho trackbar (optional)
+            public TrackBar mi_TrackTheta; // Theta trackbar (optional)
+            public TrackBar mi_TrackPhi;   // Phi trackbar (optional)
+            public double md_Rho = VALUES_RHO[2]; // 2 = Default value
+            public double md_Theta = VALUES_THETA[2]; // 2 = Default value
+            public double md_Phi = VALUES_PHI[2]; // 2 = Default value
 
             public void AssignTrackbar(eMouseAction e_Trackbar, TrackBar i_Trackbar, EventHandler i_OnScroll)
             {
@@ -88,22 +85,22 @@ namespace Plot3D
                 switch (e_Trackbar)
                 {
                     case eMouseAction.Rho:
-                        d_Values      = VALUES_RHO;
-                        mi_TrackRho   = i_Trackbar;
+                        d_Values = VALUES_RHO;
+                        mi_TrackRho = i_Trackbar;
                         break;
                     case eMouseAction.Theta:
-                        d_Values      = VALUES_THETA;
+                        d_Values = VALUES_THETA;
                         mi_TrackTheta = i_Trackbar;
                         break;
                     case eMouseAction.Phi:
-                        d_Values      = VALUES_PHI;
-                        mi_TrackPhi   = i_Trackbar;
+                        d_Values = VALUES_PHI;
+                        mi_TrackPhi = i_Trackbar;
                         break;
                 }
 
                 i_Trackbar.Minimum = (int)d_Values[0]; // 0 = Minimum
                 i_Trackbar.Maximum = (int)d_Values[1]; // 1 = Maximum
-                i_Trackbar.Value   = (int)d_Values[2]; // 2 = Default value
+                i_Trackbar.Value = (int)d_Values[2]; // 2 = Default value
                 i_Trackbar.Scroll += i_OnScroll;
             }
 
@@ -112,9 +109,9 @@ namespace Plot3D
             /// </summary>
             public void OnTrackBarScroll()
             {
-                if (mi_TrackRho   != null) md_Rho   = mi_TrackRho  .Value;
+                if (mi_TrackRho != null) md_Rho = mi_TrackRho.Value;
                 if (mi_TrackTheta != null) md_Theta = mi_TrackTheta.Value;
-                if (mi_TrackPhi   != null) md_Phi   = mi_TrackPhi  .Value;
+                if (mi_TrackPhi != null) md_Phi = mi_TrackPhi.Value;
             }
 
             /// <summary>
@@ -125,7 +122,7 @@ namespace Plot3D
                 switch (me_Action)
                 {
                     case eMouseAction.Rho:
-                        md_Rho += s32_DiffY *     VALUES_RHO[3];  // 3 = Factor
+                        md_Rho += s32_DiffY * VALUES_RHO[3];  // 3 = Factor
                         md_Rho = Math.Max(md_Rho, VALUES_RHO[0]); // 0 = Minimum
                         md_Rho = Math.Min(md_Rho, VALUES_RHO[1]); // 1 = Maximum
                         if (mi_TrackRho != null)
@@ -133,7 +130,7 @@ namespace Plot3D
                         break;
 
                     case eMouseAction.Theta:
-                        md_Theta -= s32_DiffY *       VALUES_THETA[3];  // 3 = Factor
+                        md_Theta -= s32_DiffY * VALUES_THETA[3];  // 3 = Factor
                         md_Theta = Math.Max(md_Theta, VALUES_THETA[0]); // 0 = Minimum
                         md_Theta = Math.Min(md_Theta, VALUES_THETA[1]); // 1 = Maximum
                         if (mi_TrackTheta != null)
@@ -143,7 +140,7 @@ namespace Plot3D
                     case eMouseAction.Phi:
                         md_Phi -= s32_DiffX * VALUES_PHI[3]; // 3 = Factor
                         if (md_Phi > 360.0) md_Phi -= 360.0; // continuous rotation
-                        if (md_Phi <   0.0) md_Phi += 360.0; // continuous rotation
+                        if (md_Phi < 0.0) md_Phi += 360.0; // continuous rotation
                         if (mi_TrackPhi != null)
                             mi_TrackPhi.Value = (int)md_Phi;
                         break;
@@ -179,7 +176,7 @@ namespace Plot3D
                     case eCoord.X: return md_X;
                     case eCoord.Y: return md_Y;
                     case eCoord.Z: return md_Z;
-                    default:       return 0;
+                    default: return 0;
                 }
             }
             public void SetValue(eCoord e_Coord, double d_Value)
@@ -243,7 +240,7 @@ namespace Plot3D
                 {
                     for (int Y = 0; Y < i_Points3D.GetLength(1); Y++)
                     {
-                        cPoint3D i_Point3D = i_Points3D[X,Y];
+                        cPoint3D i_Point3D = i_Points3D[X, Y];
 
                         md_MinX = Math.Min(md_MinX, i_Point3D.md_X);
                         md_MaxX = Math.Max(md_MaxX, i_Point3D.md_X);
@@ -262,12 +259,12 @@ namespace Plot3D
 
         private class cLine
         {
-            public eCoord     me_Line;    // main coordinate
-            public eCoord     me_Offset;  // secondary coordinate
-            public double     md_Label;   // Label for axis
-            public Pen        mi_Pen;
-            public double     md_Sort;
-            public double     md_Angle;
+            public eCoord me_Line;    // main coordinate
+            public eCoord me_Offset;  // secondary coordinate
+            public double md_Label;   // Label for axis
+            public Pen mi_Pen;
+            public double md_Sort;
+            public double md_Angle;
             public cPoint3D[] mi_Points3D = new cPoint3D[2] { new cPoint3D(), new cPoint3D() }; // start and end point of line
             public cPoint2D[] mi_Points2D = new cPoint2D[2] { new cPoint2D(), new cPoint2D() };
 
@@ -304,7 +301,7 @@ namespace Plot3D
         private class cPolygon
         {
             public PointF[] mk_Points;  // 4 polygon points
-            public double   md_FactorZ; // used to determine color
+            public double md_FactorZ; // used to determine color
 
             // Graphics.FillPolygon() with huge coordinates may result in an Overflow Exception
             public bool IsValid
@@ -328,8 +325,8 @@ namespace Plot3D
         private class cDrawObj
         {
             public cPolygon mi_Polygon;
-            public cLine    mi_Line;
-            public double   md_Sort;    // sorting is important. Always draw from back to front.
+            public cLine mi_Line;
+            public double md_Sort;    // sorting is important. Always draw from back to front.
         }
 
         #endregion
@@ -341,8 +338,8 @@ namespace Plot3D
             public double md_SortXY;   // Sort order of raster in area XY  (red)
             public double md_SortXZ;   // Sort order of X axis and raster in area XZ (blue)
             public double md_SortYZ;   // Sort order of Y axis and raster in area YZ (green)
-            public int    ms32_Quadrant;
-            public bool   mb_BottomView;
+            public int ms32_Quadrant;
+            public bool mb_BottomView;
 
             public cQuadrant(double d_MousePhi, cLine i_AxisX, cLine i_AxisY, cLine i_AxisZ)
             {
@@ -367,16 +364,16 @@ namespace Plot3D
                     {
                         case 0: ms32_Quadrant = i_AxisX.md_Angle + 180.0 < i_AxisZ.md_Angle ? 1 : 0; break;
                         case 1: ms32_Quadrant = i_AxisY.md_Angle + 180.0 < i_AxisZ.md_Angle ? 2 : 1; break;
-                        case 2: ms32_Quadrant = i_AxisX.md_Angle         < i_AxisZ.md_Angle ? 3 : 2; break;
-                        case 3: ms32_Quadrant = i_AxisY.md_Angle         < i_AxisZ.md_Angle ? 0 : 3; break;
+                        case 2: ms32_Quadrant = i_AxisX.md_Angle < i_AxisZ.md_Angle ? 3 : 2; break;
+                        case 3: ms32_Quadrant = i_AxisY.md_Angle < i_AxisZ.md_Angle ? 0 : 3; break;
                     }
                 }
                 else // Top View
                 {
                     switch (s32_Section45)
                     {
-                        case 0: ms32_Quadrant = i_AxisX.md_Angle         > i_AxisZ.md_Angle ? 1 : 0; break;
-                        case 1: ms32_Quadrant = i_AxisY.md_Angle         > i_AxisZ.md_Angle ? 2 : 1; break;
+                        case 0: ms32_Quadrant = i_AxisX.md_Angle > i_AxisZ.md_Angle ? 1 : 0; break;
+                        case 1: ms32_Quadrant = i_AxisY.md_Angle > i_AxisZ.md_Angle ? 2 : 1; break;
                         case 2: ms32_Quadrant = i_AxisX.md_Angle + 180.0 > i_AxisZ.md_Angle ? 3 : 2; break;
                         case 3: ms32_Quadrant = i_AxisY.md_Angle + 180.0 > i_AxisZ.md_Angle ? 0 : 3; break;
                     }
@@ -412,32 +409,32 @@ namespace Plot3D
             private double md_FactY;
             private double md_OffsY;
             // ----------------
-            public double  md_NormalizeXY;
-            public double  md_NormalizeZ;
+            public double md_NormalizeXY;
+            public double md_NormalizeZ;
 
             public void SetCoeficients(cMouse i_Mouse)
             {
-                md_Rho         =  i_Mouse.md_Rho;                           // Distance of viewer (zoom)
-                double d_Theta =  i_Mouse.md_Theta       * Math.PI / 180.0; // Height   of viewer (elevation)
-                double d_Phi   = (i_Mouse.md_Phi -180.0) * Math.PI / 180.0; // Rotation around center (-pi ... +pi)
+                md_Rho = i_Mouse.md_Rho;                           // Distance of viewer (zoom)
+                double d_Theta = i_Mouse.md_Theta * Math.PI / 180.0; // Height   of viewer (elevation)
+                double d_Phi = (i_Mouse.md_Phi - 180.0) * Math.PI / 180.0; // Rotation around center (-pi ... +pi)
 
-                md_sf   = Math.Sin(d_Phi);
-                md_cf   = Math.Cos(d_Phi);
-                md_st   = Math.Sin(d_Theta);
-                md_ct   = Math.Cos(d_Theta);
+                md_sf = Math.Sin(d_Phi);
+                md_cf = Math.Cos(d_Phi);
+                md_st = Math.Sin(d_Theta);
+                md_ct = Math.Cos(d_Theta);
                 md_Dist = 0.5; // Camera distance. Smaller values result in ugly stretched egdes when rotating.
             }
 
             public void SetSize(Size k_Size) // Control.ClientSize
             {
-                double d_Width  = k_Size.Width  * 0.0254 / 96.0; // 0.0254 m = 1 inch. Screen has 96 DPI
+                double d_Width = k_Size.Width * 0.0254 / 96.0; // 0.0254 m = 1 inch. Screen has 96 DPI
                 double d_Height = k_Size.Height * 0.0254 / 96.0;
 
                 // linear transformation coeficients
-                md_FactX =  k_Size.Width  / d_Width;
+                md_FactX = k_Size.Width / d_Width;
                 md_FactY = -k_Size.Height / d_Height;
-                
-                md_OffsX =  md_FactX * d_Width  / 2.0;
+
+                md_OffsX = md_FactX * d_Width / 2.0;
                 md_OffsY = -md_FactY * d_Height / 2.0;
             }
 
@@ -452,7 +449,7 @@ namespace Plot3D
                 // 3D coordinates with center point in the middle of the screen
                 // X positive to the right, X negative to the left
                 // Y positive to the top,   Y negative to the bottom
-                double xn = -md_sf *         X + md_cf         * Y;
+                double xn = -md_sf * X + md_cf * Y;
                 double yn = -md_cf * md_ct * X - md_sf * md_ct * Y + md_st * Z;
                 double zn = -md_cf * md_st * X - md_sf * md_st * Y - md_ct * Z + md_Rho;
 
@@ -480,9 +477,9 @@ namespace Plot3D
         // A movement of mouse by approx 1000 pixels on the screen results in getting from Min to Max or vice versa.
         //
         //                                                      MIN     MAX   DEFAULT  MOUSE FACTOR
-        static readonly double[] VALUES_RHO   = new double[] {  300,   1800,   900,    2    };
-        static readonly double[] VALUES_THETA = new double[] {   10,    170,    45,    0.25 }; // degree
-        static readonly double[] VALUES_PHI   = new double[] {    0,    360,   120,    0.4  }; // degree  (continuous rotation)
+        static readonly double[] VALUES_RHO = new double[] { 300, 1800, 900, 2 };
+        static readonly double[] VALUES_THETA = new double[] { 10, 170, 45, 0.25 }; // degree
+        static readonly double[] VALUES_PHI = new double[] { 0, 360, 120, 0.4 }; // degree  (continuous rotation)
 
         // Border in pixels around the 3D Graph in AutoSize mode
         const int AUTOSIZE_BORDER = 10;
@@ -493,21 +490,21 @@ namespace Plot3D
         // Calculate 3-dimensional Z value from X,Y values
         public delegate double delRendererFunction(double X, double Y);
 
-        Pen            mi_LinePen     = new Pen(Color.Black, 1);
-        Pen            mi_BorderPen   = new Pen(Color.FromArgb(255,180,180,180), 1); // bright gray
-        Pen[]          mi_AxisPen     = new Pen[3];
-        Pen[]          mi_RasterPen   = new Pen[3];
-        cTransform     mi_Transform   = new cTransform();
+        Pen mi_LinePen = new Pen(Color.Black, 1);
+        Pen mi_BorderPen = new Pen(Color.FromArgb(255, 180, 180, 180), 1); // bright gray
+        Pen[] mi_AxisPen = new Pen[3];
+        Pen[] mi_RasterPen = new Pen[3];
+        cTransform mi_Transform = new cTransform();
         List<cDrawObj> mi_DrawObjects = new List<cDrawObj>(); // cPolygon or cLine
-        eRaster        me_Raster      = eRaster.Off;
-        cMouse         mi_Mouse       = new cMouse();
-        SolidBrush[]   mi_Brushes;
-        Brush          mi_LegendBrush;
-        cPoint3D[,]    mi_Points3D;
-        cMinMax3D      mi_MinMax;
-        cQuadrant      mi_Quadrant;
-        bool           mb_AutoFitScreen;
-        int            ms32_PolygonCount;
+        eRaster me_Raster = eRaster.Off;
+        cMouse mi_Mouse = new cMouse();
+        SolidBrush[] mi_Brushes;
+        Brush mi_LegendBrush;
+        cPoint3D[,] mi_Points3D;
+        cMinMax3D mi_MinMax;
+        cQuadrant mi_Quadrant;
+        bool mb_AutoFitScreen;
+        int ms32_PolygonCount;
 
         /// <summary>
         /// setting LineColor = Color.Black draws black lines between the polygons
@@ -518,8 +515,14 @@ namespace Plot3D
             set
             {
                 Debug.Assert(!InvokeRequired); // Do not call from other threads or use Invoke()
-                if (value.A == 0) mi_LinePen = null; // transparent color
-                else              mi_LinePen = new Pen(value);
+                if (value.A == 0)
+                {
+                    mi_LinePen = null; // transparent color
+                }
+                else
+                {
+                    mi_LinePen = new Pen(value);
+                }
                 Invalidate(); // repaint only
             }
         }
@@ -533,8 +536,14 @@ namespace Plot3D
             set
             {
                 Debug.Assert(!InvokeRequired); // Do not call from other threads or use Invoke()
-                if (value.A == 0) mi_BorderPen = null; // transparent color
-                else              mi_BorderPen = new Pen(value);
+                if (value.A == 0)
+                {
+                    mi_BorderPen = null; // transparent color
+                }
+                else
+                {
+                    mi_BorderPen = new Pen(value);
+                }
                 Invalidate(); // repaint only
             }
         }
@@ -561,12 +570,12 @@ namespace Plot3D
             set
             {
                 Debug.Assert(!InvokeRequired); // Do not call from other threads or use Invoke()
-				if (me_Raster != value)
-				{
+                if (me_Raster != value)
+                {
                     me_Raster = value;
                     mi_DrawObjects.Clear(); // recalculate
                     Invalidate();           // repaint
-				}
+                }
             }
         }
 
@@ -576,12 +585,12 @@ namespace Plot3D
         /// </summary>
         public bool AutoFitScreen
         {
-            set 
+            set
             {
                 Debug.Assert(!InvokeRequired); // Do not call from other threads or use Invoke()
                 if (mb_AutoFitScreen != value)
                 {
-                    mb_AutoFitScreen   = value; 
+                    mb_AutoFitScreen = value;
                     mi_Mouse.mk_Offset = Point.Empty;
                     mi_DrawObjects.Clear(); // recalculate
                     Invalidate();           // repaint
@@ -613,9 +622,9 @@ namespace Plot3D
         public void AssignTrackBars(TrackBar i_Rho, TrackBar i_Theta, TrackBar i_Phi)
         {
             Debug.Assert(!InvokeRequired); // Do not call from other threads or use Invoke()
-            mi_Mouse.AssignTrackbar(eMouseAction.Rho,   i_Rho,   new EventHandler(OnTrackbarScroll));
+            mi_Mouse.AssignTrackbar(eMouseAction.Rho, i_Rho, new EventHandler(OnTrackbarScroll));
             mi_Mouse.AssignTrackbar(eMouseAction.Theta, i_Theta, new EventHandler(OnTrackbarScroll));
-            mi_Mouse.AssignTrackbar(eMouseAction.Phi,   i_Phi,   new EventHandler(OnTrackbarScroll));
+            mi_Mouse.AssignTrackbar(eMouseAction.Phi, i_Phi, new EventHandler(OnTrackbarScroll));
         }
 
         // ============================================================================
@@ -626,15 +635,15 @@ namespace Plot3D
             Debug.Assert(!InvokeRequired); // Do not call from other threads or use Invoke()
 
             // avoid flicker
-            SetStyle(ControlStyles.AllPaintingInWmPaint,  true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
 
             BackColor = Color.White;
 
             // Colors of main coordinate axis
-            mi_AxisPen[0] = new Pen(Color.DarkBlue,  3);
+            mi_AxisPen[0] = new Pen(Color.DarkBlue, 3);
             mi_AxisPen[1] = new Pen(Color.DarkGreen, 3);
-            mi_AxisPen[2] = new Pen(Color.DarkRed,   3);
+            mi_AxisPen[2] = new Pen(Color.DarkRed, 3);
 
             // Colors of secondary raster lines
             mi_RasterPen[0] = new Pen(Color.FromArgb(255, 180, 100, 100), 1);
@@ -645,7 +654,7 @@ namespace Plot3D
         }
 
         // ============================================================================
-   
+
         /// <summary>
         /// Here you can set a callback function delegate which will be called to calculate the 3D values.
         /// Use either SetFunction() or SetValues()
@@ -667,13 +676,11 @@ namespace Plot3D
                     i_Point.md_X = k_Start.X + d_Density * X;
                     i_Point.md_Y = k_Start.Y + d_Density * Y;
                     i_Point.md_Z = f_Function(i_Point.md_X, i_Point.md_Y);
-
                     mi_Points3D[X, Y] = i_Point;
                 }
             }
 
             NormalizeValues(e_Normalize);
-
             mi_Mouse.mk_Offset = Point.Empty;
             mi_DrawObjects.Clear(); // recalculate
             Invalidate();           // repaint
@@ -686,10 +693,8 @@ namespace Plot3D
         public void SetValues(cPoint3D[,] i_Points3D, eNormalize e_Normalize)
         {
             Debug.Assert(!InvokeRequired); // Do not call from other threads or use Invoke()
-
             mi_Points3D = i_Points3D;
             NormalizeValues(e_Normalize);
-
             mi_Mouse.mk_Offset = Point.Empty;
             mi_DrawObjects.Clear(); // recalculate
             Invalidate();           // repaint
@@ -710,30 +715,40 @@ namespace Plot3D
 
             ms32_PolygonCount = (mi_Points3D.GetLength(0) - 1) * (mi_Points3D.GetLength(1) - 1);
             if (ms32_PolygonCount < 1)
+            {
                 throw new Exception("Insufficient 3D points specified");
+            }
 
             // Normalize 3D X,Y,Z values to compensate different ranges of X min ... X max and Y min ... Y max
             double d_RangeXY = Math.Max(mi_MinMax.md_MaxX - mi_MinMax.md_MinX, mi_MinMax.md_MaxY - mi_MinMax.md_MinY);
             if (d_RangeXY == 0.0)
+            {
                 throw new Exception("The 3D points cannot have all the same X,Y coordinates");
+            }
 
             double d_FactorXY = 250.0 / d_RangeXY;
-            
+
             double d_FactorZ = d_FactorXY;
             if ((e_Normalize & eNormalize.AdaptZ) != 0)
             {
                 double d_RangeZ;
                 if (me_Raster == eRaster.Off)
+                {
                     d_RangeZ = mi_MinMax.md_MaxZ - mi_MinMax.md_MinZ;
+                }
                 else
+                {
                     d_RangeZ = Math.Max(0, mi_MinMax.md_MaxZ) - Math.Min(0, mi_MinMax.md_MinZ);
+                }
 
                 if (d_RangeZ > 0.0)
+                {
                     d_FactorZ = 250.0 / d_RangeZ;
+                }
             }
 
             mi_Transform.md_NormalizeXY = d_FactorXY;
-            mi_Transform.md_NormalizeZ  = d_FactorZ;
+            mi_Transform.md_NormalizeZ = d_FactorZ;
 
             if ((e_Normalize & eNormalize.Center) != 0)
             {
@@ -743,9 +758,13 @@ namespace Plot3D
                 if ((e_Normalize & eNormalize.AdaptZ) != 0)
                 {
                     if (me_Raster == eRaster.Off)
+                    {
                         mi_MinMax.mi_Center.md_Z = (mi_MinMax.md_MaxZ + mi_MinMax.md_MinZ) / 2.0;
+                    }
                     else
+                    {
                         mi_MinMax.mi_Center.md_Z = (Math.Max(0, mi_MinMax.md_MaxZ) + Math.Min(0, mi_MinMax.md_MinZ)) / 2.0;
+                    }
                 }
             }
         }
@@ -758,7 +777,9 @@ namespace Plot3D
             mi_DrawObjects.Clear();
 
             if (mi_Points3D == null)
+            {
                 return; // no 3D data present
+            }
 
             cPoint2D[,] i_Points2D = new cPoint2D[mi_Points3D.GetLength(0), mi_Points3D.GetLength(1)];
             List<cLine> i_Lines = new List<cLine>();
@@ -771,9 +792,9 @@ namespace Plot3D
             {
                 for (int Y = 0; Y < mi_Points3D.GetLength(1); Y++)
                 {
-                    cPoint3D i_Point3D = mi_Points3D[X,Y];
+                    cPoint3D i_Point3D = mi_Points3D[X, Y];
                     cPoint2D i_Point2D = mi_Transform.Project(i_Point3D, mi_MinMax.mi_Center);
-                    i_Points2D[X,Y] = i_Point2D;
+                    i_Points2D[X, Y] = i_Point2D;
 
                     d_Min2X = Math.Min(d_Min2X, i_Point2D.md_X);
                     d_Max2X = Math.Max(d_Max2X, i_Point2D.md_X);
@@ -785,9 +806,9 @@ namespace Plot3D
             if (me_Raster != eRaster.Off)
             {
                 // Add coordinate system main lines
-                for (int A=0; A<3; A++)
+                for (int A = 0; A < 3; A++)
                 {
-                    cLine i_Axis  = new cLine();
+                    cLine i_Axis = new cLine();
                     i_Axis.mi_Pen = mi_AxisPen[A];
 
                     switch ((eCoord)A)
@@ -818,56 +839,64 @@ namespace Plot3D
                 // Add raster lines in 6 different directions
                 if (me_Raster >= eRaster.Raster)
                 {
-                    for (int A=0; A<3; A++)
+                    for (int A = 0; A < 3; A++)
                     {
                         // Combine X+Y, Y+Z, Z+X
-                        eCoord e_First  = (eCoord)(A);
-                        eCoord e_Second = (eCoord)((A+1) % 3);
+                        eCoord e_First = (eCoord)(A);
+                        eCoord e_Second = (eCoord)((A + 1) % 3);
 
-                        cLine i_FirstAxis  = i_Lines[(int)e_First];
+                        cLine i_FirstAxis = i_Lines[(int)e_First];
                         cLine i_SecondAxis = i_Lines[(int)e_Second];
 
                         double d_FirstStart = i_FirstAxis.mi_Points3D[0].GetValue(e_First);
-                        double d_FirstEnd   = i_FirstAxis.mi_Points3D[1].GetValue(e_First);
+                        double d_FirstEnd = i_FirstAxis.mi_Points3D[1].GetValue(e_First);
 
                         double d_SecndStart = i_SecondAxis.mi_Points3D[0].GetValue(e_Second);
-                        double d_SecndEnd   = i_SecondAxis.mi_Points3D[1].GetValue(e_Second);
+                        double d_SecndEnd = i_SecondAxis.mi_Points3D[1].GetValue(e_Second);
 
                         // Distance between raster lines
                         double d_Interval = CalculateInterval(d_SecndEnd - d_SecndStart);
 
                         double d_OffPos = 0.0;
                         double d_OffNeg = 0.0;
-                        for (int L=1; L<=10; L++)
+                        for (int L = 1; L <= 10; L++)
                         {
                             d_OffPos += d_Interval;
                             d_OffNeg -= d_Interval;
 
                             // Draw raster on positive side
-                            if (d_OffPos <= d_SecndEnd) 
+                            if (d_OffPos <= d_SecndEnd)
+                            {
                                 AddRasterLine(i_Lines, mi_RasterPen[A], e_First, d_FirstStart, d_FirstEnd, e_Second, d_OffPos);
+                            }
 
                             // Draw raster on negative side (only if negative values exist)
-                            if (d_OffNeg >= d_SecndStart) 
+                            if (d_OffNeg >= d_SecndStart)
+                            {
                                 AddRasterLine(i_Lines, mi_RasterPen[A], e_First, d_FirstStart, d_FirstEnd, e_Second, d_OffNeg);
+                            }
                         }
 
                         d_Interval = d_Interval = CalculateInterval(d_FirstEnd - d_FirstStart);
 
                         d_OffPos = 0.0;
                         d_OffNeg = 0.0;
-                        for (int L=1; L<=10; L++)
+                        for (int L = 1; L <= 10; L++)
                         {
                             d_OffPos += d_Interval;
                             d_OffNeg -= d_Interval;
 
                             // Draw raster on positive side
-                            if (d_OffPos <= d_FirstEnd) 
+                            if (d_OffPos <= d_FirstEnd)
+                            {
                                 AddRasterLine(i_Lines, mi_RasterPen[A], e_Second, d_SecndStart, d_SecndEnd, e_First, d_OffPos);
+                            }
 
                             // Draw raster on negative side (only if negative values exist)
                             if (d_OffNeg >= d_FirstStart)
+                            {
                                 AddRasterLine(i_Lines, mi_RasterPen[A], e_Second, d_SecndStart, d_SecndEnd, e_First, d_OffNeg);
+                            }
                         }
                     }
                 }
@@ -875,7 +904,7 @@ namespace Plot3D
                 // Convert axis and raster lines 3D --> 2D
                 foreach (cLine i_Line in i_Lines)
                 {
-                    for (int P=0; P<2; P++)
+                    for (int P = 0; P < 2; P++)
                     {
                         cPoint2D i_Point2D = mi_Transform.Project(i_Line.mi_Points3D[P], mi_MinMax.mi_Center);
                         i_Line.mi_Points2D[P] = i_Point2D;
@@ -891,21 +920,21 @@ namespace Plot3D
             if (mb_AutoFitScreen)
             {
                 Size k_Screen = ClientSize;
-                k_Screen.Width  -= 2 * AUTOSIZE_BORDER;
+                k_Screen.Width -= 2 * AUTOSIZE_BORDER;
                 k_Screen.Height -= 2 * AUTOSIZE_BORDER;
 
-                double d_FactorX = k_Screen.Width  / (d_Max2X - d_Min2X);
+                double d_FactorX = k_Screen.Width / (d_Max2X - d_Min2X);
                 double d_FactorY = k_Screen.Height / (d_Max2Y - d_Min2Y);
-                double d_Factor  = Math.Min(d_FactorX, d_FactorY);
+                double d_Factor = Math.Min(d_FactorX, d_FactorY);
 
-                double d_OffsetX = AUTOSIZE_BORDER - d_Min2X * d_Factor + (k_Screen.Width  - (d_Max2X - d_Min2X) * d_Factor) / 2.0;
+                double d_OffsetX = AUTOSIZE_BORDER - d_Min2X * d_Factor + (k_Screen.Width - (d_Max2X - d_Min2X) * d_Factor) / 2.0;
                 double d_OffsetY = AUTOSIZE_BORDER - d_Min2Y * d_Factor + (k_Screen.Height - (d_Max2Y - d_Min2Y) * d_Factor) / 2.0;
 
                 for (int X = 0; X < i_Points2D.GetLength(0); X++)
                 {
                     for (int Y = 0; Y < i_Points2D.GetLength(1); Y++)
                     {
-                        cPoint2D i_Point2D = i_Points2D[X,Y];
+                        cPoint2D i_Point2D = i_Points2D[X, Y];
                         i_Point2D.md_X = i_Point2D.md_X * d_Factor + d_OffsetX;
                         i_Point2D.md_Y = i_Point2D.md_Y * d_Factor + d_OffsetY;
                     }
@@ -913,7 +942,7 @@ namespace Plot3D
 
                 foreach (cLine i_Line in i_Lines)
                 {
-                    for (int P=0; P<2; P++)
+                    for (int P = 0; P < 2; P++)
                     {
                         cPoint2D i_Point2D = i_Line.mi_Points2D[P];
                         i_Point2D.md_X = i_Point2D.md_X * d_Factor + d_OffsetX;
@@ -923,23 +952,23 @@ namespace Plot3D
             }
 
             // Avoid division by zero crash if d_Max == d_Min
-            double d_Range3Z = Math.Max(0.00001, mi_MinMax.md_MaxZ - mi_MinMax.md_MinZ); 
+            double d_Range3Z = Math.Max(0.00001, mi_MinMax.md_MaxZ - mi_MinMax.md_MinZ);
 
             // Create polygons
-            for (int X = 0; X < mi_Points3D.GetLength(0) -1; X++)
+            for (int X = 0; X < mi_Points3D.GetLength(0) - 1; X++)
             {
-                for (int Y = 0; Y < mi_Points3D.GetLength(1) -1; Y++)
+                for (int Y = 0; Y < mi_Points3D.GetLength(1) - 1; Y++)
                 {
-                    cPolygon i_Poly  = new cPolygon();
+                    cPolygon i_Poly = new cPolygon();
                     i_Poly.mk_Points = new PointF[] { i_Points2D[X,   Y]  .Coord,
                                                       i_Points2D[X,   Y+1].Coord,
                                                       i_Points2D[X+1, Y+1].Coord,
                                                       i_Points2D[X+1, Y]  .Coord };
-                    
-                    double Z1 = mi_Points3D[X,   Y]  .md_Z;
-                    double Z2 = mi_Points3D[X,   Y+1].md_Z;
-                    double Z3 = mi_Points3D[X+1, Y+1].md_Z;
-                    double Z4 = mi_Points3D[X+1, Y]  .md_Z;
+
+                    double Z1 = mi_Points3D[X, Y].md_Z;
+                    double Z2 = mi_Points3D[X, Y + 1].md_Z;
+                    double Z3 = mi_Points3D[X + 1, Y + 1].md_Z;
+                    double Z4 = mi_Points3D[X + 1, Y].md_Z;
                     double Zavrg = (Z1 + Z2 + Z3 + Z4) / 4.0;
 
                     i_Poly.md_FactorZ = (Zavrg - mi_MinMax.md_MinZ) / d_Range3Z;
@@ -947,10 +976,10 @@ namespace Plot3D
                     i_Poly.md_FactorZ = Math.Max(0.0, i_Poly.md_FactorZ);
 
                     // Polygons must be painted in correct order: from behind to front. Order depends on rotation angle.
-                    double d_Sort = mi_Transform.ProjectXY(X+1, Y+1);
+                    double d_Sort = mi_Transform.ProjectXY(X + 1, Y + 1);
 
                     AddDrawObject(i_Poly, null, d_Sort);
-                    ms32_PolygonCount ++;
+                    ms32_PolygonCount++;
                 }
             }
 
@@ -963,14 +992,14 @@ namespace Plot3D
         // Create a line from {d_Start, d_Offset} to {d_End, d_Offset}
         // The coordinates may be X,Y,Z 
         private void AddRasterLine(List<cLine> i_Lines, Pen i_Pen,
-                                   eCoord e_Line,   double d_Start, double d_End, 
+                                   eCoord e_Line, double d_Start, double d_End,
                                    eCoord e_Offset, double d_Offset)
         {
             cLine i_Raster = new cLine();
-            i_Raster.mi_Pen    = i_Pen;
-            i_Raster.me_Line   = e_Line;
+            i_Raster.mi_Pen = i_Pen;
+            i_Raster.me_Line = e_Line;
             i_Raster.me_Offset = e_Offset;
-            i_Raster.md_Label  = d_Offset;
+            i_Raster.md_Label = d_Offset;
 
             i_Raster.mi_Points3D[0].SetValue(e_Line, d_Start);
             i_Raster.mi_Points3D[1].SetValue(e_Line, d_End);
@@ -1004,11 +1033,17 @@ namespace Plot3D
         {
             double d_Factor = Math.Pow(10.0, Math.Floor(Math.Log10(d_Range)));
             if (d_Range / d_Factor >= 5.0)
+            {
                 return d_Factor;
+            }
             else if (d_Range / (d_Factor / 2.0) >= 5.0)
+            {
                 return d_Factor / 2.0;
+            }
             else
+            {
                 return d_Factor / 5.0;
+            }
         }
 
         /// <summary>
@@ -1018,14 +1053,16 @@ namespace Plot3D
         {
             cDrawObj i_DrawObj = new cDrawObj();
             i_DrawObj.mi_Polygon = i_Poly;
-            i_DrawObj.mi_Line    = i_Line;
-            i_DrawObj.md_Sort    = d_Sort;
+            i_DrawObj.mi_Line = i_Line;
+            i_DrawObj.md_Sort = d_Sort;
 
             int P;
-            for (P=0; P<mi_DrawObjects.Count; P++)
+            for (P = 0; P < mi_DrawObjects.Count; P++)
             {
                 if (mi_DrawObjects[P].md_Sort > d_Sort)
+                {
                     break;
+                }
             }
             mi_DrawObjects.Insert(P, i_DrawObj);
         }
@@ -1039,24 +1076,26 @@ namespace Plot3D
         protected override void OnPaint(PaintEventArgs e)
         {
             if (mi_DrawObjects.Count == 0)
+            {
                 CalcPolygons();
+            }
 
             e.Graphics.Clear(BackColor);
 
             if (mi_LegendBrush != null)
             {
                 String[] s_Legend = new String[] { "Rotation:", "Elevation:", "Distance:" };
-                String[] s_Value  = new String[] { String.Format("{0:+#;-#;0}°", (int)mi_Mouse.md_Phi),
+                String[] s_Value = new String[] { String.Format("{0:+#;-#;0}°", (int)mi_Mouse.md_Phi),
                                                    String.Format("{0:+#;-#;0}°", (int)mi_Mouse.md_Theta),
                                                    String.Format("{0}",          (int)mi_Mouse.md_Rho) };
 
                 SizeF k_Size = e.Graphics.MeasureString(s_Legend[1], Font); // measure the widest string
                 int X = 4;
                 int Y = 3;
-                for (int i=0; i<3; i++)
+                for (int i = 0; i < 3; i++)
                 {
-                    e.Graphics.DrawString(s_Legend[i], Font, mi_LegendBrush, X,  Y);
-                    e.Graphics.DrawString(s_Value [i], Font, mi_LegendBrush, X + k_Size.Width, Y);
+                    e.Graphics.DrawString(s_Legend[i], Font, mi_LegendBrush, X, Y);
+                    e.Graphics.DrawString(s_Value[i], Font, mi_LegendBrush, X + k_Size.Width, Y);
                     Y += Font.Height;
                 }
             }
@@ -1072,7 +1111,9 @@ namespace Plot3D
                 {
                     cPolygon i_Poly = i_DrawObj.mi_Polygon;
                     if (!i_Poly.IsValid)
+                    {
                         continue; // avoid overflow exception
+                    }
 
                     Brush i_Brush = Brushes.Goldenrod;
                     if (mi_Brushes != null)
@@ -1099,7 +1140,9 @@ namespace Plot3D
                 {
                     cLine i_Line = i_DrawObj.mi_Line;
                     if (!i_Line.IsValid)
+                    {
                         continue; // avoid hanging
+                    }
 
                     if (e_Smooth != SmoothingMode.AntiAlias) // avoid unneccessary calls into GDI+ (speed optimization)
                     {
@@ -1111,8 +1154,8 @@ namespace Plot3D
 
                     // ------------ Label ------------
 
-                    if (me_Raster == eRaster.Labels        && 
-                        i_Line.md_Label           != 0.0   && // no label for main axis
+                    if (me_Raster == eRaster.Labels &&
+                        i_Line.md_Label != 0.0 && // no label for main axis
                         mi_Quadrant.mb_BottomView == false && // no label in bottom view
                         mi_Quadrant.ms32_Quadrant == 3)       // only in quadrant 3 showing labels makes sense
                     {
@@ -1134,8 +1177,10 @@ namespace Plot3D
                             k_Pos.Y += (float)mi_Transform.ProjectXY(5, -Font.Height / 2);
                             i_Format.Alignment = StringAlignment.Far;
                         }
-                        else continue;
-
+                        else
+                        {
+                            continue;
+                        }
                         String s_Label = ((int)i_Line.md_Label).ToString();
                         e.Graphics.DrawString(s_Label, Font, Brushes.Black, k_Pos, i_Format);
                     }
@@ -1159,8 +1204,10 @@ namespace Plot3D
             mi_Mouse.mk_LastPos = e.Location;
 
             if (mi_DrawObjects.Count == 0)
+            {
                 return;
-           
+            }
+
             switch (Control.ModifierKeys)
             {
                 case Keys.None:

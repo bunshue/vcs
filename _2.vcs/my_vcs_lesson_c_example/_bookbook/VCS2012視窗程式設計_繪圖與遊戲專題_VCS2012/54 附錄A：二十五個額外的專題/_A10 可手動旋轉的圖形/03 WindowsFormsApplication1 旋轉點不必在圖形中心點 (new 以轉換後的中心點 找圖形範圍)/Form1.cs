@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Drawing.Drawing2D;
 
 namespace WindowsFormsApplication1
@@ -19,12 +20,16 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             this.ClientSize = new Size(600, 600);
             Point pos = new Point(this.ClientSize.Width / 4, this.ClientSize.Height / 4);
             image01 = new G2D_ImageRotateBias(bitmap, pos, new Point(bitmap.Width / 2, bitmap.Height / 2));
 
             pos = new Point(this.ClientSize.Width / 2, this.ClientSize.Height / 2);
-            image02 = new G2D_ImageRotateBias(bitmap2, pos, new Point(bitmap2.Width *3/ 4, bitmap2.Height *3/ 4));
+            image02 = new G2D_ImageRotateBias(bitmap2, pos, new Point(bitmap2.Width * 3 / 4, bitmap2.Height * 3 / 4));
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -66,3 +71,4 @@ namespace WindowsFormsApplication1
         }
     }
 }
+

@@ -16,19 +16,28 @@ namespace WindowsFormsApplication1
 
             double Product = p1p2.X * p1q1.Y - p1q1.X * p1p2.Y;
 
-            if (Product > 0) return 1; // 右側，在正常的 2D 座標系統 是左側 return -1
-            else if (Product < 0) return -1; // 左側，在正常的 2D 座標系統 是右側 return 1
+            if (Product > 0)
+            {
+                return 1; // 右側，在正常的 2D 座標系統 是左側 return -1
+            }
+            else if (Product < 0)
+            {
+                return -1; // 左側，在正常的 2D 座標系統 是右側 return 1
+            }
             else // Product == 0  在 向量的延伸線 上
             {
                 float MaxX = (p1.X > p2.X ? p1.X : p2.X);
                 float MinX = (p1.X < p2.X ? p1.X : p2.X);
                 float MaxY = (p1.Y > p2.Y ? p1.Y : p2.Y);
                 float MinY = (p1.Y < p2.Y ? p1.Y : p2.Y);
-                if (q1.X <= MaxX && q1.X >= MinX && 
-                    q1.Y <= MaxY && q1.Y >= MinY) // q1 在 向量上
+                if (q1.X <= MaxX && q1.X >= MinX && q1.Y <= MaxY && q1.Y >= MinY) // q1 在 向量上
+                {
                     return 0; // q1 在 向量上
+                }
                 else
+                {
                     return -101; // q1 在 向量的延伸線 上
+                }
             }
         }
 
@@ -50,11 +59,17 @@ namespace WindowsFormsApplication1
             double Product_p3p1p3q1 = p3p1.X * p3q1.Y - p3q1.X * p3p1.Y;
 
             if (Product_p1p2p1q1 <= 0 && Product_p2p3p2q1 <= 0 && Product_p3p1p3q1 <= 0)
+            {
                 return true;
+            }
             else if (Product_p1p2p1q1 >= 0 && Product_p2p3p2q1 >= 0 && Product_p3p1p3q1 >= 0)
+            {
                 return true;
+            }
             else
+            {
                 return false;
+            }
         }
 
         // 計算 點 q1 至 直線 p1 p2 的 直線距離D、交叉點H、及對側點 q2的座標
@@ -70,7 +85,7 @@ namespace WindowsFormsApplication1
             double L = A * q1.X + B * q1.Y + C;
             D = Math.Abs(L) / Math.Sqrt(S);
             H = new PointF((float)(q1.X - A * L / S), (float)(q1.Y - B * L / S));
-            q2 = new PointF((float)(q1.X - 2*A * L / S), (float)(q1.Y - 2*B * L / S));
+            q2 = new PointF((float)(q1.X - 2 * A * L / S), (float)(q1.Y - 2 * B * L / S));
         }
 
         // 向量正規化   由一個向量 => 一個長度為 1 的向量
@@ -89,3 +104,4 @@ namespace WindowsFormsApplication1
         }
     }
 }
+

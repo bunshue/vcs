@@ -13,8 +13,7 @@ namespace WindowsFormsApplication1
     {
         double Theta = -Math.PI / 2;
         Pen MyPen = new Pen(Color.DarkBlue, 10);
-        Font fn = new Font("標楷體", 12); //("Times New Roman", 12);
-
+        Font fn = new Font("標楷體", 12);
         int x0, y0; // 起初的位置
         int D = 100; // 力道
         ClassCannon b;
@@ -25,6 +24,10 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             MyPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
             MyPen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
         }
@@ -44,43 +47,30 @@ namespace WindowsFormsApplication1
 
             for (int i = mylist.Count - 1; i >= 0; i--)
             {
-                if (mylist[i].x < 0 || mylist[i].x > w || // 超過視窗左右邊界時
-                    mylist[i].y > h)  // 超過視窗下緣時 
+                //   超過視窗左右邊界時                    超過視窗下緣時
+                if (mylist[i].x < 0 || mylist[i].x > w || mylist[i].y > h)
+                {
                     mylist.RemoveAt(i);
+                }
                 else
+                {
                     mylist[i].Draw(e.Graphics);
+                }
             }
 
-            e.Graphics.DrawString("發射座標 : (" + x0.ToString() + "," + y0.ToString() + ")",
-                fn, Brushes.Black, 10, 10, StringFormat.GenericTypographic);
-
-            e.Graphics.DrawString("發射仰角角度 : " + (-Theta * 180 / Math.PI).ToString(),
-                fn, Brushes.Black, 10, 30, StringFormat.GenericTypographic);
-
-            e.Graphics.DrawString("發射速度 (力道) : " + D.ToString(),
-                fn, Brushes.Black, 10, 50, StringFormat.GenericTypographic);
+            e.Graphics.DrawString("發射座標 : (" + x0.ToString() + "," + y0.ToString() + ")", fn, Brushes.Black, 10, 10, StringFormat.GenericTypographic);
+            e.Graphics.DrawString("發射仰角角度 : " + (-Theta * 180 / Math.PI).ToString(), fn, Brushes.Black, 10, 30, StringFormat.GenericTypographic);
+            e.Graphics.DrawString("發射速度 (力道) : " + D.ToString(), fn, Brushes.Black, 10, 50, StringFormat.GenericTypographic);
 
             if (mylist.Count >= 1)
             {
-                e.Graphics.DrawString("拋體目前座標 : (" + mylist[0].x.ToString() + "," + mylist[0].y.ToString() + ")",
-                    fn, Brushes.Blue, 10, 70, StringFormat.GenericTypographic);
-
-                e.Graphics.DrawString("(X軸速度, Y軸速度) : (" + mylist[0].vx.ToString() + "," + mylist[0].vy.ToString() + ")",
-                    fn, Brushes.Blue, 10, 90, StringFormat.GenericTypographic);
-
-                e.Graphics.DrawString("目前的速度 : " + mylist[0].v.ToString(),
-                    fn, Brushes.Blue, 10, 110, StringFormat.GenericTypographic);
-
-                e.Graphics.DrawString("拋射的最大高度 : " + mylist[0].h.ToString(),
-                    fn, Brushes.Blue, 10, 130, StringFormat.GenericTypographic);
-
-                e.Graphics.DrawString("拋體在空中停留的時間 : " + mylist[0].T.ToString() + " 秒",
-                    fn, Brushes.Blue, 10, 150, StringFormat.GenericTypographic);
-
-                e.Graphics.DrawString("拋射的最遠距離 : " + mylist[0].R.ToString(),
-                    fn, Brushes.Blue, 10, 170, StringFormat.GenericTypographic);
+                e.Graphics.DrawString("拋體目前座標 : (" + mylist[0].x.ToString() + "," + mylist[0].y.ToString() + ")", fn, Brushes.Blue, 10, 70, StringFormat.GenericTypographic);
+                e.Graphics.DrawString("(X軸速度, Y軸速度) : (" + mylist[0].vx.ToString() + "," + mylist[0].vy.ToString() + ")", fn, Brushes.Blue, 10, 90, StringFormat.GenericTypographic);
+                e.Graphics.DrawString("目前的速度 : " + mylist[0].v.ToString(), fn, Brushes.Blue, 10, 110, StringFormat.GenericTypographic);
+                e.Graphics.DrawString("拋射的最大高度 : " + mylist[0].h.ToString(), fn, Brushes.Blue, 10, 130, StringFormat.GenericTypographic);
+                e.Graphics.DrawString("拋體在空中停留的時間 : " + mylist[0].T.ToString() + " 秒", fn, Brushes.Blue, 10, 150, StringFormat.GenericTypographic);
+                e.Graphics.DrawString("拋射的最遠距離 : " + mylist[0].R.ToString(), fn, Brushes.Blue, 10, 170, StringFormat.GenericTypographic);
             }
-
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -88,12 +78,16 @@ namespace WindowsFormsApplication1
             if (e.KeyData == Keys.A || e.KeyData == Keys.Left)
             {
                 if (Theta >= -2)
+                {
                     Theta = Theta - 0.05;
+                }
             }
             else if (e.KeyData == Keys.D || e.KeyData == Keys.Right)
             {
                 if (Theta < 0)
+                {
                     Theta = Theta + 0.05;
+                }
             }
             else if (e.KeyData == Keys.W || e.KeyData == Keys.Up)
             {
@@ -101,8 +95,14 @@ namespace WindowsFormsApplication1
             }
             else if (e.KeyData == Keys.S || e.KeyData == Keys.Down)
             {
-                if (D <= 0) D = 0;
-                else D -= 5;
+                if (D <= 0)
+                {
+                    D = 0;
+                }
+                else
+                {
+                    D -= 5;
+                }
             }
             else if (e.KeyData == Keys.Space && SpaceUp)
             {
@@ -111,10 +111,8 @@ namespace WindowsFormsApplication1
                 mylist.Add(b);
                 timer1.Enabled = true;
             }
-
             this.Invalidate();
         }
-
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
@@ -124,7 +122,9 @@ namespace WindowsFormsApplication1
             }
 
             if (e.KeyData == Keys.P)
+            {
                 timer1.Enabled = !timer1.Enabled;
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -133,3 +133,5 @@ namespace WindowsFormsApplication1
         }
     }
 }
+
+

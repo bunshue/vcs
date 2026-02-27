@@ -1,5 +1,4 @@
-﻿// 作者：鄞永傳老師  xnabook@yahoo.com.tw  2008.12.14
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,7 +22,10 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             myPen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
 
             // 加入三個可移動點  當作 三角形 的三個頂點
@@ -36,10 +38,7 @@ namespace WindowsFormsApplication1
             mpList.Add(mp);
 
             Point q1 = new Point(300, 300);  // 獨立的一點 當作 小球的座標
-            ball = new BallInATriangle(q1,
-                new PointF(2, 3),
-                D,
-                Color.Red);
+            ball = new BallInATriangle(q1, new PointF(2, 3), D, Color.Red);
 
             isBallInTriangle(); // 小球 是否在三角形內
         }
@@ -97,9 +96,13 @@ namespace WindowsFormsApplication1
         {
             bool ret = G2D_PointAndLine.IsPointInTriangle(mpList[0].pos, mpList[1].pos, mpList[2].pos, ball.position);
             if (ret == true)
+            {
                 label1.Text = "小球 在 p1 p2 p3 三角形內！ (Inside)";
+            }
             else
+            {
                 label1.Text = "小球 不在 p1 p2 p3 三角形內！ (Outside)";
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -110,3 +113,4 @@ namespace WindowsFormsApplication1
         }
     }
 }
+

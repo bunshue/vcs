@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Drawing.Drawing2D; // MatrixOrder
 
 namespace WindowsFormsApplication1
@@ -13,9 +14,15 @@ namespace WindowsFormsApplication1
     public partial class Form1 : Form
     {
         float xScale = 1; // X 軸縮放倍數
+
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         // 表單重畫事件
@@ -39,7 +46,10 @@ namespace WindowsFormsApplication1
         private void button1_Click(object sender, EventArgs e)
         {
             xScale = xScale - 0.1f;
-            if (xScale <= 0.1f) xScale = 0.1f;
+            if (xScale <= 0.1f)
+            {
+                xScale = 0.1f;
+            }
             this.Invalidate();
         }
 

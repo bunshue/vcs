@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Drawing.Drawing2D; // for Matrix
 
 namespace WindowsFormsApplication1
@@ -15,6 +16,11 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -42,7 +48,7 @@ namespace WindowsFormsApplication1
             Matrix myMatrix4 = new Matrix(rect2, pt2); // 第四種方式
 
             e.Graphics.Transform = myMatrix1;
-
         }
     }
 }
+

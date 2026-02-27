@@ -17,17 +17,15 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             CircleRect = new Rectangle(20, 20, 400, 400); // 邊界圓形的矩形區域
-            ball = new BallInACircle(new PointF(210, 310), 
-                         new PointF(3, 5),
-                         CircleRect, 
-                         10,
-                         Color.Red);
+            ball = new BallInACircle(new PointF(210, 310), new PointF(3, 5), CircleRect, 10, Color.Red);
 
             // 調整 視窗客戶區的寬高
-            this.ClientSize = new Size((int)(CircleRect.Width + 2 * CircleRect.X),
-                (int)(CircleRect.Height + 2 * CircleRect.Y));
+            this.ClientSize = new Size((int)(CircleRect.Width + 2 * CircleRect.X), (int)(CircleRect.Height + 2 * CircleRect.Y));
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -36,12 +34,9 @@ namespace WindowsFormsApplication1
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
             // 輔助線條
-            e.Graphics.DrawLine(Pens.Silver, CircleRect.X, CircleRect.Y + CircleRect.Height / 2,
-                CircleRect.X + CircleRect.Width, CircleRect.Y + CircleRect.Height / 2);
+            e.Graphics.DrawLine(Pens.Silver, CircleRect.X, CircleRect.Y + CircleRect.Height / 2, CircleRect.X + CircleRect.Width, CircleRect.Y + CircleRect.Height / 2);
 
-            e.Graphics.DrawLine(Pens.Silver, CircleRect.X + CircleRect.Width/ 2, CircleRect.Y,
-                CircleRect.X + CircleRect.Width/2, CircleRect.Y + CircleRect.Height);
-
+            e.Graphics.DrawLine(Pens.Silver, CircleRect.X + CircleRect.Width / 2, CircleRect.Y, CircleRect.X + CircleRect.Width / 2, CircleRect.Y + CircleRect.Height);
 
             ball.DrawCircle(e.Graphics, Color.Red); // 繪出 邊界圓形
             ball.Draw(e.Graphics, Color.Blue); // 繪出  圓形中的小球

@@ -1,5 +1,4 @@
-﻿/* 作者：鄞永傳老師‧xnabook@yahoo.com.tw‧2009-09 */
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing; // Point
@@ -26,14 +25,18 @@ namespace WindowsFormsApplication1
                 dy = y - p.Y;
                 return true;
             }
-            else return false;
+            else
+            {
+                return false;
+            }
         }
 
         // 更新 點的座標
         public void Move(int x, int y)  // 滑鼠的位置
         {
-            p.X = (x - dx); 
+            p.X = (x - dx);
             p.Y = (y - dy);
         }
     }
 }
+

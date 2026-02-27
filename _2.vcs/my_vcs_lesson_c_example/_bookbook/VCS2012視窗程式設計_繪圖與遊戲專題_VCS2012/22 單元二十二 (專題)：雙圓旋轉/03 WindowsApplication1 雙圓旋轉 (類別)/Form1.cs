@@ -1,5 +1,4 @@
-﻿/* 作者：鄞永傳老師‧xnabook@yahoo.com.tw‧2009-09 */
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,12 +10,16 @@ namespace WindowsApplication1
 {
     public partial class Form1 : Form
     {
-
         ClassDoubleCircles doubleCircles, doubleCircles2;
 
         public Form1()
         {
             InitializeComponent();
+        }
+
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             doubleCircles = new ClassDoubleCircles(100, 100, 50, 100);
             doubleCircles2 = new ClassDoubleCircles(400, 400, 50, 100);
         }

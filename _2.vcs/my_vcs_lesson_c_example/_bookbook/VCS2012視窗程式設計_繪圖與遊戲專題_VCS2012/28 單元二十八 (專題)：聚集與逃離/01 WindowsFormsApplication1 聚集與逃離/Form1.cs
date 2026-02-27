@@ -20,7 +20,10 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             int X, Y;
             for (int i = 0; i < smallBallCount; i++)  // 初始化 200 顆小球
             {
@@ -59,10 +62,16 @@ namespace WindowsFormsApplication1
         {
             // 讓大球 逐漸 逼近 滑鼠的座標
             BigBall.X = BigBall.X + (Mouse.X - BigBall.X) / 10;
-            if (Math.Abs(Mouse.X - BigBall.X) < 1) BigBall.X = Mouse.X;
+            if (Math.Abs(Mouse.X - BigBall.X) < 1)
+            {
+                BigBall.X = Mouse.X;
+            }
 
             BigBall.Y = BigBall.Y + (Mouse.Y - BigBall.Y) / 10;
-            if (Math.Abs(Mouse.Y - BigBall.Y) < 1) BigBall.Y = Mouse.Y;
+            if (Math.Abs(Mouse.Y - BigBall.Y) < 1)
+            {
+                BigBall.Y = Mouse.Y;
+            }
 
             double X, Y; // 小球 新的座標
             double D;    // 小球 和 大球 的距離
@@ -71,9 +80,7 @@ namespace WindowsFormsApplication1
             // 更新 小球的座標
             for (int i = 0; i <= R.Count - 1; i++)
             {
-                D = Math.Sqrt(
-                    (R[i].X - BigBall.X) * (R[i].X - BigBall.X) +
-                    (R[i].Y - BigBall.Y) * (R[i].Y - BigBall.Y));
+                D = Math.Sqrt((R[i].X - BigBall.X) * (R[i].X - BigBall.X) + (R[i].Y - BigBall.Y) * (R[i].Y - BigBall.Y));
 
                 if (D < 50) // 距離 50 以內 快速逃離
                 {
@@ -128,7 +135,6 @@ namespace WindowsFormsApplication1
             {
                 e.Graphics.FillEllipse(Brushes.Silver, R[i].X - 5, R[i].Y - 5, 10, 10);
             }
-
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
@@ -136,7 +142,7 @@ namespace WindowsFormsApplication1
             // 紀錄滑鼠的座標
             Mouse.X = e.X;
             Mouse.Y = e.Y;
-
         }
     }
 }
+

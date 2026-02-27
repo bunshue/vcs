@@ -7,7 +7,7 @@ namespace WindowsApplication1
 {
     class DraggingSegments
     {
-        Segment[] seg ;
+        Segment[] seg;
 
         // snake01 = new DraggingSegments(10, 60, 20, Color.Red, Color.Blue);
         public DraggingSegments(int segNo, int segW, int segH, Color color1, Color color2)
@@ -20,25 +20,26 @@ namespace WindowsApplication1
             for (int i = 1; i < seg.Length; i++)
             {
                 if (i % 2 == 0)
+                {
                     seg[i] = new Segment(segW, segH, color1);
+                }
                 else
+                {
                     seg[i] = new Segment(segW, segH, color2);
-
+                }
                 seg[i].SetPos(seg[i - 1].GetPin2());
             }
-
         }
 
         public void Update(int X, int Y)
         {
             drag(seg[seg.Length - 1], X, Y);
-
             for (int i = seg.Length - 2; i >= 0; i--)
             {
                 drag(seg[i], (int)seg[i + 1].pin1.X, (int)seg[i + 1].pin1.Y);
             }
         }
-        
+
         void drag(Segment seg, int X, int Y)
         {
             float dx = X - seg.pin1.X;
@@ -63,3 +64,4 @@ namespace WindowsApplication1
         }
     }
 }
+

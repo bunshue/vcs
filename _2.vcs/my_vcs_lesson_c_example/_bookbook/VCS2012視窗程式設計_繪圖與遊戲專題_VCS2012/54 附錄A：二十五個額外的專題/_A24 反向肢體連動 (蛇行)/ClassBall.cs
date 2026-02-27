@@ -1,5 +1,4 @@
-﻿/* 作者：鄞永傳老師‧xnabook@yahoo.com.tw‧2009-09 */
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
@@ -14,11 +13,7 @@ namespace WindowsApplication1
         public int Ball_Width = 10; // 球的半徑
         SolidBrush myBrush = new SolidBrush(Color.Blue);
 
-        public ClassBall(Point position, 
-                         Point velocity, 
-                         Size clientSize, 
-                         int Ball_Width,
-                         Color color)
+        public ClassBall(Point position, Point velocity, Size clientSize, int Ball_Width, Color color)
         {
             this.position = position; // 球的位置
             this.velocity = velocity; // 球的速度
@@ -55,7 +50,6 @@ namespace WindowsApplication1
                 velocity.X = -velocity.X;
                 position.X = Ball_Width;
             }
-
             //  上邊界
             else if (position.Y < Ball_Width)
             {

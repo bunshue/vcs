@@ -13,22 +13,22 @@ namespace WindowsFormsApplication1
     {
         int x0 = 30;  // 左上角座標定位點
         int y0 = 30;
-
         Rectangle rectRed, rectGreen, rectBlue; // 三個顏色方塊 出發點
         bool dragging = false; // 是否拖曳中
         int dx, dy;  // 滑鼠偏移值
-
         List<G2D_DraggingRect> rectList = new List<G2D_DraggingRect>(); // 方塊清單
         G2D_DraggingRect rectSelected; // 被選中的方塊
         int rectListNow; // 被選中的方塊 的編號  刪除時要用的
-
         int Grid = 20; // 格子數目
         int Gwidth; // 格子寬
-        
+
         public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             InitialGrid();
         }
 
@@ -124,21 +124,21 @@ namespace WindowsFormsApplication1
 
         private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
-           dragging = false;
+            dragging = false;
 
-           int x = (int)((rectSelected.rect.X - x0) / Gwidth);
-           int y = (int)((rectSelected.rect.Y - y0) / Gwidth);
+            int x = (int)((rectSelected.rect.X - x0) / Gwidth);
+            int y = (int)((rectSelected.rect.Y - y0) / Gwidth);
 
-           if (x < 0 || x >= Grid || y < 0 || y >= Grid) // 拖到外面 就刪除 
-           {
-               rectList.RemoveAt(rectListNow);
-           }
-           else // 拖到裡面 就 就定位 
-           {
-               rectSelected.rect = new Rectangle(x * Gwidth + x0, y * Gwidth + y0, Gwidth, Gwidth);
-           }
+            if (x < 0 || x >= Grid || y < 0 || y >= Grid) // 拖到外面 就刪除 
+            {
+                rectList.RemoveAt(rectListNow);
+            }
+            else // 拖到裡面 就 就定位 
+            {
+                rectSelected.rect = new Rectangle(x * Gwidth + x0, y * Gwidth + y0, Gwidth, Gwidth);
+            }
 
-           this.Invalidate();
+            this.Invalidate();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)

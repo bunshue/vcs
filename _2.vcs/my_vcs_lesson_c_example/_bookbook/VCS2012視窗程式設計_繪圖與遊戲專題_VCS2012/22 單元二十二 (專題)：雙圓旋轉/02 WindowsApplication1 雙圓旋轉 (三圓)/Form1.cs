@@ -1,5 +1,4 @@
-﻿/* 作者：鄞永傳老師‧xnabook@yahoo.com.tw‧2009-09 */
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,7 +15,7 @@ namespace WindowsApplication1
         Pen pen03 = new Pen(Color.Green, 4);// 外圓 的筆刷
 
         double angle = 0;            // 內圓 的角度
-        double angle2 = Math.PI ; // 外圓 的角度
+        double angle2 = Math.PI; // 外圓 的角度
         double angleDelta = 0.1;     // 旋轉的角度遞增值
 
         int inner = 100; // 內圓 的半徑
@@ -32,6 +31,10 @@ namespace WindowsApplication1
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             // 內外圓 的筆刷樣式設定
             pen01.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
             pen02.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
@@ -45,8 +48,7 @@ namespace WindowsApplication1
             int y0 = this.ClientSize.Height / 2;
 
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            e.Graphics.DrawImage(bitmap, x0 - bitmap.Width / 2, y0 - bitmap.Height/2, bitmap.Width, bitmap.Height);
-
+            e.Graphics.DrawImage(bitmap, x0 - bitmap.Width / 2, y0 - bitmap.Height / 2, bitmap.Width, bitmap.Height);
 
             // 繪出內外圓 的大圓
             e.Graphics.DrawEllipse(pen01, x0 - inner, y0 - inner, inner * 2, inner * 2);
@@ -58,7 +60,7 @@ namespace WindowsApplication1
             for (int i = 0; i < innerNo; i++)
             {
                 // 依旋轉角度angle算出 座標
-                x = x0 + (int)((inner-10) * Math.Cos(angle + i*(Math.PI*2 / innerNo)));
+                x = x0 + (int)((inner - 10) * Math.Cos(angle + i * (Math.PI * 2 / innerNo)));
                 y = y0 + (int)((inner - 10) * Math.Sin(angle + i * (Math.PI * 2 / innerNo)));
                 e.Graphics.FillEllipse(Brushes.Red, x - 10, y - 10, 20, 20);
             }
@@ -106,31 +108,43 @@ namespace WindowsApplication1
             if (dist < inner) // 滑鼠在內圓按下
             {
                 if (e.Button == MouseButtons.Left)  // 滑鼠左鍵 增加小圓球
+                {
                     innerNo++;
+                }
                 else if (e.Button == MouseButtons.Right) // 滑鼠右鍵 減少小圓球
                 {
                     if (innerNo > 0)
+                    {
                         innerNo--;
+                    }
                 }
             }
             else if (dist < outer) // 滑鼠在外圓按下
             {
                 if (e.Button == MouseButtons.Left)
+                {
                     outerNo++;
+                }
                 else if (e.Button == MouseButtons.Right)
                 {
                     if (outerNo > 0)
+                    {
                         outerNo--;
+                    }
                 }
             }
             else if (dist < outer2) // 滑鼠在外圓按下
             {
                 if (e.Button == MouseButtons.Left)
+                {
                     outerNo2++;
+                }
                 else if (e.Button == MouseButtons.Right)
                 {
                     if (outerNo2 > 0)
+                    {
                         outerNo2--;
+                    }
                 }
             }
         }
@@ -139,16 +153,30 @@ namespace WindowsApplication1
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Space) // 空白鍵 旋轉反向
+            {
                 angleDelta = -angleDelta;
+            }
             else if (e.KeyData == Keys.Up) // ↑鍵 旋轉加速
             {
-                if (angleDelta > 0) angleDelta += 0.1;
-                else angleDelta -= 0.1;
+                if (angleDelta > 0)
+                {
+                    angleDelta += 0.1;
+                }
+                else
+                {
+                    angleDelta -= 0.1;
+                }
             }
             else if (e.KeyData == Keys.Down) // ↓鍵 旋轉減慢
             {
-                if (angleDelta > 0) angleDelta -= 0.1;
-                else angleDelta += 0.1;
+                if (angleDelta > 0)
+                {
+                    angleDelta -= 0.1;
+                }
+                else
+                {
+                    angleDelta += 0.1;
+                }
             }
         }
     }

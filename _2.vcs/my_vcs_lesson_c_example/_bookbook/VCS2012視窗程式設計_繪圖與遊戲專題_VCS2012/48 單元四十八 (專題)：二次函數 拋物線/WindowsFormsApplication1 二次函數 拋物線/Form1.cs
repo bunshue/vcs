@@ -29,7 +29,10 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             textBox1.Text = p1.X.ToString();
             textBox2.Text = p1.Y.ToString();
 
@@ -53,16 +56,24 @@ namespace WindowsFormsApplication1
             if (e.Delta > 0)
             {
                 D = D + 1;
-                if (D > 40) D = 40;
+                if (D > 40)
+                {
+                    D = 40;
+                }
             }
             else if (e.Delta < 0)
             {
                 D = D - 1;
-                if (D < 10) D = 10;
+                if (D < 10)
+                {
+                    D = 10;
+                }
             }
 
             foreach (ClassMovingPoint mp in mpList) // 更新 可移動點 物件 的 格子單位寬
+            {
                 mp.D = D;
+            }
 
             this.Invalidate();
         }
@@ -81,7 +92,6 @@ namespace WindowsFormsApplication1
             c = (4 * A * C - B * B) / 4 * A;
             label6.Text = "Y = " + a.ToString() + " (X + " + b.ToString() + ")^2 + " + c.ToString();
 
-
             PointF p = new PointF(0, 0); // 頂點
             Rectangle rect = new Rectangle();
 
@@ -89,14 +99,20 @@ namespace WindowsFormsApplication1
             while (true)
             {
                 if (Math.Abs(A) <= 1.0f)
+                {
                     p.X = p.X - 0.1f;
+                }
                 else
+                {
                     p.X = p.X - 0.1f / A;
+                }
                 p.Y = A * p.X * p.X + B * p.X + C;
 
                 rect = GetRect2(p);
-                if (rect.Y < 0 || rect.Y > this.ClientSize.Height ||
-                    rect.X < 0 || rect.X > this.ClientSize.Width) break;
+                if (rect.Y < 0 || rect.Y > this.ClientSize.Height || rect.X < 0 || rect.X > this.ClientSize.Width)
+                {
+                    break;
+                }
                 e.Graphics.FillEllipse(Brushes.Black, rect);
             }
 
@@ -104,14 +120,20 @@ namespace WindowsFormsApplication1
             while (true)
             {
                 if (Math.Abs(A) <= 1.0f)
+                {
                     p.X = p.X + 0.1f;
+                }
                 else
+                {
                     p.X = p.X + 0.1f / A;
+                }
                 p.Y = A * p.X * p.X + B * p.X + C;
 
                 rect = GetRect2(p);
-                if (rect.Y < 0 || rect.Y > this.ClientSize.Height ||
-                    rect.X < 0 || rect.X > this.ClientSize.Width) break;
+                if (rect.Y < 0 || rect.Y > this.ClientSize.Height || rect.X < 0 || rect.X > this.ClientSize.Width)
+                {
+                    break;
+                }
                 e.Graphics.FillEllipse(Brushes.Black, rect);
             }
 
@@ -120,7 +142,6 @@ namespace WindowsFormsApplication1
 
             e.Graphics.DrawEllipse(Pens.Black, GetRect(p1)); // 可點選移動的點 有外框線
             e.Graphics.DrawEllipse(Pens.Black, GetRect(p2));
-
 
             e.Graphics.DrawString("p1", fn, Brushes.Black, GetPoint(p1), StringFormat.GenericTypographic);
             e.Graphics.DrawString("p2", fn, Brushes.Black, GetPoint(p2), StringFormat.GenericTypographic);
@@ -140,7 +161,6 @@ namespace WindowsFormsApplication1
             Point point = new Point();
             point.X = (int)(this.ClientSize.Width / 2 + p.X * D);
             point.Y = (int)(this.ClientSize.Height / 2 - p.Y * D);
-
             return point;
         }
 
@@ -154,6 +174,7 @@ namespace WindowsFormsApplication1
             rect.Height = D;
             return rect;
         }
+
         // 由 點 算出 矩形視窗座標 (拋物線的軌跡小點使用)
         Rectangle GetRect2(PointF p)
         {
@@ -311,9 +332,13 @@ namespace WindowsFormsApplication1
             textBox2.Text = textBox_c.Text;
 
             if (p1.X != 0)
+            {
                 p2.X = 0;
+            }
             else
+            {
                 p2.X = 1;
+            }
 
             p2.Y = Convert.ToSingle(aa * (p2.X + bb) * (p2.X + bb) + cc);
 
@@ -327,3 +352,4 @@ namespace WindowsFormsApplication1
         }
     }
 }
+

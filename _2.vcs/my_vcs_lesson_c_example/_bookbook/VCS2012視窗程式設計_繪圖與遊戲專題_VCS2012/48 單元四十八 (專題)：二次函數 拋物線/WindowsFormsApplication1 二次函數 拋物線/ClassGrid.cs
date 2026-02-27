@@ -1,5 +1,4 @@
-﻿/* 作者：鄞永傳老師‧xnabook@yahoo.com.tw‧2009-09 */
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
@@ -35,11 +34,8 @@ namespace WindowsFormsApplication1
             {
                 G.DrawLine(myPen1, 0, i, w, i);
             }
-
             G.DrawLine(myPen2, w / 2, 0, w / 2, h);
             G.DrawLine(myPen2, 0, h / 2, w, h / 2);
-
         }
-
     }
 }

@@ -99,6 +99,9 @@ namespace vcs_Draw_Transform1
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
 
+            pictureBox2.Size = new Size(410, 230);
+            pictureBox2.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+
             richTextBox1.Size = new Size(300, 880);
             richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -988,6 +991,30 @@ namespace vcs_Draw_Transform1
         {
             pictureBox1.Invalidate();
         }
+
+        //畫一個旋轉的矩形 ST
+        float angle = 0;  // 矩形的旋轉角度
+        bool dragging = true; // 是否開始拖拉
+        int Mx, My;  // 滑鼠的位置
+
+        private void pictureBox2_Paint(object sender, PaintEventArgs e)
+        {
+            if (dragging) // 如果是在拖拉中
+            {
+                e.Graphics.TranslateTransform(Mx, My);
+                e.Graphics.RotateTransform(angle);
+                e.Graphics.DrawRectangle(Pens.Black, -50, -50, 100, 100);
+            }
+        }
+
+        private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
+        {
+            Mx = e.X;  // 記錄滑鼠的位置
+            My = e.Y;
+            angle = angle + 10; // 增加 旋轉角度
+            this.pictureBox2.Invalidate();
+        }
+        //畫一個旋轉的矩形 SP
     }
 
     public static class ImageEx

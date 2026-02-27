@@ -1,5 +1,4 @@
-﻿/* 作者：鄞永傳老師‧xnabook@yahoo.com.tw‧2010-06 */
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,6 +21,10 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             // 第一組 大腿、小腿
             Thigh1 = new Segment(160, 40, Color.Red);
             Calf1 = new Segment(120, 30, Color.Blue);
@@ -70,8 +73,14 @@ namespace WindowsFormsApplication1
             calf.Angle = thigh.Angle + angle2;
 
             pos.X += Dx; // X 軸位置 往前
-            if (pos.X > this.ClientSize.Width + 200) pos.X = -200; // 超過右邊太遠
-            if (pos.X < -200) pos.X = this.ClientSize.Width + 200; // 超過左邊太遠
+            if (pos.X > this.ClientSize.Width + 200)
+            {
+                pos.X = -200; // 超過右邊太遠
+            }
+            if (pos.X < -200)
+            {
+                pos.X = this.ClientSize.Width + 200; // 超過左邊太遠
+            }
 
             thigh.SetPos(new PointF(pos.X, pos.Y)); // 大腿 位置 往前
             calf.SetPos(thigh.GetPin2()); // 小腿 位置 在 大腿的下節點
@@ -83,15 +92,24 @@ namespace WindowsFormsApplication1
         {
             // 鍵盤上下鍵調整高度
             if (e.KeyCode == Keys.Up)
+            {
                 pos.Y--;
+            }
             if (e.KeyCode == Keys.Down)
+            {
                 pos.Y++;
+            }
 
             // 鍵盤左右鍵調整往前或往後的速度
             if (e.KeyCode == Keys.Right)
+            {
                 Dx++;
+            }
             if (e.KeyCode == Keys.Left)
+            {
                 Dx--;
+            }
         }
     }
 }
+

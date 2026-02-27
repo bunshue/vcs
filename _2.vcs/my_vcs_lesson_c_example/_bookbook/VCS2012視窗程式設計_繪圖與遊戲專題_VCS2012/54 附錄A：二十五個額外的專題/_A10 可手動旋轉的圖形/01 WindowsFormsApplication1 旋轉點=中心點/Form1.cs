@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Drawing.Drawing2D;
 
 namespace WindowsFormsApplication1
@@ -27,6 +28,10 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             this.ClientSize = new Size(600, 600);
             pos = new Point(this.ClientSize.Width / 2, this.ClientSize.Height / 2);
             disInBitmap = (bitmap.Width / 2.0) * 1.4142; // 根號 2 
@@ -46,14 +51,13 @@ namespace WindowsFormsApplication1
             A = new Matrix();
             A.Translate(pos.X, pos.Y, MatrixOrder.Append);
             e.Graphics.Transform = A;
-            e.Graphics.FillEllipse(myBrush, - 10, - 10, 20, 20);
+            e.Graphics.FillEllipse(myBrush, -10, -10, 20, 20);
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             // 滑鼠游標位置 和 圖形中心點 的距離
-            double dis = Math.Sqrt((e.X - pos.X) * (e.X - pos.X) +
-                                   (e.Y - pos.Y) * (e.Y - pos.Y));
+            double dis = Math.Sqrt((e.X - pos.X) * (e.X - pos.X) + (e.Y - pos.Y) * (e.Y - pos.Y));
 
             if (dis < disInPos) // 滑鼠游標在 圖形中心點 => 要移動圖形
             {
@@ -67,7 +71,7 @@ namespace WindowsFormsApplication1
                 timer1.Enabled = false;
                 actionTurning = true; // 進入旋轉模式
                 mx = e.X;  // 記錄 滑鼠游標 位置
-                my = e.Y ;
+                my = e.Y;
             }
         }
 
@@ -113,7 +117,11 @@ namespace WindowsFormsApplication1
             this.Invalidate();
 
             Inertia = 0.99f * Inertia; // 旋轉慣性 愈來愈小
-            if (Inertia < 0.01f && Inertia > -0.01f) timer1.Enabled = false;
+            if (Inertia < 0.01f && Inertia > -0.01f)
+            {
+                timer1.Enabled = false;
+            }
         }
     }
 }
+

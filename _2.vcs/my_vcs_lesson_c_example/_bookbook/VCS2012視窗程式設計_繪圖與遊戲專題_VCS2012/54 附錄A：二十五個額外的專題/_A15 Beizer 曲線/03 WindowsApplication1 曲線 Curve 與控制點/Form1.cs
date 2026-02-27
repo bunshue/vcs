@@ -1,11 +1,11 @@
-﻿// 作者：鄞永傳老師‧xnabook@yahoo.com.tw‧2012-08 
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Drawing.Drawing2D;
 
 namespace WindowsApplication1
@@ -16,13 +16,15 @@ namespace WindowsApplication1
         int mp_Selected = -1;  // 動態陣列 的第幾個 被選到
         bool dragging = false; // 是否拖拉中
         Pen penRed = new Pen(Color.Red, 3);
-        
 
         public Form1()
         {
             InitializeComponent();
+        }
 
-            MovingPoint mp; 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            MovingPoint mp;
             mp = new MovingPoint(new Point(100, 200));
             mpList.Add(mp); // 第一個控制點
 

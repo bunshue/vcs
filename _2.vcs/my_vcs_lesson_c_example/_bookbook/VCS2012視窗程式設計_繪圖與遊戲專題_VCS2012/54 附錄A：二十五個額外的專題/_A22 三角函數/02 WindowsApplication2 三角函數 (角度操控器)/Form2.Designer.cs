@@ -245,10 +245,11 @@
             this.Name = "Form2";
             this.Text = "角度操控器 (-360 ~ 360)";
             this.TopMost = true;
-            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form2_MouseUp);
+            this.Load += new System.EventHandler(this.Form2_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form2_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form2_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form2_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form2_MouseUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 

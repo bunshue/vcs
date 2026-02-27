@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Drawing.Drawing2D;
 
 namespace WindowsFormsApplication1
@@ -19,6 +20,10 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             this.ClientSize = new Size(600, 600);
             Point pos = new Point(this.ClientSize.Width / 4, this.ClientSize.Height / 4);
             image01 = new G2D_ImageRotate(bitmap, pos);

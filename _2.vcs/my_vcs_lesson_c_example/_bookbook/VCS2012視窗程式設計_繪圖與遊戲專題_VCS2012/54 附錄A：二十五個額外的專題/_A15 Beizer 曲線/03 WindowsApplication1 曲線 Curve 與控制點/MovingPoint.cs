@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Drawing; // Point
+using System.Drawing;
 
 namespace WindowsApplication1
 {
@@ -26,17 +26,20 @@ namespace WindowsApplication1
             {
                 return true;
             }
-            else return false;
+            else
+            {
+                return false;
+            }
         }
 
         // 更新 點的座標
         public void Update(int x, int y)  // 滑鼠的位置
         {
-            p.X = (x - dx); 
+            p.X = (x - dx);
             p.Y = (y - dy);
         }
 
-        public void Draw(Graphics G)  // 
+        public void Draw(Graphics G)
         {
             G.DrawRectangle(Pens.Black, p.X - 10, p.Y - 10, 20, 20);
         }
