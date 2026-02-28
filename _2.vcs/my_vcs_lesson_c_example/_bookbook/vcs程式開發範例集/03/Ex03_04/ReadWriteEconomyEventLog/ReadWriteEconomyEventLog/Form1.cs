@@ -27,7 +27,7 @@ namespace ReadWriteEconomyEventLog
             eventLog1.Log = "NewLog1";//NewLog1日誌，
             eventLog1.Source = "ZhyScoure";//事件源名
             this.eventLog1.MachineName = ".";//表示本機
-            // this.eventLog1.Clear();   
+            // this.eventLog1.Clear();
         }
 
         //寫入日誌

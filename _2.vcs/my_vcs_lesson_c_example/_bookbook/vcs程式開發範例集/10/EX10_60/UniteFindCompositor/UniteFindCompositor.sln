@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniteFindCompositor", "UniteFindCompositor\UniteFindCompositor.csproj", "{2A64F70E-CC15-4681-99A3-FCBA12F525FD}"
 EndProject
 Global

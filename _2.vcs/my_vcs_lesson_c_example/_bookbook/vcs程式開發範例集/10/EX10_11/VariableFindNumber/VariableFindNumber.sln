@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VariableFindNumber", "VariableFindNumber\VariableFindNumber.csproj", "{26B44DB4-C266-4D37-A8D0-3DC3BE922111}"
 EndProject
 Global

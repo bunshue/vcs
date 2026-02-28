@@ -45,7 +45,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(358, 159);
+            this.ClientSize = new System.Drawing.Size(535, 394);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form1";
             this.Text = "取得數據庫中的全部使用者圖示";

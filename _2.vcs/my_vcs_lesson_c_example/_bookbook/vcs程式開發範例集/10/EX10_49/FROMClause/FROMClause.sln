@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FROMClause", "FROMClause\FROMClause.csproj", "{4D783198-DC3B-48A5-801C-BEB1691D1BFD}"
 EndProject
 Global

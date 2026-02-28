@@ -29,12 +29,22 @@ namespace YearMonthDayFind
         private void button1_Click(object sender, EventArgs e)
         {
             string DataSQL = "select 書號,書名,銷售數量,日期 from tb_xsb";//設定SQL語句
+
             if (textBox1.Text.Length > 0)//如果年份有值
+            {
                 DataSQL = DataSQL + " where year(日期)='" + textBox1.Text + "'";//新增年的條件
+            }
+
             if (textBox2.Text.Length > 0)//如果月份有值
+            {
                 DataSQL = DataSQL + " and month(日期)='" + textBox2.Text + "'";//新增月的條件
+            }
+
             if (textBox3.Text.Length > 0)//如果日有值
+            {
                 DataSQL = DataSQL + " and day(日期)='" + textBox3.Text + "'";//新增日的條件
+            }
+
             ShowDate(DataSQL, dataGridView1);//呼叫自定義方漢
         }
 

@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewUpData", "ViewUpData\ViewUpData.csproj", "{305E4B43-B01D-4868-994C-7AC1D1D37B17}"
 EndProject
 Global

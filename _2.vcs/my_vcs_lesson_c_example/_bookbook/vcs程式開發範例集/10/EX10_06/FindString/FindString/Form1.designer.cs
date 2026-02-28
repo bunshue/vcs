@@ -58,7 +58,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(153, 6);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.Size = new System.Drawing.Size(100, 22);
             this.textBox1.TabIndex = 2;
             this.textBox1.Text = "計算機";
             // 
@@ -82,6 +82,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "查詢字串";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+
 using System.Data.SqlClient;
 
 namespace StaticCrosstab
@@ -15,6 +16,15 @@ namespace StaticCrosstab
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            SqlConnection con = new SqlConnection("Server=(local);database=db_10;Uid=sa;Pwd=");
+            SqlDataAdapter dap = new SqlDataAdapter("SELECT * FROM 銷售表", con);
+            DataSet ds = new DataSet();
+            dap.Fill(ds, "table");
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -32,15 +42,6 @@ namespace StaticCrosstab
             SqlDataAdapter dap = new SqlDataAdapter("SELECT 員工姓名, SUM(CASE 所在部門 WHEN '食品部' THEN 銷售業績 ELSE NULL END) AS [食品部業績],SUM(CASE 所在部門 WHEN '家電部' THEN 銷售業績 ELSE NULL END) AS [家電部業績] FROM 銷售表 GROUP BY 員工姓名", con);
             DataSet ds = new DataSet();
             dap.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0].DefaultView;
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            SqlConnection con = new SqlConnection("Server=(local);database=db_10;Uid=sa;Pwd=");
-            SqlDataAdapter dap = new SqlDataAdapter("SELECT * FROM 銷售表", con);
-            DataSet ds = new DataSet();
-            dap.Fill(ds, "table");
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
         }
     }

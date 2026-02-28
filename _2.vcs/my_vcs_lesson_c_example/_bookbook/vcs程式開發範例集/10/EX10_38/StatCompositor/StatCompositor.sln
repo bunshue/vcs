@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatCompositor", "StatCompositor\StatCompositor.csproj", "{EBCA4088-E587-43D2-9E6D-F2AC6E7F4D11}"
 EndProject
 Global

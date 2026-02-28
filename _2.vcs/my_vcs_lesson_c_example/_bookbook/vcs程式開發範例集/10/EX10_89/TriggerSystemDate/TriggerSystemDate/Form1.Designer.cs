@@ -52,7 +52,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 45);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 12);
+            this.label2.Size = new System.Drawing.Size(77, 12);
             this.label2.TabIndex = 1;
             this.label2.Text = "使用者名稱：";
             // 
@@ -60,7 +60,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(77, 39);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.Size = new System.Drawing.Size(100, 22);
             this.textBox1.TabIndex = 2;
             this.textBox1.Text = "mr";
             // 
@@ -69,7 +69,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 68);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 12);
+            this.label3.Size = new System.Drawing.Size(77, 12);
             this.label3.TabIndex = 1;
             this.label3.Text = "使用者密碼：";
             // 
@@ -77,7 +77,7 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(77, 65);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 21);
+            this.textBox2.Size = new System.Drawing.Size(100, 22);
             this.textBox2.TabIndex = 2;
             this.textBox2.Text = "mrsoft";
             // 
@@ -117,6 +117,7 @@
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "Update觸發器在系統日誌中的運用";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

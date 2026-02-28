@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+
 using System.Data.SqlClient;
 
 namespace FindDate
@@ -25,6 +26,11 @@ namespace FindDate
             DataSet ds = new DataSet();
             dap.Fill(ds);
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

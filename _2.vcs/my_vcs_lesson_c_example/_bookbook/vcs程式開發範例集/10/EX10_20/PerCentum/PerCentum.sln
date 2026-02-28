@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerCentum", "PerCentum\PerCentum.csproj", "{F8FDA351-A0D2-440F-9AA8-00C079BE7CA9}"
 EndProject
 Global

@@ -26,7 +26,7 @@ namespace LookupBlack
             DataSet ds = new DataSet();//實例化DataSet類
             dap.Fill(ds);//更新行
             dataGridView1.DataSource = ds.Tables[0].DefaultView;//顯示統計後的數據
-         }
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {

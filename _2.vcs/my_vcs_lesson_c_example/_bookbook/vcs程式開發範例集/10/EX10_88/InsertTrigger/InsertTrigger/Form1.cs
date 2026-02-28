@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+
 using System.Data.SqlClient;
 
 namespace InsertTrigger
@@ -15,6 +16,15 @@ namespace InsertTrigger
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            SqlConnection con = new SqlConnection("Server=(local);database=db_10;Uid=sa;Pwd=");
+            SqlDataAdapter dap = new SqlDataAdapter("select * from 員工工資表", con);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -32,14 +42,6 @@ namespace InsertTrigger
         {
             Application.Exit();
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            SqlConnection con = new SqlConnection("Server=(local);database=db_10;Uid=sa;Pwd=");
-            SqlDataAdapter dap = new SqlDataAdapter("select * from 員工工資表",con);
-            DataSet ds = new DataSet();
-            dap.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0].DefaultView;
-        }
     }
 }
+

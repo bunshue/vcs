@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+
 using System.Data.SqlClient;
 
 namespace ORANDFind
@@ -36,3 +37,4 @@ namespace ORANDFind
         }
     }
 }
+

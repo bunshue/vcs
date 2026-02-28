@@ -19,7 +19,7 @@ namespace JoinAccount
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            SqlConnection cn = new SqlConnection("server=(local);database=db_10;Uid=sa;Pwd=");
+            SqlConnection cn = new SqlConnection("server=(local);database=db_10_Data;Uid=sa;Pwd=");
             cn.Open();
             SqlDataAdapter dap = new SqlDataAdapter("SELECT 產品編號,產品名稱,產品單價,產品數量,(產品數量*產品單價) AS 總金額 FROM tb_03", cn);
             DataSet ds = new DataSet();

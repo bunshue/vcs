@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeftOuterJoin", "LeftOuterJoin\LeftOuterJoin.csproj", "{1398D732-DCE3-4A1E-9F6B-96361535ACCB}"
 EndProject
 Global

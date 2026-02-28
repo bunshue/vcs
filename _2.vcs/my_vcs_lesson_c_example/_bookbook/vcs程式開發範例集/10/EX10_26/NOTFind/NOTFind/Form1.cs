@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+
 using System.Data.SqlClient;
 
 namespace NOTFind
@@ -48,6 +49,5 @@ namespace NOTFind
         {
             this.dataGridViewBind("select * from tb_kf where 房態='空房 ' and not(價格 between 80 and 150 )");
         }
-
     }
 }

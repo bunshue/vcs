@@ -45,7 +45,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(357, 174);
+            this.ClientSize = new System.Drawing.Size(672, 476);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form1";
             this.Text = "C#運用預儲程序";

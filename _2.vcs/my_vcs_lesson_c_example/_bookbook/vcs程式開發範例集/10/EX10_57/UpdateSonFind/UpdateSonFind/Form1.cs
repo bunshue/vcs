@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+
 using System.Data.SqlClient;
 
 namespace UpdateSonFind
@@ -31,7 +32,7 @@ namespace UpdateSonFind
         {
             SqlConnection con = new SqlConnection("server=(local);user id=sa;pwd=;DataBase=db_10");
             con.Open();
-            string SqlStr = "update 員工工資表 set 基本工資=(select 基本工資 from 規定工資表 where 工作時間='" + comboBox1.Text + "') where 員工姓名='" + textBox1.Text+ "'";
+            string SqlStr = "update 員工工資表 set 基本工資=(select 基本工資 from 規定工資表 where 工作時間='" + comboBox1.Text + "') where 員工姓名='" + textBox1.Text + "'";
             SqlCommand cmd = new SqlCommand(SqlStr, con);
             cmd.ExecuteNonQuery();
             con.Close();

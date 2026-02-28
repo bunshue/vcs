@@ -25,5 +25,10 @@ namespace LogicFind
             dap.Fill(ds);
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

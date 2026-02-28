@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+
 using System.Data.SqlClient;
 
 namespace ViewUpData
@@ -17,16 +18,6 @@ namespace ViewUpData
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            SqlConnection con = new SqlConnection("Server=(local);database=db_10;Uid=sa;Pwd=");
-            con.Open();
-            SqlCommand cmd = new SqlCommand("update v10_01 set 基本工資='" + textBox2.Text + "' where 員工編號='" + textBox1.Text + "'", con);
-            cmd.ExecuteNonQuery();
-            con.Close();
-            this.Form1_Load(sender ,e);
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             SqlConnection con = new SqlConnection("Server=(local);database=db_10;Uid=sa;Pwd=");
@@ -34,6 +25,16 @@ namespace ViewUpData
             DataSet ds = new DataSet();
             dap.Fill(ds);
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SqlConnection con = new SqlConnection("Server=(local);database=db_10;Uid=sa;Pwd=");
+            con.Open();
+            SqlCommand cmd = new SqlCommand("update v10_01 set 基本工資='" + textBox2.Text + "' where 員工編號='" + textBox1.Text + "'", con);
+            cmd.ExecuteNonQuery();
+            con.Close();
+            this.Form1_Load(sender, e);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GroupingFindAll", "GroupingFindAll\GroupingFindAll.csproj", "{8D5EFDC2-022F-483E-A27C-5D6135C519EE}"
 EndProject
 Global

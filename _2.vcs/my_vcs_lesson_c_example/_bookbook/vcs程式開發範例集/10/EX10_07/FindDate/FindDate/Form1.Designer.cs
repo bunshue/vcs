@@ -67,7 +67,7 @@
             // 
             this.dateTimePicker1.Location = new System.Drawing.Point(116, 12);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(156, 21);
+            this.dateTimePicker1.Size = new System.Drawing.Size(156, 22);
             this.dateTimePicker1.TabIndex = 4;
             // 
             // Form1
@@ -81,6 +81,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form1";
             this.Text = "查詢日期數據";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindProcedure", "FindProcedure\FindProcedure.csproj", "{E1014D79-1DDC-4149-BA81-260887FB1801}"
 EndProject
 Global

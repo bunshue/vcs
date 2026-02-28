@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INFind", "INFind\INFind.csproj", "{628C74FA-1A00-4FD9-A9B7-72EFC05D8BB9}"
 EndProject
 Global
