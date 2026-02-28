@@ -7,8 +7,6 @@ using System.Text;
 using System.Windows.Forms;
 using System.Linq;
 
-using System.Data.SqlClient;
-
 namespace MAXStat
 {
     public partial class Form1 : Form
@@ -20,21 +18,6 @@ namespace MAXStat
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            SqlConnection cn = new SqlConnection("server=(local);user id=sa;pwd=;Database=db_10");
-            SqlDataAdapter dap = new SqlDataAdapter("select * from tb_sellInfo ", cn);
-            DataSet ds = new DataSet();
-            dap.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0].DefaultView;
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            SqlConnection cn = new SqlConnection("server=(local);user id=sa;pwd=;Database=db_10");
-            SqlDataAdapter dap = new SqlDataAdapter("select * from tb_sellInfo where 銷售額 in(select max(銷售額) from tb_sellInfo) ", cn);
-            DataSet ds = new DataSet();
-            dap.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0].DefaultView;
         }
     }
 }

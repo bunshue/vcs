@@ -60,7 +60,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(58, 8);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(59, 21);
+            this.textBox1.Size = new System.Drawing.Size(59, 22);
             this.textBox1.TabIndex = 2;
             this.textBox1.Text = "計算機";
             // 
@@ -86,14 +86,14 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(218, 8);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(49, 21);
+            this.textBox2.Size = new System.Drawing.Size(49, 22);
             this.textBox2.TabIndex = 2;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(402, 229);
+            this.ClientSize = new System.Drawing.Size(623, 525);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);

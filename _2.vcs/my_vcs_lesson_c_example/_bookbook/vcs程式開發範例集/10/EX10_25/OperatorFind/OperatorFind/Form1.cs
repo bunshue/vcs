@@ -6,20 +6,21 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Data.SqlClient;
 
 namespace OperatorFind
 {
     public partial class Form1 : Form
     {
+        string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\{0};Integrated Security=True;Connect Timeout=30";
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        string M_str_sqlcon = "Server=(local);DataBase=db_10;UID=sa;PWD=;";
-
-        #region  建立DataSet對像
+        //#region  建立DataSet對像
         /// <summary>
         /// 建立一個DataSet對像
         /// </summary>
@@ -28,20 +29,27 @@ namespace OperatorFind
         /// <returns>傳回DataSet對像</returns>
         public DataSet getDataSet(string SQLstr, string tableName)
         {
-            SqlConnection My_con = new SqlConnection(M_str_sqlcon);   //用SqlConnection對象與指定的數據庫相連接
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+
+            SqlConnection My_con = new SqlConnection(cnstr);   //用SqlConnection對象與指定的數據庫相連接
             My_con.Open();  //打開數據庫連接
             SqlDataAdapter SQLda = new SqlDataAdapter(SQLstr, My_con);  //建立一個SqlDataAdapter對象，並取得指定數據表的訊息
             DataSet My_DataSet = new DataSet(); //建立DataSet對像
             if (tableName == "")
+            {
                 SQLda.Fill(My_DataSet);
+            }
             else
+            {
                 SQLda.Fill(My_DataSet, tableName);  //透過SqlDataAdapter對象的的Fill()方法，將數據表訊息新增到DataSet對像中
+            }
             My_con.Close();    //關閉數據庫的連接
             return My_DataSet;  //傳回DataSet對象的訊息
         }
-        #endregion
+        //#endregion
 
-        #region  取得數據表的字段名的描述訊息
+        //#region  取得數據表的字段名的描述訊息
         /// <summary>
         /// 取得數據表的字段名的描述訊息
         /// </summary>
@@ -56,9 +64,11 @@ namespace OperatorFind
             DataSet SqlRead = getDataSet(SBewrite, "");//將尋找的訊息存入到DataSet對像
             int nint = SqlRead.Tables[0].Rows.Count;//取得尋找數據的行數
             for (int i = 0; i < nint; i++)//將表中的字段名新增到ComboBox控制元件中
+            {
                 combox.Items.Add(SqlRead.Tables[0].Rows[i][0].ToString());
+            }
         }
-        #endregion
+        //#endregion
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -96,10 +106,14 @@ namespace OperatorFind
 
                 }
                 if (!blur)//如是不是模糊查詢
+                {
                     StrSQL = StrSQL + " where " + FieldName + Condition + "'" + FieldValue + "'";//組合算數運算符查詢語句
+                }
             }
             else//查詢條件為空
+            {
                 StrSQL = StrSQL + " where " + FieldName + " IS null or " + FieldName + "=''";
+            }
             return StrSQL;//傳回SQL語句
         }
 
@@ -110,3 +124,4 @@ namespace OperatorFind
         }
     }
 }
+

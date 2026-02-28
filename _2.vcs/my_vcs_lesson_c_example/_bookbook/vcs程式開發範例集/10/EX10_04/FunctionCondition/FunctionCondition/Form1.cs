@@ -13,6 +13,8 @@ namespace FunctionCondition
 {
     public partial class Form1 : Form
     {
+        string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\{0};Integrated Security=True;Connect Timeout=30";
+
         public Form1()
         {
             InitializeComponent();
@@ -20,11 +22,13 @@ namespace FunctionCondition
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            SqlConnection cn = new SqlConnection("server=(local);database=db_10;Uid=sa;Pwd=");
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection cn = new SqlConnection(cnstr);
             cn.Open();
             SqlDataAdapter dap = new SqlDataAdapter("SELECT * FROM tb_01", cn);
             DataSet ds = new DataSet();
-            dap.Fill(ds,"Table");
+            dap.Fill(ds, "Table");
             string[] arylist = new string[ds.Tables[0].Columns.Count];
             for (int i = 0; i < ds.Tables[0].Columns.Count; i++)
             {
@@ -39,12 +43,14 @@ namespace FunctionCondition
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text == ""||comboBox1.Text=="")
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            if (textBox1.Text == "" || comboBox1.Text == "")
             {
                 MessageBox.Show("文字框不能為空！");
                 return;
             }
-            SqlConnection cn = new SqlConnection("server=(local);database=db_10;Uid=sa;Pwd=");
+            SqlConnection cn = new SqlConnection(cnstr);
             cn.Open();
             SqlDataAdapter dap = new SqlDataAdapter("SELECT 學生編號," + comboBox1.Text + " FROM tb_01 WHERE len(" + comboBox1.Text + ")=" + textBox1.Text, cn);
             DataSet ds = new DataSet();

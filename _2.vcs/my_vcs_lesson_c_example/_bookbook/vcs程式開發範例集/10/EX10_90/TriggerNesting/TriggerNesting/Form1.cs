@@ -13,6 +13,8 @@ namespace TriggerNesting
 {
     public partial class Form1 : Form
     {
+        string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\{0};Integrated Security=True;Connect Timeout=30";
+
         public Form1()
         {
             InitializeComponent();
@@ -20,7 +22,9 @@ namespace TriggerNesting
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection("Server=(local);database=db_10;Uid=sa;Pwd=");
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection con = new SqlConnection(cnstr);
             SqlDataAdapter dap = new SqlDataAdapter("select * from 部門工資統計表 select * from 明細工資表", con);
             DataSet ds = new DataSet();
             dap.Fill(ds);
@@ -30,7 +34,9 @@ namespace TriggerNesting
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection("Server=(local);database=db_10;Uid=sa;Pwd=");
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection con = new SqlConnection(cnstr);
             SqlCommand cmd = new SqlCommand("update 部門工資統計表 set 基本工資=" + Convert.ToInt32(textBox2.Text) + "where 員工姓名 = '" + textBox1.Text + "'", con);
             con.Open();
             cmd.ExecuteNonQuery();

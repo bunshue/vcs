@@ -60,7 +60,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(107, 12);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(55, 21);
+            this.textBox1.Size = new System.Drawing.Size(55, 22);
             this.textBox1.TabIndex = 2;
             // 
             // label2
@@ -76,7 +76,7 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(191, 12);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(67, 21);
+            this.textBox2.Size = new System.Drawing.Size(67, 22);
             this.textBox2.TabIndex = 2;
             // 
             // dataGridView1
@@ -85,14 +85,14 @@
             this.dataGridView1.Location = new System.Drawing.Point(1, 38);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(378, 124);
+            this.dataGridView1.Size = new System.Drawing.Size(668, 527);
             this.dataGridView1.TabIndex = 3;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(380, 164);
+            this.ClientSize = new System.Drawing.Size(681, 588);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);

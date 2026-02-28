@@ -60,7 +60,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(-1, 41);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(341, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(423, 351);
             this.dataGridView1.TabIndex = 3;
             // 
             // dateTimePicker1
@@ -75,7 +75,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(342, 188);
+            this.ClientSize = new System.Drawing.Size(570, 437);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label1);

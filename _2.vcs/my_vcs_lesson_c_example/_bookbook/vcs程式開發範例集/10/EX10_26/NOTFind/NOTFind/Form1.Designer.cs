@@ -64,7 +64,7 @@
             this.radioButton3.AutoSize = true;
             this.radioButton3.Location = new System.Drawing.Point(12, 52);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(341, 16);
+            this.radioButton3.Size = new System.Drawing.Size(339, 16);
             this.radioButton3.TabIndex = 0;
             this.radioButton3.Text = "查詢空閒客房而且客房價格不在８０-１５０之間的客房訊息";
             this.radioButton3.UseVisualStyleBackColor = true;
@@ -76,14 +76,14 @@
             this.dataGridView1.Location = new System.Drawing.Point(2, 74);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(360, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(545, 435);
             this.dataGridView1.TabIndex = 1;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(364, 226);
+            this.ClientSize = new System.Drawing.Size(711, 577);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.radioButton3);
             this.Controls.Add(this.radioButton2);

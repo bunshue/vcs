@@ -13,6 +13,8 @@ namespace COUNTMax
 {
     public partial class Form1 : Form
     {
+        string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\{0};Integrated Security=True;Connect Timeout=30";
+
         public Form1()
         {
             InitializeComponent();
@@ -20,7 +22,9 @@ namespace COUNTMax
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SqlConnection cn = new SqlConnection("server=(local);user id=sa;pwd=;Database=db_10");
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection cn = new SqlConnection(cnstr);
             SqlDataAdapter dap = new SqlDataAdapter("select count(distinct 日期) as 商品數 from tb_sell where 銷價 >500", cn);
             DataSet ds = new DataSet();
             dap.Fill(ds);
@@ -29,7 +33,9 @@ namespace COUNTMax
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            SqlConnection cn = new SqlConnection("server=(local);user id=sa;pwd=;Database=db_10");
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection cn = new SqlConnection(cnstr);
             SqlDataAdapter dap = new SqlDataAdapter("select * from tb_sell", cn);
             DataSet ds = new DataSet();
             dap.Fill(ds);

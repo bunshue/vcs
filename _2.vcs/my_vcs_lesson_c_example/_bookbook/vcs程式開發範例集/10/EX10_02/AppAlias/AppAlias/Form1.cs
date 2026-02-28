@@ -12,6 +12,8 @@ namespace AppAlias
 {
     public partial class Form1 : Form
     {
+        string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\{0};Integrated Security=True;Connect Timeout=30";
+
         public Form1()
         {
             InitializeComponent();
@@ -19,7 +21,10 @@ namespace AppAlias
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            SqlConnection cn = new SqlConnection("server=(local);database=db_10;Uid=sa;Pwd=");
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+
+            SqlConnection cn = new SqlConnection(cnstr);
             cn.Open();
             SqlDataAdapter dap = new SqlDataAdapter("SELECT * FROM tb_02", cn);
             DataSet ds = new DataSet();
@@ -38,12 +43,15 @@ namespace AppAlias
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (comboBox1.Text == "" || textBox1.Text=="")
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+
+            if (comboBox1.Text == "" || textBox1.Text == "")
             {
                 MessageBox.Show("列名和別名不能為空!");
                 return;
             }
-            SqlConnection cn = new SqlConnection("server=(local);database=db_10;Uid=sa;Pwd=");
+            SqlConnection cn = new SqlConnection(cnstr);
             cn.Open();
             string str = "SELECT " + comboBox1.Text + "," + comboBox1.Text + " AS " + textBox1.Text.Trim() + " FROM tb_02";
             SqlDataAdapter dap = new SqlDataAdapter(str, cn);

@@ -50,7 +50,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(6, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(167, 12);
+            this.label1.Size = new System.Drawing.Size(162, 12);
             this.label1.TabIndex = 1;
             this.label1.Text = "利用[^]通配符進行查詢年齡：";
             // 
@@ -58,7 +58,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(176, 4);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(66, 21);
+            this.textBox1.Size = new System.Drawing.Size(66, 22);
             this.textBox1.TabIndex = 2;
             // 
             // dataGridView1
@@ -67,14 +67,14 @@
             this.dataGridView1.Location = new System.Drawing.Point(3, 32);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(374, 155);
+            this.dataGridView1.Size = new System.Drawing.Size(505, 471);
             this.dataGridView1.TabIndex = 3;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(379, 188);
+            this.ClientSize = new System.Drawing.Size(731, 527);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);

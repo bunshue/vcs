@@ -13,6 +13,8 @@ namespace EncryptProcedure
 {
     public partial class Form1 : Form
     {
+        string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\{0};Integrated Security=True;Connect Timeout=30";
+
         public Form1()
         {
             InitializeComponent();
@@ -20,7 +22,9 @@ namespace EncryptProcedure
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection("Server=(local);database=db_10;Uid=sa;Pwd=");
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection con = new SqlConnection(cnstr);
             con.Open();
             SqlCommand cmd = new SqlCommand("ALTER  PROCEDURE [insert_加密學生訊息表](@姓名_2 [varchar](50),@性別_3	[varchar](50),@年齡_4 [int],@籍貫_5 [varchar](50),@課程編號_6 [varchar](50)) AS INSERT INTO [db_10].[dbo].[學生訊息表] ([姓名],[性別],[年齡], [籍貫],[課程編號]) VALUES (@姓名_2, @性別_3, @年齡_4, @籍貫_5, @課程編號_6)", con);
             cmd.CommandType = CommandType.Text;
@@ -30,7 +34,9 @@ namespace EncryptProcedure
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection("Server=(local);database=db_10;Uid=sa;Pwd=");
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection con = new SqlConnection(cnstr);
             SqlDataAdapter dap = new SqlDataAdapter("exec sp_helptext insert_加密學生訊息表", con);
             dap.SelectCommand.CommandType = CommandType.Text;
             DataSet ds = new DataSet();
@@ -47,7 +53,9 @@ namespace EncryptProcedure
 
         private void button2_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection("Server=(local);database=db_10;Uid=sa;Pwd=");
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection con = new SqlConnection(cnstr);
             con.Open();
             SqlCommand cmd = new SqlCommand("ALTER  PROCEDURE [insert_加密學生訊息表](@姓名_2 [varchar](50),@性別_3	[varchar](50),@年齡_4 [int],@籍貫_5 [varchar](50),@課程編號_6 [varchar](50)) with encryption AS INSERT INTO [db_10].[dbo].[學生訊息表] ([姓名],[性別],[年齡], [籍貫],[課程編號]) VALUES (@姓名_2, @性別_3, @年齡_4, @籍貫_5, @課程編號_6)", con);
             cmd.CommandType = CommandType.Text;

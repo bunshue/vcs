@@ -7,8 +7,6 @@ using System.Text;
 using System.Windows.Forms;
 using System.Linq;
 
-using System.Data.SqlClient;
-
 namespace SUMStat
 {
     public partial class Form1 : Form
@@ -18,23 +16,8 @@ namespace SUMStat
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            SqlConnection cn = new SqlConnection("server=(local);user id=sa;pwd=;Database=db_10");
-            SqlDataAdapter dap = new SqlDataAdapter("select sum(銷售數量) as 總數量 ,sum(金額) as 總金額 from tb_xsb", cn);
-            DataSet ds = new DataSet();
-            dap.Fill(ds);
-            textBox1.Text = ds.Tables[0].Rows[0][0].ToString();
-            textBox2.Text = ds.Tables[0].Rows[0][1].ToString();
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
-            SqlConnection cn = new SqlConnection("server=(local);user id=sa;pwd=;Database=db_10");
-            SqlDataAdapter dap = new SqlDataAdapter("select * from tb_xsb", cn);
-            DataSet ds = new DataSet();
-            dap.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0].DefaultView;
         }
     }
 }

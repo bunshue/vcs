@@ -64,14 +64,14 @@
             this.dataGridView1.Location = new System.Drawing.Point(1, 52);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(399, 178);
+            this.dataGridView1.Size = new System.Drawing.Size(655, 434);
             this.dataGridView1.TabIndex = 1;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(401, 232);
+            this.ClientSize = new System.Drawing.Size(714, 523);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.radioButton2);
             this.Controls.Add(this.radioButton1);
