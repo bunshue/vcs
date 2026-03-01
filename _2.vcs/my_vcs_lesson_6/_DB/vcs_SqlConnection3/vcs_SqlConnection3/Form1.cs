@@ -91,8 +91,72 @@ namespace vcs_SqlConnection3
             richTextBox1.Clear();
         }
 
+        private void showinfo()
+        {
+            string db_filename = "db_09_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+
+            using (SqlConnection con = new SqlConnection(cnstr))
+            {
+                DataTable dt = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter("select * from 員工表", con);
+                da.Fill(dt);
+                this.dataGridView1.DataSource = dt.DefaultView;
+            }
+        }
+
+        /*
+        private void showinfo()
+        {
+            using (SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09"))
+            {
+                DataTable dt = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter("select * from 員工表", con);
+                da.Fill(dt);
+                this.dataGridView1.DataSource = dt.DefaultView;
+            }
+        }
+        */
+
+        /*
+        private void showinfo()
+        {
+            using (SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09"))
+            {
+                DataTable dt = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter("select * from 員工表", con);
+                da.Fill(dt);
+                this.dataGridView1.DataSource = dt.DefaultView;
+            }
+        }
+        */
+
         private void button0_Click(object sender, EventArgs e)
         {
+            showinfo();
+
+            //3030
+
+            SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09");
+
+            string sql_command = "xxxxx";
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                try
+                {
+                    con.Open();
+                    cmd.Connection = con;
+                    cmd.CommandText = sql_command;
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    showinfo();
+                    MessageBox.Show("刪除成功");
+                }
+                catch
+                {
+                    MessageBox.Show("SQL語句有誤");
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

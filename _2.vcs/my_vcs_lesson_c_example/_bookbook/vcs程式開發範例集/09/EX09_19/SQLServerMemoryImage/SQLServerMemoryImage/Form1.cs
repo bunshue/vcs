@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+
 using System.Data.SqlClient;
 using System.IO;
 
@@ -15,6 +16,7 @@ namespace SQLServerMemoryImage
     {
         SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09");
         byte[] imgBytesIn;
+
         public Form1()
         {
             InitializeComponent();
@@ -84,7 +86,6 @@ namespace SQLServerMemoryImage
                     part = dt.Rows[0][8].ToString();
                 }
             }
-
             getValue();
         }
 

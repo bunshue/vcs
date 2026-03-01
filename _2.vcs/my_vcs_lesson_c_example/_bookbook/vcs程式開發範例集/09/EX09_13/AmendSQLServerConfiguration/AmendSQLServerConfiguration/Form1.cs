@@ -6,25 +6,28 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+
 using System.Data.SqlClient;
 
 namespace AmendSQLServerConfiguration
 {
     public partial class Form1 : Form
     {
+        string tag = "null";
+        SqlConnection con = new SqlConnection("Data Source=(local);Initial Catalog=db_09;Integrated Security=SSPI");
+        DataTable dt;
+
         public Form1()
         {
             InitializeComponent();
         }
-        string tag = "null";
-        SqlConnection con = new SqlConnection("Data Source=(local);Initial Catalog=db_09;Integrated Security=SSPI");
-        DataTable dt;
+
         private void Form1_Load(object sender, EventArgs e)
         {
             showTrack();
             types();
         }
-      
+
         private void dataGridView1_Click(object sender, EventArgs e)
         {
             this.textBox1.Text = this.dataGridView1.SelectedCells[0].Value.ToString();
@@ -32,6 +35,7 @@ namespace AmendSQLServerConfiguration
             this.textBox2.Text = this.dataGridView1.SelectedCells[2].Value.ToString();
             this.textBox1.Enabled = false;
         }
+
         private void showTrack()
         {
             con.Open();
@@ -46,9 +50,10 @@ namespace AmendSQLServerConfiguration
             this.dataGridView1.DataSource = dt.DefaultView;
             con.Close();
         }
+
         private void types()
         {
-            string[] strtype ={ "varchar", "char"};
+            string[] strtype = { "varchar", "char" };
             this.comboBox1.DataSource = strtype;
         }
 
@@ -69,7 +74,7 @@ namespace AmendSQLServerConfiguration
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("是否刪除","提示",MessageBoxButtons.OKCancel,MessageBoxIcon.Question)==DialogResult.OK)
+            if (MessageBox.Show("是否刪除", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
                 con.Open();
                 string str = "alter table tb_11 drop column " + this.textBox1.Text + "";

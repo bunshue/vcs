@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+
 using System.Data.SqlClient;
 
 namespace PROCEDUREWrite
@@ -13,6 +14,7 @@ namespace PROCEDUREWrite
     public partial class Form1 : Form
     {
         SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09");
+
         public Form1()
         {
             InitializeComponent();
@@ -22,6 +24,7 @@ namespace PROCEDUREWrite
         {
             showinfo();
         }
+
         //自定義方法，顯示數據
         private void showinfo()
         {
@@ -33,12 +36,14 @@ namespace PROCEDUREWrite
                 this.dataGridView1.DataSource = dv;//顯示數據
             }
         }
+
         //新增
         private void button1_Click(object sender, EventArgs e)
         {
             this.textBox1.Text = ID();//自定義方法，自動產生編號
             this.textBox1.Enabled = false;//按鈕不可用
         }
+
         //自定義方法
         private string ID()
         {
@@ -62,6 +67,7 @@ namespace PROCEDUREWrite
                 return null;
             }
         }
+
         //保存
         private void button2_Click(object sender, EventArgs e)
         {
@@ -112,3 +118,4 @@ namespace PROCEDUREWrite
         }
     }
 }
+

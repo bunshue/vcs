@@ -14,7 +14,6 @@ namespace SQLUpData
     public partial class Form1 : Form
     {
         DataTable dt = null;
-
         SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09");
 
         public Form1()
@@ -92,3 +91,4 @@ namespace SQLUpData
         }
     }
 }
+

@@ -17,7 +17,6 @@ namespace AugmentWaferToExEDocument
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
             this.label1.Text = "共有：" + this.imageList1.Images.Count.ToString() + " 幅图片";
         }
 
@@ -49,3 +48,5 @@ namespace AugmentWaferToExEDocument
         }
     }
 }
+
+

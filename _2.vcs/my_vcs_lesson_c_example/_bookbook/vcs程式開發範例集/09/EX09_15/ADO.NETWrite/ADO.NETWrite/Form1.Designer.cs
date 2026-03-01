@@ -67,28 +67,28 @@
             // 
             this.textBox5.Location = new System.Drawing.Point(217, 55);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(86, 21);
+            this.textBox5.Size = new System.Drawing.Size(86, 22);
             this.textBox5.TabIndex = 10;
             // 
             // textBox4
             // 
             this.textBox4.Location = new System.Drawing.Point(62, 55);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(86, 21);
+            this.textBox4.Size = new System.Drawing.Size(86, 22);
             this.textBox4.TabIndex = 9;
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(217, 22);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(86, 21);
+            this.textBox2.Size = new System.Drawing.Size(86, 22);
             this.textBox2.TabIndex = 7;
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(62, 22);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(86, 21);
+            this.textBox1.Size = new System.Drawing.Size(86, 22);
             this.textBox1.TabIndex = 6;
             // 
             // label5
@@ -137,7 +137,7 @@
             this.tbSave.Image = ((System.Drawing.Image)(resources.GetObject("tbSave.Image")));
             this.tbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tbSave.Name = "tbSave";
-            this.tbSave.Size = new System.Drawing.Size(49, 22);
+            this.tbSave.Size = new System.Drawing.Size(51, 22);
             this.tbSave.Text = "保存";
             this.tbSave.Click += new System.EventHandler(this.tbSave_Click);
             // 
@@ -149,7 +149,7 @@
             this.tbSave});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(341, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(705, 25);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -167,7 +167,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(341, 139);
+            this.ClientSize = new System.Drawing.Size(705, 439);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "Form1";

@@ -30,7 +30,6 @@ namespace FileCopyPlan
             textBox2.Text = @"D:\dddddddddd3";
         }
 
-
         private void button1_Click(object sender, EventArgs e)
         {
             openFileDialog1.InitialDirectory = @"D:\_git\vcs\_1.data\______test_files1\";
@@ -145,3 +144,4 @@ namespace FileCopyPlan
         }
     }
 }
+

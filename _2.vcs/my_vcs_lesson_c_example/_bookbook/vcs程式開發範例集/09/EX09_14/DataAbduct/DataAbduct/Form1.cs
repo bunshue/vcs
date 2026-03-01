@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+
 using System.Data.SqlClient;
 
 namespace DataAbduct
@@ -15,14 +16,17 @@ namespace DataAbduct
         DataTable dt = null;
         TextBox[] txtBox;
         SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09");
+
         public Form1()
         {
             InitializeComponent();
         }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             showList();
         }
+
         private void showList()
         {
             listView1.View = View.Details;//圖示
@@ -45,6 +49,7 @@ namespace DataAbduct
                 Method(dt);
             }
         }
+
         private void tbADD_Click(object sender, EventArgs e)
         {
             if (dt != null)
@@ -99,9 +104,6 @@ namespace DataAbduct
                 da.Update(dt);
                 MessageBox.Show("以成功能將訊息解析回資料庫");
             }
-
         }
-
-
     }
 }

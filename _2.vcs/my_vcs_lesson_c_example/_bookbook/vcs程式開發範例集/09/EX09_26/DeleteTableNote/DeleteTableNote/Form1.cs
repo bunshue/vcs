@@ -22,7 +22,7 @@ namespace DeleteTableNote
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            showinf();
+            showinfo();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -48,14 +48,14 @@ namespace DeleteTableNote
                         cmd.Connection = con;
                         cmd.ExecuteNonQuery();
                         con.Close();
-                        showinf();
+                        showinfo();
                         MessageBox.Show("刪除成功");
                     }
                 }
             }
         }
 
-        private void showinf()
+        private void showinfo()
         {
             using (SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09"))
             {

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+
 using System.Data.SqlClient;
 
 namespace ADO.NETWrite
@@ -13,9 +14,15 @@ namespace ADO.NETWrite
     public partial class Form1 : Form
     {
         SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09");
+
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            ControlInfo(false);
         }
 
         private void tbADD_Click(object sender, EventArgs e)
@@ -36,8 +43,8 @@ namespace ADO.NETWrite
                 }
             }
             con.Close();
-
         }
+
         private void ControlInfo(Boolean B)
         {
             foreach (Control ct in this.groupBox1.Controls)
@@ -56,10 +63,6 @@ namespace ADO.NETWrite
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            ControlInfo(false);
-        }
         private void tbSave_Click(object sender, EventArgs e)
         {
             con.Open();

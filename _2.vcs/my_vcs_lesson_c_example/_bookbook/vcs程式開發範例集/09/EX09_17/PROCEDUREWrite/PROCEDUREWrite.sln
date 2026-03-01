@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PROCEDUREWrite", "PROCEDUREWrite\PROCEDUREWrite.csproj", "{3C38A9E2-C39E-40D3-972F-88434463C141}"
 EndProject
 Global
