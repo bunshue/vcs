@@ -27,19 +27,18 @@ namespace 隱藏_顯示桌面圖標
             this.TopMost = true;
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            if (checkBox1.Checked)
-            {
-                ShowWindow(FindWindow("progman", null), 0);
-                richTextBox1.Text += "隱藏桌面圖標\n";
-            }
-            else
-            {
-                ShowWindow(FindWindow("progman", null), 5);
-                richTextBox1.Text += "顯示桌面圖標\n";
-            }
+            //隱藏桌面圖標
+            ShowWindow(FindWindow("progman", null), 0);
+            richTextBox1.Text += "隱藏桌面圖標\n";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //顯示桌面圖標
+            ShowWindow(FindWindow("progman", null), 5);
+            richTextBox1.Text += "顯示桌面圖標\n";
         }
     }
 }
-

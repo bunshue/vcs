@@ -22,14 +22,13 @@ namespace ScreenImage
         private void Form1_Load(object sender, EventArgs e)
         {
             Hook.KeyUp += new KeyEventHandler(Hook_KeyUp);//加載鍵盤的放開事件
-            comboBox1.SelectedIndex = 0;//設定圖片的類型
         }
 
         //聲明一個API函數
         [System.Runtime.InteropServices.DllImportAttribute("gdi32.dll")]
         private static extern bool BitBlt(IntPtr hdcDest, int nXDest, int nYDest, int nWidth, int nHeight, IntPtr hdcSrc, int nXSrc, int nYSrc, System.Int32 dwRop);
 
-        public void SnatchScreen(Form Frm, string FilePath, string Style)
+        public void SnatchScreen(Form Frm, string FilePath)
         {
             Point Var_Loc = Frm.Location;//取得目前視窗的位置
             int Frm_left = -Var_Loc.X;
@@ -46,19 +45,13 @@ namespace ScreenImage
             g.ReleaseHdc(Screen_dc);//釋放掉螢幕的句柄
             Var_G_Image.ReleaseHdc(Bitmap_dc);//釋放掉Bitmap的句柄
             ImageFormat ImageF = ImageFormat.Jpeg;//實例化ImageFormat類
-            switch (Style)
-            {
-                //設定文件的類型
-                case "JPG": ImageF = ImageFormat.Jpeg; break;
-                case "BMP": ImageF = ImageFormat.Bmp; break;
-                case "GIF": ImageF = ImageFormat.Gif; break;
-                case "PNG": ImageF = ImageFormat.Png; break;
-                case "WMF": ImageF = ImageFormat.Wmf; break;
-            }
+
+            ImageF = ImageFormat.Jpeg;
             Var_Image.Save(FilePath, ImageF);//以指定的文件格式來保存
         }
 
         HOOK Hook = new HOOK();
+
         private void button1_Click(object sender, EventArgs e)
         {
             //richTextBox1.Text += "stop\n";
@@ -75,7 +68,7 @@ namespace ScreenImage
             if (e.KeyCode.ToString() == "F10")//如是目前按下的是F10鍵
             {
                 //如果沒有對螢幕螢幕截圖進行設定
-                if (textBox1.Text.Length == 0 || textBox2.Text.Length == 0 || comboBox1.Text.Length == 0)
+                if (textBox1.Text.Length == 0 || textBox2.Text.Length == 0)
                 {
                     MessageBox.Show("請設定抓取圖片的存放位置及圖片類型。");//彈出提示文字框
                     HOOK.pp = 1;//標識，不進行F10鍵的正常操作
@@ -83,21 +76,16 @@ namespace ScreenImage
                 }
                 //執行螢幕截圖的操作
                 //richTextBox1.Text += "wwwwwwwwwwwwwwwwwwwwwwwwww\n";
-                     
-                SnatchScreen(this, textBox1.Text + "\\" + textBox2.Text + "." + comboBox1.Text, comboBox1.Text);
+
+                SnatchScreen(this, textBox1.Text + "\\" + textBox2.Text + ".jpg");
                 HOOK.pp = 1;//標識，不進行F10鍵的正常操作
+
+                //richTextBox1.Text += "AAAAAAAAAAAAAAAAAA\n";
             }
             else
             {
                 HOOK.pp = 0;//標識，執行F10鍵的正常操作
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)//開啟文件對話框
-            {
-                textBox1.Text = folderBrowserDialog1.SelectedPath;//取得圖片儲存的路徑
+                //richTextBox1.Text += "BBBBBBBBBBBBBBBBBBB\n";
             }
         }
 
@@ -114,4 +102,3 @@ namespace ScreenImage
         }
     }
 }
-

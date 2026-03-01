@@ -37,6 +37,8 @@ namespace 隱藏_顯示開始按鈕
 
         private void button1_Click(object sender, EventArgs e)
         {
+            // 看不出效果
+
             if (radioButton1.Checked)
             {
                 ShowWindow(FindWindowEx(FindWindow("Shell_TrayWnd", null), 0, "Button", null), SW_HIDE);
