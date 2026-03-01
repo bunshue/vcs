@@ -571,6 +571,7 @@
             this.button40.Name = "button40";
             this.button40.Size = new System.Drawing.Size(200, 60);
             this.button40.TabIndex = 167;
+            this.button40.Text = "利用聚合函數MIN求銷售額、利潤最少的商品";
             this.button40.UseVisualStyleBackColor = true;
             this.button40.Click += new System.EventHandler(this.button40_Click);
             // 
@@ -581,6 +582,7 @@
             this.button41.Name = "button41";
             this.button41.Size = new System.Drawing.Size(200, 60);
             this.button41.TabIndex = 168;
+            this.button41.Text = "利用聚合函數COUNT求日銷售額大於某值的商品數";
             this.button41.UseVisualStyleBackColor = true;
             this.button41.Click += new System.EventHandler(this.button41_Click);
             // 
@@ -591,6 +593,7 @@
             this.button42.Name = "button42";
             this.button42.Size = new System.Drawing.Size(200, 60);
             this.button42.TabIndex = 169;
+            this.button42.Text = "用子查詢作表達式";
             this.button42.UseVisualStyleBackColor = true;
             this.button42.Click += new System.EventHandler(this.button42_Click);
             // 
@@ -601,6 +604,7 @@
             this.button43.Name = "button43";
             this.button43.Size = new System.Drawing.Size(200, 60);
             this.button43.TabIndex = 170;
+            this.button43.Text = "靜態交叉表";
             this.button43.UseVisualStyleBackColor = true;
             this.button43.Click += new System.EventHandler(this.button43_Click);
             // 

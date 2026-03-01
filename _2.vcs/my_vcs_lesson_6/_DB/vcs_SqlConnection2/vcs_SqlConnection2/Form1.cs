@@ -887,18 +887,122 @@ namespace vcs_SqlConnection2
 
         private void button40_Click(object sender, EventArgs e)
         {
+            /*
+            //show
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection cn = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("select * from tb_sell", cn);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            */
+
+            //利用聚合函數MIN求銷售額、利潤最少的商品
+
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection cn = new SqlConnection(cnstr);
+
+            //查詢銷售額最少的商品訊息
+            //SqlDataAdapter dap = new SqlDataAdapter("select * from tb_sell where 銷價 in(select min(銷價) from tb_sell)", cn);
+
+            //查詢利潤最少的商品訊息
+            SqlDataAdapter dap = new SqlDataAdapter("select * from tb_sell where 利潤 in(select min(利潤) from tb_sell)", cn);
+
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
         }
 
         private void button41_Click(object sender, EventArgs e)
         {
+            /*
+            //show
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection cn = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("select * from tb_sell", cn);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            */
+
+            //利用聚合函數COUNT求日銷售額大於某值的商品數
+
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection cn = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("select count(distinct 日期) as 商品數 from tb_sell where 銷價 >500", cn);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+
+            richTextBox1.Text += "查詢日銷售額大於５００的銷售商品種數：" + ds.Tables[0].Rows[0][0].ToString() + "\n";
         }
 
         private void button42_Click(object sender, EventArgs e)
         {
+            /*
+            //show
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection cn = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("select  * from tb_Stud", cn);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            */
+
+            //用子查詢作表達式
+
+            //查詢 計算機 課程的平均成績
+
+            string course = "計算機";
+
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection cn = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("select  distinct (select  AVG(成績) from tb_Stud  where 課程='" + course + "') as 平均成績  FROM tb_Stud ", cn);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+
+            richTextBox1.Text += "查詢 計算機 課程的平均成績 : " + ds.Tables[0].Rows[0][0].ToString() + "\n";
         }
 
         private void button43_Click(object sender, EventArgs e)
         {
+            /*
+            //show
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection con = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("SELECT * FROM 銷售表", con);
+            DataSet ds = new DataSet();
+            dap.Fill(ds, "table");
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            */
+
+            //3030
+
+            //靜態交叉表
+
+            //銷售業績分析
+
+
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection con = new SqlConnection(cnstr);
+
+            //按員工姓名分析
+            //SqlDataAdapter dap = new SqlDataAdapter("SELECT 所在部門, SUM(CASE 員工姓名 WHEN '李金明' THEN 銷售業績 ELSE NULL END)AS [李金明],SUM(CASE 員工姓名 WHEN '周可人' THEN 銷售業績 ELSE NULL END)as [周可人] ,SUM(CASE 員工姓名 WHEN '韓運' THEN 銷售業績 ELSE NULL END)AS [韓運],SUM(CASE 員工姓名 WHEN '司徒南' THEN 銷售業績 ELSE NULL END)AS [司徒南],SUM(CASE 員工姓名 WHEN '史佳金' THEN 銷售業績 ELSE NULL END)AS [史佳金]  FROM 銷售表 GROUP BY 所在部門", con);
+
+            //按部門分析
+            SqlDataAdapter dap = new SqlDataAdapter("SELECT 員工姓名, SUM(CASE 所在部門 WHEN '食品部' THEN 銷售業績 ELSE NULL END) AS [食品部業績],SUM(CASE 所在部門 WHEN '家電部' THEN 銷售業績 ELSE NULL END) AS [家電部業績] FROM 銷售表 GROUP BY 員工姓名", con);
+
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+
         }
 
         private void button44_Click(object sender, EventArgs e)
