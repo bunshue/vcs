@@ -168,7 +168,6 @@ namespace vcs_Speech_DotNetSpeech
             return File.Exists(path);
         }
 
-
         public Form1()
         {
             InitializeComponent();
@@ -381,5 +380,3 @@ namespace vcs_Speech_DotNetSpeech
         }
     }
 }
-
-

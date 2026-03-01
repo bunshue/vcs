@@ -8,9 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 
 using SpeechLib;    //for SpVoiceClass
+
 /*
 參考/加入參考/COM/Microsoft Speech Object Library 5.4 選 C:\Windows\System32\Speech\Common\sapi.dll
-
 把參考SpeechLib的屬性 [內嵌Interop類型]設為 False
 */
 
@@ -43,7 +43,6 @@ namespace vcs_SpeechLib
             {
                 MessageBox.Show("An Error Occured!", "SpeechApp", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -52,7 +51,6 @@ namespace vcs_SpeechLib
 
             string article1 = "Insight Medical Solutions Inc.";
             string article2 = "群曜醫電股份有限公司";
-
             try
             {
                 string filename = Application.StartupPath + "\\wav_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".wav";
@@ -69,8 +67,6 @@ namespace vcs_SpeechLib
                 SpFileStream.Close();
 
                 richTextBox1.Text += "已存檔 : " + filename + "\n";
-
-
 
                 /* 後續
                 ISpeechObjectTokens tokens = Voice.GetVoices(string.Empty, string.Empty);
@@ -288,4 +284,3 @@ namespace vcs_SpeechLib
         }
     }//end class
 }
-

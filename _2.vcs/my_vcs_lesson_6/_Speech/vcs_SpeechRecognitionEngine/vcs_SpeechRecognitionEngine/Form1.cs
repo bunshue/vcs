@@ -17,15 +17,10 @@ using System.Speech.Synthesis;
 //語音識別
 /*
 在.NET4.0中，我可以借助System.Speech組件讓電腦來識別我們的聲音。
-
 以上，當我說"name"，顯示"Darren"，我說"age",顯示"永遠21"。如何做呢？
-
 首先要開啟電腦的語音識別功能。
-
 右鍵電腦右下方的揚聲器，選擇"錄音設備"。
-
 點擊默認的"麥克風"，再點擊左下角的"配置"按鈕。
-
 點擊"啟動語音識別"。
 */
 
@@ -45,25 +40,16 @@ namespace vcs_SpeechRecognitionEngine
         {
             //_recognizer.LoadGrammar(new Grammar(new GrammarBuilder("test")) { Name = "testGrammar" }); // load a grammar"test"
 
-
             /*
             Choices preCmd = new Choices();
-
             preCmd.Add(new string[] { "name", "age" });
-
             GrammarBuilder gb = new GrammarBuilder();
-
             gb.Append(preCmd);
-
             Grammar gr = new Grammar(gb);
-
             recEngine.LoadGrammarAsync(gr);
-
             recEngine.SetInputToDefaultAudioDevice();
-
             recEngine.SpeechRecognized += recEngine_SpeechRecognized;
             */
-
         }
 
         void recEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
@@ -90,15 +76,11 @@ namespace vcs_SpeechRecognitionEngine
             */
 
             recEngine.RecognizeAsync(RecognizeMode.Multiple);
-
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             recEngine.RecognizeAsyncStop();
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -106,7 +88,6 @@ namespace vcs_SpeechRecognitionEngine
             // Create an in-process speech recognizer for the en-US locale.  
             using (SpeechRecognitionEngine recognizer = new SpeechRecognitionEngine(new CultureInfo("zh-tw")))
             {
-
                 // Create and load a dictation grammar.  
                 recognizer.LoadGrammar(new DictationGrammar());
 
@@ -125,8 +106,6 @@ namespace vcs_SpeechRecognitionEngine
                     Console.ReadLine();
                 }
             }
-
-
         }
 
         // Handle the SpeechRecognized event.  
@@ -176,3 +155,4 @@ namespace vcs_SpeechRecognitionEngine
         */
     }
 }
+
