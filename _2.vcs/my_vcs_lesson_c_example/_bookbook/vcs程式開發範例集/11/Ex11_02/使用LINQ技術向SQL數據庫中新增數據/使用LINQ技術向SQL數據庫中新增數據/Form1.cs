@@ -11,22 +11,32 @@ namespace 使用LINQ技術向SQL數據庫中新增數據
 {
     public partial class Form1 : Form
     {
+        string strCon = "Data Source=(local);database=db_11;uid=sa;pwd=;";
+        linqtosqlDataContext linq;
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        string strCon = "Data Source=(local);database=db_11;uid=sa;pwd=;";
-        linqtosqlDataContext linq;
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            cbbduty.SelectedIndex = 0;
+            cbbmary.SelectedIndex = 0;
+            cbbSex.SelectedIndex = 0;
+            binginfo();
+        }
+
         private void Form1_Activated(object sender, EventArgs e)
         {
             txtName.Focus();
         }
+
         private void binginfo()
         {
             linq = new linqtosqlDataContext(strCon);
             var result = from info in linq.tb_User
-                         select new 
+                         select new
                          {
                              編號 = info.ID,
                              姓名 = info.User_Name.Trim(),
@@ -38,13 +48,6 @@ namespace 使用LINQ技術向SQL數據庫中新增數據
                              聯繫地址 = info.User_Address.Trim()
                          };
             dataGridView1.DataSource = result;
-        }
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            cbbduty.SelectedIndex = 0;
-            cbbmary.SelectedIndex = 0;
-            cbbSex.SelectedIndex = 0;
-            binginfo();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -97,7 +100,7 @@ namespace 使用LINQ技術向SQL數據庫中新增數據
 
         private void txtage_KeyUp(object sender, KeyEventArgs e)
         {
-            if(txtage.Text.StartsWith("0"))
+            if (txtage.Text.StartsWith("0"))
             {
                 MessageBox.Show("年齡不能以0開頭");
                 txtage.Text = "";

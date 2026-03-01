@@ -100,7 +100,7 @@
             // 
             this.txtaddress.Location = new System.Drawing.Point(80, 86);
             this.txtaddress.Name = "txtaddress";
-            this.txtaddress.Size = new System.Drawing.Size(372, 21);
+            this.txtaddress.Size = new System.Drawing.Size(372, 22);
             this.txtaddress.TabIndex = 37;
             // 
             // label8
@@ -117,7 +117,7 @@
             this.txtphone.Location = new System.Drawing.Point(371, 51);
             this.txtphone.MaxLength = 11;
             this.txtphone.Name = "txtphone";
-            this.txtphone.Size = new System.Drawing.Size(81, 21);
+            this.txtphone.Size = new System.Drawing.Size(81, 22);
             this.txtphone.TabIndex = 35;
             this.txtphone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtphone_KeyPress);
             // 
@@ -181,10 +181,10 @@
             this.txtage.Location = new System.Drawing.Point(371, 22);
             this.txtage.MaxLength = 3;
             this.txtage.Name = "txtage";
-            this.txtage.Size = new System.Drawing.Size(81, 21);
+            this.txtage.Size = new System.Drawing.Size(81, 22);
             this.txtage.TabIndex = 29;
-            this.txtage.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtage_KeyUp);
             this.txtage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtage_KeyPress);
+            this.txtage.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtage_KeyUp);
             // 
             // label3
             // 
@@ -220,7 +220,7 @@
             // 
             this.txtName.Location = new System.Drawing.Point(80, 23);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(100, 21);
+            this.txtName.Size = new System.Drawing.Size(100, 22);
             this.txtName.TabIndex = 25;
             // 
             // label1
@@ -246,7 +246,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(467, 342);
+            this.ClientSize = new System.Drawing.Size(779, 530);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button2);
@@ -269,8 +269,8 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "使用LINQ技術在SQL數據庫中修改數據";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.Activated += new System.EventHandler(this.Form1_Activated);
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.Data.SqlClient;
 using System.Collections;
+
 namespace 利用餅型圖分析產品市場佔有率
 {
     public partial class Form1 : Form
@@ -18,17 +19,28 @@ namespace 利用餅型圖分析產品市場佔有率
         SqlConnection con;
         SqlCommand cmd;
         Hashtable ht = new Hashtable();
+
         public Form1()
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Conn();
+            using (cmd = new SqlCommand("select Sum(t_Num)  from tb_product", con))
+            {
+                SumNum = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+        }
+
         private void Conn()
         {
             con = new SqlConnection("server=.;uid=sa;pwd=;database=db_13");
             con.Open();
         }
 
-        private void showPic(float f,Brush B)
+        private void showPic(float f, Brush B)
         {
             Graphics g = this.panel1.CreateGraphics();
             if (TimeNum == 0.0f)
@@ -41,6 +53,7 @@ namespace 利用餅型圖分析產品市場佔有率
             }
             TimeNum += f * 360;
         }
+
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             ht.Clear();
@@ -52,7 +65,7 @@ namespace 利用餅型圖分析產品市場佔有率
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    ht.Add(dr[0],Convert.ToInt32(dr[1]));
+                    ht.Add(dr[0], Convert.ToInt32(dr[1]));
                 }
                 float[] flo = new float[ht.Count];
                 int T = 0;
@@ -63,16 +76,9 @@ namespace 利用餅型圖分析產品市場佔有率
                     g2.DrawString(de.Key + "        " + flo[T] * 100 + "%", new Font("Arial", 8, FontStyle.Regular), Bru, 7, 5 + T * 18);
                     showPic(flo[T], Bru);
                     T++;
-                }  
-            }
-        }
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            Conn();
-            using (cmd = new SqlCommand("select Sum(t_Num)  from tb_product", con))
-            {
-               SumNum=Convert.ToInt32(cmd.ExecuteScalar());
+                }
             }
         }
     }
 }
+

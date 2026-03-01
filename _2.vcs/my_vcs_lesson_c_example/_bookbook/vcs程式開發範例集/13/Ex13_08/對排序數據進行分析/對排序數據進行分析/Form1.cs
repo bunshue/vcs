@@ -6,15 +6,16 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-
 using System.Drawing.Imaging;
 using System.Data.SqlClient;
+
 namespace 對排序數據進行分析
 {
     public partial class Form1 : Form
     {
         SqlConnection con;
         SqlCommand cmd;
+
         public Form1()
         {
             InitializeComponent();
@@ -22,13 +23,14 @@ namespace 對排序數據進行分析
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
         }
         private void Conn()
         {
             con = new SqlConnection("server=.;uid=sa;pwd=;database=db_13");
             con.Open();
         }
+
         private void ShowPic(string str)
         {
             Conn();
@@ -81,6 +83,5 @@ namespace 對排序數據進行分析
         {
             ShowPic("desc");
         }
-
     }
 }

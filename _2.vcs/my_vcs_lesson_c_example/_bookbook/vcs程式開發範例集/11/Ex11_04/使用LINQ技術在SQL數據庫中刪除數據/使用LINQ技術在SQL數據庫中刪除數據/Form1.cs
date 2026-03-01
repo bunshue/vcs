@@ -11,18 +11,25 @@ namespace 使用LINQ技術在SQL數據庫中刪除數據
 {
     public partial class Form1 : Form
     {
+        linqtosqlDataContext linq;
+        string strCon = "Data Source=(local);database=db_11;uid=sa;pwd=;";
+
         public Form1()
         {
             InitializeComponent();
         }
-        linqtosqlDataContext linq;
-        string strCon = "Data Source=(local);database=db_11;uid=sa;pwd=;";
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            bindinfo();
+        }
+
         private void bindinfo()
         {
             linq = new linqtosqlDataContext(strCon);//實例化Linq連接對像
             //取得所有員工訊息
             var result = from info in linq.tb_User
-                         select new 
+                         select new
                          {
                              編號 = info.ID,
                              姓名 = info.User_Name.Trim(),
@@ -36,17 +43,12 @@ namespace 使用LINQ技術在SQL數據庫中刪除數據
             dataGridView1.DataSource = result;//對DataGridView控制元件進行數據綁定
         }
 
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            bindinfo();
-        }
         int id;
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dataGridView1.SelectedRows.Count != 0)
             {
-                id =Convert.ToInt32( dataGridView1.SelectedRows[0].Cells[0].Value);
+                id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
             }
         }
 
@@ -75,3 +77,4 @@ namespace 使用LINQ技術在SQL數據庫中刪除數據
         }
     }
 }
+

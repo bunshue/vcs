@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+
 using System.Data.SqlClient;
 
 namespace CutSQLServer
@@ -15,6 +16,11 @@ namespace CutSQLServer
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -31,7 +37,7 @@ namespace CutSQLServer
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("已成功斷開服務");
                 }
-                catch(Exception euy)
+                catch (Exception euy)
                 {
                     MessageBox.Show(euy.Message);
                 }
@@ -41,11 +47,6 @@ namespace CutSQLServer
         private void button2_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

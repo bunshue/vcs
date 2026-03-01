@@ -77,7 +77,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 17);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(143, 12);
+            this.label1.Size = new System.Drawing.Size(149, 12);
             this.label1.TabIndex = 3;
             this.label1.Text = "要附加數數據的MDF文件：";
             // 
@@ -86,7 +86,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 40);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(143, 12);
+            this.label2.Size = new System.Drawing.Size(146, 12);
             this.label2.TabIndex = 4;
             this.label2.Text = "要附加數數據的LDF文件：";
             // 
@@ -103,21 +103,21 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(160, 64);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(198, 21);
+            this.textBox1.Size = new System.Drawing.Size(198, 22);
             this.textBox1.TabIndex = 6;
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(161, 37);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(197, 21);
+            this.textBox2.Size = new System.Drawing.Size(197, 22);
             this.textBox2.TabIndex = 7;
             // 
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(161, 12);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(198, 21);
+            this.textBox3.Size = new System.Drawing.Size(198, 22);
             this.textBox3.TabIndex = 8;
             // 
             // openFileDialog1
@@ -130,7 +130,7 @@
             // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(447, 103);
+            this.ClientSize = new System.Drawing.Size(701, 482);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);

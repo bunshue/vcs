@@ -18,9 +18,15 @@ namespace 利用圖表分析彩票中獎情況
         SqlCommand cmd;
         SqlDataAdapter da;
         DataSet ds;
+
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void Conn()
@@ -28,7 +34,7 @@ namespace 利用圖表分析彩票中獎情況
             con = new SqlConnection("server=.;uid=sa;pwd=;database=db_13");
             con.Open();
         }
-      
+
         private void button1_Click(object sender, EventArgs e)
         {
             string str = "select * from tb_lottery where t_year between '" + Convert.ToDateTime(this.dateTimePicker1.Text).ToShortDateString() + "' and '" + Convert.ToDateTime(this.dateTimePicker2.Text).ToShortDateString() + "' order by t_year";
@@ -64,7 +70,6 @@ namespace 利用圖表分析彩票中獎情況
                 dr.Close();
                 this.panel1.BackgroundImage = bmp;
 
-
                 Bitmap bmpP = new Bitmap(this.panel3.Width, this.panel3.Height);
 
                 Graphics gP = Graphics.FromImage(bmpP);
@@ -96,12 +101,6 @@ namespace 利用圖表分析彩票中獎情況
                 MessageBox.Show("此範圍內沒有任何訊息！！！");
                 return;
             }
-        
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
         }
     }
 }

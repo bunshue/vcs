@@ -61,7 +61,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(12, 25);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(213, 21);
+            this.textBox1.Size = new System.Drawing.Size(213, 22);
             this.textBox1.TabIndex = 2;
             // 
             // label1
@@ -86,7 +86,7 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(14, 67);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(211, 21);
+            this.textBox2.Size = new System.Drawing.Size(211, 22);
             this.textBox2.TabIndex = 5;
             // 
             // openFileDialog1
@@ -98,7 +98,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(289, 126);
+            this.ClientSize = new System.Drawing.Size(722, 471);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);

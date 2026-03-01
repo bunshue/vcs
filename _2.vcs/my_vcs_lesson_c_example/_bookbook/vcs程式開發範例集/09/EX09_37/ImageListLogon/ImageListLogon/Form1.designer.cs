@@ -38,7 +38,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -73,7 +73,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(17, 46);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.Size = new System.Drawing.Size(47, 12);
             this.label2.TabIndex = 9;
             this.label2.Text = "密  碼：";
             // 
@@ -82,7 +82,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(17, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 8;
             this.label1.Text = "使用者名：";
             // 
@@ -91,14 +91,14 @@
             this.textBox2.Location = new System.Drawing.Point(85, 46);
             this.textBox2.Name = "textBox2";
             this.textBox2.PasswordChar = '*';
-            this.textBox2.Size = new System.Drawing.Size(100, 21);
+            this.textBox2.Size = new System.Drawing.Size(100, 22);
             this.textBox2.TabIndex = 7;
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(85, 18);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.Size = new System.Drawing.Size(100, 22);
             this.textBox1.TabIndex = 6;
             // 
             // button1
@@ -139,7 +139,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(353, 237);
+            this.ClientSize = new System.Drawing.Size(767, 505);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";

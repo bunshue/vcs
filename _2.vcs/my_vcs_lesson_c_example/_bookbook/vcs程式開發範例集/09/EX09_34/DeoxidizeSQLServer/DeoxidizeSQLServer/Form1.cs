@@ -6,8 +6,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
-using System.Data.SqlClient;
 
+using System.Data.SqlClient;
 
 namespace DeoxidizeSQLServer
 {
@@ -55,7 +55,7 @@ namespace DeoxidizeSQLServer
                 con.Open();
                 try
                 {
-                    SqlCommand cmd = new SqlCommand(SqlStr2,con);
+                    SqlCommand cmd = new SqlCommand(SqlStr2, con);
                     cmd.Connection = con;
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("還原數據成功");

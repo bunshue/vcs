@@ -45,7 +45,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(260, 149);
+            this.ClientSize = new System.Drawing.Size(652, 518);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "利用控制元件完成柱形圖分析";

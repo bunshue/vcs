@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+
 using System.Data.SqlClient;
 
 namespace SQLPeriphery
@@ -15,6 +16,11 @@ namespace SQLPeriphery
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -31,9 +37,11 @@ namespace SQLPeriphery
                     cmd.CommandText = str;
                     cmd.ExecuteNonQuery();
                     this.label3.Text = "已成功完成訊息拷貝";
-                    
                 }
-                catch (Exception ey) { MessageBox.Show(ey.Message); }
+                catch (Exception ey)
+                {
+                    MessageBox.Show(ey.Message);
+                }
             }
         }
 
@@ -55,3 +63,4 @@ namespace SQLPeriphery
         }
     }
 }
+

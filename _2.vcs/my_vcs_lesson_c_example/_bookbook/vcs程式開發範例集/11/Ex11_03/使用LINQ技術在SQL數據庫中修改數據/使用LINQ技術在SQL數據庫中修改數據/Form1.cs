@@ -11,16 +11,24 @@ namespace 使用LINQ技術在SQL數據庫中修改數據
 {
     public partial class Form1 : Form
     {
+        string strCon = "Data Source=(local);database=db_11;uid=sa;pwd=;";
+        linqtosqlDataContext linq;
+
         public Form1()
         {
             InitializeComponent();
         }
-        string strCon = "Data Source=(local);database=db_11;uid=sa;pwd=;";
-        linqtosqlDataContext linq;
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            binginfo();
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
+
         private void binginfo()
         {
             linq = new linqtosqlDataContext(strCon);
@@ -38,10 +46,6 @@ namespace 使用LINQ技術在SQL數據庫中修改數據
                          };
             dataGridView1.DataSource = result;
         }
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            binginfo();
-        }
 
         private void Form1_Activated(object sender, EventArgs e)
         {
@@ -52,6 +56,7 @@ namespace 使用LINQ技術在SQL數據庫中修改數據
         {
 
         }
+
         int Pid;
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {

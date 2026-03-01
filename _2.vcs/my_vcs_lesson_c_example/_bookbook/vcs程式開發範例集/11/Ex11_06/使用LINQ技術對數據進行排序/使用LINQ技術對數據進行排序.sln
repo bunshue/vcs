@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "使用LINQ技術對數據進行排序", "使用LINQ技術對數據進行排序\使用LINQ技術對數據進行排序.csproj", "{9D35E2D5-4B2A-4FB5-8ABF-D272C6A29EA6}"
 EndProject
 Global

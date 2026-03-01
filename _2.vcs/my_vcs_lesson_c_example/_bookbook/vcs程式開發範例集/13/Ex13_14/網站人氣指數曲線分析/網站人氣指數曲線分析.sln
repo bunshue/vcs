@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "網站人氣指數曲線分析", "網站人氣指數曲線分析\網站人氣指數曲線分析.csproj", "{0EE1A3B0-8232-442E-BE64-798D6A4496D8}"
 EndProject
 Global

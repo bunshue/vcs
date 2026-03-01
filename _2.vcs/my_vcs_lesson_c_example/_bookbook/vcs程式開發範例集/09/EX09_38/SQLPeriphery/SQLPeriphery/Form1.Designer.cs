@@ -65,14 +65,14 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(71, 24);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(175, 21);
+            this.textBox1.Size = new System.Drawing.Size(175, 22);
             this.textBox1.TabIndex = 3;
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(71, 55);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(175, 21);
+            this.textBox2.Size = new System.Drawing.Size(175, 22);
             this.textBox2.TabIndex = 4;
             // 
             // label1
@@ -130,7 +130,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(319, 106);
+            this.ClientSize = new System.Drawing.Size(716, 473);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -142,6 +142,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "拷貝文件";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -19,7 +19,7 @@ namespace SeparateSQLServer
 
         private void Form1_Load(object sender, EventArgs e)
         {
-      
+
         }
 
         private void biandingiInfo()
@@ -44,11 +44,11 @@ namespace SeparateSQLServer
                     SqlCommand cmd = new SqlCommand();
                     con.Open();
                     cmd.Connection = con;
-                    cmd.CommandText = "sp_detach_db @dbname='" + this.comboBox1.Text+"'";
+                    cmd.CommandText = "sp_detach_db @dbname='" + this.comboBox1.Text + "'";
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("分離成功");
                 }
-                catch(Exception ey)
+                catch (Exception ey)
                 {
                     MessageBox.Show(ey.Message);
                 }

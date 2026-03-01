@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Data.SqlClient;
+
 namespace 利用控制元件完成柱形圖分析
 {
     public partial class Form1 : Form
@@ -31,16 +32,15 @@ namespace 利用控制元件完成柱形圖分析
                 int Values = Convert.ToInt32(ds.Tables[1].Rows[0][0].ToString());
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
-
                     ds.Tables[0].Rows[i][0].ToString();
                     float f = Convert.ToInt32(ds.Tables[0].Rows[i][1].ToString());
                     Size s = new Size();
                     s.Width = 30;
-                    s.Height = Convert.ToInt32(f/Values*200);
+                    s.Height = Convert.ToInt32(f / Values * 200);
 
                     Point pint = new Point();
                     pint.X = XValse;
-                    pint.Y = this.Height-50-s.Height;
+                    pint.Y = this.Height - 50 - s.Height;
                     p[i] = new Panel();
                     p[i].Location = pint;
                     p[i].BackColor = Color.Red;
@@ -51,8 +51,8 @@ namespace 利用控制元件完成柱形圖分析
                     lbl.Font = new Font("細明體", 9, FontStyle.Regular);
                     lbl.ForeColor = Color.White;
                     p[i].Controls.Add(lbl);
-                   this.Controls.Add(p[i]);
-                }   
+                    this.Controls.Add(p[i]);
+                }
             }
         }
     }

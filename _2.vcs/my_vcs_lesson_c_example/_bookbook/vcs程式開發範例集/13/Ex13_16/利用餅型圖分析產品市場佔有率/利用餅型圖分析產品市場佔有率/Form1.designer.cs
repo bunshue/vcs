@@ -62,7 +62,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(423, 248);
+            this.ClientSize = new System.Drawing.Size(752, 511);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.linkLabel1);
@@ -70,8 +70,8 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "利用餅型圖分析產品市場佔有率";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.ResumeLayout(false);
             this.PerformLayout();
 

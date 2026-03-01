@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+
 using System.Data.SqlClient;
 
 namespace AddOnsOddSQLServer
@@ -17,16 +18,19 @@ namespace AddOnsOddSQLServer
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
 
             if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
-            { 
-                if(this.openFileDialog1.FileName!="")
+            {
+                if (this.openFileDialog1.FileName != "")
                 {
                     this.textBox1.Text = this.openFileDialog1.FileName;
-                    
-                  
                 }
             }
         }
@@ -59,20 +63,12 @@ namespace AddOnsOddSQLServer
                     cmd.CommandText = sb.ToString();
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("附加成功");
-                   
                 }
                 catch (Exception ety)
                 {
                     MessageBox.Show(ety.Message);
                 }
-
             }
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-        
     }
 }

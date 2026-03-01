@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Data.SqlClient;
+
 namespace 多曲線數據分析
 {
     public partial class Form1 : Form
@@ -27,9 +28,9 @@ namespace 多曲線數據分析
                 this.comboBox1.DataSource = dt.DefaultView;
                 this.comboBox1.DisplayMember = "Years";
                 this.comboBox1.ValueMember = "Years";
-
             }
         }
+
         private void CreateImage(int ID)
         {
             int height = 440, width = 600;
@@ -172,13 +173,13 @@ namespace 多曲線數據分析
                 this.panel1.BackgroundImage = image;
             }
             catch
-            {}
+            { }
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {          
+        {
             this.CreateImage(Convert.ToInt32(this.comboBox1.Text));
         }
-     
     }
 }
+

@@ -6,12 +6,15 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Data.SqlClient;
+
 namespace 網站人氣指數曲線分析
 {
     public partial class Form1 : Form
     {
         static int i = 0;
+
         public Form1()
         {
             InitializeComponent();
@@ -19,9 +22,9 @@ namespace 網站人氣指數曲線分析
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
             i += 1;
         }
+
         private void drowPic()
         {
             //清空圖片背景色
@@ -95,16 +98,16 @@ namespace 網站人氣指數曲線分析
                 //與Y軸數產生有關(y * 12) / 16  因為起始為500
                 Count[j] = Convert.ToInt32(ds.Tables[0].Rows[0][j + 2].ToString()) * (y * 12) / 16 / 500;
             }
-            points[0].X = x; 
+            points[0].X = x;
             points[0].Y = k - Count[0];
             x = x + (this.Width - 34) / 14;
-            points[1].X = x; 
+            points[1].X = x;
             points[1].Y = k - Count[1];
             x = x + (this.Width - 34) / 14;
-            points[2].X = x; 
+            points[2].X = x;
             points[2].Y = k - Count[2];
             x = x + (this.Width - 34) / 14;
-            points[3].X = x; 
+            points[3].X = x;
             points[3].Y = k - Count[3];
             x = x + (this.Width - 34) / 14;
             points[4].X = x;
@@ -116,27 +119,30 @@ namespace 網站人氣指數曲線分析
             points[6].X = x;
             points[6].Y = k - Count[6];
             x = x + (this.Width - 34) / 14;
-            points[7].X = x; 
+            points[7].X = x;
             points[7].Y = k - Count[7];
             x = x + (this.Width - 34) / 14;
             points[8].X = x;
             points[8].Y = k - Count[8];
             x = x + (this.Width - 34) / 14;
-            points[9].X = x; 
+            points[9].X = x;
             points[9].Y = k - Count[9];
             x = x + (this.Width - 34) / 14;
             points[10].X = x;
             points[10].Y = k - Count[10];
             x = x + (this.Width - 34) / 14;
-            points[11].X = x; 
+            points[11].X = x;
             points[11].Y = k - Count[11];
             g.DrawLines(mypen, points);  //繪製折線      
         }
-      
+
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             if (i != 0)
+            {
                 drowPic();
+            }
         }
     }
 }
+

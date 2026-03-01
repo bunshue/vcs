@@ -11,12 +11,19 @@ namespace 使用LINQ技術對數據進行排序
 {
     public partial class Form1 : Form
     {
+        linqtosqlDataContext linq;
+        string strCon = "Data Source=(local);database=db_11;uid=sa;pwd=;";
+
         public Form1()
         {
             InitializeComponent();
         }
-        linqtosqlDataContext linq;
-        string strCon = "Data Source=(local);database=db_11;uid=sa;pwd=;";
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            bindinfo();
+        }
+
         private void bindinfo()
         {
             linq = new linqtosqlDataContext(strCon);//實例化Linq連接對像
@@ -35,15 +42,12 @@ namespace 使用LINQ技術對數據進行排序
                          };
             dataGridView1.DataSource = result;//對DataGridView控制元件進行數據綁定
         }
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            bindinfo();
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
             linq = new linqtosqlDataContext(strCon);
-            var result = from info in linq.tb_User orderby info.ID ascending 
+            var result = from info in linq.tb_User
+                         orderby info.ID ascending
                          select new
                          {
                              編號 = info.ID,

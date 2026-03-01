@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "使用LINQ技術在SQL數據庫中刪除數據", "使用LINQ技術在SQL數據庫中刪除數據\使用LINQ技術在SQL數據庫中刪除數據.csproj", "{A9AD5DA5-448F-4C1F-BD1F-799BDC3CED04}"
 EndProject
 Global

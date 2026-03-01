@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Data.SqlClient;
+
 namespace 利用多餅型圖分析企業人力資源情況
 {
     public partial class Form1 : Form
@@ -15,7 +16,8 @@ namespace 利用多餅型圖分析企業人力資源情況
         SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_13");
         SqlCommand cmd;
         static int ConutNum = 0;
-        static float floatNum=0.0f;
+        static float floatNum = 0.0f;
+
         public Form1()
         {
             InitializeComponent();
@@ -39,12 +41,12 @@ namespace 利用多餅型圖分析企業人力資源情況
                 Bitmap bmp = new Bitmap(this.panel1.Width, this.panel1.Height);
                 Graphics g = Graphics.FromImage(bmp);
                 cmd.Connection.Open();
-                SqlDataReader dr=cmd.ExecuteReader();
+                SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    float f =Convert.ToSingle(dr[1]) / Sum;
+                    float f = Convert.ToSingle(dr[1]) / Sum;
                     string str = dr[0].ToString();
-                    drowPic(g, f,str);
+                    drowPic(g, f, str);
                 }
                 g.DrawLine(new Pen(Color.Black), 0, this.panel1.Height / 2, this.panel1.Width, this.panel1.Height / 2);
                 g.DrawLine(new Pen(Color.Black), this.panel1.Width / 2, 0, this.panel1.Width / 2, this.panel1.Height);
@@ -54,12 +56,12 @@ namespace 利用多餅型圖分析企業人力資源情況
             }
         }
 
-        private void drowPic(Graphics g, float f,string str)
+        private void drowPic(Graphics g, float f, string str)
         {
             if (ConutNum == 0)
             {
                 g.FillPie(new SolidBrush(Color.Black), 0, 0, (this.panel1.Width) / 2, (this.panel1.Height - 10) / 2, 0, 360 * f);
-                g.DrawString(str, new Font("細明體", 10, FontStyle.Bold), new SolidBrush(Color.Black), (this.panel1.Width) / 2-70, 10);
+                g.DrawString(str, new Font("細明體", 10, FontStyle.Bold), new SolidBrush(Color.Black), (this.panel1.Width) / 2 - 70, 10);
                 g.DrawString(Convert.ToString(f * 100).Substring(0, 5) + "%", new Font("細明體", 10, FontStyle.Bold), new SolidBrush(Color.Black), (this.panel1.Width) / 2 - 70, 25);
                 floatNum = 360 * f;
                 ConutNum += 1;
@@ -74,19 +76,18 @@ namespace 利用多餅型圖分析企業人力資源情況
             }
             else if (ConutNum == 2)
             {
-                g.FillPie(new SolidBrush(Color.Red), 0, (this.panel1.Height - 10) / 2+10, (this.panel1.Width) / 2, (this.panel1.Height - 10) / 2, floatNum, 360 * f);
-                g.DrawString(str, new Font("細明體", 10, FontStyle.Bold), new SolidBrush(Color.Red), 10, (this.panel1.Height - 10) / 2+20);
+                g.FillPie(new SolidBrush(Color.Red), 0, (this.panel1.Height - 10) / 2 + 10, (this.panel1.Width) / 2, (this.panel1.Height - 10) / 2, floatNum, 360 * f);
+                g.DrawString(str, new Font("細明體", 10, FontStyle.Bold), new SolidBrush(Color.Red), 10, (this.panel1.Height - 10) / 2 + 20);
                 g.DrawString(Convert.ToString(f * 100).Substring(0, 5) + "%", new Font("細明體", 10, FontStyle.Bold), new SolidBrush(Color.Red), 10, (this.panel1.Height - 10) / 2 + 35);
                 floatNum += 360 * f;
                 ConutNum += 1;
             }
             else if (ConutNum == 3)
             {
-                g.FillPie(new SolidBrush(Color.Blue), (this.panel1.Width) / 2-10, (this.panel1.Height - 10) / 2+10, (this.panel1.Width) / 2, (this.panel1.Height - 10) / 2, floatNum, 360 * f);
+                g.FillPie(new SolidBrush(Color.Blue), (this.panel1.Width) / 2 - 10, (this.panel1.Height - 10) / 2 + 10, (this.panel1.Width) / 2, (this.panel1.Height - 10) / 2, floatNum, 360 * f);
                 g.DrawString(str, new Font("細明體", 10, FontStyle.Bold), new SolidBrush(Color.Blue), (this.panel1.Width) / 2 + 10, (this.panel1.Height - 10) / 2 + 20);
                 g.DrawString(Convert.ToString(f * 100).Substring(0, 5) + "%", new Font("細明體", 10, FontStyle.Bold), new SolidBrush(Color.Blue), (this.panel1.Width) / 2 + 10, (this.panel1.Height - 10) / 2 + 35);
             }
         }
-
     }
 }

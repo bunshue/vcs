@@ -12,6 +12,9 @@ namespace 製作一個可以旋轉的餅型圖
 {
     public partial class Form1 : Form
     {
+        SqlConnection con;
+        SqlCommand cmd;
+
         public class PyPanel : Panel
         {
             public PyPanel()
@@ -20,13 +23,17 @@ namespace 製作一個可以旋轉的餅型圖
                 UpdateStyles();
             }
         }
+
         public Form1()
         {
             InitializeComponent();
         }
-        SqlConnection con;
-        SqlCommand cmd;
-        
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void Conn()
         {
             con = new SqlConnection("server=.;uid=sa;pwd=;database=db_13");
@@ -42,7 +49,7 @@ namespace 製作一個可以旋轉的餅型圖
             this.Controls.Add(panel1);
             panel1.Width = 230;
             panel1.Height = 230;
-            bt = new Bitmap(panel1.Width,panel1.Height);
+            bt = new Bitmap(panel1.Width, panel1.Height);
             Graphics g = Graphics.FromImage(bt);
             Pen p = new Pen(new SolidBrush(Color.Blue));
             Point p1 = new Point(0, 0);
@@ -50,17 +57,13 @@ namespace 製作一個可以旋轉的餅型圖
             Rectangle trct = new Rectangle(p1, s);
             g.FillEllipse(new SolidBrush(Color.Red), trct);
             g.FillPie(new SolidBrush(Color.Blue), trct, flag, f * 360);
-            bt1 = new Bitmap(panel2.Width,panel2.Height);
+            bt1 = new Bitmap(panel2.Width, panel2.Height);
             Graphics ginfo = Graphics.FromImage(bt1);
             Font font = new Font("細明體", 10, FontStyle.Regular);
             ginfo.DrawString(SexCode + " " + f.ToString().Substring(0, 4), font, new SolidBrush(Color.Blue), 0, 5);
             ginfo.DrawString("女" + " " + (1.0 - Convert.ToDouble(f.ToString().Substring(0, 4))).ToString().Substring(0, 4), font, new SolidBrush(Color.Red), 0, 25);
             panel1.BackgroundImage = bt;
             panel2.BackgroundImage = bt1;
-        }
-        private void Form1_Load(object sender, EventArgs e)
-        {
- 
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -112,7 +115,7 @@ namespace 製作一個可以旋轉的餅型圖
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (button2.Text =="旋轉")
+            if (button2.Text == "旋轉")
             {
                 timer1.Start();
                 button2.Text = "停止";

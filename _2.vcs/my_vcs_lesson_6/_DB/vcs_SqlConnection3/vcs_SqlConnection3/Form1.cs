@@ -105,32 +105,6 @@ namespace vcs_SqlConnection3
             }
         }
 
-        /*
-        private void showinfo()
-        {
-            using (SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09"))
-            {
-                DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter("select * from 員工表", con);
-                da.Fill(dt);
-                this.dataGridView1.DataSource = dt.DefaultView;
-            }
-        }
-        */
-
-        /*
-        private void showinfo()
-        {
-            using (SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09"))
-            {
-                DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter("select * from 員工表", con);
-                da.Fill(dt);
-                this.dataGridView1.DataSource = dt.DefaultView;
-            }
-        }
-        */
-
         private void button0_Click(object sender, EventArgs e)
         {
             showinfo();
@@ -139,7 +113,9 @@ namespace vcs_SqlConnection3
 
             SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09");
 
+            //在文字框中輸入有效的SQL語句修改數據
             string sql_command = "xxxxx";
+
             using (SqlCommand cmd = new SqlCommand())
             {
                 try

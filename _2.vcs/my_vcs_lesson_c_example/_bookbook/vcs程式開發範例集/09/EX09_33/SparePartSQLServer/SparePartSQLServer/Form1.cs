@@ -5,8 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using System.IO;
 using System.Linq;
+
+using System.IO;
 using System.Data.SqlClient;
 
 namespace SparePartSQLServer
@@ -20,7 +21,7 @@ namespace SparePartSQLServer
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            using(SqlConnection con=new SqlConnection("server=.;pwd=;uid=sa;database=master"))
+            using (SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=master"))
             {
                 DataTable dt = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter("select name from sysdatabases", con);
@@ -49,7 +50,7 @@ namespace SparePartSQLServer
                     if (!File.Exists(sd.FileName.ToString()))
                     {
                         SqlConnection con = new SqlConnection();		//利用程式碼完成連接資料庫
-                        con.ConnectionString = "server=.;uid=sa;pwd=;database='"+this.comboBox1.Text+"'";
+                        con.ConnectionString = "server=.;uid=sa;pwd=;database='" + this.comboBox1.Text + "'";
                         con.Open();
                         SqlCommand com = new SqlCommand();
                         this.textBox1.Text = sd.FileName.ToString();

@@ -51,7 +51,7 @@
             this.textBox1.Enabled = false;
             this.textBox1.Location = new System.Drawing.Point(97, 40);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(172, 21);
+            this.textBox1.Size = new System.Drawing.Size(172, 22);
             this.textBox1.TabIndex = 9;
             // 
             // comboBox1
@@ -100,7 +100,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(302, 104);
+            this.ClientSize = new System.Drawing.Size(672, 424);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox1);
