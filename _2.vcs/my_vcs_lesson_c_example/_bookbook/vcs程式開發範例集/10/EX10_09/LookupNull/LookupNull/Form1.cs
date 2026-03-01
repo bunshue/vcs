@@ -29,9 +29,13 @@ namespace LookupNull
             dap.Fill(ds);//更新行
             string[] arylist = new string[ds.Tables[0].Columns.Count];//用數據表的列數定義數組
             for (int i = 0; i < ds.Tables[0].Columns.Count; i++)
+            {
                 arylist[i] = ds.Tables[0].Columns[i].ColumnName;//取得數據表中的字段名稱
+            }
             for (int j = 0; j < ds.Tables[0].Columns.Count; j++)//向ComboBox控制元件中新增字段名稱
+            {
                 comboBox1.Items.Add(arylist[j]);
+            }
             dataGridView1.DataSource = ds.Tables[0].DefaultView;//顯示數據表中的數據
         }
 

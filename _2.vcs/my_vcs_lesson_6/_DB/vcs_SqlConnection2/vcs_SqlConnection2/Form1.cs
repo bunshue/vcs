@@ -221,6 +221,26 @@ namespace vcs_SqlConnection2
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //show
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection cn = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("select * from tb_stu", cn);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+
+            //3030
+
+            //利用[]通配符進行查詢
+
+            int age_like = 3;
+            cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            cn = new SqlConnection(cnstr);
+            dap = new SqlDataAdapter("select * from tb_stu where 年齡 like '" + age_like.ToString() + "[0-9]'", cn);
+            ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -261,10 +281,47 @@ namespace vcs_SqlConnection2
 
         private void button8_Click(object sender, EventArgs e)
         {
+            /*
+            //show
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection cn = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("select * from tb_stu", cn);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            */
+
+            //3030
+
+            //利用[^]通配符進行查詢
+
+            //利用[^]通配符進行查詢年齡：
+
+            string student_age = "2";
+
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection cn = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("select * from tb_stu where 年齡 like '[^" + student_age + "][0-9]'", cn);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //查詢邏輯型數據
+            //查詢是否為國家統招學生：
+            string select_type = "是";  // "是/否"
+
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection cn = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("SELECT * FROM tb_08 WHERE 統招否='" + select_type + "'", cn);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -398,6 +455,31 @@ namespace vcs_SqlConnection2
 
         private void button19_Click(object sender, EventArgs e)
         {
+            /*
+            //show
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection cn = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("select * from tb_stu", cn);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            */
+
+            //3030
+
+            //利用%通配符進行查詢
+
+            //請輸入學生編號：
+            string student_id = "3";
+
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection cn = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("select * from tb_stu where 學生編號 like '%" + student_id + "%'", cn);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -774,6 +856,33 @@ namespace vcs_SqlConnection2
 
         private void button39_Click(object sender, EventArgs e)
         {
+            /*
+            //show
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection cn = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("select * from tb_stu", cn);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            */
+
+            //複雜的模式查詢
+            string student_id = "2";  // 學生編號
+            string student_name = "王";  // 學生姓名
+            string student_age = "1";  // 學生年齡
+
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            string sqlstr = "select * from tb_stu where 學生編號 like '"
+            + student_id + "%' and (( 學生姓名 like '"
+            + student_name + "_') or (年齡 like '[^"
+            + student_age + "][0-9]'))";
+            SqlConnection cn = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter(sqlstr, cn);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
         }
 
         private void button40_Click(object sender, EventArgs e)
