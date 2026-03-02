@@ -169,7 +169,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(610, 448);
+            this.ClientSize = new System.Drawing.Size(769, 549);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button6);
@@ -181,6 +181,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Process範例";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }

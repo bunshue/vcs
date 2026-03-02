@@ -38,16 +38,16 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(95, 17);
+            this.textBox1.Location = new System.Drawing.Point(81, 16);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(37, 23);
+            this.textBox1.Size = new System.Drawing.Size(32, 22);
             this.textBox1.TabIndex = 5;
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(12, 60);
+            this.progressBar1.Location = new System.Drawing.Point(10, 55);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(313, 25);
+            this.progressBar1.Size = new System.Drawing.Size(268, 23);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar1.TabIndex = 4;
             // 
@@ -58,17 +58,17 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 22);
+            this.label1.Location = new System.Drawing.Point(10, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 14);
+            this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 7;
             this.label1.Text = "目前進度：";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(211, 16);
+            this.button1.Location = new System.Drawing.Point(181, 15);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(87, 25);
+            this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 6;
             this.button1.Text = "開始";
             this.button1.UseVisualStyleBackColor = true;
@@ -76,9 +76,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(338, 106);
+            this.ClientSize = new System.Drawing.Size(567, 389);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label1);

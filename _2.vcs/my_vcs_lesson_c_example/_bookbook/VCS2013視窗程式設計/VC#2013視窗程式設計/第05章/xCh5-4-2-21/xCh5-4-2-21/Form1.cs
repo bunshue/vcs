@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using System.Diagnostics;
 
 namespace xCh5_4_2_21
@@ -16,6 +17,11 @@ namespace xCh5_4_2_21
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -29,32 +35,32 @@ namespace xCh5_4_2_21
 
         private void button2_Click(object sender, EventArgs e)
         {
-                process1 = Process.Start("Notepad.exe");
-                for (int i = 0; i < 5; i++)
+            process1 = Process.Start("Notepad.exe");
+            for (int i = 0; i < 5; i++)
+            {
+                if (!process1.HasExited)
                 {
-                    if (!process1.HasExited)
-                    {
-                        process1.Refresh();
+                    process1.Refresh();
 
-                        textBox1.AppendText(
-                            "實體記憶體的耗用： "+ 
-                            process1.WorkingSet64.ToString()+
-                            Environment.NewLine
-                            );
+                    textBox1.AppendText(
+                        "實體記憶體的耗用： " +
+                        process1.WorkingSet64.ToString() +
+                        Environment.NewLine
+                        );
 
-                        process1.WaitForExit(3000);
-                    }
-                    else
-                    {
-                        break;
-                    }
+                    process1.WaitForExit(3000);
                 }
-                process1.CloseMainWindow();
-                textBox1.AppendText("執行了CloseMainWindow()方法");
-                textBox1.AppendText(Environment.NewLine);
+                else
+                {
+                    break;
+                }
+            }
+            process1.CloseMainWindow();
+            textBox1.AppendText("執行了CloseMainWindow()方法");
+            textBox1.AppendText(Environment.NewLine);
 
-                process1.Close();
-                textBox1.AppendText("執行了Close()方法");
+            process1.Close();
+            textBox1.AppendText("執行了Close()方法");
         }
     }
 }

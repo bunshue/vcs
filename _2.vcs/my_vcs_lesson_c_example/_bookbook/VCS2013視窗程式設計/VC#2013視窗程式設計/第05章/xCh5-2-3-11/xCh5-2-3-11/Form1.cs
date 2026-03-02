@@ -29,7 +29,9 @@ namespace xCh5_2_3_11
             // 跑馬燈式的進度列會一直有動畫，
             // 為避免誤解，當進度為0時，將其樣式更改為Block
             if (progressBar1.Minimum == 0)
+            {
                 progressBar1.Style = ProgressBarStyle.Blocks;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -55,3 +57,4 @@ namespace xCh5_2_3_11
         }
     }
 }
+

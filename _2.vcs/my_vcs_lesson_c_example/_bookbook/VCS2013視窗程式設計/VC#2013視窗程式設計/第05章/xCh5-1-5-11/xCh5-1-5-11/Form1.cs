@@ -19,13 +19,16 @@ namespace xCh5_1_5_11
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             // 建立ListView 控制項，並指定其位置與大小
             listView1 = new ListView();
-            listView1.Bounds = new Rectangle(
-                new Point(10, 10),
-                new Size(300, 180));
+            listView1.Bounds = new Rectangle(new Point(10, 10), new Size(300, 180));
 
             // 設定檢視模式為「詳細資訊」
             listView1.View = View.Details;
@@ -97,13 +100,10 @@ namespace xCh5_1_5_11
             listView1.Columns.Add("倉庫", -2, HorizontalAlignment.Center);
 
             // 將各選項加入ListView.
-            listView1.Items.AddRange(new ListViewItem[] { 
-                item1, item2, item3 
-            });
+            listView1.Items.AddRange(new ListViewItem[] { item1, item2, item3 });
 
             // 設定事件處理程序的delegate
-            this.listView1.SelectedIndexChanged +=
-                new System.EventHandler(listView1_SelectedIndexChanged);
+            this.listView1.SelectedIndexChanged += new System.EventHandler(listView1_SelectedIndexChanged);
 
             this.listView1.ItemChecked += new ItemCheckedEventHandler(listView1_ItemChecked);
 
@@ -140,19 +140,21 @@ namespace xCh5_1_5_11
             double price = 0;
             if (e.CurrentValue == CheckState.Unchecked)
             {
-                price += Double.Parse(
-                    this.listView1.Items[e.Index].SubItems[1].Text);
+                price += Double.Parse(this.listView1.Items[e.Index].SubItems[1].Text);
             }
             else if ((e.CurrentValue == CheckState.Checked))
             {
-                price -= Double.Parse(
-                    this.listView1.Items[e.Index].SubItems[1].Text);
+                price -= Double.Parse(this.listView1.Items[e.Index].SubItems[1].Text);
             }
 
             if (price > 0)
+            {
                 textBox3.Text = "選取項目的價格->" + price.ToString();
+            }
             else
+            {
                 textBox3.Text = "取消項目的價格->" + Math.Abs(price).ToString();
+            }
         }
 
         // 以「大圖示」顯示
@@ -178,7 +180,7 @@ namespace xCh5_1_5_11
         {
             listView1.View = View.Details;
         }
-        
+
         // 「總價」按鈕，計算所有選取項目的總價
         private void button6_Click(object sender, EventArgs e)
         {
@@ -196,6 +198,6 @@ namespace xCh5_1_5_11
             }
             textBox4.Text = "已勾選項目，其總價->" + price.ToString();
         }
-
     }
 }
+

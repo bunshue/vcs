@@ -17,6 +17,11 @@ namespace xCh4_1_2_91
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             openFileDialog1.DefaultExt = "bmp";
@@ -30,21 +35,21 @@ namespace xCh4_1_2_91
 
             try
             {
-                Image myImage= 
+                Image myImage =
                     Image.FromFile(openFileDialog1.FileName);
                 Clipboard.SetImage(myImage);
 
-                DataFormats.Format df = 
+                DataFormats.Format df =
                     DataFormats.GetFormat(DataFormats.Bitmap);
-                 if (richTextBox1.CanPaste(df))
+                if (richTextBox1.CanPaste(df))
                 {
                     richTextBox1.Paste(df);
                 }
             }
             catch
             {
-                MessageBox.Show("無法插入圖片", "錯誤", 
-                    MessageBoxButtons.OK, 
+                MessageBox.Show("無法插入圖片", "錯誤",
+                    MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
         }
@@ -52,14 +57,18 @@ namespace xCh4_1_2_91
         private void button2_Click(object sender, EventArgs e)
         {
             if (richTextBox1.SelectionLength == 0)
+            {
                 richTextBox1.SelectAll();
+            }
             richTextBox1.Cut();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             if (richTextBox1.SelectionLength == 0)
+            {
                 richTextBox1.SelectAll();
+            }
             richTextBox1.Copy();
         }
 

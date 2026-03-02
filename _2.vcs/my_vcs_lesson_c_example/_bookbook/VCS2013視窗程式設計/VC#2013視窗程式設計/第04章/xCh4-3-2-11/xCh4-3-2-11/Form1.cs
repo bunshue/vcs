@@ -50,10 +50,14 @@ namespace xCh4_3_2_11
                     button1.ImageIndex = ndx;
                 }
                 else
+                {
                     MessageBox.Show("數字不正確！");
+                }
             }
             else
+            {
                 MessageBox.Show("請輸入正確的數字！");
+            }
         }
     }
 }

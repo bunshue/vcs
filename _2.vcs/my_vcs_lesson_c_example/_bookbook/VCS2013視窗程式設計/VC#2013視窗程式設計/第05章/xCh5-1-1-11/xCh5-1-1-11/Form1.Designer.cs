@@ -44,26 +44,26 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(174, 84);
+            this.label4.Location = new System.Drawing.Point(149, 78);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 14);
+            this.label4.Size = new System.Drawing.Size(33, 12);
             this.label4.TabIndex = 21;
             this.label4.Text = "label4";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(177, 103);
+            this.textBox2.Location = new System.Drawing.Point(152, 95);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(120, 134);
+            this.textBox2.Size = new System.Drawing.Size(103, 124);
             this.textBox2.TabIndex = 20;
             // 
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(12, 129);
+            this.checkBox3.Location = new System.Drawing.Point(10, 119);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(82, 18);
+            this.checkBox3.Size = new System.Drawing.Size(72, 16);
             this.checkBox3.TabIndex = 19;
             this.checkBox3.Text = "鍵盤選值";
             this.checkBox3.UseVisualStyleBackColor = true;
@@ -72,9 +72,9 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(12, 104);
+            this.checkBox2.Location = new System.Drawing.Point(10, 96);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(82, 18);
+            this.checkBox2.Size = new System.Drawing.Size(72, 16);
             this.checkBox2.TabIndex = 18;
             this.checkBox2.Text = "循環切換";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -83,9 +83,9 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(12, 80);
+            this.checkBox1.Location = new System.Drawing.Point(10, 74);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(54, 18);
+            this.checkBox1.Size = new System.Drawing.Size(48, 16);
             this.checkBox1.TabIndex = 17;
             this.checkBox1.Text = "排序";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -94,24 +94,24 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 186);
+            this.label3.Location = new System.Drawing.Point(10, 172);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 14);
+            this.label3.Size = new System.Drawing.Size(33, 12);
             this.label3.TabIndex = 16;
             this.label3.Text = "label3";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 12);
+            this.textBox1.Location = new System.Drawing.Point(10, 11);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(156, 23);
+            this.textBox1.Size = new System.Drawing.Size(134, 22);
             this.textBox1.TabIndex = 15;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(177, 48);
+            this.button1.Location = new System.Drawing.Point(152, 44);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(120, 23);
+            this.button1.Size = new System.Drawing.Size(103, 21);
             this.button1.TabIndex = 14;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
@@ -120,36 +120,36 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 163);
+            this.label2.Location = new System.Drawing.Point(10, 150);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 14);
+            this.label2.Size = new System.Drawing.Size(33, 12);
             this.label2.TabIndex = 13;
             this.label2.Text = "label2";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(174, 15);
+            this.label1.Location = new System.Drawing.Point(149, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 14);
+            this.label1.Size = new System.Drawing.Size(33, 12);
             this.label1.TabIndex = 12;
             this.label1.Text = "label1";
             // 
             // domainUpDown1
             // 
             this.domainUpDown1.InterceptArrowKeys = false;
-            this.domainUpDown1.Location = new System.Drawing.Point(12, 51);
+            this.domainUpDown1.Location = new System.Drawing.Point(10, 47);
             this.domainUpDown1.Name = "domainUpDown1";
-            this.domainUpDown1.Size = new System.Drawing.Size(156, 23);
+            this.domainUpDown1.Size = new System.Drawing.Size(134, 22);
             this.domainUpDown1.TabIndex = 11;
             this.domainUpDown1.Text = "domainUpDown1";
             this.domainUpDown1.SelectedItemChanged += new System.EventHandler(this.domainUpDown1_SelectedItemChanged);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(318, 260);
+            this.ClientSize = new System.Drawing.Size(664, 506);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.checkBox3);

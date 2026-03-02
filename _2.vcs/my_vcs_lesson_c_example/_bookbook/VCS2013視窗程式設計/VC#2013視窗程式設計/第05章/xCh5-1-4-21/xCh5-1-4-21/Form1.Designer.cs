@@ -39,33 +39,33 @@
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(25, 49);
+            this.comboBox1.Location = new System.Drawing.Point(21, 45);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(180, 165);
+            this.comboBox1.Size = new System.Drawing.Size(155, 153);
             this.comboBox1.TabIndex = 0;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 23);
+            this.label1.Location = new System.Drawing.Point(19, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 14);
+            this.label1.Size = new System.Drawing.Size(33, 12);
             this.label1.TabIndex = 1;
             this.label1.Text = "label1";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(69, 20);
+            this.textBox1.Location = new System.Drawing.Point(59, 18);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(136, 23);
+            this.textBox1.Size = new System.Drawing.Size(117, 22);
             this.textBox1.TabIndex = 2;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(211, 23);
+            this.button1.Location = new System.Drawing.Point(181, 21);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(64, 21);
             this.button1.TabIndex = 3;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
@@ -73,9 +73,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(211, 52);
+            this.button2.Location = new System.Drawing.Point(181, 48);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(64, 21);
             this.button2.TabIndex = 4;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
@@ -83,9 +83,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(311, 226);
+            this.ClientSize = new System.Drawing.Size(648, 491);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);

@@ -38,19 +38,19 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(155, 52);
+            this.textBox1.Location = new System.Drawing.Point(133, 48);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(102, 85);
+            this.textBox1.Size = new System.Drawing.Size(88, 79);
             this.textBox1.TabIndex = 11;
             // 
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(36, 90);
+            this.checkBox3.Location = new System.Drawing.Point(31, 83);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(54, 18);
+            this.checkBox3.Size = new System.Drawing.Size(48, 16);
             this.checkBox3.TabIndex = 10;
             this.checkBox3.Text = "蘋果";
             this.checkBox3.UseVisualStyleBackColor = true;
@@ -58,9 +58,9 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(36, 66);
+            this.checkBox2.Location = new System.Drawing.Point(31, 61);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(54, 18);
+            this.checkBox2.Size = new System.Drawing.Size(48, 16);
             this.checkBox2.TabIndex = 9;
             this.checkBox2.Text = "香蕉";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -68,17 +68,17 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 26);
+            this.label1.Location = new System.Drawing.Point(20, 24);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 14);
+            this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 8;
             this.label1.Text = "水果：";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(155, 21);
+            this.button1.Location = new System.Drawing.Point(133, 19);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(102, 25);
+            this.button1.Size = new System.Drawing.Size(87, 23);
             this.button1.TabIndex = 7;
             this.button1.Text = "採購項目";
             this.button1.UseVisualStyleBackColor = true;
@@ -87,18 +87,18 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(36, 43);
+            this.checkBox1.Location = new System.Drawing.Point(31, 40);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(54, 18);
+            this.checkBox1.Size = new System.Drawing.Size(48, 16);
             this.checkBox1.TabIndex = 6;
             this.checkBox1.Text = "西瓜";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 163);
+            this.ClientSize = new System.Drawing.Size(542, 374);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.checkBox2);
@@ -107,6 +107,7 @@
             this.Controls.Add(this.checkBox1);
             this.Name = "Form1";
             this.Text = "CheckBox範例";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

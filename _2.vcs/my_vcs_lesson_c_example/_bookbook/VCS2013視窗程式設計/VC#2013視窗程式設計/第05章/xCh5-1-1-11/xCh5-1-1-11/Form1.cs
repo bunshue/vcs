@@ -17,10 +17,16 @@ namespace xCh5_1_1_11
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            button1.Text = "新增";
+            label1.Text = "目前共有 " + domainUpDown1.Items.Count + " 個選項";
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             domainUpDown1.Items.Add((textBox1.Text.Trim()));
-            textBox2.Text=textBox2.Text + Environment.NewLine +textBox1.Text.Trim();
+            textBox2.Text = textBox2.Text + Environment.NewLine + textBox1.Text.Trim();
             textBox1.Text = "";
             label1.Text = "目前共有 " + domainUpDown1.Items.Count + " 個選項";
         }
@@ -65,12 +71,6 @@ namespace xCh5_1_1_11
             {
                 domainUpDown1.InterceptArrowKeys = false;
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            button1.Text = "新增";
-            label1.Text = "目前共有 " + domainUpDown1.Items.Count + " 個選項";
         }
     }
 }

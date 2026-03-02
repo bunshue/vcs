@@ -33,9 +33,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(23, 22);
+            this.button1.Location = new System.Drawing.Point(20, 20);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(64, 21);
             this.button1.TabIndex = 0;
             this.button1.Text = "輔助說明";
             this.button1.TextAlign = System.Drawing.ContentAlignment.TopLeft;
@@ -44,12 +44,13 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(239, 68);
+            this.ClientSize = new System.Drawing.Size(444, 300);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form的Help方法";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }

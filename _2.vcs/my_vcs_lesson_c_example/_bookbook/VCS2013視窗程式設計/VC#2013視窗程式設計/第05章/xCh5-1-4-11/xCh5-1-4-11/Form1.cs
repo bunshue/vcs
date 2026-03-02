@@ -19,6 +19,11 @@ namespace xCh5_1_4_11
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             // 建構comboBox1物件，並設定相關的屬性
@@ -35,28 +40,25 @@ namespace xCh5_1_4_11
             Controls.Add(comboBox1);
 
             // 設定comboBox1物件的DropDown事件的delegate
-            comboBox1.DropDown +=
-                new System.EventHandler(comboBox1_DropDown);
+            comboBox1.DropDown += new System.EventHandler(comboBox1_DropDown);
 
             // 設定comboBox1物件的SelectedIndexChanged事件的delegate
-            comboBox1.SelectedIndexChanged +=
-                new System.EventHandler(comboBox1_SelectedIndexChanged);
+            comboBox1.SelectedIndexChanged += new System.EventHandler(comboBox1_SelectedIndexChanged);
         }
 
         private void comboBox1_DropDown(object sender, System.EventArgs e)
         {
-            System.Windows.Forms.ComboBox myCombo = 
-                (System.Windows.Forms.ComboBox)sender;
+            System.Windows.Forms.ComboBox myCombo = (System.Windows.Forms.ComboBox)sender;
             textBox1.Clear();
             textBox1.AppendText(myCombo.Text);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            System.Windows.Forms.ComboBox myCombo = 
-                (System.Windows.Forms.ComboBox)sender;
+            System.Windows.Forms.ComboBox myCombo = (System.Windows.Forms.ComboBox)sender;
             textBox2.Clear();
             textBox2.AppendText(myCombo.Text);
         }
     }
 }
+

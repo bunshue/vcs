@@ -44,19 +44,13 @@ namespace xCh5_1_3_11
             string result;
             foreach (int indexChecked in checkedListBox1.CheckedIndices)
             {
-                result = "索引 " + indexChecked.ToString() + ", 已被勾選. 勾選的狀態是->" +
-                                checkedListBox1.GetItemCheckState(indexChecked).ToString();
+                result = "索引 " + indexChecked.ToString() + ", 已被勾選. 勾選的狀態是->" + checkedListBox1.GetItemCheckState(indexChecked).ToString();
                 textBox1.AppendText(result + '\n');
             }
 
             foreach (object itemChecked in checkedListBox1.CheckedItems)
             {
-                result = "被勾選的項目是\"" +
-                    itemChecked.ToString() + 
-                    "\"勾選的狀態是->" +
-                    checkedListBox1.GetItemCheckState(
-                        checkedListBox1.Items.IndexOf(itemChecked)
-                    ).ToString();
+                result = "被勾選的項目是\"" + itemChecked.ToString() + "\"勾選的狀態是->" + checkedListBox1.GetItemCheckState(checkedListBox1.Items.IndexOf(itemChecked)).ToString();
 
                 textBox1.AppendText(result + '\n');
             }
@@ -77,3 +71,4 @@ namespace xCh5_1_3_11
         }
     }
 }
+

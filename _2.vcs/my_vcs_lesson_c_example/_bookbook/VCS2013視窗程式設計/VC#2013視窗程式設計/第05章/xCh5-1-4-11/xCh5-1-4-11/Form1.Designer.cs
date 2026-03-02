@@ -38,40 +38,40 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(132, 81);
+            this.label2.Location = new System.Drawing.Point(113, 75);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 14);
+            this.label2.Size = new System.Drawing.Size(65, 12);
             this.label2.TabIndex = 10;
             this.label2.Text = "選項變更時";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(132, 51);
+            this.label1.Location = new System.Drawing.Point(113, 47);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 14);
+            this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 9;
             this.label1.Text = "點選箭頭時";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(211, 78);
+            this.textBox2.Location = new System.Drawing.Point(181, 72);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(77, 23);
+            this.textBox2.Size = new System.Drawing.Size(67, 22);
             this.textBox2.TabIndex = 8;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(211, 47);
+            this.textBox1.Location = new System.Drawing.Point(181, 43);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(77, 23);
+            this.textBox1.Size = new System.Drawing.Size(67, 22);
             this.textBox1.TabIndex = 7;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(132, 16);
+            this.button1.Location = new System.Drawing.Point(113, 15);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(157, 25);
+            this.button1.Size = new System.Drawing.Size(135, 23);
             this.button1.TabIndex = 6;
             this.button1.Text = "建構ComBox List";
             this.button1.UseVisualStyleBackColor = true;
@@ -79,9 +79,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(310, 116);
+            this.ClientSize = new System.Drawing.Size(599, 353);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox2);
@@ -89,6 +89,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "ComboBox範例";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

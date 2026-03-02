@@ -89,7 +89,7 @@ namespace CH1407
         {
             //設定要讀取取的檔名和路徑
             string printFile = "Demo02.txt";
-            string filePath = @"D:\\C#Lab\\";
+            string filePath = @"D:\\vcs\\";
             //讀取的檔名「Demo02.txt」為列印文件的檔名
             OnPaper.DocumentName = printFile;
             //建立檔案並以Open開啟，以using指定範圍為唯讀
@@ -105,4 +105,3 @@ namespace CH1407
         }
     }
 }
-

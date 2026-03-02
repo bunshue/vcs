@@ -37,11 +37,11 @@ namespace xCh4_2_1_2_11
 
             linkLabel1.Links[0].Visited = true;                // 標示第1個超連結已被點選過了
             linkLabel1.Links[0].LinkData = "tw.yahoo.com";     // 「奇摩」的網址
-            
+
             // 2.指定另外二個超連結的區域
             // * 超連結文字中標示出「微軟」為超連結及其網址
             // * 超連結文字中標示出「文件庫」為超連結及其網址
-            linkLabel1.Links.Add(19, 2, "www.microsoft.com"); 
+            linkLabel1.Links.Add(19, 2, "www.microsoft.com");
             linkLabel1.Links.Add(27, 3, "msdn.microsoft.com");
         }
 
@@ -55,11 +55,11 @@ namespace xCh4_2_1_2_11
 
         private void button1_Click(object sender, EventArgs e)
         {
-             string msg="";
+            string msg = "";
             IEnumerator myLinks = linkLabel1.Links.GetEnumerator();
-            while(myLinks.MoveNext())
+            while (myLinks.MoveNext())
             {
-                LinkLabel.Link link = ( LinkLabel.Link)myLinks.Current;
+                LinkLabel.Link link = (LinkLabel.Link)myLinks.Current;
                 msg = msg + link.LinkData + "\n";
             }
             MessageBox.Show(msg, "現有的超連結內容");
@@ -69,9 +69,9 @@ namespace xCh4_2_1_2_11
         {
             // 新增[MSDN]的超連結
             LinkLabel.Link aLink = new LinkLabel.Link(23, 4, "msdn.microsoft.com/zh-tw/library");
-             linkLabel1.Links.Add(aLink);
-             linkLabel1.Links[3].Visited = true; 
-             label1.Text = "連結數：" +linkLabel1.Links.Count.ToString();
+            linkLabel1.Links.Add(aLink);
+            linkLabel1.Links[3].Visited = true;
+            label1.Text = "連結數：" + linkLabel1.Links.Count.ToString();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -99,4 +99,3 @@ namespace xCh4_2_1_2_11
         }
     }
 }
-

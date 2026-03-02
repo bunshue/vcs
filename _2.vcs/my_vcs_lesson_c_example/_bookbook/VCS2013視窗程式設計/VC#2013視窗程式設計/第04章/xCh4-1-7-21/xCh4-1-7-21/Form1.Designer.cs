@@ -41,18 +41,18 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 21);
+            this.label1.Location = new System.Drawing.Point(22, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 14);
+            this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "學歷：";
             // 
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(29, 38);
+            this.radioButton1.Location = new System.Drawing.Point(25, 35);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(67, 18);
+            this.radioButton1.Size = new System.Drawing.Size(59, 16);
             this.radioButton1.TabIndex = 1;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "國中小";
@@ -62,9 +62,9 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(29, 62);
+            this.radioButton2.Location = new System.Drawing.Point(25, 57);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(67, 18);
+            this.radioButton2.Size = new System.Drawing.Size(59, 16);
             this.radioButton2.TabIndex = 2;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "高中職";
@@ -74,9 +74,9 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(29, 86);
+            this.radioButton3.Location = new System.Drawing.Point(25, 79);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(81, 18);
+            this.radioButton3.Size = new System.Drawing.Size(71, 16);
             this.radioButton3.TabIndex = 3;
             this.radioButton3.TabStop = true;
             this.radioButton3.Text = "大專院校";
@@ -86,9 +86,9 @@
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(29, 110);
+            this.radioButton4.Location = new System.Drawing.Point(25, 102);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(53, 18);
+            this.radioButton4.Size = new System.Drawing.Size(47, 16);
             this.radioButton4.TabIndex = 4;
             this.radioButton4.TabStop = true;
             this.radioButton4.Text = "碩士";
@@ -98,9 +98,9 @@
             // radioButton5
             // 
             this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(29, 134);
+            this.radioButton5.Location = new System.Drawing.Point(25, 124);
             this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(53, 18);
+            this.radioButton5.Size = new System.Drawing.Size(47, 16);
             this.radioButton5.TabIndex = 5;
             this.radioButton5.TabStop = true;
             this.radioButton5.Text = "博士";
@@ -109,9 +109,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(144, 21);
+            this.button1.Location = new System.Drawing.Point(123, 19);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 23);
+            this.button1.Size = new System.Drawing.Size(86, 21);
             this.button1.TabIndex = 6;
             this.button1.Text = "設定FlatStyle";
             this.button1.UseVisualStyleBackColor = true;
@@ -119,16 +119,16 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(144, 57);
+            this.textBox1.Location = new System.Drawing.Point(123, 53);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 23);
+            this.textBox1.Size = new System.Drawing.Size(86, 22);
             this.textBox1.TabIndex = 7;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(279, 182);
+            this.ClientSize = new System.Drawing.Size(596, 478);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.radioButton5);
@@ -139,6 +139,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "RadioButton範例";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

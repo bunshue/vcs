@@ -17,14 +17,17 @@ namespace WindowsFormsApplication1
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             openFileDialog1.DefaultExt = "*.rtf";
             openFileDialog1.Filter = "RTF檔|*.rtf";
 
-            if(openFileDialog1.ShowDialog()==
-                System.Windows.Forms.DialogResult.OK &&
-                openFileDialog1.FileName.Length>0)
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK && openFileDialog1.FileName.Length > 0)
             {
                 richTextBox1.LoadFile(openFileDialog1.FileName);
             }
@@ -35,21 +38,17 @@ namespace WindowsFormsApplication1
             openFileDialog1.DefaultExt = "*.txt";
             openFileDialog1.Filter = "純文字檔|*.txt";
 
-            if (openFileDialog1.ShowDialog() ==System.Windows.Forms.DialogResult.OK )
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                richTextBox1.LoadFile(
-                    openFileDialog1.FileName,
-                    RichTextBoxStreamType.PlainText);
+                richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.PlainText);
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             saveFileDialog1.Filter = "RTF檔|*.rtf";
- 
-            if (saveFileDialog1.ShowDialog() ==
-                System.Windows.Forms.DialogResult.OK &&
-                saveFileDialog1.FileName.Length > 0)
+
+            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK && saveFileDialog1.FileName.Length > 0)
             {
                 richTextBox1.SaveFile(saveFileDialog1.FileName);
             }
@@ -59,14 +58,11 @@ namespace WindowsFormsApplication1
         {
             saveFileDialog1.Filter = "RTF檔|*.rtf";
 
-            if (saveFileDialog1.ShowDialog() ==
-                 System.Windows.Forms.DialogResult.OK &&
-                 saveFileDialog1.FileName.Length > 0)
+            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK && saveFileDialog1.FileName.Length > 0)
             {
-                richTextBox1.LoadFile(
-                   saveFileDialog1.FileName,
-                    RichTextBoxStreamType.PlainText);
+                richTextBox1.LoadFile(saveFileDialog1.FileName, RichTextBoxStreamType.PlainText);
             }
         }
     }
 }
+

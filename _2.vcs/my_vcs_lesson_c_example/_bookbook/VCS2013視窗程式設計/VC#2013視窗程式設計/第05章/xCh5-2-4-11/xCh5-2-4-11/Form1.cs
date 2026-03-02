@@ -67,8 +67,7 @@ namespace xCh5_2_4_11
         private bool IsSchoolValid()
         {
             // 判斷使用者是否已選擇學歷資料
-            return ((comboBox1.SelectedItem != null) &&
-                (!comboBox1.SelectedItem.ToString().Equals("無")));
+            return ((comboBox1.SelectedItem != null) && (!comboBox1.SelectedItem.ToString().Equals("無")));
         }
 
         private void textBox1_Validated(object sender, EventArgs e)
@@ -112,3 +111,4 @@ namespace xCh5_2_4_11
         }
     }
 }
+

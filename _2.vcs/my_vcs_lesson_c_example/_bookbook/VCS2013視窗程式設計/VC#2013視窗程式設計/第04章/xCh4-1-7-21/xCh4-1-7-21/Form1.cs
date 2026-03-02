@@ -119,5 +119,10 @@ namespace xCh4_1_7_21
                 radioButton5.CheckAlign = ContentAlignment.MiddleLeft;
             }
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

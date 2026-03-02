@@ -46,10 +46,7 @@ namespace xCh5_3_1_11
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             label4.Text = trackBar1.Value.ToString();
-            textBox1.BackColor = Color.FromArgb(
-                trackBar1.Value, 
-                trackBar2.Value, 
-                trackBar3.Value);
+            textBox1.BackColor = Color.FromArgb(trackBar1.Value, trackBar2.Value, trackBar3.Value);
         }
 
         private void trackBar2_Scroll(object sender, EventArgs e)
@@ -62,6 +59,7 @@ namespace xCh5_3_1_11
         {
             label6.Text = trackBar3.Value.ToString();
             textBox1.BackColor = Color.FromArgb(trackBar1.Value, trackBar2.Value, trackBar3.Value);
-        } 
+        }
     }
 }
+

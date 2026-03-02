@@ -27,7 +27,10 @@ namespace xCh4_2_1_1_11
             linkLabel1.LinkArea = new LinkArea(0, 0);
             MessageBox.Show(linkLabel1.LinkArea.IsEmpty.ToString());
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
-
-

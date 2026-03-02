@@ -46,18 +46,23 @@ namespace xCh5_1_4_21
 
             resultIndex = comboBox1.FindString(textBox1.Text);
             int myFlag = 0;
-            if (resultIndex != -1) myFlag = resultIndex;
+            if (resultIndex != -1)
+            {
+                myFlag = resultIndex;
+            }
 
             while (resultIndex != -1)
             {
                 // FindString會循環的找，所以又重頭時，要離開
                 count += 1;
                 resultIndex = comboBox1.FindString(textBox1.Text, resultIndex);
-                if (resultIndex == myFlag) break;
+                if (resultIndex == myFlag)
+                {
+                    break;
+                }
             }
-            
-            MessageBox.Show("共有 " + count.ToString() + " 筆的 " + textBox1.Text,
-                "FindString()方法",MessageBoxButtons.OK,MessageBoxIcon.Information);  
+
+            MessageBox.Show("共有 " + count.ToString() + " 筆的 " + textBox1.Text, "FindString()方法", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -76,19 +81,16 @@ namespace xCh5_1_4_21
                 // 因為會再度使用上次的resultIndex的值，但是那個值代表的
                 // 位置已經被移除，所以，目前的最後一筆會是
                 // resultIndex的值減1
-                if (resultIndex == (comboBox1.Items.Count)) resultIndex--;
+                if (resultIndex == (comboBox1.Items.Count))
+                {
+                    resultIndex--;
+                }
 
                 count += 1;
-                resultIndex = comboBox1.FindStringExact(
-                    selectedEmployee,
-                    resultIndex);
+                resultIndex = comboBox1.FindStringExact(selectedEmployee, resultIndex);
             }
 
-            MessageBox.Show("共有 " + count.ToString() + " 筆的 " + 
-                selectedEmployee + "被移除",
-                "FindStringExact()方法", 
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            MessageBox.Show("共有 " + count.ToString() + " 筆的 " + selectedEmployee + "被移除", "FindStringExact()方法", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -96,11 +98,7 @@ namespace xCh5_1_4_21
             int selectedIndex = comboBox1.SelectedIndex;
             Object selectedItem = comboBox1.SelectedItem;
 
-            MessageBox.Show("被選取的項目是： " + selectedItem.ToString() + "\n" +
-                            "其索引值為：" + selectedIndex.ToString(),
-                            "SelectedIndexChanged事件",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            MessageBox.Show("被選取的項目是： " + selectedItem.ToString() + "\n" + "其索引值為：" + selectedIndex.ToString(), "SelectedIndexChanged事件", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

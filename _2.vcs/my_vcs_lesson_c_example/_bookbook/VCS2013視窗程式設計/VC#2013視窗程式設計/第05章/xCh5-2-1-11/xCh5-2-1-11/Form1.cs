@@ -39,7 +39,7 @@ namespace xCh5_2_1_11
 
         private void button2_Click(object sender, EventArgs e)
         {
-            textBox1.Text = toolTip1.GetToolTip(textBox1); 
+            textBox1.Text = toolTip1.GetToolTip(textBox1);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -52,7 +52,9 @@ namespace xCh5_2_1_11
             try
             {
                 if (textBox1.Text != "")
+                {
                     Convert.ToInt32(textBox1.Text);
+                }
             }
             catch (Exception ex)
             {

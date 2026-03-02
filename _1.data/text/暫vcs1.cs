@@ -5,9 +5,6 @@ amend
 D:\\C#Lab  
 dlgFolderBrowser.SelectedPath = @"D:\USERS\LSH\Documents";
 
-
-酵母菌（Yeast）
-
                 //取得Click事件的訊息
                 tsmiFile.PerformClick();
 

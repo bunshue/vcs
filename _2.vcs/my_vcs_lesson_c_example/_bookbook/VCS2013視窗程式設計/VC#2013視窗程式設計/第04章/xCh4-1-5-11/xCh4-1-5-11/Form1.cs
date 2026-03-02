@@ -27,6 +27,11 @@ namespace xCh4_1_5_11
         {
             MessageBox.Show("Value屬性變更 ！");
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

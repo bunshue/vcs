@@ -15,6 +15,10 @@ namespace xCh5_1_2_11
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             // 設定可以選取多重項目，且使用者可以用 
             // SHIFT、CTRL 和方向鍵進行選取。
             listBox1.SelectionMode = SelectionMode.MultiExtended;
@@ -42,7 +46,9 @@ namespace xCh5_1_2_11
             // 如果沒有指定要插入的位置，就插入到最後一筆
             // 如果有指定位置，就插到指定位置
             if (textBox3.Text == "")
+            {
                 listBox1.Items.Insert(listBox1.Items.Count, textBox1.Text);
+            }
             else
             {
                 int ndx = Convert.ToInt32(textBox3.Text);
@@ -60,7 +66,9 @@ namespace xCh5_1_2_11
             // 中挑選的部份；
             // 如果有給，則刪除指定位置的選項
             if (textBox3.Text == "")
+            {
                 listBox1.ClearSelected();
+            }
             else
             {
                 int ndx = Convert.ToInt32(textBox3.Text);
@@ -79,8 +87,7 @@ namespace xCh5_1_2_11
         {
             textBox2.Clear();
             int ndx;
-            System.Collections.IEnumerator myEnumerator = 
-                listBox1.SelectedIndices.GetEnumerator();
+            System.Collections.IEnumerator myEnumerator = listBox1.SelectedIndices.GetEnumerator();
             while (myEnumerator.MoveNext())
             {
                 object obj = myEnumerator.Current;
@@ -98,18 +105,22 @@ namespace xCh5_1_2_11
 
             // 如果找不到，其傳回值為-1
             if (index != -1)
+            {
                 listBox1.SetSelected(index, true);
+            }
             else
+            {
                 MessageBox.Show("目前的ListBox中並沒有要查尋的「" + searchString + "」");
+            }
         }
 
         // 使用者於ListBox中的選項挑選時引發
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            label1.Text = "目前位置：" + listBox1.SelectedIndex + "/" +
-                 listBox1.Items.Count;
+            label1.Text = "目前位置：" + listBox1.SelectedIndex + "/" + listBox1.Items.Count;
 
             textBox2.AppendText(Environment.NewLine + listBox1.SelectedItem.ToString());
         }
     }
 }
+

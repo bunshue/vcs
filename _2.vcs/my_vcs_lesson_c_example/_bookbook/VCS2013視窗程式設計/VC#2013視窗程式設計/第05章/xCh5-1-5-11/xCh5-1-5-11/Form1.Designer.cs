@@ -42,30 +42,30 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(373, 111);
+            this.textBox4.Location = new System.Drawing.Point(320, 102);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(215, 23);
+            this.textBox4.Size = new System.Drawing.Size(185, 22);
             this.textBox4.TabIndex = 20;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(373, 81);
+            this.textBox3.Location = new System.Drawing.Point(320, 75);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(215, 23);
+            this.textBox3.Size = new System.Drawing.Size(185, 22);
             this.textBox3.TabIndex = 19;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(373, 50);
+            this.textBox2.Location = new System.Drawing.Point(320, 46);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(215, 23);
+            this.textBox2.Size = new System.Drawing.Size(185, 22);
             this.textBox2.TabIndex = 18;
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(507, 257);
+            this.button6.Location = new System.Drawing.Point(435, 237);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(87, 25);
+            this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 17;
             this.button6.Text = "總價";
             this.button6.UseVisualStyleBackColor = true;
@@ -73,16 +73,16 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(373, 20);
+            this.textBox1.Location = new System.Drawing.Point(320, 18);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(215, 23);
+            this.textBox1.Size = new System.Drawing.Size(185, 22);
             this.textBox1.TabIndex = 16;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(413, 257);
+            this.button5.Location = new System.Drawing.Point(354, 237);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(87, 25);
+            this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 15;
             this.button5.Text = "詳細資訊";
             this.button5.UseVisualStyleBackColor = true;
@@ -90,9 +90,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(318, 257);
+            this.button4.Location = new System.Drawing.Point(273, 237);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(87, 25);
+            this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 14;
             this.button4.Text = "清單";
             this.button4.UseVisualStyleBackColor = true;
@@ -100,9 +100,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(224, 257);
+            this.button3.Location = new System.Drawing.Point(192, 237);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(87, 25);
+            this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 13;
             this.button3.Text = "小圖示";
             this.button3.UseVisualStyleBackColor = true;
@@ -110,9 +110,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(129, 257);
+            this.button2.Location = new System.Drawing.Point(111, 237);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(87, 25);
+            this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 12;
             this.button2.Text = "大圖示";
             this.button2.UseVisualStyleBackColor = true;
@@ -120,9 +120,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(9, 257);
+            this.button1.Location = new System.Drawing.Point(8, 237);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(113, 25);
+            this.button1.Size = new System.Drawing.Size(97, 23);
             this.button1.TabIndex = 11;
             this.button1.Text = "建構ListView";
             this.button1.UseVisualStyleBackColor = true;
@@ -130,9 +130,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(602, 303);
+            this.ClientSize = new System.Drawing.Size(777, 473);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
@@ -145,6 +145,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "ListView範例";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

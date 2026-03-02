@@ -31,7 +31,7 @@ namespace xCh5_1_2_21
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (textBox1.Text.ToString()=="") return;
+            if (textBox1.Text.ToString() == "") return;
 
             double hrs = double.Parse(textBox1.Text.ToString());
             switch (listBox1.SelectedIndex)
@@ -49,7 +49,7 @@ namespace xCh5_1_2_21
                     label3.Text = "耗用度數：" + (900 * hrs / 1000).ToString();
                     break;
                 case 4:
-                    label3.Text = "耗用度數：" +(800 * hrs / 1000).ToString();
+                    label3.Text = "耗用度數：" + (800 * hrs / 1000).ToString();
                     break;
             }
         }

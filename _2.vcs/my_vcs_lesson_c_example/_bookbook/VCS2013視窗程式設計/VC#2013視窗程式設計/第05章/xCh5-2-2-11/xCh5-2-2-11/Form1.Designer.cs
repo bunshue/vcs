@@ -41,9 +41,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 64);
+            this.ClientSize = new System.Drawing.Size(611, 419);
             this.Name = "Form1";
             this.Text = "NotifyIcon範例";
             this.Load += new System.EventHandler(this.Form1_Load);

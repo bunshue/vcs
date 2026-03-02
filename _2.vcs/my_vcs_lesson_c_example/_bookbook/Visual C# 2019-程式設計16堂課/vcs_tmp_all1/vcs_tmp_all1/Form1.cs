@@ -146,7 +146,7 @@ namespace vcs_tmp_all1
         {
             //新增檔案
             //指定路徑建立檔案
-            string path = @"D:\C#Lab\Sample\Demo.txt";
+            string path = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\Visual C# 2019-程式設計16堂課\Sample\Demo.txt";
             FileInfo createFile = new FileInfo(path);
             //以Create方法新增一個檔案
             FileStream fs = createFile.Create();
@@ -155,7 +155,7 @@ namespace vcs_tmp_all1
 
 
             //複製檔案
-            path = @"D:\C#Lab\Sample\Demo.txt";
+            path = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\Visual C# 2019-程式設計16堂課\Sample\Demo.txt";
             //目的檔案「Text.txttmp」
             String tagPath = path + "tmp";
             FileInfo copyFile = new FileInfo(path);
@@ -170,9 +170,8 @@ namespace vcs_tmp_all1
                 MessageBox.Show(ex.Message);
             }
 
-
             //刪除檔案
-            path = @"D:\C#Lab\Sample\Demo.txttmp";
+            path = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\Visual C# 2019-程式設計16堂課\Sample\Demo.txttmp";
             copyFile = new FileInfo(path);
             if (copyFile.Exists == false)//查看檔案是否存在
             {
@@ -182,13 +181,11 @@ namespace vcs_tmp_all1
             {
                 copyFile.Delete();//刪除檔案
             }
-
-
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string path = @"D:\C#Lab\Sample\Demo.txt";
+            string path = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\Visual C# 2019-程式設計16堂課\Sample\Demo.txt";
             string str;
             FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
             StreamWriter sw = new StreamWriter(fs, Encoding.Unicode);
@@ -215,7 +212,7 @@ namespace vcs_tmp_all1
         {
             try
             {
-                string path = @"D:\C#Lab\Sample\Icon\";
+                string path = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\Visual C# 2019-程式設計16堂課\Sample\Icon\";
                 //取得資料夾最後一次被存取的時間
                 DateTime dt = Directory.GetLastWriteTime(path);
                 //如果資料夾不存在就建立資料夾
@@ -242,7 +239,7 @@ namespace vcs_tmp_all1
         private void button5_Click(object sender, EventArgs e)
         {
             //儲存要回傳的檔案路徑和檔案類型
-            string path2 = @"D:\C#Lab\Sample";
+            string path2 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\Visual C# 2019-程式設計16堂課\Sample";
             string fnShow = "檔案清單---<*.jpg>\n\n";
 
             //判斷資料夾是否存在，若是不存在會擲出例外情形

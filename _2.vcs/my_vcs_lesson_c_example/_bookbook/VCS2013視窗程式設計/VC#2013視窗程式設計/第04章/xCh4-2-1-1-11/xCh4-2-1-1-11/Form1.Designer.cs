@@ -34,9 +34,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(185, 33);
+            this.button1.Location = new System.Drawing.Point(159, 30);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(64, 21);
             this.button1.TabIndex = 9;
             this.button1.Text = "IsEmpty";
             this.button1.UseVisualStyleBackColor = true;
@@ -45,9 +45,9 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(28, 33);
+            this.linkLabel1.Location = new System.Drawing.Point(24, 30);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(67, 14);
+            this.linkLabel1.Size = new System.Drawing.Size(55, 12);
             this.linkLabel1.TabIndex = 8;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "linkLabel1";
@@ -55,13 +55,14 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 86);
+            this.ClientSize = new System.Drawing.Size(664, 388);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.linkLabel1);
             this.Name = "Form1";
             this.Text = "LinkArea屬性";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

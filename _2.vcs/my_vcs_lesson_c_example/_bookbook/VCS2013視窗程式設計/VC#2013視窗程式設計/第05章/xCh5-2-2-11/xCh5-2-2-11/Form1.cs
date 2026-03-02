@@ -32,8 +32,9 @@ namespace xCh5_2_2_11
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (this.WindowState == FormWindowState.Minimized)
+            {
                 this.WindowState = FormWindowState.Normal;
-
+            }
             this.Activate();
         }
 
@@ -42,7 +43,7 @@ namespace xCh5_2_2_11
             // 滑鼠點擊後，才會出現
             notifyIcon1.ShowBalloonTip(
                 1000,
-                "我的應用程式", 
+                "我的應用程式",
                 "雙擊圖示，秀出應用程式",
                 ToolTipIcon.Info
                 );

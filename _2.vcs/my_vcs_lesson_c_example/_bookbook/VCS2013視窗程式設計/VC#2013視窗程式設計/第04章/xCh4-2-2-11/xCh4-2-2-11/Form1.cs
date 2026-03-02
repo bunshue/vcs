@@ -17,12 +17,19 @@ namespace xCh4_2_2_11
             InitializeComponent();
         }
 
+        // 程式執行後，開啟預設的網頁，本例為www.google.com.tw
+        // 同時將focus移入可填寫網址的textBox1物件
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            webBrowser1.Url = new Uri("http://www.google.com.tw/");
+        }
+
         // 「瀏覽」
         private void button1_Click(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(textBox1.Text)) return;
             if (textBox1.Text.Equals("about:blank")) return;
-            if (!textBox1.Text.StartsWith("http://") &&  !textBox1.Text.StartsWith("https://"))
+            if (!textBox1.Text.StartsWith("http://") && !textBox1.Text.StartsWith("https://"))
             {
                 textBox1.Text = "http://" + textBox1.Text;
             }
@@ -34,7 +41,7 @@ namespace xCh4_2_2_11
             {
                 return;
             }
-         }
+        }
 
         // 回首頁
         private void button2_Click(object sender, EventArgs e)
@@ -93,17 +100,7 @@ namespace xCh4_2_2_11
         // 發生於 WebBrowser 控制項完成文件的載入時
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            this.Text = "WebBrowser控制項範例：文件名稱->" +
-                webBrowser1.DocumentTitle +
-                "，文件類型->" +
-                webBrowser1.DocumentType;
-        }
-
-        // 程式執行後，開啟預設的網頁，本例為www.google.com.tw
-        // 同時將focus移入可填寫網址的textBox1物件
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            webBrowser1.Url = new Uri("http://www.google.com.tw/");
+            this.Text = "WebBrowser控制項範例：文件名稱->" + webBrowser1.DocumentTitle + "，文件類型->" + webBrowser1.DocumentType;
         }
     }
 }

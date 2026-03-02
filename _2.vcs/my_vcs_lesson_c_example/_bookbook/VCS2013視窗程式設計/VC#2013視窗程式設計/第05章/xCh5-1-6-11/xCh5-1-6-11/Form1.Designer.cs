@@ -37,18 +37,18 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(344, 83);
+            this.textBox2.Location = new System.Drawing.Point(295, 77);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.textBox2.Size = new System.Drawing.Size(150, 194);
+            this.textBox2.Size = new System.Drawing.Size(129, 179);
             this.textBox2.TabIndex = 9;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(344, 49);
+            this.button2.Location = new System.Drawing.Point(295, 45);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(150, 25);
+            this.button2.Size = new System.Drawing.Size(129, 23);
             this.button2.TabIndex = 8;
             this.button2.Text = "已勾選項目";
             this.button2.UseVisualStyleBackColor = true;
@@ -56,16 +56,16 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(17, 254);
+            this.textBox1.Location = new System.Drawing.Point(15, 234);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(319, 23);
+            this.textBox1.Size = new System.Drawing.Size(274, 22);
             this.textBox1.TabIndex = 7;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(344, 18);
+            this.button1.Location = new System.Drawing.Point(295, 17);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 25);
+            this.button1.Size = new System.Drawing.Size(129, 23);
             this.button1.TabIndex = 6;
             this.button1.Text = "動態建構TreeView";
             this.button1.UseVisualStyleBackColor = true;
@@ -73,18 +73,18 @@
             // 
             // treeView1
             // 
-            this.treeView1.Location = new System.Drawing.Point(17, 18);
+            this.treeView1.Location = new System.Drawing.Point(15, 17);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(319, 229);
+            this.treeView1.Size = new System.Drawing.Size(274, 212);
             this.treeView1.TabIndex = 5;
             this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(514, 294);
+            this.ClientSize = new System.Drawing.Size(711, 542);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox1);
@@ -92,6 +92,7 @@
             this.Controls.Add(this.treeView1);
             this.Name = "Form1";
             this.Text = "TreeView範例";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

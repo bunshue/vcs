@@ -34,24 +34,24 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(121, 20);
+            this.textBox1.Location = new System.Drawing.Point(104, 18);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(181, 23);
+            this.textBox1.Size = new System.Drawing.Size(156, 22);
             this.textBox1.TabIndex = 4;
             // 
             // maskedTextBox1
             // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(15, 20);
+            this.maskedTextBox1.Location = new System.Drawing.Point(13, 18);
             this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(100, 23);
+            this.maskedTextBox1.Size = new System.Drawing.Size(86, 22);
             this.maskedTextBox1.TabIndex = 3;
             this.maskedTextBox1.TypeValidationCompleted += new System.Windows.Forms.TypeValidationEventHandler(this.maskedTextBox1_TypeValidationCompleted);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(317, 63);
+            this.ClientSize = new System.Drawing.Size(616, 360);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.maskedTextBox1);
             this.Name = "Form1";

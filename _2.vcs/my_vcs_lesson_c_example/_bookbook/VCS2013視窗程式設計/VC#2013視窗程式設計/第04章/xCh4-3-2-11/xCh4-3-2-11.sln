@@ -1,6 +1,6 @@
-
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xCh4-3-2-11", "xCh4-3-2-11\xCh4-3-2-11.csproj", "{E63C0221-3C52-4A9E-BDC5-E4CF802285BA}"
 EndProject
 Global

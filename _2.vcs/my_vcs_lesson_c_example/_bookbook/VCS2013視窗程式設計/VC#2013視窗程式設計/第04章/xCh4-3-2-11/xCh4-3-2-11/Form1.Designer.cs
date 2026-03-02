@@ -47,33 +47,33 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(177, 25);
+            this.label2.Location = new System.Drawing.Point(152, 23);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 14);
+            this.label2.Size = new System.Drawing.Size(33, 12);
             this.label2.TabIndex = 9;
             this.label2.Text = "label2";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(30, 25);
+            this.label1.Location = new System.Drawing.Point(26, 23);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 14);
+            this.label1.Size = new System.Drawing.Size(33, 12);
             this.label1.TabIndex = 8;
             this.label1.Text = "label1";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(281, 25);
+            this.textBox1.Location = new System.Drawing.Point(241, 23);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(44, 23);
+            this.textBox1.Size = new System.Drawing.Size(38, 22);
             this.textBox1.TabIndex = 7;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(180, 63);
+            this.button1.Location = new System.Drawing.Point(154, 58);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(113, 90);
+            this.button1.Size = new System.Drawing.Size(97, 83);
             this.button1.TabIndex = 6;
             this.button1.Text = "載入圖片";
             this.button1.UseVisualStyleBackColor = true;
@@ -82,7 +82,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(22, 63);
+            this.pictureBox1.Location = new System.Drawing.Point(19, 58);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(128, 90);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -91,9 +91,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(346, 178);
+            this.ClientSize = new System.Drawing.Size(648, 497);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);

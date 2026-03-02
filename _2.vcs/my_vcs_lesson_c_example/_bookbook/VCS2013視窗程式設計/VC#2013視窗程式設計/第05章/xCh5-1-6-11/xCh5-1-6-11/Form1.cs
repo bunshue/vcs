@@ -18,6 +18,11 @@ namespace xCh5_1_6_11
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             // 動態產生9位顧客的姓名
@@ -37,7 +42,7 @@ namespace xCh5_1_6_11
             ArrayList customerArray = new ArrayList();
             for (int i = 0; i < 9; i++)
             {
-                customerArray.Add(new Customer("顧客："+customerName[i]));
+                customerArray.Add(new Customer("顧客：" + customerName[i]));
             }
 
             // 利用亂數，隨機產生不同Customer物件所擁有的訂單數
@@ -45,9 +50,9 @@ namespace xCh5_1_6_11
             foreach (Customer customer in customerArray)
             {
                 // 顧客訂單數以1~10之間的亂數產生
-                Random randObj = new Random(seed++*100);
+                Random randObj = new Random(seed++ * 100);
                 int upperLimit = randObj.Next(1, 10);
-                
+
                 for (int y = 1; y < upperLimit; y++)
                 {
                     customer.CustomerOrders.Add(new Order("訂單#" + y.ToString()));
@@ -59,7 +64,7 @@ namespace xCh5_1_6_11
             // 清除目前TreeView物的所有節點
             treeView1.Nodes.Clear();
             // 指定節點選取與非選取時所要使用的圖片 
-            int selectedCustomerImageIndex =0;
+            int selectedCustomerImageIndex = 0;
             int unselectedCustomerImageIndex = 1;
             int selectedOrderImageIndex = 2;
             int unselectedOrderImageIndex = 3;
@@ -67,9 +72,7 @@ namespace xCh5_1_6_11
             // 將ArrayList中的Customer物件資料加入成為節點
             foreach (Customer customer in customerArray)
             {
-                treeView1.Nodes.Add(new TreeNode(
-                    customer.CustomerName, 
-                    unselectedCustomerImageIndex, 
+                treeView1.Nodes.Add(new TreeNode(customer.CustomerName, unselectedCustomerImageIndex,
                     selectedCustomerImageIndex));
                 // 為每一Customer節點加入其Order節點，
                 // 並針對偶數的節點指定該節點被選取或取消選取時的圖像
@@ -77,13 +80,17 @@ namespace xCh5_1_6_11
                 foreach (Order order in customer.CustomerOrders)
                 {
                     i++;
-                    if(i% 2 == 0)
+                    if (i % 2 == 0)
+                    {
                         treeView1.Nodes[customerArray.IndexOf(customer)].Nodes.Add(
-                      new TreeNode(customer.CustomerName + "." + order.OrderID,                      
+                      new TreeNode(customer.CustomerName + "." + order.OrderID,
                           unselectedOrderImageIndex, selectedOrderImageIndex));
+                    }
                     else
+                    {
                         treeView1.Nodes[customerArray.IndexOf(customer)].Nodes.Add(
                       new TreeNode(customer.CustomerName + "." + order.OrderID));
+                    }
                 }
             }
             // 開始重繪TreeView物件
@@ -202,6 +209,4 @@ namespace xCh5_1_6_11
             set { this.ordID = value; }
         }
     }
-
- 
 }

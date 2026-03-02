@@ -45,8 +45,7 @@ namespace xCh5_2_1_21
             {
                 using (Font f = new Font("Tahoma", 12))
                 {
-                    e.ToolTipSize = TextRenderer.MeasureText(
-                        toolTip1.GetToolTip(e.AssociatedControl), f);
+                    e.ToolTipSize = TextRenderer.MeasureText(toolTip1.GetToolTip(e.AssociatedControl), f);
                 }
             }
         }
@@ -78,7 +77,7 @@ namespace xCh5_2_1_21
                 // 繪製文字
                 e.DrawText(sf);
             }
-            
+
             else if (e.AssociatedControl == button2)
             {
                 // 繪製客製化的背景
@@ -96,12 +95,11 @@ namespace xCh5_2_1_21
                     sf.FormatFlags = StringFormatFlags.NoWrap;
                     using (Font f = new Font("Tahoma", 9))
                     {
-                        e.Graphics.DrawString(e.ToolTipText, f,
-                            SystemBrushes.ActiveCaptionText, e.Bounds, sf);
+                        e.Graphics.DrawString(e.ToolTipText, f, SystemBrushes.ActiveCaptionText, e.Bounds, sf);
                     }
                 }
             }
-           
+
             else if (e.AssociatedControl == button3)
             {
                 e.DrawBackground();

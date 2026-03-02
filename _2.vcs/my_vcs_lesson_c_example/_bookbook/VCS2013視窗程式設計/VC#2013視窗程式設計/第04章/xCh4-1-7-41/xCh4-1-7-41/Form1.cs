@@ -36,5 +36,10 @@ namespace xCh4_1_7_41
                 +"\n您目前的體重是："+normalOrNot;
             MessageBox.Show(msg);
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

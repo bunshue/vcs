@@ -59,20 +59,19 @@ namespace xCh5_4_1_11
             label1.Text = ("目前進度是：" + e.ProgressPercentage.ToString() + "%");
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(
-            object sender, RunWorkerCompletedEventArgs e)
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Cancelled == true)
             {
-               label1.Text = "非同步作業被取消了！";
+                label1.Text = "非同步作業被取消了！";
             }
             else if (e.Error != null)
             {
-               label1.Text = "錯誤： " + e.Error.Message;
+                label1.Text = "錯誤： " + e.Error.Message;
             }
             else
             {
-               label1.Text = "Done!";
+                label1.Text = "Done!";
             }
         }
 
@@ -85,3 +84,4 @@ namespace xCh5_4_1_11
         }
     }
 }
+
