@@ -72,6 +72,10 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.textBox12 = new System.Windows.Forms.TextBox();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.textBox_multiline = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -79,6 +83,7 @@
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
+            this.groupBox8.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox2
@@ -267,7 +272,7 @@
             this.richTextBox1.Size = new System.Drawing.Size(350, 105);
             this.richTextBox1.TabIndex = 18;
             this.richTextBox1.Text = "textBox4.MaxLength = 3;    //設最多只能輸入3位數\ntextBox4.ReadOnly = true;   //設為唯讀不能輸入\nte" +
-    "xtBox4.TabIndex = 0;     //設為第一個停駐焦點\ntextBox4.Focus();    //將停駐焦點移到txtDegree";
+                "xtBox4.TabIndex = 0;     //設為第一個停駐焦點\ntextBox4.Focus();    //將停駐焦點移到txtDegree";
             // 
             // textBox4
             // 
@@ -403,7 +408,7 @@
             this.textBox_use_scrollbar.Size = new System.Drawing.Size(262, 38);
             this.textBox_use_scrollbar.TabIndex = 23;
             this.textBox_use_scrollbar.Text = "TextBox加ScrollBar 1 TextBox加ScrollBar 2 TextBox加ScrollBar 3 TextBox加ScrollBar 4 T" +
-    "extBox加ScrollBar 5 TextBox加ScrollBar 6 TextBox加ScrollBar 7 TextBox加ScrollBar 8";
+                "extBox加ScrollBar 5 TextBox加ScrollBar 6 TextBox加ScrollBar 7 TextBox加ScrollBar 8";
             // 
             // bt_clear
             // 
@@ -538,11 +543,53 @@
             this.textBox12.TabIndex = 9;
             this.textBox12.UseSystemPasswordChar = true;
             // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.textBox_multiline);
+            this.groupBox8.Controls.Add(this.button3);
+            this.groupBox8.Controls.Add(this.button2);
+            this.groupBox8.Location = new System.Drawing.Point(584, 557);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(295, 100);
+            this.groupBox8.TabIndex = 40;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "多行TextBox";
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button2.Location = new System.Drawing.Point(135, 22);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(90, 62);
+            this.button2.TabIndex = 41;
+            this.button2.Text = "設定多行TextBox";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button3.Location = new System.Drawing.Point(231, 21);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(60, 60);
+            this.button3.TabIndex = 42;
+            this.button3.Text = "Info";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // textBox_multiline
+            // 
+            this.textBox_multiline.Location = new System.Drawing.Point(7, 21);
+            this.textBox_multiline.Name = "textBox_multiline";
+            this.textBox_multiline.Size = new System.Drawing.Size(122, 22);
+            this.textBox_multiline.TabIndex = 43;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1210, 708);
+            this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.lb_CustomTextBoxGroup3);
@@ -579,6 +626,8 @@
             this.groupBox6.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -630,6 +679,10 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TextBox textBox_multiline;
     }
 }
 

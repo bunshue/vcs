@@ -17,6 +17,12 @@ namespace xCh4_1_2_31
             InitializeComponent();
         }
 
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             try
@@ -39,9 +45,9 @@ namespace xCh4_1_2_31
             {
                 // 如果發生錯誤的話，就使用系統色及10點大小的刪除線加底線樣式呈現
                 textBox1.ForeColor = SystemColors.ControlText;
-                textBox1.Font = new Font(FontFamily.GenericSansSerif, 13.0F,
-                    FontStyle.Strikeout|FontStyle.Underline);
+                textBox1.Font = new Font(FontFamily.GenericSansSerif, 13.0F, FontStyle.Strikeout | FontStyle.Underline);
             }
         }
     }
 }
+

@@ -104,7 +104,6 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(200, 60);
             this.button8.TabIndex = 133;
-            this.button8.Text = "利用[^]通配符進行查詢";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -148,7 +147,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(200, 60);
             this.button6.TabIndex = 128;
-            this.button6.Text = "利用[]通配符進行查詢";
+            this.button6.Text = "通配符";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -223,7 +222,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(200, 60);
             this.button10.TabIndex = 135;
-            this.button10.Text = "having語句運用在多表查詢中";
+            this.button10.Text = "HAVING";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -234,7 +233,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(200, 60);
             this.button11.TabIndex = 136;
-            this.button11.Text = "利用having語句過濾分組數據";
+            this.button11.Text = "AND / OR";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -245,7 +244,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(200, 60);
             this.button12.TabIndex = 137;
-            this.button12.Text = "動態交叉表查詢";
+            this.button12.Text = "靜態/動態 交叉表 查詢";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -322,7 +321,6 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(200, 60);
             this.button19.TabIndex = 144;
-            this.button19.Text = "利用%通配符進行查詢";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -386,7 +384,6 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(200, 60);
             this.button24.TabIndex = 150;
-            this.button24.Text = "利用聚合函數MAX求月銷售額完成最多的員工";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
@@ -397,7 +394,6 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(200, 60);
             this.button25.TabIndex = 151;
-            this.button25.Text = "利用聚合函數AVG求某班學生的平均年齡";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -408,7 +404,6 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(200, 60);
             this.button26.TabIndex = 152;
-            this.button26.Text = "利用聚合函數SUM對銷售額進行匯總";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -430,7 +425,7 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(200, 60);
             this.button28.TabIndex = 154;
-            this.button28.Text = "查詢字串";
+            this.button28.Text = "查詢字串/數字";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
@@ -494,7 +489,6 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(200, 60);
             this.button33.TabIndex = 160;
-            this.button33.Text = "查詢時不顯示重複記錄";
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
@@ -516,7 +510,6 @@
             this.button35.Name = "button35";
             this.button35.Size = new System.Drawing.Size(200, 60);
             this.button35.TabIndex = 162;
-            this.button35.Text = "查詢數字";
             this.button35.UseVisualStyleBackColor = true;
             this.button35.Click += new System.EventHandler(this.button35_Click);
             // 
@@ -538,7 +531,6 @@
             this.button37.Name = "button37";
             this.button37.Size = new System.Drawing.Size(200, 60);
             this.button37.TabIndex = 164;
-            this.button37.Text = "數據分組統計（單列）";
             this.button37.UseVisualStyleBackColor = true;
             this.button37.Click += new System.EventHandler(this.button37_Click);
             // 
@@ -549,7 +541,6 @@
             this.button38.Name = "button38";
             this.button38.Size = new System.Drawing.Size(200, 60);
             this.button38.TabIndex = 165;
-            this.button38.Text = "同時利用OR、AND進行查詢";
             this.button38.UseVisualStyleBackColor = true;
             this.button38.Click += new System.EventHandler(this.button38_Click);
             // 
@@ -571,7 +562,7 @@
             this.button40.Name = "button40";
             this.button40.Size = new System.Drawing.Size(200, 60);
             this.button40.TabIndex = 167;
-            this.button40.Text = "利用聚合函數MIN求銷售額、利潤最少的商品";
+            this.button40.Text = "聚合函數MIN/COUNT";
             this.button40.UseVisualStyleBackColor = true;
             this.button40.Click += new System.EventHandler(this.button40_Click);
             // 
@@ -582,7 +573,6 @@
             this.button41.Name = "button41";
             this.button41.Size = new System.Drawing.Size(200, 60);
             this.button41.TabIndex = 168;
-            this.button41.Text = "利用聚合函數COUNT求日銷售額大於某值的商品數";
             this.button41.UseVisualStyleBackColor = true;
             this.button41.Click += new System.EventHandler(this.button41_Click);
             // 
@@ -604,7 +594,6 @@
             this.button43.Name = "button43";
             this.button43.Size = new System.Drawing.Size(200, 60);
             this.button43.TabIndex = 170;
-            this.button43.Text = "靜態交叉表";
             this.button43.UseVisualStyleBackColor = true;
             this.button43.Click += new System.EventHandler(this.button43_Click);
             // 

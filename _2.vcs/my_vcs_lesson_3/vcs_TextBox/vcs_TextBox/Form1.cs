@@ -83,19 +83,22 @@ namespace vcs_TextBox
             dy = 60 + 5;
 
             int W = 300;
-            int H = 180;
+            int H = 160;
 
             groupBox1.Size = new Size(W, H);
             groupBox3.Size = new Size(W, H);
             groupBox4.Size = new Size(W, H);
             groupBox5.Size = new Size(W, H);
             groupBox6.Size = new Size(W, H);
-            groupBox7.Size = new Size(W, H);
+            groupBox7.Size = new Size(W, H * 2 / 3);
+            groupBox8.Size = new Size(W, H * 2 / 3);
 
             groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 80);
 
             groupBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
-            groupBox7.Location = new Point(x_st + dx * 5, y_st + dy * 3);
+            groupBox7.Location = new Point(x_st + dx * 5, y_st + dy * 3 - 25);
+            groupBox8.Location = new Point(x_st + dx * 5, y_st + dy * 5 - 50);
+
             groupBox3.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 0);
             groupBox4.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 2 + 50);
             groupBox5.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 4 + 50 * 2);
@@ -314,6 +317,30 @@ namespace vcs_TextBox
             textBox10.ForeColor = Color.Black;
             textBox10.BackColor = Color.White;
             textBox10.Select(0, 0);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //設定多行TextBox
+            textBox_multiline.Multiline = true;
+            textBox_multiline.ScrollBars = ScrollBars.Vertical;
+            textBox_multiline.AcceptsReturn = true;
+
+            Size aSize = new Size(120, 150);
+            textBox_multiline.Size = aSize;
+
+            textBox_multiline.Focus();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            int i = 0;
+            foreach (string line in textBox_multiline.Lines)
+            {
+                i++;
+            }
+            richTextBox2.Text += "共有 " + i + " 列文字：" + textBox_multiline.Text + "\n";
+
         }
     }
 }

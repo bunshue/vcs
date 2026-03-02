@@ -12,6 +12,23 @@ namespace xCh2_2_61
 {
     public partial class Form1 : Form
     {
+        Label Label1 = new Label();
+        Label Label2 = new Label();
+        TextBox TextBoxOutput = new TextBox();
+        TextBox TextBoxInput = new TextBox();
+        GroupBox EventsGroupBox = new GroupBox();
+        Button ButtonClear = new Button();
+        LinkLabel LinkLabelDrag = new LinkLabel();
+
+        CheckBox CheckBoxToggleAll = new CheckBox();
+        CheckBox CheckBoxMouse = new CheckBox();
+        CheckBox CheckBoxMouseEnter = new CheckBox();
+        CheckBox CheckBoxMouseMove = new CheckBox();
+        CheckBox CheckBoxMousePoints = new CheckBox();
+        CheckBox CheckBoxMouseDrag = new CheckBox();
+        CheckBox CheckBoxMouseDragOver = new CheckBox();
+        CheckBox CheckBoxKeyboard = new CheckBox();
+        CheckBox CheckBoxKeyUpDown = new CheckBox();
 
         public Form1()
         {

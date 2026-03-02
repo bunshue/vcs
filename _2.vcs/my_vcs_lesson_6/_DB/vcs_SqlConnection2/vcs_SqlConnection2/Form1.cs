@@ -221,6 +221,8 @@ namespace vcs_SqlConnection2
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //通配符大全
+
             //show
             string db_filename = "db_10_Data.MDF";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
@@ -241,6 +243,66 @@ namespace vcs_SqlConnection2
             ds = new DataSet();
             dap.Fill(ds);
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
+
+            //3030
+            /*
+            //show
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection cn = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("select * from tb_stu", cn);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            */
+
+            //3030
+
+            //利用[^]通配符進行查詢
+
+            //利用[^]通配符進行查詢年齡：
+            /*
+            string student_age = "2";
+
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection cn = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("select * from tb_stu where 年齡 like '[^" + student_age + "][0-9]'", cn);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            */
+
+            //3030
+
+            /*
+            //show
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection cn = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("select * from tb_stu", cn);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            */
+
+            //3030
+
+            //利用%通配符進行查詢
+
+            /*
+            //請輸入學生編號：
+            string student_id = "3";
+
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection cn = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("select * from tb_stu where 學生編號 like '%" + student_id + "%'", cn);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            */
+
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -281,32 +343,6 @@ namespace vcs_SqlConnection2
 
         private void button8_Click(object sender, EventArgs e)
         {
-            /*
-            //show
-            string db_filename = "db_10_Data.MDF";
-            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-            SqlConnection cn = new SqlConnection(cnstr);
-            SqlDataAdapter dap = new SqlDataAdapter("select * from tb_stu", cn);
-            DataSet ds = new DataSet();
-            dap.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0].DefaultView;
-            */
-
-            //3030
-
-            //利用[^]通配符進行查詢
-
-            //利用[^]通配符進行查詢年齡：
-
-            string student_age = "2";
-
-            string db_filename = "db_10_Data.MDF";
-            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-            SqlConnection cn = new SqlConnection(cnstr);
-            SqlDataAdapter dap = new SqlDataAdapter("select * from tb_stu where 年齡 like '[^" + student_age + "][0-9]'", cn);
-            DataSet ds = new DataSet();
-            dap.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0].DefaultView;
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -339,16 +375,15 @@ namespace vcs_SqlConnection2
 
             cmd_name = "SELECT 部門工資統計表.所屬部門, MAX(部門工資統計表.基本工資) AS 部門最高工資,SUM(員工請假表.請假天數) AS 合計請假天數, AVG(員工請假表.扣除金額) AS 平均扣除金額 FROM 部門工資統計表 INNER JOIN 員工請假表 ON 部門工資統計表.員工編號 = 員工請假表.員工編號 GROUP BY 部門工資統計表.所屬部門 HAVING (SUM(員工請假表.請假天數) < 10)";
             show_database(db_filename, cmd_name);
-        }
 
-        private void button11_Click(object sender, EventArgs e)
-        {
+            //3030
+
             //利用having語句過濾分組數據
-
+            /*
             string db_filename = "db_10_Data.MDF";
             string cmd_name = "SELECT * FROM 部門工資統計表";
             show_database(db_filename, cmd_name);
-
+            */
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             cmd_name = "SELECT DISTINCT 所屬部門, COUNT(*) AS 部門人數, MAX(基本工資) AS 最高工資, AVG(基本工資) AS 平均工資 FROM 部門工資統計表 GROUP BY 所屬部門 HAVING (AVG(基本工資) > 1000)";
@@ -364,16 +399,88 @@ namespace vcs_SqlConnection2
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
         }
 
-        private void button12_Click(object sender, EventArgs e)
+        private void button11_Click(object sender, EventArgs e)
         {
             string db_filename = "db_10_Data.MDF";
-            string cmd_name = "SELECT * FROM 銷售表";
+            string cmd_name = "SELECT * FROM tb_Score";
             show_database(db_filename, cmd_name);
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
+            //同時利用OR、AND進行查詢
+            //查詢數學成績大於90分或者音樂成績大於90分同時還得滿足英語成績大於90分的學生訊息。
+            cmd_name = "SELECT * FROM tb_Score where (Math_Score>90 or Music_Score>90) and English_Score>90 ";
+            show_database(db_filename, cmd_name);
+
+            /*
+            dap.Fill(ds, "book");  //test use "book"
+            */
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //利用OR進行查詢
+            //查詢數學成績或英語成績大於９５分的學生訊息
+            cmd_name = "SELECT * FROM tb_Score where Math_Score>95 or English_Score>95";
+            show_database(db_filename, cmd_name);
+
+            //dap.Fill(ds, "book");  //test use "book"
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //利用AND進行查詢
+            //查詢英語成績或數學成績都大於90的學生訊息
+            cmd_name = "SELECT * FROM tb_Score where Math_Score>90 and English_Score>90";
+            show_database(db_filename, cmd_name);
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //靜態/動態 交叉表 查詢
+
+            //靜態 交叉表 查詢
+
+            /*
+            //show
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection con = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("SELECT * FROM 銷售表", con);
+            DataSet ds = new DataSet();
+            dap.Fill(ds, "table");
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            */
+
+            //3030
+
+            //靜態交叉表
+
+            //銷售業績分析
+
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection con = new SqlConnection(cnstr);
+
+            //按員工姓名分析
+            //SqlDataAdapter dap = new SqlDataAdapter("SELECT 所在部門, SUM(CASE 員工姓名 WHEN '李金明' THEN 銷售業績 ELSE NULL END)AS [李金明],SUM(CASE 員工姓名 WHEN '周可人' THEN 銷售業績 ELSE NULL END)as [周可人] ,SUM(CASE 員工姓名 WHEN '韓運' THEN 銷售業績 ELSE NULL END)AS [韓運],SUM(CASE 員工姓名 WHEN '司徒南' THEN 銷售業績 ELSE NULL END)AS [司徒南],SUM(CASE 員工姓名 WHEN '史佳金' THEN 銷售業績 ELSE NULL END)AS [史佳金]  FROM 銷售表 GROUP BY 所在部門", con);
+
+            //按部門分析
+            SqlDataAdapter dap = new SqlDataAdapter("SELECT 員工姓名, SUM(CASE 所在部門 WHEN '食品部' THEN 銷售業績 ELSE NULL END) AS [食品部業績],SUM(CASE 所在部門 WHEN '家電部' THEN 銷售業績 ELSE NULL END) AS [家電部業績] FROM 銷售表 GROUP BY 員工姓名", con);
+
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+
+            /*
+            string db_filename = "db_10_Data.MDF";
+            string cmd_name = "SELECT * FROM 銷售表";
+            show_database(db_filename, cmd_name);
+            */
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
             //tmp string cmd_name = "SELECT DISTINCT 所屬部門, COUNT(*) AS 部門人數, MAX(基本工資) AS 最高工資, AVG(基本工資) AS 平均工資 FROM 部門工資統計表 GROUP BY 所屬部門 HAVING (AVG(基本工資) > 1000)";
 
+            //動態 交叉表 查詢
             /*
             //動態交叉表查詢
             SqlConnection cn = new SqlConnection(cnstr);
@@ -455,31 +562,6 @@ namespace vcs_SqlConnection2
 
         private void button19_Click(object sender, EventArgs e)
         {
-            /*
-            //show
-            string db_filename = "db_10_Data.MDF";
-            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-            SqlConnection cn = new SqlConnection(cnstr);
-            SqlDataAdapter dap = new SqlDataAdapter("select * from tb_stu", cn);
-            DataSet ds = new DataSet();
-            dap.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0].DefaultView;
-            */
-
-            //3030
-
-            //利用%通配符進行查詢
-
-            //請輸入學生編號：
-            string student_id = "3";
-
-            string db_filename = "db_10_Data.MDF";
-            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-            SqlConnection cn = new SqlConnection(cnstr);
-            SqlDataAdapter dap = new SqlDataAdapter("select * from tb_stu where 學生編號 like '%" + student_id + "%'", cn);
-            DataSet ds = new DataSet();
-            dap.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0].DefaultView;
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -543,102 +625,14 @@ namespace vcs_SqlConnection2
 
         private void button24_Click(object sender, EventArgs e)
         {
-            string db_filename = "db_10_Data.MDF";
-            string cmd_name = "SELECT * FROM tb_sellInfo";
-            show_database(db_filename, cmd_name);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //利用聚合函數MAX求月銷售額完成最多的員工
-            //查詢銷售額最多的員工及相關訊息
-            cmd_name = "SELECT * FROM tb_sellInfo where 銷售額 in(select max(銷售額) from tb_sellInfo)";
-            show_database(db_filename, cmd_name);
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
-            string db_filename = "db_10_Data.MDF";
-            string cmd_name = "SELECT * FROM tb_stu";
-            show_database(db_filename, cmd_name);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //利用聚合函數AVG求某班學生的平均年齡
-            //統計
-            cmd_name = "select avg(年齡) as 平均年齡 from tb_stu";
-            show_database(db_filename, cmd_name);
-
-            //richTextBox1.Text += "學生平均年齡 : " + ds.Tables[0].Rows[0][0].ToString() + "\n";
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //利用變數查詢字串數據
-            string MyStr = "武梅";
-            cmd_name = "SELECT * FROM tb_stu where 學生姓名='" + MyStr + "'";
-            show_database(db_filename, cmd_name);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //利用變數查詢數值型數據
-            int MyInt = 23;
-            cmd_name = "SELECT * FROM tb_stu where 年齡='" + MyInt + "'";
-            show_database(db_filename, cmd_name);
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
-            string db_filename = "db_10_Data.MDF";
-            string cmd_name = "SELECT * FROM tb_xsb";
-            show_database(db_filename, cmd_name);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //利用聚合函數SUM對銷售額進行匯總
-            //圖書銷售統計
-            cmd_name = "select sum(銷售數量) as 總數量 ,sum(金額) as 總金額 from tb_xsb";
-            show_database(db_filename, cmd_name);
-
-            //richTextBox1.Text += "銷售總數量：" + ds.Tables[0].Rows[0][0].ToString() + "\n";
-            //richTextBox1.Text += "銷售總金額：" + ds.Tables[0].Rows[0][1].ToString() + "\n";
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //對統計結果進行排序
-            //對圖書銷售數量前五名的書籍按降序排序
-            cmd_name = "select top 5 書號,書名,作者,出版社,sum(銷售數量) as 合計銷售數量 from tb_xsb  group by 書號,書名,作者,出版社  order by 5 desc";
-            show_database(db_filename, cmd_name);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //對數據進行多條件排序
-            //查詢圖書訊息，按序號升序排序並日期降序排序
-            cmd_name = "select distinct 書號,書名,作者,銷售數量,日期 from tb_xsb order by 書號 asc,日期 desc ";
-            show_database(db_filename, cmd_name);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //dap.Fill(ds, "book");  //test use "book"
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //列出數據中的重複記錄和記錄條數
-            //查詢已銷售圖書情況
-            cmd_name = "select Count(書號)as 記錄條數, 書號,書名,作者 from tb_xsb group by 書號,書名,作者 Having Count(書號)>1";
-            show_database(db_filename, cmd_name);
-
-            //dap.Fill(ds, "book");  //test use "book"
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //查詢銷售量占前50%的圖書訊息
-            cmd_name = "select top 50 percent 書號,書名,sum(銷售數量)as 合計銷售數量 from tb_xsb group by 書號,書名,作者 order by 3 desc";
-            show_database(db_filename, cmd_name);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //取出數據統計結果後10名數據//設定統計查詢的SQL語句
-            cmd_name = "select top 10 書號,書名,sum(銷售數量)as 合計銷售數量 from tb_xsb group by 書號,書名,作者 order by 3 asc";
-            show_database(db_filename, cmd_name);
         }
 
         private void button27_Click(object sender, EventArgs e)
@@ -694,6 +688,18 @@ namespace vcs_SqlConnection2
             string search_college = "計算機";
             string cmd_name = "SELECT * FROM tb_05 WHERE 所在院系 LIKE '%" + search_college + "%'";
             show_database(db_filename, cmd_name);
+
+            //3030
+
+            /*
+            //查詢數字
+            //查詢年齡為：23
+
+            string db_filename = "db_10_Data.MDF";
+            int age = 23;
+            string cmd_name = "SELECT * FROM tb_05 WHERE 學生年齡=" + age.ToString();
+            show_database(db_filename, cmd_name);
+            */
         }
 
         private void button29_Click(object sender, EventArgs e)
@@ -743,21 +749,6 @@ namespace vcs_SqlConnection2
 
         private void button33_Click(object sender, EventArgs e)
         {
-            string db_filename = "db_10_Data.MDF";
-            string cmd_name = "select distinct 書號,條形碼,書名,作者,出版社 from tb_xsb";
-            show_database(db_filename, cmd_name);
-
-            //dap.Fill(ds, "book");  //test use "book"
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //查詢時不顯示重複記錄
-            //查詢已銷售圖書情況
-
-            cmd_name = "select distinct 書號,條形碼,書名,作者,出版社 from tb_xsb";
-            show_database(db_filename, cmd_name);
-
-            //dap.Fill(ds, "book");  //test use "book"
         }
 
         private void button34_Click(object sender, EventArgs e)
@@ -788,13 +779,6 @@ namespace vcs_SqlConnection2
 
         private void button35_Click(object sender, EventArgs e)
         {
-            //查詢數字
-            //查詢年齡為：23
-
-            string db_filename = "db_10_Data.MDF";
-            int age = 23;
-            string cmd_name = "SELECT * FROM tb_05 WHERE 學生年齡=" + age.ToString();
-            show_database(db_filename, cmd_name);
         }
 
         private void button36_Click(object sender, EventArgs e)
@@ -813,45 +797,10 @@ namespace vcs_SqlConnection2
 
         private void button37_Click(object sender, EventArgs e)
         {
-            //數據分組統計（單列）
-            //庫存圖書按出版社統計圖書庫存金額，並按金額降序排序。
-            string db_filename = "db_10_Data.MDF";
-            string cmd_name = "select 出版社,sum(金額) as 合計金額 from tb_xsb group by 出版社 order by 2 desc";
-            show_database(db_filename, cmd_name);
         }
 
         private void button38_Click(object sender, EventArgs e)
         {
-            string db_filename = "db_10_Data.MDF";
-            string cmd_name = "SELECT * FROM tb_Score";
-            show_database(db_filename, cmd_name);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //同時利用OR、AND進行查詢
-            //查詢數學成績大於90分或者音樂成績大於90分同時還得滿足英語成績大於90分的學生訊息。
-            cmd_name = "SELECT * FROM tb_Score where (Math_Score>90 or Music_Score>90) and English_Score>90 ";
-            show_database(db_filename, cmd_name);
-
-            /*
-            dap.Fill(ds, "book");  //test use "book"
-            */
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //利用OR進行查詢
-            //查詢數學成績或英語成績大於９５分的學生訊息
-            cmd_name = "SELECT * FROM tb_Score where Math_Score>95 or English_Score>95";
-            show_database(db_filename, cmd_name);
-
-            //dap.Fill(ds, "book");  //test use "book"
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //利用AND進行查詢
-            //查詢英語成績或數學成績都大於90的學生訊息
-            cmd_name = "SELECT * FROM tb_Score where Math_Score>90 and English_Score>90";
-            show_database(db_filename, cmd_name);
         }
 
         private void button39_Click(object sender, EventArgs e)
@@ -887,6 +836,8 @@ namespace vcs_SqlConnection2
 
         private void button40_Click(object sender, EventArgs e)
         {
+            //聚合函數大全
+
             /*
             //show
             string db_filename = "db_10_Data.MDF";
@@ -897,6 +848,8 @@ namespace vcs_SqlConnection2
             dap.Fill(ds);
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
             */
+
+            //3030
 
             //利用聚合函數MIN求銷售額、利潤最少的商品
 
@@ -913,23 +866,11 @@ namespace vcs_SqlConnection2
             DataSet ds = new DataSet();
             dap.Fill(ds);
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
-        }
 
-        private void button41_Click(object sender, EventArgs e)
-        {
-            /*
-            //show
-            string db_filename = "db_10_Data.MDF";
-            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-            SqlConnection cn = new SqlConnection(cnstr);
-            SqlDataAdapter dap = new SqlDataAdapter("select * from tb_sell", cn);
-            DataSet ds = new DataSet();
-            dap.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0].DefaultView;
-            */
+            //3030
 
             //利用聚合函數COUNT求日銷售額大於某值的商品數
-
+            /*
             string db_filename = "db_10_Data.MDF";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
             SqlConnection cn = new SqlConnection(cnstr);
@@ -938,6 +879,138 @@ namespace vcs_SqlConnection2
             dap.Fill(ds);
 
             richTextBox1.Text += "查詢日銷售額大於５００的銷售商品種數：" + ds.Tables[0].Rows[0][0].ToString() + "\n";
+            */
+
+            //3030
+
+            //string db_filename = "db_10_Data.MDF";
+            string cmd_name = "SELECT * FROM tb_sellInfo";
+            show_database(db_filename, cmd_name);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //利用聚合函數MAX求月銷售額完成最多的員工
+            //查詢銷售額最多的員工及相關訊息
+            cmd_name = "SELECT * FROM tb_sellInfo where 銷售額 in(select max(銷售額) from tb_sellInfo)";
+            show_database(db_filename, cmd_name);
+
+            //3030
+            /*
+            string db_filename = "db_10_Data.MDF";
+            string cmd_name = "SELECT * FROM tb_stu";
+            show_database(db_filename, cmd_name);
+            */
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //利用聚合函數AVG求某班學生的平均年齡
+            //統計
+            cmd_name = "select avg(年齡) as 平均年齡 from tb_stu";
+            show_database(db_filename, cmd_name);
+
+            //richTextBox1.Text += "學生平均年齡 : " + ds.Tables[0].Rows[0][0].ToString() + "\n";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //利用變數查詢字串數據
+            string MyStr = "武梅";
+            cmd_name = "SELECT * FROM tb_stu where 學生姓名='" + MyStr + "'";
+            show_database(db_filename, cmd_name);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //利用變數查詢數值型數據
+            int MyInt = 23;
+            cmd_name = "SELECT * FROM tb_stu where 年齡='" + MyInt + "'";
+            show_database(db_filename, cmd_name);
+
+
+            //3030
+            /*
+            string db_filename = "db_10_Data.MDF";
+            string cmd_name = "SELECT * FROM tb_xsb";
+            show_database(db_filename, cmd_name);
+            */
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //利用聚合函數SUM對銷售額進行匯總
+            //圖書銷售統計
+            cmd_name = "select sum(銷售數量) as 總數量 ,sum(金額) as 總金額 from tb_xsb";
+            show_database(db_filename, cmd_name);
+
+            //richTextBox1.Text += "銷售總數量：" + ds.Tables[0].Rows[0][0].ToString() + "\n";
+            //richTextBox1.Text += "銷售總金額：" + ds.Tables[0].Rows[0][1].ToString() + "\n";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //對統計結果進行排序
+            //對圖書銷售數量前五名的書籍按降序排序
+            cmd_name = "select top 5 書號,書名,作者,出版社,sum(銷售數量) as 合計銷售數量 from tb_xsb  group by 書號,書名,作者,出版社  order by 5 desc";
+            show_database(db_filename, cmd_name);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //對數據進行多條件排序
+            //查詢圖書訊息，按序號升序排序並日期降序排序
+            cmd_name = "select distinct 書號,書名,作者,銷售數量,日期 from tb_xsb order by 書號 asc,日期 desc ";
+            show_database(db_filename, cmd_name);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //dap.Fill(ds, "book");  //test use "book"
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //列出數據中的重複記錄和記錄條數
+            //查詢已銷售圖書情況
+            cmd_name = "select Count(書號)as 記錄條數, 書號,書名,作者 from tb_xsb group by 書號,書名,作者 Having Count(書號)>1";
+            show_database(db_filename, cmd_name);
+
+            //dap.Fill(ds, "book");  //test use "book"
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //查詢銷售量占前50%的圖書訊息
+            cmd_name = "select top 50 percent 書號,書名,sum(銷售數量)as 合計銷售數量 from tb_xsb group by 書號,書名,作者 order by 3 desc";
+            show_database(db_filename, cmd_name);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //取出數據統計結果後10名數據//設定統計查詢的SQL語句
+            cmd_name = "select top 10 書號,書名,sum(銷售數量)as 合計銷售數量 from tb_xsb group by 書號,書名,作者 order by 3 asc";
+            show_database(db_filename, cmd_name);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+            /*
+            string db_filename = "db_10_Data.MDF";
+            string cmd_name = "select distinct 書號,條形碼,書名,作者,出版社 from tb_xsb";
+            show_database(db_filename, cmd_name);
+            */
+            //dap.Fill(ds, "book");  //test use "book"
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //查詢時不顯示重複記錄
+            //查詢已銷售圖書情況
+
+            cmd_name = "select distinct 書號,條形碼,書名,作者,出版社 from tb_xsb";
+            show_database(db_filename, cmd_name);
+
+            //dap.Fill(ds, "book");  //test use "book"
+
+            //3030
+            /*
+            //數據分組統計（單列）
+            //庫存圖書按出版社統計圖書庫存金額，並按金額降序排序。
+            string db_filename = "db_10_Data.MDF";
+            string cmd_name = "select 出版社,sum(金額) as 合計金額 from tb_xsb group by 出版社 order by 2 desc";
+            show_database(db_filename, cmd_name);
+            */
+
+
+        }
+
+        private void button41_Click(object sender, EventArgs e)
+        {
         }
 
         private void button42_Click(object sender, EventArgs e)
@@ -971,38 +1044,6 @@ namespace vcs_SqlConnection2
 
         private void button43_Click(object sender, EventArgs e)
         {
-            /*
-            //show
-            string db_filename = "db_10_Data.MDF";
-            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-            SqlConnection con = new SqlConnection(cnstr);
-            SqlDataAdapter dap = new SqlDataAdapter("SELECT * FROM 銷售表", con);
-            DataSet ds = new DataSet();
-            dap.Fill(ds, "table");
-            dataGridView1.DataSource = ds.Tables[0].DefaultView;
-            */
-
-            //3030
-
-            //靜態交叉表
-
-            //銷售業績分析
-
-
-            string db_filename = "db_10_Data.MDF";
-            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-            SqlConnection con = new SqlConnection(cnstr);
-
-            //按員工姓名分析
-            //SqlDataAdapter dap = new SqlDataAdapter("SELECT 所在部門, SUM(CASE 員工姓名 WHEN '李金明' THEN 銷售業績 ELSE NULL END)AS [李金明],SUM(CASE 員工姓名 WHEN '周可人' THEN 銷售業績 ELSE NULL END)as [周可人] ,SUM(CASE 員工姓名 WHEN '韓運' THEN 銷售業績 ELSE NULL END)AS [韓運],SUM(CASE 員工姓名 WHEN '司徒南' THEN 銷售業績 ELSE NULL END)AS [司徒南],SUM(CASE 員工姓名 WHEN '史佳金' THEN 銷售業績 ELSE NULL END)AS [史佳金]  FROM 銷售表 GROUP BY 所在部門", con);
-
-            //按部門分析
-            SqlDataAdapter dap = new SqlDataAdapter("SELECT 員工姓名, SUM(CASE 所在部門 WHEN '食品部' THEN 銷售業績 ELSE NULL END) AS [食品部業績],SUM(CASE 所在部門 WHEN '家電部' THEN 銷售業績 ELSE NULL END) AS [家電部業績] FROM 銷售表 GROUP BY 員工姓名", con);
-
-            DataSet ds = new DataSet();
-            dap.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0].DefaultView;
-
         }
 
         private void button44_Click(object sender, EventArgs e)

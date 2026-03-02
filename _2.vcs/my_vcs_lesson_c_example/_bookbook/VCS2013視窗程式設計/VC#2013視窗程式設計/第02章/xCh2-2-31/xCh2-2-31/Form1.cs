@@ -59,5 +59,10 @@ namespace xCh2_2_31
         {
             textBox2.Text = "電子郵信箱格式無誤";
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -33,9 +33,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(49, 35);
+            this.button1.Location = new System.Drawing.Point(42, 32);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(95, 27);
+            this.button1.Size = new System.Drawing.Size(81, 25);
             this.button1.TabIndex = 0;
             this.button1.Text = "開啟新表單";
             this.button1.UseVisualStyleBackColor = true;
@@ -43,9 +43,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(201, 103);
+            this.ClientSize = new System.Drawing.Size(359, 248);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";

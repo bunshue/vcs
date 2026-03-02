@@ -37,6 +37,11 @@ namespace xCh2_2_51
                 label1.Text = Environment.NewLine + "數字鎖鍵已取消";
             }
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

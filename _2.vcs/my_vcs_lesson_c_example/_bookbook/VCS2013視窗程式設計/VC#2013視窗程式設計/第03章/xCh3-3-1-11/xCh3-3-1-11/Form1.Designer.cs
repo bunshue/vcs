@@ -35,14 +35,14 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(18, 19);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(268, 22);
+            this.textBox1.Size = new System.Drawing.Size(306, 22);
             this.textBox1.TabIndex = 1;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(415, 231);
+            this.ClientSize = new System.Drawing.Size(549, 366);
             this.Controls.Add(this.textBox1);
             this.Name = "Form1";
             this.Text = "MDI子視窗";
