@@ -19,7 +19,7 @@ namespace xCh6_1_4_11
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            pictureBox1.Image = Image.FromFile(@"c:\Spring.jpg");
+            pictureBox1.Image = Image.FromFile(@"../../../Spring.jpg");
 
             textBox1.Text = splitContainer1.SplitterDistance.ToString();
             textBox2.Text = splitContainer1.SplitterWidth.ToString();

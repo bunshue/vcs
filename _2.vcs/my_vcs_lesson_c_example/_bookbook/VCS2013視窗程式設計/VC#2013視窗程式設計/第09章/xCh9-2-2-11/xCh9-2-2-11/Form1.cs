@@ -32,14 +32,13 @@ namespace xCh9_2_2_11
             table = new DataTable("Table");
             column = new DataColumn("Column");
             table.Columns.Add(column);
-            
+
             for (int i = 0; i < 10; i++)
             {
                 row = table.NewRow();
                 row["Column"] = "紀錄- " + i;
                 table.Rows.Add(row);
             }
-
             table.AcceptChanges();
         }
 
@@ -68,8 +67,7 @@ namespace xCh9_2_2_11
             row["Column"] = "程式設計";
             table.Rows.Add(row);
 
-            view.RowStateFilter = DataViewRowState.Added |
-                DataViewRowState.ModifiedCurrent;
+            view.RowStateFilter = DataViewRowState.Added | DataViewRowState.ModifiedCurrent;
             PrintView(view, "**ModifiedCurrent及Added");
 
             view.RowStateFilter = DataViewRowState.ModifiedOriginal;
@@ -91,7 +89,5 @@ namespace xCh9_2_2_11
             view.RowStateFilter = DataViewRowState.OriginalRows;
             PrintView(view, "**紀錄含有原始值(OriginalRows)");
         }
-
- 
     }
 }

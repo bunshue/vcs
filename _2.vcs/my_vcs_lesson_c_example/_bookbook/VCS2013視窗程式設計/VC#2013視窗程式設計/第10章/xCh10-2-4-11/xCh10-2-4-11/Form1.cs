@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using System.Data.OleDb;
 
 namespace xCh10_2_4_11
@@ -23,7 +24,10 @@ namespace xCh10_2_4_11
         public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             builder = new OleDbConnectionStringBuilder();
             builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
             builder["Data Source"] = @"C:\Northwind.mdb";
@@ -36,7 +40,7 @@ namespace xCh10_2_4_11
             myAdapter = new OleDbDataAdapter("SELECT * FROM 客戶", connection);
             NorthwindDataSet = new DataSet();
             myAdapter.Fill(NorthwindDataSet, "客戶Table");
-            dataGridView1.DataSource = NorthwindDataSet.Tables["客戶Table"];         
+            dataGridView1.DataSource = NorthwindDataSet.Tables["客戶Table"];
         }
 
         private void DataChanged()
@@ -67,9 +71,9 @@ namespace xCh10_2_4_11
         {
             // 建構Update
             command = new OleDbCommand();
-            command.CommandText = 
+            command.CommandText =
                 "UPDATE 客戶 SET " +
-                    "客戶編號 = @CustomerID, "+
+                    "客戶編號 = @CustomerID, " +
                     "公司名稱 = @CompanyName " +
                     "WHERE 客戶編號 = @CustomerID";
             command.Connection = connection;
@@ -87,8 +91,7 @@ namespace xCh10_2_4_11
         {
             // 建構Delete
             command = new OleDbCommand();
-            command.CommandText = "DELETE * FROM 客戶 " + 
-                "WHERE 客戶編號 = @CustomerID";
+            command.CommandText = "DELETE * FROM 客戶 " + "WHERE 客戶編號 = @CustomerID";
             command.Connection = connection;
 
             parameter = command.Parameters.Add("@CustomerID", OleDbType.Char, 5);

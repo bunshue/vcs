@@ -39,9 +39,10 @@ namespace xCh11_6_4_11
                 select (string)typeElement.Parent.Element("內容");
 
             foreach (string str in cList)
+            {
                 Console.WriteLine(str);
+            }
         }
     }
 }
-
 

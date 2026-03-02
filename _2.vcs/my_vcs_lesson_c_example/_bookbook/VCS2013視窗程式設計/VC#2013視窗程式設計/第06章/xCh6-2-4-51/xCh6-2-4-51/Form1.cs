@@ -17,26 +17,40 @@ namespace xCh6_2_4_51
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            toolStripTextBox1.Font = new Font(
-                toolStripTextBox1.Font.Name,
-                Convert.ToSingle(toolStripComboBox1.SelectedItem),
-                toolStripTextBox1.Font.Style);
+            toolStripTextBox1.Font = new Font(toolStripTextBox1.Font.Name, Convert.ToSingle(toolStripComboBox1.SelectedItem), toolStripTextBox1.Font.Style);
         }
 
         private void toolStripTextBox1_TextChanged(object sender, EventArgs e)
         {
             if (toolStripMenuItem2.Checked)
+            {
                 if (toolStripMenuItem3.Checked)
+                {
                     toolStripTextBox1.Font = new Font(Font, FontStyle.Bold | FontStyle.Italic);
+                }
                 else
+                {
                     toolStripTextBox1.Font = new Font(Font, FontStyle.Bold);
+                }
+            }
             else
+            {
                 if (toolStripMenuItem3.Checked)
+                {
                     toolStripTextBox1.Font = new Font(Font, FontStyle.Italic);
+                }
                 else
+                {
                     toolStripTextBox1.Font = new Font(Font, FontStyle.Regular);
+                }
+            }
         }
     }
 }

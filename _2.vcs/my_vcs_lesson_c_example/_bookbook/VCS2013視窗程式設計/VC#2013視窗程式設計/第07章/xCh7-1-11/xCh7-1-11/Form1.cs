@@ -36,7 +36,9 @@ namespace xCh7_1_11
                 textBox1.Text = "完成前景色(ForeColor)的設定";
             }
             else
+            {
                 textBox1.Text = "[取消]前景色(ForeColor)的設定";
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -50,7 +52,9 @@ namespace xCh7_1_11
                 textBox1.Text = "完成背景色(BackColor)的設定";
             }
             else
+            {
                 textBox1.Text = "[取消]背景色(BackColor)的設定";
+            }
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

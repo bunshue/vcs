@@ -33,8 +33,7 @@ namespace xCh6_4_11
             leftSideToolStripStatusLabel.Text = "有彈性的Label";
             leftSideToolStripStatusLabel.Alignment = ToolStripItemAlignment.Left;
             leftSideToolStripStatusLabel.Tag = "http://msdn.microsoft.com/zh-TW/";
-            leftSideToolStripStatusLabel.Click += 
-                new EventHandler(leftSideToolStripStatusLabel_Click);
+            leftSideToolStripStatusLabel.Click += new EventHandler(leftSideToolStripStatusLabel_Click);
 
             statusStrip1.Items.Add(leftSideToolStripStatusLabel);
 
@@ -61,18 +60,13 @@ namespace xCh6_4_11
             ToolStripMenuItem m2 = new ToolStripMenuItem("MenuItem-II");
             ToolStripMenuItem m3 = new ToolStripMenuItem("MenuItem-III");
 
-            ToolStripMenuItem m = new ToolStripMenuItem("MenuItem",
-                image2,
-                new ToolStripItem[] { m1, m2, m3 });
+            ToolStripMenuItem m = new ToolStripMenuItem("MenuItem", image2, new ToolStripItem[] { m1, m2, m3 });
 
             m.ToolTipText = "這是ToolStripMenuItem物件";
 
-            m.DropDownClosed += new
-                EventHandler(toolStripDropDownItem_DropDownClosed);
-            m.DropDownItemClicked += new
-                ToolStripItemClickedEventHandler(toolStripDropDownItem_DropDownItemClicked);
-            m.DropDownOpened += new
-                EventHandler(toolStripDropDownItem_DropDownOpened);
+            m.DropDownClosed += new EventHandler(toolStripDropDownItem_DropDownClosed);
+            m.DropDownItemClicked += new ToolStripItemClickedEventHandler(toolStripDropDownItem_DropDownItemClicked);
+            m.DropDownOpened += new EventHandler(toolStripDropDownItem_DropDownOpened);
 
             // 建構ToolStripSplitButton
             Bitmap image1 = new Bitmap(@"C:\user32x32.png", true);
@@ -98,12 +92,9 @@ namespace xCh6_4_11
 
             sb.ToolTipText = "這是ToolStripSplitButton物件";
 
-            sb.DropDownClosed += 
-                new EventHandler(toolStripDropDownItem_DropDownClosed);
-            sb.DropDownItemClicked += 
-                new ToolStripItemClickedEventHandler(toolStripDropDownItem_DropDownItemClicked);
-            sb.DropDownOpened += 
-                new EventHandler(toolStripDropDownItem_DropDownOpened);
+            sb.DropDownClosed += new EventHandler(toolStripDropDownItem_DropDownClosed);
+            sb.DropDownItemClicked += new ToolStripItemClickedEventHandler(toolStripDropDownItem_DropDownItemClicked);
+            sb.DropDownOpened += new EventHandler(toolStripDropDownItem_DropDownOpened);
 
             // 加入ToolStripButton與ToolStripSplitButton
             statusStrip1.Items.AddRange(new ToolStripItem[] { m, sb });
@@ -115,8 +106,7 @@ namespace xCh6_4_11
             // 切換Spring屬性
             leftSideToolStripStatusLabel.Spring ^= true;
 
-            leftSideToolStripStatusLabel.Text =
-                leftSideToolStripStatusLabel.Spring ? "有彈性的Label-True" : "有彈性的Label-False";
+            leftSideToolStripStatusLabel.Text = leftSideToolStripStatusLabel.Spring ? "有彈性的Label-True" : "有彈性的Label-False";
 
             // 如果還具有LinkLabel功能，點選後後開啟IE瀏覽URL的網址
             if (leftSideToolStripStatusLabel.IsLink)

@@ -17,6 +17,11 @@ namespace xCh11_4_1_11
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             // DataContext的名稱是以「*.dbml」的檔名，

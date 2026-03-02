@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using System.Data.OleDb;
 
 namespace xCh10_3_11
@@ -16,6 +17,11 @@ namespace xCh10_3_11
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -49,3 +55,4 @@ namespace xCh10_3_11
         }
     }
 }
+

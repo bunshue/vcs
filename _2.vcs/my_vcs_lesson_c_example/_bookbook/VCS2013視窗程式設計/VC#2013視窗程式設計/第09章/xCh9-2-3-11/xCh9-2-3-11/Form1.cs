@@ -30,8 +30,7 @@ namespace xCh9_2_3_11
             studentTable.MinimumCapacity = 50;
 
             // 建構資料欄
-            DataColumn idColumn = new DataColumn("編號", 
-                Type.GetType("System.Int32"));
+            DataColumn idColumn = new DataColumn("編號", Type.GetType("System.Int32"));
             // 設定「編號」資料欄為自動增加數值
             idColumn.AutoIncrement = true;
             DataColumn nameColumn = new DataColumn("姓名");
@@ -121,9 +120,9 @@ namespace xCh9_2_3_11
             // rowView["學歷"]  = comboBox2.Text;
             rowView.Row[2] = comboBox2.Text;
 
-            MessageBox.Show("DataRowView.IsNew:->" + rowView.IsNew.ToString(),"新增資料");
+            MessageBox.Show("DataRowView.IsNew:->" + rowView.IsNew.ToString(), "新增資料");
             rowView.EndEdit();
-            MessageBox.Show("DataRowView.IsNew:->" + rowView.IsNew.ToString(),"新增資料");
+            MessageBox.Show("DataRowView.IsNew:->" + rowView.IsNew.ToString(), "新增資料");
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -139,8 +138,7 @@ namespace xCh9_2_3_11
             view[i].BeginEdit();
             view[i]["姓名"] = textBox2.Text;
             view[i]["學歷"] = comboBox2.Text;
-            if (MessageBox.Show("是否要修改 " + textBox1.Text + " 這筆資料？", "小心",
-                MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.OK)
+            if (MessageBox.Show("是否要修改 " + textBox1.Text + " 這筆資料？", "小心", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.OK)
             {
                 view[i].EndEdit();
             }
@@ -154,19 +152,19 @@ namespace xCh9_2_3_11
         private void RestoreKey()
         {
             if (checkBox1.Checked)
+            {
                 view.Sort = "編號 ASC";
+            }
             else
+            {
                 view.Sort = "編號 DESC";
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(
-                "是否刪除 " + textBox1.Text + " 這筆資料？", 
-                "小心",
-                MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.OK)
+            if (MessageBox.Show("是否刪除 " + textBox1.Text + " 這筆資料？", "小心", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.OK)
             {
-
                 DataRowView row;
                 DataView view = (DataView)dataGridView1.DataSource;
                 row = view[dataGridView1.CurrentCell.RowIndex];
@@ -182,10 +180,15 @@ namespace xCh9_2_3_11
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-             if (checkBox1.Checked)
+            if (checkBox1.Checked)
+            {
                 view.Sort = "編號 ASC";
+            }
             else
+            {
                 view.Sort = "編號 DESC";
+            }
         }
     }
 }
+

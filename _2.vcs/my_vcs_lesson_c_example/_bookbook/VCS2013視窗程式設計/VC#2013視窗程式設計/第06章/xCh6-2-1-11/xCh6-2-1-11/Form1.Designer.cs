@@ -42,18 +42,18 @@
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(180, 39);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(197, 59);
             // 
             // toolStripContainer1.LeftToolStripPanel
             // 
             this.toolStripContainer1.LeftToolStripPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.toolStripContainer1.Location = new System.Drawing.Point(25, 29);
+            this.toolStripContainer1.Location = new System.Drawing.Point(21, 27);
             this.toolStripContainer1.Name = "toolStripContainer1";
             // 
             // toolStripContainer1.RightToolStripPanel
             // 
             this.toolStripContainer1.RightToolStripPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.toolStripContainer1.Size = new System.Drawing.Size(230, 89);
+            this.toolStripContainer1.Size = new System.Drawing.Size(197, 82);
             this.toolStripContainer1.TabIndex = 0;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
@@ -63,9 +63,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 146);
+            this.ClientSize = new System.Drawing.Size(682, 526);
             this.Controls.Add(this.toolStripContainer1);
             this.Name = "Form1";
             this.Text = "ToolStripContainer範例";

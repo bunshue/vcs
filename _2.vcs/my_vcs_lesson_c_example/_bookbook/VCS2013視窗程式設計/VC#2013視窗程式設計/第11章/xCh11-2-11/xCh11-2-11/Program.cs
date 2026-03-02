@@ -25,7 +25,6 @@ namespace xCh11_2_11
                 new Student {Name="周芷若", ID=114, Scores= new List<int> {72, 81, 65, 84}},
                 new Student {Name="黃藥師", ID=115, Scores= new List<int> {97, 89, 85, 82}} 
             };
-
             return students;
         }
 
@@ -51,5 +50,3 @@ namespace xCh11_2_11
         }
     }
 }
-
-

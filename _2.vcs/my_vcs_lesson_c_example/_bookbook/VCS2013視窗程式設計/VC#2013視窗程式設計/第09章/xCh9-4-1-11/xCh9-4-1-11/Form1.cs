@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;using System.Text;using System.Threading.Tasks;using System.Windows.Forms;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace xCh9_4_1_11
 {
@@ -15,6 +18,11 @@ namespace xCh9_4_1_11
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -63,12 +71,8 @@ namespace xCh9_4_1_11
             try
             {
                 // 將studentsDataSet寫成XML文件
-                string xmlFilename = 
-                    @"C:\\XmlDocument-"+
-                    DateTime.Now.Millisecond.ToString()+
-                    ".xml";
-                System.IO.FileStream streamWrite = new 
-                    System.IO.FileStream(xmlFilename, System.IO.FileMode.Create);
+                string xmlFilename = @"C:\\XmlDocument-" + DateTime.Now.Millisecond.ToString() + ".xml";
+                System.IO.FileStream streamWrite = new System.IO.FileStream(xmlFilename, System.IO.FileMode.Create);
                 studentsDataSet.WriteXml(streamWrite);
                 streamWrite.Dispose();
 
@@ -87,8 +91,7 @@ namespace xCh9_4_1_11
 
             // 讀入XML文件 
             string xmlFilename = @"C:\\XmlDocument-432.xml";
-            System.IO.FileStream streamRead = 
-                new System.IO.FileStream(xmlFilename, System.IO.FileMode.Open);
+            System.IO.FileStream streamRead = new System.IO.FileStream(xmlFilename, System.IO.FileMode.Open);
             studentsDataSet.ReadXml(streamRead);
             streamRead.Dispose();
 
@@ -97,3 +100,4 @@ namespace xCh9_4_1_11
         }
     }
 }
+

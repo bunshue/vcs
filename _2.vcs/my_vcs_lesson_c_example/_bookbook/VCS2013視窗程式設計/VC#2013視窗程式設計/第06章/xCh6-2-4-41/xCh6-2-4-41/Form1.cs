@@ -28,7 +28,7 @@ namespace xCh6_2_4_41
             "http://msdn.microsoft.com.tw",
             "http://www.google.com.tw",
             "http://www.kingsinfo.com.tw"});
-            toolStripComboBox1.AutoCompleteMode =AutoCompleteMode.SuggestAppend;
+            toolStripComboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             toolStripComboBox1.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
             toolStripComboBox1.DropDownHeight = 40;
@@ -47,8 +47,7 @@ namespace xCh6_2_4_41
             toolStripComboBox1.Size = new Size(200, 25);
             toolStripComboBox1.Sorted = true;
             toolStripComboBox1.ToolTipText = "請選擇所需的網址";
-            toolStripComboBox1.SelectedIndexChanged += 
-                new EventHandler(toolStripComboBox1_SelectedIndexChanged);
+            toolStripComboBox1.SelectedIndexChanged += new EventHandler(toolStripComboBox1_SelectedIndexChanged);
 
             toolStrip1.Items.Add(toolStripComboBox1);
         }

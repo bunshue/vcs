@@ -35,14 +35,15 @@ namespace xCh7_3_1_11
             // 設定FolderBrowserDialog的初值
             folderBrowserDialog1.ShowNewFolderButton = false;
             folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
-            folderBrowserDialog1.Description = "----資料夾瀏覽對話方塊----" +
-                "\n請選擇所要開啟的檔案所在的資料夾";
+            folderBrowserDialog1.Description = "----資料夾瀏覽對話方塊----" + "\n請選擇所要開啟的檔案所在的資料夾";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
                 textBox1.Text = folderBrowserDialog1.SelectedPath;
+            }
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -57,21 +58,29 @@ namespace xCh7_3_1_11
             switch (x)
             {
                 case "MyComputer":
-                    folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer; break;
+                    folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
+                    break;
                 case "MyDocuments":
-                    folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyDocuments; break;
+                    folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyDocuments;
+                    break;
                 case "MyMusic":
-                    folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyMusic; break;
+                    folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyMusic;
+                    break;
                 case "MyPictures":
-                    folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyPictures; break;
+                    folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyPictures;
+                    break;
                 case "Desktop":
-                    folderBrowserDialog1.RootFolder = Environment.SpecialFolder.Desktop; break;
+                    folderBrowserDialog1.RootFolder = Environment.SpecialFolder.Desktop;
+                    break;
                 case "ProgramFiles":
-                    folderBrowserDialog1.RootFolder = Environment.SpecialFolder.ProgramFiles; break;
+                    folderBrowserDialog1.RootFolder = Environment.SpecialFolder.ProgramFiles;
+                    break;
                 case "StartMenu":
-                    folderBrowserDialog1.RootFolder = Environment.SpecialFolder.StartMenu; break;
+                    folderBrowserDialog1.RootFolder = Environment.SpecialFolder.StartMenu;
+                    break;
                 default:
-                    folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer; break;
+                    folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
+                    break;
             }
         }
     }

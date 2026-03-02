@@ -33,16 +33,16 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 12);
+            this.textBox1.Location = new System.Drawing.Point(10, 11);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(260, 23);
+            this.textBox1.Size = new System.Drawing.Size(223, 22);
             this.textBox1.TabIndex = 0;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 55);
+            this.ClientSize = new System.Drawing.Size(566, 411);
             this.Controls.Add(this.textBox1);
             this.Name = "Form1";
             this.Text = "Binding.Add()方法";

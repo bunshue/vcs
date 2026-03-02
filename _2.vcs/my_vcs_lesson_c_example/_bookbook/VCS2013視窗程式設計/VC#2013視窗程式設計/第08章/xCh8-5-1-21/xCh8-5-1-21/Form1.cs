@@ -12,12 +12,13 @@ namespace xCh8_5_1_21
 {
     public partial class Form1 : Form
     {
+        BindingManagerBase myBindingManagerBase;
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        BindingManagerBase myBindingManagerBase;
         private void Form1_Load(object sender, EventArgs e)
         {
             // TODO: 這行程式碼會將資料載入 '北風DataSet.員工' 資料表。您可以視需要進行移動或移除。
@@ -54,7 +55,9 @@ namespace xCh8_5_1_21
                 ShowPosition();
             }
             else
+            {
                 MessageBox.Show("目前已是第一筆，無法往前取得資料");
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -65,7 +68,9 @@ namespace xCh8_5_1_21
                 ShowPosition();
             }
             else
+            {
                 MessageBox.Show("目前已是最後一筆，無法往下取得資料");
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)

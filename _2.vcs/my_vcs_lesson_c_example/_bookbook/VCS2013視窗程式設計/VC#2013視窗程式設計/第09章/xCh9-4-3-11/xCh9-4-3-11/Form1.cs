@@ -17,13 +17,16 @@ namespace xCh9_4_3_11
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             // 讀入coffeeData.xml的XML文件結構
             DataSet dataSet = new DataSet();
-            dataSet.InferXmlSchema(
-                @"c:\coffeeData.xml", 
-                new string[] { "urn:schemas-microsoft-com:officedata" });
+            dataSet.InferXmlSchema(@"c:\coffeeData.xml", new string[] { "urn:schemas-microsoft-com:officedata" });
 
             // 加入記錄
             DataRow newRow;

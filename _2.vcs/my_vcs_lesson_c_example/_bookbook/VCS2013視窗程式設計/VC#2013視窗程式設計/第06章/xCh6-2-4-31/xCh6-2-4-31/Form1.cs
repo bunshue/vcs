@@ -40,8 +40,7 @@ namespace xCh6_2_4_31
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("IEXPLORE.EXE",toolStripTextBox1.Text);
+            System.Diagnostics.Process.Start("IEXPLORE.EXE", toolStripTextBox1.Text);
         }
- 
     }
 }

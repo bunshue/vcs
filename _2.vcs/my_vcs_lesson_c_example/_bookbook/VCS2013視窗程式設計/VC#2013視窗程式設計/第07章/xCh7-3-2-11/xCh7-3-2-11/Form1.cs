@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using System.IO;
 
 namespace xCh7_3_2_11
@@ -21,9 +22,7 @@ namespace xCh7_3_2_11
         private void Form1_Load(object sender, EventArgs e)
         {
             openFileDialog1.Title = "客製化的「開啟檔案」對話方塊";
-            openFileDialog1.Filter =
-                "圖檔 (*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF|" +
-                "所有檔案 (*.*)|*.*";
+            openFileDialog1.Filter = "圖檔 (*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF|" + "所有檔案 (*.*)|*.*";
 
             openFileDialog1.FilterIndex = 2;
             openFileDialog1.ValidateNames = false;
@@ -31,9 +30,7 @@ namespace xCh7_3_2_11
 
             saveFileDialog1.Title = "客製化的「另存新檔」對話方塊";
             saveFileDialog1.RestoreDirectory = false;
-            saveFileDialog1.Filter =
-                "圖檔 (*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF|" +
-                "所有檔案 (*.*)|*.*";
+            saveFileDialog1.Filter = "圖檔 (*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF|" + "所有檔案 (*.*)|*.*";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -113,9 +110,13 @@ namespace xCh7_3_2_11
                 if (myFile != null)
                 {
                     if (File.Exists(myFile))
-                         SaveFile(myFile);
-                    else
+                    {
                         SaveFile(myFile);
+                    }
+                    else
+                    {
+                        SaveFile(myFile);
+                    }
                 }
             }
             catch (Exception ex)

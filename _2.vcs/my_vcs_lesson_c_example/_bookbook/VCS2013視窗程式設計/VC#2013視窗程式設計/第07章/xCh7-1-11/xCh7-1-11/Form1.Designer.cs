@@ -39,9 +39,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(123, 63);
+            this.button2.Location = new System.Drawing.Point(105, 58);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(87, 25);
+            this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 8;
             this.button2.Text = "BackColor";
             this.button2.UseVisualStyleBackColor = true;
@@ -49,9 +49,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(16, 63);
+            this.button1.Location = new System.Drawing.Point(14, 58);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(87, 25);
+            this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 7;
             this.button1.Text = "ForeColor";
             this.button1.UseVisualStyleBackColor = true;
@@ -59,9 +59,9 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(16, 23);
+            this.textBox1.Location = new System.Drawing.Point(14, 21);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(194, 23);
+            this.textBox1.Size = new System.Drawing.Size(167, 22);
             this.textBox1.TabIndex = 6;
             // 
             // colorDialog1
@@ -71,9 +71,9 @@
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(228, 71);
+            this.checkBox3.Location = new System.Drawing.Point(195, 66);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(82, 18);
+            this.checkBox3.Size = new System.Drawing.Size(72, 16);
             this.checkBox3.TabIndex = 11;
             this.checkBox3.Text = "ShowHelp";
             this.checkBox3.UseVisualStyleBackColor = true;
@@ -82,9 +82,9 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(228, 47);
+            this.checkBox2.Location = new System.Drawing.Point(195, 43);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(77, 18);
+            this.checkBox2.Size = new System.Drawing.Size(67, 16);
             this.checkBox2.TabIndex = 10;
             this.checkBox2.Text = "FullOpen";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -93,9 +93,9 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(228, 23);
+            this.checkBox1.Location = new System.Drawing.Point(195, 21);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(110, 18);
+            this.checkBox1.Size = new System.Drawing.Size(95, 16);
             this.checkBox1.TabIndex = 9;
             this.checkBox1.Text = "AllowFullOpen";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -103,9 +103,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(353, 109);
+            this.ClientSize = new System.Drawing.Size(574, 400);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);

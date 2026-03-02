@@ -42,10 +42,10 @@
             this.斜體ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.底線ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.顏色ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.大小ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
+            this.大小ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripComboBox2 = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,7 +58,7 @@
             this.toolStripTextBox1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(425, 29);
+            this.menuStrip1.Size = new System.Drawing.Size(614, 27);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -71,7 +71,7 @@
             this.toolStripMenuItem1,
             this.結束XToolStripMenuItem});
             this.檔案FToolStripMenuItem.Name = "檔案FToolStripMenuItem";
-            this.檔案FToolStripMenuItem.Size = new System.Drawing.Size(63, 25);
+            this.檔案FToolStripMenuItem.Size = new System.Drawing.Size(57, 23);
             this.檔案FToolStripMenuItem.Text = "檔案(&F)";
             // 
             // 開新檔案ToolStripMenuItem
@@ -79,32 +79,32 @@
             this.開新檔案ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("開新檔案ToolStripMenuItem.Image")));
             this.開新檔案ToolStripMenuItem.Name = "開新檔案ToolStripMenuItem";
             this.開新檔案ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.開新檔案ToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.開新檔案ToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.開新檔案ToolStripMenuItem.Text = "開新檔案...";
             this.開新檔案ToolStripMenuItem.Click += new System.EventHandler(this.開新檔案ToolStripMenuItem_Click);
             // 
             // 開啟舊檔ToolStripMenuItem
             // 
             this.開啟舊檔ToolStripMenuItem.Name = "開啟舊檔ToolStripMenuItem";
-            this.開啟舊檔ToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.開啟舊檔ToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.開啟舊檔ToolStripMenuItem.Text = "開啟舊檔";
             // 
             // 關閉檔案ToolStripMenuItem
             // 
             this.關閉檔案ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("關閉檔案ToolStripMenuItem.Image")));
             this.關閉檔案ToolStripMenuItem.Name = "關閉檔案ToolStripMenuItem";
-            this.關閉檔案ToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.關閉檔案ToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.關閉檔案ToolStripMenuItem.Text = "關閉檔案";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(190, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(173, 6);
             // 
             // 結束XToolStripMenuItem
             // 
             this.結束XToolStripMenuItem.Name = "結束XToolStripMenuItem";
-            this.結束XToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.結束XToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.結束XToolStripMenuItem.Text = "結束(&X)";
             // 
             // 格式OToolStripMenuItem
@@ -114,7 +114,7 @@
             this.顏色ToolStripMenuItem,
             this.大小ToolStripMenuItem});
             this.格式OToolStripMenuItem.Name = "格式OToolStripMenuItem";
-            this.格式OToolStripMenuItem.Size = new System.Drawing.Size(67, 25);
+            this.格式OToolStripMenuItem.Size = new System.Drawing.Size(61, 23);
             this.格式OToolStripMenuItem.Text = "格式(&O)";
             // 
             // 樣式ToolStripMenuItem
@@ -124,28 +124,28 @@
             this.斜體ToolStripMenuItem,
             this.底線ToolStripMenuItem});
             this.樣式ToolStripMenuItem.Name = "樣式ToolStripMenuItem";
-            this.樣式ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.樣式ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.樣式ToolStripMenuItem.Text = "樣式";
             // 
             // 粗體ToolStripMenuItem
             // 
             this.粗體ToolStripMenuItem.CheckOnClick = true;
             this.粗體ToolStripMenuItem.Name = "粗體ToolStripMenuItem";
-            this.粗體ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.粗體ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.粗體ToolStripMenuItem.Text = "粗體";
             // 
             // 斜體ToolStripMenuItem
             // 
             this.斜體ToolStripMenuItem.CheckOnClick = true;
             this.斜體ToolStripMenuItem.Name = "斜體ToolStripMenuItem";
-            this.斜體ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.斜體ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.斜體ToolStripMenuItem.Text = "斜體";
             // 
             // 底線ToolStripMenuItem
             // 
             this.底線ToolStripMenuItem.CheckOnClick = true;
             this.底線ToolStripMenuItem.Name = "底線ToolStripMenuItem";
-            this.底線ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.底線ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.底線ToolStripMenuItem.Text = "底線";
             // 
             // 顏色ToolStripMenuItem
@@ -153,37 +153,37 @@
             this.顏色ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripComboBox1});
             this.顏色ToolStripMenuItem.Name = "顏色ToolStripMenuItem";
-            this.顏色ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.顏色ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.顏色ToolStripMenuItem.Text = "顏色";
+            // 
+            // toolStripComboBox1
+            // 
+            this.toolStripComboBox1.Name = "toolStripComboBox1";
+            this.toolStripComboBox1.Size = new System.Drawing.Size(121, 23);
             // 
             // 大小ToolStripMenuItem
             // 
             this.大小ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripComboBox2});
             this.大小ToolStripMenuItem.Name = "大小ToolStripMenuItem";
-            this.大小ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.大小ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.大小ToolStripMenuItem.Text = "大小";
-            // 
-            // toolStripTextBox1
-            // 
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 25);
-            // 
-            // toolStripComboBox1
-            // 
-            this.toolStripComboBox1.Name = "toolStripComboBox1";
-            this.toolStripComboBox1.Size = new System.Drawing.Size(121, 26);
             // 
             // toolStripComboBox2
             // 
             this.toolStripComboBox2.Name = "toolStripComboBox2";
-            this.toolStripComboBox2.Size = new System.Drawing.Size(121, 26);
+            this.toolStripComboBox2.Size = new System.Drawing.Size(121, 23);
+            // 
+            // toolStripTextBox1
+            // 
+            this.toolStripTextBox1.Name = "toolStripTextBox1";
+            this.toolStripTextBox1.Size = new System.Drawing.Size(86, 23);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(425, 166);
+            this.ClientSize = new System.Drawing.Size(614, 500);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";

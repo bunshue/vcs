@@ -38,9 +38,10 @@ namespace xCh11_6_4_21
                 select e;
 
             foreach (XElement e in items)
+            {
                 Console.WriteLine("分類號 = {0}", (string)e.Attribute("分類號"));
+            }
         }
     }
 }
-
 

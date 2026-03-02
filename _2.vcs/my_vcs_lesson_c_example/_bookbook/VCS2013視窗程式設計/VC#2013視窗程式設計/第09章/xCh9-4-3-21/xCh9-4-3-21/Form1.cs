@@ -17,6 +17,11 @@ namespace xCh9_4_3_21
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             DataSet studentsDataSet = new DataSet("StudentsDataSet");
@@ -32,7 +37,7 @@ namespace xCh9_4_3_21
 
             studentsDataSet.Tables.Add(studentTable);
 
-            studentsDataSet.WriteXmlSchema(@"c:\Students.xsd");
+            studentsDataSet.WriteXmlSchema(@"tmp_Students.xsd");
 
             MessageBox.Show("成功寫入Students.xsd");
         }
@@ -40,7 +45,7 @@ namespace xCh9_4_3_21
         private void button2_Click(object sender, EventArgs e)
         {
             DataSet dataSet = new DataSet();
-            dataSet.ReadXmlSchema(@"c:\Students.xsd");
+            dataSet.ReadXmlSchema(@"tmp_Students.xsd");
 
             dataGridView1.DataSource = dataSet.Tables["StudentTable"];
         }

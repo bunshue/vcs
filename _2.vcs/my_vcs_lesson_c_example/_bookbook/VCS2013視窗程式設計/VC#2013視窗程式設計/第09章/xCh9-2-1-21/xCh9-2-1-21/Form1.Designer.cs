@@ -59,6 +59,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "巡覽DataSet的組成";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

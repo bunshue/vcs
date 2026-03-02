@@ -35,9 +35,9 @@ namespace xCh11_6_3_21
                 };
 
             foreach (var el in motoElements)
+            {
                 Console.WriteLine(el.x + " 的內容是 " + el.y);
+            }
         }
     }
 }
-
-

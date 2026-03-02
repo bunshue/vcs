@@ -76,8 +76,7 @@ namespace xCh6_1_5_11
             tab1Button1.Location = new System.Drawing.Point(20, 10);
             tab1Button1.Size = new System.Drawing.Size(60, 20);
             tab1Button1.TabIndex = 0;
-            tab1Button1.Click += new
-               System.EventHandler(tab1Button1_Click);
+            tab1Button1.Click += new System.EventHandler(tab1Button1_Click);
 
             tabControl1.TabPages[0].Controls.Add(tab1Button1);
         }
@@ -98,12 +97,7 @@ namespace xCh6_1_5_11
         {
             tabPage1 = new TabPage("庫存");
             tabPage2 = new TabPage("缺貨");
-            tabControl1.Controls.AddRange(
-              new Control[] {
-                tabPage1,
-                tabPage2
-                }
-            );
+            tabControl1.Controls.AddRange(new Control[] { tabPage1, tabPage2 });
         }
 
         private void tabControl1_Selected(object sender, TabControlEventArgs e)

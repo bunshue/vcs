@@ -17,6 +17,11 @@ namespace xCh9_2_1_21
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             // 建構DataSet及其組成的資料表
@@ -73,8 +78,6 @@ namespace xCh9_2_1_21
                     textBox1.AppendText(Environment.NewLine);
                 }
             }
-
-
         }
     }
 }

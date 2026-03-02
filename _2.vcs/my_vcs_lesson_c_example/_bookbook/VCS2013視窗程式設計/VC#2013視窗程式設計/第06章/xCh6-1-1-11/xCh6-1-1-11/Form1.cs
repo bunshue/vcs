@@ -20,6 +20,7 @@ namespace xCh6_1_1_11
         private System.Windows.Forms.Button Button6;
         private System.Windows.Forms.Button Button7;
         private System.Windows.Forms.Button Button8;
+
         public Form1()
         {
             InitializeComponent();
@@ -50,7 +51,7 @@ namespace xCh6_1_1_11
             flowLayoutPanel1.FlowDirection = FlowDirection.RightToLeft;
             flowLayoutPanel1.WrapContents = false;
             flowLayoutPanel1.AutoScroll = false;
- 
+
             Button1.Name = "Button11";
             Button2.Name = "Button22";
             Button3.Name = "Button33";
@@ -73,25 +74,37 @@ namespace xCh6_1_1_11
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox1.Checked)
+            {
                 flowLayoutPanel1.FlowDirection = FlowDirection.LeftToRight;
+            }
             else
+            {
                 flowLayoutPanel1.FlowDirection = FlowDirection.RightToLeft;
+            }
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox2.Checked)
+            {
                 flowLayoutPanel1.WrapContents = true;
+            }
             else
+            {
                 flowLayoutPanel1.WrapContents = false;
+            }
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox3.Checked)
+            {
                 flowLayoutPanel1.AutoScroll = true;
+            }
             else
+            {
                 flowLayoutPanel1.AutoScroll = false;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using System.Data.Objects;
 
 namespace xCh12_1_11
@@ -31,20 +32,20 @@ namespace xCh12_1_11
             }
 
             var employees = from emp in currContext.Employees
-                            select new { emp.Address,  emp.EmployeeName };
+                            select new { emp.Address, emp.EmployeeName };
             foreach (var recs in employees)
             {
-                listBox1.Items.Add(string.Format("{0}\t{1}", recs.EmployeeName,recs.Address));
+                listBox1.Items.Add(string.Format("{0}\t{1}", recs.EmployeeName, recs.Address));
             }
 
             var nemployees = from emp in currContext.Employees
-                            select new 
-                            { 
-                                地址=emp.Address, 
-                                姓名=emp.EmployeeName
-                            };
+                             select new
+                             {
+                                 地址 = emp.Address,
+                                 姓名 = emp.EmployeeName
+                             };
             dataGridView1.DataSource = nemployees.ToList();
-            dataGridView1.Columns[0].Width =250;
+            dataGridView1.Columns[0].Width = 250;
             dataGridView1.Columns[1].Width = 100;
         }
     }

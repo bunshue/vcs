@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using System.Data.OleDb;
 
 namespace xCh10_3_21
@@ -16,7 +17,10 @@ namespace xCh10_3_21
         public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             comboBox1.Items.AddRange(
                 new object[] {
                     "宜蘭市",
@@ -46,8 +50,7 @@ namespace xCh10_3_21
                 connection.Open();
 
                 OleDbCommand command;
-                command = new OleDbCommand(
-                    "SELECT * FROM 客戶 " + "WHERE 城市 = ?", connection);
+                command = new OleDbCommand("SELECT * FROM 客戶 " + "WHERE 城市 = ?", connection);
                 command.Parameters.Add("城市", OleDbType.VarChar, 6);
 
                 string cityParam = comboBox1.Items[comboBox1.SelectedIndex].ToString();

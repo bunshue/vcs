@@ -21,8 +21,7 @@ namespace xCh11_5_1_21
         {
             xCh11_5_1_21.Northwind ds = new Northwind();
 
-            xCh11_5_1_21.NorthwindTableAdapters.產品資料TableAdapter da =     
-                new xCh11_5_1_21.NorthwindTableAdapters.產品資料TableAdapter();
+            xCh11_5_1_21.NorthwindTableAdapters.產品資料TableAdapter da = new xCh11_5_1_21.NorthwindTableAdapters.產品資料TableAdapter();
 
             da.Fill(ds.產品資料);
 
@@ -42,3 +41,4 @@ namespace xCh11_5_1_21
         }
     }
 }
+

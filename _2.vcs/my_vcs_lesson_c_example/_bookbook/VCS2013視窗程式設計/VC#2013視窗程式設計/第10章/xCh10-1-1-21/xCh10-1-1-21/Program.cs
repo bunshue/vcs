@@ -32,8 +32,7 @@ namespace xCh10_1_1_21
              */
             // 以連線字串設定給ConnectionStrin屬性 
             // 這些值可以被取得，也可以被修改
-            builder.ConnectionString =
-                "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\\Northwind.mdb;User ID=Admin";
+            builder.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\\Northwind.mdb;User ID=Admin";
             Console.WriteLine(builder.ConnectionString);
             Console.WriteLine();
 

@@ -32,7 +32,9 @@ namespace xCh6_2_4_71
             // 跑馬燈式的進度列會一直有動畫，
             // 為避免誤解，當進度為0時，將其樣式更改為Block
             if (toolStripProgressBar1.Minimum == 0)
+            {
                 toolStripProgressBar1.Style = ProgressBarStyle.Blocks;
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -52,9 +54,7 @@ namespace xCh6_2_4_71
             else
             {
                 toolStripProgressBar1.Value += 10;
-                toolStripTextBox1.Text = "目前進度：" +
-                    toolStripProgressBar1.Value.ToString() + 
-                    "%";
+                toolStripTextBox1.Text = "目前進度：" + toolStripProgressBar1.Value.ToString() + "%";
             }
         }
 

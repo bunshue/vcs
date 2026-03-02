@@ -20,9 +20,10 @@ namespace xCh11_6_5_11
 
             Console.WriteLine("書籍價目表，依價格排序：");
             foreach (decimal el in prices)
+            {
                 Console.WriteLine(el + " 元");
+            }
         }
     }
 }
-
 

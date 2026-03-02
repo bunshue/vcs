@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using System.Data.OleDb;
 
 namespace xCh10_2_2_11
@@ -19,7 +20,10 @@ namespace xCh10_2_2_11
         public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             builder = new OleDbConnectionStringBuilder();
             builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
             builder["Data Source"] = @"C:\Northwind.mdb";
@@ -98,24 +102,15 @@ namespace xCh10_2_2_11
                 DataTable 部份員工Table = new DataTable("部份員工Table");
 
                 int nameNdx = reader.GetOrdinal("姓名");
-                DataColumn nameColumn = new DataColumn(
-                    reader.GetName(nameNdx), 
-                    reader.GetFieldType(nameNdx)
-                    );
+                DataColumn nameColumn = new DataColumn(reader.GetName(nameNdx), reader.GetFieldType(nameNdx));
                 部份員工Table.Columns.Add(nameColumn);
 
                 int positionNdx = reader.GetOrdinal("職稱");
-                DataColumn positionColumn = new DataColumn(
-                    reader.GetName(positionNdx), 
-                    reader.GetFieldType(positionNdx)
-                    );
+                DataColumn positionColumn = new DataColumn(reader.GetName(positionNdx), reader.GetFieldType(positionNdx));
                 部份員工Table.Columns.Add(positionColumn);
 
                 int telNdx = reader.GetOrdinal("電話號碼");
-                DataColumn telColumn = new DataColumn(
-                    reader.GetName(telNdx), 
-                    reader.GetFieldType(telNdx)
-                    );
+                DataColumn telColumn = new DataColumn(reader.GetName(telNdx), reader.GetFieldType(telNdx));
                 部份員工Table.Columns.Add(telColumn);
 
                 // 加入記錄
@@ -141,3 +136,5 @@ namespace xCh10_2_2_11
         }
     }
 }
+
+

@@ -114,6 +114,7 @@ namespace xCh9_3_11
                 "隨身碟", 
                 "MP3撥放器" 
             };
+
             for (int i = 0; i <= 4; i++)
             {
                 row = table.NewRow();
@@ -122,6 +123,7 @@ namespace xCh9_3_11
                 row["客戶編號"] = 0;
                 table.Rows.Add(row);
             }
+
             for (int i = 0; i <= 4; i++)
             {
                 row = table.NewRow();
@@ -130,6 +132,7 @@ namespace xCh9_3_11
                 row["客戶編號"] = 1;
                 table.Rows.Add(row);
             }
+
             for (int i = 0; i <= 4; i++)
             {
                 row = table.NewRow();
@@ -142,15 +145,9 @@ namespace xCh9_3_11
 
         private void MakeDataRelation()
         {
-            DataColumn parentColumn = 
-                dataSet.Tables["ParentTable"].Columns["客戶編號"];
-
-            DataColumn childColumn = 
-                dataSet.Tables["ChildTable"].Columns["客戶編號"];
-
-            DataRelation relation = 
-                new DataRelation("parent2Child", parentColumn, childColumn);
-
+            DataColumn parentColumn = dataSet.Tables["ParentTable"].Columns["客戶編號"];
+            DataColumn childColumn = dataSet.Tables["ChildTable"].Columns["客戶編號"];
+            DataRelation relation = new DataRelation("parent2Child", parentColumn, childColumn);
             dataSet.Tables["ChildTable"].ParentRelations.Add(relation);
         }
     }

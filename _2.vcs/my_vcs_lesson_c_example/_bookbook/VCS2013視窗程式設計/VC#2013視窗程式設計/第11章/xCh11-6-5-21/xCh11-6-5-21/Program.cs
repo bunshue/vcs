@@ -20,9 +20,9 @@ namespace xCh11_6_5_21
                 select total;
 
             foreach (decimal cost in costs)
+            {
                 Console.WriteLine(cost);
+            }
         }
     }
 }
-
-

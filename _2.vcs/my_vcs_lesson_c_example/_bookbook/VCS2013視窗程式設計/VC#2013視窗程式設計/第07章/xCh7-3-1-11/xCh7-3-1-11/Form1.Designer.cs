@@ -38,18 +38,18 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(248, 51);
+            this.comboBox1.Location = new System.Drawing.Point(213, 47);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(140, 21);
+            this.comboBox1.Size = new System.Drawing.Size(121, 20);
             this.comboBox1.TabIndex = 7;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(248, 28);
+            this.checkBox1.Location = new System.Drawing.Point(213, 26);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(153, 18);
+            this.checkBox1.Size = new System.Drawing.Size(133, 16);
             this.checkBox1.TabIndex = 6;
             this.checkBox1.Text = "ShowNewFolderButton";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -57,9 +57,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 18);
+            this.button1.Location = new System.Drawing.Point(10, 17);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(143, 25);
+            this.button1.Size = new System.Drawing.Size(123, 23);
             this.button1.TabIndex = 5;
             this.button1.Text = "選擇資料夾的位置";
             this.button1.UseVisualStyleBackColor = true;
@@ -67,16 +67,16 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 49);
+            this.textBox1.Location = new System.Drawing.Point(10, 45);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(228, 23);
+            this.textBox1.Size = new System.Drawing.Size(196, 22);
             this.textBox1.TabIndex = 4;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(403, 98);
+            this.ClientSize = new System.Drawing.Size(707, 452);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button1);

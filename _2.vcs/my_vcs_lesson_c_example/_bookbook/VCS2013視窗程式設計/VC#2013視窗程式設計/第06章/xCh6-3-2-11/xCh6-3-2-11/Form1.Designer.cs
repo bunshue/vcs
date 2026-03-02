@@ -54,27 +54,27 @@
             this.貼上ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(131, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(118, 70);
             // 
             // 剪下ToolStripMenuItem
             // 
             this.剪下ToolStripMenuItem.Name = "剪下ToolStripMenuItem";
             this.剪下ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.U)));
-            this.剪下ToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.剪下ToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.剪下ToolStripMenuItem.Text = "剪下";
             // 
             // 複製ToolStripMenuItem
             // 
             this.複製ToolStripMenuItem.Name = "複製ToolStripMenuItem";
             this.複製ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.複製ToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.複製ToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.複製ToolStripMenuItem.Text = "複製";
             // 
             // 貼上ToolStripMenuItem
             // 
             this.貼上ToolStripMenuItem.Name = "貼上ToolStripMenuItem";
             this.貼上ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.貼上ToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.貼上ToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.貼上ToolStripMenuItem.Text = "貼上";
             // 
             // contextMenuStrip2
@@ -88,68 +88,69 @@
             this.toolStripMenuItem1,
             this.關閉ToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(119, 142);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(111, 142);
             // 
             // 還原ToolStripMenuItem
             // 
             this.還原ToolStripMenuItem.Image = global::xCh6_3_2_11.Properties.Resources.user32x32;
             this.還原ToolStripMenuItem.Name = "還原ToolStripMenuItem";
-            this.還原ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.還原ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.還原ToolStripMenuItem.Text = "還原";
             // 
             // 移動ToolStripMenuItem
             // 
             this.移動ToolStripMenuItem.Name = "移動ToolStripMenuItem";
-            this.移動ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.移動ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.移動ToolStripMenuItem.Text = "移動";
             // 
             // 大小ToolStripMenuItem
             // 
             this.大小ToolStripMenuItem.Name = "大小ToolStripMenuItem";
-            this.大小ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.大小ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.大小ToolStripMenuItem.Text = "大小";
             // 
             // 最小化ToolStripMenuItem
             // 
             this.最小化ToolStripMenuItem.Image = global::xCh6_3_2_11.Properties.Resources.frai32x32;
             this.最小化ToolStripMenuItem.Name = "最小化ToolStripMenuItem";
-            this.最小化ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.最小化ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.最小化ToolStripMenuItem.Text = "最小化";
             // 
             // 最大化ToolStripMenuItem
             // 
             this.最大化ToolStripMenuItem.Name = "最大化ToolStripMenuItem";
-            this.最大化ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.最大化ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.最大化ToolStripMenuItem.Text = "最大化";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(107, 6);
             // 
             // 關閉ToolStripMenuItem
             // 
             this.關閉ToolStripMenuItem.Name = "關閉ToolStripMenuItem";
-            this.關閉ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.關閉ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.關閉ToolStripMenuItem.Text = "關閉";
             // 
             // textBox1
             // 
             this.textBox1.ContextMenuStrip = this.contextMenuStrip1;
-            this.textBox1.Location = new System.Drawing.Point(12, 12);
+            this.textBox1.Location = new System.Drawing.Point(10, 11);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(254, 23);
+            this.textBox1.Size = new System.Drawing.Size(218, 22);
             this.textBox1.TabIndex = 2;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(278, 222);
+            this.ClientSize = new System.Drawing.Size(660, 552);
             this.ContextMenuStrip = this.contextMenuStrip2;
             this.Controls.Add(this.textBox1);
             this.Name = "Form1";
             this.Text = "ContextMenuStrip範例";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.contextMenuStrip1.ResumeLayout(false);
             this.contextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);

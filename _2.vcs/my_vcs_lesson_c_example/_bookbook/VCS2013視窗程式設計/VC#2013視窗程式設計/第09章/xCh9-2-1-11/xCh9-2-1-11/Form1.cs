@@ -17,6 +17,11 @@ namespace xCh9_2_1_11
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             // 建構DataSet及其組成的資料表
@@ -24,12 +29,12 @@ namespace xCh9_2_1_11
             DataTable studentTable = new DataTable("StudentTable");
 
             // 建構資料欄
-            DataColumn idColumn = new DataColumn("編號" );
+            DataColumn idColumn = new DataColumn("編號");
             DataColumn nameColumn = new DataColumn("姓名");
             DataColumn schoolColumn = new DataColumn("學歷");
 
             // 設定「編號」資料欄為自動增加數值
-            idColumn.DataType=Type.GetType("System.Int32");
+            idColumn.DataType = Type.GetType("System.Int32");
             idColumn.AutoIncrement = true;
 
             // 加入資料欄
@@ -58,8 +63,8 @@ namespace xCh9_2_1_11
             studentTable.Rows.Add(newRow);
 
             // 秀出剛動態建構出來的DataSet 
-            dataGridView1.DataSource = 
-                studentsDataSet.Tables["StudentTable"];
+            dataGridView1.DataSource = studentsDataSet.Tables["StudentTable"];
         }
     }
 }
+

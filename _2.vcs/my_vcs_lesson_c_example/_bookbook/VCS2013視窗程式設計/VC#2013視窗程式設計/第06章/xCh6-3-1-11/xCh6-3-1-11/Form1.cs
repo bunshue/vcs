@@ -56,9 +56,7 @@ namespace xCh6_3_1_11
 
             // 重設功能表單TextBox的文字內容
             toolStripTextBox1.Size = new Size(125, 20);
-            toolStripTextBox1.Text = "目前已開啟 " +
-                this.MdiChildren.Length.ToString() + 
-                " 個表單";
+            toolStripTextBox1.Text = "目前已開啟 " + this.MdiChildren.Length.ToString() + " 個表單";
         }
     }
 }

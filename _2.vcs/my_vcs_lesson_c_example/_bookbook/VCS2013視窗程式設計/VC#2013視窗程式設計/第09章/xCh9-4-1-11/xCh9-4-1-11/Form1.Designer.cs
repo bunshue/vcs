@@ -37,9 +37,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(146, 15);
+            this.button2.Location = new System.Drawing.Point(125, 14);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 25);
+            this.button2.Size = new System.Drawing.Size(86, 23);
             this.button2.TabIndex = 5;
             this.button2.Text = "寫成XML文件";
             this.button2.UseVisualStyleBackColor = true;
@@ -48,17 +48,17 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 46);
+            this.dataGridView1.Location = new System.Drawing.Point(10, 42);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(406, 132);
+            this.dataGridView1.Size = new System.Drawing.Size(348, 122);
             this.dataGridView1.TabIndex = 4;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 15);
+            this.button1.Location = new System.Drawing.Point(10, 14);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(128, 25);
+            this.button1.Size = new System.Drawing.Size(110, 23);
             this.button1.TabIndex = 3;
             this.button1.Text = "動態建構DataSet";
             this.button1.UseVisualStyleBackColor = true;
@@ -66,9 +66,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(252, 15);
+            this.button3.Location = new System.Drawing.Point(216, 14);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(106, 25);
+            this.button3.Size = new System.Drawing.Size(91, 23);
             this.button3.TabIndex = 6;
             this.button3.Text = "讀入XML文件";
             this.button3.UseVisualStyleBackColor = true;
@@ -76,15 +76,16 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(431, 192);
+            this.ClientSize = new System.Drawing.Size(660, 523);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "DataSet與XML範例";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 

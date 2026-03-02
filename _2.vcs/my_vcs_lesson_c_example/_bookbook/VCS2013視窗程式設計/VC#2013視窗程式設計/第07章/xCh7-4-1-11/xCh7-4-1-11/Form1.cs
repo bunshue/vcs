@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using System.IO;
 
 namespace xCh7_4_1_11
@@ -16,6 +17,11 @@ namespace xCh7_4_1_11
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -50,20 +56,12 @@ namespace xCh7_4_1_11
         {
             string toPrintFile = textBox1.Text;
             stream = new FileStream(toPrintFile, FileMode.Open);
-            streamToPrint = new StreamReader(
-                stream,
-                Encoding.GetEncoding("big5")
-                );
+            streamToPrint = new StreamReader(stream, Encoding.GetEncoding("big5"));
         }
         private void PageSetting(System.Drawing.Printing.PrintPageEventArgs e)
         {
             printFont = new Font("標楷體", 10);
-            pageNumberArea = new RectangleF(
-                0, 
-                e.PageBounds.Bottom - 20, 
-                e.PageSettings.Bounds.Width, 
-                20
-                );
+            pageNumberArea = new RectangleF(0, e.PageBounds.Bottom - 20, e.PageSettings.Bounds.Width, 20);
             format = new StringFormat();
             format.Alignment = StringAlignment.Center;
 
@@ -84,18 +82,16 @@ namespace xCh7_4_1_11
                     OpenFile();     // 判斷是否否是列印第一頁
                     PageSetting(e); // 設定列印頁碼所需的資料
                     // 計算每頁的列數
-                    linesPerPage = 
-                        e.MarginBounds.Height / printFont.GetHeight(e.Graphics);
+                    linesPerPage = e.MarginBounds.Height / printFont.GetHeight(e.Graphics);
                 }
 
                 // 列印檔案中的每一列
-                while (count < linesPerPage &&
-                    ((line = streamToPrint.ReadLine()) != null))
+                while (count < linesPerPage && ((line = streamToPrint.ReadLine()) != null))
                 {
                     yPos = topMargin + (count * printFont.GetHeight(e.Graphics));
                     e.Graphics.DrawString(
-                        line, 
-                        printFont, 
+                        line,
+                        printFont,
                         Brushes.Black,
                         leftMargin,
                         yPos,
@@ -110,19 +106,21 @@ namespace xCh7_4_1_11
 
                     // 註明再度執行PrintPage事件處理程序時，
                     // 是第二頁以後的頁面
-                    isFirstPage = false;    
+                    isFirstPage = false;
                 }
                 else
+                {
                     e.HasMorePages = false;
+                }
 
                 // 印出頁碼
                 pageNumber++;
                 pageNumberTtile = "第 " + pageNumber.ToString() + " 頁";
                 e.Graphics.DrawString(
-                    pageNumberTtile, 
-                    printFont, 
-                    Brushes.Red, 
-                    pageNumberArea, 
+                    pageNumberTtile,
+                    printFont,
+                    Brushes.Red,
+                    pageNumberArea,
                     format);
             }
             finally
@@ -145,8 +143,10 @@ namespace xCh7_4_1_11
         {
             pageSetupDialog1.Document = printDocument1;
 
-            if (pageSetupDialog1.ShowDialog() == DialogResult.OK) 
+            if (pageSetupDialog1.ShowDialog() == DialogResult.OK)
+            {
                 printDocument1.DefaultPageSettings = pageSetupDialog1.PageSettings;
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -155,7 +155,9 @@ namespace xCh7_4_1_11
             printDialog1.PrinterSettings = pageSetupDialog1.PrinterSettings;
 
             if (printDialog1.ShowDialog() == DialogResult.OK)
+            {
                 printDocument1.Print();
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)

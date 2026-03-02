@@ -51,8 +51,7 @@ namespace xCh11_2_31
                select new { Category = category.ID, Product = prod.Name };
 
             Console.Write("*** 內部聯結：");
-            Console.WriteLine(
-                "查詢運算結果->{0} 項目位於1個群組中。", innerJoinQuery.Count());
+            Console.WriteLine("查詢運算結果->{0} 項目位於1個群組中。", innerJoinQuery.Count());
             Console.WriteLine("{0,-8}{1}", "品名", "種類");
 
             foreach (var item in innerJoinQuery)
@@ -82,9 +81,7 @@ namespace xCh11_2_31
                 }
             }
 
-            Console.WriteLine(
-                "查詢運算結果->Unshaped GroupJoin: {0} 項目位於 {1} 個未具名的群組中",
-                    totalItems, groupJoinQuery.Count());
+            Console.WriteLine("查詢運算結果->Unshaped GroupJoin: {0} 項目位於 {1} 個未具名的群組中", totalItems, groupJoinQuery.Count());
         }
 
         public void GroupJoin2()
@@ -105,9 +102,7 @@ namespace xCh11_2_31
                 totalItems++;
                 Console.WriteLine("   {0,-10}{1}", item.ProductName, item.Category);
             }
-
-            Console.WriteLine("查詢運算結果-> {0} 項目位於1個群組中",
-                totalItems, groupJoinQuery.Count());
+            Console.WriteLine("查詢運算結果-> {0} 項目位於1個群組中", totalItems, groupJoinQuery.Count());
         }
 
         public void GroupInnerJoin()
@@ -138,8 +133,7 @@ namespace xCh11_2_31
                 }
             }
 
-            Console.WriteLine("查詢運算結果-> {0} 項目位於 {1} 個具名的群組中",
-                totalItems, groupJoinQuery.Count());
+            Console.WriteLine("查詢運算結果-> {0} 項目位於 {1} 個具名的群組中", totalItems, groupJoinQuery.Count());
         }
 
         public void LeftOuterJoin1()
@@ -161,13 +155,10 @@ namespace xCh11_2_31
                 foreach (var item in prodGrouping)
                 {
                     totalItems++;
-
                     Console.WriteLine("  {0,-10}{1}", item.Name, item.CategoryID);
                 }
             }
-
-            Console.WriteLine("查詢運算結果-> {0} 項目位於 in {1} 個群組中",
-                totalItems, leftOuterQuery.Count());
+            Console.WriteLine("查詢運算結果-> {0} 項目位於 in {1} 個群組中", totalItems, leftOuterQuery.Count());
         }
 
         public void LeftOuterJoin2()
@@ -176,10 +167,13 @@ namespace xCh11_2_31
                from category in categories
                join prod in products on category.ID equals prod.CategoryID into prodGroup
                from item in prodGroup.DefaultIfEmpty()
-               select new { 
-                   Name = item == null ? 
-                   "左側來源無相符項目 !" : 
-                   item.Name, CategoryID = category.ID };
+               select new
+               {
+                   Name = item == null ?
+                   "左側來源無相符項目 !" :
+                   item.Name,
+                   CategoryID = category.ID
+               };
 
             int totalItems = 0;
             Console.WriteLine("左外部聯結：");
@@ -190,7 +184,6 @@ namespace xCh11_2_31
                 totalItems++;
                 Console.WriteLine("{0,-23}{1}", item.Name, item.CategoryID);
             }
-
             Console.WriteLine("查詢運算結果-> {0} 項目位於1個群組中", totalItems);
         }
     }

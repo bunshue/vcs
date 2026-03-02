@@ -34,7 +34,7 @@ namespace xCh9_1_1_11
 
         private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("是否要刪除？", 
+            if (MessageBox.Show("是否要刪除？",
                 "小心", MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question,
                 MessageBoxDefaultButton.Button2) == DialogResult.Yes)

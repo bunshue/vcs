@@ -18,11 +18,11 @@ namespace xCh11_6_1_11
                 where (string)el.Attribute("付款方式") == "貨到付款"
                 select el;
 
-
             foreach (XElement el in address)
+            {
                 Console.WriteLine(el);
+            }
         }
     }
 }
-
 

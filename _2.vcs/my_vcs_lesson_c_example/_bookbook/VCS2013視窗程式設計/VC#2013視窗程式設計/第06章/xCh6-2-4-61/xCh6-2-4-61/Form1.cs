@@ -31,23 +31,19 @@ namespace xCh6_2_4_61
             // 根據預設的DisplayStyle為Image，因此Text的並不會顯示出來
             // 因此，調整其DisplayStyle，並調整文字與圖片的前後關係
             toolStripDropDownButton1.Text = "顏色設定";
-            toolStripDropDownButton1.Image = 
-                Image.FromFile(@"c:\user_red32x32.png");
-            toolStripDropDownButton1.DisplayStyle = 
-                ToolStripItemDisplayStyle.ImageAndText;
-            toolStripDropDownButton1.TextImageRelation = 
-                TextImageRelation.TextBeforeImage;
+            toolStripDropDownButton1.Image = Image.FromFile(@"c:\user_red32x32.png");
+            toolStripDropDownButton1.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            toolStripDropDownButton1.TextImageRelation = TextImageRelation.TextBeforeImage;
 
             // 設定下拉式清單出現的方向在左方
-            toolStripDropDownButton1.DropDownDirection = 
-                ToolStripDropDownDirection.Left;
+            toolStripDropDownButton1.DropDownDirection = ToolStripDropDownDirection.Left;
 
             // 不顯示drop-down的下拉式箭頭
             toolStripDropDownButton1.ShowDropDownArrow = false;
 
             // 設定提示文字
             toolStripDropDownButton1.ToolTipText = "文字顏色設定";
- 
+
             // 動態建構三個ToolStripButton物件，
             // 並設定為DropDown物件的內容，即「選項」
             buttonRed = new ToolStripButton();
@@ -89,7 +85,9 @@ namespace xCh6_2_4_61
             ToolStripButton senderButton = (ToolStripButton)sender;
 
             if (toolStripTextBox1.Text == "")
+            {
                 toolStripTextBox1.Text = "顏色設定";
+            }
             toolStripTextBox1.ForeColor = senderButton.ForeColor;
         }
     }

@@ -31,8 +31,7 @@ namespace xCh6_2_4_11
             openToolStripButton.Text = "開啟舊檔";
             saveToolStripButton.Text = "儲存檔案";
 
-            toolStrip1.Items.AddRange(
-                 new System.Windows.Forms.ToolStripItem[] 
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] 
             {
                newToolStripButton,
                openToolStripButton,
@@ -42,3 +41,4 @@ namespace xCh6_2_4_11
         }
     }
 }
+

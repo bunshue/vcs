@@ -29,7 +29,7 @@ namespace xCh11_2_21
                 group w by w[0] into grps
                 where (grps.Key == 'a' ||
                             grps.Key == 'e' ||
-                            grps.Key == 'i'  ||
+                            grps.Key == 'i' ||
                             grps.Key == 'o' ||
                             grps.Key == 'u')
                 select grps;

@@ -43,17 +43,17 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(354, 65);
+            this.label4.Location = new System.Drawing.Point(303, 60);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 14);
+            this.label4.Size = new System.Drawing.Size(33, 12);
             this.label4.TabIndex = 15;
             this.label4.Text = "label4";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(480, 270);
+            this.button2.Location = new System.Drawing.Point(411, 249);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(104, 25);
+            this.button2.Size = new System.Drawing.Size(89, 23);
             this.button2.TabIndex = 14;
             this.button2.Text = "取得部份資料";
             this.button2.UseVisualStyleBackColor = true;
@@ -62,53 +62,53 @@
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(12, 270);
+            this.dataGridView2.Location = new System.Drawing.Point(10, 249);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 24;
-            this.dataGridView2.Size = new System.Drawing.Size(462, 163);
+            this.dataGridView2.Size = new System.Drawing.Size(396, 150);
             this.dataGridView2.TabIndex = 13;
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 92);
+            this.dataGridView1.Location = new System.Drawing.Point(10, 85);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(575, 172);
+            this.dataGridView1.Size = new System.Drawing.Size(493, 159);
             this.dataGridView1.TabIndex = 12;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(117, 65);
+            this.label3.Location = new System.Drawing.Point(100, 60);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 14);
+            this.label3.Size = new System.Drawing.Size(33, 12);
             this.label3.TabIndex = 11;
             this.label3.Text = "label3";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(117, 38);
+            this.label2.Location = new System.Drawing.Point(100, 35);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 14);
+            this.label2.Size = new System.Drawing.Size(33, 12);
             this.label2.TabIndex = 10;
             this.label2.Text = "label2";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(117, 15);
+            this.label1.Location = new System.Drawing.Point(100, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 14);
+            this.label1.Size = new System.Drawing.Size(33, 12);
             this.label1.TabIndex = 9;
             this.label1.Text = "label1";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 10);
+            this.button1.Location = new System.Drawing.Point(10, 9);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(87, 25);
+            this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 8;
             this.button1.Text = "取得資料";
             this.button1.UseVisualStyleBackColor = true;
@@ -116,9 +116,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(602, 448);
+            this.ClientSize = new System.Drawing.Size(768, 549);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.dataGridView2);
@@ -129,6 +129,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "DataReader範例";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

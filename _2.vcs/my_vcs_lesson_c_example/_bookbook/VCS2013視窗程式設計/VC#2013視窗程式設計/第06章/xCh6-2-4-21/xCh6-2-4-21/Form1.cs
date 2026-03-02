@@ -36,10 +36,7 @@ namespace xCh6_2_4_21
             ToolStripLabel toolStripLabel1 = (ToolStripLabel)sender;
 
             // 從tag屬性中取出網址
-            System.Diagnostics.Process.Start(
-                "IEXPLORE.EXE",
-                toolStripLabel1.Tag.ToString()
-             );
+            System.Diagnostics.Process.Start("IEXPLORE.EXE", toolStripLabel1.Tag.ToString());
 
             // 設定已瀏覽
             toolStripLabel1.LinkVisited = true;

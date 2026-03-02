@@ -45,9 +45,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(15, 68);
+            this.button2.Location = new System.Drawing.Point(13, 63);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(57, 25);
+            this.button2.Size = new System.Drawing.Size(49, 23);
             this.button2.TabIndex = 6;
             this.button2.Text = "列印";
             this.button2.UseVisualStyleBackColor = true;
@@ -55,9 +55,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(15, 23);
+            this.button1.Location = new System.Drawing.Point(13, 21);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(99, 25);
+            this.button1.Size = new System.Drawing.Size(85, 23);
             this.button1.TabIndex = 5;
             this.button1.Text = "待列印檔案：";
             this.button1.UseVisualStyleBackColor = true;
@@ -65,9 +65,9 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(121, 23);
+            this.textBox1.Location = new System.Drawing.Point(104, 21);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(188, 23);
+            this.textBox1.Size = new System.Drawing.Size(162, 22);
             this.textBox1.TabIndex = 4;
             // 
             // printDocument1
@@ -93,9 +93,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(78, 68);
+            this.button3.Location = new System.Drawing.Point(67, 63);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(87, 25);
+            this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 7;
             this.button3.Text = "預覽列印";
             this.button3.UseVisualStyleBackColor = true;
@@ -103,9 +103,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(171, 68);
+            this.button4.Location = new System.Drawing.Point(147, 63);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(87, 25);
+            this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 8;
             this.button4.Text = "版面設定";
             this.button4.UseVisualStyleBackColor = true;
@@ -117,9 +117,9 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(264, 68);
+            this.button5.Location = new System.Drawing.Point(226, 63);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(87, 25);
+            this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 9;
             this.button5.Text = "列印設定";
             this.button5.UseVisualStyleBackColor = true;
@@ -127,9 +127,9 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(316, 23);
+            this.button6.Location = new System.Drawing.Point(271, 21);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(45, 23);
+            this.button6.Size = new System.Drawing.Size(39, 21);
             this.button6.TabIndex = 10;
             this.button6.Text = "關於";
             this.button6.UseVisualStyleBackColor = true;
@@ -137,9 +137,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(365, 111);
+            this.ClientSize = new System.Drawing.Size(602, 390);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -149,6 +149,7 @@
             this.Controls.Add(this.textBox1);
             this.Name = "Form1";
             this.Text = "PrintDocument範例";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

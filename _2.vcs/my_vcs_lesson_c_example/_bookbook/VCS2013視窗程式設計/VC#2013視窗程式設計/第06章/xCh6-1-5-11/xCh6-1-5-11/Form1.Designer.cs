@@ -43,39 +43,39 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(14, 18);
+            this.tabControl1.Location = new System.Drawing.Point(12, 17);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(335, 164);
+            this.tabControl1.Size = new System.Drawing.Size(287, 151);
             this.tabControl1.TabIndex = 4;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             // 
             // tabPage1
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 23);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(327, 137);
+            this.tabPage1.Size = new System.Drawing.Size(279, 125);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 23);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(327, 137);
+            this.tabPage2.Size = new System.Drawing.Size(279, 125);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(355, 132);
+            this.button4.Location = new System.Drawing.Point(304, 122);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(94, 23);
+            this.button4.Size = new System.Drawing.Size(81, 21);
             this.button4.TabIndex = 9;
             this.button4.Text = "+Tabs";
             this.button4.UseVisualStyleBackColor = true;
@@ -83,9 +83,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(355, 103);
+            this.button3.Location = new System.Drawing.Point(304, 95);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(94, 23);
+            this.button3.Size = new System.Drawing.Size(81, 21);
             this.button3.TabIndex = 5;
             this.button3.Text = "+Tabs";
             this.button3.UseVisualStyleBackColor = true;
@@ -93,9 +93,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(355, 72);
+            this.button2.Location = new System.Drawing.Point(304, 66);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(94, 25);
+            this.button2.Size = new System.Drawing.Size(81, 23);
             this.button2.TabIndex = 8;
             this.button2.Text = "加入控制項";
             this.button2.UseVisualStyleBackColor = true;
@@ -104,17 +104,17 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 195);
+            this.label1.Location = new System.Drawing.Point(13, 180);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 14);
+            this.label1.Size = new System.Drawing.Size(33, 12);
             this.label1.TabIndex = 7;
             this.label1.Text = "label1";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(355, 41);
+            this.button1.Location = new System.Drawing.Point(304, 38);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(94, 25);
+            this.button1.Size = new System.Drawing.Size(81, 23);
             this.button1.TabIndex = 6;
             this.button1.Text = "新增Tab Page";
             this.button1.UseVisualStyleBackColor = true;
@@ -122,9 +122,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(468, 227);
+            this.ClientSize = new System.Drawing.Size(631, 430);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);

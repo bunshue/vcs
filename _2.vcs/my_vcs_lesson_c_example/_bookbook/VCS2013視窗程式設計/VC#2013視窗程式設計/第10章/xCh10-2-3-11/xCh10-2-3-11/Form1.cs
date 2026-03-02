@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using System.Data.OleDb;
 
 namespace xCh10_2_3_11
@@ -17,6 +18,7 @@ namespace xCh10_2_3_11
         {
             InitializeComponent();
         }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             comboBox1.Items.AddRange(new object[] {
@@ -39,17 +41,14 @@ namespace xCh10_2_3_11
             builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
             builder["Data Source"] = @"C:\Northwind.mdb";
             builder["User Id"] = "Admin";
-            string queryString = 
-                "SELECT * FROM 供應商 WHERE 供應商=@supplier OR 行政區=@district";
+            string queryString = "SELECT * FROM 供應商 WHERE 供應商=@supplier OR 行政區=@district";
 
             using (OleDbConnection connection = new OleDbConnection(builder.ConnectionString))
             {
                 connection.Open();
 
                 OleDbCommand command = new OleDbCommand(queryString, connection);
-                OleDbParameter supplierParam = command.Parameters.Add(
-                    "@supplier", OleDbType.Char
-                    );
+                OleDbParameter supplierParam = command.Parameters.Add("@supplier", OleDbType.Char);
                 supplierParam.Value = "一心";
                 // 以上二道敘述的寫法，可縮寫如下：
                 // command.Parameters.Add("@supplier", OleDbType.Char).Value = "一心";
@@ -78,6 +77,7 @@ namespace xCh10_2_3_11
                     aColumn = new DataColumn(reader.GetName(i), reader.GetFieldType(i));
                     供應商Table.Columns.Add(aColumn);
                 }
+
                 // 加入記錄
                 DataRow newRow = null;
                 while (reader.Read())
@@ -98,3 +98,4 @@ namespace xCh10_2_3_11
         }
     }
 }
+
