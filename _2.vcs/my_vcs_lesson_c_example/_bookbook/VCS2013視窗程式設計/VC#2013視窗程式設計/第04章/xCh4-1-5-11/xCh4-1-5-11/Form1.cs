@@ -15,24 +15,21 @@ namespace xCh4_1_5_11
         public Form1()
         {
             InitializeComponent();
-            label1.Text = dateTimePicker1.Value.ToString();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            label1.Text = dateTimePicker1.Value.ToShortDateString();
-        }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-            MessageBox.Show("Value屬性變更 ！");
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            richTextBox1.Text += dateTimePicker1.Value.ToString() + "\n";
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += dateTimePicker1.Value.ToShortDateString() + "\n";
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "Value屬性變更 ！\n";
         }
     }
 }
-
-

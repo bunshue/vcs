@@ -15,6 +15,16 @@ namespace xCh2_2_41
         // 判斷使用者是否已輸入數字
         private bool nonNumberEntered = false;
 
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
             // 假設使用者已輸入數字
@@ -48,18 +58,10 @@ namespace xCh2_2_41
                 label2.Text += "請輸入數字或是退後鍵修正數字 !!!";
             }
             else
+            {
                 label2.Text = e.KeyChar + " 是OK的";
-        }
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
+            }
         }
     }
 }
-
 

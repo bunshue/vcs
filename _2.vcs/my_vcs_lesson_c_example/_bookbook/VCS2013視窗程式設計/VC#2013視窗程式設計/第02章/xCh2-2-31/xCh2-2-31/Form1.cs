@@ -17,6 +17,11 @@ namespace xCh2_2_31
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void textBox1_Validating(object sender, CancelEventArgs e)
         {
             string errorMsg;
@@ -58,11 +63,6 @@ namespace xCh2_2_31
         private void textBox1_Validated(object sender, EventArgs e)
         {
             textBox2.Text = "電子郵信箱格式無誤";
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -15,6 +15,16 @@ namespace xCh4_1_6_21
         static System.Windows.Forms.Timer myTimer = new System.Windows.Forms.Timer();
         static int alarmCounter = 1;
 
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         // Timer元件的Tick事件處理程序
         private static void TimerEventProcessor(Object myObject, EventArgs myEventArgs)
         {
@@ -30,16 +40,6 @@ namespace xCh4_1_6_21
                 myTimer.Stop();
                 Application.Exit();
             }
-        }
-
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void button1_Click(object sender, EventArgs e)
