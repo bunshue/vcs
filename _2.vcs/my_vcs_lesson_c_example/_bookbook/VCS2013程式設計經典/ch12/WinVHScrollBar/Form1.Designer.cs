@@ -74,7 +74,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(394, 326);
+            this.ClientSize = new System.Drawing.Size(617, 484);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.hScrollBar1);
             this.Controls.Add(this.vScrollBar1);

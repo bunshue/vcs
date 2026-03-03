@@ -11,11 +11,6 @@ namespace vcs_Bar
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         // 宣告p[0]~p[3]的PictureBox陣列，可存放用來存放0.jpg~3.jpg
         // 其中p[0]不使用，p[1]~p[3]代表三個拉霸圖示
         PictureBox[] p = new PictureBox[4];
@@ -24,7 +19,11 @@ namespace vcs_Bar
         int[] num = new int[4];
         int t; //宣告t用來計算timer1共執行幾次
 
-        //表單載入時執行Form1_Load事件處理函式
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             // 使表單無法被調整大小
@@ -75,7 +74,7 @@ namespace vcs_Bar
             {
                 num[i] = r.Next(0, 4);   // 產生 0~3 的亂數並指定給 num[1]~num[3]
                 // 使pic1~pic3以亂數的方式顯示 0.jpg~3.jpg
-                p[i].Image = new Bitmap("../../"+Convert.ToString(num[i]) + ".jpg");
+                p[i].Image = new Bitmap("../../" + Convert.ToString(num[i]) + ".jpg");
             }
             t += 1;
             // 當計時器執行20次時，即馬上判斷是否中獎
@@ -114,3 +113,4 @@ namespace vcs_Bar
         }
     }
 }
+

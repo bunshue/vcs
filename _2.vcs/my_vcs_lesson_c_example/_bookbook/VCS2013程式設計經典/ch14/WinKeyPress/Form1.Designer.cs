@@ -41,7 +41,7 @@
             // txtTotal
             // 
             this.txtTotal.Location = new System.Drawing.Point(108, 158);
-            this.txtTotal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTotal.Margin = new System.Windows.Forms.Padding(4);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.Size = new System.Drawing.Size(132, 25);
             this.txtTotal.TabIndex = 11;
@@ -49,7 +49,7 @@
             // txtQty
             // 
             this.txtQty.Location = new System.Drawing.Point(108, 111);
-            this.txtQty.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtQty.Margin = new System.Windows.Forms.Padding(4);
             this.txtQty.Name = "txtQty";
             this.txtQty.Size = new System.Drawing.Size(132, 25);
             this.txtQty.TabIndex = 10;
@@ -59,7 +59,7 @@
             // txtPrice
             // 
             this.txtPrice.Location = new System.Drawing.Point(108, 65);
-            this.txtPrice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPrice.Margin = new System.Windows.Forms.Padding(4);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(132, 25);
             this.txtPrice.TabIndex = 9;
@@ -69,7 +69,7 @@
             // txtId
             // 
             this.txtId.Location = new System.Drawing.Point(108, 19);
-            this.txtId.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtId.Margin = new System.Windows.Forms.Padding(4);
             this.txtId.Name = "txtId";
             this.txtId.Size = new System.Drawing.Size(132, 25);
             this.txtId.TabIndex = 4;
@@ -120,7 +120,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(285, 219);
+            this.ClientSize = new System.Drawing.Size(769, 456);
             this.Controls.Add(this.txtTotal);
             this.Controls.Add(this.txtQty);
             this.Controls.Add(this.txtPrice);
@@ -130,7 +130,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);

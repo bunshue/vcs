@@ -17,7 +17,6 @@ namespace WinVHScrollBar
             InitializeComponent();
         }
 
-        // ===  表單載入時執行此事件
         private void Form1_Load(object sender, EventArgs e)
         {
             // pictureBox1顯示 "無尾熊.jpg"

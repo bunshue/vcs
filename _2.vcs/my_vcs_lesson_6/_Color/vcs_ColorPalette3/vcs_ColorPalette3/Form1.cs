@@ -16,7 +16,7 @@ namespace vcs_ColorPalette3
         {
             InitializeComponent();
         }
-        //表單載入時執行
+
         private void Form1_Load(object sender, EventArgs e)
         {
             //設定軌跡捲棒的初值為最大值 
@@ -44,6 +44,7 @@ namespace vcs_ColorPalette3
             tkbGreen.Scroll += new EventHandler(tkb_Scroll);
             tkbBlue.Scroll += new EventHandler(tkb_Scroll);
         }
+
         //tkbAlpha, tkbRed, tkbGreen, tkbBlue的Scroll事件被觸發時皆執行此事件處理函式
         private void tkb_Scroll(object sender, EventArgs e)
         {

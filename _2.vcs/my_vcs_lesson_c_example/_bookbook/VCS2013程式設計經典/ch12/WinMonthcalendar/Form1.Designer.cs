@@ -43,7 +43,7 @@
             // 
             this.btnEnd.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnEnd.Location = new System.Drawing.Point(419, 294);
-            this.btnEnd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnEnd.Margin = new System.Windows.Forms.Padding(2);
             this.btnEnd.Name = "btnEnd";
             this.btnEnd.Size = new System.Drawing.Size(58, 29);
             this.btnEnd.TabIndex = 17;
@@ -55,7 +55,7 @@
             // 
             this.btnReSet.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnReSet.Location = new System.Drawing.Point(419, 258);
-            this.btnReSet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnReSet.Margin = new System.Windows.Forms.Padding(2);
             this.btnReSet.Name = "btnReSet";
             this.btnReSet.Size = new System.Drawing.Size(58, 29);
             this.btnReSet.TabIndex = 16;
@@ -67,7 +67,7 @@
             // 
             this.btnOk.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnOk.Location = new System.Drawing.Point(419, 223);
-            this.btnOk.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnOk.Margin = new System.Windows.Forms.Padding(2);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(58, 29);
             this.btnOk.TabIndex = 15;
@@ -90,7 +90,7 @@
             // 
             this.textBox1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.textBox1.Location = new System.Drawing.Point(261, 167);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(136, 157);
@@ -110,7 +110,7 @@
             // monthCalendar1
             // 
             this.monthCalendar1.Location = new System.Drawing.Point(13, 165);
-            this.monthCalendar1.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.monthCalendar1.Margin = new System.Windows.Forms.Padding(7);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 11;
             // 
@@ -130,7 +130,7 @@
             this.checkedListBox1.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.checkedListBox1.FormattingEnabled = true;
             this.checkedListBox1.Location = new System.Drawing.Point(13, 29);
-            this.checkedListBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkedListBox1.Margin = new System.Windows.Forms.Padding(2);
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(342, 104);
             this.checkedListBox1.TabIndex = 9;
@@ -139,7 +139,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(492, 334);
+            this.ClientSize = new System.Drawing.Size(754, 538);
             this.Controls.Add(this.btnEnd);
             this.Controls.Add(this.btnReSet);
             this.Controls.Add(this.btnOk);
@@ -150,7 +150,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.checkedListBox1);
             this.Font = new System.Drawing.Font("新細明體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);

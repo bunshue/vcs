@@ -200,7 +200,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(405, 320);
+            this.ClientSize = new System.Drawing.Size(769, 495);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.gbPS4);
             this.Controls.Add(this.gbXBoxOne);

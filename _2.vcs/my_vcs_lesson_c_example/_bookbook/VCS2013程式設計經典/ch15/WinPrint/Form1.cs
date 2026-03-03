@@ -17,7 +17,6 @@ namespace WinPrint
             InitializeComponent();
         }
 
-        //  === 表單載入時會執行
         private void Form1_Load(object sender, EventArgs e)
         {
             printPreviewDialog1.Document = printDocument1;
@@ -27,7 +26,6 @@ namespace WinPrint
             textBox1.Font = new Font("標楷體", 12, FontStyle.Regular);
         }
 
-        //  ===  版面設定按鈕被按時會執行
         private void btnSetup_Click(object sender, EventArgs e)
         {
             if (pageSetupDialog1.ShowDialog() == DialogResult.OK)
@@ -37,13 +35,11 @@ namespace WinPrint
             }
         }
 
-        //  ===  預覽列印按鈕被按時會執行
         private void btnPreview_Click(object sender, EventArgs e)
         {
             printPreviewDialog1.ShowDialog();
         }
 
-        //  ===  列印按鈕被按時會執行
         private void btnPrint_Click(object sender, EventArgs e)
         {
             if (printDialog1.ShowDialog() == DialogResult.OK)
@@ -53,7 +49,6 @@ namespace WinPrint
             }
         }
 
-        //  ===  當printDocument.Print()方法被執行時會被觸發
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             Graphics prnGraph = e.Graphics;
@@ -64,7 +59,6 @@ namespace WinPrint
             prnGraph.DrawString(textBox1.Text, prnFont, prnBrush, left, top);
         }
 
-        //  ===  結束按鈕被按時會執行
         private void btnEnd_Click(object sender, EventArgs e)
         {
             Application.Exit();

@@ -12,14 +12,13 @@ namespace vcs_ReadWrite_XML9
     public partial class Form1 : Form
     {
         string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\person.xml";
+        DataSet ds = new DataSet();
 
         public Form1()
         {
             InitializeComponent();
         }
 
-        DataSet ds = new DataSet();
-        // 表單載入時執行
         private void Form1_Load(object sender, EventArgs e)
         {
             // 讀取XML文件並放入DataSet
@@ -29,7 +28,7 @@ namespace vcs_ReadWrite_XML9
             // 在學生DataTable建立學號欄位為主鍵，主鍵名稱為「PK_學號」
             ds.Tables["學生"].Constraints.Add("PK_學號", dc, true);
         }
-        // 按 [新增] 鈕執行此事件
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             DataRow dr;
@@ -52,7 +51,7 @@ namespace vcs_ReadWrite_XML9
                 MessageBox.Show(txtId.Text + "學號重複，已經有此筆記錄!!", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-        // 按 [更新] 鈕執行此事件 
+
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             DataRow dr;
@@ -70,7 +69,7 @@ namespace vcs_ReadWrite_XML9
                 MessageBox.Show("學號" + txtId.Text + "這筆記錄已經在記憶體更新完成!!");
             }
         }
-        // 按 [刪除] 鈕執行此事件 
+
         private void btnDel_Click(object sender, EventArgs e)
         {
             DataRow dr;
@@ -86,13 +85,12 @@ namespace vcs_ReadWrite_XML9
                 MessageBox.Show("學號" + txtId.Text + "這筆記錄已經在記憶體刪除完成!!");
             }
         }
-        // 按 [整批更新] 鈕執行此事件 
+
         private void btnAllUpdate_Click(object sender, EventArgs e)
         {
             // 將DataSet的資料一次寫回XML文件
             //ds.WriteXml(filename);
             MessageBox.Show("成功的將資料更新到XML檔");
         }
-
     }
 }

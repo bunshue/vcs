@@ -33,6 +33,7 @@
             this.btnCheckLot = new System.Windows.Forms.Button();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // btnCls
@@ -74,7 +75,7 @@
             this.checkedListBox1.Location = new System.Drawing.Point(29, 56);
             this.checkedListBox1.Margin = new System.Windows.Forms.Padding(2);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(670, 324);
+            this.checkedListBox1.Size = new System.Drawing.Size(471, 324);
             this.checkedListBox1.TabIndex = 7;
             // 
             // label1
@@ -87,11 +88,20 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "大樂透-請選擇6個號碼";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(505, 12);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(348, 552);
+            this.richTextBox1.TabIndex = 12;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(865, 576);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btnCls);
             this.Controls.Add(this.lblShow);
             this.Controls.Add(this.btnCheckLot);
@@ -113,6 +123,7 @@
         private System.Windows.Forms.Button btnCheckLot;
         private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

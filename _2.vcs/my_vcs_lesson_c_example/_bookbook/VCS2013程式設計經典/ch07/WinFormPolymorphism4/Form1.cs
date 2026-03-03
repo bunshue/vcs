@@ -23,38 +23,32 @@ namespace WinFormPolymorphism4
             InitializeComponent();
         }
 
-        // 表單載入時執行
         private void Form1_Load(object sender, EventArgs e)
         {
             myCal = myCalAdd;   // myCal參考指向myCalAdd物件
             txtAns.ReadOnly = true;
         }
 
-        // 當 [加] 選項按鈕Checked屬性值變更時執行
         private void rdbAdd_CheckedChanged(object sender, EventArgs e)
         {
             myCal = myCalAdd;   // myCal參考指向myCalAdd物件
         }
 
-        // 當 [減] 選項按鈕Checked屬性值變更時執行
         private void rdbSub_CheckedChanged(object sender, EventArgs e)
         {
             myCal = myCalSub;   // myCal參考指向myCalSub物件
         }
 
-        // 當 [乘] 選項按鈕Checked屬性值變更時執行
         private void rdbMul_CheckedChanged(object sender, EventArgs e)
         {
             myCal = myCalMul;   // myCal參考指向myCalMul物件
         }
 
-        // 當 [除] 選項按鈕Checked屬性值變更時執行
         private void rdbDiv_CheckedChanged(object sender, EventArgs e)
         {
             myCal = myCalDiv;   // myCal參考指向myCalDiv物件
         }
 
-        // 當按下 [計算] 鈕時執行
         private void btnCal_Click(object sender, EventArgs e)
         {
             try
@@ -67,7 +61,6 @@ namespace WinFormPolymorphism4
             }
             catch (Exception ex)
             {
-                // MessageBox.Show方法可顯示對話方塊
                 MessageBox.Show(ex.Message);
             }
         }

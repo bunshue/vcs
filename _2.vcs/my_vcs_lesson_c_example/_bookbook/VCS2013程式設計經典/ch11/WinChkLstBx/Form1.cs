@@ -12,14 +12,14 @@ namespace WinChkLstBx
 {
     public partial class Form1 : Form
     {
+        // 建立pcLot陣列，其陣列元素為pcLot[0]~pcLot[5]
+        // 用來存放本期大樂透的6個號碼
+        int[] pcLot = new int[6];
+
         public Form1()
         {
             InitializeComponent();
         }
-
-        // 建立pcLot陣列，其陣列元素為pcLot[0]~pcLot[5]
-        // 用來存放本期大樂透的6個號碼
-        int[] pcLot = new int[6];
 
         private void Form1_Load(object sender, EventArgs e)
         {
