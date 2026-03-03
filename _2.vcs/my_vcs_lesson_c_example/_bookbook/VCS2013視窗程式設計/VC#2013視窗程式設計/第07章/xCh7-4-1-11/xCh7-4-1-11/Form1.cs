@@ -159,11 +159,5 @@ namespace xCh7_4_1_11
                 printDocument1.Print();
             }
         }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            xCh7_4_1_11AboutBox frmAboutbox = new xCh7_4_1_11AboutBox();
-            frmAboutbox.ShowDialog();
-        }
     }
 }

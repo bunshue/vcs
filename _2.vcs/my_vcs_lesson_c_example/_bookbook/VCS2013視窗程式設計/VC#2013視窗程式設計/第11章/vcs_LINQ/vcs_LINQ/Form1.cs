@@ -109,7 +109,7 @@ namespace vcs_LINQ
             // Step 03. 執行查詢
             foreach (int x in nbrQuery)
             {
-                Console.Write("{0,1} ", x);
+                richTextBox1.Text += x + "\n";
             }
         }
 
@@ -139,10 +139,18 @@ namespace vcs_LINQ
             // Step 03. 執行查詢
             foreach (var studentGroup in booleanGroupQuery)
             {
-                Console.WriteLine(studentGroup.Key == true ? "高分組" : "低分組");
+                if (studentGroup.Key == true)
+                {
+                    richTextBox1.Text += "高分組\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "低分組\n";
+                }
+
                 foreach (var student in studentGroup)
                 {
-                    Console.WriteLine("   {0}: {1}", student.Name, student.Scores.Average());
+                    richTextBox1.Text += string.Format("   {0}: {1}", student.Name, student.Scores.Average()) + "\n";
                 }
             }
         }
@@ -176,10 +184,10 @@ namespace vcs_LINQ
             //Step 03. 執行查詢
             foreach (var wordGroup in wordGroups)
             {
-                Console.WriteLine("以母音: {0} 開頭的群組", wordGroup.Key);
+                richTextBox1.Text += string.Format("以母音: {0} 開頭的群組", wordGroup.Key) + "\n";
                 foreach (var word in wordGroup)
                 {
-                    Console.WriteLine("   {0}", word);
+                    richTextBox1.Text += string.Format("   {0}", word) + "\n";
                 }
             }
         }
@@ -281,7 +289,7 @@ namespace vcs_LINQ
 
             foreach (XElement el in address)
             {
-                Console.WriteLine(el);
+                richTextBox1.Text += el + "\n";
             }
         }
 
@@ -296,15 +304,13 @@ namespace vcs_LINQ
 
             foreach (XElement el in tests)
             {
-                Console.WriteLine("姓名->" + (string)el.Element(XName.Get("姓名")).Value);
-                Console.WriteLine("郵遞區號->" + (string)el.Element(XName.Get("郵遞區號")).Value);
+                richTextBox1.Text += string.Format("姓名->" + (string)el.Element(XName.Get("姓名")).Value) + "\n";
+                richTextBox1.Text += string.Format("郵遞區號->" + (string)el.Element(XName.Get("郵遞區號")).Value) + "\n";
             }
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-
-
             XElement root = XElement.Parse(@"
             <文章>
                 <段落>
@@ -331,8 +337,7 @@ namespace vcs_LINQ
                 (sb, i) => sb.Append(i),
                 sp => sp.ToString()
             );
-
-            Console.WriteLine(str);
+            richTextBox1.Text += str + "\n";
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -350,7 +355,7 @@ namespace vcs_LINQ
 
             XElement xmlTree = XElement.Parse(markup);
 
-            Console.WriteLine("位於 http://www.eTesting.com.tw 名稱空間的元素");
+            richTextBox1.Text += string.Format("位於 http://www.eTesting.com.tw 名稱空間的元素") + "\n";
             var motoElements =
                 from el in xmlTree.Descendants()
                 where el.Name.Namespace == "http://www.eTesting.com.tw"
@@ -362,7 +367,7 @@ namespace vcs_LINQ
 
             foreach (var el in motoElements)
             {
-                Console.WriteLine(el.x + " 的內容是 " + el.y);
+                richTextBox1.Text += el.x + " 的內容是 " + el.y + "\n";
             }
         }
 
@@ -397,7 +402,7 @@ namespace vcs_LINQ
 
             foreach (string str in cList)
             {
-                Console.WriteLine(str);
+                richTextBox1.Text += str + "\n";
             }
         }
 
@@ -431,7 +436,7 @@ namespace vcs_LINQ
 
             foreach (XElement ex in items)
             {
-                Console.WriteLine("分類號 = {0}", (string)ex.Attribute("分類號"));
+                richTextBox1.Text += string.Format("分類號 = {0}", (string)ex.Attribute("分類號")) + "\n";
             }
         }
 
@@ -444,10 +449,10 @@ namespace vcs_LINQ
                 orderby price
                 select price;
 
-            Console.WriteLine("書籍價目表，依價格排序：");
+            richTextBox1.Text += string.Format("書籍價目表，依價格排序：") + "\n";
             foreach (decimal el in prices)
             {
-                Console.WriteLine(el + " 元");
+                richTextBox1.Text += el + " 元\n";
             }
         }
 
@@ -463,9 +468,8 @@ namespace vcs_LINQ
 
             foreach (decimal cost in costs)
             {
-                Console.WriteLine(cost);
+                richTextBox1.Text += cost + "\n";
             }
-
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -518,10 +522,8 @@ namespace vcs_LINQ
 
             foreach (Student2 s in query)
             {
-                Console.WriteLine(s.Name + ": " + s.Scores[0]);
+                richTextBox1.Text += s.Name + ": " + s.Scores[0] + "\n";
             }
-
-
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -603,6 +605,7 @@ namespace vcs_LINQ
         public int[] Scores { get; set; }
     }
 }
+
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個

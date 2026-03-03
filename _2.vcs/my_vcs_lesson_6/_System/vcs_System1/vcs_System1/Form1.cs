@@ -681,6 +681,56 @@ namespace vcs_System1
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //讀取組件資訊
+            // 讀取組件資訊
+            // 專案/右鍵/屬性/應用程式/組件資訊/
+
+            object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
+
+            if (attributes.Length > 0)
+            {
+                AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
+                if (titleAttribute.Title != "")
+                {
+                    string cccc = titleAttribute.Title;
+                    richTextBox1.Text += "標題 : " + cccc + "\n";
+                }
+            }
+            string AssemblyTitle = System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
+            richTextBox1.Text += "標題AssemblyTitle : " + AssemblyTitle + "\n";
+
+            attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
+            if (attributes.Length > 0)
+            {
+                string AssemblyDescription = ((AssemblyDescriptionAttribute)attributes[0]).Description;
+                richTextBox1.Text += "描述AssemblyDescription : " + AssemblyDescription + "\n";
+            }
+
+            attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
+            if (attributes.Length > 0)
+            {
+                string AssemblyCompany = ((AssemblyCompanyAttribute)attributes[0]).Company;
+                richTextBox1.Text += "公司AssemblyCompany : " + AssemblyCompany + "\n";
+            }
+
+            attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
+            if (attributes.Length > 0)
+            {
+                string AssemblyProduct = ((AssemblyProductAttribute)attributes[0]).Product;
+                richTextBox1.Text += "產品AssemblyProduct : " + AssemblyProduct + "\n";
+            }
+
+            attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
+            if (attributes.Length > 0)
+            {
+                string AssemblyCopyright = ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
+                richTextBox1.Text += "著作權AssemblyCopyright : " + AssemblyCopyright + "\n";
+            }
+
+
+            string AssemblyVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            richTextBox1.Text += "組件版本AssemblyVersion : " + AssemblyVersion + "\n";
+
         }
 
         private void button6_Click(object sender, EventArgs e)

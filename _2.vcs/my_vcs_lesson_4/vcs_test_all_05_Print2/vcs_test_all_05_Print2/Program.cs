@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WinPrint
+namespace vcs_test_all_05_Print2
 {
     static class Program
     {
