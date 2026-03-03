@@ -31,10 +31,10 @@ namespace vcs_DataTable1
             int dy;
 
             //button
-            x_st = 15;
-            y_st = 15;
-            dx = 180;
-            dy = 90;
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 10;
+            dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -44,29 +44,41 @@ namespace vcs_DataTable1
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            button8.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button9.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-
-            button16.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button17.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button18.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button19.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button21.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button23.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 50);
-
-            //控件位置
+            dataGridView1.Size = new Size(400, 150);
+            dataGridView1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 40);
+            richTextBox1.Size = new Size(500, 500);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 3);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1273, 784);
+            this.Text = "vcs_DataTable1";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -1046,24 +1058,223 @@ namespace vcs_DataTable1
             return myTb;
         }
 
+        private DataTable MakeTable()
+        {
+            DataTable t = new DataTable("Control");
+            t.Columns.Add("BackColor", typeof(Color));
+            t.Columns.Add("ForeColor", typeof(Color));
+            t.Columns.Add("Text");
+
+            DataRow r;
+
+            r = t.NewRow();
+            r["BackColor"] = Color.Blue;
+            r["ForeColor"] = Color.Yellow;
+            r["Text"] = "藍底黃字";
+            t.Rows.Add(r);
+
+            r = t.NewRow();
+            r["BackColor"] = Color.White;
+            r["ForeColor"] = Color.Green;
+            r["Text"] = "白底綠字";
+            t.Rows.Add(r);
+
+            r = t.NewRow();
+            r["BackColor"] = Color.Orange;
+            r["ForeColor"] = Color.Black;
+            r["Text"] = "橙底黑字";
+            t.Rows.Add(r);
+
+            return t;
+        }
+
         private void button18_Click(object sender, EventArgs e)
         {
-
+            //DataTable用法
+            DataTable t = MakeTable();
+            richTextBox1.Text += t.ToString() + "\n";
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
+            //DataSet轉DataTable
+            //動態建構DataSet
 
+            // 建構DataSet及其組成的資料表
+            DataSet studentsDataSet = new DataSet("StudentsDataSet");
+            DataTable studentTable = new DataTable("StudentTable");
+
+            // 建構資料欄
+            DataColumn idColumn = new DataColumn("編號");
+            DataColumn nameColumn = new DataColumn("姓名");
+            DataColumn schoolColumn = new DataColumn("學歷");
+
+            // 設定「編號」資料欄為自動增加數值
+            idColumn.DataType = Type.GetType("System.Int32");
+            idColumn.AutoIncrement = true;
+
+            // 加入資料欄
+            studentTable.Columns.Add(idColumn);
+            studentTable.Columns.Add(nameColumn);
+            studentTable.Columns.Add(schoolColumn);
+
+            // 將資料表加入DataSet
+            studentsDataSet.Tables.Add(studentTable);
+
+            // 加入記錄
+            DataRow newRow;
+            newRow = studentTable.NewRow();
+            newRow["姓名"] = "唐三藏";
+            newRow["學歷"] = "博士";
+            studentTable.Rows.Add(newRow);
+
+            newRow = studentTable.NewRow();
+            newRow["姓名"] = "孫悟空";
+            newRow["學歷"] = "碩士";
+            studentTable.Rows.Add(newRow);
+
+            newRow = studentTable.NewRow();
+            newRow["姓名"] = "豬八戒";
+            newRow["學歷"] = "學士";
+            studentTable.Rows.Add(newRow);
+
+            // 秀出剛動態建構出來的DataSet 
+            dataGridView1.DataSource = studentsDataSet.Tables["StudentTable"];
         }
 
         private void button20_Click(object sender, EventArgs e)
         {
+            //動態建構DataSet
 
+            // 建構DataSet及其組成的資料表
+            DataSet studentsDataSet = new DataSet("StudentsDataSet");
+            DataTable studentTable = new DataTable("StudentTable");
+
+            // 建構資料欄
+            DataColumn idColumn = new DataColumn("編號");
+            DataColumn nameColumn = new DataColumn("姓名");
+            DataColumn schoolColumn = new DataColumn("學歷");
+
+            // 設定「編號」資料欄為自動增加數值
+            idColumn.DataType = Type.GetType("System.Int32");
+            idColumn.AutoIncrement = true;
+
+            // 加入資料欄
+            studentTable.Columns.Add(idColumn);
+            studentTable.Columns.Add(nameColumn);
+            studentTable.Columns.Add(schoolColumn);
+
+            // 將資料表加入DataSet
+            studentsDataSet.Tables.Add(studentTable);
+
+            // 加入記錄
+            DataRow newRow;
+            newRow = studentTable.NewRow();
+            newRow["姓名"] = "唐三藏";
+            newRow["學歷"] = "博士";
+            studentTable.Rows.Add(newRow);
+
+            newRow = studentTable.NewRow();
+            newRow["姓名"] = "孫悟空";
+            newRow["學歷"] = "碩士";
+            studentTable.Rows.Add(newRow);
+
+            newRow = studentTable.NewRow();
+            newRow["姓名"] = "豬八戒";
+            newRow["學歷"] = "學士";
+            studentTable.Rows.Add(newRow);
+
+            // 秀出剛動態建構出來的DataSet 
+            // 巡覽每一資料表
+            foreach (DataTable thisTable in studentsDataSet.Tables)
+            {
+                // 巡覽每一資料列
+                foreach (DataRow row in thisTable.Rows)
+                {
+                    // 巡覽每一資料欄
+                    foreach (DataColumn column in thisTable.Columns)
+                    {
+                        richTextBox1.AppendText(row[column].ToString());
+                        richTextBox1.AppendText("\t");
+                    }
+                    richTextBox1.AppendText(Environment.NewLine);
+                }
+            }
         }
+
+        private void MakeDataTable()
+        {
+            table = new DataTable("Table");
+            column = new DataColumn("Column");
+            table.Columns.Add(column);
+
+            for (int i = 0; i < 10; i++)
+            {
+                row = table.NewRow();
+                row["Column"] = "紀錄- " + i;
+                table.Rows.Add(row);
+            }
+            table.AcceptChanges();
+        }
+
+        private void PrintView(DataView view, string label)
+        {
+            richTextBox1.AppendText(Environment.NewLine);
+            richTextBox1.AppendText(Environment.NewLine + label);
+
+            string result = "";
+            for (int i = 0; i < view.Count; i++)
+            {
+                richTextBox1.AppendText(Environment.NewLine);
+                richTextBox1.AppendText(view[i]["Column"].ToString());
+                result = "DataViewRow.RowVersion值：" + view[i].RowVersion;
+                richTextBox1.AppendText("，" + result);
+            }
+        }
+
+        private void DemonstrateRowVersion()
+        {
+            DataView view = new DataView(table);
+
+            table.Rows[1]["Column"] = "物件導向";
+
+            row = table.NewRow();
+            row["Column"] = "程式設計";
+            table.Rows.Add(row);
+
+            view.RowStateFilter = DataViewRowState.Added | DataViewRowState.ModifiedCurrent;
+            PrintView(view, "**ModifiedCurrent及Added");
+
+            view.RowStateFilter = DataViewRowState.ModifiedOriginal;
+            PrintView(view, "**顯示已被變更的紀錄(ModifiedOriginal)");
+
+            table.Rows[1].Delete();
+            table.Rows[2].Delete();
+            table.Rows[3].Delete();
+
+            view.RowStateFilter = DataViewRowState.Deleted;
+            PrintView(view, "**顯示已被刪除的紀錄(Deleted)");
+
+            view.RowStateFilter = DataViewRowState.CurrentRows;
+            PrintView(view, "**紀錄是目前的值(Current)");
+
+            view.RowStateFilter = DataViewRowState.Unchanged;
+            PrintView(view, "**紀錄未被變更者(Unchanged)");
+
+            view.RowStateFilter = DataViewRowState.OriginalRows;
+            PrintView(view, "**紀錄含有原始值(OriginalRows)");
+        }
+
+        DataTable table;
+        DataColumn column;
+        DataRow row;
 
         private void button21_Click(object sender, EventArgs e)
         {
-
+            //RowVersion範例
+            //DataTable
+            MakeDataTable();
+            DemonstrateRowVersion();
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -1072,6 +1283,36 @@ namespace vcs_DataTable1
         }
 
         private void button23_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button29_Click(object sender, EventArgs e)
         {
 
         }
