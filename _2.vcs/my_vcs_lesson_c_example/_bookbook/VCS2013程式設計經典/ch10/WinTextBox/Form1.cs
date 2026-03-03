@@ -19,7 +19,6 @@ namespace WinTextBox
             InitializeComponent();
         }
 
-        // 表單載入時執行
         private void Form1_Load(object sender, EventArgs e)
         {
             string[] address = new string[]
@@ -39,11 +38,10 @@ namespace WinTextBox
             txtWebSite.AutoCompleteSource = AutoCompleteSource.HistoryList;
         }
 
-        // 按下 [確定] 時執行
         private void button1_Click(object sender, EventArgs e)
         {
-            // 在對話方塊上顯示使用者輸入的公司, 住址, 網站資訊
-            MessageBox.Show("公司：" + txtCompany.Text + "\n住址：" + txtAddress.Text + "\n網站：" + txtWebSite.Text);
+            // 顯示 公司, 住址, 網站資訊
+            richTextBox1.Text += "公司：" + txtCompany.Text + "\n住址：" + txtAddress.Text + "\n網站：" + txtWebSite.Text + "\n";
         }
     }
 }

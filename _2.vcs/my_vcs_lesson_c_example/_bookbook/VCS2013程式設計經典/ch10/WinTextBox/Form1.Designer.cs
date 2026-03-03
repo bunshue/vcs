@@ -35,62 +35,63 @@
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.txtWebSite = new System.Windows.Forms.TextBox();
             this.OK = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(38, 48);
+            this.label1.Location = new System.Drawing.Point(24, 24);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 20);
+            this.label1.Size = new System.Drawing.Size(52, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "公司 : ";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(38, 93);
+            this.label2.Location = new System.Drawing.Point(24, 69);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 20);
+            this.label2.Size = new System.Drawing.Size(52, 16);
             this.label2.TabIndex = 1;
             this.label2.Text = "住址 : ";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(38, 142);
+            this.label3.Location = new System.Drawing.Point(24, 118);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 20);
+            this.label3.Size = new System.Drawing.Size(48, 16);
             this.label3.TabIndex = 2;
             this.label3.Text = "網站 :";
             // 
             // txtCompany
             // 
-            this.txtCompany.Location = new System.Drawing.Point(101, 45);
+            this.txtCompany.Location = new System.Drawing.Point(87, 21);
             this.txtCompany.Name = "txtCompany";
-            this.txtCompany.Size = new System.Drawing.Size(244, 31);
+            this.txtCompany.Size = new System.Drawing.Size(244, 27);
             this.txtCompany.TabIndex = 3;
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(101, 91);
+            this.txtAddress.Location = new System.Drawing.Point(87, 67);
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(244, 31);
+            this.txtAddress.Size = new System.Drawing.Size(244, 27);
             this.txtAddress.TabIndex = 4;
             // 
             // txtWebSite
             // 
-            this.txtWebSite.Location = new System.Drawing.Point(101, 139);
+            this.txtWebSite.Location = new System.Drawing.Point(87, 115);
             this.txtWebSite.Name = "txtWebSite";
-            this.txtWebSite.Size = new System.Drawing.Size(244, 31);
+            this.txtWebSite.Size = new System.Drawing.Size(244, 27);
             this.txtWebSite.TabIndex = 5;
             // 
             // OK
             // 
-            this.OK.Location = new System.Drawing.Point(254, 195);
+            this.OK.Location = new System.Drawing.Point(240, 171);
             this.OK.Name = "OK";
             this.OK.Size = new System.Drawing.Size(91, 32);
             this.OK.TabIndex = 6;
@@ -98,11 +99,20 @@
             this.OK.UseVisualStyleBackColor = true;
             this.OK.Click += new System.EventHandler(this.button1_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(27, 224);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(431, 310);
+            this.richTextBox1.TabIndex = 7;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(380, 264);
+            this.ClientSize = new System.Drawing.Size(529, 546);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.OK);
             this.Controls.Add(this.txtWebSite);
             this.Controls.Add(this.txtAddress);
@@ -129,6 +139,7 @@
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.TextBox txtWebSite;
         private System.Windows.Forms.Button OK;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

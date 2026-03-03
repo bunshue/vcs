@@ -17,7 +17,6 @@ namespace WinFontColorDialog
             InitializeComponent();
         }
 
-        // ===  表單載入時執行
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Text = "記事本 2.0版";
@@ -29,7 +28,6 @@ namespace WinFontColorDialog
             colorDialog1.FullOpen = true;
         }
 
-        // ===  判斷開啟字型對話方塊時是否按下 [確定] 鈕
         private void 字型ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // 判斷開啟字型對話方塊時是否按下 [確定] 鈕
@@ -42,7 +40,6 @@ namespace WinFontColorDialog
             }
         }
 
-        // ===  執行功能表的 [色彩/前景色] 指令時執行此事件處理函式
         private void 前景色ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // 判斷開啟色彩對話方塊時是否按下 [確定] 鈕
@@ -53,7 +50,6 @@ namespace WinFontColorDialog
             }
         }
 
-        // ===  執行功能表的 [色彩/背景色] 指令時執行此事件處理函式
         private void 背景色ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // 判斷開啟色彩對話方塊時是否沒有按下 [消取] 鈕
@@ -65,4 +61,3 @@ namespace WinFontColorDialog
         }
     }
 }
-

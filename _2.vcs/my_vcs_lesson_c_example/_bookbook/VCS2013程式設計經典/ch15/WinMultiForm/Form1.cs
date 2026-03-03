@@ -17,13 +17,11 @@ namespace WinMultiForm
             InitializeComponent();
         }
 
-        // === 表單載入時執行
         private void frmMain_Load(object sender, EventArgs e)
         {
             lblShow.Text = "";
         }
 
-        // ===  按下 [開啟試算] 鈕執行
         private void btnOpen_Click(object sender, EventArgs e)
         {
             int myMoney = 0, myYear = 0;
@@ -36,7 +34,7 @@ namespace WinMultiForm
             }
             catch (Exception ex)
             {
-                MessageBox.Show("請輸入正確的數值資料");
+                MessageBox.Show("請輸入正確的數值資料" + ex.ToString());
                 return;
             }
             frmCal f = new frmCal(); //宣告並建立frmCal表單類別的f物件

@@ -41,8 +41,8 @@ namespace vcs_Dictionary
             //button
             x_st = 10;
             y_st = 10;
-            dx = 180;
-            dy = 70;
+            dx = 200 + 10;
+            dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -55,9 +55,17 @@ namespace vcs_Dictionary
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
+            richTextBox1.Size = new Size(800, 690);
             richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1050, 750);
+            this.Text = "vcs_Dictionary";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -257,6 +265,21 @@ namespace vcs_Dictionary
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //Dictionary字典用法3
+            Dictionary<string, Member> m = new Dictionary<string, Member>();
+
+            m.Add("David", new Member() { Name = "David", Select = true, Score = 70 });
+            m.Add("Mary", new Member() { Name = "Mary", Select = false, Score = 65 });
+            m.Add("Tom", new Member() { Name = "Tom", Select = true, Score = 85 });
+            m.Add("Jack", new Member() { Name = "Jack", Select = true, Score = 95 });
+
+            //泛型陣列操作
+            Console.WriteLine("=== 泛型 Dictionary 操作不需強制轉換 .... \n");
+            foreach (KeyValuePair<string, Member> item in m)
+            {
+                Console.WriteLine(" 姓名:{0} \t 選課:{1}  \t  成績:{2}  \n", item.Key, item.Value.Select, item.Value.Score);
+            }
+            Console.Read();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -319,5 +342,13 @@ namespace vcs_Dictionary
             }
         }
     }
+
+    class Member
+    {
+        public string Name { get; set; }      // 姓名屬性          
+        public bool Select { get; set; }      // 選課屬性
+        public int Score { get; set; }        // 成績屬性           
+    }
 }
+
 

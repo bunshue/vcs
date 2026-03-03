@@ -56,7 +56,6 @@ namespace WinListCombo
             lstJob.SelectedIndex = 0;   // lstJob清單預設第1個選項被選取
         }
 
-        // 按新增鈕執行
         private void btnAdd_Click(object sender, EventArgs e)
         {
             if (cboName.Text == "")  // 檢查姓名是否為空字串
@@ -81,7 +80,7 @@ namespace WinListCombo
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("生日有誤");
+                    MessageBox.Show("生日有誤" + ex.ToString());
                     return;  // 如果生日有誤即離開此事件處理函式
                 }
                 // 將姓名下拉式清單所輸入的值放入下拉式清單的選項內
