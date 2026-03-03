@@ -17,7 +17,9 @@ namespace CH0809
          };
             //foreach廻圈讀取物件並呼叫方法
             foreach (Car item in cars)
+            {
                 item.Display();
+            }
             Console.ReadKey();
         }
     }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Console;
 
 namespace CH0806
 {
@@ -16,8 +15,7 @@ namespace CH0806
         public void Display(ushort ht)
         {
             Height = ht;
-            WriteLine($"他是 {FirstName} {SurName}," +
-               $" 身高 {Height}cm");
+            Console.WriteLine("他是 {FirstName} {SurName}," +               " 身高 {Height}cm");
         }
     }
 }

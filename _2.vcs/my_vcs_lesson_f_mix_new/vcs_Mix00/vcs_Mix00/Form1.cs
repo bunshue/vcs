@@ -1732,7 +1732,22 @@ namespace vcs_Mix00
 
         private void button33_Click(object sender, EventArgs e)
         {
+            List<Person> persons1 = new List<Person>();
+            persons1.Add(new Person("张三", "男", 20, 1500));
+            persons1.Add(new Person("王成", "男", 32, 3200));
+            persons1.Add(new Person("李丽", "女", 19, 1700));
+            persons1.Add(new Person("何英", "女", 35, 3600));
+            persons1.Add(new Person("何英", "女", 18, 1600));
 
+            //Console.WriteLine("泛型分组如下：");
+            richTextBox1.Text += "泛型分组如下：\n";
+
+            var ls = persons1.GroupBy(a => a.Sex).Select(g => (new { sex = g.Key, count = g.Count(), ageC = g.Sum(item => item.Age), moneyC = g.Sum(item => item.Money) }));
+            foreach (var item in ls)
+            {
+                //Console.WriteLine(item.sex + "  " + item.count + "  " + item.ageC + "   " + item.moneyC);
+                richTextBox1.Text += item.sex + "  " + item.count + "  " + item.ageC + "   " + item.moneyC + "\n";
+            }
         }
 
         private void button34_Click(object sender, EventArgs e)
@@ -2900,5 +2915,20 @@ namespace vcs_Mix00
             return ch;
         }
     }
-}
 
+    public class Person
+    {
+        public string Name { get; set; }
+        public int Age { get; private set; }
+        public string Sex { get; set; }
+        public int Money { get; set; }
+
+        public Person(string name, string sex, int age, int money)
+        {
+            Name = name;
+            Age = age;
+            Sex = sex;
+            Money = money;
+        }
+    }
+}

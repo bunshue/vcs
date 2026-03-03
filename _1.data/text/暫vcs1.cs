@@ -191,6 +191,19 @@ Microsoft SQL Server 的主資料庫檔案（Master Database File），通常與
                 this.dataGridView1.DataSource = ds.Tables[0].DefaultView;
 
 
+6060
+
+C# 6.0 是隨 Visual Studio 2015 發布的 C# 版本，專注於提升開發效率、代碼簡潔性及可讀性，
+引入了自動屬性初始化器、字串插補 ($"")、Null 傳遞運算子 (?.)、Nameof 運算子等重要特性，顯著減少了樣板代碼。
+C# 6.0 旨在讓代碼更精簡，是 .NET 開發中一個重要的生產力提升版本。
+
+1.自動屬性初始化器 (Auto-Property Initializers)： 可以在屬性定義時直接賦值。
+	public string Name { get; set; } = "Unknown";
+
+2.字串插補 (String Interpolation)： 使用 $ 符號直接在字串中嵌入變數，比 string.Format 更直觀。
+	var s = $"Hello, {name}";
+
+
 
 
 

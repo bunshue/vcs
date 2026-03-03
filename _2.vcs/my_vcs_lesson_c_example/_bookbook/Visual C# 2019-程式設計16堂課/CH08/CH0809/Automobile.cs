@@ -6,15 +6,13 @@ using System.Threading.Tasks;
 
 namespace CH0809
 {
-
     class Automobile : Car   //子類別
     {
         private float engine;   //排氣量
         public string Hue { get; set; }
 
         //定義建構函式– base()方法取得父類別屬性
-        public Automobile(string carName, string tint,
-              float engine) : base(carName)
+        public Automobile(string carName, string tint,              float engine) : base(carName)
         {
             Hue = tint;
             this.engine = engine;
@@ -26,7 +24,6 @@ namespace CH0809
 
         //覆寫父類別方法 - 要加關鍵字override
         public override void Display() =>
-           Console.WriteLine($"{Name,7} {Hue}," +
-              $" 排氣量 {Pde:f2}L");
+           Console.WriteLine("{Name,7} {Hue}," +              " 排氣量 {Pde:f2}L");
     }
 }

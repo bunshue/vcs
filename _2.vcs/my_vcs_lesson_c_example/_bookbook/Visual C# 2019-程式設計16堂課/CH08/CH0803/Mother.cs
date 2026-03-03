@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Console;
 
 namespace CH0803
 {
@@ -23,8 +22,6 @@ namespace CH0803
         }
 
         //成員方法-運算式主體定義
-        public void Display() => WriteLine(
-           $"{Firstname} {Surname}\n" +
-           $"{Hair}, 身高 {Height}cm");
+        public void Display() => Console.WriteLine(           "{Firstname} {Surname}\n" +           "{Hair}, 身高 {Height}cm");
     }
 }

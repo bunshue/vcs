@@ -19,8 +19,7 @@ namespace CH0808
         {
             int hourMoney = 227;
             prtSalary = hourMoney * 5 * 20;
-            Console.WriteLine(
-               $"兼職員工 {Name,7} 薪水 {prtSalary:C0}");
+            Console.WriteLine("兼職員工 {Name,7} 薪水 {prtSalary:C0}");
         }
     }
 }

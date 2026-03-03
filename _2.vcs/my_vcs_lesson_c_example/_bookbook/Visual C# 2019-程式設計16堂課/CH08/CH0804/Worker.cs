@@ -10,13 +10,12 @@ namespace CH0804
     {
         //利用base()方法呼叫基底類別的建構函式來使用
         public Worker(string Name, int pay)
-              : base(Name, pay) { }
+            : base(Name, pay) { }
 
         public void hireTime()
         {
             DateTime startDate = DateTime.Today;
-            Console.WriteLine("雇用日期：{0}",
-               startDate.ToShortDateString());
+            Console.WriteLine("雇用日期：{0}", startDate.ToShortDateString());
         }
     }
 }

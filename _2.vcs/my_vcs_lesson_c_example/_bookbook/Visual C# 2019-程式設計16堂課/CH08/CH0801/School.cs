@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Console;
 
 namespace CH0801
 {
@@ -25,12 +24,12 @@ namespace CH0801
         public void ShowMsg()
         {
             string title = "科目", course = "教室";
-            WriteLine($"{title,-9}{course,-6}老師");
+            Console.WriteLine("{title,-9}{course,-6}老師");
 
             string sign = new string('*', 30);
-            WriteLine(sign);
+            Console.WriteLine(sign);
 
-            WriteLine($"{Subject} AB{Room} {Teacher}");
+            Console.WriteLine("{Subject} AB{Room} {Teacher}");
         }
     }
 }

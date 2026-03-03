@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Console;
 
 namespace CH0711
 {
@@ -28,7 +27,7 @@ namespace CH0711
             //讀取陣列元素
             foreach (byte item in number)
             {
-                Console.Write($"{item}, 3");
+                Console.Write("{item}, 3");
             }
             Console.ReadKey();
         }

@@ -12,7 +12,8 @@ namespace CH0807
         public int Subsidy { get; set; }
 
         //以base()取得父類別的建構函式
-        public Worker(string title) : base(title)
+        public Worker(string title)
+            : base(title)
         {
             Job = title;
         }
@@ -25,7 +26,7 @@ namespace CH0807
             else if (grade == 2)
                 Subsidy = 800;
             else
-                Subsidy = 1_200;
+                Subsidy = 1200;
             return Subsidy;
         }
     }

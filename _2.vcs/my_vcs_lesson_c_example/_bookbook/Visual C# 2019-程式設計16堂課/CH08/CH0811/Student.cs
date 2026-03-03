@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Console;
 
 namespace CH0811
 {
@@ -48,8 +47,8 @@ namespace CH0811
         public void Display()
         {
             //每學分費用
-            int accout = 1_470, total = 0;
-            int pay = 8_500;//研究生指導費
+            int accout = 1470, total = 0;
+            int pay = 8500;//研究生指導費
 
             //Grade = 1為一般生，Grade = 2為研究生
             if (Grade == 1)
@@ -57,8 +56,7 @@ namespace CH0811
             else if (Grade == 2)
                 total = Course * accout + pay;
 
-            WriteLine($"{Title,-5} {msg,4} {Course,4}" +
-               $"{total,10:c0}");
+            Console.WriteLine("{Title,-5} {msg,4} {Course,4}" + "{total,10:c0}");
         }
     }
 }

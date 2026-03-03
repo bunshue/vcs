@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Console;
-
 
 namespace CH0801
 {
@@ -16,7 +14,7 @@ namespace CH0801
 
         public Subjects()   //建構函式
         {
-            Cost = 3_500; //學分費
+            Cost = 3500; //學分費
             Grade = 4;    //學分數
         }
 
@@ -27,17 +25,17 @@ namespace CH0801
         public void Display(int sts)
         {
             string sign = new string('-', 30);
-            WriteLine(sign);
+            Console.WriteLine(sign);
             string st1 = "選修學生", st2 = "學分";
             string st3 = "學分費", st4 = "費用";
 
             if (sts < 15)
-                WriteLine("法定人數不足...");
+                Console.WriteLine("法定人數不足...");
             else
             {
-                WriteLine($"{st1,4} {st2} {st3} {st4}");
-                Write($" {sts,7}{Grade,4} ");
-                WriteLine($"{Cost,7:N0}{Amount,10:c0}");
+                Console.WriteLine("{st1,4} {st2} {st3} {st4}");
+                Console.Write(" {sts,7}{Grade,4} ");
+                Console.WriteLine("{Cost,7:N0}{Amount,10:c0}");
             }
         }
     }

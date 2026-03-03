@@ -20,8 +20,6 @@ namespace CH0803
         }
 
         //成員方法
-        public void Show() => Console.WriteLine(
-           $"{Title} {Surname}\n" +
-           $"{Hair}, 身高 {Height}cm");
+        public void Show() => Console.WriteLine(           "{Title} {Surname}\n" +           "{Hair}, 身高 {Height}cm");
     }
 }

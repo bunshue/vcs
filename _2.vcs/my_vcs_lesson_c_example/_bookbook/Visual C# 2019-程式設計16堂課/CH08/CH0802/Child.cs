@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Console;
 
 namespace CH0802
 {
@@ -19,7 +18,7 @@ namespace CH0802
         public void Display()
         {
             //屬性Surname為父類別擁有
-            WriteLine($"Hi {Firstname}, {Surname}");
+            Console.WriteLine("Hi {Firstname}, {Surname}");
         }
     }
 }

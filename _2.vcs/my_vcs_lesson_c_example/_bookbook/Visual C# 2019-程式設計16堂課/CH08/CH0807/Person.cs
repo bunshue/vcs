@@ -22,11 +22,11 @@ namespace CH0807
         public virtual int Display(int grade)
         {
             if (grade == 1)
-                Salary = 28_500;
+                Salary = 28500;
             else if (grade == 2)
-                Salary = 32_500;
+                Salary = 32500;
             else if (grade == 3)
-                Salary = 35_200;
+                Salary = 35200;
 
             return Salary;
         }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Console;
 
 namespace CH0804
 {
@@ -18,7 +17,7 @@ namespace CH0804
         {
             Name = title;
             baseSalary = wage;
-            WriteLine($"{Name}，薪水 {baseSalary:C0}");
+            Console.WriteLine("{Name}，薪水 {baseSalary:C0}");
         }
     }
 }

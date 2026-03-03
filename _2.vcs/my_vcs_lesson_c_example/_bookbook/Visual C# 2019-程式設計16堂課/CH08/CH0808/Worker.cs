@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Console;
 
 namespace CH0808
 {
@@ -16,12 +15,12 @@ namespace CH0808
 
         public void Display()//成員方法
         {
-            Write($"{Name} ");
+            Console.Write("{Name} ");
             TotalSalary();
         }
 
         //定義虛擬方法：採運算式主體定義，子類別可覆寫
         public virtual void TotalSalary() =>
-           WriteLine("基本薪 NT$ 22,500");
+           Console.WriteLine("基本薪 NT$ 22,500");
     }
 }

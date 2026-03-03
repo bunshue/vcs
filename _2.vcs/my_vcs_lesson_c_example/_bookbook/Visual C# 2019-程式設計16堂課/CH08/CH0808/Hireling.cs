@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Console;
 
 namespace CH0808
 {
@@ -21,9 +20,9 @@ namespace CH0808
         public override void TotalSalary()
         {
             //基本薪 money, 津貼 subsidy
-            int money = 22_500, subsidy = 7_500;
+            int money = 22500, subsidy = 7500;
             Salary = money + subsidy;
-            WriteLine($"正式員工{Name,8} 薪水 {Salary:C0}");
+            Console.WriteLine("正式員工{Name,8} 薪水 {Salary:C0}");
         }
     }
 }
