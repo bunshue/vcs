@@ -14,15 +14,17 @@ namespace 產品管理
     {
         //宣告cnStr連線字串置於事件處理函式外，以提供給其他事件處理函式共用
         String cnStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True;Connect Timeout=30";
+
         //GetCategory()方法可傳回產品類別的DataTable
-        public DataTable  GetCategory()
+        public DataTable GetCategory()
         {
             SqlConnection cn = new SqlConnection(cnStr);
             SqlDataAdapter da = new SqlDataAdapter("SELECT * From 產品類別", cn);
             DataSet ds = new DataSet();
             da.Fill(ds);
-            return  ds.Tables[0];
+            return ds.Tables[0];
         }
+
         //GetProduct()方法可依傳入的類別編號來傳回指定的產品資料的DataTable
         public DataTable GetProduct(int CategoryId)
         {
@@ -32,6 +34,7 @@ namespace 產品管理
             da.Fill(ds);
             return ds.Tables[0];
         }
+
         //Edit()方法可依傳入的SQL陳述式對指定的資料表進行新增、修改、刪除
         public void Edit(string SqlCmd)
         {
@@ -43,7 +46,7 @@ namespace 產品管理
                 cmd.CommandText = SqlCmd;
                 cmd.Connection = cn;
                 cmd.ExecuteNonQuery();
-                cn.Close();      
+                cn.Close();
             }
             catch (Exception ex)
             {

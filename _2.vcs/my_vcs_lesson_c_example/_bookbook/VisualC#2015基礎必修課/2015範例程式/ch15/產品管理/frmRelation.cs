@@ -12,19 +12,18 @@ namespace 產品管理
 {
     public partial class frmRelation : Form
     {
+        //建立MyDBClass類別物件db，來管理Database1.mdf資料庫
+        MyDBClass db = new MyDBClass();
+
         public frmRelation()
         {
             InitializeComponent();
         }
 
-        //建立MyDBClass類別物件db，來管理Database1.mdf資料庫
-        MyDBClass db = new MyDBClass();
-
-        //表單載入時執行
         private void frmRelation_Load(object sender, EventArgs e)
         {
             dgvCategory.DataSource = db.GetCategory();
-            dgvCategory.Dock = DockStyle.Top;  
+            dgvCategory.Dock = DockStyle.Top;
             dgvProduct.Dock = DockStyle.Fill;
             //取得目前產品類別dgvCategory所選取記錄的第一欄資料，即類別編號
             //並指定給CategoryId整數變數
@@ -33,6 +32,7 @@ namespace 產品管理
             //接著將產品資料顯示在dgvProduct上
             dgvProduct.DataSource = db.GetProduct(CategoryId);
         }
+
         //產品類別dgvCategory上按一下執行
         private void dgvCategory_Click(object sender, EventArgs e)
         {
@@ -41,8 +41,8 @@ namespace 產品管理
                 int CategoryId = int.Parse(dgvCategory.CurrentRow.Cells[0].Value.ToString());
                 dgvProduct.DataSource = db.GetProduct(CategoryId);
             }
-            catch(Exception ex)
-            {}
+            catch (Exception ex)
+            { }
         }
     }
 }

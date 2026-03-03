@@ -31,15 +31,16 @@ namespace CH1301
             //依設定值，文字方塊的文字會以新字型來載入
             rtxtShow.Font = new Font(StrFont, StrFontSize, StrFontStyle);
         }
-        //將字變成大寫
+
         private void Upper_menuItem_Click(object sender, EventArgs e)
         {
+            //將字變成大寫
             rtxtShow.Text = rtxtShow.Text.ToUpper();
         }
 
-        //將字變成小寫
         private void Lower_menuItem_Click(object sender, EventArgs e)
         {
+            //將字變成小寫
             rtxtShow.Text = rtxtShow.Text.ToLower();
         }
 

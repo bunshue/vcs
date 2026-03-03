@@ -12,20 +12,14 @@ namespace 產品管理
 {
     public partial class frmProduct : Form
     {
+        //建立MyDBClass類別物件db，來管理Database1.mdf資料庫
+        MyDBClass db = new MyDBClass();
+
         public frmProduct()
         {
             InitializeComponent();
         }
 
-        //建立MyDBClass類別物件db，來管理Database1.mdf資料庫
-        MyDBClass db = new MyDBClass();
-
-        void TextBoxClear()  //清除文字方塊欄位
-        {
-            txtName.Text = txtPrice.Text = txtMsg.Text = "" ;
-        }
-
-        //表單載入時
         private void frmProduct_Load(object sender, EventArgs e)
         {
             //將產品類別顯示在清單中   
@@ -36,8 +30,14 @@ namespace 產品管理
             int CategoryId = int.Parse(cboCategoryId.SelectedValue.ToString());
             //呼叫GetProduct()方法並傳入類別編號
             //依類別編號取得指定的產品資料並顯示於dataGridView1上
-            dataGridView1.DataSource = db.GetProduct(CategoryId);      
+            dataGridView1.DataSource = db.GetProduct(CategoryId);
         }
+
+        void TextBoxClear()  //清除文字方塊欄位
+        {
+            txtName.Text = txtPrice.Text = txtMsg.Text = "";
+        }
+
         //選取類別編號下拉式清單時執行
         private void cboCategoryId_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -79,8 +79,7 @@ namespace 產品管理
         //按刪除鈕
         private void btnDel_Click(object sender, EventArgs e)
         {
-            db.Edit("DELETE FROM 產品資料 WHERE 產品編號=" +
-                dataGridView1.CurrentRow.Cells[0].Value.ToString());
+            db.Edit("DELETE FROM 產品資料 WHERE 產品編號=" + dataGridView1.CurrentRow.Cells[0].Value.ToString());
             int CategoryId = int.Parse(cboCategoryId.SelectedValue.ToString());
             dataGridView1.DataSource = db.GetProduct(CategoryId);
             TextBoxClear();

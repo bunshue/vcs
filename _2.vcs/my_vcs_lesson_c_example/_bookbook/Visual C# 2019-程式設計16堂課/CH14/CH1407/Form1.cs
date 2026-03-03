@@ -28,7 +28,6 @@ namespace CH1407
 
         }
 
-        //按下「預覽列印」按鈕
         private void btnPreview_Click(object sender, EventArgs e)
         {
             ReadPrintFile();
@@ -38,16 +37,12 @@ namespace CH1407
             dlgPreview.ShowDialog();//顯示預覽列印對話方塊
         }
 
-        //列印文件的PrintPage()事件處理
         private void OnPaper_PrintPage(object sender, PrintPageEventArgs ev)
         {
             int charsPerPage = 0;//統計每頁字元
             int morePages = 0; //統計頁數        
             Graphics gs = ev.Graphics;
-            gs.MeasureString(readToPrint, printFont,
-               ev.MarginBounds.Size,
-               StringFormat.GenericTypographic,
-               out charsPerPage, out morePages);
+            gs.MeasureString(readToPrint, printFont, ev.MarginBounds.Size, StringFormat.GenericTypographic, out charsPerPage, out morePages);
 
             //依據檔案內容繪製列印內容
             gs.DrawString(readToPrint, printFont, Brushes.Black, ev.MarginBounds, StringFormat.GenericTypographic);
@@ -61,7 +56,6 @@ namespace CH1407
             }
         }
 
-        //按下「列印」按鈕
         private void btnPrint_Click(object sender, EventArgs e)
         {
             ReadPrintFile();//呼叫載入檔案方法

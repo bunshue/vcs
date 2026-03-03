@@ -42,7 +42,7 @@
             this.系統功能ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(482, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(649, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -59,21 +59,21 @@
             // 產品類別管理ToolStripMenuItem
             // 
             this.產品類別管理ToolStripMenuItem.Name = "產品類別管理ToolStripMenuItem";
-            this.產品類別管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.產品類別管理ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.產品類別管理ToolStripMenuItem.Text = "產品類別管理";
             this.產品類別管理ToolStripMenuItem.Click += new System.EventHandler(this.產品類別管理ToolStripMenuItem_Click);
             // 
             // 產品資料管理ToolStripMenuItem
             // 
             this.產品資料管理ToolStripMenuItem.Name = "產品資料管理ToolStripMenuItem";
-            this.產品資料管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.產品資料管理ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.產品資料管理ToolStripMenuItem.Text = "產品資料管理";
             this.產品資料管理ToolStripMenuItem.Click += new System.EventHandler(this.產品資料管理ToolStripMenuItem_Click);
             // 
             // 產品關聯查詢ToolStripMenuItem
             // 
             this.產品關聯查詢ToolStripMenuItem.Name = "產品關聯查詢ToolStripMenuItem";
-            this.產品關聯查詢ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.產品關聯查詢ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.產品關聯查詢ToolStripMenuItem.Text = "產品關聯查詢";
             this.產品關聯查詢ToolStripMenuItem.Click += new System.EventHandler(this.產品關聯查詢ToolStripMenuItem_Click);
             // 
@@ -81,13 +81,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(482, 410);
+            this.ClientSize = new System.Drawing.Size(649, 496);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMain";
             this.Text = "產品管理系統";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

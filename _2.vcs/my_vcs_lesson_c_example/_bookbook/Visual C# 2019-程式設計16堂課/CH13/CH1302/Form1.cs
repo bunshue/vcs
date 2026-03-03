@@ -35,11 +35,17 @@ namespace CH1302
         private void tscobFont_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tscobFont.SelectedIndex == 0)
+            {
                 rtxtShow.Font = new Font("Arial", 12);
+            }
             else if (tscobFont.SelectedIndex == 1)
+            {
                 rtxtShow.Font = new Font("Garamond", 14);
+            }
             else
+            {
                 rtxtShow.Font = new Font("Times New Roman", 16);
+            }
         }
     }
 }

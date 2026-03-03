@@ -17,6 +17,11 @@ namespace 產品管理
             InitializeComponent();
         }
 
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void 產品類別管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //建立frmCategory子表單物件ChildForm
@@ -41,3 +46,4 @@ namespace 產品管理
         }
     }
 }
+
