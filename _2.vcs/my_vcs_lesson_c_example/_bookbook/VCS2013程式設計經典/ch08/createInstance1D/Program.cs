@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Collections;  // 若此行有寫入，第21行System.Collectios.可省略 
+using System.Collections;
 
 namespace createInstance1D
 {
@@ -15,10 +15,12 @@ namespace createInstance1D
             Array ary1D = Array.CreateInstance(typeof(Int32), 5);
             // 設定陣列初值依序為:1,2,3,4,5
             for (int i = ary1D.GetLowerBound(0); i <= ary1D.GetUpperBound(0); i++)
+            {
                 ary1D.SetValue(i + 1, i);
+            }
 
             // 顯示陣列初值            
-            System.Collections.IEnumerator myEnumerator = ary1D.GetEnumerator();
+            IEnumerator myEnumerator = ary1D.GetEnumerator();
             int k = 0;
             int cols = ary1D.GetLength(ary1D.Rank - 1);
             while (myEnumerator.MoveNext())
@@ -38,3 +40,4 @@ namespace createInstance1D
         }
     }
 }
+

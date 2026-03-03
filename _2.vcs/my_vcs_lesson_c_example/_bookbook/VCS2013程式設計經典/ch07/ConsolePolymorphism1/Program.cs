@@ -30,6 +30,7 @@ namespace ConsolePolymorphism1
             }
         }
     }
+
     class Manager : Employee  // Manager經理類別繼承自Employee員工類別
     {
         // 增加Bounds獎金屬性
@@ -63,13 +64,13 @@ namespace ConsolePolymorphism1
     {
         static void Main(string[] args)
         {
-           Manager peter = new Manager();
-           peter.Salary = 70000;
-           Console.WriteLine("\n Peter 經理的薪資 : {0}元", peter.Salary.ToString("0,0"));
-           peter.Bonus = 30000;
-           Console.WriteLine("\n Peter 經理的獎金 : {0}元", peter.Bonus.ToString("0,0"));
-           peter.ShowTotal();
-           Console.Read();
+            Manager peter = new Manager();
+            peter.Salary = 70000;
+            Console.WriteLine("\n Peter 經理的薪資 : {0}元", peter.Salary.ToString("0,0"));
+            peter.Bonus = 30000;
+            Console.WriteLine("\n Peter 經理的獎金 : {0}元", peter.Bonus.ToString("0,0"));
+            peter.ShowTotal();
+            Console.Read();
         }
     }
 }

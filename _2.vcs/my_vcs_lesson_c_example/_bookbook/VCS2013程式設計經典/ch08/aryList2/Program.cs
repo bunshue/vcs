@@ -33,12 +33,14 @@ namespace aryList2
 
             Console.Read();
         }
+
         public static void PrintOut(IEnumerable myAryLst)
         {
             int i = 0;
             foreach (Object obj in myAryLst)
-                Console.WriteLine("\t第{0}個元素 : {1} ", ++i, obj);         
+            {
+                Console.WriteLine("\t第{0}個元素 : {1} ", ++i, obj);
+            }
         }
-
     }
 }

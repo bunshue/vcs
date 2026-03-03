@@ -160,7 +160,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(377, 283);
+            this.ClientSize = new System.Drawing.Size(577, 496);
             this.Controls.Add(this.btnCal);
             this.Controls.Add(this.rdbDiv);
             this.Controls.Add(this.rdbMul);

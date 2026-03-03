@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsolePolymorphism3", "ConsolePolymorphism3.csproj", "{DB17A09C-2C0C-4980-B8A4-392C63E635C9}"
 EndProject
 Global

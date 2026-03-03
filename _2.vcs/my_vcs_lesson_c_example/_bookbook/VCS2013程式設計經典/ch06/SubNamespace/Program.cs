@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
- namespace IBM
- {
+namespace IBM
+{
     namespace Taiwan            // 子命名空間 Taiwan
     {
         class Notebook
@@ -20,12 +20,12 @@ using System.Threading.Tasks;
     }
 }
 
- namespace Apple
- {
-     class Notebook
-     {
-     }
- }
+namespace Apple
+{
+    class Notebook
+    {
+    }
+}
 
 namespace SubNamespace
 {
@@ -34,11 +34,11 @@ namespace SubNamespace
         static void Main(string[] args)
         {
             // 使用IBM的Taiwan子命名空間下的Notebook類別建立A物件
-             IBM.Taiwan.Notebook A = new IBM.Taiwan.Notebook();
-             // 使用IBM的Japan子命名空間下的Notebook類別建立A物件
-             IBM.Japan.Notebook B = new IBM.Japan.Notebook();
-             // 使用Apple命名空間下的Notebook類別建立C物件
-             Apple.Notebook C = new Apple.Notebook();
-         }
+            IBM.Taiwan.Notebook A = new IBM.Taiwan.Notebook();
+            // 使用IBM的Japan子命名空間下的Notebook類別建立A物件
+            IBM.Japan.Notebook B = new IBM.Japan.Notebook();
+            // 使用Apple命名空間下的Notebook類別建立C物件
+            Apple.Notebook C = new Apple.Notebook();
+        }
     }
 }

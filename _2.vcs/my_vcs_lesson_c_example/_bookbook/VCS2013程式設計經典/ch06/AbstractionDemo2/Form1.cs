@@ -16,12 +16,18 @@ namespace AbstractionDemo2
         {
             InitializeComponent();
         }
-        
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         // 定義Shape列舉內含Circle、Line、Arc用來表示要畫的圖形
-        enum Shape:int
+        enum Shape : int
         {
             Circle = 0, Line = 1, Arc = 2
         }
+
         // 定義Draw方法用來在表單上繪製圖形
         // 若vType等於0則畫圓, vType等於1則畫線, vType等於2則畫弧形
         private void Draw(Shape vType)
@@ -32,20 +38,19 @@ namespace AbstractionDemo2
             g.Clear(Color.White);        // 清除畫布
             switch (vType)
             {
-                case Shape.Circle :
+                case Shape.Circle:
                     g.DrawEllipse(p, 90, 30, 90, 90);      // 畫圓
                     break;
-                case Shape.Line :
+                case Shape.Line:
                     g.DrawLine(p, 90, 50, 180, 100);       // 畫線
                     break;
-                case Shape.Arc :
+                case Shape.Arc:
                     g.DrawArc(p, 90, 30, 90, 90, 0, 250);  // 畫弧形
                     break;
             }
         }
-        // 按 [畫圓] 鈕執行btnCircle_Click事件處理函式 
+        // 按 [畫圓] 鈕執行btnCircle_Click事件處理函式
 
-        
         private void btnCircle_Click(object sender, EventArgs e)
         {
             Draw(Shape.Circle);
@@ -60,6 +65,5 @@ namespace AbstractionDemo2
         {
             Draw(Shape.Arc);
         }
-
     }
 }

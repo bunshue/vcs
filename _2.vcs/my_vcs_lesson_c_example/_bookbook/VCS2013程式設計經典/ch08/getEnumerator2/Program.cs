@@ -28,7 +28,9 @@ namespace GetEnumerator2
             Console.WriteLine("\n myAry 陣列元素內容如下 :\n");
             // 依序透過MoveNext方法指標下移一個項目,current屬性讀取陣列元素
             while ((myEnumerator.MoveNext()) && (myEnumerator.Current != null))
+            {
                 Console.WriteLine(" myAry[{0}] = {1}", i++, myEnumerator.Current);
+            }
             Console.Read();
         }
     }

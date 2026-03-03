@@ -1732,22 +1732,62 @@ namespace vcs_Mix00
 
         private void button33_Click(object sender, EventArgs e)
         {
-            List<Person> persons1 = new List<Person>();
-            persons1.Add(new Person("张三", "男", 20, 1500));
-            persons1.Add(new Person("王成", "男", 32, 3200));
-            persons1.Add(new Person("李丽", "女", 19, 1700));
-            persons1.Add(new Person("何英", "女", 35, 3600));
-            persons1.Add(new Person("何英", "女", 18, 1600));
+            Car1 Benz1 = new Car1();
+            Benz1.SetSpeed(500);			// 速度值超過 200
+            Console.WriteLine("Benz1.GetSpeed() = {0}", Benz1.GetSpeed());	// 顯示速度最大值200
+            Console.Read();
 
-            //Console.WriteLine("泛型分组如下：");
-            richTextBox1.Text += "泛型分组如下：\n";
+            //3030
 
-            var ls = persons1.GroupBy(a => a.Sex).Select(g => (new { sex = g.Key, count = g.Count(), ageC = g.Sum(item => item.Age), moneyC = g.Sum(item => item.Money) }));
-            foreach (var item in ls)
-            {
-                //Console.WriteLine(item.sex + "  " + item.count + "  " + item.ageC + "   " + item.moneyC);
-                richTextBox1.Text += item.sex + "  " + item.count + "  " + item.ageC + "   " + item.moneyC + "\n";
-            }
+            Car2 Benz2 = new Car2();
+            Benz2.Speed = 199;
+            Console.WriteLine("現在速度:{0}", Benz2.Speed);
+            Console.WriteLine("加速 ...");
+            Benz2.Accelerate();
+            Console.WriteLine("現在速度:{0}", Benz2.Speed);
+            Console.WriteLine("加速 ...");
+            Benz2.Accelerate();
+            Console.WriteLine("現在速度:{0}", Benz2.Speed);
+            Console.Read();
+
+            //3030
+
+            Student1 Peter = new Student1();
+            Console.WriteLine(" Peter的資料-->使用Student()建構式");
+            Peter.GetShow();
+            Student1 David = new Student1(56);
+            Console.WriteLine(" David的資料-->使用Student(56)建構式");
+            David.GetShow();
+            Student1 Mary = new Student1(48, 150);
+            Console.WriteLine(" Mary的資料 -->使用Student(48, 150)建構式");
+            Mary.GetShow();
+            Console.Read();
+
+            //3030
+
+            Student2 David2 = new Student2(56);
+            Console.WriteLine(" David2的資料-->使用Student(56)建構式");
+            David2.GetShow();
+            Student2 Mary2 = new Student2(48, 150);
+            Console.WriteLine(" Mary2的資料 -->使用Student(48, 150)建構式");
+            Mary2.GetShow();
+            Console.Read();
+
+            //3030
+
+            Student3 Peter3 = new Student3();
+            Console.WriteLine(" Peter3的資料-->使用Student()建構式");
+            Peter3.GetShow();
+            Student3 David3 = new Student3(56);
+            Console.WriteLine(" David3的資料-->使用Student(56)建構式");
+            David3.GetShow();
+            Student3 Mary3 = new Student3(48, 150);
+            Console.WriteLine(" Mary3的資料 -->使用Student(48, 150)建構式");
+            Mary3.GetShow();
+            Console.Read();
+
+
+
         }
 
         private void button34_Click(object sender, EventArgs e)
@@ -2916,19 +2956,131 @@ namespace vcs_Mix00
         }
     }
 
-    public class Person
+    class Car1
     {
-        public string Name { get; set; }
-        public int Age { get; private set; }
-        public string Sex { get; set; }
-        public int Money { get; set; }
-
-        public Person(string name, string sex, int age, int money)
+        // 宣告_speed為私有變數，表示該變數只能在Car類別內使用
+        private int _speed;
+        // 定義GetSpeed()方法用來傳回_speed
+        public int GetSpeed()
         {
-            Name = name;
-            Age = age;
-            Sex = sex;
-            Money = money;
+            return _speed;
+        }
+        // 定義SetSpeed()方法用來設定_speed
+        public void SetSpeed(int vSpeed)
+        {
+            if (vSpeed < 0) vSpeed = 0;		// 設定速度不得低於 0
+            if (vSpeed > 200) vSpeed = 200;	// 設定速度不得高於 200
+            _speed = vSpeed;
+        }
+    }
+
+    class Car2   // 定義Car類別
+    {
+        // 宣告_speed私有變數用來存放車子的速度值
+        private int _speed = 0;
+        // 定義Speed速度屬性
+        public int Speed
+        {
+            get
+            {
+                return _speed;  // 傳回目前的速度
+            }
+            set
+            {
+                if (value < 0) value = 0;       // 速度不可小於0
+                if (value > 200) value = 200;   // 速度不可大於200
+                _speed = value;                 // 設定速度
+            }
+        }
+        // 定義Accelerate()方法，用來指定目前車子速度+1 
+        public void Accelerate()
+        {
+            _speed++;					// 速度 + 1
+            if (_speed > 200) _speed = 200;	// 檢查速度不可超過 200
+        }
+    }
+
+    class Student1
+    {
+        private int _Height, _Weight;
+        public Student1()
+        {
+            _Weight = 48;
+            _Height = 160;
+        }
+        // Student類別的建構式，須設定一個引數
+        public Student1(int w)
+        {
+            _Weight = w;  		// 初始化_Weight欄位
+            _Height = 160;	      	// 初始化_Height欄位的值為160
+        }
+        // Student類別的建構式，須設定兩個引數
+        public Student1(int w, int h)
+        {
+            _Weight = w;
+            _Height = h;
+        }
+        // Student類別的GetShow()方法，可顯示學生的身高和體重
+        public void GetShow()
+        {
+            Console.WriteLine(" 身高是: {0} ", _Height);
+            Console.WriteLine(" 體重是: {0} \n", _Weight);
+        }
+    }
+
+    class Student2
+    {
+        private int _Height, _Weight;
+        //public Student()
+        //{
+        //    _Weight = 48;
+        //    _Height = 160;
+        // }
+        // Student類別的建構式，須設定一個引數
+        public Student2(int w)
+        {
+            _Weight = w;  		// 初始化_Weight欄位
+            _Height = 160;	      	// 初始化_Height欄位的值為160
+        }
+        // Student類別的建構式，須設定兩個引數
+        public Student2(int w, int h)
+        {
+            _Weight = w;
+            _Height = h;
+        }
+        // Student類別的GetShow()方法，可顯示學生的身高和體重
+        public void GetShow()
+        {
+            Console.WriteLine(" 身高是: {0} ", _Height);
+            Console.WriteLine(" 體重是: {0} \n", _Weight);
+        }
+    }
+
+    class Student3
+    {
+        private int _Height, _Weight;
+        public Student3()
+        {
+            //_Weight = 48;
+            //_Height = 160;
+        }
+        // Student類別的建構式，須設定一個引數
+        public Student3(int w)
+        {
+            _Weight = w;  		// 初始化_Weight欄位
+            _Height = 160;	      	// 初始化_Height欄位的值為160
+        }
+        // Student類別的建構式，須設定兩個引數
+        public Student3(int w, int h)
+        {
+            _Weight = w;
+            _Height = h;
+        }
+        // Student類別的GetShow()方法，可顯示學生的身高和體重
+        public void GetShow()
+        {
+            Console.WriteLine(" 身高是: {0} ", _Height);
+            Console.WriteLine(" 體重是: {0} \n", _Weight);
         }
     }
 }

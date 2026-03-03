@@ -39,6 +39,9 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button6 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_show)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -159,11 +162,44 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(12, 350);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(120, 60);
+            this.button7.TabIndex = 11;
+            this.button7.Text = "Queue測試1";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(12, 426);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(120, 60);
+            this.button8.TabIndex = 26;
+            this.button8.Text = "Queue測試2";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(12, 502);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(120, 60);
+            this.button9.TabIndex = 27;
+            this.button9.Text = "Queue測試3";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1121, 670);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.richTextBox1);
@@ -190,6 +226,9 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
     }
 }
 

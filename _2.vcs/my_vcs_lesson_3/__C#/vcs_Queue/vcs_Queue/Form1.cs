@@ -233,5 +233,112 @@ namespace vcs_Queue
             }
             Console.WriteLine();
         }
+
+        public static void PrintOut(IEnumerable myCollction)
+        {
+            int i = 0;
+            foreach (Object obj in myCollction)
+            {
+                Console.WriteLine("     第{0}個元素 : {1} ", ++i, obj);
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //Queue測試1
+            Queue myQueue = new Queue();
+            string[] ary = { "Jack", "Ford", "David" };
+            //將陣列置入佇列
+            foreach (string name in ary)
+            {
+                myQueue.Enqueue(name);
+            }
+            Console.WriteLine(" 1.目前佇列的資料 : ");
+            PrintOut(myQueue);
+            Console.WriteLine(" 1.目前堆疊佇列內資料的個數: {0} ", myQueue.Count);
+            Console.WriteLine(" --------------------------------------------");
+
+            // 將 Mary 置入堆疊佇列(最上面)
+            myQueue.Enqueue("Mary");
+            Console.WriteLine(" 2.目前佇列內的資料 : ");
+            PrintOut(myQueue);
+
+            // 取得堆疊最上面的資料
+            //myQueue.Peek();
+            Console.WriteLine(" 3.查詢佇列最上面資料 : {0} ", myQueue.Peek());
+            Console.WriteLine(" 3.目前佇列內的資料 :");
+            PrintOut(myQueue);
+            Console.WriteLine(" --------------------------------------------");
+
+            // 由堆疊最上面取出資料
+            Console.WriteLine(" 4.取出佇列最上面的資料 : {0} ", myQueue.Dequeue());
+            Console.WriteLine(" 4.目前佇列內的資料 : ");
+            PrintOut(myQueue);
+            Console.WriteLine(" --------------------------------------------");
+
+            // 檢查 "David" 是否在佇列中
+            if (!myQueue.Contains("David"))
+            {
+                Console.WriteLine(" 5.佇列內無 David 資料!");
+            }
+            else
+            {
+                Console.WriteLine(" 5.佇列內有 David 資料!");
+            }
+
+            // 清除佇列
+            myQueue.Clear();
+            Console.WriteLine("\n 6.清除佇列後資料的個數: {0}", myQueue.Count);
+            PrintOut(myQueue);
+            Console.WriteLine(" --------------------------------------------");
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //Queue測試2
+            Queue m = new Queue();   // 非泛型           
+
+            m.Enqueue(new Member() { Name = "David", Select = true, Score = 70 });
+            m.Enqueue(new Member() { Name = "Mary", Select = false, Score = 65 });
+            m.Enqueue(new Member() { Name = "Tom", Select = true, Score = 85 });
+            m.Enqueue(new Member() { Name = "Jack", Select = true, Score = 95 });
+
+            Console.WriteLine("=== 非泛型 Queue 操作 需強制轉換 .... \n");
+            while (m.Count > 0)
+            {
+                Console.WriteLine("{0} ", ((Member)m.Dequeue()).ToString());
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //Queue測試3
+
+            Queue<Member> m = new Queue<Member>();   // 泛型           
+
+            m.Enqueue(new Member() { Name = "David", Select = true, Score = 70 });
+            m.Enqueue(new Member() { Name = "Mary", Select = false, Score = 65 });
+            m.Enqueue(new Member() { Name = "Tom", Select = true, Score = 85 });
+            m.Enqueue(new Member() { Name = "Jack", Select = true, Score = 95 });
+
+            Console.WriteLine("=== 泛型 Queue 操作不需強制轉換 .... \n");
+
+            while (m.Count > 0)
+            {
+                Console.WriteLine("{0} ", (m.Dequeue().ToString()));
+            }
+        }
+    }
+
+    class Member
+    {
+        public string Name { get; set; }      // 姓名屬性          
+        public bool Select { get; set; }      // 選課屬性
+        public int Score { get; set; }        // 成績屬性
+
+        public override string ToString()    // 覆寫覆類別 ToString()方法
+        {
+            return string.Format("姓名 : {0} \t 選課 :{1} \t 成績: {2} \n ", Name, Select ? "是" : "否", Score.ToString());
+        }
     }
 }

@@ -30,7 +30,7 @@ namespace ConsoleDestructor2
 
     class Program
     {
-          static void DoSomething()
+        static void DoSomething()
         {
             Console.WriteLine("進入程序，並宣告 BMW 物件 ...");
             Car BMW = new Car(10);

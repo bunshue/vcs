@@ -14,6 +14,7 @@ namespace Dictionary1
             public bool Select { get; set; }      // 選課屬性
             public int Score { get; set; }        // 成績屬性           
         }
+
         static void Main(string[] args)
         {
             Dictionary<string, Member> m = new Dictionary<string, Member>();

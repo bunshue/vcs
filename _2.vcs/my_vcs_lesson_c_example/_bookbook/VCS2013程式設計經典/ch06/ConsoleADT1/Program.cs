@@ -10,11 +10,11 @@ namespace ConsoleADT1
     {
         static void Main(string[] args)
         {
-            int[] stu_No = new int[]{1001,1002,1003,1004,1005};
-            string[] stu_Name = new string[]{"Lida","Jack","Mary","Nacy","Jane"};
-            int[] stu_Chin = new int[]{85,80,75,90,60};
-            int[] stu_Eng = new int[]{90,80,70,60,88};
-            int[] stu_Math = new int[]{66,77,88,99,60};
+            int[] stu_No = new int[] { 1001, 1002, 1003, 1004, 1005 };
+            string[] stu_Name = new string[] { "Lida", "Jack", "Mary", "Nacy", "Jane" };
+            int[] stu_Chin = new int[] { 85, 80, 75, 90, 60 };
+            int[] stu_Eng = new int[] { 90, 80, 70, 60, 88 };
+            int[] stu_Math = new int[] { 66, 77, 88, 99, 60 };
 
             int i, j, tmp;
             string s;

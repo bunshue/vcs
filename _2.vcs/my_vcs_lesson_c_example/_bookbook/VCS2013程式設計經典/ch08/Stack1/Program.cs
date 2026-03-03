@@ -30,9 +30,9 @@ namespace Stack1
             m.Push(new Member() { Name = "Jack", Select = true, Score = 95 });
 
             Console.WriteLine("=== 非泛型 Stack 操作需強制轉換 .... \n");
-            while(m.Count >0)
+            while (m.Count > 0)
             {
-                Console.WriteLine ("{0} ", (Member )m.Pop ());
+                Console.WriteLine("{0} ", (Member)m.Pop());
             }
             Console.Read();
         }

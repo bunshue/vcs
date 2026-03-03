@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
-//using System.Collections;  泛型不用引入
 
 namespace SortedList2
 {

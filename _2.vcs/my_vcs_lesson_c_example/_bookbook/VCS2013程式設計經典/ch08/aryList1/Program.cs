@@ -5,14 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 
-
 namespace aryList1
 {
     class Program
     {
         static void Main(string[] args)
         {
-
             ArrayList myAryLst = new ArrayList { "Jack", 20, true }; // 元素為不同資料型別  
             Console.WriteLine("1.設定 AryLst串列內初值 :");
             PrintOut(myAryLst);
@@ -69,7 +67,9 @@ namespace aryList1
             int i = 0;
             Console.WriteLine("  目前 AryLst串列內所有元素 : ");
             foreach (Object obj in tAryLst)
+            {
                 Console.WriteLine("    第{0}個元素 : {1} ", ++i, obj);
+            }
         }
     }
 }

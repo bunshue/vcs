@@ -27,17 +27,17 @@ namespace ConsoleDestructor1
             Console.WriteLine("車子物件消滅了 ...");
         }
     }
-   class Program
+    class Program
     {
-       static void DoSomething()
-       {
+        static void DoSomething()
+        {
             Console.WriteLine("進入程序，並宣告 BMW 物件 ...");
             Car BMW = new Car(10);
             Console.WriteLine("BMW 物件宣告完成，準備離開方法 ...");
-       }
+        }
 
-       static void Main(string[] args)
-       {
+        static void Main(string[] args)
+        {
             DoSomething();
             Console.WriteLine("宣告 Benz 物件 ..");
             Car Benz = new Car();

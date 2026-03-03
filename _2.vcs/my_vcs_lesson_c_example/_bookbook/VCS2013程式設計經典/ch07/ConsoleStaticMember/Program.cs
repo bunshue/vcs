@@ -8,7 +8,7 @@ namespace ConsoleStaticMember
 {
     public class Car
     {
-        public  int No { get; set; }         // No屬性用來記錄是第幾部車
+        public int No { get; set; }         // No屬性用來記錄是第幾部車
         public static int Total { get; set; }// Total靜態屬性，記錄車子總數
         // static方法
         public static void ShowTotalCars()
@@ -49,7 +49,6 @@ namespace ConsoleStaticMember
             MyCar = BMW;    		// 將 MyCar 指向 BMW
             MyCar.ShowMe("MyCar");
             Console.Read();
-
         }
     }
 }

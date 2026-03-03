@@ -42,7 +42,7 @@ namespace ConsoleSort1
                 Console.WriteLine(RoleName[i] + "\t" + Money[i].ToString("#,#"));
             }
             Console.Read();
-
         }
     }
 }
+

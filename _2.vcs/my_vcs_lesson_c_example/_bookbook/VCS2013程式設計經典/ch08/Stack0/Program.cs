@@ -15,6 +15,7 @@ namespace Stack0
             foreach (Object obj in myCollction)
                 Console.WriteLine("   第{0}個元素 : {1} ", ++i, obj);
         }
+
         static void Main(string[] args)
         {
             Stack myStack = new Stack();
@@ -50,9 +51,13 @@ namespace Stack0
             // 檢查堆疊內是否有 "David" 這個資料
             Console.WriteLine(" 5.檢查堆疊內是否有 David 這個資料 ? ");
             if (!myStack.Contains("David"))
+            {
                 Console.WriteLine(" 5.堆疊內無此資料!");
+            }
             else
+            {
                 Console.WriteLine(" 5.堆疊內有此資料!");
+            }
             Console.WriteLine(" ----------------------------");
 
             // 清除堆疊內所有元素           

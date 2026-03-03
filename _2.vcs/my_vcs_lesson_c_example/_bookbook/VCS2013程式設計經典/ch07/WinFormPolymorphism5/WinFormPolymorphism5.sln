@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormPolymorphism5", "WinFormPolymorphism5.csproj", "{3AB6CA7F-33F3-4A25-A2A6-59D580F99095}"
 EndProject
 Global

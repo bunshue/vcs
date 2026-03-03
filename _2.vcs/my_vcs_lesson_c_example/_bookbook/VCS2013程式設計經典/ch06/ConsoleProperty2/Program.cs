@@ -9,7 +9,7 @@ namespace ConsoleProperty2
     class Car       // 定義Car類別
     {
         // 宣告_speed為私有變數，表示該變數只能在Car類別內使用
-        private int _speed; 
+        private int _speed;
         // 宣告Speed為公開屬性
         public int Speed
         {

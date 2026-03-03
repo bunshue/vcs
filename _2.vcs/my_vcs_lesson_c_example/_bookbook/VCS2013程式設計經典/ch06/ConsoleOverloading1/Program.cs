@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace ConsoleOverloading1
 {
-   class Car   // 定義Car類別
-   {
-       private int _speed = 0;
-       public int Speed
-       {
-           get
-           {
+    class Car   // 定義Car類別
+    {
+        private int _speed = 0;
+        public int Speed
+        {
+            get
+            {
                 return _speed;
             }
             set
@@ -34,7 +34,7 @@ namespace ConsoleOverloading1
         }
         // 第三種加速方法
         public void Accelerate(string S)
-       	{
+        {
             if (S == "STOP") this.Speed = 0;
         }
     }

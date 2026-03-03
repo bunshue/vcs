@@ -17,9 +17,8 @@ namespace ConsoleProperty1
         {
             Car Benz = new Car();
             Benz.Speed = 100;	// 物件建立之後可直接使用「.」存取該屬性
-            Console.WriteLine("Benz.Speed = {0} ",Benz.Speed);
+            Console.WriteLine("Benz.Speed = {0} ", Benz.Speed);
             Console.Read();
-
         }
     }
 }

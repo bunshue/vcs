@@ -20,6 +20,7 @@ namespace HashTable1
                 return string.Format("姓名 : {0} \t 選課 :{1} \t 成績: {2} \n ", Name, Select ? "是" : "否", Score.ToString());
             }
         }
+
         static void Main(string[] args)
         {
             Hashtable m = new Hashtable();  // 非泛型

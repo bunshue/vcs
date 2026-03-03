@@ -30,10 +30,10 @@ namespace ConsoleInherits1
     class Manager : Employee
     {
 
-        public int Bonus{get;set;}     	// 加入Bonus獎金屬性
+        public int Bonus { get; set; }     	// 加入Bonus獎金屬性
         public void ShowTotal()   	// 加入顯示實領獎金方法
         {
-            Console.WriteLine("\n 實領薪資：{0}", (Bonus + Salary).ToString ("0,0"));
+            Console.WriteLine("\n 實領薪資：{0}", (Bonus + Salary).ToString("0,0"));
         }
     }
 

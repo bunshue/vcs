@@ -20,6 +20,7 @@ namespace SortedList1
                 return string.Format("姓名 : {0} \t 選課 :{1} \t 成績: {2} \n ", Name, Select ? "是" : "否", Score.ToString());
             }
         }
+
         static void Main(string[] args)
         {
             SortedList m = new SortedList();  // 非泛型
@@ -33,7 +34,7 @@ namespace SortedList1
             Console.WriteLine("=== 非泛型 SortedList 操作需強制轉換 .... \n");
             foreach (DictionaryEntry item in m)
             {
-                Console.WriteLine( ((Member)item.Value).ToString() );
+                Console.WriteLine(((Member)item.Value).ToString());
             }
             Console.Read();
         }

@@ -30,13 +30,13 @@ namespace ConsolePolymorphism2
         }
         public virtual void ShowTotal()	//ShowTotal方法允許被覆寫
         {
-            Console.WriteLine("\n 底薪：{0}元", Salary.ToString ("0,0"));
+            Console.WriteLine("\n 底薪：{0}元", Salary.ToString("0,0"));
         }
     }
-    // 定義Manager經理子類別繼承自Employee員工父類別
-    class Manager : Employee 
-    {
 
+    // 定義Manager經理子類別繼承自Employee員工父類別
+    class Manager : Employee
+    {
         public int Bonus { get; set; }
         public override int Salary
         {
@@ -59,16 +59,17 @@ namespace ConsolePolymorphism2
         public override void ShowTotal()//覆寫Employee的ShowTotal方法
         {
             base.ShowTotal();	//呼叫父類別Employee的ShowTotal方法
-            Console.WriteLine("\n 薪水 + 獎金共：{0}元", (Bonus+Salary).ToString ("0,0"));
+            Console.WriteLine("\n 薪水 + 獎金共：{0}元", (Bonus + Salary).ToString("0,0"));
         }
     }
+
     class Program
     {
         static void Main(string[] args)
         {
             Employee tom = new Employee();
             tom.Salary = 40000;
-            Console.WriteLine("\n Tom 員工薪資 : {0}元", tom.Salary.ToString ("0,0"));
+            Console.WriteLine("\n Tom 員工薪資 : {0}元", tom.Salary.ToString("0,0"));
             tom.ShowTotal();
             Console.WriteLine("======================");
             //Console.WriteLine();

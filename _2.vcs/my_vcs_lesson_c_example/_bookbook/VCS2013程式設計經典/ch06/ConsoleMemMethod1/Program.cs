@@ -9,7 +9,7 @@ namespace ConsoleMemMethod1
     class Car       // 定義Car類別
     {
         // 宣告私有變數_x, _y用來表示目前車子的X, Y座標位置
-        private int _x, _y; 
+        private int _x, _y;
         // 定義Movie方法，用來設定目前車子的X, Y座標位置
         public void Move(int vX, int vY)
         {
@@ -22,8 +22,8 @@ namespace ConsoleMemMethod1
     {
         static void Main(string[] args)
         {
-           Car Benz = new Car();
-           Benz.Move(100, 200);    
+            Car Benz = new Car();
+            Benz.Move(100, 200);
 
         }
     }

@@ -14,10 +14,10 @@ namespace ArrayList1
             public string Name { get; set; }      // 姓名屬性          
             public bool Select { get; set; }      // 選課屬性
             public int Score { get; set; }        // 成績屬性
-           
+
             public override string ToString()    // 覆寫覆類別 ToString()方法
             {
-                return string.Format ("姓名 : {0} \t 選課 :{1} \t 成績: {2} \n " , Name,Select? "是":"否",Score.ToString ());
+                return string.Format("姓名 : {0} \t 選課 :{1} \t 成績: {2} \n ", Name, Select ? "是" : "否", Score.ToString());
             }
         }
 
@@ -36,9 +36,13 @@ namespace ArrayList1
             foreach (var item in m)
             {
                 if (item is Member)
+                {
                     Console.WriteLine("{0} ", item.ToString());
+                }
                 else
-                    Console.WriteLine("{0} ", (string)item);          
+                {
+                    Console.WriteLine("{0} ", (string)item);
+                }
             }
             Console.Read();
         }
