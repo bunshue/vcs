@@ -1,4 +1,38 @@
 ﻿
+北風.accdb
+
+
+對應方法
+            //var str = string.Format("我的名字叫{1}，我今年{1}岁。", "张三", 23);
+            //Console.WriteLine(str);
+
+            var str = $"我的名字叫{"张三"}，我今年{23}岁。";
+            Console.WriteLine(str);
+
+
+            員工BindingSource.Sort = "識別碼 ASC"; // ASC，即為ascending表示升冪
+            員工BindingSource.Sort = "識別碼 DESC";// DESC，即為descening表示降冪
+
+
+            if (MessageBox.Show("是否刪除？", "小心", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+            }
+            if (MessageBox.Show("是否要刪除？", "小心", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                員工BindingSource.RemoveCurrent();
+            }
+
+            comboBox1.Items.AddRange( 
+                       new object[] { "業務代表",
+                                             "業務協調員",
+                                             "業務經理",
+                                             "資深工程師",
+                                             "副總裁，銷售部門"}
+            );
+
+
+
+
 amend
 
 

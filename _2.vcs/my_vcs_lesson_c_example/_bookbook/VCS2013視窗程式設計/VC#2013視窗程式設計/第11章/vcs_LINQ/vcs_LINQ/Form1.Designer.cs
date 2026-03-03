@@ -1,4 +1,4 @@
-﻿namespace vcs_OleDb
+﻿namespace vcs_LINQ
 {
     partial class Form1
     {
@@ -114,7 +114,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(200, 60);
             this.button0.TabIndex = 129;
-            this.button0.Text = "OleDb";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -135,7 +134,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 127;
-            this.button1.Text = "OleDb";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -156,7 +154,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 125;
-            this.button4.Text = "OleDb";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -167,7 +164,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 124;
-            this.button3.Text = "OleDb";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -178,7 +174,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 123;
-            this.button2.Text = "OleDb";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace xCh10_3_21.Properties {
+namespace vcs_LINQ.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
