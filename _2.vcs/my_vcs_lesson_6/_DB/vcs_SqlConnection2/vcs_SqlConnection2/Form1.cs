@@ -232,7 +232,7 @@ namespace vcs_SqlConnection2
             dap.Fill(ds);
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //利用[]通配符進行查詢
 
@@ -244,7 +244,7 @@ namespace vcs_SqlConnection2
             dap.Fill(ds);
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
             /*
             //show
             string db_filename = "db_10_Data.MDF";
@@ -256,7 +256,7 @@ namespace vcs_SqlConnection2
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
             */
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //利用[^]通配符進行查詢
 
@@ -273,7 +273,7 @@ namespace vcs_SqlConnection2
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
             */
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             /*
             //show
@@ -286,7 +286,7 @@ namespace vcs_SqlConnection2
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
             */
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //利用%通配符進行查詢
 
@@ -320,13 +320,13 @@ namespace vcs_SqlConnection2
             cmd_name = "SELECT * FROM 明細工資表 WHERE (員工編號 IN (" + number + "))";
             show_database(db_filename, cmd_name);
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //使用外連接進行多表聯合查詢
             cmd_name = "SELECT 員工訊息表.序號, 員工訊息表.員工編號, 員工訊息表.員工姓名, 明細工資表.薪資編號, 明細工資表.月份, 明細工資表.基本工資, 明細工資表.獎金, 員工請假表.請假天數, 員工請假表.扣除金額 FROM 員工訊息表 LEFT OUTER JOIN 明細工資表 ON 員工訊息表.員工編號 = 明細工資表.員工編號 LEFT OUTER JOIN 員工請假表 ON 員工訊息表.員工編號 = 員工請假表.員工編號 ";
             show_database(db_filename, cmd_name);
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //使用右外連接查詢數據
             //RightOuterJoin
@@ -334,7 +334,8 @@ namespace vcs_SqlConnection2
             cmd_name = "SELECT 明細工資表.編號, 明細工資表.薪資編號, 員工訊息表.員工編號, 明細工資表.基本工資, 明細工資表.獎金, 員工訊息表.員工姓名, 員工訊息表.身份證號 FROM 員工訊息表 RIGHT OUTER JOIN 明細工資表 ON 員工訊息表.員工編號 = 明細工資表.員工編號";
             show_database(db_filename, cmd_name);
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
             //使用左外連接查詢數據
             cmd_name = "SELECT 員工訊息表.序號, 員工訊息表.員工編號, 員工訊息表.員工姓名, 明細工資表.月份, 明細工資表.基本工資, 明細工資表.獎金 FROM 員工訊息表 LEFT OUTER JOIN 明細工資表 ON 員工訊息表.員工編號 = 明細工資表.員工編號";
             show_database(db_filename, cmd_name);
@@ -343,6 +344,139 @@ namespace vcs_SqlConnection2
 
         private void button8_Click(object sender, EventArgs e)
         {
+            //Insert觸發器的運用
+            /*
+            //show
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection con = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("select * from 員工工資表", con);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            */
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            // 員工訊息註冊
+
+            //Insert觸發器的運用
+            string number = "123";
+            string name = "david";
+            string id = "A123456789";
+            string phone = "0912345678";
+
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection con = new SqlConnection(cnstr);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("insert into 員工訊息表 (員工編號,員工姓名,身份證號,聯繫電話) values ('" + number + "','" + name + "','" + id + "','" + phone + "')", con);
+            cmd.ExecuteNonQuery();
+            con.Close();
+            MessageBox.Show("數據新增成功！");
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //運用預儲程序新增數據
+            /*
+            //show
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection con = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("select * from 員工訊息表", con);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            */
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //運用預儲程序新增數據
+
+            //員工基本訊息註冊
+            /*
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection con = new SqlConnection(cnstr);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("procInsertEmployee", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlParameter[] prams = {
+						new SqlParameter("@員工編號",  SqlDbType.VarChar, 50),
+                		new SqlParameter("@員工姓名",  SqlDbType.VarChar, 50),
+                		new SqlParameter("@身份證號",  SqlDbType.VarChar, 50),
+                        new SqlParameter("@聯繫電話",  SqlDbType.VarChar, 50) 
+			};
+
+            string number = "123";
+            string name = "david";
+            string id = "A123456789";
+            string phone = "0912345678";
+
+            prams[0].Value = number;
+            prams[1].Value = name;
+            prams[2].Value = id;
+            prams[3].Value = phone;
+
+            // 新增參數
+            foreach (SqlParameter parameter in prams)
+            {
+                cmd.Parameters.Add(parameter);
+            }
+            cmd.ExecuteNonQuery();
+            con.Close();
+            */
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //運用預儲程序修改數據
+
+            /*
+            //show
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection con = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("select * from 員工訊息表", con);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            */
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            /*
+            //運用預儲程序修改數據
+
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection con = new SqlConnection(cnstr);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("procUpdateEmployee", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlParameter[] prams = {
+			        new SqlParameter("@員工編號",  SqlDbType.VarChar, 50),
+                	new SqlParameter("@員工姓名",  SqlDbType.VarChar, 50),
+                	new SqlParameter("@身份證號",  SqlDbType.VarChar, 50),
+                    new SqlParameter("@聯繫電話",  SqlDbType.VarChar, 50)
+			};
+
+            string number = "123";
+            string name = "david";
+            string id = "A123456789";
+            string phone = "0912345678";
+
+            prams[0].Value = number;
+            prams[1].Value = name;
+            prams[2].Value = id;
+            prams[3].Value = phone;
+            // 依次把參數傳入命令文字
+            foreach (SqlParameter parameter in prams)
+            {
+                cmd.Parameters.Add(parameter);
+            }
+            cmd.ExecuteNonQuery();
+            */
+
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -376,7 +510,7 @@ namespace vcs_SqlConnection2
             cmd_name = "SELECT 部門工資統計表.所屬部門, MAX(部門工資統計表.基本工資) AS 部門最高工資,SUM(員工請假表.請假天數) AS 合計請假天數, AVG(員工請假表.扣除金額) AS 平均扣除金額 FROM 部門工資統計表 INNER JOIN 員工請假表 ON 部門工資統計表.員工編號 = 員工請假表.員工編號 GROUP BY 部門工資統計表.所屬部門 HAVING (SUM(員工請假表.請假天數) < 10)";
             show_database(db_filename, cmd_name);
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //利用having語句過濾分組數據
             /*
@@ -451,7 +585,7 @@ namespace vcs_SqlConnection2
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
             */
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //靜態交叉表
 
@@ -562,6 +696,7 @@ namespace vcs_SqlConnection2
 
         private void button19_Click(object sender, EventArgs e)
         {
+
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -625,6 +760,7 @@ namespace vcs_SqlConnection2
 
         private void button24_Click(object sender, EventArgs e)
         {
+
         }
 
         private void button25_Click(object sender, EventArgs e)
@@ -689,7 +825,7 @@ namespace vcs_SqlConnection2
             string cmd_name = "SELECT * FROM tb_05 WHERE 所在院系 LIKE '%" + search_college + "%'";
             show_database(db_filename, cmd_name);
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             /*
             //查詢數字
@@ -849,7 +985,7 @@ namespace vcs_SqlConnection2
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
             */
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //利用聚合函數MIN求銷售額、利潤最少的商品
 
@@ -867,7 +1003,7 @@ namespace vcs_SqlConnection2
             dap.Fill(ds);
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //利用聚合函數COUNT求日銷售額大於某值的商品數
             /*
@@ -881,7 +1017,7 @@ namespace vcs_SqlConnection2
             richTextBox1.Text += "查詢日銷售額大於５００的銷售商品種數：" + ds.Tables[0].Rows[0][0].ToString() + "\n";
             */
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //string db_filename = "db_10_Data.MDF";
             string cmd_name = "SELECT * FROM tb_sellInfo";
@@ -894,7 +1030,7 @@ namespace vcs_SqlConnection2
             cmd_name = "SELECT * FROM tb_sellInfo where 銷售額 in(select max(銷售額) from tb_sellInfo)";
             show_database(db_filename, cmd_name);
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
             /*
             string db_filename = "db_10_Data.MDF";
             string cmd_name = "SELECT * FROM tb_stu";
@@ -923,8 +1059,7 @@ namespace vcs_SqlConnection2
             cmd_name = "SELECT * FROM tb_stu where 年齡='" + MyInt + "'";
             show_database(db_filename, cmd_name);
 
-
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
             /*
             string db_filename = "db_10_Data.MDF";
             string cmd_name = "SELECT * FROM tb_xsb";
@@ -997,7 +1132,7 @@ namespace vcs_SqlConnection2
 
             //dap.Fill(ds, "book");  //test use "book"
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
             /*
             //數據分組統計（單列）
             //庫存圖書按出版社統計圖書庫存金額，並按金額降序排序。
@@ -1005,8 +1140,6 @@ namespace vcs_SqlConnection2
             string cmd_name = "select 出版社,sum(金額) as 合計金額 from tb_xsb group by 出版社 order by 2 desc";
             show_database(db_filename, cmd_name);
             */
-
-
         }
 
         private void button41_Click(object sender, EventArgs e)
