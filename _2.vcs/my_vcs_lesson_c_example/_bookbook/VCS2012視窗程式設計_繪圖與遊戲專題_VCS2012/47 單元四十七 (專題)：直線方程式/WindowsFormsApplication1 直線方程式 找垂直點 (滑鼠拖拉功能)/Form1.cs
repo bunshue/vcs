@@ -250,7 +250,6 @@ namespace WindowsFormsApplication1
                     break;
                 }
             }
-
         }
 
         // 更新 被選到的點 的 格子座標

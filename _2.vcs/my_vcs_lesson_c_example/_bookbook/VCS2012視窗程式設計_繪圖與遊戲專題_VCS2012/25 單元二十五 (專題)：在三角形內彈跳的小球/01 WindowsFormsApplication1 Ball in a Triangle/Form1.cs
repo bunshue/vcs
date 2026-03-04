@@ -13,10 +13,8 @@ namespace WindowsFormsApplication1
         List<ClassMovingPoint> mpList = new List<ClassMovingPoint>(); // 可移動點的動態陣列
         int mp_Selected = -1;  // 動態陣列 的第幾個 被選到
         bool dragging = false; // 是否拖拉中
-
         Pen myPen = new Pen(Color.Green, 5);  // 有箭頭的直線筆 當作三角形的邊界
         int D = 10; // 小球的半徑
-
         BallInATriangle ball; // 在三角形 內的小球物件
 
         public Form1()
@@ -113,4 +111,3 @@ namespace WindowsFormsApplication1
         }
     }
 }
-

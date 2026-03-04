@@ -23,6 +23,10 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             UpdateMyRectList();
             myImage = new Bitmap(Properties.Resources.Sun128);
         }
@@ -43,12 +47,10 @@ namespace WindowsFormsApplication1
             Rectangle rect = new Rectangle();
             // 設定視窗寬為360度  算出視窗寬的每一個像素代表幾度
             double unit = 360.0 / this.ClientSize.Width;
-
             for (int i = 0; i <= this.ClientSize.Width; i = i + 10)
             {
                 x = i;
                 y = this.ClientSize.Height / 2 - (int)(Radius * Math.Sin(i * unit * Math.PI / 180));
-
                 rect.X = x;
                 rect.Y = y;
                 rect.Width = 2;
@@ -69,11 +71,9 @@ namespace WindowsFormsApplication1
             if (myRectListIndex >= 0 && myRectListIndex <= myRectList.Count - 1)
             {
                 // 畫布原點 平移
-                e.Graphics.TranslateTransform(myRectList[myRectListIndex].X + 1,
-                                              myRectList[myRectListIndex].Y + 1);
+                e.Graphics.TranslateTransform(myRectList[myRectListIndex].X + 1, myRectList[myRectListIndex].Y + 1);
                 // 畫布座標旋轉
                 e.Graphics.RotateTransform(Angle);
-
                 e.Graphics.DrawImage(myImage, -myImage.Width / 2, -myImage.Height / 2);
             }
         }
@@ -116,10 +116,12 @@ namespace WindowsFormsApplication1
         {
             myRectListIndex += myRectListIndex_D;
             if (myRectListIndex == myRectList.Count - 1 || myRectListIndex == 0)
+            {
                 myRectListIndex_D = -myRectListIndex_D;
-
+            }
             Angle += Angle_D;
             this.Invalidate();
         }
     }
 }
+

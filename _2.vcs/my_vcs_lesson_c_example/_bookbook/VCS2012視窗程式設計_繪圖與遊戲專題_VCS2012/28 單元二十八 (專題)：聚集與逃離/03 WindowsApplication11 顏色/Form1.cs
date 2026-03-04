@@ -89,9 +89,18 @@ namespace WindowsApplication11
             pos.Y = rd.Next(ClientHeight);
             this.ClientWidth = ClientWidth;
             this.ClientHeight = ClientHeight;
-            if (rd.NextDouble() < 0.3) color = Color.Red;
-            else if (rd.NextDouble() < 0.6) color = Color.Green;
-            else color = Color.Blue;
+            if (rd.NextDouble() < 0.3)
+            {
+                color = Color.Red;
+            }
+            else if (rd.NextDouble() < 0.6)
+            {
+                color = Color.Green;
+            }
+            else
+            {
+                color = Color.Blue;
+            }
         }
 
         public void Update(PointF BigBall)
@@ -100,9 +109,7 @@ namespace WindowsApplication11
             double D;    // 小球 和 大球 的距離
             double Dx, Dy; // 小球 新的座標 和 大球 的距離
 
-            D = Math.Sqrt(
-                    (pos.X - BigBall.X) * (pos.X - BigBall.X) +
-                    (pos.Y - BigBall.Y) * (pos.Y - BigBall.Y));
+            D = Math.Sqrt((pos.X - BigBall.X) * (pos.X - BigBall.X) + (pos.Y - BigBall.Y) * (pos.Y - BigBall.Y));
 
             if (D < 50) // 距離 50 以內 快速逃離
             {
@@ -120,16 +127,28 @@ namespace WindowsApplication11
             {
                 // 在邊界內漫遊
                 X = pos.X + rd.Next(11) - 5;  // -5 ~ 5 之間變動
-                if (X > ClientWidth) X = ClientWidth;
-                else if (X < 0) X = 0;
+                if (X > ClientWidth)
+                {
+                    X = ClientWidth;
+                }
+                else if (X < 0)
+                {
+                    X = 0;
+                }
 
                 Y = pos.Y + rd.Next(11) - 5;
-                if (Y > ClientHeight) Y = ClientHeight;
-                else if (Y < 0) Y = 0;
-
+                if (Y > ClientHeight)
+                {
+                    Y = ClientHeight;
+                }
+                else if (Y < 0)
+                {
+                    Y = 0;
+                }
                 pos = new Point((int)X, (int)Y);
             }
         }
+
         public void Draw(Graphics G)
         {
             //G.FillEllipse(Brushes.Black, pos.X - 5, pos.Y - 5, 10, 10);

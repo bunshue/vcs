@@ -18,7 +18,6 @@ namespace WindowsFormsApplication1
         int D = 100; // 力道
         ClassCannon b;
         List<ClassCannon> mylist = new List<ClassCannon>();
-
         bool SpaceUp = true;
 
         public Form1()
@@ -133,5 +132,3 @@ namespace WindowsFormsApplication1
         }
     }
 }
-
-

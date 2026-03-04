@@ -29,21 +29,6 @@ namespace WindowsFormsApplication1
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-
-            // 繪出 太陽
-            e.Graphics.TranslateTransform(this.ClientSize.Width / 2, this.ClientSize.Height / 2);
-            e.Graphics.FillEllipse(Brushes.Crimson, -100, -100, 200, 200);
-
-            // 繪出 地球
-            e.Graphics.RotateTransform(angleEarth);
-            e.Graphics.TranslateTransform(200, 0);
-            e.Graphics.FillEllipse(Brushes.Cyan, -20, -20, 40, 40);
-
-            // 繪出 月球
-            e.Graphics.RotateTransform(angleMoon);
-            e.Graphics.TranslateTransform(40, 0);
-            e.Graphics.FillEllipse(Brushes.PaleGreen, -5, -5, 10, 10);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -53,7 +38,7 @@ namespace WindowsFormsApplication1
 
             angleMoon += deltaMoon; // 月球的旋轉角度 累進
             angleMoon %= 360;
-            this.Invalidate();
+            this.pictureBox1.Invalidate();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -65,7 +50,10 @@ namespace WindowsFormsApplication1
             else if (e.KeyData == Keys.Down)
             {
                 deltaEarth -= 1;
-                if (deltaEarth < 1) deltaEarth = 1;
+                if (deltaEarth < 1)
+                {
+                    deltaEarth = 1;
+                }
             }
 
             if (e.KeyData == Keys.Right)
@@ -75,7 +63,10 @@ namespace WindowsFormsApplication1
             else if (e.KeyData == Keys.Left)
             {
                 deltaMoon -= 1;
-                if (deltaMoon < 1) deltaMoon = 1;
+                if (deltaMoon < 1)
+                {
+                    deltaMoon = 1;
+                }
             }
 
             if (e.KeyData == Keys.Space)
@@ -83,6 +74,25 @@ namespace WindowsFormsApplication1
                 deltaEarth = 1;
                 deltaMoon = 12;
             }
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            // 繪出 太陽
+            e.Graphics.TranslateTransform(this.pictureBox1.ClientSize.Width / 2, this.pictureBox1.ClientSize.Height / 2);
+            e.Graphics.FillEllipse(Brushes.Crimson, -100, -100, 200, 200);
+
+            // 繪出 地球
+            e.Graphics.RotateTransform(angleEarth);
+            e.Graphics.TranslateTransform(200, 0);
+            e.Graphics.FillEllipse(Brushes.Cyan, -20, -20, 40, 40);
+
+            // 繪出 月球
+            e.Graphics.RotateTransform(angleMoon);
+            e.Graphics.TranslateTransform(40, 0);
+            e.Graphics.FillEllipse(Brushes.PaleGreen, -5, -5, 10, 10);
         }
     }
 }

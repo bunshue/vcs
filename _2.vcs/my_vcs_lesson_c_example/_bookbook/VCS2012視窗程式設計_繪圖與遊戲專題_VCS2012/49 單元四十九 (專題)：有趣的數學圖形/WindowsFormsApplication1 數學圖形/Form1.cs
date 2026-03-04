@@ -27,8 +27,7 @@ namespace WindowsFormsApplication1
         private void Form1_Load(object sender, EventArgs e)
         {
             label1.Text = "";
-            this.ClientSize = new Size(800, 600); // 定出
-
+            this.ClientSize = new Size(800, 600);
             G = this.CreateGraphics();
         }
 
@@ -136,4 +135,3 @@ namespace WindowsFormsApplication1
         }
     }
 }
-

@@ -280,7 +280,6 @@ namespace WindowsFormsApplication1
                     textBox3.Text = p2.X.ToString();
                     textBox4.Text = p2.Y.ToString();
                 }
-
                 this.Invalidate();
             }
         }
@@ -352,4 +351,3 @@ namespace WindowsFormsApplication1
         }
     }
 }
-

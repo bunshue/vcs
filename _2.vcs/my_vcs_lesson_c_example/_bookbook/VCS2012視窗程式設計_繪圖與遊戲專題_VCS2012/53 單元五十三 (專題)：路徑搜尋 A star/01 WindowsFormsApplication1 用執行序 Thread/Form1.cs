@@ -60,6 +60,7 @@ namespace WindowsFormsApplication1
             G2D_Cell c;
             short no = 0;  // 方塊編號
             for (short j = 0; j < h; j++)  // 由上往下
+            {
                 for (short i = 0; i < w; i++) // 由左往右
                 {
                     c = new G2D_Cell(new Point(Cx + i * 2 * D, Cy + j * 2 * D), D, no);
@@ -144,6 +145,7 @@ namespace WindowsFormsApplication1
                     cList.Add(c); // 加入到清單中
                     no++;
                 }
+            }
 
             label1.Text = w + " x " + h + " 個小方塊，編號 ( 0 ~ " + (w * h - 1) + " )";
 
@@ -488,7 +490,6 @@ namespace WindowsFormsApplication1
                     b = cList[b].Parent;
                 }
             }
-
             this.Invalidate();
         }
 
@@ -501,9 +502,10 @@ namespace WindowsFormsApplication1
         private void button4_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < wallList.Count; i++)
+            {
                 cList[wallList[i]].wall = false;
+            }
             wallList.Clear();
-
             this.Invalidate();
         }
 
@@ -539,7 +541,6 @@ namespace WindowsFormsApplication1
                         }
                     }
                 }
-
                 startRect.pos = cList[Start].pos; // 都沒有到定位 startRect 移回到 原先的開始點 
                 this.Invalidate();
             }
