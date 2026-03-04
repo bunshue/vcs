@@ -33,8 +33,8 @@ namespace vcs_Hashtable
             //button
             x_st = 10;
             y_st = 10;
-            dx = 180;
-            dy = 80;
+            dx = 200 + 10;
+            dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -44,7 +44,7 @@ namespace vcs_Hashtable
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
 
-            groupBox1.Location = new Point(x_st + dx * 1+10, y_st + dy * 0);
+            groupBox1.Location = new Point(x_st + dx * 1 + 10, y_st + dy * 0);
 
             x_st = 15;
             y_st = 15;
@@ -67,9 +67,16 @@ namespace vcs_Hashtable
             ht12.Location = new Point(x_st + dx * 1, y_st + dy * 5);
             ht13.Location = new Point(x_st + dx * 1, y_st + dy * 6);
 
-            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-
+            richTextBox1.Size = new Size(500, 600);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1273, 784);
+            this.Text = "vcs_Hashtable";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -178,18 +185,74 @@ namespace vcs_Hashtable
             {
                 richTextBox1.Text += "Key \"龍\" 已被刪除" + "\n";
             }
+        }
 
-
-
-
+        public static void PrintOut(IEnumerable tmyHT)
+        {
+            Console.WriteLine("   品名 (Key)  價格 (Value)");
+            foreach (DictionaryEntry de in tmyHT)
+            {
+                Console.WriteLine("    {0}\t {1}", de.Key, de.Value);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            Hashtable myHT = new Hashtable(); // 建立myHT為一個屬於Hashtable的實體
+
+            Console.WriteLine("\n 1.置入四筆 Key & Value 鍵值到 HashTable 內.");
+            myHT.Add("iPhone5S", 22000);  //添加 key&value鍵值對
+            myHT.Add("iPhone5C", 18000);  //添加 key&value鍵值對
+            myHT.Add("iPad2", 12500);     //添加 key&value鍵值對
+            myHT.Add("iPadMini", 15900);  //添加 key&value鍵值對
+
+            //PrintKeysAndValues(mySL);
+            PrintOut(myHT);
+            Console.WriteLine(" 1.目前 HashTable 內元素總個數 : {0}", myHT.Count);
+            Console.WriteLine(" ------------------------------------------");
+
+            // 查詢產品單價
+            Console.Write(" 2.請輸入 Apple 產品名稱 : ");
+            string item = Console.ReadLine();
+            if (!myHT.ContainsKey(item))      // 判斷HashTable是否含特定鍵,傳回值true或false
+            {
+                Console.WriteLine(" 2. {0} 不存在 !!", item);
+            }
+            else
+            {
+                Console.WriteLine(" 2.{0}單價 : {1}", item, myHT[item]);
+            }
+            Console.WriteLine(" ------------------------------------------");
+
+            // 移除剛查詢的 Key & Value 鍵值對
+            Console.WriteLine(" 3.移除剛查詢鍵值 {0}", item);
+            myHT.Remove(item);
+            PrintOut(myHT);
+            Console.WriteLine(" 3.目前 HashTable 內元素總個數 : {0}", myHT.Count);
+            Console.WriteLine(" ------------------------------------------");
+
+            //移除所有元素
+            Console.WriteLine(" 4.移除 HashTable 內所有元素");
+            myHT.Clear();
+            Console.WriteLine(" 4.目前 HashTable 內元素總個數 : {0}", myHT.Count);
+            Console.WriteLine(" ------------------------------------------");
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            Hashtable m = new Hashtable();  // 非泛型
+
+            m.Add("David", new Member() { Name = "David", Select = true, Score = 70 });
+            m.Add("Mary", new Member() { Name = "Mary", Select = false, Score = 65 });
+            m.Add("Tom", new Member() { Name = "Tom", Select = true, Score = 85 });
+            m.Add("Jack", new Member() { Name = "Jack", Select = true, Score = 95 });
+
+            //非泛型操作
+            Console.WriteLine("=== 非泛型 HasnTable 操作需強制轉換 .... \n");
+            foreach (DictionaryEntry item in m)
+            {
+                Console.WriteLine(((Member)item.Value).ToString());
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -523,7 +586,18 @@ namespace vcs_Hashtable
         //Hashtable 測試 SP
 
 
-    
-    
+
+    }
+
+    class Member
+    {
+        public string Name { get; set; }      // 姓名屬性          
+        public bool Select { get; set; }      // 選課屬性
+        public int Score { get; set; }        // 成績屬性  
+
+        public override string ToString()    // 覆寫覆類別 ToString()方法
+        {
+            return string.Format("姓名 : {0} \t 選課 :{1} \t 成績: {2} \n ", Name, Select ? "是" : "否", Score.ToString());
+        }
     }
 }

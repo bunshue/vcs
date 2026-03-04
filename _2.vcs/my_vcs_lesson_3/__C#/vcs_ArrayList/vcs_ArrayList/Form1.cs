@@ -65,7 +65,37 @@ namespace vcs_ArrayList
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             */
 
+            richTextBox1.Size = new Size(300, 600);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            x_st = 10;
+            y_st = 20;
+            dx = 100 + 10;
+            dy = 60 + 10;
+            bt_arrayList00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_arrayList01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_arrayList02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_arrayList03.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            bt_arrayList04.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            bt_arrayList05.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            bt_arrayList06.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            bt_arrayList07.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            bt_arrayList08.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_arrayList09.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            bt_arrayList10.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            bt_arrayList11.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            bt_arrayList12.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            bt_arrayList13.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            bt_arrayList14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            bt_arrayList15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+
+            this.Size = new Size(1000, 700);
+            this.Text = "vcs_ArrayList";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -382,12 +412,163 @@ namespace vcs_ArrayList
 
         private void bt_arrayList08_Click(object sender, EventArgs e)
         {
+            //ArrayList 1
+            ArrayList m = new ArrayList();   // 非泛型
 
+            //SortedList<string, Member> m = new SortedList<string, Member>();
+
+            m.Add(new Member() { Name = "David", Select = true, Score = 70 });
+            m.Add(new Member() { Name = "Mary", Select = false, Score = 65 });
+            m.Add(new Member() { Name = "Tom", Select = true, Score = 85 });
+            m.Add(new Member() { Name = "Jack", Select = true, Score = 95 });
+
+            Console.WriteLine("=== 非泛型陣列操作需強制轉換 .... \n");
+            foreach (var item in m)
+            {
+                if (item is Member)
+                {
+                    Console.WriteLine("{0} ", item.ToString());
+                }
+                else
+                {
+                    Console.WriteLine("{0} ", (string)item);
+                }
+            }
+            Console.Read();
+        }
+
+
+        // "走訪串列所有元素
+        public static void PrintOut(IEnumerable tAryLst)
+        { // 公開能逐一查看非泛型集合內容的一次的列舉直
+            int i = 0;
+            Console.WriteLine("  目前 AryLst串列內所有元素 : ");
+            foreach (Object obj in tAryLst)
+            {
+                Console.WriteLine("    第{0}個元素 : {1} ", ++i, obj);
+            }
         }
 
         private void bt_arrayList09_Click(object sender, EventArgs e)
         {
+            //ArrayList 2
 
+            ArrayList myAryLst = new ArrayList { "Jack", 20, true }; // 元素為不同資料型別  
+            Console.WriteLine("1.設定 AryLst串列內初值 :");
+            PrintOut(myAryLst);
+            Console.WriteLine("---------------------------------------");
+
+            //插入串列的最後面
+            Console.WriteLine("2.插入 \"大學\" 到串列的最後面 :");
+            myAryLst.Add("大學");
+            PrintOut(myAryLst);
+            Console.WriteLine("---------------------------------------");
+
+            //多筆資料採陣列方式插入到串列最後面
+            Console.WriteLine("3.插入\"台北\" , \"101\" 兩個元素到串列的最後面 :");
+            myAryLst.AddRange(new string[] { "台北", "101" });
+            PrintOut(myAryLst);
+            Console.WriteLine("---------------------------------------");
+
+            //插入到串列的第2個元素後面
+            Console.WriteLine("4.插入\"Wu\" 到串列的第2個元素後面");
+            myAryLst.Insert(1, "Wu");
+            PrintOut(myAryLst);
+            Console.WriteLine("---------------------------------------");
+
+            //刪除串列中 "Wu" 佇個元素
+            Console.WriteLine("5.移除串列中元素為 Wu");
+            myAryLst.Remove("Wu");
+            PrintOut(myAryLst);
+            Console.WriteLine("---------------------------------------");
+
+            //移除串列中第3個元素
+            Console.WriteLine("6.移除串列中第3個元素");
+            myAryLst.RemoveAt(2);
+            PrintOut(myAryLst);
+            Console.WriteLine("---------------------------------------");
+
+            // 移除串列中從第3個元素開始共兩個元素
+            Console.WriteLine("7.移除串列中從第3個元素開始共兩個元素");
+            myAryLst.RemoveRange(2, 2);
+            PrintOut(myAryLst);
+            Console.WriteLine("---------------------------------------");
+
+            // 移除串列中所有元素
+            Console.WriteLine("8.移除串列中所有元素");
+            myAryLst.Clear();
+            Console.WriteLine("  目前 AryList 串列元素總個數 : ", myAryLst.Count);
+            Console.WriteLine("---------------------------------------");
+        }
+
+        public static void PrintOut2(IEnumerable myAryLst)
+        {
+            int i = 0;
+            foreach (Object obj in myAryLst)
+            {
+                Console.WriteLine("\t第{0}個元素 : {1} ", ++i, obj);
+            }
+        }
+
+        private void bt_arrayList10_Click(object sender, EventArgs e)
+        {
+            //ArrayList 3
+            ArrayList myAryLst = new ArrayList { "Jack", "Ford", "Bob", "David" };
+
+            // 顯示ArrayList串列的初值內容(排序前）：
+            Console.WriteLine(" 1. 顯示串列初值設定內容(排序前）:");
+            PrintOut2(myAryLst);
+            Console.WriteLine(" ---------------------------------");
+
+            // 顯示ArrayList串列排序後內容
+            myAryLst.Sort();
+
+            Console.WriteLine(" 2.  myAryLst.Sort()由小而大做遞增排序 :");
+            PrintOut2(myAryLst);
+            Console.WriteLine(" ----------------------------------");
+
+            // 顯示ArrayList串列排序後內容
+            myAryLst.Reverse();
+            Console.WriteLine(" 3. myAryLst.Reverse()由大而小做遞減排序 :");
+            PrintOut2(myAryLst);
+            Console.WriteLine(" ----------------------------------");
+        }
+
+        private void bt_arrayList11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_arrayList12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_arrayList13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_arrayList14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_arrayList15_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+
+    class Member
+    {
+        public string Name { get; set; }      // 姓名屬性          
+        public bool Select { get; set; }      // 選課屬性
+        public int Score { get; set; }        // 成績屬性
+
+        public override string ToString()    // 覆寫覆類別 ToString()方法
+        {
+            return string.Format("姓名 : {0} \t 選課 :{1} \t 成績: {2} \n ", Name, Select ? "是" : "否", Score.ToString());
         }
     }
 }

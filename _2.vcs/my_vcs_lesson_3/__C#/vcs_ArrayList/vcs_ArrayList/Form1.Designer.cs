@@ -48,6 +48,12 @@
             this.button12 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.bt_arrayList15 = new System.Windows.Forms.Button();
+            this.bt_arrayList14 = new System.Windows.Forms.Button();
+            this.bt_arrayList13 = new System.Windows.Forms.Button();
+            this.bt_arrayList12 = new System.Windows.Forms.Button();
+            this.bt_arrayList11 = new System.Windows.Forms.Button();
+            this.bt_arrayList10 = new System.Windows.Forms.Button();
             this.bt_arrayList09 = new System.Windows.Forms.Button();
             this.bt_arrayList08 = new System.Windows.Forms.Button();
             this.bt_arrayList07 = new System.Windows.Forms.Button();
@@ -65,11 +71,10 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Right;
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(623, 0);
+            this.richTextBox1.Location = new System.Drawing.Point(620, 11);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(383, 641);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -229,7 +234,7 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(877, 538);
+            this.bt_clear.Location = new System.Drawing.Point(640, 39);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(75, 35);
             this.bt_clear.TabIndex = 16;
@@ -275,6 +280,12 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.bt_arrayList15);
+            this.groupBox2.Controls.Add(this.bt_arrayList14);
+            this.groupBox2.Controls.Add(this.bt_arrayList13);
+            this.groupBox2.Controls.Add(this.bt_arrayList12);
+            this.groupBox2.Controls.Add(this.bt_arrayList11);
+            this.groupBox2.Controls.Add(this.bt_arrayList10);
             this.groupBox2.Controls.Add(this.bt_arrayList09);
             this.groupBox2.Controls.Add(this.bt_arrayList08);
             this.groupBox2.Controls.Add(this.bt_arrayList07);
@@ -287,32 +298,89 @@
             this.groupBox2.Controls.Add(this.bt_arrayList03);
             this.groupBox2.Location = new System.Drawing.Point(348, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(260, 450);
+            this.groupBox2.Size = new System.Drawing.Size(260, 606);
             this.groupBox2.TabIndex = 19;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "ArrayList";
             // 
+            // bt_arrayList15
+            // 
+            this.bt_arrayList15.Location = new System.Drawing.Point(112, 489);
+            this.bt_arrayList15.Name = "bt_arrayList15";
+            this.bt_arrayList15.Size = new System.Drawing.Size(100, 60);
+            this.bt_arrayList15.TabIndex = 16;
+            this.bt_arrayList15.UseVisualStyleBackColor = true;
+            this.bt_arrayList15.Click += new System.EventHandler(this.bt_arrayList15_Click);
+            // 
+            // bt_arrayList14
+            // 
+            this.bt_arrayList14.Location = new System.Drawing.Point(112, 423);
+            this.bt_arrayList14.Name = "bt_arrayList14";
+            this.bt_arrayList14.Size = new System.Drawing.Size(100, 60);
+            this.bt_arrayList14.TabIndex = 15;
+            this.bt_arrayList14.UseVisualStyleBackColor = true;
+            this.bt_arrayList14.Click += new System.EventHandler(this.bt_arrayList14_Click);
+            // 
+            // bt_arrayList13
+            // 
+            this.bt_arrayList13.Location = new System.Drawing.Point(112, 357);
+            this.bt_arrayList13.Name = "bt_arrayList13";
+            this.bt_arrayList13.Size = new System.Drawing.Size(100, 60);
+            this.bt_arrayList13.TabIndex = 14;
+            this.bt_arrayList13.UseVisualStyleBackColor = true;
+            this.bt_arrayList13.Click += new System.EventHandler(this.bt_arrayList13_Click);
+            // 
+            // bt_arrayList12
+            // 
+            this.bt_arrayList12.Location = new System.Drawing.Point(112, 291);
+            this.bt_arrayList12.Name = "bt_arrayList12";
+            this.bt_arrayList12.Size = new System.Drawing.Size(100, 60);
+            this.bt_arrayList12.TabIndex = 13;
+            this.bt_arrayList12.UseVisualStyleBackColor = true;
+            this.bt_arrayList12.Click += new System.EventHandler(this.bt_arrayList12_Click);
+            // 
+            // bt_arrayList11
+            // 
+            this.bt_arrayList11.Location = new System.Drawing.Point(112, 225);
+            this.bt_arrayList11.Name = "bt_arrayList11";
+            this.bt_arrayList11.Size = new System.Drawing.Size(100, 60);
+            this.bt_arrayList11.TabIndex = 12;
+            this.bt_arrayList11.UseVisualStyleBackColor = true;
+            this.bt_arrayList11.Click += new System.EventHandler(this.bt_arrayList11_Click);
+            // 
+            // bt_arrayList10
+            // 
+            this.bt_arrayList10.Location = new System.Drawing.Point(112, 159);
+            this.bt_arrayList10.Name = "bt_arrayList10";
+            this.bt_arrayList10.Size = new System.Drawing.Size(100, 60);
+            this.bt_arrayList10.TabIndex = 11;
+            this.bt_arrayList10.Text = "ArrayList 3";
+            this.bt_arrayList10.UseVisualStyleBackColor = true;
+            this.bt_arrayList10.Click += new System.EventHandler(this.bt_arrayList10_Click);
+            // 
             // bt_arrayList09
             // 
-            this.bt_arrayList09.Location = new System.Drawing.Point(124, 370);
+            this.bt_arrayList09.Location = new System.Drawing.Point(112, 93);
             this.bt_arrayList09.Name = "bt_arrayList09";
             this.bt_arrayList09.Size = new System.Drawing.Size(100, 60);
             this.bt_arrayList09.TabIndex = 10;
+            this.bt_arrayList09.Text = "ArrayList 2";
             this.bt_arrayList09.UseVisualStyleBackColor = true;
             this.bt_arrayList09.Click += new System.EventHandler(this.bt_arrayList09_Click);
             // 
             // bt_arrayList08
             // 
-            this.bt_arrayList08.Location = new System.Drawing.Point(124, 291);
+            this.bt_arrayList08.Location = new System.Drawing.Point(112, 27);
             this.bt_arrayList08.Name = "bt_arrayList08";
             this.bt_arrayList08.Size = new System.Drawing.Size(100, 60);
             this.bt_arrayList08.TabIndex = 9;
+            this.bt_arrayList08.Text = "ArrayList 1";
             this.bt_arrayList08.UseVisualStyleBackColor = true;
             this.bt_arrayList08.Click += new System.EventHandler(this.bt_arrayList08_Click);
             // 
             // bt_arrayList07
             // 
-            this.bt_arrayList07.Location = new System.Drawing.Point(124, 198);
+            this.bt_arrayList07.Location = new System.Drawing.Point(6, 489);
             this.bt_arrayList07.Name = "bt_arrayList07";
             this.bt_arrayList07.Size = new System.Drawing.Size(100, 60);
             this.bt_arrayList07.TabIndex = 8;
@@ -321,7 +389,7 @@
             // 
             // bt_arrayList06
             // 
-            this.bt_arrayList06.Location = new System.Drawing.Point(124, 112);
+            this.bt_arrayList06.Location = new System.Drawing.Point(6, 423);
             this.bt_arrayList06.Name = "bt_arrayList06";
             this.bt_arrayList06.Size = new System.Drawing.Size(100, 60);
             this.bt_arrayList06.TabIndex = 7;
@@ -331,7 +399,7 @@
             // 
             // bt_arrayList05
             // 
-            this.bt_arrayList05.Location = new System.Drawing.Point(124, 36);
+            this.bt_arrayList05.Location = new System.Drawing.Point(6, 357);
             this.bt_arrayList05.Name = "bt_arrayList05";
             this.bt_arrayList05.Size = new System.Drawing.Size(100, 60);
             this.bt_arrayList05.TabIndex = 6;
@@ -341,7 +409,7 @@
             // 
             // bt_arrayList00
             // 
-            this.bt_arrayList00.Location = new System.Drawing.Point(6, 36);
+            this.bt_arrayList00.Location = new System.Drawing.Point(6, 27);
             this.bt_arrayList00.Name = "bt_arrayList00";
             this.bt_arrayList00.Size = new System.Drawing.Size(100, 60);
             this.bt_arrayList00.TabIndex = 5;
@@ -351,7 +419,7 @@
             // 
             // bt_arrayList01
             // 
-            this.bt_arrayList01.Location = new System.Drawing.Point(6, 112);
+            this.bt_arrayList01.Location = new System.Drawing.Point(6, 93);
             this.bt_arrayList01.Name = "bt_arrayList01";
             this.bt_arrayList01.Size = new System.Drawing.Size(100, 60);
             this.bt_arrayList01.TabIndex = 0;
@@ -361,7 +429,7 @@
             // 
             // bt_arrayList04
             // 
-            this.bt_arrayList04.Location = new System.Drawing.Point(6, 370);
+            this.bt_arrayList04.Location = new System.Drawing.Point(6, 291);
             this.bt_arrayList04.Name = "bt_arrayList04";
             this.bt_arrayList04.Size = new System.Drawing.Size(100, 60);
             this.bt_arrayList04.TabIndex = 4;
@@ -371,7 +439,7 @@
             // 
             // bt_arrayList02
             // 
-            this.bt_arrayList02.Location = new System.Drawing.Point(6, 198);
+            this.bt_arrayList02.Location = new System.Drawing.Point(6, 159);
             this.bt_arrayList02.Name = "bt_arrayList02";
             this.bt_arrayList02.Size = new System.Drawing.Size(100, 60);
             this.bt_arrayList02.TabIndex = 1;
@@ -381,7 +449,7 @@
             // 
             // bt_arrayList03
             // 
-            this.bt_arrayList03.Location = new System.Drawing.Point(6, 291);
+            this.bt_arrayList03.Location = new System.Drawing.Point(6, 225);
             this.bt_arrayList03.Name = "bt_arrayList03";
             this.bt_arrayList03.Size = new System.Drawing.Size(100, 60);
             this.bt_arrayList03.TabIndex = 3;
@@ -451,6 +519,12 @@
         private System.Windows.Forms.Button bt_arrayList02;
         private System.Windows.Forms.Button bt_arrayList03;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button bt_arrayList15;
+        private System.Windows.Forms.Button bt_arrayList14;
+        private System.Windows.Forms.Button bt_arrayList13;
+        private System.Windows.Forms.Button bt_arrayList12;
+        private System.Windows.Forms.Button bt_arrayList11;
+        private System.Windows.Forms.Button bt_arrayList10;
     }
 }
 

@@ -193,19 +193,16 @@ namespace vcs_Mix00
 
             foreach (DriveInfo d in allDrives)
             {
-                Console.WriteLine("磁碟名稱 {0}", d.Name);
-                Console.WriteLine("  磁碟類型: {0}", d.DriveType);
+                richTextBox1.Text += "磁碟名稱 {0}" + d.Name + "\n";
+                richTextBox1.Text += "  磁碟類型: {0}" + d.DriveType + "\n";
                 if (d.IsReady == true)
                 {
-                    Console.WriteLine("  檔案系統名稱: {0}", d.DriveFormat);
-                    Console.WriteLine("  目前可用空間量: \t{0, 15} bytes", d.AvailableFreeSpace);
-                    Console.WriteLine("  可用空間總量: \t{0, 15} bytes", d.TotalFreeSpace);
-                    Console.WriteLine("  可儲存空間總量: \t{0, 15} bytes ", d.TotalSize);
+                    richTextBox1.Text += "  檔案系統名稱: {0}" + d.DriveFormat + "\n";
+                    richTextBox1.Text += "  目前可用空間量: \t{0, 15} bytes" + d.AvailableFreeSpace + "\n";
+                    richTextBox1.Text += "  可用空間總量: \t{0, 15} bytes" + d.TotalFreeSpace + "\n";
+                    richTextBox1.Text += "  可儲存空間總量: \t{0, 15} bytes " + d.TotalSize + "\n";
                 }
             }
-            Console.Read();
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -578,38 +575,35 @@ namespace vcs_Mix00
             DirectoryInfo dir = new DirectoryInfo("D:\\_git\\vcs\\CSharp");
             if (dir.Exists)
             {	// 判斷目錄是否存在
-                Console.WriteLine("D:\\_git\\vcs\\CSharp 路徑存在, 不建立目錄");
+                richTextBox1.Text += "D:\\_git\\vcs\\CSharp 路徑存在, 不建立目錄\n";
             }
             else
             {
-                Console.WriteLine("D:\\_git\\vcs\\CSharp 路徑不存在，建立目錄");
+                richTextBox1.Text += "D:\\_git\\vcs\\CSharp 路徑不存在，建立目錄\n";
                 dir.Create();	// 建立目錄
                 dir.Refresh();	// 重新整理目錄
             }
-            Console.WriteLine("{0}檔案資訊如下：", dir.FullName);
-            Console.WriteLine("建立時間：{0}", dir.CreationTime);
-            Console.WriteLine("存取時間：{0}", dir.LastAccessTime);
-            Console.WriteLine("資料夾名稱：{0}", dir.Name);
-            Console.WriteLine("根目錄：{0}", dir.Parent);
-            Console.WriteLine();
+            richTextBox1.Text += "{0}檔案資訊如下：" + dir.FullName + "\n";
+            richTextBox1.Text += "建立時間：{0}" + dir.CreationTime + "\n";
+            richTextBox1.Text += "存取時間：{0}" + dir.LastAccessTime + "\n";
+            richTextBox1.Text += "資料夾名稱：{0}" + dir.Name + "\n";
+            richTextBox1.Text += "根目錄：{0}" + dir.Parent + "\n";
             Console.Write("是否刪除 D:\\_git\\vcs\\CSharp 資料夾   1.刪除  2.不刪除->");
             if (Console.ReadLine() == "1")
             {
                 try
                 {
                     dir.Delete();	       // 刪除檔案
-                    Console.WriteLine("刪除成功");
+                    richTextBox1.Text += "刪除成功" + "\n";
                 }
                 catch (Exception ex)   // 刪除檔案失敗會產生例外
                 {
-                    Console.WriteLine("刪除失敗");
-                    Console.WriteLine(ex.Message);  // 顯示例外訊息
+                    richTextBox1.Text += "刪除失敗" + "\n";
+                    richTextBox1.Text += ex.Message + "\n";  // 顯示例外訊息
                 }
             }
-            Console.Read();
 
-
-            //6060
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //Console.Write("請輸入路徑->");
             //string fpath = Console.ReadLine();
@@ -619,20 +613,15 @@ namespace vcs_Mix00
             DirectoryInfo dir2 = new DirectoryInfo(foldername);
             if (!dir2.Exists)	//判斷路徑是否不存在
             {
-                Console.WriteLine("路徑不存在");
-                Console.Read();
+                richTextBox1.Text += "路徑不存在" + "\n";
                 return;
             }
-            Console.WriteLine("{0}資料夾下的子資料夾如下：", dir2.FullName);
+            richTextBox1.Text += "{0}資料夾下的子資料夾如下：" + dir2.FullName + "\n";
             DirectoryInfo[] subdir = dir2.GetDirectories();
             foreach (DirectoryInfo r in subdir)
             {
-                Console.WriteLine("完整路徑：{0}  \t建立時間{1}", r.FullName, r.CreationTime);
+                richTextBox1.Text += "完整路徑：{0}  \t建立時間{1}" + r.FullName + r.CreationTime + "\n";
             }
-            Console.Read();
-
-
-
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -823,7 +812,7 @@ namespace vcs_Mix00
         {
             if (!File.Exists(path))
             {
-                Console.WriteLine("文件不存在！");
+                richTextBox1.Text += "文件不存在！\n";
                 return;
             }
             Hashtable ht = new Hashtable(StringComparer.OrdinalIgnoreCase);
@@ -891,8 +880,8 @@ namespace vcs_Mix00
             //打印出來
             foreach (object item in keysList)
             {
-                //Console.WriteLine((string)item + ":" + (string)ht[item]);
-                Console.WriteLine(item.ToString() + ":" + ht[item].ToString());
+                //richTextBox1.Text +=(string)item + ":" + (string)ht[item]);
+                richTextBox1.Text += item.ToString() + ":" + ht[item].ToString() + "\n";
             }
         }
 
@@ -1379,11 +1368,13 @@ namespace vcs_Mix00
         static void hanoi(int n, int p1, int p2, int p3)
         {
             if (n == 1)
-                Console.WriteLine("盤子從 " + p1 + " 移到 " + p3);
+            {
+                //richTextBox1.Text += "盤子從 " + p1 + " 移到 " + p3;
+            }
             else
             {
                 hanoi(n - 1, p1, p3, p2);
-                Console.WriteLine("盤子從 " + p1 + " 移到 " + p3);
+                //richTextBox1.Text += "盤子從 " + p1 + " 移到 " + p3;
                 hanoi(n - 1, p2, p1, p3);
             }
         }
@@ -1404,7 +1395,7 @@ namespace vcs_Mix00
         {
             Book eng = new Book();
             eng.books = 10;
-            Console.WriteLine("目前英文類書籍共有{0}本", eng.books);
+            richTextBox1.Text += "目前英文類書籍共有{0}本" + eng.books + "\n";
         }
 
         static int top = -1;
@@ -1412,7 +1403,9 @@ namespace vcs_Mix00
         public static void Push(int[] stack, int MAX, int val)
         {
             if (top >= MAX - 1)
-                Console.WriteLine("[堆疊已經滿了]");
+            {
+                //richTextBox1.Text += "[堆疊已經滿了]" + "\n";
+            }
             else
             {
                 top++;
@@ -1423,9 +1416,13 @@ namespace vcs_Mix00
         public static int Pop(int[] stack)
         {
             if (top < 0)
-                Console.WriteLine("[堆疊已經空了]");
+            {
+                //richTextBox1.Text += "[堆疊已經空了]" + "\n";
+            }
             else
+            {
                 top--;
+            }
             return stack[top];
         }
 
@@ -1439,7 +1436,7 @@ namespace vcs_Mix00
             Random intRnd = new Random();
             for (i = 0; i < 52; i++)
                 card[i] = i;
-            Console.WriteLine("[洗牌中...請稍後!]");
+            richTextBox1.Text += "[洗牌中...請稍後!]" + "\n";
             while (k < 30)
             {
                 for (i = 0; i < 51; i++)
@@ -1463,9 +1460,9 @@ namespace vcs_Mix00
                 Push(stack, 52, card[i]);  //將52張牌推入堆疊
                 i++;
             }
-            Console.WriteLine("[逆時針發牌]");
-            Console.WriteLine("[顯示各家牌子]\n 東家\t  北家\t   西家\t    南家");
-            Console.WriteLine("=================================");
+            richTextBox1.Text += "[逆時針發牌]" + "\n";
+            richTextBox1.Text += "[顯示各家牌子]\n 東家\t  北家\t   西家\t    南家" + "\n";
+            richTextBox1.Text += "=================================" + "\n";
             while (top >= 0)
             {
                 style = stack[top] / 13;   //計算牌子花色
@@ -1484,10 +1481,10 @@ namespace vcs_Mix00
                         ascVal = 'S';
                         break;
                 }
-                Console.WriteLine("[" + ascVal + (stack[top] % 13 + 1) + "]");
-                Console.WriteLine('\t');
+                richTextBox1.Text += "[" + ascVal + (stack[top] % 13 + 1) + "]" + "\n";
+                richTextBox1.Text += '\t' + "\n";
                 if (top % 4 == 0)
-                    Console.WriteLine();
+                    richTextBox1.Text += "\n";
                 top--;
             }
             //ReadKey();
@@ -1503,11 +1500,11 @@ namespace vcs_Mix00
             int z;
             x = 20;
             y = 30;
-            Console.WriteLine("\n方法內 交換前\t\t\t：x= {0}   y={1} ", x, y);
+            //richTextBox1.Text +=string.Format("\n方法內 交換前\t\t\t：x= {0}   y={1} ", x, y);
             z = x;   //透過第三個變數來做x,y值作互換
             x = y;
             y = z;
-            Console.WriteLine("\n方法內 交換後\t\t\t：x= {0}   y={1}", x, y);
+            //richTextBox1.Text += string.Format("\n方法內 交換後\t\t\t：x= {0}   y={1}", x, y);
         }
 
         private static void CallRef(ref int x, ref int y)
@@ -1515,11 +1512,11 @@ namespace vcs_Mix00
             int z;
             x = 20;
             y = 30;
-            Console.WriteLine("\n方法內 交換前\t\t：x= {0}   y={1} ", x, y);
+            //richTextBox1.Text +=string.Format("\n方法內 交換前\t\t：x= {0}   y={1} ", x, y);
             z = x;  //透過第三個變數來做x,y值作互換
             x = y;
             y = z;
-            Console.WriteLine("\n方法內 交換後\t\t：x= {0}   y={1} ", x, y);
+            //richTextBox1.Text += string.Format("\n方法內 交換後\t\t：x= {0}   y={1} ", x, y);
         }
 
         private void button30_Click(object sender, EventArgs e)
@@ -1527,28 +1524,22 @@ namespace vcs_Mix00
             //Call by Value vs Call by Reference
             //value
 
-            Console.WriteLine("\n  **** Call By Value 傳值呼叫 **** \n");
+            richTextBox1.Text += string.Format("\n  **** Call By Value 傳值呼叫 **** \n");
             int a = 10;
             int b = 12;
-            Console.WriteLine("\n呼叫敘述 未進入方法前\t\t：a= {0} b={1}", a, b);
+            richTextBox1.Text += string.Format("\n呼叫敘述 未進入方法前\t\t：a= {0} b={1}", a, b);
             CallValue(a, b);
-            Console.WriteLine("\n呼叫敘述 離開方法回原處時\t：a={0}  b={1}", a, b);
-            Console.Read();
-
-
-
+            richTextBox1.Text += string.Format("\n呼叫敘述 離開方法回原處時\t：a={0}  b={1}", a, b);
 
             //-------------
             //reference
 
-            Console.WriteLine("\n  **** Call By Reference 參考呼叫 **** \n");
+            richTextBox1.Text += string.Format("\n  **** Call By Reference 參考呼叫 **** \n");
             a = 10;
             b = 12;
-            Console.WriteLine("\n呼叫敘述 未進入方法前\t：a= {0}  b={1}", a, b);
+            richTextBox1.Text += string.Format("\n呼叫敘述 未進入方法前\t：a= {0}  b={1}", a, b);
             CallRef(ref a, ref b);
-            Console.WriteLine("\n呼叫敘述 離開方法回原處\t：a= {0}  b={1}", a, b);
-            Console.Read();
-
+            richTextBox1.Text += string.Format("\n呼叫敘述 離開方法回原處\t：a= {0}  b={1}", a, b);
         }
 
         private void button31_Click(object sender, EventArgs e)
@@ -1594,7 +1585,7 @@ namespace vcs_Mix00
                 richTextBox1.Text += total[i] + "\n";
             }
 
-            //6060
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //宣告鋸齒陣列為隱含型別
             var subject = new[]
@@ -1662,8 +1653,7 @@ namespace vcs_Mix00
                     }//end Main()
             */
 
-
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
             /*
             int num = 10;
             double sum = 0;
@@ -1678,10 +1668,10 @@ namespace vcs_Mix00
             foreach (double height in tall)  // 計算總人數身高的加總
                 sum += height;   // 將所有陣列元素依序加總指定給sum           
 
-            //Console.WriteLine("\n=== " + i.ToString("#") + " 位平均身高:" + (sum / num).ToString("00.00"));// 顯示平均身高
+            //richTextBox1.Text +="\n=== " + i.ToString("#") + " 位平均身高:" + (sum / num).ToString("00.00"));// 顯示平均身高
             */
 
-            //6060
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //宣告陣列並初始化
             int[] number = { 124, 65, 3314, 81, 92, 65 };
@@ -1702,7 +1692,7 @@ namespace vcs_Mix00
             int unknown = Array.IndexOf(number, 33);
             //WriteLine($"從前方找33，索引值 {unknown}");
 
-            //6060
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             string[] RoleName = new string[] { "魯夫", "喬巴", "羅賓", "香吉士", "騙人布" };
             int[] Money = new int[] { 300000000, 50, 78000000, 77000000, 30000000 };
@@ -1711,8 +1701,8 @@ namespace vcs_Mix00
             for (int i = 0; i <= RoleName.GetUpperBound(0); i++)
             {
                 // 顯示RoleName[0]~RoleName[4] 及Money[0] ~Money[4] 
-                //Console.WriteLine("{0}\t{1}", RoleName[i], Money[i]);
-                Console.WriteLine(RoleName[i] + "\t" + Money[i].ToString("#,#"));
+                //richTextBox1.Text +="{0}\t{1}", RoleName[i], Money[i]);
+                richTextBox1.Text += RoleName[i] + "\t" + Money[i].ToString("#,#") + "\n";
             }
 
             richTextBox1.Text += "aaaaaaaaaaaaaaaaaaa\n";
@@ -1724,7 +1714,7 @@ namespace vcs_Mix00
             richTextBox1.Text += "num = " + num.ToString() + "\n";
 
 
-            //6060
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
 
         }
@@ -1733,66 +1723,110 @@ namespace vcs_Mix00
         {
             Car1 Benz1 = new Car1();
             Benz1.SetSpeed(500);			// 速度值超過 200
-            Console.WriteLine("Benz1.GetSpeed() = {0}", Benz1.GetSpeed());	// 顯示速度最大值200
-            Console.Read();
+            richTextBox1.Text += "Benz1.GetSpeed() = {0}" + Benz1.GetSpeed() + "\n";	// 顯示速度最大值200
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             Car2 Benz2 = new Car2();
             Benz2.Speed = 199;
-            Console.WriteLine("現在速度:{0}", Benz2.Speed);
-            Console.WriteLine("加速 ...");
+            richTextBox1.Text += "現在速度:{0}" + Benz2.Speed + "\n";
+            richTextBox1.Text += "加速 ..." + "\n";
             Benz2.Accelerate();
-            Console.WriteLine("現在速度:{0}", Benz2.Speed);
-            Console.WriteLine("加速 ...");
+            richTextBox1.Text += "現在速度:{0}" + Benz2.Speed + "\n";
+            richTextBox1.Text += "加速 ..." + "\n";
             Benz2.Accelerate();
-            Console.WriteLine("現在速度:{0}", Benz2.Speed);
-            Console.Read();
+            richTextBox1.Text += "現在速度:{0}" + Benz2.Speed + "\n";
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             Student1 Peter = new Student1();
-            Console.WriteLine(" Peter的資料-->使用Student()建構式");
+            richTextBox1.Text += " Peter的資料-->使用Student()建構式\n";
             Peter.GetShow();
             Student1 David = new Student1(56);
-            Console.WriteLine(" David的資料-->使用Student(56)建構式");
+            richTextBox1.Text += " David的資料-->使用Student(56)建構式\n";
             David.GetShow();
             Student1 Mary = new Student1(48, 150);
-            Console.WriteLine(" Mary的資料 -->使用Student(48, 150)建構式");
+            richTextBox1.Text += " Mary的資料 -->使用Student(48, 150)建構式\n";
             Mary.GetShow();
-            Console.Read();
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             Student2 David2 = new Student2(56);
-            Console.WriteLine(" David2的資料-->使用Student(56)建構式");
+            richTextBox1.Text += " David2的資料-->使用Student(56)建構式\n";
             David2.GetShow();
             Student2 Mary2 = new Student2(48, 150);
-            Console.WriteLine(" Mary2的資料 -->使用Student(48, 150)建構式");
+            richTextBox1.Text += " Mary2的資料 -->使用Student(48, 150)建構式\n";
             Mary2.GetShow();
-            Console.Read();
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             Student3 Peter3 = new Student3();
-            Console.WriteLine(" Peter3的資料-->使用Student()建構式");
+            richTextBox1.Text += " Peter3的資料-->使用Student()建構式\n";
             Peter3.GetShow();
             Student3 David3 = new Student3(56);
-            Console.WriteLine(" David3的資料-->使用Student(56)建構式");
+            richTextBox1.Text += " David3的資料-->使用Student(56)建構式\n";
             David3.GetShow();
             Student3 Mary3 = new Student3(48, 150);
-            Console.WriteLine(" Mary3的資料 -->使用Student(48, 150)建構式");
+            richTextBox1.Text += " Mary3的資料 -->使用Student(48, 150)建構式\n";
             Mary3.GetShow();
-            Console.Read();
+        }
+
+        private void CallOut(out int x, out int y)
+        {
+            int z;
+            x = 20;
+            y = 30;
+            richTextBox1.Text += string.Format("\n方法內 交換前\t\t\t: x= {0}  y={1} ", x, y);
+            z = x;
+            x = y;
+            y = z;
+            richTextBox1.Text += string.Format("\n方法內 交換後\t\t\t: x= {0}  y={1} ", x, y);
         }
 
         private void button34_Click(object sender, EventArgs e)
         {
+            //測試out
+
+            richTextBox1.Text += "\n  **** Call Out 傳出參數 **** \n";
+            int a, b;
+            richTextBox1.Text += "\n呼叫敘述 未進入方法前  a 和 b 未設定初值\n";
+            CallOut(out a, out b);
+            richTextBox1.Text += string.Format("\n呼叫敘述 離開方法回主程式\t: a= {0}  b={1}", a, b) + "\n";
         }
 
         private void button35_Click(object sender, EventArgs e)
         {
+            // 建立RoleName[0]~RoleName[4]用來存放角色姓名
+            string[] RoleName = new string[] { "魯夫", "喬巴", "羅賓", "香吉士", "騙人布" };
+            // 建立Money[0]~Money[4] 用來存放角色的懸賞金額
+            int[] Money = new int[] { 300000000, 50, 78000000, 77000000, 30000000 };
+            Console.WriteLine("==草帽海賊團成員(遞增排序)==\n");
+            Console.WriteLine("姓名\t懸賞金額");
+            Console.WriteLine("==================");
+            // Money 陣列遞增排序，且RoleName亦跟著更動
+            Array.Sort(Money, RoleName);
+            int i; // 宣告 i 為for迴圈計數變數
+            // 陣列的GetUpperBound()方法可用來取得某一維度的上限
+            // 因此RoleName.GetUpperBound(0) 會傳回 4
+            for (i = 0; i <= RoleName.GetUpperBound(0); i++)
+            {
+                // 顯示RoleName[0]~RoleName[4] 及Money[0] ~Money[4] 
+                Console.WriteLine(RoleName[i] + "\t" + Money[i].ToString("#,#"));
+            }
+            Console.WriteLine("\n");
 
+            Console.WriteLine("==草帽海賊團成員(遞減排序)==\n");
+            Console.WriteLine("姓名\t懸賞金額");
+            Console.WriteLine("==================");
+            // Money 陣列遞增排序，且RoleName亦跟著更動
+            Array.Sort(Money, RoleName);
+            // 反轉Money陣列，使Money陣列變成遞減排序
+            Array.Reverse(Money);
+            Array.Reverse(RoleName);    // 反轉RoleName陣列
+            for (i = 0; i <= RoleName.GetUpperBound(0); i++)
+            {
+                Console.WriteLine(RoleName[i] + "\t" + Money[i].ToString("#,#"));
+            }
         }
 
         private void button36_Click(object sender, EventArgs e)
@@ -3018,8 +3052,8 @@ namespace vcs_Mix00
         // Student類別的GetShow()方法，可顯示學生的身高和體重
         public void GetShow()
         {
-            Console.WriteLine(" 身高是: {0} ", _Height);
-            Console.WriteLine(" 體重是: {0} \n", _Weight);
+            //richTextBox1.Text +=string.Format(" 身高是: {0} ", _Height);
+            //richTextBox1.Text += string.Format(" 體重是: {0} \n", _Weight);
         }
     }
 
@@ -3046,8 +3080,8 @@ namespace vcs_Mix00
         // Student類別的GetShow()方法，可顯示學生的身高和體重
         public void GetShow()
         {
-            Console.WriteLine(" 身高是: {0} ", _Height);
-            Console.WriteLine(" 體重是: {0} \n", _Weight);
+            //richTextBox1.Text +=string.Format(" 身高是: {0} ", _Height);
+            //richTextBox1.Text += string.Format(" 體重是: {0} \n", _Weight);
         }
     }
 
@@ -3074,8 +3108,27 @@ namespace vcs_Mix00
         // Student類別的GetShow()方法，可顯示學生的身高和體重
         public void GetShow()
         {
-            Console.WriteLine(" 身高是: {0} ", _Height);
-            Console.WriteLine(" 體重是: {0} \n", _Weight);
+            //richTextBox1.Text +=" 身高是: {0} "+ _Height+ "\n";
+            //richTextBox1.Text +=" 體重是: {0} \n"+ _Weight+ "\n";
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+
