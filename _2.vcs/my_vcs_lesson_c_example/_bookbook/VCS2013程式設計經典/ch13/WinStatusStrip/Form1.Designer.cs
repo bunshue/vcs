@@ -53,16 +53,16 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripDropDownButton1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 214);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 389);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(284, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(589, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(129, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(128, 17);
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
             // toolStripDropDownButton1
@@ -81,28 +81,28 @@
             // 最末張ToolStripMenuItem
             // 
             this.最末張ToolStripMenuItem.Name = "最末張ToolStripMenuItem";
-            this.最末張ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.最末張ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.最末張ToolStripMenuItem.Text = "最末張";
             this.最末張ToolStripMenuItem.Click += new System.EventHandler(this.最末張ToolStripMenuItem_Click);
             // 
             // 下一張ToolStripMenuItem
             // 
             this.下一張ToolStripMenuItem.Name = "下一張ToolStripMenuItem";
-            this.下一張ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.下一張ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.下一張ToolStripMenuItem.Text = "下一張";
             this.下一張ToolStripMenuItem.Click += new System.EventHandler(this.下一張ToolStripMenuItem_Click);
             // 
             // 上一張ToolStripMenuItem
             // 
             this.上一張ToolStripMenuItem.Name = "上一張ToolStripMenuItem";
-            this.上一張ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.上一張ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.上一張ToolStripMenuItem.Text = "上一張";
             this.上一張ToolStripMenuItem.Click += new System.EventHandler(this.上一張ToolStripMenuItem_Click);
             // 
             // 第一張ToolStripMenuItem
             // 
             this.第一張ToolStripMenuItem.Name = "第一張ToolStripMenuItem";
-            this.第一張ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.第一張ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.第一張ToolStripMenuItem.Text = "第一張";
             this.第一張ToolStripMenuItem.Click += new System.EventHandler(this.第一張ToolStripMenuItem_Click);
             // 
@@ -110,7 +110,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 236);
+            this.ClientSize = new System.Drawing.Size(589, 411);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.statusStrip1);
             this.Name = "Form1";

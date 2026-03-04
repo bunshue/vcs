@@ -63,7 +63,7 @@
             this.toolStripLabel1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(428, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(704, 25);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -145,7 +145,7 @@
             this.tsbFontColor.Image = ((System.Drawing.Image)(resources.GetObject("tsbFontColor.Image")));
             this.tsbFontColor.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbFontColor.Name = "tsbFontColor";
-            this.tsbFontColor.Size = new System.Drawing.Size(71, 19);
+            this.tsbFontColor.Size = new System.Drawing.Size(71, 22);
             this.tsbFontColor.Text = "字型色彩";
             // 
             // 黑ToolStripMenuItem
@@ -179,7 +179,7 @@
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(0, 0);
+            this.toolStripLabel1.Size = new System.Drawing.Size(0, 22);
             // 
             // richTextBox1
             // 
@@ -193,7 +193,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(428, 241);
+            this.ClientSize = new System.Drawing.Size(704, 460);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "Form1";

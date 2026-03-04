@@ -17,7 +17,6 @@ namespace WinMonthcalendar
             InitializeComponent();
         }
 
-        // 表單載入時執行
         private void Form1_Load(object sender, EventArgs e)
         {
             // 建立Product陣列用來存放產品
@@ -32,7 +31,6 @@ namespace WinMonthcalendar
             checkedListBox1.CheckOnClick = true; // 只按一下選取
         }
 
-        // 按 [確定] 鈕執行
         private void btnOk_Click(object sender, EventArgs e)
         {
             textBox1.Text = "訂購產品如下" + Environment.NewLine + Environment.NewLine;
@@ -52,7 +50,6 @@ namespace WinMonthcalendar
                 ToShortDateString() + " 送達貴處";
         }
 
-        // 按 [重選] 鈕執行
         private void btnReSet_Click(object sender, EventArgs e)
         {
             // 設定所有核取方塊不勾選
@@ -61,12 +58,6 @@ namespace WinMonthcalendar
                 checkedListBox1.SetItemChecked(i, false);
             }
             textBox1.Text = "";
-        }
-
-        // 按 [結束] 鈕執行
-        private void btnEnd_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
     }
 }

@@ -56,7 +56,7 @@
             this.cboFontColor});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(530, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(683, 27);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -68,53 +68,53 @@
             this.清除ToolStripMenuItem,
             this.結束ToolStripMenuItem});
             this.檔案FToolStripMenuItem.Name = "檔案FToolStripMenuItem";
-            this.檔案FToolStripMenuItem.Size = new System.Drawing.Size(50, 24);
+            this.檔案FToolStripMenuItem.Size = new System.Drawing.Size(49, 23);
             this.檔案FToolStripMenuItem.Text = "檔案&F";
             // 
             // 開檔ToolStripMenuItem
             // 
             this.開檔ToolStripMenuItem.Name = "開檔ToolStripMenuItem";
-            this.開檔ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.開檔ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.開檔ToolStripMenuItem.Text = "開檔";
             this.開檔ToolStripMenuItem.Click += new System.EventHandler(this.開檔ToolStripMenuItem_Click);
             // 
             // 存檔ToolStripMenuItem
             // 
             this.存檔ToolStripMenuItem.Name = "存檔ToolStripMenuItem";
-            this.存檔ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.存檔ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.存檔ToolStripMenuItem.Text = "存檔";
             this.存檔ToolStripMenuItem.Click += new System.EventHandler(this.存檔ToolStripMenuItem_Click);
             // 
             // 清除ToolStripMenuItem
             // 
             this.清除ToolStripMenuItem.Name = "清除ToolStripMenuItem";
-            this.清除ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.清除ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.清除ToolStripMenuItem.Text = "清除";
             this.清除ToolStripMenuItem.Click += new System.EventHandler(this.清除ToolStripMenuItem_Click);
             // 
             // 結束ToolStripMenuItem
             // 
             this.結束ToolStripMenuItem.Name = "結束ToolStripMenuItem";
-            this.結束ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.結束ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.結束ToolStripMenuItem.Text = "結束";
             this.結束ToolStripMenuItem.Click += new System.EventHandler(this.結束ToolStripMenuItem_Click);
             // 
             // 項目符號ToolStripMenuItem
             // 
             this.項目符號ToolStripMenuItem.Name = "項目符號ToolStripMenuItem";
-            this.項目符號ToolStripMenuItem.Size = new System.Drawing.Size(68, 24);
+            this.項目符號ToolStripMenuItem.Size = new System.Drawing.Size(67, 23);
             this.項目符號ToolStripMenuItem.Text = "項目符號";
             this.項目符號ToolStripMenuItem.Click += new System.EventHandler(this.項目符號ToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(12, 24);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(12, 23);
             // 
             // 字型大小ToolStripMenuItem
             // 
             this.字型大小ToolStripMenuItem.Name = "字型大小ToolStripMenuItem";
-            this.字型大小ToolStripMenuItem.Size = new System.Drawing.Size(68, 24);
+            this.字型大小ToolStripMenuItem.Size = new System.Drawing.Size(67, 23);
             this.字型大小ToolStripMenuItem.Text = "字型大小";
             // 
             // cboSize
@@ -127,13 +127,13 @@
             "14",
             "16"});
             this.cboSize.Name = "cboSize";
-            this.cboSize.Size = new System.Drawing.Size(75, 24);
+            this.cboSize.Size = new System.Drawing.Size(75, 23);
             this.cboSize.SelectedIndexChanged += new System.EventHandler(this.cboSize_SelectedIndexChanged);
             // 
             // 字型色彩ToolStripMenuItem
             // 
             this.字型色彩ToolStripMenuItem.Name = "字型色彩ToolStripMenuItem";
-            this.字型色彩ToolStripMenuItem.Size = new System.Drawing.Size(68, 24);
+            this.字型色彩ToolStripMenuItem.Size = new System.Drawing.Size(67, 23);
             this.字型色彩ToolStripMenuItem.Text = "字型色彩";
             // 
             // cboFontColor
@@ -145,7 +145,7 @@
             "綠",
             "藍"});
             this.cboFontColor.Name = "cboFontColor";
-            this.cboFontColor.Size = new System.Drawing.Size(75, 24);
+            this.cboFontColor.Size = new System.Drawing.Size(75, 23);
             this.cboFontColor.SelectedIndexChanged += new System.EventHandler(this.cboFontColor_SelectedIndexChanged);
             // 
             // richTextBox1
@@ -160,7 +160,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(530, 262);
+            this.ClientSize = new System.Drawing.Size(683, 429);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;

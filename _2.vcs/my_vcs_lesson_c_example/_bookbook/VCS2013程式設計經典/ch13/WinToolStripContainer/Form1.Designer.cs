@@ -59,11 +59,11 @@
             // 
             this.toolStripContainer1.ContentPanel.AutoScroll = true;
             this.toolStripContainer1.ContentPanel.Controls.Add(this.richTextBox1);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(465, 279);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(624, 437);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(465, 304);
+            this.toolStripContainer1.Size = new System.Drawing.Size(624, 462);
             this.toolStripContainer1.TabIndex = 3;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
@@ -95,7 +95,7 @@
             this.toolStripLabel1});
             this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(397, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(391, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -103,7 +103,7 @@
             // 
             this.tsbOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbOpen.Name = "tsbOpen";
-            this.tsbOpen.Size = new System.Drawing.Size(36, 22);
+            this.tsbOpen.Size = new System.Drawing.Size(35, 22);
             this.tsbOpen.Text = "開檔";
             this.tsbOpen.Click += new System.EventHandler(this.tsbOpen_Click);
             // 
@@ -111,7 +111,7 @@
             // 
             this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSave.Name = "tsbSave";
-            this.tsbSave.Size = new System.Drawing.Size(36, 22);
+            this.tsbSave.Size = new System.Drawing.Size(35, 22);
             this.tsbSave.Text = "存檔";
             this.tsbSave.Click += new System.EventHandler(this.tsbSave_Click);
             // 
@@ -121,7 +121,7 @@
             this.tsbCls.Image = ((System.Drawing.Image)(resources.GetObject("tsbCls.Image")));
             this.tsbCls.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbCls.Name = "tsbCls";
-            this.tsbCls.Size = new System.Drawing.Size(36, 22);
+            this.tsbCls.Size = new System.Drawing.Size(35, 22);
             this.tsbCls.Text = "清除";
             this.tsbCls.Click += new System.EventHandler(this.tsbCls_Click);
             // 
@@ -131,7 +131,7 @@
             this.tsbBullet.Image = ((System.Drawing.Image)(resources.GetObject("tsbBullet.Image")));
             this.tsbBullet.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbBullet.Name = "tsbBullet";
-            this.tsbBullet.Size = new System.Drawing.Size(60, 22);
+            this.tsbBullet.Size = new System.Drawing.Size(59, 22);
             this.tsbBullet.Text = "項目符號";
             this.tsbBullet.Click += new System.EventHandler(this.tsbBullet_Click);
             // 
@@ -143,7 +143,7 @@
             // toolStripLabel2
             // 
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(56, 22);
+            this.toolStripLabel2.Size = new System.Drawing.Size(55, 22);
             this.toolStripLabel2.Text = "字型大小";
             // 
             // cboSize
@@ -175,34 +175,34 @@
             this.tsbFontColor.Image = ((System.Drawing.Image)(resources.GetObject("tsbFontColor.Image")));
             this.tsbFontColor.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbFontColor.Name = "tsbFontColor";
-            this.tsbFontColor.Size = new System.Drawing.Size(72, 22);
+            this.tsbFontColor.Size = new System.Drawing.Size(71, 22);
             this.tsbFontColor.Text = "字型色彩";
             // 
             // 黑ToolStripMenuItem
             // 
             this.黑ToolStripMenuItem.Name = "黑ToolStripMenuItem";
-            this.黑ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.黑ToolStripMenuItem.Size = new System.Drawing.Size(86, 22);
             this.黑ToolStripMenuItem.Text = "黑";
             this.黑ToolStripMenuItem.Click += new System.EventHandler(this.黑ToolStripMenuItem_Click);
             // 
             // 紅ToolStripMenuItem
             // 
             this.紅ToolStripMenuItem.Name = "紅ToolStripMenuItem";
-            this.紅ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.紅ToolStripMenuItem.Size = new System.Drawing.Size(86, 22);
             this.紅ToolStripMenuItem.Text = "紅";
             this.紅ToolStripMenuItem.Click += new System.EventHandler(this.紅ToolStripMenuItem_Click);
             // 
             // 綠ToolStripMenuItem
             // 
             this.綠ToolStripMenuItem.Name = "綠ToolStripMenuItem";
-            this.綠ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.綠ToolStripMenuItem.Size = new System.Drawing.Size(86, 22);
             this.綠ToolStripMenuItem.Text = "綠";
             this.綠ToolStripMenuItem.Click += new System.EventHandler(this.綠ToolStripMenuItem_Click);
             // 
             // 藍ToolStripMenuItem
             // 
             this.藍ToolStripMenuItem.Name = "藍ToolStripMenuItem";
-            this.藍ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.藍ToolStripMenuItem.Size = new System.Drawing.Size(86, 22);
             this.藍ToolStripMenuItem.Text = "藍";
             this.藍ToolStripMenuItem.Click += new System.EventHandler(this.藍ToolStripMenuItem_Click);
             // 
@@ -215,7 +215,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(465, 304);
+            this.ClientSize = new System.Drawing.Size(624, 462);
             this.Controls.Add(this.toolStripContainer1);
             this.Name = "Form1";
             this.Text = "Form1";

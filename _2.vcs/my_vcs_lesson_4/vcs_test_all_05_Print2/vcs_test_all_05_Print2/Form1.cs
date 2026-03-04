@@ -47,18 +47,43 @@ namespace vcs_test_all_05_Print2
             y_st = 10;
             dx = 200 + 10;
             dy = 60 + 10;
+            groupBox0.Size = new Size(200, 280);
+            groupBox1.Size = new Size(200, 280);
+            groupBox2.Size = new Size(200, 280);
+            groupBox3.Size = new Size(200, 280);
 
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            groupBox3.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            groupBox3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
             textBox1.Size = new Size(400, 300);
-            textBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            textBox1.Location = new Point(x_st + dx * 2, y_st + dy * 4 + 20);
 
             richTextBox1.Size = new Size(400, 800);
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            x_st = 10;
+            y_st = 20;
+            dx = 180 + 10;
+            dy = 55 + 10;
+            button00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button03.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button20.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button30.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button31.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button32.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button33.Location = new Point(x_st + dx * 0, y_st + dy * 3);
 
             this.Size = new Size(1300, 910);
             this.Text = "vcs_test_all_05_Print2";

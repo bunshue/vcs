@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Xml.Linq;
 
-//語言集成查詢 (LINQ) 是 Visual Studio 2008 和 .NET Framework 3.5 版中引入的一項創新功能。
+//語言集成查詢 (LINQ)
 /*
 查詢是一種從數據源檢索數據的表達式。 隨著時間的推移，人們已經為各種數據源開發了不同的語言；
 例如，用於關系數據庫的 SQL 和用於 XML 的 XQuery。 因此，開發人員不得不針對他們必須支持的每種數據源或數據格式而學習新的查詢語言。
@@ -22,7 +22,6 @@ namespace vcs_LINQ
 {
     public partial class Form1 : Form
     {
-
         public Form1()
         {
             InitializeComponent();
@@ -71,7 +70,6 @@ namespace vcs_LINQ
             listBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             dataGridView1.Size = new Size(400, 300);
             dataGridView1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-
 
             richTextBox1.Size = new Size(600, 400);
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 300);
@@ -244,7 +242,6 @@ namespace vcs_LINQ
             //LINQ to XML RW
             /*
             //LINQ to XML操作Xml文檔
-
             //.Net中的System.Xml.Linq命名空間提供了linq to xml的支持。這個命名空間中的XDocument，XElement以及XText，XAttribute提供了讀寫xml文檔的關鍵方法。
             1. 使用linq to xml寫xml：
             使用XDocument的構造函數可以構造一個Xml文檔對象；使用XElement對象可以構造一個xml節點元素，使用XAttribute構造函數可以構造元素的屬性；使用XText構造函數可以構造節點內的文本。
@@ -315,7 +312,6 @@ namespace vcs_LINQ
             {
                 richTextBox1.Text = "路徑有錯";
             }
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -412,3 +408,4 @@ namespace vcs_LINQ
         }
     }
 }
+

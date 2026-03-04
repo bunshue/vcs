@@ -95,31 +95,20 @@ namespace vcs_DataTable1
 
             show_data_table(dt);//顯示 DataTable 的內容
 
-            string html_result = newHtml(dt, 3);
-            richTextBox1.Text += "DataTable轉HTML\n" + html_result + "\n";
-        }
+            int rows = dt.Rows.Count;
 
-        public string newHtml(DataTable table, int z)
-        {
-            int rows = table.Rows.Count;
+            string a = "";
 
-            string a = " <Html> abc";
-
-            a += " <table> ";
             for (int i = 0; i < rows; i++)
             {
-                a += " <tr> ";
-                for (int j = 0; j < z; j++)
+                for (int j = 0; j < 3; j++)
                 {
-                    a += " <td> ";
-                    a += table.Rows[i][j];
-                    a += " </td> ";
+                    a += dt.Rows[i][j];
+                    a += "\t";
                 }
-                a += "</tr>";
+                a += "\n";
             }
-            a += " </table> ";
-            a += " </Html> ";
-            return a;
+            richTextBox1.Text += a + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -186,27 +175,16 @@ namespace vcs_DataTable1
 
             show_data_table(dt);//顯示 DataTable 的內容
 
-            string xml_data = DataTableToXml(dt);
-            richTextBox1.Text += "DataTable轉XML\n" + xml_data + "\n";
-        }
-
-        public string DataTableToXml(DataTable dt)
-        {
             StringBuilder strXml = new StringBuilder();
-            strXml.AppendLine("<XmlTable>");
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                strXml.AppendLine("<rows>");
                 for (int j = 0; j < dt.Columns.Count; j++)
                 {
                     strXml.AppendLine("<" + dt.Columns[j].ColumnName + ">" + dt.Rows[i][j] + "</" + dt.Columns[j].ColumnName + ">");
                 }
-                strXml.AppendLine("</rows>");
             }
-            strXml.AppendLine("</XmlTable>");
-            return strXml.ToString();
+            richTextBox1.Text += strXml.ToString() + "\n";
         }
-
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -254,9 +232,7 @@ namespace vcs_DataTable1
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //構建DataTable，給列名添加公式
-
-            //構建DataTable，給列名添加公式
+            richTextBox1.Text += "構建DataTable，給列名添加公式\n";
 
             //計算公式
             string expression1 = "a+b*(c-d)";
@@ -274,7 +250,6 @@ namespace vcs_DataTable1
             //添加公式
             table.Columns["e1"].Expression = expression1;
             table.Columns["e2"].Expression = expression2;
-
 
             //添加一行並賦值
             DataRow row = table.Rows.Add();
@@ -311,10 +286,8 @@ namespace vcs_DataTable1
             Console.WriteLine(value);
             */
 
-
             //可以把 DataTable 直接轉給 DataGridView 顯示
             //dataGridView1.DataSource = dt.DefaultView;
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -330,8 +303,6 @@ namespace vcs_DataTable1
             DataColumn dc = new DataColumn("column1", System.Type.GetType("System.Boolean"));
             dt.Columns.Add(dc);
 
-
-
             DataRow dr = dt.NewRow();
             dr["column0"] = "AX";
             dr["column1"] = true;
@@ -344,14 +315,11 @@ namespace vcs_DataTable1
             DataRow[] drs = dt.Select("column1 is null");
             DataRow[] drss = dt.Select("column0 = 'AX'");
 
-
             //複製DataTable, 全部
             DataTable dtNew = dt.Copy();
 
-
             //複製DataTable, 僅Scheme
             DataTable dtOnlyScheme = dt.Clone();
-
 
             //對dt的操作
             //Method 1
@@ -367,7 +335,6 @@ namespace vcs_DataTable1
             //Method 4
             dt.Rows[0][0] = "AXzhz";
             dt.Rows[0][1] = false;
-
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -384,8 +351,6 @@ namespace vcs_DataTable1
                 dRow["value"] = i;
                 table.Rows.Add(dRow);
             }
-
-
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -398,13 +363,11 @@ namespace vcs_DataTable1
 
             dt = create_datatable_data();
 
-
             richTextBox1.Text += "顯示DataTable資料a\n";
             int i;
             for (i = 0; i < 10; i++)
             {
                 richTextBox1.Text += dt.Rows[i][0].ToString() + "\n";
-
             }
 
             richTextBox1.Text += "顯示DataTable資料b\n";
@@ -448,7 +411,6 @@ namespace vcs_DataTable1
                 richTextBox1.Text += "顯示資料 : " + item + "\n";
             }
         }
-
 
         private void button9_Click(object sender, EventArgs e)
         {
@@ -518,14 +480,17 @@ namespace vcs_DataTable1
             richTextBox1.Text += "科目 : " + columnName + "\t成績 : " + fieldData + "\t\t";
 
             if (result == true)
+            {
                 richTextBox1.Text += "存在\n";
+            }
             else
+            {
                 richTextBox1.Text += "不存在\n";
+            }
             richTextBox1.Text += "\n";
 
             richTextBox1.Text += "向DataTable中添加數據\n";
             DataRow dr2;
-
             for (i = 0; i < 5; i++)
             {
                 //if (IsColumnIncludeData(dt, "SystemCode", code[i]) == false)
@@ -633,11 +598,7 @@ namespace vcs_DataTable1
                 Console.Write(row[i].ToString() + "\t");
                 richTextBox1.Text += row[i].ToString() + "\t";
             }
-
             richTextBox1.Text += "\n";
-
-
-
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -658,15 +619,11 @@ namespace vcs_DataTable1
                 richTextBox1.Text += "加入資料 : " + data + "\n";
             }
 
-
-
             richTextBox1.Text += "顯示DataTable資料a\n";
             for (i = 0; i < 10; i++)
             {
                 richTextBox1.Text += dt.Rows[i][0].ToString() + "\n";
-
             }
-
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -712,7 +669,6 @@ namespace vcs_DataTable1
             //5.將新行添加到表
             dt.Rows.Add(dr);
 
-
             /*
             //1.創建表實例
             DataTable dt=new DataTable();
@@ -745,7 +701,6 @@ namespace vcs_DataTable1
             {
                 richTextBox1.Text += string.Format("A: {0}\tB: {1}", dt.Rows[i]["A"], dt.Rows[i]["B"]) + "\n";
             }
-
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -769,10 +724,8 @@ namespace vcs_DataTable1
             dt.DefaultView.Sort = "ID asc";//相當於Order By
             dt.DefaultView.RowFilter = "ID>5";//相當於Where
 
-
             //GridView1.DataSource = dt;
             //GridView1.DataBind();
-
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -837,7 +790,9 @@ namespace vcs_DataTable1
                 dt.Rows.RemoveAt(index);
             }
             return dt;
-        }    /// <summary>   
+        }
+
+        /// <summary>   
         /// 判断数组中是否存在   
         /// </summary>   
         /// <param name="indexList">数组</param>   
@@ -922,7 +877,6 @@ namespace vcs_DataTable1
             //    //sb.Append(dc.ColumnName+"<br/>");    
             //}
 
-
             //foreach (DataRow dr in myTb.Rows)
             //{
             //    foreach (DataColumn dc in myTb.Columns)
@@ -973,10 +927,8 @@ namespace vcs_DataTable1
             {
                 sb.Append("Bool false");
             }
-
             richTextBox1.Text += sb.ToString() + "\n";
         }
-
 
         /// <summary>
         /// 判断是不是存在

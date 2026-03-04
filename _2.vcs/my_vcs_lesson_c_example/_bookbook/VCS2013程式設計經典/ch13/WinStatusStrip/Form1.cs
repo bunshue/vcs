@@ -16,6 +16,7 @@ namespace WinStatusStrip
         {
             InitializeComponent();
         }
+
         // 宣告 num 整數變數用來記錄目前的圖片索引編號，0表示第1張
         int num = 0;
         // 建立 photo 字串陣列用來存放照片的名稱
@@ -31,21 +32,18 @@ namespace WinStatusStrip
             toolStripStatusLabel1.Text = "圖片名稱：" + photo[num];
         }
 
-        // ===  表單載入時執行
         private void Form1_Load(object sender, EventArgs e)
         {
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             ShowPic();   // 呼叫ShowPic方法在pictureBox1顯示圖片
         }
 
-        // ===  按第一張執行
         private void 第一張ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             num = 0;
             ShowPic();
         }
 
-        // ===  按上一張執行
         private void 上一張ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             num--;  // num圖片索引編號減1，表示顯示上一張
@@ -57,7 +55,6 @@ namespace WinStatusStrip
             ShowPic();
         }
 
-        // ===  按下一張執行
         private void 下一張ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             num++;  // num圖片索引編號加1，表示顯示下一張
@@ -70,7 +67,6 @@ namespace WinStatusStrip
             ShowPic();
         }
 
-        // ===  按最末張執行
         private void 最末張ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // 另num由最後一張索引編號開始
