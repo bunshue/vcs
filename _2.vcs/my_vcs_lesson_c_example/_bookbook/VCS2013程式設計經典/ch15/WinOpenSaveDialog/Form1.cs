@@ -20,10 +20,13 @@ namespace WinOPenSaveDialog
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Text = "記事本 2.0版";
+
             // 使richTextBox1填滿整個表單
             richTextBox1.Dock = DockStyle.Fill;
+
             // 使fontDialog1預設出現色彩下拉式清單
             fontDialog1.ShowColor = true;
+
             // 使colorDialog1預設出現自訂色彩區段
             colorDialog1.FullOpen = true;
         }

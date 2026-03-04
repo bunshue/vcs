@@ -155,7 +155,10 @@ namespace vcs_Mix00
 
         void show_button_text(object sender)
         {
-            richTextBox1.Text += ((Button)sender).Text + "\n";
+            //richTextBox1.Text += ((Button)sender).Text + "\n";    same
+
+            Button btn = ((Button)sender);//sender轉Button類別物件，接著再指定給btn
+            richTextBox1.Text += btn.Text + "\n";
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -1831,6 +1834,44 @@ namespace vcs_Mix00
 
         private void button36_Click(object sender, EventArgs e)
         {
+            string input, sel;
+            StreamReader sr;
+            StreamWriter sw;
+            FileInfo f;
+            string filename = "tmp_aaaa.txt";
+
+            f = new FileInfo(filename);
+
+            Console.Write("請選擇功能->1.寫入  2.附加   其他.離開：");
+
+            sel = "1";
+            if (sel == "1")
+            {
+                sw = f.CreateText();  //開啟新檔
+                input = "寫入AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+                //將輸入的資料覆蓋原檔並重新寫入
+                sw.WriteLine(input);
+                sw.Flush();
+                sw.Close();
+
+            }
+            else if (sel == "2")
+            {
+                sw = f.AppendText();   //開啟舊檔
+                input = "附加AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+                //將輸入的資料附加到資料檔的最後
+                sw.WriteLine(input);
+                sw.Flush();
+                sw.Close();
+
+            }
+
+
+            sr = f.OpenText();  //以唯讀模式開檔
+            Console.WriteLine("資料檔內容如下：");
+            Console.WriteLine(sr.ReadToEnd());//讀出資料
+            sr.Close();
+            Console.WriteLine("================================");
 
         }
 

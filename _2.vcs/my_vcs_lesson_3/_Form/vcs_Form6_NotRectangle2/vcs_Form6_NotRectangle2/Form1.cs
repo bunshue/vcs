@@ -23,7 +23,7 @@ namespace vcs_Form6_NotRectangle2
             this.FormBorderStyle = FormBorderStyle.None;
             this.Width = this.BackgroundImage.Width;
             this.Height = this.BackgroundImage.Height;
-            this.TransparencyKey = Color.FromArgb(0, 255, 0);
+            this.TransparencyKey = Color.FromArgb(240, 240, 240);
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)

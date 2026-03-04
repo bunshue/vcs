@@ -12,6 +12,10 @@ using System.Collections;  // for ArrayList
 using System.Data.OleDb;
 using System.Xml.Linq;
 
+using System.Data.SqlClient;	//引用System.Data.SqlClient命名空間
+using System.Data.Linq;    	//參考/加入參考/.Net/System.Data.Linq
+using System.Data.Linq.Mapping; //含入System.Data.Linq.Mapping
+
 namespace vcs_LINQ
 {
     public partial class Form1 : Form
@@ -552,10 +556,35 @@ namespace vcs_LINQ
 
         private void button20_Click(object sender, EventArgs e)
         {
+            //Employee1
+
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
+                    @"AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch20DB.mdf;" +
+                    "Integrated Security=True";
+                DataContext dc = new DataContext(cn);
+                Table<Employee1> emp = dc.GetTable<Employee1>();
+                var result = from p in emp
+                             select new { p.姓名, p.編號, p.職稱, p.電話, p.薪資 };
+                dataGridView1.DataSource = result;
+            }
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
+            //Employee2
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
+                    @"AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch20DB.mdf;" +
+                            "Integrated Security=True";
+                DataContext dc = new DataContext(cn);
+                Table<Employee2> emp = dc.GetTable<Employee2>();
+                var result = from p in emp
+                             select new { p.員工編號, p.員工姓名, p.職位, p.聯絡電話, p.月薪 };
+                dataGridView1.DataSource = result;
+            }
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -603,6 +632,38 @@ namespace vcs_LINQ
         public string Name { get; set; }
         public int ID { get; set; }
         public int[] Scores { get; set; }
+    }
+
+
+    [Table(Name = "員工")]   	// Employee類別對應員工資料表
+    class Employee1
+    {
+        [Column]  		// 編號屬性對應至員工資料表的編號欄位
+        public int 編號 { get; set; }
+        [Column]  		// 姓名屬性對應至員工資料表的姓名欄位
+        public string 姓名 { get; set; }
+        [Column]  		// 職稱屬性對應至員工資料表的職稱欄位
+        public string 職稱 { get; set; }
+        [Column]  		// 電話屬性對應至員工資料表的電話欄位
+        public string 電話 { get; set; }
+        [Column]  		// 薪資屬性對應至員工資料表的薪資欄位
+        public int 薪資 { get; set; }
+    }
+
+
+    [Table(Name = "員工")]
+    class Employee2
+    {
+        [Column(Name = "編號")]	// 將員工編號屬性對應至員工資料表的編號欄位
+        public int 員工編號 { get; set; }
+        [Column(Name = "姓名")]	// 將員工姓名屬性對應至員工資料表的姓名欄位
+        public string 員工姓名 { get; set; }
+        [Column(Name = "職稱")]	// 將職位屬性對應至員工資料表的職稱欄位
+        public string 職位 { get; set; }
+        [Column(Name = "電話")]	// 將聯絡電話屬性對應至員工資料表的電話欄位
+        public string 聯絡電話 { get; set; }
+        [Column(Name = "薪資")]	// 將月薪屬性對應至員工資料表的薪資欄位
+        public int 月薪 { get; set; }
     }
 }
 
