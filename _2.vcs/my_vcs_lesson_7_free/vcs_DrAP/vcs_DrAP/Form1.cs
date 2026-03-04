@@ -68,6 +68,8 @@ namespace vcs_DrAP
         private const int SEARCH_MODE_CUDA = 0x03;	//search cuda code, 搜尋cuda內的關鍵字
         private const int SEARCH_MODE_OPENGL = 0x04;	//search opengl code, 搜尋opengl內的關鍵字
 
+        string result_str = string.Empty;
+
         int search_mode = SEARCH_MODE_VCS;
         bool flag_show_30_message = false;
 
@@ -146,7 +148,7 @@ namespace vcs_DrAP
             //search_path = @"D:\vcs\astro\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
             //this.listBox1.Items.Add(search_path);
             // 可用foreach 取出List 裡的值
-            //richTextBox2.Text += "\n可用foreach 取出List 裡的值\n";
+            //result_str += "\n可用foreach 取出List 裡的值\n";
             this.listBox1.Items.Clear();
             foreach (string sss in old_search_path)
             {
@@ -306,10 +308,10 @@ namespace vcs_DrAP
             bt_edit_python_files.Location = new Point(x_st + dx * 0 + 50, y_st + dy * 2);
 
             /*
-            richTextBox2.Text += "Form1 W1 " + this.Width.ToString() + "\n";
-            richTextBox2.Text += "Form1 W2 " + this.ClientSize.Width.ToString() + "\n";
-            richTextBox2.Text += "lsstview1 x_st = " + this.listView1.Location.X.ToString() + "\n";
-            richTextBox2.Text += "lsstview1 y_st = " + this.listView1.Location.Y.ToString() + "\n";
+            result_str += "Form1 W1 " + this.Width.ToString() + "\n";
+            result_str += "Form1 W2 " + this.ClientSize.Width.ToString() + "\n";
+            result_str += "lsstview1 x_st = " + this.listView1.Location.X.ToString() + "\n";
+            result_str += "lsstview1 y_st = " + this.listView1.Location.Y.ToString() + "\n";
             //this.richTextBox2.Location = new Point(1600, 600);
             */
 
@@ -410,7 +412,7 @@ namespace vcs_DrAP
         private void bt_search_one_layer_files_Click(object sender, EventArgs e)
         {
             //轉出一層
-            richTextBox2.Text += "開始計時\n";
+            result_str += "開始計時\n";
             this.Text = "DrAP";
 
             Stopwatch stopwatch = new Stopwatch();
@@ -506,8 +508,9 @@ namespace vcs_DrAP
             }
 
             stopwatch.Stop();
-            richTextBox2.Text += "停止計時\t";
-            richTextBox2.Text += "總時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
+            result_str += "停止計時\t";
+            result_str += "總時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
+            lb_search_result2.Text = ((float)stopwatch.ElapsedMilliseconds / 1000).ToString("F2") + " 秒";
             this.Text = "DrAP (轉出時間 : " + (stopwatch.ElapsedMilliseconds / 1000).ToString() + " 秒)";
         }
 
@@ -621,7 +624,7 @@ namespace vcs_DrAP
                 //一定會被執行的程式區段
             }
 
-            //richTextBox2.Text += "folder = " + FolederName + ",  name = " + fi.Name + "\n";
+            //result_str += "folder = " + FolederName + ",  name = " + fi.Name + "\n";
 
             total_size += fi.Length;
             total_files++;
@@ -736,12 +739,12 @@ namespace vcs_DrAP
 
             if (fileinfos.Count == 0)
             {
-                richTextBox2.Text += "找不到資料a\n";
+                result_str += "找不到資料a\n";
                 lb_search_result1.Text = "0";
             }
             else
             {
-                richTextBox2.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料a\n";
+                result_str += "找到 " + fileinfos.Count.ToString() + " 筆資料a\n";
                 lb_search_result1.Text = fileinfos.Count.ToString();
             }
 
@@ -764,7 +767,7 @@ namespace vcs_DrAP
                 if (cb_video_only.Checked == true)
                 {
                     //debug mesg
-                    //richTextBox2.Text += "i = " + i.ToString() + ", filename : " + fileinfos[i].filepath + "\\" + fileinfos[i].filename + "\n";
+                    //result_str += "i = " + i.ToString() + ", filename : " + fileinfos[i].filepath + "\\" + fileinfos[i].filename + "\n";
 
                     MediaFile f = new MediaFile(fileinfos[i].filepath + "\\" + fileinfos[i].filename);
 
@@ -775,9 +778,9 @@ namespace vcs_DrAP
                     {
                         int w = f.Video[0].Width;
                         int h = f.Video[0].Height;
-                        //richTextBox2.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
-                        //richTextBox2.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
-                        //richTextBox2.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
+                        //result_str += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
+                        //result_str += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
+                        //result_str += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
                         //fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
 
                         if (((cb_video_l.Checked == true) && (h >= 1080)) || ((cb_video_m.Checked == true) && (h < 1080) && (h > 480)) || ((cb_video_s.Checked == true) && (h <= 480)))
@@ -836,8 +839,8 @@ namespace vcs_DrAP
                         i1 = new ListViewItem(fileinfos[i].filename);
                         i1.UseItemStyleForSubItems = false;
 
-                        richTextBox2.Text += "XXXXXXXXXXXXXXXXXXXXXXXXX1\n";
-                        //richTextBox2.Text += "xxxxx" + fileinfos[i].filename + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize)) + "\n";
+                        result_str += "XXXXXXXXXXXXXXXXXXXXXXXXX1\n";
+                        //result_str += "xxxxx" + fileinfos[i].filename + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize)) + "\n";
                         sub_i1a.Text = fileinfos[i].filepath;
                         i1.SubItems.Add(sub_i1a);
                         //sub_i1a.Text = fi.Length.ToString();
@@ -862,7 +865,7 @@ namespace vcs_DrAP
                     i1 = new ListViewItem(fileinfos[i].filename);
                     i1.UseItemStyleForSubItems = false;
 
-                    richTextBox2.Text += "XXXXXXXXXXXXXXXXXXXXXXXXX2\n";
+                    result_str += "XXXXXXXXXXXXXXXXXXXXXXXXX2\n";
                     sub_i1a.Text = fileinfos[i].filepath;
                     i1.SubItems.Add(sub_i1a);
                     //sub_i1a.Text = fi.Length.ToString();
@@ -923,12 +926,12 @@ namespace vcs_DrAP
 
             if (fileinfos.Count == 0)
             {
-                richTextBox2.Text += "找不到資料b\n";
+                result_str += "找不到資料b\n";
                 lb_search_result1.Text = "0";
             }
             else
             {
-                richTextBox2.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料b\n";
+                result_str += "找到 " + fileinfos.Count.ToString() + " 筆資料b\n";
                 lb_search_result1.Text = fileinfos.Count.ToString();
             }
 
@@ -942,7 +945,7 @@ namespace vcs_DrAP
                     continue;
                 else
                 {
-                    richTextBox2.Text += "get file : " + fileinfos[i].filename + "\n";
+                    result_str += "get file : " + fileinfos[i].filename + "\n";
                 }
 
                 i1.UseItemStyleForSubItems = false;
@@ -982,12 +985,12 @@ namespace vcs_DrAP
 
             if (fileinfos.Count == 0)
             {
-                richTextBox2.Text += "找不到資料c\n";
+                result_str += "找不到資料c\n";
                 lb_search_result1.Text = "0";
             }
             else
             {
-                richTextBox2.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料c\n";
+                result_str += "找到 " + fileinfos.Count.ToString() + " 筆資料c\n";
                 lb_search_result1.Text = fileinfos.Count.ToString();
             }
 
@@ -1071,7 +1074,7 @@ namespace vcs_DrAP
         private void bt_search_all_files_Click(object sender, EventArgs e)
         {
             //轉出
-            richTextBox2.Text += "開始計時\n";
+            result_str += "開始計時\n";
             this.Text = "DrAP";
             // Create stopwatch
             Stopwatch stopwatch = new Stopwatch();
@@ -1088,16 +1091,16 @@ namespace vcs_DrAP
 
             if (listBox1.Items.Count == 0)
             {
-                richTextBox2.Text += "未選擇資料夾\n";
+                result_str += "未選擇資料夾\n";
                 return;
             }
 
-            richTextBox2.Text += "listbox 共有 " + listBox1.Items.Count.ToString() + " 個項目\n";
+            result_str += "listbox 共有 " + listBox1.Items.Count.ToString() + " 個項目\n";
             for (int i = 0; i < listBox1.Items.Count; i++)
             {
                 path = listBox1.Items[i].ToString();
 
-                richTextBox2.Text += "\n搜尋路徑" + path + "\n";
+                result_str += "\n搜尋路徑" + path + "\n";
 
                 if (System.IO.File.Exists(path) == true)
                 {
@@ -1134,8 +1137,9 @@ namespace vcs_DrAP
             // Stop timing
             stopwatch.Stop();
             // Write result
-            richTextBox2.Text += "停止計時\t";
-            richTextBox2.Text += "總時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
+            result_str += "停止計時\t";
+            result_str += "總時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
+            lb_search_result2.Text = ((float)stopwatch.ElapsedMilliseconds / 1000).ToString("F2") + " 秒";
             this.Text = "DrAP (轉出時間 : " + (stopwatch.ElapsedMilliseconds / 1000).ToString() + " 秒)";
         }
 
@@ -1157,7 +1161,7 @@ namespace vcs_DrAP
                     filetype2 = "*.*";
                     break;
             }
-            //richTextBox2.Text += "change file type to " + filetype2 + "\n";
+            //result_str += "change file type to " + filetype2 + "\n";
         }
 
         private void bt_clear_data_Click(object sender, EventArgs e)
@@ -1200,10 +1204,10 @@ namespace vcs_DrAP
             selNdx = listView1.SelectedIndices[0];
 
 
-            richTextBox2.Text += "aaa:\t" + listView1.Items[selNdx].Text + "\n";
-            richTextBox2.Text += "bbb:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
-            richTextBox2.Text += "ccc:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
-            richTextBox2.Text += "ddd:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
+            result_str += "aaa:\t" + listView1.Items[selNdx].Text + "\n";
+            result_str += "bbb:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+            result_str += "ccc:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+            result_str += "ddd:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
             */
 
             int selNdx;
@@ -1211,14 +1215,14 @@ namespace vcs_DrAP
 
             selNdx = listView1.SelectedIndices[0];
             listView1.Items[selNdx].Selected = true;    //選到的項目
-            richTextBox2.Text += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
-            richTextBox2.Text += "你選擇了檔名:\t" + listView1.Items[selNdx].Text + "\n";
-            richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+            result_str += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
+            result_str += "你選擇了檔名:\t" + listView1.Items[selNdx].Text + "\n";
+            result_str += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
 
             if (flag_function == FUNCTION_FIND_BIG_FILES)
             {
-                richTextBox2.Text += "a你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
-                richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
+                result_str += "a你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+                result_str += "資料夾:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
                 fullname = listView1.Items[selNdx].SubItems[3].Text + "\\" + listView1.Items[selNdx].SubItems[2].Text;
             }
             else
@@ -1226,15 +1230,15 @@ namespace vcs_DrAP
                 if (flag_function == FUNCTION_SEARCH_TEXT)
                 {
                     //搜尋字串模式
-                    richTextBox2.Text += "aaaa b1你選擇了檔名1:\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
-                    richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+                    result_str += "aaaa b1你選擇了檔名1:\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
+                    result_str += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
                     fullname = listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].SubItems[0].Text;
                 }
                 else
                 {
                     //轉出模式
-                    //richTextBox2.Text += "b你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
-                    //richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
+                    //result_str += "b你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+                    //result_str += "資料夾:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
                     fullname = listView1.Items[selNdx].SubItems[3].Text + "\\" + listView1.Items[selNdx].SubItems[2].Text;
                 }
             }
@@ -1243,7 +1247,7 @@ namespace vcs_DrAP
             {
                 FileInfo fi = new FileInfo(fullname);
 
-                //richTextBox2.Text += "fullname = " + fullname + ",  ext = " + fi.Extension + "\n";
+                //result_str += "fullname = " + fullname + ",  ext = " + fi.Extension + "\n";
 
                 if (fi.Extension == ".txt")
                 {
@@ -1251,8 +1255,8 @@ namespace vcs_DrAP
                 }
                 else
                 {
-                    richTextBox2.Text += "video_player_path = " + video_player_path + "\n";
-                    richTextBox2.Text += "fullname = " + fullname + "\n";
+                    result_str += "video_player_path = " + video_player_path + "\n";
+                    result_str += "fullname = " + fullname + "\n";
 
                     if (video_player_path == String.Empty)
                     {
@@ -1279,8 +1283,8 @@ namespace vcs_DrAP
             {
                 selNdx = listView1.SelectedIndices[0];
                 listView1.Items[selNdx].Selected = true;    //選到的項目
-                //richTextBox2.Text += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
-                richTextBox2.Text += "你選擇了資料夾:\t" + listView1.Items[selNdx].Text + "\n";
+                //result_str += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
+                result_str += "你選擇了資料夾:\t" + listView1.Items[selNdx].Text + "\n";
 
                 fullname = listView1.Items[selNdx].Text;
 
@@ -1306,14 +1310,14 @@ namespace vcs_DrAP
 
             selNdx = listView1.SelectedIndices[0];
             listView1.Items[selNdx].Selected = true;    //選到的項目
-            //richTextBox2.Text += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
-            //richTextBox2.Text += "你選擇了檔名:\t" + listView1.Items[selNdx].Text + "\n";
-            //richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+            //result_str += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
+            //result_str += "你選擇了檔名:\t" + listView1.Items[selNdx].Text + "\n";
+            //result_str += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
 
             if (flag_function == FUNCTION_FIND_BIG_FILES)
             {
-                //richTextBox2.Text += "a你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
-                //richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
+                //result_str += "a你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+                //result_str += "資料夾:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
                 fullname = listView1.Items[selNdx].SubItems[3].Text + "\\" + listView1.Items[selNdx].SubItems[2].Text;
             }
             else
@@ -1321,15 +1325,15 @@ namespace vcs_DrAP
                 if (flag_function == FUNCTION_SEARCH_TEXT)
                 {
                     //搜尋字串模式
-                    richTextBox2.Text += "aaaa b2你選擇了檔名2:\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
-                    richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+                    result_str += "aaaa b2你選擇了檔名2:\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
+                    result_str += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
                     fullname = listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].SubItems[0].Text;
                 }
                 else
                 {
                     //轉出模式
-                    //richTextBox2.Text += "b你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
-                    //richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
+                    //result_str += "b你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+                    //result_str += "資料夾:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
                     fullname = listView1.Items[selNdx].SubItems[3].Text + "\\" + listView1.Items[selNdx].SubItems[2].Text;
                 }
             }
@@ -1338,7 +1342,7 @@ namespace vcs_DrAP
             {
                 FileInfo fi = new FileInfo(fullname);
 
-                //richTextBox2.Text += "fullname = " + fullname + ",  ext = " + fi.Extension + "\n";
+                //result_str += "fullname = " + fullname + ",  ext = " + fi.Extension + "\n";
 
                 if (fi.Extension == ".txt")
                 {
@@ -1356,8 +1360,8 @@ namespace vcs_DrAP
                 }
                 else
                 {
-                    richTextBox2.Text += "video_player_path = " + video_player_path + "\n";
-                    richTextBox2.Text += "fullname = " + fullname + "\n";
+                    result_str += "video_player_path = " + video_player_path + "\n";
+                    result_str += "fullname = " + fullname + "\n";
 
                     if (video_player_path == String.Empty)
                     {
@@ -1374,14 +1378,14 @@ namespace vcs_DrAP
             }
             else
             {
-                //richTextBox2.Text += "text_editor_path = " + text_editor_path + "\t" + "fullname = " + fullname + "\n";
+                //result_str += "text_editor_path = " + text_editor_path + "\t" + "fullname = " + fullname + "\n";
                 if (System.IO.File.Exists(text_editor_path) == true)
                 {
                     Process.Start(text_editor_path, fullname);
                 }
                 else
                 {
-                    richTextBox2.Text += "開啟程式不存在\n";
+                    result_str += "開啟程式不存在\n";
                 }
             }
         }
@@ -1389,12 +1393,12 @@ namespace vcs_DrAP
         private void bt_start_files_Click(object sender, EventArgs e)
         {
             /*
-            richTextBox2.Text += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
+            result_str += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
             for (int i = 0; i < listView1.SelectedIndices.Count; i++)
             {
-                richTextBox2.Text += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
+                result_str += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
             }
-            richTextBox2.Text += "開啟\n";
+            result_str += "開啟\n";
             */
 
             int selNdx;
@@ -1402,17 +1406,17 @@ namespace vcs_DrAP
 
             if (this.listView1.SelectedIndices.Count <= 0)  //總共選擇的個數
             {
-                richTextBox2.Text += "無檔案\n";
+                result_str += "無檔案\n";
                 return;
             }
 
-            //richTextBox2.Text += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
+            //result_str += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
             //for (int i = 0; i < listView1.SelectedIndices.Count; i++)
             for (int i = 0; i < listView1.SelectedItems.Count; i++)
             {
                 selNdx = listView1.SelectedIndices[i];
                 listView1.Items[selNdx].Selected = true;    //選到的項目
-                //richTextBox2.Text += listView1.Items[selNdx].Text + "\n";
+                //result_str += listView1.Items[selNdx].Text + "\n";
 
                 if (flag_function == FUNCTION_SEARCH_TEXT)
                 {
@@ -1449,8 +1453,8 @@ namespace vcs_DrAP
 
                 /*
                 // debug mesg
-                richTextBox2.Text += "target : " + target + "\n";
-                richTextBox2.Text += "all_filename : " + all_filename + "\n";
+                result_str += "target : " + target + "\n";
+                result_str += "all_filename : " + all_filename + "\n";
                 */
 
                 if (video_player_path == String.Empty)
@@ -1483,12 +1487,12 @@ namespace vcs_DrAP
         private void bt_edit_python_files_Click(object sender, EventArgs e)
         {
             /*
-            richTextBox2.Text += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
+            result_str += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
             for (int i = 0; i < listView1.SelectedIndices.Count; i++)
             {
-                richTextBox2.Text += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
+                result_str += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
             }
-            richTextBox2.Text += "開啟\n";
+            result_str += "開啟\n";
             */
 
             int selNdx;
@@ -1496,17 +1500,17 @@ namespace vcs_DrAP
 
             if (this.listView1.SelectedIndices.Count <= 0)  //總共選擇的個數
             {
-                richTextBox2.Text += "無檔案\n";
+                result_str += "無檔案\n";
                 return;
             }
 
-            //richTextBox2.Text += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
+            //result_str += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
             //for (int i = 0; i < listView1.SelectedIndices.Count; i++)
             for (int i = 0; i < listView1.SelectedItems.Count; i++)
             {
                 selNdx = listView1.SelectedIndices[i];
                 listView1.Items[selNdx].Selected = true;    //選到的項目
-                //richTextBox2.Text += listView1.Items[selNdx].Text + "\n";
+                //result_str += listView1.Items[selNdx].Text + "\n";
 
                 if (flag_function == FUNCTION_SEARCH_TEXT)
                 {
@@ -1518,7 +1522,7 @@ namespace vcs_DrAP
                 }
             }
 
-            richTextBox2.Text += "all_filename : " + all_filename + "\n";
+            result_str += "all_filename : " + all_filename + "\n";
 
             string prog = @"C:\Users\070601\AppData\Local\Programs\Python\Python311\Lib\idlelib\idle.pyw";
 
@@ -1556,8 +1560,8 @@ namespace vcs_DrAP
 
                 /*
                 // debug mesg
-                richTextBox2.Text += "target : " + target + "\n";
-                richTextBox2.Text += "all_filename : " + all_filename + "\n";
+                result_str += "target : " + target + "\n";
+                result_str += "all_filename : " + all_filename + "\n";
                 */
 
                 if (video_player_path == String.Empty)
@@ -1590,18 +1594,18 @@ namespace vcs_DrAP
 
         private void listView1_KeyDown(object sender, KeyEventArgs e)
         {
-            //richTextBox2.Text += "KeyDown, 按鍵是：" + e.KeyCode + "\n";
+            //result_str += "KeyDown, 按鍵是：" + e.KeyCode + "\n";
 
             if (e.KeyCode == Keys.A)
             {
                 if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
                 {
-                    //richTextBox2.Text += "Ctrl + A\n";
-                    //richTextBox2.Text += "共有項目" + listView1.Items.Count.ToString() + " 個\n";
+                    //result_str += "Ctrl + A\n";
+                    //result_str += "共有項目" + listView1.Items.Count.ToString() + " 個\n";
 
                     for (int i = 0; i < listView1.Items.Count; i++)
                     {
-                        //richTextBox2.Text += listView1.Items[i] + "\n";
+                        //result_str += listView1.Items[i] + "\n";
                         listView1.Items[i].Selected = true;
                     }
                 }
@@ -1615,7 +1619,7 @@ namespace vcs_DrAP
 
             if (e.KeyCode == Keys.F2)
             {
-                richTextBox2.Text += "你按了F2\n";
+                result_str += "你按了F2\n";
 
                 if (this.listView1.SelectedIndices.Count <= 0)  //總共選擇的個數
                     return;
@@ -1623,24 +1627,24 @@ namespace vcs_DrAP
                 int selNdx = listView1.SelectedIndices[0];
                 listView1.Items[selNdx].Selected = true;    //選到的項目
                 //richTextBox1.Text += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
-                richTextBox2.Text += "你選擇了" + listView1.Items[selNdx].Text + "\t內容為：\n";
+                result_str += "你選擇了" + listView1.Items[selNdx].Text + "\t內容為：\n";
 
                 //ListViewItem t = listView1.Items[selNdx]; //相同寫法
                 //richTextBox1.Text += t.Text + "\t" + t.SubItems[1].Text + "\t" + t.SubItems[2].Text + "\n";
-                richTextBox2.Text += listView1.Items[selNdx].Text + "\t" + listView1.Items[selNdx].SubItems[1].Text + "\t" + listView1.Items[selNdx].SubItems[2].Text + "\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
+                result_str += listView1.Items[selNdx].Text + "\t" + listView1.Items[selNdx].SubItems[1].Text + "\t" + listView1.Items[selNdx].SubItems[2].Text + "\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
             }
         }
 
         private void bt_save_data_Click(object sender, EventArgs e)
         {
-            richTextBox2.Text += "儲存資料成檔案\tTBD\n";
+            result_str += "儲存資料成檔案\tTBD\n";
         }
 
         private void bt_copy_data_Click(object sender, EventArgs e)
         {
             if (this.listView1.Items.Count <= 0)
             {
-                richTextBox2.Text += "無內容可複製\n";
+                result_str += "無內容可複製\n";
                 return;
             }
 
@@ -1649,7 +1653,7 @@ namespace vcs_DrAP
 
             for (int i = 0; i < listView1.Items.Count; i++)
             {
-                //richTextBox2.Text += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n";
+                //result_str += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n";
 
                 //C# – 複製資料到剪貼簿 累計
                 Clipboard.SetDataObject(Clipboard.GetText() + listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n");      //建議用此
@@ -1709,18 +1713,18 @@ namespace vcs_DrAP
 
         private void bt_delete_file_Click(object sender, EventArgs e)
         {
-            richTextBox2.Text += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
+            result_str += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
 
             for (int i = 0; i < listView1.SelectedIndices.Count; i++)
             {
-                richTextBox2.Text += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
+                result_str += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
             }
 
-            richTextBox2.Text += "刪除\n";
+            result_str += "刪除\n";
 
             for (int i = listView1.SelectedIndices.Count - 1; i >= 0; i--)
             {
-                richTextBox2.Text += "刪除檔案: " + listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
+                result_str += "刪除檔案: " + listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
 
                 richTextBox1.Text += "目前不支援直接刪除檔案\n";
                 /*  直接刪除檔案
@@ -1753,7 +1757,7 @@ namespace vcs_DrAP
                     foreach (string subdirectory in subdirectoryEntries)
                     {
                         DirectoryInfo di = new DirectoryInfo(subdirectory);
-                        //richTextBox2.Text += subdirectory + "\n";
+                        //result_str += subdirectory + "\n";
 
                         if (search_mode == SEARCH_MODE_PYTHON)
                         {
@@ -1765,7 +1769,7 @@ namespace vcs_DrAP
                                 if (subdirectory.Contains(search_folder1))
                                 {
                                     //跳過 書附光碟
-                                    richTextBox2.Text += "跳過 " + subdirectory + "\n";
+                                    result_str += "跳過 " + subdirectory + "\n";
                                     continue;
                                 }
                                 else
@@ -1781,7 +1785,7 @@ namespace vcs_DrAP
                             else
                             {
                                 //impossible
-                                richTextBox2.Text += "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n";
+                                result_str += "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n";
                                 //python only 不包含新進檔案 與 書附光碟
                             }
                         }
@@ -1794,7 +1798,7 @@ namespace vcs_DrAP
                             }
                             else
                             {
-                                richTextBox2.Text += "跳過 " + subdirectory + "\n";
+                                result_str += "跳過 " + subdirectory + "\n";
                                 continue;
                             }
                         }
@@ -1803,7 +1807,7 @@ namespace vcs_DrAP
                             string skip_folder = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example";
                             if (subdirectory.Contains(skip_folder))
                             {
-                                richTextBox2.Text += "跳過 " + subdirectory + "\n";
+                                result_str += "跳過 " + subdirectory + "\n";
                                 continue;
                             }
                             else
@@ -1820,12 +1824,12 @@ namespace vcs_DrAP
                 }
                 catch (UnauthorizedAccessException ex)
                 {
-                    richTextBox2.Text += ex.Message + "\n";
+                    result_str += ex.Message + "\n";
                 }
             }
             catch (IOException e)
             {
-                richTextBox2.Text += "IOException, " + e.GetType().Name + "\n";
+                result_str += "IOException, " + e.GetType().Name + "\n";
             }
         }
 
@@ -1846,7 +1850,7 @@ namespace vcs_DrAP
             }
 
             FileInfo fi = new FileInfo(path);
-            //richTextBox2.Text += fi.Name + "\t" + fi.Length.ToString() + "\n";
+            //result_str += fi.Name + "\t" + fi.Length.ToString() + "\n";
             bool res;
             string pattern = string.Empty;// = "Form1.cs";
 
@@ -1913,7 +1917,7 @@ namespace vcs_DrAP
 
             if (res == true)
             {
-                //richTextBox2.Text += "aaaa : " + fi.FullName + "\n";
+                //result_str += "aaaa : " + fi.FullName + "\n";
 
                 if (search_mode == SEARCH_MODE_VCS) //有一些vcs檔案 要跳開 (先改成小寫名)
                 {
@@ -1941,7 +1945,7 @@ namespace vcs_DrAP
                     */
                 }
 
-                //richTextBox2.Text += fi.FullName + "\n";
+                //result_str += fi.FullName + "\n";
                 StreamReader sr = new StreamReader(fi.FullName, Encoding.UTF8);
 
                 int flag_pattern_match = 0;
@@ -1956,14 +1960,14 @@ namespace vcs_DrAP
                     res = line.ToLower().Replace(" ", "").Contains(tb_search.Text.ToLower().Replace(" ", ""));
                     if (res == true)
                     {
-                        //richTextBox2.Text += "第" + i.ToString() + "行： " + line + "\n";
-                        richTextBox2.Text += line + "\n";
+                        //result_str += "第" + i.ToString() + "行： " + line + "\n";
+                        result_str += line + "\n";
                         flag_pattern_match = 1;
                     }
                 }
                 if (flag_pattern_match == 1)
                 {
-                    richTextBox2.Text += "上面搜尋到的資料在檔案\t" + fi.FullName + "\n\n";
+                    result_str += "上面搜尋到的資料在檔案\t" + fi.FullName + "\n\n";
                     fileinfos.Add(new MyFileInfo(fi.Name, fi.DirectoryName, fi.Extension, fi.Length, fi.CreationTime));
                 }
                 sr.Close();
@@ -2026,12 +2030,12 @@ namespace vcs_DrAP
 
             if (fileinfos.Count == 0)
             {
-                richTextBox2.Text += "找不到資料d\n";
+                result_str += "找不到資料d\n";
                 lb_search_result1.Text = "0";
             }
             else
             {
-                richTextBox2.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料d\n";
+                result_str += "找到 " + fileinfos.Count.ToString() + " 筆資料d\n";
                 lb_search_result1.Text = fileinfos.Count.ToString();
             }
 
@@ -2041,8 +2045,8 @@ namespace vcs_DrAP
                 {
                     if (fileinfos[i].filesize == fileinfos[j].filesize)
                     {
-                        richTextBox2.Text += "檔案大小相同 " + fileinfos[i].filename + " 容量 " + ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize)) + "\n";
-                        richTextBox2.Text += "檔案大小相同 " + fileinfos[j].filename + " 容量 " + ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[j].filesize)) + "\n";
+                        result_str += "檔案大小相同 " + fileinfos[i].filename + " 容量 " + ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize)) + "\n";
+                        result_str += "檔案大小相同 " + fileinfos[j].filename + " 容量 " + ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[j].filesize)) + "\n";
 
                         ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
                         i1.UseItemStyleForSubItems = false;
@@ -2104,7 +2108,7 @@ namespace vcs_DrAP
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 //path = folderBrowserDialog1.SelectedPath;
-                richTextBox2.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";
+                result_str += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";
                 listBox1.Items.Add(folderBrowserDialog1.SelectedPath);
                 old_search_path.Add(folderBrowserDialog1.SelectedPath);
             }
@@ -2117,7 +2121,7 @@ namespace vcs_DrAP
 
         private void bt_remove_dir_Click(object sender, EventArgs e)
         {
-            richTextBox2.Text += "移除了 " + listBox1.SelectedItem + "\n";
+            result_str += "移除了 " + listBox1.SelectedItem + "\n";
             old_search_path.Remove(folderBrowserDialog1.SelectedPath);
             listBox1.Items.Remove(listBox1.SelectedItem);
         }
@@ -2132,7 +2136,7 @@ namespace vcs_DrAP
         private void bt_test1_Click(object sender, EventArgs e)
         {
             /*
-            //richTextBox2.Text += "flag_function = " + flag_function.ToString() + "\n";
+            //result_str += "flag_function = " + flag_function.ToString() + "\n";
 
             Properties.Settings.Default.search_path = "";
 
@@ -2145,7 +2149,7 @@ namespace vcs_DrAP
             //get_all_files(foldername);
 
             //轉出
-            richTextBox2.Text += "開始計時\n";
+            result_str += "開始計時\n";
             this.Text = "DrAP";
             // Create stopwatch
             Stopwatch stopwatch = new Stopwatch();
@@ -2161,7 +2165,7 @@ namespace vcs_DrAP
             total_files = 0;
 
             path = foldername;
-            richTextBox2.Text += "\n搜尋路徑" + path + "\n";
+            result_str += "\n搜尋路徑" + path + "\n";
             FolederName = path;
             ProcessDirectory(path);
             richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
@@ -2172,8 +2176,9 @@ namespace vcs_DrAP
             // Stop timing
             stopwatch.Stop();
             // Write result
-            richTextBox2.Text += "停止計時\t";
-            richTextBox2.Text += "總時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
+            result_str += "停止計時\t";
+            result_str += "總時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
+            lb_search_result2.Text = ((float)stopwatch.ElapsedMilliseconds / 1000).ToString("F2") + " 秒";
             this.Text = "DrAP (轉出時間 : " + (stopwatch.ElapsedMilliseconds / 1000).ToString() + " 秒)";
         }
 
@@ -2271,7 +2276,7 @@ namespace vcs_DrAP
                 //一定會被執行的程式區段
             }
 
-            //richTextBox2.Text += "folder = " + FolederName + ",  name = " + fi.Name + "\n";
+            //result_str += "folder = " + FolederName + ",  name = " + fi.Name + "\n";
 
             total_size += fi.Length;
             total_files++;
@@ -2431,12 +2436,12 @@ namespace vcs_DrAP
 
             if (fileinfos.Count == 0)
             {
-                richTextBox2.Text += "找不到資料e\n";
+                result_str += "找不到資料e\n";
                 lb_search_result1.Text = "0";
             }
             else
             {
-                richTextBox2.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料e\n";
+                result_str += "找到 " + fileinfos.Count.ToString() + " 筆資料e\n";
                 lb_search_result1.Text = fileinfos.Count.ToString();
             }
 
@@ -2469,8 +2474,8 @@ namespace vcs_DrAP
                     if (fileinfos[i].filesize == fileinfos[j].filesize)
                     {
                         /*
-                        richTextBox2.Text += "檔案大小相同 " + fileinfos[i].filename + " 容量 " + ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize)) + "\n";
-                        richTextBox2.Text += "檔案大小相同 " + fileinfos[j].filename + " 容量 " + ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[j].filesize)) + "\n";
+                        result_str += "檔案大小相同 " + fileinfos[i].filename + " 容量 " + ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize)) + "\n";
+                        result_str += "檔案大小相同 " + fileinfos[j].filename + " 容量 " + ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[j].filesize)) + "\n";
 
                         ListViewItem i1 = new ListViewItem(fileinfos[i].filename);
                         i1.UseItemStyleForSubItems = false;
@@ -2552,7 +2557,7 @@ namespace vcs_DrAP
 
             path = @"D:\_git\vcs\_1.data\______test_files1\_case1";
 
-            richTextBox2.Text += "\n搜尋路徑 " + path + "\n";
+            result_str += "\n搜尋路徑 " + path + "\n";
 
             total_folders = 0;
 
@@ -2696,7 +2701,7 @@ namespace vcs_DrAP
             //richTextBox1.Text += path + "\n";
             FileInfo fi = new FileInfo(path);
 
-            //richTextBox2.Text += "folder = " + FolederName + ",  name = " + fi.Name + "\n";
+            //result_str += "folder = " + FolederName + ",  name = " + fi.Name + "\n";
 
             total_size += fi.Length;
             total_files++;
@@ -2724,13 +2729,13 @@ namespace vcs_DrAP
 
             if (listBox1.Items.Count == 0)
             {
-                richTextBox2.Text += "未選擇資料夾\n";
+                result_str += "未選擇資料夾\n";
                 return;
             }
 
             if (checkBox3.Checked == true)
             {
-                richTextBox2.Text += "listbox 共有 " + listBox1.Items.Count.ToString() + " 個項目\n";
+                result_str += "listbox 共有 " + listBox1.Items.Count.ToString() + " 個項目\n";
                 for (int i = 0; i < listBox1.Items.Count; i++)
                 {
                     path = listBox1.Items[i].ToString();
@@ -2795,12 +2800,12 @@ namespace vcs_DrAP
             }
             richTextBox1.Text += "\n";
 
-            richTextBox2.Text += "listbox 共有 " + listBox1.Items.Count.ToString() + " 個項目\n";
+            result_str += "listbox 共有 " + listBox1.Items.Count.ToString() + " 個項目\n";
             for (int i = 0; i < listBox1.Items.Count; i++)
             {
                 path = listBox1.Items[i].ToString();
 
-                richTextBox2.Text += "\n搜尋路徑" + path + "\n";
+                result_str += "\n搜尋路徑" + path + "\n";
 
                 if (System.IO.File.Exists(path) == true)
                 {
@@ -2837,7 +2842,7 @@ namespace vcs_DrAP
             {
                 string hddname = string.Empty;
 
-                richTextBox2.Text += "listbox 共有 " + listBox1.Items.Count.ToString() + " 個項目\n";
+                result_str += "listbox 共有 " + listBox1.Items.Count.ToString() + " 個項目\n";
                 for (int i = 0; i < listBox1.Items.Count; i++)
                 {
                     path = listBox1.Items[i].ToString();
@@ -3053,6 +3058,12 @@ namespace vcs_DrAP
 
         void do_search_mode(int mode)
         {
+            //開始計時
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            result_str = "";
+
             string path = string.Empty;
             richTextBox1.Clear();
             richTextBox2.Clear();
@@ -3062,14 +3073,14 @@ namespace vcs_DrAP
             Application.DoEvents();
 
             richTextBox1.Text += "搜尋開始\t";
-            richTextBox2.Text += "搜尋開始\t";
+            result_str += "搜尋開始\t";
             lb_search_result1.Text = "";
 
             if (mode == SEARCH_MODE_VCS)
             {
                 search_mode = SEARCH_MODE_VCS;
                 richTextBox1.Text += "vcs\t";
-                richTextBox2.Text += "vcs\t";
+                result_str += "vcs\t";
 
                 bt_search_pattern_vcs.BackgroundImage = null;
                 bt_search_pattern_vcs.BackColor = Color.Red;
@@ -3079,7 +3090,7 @@ namespace vcs_DrAP
             {
                 search_mode = SEARCH_MODE_PYTHON;
                 richTextBox1.Text += "python\t";
-                richTextBox2.Text += "python\t";
+                result_str += "python\t";
 
                 bt_search_pattern_python.BackgroundImage = null;
                 bt_search_pattern_python.BackColor = Color.Red;
@@ -3089,7 +3100,7 @@ namespace vcs_DrAP
             {
                 search_mode = SEARCH_MODE_CUDA;
                 richTextBox1.Text += "cuda\t";
-                richTextBox2.Text += "cuda\t";
+                result_str += "cuda\t";
 
                 bt_search_pattern_cuda.BackgroundImage = null;
                 bt_search_pattern_cuda.BackColor = Color.Red;
@@ -3099,7 +3110,7 @@ namespace vcs_DrAP
             {
                 search_mode = SEARCH_MODE_OPENGL;
                 richTextBox1.Text += "opengl\t";
-                richTextBox2.Text += "opengl\t";
+                result_str += "opengl\t";
 
                 bt_search_pattern_opengl.BackgroundImage = null;
                 bt_search_pattern_opengl.BackColor = Color.Red;
@@ -3110,7 +3121,7 @@ namespace vcs_DrAP
                 //其他搜尋模式
             }
             richTextBox1.Text += tb_search.Text + "\n";
-            richTextBox2.Text += tb_search.Text + "\n";
+            result_str += tb_search.Text + "\n";
 
             bt_start_files.BackgroundImage = vcs_DrAP.Properties.Resources.ultraedit;
             Application.DoEvents();
@@ -3119,7 +3130,13 @@ namespace vcs_DrAP
 
             if (tb_search.Text == "")
             {
-                richTextBox2.Text += "未輸入搜尋內容\n";
+                result_str += "未輸入搜尋內容\n";
+
+                stopwatch.Stop();
+                result_str += "停止計時\t";
+                result_str += "總時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
+                lb_search_result2.Text = ((float)stopwatch.ElapsedMilliseconds / 1000).ToString("F2") + " 秒";
+                richTextBox2.Text += result_str;
                 return;
             }
 
@@ -3170,6 +3187,12 @@ namespace vcs_DrAP
                 bt_search_pattern_vcs.BackColor = System.Drawing.SystemColors.ControlLight;
                 bt_search_pattern_vcs.BackgroundImage = vcs_DrAP.Properties.Resources.vcs;
             }
+
+            stopwatch.Stop();
+            result_str += "停止計時\t";
+            result_str += "總時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
+            lb_search_result2.Text = ((float)stopwatch.ElapsedMilliseconds / 1000).ToString("F2") + " 秒";
+            richTextBox2.Text += result_str;
             return;
         }
 
@@ -3196,38 +3219,38 @@ namespace vcs_DrAP
 
             if (System.IO.File.Exists(Properties.Settings.Default.video_player_path) == false)
             {
-                richTextBox2.Text += "播放影片程式不存在 : " + Properties.Settings.Default.video_player_path + "\n使用Windows預設播放影片程式\n";
+                result_str += "播放影片程式不存在 : " + Properties.Settings.Default.video_player_path + "\n使用Windows預設播放影片程式\n";
                 video_player_path = String.Empty;
             }
             if (System.IO.File.Exists(Properties.Settings.Default.audio_player_path) == false)
             {
-                richTextBox2.Text += "播放音樂程式不存在 : " + Properties.Settings.Default.audio_player_path + "\n使用Windows預設播放音樂程式\n";
+                result_str += "播放音樂程式不存在 : " + Properties.Settings.Default.audio_player_path + "\n使用Windows預設播放音樂程式\n";
                 audio_player_path = String.Empty;
             }
             if (System.IO.File.Exists(Properties.Settings.Default.picture_viewer_path) == false)
             {
-                richTextBox2.Text += "播放圖片程式不存在 : " + Properties.Settings.Default.picture_viewer_path + "\n使用Windows預設播放圖片程式\n";
+                result_str += "播放圖片程式不存在 : " + Properties.Settings.Default.picture_viewer_path + "\n使用Windows預設播放圖片程式\n";
                 picture_viewer_path = String.Empty;
             }
             if (System.IO.File.Exists(Properties.Settings.Default.text_editor_path) == false)
             {
-                richTextBox2.Text += "文字編輯程式不存在 : " + Properties.Settings.Default.text_editor_path + "\n使用Windows預設文字編輯程式\n";
+                result_str += "文字編輯程式不存在 : " + Properties.Settings.Default.text_editor_path + "\n使用Windows預設文字編輯程式\n";
                 text_editor_path = String.Empty;
             }
             if (System.IO.File.Exists(Properties.Settings.Default.python_editor_path) == false)
             {
-                richTextBox2.Text += "python編輯程式不存在 : " + Properties.Settings.Default.python_editor_path + "\n使用Windows預設文字編輯程式\n";
+                result_str += "python編輯程式不存在 : " + Properties.Settings.Default.python_editor_path + "\n使用Windows預設文字編輯程式\n";
                 python_editor_path = String.Empty;
             }
             if (System.IO.File.Exists(Properties.Settings.Default.winmerge_path) == false)
             {
-                richTextBox2.Text += "winmerge程式不存在 : " + Properties.Settings.Default.winmerge_path + "\n使用Windows預設文字編輯程式\n";
+                result_str += "winmerge程式不存在 : " + Properties.Settings.Default.winmerge_path + "\n使用Windows預設文字編輯程式\n";
                 winmerge_path = String.Empty;
             }
 
             //預設搜尋路徑
             string PATH = Properties.Settings.Default.search_path;
-            //richTextBox2.Text += "PATH = " + PATH + "\n";
+            //result_str += "PATH = " + PATH + "\n";
 
             string[] path = PATH.Split(';');
 
@@ -3238,13 +3261,13 @@ namespace vcs_DrAP
                     //check existency
                     if (Directory.Exists(p) == true)
                     {
-                        //richTextBox2.Text += "len = " + p.Length.ToString() + "\t" + p + "\n";
-                        richTextBox2.Text += "加入路徑 : " + p + "\n";
+                        //result_str += "len = " + p.Length.ToString() + "\t" + p + "\n";
+                        result_str += "加入路徑 : " + p + "\n";
                         old_search_path.Add(p);       //目前只能 儲存/加入 一個路徑
                     }
                     else
                     {
-                        richTextBox2.Text += "搜尋預設路徑不存在 : " + p + "\tskip\n";
+                        result_str += "搜尋預設路徑不存在 : " + p + "\tskip\n";
                     }
                 }
             }
@@ -3255,33 +3278,33 @@ namespace vcs_DrAP
             //C# – 複製資料到剪貼簿
             //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
             Clipboard.SetDataObject(richTextBox2.Text + "\n");      //建議用此
-            richTextBox2.Text += "已複製資料到系統剪貼簿\n";
+            result_str += "已複製資料到系統剪貼簿\n";
         }
 
         private void bt_compare_Click(object sender, EventArgs e)
         {
-            richTextBox2.Text += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
+            result_str += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
             for (int i = 0; i < listView1.SelectedIndices.Count; i++)
             {
-                richTextBox2.Text += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
+                result_str += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
             }
 
             if (listView1.SelectedIndices.Count != 2)
             {
-                richTextBox2.Text += "必須要選取2個檔案才能比較\n";
+                result_str += "必須要選取2個檔案才能比較\n";
                 return;
             }
 
             int selNdx;
             string all_filename = string.Empty;
 
-            //richTextBox2.Text += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
+            //result_str += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
             //for (int i = 0; i < listView1.SelectedIndices.Count; i++)
             for (int i = 0; i < listView1.SelectedItems.Count; i++)
             {
                 selNdx = listView1.SelectedIndices[i];
                 listView1.Items[selNdx].Selected = true;    //選到的項目
-                //richTextBox2.Text += listView1.Items[selNdx].Text + "\n";
+                //result_str += listView1.Items[selNdx].Text + "\n";
 
                 if (flag_function == FUNCTION_SEARCH_TEXT)
                 {
@@ -3293,7 +3316,7 @@ namespace vcs_DrAP
                 }
             }
 
-            richTextBox2.Text += "all_filename : " + all_filename + "\n";
+            result_str += "all_filename : " + all_filename + "\n";
 
             string prog = @"C:/Program Files (x86)/WinMerge/WinMergeU.exe";
 
@@ -3428,12 +3451,12 @@ namespace vcs_DrAP
         {
             if (fileinfos.Count == 0)
             {
-                richTextBox2.Text += "找不到資料a\n";
+                result_str += "找不到資料a\n";
                 lb_search_result1.Text = "0";
             }
             else
             {
-                richTextBox2.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料a\n";
+                result_str += "找到 " + fileinfos.Count.ToString() + " 筆資料a\n";
                 lb_search_result1.Text = fileinfos.Count.ToString();
             }
 
@@ -3445,7 +3468,7 @@ namespace vcs_DrAP
 
             for (int i = 0; i < fileinfos.Count; i++)
             {
-                richTextBox2.Text += "i = " + i.ToString() + ", filename : " + fileinfos[i].filepath + "\\" + fileinfos[i].filename + "\n";
+                result_str += "i = " + i.ToString() + ", filename : " + fileinfos[i].filepath + "\\" + fileinfos[i].filename + "\n";
             }
         }
 
@@ -3466,13 +3489,13 @@ namespace vcs_DrAP
             {
                 int selNdx = listView1.SelectedIndices[0];
 
-                richTextBox2.Text += "aaaa b3你選擇了檔名3:\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
+                result_str += "aaaa b3你選擇了檔名3:\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
 
                 string foldername = listView1.Items[selNdx].SubItems[1].Text;
-                richTextBox2.Text += "資料夾:\t" + foldername + "\n";
+                result_str += "資料夾:\t" + foldername + "\n";
 
                 string fullname = listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].SubItems[0].Text;
-                richTextBox2.Text += "全檔名:\t" + fullname + "\n";
+                result_str += "全檔名:\t" + fullname + "\n";
 
                 /*
                 //C# 呼叫檔案總管開啟某個資料夾，並讓某個檔案或資料夾呈現反白的樣子

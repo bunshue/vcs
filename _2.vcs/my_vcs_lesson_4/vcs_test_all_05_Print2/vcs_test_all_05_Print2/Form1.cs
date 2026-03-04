@@ -132,14 +132,18 @@ namespace vcs_test_all_05_Print2
         private void button02_Click(object sender, EventArgs e)
         {
             //預覽列印
-            //預覽列印
-            printPreviewDialog0.ShowDialog();
+            //加入PrintDocument 和 PrintPreviewDialog
+            //printPreviewDialog1屬性之Document選printDocument1
+            //編輯 printDocument1_PrintPage
 
+            //無印表機也可以預覽列印
+
+            printPreviewDialog0.ClientSize = new Size(500, 600);
+            printPreviewDialog0.ShowDialog();
         }
 
         private void button03_Click(object sender, EventArgs e)
         {
-            //列印
             //列印
             if (printDialog0.ShowDialog() == DialogResult.OK)
             {

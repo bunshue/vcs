@@ -206,12 +206,12 @@ namespace vcs_DrAP
             str = sr.ReadLine(); // 讀出一行
             while (str != null)
             {
-                //richTextBox2.Text += str + "\n";    //一次讀一行 每一行都要加換行符號
+                //result_str += str + "\n";    //一次讀一行 每一行都要加換行符號
 
                 if (str.Contains(pattern1))
                 {
-                    //richTextBox2.Text += "有找到pattern, 要置換pattern\n";
-                    //richTextBox2.Text += str + "\n";    //一次讀一行 每一行都要加換行符號
+                    //result_str += "有找到pattern, 要置換pattern\n";
+                    //result_str += str + "\n";    //一次讀一行 每一行都要加換行符號
                     flag_need_replace = true;
                     break;
 
@@ -222,17 +222,17 @@ namespace vcs_DrAP
 
             if (flag_need_replace == false)
             {
-                //richTextBox2.Text += "沒有找到pattern, 不用置換pattern\n";
+                //result_str += "沒有找到pattern, 不用置換pattern\n";
                 return 2;   //2: 沒有找到pattern, 不用置換pattern
             }
             else
             {
-                //richTextBox2.Text += "有找到pattern, 要置換pattern\n";
+                //result_str += "有找到pattern, 要置換pattern\n";
             }
 
             if (File.Exists(filename2) == true)
             {
-                //richTextBox2.Text += "delete filename2\n";
+                //result_str += "delete filename2\n";
                 File.Delete(filename2);
             }
 
@@ -245,7 +245,7 @@ namespace vcs_DrAP
             {
                 if (str.Contains(pattern1))
                 {
-                    //richTextBox2.Text += "replace\n";
+                    //result_str += "replace\n";
                     str = str.Replace(pattern1, pattern2);
                 }
 
