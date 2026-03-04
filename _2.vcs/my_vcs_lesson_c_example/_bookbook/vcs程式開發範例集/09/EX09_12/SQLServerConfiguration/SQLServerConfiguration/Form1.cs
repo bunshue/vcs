@@ -9,6 +9,8 @@ using System.Linq;
 
 using System.Data.SqlClient;
 
+//db_09_Data.MDF
+
 namespace SQLServerConfiguration
 {
     public partial class Form1 : Form
@@ -28,7 +30,12 @@ namespace SQLServerConfiguration
 
         private DataTable Database()
         {
-            using (SqlConnection con = new SqlConnection("server=.;uid=sa;pwd=;database=master"))
+            string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\{0};Integrated Security=True;Connect Timeout=30";
+            string db_filename = "db_09_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+
+            //using (SqlConnection con = new SqlConnection("server=.;uid=sa;pwd=;database=master"))
+            using (SqlConnection con = new SqlConnection(cnstr))
             {
                 SqlDataAdapter da = new SqlDataAdapter("select name from sysdatabases ", con);
                 DataTable dt = new DataTable("sysdatabases");
@@ -41,6 +48,10 @@ namespace SQLServerConfiguration
         {
             this.dataGridView1.DataSource = null;
             strDatabase = this.comboBox1.Text.ToString();
+
+            richTextBox1.Text += "你選擇了 : " + strDatabase + "\n";
+            return;
+
             using (SqlConnection con = new SqlConnection("server=.;uid=sa;pwd=;database='" + strDatabase + "'"))
             {
                 SqlDataAdapter da = new SqlDataAdapter("SELECT name FROM sysobjects WHERE type = 'U' and name<>'dtproperties' ", con);

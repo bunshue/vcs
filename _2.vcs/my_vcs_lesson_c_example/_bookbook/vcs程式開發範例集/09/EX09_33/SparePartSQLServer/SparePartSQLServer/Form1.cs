@@ -14,6 +14,8 @@ namespace SparePartSQLServer
 {
     public partial class Form1 : Form
     {
+        string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\{0};Integrated Security=True;Connect Timeout=30";
+
         public Form1()
         {
             InitializeComponent();
@@ -21,6 +23,9 @@ namespace SparePartSQLServer
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            string db_filename = "db_09_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+
             using (SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=master"))
             {
                 DataTable dt = new DataTable();
@@ -39,6 +44,9 @@ namespace SparePartSQLServer
 
         public void beifenInfo()
         {
+            string db_filename = "db_09_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+
             try
             {
                 sd.InitialDirectory = Application.StartupPath + "\\";//預設路徑為D：//
@@ -59,17 +67,22 @@ namespace SparePartSQLServer
                         com.ExecuteNonQuery();						    //執行
                         con.Close();
                         con.Dispose();
-                        MessageBox.Show("數據備份成功！");
+                        //MessageBox.Show("數據備份成功！");
+                        richTextBox1.Text += "數據備份成功\n";
                     }
                     else
                     {
-                        MessageBox.Show("請重新命名！");
+                        //MessageBox.Show("請重新命名！");
+                        richTextBox1.Text += "請重新命名\n";
                     }
                 }
             }
             catch (Exception k)
             {
-                MessageBox.Show(k.Message);
+                //MessageBox.Show(k.Message);
+                richTextBox1.Text += "數據備份失敗, 原因 : \n";
+                richTextBox1.Text += k.Message + "\n";
+
                 return;
             }
         }

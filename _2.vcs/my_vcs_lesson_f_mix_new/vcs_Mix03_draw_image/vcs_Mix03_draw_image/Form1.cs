@@ -391,9 +391,46 @@ namespace vcs_Mix03_draw_image
             pictureBox1.Image = bitmap2;
         }
 
+
+        //聲明一個API函數
+        [System.Runtime.InteropServices.DllImportAttribute("gdi32.dll")]
+        private static extern bool BitBlt(IntPtr hdcDest, int nXDest, int nYDest, int nWidth, int nHeight, IntPtr hdcSrc, int nXSrc, int nYSrc, System.Int32 dwRop);
+
+        public void SnatchScreen(Form Frm, string FilePath)
+        {
+            Point Var_Loc = Frm.Location;//取得目前視窗的位置
+
+            richTextBox1.Text += "aaaa : " + Var_Loc.ToString() + "\n";
+            richTextBox1.Text += "bbbb : " + this.Location.ToString() + "\n";
+
+            int Frm_left = -Var_Loc.X;
+            int Frm_right = -Var_Loc.Y;
+
+            Rectangle Var_rect = new Rectangle();//實例化Rectangle類
+            Var_rect = Screen.GetWorkingArea(Frm);//獲得目前螢幕的大小
+            Graphics g = Frm.CreateGraphics();//建立一個以目前螢幕為模板的圖片
+            Image Var_Image = new Bitmap(Var_rect.Width, Var_rect.Height, g);//建立以螢幕大小為標準的位圖 
+            Graphics Var_G_Image = Graphics.FromImage(Var_Image);//根據圖片實例化Graphics類
+            IntPtr Screen_dc = g.GetHdc();//得到螢幕的句柄
+            IntPtr Bitmap_dc = Var_G_Image.GetHdc();//得到Bitmap的句柄
+            BitBlt(Bitmap_dc, 0, 0, Var_rect.Width, Var_rect.Height, Screen_dc, Frm_left, Frm_right, 13369376);//呼叫此API函數，完成螢幕擷取
+            g.ReleaseHdc(Screen_dc);//釋放掉螢幕的句柄
+            Var_G_Image.ReleaseHdc(Bitmap_dc);//釋放掉Bitmap的句柄
+            ImageFormat ImageF = ImageFormat.Jpeg;//實例化ImageFormat類
+
+            ImageF = ImageFormat.Jpeg;
+            Var_Image.Save(FilePath, ImageF);//以指定的文件格式來保存
+        }
+
         private void button6_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //本程式截圖
+
+            //執行螢幕截圖的操作
+            //本程式截圖
+            SnatchScreen(this, "tmp_aaaaaaa.jpg");
         }
 
         private void button7_Click(object sender, EventArgs e)

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.IO;
@@ -14,6 +15,8 @@ namespace DatabaseCon
 {
     public partial class Form1 : Form
     {
+        string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\{0};Integrated Security=True;Connect Timeout=30";
+
         string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_09_Data.MDF";
 
         public static string strCon = "";
@@ -206,3 +209,13 @@ namespace DatabaseCon
         }
     }
 }
+
+
+/*
+string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\{0};Integrated Security=True;Connect Timeout=30";
+
+string db_filename = "db_09_Data.MDF";
+string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+*/
+
+

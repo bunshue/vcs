@@ -41,6 +41,8 @@ namespace DeoxidizeSQLServer
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //還原SQL Server資料庫
+
             Restore();
         }
 
@@ -58,11 +60,14 @@ namespace DeoxidizeSQLServer
                     SqlCommand cmd = new SqlCommand(SqlStr2, con);
                     cmd.Connection = con;
                     cmd.ExecuteNonQuery();
-                    MessageBox.Show("還原數據成功");
+                    //MessageBox.Show("還原數據成功");
+                    richTextBox1.Text += "還原數據成功\n";
                 }
                 catch (Exception error)
                 {
-                    MessageBox.Show("還原失敗，請確保還原項與庫對應");
+                    richTextBox1.Text += "還原數據失敗，請確保還原項與庫對應, 原因 : \n";
+                    richTextBox1.Text += error.Message + "\n";
+                    //MessageBox.Show("還原失敗，請確保還原項與庫對應");
                 }
                 finally
                 {
