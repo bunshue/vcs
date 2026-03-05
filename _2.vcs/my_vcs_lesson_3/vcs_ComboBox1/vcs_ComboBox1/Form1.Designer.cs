@@ -58,6 +58,14 @@
             this.bt_clear = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox9 = new System.Windows.Forms.ComboBox();
+            this.comboBox_add = new System.Windows.Forms.ComboBox();
+            this.bt_add = new System.Windows.Forms.Button();
+            this.comboBox_day = new System.Windows.Forms.ComboBox();
+            this.comboBox_month = new System.Windows.Forms.ComboBox();
+            this.comboBox_year = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -346,11 +354,95 @@
             this.comboBox9.TextChanged += new System.EventHandler(this.comboBox9_TextChanged);
             this.comboBox9.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBox9_KeyDown);
             // 
+            // comboBox_add
+            // 
+            this.comboBox_add.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox_add.FormattingEnabled = true;
+            this.comboBox_add.Location = new System.Drawing.Point(435, 363);
+            this.comboBox_add.Name = "comboBox_add";
+            this.comboBox_add.Size = new System.Drawing.Size(209, 29);
+            this.comboBox_add.TabIndex = 25;
+            // 
+            // bt_add
+            // 
+            this.bt_add.Location = new System.Drawing.Point(653, 363);
+            this.bt_add.Name = "bt_add";
+            this.bt_add.Size = new System.Drawing.Size(77, 29);
+            this.bt_add.TabIndex = 25;
+            this.bt_add.Text = "加入選項";
+            this.bt_add.UseVisualStyleBackColor = true;
+            this.bt_add.Click += new System.EventHandler(this.bt_add_Click);
+            // 
+            // comboBox_day
+            // 
+            this.comboBox_day.FormattingEnabled = true;
+            this.comboBox_day.Location = new System.Drawing.Point(604, 412);
+            this.comboBox_day.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox_day.Name = "comboBox_day";
+            this.comboBox_day.Size = new System.Drawing.Size(45, 20);
+            this.comboBox_day.TabIndex = 73;
+            // 
+            // comboBox_month
+            // 
+            this.comboBox_month.FormattingEnabled = true;
+            this.comboBox_month.Location = new System.Drawing.Point(529, 412);
+            this.comboBox_month.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox_month.Name = "comboBox_month";
+            this.comboBox_month.Size = new System.Drawing.Size(45, 20);
+            this.comboBox_month.TabIndex = 74;
+            // 
+            // comboBox_year
+            // 
+            this.comboBox_year.FormattingEnabled = true;
+            this.comboBox_year.Location = new System.Drawing.Point(435, 412);
+            this.comboBox_year.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox_year.Name = "comboBox_year";
+            this.comboBox_year.Size = new System.Drawing.Size(59, 20);
+            this.comboBox_year.TabIndex = 72;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(653, 415);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(17, 12);
+            this.label7.TabIndex = 71;
+            this.label7.Text = "日";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(576, 415);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(17, 12);
+            this.label6.TabIndex = 70;
+            this.label6.Text = "月";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(498, 415);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(17, 12);
+            this.label8.TabIndex = 69;
+            this.label8.Text = "年";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(913, 648);
+            this.Controls.Add(this.comboBox_day);
+            this.Controls.Add(this.comboBox_month);
+            this.Controls.Add(this.comboBox_year);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.bt_add);
+            this.Controls.Add(this.comboBox_add);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox9);
             this.Controls.Add(this.bt_clear);
@@ -400,6 +492,14 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox9;
+        private System.Windows.Forms.ComboBox comboBox_add;
+        private System.Windows.Forms.Button bt_add;
+        private System.Windows.Forms.ComboBox comboBox_day;
+        private System.Windows.Forms.ComboBox comboBox_month;
+        private System.Windows.Forms.ComboBox comboBox_year;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label8;
     }
 }
 

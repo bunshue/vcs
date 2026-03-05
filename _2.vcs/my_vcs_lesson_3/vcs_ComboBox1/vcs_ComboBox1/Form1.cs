@@ -192,6 +192,34 @@ namespace vcs_ComboBox1
             this.comboBox9.Items.Add("http://www.microsoft.com/");//向ComboBox控件中添加網址「http://www.qq.com/」
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //年月日
+
+            // 年下拉式清單預設值100年前
+            comboBox_year.Text = (DateTime.Now.Year - 100).ToString();
+            comboBox_month.Text = "1"; // 月下拉式清單預設值1
+            comboBox_day.Text = "1";      // 日下拉式清單預設值 1
+
+            // 年下拉式清單的範圍100年前~今年
+            for (int i = DateTime.Now.Year - 100; i <= DateTime.Now.Year; i++)
+            {
+                comboBox_year.Items.Add(i.ToString());
+            }
+
+            for (int i = 1; i <= 12; i++) // 月下拉式清單的範圍是1-12
+            {
+                comboBox_month.Items.Add(i.ToString());
+            }
+
+            for (int i = 1; i <= 31; i++) // 日下拉式清單的範圍是1-31
+            {
+                comboBox_day.Items.Add(i.ToString());
+            }
+
+
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
         }
 
         void show_item_location()
@@ -251,6 +279,11 @@ namespace vcs_ComboBox1
             cboFace.Location = new Point(x_st + dx * 0 + 150, y_st + dy * 7 + dd);
 
             this.Size = new Size(1200, 800);
+            this.Text = "vcs_ComboBox1";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -572,6 +605,13 @@ namespace vcs_ComboBox1
                     comboBox9.Select(importText.Length, comboBox9.Text.Length);//設定文本的選擇長度
                 }
             }
+        }
+
+        private void bt_add_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "加入 : " + comboBox_add.Text + "\n";
+            // 將下拉式清單所輸入的值放入下拉式清單的選項內
+            comboBox_add.Items.Add(comboBox_add.Text);
         }
     }
 

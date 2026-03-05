@@ -27,6 +27,7 @@ namespace WinMonthcalendar
             checkedListBox1.Items.AddRange(Product);
             checkedListBox1.MultiColumn = true;	// 核取清單方塊設為多欄
             checkedListBox1.ColumnWidth = 150; 	// 核取清單方塊欄寬150
+
             monthCalendar1.MinDate = DateTime.Now;// 日曆控制項最小可選日期為今日
             checkedListBox1.CheckOnClick = true; // 只按一下選取
         }
@@ -44,10 +45,7 @@ namespace WinMonthcalendar
                 }
             }
             // 在textBox1上顯示送貨日期的範圍
-            textBox1.Text += Environment.NewLine + "指定送貨日期為" +
-                monthCalendar1.SelectionRange.Start.ToShortDateString() +
-                "至" + monthCalendar1.SelectionRange.End.
-                ToShortDateString() + " 送達貴處";
+            textBox1.Text += Environment.NewLine + "指定送貨日期為" + monthCalendar1.SelectionRange.Start.ToShortDateString() + "至" + monthCalendar1.SelectionRange.End.ToShortDateString() + " 送達貴處";
         }
 
         private void btnReSet_Click(object sender, EventArgs e)

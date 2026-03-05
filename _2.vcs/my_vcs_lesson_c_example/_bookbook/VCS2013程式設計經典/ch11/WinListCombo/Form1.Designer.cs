@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.label8 = new System.Windows.Forms.Label();
-            this.btnAdd = new System.Windows.Forms.Button();
             this.lstJob = new System.Windows.Forms.ListBox();
             this.rdbF = new System.Windows.Forms.RadioButton();
             this.rdbM = new System.Windows.Forms.RadioButton();
@@ -45,6 +44,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label8
@@ -57,17 +59,6 @@
             this.label8.Size = new System.Drawing.Size(186, 22);
             this.label8.TabIndex = 22;
             this.label8.Text = "會員基本登錄作業";
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(176, 174);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(2);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(88, 43);
-            this.btnAdd.TabIndex = 20;
-            this.btnAdd.Text = "新增";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // lstJob
             // 
@@ -218,14 +209,46 @@
             this.richTextBox1.TabIndex = 23;
             this.richTextBox1.Text = "";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(146, 56);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(166, 22);
+            this.textBox1.TabIndex = 24;
+            this.textBox1.Text = "david";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(19, 319);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(88, 43);
+            this.button1.TabIndex = 25;
+            this.button1.Text = "新增";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(129, 319);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(88, 43);
+            this.button2.TabIndex = 26;
+            this.button2.Text = "check";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(810, 622);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.lstJob);
             this.Controls.Add(this.rdbF);
             this.Controls.Add(this.rdbM);
@@ -251,7 +274,6 @@
         #endregion
 
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.ListBox lstJob;
         private System.Windows.Forms.RadioButton rdbF;
         private System.Windows.Forms.RadioButton rdbM;
@@ -267,6 +289,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 

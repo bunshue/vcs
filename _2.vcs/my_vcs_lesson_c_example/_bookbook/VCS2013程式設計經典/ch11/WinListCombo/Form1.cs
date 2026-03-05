@@ -32,65 +32,11 @@ namespace WinListCombo
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // 年下拉式清單預設值100年前
-            cboYear.Text = (DateTime.Now.Year - 100).ToString();
-            cboMonth.Text = "1"; // 月下拉式清單預設值1
-            cboDay.Text = "1";      // 日下拉式清單預設值 1
-            // 年下拉式清單的範圍100年前~今年
-            for (int i = DateTime.Now.Year - 100; i <= DateTime.Now.Year; i++)
-            {
-                cboYear.Items.Add(i.ToString());
-            }
-            for (int i = 1; i <= 12; i++) // 月下拉式清單的範圍是1-12
-            {
-                cboMonth.Items.Add(i.ToString());
-            }
-            for (int i = 1; i <= 31; i++) // 日下拉式清單的範圍是1-31
-            {
-                cboDay.Items.Add(i.ToString());
-            }
-            rdbM.Checked = true;  // 男選項鈕預設被選取
+            //ListBox預設選項
             // 建立Job字串陣列用來存放職業
-            String[] Job = new String[] { "學生", "公教", "服務", "製造", "家管", "其它" };
+            String[] Job = new String[] { "士", "農", "工", "商", "兵", "其它" };
             lstJob.Items.AddRange(Job); // lstJob清單放入Job陣列內容
             lstJob.SelectedIndex = 0;   // lstJob清單預設第1個選項被選取
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            if (cboName.Text == "")  // 檢查姓名是否為空字串
-            {
-                MessageBox.Show("請輸入姓名");
-                return;   // 離開此事件處理函式
-            }
-            // 使用ContainsKey方法檢查會員的鍵值(姓名)是否在 m 串列物件中
-            if (m.ContainsKey(cboName.Text))
-            {
-                MessageBox.Show("資料已存在!");
-                return; // 離開此事件處理函式
-            }
-            else
-            {
-                // 建立日期物件用來存放會員的生日
-                DateTime myBirthDay = new DateTime();
-                try   // 使用例外處理補捉輸入生日可能會發生的例外
-                {
-                    myBirthDay = DateTime.Parse
-                    (cboYear.Text + "/" + cboMonth.Text + "/" + cboDay.Text);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("生日有誤" + ex.ToString());
-                    return;  // 如果生日有誤即離開此事件處理函式
-                }
-                // 將姓名下拉式清單所輸入的值放入下拉式清單的選項內
-                cboName.Items.Add(cboName.Text);
-
-                // 將Member會員物件新增至 m 串列內
-                // Key鍵值為會員姓名，Value對應值為Member會員物件
-                m.Add(cboName.Text, new Member() { Name = cboName.Text, BirthdDay = myBirthDay, Sex = rdbF.Checked ? "男" : "女", Job = lstJob.SelectedItem.ToString() });
-                MessageBox.Show("會員新增成功");
-            }
         }
 
         // 姓名下拉式清單被選取時執行
@@ -105,6 +51,7 @@ namespace WinListCombo
             cboYear.Text = sm.BirthdDay.Year.ToString();
             cboMonth.Text = sm.BirthdDay.Month.ToString();
             cboDay.Text = sm.BirthdDay.Day.ToString();
+
             if (sm.Sex == "男")
             {
                 rdbF.Checked = true;
@@ -113,8 +60,97 @@ namespace WinListCombo
             {
                 rdbM.Checked = true;
             }
+
             int JobIndex = lstJob.FindString(sm.Job);
             lstJob.SelectedIndex = JobIndex;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //字串二維陣列
+            string[,] members = new string[5, 4] {
+            { "Doraemon", "9/3/2112", "男", "士" },
+            { "Dorami", "12/2/2114", "女", "農" },
+            { "Mickey", "11/18/1928", "男", "工" },
+            { "Benny", "8/14/2000", "男", "商" },
+            { "Cony", "4/17/2013", "女", "兵" }
+            };
+
+            string name = members[0, 0];
+            string birthday = members[0, 1];
+            string sex = members[0, 2];
+            string job = members[0, 3];
+            // 將姓名下拉式清單所輸入的值放入下拉式清單的選項內
+            cboName.Items.Add(name);
+            // 將Member會員物件新增至 m 串列內
+            // Key鍵值為會員姓名，Value對應值為Member會員物件
+            m.Add(name, new Member() { Name = name, BirthdDay = DateTime.Parse(birthday), Sex = sex, Job = job });
+
+            name = members[1, 0];
+            birthday = members[1, 1];
+            sex = members[1, 2];
+            job = members[1, 3];
+            // 將姓名下拉式清單所輸入的值放入下拉式清單的選項內
+            cboName.Items.Add(name);
+            // 將Member會員物件新增至 m 串列內
+            // Key鍵值為會員姓名，Value對應值為Member會員物件
+            m.Add(name, new Member() { Name = name, BirthdDay = DateTime.Parse(birthday), Sex = sex, Job = job });
+
+            name = members[2, 0];
+            birthday = members[2, 1];
+            sex = members[2, 2];
+            job = members[2, 3];
+            // 將姓名下拉式清單所輸入的值放入下拉式清單的選項內
+            cboName.Items.Add(name);
+            // 將Member會員物件新增至 m 串列內
+            // Key鍵值為會員姓名，Value對應值為Member會員物件
+            m.Add(name, new Member() { Name = name, BirthdDay = DateTime.Parse(birthday), Sex = sex, Job = job });
+
+            name = members[3, 0];
+            birthday = members[3, 1];
+            sex = members[3, 2];
+            job = members[3, 3];
+            // 將姓名下拉式清單所輸入的值放入下拉式清單的選項內
+            cboName.Items.Add(name);
+            // 將Member會員物件新增至 m 串列內
+            // Key鍵值為會員姓名，Value對應值為Member會員物件
+            m.Add(name, new Member() { Name = name, BirthdDay = DateTime.Parse(birthday), Sex = sex, Job = job });
+
+            name = members[4, 0];
+            birthday = members[4, 1];
+            sex = members[4, 2];
+            job = members[4, 3];
+            // 將姓名下拉式清單所輸入的值放入下拉式清單的選項內
+            cboName.Items.Add(name);
+            // 將Member會員物件新增至 m 串列內
+            // Key鍵值為會員姓名，Value對應值為Member會員物件
+            m.Add(name, new Member() { Name = name, BirthdDay = DateTime.Parse(birthday), Sex = sex, Job = job });
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string check_name = "Doraemon";
+            // 使用ContainsKey方法檢查會員的鍵值(姓名)是否在 m 串列物件中
+            if (m.ContainsKey(check_name))
+            {
+                richTextBox1.Text += "資料已存在!\n";
+            }
+            else
+            {
+                richTextBox1.Text += "無此資料\n";
+            }
+
+            check_name = "Jerry";
+            // 使用ContainsKey方法檢查會員的鍵值(姓名)是否在 m 串列物件中
+            if (m.ContainsKey(check_name))
+            {
+                richTextBox1.Text += "資料已存在!\n";
+            }
+            else
+            {
+                richTextBox1.Text += "無此資料\n";
+            }
+
         }
     }
 }

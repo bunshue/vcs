@@ -84,28 +84,28 @@
             // 開啟舊檔ToolStripMenuItem
             // 
             this.開啟舊檔ToolStripMenuItem.Name = "開啟舊檔ToolStripMenuItem";
-            this.開啟舊檔ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.開啟舊檔ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.開啟舊檔ToolStripMenuItem.Text = "開啟舊檔";
             this.開啟舊檔ToolStripMenuItem.Click += new System.EventHandler(this.開啟舊檔ToolStripMenuItem_Click);
             // 
             // 儲存檔案ToolStripMenuItem
             // 
             this.儲存檔案ToolStripMenuItem.Name = "儲存檔案ToolStripMenuItem";
-            this.儲存檔案ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.儲存檔案ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.儲存檔案ToolStripMenuItem.Text = "儲存檔案";
             this.儲存檔案ToolStripMenuItem.Click += new System.EventHandler(this.儲存檔案ToolStripMenuItem_Click);
             // 
             // 清除ToolStripMenuItem
             // 
             this.清除ToolStripMenuItem.Name = "清除ToolStripMenuItem";
-            this.清除ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.清除ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.清除ToolStripMenuItem.Text = "清除";
             this.清除ToolStripMenuItem.Click += new System.EventHandler(this.清除ToolStripMenuItem_Click);
             // 
             // 結束ToolStripMenuItem
             // 
             this.結束ToolStripMenuItem.Name = "結束ToolStripMenuItem";
-            this.結束ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.結束ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.結束ToolStripMenuItem.Text = "結束";
             this.結束ToolStripMenuItem.Click += new System.EventHandler(this.結束ToolStripMenuItem_Click);
             // 
@@ -128,14 +128,14 @@
             // 前景色ToolStripMenuItem
             // 
             this.前景色ToolStripMenuItem.Name = "前景色ToolStripMenuItem";
-            this.前景色ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.前景色ToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.前景色ToolStripMenuItem.Text = "前景色";
             this.前景色ToolStripMenuItem.Click += new System.EventHandler(this.前景色ToolStripMenuItem_Click);
             // 
             // 背景色ToolStripMenuItem
             // 
             this.背景色ToolStripMenuItem.Name = "背景色ToolStripMenuItem";
-            this.背景色ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.背景色ToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.背景色ToolStripMenuItem.Text = "背景色";
             this.背景色ToolStripMenuItem.Click += new System.EventHandler(this.背景色ToolStripMenuItem_Click);
             // 

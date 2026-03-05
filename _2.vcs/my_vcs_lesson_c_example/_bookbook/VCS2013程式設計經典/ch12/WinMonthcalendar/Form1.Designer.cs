@@ -120,7 +120,7 @@
             this.checkedListBox1.Location = new System.Drawing.Point(13, 29);
             this.checkedListBox1.Margin = new System.Windows.Forms.Padding(2);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(342, 104);
+            this.checkedListBox1.Size = new System.Drawing.Size(478, 104);
             this.checkedListBox1.TabIndex = 9;
             // 
             // richTextBox1
