@@ -37,7 +37,6 @@ namespace xCh2_2_61
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
             this.ClientSize = new Size(552, 510);
 
             Label1.Location = new Point(232, 12);

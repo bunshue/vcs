@@ -20,6 +20,8 @@ namespace vcs_LinkLabel
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             linkLabel1.Text = "群曜醫電";
             toolTip1.IsBalloon = true;			  // 使用汽球的形式
             toolTip1.ToolTipIcon = ToolTipIcon.Info;  // 顯示資訊圖示Icon
@@ -28,6 +30,48 @@ namespace vcs_LinkLabel
             linkLabel2.Text = "請聯絡我們";
             linkLabel2.LinkArea = new LinkArea(1, 2); // 設定「聯絡」可以超連結
             toolTip2.SetToolTip(linkLabel2, "歡迎來信");   // 設定linkLabel2顯示工具提示
+
+            //linkLabel_contact1
+            //toolTip_contact1
+
+
+            //linkLabel_contact2
+            //toolTip_contact2
+
+
+            linkLabel_contact1.Text = "碁峰資訊";
+            toolTip_contact1.IsBalloon = true;			// 使用汽球的型式
+            toolTip_contact1.ToolTipIcon = ToolTipIcon.Info;  	// 顯示資訊圖示Icon
+            toolTip_contact1.ToolTipTitle = "碁峰給您快樂學習"; 	// 設定工具提示標題
+            toolTip_contact1.BackColor = Color.Orange;	// 設定工具提示背景色為橘色
+            toolTip_contact1.SetToolTip(linkLabel_contact1, "碁峰提供好書");
+
+            linkLabel_contact2.Text = "請聯絡我們";
+            linkLabel_contact2.LinkArea = new LinkArea(1, 2);// 設定「聯絡」可以超連結
+            toolTip_contact2.SetToolTip(linkLabel_contact2, "歡迎讀者來信");
+
+
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 10;
+            dy = 60 + 10;
+
+            //this.Size = new Size(1273, 784);
+            this.Text = "vcs_test_all_00_Usually";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -66,5 +110,19 @@ namespace vcs_LinkLabel
             //啟動小算盤應用程式
             Process.Start("calc.exe");
         }
+
+        private void linkLabel_contact1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            // 連結到碁峰網站
+            System.Diagnostics.Process.Start("http://www.gotop.com.tw");
+        }
+
+        private void linkLabel_contact2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            // 按下 "連絡" 執行
+            // 開啟郵件軟體連結 wltasi@yahoo.com.tw
+            System.Diagnostics.Process.Start("mailto:wltasi@yahoo.com.tw");
+        }
     }
 }
+

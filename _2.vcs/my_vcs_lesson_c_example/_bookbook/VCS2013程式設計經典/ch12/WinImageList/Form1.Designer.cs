@@ -111,7 +111,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(379, 261);
+            this.ClientSize = new System.Drawing.Size(608, 486);
             this.Controls.Add(this.lblShow);
             this.Controls.Add(this.btnLast);
             this.Controls.Add(this.btnNext);
@@ -119,7 +119,7 @@
             this.Controls.Add(this.btnFirst);
             this.Controls.Add(this.pictureBox1);
             this.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);

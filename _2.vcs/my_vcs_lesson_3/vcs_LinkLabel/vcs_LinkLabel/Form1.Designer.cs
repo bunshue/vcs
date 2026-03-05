@@ -36,6 +36,12 @@
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.linkLabel4 = new System.Windows.Forms.LinkLabel();
             this.linkLabel5 = new System.Windows.Forms.LinkLabel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.linkLabel_contact2 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel_contact1 = new System.Windows.Forms.LinkLabel();
+            this.toolTip_contact1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip_contact2 = new System.Windows.Forms.ToolTip(this.components);
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // linkLabel1
@@ -104,11 +110,49 @@
             this.linkLabel5.Text = "小算盤";
             this.linkLabel5.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel5_LinkClicked);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.linkLabel_contact2);
+            this.groupBox1.Controls.Add(this.linkLabel_contact1);
+            this.groupBox1.Location = new System.Drawing.Point(282, 284);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(487, 220);
+            this.groupBox1.TabIndex = 6;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "LinkLabel + ToolTip";
+            // 
+            // linkLabel_contact2
+            // 
+            this.linkLabel_contact2.AutoSize = true;
+            this.linkLabel_contact2.LinkArea = new System.Windows.Forms.LinkArea(1, 2);
+            this.linkLabel_contact2.Location = new System.Drawing.Point(60, 110);
+            this.linkLabel_contact2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.linkLabel_contact2.Name = "linkLabel_contact2";
+            this.linkLabel_contact2.Size = new System.Drawing.Size(66, 19);
+            this.linkLabel_contact2.TabIndex = 3;
+            this.linkLabel_contact2.TabStop = true;
+            this.linkLabel_contact2.Text = "請連絡我們";
+            this.linkLabel_contact2.UseCompatibleTextRendering = true;
+            this.linkLabel_contact2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_contact2_LinkClicked);
+            // 
+            // linkLabel_contact1
+            // 
+            this.linkLabel_contact1.AutoSize = true;
+            this.linkLabel_contact1.Location = new System.Drawing.Point(60, 63);
+            this.linkLabel_contact1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.linkLabel_contact1.Name = "linkLabel_contact1";
+            this.linkLabel_contact1.Size = new System.Drawing.Size(53, 12);
+            this.linkLabel_contact1.TabIndex = 2;
+            this.linkLabel_contact1.TabStop = true;
+            this.linkLabel_contact1.Text = "碁峰資訊";
+            this.linkLabel_contact1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_contact1_LinkClicked);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1041, 633);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.linkLabel5);
             this.Controls.Add(this.linkLabel4);
             this.Controls.Add(this.linkLabel3);
@@ -117,6 +161,8 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -131,6 +177,11 @@
         private System.Windows.Forms.LinkLabel linkLabel3;
         private System.Windows.Forms.LinkLabel linkLabel4;
         private System.Windows.Forms.LinkLabel linkLabel5;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.LinkLabel linkLabel_contact2;
+        private System.Windows.Forms.LinkLabel linkLabel_contact1;
+        private System.Windows.Forms.ToolTip toolTip_contact1;
+        private System.Windows.Forms.ToolTip toolTip_contact2;
     }
 }
 
