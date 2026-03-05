@@ -26,7 +26,7 @@ namespace xCh10_2_2_11
         {
             builder = new OleDbConnectionStringBuilder();
             builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
-            builder["Data Source"] = @"C:\Northwind.mdb";
+            builder["Data Source"] = @"D:\Northwind2.mdb";
             builder["User Id"] = "Admin";
 
             // 取出員工資料表中所有欄位的內容

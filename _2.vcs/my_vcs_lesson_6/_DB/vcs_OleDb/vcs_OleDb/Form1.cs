@@ -91,36 +91,32 @@ namespace vcs_OleDb
             richTextBox1.Clear();
         }
 
-        void OpenConnection(string connectionString)
+        private void button0_Click(object sender, EventArgs e)
         {
-            using (OleDbConnection connection = new OleDbConnection(connectionString))
+            //連線OleDb 1, 使用 連線字串
+
+            string connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\\Northwind.mdb";
+            using (OleDbConnection connection = new OleDbConnection(connectionString))  // 連接資料庫
             {
                 try
                 {
                     connection.Open();
-                    Console.WriteLine("連接字串：" + connection.ConnectionString);
-                    Console.WriteLine("資料庫： {0} \n伺服器名稱或檔案名稱： {1}", connection.Database, connection.DataSource);
-                    Console.WriteLine("伺服器版本： {0} \n提供者名稱：{1}", connection.ServerVersion, connection.Provider);
-                    Console.WriteLine("目前的連線狀態：" + connection.State);
-
 
                     richTextBox1.Text += "連接字串：" + connection.ConnectionString + "\n";
-                    richTextBox1.Text += "資料庫： {0} \n伺服器名稱或檔案名稱： {1}" + "\t" + connection.Database + "\t" + connection.DataSource + "\n";
-                    richTextBox1.Text += "伺服器版本： {0} \n提供者名稱：{1}" + "\t" + connection.ServerVersion + "\t" + connection.Provider + "\n";
+                    richTextBox1.Text += string.Format("資料庫： {0} 伺服器名稱或檔案名稱： {1}", connection.Database, connection.DataSource) + "\n";
+                    richTextBox1.Text += string.Format("伺服器版本： {0} 提供者名稱：{1}", connection.ServerVersion, connection.Provider) + "\n";
                     richTextBox1.Text += "目前的連線狀態：" + connection.State + "\n";
-
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
             }
-        }
 
-        private void button0_Click(object sender, EventArgs e)
-        {
-            //OleDb
-            OpenConnection("Provider=Microsoft.Jet.OLEDB.4.0; Data Source=D:\\Northwind.mdb");
+            //3030
+
+            //連線OleDb 2, 使用 OleDbConnectionStringBuilder
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -129,7 +125,7 @@ namespace vcs_OleDb
             //第一種方式
 
             OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder();
-            builder.ConnectionString = @"Data Source=C:\Northwind.mdb";
+            builder.ConnectionString = @"Data Source=D:\Northwind.mdb";
 
             // 使用Add()方法以明確地加入key/value pairs
             builder.Add("Provider", "Microsoft.Jet.Oledb.4.0");
@@ -144,7 +140,7 @@ namespace vcs_OleDb
             //第二種方式
             // 以連線字串設定給ConnectionStrin屬性 
             // 這些值可以被取得，也可以被修改
-            builder.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\\Northwind.mdb;User ID=Admin";
+            builder.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\\Northwind.mdb;User ID=Admin";
             Console.WriteLine(builder.ConnectionString);
             Console.WriteLine();
 
@@ -164,7 +160,7 @@ namespace vcs_OleDb
             // 使用indexer加入必要的key/value pairs
             OleDbConnectionStringBuilder newBuilder = new OleDbConnectionStringBuilder();
             newBuilder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
-            newBuilder["Data Source"] = "C:\\Northwind.mdb";
+            newBuilder["Data Source"] = "D:\\Northwind.mdb";
             newBuilder["User Id"] = "Admin;NewValue=Bad";
         }
 
@@ -172,15 +168,15 @@ namespace vcs_OleDb
         {
             OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder();
             builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
-            builder["Data Source"] = @"C:\Northwind.mdb";
+            builder["Data Source"] = @"D:\Northwind.mdb";
             builder["User Id"] = "Admin";
 
             // 取出員工資料表中所有欄位的內容
-            string queryString = "SELECT * FROM 員工";
+            string queryString = "SELECT * FROM 員工";  // 設定SQL語句
 
-            using (OleDbConnection connection = new OleDbConnection(builder.ConnectionString))
+            using (OleDbConnection connection = new OleDbConnection(builder.ConnectionString))  // 連接資料庫
             {
-                OleDbCommand command = new OleDbCommand(queryString, connection);
+                OleDbCommand command = new OleDbCommand(queryString, connection);//執行SQL語句
                 command.CommandTimeout = 20;
 
                 connection.Open();
@@ -202,13 +198,14 @@ namespace vcs_OleDb
 
             OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder();
             builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
-            builder["Data Source"] = @"C:\Northwind.mdb";
+            builder["Data Source"] = @"D:\Northwind.mdb";
             builder["User Id"] = "Admin";
 
-            using (OleDbConnection connection = new OleDbConnection(builder.ConnectionString))
+            using (OleDbConnection connection = new OleDbConnection(builder.ConnectionString))  // 連接資料庫
             {
-                string queryString = "SELECT * FROM 供應商";
-                OleDbCommand command = new OleDbCommand(builder.ConnectionString);
+                string queryString = "SELECT * FROM 供應商";  // 設定SQL語句
+
+                OleDbCommand command = new OleDbCommand(builder.ConnectionString);//執行SQL語句
                 connection.Open();
 
                 // 建構DataSet及其組成分子
@@ -219,7 +216,7 @@ namespace vcs_OleDb
                 // 秀出剛動態建構出來的DataSet 
                 dataGridView1.DataSource = NorthwindDataSet.Tables["供應商Table"];
 
-                queryString = "SELECT * FROM 員工";
+                queryString = "SELECT * FROM 員工";  // 設定SQL語句
                 myAdapter = new OleDbDataAdapter(queryString, connection);
                 myAdapter.Fill(NorthwindDataSet, "員工Table");
 
@@ -242,15 +239,16 @@ namespace vcs_OleDb
 
             OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder();
             builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
-            builder["Data Source"] = @"C:\Northwind.mdb";
+            builder["Data Source"] = @"D:\Northwind.mdb";
             builder["User Id"] = "Admin";
 
-            using (OleDbConnection connection = new OleDbConnection(builder.ConnectionString))
+            using (OleDbConnection connection = new OleDbConnection(builder.ConnectionString))  // 連接資料庫
             {
                 connection.Open();
 
                 OleDbCommand command;
-                command = new OleDbCommand("SELECT * FROM 客戶 " + "WHERE 城市 = ?", connection);
+                // 設定SQL語句
+                command = new OleDbCommand("SELECT * FROM 客戶 " + "WHERE 城市 = ?", connection);//執行SQL語句
                 command.Parameters.Add("城市", OleDbType.VarChar, 6);
 
                 command.Parameters["城市"].Value = cityParam;
