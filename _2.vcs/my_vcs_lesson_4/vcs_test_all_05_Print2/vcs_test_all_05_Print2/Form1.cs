@@ -60,7 +60,7 @@ namespace vcs_test_all_05_Print2
             textBox1.Size = new Size(400, 300);
             textBox1.Location = new Point(x_st + dx * 2, y_st + dy * 4 + 20);
 
-            richTextBox1.Size = new Size(400, 800);
+            richTextBox1.Size = new Size(400, 690);
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -85,7 +85,22 @@ namespace vcs_test_all_05_Print2
             button32.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button33.Location = new Point(x_st + dx * 0, y_st + dy * 3);
 
-            this.Size = new Size(1300, 910);
+            x_st = 10;
+            y_st = 300;
+            dx = 180 + 10;
+            dy = 55 + 10;
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button6.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button7.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button8.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button9.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+
+            this.Size = new Size(1300, 750);
             this.Text = "vcs_test_all_05_Print2";
 
             //設定執行後的表單起始位置, 正中央
@@ -97,7 +112,6 @@ namespace vcs_test_all_05_Print2
         {
             richTextBox1.Clear();
         }
-
 
         private void printDocument0_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
@@ -116,12 +130,10 @@ namespace vcs_test_all_05_Print2
         private void button00_Click(object sender, EventArgs e)
         {
             //版面設定
-            //版面設定
             if (pageSetupDialog0.ShowDialog() == DialogResult.OK)
             {
                 printDocument0.DefaultPageSettings = pageSetupDialog0.PageSettings;
             }
-
         }
 
         private void button01_Click(object sender, EventArgs e)
@@ -150,8 +162,6 @@ namespace vcs_test_all_05_Print2
                 //Print()方法會觸動PrintDocument控制項的PrintPage事件
                 printDocument0.Print();
             }
-
-
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -214,7 +224,55 @@ namespace vcs_test_all_05_Print2
 
         }
 
+        private void button0_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
