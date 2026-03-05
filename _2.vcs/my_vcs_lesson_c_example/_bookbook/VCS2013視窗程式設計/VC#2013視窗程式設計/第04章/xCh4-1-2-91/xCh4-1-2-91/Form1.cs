@@ -35,12 +35,10 @@ namespace xCh4_1_2_91
 
             try
             {
-                Image myImage =
-                    Image.FromFile(openFileDialog1.FileName);
+                Image myImage = Image.FromFile(openFileDialog1.FileName);
                 Clipboard.SetImage(myImage);
 
-                DataFormats.Format df =
-                    DataFormats.GetFormat(DataFormats.Bitmap);
+                DataFormats.Format df = DataFormats.GetFormat(DataFormats.Bitmap);
                 if (richTextBox1.CanPaste(df))
                 {
                     richTextBox1.Paste(df);
@@ -48,9 +46,7 @@ namespace xCh4_1_2_91
             }
             catch
             {
-                MessageBox.Show("無法插入圖片", "錯誤",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                MessageBox.Show("無法插入圖片", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

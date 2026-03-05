@@ -82,14 +82,11 @@ namespace xCh5_1_6_11
                     i++;
                     if (i % 2 == 0)
                     {
-                        treeView1.Nodes[customerArray.IndexOf(customer)].Nodes.Add(
-                      new TreeNode(customer.CustomerName + "." + order.OrderID,
-                          unselectedOrderImageIndex, selectedOrderImageIndex));
+                        treeView1.Nodes[customerArray.IndexOf(customer)].Nodes.Add(new TreeNode(customer.CustomerName + "." + order.OrderID, unselectedOrderImageIndex, selectedOrderImageIndex));
                     }
                     else
                     {
-                        treeView1.Nodes[customerArray.IndexOf(customer)].Nodes.Add(
-                      new TreeNode(customer.CustomerName + "." + order.OrderID));
+                        treeView1.Nodes[customerArray.IndexOf(customer)].Nodes.Add(new TreeNode(customer.CustomerName + "." + order.OrderID));
                     }
                 }
             }
@@ -127,6 +124,7 @@ namespace xCh5_1_6_11
                 AllCheckedNodes(x);
             }
         }
+
         // butto2的輔助功能
         private void AllCheckedNodes(TreeNode treeNode)
         {
@@ -160,6 +158,7 @@ namespace xCh5_1_6_11
                 }
             }
         }
+
         // treeView1的AfterCheck事件的輔助程式
         private void AdjustAllChildNodes(TreeNode treeNode, bool nodeChecked)
         {

@@ -17,6 +17,11 @@ namespace xCh4_1_7_21
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             foreach (Control x in Controls)
@@ -25,7 +30,9 @@ namespace xCh4_1_7_21
                 {
                     RadioButton myRadioButton = (System.Windows.Forms.RadioButton)x;
                     if (!myRadioButton.Checked)
+                    {
                         myRadioButton.FlatStyle = FlatStyle.Standard;
+                    }
                 }
             }
         }
@@ -118,11 +125,6 @@ namespace xCh4_1_7_21
             {
                 radioButton5.CheckAlign = ContentAlignment.MiddleLeft;
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

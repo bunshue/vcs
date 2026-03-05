@@ -66,9 +66,7 @@ namespace xCh5_1_3_11
                 y = (int)myEnumerator.Current;
                 checkedListBox1.SetItemChecked(y, false);
             }
-
             textBox1.Clear();
         }
     }
 }
-

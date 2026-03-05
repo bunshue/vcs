@@ -43,7 +43,6 @@ namespace vcs_TextBox2
             tb_auto_complete1.AutoCompleteSource = AutoCompleteSource.CustomSource;
             tb_auto_complete1.AutoCompleteCustomSource = source;
 
-
             tb_auto_complete2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             tb_auto_complete2.AutoCompleteSource = AutoCompleteSource.HistoryList;
 
@@ -60,6 +59,20 @@ namespace vcs_TextBox2
             textBox3.Text = "0";
             textBox3.ReadOnly = true;
             //限制輸入 SP
+
+            //使用 MaskedTextBox ST
+
+            maskedTextBox1.Mask = "00/00/0000";
+            maskedTextBox1.ValidatingType = typeof(System.DateTime);
+
+            //使用 MaskedTextBox SP
+
+            //設定 TextBox 屬性 ST
+            textBox_property.MaxLength = 3;    //設最多只能輸入3位數
+            textBox_property.ReadOnly = false;   //設為唯讀不能輸入, 改了
+            textBox_property.TabIndex = 0;     //設為第一個停駐焦點
+            textBox_property.Focus();    //將停駐焦點移到txtDegree
+            //設定 TextBox 屬性 SP
         }
 
         void show_item_location()
@@ -78,9 +91,19 @@ namespace vcs_TextBox2
             dy = H + 10;
 
             groupBox0.Size = new Size(W, H);
-            groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Size = new Size(W, H);
+            groupBox2.Size = new Size(W, H);
+            groupBox3.Size = new Size(W, H);
+            groupBox4.Size = new Size(W, H);
+            groupBox5.Size = new Size(W, H + 100);
+            groupBox6.Size = new Size(W, H);
+            groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            groupBox3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            groupBox4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            groupBox5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            groupBox6.Location = new Point(x_st + dx * 0, y_st + dy * 2);
 
             richTextBox1.Size = new Size(300, 340);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
@@ -106,7 +129,23 @@ namespace vcs_TextBox2
             label1b.Text = "限制 數字";
             label2b.Text = "限制 數字";
             label3b.Text = "";
+            label1.Text = "TextBox只允許僅允許\n數字, Enter, Backspace, +-*/()";
 
+
+            x_st = 10;
+            y_st = 20;
+            dx = 60;
+            dy = 24;
+            textBox_property.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            y_st = 60;
+            lb_property0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            lb_property1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            lb_property2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            lb_property3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            lb_property0.Text = "屬性.MaxLength = 3;   //最多只能輸入3位數";
+            lb_property1.Text = "屬性.ReadOnly = true; //設為唯讀不能輸入";
+            lb_property2.Text = "屬性.TabIndex = 0;    //設為第一個停駐焦點";
+            lb_property3.Text = "屬性.Focus();         //將停駐焦點移到此";
 
             this.Size = new Size(1380, 800);
             this.Text = "vcs_TextBox";
@@ -200,6 +239,88 @@ namespace vcs_TextBox2
             if ((e.KeyChar < '0' || e.KeyChar > '9') && (e.KeyChar != '\b'))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void textBox_check_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                // 將使用者輸入的數字轉換成double型別
+                if (double.Parse(textBox_check.Text) < 0)
+                {
+                    // 如果輸入的數值小於0的話，用紅色粗體15點的大小呈現
+                    textBox_check.ForeColor = Color.Red;
+                    textBox_check.Font = new Font(FontFamily.GenericSansSerif, 13.0F, FontStyle.Bold);
+                }
+                else
+                {
+                    // 如果輸入的數值大於0的話，用黑色斜體12點的大小呈現
+                    textBox_check.ForeColor = Color.Black;
+                    textBox_check.Font = new Font(FontFamily.GenericSansSerif, 13.0F, FontStyle.Italic);
+                }
+            }
+            catch
+            {
+                // 如果發生錯誤的話，就使用系統色及10點大小的刪除線加底線樣式呈現
+                textBox_check.ForeColor = SystemColors.ControlText;
+                textBox_check.Font = new Font(FontFamily.GenericSansSerif, 13.0F, FontStyle.Strikeout | FontStyle.Underline);
+            }
+
+        }
+
+        private void maskedTextBox1_TypeValidationCompleted(object sender, TypeValidationEventArgs e)
+        {
+            if (!e.IsValidInput)
+            {
+                richTextBox1.Text = "資料格式錯誤 ！";
+            }
+            else
+            {
+                DateTime userDate = (DateTime)e.ReturnValue;
+                if (userDate < DateTime.Now)
+                {
+                    richTextBox1.Text = "資料格式正確，但值不對 ！";
+                    e.Cancel = true;
+                }
+            }
+
+        }
+
+        private void textBox_only_number_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //只允許輸入數字
+            /* same
+            if ((e.KeyChar != 8 && !char.IsDigit(e.KeyChar)) && e.KeyChar != 13)
+            {
+                //MessageBox.Show("只允許輸入數字", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                e.Handled = true;
+            }
+            */
+            byte asc = Convert.ToByte(e.KeyChar);
+            if (asc < 48 || asc > 57)
+            {
+                e.Handled = true;  //不接受字元
+            }
+        }
+
+        // 限制textBox中的字符輸入, 用KeyPress事件
+        // 僅允許 數字, Enter, Backspace, +-*/()
+        private void textBox_only_number2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //如果輸入的不是數字類別，也不是回車鍵、Backspace鍵、+ - * / ( )，則textBox1_KeyPress取消該輸入
+            if (!(Char.IsNumber(e.KeyChar)) && e.KeyChar != (char)13 && e.KeyChar != (char)8 && e.KeyChar != (char)40 && e.KeyChar != (char)41 && e.KeyChar != (char)42 && e.KeyChar != (char)43 && e.KeyChar != (char)45 && e.KeyChar != (char)47)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBox_only_abc_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //只允許輸入小寫英文字母
+            if (e.KeyChar < 'a' || e.KeyChar > 'z')
+            {
+                e.Handled = true;  //不接受字元
             }
         }
     }

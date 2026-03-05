@@ -61,7 +61,6 @@ namespace xCh5_1_4_21
                     break;
                 }
             }
-
             MessageBox.Show("共有 " + count.ToString() + " 筆的 " + textBox1.Text, "FindString()方法", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -97,7 +96,6 @@ namespace xCh5_1_4_21
         {
             int selectedIndex = comboBox1.SelectedIndex;
             Object selectedItem = comboBox1.SelectedItem;
-
             MessageBox.Show("被選取的項目是： " + selectedItem.ToString() + "\n" + "其索引值為：" + selectedIndex.ToString(), "SelectedIndexChanged事件", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }

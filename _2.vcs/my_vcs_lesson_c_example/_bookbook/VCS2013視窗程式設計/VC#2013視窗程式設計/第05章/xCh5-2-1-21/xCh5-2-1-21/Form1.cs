@@ -77,7 +77,6 @@ namespace xCh5_2_1_21
                 // 繪製文字
                 e.DrawText(sf);
             }
-
             else if (e.AssociatedControl == button2)
             {
                 // 繪製客製化的背景
@@ -99,7 +98,6 @@ namespace xCh5_2_1_21
                     }
                 }
             }
-
             else if (e.AssociatedControl == button3)
             {
                 e.DrawBackground();

@@ -17,6 +17,11 @@ namespace xCh4_2_1_1_11
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             MessageBox.Show(linkLabel1.LinkArea.IsEmpty.ToString());
@@ -26,11 +31,6 @@ namespace xCh4_2_1_1_11
         {
             linkLabel1.LinkArea = new LinkArea(0, 0);
             MessageBox.Show(linkLabel1.LinkArea.IsEmpty.ToString());
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

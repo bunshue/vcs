@@ -570,7 +570,16 @@ namespace vcs_test_all_00_Usually
 
         private void button10_Click(object sender, EventArgs e)
         {
-
+            //撈出所有控件
+            foreach (Control x in Controls)
+            {
+                //撈出所有的Button
+                if (x.GetType().ToString() == "System.Windows.Forms.Button")
+                {
+                    System.Windows.Forms.Button myCheckbox = (System.Windows.Forms.Button)x;
+                    richTextBox1.Text += "Name : " + x.Name + "\tText : " + x.Text + "\n";
+                }
+            }
         }
 
         private void button11_Click(object sender, EventArgs e)

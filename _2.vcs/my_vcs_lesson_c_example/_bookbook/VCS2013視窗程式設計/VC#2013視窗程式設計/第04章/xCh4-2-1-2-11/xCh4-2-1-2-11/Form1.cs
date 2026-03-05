@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using System.Collections;
 
 namespace xCh4_2_1_2_11
@@ -16,7 +17,10 @@ namespace xCh4_2_1_2_11
         public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             // 指定位置、大小與自動依文字內容調整大小
             linkLabel1.Location = new Point(20, 20);
             linkLabel1.Size = new Size(200, 20);
@@ -43,6 +47,13 @@ namespace xCh4_2_1_2_11
             // * 超連結文字中標示出「文件庫」為超連結及其網址
             linkLabel1.Links.Add(19, 2, "www.microsoft.com");
             linkLabel1.Links.Add(27, 3, "msdn.microsoft.com");
+
+            button1.Text = "目前的超連結";
+            button2.Text = "新增超連結";
+            button3.Text = "移除現有的超連結";
+            button4.Text = "清除所有的超連結";
+
+            label1.Text = "現有的超連結數：" + linkLabel1.Links.Count.ToString();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -86,16 +97,6 @@ namespace xCh4_2_1_2_11
             //  清除所有超連結
             linkLabel1.Links.Clear();
             label1.Text = "連結數：" + linkLabel1.Links.Count.ToString();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            button1.Text = "目前的超連結";
-            button2.Text = "新增超連結";
-            button3.Text = "移除現有的超連結";
-            button4.Text = "清除所有的超連結";
-
-            label1.Text = "現有的超連結數：" + linkLabel1.Links.Count.ToString();
         }
     }
 }

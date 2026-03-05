@@ -27,10 +27,7 @@ namespace xCh5_4_2_21
         private void button1_Click(object sender, EventArgs e)
         {
             Process currentProcess = Process.GetCurrentProcess();
-            MessageBox.Show(
-                 "電腦名稱：" + currentProcess.MachineName +
-                 Environment.NewLine +
-                 "處理序名稱：" + currentProcess.ProcessName);
+            MessageBox.Show("電腦名稱：" + currentProcess.MachineName + Environment.NewLine + "處理序名稱：" + currentProcess.ProcessName);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -41,13 +38,7 @@ namespace xCh5_4_2_21
                 if (!process1.HasExited)
                 {
                     process1.Refresh();
-
-                    textBox1.AppendText(
-                        "實體記憶體的耗用： " +
-                        process1.WorkingSet64.ToString() +
-                        Environment.NewLine
-                        );
-
+                    textBox1.AppendText("實體記憶體的耗用： " + process1.WorkingSet64.ToString() + Environment.NewLine);
                     process1.WaitForExit(3000);
                 }
                 else

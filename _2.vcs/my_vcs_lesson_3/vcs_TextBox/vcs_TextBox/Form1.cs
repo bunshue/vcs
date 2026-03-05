@@ -36,11 +36,6 @@ namespace vcs_TextBox
 
             this.AcceptButton = button5;            //在表單按enter就執行button5按鈕的動作
 
-            textBox4.MaxLength = 3;    //設最多只能輸入3位數
-            textBox4.ReadOnly = false;   //設為唯讀不能輸入, 改了
-            textBox4.TabIndex = 0;     //設為第一個停駐焦點
-            textBox4.Focus();    //將停駐焦點移到txtDegree
-
             //製作一個加上底線的TextBox  在文字框下劃一條底線
             TextBox goal = new CustomTextBoxGroup();//定義一個TextBox對像goal
             goal.Parent = this;//獲取或設置自定義TextBox控件的父容器
@@ -56,9 +51,6 @@ namespace vcs_TextBox
             RightKeyCarte.Location = new Point(470, 550);
 
             this.Controls.Add(this.RightKeyCarte);//在當前窗體中添加自定義控件
-
-            textBox8.KeyPress += new KeyPressEventHandler(textBox8_KeyPress);
-            label11.Text = "TextBox只允許僅允許\n數字, Enter, Backspace, +-*/()";
 
             lb_CustomTextBoxGroup3.Location = new Point(12, 650);
             this.NoStiky.Parent = this;//設定自定義控件的父容器為當前窗口
@@ -86,29 +78,21 @@ namespace vcs_TextBox
             int H = 160;
 
             groupBox1.Size = new Size(W, H);
-            groupBox3.Size = new Size(W, H);
             groupBox4.Size = new Size(W, H);
-            groupBox5.Size = new Size(W, H);
             groupBox6.Size = new Size(W, H);
-            groupBox7.Size = new Size(W, H * 2 / 3);
             groupBox8.Size = new Size(W, H * 2 / 3);
 
-            groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 80);
+            groupBox1.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 0);
+            groupBox8.Location = new Point(x_st + dx * 5 + 0, y_st + dy * 0);
 
-            groupBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
-            groupBox7.Location = new Point(x_st + dx * 5, y_st + dy * 3 - 25);
-            groupBox8.Location = new Point(x_st + dx * 5, y_st + dy * 5 - 50);
-
-            groupBox3.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 0);
             groupBox4.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 2 + 50);
-            groupBox5.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 4 + 50 * 2);
-            groupBox6.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 6 + 50 * 3);
+            groupBox6.Location = new Point(x_st + dx * 5 + 0, y_st + dy * 2 + 50);
 
-            richTextBox2.Size = new Size(300, 340);
-            richTextBox2.Location = new Point(x_st + dx * 5, y_st + dy * 6);
+            richTextBox2.Size = new Size(400, 300);
+            richTextBox2.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 4 + 50 * 2);
             bt_clear.Location = new Point(richTextBox2.Location.X + richTextBox2.Size.Width - bt_clear.Size.Width, richTextBox2.Location.Y + richTextBox2.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1380, 800);
+            this.Size = new Size(1420, 800);
             this.Text = "vcs_TextBox";
 
             //設定執行後的表單起始位置, 正中央
@@ -119,21 +103,6 @@ namespace vcs_TextBox
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox2.Clear();
-        }
-
-        /// <summary>
-        /// 限制textBox中的字符輸入, 用KeyPress事件
-        /// 僅允許 數字, Enter, Backspace, +-*/()
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void textBox8_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //如果輸入的不是數字類別，也不是回車鍵、Backspace鍵、+ - * / ( )，則textBox1_KeyPress取消該輸入
-            if (!(Char.IsNumber(e.KeyChar)) && e.KeyChar != (char)13 && e.KeyChar != (char)8 && e.KeyChar != (char)40 && e.KeyChar != (char)41 && e.KeyChar != (char)42 && e.KeyChar != (char)43 && e.KeyChar != (char)45 && e.KeyChar != (char)47)
-            {
-                e.Handled = true;
-            }
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -224,32 +193,6 @@ namespace vcs_TextBox
         {
             tb_id.Clear();
             tb_password.Text = "";
-        }
-
-        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //只允許輸入數字
-            /* same
-            if ((e.KeyChar != 8 && !char.IsDigit(e.KeyChar)) && e.KeyChar != 13)
-            {
-                //MessageBox.Show("只允許輸入數字", "操作提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                e.Handled = true;
-            }
-            */
-            byte asc = Convert.ToByte(e.KeyChar);
-            if (asc < 48 || asc > 57)
-            {
-                e.Handled = true;  //不接受字元
-            }
-        }
-
-        private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //只允許輸入小寫英文字母
-            if (e.KeyChar < 'a' || e.KeyChar > 'z')
-            {
-                e.Handled = true;  //不接受字元
-            }
         }
 
         //拖曳文字內容到其他TextBox ST

@@ -27,12 +27,21 @@ namespace xCh4_2_2_11
         // 「瀏覽」
         private void button1_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(textBox1.Text)) return;
-            if (textBox1.Text.Equals("about:blank")) return;
+            if (String.IsNullOrEmpty(textBox1.Text))
+            {
+                return;
+            }
+
+            if (textBox1.Text.Equals("about:blank"))
+            {
+                return;
+            }
+
             if (!textBox1.Text.StartsWith("http://") && !textBox1.Text.StartsWith("https://"))
             {
                 textBox1.Text = "http://" + textBox1.Text;
             }
+
             try
             {
                 webBrowser1.Navigate(new Uri(textBox1.Text));
@@ -43,63 +52,63 @@ namespace xCh4_2_2_11
             }
         }
 
-        // 回首頁
         private void button2_Click(object sender, EventArgs e)
         {
+            // 回首頁
             webBrowser1.GoHome();
         }
 
-        // 下一頁
         private void button3_Click(object sender, EventArgs e)
         {
+            // 下一頁
             webBrowser1.GoForward();
         }
 
-        // 上一頁
         private void button4_Click(object sender, EventArgs e)
         {
+            // 上一頁
             webBrowser1.GoBack();
         }
 
-        // 預覽列印
         private void button5_Click(object sender, EventArgs e)
         {
+            // 預覽列印
             webBrowser1.ShowPrintPreviewDialog();
         }
 
-        // 重新載入
         private void button6_Click(object sender, EventArgs e)
         {
+            // 重新載入
             webBrowser1.Refresh();
         }
 
-        // 停止
         private void button7_Click(object sender, EventArgs e)
         {
+            // 停止
             webBrowser1.Stop();
         }
 
-        // 開啟 Internet Explorer [列印] 對話方塊
         private void button8_Click(object sender, EventArgs e)
         {
+            // 開啟 Internet Explorer [列印] 對話方塊
             webBrowser1.ShowPrintDialog();
         }
 
-        // 開啟 Internet Explorer [版面設定] 對話方塊
         private void button9_Click(object sender, EventArgs e)
         {
+            // 開啟 Internet Explorer [版面設定] 對話方塊
             webBrowser1.ShowPageSetupDialog();
         }
 
-        // 開啟 Internet Explorer [儲存網頁] 對話方塊
         private void button10_Click(object sender, EventArgs e)
         {
+            // 開啟 Internet Explorer [儲存網頁] 對話方塊
             webBrowser1.ShowSaveAsDialog();
         }
 
-        // 發生於 WebBrowser 控制項完成文件的載入時
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
+            // 發生於 WebBrowser 控制項完成文件的載入時
             this.Text = "WebBrowser控制項範例：文件名稱->" + webBrowser1.DocumentTitle + "，文件類型->" + webBrowser1.DocumentType;
         }
     }
