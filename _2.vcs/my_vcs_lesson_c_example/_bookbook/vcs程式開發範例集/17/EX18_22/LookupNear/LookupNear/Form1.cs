@@ -6,18 +6,25 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Collections;
 
 namespace LookupNear
 {
     public partial class Form1 : Form
     {
+        static int[] a = new int[21] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };//定義數組
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        static int[] a = new int[21] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };//定義數組
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         public string LOCATE(int[] XX, int N, int X)//N數值的個數，M尋找的數值
         {
             int tem_n;//定義變數
@@ -30,14 +37,20 @@ namespace LookupNear
             {
                 jm = (ju + jl) / 2;//取得中間的位置
                 if (XX[N] > XX[1] == X > XX[jm])//利用二分尋找進行判斷
+                {
                     jl = jm;
+                }
                 else
+                {
                     ju = jm;
+                }
                 goto rebound;
             }
             tem_n = jl;//取得近似值的位置
             if (X - XX[tem_n] > (XX[tem_n + 1] - N))//判斷左右那個更接近
+            {
                 tem_n = jl + 1;
+            }
             return "a[" + tem_n.ToString() + "]:" + XX[tem_n].ToString();//傳回近似值
         }
 
@@ -54,8 +67,6 @@ namespace LookupNear
             listBox1.Items.Add("一維數組 a :");
             listBox1.Items.Add(str1.Trim());
         }
-
-
 
         private void button1_Click(object sender, EventArgs e)
         {

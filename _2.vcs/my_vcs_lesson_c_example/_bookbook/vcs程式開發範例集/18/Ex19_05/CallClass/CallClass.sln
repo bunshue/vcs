@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallClass", "CallClass\CallClass.csproj", "{5F8945EA-9AB1-4D09-BD50-B0B5C603EC09}"
 EndProject
 Global

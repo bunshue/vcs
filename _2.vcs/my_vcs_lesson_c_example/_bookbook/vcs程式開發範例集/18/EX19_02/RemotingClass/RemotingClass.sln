@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemotingClass", "RemotingClass\RemotingClass.csproj", "{A7A20FFB-A5A3-4C81-9319-5310D26A1EEE}"
 EndProject
 Global

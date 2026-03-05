@@ -15,7 +15,7 @@ using System.IO;
 
 namespace 收取電子郵件
 {
-   
+
     public partial class Form1 : Form
     {
         public Form1()
@@ -40,7 +40,7 @@ namespace 收取電子郵件
 
             try
             {
-                sendstring = "USER "+this.textBox2.Text+"\r\n";//儲存使用者名
+                sendstring = "USER " + this.textBox2.Text + "\r\n";//儲存使用者名
                 bufferstring = Encoding.GetEncoding("gb2312").GetBytes(sendstring.ToCharArray());
                 networkstream.Write(bufferstring, 0, bufferstring.Length);//將使用者名發送到服務器
                 richTextBox1.AppendText(streamreader.ReadLine() + "\r\n");//將用使用者顯示在 richTextBox控制元件中
@@ -48,10 +48,10 @@ namespace 收取電子郵件
                 bufferstring = Encoding.GetEncoding("gb2312").GetBytes(sendstring.ToCharArray());
                 networkstream.Write(bufferstring, 0, bufferstring.Length);//將使用者密碼發送到服務器
                 richTextBox1.AppendText(streamreader.ReadLine() + "\r\n");
-                sendstring = "STAT " +"\r\n";//儲存從服務器獲得所有訊息序號和字節數命令
+                sendstring = "STAT " + "\r\n";//儲存從服務器獲得所有訊息序號和字節數命令
                 bufferstring = Encoding.GetEncoding("gb2312").GetBytes(sendstring.ToCharArray());
                 networkstream.Write(bufferstring, 0, bufferstring.Length);//從服務器獲得所有訊息序號和字節數
-                string strResult=streamreader.ReadLine();//讀取從服務器傳回的數據
+                string strResult = streamreader.ReadLine();//讀取從服務器傳回的數據
                 if (strResult.IndexOf('-') == -1)
                 {
                     richTextBox1.AppendText(strResult + "\r\n");
@@ -119,7 +119,7 @@ namespace 收取電子郵件
             Showinfo();
             Showinfo();
         }
-       
+
         private void button3_Click(object sender, EventArgs e)
         {
             Application.Exit();

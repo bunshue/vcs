@@ -83,7 +83,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(395, 465);
+            this.ClientSize = new System.Drawing.Size(624, 594);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
@@ -91,6 +91,7 @@
             this.Controls.Add(this.listBox1);
             this.Name = "Form1";
             this.Text = "在數組中快速尋找近似值";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();

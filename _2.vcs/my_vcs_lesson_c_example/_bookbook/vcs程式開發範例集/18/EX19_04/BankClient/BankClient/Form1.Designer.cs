@@ -55,7 +55,7 @@
             // 
             this.txtFromBank.Location = new System.Drawing.Point(83, 24);
             this.txtFromBank.Name = "txtFromBank";
-            this.txtFromBank.Size = new System.Drawing.Size(100, 21);
+            this.txtFromBank.Size = new System.Drawing.Size(100, 22);
             this.txtFromBank.TabIndex = 1;
             this.txtFromBank.Text = "Bank_CCB";
             // 
@@ -63,7 +63,7 @@
             // 
             this.txtFromAccount.Location = new System.Drawing.Point(273, 24);
             this.txtFromAccount.Name = "txtFromAccount";
-            this.txtFromAccount.Size = new System.Drawing.Size(100, 21);
+            this.txtFromAccount.Size = new System.Drawing.Size(100, 22);
             this.txtFromAccount.TabIndex = 2;
             this.txtFromAccount.Text = "123456";
             // 
@@ -71,7 +71,7 @@
             // 
             this.txtToBank.Location = new System.Drawing.Point(83, 67);
             this.txtToBank.Name = "txtToBank";
-            this.txtToBank.Size = new System.Drawing.Size(100, 21);
+            this.txtToBank.Size = new System.Drawing.Size(100, 22);
             this.txtToBank.TabIndex = 3;
             this.txtToBank.Text = "Bank_ICBC";
             // 
@@ -79,7 +79,7 @@
             // 
             this.txtToAccount.Location = new System.Drawing.Point(273, 67);
             this.txtToAccount.Name = "txtToAccount";
-            this.txtToAccount.Size = new System.Drawing.Size(100, 21);
+            this.txtToAccount.Size = new System.Drawing.Size(100, 22);
             this.txtToAccount.TabIndex = 4;
             this.txtToAccount.Text = "654321";
             // 
@@ -123,7 +123,7 @@
             // 
             this.txtBalance.Location = new System.Drawing.Point(200, 107);
             this.txtBalance.Name = "txtBalance";
-            this.txtBalance.Size = new System.Drawing.Size(67, 21);
+            this.txtBalance.Size = new System.Drawing.Size(67, 22);
             this.txtBalance.TabIndex = 6;
             // 
             // label5
@@ -139,7 +139,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(387, 144);
+            this.ClientSize = new System.Drawing.Size(596, 437);
             this.Controls.Add(this.txtBalance);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label5);
@@ -153,6 +153,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "COM+ 客戶端---銀行轉賬";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

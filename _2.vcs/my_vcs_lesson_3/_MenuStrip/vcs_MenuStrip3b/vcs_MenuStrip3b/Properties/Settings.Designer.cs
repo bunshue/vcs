@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BankClient.Properties {
+namespace vcs_MenuStrip3b.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

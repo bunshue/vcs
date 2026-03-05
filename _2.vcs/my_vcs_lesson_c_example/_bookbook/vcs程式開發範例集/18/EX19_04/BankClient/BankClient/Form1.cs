@@ -27,5 +27,10 @@ namespace BankClient
             else
                 MessageBox.Show("銀行轉賬失敗！", "系統提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
