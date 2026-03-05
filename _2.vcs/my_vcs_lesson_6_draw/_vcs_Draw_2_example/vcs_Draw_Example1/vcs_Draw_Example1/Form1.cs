@@ -3903,6 +3903,21 @@ namespace vcs_Draw_Example1
 
         private void button26_Click(object sender, EventArgs e)
         {
+            //透明的畫筆與塗刷
+            Pen myPen = new Pen(Color.FromArgb(64, 0, 255, 0), 40); // 透明的畫筆
+            SolidBrush myBrush = new SolidBrush(Color.FromArgb(64, 0, 0, 255)); // 透明的塗刷
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Image image = Image.FromFile(filename);
+
+            Rectangle rectDest = new Rectangle(0, 0, image.Width, image.Height);
+            g.DrawImage(image, rectDest); // 呈現原圖
+            g.DrawLine(myPen, 0, 100, image.Width, 100); // 畫出透明的直線
+            int Cx = this.pictureBox1.ClientSize.Width / 2; // 視窗客戶區 正中心
+            int Cy = this.pictureBox1.ClientSize.Height / 2;
+            g.FillEllipse(myBrush, Cx - 100, Cy - 100, 200, 200); // 繪畫出透明的圓形
+
+            pictureBox1.Image = bitmap1;
         }
 
         //在餅型圖的外圍顯示說明文字 ST

@@ -167,7 +167,7 @@ namespace vcs_test_all_00_Usually
             richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1273, 784);
+            this.Size = new Size(1273, 750);
             this.Text = "vcs_test_all_00_Usually";
 
             //最大化螢幕
