@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WinKeyUpDn
+namespace vcs_KeyDown1b
 {
     public partial class Form1 : Form
     {

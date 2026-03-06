@@ -1,4 +1,4 @@
-﻿namespace WinKeyUpDn
+﻿namespace vcs_KeyDown1b
 {
     partial class Form1
     {
@@ -75,7 +75,7 @@
             // 
             // picTankD
             // 
-            this.picTankD.Image = global::WinKeyUpDn.Properties.Resources.tankD;
+            this.picTankD.Image = global::vcs_KeyDown1b.Properties.Resources.tankD;
             this.picTankD.Location = new System.Drawing.Point(21, 136);
             this.picTankD.Margin = new System.Windows.Forms.Padding(4);
             this.picTankD.Name = "picTankD";
@@ -96,7 +96,7 @@
             // 
             // picTankR
             // 
-            this.picTankR.Image = global::WinKeyUpDn.Properties.Resources.tankR;
+            this.picTankR.Image = global::vcs_KeyDown1b.Properties.Resources.tankR;
             this.picTankR.Location = new System.Drawing.Point(245, 140);
             this.picTankR.Margin = new System.Windows.Forms.Padding(4);
             this.picTankR.Name = "picTankR";
@@ -107,7 +107,7 @@
             // 
             // picTankL
             // 
-            this.picTankL.Image = global::WinKeyUpDn.Properties.Resources.tankL;
+            this.picTankL.Image = global::vcs_KeyDown1b.Properties.Resources.tankL;
             this.picTankL.Location = new System.Drawing.Point(245, 34);
             this.picTankL.Margin = new System.Windows.Forms.Padding(4);
             this.picTankL.Name = "picTankL";
@@ -118,7 +118,7 @@
             // 
             // picTankU
             // 
-            this.picTankU.Image = global::WinKeyUpDn.Properties.Resources.tankU;
+            this.picTankU.Image = global::vcs_KeyDown1b.Properties.Resources.tankU;
             this.picTankU.Location = new System.Drawing.Point(21, 25);
             this.picTankU.Margin = new System.Windows.Forms.Padding(4);
             this.picTankU.Name = "picTankU";

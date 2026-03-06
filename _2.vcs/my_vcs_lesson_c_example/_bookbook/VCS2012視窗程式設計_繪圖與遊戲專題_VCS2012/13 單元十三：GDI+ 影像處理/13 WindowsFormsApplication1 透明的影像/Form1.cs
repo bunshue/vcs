@@ -25,7 +25,7 @@ namespace WindowsFormsApplication1
         private void Form1_Load(object sender, EventArgs e)
         {
             img = Properties.Resources.Monet; // 影像從資源載入
-            this.ClientSize = new Size(img.Width, img.Height);// 調整視窗客戶區寬高
+            this.ClientSize = new Size(img.Width + 100, img.Height + 100);// 調整視窗客戶區寬高
             img2 = Properties.Resources.Amarillo200; // 影像從資源載入
         }
 
@@ -49,9 +49,7 @@ namespace WindowsFormsApplication1
             ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
             // 繪出透明的影像
-            e.Graphics.DrawImage(img2,
-                new Rectangle(MousePos.X - img2.Width / 2, MousePos.Y - img2.Height / 2, img2.Width, img2.Height),
-                0, 0, img2.Width, img2.Height, GraphicsUnit.Pixel, ia);
+            e.Graphics.DrawImage(img2, new Rectangle(MousePos.X - img2.Width / 2, MousePos.Y - img2.Height / 2, img2.Width, img2.Height), 0, 0, img2.Width, img2.Height, GraphicsUnit.Pixel, ia);
         }
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
@@ -61,4 +59,3 @@ namespace WindowsFormsApplication1
         }
     }
 }
-

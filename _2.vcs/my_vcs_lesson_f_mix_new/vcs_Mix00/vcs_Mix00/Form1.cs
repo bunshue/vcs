@@ -491,6 +491,28 @@ namespace vcs_Mix00
         private void button7_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //IEnumerator
+
+            // 宣告並建立含有10個字元的字串陣列
+            String[] myAry = new String[10];
+            // 設定陣列初值
+            myAry[0] = "第三次";
+            myAry[1] = "工業革命";
+            myAry[2] = "是";
+            myAry[3] = "3D 列印";
+
+            // 顯示陣列的內容
+            int i = 0;
+            //實作名稱myEnumerator列舉器, 透過GetEnumerator方法來讀取myAry陣列
+            // 此時指標指到myAry陣列第一個陣列元素的前面
+            IEnumerator myEnumerator = myAry.GetEnumerator();
+
+            Console.WriteLine("\n myAry 陣列元素內容如下 :\n");
+            // 依序透過MoveNext方法指標下移一個項目,current屬性讀取陣列元素
+            while ((myEnumerator.MoveNext()) && (myEnumerator.Current != null))
+            {
+                Console.WriteLine(" myAry[{0}] = {1}", i++, myEnumerator.Current);
+            }
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -1877,12 +1899,67 @@ namespace vcs_Mix00
 
         private void button37_Click(object sender, EventArgs e)
         {
+            //Array 1
+            // 產生一個含有五個陣列元素的整數陣列
+            Array ary1D = Array.CreateInstance(typeof(Int32), 5);
+            // 設定陣列初值依序為:1,2,3,4,5
+            for (int i = ary1D.GetLowerBound(0); i <= ary1D.GetUpperBound(0); i++)
+            {
+                ary1D.SetValue(i + 1, i);
+            }
 
+            // 顯示陣列初值            
+            IEnumerator myEnumerator = ary1D.GetEnumerator();
+            int k = 0;
+            int cols = ary1D.GetLength(ary1D.Rank - 1);
+            while (myEnumerator.MoveNext())
+            {
+                if (k < cols)
+                {
+                    k++;
+                }
+                else
+                {
+                    Console.WriteLine();
+                    k = 1;
+                }
+                Console.Write(" {0}. ary1D[{1}] = {2} \n", k, k, myEnumerator.Current);
+            }
         }
 
         private void button38_Click(object sender, EventArgs e)
         {
+            //Array 2
+            // 產生 2x3 字串陣列並設定初值
+            Array ary2D = Array.CreateInstance(typeof(String), 2, 3);
 
+            for (int i = ary2D.GetLowerBound(0); i <= ary2D.GetUpperBound(0); i++)
+            {
+                for (int j = ary2D.GetLowerBound(1); j <= ary2D.GetUpperBound(1); j++)
+                {
+                    ary2D.SetValue("註標 " + i + "," + j, i, j);
+                }
+            }
+
+            // 顯示陣列的資料
+            Console.WriteLine(" 二維陣列包含下列資料 :");
+
+            IEnumerator myEnumerator = ary2D.GetEnumerator();
+
+            int r = 0;  // row 列
+            int c = 0;  // col 欄
+
+            int cols = ary2D.GetLength(ary2D.Rank - 1);
+
+            while (myEnumerator.MoveNext() && (myEnumerator.Current != null))
+            {
+                if (r > cols || c >= 3)
+                {
+                    Console.WriteLine();
+                    r++; c = 0;
+                }
+                Console.Write(" ary2D[{0},{1}]={2} , ", r, c++, myEnumerator.Current);
+            }
         }
 
         private void button39_Click(object sender, EventArgs e)

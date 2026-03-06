@@ -7,8 +7,8 @@
     <ProjectGuid>{CECF06C3-2EE0-4DDC-813E-D3B0E0CDF951}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WinKeyUpDn</RootNamespace>
-    <AssemblyName>WinKeyUpDn</AssemblyName>
+    <RootNamespace>vcs_KeyDown1b</RootNamespace>
+    <AssemblyName>vcs_KeyDown1b</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

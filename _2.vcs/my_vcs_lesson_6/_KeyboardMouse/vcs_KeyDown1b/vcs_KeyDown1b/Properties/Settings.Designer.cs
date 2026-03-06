@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WinKeyUpDn.Properties {
+namespace vcs_KeyDown1b.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

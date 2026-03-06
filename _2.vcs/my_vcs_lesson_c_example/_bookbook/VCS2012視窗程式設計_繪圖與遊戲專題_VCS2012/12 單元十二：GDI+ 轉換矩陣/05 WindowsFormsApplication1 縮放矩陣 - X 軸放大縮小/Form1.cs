@@ -25,13 +25,38 @@ namespace WindowsFormsApplication1
 
         }
 
-        // 表單重畫事件
         private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            xScale = xScale - 0.1f;
+            if (xScale <= 0.1f)
+            {
+                xScale = 0.1f;
+            }
+            this.Invalidate();
+            this.pictureBox1.Invalidate();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            xScale = xScale + 0.1f;
+            this.Invalidate();
+            this.pictureBox1.Invalidate();
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-            int Cx = this.ClientSize.Width / 2; // 視窗客戶區正中心點
-            int Cy = this.ClientSize.Height / 2;//
+            int Cx = this.pictureBox1.ClientSize.Width / 2;
+            int Cy = this.pictureBox1.ClientSize.Height / 2;
             int D = 100; // 球本身的半徑
 
             e.Graphics.ResetTransform(); // 畫布的矩陣 = 單位矩陣
@@ -43,27 +68,7 @@ namespace WindowsFormsApplication1
 
             e.Graphics.Transform = A;  // 畫布的矩陣 = 矩陣 A
             e.Graphics.DrawEllipse(Pens.Red, 0 - D, 0 - D, 2 * D, 2 * D); //畫出縮放後的圓 
-        }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            xScale = xScale - 0.1f;
-            if (xScale <= 0.1f)
-            {
-                xScale = 0.1f;
-            }
-            this.Invalidate();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            xScale = xScale + 0.1f;
-            this.Invalidate();
-        }
-
-        private void Form1_Resize(object sender, EventArgs e)
-        {
-            this.Invalidate();
         }
     }
 }

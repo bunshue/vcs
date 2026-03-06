@@ -161,6 +161,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(200, 60);
             this.button7.TabIndex = 89;
+            this.button7.Text = "IEnumerator";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -522,6 +523,7 @@
             this.button37.Name = "button37";
             this.button37.Size = new System.Drawing.Size(200, 60);
             this.button37.TabIndex = 137;
+            this.button37.Text = "Array 1";
             this.button37.UseVisualStyleBackColor = true;
             this.button37.Click += new System.EventHandler(this.button37_Click);
             // 
@@ -532,6 +534,7 @@
             this.button38.Name = "button38";
             this.button38.Size = new System.Drawing.Size(200, 60);
             this.button38.TabIndex = 138;
+            this.button38.Text = "Array 2";
             this.button38.UseVisualStyleBackColor = true;
             this.button38.Click += new System.EventHandler(this.button38_Click);
             // 

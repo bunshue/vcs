@@ -27,11 +27,23 @@ namespace WindowsFormsApplication1
 
         }
 
-        // 表單重畫事件
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            int Cx = this.ClientSize.Width / 2; // 視窗客戶區正中心點
-            int Cy = this.ClientSize.Height / 2;//
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            int Cx = this.pictureBox1.ClientSize.Width / 2;
+            int Cy = this.pictureBox1.ClientSize.Height / 2;
             int D = 100; // 球本身的半徑
 
             e.Graphics.ResetTransform(); // 畫布的矩陣 = 單位矩陣
@@ -50,15 +62,10 @@ namespace WindowsFormsApplication1
             e.Graphics.DrawEllipse(Pens.Red, 0 - D, 0 - D, 2 * D, 2 * D); //畫出縮放後的圓 
         }
 
-        private void Form1_Resize(object sender, EventArgs e)
-        {
-            this.Invalidate();
-        }
-
-        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             MP = e.Location; // 紀錄滑鼠游標座標
-            this.Invalidate();// 要求表單重畫
+            this.pictureBox1.Invalidate();// 要求表單重畫
         }
     }
 }
