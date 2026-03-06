@@ -116,16 +116,148 @@ namespace vcs_Draw_Transform2
             pictureBox1.Image = bitmap1;
         }
 
+        int angle = 0;
+        public Bitmap ConvertToRotate(string filename)
+        {
+            angle += 30;
+            Bitmap bitmap1 = new Bitmap(filename);
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            Bitmap bitmap2 = new Bitmap(W, H);
+
+            Graphics g = Graphics.FromImage(bitmap2);
+
+            Matrix mx = new Matrix();
+            //mx.Rotate(30);//以左上角為圓心順時鐘旋轉角度
+            mx.RotateAt(angle, new PointF(W / 2, H / 2));//以(cx,cy)為圓心順時鐘旋轉角度
+            g.Transform = mx;
+
+            g.DrawImage(bitmap1, new Rectangle(0, 0, W, H));
+
+            g.Dispose();
+
+            return bitmap2;
+        }
+
         private void button0_Click(object sender, EventArgs e)
         {
             reset_pictureBox();
+
+            //旋轉
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            pictureBox1.Image = ConvertToRotate(filename);
         }
 
+        //畫Sinc ST
         private void button1_Click(object sender, EventArgs e)
         {
             reset_pictureBox();
-
+            //畫Sinc
+            MakeGraph();
         }
+        // Make the graph.
+        private void MakeGraph()
+        {
+            // The bounds to draw.
+            float xmin = -20;
+            float xmax = 20;
+            float ymin = -5;
+            float ymax = 12;
+
+            // Make the Bitmap.
+            int wid = pictureBox1.ClientSize.Width;
+            int hgt = pictureBox1.ClientSize.Height;
+
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            // Transform to map the graph bounds to the Bitmap.
+            RectangleF rect = new RectangleF(xmin, ymin, xmax - xmin, ymax - ymin);
+            PointF[] pts = 
+                {
+                    new PointF(0, hgt),
+                    new PointF(wid, hgt),
+                    new PointF(0, 0),
+                };
+            g.Transform = new Matrix(rect, pts);
+
+            // Draw the graph.
+            Pen graph_pen = new Pen(Color.Blue, 0);
+            // Draw the axes.
+            g.DrawLine(graph_pen, xmin, 0, xmax, 0);
+            g.DrawLine(graph_pen, 0, ymin, 0, ymax);
+            for (int x = (int)xmin; x <= xmax; x++)
+            {
+                g.DrawLine(graph_pen, x, -0.1f, x, 0.1f);
+            }
+            for (int y = (int)ymin; y <= ymax; y++)
+            {
+                g.DrawLine(graph_pen, -0.1f, y, 0.1f, y);
+            }
+            graph_pen.Color = Color.Red;
+
+            // See how big 1 pixel is horizontally.
+            Matrix inverse = g.Transform;
+            inverse.Invert();
+            PointF[] pixel_pts =
+                    {
+                        new PointF(0, 0),
+                        new PointF(1, 0)
+                    };
+            inverse.TransformPoints(pixel_pts);
+            float dx = pixel_pts[1].X - pixel_pts[0].X;
+            dx /= 2;
+
+            // Loop over x values to generate points.
+            List<PointF> points = new List<PointF>();
+            for (float x = xmin; x <= xmax; x += dx)
+            {
+                bool valid_point = false;
+                try
+                {
+                    // Get the next point.
+                    float y = F(x);
+
+                    // If the slope is reasonable, this is a valid point.
+                    if (points.Count == 0) valid_point = true;
+                    else
+                    {
+                        float dy = y - points[points.Count - 1].Y;
+                        if (Math.Abs(dy / dx) < 1000) valid_point = true;
+                    }
+                    if (valid_point) points.Add(new PointF(x, y));
+                }
+                catch
+                {
+                }
+
+                // If the new point is invalid, draw
+                // the points in the latest batch.
+                if (!valid_point)
+                {
+                    if (points.Count > 1) g.DrawLines(graph_pen, points.ToArray());
+                    points.Clear();
+                }
+            }
+
+            // Draw the last batch of points.
+            if (points.Count > 1)
+            {
+                g.DrawLines(graph_pen, points.ToArray());
+            }
+
+            // Display the result.
+            pictureBox1.Image = bitmap1;
+        }
+
+        // The function to graph.
+        private float F(float x)
+        {
+            //return (float)((1 / x + 1 / (x + 1) - 2 * x * x) / 10);
+            //return x;
+            //return (float)Math.Sin(x);
+            return (float)(10 * Math.Sin(x) / x);
+        }
+        //畫Sinc SP
 
         private void button2_Click(object sender, EventArgs e)
         {

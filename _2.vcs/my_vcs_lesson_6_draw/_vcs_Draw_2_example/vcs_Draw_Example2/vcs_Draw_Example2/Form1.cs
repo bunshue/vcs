@@ -461,115 +461,9 @@ namespace vcs_Draw_Example2
         }
         //畫XY平面 SP
 
-        //畫Sinc ST
         private void button3_Click(object sender, EventArgs e)
         {
-            MakeGraph();
         }
-
-        // Make the graph.
-        private void MakeGraph()
-        {
-            // The bounds to draw.
-            float xmin = -20;
-            float xmax = 20;
-            float ymin = -5;
-            float ymax = 12;
-
-            // Make the Bitmap.
-            int wid = pictureBox1.ClientSize.Width;
-            int hgt = pictureBox1.ClientSize.Height;
-
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-
-            // Transform to map the graph bounds to the Bitmap.
-            RectangleF rect = new RectangleF(xmin, ymin, xmax - xmin, ymax - ymin);
-            PointF[] pts = 
-                {
-                    new PointF(0, hgt),
-                    new PointF(wid, hgt),
-                    new PointF(0, 0),
-                };
-            g.Transform = new Matrix(rect, pts);
-
-            // Draw the graph.
-            Pen graph_pen = new Pen(Color.Blue, 0);
-            // Draw the axes.
-            g.DrawLine(graph_pen, xmin, 0, xmax, 0);
-            g.DrawLine(graph_pen, 0, ymin, 0, ymax);
-            for (int x = (int)xmin; x <= xmax; x++)
-            {
-                g.DrawLine(graph_pen, x, -0.1f, x, 0.1f);
-            }
-            for (int y = (int)ymin; y <= ymax; y++)
-            {
-                g.DrawLine(graph_pen, -0.1f, y, 0.1f, y);
-            }
-            graph_pen.Color = Color.Red;
-
-            // See how big 1 pixel is horizontally.
-            Matrix inverse = g.Transform;
-            inverse.Invert();
-            PointF[] pixel_pts =
-                    {
-                        new PointF(0, 0),
-                        new PointF(1, 0)
-                    };
-            inverse.TransformPoints(pixel_pts);
-            float dx = pixel_pts[1].X - pixel_pts[0].X;
-            dx /= 2;
-
-            // Loop over x values to generate points.
-            List<PointF> points = new List<PointF>();
-            for (float x = xmin; x <= xmax; x += dx)
-            {
-                bool valid_point = false;
-                try
-                {
-                    // Get the next point.
-                    float y = F(x);
-
-                    // If the slope is reasonable, this is a valid point.
-                    if (points.Count == 0) valid_point = true;
-                    else
-                    {
-                        float dy = y - points[points.Count - 1].Y;
-                        if (Math.Abs(dy / dx) < 1000) valid_point = true;
-                    }
-                    if (valid_point) points.Add(new PointF(x, y));
-                }
-                catch
-                {
-                }
-
-                // If the new point is invalid, draw
-                // the points in the latest batch.
-                if (!valid_point)
-                {
-                    if (points.Count > 1) g.DrawLines(graph_pen, points.ToArray());
-                    points.Clear();
-                }
-            }
-
-            // Draw the last batch of points.
-            if (points.Count > 1)
-            {
-                g.DrawLines(graph_pen, points.ToArray());
-            }
-
-            // Display the result.
-            pictureBox1.Image = bitmap1;
-        }
-
-        // The function to graph.
-        private float F(float x)
-        {
-            //return (float)((1 / x + 1 / (x + 1) - 2 * x * x) / 10);
-            //return x;
-            //return (float)Math.Sin(x);
-            return (float)(10 * Math.Sin(x) / x);
-        }
-        //畫Sinc SP
 
 
         //畫愛心 ST
@@ -582,7 +476,9 @@ namespace vcs_Draw_Example2
             List<PointF> points = new List<PointF>();
             float dt = (float)(2 * Math.PI / num_points);
             for (float t = 0; t <= 2 * Math.PI; t += dt)
+            {
                 points.Add(new PointF(X(t) * 5 + 200, Y(t) * 5 + 200));
+            }
 
             // Get the coordinate bounds.
             float wxmin = points[0].X;
@@ -598,15 +494,11 @@ namespace vcs_Draw_Example2
             }
 
             // Make the world coordinate rectangle.
-            RectangleF world_rect = new RectangleF(
-                wxmin, wymin, wxmax - wxmin, wymax - wymin);
+            RectangleF world_rect = new RectangleF(wxmin, wymin, wxmax - wxmin, wymax - wymin);
 
             // Make the device coordinate rectangle with a margin.
             const int margin = 5;
-            Rectangle device_rect = new Rectangle(
-                margin, margin,
-                pictureBox1.ClientSize.Width - 2 * margin,
-                pictureBox1.ClientSize.Height - 2 * margin);
+            Rectangle device_rect = new Rectangle(margin, margin, pictureBox1.ClientSize.Width - 2 * margin, pictureBox1.ClientSize.Height - 2 * margin);
 
             // Map world to device coordinates without distortion.
             // Flip vertically so Y increases downward.
@@ -777,7 +669,6 @@ namespace vcs_Draw_Example2
                 //data_y[i] = (int)(Math.Sin(i) * 100 + 100);
                 data_y[i] = (int)(Math.Pow(((double)data_x[i]) / 255, 1 / gamma) * 255);
                 //data_y[i] = i;
-
             }
             plotXY(data_x, data_y);
         }
@@ -803,14 +694,13 @@ namespace vcs_Draw_Example2
             for (int i = 1; i <= 7; ++i)
             {
                 //在窗體上面畫出橙色的矩形
-
                 Rectangle r = new Rectangle(i * 40 - 15, 0, 15, this.ClientRectangle.Height);
                 g.FillRectangle(Brushes.Orange, r);
             }
             //在內存中創建一個Bitmap並設置CompositingMode
             Bitmap bmp = new Bitmap(260, 260, PixelFormat.Format32bppArgb);
             Graphics gBmp = Graphics.FromImage(bmp);
-            gBmp.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
+            gBmp.CompositingMode = CompositingMode.SourceCopy;
 
             // 創建一個帶有Alpha的紅色區域
             // 並將其畫在內存的位圖裏面
@@ -925,19 +815,23 @@ namespace vcs_Draw_Example2
                     if (leftStatus)
                     {
                         if (m % 2 == 0)
+                        {
                             list.Add(double.Parse(sr.ReadLine()));
+                        }
                     }
                     else
                     {
                         if (m % 2 != 0)
+                        {
                             list.Add(double.Parse(sr.ReadLine()));
+                        }
                     }
                     m++;
                 }
                 sr.Close();
                 Bitmap bitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
                 Graphics g = Graphics.FromImage(bitmap);
-                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                g.SmoothingMode = SmoothingMode.AntiAlias;
                 g.DrawLine(new Pen(Color.Black, 5), new Point(20, 20), new Point(20, 540));
                 g.DrawLine(new Pen(Color.Black, 5), new Point(20, 290), new Point(1600, 290));
 
@@ -990,9 +884,8 @@ namespace vcs_Draw_Example2
                 // Clear.
                 gr.SmoothingMode = SmoothingMode.AntiAlias;
                 gr.Clear(Color.White);
-                gr.ScaleTransform(15f, -15f, System.Drawing.Drawing2D.MatrixOrder.Append);
-                gr.TranslateTransform(bm.Width * 0.5f, bm.Height * 0.5f,
-                    System.Drawing.Drawing2D.MatrixOrder.Append);
+                gr.ScaleTransform(15f, -15f, MatrixOrder.Append);
+                gr.TranslateTransform(bm.Width * 0.5f, bm.Height * 0.5f, MatrixOrder.Append);
 
                 // 畫坐標軸
                 using (Pen axis_pen = new Pen(Color.LightGray, 0))

@@ -58,21 +58,16 @@ namespace vcs_ImageProcessing4
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
-
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button20.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button21.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            button22.Location = new Point(x_st + dx * 1, y_st + dy * 10);
-            button23.Location = new Point(x_st + dx * 1, y_st + dy * 11);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox1.Size = new Size(600, 600);
@@ -1008,61 +1003,7 @@ new Point(100, 400)};// destination for lower-left point of original
         private void button16_Click(object sender, EventArgs e)
         {
             reset_pictureBox();
-        }
 
-        private void button17_Click(object sender, EventArgs e)
-        {
-            reset_pictureBox();
-        }
-
-        private void button18_Click(object sender, EventArgs e)
-        {
-            reset_pictureBox();
-
-            //旋轉
-            pictureBox1.Image = ConvertToRotate(filename);
-        }
-
-        private void button19_Click(object sender, EventArgs e)
-        {
-            //轉成藍色系
-            // Retrieve the image.
-            Bitmap image1 = new Bitmap(filename, true);
-
-            int x, y;
-
-            // Loop through the images pixels to reset color.
-            for (x = 0; x < image1.Width; x++)
-            {
-                for (y = 0; y < image1.Height; y++)
-                {
-                    Color pixelColor = image1.GetPixel(x, y);
-                    //Color newColor = Color.FromArgb(pixelColor.R, 0, 0);
-                    //Color newColor = Color.FromArgb(0, pixelColor.G, 0);
-                    Color newColor = Color.FromArgb(0, 0, pixelColor.B);
-                    image1.SetPixel(x, y, newColor);
-                }
-            }
-
-            // Set the PictureBox to display the image.
-            pictureBox1.Image = image1;
-
-            richTextBox1.Text += "圖片大小 " + image1.Width.ToString() + " X " + image1.Height.ToString() + "\n";
-
-            // Display the pixel format in Label1.
-            richTextBox1.Text += "Pixel format: " + image1.PixelFormat.ToString() + "\n";
-        }
-
-        private void button20_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button21_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button22_Click(object sender, EventArgs e)
-        {
             //擷取其中一塊
             int xx;
             int yy;
@@ -1094,8 +1035,9 @@ new Point(100, 400)};// destination for lower-left point of original
             richTextBox1.Text += "處理完成\n";
         }
 
-        private void button23_Click(object sender, EventArgs e)
+        private void button17_Click(object sender, EventArgs e)
         {
+            reset_pictureBox();
             //縮圖成一半
             int xx;
             int yy;
@@ -1128,6 +1070,41 @@ new Point(100, 400)};// destination for lower-left point of original
             richTextBox1.Text += "處理完成\n";
         }
 
+        private void button18_Click(object sender, EventArgs e)
+        {
+            reset_pictureBox();
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            //轉成藍色系
+            // Retrieve the image.
+            Bitmap image1 = new Bitmap(filename, true);
+
+            int x, y;
+
+            // Loop through the images pixels to reset color.
+            for (x = 0; x < image1.Width; x++)
+            {
+                for (y = 0; y < image1.Height; y++)
+                {
+                    Color pixelColor = image1.GetPixel(x, y);
+                    //Color newColor = Color.FromArgb(pixelColor.R, 0, 0);
+                    //Color newColor = Color.FromArgb(0, pixelColor.G, 0);
+                    Color newColor = Color.FromArgb(0, 0, pixelColor.B);
+                    image1.SetPixel(x, y, newColor);
+                }
+            }
+
+            // Set the PictureBox to display the image.
+            pictureBox1.Image = image1;
+
+            richTextBox1.Text += "圖片大小 " + image1.Width.ToString() + " X " + image1.Height.ToString() + "\n";
+
+            // Display the pixel format in Label1.
+            richTextBox1.Text += "Pixel format: " + image1.PixelFormat.ToString() + "\n";
+        }
+
         public Bitmap ConvertToGrayscale(string filename)
         {
             Bitmap bitmap1 = new Bitmap(filename);
@@ -1144,29 +1121,6 @@ new Point(100, 400)};// destination for lower-left point of original
                     bitmap2.SetPixel(x, y, Color.FromArgb(luma, luma, luma)); // 寫入 像素値
                 }
             }
-            return bitmap2;
-        }
-
-        int angle = 0;
-        public Bitmap ConvertToRotate(string filename)
-        {
-            angle += 30;
-            Bitmap bitmap1 = new Bitmap(filename);
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            Bitmap bitmap2 = new Bitmap(W, H);
-
-            Graphics g = Graphics.FromImage(bitmap2);
-
-            Matrix mx = new Matrix();
-            //mx.Rotate(30);//以左上角為圓心順時鐘旋轉角度
-            mx.RotateAt(angle, new PointF(W / 2, H / 2));//以(cx,cy)為圓心順時鐘旋轉角度
-            g.Transform = mx;
-
-            g.DrawImage(bitmap1, new Rectangle(0, 0, W, H));
-
-            g.Dispose();
-
             return bitmap2;
         }
     }

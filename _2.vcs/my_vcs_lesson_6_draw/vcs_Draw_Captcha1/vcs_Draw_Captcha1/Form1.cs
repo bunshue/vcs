@@ -451,10 +451,13 @@ namespace vcs_Draw_Captcha1
                 number = random.Next();
 
                 if (number % 2 == 0)
+                {
                     code = (char)('0' + (char)(number % 10));
+                }
                 else
+                {
                     code = (char)('A' + (char)(number % 26));
-
+                }
                 checkCode += " " + code.ToString();
             }
             return checkCode;
@@ -466,7 +469,9 @@ namespace vcs_Draw_Captcha1
             richTextBox1.Text += "len = " + checkCode.Length.ToString() + "\n";
 
             if (checkCode == null || checkCode.Trim() == String.Empty)
+            {
                 return;
+            }
 
             Bitmap bitmap1 = new Bitmap((int)Math.Ceiling((checkCode.Length * 20.0)), 50);
             richTextBox1.Text += "W = " + bitmap1.Width.ToString() + ", H = " + bitmap1.Height.ToString() + "\n";
@@ -538,8 +543,7 @@ namespace vcs_Draw_Captcha1
         /// <returns>返回一個隨機數字符串</returns>
         private string RndNum(int VcodeNum)
         {
-            string Vchar = "1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,G,H,I,J,K,L,M,N,P" +
-                ",Q,R,S,T,U,V,W,X,Y,Z";
+            string Vchar = "1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,G,H,I,J,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z";
             string[] VcArray = Vchar.Split(new Char[] { ',' });//拆分成陣列
             string VNum = "";//產生的隨機數
             int temp = -1;//記錄上次隨機數值，盡量避免生產幾個一樣的隨機數
@@ -725,9 +729,13 @@ namespace vcs_Draw_Captcha1
             {
                 num = ran.Next();
                 if (i % 2 == 1)
+                {
                     tem = num % 10 + '0'; //數字
+                }
                 else
+                {
                     tem = num % 26 + 'A'; //字母
+                }
                 rtuStr += Convert.ToChar(tem).ToString();
             }
             return rtuStr;
@@ -868,7 +876,6 @@ namespace vcs_Draw_Captcha1
             方法GetImgWithValidateCode()返回生成的驗證碼圖片，
             方法 IsRight(string inputValCode) 判斷用戶輸入的驗證碼 inputValCode與圖片顯示的字符是否一致，不區分大小寫
             */
-
             DrawValImg drawimg = new DrawValImg();
             Image img = drawimg.GetImgWithValidateCode();
             pictureBox11.Image = img;
@@ -1056,10 +1063,13 @@ namespace vcs_Draw_Captcha1
                 number = random.Next();
 
                 if (number % 2 == 0)
+                {
                     code = (char)('0' + (char)(number % 10));
+                }
                 else
+                {
                     code = (char)('a' + (char)(number % 26));
-
+                }
                 checkCode += code.ToString();
             }
             return checkCode;
@@ -1181,7 +1191,6 @@ namespace vcs_Draw_Captcha1
             //    Color clr = color[rnd.Next(color.Length)];
             //    bitmap1.SetPixel(x, y, clr);
             //}
-
 
             /*  
               //将验证码图片写入内存流，并将其以 "image/Png" 格式输出 
@@ -1440,8 +1449,8 @@ namespace vcs_Draw_Captcha1
             nBlue = rd.Next(255) % 128 + 128;
 
             // 2. 填充位圖背景
-            Graphics graph = Graphics.FromImage(bitmap1);
-            graph.FillRectangle(new SolidBrush(Color.FromArgb(nRed, nGreen, nBlue))
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.FillRectangle(new SolidBrush(Color.FromArgb(nRed, nGreen, nBlue))
              , 0
              , 0
              , nBmpWidth
@@ -1456,7 +1465,7 @@ namespace vcs_Draw_Captcha1
                 int y1 = rd.Next() % nBmpHeight;
                 int x2 = rd.Next() % nBmpWidth;
                 int y2 = rd.Next() % nBmpHeight;
-                graph.DrawLine(pen, x1, y1, x2, y2);
+                g.DrawLine(pen, x1, y1, x2, y2);
             }
 
             // 采用的字符集，可以隨即拓展，並可以控制字符出現的幾率
@@ -1470,14 +1479,12 @@ namespace vcs_Draw_Captcha1
                 int y = rd.Next(10) + 1;
 
                 // 確定字體
-                Font font = new Font("Arial",
-                  14 + rd.Next() % 4,
-                FontStyle.Bold);
+                Font font = new Font("Arial", 14 + rd.Next() % 4, FontStyle.Bold);
                 string c = strCode.Substring(i, 1);  // 獲取字符
                 strResult += c.ToString();
 
                 // 繪制字符
-                graph.DrawString(c.ToString(),
+                g.DrawString(c.ToString(),
                     font,
                     new SolidBrush(Color.FromArgb(nRed - 68, nGreen - 68, nBlue - 68)),   //繪制字體顏色，采用比背景與干擾線略深一些的顏色
                      x,
@@ -1488,7 +1495,7 @@ namespace vcs_Draw_Captcha1
             bitmap1.Save(ms, ImageFormat.Jpeg);
             //bitmap1.Dispose();
             pictureBox21.Image = bitmap1;
-            graph.Dispose();
+            g.Dispose();
 
             strKey = strResult;
             byte[] byteReturn = ms.ToArray();
@@ -1696,9 +1703,7 @@ namespace vcs_Draw_Captcha1
                 // Convert the text into a path.
                 using (GraphicsPath graphics_path = new GraphicsPath())
                 {
-                    graphics_path.AddString(txt,
-                        the_font.FontFamily, (int)(Font.Style),
-                        the_font.Size, rectf, string_format);
+                    graphics_path.AddString(txt, the_font.FontFamily, (int)(Font.Style), the_font.Size, rectf, string_format);
 
                     // Make random warping parameters.
                     float x1 = (float)(X + Rand.Next(ch_wid) / 2);
@@ -1706,19 +1711,11 @@ namespace vcs_Draw_Captcha1
                     float x2 = (float)(X + ch_wid / 2 + Rand.Next(ch_wid) / 2);
                     float y2 = (float)(hgt / 2 + Rand.Next(hgt) / 2);
                     PointF[] pts = {
-                    new PointF(
-                        (float)(X + Rand.Next(ch_wid) / 4),
-                        (float)(Rand.Next(hgt) / 4)),
-                    new PointF(
-                        (float)(X + ch_wid - Rand.Next(ch_wid) / 4),
-                        (float)(Rand.Next(hgt) / 4)),
-                    new PointF(
-                        (float)(X + Rand.Next(ch_wid) / 4),
-                        (float)(hgt - Rand.Next(hgt) / 4)),
-                    new PointF(
-                        (float)(X + ch_wid - Rand.Next(ch_wid) / 4),
-                        (float)(hgt - Rand.Next(hgt) / 4))
-                };
+                                       new PointF((float)(X + Rand.Next(ch_wid) / 4),(float)(Rand.Next(hgt) / 4)),
+                                       new PointF((float)(X + ch_wid - Rand.Next(ch_wid) / 4),(float)(Rand.Next(hgt) / 4)),
+                                       new PointF((float)(X + Rand.Next(ch_wid) / 4),(float)(hgt - Rand.Next(hgt) / 4)),
+                                       new PointF((float)(X + ch_wid - Rand.Next(ch_wid) / 4),(float)(hgt - Rand.Next(hgt) / 4))
+                                   };
                     Matrix mat = new Matrix();
                     graphics_path.Warp(pts, rectf, mat, WarpMode.Perspective, 0);
 
@@ -1748,10 +1745,7 @@ namespace vcs_Draw_Captcha1
         {
             using (Font the_font = new Font("Times New Roman", 30))
             {
-                pictureBox23.Image = MakeCaptchaImage23(captcha_text,
-                    pictureBox23.ClientSize.Width,
-                    pictureBox23.ClientSize.Height,
-                    the_font, Brushes.Blue);
+                pictureBox23.Image = MakeCaptchaImage23(captcha_text, pictureBox23.ClientSize.Width, pictureBox23.ClientSize.Height, the_font, Brushes.Blue);
             }
         }
 
@@ -2303,14 +2297,20 @@ namespace vcs_Draw_Captcha1
             {
                 index = rnd.Next(0, codeLen);
                 if (chs[index] == '\0')
+                {
                     chs[index] = CreateZhChar();
+                }
                 else
+                {
                     --i;
+                }
             }
             for (int i = 0; i < codeLen; i++)
             {
                 if (chs[i] == '\0')
+                {
                     chs[i] = CreateEnOrNumChar();
+                }
             }
 
             return new string(chs, 0, chs.Length);
@@ -2455,6 +2455,7 @@ namespace vcs_Draw_Captcha1
                 validStr = validStr + str.Substring(rd.Next(57), 1);//返回0到56共57個
             }
         }
+
         /// <summary>
         /// 由隨機字符串，隨即顏色背景，和隨機線條產生的Image
         /// </summary>
@@ -2526,6 +2527,7 @@ namespace vcs_Draw_Captcha1
             gph.DrawImage(img, 50, 20, width, 10);
             return img;
         }
+
         /// <summary>
         /// 產生一種 R,G,B 均大於 colorBase 隨機顏色，以確保顏色不會過深
         /// </summary>
@@ -2542,6 +2544,7 @@ namespace vcs_Draw_Captcha1
             color = Color.FromArgb(random.Next(56) + colorBase, random.Next(56) + colorBase, random.Next(56) + colorBase);
             return color;
         }
+
         /// <summary>
         /// 扭曲圖片
         /// </summary>
@@ -2582,6 +2585,7 @@ namespace vcs_Draw_Captcha1
             }
             return bitmap1;
         }
+
         /// <summary>
         /// 判斷驗證碼是否正確
         /// </summary>
@@ -2599,7 +2603,6 @@ namespace vcs_Draw_Captcha1
             }
         }
     }
-
 
     /// <summary>
     /// 驗證碼生成類
@@ -3087,11 +3090,11 @@ namespace vcs_Draw_Captcha1
             {
                 Pen p = new Pen(GetRandomDeepColor());
                 Point[] point = {
-                                        new Point(random.Next(1, (bitmap1.Width / 10)), random.Next(1, (bitmap1.Height))),
-                                        new Point(random.Next((bitmap1.Width / 10) * 2, (bitmap1.Width / 10) * 4), random.Next(1, (bitmap1.Height))),
-                                        new Point(random.Next((bitmap1.Width / 10) * 4, (bitmap1.Width / 10) * 6), random.Next(1, (bitmap1.Height))),
-                                        new Point(random.Next((bitmap1.Width / 10) * 8, bitmap1.Width), random.Next(1, (bitmap1.Height)))
-                                    };
+                                    new Point(random.Next(1, (bitmap1.Width / 10)), random.Next(1, (bitmap1.Height))),
+                                    new Point(random.Next((bitmap1.Width / 10) * 2, (bitmap1.Width / 10) * 4), random.Next(1, (bitmap1.Height))),
+                                    new Point(random.Next((bitmap1.Width / 10) * 4, (bitmap1.Width / 10) * 6), random.Next(1, (bitmap1.Height))),
+                                    new Point(random.Next((bitmap1.Width / 10) * 8, bitmap1.Width), random.Next(1, (bitmap1.Height)))
+                                };
 
                 gPath1.AddBeziers(point);
                 g.DrawPath(p, gPath1);
@@ -3101,11 +3104,11 @@ namespace vcs_Draw_Captcha1
             {
                 Pen p = new Pen(GetRandomDeepColor());
                 Point[] point = {
-                                new Point(random.Next(1, bitmap1.Width), random.Next(1, bitmap1.Height)),
-                                new Point(random.Next((bitmap1.Width / 10) * 2, bitmap1.Width), random.Next(1, bitmap1.Height)),
-                                new Point(random.Next((bitmap1.Width / 10) * 4, bitmap1.Width), random.Next(1, bitmap1.Height)),
-                                new Point(random.Next(1, bitmap1.Width), random.Next(1, bitmap1.Height))
-                                    };
+                                    new Point(random.Next(1, bitmap1.Width), random.Next(1, bitmap1.Height)),
+                                    new Point(random.Next((bitmap1.Width / 10) * 2, bitmap1.Width), random.Next(1, bitmap1.Height)),
+                                    new Point(random.Next((bitmap1.Width / 10) * 4, bitmap1.Width), random.Next(1, bitmap1.Height)),
+                                    new Point(random.Next(1, bitmap1.Width), random.Next(1, bitmap1.Height))
+                                };
                 gPath1.AddBeziers(point);
                 g.DrawPath(p, gPath1);
                 p.Dispose();
@@ -3645,7 +3648,6 @@ namespace vcs_Draw_Captcha1
 
             try
             {
-
                 Bitmap bitmap1 = new Bitmap(w, h, PixelFormat.Format24bppRgb);
 
                 BitmapData srcData = bitmap0.LockBits(new Rectangle(0, 0, w, h), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
@@ -3743,7 +3745,6 @@ namespace vcs_Draw_Captcha1
                                 pOut[0] = (byte)vB;
                                 pOut[1] = (byte)vG;
                                 pOut[2] = (byte)vR;
-
                             }
 
                             pIn += 3;
@@ -4348,6 +4349,7 @@ namespace vcs_Draw_Captcha1
             }
             return res;
         }
+
         /// <summary>
         /// 對顏色值進行灰色處理
         /// </summary>
@@ -4359,6 +4361,7 @@ namespace vcs_Draw_Captcha1
                (int)(cr.R * .3 + cr.G * .59 + cr.B * 0.11),
               (int)(cr.R * .3 + cr.G * .59 + cr.B * 0.11));
         }
+
         /// <summary>
         /// 對圖片進行高斯模糊
         /// </summary>

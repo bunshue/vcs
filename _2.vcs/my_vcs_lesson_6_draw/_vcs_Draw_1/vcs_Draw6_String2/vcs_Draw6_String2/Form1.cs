@@ -81,9 +81,13 @@ namespace vcs_Draw6_String2
             format.Alignment = StringAlignment.Center;
             format.LineAlignment = StringAlignment.Center;
 
+            richTextBox1.Text += "AAA1\n";
             DrawString(e.Graphics, _text, _font, _brush, new PointF(100, 80), format, 45f);
+            richTextBox1.Text += "AAA2\n";
             DrawString(e.Graphics, _text, _font, _brush, new PointF(200, 80), format, -45f);
+            richTextBox1.Text += "AAA3\n";
             DrawString(e.Graphics, _text, _font, _brush, new PointF(300, 80), format, 90f);
+            richTextBox1.Text += "AAA4\n";
             DrawString(e.Graphics, _text, _font, _brush, new PointF(400, 80), format, -60f);
 
             // 繪制矩形內旋轉的文本  
@@ -93,21 +97,25 @@ namespace vcs_Draw6_String2
             format.Alignment = StringAlignment.Near;
 
             e.Graphics.DrawRectangle(_pen, rect.Left, rect.Top, rect.Width, rect.Height);
+            richTextBox1.Text += "AAA5\n";
             DrawString(e.Graphics, _text, _font, _brush, rect, format, 30);
 
             rect.Location += new SizeF(180, 0);
             format.LineAlignment = StringAlignment.Near;
             e.Graphics.DrawRectangle(_pen, rect.Left, rect.Top, rect.Width, rect.Height);
+            richTextBox1.Text += "AAA6\n";
             DrawString(e.Graphics, _text, _font, _brush, rect, format, -30);
 
             rect.Location += new SizeF(180, 0);
             format.LineAlignment = StringAlignment.Center;
             e.Graphics.DrawRectangle(_pen, rect.Left, rect.Top, rect.Width, rect.Height);
+            richTextBox1.Text += "AAA7\n";
             DrawString(e.Graphics, _text, _font, _brush, rect, format, -90);
 
             rect.Location += new SizeF(180, 0);
             format.LineAlignment = StringAlignment.Far;
             e.Graphics.DrawRectangle(_pen, rect.Left, rect.Top, rect.Width, rect.Height);
+            richTextBox1.Text += "AAA8\n";
             DrawString(e.Graphics, _text, _font, _brush, rect, format, 70);
 
             // Second line  
@@ -116,21 +124,25 @@ namespace vcs_Draw6_String2
             format.Alignment = StringAlignment.Center;
 
             e.Graphics.DrawRectangle(_pen, rect.Left, rect.Top, rect.Width, rect.Height);
+            richTextBox1.Text += "AAA9\n";
             DrawString(e.Graphics, _text, _font, _brush, rect, format, 40);
 
             rect.Location += new SizeF(180, 0);
             format.LineAlignment = StringAlignment.Near;
             e.Graphics.DrawRectangle(_pen, rect.Left, rect.Top, rect.Width, rect.Height);
+            richTextBox1.Text += "AAA10\n";
             DrawString(e.Graphics, _text, _font, _brush, rect, format, 30);
 
             rect.Location += new SizeF(180, 0);
             format.LineAlignment = StringAlignment.Center;
             e.Graphics.DrawRectangle(_pen, rect.Left, rect.Top, rect.Width, rect.Height);
+            richTextBox1.Text += "AAA11\n";
             DrawString(e.Graphics, _text, _font, _brush, rect, format, -70);
 
             rect.Location += new SizeF(180, 0);
             format.LineAlignment = StringAlignment.Far;
             e.Graphics.DrawRectangle(_pen, rect.Left, rect.Top, rect.Width, rect.Height);
+            richTextBox1.Text += "AAA12\n";
             DrawString(e.Graphics, _text, _font, _brush, rect, format, 60);
 
             // Third line  
@@ -139,22 +151,28 @@ namespace vcs_Draw6_String2
             format.Alignment = StringAlignment.Far;
 
             e.Graphics.DrawRectangle(_pen, rect.Left, rect.Top, rect.Width, rect.Height);
+            richTextBox1.Text += "AAA13\n";
             DrawString(e.Graphics, _text, _font, _brush, rect, format, -30);
 
             rect.Location += new SizeF(180, 0);
             format.LineAlignment = StringAlignment.Near;
             e.Graphics.DrawRectangle(_pen, rect.Left, rect.Top, rect.Width, rect.Height);
+            richTextBox1.Text += "AAA14\n";
             DrawString(e.Graphics, _text, _font, _brush, rect, format, -30);
 
             rect.Location += new SizeF(180, 0);
             format.LineAlignment = StringAlignment.Center;
             e.Graphics.DrawRectangle(_pen, rect.Left, rect.Top, rect.Width, rect.Height);
+            richTextBox1.Text += "AAA15\n";
             DrawString(e.Graphics, _text, _font, _brush, rect, format, 90);
 
             rect.Location += new SizeF(180, 0);
             format.LineAlignment = StringAlignment.Far;
             e.Graphics.DrawRectangle(_pen, rect.Left, rect.Top, rect.Width, rect.Height);
+            richTextBox1.Text += "AAA16\n";
             DrawString(e.Graphics, _text, _font, _brush, rect, format, 45);
+
+            richTextBox1.Text += "OK\n";
         }
 
         /// <summary>  
@@ -168,6 +186,8 @@ namespace vcs_Draw6_String2
         /// <param name="angle">角度</param>  
         public void DrawString(Graphics g, string s, Font font, Brush brush, RectangleF layoutRectangle, StringFormat format, float angle)
         {
+            richTextBox1.Text += "BBB\n";
+
             // 求取字符串大小  
             SizeF size = g.MeasureString(s, font);
 
@@ -197,6 +217,7 @@ namespace vcs_Draw6_String2
         /// <param name="angle">角度</param>  
         public void DrawString(Graphics g, string s, Font font, Brush brush, PointF point, StringFormat format, float angle)
         {
+            richTextBox1.Text += "aaaaaaaaa\n";
             // Save the matrix  
             Matrix mtxSave = g.Transform;
 
@@ -212,6 +233,7 @@ namespace vcs_Draw6_String2
 
         private SizeF ConvertSize(SizeF size, float angle)
         {
+            richTextBox1.Text += "CCC\n";
             richTextBox1.Text += "angle = " + angle.ToString() + "\n";
             richTextBox1.Text += "size = " + size.ToString() + "\n";
             Matrix matrix = new Matrix();
