@@ -154,10 +154,10 @@ namespace vcs_OleDb
 
             //第三種方式
             // 使用indexer加入必要的key/value pairs
-            OleDbConnectionStringBuilder newBuilder = new OleDbConnectionStringBuilder();
-            newBuilder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
-            newBuilder["Data Source"] = "D:\\Northwind.mdb";
-            newBuilder["User Id"] = "Admin;NewValue=Bad";
+            builder = new OleDbConnectionStringBuilder();
+            builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
+            builder["Data Source"] = "D:\\Northwind.mdb";
+            builder["User Id"] = "Admin;NewValue=Bad";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -482,18 +482,10 @@ namespace vcs_OleDb
             //(1/4)讀取
 
             OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder();
-            builder.ConnectionString = @"Data Source=D:\Northwind.mdb";
-            // 使用Add()方法以明確地加入key/value pairs
-            builder.Add("Provider", "Microsoft.Jet.Oledb.4.0");
-            builder.Add("Jet OLEDB:Database Password", "p@ssw0rd");
-            builder.Add("Jet OLEDB:System Database", @"C:\Workgroup.mdb");
-
-            /* NG
-            builder = new OleDbConnectionStringBuilder();
             builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
             builder["Data Source"] = @"D:\Northwind.mdb";
             builder["User Id"] = "Admin";
-            */
+
             connection = new OleDbConnection(builder.ConnectionString);
             connection.Open();
 

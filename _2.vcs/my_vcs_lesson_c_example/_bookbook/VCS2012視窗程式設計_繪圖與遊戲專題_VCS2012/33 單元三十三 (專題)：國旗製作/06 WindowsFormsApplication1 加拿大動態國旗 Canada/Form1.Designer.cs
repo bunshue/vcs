@@ -42,7 +42,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(997, 584);
+            this.ClientSize = new System.Drawing.Size(435, 350);
             this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "加拿大 (Canada)";

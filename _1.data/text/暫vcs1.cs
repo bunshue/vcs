@@ -3,6 +3,31 @@
 
 
 
+各種 DrawImage
+            richTextBox1.Text += "第1項 PictureBox\n";
+            Rectangle rectDest = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
+            Rectangle rectSrc = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
+            e.Graphics.DrawImage(bitmap1, rectDest, rectSrc, GraphicsUnit.Pixel); // 呈現原圖
+
+            /*
+            richTextBox1.Text += "第2項 PictureBox\n";
+            Rectangle rectDest = new Rectangle(0, 0, bitmap1.Width, bitmap1.Height);
+            e.Graphics.DrawImage(bitmap1, rectDest); // 呈現原圖
+
+            richTextBox1.Text += "第3項 PictureBox\n";
+            Rectangle rectDest = new Rectangle(0, 0, bitmap1.Width * 2, bitmap1.Height / 2);
+            e.Graphics.DrawImage(bitmap1, rectDest); // 呈現原圖
+            */
+            richTextBox1.Text += "第4項 PictureBox\n";
+            Point dest = new Point(0, 0); // 目的地左上角座標
+            e.Graphics.DrawImage(bitmap1, dest); // 呈現原圖
+
+            richTextBox1.Text += "第5項 PictureBox\n";
+            e.Graphics.DrawImage(bitmap1, 0, 0); // 呈現原圖
+
+
+
+
 
 取得目前可用字型，顯示於ListBox。
 this.listBox1.Items.AddRange(FontFamily.Families);

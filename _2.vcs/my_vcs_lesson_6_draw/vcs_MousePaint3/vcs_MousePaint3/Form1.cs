@@ -21,7 +21,6 @@ namespace vcs_MousePaint3
         float deltaEarth = 1;  // 地球旋轉角度的遞增值
         float deltaMoon = 12;  // 月球旋轉角度的遞增值
 
-
         string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
         Bitmap bitmap1; // Bitmap 影像
         Point MousePos = new Point(); //滑鼠位置
@@ -142,7 +141,6 @@ namespace vcs_MousePaint3
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             Cursor = Cursors.Default;
-
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)

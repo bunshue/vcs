@@ -522,6 +522,42 @@ namespace vcs_Draw5_Image_ImageAttributes
 
         private void button6_Click(object sender, EventArgs e)
         {
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_angry_bird\AB_red.jpg";
+
+            //貼上半透明圖片
+            Bitmap img; // Bitmap 影像
+            Bitmap img2;  // 透明的影像
+            img = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
+            //this.ClientSize = new Size(img.Width + 100, img.Height + 100);// 調整視窗客戶區寬高
+            img2 = (Bitmap)Bitmap.FromFile(filename2);	//Bitmap.FromFile出來的是Image格式
+
+            g.Clear(Color.White);
+
+            Rectangle rectDest = new Rectangle(0, 0, img.Width, img.Height);
+            g.DrawImage(img, rectDest); // 呈現原圖
+
+            // 色彩調整矩陣
+            float[][] cmArray =
+               {
+                  new float[] {1, 0, 0, 0,    0},
+                  new float[] {0, 1, 0, 0,    0},
+                  new float[] {0, 0, 1, 0,    0},
+                  new float[] {0, 0, 0, 0.5f, 0},
+                  new float[] {0, 0, 0, 0,    1}
+               };
+
+            ColorMatrix cm = new ColorMatrix(cmArray);
+            ImageAttributes ia = new ImageAttributes();
+            ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+
+            // 繪出透明的影像
+            int x_st = 220;
+            int y_st = 320;
+
+            g.DrawImage(img2, new Rectangle(x_st - img2.Width / 2, y_st - img2.Height / 2, img2.Width, img2.Height), 0, 0, img2.Width, img2.Height, GraphicsUnit.Pixel, ia);
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -1622,11 +1658,6 @@ namespace vcs_Draw5_Image_ImageAttributes
             cm.Matrix44 = 1.00f;
             print_ColorMatrix(cm);
 */
-
-
-
-
-
 
 
 /*
