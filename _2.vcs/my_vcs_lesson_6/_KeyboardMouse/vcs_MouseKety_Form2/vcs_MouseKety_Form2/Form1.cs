@@ -34,15 +34,16 @@ namespace vcs_MouseKety_Form2
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             label0.Text = "在Form上按方向鍵控制鼠標";
             label1.Text = "在Form上按滑鼠各按鍵";
             label2.Text = "按X離開";
             label3.Text = "";
             label4.Text = "";
-        }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
             // 加入滾輪事件、指定事件處理函數
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseWheel);
         }
@@ -114,7 +115,6 @@ namespace vcs_MouseKety_Form2
             說明：利用switch來判斷e.Button按下的是那個按鍵
             需要注意的是，判讀的值在System.Windows.Forms.MouseButtons 裡對應
             */
-
         }
 
         // 滑鼠移動事件
@@ -131,5 +131,4 @@ namespace vcs_MouseKety_Form2
         }
     }
 }
-
 

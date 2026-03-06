@@ -109,11 +109,11 @@ namespace vcs_OleDb
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    richTextBox1.Text += ex.Message + "\n";
                 }
             }
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //連線OleDb 2, 使用 OleDbConnectionStringBuilder
 
@@ -131,8 +131,7 @@ namespace vcs_OleDb
             builder.Add("Provider", "Microsoft.Jet.Oledb.4.0");
             builder.Add("Jet OLEDB:Database Password", "p@ssw0rd");
             builder.Add("Jet OLEDB:System Database", @"C:\Workgroup.mdb");
-            Console.WriteLine(builder.ConnectionString);
-            Console.WriteLine();
+            richTextBox1.Text += builder.ConnectionString + "\n";
 
             // 清除所有值，並回復到預設值
             builder.Clear();
@@ -141,20 +140,17 @@ namespace vcs_OleDb
             // 以連線字串設定給ConnectionStrin屬性 
             // 這些值可以被取得，也可以被修改
             builder.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\\Northwind.mdb;User ID=Admin";
-            Console.WriteLine(builder.ConnectionString);
-            Console.WriteLine();
+            richTextBox1.Text += builder.ConnectionString + "\n";
 
             // 呼叫Remove()方法移除key/value pairs 
             builder.Remove("User ID");
-            Console.WriteLine(builder.ConnectionString);
-            Console.WriteLine();
+            richTextBox1.Text += builder.ConnectionString + "\n";
 
             // 使用indexer加入新值 
             // necessary.
             builder["User ID"] = "Admin";
             builder["Password"] = "p@ssw0rd";
-            Console.WriteLine(builder.ConnectionString);
-            Console.WriteLine();
+            richTextBox1.Text += builder.ConnectionString + "\n";
 
             //第三種方式
             // 使用indexer加入必要的key/value pairs
@@ -185,7 +181,7 @@ namespace vcs_OleDb
                 while (reader.Read())
                 {
                     // 依員工資料表，reader[1]指的是第2欄的姓名欄
-                    Console.WriteLine(reader[1].ToString());
+                    richTextBox1.Text += reader[1].ToString() + "\n";
                 }
                 reader.Close();
             }
@@ -484,11 +480,20 @@ namespace vcs_OleDb
             //ExecuteNonQuery範例(4)
 
             //(1/4)讀取
+
+            OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder();
+            builder.ConnectionString = @"Data Source=D:\Northwind.mdb";
+            // 使用Add()方法以明確地加入key/value pairs
+            builder.Add("Provider", "Microsoft.Jet.Oledb.4.0");
+            builder.Add("Jet OLEDB:Database Password", "p@ssw0rd");
+            builder.Add("Jet OLEDB:System Database", @"C:\Workgroup.mdb");
+
+            /* NG
             builder = new OleDbConnectionStringBuilder();
             builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
             builder["Data Source"] = @"D:\Northwind.mdb";
             builder["User Id"] = "Admin";
-
+            */
             connection = new OleDbConnection(builder.ConnectionString);
             connection.Open();
 

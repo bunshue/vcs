@@ -49,7 +49,6 @@ namespace vcs_MouseKety_Form
                     break;
             }
 
-
             switch (e.KeyData)
             {//監聽上、下、左、右來移動圖片
                 case Keys.Up: pictureBox1.Top -= 10; break;
@@ -66,11 +65,12 @@ namespace vcs_MouseKety_Form
 
             //監聽按下的鍵值
             if (e.Control && e.Alt && e.KeyCode == Keys.H)
-                MessageBox.Show("哈哈哈！");//若按下Ctrl + Alt + H 
+            {
+                MessageBox.Show("哈哈哈！");//若按下Ctrl + Alt + H
+            }
             else if (e.Control && e.Alt && e.KeyCode == Keys.E)//若按下Ctrl + Alt + E
             {
-                DialogResult ans = MessageBox.Show("請問是否結束本程式？", "結束",
-                                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult ans = MessageBox.Show("請問是否結束本程式？", "結束", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 //跳出訊息視窗，取得 DialogResult ans的結果
                 if (ans == System.Windows.Forms.DialogResult.Yes)
                 {

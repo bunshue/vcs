@@ -16,6 +16,11 @@ namespace vcs_MouseKety_RichTextBox
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void richTextBox1_KeyDown(object sender, KeyEventArgs e)
         {
             label2.Text = "KeyDown";
@@ -126,9 +131,6 @@ namespace vcs_MouseKety_RichTextBox
                 }
                 */
             }
-
-
-
         }
 
         private void richTextBox1_KeyPress(object sender, KeyPressEventArgs e)

@@ -2,6 +2,385 @@
 北風.accdb
 
 
+
+
+取得目前可用字型，顯示於ListBox。
+this.listBox1.Items.AddRange(FontFamily.Families);
+
+
+
+            listBox1.Items.AddRange(
+                new object[] { 
+                    "電冰箱：1300W", 
+                    "電鍋：800W", 
+                    "微波爐：1200W", 
+                    "冷氣機：900W", 
+                    "吹風機：800W" 
+                });
+
+
+
+
+
+label
+            //將兩個標籤的文字對齊以垂直置中，水平置中
+            lblMouse.TextAlign = ContentAlignment.MiddleCenter;
+
+鍵盤按鍵狀態
+            if (Control.IsKeyLocked(Keys.CapsLock))
+            {
+                label1.Text = "大寫鎖鍵已按下";
+            }
+            else
+            {
+                label1.Text = "大寫鎖鍵取消";
+            }
+
+            if (Control.IsKeyLocked(Keys.NumLock))
+            {
+                label1.Text += Environment.NewLine + "數字鎖鍵已按下";
+            }
+            else
+            {
+                label1.Text = Environment.NewLine + "數字鎖鍵已取消";
+            }
+
+
+        private void lblMouse_MouseUp(object sender, MouseEventArgs e)
+        {
+            switch (e.Button)
+            {
+                case MouseButtons.Left:
+                    lblMouse.Text = "按下滑鼠左鍵";
+                    break;
+                case MouseButtons.Right:
+                    lblMouse.Text = "按下滑鼠右鍵";
+                    break;
+                case MouseButtons.XButton1:
+                    lblMouse.Text = "按下滑鼠瀏覽鍵";
+                    break;
+            }
+        }
+
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Up)
+            {
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+            }
+            else if (e.KeyCode == Keys.Right)
+            {
+            }
+            else if (e.KeyCode == Keys.ShiftKey)
+            {
+            }
+        }
+
+
+
+        private const string FONT_NAME = "Times New Roman";
+        private const float FONT_SIZE = 12;
+        private const FontStyle FONT_STYLE = FontStyle.Bold;
+        private const string MENU_CAPTION = "Say Hi";
+
+            // Create the font we will use to draw the text.
+            using (Font menu_font = new Font(FONT_NAME, FONT_SIZE, FONT_STYLE))
+            {
+                // See how big the text will be.
+                SizeF text_size = e.Graphics.MeasureString(MENU_CAPTION, menu_font);
+            }
+
+            // Create the font we will use to draw the text.
+            using (Font menu_font = new Font(FONT_NAME, FONT_SIZE, FONT_STYLE))
+            {
+                // See if the mouse is over the menu item.
+                if ((e.State & DrawItemState.Selected) != DrawItemState.None)
+                {
+                    e.Graphics.FillRectangle(Brushes.Pink, e.Bounds);
+
+                    // Draw the text.
+                    e.Graphics.DrawString(MENU_CAPTION, menu_font, System.Drawing.Brushes.AliceBlue, e.Bounds.X, e.Bounds.Y);
+                }
+                else
+                {
+                    // The mouse is not over the item.
+                    // Erase the background.
+                    e.Graphics.FillRectangle(System.Drawing.Brushes.LightGray, e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height);
+
+                    // Draw the text.
+                    e.Graphics.DrawString(MENU_CAPTION, menu_font, System.Drawing.Brushes.Black, e.Bounds.X, e.Bounds.Y);
+                }
+
+
+
+
+
+
+PasswordChar
+
+
+禁止使用滑鼠右鍵
+
+            dataGridView1.DataSource = nemployees.ToList();
+            dataGridView1.Columns[0].Width = 250;
+            dataGridView1.Columns[1].Width = 100;
+
+
+json load 出來後是字典
+
+
+
+
+
+
+                    Console.WriteLine("例外處理類型   :{0}", ex.GetType().ToString());
+                    Console.WriteLine("錯誤訊息       :{0}", ex.Message);
+                    Console.WriteLine("程式或物件名稱 :{0}", ex.Source);
+                    Console.WriteLine("產生錯誤程序   :{0}", ex.TargetSite.Name);
+                    Console.WriteLine("錯誤之處       :{0}", ex.StackTrace);
+
+
+
+             //Console.WriteLine (ex.ToString() + "\n" + ex.HelpLink + "\n" + ex.StackTrace );
+              Console.WriteLine(ex.ToString());
+              Console.WriteLine();
+              Console.WriteLine(ex.HelpLink + "\n" + ex.StackTrace);
+              
+              
+//3030
+
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            this.AutoSize = true;
+            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            this.AutoSize = true;
+            this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            
+            
+LinkLabel + ToolTip
+
+
+使用 Validating + Validated
+
+
+            textBox1.Text = File.ReadAllText(@"C:\鹿柴.txt");
+                textBox1.Text = File.ReadAllText(@"C:\鹿柴.txt");
+                textBox1.Text = File.ReadAllText(@"C:\春曉.txt");
+                textBox1.Text = File.ReadAllText(@"C:\夜思.txt");
+
+三元運算子
+string normalOrNot = (nowHeight >= min & nowHeight <= max ? "標準" : "要注意喔");
+
+pictureBox 顯示圖片的方法(4)
+
+            Image image1 = Image.FromFile("c:\\MyImages\\一頁書.jpg");
+            pictureBox1.Image = image1;
+
+            Image image1 = new Bitmap(@"C:\MyImages\南宮恨.jpg", true);
+            pictureBox1.Image = image1;
+
+            pictureBox1.ImageLocation = "file:///c:/MyImages/素還真.png";
+
+            pictureBox1.Load("file:///c:/MyImages/妙築玄華.jpg");
+
+
+            button1.Text = "衛星雲圖";
+            pictureBox1.ImageLocation = "http://www.cwb.gov.tw/V7/observe/satellite/Data/s3p/s3p-2013-01-20-01-00.jpg";
+
+
+
+
+TextBox 之 自動完成字串
+
+AutoCompleteSource
+
+AllSystemSources、AllUrl、FileSystem、
+HistoryList、RecentlyUsedList、
+CustomSource 和 None。 預設為 None。
+
+
+ // 引用System.Windows.Forms命名空間
+ // 如此才能使用較簡潔的物件名稱來使用Form, Button, TextBox, Label...等類別
+ using System.Windows.Forms;
+
+    // 定義Form1繼承System.Windows.Forms命名空間下的Form類別
+    class Form1 : Form
+    {
+    //xxxx
+    }
+
+
+WaferAdapter.Fill(WaferSet, "商品");//向數據集中填充數據
+WaferTable = WaferSet.Tables["商品"];//向數據表中填充數據
+this.dataGridView1.DataSource = WaferSet.Tables["商品"].DefaultView;//為DataGridView控件綁定數據源
+
+
+printPreviewDialog1     .ShowDialog();
+						printPreviewDialog_image.ShowDialog();
+printPreviewDialog_grid.ShowDialog();
+printPreviewDialog_grid2.ShowDialog();
+printPreviewDialog_pages.ShowDialog();
+
+
+printPreviewDialog1 控件要在 Document 設定 printDocument
+
+
+printDocument_grid
+printDocument_pascal
+
+
+            //列出已安裝的字型
+            foreach (FontFamily oneFontFamily in FontFamily.Families)
+            {
+                listBox1.Items.Add(oneFontFamily.Name);
+            }
+
+
+            //尋找字串在RTB中的位置
+            int position = richTextBox1.Find("搜尋的字串");
+
+
+RTB 的 LinkClicked
+        private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(e.LinkText);
+        }
+
+            richTextBox1.SelectionStart = 20;
+            richTextBox1.Focus();
+
+
+            richTextBox1.ScrollToCaret();
+            richTextBox1.Focus();
+
+
+//3030
+
+
+textBox 屬性設定
+            txtShow.Dock = DockStyle.Fill; // txtShow文字方塊填滿整個標籤頁
+            // txtShow 字型大小11
+            txtShow.Font = new Font(txtShow.Font.FontFamily, 11, FontStyle.Regular);
+            txtShow.ReadOnly = true;
+            txtShow.Multiline = true;
+
+
+
+//3030
+
+
+3030
+
+            // 修改滑鼠停留在Label時的滑鼠游標的長相
+            label1.Cursor = Cursors.Hand;
+
+            // 動態修改Label的文字，並設定成便捷鍵N
+            label1.Text = "姓名(&N)";
+
+
+            //尋找RTB裡面的位置
+            string text = "david";
+            int indexToText = richTextBox1.Find(text);
+            MessageBox.Show(indexToText.ToString());
+
+
+
+
+加在三Form之間
+
+        //移動無邊框窗體 ST
+        private const int WM_NCHITTEST = 0x84;
+        private const int HTCLIENT = 0x1;
+        private const int HTCAPTION = 0x2;
+
+        protected override void WndProc(ref Message m)
+        {
+            switch (m.Msg)
+            {
+                case WM_NCHITTEST:
+                    base.WndProc(ref m);
+                    if ((int)m.Result == HTCLIENT)
+                        m.Result = (IntPtr)HTCAPTION;
+                    return;
+                    break;
+            }
+            base.WndProc(ref m);
+        }
+        //移動無邊框窗體 SP
+
+
+            //變數以float, double,decimal為型別
+            float a; double b; decimal c;
+            a = 3.22222222222222222222222F;
+            b = 3.22222222222222222222222;
+            c = 3.22222222222222222222222M;
+            WriteLine("單精度  = {a}");
+            WriteLine("倍精度  = {b}");
+            WriteLine("精確小數 = {c}");
+
+
+            //將指定ASCII數值以型別char轉為字元
+            int num1 = 69;
+            //呼叫Convert類別的ToChar()轉為字元
+            char chE = Convert.ToChar(69);
+            WriteLine($"ASCII {num1} 是字元 {chE}");
+
+            //將字元以型別int轉為ASCII值
+            char chX = 'X';
+            //直接以int將字元轉為整數
+            int num2 = (int)chX;
+            WriteLine($"字元 {chX} 的ASCII = {num2}");
+
+            //直接以unicode做設定
+            char key = '\u0308';
+            WriteLine($"字元 {key}");
+
+
+
+            //宣告陣列並初始化
+            ushort[] score = new ushort[] { 78, 65, 92, 55, 83 };
+            Array.Sort(score);//遞增排序
+            Array.Reverse(score);//遞減排序
+            toolStripStatusLabel1.Text = "目前時間：" + DateTime.Now.ToLongTimeString();
+            this.Text = "當前時間:" + DateTime.Now.ToLongTimeString();
+            this.Text = "當前時間:" + DateTime.Now.ToLongTimeString();
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+0x16 : 最大垂直圖形尺寸 (單位為公分)。
+0x42 : 水平圖像尺寸 (單位為公釐)
+0x43 : 垂直圖像尺寸 (單位為公釐)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+SyncFolder 同步文件夾
+
+影像分析工具
+1. 影像直方圖 hist
+2. 直方圖均值化 equalize
+3. 直方圖二值化
+
+是不是 png 就都有alpha通道
+
+KPI: 關鍵 績效 指標
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
 對應方法
             //var str = string.Format("我的名字叫{1}，我今年{1}岁。", "张三", 23);
             //Console.WriteLine(str);
@@ -21,16 +400,6 @@
             {
                 員工BindingSource.RemoveCurrent();
             }
-
-            comboBox1.Items.AddRange( 
-                       new object[] { "業務代表",
-                                             "業務協調員",
-                                             "業務經理",
-                                             "資深工程師",
-                                             "副總裁，銷售部門"}
-            );
-
-
 
 
 amend
@@ -78,10 +447,6 @@ dlgFolderBrowser.SelectedPath = @"D:\USERS\LSH\Documents";
             richTextBox1.Lines = tmp;
 6060            
 
-            //Combobox加資料
-            //初始化cobSubject-建立陣列，再以AddRange()方法加入
-            string[] subject = { "日語入門", "多媒體導論", "資料庫", "英文會話" };
-            cobSubject.Items.AddRange(subject);
 
 6060
 
@@ -1652,13 +2017,13 @@ this.notifyIcon1.Visible = true;
 this.notifyIcon1.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
 this.notifyIcon1.Click += new System.EventHandler(this.notifyIcon1_Click);
 this.NicontextMenu.MenuItems.AddRange(
-new System.Windows.Forms.MenuItem[]
-{
-this.menuItem_Hide,
-this.menuItem_Show,
-this.menuItem_Aubot,
-this.menuItem_Exit
-}
+	new System.Windows.Forms.MenuItem[]
+	{
+		this.menuItem_Hide,
+		this.menuItem_Show,
+		this.menuItem_Aubot,
+		this.menuItem_Exit
+	}
 );
 //
 // menuItem_Hide
@@ -12703,10 +13068,6 @@ data : 10.0.17134.220 (WinBuild.160101.0800)
 
         }
         
-
- 取得目前可用字型，顯示於ListBox。
-
-	this.listBox1.Items.AddRange(FontFamily.Families);
 
 
 this.Cursor = System.Windows.Forms.Cursors.Hand;

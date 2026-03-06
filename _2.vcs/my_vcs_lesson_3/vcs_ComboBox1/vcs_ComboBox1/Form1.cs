@@ -55,6 +55,8 @@ namespace vcs_ComboBox1
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
+            //Combobox加資料
+            //初始化字串一維振烈，再以AddRange()方法加入
             //字串一維陣列
             string[] cities = new string[] { "台北", "新竹", "台中", "台南", "高雄" };
             comboBox1a.Items.AddRange(cities);

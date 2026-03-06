@@ -185,11 +185,6 @@ namespace vcs_MouseKety_PictureBox
             //pictureBox1.Focus();
             this.Focus();
         }
-
-
-
-
-
-
     }
 }
+

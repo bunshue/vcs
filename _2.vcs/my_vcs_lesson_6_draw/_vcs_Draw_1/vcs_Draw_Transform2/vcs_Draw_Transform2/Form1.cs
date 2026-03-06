@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Drawing.Imaging;
-using System.Drawing.Drawing2D; //SmoothingMode
+using System.Drawing.Drawing2D; //SmoothingMode, Matrix
 
 //平移縮放旋轉
 
@@ -117,8 +117,13 @@ namespace vcs_Draw_Transform2
         }
 
         int angle = 0;
-        public Bitmap ConvertToRotate(string filename)
+        private void button0_Click(object sender, EventArgs e)
         {
+            reset_pictureBox();
+
+            //旋轉
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
             angle += 30;
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
@@ -136,73 +141,63 @@ namespace vcs_Draw_Transform2
 
             g.Dispose();
 
-            return bitmap2;
-        }
-
-        private void button0_Click(object sender, EventArgs e)
-        {
-            reset_pictureBox();
-
-            //旋轉
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            pictureBox1.Image = ConvertToRotate(filename);
+            pictureBox1.Image = bitmap2;
         }
 
         //畫Sinc ST
         private void button1_Click(object sender, EventArgs e)
         {
             reset_pictureBox();
+
             //畫Sinc
             MakeGraph();
         }
         // Make the graph.
         private void MakeGraph()
         {
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            // Transform to map the graph bounds to the Bitmap.
             // The bounds to draw.
             float xmin = -20;
             float xmax = 20;
             float ymin = -5;
             float ymax = 12;
-
-            // Make the Bitmap.
-            int wid = pictureBox1.ClientSize.Width;
-            int hgt = pictureBox1.ClientSize.Height;
-
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-
-            // Transform to map the graph bounds to the Bitmap.
             RectangleF rect = new RectangleF(xmin, ymin, xmax - xmin, ymax - ymin);
+
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
             PointF[] pts = 
-                {
-                    new PointF(0, hgt),
-                    new PointF(wid, hgt),
-                    new PointF(0, 0),
-                };
+            {
+                new PointF(0, H),
+                new PointF(W, H),
+                new PointF(0, 0),
+            };
             g.Transform = new Matrix(rect, pts);
 
             // Draw the graph.
-            Pen graph_pen = new Pen(Color.Blue, 0);
+            Pen p = new Pen(Color.Blue, 0);
             // Draw the axes.
-            g.DrawLine(graph_pen, xmin, 0, xmax, 0);
-            g.DrawLine(graph_pen, 0, ymin, 0, ymax);
+            g.DrawLine(p, xmin, 0, xmax, 0);
+            g.DrawLine(p, 0, ymin, 0, ymax);
             for (int x = (int)xmin; x <= xmax; x++)
             {
-                g.DrawLine(graph_pen, x, -0.1f, x, 0.1f);
+                g.DrawLine(p, x, -0.1f, x, 0.1f);
             }
             for (int y = (int)ymin; y <= ymax; y++)
             {
-                g.DrawLine(graph_pen, -0.1f, y, 0.1f, y);
+                g.DrawLine(p, -0.1f, y, 0.1f, y);
             }
-            graph_pen.Color = Color.Red;
+            p.Color = Color.Red;
 
             // See how big 1 pixel is horizontally.
             Matrix inverse = g.Transform;
             inverse.Invert();
             PointF[] pixel_pts =
-                    {
-                        new PointF(0, 0),
-                        new PointF(1, 0)
-                    };
+            {
+                new PointF(0, 0),
+                new PointF(1, 0)
+            };
             inverse.TransformPoints(pixel_pts);
             float dx = pixel_pts[1].X - pixel_pts[0].X;
             dx /= 2;
@@ -218,13 +213,22 @@ namespace vcs_Draw_Transform2
                     float y = F(x);
 
                     // If the slope is reasonable, this is a valid point.
-                    if (points.Count == 0) valid_point = true;
+                    if (points.Count == 0)
+                    {
+                        valid_point = true;
+                    }
                     else
                     {
                         float dy = y - points[points.Count - 1].Y;
-                        if (Math.Abs(dy / dx) < 1000) valid_point = true;
+                        if (Math.Abs(dy / dx) < 1000)
+                        {
+                            valid_point = true;
+                        }
                     }
-                    if (valid_point) points.Add(new PointF(x, y));
+                    if (valid_point)
+                    {
+                        points.Add(new PointF(x, y));
+                    }
                 }
                 catch
                 {
@@ -234,7 +238,10 @@ namespace vcs_Draw_Transform2
                 // the points in the latest batch.
                 if (!valid_point)
                 {
-                    if (points.Count > 1) g.DrawLines(graph_pen, points.ToArray());
+                    if (points.Count > 1)
+                    {
+                        g.DrawLines(p, points.ToArray());
+                    }
                     points.Clear();
                 }
             }
@@ -242,10 +249,9 @@ namespace vcs_Draw_Transform2
             // Draw the last batch of points.
             if (points.Count > 1)
             {
-                g.DrawLines(graph_pen, points.ToArray());
+                g.DrawLines(p, points.ToArray());
             }
 
-            // Display the result.
             pictureBox1.Image = bitmap1;
         }
 
@@ -282,8 +288,6 @@ namespace vcs_Draw_Transform2
 
         private void button7_Click(object sender, EventArgs e)
         {
-            reset_pictureBox();
-
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -296,6 +300,42 @@ namespace vcs_Draw_Transform2
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //Matrix 測試
+            //矩陣的定義
+            Matrix myMatrix1 = new Matrix();  // 第一種方式
+            Matrix myMatrix2 = new Matrix(1, 2, 4, 5, 7, 8); // 第二種方式
+
+            float m11 = myMatrix2.Elements[0];
+            float m12 = myMatrix2.Elements[1];
+            float m21 = myMatrix2.Elements[2];
+            float m22 = myMatrix2.Elements[3];
+            float dx = myMatrix2.Elements[4];
+            float dy = myMatrix2.Elements[5];
+
+            float dx2 = myMatrix2.OffsetX;
+            float dy2 = myMatrix2.OffsetY;
+
+
+            Rectangle rect = new Rectangle(0, 0, 100, 100);
+            Point[] pt = new Point[3] { new Point(0, 0), new Point(100, 0), new Point(0, 100) };
+            Matrix myMatrix3 = new Matrix(rect, pt); // 第三種方式
+
+            RectangleF rect2 = new Rectangle(0, 0, 100, 100);
+            PointF[] pt2 = new PointF[3] { new PointF(0, 0), new PointF(100, 0), new PointF(0, 100) };
+            Matrix myMatrix4 = new Matrix(rect2, pt2); // 第四種方式
+
+            //e.Graphics.Transform = myMatrix1;
+
+            //矩陣的相乘的順序
+            Matrix A = new Matrix(0, 1, -1, 0, 0, 0);
+            Matrix B = new Matrix(1, 0, 0, 1, 1, 0);
+
+            A.Multiply(B);  // A = B x A
+            //A.Multiply(B, MatrixOrder.Prepend); // A = B x A
+            //A.Multiply(B, MatrixOrder.Append);  // A = A x B
+
+
+
 
         }
 
