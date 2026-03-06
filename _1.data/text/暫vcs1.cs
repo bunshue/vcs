@@ -1,6 +1,8 @@
 ﻿
 北風.accdb
 
+            richTextBox1.Text += dateTimePicker1.Value.ToString() + "\n";
+            richTextBox1.Text += dateTimePicker1.Value.ToShortDateString() + "\n";
 
 
 各種 DrawImage

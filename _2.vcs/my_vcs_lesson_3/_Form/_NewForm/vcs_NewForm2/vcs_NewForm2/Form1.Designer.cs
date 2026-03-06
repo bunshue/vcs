@@ -1,4 +1,4 @@
-﻿namespace xCh2_1_11
+﻿namespace vcs_NewForm2
 {
     partial class Form1
     {
@@ -33,9 +33,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(42, 32);
+            this.button1.Location = new System.Drawing.Point(96, 84);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(81, 25);
+            this.button1.Size = new System.Drawing.Size(131, 93);
             this.button1.TabIndex = 0;
             this.button1.Text = "開啟新表單";
             this.button1.UseVisualStyleBackColor = true;
@@ -45,10 +45,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(359, 248);
+            this.ClientSize = new System.Drawing.Size(333, 284);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "父表單";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 

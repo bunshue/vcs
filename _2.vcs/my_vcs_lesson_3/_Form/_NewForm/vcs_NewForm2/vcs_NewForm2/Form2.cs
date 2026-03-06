@@ -5,14 +5,18 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace xCh2_1_11
+namespace vcs_NewForm2
 {
     public partial class Form2 : Form
     {
         static int count = 0;
+
+        public Form2()
+        {
+            InitializeComponent();
+        }
 
         private void Form2_Load(object sender, EventArgs e)
         {
@@ -27,7 +31,7 @@ namespace xCh2_1_11
 
         private void Form2_Shown(object sender, EventArgs e)
         {
-            MessageBox.Show("已引發 Form.Shown 事件");
+            //MessageBox.Show("已引發 Form.Shown 事件");
         }
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
@@ -38,7 +42,9 @@ namespace xCh2_1_11
                 MessageBoxDefaultButton.Button2);
 
             if (result == DialogResult.Cancel)
+            {
                 e.Cancel = true;
+            }
         }
 
         private void Form2_FormClosed(object sender, FormClosedEventArgs e)
@@ -48,12 +54,5 @@ namespace xCh2_1_11
             count -= 1;
             label1.Text = "目前已開啟的表單數：" + count;
         }
-
-        public Form2()
-        {
-            InitializeComponent();
-        }
     }
 }
-
-

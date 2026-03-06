@@ -41,7 +41,11 @@
             this.linkLabel_contact1 = new System.Windows.Forms.LinkLabel();
             this.toolTip_contact1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip_contact2 = new System.Windows.Forms.ToolTip(this.components);
+            this.button1 = new System.Windows.Forms.Button();
+            this.linkLabel6 = new System.Windows.Forms.LinkLabel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // linkLabel1
@@ -116,7 +120,7 @@
             this.groupBox1.Controls.Add(this.linkLabel_contact1);
             this.groupBox1.Location = new System.Drawing.Point(282, 284);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(487, 220);
+            this.groupBox1.Size = new System.Drawing.Size(297, 165);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "LinkLabel + ToolTip";
@@ -147,11 +151,44 @@
             this.linkLabel_contact1.Text = "碁峰資訊";
             this.linkLabel_contact1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_contact1_LinkClicked);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(164, 72);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(64, 21);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "IsEmpty";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // linkLabel6
+            // 
+            this.linkLabel6.AutoSize = true;
+            this.linkLabel6.Location = new System.Drawing.Point(29, 72);
+            this.linkLabel6.Name = "linkLabel6";
+            this.linkLabel6.Size = new System.Drawing.Size(55, 12);
+            this.linkLabel6.TabIndex = 10;
+            this.linkLabel6.TabStop = true;
+            this.linkLabel6.Text = "linkLabel6";
+            this.linkLabel6.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel6_LinkClicked);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.linkLabel6);
+            this.groupBox2.Location = new System.Drawing.Point(609, 293);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(271, 156);
+            this.groupBox2.TabIndex = 12;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "LinkArea屬性";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1041, 633);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.linkLabel5);
             this.Controls.Add(this.linkLabel4);
@@ -163,6 +200,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -182,6 +221,9 @@
         private System.Windows.Forms.LinkLabel linkLabel_contact1;
         private System.Windows.Forms.ToolTip toolTip_contact1;
         private System.Windows.Forms.ToolTip toolTip_contact2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.LinkLabel linkLabel6;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
 

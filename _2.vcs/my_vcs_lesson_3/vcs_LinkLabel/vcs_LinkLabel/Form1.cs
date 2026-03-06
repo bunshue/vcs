@@ -123,6 +123,18 @@ namespace vcs_LinkLabel
             // 開啟郵件軟體連結 wltasi@yahoo.com.tw
             System.Diagnostics.Process.Start("mailto:wltasi@yahoo.com.tw");
         }
+
+        private void linkLabel6_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            MessageBox.Show(linkLabel6.LinkArea.IsEmpty.ToString());
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //LinkArea屬性
+            linkLabel6.LinkArea = new LinkArea(0, 0);
+            MessageBox.Show(linkLabel6.LinkArea.IsEmpty.ToString());
+        }
     }
 }
 
