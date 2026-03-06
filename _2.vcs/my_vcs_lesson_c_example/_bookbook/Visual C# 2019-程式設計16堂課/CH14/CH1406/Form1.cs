@@ -9,6 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Printing;
 
+/*
+printDocument2
+改DocumentName
+
+printDialog2
+改Document為printDocument2
+*/
+
 namespace CH1406
 {
     public partial class Form1 : Form
@@ -42,6 +50,11 @@ namespace CH1406
             string text = "千江有水千月，萬里晴空萬里晴";
             Font oneFont = new Font("標楷體", 35, FontStyle.Bold);
             e.Graphics.DrawString(text, oneFont, Brushes.Blue, 10, 10);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -56,18 +56,30 @@
             this.label15 = new System.Windows.Forms.Label();
             this.textBox12 = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.textBox_only_number2 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.textBox_only_number = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.textBox_only_abc = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox_only_number2 = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.textBox_property = new System.Windows.Forms.TextBox();
-            this.lb_property0 = new System.Windows.Forms.Label();
-            this.lb_property1 = new System.Windows.Forms.Label();
-            this.lb_property3 = new System.Windows.Forms.Label();
             this.lb_property2 = new System.Windows.Forms.Label();
+            this.lb_property3 = new System.Windows.Forms.Label();
+            this.lb_property1 = new System.Windows.Forms.Label();
+            this.lb_property0 = new System.Windows.Forms.Label();
+            this.textBox_property = new System.Windows.Forms.TextBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox_phone = new System.Windows.Forms.TextBox();
+            this.textBox_name = new System.Windows.Forms.TextBox();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox_email = new System.Windows.Forms.TextBox();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.lb_check_numbers = new System.Windows.Forms.Label();
+            this.textBox_check_numbers = new System.Windows.Forms.TextBox();
             this.groupBox0.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -75,6 +87,9 @@
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.groupBox9.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox0
@@ -349,6 +364,27 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "使用 KeyPress";
             // 
+            // textBox_only_number2
+            // 
+            this.textBox_only_number2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox_only_number2.Location = new System.Drawing.Point(17, 212);
+            this.textBox_only_number2.MaxLength = 0;
+            this.textBox_only_number2.Name = "textBox_only_number2";
+            this.textBox_only_number2.Size = new System.Drawing.Size(133, 30);
+            this.textBox_only_number2.TabIndex = 20;
+            this.textBox_only_number2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox_only_number2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_only_number2_KeyPress);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Location = new System.Drawing.Point(13, 161);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(414, 19);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "TextBox只允許僅允許 數字, Enter, Backspace, +-*/()";
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -391,27 +427,6 @@
             this.textBox_only_abc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox_only_abc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_only_abc_KeyPress);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(13, 161);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(414, 19);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "TextBox只允許僅允許 數字, Enter, Backspace, +-*/()";
-            // 
-            // textBox_only_number2
-            // 
-            this.textBox_only_number2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox_only_number2.Location = new System.Drawing.Point(17, 212);
-            this.textBox_only_number2.MaxLength = 0;
-            this.textBox_only_number2.Name = "textBox_only_number2";
-            this.textBox_only_number2.Size = new System.Drawing.Size(133, 30);
-            this.textBox_only_number2.TabIndex = 20;
-            this.textBox_only_number2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox_only_number2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_only_number2_KeyPress);
-            // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.lb_property2);
@@ -426,35 +441,15 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "TextBox屬性";
             // 
-            // textBox_property
+            // lb_property2
             // 
-            this.textBox_property.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox_property.Location = new System.Drawing.Point(19, 21);
-            this.textBox_property.MaxLength = 0;
-            this.textBox_property.Name = "textBox_property";
-            this.textBox_property.Size = new System.Drawing.Size(133, 30);
-            this.textBox_property.TabIndex = 21;
-            this.textBox_property.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // lb_property0
-            // 
-            this.lb_property0.AutoSize = true;
-            this.lb_property0.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_property0.Location = new System.Drawing.Point(26, 93);
-            this.lb_property0.Name = "lb_property0";
-            this.lb_property0.Size = new System.Drawing.Size(37, 15);
-            this.lb_property0.TabIndex = 21;
-            this.lb_property0.Text = "屬性";
-            // 
-            // lb_property1
-            // 
-            this.lb_property1.AutoSize = true;
-            this.lb_property1.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_property1.Location = new System.Drawing.Point(89, 93);
-            this.lb_property1.Name = "lb_property1";
-            this.lb_property1.Size = new System.Drawing.Size(37, 15);
-            this.lb_property1.TabIndex = 22;
-            this.lb_property1.Text = "屬性";
+            this.lb_property2.AutoSize = true;
+            this.lb_property2.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_property2.Location = new System.Drawing.Point(142, 93);
+            this.lb_property2.Name = "lb_property2";
+            this.lb_property2.Size = new System.Drawing.Size(37, 15);
+            this.lb_property2.TabIndex = 23;
+            this.lb_property2.Text = "屬性";
             // 
             // lb_property3
             // 
@@ -466,21 +461,164 @@
             this.lb_property3.TabIndex = 23;
             this.lb_property3.Text = "屬性";
             // 
-            // lb_property2
+            // lb_property1
             // 
-            this.lb_property2.AutoSize = true;
-            this.lb_property2.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_property2.Location = new System.Drawing.Point(142, 93);
-            this.lb_property2.Name = "lb_property2";
-            this.lb_property2.Size = new System.Drawing.Size(37, 15);
-            this.lb_property2.TabIndex = 23;
-            this.lb_property2.Text = "屬性";
+            this.lb_property1.AutoSize = true;
+            this.lb_property1.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_property1.Location = new System.Drawing.Point(89, 93);
+            this.lb_property1.Name = "lb_property1";
+            this.lb_property1.Size = new System.Drawing.Size(37, 15);
+            this.lb_property1.TabIndex = 22;
+            this.lb_property1.Text = "屬性";
+            // 
+            // lb_property0
+            // 
+            this.lb_property0.AutoSize = true;
+            this.lb_property0.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_property0.Location = new System.Drawing.Point(26, 93);
+            this.lb_property0.Name = "lb_property0";
+            this.lb_property0.Size = new System.Drawing.Size(37, 15);
+            this.lb_property0.TabIndex = 21;
+            this.lb_property0.Text = "屬性";
+            // 
+            // textBox_property
+            // 
+            this.textBox_property.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox_property.Location = new System.Drawing.Point(19, 21);
+            this.textBox_property.MaxLength = 0;
+            this.textBox_property.Name = "textBox_property";
+            this.textBox_property.Size = new System.Drawing.Size(133, 30);
+            this.textBox_property.TabIndex = 21;
+            this.textBox_property.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.label3);
+            this.groupBox7.Controls.Add(this.label2);
+            this.groupBox7.Controls.Add(this.textBox_phone);
+            this.groupBox7.Controls.Add(this.textBox_name);
+            this.groupBox7.Location = new System.Drawing.Point(317, 316);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(286, 136);
+            this.groupBox7.TabIndex = 13;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "KeyPress";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label3.Location = new System.Drawing.Point(29, 93);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(37, 15);
+            this.label3.TabIndex = 25;
+            this.label3.Text = "電話";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label2.Location = new System.Drawing.Point(29, 36);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(37, 15);
+            this.label2.TabIndex = 24;
+            this.label2.Text = "名稱";
+            // 
+            // textBox_phone
+            // 
+            this.textBox_phone.Location = new System.Drawing.Point(80, 89);
+            this.textBox_phone.Name = "textBox_phone";
+            this.textBox_phone.Size = new System.Drawing.Size(140, 22);
+            this.textBox_phone.TabIndex = 12;
+            this.textBox_phone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_phone_KeyPress);
+            // 
+            // textBox_name
+            // 
+            this.textBox_name.Location = new System.Drawing.Point(80, 35);
+            this.textBox_name.Name = "textBox_name";
+            this.textBox_name.Size = new System.Drawing.Size(140, 22);
+            this.textBox_name.TabIndex = 11;
+            this.textBox_name.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_name_KeyPress);
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.label4);
+            this.groupBox8.Controls.Add(this.label5);
+            this.groupBox8.Controls.Add(this.textBox_email);
+            this.groupBox8.Location = new System.Drawing.Point(12, 458);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(286, 136);
+            this.groupBox8.TabIndex = 26;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "使用 Validating + Validated";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label4.Location = new System.Drawing.Point(16, 61);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(112, 15);
+            this.label4.TabIndex = 25;
+            this.label4.Text = "電子郵件信箱：";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label5.Location = new System.Drawing.Point(16, 35);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(97, 15);
+            this.label5.TabIndex = 24;
+            this.label5.Text = "驗證電子郵件";
+            // 
+            // textBox_email
+            // 
+            this.textBox_email.Location = new System.Drawing.Point(29, 91);
+            this.textBox_email.Name = "textBox_email";
+            this.textBox_email.Size = new System.Drawing.Size(234, 22);
+            this.textBox_email.TabIndex = 12;
+            this.textBox_email.Validating += new System.ComponentModel.CancelEventHandler(this.textBox_email_Validating);
+            this.textBox_email.Validated += new System.EventHandler(this.textBox_email_Validated);
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.lb_check_numbers);
+            this.groupBox9.Controls.Add(this.textBox_check_numbers);
+            this.groupBox9.Location = new System.Drawing.Point(317, 458);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(286, 136);
+            this.groupBox9.TabIndex = 27;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "檢查數字";
+            // 
+            // lb_check_numbers
+            // 
+            this.lb_check_numbers.AutoSize = true;
+            this.lb_check_numbers.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_check_numbers.Location = new System.Drawing.Point(22, 35);
+            this.lb_check_numbers.Name = "lb_check_numbers";
+            this.lb_check_numbers.Size = new System.Drawing.Size(67, 15);
+            this.lb_check_numbers.TabIndex = 25;
+            this.lb_check_numbers.Text = "檢查數字";
+            // 
+            // textBox_check_numbers
+            // 
+            this.textBox_check_numbers.Location = new System.Drawing.Point(29, 91);
+            this.textBox_check_numbers.Name = "textBox_check_numbers";
+            this.textBox_check_numbers.Size = new System.Drawing.Size(234, 22);
+            this.textBox_check_numbers.TabIndex = 12;
+            this.textBox_check_numbers.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_check_numbers_KeyDown);
+            this.textBox_check_numbers.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_check_numbers_KeyPress);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1057, 591);
+            this.ClientSize = new System.Drawing.Size(1057, 628);
+            this.Controls.Add(this.groupBox9);
+            this.Controls.Add(this.groupBox8);
+            this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
@@ -507,6 +645,12 @@
             this.groupBox5.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -553,6 +697,18 @@
         private System.Windows.Forms.Label lb_property1;
         private System.Windows.Forms.Label lb_property0;
         private System.Windows.Forms.TextBox textBox_property;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBox_phone;
+        private System.Windows.Forms.TextBox textBox_name;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBox_email;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.Label lb_check_numbers;
+        private System.Windows.Forms.TextBox textBox_check_numbers;
     }
 }
 

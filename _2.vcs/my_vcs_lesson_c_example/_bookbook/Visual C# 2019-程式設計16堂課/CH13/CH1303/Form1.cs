@@ -19,29 +19,32 @@ namespace CH1303
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_angry_bird\AB_red.jpg";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);
+            pictureBox1.Image = bitmap1;
+            pictureBox1.ClientSize = new Size(bitmap1.Width, bitmap1.Height);
         }
 
         private void tsslMsg_Click(object sender, EventArgs e)
         {
-            picSample.Left = 0;
-            tmrAuto.Start();//開始計時
+            pictureBox1.Left = 0;
+            timer1.Start();//開始計時
             tsslMsg.Text = "移動圖片";
         }
 
-        private void tmrAuto_Tick(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
-            if (picSample.Left < 200)
+            if (pictureBox1.Left < 200)
             {
                 //從表單的左邊移動圖片
-                picSample.Left += 5;
-                tsspShow.Value = picSample.Left;
+                pictureBox1.Left += 5;
+                tsspShow.Value = pictureBox1.Left;
                 //顯示進度列目前進行的狀態
                 tsslMsg.Text = String.Concat(tsspShow.Value / 3, " % 已經完成");
             }
             else
             {
-                tmrAuto.Stop();
+                timer1.Stop();
                 tsslMsg.Text = "使命已達";
             }
         }

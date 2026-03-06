@@ -71,6 +71,8 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
+            this.printDocument2 = new System.Drawing.Printing.PrintDocument();
+            this.printDialog2 = new System.Windows.Forms.PrintDialog();
             this.groupBox0.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -468,6 +470,10 @@
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
+            // printDialog2
+            // 
+            this.printDialog2.UseEXDialog = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -546,6 +552,8 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button0;
+        private System.Drawing.Printing.PrintDocument printDocument2;
+        private System.Windows.Forms.PrintDialog printDialog2;
     }
 }
 

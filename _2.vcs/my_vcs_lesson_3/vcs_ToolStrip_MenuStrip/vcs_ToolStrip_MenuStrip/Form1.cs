@@ -13,15 +13,20 @@ namespace vcs_ToolStrip_MenuStrip
 {
     public partial class Form1 : Form
     {
+        // The currently selected drawing parameters.
+        private Color DrawingColor = Color.Black;
+        private int DrawingThickness = 1;
+        private DashStyle DrawingDashStyle = DashStyle.Solid;
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        // The currently selected drawing parameters.
-        private Color DrawingColor = Color.Black;
-        private int DrawingThickness = 1;
-        private DashStyle DrawingDashStyle = DashStyle.Solid;
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
 
         // Select the appropriate color.
         private void ColorTool_Click(object sender, EventArgs e)
@@ -76,3 +81,4 @@ namespace vcs_ToolStrip_MenuStrip
         }
     }
 }
+

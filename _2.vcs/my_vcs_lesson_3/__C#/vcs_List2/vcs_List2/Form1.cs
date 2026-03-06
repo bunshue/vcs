@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Collections;
+
 namespace vcs_List2
 {
     public partial class Form1 : Form
@@ -199,16 +201,103 @@ namespace vcs_List2
         {
         }
 
+        public static void PrintOut1(IEnumerable tempmySL)
+        {
+            Console.WriteLine("\t對應鍵(Key) \t   對應值(Value)");
+            foreach (DictionaryEntry de in tempmySL)
+            {
+                Console.WriteLine("\t {0}  \t\t{1}", de.Key, de.Value);
+            }
+        }
+
+        public static void PrintOut2(SortedList myList)
+        {
+            Console.WriteLine("\t對應鍵(Key) \t   對應值(Value)");
+            for (int i = 0; i < myList.Count; i++)
+            {
+                Console.WriteLine("\t {0}  \t\t{1}", myList.GetKey(i), myList.GetByIndex(i));
+                // GetKey(i):取得 SortedList 物件中指定之索引處的索引鍵。
+                // GetByIndex(i):取得 SortedList 物件中指定之索引處的值。
+            }
+        }
+
         private void button20_Click(object sender, EventArgs e)
         {
+            //SortedList 0
+            SortedList mySL = new SortedList(); //建立myHT為屬於Hashtable實體
+
+            Console.WriteLine("\n1.置入四筆Key&Value鍵值到SortedList串列內.");
+            mySL["iPhone5S"] = 22000;  //添加 key&value鍵值對
+            mySL["iPhone5C"] = 18000;  //添加 key&value鍵值對
+            mySL["iPad2"] = 12500;     //添加 key&value鍵值對
+            mySL["iPad Mini"] = 15900;  //添加 key&value鍵值對
+
+            PrintOut1(mySL);
+            Console.WriteLine(" 1.目前 SortedList串列內元素總個數 : {0}", mySL.Count);
+            Console.WriteLine(" ---------------------------------------");
+
+            // 查詢產品單價
+            Console.Write(" 2.請輸入Apple產品名稱 : ");
+            string item = Console.ReadLine();
+            if (!mySL.ContainsKey(item))//判斷SortedList是否含特定鍵
+            {
+                Console.WriteLine(" 2. {0} 不存在 !!", item);
+            }
+            else
+            {
+                Console.WriteLine(" 2.{0}單價 : {1}", item, mySL[item]);
+            }
+            Console.WriteLine(" --------------------------------------");
+
+            // 移除剛查詢的 Key & Value 鍵值對
+            Console.WriteLine(" 3.移除剛查詢鍵值 {0}", item);
+            mySL.Remove(item);
+            PrintOut2(mySL);
+            Console.WriteLine(" 3.目前 SortedList串列內元素總個數 : {0}", mySL.Count);
+            Console.WriteLine(" ---------------------------------------");
+
+            //移除所有元素
+            Console.WriteLine(" 4.移除 SortedList串列內所有元素");
+            mySL.Clear();
+            Console.WriteLine(" 4.目前 SortedList串列內元素總個數 : {0}", mySL.Count);
+            Console.WriteLine(" --------------------------------------");
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
+            //SortedList 1
+            SortedList m = new SortedList();  // 非泛型
+
+            m.Add("David", new Member1() { Name = "David", Select = true, Score = 70 });
+            m.Add("Mary", new Member1() { Name = "Mary", Select = false, Score = 65 });
+            m.Add("Tom", new Member1() { Name = "Tom", Select = true, Score = 85 });
+            m.Add("Jack", new Member1() { Name = "Jack", Select = true, Score = 95 });
+
+            //非泛型操作
+            Console.WriteLine("=== 非泛型 SortedList 操作需強制轉換 .... \n");
+            foreach (DictionaryEntry item in m)
+            {
+                Console.WriteLine(((Member1)item.Value).ToString());
+            }
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
+            //SortedList 2
+            SortedList<string, Member2> m = new SortedList<string, Member2>();
+
+            m.Add("David", new Member2() { Name = "David", Select = true, Score = 70 });
+            m.Add("Mary", new Member2() { Name = "Mary", Select = false, Score = 65 });
+            m.Add("Tom", new Member2() { Name = "Tom", Select = true, Score = 85 });
+            m.Add("Jack", new Member2() { Name = "Jack", Select = true, Score = 95 });
+
+            //泛型陣列操作
+            Console.WriteLine("=== 泛型 SortedList 操作不需強制轉換 .... \n");
+            foreach (KeyValuePair<string, Member2> item in m)
+            {
+                // Console.WriteLine (" 姓名:{0} \t 選課:{1}  \t  成績:{2}  \n" ,item.Key, item.Value.Select, item.Value.Score );
+                Console.WriteLine(item.Value.ToString());
+            }
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -266,6 +355,30 @@ namespace vcs_List2
         // {
         //   return string.Format("姓名 : {0} \t 選課 :{1} \t 成績: {2} \n ", Name, Select ? "是" : "否", Score.ToString());
         //}
+    }
+
+    class Member1
+    {
+        public string Name { get; set; }      // 姓名屬性          
+        public bool Select { get; set; }      // 選課屬性
+        public int Score { get; set; }        // 成績屬性  
+
+        public override string ToString()    // 覆寫覆類別 ToString()方法
+        {
+            return string.Format("姓名 : {0} \t 選課 :{1} \t 成績: {2} \n ", Name, Select ? "是" : "否", Score.ToString());
+        }
+    }
+
+    class Member2
+    {
+        public string Name { get; set; }      // 姓名屬性          
+        public bool Select { get; set; }      // 選課屬性
+        public int Score { get; set; }        // 成績屬性
+
+        public override string ToString()    // 覆寫覆類別 ToString()方法
+        {
+            return string.Format("姓名 : {0} \t 選課 :{1} \t 成績: {2} \n ", Name, Select ? "是" : "否", Score.ToString());
+        }
     }
 }
 

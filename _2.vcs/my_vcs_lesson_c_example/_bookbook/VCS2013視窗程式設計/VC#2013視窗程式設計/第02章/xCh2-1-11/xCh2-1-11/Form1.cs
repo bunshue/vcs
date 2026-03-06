@@ -33,6 +33,11 @@ namespace xCh2_1_11
             // 讓Form1保持在Activate的狀態
             this.Activate();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

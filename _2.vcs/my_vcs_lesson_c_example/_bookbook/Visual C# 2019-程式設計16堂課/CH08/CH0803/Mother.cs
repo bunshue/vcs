@@ -12,7 +12,7 @@ namespace CH0803
         protected string Surname
         { get { return "Purefoy"; } }
         public ushort Height { get; set; }
-        public string Hair { get; set; } = "棕色髮";
+        public string Hair { get; set; }
 
         //建構函式
         public Mother()
@@ -22,6 +22,9 @@ namespace CH0803
         }
 
         //成員方法-運算式主體定義
-        public void Display() => Console.WriteLine(           "{Firstname} {Surname}\n" +           "{Hair}, 身高 {Height}cm");
+        public void Display()
+        {
+            Console.WriteLine("{Firstname} {Surname}\n" + "{Hair}, 身高 {Height}cm");
+        }
     }
 }

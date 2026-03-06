@@ -32,10 +32,10 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsslMsg = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsspShow = new System.Windows.Forms.ToolStripProgressBar();
-            this.picSample = new System.Windows.Forms.PictureBox();
-            this.tmrAuto = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picSample)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -44,10 +44,10 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsslMsg,
             this.tsspShow});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 247);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 440);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(393, 30);
+            this.statusStrip1.Size = new System.Drawing.Size(635, 30);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -65,33 +65,32 @@
             this.tsspShow.Name = "tsspShow";
             this.tsspShow.Size = new System.Drawing.Size(180, 24);
             // 
-            // picSample
+            // pictureBox1
             // 
-            this.picSample.Image = global::CH1303.Properties.Resources._026;
-            this.picSample.Location = new System.Drawing.Point(0, 7);
-            this.picSample.Name = "picSample";
-            this.picSample.Size = new System.Drawing.Size(103, 104);
-            this.picSample.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picSample.TabIndex = 3;
-            this.picSample.TabStop = false;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 62);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 96);
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
             // 
-            // tmrAuto
+            // timer1
             // 
-            this.tmrAuto.Tick += new System.EventHandler(this.tmrAuto_Tick);
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(393, 277);
+            this.ClientSize = new System.Drawing.Size(635, 470);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.picSample);
             this.Name = "Form1";
             this.Text = "CH1303";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picSample)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -102,8 +101,8 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel tsslMsg;
         private System.Windows.Forms.ToolStripProgressBar tsspShow;
-        private System.Windows.Forms.PictureBox picSample;
-        private System.Windows.Forms.Timer tmrAuto;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

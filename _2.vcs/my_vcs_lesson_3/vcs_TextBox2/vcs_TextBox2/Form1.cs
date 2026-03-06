@@ -97,6 +97,9 @@ namespace vcs_TextBox2
             groupBox4.Size = new Size(W, H);
             groupBox5.Size = new Size(W, H + 100);
             groupBox6.Size = new Size(W, H);
+            groupBox7.Size = new Size(W, H);
+            groupBox8.Size = new Size(W, H);
+            groupBox9.Size = new Size(W, H);
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
@@ -104,6 +107,9 @@ namespace vcs_TextBox2
             groupBox4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             groupBox5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             groupBox6.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            groupBox7.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            groupBox8.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            groupBox9.Location = new Point(x_st + dx * 1, y_st + dy * 3);
 
             richTextBox1.Size = new Size(300, 340);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
@@ -323,5 +329,116 @@ namespace vcs_TextBox2
                 e.Handled = true;  //不接受字元
             }
         }
+
+        private void textBox_name_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //名稱
+            int word;
+            word = (int)(e.KeyChar);
+            if (word < 65 || word > 90) //判斷是否輸入字元為A~Z
+            {
+                MessageBox.Show("必須輸入A~Z的字元");
+                e.Handled = true; ;//不能忽略使用者輸入的字元
+                textBox_name.Clear(); //清除文字方塊內容            
+            }
+        }
+
+        private void textBox_phone_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //電話
+            int wd;
+            wd = (int)(e.KeyChar);
+            if (wd < 48 || wd > 57) //判斷是否輸入字元為A~Z
+            {
+                MessageBox.Show("必須輸入0~9的數字");
+                e.Handled = true; ;//不能忽略使用者輸入的字元
+            }
+        }
+
+        public bool ValidEmailAddress(string emailAddress, out string errorMessage)
+        {
+            // 確定e-mail address並非空白
+            if (emailAddress.Length == 0)
+            {
+                errorMessage = "請輸入電子郵件信箱，不可以空白";
+                return false;
+            }
+
+            // 確定電子郵件信箱是否含有1個 "@" 與 "." 字元
+            if (emailAddress.IndexOf("@") > -1)
+            {
+                if (emailAddress.IndexOf(".", emailAddress.IndexOf("@")) > emailAddress.IndexOf("@"))
+                {
+                    errorMessage = "";
+                    return true;
+                }
+            }
+
+            errorMessage = "無效的電子郵件信箱";
+            return false;
+        }
+
+        private void textBox_email_Validating(object sender, CancelEventArgs e)
+        {
+            string errorMsg;
+
+            if (!ValidEmailAddress(textBox_email.Text, out errorMsg))
+            {
+                // 取消事件，並選取錯誤的文字
+                e.Cancel = true;
+                textBox_email.Select(0, textBox_email.Text.Length);
+
+                // 秀出錯誤訊息
+                richTextBox1.Text += errorMsg + "\n";
+            }
+        }
+
+        private void textBox_email_Validated(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "電子郵信箱格式 OK\n";
+
+        }
+
+        // 判斷使用者是否已輸入數字
+        private bool nonNumberEntered = false;
+
+        private void textBox_check_numbers_KeyDown(object sender, KeyEventArgs e)
+        {
+            // 假設使用者已輸入數字
+            nonNumberEntered = false;
+
+            // 判斷使用者是否使用鍵盤上頭的數字鍵
+            if (e.KeyCode < Keys.D0 || e.KeyCode > Keys.D9)
+            {
+                // 判斷使用者是否使用數字盤(keypad)輸入數字
+                if (e.KeyCode < Keys.NumPad0 || e.KeyCode > Keys.NumPad9)
+                {
+                    // 判斷使用者是否輸入退後鍵(Backspace)
+                    if (e.KeyCode != Keys.Back)
+                    {
+                        // 因為使用者並沒有輸入數字，因此將之設為true
+                        nonNumberEntered = true;
+                    }
+                }
+            }
+        }
+
+        private void textBox_check_numbers_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 判斷使用者是否已輸入數字
+            if (nonNumberEntered == true)
+            {
+                // 因為沒有輸入數字，因此該輸入不予顯示，並提示使用者相關的訊息
+                e.Handled = true;
+
+                lb_check_numbers.Text = e.KeyChar + " 是不被允許的，" + Environment.NewLine;
+                lb_check_numbers.Text += "請輸入數字或是退後鍵修正數字 !!!";
+            }
+            else
+            {
+                lb_check_numbers.Text = e.KeyChar + " 是OK的";
+            }
+        }
     }
 }
+
