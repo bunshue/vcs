@@ -561,6 +561,29 @@ namespace vcs_test_all_04_Dialog
 
         private void button33_Click(object sender, EventArgs e)
         {
+            // 色彩對話方塊
+            // 初始化 色彩對話方塊
+            colorDialog1.AllowFullOpen = false;
+            colorDialog1.FullOpen = false;
+            colorDialog1.ShowHelp = false;
+
+            // 色彩對話方塊 內容
+            colorDialog1.AllowFullOpen = true;
+            colorDialog1.FullOpen = true;
+            colorDialog1.ShowHelp = true;
+
+            // 初始化色彩
+            colorDialog1.Color = richTextBox1.ForeColor;
+
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.ForeColor = colorDialog1.Color;
+                richTextBox1.Text += "完成前景色(ForeColor)的設定";
+            }
+            else
+            {
+                richTextBox1.Text += "[取消]前景色(ForeColor)的設定";
+            }
         }
 
         private void button34_Click(object sender, EventArgs e)
@@ -606,7 +629,25 @@ namespace vcs_test_all_04_Dialog
 
         private void button42_Click(object sender, EventArgs e)
         {
+            //設定字型, 使用Apply
+            fontDialog1.AllowScriptChange = false;
+            fontDialog1.AllowVectorFonts = false;
+            fontDialog1.AllowVerticalFonts = false;
+            fontDialog1.ShowApply = false;
+            fontDialog1.ShowColor = false;
+            fontDialog1.ShowEffects = false;
+            fontDialog1.ShowHelp = false;
+            fontDialog1.FixedPitchOnly = false;
 
+            fontDialog1.MaxSize = 40;
+            fontDialog1.MinSize = 10;
+
+            if (fontDialog1.ShowDialog() != DialogResult.Cancel)
+            {
+                richTextBox1.Font = fontDialog1.Font;
+                richTextBox1.ForeColor = fontDialog1.Color;
+                richTextBox1.Text += "已完成設定";
+            }
         }
 
         private void button43_Click(object sender, EventArgs e)
@@ -782,8 +823,16 @@ namespace vcs_test_all_04_Dialog
                 }
             }
         }
+
+        private void fontDialog1_Apply(object sender, EventArgs e)
+        {
+            richTextBox1.Font = fontDialog1.Font;
+            richTextBox1.ForeColor = fontDialog1.Color;
+            richTextBox1.Text += "已完成設定";
+        }
     }
 }
+
 
 /*
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個

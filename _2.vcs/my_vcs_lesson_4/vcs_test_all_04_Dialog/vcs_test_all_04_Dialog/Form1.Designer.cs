@@ -367,6 +367,7 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(150, 50);
             this.button33.TabIndex = 5;
+            this.button33.Text = "色彩對話方塊";
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
@@ -413,6 +414,7 @@
             this.button42.Name = "button42";
             this.button42.Size = new System.Drawing.Size(150, 50);
             this.button42.TabIndex = 3;
+            this.button42.Text = "設定字型 使用Apply";
             this.button42.UseVisualStyleBackColor = true;
             this.button42.Click += new System.EventHandler(this.button42_Click);
             // 
@@ -440,6 +442,10 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // fontDialog1
+            // 
+            this.fontDialog1.Apply += new System.EventHandler(this.fontDialog1_Apply);
             // 
             // printDialog1
             // 

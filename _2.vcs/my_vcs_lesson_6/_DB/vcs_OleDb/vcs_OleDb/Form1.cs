@@ -267,15 +267,194 @@ namespace vcs_OleDb
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //取得資料
+            OleDbConnectionStringBuilder builder;
+            string queryString;
+            //string connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\\Northwind.mdb";
+            builder = new OleDbConnectionStringBuilder();
+            builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
+            builder["Data Source"] = @"D:\Northwind2.mdb";
+            builder["User Id"] = "Admin";
 
+            // 取出員工資料表中所有欄位的內容
+            queryString = "SELECT * FROM 員工";
+
+            string connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\\Northwind2.mdb";
+
+            //using (OleDbConnection connection = new OleDbConnection(builder.ConnectionString))
+            using (OleDbConnection connection = new OleDbConnection(connectionString))
+            {
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+                command.CommandTimeout = 20;
+
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+
+                richTextBox1.Text += "是否包含一個或多個資料列：" + (reader.HasRows ? "是" : "否") + "\n";
+                richTextBox1.Text += "目前資料列中的資料行數目：" + reader.FieldCount.ToString() + "\n";
+                richTextBox1.Text += "資料讀取器是否關閉：" + (reader.IsClosed ? "是" : "否") + "\n";
+
+                // 建構DataSet及其組成分子
+                DataSet NorthwindDataSet = new DataSet();
+                DataTable 員工Table = new DataTable("員工Table");
+                DataColumn aColumn;
+
+                for (int i = 0; i < reader.FieldCount; i++)
+                {
+                    aColumn = new DataColumn(reader.GetName(i), reader.GetFieldType(i));
+                    員工Table.Columns.Add(aColumn);
+                }
+
+                // 加入記錄
+                DataRow newRow = null;
+                while (reader.Read())
+                {
+                    newRow = 員工Table.NewRow();
+                    for (int i = 0; i < reader.FieldCount; i++)
+                    {
+                        newRow[i] = reader.GetValue(i);// 相當於reader[i];
+                    }
+                    員工Table.Rows.Add(newRow);
+                }
+
+                NorthwindDataSet.Tables.Add(員工Table);
+
+                // 秀出剛動態建構出來的DataSet 
+                dataGridView1.DataSource = NorthwindDataSet.Tables["員工Table"];
+
+                reader.Close();
+
+                // 執行查詢，並傳回查詢所傳回的結果集中第一個資料列的第一個資料行。
+                // 會忽略其他的資料行或資料列。
+                command.CommandText = "SELECT COUNT(*) FROM 員工";
+                int count = (Int32)command.ExecuteScalar();
+                richTextBox1.Text += "共有 " + count.ToString() + " 筆記錄\n";
+
+                reader.Close();
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //取得部分資料
+            OleDbConnectionStringBuilder builder;
+            string queryString;
+            //string connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\\Northwind.mdb";
+            builder = new OleDbConnectionStringBuilder();
+            builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
+            builder["Data Source"] = @"D:\Northwind2.mdb";
+            builder["User Id"] = "Admin";
+
+            // 取出員工資料表中所有欄位的內容
+            queryString = "SELECT * FROM 員工";
+
+            using (OleDbConnection connection = new OleDbConnection(builder.ConnectionString))
+            {
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+                command.CommandTimeout = 20;
+
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+
+                // 建構DataSet及其組成分子
+                DataSet NorthwindDataSet = new DataSet();
+                DataTable 部份員工Table = new DataTable("部份員工Table");
+
+                int nameNdx = reader.GetOrdinal("姓名");
+                DataColumn nameColumn = new DataColumn(reader.GetName(nameNdx), reader.GetFieldType(nameNdx));
+                部份員工Table.Columns.Add(nameColumn);
+
+                int positionNdx = reader.GetOrdinal("職稱");
+                DataColumn positionColumn = new DataColumn(reader.GetName(positionNdx), reader.GetFieldType(positionNdx));
+                部份員工Table.Columns.Add(positionColumn);
+
+                int telNdx = reader.GetOrdinal("電話號碼");
+                DataColumn telColumn = new DataColumn(reader.GetName(telNdx), reader.GetFieldType(telNdx));
+                部份員工Table.Columns.Add(telColumn);
+
+                // 加入記錄
+                DataRow newRow = null;
+                while (reader.Read())
+                {
+                    newRow = 部份員工Table.NewRow();
+
+                    newRow[0] = reader.GetValue(nameNdx);
+                    newRow[1] = reader.GetString(positionNdx);
+                    newRow[2] = reader.GetValue(telNdx);
+
+                    部份員工Table.Rows.Add(newRow);
+                }
+
+                reader.Close();
+
+                NorthwindDataSet.Tables.Add(部份員工Table);
+
+                // 秀出剛動態建構出來的DataSet 
+                dataGridView2.DataSource = NorthwindDataSet.Tables["部份員工Table"];
+            }
+
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //Command.Parameters範例
+            //取得供應商資料
+            /*
+            "宜蘭","台北","桃園","新竹","苗栗",
+            "台中","南投","高雄","屏東","花蓮"
+            */
+
+            OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder();
+            builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
+            builder["Data Source"] = @"D:\Northwind.mdb";
+            builder["User Id"] = "Admin";
+            string queryString = "SELECT * FROM 供應商 WHERE 供應商=@supplier OR 行政區=@district";
+
+            using (OleDbConnection connection = new OleDbConnection(builder.ConnectionString))
+            {
+                connection.Open();
+
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+                OleDbParameter supplierParam = command.Parameters.Add("@supplier", OleDbType.Char);
+                supplierParam.Value = "一心";
+                // 以上二道敘述的寫法，可縮寫如下：
+                // command.Parameters.Add("@supplier", OleDbType.Char).Value = "一心";
+
+                // 如果有從ComboBox中挑選行政區，則將該值設定給做為篩選條件的distric
+                // 否則就提示使用者，並中斷事件這個事件處理程序
+
+                string district = "新竹";
+                command.Parameters.AddWithValue("@district", district);
+
+                OleDbDataReader reader = command.ExecuteReader();
+
+                // 建構DataSet及其組成分子
+                DataSet NorthwindDataSet = new DataSet();
+                DataTable 供應商Table = new DataTable("供應商Table");
+                DataColumn aColumn;
+                for (int i = 0; i < reader.FieldCount; i++)
+                {
+                    aColumn = new DataColumn(reader.GetName(i), reader.GetFieldType(i));
+                    供應商Table.Columns.Add(aColumn);
+                }
+
+                // 加入記錄
+                DataRow newRow = null;
+                while (reader.Read())
+                {
+                    newRow = 供應商Table.NewRow();
+                    for (int i = 0; i < reader.FieldCount; i++)
+                    {
+                        newRow[i] = reader.GetValue(i);// 相當於reader[i];
+                    }
+                    供應商Table.Rows.Add(newRow);
+                }
+                NorthwindDataSet.Tables.Add(供應商Table);
+
+                // 秀出剛動態建構出來的DataSet 
+                dataGridView1.DataSource = NorthwindDataSet.Tables["供應商Table"];
+                reader.Close();
+            }
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -286,20 +465,101 @@ namespace vcs_OleDb
         {
         }
 
+        OleDbConnectionStringBuilder builder;
+        OleDbConnection connection;
+        OleDbCommand command;
+        OleDbParameter parameter;
+        OleDbDataAdapter myAdapter;
+        DataSet NorthwindDataSet;
+
+        private void DataChanged()
+        {
+            NorthwindDataSet = new DataSet();
+            myAdapter.Fill(NorthwindDataSet, "客戶Table");
+            dataGridView1.DataSource = NorthwindDataSet.Tables["客戶Table"];
+        }
+
         private void button10_Click(object sender, EventArgs e)
         {
+            //ExecuteNonQuery範例(4)
+
+            //(1/4)讀取
+            builder = new OleDbConnectionStringBuilder();
+            builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
+            builder["Data Source"] = @"D:\Northwind.mdb";
+            builder["User Id"] = "Admin";
+
+            connection = new OleDbConnection(builder.ConnectionString);
+            connection.Open();
+
+            // 取出所有客戶資料並交由DataGridView物件顯示
+            myAdapter = new OleDbDataAdapter("SELECT * FROM 客戶", connection);
+            NorthwindDataSet = new DataSet();
+            myAdapter.Fill(NorthwindDataSet, "客戶Table");
+            dataGridView1.DataSource = NorthwindDataSet.Tables["客戶Table"];
+
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
+            string customer_id = "12345";
+            string company_name = "lion-mouse";
+            //新增
+            // 建構Insert
+            command = new OleDbCommand();
+            command.CommandText = "INSERT INTO 客戶 (客戶編號, 公司名稱) VALUES (?, ?)";
+            command.Connection = connection;
+
+            command.Parameters.Add("CustomerID", OleDbType.Char, 5);
+            command.Parameters.Add("CompanyName", OleDbType.VarChar, 40);
+            command.Parameters["CustomerID"].Value = customer_id;//客戶編號
+            command.Parameters["CompanyName"].Value = company_name;//公司名稱
+            command.ExecuteNonQuery();
+
+            NorthwindDataSet.Tables["客戶Table"].AcceptChanges();
+            DataChanged();
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
+            string customer_id = "12345";
+            string company_name_new = "cat-dog";
+
+            //修改
+            // 建構Update
+            command = new OleDbCommand();
+            command.CommandText =
+                "UPDATE 客戶 SET " +
+                    "客戶編號 = @CustomerID, " +
+                    "公司名稱 = @CompanyName " +
+                    "WHERE 客戶編號 = @CustomerID";
+            command.Connection = connection;
+
+            command.Parameters.Add("@CustomerID", OleDbType.Char, 5);
+            command.Parameters.Add("@CompanyName", OleDbType.VarChar, 40);
+            command.Parameters["@CustomerID"].Value = customer_id;//客戶編號
+            command.Parameters["@CompanyName"].Value = company_name_new;//公司名稱
+
+            command.ExecuteNonQuery();
+            DataChanged();
+
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
+            string customer_id = "12345";
+            //刪除
+            // 建構Delete
+            command = new OleDbCommand();
+            command.CommandText = "DELETE * FROM 客戶 " + "WHERE 客戶編號 = @CustomerID";
+            command.Connection = connection;
+
+            parameter = command.Parameters.Add("@CustomerID", OleDbType.Char, 5);
+            command.Parameters["@CustomerID"].Value = customer_id;//客戶編號
+            command.ExecuteNonQuery();
+
+            NorthwindDataSet.Tables["客戶Table"].AcceptChanges();
+            DataChanged();
         }
 
         private void button14_Click(object sender, EventArgs e)
