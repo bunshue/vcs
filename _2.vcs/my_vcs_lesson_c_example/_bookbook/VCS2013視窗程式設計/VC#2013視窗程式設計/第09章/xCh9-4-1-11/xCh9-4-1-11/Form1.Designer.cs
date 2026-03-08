@@ -39,7 +39,7 @@
             // 
             this.button2.Location = new System.Drawing.Point(125, 14);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(86, 23);
+            this.button2.Size = new System.Drawing.Size(86, 57);
             this.button2.TabIndex = 5;
             this.button2.Text = "寫成XML文件";
             this.button2.UseVisualStyleBackColor = true;
@@ -48,7 +48,7 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(10, 42);
+            this.dataGridView1.Location = new System.Drawing.Point(10, 141);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(348, 122);
@@ -58,7 +58,7 @@
             // 
             this.button1.Location = new System.Drawing.Point(10, 14);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(110, 23);
+            this.button1.Size = new System.Drawing.Size(110, 57);
             this.button1.TabIndex = 3;
             this.button1.Text = "動態建構DataSet";
             this.button1.UseVisualStyleBackColor = true;
@@ -68,7 +68,7 @@
             // 
             this.button3.Location = new System.Drawing.Point(216, 14);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(91, 23);
+            this.button3.Size = new System.Drawing.Size(91, 57);
             this.button3.TabIndex = 6;
             this.button3.Text = "讀入XML文件";
             this.button3.UseVisualStyleBackColor = true;

@@ -41,8 +41,7 @@ namespace vcs_ComboBox1
                 SizeF text_size = e.Graphics.MeasureString(Text, Font);
 
                 // The height is the maximum of the image height and text height.
-                Height = 2 * MarginHeight +
-                    (int)Math.Max(Picture.Height, text_size.Height);
+                Height = 2 * MarginHeight + (int)Math.Max(Picture.Height, text_size.Height);
 
                 // The width is the sum of the image and text widths.
                 Width = (int)(4 * MarginWidth + Picture.Width + text_size.Width);
@@ -62,10 +61,7 @@ namespace vcs_ComboBox1
             float hgt = e.Bounds.Height - 2 * MarginHeight;
             float scale = hgt / Picture.Height;
             float wid = Picture.Width * scale;
-            RectangleF rect = new RectangleF(
-                e.Bounds.X + MarginWidth,
-                e.Bounds.Y + MarginHeight,
-                wid, hgt);
+            RectangleF rect = new RectangleF(e.Bounds.X + MarginWidth, e.Bounds.Y + MarginHeight, wid, hgt);
             e.Graphics.InterpolationMode = InterpolationMode.HighQualityBilinear;
             e.Graphics.DrawImage(Picture, rect);
 
@@ -74,13 +70,13 @@ namespace vcs_ComboBox1
             // draw only the first line of text.
             string visible_text = Text;
             if (e.Bounds.Height < Picture.Height)
+            {
                 visible_text = Text.Substring(0, Text.IndexOf('\n'));
+            }
 
             // Make a rectangle to hold the text.
             wid = e.Bounds.Width - rect.Right - 3 * MarginWidth;
-            rect = new RectangleF(
-                rect.Right + 2 * MarginWidth, rect.Y,
-                wid, hgt);
+            rect = new RectangleF(rect.Right + 2 * MarginWidth, rect.Y, wid, hgt);
             using (StringFormat sf = new StringFormat())
             {
                 sf.Alignment = StringAlignment.Near;
