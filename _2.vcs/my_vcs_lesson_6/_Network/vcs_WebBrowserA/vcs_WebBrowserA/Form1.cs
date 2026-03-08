@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace xCh4_2_2_11
+namespace vcs_WebBrowserA
 {
     public partial class Form1 : Form
     {

@@ -7,8 +7,8 @@
     <ProjectGuid>{7C618798-1DAA-4449-AD91-D7EE2BE944A0}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>xCh4_2_2_11</RootNamespace>
-    <AssemblyName>xCh4-2-2-11</AssemblyName>
+    <RootNamespace>vcs_WebBrowserA</RootNamespace>
+    <AssemblyName>vcs_WebBrowserA</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

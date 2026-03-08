@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace xCh4_2_2_11
+namespace vcs_WebBrowserA
 {
     static class Program
     {

@@ -1,4 +1,4 @@
-﻿namespace xCh4_2_2_11
+﻿namespace vcs_WebBrowserA
 {
     partial class Form1
     {
