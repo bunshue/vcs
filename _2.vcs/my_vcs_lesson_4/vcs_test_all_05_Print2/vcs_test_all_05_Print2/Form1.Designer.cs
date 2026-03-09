@@ -73,6 +73,10 @@
             this.button0 = new System.Windows.Forms.Button();
             this.printDocument2 = new System.Drawing.Printing.PrintDocument();
             this.printDialog2 = new System.Windows.Forms.PrintDialog();
+            this.printDialog3 = new System.Windows.Forms.PrintDialog();
+            this.printDocument3 = new System.Drawing.Printing.PrintDocument();
+            this.printPreviewDialog3 = new System.Windows.Forms.PrintPreviewDialog();
+            this.printPreviewControl1 = new System.Windows.Forms.PrintPreviewControl();
             this.groupBox0.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -474,15 +478,50 @@
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
+            // printDocument2
+            // 
+            this.printDocument2.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument2_PrintPage);
+            // 
             // printDialog2
             // 
+            this.printDialog2.Document = this.printDocument2;
             this.printDialog2.UseEXDialog = true;
+            // 
+            // printDialog3
+            // 
+            this.printDialog3.Document = this.printDocument3;
+            this.printDialog3.UseEXDialog = true;
+            // 
+            // printDocument3
+            // 
+            this.printDocument3.DocumentName = "document3";
+            this.printDocument3.EndPrint += new System.Drawing.Printing.PrintEventHandler(this.printDocument3_EndPrint);
+            this.printDocument3.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument3_PrintPage);
+            // 
+            // printPreviewDialog3
+            // 
+            this.printPreviewDialog3.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog3.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog3.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog3.Document = this.printDocument3;
+            this.printPreviewDialog3.Enabled = true;
+            this.printPreviewDialog3.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog3.Icon")));
+            this.printPreviewDialog3.Name = "printPreviewDialog1";
+            this.printPreviewDialog3.Visible = false;
+            // 
+            // printPreviewControl1
+            // 
+            this.printPreviewControl1.Location = new System.Drawing.Point(245, 298);
+            this.printPreviewControl1.Name = "printPreviewControl1";
+            this.printPreviewControl1.Size = new System.Drawing.Size(100, 100);
+            this.printPreviewControl1.TabIndex = 163;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1127, 484);
+            this.Controls.Add(this.printPreviewControl1);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button8);
@@ -558,6 +597,10 @@
         private System.Windows.Forms.Button button0;
         private System.Drawing.Printing.PrintDocument printDocument2;
         private System.Windows.Forms.PrintDialog printDialog2;
+        private System.Windows.Forms.PrintDialog printDialog3;
+        private System.Drawing.Printing.PrintDocument printDocument3;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog3;
+        private System.Windows.Forms.PrintPreviewControl printPreviewControl1;
     }
 }
 

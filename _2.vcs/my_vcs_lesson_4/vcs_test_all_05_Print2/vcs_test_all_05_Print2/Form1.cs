@@ -8,7 +8,24 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
+using System.Drawing.Printing;
 using System.Data.SqlClient;  // for SqlConnection, SqlCommand, SqlDataAdapter
+
+/*
+預覽列印
+printPreviewDialog3
+改Document為printDocument3
+
+列印
+printDialog3
+改Document為printDocument3
+
+列印文件
+printDocument3
+改DocumentName 自訂 document3
+加printDocument3_PrintPage
+加printDocument3_EndPrint
+*/
 
 namespace vcs_test_all_05_Print2
 {
@@ -36,6 +53,11 @@ namespace vcs_test_all_05_Print2
                 "醒來懼銅鏡，" + Environment.NewLine +
                 "怕顯董賊身。";
 
+            button20.Enabled = false;
+            button21.Enabled = false;
+            button22.Enabled = false;
+            button30.Enabled = false;
+            button31.Enabled = false;
         }
 
         private void show_item_location()
@@ -116,7 +138,9 @@ namespace vcs_test_all_05_Print2
             richTextBox1.Clear();
         }
 
-        private void printDocument0_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        //------------------------------------------------------------  # 60個
+
+        private void printDocument0_PrintPage(object sender, PrintPageEventArgs e)
         {
             Graphics g = e.Graphics;
             Font prnFont = new Font(textBox1.Font.Name, textBox1.Font.Size, textBox1.Font.Style);
@@ -166,6 +190,8 @@ namespace vcs_test_all_05_Print2
                 printDocument0.Print();
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button10_Click(object sender, EventArgs e)
         {
@@ -223,7 +249,7 @@ namespace vcs_test_all_05_Print2
             stream = new FileStream(toPrintFile, FileMode.Open);
             streamToPrint = new StreamReader(stream, Encoding.GetEncoding("big5"));
         }
-        private void PageSetting(System.Drawing.Printing.PrintPageEventArgs e)
+        private void PageSetting(PrintPageEventArgs e)
         {
             printFont = new Font("標楷體", 10);
             pageNumberArea = new RectangleF(0, e.PageBounds.Bottom - 20, e.PageSettings.Bounds.Width, 20);
@@ -234,7 +260,7 @@ namespace vcs_test_all_05_Print2
             topMargin = e.MarginBounds.Top;
         }
 
-        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        private void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
         {
             float yPos = 0;
             int count = 0;
@@ -299,6 +325,8 @@ namespace vcs_test_all_05_Print2
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button20_Click(object sender, EventArgs e)
         {
 
@@ -316,8 +344,29 @@ namespace vcs_test_all_05_Print2
 
         private void button23_Click(object sender, EventArgs e)
         {
-
+            //對話方塊啟用頁數核取方塊
+            printDialog2.AllowSomePages = true;
+            //對話方塊啟用說明按鈕
+            printDialog2.ShowHelp = true;
+            //列印對話方塊中，按下確定鈕的話
+            DialogResult result = printDialog2.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                printDocument2.Print();
+            }
         }
+
+        private void printDocument2_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            string text = "千江有水千月，萬里晴空萬里晴";
+            Font oneFont = new Font("標楷體", 35, FontStyle.Bold);
+            e.Graphics.DrawString(text, oneFont, Brushes.Blue, 10, 10);
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private string readToPrint, allContents;
+        private Font printFont3;//列印字型
 
         private void button30_Click(object sender, EventArgs e)
         {
@@ -329,14 +378,76 @@ namespace vcs_test_all_05_Print2
 
         }
 
+        //利用FileStream來讀取檔案並開啟
+        private void ReadPrintFile()
+        {
+            //設定要讀取取的檔名和路徑
+            string printFile = "Demo02.txt";
+            string filePath = @"D:\\vcs\\";
+            //讀取的檔名「Demo02.txt」為列印文件的檔名
+            printDocument3.DocumentName = printFile;
+            //建立檔案並以Open開啟，以using指定範圍為唯讀
+            using (FileStream stream = new FileStream(filePath + printFile, FileMode.Open))
+            using (StreamReader reader = new
+            StreamReader(stream)) //指定區段為唯讀
+            {
+                //allContents存放檔案內容
+                allContents = reader.ReadToEnd();
+            }
+            readToPrint = allContents;
+            printFont3 = new Font("標楷體", 20);
+        }
+
         private void button32_Click(object sender, EventArgs e)
         {
-
+            //預覽列印
+            ReadPrintFile();
+            printPreviewControl1.UseAntiAlias = true;//啟用平滑字效果
+            printPreviewControl1.Document = printDocument3;
+            printPreviewControl1.Document.DocumentName = "CH1407-Demo02";
+            printPreviewDialog3.ShowDialog();//顯示預覽列印對話方塊
         }
 
         private void button33_Click(object sender, EventArgs e)
         {
+            //列印
+            ReadPrintFile();//呼叫載入檔案方法
+            //啟用「頁數」選項按鈕，「選取範圍」選項按鈕
+            printDialog3.AllowSomePages = true;
+            printDialog3.AllowSelection = true;
+            //列印文件指定給列印對話方塊
+            printDialog3.Document = printDocument3;
+            DialogResult result = printDialog3.ShowDialog();
+            //開啟列印對話方塊
+            if (result == DialogResult.OK)
+            {
+                printDocument3.Print(); //執行列印
+            }
+        }
 
+        private void printDocument3_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            int charsPerPage = 0;//統計每頁字元
+            int morePages = 0; //統計頁數        
+            Graphics gs = e.Graphics;
+            gs.MeasureString(readToPrint, printFont3, e.MarginBounds.Size, StringFormat.GenericTypographic, out charsPerPage, out morePages);
+
+            //依據檔案內容繪製列印內容
+            gs.DrawString(readToPrint, printFont3, Brushes.Black, e.MarginBounds, StringFormat.GenericTypographic);
+            //移除已列印的字串
+            readToPrint = readToPrint.Substring(charsPerPage);
+            //當readToPrint大於零時，檢查是否要列印很多頁
+            e.HasMorePages = (readToPrint.Length > 0);
+            if (!e.HasMorePages)
+            {
+                readToPrint = allContents;
+            }
+        }
+
+        //列印到最後一頁顯示訊息
+        private void printDocument3_EndPrint(object sender, PrintEventArgs e)
+        {
+            MessageBox.Show(printDocument3.DocumentName + " -- 完成列印", "列印文件");
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -388,6 +499,7 @@ namespace vcs_test_all_05_Print2
         {
 
         }
+
     }
 }
 

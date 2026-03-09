@@ -19,7 +19,7 @@ namespace xCh6_2_4_71
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            toolStripButton1.Image = Image.FromFile(@"c:\user_red32x32.png");
+            toolStripButton1.Image = Image.FromFile(@"D:\user_red32x32.png");
 
             // 設定進度列的最大值與最小值
             toolStripProgressBar1.Maximum = 100;
