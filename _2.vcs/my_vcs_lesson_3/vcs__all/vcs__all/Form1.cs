@@ -20,6 +20,8 @@ namespace vcs__all
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             progressBar1.Value = 66;
 
             numericUpDown2.Minimum = 0;
@@ -34,6 +36,57 @@ namespace vcs__all
 
             // Handle the DoubleClick event to activate the form.
             notifyIcon1.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
+        }
+
+        void show_item_location()
+        {
+            int W = 360;
+            int H = 200;
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 70;
+            dx = W + 10;
+            dy = H + 10;
+
+            groupBox0.Size = new Size(W, H);
+            groupBox1.Size = new Size(W, H);
+            groupBox2.Size = new Size(W, H);
+            groupBox3.Size = new Size(W, H);
+            groupBox4.Size = new Size(W, H);
+            groupBox5.Size = new Size(W, H);
+            groupBox6.Size = new Size(W, H);
+            groupBox7.Size = new Size(W, H);
+            groupBox8.Size = new Size(W, H);
+            groupBox9.Size = new Size(W, H);
+            groupBox10.Size = new Size(W, H);
+            groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            groupBox3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            groupBox4.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            groupBox5.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            groupBox6.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            groupBox7.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            groupBox8.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            groupBox9.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            groupBox10.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+
+
+
+            richTextBox2.Size = new Size(W, H * 2);
+            richTextBox2.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+
+            this.Size = new Size(1510, 920);
+            this.Text = "vcs__all";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
