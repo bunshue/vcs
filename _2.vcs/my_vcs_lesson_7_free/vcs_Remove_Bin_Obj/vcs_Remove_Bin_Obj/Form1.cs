@@ -18,6 +18,7 @@ namespace vcs_Remove_Bin_Obj
         string search_path = string.Empty;
         //string search_path = @"D:\_git\vcs\_2.vcs";
         string specified_search_path = String.Empty;
+        string result_str = string.Empty;
 
         int total_show_empty_folder_cnt = 0;
         int total_delete_empty_folder_cnt = 0;
@@ -56,6 +57,7 @@ namespace vcs_Remove_Bin_Obj
 
             richTextBox1.Size = new Size(300, 550);
             richTextBox1.Location = new Point(x_st + dx * 1 + 630, y_st + dy * 1);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //取得目前所在路徑
             string currentPath = Directory.GetCurrentDirectory();
@@ -66,15 +68,21 @@ namespace vcs_Remove_Bin_Obj
             lb_main_mesg.Text = "";
 
             this.Size = new Size(1200, 650);
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
+            result_str = "";
             richTextBox1.Clear();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            result_str = "";
             total_show_empty_folder_cnt = 0;
             total_delete_empty_folder_cnt = 0;
             lb_main_mesg.Text = "開始刪除檔案";
@@ -82,31 +90,31 @@ namespace vcs_Remove_Bin_Obj
             /*
             //取得目前所在路徑
             string currentPath = Directory.GetCurrentDirectory();
-            richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
+            result_str += "目前所在路徑: " + currentPath + "\n";
 
             //確認資料夾是否存在
             string Path = @"D:/_git/vcs/_1.data/______test_files2/aaaa/bbbb";
             if (Directory.Exists(Path) == false)    //確認資料夾是否存在
-                richTextBox1.Text += "資料夾: " + Path + " 不存在\n";
+                result_str += "資料夾: " + Path + " 不存在\n";
             else
-                richTextBox1.Text += "資料夾: " + Path + " 存在\n";
+                result_str += "資料夾: " + Path + " 存在\n";
             */
 
             string path = string.Empty;
 
             if (rb_remove_vcs.Checked == true)
             {
-                richTextBox1.Text += "清理 vcs\n";
+                result_str += "清理 vcs\n";
                 path = search_path;
             }
             else if (rb_remove_cuda.Checked == true)
             {
-                richTextBox1.Text += "清理 CUDA\n";
+                result_str += "清理 CUDA\n";
                 path = @"D:\_git\vcs\_3.cuda";
             }
             else if (rb_remove_opengl.Checked == true)
             {
-                richTextBox1.Text += "清理 Open GL\n";
+                result_str += "清理 Open GL\n";
                 path = @"D:\_git\vcs\_6.opengl";
             }
             else
@@ -116,7 +124,7 @@ namespace vcs_Remove_Bin_Obj
 
             folder_name.Clear();
 
-            richTextBox1.Text += "資料夾: " + path + "\n\n";
+            result_str += "資料夾: " + path + "\n\n";
             if (Directory.Exists(path))
             {
                 // This path is a directory
@@ -129,12 +137,13 @@ namespace vcs_Remove_Bin_Obj
 
             if (checkBox9.Checked == true)
             {
-                richTextBox1.Text += "共找到空資料夾 " + total_show_empty_folder_cnt.ToString() + " 個\n";
+                result_str += "共找到空資料夾 " + total_show_empty_folder_cnt.ToString() + " 個\n";
             }
             if (checkBox10.Checked == true)
             {
-                richTextBox1.Text += "共刪除空資料夾 " + total_delete_empty_folder_cnt.ToString() + " 個\n";
+                result_str += "共刪除空資料夾 " + total_delete_empty_folder_cnt.ToString() + " 個\n";
             }
+            richTextBox1.Text += result_str;
         }
 
         // Process all files in the directory passed in, recurse on any directories 
@@ -159,7 +168,7 @@ namespace vcs_Remove_Bin_Obj
                         {
                             if (checkBox4.Checked == true)
                             {
-                                richTextBox1.Text += fileName + "\n";   //僅顯示
+                                result_str += fileName + "\n";   //僅顯示
                             }
                             if (checkBox2.Checked == true)
                             {
@@ -170,7 +179,7 @@ namespace vcs_Remove_Bin_Obj
                         {
                             if (checkBox7.Checked == true)
                             {
-                                richTextBox1.Text += fileName + "\n";   //僅顯示
+                                result_str += fileName + "\n";   //僅顯示
                             }
                             if (checkBox8.Checked == true)
                             {
@@ -185,47 +194,47 @@ namespace vcs_Remove_Bin_Obj
                     Array.Sort(subdirectoryEntries);
                     foreach (string subdirectory in subdirectoryEntries)
                     {
-                        //richTextBox1.Text += "subdirectory = " + subdirectory + "\n";
+                        //result_str += "subdirectory = " + subdirectory + "\n";
 
                         if (subdirectory.EndsWith("\\bin"))
                         {
                             if (checkBox3.Checked == true)
-                                richTextBox1.Text += subdirectory + "\n";
+                                result_str += subdirectory + "\n";
                             if (checkBox1.Checked == true)
                                 folder_name.Add(subdirectory);
                         }
                         else if (subdirectory.EndsWith("\\obj"))
                         {
                             if (checkBox3.Checked == true)
-                                richTextBox1.Text += subdirectory + "\n";
+                                result_str += subdirectory + "\n";
                             if (checkBox1.Checked == true)
                                 folder_name.Add(subdirectory);
                         }
                         else if (subdirectory.EndsWith("\\.vs"))
                         {
                             if (checkBox3.Checked == true)
-                                richTextBox1.Text += subdirectory + "\n";
+                                result_str += subdirectory + "\n";
                             if (checkBox1.Checked == true)
                                 folder_name.Add(subdirectory);
                         }
                         else if (subdirectory.EndsWith("\\x64"))
                         {
                             if (checkBox3.Checked == true)
-                                richTextBox1.Text += subdirectory + "\n";
+                                result_str += subdirectory + "\n";
                             if (checkBox1.Checked == true)
                                 folder_name.Add(subdirectory);
                         }
                         else if ((subdirectory.EndsWith("\\_UpgradeReport_Files")) || (subdirectory.EndsWith("Backup")))
                         {
                             if (checkBox7.Checked == true)
-                                richTextBox1.Text += subdirectory + "\n";   //僅顯示
+                                result_str += subdirectory + "\n";   //僅顯示
                             if (checkBox8.Checked == true)
                                 folder_name.Add(subdirectory);              //加入刪除準備
                         }
                         else if (subdirectory.EndsWith("\\Debug"))
                         {
                             if (checkBox3.Checked == true)
-                                richTextBox1.Text += subdirectory + "\n";
+                                result_str += subdirectory + "\n";
                             if (checkBox1.Checked == true)
                                 folder_name.Add(subdirectory);
                         }
@@ -235,27 +244,27 @@ namespace vcs_Remove_Bin_Obj
                 }
                 catch (UnauthorizedAccessException ex)
                 {
-                    richTextBox1.Text += ex.Message + "\n";
+                    result_str += ex.Message + "\n";
                 }
                 if ((file_cnt == 0) && (dir_cnt == 0))
                 {
                     if (checkBox9.Checked == true)
                     {
-                        richTextBox1.Text += targetDirectory + "是一個空資料夾\n";
+                        result_str += targetDirectory + "是一個空資料夾\n";
                         total_show_empty_folder_cnt++;
                     }
                     if (checkBox10.Checked == true)
                     {
-                        //richTextBox1.Text += "刪除 : " + targetDirectory + "是一個空資料夾\n";
+                        //result_str += "刪除 : " + targetDirectory + "是一個空資料夾\n";
                         Directory.Delete(targetDirectory, false);   //not recurrsive
-                        richTextBox1.Text += "已刪除資料夾 : " + targetDirectory + "\n";
+                        result_str += "已刪除資料夾 : " + targetDirectory + "\n";
                         total_delete_empty_folder_cnt++;
                     }
                 }
             }
             catch (IOException e)
             {
-                richTextBox1.Text += "IOException, " + e.GetType().Name + "\n";
+                result_str += "IOException, " + e.GetType().Name + "\n";
             }
         }
 
@@ -268,17 +277,17 @@ namespace vcs_Remove_Bin_Obj
             int i;
             int len;
             len = folder_name.Count;
-            richTextBox1.Text += "欲刪除個數 : " + len + "\n";
+            result_str += "欲刪除個數 : " + len + "\n";
             for (i = 0; i < len; i++)
             {
-                //richTextBox1.Text += "資料夾 : " + folder_name[i] + "\n";
+                //result_str += "資料夾 : " + folder_name[i] + "\n";
 
                 if (folder_name[i].Contains("bin"))
                 {
                     //需要跳過的資料夾
                     if (folder_name[i].Contains("xxxxxxxxxxxxxxxx"))
                     {
-                        richTextBox1.Text += "iiiiiiiiiiiiiiiiiiiii\n";
+                        result_str += "iiiiiiiiiiiiiiiiiiiii\n";
                         continue;
                     }
                     else if ((folder_name[i].Contains("libemgucv")) && (!folder_name[i].Contains("Emgu.CV.Example")))
@@ -325,7 +334,7 @@ namespace vcs_Remove_Bin_Obj
                     //需要跳過的資料夾
                     if (folder_name[i].Contains("_3.cuda") == true)
                     {
-                        richTextBox1.Text += "跳過......\n";
+                        result_str += "跳過......\n";
                         //continue;
                     }
                 }
@@ -348,7 +357,7 @@ namespace vcs_Remove_Bin_Obj
                     continue;
                 }
 
-                //richTextBox1.Text += "刪除 : " + folder_name[i] + "\n";
+                //result_str += "刪除 : " + folder_name[i] + "\n";
 
                 if (Directory.Exists(folder_name[i]))     //確認資料夾是否存在
                 {
@@ -356,11 +365,11 @@ namespace vcs_Remove_Bin_Obj
                     {
                         Directory.Delete(folder_name[i], true);   //recurrsive
                         //Directory.Delete(folder_name[i], false);   //not recurrsive
-                        richTextBox1.Text += "已刪除資料夾" + folder_name[i] + "\n";
+                        result_str += "已刪除資料夾" + folder_name[i] + "\n";
                     }
                     catch
                     {
-                        richTextBox1.Text += "無法刪除資料夾" + folder_name[i] + "\n";
+                        result_str += "無法刪除資料夾" + folder_name[i] + "\n";
                         flag_rename_fail = true;
                     }
                 }
@@ -369,17 +378,17 @@ namespace vcs_Remove_Bin_Obj
                     try
                     {
                         File.Delete(folder_name[i]);
-                        richTextBox1.Text += "已刪除檔案" + folder_name[i] + "\n";
+                        result_str += "已刪除檔案" + folder_name[i] + "\n";
                     }
                     catch
                     {
-                        richTextBox1.Text += "無法刪除檔案" + folder_name[i] + "\n";
+                        result_str += "無法刪除檔案" + folder_name[i] + "\n";
                         flag_rename_fail = true;
                     }
                 }
                 else
                 {
-                    richTextBox1.Text += "資料夾或檔案: " + folder_name[i] + " 不存在，不能刪除\n";
+                    result_str += "資料夾或檔案: " + folder_name[i] + " 不存在，不能刪除\n";
                     flag_rename_fail = true;
                 }
             }
@@ -395,7 +404,8 @@ namespace vcs_Remove_Bin_Obj
 
         private void button3_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "檔名簡中轉正中\nTBD";
+            result_str = "";
+            result_str += "檔名簡中轉正中\nTBD";
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -411,24 +421,24 @@ namespace vcs_Remove_Bin_Obj
 
             if (Directory.Exists(foldername) == true)    //確認資料夾是否存在
             {
-                richTextBox1.Text += "資料夾: " + foldername + " 存在\n";
+                result_str += "資料夾: " + foldername + " 存在\n";
 
                 filenames = Directory.GetFiles(foldername); //獲得文件夾目錄下所有文件全路徑
                 foreach (string filename in filenames)
                 {
                     if ((filename.Contains("freeglut.dll") == false) && (filename.Contains("glew64.dll") == false))
                     {
-                        richTextBox1.Text += "remove : " + filename + "\n";
+                        result_str += "remove : " + filename + "\n";
                         if (File.Exists(filename))  //確認檔案是否存在
                         {
                             try
                             {
                                 File.Delete(filename);
-                                richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                                result_str += "已刪除檔案" + filename + "\n";
                             }
                             catch
                             {
-                                richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                                result_str += "無法刪除檔案" + filename + "\n";
                             }
                         }
                     }
@@ -439,24 +449,24 @@ namespace vcs_Remove_Bin_Obj
 
             if (Directory.Exists(foldername) == true)    //確認資料夾是否存在
             {
-                richTextBox1.Text += "資料夾: " + foldername + " 存在\n";
+                result_str += "資料夾: " + foldername + " 存在\n";
 
                 filenames = Directory.GetFiles(foldername); //獲得文件夾目錄下所有文件全路徑
                 foreach (string filename in filenames)
                 {
                     if ((filename.Contains("freeglut.dll") == false) && (filename.Contains("glew64.dll") == false))
                     {
-                        richTextBox1.Text += "remove : " + filename + "\n";
+                        result_str += "remove : " + filename + "\n";
                         if (File.Exists(filename))  //確認檔案是否存在
                         {
                             try
                             {
                                 File.Delete(filename);
-                                richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                                result_str += "已刪除檔案" + filename + "\n";
                             }
                             catch
                             {
-                                richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                                result_str += "無法刪除檔案" + filename + "\n";
                             }
                         }
                     }
@@ -467,24 +477,24 @@ namespace vcs_Remove_Bin_Obj
 
             if (Directory.Exists(foldername) == true)    //確認資料夾是否存在
             {
-                richTextBox1.Text += "資料夾: " + foldername + " 存在\n";
+                result_str += "資料夾: " + foldername + " 存在\n";
 
                 filenames = Directory.GetFiles(foldername); //獲得文件夾目錄下所有文件全路徑
                 foreach (string filename in filenames)
                 {
                     if ((filename.Contains("freeglut.dll") == false) && (filename.Contains("glew64.dll") == false))
                     {
-                        richTextBox1.Text += "remove : " + filename + "\n";
+                        result_str += "remove : " + filename + "\n";
                         if (File.Exists(filename))  //確認檔案是否存在
                         {
                             try
                             {
                                 File.Delete(filename);
-                                richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                                result_str += "已刪除檔案" + filename + "\n";
                             }
                             catch
                             {
-                                richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                                result_str += "無法刪除檔案" + filename + "\n";
                             }
                         }
                     }
@@ -494,13 +504,13 @@ namespace vcs_Remove_Bin_Obj
             foldername = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\libemgucv-windows-x64-2.3.0.1416\bin";
             if (Directory.Exists(foldername) == true)    //確認資料夾是否存在
             {
-                richTextBox1.Text += "資料夾: " + foldername + " 存在\n";
+                result_str += "資料夾: " + foldername + " 存在\n";
 
                 //filenames = Directory.GetFiles(foldername); //獲得文件夾目錄下所有文件全路徑
                 filenames = Directory.GetFiles(foldername, "*.exe"); //獲得文件夾目錄下指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
-                    richTextBox1.Text += "remove : " + filename + "\n";
+                    result_str += "remove : " + filename + "\n";
 
                     if (filename.Contains("opencv"))
                         continue;
@@ -514,11 +524,11 @@ namespace vcs_Remove_Bin_Obj
                         try
                         {
                             File.Delete(filename);
-                            richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                            result_str += "已刪除檔案" + filename + "\n";
                         }
                         catch
                         {
-                            richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                            result_str += "無法刪除檔案" + filename + "\n";
                         }
                     }
                 }
@@ -526,7 +536,7 @@ namespace vcs_Remove_Bin_Obj
                 filenames = Directory.GetFiles(foldername, "*.pdb"); //獲得文件夾目錄下指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
-                    richTextBox1.Text += "remove : " + filename + "\n";
+                    result_str += "remove : " + filename + "\n";
 
                     if (filename.Contains("opencv"))
                         continue;
@@ -540,11 +550,11 @@ namespace vcs_Remove_Bin_Obj
                         try
                         {
                             File.Delete(filename);
-                            richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                            result_str += "已刪除檔案" + filename + "\n";
                         }
                         catch
                         {
-                            richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                            result_str += "無法刪除檔案" + filename + "\n";
                         }
                     }
                 }
@@ -552,7 +562,7 @@ namespace vcs_Remove_Bin_Obj
                 filenames = Directory.GetFiles(foldername, "*.manifest"); //獲得文件夾目錄下指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
-                    richTextBox1.Text += "remove : " + filename + "\n";
+                    result_str += "remove : " + filename + "\n";
 
                     if (filename.Contains("opencv"))
                         continue;
@@ -566,11 +576,11 @@ namespace vcs_Remove_Bin_Obj
                         try
                         {
                             File.Delete(filename);
-                            richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                            result_str += "已刪除檔案" + filename + "\n";
                         }
                         catch
                         {
-                            richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                            result_str += "無法刪除檔案" + filename + "\n";
                         }
                     }
                 }
@@ -578,7 +588,7 @@ namespace vcs_Remove_Bin_Obj
                 filenames = Directory.GetFiles(foldername, "*.txt"); //獲得文件夾目錄下指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
-                    richTextBox1.Text += "remove : " + filename + "\n";
+                    result_str += "remove : " + filename + "\n";
 
                     if (filename.Contains("opencv"))
                         continue;
@@ -592,11 +602,11 @@ namespace vcs_Remove_Bin_Obj
                         try
                         {
                             File.Delete(filename);
-                            richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                            result_str += "已刪除檔案" + filename + "\n";
                         }
                         catch
                         {
-                            richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                            result_str += "無法刪除檔案" + filename + "\n";
                         }
                     }
                 }
@@ -604,7 +614,7 @@ namespace vcs_Remove_Bin_Obj
                 filenames = Directory.GetFiles(foldername, "*.config"); //獲得文件夾目錄下指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
-                    richTextBox1.Text += "remove : " + filename + "\n";
+                    result_str += "remove : " + filename + "\n";
 
                     if (filename.Contains("opencv"))
                         continue;
@@ -618,11 +628,11 @@ namespace vcs_Remove_Bin_Obj
                         try
                         {
                             File.Delete(filename);
-                            richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                            result_str += "已刪除檔案" + filename + "\n";
                         }
                         catch
                         {
-                            richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                            result_str += "無法刪除檔案" + filename + "\n";
                         }
                     }
                 }
@@ -630,7 +640,7 @@ namespace vcs_Remove_Bin_Obj
                 filenames = Directory.GetFiles(foldername, "*.jpg"); //獲得文件夾目錄下指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
-                    richTextBox1.Text += "remove : " + filename + "\n";
+                    result_str += "remove : " + filename + "\n";
 
                     if (filename.Contains("opencv"))
                         continue;
@@ -644,11 +654,11 @@ namespace vcs_Remove_Bin_Obj
                         try
                         {
                             File.Delete(filename);
-                            richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                            result_str += "已刪除檔案" + filename + "\n";
                         }
                         catch
                         {
-                            richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                            result_str += "無法刪除檔案" + filename + "\n";
                         }
                     }
                 }
@@ -658,13 +668,13 @@ namespace vcs_Remove_Bin_Obj
 
             if (Directory.Exists(foldername) == true)    //確認資料夾是否存在
             {
-                richTextBox1.Text += "資料夾: " + foldername + " 存在\n";
+                result_str += "資料夾: " + foldername + " 存在\n";
 
                 //filenames = Directory.GetFiles(foldername); //獲得文件夾目錄下所有文件全路徑
                 filenames = Directory.GetFiles(foldername, "*.exe"); //獲得文件夾目錄下指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
-                    richTextBox1.Text += "remove : " + filename + "\n";
+                    result_str += "remove : " + filename + "\n";
 
                     if (filename.Contains("opencv"))
                         continue;
@@ -678,11 +688,11 @@ namespace vcs_Remove_Bin_Obj
                         try
                         {
                             File.Delete(filename);
-                            richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                            result_str += "已刪除檔案" + filename + "\n";
                         }
                         catch
                         {
-                            richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                            result_str += "無法刪除檔案" + filename + "\n";
                         }
                     }
                 }
@@ -690,7 +700,7 @@ namespace vcs_Remove_Bin_Obj
                 filenames = Directory.GetFiles(foldername, "*.pdb"); //獲得文件夾目錄下指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
-                    richTextBox1.Text += "remove : " + filename + "\n";
+                    result_str += "remove : " + filename + "\n";
 
                     if (filename.Contains("opencv"))
                         continue;
@@ -704,11 +714,11 @@ namespace vcs_Remove_Bin_Obj
                         try
                         {
                             File.Delete(filename);
-                            richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                            result_str += "已刪除檔案" + filename + "\n";
                         }
                         catch
                         {
-                            richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                            result_str += "無法刪除檔案" + filename + "\n";
                         }
                     }
                 }
@@ -716,7 +726,7 @@ namespace vcs_Remove_Bin_Obj
                 filenames = Directory.GetFiles(foldername, "*.manifest"); //獲得文件夾目錄下指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
-                    richTextBox1.Text += "remove : " + filename + "\n";
+                    result_str += "remove : " + filename + "\n";
 
                     if (filename.Contains("opencv"))
                         continue;
@@ -730,11 +740,11 @@ namespace vcs_Remove_Bin_Obj
                         try
                         {
                             File.Delete(filename);
-                            richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                            result_str += "已刪除檔案" + filename + "\n";
                         }
                         catch
                         {
-                            richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                            result_str += "無法刪除檔案" + filename + "\n";
                         }
                     }
                 }
@@ -742,7 +752,7 @@ namespace vcs_Remove_Bin_Obj
                 filenames = Directory.GetFiles(foldername, "*.txt"); //獲得文件夾目錄下指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
-                    richTextBox1.Text += "remove : " + filename + "\n";
+                    result_str += "remove : " + filename + "\n";
 
                     if (filename.Contains("opencv"))
                         continue;
@@ -756,11 +766,11 @@ namespace vcs_Remove_Bin_Obj
                         try
                         {
                             File.Delete(filename);
-                            richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                            result_str += "已刪除檔案" + filename + "\n";
                         }
                         catch
                         {
-                            richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                            result_str += "無法刪除檔案" + filename + "\n";
                         }
                     }
                 }
@@ -769,7 +779,7 @@ namespace vcs_Remove_Bin_Obj
                 filenames = Directory.GetFiles(foldername, "*.config"); //獲得文件夾目錄下指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
-                    richTextBox1.Text += "remove : " + filename + "\n";
+                    result_str += "remove : " + filename + "\n";
 
                     if (filename.Contains("opencv"))
                         continue;
@@ -783,11 +793,11 @@ namespace vcs_Remove_Bin_Obj
                         try
                         {
                             File.Delete(filename);
-                            richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                            result_str += "已刪除檔案" + filename + "\n";
                         }
                         catch
                         {
-                            richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                            result_str += "無法刪除檔案" + filename + "\n";
                         }
                     }
                 }
@@ -795,7 +805,7 @@ namespace vcs_Remove_Bin_Obj
                 filenames = Directory.GetFiles(foldername, "*.jpg"); //獲得文件夾目錄下指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
-                    richTextBox1.Text += "remove : " + filename + "\n";
+                    result_str += "remove : " + filename + "\n";
 
                     if (filename.Contains("opencv"))
                         continue;
@@ -809,11 +819,11 @@ namespace vcs_Remove_Bin_Obj
                         try
                         {
                             File.Delete(filename);
-                            richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                            result_str += "已刪除檔案" + filename + "\n";
                         }
                         catch
                         {
-                            richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                            result_str += "無法刪除檔案" + filename + "\n";
                         }
                     }
                 }
@@ -832,11 +842,11 @@ namespace vcs_Remove_Bin_Obj
                     try
                     {
                         File.Delete(filename);
-                        richTextBox1.Text += "已刪除檔案" + delete_filenames + "\n";
+                        result_str += "已刪除檔案" + delete_filenames + "\n";
                     }
                     catch
                     {
-                        richTextBox1.Text += "無法刪除檔案" + delete_filenames + "\n";
+                        result_str += "無法刪除檔案" + delete_filenames + "\n";
                     }
                 }
             }
@@ -851,7 +861,7 @@ namespace vcs_Remove_Bin_Obj
             }
             else
             {
-                richTextBox1.Text += "尚未選擇\n";
+                result_str += "尚未選擇\n";
             }
         }
     }

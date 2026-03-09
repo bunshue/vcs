@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using System.Collections;
 
 namespace xCh5_1_3_11
@@ -22,14 +23,15 @@ namespace xCh5_1_3_11
         {
             // 新增ListBox物件的選項
             checkedListBox1.Items.AddRange(
-                 new object[] { 
-                    "滑鼠", 
-                    "鍵盤", 
-                    "網卡", 
-                    "螢幕", 
-                    "音效卡", 
-                    "數據機", 
-                    "外接硬碟"                   
+                new object[]
+                { 
+                    "滑鼠",
+                    "鍵盤",
+                    "網卡",
+                    "螢幕",
+                    "音效卡",
+                    "數據機",
+                    "外接硬碟"
                 });
             checkedListBox1.MultiColumn = true;
             checkedListBox1.ColumnWidth = 80;
@@ -51,7 +53,6 @@ namespace xCh5_1_3_11
             foreach (object itemChecked in checkedListBox1.CheckedItems)
             {
                 result = "被勾選的項目是\"" + itemChecked.ToString() + "\"勾選的狀態是->" + checkedListBox1.GetItemCheckState(checkedListBox1.Items.IndexOf(itemChecked)).ToString();
-
                 textBox1.AppendText(result + '\n');
             }
         }

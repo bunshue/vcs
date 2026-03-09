@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace xCh5_2_3_11
+namespace vcs_ProgressBar
 {
     static class Program
     {

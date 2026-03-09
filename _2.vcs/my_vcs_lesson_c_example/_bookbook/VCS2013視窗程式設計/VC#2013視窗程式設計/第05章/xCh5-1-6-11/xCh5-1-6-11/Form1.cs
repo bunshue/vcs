@@ -103,10 +103,10 @@ namespace xCh5_1_6_11
             //建構ImageList物件
             ImageList myImageList = new ImageList();
             myImageList.ImageSize = new Size(32, 32);
-            myImageList.Images.Add(Image.FromFile(@"c:\user_red32x32.png"));
-            myImageList.Images.Add(Image.FromFile(@"c:\user32x32.png"));
-            myImageList.Images.Add(Image.FromFile(@"c:\frai32x32.png"));
-            myImageList.Images.Add(Image.FromFile(@"c:\leela32x32.png"));
+            myImageList.Images.Add(Image.FromFile(@"d:\user_red32x32.png"));
+            myImageList.Images.Add(Image.FromFile(@"d:\user32x32.png"));
+            myImageList.Images.Add(Image.FromFile(@"d:\frai32x32.png"));
+            myImageList.Images.Add(Image.FromFile(@"d:\leela32x32.png"));
 
             // 將ImageList物件設定TreeView的ImageList屬性
             treeView1.ImageList = myImageList;

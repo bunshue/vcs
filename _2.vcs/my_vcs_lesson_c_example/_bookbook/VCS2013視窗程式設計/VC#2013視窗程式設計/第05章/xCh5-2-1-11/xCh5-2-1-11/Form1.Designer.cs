@@ -38,9 +38,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(10, 39);
+            this.button1.Location = new System.Drawing.Point(10, 56);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(75, 43);
             this.button1.TabIndex = 5;
             this.button1.Text = "設定";
             this.button1.UseVisualStyleBackColor = true;
@@ -66,9 +66,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(172, 39);
+            this.button3.Location = new System.Drawing.Point(172, 56);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(75, 43);
             this.button3.TabIndex = 7;
             this.button3.Text = "全部移除";
             this.button3.UseVisualStyleBackColor = true;
@@ -76,9 +76,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(91, 39);
+            this.button2.Location = new System.Drawing.Point(91, 56);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(75, 43);
             this.button2.TabIndex = 6;
             this.button2.Text = "取得";
             this.button2.UseVisualStyleBackColor = true;

@@ -19,7 +19,7 @@ namespace xCh5_2_2_11
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            notifyIcon1.Icon = new Icon(@"c:\Vista_icons_06.ico");
+            notifyIcon1.Icon = new Icon(@"D:\home.ico");
             notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
             notifyIcon1.BalloonTipTitle = "NotifyIcon範例程式";
             notifyIcon1.BalloonTipText = "雙擊圖示，秀出應用程式";
@@ -41,12 +41,7 @@ namespace xCh5_2_2_11
         private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
         {
             // 滑鼠點擊後，才會出現
-            notifyIcon1.ShowBalloonTip(
-                1000,
-                "我的應用程式",
-                "雙擊圖示，秀出應用程式",
-                ToolTipIcon.Info
-                );
+            notifyIcon1.ShowBalloonTip(1000, "我的應用程式", "雙擊圖示，秀出應用程式", ToolTipIcon.Info);
         }
     }
 }

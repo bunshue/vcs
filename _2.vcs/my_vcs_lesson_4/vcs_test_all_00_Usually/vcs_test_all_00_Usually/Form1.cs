@@ -106,7 +106,6 @@ namespace vcs_test_all_00_Usually
             bitmap1 = (Bitmap)Bitmap.FromFile(filename);
             pictureBox1.Image = bitmap1;
 
-
             /*
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式

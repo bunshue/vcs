@@ -58,21 +58,22 @@ namespace xCh5_2_1_21
                 e.DrawBackground();
 
                 // 繪製3 D的框
-                e.Graphics.DrawLines(SystemPens.ControlLightLight, new Point[] {
+                e.Graphics.DrawLines(SystemPens.ControlLightLight, new Point[]
+                {
                     new Point (0, e.Bounds.Height - 1), 
                     new Point (0, 0), 
                     new Point (e.Bounds.Width - 1, 0)
                 });
-                e.Graphics.DrawLines(SystemPens.ControlDarkDark, new Point[] {
+
+                e.Graphics.DrawLines(SystemPens.ControlDarkDark, new Point[]
+                {
                     new Point (0, e.Bounds.Height - 1), 
                     new Point (e.Bounds.Width - 1, e.Bounds.Height - 1), 
                     new Point (e.Bounds.Width - 1, 0)
                 });
 
                 // 客製化文字的格式
-                TextFormatFlags sf = TextFormatFlags.VerticalCenter |
-                                     TextFormatFlags.HorizontalCenter |
-                                     TextFormatFlags.NoFullWidthCharacterBreak;
+                TextFormatFlags sf = TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter | TextFormatFlags.NoFullWidthCharacterBreak;
 
                 // 繪製文字
                 e.DrawText(sf);

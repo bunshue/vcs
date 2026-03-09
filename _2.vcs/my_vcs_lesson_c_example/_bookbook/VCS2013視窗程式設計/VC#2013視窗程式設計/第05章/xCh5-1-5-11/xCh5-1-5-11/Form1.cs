@@ -21,11 +21,8 @@ namespace xCh5_1_5_11
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //建構ListView
 
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
             // 建立ListView 控制項，並指定其位置與大小
             listView1 = new ListView();
             listView1.Bounds = new Rectangle(new Point(10, 10), new Size(300, 180));
@@ -52,12 +49,12 @@ namespace xCh5_1_5_11
             ImageList imageListLarge = new ImageList();
 
             // 加入圖像
-            imageListSmall.Images.Add(Bitmap.FromFile("C:\\leela32x32.png"));
-            imageListSmall.Images.Add(Bitmap.FromFile("C:\\user32x32.png"));
-            imageListSmall.Images.Add(Bitmap.FromFile("C:\\frai32x32.png"));
-            imageListLarge.Images.Add(Bitmap.FromFile("C:\\leela48x48.png"));
-            imageListLarge.Images.Add(Bitmap.FromFile("C:\\user48x48.png"));
-            imageListLarge.Images.Add(Bitmap.FromFile("C:\\frai48x48.png"));
+            imageListSmall.Images.Add(Bitmap.FromFile("d:\\leela32x32.png"));
+            imageListSmall.Images.Add(Bitmap.FromFile("d:\\user32x32.png"));
+            imageListSmall.Images.Add(Bitmap.FromFile("d:\\frai32x32.png"));
+            //imageListLarge.Images.Add(Bitmap.FromFile("d:\\leela48x48.png"));
+            //imageListLarge.Images.Add(Bitmap.FromFile("d:\\user48x48.png"));
+            //imageListLarge.Images.Add(Bitmap.FromFile("d:\\frai48x48.png"));
 
             // 設定圖像的大小分別是32x32及48x48
             imageListSmall.ImageSize = new Size(32, 32);
@@ -111,8 +108,6 @@ namespace xCh5_1_5_11
 
             // Add the ListView to the control collection.
             this.Controls.Add(listView1);
-
-            button1.Enabled = false;
         }
 
         private void listView1_SelectedIndexChanged(object sender, System.EventArgs e)

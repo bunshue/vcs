@@ -61,7 +61,7 @@ namespace xCh5_1_4_21
                     break;
                 }
             }
-            MessageBox.Show("共有 " + count.ToString() + " 筆的 " + textBox1.Text, "FindString()方法", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            richTextBox1.Text += "共有 : " + count.ToString() + " 筆的 " + textBox1.Text + "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -88,15 +88,14 @@ namespace xCh5_1_4_21
                 count += 1;
                 resultIndex = comboBox1.FindStringExact(selectedEmployee, resultIndex);
             }
-
-            MessageBox.Show("共有 " + count.ToString() + " 筆的 " + selectedEmployee + "被移除", "FindStringExact()方法", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            richTextBox1.Text += "共有 " + count.ToString() + " 筆的 " + selectedEmployee + "被移除\n";
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             int selectedIndex = comboBox1.SelectedIndex;
             Object selectedItem = comboBox1.SelectedItem;
-            MessageBox.Show("被選取的項目是： " + selectedItem.ToString() + "\n" + "其索引值為：" + selectedIndex.ToString(), "SelectedIndexChanged事件", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            richTextBox1.Text += "被選取的項目是： " + selectedItem.ToString() + "\n" + "其索引值為：" + selectedIndex.ToString() + "\n";
         }
     }
 }

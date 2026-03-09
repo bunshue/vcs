@@ -7,11 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-/*
-DomainUpDown 表示會顯示字串值的 Windows 微調方塊 (也稱為上下按鈕控制項)。
-*/
 
-namespace vcs_NumericUpDown
+namespace vcs_ProgressBar
 {
     public partial class Form1 : Form
     {
@@ -24,23 +21,19 @@ namespace vcs_NumericUpDown
         {
             show_item_location();
 
-            richTextBox1.Text += "建立 DomainUpDown 內容\n";
-            domainUpDown1.Items.Add("Mouse");
-            domainUpDown1.Items.Add("Ox");
-            domainUpDown1.Items.Add("Tiger");
-            domainUpDown1.Items.Add("Rabbit");
-            domainUpDown1.Items.Add("Dragon");
+            // 設定進度列的最大值與最小值
+            progressBar0.Maximum = 100;
+            progressBar0.Minimum = 0;
 
-            //是否排序
-            //domainUpDown1.Sorted = true;
-            //是否循環切換
-            //domainUpDown1.Wrap = true;
-            //是否鍵盤選值
-            //domainUpDown1.InterceptArrowKeys = true;
+            // 設定Timer每一秒鐘會執行Tick事件一次
+            timer1.Interval = 1000;
 
-            domainUpDown1.SelectedIndex = 0;
-
-            richTextBox1.Text += "目前共有 " + domainUpDown1.Items.Count + " 個選項\n";
+            // 跑馬燈式的進度列會一直有動畫，
+            // 為避免誤解，當進度為0時，將其樣式更改為Block
+            if (progressBar0.Minimum == 0)
+            {
+                progressBar0.Style = ProgressBarStyle.Blocks;
+            }
         }
 
         void show_item_location()
@@ -57,14 +50,13 @@ namespace vcs_NumericUpDown
             dy = 150 + 20;
 
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
 
             richTextBox1.Size = new Size(620, 400);
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(680, 650);
-            this.Text = "vcs_NumericUpDown";
+            this.Text = "vcs_ProgressBar";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
@@ -76,38 +68,34 @@ namespace vcs_NumericUpDown
             richTextBox1.Clear();
         }
 
-        //------------------------------------------------------------  # 60個
-
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        private void bt_start_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "目前數量 : " + numericUpDown1.Value + "\n";
+            progressBar0.Style = ProgressBarStyle.Marquee;
+            timer1.Start();
         }
 
-        private void bt_plus_Click(object sender, EventArgs e)
+        private void bt_stop_Click(object sender, EventArgs e)
         {
-            numericUpDown1.UpButton();
+            timer1.Stop();
         }
 
-        private void bt_minus_Click(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
-            numericUpDown1.DownButton();
+            if (progressBar0.Value >= progressBar0.Maximum)
+            {
+                timer1.Stop();
+                lb_status0.Text = "完成";
+                progressBar0.Value = 0;
+                progressBar0.Style = ProgressBarStyle.Blocks;
+            }
+            else
+            {
+                progressBar0.Value += 10;
+                lb_status0.Text = progressBar0.Value.ToString() + "%";
+            }
         }
-
-        //------------------------------------------------------------  # 60個
-
-        private void domainUpDown1_SelectedItemChanged(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "Index : " + domainUpDown1.SelectedIndex.ToString() + "\t" + "內容 : " + domainUpDown1.SelectedItem.ToString() + "\n";
-            richTextBox1.Text += "目前選到的是：" + domainUpDown1.Text + "\n";
-            richTextBox1.Text += "目前選到的是：" + (string)domainUpDown1.SelectedItem + "\n";
-
-        }
-
-        //------------------------------------------------------------  # 60個
-
     }
 }
-
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
