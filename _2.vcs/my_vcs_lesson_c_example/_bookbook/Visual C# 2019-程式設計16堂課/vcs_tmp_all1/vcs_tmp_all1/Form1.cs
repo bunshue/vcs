@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
-//using System.Drawing.Printing;
 
 namespace vcs_tmp_all1
 {
@@ -45,28 +44,9 @@ namespace vcs_tmp_all1
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
             richTextBox1.Size = new Size(400, 690);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
@@ -116,8 +96,7 @@ namespace vcs_tmp_all1
                 DirectoryInfo currentDir = new
                    DirectoryInfo(path2);
                 //從指定路徑傳回指定的檔案類型
-                FileInfo[] listFile =
-                   currentDir.GetFiles("*.txt");
+                FileInfo[] listFile = currentDir.GetFiles("*.txt");
                 //設定檔案的標題
                 //string header = fnShow + "\n" + $"{"檔名",-16}{"檔案長度",-12}{"修改日期"}" + "\n";
                 string header = fnShow + "\n" + "檔名" + "檔案長度" + "修改日期" + "\n";
@@ -139,7 +118,6 @@ namespace vcs_tmp_all1
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -151,8 +129,6 @@ namespace vcs_tmp_all1
             //以Create方法新增一個檔案
             FileStream fs = createFile.Create();
             fs.Close();//關閉檔案
-
-
 
             //複製檔案
             path = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\Visual C# 2019-程式設計16堂課\Sample\Demo.txt";
@@ -190,22 +166,20 @@ namespace vcs_tmp_all1
             FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
             StreamWriter sw = new StreamWriter(fs, Encoding.Unicode);
 
-            //WriteLine("請輸入想儲存的文字");
+            //想儲存的文字
             str = "aaaaaaaaa";
             sw.WriteLine(str);  //將資料寫入檔案
             sw.Close();   //關閉sw資料流
-            //WriteLine("檔案內所輸入的文字為");
 
+            //檔案內所輸入的文字為
             FileStream f = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Read);
             StreamReader sr = new StreamReader(f, Encoding.Unicode);
             sr.BaseStream.Seek(0, SeekOrigin.Begin);
             while (sr.Peek() > -1)
             {
-                //WriteLine(sr.ReadLine());//讀出檔案
+                richTextBox1.Text += sr.ReadLine() + "\n";//讀出檔案
             }
             sr.Close();  //關閉資料流
-            //ReadKey();
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -222,18 +196,17 @@ namespace vcs_tmp_all1
                 }
                 else
                 {
-                    //WriteLine($"資料夾建立的時間：\n{dt}");
+                    richTextBox1.Text += "資料夾建立的時間 : " + dt + "\n";
                 }
                 //更新時間
                 Directory.SetLastWriteTime(path, DateTime.Now);
                 dt = Directory.GetLastWriteTime(path);
-                //WriteLine($"\n最後存取時間：\n{dt}");
+                richTextBox1.Text += "最後存取時間 : " + dt + "\n";
             }
             catch (Exception ex)
             {
-                //WriteLine($"無法建立:{e.ToString()}");
+                richTextBox1.Text += "無法建立 : " + e.ToString() + "\n";
             }
-            //ReadKey();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -252,22 +225,20 @@ namespace vcs_tmp_all1
                 string sign = new string('-', 37);
                 string fnName = "檔名", fnLength = "檔案長度";
                 string fnDate = "修改日期";
-                //string header = fnShow + $"{fnName,-12}{fnLength,-8}{fnDate,-11}";
-
-                //WriteLine(header);
-                //WriteLine(sign);
+                string header = fnShow + "\t" + fnName + "\t" + fnLength + "\t" + fnDate + "\n";
+                richTextBox1.Text += header + "\n";
+                richTextBox1.Text += sign + "\n";
 
                 foreach (FileInfo getInfo in listFile)
                 {
                     string dt = getInfo.LastWriteTime.ToShortDateString();
-                    //WriteLine($"{getInfo.Name,-15}" + $"{getInfo.Length.ToString(),-10} {dt}");
+                    richTextBox1.Text += getInfo.Name + "\t" + getInfo.Length.ToString() + "\t" + dt + "\n";
                 }
             }
             catch (Exception ex)
             {
-                //WriteLine($"無此資料夾: {ex.Message}");
+                richTextBox1.Text += "無此資料夾 : " + ex.Message + "\n";
             }
-            //ReadKey();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -275,9 +246,8 @@ namespace vcs_tmp_all1
             BinaryReader readBit;
             FileStream objStream;
             //設定欲讀取檔案的路徑
-            string path = @"D:\C#Lab\CH15\CH1506\005.jpg";
-            //讀取範例CH1507寫入的二進位檔 Demo03.txt
-            //string path = @"D:\C#Lab\Demo03.txt";
+            string path = @"D:\_git\vcs\_1.data\______test_files1\__RW\_bin\vcs_ReadWrite_BIN.bin";
+
             int count = 0;
             try
             {
@@ -289,12 +259,12 @@ namespace vcs_tmp_all1
                     do
                     {
                         //以位元組為單位讀取檔案內容，16進位方式顯示
-                        //Write($"{readBit.ReadByte(),2:X}");
+                        richTextBox1.Text += readBit.ReadByte().ToString() + " ";
                         count += 1;
                         //'** 換行
                         if (count == 10)
                         {
-                            //WriteLine();
+                            richTextBox1.Text += "\n";
                             count = 0;
                         }
                     } while (true);
@@ -302,76 +272,73 @@ namespace vcs_tmp_all1
             }
             catch (IndexOutOfRangeException ex)
             {
-                //WriteLine("沒有指定檔案");
+                richTextBox1.Text += "沒有指定檔案\n";
             }
 
             catch (EndOfStreamException ex)
             {
-                //WriteLine("\n檔案讀取完畢");
+                richTextBox1.Text += "檔案讀取完畢\n";
             }
 
             catch (Exception ex)
             {
-                //WriteLine(e.Message);
+                richTextBox1.Text += ex.Message + "\n";
             }
-            //ReadKey();
-
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
             BinaryWriter objWriter;
             FileStream objStream;
-            string path = @"tmp_Demo03.txt";
+            string path = @"tmp_BinaryWriter.txt";
             try
             {
                 objStream = new FileStream(path, FileMode.Append, FileAccess.Write);
                 //使用using敘詞，寫入完墓會自動釋放資源
                 using (objWriter = new BinaryWriter(objStream))
                 {
-                    //* 寫入字串
+                    // 寫入字串
                     objWriter.Write("空山不見人");
                     objWriter.Write("Visual C# 7.0");
-                    //* 寫入數值
+                    // 寫入數值
                     objWriter.Write(640526);
                 }
             }
             catch (IndexOutOfRangeException ex)
             {
-                //WriteLine("沒有指定檔案");
+                richTextBox1.Text += "沒有指定檔案\n";
             }
             catch (Exception ex)
             {
-                //WriteLine(e.Message);
+                richTextBox1.Text += ex.Message + "\n";
             }
-        }
 
-        private void button8_Click(object sender, EventArgs e)
-        {
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
             BinaryReader objReader;
-            FileStream objStream;
-            string path = @"tmp_Demo03aa.txt";
+            //FileStream objStream;
+            path = @"tmp_Demo03aa.txt";
             try
             {
                 objStream = new FileStream(path, FileMode.Open, FileAccess.Read);
                 objReader = new BinaryReader(objStream);
-                //WriteLine(objReader.ReadString());
-                //WriteLine(objReader.ReadInt32());
+                richTextBox1.Text += objReader.ReadString() + "\n";
+                richTextBox1.Text += objReader.ReadInt32() + "\n";
                 objReader.Close();
             }
             catch (IndexOutOfRangeException ex)
             {
-                //WriteLine("沒有指定檔案");
+                richTextBox1.Text += "沒有指定檔案\n";
             }
 
             catch (EndOfStreamException ex)
             {
-                //WriteLine("檔案讀取完畢");
+                richTextBox1.Text += "檔案讀取完畢\n";
             }
 
             catch (Exception ex)
             {
-                //WriteLine(e.Message);
+                richTextBox1.Text += ex.Message + "\n";
             }
         }
 
@@ -410,7 +377,7 @@ namespace vcs_tmp_all1
                 }
             }
 
-            //6060
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //openFileDialog1
 
@@ -448,8 +415,6 @@ namespace vcs_tmp_all1
             {
                 return;
             }
-
-
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -483,7 +448,6 @@ namespace vcs_tmp_all1
                 writer.Write(richTextBox1.Text);
                 writer.Close(); //關閉檔案
             }
-
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -510,134 +474,10 @@ namespace vcs_tmp_all1
                 openFileDialog1.InitialDirectory = folderName;
                 openFileDialog1.FileName = null;
             }
-
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-            //colorDialog1
-            colorDialog1.AllowFullOpen = true;
-            colorDialog1.ShowHelp = true;//顯示說明按鈕
-            colorDialog1.AnyColor = true;//顯示所有可用基本色彩         
-            //使用者如果按下確定鈕變更背景色彩
-            if (colorDialog1.ShowDialog() == DialogResult.OK)
-            {
-                richTextBox1.BackColor = colorDialog1.Color;
-            }
-
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-            //fontDialog1
-            fontDialog1.ShowColor = true; //顯示色彩選擇
-            fontDialog1.Font = richTextBox1.Font; //取得Windows系統字型
-            fontDialog1.Color = richTextBox1.ForeColor;//取得前景色彩
-            if (fontDialog1.ShowDialog() != DialogResult.Cancel)
-            {
-                //改變文字方塊的字型
-                richTextBox1.Font = fontDialog1.Font;
-                //改變文字方塊的前景顏色
-                richTextBox1.ForeColor = fontDialog1.Color;
-            }
-
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-            //printDocument1
-            richTextBox1.LoadFile("../../../Demo01.rtf");
-            printDocument1.DocumentName = "AAAAAAA";
-
-            try
-            {
-                printDocument1.Print();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        //PrintDocument的事件
-        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
-        {
-            //1.建立繪圖物件gs和參數ev的關聯
-            Graphics gs = e.Graphics;
-            //設定列印字型
-            Font fontPrint = new Font("Segoe Print", 14);
-            int morePages = 0; //計算每份文件頁數
-            int OnPageChars = 0;//計算每頁字元數
-            //2.測量要繪製的字串
-            gs.MeasureString(richTextBox1.Text,
-               fontPrint, e.MarginBounds.Size,
-               StringFormat.GenericTypographic,
-               out OnPageChars, out morePages);
-            //3.繪製邊界內的字型
-            gs.DrawString(richTextBox1.Text, fontPrint, Brushes.Black, e.MarginBounds, new StringFormat());
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button18_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button19_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button20_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button21_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button22_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button24_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button25_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button26_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button27_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button28_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button29_Click(object sender, EventArgs e)
-        {
         }
     }
 }
+
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -656,7 +496,4 @@ namespace vcs_tmp_all1
 
 */
 
-
 //saveFileDialog1.InitialDirectory = Application.StartupPath; //從目前目錄開始尋找檔案
-
-

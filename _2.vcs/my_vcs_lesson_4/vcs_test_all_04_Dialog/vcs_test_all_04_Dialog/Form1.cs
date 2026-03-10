@@ -224,6 +224,10 @@ namespace vcs_test_all_04_Dialog
 
             this.Size = new Size(1210, 740);
             this.Text = "vcs_test_all_04_Dialog";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -588,6 +592,16 @@ namespace vcs_test_all_04_Dialog
 
         private void button34_Click(object sender, EventArgs e)
         {
+            //色彩對話方塊
+            //colorDialog1
+            colorDialog1.AllowFullOpen = true;
+            colorDialog1.ShowHelp = true;//顯示說明按鈕
+            colorDialog1.AnyColor = true;//顯示所有可用基本色彩         
+            //使用者如果按下確定鈕變更背景色彩
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.BackColor = colorDialog1.Color;
+            }
         }
 
         private void button40_Click(object sender, EventArgs e)
@@ -652,28 +666,22 @@ namespace vcs_test_all_04_Dialog
 
         private void button43_Click(object sender, EventArgs e)
         {
-
+            //設定字型
+            //fontDialog1
+            fontDialog1.ShowColor = true; //顯示色彩選擇
+            fontDialog1.Font = richTextBox1.Font; //取得Windows系統字型
+            fontDialog1.Color = richTextBox1.ForeColor;//取得前景色彩
+            if (fontDialog1.ShowDialog() != DialogResult.Cancel)
+            {
+                //改變文字方塊的字型
+                richTextBox1.Font = fontDialog1.Font;
+                //改變文字方塊的前景顏色
+                richTextBox1.ForeColor = fontDialog1.Color;
+            }
         }
 
         private void button44_Click(object sender, EventArgs e)
         {
-            //設定印表機
-            printDialog1.AllowCurrentPage = true;       //顯示當前頁
-            printDialog1.AllowPrintToFile = true;       //允許選擇打印到文件
-            printDialog1.AllowSelection = true;         //啟用“選擇”單選按鈕
-            printDialog1.AllowSomePages = true;         //啟用“頁”單選按鈕
-            //printDialog1.Document = printDocument1;   //指定設置的PrintDocument對象
-            //printDialog1.PrinterSettings = printDocument1.PrinterSettings;    //打印頁的默認設置
-            printDialog1.PrintToFile = false;           //不選擇“打印到文件”
-            printDialog1.ShowHelp = true;               //顯示“幫助”按鈕
-            printDialog1.ShowNetwork = true;            //可以選擇網絡打印機
-            if (printDialog1.ShowDialog() == DialogResult.OK)
-            {
-                //printDocument1.Print();    //打印
-            }
-            else
-            {
-            }
         }
 
         private void bt_open_folder_Click(object sender, EventArgs e)
@@ -833,7 +841,6 @@ namespace vcs_test_all_04_Dialog
     }
 }
 
-
 /*
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -902,7 +909,6 @@ richTextBox1.Text += "----------------------------------------------------------
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
 openFileDialog1.Filter = "點陣圖 (*.bmp)|*.bmp|JPEG (*.JPG)|*.JPG|" + "GIF(*.GIF)|*.GIF|All File (*.*)|*.*";
-
 saveFileDialog1.Filter = "點陣圖 (*.bmp)|*.bmp|JPEG (*.JPG)|*.JPG|" + "GIF(*.GIF)| *. GIF|All File (*.*)|*.*";
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個

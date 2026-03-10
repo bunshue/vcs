@@ -65,7 +65,6 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
-            this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.colorDialog_forecolor = new System.Windows.Forms.ColorDialog();
             this.colorDialog_backcolor = new System.Windows.Forms.ColorDialog();
             this.label1 = new System.Windows.Forms.Label();
@@ -357,6 +356,7 @@
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(150, 50);
             this.button34.TabIndex = 6;
+            this.button34.Text = "色彩對話方塊";
             this.button34.UseVisualStyleBackColor = true;
             this.button34.Click += new System.EventHandler(this.button34_Click);
             // 
@@ -425,7 +425,6 @@
             this.button44.Name = "button44";
             this.button44.Size = new System.Drawing.Size(150, 50);
             this.button44.TabIndex = 6;
-            this.button44.Text = "設定印表機";
             this.button44.UseVisualStyleBackColor = true;
             this.button44.Click += new System.EventHandler(this.button44_Click);
             // 
@@ -436,6 +435,7 @@
             this.button43.Name = "button43";
             this.button43.Size = new System.Drawing.Size(150, 50);
             this.button43.TabIndex = 5;
+            this.button43.Text = "設定字型";
             this.button43.UseVisualStyleBackColor = true;
             this.button43.Click += new System.EventHandler(this.button43_Click);
             // 
@@ -446,10 +446,6 @@
             // fontDialog1
             // 
             this.fontDialog1.Apply += new System.EventHandler(this.fontDialog1_Apply);
-            // 
-            // printDialog1
-            // 
-            this.printDialog1.UseEXDialog = true;
             // 
             // label1
             // 
@@ -600,7 +596,6 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.FontDialog fontDialog1;
-        private System.Windows.Forms.PrintDialog printDialog1;
         private System.Windows.Forms.ColorDialog colorDialog_forecolor;
         private System.Windows.Forms.ColorDialog colorDialog_backcolor;
         private System.Windows.Forms.Label label1;

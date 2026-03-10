@@ -71,19 +71,26 @@ namespace vcs_test_all_05_Print2
             x_st = 10;
             y_st = 10;
             dx = 200 + 10;
-            dy = 60 + 10;
+            dy = 280 + 10;
             groupBox0.Size = new Size(200, 280);
             groupBox1.Size = new Size(200, 280);
             groupBox2.Size = new Size(200, 280);
             groupBox3.Size = new Size(200, 280);
+            groupBox4.Size = new Size(200, 280);
+            groupBox5.Size = new Size(200, 280);
 
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             groupBox3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            groupBox4.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            groupBox5.Location = new Point(x_st + dx * 1, y_st + dy * 1);
 
-            textBox1.Size = new Size(400, 300);
-            textBox1.Location = new Point(x_st + dx * 2, y_st + dy * 4 + 20);
+            dy = 60 + 10;
+            textBox1.Size = new Size(240, 180);
+            textBox1.Location = new Point(x_st + dx * 3 - 50, y_st + dy * 4 + 20);
+            printPreviewControl1.Size = new Size(240, 180);
+            printPreviewControl1.Location = new Point(x_st + dx * 3 - 50, y_st + dy * 7);
 
             richTextBox1.Size = new Size(400, 690);
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
@@ -109,8 +116,16 @@ namespace vcs_test_all_05_Print2
             button31.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button32.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button33.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button40.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button41.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button42.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button43.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button50.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button51.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button52.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button53.Location = new Point(x_st + dx * 0, y_st + dy * 3);
 
-            x_st = 10;
+            x_st = 425;
             y_st = 300;
             dx = 180 + 10;
             dy = 55 + 10;
@@ -119,11 +134,6 @@ namespace vcs_test_all_05_Print2
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button5.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button6.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button7.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button8.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button9.Location = new Point(x_st + dx * 1, y_st + dy * 4);
 
             this.Size = new Size(1300, 750);
             this.Text = "vcs_test_all_05_Print2";
@@ -450,14 +460,98 @@ namespace vcs_test_all_05_Print2
             MessageBox.Show(printDocument3.DocumentName + " -- 完成列印", "列印文件");
         }
 
-        private void button0_Click(object sender, EventArgs e)
+        private void button40_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button41_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button42_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button43_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button50_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button51_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button52_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button53_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            //print
+            //printDocumentA
+            richTextBox1.LoadFile("../../../Demo01.rtf");
+            printDocumentA.DocumentName = "AAAAAAA";
+
+            try
+            {
+                printDocumentA.Print();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        //PrintDocument的事件
+        private void printDocumentA_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            //1.建立繪圖物件gs和參數ev的關聯
+            Graphics gs = e.Graphics;
+            //設定列印字型
+            Font fontPrint = new Font("Segoe Print", 14);
+            int morePages = 0; //計算每份文件頁數
+            int OnPageChars = 0;//計算每頁字元數
+            //2.測量要繪製的字串
+            gs.MeasureString(richTextBox1.Text, fontPrint, e.MarginBounds.Size, StringFormat.GenericTypographic, out OnPageChars, out morePages);
+            //3.繪製邊界內的字型
+            gs.DrawString(richTextBox1.Text, fontPrint, Brushes.Black, e.MarginBounds, new StringFormat());
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //設定印表機
+            //printDialogB
+            printDialogB.AllowCurrentPage = true;       //顯示當前頁
+            printDialogB.AllowPrintToFile = true;       //允許選擇打印到文件
+            printDialogB.AllowSelection = true;         //啟用“選擇”單選按鈕
+            printDialogB.AllowSomePages = true;         //啟用“頁”單選按鈕
+            //printDialogB.Document = printDocument1;   //指定設置的PrintDocument對象
+            //printDialogB.PrinterSettings = printDocument1.PrinterSettings;    //打印頁的默認設置
+            printDialogB.PrintToFile = false;           //不選擇“打印到文件”
+            printDialogB.ShowHelp = true;               //顯示“幫助”按鈕
+            printDialogB.ShowNetwork = true;            //可以選擇網絡打印機
+            if (printDialogB.ShowDialog() == DialogResult.OK)
+            {
+                //printDocumentB.Print();    //打印
+            }
+            else
+            {
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -474,32 +568,6 @@ namespace vcs_test_all_05_Print2
         {
 
         }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }
 
