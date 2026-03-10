@@ -25,7 +25,6 @@ namespace vcs_ImageList
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //將"企鵝.jpg", "沙漠.jpg", "無尾熊.jpg", "菊花.jpg", "鬱金香.jpg"
             // 五張圖放入imageList影像清單控制項內 
             for (int i = 0; i <= photo.GetUpperBound(0); i++)
             {

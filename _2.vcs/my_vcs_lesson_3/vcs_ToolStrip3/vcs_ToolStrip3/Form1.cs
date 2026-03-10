@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WinToolStrip
+namespace vcs_ToolStrip3
 {
     public partial class Form1 : Form
     {

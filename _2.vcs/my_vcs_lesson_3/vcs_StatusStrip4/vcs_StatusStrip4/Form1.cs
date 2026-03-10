@@ -5,31 +5,37 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WinStatusStrip
+/*
+加一個 StatusStrip 控件為statusStrip1
+拉一個 StatusLabel 為toolStripStatusLabel1
+toolStripStatusLabel1 拉一個 toolStripDropDownButton1, 加入4個項目
+把 toolStripDropDownButton1 的屬性的 Image 清掉
+*/
+
+namespace vcs_StatusStrip4
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         // 宣告 num 整數變數用來記錄目前的圖片索引編號，0表示第1張
         int num = 0;
         // 建立 photo 字串陣列用來存放照片的名稱
         // 陣列元素索引範圍photo[0]~photo[4]
-        string[] photo = new string[] { "企鵝", "沙漠", "無尾熊", "菊花", "鬱金香" };
+        string[] photo = new string[] { "ggb1", "ggb2", "ggb3", "ggb4", "ggb5" };
 
         // ===  ShowPic()方法，可在pictureBox1顯示目前的圖片
         // 在toolStripStatusLabel1顯示目前的圖片名稱
         void ShowPic()
         {
             // 在pictureBox1上顯示photo[num]陣列元素的圖檔
-            pictureBox1.Image = new Bitmap(photo[num] + ".jpg");
+            pictureBox1.Image = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\_scenery\" + photo[num] + ".jpg");
             toolStripStatusLabel1.Text = "圖片名稱：" + photo[num];
+        }
+
+        public Form1()
+        {
+            InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)

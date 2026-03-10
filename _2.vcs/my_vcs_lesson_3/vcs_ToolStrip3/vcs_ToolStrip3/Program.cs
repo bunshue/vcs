@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WinToolStrip
+namespace vcs_ToolStrip3
 {
     static class Program
     {

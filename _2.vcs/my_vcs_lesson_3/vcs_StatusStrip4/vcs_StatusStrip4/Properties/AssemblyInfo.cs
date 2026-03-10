@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("WinStatusStrip")]
+[assembly: AssemblyTitle("vcs_StatusStrip4")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Home")]
-[assembly: AssemblyProduct("WinStatusStrip")]
-[assembly: AssemblyCopyright("Copyright © Home 2013")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("vcs_StatusStrip4")]
+[assembly: AssemblyCopyright("Copyright ©  2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
-[assembly: Guid("7b4d2c01-c088-46cb-bb53-032fa731d9d4")]
+[assembly: Guid("2c1c57f7-0009-42c4-b221-814af9cc93a6")]
 
 // 組件的版本資訊是由下列四項值構成:
 //

@@ -1,4 +1,4 @@
-﻿namespace WinToolStrip
+﻿namespace vcs_ToolStrip3
 {
     partial class Form1
     {
@@ -69,7 +69,7 @@
             // 
             // tsbOpen
             // 
-            this.tsbOpen.Image = global::WinToolStrip.Properties.Resources.OPEN;
+            this.tsbOpen.Image = global::vcs_ToolStrip3.Properties.Resources.OPEN;
             this.tsbOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbOpen.Name = "tsbOpen";
             this.tsbOpen.Size = new System.Drawing.Size(51, 22);
@@ -78,7 +78,7 @@
             // 
             // tsbSave
             // 
-            this.tsbSave.Image = global::WinToolStrip.Properties.Resources.SAVE;
+            this.tsbSave.Image = global::vcs_ToolStrip3.Properties.Resources.SAVE;
             this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSave.Name = "tsbSave";
             this.tsbSave.Size = new System.Drawing.Size(51, 22);
