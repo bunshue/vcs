@@ -2257,7 +2257,6 @@ namespace vcs_test_all_01_DateTime
 
         private void YourChoice(int year, int month, int day)
         {
-            //user select date from MonthCalendar control
             this.MoonAge(day, month, year);
         }
 
@@ -2289,7 +2288,6 @@ namespace vcs_test_all_01_DateTime
                 richTextBox1.Text += "DateTime.TryParse 失敗\n";
                 richTextBox1.Text += "取得DateTime失敗 3\n";
             }
-
         }
     }
 }

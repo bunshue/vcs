@@ -85,10 +85,10 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.label18 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox0 = new System.Windows.Forms.GroupBox();
@@ -99,6 +99,7 @@
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -110,8 +111,8 @@
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox0.SuspendLayout();
@@ -146,7 +147,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.Location = new System.Drawing.Point(35, 48);
+            this.button1.Location = new System.Drawing.Point(16, 52);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 50);
             this.button1.TabIndex = 0;
@@ -259,6 +260,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button7);
             this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.button1);
@@ -274,7 +276,7 @@
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button4.Location = new System.Drawing.Point(148, 47);
+            this.button4.Location = new System.Drawing.Point(129, 51);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(105, 42);
             this.button4.TabIndex = 31;
@@ -285,7 +287,7 @@
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button5.Location = new System.Drawing.Point(155, 131);
+            this.button5.Location = new System.Drawing.Point(136, 135);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(104, 42);
             this.button5.TabIndex = 32;
@@ -297,7 +299,7 @@
             // 
             this.button2.BackColor = System.Drawing.Color.Red;
             this.button2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.Location = new System.Drawing.Point(35, 124);
+            this.button2.Location = new System.Drawing.Point(16, 128);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(110, 55);
             this.button2.TabIndex = 29;
@@ -675,19 +677,6 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "NumericUpDown";
             // 
-            // trackBar2
-            // 
-            this.trackBar2.Location = new System.Drawing.Point(152, 35);
-            this.trackBar2.Maximum = 6000;
-            this.trackBar2.Minimum = 1000;
-            this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar2.Size = new System.Drawing.Size(45, 128);
-            this.trackBar2.SmallChange = 100;
-            this.trackBar2.TabIndex = 4;
-            this.trackBar2.Value = 2000;
-            this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
-            // 
             // label18
             // 
             this.label18.AutoSize = true;
@@ -732,6 +721,19 @@
             0,
             0});
             this.numericUpDown3.ValueChanged += new System.EventHandler(this.numericUpDown3_ValueChanged);
+            // 
+            // trackBar2
+            // 
+            this.trackBar2.Location = new System.Drawing.Point(152, 35);
+            this.trackBar2.Maximum = 6000;
+            this.trackBar2.Minimum = 1000;
+            this.trackBar2.Name = "trackBar2";
+            this.trackBar2.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBar2.Size = new System.Drawing.Size(45, 128);
+            this.trackBar2.SmallChange = 100;
+            this.trackBar2.TabIndex = 4;
+            this.trackBar2.Value = 2000;
+            this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
             // 
             // groupBox2
             // 
@@ -851,11 +853,24 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.Color.Red;
+            this.button7.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button7.Location = new System.Drawing.Point(240, 49);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(110, 55);
+            this.button7.TabIndex = 33;
+            this.button7.Text = "Help";
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1225, 821);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.groupBox8);
@@ -872,7 +887,6 @@
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
@@ -894,8 +908,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -983,6 +997,7 @@
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.GroupBox groupBox10;
         private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Button button7;
     }
 }
 

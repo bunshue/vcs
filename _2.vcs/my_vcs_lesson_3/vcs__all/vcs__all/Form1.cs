@@ -149,6 +149,12 @@ namespace vcs__all
             }
         }
 
+        private void button7_Click(object sender, EventArgs e)
+        {
+            string help_filename = @"D:\_git\vcs\_1.data\______test_files1\_chm\AMCap.chm";
+            Help.ShowHelp(this, help_filename);
+        }
+
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             progressBar1.Value = (int)numericUpDown1.Value;
@@ -157,9 +163,13 @@ namespace vcs__all
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
                 richTextBox1.Text += "開啟檔案: " + openFileDialog1.FileName + "\n";
+            }
             else
+            {
                 richTextBox1.Text += "未選擇檔案" + "\n";
+            }
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
