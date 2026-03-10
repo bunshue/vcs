@@ -755,17 +755,28 @@ namespace vcs_List2
 
         public class classStudent
         {
+            //靜態屬性 -- 記錄生成的物件
+            public static int Number { get; private set; }
+
             public string Name;
             public int Score;
+
+            //建構函式
             public classStudent(string name, int score)
             {
                 this.Name = name;
                 this.Score = score;
+                Number++;   //建立物件就計數
+                Console.WriteLine("第" + Number + "個學生");
             }
+
+            ~classStudent() { }   //解構函式
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
+            Console.WriteLine("未實體化，學生 : " + classStudent.Number + " 個\n");
+
             //類別串列2
             //建立 一維類別串列
             List<classStudent> classList2 = new List<classStudent>()
@@ -785,6 +796,8 @@ namespace vcs_List2
             {
                 richTextBox1.Text += "Name : " + stu.Name + ", Score : " + stu.Score + "\n";
             }
+
+            Console.WriteLine("已實體化，學生 : " + classStudent.Number + " 個\n");
 
             //排序
             classList2.Sort((x, y) => { return -x.Score.CompareTo(y.Score); });
@@ -1073,6 +1086,7 @@ namespace vcs_List2
         public string Sex { get; set; }
         public int Money { get; set; }
 
+        //建構函式
         public Person(string name, string sex, int age, int money)
         {
             Name = name;
@@ -1080,6 +1094,7 @@ namespace vcs_List2
             Sex = sex;
             Money = money;
         }
+        ~Person() { }   //解構函式
     }
 
     class Member

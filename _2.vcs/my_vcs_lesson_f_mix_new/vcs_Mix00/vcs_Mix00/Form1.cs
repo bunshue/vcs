@@ -568,9 +568,37 @@ namespace vcs_Mix00
             richTextBox1.Text += "\n";
         }
 
+        class Student
+        {
+            //第一個靜態方法-計算總分
+            public static uint Total(uint a, uint b, uint c)
+            {
+                uint sum = a + b + c;//總分
+                return sum;//回傳加總結果         
+            }
+            //第二個靜態方法-算平均分數
+            public static float Average(string word, uint number)
+            {
+                float result = number / 3.0F;//平均
+                return result;
+            }
+        }
+
         private void button9_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //使用類別的靜態方法
+            string name = "david";
+            uint math = 90;
+            uint eng = 82;
+            uint chin = 85;
+
+            //直接以類別來呼叫靜態方法Total()、Average()
+            uint score = Student.Total(math, eng, chin);
+            float avg = Student.Average("平均分數", score);
+
+            Console.WriteLine(name = " " + "總分 : " + score + "\t平均 : " + avg);
         }
 
         //局部圖像放大
@@ -998,8 +1026,25 @@ namespace vcs_Mix00
             sr.Close();
         }
 
+        //產生委派物件-有兩個參數
+        delegate int ExpressNum(int one, int two);
+
         private void button19_Click(object sender, EventArgs e)
         {
+            //委派函數
+            int total;
+            int num1 = 123;
+            int num2 = 456;
+
+            //產生委派物件，呼叫Lamdba運算式         
+            ExpressNum result = (a, b) => a + b;
+            //傳遞引數給委派
+            total = result(num1, num2);
+            Console.WriteLine("{num1} + {num2} = {total}");
+
+            result = (a, b) => a - b;
+            total = result(num1, num2);
+            Console.WriteLine("{num1} - {num2} = {total}");
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -1515,9 +1560,28 @@ namespace vcs_Mix00
             //ReadKey();
         }
 
+        //靜態方法
+        static void Lotto(ref byte[] anyArr)
+        {
+            //以Random類別呼叫NextBytes()方法產生隨機數
+            Random rand = new Random();
+            //建立能存放6個元素的陣列
+            anyArr = new byte[6];
+            rand.NextBytes(anyArr);
+        }
+
         private void button29_Click(object sender, EventArgs e)
         {
-
+            //使用 ref
+            byte[] number = new byte[6];
+            //呼叫靜態方法，以陣列為引數
+            Lotto(ref number);
+            Console.WriteLine("今天的樂透--");
+            //讀取陣列元素
+            foreach (byte item in number)
+            {
+                Console.Write("{item}, 3");
+            }
         }
 
         private static void CallValue(int x, int y)
