@@ -49,10 +49,8 @@ namespace vcs_test_all_01_DateTime
             timer1.Interval = 1000;
             timer1.Enabled = true;
 
-            this.ShowMoon();
-
-            this.monthCalendar1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.monthCalendar1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            DateTime dt = DateTime.Now;
+            this.ShowMoon(dt.Year, dt.Month, dt.Day);
 
             //設定倒數計時
             //dtTarget = DateTime.Now.AddHours(2);  //設定兩小時後
@@ -120,22 +118,20 @@ namespace vcs_test_all_01_DateTime
             comboBox1.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
             groupBox6.Location = new Point(x_st + dx * 2, y_st + dy * 0);//特殊曆法
-            groupBox13.Location = new Point(x_st + dx * 2, y_st + dy * 2 - 30);//月相
+            groupBox13.Location = new Point(x_st + dx * 2, y_st + dy * 2 - 20);//月相
             lb_time2.Location = new Point(x_st + dx * 2, y_st + dy * 5 + 10);
 
             groupBox9.Location = new Point(x_st + dx * 2, y_st + dy * 7 + 50);//Timer顯示時間
 
             groupBox6.Size = new Size(420, 110);
             groupBox9.Size = new Size(200, 160);
-            groupBox13.Size = new Size(390, 230);
+            groupBox13.Size = new Size(300, 200);
 
             richTextBox1.Size = new Size(340, 700);
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             lb_time.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 10);
-
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             x_st = 10;
             y_st = 20;
@@ -152,6 +148,11 @@ namespace vcs_test_all_01_DateTime
             button17.Text = "CultureInfo\n月名星期名";
 
             this.Size = new Size(1290, 770);
+            this.Text = "vcs_test_all_01_DateTime";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -2254,33 +2255,23 @@ namespace vcs_test_all_01_DateTime
             bitmap1 = null;
         }
 
-        private void YourChoice()
+        private void YourChoice(int year, int month, int day)
         {
             //user select date from MonthCalendar control
-            int Aday, Amonth, Ayear;
-            Aday = this.monthCalendar1.SelectionStart.Day;
-            Amonth = this.monthCalendar1.SelectionStart.Month;
-            Ayear = this.monthCalendar1.SelectionStart.Year;
-            this.MoonAge(Aday, Amonth, Ayear);
+            this.MoonAge(day, month, year);
         }
 
-        private void ShowMoon()
+        private void ShowMoon(int year, int month, int day)
         {
-            //draw moon and print age in selected days
-            this.YourChoice(); //select date
+            this.YourChoice(year, month, day);
             this.ClearDraw(); //clear pictureBox1 PictureBox
             this.DrawMoon(); //draw the moon
         }
 
-        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
-        {
-            this.ShowMoon();
-        }
-
         private void btn_moon_today_Click(object sender, EventArgs e)
         {
-            //set the date of today
-            this.monthCalendar1.SetDate(this.monthCalendar1.TodayDate.Date);
+            DateTime dt = DateTime.Now;
+            this.ShowMoon(dt.Year, dt.Month, dt.Day);
         }
 
         private void btn_moon_ok_Click(object sender, EventArgs e)
@@ -2290,13 +2281,15 @@ namespace vcs_test_all_01_DateTime
             if (conversionSuccessful == true)
             {
                 richTextBox1.Text += "得到DateTime資料： " + dt.ToString() + "\n";
-                this.monthCalendar1.SetDate(dt);
+                this.ShowMoon(dt.Year, dt.Month, dt.Day);
+                //this.ShowMoon();
             }
             else
             {
                 richTextBox1.Text += "DateTime.TryParse 失敗\n";
                 richTextBox1.Text += "取得DateTime失敗 3\n";
             }
+
         }
     }
 }

@@ -40,7 +40,6 @@ namespace vcs_MonthCalendar
             else
             {
                 //不知道怎麼恢復
-
             }
         }
 
@@ -54,10 +53,6 @@ namespace vcs_MonthCalendar
             {
                 monthCalendar1.MaxSelectionCount = 1;
             }
-
         }
-
-
-
     }
 }

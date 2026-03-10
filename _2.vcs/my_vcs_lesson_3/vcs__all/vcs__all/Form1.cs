@@ -76,10 +76,9 @@ namespace vcs__all
             groupBox9.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             groupBox10.Location = new Point(x_st + dx * 2, y_st + dy * 2);
 
-
-
-            richTextBox2.Size = new Size(W, H * 2);
-            richTextBox2.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            richTextBox1.Size = new Size(W, H * 2 - 30);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1510, 920);
             this.Text = "vcs__all";
@@ -87,6 +86,11 @@ namespace vcs__all
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -111,12 +115,12 @@ namespace vcs__all
 
         private void button2_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("一個空的程式，介紹會用到的元件。");
+            richTextBox1.Text += "一個空的程式，介紹會用到的元件。\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("取得： TrackBar = " + trackBar1.Value + "   NumericUpDown = " + numericUpDown1.Value + "\nComboBox = " + comboBox1.SelectedIndex);
+            richTextBox1.Text += "取得： TrackBar = " + trackBar1.Value + "   NumericUpDown = " + numericUpDown1.Value + "\nComboBox = " + comboBox1.SelectedIndex + "\n";
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -128,13 +132,21 @@ namespace vcs__all
         {
             DialogResult result = MessageBox.Show("您要將變更儲存至\"vcs_doc.doc\"嗎?", "Microsoft Office Word", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
+            {
                 MessageBox.Show("您選了Yes");
+            }
             else if (result == DialogResult.No)
+            {
                 MessageBox.Show("您選了No");
+            }
             else if (result == DialogResult.Cancel)
+            {
                 MessageBox.Show("您選了Cancel");
+            }
             else
+            {
                 MessageBox.Show("您選了其他");
+            }
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
@@ -145,9 +157,9 @@ namespace vcs__all
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                MessageBox.Show("開啟檔案: " + openFileDialog1.FileName);
+                richTextBox1.Text += "開啟檔案: " + openFileDialog1.FileName + "\n";
             else
-                MessageBox.Show("未選擇檔案");
+                richTextBox1.Text += "未選擇檔案" + "\n";
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -169,5 +181,6 @@ namespace vcs__all
         {
             trackBar2.Value = (Int32)numericUpDown3.Value;
         }
+
     }
 }

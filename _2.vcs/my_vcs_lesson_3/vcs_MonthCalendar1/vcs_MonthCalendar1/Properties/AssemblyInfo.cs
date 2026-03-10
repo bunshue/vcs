@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("WinVHScrollBar")]
+[assembly: AssemblyTitle("vcs_MonthCalendar1")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Home")]
-[assembly: AssemblyProduct("WinVHScrollBar")]
-[assembly: AssemblyCopyright("Copyright © Home 2013")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("vcs_MonthCalendar1")]
+[assembly: AssemblyCopyright("Copyright ©  2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
-[assembly: Guid("963f4474-1949-4929-aab6-5b2f17d21bf3")]
+[assembly: Guid("58bfed6b-6292-4314-8aa3-d9fce00b510e")]
 
 // 組件的版本資訊是由下列四項值構成:
 //

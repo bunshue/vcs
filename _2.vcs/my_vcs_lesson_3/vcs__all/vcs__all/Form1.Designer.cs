@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox0 = new System.Windows.Forms.RichTextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox0 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.LinkLabel = new System.Windows.Forms.LinkLabel();
@@ -44,14 +44,14 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.linkLabel3 = new System.Windows.Forms.LinkLabel();
-            this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.檔案ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,7 +83,7 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.label17 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.label18 = new System.Windows.Forms.Label();
@@ -92,12 +92,13 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox0 = new System.Windows.Forms.GroupBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.bt_clear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -116,17 +117,17 @@
             this.groupBox0.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.groupBox8.SuspendLayout();
-            this.groupBox9.SuspendLayout();
             this.SuspendLayout();
             // 
-            // richTextBox1
+            // richTextBox0
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(171, 79);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(137, 85);
-            this.richTextBox1.TabIndex = 3;
-            this.richTextBox1.Text = "若要多行，Multiline改True";
+            this.richTextBox0.Location = new System.Drawing.Point(171, 79);
+            this.richTextBox0.Name = "richTextBox0";
+            this.richTextBox0.Size = new System.Drawing.Size(137, 85);
+            this.richTextBox0.TabIndex = 3;
+            this.richTextBox0.Text = "若要多行，Multiline改True";
             // 
             // comboBox1
             // 
@@ -152,14 +153,14 @@
             this.button1.Text = "Button";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // textBox0
             // 
-            this.textBox1.Location = new System.Drawing.Point(15, 79);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(138, 85);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.Text = "若要多行，Multiline改True";
+            this.textBox0.Location = new System.Drawing.Point(15, 79);
+            this.textBox0.Multiline = true;
+            this.textBox0.Name = "textBox0";
+            this.textBox0.Size = new System.Drawing.Size(138, 85);
+            this.textBox0.TabIndex = 2;
+            this.textBox0.Text = "若要多行，Multiline改True";
             // 
             // label1
             // 
@@ -238,7 +239,7 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(100, 104);
+            this.numericUpDown1.Location = new System.Drawing.Point(14, 104);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(120, 30);
             this.numericUpDown1.TabIndex = 18;
@@ -269,6 +270,40 @@
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Button / MessageBox";
+            // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button4.Location = new System.Drawing.Point(148, 47);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(105, 42);
+            this.button4.TabIndex = 31;
+            this.button4.Text = "關閉檔案1";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button5.Location = new System.Drawing.Point(155, 131);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(104, 42);
+            this.button5.TabIndex = 32;
+            this.button5.Text = "關閉檔案2";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Red;
+            this.button2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button2.Location = new System.Drawing.Point(35, 124);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(110, 55);
+            this.button2.TabIndex = 29;
+            this.button2.Text = "說明";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // listBox1
             // 
@@ -328,50 +363,16 @@
             this.linkLabel3.UseCompatibleTextRendering = true;
             this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
             // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.Red;
-            this.button2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.Location = new System.Drawing.Point(35, 124);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(110, 55);
-            this.button2.TabIndex = 29;
-            this.button2.Text = "說明";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button3.Location = new System.Drawing.Point(230, 117);
+            this.button3.Location = new System.Drawing.Point(144, 117);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(92, 45);
+            this.button3.Size = new System.Drawing.Size(46, 46);
             this.button3.TabIndex = 30;
-            this.button3.Text = "取值";
+            this.button3.Text = "Get";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button4
-            // 
-            this.button4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button4.Location = new System.Drawing.Point(148, 47);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(105, 42);
-            this.button4.TabIndex = 31;
-            this.button4.Text = "關閉檔案1";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button5
-            // 
-            this.button5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button5.Location = new System.Drawing.Point(155, 131);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(104, 42);
-            this.button5.TabIndex = 32;
-            this.button5.Text = "關閉檔案2";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // menuStrip1
             // 
@@ -548,10 +549,10 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(264, 130);
+            this.tabPage2.Size = new System.Drawing.Size(264, 123);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -589,7 +590,7 @@
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(100, 142);
+            this.numericUpDown2.Location = new System.Drawing.Point(14, 142);
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(120, 30);
             this.numericUpDown2.TabIndex = 39;
@@ -649,17 +650,16 @@
             this.pictureBox1.TabIndex = 12;
             this.pictureBox1.TabStop = false;
             // 
-            // richTextBox2
+            // richTextBox1
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(982, 59);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(100, 100);
-            this.richTextBox2.TabIndex = 43;
-            this.richTextBox2.Text = "";
+            this.richTextBox1.Location = new System.Drawing.Point(982, 59);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
+            this.richTextBox1.TabIndex = 43;
+            this.richTextBox1.Text = "";
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.trackBar2);
             this.groupBox4.Controls.Add(this.label18);
             this.groupBox4.Controls.Add(this.button6);
             this.groupBox4.Controls.Add(this.numericUpDown3);
@@ -677,7 +677,7 @@
             // 
             // trackBar2
             // 
-            this.trackBar2.Location = new System.Drawing.Point(27, 31);
+            this.trackBar2.Location = new System.Drawing.Point(152, 35);
             this.trackBar2.Maximum = 6000;
             this.trackBar2.Minimum = 1000;
             this.trackBar2.Name = "trackBar2";
@@ -692,7 +692,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("新細明體", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label18.Location = new System.Drawing.Point(226, 32);
+            this.label18.Location = new System.Drawing.Point(140, 32);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(50, 19);
             this.label18.TabIndex = 3;
@@ -701,7 +701,7 @@
             // button6
             // 
             this.button6.Font = new System.Drawing.Font("新細明體", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button6.Location = new System.Drawing.Point(100, 60);
+            this.button6.Location = new System.Drawing.Point(14, 60);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(100, 40);
             this.button6.TabIndex = 2;
@@ -711,7 +711,7 @@
             // numericUpDown3
             // 
             this.numericUpDown3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.numericUpDown3.Location = new System.Drawing.Point(100, 26);
+            this.numericUpDown3.Location = new System.Drawing.Point(14, 26);
             this.numericUpDown3.Maximum = new decimal(new int[] {
             6000,
             0,
@@ -735,6 +735,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.trackBar2);
             this.groupBox2.Controls.Add(this.progressBar1);
             this.groupBox2.Controls.Add(this.trackBar1);
             this.groupBox2.Controls.Add(this.comboBox1);
@@ -772,20 +773,20 @@
             this.groupBox0.TabStop = false;
             this.groupBox0.Text = "Label / LinkLabel";
             // 
-            // groupBox5
+            // groupBox9
             // 
-            this.groupBox5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.groupBox5.Location = new System.Drawing.Point(384, 243);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(154, 141);
-            this.groupBox5.TabIndex = 25;
-            this.groupBox5.TabStop = false;
+            this.groupBox9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.groupBox9.Location = new System.Drawing.Point(475, 487);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(154, 141);
+            this.groupBox9.TabIndex = 25;
+            this.groupBox9.TabStop = false;
             // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.webBrowser1);
             this.groupBox6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.groupBox6.Location = new System.Drawing.Point(544, 256);
+            this.groupBox6.Location = new System.Drawing.Point(732, 305);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(186, 129);
             this.groupBox6.TabIndex = 26;
@@ -798,64 +799,75 @@
             this.groupBox7.Controls.Add(this.checkBox1);
             this.groupBox7.Controls.Add(this.listBox1);
             this.groupBox7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.groupBox7.Location = new System.Drawing.Point(736, 265);
+            this.groupBox7.Location = new System.Drawing.Point(924, 264);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(199, 170);
             this.groupBox7.TabIndex = 27;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "ListBox/RadioButton/CheckBox";
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.textBox0);
+            this.groupBox5.Controls.Add(this.label1);
+            this.groupBox5.Controls.Add(this.label3);
+            this.groupBox5.Controls.Add(this.richTextBox0);
+            this.groupBox5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.groupBox5.Location = new System.Drawing.Point(383, 287);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(344, 170);
+            this.groupBox5.TabIndex = 28;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "TextBox / RichTextBox";
+            // 
             // groupBox8
             // 
-            this.groupBox8.Controls.Add(this.textBox1);
-            this.groupBox8.Controls.Add(this.label1);
-            this.groupBox8.Controls.Add(this.label3);
-            this.groupBox8.Controls.Add(this.richTextBox1);
+            this.groupBox8.Controls.Add(this.tabControl1);
             this.groupBox8.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.groupBox8.Location = new System.Drawing.Point(12, 497);
+            this.groupBox8.Location = new System.Drawing.Point(12, 468);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(344, 170);
+            this.groupBox8.Size = new System.Drawing.Size(224, 204);
             this.groupBox8.TabIndex = 28;
             this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "TextBox / RichTextBox";
-            // 
-            // groupBox9
-            // 
-            this.groupBox9.Controls.Add(this.tabControl1);
-            this.groupBox9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.groupBox9.Location = new System.Drawing.Point(383, 463);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(224, 204);
-            this.groupBox9.TabIndex = 28;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "TabControl";
+            this.groupBox8.Text = "TabControl";
             // 
             // groupBox10
             // 
             this.groupBox10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.groupBox10.Location = new System.Drawing.Point(656, 483);
+            this.groupBox10.Location = new System.Drawing.Point(252, 478);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(207, 172);
             this.groupBox10.TabIndex = 28;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "xxxx";
             // 
+            // bt_clear
+            // 
+            this.bt_clear.Location = new System.Drawing.Point(999, 100);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(69, 32);
+            this.bt_clear.TabIndex = 45;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1225, 821);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.groupBox10);
-            this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
-            this.Controls.Add(this.groupBox5);
+            this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox0);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.richTextBox2);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
@@ -892,9 +904,9 @@
             this.groupBox6.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
-            this.groupBox9.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -902,10 +914,10 @@
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox richTextBox0;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox0;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.LinkLabel LinkLabel;
@@ -955,7 +967,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.TrackBar trackBar2;
         private System.Windows.Forms.Label label18;
@@ -964,12 +976,13 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox0;
-        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.Button bt_clear;
     }
 }
 
