@@ -60,6 +60,10 @@ namespace vcs_DynamicAddRemoveControls2
 
             this.Size = new Size(1273, 784);
             this.Text = "vcs_DynamicAddRemoveControls2";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -174,7 +178,15 @@ namespace vcs_DynamicAddRemoveControls2
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            //對控件的修改
+            foreach (Control x in Controls)
+            {
+                if (x.GetType().ToString() == "System.Windows.Forms.Button")
+                {
+                    Button Button = (System.Windows.Forms.Button)x;
+                    Button.BackColor = Color.Pink;
+                }
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)

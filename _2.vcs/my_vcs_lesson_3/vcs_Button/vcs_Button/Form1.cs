@@ -97,7 +97,7 @@ namespace vcs_Button
             button1a.Location = new Point(0, 0);
 
             // Make the button big enough to hold the whole region.
-            button1a.SetBounds(                button1a.Location.X,                button1a.Location.Y,                pts1[3].X + 5, pts1[4].Y + 5);	//SetBounds : 設定控件的位置與大小
+            button1a.SetBounds(button1a.Location.X, button1a.Location.Y, pts1[3].X + 5, pts1[4].Y + 5);	//SetBounds : 設定控件的位置與大小
 
             // Shape the button.  button1b
             // Define the points in the polygonal path.
@@ -137,7 +137,7 @@ namespace vcs_Button
 
             // Make the button big enough to hold the whole region.
             button1b.Location = new Point(220, 0);
-            button1b.SetBounds(                button1b.Location.X,                button1b.Location.Y,                200, 200);	//SetBounds : 設定控件的位置與大小
+            button1b.SetBounds(button1b.Location.X, button1b.Location.Y, 200, 200);	//SetBounds : 設定控件的位置與大小
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -710,7 +710,7 @@ namespace vcs_Button
             btn[3] = btn3;   // 設定btn[3]即代表btn3
 
             // 使用for 迴圈設定btn0~btn3上的Text屬性與Click事件要執行的事MyClick
-            int x_st = 660;
+            int x_st = 640;
             int y_st = 350 + 50;
             int dx = 100;
             int dy = 50;
@@ -718,7 +718,7 @@ namespace vcs_Button
             for (int i = 0; i < 4; i++)
             {
                 btn[i].Text = "按鈕 " + i.ToString();
-                btn[i].Size = new Size(150, 40);
+                btn[i].Size = new Size(136, 40);
                 btn[i].Location = new Point(x_st + dx * 0, y_st + dy * i);
                 btn[i].Click += new EventHandler(MyClick);
                 this.Controls.Add(btn[i]);
@@ -731,10 +731,40 @@ namespace vcs_Button
             Button btn = (Button)sender;   // 將sender轉型成Button物件btn
             richTextBox1.Text += "你按了 " + btn.Name + "\t" + btn.Text + "\n";
         }
-
         //建立按鈕串列 SP
 
         //------------------------------------------------------------  // 60個
+
+        int cnt = 0;
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //設定按鈕樣式 FlatStyle
+            if (cnt == 0)
+            {
+                button8.FlatStyle = FlatStyle.Flat;
+                button8.Text = "Flat";
+            }
+            else if (cnt == 1)
+            {
+                button8.FlatStyle = FlatStyle.Popup;
+                button8.Text = "Popup";
+            }
+            else if (cnt == 2)
+            {
+                button8.FlatStyle = FlatStyle.Standard;
+                button8.Text = "Standard";
+            }
+            else if (cnt == 3)
+            {
+                button8.FlatStyle = FlatStyle.System;
+                button8.Text = "System";
+            }
+            cnt++;
+            if (cnt > 3)
+            {
+                cnt = 0;
+            }
+        }
     }
 }
 

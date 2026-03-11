@@ -32,10 +32,10 @@ namespace vcs_ToolTip2
             toolTip0.ToolTipTitle = "小提示";
             toolTip0.ShowAlways = true;
 
-            toolTip0.SetToolTip(textBox0, "textBox1預設的文字");
-            toolTip0.SetToolTip(button00, "button00預設的文字");
-            toolTip0.SetToolTip(button01, "button01預設的文字");
-            toolTip0.SetToolTip(button02, "button02預設的文字");
+            toolTip0.SetToolTip(textBox0, "textBox1顯示提示訊息");
+            toolTip0.SetToolTip(button00, "button00顯示提示訊息");
+            toolTip0.SetToolTip(button01, "button01顯示提示訊息");
+            toolTip0.SetToolTip(button02, "button02顯示提示訊息");
 
             //6060
 

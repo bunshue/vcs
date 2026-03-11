@@ -5,10 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace xCh5_2_2_11
+namespace vcs_NotifyIcon2
 {
     public partial class Form1 : Form
     {

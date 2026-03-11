@@ -196,11 +196,11 @@ namespace vcs_Mix00
 
             foreach (DriveInfo d in allDrives)
             {
-                richTextBox1.Text += "磁碟名稱 {0}" + d.Name + "\n";
-                richTextBox1.Text += "  磁碟類型: {0}" + d.DriveType + "\n";
+                richTextBox1.Text += "磁碟名稱 : " + d.Name + "\n";
+                richTextBox1.Text += "  磁碟類型 : " + d.DriveType + "\n";
                 if (d.IsReady == true)
                 {
-                    richTextBox1.Text += "  檔案系統名稱: {0}" + d.DriveFormat + "\n";
+                    richTextBox1.Text += "  檔案系統名稱 : " + d.DriveFormat + "\n";
                     richTextBox1.Text += "  目前可用空間量: \t{0, 15} bytes" + d.AvailableFreeSpace + "\n";
                     richTextBox1.Text += "  可用空間總量: \t{0, 15} bytes" + d.TotalFreeSpace + "\n";
                     richTextBox1.Text += "  可儲存空間總量: \t{0, 15} bytes " + d.TotalSize + "\n";
@@ -608,11 +608,11 @@ namespace vcs_Mix00
                 dir.Create();	// 建立目錄
                 dir.Refresh();	// 重新整理目錄
             }
-            richTextBox1.Text += "{0}檔案資訊如下：" + dir.FullName + "\n";
-            richTextBox1.Text += "建立時間：{0}" + dir.CreationTime + "\n";
-            richTextBox1.Text += "存取時間：{0}" + dir.LastAccessTime + "\n";
-            richTextBox1.Text += "資料夾名稱：{0}" + dir.Name + "\n";
-            richTextBox1.Text += "根目錄：{0}" + dir.Parent + "\n";
+            richTextBox1.Text += dir.FullName + " 檔案資訊如下 :\n";
+            richTextBox1.Text += "建立時間 : " + dir.CreationTime + "\n";
+            richTextBox1.Text += "存取時間 : " + dir.LastAccessTime + "\n";
+            richTextBox1.Text += "資料夾名稱 : " + dir.Name + "\n";
+            richTextBox1.Text += "根目錄 : " + dir.Parent + "\n";
             Console.Write("是否刪除 D:\\_git\\vcs\\CSharp 資料夾   1.刪除  2.不刪除->");
             if (Console.ReadLine() == "1")
             {
@@ -641,11 +641,11 @@ namespace vcs_Mix00
                 richTextBox1.Text += "路徑不存在" + "\n";
                 return;
             }
-            richTextBox1.Text += "{0}資料夾下的子資料夾如下：" + dir2.FullName + "\n";
+            richTextBox1.Text += dir2.FullName + ", 資料夾下的子資料夾如下 :\n";
             DirectoryInfo[] subdir = dir2.GetDirectories();
             foreach (DirectoryInfo r in subdir)
             {
-                richTextBox1.Text += "完整路徑：{0}  \t建立時間{1}" + r.FullName + r.CreationTime + "\n";
+                richTextBox1.Text += "完整路徑 : " + r.FullName + "\t建立時間 : " + r.CreationTime + "\n";
             }
         }
 
@@ -825,12 +825,9 @@ namespace vcs_Mix00
             {
                 richTextBox1.Text += "剛好\n";
                 camera_serial_data2 = camera_serial_data;
-
             }
             richTextBox1.Text += "len of camera_serial_data2 = " + camera_serial_data2.Length.ToString() + "\n";
             richTextBox1.Text += camera_serial_data2 + "\n";
-
-
         }
 
         public void StatisticsWords(string path)
@@ -1213,7 +1210,6 @@ namespace vcs_Mix00
             richTextBox1.Text += "CMX14 = 0x" + CMX14.ToString("X2") + " = " + CMX14.ToString() + "\n";
             richTextBox1.Text += "CMX15 = 0x" + CMX15.ToString("X2") + " = " + CMX15.ToString() + "\n";
             richTextBox1.Text += "CMX16 = 0x" + CMX16.ToString("X2") + " = " + CMX16.ToString() + "\n";
-
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -1245,7 +1241,6 @@ namespace vcs_Mix00
             string info = string.Format("total methods:{0}", count);
             richTextBox1.Text += info + "\n";
         }
-
 
         //统计方法名称
         public void GetMethodNameAndLines(string path)
@@ -1383,7 +1378,7 @@ namespace vcs_Mix00
 
         private void button24_Click(object sender, EventArgs e)
         {
-            //** 自訂格式化輸出
+            richTextBox1.Text += "自訂格式化輸出\n";
             richTextBox1.Text += String.Format("{0:##,##0.00}", 8567.1) + "\n";
             richTextBox1.Text += String.Format("{0:###0.00}", 566.7) + "\n";
             richTextBox1.Text += String.Format("{0:0.00%}", 8) + "\n";
@@ -1396,7 +1391,9 @@ namespace vcs_Mix00
             int i;
             temp = str.ToCharArray();
             for (i = temp.Length - 1; i >= 0; i--)
+            {
                 strR += temp[i];
+            }
             return strR;
         }
 
@@ -1469,7 +1466,9 @@ namespace vcs_Mix00
             int style;
             Random intRnd = new Random();
             for (i = 0; i < 52; i++)
+            {
                 card[i] = i;
+            }
             richTextBox1.Text += "[洗牌中...請稍後!]" + "\n";
             while (k < 30)
             {
@@ -1518,10 +1517,11 @@ namespace vcs_Mix00
                 richTextBox1.Text += "[" + ascVal + (stack[top] % 13 + 1) + "]" + "\n";
                 richTextBox1.Text += '\t' + "\n";
                 if (top % 4 == 0)
+                {
                     richTextBox1.Text += "\n";
+                }
                 top--;
             }
-            //ReadKey();
         }
 
         //靜態方法
@@ -1574,6 +1574,7 @@ namespace vcs_Mix00
 
         private void button30_Click(object sender, EventArgs e)
         {
+            //傳值
             //Call by Value vs Call by Reference
             //value
 
@@ -1584,7 +1585,9 @@ namespace vcs_Mix00
             CallValue(a, b);
             richTextBox1.Text += string.Format("\n呼叫敘述 離開方法回原處時\t：a={0}  b={1}", a, b);
 
-            //-------------
+            //6060
+
+            //傳址
             //reference
 
             richTextBox1.Text += string.Format("\n  **** Call By Reference 參考呼叫 **** \n");
@@ -1690,7 +1693,8 @@ namespace vcs_Mix00
                 }
                 //WriteLine();//
             }
-            //ReadKey();//螢幕暫停
+
+            //6060
 
             //三維 array
             /*
@@ -1732,12 +1736,11 @@ namespace vcs_Mix00
                             //WriteLine();   //換行
 
                         }//end first for-loop
-
-                        //ReadKey();//螢幕暫停
                     }//end Main()
             */
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
+            //6060
+
             /*
             int num = 10;
             double sum = 0;

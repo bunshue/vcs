@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace xCh4_1_7_21
+namespace vcs_NotifyIcon2
 {
     static class Program
     {

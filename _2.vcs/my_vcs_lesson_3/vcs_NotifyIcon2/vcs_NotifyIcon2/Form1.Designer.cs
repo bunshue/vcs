@@ -1,4 +1,4 @@
-﻿namespace xCh5_2_2_11
+﻿namespace vcs_NotifyIcon2
 {
     partial class Form1
     {
@@ -43,9 +43,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(611, 419);
+            this.ClientSize = new System.Drawing.Size(529, 441);
             this.Name = "Form1";
-            this.Text = "NotifyIcon範例";
+            this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 

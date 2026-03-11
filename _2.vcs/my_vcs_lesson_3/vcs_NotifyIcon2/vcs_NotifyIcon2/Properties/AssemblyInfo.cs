@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("xCh18-2-2-11")]
+[assembly: AssemblyTitle("vcs_NotifyIcon2")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("SYNNEX")]
-[assembly: AssemblyProduct("xCh18-2-2-11")]
-[assembly: AssemblyCopyright("Copyright © SYNNEX 2013")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("vcs_NotifyIcon2")]
+[assembly: AssemblyCopyright("Copyright ©  2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
-[assembly: Guid("5305d710-619a-4ef6-9577-b11afc7f4882")]
+[assembly: Guid("d3912e47-742a-4a6d-b2e5-4c083aff91f8")]
 
 // 組件的版本資訊是由下列四項值構成:
 //
