@@ -321,6 +321,36 @@ namespace vcs_Mix01
         private void button5_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //DirectoryInfo
+            //儲存要回傳的檔案路徑和檔案類型
+            string path2 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook";
+            string fnShow = "檔案清單---<*.jpg>\n\n";
+
+            //判斷資料夾是否存在，若是不存在會擲出例外情形
+            try
+            {    //取得檔案路徑訊息
+                DirectoryInfo currentDir = new DirectoryInfo(path2);
+                //從指定路徑傳回指定的檔案類型
+                FileInfo[] listFile = currentDir.GetFiles("*.jpg");
+                //設定檔案的標題
+                string sign = new string('-', 37);
+                string fnName = "檔名", fnLength = "檔案長度";
+                string fnDate = "修改日期";
+                string header = fnShow + "\t" + fnName + "\t" + fnLength + "\t" + fnDate + "\n";
+                richTextBox1.Text += header + "\n";
+                richTextBox1.Text += sign + "\n";
+
+                foreach (FileInfo getInfo in listFile)
+                {
+                    string dt = getInfo.LastWriteTime.ToShortDateString();
+                    richTextBox1.Text += getInfo.Name + "\t" + getInfo.Length.ToString() + "\t" + dt + "\n";
+                }
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "無此資料夾 : " + ex.Message + "\n";
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)

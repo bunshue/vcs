@@ -19,6 +19,7 @@ namespace vcs_ReadWrite_RTF2
         }
 
         string temp = "tomorrow.RTF";//保存文件的路徑
+
         private void Form1_Load(object sender, EventArgs e)
         {
             if (File.Exists(temp))//當在指定路徑下存在該文件時
@@ -51,10 +52,10 @@ namespace vcs_ReadWrite_RTF2
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-            hold.Enabled = true;//
-            if (this.richTextBox1.Text == "" || this.richTextBox1.Text == null)//
+            hold.Enabled = true;
+            if (this.richTextBox1.Text == "" || this.richTextBox1.Text == null)
             {
-                unfold.Enabled = true;//
+                unfold.Enabled = true;
             }
         }
 

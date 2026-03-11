@@ -109,6 +109,7 @@
             this.button01.Name = "button01";
             this.button01.Size = new System.Drawing.Size(150, 50);
             this.button01.TabIndex = 2;
+            this.button01.Text = "選取資料夾";
             this.button01.UseVisualStyleBackColor = true;
             this.button01.Click += new System.EventHandler(this.button01_Click);
             // 

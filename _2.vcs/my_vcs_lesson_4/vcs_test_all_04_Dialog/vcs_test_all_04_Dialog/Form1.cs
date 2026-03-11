@@ -257,6 +257,27 @@ namespace vcs_test_all_04_Dialog
 
         private void button01_Click(object sender, EventArgs e)
         {
+            //選取資料夾
+            //folderBrowserDialog1
+            //瀏覽資料夾
+
+            //設定瀏覽資料夾對話方塊-從虛擬「桌面」為開始的資料夾
+            folderBrowserDialog1.RootFolder = Environment.SpecialFolder.Desktop;
+
+            //指定要瀏覽的資料夾
+            folderBrowserDialog1.SelectedPath = Application.StartupPath; //從目前目錄開始尋找檔案
+
+            //瀏覽資料夾的提示文字
+            folderBrowserDialog1.Description = "選取要瀏覽的資料夾";
+
+            //進入FloderBrowserDialog並按確定鈕
+            DialogResult result = folderBrowserDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                //取得瀏覽資料夾對話方塊所選取的路徑
+                string folderName = folderBrowserDialog1.SelectedPath;
+            }
+
         }
 
         private void button02_Click(object sender, EventArgs e)
@@ -841,6 +862,25 @@ namespace vcs_test_all_04_Dialog
     }
 }
 
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+
 /*
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -912,6 +952,75 @@ openFileDialog1.Filter = "點陣圖 (*.bmp)|*.bmp|JPEG (*.JPG)|*.JPG|" + "GIF(*.
 saveFileDialog1.Filter = "點陣圖 (*.bmp)|*.bmp|JPEG (*.JPG)|*.JPG|" + "GIF(*.GIF)| *. GIF|All File (*.*)|*.*";
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+            //openFileDialog1
+            //建立處理資料流的物件note
+            Stream note = null;
+            //設定OpenFileDialog的屬性-InitialDirectory設預設路徑
+            //openFileDialog1.InitialDirectory = "../../data/";
+            openFileDialog1.InitialDirectory = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\Visual C# 2019-程式設計16堂課\vcs_tmp_all1\vcs_tmp_all1\data";
+            //篩選檔案，只顯示文字檔
+            openFileDialog1.Filter = "文字檔(*.txt)|*.txt|所有檔案(*.*)|*.*";
+            //檔案類型會顯示-所有檔案
+            openFileDialog1.FilterIndex = 2;
+            //對話方塊關閉前還原目前取得的路徑
+            openFileDialog1.RestoreDirectory = true;
+            //以一般的訊息方塊來確認使用者按OK鈕 
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+            }
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //openFileDialog1
+
+            openFileDialog1.InitialDirectory = Application.StartupPath; //從目前目錄開始尋找檔案
+            openFileDialog1.FileName = null;
+
+            //開啟RTF格式檔案
+            openFileDialog1.DefaultExt = "rtf";
+            openFileDialog1.Filter = "RTF格式(*.rtf)|*.rtf|所有檔案(*.*)|*.*";
+
+            //顯示開啟檔案對話方塊
+            DialogResult result = openFileDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+            }
+
+
+
+
+                //確認沒有開啟的檔案，依預設的資料夾來開啟
+                openFileDialog1.InitialDirectory = folderName;
+                openFileDialog1.FileName = null;
+
+
+
+
+
+            //savefiledialog
+            //設定預設目錄, 預設欲儲存的檔案類型
+            saveFileDialog1.InitialDirectory = Application.StartupPath; //從目前目錄開始尋找檔案
+            saveFileDialog1.Filter = "文字檔(*.txt)|*.txt|RTF格式|*.rtf";
+            //設定對話方塊的標題
+            saveFileDialog1.Title = "儲存檔案";
+            //設定是否在關閉之前要還原至目前的目錄
+            saveFileDialog1.RestoreDirectory = true;
+            saveFileDialog1.CreatePrompt = true;
+            saveFileDialog1.OverwritePrompt = true;
+            //假如按下儲存按鈕時
+            DialogResult result = saveFileDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+            }
+
+
+
+
+
+//saveFileDialog1.InitialDirectory = Application.StartupPath; //從目前目錄開始尋找檔案
 
 */
 

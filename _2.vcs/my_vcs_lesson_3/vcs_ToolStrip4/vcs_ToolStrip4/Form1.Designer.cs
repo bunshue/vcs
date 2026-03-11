@@ -34,6 +34,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tscobFont = new System.Windows.Forms.ToolStripComboBox();
             this.rtxtShow = new System.Windows.Forms.RichTextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tsMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,7 +48,7 @@
             this.tscobFont});
             this.tsMain.Location = new System.Drawing.Point(0, 0);
             this.tsMain.Name = "tsMain";
-            this.tsMain.Size = new System.Drawing.Size(572, 29);
+            this.tsMain.Size = new System.Drawing.Size(996, 29);
             this.tsMain.TabIndex = 2;
             this.tsMain.Text = "toolStrip1";
             // 
@@ -96,11 +97,20 @@
             this.rtxtShow.TabIndex = 3;
             this.rtxtShow.Text = "";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(566, 32);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(418, 428);
+            this.richTextBox1.TabIndex = 4;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(572, 472);
+            this.ClientSize = new System.Drawing.Size(996, 472);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.tsMain);
             this.Controls.Add(this.rtxtShow);
             this.Name = "Form1";
@@ -121,6 +131,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripComboBox tscobFont;
         private System.Windows.Forms.RichTextBox rtxtShow;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

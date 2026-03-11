@@ -316,33 +316,6 @@ namespace vcs_test_all_01_Control
 
         private void button3_Click(object sender, EventArgs e)
         {
-            CreateMyRichTextBox();
-        }
-
-        public void CreateMyRichTextBox()
-        {
-            RichTextBox richTextBox1 = new RichTextBox();
-            richTextBox1.Dock = DockStyle.Fill;
-
-            try
-            {
-                richTextBox1.LoadFile(@"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf\VS2013Express.rtf");
-                richTextBox1.Find("Text", RichTextBoxFinds.MatchCase);
-
-                richTextBox1.SelectionFont = new Font("Verdana", 12, FontStyle.Bold);
-                richTextBox1.SelectionColor = Color.Red;
-
-                string filename = Application.StartupPath + "\\rtf_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".rtf";
-                richTextBox1.SaveFile(filename, RichTextBoxStreamType.RichText);
-                richTextBox1.Text += "已存檔 : " + filename + "\n";
-
-                this.Controls.Add(richTextBox1);
-            }
-            catch (System.IO.FileNotFoundException)
-            {
-                MessageBox.Show("找不到檔案");
-            }
-
         }
 
         private void button4_Click(object sender, EventArgs e)

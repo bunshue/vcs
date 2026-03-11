@@ -125,6 +125,11 @@ namespace vcs_RichTextBox3
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Size.Width - bt_clear2.Size.Width, richTextBox2.Location.Y + richTextBox2.Size.Height - bt_clear2.Size.Height);
 
             this.Size = new Size(1420, 760);
+            this.Text = "vcs_RichTextBox3";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -303,30 +308,10 @@ namespace vcs_RichTextBox3
 
         private void button12_Click(object sender, EventArgs e)
         {
-            //開啟RTF檔案
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf\text.rtf";
-
-            try
-            {
-                richTextBox1.LoadFile(filename);
-            }
-            catch (FileNotFoundException)
-            {
-                MessageBox.Show("沒找到相關文件");
-            }
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-            //另存RTF檔案
-            try
-            {
-                richTextBox1.SaveFile("tmp_aaaa.rtf");
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show(err.Message);
-            }
         }
 
         private void button14_Click(object sender, EventArgs e)

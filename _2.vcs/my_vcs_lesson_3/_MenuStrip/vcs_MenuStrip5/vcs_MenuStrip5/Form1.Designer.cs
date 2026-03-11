@@ -58,6 +58,7 @@
             this.黑色ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.黃色ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.紅色ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.Main_menuStrip.SuspendLayout();
             this.ctmsColor.SuspendLayout();
             this.SuspendLayout();
@@ -71,7 +72,7 @@
             this.Font_menuItem});
             this.Main_menuStrip.Location = new System.Drawing.Point(0, 0);
             this.Main_menuStrip.Name = "Main_menuStrip";
-            this.Main_menuStrip.Size = new System.Drawing.Size(492, 24);
+            this.Main_menuStrip.Size = new System.Drawing.Size(938, 24);
             this.Main_menuStrip.TabIndex = 2;
             this.Main_menuStrip.Text = "設定檔案";
             // 
@@ -295,11 +296,20 @@
             this.紅色ToolStripMenuItem.Text = "紅色";
             this.紅色ToolStripMenuItem.Click += new System.EventHandler(this.紅色ToolStripMenuItem_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(486, 27);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(440, 492);
+            this.richTextBox1.TabIndex = 4;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(492, 531);
+            this.ClientSize = new System.Drawing.Size(938, 531);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.Main_menuStrip);
             this.Controls.Add(this.rtxtShow);
             this.Name = "Form1";
@@ -344,6 +354,7 @@
         private System.Windows.Forms.ToolStripMenuItem 黑色ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 黃色ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 紅色ToolStripMenuItem;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

@@ -150,12 +150,12 @@ namespace vcs_MenuStrip5
 
         private void OpenFile_menuItem_Click(object sender, EventArgs e)
         {
-            rtxtShow.LoadFile("../../../Demo01.rtf");
+            richTextBox1.Text += "你按了 開檔\n";
         }
 
         private void SaveFile_menuItem_Click(object sender, EventArgs e)
         {
-            rtxtShow.SaveFile("tmp_Demo02.rtf");
+            richTextBox1.Text += "你按了 存檔\n";
         }
 
         private void EndFile_menuItem_Click(object sender, EventArgs e)

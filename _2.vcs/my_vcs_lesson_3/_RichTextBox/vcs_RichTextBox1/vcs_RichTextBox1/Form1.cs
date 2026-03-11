@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using System.IO;    //for FILE
 using System.Diagnostics;   //for Process, Stopwatch
 
-
 namespace vcs_RichTextBox1
 {
     public partial class Form1 : Form
@@ -152,13 +151,17 @@ namespace vcs_RichTextBox1
             bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear1.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear1.Size.Height);
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Size.Width - bt_clear2.Size.Width, richTextBox2.Location.Y + richTextBox2.Size.Height - bt_clear2.Size.Height);
 
-            this.Size = new Size(1500 + 20, 780);
-
             lb_richtextbox1.Text = "richTextBox1";
             lb_richtextbox2.Text = "richTextBox2 message";
             lb_richtextbox_rtf.Text = "richTextBox_rtf";
             lb_richtextbox1_text.Text = "抓出游標所指的字";
+
+            this.Size = new Size(1500 + 20, 780);
             this.Text = "vcs_RichTextBox1";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear1_Click(object sender, EventArgs e)

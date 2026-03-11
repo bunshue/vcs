@@ -25,23 +25,12 @@ namespace vcs_ToolStrip3
 
         private void tsbOpen_Click(object sender, EventArgs e)
         {
-            // 使用try{...}catch{...}來補捉沒有檔案可能發生的例外
-            try
-            {
-                // 將test.rtf檔的內容載入到richTextBox1豐富文字方塊內
-                richTextBox1.LoadFile("GOTOP.rtf", RichTextBoxStreamType.RichText);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            richTextBox1.Text += "你按了 開檔\n";
         }
 
         private void tsbSave_Click(object sender, EventArgs e)
         {
-            // 將richTextBox1豐富文字方塊內的資料儲存到test.rtf檔
-            richTextBox1.SaveFile("GOTOP.rtf", RichTextBoxStreamType.RichText);
-
+            richTextBox1.Text += "你按了 開檔\n";
         }
 
         private void tsbCls_Click(object sender, EventArgs e)

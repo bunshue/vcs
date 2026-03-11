@@ -85,33 +85,6 @@ namespace vcs_Password
 
         private void button3_Click(object sender, EventArgs e)
         {
-            CreateMyRichTextBox();
-        }
-
-        public void CreateMyRichTextBox()
-        {
-            RichTextBox richTextBox1 = new RichTextBox();
-            richTextBox1.Dock = DockStyle.Fill;
-
-            try
-            {
-                richTextBox1.LoadFile(@"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf\VS2013Express.rtf");
-                richTextBox1.Find("Text", RichTextBoxFinds.MatchCase);
-
-                richTextBox1.SelectionFont = new Font("Verdana", 12, FontStyle.Bold);
-                richTextBox1.SelectionColor = Color.Red;
-
-                string filename = Application.StartupPath + "\\rtf_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".rtf";
-                richTextBox1.SaveFile(filename, RichTextBoxStreamType.RichText);
-                richTextBox1.Text += "已存檔 : " + filename + "\n";
-
-                this.Controls.Add(richTextBox1);
-            }
-            catch (System.IO.FileNotFoundException)
-            {
-                MessageBox.Show("找不到檔案");
-            }
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -123,10 +96,7 @@ namespace vcs_Password
                 System.String strControlName = con.Name.ToString();//获得控件的名称
 
                 richTextBox1.Text += "Type\t" + strControl + "\tName\t" + strControlName + "\n";
-
-
             }
-
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -271,7 +241,7 @@ namespace vcs_Password
             e.Graphics.DrawLine(Pens.Red, e.Graphics.MeasureString(groupBox1.Text, groupBox1.Font).Width + 8, 7, groupBox1.Width - 2, 7);
             e.Graphics.DrawLine(Pens.Red, 1, 7, 1, groupBox1.Height - 2);
             e.Graphics.DrawLine(Pens.Red, 1, groupBox1.Height - 2, groupBox1.Width - 2, groupBox1.Height - 2);
-            e.Graphics.DrawLine(Pens.Red, groupBox1.Width - 2, 7, groupBox1.Width - 2, groupBox1.Height - 2); 
+            e.Graphics.DrawLine(Pens.Red, groupBox1.Width - 2, 7, groupBox1.Width - 2, groupBox1.Height - 2);
         }
 
         private void button14_MouseMove(object sender, MouseEventArgs e)
@@ -446,10 +416,4 @@ namespace vcs_Password
             }
         }
     }
-
-
-
-
-
-
 }

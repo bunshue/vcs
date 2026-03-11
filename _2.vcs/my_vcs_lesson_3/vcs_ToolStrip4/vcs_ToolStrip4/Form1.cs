@@ -24,12 +24,12 @@ namespace vcs_ToolStrip4
 
         private void tsbOpen_Click(object sender, EventArgs e)
         {
-            rtxtShow.LoadFile("../../Demo01.rtf");
+            richTextBox1.Text += "你按了 開檔\n";
         }
 
         private void tsbSave_Click(object sender, EventArgs e)
         {
-            rtxtShow.SaveFile("tmp_change.rtf");
+            richTextBox1.Text += "你按了 存檔\n";
         }
 
         private void tscobFont_SelectedIndexChanged(object sender, EventArgs e)
