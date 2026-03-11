@@ -61,10 +61,9 @@ namespace xCh5_1_3_11
         {
             IEnumerator myEnumerator;
             myEnumerator = checkedListBox1.CheckedIndices.GetEnumerator();
-            int y;
             while (myEnumerator.MoveNext() != false)
             {
-                y = (int)myEnumerator.Current;
+                int y = (int)myEnumerator.Current;
                 checkedListBox1.SetItemChecked(y, false);
             }
             textBox1.Clear();

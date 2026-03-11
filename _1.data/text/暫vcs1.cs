@@ -36,17 +36,6 @@ this.listBox1.Items.AddRange(FontFamily.Families);
 
 
 
-            listBox1.Items.AddRange(
-                new object[] { 
-                    "電冰箱：1300W", 
-                    "電鍋：800W", 
-                    "微波爐：1200W", 
-                    "冷氣機：900W", 
-                    "吹風機：800W" 
-                });
-
-
-
 
 
 label
@@ -5145,7 +5134,6 @@ TBGBMBKB
 
 
 vcs
-listBox1.Items.Count > 0);
 
             if (listBox1.SelectedItems.Count > 0)
 

@@ -24,14 +24,16 @@ namespace xCh5_1_2_11
             listBox1.SelectionMode = SelectionMode.MultiExtended;
 
             // 新增ListBox物件的選項
-            listBox1.Items.AddRange(
-                new object[] { 
-                    "滑鼠", 
-                    "鍵盤", 
-                    "網卡", 
-                    "螢幕", 
-                    "音效卡" 
-                });
+            listBox1.Items.AddRange(new object[]
+            { 
+                "滑鼠", 
+                "鍵盤", 
+                "網卡", 
+                "螢幕", 
+                "音效卡" 
+            });
+
+            richTextBox1.Text += "listBox1有項目 : " + listBox1.Items.Count.ToString() + " 個\n";
         }
 
         // 新增按鈕
@@ -118,6 +120,7 @@ namespace xCh5_1_2_11
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             label1.Text = "目前位置：" + listBox1.SelectedIndex + "/" + listBox1.Items.Count;
+            richTextBox1.Text += "目前位置：" + listBox1.SelectedIndex + "/" + listBox1.Items.Count + "\n";
 
             textBox2.AppendText(Environment.NewLine + listBox1.SelectedItem.ToString());
         }

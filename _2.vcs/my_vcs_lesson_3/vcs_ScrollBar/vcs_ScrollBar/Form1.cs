@@ -36,6 +36,16 @@ namespace vcs_ScrollBar
             // label1顯示目前水平捲軸與垂直捲軸的值
             label1.Text = "寬：" + hScrollBar1.Value.ToString() + "       " + "高：" + vScrollBar1.Value.ToString();
 
+            hScrollBar1.Minimum = 0;
+            hScrollBar1.Maximum = pictureBox1.Width;
+
+            vScrollBar1.Minimum = 0;
+            vScrollBar1.Maximum = pictureBox1.Height;
+
+            //pictureBox1.Width = 300;
+            //pictureBox1.Height = 225;
+            //hScrollBar1.Value = 300;
+            //vScrollBar1.Value = 225;
         }
 
         void show_item_location()
@@ -66,16 +76,14 @@ namespace vcs_ScrollBar
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
-
         }
-
 
         private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
             // ===  當vScrollBar1垂直捲軸捲動時會執行此事件
             // 圖片的高度依目前垂直捲軸的值調整
             pictureBox1.Height = vScrollBar1.Value;
-            //label1.Text = "寬：" + hScrollBar1.Value.ToString() + "       高：" + vScrollBar1.Value.ToString();
+            label1.Text = "寬：" + hScrollBar1.Value.ToString() + "       高：" + vScrollBar1.Value.ToString();
         }
 
         private void hScrollBar1_Scroll(object sender, ScrollEventArgs e)
@@ -85,6 +93,5 @@ namespace vcs_ScrollBar
             pictureBox1.Width = hScrollBar1.Value;
             label1.Text = "寬：" + hScrollBar1.Value.ToString() + "       高：" + vScrollBar1.Value.ToString();
         }
-
     }
 }
