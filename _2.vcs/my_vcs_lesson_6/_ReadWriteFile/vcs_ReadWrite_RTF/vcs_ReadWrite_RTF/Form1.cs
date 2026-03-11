@@ -64,6 +64,39 @@ namespace vcs_ReadWrite_RTF
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf\VS2013Express.rtf";
             richTextBox1.LoadFile(filename, RichTextBoxStreamType.RichText);//從指定位置加載RTF文件
             richTextBox2.Text += "開啟檔案 : " + filename + "\n";
+
+
+            /*
+            //以RichTextBox的LoadFile()方法載入檔案
+            Stream sr = openFileDialog1.OpenFile();
+            richTextBox1.LoadFile(sr, RichTextBoxStreamType.RichText);
+            sr.Close();
+            */
+
+            /*
+            //開啟RTF檔案
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf\text.rtf";
+
+            try
+            {
+                richTextBox1.LoadFile(filename);
+            }
+            catch (FileNotFoundException)
+            {
+                MessageBox.Show("沒找到相關文件");
+            }
+            */
+
+            /*
+            rtxtShow.LoadFile("../../Demo01.rtf");
+            // 將test.rtf檔的內容載入到richTextBox1豐富文字方塊內
+            richTextBox1.LoadFile("Gotop.rtf", RichTextBoxStreamType.RichText);
+
+            // 將test.rtf檔的內容載入到richTextBox1豐富文字方塊內
+            richTextBox1.LoadFile("GOTOP.rtf", RichTextBoxStreamType.RichText);
+            */
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -77,16 +110,34 @@ namespace vcs_ReadWrite_RTF
             //richTextBox1.SaveFile(filename);//在指定位置下保存RTF文件
 
             richTextBox2.Text += "儲存檔案 : " + filename + " 完成\n";
+
+            /*
+            rtxtShow.SaveFile("tmp_change.rtf");
+
+            // 將richTextBox1豐富文字方塊內的資料儲存到test.rtf檔
+            richTextBox1.SaveFile("tmp_Gotop.rtf", RichTextBoxStreamType.RichText);
+
+
+            // 將richTextBox1豐富文字方塊內的資料儲存到test.rtf檔
+            richTextBox1.SaveFile("GOTOP.rtf", RichTextBoxStreamType.RichText);
+            */
+
+            /*
+            //另存RTF檔案
+            try
+            {
+                richTextBox1.SaveFile("tmp_aaaa.rtf");
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message);
+            }
+            */
+
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            /*
-            //以RichTextBox的LoadFile()方法載入檔案
-            Stream sr = openFileDialog1.OpenFile();
-            richTextBox1.LoadFile(sr, RichTextBoxStreamType.RichText);
-            sr.Close();
-            */
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -109,30 +160,10 @@ namespace vcs_ReadWrite_RTF
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //開啟RTF檔案
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf\text.rtf";
-
-            try
-            {
-                richTextBox1.LoadFile(filename);
-            }
-            catch (FileNotFoundException)
-            {
-                MessageBox.Show("沒找到相關文件");
-            }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //另存RTF檔案
-            try
-            {
-                richTextBox1.SaveFile("tmp_aaaa.rtf");
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show(err.Message);
-            }
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -176,8 +207,6 @@ namespace vcs_ReadWrite_RTF
         {
 
         }
-
-
     }
 }
 
@@ -196,29 +225,6 @@ namespace vcs_ReadWrite_RTF
 
 
 /*  可搬出
-
-*/
-
-
-
-/*
-            rtxtShow.LoadFile("../../Demo01.rtf");
-            rtxtShow.SaveFile("tmp_change.rtf");
-
-
-                // 將test.rtf檔的內容載入到richTextBox1豐富文字方塊內
-                richTextBox1.LoadFile("Gotop.rtf", RichTextBoxStreamType.RichText);
-
-                // 將test.rtf檔的內容載入到richTextBox1豐富文字方塊內
-                richTextBox1.LoadFile("GOTOP.rtf", RichTextBoxStreamType.RichText);
-
-
-            // 將richTextBox1豐富文字方塊內的資料儲存到test.rtf檔
-            richTextBox1.SaveFile("tmp_Gotop.rtf", RichTextBoxStreamType.RichText);
-
-
-            // 將richTextBox1豐富文字方塊內的資料儲存到test.rtf檔
-            richTextBox1.SaveFile("GOTOP.rtf", RichTextBoxStreamType.RichText);
 
 */
 

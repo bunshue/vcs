@@ -568,37 +568,9 @@ namespace vcs_Mix00
             richTextBox1.Text += "\n";
         }
 
-        class Student
-        {
-            //第一個靜態方法-計算總分
-            public static uint Total(uint a, uint b, uint c)
-            {
-                uint sum = a + b + c;//總分
-                return sum;//回傳加總結果         
-            }
-            //第二個靜態方法-算平均分數
-            public static float Average(string word, uint number)
-            {
-                float result = number / 3.0F;//平均
-                return result;
-            }
-        }
-
         private void button9_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //使用類別的靜態方法
-            string name = "david";
-            uint math = 90;
-            uint eng = 82;
-            uint chin = 85;
-
-            //直接以類別來呼叫靜態方法Total()、Average()
-            uint score = Student.Total(math, eng, chin);
-            float avg = Student.Average("平均分數", score);
-
-            Console.WriteLine(name = " " + "總分 : " + score + "\t平均 : " + avg);
         }
 
         //局部圖像放大
@@ -1456,16 +1428,8 @@ namespace vcs_Mix00
             hanoi(N, 1, 2, 3);
         }
 
-        class Book
-        {
-            public int books; //宣告books為公用變數
-        }
-
         private void button27_Click(object sender, EventArgs e)
         {
-            Book eng = new Book();
-            eng.books = 10;
-            richTextBox1.Text += "目前英文類書籍共有{0}本" + eng.books + "\n";
         }
 
         static int top = -1;
@@ -1631,11 +1595,42 @@ namespace vcs_Mix00
             richTextBox1.Text += string.Format("\n呼叫敘述 離開方法回原處\t：a= {0}  b={1}", a, b);
         }
 
+
+        //以傳值方式呼叫PassValue方法
+        private void PassValue(int x, int y)
+        {
+            //label1.Text += "2.方法中:變數計算前: x = " + x.ToString() + "  y = " + y.ToString() + "\n\n";
+            x += 3; //虛引數x加3
+            y += 2; //虛引數y加2
+            //label1.Text += "3.方法中:變數計算後: x = " + x.ToString() + "  y = " + y.ToString() + "\n\n";
+        }
+
+        //以參考呼叫PassRef方法
+        private void PassRef(ref int x, ref int y)
+        {
+            //label1.Text += "2.方法中:變數計算前: x = " + x.ToString() + "  y = " + y.ToString() + "\n\n";
+            x += 3; //虛引數x加3
+            y += 2; //虛引數y加2
+            //label1.Text += "3.方法中:變數計算後: x = " + x.ToString() + "  y = " + y.ToString() + "\n\n";
+        }
+
         private void button31_Click(object sender, EventArgs e)
         {
-            //輸出標頭
-            String ch = new String('-', 58);
-            richTextBox1.Text += ch + "\n";
+            //傳值 vs 傳址
+            //傳值
+
+            int a = 10, b = 15;
+            //label1.Text = "1.主程式:呼叫方法前: a = " + a.ToString() + "  b = " + b.ToString() + "\n\n";
+            PassValue(a, b);
+            //label1.Text += "4.主程式:呼叫方法後: a = " + a.ToString() + "  b = " + b.ToString() + "\n\n";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //傳址
+
+            //label1.Text = "1.主程式:呼叫方法前: a = " + a.ToString() + "  b = " + b.ToString() + "\n\n";
+            PassRef(ref a, ref b);
+            //label1.Text += "4.主程式:呼叫方法後: a = " + a.ToString() + "  b = " + b.ToString() + "\n\n";
         }
 
         private void button32_Click(object sender, EventArgs e)
@@ -1802,62 +1797,12 @@ namespace vcs_Mix00
             int num = ng_reason.GetUpperBound(0);
             richTextBox1.Text += "num = " + num.ToString() + "\n";
 
-
             richTextBox1.Text += "------------------------------\n";  // 30個
-
 
         }
 
         private void button33_Click(object sender, EventArgs e)
         {
-            Car1 Benz1 = new Car1();
-            Benz1.SetSpeed(500);			// 速度值超過 200
-            richTextBox1.Text += "Benz1.GetSpeed() = {0}" + Benz1.GetSpeed() + "\n";	// 顯示速度最大值200
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            Car2 Benz2 = new Car2();
-            Benz2.Speed = 199;
-            richTextBox1.Text += "現在速度:{0}" + Benz2.Speed + "\n";
-            richTextBox1.Text += "加速 ..." + "\n";
-            Benz2.Accelerate();
-            richTextBox1.Text += "現在速度:{0}" + Benz2.Speed + "\n";
-            richTextBox1.Text += "加速 ..." + "\n";
-            Benz2.Accelerate();
-            richTextBox1.Text += "現在速度:{0}" + Benz2.Speed + "\n";
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            Student1 Peter = new Student1();
-            richTextBox1.Text += " Peter的資料-->使用Student()建構式\n";
-            Peter.GetShow();
-            Student1 David = new Student1(56);
-            richTextBox1.Text += " David的資料-->使用Student(56)建構式\n";
-            David.GetShow();
-            Student1 Mary = new Student1(48, 150);
-            richTextBox1.Text += " Mary的資料 -->使用Student(48, 150)建構式\n";
-            Mary.GetShow();
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            Student2 David2 = new Student2(56);
-            richTextBox1.Text += " David2的資料-->使用Student(56)建構式\n";
-            David2.GetShow();
-            Student2 Mary2 = new Student2(48, 150);
-            richTextBox1.Text += " Mary2的資料 -->使用Student(48, 150)建構式\n";
-            Mary2.GetShow();
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            Student3 Peter3 = new Student3();
-            richTextBox1.Text += " Peter3的資料-->使用Student()建構式\n";
-            Peter3.GetShow();
-            Student3 David3 = new Student3(56);
-            richTextBox1.Text += " David3的資料-->使用Student(56)建構式\n";
-            David3.GetShow();
-            Student3 Mary3 = new Student3(48, 150);
-            richTextBox1.Text += " Mary3的資料 -->使用Student(48, 150)建構式\n";
-            Mary3.GetShow();
         }
 
         private void CallOut(out int x, out int y)
@@ -2028,7 +1973,9 @@ namespace vcs_Mix00
 
         private void button39_Click(object sender, EventArgs e)
         {
-
+            //輸出標頭
+            String ch = new String('-', 58);
+            richTextBox1.Text += ch + "\n";
         }
     }
 
@@ -2043,11 +1990,7 @@ namespace vcs_Mix00
             protocol_Tls12 = (SecurityProtocolType)3072;
     }
 
-    /// <summary>
-    /// 表達式計算類。支持數學函數，支持函數嵌套
-    /// 作者watsonyin
-    /// 開發日期：2010年10月 版本1.0
-    /// </summary>
+    // 表達式計算類。支持數學函數，支持函數嵌套
     public class NEval
     {
         public NEval()
@@ -2578,10 +2521,7 @@ namespace vcs_Mix00
         }
     }
 
-
-    /// <summary>
-    /// 可以检测到的表达式错误的Exception
-    /// </summary>
+    // 可以检测到的表达式错误的Exception
     public class ExpressionException : Exception
     {
         public override string Message
@@ -2982,16 +2922,10 @@ namespace vcs_Mix00
         }
     }
 
-    /// <summary> 
-    /// 感知哈希算法 
-    /// </summary> 
+    // 感知哈希算法 
     public class ImageComparer
     {
-        /// <summary> 
-        /// 獲取圖片的Hashcode 
-        /// </summary> 
-        /// <param name="imageName"></param> 
-        /// <returns></returns> 
+        // 獲取圖片的Hashcode
         public static string GetImageHashCode(string imageName)
         {
             int width = 8;
@@ -3045,13 +2979,8 @@ namespace vcs_Mix00
             return hashCode.ToString();
         }
 
-        /// <summary> 
-        /// 計算"漢明距離"（Hamming distance）。 
-        /// 如果不相同的數據位不超過5，就說明兩張圖片很相似；如果大於10，就說明這是兩張不同的圖片。 
-        /// </summary> 
-        /// <param name="sourceHashCode"></param> 
-        /// <param name="hashCode"></param> 
-        /// <returns></returns> 
+        // 計算"漢明距離"（Hamming distance）。 
+        // 如果不相同的數據位不超過5，就說明兩張圖片很相似；如果大於10，就說明這是兩張不同的圖片。 
         public static int HammingDistance(String sourceHashCode, String hashCode)
         {
             int difference = 0;
@@ -3067,21 +2996,13 @@ namespace vcs_Mix00
             return difference;
         }
 
-        /// <summary> 
-        /// 縮放圖片
-        /// </summary> 
-        /// <param name="imageName"></param> 
-        /// <returns></returns> 
+        // 縮放圖片
         private static Image Thumb(string imageName)
         {
             return Image.FromFile(imageName).GetThumbnailImage(8, 8, () => { return false; }, IntPtr.Zero);
         }
 
-        /// <summary> 
-        /// 轉為64級灰度 
-        /// </summary> 
-        /// <param name="pixels"></param> 
-        /// <returns></returns> 
+        // 轉為64級灰度 
         private static int RGBToGray(int pixels)
         {
             int _red = (pixels >> 16) & 0xFF;
@@ -3090,11 +3011,7 @@ namespace vcs_Mix00
             return (int)(0.3 * _red + 0.59 * _green + 0.11 * _blue);
         }
 
-        /// <summary> 
-        /// 計算平均值 
-        /// </summary> 
-        /// <param name="pixels"></param> 
-        /// <returns></returns> 
+        // 計算平均值 
         private static int Average(int[] pixels)
         {
             float m = 0;
@@ -3164,134 +3081,6 @@ namespace vcs_Mix00
                     break;
             }
             return ch;
-        }
-    }
-
-    class Car1
-    {
-        // 宣告_speed為私有變數，表示該變數只能在Car類別內使用
-        private int _speed;
-        // 定義GetSpeed()方法用來傳回_speed
-        public int GetSpeed()
-        {
-            return _speed;
-        }
-        // 定義SetSpeed()方法用來設定_speed
-        public void SetSpeed(int vSpeed)
-        {
-            if (vSpeed < 0) vSpeed = 0;		// 設定速度不得低於 0
-            if (vSpeed > 200) vSpeed = 200;	// 設定速度不得高於 200
-            _speed = vSpeed;
-        }
-    }
-
-    class Car2   // 定義Car類別
-    {
-        // 宣告_speed私有變數用來存放車子的速度值
-        private int _speed = 0;
-        // 定義Speed速度屬性
-        public int Speed
-        {
-            get
-            {
-                return _speed;  // 傳回目前的速度
-            }
-            set
-            {
-                if (value < 0) value = 0;       // 速度不可小於0
-                if (value > 200) value = 200;   // 速度不可大於200
-                _speed = value;                 // 設定速度
-            }
-        }
-        // 定義Accelerate()方法，用來指定目前車子速度+1 
-        public void Accelerate()
-        {
-            _speed++;					// 速度 + 1
-            if (_speed > 200) _speed = 200;	// 檢查速度不可超過 200
-        }
-    }
-
-    class Student1
-    {
-        private int _Height, _Weight;
-        public Student1()
-        {
-            _Weight = 48;
-            _Height = 160;
-        }
-        // Student類別的建構式，須設定一個引數
-        public Student1(int w)
-        {
-            _Weight = w;  		// 初始化_Weight欄位
-            _Height = 160;	      	// 初始化_Height欄位的值為160
-        }
-        // Student類別的建構式，須設定兩個引數
-        public Student1(int w, int h)
-        {
-            _Weight = w;
-            _Height = h;
-        }
-        // Student類別的GetShow()方法，可顯示學生的身高和體重
-        public void GetShow()
-        {
-            //richTextBox1.Text +=string.Format(" 身高是: {0} ", _Height);
-            //richTextBox1.Text += string.Format(" 體重是: {0} \n", _Weight);
-        }
-    }
-
-    class Student2
-    {
-        private int _Height, _Weight;
-        //public Student()
-        //{
-        //    _Weight = 48;
-        //    _Height = 160;
-        // }
-        // Student類別的建構式，須設定一個引數
-        public Student2(int w)
-        {
-            _Weight = w;  		// 初始化_Weight欄位
-            _Height = 160;	      	// 初始化_Height欄位的值為160
-        }
-        // Student類別的建構式，須設定兩個引數
-        public Student2(int w, int h)
-        {
-            _Weight = w;
-            _Height = h;
-        }
-        // Student類別的GetShow()方法，可顯示學生的身高和體重
-        public void GetShow()
-        {
-            //richTextBox1.Text +=string.Format(" 身高是: {0} ", _Height);
-            //richTextBox1.Text += string.Format(" 體重是: {0} \n", _Weight);
-        }
-    }
-
-    class Student3
-    {
-        private int _Height, _Weight;
-        public Student3()
-        {
-            //_Weight = 48;
-            //_Height = 160;
-        }
-        // Student類別的建構式，須設定一個引數
-        public Student3(int w)
-        {
-            _Weight = w;  		// 初始化_Weight欄位
-            _Height = 160;	      	// 初始化_Height欄位的值為160
-        }
-        // Student類別的建構式，須設定兩個引數
-        public Student3(int w, int h)
-        {
-            _Weight = w;
-            _Height = h;
-        }
-        // Student類別的GetShow()方法，可顯示學生的身高和體重
-        public void GetShow()
-        {
-            //richTextBox1.Text +=" 身高是: {0} "+ _Height+ "\n";
-            //richTextBox1.Text +=" 體重是: {0} \n"+ _Weight+ "\n";
         }
     }
 }

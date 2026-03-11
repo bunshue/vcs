@@ -34,6 +34,7 @@ namespace vcs_Mix01
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
             toolTip1.SetToolTip(button6, "顯示提示訊息");
         }
 
@@ -121,17 +122,6 @@ namespace vcs_Mix01
         private void button0_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            int[] Choices;
-            int num_candidates = 10;
-            Choices = Extensions.RandomArrangement(num_candidates);
-
-            foreach (int i in Choices)
-            {
-                richTextBox1.Text += i.ToString() + " ";
-
-            }
-            richTextBox1.Text += "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -274,48 +264,9 @@ namespace vcs_Mix01
             }
         }
 
-        //之後 class PersonClass 在獨立成一個檔案 PersonClass.cs
-        class PersonClass
-        {
-            //自動實作屬性
-            public string Name { get; set; }
-            public byte Height { get; set; }
-
-            //定義靜態方法
-            public void showInfo(PersonClass first)
-            {
-                //指派屬性值做物件初始化
-                first = new PersonClass() { Name = "林小明", Height = 172 };
-            }
-
-            //定義靜態方法
-            public void display(ref PersonClass second)
-            {
-                //指派屬性值做物件初始化
-                second = new PersonClass { Name = "江大海", Height = 168 };
-            }
-        }
-
         private void button4_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            PersonClass pern = new PersonClass() { Name = "王小風", Height = 176 };
-
-            richTextBox1.Text += "By Value -> \n";
-            //Passing By Value - 輸出王小風
-            pern.showInfo(pern);
-
-            richTextBox1.Text += pern.Name + "\t" + pern.Height + "\n";
-            //Console.WriteLine($"{pern.Name}, " +               $"您的身高 {pern.Height}cm");
-            richTextBox1.Text += "By Reference -> \n";
-            //Passing By Reference - 輸出江大海
-            pern.display(ref pern);
-
-            richTextBox1.Text += pern.Name + "\t" + pern.Height + "\n";
-            //Console.WriteLine($"{pern.Name}, " +               $"您的身高 {pern.Height}cm");
-            //Console.ReadKey();
-
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -826,46 +777,9 @@ namespace vcs_Mix01
             }
         }
 
-        //以傳值方式呼叫PassValue方法
-        private void PassValue(int x, int y)
-        {
-            //label1.Text += "2.方法中:變數計算前: x = " + x.ToString() + "  y = " + y.ToString() + "\n\n";
-            x += 3; //虛引數x加3
-            y += 2; //虛引數y加2
-            //label1.Text += "3.方法中:變數計算後: x = " + x.ToString() + "  y = " + y.ToString() + "\n\n";
-        }
-
-        //以參考呼叫PassRef方法
-        private void PassRef(ref int x, ref int y)
-        {
-            //label1.Text += "2.方法中:變數計算前: x = " + x.ToString() + "  y = " + y.ToString() + "\n\n";
-            x += 3; //虛引數x加3
-            y += 2; //虛引數y加2
-            //label1.Text += "3.方法中:變數計算後: x = " + x.ToString() + "  y = " + y.ToString() + "\n\n";
-        }
-
-
-
         private void button14_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //傳值
-
-            int a = 10, b = 15;
-            //label1.Text = "1.主程式:呼叫方法前: a = " + a.ToString() + "  b = " + b.ToString() + "\n\n";
-            PassValue(a, b);
-            //label1.Text += "4.主程式:呼叫方法後: a = " + a.ToString() + "  b = " + b.ToString() + "\n\n";
-
-
-            //3030
-
-            //傳址
-
-            //label1.Text = "1.主程式:呼叫方法前: a = " + a.ToString() + "  b = " + b.ToString() + "\n\n";
-            PassRef(ref a, ref b);
-            //label1.Text += "4.主程式:呼叫方法後: a = " + a.ToString() + "  b = " + b.ToString() + "\n\n";
-
         }
 
         //氣泡排序法
@@ -1018,7 +932,6 @@ namespace vcs_Mix01
         private void button26_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //加入檔案右鍵選單
 
             //加入檔案右鍵選單
 
@@ -1061,225 +974,19 @@ namespace vcs_Mix01
             shell.Close();
         }
 
-        //建立 HDateTime 類別
-        public class HDateTime
-        {
-            public int year;
-            public int month;
-            public int day;
-            //public string name;
-            //A class被實例化時，會立即執行建構子內容，並且可以傳入參數
-            public string Show
-            {
-                // 可以透過 get 存取子，將字串進行判斷、處理.... 再返回結果
-                //get { return name; }
-
-                // set含有特殊的keyword: value, 當有值傳入時，都會存入value中
-                set
-                {
-                    //name = type;
-                    //Console.WriteLine("I am " + value);
-                }
-            }
-
-            public HDateTime Parse(string dd)
-            {
-                HDateTime mdt = new HDateTime();
-
-                int index_year;
-                int index_month;
-                int index_day;
-
-                index_year = dd.IndexOf("年", 0);
-                index_month = dd.IndexOf("月", index_year + 1);
-                index_day = dd.IndexOf("日", index_month + 1);
-
-                int year = 0;
-                int month = 0;
-                int day = 0;
-
-                if ((index_year == -1) || (index_month == -1) || (index_day == -1))
-                {
-                    //return new HDateTime(0, 0, 0);
-                }
-                else
-                {
-                    year = int.Parse(dd.Substring(0, index_year - 0));
-                    month = int.Parse(dd.Substring(index_year + 1, index_month - index_year - 1));
-                    day = int.Parse(dd.Substring(index_month + 1, index_day - index_month - 1));
-                    //return new DateTime(year, month, day);
-                }
-                if ((month < 1) || (month > 12))
-                    month = -1;
-                if ((day < 1) || (day > 31))
-                    day = -1;
-
-                mdt.year = year;
-                mdt.month = month;
-                mdt.day = day;
-                return mdt;
-            }
-        }
-
         private void button27_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //為年表所做的時間分析程式HDateTime.Parse
-
-
-            string dd1 = "541年7月21日";
-            string dd2 = "-541年17月21日";
-            string dd3 = "41年7月-20日";
-            string dd4 = " 541年 7月 21日";   //包含空白
-
-            HDateTime hdt = new HDateTime();
-
-            richTextBox1.Text += "原字串\t" + dd1 + "\n";
-            hdt = hdt.Parse(dd1);
-            richTextBox1.Text += "解讀後, yy = " + hdt.year.ToString() + ", mm = " + hdt.month.ToString() + ", dd = " + hdt.day.ToString() + "\n";
-
-            richTextBox1.Text += "原字串\t" + dd2 + "\n";
-            hdt = hdt.Parse(dd2);
-            richTextBox1.Text += "解讀後, yy = " + hdt.year.ToString() + ", mm = " + hdt.month.ToString() + ", dd = " + hdt.day.ToString() + "\n";
-
-            richTextBox1.Text += "原字串\t" + dd3 + "\n";
-            hdt = hdt.Parse(dd3);
-            richTextBox1.Text += "解讀後, yy = " + hdt.year.ToString() + ", mm = " + hdt.month.ToString() + ", dd = " + hdt.day.ToString() + "\n";
-
-            richTextBox1.Text += "包含空白 原字串\t" + dd4 + "\n";
-            hdt = hdt.Parse(dd4);
-            richTextBox1.Text += "解讀後, yy = " + hdt.year.ToString() + ", mm = " + hdt.month.ToString() + ", dd = " + hdt.day.ToString() + "\n";
-        }
-
-        public class Person
-        {
-            public string Name;
-            public int Age;
-            public DateTime birthday;
-        }
-
-        public struct Age
-        {
-            public int Years;
-            public int Months;
-            public int Days;
-        }
-        public static Age CalculateAge(DateTime birthDate, DateTime endDate)
-        {
-            if (birthDate.Date > endDate.Date)
-            {
-                throw new ArgumentException("birthDate cannot be higher then endDate", "birthDate");
-            }
-
-            int years = endDate.Year - birthDate.Year;
-            int months = 0;
-            int days = 0;
-
-            // Check if the last year, was a full year.
-            if (endDate < birthDate.AddYears(years) && years != 0)
-            {
-                years--;
-            }
-
-            // Calculate the number of months.
-            birthDate = birthDate.AddYears(years);
-
-            if (birthDate.Year == endDate.Year)
-            {
-                months = endDate.Month - birthDate.Month;
-            }
-            else
-            {
-                months = (12 - birthDate.Month) + endDate.Month;
-            }
-
-            // Check if last month was a complete month.
-            if (endDate < birthDate.AddMonths(months) && months != 0)
-            {
-                months--;
-            }
-
-            // Calculate the number of days.
-            birthDate = birthDate.AddMonths(months);
-
-            days = (endDate - birthDate).Days;
-            Age result;
-            result.Years = years;
-            result.Months = months;
-            result.Days = days;
-            return result;
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            Person av1 = new Person();
-            av1.Name = "松島かえで";
-            av1.birthday = DateTime.Parse("1982年11月07日");
-            av1.Age = 18;
-            richTextBox1.Text += "姓名：" + av1.Name + "\n";
-            //richTextBox1.Text += "年齡：" + av1.Age.ToString() + "\n";
-            richTextBox1.Text += "生日：" + av1.birthday.ToShortDateString() + "\n";
-
-            DateTime flakNow = DateTime.Now;
-            Age myAge = CalculateAge(av1.birthday, flakNow);
-            richTextBox1.Text += "年 : " + myAge.Years.ToString() + "\n";
-            richTextBox1.Text += "月 : " + myAge.Months.ToString() + "\n";
-            richTextBox1.Text += "日 : " + myAge.Days.ToString() + "\n";
-            if ((myAge.Months != 0) && (myAge.Days != 0))
-                av1.Age = myAge.Years + 1;
-            else
-                av1.Age = myAge.Years;
-            richTextBox1.Text += "年齡：" + av1.Age.ToString() + "\n";
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            string txt = "2006/3/11";
-
-            DateTime dt = DateTime.Now;
-            bool conversionSuccessful = DateTime.TryParse(txt, out dt);    //out為必須     //public static bool TryParse(string s, out DateTime result);
-            if (conversionSuccessful == true)
-                richTextBox1.Text += "得到DateTime資料： " + dt.ToString() + "\n";
-            else
-                richTextBox1.Text += "DateTime.TryParse 失敗\n";
-
-            txt = "123年3月11";
-            conversionSuccessful = DateTime.TryParse(txt, out dt);    //out為必須     //public static bool TryParse(string s, out DateTime result);
-            if (conversionSuccessful == true)
-                richTextBox1.Text += "得到DateTime資料： " + dt.ToString() + "\n";
-            else
-                richTextBox1.Text += "DateTime.TryParse 失敗\n";
-
-        }
-    }
-
-    //不重複之陣列
-    public static class Extensions
-    {
-        private static Random Rand = new Random();
-
-        // Randomize an array.
-        public static void Randomize<T>(this T[] items)
-        {
-            // For each spot in the array, pick
-            // a random item to swap into that spot.
-            for (int i = 0; i < items.Length - 1; i++)
-            {
-                int j = Rand.Next(i, items.Length);
-                T temp = items[i];
-                items[i] = items[j];
-                items[j] = temp;
-            }
-        }
-
-        public static int[] RandomArrangement(int num_items)
-        {
-            int[] items = Enumerable.Range(0, num_items).ToArray();
-            items.Randomize();
-            return items;
         }
     }
 }
