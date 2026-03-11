@@ -826,14 +826,92 @@ namespace vcs_Mix01
             }
         }
 
+        //以傳值方式呼叫PassValue方法
+        private void PassValue(int x, int y)
+        {
+            //label1.Text += "2.方法中:變數計算前: x = " + x.ToString() + "  y = " + y.ToString() + "\n\n";
+            x += 3; //虛引數x加3
+            y += 2; //虛引數y加2
+            //label1.Text += "3.方法中:變數計算後: x = " + x.ToString() + "  y = " + y.ToString() + "\n\n";
+        }
+
+        //以參考呼叫PassRef方法
+        private void PassRef(ref int x, ref int y)
+        {
+            //label1.Text += "2.方法中:變數計算前: x = " + x.ToString() + "  y = " + y.ToString() + "\n\n";
+            x += 3; //虛引數x加3
+            y += 2; //虛引數y加2
+            //label1.Text += "3.方法中:變數計算後: x = " + x.ToString() + "  y = " + y.ToString() + "\n\n";
+        }
+
+
+
         private void button14_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //傳值
+
+            int a = 10, b = 15;
+            //label1.Text = "1.主程式:呼叫方法前: a = " + a.ToString() + "  b = " + b.ToString() + "\n\n";
+            PassValue(a, b);
+            //label1.Text += "4.主程式:呼叫方法後: a = " + a.ToString() + "  b = " + b.ToString() + "\n\n";
+
+
+            //3030
+
+            //傳址
+
+            //label1.Text = "1.主程式:呼叫方法前: a = " + a.ToString() + "  b = " + b.ToString() + "\n\n";
+            PassRef(ref a, ref b);
+            //label1.Text += "4.主程式:呼叫方法後: a = " + a.ToString() + "  b = " + b.ToString() + "\n\n";
+
+        }
+
+        //氣泡排序法
+        private void BubbleSort(ref int[] vArray)
+        {
+            int i, j, temp;
+            for (i = vArray.GetUpperBound(0); i > 0; i--)  // 第幾輪Pass
+            {
+                for (j = 0; j < i; j++)
+                {
+                    if (vArray[j] > vArray[j + 1])
+                    {
+                        temp = vArray[j];  // 兩陣列元素內容互換
+                        vArray[j] = vArray[j + 1];
+                        vArray[j + 1] = temp;
+                    }
+                }
+            }
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //氣泡排序法
+
+            //傳一個陣列給函數 做 氣泡排序法
+            int[] myArray = new int[] { 33, 25, 16, 78, 12 };
+            richTextBox1.Text += "排序前: \n";
+            // 顯示排序前的每個陣列元素資料
+            for (int i = 0; i <= myArray.GetUpperBound(0); i++)
+            {
+                richTextBox1.Text += myArray[i] + ",  ";
+            }
+            richTextBox1.Text += "\n";
+
+            // 呼叫BubbleSort進行由小到大排序，傳遞的參數為myArray陣列
+            BubbleSort(ref myArray);
+
+            richTextBox1.Text += "排序後: \n";
+            // 顯示排序後的每個陣列元素資料
+            for (int i = 0; i <= myArray.GetUpperBound(0); i++)
+            {
+                richTextBox1.Text += myArray[i] + ",  ";
+            }
+            richTextBox1.Text += "\n";
         }
 
         private void button16_Click(object sender, EventArgs e)

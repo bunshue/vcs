@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace MDIMutilFormDemo
+namespace MDIMutilFormEx
 {
     public partial class frmBar : Form
     {
