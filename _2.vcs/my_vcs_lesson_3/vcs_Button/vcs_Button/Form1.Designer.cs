@@ -69,6 +69,7 @@
             this.bt_puzzle0 = new System.Windows.Forms.Button();
             this.lb_puzzle = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.button7 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -537,11 +538,23 @@
             this.label1.TabIndex = 227;
             this.label1.Text = "測試圖片移動";
             // 
+            // button7
+            // 
+            this.button7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button7.Location = new System.Drawing.Point(660, 350);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(150, 40);
+            this.button7.TabIndex = 228;
+            this.button7.Text = "建立按鈕串列";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1529, 744);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lb_puzzle);
             this.Controls.Add(this.bt_puzzle3);
@@ -633,6 +646,7 @@
         private System.Windows.Forms.Button bt_puzzle0;
         private System.Windows.Forms.Label lb_puzzle;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button7;
     }
 }
 

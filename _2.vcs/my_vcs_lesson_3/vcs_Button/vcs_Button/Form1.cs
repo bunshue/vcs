@@ -97,12 +97,7 @@ namespace vcs_Button
             button1a.Location = new Point(0, 0);
 
             // Make the button big enough to hold the whole region.
-            button1a.SetBounds(
-                button1a.Location.X,
-                button1a.Location.Y,
-                pts1[3].X + 5, pts1[4].Y + 5);	//SetBounds : 設定控件的位置與大小
-
-
+            button1a.SetBounds(                button1a.Location.X,                button1a.Location.Y,                pts1[3].X + 5, pts1[4].Y + 5);	//SetBounds : 設定控件的位置與大小
 
             // Shape the button.  button1b
             // Define the points in the polygonal path.
@@ -142,10 +137,7 @@ namespace vcs_Button
 
             // Make the button big enough to hold the whole region.
             button1b.Location = new Point(220, 0);
-            button1b.SetBounds(
-                button1b.Location.X,
-                button1b.Location.Y,
-                200, 200);	//SetBounds : 設定控件的位置與大小
+            button1b.SetBounds(                button1b.Location.X,                button1b.Location.Y,                200, 200);	//SetBounds : 設定控件的位置與大小
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -180,36 +172,6 @@ namespace vcs_Button
             btn_word_22.BackgroundImage = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_臨江仙\28夕.jpeg");
             btn_word_23.BackgroundImage = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_臨江仙\29陽.jpeg");
             btn_word_24.BackgroundImage = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_臨江仙\30紅.jpeg");
-        }
-
-        private void bt_exit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        void bt_exit_setup()
-        {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
-
-            Button bt_exit = new Button();  // 實例化按鈕
-            bt_exit.Size = new Size(w, h);
-            bt_exit.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            g.DrawLine(p, 0, 0, w - 1, h - 1);
-            g.DrawLine(p, w - 1, 0, 0, h - 1);
-            bt_exit.Image = bmp;
-
-            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
-            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_exit); // 將按鈕加入表單
-            bt_exit.BringToFront();     //移到最上層
         }
 
         void show_item_location()
@@ -276,6 +238,45 @@ namespace vcs_Button
 
             //this.Size = new Size(1220, 800);
             this.Text = "vcs_Button";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        void bt_exit_setup()
+        {
+            int width = 5;
+            int w = 50; //設定按鈕大小 W
+            int h = 50; //設定按鈕大小 H
+
+            Button bt_exit = new Button();  // 實例化按鈕
+            bt_exit.Size = new Size(w, h);
+            bt_exit.Text = "";
+            Bitmap bmp = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(bmp);
+            Pen p = new Pen(Color.Red, width);
+            g.Clear(Color.Pink);
+            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
+            g.DrawLine(p, 0, 0, w - 1, h - 1);
+            g.DrawLine(p, w - 1, 0, 0, h - 1);
+            bt_exit.Image = bmp;
+
+            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
+            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
+
+            this.Controls.Add(bt_exit); // 將按鈕加入表單
+            bt_exit.BringToFront();     //移到最上層
         }
 
         void button6_MouseMove(object sender, MouseEventArgs e)
@@ -286,11 +287,6 @@ namespace vcs_Button
         void button6_MouseLeave(object sender, EventArgs e)
         {
             button6.ImageAlign = ContentAlignment.MiddleCenter;
-        }
-
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
         }
 
         private void button1a_Click(object sender, EventArgs e)
@@ -693,6 +689,50 @@ namespace vcs_Button
             }
         }
         //程序執行時拖曳組件 SP
+
+        //------------------------------------------------------------  // 60個
+
+        //建立按鈕串列 ST
+        //建立控件串列 與 共用事件
+
+        Button btn0 = new Button();
+        Button btn1 = new Button();
+        Button btn2 = new Button();
+        Button btn3 = new Button();
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            // 建立控件串列
+            Button[] btn = new Button[4];
+            btn[0] = btn0;   // 設定btn[0]即代表btn0
+            btn[1] = btn1;   // 設定btn[1]即代表btn1
+            btn[2] = btn2;   // 設定btn[2]即代表btn2
+            btn[3] = btn3;   // 設定btn[3]即代表btn3
+
+            // 使用for 迴圈設定btn0~btn3上的Text屬性與Click事件要執行的事MyClick
+            int x_st = 660;
+            int y_st = 350 + 50;
+            int dx = 100;
+            int dy = 50;
+
+            for (int i = 0; i < 4; i++)
+            {
+                btn[i].Text = "按鈕 " + i.ToString();
+                btn[i].Size = new Size(150, 40);
+                btn[i].Location = new Point(x_st + dx * 0, y_st + dy * i);
+                btn[i].Click += new EventHandler(MyClick);
+                this.Controls.Add(btn[i]);
+            }
+        }
+
+        // 建立MyClick事件處理函式, 用來處理button1~button4的Click事件
+        void MyClick(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;   // 將sender轉型成Button物件btn
+            richTextBox1.Text += "你按了 " + btn.Name + "\t" + btn.Text + "\n";
+        }
+
+        //建立按鈕串列 SP
 
         //------------------------------------------------------------  // 60個
     }
