@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Main));
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txt_PassWord = new System.Windows.Forms.TextBox();
@@ -37,7 +35,6 @@
             this.btn_Login = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
@@ -90,25 +87,15 @@
             // 
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
-            this.listView1.LargeImageList = this.imageList1;
             this.listView1.Location = new System.Drawing.Point(0, 3);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(353, 234);
-            this.listView1.SmallImageList = this.imageList1;
-            this.listView1.StateImageList = this.imageList1;
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "用户名";
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.SystemColors.Control;
-            this.imageList1.Images.SetKeyName(0, "图标 (35).ico");
-            this.imageList1.Images.SetKeyName(1, "图标 (36).ico");
             // 
             // richTextBox1
             // 
@@ -147,7 +134,6 @@
         private System.Windows.Forms.Button btn_Login;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.RichTextBox richTextBox1;
 
     }

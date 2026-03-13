@@ -21,7 +21,7 @@ namespace UseImageList
         private void Form1_Load(object sender, EventArgs e)
         {
             listView1.View = View.LargeIcon;//设置显示方式
-            listView1.LargeImageList = imageList1;//设置ImageList属性
+
             DataColumn column = new DataColumn();//创建数据列对象
             column.DataType = System.Type.GetType("System.String");   //设置数据类型
             column.ColumnName = "userName";//设置列名称
@@ -39,10 +39,7 @@ namespace UseImageList
             richTextBox1.Text += "add user : " + dr["userName"] + "\n";
         }
 
-        /// <summary>
-        /// 显示数据表中内容
-        /// </summary>
-        /// <param name="dt">数据表对象</param>
+        // 显示数据表中内容
         private void Method(DataTable dt)
         {
             listView1.Items.Clear();//清空控件中所有数据项
@@ -52,12 +49,14 @@ namespace UseImageList
                 {
                     //添加数据项和图像
                     listView1.Items.Add(dt.Rows[j][0].ToString(), 0);
+
                 }
                 else
                 {
                     //添加数据项和图像
                     listView1.Items.Add(dt.Rows[j][0].ToString(), 1);
                 }
+                richTextBox1.Text += dt.Rows[j][0].ToString() + "\n";
             }
         }
     }
