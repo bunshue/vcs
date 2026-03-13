@@ -23,8 +23,10 @@ namespace RevolveImageByAngle
         {
             //取得原始大小的图像
             bitmap1 = new Bitmap(filename);
+
             //得到缩放后的图像
             bitmap2 = new Bitmap(bitmap1, this.pictureBox1.Width, this.pictureBox1.Height);   //縮放圖片大小
+
             this.pictureBox1.Image = bitmap2;
         }
 

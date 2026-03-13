@@ -61,7 +61,7 @@ namespace ManageFileByType
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(225, 22);
             this.textBox1.TabIndex = 2;
-            this.textBox1.Text = @"D:\_git\vcs\_1.data\______test_files1";
+            this.textBox1.Text = "D:\\_git\\vcs\\_1.data\\______test_files1";
             // 
             // button2
             // 
@@ -105,6 +105,7 @@ namespace ManageFileByType
             this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "对指定文件夹中的文件进行分类存储";
+            this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

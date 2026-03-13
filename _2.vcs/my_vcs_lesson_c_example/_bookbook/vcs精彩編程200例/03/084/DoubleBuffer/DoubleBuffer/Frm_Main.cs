@@ -18,6 +18,11 @@ namespace DoubleBuffer
             InitializeComponent();
         }
 
+        private void Frm_Main_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void PaintImage(Graphics g)
         {
             //绘图
@@ -33,7 +38,7 @@ namespace DoubleBuffer
             pgb.SurroundColors = new Color[] { Color.Green, Color.Yellow, Color.Red, Color.Blue, Color.Orange, Color.LightBlue };
             g.FillPath(pgb, path);
             g.DrawString("明日科技欢迎您", new Font("宋体", 18, FontStyle.Bold), new SolidBrush(Color.Red), new PointF(110, 20));
-            g.DrawBeziers(new Pen(new SolidBrush(Color.Green),2),new Point[] {new Point(220,100),new Point(250,180),new Point(300,70),new Point(350,150)});
+            g.DrawBeziers(new Pen(new SolidBrush(Color.Green), 2), new Point[] { new Point(220, 100), new Point(250, 180), new Point(300, 70), new Point(350, 150) });
             g.DrawArc(new Pen(new SolidBrush(Color.Blue), 5), new Rectangle(new Point(250, 170), new Size(60, 60)), 0, 360);
             g.DrawRectangle(new Pen(new SolidBrush(Color.Orange), 3), new Rectangle(new Point(240, 260), new Size(90, 50)));
         }

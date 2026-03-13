@@ -16,8 +16,15 @@ namespace ASCII
             InitializeComponent();
         }
 
+        private void Frm_Main_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void btn_ToASCII_Click(object sender, EventArgs e)
         {
+            //轉為ASCII
+
             if (txt_char.Text != string.Empty)//判断输入是否为空
             {
                 //判断输入是否为字母                         //頗為特別的語法
@@ -36,6 +43,8 @@ namespace ASCII
 
         private void btn_ToChar_Click(object sender, EventArgs e)
         {
+            //轉為字母
+
             if (txt_ASCII2.Text != string.Empty)//判断输入是否为空
             {
                 int P_int_Num;//定义整型局部变量
@@ -51,7 +60,6 @@ namespace ASCII
                     MessageBox.Show("请输入正确ASCII码值。", "错误！");
                 }
             }
-
             string P_str_temp = "abc";
             string P_str = Encoding.GetEncoding("unicode").GetBytes(new char[] { P_str_temp[0] })[0].ToString();
             richTextBox1.Text += "aaa\t" + P_str_temp + "\n";
@@ -59,4 +67,3 @@ namespace ASCII
         }
     }
 }
-

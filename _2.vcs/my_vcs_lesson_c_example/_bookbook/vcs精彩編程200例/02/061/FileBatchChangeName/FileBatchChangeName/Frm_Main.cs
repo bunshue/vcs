@@ -19,7 +19,7 @@ namespace FileBatchChangeName
         }
         string[] files;//选择文件的集合
         FileInfo fi;//创建一个FileInfo对象，用于获取文件信息
-        string[] lvFiles=new string[7];//向控件中添加的行信息
+        string[] lvFiles = new string[7];//向控件中添加的行信息
         Thread td;//处理批量更名方法的线程
         private void 添加文件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -36,7 +36,7 @@ namespace FileBatchChangeName
                     string ftype = path.Substring(path.LastIndexOf("."), path.Length - path.LastIndexOf("."));
                     string createTime = fi.CreationTime.ToShortDateString();
                     double a = Convert.ToDouble(Convert.ToDouble(fi.Length) / Convert.ToDouble(1024));
-                    string fsize = a.ToString("0.0")+" KB";
+                    string fsize = a.ToString("0.0") + " KB";
                     lvFiles[0] = name;
                     lvFiles[1] = name;
                     lvFiles[2] = ftype;
@@ -47,7 +47,7 @@ namespace FileBatchChangeName
                     ListViewItem lvi = new ListViewItem(lvFiles);
                     lvi.UseItemStyleForSubItems = false;
                     lvi.SubItems[1].BackColor = Color.AliceBlue;
-                    
+
                     listView1.Items.Add(lvi);
                 }
                 tsslSum.Text = listView1.Items.Count.ToString();
@@ -82,7 +82,7 @@ namespace FileBatchChangeName
                     {
                         string name = listView1.Items[i].SubItems[1].Text;
                         string name1 = name.Remove(name.LastIndexOf("."));
-                        string newName = name.Replace(name1,name1.ToUpper());
+                        string newName = name.Replace(name1, name1.ToUpper());
                         listView1.Items[i].SubItems[1].Text = newName;
                     }
                 }
@@ -115,7 +115,7 @@ namespace FileBatchChangeName
                     for (int i = 0; i < listView1.Items.Count; i++)
                     {
                         string name = listView1.Items[i].SubItems[1].Text;
-                        string name1 = name.Substring(0,1);
+                        string name1 = name.Substring(0, 1);
                         string name2 = name.Substring(1);
                         string newName = name1.ToUpper() + name2;
                         listView1.Items[i].SubItems[1].Text = newName;
@@ -191,8 +191,8 @@ namespace FileBatchChangeName
                                 string name = listView1.Items[i].SubItems[1].Text;
                                 string name1 = name.Remove(name.LastIndexOf("."));
                                 string name2 = "file_" + k.ToString();
-                                k = k +(int) nuAdd.Value;
-                                string newName = name.Replace(name1,name2);
+                                k = k + (int)nuAdd.Value;
+                                string newName = name.Replace(name1, name2);
                                 listView1.Items[i].SubItems[1].Text = newName;
                             }
                             IsOK = true;
@@ -204,23 +204,23 @@ namespace FileBatchChangeName
 
         private void StartNumAndAdd()//设置起始数字和增量值
         {
-             int k = (int)nuStart.Value;
-             if (comboBox2.Text != "")
-             {
-                 if (listView1.Items.Count > 0)
-                 {
-                     for (int i = 0; i < listView1.Items.Count; i++)
-                     {
-                         string name = listView1.Items[i].SubItems[1].Text;
-                         string name1 = name.Remove(name.LastIndexOf("."));
-                         string name2 = name1.Remove(name.LastIndexOf("_")+1)+k.ToString();
-                         k = k + (int)nuAdd.Value;
-                         string newName = name.Replace(name1, name2);
-                         listView1.Items[i].SubItems[1].Text = newName;
-                     }
-                     IsOK = true;
-                 }
-             }
+            int k = (int)nuStart.Value;
+            if (comboBox2.Text != "")
+            {
+                if (listView1.Items.Count > 0)
+                {
+                    for (int i = 0; i < listView1.Items.Count; i++)
+                    {
+                        string name = listView1.Items[i].SubItems[1].Text;
+                        string name1 = name.Remove(name.LastIndexOf("."));
+                        string name2 = name1.Remove(name.LastIndexOf("_") + 1) + k.ToString();
+                        k = k + (int)nuAdd.Value;
+                        string newName = name.Replace(name1, name2);
+                        listView1.Items[i].SubItems[1].Text = newName;
+                    }
+                    IsOK = true;
+                }
+            }
         }
 
 
@@ -238,9 +238,9 @@ namespace FileBatchChangeName
         {
             if (listView1.Items.Count > 0)
             {
-                if (IsOK&&txtTemplate.Text.Trim()!=""&&comboBox2.Text!="")
+                if (IsOK && txtTemplate.Text.Trim() != "" && comboBox2.Text != "")
                 {
-                    
+
                     for (int i = 0; i < listView1.Items.Count; i++)
                     {
                         string name = listView1.Items[i].SubItems[1].Text;
@@ -272,7 +272,7 @@ namespace FileBatchChangeName
                     listView1.Items[i].SubItems[6].Text = "√成功";
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 flag++;
                 MessageBox.Show(ex.Message);
@@ -326,12 +326,12 @@ namespace FileBatchChangeName
 
         private static string TraditionalChineseToSimplifiedChinese(string str)//繁体转简体
         {
-            return (Microsoft.VisualBasic.Strings.StrConv(str,Microsoft.VisualBasic.VbStrConv.SimplifiedChinese,0));
+            return (Microsoft.VisualBasic.Strings.StrConv(str, Microsoft.VisualBasic.VbStrConv.SimplifiedChinese, 0));
         }
 
         private static string SimplifiedChineseToTraditionalChinese(string str)//简体转繁体
         {
-            return (Microsoft.VisualBasic.Strings.StrConv(str as string ,Microsoft.VisualBasic.VbStrConv.TraditionalChinese,0));
+            return (Microsoft.VisualBasic.Strings.StrConv(str as string, Microsoft.VisualBasic.VbStrConv.TraditionalChinese, 0));
         }
 
         private void 繁体转简体ToolStripMenuItem_Click(object sender, EventArgs e)

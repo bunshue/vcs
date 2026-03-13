@@ -22,7 +22,12 @@ namespace BatchDecompression
             InitializeComponent();
         }
 
-        #region 压缩文件及文件夹
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        //#region 压缩文件及文件夹
         /// <summary>
         /// 递归压缩文件夹方法
         /// </summary>
@@ -129,10 +134,10 @@ namespace BatchDecompression
                 return false;
             }
         }
-        #endregion
+        //#endregion
 
-        #region 复制文件//
-        public void CopyFile(string[] list,string strNewPath,ToolStripProgressBar TSPBar)
+        //#region 复制文件
+        public void CopyFile(string[] list, string strNewPath, ToolStripProgressBar TSPBar)
         {
             try
             {
@@ -144,7 +149,7 @@ namespace BatchDecompression
                 {
                     string strFile = objFile.ToString();
                     string Filename = strFile.Substring(strFile.LastIndexOf("\\") + 1, strFile.Length - strFile.LastIndexOf("\\") - 1);
-                    File.Copy(strFile, strNewFile+"\\"+Filename, true);
+                    File.Copy(strFile, strNewFile + "\\" + Filename, true);
                     TSPBar.Value += 1;
                 }
             }
@@ -153,9 +158,9 @@ namespace BatchDecompression
                 MessageBox.Show(ex.Message);
             }
         }
-        #endregion
+        //#endregion
 
-        #region 解压文件
+        //#region 解压文件
         /// <summary>
         /// 解压文件
         /// </summary>
@@ -229,7 +234,7 @@ namespace BatchDecompression
                 GC.Collect(1);
             }
         }
-        #endregion
+        //#endregion
 
         string[] files;//存储要进行压缩的文件数组
         string[] files2;//存储要进行解压缩的文件数组
@@ -267,7 +272,7 @@ namespace BatchDecompression
         {
             try
             {
-                if (txtfiles.Text.Trim()!="")
+                if (txtfiles.Text.Trim() != "")
                 {
                     toolStripProgressBar1.Maximum = files.Length;
                     if (files.Length > 1)
@@ -276,7 +281,7 @@ namespace BatchDecompression
                         {
                             string strNewPath = DateTime.Now.ToString("yyyyMMddhhmmss");
                             CopyFile(files, strNewPath, toolStripProgressBar1);
-                            Zip("c:\\"+strNewPath,saveFileDialog1.FileName);
+                            Zip("c:\\" + strNewPath, saveFileDialog1.FileName);
                             Directory.Delete("c:\\" + strNewPath, true);
                             MessageBox.Show("压缩文件成功");
                         }
@@ -285,7 +290,7 @@ namespace BatchDecompression
                 }
                 else
                 {
-                    MessageBox.Show("警告：请选择要进行批量压缩的文件！","警告",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    MessageBox.Show("警告：请选择要进行批量压缩的文件！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch { }
@@ -314,7 +319,6 @@ namespace BatchDecompression
                 }
             }
             catch { }
-                
         }
     }
 }

@@ -6,8 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Diagnostics;
+
 using System.IO;
+using System.Diagnostics;
+
 namespace CamouflageFolder
 {
     public partial class Frm_Main : Form
@@ -15,6 +17,11 @@ namespace CamouflageFolder
         public Frm_Main()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            comboBox1.SelectedIndex = 0;
         }
 
         private string GetFolType()
@@ -51,11 +58,6 @@ namespace CamouflageFolder
                     MessageBox.Show("不能对盘符进行伪装", "提示信息", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            comboBox1.SelectedIndex = 0;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)

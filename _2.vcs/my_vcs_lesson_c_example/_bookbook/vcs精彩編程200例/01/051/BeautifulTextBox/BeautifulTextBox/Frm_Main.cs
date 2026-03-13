@@ -16,11 +16,15 @@ namespace BeautifulTextBox
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Frm_Main_Load(object sender, EventArgs e)
         {
 
-            numberBox1.DataStyle =//设置数据样式
-                NumberBox.StyleSort.Decimal;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //设置数据样式
+            numberBox1.DataStyle = NumberBox.StyleSort.Decimal;
         }
     }
 }

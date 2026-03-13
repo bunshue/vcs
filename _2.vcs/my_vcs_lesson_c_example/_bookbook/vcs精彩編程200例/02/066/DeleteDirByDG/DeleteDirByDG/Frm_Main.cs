@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;
 
 namespace DeleteDirByDG
@@ -14,6 +15,11 @@ namespace DeleteDirByDG
         public Frm_Main()
         {
             InitializeComponent();
+        }
+
+        private void Frm_Main_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -37,7 +43,7 @@ namespace DeleteDirByDG
                 richTextBox1.Text += "偽刪除 " + textBox1.Text + "\\" + FSInfo[i].ToString() + "\n";
                 file_no++;
             }
-            MessageBox.Show("删除成功\n共刪除 " + file_no.ToString()+" 個檔案", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("删除成功\n共刪除 " + file_no.ToString() + " 個檔案", "信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

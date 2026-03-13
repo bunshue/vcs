@@ -11,8 +11,7 @@ namespace ChuffedFarm
 {
     public partial class Frm_Main : Form
     {
-
-        private PlantState  PlantState = PlantState.Nothing;
+        private PlantState PlantState = PlantState.Nothing;
         private CPictureBox cpbxSeed;
         private int intAmount;
 
@@ -20,7 +19,12 @@ namespace ChuffedFarm
         {
             InitializeComponent();
         }
-    
+
+        private void Frm_Main_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void pbxSeed_MouseEnter(object sender, EventArgs e)
         {
             this.pbxInseminate.Image = ChuffedFarm.Properties.Resources.播种1;
@@ -81,7 +85,7 @@ namespace ChuffedFarm
                     {
                         if (this.PlantState == PlantState.Inseminate)//若是种植状态
                         {
-                            this.cpbxSeed.Location = new Point(e.X-20 , e.Y-40 );
+                            this.cpbxSeed.Location = new Point(e.X - 20, e.Y - 40);
                         }
                     }
                 }
@@ -107,7 +111,7 @@ namespace ChuffedFarm
         private void pbxInseminate_Click(object sender, EventArgs e)
         {
             //什么时候可以种植
-            if (PlantState != PlantState.Nothing && PlantState != PlantState.Harvest&&PlantState!= PlantState.Inseminate)
+            if (PlantState != PlantState.Nothing && PlantState != PlantState.Harvest && PlantState != PlantState.Inseminate)
             {
                 MessageBox.Show("还未收获，无法播种!");
                 return;
@@ -120,7 +124,7 @@ namespace ChuffedFarm
             this.cpbxSeed.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.cpbxSeed.Image = ChuffedFarm.Properties.Resources.seed2;
             this.cpbxSeed.Size = new System.Drawing.Size(ChuffedFarm.Properties.Resources.seed2.Width, ChuffedFarm.Properties.Resources.seed2.Height);//52.28
-            this.cpbxSeed.Location = new System.Drawing.Point(this.pbxInseminate.Location.X-50,this.pbxInseminate.Location.Y - 80);
+            this.cpbxSeed.Location = new System.Drawing.Point(this.pbxInseminate.Location.X - 50, this.pbxInseminate.Location.Y - 80);
             //
             this.cpbxSeed.TabStop = true;
             this.cpbxSeed.IsInseminate = false;//刚刚创建种子实例，还未种下
@@ -134,7 +138,7 @@ namespace ChuffedFarm
         {
             if (PlantState == PlantState.Nothing)
             {
-                MessageBox.Show("还未播种，怎么长啊","信息提示！");
+                MessageBox.Show("还未播种，怎么长啊", "信息提示！");
                 return;
             }
             if (PlantState == PlantState.BlossomOut)
@@ -155,13 +159,13 @@ namespace ChuffedFarm
             }
 
             this.PlantState = PlantState.Vegetate;
-            
+
             IEnumerable<Control> cons = this.GetCPictureBoxes();
             foreach (CPictureBox cpbx in cons)
             {
                 tipSeed.SetToolTip(cpbx, "");//已经开始生长，不再是种子，无需提示
                 cpbx.Size = new Size(ChuffedFarm.Properties.Resources.grow.Width, ChuffedFarm.Properties.Resources.grow.Height);
-                cpbx.Image = ChuffedFarm.Properties.Resources.grow;   
+                cpbx.Image = ChuffedFarm.Properties.Resources.grow;
             }
         }
 
@@ -257,7 +261,6 @@ namespace ChuffedFarm
                 return;
             }
 
-
             if (PlantState == PlantState.Harvest)
             {
                 MessageBox.Show("已经收过了！", "信息提示！");
@@ -275,16 +278,16 @@ namespace ChuffedFarm
                 pbxHarvest_Click(sender, e);
             }
             this.PlantState = PlantState.Harvest;
-            lbAmount.Text = "你的仓库里有" + intAmount.ToString()+"个果实！";
+            lbAmount.Text = "你的仓库里有" + intAmount.ToString() + "个果实！";
         }
-        
+
         /// <summary>
         /// 获取动态生成的自定义PictureBox控件
         /// </summary>
         /// <returns></returns>
         private IEnumerable<Control> GetCPictureBoxes()
         {
-            return this.Controls.Cast<Control>().Where(con => (con.GetType()==typeof(CPictureBox)));//Linq查询技术
+            return this.Controls.Cast<Control>().Where(con => (con.GetType() == typeof(CPictureBox)));//Linq查询技术
         }
     }
 }

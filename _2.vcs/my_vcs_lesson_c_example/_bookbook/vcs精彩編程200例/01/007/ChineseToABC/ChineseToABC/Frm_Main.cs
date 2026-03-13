@@ -17,10 +17,15 @@ namespace ChineseToABC
             InitializeComponent();
         }
 
+        private void Frm_Main_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void txt_Chinese_TextChanged(object sender, EventArgs e)
         {
-            txt_PinYIn.Text = //调用拼音类的GetABC方法得到拼音字符串
-                new PinYin().GetABC(txt_Chinese.Text);
+            //调用拼音类的GetABC方法得到拼音字符串
+            txt_PinYIn.Text = new PinYin().GetABC(txt_Chinese.Text);
         }
     }
 }

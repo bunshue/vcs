@@ -54,9 +54,9 @@
             this.pbxInseminate.Size = new System.Drawing.Size(57, 57);
             this.pbxInseminate.TabIndex = 0;
             this.pbxInseminate.TabStop = false;
-            this.pbxInseminate.MouseLeave += new System.EventHandler(this.pbxSeed_MouseLeave);
             this.pbxInseminate.Click += new System.EventHandler(this.pbxInseminate_Click);
             this.pbxInseminate.MouseEnter += new System.EventHandler(this.pbxSeed_MouseEnter);
+            this.pbxInseminate.MouseLeave += new System.EventHandler(this.pbxSeed_MouseLeave);
             // 
             // pbxVegetate
             // 
@@ -69,9 +69,9 @@
             this.pbxVegetate.Size = new System.Drawing.Size(57, 57);
             this.pbxVegetate.TabIndex = 1;
             this.pbxVegetate.TabStop = false;
-            this.pbxVegetate.MouseLeave += new System.EventHandler(this.pbxVegetate_MouseLeave);
             this.pbxVegetate.Click += new System.EventHandler(this.pbxVegetate_Click);
             this.pbxVegetate.MouseEnter += new System.EventHandler(this.pbxVegetate_MouseEnter);
+            this.pbxVegetate.MouseLeave += new System.EventHandler(this.pbxVegetate_MouseLeave);
             // 
             // pbxBlossomOut
             // 
@@ -84,9 +84,9 @@
             this.pbxBlossomOut.Size = new System.Drawing.Size(57, 57);
             this.pbxBlossomOut.TabIndex = 2;
             this.pbxBlossomOut.TabStop = false;
-            this.pbxBlossomOut.MouseLeave += new System.EventHandler(this.pbxBlossomOut_MouseLeave);
             this.pbxBlossomOut.Click += new System.EventHandler(this.pbxBlossomOut_Click);
             this.pbxBlossomOut.MouseEnter += new System.EventHandler(this.pbxBlossomOut_MouseEnter);
+            this.pbxBlossomOut.MouseLeave += new System.EventHandler(this.pbxBlossomOut_MouseLeave);
             // 
             // pbxMakeFruitage
             // 
@@ -99,9 +99,9 @@
             this.pbxMakeFruitage.Size = new System.Drawing.Size(57, 57);
             this.pbxMakeFruitage.TabIndex = 3;
             this.pbxMakeFruitage.TabStop = false;
-            this.pbxMakeFruitage.MouseLeave += new System.EventHandler(this.pbxMakeFruitage_MouseLeave);
             this.pbxMakeFruitage.Click += new System.EventHandler(this.pbxMakeFruitage_Click);
             this.pbxMakeFruitage.MouseEnter += new System.EventHandler(this.pbxMakeFruitage_MouseEnter);
+            this.pbxMakeFruitage.MouseLeave += new System.EventHandler(this.pbxMakeFruitage_MouseLeave);
             // 
             // pbxHarvest
             // 
@@ -114,9 +114,9 @@
             this.pbxHarvest.Size = new System.Drawing.Size(57, 57);
             this.pbxHarvest.TabIndex = 4;
             this.pbxHarvest.TabStop = false;
-            this.pbxHarvest.MouseLeave += new System.EventHandler(this.pbxHarvest_MouseLeave);
             this.pbxHarvest.Click += new System.EventHandler(this.pbxHarvest_Click);
             this.pbxHarvest.MouseEnter += new System.EventHandler(this.pbxHarvest_MouseEnter);
+            this.pbxHarvest.MouseLeave += new System.EventHandler(this.pbxHarvest_MouseLeave);
             // 
             // lbAmount
             // 
@@ -129,7 +129,7 @@
             this.lbAmount.TabIndex = 5;
             this.lbAmount.Text = "你的仓库没有任何果实了，快快播种吧！";
             // 
-            // Form1
+            // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -145,9 +145,10 @@
             this.DoubleBuffered = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form1";
+            this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "打造自己的开心农场";
+            this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.Click += new System.EventHandler(this.Form1_Click);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.pbxInseminate)).EndInit();

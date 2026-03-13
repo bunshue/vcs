@@ -26,11 +26,6 @@ namespace vcs_test_all_03_Syntax
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //for Interaction,          //參考/加入參考/.NET/Microsoft.VisualBasic
-            string uName = Microsoft.VisualBasic.Interaction.InputBox("請輸入姓名", "程式啟動時，輸入資料");
-            DialogResult dr = MessageBox.Show(uName + "歡迎您！", "歡迎", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-            this.Text = uName;	//表單標題顯示姓名
-
             show_item_location();
             textBox_hex.ShortcutsEnabled = false;   // 不啟用快速鍵, 限制 TextBox 上不使用快速鍵與滑鼠右鍵表單
 
@@ -389,15 +384,12 @@ namespace vcs_test_all_03_Syntax
             // 將pcLot陣列內的大樂透號碼進行遞增排序，以方便比對是否中獎
             Array.Sort(pcLot);
 
-            string myNumStr = "", pcNumStr = "";
+            string pcNumStr = "";
             // 將本期大樂透號碼逐一指定給pcNumStr字串變數
-            // 以便將來和使用者所選號碼myNumStr字串比對
             for (int i = 0; i <= pcLot.GetUpperBound(0); i++)
             {
                 pcNumStr += pcLot[i].ToString() + ", ";
             }
-
-
         }
 
         private void button10_Click(object sender, EventArgs e)

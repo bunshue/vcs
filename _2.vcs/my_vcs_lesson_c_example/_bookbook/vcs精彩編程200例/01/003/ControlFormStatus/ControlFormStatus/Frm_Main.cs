@@ -30,7 +30,7 @@ namespace ControlFormStatus
             pictureBox_Close.Image = Properties.Resources.关闭按钮;//显示关闭按钮的图片
         }
 
-        #region  设置窗体的最大化、最小化和关闭按钮的单击事件
+        //#region  设置窗体的最大化、最小化和关闭按钮的单击事件
         /// <summary>
         /// 设置窗体的最大化、最小化和关闭按钮的单击事件
         /// </summary>
@@ -56,9 +56,9 @@ namespace ControlFormStatus
                     break;
             }
         }
-        #endregion
+        //#endregion
 
-        #region  控制图片的切换状态
+        //#region  控制图片的切换状态
         /// <summary>
         /// 控制图片的切换状态
         /// </summary>
@@ -100,7 +100,7 @@ namespace ControlFormStatus
                     }
             }
         }
-        #endregion
+        //#endregion
 
         private void pictureBox_Close_Click(object sender, EventArgs e)//单击事件
         {

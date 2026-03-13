@@ -16,6 +16,11 @@ namespace ChineseCode
             InitializeComponent();
         }
 
+        private void Frm_Main_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void btn_Get_Click(object sender, EventArgs e)
         {
             if (txt_Chinese.Text != string.Empty)//判断输入是否为空
@@ -47,4 +52,3 @@ namespace ChineseCode
         }
     }
 }
-

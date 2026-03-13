@@ -101,6 +101,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Frm_Main";
             this.Text = "汉字与区位码的转换";
+            this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

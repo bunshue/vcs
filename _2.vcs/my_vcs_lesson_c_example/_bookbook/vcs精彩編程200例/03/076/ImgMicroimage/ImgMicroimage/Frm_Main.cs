@@ -6,9 +6,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;
 using System.Drawing.Imaging;
 using System.Threading;
+
 namespace ImgMicroimage
 {
     public partial class Frm_Main : Form
@@ -22,11 +24,12 @@ namespace ImgMicroimage
             }
         }
         CustomListView clv = new CustomListView();
-        
+
         public Frm_Main()
         {
             InitializeComponent();
         }
+
         string filePath;
         public Image ResourceImage;
         private int ImageWidth;
@@ -135,7 +138,7 @@ namespace ImgMicroimage
         }
         private void toolStripButton1_Click_1(object sender, EventArgs e)
         {
-            
+
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 clv.Items.Clear();
@@ -220,7 +223,7 @@ namespace ImgMicroimage
             clv.LargeImageList = imageList1;
             clv.View = View.LargeIcon;
             clv.DoubleClick += new EventHandler(clv_DoubleClick);
-            clv.Click+=new EventHandler(clv_Click);   
+            clv.Click += new EventHandler(clv_Click);
         }
     }
 }

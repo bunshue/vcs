@@ -20,8 +20,6 @@ using System.Drawing.Printing;  //for PrinterSettings
 using System.Threading;
 using System.ServiceProcess;    //for ServiceController     參考/加入參考/.NET/System.ServiceProcess
 
-using Microsoft.VisualBasic.Devices;    //for Computer
-
 /*
 讀取/寫入程式預設值
 到
@@ -34,8 +32,6 @@ namespace vcs_System1
     {
         DateTime start_time = DateTime.Now;
 
-        Thread td;
-
         public Form1()
         {
             InitializeComponent();
@@ -46,8 +42,6 @@ namespace vcs_System1
             show_item_location();
 
             CheckForIllegalCrossThreadCalls = false;
-
-            GetMemoryInfo();
         }
 
         void show_item_location()
@@ -119,30 +113,18 @@ namespace vcs_System1
             button49.Location = new Point(x_st + dx * 4, y_st + dy * 9);
 
             groupBox1.Size = new Size(200, 150);//Windows 開關機(偽執行)
-            groupBox2.Size = new Size(320, 150);
-            groupBox3.Size = new Size(320, 100);
-            groupBox4.Size = new Size(320, 100);
-
-            groupBox2.Location = new Point(x_st + dx * 5, y_st + dy * 0);//記憶體狀態
-            groupBox3.Location = new Point(x_st + dx * 5, y_st + dy * 2 + 20);//物理內存
-            groupBox4.Location = new Point(x_st + dx * 5, y_st + dy * 4);//虛擬內存
-            groupBox1.Location = new Point(x_st + dx * 5, y_st + dy * 6);
+            groupBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
 
             richTextBox1.Size = new Size(300, 640);
-            richTextBox1.Location = new Point(x_st + dx * 6 + 130, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            dy = 30;
-            label1.Location = new Point(x_st + dx * 0, y_st + 12 + dy * 0);
-            label2.Location = new Point(x_st + dx * 0, y_st + 12 + dy * 1);
-            label3.Location = new Point(x_st + dx * 0, y_st + 12 + dy * 2);
-            label4.Location = new Point(x_st + dx * 0, y_st + 12 + dy * 3);
-            label1.Text = "";
-            label2.Text = "";
-            label3.Text = "";
-            label4.Text = "";
+            this.Size = new Size(1600, 700);
+            this.Text = "vcs_System1";
 
-            this.Size = new Size(1710, 700);
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -889,17 +871,8 @@ namespace vcs_System1
         {
         }
 
-        [DllImport("kernel32.dll")]
-        private static extern int SetComputerName(string ipComputerName);//重寫API函數
-
         private void button18_Click(object sender, EventArgs e)
         {
-            //取得並修改電腦名(偽執行)
-            Computer computer = new Computer();//創建計算機對象
-            richTextBox1.Text += "取得原計算機名 : " + computer.Name + "\n";
-
-            richTextBox1.Text += "偽執行 計算機名稱修改, 須重啟計算機使之生效\n";
-            //SetComputerName("lion-mouse");//修改計算機名稱
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -1417,7 +1390,7 @@ namespace vcs_System1
         }
 
 
-        #region Windows 開關機
+        //#region Windows 開關機
         [DllImport("user32")]
         public static extern bool ExitWindowsEx(uint uFlags, uint dwReason);
 
@@ -1473,69 +1446,7 @@ namespace vcs_System1
             //偽執行
             //Application.SetSuspendState(PowerState.Suspend, true, true);
         }
-
-        #endregion
-
-        private void GetMemoryInfo()
-        {
-            Memory();
-        }
-
-        private void Memory()
-        {
-            Microsoft.VisualBasic.Devices.Computer myInfo = new Microsoft.VisualBasic.Devices.Computer();
-            //获取物理内存总量
-            pbMemorySum.Maximum = Convert.ToInt32(myInfo.Info.TotalPhysicalMemory / 1024 / 1024);
-            pbMemorySum.Value = Convert.ToInt32(myInfo.Info.TotalPhysicalMemory / 1024 / 1024);
-            lblSum.Text = (myInfo.Info.TotalPhysicalMemory / 1024).ToString();
-            //获取可用物理内存总量
-            pbMemoryUse.Maximum = Convert.ToInt32(myInfo.Info.TotalPhysicalMemory / 1024 / 1024);
-            pbMemoryUse.Value = Convert.ToInt32(myInfo.Info.AvailablePhysicalMemory / 1024 / 1024);
-            lblMuse.Text = (myInfo.Info.AvailablePhysicalMemory / 1024).ToString();
-            //获取虚拟内存总量
-            pbVmemorysum.Maximum = Convert.ToInt32(myInfo.Info.TotalVirtualMemory / 1024 / 1024);
-            pbVmemorysum.Value = Convert.ToInt32(myInfo.Info.TotalVirtualMemory / 1024 / 1024);
-            lblVinfo.Text = (myInfo.Info.TotalVirtualMemory / 1024).ToString();
-            //获取可用虚拟内存总量
-            pbVmemoryuse.Maximum = Convert.ToInt32(myInfo.Info.TotalVirtualMemory / 1024 / 1024);
-            pbVmemoryuse.Value = Convert.ToInt32(myInfo.Info.AvailableVirtualMemory / 1024 / 1024);
-            lblVuse.Text = (myInfo.Info.AvailableVirtualMemory / 1024).ToString();
-        }
-
-        private void timer_memory_Tick(object sender, EventArgs e)
-        {
-            //使用Computer()讀得記憶體狀態
-
-            //1. 參考 -> 加入參考 -> .NET/Microsoft.VisualBasic
-            //2. using Microsoft.VisualBasic.Devices;
-
-            Computer myComputer = new Computer();
-
-            //Bytes
-            label1.Text = "物理內存總量(B)： " + Convert.ToString(myComputer.Info.TotalPhysicalMemory);
-            label2.Text = "可用物理內存(B)： " + Convert.ToString(myComputer.Info.AvailablePhysicalMemory);
-            label3.Text = "虛擬內存總量(B)： " + Convert.ToString(myComputer.Info.TotalVirtualMemory);
-            label4.Text = "可用虛擬內存(B)： " + Convert.ToString(myComputer.Info.AvailableVirtualMemory);
-
-            //MB
-            label1.Text = "物理內存總量(MB)： " + Convert.ToString(myComputer.Info.TotalPhysicalMemory / 1024 / 1024) + " MB";
-            label2.Text = "可用物理內存(MB)： " + Convert.ToString(myComputer.Info.AvailablePhysicalMemory / 1024 / 1024) + " MB";
-            label3.Text = "虛擬內存總量(MB)： " + Convert.ToString(myComputer.Info.TotalVirtualMemory / 1024 / 1024) + " MB";
-            label4.Text = "可用虛擬內存(MB)： " + Convert.ToString(myComputer.Info.AvailableVirtualMemory / 1024 / 1024) + " MB";
-
-            //------------------------------------------------------------  # 60個
-
-            td = new Thread(new ThreadStart(GetMemoryInfo));
-            td.Start();
-        }
-
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (td != null)
-            {
-                td.Abort();
-            }
-        }
+        //#endregion
     }
 
     /*

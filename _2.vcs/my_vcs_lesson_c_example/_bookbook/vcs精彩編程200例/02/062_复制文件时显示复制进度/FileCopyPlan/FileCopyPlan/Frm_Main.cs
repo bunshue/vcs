@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;
 using System.Threading;//线程序的命名空间
 
@@ -13,15 +14,20 @@ namespace FileCopyPlan
 {
     public partial class Frm_Main : Form
     {
+        private System.Threading.Thread thdAddFile; //创建一个线程
+        private string str = "";
+        FileStream FormerOpen;//实例化FileStream类
+        FileStream ToFileOpen;//实例化FileStream类
+
         public Frm_Main()
         {
             InitializeComponent();
         }
 
-        private System.Threading.Thread thdAddFile; //创建一个线程
-        private string str = "";
-        FileStream FormerOpen;//实例化FileStream类
-        FileStream ToFileOpen;//实例化FileStream类
+        private void Frm_Main_Load(object sender, EventArgs e)
+        {
+
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -132,4 +138,3 @@ namespace FileCopyPlan
         }
     }
 }
-

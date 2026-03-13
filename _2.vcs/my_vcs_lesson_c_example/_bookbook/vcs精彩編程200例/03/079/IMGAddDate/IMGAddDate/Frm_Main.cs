@@ -137,7 +137,7 @@ namespace IMGAddDate
             }
         }
 
-        #region 获取数码相片的拍摄日期
+        //#region 获取数码相片的拍摄日期
         //获取图像文件的所有元数据属性，保存倒PropertyItem数组
         public static PropertyItem[] GetExif(string fileName)
         {
@@ -163,6 +163,6 @@ namespace IMGAddDate
             //若没有相关的EXIF信息则返回N/A
             return "N/A";
         }
-        #endregion
+        //#endregion
     }
 }

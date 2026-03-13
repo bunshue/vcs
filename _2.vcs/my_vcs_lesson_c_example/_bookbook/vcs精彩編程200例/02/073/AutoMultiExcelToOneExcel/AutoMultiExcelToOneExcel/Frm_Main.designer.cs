@@ -45,6 +45,7 @@
             this.nudown_Min = new System.Windows.Forms.NumericUpDown();
             this.btn_Set = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudown_Hour)).BeginInit();
@@ -81,7 +82,7 @@
             this.txt_Excel.Location = new System.Drawing.Point(137, 54);
             this.txt_Excel.Name = "txt_Excel";
             this.txt_Excel.ReadOnly = true;
-            this.txt_Excel.Size = new System.Drawing.Size(172, 21);
+            this.txt_Excel.Size = new System.Drawing.Size(172, 22);
             this.txt_Excel.TabIndex = 4;
             // 
             // label2
@@ -89,7 +90,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(33, 57);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 12);
+            this.label2.Size = new System.Drawing.Size(103, 12);
             this.label2.TabIndex = 3;
             this.label2.Text = "请选择Excel文件：";
             // 
@@ -108,7 +109,7 @@
             this.txt_MultiExcel.Location = new System.Drawing.Point(137, 23);
             this.txt_MultiExcel.Name = "txt_MultiExcel";
             this.txt_MultiExcel.ReadOnly = true;
-            this.txt_MultiExcel.Size = new System.Drawing.Size(172, 21);
+            this.txt_MultiExcel.Size = new System.Drawing.Size(172, 22);
             this.txt_MultiExcel.TabIndex = 1;
             // 
             // label1
@@ -116,7 +117,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(9, 26);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(131, 12);
+            this.label1.Size = new System.Drawing.Size(127, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "请选择多个Excel文件：";
             // 
@@ -173,7 +174,7 @@
             0,
             0});
             this.nudown_Hour.Name = "nudown_Hour";
-            this.nudown_Hour.Size = new System.Drawing.Size(54, 21);
+            this.nudown_Hour.Size = new System.Drawing.Size(54, 22);
             this.nudown_Hour.TabIndex = 13;
             // 
             // label8
@@ -194,7 +195,7 @@
             0,
             0});
             this.nudown_Min.Name = "nudown_Min";
-            this.nudown_Min.Size = new System.Drawing.Size(54, 21);
+            this.nudown_Min.Size = new System.Drawing.Size(54, 22);
             this.nudown_Min.TabIndex = 12;
             // 
             // btn_Set
@@ -212,18 +213,27 @@
             this.timer1.Interval = 60000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(10, 183);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(386, 238);
+            this.richTextBox1.TabIndex = 8;
+            this.richTextBox1.Text = "";
+            // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 162);
+            this.ClientSize = new System.Drawing.Size(432, 433);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox1);
             this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "将多个Excel文件进行自动汇总";
-            this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Frm_Main_FormClosing);
+            this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -252,6 +262,7 @@
         private System.Windows.Forms.NumericUpDown nudown_Min;
         private System.Windows.Forms.Button btn_Set;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

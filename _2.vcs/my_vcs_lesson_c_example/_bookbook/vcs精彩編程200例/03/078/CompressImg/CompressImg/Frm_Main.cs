@@ -17,10 +17,6 @@ namespace CompressImg
 {
     public partial class Frm_Main : Form
     {
-        public Frm_Main()
-        {
-            InitializeComponent();
-        }
         FileSystemInfo[] fsi = null;
         string ImgPath = "";
         ArrayList al = new ArrayList();
@@ -29,6 +25,12 @@ namespace CompressImg
         Thread td;
         Image ig = null;
         string strSavePath = "";
+
+        public Frm_Main()
+        {
+            InitializeComponent();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             CheckForIllegalCrossThreadCalls = false;
@@ -170,14 +172,22 @@ namespace CompressImg
             progressBar1.Maximum = al.Count;
             progressBar1.Minimum = 1;
             if (ImgPath.Length == 3)
+            {
                 strSourcePath = ImgPath;
+            }
             else
+            {
                 strSourcePath = ImgPath + "\\";
+            }
 
             if (ImgSavePath.Length == 3)
+            {
                 strSavePath = ImgSavePath;
+            }
             else
+            {
                 strSavePath = ImgSavePath + "\\";
+            }
             for (int i = 0; i < al.Count; i++)
             {
                 ig = Image.FromFile(strSourcePath + al[i].ToString());
@@ -220,9 +230,13 @@ namespace CompressImg
                 else
                 {
                     if (txtPicPath.Text.Trim() == "")
+                    {
                         MessageBox.Show("警告：请选择待处理的图片", "警告", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                     if (txtSavePath.Text.Trim() == "")
+                    {
                         MessageBox.Show("警告：请选择保存路径", "警告", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
@@ -236,4 +250,3 @@ namespace CompressImg
         }
     }
 }
-

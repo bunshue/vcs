@@ -142,8 +142,6 @@ namespace vcs_Clock2
                     second = intSecon.ToString();
                 }
                 textBox2.Text = Hour + Minute + second;
-
-
             }
         }
 
@@ -277,7 +275,6 @@ namespace vcs_Clock2
                     second = intSecon.ToString();
                 }
                 textBox2.Text = Hour + Minute + second;
-
             }
         }
 

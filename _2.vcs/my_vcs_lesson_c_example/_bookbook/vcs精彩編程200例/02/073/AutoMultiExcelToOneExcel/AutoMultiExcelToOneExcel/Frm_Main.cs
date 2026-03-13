@@ -18,7 +18,7 @@ namespace AutoMultiExcelToOneExcel
             InitializeComponent();
         }
 
-        #region 为INI文件中指定的节点取得字符串
+        //#region 为INI文件中指定的节点取得字符串
         /// <summary>
         /// 为INI文件中指定的节点取得字符串
         /// </summary>
@@ -37,9 +37,9 @@ namespace AutoMultiExcelToOneExcel
             StringBuilder lpReturnedString,
             int nSize,
             string lpFileName);
-        #endregion
+        //#endregion
 
-        #region 修改INI文件中内容
+        //#region 修改INI文件中内容
         /// <summary>
         /// 修改INI文件中内容
         /// </summary>
@@ -54,9 +54,9 @@ namespace AutoMultiExcelToOneExcel
             string lpKeyName,
             string lpString,
             string lpFileName);
-        #endregion
+        //#endregion
 
-        #region 从INI文件中读取指定节点的内容
+        //#region 从INI文件中读取指定节点的内容
         /// <summary>
         /// 从INI文件中读取指定节点的内容
         /// </summary>
@@ -71,7 +71,7 @@ namespace AutoMultiExcelToOneExcel
             GetPrivateProfileString(section, key, def, temp, 1024, fileName);
             return temp.ToString();
         }
-        #endregion
+        //#endregion
 
         string M_str_Name = Application.StartupPath + "\\Set.ini";//定义要读取的INI文件
 
@@ -92,7 +92,9 @@ namespace AutoMultiExcelToOneExcel
             if (openMultiExcel.ShowDialog() == DialogResult.OK)//判断是否选择了文件
             {
                 for (int i = 0; i < openMultiExcel.FileNames.Length; i++)//遍历选择的多个文件
+                {
                     txt_MultiExcel.Text += openMultiExcel.FileNames[i] + ",";//显示选择的多个Excel文件
+                }
             }
         }
 
@@ -172,7 +174,9 @@ namespace AutoMultiExcelToOneExcel
             {
                 string P_str_Name = DTReader["Table_Name"].ToString().Replace('$', ' ').Trim();//记录工作表名称
                 if (!P_list_SheetName.Contains(P_str_Name))//判断泛型集合中是否已经存在该工作表名称
+                {
                     P_list_SheetName.Add(P_str_Name);//将工作表名添加到泛型集合中
+                }
             }
             DTable = null;//清空表对象
             DTReader = null;//清空表读取对象
@@ -184,7 +188,9 @@ namespace AutoMultiExcelToOneExcel
         {
             System.Diagnostics.Process[] excelProcess = System.Diagnostics.Process.GetProcessesByName(P_str_Process);//实例化进程对象
             foreach (System.Diagnostics.Process p in excelProcess)
+            {
                 p.Kill();//关闭进程
+            }
             System.Threading.Thread.Sleep(10);//使线程休眠10毫秒
         }
     }
