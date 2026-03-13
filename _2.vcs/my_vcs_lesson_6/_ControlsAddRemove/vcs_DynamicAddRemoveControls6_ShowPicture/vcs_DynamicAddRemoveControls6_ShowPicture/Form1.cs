@@ -103,7 +103,9 @@ namespace vcs_DynamicAddRemoveControls6_ShowPicture
                         }
                     }
                     else
+                    {
                         richTextBox1.Text += "檔案: " + filename + " 不存在\n";
+                    }
                 }
             }
             return files;
@@ -191,7 +193,9 @@ namespace vcs_DynamicAddRemoveControls6_ShowPicture
                         current_picture_count -= current_picture_count % (COLUMNS * ROWS);
                     }
                     else
+                    {
                         current_picture_count -= COLUMNS * ROWS * 2;
+                    }
 
                     removeAllPictureBox();
                     //動態產生pictureBox
@@ -253,13 +257,10 @@ namespace vcs_DynamicAddRemoveControls6_ShowPicture
                 }
                 //richTextBox1.Text += "i = " + i.ToString() + "\tremove = " + remove_item.ToString() + "\n";
                 if (remove_item == false)
+                {
                     break;
+                }
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

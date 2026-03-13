@@ -11,8 +11,10 @@ using System.IO;    //for Directory
 
 //所有的PNG檔要選屬性/複製到輸出目錄/選 有更新時才複製
 
-
 //將控件（如按鈕、文字框等）動態加入容器（如 Form、Panel 或 GroupBox）
+
+//動態加入控制項( Controls.Add() )
+//動態移除控制項( Controls.Remove() )
 
 namespace vcs_DynamicAddRemoveControls1
 {
@@ -1107,4 +1109,30 @@ myButton.BringToFront() 或 myButton.SendToBack() 調整。
                 //動態添加控件的事件,語句:
                 //Control.Command += new CommandEventHandler(this.EventFun);
                 btn.Click += new System.EventHandler(btn_ClickEvent1);// 加入按鈕事件
+*/
+
+
+
+
+
+
+/*
+// 加入 TextBox 到 Form
+            TextBox tb1 = new TextBox();
+            tb1.Name = "tb1";
+            tb1.Location = new Point(10, 10);
+            this.Controls.Add(tb1);
+
+            // 加入 TextBox 到 GroupBox
+            TextBox tb3 = new TextBox();
+            tb3.Name = "tb3";
+            tb3.Location = new Point(10, 10);
+            this.groupBox1.Controls.Add(tb3);
+            
+            // 加入 TextBox 到 Panel
+            TextBox tb4 = new TextBox();
+            tb4.Name = "tb4";
+            tb4.Location = new Point(10, 10);
+            this.panel1.Controls.Add(tb4)
+
 */

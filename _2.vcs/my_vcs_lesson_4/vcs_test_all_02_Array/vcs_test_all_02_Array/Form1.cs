@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;                //for file read/write
-
 using System.Collections; //匯入集合物件      for Hashtable
 
 namespace vcs_test_all_02_Array
@@ -89,6 +88,10 @@ namespace vcs_test_all_02_Array
 
             this.Size = new Size(920, 710);
             this.Text = "vcs_test_all_02_Array";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -427,10 +430,10 @@ namespace vcs_test_all_02_Array
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
+            /*
             //製作二維陣列
             int COLUMNS = 10;
             int ROWS = 3;
-            /*
             int[,] gray = new int[ROWS, COLUMNS];
 
             for (j = 0; j < ROWS; j++)
@@ -1388,7 +1391,8 @@ namespace vcs_test_all_02_Array
         private void bt_parse1_Click(object sender, EventArgs e)
         {
             //解讀一個在TextBox的矩陣
-            int num_rows, num_cols;
+            int num_rows;
+            int num_cols;
             richTextBox1.Text += "call LoadArray for arr\n";
             double[,] arr = LoadArray(out num_rows, out num_cols);
             // Display the initial arrays.
@@ -1399,7 +1403,8 @@ namespace vcs_test_all_02_Array
         private void bt_parse2_Click(object sender, EventArgs e)
         {
             //解讀一個在RichTextBox的矩陣
-            int num_rows, num_cols;
+            int num_rows;
+            int num_cols;
             richTextBox1.Text += "call LoadArray for arr\n";
             double[,] arr = LoadArray2(out num_rows, out num_cols);
             // Display the initial arrays.

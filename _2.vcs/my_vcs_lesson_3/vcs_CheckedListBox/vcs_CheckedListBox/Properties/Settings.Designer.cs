@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_Chart7.Properties
+namespace vcs_CheckedListBox.Properties
 {
 
 

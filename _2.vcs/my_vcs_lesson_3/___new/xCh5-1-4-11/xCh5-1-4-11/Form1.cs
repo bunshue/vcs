@@ -51,6 +51,8 @@ namespace xCh5_1_4_11
             System.Windows.Forms.ComboBox myCombo = (System.Windows.Forms.ComboBox)sender;
             textBox1.Clear();
             textBox1.AppendText(myCombo.Text);
+
+            richTextBox1.Text += "DropDown : " + myCombo.Text + "\n";
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -58,6 +60,7 @@ namespace xCh5_1_4_11
             System.Windows.Forms.ComboBox myCombo = (System.Windows.Forms.ComboBox)sender;
             textBox2.Clear();
             textBox2.AppendText(myCombo.Text);
+            richTextBox1.Text += "SelectedIndexChanged : " + myCombo.Text + "\n";
         }
     }
 }

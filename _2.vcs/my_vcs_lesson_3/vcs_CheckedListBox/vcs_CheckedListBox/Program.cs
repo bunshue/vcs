@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WinChkLstBx
+namespace vcs_CheckedListBox
 {
     static class Program
     {

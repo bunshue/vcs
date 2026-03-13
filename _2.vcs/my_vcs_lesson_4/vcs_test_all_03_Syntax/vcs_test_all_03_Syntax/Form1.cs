@@ -353,8 +353,51 @@ namespace vcs_test_all_03_Syntax
                 richTextBox1.Text += "不是一個空字串，內容: " + string_b + "\n";
         }
 
+        int[] pcLot = new int[6];
+
+        // SetLot可用來設定num個min~max之間的亂數，並將亂數值放入choose陣列內
+        void SetLot(ref  int[] choose, int min, int max, int num)
+        {
+            int[] lot = new int[50];//陣列元素為lot[0]~lot[49],lot[49]省略不用 
+            int max_dim, choice;
+            int i, j;
+            max_dim = max - min + 1;
+            for (i = 0; i < max_dim; i++)
+            {
+                lot[i] = min + i;
+            }
+            Random rndObj = new Random();  // 建立亂數物件rndObj
+            for (i = 0; i < num; i++)
+            {
+                choice = rndObj.Next(0, max_dim);
+                choose[i] = lot[choice];
+                for (j = choice; j < max_dim; j++)
+                {
+                    lot[j] = lot[j + 1];
+                }
+                max_dim--;
+            }
+        }
+
         private void button9_Click(object sender, EventArgs e)
         {
+            //測試 ref
+
+            // 呼叫SetLot方法， 產生本期大樂透6個號碼並放入pcLot陣列內
+            SetLot(ref pcLot, 1, 49, pcLot.Length);
+
+            // 將pcLot陣列內的大樂透號碼進行遞增排序，以方便比對是否中獎
+            Array.Sort(pcLot);
+
+            string myNumStr = "", pcNumStr = "";
+            // 將本期大樂透號碼逐一指定給pcNumStr字串變數
+            // 以便將來和使用者所選號碼myNumStr字串比對
+            for (int i = 0; i <= pcLot.GetUpperBound(0); i++)
+            {
+                pcNumStr += pcLot[i].ToString() + ", ";
+            }
+
+
         }
 
         private void button10_Click(object sender, EventArgs e)

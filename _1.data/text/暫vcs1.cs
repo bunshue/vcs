@@ -1,4 +1,29 @@
 ﻿
+
+//將 ToolStrip 加入 toolStripContainer1 的 TopToolStripPanel
+//將 toolStripContainer1 加入 表單
+
+
+        ToolStripContainer toolStripContainer1;
+        ToolStrip toolStrip1;
+
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+
+            toolStrip1 = new System.Windows.Forms.ToolStrip();
+            toolStrip1.Items.Add("新增檔案");
+            toolStrip1.Items.Add("開啟檔案");
+            toolStrip1.Items.Add("儲存檔案");
+            toolStrip1.Items.Add("關閉檔案");
+            toolStripContainer1.TopToolStripPanel.Controls.Add(toolStrip1);
+
+            Controls.Add(toolStripContainer1);
+        }
+
+
+
 北風.accdb
 
             richTextBox1.Text += dateTimePicker1.Value.ToString() + "\n";
@@ -1276,9 +1301,9 @@ richTextBox1.Text += "----------------------------------------------------------
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
 splitContainer1
+
 splitContainer1 預設兩個Panel, Panel1 和 Panel2，Dock 選 DockStyle.Fill
 放控件至Panel中，Dock 選 DockStyle.Fill
-
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -3566,9 +3591,6 @@ print('------------------------------------------------------------')	#60個
                     panel3.Height = 100;
                 CreateImage();
             }
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -8456,7 +8478,6 @@ string appPath = Application.ExecutablePath;
 panel1.BackColor = Color.FromA#41ccd4;
 注意：在设计时手动输入这些值，不要用颜色选取
 
-
         //執行時期 顯示 屬性編輯視窗
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -9894,9 +9915,6 @@ axWindowsMediaPlayer1.uiMode = "invisible";
 
 從WMP8開始就不支持mms/rtsp協議了，所用wmp.URL="mms://xxxx";是不行的了。點此處見詳情，而mms這個協議現在還在廣泛使用。鬱悶。因此，我們不能使用wmp來看網絡電視了。
 
-
-
-
 媒體播放器包括如下元素：
 Video Display Panel：視頻顯示面板；
 Video Border：視頻邊框；
@@ -9906,7 +9924,6 @@ Control Bar with Audio and Position Controls：帶有聲音和位置控制的控
 Go To Bar：轉到欄；
 Display Panel：顯示面板；
 Status Bar：狀態欄；
-
 　　就是這麼幾個部分，網上有資料說控件提供方法控制它們顯示與否，但是我在sdk中並沒有找到它們。唯一可以粗略控制它們的就是uiMode屬性。它的取值前面有。
 
 
@@ -12145,25 +12162,6 @@ Encoding.GetString 方法 : 將位元組序列解碼成字串。
             byte[] stringConvByte = Encoding.Default.GetBytes(strOrg);
             // Encoding.GetString方法，將 Byte 序列 轉為 String
             string byteConvStrig = Encoding.Default.GetString(stringConvByte);
-
-
-// 加入 TextBox 到 Form
-            TextBox tb1 = new TextBox();
-            tb1.Name = "tb1";
-            tb1.Location = new Point(10, 10);
-            this.Controls.Add(tb1);
-
-            // 加入 TextBox 到 GroupBox
-            TextBox tb3 = new TextBox();
-            tb3.Name = "tb3";
-            tb3.Location = new Point(10, 10);
-            this.groupBox1.Controls.Add(tb3);
-            
-            // 加入 TextBox 到 Panel
-            TextBox tb4 = new TextBox();
-            tb4.Name = "tb4";
-            tb4.Location = new Point(10, 10);
-            this.panel1.Controls.Add(tb4)
             
 
 不用richTextBox的debug方法            

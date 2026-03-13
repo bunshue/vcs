@@ -46,7 +46,6 @@ namespace vcs_ListView1
 
             listView1.Size = new Size(600, 600);
             richTextBox1.Size = new Size(300, 600);
-            this.Size = new Size(1430, 700);
 
             int x_st = 10;
             int y_st = 10;
@@ -90,8 +89,14 @@ namespace vcs_ListView1
 
             listView1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
-
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1430, 700);
+            this.Text = "vcs_ListView1";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void listView1_MouseClick(object sender, MouseEventArgs e)
@@ -168,8 +173,6 @@ namespace vcs_ListView1
             apply_listView00();
 
             listView1.MultiSelect = true;// 是否允許多行選擇
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
