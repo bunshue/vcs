@@ -166,6 +166,10 @@ namespace vcs_Draw_Example1
 
             this.Size = new Size(1800, 960);
             this.Text = "vcs_Draw_Example1";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -6509,13 +6513,13 @@ namespace vcs_Draw_Example1
 
         private void bt_2d_array1_Click(object sender, EventArgs e)
         {
-            //畫二維矩陣 + 輪廓
+            //畫二維陣列 + 輪廓
             g.Clear(Color.White);
 
             Pen p = new Pen(Color.Red, 10);  // 設定畫筆為紅色、粗細為 10 點。
             SolidBrush sb = new SolidBrush(Color.Blue);
 
-            int[,] gray = new int[31, 23];
+            int[,] gray = new int[31, 23];  // 整數二維陣列
 
             fillup_data1(gray);
 
@@ -6557,7 +6561,7 @@ namespace vcs_Draw_Example1
                 }
             }
 
-            //以上為 畫二維矩陣
+            //以上為 畫二維陣列
             //以下為 畫輪廓
 
             //二值化 把邊框畫出來 ST

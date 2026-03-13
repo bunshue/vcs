@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Collections;  // for IEnumerator
+
 namespace vcs_CheckedListBox
 {
     public partial class Form1 : Form
@@ -18,6 +20,7 @@ namespace vcs_CheckedListBox
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
             checkedListBox1.MultiColumn = true;	// chkListLot水平欄顯示
             checkedListBox1.ColumnWidth = 100;    	// chkListLot水平欄寬
             // 在chkListLot核取清單方塊加入項目, 可讓使用者勾選
@@ -26,6 +29,22 @@ namespace vcs_CheckedListBox
                 checkedListBox1.Items.Add(i.ToString());
             }
 
+            /*
+            checkedListBox1.Items.AddRange(
+                new object[]
+                { 
+                    "滑鼠",
+                    "鍵盤",
+                    "網卡",
+                    "螢幕",
+                    "音效卡",
+                    "數據機",
+                    "外接硬碟"
+                });
+            checkedListBox1.MultiColumn = true;
+            checkedListBox1.ColumnWidth = 120;
+            checkedListBox1.CheckOnClick = true;
+            */
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -71,12 +90,32 @@ namespace vcs_CheckedListBox
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //勾選狀態
+            string result;
+            foreach (int indexChecked in checkedListBox1.CheckedIndices)
+            {
+                result = "索引 " + indexChecked.ToString() + ", 已被勾選. 勾選的狀態是->" + checkedListBox1.GetItemCheckState(indexChecked).ToString();
+                richTextBox1.Text += result + "\n";
+            }
+
+            foreach (object itemChecked in checkedListBox1.CheckedItems)
+            {
+                result = "被勾選的項目是\"" + itemChecked.ToString() + "\"勾選的狀態是->" + checkedListBox1.GetItemCheckState(checkedListBox1.Items.IndexOf(itemChecked)).ToString();
+                richTextBox1.Text += result + "\n";
+            }
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            //取消勾選
+            IEnumerator myEnumerator;
+            myEnumerator = checkedListBox1.CheckedIndices.GetEnumerator();
+            while (myEnumerator.MoveNext() != false)
+            {
+                int y = (int)myEnumerator.Current;
+                checkedListBox1.SetItemChecked(y, false);
+            }
         }
     }
 }

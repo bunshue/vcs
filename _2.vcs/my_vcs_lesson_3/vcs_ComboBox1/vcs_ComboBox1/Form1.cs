@@ -220,7 +220,16 @@ namespace vcs_ComboBox1
                 comboBox_day.Items.Add(i.ToString());
             }
 
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
+            // 建構comboBox_event物件，並設定相關的屬性
+            //comboBox_event.Location = new System.Drawing.Point(15, 15);
+            comboBox_event.Name = "comboBox_event";
+            comboBox_event.Size = new System.Drawing.Size(200, 50);
+            comboBox_event.TabIndex = 0;
+            comboBox_event.Text = "網卡";
+            string[] installs = new string[] { "滑鼠", "鍵盤", "網卡", "螢幕", "音效卡" };
+            comboBox_event.Items.AddRange(installs);
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -616,6 +625,20 @@ namespace vcs_ComboBox1
             richTextBox1.Text += "加入 : " + comboBox_add.Text + "\n";
             // 將下拉式清單所輸入的值放入下拉式清單的選項內
             comboBox_add.Items.Add(comboBox_add.Text);
+        }
+
+        //6060
+
+        private void comboBox_event_DropDown(object sender, EventArgs e)
+        {
+            System.Windows.Forms.ComboBox myCombo = (System.Windows.Forms.ComboBox)sender;
+            richTextBox1.Text += "DropDown : " + myCombo.Text + "\n";
+        }
+
+        private void comboBox_event_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            System.Windows.Forms.ComboBox myCombo = (System.Windows.Forms.ComboBox)sender;
+            richTextBox1.Text += "SelectedIndexChanged : " + myCombo.Text + "\n";
         }
     }
 

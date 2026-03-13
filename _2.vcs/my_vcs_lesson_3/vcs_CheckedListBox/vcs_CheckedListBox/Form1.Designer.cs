@@ -37,10 +37,11 @@
             // 
             // checkedListBox1
             // 
+            this.checkedListBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.checkedListBox1.FormattingEnabled = true;
             this.checkedListBox1.Location = new System.Drawing.Point(12, 12);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(499, 191);
+            this.checkedListBox1.Size = new System.Drawing.Size(499, 157);
             this.checkedListBox1.TabIndex = 0;
             // 
             // richTextBox1
@@ -57,7 +58,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(92, 51);
             this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
+            this.button1.Text = "Info";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -67,7 +68,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(92, 51);
             this.button2.TabIndex = 3;
-            this.button2.Text = "button2";
+            this.button2.Text = "勾選狀態";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -77,7 +78,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(92, 51);
             this.button3.TabIndex = 4;
-            this.button3.Text = "button3";
+            this.button3.Text = "取消勾選";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 

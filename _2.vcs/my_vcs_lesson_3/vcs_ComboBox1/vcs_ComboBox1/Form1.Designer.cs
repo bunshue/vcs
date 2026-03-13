@@ -66,9 +66,12 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.comboBox_event = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // cboFace
@@ -430,11 +433,32 @@
             this.label8.TabIndex = 69;
             this.label8.Text = "年";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.comboBox_event);
+            this.groupBox2.Location = new System.Drawing.Point(380, 515);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(350, 100);
+            this.groupBox2.TabIndex = 75;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "ComboBox方法";
+            // 
+            // comboBox_event
+            // 
+            this.comboBox_event.FormattingEnabled = true;
+            this.comboBox_event.Location = new System.Drawing.Point(37, 40);
+            this.comboBox_event.Name = "comboBox_event";
+            this.comboBox_event.Size = new System.Drawing.Size(292, 20);
+            this.comboBox_event.TabIndex = 0;
+            this.comboBox_event.DropDown += new System.EventHandler(this.comboBox_event_DropDown);
+            this.comboBox_event.SelectedIndexChanged += new System.EventHandler(this.comboBox_event_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(913, 648);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.comboBox_day);
             this.Controls.Add(this.comboBox_month);
             this.Controls.Add(this.comboBox_year);
@@ -457,6 +481,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -500,6 +525,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ComboBox comboBox_event;
     }
 }
 
