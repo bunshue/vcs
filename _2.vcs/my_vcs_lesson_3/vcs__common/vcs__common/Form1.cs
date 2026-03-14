@@ -58,14 +58,16 @@ namespace vcs__common
 
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             linkLabel1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            comboBox1.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            checkBox1.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            radioButton1.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            trackBar1.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            hScrollBar1.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            vScrollBar1.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            textBox1.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            numericUpDown1.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            comboBox1.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            checkBox1.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            radioButton1.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            trackBar1.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            hScrollBar1.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            vScrollBar1.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            textBox1.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            richTextBox1.Size = new Size(400, 200);
 
             this.Size = new Size(650, 670);
             this.Text = "vcs__common";
@@ -106,10 +108,32 @@ namespace vcs__common
 
         }
 
+        //控件驗證功能 ST
         private void button3_Click(object sender, EventArgs e)
         {
-
+            //控件驗證功能
+            textBox1.Validated += new EventHandler(textBox1_Validated);
+            comboBox1.Validated += new EventHandler(comboBox1_Validated);
+            numericUpDown1.Validated += new EventHandler(numericUpDown1_Validated);
         }
+
+        private void textBox1_Validated(object sender, EventArgs e)
+        {
+            //離開 TextBox 會執行 Validated 函數
+            richTextBox1.Text += "你輸入的資料的長度 : " + textBox1.Text.Length.ToString() + "\n";
+        }
+
+        private void comboBox1_Validated(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你選擇了 : " + comboBox1.Text + "\n";
+        }
+
+        private void numericUpDown1_Validated(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你選擇了 : " + numericUpDown1.Value.ToString() + "\n";
+        }
+
+        //控件驗證功能 SP
 
         private void button4_Click(object sender, EventArgs e)
         {

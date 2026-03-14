@@ -50,12 +50,16 @@ namespace xCh6_2_1_11
         {
             if (toolStripContainer1.TopToolStripPanel.Visible == true)
             {
+                richTextBox1.Text += "設定 TopToolStripPanel.Visible = false\n";
                 toolStripContainer1.TopToolStripPanel.Visible = false;
+
                 button1.Text = "顯現TopToolStripPanel";
             }
             else
             {
+                richTextBox1.Text += "設定 TopToolStripPanel.Visible = true\n";
                 toolStripContainer1.TopToolStripPanel.Visible = true;
+
                 button1.Text = "隱藏TopToolStripPanel";
             }
         }

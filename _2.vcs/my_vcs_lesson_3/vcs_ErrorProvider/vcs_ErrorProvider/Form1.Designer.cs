@@ -46,6 +46,7 @@
             this.bt_ok = new System.Windows.Forms.Button();
             this.tb_id = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt_clear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider3)).BeginInit();
@@ -105,7 +106,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(12, 268);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(640, 276);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 5;
             this.richTextBox1.Text = "";
             // 
@@ -209,11 +210,22 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Error Provider";
             // 
+            // bt_clear
+            // 
+            this.bt_clear.Location = new System.Drawing.Point(28, 287);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(69, 32);
+            this.bt_clear.TabIndex = 15;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(670, 556);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.richTextBox1);
@@ -250,6 +262,7 @@
         private System.Windows.Forms.Button bt_ok;
         private System.Windows.Forms.TextBox tb_id;
         private System.Windows.Forms.ErrorProvider errorProvider3;
+        private System.Windows.Forms.Button bt_clear;
     }
 }
 

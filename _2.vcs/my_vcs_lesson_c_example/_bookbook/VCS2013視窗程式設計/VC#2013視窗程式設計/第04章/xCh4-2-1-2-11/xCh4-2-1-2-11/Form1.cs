@@ -48,12 +48,7 @@ namespace xCh4_2_1_2_11
             linkLabel1.Links.Add(19, 2, "www.microsoft.com");
             linkLabel1.Links.Add(27, 3, "msdn.microsoft.com");
 
-            button1.Text = "目前的超連結";
-            button2.Text = "新增超連結";
-            button3.Text = "移除現有的超連結";
-            button4.Text = "清除所有的超連結";
-
-            label1.Text = "現有的超連結數：" + linkLabel1.Links.Count.ToString();
+            richTextBox1.Text += "現有的超連結數：" + linkLabel1.Links.Count.ToString() + "\n";
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -73,7 +68,7 @@ namespace xCh4_2_1_2_11
                 LinkLabel.Link link = (LinkLabel.Link)myLinks.Current;
                 msg = msg + link.LinkData + "\n";
             }
-            MessageBox.Show(msg, "現有的超連結內容");
+            richTextBox1.Text += "現有的超連結內容 :\n" + msg + "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -82,21 +77,22 @@ namespace xCh4_2_1_2_11
             LinkLabel.Link aLink = new LinkLabel.Link(23, 4, "msdn.microsoft.com/zh-tw/library");
             linkLabel1.Links.Add(aLink);
             linkLabel1.Links[3].Visited = true;
-            label1.Text = "連結數：" + linkLabel1.Links.Count.ToString();
+            richTextBox1.Text += "連結數：" + linkLabel1.Links.Count.ToString() + "\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //移除現有的超連結
             // 移除[文件庫]的超連結
             linkLabel1.Links.RemoveAt(3);
-            label1.Text = "連結數：" + linkLabel1.Links.Count.ToString();
+            richTextBox1.Text += "連結數：" + linkLabel1.Links.Count.ToString() + "\n";
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //  清除所有超連結
+            //  清除所有的超連結
             linkLabel1.Links.Clear();
-            label1.Text = "連結數：" + linkLabel1.Links.Count.ToString();
+            richTextBox1.Text += "連結數：" + linkLabel1.Links.Count.ToString() + "\n";
         }
     }
 }

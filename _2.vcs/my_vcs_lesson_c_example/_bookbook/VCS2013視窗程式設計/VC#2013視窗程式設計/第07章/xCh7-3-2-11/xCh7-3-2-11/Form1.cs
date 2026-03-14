@@ -10,6 +10,10 @@ using System.Windows.Forms;
 
 using System.IO;
 
+/*
+saveFileDialog1 使用 saveFileDialog1_FileOk
+*/
+
 namespace xCh7_3_2_11
 {
     public partial class Form1 : Form
@@ -23,10 +27,11 @@ namespace xCh7_3_2_11
         {
             openFileDialog1.Title = "客製化的「開啟檔案」對話方塊";
             openFileDialog1.Filter = "圖檔 (*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF|" + "所有檔案 (*.*)|*.*";
-
             openFileDialog1.FilterIndex = 2;
             openFileDialog1.ValidateNames = false;
             openFileDialog1.CheckFileExists = false;
+
+
 
             saveFileDialog1.Title = "客製化的「另存新檔」對話方塊";
             saveFileDialog1.RestoreDirectory = false;
@@ -35,6 +40,10 @@ namespace xCh7_3_2_11
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //預覽
+            //多重選取
+            //openFileDialog1.Multiselect = true;//false
+
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 // 在TextBox中寫入已選取的檔案名稱及安全名稱
@@ -60,13 +69,9 @@ namespace xCh7_3_2_11
             }
         }
 
-        private void checkBox4_CheckedChanged(object sender, EventArgs e)
-        {
-            openFileDialog1.Multiselect = checkBox4.Checked;
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
+            //開啟檔案
             Stream myStream = null;
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
@@ -98,6 +103,7 @@ namespace xCh7_3_2_11
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //另存新檔
             saveFileDialog1.ShowDialog();
         }
 
@@ -139,39 +145,15 @@ namespace xCh7_3_2_11
             MessageBox.Show("存檔完成 !");
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            openFileDialog1.ShowHelp = checkBox1.Checked;
-        }
+        /*屬性設定
+                openFileDialog1.ShowHelp = checkBox1.Checked;
+                    openFileDialog1.ShowReadOnly = checkBox2.Checked;
+                    openFileDialog1.ReadOnlyChecked = checkBox3.Checked;
+                    openFileDialog1.ValidateNames = checkBox5.Checked;
+                    openFileDialog1.CheckFileExists = checkBox6.Checked;
+                    openFileDialog1.CheckPathExists = checkBox7.Checked;
 
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            openFileDialog1.ShowReadOnly = checkBox2.Checked;
-        }
-
-        private void checkBox3_CheckedChanged(object sender, EventArgs e)
-        {
-            openFileDialog1.ReadOnlyChecked = checkBox3.Checked;
-        }
-
-        private void checkBox5_CheckedChanged(object sender, EventArgs e)
-        {
-            openFileDialog1.ValidateNames = checkBox5.Checked;
-        }
-
-        private void checkBox6_CheckedChanged(object sender, EventArgs e)
-        {
-            openFileDialog1.CheckFileExists = checkBox6.Checked;
-        }
-
-        private void checkBox7_CheckedChanged(object sender, EventArgs e)
-        {
-            openFileDialog1.CheckPathExists = checkBox7.Checked;
-        }
-
-        private void checkBox8_CheckedChanged(object sender, EventArgs e)
-        {
-            saveFileDialog1.RestoreDirectory = checkBox8.Checked;
-        }
+                    saveFileDialog1.RestoreDirectory = checkBox8.Checked;
+        */
     }
 }

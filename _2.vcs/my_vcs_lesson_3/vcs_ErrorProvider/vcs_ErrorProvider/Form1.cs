@@ -20,8 +20,40 @@ namespace vcs_ErrorProvider
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             tb_id.Validating += new CancelEventHandler(tb_id_Validating);
             tb_name.Validating += new CancelEventHandler(tb_name_Validating);
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 10;
+            dy = 60 + 10;
+
+            richTextBox1.Size = new Size(640, 276);
+            //richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            //this.Size = new Size(1273, 750);
+            this.Text = "vcs_ErrorProvider";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         string strA = null;
@@ -30,14 +62,15 @@ namespace vcs_ErrorProvider
         private void textBox1_Validating(object sender, CancelEventArgs e)
         {
             //驗證帳號
-
             if (textBox1.Text != "ims")
             {
                 errorProvider1.SetError(textBox1, "登錄名錯誤");
+                richTextBox1.Text += "登錄名錯誤\n";
             }
             else
             {
                 errorProvider1.SetError(textBox1, "");
+                richTextBox1.Text += "登錄名OK\n";
                 strA = textBox1.Text;
             }
         }
@@ -47,14 +80,15 @@ namespace vcs_ErrorProvider
             //驗證密碼
             if (textBox2.Text != "iloveims")//判斷輸入是否正確
             {
-                errorProvider2.SetError(textBox2, "密碼確誤");
+                errorProvider2.SetError(textBox2, "密碼錯誤");
+                richTextBox1.Text += "密碼錯誤\n";
             }
             else
             {
                 errorProvider2.SetError(textBox2, "");
                 strB = textBox2.Text;
+                richTextBox1.Text += "密碼OK\n";
             }
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -183,7 +217,8 @@ namespace vcs_ErrorProvider
 
         private void bt_ok_Click(object sender, EventArgs e)
         {
-            //richTextBox1.Text += "你按了OK\n";
+            richTextBox1.Text += "你按了OK\n";
+
             // Validate all fields.
             ValidateIDCode(errorProvider3, tb_id);
             ValidateRequiredField(errorProvider3, tb_name);
@@ -198,10 +233,35 @@ namespace vcs_ErrorProvider
                 }
             }
             richTextBox1.Text += "資料正確\nID:\t" + tb_id.Text + "\nName:\t" + tb_name.Text + "\n";
-
         }
-        
-
-
     }
 }
+
+/*
+            errorProvider1.SetIconAlignment(textBox1, ErrorIconAlignment.MiddleRight);
+            errorProvider1.SetIconPadding(textBox1, 2);
+            errorProvider1.BlinkRate = 1000;
+            errorProvider1.BlinkStyle = ErrorBlinkStyle.AlwaysBlink;
+
+            errorProvider2.SetIconAlignment(numericUpDown1, ErrorIconAlignment.MiddleRight);
+            errorProvider2.SetIconPadding(numericUpDown1, 2);
+            errorProvider2.BlinkStyle = ErrorBlinkStyle.BlinkIfDifferentError;
+
+            errorProvider3.SetIconAlignment(comboBox1, ErrorIconAlignment.MiddleRight);
+            errorProvider3.SetIconPadding(comboBox1, 2);
+            errorProvider3.BlinkRate = 1000;
+            errorProvider3.BlinkStyle = ErrorBlinkStyle.NeverBlink;
+
+
+            errorProvider1.SetError(textBox1, "");
+            errorProvider1.SetError(textBox1, "姓名不得為空白");
+            errorProvider2.SetError(numericUpDown1, "年齡不夠大");
+            errorProvider2.SetError(numericUpDown1, "年齡太大");
+            errorProvider2.SetError(numericUpDown1, "");
+            errorProvider3.SetError(comboBox1, "請選擇學歷");
+            errorProvider3.SetError(comboBox1, "");
+
+*/
+
+
+

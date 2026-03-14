@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.toolStripContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,7 +43,7 @@
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(197, 59);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(197, 57);
             // 
             // toolStripContainer1.LeftToolStripPanel
             // 
@@ -61,11 +62,20 @@
             // 
             this.toolStripContainer1.TopToolStripPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(21, 187);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(649, 327);
+            this.richTextBox1.TabIndex = 1;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(682, 526);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.toolStripContainer1);
             this.Name = "Form1";
             this.Text = "ToolStripContainer範例";
@@ -79,6 +89,7 @@
         #endregion
 
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
