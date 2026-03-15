@@ -34,7 +34,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(718, 532);
+            this.ClientSize = new System.Drawing.Size(718, 625);
             this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "Region - Union()";

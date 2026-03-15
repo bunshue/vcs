@@ -14,7 +14,6 @@ namespace WindowsFormsApplication1
     public partial class Form1 : Form
     {
         Pen myPen = new Pen(Color.Red, 5);
-        Pen myPen2 = new Pen(Color.Blue, 20);
         GraphicsPath gp = new GraphicsPath();
         bool show_Arrow = false;  // 是否要顯示出 箭形直線
 
@@ -25,43 +24,40 @@ namespace WindowsFormsApplication1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            int Cx = this.ClientSize.Width / 2; // 視窗客戶區的中心點
-            int Cy = this.ClientSize.Height / 2;
-
-            int D = 20;    // 每格 寬
+            int Cx = 200;
+            int Cy = 100;
+            int D = 50;    // 每格 寬
             int x = Cx;    // 心臟的起始點
-            int y = Cy - 2 * D;
+            int y = Cy;
 
-            //心臟右邊的曲線 由上往下
+            //右區
             PointF[] pt = new PointF[]{
                           new PointF(x, y),
-                          new PointF(x+3*D, y - 1.5f*D),
-                          new PointF(x+5*D, y),
-                          new PointF(x+4*D, y+3*D),
-                          new PointF(x, y+ 7 *D),
+                          new PointF(x+D, y +D),
+                          new PointF(x+D*2, y+D),
+                          new PointF(x+D*3/2, y+D+D/2),
+                          new PointF(x, y+ D*4),
                           };
             gp.AddCurve(pt, 0.6f);
 
-            //心臟左邊的曲線 順時間方向 由下往上 定義點的座標
+            //左區
             PointF[] pt2 = new PointF[]{
-                          new PointF(x, y+ 7 *D),
-                          new PointF(x-4*D, y+3*D),
-                          new PointF(x-5*D, y),
-                          new PointF(x-3*D, y - 1.5f*D),
+                          new PointF(x, y+ D*4),
+                          new PointF(x-D*3/2, y+D+D/2),
+                          new PointF(x-D*2, y+D),
+                          new PointF(x-D, y +D),
                           new PointF(x, y),
                           };
             gp.AddCurve(pt2, 0.6f);
-
-            myPen2.EndCap = LineCap.ArrowAnchor;
         }
 
         // 表單重畫
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawPath(myPen, gp); // 繪製心形 曲線
-            if (show_Arrow)
+            e.Graphics.DrawPath(myPen, gp);
+            if (show_Arrow)//座標落在區域內
             {
-                e.Graphics.DrawLine(myPen2, 20, this.ClientSize.Height / 2, this.ClientSize.Width - 20, this.ClientSize.Height / 2); // 繪製箭形直線
+                e.Graphics.FillPath(Brushes.Cyan, gp);
             }
         }
 

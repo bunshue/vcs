@@ -660,6 +660,27 @@ namespace vcs_Draw_GraphicsPath
 
         private void button13_Click(object sender, EventArgs e)
         {
+            Graphics g = this.pictureBox1.CreateGraphics();
+
+            //GraphicsPath - AddArc() 倒角矩形
+
+            GraphicsPath gp = new GraphicsPath(); // GraphicsPath物件
+
+            int Cx = this.pictureBox1.ClientSize.Width / 2; // 視窗客戶區的正中央
+            int Cy = this.pictureBox1.ClientSize.Height / 2;
+            // 矩形的 寬高是取自視窗客戶區寬高最小者的一半
+            int D1 = Math.Min(this.ClientSize.Width, this.ClientSize.Height) / 4;
+
+            gp.AddArc(Cx - D1, Cy - D1, 2 * D1, 2 * D1, 30, 30);
+            gp.AddArc(Cx - D1, Cy - D1, 2 * D1, 2 * D1, 90 + 30, 30);
+            gp.AddArc(Cx - D1, Cy - D1, 2 * D1, 2 * D1, 180 + 30, 30);
+            gp.AddArc(Cx - D1, Cy - D1, 2 * D1, 2 * D1, 270 + 30, 30);
+            gp.CloseFigure(); // 封閉形狀 將形狀的頭尾座標連接
+            // 將 gp 內的形狀 繪出
+            g.DrawPath(Pens.Black, gp); // 繪出GraphicsPath物件
+
+
+
 
         }
 
