@@ -1,5 +1,360 @@
 ﻿
 
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                try
+                {
+                    con.Open();
+                    cmd.Connection = con;
+                    cmd.CommandText = this.textBox1.Text;
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    showinfo();
+                    MessageBox.Show("刪除成功");
+                    this.textBox1.Focus();
+                    this.textBox1.SelectAll();
+                }
+                catch
+                {
+                    MessageBox.Show("SQL語句有誤");
+                    this.textBox1.Focus();
+                    this.textBox1.SelectAll();
+                }
+            }
+        }
+
+        private void showinfo()
+        {
+            using (SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09"))
+            {
+                DataTable dt = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter("select * from 員工表", con);
+                da.Fill(dt);
+                this.dataGridView1.DataSource = dt.DefaultView;
+            }    
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            showinfo();
+        }
+
+
+
+//6060
+
+
+        //結構陣列
+
+        struct Student
+        {
+            public int No;
+            public string Name;
+            public int Score;
+        };
+        // 初值置入結構陣列
+        // 1001,"Paul",85,90,66
+        // 1002,"Jack",80,80,77
+        // 1003,"Mary",75,70,80
+        // 1004,"Jane",90,85,99
+        // 1005,"Nacy",70,80,60
+        // 結構陣列如何在宣告建立結構陣列時,同時設定初值
+        static void Main(string[] args)
+        {
+            int i, j;
+            Student temp;
+
+            // Student[] bcc = new Student[5];
+            // bcc[0].No = 1001; bcc[0].Name = "Paul"; bcc[0].Score = 85;
+            // bcc[1].No = 1002; bcc[1].Name = "Jack"; bcc[1].Score = 80;
+            // bcc[2].No = 1003; bcc[2].Name = "Mary"; bcc[2].Score = 70;
+            // bcc[3].No = 1004; bcc[3].Name = "Jane"; bcc[3].Score = 90;
+            // bcc[4].No = 1005; bcc[4].Name = "Nacy"; bcc[4].Score = 75;
+
+            Student[] bcc = new Student[] {
+               new Student(){No=1001,Name="Paul", Score=85},
+               new Student(){No=1002,Name="Jack", Score=80},
+               new Student(){No=1003,Name="Mary", Score=70},
+               new Student(){No=1004,Name="Jane", Score=90},
+               new Student(){No=1005,Name="Nacy", Score=75}
+           };
+
+            for (i = 0; i < bcc.Length; i++)
+            {
+            }
+            for (i = 0; i < bcc.Length; i++)
+            {
+                Console.WriteLine("  {0}   {1}    {2}", bcc[i].No, bcc[i].Name, bcc[i].Score);
+            }
+
+
+
+//6060
+
+格式化列印
+                Console.WriteLine(" {0},  {1},   {2},    {3},   {4}", stu_No[i], stu_Name[i], stu_Chin[i], stu_Eng[i], stu_Math[i]);
+
+//6060
+
+
+
+//6060
+
+using System.Drawing.Drawing2D;  // MatrixOrder
+
+
+            Bitmap bm = new Bitmap(Properties.Resources.Butterfly);
+            float theta = 0; // 旋轉角度
+
+            theta = theta + 2;  // 旋轉角度 遞增
+
+
+            //畫布轉換矩陣的旋轉設定 - 在固定點自轉
+            int Cx = this.ClientSize.Width / 2; // 視窗客戶區正中心點
+            int Cy = this.ClientSize.Height / 2;//
+
+            e.Graphics.ResetTransform(); // 畫布的矩陣 = 單位矩陣
+
+            e.Graphics.TranslateTransform(-bm.Width / 2, -bm.Height / 2, MatrixOrder.Append);
+            e.Graphics.RotateTransform(theta, MatrixOrder.Append);  // 乘上 旋轉矩陣
+            e.Graphics.TranslateTransform(Cx, Cy, MatrixOrder.Append); // 再搬到視窗客戶區正中心點
+
+            e.Graphics.DrawImage(bm, 0, 0); // 繪出圖形
+
+//6060
+
+
+畫布轉換矩陣的平移設定 (↑↓←→按鍵)
+
+        Bitmap bm = new Bitmap(Properties.Resources.Butterfly);
+        Point pos = new Point(); // 圖形的位置
+                // 向上
+                pos = new Point(pos.X, pos.Y - 10);
+                // 向下
+                pos = new Point(pos.X, pos.Y + 10);
+                // 向左
+                pos = new Point(pos.X - 10, pos.Y);
+                // 向右
+                pos = new Point(pos.X + 10, pos.Y);
+
+        // 表單重畫事件
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.TranslateTransform(pos.X, pos.Y);
+            e.Graphics.DrawImage(bm, 0, 0); // 繪出圖形
+            //e.Graphics.DrawImage(bm, pos); // 繪出圖形
+        }
+
+
+
+
+
+/*
+Pen myPen2 = new Pen(Color.Blue, 20);
+myPen2.EndCap = LineCap.ArrowAnchor;
+e.Graphics.DrawLine(myPen2, 20, this.ClientSize.Height / 2, this.ClientSize.Width - 20, this.ClientSize.Height / 2); // 繪製箭形直線
+*/
+
+
+
+//6060
+
+using System.Drawing.Drawing2D;  // for GraphicsPath
+
+            GraphicsPath gp = new GraphicsPath();  // GraphicsPath物件
+
+            int x_st = 100;
+            int y_st = 100;
+
+            PointF[] pt = new PointF[]
+            {
+                new PointF(x_st, y_st),
+                new PointF(x_st+50, y_st-50),
+                new PointF(x_st+100, y_st-100),
+                new PointF(x_st+150, y_st+50),
+                new PointF(x_st+200, y_st-50),
+            };
+
+            gp.AddCurve(pt, 0.6f); // 加入曲線
+            
+            
+            PointF[] pt2 = new PointF[]{
+                          new PointF(x, y+ 7 *D),
+                          new PointF(x-4*D, y+3*D),
+                          new PointF(x-5*D, y),
+                          new PointF(x-3*D, y - 1.5f*D),
+                          new PointF(x, y),
+                          };
+            gp.AddCurve(pt2, 0.6f);
+
+            //gp.CloseFigure(); //  封閉目前的圖形
+            e.Graphics.DrawPath(Pens.Black, gp); // 繪出圖形軌跡
+            e.Graphics.DrawPath(Pens.Black, gp); // 繪出GraphicsPath物件
+
+//6060
+
+            numericUpDown1.Maximum = new System.Decimal(new int[] { 150, 0, 0, 0 });
+
+            comboBox1.Items.AddRange(new object[] { 
+                "無", 
+                "國中小", 
+                "高中職", 
+                "大專",
+                "碩士", 
+                "博士" }
+            );
+
+
+combobox
+            // 將可供瀏覽的資料夾寫入ComboBox物件
+            comboBox1.Items.AddRange(new object[]{
+                "MyComputer",
+                "MyDocuments",
+                "MyMusic",
+                "MyPictures",
+                "Desktop",
+                "ProgramFiles",
+                "StartMenu"});
+
+            // 預設ComboBox物件的Text為第1個選項
+            comboBox1.SelectedIndex = 0;
+
+FBD
+
+
+/*
+            // 設定FolderBrowserDialog的初值
+            folderBrowserDialog1.ShowNewFolderButton = false;
+            folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
+            folderBrowserDialog1.Description = "----資料夾瀏覽對話方塊----" + "\n請選擇所要開啟的檔案所在的資料夾";
+
+if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                textBox1.Text = folderBrowserDialog1.SelectedPath;
+            }
+
+    folderBrowserDialog1.ShowNewFolderButton = checkBox1.Checked;
+
+*/
+
+/*
+            // 設定FBD預設路徑
+            folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
+            folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyDocuments;
+            folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyMusic;
+            folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyPictures;
+            folderBrowserDialog1.RootFolder = Environment.SpecialFolder.Desktop;
+            folderBrowserDialog1.RootFolder = Environment.SpecialFolder.ProgramFiles;
+            folderBrowserDialog1.RootFolder = Environment.SpecialFolder.StartMenu;
+            folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
+
+*/
+
+
+
+        //Random r = new Random();
+            string new_string = "string" + r.Next(100).ToString("D3");
+
+
+
+
+
+複利率本利和試算
+        //Cal 方法可計算配息方式
+        public int Cal(int vMoney, int vYear, double vRate)
+        {
+            // 每年計息一次
+            return (int)(vMoney * Math.Pow(1 + vRate, vYear));
+
+            //每月計息一次
+            //return (int)(vMoney * Math.Pow(1 + (vRate) / 12, vYear * 12));
+        }
+
+        private void btnOpen_Click(object sender, EventArgs e)
+        {
+            int myMoney = 10000;//本金(元)
+            int myYear = 10;//年後頷回本利(年)
+            double myRate = 5.0 / 100;//年利率(%)
+
+            //計算配息方式
+            richTextBox1.Text += myYear.ToString() + " 年後領回本利和：" + Cal(myMoney, myYear, myRate).ToString() + "\n";
+        }
+
+
+radioButton1屬性
+
+            if (radioButton1.CheckAlign == ContentAlignment.MiddleLeft)
+            {
+                radioButton1.CheckAlign = ContentAlignment.MiddleRight;
+            }
+            else
+            {
+                radioButton1.CheckAlign = ContentAlignment.MiddleLeft;
+            }
+
+
+
+            if (radioButton2.CheckAlign == ContentAlignment.MiddleLeft)
+            {
+                radioButton2.CheckAlign = ContentAlignment.MiddleRight;
+            }
+            else
+            {
+                radioButton2.CheckAlign = ContentAlignment.MiddleLeft;
+            }
+
+
+
+
+            if (radioButton3.CheckAlign == ContentAlignment.MiddleLeft)
+            {
+                radioButton3.CheckAlign = ContentAlignment.MiddleRight;
+            }
+            else
+            {
+                radioButton3.CheckAlign = ContentAlignment.MiddleLeft;
+            }
+
+
+            if (radioButton4.CheckAlign == ContentAlignment.MiddleLeft)
+            {
+                radioButton4.CheckAlign = ContentAlignment.MiddleRight;
+            }
+            else
+            {
+                radioButton4.CheckAlign = ContentAlignment.MiddleLeft;
+            }
+
+            if (radioButton5.CheckAlign == ContentAlignment.MiddleLeft)
+            {
+                radioButton5.CheckAlign = ContentAlignment.MiddleRight;
+            }
+            else
+            {
+                radioButton5.CheckAlign = ContentAlignment.MiddleLeft;
+            }
+
+
+
+//6060
+
+
+this.Text                    = String.Format("關於 {0}", AssemblyTitle);
+this.labelVersion.Text       = String.Format("版本 {0}", AssemblyVersion);
+
+
+
+
+
+
+
+//6060
+
+
 //將 ToolStrip 加入 toolStripContainer1 的 TopToolStripPanel
 //將 toolStripContainer1 加入 表單
 
@@ -155,13 +510,7 @@ label
                     e.Graphics.DrawString(MENU_CAPTION, menu_font, System.Drawing.Brushes.Black, e.Bounds.X, e.Bounds.Y);
                 }
 
-
-
-
-
-
 PasswordChar
-
 
 禁止使用滑鼠右鍵
 
@@ -469,7 +818,6 @@ dlgFolderBrowser.SelectedPath = @"D:\USERS\LSH\Documents";
                 hwidth += 2;
             }
             g.DrawRectangles(pen, R1);
-
 
 
 //測試RTB

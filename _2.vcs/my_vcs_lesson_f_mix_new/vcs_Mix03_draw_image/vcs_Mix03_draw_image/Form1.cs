@@ -440,6 +440,17 @@ namespace vcs_Mix03_draw_image
         private void button7_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            Graphics g = this.pictureBox1.CreateGraphics();   // 取得畫布
+            Pen p = new Pen(Color.Red);  // 建立一支紅色的筆
+            g.Clear(Color.White);        // 清除畫布
+
+            g.DrawEllipse(p, 90, 30, 90, 90);      // 畫圓
+            g.DrawLine(p, 90, 50, 180, 100);       // 畫線
+            g.DrawArc(p, 90, 30, 90, 90, 0, 250);  // 畫弧形
+
+
+
         }
 
         private void button8_Click(object sender, EventArgs e)

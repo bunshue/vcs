@@ -24,6 +24,7 @@ namespace vcs_KeyDown3_Tank
             picTank.Left = 100; picTank.Top = 90;  //預設picTank的位置
             picFire.Image = Image.FromFile("../../fire.gif");  //載入fire.gif
             picFire.Visible = false;  //預設picFire不可見
+            this.Text = "W / S / A / D / 上 / 下 / 左 / 右";
         }
         //當按下按鍵時
         private void Form1_KeyDown(object sender, KeyEventArgs e)
