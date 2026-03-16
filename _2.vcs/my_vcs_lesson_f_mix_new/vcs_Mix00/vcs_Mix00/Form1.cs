@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;
+using System.IO;    //for Stream
 using System.Net;
 using System.Collections;
 using System.Drawing.Text;
@@ -19,7 +19,6 @@ using System.Security;
 using System.Security.Cryptography; //for HashAlgorithm
 using System.Diagnostics;   //for Process
 using System.Threading;
-using System.Media;     //for SoundPlayer
 using System.Web;   //for HttpUtility, 需改用.Net Framework4, 然後參考/加入參考/.Net/System.Web
 using System.Globalization; //for CultureInfo
 using System.Text.RegularExpressions;
@@ -1425,9 +1424,110 @@ namespace vcs_Mix00
             hanoi(N, 1, 2, 3);
         }
 
+        class MyImage       // 定義MyImage類別
+        {
+            // 宣告私有變數_x, _y用來表示目前車子的X, Y座標位置
+            private int _x, _y;
+            private Bitmap bmp;
+
+            // 宣告_speed為私有變數，表示該變數只能在Car類別內使用
+            private int _speed = 0;
+
+            private int _angle = 10; // 私有_angle變數初值為10
+
+            public int Angle    	// 定義Angle唯讀屬性
+            {						// Angle屬性只有get區段沒有set區段
+                get
+                {
+                    return _angle;
+                }
+            }
+
+            // 宣告Speed為公開屬性
+            public int Speed
+            {
+                get     // get存取子可傳回屬性值
+                {
+                    return _speed;// 傳回屬性值
+                }
+                set     // set存取子可設定屬性值
+                {
+                    if (value < 0)
+                    {
+                        value = 0;// 速度不得低於 0
+                    }
+                    if (value > 200)
+                    {
+                        value = 200;// 速度不得高於 200
+                    }
+                    _speed = value;// 設定屬性值
+                }
+            }
+            // 第一種加速方法
+            public void Accelerate()
+            {
+                this.Speed++;
+            }
+
+            // 第二種加速方法
+            public void Accelerate(int addSpeed)
+            {
+                this.Speed += addSpeed;
+            }
+
+            // 第三種加速方法
+            public void Accelerate(string S)
+            {
+                if (S == "STOP")
+                {
+                    this.Speed = 0;
+                }
+            }
+
+            // 定義 ImageProcessing 方法
+            public void ImageProcessing(int vX, int vY)
+            {
+                _x = vX;
+                _y = vY;
+            }
+        }
+
         private void button27_Click(object sender, EventArgs e)
         {
+            //test class
+
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            //Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
+            //MyImage Benz = new MyImage();
+            //Benz.ImageProcessing(100, 200);
+
+            MyImage Benz = new MyImage();
+            Console.WriteLine("現在速度:{0}", Benz.Speed);
+
+            Console.WriteLine("加速 ...");
+            Benz.Accelerate();		// 執行第一種加速方法
+            Console.WriteLine("現在速度:{0}", Benz.Speed);
+            Console.WriteLine("加速 10 ...");
+            Benz.Accelerate(10);		// 執行第二種加速方法
+            Console.WriteLine("現在速度:{0}", Benz.Speed);
+            Console.WriteLine("停車 ...");
+            Benz.Accelerate("STOP");	// 執行第三種加速方法
+            Console.WriteLine("現在速度:{0}", Benz.Speed);
+            Console.Read();
+
+
+            //MyImage Benz = new MyImage();
+            Benz.Speed = 500;			// 速度值超過 200
+            Console.WriteLine("Benz.Speed = {0}", Benz.Speed);
+            Console.Read();
+
+
+
+
         }
+
+
 
         static int top = -1;
 
@@ -1806,6 +1906,19 @@ namespace vcs_Mix00
 
         private void button33_Click(object sender, EventArgs e)
         {
+            //Assembly 大全集
+
+            string location = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            richTextBox1.Text += "location : " + location + "\n";
+            //string serviceFileName = location.Substring(0, location.LastIndexOf('\\')) + "\\" + serviceName + ".exe";
+
+            string namespaceName = Assembly.GetExecutingAssembly().GetName().Name.ToString();   //獲取前文檔命名空間的名稱
+            richTextBox1.Text += namespaceName + "\n";
+
+            Assembly asm = Assembly.GetExecutingAssembly();
+            string name = asm.GetName().Name;
+            richTextBox1.Text += "name : " + name + "\n";
+
         }
 
         private void CallOut(out int x, out int y)
@@ -3105,4 +3218,89 @@ namespace vcs_Mix00
 
 */
 
+
+
+
+
+/*
+
+
+private void AboutBox_Load(object sender, EventArgs e)
+{
+	AssemblyInfoClass myAssembly = new AssemblyInfoClass();
+	labelProductName.Text = "產品名稱：" + myAssembly.Product;
+	labelVersion.Text = "版本：" + myAssembly.Version;
+	labelCopyright.Text = "版權宣告：" + myAssembly.Copyright;
+	labelCompanyName.Text = "公司名稱：" + myAssembly.Company;
+	textBoxDescription.Text = "細部描述：" +
+	myAssembly.Description;
+}
+
+                string location = Assembly.GetExecutingAssembly().Location;
+                string serviceFileName = location.Substring(0, location.LastIndexOf('\\')) + "\\" + serviceName + ".exe";
+
+一、獲取程序集版本
+label版本.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+            //獲取本代碼所在的文件作為臨時文件，用於獲取屬性列表
+            string tempFile = Assembly.GetExecutingAssembly().FullName;
+
+C#讀取exe版本號
+
+	Assembly currentAssembly = Assembly.LoadFile(currentAssemblyPath);
+	Assembly updatedAssembly = Assembly.LoadFile(updatedAssemblyPath);
+	
+	AssemblyName currentAssemblyName = currentAssembly.GetName();
+	AssemblyName updatedAssemblyName = updatedAssembly.GetName();
+	
+	// 比較版本號
+	if (updatedAssemblyName.Version.CompareTo(currentAssemblyName.Version) <= 0)
+	{
+	    // 不需要更新
+	    return;
+	}
+	
+	AssemblyName currentAssemblyName = AssemblyName.GetAssemblyName(currentAssemblyPath);
+	AssemblyName updatedAssemblyName = AssemblyName.GetAssemblyName(updatedAssemblyPath);
+	
+	// 比較版本
+	if (updatedAssemblyName.Version.CompareTo(currentAssemblyName.Version) <= 0)
+	{
+	    // 不需要更新
+	    return;
+	}
+	
+	// 更新
+	File.Copy(updatedAssemblyPath, currentAssemblyPath, true);
+	
+            //取得 namespaceName
+            string namespaceName = Assembly.GetExecutingAssembly().GetName().Name.ToString();
+
+            richTextBox1.Text += namespaceName + "\n";
+
+            richTextBox1.Text += Assembly.GetExecutingAssembly().Location + "\n";
+
+
+一、獲取程序集版本
+label版本.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+
+使用資源檔的圖片
+
+屬性/資源/加入資源/加入現有檔案/ 選取檔案 picture1.jpg
+此時, Resources 會出現 picture1.jpg
+點選picture1.jpg, 屬性
+建置動作 改成 內嵌資源
+
+
+            Assembly asm = this.GetType().Assembly;
+            Stream stream = asm.GetManifestResourceStream("vcs_test.Resources.picture1.jpg");
+            this.BackgroundImage = new Bitmap(stream);
+
+*/
+/*
+
+            var RootDirectory = AppDomain.CurrentDomain.BaseDirectory ?? System.Reflection.Assembly.GetExecutingAssembly().Location;
+            richTextBox1.Text += "RootDirectory = " + RootDirectory + "\n";
+*/
 

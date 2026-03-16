@@ -413,6 +413,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(200, 60);
             this.button27.TabIndex = 127;
+            this.button27.Text = "test class";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
@@ -478,6 +479,7 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(200, 60);
             this.button33.TabIndex = 133;
+            this.button33.Text = "Assembly";
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 

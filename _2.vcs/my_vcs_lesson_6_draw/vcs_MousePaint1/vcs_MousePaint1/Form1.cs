@@ -96,11 +96,11 @@ namespace vcs_MousePaint1
         bool dragging4 = false; // 是否拖拉中
         //pictureBox4 連續貝茲線與控制點 SP
 
-        //pictureBox5 拖曳圖片框中的紅點 ST
-        //Point一維陣列
-        Point[] pts5 = new Point[6];    //一維陣列內有6個Point
-        int find_point_index = -1;
-        //pictureBox5 拖曳圖片框中的紅點 SP
+        //pictureBox5 ST
+        List<MovingPoint> mpList5 = new List<MovingPoint>(); // 可移動點的動態陣列
+        int mp_Selected5 = -1;  // 動態陣列 的第幾個 被選到
+        bool dragging5 = false; // 是否拖拉中
+        //pictureBox5 SP
 
         public Form1()
         {
@@ -170,17 +170,20 @@ namespace vcs_MousePaint1
             mpList4.Add(mp4); // 第七個控制點
             //pictureBox4 連續貝茲線與控制點 SP
 
-            //pictureBox5 拖曳圖片框中的紅點 ST
-            int x_st = 100;
-            int y_st = 80;
-            int dy = 50;
-            pts5[0] = new Point(x_st + 0, y_st + dy * 0);
-            pts5[1] = new Point(x_st + 0, y_st + dy * 1);
-            pts5[2] = new Point(x_st + 0, y_st + dy * 2);
-            pts5[3] = new Point(x_st + 0, y_st + dy * 3);
-            pts5[4] = new Point(x_st + 0, y_st + dy * 4);
-            pts5[5] = new Point(x_st + 0, y_st + dy * 5);
-            //pictureBox5 拖曳圖片框中的紅點 SP
+            //pictureBox5 ST
+            MovingPoint mp5;
+            mp5 = new MovingPoint(new Point(100, 200));
+            mpList5.Add(mp5); // 第一個控制點
+
+            mp5 = new MovingPoint(new Point(200, 100));
+            mpList5.Add(mp5); // 第二個控制點
+
+            mp5 = new MovingPoint(new Point(300, 300));
+            mpList5.Add(mp5); // 第三個控制點
+
+            mp5 = new MovingPoint(new Point(400, 200));
+            mpList5.Add(mp5); // 第四個控制點
+            //pictureBox5 SP
         }
 
         void show_item_location()
@@ -215,12 +218,17 @@ namespace vcs_MousePaint1
             label2.Text = "累計畫矩形";
             label3.Text = "貝茲線與控制點";
             label4.Text = "連續貝茲線與控制點";
-            label5.Text = "";
+            label5.Text = "Region - 貝茲曲線與控制點 (Region and GraphicsPath)";
             richTextBox1.Size = new Size(W - 200, H * 2 + 60);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1740, 940);
+            this.Text = "vcs_MousePaint1";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -649,86 +657,66 @@ namespace vcs_MousePaint1
             e.Graphics.DrawEllipse(Pens.Black, mpList4[6].p.X - 10, mpList4[6].p.Y - 10, 20, 20);
         }
 
-        bool flag_pictureBox5_mouse_down = false;
         private void pictureBox5_MouseDown(object sender, MouseEventArgs e)
         {
-            Point pt = FindPointAt(e.X, e.Y);
-            if (pt == new Point(9999, 9999))
+            // 端點或控制點 是否被點選到
+            for (int i = 0; i <= mpList5.Count - 1; i++)
             {
-                richTextBox1.Text += "找不到\n";
-            }
-            else
-            {
-                flag_pictureBox5_mouse_down = true;
-                richTextBox1.Text += "找到 : (" + pt.X.ToString() + ", " + pt.Y.ToString() + ")\t";
-                int index = get_index(pt);
-                richTextBox1.Text += "索引 : " + index.ToString() + "\n";
-                find_point_index = index;
-            }
-        }
-
-        private Point FindPointAt(int X, int Y)
-        {
-            foreach (Point pt in pts5)
-            {
-                float dx = pt.X - X;
-                float dy = pt.Y - Y;
-                if (dx * dx + dy * dy <= EPSILON)
+                if (mpList5[i].CheckSelected(e.X, e.Y))
                 {
-                    return pt;
+                    mp_Selected5 = i;
+                    dragging5 = true;
+                    break;
                 }
             }
-            return new Point(9999, 9999);
-        }
-
-        int get_index(Point point)
-        {
-            int len = pts5.Length;
-            for (int index = 0; index < len; index++)
-            {
-                if (point == pts5[index])
-                {
-                    return index;
-                }
-            }
-            return -1;
         }
 
         private void pictureBox5_MouseMove(object sender, MouseEventArgs e)
         {
-            if (flag_pictureBox5_mouse_down == true)
+            if (dragging5) // 移動端點或控制點
             {
-                update_pts(find_point_index, e.Location);
+                mpList5[mp_Selected5].Move(e.X, e.Y);
                 this.pictureBox5.Invalidate();
             }
         }
 
         private void pictureBox5_MouseUp(object sender, MouseEventArgs e)
         {
-            flag_pictureBox5_mouse_down = false;
+            // 解除 端點或控制點 的點選狀況
+            mp_Selected5 = -1;
+            dragging5 = false;
         }
 
         private void pictureBox5_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawString("拖曳圖片框中的紅點", new Font("標楷體", 16), new SolidBrush(Color.Black), 20, 20);
-            //e.Graphics.DrawRectangle(Pens.Red, 100, 100, 300, 300);
-            foreach (Point pt in pts5)
-            {
-                e.Graphics.FillEllipse(Brushes.Red, pt.X - 10, pt.Y - 10, 20, 20);
-            }
+            GraphicsPath gp = new GraphicsPath(); // 圖形軌跡物件
+
+            //加入 兩條切線
+            gp.AddLine(mpList5[0].p, mpList5[1].p);
+            gp.CloseFigure(); // 關閉目前的圖形
+
+            gp.AddLine(mpList5[2].p, mpList5[3].p);
+            gp.CloseFigure(); // 關閉目前的圖形
+
+            //加入 兩個端點 和 兩個控制點
+            gp.AddEllipse(mpList5[0].p.X - 10, mpList5[0].p.Y - 10, 20, 20);
+            Rectangle rect1, rect2;
+            rect1 = new Rectangle(mpList5[1].p.X - 10, mpList5[1].p.Y - 10, 20, 20);
+            rect2 = new Rectangle(mpList5[2].p.X - 10, mpList5[2].p.Y - 10, 20, 20);
+            gp.AddRectangle(rect1);
+            gp.AddRectangle(rect2);
+            gp.AddEllipse(mpList5[3].p.X - 10, mpList5[3].p.Y - 10, 20, 20);
+
+            // 只含貝茲曲線 的 GraphicsPath圖形軌跡物件
+            GraphicsPath gp2 = new GraphicsPath(); // 圖形軌跡物件
+            gp2.AddBezier(mpList5[0].p, mpList5[1].p, mpList5[2].p, mpList5[3].p);
+            Region r1 = new Region(gp2); // 新增 區域表面 物件
+            e.Graphics.FillRegion(Brushes.Yellow, r1); // 區域表面 繪出
+
+            gp.AddPath(gp2, false); // 將 gp2 加入 gp 中
+            e.Graphics.DrawPath(Pens.Black, gp); // 圖形軌跡 繪出
         }
 
-        void update_pts(int index, Point point)
-        {
-            int len = pts5.Length;
-            if ((index < 0) || index >= len)
-            {
-                richTextBox1.Text += index.ToString();
-                //richTextBox1.Text += "XXXXXXX\n";
-                return;
-            }
-            pts5[index] = point;
-        }
     }
 }
 

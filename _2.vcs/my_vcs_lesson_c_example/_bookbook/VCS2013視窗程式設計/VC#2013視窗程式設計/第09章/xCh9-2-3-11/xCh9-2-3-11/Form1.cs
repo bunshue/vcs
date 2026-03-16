@@ -73,6 +73,7 @@ namespace xCh9_2_3_11
         private void Form1_Load(object sender, EventArgs e)
         {
             MakeDataTable();
+
             comboBox1.Items.AddRange(new object[] { "博士", "碩士", "學士", "高中" });
             comboBox2.Items.AddRange(new object[] { "博士", "碩士", "學士", "高中" });
         }
@@ -80,6 +81,7 @@ namespace xCh9_2_3_11
         private void button1_Click(object sender, EventArgs e)
         {
             view = new DataView();
+
             view.Table = studentsDataSet.Tables["StudentTable"];
             view.AllowDelete = true;
             view.AllowEdit = true;

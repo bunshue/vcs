@@ -16,33 +16,60 @@ namespace 利用圖片加密文件
         {
             InitializeComponent();
         }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            pictureBox1.ImageLocation = filename;
+
+            filename = @"D:\_git\vcs\_1.data\______test_files1\poetry.txt";
+            textBox1.Text = filename;
+        }
+
         //打開圖片
         private void button1_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "jpg,bmp,gif|*.jpg|*.gif|*.bmp";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            //openFileDialog1.Filter = "jpg,bmp,gif|*.jpg|*.gif|*.bmp";
+            //if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                pictureBox1.ImageLocation = openFileDialog1.FileName;
+                pictureBox1.ImageLocation = filename;
             }
         }
+
         //打開加密文件
         private void button2_Click(object sender, EventArgs e)
         {
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\poetry.txt";
+            textBox1.Text = filename;
+            /*
             openFileDialog1.Filter = "文字文件|*.txt";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 textBox1.Text = openFileDialog1.FileName;
             }
+            */
         }
+
         // 加密
         private void button3_Click(object sender, EventArgs e)
         {
             try
             {
-                if (pictureBox1.ImageLocation==null)
-                { MessageBox.Show("請選擇一幅圖片用於加密"); return; }
+                if (pictureBox1.ImageLocation == null)
+                {
+                    MessageBox.Show("請選擇一幅圖片用於加密");
+                    richTextBox1.Text += "請選擇一幅圖片用於加密\n";
+                    return;
+                }
+
                 if (textBox1.Text == "")
-                { MessageBox.Show("請選擇加密文件路徑"); return; }
+                {
+                    MessageBox.Show("請選擇加密文件路徑");
+                    richTextBox1.Text += "請選擇加密文件路徑\n";
+                    return;
+                }
+
                 //圖片流
                 FileStream fsPic = new FileStream(pictureBox1.ImageLocation, FileMode.Open, FileAccess.Read);
                 //加密文件流
@@ -57,7 +84,7 @@ namespace 利用圖片加密文件
                 int intLent = strPath.LastIndexOf("\\") + 1;
                 int intLong = strPath.Length;
                 string strName = strPath.Substring(intLent, intLong - intLent);//要加密的文件名稱
-                string strLinPath = "C:\\" + strName;//臨時加密文件路徑
+                string strLinPath = "D:\\" + strName;//臨時加密文件路徑
                 FileStream fsOut = File.Open(strLinPath, FileMode.Create, FileAccess.Write);
                 //開始加密
                 RC2CryptoServiceProvider desc = new RC2CryptoServiceProvider();//des進行加
@@ -74,20 +101,18 @@ namespace 利用圖片加密文件
                 File.Copy(strLinPath, textBox1.Text);//複製加密文件
                 File.Delete(strLinPath);//冊除臨時文件
                 MessageBox.Show("加密成功");
+                richTextBox1.Text += "加密成功\n";
                 pictureBox1.ImageLocation = null;
                 textBox1.Text = "";
             }
-            catch (Exception ee)
+            catch (Exception ex)
             {
-                MessageBox.Show(ee.Message);
+                MessageBox.Show(ex.Message);
+                richTextBox1.Text += ex.Message + "\n";
+
             }
-
         }
 
-        private void Form2_Load(object sender, EventArgs e)
-        {
-
-        }
         //解密
         private void button4_Click(object sender, EventArgs e)
         {
@@ -107,7 +132,7 @@ namespace 利用圖片加密文件
                 int intLent = strPath.LastIndexOf("\\") + 1;
                 int intLong = strPath.Length;
                 string strName = strPath.Substring(intLent, intLong - intLent);//要加密的文件名稱
-                string strLinPath = "C:\\" + strName;//臨時解密文件路徑
+                string strLinPath = "D:\\" + strName;//臨時解密文件路徑
                 FileStream fs = new FileStream(strLinPath, FileMode.Create, FileAccess.Write);
                 //開始解密
                 RC2CryptoServiceProvider desc = new RC2CryptoServiceProvider();//des進行解
@@ -127,12 +152,14 @@ namespace 利用圖片加密文件
                 File.Copy(strLinPath, textBox1.Text);//複製加密文件
                 File.Delete(strLinPath);//冊除臨時文件
                 MessageBox.Show("解密成功");
+                richTextBox1.Text += "解密成功\n";
                 pictureBox1.ImageLocation = null;
                 textBox1.Text = "";
             }
-            catch (Exception ee)
+            catch (Exception ex)
             {
-                MessageBox.Show(ee.Message);
+                MessageBox.Show(ex.Message);
+                richTextBox1.Text += ex.Message + "\n";
             }
         }
     }

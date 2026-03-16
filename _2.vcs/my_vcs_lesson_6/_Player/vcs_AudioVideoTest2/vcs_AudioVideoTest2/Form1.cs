@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Threading;     // for Thread
-using System.Media;         // for SystemSounds     SystemSounds類別、SoundPlayer類別
+using System.Media;         // for SystemSounds     SystemSounds類別
 
 namespace vcs_AudioVideoTest2
 {

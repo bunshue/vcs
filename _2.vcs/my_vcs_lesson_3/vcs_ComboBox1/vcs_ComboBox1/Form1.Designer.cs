@@ -67,7 +67,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.comboBox_event = new System.Windows.Forms.ComboBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -435,23 +435,24 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.comboBox_event);
-            this.groupBox2.Location = new System.Drawing.Point(380, 515);
+            this.groupBox2.Controls.Add(this.comboBox1);
+            this.groupBox2.Location = new System.Drawing.Point(435, 525);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(350, 100);
             this.groupBox2.TabIndex = 75;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "ComboBox方法";
+            this.groupBox2.Text = "共同 ComboBox 使用";
             // 
-            // comboBox_event
+            // comboBox1
             // 
-            this.comboBox_event.FormattingEnabled = true;
-            this.comboBox_event.Location = new System.Drawing.Point(37, 40);
-            this.comboBox_event.Name = "comboBox_event";
-            this.comboBox_event.Size = new System.Drawing.Size(292, 20);
-            this.comboBox_event.TabIndex = 0;
-            this.comboBox_event.DropDown += new System.EventHandler(this.comboBox_event_DropDown);
-            this.comboBox_event.SelectedIndexChanged += new System.EventHandler(this.comboBox_event_SelectedIndexChanged);
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(19, 43);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(292, 20);
+            this.comboBox1.TabIndex = 1;
+            this.comboBox1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBox1_DrawItem);
+            this.comboBox1.DropDown += new System.EventHandler(this.comboBox1_DropDown);
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -526,7 +527,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ComboBox comboBox_event;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 

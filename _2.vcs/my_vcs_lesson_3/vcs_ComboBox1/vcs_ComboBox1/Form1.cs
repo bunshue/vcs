@@ -222,17 +222,21 @@ namespace vcs_ComboBox1
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            // 建構comboBox_event物件，並設定相關的屬性
-            //comboBox_event.Location = new System.Drawing.Point(15, 15);
-            comboBox_event.Name = "comboBox_event";
-            comboBox_event.Size = new System.Drawing.Size(200, 50);
-            comboBox_event.TabIndex = 0;
-            comboBox_event.Text = "網卡";
+            // 建構 comboBox1 物件，並設定相關的屬性
+            //comboBox1.Location = new System.Drawing.Point(15, 15);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new System.Drawing.Size(200, 50);
+            comboBox1.TabIndex = 0;
+            comboBox1.Text = "無";
+
+            //加入 comboBox 項目
             string[] installs = new string[] { "滑鼠", "鍵盤", "網卡", "螢幕", "音效卡" };
-            comboBox_event.Items.AddRange(installs);
+            comboBox1.Items.AddRange(installs);
+
+            // 預設ComboBox物件的Text為第1個選項
+            comboBox1.SelectedIndex = 0;
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
         }
 
         void show_item_location()
@@ -354,23 +358,21 @@ namespace vcs_ComboBox1
                 Size imageSize = G_ImageList.ImageSize;//獲取圖像大小
                 if (e.Index >= 0)//判斷是否有繪制項
                 {
-                    Font fn = new Font("標楷體", 10, FontStyle.Bold);//創建字體對象
+                    Font fn = new Font("標楷體", 30, FontStyle.Bold);//創建字體對象
                     string s = comboBox2.Items[e.Index].ToString();//得到繪制項的字符串
                     DrawItemState dis = e.State;
                     if (e.State == (DrawItemState.NoAccelerator | DrawItemState.NoFocusRect))
                     {
                         e.Graphics.FillRectangle(new SolidBrush(Color.LightYellow), r);//畫條目背景
                         G_ImageList.Draw(e.Graphics, r.Left, r.Top, e.Index);//繪制圖像
-                        e.Graphics.DrawString(s, fn, new SolidBrush(Color.Black),//顯示字符串
-                            r.Left + imageSize.Width, r.Top);
+                        e.Graphics.DrawString(s, fn, new SolidBrush(Color.Black), r.Left + imageSize.Width, r.Top);
                         e.DrawFocusRectangle();//顯示取得焦點時的虛線框
                     }
                     else
                     {
                         e.Graphics.FillRectangle(new SolidBrush(Color.LightGreen), r);//畫條目背景
                         G_ImageList.Draw(e.Graphics, r.Left, r.Top, e.Index);//繪制圖像
-                        e.Graphics.DrawString(s, fn, new SolidBrush(Color.Black),//顯示字符串 
-                            r.Left + imageSize.Width, r.Top);
+                        e.Graphics.DrawString(s, fn, new SolidBrush(Color.Black), r.Left + imageSize.Width, r.Top);
                         e.DrawFocusRectangle();//顯示取得焦點時的虛線框 
                     }
                 }
@@ -629,16 +631,57 @@ namespace vcs_ComboBox1
 
         //6060
 
-        private void comboBox_event_DropDown(object sender, EventArgs e)
+        private void comboBox1_DropDown(object sender, EventArgs e)
         {
             System.Windows.Forms.ComboBox myCombo = (System.Windows.Forms.ComboBox)sender;
             richTextBox1.Text += "DropDown : " + myCombo.Text + "\n";
         }
 
-        private void comboBox_event_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             System.Windows.Forms.ComboBox myCombo = (System.Windows.Forms.ComboBox)sender;
             richTextBox1.Text += "SelectedIndexChanged : " + myCombo.Text + "\n";
+        }
+
+        private void comboBox1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            //都不會跑到這~~~~~~~~~~~~~~~
+
+            if (G_ImageList != null)
+            {
+                richTextBox1.Text += "AAA\n";
+
+                Graphics g = e.Graphics;               //得到繪圖物件
+                Rectangle rec = e.Bounds;              //得到繪圖範圍
+                Size imageSize = G_ImageList.ImageSize;//取得圖像大小
+                if (e.Index >= 0)                      //判斷是否有繪製項 
+                {
+                    Font font = new Font("微軟正黑體", 50, FontStyle.Bold);//建立字體物件
+                    string s = comboBox1.Items[e.Index].ToString();        //得到繪製項的字串
+                    DrawItemState dis = e.State;
+                    if (e.State == (DrawItemState.NoAccelerator | DrawItemState.NoFocusRect))
+                    {
+                        g.FillRectangle(new SolidBrush(Color.LightBlue), rec); //畫item背景
+                        G_ImageList.Draw(g, rec.Left, rec.Top, e.Index);                //繪製圖像
+                        e.Graphics.DrawString(s, font, new SolidBrush(Color.Black),     //顯示字串
+                            rec.Left + imageSize.Width, rec.Top);
+                        e.DrawFocusRectangle();                                         //顯示取得焦點時的虛線框
+                    }
+                    else
+                    {
+                        g.FillRectangle(new SolidBrush(Color.LightGreen), rec);//畫item背景
+                        G_ImageList.Draw(e.Graphics, rec.Left, rec.Top, e.Index);       //繪製圖像
+                        e.Graphics.DrawString(s, font, new SolidBrush(Color.Black),     //顯示字串 
+                            rec.Left + imageSize.Width, rec.Top);
+                        e.DrawFocusRectangle();                                         //顯示取得焦點時的虛線框 
+                    }
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "XXXXX\n";
+
+            }
         }
     }
 
@@ -682,5 +725,7 @@ namespace vcs_ComboBox1
 /*  可搬出
 
 */
+
+
 
 

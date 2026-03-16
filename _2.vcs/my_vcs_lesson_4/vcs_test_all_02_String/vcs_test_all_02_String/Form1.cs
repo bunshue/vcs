@@ -21,6 +21,7 @@ namespace vcs_test_all_02_String
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
             show_numbers();
         }
 
@@ -105,6 +106,10 @@ namespace vcs_test_all_02_String
 
             this.Size = new Size(1490, 710);
             this.Text = "vcs_test_all_02_String";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -273,7 +278,6 @@ namespace vcs_test_all_02_String
             Console.WriteLine(@"C:\Windows\system32");//第一種輸出格式就是在前面加@
             Console.WriteLine("C:\\Windows\\system32");//第二種輸出格式就是將"\"改成"\\"
             Console.ReadLine();
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -1247,5 +1251,31 @@ namespace vcs_test_all_02_String
 
 */
 
+/*
+string filename = string.Format("{0}bmp_{1}{2}", dir, DateTime.Now.ToString("yyyyMMdd_HHmmss"), ".bmp");
 
+string filename = string.Format("bmp_{0:yyyyMMdd_HHmmss}.bmp", DateTime.Now);	//不含啟動路徑
+
+格式化列印
+
+this.Text                    = String.Format("關於 {0}", AssemblyTitle);
+this.labelVersion.Text       = String.Format("版本 {0}", AssemblyVersion);
+
+Console.WriteLine("{0}  {1}   {2}", bcc[i].No, bcc[i].Name, bcc[i].Score);
+Console.WriteLine("{0}, {1},  {2},    {3},   {4}", stu_No[i], stu_Name[i], stu_Chin[i], stu_Eng[i], stu_Math[i]);
+
+Console.WriteLine("例外處理類型   :{0}", ex.GetType().ToString());
+Console.WriteLine("錯誤訊息       :{0}", ex.Message);
+Console.WriteLine("程式或物件名稱 :{0}", ex.Source);
+Console.WriteLine("產生錯誤程序   :{0}", ex.TargetSite.Name);
+Console.WriteLine("錯誤之處       :{0}", ex.StackTrace);
+
+//var str = string.Format("我的名字叫{1}，我今年{1}岁。", "张三", 23);
+//Console.WriteLine(str);
+
+var str = $"我的名字叫{"张三"}，我今年{23}岁。";
+Console.WriteLine(str);
+
+
+*/
 

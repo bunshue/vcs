@@ -14,7 +14,6 @@ using System.Reflection;    //for Assembly
 using System.Security.Cryptography;
 using System.Diagnostics;   //for Process
 using System.Threading;
-using System.Media;     //for SoundPlayer
 using System.Web;   //for HttpUtility, 需改用.Net Framework4, 然後參考/加入參考/.Net/System.Web
 using System.Globalization; //for CultureInfo
 using System.Runtime.InteropServices;
@@ -120,6 +119,46 @@ namespace vcs_Mix01
         private void button0_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            /* 創建一個進程，並為進程傳入需要的參數    * 或者說是啟動一個外部程序，並為其傳入參數    * 等待退出或者強制關閉   */
+
+            //啟動一個外部程序
+            //聲明一個程序信息類，指定啟動進程是的參數信息                   
+            ProcessStartInfo Info = new ProcessStartInfo();
+            //設置外部程序名
+            Info.FileName = "notepad.exe";
+            //設置外部程序的啟動參數（命令行參數）為test.txt                   
+            Info.Arguments = "test.txt";
+            //設置外部程序工作目錄為  C:\                   
+            Info.WorkingDirectory = "C:\\";
+            //聲明一個程序類,也就是創建一個進程                   
+            Process Proc;
+            try
+            {
+                //                   //啟動外部程序                   
+                Proc = Process.Start(Info);
+            }
+            catch (System.ComponentModel.Win32Exception ex)
+            {
+                Console.WriteLine("系統找不到指定的程序文件。\r{0}", ex);
+                return;
+            }
+            //打印出外部程序的開始執行時間
+            Console.WriteLine("外部程序的開始執行時間：{0}", Proc.StartTime);
+
+            //等待3秒鐘                   
+            Proc.WaitForExit(3000);
+            //如果這個外部程序沒有結束運行則對其強行終止                   
+            if (Proc.HasExited == false)
+            {
+                Console.WriteLine("由主程序強行終止外部程序的運行！");
+                Proc.Kill();
+            }
+            else
+            {
+                Console.WriteLine("由外部程序正常退出！");
+            }
+            Console.WriteLine("外部程序的結束運行時間：{0}", Proc.ExitTime);
+            Console.WriteLine("外部程序在結束運行時的返回值：{0}", Proc.ExitCode);
         }
 
         private void button1_Click(object sender, EventArgs e)

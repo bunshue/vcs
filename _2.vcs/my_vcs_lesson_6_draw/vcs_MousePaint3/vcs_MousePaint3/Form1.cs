@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Drawing2D; //for SmoothingMode
+using System.Drawing.Drawing2D; //for SmoothingMode, Matrix, MatrixOrder, HatchBrush
 
 // 滑鼠操作畫圖相關
 
@@ -25,6 +25,21 @@ namespace vcs_MousePaint3
         Bitmap bitmap1; // Bitmap 影像
         Point MousePos = new Point(); //滑鼠位置
 
+        float shearX = 0; // X 軸水平分歧因數
+        float shearY = 0; // Y 軸垂直分歧因數
+        Point MP; // 滑鼠游標座標
+
+        HatchBrush myBrush1 = new HatchBrush(HatchStyle.Cross, Color.Red);
+        float theta = 0; // 旋轉角度
+
+        int EPSILON = 100; // 滑鼠 是否 點選到點 的距離 判斷 (避免 開根號)
+
+        //pictureBox5 拖曳圖片框中的紅點 ST
+        //Point一維陣列
+        Point[] pts5 = new Point[6];    //一維陣列內有6個Point
+        int find_point_index = -1;
+        //pictureBox5 拖曳圖片框中的紅點 SP
+
         public Form1()
         {
             InitializeComponent();
@@ -38,6 +53,19 @@ namespace vcs_MousePaint3
 
             pictureBox0.BackColor = Color.Black;
             bitmap1 = (Bitmap)Bitmap.FromFile(filename);
+
+
+            //pictureBox5 拖曳圖片框中的紅點 ST
+            int x_st = 100;
+            int y_st = 80;
+            int dy = 50;
+            pts5[0] = new Point(x_st + 0, y_st + dy * 0);
+            pts5[1] = new Point(x_st + 0, y_st + dy * 1);
+            pts5[2] = new Point(x_st + 0, y_st + dy * 2);
+            pts5[3] = new Point(x_st + 0, y_st + dy * 3);
+            pts5[4] = new Point(x_st + 0, y_st + dy * 4);
+            pts5[5] = new Point(x_st + 0, y_st + dy * 5);
+            //pictureBox5 拖曳圖片框中的紅點 SP
         }
 
         void show_item_location()
@@ -69,10 +97,14 @@ namespace vcs_MousePaint3
             label5.Location = new Point(x_st + dx * 2, y_st + dy * 1 - dd);
             label0.Text = "太陽、地球、與月亮 (↑↓←→空白鍵)";
             label1.Text = "扭曲的影像";
-            label2.Text = "";
-            label3.Text = "";
+            label2.Text = "切變矩陣";
+            label3.Text = "畫布轉換矩陣的旋轉設定 - 繞固定點公轉";
             label4.Text = "";
             label5.Text = "";
+
+            richTextBox1.Size = new Size(W - 200, H * 2 + 60);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1740, 940);
             this.Text = "vcs_MousePaint3";
@@ -86,6 +118,11 @@ namespace vcs_MousePaint3
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void pictureBox0_MouseDown(object sender, MouseEventArgs e)
@@ -166,6 +203,8 @@ namespace vcs_MousePaint3
 
         private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
         {
+            MP = e.Location; // 紀錄滑鼠游標座標
+            this.pictureBox2.Invalidate();// 要求表單重畫
         }
 
         private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
@@ -174,6 +213,25 @@ namespace vcs_MousePaint3
 
         private void pictureBox2_Paint(object sender, PaintEventArgs e)
         {
+            int Cx = this.pictureBox2.ClientSize.Width / 2;
+            int Cy = this.pictureBox2.ClientSize.Height / 2;
+            int D = 100; // 球本身的半徑
+
+            e.Graphics.ResetTransform(); // 畫布的矩陣 = 單位矩陣
+            e.Graphics.DrawEllipse(Pens.Silver, Cx - D, Cy - D, 2 * D, 2 * D); //畫出開始的圓
+
+            shearX = (MP.X - Cx) / (float)D; // X 軸水平分歧因數
+            shearY = (MP.Y - Cy) / (float)D; // Y 軸水平分歧因數
+
+            this.Text = "切變矩陣 (" + shearX.ToString() + ", " + shearY.ToString() + ")";
+
+            Matrix A = new Matrix(); // 轉換矩陣
+            A.Shear(shearX, shearY, MatrixOrder.Append);// shearX, shearY, MatrixOrder.Append);  // 乘上 切變矩陣
+            A.Translate(Cx, Cy, MatrixOrder.Append); // 再搬到視窗客戶區正中心點
+
+            e.Graphics.Transform = A;  // 畫布的矩陣 = 矩陣 A
+            e.Graphics.DrawEllipse(Pens.Red, 0 - D, 0 - D, 2 * D, 2 * D); //畫出縮放後的圓 
+
         }
 
         private void pictureBox3_MouseDown(object sender, MouseEventArgs e)
@@ -190,6 +248,21 @@ namespace vcs_MousePaint3
 
         private void pictureBox3_Paint(object sender, PaintEventArgs e)
         {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            int Cx = this.pictureBox3.ClientSize.Width / 2; // 視窗客戶區正中心點
+            int Cy = this.pictureBox3.ClientSize.Height / 2;//
+            int D = 20; // 球本身的半徑
+            int D2 = 100; // 球旋轉的半徑
+
+            e.Graphics.ResetTransform(); // 畫布的矩陣 = 單位矩陣
+            e.Graphics.FillEllipse(Brushes.Gray, Cx - D, Cy - D, 2 * D, 2 * D); //畫出正中心圓點 
+            e.Graphics.DrawEllipse(Pens.Silver, Cx - D2, Cy - D2, 2 * D2, 2 * D2); //畫出軌道
+
+            e.Graphics.TranslateTransform(D2, 0, MatrixOrder.Append);  // 先平移到 旋轉的半徑邊緣
+            e.Graphics.RotateTransform(theta, MatrixOrder.Append);  // 乘上 旋轉矩陣
+            e.Graphics.TranslateTransform(Cx, Cy, MatrixOrder.Append); // 再搬到視窗客戶區正中心點
+            e.Graphics.FillEllipse(myBrush1, 0 - D, 0 - D, 2 * D, 2 * D); //畫出旋轉的圓點 
         }
 
         private void pictureBox4_MouseDown(object sender, MouseEventArgs e)
@@ -208,20 +281,85 @@ namespace vcs_MousePaint3
         {
         }
 
+        bool flag_pictureBox5_mouse_down = false;
         private void pictureBox5_MouseDown(object sender, MouseEventArgs e)
         {
+            Point pt = FindPointAt(e.X, e.Y);
+            if (pt == new Point(9999, 9999))
+            {
+                richTextBox1.Text += "找不到\n";
+            }
+            else
+            {
+                flag_pictureBox5_mouse_down = true;
+                richTextBox1.Text += "找到 : (" + pt.X.ToString() + ", " + pt.Y.ToString() + ")\t";
+                int index = get_index(pt);
+                richTextBox1.Text += "索引 : " + index.ToString() + "\n";
+                find_point_index = index;
+            }
+        }
+
+        private Point FindPointAt(int X, int Y)
+        {
+            foreach (Point pt in pts5)
+            {
+                float dx = pt.X - X;
+                float dy = pt.Y - Y;
+                if (dx * dx + dy * dy <= EPSILON)
+                {
+                    return pt;
+                }
+            }
+            return new Point(9999, 9999);
+        }
+
+        int get_index(Point point)
+        {
+            int len = pts5.Length;
+            for (int index = 0; index < len; index++)
+            {
+                if (point == pts5[index])
+                {
+                    return index;
+                }
+            }
+            return -1;
         }
 
         private void pictureBox5_MouseMove(object sender, MouseEventArgs e)
         {
+            if (flag_pictureBox5_mouse_down == true)
+            {
+                update_pts(find_point_index, e.Location);
+                this.pictureBox5.Invalidate();
+            }
         }
 
         private void pictureBox5_MouseUp(object sender, MouseEventArgs e)
         {
+            flag_pictureBox5_mouse_down = false;
         }
 
         private void pictureBox5_Paint(object sender, PaintEventArgs e)
         {
+            e.Graphics.DrawString("拖曳圖片框中的紅點", new Font("標楷體", 16), new SolidBrush(Color.Black), 20, 20);
+            //e.Graphics.DrawRectangle(Pens.Red, 100, 100, 300, 300);
+            foreach (Point pt in pts5)
+            {
+                e.Graphics.FillEllipse(Brushes.Red, pt.X - 10, pt.Y - 10, 20, 20);
+            }
+        }
+
+        void update_pts(int index, Point point)
+        {
+            int len = pts5.Length;
+            if ((index < 0) || index >= len)
+            {
+                richTextBox1.Text += index.ToString();
+                //richTextBox1.Text += "XXXXXXX\n";
+                return;
+            }
+            pts5[index] = point;
         }
 
         private void timer0_Tick(object sender, EventArgs e)
@@ -267,6 +405,13 @@ namespace vcs_MousePaint3
                 deltaEarth = 1;
                 deltaMoon = 12;
             }
+        }
+
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            theta = theta + 1; // 旋轉角度 遞增
+            this.pictureBox3.Invalidate(); // 要求表單重畫
+
         }
     }
 }

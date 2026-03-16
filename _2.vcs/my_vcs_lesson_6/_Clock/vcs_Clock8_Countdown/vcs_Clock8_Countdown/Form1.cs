@@ -7,15 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Media;
-
 namespace vcs_Clock8_Countdown
 {
     public partial class Form1 : Form
     {
         // Initialize information about the event.
         private const string EventName = "End of the World";
-        private DateTime EventDate = DateTime.Now + new TimeSpan(1, 13, 42, 59);
+        //private DateTime EventDate = DateTime.Now + new TimeSpan(1, 13, 42, 59);
+        private DateTime EventDate = DateTime.Now + new TimeSpan(0, 0, 0, 10);
 
         public Form1()
         {
@@ -43,28 +42,20 @@ namespace vcs_Clock8_Countdown
                 {
                     if (ctl == lblEvent)
                     {
-                        ctl.Location = new Point(
-                            (this.ClientSize.Width - ctl.Width) / 2,
-                            (this.ClientSize.Height - ctl.Height) / 2);
+                        ctl.Location = new Point((this.ClientSize.Width - ctl.Width) / 2, (this.ClientSize.Height - ctl.Height) / 2);
                     }
                     else
                     {
                         ctl.Visible = false;
                     }
                 }
-
-                using (SoundPlayer player = new SoundPlayer(
-                    Properties.Resources.tada))
-                {
-                    player.Play();
-                }
             }
-            else 
+            else
             {
-                lblDays.Text = remaining.Days + " days";
-                lblHours.Text = remaining.Hours + " hours";
-                lblMinutes.Text = remaining.Minutes + " minutes";
-                lblSeconds.Text = remaining.Seconds + " seconds";
+                lb_time.Text = remaining.Days + " days" + "\n" +
+                remaining.Hours + " hours" + "\n" +
+                remaining.Minutes + " minutes" + "\n" +
+                remaining.Seconds + " seconds" + "\n";
             }
         }
     }

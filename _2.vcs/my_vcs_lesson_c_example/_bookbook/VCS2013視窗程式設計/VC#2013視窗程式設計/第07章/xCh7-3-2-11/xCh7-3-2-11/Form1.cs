@@ -31,8 +31,6 @@ namespace xCh7_3_2_11
             openFileDialog1.ValidateNames = false;
             openFileDialog1.CheckFileExists = false;
 
-
-
             saveFileDialog1.Title = "客製化的「另存新檔」對話方塊";
             saveFileDialog1.RestoreDirectory = false;
             saveFileDialog1.Filter = "圖檔 (*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF|" + "所有檔案 (*.*)|*.*";
@@ -96,7 +94,7 @@ namespace xCh7_3_2_11
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("發生錯誤 " + ex.Message);
+                    richTextBox1.Text += "發生錯誤 " + ex.Message + "\n";
                 }
             }
         }
@@ -127,7 +125,7 @@ namespace xCh7_3_2_11
             }
             catch (Exception ex)
             {
-                MessageBox.Show("發生錯誤：" + ex.Message);
+                richTextBox1.Text += "發生錯誤 " + ex.Message + "\n";
             }
         }
 
@@ -140,20 +138,22 @@ namespace xCh7_3_2_11
             sw.Write(DateTime.Now);
 
             sw.Flush();
-
             sw.Close();
-            MessageBox.Show("存檔完成 !");
+
+            richTextBox1.Text += "存檔完成 !\n";
         }
-
-        /*屬性設定
-                openFileDialog1.ShowHelp = checkBox1.Checked;
-                    openFileDialog1.ShowReadOnly = checkBox2.Checked;
-                    openFileDialog1.ReadOnlyChecked = checkBox3.Checked;
-                    openFileDialog1.ValidateNames = checkBox5.Checked;
-                    openFileDialog1.CheckFileExists = checkBox6.Checked;
-                    openFileDialog1.CheckPathExists = checkBox7.Checked;
-
-                    saveFileDialog1.RestoreDirectory = checkBox8.Checked;
-        */
     }
 }
+
+
+/*屬性設定
+openFileDialog1.ShowHelp = checkBox1.Checked;
+openFileDialog1.ShowReadOnly = checkBox2.Checked;
+openFileDialog1.ReadOnlyChecked = checkBox3.Checked;
+openFileDialog1.ValidateNames = checkBox5.Checked;
+openFileDialog1.CheckFileExists = checkBox6.Checked;
+openFileDialog1.CheckPathExists = checkBox7.Checked;
+
+saveFileDialog1.RestoreDirectory = checkBox8.Checked;
+*/
+

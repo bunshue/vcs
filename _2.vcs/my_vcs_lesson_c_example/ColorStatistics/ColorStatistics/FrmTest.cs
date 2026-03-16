@@ -10,11 +10,10 @@ using System.Windows.Forms;
 using System.Diagnostics;
 
 /*
-一個簡單的統計圖像主顏色的算法（C#源代碼)
-
+一個簡單的統計圖像主顏色的算法
 算法的原理很簡單，就是統計出圖像中各種顏色的分布情況，然後取前N個顏色作為主成分。
-
-當然，實際上如果直接對圖像的各通道256個色階進行統計，得到的結果可能是沒有意義的，所以一般都需要先把256個色階線性的隱射到更少的色階范圍。
+當然，實際上如果直接對圖像的各通道256個色階進行統計，得到的結果可能是沒有意義的，
+所以一般都需要先把256個色階線性的隱射到更少的色階范圍。
 */
 
 namespace ColorStatistics
@@ -24,6 +23,7 @@ namespace ColorStatistics
         string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp";
 
         List<Statistics.MajorColor> MC;
+
         int PixelAmount = 0;
 
         public FrmTest()
@@ -99,7 +99,6 @@ namespace ColorStatistics
 
         private void CmdDeal_Click(object sender, EventArgs e)
         {
-
             if (pictureBox1.Image != null)
             {
                 Stopwatch Sw = new Stopwatch();
@@ -112,11 +111,7 @@ namespace ColorStatistics
                 for (i = 0; i < len; i++)
                 {
                     richTextBox1.Text += (i + 1).ToString() + "\t" + MC[i].Color + "\t" + MC[i].Amount + "\n";
-
                 }
-
-
-
                 Sw.Stop();
                 LblStatus.Text = "計算主成分用時: " + Sw.ElapsedMilliseconds.ToString() + " 毫秒";
                 PixelAmount = pictureBox1.Image.Width * pictureBox1.Image.Height;
@@ -140,4 +135,3 @@ namespace ColorStatistics
         }
     }
 }
-

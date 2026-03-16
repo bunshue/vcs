@@ -1,6 +1,749 @@
 ﻿
+vcs
+每逢整點時跳一個clock顯示5秒即消失
+
+poem+一頁模式
+
+this.acceptButton = btn.....
+ListView之View選Details/LargeIcon
 
 
+
+豁免條款
+清潔	cleaning	物理性、汙染物
+消毒	disinfection	物理性或化學性、微生物
+滅菌	sterilization
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+            //在RTB內貼入圖片
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Image myImage = Image.FromFile(filename);
+            Clipboard.SetImage(myImage);
+
+            DataFormats.Format df = DataFormats.GetFormat(DataFormats.Bitmap);
+            if (richTextBox1.CanPaste(df))
+            {
+                richTextBox1.Paste(df);
+            }
+
+
+
+            //RTB的操作 貼上
+            richTextBox2.Paste();
+
+
+            //RTB的操作 全選 拷貝
+
+            if (richTextBox1.SelectionLength == 0)
+            {
+                richTextBox1.SelectAll();
+            }
+            richTextBox1.Copy();
+
+
+            //RTB的操作 全選 剪下
+            if (richTextBox1.SelectionLength == 0)
+            {
+                richTextBox1.SelectAll();
+            }
+            richTextBox1.Cut();
+
+//6060
+
+            //程式碼加入行號
+            //設定檔案的路徑
+            string path = @"../../data/Program.cs";
+            string append = @"tmp_final.txt";
+            string str;
+            int index = 1;
+
+            StreamReader sr = File.OpenText(path);
+            StreamWriter sw = File.AppendText(append);
+
+            while ((str = sr.ReadLine()) != null)
+            {
+                richTextBox1.Text += str + "\n";
+                //WriteLine($"{index:D5} {str}");
+                //sw.WriteLine($"{index++:D5} {str}");
+            }
+            sr.Close();
+            sw.Close();
+
+
+//程式碼加入行號
+           string str;
+		   int index=1;
+
+           StreamReader sr = File.OpenText("Program.cs"); 
+		   StreamWriter sw = File.AppendText("final.txt");
+		   
+		   while((str = sr.ReadLine ())!=null)
+		   {
+			   Console.WriteLine ("{0:D5} {1}",index,str);
+			   sw.WriteLine ("{0:D5} {1}",index++,str);
+		   }
+		   sr.Close ();
+		   sw.Close ();
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+            openFileDialog1.DefaultExt = "bmp";
+            openFileDialog1.Filter = "Bitmap 檔|*.bmp|JPEG 檔|*.jpg";
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.ShowDialog();
+            if (openFileDialog1.FileName == "")
+            {
+                return;
+            }
+
+
+//6060
+
+            openFileDialog1.DefaultExt = "*.txt";
+            openFileDialog1.Filter = "純文字檔|*.txt";
+
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.PlainText);
+            }
+
+
+
+            richTextBox1.Text += "你按了 開檔\n";
+
+            richTextBox1.Text += "你按了 存檔\n";
+
+            rtxtShow.LoadFile("../../../Demo01.rtf");
+            rtxtShow.SaveFile("tmp_Demo02.rtf");
+
+
+
+                            //PlainText-代表OLE物件的純文字資料流，文字中允許有空格
+                            richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.PlainText);
+
+
+
+
+
+            // 使用try{...}catch{...}來補捉沒有檔案可能發生的例外
+            try
+            {
+                // 將test.rtf檔的內容載入到richTextBox1豐富文字方塊內
+                // richTextBox1.LoadFile("../../../GOTOP.rtf", RichTextBoxStreamType.RichText);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
+            // 使用try{...}catch{...}來補捉沒有檔案可能發生的例外
+            try
+            {
+                // 將test.rtf檔的內容載入到richTextBox1豐富文字方塊內
+                richTextBox1.LoadFile("GOTOP.rtf", RichTextBoxStreamType.RichText);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            // 將richTextBox1豐富文字方塊內的資料儲存到test.rtf檔
+            richTextBox1.SaveFile("GOTOP.rtf", RichTextBoxStreamType.RichText);
+
+            // 將richTextBox1豐富文字方塊內的資料儲存到test.rtf檔
+            // richTextBox1.SaveFile("tmp_GOTOP.rtf", RichTextBoxStreamType.RichText);
+
+
+
+
+            openFileDialog1.DefaultExt = "*.rtf";
+            openFileDialog1.Filter = "RTF檔|*.rtf";
+
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK && openFileDialog1.FileName.Length > 0)
+            {
+                richTextBox1.LoadFile(openFileDialog1.FileName);
+            }
+
+
+            saveFileDialog1.Filter = "RTF檔|*.rtf";
+
+            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK && saveFileDialog1.FileName.Length > 0)
+            {
+                richTextBox1.SaveFile(saveFileDialog1.FileName);
+            }
+
+            saveFileDialog1.Filter = "RTF檔|*.rtf";
+
+            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK && saveFileDialog1.FileName.Length > 0)
+            {
+                richTextBox1.LoadFile(saveFileDialog1.FileName, RichTextBoxStreamType.PlainText);
+            }
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //測試
+            //richTextBox1.Text = "「紫釵記」以明朝湯顯祖的雜劇「紫釵記」為本，而湯顯祖的「紫釵記」亦是他重寫自己早期另一個劇本「紫簫記」 「紫簫記」的情節比較簡單，最重要的分別是欠缺了「紫釵」這個戲劇元素。湯顯祖劇作的藍本是唐代蔣防傳奇小說「霍小玉傳」。無論「紫釵記」或「紫簫記」，霍小玉都能與李益終成眷屬，而小說中之李益對小玉始亂終棄，順從母親之命，另娶富家女為妻，使小玉悲痛欲絕，「喪慟號哭數聲而絕」。小說中的李益在小玉死後，娶妻妾三人，惶惶不可終日，輒加猜忌，家宅不寧。";
+            richTextBox1.Text ="if (richTextBox1.SelectedText != 控制項)\n"+
+                "if (richTextBox1.Find(控制項, RichTextBoxFinds.WholeWord) == -1)\n"+
+                "MessageBox.Show(The text 控制項 was not found!);\n"+
+                "if (richTextBox1.SelectedText != 控制項)\n";
+
+
+            if (richTextBox1.SelectedText != "控制項")
+            {
+                if (richTextBox1.Find("控制項", RichTextBoxFinds.WholeWord) == -1)
+                {
+                    MessageBox.Show("The text \"控制項\" was not found!");
+                    return;
+                }
+            }
+            richTextBox1.SelectionProtected = true;
+
+//3030
+
+            if (richTextBox1.SelectedText != "控制項")
+            {
+                if (richTextBox1.Find("控制項", RichTextBoxFinds.WholeWord) == -1)
+                {
+                    MessageBox.Show("The text \"控制項\" was not found!");
+                    return;
+                }
+            }
+            richTextBox1.SelectionProtected = false;
+
+        }
+
+        private void richTextBox1_Protected(object sender, EventArgs e)
+        {
+            MessageBox.Show("喔.喔.，這些字是不能改的喔！");
+        }
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string path2 = @"../../data";
+            string fnShow = "檔案清單---<*.TXT>";
+            try
+            {
+                //取得檔案路徑訊息
+                DirectoryInfo currentDir = new
+                   DirectoryInfo(path2);
+                //從指定路徑傳回指定的檔案類型
+                FileInfo[] listFile = currentDir.GetFiles("*.txt");
+                //設定檔案的標題
+                //string header = fnShow + "\n" + $"{"檔名",-16}{"檔案長度",-12}{"修改日期"}" + "\n";
+                string header = fnShow + "\n" + "檔名" + "檔案長度" + "修改日期" + "\n";
+                richTextBox1.Text = header;
+
+                /* 讀取資料夾中有關於 --檔名(Name)、長度(Length)
+                   和修改日期(LastWriteTime)*/
+                foreach (FileInfo getInfo in listFile)
+                {
+                    /*
+                    richTextBox1.Text += $"{getInfo.Name,-15}" +
+                       $"{getInfo.Length.ToString(),-11}" +
+                       $"{getInfo.LastWriteTime.ToShortDateString(),15}" + "\n";
+                    */
+                    richTextBox1.Text += getInfo.Name + "\t" + getInfo.Length.ToString() + "\t" + getInfo.LastWriteTime.ToShortDateString() + "\n";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //新增檔案
+            //指定路徑建立檔案
+            string path = @"_tmp_aaaa.txt";
+            FileInfo createFile = new FileInfo(path);
+            //以Create方法新增一個檔案
+            FileStream fs = createFile.Create();
+            fs.Close();//關閉檔案
+
+            //複製檔案
+            path = @"_tmp_aaaa.txt";
+            //目的檔案「Text.txttmp」
+            String tagPath = path + "tmp";
+            FileInfo copyFile = new FileInfo(path);
+            try
+            {
+                //以CopyTo方法複製檔案
+                copyFile.CopyTo(tagPath);
+                richTextBox1.Text = path + " 已複製";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            //刪除檔案
+            path = @"_tmp_aaaa.txt";
+            copyFile = new FileInfo(path);
+            if (copyFile.Exists == false)//查看檔案是否存在
+            {
+                MessageBox.Show("無此檔案");
+            }
+            else
+            {
+                copyFile.Delete();//刪除檔案
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string path = @"_tmp_bbbb.txt";
+            string str;
+            FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
+            StreamWriter sw = new StreamWriter(fs, Encoding.Unicode);
+
+            //想儲存的文字
+            str = "aaaaaaaaa";
+            sw.WriteLine(str);  //將資料寫入檔案
+            sw.Close();   //關閉sw資料流
+
+            //檔案內所輸入的文字為
+            FileStream f = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Read);
+            StreamReader sr = new StreamReader(f, Encoding.Unicode);
+            sr.BaseStream.Seek(0, SeekOrigin.Begin);
+            while (sr.Peek() > -1)
+            {
+                richTextBox1.Text += sr.ReadLine() + "\n";//讀出檔案
+            }
+            sr.Close();  //關閉資料流
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string path = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\";
+                //取得資料夾最後一次被存取的時間
+                DateTime dt = Directory.GetLastWriteTime(path);
+                //如果資料夾不存在就建立資料夾
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                else
+                {
+                    richTextBox1.Text += "資料夾建立的時間 : " + dt + "\n";
+                }
+                //更新時間
+                Directory.SetLastWriteTime(path, DateTime.Now);
+                dt = Directory.GetLastWriteTime(path);
+                richTextBox1.Text += "最後存取時間 : " + dt + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "無法建立 : " + e.ToString() + "\n";
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //BinaryReader
+
+            BinaryReader readBit;
+            FileStream objStream;
+            //設定欲讀取檔案的路徑
+            string path = @"D:\_git\vcs\_1.data\______test_files1\__RW\_bin\vcs_ReadWrite_BIN.bin";
+
+            int count = 0;
+            try
+            {
+                objStream = new FileStream(path, FileMode.Open, FileAccess.Read);
+
+                //使用using陳述詞，確保資源的釋放
+                using (readBit = new BinaryReader(objStream))
+                {
+                    do
+                    {
+                        //以位元組為單位讀取檔案內容，16進位方式顯示
+                        richTextBox1.Text += readBit.ReadByte().ToString() + " ";
+                        count += 1;
+                        //'** 換行
+                        if (count == 10)
+                        {
+                            richTextBox1.Text += "\n";
+                            count = 0;
+                        }
+                    } while (true);
+                }
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                richTextBox1.Text += "沒有指定檔案\n";
+            }
+
+            catch (EndOfStreamException ex)
+            {
+                richTextBox1.Text += "檔案讀取完畢\n";
+            }
+
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.Message + "\n";
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //BinaryWriter
+
+            BinaryWriter objWriter;
+            FileStream objStream;
+            string path = @"tmp_BinaryWriter.txt";
+            try
+            {
+                objStream = new FileStream(path, FileMode.Append, FileAccess.Write);
+                //使用using敘詞，寫入完墓會自動釋放資源
+                using (objWriter = new BinaryWriter(objStream))
+                {
+                    // 寫入字串
+                    objWriter.Write("空山不見人");
+                    objWriter.Write("Visual C# 7.0");
+                    // 寫入數值
+                    objWriter.Write(640526);
+                }
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                richTextBox1.Text += "沒有指定檔案\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.Message + "\n";
+            }
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            BinaryReader objReader;
+            //FileStream objStream;
+            path = @"tmp_03aa.txt";
+            try
+            {
+                objStream = new FileStream(path, FileMode.Open, FileAccess.Read);
+                objReader = new BinaryReader(objStream);
+                richTextBox1.Text += objReader.ReadString() + "\n";
+                richTextBox1.Text += objReader.ReadInt32() + "\n";
+                objReader.Close();
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                richTextBox1.Text += "沒有指定檔案\n";
+            }
+
+            catch (EndOfStreamException ex)
+            {
+                richTextBox1.Text += "檔案讀取完畢\n";
+            }
+
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.Message + "\n";
+            }
+        }
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+            string sign = new string('*', 30);
+            Console.WriteLine(sign);
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
+兩個DateTime相減是TimeSpan
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+            DateTime LoginTime, LogoffTime;
+
+            //StayTime取得停留時間
+            TimeSpan StayTime = new TimeSpan();
+
+            //取得目前登入的時間
+            LoginTime = DateTime.Now;
+            Console.WriteLine("登入時間：{LoginTime}");
+
+
+// do something
+
+                    LogoffTime = DateTime.Now;
+                    Console.WriteLine("登出時間：{LogoffTime}");
+
+                    /* DateTime結構的Subtract()方法計算時間差
+                       時間差(StayTime) = 登出時間 - 登入時間
+                       再以所得結果，換算時、分、秒   */
+                    StayTime = LogoffTime.Subtract(LoginTime);
+                    Console.WriteLine("您在此停留{StayTime.Hours,2}" + " 小時，{StayTime.Minutes} 分鐘 " + "{StayTime.Seconds} 秒");
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+helpProvider1 的用法
+
+
+            helpProvider1.SetShowHelp(textBox1, true);
+            helpProvider1.SetHelpString(textBox1, "請輸入帳號！");
+
+            helpProvider1.SetShowHelp(textBox2, true);
+            helpProvider1.SetHelpString(textBox2, "請輸入密碼！");
+
+            helpProvider1.SetShowHelp(button1, true);
+            helpProvider1.SetHelpString(button1, "帳號輸入後，點這裡喔！");
+
+
+TrackBar範例
+
+            trackBar1.Minimum = 0;
+            trackBar1.Maximum = 255;
+            trackBar1.TickFrequency = 30;
+            trackBar1.LargeChange = 30;
+            trackBar1.SmallChange = 10;
+
+            trackBar2.Minimum = 0;
+            trackBar2.Maximum = 255;
+            trackBar2.TickFrequency = 30;
+            trackBar2.LargeChange = 30;
+            trackBar2.SmallChange = 10;
+
+            trackBar3.Minimum = 0;
+            trackBar3.Maximum = 255;
+            trackBar3.TickFrequency = 30;
+            trackBar3.LargeChange = 30;
+            trackBar3.SmallChange = 10;
+
+            label1.Text = "R";
+            label2.Text = "G";
+            label3.Text = "B";
+            label7.Text = "示範：";
+
+//scroll方法
+            label4.Text = trackBar1.Value.ToString();
+            label5.Text = trackBar2.Value.ToString();
+            label6.Text = trackBar3.Value.ToString();
+            textBox1.BackColor = Color.FromArgb(trackBar1.Value, trackBar2.Value, trackBar3.Value);
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+XeSS: Intel
+nVidia : DLSS
+AMD : FSR super sampling
+
+可變 mutable
+不可變 immutable
+
+大 DS
+中 L
+小 T
+
+網路上常見的資料格式(4)
+csv、json、xml、html、
+
+HTML 是由元素(element)所組成，其中包含了標籤(tag)與屬性內容(content)
+標籤 <p> <a>
+屬性 <a href .... 後為內容
+
+html剖析器 html.parse、lxml、html5lib，建議使用 lxml
+
+# plt.savefig("tmp_hound_wordcloud.png")
+
+plt.title(
+    "Chamberlain Hunt Academy Senior Class Presents:\n", fontsize=15, color="brown"
+)
+plt.text(
+    -10,
+    0,
+    "The Hound of the Baskervilles",
+    fontsize=20,
+    fontweight="bold",
+    color="brown",
+)
+plt.suptitle(
+    "7:00 pm May 10-12 McComb Auditorium", x=0.52, y=0.095, fontsize=15, color="brown"
+)
+
+------------------------------------------------------------
+
+//6060
+
+
+
+
+
+        //Random r = new Random();
+            string new_string = "string" + r.Next(100).ToString("D3");
+
+//6060
+
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || ((e.KeyChar >= 'A') && (e.KeyChar <= 'F')) || ((e.KeyChar >= 'a') && (e.KeyChar <= 'f')) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+
+        private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+        
+
+textBox 的 KeyPress
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 13)
+            {
+                e.Handled = true;
+            }
+            else if (e.KeyChar == 13)
+            {
+                int textSize = int.Parse(textBox2.Text);
+                //ApplyTextSize(textSize);
+
+                e.Handled = true;
+                this.richTextBox1.Focus();
+            }
+        }
+
+ C# 限定textbox只能輸入數字 
+ 
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (((int)e.KeyChar < 48 | (int)e.KeyChar > 57) & (int)e.KeyChar != 8)
+            {
+                e.Handled = true;
+            }
+        }
+
+
+                       richTextBox1.Text += p.A.ToString("X2") + p.R.ToString("X2") + p.G.ToString("X2") + p.B.ToString("X2") + "  ";
+
+
+//6060
+
+
+//6060
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -88,42 +831,13 @@
             }
             for (i = 0; i < bcc.Length; i++)
             {
-                Console.WriteLine("  {0}   {1}    {2}", bcc[i].No, bcc[i].Name, bcc[i].Score);
-            }
-
-
-
-//6060
-
-格式化列印
-                Console.WriteLine(" {0},  {1},   {2},    {3},   {4}", stu_No[i], stu_Name[i], stu_Chin[i], stu_Eng[i], stu_Math[i]);
-
 //6060
 
 
 
 //6060
 
-using System.Drawing.Drawing2D;  // MatrixOrder
 
-
-            Bitmap bm = new Bitmap(Properties.Resources.Butterfly);
-            float theta = 0; // 旋轉角度
-
-            theta = theta + 2;  // 旋轉角度 遞增
-
-
-            //畫布轉換矩陣的旋轉設定 - 在固定點自轉
-            int Cx = this.ClientSize.Width / 2; // 視窗客戶區正中心點
-            int Cy = this.ClientSize.Height / 2;//
-
-            e.Graphics.ResetTransform(); // 畫布的矩陣 = 單位矩陣
-
-            e.Graphics.TranslateTransform(-bm.Width / 2, -bm.Height / 2, MatrixOrder.Append);
-            e.Graphics.RotateTransform(theta, MatrixOrder.Append);  // 乘上 旋轉矩陣
-            e.Graphics.TranslateTransform(Cx, Cy, MatrixOrder.Append); // 再搬到視窗客戶區正中心點
-
-            e.Graphics.DrawImage(bm, 0, 0); // 繪出圖形
 
 //6060
 
@@ -150,81 +864,14 @@ using System.Drawing.Drawing2D;  // MatrixOrder
         }
 
 
-
-
-
-/*
-Pen myPen2 = new Pen(Color.Blue, 20);
-myPen2.EndCap = LineCap.ArrowAnchor;
-e.Graphics.DrawLine(myPen2, 20, this.ClientSize.Height / 2, this.ClientSize.Width - 20, this.ClientSize.Height / 2); // 繪製箭形直線
-*/
-
-
-
 //6060
 
-using System.Drawing.Drawing2D;  // for GraphicsPath
-
-            GraphicsPath gp = new GraphicsPath();  // GraphicsPath物件
-
-            int x_st = 100;
-            int y_st = 100;
-
-            PointF[] pt = new PointF[]
-            {
-                new PointF(x_st, y_st),
-                new PointF(x_st+50, y_st-50),
-                new PointF(x_st+100, y_st-100),
-                new PointF(x_st+150, y_st+50),
-                new PointF(x_st+200, y_st-50),
-            };
-
-            gp.AddCurve(pt, 0.6f); // 加入曲線
-            
-            
-            PointF[] pt2 = new PointF[]{
-                          new PointF(x, y+ 7 *D),
-                          new PointF(x-4*D, y+3*D),
-                          new PointF(x-5*D, y),
-                          new PointF(x-3*D, y - 1.5f*D),
-                          new PointF(x, y),
-                          };
-            gp.AddCurve(pt2, 0.6f);
-
-            //gp.CloseFigure(); //  封閉目前的圖形
-            e.Graphics.DrawPath(Pens.Black, gp); // 繪出圖形軌跡
-            e.Graphics.DrawPath(Pens.Black, gp); // 繪出GraphicsPath物件
 
 //6060
 
             numericUpDown1.Maximum = new System.Decimal(new int[] { 150, 0, 0, 0 });
 
-            comboBox1.Items.AddRange(new object[] { 
-                "無", 
-                "國中小", 
-                "高中職", 
-                "大專",
-                "碩士", 
-                "博士" }
-            );
-
-
-combobox
-            // 將可供瀏覽的資料夾寫入ComboBox物件
-            comboBox1.Items.AddRange(new object[]{
-                "MyComputer",
-                "MyDocuments",
-                "MyMusic",
-                "MyPictures",
-                "Desktop",
-                "ProgramFiles",
-                "StartMenu"});
-
-            // 預設ComboBox物件的Text為第1個選項
-            comboBox1.SelectedIndex = 0;
-
 FBD
-
 
 /*
             // 設定FolderBrowserDialog的初值
@@ -251,16 +898,7 @@ if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             folderBrowserDialog1.RootFolder = Environment.SpecialFolder.ProgramFiles;
             folderBrowserDialog1.RootFolder = Environment.SpecialFolder.StartMenu;
             folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
-
 */
-
-
-
-        //Random r = new Random();
-            string new_string = "string" + r.Next(100).ToString("D3");
-
-
-
 
 
 複利率本利和試算
@@ -341,10 +979,6 @@ radioButton1屬性
 
 
 //6060
-
-
-this.Text                    = String.Format("關於 {0}", AssemblyTitle);
-this.labelVersion.Text       = String.Format("版本 {0}", AssemblyVersion);
 
 
 
@@ -475,8 +1109,6 @@ label
             }
         }
 
-
-
         private const string FONT_NAME = "Times New Roman";
         private const float FONT_SIZE = 12;
         private const FontStyle FONT_STYLE = FontStyle.Bold;
@@ -521,16 +1153,6 @@ PasswordChar
 
 json load 出來後是字典
 
-
-
-
-
-
-                    Console.WriteLine("例外處理類型   :{0}", ex.GetType().ToString());
-                    Console.WriteLine("錯誤訊息       :{0}", ex.Message);
-                    Console.WriteLine("程式或物件名稱 :{0}", ex.Source);
-                    Console.WriteLine("產生錯誤程序   :{0}", ex.TargetSite.Name);
-                    Console.WriteLine("錯誤之處       :{0}", ex.StackTrace);
 
 
 
@@ -770,14 +1392,7 @@ KPI: 關鍵 績效 指標
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-
 對應方法
-            //var str = string.Format("我的名字叫{1}，我今年{1}岁。", "张三", 23);
-            //Console.WriteLine(str);
-
-            var str = $"我的名字叫{"张三"}，我今年{23}岁。";
-            Console.WriteLine(str);
-
 
             員工BindingSource.Sort = "識別碼 ASC"; // ASC，即為ascending表示升冪
             員工BindingSource.Sort = "識別碼 DESC";// DESC，即為descening表示降冪
@@ -791,9 +1406,7 @@ print("------------------------------------------------------------")  # 60個
                 員工BindingSource.RemoveCurrent();
             }
 
-
 amend
-
 
 D:\\C#Lab  
 dlgFolderBrowser.SelectedPath = @"D:\USERS\LSH\Documents";
@@ -1088,13 +1701,8 @@ richTextBox1.Text += "影像旋轉，存檔完成，檔名：" + filename + "\n"
             */
 
 
-
-
-
-
 //另存新檔
 //SaveBitmapUsingExtension(RotatedBitmap, sfdFile.FileName);
-
 
         // Save the file with the appropriate format.
         // Throw a NotSupportedException if the file
@@ -1143,8 +1751,6 @@ richTextBox1.Text += "影像旋轉，存檔完成，檔名：" + filename + "\n"
             // Make a copy of the result image.
             using (Bitmap bmp = (Bitmap)pictureBox0.Image.Clone())
             {
-                bmp.MakeTransparent(Color.Magenta);
-
                 save_image_to_drive(bmp);
             }
         }
@@ -1362,46 +1968,15 @@ richTextBox1.Text += "----------------------------------------------------------
 
 
 
-
-
-
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-
-
 
 using System.Diagnostics;           //for Debug
             Debug.Assert(Math.Abs(total) < 0.001f);
-
-
  
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            //using System.Collections;//for Hashtable
-
-            Hashtable imageList = new Hashtable();
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Image image1 = Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-
-            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-            Image image2 = Image.FromFile(filename2);	//Image.FromFile出來的是Image格式
-
-            string filename3 = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
-            Image image3 = Image.FromFile(filename3);	//Image.FromFile出來的是Image格式
-
-            imageList.Add(imageList.Count + 1, image1);
-            imageList.Add(imageList.Count + 1, image2);
-            imageList.Add(imageList.Count + 1, image3);
-
-            object obj = imageList[1];
-
-            //object obj = imageList[3];
-
-            pictureBox1.Image = (Image)obj;
-  
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -1411,6 +1986,8 @@ richTextBox1.Text += "----------------------------------------------------------
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+將顏色排成串列 用foreach畫出
 
             foreach (int argb in Properties.Settings.Default.Argbs)
             {
@@ -1418,8 +1995,7 @@ richTextBox1.Text += "----------------------------------------------------------
                 richTextBox1.Text += "get color " + color.ToString() + "\n";
                 using (SolidBrush br = new SolidBrush(color))
                 {
-                    e.Graphics.FillRectangle(br, x, y,
-                        PatchWidth, PatchHeight);
+                    e.Graphics.FillRectangle(br, x, y, PatchWidth, PatchHeight);
                 }
                 x += PatchWidth + PatchMargin;
                 if (x > max_x)
@@ -1479,8 +2055,6 @@ richTextBox1.Text += "----------------------------------------------------------
             }
         }
         
-        
-
             string filename = @"../../net/net1.net";
 
             using (TextReader reader = new StreamReader(filename))
@@ -1494,42 +2068,13 @@ richTextBox1.Text += "----------------------------------------------------------
                 }
             }
 
+string txt = link.Cost.ToString();
+SizeF txt_size = gr.MeasureString(txt, this.Font);
+gr.DrawString(txt, this.Font, Brushes.Black, x1 - txt_size.Width / 2, y1 - txt_size.Height / 2);
 
-
-
-
-            //Rectangle 的 Union
-            Graphics g = this.pictureBox1.CreateGraphics();
-
-            Rectangle rec1 = new Rectangle(100, 10, 200, 200);
-            Rectangle rec2 = new Rectangle(150, 100, 200, 200);
-            Rectangle rec3 = new Rectangle(30, 150, 200, 200);
-            g.DrawRectangle(Pens.Red, rec1);
-            g.DrawRectangle(Pens.Green, rec2);
-            g.DrawRectangle(Pens.Blue, rec3);
-
-            Rectangle new_rect = Rectangle.Union(rec1, rec2);
-            new_rect = Rectangle.Union(new_rect, rec3);
-            g.DrawRectangle(Pens.Magenta, new_rect);
-
-
-
-
-                            string txt = link.Cost.ToString();
-                            SizeF txt_size = gr.MeasureString(txt, this.Font);
-                            gr.DrawString(txt, this.Font, Brushes.Black,
-                                x1 - txt_size.Width / 2,
-                                y1 - txt_size.Height / 2);
-
-                string txt = node.Id.ToString();
-                SizeF txt_size = gr.MeasureString(txt, this.Font);
-                gr.DrawString(txt, this.Font, text_brush,
-                    node.Location.X - txt_size.Width / 2,
-                    node.Location.Y - txt_size.Height / 2);
-
-
-
-
+string txt = node.Id.ToString();
+SizeF txt_size = gr.MeasureString(txt, this.Font);
+gr.DrawString(txt, this.Font, text_brush, node.Location.X - txt_size.Width / 2, node.Location.Y - txt_size.Height / 2);
 
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -1540,27 +2085,13 @@ richTextBox1.Text += "----------------------------------------------------------
             richTextBox1.Text += pic.Name + " ";
             //MessageBox.Show(pic.Name);
         }
-        
+       
 
         //重寫表單的OnPaint範例 直接寫在此即可
         protected override void OnPaint(PaintEventArgs e)
         {
             e.Graphics.DrawRectangle(Pens.Red, 5, 5, this.Width - 10, this.Height - 10);
         }
-
-
-
-
-
-
-
-
-            groupBox10.Location = new Point(x_st + dx * 2, y_st + dy * 6 - 40); //listView
-            listView1.Location = new Point(5, 10);
-            listView1.Size = new Size(360, 120);
-            bt3.Location = new Point(370, 10);
-
-
 
         void load_listview_data()
         {
@@ -1587,47 +2118,15 @@ richTextBox1.Text += "----------------------------------------------------------
         }
 
 
-
-
-
-textBox 的 KeyPress
-
-        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 13)
-            {
-                e.Handled = true;
-            }
-            else if (e.KeyChar == 13)
-            {
-                int textSize = int.Parse(textBox2.Text);
-                //ApplyTextSize(textSize);
-
-                e.Handled = true;
-                this.richTextBox1.Focus();
-            }
-        }
-
-
-
-
-
-
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
 
 
 //Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定義鼠標 
 
-string location = System.Reflection.Assembly.GetExecutingAssembly().Location;
-//string serviceFileName = location.Substring(0, location.LastIndexOf('\\')) + "\\" + serviceName + ".exe";
-
-
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
 
 
 
@@ -1748,34 +2247,6 @@ String ccc = String.Format("{0,-30} | {1,-20} | {2,5}", "aaaa", "b", 3);
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-                    Color pt;
-                    x_st = WW / 2 - ww / 2 + flag_right_left_cnt * awb_step + flag_right_left_point_cnt;
-                    if (x_st < 0)
-                        x_st = 0;
-                    if ((x_st + ww) > WW)
-                        x_st = WW - ww;
-
-                    y_st = HH / 2 - hh / 2 + flag_down_up_cnt * awb_step + flag_down_up_point_cnt;
-                    if (y_st < 0)
-                        y_st = 0;
-                    if ((y_st + hh) > HH)
-                        y_st = HH - hh;
-
-                    total_R = 0;
-                    total_G = 0;
-                    total_B = 0;
-
-                    for (j = 0; j < hh; j++)
-                    {
-                        for (i = 0; i < ww; i++)
-                        {
-                            pt = bitmap1.GetPixel(x_st + i, y_st + j);
-                            total_R += pt.R;
-                            total_G += pt.G;
-                            total_B += pt.B;
-                        }
-                    }
 
 vcs 之 radioButton 可以用Image, Text設為空
 
@@ -2231,23 +2702,21 @@ dgv1
 ------------------------------------------------------------
 ------------------------------------------------------------
 
-                    axWindowsMediaPlayer1.Ctlcontrols.playItem(playListDict[path]);		playItem ??
+	axWindowsMediaPlayer1.Ctlcontrols.playItem(playListDict[path]);		playItem ??
 
 指名播放某項
-                axWindowsMediaPlayer1.currentMedia = axWindowsMediaPlayer1.currentPlaylist.Item[int.Parse(lvDetail.SelectedItems[0].Text) - 1];
+	axWindowsMediaPlayer1.currentMedia = axWindowsMediaPlayer1.currentPlaylist.Item[int.Parse(lvDetail.SelectedItems[0].Text) - 1];
 
-            IWMPMedia currentMedia = axWindowsMediaPlayer1.currentMedia;
-
+	IWMPMedia currentMedia = axWindowsMediaPlayer1.currentMedia;
 
         public int index = 1;
         public int listIndex;
         private bool first_in = true;   //是否第一次進入歌詞區域
         private bool showLrc = true;//預設顯示歌詞
         private int index = 0;//播放的圖片下標
-														private List<string> imageList;//播放的圖片
+        private List<string> imageList;//播放的圖片
         private Point closePoint;//關閉按鈕的位置
         private Size dfSize;//最初的位置
-
 
         //聲音
         SoundPlayer player = new SoundPlayer();
@@ -2256,7 +2725,7 @@ dgv1
         //播放列表
         Dictionary<string, IWMPMedia> playListDict = new Dictionary<string, IWMPMedia>();
 
-						List<string> al = new List<string>(); //當前歌詞時間表     
+	List<string> al = new List<string>(); //當前歌詞時間表     
 
         IWMPMedia media;
 
@@ -2310,19 +2779,13 @@ https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,N
 &key=AIzaSyDlCB_7UxkHonf782F-MhLa_DmCxfAzSRY
 
 
-
-
 AIzaSyDlCB_7UxkHonf782F-MhLa_DmCxfAzSRY
 
-
-
-        private const string mapurl = "http://maps.google.com/mapdata?latitude_e6={0}&longitude_e6={1}&zm={2}&w={3}&h={4}&cc=&min_priority=2";
+private const string mapurl = "http://maps.google.com/mapdata?latitude_e6={0}&longitude_e6={1}&zm={2}&w={3}&h={4}&cc=&min_priority=2";
 
 string.Format(mapurl, this.Latitude, this.Longitude, this.Zoom, this.Width.Value, this.Height.Value)
 			
 			url : http://maps.google.com/mapdata?latitude_e6=100&longitude_e6=123&zm=200&w=640&h=480&cc=&min_priority=2
-
-
 
 ------------------------------------------------------------
 ------------------------------------------------------------
@@ -2504,19 +2967,7 @@ this.ShowCtiServer();
 ------------------------------------------------------------
 ------------------------------------------------------------
 
-
-
-
-
-
-
-
-把一個ENUM的內容用foreach加到一個combobox裡
-點選combobox的項目 套用之
-
 用以測googlemap之各種地圖 圖標
-
-
 
 逐步解說：使用 C 撰寫複合控制項#
 
@@ -2962,22 +3413,6 @@ Stream stream = client.OpenRead(URLAddress);
 client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705; Combat;)");
 
 
-
-
-
-
-
-
-
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-
 using System.Net;
 using System.IO;    //for MemoryStream
 
@@ -3013,7 +3448,7 @@ namespace vcs_
             string url_file1 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
             //string url_file = @"http://antwrp.gsfc.nasa.gov/apod/";
 
-            using ( client1 = new ())     // Create a web client
+            using(client1 = new ())     // Create a web client
             {
                 try  // Get the response string from the URL.
                 {
@@ -3033,7 +3468,7 @@ namespace vcs_
 
             string url_file2 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
             //string url_file2 = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
-            using ( client2 = new ())     // Create a web client
+            using(client2 = new ())     // Create a web client
             {
                 try  // Get the response string from the URL.
                 {
@@ -3057,7 +3492,7 @@ namespace vcs_
             Application.DoEvents();
 
             string url_weather = @"http://api.openweathermap.org/data/2.5/weather?q=Hsinchu&mode=xml&units=imperial&APPID=e8edf79325ae8948a635efd0e076a8bc";
-            using (  = new ())     // Create a web client
+            using(  = new ())     // Create a web client
             {
                 try  // Get the response string from the URL.
                 {
@@ -3218,16 +3653,6 @@ namespace vcs_
 
 
 
-
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-
 using System.Net;
 using System.IO;    //for MemoryStream
 
@@ -3235,57 +3660,58 @@ namespace vcs_
 {
 public partial class Form1 : Form
 {
-public Form1()
-{
-InitializeComponent();
-}
-
-private void Form1_Load(object sender, EventArgs e)
-{
-// Allow TLS 1.1 and TLS 1.2 protocols for file download.
-//for Sugar     3840 Romeo也可用
-ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
-richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
-
-//for Romeo and Sugar    3072
-//ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
-//ServicePointManager.SecurityProtocol = (SecurityProtocolType)3840;
-//richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
-}
+	public Form1()
+	{
+		InitializeComponent();
+	}
+	
+	private void Form1_Load(object sender, EventArgs e)
+	{
+		// Allow TLS 1.1 and TLS 1.2 protocols for file download.
+		//for Sugar     3840 Romeo也可用
+		ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
+		richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
+		
+		//for Romeo and Sugar    3072
+		//ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+		//ServicePointManager.SecurityProtocol = (SecurityProtocolType)3840;
+		//richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
+	}
 
 private void button1_Click(object sender, EventArgs e)
 {
-/*
-//加入這段語法忽略憑證
-ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
-*/
+	/*
+	//加入這段語法忽略憑證
+	ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+	*/
 
-string url_file1 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
-//string url_file = @"http://antwrp.gsfc.nasa.gov/apod/";
+	string url_file1 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
+	//string url_file = @"http://antwrp.gsfc.nasa.gov/apod/";
+	
+	using(client1 = new ())     // Create a web client
+	{
+	try  // Get the response string from the URL.
+	{
+	//richTextBox1.Text += data + "\n";
+	richTextBox1.Text += "抓網頁資料到記憶體\tOK\n";
+	}
+	catch (WebException ex)
+	{
+	MessageBox.Show("WebException\t" + ex.Message);
+	}
+	catch (Exception ex)
+	{
+	MessageBox.Show("Unknown error\t" + ex.Message);
+	}
+}
 
-using ( client1 = new ())     // Create a web client
-{
-try  // Get the response string from the URL.
-{
-//richTextBox1.Text += data + "\n";
-richTextBox1.Text += "抓網頁資料到記憶體\tOK\n";
-}
-catch (WebException ex)
-{
-MessageBox.Show("WebException\t" + ex.Message);
-}
-catch (Exception ex)
-{
-MessageBox.Show("Unknown error\t" + ex.Message);
-}
-}
 Application.DoEvents();
 
 string url_file2 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
 //string url_file2 = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
-using ( client2 = new ())     // Create a web client
+using(client2 = new ())     // Create a web client
 {
-try  // Get the response string from the URL.
+	try  // Get the response string from the URL.
 {
 //string filename_local = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
 int pos1 = url_file2.LastIndexOf('/');
@@ -3297,34 +3723,34 @@ richTextBox1.Text += "抓網頁資料到本地檔案\tOK\n";
 }
 catch (WebException ex)
 {
-MessageBox.Show("WebException\t" + ex.Message);
+	MessageBox.Show("WebException\t" + ex.Message);
 }
 catch (Exception ex)
 {
-MessageBox.Show("Unknown error\t" + ex.Message);
+	MessageBox.Show("Unknown error\t" + ex.Message);
 }
 }
 Application.DoEvents();
 
 string url_weather = @"http://api.openweathermap.org/data/2.5/weather?q=Hsinchu&mode=xml&units=imperial&APPID=e8edf79325ae8948a635efd0e076a8bc";
-using (  = new ())     // Create a web client
+using( = new ())     // Create a web client
 {
-try  // Get the response string from the URL.
-{
-// Get the response string from the URL.
-//richTextBox1.Text += "data\n" + xml + "\n";
-richTextBox1.Text += "抓網頁查詢資料到記憶體\tOK\n";
-}
-catch (WebException ex)
-{
-MessageBox.Show("WebException\t" + ex.Message);
-}
-catch (Exception ex)
-{
-MessageBox.Show("Unknown error\t" + ex.Message);
-}
-}
-Application.DoEvents();
+	try  // Get the response string from the URL.
+	{
+	// Get the response string from the URL.
+	//richTextBox1.Text += "data\n" + xml + "\n";
+	richTextBox1.Text += "抓網頁查詢資料到記憶體\tOK\n";
+	}
+	catch (WebException ex)
+	{
+	MessageBox.Show("WebException\t" + ex.Message);
+	}
+	catch (Exception ex)
+	{
+	MessageBox.Show("Unknown error\t" + ex.Message);
+	}
+	}
+	Application.DoEvents();
 
 string img_src_url = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
 richTextBox1.Text += "圖片所在網址 : " + img_src_url + "\n";
@@ -3666,7 +4092,6 @@ namespace RegexPractice
 
 
 Another code snippet
-
 Download specified number of pictures from “ http://browse.deviantart.com/customization/wallpaper/widescreen/?order=15” and save to local files.
 
 	using System;  
@@ -3768,12 +4193,6 @@ Download specified number of pictures from “ http://browse.deviantart.com/cust
 	        
 	    }  
 	 }  
-
-
- 
-
-
-
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -3996,9 +4415,6 @@ if (frames.Count > 0)
 
 
 print('------------------------------------------------------------')	#60個
-
-
-
 print('------------------------------------------------------------')	#60個
 
             //serialPort2.Write(data, 0, data.Length);
@@ -4099,130 +4515,6 @@ void WriteToSerialPort2(byte[] data, int offset, int count)
         }
 
 
- 如需叫用 Just-In-Time (JIT) 偵錯的詳細資料，
-請參閱本訊息結尾處 (而非這個對話方塊) 的資訊。
-
-************** 例外狀況文字 **************
-System.IO.IOException: 裝置未就緒。
-
-   於 System.IO.Ports.InternalResources.WinIOError(Int32 errorCode, String str)
-   於 System.IO.Ports.SerialStream.EndWrite(IAsyncResult asyncResult)
-   於 System.IO.Ports.SerialStream.Write(Byte[] array, Int32 offset, Int32 count, Int32 timeout)
-   於 System.IO.Ports.SerialPort.Write(Byte[] buffer, Int32 offset, Int32 count)
-   於 iMS_Link.Form1.Get_IMS_Data(Byte xx, Byte yy, Byte zz)
-   於 iMS_Link.Form1.timer_rtc_Tick(Object sender, EventArgs e)
-   於 System.Windows.Forms.Timer.OnTick(EventArgs e)
-   於 System.Windows.Forms.Timer.TimerNativeWindow.WndProc(Message& m)
-   於 System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
-
-
-************** 已載入的組件 **************
-mscorlib
-    組件版本: 4.0.0.0
-    Win32 版本: 4.8.9181.0 built by: NET481REL1LAST_C
-    程式碼庫: file:///C:/Windows/Microsoft.NET/Framework/v4.0.30319/mscorlib.dll
-----------------------------------------
-iMS_Link
-    組件版本: 1.0.0.0
-    Win32 版本: 1.0.0.0
-    程式碼庫: file:///C:/Users/070601/Desktop/iMS_Link01/01iMS_AWB_SETUP.exe
-----------------------------------------
-System.Windows.Forms
-    組件版本: 4.0.0.0
-    Win32 版本: 4.8.9181.0 built by: NET481REL1LAST_C
-    程式碼庫: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Windows.Forms/v4.0_4.0.0.0__b77a5c561934e089/System.Windows.Forms.dll
-----------------------------------------
-System
-    組件版本: 4.0.0.0
-    Win32 版本: 4.8.9214.0 built by: NET481REL1LAST_B
-    程式碼庫: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System/v4.0_4.0.0.0__b77a5c561934e089/System.dll
-----------------------------------------
-System.Drawing
-    組件版本: 4.0.0.0
-    Win32 版本: 4.8.9037.0 built by: NET481REL1
-    程式碼庫: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Drawing/v4.0_4.0.0.0__b03f5f7f11d50a3a/System.Drawing.dll
-----------------------------------------
-System.Windows.Forms.DataVisualization
-    組件版本: 4.0.0.0
-    Win32 版本: 4.8.9037.0
-    程式碼庫: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Windows.Forms.DataVisualization/v4.0_4.0.0.0__31bf3856ad364e35/System.Windows.Forms.DataVisualization.dll
-----------------------------------------
-AForge.Video.DirectShow
-    組件版本: 2.2.5.0
-    Win32 版本: 2.2.5.0
-    程式碼庫: file:///C:/Users/070601/Desktop/iMS_Link01/AForge.Video.DirectShow.DLL
-----------------------------------------
-AForge.Video
-    組件版本: 2.2.5.0
-    Win32 版本: 2.2.5.0
-    程式碼庫: file:///C:/Users/070601/Desktop/iMS_Link01/AForge.Video.DLL
-----------------------------------------
-System.Configuration
-    組件版本: 4.0.0.0
-    Win32 版本: 4.8.9037.0 built by: NET481REL1
-    程式碼庫: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Configuration/v4.0_4.0.0.0__b03f5f7f11d50a3a/System.Configuration.dll
-----------------------------------------
-System.Core
-    組件版本: 4.0.0.0
-    Win32 版本: 4.8.9214.0 built by: NET481REL1LAST_B
-    程式碼庫: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Core/v4.0_4.0.0.0__b77a5c561934e089/System.Core.dll
-----------------------------------------
-System.Xml
-    組件版本: 4.0.0.0
-    Win32 版本: 4.8.9037.0 built by: NET481REL1
-    程式碼庫: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Xml/v4.0_4.0.0.0__b77a5c561934e089/System.Xml.dll
-----------------------------------------
-System.Windows.Forms.DataVisualization.resources
-    組件版本: 4.0.0.0
-    Win32 版本: 4.8.9037.0
-    程式碼庫: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Windows.Forms.DataVisualization.resources/v4.0_4.0.0.0_zh-Hant_31bf3856ad364e35/System.Windows.Forms.DataVisualization.resources.dll
-----------------------------------------
-Accessibility
-    組件版本: 4.0.0.0
-    Win32 版本: 4.8.9037.0 built by: NET481REL1
-    程式碼庫: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/Accessibility/v4.0_4.0.0.0__b03f5f7f11d50a3a/Accessibility.dll
-----------------------------------------
-System.DirectoryServices
-    組件版本: 4.0.0.0
-    Win32 版本: 4.8.9037.0 built by: NET481REL1
-    程式碼庫: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.DirectoryServices/v4.0_4.0.0.0__b03f5f7f11d50a3a/System.DirectoryServices.dll
-----------------------------------------
-HslCommunication
-    組件版本: 4.3.2.0
-    Win32 版本: 4.3.2.0
-    程式碼庫: file:///C:/Users/070601/Desktop/iMS_Link01/HslCommunication.DLL
-----------------------------------------
-System.Windows.Forms.resources
-    組件版本: 4.0.0.0
-    Win32 版本: 4.8.9037.0 built by: NET481REL1
-    程式碼庫: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Windows.Forms.resources/v4.0_4.0.0.0_zh-Hant_b77a5c561934e089/System.Windows.Forms.resources.dll
-----------------------------------------
-mscorlib.resources
-    組件版本: 4.0.0.0
-    Win32 版本: 4.8.9037.0 built by: NET481REL1
-    程式碼庫: file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/mscorlib.resources/v4.0_4.0.0.0_zh-Hant_b77a5c561934e089/mscorlib.resources.dll
-----------------------------------------
-
-************** JIT 偵錯 **************
-若要啟用 Just-In-Time (JIT) 偵錯功能，則必須在
-此應用程式或電腦的 .config 檔案中，設定
-system.windows.forms 區段內的 jitDebugging 值。
-且該應用程式也必須在啟用偵錯的狀態下進行
-編譯。
-
-例如:
-
-<configuration>
-    <system.windows.forms jitDebugging="true" />
-</configuration>
-
-當 JIT 偵錯功能啟用後，會將所有未處理的例外狀況
-傳送給電腦上已註冊的 JIT 偵錯工具進行處
-理，而不是使用這個對話方塊來處理。
-      
-
-
-
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -4254,7 +4546,6 @@ richTextBox1.Text += "----------------------------------------------------------
 
 取得目前本基所有的磁碟機
            this.comboBox2.DataSource = Environment.GetLogicalDrives();
-
 
 
             //checkedListBox1
@@ -4377,16 +4668,12 @@ Bitmap基本特性 Width Height
 Setpixel
 Getpixel
 
-
 或許需要一個 Bitmap 與 Image 特性大整理
 Bitmap內部資料的排列 及 使用
 1. 自建空白 Bitmap
 2. 直接從圖片建立Bitmap
 3. 自建空白打Bitmap 裡面加入一個小Bitmap
 4. 改變Bitmap/Image大小
-
-
-bitmap.maketransparent
 
 clone語法
             //clone範例
@@ -4577,8 +4864,6 @@ DateTime
 				
 //--------------------------------------------------------------------------------------------------------------------------
 
-            string namespaceName = Assembly.GetExecutingAssembly().GetName().Name.ToString();   //獲取前文檔命名空間的名稱
-            richTextBox1.Text += namespaceName + "\n";
 
 
 
@@ -5461,48 +5746,6 @@ TBGBMBKB
 移動控件mousedown-mousemove-mouseup
 
 
-
-
-準備自建函式庫用
-        Bitmap color_to_gray(Bitmap bitmap1)
-        {
-            //SetPixel 彩色轉灰階
-            int xx;
-            int yy;
-
-            for (yy = 0; yy < bitmap1.Height; yy++)
-            {
-                for (xx = 0; xx < bitmap1.Width; xx++)
-                {
-                    byte rrr = bitmap1.GetPixel(xx, yy).R;
-                    byte ggg = bitmap1.GetPixel(xx, yy).G;
-                    byte bbb = bitmap1.GetPixel(xx, yy).B;
-
-                    int Gray = (rrr * 299 + ggg * 587 + bbb * 114 + 500) / 1000;
-                    Color zz = Color.FromArgb(255, Gray, Gray, Gray);
-
-                    bitmap1.SetPixel(xx, yy, zz);
-                }
-            }
-            return bitmap1;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //SetPixel 彩色轉灰階
-            string filename = @"C:\______test_files\picture1.jpg";
-
-            Bitmap bitmap1 = new Bitmap(filename);
-            Bitmap bitmap2 = color_to_gray(bitmap1);
-
-            pictureBox1.Image = bitmap2;
-
-        }
-
-
-
-
-
 vcs
 
             if (listBox1.SelectedItems.Count > 0)
@@ -5687,18 +5930,10 @@ pictureBox1.Image.Save(filename);
 無法嵌入互操作類型“Microsoft.Office.Interop.Excel.ApplicationClass”。請改用適用的接口，interop.excel
 把Microsoft.Office.Interop.Excel.DLL的嵌入互操作類型改為ture就可以了
 
-
-
-
-
-
 如何把一個大Bitmap直接縮成一個小Bitmap
 例如原本300X300的Bitmap要如何變成一個100X100的Bitmap?
 
-
-
 非1080p的，要標注出來
-
 
 標準版轉出程式：
 用一個結構陣列List儲存最終資料
@@ -5707,14 +5942,9 @@ richtextbox 直接貼上簡中 會出現亂碼  why?
 
 別人的vcs程式也會這樣嗎？
 
-
 從一個資料夾中撈出所有檔案 標準版
 1. 包含/不包含 子目錄
 2. 不排序、依檔名排序、依檔案大小排序、依時間排序
-
-
-
-
 
 //本地緩存+在線服務
             this.gMapControl1.Manager.Mode = AccessMode.ServerAndCache;
@@ -5723,18 +5953,7 @@ richtextbox 直接貼上簡中 會出現亂碼  why?
 //本地緩存
             this.gMapControl1.Manager.Mode = AccessMode.CacheOnly;
 
-
 盡量要把dropbox的文件 搬到 git 裏
-
-            
-
-啟動一個外部程序: [html]   using System;   using System.Collections.Generic;   using System.Linq;   using System.Text;         /* 創建一個進程，並為進程傳入需要的參數    * 或者說是啟動一個外部程序，並為其傳入參數    * 等待退出或者強制關閉   */   namespace ConsoleApplication1   {       class Program       {           static void Main(string[] args)           {                      ////////////聲明一個程序信息類，指定啟動進程是的參數信息                   System.Diagnostics.ProcessStartInfo  Info  =  new  System.Diagnostics.ProcessStartInfo();                      //設置外部程序名                   Info.FileName  =  "notepad.exe";                      //設置外部程序的啟動參數（命令行參數）為test.txt                   Info.Arguments  =  "test.txt";                      //設置外部程序工作目錄為  C:\                   Info.WorkingDirectory  =  "C:\\";                      ///////////聲明一個程序類,也就是創建一個進程                   System.Diagnostics.Process  Proc  ;                      try                   {                   //                   //啟動外部程序                   //                   Proc  =  System.Diagnostics.Process.Start(Info);                   }                   catch(System.ComponentModel.Win32Exception  e)                   {                   Console.WriteLine("系統找不到指定的程序文件。\r{0}",  e);                   return;                   }                      //打印出外部程序的開始執行時間                   Console.WriteLine("外部程序的開始執行時間：{0}",  Proc.StartTime);                      //等待3秒鐘                   Proc.WaitForExit(3000);                      //如果這個外部程序沒有結束運行則對其強行終止                   if(Proc.HasExited  ==  false)                   {                   Console.WriteLine("由主程序強行終止外部程序的運行！");                   Proc.Kill();                   }                   else                   {  www.2cto.com                 Console.WriteLine("由外部程序正常退出！");                   }                   Console.WriteLine("外部程序的結束運行時間：{0}",  Proc.ExitTime);                   Console.WriteLine("外部程序在結束運行時的返回值：{0}",  Proc.ExitCode);           }       }   }     
-
-
-AcdSee2.4 Serial: 
-Name:Unregistered 
-Code:422301873421327 
-
 
 PictureBox 好像不能旋轉方向～～～～～～～～～～～～
 若做成Picasa效果 可能不行
@@ -5750,9 +5969,6 @@ Randomly任意位置顯示 及方向
 圖片按左鍵把圖片拉到最上層
 圖片按右鍵把圖片推到最下層
 也可以無邊框移動圖片
-
-
-
 
 
 車諾比核事故
@@ -6188,6 +6404,7 @@ https://www.zhangshengrong.com/p/yOXD5ejR1B/
         public Form1()
         {
             InitializeComponent();
+            
             MousePoint point;
             GetCursorPos(out point);
             Console.WriteLine(point.x + "," + point.y);
@@ -6296,25 +6513,17 @@ https://www.zhangshengrong.com/p/yOXD5ejR1B/
 
             webBrowser1.DocumentText = testString;
             webBrowser1.Document.Write(testString);
-
             webBrowser1.Refresh();
 
             using (WebBrowser webBrowser = new WebBrowser())
             {
                 webBrowser.Visible = false;
-
                 webBrowser.DocumentText = testString;
-
                 webBrowser.Document.Write(testString);
-
                 richTextBox1.Text = webBrowser.Document.Body.OuterText;
             } 
 
-
-
 \\圖片格式轉換
-
-
 
 vcs helper的  根據副檔名 決定檔案儲存格式
 
@@ -6714,41 +6923,6 @@ writer.Open(filename, width, height, this.Videofps, VideoCodec.MPEG4);
             textBox1.ShortcutsEnabled = false;   // 不啟用快速鍵, 限制 TextBox 上不使用快速鍵與滑鼠右鍵表單
             textBox5.ShortcutsEnabled = false;   // 不啟用快速鍵, 限制 TextBox 上不使用快速鍵與滑鼠右鍵表單
 
-
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
-            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
-            // e.KeyChar == (Char)8 -----------> Backspace
-            // e.KeyChar == (Char)13-----------> Enter            
-            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || ((e.KeyChar >= 'A') && (e.KeyChar <= 'F')) || ((e.KeyChar >= 'a') && (e.KeyChar <= 'f')) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
-        }
-
-
-        private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
-            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
-            // e.KeyChar == (Char)8 -----------> Backspace
-            // e.KeyChar == (Char)13-----------> Enter            
-            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
-        }
-        
-        
         
         public double hex2dec(string hex_data)
         {
@@ -6933,16 +7107,6 @@ c# - C#htmlagilitypack Node.InnerHTML不正确区分大小写，如何拉正确�
                 resultat1.LoadHtml(source1);
                var val = resultat1.DocumentNode.SelectSingleNode("//div[@class='news_content_container']").InnerText;
                
-               
-               
-               
-               
-               
-               
-               
-               
-
-            
 
 dll檔案選sapi.dll
 
@@ -6950,13 +7114,11 @@ dll檔案選sapi.dll
 
 引用要寫 using SpeechLib;
  
-                SpeechVoiceSpeakFlags spFlags = SpeechVoiceSpeakFlags.SVSFlagsAsync;
-                SpVoice voice = new SpVoice();
-                
-                    voice.Speak(this.textBox1.Text, spFlags);
+SpeechVoiceSpeakFlags spFlags = SpeechVoiceSpeakFlags.SVSFlagsAsync;
+SpVoice voice = new SpVoice();
 
-            
-            
+voice.Speak(this.textBox1.Text, spFlags);
+          
             
 
 可以錄影的那個webcam版本 x86可用的
@@ -7156,121 +7318,6 @@ P2P，英文Peer-to-Peer的縮寫，中譯為對等互聯或點對點技術。
 
                 saveFileDialog1.CreatePrompt = true;	//如果指定不存在的文件，提示允許創建該文件
                 saveFileDialog1.OverwritePrompt = true;//如果用戶指定的文件名已存在，顯示警告
-
-
-        				
-//---Assembly 用法 ST-----------------------------------------------------------------------------------------------------------------------
-       
-using System.Reflection;
-	Assembly asm = Assembly.GetExecutingAssembly();
-	string name = asm.GetName().Name;
-	richTextBox1.Text += "name : " + name + "\n";
-
-
-private void AboutBox_Load(object sender, EventArgs e)
-{
-	AssemblyInfoClass myAssembly = new AssemblyInfoClass();
-	labelProductName.Text = "產品名稱：" + myAssembly.Product;
-	labelVersion.Text = "版本：" + myAssembly.Version;
-	labelCopyright.Text = "版權宣告：" + myAssembly.Copyright;
-	labelCompanyName.Text = "公司名稱：" + myAssembly.Company;
-	textBoxDescription.Text = "細部描述：" +
-	myAssembly.Description;
-}
-
-                string location = Assembly.GetExecutingAssembly().Location;
-                string serviceFileName = location.Substring(0, location.LastIndexOf('\\')) + "\\" + serviceName + ".exe";
-
-一、獲取程序集版本
-label版本.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-
-
-
-
-
-            //獲取本代碼所在的文件作為臨時文件，用於獲取屬性列表
-            string tempFile = Assembly.GetExecutingAssembly().FullName;
-
-
-
-
-C#讀取exe版本號
-
-	using System.Reflection;
-	using System.IO;
-	...
-	
-	Assembly currentAssembly = Assembly.LoadFile(currentAssemblyPath);
-	Assembly updatedAssembly = Assembly.LoadFile(updatedAssemblyPath);
-	
-	AssemblyName currentAssemblyName = currentAssembly.GetName();
-	AssemblyName updatedAssemblyName = updatedAssembly.GetName();
-	
-	// 比較版本號
-	if (updatedAssemblyName.Version.CompareTo(currentAssemblyName.Version) <= 0)
-	{
-	    // 不需要更新
-	    return;
-	}
-	
-	using System.Reflection;
-	using System.IO;
-	...
-	
-	AssemblyName currentAssemblyName = AssemblyName.GetAssemblyName(currentAssemblyPath);
-	AssemblyName updatedAssemblyName = AssemblyName.GetAssemblyName(updatedAssemblyPath);
-	
-	// 比較版本
-	if (updatedAssemblyName.Version.CompareTo(currentAssemblyName.Version) <= 0)
-	{
-	    // 不需要更新
-	    return;
-	}
-	
-	// 更新
-	File.Copy(updatedAssemblyPath, currentAssemblyPath, true);
-	
-
-            
-using System.Reflection;
-            //取得 namespaceName
-            string namespaceName = Assembly.GetExecutingAssembly().GetName().Name.ToString();
-
-            richTextBox1.Text += namespaceName + "\n";
-
-            richTextBox1.Text += Assembly.GetExecutingAssembly().Location + "\n";
-
-
-一、獲取程序集版本
-label版本.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-
-
-
-
-
-使用資源檔的圖片
-
-屬性/資源/加入資源/加入現有檔案/ 選取檔案 picture1.jpg
-此時, Resources 會出現 picture1.jpg
-點選picture1.jpg, 屬性
-建置動作 改成 內嵌資源
-
-
-using System.Reflection;    //for Assembly
-using System.IO;    //for Stream
-
-            Assembly asm = this.GetType().Assembly;
-            Stream stream = asm.GetManifestResourceStream("vcs_test.Resources.picture1.jpg");
-            this.BackgroundImage = new Bitmap(stream);
-
-
-
-
-
-
-//---Assembly 用法 SP-----------------------------------------------------------------------------------------------------------------------
-
-
 
 
 鼠標相關的事件大致有六種，分別是 ：
@@ -7526,7 +7573,7 @@ if(f3.DialogResult == DialogREsult.OK)
                     }
                     catch (EndOfStreamException e)
                     {
-                        Console.WriteLine("已經到了結尾 {0}", e.ToString());
+                        Console.WriteLine("已經到了結尾");
                     }
                 }
                 br.Close();
@@ -7763,13 +7810,13 @@ g.InterpolationMode = InterpolationMode.HighQualityBilinear;
 
 //--------------------------------------------------------------------------------------------------------------------------
 
-
-
-
 drawdraw
 
-　　本文將介紹在．Net中如何使用代碼畫圖表，就像用MS Excel產生的圖表一樣。也可以畫像DataGrid一樣的表格。
-　　在．Net中，微軟給我們提供了畫圖類（System.Drawing.Imaging），在該類中畫圖的準系統都有。比如：直線、折線、矩形、多邊形、橢圓形、扇形、曲線等等，因此一般的圖形都可以直接通過代碼畫出來。接下來介紹一些畫圖函數：
+本文將介紹在．Net中如何使用代碼畫圖表，就像用MS Excel產生的圖表一樣。也可以畫像DataGrid一樣的表格。
+在．Net中，微軟給我們提供了畫圖類（System.Drawing.Imaging），在該類中畫圖的準系統都有。
+比如：直線、折線、矩形、多邊形、橢圓形、扇形、曲線等等，因此一般的圖形都可以直接通過代碼畫出來。
+接下來介紹一些畫圖函數：
+
 Bitmap bMap=new Bitmap(500,500)　//定義映像大小；
 bMap.Save(Stream,ImageCodecInfo) //將映像儲存到指定的輸出資料流；
 Graphics gph //定義或建立GDI繪圖對像；
@@ -7784,79 +7831,56 @@ DrawRectangle(Pen,x,y,Width,Height) //用指定的筆繪製一個指定座標點
 DrawPie(Pen,x,y,Width,Height,startAngle,sweepAngle) //用指定的筆繪製一個指定座標點、寬度、高度以及兩條射線組成的扇形；
 
 
-
-
-
-    
-
-
-
-
 //--------------------------------------------------------------------------------------------------------------------------
 
-
-
-
-
-
-       
-
 MemoryStream 可以seek
-                    MemoryStream ms = new MemoryStream();
-                    XmlWt = new XmlTextWriter(ms, Encoding.Unicode);
-                    //獲取ds中的數據
-                    dt.WriteXml(XmlWt);
-                    int count = (int)ms.Length;
-                    byte[] temp = new byte[count];
-                    ms.Seek(0, SeekOrigin.Begin);
-                    ms.Read(temp, 0, count);
-                    //返回Unicode編碼的文本
-
-                        ms.Close();
-                        ms.Dispose();
+	MemoryStream ms = new MemoryStream();
+	XmlWt = new XmlTextWriter(ms, Encoding.Unicode);
+	//獲取ds中的數據
+	dt.WriteXml(XmlWt);
+	int count = (int)ms.Length;
+	byte[] temp = new byte[count];
+	ms.Seek(0, SeekOrigin.Begin);
+	ms.Read(temp, 0, count);
+	//返回Unicode編碼的文本
+	
+	ms.Close();
+	ms.Dispose();
                         
-     MemoryStream stream = null;
-     XmlTextWriter writer = null;
-     try
-     {
-         stream = new MemoryStream();
-         writer = new XmlTextWriter(stream, Encoding.Default);
-         xmlDS.WriteXml(writer);
-         int count = (int)stream.Length;
-         byte[] arr = new byte[count];
-         stream.Seek(0, SeekOrigin.Begin);
-         stream.Read(arr, 0, count);
-         UTF8Encoding utf = new UTF8Encoding();
-         return utf.GetString(arr).Trim();
-         
-
-         /// <summary>
-        /// 實現bitmap到ico的轉換
-        /// </summary>
-        /// <param name="bitmap">原圖</param>
-        /// <returns>轉換後的指定大小的圖標</returns>
-        private Icon ConvertBitmap2Ico(Bitmap bitmap)
-        {
-            Bitmap icoBitmap = new Bitmap(bitmap, size);//創建制定大小的原位圖
-
-            //獲得原位圖的圖標句柄
-            IntPtr hIco = icoBitmap.GetHicon();
-            //從圖標的指定WINDOWS句柄創建Icon
-            Icon icon = Icon.FromHandle(hIco);
-
-            return icon;
-        }
-        
-        
-
-    
-            
+	MemoryStream stream = null;
+	XmlTextWriter writer = null;
+	try
+	{
+		stream = new MemoryStream();
+		writer = new XmlTextWriter(stream, Encoding.Default);
+		xmlDS.WriteXml(writer);
+		int count = (int)stream.Length;
+		byte[] arr = new byte[count];
+		stream.Seek(0, SeekOrigin.Begin);
+		stream.Read(arr, 0, count);
+		UTF8Encoding utf = new UTF8Encoding();
+		return utf.GetString(arr).Trim();
+		
+		/// <summary>
+		/// 實現bitmap到ico的轉換
+		/// </summary>
+		/// <param name="bitmap">原圖</param>
+		/// <returns>轉換後的指定大小的圖標</returns>
+		private Icon ConvertBitmap2Ico(Bitmap bitmap)
+		{
+			Bitmap icoBitmap = new Bitmap(bitmap, size);//創建制定大小的原位圖
+			
+			//獲得原位圖的圖標句柄
+			IntPtr hIco = icoBitmap.GetHicon();
+			//從圖標的指定WINDOWS句柄創建Icon
+			Icon icon = Icon.FromHandle(hIco);
+			
+			return icon;
+		}
 
 先使用無符號字節數組存放數據庫對應的數據集中表的image類型字段的值。例如：
 
 byte[] bytes= (byte[]) image類型字段值
-
-
 
 //在C#中調用windows API函數
 
@@ -7891,8 +7915,6 @@ public static extern int ShellExecute(IntPtr hwnd,string lpOperation,string lpFi
 /// </summary>
 [DllImport("user32.dll", EntryPoint="ShowWindow", CharSet=CharSet.Auto)]
 public static extern int ShowWindow(IntPtr hwnd,int nCmdShow);
-
-
 
 //打開CD托盤：
 long lngReturn = ApiCalls.mciSendString("set CDAudio door open", strReturn, 127, 0);
@@ -8126,6 +8148,7 @@ class GetIP
          }
     }
 }
+
 十九、取得機器名稱：
 using System;
 using System.Net;
@@ -8150,7 +8173,6 @@ class ResolveIP
          Console.WriteLine (Host name : {0}, ipEntry.HostName);         
      }
 }
-
 
 
 Web Service方面的：
@@ -8669,38 +8691,23 @@ public static string GetHtml(string URL)
 
 
 地支時間與現在時間的對應關系：
-
 【子時】夜半，又名子夜、中夜：十二時辰的第一個時辰。（23時至次日01時）。
-
 【丑時】雞鳴，又名荒雞：十二時辰的第二個時辰。（01時至03時）。
-
 【寅時】平旦，又稱黎明、早晨、日旦等：時是夜與日的交替之際。（03時至05時）。
-
 【卯時】日出，又名日始、破曉、旭日等：指太陽剛剛露臉，冉冉初升的那段時間。（05 時至07時）。
-
 【辰時】食時，又名早食等：古人“朝食”之時也就是吃早飯時間，（07時至 09時）。
-
 【巳時】隅中，又名日禺等：臨近中午的時候稱為隅中。（09時至11時）。
-
 【午時】日中，又名日正、中午等：（11時至13時）。
-
 【未時】日昳，又名日跌、日央等：太陽偏西為日跌。（13時至15時）。
-
 【申時】哺時，又名日鋪、夕食等：（15時至17時）。
-
 【酉時】日入，又名日落、日沉、傍晚：意為太陽落山的時候。（17時至19時）。　
-
 【戌時】黃昏，又名日夕、日暮、日晚等：此時太陽已經落山，天將黑未黑。天地昏黃，萬物朦胧 ，故稱黃昏。（19時至21時）。
-
 【亥時】人定，又名定昏等：此時夜色已深，人們也已經停止活動，安歇睡眠了。人定也就是人靜 。（21時至23時）。
-
-
 
 
 開關檔案 使用指定的編碼
 StreamWriter outStream = new StreamWriter(filepath, false, Encoding.GetEncoding(950));
 using (StreamReader sr = new StreamReader(filepath, Encoding.GetEncoding(936)))
-
 
 
 用C＃實現在客戶區拖動窗體
@@ -8752,18 +8759,12 @@ C#調用默認浏覽器打開網頁的幾種方法
 三、添加office相關引用
 Microsoft.Office.Interop.Word 12.0.0.0
 
-
-
-
-
 using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.IO;
 using Microsoft.Office.Core;
 using Word=Microsoft.Office.Interop.Word;
 using System.Reflection;
-
-
 
 求取字母的ASCII值
 
@@ -8792,15 +8793,12 @@ dataGridView1.Sort(dataGridView1.Columns[1], System.ComponentModel.ListSortDirec
             g.CopyFromScreen(new Point(pt.X - w / 2, pt.Y - h / 2), new Point(0, 0), new Size(w, h));
 
 
-
  C# 修改啟始Form [複製鏈接]
 打開program.cs，修改Application.Run(new Form1());，將Form1改為要啟始的頁面即可!
 
 
 網際網路時間伺服器，
 從原來的 time.windows.com 改為 time.nist.gov，
-
-
 
 
 
@@ -9163,10 +9161,6 @@ int URms = System.Environment.TickCount;
 XXXXXXXXX
 
 Console.WriteLine("花費 {0} ms 完成!!!", Environment.TickCount - URms);
-
-
-
-
 				
 
 做一個我的 Transform範例
@@ -9464,7 +9458,6 @@ for(i=0; i<360;i++)
 //--------------------------------------------------------------------------------------------------------------------------
 //較完整 可一段一段貼上範例程式
 //--------------------------------------------------------------------------------------------------------------------------
-
 
 //C#獲取硬盤序列號
 
@@ -9879,9 +9872,6 @@ int main()
 {
 :
 :
-
-
-
 	// 動態分配位於"host(CPU) 記憶體" 的向量
 	float* h_A = (float*)malloc(size);
 	// 隨機初始化輸入向量
@@ -9892,22 +9882,18 @@ int main()
 	// 動態分配位於"device(GPU) 記憶體"的向量
 	float* d_A;
 	cudaMalloc(&d_A, size); // cudaError_t cudaMalloc ( void** devPtr, size_t size )
-	
-	
+		
 	// 將向量從 CPU 複製到 GPU
 	cudaMemcpy(d_A, h_A, size, cudaMemcpyHostToDevice);
 	
-
 	// 將 device code 送入 GPU 並執行，執行時一個 Grid 只有一個 block ，一個 block 有 N 個 thread
 	VecAdd<<<1, N>>>(d_A, d_B, d_C);	
-
 
 	// 將算好的向量從 GPU 複製到 CPU
 	cudaMemcpy(h_C, d_C, size, cudaMemcpyDeviceToHost);
 
 	// 印出運算結果
 	printf("%f ", h_C[i]);
-
 
 	// 釋放 GPU 記憶體
 	cudaFree(d_A);
@@ -9917,10 +9903,7 @@ int main()
 	// 釋放 CPU 記憶體
     free(h_A);
 	free(h_B);
-	free(h_C);
-	
-
-    
+	free(h_C);   
 
 
 #if __CUDA_ARCH__ < 700
@@ -10113,7 +10096,6 @@ using System.Text.RegularExpressions;
         }
     
     
-
 
 
 
@@ -12087,33 +12069,17 @@ richtextbox範例 for 搜尋
 load一檔
 從頭搜尋到尾 搜尋到的字串變色。
 
- 
-
-
-
-
-
-
-
-
 this.close() ; //關閉視窗
 Application.Exit() ; //結束程序
 
 現在都習慣直接強制離開
 Environment.Exit(0);
 
-
-
 LargeImageList
-
 這個屬性包含ImageList,而ImageList包含大影象。這些影象可以在View屬性為LargeIcon時使用。
 
-
 SmallImageList
-
 當View屬性為SmaillIcon時,這個屬性包含了ImageList,其中ImageList包含了要使用的影象
-
-
 
 LabelWrap
 
@@ -12157,14 +12123,8 @@ EndUpdate
 結束更新
 
 
-
-
-
 C# listview中顯示imagelist中的圖片
 https://www.itread01.com/content/1546725619.html
-
-
-
 
 
 vcs參考code
@@ -12258,13 +12218,6 @@ this.tcResult.MouseWheel += new MouseEventHandler(tcResult_MouseWheel);
 而且PictureBox及TabPage無法收到MouseWheel的事件。 	
 
 
-列舉系統的所有Color並以ComboBox顯示
-
-comboBox自行繪制顯示的內容，在這邊需要將comboBox中的屬性'DrawMode'設為'OwnerDrawFixed'，並新的DrawItem事件
-
-
-
-
 
 #region 是 C# 預處理器指令。
 #region 是一個分塊預處理命令，它主要是用於編輯器代碼的分塊，在編譯時會被自動刪除。
@@ -12283,33 +12236,6 @@ Debug.Print("欲輸出訊息");
 
 勾選 
 【工具】→【選項】→【偵錯】→【將所有輸出視窗文字重新導向到即時運算視窗】
-
-
-vcs_MyPaint
-            int xx;
-            int yy;
-            for (yy = 0; yy < bitmap1.Height; yy++)
-            {
-                for (xx = 0; xx < bitmap1.Width; xx++)
-                {
-                    byte rrr = bitmap1.GetPixel(xx, yy).R;
-                    byte ggg = bitmap1.GetPixel(xx, yy).G;
-                    byte bbb = bitmap1.GetPixel(xx, yy).B;
-
-
-                    int Gray = (rrr * 299 + ggg * 587 + bbb * 114 + 500) / 1000;
-                    Color zz = Color.FromArgb(255, Gray, Gray, Gray);
-
-                    bitmap1.SetPixel(xx, yy, zz);
-                }
-            }
-
-            pictureBox2.Image = bitmap1;
-
-
-
-
-
 
 
 [C#]將指定的檔案刪除並送到資源回收桶
@@ -12652,12 +12578,7 @@ byte[] byteArray = System.Text.Encoding.ASCII.GetBytes ( str );
 
 ASCII byte[] 轉成string：（byte[] = new byte[]{ 0x30, 0x31} 轉成 "01"）
 
-string str = System.Text.Encoding.ASCII.GetString ( byteArray );
-
-
-
-
-
+string str = System.Text.Encoding.ASCII.GetString(byteArray);
 
 
 
@@ -12665,9 +12586,13 @@ string text = "是不是漢字，ABC，keleyi.com";
 for (int i = 0; i < text.Length; i++)
 {
 	if (Regex.IsMatch(text[i].ToString(), @"[\u4e00-\u9fbb]+{1}quot;))
+	{
 		Console.WriteLine("是漢字");
+	}
 	else
-	Console.WriteLine("不是漢字");
+	{
+		Console.WriteLine("不是漢字");
+	}
 }
 
 3400～4DFFh：中日韓認同表意文字擴充A區，總計收容6,582個中日韓漢字。
@@ -12892,8 +12817,6 @@ g.DrawImage(br, 0, 0);
 https://dreamtails.pixnet.net/blog/post/22318000
 
 
-
-
 韓戰
 1950年6月25日－1953年7月27日[註 19]
 （3年1個月又2天）
@@ -12911,26 +12834,15 @@ https://dreamtails.pixnet.net/blog/post/22318000
   uiMode:String; 播放器界面模式，可?Full, Mini, None, Invisible 
   
   
-  
-  
-  
-  
-  
-  
-   [C#]開啟EXE檔並輸入EXE檔的參數
+[C#]開啟EXE檔並輸入EXE檔的參數
 先USING System.Diagnostics;
 
 在程式裡放入下列程式
 System.Diagnostics.Process.Start("路徑", "參數"); 
 
 
-
 c# 首字母大寫 方法
 s.Substring(0,1).ToUpper()+s.Substring(1);
-
-
-
-
 
 
 DateTime類型中 DayOfWeek時的英文如何轉換成中文
@@ -13071,9 +12983,10 @@ string dateString = System.DateTime.Today.ToString("yyyy-M-d dddd", new System.G
             richTextBox1.AppendText("螢幕解析度 : " + screenWidth.ToString() + "*" + screenHeight.ToString() + "\n");
 
 
+//6060
 
-
-
+bitmap.maketransparent
+bmp.MakeTransparent(Color.Magenta);
 
 [C#]WinForm利用Bitmap的MakeTransparent將圖片某些顏色透明化
             Bitmap bmp2 = new Bitmap(asm.GetManifestResourceStream(name + ".puma.bmp"));//載入圖片資源
@@ -13082,7 +12995,8 @@ string dateString = System.DateTime.Today.ToString("yyyy-M-d dddd", new System.G
             
             bit = new Bitmap("picture1.jpg");  //圖片放在debug內
             bit.MakeTransparent(Color.White);  //將視窗中白色的部份變為透明
-            
+
+//6060           
             
 
 vcs抓網路上的檔案
@@ -13102,6 +13016,8 @@ vcs抓網路上的檔案
                 Environment.Exit(0);    //如果抓不到檔案就離開程式，沒這行程式會一直卡在這如果沒抓到檔案的話…
             }
         
+6060
+
 C# 讓視窗背景顯示GIF動畫 
 private void Form1_Load(object sender, EventArgs e)
         {
@@ -13110,17 +13026,6 @@ private void Form1_Load(object sender, EventArgs e)
         }        
         註：1.gif一樣是放在專案資料夾下：WindowsFormsApp1\WindowsFormsApp1\bin\Debug
 
- C# 限定textbox只能輸入數字 
- 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (((int)e.KeyChar < 48 | (int)e.KeyChar > 57) & (int)e.KeyChar != 8)
-            {
-                e.Handled = true;
-            }
-        }
- 
- 
 
             int[] tall = new int[] { 10, 20, 30, 40, 50 };
             int sum = 0;
@@ -13138,10 +13043,6 @@ private void Form1_Load(object sender, EventArgs e)
                 richTextBox1.Text += name + "\n";
             }
             richTextBox1.Text += "\n";
-
-
-
-
 
 
 從第5項填資料到ListView
@@ -13181,13 +13082,6 @@ private void Form1_Load(object sender, EventArgs e)
             }
         }
 
-
-
-            System.Drawing.StringFormat drawFormat = new System.Drawing.StringFormat();
-            drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
-            g.DrawString("畫字串畫直的", this.Font, new SolidBrush(Color.Black), 300, 100, drawFormat);
-
-
 ----------------many ST----------------
 
 richTextBox1.Text += System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "\n";
@@ -13201,9 +13095,6 @@ richTextBox1.Text += DateTime.Now.ToString() + "\n";
 using System.Windows.Media.Imaging要引用PresentationCore
 
 只需要在引用-->程序集-->框架-->PresentationCore
-
-
-
 
 string my_string = "   歡迎來到Myson Century!   ";
 
@@ -13325,12 +13216,8 @@ C#語言下路徑指定方式有兩種:
             g.ReleaseHdc(dc1); 
             myImage.Save(@"c:\screen0.jpg");
             
-            
 
-
-
-
- 瞭解程式執行時間 
+瞭解程式執行時間 
 
 using System.Diagnostics;
 //-------------------------------------------
@@ -13347,11 +13234,6 @@ Console.WriteLine("花費 {0} 毫秒", ms);
 
 補充說明: 不一定每次測到的時間都相同喔!
 建議值: 超過100毫秒就有點太慢囉…. (電腦爛會Lag更長)
-
-
-
-
-
 
 tmp code
 
@@ -13399,36 +13281,13 @@ tmp code
             richTextBox1.Text += "現在時間減30分鐘： " + Minus30Minutes.ToLongTimeString() + Environment.NewLine;
         }
         
-        
-        
 星期一        
-
-
-
-
-
-
 
 
 C# 取得檔案版本資訊
 using System.Diagnostics;
             richTextBox1.Text += "data : " + FileVersionInfo.GetVersionInfo(@"C:\WINDOWS\NOTEPAD.EXE").FileVersion.ToString() + "\n"; 
 data : 10.0.17134.220 (WinBuild.160101.0800)
-
-
-
-        public Form1()
-        {
-            InitializeComponent();
-
-            /*
-            //測試沒有標題沒有邊框的Form
-            this.Text = string.Empty;
-            this.ControlBox = false;
-            */
-
-        }
-        
 
 
 this.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -13474,27 +13333,7 @@ http://fecbob.pixnet.net/blog/post/38088065-c%23-%E5%9C%93%E8%A7%92-panel
 
 
 複製部分圖片
-
-
-[C#] DrawRoundRetangle
-//繪製圓角矩形
-private GraphicsPath DrawRoundRect(float x, float y, float width, float height, float cornerRadius) {
-            GraphicsPath roundedRect = new GraphicsPath();
-            Rectangle rect = new Rectangle((int)x, (int)y, (int)width, (int)height);
-            roundedRect.AddArc(rect.X, rect.Y, cornerRadius * 2, cornerRadius * 2, 180, 90);
-            roundedRect.AddLine(rect.X + cornerRadius, rect.Y, rect.Right - cornerRadius * 2, rect.Y);
-            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y, cornerRadius * 2, cornerRadius * 2, 270, 90);
-            roundedRect.AddLine(rect.Right, rect.Y + cornerRadius * 2, rect.Right, rect.Y + rect.Height - cornerRadius * 2);
-            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y + rect.Height - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 0, 90);
-            roundedRect.AddLine(rect.Right - cornerRadius * 2, rect.Bottom, rect.X + cornerRadius * 2, rect.Bottom);
-            roundedRect.AddArc(rect.X, rect.Bottom - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 90, 90);
-            roundedRect.AddLine(rect.X, rect.Bottom - cornerRadius * 2, rect.X, rect.Y + cornerRadius * 2);
-            roundedRect.CloseFigure();
-            return roundedRect;
-        }
-        
-        
-        
+       
 
 [SDK] 於 C#.net 環境下, 如何將相機影像繪製於 PictureBox 中?
 https://www.aisys.com.tw/web/tech/tech.php?question_id=127
@@ -14114,44 +13953,7 @@ myFile.Close();
 
 ImageViewer	研究選單架構
 
-
-using System.Drawing.Imaging;
-
-           Bitmap mimg = new Bitmap(width * 2, height);
-
-            for (int y = 0; y < height; y++)
-            {
-                for (int lx = 0, rx = width * 2 - 1; lx < width; lx++, rx--)
-                {
-                    cnt++;
-                    //get source pixel value
-                    Color p = simg.GetPixel(lx, y);
-                    if ((cnt % 10000) == 0)
-                    {
-                        richTextBox1.Text += p.A.ToString("X2") + p.R.ToString("X2") + p.G.ToString("X2") + p.B.ToString("X2") + "  ";
-                        //richTextBox1.Text += p.A.ToString() + p.R.ToString() + p.G.ToString() + p.B.ToString() + "  ";
-                    }
-
-                    //set mirror pixel value
-                    mimg.SetPixel(lx, y, p);
-                    mimg.SetPixel(rx, y, p);
-                }
-            }
-
-            //load mirror image in picturebox2
-            pictureBox2.Image = mimg;
-
-            //save (write) mirror image
-            //mimg.Save("C:\\MirrorImage.png");
-            mimg.Save("C:\\MirrorImage.jpg", ImageFormat.Jpeg);
-            mimg.Save("C:\\MirrorImage.png", ImageFormat.Png);
-            mimg.Save("C:\\MirrorImage.bmp", ImageFormat.Bmp);
-
-
 vcs不可畫點，用畫橢圓取代
-
-
-
 
 //-------------------------------------------------------------------------------------
 
@@ -14929,4 +14731,12 @@ string filename = @"D:\_git\vcs\_1.data\______test_files1\__text\war_and_peace.t
 
 */
 
+
+
+把一個ENUM的內容用foreach加到一個combobox裡
+點選combobox的項目 套用之
+
+列舉系統的所有Color並以ComboBox顯示
+
+comboBox自行繪制顯示的內容，在這邊需要將comboBox中的屬性'DrawMode'設為'OwnerDrawFixed'，並新的DrawItem事件
 

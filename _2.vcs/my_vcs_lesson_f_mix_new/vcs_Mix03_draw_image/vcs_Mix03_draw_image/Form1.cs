@@ -8,13 +8,13 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
-using System.Drawing.Imaging;   //for ImageFormat, ImageLockMode, Encoder, ImageCodecInfo
-//using System.Drawing.Imaging;   //for ColorMatrix, ImageAttributes
-using System.Drawing.Drawing2D;  // for GraphicsPath, Matrix
+using System.Drawing.Imaging;   //for ImageFormat, ImageLockMode, Encoder, ImageCodecInfo, ColorMatrix, ImageAttributes
+using System.Drawing.Drawing2D;  // for GraphicsPath, Matrix, MatrixOrder
 using System.Reflection;    //for Assembly
 using System.Security.Cryptography; //for HashAlgorithm
 using System.Diagnostics;   //for Process
 using System.Threading;
+using System.Collections;//for Hashtable
 
 namespace vcs_Mix03_draw_image
 {
@@ -70,15 +70,25 @@ namespace vcs_Mix03_draw_image
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
             pictureBox1.Size = new Size(600, 600);
-            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
             richTextBox1.Size = new Size(300, 640);
-            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1360, 710);
+            this.Size = new Size(1560, 710);
             this.Text = "vcs_Mix03_draw_image";
 
             //設定執行後的表單起始位置, 正中央
@@ -340,29 +350,6 @@ namespace vcs_Mix03_draw_image
         private void button4_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-
-            //從pictureBox開始畫圖
-
-            Graphics g = pictureBox1.CreateGraphics();				//實例化pictureBox1控件的Graphics類
-
-            //g.Clear(Color.White);
-
-            g.DrawRectangle(Pens.Red, 0, 0, 440, 256);
-
-            Point[] curvePoints = new Point[220];    //一維陣列內有 8 個Point
-
-            int i;
-            for (i = 0; i < 220; i++)
-            {
-                curvePoints[i].X = i * 2;
-                curvePoints[i].Y = i * 2;
-            }
-
-            // Draw lines between original points to screen.
-            g.DrawLines(Pens.Red, curvePoints);   //畫直線
-            // Draw curve to screen.
-            //gc.DrawCurve(redPen, curvePoints); //畫曲線
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -440,27 +427,322 @@ namespace vcs_Mix03_draw_image
         private void button7_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            Graphics g = this.pictureBox1.CreateGraphics();   // 取得畫布
-            Pen p = new Pen(Color.Red);  // 建立一支紅色的筆
-            g.Clear(Color.White);        // 清除畫布
-
-            g.DrawEllipse(p, 90, 30, 90, 90);      // 畫圓
-            g.DrawLine(p, 90, 50, 180, 100);       // 畫線
-            g.DrawArc(p, 90, 30, 90, 90, 0, 250);  // 畫弧形
-
-
-
         }
+
+        float theta = 0; // 旋轉角度
 
         private void button8_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Bitmap bm = new Bitmap(filename);
+
+            theta = theta + 2;  // 旋轉角度 遞增
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+
+            //畫布轉換矩陣的旋轉設定 - 在固定點自轉
+            int Cx = this.pictureBox1.ClientSize.Width / 2; // 視窗客戶區正中心點
+            int Cy = this.pictureBox1.ClientSize.Height / 2;//
+
+            g.ResetTransform(); // 畫布的矩陣 = 單位矩陣
+
+            g.TranslateTransform(-bm.Width / 2, -bm.Height / 2, MatrixOrder.Append);
+            g.RotateTransform(theta, MatrixOrder.Append);  // 乘上 旋轉矩陣
+            g.TranslateTransform(Cx, Cy, MatrixOrder.Append); // 再搬到視窗客戶區正中心點
+
+            g.DrawImage(bm, 0, 0); // 繪出圖形
+
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //using System.Collections;//for Hashtable
+
+            Hashtable imageList = new Hashtable();
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Image image1 = Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            Image image2 = Image.FromFile(filename2);	//Image.FromFile出來的是Image格式
+
+            string filename3 = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
+            Image image3 = Image.FromFile(filename3);	//Image.FromFile出來的是Image格式
+
+            imageList.Add(imageList.Count + 1, image1);
+            imageList.Add(imageList.Count + 1, image2);
+            imageList.Add(imageList.Count + 1, image3);
+
+            object obj = imageList[3];
+            pictureBox1.Image = (Image)obj;
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //Rectangle 的 Union
+            Graphics g = this.pictureBox1.CreateGraphics();
+
+            Rectangle rec1 = new Rectangle(100, 10, 200, 200);
+            Rectangle rec2 = new Rectangle(150, 100, 200, 200);
+            Rectangle rec3 = new Rectangle(30, 150, 200, 200);
+            g.DrawRectangle(Pens.Red, rec1);
+            g.DrawRectangle(Pens.Green, rec2);
+            g.DrawRectangle(Pens.Blue, rec3);
+
+            Rectangle new_rect = Rectangle.Union(rec1, rec2);
+            new_rect = Rectangle.Union(new_rect, rec3);
+            g.DrawRectangle(Pens.Magenta, new_rect);
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //亂畫一通
+            Graphics g = pictureBox1.CreateGraphics();
+
+            //畫箭頭
+            Pen myPen2 = new Pen(Color.Blue, 20);
+            myPen2.EndCap = LineCap.ArrowAnchor;
+            g.DrawLine(myPen2, 20, 100, 300, 100); // 繪製箭形直線
+
+            //3030
+
+            System.Drawing.StringFormat drawFormat = new System.Drawing.StringFormat();
+            drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
+            g.DrawString("畫字串畫直的", this.Font, new SolidBrush(Color.Black), 300, 100, drawFormat);
+
+
+            //3030
+
+            float x = 100;
+            float y = 100;
+            float width = 200;
+            float height = 100;
+            float cornerRadius = 20;
+            //GraphicsPath gp = new GraphicsPath();  // GraphicsPath物件
+            GraphicsPath gp = DrawRoundRect(x, y, width, height, cornerRadius);
+
+            //g.DrawPath(Pens.Red, gp); // 繪出圖形軌跡
+            g.FillPath(Brushes.Lime, gp); // 繪出圖形軌跡
+
+
+            //6060
+
+            gp = new GraphicsPath();  // GraphicsPath物件
+
+            int x_st = 100;
+            int y_st = 100;
+
+            PointF[] pt = new PointF[]
+            {
+                new PointF(x_st, y_st),
+                new PointF(x_st+50, y_st-50),
+                new PointF(x_st+100, y_st-100),
+                new PointF(x_st+150, y_st+50),
+                new PointF(x_st+200, y_st-50),
+            };
+
+            gp.AddCurve(pt, 0.6f); // 加入曲線
+
+            /*
+            PointF[] pt2 = new PointF[]{
+                          new PointF(x, y+ 7 *D),
+                          new PointF(x-4*D, y+3*D),
+                          new PointF(x-5*D, y),
+                          new PointF(x-3*D, y - 1.5f*D),
+                          new PointF(x, y),
+                          };
+            gp.AddCurve(pt2, 0.6f);
+            */
+            //gp.CloseFigure(); //  封閉目前的圖形
+            g.DrawPath(Pens.Black, gp); // 繪出圖形軌跡
+            g.DrawPath(Pens.Black, gp); // 繪出GraphicsPath物件
+
+            //6060
+
+
+
+            Pen p = new Pen(Color.Red);  // 建立一支紅色的筆
+
+            g.DrawEllipse(p, 90, 30, 90, 90);      // 畫圓
+            g.DrawLine(p, 90, 50, 180, 100);       // 畫線
+            g.DrawArc(p, 90, 30, 90, 90, 0, 250);  // 畫弧形
+
+            //3030
+
+            //從pictureBox開始畫圖
+
+            //Graphics g = pictureBox1.CreateGraphics();				//實例化pictureBox1控件的Graphics類
+
+            //g.Clear(Color.White);
+
+            g.DrawRectangle(Pens.Red, 0, 0, 440, 256);
+
+            Point[] curvePoints = new Point[220];    //一維陣列內有 8 個Point
+
+            int i;
+            for (i = 0; i < 220; i++)
+            {
+                curvePoints[i].X = i * 2;
+                curvePoints[i].Y = i * 2;
+            }
+
+            // Draw lines between original points to screen.
+            g.DrawLines(Pens.Red, curvePoints);   //畫直線
+            // Draw curve to screen.
+            //gc.DrawCurve(redPen, curvePoints); //畫曲線
+
+            //3030
+
+
+
+
+        }
+
+
+           
+
+//繪製圓角矩形 DrawRoundRetangle
+        private GraphicsPath DrawRoundRect(float x, float y, float width, float height, float cornerRadius)
+        {
+            GraphicsPath roundedRect = new GraphicsPath();
+            Rectangle rect = new Rectangle((int)x, (int)y, (int)width, (int)height);
+            roundedRect.AddArc(rect.X, rect.Y, cornerRadius * 2, cornerRadius * 2, 180, 90);
+            roundedRect.AddLine(rect.X + cornerRadius, rect.Y, rect.Right - cornerRadius * 2, rect.Y);
+            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y, cornerRadius * 2, cornerRadius * 2, 270, 90);
+            roundedRect.AddLine(rect.Right, rect.Y + cornerRadius * 2, rect.Right, rect.Y + rect.Height - cornerRadius * 2);
+            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y + rect.Height - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 0, 90);
+            roundedRect.AddLine(rect.Right - cornerRadius * 2, rect.Bottom, rect.X + cornerRadius * 2, rect.Bottom);
+            roundedRect.AddArc(rect.X, rect.Bottom - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 90, 90);
+            roundedRect.AddLine(rect.X, rect.Bottom - cornerRadius * 2, rect.X, rect.Y + cornerRadius * 2);
+            roundedRect.CloseFigure();
+            return roundedRect;
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //交集聯集互斥
+
+            Graphics g = pictureBox1.CreateGraphics();
+
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            int Cx = 200;
+            int Cy = 70;
+            int R = 60;
+            int dd = 30;
+
+            g.DrawString("聯集", new Font("標楷體", 24), new SolidBrush(Color.Blue), new PointF(5, Cy));
+
+            GraphicsPath gp1 = new GraphicsPath(); // 圖形軌跡
+            gp1.AddEllipse(Cx - dd - R, Cy - R, R * 2, R * 2);
+
+            GraphicsPath gp2 = new GraphicsPath(); // 圖形軌跡
+            gp2.AddEllipse(Cx + dd - R, Cy - R, R * 2, R * 2);
+
+            Region r1 = new Region(gp1); // Region 區域表面 物件
+            Region r2 = new Region(gp2); // Region 區域表面 物件
+
+            r1.Union(r2);  // r1 = r1 + r2  聯集
+
+            g.FillRegion(Brushes.Silver, r1); // r1 區域表面 繪出
+            g.DrawPath(Pens.Black, gp1); // 圖形軌跡 繪出
+            g.DrawPath(Pens.Black, gp2); // 圖形軌跡 繪出
+
+            //6060
+
+            Cx = 200;
+            Cy = 200;
+
+            g.DrawString("交集\n排除", new Font("標楷體", 24), new SolidBrush(Color.Blue), new PointF(5, Cy));
+
+            gp1 = new GraphicsPath(); // 圖形軌跡
+            gp1.AddEllipse(Cx - dd - R, Cy - R, R * 2, R * 2);
+
+            gp2 = new GraphicsPath(); // 圖形軌跡
+            gp2.AddEllipse(Cx + dd - R, Cy - R, R * 2, R * 2);
+
+            r1 = new Region(gp1); // Region 區域表面 物件
+            r2 = new Region(gp2); // Region 區域表面 物件
+            Region r3 = new Region(gp1); // Region 區域表面 物件
+
+            r3.Intersect(r2);  // r3 = r1 - r2   交集
+            r1.Exclude(r3);    // r1 = r1 - r3   排除
+            r2.Exclude(r3);    // r2 = r2 - r3   排除
+
+            g.FillRegion(Brushes.Red, r1);  // r1 區域表面  繪出
+            g.FillRegion(Brushes.Blue, r2); // r2 區域表面 繪出
+            g.FillRegion(Brushes.Yellow, r3); // r3 區域表面 繪出
+
+            g.DrawPath(Pens.Black, gp1); // 圖形軌跡 繪出
+            g.DrawPath(Pens.Black, gp2); // 圖形軌跡 繪出
+
+            //6060
+
+            Cx = 200;
+            Cy = 330;
+
+            g.DrawString("互斥或", new Font("標楷體", 24), new SolidBrush(Color.Blue), new PointF(5, Cy));
+
+            gp1 = new GraphicsPath(); // 圖形軌跡
+            gp1.AddEllipse(Cx - dd - R, Cy - R, R * 2, R * 2);
+
+            gp2 = new GraphicsPath(); // 圖形軌跡
+            gp2.AddEllipse(Cx + dd - R, Cy - R, R * 2, R * 2);
+
+            r1 = new Region(gp1); // Region 區域表面 物件
+            r2 = new Region(gp2); // Region 區域表面 物件
+
+            r1.Xor(r2);  // r1 = r1 + r2 - (r1 Intersect r2)  互斥
+
+            g.FillRegion(Brushes.Silver, r1); // r1 區域表面  繪出
+            g.DrawPath(Pens.Black, gp1); // 圖形軌跡 繪出
+            g.DrawPath(Pens.Black, gp2); // 圖形軌跡 繪出
+
+
+
+
+
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
