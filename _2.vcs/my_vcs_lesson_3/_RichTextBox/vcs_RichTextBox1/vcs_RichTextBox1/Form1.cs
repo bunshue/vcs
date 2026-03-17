@@ -234,60 +234,8 @@ namespace vcs_RichTextBox1
             richTextBox1.Select(0, 0);//離開選取
         }
 
-        //#region 日誌記錄、支援其他執行緒訪問
-        public delegate void LogAppendDelegate(Color color, string text);
-        /// <summary> 
-        /// 追加顯示文字 
-        /// </summary> 
-        /// <param name="color">文字顏色</param> 
-        /// <param name="text">顯示文字</param> 
-        public void LogAppend(Color color, string text)
-        {
-            richTextBox1.AppendText("\n");
-            richTextBox1.SelectionColor = color;
-            richTextBox1.AppendText(text);
-        }
-        /// <summary> 
-        /// 顯示錯誤日誌 
-        /// </summary> 
-        /// <param name="text"></param> 
-        public void LogError(string text)
-        {
-            LogAppendDelegate la = new LogAppendDelegate(LogAppend);
-            richTextBox1.Invoke(la, Color.Red, DateTime.Now.ToString("HH:mm:ss ") + text);
-        }
-        /// <summary> 
-        /// 顯示警告資訊 
-        /// </summary> 
-        /// <param name="text"></param> 
-        public void LogWarning(string text)
-        {
-            LogAppendDelegate la = new LogAppendDelegate(LogAppend);
-            richTextBox1.Invoke(la, Color.Violet, DateTime.Now.ToString("HH:mm:ss ") + text);
-        }
-        /// <summary> 
-        /// 顯示資訊 
-        /// </summary> 
-        /// <param name="text"></param> 
-        public void LogMessage(string text)
-        {
-            LogAppendDelegate la = new LogAppendDelegate(LogAppend);
-            richTextBox1.Invoke(la, Color.Black, DateTime.Now.ToString("HH:mm:ss ") + text);
-        }
-        //#endregion
-
         private void button2_Click(object sender, EventArgs e)
         {
-            string str1 = "C# RichTextBox顯示不同顏色文字 一般訊息";
-            string str2 = "C# RichTextBox顯示不同顏色文字 錯誤訊息";
-            string str3 = "C# RichTextBox顯示不同顏色文字 警告訊息";
-
-            LogMessage(str1);
-            LogError(str2);
-            LogWarning(str3);
-            LogMessage(str1);
-            LogError(str2);
-            LogWarning(str3);
         }
 
         private void button3_Click(object sender, EventArgs e)

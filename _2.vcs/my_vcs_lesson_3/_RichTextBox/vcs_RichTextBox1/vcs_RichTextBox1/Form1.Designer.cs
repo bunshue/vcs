@@ -115,7 +115,7 @@
             this.richTextBox1.Size = new System.Drawing.Size(540, 300);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "定風波\n三月七日，沙湖道中遇雨。雨具先去，同行皆狼狽，余獨不覺，已而遂晴，故作此詞。\n莫聽穿林打葉聲，何妨吟嘯且徐行。\n竹杖芒鞋輕勝馬，誰怕？一蓑煙雨任平生。\n料" +
-    "峭春風吹酒醒，微冷，山頭斜照卻相迎。\n回首向來蕭瑟處，歸去，也無風雨也無晴。\n ";
+                "峭春風吹酒醒，微冷，山頭斜照卻相迎。\n回首向來蕭瑟處，歸去，也無風雨也無晴。\n ";
             this.richTextBox1.SelectionChanged += new System.EventHandler(this.richTextBox1_SelectionChanged);
             this.richTextBox1.Click += new System.EventHandler(this.richTextBox1_Click);
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
@@ -132,7 +132,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 2;
-            this.button2.Text = " RichTextBox顯示不同顏色文字, 做LOG用";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 

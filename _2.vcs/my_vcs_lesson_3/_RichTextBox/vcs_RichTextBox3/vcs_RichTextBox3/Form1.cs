@@ -16,11 +16,9 @@ namespace vcs_RichTextBox3
         //richTextBox顯示不同顏色文字 ST
         public delegate void LogAppendDelegate(Color color, string text);
 
-        /// <summary>  
-        /// 追加顯示文本  
-        /// </summary>  
-        /// <param name="color">文本顏色</param>  
-        /// <param name="text">顯示文本</param>  
+        // 追加顯示文本  
+        // <param name="color">文本顏色</param>  
+        // <param name="text">顯示文本</param>  
         public void LogAppend(Color color, string text)
         {
             richTextBox1.AppendText(" ");
@@ -28,30 +26,21 @@ namespace vcs_RichTextBox3
             richTextBox1.AppendText(text);
         }
 
-        /// <summary>  
-        /// 顯示錯誤信息
-        /// </summary>  
-        /// <param name="text"></param>  
+        // 顯示錯誤信息
         public void LogError(string text)
         {
             LogAppendDelegate la = new LogAppendDelegate(LogAppend);
             richTextBox1.Invoke(la, Color.Red, DateTime.Now.ToString("HH:mm:ss ") + text);
         }
 
-        /// <summary>  
-        /// 顯示警告信息  
-        /// </summary>  
-        /// <param name="text"></param>  
+        // 顯示警告信息
         public void LogWarning(string text)
         {
             LogAppendDelegate la = new LogAppendDelegate(LogAppend);
             richTextBox1.Invoke(la, Color.Violet, DateTime.Now.ToString("HH:mm:ss ") + text);
         }
 
-        /// <summary>  
-        /// 顯示一般信息  
-        /// </summary>  
-        /// <param name="text"></param>  
+        // 顯示一般信息
         public void LogMessage(string text)
         {
             LogAppendDelegate la = new LogAppendDelegate(LogAppend);
@@ -166,11 +155,7 @@ namespace vcs_RichTextBox3
             Ranks();
         }
 
-        /// <summary>自定义方法 -- 
-        ///  获取文本中(行和列)--光标--坐标位置的调用方法
-        /// </summary>
-        /// <param></param>
-        /// <returns></returns>
+        //  获取文本中(行和列)--光标--坐标位置的调用方法
         private void Ranks()
         {
             /*  得到光标行第一个字符的索引，
@@ -273,6 +258,19 @@ namespace vcs_RichTextBox3
             string message = string.Empty;
             message = "顯示一般信息\n";
             LogMessage(message);
+
+
+            string str1 = "C# RichTextBox顯示不同顏色文字 一般訊息";
+            string str2 = "C# RichTextBox顯示不同顏色文字 錯誤訊息";
+            string str3 = "C# RichTextBox顯示不同顏色文字 警告訊息";
+
+            LogMessage(str1);
+            LogError(str2);
+            LogWarning(str3);
+            LogMessage(str1);
+            LogError(str2);
+            LogWarning(str3);
+
         }
 
         private void button7_Click(object sender, EventArgs e)

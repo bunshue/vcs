@@ -140,6 +140,7 @@
             // 
             // bt_edge_detection9
             // 
+            this.bt_edge_detection9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_edge_detection9.Location = new System.Drawing.Point(8, 379);
             this.bt_edge_detection9.Name = "bt_edge_detection9";
             this.bt_edge_detection9.Size = new System.Drawing.Size(200, 40);
@@ -150,6 +151,7 @@
             // 
             // bt_edge_detection8
             // 
+            this.bt_edge_detection8.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_edge_detection8.Location = new System.Drawing.Point(8, 339);
             this.bt_edge_detection8.Name = "bt_edge_detection8";
             this.bt_edge_detection8.Size = new System.Drawing.Size(200, 40);
@@ -160,6 +162,7 @@
             // 
             // bt_edge_detection7
             // 
+            this.bt_edge_detection7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_edge_detection7.Location = new System.Drawing.Point(8, 300);
             this.bt_edge_detection7.Name = "bt_edge_detection7";
             this.bt_edge_detection7.Size = new System.Drawing.Size(200, 40);
@@ -170,6 +173,7 @@
             // 
             // bt_edge_detection0
             // 
+            this.bt_edge_detection0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_edge_detection0.Location = new System.Drawing.Point(8, 21);
             this.bt_edge_detection0.Name = "bt_edge_detection0";
             this.bt_edge_detection0.Size = new System.Drawing.Size(200, 40);
@@ -180,6 +184,7 @@
             // 
             // bt_edge_detection6
             // 
+            this.bt_edge_detection6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_edge_detection6.Location = new System.Drawing.Point(8, 260);
             this.bt_edge_detection6.Name = "bt_edge_detection6";
             this.bt_edge_detection6.Size = new System.Drawing.Size(200, 40);
@@ -190,6 +195,7 @@
             // 
             // bt_edge_detection1
             // 
+            this.bt_edge_detection1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_edge_detection1.Location = new System.Drawing.Point(8, 60);
             this.bt_edge_detection1.Name = "bt_edge_detection1";
             this.bt_edge_detection1.Size = new System.Drawing.Size(200, 40);
@@ -200,6 +206,7 @@
             // 
             // bt_edge_detection5
             // 
+            this.bt_edge_detection5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_edge_detection5.Location = new System.Drawing.Point(8, 220);
             this.bt_edge_detection5.Name = "bt_edge_detection5";
             this.bt_edge_detection5.Size = new System.Drawing.Size(200, 40);
@@ -210,6 +217,7 @@
             // 
             // bt_edge_detection2
             // 
+            this.bt_edge_detection2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_edge_detection2.Location = new System.Drawing.Point(8, 99);
             this.bt_edge_detection2.Name = "bt_edge_detection2";
             this.bt_edge_detection2.Size = new System.Drawing.Size(200, 40);
@@ -220,6 +228,7 @@
             // 
             // bt_edge_detection4
             // 
+            this.bt_edge_detection4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_edge_detection4.Location = new System.Drawing.Point(8, 180);
             this.bt_edge_detection4.Name = "bt_edge_detection4";
             this.bt_edge_detection4.Size = new System.Drawing.Size(200, 40);
@@ -230,6 +239,7 @@
             // 
             // bt_edge_detection3
             // 
+            this.bt_edge_detection3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_edge_detection3.Location = new System.Drawing.Point(8, 139);
             this.bt_edge_detection3.Name = "bt_edge_detection3";
             this.bt_edge_detection3.Size = new System.Drawing.Size(200, 40);
@@ -273,6 +283,7 @@
             // 
             // bt_image_process_p23
             // 
+            this.bt_image_process_p23.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_p23.Location = new System.Drawing.Point(230, 499);
             this.bt_image_process_p23.Name = "bt_image_process_p23";
             this.bt_image_process_p23.Size = new System.Drawing.Size(200, 40);
@@ -283,6 +294,7 @@
             // 
             // bt_image_process_p22
             // 
+            this.bt_image_process_p22.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_p22.Location = new System.Drawing.Point(230, 459);
             this.bt_image_process_p22.Name = "bt_image_process_p22";
             this.bt_image_process_p22.Size = new System.Drawing.Size(200, 40);
@@ -293,6 +305,7 @@
             // 
             // bt_image_process_p21
             // 
+            this.bt_image_process_p21.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_p21.Location = new System.Drawing.Point(230, 418);
             this.bt_image_process_p21.Name = "bt_image_process_p21";
             this.bt_image_process_p21.Size = new System.Drawing.Size(200, 40);
@@ -303,6 +316,7 @@
             // 
             // bt_image_process_p20
             // 
+            this.bt_image_process_p20.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_p20.Location = new System.Drawing.Point(230, 379);
             this.bt_image_process_p20.Name = "bt_image_process_p20";
             this.bt_image_process_p20.Size = new System.Drawing.Size(200, 40);
@@ -313,6 +327,7 @@
             // 
             // bt_image_process_p19
             // 
+            this.bt_image_process_p19.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_p19.Location = new System.Drawing.Point(230, 302);
             this.bt_image_process_p19.Name = "bt_image_process_p19";
             this.bt_image_process_p19.Size = new System.Drawing.Size(200, 40);
@@ -323,6 +338,7 @@
             // 
             // bt_image_process_p18
             // 
+            this.bt_image_process_p18.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_p18.Location = new System.Drawing.Point(230, 263);
             this.bt_image_process_p18.Name = "bt_image_process_p18";
             this.bt_image_process_p18.Size = new System.Drawing.Size(200, 40);
@@ -333,6 +349,7 @@
             // 
             // bt_image_process_p17
             // 
+            this.bt_image_process_p17.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_p17.Location = new System.Drawing.Point(230, 222);
             this.bt_image_process_p17.Name = "bt_image_process_p17";
             this.bt_image_process_p17.Size = new System.Drawing.Size(200, 40);
@@ -343,6 +360,7 @@
             // 
             // bt_image_process_p16
             // 
+            this.bt_image_process_p16.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_p16.Location = new System.Drawing.Point(230, 181);
             this.bt_image_process_p16.Name = "bt_image_process_p16";
             this.bt_image_process_p16.Size = new System.Drawing.Size(200, 40);
@@ -353,6 +371,7 @@
             // 
             // bt_image_process_p15
             // 
+            this.bt_image_process_p15.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_p15.Location = new System.Drawing.Point(230, 142);
             this.bt_image_process_p15.Name = "bt_image_process_p15";
             this.bt_image_process_p15.Size = new System.Drawing.Size(200, 40);
@@ -363,6 +382,7 @@
             // 
             // bt_image_process_p14
             // 
+            this.bt_image_process_p14.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_p14.Location = new System.Drawing.Point(230, 101);
             this.bt_image_process_p14.Name = "bt_image_process_p14";
             this.bt_image_process_p14.Size = new System.Drawing.Size(200, 40);
@@ -373,6 +393,7 @@
             // 
             // bt_image_process_p13
             // 
+            this.bt_image_process_p13.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_p13.Location = new System.Drawing.Point(230, 59);
             this.bt_image_process_p13.Name = "bt_image_process_p13";
             this.bt_image_process_p13.Size = new System.Drawing.Size(200, 40);
@@ -383,6 +404,7 @@
             // 
             // bt_image_process_p12
             // 
+            this.bt_image_process_p12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_p12.Location = new System.Drawing.Point(230, 17);
             this.bt_image_process_p12.Name = "bt_image_process_p12";
             this.bt_image_process_p12.Size = new System.Drawing.Size(200, 40);
@@ -392,6 +414,7 @@
             // 
             // bt_image_process_p11
             // 
+            this.bt_image_process_p11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_p11.Location = new System.Drawing.Point(20, 499);
             this.bt_image_process_p11.Name = "bt_image_process_p11";
             this.bt_image_process_p11.Size = new System.Drawing.Size(200, 40);
@@ -402,6 +425,7 @@
             // 
             // bt_image_process_p10
             // 
+            this.bt_image_process_p10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_p10.Location = new System.Drawing.Point(20, 460);
             this.bt_image_process_p10.Name = "bt_image_process_p10";
             this.bt_image_process_p10.Size = new System.Drawing.Size(200, 40);
@@ -412,6 +436,7 @@
             // 
             // bt_image_process_p9
             // 
+            this.bt_image_process_p9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_p9.Location = new System.Drawing.Point(20, 421);
             this.bt_image_process_p9.Name = "bt_image_process_p9";
             this.bt_image_process_p9.Size = new System.Drawing.Size(200, 40);
@@ -422,6 +447,7 @@
             // 
             // bt_image_process_p8
             // 
+            this.bt_image_process_p8.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_p8.Location = new System.Drawing.Point(20, 381);
             this.bt_image_process_p8.Name = "bt_image_process_p8";
             this.bt_image_process_p8.Size = new System.Drawing.Size(200, 40);
@@ -431,6 +457,7 @@
             // 
             // bt_image_process_p7
             // 
+            this.bt_image_process_p7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_p7.Location = new System.Drawing.Point(20, 303);
             this.bt_image_process_p7.Name = "bt_image_process_p7";
             this.bt_image_process_p7.Size = new System.Drawing.Size(200, 40);
@@ -441,6 +468,7 @@
             // 
             // bt_image_process_p0
             // 
+            this.bt_image_process_p0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_p0.Location = new System.Drawing.Point(20, 18);
             this.bt_image_process_p0.Name = "bt_image_process_p0";
             this.bt_image_process_p0.Size = new System.Drawing.Size(200, 40);
@@ -451,6 +479,7 @@
             // 
             // bt_image_process_p6
             // 
+            this.bt_image_process_p6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_p6.Location = new System.Drawing.Point(20, 263);
             this.bt_image_process_p6.Name = "bt_image_process_p6";
             this.bt_image_process_p6.Size = new System.Drawing.Size(200, 40);
@@ -460,6 +489,7 @@
             // 
             // bt_image_process_p1
             // 
+            this.bt_image_process_p1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_p1.Location = new System.Drawing.Point(20, 57);
             this.bt_image_process_p1.Name = "bt_image_process_p1";
             this.bt_image_process_p1.Size = new System.Drawing.Size(200, 40);
@@ -470,6 +500,7 @@
             // 
             // bt_image_process_p5
             // 
+            this.bt_image_process_p5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_p5.Location = new System.Drawing.Point(20, 222);
             this.bt_image_process_p5.Name = "bt_image_process_p5";
             this.bt_image_process_p5.Size = new System.Drawing.Size(200, 40);
@@ -480,6 +511,7 @@
             // 
             // bt_image_process_p2
             // 
+            this.bt_image_process_p2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_p2.Location = new System.Drawing.Point(20, 97);
             this.bt_image_process_p2.Name = "bt_image_process_p2";
             this.bt_image_process_p2.Size = new System.Drawing.Size(200, 40);
@@ -490,6 +522,7 @@
             // 
             // bt_image_process_p4
             // 
+            this.bt_image_process_p4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_p4.Location = new System.Drawing.Point(20, 181);
             this.bt_image_process_p4.Name = "bt_image_process_p4";
             this.bt_image_process_p4.Size = new System.Drawing.Size(200, 40);
@@ -500,6 +533,7 @@
             // 
             // bt_image_process_p3
             // 
+            this.bt_image_process_p3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_p3.Location = new System.Drawing.Point(20, 139);
             this.bt_image_process_p3.Name = "bt_image_process_p3";
             this.bt_image_process_p3.Size = new System.Drawing.Size(200, 40);
@@ -527,6 +561,7 @@
             // 
             // bt_image_process_m7
             // 
+            this.bt_image_process_m7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_m7.Location = new System.Drawing.Point(6, 296);
             this.bt_image_process_m7.Name = "bt_image_process_m7";
             this.bt_image_process_m7.Size = new System.Drawing.Size(200, 40);
@@ -536,6 +571,7 @@
             // 
             // bt_image_process_m0
             // 
+            this.bt_image_process_m0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_m0.Location = new System.Drawing.Point(6, 21);
             this.bt_image_process_m0.Name = "bt_image_process_m0";
             this.bt_image_process_m0.Size = new System.Drawing.Size(200, 40);
@@ -546,6 +582,7 @@
             // 
             // bt_image_process_m6
             // 
+            this.bt_image_process_m6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_m6.Location = new System.Drawing.Point(6, 257);
             this.bt_image_process_m6.Name = "bt_image_process_m6";
             this.bt_image_process_m6.Size = new System.Drawing.Size(200, 40);
@@ -555,6 +592,7 @@
             // 
             // bt_image_process_m1
             // 
+            this.bt_image_process_m1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_m1.Location = new System.Drawing.Point(6, 60);
             this.bt_image_process_m1.Name = "bt_image_process_m1";
             this.bt_image_process_m1.Size = new System.Drawing.Size(200, 40);
@@ -565,6 +603,7 @@
             // 
             // bt_image_process_m5
             // 
+            this.bt_image_process_m5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_m5.Location = new System.Drawing.Point(6, 218);
             this.bt_image_process_m5.Name = "bt_image_process_m5";
             this.bt_image_process_m5.Size = new System.Drawing.Size(200, 40);
@@ -575,6 +614,7 @@
             // 
             // bt_image_process_m2
             // 
+            this.bt_image_process_m2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_m2.Location = new System.Drawing.Point(6, 99);
             this.bt_image_process_m2.Name = "bt_image_process_m2";
             this.bt_image_process_m2.Size = new System.Drawing.Size(200, 40);
@@ -585,6 +625,7 @@
             // 
             // bt_image_process_m4
             // 
+            this.bt_image_process_m4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_m4.Location = new System.Drawing.Point(6, 179);
             this.bt_image_process_m4.Name = "bt_image_process_m4";
             this.bt_image_process_m4.Size = new System.Drawing.Size(200, 40);
@@ -595,6 +636,7 @@
             // 
             // bt_image_process_m3
             // 
+            this.bt_image_process_m3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_m3.Location = new System.Drawing.Point(6, 139);
             this.bt_image_process_m3.Name = "bt_image_process_m3";
             this.bt_image_process_m3.Size = new System.Drawing.Size(200, 40);
@@ -643,6 +685,7 @@
             // 
             // bt_animate7
             // 
+            this.bt_animate7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_animate7.Location = new System.Drawing.Point(212, 155);
             this.bt_animate7.Name = "bt_animate7";
             this.bt_animate7.Size = new System.Drawing.Size(200, 40);
@@ -652,6 +695,7 @@
             // 
             // bt_animate0
             // 
+            this.bt_animate0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_animate0.Location = new System.Drawing.Point(6, 21);
             this.bt_animate0.Name = "bt_animate0";
             this.bt_animate0.Size = new System.Drawing.Size(200, 40);
@@ -662,6 +706,7 @@
             // 
             // bt_animate6
             // 
+            this.bt_animate6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_animate6.Location = new System.Drawing.Point(212, 113);
             this.bt_animate6.Name = "bt_animate6";
             this.bt_animate6.Size = new System.Drawing.Size(200, 40);
@@ -672,6 +717,7 @@
             // 
             // bt_animate1
             // 
+            this.bt_animate1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_animate1.Location = new System.Drawing.Point(6, 67);
             this.bt_animate1.Name = "bt_animate1";
             this.bt_animate1.Size = new System.Drawing.Size(200, 40);
@@ -682,6 +728,7 @@
             // 
             // bt_animate5
             // 
+            this.bt_animate5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_animate5.Location = new System.Drawing.Point(212, 67);
             this.bt_animate5.Name = "bt_animate5";
             this.bt_animate5.Size = new System.Drawing.Size(200, 40);
@@ -692,6 +739,7 @@
             // 
             // bt_animate2
             // 
+            this.bt_animate2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_animate2.Location = new System.Drawing.Point(6, 113);
             this.bt_animate2.Name = "bt_animate2";
             this.bt_animate2.Size = new System.Drawing.Size(200, 40);
@@ -702,6 +750,7 @@
             // 
             // bt_animate4
             // 
+            this.bt_animate4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_animate4.Location = new System.Drawing.Point(212, 21);
             this.bt_animate4.Name = "bt_animate4";
             this.bt_animate4.Size = new System.Drawing.Size(200, 40);
@@ -712,6 +761,7 @@
             // 
             // bt_animate3
             // 
+            this.bt_animate3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_animate3.Location = new System.Drawing.Point(6, 155);
             this.bt_animate3.Name = "bt_animate3";
             this.bt_animate3.Size = new System.Drawing.Size(200, 40);

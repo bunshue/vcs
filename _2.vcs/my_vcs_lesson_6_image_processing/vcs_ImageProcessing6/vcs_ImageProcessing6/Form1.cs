@@ -51,6 +51,7 @@ namespace vcs_ImageProcessing6
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
             pictureBox0.Image = Image.FromFile(filename);
             pictureBox1.Image = Image.FromFile(filename);
             pictureBox2.Image = Image.FromFile(filename);
@@ -60,7 +61,6 @@ namespace vcs_ImageProcessing6
             Bitmap bitmap1 = new Bitmap(filename);
             CurrentBitmap1 = bitmap1.Clone() as Bitmap;
             pictureBox1.Image = bitmap1.Clone() as Image;
-
 
             //pictureBox2
             try

@@ -77,12 +77,9 @@ namespace vcs_Delegate
             return n1 - n2;
         }
 
-        /// <summary>
-        /// 取一個任意數組的最大值
-        /// </summary>
+        // 取一個任意數組的最大值
         /// <param name="objs">數組</param>
         /// <param name="del">委托</param>
-        /// <returns></returns>
         public static object getMax(object[] objs, delCompre del)
         {
             object max = objs[0];
@@ -155,9 +152,7 @@ namespace vcs_Delegate
             string[] strs = { "asd", "sdf", "zxcvv", "123", "qwe" };
             string maxStr = getMax2(strs, (string s1, string s2) => { return s1.Length - s2.Length; });
             Console.WriteLine(maxStr);
-
         }
-
         //delegate 範例3 SP
 
     }

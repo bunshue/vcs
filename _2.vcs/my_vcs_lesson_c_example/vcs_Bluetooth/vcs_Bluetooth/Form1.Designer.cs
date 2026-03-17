@@ -29,72 +29,74 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.mainMenu1 = new System.Windows.Forms.MainMenu();
+            this.components = new System.ComponentModel.Container();
+            this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
             this.menuItem1 = new System.Windows.Forms.MenuItem();
-            this.menuItem2 = new System.Windows.Forms.MenuItem();
-            this.menuItem3 = new System.Windows.Forms.MenuItem();
             this.menuItem4 = new System.Windows.Forms.MenuItem();
             this.menuItem5 = new System.Windows.Forms.MenuItem();
+            this.menuItem2 = new System.Windows.Forms.MenuItem();
+            this.menuItem3 = new System.Windows.Forms.MenuItem();
             this.listBoxMsg = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // mainMenu1
             // 
-            this.mainMenu1.MenuItems.Add(this.menuItem1);
-            this.mainMenu1.MenuItems.Add(this.menuItem2);
+            this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem1,
+            this.menuItem2});
             // 
             // menuItem1
             // 
-            this.menuItem1.MenuItems.Add(this.menuItem4);
-            this.menuItem1.MenuItems.Add(this.menuItem5);
+            this.menuItem1.Index = 0;
+            this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem4,
+            this.menuItem5});
             this.menuItem1.Text = "Action";
-            // 
-            // menuItem2
-            // 
-            this.menuItem2.MenuItems.Add(this.menuItem3);
-            this.menuItem2.Text = "Menu";
-            // 
-            // menuItem3
-            // 
-            this.menuItem3.Text = "Exit";
-            this.menuItem3.Click += new System.EventHandler(this.menuItem3_Click);
             // 
             // menuItem4
             // 
+            this.menuItem4.Index = 0;
             this.menuItem4.Text = "Listen";
             this.menuItem4.Click += new System.EventHandler(this.menuItem4_Click);
             // 
             // menuItem5
             // 
+            this.menuItem5.Index = 1;
             this.menuItem5.Text = "Send";
             this.menuItem5.Click += new System.EventHandler(this.menuItem5_Click);
             // 
+            // menuItem2
+            // 
+            this.menuItem2.Index = 1;
+            this.menuItem2.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem3});
+            this.menuItem2.Text = "Menu";
+            // 
+            // menuItem3
+            // 
+            this.menuItem3.Index = 0;
+            this.menuItem3.Text = "Exit";
+            this.menuItem3.Click += new System.EventHandler(this.menuItem3_Click);
+            // 
             // listBoxMsg
             // 
+            this.listBoxMsg.ItemHeight = 12;
             this.listBoxMsg.Location = new System.Drawing.Point(0, 0);
             this.listBoxMsg.Name = "listBoxMsg";
-            this.listBoxMsg.Size = new System.Drawing.Size(240, 226);
+            this.listBoxMsg.Size = new System.Drawing.Size(606, 532);
             this.listBoxMsg.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(4, 233);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(233, 20);
-            this.label1.Text = "@Jake Lin       procoder.cnblogs.com";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(240, 268);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(618, 548);
             this.Controls.Add(this.listBoxMsg);
             this.Menu = this.mainMenu1;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }
@@ -107,7 +109,6 @@
         private System.Windows.Forms.MenuItem menuItem2;
         private System.Windows.Forms.MenuItem menuItem3;
         private System.Windows.Forms.ListBox listBoxMsg;
-        private System.Windows.Forms.Label label1;
     }
 }
 

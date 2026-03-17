@@ -26,9 +26,10 @@ namespace vcs_ImageProcessing5
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             Bitmap bitmap1 = new Bitmap(filename);
             pictureBox1.Image = bitmap1;
-            show_item_location();
         }
 
         void show_item_location()

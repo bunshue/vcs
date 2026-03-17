@@ -76,6 +76,7 @@
             // 
             // btnEmboss1
             // 
+            this.btnEmboss1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnEmboss1.Location = new System.Drawing.Point(12, 7);
             this.btnEmboss1.Name = "btnEmboss1";
             this.btnEmboss1.Size = new System.Drawing.Size(200, 40);
@@ -85,6 +86,7 @@
             // 
             // btnBlur1
             // 
+            this.btnBlur1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnBlur1.Location = new System.Drawing.Point(12, 138);
             this.btnBlur1.Name = "btnBlur1";
             this.btnBlur1.Size = new System.Drawing.Size(200, 40);
@@ -94,6 +96,7 @@
             // 
             // btnBlur2
             // 
+            this.btnBlur2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnBlur2.Location = new System.Drawing.Point(12, 182);
             this.btnBlur2.Name = "btnBlur2";
             this.btnBlur2.Size = new System.Drawing.Size(200, 40);
@@ -103,6 +106,7 @@
             // 
             // btnHighPass1
             // 
+            this.btnHighPass1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnHighPass1.Location = new System.Drawing.Point(12, 228);
             this.btnHighPass1.Name = "btnHighPass1";
             this.btnHighPass1.Size = new System.Drawing.Size(200, 40);
@@ -112,6 +116,7 @@
             // 
             // btnHighPass2
             // 
+            this.btnHighPass2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnHighPass2.Location = new System.Drawing.Point(12, 278);
             this.btnHighPass2.Name = "btnHighPass2";
             this.btnHighPass2.Size = new System.Drawing.Size(200, 40);
@@ -121,6 +126,7 @@
             // 
             // btnEdge1
             // 
+            this.btnEdge1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnEdge1.Location = new System.Drawing.Point(12, 323);
             this.btnEdge1.Name = "btnEdge1";
             this.btnEdge1.Size = new System.Drawing.Size(200, 40);
@@ -130,6 +136,7 @@
             // 
             // btnEdge2
             // 
+            this.btnEdge2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnEdge2.Location = new System.Drawing.Point(12, 367);
             this.btnEdge2.Name = "btnEdge2";
             this.btnEdge2.Size = new System.Drawing.Size(200, 40);
@@ -139,6 +146,7 @@
             // 
             // btnEmboss2
             // 
+            this.btnEmboss2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnEmboss2.Location = new System.Drawing.Point(12, 49);
             this.btnEmboss2.Name = "btnEmboss2";
             this.btnEmboss2.Size = new System.Drawing.Size(200, 40);
@@ -148,6 +156,7 @@
             // 
             // btnEdge3
             // 
+            this.btnEdge3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnEdge3.Location = new System.Drawing.Point(12, 414);
             this.btnEdge3.Name = "btnEdge3";
             this.btnEdge3.Size = new System.Drawing.Size(200, 40);
@@ -157,7 +166,8 @@
             // 
             // btnAverage
             // 
-            this.btnAverage.Location = new System.Drawing.Point(218, 7);
+            this.btnAverage.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnAverage.Location = new System.Drawing.Point(231, 7);
             this.btnAverage.Name = "btnAverage";
             this.btnAverage.Size = new System.Drawing.Size(200, 40);
             this.btnAverage.TabIndex = 16;
@@ -166,7 +176,8 @@
             // 
             // btnGrayscale
             // 
-            this.btnGrayscale.Location = new System.Drawing.Point(218, 56);
+            this.btnGrayscale.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnGrayscale.Location = new System.Drawing.Point(231, 56);
             this.btnGrayscale.Name = "btnGrayscale";
             this.btnGrayscale.Size = new System.Drawing.Size(200, 40);
             this.btnGrayscale.TabIndex = 17;
@@ -175,7 +186,8 @@
             // 
             // btnGreen
             // 
-            this.btnGreen.Location = new System.Drawing.Point(218, 142);
+            this.btnGreen.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnGreen.Location = new System.Drawing.Point(231, 142);
             this.btnGreen.Name = "btnGreen";
             this.btnGreen.Size = new System.Drawing.Size(200, 40);
             this.btnGreen.TabIndex = 19;
@@ -184,7 +196,8 @@
             // 
             // btnRed
             // 
-            this.btnRed.Location = new System.Drawing.Point(218, 98);
+            this.btnRed.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnRed.Location = new System.Drawing.Point(231, 98);
             this.btnRed.Name = "btnRed";
             this.btnRed.Size = new System.Drawing.Size(200, 40);
             this.btnRed.TabIndex = 18;
@@ -193,7 +206,8 @@
             // 
             // btnBlue
             // 
-            this.btnBlue.Location = new System.Drawing.Point(218, 187);
+            this.btnBlue.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnBlue.Location = new System.Drawing.Point(231, 187);
             this.btnBlue.Name = "btnBlue";
             this.btnBlue.Size = new System.Drawing.Size(200, 40);
             this.btnBlue.TabIndex = 20;
@@ -202,7 +216,8 @@
             // 
             // btnInvert
             // 
-            this.btnInvert.Location = new System.Drawing.Point(218, 231);
+            this.btnInvert.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnInvert.Location = new System.Drawing.Point(231, 231);
             this.btnInvert.Name = "btnInvert";
             this.btnInvert.Size = new System.Drawing.Size(200, 40);
             this.btnInvert.TabIndex = 21;
@@ -211,7 +226,8 @@
             // 
             // btnMaximum
             // 
-            this.btnMaximum.Location = new System.Drawing.Point(218, 316);
+            this.btnMaximum.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnMaximum.Location = new System.Drawing.Point(231, 316);
             this.btnMaximum.Name = "btnMaximum";
             this.btnMaximum.Size = new System.Drawing.Size(200, 40);
             this.btnMaximum.TabIndex = 12;
@@ -220,7 +236,8 @@
             // 
             // btnMinimum
             // 
-            this.btnMinimum.Location = new System.Drawing.Point(218, 362);
+            this.btnMinimum.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnMinimum.Location = new System.Drawing.Point(231, 362);
             this.btnMinimum.Name = "btnMinimum";
             this.btnMinimum.Size = new System.Drawing.Size(200, 40);
             this.btnMinimum.TabIndex = 13;
@@ -229,7 +246,8 @@
             // 
             // btnPixellate
             // 
-            this.btnPixellate.Location = new System.Drawing.Point(218, 406);
+            this.btnPixellate.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnPixellate.Location = new System.Drawing.Point(231, 406);
             this.btnPixellate.Name = "btnPixellate";
             this.btnPixellate.Size = new System.Drawing.Size(200, 40);
             this.btnPixellate.TabIndex = 14;
@@ -239,24 +257,27 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(247, 287);
+            this.label1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Location = new System.Drawing.Point(260, 287);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 12);
+            this.label1.Size = new System.Drawing.Size(52, 19);
             this.label1.TabIndex = 19;
             this.label1.Text = "Rank:";
             // 
             // txtRank
             // 
-            this.txtRank.Location = new System.Drawing.Point(289, 284);
+            this.txtRank.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.txtRank.Location = new System.Drawing.Point(302, 284);
             this.txtRank.Name = "txtRank";
-            this.txtRank.Size = new System.Drawing.Size(38, 22);
+            this.txtRank.Size = new System.Drawing.Size(38, 30);
             this.txtRank.TabIndex = 11;
             this.txtRank.Text = "9";
             this.txtRank.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btnPointellate
             // 
-            this.btnPointellate.Location = new System.Drawing.Point(218, 451);
+            this.btnPointellate.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnPointellate.Location = new System.Drawing.Point(231, 451);
             this.btnPointellate.Name = "btnPointellate";
             this.btnPointellate.Size = new System.Drawing.Size(200, 40);
             this.btnPointellate.TabIndex = 15;
@@ -265,6 +286,7 @@
             // 
             // btnEmboss3
             // 
+            this.btnEmboss3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnEmboss3.Location = new System.Drawing.Point(12, 93);
             this.btnEmboss3.Name = "btnEmboss3";
             this.btnEmboss3.Size = new System.Drawing.Size(200, 40);
@@ -274,7 +296,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(665, 113);
+            this.richTextBox1.Location = new System.Drawing.Point(675, 118);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 22;
@@ -282,7 +304,7 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(686, 166);
+            this.bt_clear.Location = new System.Drawing.Point(696, 171);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(60, 30);
             this.bt_clear.TabIndex = 23;
@@ -292,7 +314,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(665, 7);
+            this.pictureBox1.Location = new System.Drawing.Point(675, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.TabIndex = 24;
@@ -304,7 +326,7 @@
             this.groupBox1.Controls.Add(this.bt_image_process_b1);
             this.groupBox1.Controls.Add(this.bt_image_process_b2);
             this.groupBox1.Controls.Add(this.bt_image_process_b3);
-            this.groupBox1.Location = new System.Drawing.Point(425, 362);
+            this.groupBox1.Location = new System.Drawing.Point(444, 362);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(226, 181);
             this.groupBox1.TabIndex = 49;
@@ -312,6 +334,7 @@
             // 
             // bt_image_process_b0
             // 
+            this.bt_image_process_b0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_b0.Location = new System.Drawing.Point(6, 12);
             this.bt_image_process_b0.Name = "bt_image_process_b0";
             this.bt_image_process_b0.Size = new System.Drawing.Size(200, 40);
@@ -322,6 +345,7 @@
             // 
             // bt_image_process_b1
             // 
+            this.bt_image_process_b1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_b1.Location = new System.Drawing.Point(6, 52);
             this.bt_image_process_b1.Name = "bt_image_process_b1";
             this.bt_image_process_b1.Size = new System.Drawing.Size(200, 40);
@@ -332,6 +356,7 @@
             // 
             // bt_image_process_b2
             // 
+            this.bt_image_process_b2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_b2.Location = new System.Drawing.Point(6, 92);
             this.bt_image_process_b2.Name = "bt_image_process_b2";
             this.bt_image_process_b2.Size = new System.Drawing.Size(200, 40);
@@ -342,6 +367,7 @@
             // 
             // bt_image_process_b3
             // 
+            this.bt_image_process_b3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_b3.Location = new System.Drawing.Point(6, 131);
             this.bt_image_process_b3.Name = "bt_image_process_b3";
             this.bt_image_process_b3.Size = new System.Drawing.Size(200, 40);
@@ -359,7 +385,7 @@
             this.groupBox2.Controls.Add(this.bt_image_process_a2);
             this.groupBox2.Controls.Add(this.bt_image_process_a4);
             this.groupBox2.Controls.Add(this.bt_image_process_a3);
-            this.groupBox2.Location = new System.Drawing.Point(424, 12);
+            this.groupBox2.Location = new System.Drawing.Point(444, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(225, 344);
             this.groupBox2.TabIndex = 50;
@@ -367,6 +393,7 @@
             // 
             // bt_image_process_a7
             // 
+            this.bt_image_process_a7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_a7.Location = new System.Drawing.Point(6, 299);
             this.bt_image_process_a7.Name = "bt_image_process_a7";
             this.bt_image_process_a7.Size = new System.Drawing.Size(200, 40);
@@ -376,6 +403,7 @@
             // 
             // bt_image_process_a0
             // 
+            this.bt_image_process_a0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_a0.Location = new System.Drawing.Point(6, 14);
             this.bt_image_process_a0.Name = "bt_image_process_a0";
             this.bt_image_process_a0.Size = new System.Drawing.Size(200, 40);
@@ -386,6 +414,7 @@
             // 
             // bt_image_process_a6
             // 
+            this.bt_image_process_a6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_a6.Location = new System.Drawing.Point(6, 261);
             this.bt_image_process_a6.Name = "bt_image_process_a6";
             this.bt_image_process_a6.Size = new System.Drawing.Size(200, 40);
@@ -395,6 +424,7 @@
             // 
             // bt_image_process_a1
             // 
+            this.bt_image_process_a1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_a1.Location = new System.Drawing.Point(6, 60);
             this.bt_image_process_a1.Name = "bt_image_process_a1";
             this.bt_image_process_a1.Size = new System.Drawing.Size(200, 40);
@@ -405,6 +435,7 @@
             // 
             // bt_image_process_a5
             // 
+            this.bt_image_process_a5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_a5.Location = new System.Drawing.Point(6, 222);
             this.bt_image_process_a5.Name = "bt_image_process_a5";
             this.bt_image_process_a5.Size = new System.Drawing.Size(200, 40);
@@ -415,6 +446,7 @@
             // 
             // bt_image_process_a2
             // 
+            this.bt_image_process_a2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_a2.Location = new System.Drawing.Point(6, 100);
             this.bt_image_process_a2.Name = "bt_image_process_a2";
             this.bt_image_process_a2.Size = new System.Drawing.Size(200, 40);
@@ -425,6 +457,7 @@
             // 
             // bt_image_process_a4
             // 
+            this.bt_image_process_a4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_a4.Location = new System.Drawing.Point(6, 183);
             this.bt_image_process_a4.Name = "bt_image_process_a4";
             this.bt_image_process_a4.Size = new System.Drawing.Size(200, 40);
@@ -435,6 +468,7 @@
             // 
             // bt_image_process_a3
             // 
+            this.bt_image_process_a3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_image_process_a3.Location = new System.Drawing.Point(6, 142);
             this.bt_image_process_a3.Name = "bt_image_process_a3";
             this.bt_image_process_a3.Size = new System.Drawing.Size(200, 40);
@@ -445,7 +479,8 @@
             // 
             // btnGrayscale2
             // 
-            this.btnGrayscale2.Location = new System.Drawing.Point(218, 497);
+            this.btnGrayscale2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnGrayscale2.Location = new System.Drawing.Point(231, 497);
             this.btnGrayscale2.Name = "btnGrayscale2";
             this.btnGrayscale2.Size = new System.Drawing.Size(200, 40);
             this.btnGrayscale2.TabIndex = 51;
@@ -455,7 +490,7 @@
             // bt_reset
             // 
             this.bt_reset.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_reset.Location = new System.Drawing.Point(686, 47);
+            this.bt_reset.Location = new System.Drawing.Point(696, 52);
             this.bt_reset.Name = "bt_reset";
             this.bt_reset.Size = new System.Drawing.Size(66, 40);
             this.bt_reset.TabIndex = 229;
@@ -467,7 +502,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(812, 643);
+            this.ClientSize = new System.Drawing.Size(911, 698);
             this.Controls.Add(this.bt_reset);
             this.Controls.Add(this.btnGrayscale2);
             this.Controls.Add(this.groupBox2);

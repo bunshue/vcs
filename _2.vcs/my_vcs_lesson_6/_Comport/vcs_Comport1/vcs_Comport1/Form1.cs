@@ -17,16 +17,10 @@ namespace vcs_Comport1
     {
         SerialPort serialPort1 = new SerialPort();
 
-        /// <summary>
-        /// 定义委托
-        /// </summary>
-        /// <param name="a"></param>
+        // 定义委托
         public delegate void ShowString(string a);
 
-        /// <summary>
-        /// 字符显示在文本框
-        /// </summary>
-        /// <param name="a"></param>
+        // 字符显示在文本框
         public void ShowTxt(string a)
         {
             this.richTextBox1.AppendText(DateTime.Now.ToString() + "|" + a + "\n");
@@ -36,13 +30,9 @@ namespace vcs_Comport1
             }
         }
 
-        /// <summary>
-        /// 定义委托并初始化
-        /// </summary>
+        // 定义委托并初始化
         ShowString AA;
-        /// <summary>
-        /// 接收字符串存储
-        /// </summary>
+        // 接收字符串存储
         string ReadStr = "";
         public Form1()
         {
