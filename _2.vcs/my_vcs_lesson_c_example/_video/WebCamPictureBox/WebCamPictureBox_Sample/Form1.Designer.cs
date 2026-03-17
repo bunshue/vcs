@@ -73,7 +73,7 @@ namespace WebCamPictureBox_Sample
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(362, 95);
+            this.button4.Location = new System.Drawing.Point(658, 96);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(64, 74);
             this.button4.TabIndex = 5;
@@ -93,30 +93,30 @@ namespace WebCamPictureBox_Sample
             // 
             // webCamPictureBox2
             // 
+            this.webCamPictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.webCamPictureBox2.Image = global::WebCamPictureBox_Sample.Properties.Resources.WebPictureBox;
-            this.webCamPictureBox2.Location = new System.Drawing.Point(449, 12);
+            this.webCamPictureBox2.Location = new System.Drawing.Point(727, 12);
             this.webCamPictureBox2.Name = "webCamPictureBox2";
-            this.webCamPictureBox2.Size = new System.Drawing.Size(320, 240);
-            this.webCamPictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.webCamPictureBox2.Size = new System.Drawing.Size(640, 480);
             this.webCamPictureBox2.TabIndex = 4;
             this.webCamPictureBox2.TabStop = false;
             // 
             // webCamPictureBox1
             // 
+            this.webCamPictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.webCamPictureBox1.Image = global::WebCamPictureBox_Sample.Properties.Resources.WebPictureBox;
             this.webCamPictureBox1.Location = new System.Drawing.Point(12, 12);
             this.webCamPictureBox1.Name = "webCamPictureBox1";
-            this.webCamPictureBox1.Size = new System.Drawing.Size(320, 240);
-            this.webCamPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.webCamPictureBox1.Size = new System.Drawing.Size(640, 480);
             this.webCamPictureBox1.TabIndex = 0;
             this.webCamPictureBox1.TabStop = false;
             this.webCamPictureBox1.ConnectStateChanged += new System.EventHandler(this.webCamPictureBox1_WebCamConnectStateChanged);
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(868, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(727, 498);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(364, 507);
+            this.richTextBox1.Size = new System.Drawing.Size(640, 236);
             this.richTextBox1.TabIndex = 10;
             this.richTextBox1.Text = "";
             // 
@@ -124,7 +124,7 @@ namespace WebCamPictureBox_Sample
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1244, 696);
+            this.ClientSize = new System.Drawing.Size(1379, 746);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);

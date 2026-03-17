@@ -1,4 +1,50 @@
 ﻿
+		
+		    public class Book
+    {
+        public string Id { get; set; }
+        public string BkName { get; set; }
+        public int Price { get; set; }
+        public string Img { get; set; }
+    }
+	
+            Book[] bk = new Book[]
+            {
+                new Book(){ Id="AEL014200", BkName="Visual C# 2012 程式設計經典", Price=650, Img="images/cs2012.jpg"},
+                new Book(){ Id="AEL009400", BkName="Visual C# 2012 基礎必修課", Price=520, Img="images/cs2010.jpg"},
+                new Book(){ Id="AEL009500", BkName="Visual Basic 2010 程式設計經典", Price=520, Img="images/vb2010.jpg"}
+            };
+			
+
+
+//6060
+
+
+
+        object locker = new object();
+
+
+
+            lock (locker)
+            {
+                if (lastFrame == null)
+                {
+                    throw new ApplicationException("No frame capture yet.");
+                }
+                return (Bitmap)lastFrame.Clone();
+            }
+
+
+            lock (locker)
+            {
+                lastFrame = (Bitmap)eventArgs.Frame.Clone();
+            }
+
+
+
+//6060
+
+
 vcs
 每逢整點時跳一個clock顯示5秒即消失
 

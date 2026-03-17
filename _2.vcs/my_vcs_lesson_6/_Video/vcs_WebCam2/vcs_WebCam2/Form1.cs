@@ -170,6 +170,7 @@ namespace vcs_WebCam2
             this.ActiveControl = pictureBox1;//选中pictureBox1，不然没法触发事件
 
             show_item_location();
+
             Init_WebcamSetup();
         }
 
@@ -310,7 +311,6 @@ namespace vcs_WebCam2
             lb_main_mesg.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             lb_fps.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
-
             x_st = BORDER;
             y_st = 120;
             dx = 55;
@@ -325,14 +325,16 @@ namespace vcs_WebCam2
             lb_yuv_v.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             panel1.Location = new Point(x_st + dx * 3 + 10, y_st + dy * 0);
 
-
-
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             lb_main_mesg.Text = "";
 
             bt_start.Enabled = true;
             bt_stop.Enabled = false;
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -351,6 +353,7 @@ namespace vcs_WebCam2
 
             try
             {
+                //枚舉所有視頻輸入設備
                 USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //實例化對象
                 webcam_count = USBWebcams.Count;
                 richTextBox1.Text += "找到 " + webcam_count.ToString() + " 台WebCam\n";
@@ -1053,11 +1056,8 @@ namespace vcs_WebCam2
                 }
                 richTextBox1.Text += "\n";
             }
-            richTextBox1.Text += "\n";
 
-
-            richTextBox1.Text += "USBWebcams.Count : " + USBWebcams.Count.ToString() + "\n";
-
+            richTextBox1.Text += "\nUSBWebcams.Count : " + USBWebcams.Count.ToString() + "\n";
 
             int webcam_count = USBWebcams.Count;
             richTextBox1.Text += "找到 " + webcam_count.ToString() + " 台WebCam\n";
@@ -1606,3 +1606,90 @@ namespace vcs_WebCam2
         }
     }
 }
+
+/*
+            for (int i = 0; i < USBWebcams.Count; i++)
+            {
+                if (USBWebcams[i].Name.Contains("Microsoft"))
+                {
+                    Cam = new VideoCaptureDevice(USBWebcams[i].MonikerString);
+                    break;
+                }
+            }
+*/
+
+
+/* 測試無效~~~~
+richTextBox1.Text += "ttttt\n";
+short v = 0;
+Cam.SetCameraProperty(CameraControlProperty.Focus, v, CameraControlFlags.Manual);
+Cam.SetCameraProperty(CameraControlProperty.Exposure, v, CameraControlFlags.Manual);
+Cam.SetCameraProperty(CameraControlProperty.Iris, v, CameraControlFlags.Manual);
+Cam.SetCameraProperty(CameraControlProperty.Pan, v, CameraControlFlags.Manual);
+Cam.SetCameraProperty(CameraControlProperty.Roll, v, CameraControlFlags.Manual);
+Cam.SetCameraProperty(CameraControlProperty.Tilt, v, CameraControlFlags.Manual);
+Cam.SetCameraProperty(CameraControlProperty.Zoom, v, CameraControlFlags.Manual);
+*/
+
+
+/*
+        private FilterInfoCollection USBWebcams = null;
+        private VideoCaptureDevice Cam = null;
+
+        int webcam_w = 640;
+        int webcam_h = 480;
+        int webcam_fps = 30;
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //離開程式前, 關閉相機(錄影與播放)
+            ///先關閉錄影  再關閉播放
+
+            if (flag_recording == true)
+            {
+                try
+                {
+                    bt_record_stop_Click(sender, e);
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "xxx錯誤訊息e01 : " + ex.Message + "\n";
+                }
+            }
+
+            if (Cam != null)
+            {
+                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                {
+                    Cam.Stop();   // WebCam stops capturing images.
+                    Cam.SignalToStop();
+                    Cam.WaitForStop();
+                }
+            }
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            //show_main_message("離開", S_OK, 20);
+            bt_record_stop_Click(sender, e);
+            Application.Exit();
+
+            show_main_message("測試自動錄影", S_OK, 20);
+            test_auto_record();
+        }
+
+class CameraMonitor
+{
+    public void StopCapture()
+    {
+        if (this.Cam.IsRunning == true)
+        {
+            // we must stop the VideoCaptureDevice when done to free it so it can be used by other applications
+            this.Cam.Stop();
+        }
+    }
+
+}
+ */
+
+

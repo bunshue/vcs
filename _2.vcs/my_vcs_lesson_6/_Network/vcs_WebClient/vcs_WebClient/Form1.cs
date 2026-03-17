@@ -50,10 +50,10 @@ namespace vcs_WebClient
         {
             int x_st = 10;
             int y_st = 10;
-            int w = 120;
+            int w = 200;
             int h = 50;
-            int dx = w + 5;
-            int dy = h + 5;
+            int dx = w + 10;
+            int dy = h + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -93,11 +93,16 @@ namespace vcs_WebClient
             webBrowser1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
 
             pictureBox1.Size = new Size(600, 250);
-            pictureBox1.Location = new Point(x_st + dx * 5, y_st + dy * 10);
+            pictureBox1.Location = new Point(x_st + dx * 4, y_st + dy * 10);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1260, 870);
+            this.Size = new Size(1600, 930);
+            this.Text = "vcs_WebClient";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -1151,8 +1156,33 @@ namespace vcs_WebClient
 
         private void button25_Click(object sender, EventArgs e)
         {
-
+            //test
+            WebClient wc = new WebClient();
+            wc.DownloadStringAsync(new Uri("http://data.taipei.gov.tw/opendata/apply/json/RjQzRThDNjUtMzU3OS00MTU5LUEwOUEtMUI2NzFDOTE5NDcz"));
+            wc.DownloadStringCompleted += wc_DownloadStringCompleted333;
         }
+
+        void wc_DownloadStringCompleted333(object sender, DownloadStringCompletedEventArgs e)
+        {
+            /* do something
+            JArray spaJspn = JsonConvert.DeserializeObject<JArray>(e.Result);
+            int i = 0;
+            foreach (var s in spaJspn)
+            {
+                this.Items.Add(new SPAPlace()
+                {
+                    ID = i,
+                    PlaceName = (string)s["name"],
+                    Address = (string)s["poi_addr"],
+                    Tel = (string)s["tel"],
+                    Lng = (double)s["X"],
+                    Lat = (double)s["Y"]
+                });
+                i++;
+            }
+            */
+        }
+
 
         private void button26_Click(object sender, EventArgs e)
         {
