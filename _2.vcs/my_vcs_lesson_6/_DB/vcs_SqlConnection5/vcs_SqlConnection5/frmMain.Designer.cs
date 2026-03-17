@@ -50,6 +50,7 @@
             this.lb_dgv3 = new System.Windows.Forms.Label();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.dataGridView5 = new System.Windows.Forms.DataGridView();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
@@ -63,7 +64,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(120, 108);
             this.button1.TabIndex = 3;
-            this.button1.Text = "產品類別管理\r\n產品資料管理\r\n產品關聯查詢";
+            this.button1.Text = "兩個表單";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -253,11 +254,22 @@
             this.dataGridView5.Size = new System.Drawing.Size(450, 220);
             this.dataGridView5.TabIndex = 37;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(160, 13);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(120, 108);
+            this.button2.TabIndex = 38;
+            this.button2.Text = "產品類別管理\r\n產品資料管理\r\n產品關聯查詢";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1268, 781);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.dataGridView5);
             this.Controls.Add(this.dataGridView4);
             this.Controls.Add(this.lb_dgv3);
@@ -317,5 +329,6 @@
         private System.Windows.Forms.Label lb_dgv3;
         private System.Windows.Forms.DataGridView dataGridView4;
         private System.Windows.Forms.DataGridView dataGridView5;
+        private System.Windows.Forms.Button button2;
     }
 }

@@ -30,10 +30,8 @@ namespace vcs_SqlConnection5
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        void show_product_data()
         {
-            //產品類別管理
-
             //取得產品類別, 並顯示dataGridView1上
             using (SqlConnection cn = new SqlConnection(db_cnstr))
             {
@@ -41,8 +39,42 @@ namespace vcs_SqlConnection5
                 DataSet ds = new DataSet();  // 建立DataSet來儲存Table
                 da.Fill(ds);  // 將DataAdapter查詢之後的結果填充至DataSet
                 dataGridView1.DataSource = ds.Tables[0];
-                lb_dgv1.Text = "產品類別管理";
+                lb_dgv1.Text = "產品類別";
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //兩個表單
+
+            //產品類別 => dataGridView1
+            using (SqlConnection cn = new SqlConnection(db_cnstr))
+            {
+                SqlDataAdapter da = new SqlDataAdapter("SELECT * From 產品類別", cn);
+                DataSet ds = new DataSet();  // 建立DataSet來儲存Table
+                da.Fill(ds);  // 將DataAdapter查詢之後的結果填充至DataSet
+                dataGridView1.DataSource = ds.Tables[0];
+                lb_dgv1.Text = "產品類別";
+            }
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //產品資料 => dataGridView2
+            using (SqlConnection cn = new SqlConnection(db_cnstr))
+            {
+                SqlDataAdapter da = new SqlDataAdapter("SELECT * From 產品資料", cn);
+                DataSet ds = new DataSet();  // 建立DataSet來儲存Table
+                da.Fill(ds);  // 將DataAdapter查詢之後的結果填充至DataSet
+                dataGridView2.DataSource = ds.Tables[0];
+                lb_dgv2.Text = "產品資料";
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //產品類別管理
+
+            show_product_data();
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
@@ -73,21 +105,15 @@ namespace vcs_SqlConnection5
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             //產品關聯查詢
-            using (SqlConnection cn = new SqlConnection(db_cnstr))
-            {
-                SqlDataAdapter da = new SqlDataAdapter("SELECT * From 產品類別", cn);
-                DataSet ds = new DataSet();  // 建立DataSet來儲存Table
-                da.Fill(ds);  // 將DataAdapter查詢之後的結果填充至DataSet
-                dataGridView4.DataSource = ds.Tables[0];
-            }
 
+            show_product_data();
 
             //查詢 類別編號 = 1 的資料
             //int CategoryId1 = 1;
 
             //取得目前產品類別dataGridView4所選取記錄的第一欄資料，即類別編號
             //並指定給CategoryId整數變數
-            int CategoryId2 = int.Parse(dataGridView4.CurrentRow.Cells[0].Value.ToString());
+            int CategoryId2 = 1;
             richTextBox1.Text += "CategoryId2 = " + CategoryId2.ToString() + "\n";
             //傳入類別編號CategoryId來取得該類別相對應的產品資料
             //接著將產品資料顯示在dataGridView5上
@@ -104,55 +130,46 @@ namespace vcs_SqlConnection5
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            //新增
+            //新增類別名稱
+            string new_item = "aaaaaaaaaaa";
+            txtName.Text = new_item;
+
             //呼叫Edit()方法並傳入INSERT陳述式新增產品類別記錄
             db.Edit("INSERT INTO 產品類別(類別名稱)VALUES(N'" + txtName.Text.Replace("'", "''") + "')");
 
-            using (SqlConnection cn = new SqlConnection(db_cnstr))
-            {
-                SqlDataAdapter da = new SqlDataAdapter("SELECT * From 產品類別", cn);
-                DataSet ds = new DataSet();  // 建立DataSet來儲存Table
-                da.Fill(ds);  // 將DataAdapter查詢之後的結果填充至DataSet
-                dataGridView1.DataSource = ds.Tables[0];
-            }
+            show_product_data();
 
             txtName.Text = "";
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            //修改
+            //修改, 修改 類別編號4 的 產品類別
+
+            int old_id = 4;
+
+            string new_name = "bbbbb";
+            txtName.Text = new_name;
+
             //呼叫Edit()方法並傳入UPDATE陳述式修改產品類別記錄
-            //dataGridView1.CurrentRow.Cells[0].Value.ToString()
             //取得DataGridView目前選取第一欄的資料，也就是類別編號欄位
-            db.Edit("UPDATE 產品類別 SET 類別名稱=N'" + txtName.Text.Replace("'", "''") + "' WHERE 類別編號=" + dataGridView1.CurrentRow.Cells[0].Value.ToString());
+            db.Edit("UPDATE 產品類別 SET 類別名稱=N'" + txtName.Text.Replace("'", "''") + "' WHERE 類別編號=" + old_id.ToString());
 
-            using (SqlConnection cn = new SqlConnection(db_cnstr))
-            {
-                SqlDataAdapter da = new SqlDataAdapter("SELECT * From 產品類別", cn);
-                DataSet ds = new DataSet();  // 建立DataSet來儲存Table
-                da.Fill(ds);  // 將DataAdapter查詢之後的結果填充至DataSet
-                dataGridView1.DataSource = ds.Tables[0];
-            }
-
-            txtName.Text = "";
+            show_product_data();
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             //刪除
+
+            int delete_id = 5;
+
             //呼叫Edit()方法並傳入DELETE陳述式刪除指定的產品類別記錄
-            db.Edit("DELETE FROM 產品類別 WHERE 類別編號=" + dataGridView1.CurrentRow.Cells[0].Value.ToString());
+            db.Edit("DELETE FROM 產品類別 WHERE 類別編號=" + delete_id.ToString());
+
+            delete_id = 6;
             //刪除與產品類別相關聯的產品資料
-            db.Edit("DELETE FROM 產品資料 WHERE 類別編號=" + dataGridView1.CurrentRow.Cells[0].Value.ToString());
+            db.Edit("DELETE FROM 產品資料 WHERE 類別編號=" + delete_id.ToString());
 
-            using (SqlConnection cn = new SqlConnection(db_cnstr))
-            {
-                SqlDataAdapter da = new SqlDataAdapter("SELECT * From 產品類別", cn);
-                DataSet ds = new DataSet();  // 建立DataSet來儲存Table
-                da.Fill(ds);  // 將DataAdapter查詢之後的結果填充至DataSet
-                dataGridView1.DataSource = ds.Tables[0];
-            }
-
-            txtName.Text = "";
+            show_product_data();
         }
 
         private void dataGridView1_Click(object sender, EventArgs e)
@@ -233,6 +250,7 @@ namespace vcs_SqlConnection5
         private void cboCategoryId_SelectedIndexChanged(object sender, EventArgs e)
         {
         }
+
     }
 
     class MyDBClass
@@ -281,5 +299,6 @@ namespace vcs_SqlConnection5
 //cboCategoryId.DisplayMember = "類別名稱";//指定Text屬性繫結的是類別名稱
 //cboCategoryId.ValueMember = "類別編號";  //指定Value屬性繫結的是類別編號
 
-
+//dataGridView1.CurrentRow.Cells[0].Value
+//dataGridView1.CurrentRow.Cells[0].Value
 
