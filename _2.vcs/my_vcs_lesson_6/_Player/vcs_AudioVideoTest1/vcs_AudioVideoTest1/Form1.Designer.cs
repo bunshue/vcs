@@ -71,9 +71,14 @@
             this.button27 = new System.Windows.Forms.Button();
             this.button28 = new System.Windows.Forms.Button();
             this.button29 = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.bt_soundplayer2 = new System.Windows.Forms.Button();
+            this.bt_soundplayer0 = new System.Windows.Forms.Button();
+            this.bt_soundplayer1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button2
@@ -104,7 +109,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 2;
-            this.button4.Text = "播放.wav檔(一次)";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -230,7 +234,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 13;
-            this.button1.Text = "停止.wav檔";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -263,7 +266,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 16;
-            this.button5.Text = "播放.wav檔(連續)";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -274,7 +276,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(200, 60);
             this.button6.TabIndex = 17;
-            this.button6.Text = "停止播放.wav檔";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -372,7 +373,6 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(200, 60);
             this.button15.TabIndex = 26;
-            this.button15.Text = "月亮代表我的心2";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -383,7 +383,6 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(200, 60);
             this.button16.TabIndex = 27;
-            this.button16.Text = "播放 wav或音樂檔";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -414,7 +413,6 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(200, 60);
             this.button19.TabIndex = 30;
-            this.button19.Text = "SoundPlayer all";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -518,11 +516,57 @@
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.bt_soundplayer2);
+            this.groupBox2.Controls.Add(this.bt_soundplayer0);
+            this.groupBox2.Controls.Add(this.bt_soundplayer1);
+            this.groupBox2.Location = new System.Drawing.Point(847, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(194, 266);
+            this.groupBox2.TabIndex = 20;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "soundplayer";
+            // 
+            // bt_soundplayer2
+            // 
+            this.bt_soundplayer2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_soundplayer2.Location = new System.Drawing.Point(6, 165);
+            this.bt_soundplayer2.Name = "bt_soundplayer2";
+            this.bt_soundplayer2.Size = new System.Drawing.Size(170, 50);
+            this.bt_soundplayer2.TabIndex = 43;
+            this.bt_soundplayer2.Text = "停止播放.wav檔";
+            this.bt_soundplayer2.UseVisualStyleBackColor = true;
+            this.bt_soundplayer2.Click += new System.EventHandler(this.bt_soundplayer2_Click);
+            // 
+            // bt_soundplayer0
+            // 
+            this.bt_soundplayer0.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_soundplayer0.Location = new System.Drawing.Point(6, 33);
+            this.bt_soundplayer0.Name = "bt_soundplayer0";
+            this.bt_soundplayer0.Size = new System.Drawing.Size(170, 50);
+            this.bt_soundplayer0.TabIndex = 41;
+            this.bt_soundplayer0.Text = "播放.wav檔(一次)";
+            this.bt_soundplayer0.UseVisualStyleBackColor = true;
+            this.bt_soundplayer0.Click += new System.EventHandler(this.bt_soundplayer0_Click);
+            // 
+            // bt_soundplayer1
+            // 
+            this.bt_soundplayer1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_soundplayer1.Location = new System.Drawing.Point(6, 99);
+            this.bt_soundplayer1.Name = "bt_soundplayer1";
+            this.bt_soundplayer1.Size = new System.Drawing.Size(170, 50);
+            this.bt_soundplayer1.TabIndex = 42;
+            this.bt_soundplayer1.Text = "播放.wav檔(連續)";
+            this.bt_soundplayer1.UseVisualStyleBackColor = true;
+            this.bt_soundplayer1.Click += new System.EventHandler(this.bt_soundplayer1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(851, 692);
+            this.ClientSize = new System.Drawing.Size(1076, 692);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button29);
             this.Controls.Add(this.button28);
             this.Controls.Add(this.button27);
@@ -563,6 +607,7 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -611,6 +656,10 @@
         private System.Windows.Forms.Button button27;
         private System.Windows.Forms.Button button28;
         private System.Windows.Forms.Button button29;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button bt_soundplayer2;
+        private System.Windows.Forms.Button bt_soundplayer0;
+        private System.Windows.Forms.Button bt_soundplayer1;
     }
 }
 

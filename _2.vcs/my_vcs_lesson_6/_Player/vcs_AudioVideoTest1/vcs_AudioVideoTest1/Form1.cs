@@ -140,10 +140,12 @@ namespace vcs_AudioVideoTest1
             sp.LoadAsync();  //设置播放的方法
             sp.Play(); //播放声音文件
             */
-        }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
+
+            //3030
+
+            //停止播放
+            /*
             //法一
             //直接使用 SoundPlayer 類別
             SoundPlayer sp = new SoundPlayer(@"D:\_git\vcs\_1.data\______test_files1\_wav\WindowsShutdown.wav");
@@ -153,6 +155,63 @@ namespace vcs_AudioVideoTest1
             //sp.SoundLocation = @"F:\_______mp3_ALL_all1\_mp3_0_中英日語文\《遥远的绝响--配乐朗诵余秋雨作品(共4篇)》.赵忠祥.[wav]\02.都江堰.wav";
 
             sp.Stop(); // 停止
+            */
+            //3030
+
+            /*
+            //播放 wav或音樂檔
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_wav\chimes.wav";
+
+            SoundPlayer sp = new SoundPlayer();
+            sp.SoundLocation = filename;
+            //sp.PlayLooping();   //沒效~~~
+            sp.Play(); // 撥放
+
+            //sp.Stop(); // 停止
+            */
+            /*  ok
+            //簡易播放wav的方法，僅可播放wav，不可播放mp3
+            filename = @"D:\_git\vcs\_1.data\______test_files1\_wav\WindowsShutdown.wav";
+            SoundPlayer sp = new SoundPlayer(filename);
+            sp.Play();
+            */
+
+
+            /*
+            //SoundPlayer all
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_wav\chimes.wav";
+
+            SoundPlayer sp;
+
+            //單一播放
+            sp = new SoundPlayer(filename);
+            sp.Play();
+            */
+
+            /*
+            //循環播放
+            sp = new SoundPlayer(filename);
+            sp.PlayLooping();
+
+            //停止播放
+            if (sp != null)
+            {
+                sp.Stop();
+            }
+            */
+
+            /*
+            using (SoundPlayer player = new SoundPlayer(Properties.Resources.tada))
+            {
+                player.Play();
+            }
+            */
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
 
         int number = 0;
@@ -198,46 +257,14 @@ namespace vcs_AudioVideoTest1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            PlayWav(@"D:\_git\vcs\_1.data\______test_files1\_wav\Frog.wav", false);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            PlayWav(@"D:\_git\vcs\_1.data\______test_files1\_wav\Frog.wav", true);
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            PlayWav(null, false);
-        }
-
-        // The player making the current sound.
-        private SoundPlayer Player = null;
-
-        // Dispose of the current player and
-        // play the indicated WAV file.
-        private void PlayWav(string filename, bool play_looping)
-        {
-            // Stop the player if it is running.
-            if (Player != null)
-            {
-                Player.Stop();
-                Player.Dispose();
-                Player = null;
-            }
-
-            // If we have no file name, we're done.
-            if (filename == null) return;
-            if (filename.Length == 0) return;
-
-            // Make the new player for the WAV file.
-            Player = new SoundPlayer(filename);
-
-            // Play.
-            if (play_looping)
-                Player.PlayLooping();
-            else
-                Player.Play();
         }
 
         public int MediaGetPosition()
@@ -376,8 +403,6 @@ namespace vcs_AudioVideoTest1
 
         private void button9_Click(object sender, EventArgs e)
         {
-            //從mp3中提取信息1
-
             //從mp3中提取信息 1
             //從mp3中提取信息
 
@@ -443,13 +468,10 @@ namespace vcs_AudioVideoTest1
 
             }
             fs.Close();
-
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //從mp3中提取信息2
-
             //從mp3中提取信息 2
             //get mp3 info
 
@@ -518,8 +540,6 @@ namespace vcs_AudioVideoTest1
                 richTextBox1.Text += "备注:" + sComm + "\n";
             }
             fs.Close();
-
-
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -786,27 +806,12 @@ namespace vcs_AudioVideoTest1
 
         private void button15_Click(object sender, EventArgs e)
         {
-            //月亮代表我的心2
+
 
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\_wav\chimes.wav";
-
-            SoundPlayer sp = new SoundPlayer();
-            sp.SoundLocation = filename;
-            //sp.PlayLooping();   //沒效~~~
-            sp.Play(); // 撥放
-
-            //sp.Stop(); // 停止
-
-            /*  ok
-            //簡易播放wav的方法，僅可播放wav，不可播放mp3
-            filename = @"D:\_git\vcs\_1.data\______test_files1\_wav\WindowsShutdown.wav";
-            SoundPlayer sp = new SoundPlayer(filename);
-            sp.Play();
-            */
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -821,33 +826,6 @@ namespace vcs_AudioVideoTest1
 
         private void button19_Click(object sender, EventArgs e)
         {
-            //SoundPlayer all
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\_wav\chimes.wav";
-
-            SoundPlayer sp;
-
-            //單一播放
-            sp = new SoundPlayer(filename);
-            sp.Play();
-
-            /*
-            //循環播放
-            sp = new SoundPlayer(filename);
-            sp.PlayLooping();
-
-            //停止播放
-            if (sp != null)
-            {
-                sp.Stop();
-            }
-            */
-
-            /*
-            using (SoundPlayer player = new SoundPlayer(Properties.Resources.tada))
-            {
-                player.Play();
-            }
-            */
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -898,6 +876,61 @@ namespace vcs_AudioVideoTest1
         private void button29_Click(object sender, EventArgs e)
         {
 
+        }
+
+        // The player making the current sound.
+        private SoundPlayer Player = null;
+
+        // Dispose of the current player and
+        // play the indicated WAV file.
+        private void PlayWav(string filename, bool play_looping)
+        {
+            // Stop the player if it is running.
+            if (Player != null)
+            {
+                Player.Stop();
+                Player.Dispose();
+                Player = null;
+            }
+
+            // If we have no file name, we're done.
+            if (filename == null)
+            {
+                return;
+            }
+            if (filename.Length == 0)
+            {
+                return;
+            }
+
+            // Make the new player for the WAV file.
+            Player = new SoundPlayer(filename);
+
+            // Play.
+            if (play_looping)
+            {
+                Player.PlayLooping();
+            }
+            else
+            {
+                Player.Play();
+            }
+        }
+
+        private void bt_soundplayer0_Click(object sender, EventArgs e)
+        {
+            PlayWav(@"D:\_git\vcs\_1.data\______test_files1\_wav\Frog.wav", false);
+        }
+
+        private void bt_soundplayer1_Click(object sender, EventArgs e)
+        {
+            PlayWav(@"D:\_git\vcs\_1.data\______test_files1\_wav\Frog.wav", true);
+
+        }
+
+        private void bt_soundplayer2_Click(object sender, EventArgs e)
+        {
+            PlayWav(null, false);
         }
 
     }

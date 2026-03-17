@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Threading;     // for Thread
-using System.Media;         // for SystemSounds     SystemSounds類別
 
 namespace vcs_AudioVideoTest2
 {
@@ -52,8 +51,6 @@ namespace vcs_AudioVideoTest2
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 4);
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 5);
             button13.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-
-            groupBox3.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 8 + 20);
 
@@ -210,27 +207,22 @@ namespace vcs_AudioVideoTest2
 
         private void button5_Click(object sender, EventArgs e)
         {
-            SystemSounds.Asterisk.Play();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            SystemSounds.Beep.Play();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            SystemSounds.Exclamation.Play();
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            SystemSounds.Hand.Play();
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            SystemSounds.Question.Play();
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -448,29 +440,5 @@ namespace vcs_AudioVideoTest2
         }
         //PC喇叭音效 SP
 
-        private void bt_system_sound0_Click(object sender, EventArgs e)
-        {
-            SystemSounds.Asterisk.Play();
-        }
-
-        private void bt_system_sound1_Click(object sender, EventArgs e)
-        {
-            SystemSounds.Beep.Play();
-        }
-
-        private void bt_system_sound2_Click(object sender, EventArgs e)
-        {
-            SystemSounds.Exclamation.Play();
-        }
-
-        private void bt_system_sound3_Click(object sender, EventArgs e)
-        {
-            SystemSounds.Hand.Play();
-        }
-
-        private void bt_system_sound4_Click(object sender, EventArgs e)
-        {
-            SystemSounds.Question.Play();
-        }
     }
 }

@@ -41,6 +41,7 @@ namespace vcs_SqlConnection5
                 DataSet ds = new DataSet();  // 建立DataSet來儲存Table
                 da.Fill(ds);  // 將DataAdapter查詢之後的結果填充至DataSet
                 dataGridView1.DataSource = ds.Tables[0];
+                lb_dgv1.Text = "產品類別管理";
             }
 
             richTextBox1.Text += "------------------------------\n";  // 30個
@@ -54,23 +55,19 @@ namespace vcs_SqlConnection5
                 DataSet ds = new DataSet();  // 建立DataSet來儲存Table
                 da.Fill(ds);  // 將DataAdapter查詢之後的結果填充至DataSet
                 cboCategoryId.DataSource = ds.Tables[0];
+                dataGridView3.DataSource = ds.Tables[0];
             }
 
-            cboCategoryId.DisplayMember = "類別名稱";//指定Text屬性繫結的是類別名稱
-            cboCategoryId.ValueMember = "類別編號";  //指定Value屬性繫結的是類別名稱
-            //取得目前清單中的Value值，即目前選取項目的類別編號
-            int CategoryId1 = int.Parse(cboCategoryId.SelectedValue.ToString());
-            richTextBox1.Text += "CategoryId1 = " + CategoryId1.ToString() + "\n";
-
-            //傳入類別編號
-            //依類別編號取得指定的產品資料並顯示於dataGridView1上
+            //查詢 類別編號 = 1 的資料
+            int CategoryId1 = 1;
             using (SqlConnection cn = new SqlConnection(db_cnstr))
             {
                 //依傳入的類別編號來傳回指定的產品資料的DataTable
                 SqlDataAdapter da = new SqlDataAdapter("SELECT 產品編號,品名,單價,說明 From 產品資料 WHERE 類別編號=" + CategoryId1, cn);
                 DataSet ds = new DataSet();
                 da.Fill(ds);
-                dataGridView1.DataSource = ds.Tables[0];
+                dataGridView2.DataSource = ds.Tables[0];
+                lb_dgv2.Text = "產品資料管理";
             }
 
             richTextBox1.Text += "------------------------------\n";  // 30個
@@ -81,24 +78,27 @@ namespace vcs_SqlConnection5
                 SqlDataAdapter da = new SqlDataAdapter("SELECT * From 產品類別", cn);
                 DataSet ds = new DataSet();  // 建立DataSet來儲存Table
                 da.Fill(ds);  // 將DataAdapter查詢之後的結果填充至DataSet
-                dgvCategory.DataSource = ds.Tables[0];
+                dataGridView4.DataSource = ds.Tables[0];
             }
 
-            //dgvCategory.Dock = DockStyle.Top;
-            //dgvProduct.Dock = DockStyle.Fill;
-            //取得目前產品類別dgvCategory所選取記錄的第一欄資料，即類別編號
+
+            //查詢 類別編號 = 1 的資料
+            //int CategoryId1 = 1;
+
+            //取得目前產品類別dataGridView4所選取記錄的第一欄資料，即類別編號
             //並指定給CategoryId整數變數
-            int CategoryId2 = int.Parse(dgvCategory.CurrentRow.Cells[0].Value.ToString());
+            int CategoryId2 = int.Parse(dataGridView4.CurrentRow.Cells[0].Value.ToString());
             richTextBox1.Text += "CategoryId2 = " + CategoryId2.ToString() + "\n";
             //傳入類別編號CategoryId來取得該類別相對應的產品資料
-            //接著將產品資料顯示在dgvProduct上
+            //接著將產品資料顯示在dataGridView5上
             using (SqlConnection cn = new SqlConnection(db_cnstr))
             {
                 //依傳入的類別編號來傳回指定的產品資料的DataTable
                 SqlDataAdapter da = new SqlDataAdapter("SELECT 產品編號,品名,單價,說明 From 產品資料 WHERE 類別編號=" + CategoryId2, cn);
                 DataSet ds = new DataSet();
                 da.Fill(ds);
-                dgvProduct.DataSource = ds.Tables[0];
+                dataGridView5.DataSource = ds.Tables[0];
+                lb_dgv3.Text = "產品關聯查詢";
             }
         }
 
@@ -155,26 +155,12 @@ namespace vcs_SqlConnection5
             txtName.Text = "";
         }
 
+        private void dataGridView1_Click(object sender, EventArgs e)
+        {
+        }
 
         private void dgvCategory_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "aaaa\n";
-            //產品類別dgvCategory上按一下執行
-            try
-            {
-                int CategoryId = int.Parse(dgvCategory.CurrentRow.Cells[0].Value.ToString());
-                richTextBox1.Text += "CategoryId = " + CategoryId.ToString() + "\n";
-                using (SqlConnection cn = new SqlConnection(db_cnstr))
-                {
-                    //依傳入的類別編號來傳回指定的產品資料的DataTable
-                    SqlDataAdapter da = new SqlDataAdapter("SELECT 產品編號,品名,單價,說明 From 產品資料 WHERE 類別編號=" + CategoryId, cn);
-                    DataSet ds = new DataSet();
-                    da.Fill(ds);
-                    dgvProduct.DataSource = ds.Tables[0];
-                }
-            }
-            catch (Exception ex)
-            { }
         }
 
         void TextBoxClear()  //清除文字方塊欄位
@@ -190,6 +176,7 @@ namespace vcs_SqlConnection5
                 txtName.Text.Replace("'", "''") + "'," +
                 txtPrice.Text + ",N'" +
                 txtMsg.Text.Replace("'", "''") + "')");
+
             int CategoryId1 = int.Parse(cboCategoryId.SelectedValue.ToString());
             richTextBox1.Text += "CategoryId1 = " + CategoryId1.ToString() + "\n";
             using (SqlConnection cn = new SqlConnection(db_cnstr))
@@ -211,6 +198,7 @@ namespace vcs_SqlConnection5
                 txtPrice.Text + ", 說明=N'" +
                 txtMsg.Text.Replace("'", "''") + "' WHERE 產品編號=" +
                 dataGridView1.CurrentRow.Cells[0].Value.ToString());
+
             int CategoryId2 = int.Parse(cboCategoryId.SelectedValue.ToString());
             richTextBox1.Text += "CategoryId2 = " + CategoryId2.ToString() + "\n";
             using (SqlConnection cn = new SqlConnection(db_cnstr))
@@ -228,6 +216,7 @@ namespace vcs_SqlConnection5
 
             //刪除
             db.Edit("DELETE FROM 產品資料 WHERE 產品編號=" + dataGridView1.CurrentRow.Cells[0].Value.ToString());
+
             int CategoryId3 = int.Parse(cboCategoryId.SelectedValue.ToString());
             richTextBox1.Text += "CategoryId3 = " + CategoryId3.ToString() + "\n";
             using (SqlConnection cn = new SqlConnection(db_cnstr))
@@ -241,25 +230,8 @@ namespace vcs_SqlConnection5
             TextBoxClear();
         }
 
-        //選取類別編號下拉式清單時執行
         private void cboCategoryId_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                int CategoryId = int.Parse(cboCategoryId.SelectedValue.ToString());
-                richTextBox1.Text += "CategoryId = " + CategoryId.ToString() + "\n";
-                using (SqlConnection cn = new SqlConnection(db_cnstr))
-                {
-                    //依傳入的類別編號來傳回指定的產品資料的DataTable
-                    SqlDataAdapter da = new SqlDataAdapter("SELECT 產品編號,品名,單價,說明 From 產品資料 WHERE 類別編號=" + CategoryId, cn);
-                    DataSet ds = new DataSet();
-                    da.Fill(ds);
-                    dataGridView1.DataSource = ds.Tables[0];
-                }
-            }
-            catch (Exception ex)
-            {
-            }
         }
     }
 
@@ -304,5 +276,10 @@ namespace vcs_SqlConnection5
 /*  可搬出
 
  */
+
+
+//cboCategoryId.DisplayMember = "類別名稱";//指定Text屬性繫結的是類別名稱
+//cboCategoryId.ValueMember = "類別編號";  //指定Value屬性繫結的是類別編號
+
 
 

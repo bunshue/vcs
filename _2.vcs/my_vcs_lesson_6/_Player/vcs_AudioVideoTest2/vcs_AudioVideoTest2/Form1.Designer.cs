@@ -45,6 +45,7 @@
             this.txtFrequency = new System.Windows.Forms.TextBox();
             this.Label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt_play_tone = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
@@ -62,16 +63,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
-            this.bt_play_tone = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.bt_system_sound4 = new System.Windows.Forms.Button();
-            this.bt_system_sound3 = new System.Windows.Forms.Button();
-            this.bt_system_sound2 = new System.Windows.Forms.Button();
-            this.bt_system_sound1 = new System.Windows.Forms.Button();
-            this.bt_system_sound0 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -134,7 +127,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(190, 40);
             this.button5.TabIndex = 5;
-            this.button5.Text = "Asterisk";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -145,7 +137,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(190, 40);
             this.button6.TabIndex = 6;
-            this.button6.Text = "Beep";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -156,7 +147,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(190, 40);
             this.button7.TabIndex = 7;
-            this.button7.Text = "Exclamation";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -167,7 +157,6 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(190, 40);
             this.button8.TabIndex = 8;
-            this.button8.Text = "Hand";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -178,7 +167,6 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(190, 40);
             this.button9.TabIndex = 9;
-            this.button9.Text = "Question";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -256,6 +244,17 @@
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Play tone";
+            // 
+            // bt_play_tone
+            // 
+            this.bt_play_tone.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_play_tone.Location = new System.Drawing.Point(63, 85);
+            this.bt_play_tone.Name = "bt_play_tone";
+            this.bt_play_tone.Size = new System.Drawing.Size(90, 40);
+            this.bt_play_tone.TabIndex = 23;
+            this.bt_play_tone.Text = "Play";
+            this.bt_play_tone.UseVisualStyleBackColor = true;
+            this.bt_play_tone.Click += new System.EventHandler(this.bt_play_tone_Click);
             // 
             // groupBox2
             // 
@@ -444,87 +443,11 @@
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
-            // bt_play_tone
-            // 
-            this.bt_play_tone.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_play_tone.Location = new System.Drawing.Point(63, 85);
-            this.bt_play_tone.Name = "bt_play_tone";
-            this.bt_play_tone.Size = new System.Drawing.Size(90, 40);
-            this.bt_play_tone.TabIndex = 23;
-            this.bt_play_tone.Text = "Play";
-            this.bt_play_tone.UseVisualStyleBackColor = true;
-            this.bt_play_tone.Click += new System.EventHandler(this.bt_play_tone_Click);
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.bt_system_sound4);
-            this.groupBox3.Controls.Add(this.bt_system_sound3);
-            this.groupBox3.Controls.Add(this.bt_system_sound2);
-            this.groupBox3.Controls.Add(this.bt_system_sound1);
-            this.groupBox3.Controls.Add(this.bt_system_sound0);
-            this.groupBox3.Location = new System.Drawing.Point(417, 12);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(176, 261);
-            this.groupBox3.TabIndex = 23;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "播放系統事件聲音";
-            // 
-            // bt_system_sound4
-            // 
-            this.bt_system_sound4.Location = new System.Drawing.Point(28, 211);
-            this.bt_system_sound4.Name = "bt_system_sound4";
-            this.bt_system_sound4.Size = new System.Drawing.Size(120, 30);
-            this.bt_system_sound4.TabIndex = 4;
-            this.bt_system_sound4.Text = "Question";
-            this.bt_system_sound4.UseVisualStyleBackColor = true;
-            this.bt_system_sound4.Click += new System.EventHandler(this.bt_system_sound4_Click);
-            // 
-            // bt_system_sound3
-            // 
-            this.bt_system_sound3.Location = new System.Drawing.Point(28, 163);
-            this.bt_system_sound3.Name = "bt_system_sound3";
-            this.bt_system_sound3.Size = new System.Drawing.Size(120, 30);
-            this.bt_system_sound3.TabIndex = 3;
-            this.bt_system_sound3.Text = "Hand";
-            this.bt_system_sound3.UseVisualStyleBackColor = true;
-            this.bt_system_sound3.Click += new System.EventHandler(this.bt_system_sound3_Click);
-            // 
-            // bt_system_sound2
-            // 
-            this.bt_system_sound2.Location = new System.Drawing.Point(28, 115);
-            this.bt_system_sound2.Name = "bt_system_sound2";
-            this.bt_system_sound2.Size = new System.Drawing.Size(120, 30);
-            this.bt_system_sound2.TabIndex = 2;
-            this.bt_system_sound2.Text = "Exclamation";
-            this.bt_system_sound2.UseVisualStyleBackColor = true;
-            this.bt_system_sound2.Click += new System.EventHandler(this.bt_system_sound2_Click);
-            // 
-            // bt_system_sound1
-            // 
-            this.bt_system_sound1.Location = new System.Drawing.Point(28, 69);
-            this.bt_system_sound1.Name = "bt_system_sound1";
-            this.bt_system_sound1.Size = new System.Drawing.Size(120, 30);
-            this.bt_system_sound1.TabIndex = 1;
-            this.bt_system_sound1.Text = "Beep";
-            this.bt_system_sound1.UseVisualStyleBackColor = true;
-            this.bt_system_sound1.Click += new System.EventHandler(this.bt_system_sound1_Click);
-            // 
-            // bt_system_sound0
-            // 
-            this.bt_system_sound0.Location = new System.Drawing.Point(28, 21);
-            this.bt_system_sound0.Name = "bt_system_sound0";
-            this.bt_system_sound0.Size = new System.Drawing.Size(120, 30);
-            this.bt_system_sound0.TabIndex = 0;
-            this.bt_system_sound0.Text = "Asterisk";
-            this.bt_system_sound0.UseVisualStyleBackColor = true;
-            this.bt_system_sound0.Click += new System.EventHandler(this.bt_system_sound0_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1227, 644);
-            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.button13);
             this.Controls.Add(this.button12);
@@ -550,7 +473,6 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -592,12 +514,6 @@
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button bt_play_tone;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button bt_system_sound4;
-        private System.Windows.Forms.Button bt_system_sound3;
-        private System.Windows.Forms.Button bt_system_sound2;
-        private System.Windows.Forms.Button bt_system_sound1;
-        private System.Windows.Forms.Button bt_system_sound0;
     }
 }
 
