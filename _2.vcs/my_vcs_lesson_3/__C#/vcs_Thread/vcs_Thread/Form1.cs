@@ -198,7 +198,13 @@ namespace vcs_Thread
             button92.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button100.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button101.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+
             this.Size = new Size(1000, 650);
+            this.Text = "vcs_Thread";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)

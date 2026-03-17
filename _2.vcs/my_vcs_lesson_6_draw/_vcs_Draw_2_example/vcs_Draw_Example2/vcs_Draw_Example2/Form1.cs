@@ -140,6 +140,10 @@ namespace vcs_Draw_Example2
 
             this.Size = new Size(1500, 900);
             this.Text = "vcs_Draw_Example2";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)

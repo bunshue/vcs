@@ -25,13 +25,13 @@ namespace vcs_DetectUSBDrive1
         {
             InitializeComponent();
         }
+
         protected override void WndProc(ref Message m)
         {
             const int WM_DEVICECHANGE = 0x219;
             const int DBT_DEVICEARRIVAL = 0x8000;
             const int DBT_DEVICEREMOVECOMPLETE = 0x8004;
 
-            object ojb = new object();
             try
             {
                 if (m.Msg == WM_DEVICECHANGE)       //電腦硬體裝置改變時產生的訊息
@@ -70,6 +70,11 @@ namespace vcs_DetectUSBDrive1
                     richTextBox1.Text += "偵測到  " + di.Name + "  抽取式存放裝置\n";
                 }
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
