@@ -116,6 +116,8 @@
             this.printDocument2 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog2 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog2 = new System.Windows.Forms.PrintDialog();
+            this.bt_print3 = new System.Windows.Forms.Button();
+            this.bt_print2b = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSkip)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPoints)).BeginInit();
@@ -853,16 +855,17 @@
             // bt_print
             // 
             this.bt_print.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_print.Location = new System.Drawing.Point(916, 144);
+            this.bt_print.Location = new System.Drawing.Point(896, 144);
             this.bt_print.Name = "bt_print";
-            this.bt_print.Size = new System.Drawing.Size(80, 40);
+            this.bt_print.Size = new System.Drawing.Size(100, 40);
             this.bt_print.TabIndex = 67;
-            this.bt_print.Text = "列印 ";
+            this.bt_print.Text = "預覽列印";
             this.bt_print.UseVisualStyleBackColor = true;
             this.bt_print.Click += new System.EventHandler(this.bt_print_Click);
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.bt_print2b);
             this.groupBox3.Controls.Add(this.label13);
             this.groupBox3.Controls.Add(this.textBox3);
             this.groupBox3.Controls.Add(this.bt_print2);
@@ -895,11 +898,11 @@
             // 
             // bt_print2
             // 
-            this.bt_print2.Location = new System.Drawing.Point(70, 108);
+            this.bt_print2.Location = new System.Drawing.Point(20, 109);
             this.bt_print2.Name = "bt_print2";
-            this.bt_print2.Size = new System.Drawing.Size(75, 23);
+            this.bt_print2.Size = new System.Drawing.Size(80, 40);
             this.bt_print2.TabIndex = 0;
-            this.bt_print2.Text = "列印";
+            this.bt_print2.Text = "預覽列印";
             this.bt_print2.UseVisualStyleBackColor = true;
             this.bt_print2.Click += new System.EventHandler(this.bt_print2_Click);
             // 
@@ -953,11 +956,33 @@
             // 
             this.printDialog2.UseEXDialog = true;
             // 
+            // bt_print3
+            // 
+            this.bt_print3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_print3.Location = new System.Drawing.Point(896, 195);
+            this.bt_print3.Name = "bt_print3";
+            this.bt_print3.Size = new System.Drawing.Size(100, 40);
+            this.bt_print3.TabIndex = 69;
+            this.bt_print3.Text = "列印 ";
+            this.bt_print3.UseVisualStyleBackColor = true;
+            this.bt_print3.Click += new System.EventHandler(this.bt_print3_Click);
+            // 
+            // bt_print2b
+            // 
+            this.bt_print2b.Location = new System.Drawing.Point(106, 109);
+            this.bt_print2b.Name = "bt_print2b";
+            this.bt_print2b.Size = new System.Drawing.Size(80, 40);
+            this.bt_print2b.TabIndex = 7;
+            this.bt_print2b.Text = "列印";
+            this.bt_print2b.UseVisualStyleBackColor = true;
+            this.bt_print2b.Click += new System.EventHandler(this.bt_print2b_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1065, 878);
+            this.Controls.Add(this.bt_print3);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.bt_print);
             this.Controls.Add(this.printPreviewControl1);
@@ -1093,6 +1118,8 @@
         private System.Drawing.Printing.PrintDocument printDocument2;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog2;
         private System.Windows.Forms.PrintDialog printDialog2;
+        private System.Windows.Forms.Button bt_print3;
+        private System.Windows.Forms.Button bt_print2b;
     }
 }
 

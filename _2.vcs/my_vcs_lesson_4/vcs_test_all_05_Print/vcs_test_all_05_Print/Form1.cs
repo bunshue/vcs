@@ -76,7 +76,8 @@ namespace vcs_test_all_05_Print
 
             printPreviewControl1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             bt_print.Location = new Point(x_st + dx * 5, y_st + dy * 2 + 30);
-            groupBox3.Location = new Point(x_st + dx * 5, y_st + dy * 3+50);
+            bt_print3.Location = new Point(x_st + dx * 5 + 110, y_st + dy * 2 + 30);
+            groupBox3.Location = new Point(x_st + dx * 5, y_st + dy * 3 + 50);
 
             richTextBox1.Size = new Size(240, 400);
             richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 8);
@@ -1578,6 +1579,10 @@ namespace vcs_test_all_05_Print
         {
             printPreviewDialog1.Document = this.printDocument_preview;
             printPreviewDialog1.ShowDialog();
+        }
+
+        private void bt_print3_Click(object sender, EventArgs e)
+        {
             printDocument1.Print();
         }
 
@@ -1599,19 +1604,25 @@ namespace vcs_test_all_05_Print
 
         private void bt_print2_Click(object sender, EventArgs e)
         {
-            printDialog2.ShowDialog();
             printPreviewDialog2.Document = this.printDocument2;
             printPreviewDialog2.ShowDialog();
         }
 
+        private void bt_print2b_Click(object sender, EventArgs e)
+        {
+            printDialog2.ShowDialog();
+        }
+
         private void printDocument2_PrintPage(object sender, PrintPageEventArgs e)
         {
-            e.Graphics.DrawString(label1.Text, new Font("細明體", 10, FontStyle.Regular), Brushes.Black, 260, 400);
-            e.Graphics.DrawString(textBox1.Text, new Font("細明體", 10, FontStyle.Regular), Brushes.Black, 330, 400);
-            e.Graphics.DrawString(label2.Text, new Font("細明體", 10, FontStyle.Regular), Brushes.Black, 270, 420);
-            e.Graphics.DrawString(textBox2.Text, new Font("細明體", 10, FontStyle.Regular), Brushes.Black, 330, 420);
-            e.Graphics.DrawString(label3.Text, new Font("細明體", 10, FontStyle.Regular), Brushes.Black, 270, 440);
-            e.Graphics.DrawString(textBox3.Text, new Font("細明體", 10, FontStyle.Regular), Brushes.Black, 330, 440);
+            int x_st = 100;
+            int y_st = 100;
+            int dy = 60;
+            e.Graphics.DrawString("老來多驚夢，", new Font("細明體", 36, FontStyle.Regular), Brushes.Black, x_st, y_st);
+            e.Graphics.DrawString("似有獻刀人，", new Font("細明體", 36, FontStyle.Regular), Brushes.Black, x_st, y_st + dy * 1);
+            e.Graphics.DrawString("醒來懼銅鏡，", new Font("細明體", 36, FontStyle.Regular), Brushes.Black, x_st, y_st + dy * 2);
+            e.Graphics.DrawString("怕顯董賊身。", new Font("細明體", 36, FontStyle.Regular), Brushes.Black, x_st, y_st + dy * 3);
         }
     }
 }
+

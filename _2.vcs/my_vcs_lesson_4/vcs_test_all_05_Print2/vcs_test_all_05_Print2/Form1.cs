@@ -55,7 +55,6 @@ namespace vcs_test_all_05_Print2
 
             button20.Enabled = false;
             button21.Enabled = false;
-            button22.Enabled = false;
             button30.Enabled = false;
             button31.Enabled = false;
         }
@@ -349,7 +348,8 @@ namespace vcs_test_all_05_Print2
 
         private void button22_Click(object sender, EventArgs e)
         {
-
+            //預覽列印
+            printPreviewDialog2.ShowDialog();
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -368,9 +368,9 @@ namespace vcs_test_all_05_Print2
 
         private void printDocument2_PrintPage(object sender, PrintPageEventArgs e)
         {
-            string text = "千江有水千月，萬里晴空萬里晴";
-            Font oneFont = new Font("標楷體", 35, FontStyle.Bold);
-            e.Graphics.DrawString(text, oneFont, Brushes.Blue, 10, 10);
+            string text = "千江有水千月，\n萬里晴空萬里晴";
+            Font oneFont = new Font("標楷體", 50, FontStyle.Bold);
+            e.Graphics.DrawString(text, oneFont, Brushes.Blue, 50, 50);
         }
 
         //------------------------------------------------------------  # 60個
