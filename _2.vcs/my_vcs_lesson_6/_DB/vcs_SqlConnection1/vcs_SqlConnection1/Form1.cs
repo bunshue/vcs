@@ -13,7 +13,7 @@ namespace vcs_SqlConnection1
 {
     public partial class Form1 : Form
     {
-        string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\{0};Integrated Security=True;Connect Timeout=30";
+        string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
 
         public Form1()
         {
@@ -68,17 +68,27 @@ namespace vcs_SqlConnection1
             button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            button30.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button34.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button35.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button36.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
             dataGridView1.Size = new Size(620, 400);
-            dataGridView1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            dataGridView1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             dataGridView2.Size = new Size(620, 400);
-            dataGridView2.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            dataGridView2.Location = new Point(x_st + dx * 4, y_st + dy * 6);
 
             richTextBox1.Size = new Size(400, 800);
-            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1720, 910);
+            this.Size = new Size(1910, 910);
             this.Text = "vcs_SqlConnection1";
 
             //設定執行後的表單起始位置, 正中央
@@ -952,9 +962,6 @@ namespace vcs_SqlConnection1
 
         private void button20_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "aaaaaaaaaaaaaaaaaa\n";
-
-            //string cnstr =  "Data Source=MR-PC\\YL;Database=db_TomeTwo;UID=sa;Pwd=;";//取连接字符串
             string db_filename = "db_TomeTwo.mdf";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
@@ -1011,7 +1018,6 @@ namespace vcs_SqlConnection1
             // 查询数据库信息
 
             //创建数据库连接字符串
-            //string P_Str_ConnectionStr = string.Format(@"server=MR-PC\YL;database=db_TomeTwo;uid=sa;pwd=");
             string P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
 
             //创建SQL查询字符串
@@ -1115,7 +1121,6 @@ namespace vcs_SqlConnection1
             string db_filename = "db_TomeTwo.mdf";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
-            //SqlConnection cn = new SqlConnection( "Data Source=MR-PC\\YL;Database=db_TomeTwo;Uid=sa;Pwd=;");//创建数据库连接对象
             //SqlConnection cn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30");//创建数据库连接对象
             SqlConnection cn = new SqlConnection(cnstr);//创建数据库连接对象
 
@@ -1254,8 +1259,115 @@ namespace vcs_SqlConnection1
         {
         }
 
+        private void showinfo()
+        {
+            string db_filename = "db_09_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+
+            using (SqlConnection con = new SqlConnection(cnstr))
+            {
+                DataTable dt = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter("select * from 員工表", con);
+                da.Fill(dt);
+                this.dataGridView1.DataSource = dt.DefaultView;
+            }
+        }
+
         private void button29_Click(object sender, EventArgs e)
         {
+            showinfo();
+
+            //3030
+
+            SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09");
+
+            //在文字框中輸入有效的SQL語句修改數據
+            string sql_command = "xxxxx";
+
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                try
+                {
+                    con.Open();
+                    cmd.Connection = con;
+                    cmd.CommandText = sql_command;
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    showinfo();
+                    MessageBox.Show("刪除成功");
+                }
+                catch
+                {
+                    MessageBox.Show("SQL語句有誤");
+                }
+            }
+        }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            //讀取資料庫
+            //讀取資料庫
+            //string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            //string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
+
+            //创建数据库连接对象
+            SqlConnection sqlcon = new SqlConnection(cnstr);
+
+            //创建适配器对象
+            SqlDataAdapter sqlda = new SqlDataAdapter("SELECT * FROM tb_Employee", sqlcon);
+
+            //创建数据集
+            DataSet ds = new DataSet();
+            sqlda.Fill(ds);//填充数据集
+
+            dataGridView1.DataSource = ds.Tables[0];//设置数据源
+
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button38_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button39_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

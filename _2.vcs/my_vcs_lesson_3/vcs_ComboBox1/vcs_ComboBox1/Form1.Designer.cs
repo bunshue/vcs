@@ -68,6 +68,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -361,14 +362,14 @@
             // 
             this.comboBox_add.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.comboBox_add.FormattingEnabled = true;
-            this.comboBox_add.Location = new System.Drawing.Point(435, 363);
+            this.comboBox_add.Location = new System.Drawing.Point(435, 333);
             this.comboBox_add.Name = "comboBox_add";
             this.comboBox_add.Size = new System.Drawing.Size(209, 29);
             this.comboBox_add.TabIndex = 25;
             // 
             // bt_add
             // 
-            this.bt_add.Location = new System.Drawing.Point(653, 363);
+            this.bt_add.Location = new System.Drawing.Point(653, 333);
             this.bt_add.Name = "bt_add";
             this.bt_add.Size = new System.Drawing.Size(77, 29);
             this.bt_add.TabIndex = 25;
@@ -379,7 +380,7 @@
             // comboBox_day
             // 
             this.comboBox_day.FormattingEnabled = true;
-            this.comboBox_day.Location = new System.Drawing.Point(604, 412);
+            this.comboBox_day.Location = new System.Drawing.Point(604, 382);
             this.comboBox_day.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_day.Name = "comboBox_day";
             this.comboBox_day.Size = new System.Drawing.Size(45, 20);
@@ -388,7 +389,7 @@
             // comboBox_month
             // 
             this.comboBox_month.FormattingEnabled = true;
-            this.comboBox_month.Location = new System.Drawing.Point(529, 412);
+            this.comboBox_month.Location = new System.Drawing.Point(529, 382);
             this.comboBox_month.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_month.Name = "comboBox_month";
             this.comboBox_month.Size = new System.Drawing.Size(45, 20);
@@ -397,7 +398,7 @@
             // comboBox_year
             // 
             this.comboBox_year.FormattingEnabled = true;
-            this.comboBox_year.Location = new System.Drawing.Point(435, 412);
+            this.comboBox_year.Location = new System.Drawing.Point(435, 382);
             this.comboBox_year.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox_year.Name = "comboBox_year";
             this.comboBox_year.Size = new System.Drawing.Size(59, 20);
@@ -406,7 +407,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(653, 415);
+            this.label7.Location = new System.Drawing.Point(653, 385);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(17, 12);
@@ -416,7 +417,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(576, 415);
+            this.label6.Location = new System.Drawing.Point(576, 385);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(17, 12);
@@ -426,7 +427,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(498, 415);
+            this.label8.Location = new System.Drawing.Point(498, 385);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(17, 12);
@@ -436,7 +437,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.comboBox1);
-            this.groupBox2.Location = new System.Drawing.Point(435, 525);
+            this.groupBox2.Location = new System.Drawing.Point(435, 422);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(350, 100);
             this.groupBox2.TabIndex = 75;
@@ -454,11 +455,21 @@
             this.comboBox1.DropDown += new System.EventHandler(this.comboBox1_DropDown);
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Location = new System.Drawing.Point(435, 536);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(350, 100);
+            this.groupBox3.TabIndex = 76;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "使用 DataSource";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(913, 648);
+            this.ClientSize = new System.Drawing.Size(962, 648);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.comboBox_day);
             this.Controls.Add(this.comboBox_month);
@@ -528,6 +539,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.GroupBox groupBox3;
     }
 }
 

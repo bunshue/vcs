@@ -374,23 +374,96 @@ namespace vcs_SqlConnection5
 
         }
 
+        //6060
+
+        // 宣告cnStr資料庫連接字串，指定連接ch23DB.mdf
+        private string cnStr = @"Data Source=(LocalDB)\v11.0;" +
+                    "AttachDbFilename=|DataDirectory|ch23DB.mdf;" +
+                    "Integrated Security=True";
+
+        public DataSet SelectBook()
+        {
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = cnStr;
+                SqlDataAdapter da = new SqlDataAdapter
+                   ("SELECT * FROM 書籍", cn);
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+                return ds;
+            }
+        }
+
+        public void InsertBook(string 書號, string 書名, int 單價, int 數量)
+        {
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = cnStr;
+                cn.Open();
+                string sqlStr = "INSERT INTO 書籍(書號, 書名, 單價, 數量)"
+                   + "VALUES(@BookId, @BookName, @Price, @Qty)";
+                SqlCommand cmd = new SqlCommand(sqlStr, cn);
+                cmd.Parameters.Add(new SqlParameter
+                   ("@BookId", SqlDbType.NVarChar));
+                cmd.Parameters.Add(new SqlParameter
+                   ("@BookName", SqlDbType.NVarChar));
+                cmd.Parameters.Add(new SqlParameter
+                   ("@Price", SqlDbType.Int));
+                cmd.Parameters.Add(new SqlParameter
+                   ("@Qty", SqlDbType.Int));
+                cmd.Parameters["@BookId"].Value = 書號;
+                cmd.Parameters["@BookName"].Value = 書名;
+                cmd.Parameters["@Price"].Value = 單價;
+                cmd.Parameters["@Qty"].Value = 數量;
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void UpdateBook(string 書號, string 書名, int 單價, int 數量)
+        {
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = cnStr;
+                cn.Open();
+                string sqlStr = "UPDATE 書籍 SET 書名=@BookName," +
+                   "單價=@Price, 數量=@Qty WHERE 書號=@BookId";
+                SqlCommand cmd = new SqlCommand(sqlStr, cn);
+                cmd.Parameters.Add(new SqlParameter
+                   ("@BookId", SqlDbType.NVarChar));
+                cmd.Parameters.Add(new SqlParameter
+                   ("@BookName", SqlDbType.NVarChar));
+                cmd.Parameters.Add(new SqlParameter
+                   ("@Price", SqlDbType.Int));
+                cmd.Parameters.Add(new SqlParameter
+                   ("@Qty", SqlDbType.Int));
+                cmd.Parameters["@BookId"].Value = 書號;
+                cmd.Parameters["@BookName"].Value = 書名;
+                cmd.Parameters["@Price"].Value = 單價;
+                cmd.Parameters["@Qty"].Value = 數量;
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void DeleteBook(string 書號)
+        {
+            using (SqlConnection cn = new SqlConnection())
+            {
+                cn.ConnectionString = cnStr;
+                cn.Open();
+                string sqlStr = "DELETE FROM 書籍 WHERE 書號 = @BookId";
+                SqlCommand cmd = new SqlCommand(sqlStr, cn);
+                cmd.Parameters.Add(new SqlParameter
+                  ("@BookId", SqlDbType.NVarChar));
+                cmd.Parameters["@BookId"].Value = 書號;
+                cmd.ExecuteNonQuery();
+            }
+        }
+        
+
+
         private void button6_Click(object sender, EventArgs e)
         {
-            //string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
-            //string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
 
-            //创建数据库连接对象
-            SqlConnection sqlcon = new SqlConnection(cnstr);
-
-            //创建适配器对象
-            SqlDataAdapter sqlda = new SqlDataAdapter("SELECT * FROM tb_Employee", sqlcon);
-
-            //创建数据集
-            DataSet ds = new DataSet();
-            sqlda.Fill(ds);//填充数据集
-
-            dataGridView1.DataSource = ds.Tables[0];//设置数据源
         }
     }
 

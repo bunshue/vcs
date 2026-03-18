@@ -21,7 +21,7 @@ namespace RefreshFormByChildForm
         /// 本实例应该设置主窗体的IsMdiContainer属性为true、MainMenuStrip属性为所添加的菜单栏、WindowState属性为Maximized、窗体名称为FrmMain、设置AllowUserToAddRows属性为false
         /// </summary>
 
-        #region 声明的变量
+        //#region 声明的变量
         public static bool flag = false;//标识是否创建新的子窗体
         Frm_Child BabyWindow = new Frm_Child();//实例化一个子窗体
         DataSet PubsSet = new DataSet(); //定义一个数据集对象
@@ -31,7 +31,7 @@ namespace RefreshFormByChildForm
         SqlDataAdapter PubsAdapter;       //声明一个数据读取器对象
         SqlConnection ConnPubs;           //声明一个数据库连接对象
         SqlCommand PersonalInformation;    //声明一个执行SQL语句的对象
-        #endregion
+        //#endregion
 
         private void Frm_Main_Load(object sender, EventArgs e)
         {
@@ -57,7 +57,7 @@ namespace RefreshFormByChildForm
             }
         }
 
-        #region 增加单一的FrmChild窗体
+        //#region 增加单一的FrmChild窗体
         private void AddandDelete_Click(object sender, EventArgs e)
         {
             if (flag == false)//判断标识的值决定是否创建窗体
@@ -73,14 +73,14 @@ namespace RefreshFormByChildForm
                 }
             }
         }
-        #endregion
+        //#endregion
 
         private void ExitProject_Click(object sender, EventArgs e)
         {
             Application.Exit();//退出本程序
         }
 
-        #region 创建子窗体的CreateFrmChild方法
+        //#region 创建子窗体的CreateFrmChild方法
         public void CreateFrmChild()
         {
             Frm_Child BabyWindow = new Frm_Child();//实例化一个子窗体
@@ -119,9 +119,9 @@ namespace RefreshFormByChildForm
                 MessageBox.Show("数据添加成功！", "提示信息", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);//弹出添加成功的提示信息
             }
         }
-        #endregion
+        //#endregion
 
-        #region 用于读取数据库的DisplayData方法
+        //#region 用于读取数据库的DisplayData方法
         public void DisplayData()
         {
             PubsSet.Clear();
@@ -132,6 +132,6 @@ namespace RefreshFormByChildForm
             PersonalAdapter.Fill(PubsSet, "tb_User"); //向表DisplayTable中填充数据
             dataGridView1.DataSource = PubsSet.Tables["tb_User"].DefaultView;//设定DataGridView控件的数据源
         }
-        #endregion
+        //#endregion
     }
 }

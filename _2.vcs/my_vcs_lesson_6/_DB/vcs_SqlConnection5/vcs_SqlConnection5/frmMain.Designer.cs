@@ -212,7 +212,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(100, 80);
             this.button6.TabIndex = 45;
-            this.button6.Text = "讀取資料庫";
+            this.button6.Text = "aaaa";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 

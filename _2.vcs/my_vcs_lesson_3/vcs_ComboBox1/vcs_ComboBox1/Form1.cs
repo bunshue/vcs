@@ -237,6 +237,22 @@ namespace vcs_ComboBox1
             comboBox1.SelectedIndex = 0;
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            // 使用 DataSource
+            // 取得或設定此 ComboBox資料來源
+            // Initialize an array with data to bind to the combo box.
+            var daysOfWeek = new[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+
+            // Initialize combo box
+            var comboBox = new ComboBox
+            {
+                DataSource = daysOfWeek,
+                Location = new System.Drawing.Point(30, 40),
+                Name = "comboBox",
+                Size = new System.Drawing.Size(166, 21),
+                DropDownStyle = ComboBoxStyle.DropDownList
+            };
+            this.groupBox3.Controls.Add(comboBox);
         }
 
         void show_item_location()
