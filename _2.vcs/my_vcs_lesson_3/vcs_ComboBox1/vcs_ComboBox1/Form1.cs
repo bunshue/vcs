@@ -55,41 +55,6 @@ namespace vcs_ComboBox1
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            //字串一維陣列轉comboBox
-            //初始化字串一維陣列，再以AddRange()方法加入
-            //字串一維陣列
-            string[] cities = new string[] { "台北", "新竹", "台中", "台南", "高雄" };
-            comboBox1a.Items.AddRange(cities);
-
-            //預設選項為第0項
-            //comboBox1a.Text = cities[0];
-
-            //預設選項包含關鍵字
-            comboBox1a.SelectedItem = FindItemContaining(comboBox1a.Items, "竹");
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //從陣列抓資料到combobox清單內
-            //系統內建的全部滑鼠游標圖形
-            //系統內建資料轉comboBox
-            Cursor[] cursorList = new Cursor[] {
-                Cursors.AppStarting, Cursors.Arrow, Cursors.Cross,
-                Cursors.Default, Cursors.Hand, Cursors.Help,
-                Cursors.HSplit, Cursors.IBeam, Cursors.No,
-                Cursors.NoMove2D, Cursors.NoMoveHoriz, Cursors.NoMoveVert,
-                Cursors.PanEast, Cursors.PanNE, Cursors.PanNorth,
-                Cursors.PanNW, Cursors.PanSE, Cursors.PanSouth,
-                Cursors.PanSW, Cursors.PanWest, Cursors.SizeAll,
-                Cursors.SizeNESW, Cursors.SizeNS, Cursors.SizeNWSE,
-                Cursors.SizeWE, Cursors.UpArrow, Cursors.VSplit, Cursors.WaitCursor};
-
-            foreach (Cursor cursor in cursorList)
-            {
-                comboBox1b.Items.Add(cursor);  // 加入到 comboBox1b 清單內
-            }
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
             comboBox2.DrawMode = DrawMode.OwnerDrawFixed;//設置繪制元素方式
             comboBox2.DropDownStyle = ComboBoxStyle.DropDownList; //設置組合框樣式
             comboBox2.Items.Add("小車");//添加項
@@ -189,14 +154,6 @@ namespace vcs_ComboBox1
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            //用ComboBox控制元件製作類似瀏覽器的網址輸入框
-            this.comboBox9.Items.Add("http://www.yahoo.com/");//向ComboBox控件中添加網址「http://www.baidu.com/」
-            this.comboBox9.Items.Add("http://www.sina.com/");//向ComboBox控件中添加網址「http://www.sina.com.cn/」
-            this.comboBox9.Items.Add("http://www.google.com/");//向ComboBox控件中添加網址「http://www.163.com/」
-            this.comboBox9.Items.Add("http://www.microsoft.com/");//向ComboBox控件中添加網址「http://www.qq.com/」
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
             //年月日
 
             // 年下拉式清單預設值100年前
@@ -219,50 +176,6 @@ namespace vcs_ComboBox1
             {
                 comboBox_day.Items.Add(i.ToString());
             }
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            // 建構 comboBox1 物件，並設定相關的屬性
-            //comboBox1.Location = new System.Drawing.Point(15, 15);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new System.Drawing.Size(200, 50);
-            comboBox1.TabIndex = 0;
-            comboBox1.Text = "無";
-
-            //加入 comboBox 項目
-            string[] installs = new string[] { "滑鼠", "鍵盤", "網卡", "螢幕", "音效卡" };
-            comboBox1.Items.AddRange(installs);
-
-            // 預設ComboBox物件的Text為第1個選項
-            comboBox1.SelectedIndex = 0;
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            // 使用 DataSource
-            // 取得或設定此 ComboBox資料來源
-            // Initialize an array with data to bind to the combo box.
-            var daysOfWeek = new[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
-
-            // Initialize combo box
-            var comboBox = new ComboBox
-            {
-                DataSource = daysOfWeek,
-                Location = new System.Drawing.Point(30, 40),
-                Name = "comboBox",
-                Size = new System.Drawing.Size(200, 50),
-                DropDownStyle = ComboBoxStyle.DropDownList
-            };
-            this.groupBox3.Controls.Add(comboBox);
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //comboBox7
-            comboBox7.Items.Add("https://www.google.com/");
-            comboBox7.Items.Add("http://www.yahoo.com.tw/");
-            comboBox7.Items.Add("http://www.baidu.com/");
-            comboBox7.Items.Add("http://www.sina.com.cn/");
-            comboBox7.Items.Add("http://www.163.com/");
-            comboBox7.Items.Add("http://www.qq.com/");
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -300,12 +213,6 @@ namespace vcs_ComboBox1
             dx = 200;
             dy = 80;
             int dd = 25;
-
-            label1a.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            comboBox1a.Location = new Point(x_st + dx * 0, y_st + dy * 0 + dd);
-
-            label1b.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            comboBox1b.Location = new Point(x_st + dx * 0, y_st + dy * 1 + dd);
 
             label2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             comboBox2.Location = new Point(x_st + dx * 0, y_st + dy * 2 + dd);
@@ -364,18 +271,6 @@ namespace vcs_ComboBox1
                     e.DrawFocusRectangle();//在指定的邊界範圍內繪製聚焦框
                 }
             }
-        }
-
-        private object FindItemContaining(IEnumerable items, string target)
-        {
-            foreach (object item in items)
-            {
-                if (item.ToString().Contains(target))
-                {
-                    return item;
-                }
-            }
-            return null;
         }
 
         private void comboBox2_DrawItem(object sender, DrawItemEventArgs e)
@@ -628,29 +523,6 @@ namespace vcs_ComboBox1
             }
         }
 
-        private bool EditState = false;//定義一個全局變量標識
-        private void comboBox9_KeyDown(object sender, KeyEventArgs e)
-        {
-            EditState = (e.KeyCode != Keys.Back && e.KeyCode != Keys.Delete);//當按鍵既不是Back鍵又不是Delete鍵時
-            comboBox9.DroppedDown = true;//當有按鍵被按下時顯示下拉列表
-        }
-
-        private void comboBox9_TextChanged(object sender, EventArgs e)
-        {
-            if (EditState)//當變量的值為真時
-            {
-                string importText = comboBox9.Text;//獲得輸入的文本
-                int index = comboBox9.FindString(importText);//在ComboBox集合中查找匹配的文本
-                if (index >= 0)                        //當有查找結果時 
-                {
-                    EditState = false;                //關閉編輯狀態
-                    comboBox9.SelectedIndex = index;    //找到對應項
-                    EditState = true;                 //打開編輯狀態
-                    comboBox9.Select(importText.Length, comboBox9.Text.Length);//設定文本的選擇長度
-                }
-            }
-        }
-
         private void bt_add_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "加入 : " + comboBox_add.Text + "\n";
@@ -658,85 +530,6 @@ namespace vcs_ComboBox1
             comboBox_add.Items.Add(comboBox_add.Text);
         }
 
-        //6060
-
-        private void comboBox1_DropDown(object sender, EventArgs e)
-        {
-            System.Windows.Forms.ComboBox myCombo = (System.Windows.Forms.ComboBox)sender;
-            richTextBox1.Text += "DropDown : " + myCombo.Text + "\n";
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            System.Windows.Forms.ComboBox myCombo = (System.Windows.Forms.ComboBox)sender;
-            richTextBox1.Text += "SelectedIndexChanged : " + myCombo.Text + "\n";
-        }
-
-        private void comboBox1_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            //都不會跑到這~~~~~~~~~~~~~~~
-
-            if (G_ImageList != null)
-            {
-                richTextBox1.Text += "AAA\n";
-
-                Graphics g = e.Graphics;               //得到繪圖物件
-                Rectangle rec = e.Bounds;              //得到繪圖範圍
-                Size imageSize = G_ImageList.ImageSize;//取得圖像大小
-                if (e.Index >= 0)                      //判斷是否有繪製項 
-                {
-                    Font font = new Font("微軟正黑體", 50, FontStyle.Bold);//建立字體物件
-                    string s = comboBox1.Items[e.Index].ToString();        //得到繪製項的字串
-                    DrawItemState dis = e.State;
-                    if (e.State == (DrawItemState.NoAccelerator | DrawItemState.NoFocusRect))
-                    {
-                        g.FillRectangle(new SolidBrush(Color.LightBlue), rec); //畫item背景
-                        G_ImageList.Draw(g, rec.Left, rec.Top, e.Index);                //繪製圖像
-                        e.Graphics.DrawString(s, font, new SolidBrush(Color.Black),     //顯示字串
-                            rec.Left + imageSize.Width, rec.Top);
-                        e.DrawFocusRectangle();                                         //顯示取得焦點時的虛線框
-                    }
-                    else
-                    {
-                        g.FillRectangle(new SolidBrush(Color.LightGreen), rec);//畫item背景
-                        G_ImageList.Draw(e.Graphics, rec.Left, rec.Top, e.Index);       //繪製圖像
-                        e.Graphics.DrawString(s, font, new SolidBrush(Color.Black),     //顯示字串 
-                            rec.Left + imageSize.Width, rec.Top);
-                        e.DrawFocusRectangle();                                         //顯示取得焦點時的虛線框 
-                    }
-                }
-            }
-            else
-            {
-                richTextBox1.Text += "XXXXX\n";
-
-            }
-        }
-
-        private bool State = false;//定义一个全局变量标识
-
-        private void comboBox7_TextChanged(object sender, EventArgs e)
-        {
-            if (State == true)//当变量的值为真时
-            {
-                string importText = comboBox7.Text;//获得输入的文本
-                int index = comboBox7.FindString(importText);//在ComboBox集合中查找匹配的文本
-                if (index >= 0)//当有查找结果时 
-                {
-                    State = false;//关闭编辑状态
-                    comboBox7.SelectedIndex = index;//找到对应项
-                    State = true;//打开编辑状态
-                    comboBox7.Select(importText.Length, comboBox7.Text.Length);//设定文本的选择长度
-                }
-            }
-
-        }
-
-        private void comboBox7_KeyDown(object sender, KeyEventArgs e)
-        {
-            State = (e.KeyCode != Keys.Back && e.KeyCode != Keys.Delete);//当按键既不是Back键又不是Delete键时
-            comboBox7.DroppedDown = true;//当有按键被按下时显示下拉列表
-        }
     }
 
     //自定義組合框項 
