@@ -701,11 +701,154 @@ namespace vcs_Draw_GraphicsPath
 
         private void button17_Click(object sender, EventArgs e)
         {
+            //畫字範例
+            float size = 2.0f;
 
+            Graphics g = pictureBox1.CreateGraphics();//建立控制元件的Graphics類
+            g.Clear(Color.White);//以指定的顏色清除控制元件背景
+
+            FontFamily Var_FontFamily = new FontFamily("標楷體");//設定字體樣式
+            string text = size.ToString() + "\n海納百川，\n有容乃大；\n壁立千仞，\n無欲則剛。";//設定字串
+
+            GraphicsPath Var_Path = new GraphicsPath();//實例化GraphicsPath對像
+            Var_Path.AddString(text, Var_FontFamily, (int)FontStyle.Regular, 50, new Point(0, 0), new StringFormat());//在路徑中新增文字
+            PointF[] Var_PointS = Var_Path.PathPoints;//取得路徑中的點
+            Byte[] Car_Types = Var_Path.PathTypes;//取得對應點的類型
+
+            Matrix Var_Matrix = new Matrix((float)size, 0.0F, 0.0F, (float)size, 0.0F, 0.0F);//設定仿射矩陣
+            Var_Matrix.TransformPoints(Var_PointS);
+            GraphicsPath Var_New_Path = new GraphicsPath(Var_PointS, Car_Types);
+            g.FillPath(Brushes.Red, Var_New_Path);
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
+            int x_st = 20;
+            int y_st = 20;
+            int dx = 100;
+            int dy = 80;
+            int w = 80;
+            int h = 60;
+
+            //GraphicsPath 大全
+
+            GraphicsPath gp1 = new GraphicsPath();
+            gp1.AddLine(new Point(x_st + 0, y_st + 0), new Point(x_st + w, y_st + h));
+            gp1.AddLine(new Point(x_st + 0, y_st + h), new Point(x_st + w, y_st + 0));
+            gp1.AddRectangle(new Rectangle(x_st + w, y_st - 10, w, h));
+            p = new Pen(Color.Red, 3);
+            g.DrawPath(new Pen(Color.Red), gp1);
+
+
+
+            x_st += dx * 2;
+            gp1.Reset();
+            gp1.AddLine(x_st + 0, y_st + 0, x_st + 50, y_st + 50);
+            gp1.AddEllipse(x_st + 50, y_st + 0, 100, 100);
+            gp1.AddBezier(x_st + 50 + 100, y_st + 50, x_st + 200, 0, x_st + 300, 180, x_st + 400, 20);
+            p = new Pen(Color.Green, 3);
+            g.DrawPath(p, gp1);
+
+
+            x_st += dx * 3;
+            GraphicsPath gp2 = new GraphicsPath();  // Create a GraphicsPath object.
+
+            Point[] pa = {
+                    new Point(x_st+0, y_st+0), 
+                    new Point(x_st+0, y_st+100), 
+                    new Point(x_st+100, y_st+100),
+                    new Point(x_st+100, y_st+0)
+                                   };
+
+            gp2.AddArc(x_st + 100, y_st + 0, 100, 100, 180, 180);
+            gp2.StartFigure();
+            gp2.AddCurve(pa);
+            gp2.AddPie(x_st + 100 + 50, y_st + 0, 100, 100, 40, 110);
+            g.DrawPath(p, gp2);
+
+            //填滿組合路徑
+            x_st = 20;
+            y_st = 20;
+            y_st += dy * 2;
+            Font f = new Font("Times New Roman", 14);
+            sb = new SolidBrush(Color.Blue);
+            g.DrawString("FillPath", f, sb, new PointF(x_st, y_st));
+
+
+            GraphicsPath gp3 = new GraphicsPath();  // Create a GraphicsPath object.
+            // Set up all the string parameters.
+            String drawString = "FillPath加入文字範例";
+            FontFamily family = new FontFamily("Times New Roman");
+            int fontStyle = (int)FontStyle.Italic;
+            int emSize = 26;
+            PointF pt = new PointF(x_st + dx, y_st);
+            StringFormat format = StringFormat.GenericDefault;
+            // Add the string to the path.
+            gp3.AddString(drawString, family, fontStyle, emSize, pt, format);
+            //Draw the path to the screen.
+            g.FillPath(Brushes.Black, gp3);
+
+            y_st += dy / 2;
+            //g.DrawString("FillPath", f, sb, new PointF(x_st, y_st));
+
+            x_st += dx;
+
+            GraphicsPath gp4 = new GraphicsPath();
+            gp4.AddLine(new Point(x_st + 10, y_st + 10), new Point(x_st + 60, y_st + 60));
+            gp4.AddLine(new Point(x_st + 60, y_st + 10), new Point(x_st + 10, y_st + 60));
+            gp4.AddRectangle(new Rectangle(x_st + 10, y_st + 10, 50, 50));
+            g.FillPath(new SolidBrush(Color.Blue), gp4);
+
+            //6060
+
+
+
+            float x = 100;
+            float y = 100;
+            float width = 200;
+            float height = 100;
+            float cornerRadius = 20;
+            //GraphicsPath gp = new GraphicsPath();  // GraphicsPath物件
+            GraphicsPath gp = DrawRoundRect(x, y, width, height, cornerRadius);
+
+            //g.DrawPath(Pens.Red, gp); // 繪出圖形軌跡
+            g.FillPath(Brushes.Lime, gp); // 繪出圖形軌跡
+
+
+            //6060
+
+            gp = new GraphicsPath();  // GraphicsPath物件
+
+            x_st = 100;
+            y_st = 100;
+
+            PointF[] pts = new PointF[]
+            {
+                new PointF(x_st, y_st),
+                new PointF(x_st+50, y_st-50),
+                new PointF(x_st+100, y_st-100),
+                new PointF(x_st+150, y_st+50),
+                new PointF(x_st+200, y_st-50),
+            };
+
+            gp.AddCurve(pts, 0.6f); // 加入曲線
+
+            /*
+            PointF[] pts2 = new PointF[]{
+                          new PointF(x, y+ 7 *D),
+                          new PointF(x-4*D, y+3*D),
+                          new PointF(x-5*D, y),
+                          new PointF(x-3*D, y - 1.5f*D),
+                          new PointF(x, y),
+                          };
+            gp.AddCurve(pts2, 0.6f);
+            */
+            //gp.CloseFigure(); //  封閉目前的圖形
+            g.DrawPath(Pens.Black, gp); // 繪出圖形軌跡
+            g.DrawPath(Pens.Black, gp); // 繪出GraphicsPath物件
+
+
+
 
         }
 

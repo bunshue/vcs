@@ -42,17 +42,21 @@
             this.lb_dgv4 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button6 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(232, 11);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 100);
+            this.button1.Size = new System.Drawing.Size(100, 80);
             this.button1.TabIndex = 3;
             this.button1.Text = "兩個表單";
             this.button1.UseVisualStyleBackColor = true;
@@ -137,7 +141,7 @@
             // 
             this.button2.Location = new System.Drawing.Point(338, 11);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 100);
+            this.button2.Size = new System.Drawing.Size(100, 80);
             this.button2.TabIndex = 38;
             this.button2.Text = "產品類別管理\r\n產品資料管理\r\n產品關聯查詢";
             this.button2.UseVisualStyleBackColor = true;
@@ -165,9 +169,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(232, 117);
+            this.button3.Location = new System.Drawing.Point(444, 12);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 100);
+            this.button3.Size = new System.Drawing.Size(100, 80);
             this.button3.TabIndex = 41;
             this.button3.Text = "新增\r\n修改\r\n刪除";
             this.button3.UseVisualStyleBackColor = true;
@@ -175,19 +179,51 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(338, 117);
+            this.button4.Location = new System.Drawing.Point(232, 117);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(100, 100);
+            this.button4.Size = new System.Drawing.Size(100, 80);
             this.button4.TabIndex = 42;
             this.button4.Text = "新增\r\n修改\r\n刪除\r\n";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(338, 117);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(100, 80);
+            this.button5.TabIndex = 43;
+            this.button5.Text = "取得資料並畫圖";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(232, 315);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.TabIndex = 44;
+            this.pictureBox1.TabStop = false;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(444, 118);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(100, 80);
+            this.button6.TabIndex = 45;
+            this.button6.Text = "讀取資料庫";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(601, 493);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.lb_dgv4);
@@ -209,6 +245,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -230,5 +267,8 @@
         private System.Windows.Forms.Label lb_dgv4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button button6;
     }
 }

@@ -20,7 +20,17 @@ namespace vcs_CheckedListBox
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // 建立Product陣列用來存放產品
+            string[] Product = new string[] { "火影忍者", "航海王",
+ 				"史瑞克4", "葉問2", "鋼鐵人2", "偷心大聖PS男", "阿凡達",
+ 				"半夜鬼上床", "第一次愛上你", "松藥局的兒子們", "老婆，給我飯" };
+            // 將Product陣列的所有選項放入checkedListBox1內
+            checkedListBox1.Items.AddRange(Product);
+            checkedListBox1.MultiColumn = true;	// 核取清單方塊設為多欄
+            checkedListBox1.ColumnWidth = 150; 	// 核取清單方塊欄寬150
+            checkedListBox1.CheckOnClick = true; // 只按一下選取
 
+            /*
             checkedListBox1.MultiColumn = true;	// chkListLot水平欄顯示
             checkedListBox1.ColumnWidth = 100;    	// chkListLot水平欄寬
             // 在chkListLot核取清單方塊加入項目, 可讓使用者勾選
@@ -28,6 +38,7 @@ namespace vcs_CheckedListBox
             {
                 checkedListBox1.Items.Add(i.ToString());
             }
+            */
 
             /*
             checkedListBox1.Items.AddRange(
@@ -104,6 +115,19 @@ namespace vcs_CheckedListBox
                 richTextBox1.Text += result + "\n";
             }
 
+            //3030
+
+            richTextBox1.Text += "訂購產品如下\n";
+            // 逐一檢查每一個核取方塊是否被選取
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            {
+                // 若第i個核取方塊被選取，即將該產品顯示在textBox1
+                if (checkedListBox1.GetItemChecked(i))
+                {
+                    richTextBox1.Text += "　．" + checkedListBox1.Items[i].ToString() + "\n";
+                }
+            }
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -115,6 +139,14 @@ namespace vcs_CheckedListBox
             {
                 int y = (int)myEnumerator.Current;
                 checkedListBox1.SetItemChecked(y, false);
+            }
+
+            //3030
+
+            // 設定所有核取方塊不勾選
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            {
+                checkedListBox1.SetItemChecked(i, false);
             }
         }
     }

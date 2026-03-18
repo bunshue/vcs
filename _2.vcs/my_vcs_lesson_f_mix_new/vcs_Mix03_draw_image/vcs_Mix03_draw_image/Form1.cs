@@ -515,56 +515,7 @@ namespace vcs_Mix03_draw_image
             drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
             g.DrawString("畫字串畫直的", this.Font, new SolidBrush(Color.Black), 300, 100, drawFormat);
 
-
-            //3030
-
-            float x = 100;
-            float y = 100;
-            float width = 200;
-            float height = 100;
-            float cornerRadius = 20;
-            //GraphicsPath gp = new GraphicsPath();  // GraphicsPath物件
-            GraphicsPath gp = DrawRoundRect(x, y, width, height, cornerRadius);
-
-            //g.DrawPath(Pens.Red, gp); // 繪出圖形軌跡
-            g.FillPath(Brushes.Lime, gp); // 繪出圖形軌跡
-
-
             //6060
-
-            gp = new GraphicsPath();  // GraphicsPath物件
-
-            int x_st = 100;
-            int y_st = 100;
-
-            PointF[] pt = new PointF[]
-            {
-                new PointF(x_st, y_st),
-                new PointF(x_st+50, y_st-50),
-                new PointF(x_st+100, y_st-100),
-                new PointF(x_st+150, y_st+50),
-                new PointF(x_st+200, y_st-50),
-            };
-
-            gp.AddCurve(pt, 0.6f); // 加入曲線
-
-            /*
-            PointF[] pt2 = new PointF[]{
-                          new PointF(x, y+ 7 *D),
-                          new PointF(x-4*D, y+3*D),
-                          new PointF(x-5*D, y),
-                          new PointF(x-3*D, y - 1.5f*D),
-                          new PointF(x, y),
-                          };
-            gp.AddCurve(pt2, 0.6f);
-            */
-            //gp.CloseFigure(); //  封閉目前的圖形
-            g.DrawPath(Pens.Black, gp); // 繪出圖形軌跡
-            g.DrawPath(Pens.Black, gp); // 繪出GraphicsPath物件
-
-            //6060
-
-
 
             Pen p = new Pen(Color.Red);  // 建立一支紅色的筆
 
@@ -598,15 +549,9 @@ namespace vcs_Mix03_draw_image
 
             //3030
 
-
-
-
         }
 
-
-           
-
-//繪製圓角矩形 DrawRoundRetangle
+        //繪製圓角矩形 DrawRoundRetangle
         private GraphicsPath DrawRoundRect(float x, float y, float width, float height, float cornerRadius)
         {
             GraphicsPath roundedRect = new GraphicsPath();
@@ -702,17 +647,44 @@ namespace vcs_Mix03_draw_image
             g.FillRegion(Brushes.Silver, r1); // r1 區域表面  繪出
             g.DrawPath(Pens.Black, gp1); // 圖形軌跡 繪出
             g.DrawPath(Pens.Black, gp2); // 圖形軌跡 繪出
+        }
 
-
-
-
-
-
+        private void PaintImage(Graphics g)
+        {
+            //绘图
+            GraphicsPath path = new GraphicsPath(new Point[]{ new Point(100,60),new Point(350,200),new Point(105,225),new Point(190,ClientRectangle.Bottom),
+                new Point(50,ClientRectangle.Bottom),new Point(50,180)}, new byte[]{
+                    (byte)PathPointType.Start,
+                    (byte)PathPointType.Bezier,
+                    (byte)PathPointType.Bezier,
+                    (byte)PathPointType.Bezier,
+                    (byte)PathPointType.Line,
+                    (byte)PathPointType.Line});
+            PathGradientBrush pgb = new PathGradientBrush(path);
+            pgb.SurroundColors = new Color[] { Color.Green, Color.Yellow, Color.Red, Color.Blue, Color.Orange, Color.LightBlue };
+            g.FillPath(pgb, path);
+            g.DrawString("明日科技欢迎您", new Font("宋体", 18, FontStyle.Bold), new SolidBrush(Color.Red), new PointF(110, 20));
+            g.DrawBeziers(new Pen(new SolidBrush(Color.Green), 2), new Point[] { new Point(220, 100), new Point(250, 180), new Point(300, 70), new Point(350, 150) });
+            g.DrawArc(new Pen(new SolidBrush(Color.Blue), 5), new Rectangle(new Point(250, 170), new Size(60, 60)), 0, 360);
+            g.DrawRectangle(new Pen(new SolidBrush(Color.Orange), 3), new Rectangle(new Point(240, 260), new Size(90, 50)));
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //畫圖 mix
+            Bitmap localBitmap = new Bitmap(this.pictureBox1.Width, this.pictureBox1.Height);
+            //创建位图实例
+            Graphics bitmapGraphics = Graphics.FromImage(localBitmap);
+            bitmapGraphics.Clear(BackColor);
+            bitmapGraphics.SmoothingMode = SmoothingMode.AntiAlias;
+            PaintImage(bitmapGraphics);
+            Graphics g = Graphics.FromImage(localBitmap);
+            g.DrawImage(localBitmap, 0, 0); //在窗体的画布中绘画出内存中的图像
+            //bitmapGraphics.Dispose();
+            //localBitmap.Dispose();
+            //g.Dispose();
 
+            pictureBox1.Image = localBitmap;
         }
 
         private void button14_Click(object sender, EventArgs e)

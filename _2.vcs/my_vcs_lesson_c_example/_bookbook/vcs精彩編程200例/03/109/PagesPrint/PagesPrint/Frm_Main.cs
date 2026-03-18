@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Data.SqlClient;
 
 namespace PagesPrint
@@ -17,7 +18,7 @@ namespace PagesPrint
             InitializeComponent();
         }
 
-        #region 定义全局对象及变量
+        //#region 定义全局对象及变量
         int intPage = 0;//总页数
         int intRows = 0;//每页行数
         int EndRows = 0;//最后一页行数
@@ -34,14 +35,13 @@ namespace PagesPrint
         int buttommargin = 80;//底边距 
         int columnWidth1 = 57;//第一列宽度
         int columnWidth2 = 335;//第二列宽度
-        #endregion
+        //#endregion
 
-        //初始化数据
         private void Form1_Load(object sender, EventArgs e)
         {
             intRows = Convert.ToInt32(textBox1.Text);
 
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
 
             SqlConnection sqlcon = new SqlConnection(cnstr);
 
@@ -108,45 +108,33 @@ namespace PagesPrint
             {
                 PrintPageWidth = e.PageBounds.Width;//获取打印线张的宽度
                 PrintPageHeight = e.PageBounds.Height;//获取打印线张的高度
-                //绘制边框线
                 e.Graphics.DrawLine(myPen, leftmargin, topmargin, PrintPageWidth - leftmargin - rightmargin, topmargin);
-                //绘制边框线
                 e.Graphics.DrawLine(myPen, leftmargin, topmargin, leftmargin, PrintPageHeight - topmargin - buttommargin);
-                //绘制边框线
-                e.Graphics.DrawLine(myPen, leftmargin, PrintPageHeight
-                    - topmargin - buttommargin, PrintPageWidth - leftmargin
-                    - rightmargin, PrintPageHeight - topmargin - buttommargin);
-                //绘制边框线
-                e.Graphics.DrawLine(myPen, PrintPageWidth - leftmargin
-                    - rightmargin, topmargin, PrintPageWidth - leftmargin
-                    - rightmargin, PrintPageHeight - topmargin - buttommargin);
-                #region 打印
+                e.Graphics.DrawLine(myPen, leftmargin, PrintPageHeight - topmargin - buttommargin, PrintPageWidth - leftmargin - rightmargin, PrintPageHeight - topmargin - buttommargin);
+                e.Graphics.DrawLine(myPen, PrintPageWidth - leftmargin - rightmargin, topmargin, PrintPageWidth - leftmargin - rightmargin, PrintPageHeight - topmargin - buttommargin);
+                //#region 打印
                 int intPrintRows = currentpageindex * intRows;//当前页最后一条记录的索引
-                rowgap = Convert.ToInt32((PrintPageHeight - topmargin//计算行高度
-                    - buttommargin - 5 * intRows) / intRows) + 3;
+                //计算行高度
+                rowgap = Convert.ToInt32((PrintPageHeight - topmargin - buttommargin - 5 * intRows) / intRows) + 3;
                 int j = 0;//记录正在打印的行数
                 for (int i = 0 + (intPrintRows - intRows); i < intPrintRows; i++)
                 {
                     if (i <= dataGridView1.Rows.Count - 2)
                     {
-                        e.Graphics.DrawString(dataGridView1.Rows[i].Cells[0].Value.ToString(),//绘制字符串信息
+                        e.Graphics.DrawString(dataGridView1.Rows[i].Cells[0].Value.ToString(),
                             myFont, myBrush, leftmargin + 5, topmargin + j * rowgap + 5);
-                        e.Graphics.DrawString(dataGridView1.Rows[i].Cells[1].Value.ToString(),//绘制字符串信息
+                        e.Graphics.DrawString(dataGridView1.Rows[i].Cells[1].Value.ToString(),
                             myFont, myBrush, leftmargin + columnWidth1 + 5, topmargin + j * rowgap + 5);
-                        e.Graphics.DrawString(dataGridView1.Rows[i].Cells[2].Value.ToString(),//绘制字符串信息
-                            myFont, myBrush, leftmargin + columnWidth1 + columnWidth2 + 5,
-                            topmargin + j * rowgap + 5);
-                        e.Graphics.DrawLine(myPen, leftmargin, topmargin + j * rowgap + 1,//绘制线条
+                        e.Graphics.DrawString(dataGridView1.Rows[i].Cells[2].Value.ToString(),
+                            myFont, myBrush, leftmargin + columnWidth1 + columnWidth2 + 5, topmargin + j * rowgap + 5);
+                        e.Graphics.DrawLine(myPen, leftmargin, topmargin + j * rowgap + 1,
                             PrintPageWidth - leftmargin - rightmargin, topmargin + j * rowgap + 1);
-                        e.Graphics.DrawLine(myPen, leftmargin + columnWidth1, topmargin +//绘制线条
-                            j * rowgap, leftmargin + columnWidth1, PrintPageHeight -
-                            topmargin - buttommargin);
-                        e.Graphics.DrawLine(myPen, leftmargin + columnWidth1 + columnWidth2,//绘制线条
-                            topmargin + j * rowgap, leftmargin + columnWidth1 + columnWidth2,
-                            PrintPageHeight - topmargin - buttommargin);
-                        e.Graphics.DrawString("共 " + intPage + " 页   第 " + currentpageindex//绘制页码
-                            + " 页", myFont, myBrush, PrintPageWidth - 200, (int)(PrintPageHeight
-                            - buttommargin / 2));
+                        e.Graphics.DrawLine(myPen, leftmargin + columnWidth1, topmargin +
+                            j * rowgap, leftmargin + columnWidth1, PrintPageHeight - topmargin - buttommargin);
+                        e.Graphics.DrawLine(myPen, leftmargin + columnWidth1 + columnWidth2,
+                            topmargin + j * rowgap, leftmargin + columnWidth1 + columnWidth2, PrintPageHeight - topmargin - buttommargin);
+                        e.Graphics.DrawString("共 " + intPage + " 页   第 " + currentpageindex
+                            + " 页", myFont, myBrush, PrintPageWidth - 200, (int)(PrintPageHeight - buttommargin / 2));
                         j++;//记数器
                     }
                 }
@@ -160,9 +148,8 @@ namespace PagesPrint
                     e.HasMorePages = false;//不打印副页
                     currentpageindex = 1;//当前打印的页编号设为1
                 }
-                #endregion
+                //#endregion
             }
         }
     }
 }
-

@@ -49,7 +49,8 @@ namespace vcs_SqlConnection5
             dataGridView2.Size = new Size(W, H);
             dataGridView3.Size = new Size(W, H);
             dataGridView4.Size = new Size(W, H);
-            richTextBox1.Size = new Size(300, H+180);
+            pictureBox1.Size = new Size(300, H - 120);
+            richTextBox1.Size = new Size(300, H - 100);
             dx = W + 10;
             dy = H + 30;
             int dd = 25;
@@ -61,14 +62,18 @@ namespace vcs_SqlConnection5
             dataGridView2.Location = new Point(x_st + dx * 0, y_st + dy * 1 + dd);
             dataGridView3.Location = new Point(x_st + dx * 1, y_st + dy * 0 + dd);
             dataGridView4.Location = new Point(x_st + dx * 1, y_st + dy * 1 + dd);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1 + dd-180);
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1 -140);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1 + dd+100);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             dy = 30;
-            button1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd);
-            button2.Location = new Point(x_st + dx * 2 + 110, y_st + dy * 0 + dd);
-            button3.Location = new Point(x_st + dx * 2, y_st + dy * 4 + dd);
-            button4.Location = new Point(x_st + dx * 2 + 110, y_st + dy * 4 + dd);
+            button1.Location = new Point(x_st + dx * 2 + 110 * 0, y_st + dy * 0 + dd);
+            button2.Location = new Point(x_st + dx * 2 + 110 * 1, y_st + dy * 0 + dd);
+            button3.Location = new Point(x_st + dx * 2 + 110 * 2, y_st + dy * 0 + dd);
+
+            button4.Location = new Point(x_st + dx * 2 + 110 * 0, y_st + dy * 4 + dd);
+            button5.Location = new Point(x_st + dx * 2 + 110 * 1, y_st + dy * 4 + dd);
+            button6.Location = new Point(x_st + dx * 2 + 110 * 2, y_st + dy * 4 + dd);
 
             lb_dgv1.Text = "";
             lb_dgv2.Text = "";
@@ -312,6 +317,80 @@ namespace vcs_SqlConnection5
                 dataGridView1.DataSource = ds.Tables[0];
                 lb_dgv1.Text = "刪除 產品資料";
             }
+        }
+
+        //取得資料並畫圖 ST
+
+        SqlConnection con;
+        SqlCommand cmd;
+
+        private void Conn()
+        {
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
+            con = new SqlConnection(cnstr);
+            con.Open();
+        }
+
+        private void ShowPic()
+        {
+            Conn();												//打开数据库
+            using (cmd = new SqlCommand("SELECT TOP 3 * FROM tb_Rectangle order by t_Num desc", con))
+            {
+                SqlDataReader dr = cmd.ExecuteReader();						//创建SqlDataReader对象
+                Bitmap bitM = new Bitmap(this.pictureBox1.Width, this.pictureBox1.Height);	//创建画布
+                Graphics g = Graphics.FromImage(bitM);						//创建Graphics对象
+                Pen p = new Pen(new SolidBrush(Color.SlateGray), 1.0f);			//创建Pen对象
+                p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;		//设置虚线
+                g.Clear(Color.White);									//设置画布颜色
+                for (int i = 0; i < 5; i++)
+                {
+                    //绘制水平线条
+                    g.DrawLine(p, 50, this.pictureBox1.Height - 20 - i * 20, this.pictureBox1.Width - 40, this.pictureBox1.Height - 20 - i * 20);
+                    g.DrawString(Convert.ToString(i * 100), new Font("Times New Roman", 10, FontStyle.Regular), new SolidBrush(Color.Black), 20, this.pictureBox1.Height - 27 - i * 20);					//绘制商品的增长值
+                }
+                for (int j = 0; j < 4; j++)
+                {
+                    g.DrawLine(p, 50, this.pictureBox1.Height - 20, 50, 20);			//绘制垂直线条
+                    if (dr.Read())
+                    {
+                        int x, y, w, h;									//声明变量存储坐标和大小
+                        g.DrawString(dr[0].ToString(), new Font("宋体", 9, FontStyle.Regular), new SolidBrush(Color.Black), 76 + 40 * j, this.pictureBox1.Height - 16);										//绘制商品名称
+                        x = 78 + 40 * j;									//X坐标
+                        y = this.pictureBox1.Height - 20 - Convert.ToInt32((Convert.ToDouble(Convert.ToDouble(dr[1].ToString()) * 20 / 100)));														//Y坐标
+                        w = 24;										//宽度
+                        h = Convert.ToInt32(Convert.ToDouble(dr[1].ToString()) * 20 / 100);//高度
+                        g.FillRectangle(new SolidBrush(Color.SlateGray), x, y, w, h);	//绘制柱形图
+                        g.DrawString((h * 100 / 20).ToString(), new Font("宋体", 8, FontStyle.Bold), new SolidBrush(Color.Tomato), new Point(x + 4, y - 10));												//在柱形图指定的位置绘制文字
+                    }
+                }
+                this.pictureBox1.BackgroundImage = bitM;						//显示绘制的图形
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //取得資料並畫圖
+            ShowPic();
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            //string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
+
+            //创建数据库连接对象
+            SqlConnection sqlcon = new SqlConnection(cnstr);
+
+            //创建适配器对象
+            SqlDataAdapter sqlda = new SqlDataAdapter("SELECT * FROM tb_Employee", sqlcon);
+
+            //创建数据集
+            DataSet ds = new DataSet();
+            sqlda.Fill(ds);//填充数据集
+
+            dataGridView1.DataSource = ds.Tables[0];//设置数据源
         }
     }
 

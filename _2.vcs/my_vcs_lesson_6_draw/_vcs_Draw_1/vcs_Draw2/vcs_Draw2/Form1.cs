@@ -80,9 +80,12 @@ namespace vcs_Draw2
             pictureBox1.Size = new Size(width, height);
             pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
-
             this.Size = new Size(1600, 750);
             this.Text = "vcs_Draw2";
+
+            //設定執行後的表單起始位置
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((1920 - this.Size.Width) / 2, (1080 - this.Size.Height) / 2);
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -494,23 +497,6 @@ namespace vcs_Draw2
 
         private void button5_Click(object sender, EventArgs e)
         {
-            float size = 2.0f;
-
-            Graphics g = pictureBox1.CreateGraphics();//建立控制元件的Graphics類
-            g.Clear(Color.White);//以指定的顏色清除控制元件背景
-            Brush Var_Back = Brushes.Black;//設定畫刷
-            FontFamily Var_FontFamily = new FontFamily("標楷體");//設定字體樣式
-            string Var_Str = size.ToString() + "\n海納百川，\n有容乃大；\n壁立千仞，\n無欲則剛。";//設定字串
-
-            GraphicsPath Var_Path = new GraphicsPath();//實例化GraphicsPath對像
-            Var_Path.AddString(Var_Str, Var_FontFamily, (int)FontStyle.Regular, 50, new Point(0, 0), new StringFormat());//在路徑中新增文字
-            PointF[] Var_PointS = Var_Path.PathPoints;//取得路徑中的點
-            Byte[] Car_Types = Var_Path.PathTypes;//取得對應點的類型
-
-            Matrix Var_Matrix = new Matrix((float)size, 0.0F, 0.0F, (float)size, 0.0F, 0.0F);//設定仿射矩陣
-            Var_Matrix.TransformPoints(Var_PointS);
-            GraphicsPath Var_New_Path = new GraphicsPath(Var_PointS, Car_Types);
-            g.FillPath(Var_Back, Var_New_Path);
         }
 
         private void button6_Click(object sender, EventArgs e)

@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Drawing.Imaging;   //for ImageFormat
-using System.Drawing.Drawing2D; //for GraphicsPath, GraphicsState
+using System.Drawing.Drawing2D; //for GraphicsState
 using System.Drawing.Text;      //for TextRenderingHint
 
 namespace vcs_Draw1
@@ -750,8 +750,6 @@ namespace vcs_Draw1
 
             //基本畫圖
             p = new Pen(Color.Green, 3);
-            sb = new SolidBrush(Color.Blue);
-            f = new Font("Times New Roman", 14);
 
             //Rectangle rec;
             //Rectangle[] recs;
@@ -812,69 +810,6 @@ namespace vcs_Draw1
 
             x_st += dx;
             x_st += dx / 2;
-
-            GraphicsPath gp1 = new GraphicsPath();
-            gp1.AddLine(new Point(x_st + 0, y_st + 0), new Point(x_st + w, y_st + h));
-            gp1.AddLine(new Point(x_st + 0, y_st + h), new Point(x_st + w, y_st + 0));
-            gp1.AddRectangle(new Rectangle(x_st + w, y_st - 10, w, h));
-            p = new Pen(Color.Red, 3);
-            g.DrawPath(new Pen(Color.Red), gp1);
-
-            x_st += dx * 2;
-            gp1.Reset();
-            gp1.AddLine(x_st + 0, y_st + 0, x_st + 50, y_st + 50);
-            gp1.AddEllipse(x_st + 50, y_st + 0, 100, 100);
-            gp1.AddBezier(x_st + 50 + 100, y_st + 50, x_st + 200, 0, x_st + 300, 180, x_st + 400, 20);
-            p = new Pen(Color.Green, 3);
-            g.DrawPath(p, gp1);
-
-
-            x_st += dx * 3;
-            GraphicsPath gp2 = new GraphicsPath();  // Create a GraphicsPath object.
-
-            Point[] pa = {
-                    new Point(x_st+0, y_st+0), 
-                    new Point(x_st+0, y_st+100), 
-                    new Point(x_st+100, y_st+100),
-                    new Point(x_st+100, y_st+0)
-                                   };
-
-            gp2.AddArc(x_st + 100, y_st + 0, 100, 100, 180, 180);
-            gp2.StartFigure();
-            gp2.AddCurve(pa);
-            gp2.AddPie(x_st + 100 + 50, y_st + 0, 100, 100, 40, 110);
-            g.DrawPath(p, gp2);
-
-            //填滿組合路徑
-            x_st = 20;
-            y_st = 20;
-            y_st += dy * 2;
-            g.DrawString("FillPath", f, sb, new PointF(x_st, y_st));
-
-
-            GraphicsPath gp3 = new GraphicsPath();  // Create a GraphicsPath object.
-            // Set up all the string parameters.
-            String drawString = "FillPath加入文字範例";
-            FontFamily family = new FontFamily("Times New Roman");
-            int fontStyle = (int)FontStyle.Italic;
-            int emSize = 26;
-            PointF pt = new PointF(x_st + dx, y_st);
-            StringFormat format = StringFormat.GenericDefault;
-            // Add the string to the path.
-            gp3.AddString(drawString, family, fontStyle, emSize, pt, format);
-            //Draw the path to the screen.
-            g.FillPath(Brushes.Black, gp3);
-
-            y_st += dy / 2;
-            //g.DrawString("FillPath", f, sb, new PointF(x_st, y_st));
-
-            x_st += dx;
-
-            GraphicsPath gp4 = new GraphicsPath();
-            gp4.AddLine(new Point(x_st + 10, y_st + 10), new Point(x_st + 60, y_st + 60));
-            gp4.AddLine(new Point(x_st + 60, y_st + 10), new Point(x_st + 10, y_st + 60));
-            gp4.AddRectangle(new Rectangle(x_st + 10, y_st + 10, 50, 50));
-            g.FillPath(new SolidBrush(Color.Blue), gp4);
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 

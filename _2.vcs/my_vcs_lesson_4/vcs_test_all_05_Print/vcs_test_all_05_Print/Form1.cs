@@ -18,6 +18,9 @@ namespace vcs_test_all_05_Print
 {
     public partial class Form1 : Form
     {
+        public bool Aspect = true;//打印方向
+        public bool boundary = false;//是否打印分割线
+
         public Form1()
         {
             InitializeComponent();
@@ -26,6 +29,9 @@ namespace vcs_test_all_05_Print
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            //紙張大小
+            comboBox_PageSize.SelectedIndex = 0;
 
             //列出印表機資訊
             // List the installed printers.
@@ -73,6 +79,7 @@ namespace vcs_test_all_05_Print
             button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
             button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
             button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            comboBox_PageSize.Location = new Point(x_st + dx * 1, y_st + dy * 7);
 
             printPreviewControl1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             bt_print.Location = new Point(x_st + dx * 5, y_st + dy * 2 + 30);
@@ -1623,6 +1630,93 @@ namespace vcs_test_all_05_Print
             e.Graphics.DrawString("醒來懼銅鏡，", new Font("細明體", 36, FontStyle.Regular), Brushes.Black, x_st, y_st + dy * 2);
             e.Graphics.DrawString("怕顯董賊身。", new Font("細明體", 36, FontStyle.Regular), Brushes.Black, x_st, y_st + dy * 3);
         }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            //使用PrintClass
+
+            //填充dataGridView1
+
+            //設定DGV
+            dataGridView1.ColumnCount = 3;
+            dataGridView1.Columns[0].Name = "英文名";
+            dataGridView1.Columns[0].Width = 80;//設置欄位寬度
+            dataGridView1.Columns[1].Name = "中文名";
+            dataGridView1.Columns[1].Width = 80;//設置欄位寬度
+            dataGridView1.Columns[2].Name = "體重";
+            dataGridView1.Columns[2].Width = 80;//設置欄位寬度
+
+            //填入資料
+            string ENAME = "mouse";
+            string CNAME = "米老鼠";
+            string WEIGHT = "3";
+            string[] row = new string[] { ENAME, CNAME, WEIGHT };
+            dataGridView1.Rows.Add(row);
+            dataGridView1.Rows.Add(new Object[] { "ox", "班尼牛", 48 });
+            dataGridView1.Rows.Add(new Object[] { "tiger", "跳跳虎", 33 });
+
+            //
+
+            //对打印信息进行设置
+            bool print_direction_width = false; //false:縱, true:橫
+            if (print_direction_width == false)
+            {
+                PrintClass.PageScape = false;//纵向打印
+                richTextBox1.Text += "縱向列印\n";
+            }
+            else
+            {
+                PrintClass.PageScape = true;//横向打印
+                richTextBox1.Text += "橫向列印\n";
+            }
+
+            richTextBox1.Text += "紙張大小 : " + comboBox_PageSize.SelectedIndex + "\n";
+
+            PrintClass dgp = new PrintClass(this.dataGridView1, comboBox_PageSize.SelectedIndex, print_direction_width);
+            MSetUp(dgp);//记录窗体中打印信息的相关设置
+            string[] header = new string[dataGridView1.ColumnCount];//创建一个与数据列相等的字符串数组
+            for (int p = 0; p < dataGridView1.ColumnCount; p++)//记录所有列标题的名列
+            {
+                header[p] = dataGridView1.Columns[p].HeaderCell.Value.ToString();
+            }
+
+            //NG
+            //dgp.print();//显示打印预览窗体
+        }
+
+        //#region  设置打印数据的相关信息
+        /// <summary>
+        /// 设置打印数据的相关信息
+        /// </summary>
+        /// <param dgp="PrintClass">公共类PrintClass</param>
+        private void MSetUp(PrintClass dgp)
+        {
+            dgp.PageAspect = Aspect;//设置横向打印
+        }
+        //#endregion
+
+
+
+
     }
 }
+
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+ */
 

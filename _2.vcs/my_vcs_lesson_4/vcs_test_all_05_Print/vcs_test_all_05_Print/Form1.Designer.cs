@@ -106,6 +106,7 @@
             this.printDocument_preview = new System.Drawing.Printing.PrintDocument();
             this.bt_print = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.bt_print2b = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.bt_print2 = new System.Windows.Forms.Button();
@@ -117,7 +118,8 @@
             this.printPreviewDialog2 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog2 = new System.Windows.Forms.PrintDialog();
             this.bt_print3 = new System.Windows.Forms.Button();
-            this.bt_print2b = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.comboBox_PageSize = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSkip)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPoints)).BeginInit();
@@ -126,6 +128,7 @@
             this.groupBox2.SuspendLayout();
             this.groupBox_control.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // button0
@@ -524,7 +527,9 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(194, 45);
             this.button16.TabIndex = 63;
+            this.button16.Text = "使用PrintClass";
             this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
             // printDocument_pages
             // 
@@ -880,6 +885,16 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "列印視窗中的資訊";
             // 
+            // bt_print2b
+            // 
+            this.bt_print2b.Location = new System.Drawing.Point(106, 109);
+            this.bt_print2b.Name = "bt_print2b";
+            this.bt_print2b.Size = new System.Drawing.Size(80, 40);
+            this.bt_print2b.TabIndex = 7;
+            this.bt_print2b.Text = "列印";
+            this.bt_print2b.UseVisualStyleBackColor = true;
+            this.bt_print2b.Click += new System.EventHandler(this.bt_print2b_Click);
+            // 
             // label13
             // 
             this.label13.AutoSize = true;
@@ -967,21 +982,48 @@
             this.bt_print3.UseVisualStyleBackColor = true;
             this.bt_print3.Click += new System.EventHandler(this.bt_print3_Click);
             // 
-            // bt_print2b
+            // dataGridView1
             // 
-            this.bt_print2b.Location = new System.Drawing.Point(106, 109);
-            this.bt_print2b.Name = "bt_print2b";
-            this.bt_print2b.Size = new System.Drawing.Size(80, 40);
-            this.bt_print2b.TabIndex = 7;
-            this.bt_print2b.Text = "列印";
-            this.bt_print2b.UseVisualStyleBackColor = true;
-            this.bt_print2b.Click += new System.EventHandler(this.bt_print2b_Click);
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(772, 476);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(224, 347);
+            this.dataGridView1.TabIndex = 70;
+            // 
+            // comboBox_PageSize
+            // 
+            this.comboBox_PageSize.FormattingEnabled = true;
+            this.comboBox_PageSize.Items.AddRange(new object[] {
+            "A4",
+            "A5",
+            "A6",
+            "B5(ISO)",
+            "B5(JIS)",
+            "Double Post Card",
+            "Envelope #10",
+            "Envelope B5",
+            "Envelope C5",
+            "Envelope DL",
+            "Envelope Monarch",
+            "ExeCutive",
+            "Legal",
+            "Letter",
+            "Post Card",
+            "16K",
+            "8.5x13"});
+            this.comboBox_PageSize.Location = new System.Drawing.Point(212, 336);
+            this.comboBox_PageSize.Name = "comboBox_PageSize";
+            this.comboBox_PageSize.Size = new System.Drawing.Size(194, 20);
+            this.comboBox_PageSize.TabIndex = 71;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1065, 878);
+            this.Controls.Add(this.comboBox_PageSize);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.bt_print3);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.bt_print);
@@ -1025,6 +1067,7 @@
             this.groupBox_control.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1120,6 +1163,8 @@
         private System.Windows.Forms.PrintDialog printDialog2;
         private System.Windows.Forms.Button bt_print3;
         private System.Windows.Forms.Button bt_print2b;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ComboBox comboBox_PageSize;
     }
 }
 

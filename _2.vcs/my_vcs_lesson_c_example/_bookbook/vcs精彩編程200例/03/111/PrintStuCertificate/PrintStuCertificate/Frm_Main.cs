@@ -6,8 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Data.SqlClient;
+
 using System.IO;
+using System.Data.SqlClient;
 
 namespace PrintStuCertificate
 {
@@ -18,8 +19,8 @@ namespace PrintStuCertificate
             InitializeComponent();
         }
 
-        #region 定义全局变量及对象
-        string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+        //#region 定义全局变量及对象
+        string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
         public static string strName = "";
         public static string strSex = "";
         public static string strBirthday = "";
@@ -48,7 +49,7 @@ namespace PrintStuCertificate
         SqlCommand sqlcmd;
         SqlDataAdapter sqlda;
         DataSet myds;
-        #endregion
+        //#endregion
 
         //窗体初始化时，自动编号并显示所有学生信息
         private void Form1_Load(object sender, EventArgs e)
@@ -291,7 +292,7 @@ namespace PrintStuCertificate
             Form1_Load(sender, e);
         }
 
-        #region 获得数据库连接
+        //#region 获得数据库连接
         /// <summary>
         /// 获得数据库连接
         /// </summary>
@@ -302,9 +303,9 @@ namespace PrintStuCertificate
             sqlcon.Open();
             return sqlcon;
         }
-        #endregion
+        //#endregion
 
-        #region 查询学生信息
+        //#region 查询学生信息
         /// <summary>
         /// 查询学生信息
         /// </summary>
@@ -332,6 +333,6 @@ namespace PrintStuCertificate
             sqlcon.Close();
             return myds;
         }
-        #endregion
+        //#endregion
     }
 }

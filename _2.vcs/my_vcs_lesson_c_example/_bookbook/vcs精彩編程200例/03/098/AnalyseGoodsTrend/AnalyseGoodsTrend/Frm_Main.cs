@@ -29,6 +29,7 @@ namespace AnalyseGoodsTrend
                 SqlDataAdapter da = new SqlDataAdapter();
                 da.SelectCommand = cmd;
                 da.Fill(dt);
+
                 this.comboBox1.DataSource = dt.DefaultView;
                 this.comboBox1.DisplayMember = "ShowYear";
                 this.comboBox1.ValueMember = "ShowYear";
@@ -145,7 +146,7 @@ namespace AnalyseGoodsTrend
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            int Year = Convert.ToInt32(this.comboBox1.Text);
+            int Year = 2006;
             this.CreateImage(Year);
         }
     }

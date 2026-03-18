@@ -6,9 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Data.SqlClient;
+
 using System.IO;
 using System.Collections;
+using System.Data.SqlClient;
 
 namespace PrintStuCertificate
 {
@@ -19,7 +20,7 @@ namespace PrintStuCertificate
             InitializeComponent();
         }
 
-        #region 定义全局变量及对象
+        //#region 定义全局变量及对象
         string strID = "";
         string strName = "";
         string strSex = "";
@@ -34,7 +35,7 @@ namespace PrintStuCertificate
         Brush myBrush = new SolidBrush(Color.Black);
         Pen mypen = new Pen(Color.Black);
         Font myFont = new Font("宋体", 10);
-        #endregion
+        //#endregion
 
         //窗体加载时显示所有学生信息
         private void Form1_Load(object sender, EventArgs e)
@@ -45,7 +46,7 @@ namespace PrintStuCertificate
         //设置打印内容
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            #region 记录的打印的学生信息
+            //#region 记录的打印的学生信息
             if (lists.Count > 0)
             {
                 DataSet myds = BindInfo("编号",//获得数据集对象
@@ -67,7 +68,7 @@ namespace PrintStuCertificate
                     new MemoryStream((byte[])myds.Tables[0].Rows[0][7]);
                 imgPhoto = Image.FromStream(memoryImage);//获得图像对象
             }
-            #endregion
+            //#endregion
             int printWidth = e.PageBounds.Width;//获取打印区域宽度
             int printHeight = e.PageBounds.Height;//获取打印区域高度
             //绘制矩形边框
@@ -158,7 +159,7 @@ namespace PrintStuCertificate
             printPreviewDialog1.ShowDialog();
         }
 
-        #region 获取学生信息
+        //#region 获取学生信息
         /// <summary>
         /// 获取学生信息
         /// </summary>
@@ -167,7 +168,8 @@ namespace PrintStuCertificate
         /// <returns>DataSet数据集</returns>
         private DataSet BindInfo(string str, string strKeyWord)
         {
-            string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+
             SqlConnection sqlcon = new SqlConnection(strCon);
             string strSql = "";
             if (str == "编号")
@@ -187,6 +189,6 @@ Photo as 员工照片 from tb_StudentInfo";
             sqlda.Fill(myds);
             return myds;
         }
-        #endregion
+        //#endregion
     }
 }

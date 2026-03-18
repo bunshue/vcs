@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Data.SqlClient;
 using System.Collections;
 
@@ -18,7 +19,7 @@ namespace SetPrintRange
             InitializeComponent();
         }
 
-        #region 定义全局对象及变量
+        //#region 定义全局对象及变量
         int intPage = 0;//总页数
         int intRows = 30;//每页行数
         int EndRows = 0;//最后一页行数
@@ -38,11 +39,12 @@ namespace SetPrintRange
         int page = 0;//打印指定的页
         ArrayList list = new ArrayList();//记录打印范围
         int m = 0;//定义打印范围的索引值
-        #endregion
+        //#endregion
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            //string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
 
             //创建数据库连接对象
             SqlConnection sqlcon = new SqlConnection(cnstr);
@@ -157,20 +159,14 @@ select 学生姓名,所在学院,家庭住址 from tb_Student", sqlcon);
                 PrintPageWidth = e.PageBounds.Width;//获取打印线张的宽度
                 PrintPageHeight = e.PageBounds.Height;//获取打印线张的高度
 
-                #region 绘制边框线
-                e.Graphics.DrawLine(myPen, leftmargin, topmargin,//绘制边框线
-                    PrintPageWidth - leftmargin - rightmargin, topmargin);
-                e.Graphics.DrawLine(myPen, leftmargin, topmargin,//绘制边框线
-                    leftmargin, PrintPageHeight - topmargin - buttommargin);//绘制边框线
-                e.Graphics.DrawLine(myPen, leftmargin, PrintPageHeight -
-                    topmargin - buttommargin, PrintPageWidth - leftmargin - //绘制边框线
-                    rightmargin, PrintPageHeight - topmargin - buttommargin);
-                e.Graphics.DrawLine(myPen, PrintPageWidth - leftmargin - rightmargin,//绘制边框线
-                    topmargin, PrintPageWidth - leftmargin - rightmargin,
-                    PrintPageHeight - topmargin - buttommargin);
-                #endregion
+                //#region 绘制边框线
+                e.Graphics.DrawLine(myPen, leftmargin, topmargin, PrintPageWidth - leftmargin - rightmargin, topmargin);
+                e.Graphics.DrawLine(myPen, leftmargin, topmargin, leftmargin, PrintPageHeight - topmargin - buttommargin);
+                e.Graphics.DrawLine(myPen, leftmargin, PrintPageHeight - topmargin - buttommargin, PrintPageWidth - leftmargin - rightmargin, PrintPageHeight - topmargin - buttommargin);
+                e.Graphics.DrawLine(myPen, PrintPageWidth - leftmargin - rightmargin, topmargin, PrintPageWidth - leftmargin - rightmargin, PrintPageHeight - topmargin - buttommargin);
+                //#endregion
 
-                #region 打印全部
+                //#region 打印全部
                 if (rb_All.Checked)
                 {
                     int intPrintRows = currentpageindex * intRows;//每页最后一个记录的索引
@@ -179,21 +175,20 @@ select 学生姓名,所在学院,家庭住址 from tb_Student", sqlcon);
                     {
                         if (i <= dgv_Message.Rows.Count - 2)
                         {
-                            e.Graphics.DrawString(dgv_Message.Rows[i].Cells[0].Value.ToString(),//绘制字符串
+                            e.Graphics.DrawString(dgv_Message.Rows[i].Cells[0].Value.ToString(),
                                 myFont, myBrush, leftmargin + 5, topmargin + j * rowgap + 5);
-                            e.Graphics.DrawString(dgv_Message.Rows[i].Cells[1].Value.ToString(),//绘制字符串
+                            e.Graphics.DrawString(dgv_Message.Rows[i].Cells[1].Value.ToString(),
                                 myFont, myBrush, leftmargin + columnWidth1 + 5, topmargin + j * rowgap + 5);
-                            e.Graphics.DrawString(dgv_Message.Rows[i].Cells[2].Value.ToString(),//绘制字符串
-                                myFont, myBrush, leftmargin + columnWidth1 + columnWidth2 + 5,
-                                topmargin + j * rowgap + 5);
-                            e.Graphics.DrawLine(myPen, leftmargin, topmargin + j * rowgap + 1,//绘制线条
+                            e.Graphics.DrawString(dgv_Message.Rows[i].Cells[2].Value.ToString(),
+                                myFont, myBrush, leftmargin + columnWidth1 + columnWidth2 + 5, topmargin + j * rowgap + 5);
+                            e.Graphics.DrawLine(myPen, leftmargin, topmargin + j * rowgap + 1,
                                 PrintPageWidth - leftmargin - rightmargin, topmargin + j * rowgap + 1);
-                            e.Graphics.DrawLine(myPen, leftmargin + columnWidth1, topmargin + j * rowgap,//绘制线条
+                            e.Graphics.DrawLine(myPen, leftmargin + columnWidth1, topmargin + j * rowgap,
                                 leftmargin + columnWidth1, PrintPageHeight - topmargin - buttommargin);
-                            e.Graphics.DrawLine(myPen, leftmargin + columnWidth1 + columnWidth2,//绘制线条
+                            e.Graphics.DrawLine(myPen, leftmargin + columnWidth1 + columnWidth2,
                                 topmargin + j * rowgap, leftmargin + columnWidth1 + columnWidth2,
                                 PrintPageHeight - topmargin - buttommargin);
-                            e.Graphics.DrawString("共 " + intPage + " 页   第 " +//绘制字符串
+                            e.Graphics.DrawString("共 " + intPage + " 页   第 " +
                                 currentpageindex + " 页", myFont, myBrush, PrintPageWidth - 200,
                                 (int)(PrintPageHeight - buttommargin / 2));
                             j++;
@@ -210,11 +205,11 @@ select 学生姓名,所在学院,家庭住址 from tb_Student", sqlcon);
                         currentpageindex = 1;//当前打印的页编号设为1
                     }
                 }
-                #endregion
+                //#endregion
 
                 else
                 {
-                    #region 打印指定的一页
+                    //#region 打印指定的一页
                     if (page != 0)
                     {
                         if (page <= intPage)
@@ -225,19 +220,19 @@ select 学生姓名,所在学院,家庭住址 from tb_Student", sqlcon);
                             {
                                 if (i <= dgv_Message.Rows.Count - 2)
                                 {
-                                    e.Graphics.DrawString(dgv_Message.Rows[i].Cells[0].Value.ToString(),//绘制字符串
+                                    e.Graphics.DrawString(dgv_Message.Rows[i].Cells[0].Value.ToString(),
                                         myFont, myBrush, leftmargin + 5, topmargin + j * rowgap + 5);
-                                    e.Graphics.DrawString(dgv_Message.Rows[i].Cells[1].Value.ToString(),//绘制字符串
+                                    e.Graphics.DrawString(dgv_Message.Rows[i].Cells[1].Value.ToString(),
                                         myFont, myBrush, leftmargin + columnWidth1 + 5, topmargin + j * rowgap + 5);
-                                    e.Graphics.DrawString(dgv_Message.Rows[i].Cells[2].Value.ToString(),//绘制字符串
+                                    e.Graphics.DrawString(dgv_Message.Rows[i].Cells[2].Value.ToString(),
                                         myFont, myBrush, leftmargin + columnWidth1 + columnWidth2 + 5, topmargin + j * rowgap + 5);
-                                    e.Graphics.DrawLine(myPen, leftmargin, topmargin + j * rowgap + 1,//绘制线条
+                                    e.Graphics.DrawLine(myPen, leftmargin, topmargin + j * rowgap + 1,
                                         PrintPageWidth - leftmargin - rightmargin, topmargin + j * rowgap + 1);
-                                    e.Graphics.DrawLine(myPen, leftmargin + columnWidth1, topmargin + j * rowgap,//绘制线条
+                                    e.Graphics.DrawLine(myPen, leftmargin + columnWidth1, topmargin + j * rowgap,
                                         leftmargin + columnWidth1, PrintPageHeight - topmargin - buttommargin);
-                                    e.Graphics.DrawLine(myPen, leftmargin + columnWidth1 + columnWidth2, topmargin +//绘制线条
+                                    e.Graphics.DrawLine(myPen, leftmargin + columnWidth1 + columnWidth2, topmargin +
                                         j * rowgap, leftmargin + columnWidth1 + columnWidth2, PrintPageHeight - topmargin - buttommargin);
-                                    e.Graphics.DrawString("共 " + intPage + " 页   第 " + page + " 页", myFont,//绘制字符串
+                                    e.Graphics.DrawString("共 " + intPage + " 页   第 " + page + " 页", myFont,
                                         myBrush, PrintPageWidth - 500, (int)(PrintPageHeight - buttommargin / 2));
                                     j++;
                                 }
@@ -245,9 +240,9 @@ select 学生姓名,所在学院,家庭住址 from tb_Student", sqlcon);
                         }
                         page = 0;
                     }
-                    #endregion
+                    //#endregion
 
-                    #region 打印指定的多页
+                    //#region 打印指定的多页
                     else
                     {
                         if (m < list.Count)
@@ -259,20 +254,20 @@ select 学生姓名,所在学院,家庭住址 from tb_Student", sqlcon);
                             {
                                 if (i <= dgv_Message.Rows.Count - 2)
                                 {
-                                    e.Graphics.DrawString(dgv_Message.Rows[i].Cells[0].Value.ToString(),//绘制字符串
+                                    e.Graphics.DrawString(dgv_Message.Rows[i].Cells[0].Value.ToString(),
                                         myFont, myBrush, leftmargin + 5, topmargin + j * rowgap + 5);
-                                    e.Graphics.DrawString(dgv_Message.Rows[i].Cells[1].Value.ToString(),//绘制字符串
+                                    e.Graphics.DrawString(dgv_Message.Rows[i].Cells[1].Value.ToString(),
                                         myFont, myBrush, leftmargin + columnWidth1 + 5, topmargin + j * rowgap + 5);
-                                    e.Graphics.DrawString(dgv_Message.Rows[i].Cells[2].Value.ToString(),//绘制字符串
+                                    e.Graphics.DrawString(dgv_Message.Rows[i].Cells[2].Value.ToString(),
                                         myFont, myBrush, leftmargin + columnWidth1 + columnWidth2 + 5, topmargin + j * rowgap + 5);
-                                    e.Graphics.DrawLine(myPen, leftmargin, topmargin + j * rowgap + 1,//绘制线条
+                                    e.Graphics.DrawLine(myPen, leftmargin, topmargin + j * rowgap + 1,
                                         PrintPageWidth - leftmargin - rightmargin, topmargin + j * rowgap + 1);
-                                    e.Graphics.DrawLine(myPen, leftmargin + columnWidth1, topmargin + j * rowgap,//绘制线条
+                                    e.Graphics.DrawLine(myPen, leftmargin + columnWidth1, topmargin + j * rowgap,
                                         leftmargin + columnWidth1, PrintPageHeight - topmargin - buttommargin);
-                                    e.Graphics.DrawLine(myPen, leftmargin + columnWidth1 + columnWidth2,//绘制线条
+                                    e.Graphics.DrawLine(myPen, leftmargin + columnWidth1 + columnWidth2,
                                         topmargin + j * rowgap, leftmargin + columnWidth1 + columnWidth2,
                                         PrintPageHeight - topmargin - buttommargin);
-                                    e.Graphics.DrawString("共 " + intPage + " 页   第 " + startPage + " 页",//绘制字符串
+                                    e.Graphics.DrawString("共 " + intPage + " 页   第 " + startPage + " 页",
                                         myFont, myBrush, PrintPageWidth - 200, (int)(PrintPageHeight - buttommargin / 2));
                                     j++;
                                 }
@@ -289,9 +284,10 @@ select 学生姓名,所在学院,家庭住址 from tb_Student", sqlcon);
                             }
                         }
                     }
-                    #endregion
+                    //#endregion
                 }
             }
         }
     }
 }
+

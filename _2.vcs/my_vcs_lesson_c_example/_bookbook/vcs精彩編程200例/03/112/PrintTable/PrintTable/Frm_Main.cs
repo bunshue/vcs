@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Data.SqlClient;
 
 namespace PrintTable
@@ -17,8 +18,8 @@ namespace PrintTable
             InitializeComponent();
         }
 
-        #region 定义全局变量及对象
-        string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+        //#region 定义全局变量及对象
+        string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
         public static string strID = "";
         public static string strInPeople = "";
         public static string strInProvider = "";
@@ -36,7 +37,7 @@ namespace PrintTable
         SqlCommand sqlcmd;
         SqlDataAdapter sqlda;
         DataSet myds;
-        #endregion
+        //#endregion
 
         //窗体初始化时显示所有入库信息
         private void Form1_Load(object sender, EventArgs e)
@@ -53,7 +54,7 @@ namespace PrintTable
             cboxGUnit.SelectedIndex = 0;
         }
 
-        #region 计算总金额
+        //#region 计算总金额
         private void txtGMoney_TextChanged(object sender, EventArgs e)
         {
             try
@@ -73,7 +74,7 @@ namespace PrintTable
             }
             catch { }
         }
-        #endregion
+        //#endregion
 
         //根据选中的入库单显示其详细信息
         private void dgvInfo_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -261,7 +262,7 @@ namespace PrintTable
             e.Graphics.DrawString(strRemark, myFont, myBrush, new Point(left + 82, top + 170));
         }
 
-        #region 获得数据库连接
+        //#region 获得数据库连接
         /// <summary>
         /// 获得数据库连接
         /// </summary>
@@ -272,9 +273,9 @@ namespace PrintTable
             sqlcon.Open();
             return sqlcon;
         }
-        #endregion
+        //#endregion
 
-        #region 查询商品入库信息
+        //#region 查询商品入库信息
         /// <summary>
         /// 查询商品入库信息
         /// </summary>
@@ -302,6 +303,6 @@ namespace PrintTable
             sqlcon.Close();
             return myds;
         }
-        #endregion
+        //#endregion
     }
 }

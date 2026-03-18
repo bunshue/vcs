@@ -8,24 +8,11 @@ using System.Drawing;
 using System.Data;
 using System.Collections;
 
-namespace PrintRange
+namespace vcs_test_all_05_Print
 {
-    //=====================================================
-    //Copyright (C) 2008-2009 小科
-    //All rights reserved
-    //CLR版本:            2.0.50727.1433
-    //新建项输入的名称: PrintClass
-    //机器名称:            MRWXK
-    //命名空间名称:      PrintRange
-    //文件名:              PrintClass
-    //当前系统时间:      2008-12-04 15:56:01
-    //当前登录用户名:   Administrator
-    //创建年份:           2008
-    //http://www.mingribook.com
-    //======================================================
     class PrintClass
     {
-        #region  全局变量
+        //#region  全局变量
         private DataGridView datagrid;
         private PrintDocument printdocument;
         private PageSetupDialog pagesetupdialog;
@@ -51,9 +38,9 @@ namespace PrintRange
         public bool PageAspect = false;//打印的方向
         public static bool PageScape = false;//打印方向
         public int PageSheet = 0;
-        #endregion
+        //#endregion
 
-        #region  打印信息的初始化
+        //#region  打印信息的初始化
         /// <summary>
         /// 打印信息的初始化
         /// </summary>
@@ -85,9 +72,9 @@ namespace PrintRange
             pagesetupdialog.Document = printdocument;
             printdocument.PrintPage += new PrintPageEventHandler(this.printdocument_printpage);//事件的重载
         }
-        #endregion
+        //#endregion
 
-        #region  纸张大小的设置
+        //#region  纸张大小的设置
         /// <summary>
         ///  纸张大小的设置
         /// </summary>
@@ -117,9 +104,9 @@ namespace PrintRange
             }
             return pageN;//返回纸张的名
         }
-        #endregion
+        //#endregion
 
-        #region  页的打印事件
+        //#region  页的打印事件
         /// <summary>
         ///  页的打印事件(主要用于绘制打印报表)
         /// </summary>
@@ -197,9 +184,9 @@ namespace PrintRange
                 this.currentpageindex = 0;//当前打印的页编号设为0
             }
         }
-        #endregion
+        //#endregion
 
-        #region 显示打印预览窗体
+        //#region 显示打印预览窗体
         /// <summary>
         ///  显示打印预览窗体
         /// </summary>
@@ -232,6 +219,7 @@ namespace PrintRange
                 throw new Exception("printer error." + e.Message);
             }
         }
-        #endregion
+        //#endregion
     }
 }
+

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;//for Directory
 using System.Drawing.Imaging;   //for ImageFormat, PixelFormat
-using System.Drawing.Drawing2D; //for GraphicsPath, InterpolationMode
+using System.Drawing.Drawing2D; //for InterpolationMode
 
 namespace vcs_Draw_Bitmap
 {
