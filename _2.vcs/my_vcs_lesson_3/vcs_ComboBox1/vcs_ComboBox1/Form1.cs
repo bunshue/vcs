@@ -249,10 +249,23 @@ namespace vcs_ComboBox1
                 DataSource = daysOfWeek,
                 Location = new System.Drawing.Point(30, 40),
                 Name = "comboBox",
-                Size = new System.Drawing.Size(166, 21),
+                Size = new System.Drawing.Size(200, 50),
                 DropDownStyle = ComboBoxStyle.DropDownList
             };
             this.groupBox3.Controls.Add(comboBox);
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //comboBox7
+            comboBox7.Items.Add("https://www.google.com/");
+            comboBox7.Items.Add("http://www.yahoo.com.tw/");
+            comboBox7.Items.Add("http://www.baidu.com/");
+            comboBox7.Items.Add("http://www.sina.com.cn/");
+            comboBox7.Items.Add("http://www.163.com/");
+            comboBox7.Items.Add("http://www.qq.com/");
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
         }
 
         void show_item_location()
@@ -698,6 +711,31 @@ namespace vcs_ComboBox1
                 richTextBox1.Text += "XXXXX\n";
 
             }
+        }
+
+        private bool State = false;//定义一个全局变量标识
+
+        private void comboBox7_TextChanged(object sender, EventArgs e)
+        {
+            if (State == true)//当变量的值为真时
+            {
+                string importText = comboBox7.Text;//获得输入的文本
+                int index = comboBox7.FindString(importText);//在ComboBox集合中查找匹配的文本
+                if (index >= 0)//当有查找结果时 
+                {
+                    State = false;//关闭编辑状态
+                    comboBox7.SelectedIndex = index;//找到对应项
+                    State = true;//打开编辑状态
+                    comboBox7.Select(importText.Length, comboBox7.Text.Length);//设定文本的选择长度
+                }
+            }
+
+        }
+
+        private void comboBox7_KeyDown(object sender, KeyEventArgs e)
+        {
+            State = (e.KeyCode != Keys.Back && e.KeyCode != Keys.Delete);//当按键既不是Back键又不是Delete键时
+            comboBox7.DroppedDown = true;//当有按键被按下时显示下拉列表
         }
     }
 

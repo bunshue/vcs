@@ -56,7 +56,7 @@
             // 
             this.txtMPhone.Location = new System.Drawing.Point(78, 41);
             this.txtMPhone.Name = "txtMPhone";
-            this.txtMPhone.Size = new System.Drawing.Size(162, 21);
+            this.txtMPhone.Size = new System.Drawing.Size(162, 22);
             this.txtMPhone.TabIndex = 1;
             // 
             // label2
@@ -72,7 +72,7 @@
             // 
             this.txtIP.Location = new System.Drawing.Point(78, 16);
             this.txtIP.Name = "txtIP";
-            this.txtIP.Size = new System.Drawing.Size(162, 21);
+            this.txtIP.Size = new System.Drawing.Size(162, 22);
             this.txtIP.TabIndex = 0;
             // 
             // label1
@@ -80,7 +80,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(11, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.Size = new System.Drawing.Size(51, 12);
             this.label1.TabIndex = 1;
             this.label1.Text = "IP地址：";
             // 
@@ -108,12 +108,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(306, 217);
+            this.ClientSize = new System.Drawing.Size(559, 496);
             this.Controls.Add(this.txtResult);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "IP地址及手机号码归属地查询";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

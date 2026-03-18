@@ -636,7 +636,6 @@ namespace vcs_AudioVideoTest1
                 this.timer1.Tick += ShowLineLrc;
                 this.timer1.Start();
             }
-
             int len = al.Count;
             richTextBox1.Text = "len = " + len.ToString() + "\n";
         }
@@ -652,7 +651,6 @@ namespace vcs_AudioVideoTest1
             bool isAr = this.richTextBox1.Text.Contains("歌手:");
             bool isTi = this.richTextBox1.Text.Contains("歌名:");
 
-
             if ((pos >= 0) && (pos < 25))
             {
                 int n = isAr ? 1 : 0;
@@ -660,7 +658,6 @@ namespace vcs_AudioVideoTest1
 
                 int height = 28 * (this.al.Count + m + n);
                 int max = height - this.richTextBox1.Height;
-
 
                 this.richTextBox1.SelectAll();
                 this.richTextBox1.SelectionColor = Color.Black;
@@ -714,98 +711,6 @@ namespace vcs_AudioVideoTest1
 
         private void button14_Click(object sender, EventArgs e)
         {
-            //月亮代表我的心1
-
-            //racket 定义节拍
-            const int one = 600;//一拍
-            const int half = 300;//半拍
-            const int four_one = 150;//1/4拍
-            const int onedot = 450;//附点音符
-            ////note   定义音符
-            //const int mnote1 = 440;//do
-            //const int mnote2 = 495;//re
-            //const int mnote3 = 550;//mi
-            //const int mnote4 = 587;//fa
-            //const int mnote5 = 660;//so
-            //const int mnote6 = 733;//la
-            //const int mnote7 = 825;//si
-
-            //const int lnote5 = 325;
-
-            #region
-            //low note   低音区
-            const int lnote1 = 262;
-            const int lnote2 = 294;
-            const int lnote3 = 330;
-            const int lnote4 = 349;
-            const int lnote5 = 392;
-            const int lnote6 = 440;
-            const int lnote7 = 494;
-            //mid note   中音区
-            const int mnote1 = 523;
-            const int mnote2 = 578;
-            const int mnote3 = 659;
-            const int mnote4 = 698;
-            const int mnote5 = 784;
-            const int mnote6 = 880;
-            const int mnote7 = 988;
-            //hight note   高音区
-            const int hnote1 = 1046;
-            const int hnote2 = 1175;
-            const int hnote3 = 1318;
-            const int hnote4 = 1397;
-            const int hnote5 = 1568;
-            const int hnote6 = 1760;
-            const int hnote7 = 1976;
-            #endregion
-
-            //月亮代表我的心
-            Console.Beep(lnote5, half);
-
-            Console.Beep(mnote1, onedot);
-            Console.Beep(mnote3, half);
-            Console.Beep(mnote5, onedot);
-            Console.Beep(mnote1, half);
-
-            Console.Beep(lnote7, onedot);
-            Console.Beep(mnote3, half);
-            Console.Beep(mnote5, onedot);
-            Console.Beep(mnote5, half);
-
-
-            Console.Beep(mnote6, onedot);
-            Console.Beep(mnote7, half);
-            Console.Beep(hnote1, onedot);
-            Console.Beep(mnote6, half);
-
-            Console.Beep(mnote5, one);
-            Thread.Sleep(one);
-            Thread.Sleep(one);
-            Console.Beep(mnote3, half);
-            Console.Beep(mnote2, half);
-
-            Console.Beep(mnote1, onedot);
-            Console.Beep(mnote1, half);
-            Console.Beep(mnote1, half);
-            Console.Beep(mnote1, one);
-            Console.Beep(mnote3, half);
-            Console.Beep(mnote2, half);
-
-            Console.Beep(mnote1, onedot);
-            Console.Beep(mnote1, half);
-            Console.Beep(mnote1, half);
-            Console.Beep(mnote1, one);
-            Console.Beep(mnote2, half);
-            Console.Beep(mnote3, half);
-
-
-            Console.Beep(mnote2, onedot);
-            Console.Beep(mnote1, half);
-            Console.Beep(lnote6, one);
-            Console.Beep(mnote2, half);
-            Console.Beep(mnote3, half);
-
-            Console.Beep(mnote2, one);
         }
 
         // Play the notes in a song.
@@ -872,7 +777,7 @@ namespace vcs_AudioVideoTest1
 
         private void button17_Click(object sender, EventArgs e)
         {
-            //C# 演奏月亮代表我的心
+            //月亮代表我的心2
 
             //racket 定義節拍
             const int one = 600;//一拍
@@ -890,7 +795,7 @@ namespace vcs_AudioVideoTest1
 
             //const int lnote5 = 325;
 
-            #region
+            //#region
             //low note   低音區
             const int lnote1 = 262;
             const int lnote2 = 294;
@@ -915,9 +820,9 @@ namespace vcs_AudioVideoTest1
             const int hnote5 = 1568;
             const int hnote6 = 1760;
             const int hnote7 = 1976;
-            #endregion
+            //#endregion
 
-            //月亮代表我的心
+            //月亮代表我的心2
             Console.Beep(lnote5, half);
 
             Console.Beep(mnote1, onedot);
@@ -937,8 +842,8 @@ namespace vcs_AudioVideoTest1
             Console.Beep(mnote6, half);
 
             Console.Beep(mnote5, one);
-            System.Threading.Thread.Sleep(one);
-            System.Threading.Thread.Sleep(one);
+            Thread.Sleep(one);
+            Thread.Sleep(one);
             Console.Beep(mnote3, half);
             Console.Beep(mnote2, half);
 
@@ -988,6 +893,9 @@ namespace vcs_AudioVideoTest1
 
             System.Console.Beep(400, 500);
             System.Console.Beep(800, 500);
+
+            Console.Beep(); //蜂鳴器發聲 262Hz, 500ms
+            //Console.Beep(262, 500); //蜂鳴器發聲 262Hz, 500ms
         }
 
         //Beep ST
@@ -1109,7 +1017,6 @@ namespace vcs_AudioVideoTest1
         private void bt_soundplayer1_Click(object sender, EventArgs e)
         {
             PlayWav(@"D:\_git\vcs\_1.data\______test_files1\_wav\Frog.wav", true);
-
         }
 
         private void bt_soundplayer2_Click(object sender, EventArgs e)
@@ -1119,9 +1026,7 @@ namespace vcs_AudioVideoTest1
 
         //PC喇叭音效 ST
 
-
-        // Define the frequencies of notes in an octave, as well as 
-        // silence (rest).
+        // Define the frequencies of notes in an octave, as well as silence (rest).
         protected enum Tone
         {
             REST = 0,
@@ -1193,9 +1098,13 @@ namespace vcs_AudioVideoTest1
         protected void Play(Note tune)
         {
             if (tune.NoteTone == Tone.REST)
+            {
                 Thread.Sleep((int)tune.NoteDuration);
+            }
             else
+            {
                 Console.Beep((int)tune.NoteTone, (int)tune.NoteDuration);
+            }
         }
 
         private void PlayMic(int a)
@@ -1291,7 +1200,6 @@ namespace vcs_AudioVideoTest1
         {
             int freq = int.Parse(txtFrequency.Text);
             int duration = int.Parse(txtDuration.Text);
-
             Console.Beep(freq, duration);
         }
     }
@@ -1501,10 +1409,3 @@ namespace vcs_AudioVideoTest1
         }
     }
 }
-
-
-/*
-            Console.Beep(); //蜂鳴器發聲 262Hz, 500ms
-            //Console.Beep(262, 500); //蜂鳴器發聲 262Hz, 500ms
-
-*/

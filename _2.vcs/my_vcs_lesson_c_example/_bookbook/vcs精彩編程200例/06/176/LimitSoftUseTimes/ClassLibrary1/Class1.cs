@@ -6,20 +6,6 @@ using System.Management;
 
 namespace ClassLibrary1
 {
-    //=====================================================
-    //Copyright (C) 2008-2009 小科
-    //All rights reserved
-    //CLR版本:            2.0.50727.1433
-    //新建项输入的名称: SoftReg
-    //机器名称:            MRWXK
-    //注册组织名:         
-    //命名空间名称:      LimitSoftUseTimes
-    //文件名:              SoftReg
-    //当前系统时间:      2008-12-16 13:19:10
-    //当前登录用户名:   Administrator
-    //创建年份:           2008
-    //http://www.mingribook.com
-    //======================================================
     public class SoftReg
     {
         // 取得设备硬盘的卷标号

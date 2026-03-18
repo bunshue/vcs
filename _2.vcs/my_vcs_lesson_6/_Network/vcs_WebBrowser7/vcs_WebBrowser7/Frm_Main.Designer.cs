@@ -70,7 +70,7 @@
             // 
             this.tstbURL.Name = "tstbURL";
             this.tstbURL.Size = new System.Drawing.Size(400, 25);
-            this.tstbURL.Text = "http://www.mrbccd.com";
+            this.tstbURL.Text = "https://www.google.com/";
             this.tstbURL.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tstbURL_KeyDown);
             // 
             // toolStripButton1

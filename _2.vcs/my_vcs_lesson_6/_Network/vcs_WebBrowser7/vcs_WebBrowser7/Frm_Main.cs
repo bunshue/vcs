@@ -17,12 +17,8 @@ namespace vcs_WebBrowser7
 {
     public partial class Frm_Main : Form
     {
-        public Frm_Main()
-        {
-            InitializeComponent();
-        }
         //********************************
-        public  struct RECT
+        public struct RECT
         {
             public int Left;
             public int Top;
@@ -38,19 +34,19 @@ namespace vcs_WebBrowser7
         [DllImport("gdi32")]
         public static extern int CreateCompatibleBitmap(int hdc, int nWidth, int nHeight);
         [DllImport("user32")]
-        public static extern int GetWindow(int hwnd,int wCmd);
+        public static extern int GetWindow(int hwnd, int wCmd);
         [DllImport("user32")]
-        public static extern int GetClassNameA(int hwnd,string lpClassName,int nMaxCount);
+        public static extern int GetClassNameA(int hwnd, string lpClassName, int nMaxCount);
         [DllImport("user32")]
-        private  static extern int GetWindowRect(IntPtr hwnd,ref RECT lpRect);
+        private static extern int GetWindowRect(IntPtr hwnd, ref RECT lpRect);
         [DllImport("gdi32")]
-        public static extern int BitBlt(int hDestDC,int x,int y,int nWidth,int nHeight,int hSrcDC,int xSrc,int ySrc,int dwRop);
+        public static extern int BitBlt(int hDestDC, int x, int y, int nWidth, int nHeight, int hSrcDC, int xSrc, int ySrc, int dwRop);
         [DllImport("user32")]
         public static extern int OpenClipboard(IntPtr hwnd);
         [DllImport("user32")]
         public static extern int EmptyClipboard();
         [DllImport("user32")]
-        public static extern int SetClipboardData(int wFormat,int hMem);
+        public static extern int SetClipboardData(int wFormat, int hMem);
         [DllImport("user32")]
         public static extern int CloseClipboard();
         int DestDC;
@@ -59,7 +55,17 @@ namespace vcs_WebBrowser7
         IntPtr winpoint;
         RECT Rectangles;
         bool flag = false;
-        //*******************************
+
+        public Frm_Main()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -67,7 +73,7 @@ namespace vcs_WebBrowser7
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://www.mingribook.com");
+            System.Diagnostics.Process.Start("https://www.google.com/");
         }
 
         private Uri getUrl(string address)
@@ -93,7 +99,7 @@ namespace vcs_WebBrowser7
         {
             string strUrl = tstbURL.Text.Trim();
             webBrowser1.Navigate(getUrl(strUrl));
-            tstbURL.Text =Convert.ToString(getUrl(strUrl));
+            tstbURL.Text = Convert.ToString(getUrl(strUrl));
             tsslStatus.Text = tstbURL.Text;
             flag = true;
         }
@@ -114,12 +120,12 @@ namespace vcs_WebBrowser7
         {
             this.TopMost = true;
             SelectObject(DestDC, Bhandle);
-            int linewidth=0;
-            int lineheight=0;
-            int i=0;
-            int j=0;
+            int linewidth = 0;
+            int lineheight = 0;
+            int i = 0;
+            int j = 0;
             winpoint = webBrowser1.Handle;
-            GetWindowRect(winpoint,ref Rectangles);
+            GetWindowRect(winpoint, ref Rectangles);
             webBrowser1.Document.Body.ScrollTop = 0;
             while (lineheight < webBrowser1.Document.Body.ScrollRectangle.Height - 199)
             {
@@ -127,7 +133,7 @@ namespace vcs_WebBrowser7
                 {
                     inputHide();
                     BitBlt(DestDC, 0, 0, webBrowser1.Document.Body.ClientRectangle.Width, webBrowser1.Document.Body.ClientRectangle.Height, SourceDC, Rectangles.Left, Rectangles.Top, 13369376);//获取可见区域场景
-                    linewidth = webBrowser1.Document.Body.ClientRectangle.Width+5; //赋值宽
+                    linewidth = webBrowser1.Document.Body.ClientRectangle.Width + 5; //赋值宽
                     if (linewidth < webBrowser1.Document.Body.ScrollRectangle.Width)
                     {
                         while (linewidth < webBrowser1.Document.Body.ScrollRectangle.Width - 199)
@@ -143,7 +149,7 @@ namespace vcs_WebBrowser7
                             inputHide();
                             webBrowser1.Document.Body.ScrollLeft += 199;
                             BitBlt(DestDC, webBrowser1.Document.Body.ClientRectangle.Width + 199 * j, 0, webBrowser1.Document.Body.ScrollRectangle.Width - linewidth, webBrowser1.Document.Body.ClientRectangle.Height, SourceDC, Rectangles.Left + webBrowser1.Document.Body.ClientRectangle.Width - (webBrowser1.Document.Body.ScrollRectangle.Width - linewidth), Rectangles.Top, 13369376);
-                            webBrowser1.Document.Body.ScrollLeft= 0;
+                            webBrowser1.Document.Body.ScrollLeft = 0;
                             j = 0;
                         }
 
@@ -157,7 +163,7 @@ namespace vcs_WebBrowser7
                     linewidth = webBrowser1.Document.Body.ClientRectangle.Width;//当前宽度
                     if (linewidth < webBrowser1.Document.Body.ScrollRectangle.Width)
                     {
-                        while (linewidth < webBrowser1.Document.Body.ScrollRectangle.Width-199)
+                        while (linewidth < webBrowser1.Document.Body.ScrollRectangle.Width - 199)
                         {
                             inputHide();
                             webBrowser1.Document.Body.ScrollLeft += 199;
@@ -165,60 +171,59 @@ namespace vcs_WebBrowser7
                             linewidth = linewidth + 199;
                             j = j + 1;
                         }
-                        if(linewidth >=webBrowser1.Document.Body.ScrollRectangle.Width-199)
+                        if (linewidth >= webBrowser1.Document.Body.ScrollRectangle.Width - 199)
                         {
                             inputHide();
-                            webBrowser1.Document.Body.ScrollLeft+=199;
+                            webBrowser1.Document.Body.ScrollLeft += 199;
                             BitBlt(DestDC, webBrowser1.Document.Body.ClientRectangle.Width + 199 * j, webBrowser1.Document.Body.ClientRectangle.Height + 199 * i, webBrowser1.Document.Body.ScrollRectangle.Width - linewidth, 199, SourceDC, Rectangles.Left + webBrowser1.Document.Body.ClientRectangle.Width - (webBrowser1.Document.Body.ScrollRectangle.Width - linewidth), Rectangles.Top + webBrowser1.Document.Body.ClientRectangle.Height - 199, 13369376);
-                            webBrowser1.Document.Body.ScrollLeft=0;
+                            webBrowser1.Document.Body.ScrollLeft = 0;
                             j = 0;
                         }
                     }
                     i = i + 1;//纵向计数器累计
                     lineheight = lineheight + 199;
                 }
-                webBrowser1.Document.Body.ScrollTop+=199;//调整纵向滚动条位置
+                webBrowser1.Document.Body.ScrollTop += 199;//调整纵向滚动条位置
             }
             if (lineheight >= webBrowser1.Document.Body.ScrollRectangle.Height - 199)
             {
                 inputHide();
                 BitBlt(DestDC, 0, webBrowser1.Document.Body.ClientRectangle.Height + 199 * i, webBrowser1.Document.Body.ClientRectangle.Width, (webBrowser1.Document.Body.ScrollRectangle.Height - lineheight), SourceDC, Rectangles.Left, Rectangles.Top + webBrowser1.Document.Body.ClientRectangle.Height - (webBrowser1.Document.Body.ScrollRectangle.Height - lineheight), 13369376);
                 linewidth = webBrowser1.Document.Body.ClientRectangle.Width;
-                if(linewidth < webBrowser1.Document.Body.ScrollRectangle.Width)
+                if (linewidth < webBrowser1.Document.Body.ScrollRectangle.Width)
                 {
-                    while(linewidth<webBrowser1.Document.Body.ScrollRectangle.Width-199)
+                    while (linewidth < webBrowser1.Document.Body.ScrollRectangle.Width - 199)
                     {
                         inputHide();
-                        webBrowser1.Document.Body.ScrollLeft+=199;
+                        webBrowser1.Document.Body.ScrollLeft += 199;
                         BitBlt(DestDC, webBrowser1.Document.Body.ClientRectangle.Width + 199 * j, webBrowser1.Document.Body.ClientRectangle.Height + 199 * i, webBrowser1.Document.Body.ClientRectangle.Width, (webBrowser1.Document.Body.ScrollRectangle.Height - lineheight), SourceDC, Rectangles.Left + webBrowser1.Document.Body.ClientRectangle.Width - 199, Rectangles.Top + webBrowser1.Document.Body.ClientRectangle.Height - (webBrowser1.Document.Body.ScrollRectangle.Height - lineheight), 13369376);
                         linewidth = linewidth + 199;
                         j = j + 1;
                     }
-                    if(linewidth >=webBrowser1.Document.Body.ScrollRectangle.Width-199)
+                    if (linewidth >= webBrowser1.Document.Body.ScrollRectangle.Width - 199)
                     {
                         inputHide();
-                        webBrowser1.Document.Body.ScrollLeft+=199;
+                        webBrowser1.Document.Body.ScrollLeft += 199;
                         BitBlt(DestDC, webBrowser1.Document.Body.ClientRectangle.Width + 199 * j, webBrowser1.Document.Body.ClientRectangle.Height + 199 * i, webBrowser1.Document.Body.ScrollRectangle.Width - linewidth, (webBrowser1.Document.Body.ScrollRectangle.Height - lineheight), SourceDC, Rectangles.Left + webBrowser1.Document.Body.ClientRectangle.Width - (webBrowser1.Document.Body.ScrollRectangle.Width - linewidth), Rectangles.Top + webBrowser1.Document.Body.ClientRectangle.Height - (webBrowser1.Document.Body.ScrollRectangle.Height - lineheight), 13369376);
-                        webBrowser1.Document.Body.ScrollLeft=0;
+                        webBrowser1.Document.Body.ScrollLeft = 0;
                     }
                 }
-                i=0;
+                i = 0;
                 OpenClipboard(this.Handle);
                 EmptyClipboard();
-                SetClipboardData(2,Bhandle);
+                SetClipboardData(2, Bhandle);
                 CloseClipboard();
                 Image ig = (Image)Clipboard.GetImage();
                 if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     string path = saveFileDialog1.FileName;
                     ig.Save(path);
-                    MessageBox.Show("保存成功","提示",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                    MessageBox.Show("保存成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     webBrowser1.Document.Body.ScrollTop = 0;
                     ig.Dispose();
                 }
             }
         }
-
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
@@ -232,11 +237,6 @@ namespace vcs_WebBrowser7
             SourceDC = CreateDC("DISPLAY", "0", "0", 0);
             DestDC = CreateCompatibleDC(SourceDC);
             Bhandle = CreateCompatibleBitmap(SourceDC, webBrowser1.Document.Body.ScrollRectangle.Width, webBrowser1.Document.Body.ScrollRectangle.Height);
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

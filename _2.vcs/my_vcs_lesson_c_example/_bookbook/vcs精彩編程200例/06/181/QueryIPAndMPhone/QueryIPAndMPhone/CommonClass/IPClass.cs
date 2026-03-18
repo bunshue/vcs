@@ -7,19 +7,6 @@ using System.Text.RegularExpressions;
 
 namespace QueryIPAndMPhone.CommonClass
 {
-    //=====================================================
-    //Copyright (C) 2008-2009 小科
-    //All rights reserved
-    //CLR版本:           2.0.50727.1433
-    //新建项输入的名称:  IPClass
-    //机器名称:          MRWXK
-    //命名空间名称:      QueryIPAndMPhone.CommonClass
-    //文件名:            IPClass
-    //当前系统时间:      2008-10-14 10:20:23
-    //当前登录用户名:    Administrator
-    //创建年份:          2008
-    //http://www.mingribook.com
-    //======================================================
     class IPClass
     {
         //查找IP
@@ -41,10 +28,10 @@ namespace QueryIPAndMPhone.CommonClass
             IPStruct myIPStruct;
             if (intIndex >= 0)
             {
-                FStream.Seek(intIndex,SeekOrigin.Begin);
+                FStream.Seek(intIndex, SeekOrigin.Begin);
                 //读取开头IP值
                 myIPStruct.IPStart = BReader.ReadUInt32();
-                FStream.Seek(ReadInt(BReader),SeekOrigin.Begin);
+                FStream.Seek(ReadInt(BReader), SeekOrigin.Begin);
                 //读取结尾IP值
                 myIPStruct.IPEnd = BReader.ReadUInt32();
                 myIPStruct.Country = GetIPPlace(FStream, BReader);
@@ -61,6 +48,7 @@ namespace QueryIPAndMPhone.CommonClass
             FStream.Close();
             return myIPStruct;
         }
+
         //定位IP索引记录位置
         private static int GetIPIndex(FileStream FStream, BinaryReader BReader, int intFirst, int intLast, uint uintIP)
         {
@@ -96,6 +84,7 @@ namespace QueryIPAndMPhone.CommonClass
             } while (intFirst != intLast);
             return intMiddle;
         }
+
         //判断字符串是否为数值类型
         private static bool IsNumeric(string str)
         {
@@ -104,6 +93,7 @@ namespace QueryIPAndMPhone.CommonClass
             else
                 return false;
         }
+
         //将IP字符串转换为长整型值
         private static uint IPToInt(string strIPS)
         {
@@ -122,6 +112,7 @@ namespace QueryIPAndMPhone.CommonClass
             }
             return uintIP;
         }
+
         //将长整型值转化为IP字符串
         public static string IntToIP(uint uintIP)
         {
@@ -129,6 +120,7 @@ namespace QueryIPAndMPhone.CommonClass
             strIP += (uintIP >> 24) + "." + ((uintIP & 0x00FF0000) >> 16) + "." + ((uintIP & 0x0000FF00) >> 8) + "." + (uintIP & 0x000000FF);
             return strIP;
         }
+
         //读取字符串
         public static string ReadString(BinaryReader BReader)
         {
@@ -140,6 +132,7 @@ namespace QueryIPAndMPhone.CommonClass
             } while (btContent[i++] != '\0' && i < 128);
             return Encoding.Default.GetString(btContent).TrimEnd('\0');
         }
+
         //读取3字节的整数
         public static int ReadInt(BinaryReader BReader)
         {
@@ -150,6 +143,7 @@ namespace QueryIPAndMPhone.CommonClass
             intNum |= (int)BReader.ReadByte() << 16 & 0xFF0000;
             return intNum;
         }
+
         //读取IP所在地字符串
         private static string GetIPPlace(FileStream FStream, BinaryReader BReader)
         {
@@ -159,25 +153,26 @@ namespace QueryIPAndMPhone.CommonClass
             if (Tag == 0x01)		//城市信息随国家信息定向
             {
                 OffSet = ReadInt(BReader);
-                FStream.Seek(OffSet,SeekOrigin.Begin);
+                FStream.Seek(OffSet, SeekOrigin.Begin);
                 return GetIPPlace(FStream, BReader);
             }
             else if (Tag == 0x02)	//城市信息不随国家信息定向
             {
                 OffSet = ReadInt(BReader);
                 int tmpOffSet = (int)FStream.Position;
-                FStream.Seek(OffSet,SeekOrigin.Begin);
+                FStream.Seek(OffSet, SeekOrigin.Begin);
                 string tmpStr = GetIPPlace(FStream, BReader);
-                FStream.Seek(tmpOffSet,SeekOrigin.Begin);
+                FStream.Seek(tmpOffSet, SeekOrigin.Begin);
                 return tmpStr;
             }
             else	                //最简单模式
             {
-                FStream.Seek(-1,SeekOrigin.Current);
+                FStream.Seek(-1, SeekOrigin.Current);
                 return ReadString(BReader);
             }
         }
     }
+
     //IP地址结构
     public struct IPStruct
     {

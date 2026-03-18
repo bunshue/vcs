@@ -46,6 +46,13 @@ namespace vcs_ScrollBar
             //pictureBox1.Height = 225;
             //hScrollBar1.Value = 300;
             //vScrollBar1.Value = 225;
+
+            //6060
+
+            panel_rgb.BackColor = Color.FromArgb(hScrollBar_r.Value, hScrollBar_g.Value, hScrollBar_b.Value);
+            panel_r.BackColor = Color.FromArgb(hScrollBar_r.Value, 0, 0);
+            panel_g.BackColor = Color.FromArgb(0, hScrollBar_g.Value, 0);
+            panel_b.BackColor = Color.FromArgb(0, 0, hScrollBar_b.Value);
         }
 
         void show_item_location()
@@ -92,6 +99,19 @@ namespace vcs_ScrollBar
             // 圖片的寬度依目前水平捲軸的值調整
             pictureBox1.Width = hScrollBar1.Value;
             label1.Text = "寬：" + hScrollBar1.Value.ToString() + "       高：" + vScrollBar1.Value.ToString();
+        }
+
+        private void hScrollBar_rgb_Scroll(object sender, ScrollEventArgs e)
+        {
+            //用水平滾動條調整背景色的實例
+            //调用了方法，另外把hScrollBar2的scrooll时间设置成hScrollBar1的scroll事件就行了
+            panel_rgb.BackColor = Color.FromArgb(hScrollBar_r.Value, hScrollBar_g.Value, hScrollBar_b.Value);
+            tb_r.Text = hScrollBar_r.Value.ToString();
+            tb_g.Text = hScrollBar_g.Value.ToString();
+            tb_b.Text = hScrollBar_b.Value.ToString();
+            panel_r.BackColor = Color.FromArgb(hScrollBar_r.Value, 0, 0);
+            panel_g.BackColor = Color.FromArgb(0, hScrollBar_g.Value, 0);
+            panel_b.BackColor = Color.FromArgb(0, 0, hScrollBar_b.Value);
         }
     }
 }

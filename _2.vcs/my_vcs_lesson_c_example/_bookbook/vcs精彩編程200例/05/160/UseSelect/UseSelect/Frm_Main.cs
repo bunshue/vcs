@@ -61,7 +61,7 @@ namespace UseSelect
                 if (validateNum(txt_Age.Text) && validateNum(txt_Age2.Text))
                 {
                     //组合SQL字符串
-                    FindValue += "(Age between " + Convert.ToInt32(txt_Age.Text) +                        " and " + Convert.ToInt32(txt_Age2.Text) + ") and";
+                    FindValue += "(Age between " + Convert.ToInt32(txt_Age.Text) + " and " + Convert.ToInt32(txt_Age2.Text) + ") and";
                 }
                 else
                 {

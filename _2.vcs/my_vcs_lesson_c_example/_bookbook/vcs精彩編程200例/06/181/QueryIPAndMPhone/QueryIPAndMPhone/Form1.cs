@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;
 using System.Text.RegularExpressions;
 using QueryIPAndMPhone.CommonClass;
@@ -14,17 +15,22 @@ namespace QueryIPAndMPhone
 {
     public partial class Form1 : Form
     {
+        private string IPData = "IPData.dat";           //IP数据文件
+        private string MPhoneData = "MPhoneData.dat";   //手机号码归属地数据文件
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private string IPData = "IPData.dat";           //IP数据文件
-        private string MPhoneData = "MPhoneData.dat";   //手机号码归属地数据文件
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
 
         private void btnQuery_Click(object sender, EventArgs e)
         {
-            string strIP= txtIP.Text.Trim();
+            string strIP = txtIP.Text.Trim();
             string strMPhone = txtMPhone.Text.Trim();
             txtResult.Text = "";
             //查询IP

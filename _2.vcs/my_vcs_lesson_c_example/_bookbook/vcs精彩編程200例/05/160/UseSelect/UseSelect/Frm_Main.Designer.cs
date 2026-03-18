@@ -296,15 +296,15 @@
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(145, 17);
-            this.toolStripStatusLabel2.Text = "吉林省明日科技有限公司  ";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(50, 17);
+            this.toolStripStatusLabel2.Text = "Google";
             // 
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.IsLink = true;
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(167, 17);
-            this.toolStripStatusLabel3.Text = "http://www.mingribook.com";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(153, 17);
+            this.toolStripStatusLabel3.Text = "https://www.google.com/";
             // 
             // timer1
             // 
