@@ -49,8 +49,7 @@ namespace vcs_SqlConnection5
             dataGridView2.Size = new Size(W, H);
             dataGridView3.Size = new Size(W, H);
             dataGridView4.Size = new Size(W, H);
-            pictureBox1.Size = new Size(300, H - 120);
-            richTextBox1.Size = new Size(300, H - 100);
+            richTextBox1.Size = new Size(300, H + 100);
             dx = W + 10;
             dy = H + 30;
             int dd = 25;
@@ -62,8 +61,7 @@ namespace vcs_SqlConnection5
             dataGridView2.Location = new Point(x_st + dx * 0, y_st + dy * 1 + dd);
             dataGridView3.Location = new Point(x_st + dx * 1, y_st + dy * 0 + dd);
             dataGridView4.Location = new Point(x_st + dx * 1, y_st + dy * 1 + dd);
-            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1 -140);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1 + dd+100);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1 + dd - 100);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             dy = 30;
@@ -319,75 +317,65 @@ namespace vcs_SqlConnection5
             }
         }
 
-        //取得資料並畫圖 ST
+        //------------------------------------------------------------  # 60個
 
-        SqlConnection con;
-        SqlCommand cmd;
-
-        private void Conn()
-        {
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
-            con = new SqlConnection(cnstr);
-            con.Open();
-        }
-
-        private void ShowPic()
-        {
-            Conn();												//打开数据库
-            using (cmd = new SqlCommand("SELECT TOP 3 * FROM tb_Rectangle order by t_Num desc", con))
-            {
-                SqlDataReader dr = cmd.ExecuteReader();						//创建SqlDataReader对象
-                Bitmap bitM = new Bitmap(this.pictureBox1.Width, this.pictureBox1.Height);	//创建画布
-                Graphics g = Graphics.FromImage(bitM);						//创建Graphics对象
-                Pen p = new Pen(new SolidBrush(Color.SlateGray), 1.0f);			//创建Pen对象
-                p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;		//设置虚线
-                g.Clear(Color.White);									//设置画布颜色
-                for (int i = 0; i < 5; i++)
-                {
-                    //绘制水平线条
-                    g.DrawLine(p, 50, this.pictureBox1.Height - 20 - i * 20, this.pictureBox1.Width - 40, this.pictureBox1.Height - 20 - i * 20);
-                    g.DrawString(Convert.ToString(i * 100), new Font("Times New Roman", 10, FontStyle.Regular), new SolidBrush(Color.Black), 20, this.pictureBox1.Height - 27 - i * 20);					//绘制商品的增长值
-                }
-                for (int j = 0; j < 4; j++)
-                {
-                    g.DrawLine(p, 50, this.pictureBox1.Height - 20, 50, 20);			//绘制垂直线条
-                    if (dr.Read())
-                    {
-                        int x, y, w, h;									//声明变量存储坐标和大小
-                        g.DrawString(dr[0].ToString(), new Font("宋体", 9, FontStyle.Regular), new SolidBrush(Color.Black), 76 + 40 * j, this.pictureBox1.Height - 16);										//绘制商品名称
-                        x = 78 + 40 * j;									//X坐标
-                        y = this.pictureBox1.Height - 20 - Convert.ToInt32((Convert.ToDouble(Convert.ToDouble(dr[1].ToString()) * 20 / 100)));														//Y坐标
-                        w = 24;										//宽度
-                        h = Convert.ToInt32(Convert.ToDouble(dr[1].ToString()) * 20 / 100);//高度
-                        g.FillRectangle(new SolidBrush(Color.SlateGray), x, y, w, h);	//绘制柱形图
-                        g.DrawString((h * 100 / 20).ToString(), new Font("宋体", 8, FontStyle.Bold), new SolidBrush(Color.Tomato), new Point(x + 4, y - 10));												//在柱形图指定的位置绘制文字
-                    }
-                }
-                this.pictureBox1.BackgroundImage = bitM;						//显示绘制的图形
-            }
-        }
+        // 宣告cnStr資料庫連接字串，指定連接ch23DB.mdf
+        string cnStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\ch23DB.mdf;Integrated Security=True;Connect Timeout=30";
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //取得資料並畫圖
-            ShowPic();
+            //讀取資料庫
+            DataSet ds = SelectBook();
+            dataGridView1.DataSource = ds.Tables[0];//设置数据源
 
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //新增
+            string 書號 = "IMS0311";
+            string 書名 = "膠囊內視鏡";
+            int 單價 = 12345;
+            int 數量 = 20;
+
+            InsertBook(書號, 書名, 單價, 數量);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //讀取資料庫
+            ds = SelectBook();
+            dataGridView2.DataSource = ds.Tables[0];//设置数据源
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //更新
+            書號 = "IMS0311";//以書號為準
+            書名 = "ims EGD";
+            單價 = 123;
+            數量 = 18;
+
+            UpdateBook(書號, 書名, 單價, 數量);
+
+            //讀取資料庫
+            ds = SelectBook();
+            dataGridView3.DataSource = ds.Tables[0];//设置数据源
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //刪除
+            書號 = "IMS0311";//以書號為準
+
+            DeleteBook(書號);
+
+            //讀取資料庫
+            ds = SelectBook();
+            dataGridView4.DataSource = ds.Tables[0];//设置数据源
         }
-
-        //6060
-
-        // 宣告cnStr資料庫連接字串，指定連接ch23DB.mdf
-        private string cnStr = @"Data Source=(LocalDB)\v11.0;" +
-                    "AttachDbFilename=|DataDirectory|ch23DB.mdf;" +
-                    "Integrated Security=True";
 
         public DataSet SelectBook()
         {
             using (SqlConnection cn = new SqlConnection())
             {
                 cn.ConnectionString = cnStr;
-                SqlDataAdapter da = new SqlDataAdapter
-                   ("SELECT * FROM 書籍", cn);
+                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM 書籍", cn);
                 DataSet ds = new DataSet();
                 da.Fill(ds);
                 return ds;
@@ -400,17 +388,12 @@ namespace vcs_SqlConnection5
             {
                 cn.ConnectionString = cnStr;
                 cn.Open();
-                string sqlStr = "INSERT INTO 書籍(書號, 書名, 單價, 數量)"
-                   + "VALUES(@BookId, @BookName, @Price, @Qty)";
+                string sqlStr = "INSERT INTO 書籍(書號, 書名, 單價, 數量)" + "VALUES(@BookId, @BookName, @Price, @Qty)";
                 SqlCommand cmd = new SqlCommand(sqlStr, cn);
-                cmd.Parameters.Add(new SqlParameter
-                   ("@BookId", SqlDbType.NVarChar));
-                cmd.Parameters.Add(new SqlParameter
-                   ("@BookName", SqlDbType.NVarChar));
-                cmd.Parameters.Add(new SqlParameter
-                   ("@Price", SqlDbType.Int));
-                cmd.Parameters.Add(new SqlParameter
-                   ("@Qty", SqlDbType.Int));
+                cmd.Parameters.Add(new SqlParameter("@BookId", SqlDbType.NVarChar));
+                cmd.Parameters.Add(new SqlParameter("@BookName", SqlDbType.NVarChar));
+                cmd.Parameters.Add(new SqlParameter("@Price", SqlDbType.Int));
+                cmd.Parameters.Add(new SqlParameter("@Qty", SqlDbType.Int));
                 cmd.Parameters["@BookId"].Value = 書號;
                 cmd.Parameters["@BookName"].Value = 書名;
                 cmd.Parameters["@Price"].Value = 單價;
@@ -425,17 +408,12 @@ namespace vcs_SqlConnection5
             {
                 cn.ConnectionString = cnStr;
                 cn.Open();
-                string sqlStr = "UPDATE 書籍 SET 書名=@BookName," +
-                   "單價=@Price, 數量=@Qty WHERE 書號=@BookId";
+                string sqlStr = "UPDATE 書籍 SET 書名=@BookName," + "單價=@Price, 數量=@Qty WHERE 書號=@BookId";
                 SqlCommand cmd = new SqlCommand(sqlStr, cn);
-                cmd.Parameters.Add(new SqlParameter
-                   ("@BookId", SqlDbType.NVarChar));
-                cmd.Parameters.Add(new SqlParameter
-                   ("@BookName", SqlDbType.NVarChar));
-                cmd.Parameters.Add(new SqlParameter
-                   ("@Price", SqlDbType.Int));
-                cmd.Parameters.Add(new SqlParameter
-                   ("@Qty", SqlDbType.Int));
+                cmd.Parameters.Add(new SqlParameter("@BookId", SqlDbType.NVarChar));
+                cmd.Parameters.Add(new SqlParameter("@BookName", SqlDbType.NVarChar));
+                cmd.Parameters.Add(new SqlParameter("@Price", SqlDbType.Int));
+                cmd.Parameters.Add(new SqlParameter("@Qty", SqlDbType.Int));
                 cmd.Parameters["@BookId"].Value = 書號;
                 cmd.Parameters["@BookName"].Value = 書名;
                 cmd.Parameters["@Price"].Value = 單價;
@@ -452,14 +430,13 @@ namespace vcs_SqlConnection5
                 cn.Open();
                 string sqlStr = "DELETE FROM 書籍 WHERE 書號 = @BookId";
                 SqlCommand cmd = new SqlCommand(sqlStr, cn);
-                cmd.Parameters.Add(new SqlParameter
-                  ("@BookId", SqlDbType.NVarChar));
+                cmd.Parameters.Add(new SqlParameter("@BookId", SqlDbType.NVarChar));
                 cmd.Parameters["@BookId"].Value = 書號;
                 cmd.ExecuteNonQuery();
             }
         }
-        
 
+        //------------------------------------------------------------  # 60個
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -520,3 +497,29 @@ namespace vcs_SqlConnection5
 //dataGridView1.CurrentRow.Cells[0].Value
 //dataGridView1.CurrentRow.Cells[0].Value
 
+
+/*
+                Bitmap bitM = new Bitmap(this.pictureBox1.Width, this.pictureBox1.Height);  // 创建画布
+                Graphics g = Graphics.FromImage(bitM);  // 创建Graphics对象
+                Pen p = new Pen(new SolidBrush(Color.SlateGray), 1.0f);  // 创建Pen对象
+                p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;  // 设置虚线
+                g.Clear(Color.White);  // 设置画布颜色
+
+                        int x, y, w, h;  // 声明变量存储坐标和大小
+                        g.DrawString(dr[0].ToString(), new Font("宋体", 9, FontStyle.Regular), new SolidBrush(Color.Black), 76 + 40 * j, this.pictureBox1.Height - 16);  // 绘制商品名称
+                        x = 78 + 40 * j;  // X坐标
+
+                        //richTextBox1.Text += "bbbb : " + Convert.ToInt32((Convert.ToDouble(Convert.ToDouble(dr[1].ToString()) * 20 / 100))) + "\n";
+                        y = this.pictureBox1.Height - 20 - Convert.ToInt32((Convert.ToDouble(Convert.ToDouble(dr[1].ToString()) * 20 / 100)));  // Y坐标
+
+                        w = 24;  // 宽度
+
+                        richTextBox1.Text += "cccc : " + dr[1].ToString() + "\n";
+                        //richTextBox1.Text += "cccc : " + Convert.ToInt32(Convert.ToDouble(dr[1].ToString()) * 20 / 100) + "\n";
+                        h = Convert.ToInt32(Convert.ToDouble(dr[1].ToString()) * 20 / 100);  // 高度
+
+                        g.FillRectangle(new SolidBrush(Color.SlateGray), x, y, w, h);  // 绘制柱形图
+                        g.DrawString((h * 100 / 20).ToString(), new Font("宋体", 8, FontStyle.Bold), new SolidBrush(Color.Tomato), new Point(x + 4, y - 10));  // 在柱形图指定的位置绘制文字
+                this.pictureBox1.BackgroundImage = bitM;  // 显示绘制的图形
+
+*/

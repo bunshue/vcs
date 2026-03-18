@@ -1305,24 +1305,6 @@ namespace vcs_SqlConnection1
 
         private void button30_Click(object sender, EventArgs e)
         {
-            //讀取資料庫
-            //讀取資料庫
-            //string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
-            //string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
-
-            //创建数据库连接对象
-            SqlConnection sqlcon = new SqlConnection(cnstr);
-
-            //创建适配器对象
-            SqlDataAdapter sqlda = new SqlDataAdapter("SELECT * FROM tb_Employee", sqlcon);
-
-            //创建数据集
-            DataSet ds = new DataSet();
-            sqlda.Fill(ds);//填充数据集
-
-            dataGridView1.DataSource = ds.Tables[0];//设置数据源
-
         }
 
         private void button31_Click(object sender, EventArgs e)

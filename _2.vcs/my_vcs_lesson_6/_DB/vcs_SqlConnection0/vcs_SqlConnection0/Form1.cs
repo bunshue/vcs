@@ -103,14 +103,69 @@ namespace vcs_SqlConnection0
 
         private void button0_Click(object sender, EventArgs e)
         {
+            //讀取資料庫0, 要先知道資料庫檔案(.mdf)和表單名稱(tb_Employee)
+
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+
+            //创建数据库连接对象
+            SqlConnection sqlcon = new SqlConnection(cnstr);
+
+            //创建适配器对象
+            SqlDataAdapter sqlda = new SqlDataAdapter("SELECT * FROM tb_Employee", sqlcon);
+
+            //创建数据集
+            DataSet ds = new DataSet();
+            sqlda.Fill(ds);//填充数据集
+
+            dataGridView1.DataSource = ds.Tables[0];//设置数据源
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //讀取資料庫1
+            //取得資料
+
+            //讀取資料庫0, 要先知道資料庫檔案(.mdf)和表單名稱(tb_Rectangle)
+
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
+
+            //创建数据库连接对象
+            SqlConnection sqlcon = new SqlConnection(cnstr);
+
+            //创建适配器对象
+            SqlDataAdapter sqlda = new SqlDataAdapter("SELECT * FROM tb_Rectangle", sqlcon);
+
+            //创建数据集
+            DataSet ds = new DataSet();
+            sqlda.Fill(ds);//填充数据集
+
+            dataGridView1.DataSource = ds.Tables[0];//设置数据源
+
+            //3030
+
+            SqlConnection con = new SqlConnection(cnstr);
+            con.Open();
+
+            //搜尋 表單tb_Rectangle 欄位t_Num 前4筆 降冪排列
+            using (SqlCommand cmd = new SqlCommand("SELECT TOP 4 * FROM tb_Rectangle order by t_Num desc", con))
+            {
+                SqlDataReader dr = cmd.ExecuteReader();  // 创建SqlDataReader对象
+
+                for (int j = 0; j < 4; j++)
+                {
+                    richTextBox1.Text += "j = " + j.ToString() + "\n";
+                    if (dr.Read())
+                    {
+                        richTextBox1.Text += "aaaa : " + dr[0].ToString() + "\n";
+                        richTextBox1.Text += "bbbb : " + dr[1].ToString() + "\n";
+                    }
+                }
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //讀取資料庫2
         }
 
         private void button3_Click(object sender, EventArgs e)
