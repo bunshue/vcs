@@ -28,15 +28,6 @@ namespace vcs_SqlConnection5
         private void frmMain_Load(object sender, EventArgs e)
         {
             show_item_location();
-
-            //品名
-            txtName.Text = "宏碁筆電";
-            txtName2.Text = "華碩筆電";
-            //單價
-            txtPrice.Text = "12345";
-            //說明
-            txtMsg.Text = "2026年出廠";
-
         }
 
         void show_item_location()
@@ -58,7 +49,7 @@ namespace vcs_SqlConnection5
             dataGridView2.Size = new Size(W, H);
             dataGridView3.Size = new Size(W, H);
             dataGridView4.Size = new Size(W, H);
-            richTextBox1.Size = new Size(300, H);
+            richTextBox1.Size = new Size(300, H+180);
             dx = W + 10;
             dy = H + 30;
             int dd = 25;
@@ -70,24 +61,14 @@ namespace vcs_SqlConnection5
             dataGridView2.Location = new Point(x_st + dx * 0, y_st + dy * 1 + dd);
             dataGridView3.Location = new Point(x_st + dx * 1, y_st + dy * 0 + dd);
             dataGridView4.Location = new Point(x_st + dx * 1, y_st + dy * 1 + dd);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1 + dd);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1 + dd-180);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             dy = 30;
             button1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd);
             button2.Location = new Point(x_st + dx * 2 + 110, y_st + dy * 0 + dd);
-            btnAdd.Location = new Point(x_st + dx * 2 + 110 * 2, y_st + dy * 0 + dd);
-            label1.Location = new Point(x_st + dx * 2, y_st + dy * 4 + dd);
-            txtName.Location = new Point(x_st + dx * 2 + 70, y_st + dy * 4 + dd);
-            label5.Location = new Point(x_st + dx * 2, y_st + dy * 6 + dd);
-            label2.Location = new Point(x_st + dx * 2, y_st + dy * 7 + dd);
-            label3.Location = new Point(x_st + dx * 2, y_st + dy * 8 + dd);
-            label4.Location = new Point(x_st + dx * 2, y_st + dy * 9 + dd);
-            cboCategoryId.Location = new Point(x_st + dx * 2 + 70, y_st + dy * 6 + dd);
-            txtName2.Location = new Point(x_st + dx * 2 + 70, y_st + dy * 7 + dd);
-            txtPrice.Location = new Point(x_st + dx * 2 + 70, y_st + dy * 8 + dd);
-            txtMsg.Location = new Point(x_st + dx * 2 + 70, y_st + dy * 9 + dd);
-            button6.Location = new Point(x_st + dx * 2 + 200, y_st + dy * 7 + dd);
+            button3.Location = new Point(x_st + dx * 2, y_st + dy * 4 + dd);
+            button4.Location = new Point(x_st + dx * 2 + 110, y_st + dy * 4 + dd);
 
             lb_dgv1.Text = "";
             lb_dgv2.Text = "";
@@ -171,7 +152,6 @@ namespace vcs_SqlConnection5
                 SqlDataAdapter da = new SqlDataAdapter("SELECT * From 產品類別", cn);
                 DataSet ds = new DataSet();  // 建立DataSet來儲存Table
                 da.Fill(ds);  // 將DataAdapter查詢之後的結果填充至DataSet
-                cboCategoryId.DataSource = ds.Tables[0];
                 dataGridView2.DataSource = ds.Tables[0];
                 lb_dgv2.Text = "產品類別";
             }
@@ -214,18 +194,24 @@ namespace vcs_SqlConnection5
             }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void dataGridView1_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void dgvCategory_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button3_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "新增類別名稱\n";
-            string new_item = "aaaaaaaaaaa";
-            txtName.Text = new_item;
+
+            string new_item = "麥當勞";
 
             //呼叫Edit()方法並傳入INSERT陳述式新增產品類別記錄
-            db.Edit("INSERT INTO 產品類別(類別名稱)VALUES(N'" + txtName.Text.Replace("'", "''") + "')");
+            db.Edit("INSERT INTO 產品類別(類別名稱)VALUES(N'" + new_item + "')");
 
             show_product_data(dataGridView1, "產品類別");
-
-            txtName.Text = "";
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
@@ -233,12 +219,11 @@ namespace vcs_SqlConnection5
 
             int old_id = 4;
 
-            string new_name = "bbbbb";
-            txtName.Text = new_name;
+            string new_item2 = "肯德雞";
 
             //呼叫Edit()方法並傳入UPDATE陳述式修改產品類別記錄
             //取得DataGridView目前選取第一欄的資料，也就是類別編號欄位
-            db.Edit("UPDATE 產品類別 SET 類別名稱=N'" + txtName.Text.Replace("'", "''") + "' WHERE 類別編號=" + old_id.ToString());
+            db.Edit("UPDATE 產品類別 SET 類別名稱=N'" + new_item2 + "' WHERE 類別編號=" + old_id.ToString());
 
             show_product_data(dataGridView2, "產品類別");
 
@@ -258,25 +243,21 @@ namespace vcs_SqlConnection5
             show_product_data(dataGridView3, "產品類別");
         }
 
-        private void dataGridView1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void dgvCategory_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button6_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "新增\n";
+
+            string new_item = "必勝客";
+            int price = 12345;//單價
+            string mesg = "電話訂購";//說明
+
             db.Edit("INSERT INTO 產品資料(類別編號,品名,單價,說明)VALUES(" +
                 "1" + ",N'" +
-                txtName.Text.Replace("'", "''") + "'," +
-                txtPrice.Text + ",N'" +
-                txtMsg.Text.Replace("'", "''") + "')");
+                new_item + "'," +
+                price.ToString() + ",N'" +
+                mesg + "')");
 
-            //int CategoryId1 = int.Parse(cboCategoryId.SelectedValue.ToString());
-            int CategoryId1 = 1;
+            int CategoryId1 = 1;//類別編號
             richTextBox1.Text += "CategoryId1 = " + CategoryId1.ToString() + "\n";
             using (SqlConnection cn = new SqlConnection(db_cnstr))
             {
@@ -292,14 +273,17 @@ namespace vcs_SqlConnection5
 
             richTextBox1.Text += "修改\n";
 
+            new_item = "達美樂";
+            price = 123;//單價
+            mesg = "網路訂購";//說明
+
             db.Edit("UPDATE 產品資料 SET 品名=N'" +
-                txtName.Text.Replace("'", "''") + "', 單價=" +
-                txtPrice.Text + ", 說明=N'" +
-                txtMsg.Text.Replace("'", "''") + "' WHERE 產品編號=" +
+                new_item + "', 單價=" +
+                price.ToString() + ", 說明=N'" +
+                mesg + "' WHERE 產品編號=" +
                 dataGridView1.CurrentRow.Cells[0].Value.ToString());
 
-            //int CategoryId2 = int.Parse(cboCategoryId.SelectedValue.ToString());
-            int CategoryId2 = 1;
+            int CategoryId2 = 1;//類別編號
             richTextBox1.Text += "CategoryId2 = " + CategoryId2.ToString() + "\n";
             using (SqlConnection cn = new SqlConnection(db_cnstr))
             {
@@ -317,8 +301,7 @@ namespace vcs_SqlConnection5
 
             db.Edit("DELETE FROM 產品資料 WHERE 產品編號=" + dataGridView1.CurrentRow.Cells[0].Value.ToString());
 
-            //int CategoryId3 = int.Parse(cboCategoryId.SelectedValue.ToString());
-            int CategoryId3 = 1;
+            int CategoryId3 = 1;//類別編號
             richTextBox1.Text += "CategoryId3 = " + CategoryId3.ToString() + "\n";
             using (SqlConnection cn = new SqlConnection(db_cnstr))
             {
@@ -329,10 +312,6 @@ namespace vcs_SqlConnection5
                 dataGridView1.DataSource = ds.Tables[0];
                 lb_dgv1.Text = "刪除 產品資料";
             }
-        }
-
-        private void cboCategoryId_SelectedIndexChanged(object sender, EventArgs e)
-        {
         }
     }
 
@@ -379,8 +358,12 @@ namespace vcs_SqlConnection5
  */
 
 
+//combobox 類別編號
 //cboCategoryId.DisplayMember = "類別名稱";//指定Text屬性繫結的是類別名稱
 //cboCategoryId.ValueMember = "類別編號";  //指定Value屬性繫結的是類別編號
+//int CategoryId1 = int.Parse(cboCategoryId.SelectedValue.ToString());
+//int CategoryId2 = int.Parse(cboCategoryId.SelectedValue.ToString());
+//int CategoryId3 = int.Parse(cboCategoryId.SelectedValue.ToString());
 
 //dataGridView1.CurrentRow.Cells[0].Value
 //dataGridView1.CurrentRow.Cells[0].Value

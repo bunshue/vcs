@@ -35,7 +35,7 @@ namespace vcs_Assembly
             //button
             x_st = 10;
             y_st = 10;
-            dx = 170 + 10;
+            dx = 200 + 10;
             dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -49,7 +49,16 @@ namespace vcs_Assembly
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
+            richTextBox1.Size = new Size(600, 690);
+            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(850, 750);
+            this.Text = "vcs_Assembly";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -222,10 +231,9 @@ namespace vcs_Assembly
             string installDirectory = Path.GetDirectoryName(sPath) + @"\";
             richTextBox1.Text += "取得目前執行程式的名字 = " + sPath + "\n";
             richTextBox1.Text += "取得目前執行程式所在的資料夾 = " + installDirectory + "\n";
-
         }
 
-        #region 組件屬性存取子
+        //#region 組件屬性存取子
         public string AssemblyTitle
         {
             get
@@ -302,7 +310,7 @@ namespace vcs_Assembly
                 return ((AssemblyCompanyAttribute)attributes[0]).Company;
             }
         }
-        #endregion
+        //#endregion
 
         private void button8_Click(object sender, EventArgs e)
         {
@@ -329,12 +337,109 @@ namespace vcs_Assembly
                     //richTextBox1.Text += t.ToString() + "\n"; //列出該類別資訊
                 }
             }
-
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //Assembly 大全集
+
+            string location = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            richTextBox1.Text += "location : " + location + "\n";
+            //string serviceFileName = location.Substring(0, location.LastIndexOf('\\')) + "\\" + serviceName + ".exe";
+
+            string namespaceName = Assembly.GetExecutingAssembly().GetName().Name.ToString();   //獲取前文檔命名空間的名稱
+            richTextBox1.Text += namespaceName + "\n";
+
+            Assembly asm = Assembly.GetExecutingAssembly();
+            string name = asm.GetName().Name;
+            richTextBox1.Text += "name : " + name + "\n";
+
 
         }
     }
 }
+
+
+
+
+/*
+
+private void AboutBox_Load(object sender, EventArgs e)
+{
+	AssemblyInfoClass myAssembly = new AssemblyInfoClass();
+	labelProductName.Text = "產品名稱：" + myAssembly.Product;
+	labelVersion.Text = "版本：" + myAssembly.Version;
+	labelCopyright.Text = "版權宣告：" + myAssembly.Copyright;
+	labelCompanyName.Text = "公司名稱：" + myAssembly.Company;
+	textBoxDescription.Text = "細部描述：" +
+	myAssembly.Description;
+}
+
+                string location = Assembly.GetExecutingAssembly().Location;
+                string serviceFileName = location.Substring(0, location.LastIndexOf('\\')) + "\\" + serviceName + ".exe";
+
+一、獲取程序集版本
+label版本.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+            //獲取本代碼所在的文件作為臨時文件，用於獲取屬性列表
+            string tempFile = Assembly.GetExecutingAssembly().FullName;
+
+C#讀取exe版本號
+
+	Assembly currentAssembly = Assembly.LoadFile(currentAssemblyPath);
+	Assembly updatedAssembly = Assembly.LoadFile(updatedAssemblyPath);
+	
+	AssemblyName currentAssemblyName = currentAssembly.GetName();
+	AssemblyName updatedAssemblyName = updatedAssembly.GetName();
+	
+	// 比較版本號
+	if (updatedAssemblyName.Version.CompareTo(currentAssemblyName.Version) <= 0)
+	{
+	    // 不需要更新
+	    return;
+	}
+	
+	AssemblyName currentAssemblyName = AssemblyName.GetAssemblyName(currentAssemblyPath);
+	AssemblyName updatedAssemblyName = AssemblyName.GetAssemblyName(updatedAssemblyPath);
+	
+	// 比較版本
+	if (updatedAssemblyName.Version.CompareTo(currentAssemblyName.Version) <= 0)
+	{
+	    // 不需要更新
+	    return;
+	}
+	
+	// 更新
+	File.Copy(updatedAssemblyPath, currentAssemblyPath, true);
+	
+            //取得 namespaceName
+            string namespaceName = Assembly.GetExecutingAssembly().GetName().Name.ToString();
+
+            richTextBox1.Text += namespaceName + "\n";
+
+            richTextBox1.Text += Assembly.GetExecutingAssembly().Location + "\n";
+
+
+一、獲取程序集版本
+label版本.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+
+使用資源檔的圖片
+
+屬性/資源/加入資源/加入現有檔案/ 選取檔案 picture1.jpg
+此時, Resources 會出現 picture1.jpg
+點選picture1.jpg, 屬性
+建置動作 改成 內嵌資源
+
+
+            Assembly asm = this.GetType().Assembly;
+            Stream stream = asm.GetManifestResourceStream("vcs_test.Resources.picture1.jpg");
+            this.BackgroundImage = new Bitmap(stream);
+
+*/
+/*
+
+            var RootDirectory = AppDomain.CurrentDomain.BaseDirectory ?? System.Reflection.Assembly.GetExecutingAssembly().Location;
+            richTextBox1.Text += "RootDirectory = " + RootDirectory + "\n";
+*/
+

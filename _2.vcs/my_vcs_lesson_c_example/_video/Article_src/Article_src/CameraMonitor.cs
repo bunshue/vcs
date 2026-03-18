@@ -153,9 +153,7 @@ namespace WebcamSecurity
 
             if (this.BeepOnMotion)
             {
-                // beep if BeepOnMotion is toggeled
-                System.Console.Beep(400, 500);
-                System.Console.Beep(800, 500);
+                //偵測到移動
             }
 
             Thread.Sleep(10000); // the user is notified for 10 seconds
@@ -216,4 +214,3 @@ namespace WebcamSecurity
         }
     }
 }
-

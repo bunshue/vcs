@@ -7,9 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Diagnostics;   //for Process
 using System.IO;
-
+using System.Diagnostics;   //for Process
 using System.Runtime.InteropServices;   //for DllImport
 
 //Windows API是對Windows操作系統的API函數，在C#中調用Windows API的實質是托管代碼對非托管代碼的調用。
@@ -37,10 +36,10 @@ namespace vcs_WinAPI
             int dy;
 
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 180;
-            dy = 90;
+            x_st = 12;
+            y_st = 12;
+            dx = 200 + 10;
+            dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -50,29 +49,39 @@ namespace vcs_WinAPI
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            button8.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button9.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-
-            button16.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button17.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button18.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button19.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button21.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button23.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-
+            richTextBox1.Size = new Size(420, 690);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-
-            //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1100, 750);
+            this.Text = "vcs_WinAPI";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -80,38 +89,10 @@ namespace vcs_WinAPI
             richTextBox1.Clear();
         }
 
-
-        //Beep ST
-        [DllImport("kernel32", CharSet = CharSet.Ansi)]
-        //[DllImport("kernel32.dll")]
-        public static extern bool Beep(int frequency, int duration);
-
-        public enum BeepType
-        {
-            SimpleBeep = -1,
-            IconAsterisk = 0x00000040,
-            IconExclamation = 0x00000030,
-            IconHand = 0x00000010,
-            IconQuestion = 0x00000020,
-            Ok = 0x00000000,
-        }
-        [DllImport("user32.dll")]
-        public static extern bool MessageBeep(BeepType beepType);
-
         private void button0_Click(object sender, EventArgs e)
         {
-            Beep(500, 300);
-            //其中的Beep就是Win API的調用，使用[DllImport("kernel32")]屬性進行調用。
-
-            //雜音Beep
-            Random random = new Random();
-            for (int i = 0; i < 10; i++)
-            {
-                Beep(random.Next(10000), 100);
-            }
 
         }
-        //Beep SP
 
         //鼠標 ST
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
@@ -663,7 +644,7 @@ namespace vcs_WinAPI
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern int SystemParametersInfo(int uAction, int uParam, StringBuilder lpvParam, int fuWinIni);
         private const int SPI_GETDESKWALLPAPER = 0x0073;
-        #endregion 
+        #endregion
 
         private void button17_Click(object sender, EventArgs e)
         {
@@ -736,6 +717,36 @@ namespace vcs_WinAPI
 
         }
 
+        private void button24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 
     /// <summary>
@@ -804,7 +815,4 @@ namespace vcs_WinAPI
             return retVal.ToString();
         }
     }
-
-
 }
-

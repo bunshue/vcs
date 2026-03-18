@@ -25,8 +25,72 @@ namespace vcs_Delegate
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            show_item_location();
         }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 10;
+            dy = 60 + 10;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+
+            richTextBox1.Size = new Size(500, 680);
+            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(750, 750);
+            this.Text = "vcs_Delegate";
+            //設定執行後的表單起始位置
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((1920 - this.Size.Width) / 2, (1080 - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+
+        //delegate 範例0 ST
+
+        //產生委派物件-有兩個參數
+        delegate int ExpressNum(int one, int two);
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            //委派函數
+            int total;
+            int num1 = 123;
+            int num2 = 456;
+
+            //產生委派物件，呼叫Lamdba運算式
+            ExpressNum operation1 = (a, b) => a + b;
+            ExpressNum operation2 = (a, b) => a - b;
+
+            //傳遞引數給委派
+            total = operation1(num1, num2);
+            richTextBox1.Text += num1 + " + " + num2 + " = " + total + "\n";
+
+            //傳遞引數給委派
+            total = operation2(num1, num2);
+            richTextBox1.Text += num1 + " - " + num2 + " = " + total + "\n";
+        }
+
+        //delegate 範例0 SP
+
+        //6060
 
         //delegate 範例1 ST
         //委托語法
@@ -64,6 +128,8 @@ namespace vcs_Delegate
             sayHi("david", sayHiEnglish); //調用自定義方法 參數要調用的方法
         }
         //delegate 範例1 SP
+
+        //6060
 
         //delegate 範例2 ST
         // 求任意數組最大值
@@ -123,9 +189,10 @@ namespace vcs_Delegate
         }
         //delegate 範例2 SP
 
+        //6060
+
         //delegate 範例3 ST
         // 泛型<T>委托
-
         public delegate int delCompre<T>(T t1, T t2); //定義泛型委托
 
         public static T getMax2<T>(T[] objs, delCompre<T> del)
@@ -155,5 +222,6 @@ namespace vcs_Delegate
         }
         //delegate 範例3 SP
 
+        //6060
     }
 }

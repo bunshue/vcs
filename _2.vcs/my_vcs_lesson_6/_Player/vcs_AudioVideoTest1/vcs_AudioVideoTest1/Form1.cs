@@ -976,15 +976,51 @@ namespace vcs_AudioVideoTest1
         {
         }
 
+        [DllImport("kernel32", EntryPoint = "Beep")]
+        public extern static int Beep(int dwfreq, int dwduration);
+
         private void button20_Click(object sender, EventArgs e)
         {
+            //使用 WinAPI 的 Beep
+            //Beep(200, 500);
 
+            //使用一般 Beep
+
+            System.Console.Beep(400, 500);
+            System.Console.Beep(800, 500);
         }
+
+        //Beep ST
+        //[DllImport("kernel32", CharSet = CharSet.Ansi)]
+        //[DllImport("kernel32.dll")]
+        //public static extern bool Beep(int frequency, int duration);
+
+        public enum BeepType
+        {
+            SimpleBeep = -1,
+            IconAsterisk = 0x00000040,
+            IconExclamation = 0x00000030,
+            IconHand = 0x00000010,
+            IconQuestion = 0x00000020,
+            Ok = 0x00000000,
+        }
+        [DllImport("user32.dll")]
+        public static extern bool MessageBeep(BeepType beepType);
 
         private void button21_Click(object sender, EventArgs e)
         {
+            //Beep 與 雜音Beep
+            Beep(500, 300);
+            //其中的Beep就是Win API的調用，使用[DllImport("kernel32")]屬性進行調用。
 
+            //雜音Beep
+            Random random = new Random();
+            for (int i = 0; i < 10; i++)
+            {
+                Beep(random.Next(10000), 100);
+            }
         }
+        //Beep SP
 
         private void button22_Click(object sender, EventArgs e)
         {

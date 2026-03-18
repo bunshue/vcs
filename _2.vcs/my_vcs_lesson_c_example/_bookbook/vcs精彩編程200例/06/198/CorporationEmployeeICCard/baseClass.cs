@@ -175,7 +175,7 @@ namespace CorporationEmployeeICCard
             strg += @"\db1.mdb";
             OleDbConnection conn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data source=" + strg);
             conn.Open();
-            OleDbCommand cmd = new OleDbCommand("select Count(*) from Employee where CardID='"+id+"'", conn);
+            OleDbCommand cmd = new OleDbCommand("select Count(*) from Employee where CardID='" + id + "'", conn);
             int i = Convert.ToInt32(cmd.ExecuteScalar());
             conn.Close();
             if (i > 0)
@@ -185,7 +185,7 @@ namespace CorporationEmployeeICCard
             return flag;
         }
 
-        public static void GetInfo(string id,TextBox name,TextBox sex,TextBox job,TextBox folk,TextBox dept,GroupBox gb)//根据IC卡号获取相应的信息
+        public static void GetInfo(string id, TextBox name, TextBox sex, TextBox job, TextBox folk, TextBox dept, GroupBox gb)//根据IC卡号获取相应的信息
         {
             if (CheckID(id))
             {
@@ -217,95 +217,14 @@ namespace CorporationEmployeeICCard
         {
 
             string type = fileName.Substring(fileName.IndexOf(".") + 1);//获得数据类型
+
+            //保存Excel文件
             if (type.Equals("xls", StringComparison.CurrentCultureIgnoreCase))//Excel文档
             {
-                Excel.Application excel = new Excel.Application();
-                try
-                {
-                    excel.DisplayAlerts = false;
-                    excel.Workbooks.Add(true);
-                    excel.Visible = false;
-
-                    for (int i = 0; i < srcDgv.Columns.Count; i++)//设置标题
-                    {
-                        excel.Cells[2, i + 1] = srcDgv.Columns[i].HeaderText;
-                    }
-
-                    for (int i = 0; i < srcDgv.Rows.Count; i++)//填充数据
-                    {
-                        for (int j = 0; j < srcDgv.Columns.Count; j++)
-                        {
-                            if (srcDgv[j, i].ValueType.ToString() == "System.Byte[]")
-                            {
-                                excel.Cells[i + 3, j + 1] = "System.Byte[]";
-                            }
-                            else
-                            {
-                                excel.Cells[i + 3, j + 1] = srcDgv[j, i].Value;
-                            }
-                        }
-                    }
-
-                    excel.Workbooks[1].SaveCopyAs(fileName);//保存
-                }
-                finally
-                {
-                    excel.Quit();
-                }
-                return;
             }
             //保存Word文件
             if (type.Equals("doc", StringComparison.CurrentCultureIgnoreCase))
             {
-
-                object path = fileName;
-                Object none = System.Reflection.Missing.Value;
-                Word.Application wordApp = new Word.Application();
-                Word.Document document = wordApp.Documents.Add(ref none, ref none, ref none, ref none);
-                //建立表格
-                Word.Table table = document.Tables.Add(document.Paragraphs.Last.Range, srcDgv.Rows.Count + 1, srcDgv.Columns.Count, ref none, ref none);
-                try
-                {
-
-                    for (int i = 0; i < srcDgv.Columns.Count; i++)//设置标题
-                    {
-                        table.Cell(1, i + 1).Range.Text = srcDgv.Columns[i].HeaderText;
-                    }
-
-                    for (int i = 0; i < srcDgv.Rows.Count; i++)//填充数据
-                    {
-                        for (int j = 0; j < srcDgv.Columns.Count; j++)
-                        {
-                            string a = srcDgv[j, i].ValueType.ToString();
-                            if (a == "System.Byte[]")
-                            {
-                                PictureBox pp = new PictureBox();
-                                byte[] pic = (byte[])(srcDgv[j, i].Value); //将数据库中的图片转换成二进制流
-                                MemoryStream ms = new MemoryStream(pic);	//将字节数组存入到二进制流中
-                                pp.Image = Image.FromStream(ms);           //二进制流Image控件中显示
-                                pp.Image.Save(@"C:\22.bmp");               //将图片存入到指定的路径
-                                object aaa = table.Cell(i + 2, j + 1).Range;
-                                wordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
-                                wordApp.Selection.InlineShapes.AddPicture(@"C:\22.bmp", ref none, ref none, ref aaa);
-                                pp.Dispose();
-                            }
-                            else
-                            {
-                                table.Cell(i + 2, j + 1).Range.Text = srcDgv[j, i].Value.ToString();
-                            }
-                        }
-                    }
-                    document.SaveAs(ref path, ref none, ref none, ref none, ref none, ref none, ref none, ref none, ref none, ref none, ref none);
-                    document.Close(ref none, ref none, ref none);
-                    if (File.Exists(@"C:\22.bmp"))
-                    {
-                        File.Delete(@"C:\22.bmp");
-                    }
-                }
-                finally
-                {
-                    wordApp.Quit(ref none, ref none, ref none);
-                }
             }
         }
 

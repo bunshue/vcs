@@ -13,8 +13,6 @@ namespace vcs_Clock2
 {
     public partial class Form1 : Form
     {
-        [DllImport("kernel32", EntryPoint = "Beep")]
-        public extern static int Beep(int dwfreq, int dwduration);
         public int intHour, intMouit, intSecon;
 
         public Form1()
@@ -318,7 +316,6 @@ namespace vcs_Clock2
 
             if (dat == 0)
             {
-                Beep(200, 500);
                 label4.Text = "時間已到";
             }
         }

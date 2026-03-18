@@ -481,10 +481,6 @@ namespace vcs_Mix00
         private void button6_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            System.Console.Beep(400, 500);
-            System.Console.Beep(800, 500);
-
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -506,11 +502,11 @@ namespace vcs_Mix00
             // 此時指標指到myAry陣列第一個陣列元素的前面
             IEnumerator myEnumerator = myAry.GetEnumerator();
 
-            Console.WriteLine("\n myAry 陣列元素內容如下 :\n");
+            Console.WriteLine("myAry 陣列元素內容如下 :\n");
             // 依序透過MoveNext方法指標下移一個項目,current屬性讀取陣列元素
             while ((myEnumerator.MoveNext()) && (myEnumerator.Current != null))
             {
-                Console.WriteLine(" myAry[{0}] = {1}", i++, myEnumerator.Current);
+                Console.WriteLine("myAry[{0}] = {1}", i++, myEnumerator.Current);
             }
         }
 
@@ -612,6 +608,7 @@ namespace vcs_Mix00
             richTextBox1.Text += "存取時間 : " + dir.LastAccessTime + "\n";
             richTextBox1.Text += "資料夾名稱 : " + dir.Name + "\n";
             richTextBox1.Text += "根目錄 : " + dir.Parent + "\n";
+
             Console.Write("是否刪除 D:\\_git\\vcs\\CSharp 資料夾   1.刪除  2.不刪除->");
             if (Console.ReadLine() == "1")
             {
@@ -994,25 +991,8 @@ namespace vcs_Mix00
             sr.Close();
         }
 
-        //產生委派物件-有兩個參數
-        delegate int ExpressNum(int one, int two);
-
         private void button19_Click(object sender, EventArgs e)
         {
-            //委派函數
-            int total;
-            int num1 = 123;
-            int num2 = 456;
-
-            //產生委派物件，呼叫Lamdba運算式         
-            ExpressNum result = (a, b) => a + b;
-            //傳遞引數給委派
-            total = result(num1, num2);
-            Console.WriteLine("{num1} + {num2} = {total}");
-
-            result = (a, b) => a - b;
-            total = result(num1, num2);
-            Console.WriteLine("{num1} - {num2} = {total}");
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -1377,51 +1357,14 @@ namespace vcs_Mix00
 
         private void button24_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "自訂格式化輸出\n";
-            richTextBox1.Text += String.Format("{0:##,##0.00}", 8567.1) + "\n";
-            richTextBox1.Text += String.Format("{0:###0.00}", 566.7) + "\n";
-            richTextBox1.Text += String.Format("{0:0.00%}", 8) + "\n";
-        }
-
-        static string reverse(string str)
-        {
-            char[] temp;
-            string strR = "";
-            int i;
-            temp = str.ToCharArray();
-            for (i = temp.Length - 1; i >= 0; i--)
-            {
-                strR += temp[i];
-            }
-            return strR;
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
-            string str;
-            str = "abcdefghijk";
-            richTextBox1.Text += "經反轉後的字串內容：" + reverse(str) + "\n";
-        }
-
-        static void hanoi(int n, int p1, int p2, int p3)
-        {
-            if (n == 1)
-            {
-                //richTextBox1.Text += "盤子從 " + p1 + " 移到 " + p3;
-            }
-            else
-            {
-                hanoi(n - 1, p1, p3, p2);
-                //richTextBox1.Text += "盤子從 " + p1 + " 移到 " + p3;
-                hanoi(n - 1, p2, p1, p3);
-            }
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
-            int N = 5;
-            richTextBox1.Text += "請輸入盤子數量：" + N.ToString() + "\n";
-            hanoi(N, 1, 2, 3);
         }
 
         class MyImage       // 定義MyImage類別
@@ -1521,13 +1464,7 @@ namespace vcs_Mix00
             Benz.Speed = 500;			// 速度值超過 200
             Console.WriteLine("Benz.Speed = {0}", Benz.Speed);
             Console.Read();
-
-
-
-
         }
-
-
 
         static int top = -1;
 
@@ -1906,19 +1843,6 @@ namespace vcs_Mix00
 
         private void button33_Click(object sender, EventArgs e)
         {
-            //Assembly 大全集
-
-            string location = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            richTextBox1.Text += "location : " + location + "\n";
-            //string serviceFileName = location.Substring(0, location.LastIndexOf('\\')) + "\\" + serviceName + ".exe";
-
-            string namespaceName = Assembly.GetExecutingAssembly().GetName().Name.ToString();   //獲取前文檔命名空間的名稱
-            richTextBox1.Text += namespaceName + "\n";
-
-            Assembly asm = Assembly.GetExecutingAssembly();
-            string name = asm.GetName().Name;
-            richTextBox1.Text += "name : " + name + "\n";
-
         }
 
         private void CallOut(out int x, out int y)
@@ -2010,16 +1934,13 @@ namespace vcs_Mix00
                 sw.WriteLine(input);
                 sw.Flush();
                 sw.Close();
-
             }
-
 
             sr = f.OpenText();  //以唯讀模式開檔
             Console.WriteLine("資料檔內容如下：");
             Console.WriteLine(sr.ReadToEnd());//讀出資料
             sr.Close();
             Console.WriteLine("================================");
-
         }
 
         private void button37_Click(object sender, EventArgs e)
@@ -3017,8 +2938,6 @@ namespace vcs_Mix00
                 }
             }
 
-
-
             //最後把沒有放進數組中的加上或者減掉
             if (count != 0)
             {
@@ -3220,87 +3139,4 @@ namespace vcs_Mix00
 
 
 
-
-
-/*
-
-
-private void AboutBox_Load(object sender, EventArgs e)
-{
-	AssemblyInfoClass myAssembly = new AssemblyInfoClass();
-	labelProductName.Text = "產品名稱：" + myAssembly.Product;
-	labelVersion.Text = "版本：" + myAssembly.Version;
-	labelCopyright.Text = "版權宣告：" + myAssembly.Copyright;
-	labelCompanyName.Text = "公司名稱：" + myAssembly.Company;
-	textBoxDescription.Text = "細部描述：" +
-	myAssembly.Description;
-}
-
-                string location = Assembly.GetExecutingAssembly().Location;
-                string serviceFileName = location.Substring(0, location.LastIndexOf('\\')) + "\\" + serviceName + ".exe";
-
-一、獲取程序集版本
-label版本.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-
-            //獲取本代碼所在的文件作為臨時文件，用於獲取屬性列表
-            string tempFile = Assembly.GetExecutingAssembly().FullName;
-
-C#讀取exe版本號
-
-	Assembly currentAssembly = Assembly.LoadFile(currentAssemblyPath);
-	Assembly updatedAssembly = Assembly.LoadFile(updatedAssemblyPath);
-	
-	AssemblyName currentAssemblyName = currentAssembly.GetName();
-	AssemblyName updatedAssemblyName = updatedAssembly.GetName();
-	
-	// 比較版本號
-	if (updatedAssemblyName.Version.CompareTo(currentAssemblyName.Version) <= 0)
-	{
-	    // 不需要更新
-	    return;
-	}
-	
-	AssemblyName currentAssemblyName = AssemblyName.GetAssemblyName(currentAssemblyPath);
-	AssemblyName updatedAssemblyName = AssemblyName.GetAssemblyName(updatedAssemblyPath);
-	
-	// 比較版本
-	if (updatedAssemblyName.Version.CompareTo(currentAssemblyName.Version) <= 0)
-	{
-	    // 不需要更新
-	    return;
-	}
-	
-	// 更新
-	File.Copy(updatedAssemblyPath, currentAssemblyPath, true);
-	
-            //取得 namespaceName
-            string namespaceName = Assembly.GetExecutingAssembly().GetName().Name.ToString();
-
-            richTextBox1.Text += namespaceName + "\n";
-
-            richTextBox1.Text += Assembly.GetExecutingAssembly().Location + "\n";
-
-
-一、獲取程序集版本
-label版本.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-
-
-使用資源檔的圖片
-
-屬性/資源/加入資源/加入現有檔案/ 選取檔案 picture1.jpg
-此時, Resources 會出現 picture1.jpg
-點選picture1.jpg, 屬性
-建置動作 改成 內嵌資源
-
-
-            Assembly asm = this.GetType().Assembly;
-            Stream stream = asm.GetManifestResourceStream("vcs_test.Resources.picture1.jpg");
-            this.BackgroundImage = new Bitmap(stream);
-
-*/
-/*
-
-            var RootDirectory = AppDomain.CurrentDomain.BaseDirectory ?? System.Reflection.Assembly.GetExecutingAssembly().Location;
-            richTextBox1.Text += "RootDirectory = " + RootDirectory + "\n";
-*/
 
