@@ -546,11 +546,9 @@ namespace vcs_Draw_GraphicsPath
         private void button11_Click(object sender, EventArgs e)
         {
             //畫圓角矩形
-            Bitmap bitmap1 = new Bitmap(640, 480);
-            Graphics g = Graphics.FromImage(bitmap1);
 
-            FillRoundRectangle(g, Brushes.Plum, new Rectangle(100, 100, 200, 200), 50);//圓角半徑50
-            DrawRoundRectangle(g, Pens.Yellow, new Rectangle(100, 100, 200, 200), 50);//圓角半徑50
+            FillRoundRectangle(g, Brushes.Plum, new Rectangle(100, 100, 300, 200), 50);//圓角半徑50
+            DrawRoundRectangle(g, Pens.Yellow, new Rectangle(100, 100, 300, 200), 50);//圓角半徑50
 
             /*
             for (int i = 0; i < 8; i++)
@@ -561,8 +559,26 @@ namespace vcs_Draw_GraphicsPath
             g.DrawRectangle(Pens.Red, 100, 100, 200, 200);
             */
 
-            pictureBox1.Image = bitmap1;
-            g.Dispose();
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //GraphicsPath - AddArc() 倒角矩形
+
+            GraphicsPath gp = new GraphicsPath(); // GraphicsPath物件
+
+            int Cx = this.pictureBox1.ClientSize.Width / 2; // 視窗客戶區的正中央
+            int Cy = this.pictureBox1.ClientSize.Height / 2;
+            // 矩形的 寬高是取自視窗客戶區寬高最小者的一半
+            int D1 = Math.Min(this.ClientSize.Width, this.ClientSize.Height) / 4;
+
+            gp.AddArc(Cx - D1, Cy - D1, 2 * D1, 2 * D1, 30, 30);
+            gp.AddArc(Cx - D1, Cy - D1, 2 * D1, 2 * D1, 90 + 30, 30);
+            gp.AddArc(Cx - D1, Cy - D1, 2 * D1, 2 * D1, 180 + 30, 30);
+            gp.AddArc(Cx - D1, Cy - D1, 2 * D1, 2 * D1, 270 + 30, 30);
+            gp.CloseFigure(); // 封閉形狀 將形狀的頭尾座標連接
+            // 將 gp 內的形狀 繪出
+            g.DrawPath(Pens.Black, gp); // 繪出GraphicsPath物件
+
+
         }
 
         public static void DrawRoundRectangle(Graphics g, Pen pen, Rectangle rect, int cornerRadius)
@@ -578,19 +594,45 @@ namespace vcs_Draw_GraphicsPath
             using (GraphicsPath path = CreateRoundedRectanglePath(rect, cornerRadius))
             {
                 g.FillPath(brush, path);
+                /*
+                //左上
+                g.DrawArc(Pens.Red, rect.X, rect.Y, cornerRadius * 2, cornerRadius * 2, 180, 90);
+                //上
+                g.DrawLine(Pens.Green, rect.X + cornerRadius, rect.Y, rect.Right - cornerRadius * 2, rect.Y);
+                //右上
+                g.DrawArc(Pens.Blue, rect.X + rect.Width - cornerRadius * 2, rect.Y, cornerRadius * 2, cornerRadius * 2, 270, 90);
+                //右
+                g.DrawLine(Pens.Cyan, rect.Right, rect.Y + cornerRadius * 2, rect.Right, rect.Y + rect.Height - cornerRadius * 2);
+                //右下
+                g.DrawArc(Pens.Magenta, rect.X + rect.Width - cornerRadius * 2, rect.Y + rect.Height - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 0, 90);
+                //下
+                g.DrawLine(Pens.Yellow, rect.Right - cornerRadius * 2, rect.Bottom, rect.X + cornerRadius * 2, rect.Bottom);
+                //左下
+                g.DrawArc(Pens.Black, rect.X, rect.Bottom - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 90, 90);
+                //左
+                g.DrawLine(Pens.Lime, rect.X, rect.Bottom - cornerRadius * 2, rect.X, rect.Y + cornerRadius * 2);
+                */
             }
         }
 
         internal static GraphicsPath CreateRoundedRectanglePath(Rectangle rect, int cornerRadius)
         {
             GraphicsPath roundedRect = new GraphicsPath();
+            //左上
             roundedRect.AddArc(rect.X, rect.Y, cornerRadius * 2, cornerRadius * 2, 180, 90);
+            //上
             roundedRect.AddLine(rect.X + cornerRadius, rect.Y, rect.Right - cornerRadius * 2, rect.Y);
+            //右上
             roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y, cornerRadius * 2, cornerRadius * 2, 270, 90);
+            //右
             roundedRect.AddLine(rect.Right, rect.Y + cornerRadius * 2, rect.Right, rect.Y + rect.Height - cornerRadius * 2);
+            //右下
             roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y + rect.Height - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 0, 90);
+            //下
             roundedRect.AddLine(rect.Right - cornerRadius * 2, rect.Bottom, rect.X + cornerRadius * 2, rect.Bottom);
+            //左下
             roundedRect.AddArc(rect.X, rect.Bottom - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 90, 90);
+            //左
             roundedRect.AddLine(rect.X, rect.Bottom - cornerRadius * 2, rect.X, rect.Y + cornerRadius * 2);
             roundedRect.CloseFigure();
             return roundedRect;
@@ -665,28 +707,6 @@ namespace vcs_Draw_GraphicsPath
 
         private void button13_Click(object sender, EventArgs e)
         {
-            Graphics g = this.pictureBox1.CreateGraphics();
-
-            //GraphicsPath - AddArc() 倒角矩形
-
-            GraphicsPath gp = new GraphicsPath(); // GraphicsPath物件
-
-            int Cx = this.pictureBox1.ClientSize.Width / 2; // 視窗客戶區的正中央
-            int Cy = this.pictureBox1.ClientSize.Height / 2;
-            // 矩形的 寬高是取自視窗客戶區寬高最小者的一半
-            int D1 = Math.Min(this.ClientSize.Width, this.ClientSize.Height) / 4;
-
-            gp.AddArc(Cx - D1, Cy - D1, 2 * D1, 2 * D1, 30, 30);
-            gp.AddArc(Cx - D1, Cy - D1, 2 * D1, 2 * D1, 90 + 30, 30);
-            gp.AddArc(Cx - D1, Cy - D1, 2 * D1, 2 * D1, 180 + 30, 30);
-            gp.AddArc(Cx - D1, Cy - D1, 2 * D1, 2 * D1, 270 + 30, 30);
-            gp.CloseFigure(); // 封閉形狀 將形狀的頭尾座標連接
-            // 將 gp 內的形狀 繪出
-            g.DrawPath(Pens.Black, gp); // 繪出GraphicsPath物件
-
-
-
-
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -804,9 +824,7 @@ namespace vcs_Draw_GraphicsPath
             gp4.AddRectangle(new Rectangle(x_st + 10, y_st + 10, 50, 50));
             g.FillPath(new SolidBrush(Color.Blue), gp4);
 
-            //6060
-
-
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             float x = 100;
             float y = 100;
@@ -819,8 +837,7 @@ namespace vcs_Draw_GraphicsPath
             //g.DrawPath(Pens.Red, gp); // 繪出圖形軌跡
             g.FillPath(Brushes.Lime, gp); // 繪出圖形軌跡
 
-
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             gp = new GraphicsPath();  // GraphicsPath物件
 

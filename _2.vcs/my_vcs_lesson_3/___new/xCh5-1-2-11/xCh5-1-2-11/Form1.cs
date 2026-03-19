@@ -32,7 +32,6 @@ namespace xCh5_1_2_11
                 "螢幕", 
                 "音效卡" 
             });
-
             richTextBox1.Text += "listBox1有項目 : " + listBox1.Items.Count.ToString() + " 個\n";
         }
 
@@ -116,13 +115,9 @@ namespace xCh5_1_2_11
             }
         }
 
-        // 使用者於ListBox中的選項挑選時引發
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            label1.Text = "目前位置：" + listBox1.SelectedIndex + "/" + listBox1.Items.Count;
-            richTextBox1.Text += "目前位置：" + listBox1.SelectedIndex + "/" + listBox1.Items.Count + "\n";
-
-            textBox2.AppendText(Environment.NewLine + listBox1.SelectedItem.ToString());
+            richTextBox1.Text += "目前位置：" + listBox1.SelectedIndex + "/" + listBox1.Items.Count + "\t" + listBox1.SelectedItem.ToString() + "\n";
         }
     }
 }
