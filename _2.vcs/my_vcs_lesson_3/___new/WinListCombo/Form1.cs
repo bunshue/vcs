@@ -21,9 +21,9 @@ namespace WinListCombo
             public string Job { get; set; }            // 職業屬性
         }
 
-        // 建立SortedList串列物件 m 用來存放Member會員物件
+        // 建立SortedList串列物件 member 用來存放Member會員物件
         // Key鍵值為string型別即會員姓名，Value對應值為Member會員物件
-        SortedList<string, Member> m = new SortedList<string, Member>();
+        SortedList<string, Member> member = new SortedList<string, Member>();
 
         public Form1()
         {
@@ -43,9 +43,9 @@ namespace WinListCombo
         private void cboName_SelectedIndexChanged(object sender, EventArgs e)
         {
             // 取得姓名下拉式清單的會員姓名
-            // 該會員姓名為 m 串列中的Key鍵值，透過鍵值可找到 m 串列中的某筆會員資料
+            // 該會員姓名為 member 串列中的Key鍵值，透過鍵值可找到 member 串列中的某筆會員資料
             // 再將找到的會員資料指定給 sm 物件參考
-            Member sm = m[cboName.Text];
+            Member sm = member[cboName.Text];
 
             // 透過Member會員物件參考 sm，將找到的會員資料顯示在表單的各控制項上
             cboYear.Text = sm.BirthdDay.Year.ToString();
@@ -82,9 +82,9 @@ namespace WinListCombo
             string job = members[0, 3];
             // 將姓名下拉式清單所輸入的值放入下拉式清單的選項內
             cboName.Items.Add(name);
-            // 將Member會員物件新增至 m 串列內
+            // 將Member會員物件新增至 member 串列內
             // Key鍵值為會員姓名，Value對應值為Member會員物件
-            m.Add(name, new Member() { Name = name, BirthdDay = DateTime.Parse(birthday), Sex = sex, Job = job });
+            member.Add(name, new Member() { Name = name, BirthdDay = DateTime.Parse(birthday), Sex = sex, Job = job });
 
             name = members[1, 0];
             birthday = members[1, 1];
@@ -92,9 +92,9 @@ namespace WinListCombo
             job = members[1, 3];
             // 將姓名下拉式清單所輸入的值放入下拉式清單的選項內
             cboName.Items.Add(name);
-            // 將Member會員物件新增至 m 串列內
+            // 將Member會員物件新增至 member 串列內
             // Key鍵值為會員姓名，Value對應值為Member會員物件
-            m.Add(name, new Member() { Name = name, BirthdDay = DateTime.Parse(birthday), Sex = sex, Job = job });
+            member.Add(name, new Member() { Name = name, BirthdDay = DateTime.Parse(birthday), Sex = sex, Job = job });
 
             name = members[2, 0];
             birthday = members[2, 1];
@@ -102,9 +102,9 @@ namespace WinListCombo
             job = members[2, 3];
             // 將姓名下拉式清單所輸入的值放入下拉式清單的選項內
             cboName.Items.Add(name);
-            // 將Member會員物件新增至 m 串列內
+            // 將Member會員物件新增至 member 串列內
             // Key鍵值為會員姓名，Value對應值為Member會員物件
-            m.Add(name, new Member() { Name = name, BirthdDay = DateTime.Parse(birthday), Sex = sex, Job = job });
+            member.Add(name, new Member() { Name = name, BirthdDay = DateTime.Parse(birthday), Sex = sex, Job = job });
 
             name = members[3, 0];
             birthday = members[3, 1];
@@ -112,9 +112,9 @@ namespace WinListCombo
             job = members[3, 3];
             // 將姓名下拉式清單所輸入的值放入下拉式清單的選項內
             cboName.Items.Add(name);
-            // 將Member會員物件新增至 m 串列內
+            // 將Member會員物件新增至 member 串列內
             // Key鍵值為會員姓名，Value對應值為Member會員物件
-            m.Add(name, new Member() { Name = name, BirthdDay = DateTime.Parse(birthday), Sex = sex, Job = job });
+            member.Add(name, new Member() { Name = name, BirthdDay = DateTime.Parse(birthday), Sex = sex, Job = job });
 
             name = members[4, 0];
             birthday = members[4, 1];
@@ -122,16 +122,16 @@ namespace WinListCombo
             job = members[4, 3];
             // 將姓名下拉式清單所輸入的值放入下拉式清單的選項內
             cboName.Items.Add(name);
-            // 將Member會員物件新增至 m 串列內
+            // 將Member會員物件新增至 member 串列內
             // Key鍵值為會員姓名，Value對應值為Member會員物件
-            m.Add(name, new Member() { Name = name, BirthdDay = DateTime.Parse(birthday), Sex = sex, Job = job });
+            member.Add(name, new Member() { Name = name, BirthdDay = DateTime.Parse(birthday), Sex = sex, Job = job });
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             string check_name = "Doraemon";
-            // 使用ContainsKey方法檢查會員的鍵值(姓名)是否在 m 串列物件中
-            if (m.ContainsKey(check_name))
+            // 使用ContainsKey方法檢查會員的鍵值(姓名)是否在 member 串列物件中
+            if (member.ContainsKey(check_name))
             {
                 richTextBox1.Text += "資料已存在!\n";
             }
@@ -141,8 +141,8 @@ namespace WinListCombo
             }
 
             check_name = "Jerry";
-            // 使用ContainsKey方法檢查會員的鍵值(姓名)是否在 m 串列物件中
-            if (m.ContainsKey(check_name))
+            // 使用ContainsKey方法檢查會員的鍵值(姓名)是否在 member 串列物件中
+            if (member.ContainsKey(check_name))
             {
                 richTextBox1.Text += "資料已存在!\n";
             }

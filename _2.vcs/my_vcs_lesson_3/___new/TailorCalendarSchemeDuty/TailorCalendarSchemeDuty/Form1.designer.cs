@@ -39,6 +39,7 @@ namespace TailorCalendarSchemeDuty
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // monthCalendar1
@@ -55,14 +56,14 @@ namespace TailorCalendarSchemeDuty
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 28);
+            this.textBox1.Location = new System.Drawing.Point(12, 47);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(162, 22);
             this.textBox1.TabIndex = 1;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(105, 115);
+            this.button2.Location = new System.Drawing.Point(105, 134);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(83, 23);
             this.button2.TabIndex = 5;
@@ -74,7 +75,7 @@ namespace TailorCalendarSchemeDuty
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(12, 55);
+            this.listBox1.Location = new System.Drawing.Point(12, 74);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(87, 136);
             this.listBox1.TabIndex = 6;
@@ -82,7 +83,7 @@ namespace TailorCalendarSchemeDuty
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(105, 86);
+            this.button3.Location = new System.Drawing.Point(105, 105);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(83, 23);
             this.button3.TabIndex = 7;
@@ -92,7 +93,7 @@ namespace TailorCalendarSchemeDuty
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(105, 144);
+            this.button1.Location = new System.Drawing.Point(105, 163);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(83, 23);
             this.button1.TabIndex = 8;
@@ -102,7 +103,7 @@ namespace TailorCalendarSchemeDuty
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(105, 57);
+            this.button4.Location = new System.Drawing.Point(105, 76);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(83, 23);
             this.button4.TabIndex = 9;
@@ -124,7 +125,7 @@ namespace TailorCalendarSchemeDuty
             // button5
             // 
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(113, 4);
+            this.button5.Location = new System.Drawing.Point(113, 18);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(61, 23);
             this.button5.TabIndex = 11;
@@ -134,7 +135,7 @@ namespace TailorCalendarSchemeDuty
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(105, 173);
+            this.button6.Location = new System.Drawing.Point(105, 192);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(83, 23);
             this.button6.TabIndex = 12;
@@ -145,18 +146,27 @@ namespace TailorCalendarSchemeDuty
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox2.Location = new System.Drawing.Point(186, 174);
+            this.textBox2.Location = new System.Drawing.Point(186, 193);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.textBox2.Size = new System.Drawing.Size(355, 21);
             this.textBox2.TabIndex = 13;
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(15, 287);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(600, 312);
+            this.richTextBox1.TabIndex = 14;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(772, 450);
+            this.ClientSize = new System.Drawing.Size(877, 611);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
@@ -190,6 +200,7 @@ namespace TailorCalendarSchemeDuty
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
