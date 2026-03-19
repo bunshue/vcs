@@ -2909,7 +2909,7 @@ csv檔 => 字典 = > 資料庫
 資料庫增刪改查搜尋
 
 增刪查改	CDRU
-CRUD
+CRUD 增查改刪
 
 CRUD (新增:Create , 讀取:Read, 更新: Update, 刪除:Delete)
 增	新增:Create	POST

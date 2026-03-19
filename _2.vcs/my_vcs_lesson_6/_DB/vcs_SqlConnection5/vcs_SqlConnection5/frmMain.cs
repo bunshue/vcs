@@ -14,7 +14,6 @@ namespace vcs_SqlConnection5
 {
     public partial class frmMain : Form
     {
-        //string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\{0};Integrated Security=True;Connect Timeout=30";
         string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Database1.mdf;Integrated Security=True;Connect Timeout=30";
 
         //建立MyDBClass類別物件db，來管理Database1.mdf資料庫
@@ -319,121 +318,8 @@ namespace vcs_SqlConnection5
 
         //------------------------------------------------------------  # 60個
 
-        // 宣告cnStr資料庫連接字串，指定連接ch23DB.mdf
-        string cnStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\ch23DB.mdf;Integrated Security=True;Connect Timeout=30";
-
         private void button5_Click(object sender, EventArgs e)
         {
-            //讀取資料庫
-            DataSet ds = SelectBook();
-            dataGridView1.DataSource = ds.Tables[0];//设置数据源
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //新增
-            string 書號 = "IMS0311";
-            string 書名 = "膠囊內視鏡";
-            int 單價 = 12345;
-            int 數量 = 20;
-
-            InsertBook(書號, 書名, 單價, 數量);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //讀取資料庫
-            ds = SelectBook();
-            dataGridView2.DataSource = ds.Tables[0];//设置数据源
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //更新
-            書號 = "IMS0311";//以書號為準
-            書名 = "ims EGD";
-            單價 = 123;
-            數量 = 18;
-
-            UpdateBook(書號, 書名, 單價, 數量);
-
-            //讀取資料庫
-            ds = SelectBook();
-            dataGridView3.DataSource = ds.Tables[0];//设置数据源
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //刪除
-            書號 = "IMS0311";//以書號為準
-
-            DeleteBook(書號);
-
-            //讀取資料庫
-            ds = SelectBook();
-            dataGridView4.DataSource = ds.Tables[0];//设置数据源
-        }
-
-        public DataSet SelectBook()
-        {
-            using (SqlConnection cn = new SqlConnection())
-            {
-                cn.ConnectionString = cnStr;
-                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM 書籍", cn);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-                return ds;
-            }
-        }
-
-        public void InsertBook(string 書號, string 書名, int 單價, int 數量)
-        {
-            using (SqlConnection cn = new SqlConnection())
-            {
-                cn.ConnectionString = cnStr;
-                cn.Open();
-                string sqlStr = "INSERT INTO 書籍(書號, 書名, 單價, 數量)" + "VALUES(@BookId, @BookName, @Price, @Qty)";
-                SqlCommand cmd = new SqlCommand(sqlStr, cn);
-                cmd.Parameters.Add(new SqlParameter("@BookId", SqlDbType.NVarChar));
-                cmd.Parameters.Add(new SqlParameter("@BookName", SqlDbType.NVarChar));
-                cmd.Parameters.Add(new SqlParameter("@Price", SqlDbType.Int));
-                cmd.Parameters.Add(new SqlParameter("@Qty", SqlDbType.Int));
-                cmd.Parameters["@BookId"].Value = 書號;
-                cmd.Parameters["@BookName"].Value = 書名;
-                cmd.Parameters["@Price"].Value = 單價;
-                cmd.Parameters["@Qty"].Value = 數量;
-                cmd.ExecuteNonQuery();
-            }
-        }
-
-        public void UpdateBook(string 書號, string 書名, int 單價, int 數量)
-        {
-            using (SqlConnection cn = new SqlConnection())
-            {
-                cn.ConnectionString = cnStr;
-                cn.Open();
-                string sqlStr = "UPDATE 書籍 SET 書名=@BookName," + "單價=@Price, 數量=@Qty WHERE 書號=@BookId";
-                SqlCommand cmd = new SqlCommand(sqlStr, cn);
-                cmd.Parameters.Add(new SqlParameter("@BookId", SqlDbType.NVarChar));
-                cmd.Parameters.Add(new SqlParameter("@BookName", SqlDbType.NVarChar));
-                cmd.Parameters.Add(new SqlParameter("@Price", SqlDbType.Int));
-                cmd.Parameters.Add(new SqlParameter("@Qty", SqlDbType.Int));
-                cmd.Parameters["@BookId"].Value = 書號;
-                cmd.Parameters["@BookName"].Value = 書名;
-                cmd.Parameters["@Price"].Value = 單價;
-                cmd.Parameters["@Qty"].Value = 數量;
-                cmd.ExecuteNonQuery();
-            }
-        }
-
-        public void DeleteBook(string 書號)
-        {
-            using (SqlConnection cn = new SqlConnection())
-            {
-                cn.ConnectionString = cnStr;
-                cn.Open();
-                string sqlStr = "DELETE FROM 書籍 WHERE 書號 = @BookId";
-                SqlCommand cmd = new SqlCommand(sqlStr, cn);
-                cmd.Parameters.Add(new SqlParameter("@BookId", SqlDbType.NVarChar));
-                cmd.Parameters["@BookId"].Value = 書號;
-                cmd.ExecuteNonQuery();
-            }
         }
 
         //------------------------------------------------------------  # 60個

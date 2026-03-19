@@ -191,7 +191,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(100, 80);
             this.button5.TabIndex = 43;
-            this.button5.Text = "取得資料 book";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 

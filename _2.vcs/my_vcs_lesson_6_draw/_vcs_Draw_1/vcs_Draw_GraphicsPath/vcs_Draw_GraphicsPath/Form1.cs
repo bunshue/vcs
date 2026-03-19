@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Imaging;   //for ImageFormat
 using System.Drawing.Drawing2D; //for GraphicsPath
 
 namespace vcs_Draw_GraphicsPath
@@ -549,15 +548,21 @@ namespace vcs_Draw_GraphicsPath
             //畫圓角矩形
             Bitmap bitmap1 = new Bitmap(640, 480);
             Graphics g = Graphics.FromImage(bitmap1);
-            g.FillRectangle(Brushes.Pink, new Rectangle(0, 0, 600, 400));
-            FillRoundRectangle(g, Brushes.Plum, new Rectangle(100, 100, 100, 100), 8);
-            DrawRoundRectangle(g, Pens.Yellow, new Rectangle(100, 100, 100, 100), 8);
-            //bm.Save(Response.OutputStream, ImageFormat.Jpeg);
-            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            bitmap1.Save(filename, ImageFormat.Bmp);
+
+            FillRoundRectangle(g, Brushes.Plum, new Rectangle(100, 100, 200, 200), 50);//圓角半徑50
+            DrawRoundRectangle(g, Pens.Yellow, new Rectangle(100, 100, 200, 200), 50);//圓角半徑50
+
+            /*
+            for (int i = 0; i < 8; i++)
+            {
+                g.DrawLine(Pens.Gray, 0, i * 50, 640, i * 50);//橫線
+                g.DrawLine(Pens.Gray, i * 50, 0, i * 50, 500);//直線
+            }
+            g.DrawRectangle(Pens.Red, 100, 100, 200, 200);
+            */
+
             pictureBox1.Image = bitmap1;
             g.Dispose();
-            //bitmap1.Dispose();
         }
 
         public static void DrawRoundRectangle(Graphics g, Pen pen, Rectangle rect, int cornerRadius)
@@ -969,3 +974,4 @@ namespace vcs_Draw_GraphicsPath
 /*
 
 */
+

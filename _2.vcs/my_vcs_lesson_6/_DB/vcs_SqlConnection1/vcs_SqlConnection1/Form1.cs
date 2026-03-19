@@ -152,14 +152,6 @@ namespace vcs_SqlConnection1
                 da.Fill(ds);  // 將DataAdapter查詢之後的結果填充至DataSet
 
                 dataGridView1.DataSource = ds.Tables[0];
-
-                richTextBox1.Text += "DataSet內容\n";
-                int len = ds.Tables.Count;
-                richTextBox1.Text += "表格個數 : " + len.ToString() + "\n";
-                for (int i = 0; i < len; i++)
-                {
-                    richTextBox1.Text += "表格名稱 : " + ds.Tables[i].TableName + "\n";
-                }
             }
 
             richTextBox1.Text += "------------------------------\n";  // 30個
@@ -300,6 +292,8 @@ namespace vcs_SqlConnection1
             string db_filename = "ch17DB.mdf";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
+            // 讀出資料庫資料
+
             using (SqlConnection cn = new SqlConnection())
             {
                 // 連接資料庫
@@ -310,18 +304,25 @@ namespace vcs_SqlConnection1
                 SqlCommand cmd = new SqlCommand("SELECT * FROM 成績單", cn);
 
                 SqlDataReader dr = cmd.ExecuteReader();
+
+                richTextBox1.Text += "欄數 dr.FieldCount = " + dr.FieldCount.ToString() + "\n";
+
+                richTextBox1.Text += "欄位名稱\n";
                 for (int i = 0; i < dr.FieldCount; i++)
                 {
                     richTextBox1.Text += dr.GetName(i) + "\t";
                 }
-                richTextBox1.Text += "\n";
 
+                richTextBox1.Text += "\n內容\n";
+                int cnt = 0;
                 while (dr.Read())
                 {
+                    richTextBox1.Text += "第 " + cnt.ToString() + " 筆資料 :\n";
+                    cnt++;
                     for (int i = 0; i < dr.FieldCount; i++)
                     {
                         richTextBox1.Text += dr[i].ToString() + "\t";
-                        //richTextBox1.Text += dr.GetValue(i).ToString() + "\t";    //另法
+                        //richTextBox1.Text += dr.GetValue(i).ToString() + "\t";    //same
                     }
                     richTextBox1.Text += "\n";
                 }
@@ -717,88 +718,10 @@ namespace vcs_SqlConnection1
 
         private void button14_Click(object sender, EventArgs e)
         {
-            // 資料庫連線參數, 連接字串
-            string db_filename = "Northwind.mdf";
-            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-
-            //tt1
-            using (SqlConnection cn = new SqlConnection())
-            {
-                // 連接資料庫
-                cn.ConnectionString = cnstr;
-
-                richTextBox1.Text += "連接資料庫前\t資料庫連接狀態 : " + cn.State + "\n";  // ConnectionState.Closed
-                cn.Open();  // 連接資料庫
-
-                if (cn.State == ConnectionState.Open)
-                {
-                    richTextBox1.Text += "資料庫已連接\n";
-                }
-                else
-                {
-                    richTextBox1.Text += "資料庫未連接\n";
-                }
-
-                richTextBox1.Text += "連接資料庫後\t資料庫連接狀態 : " + cn.State + "\n";  // ConnectionState.Open
-
-                // 顯示資料來源的相關資訊
-                richTextBox1.Text += "資料庫連接設定 :\n";
-                richTextBox1.Text += "連接字串：" + cn.ConnectionString + "\n";
-                richTextBox1.Text += "逾時秒數：" + cn.ConnectionTimeout + "\n";
-                richTextBox1.Text += "　資料庫：" + cn.Database + "\n";
-                richTextBox1.Text += "資料來源：" + cn.DataSource + "\n";
-
-                //關閉資料庫
-                cn.Close();
-            }
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-            string db_filename = "Northwind.mdf";
-            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-
-            //tt2
-            using (SqlConnection cn = new SqlConnection())
-            {
-                DataSet ds = new DataSet();  // 建立DataSet來儲存Table
-
-                // 連接資料庫
-                cn.ConnectionString = cnstr;
-
-                // 建立三個DataAdapter物件，用來取得員工, 客戶, 產品類別資料表
-                // 再將三個資料表放入ds(DataSet)物件中
-                string sqlstr1 = "SELECT * FROM 員工";  // 宣告查詢字串
-                SqlDataAdapter da1 = new SqlDataAdapter(sqlstr1, cn);
-                da1.Fill(ds, "員工");  // 將DataAdapter查詢之後的結果填充至DataSet
-
-                string sqlstr2 = "SELECT * FROM 客戶";  // 宣告查詢字串
-                SqlDataAdapter da2 = new SqlDataAdapter(sqlstr2, cn);
-                da2.Fill(ds, "客戶");  // 將DataAdapter查詢之後的結果填充至DataSet
-
-                string sqlstr3 = "SELECT * FROM 產品類別";  // 宣告查詢字串
-                SqlDataAdapter da3 = new SqlDataAdapter(sqlstr3, cn);
-                da3.Fill(ds, "產品類別");  // 將DataAdapter查詢之後的結果填充至DataSet
-
-                // 將ds物件內三個DataTable
-                for (int i = 0; i < ds.Tables.Count; i++)
-                {
-                    richTextBox1.Text += "取得 資料表 : " + ds.Tables[i].TableName + "\n";
-                }
-
-                richTextBox1.Text += "TableName1 : " + ds.Tables["員工"].TableName + "\n";
-                richTextBox1.Text += "TableName2 : " + ds.Tables["客戶"].TableName + "\n";
-                richTextBox1.Text += "TableName3 : " + ds.Tables["產品類別"].TableName + "\n";
-
-                // 員工
-                dataGridView1.DataSource = ds.Tables["員工"];
-
-                // 客戶
-                dataGridView2.DataSource = ds.Tables["客戶"];
-
-                // 產品類別
-                //dataGridView1.DataSource = ds.Tables["產品類別"];
-            }
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -974,18 +897,7 @@ namespace vcs_SqlConnection1
                 da.Fill(ds);  // 將DataAdapter查詢之後的結果填充至DataSet
 
                 dataGridView1.DataSource = ds.Tables[0];
-
-                richTextBox1.Text += "DataSet內容\n";
-                int len = ds.Tables.Count;
-                richTextBox1.Text += "表格個數 : " + len.ToString() + "\n";
-                for (int i = 0; i < len; i++)
-                {
-                    richTextBox1.Text += "表格名稱 : " + ds.Tables[i].TableName + "\n";
-                }
             }
-
-            return;
-
 
             //SQL1
             //从头开始提取满足指定条件的记录

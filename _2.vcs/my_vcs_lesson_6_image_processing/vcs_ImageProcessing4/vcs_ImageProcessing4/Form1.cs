@@ -32,6 +32,7 @@ namespace vcs_ImageProcessing4
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
             reset_pictureBox();
         }
 
@@ -214,7 +215,6 @@ namespace vcs_ImageProcessing4
             }
             pictureBox1.Image = bitmap1;
             richTextBox1.Text += "處理完成\n";
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -402,7 +402,6 @@ namespace vcs_ImageProcessing4
             return new RGB((byte)r, (byte)g, (byte)b);
         }
 
-
         private void button6_Click(object sender, EventArgs e)
         {
             //降亮度
@@ -448,7 +447,6 @@ namespace vcs_ImageProcessing4
             pictureBox1.Image = bitmap1;
         }
 
-        //public void bitSlicing(Bitmap Image)
         public void bitSlicing()
         {
             string filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp"; //stomach
@@ -488,7 +486,6 @@ namespace vcs_ImageProcessing4
             Bitmap level7 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
             Bitmap level8 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
 
-
             BitmapData level1Data = level1.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
             BitmapData level2Data = level2.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
             BitmapData level3Data = level3.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
@@ -510,7 +507,6 @@ namespace vcs_ImageProcessing4
             IntPtr intPtr6 = level6Data.Scan0;
             IntPtr intPtr7 = level7Data.Scan0;
             IntPtr intPtr8 = level8Data.Scan0;
-
 
             byte[] GrayImgBytes = new byte[size];
             byte[] level1Bytes = new byte[size];
@@ -676,7 +672,6 @@ namespace vcs_ImageProcessing4
             Bitmap level7 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
             Bitmap level8 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
 
-
             BitmapData level1Data = level1.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
             BitmapData level2Data = level2.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
             BitmapData level3Data = level3.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
@@ -698,7 +693,6 @@ namespace vcs_ImageProcessing4
             IntPtr intPtr6 = level6Data.Scan0;
             IntPtr intPtr7 = level7Data.Scan0;
             IntPtr intPtr8 = level8Data.Scan0;
-
 
             byte[] GrayImgBytes = new byte[size];
             byte[] level1Bytes = new byte[size];
@@ -805,7 +799,6 @@ namespace vcs_ImageProcessing4
             level8.UnlockBits(level8Data);
             bitmap1.UnlockBits(GrayImgData);
 
-
             int W = pictureBox1.Size.Width;
             int H = pictureBox1.Size.Height;
             Bitmap bmp = new Bitmap(W - 50, H - 50);
@@ -863,9 +856,9 @@ namespace vcs_ImageProcessing4
                 {
                     Point[] destinationPoints =
                     {
-                        new Point(H, 0), // destination for upper-left point of original
-                        new Point(H, W),// destination for upper-right point of original
-                        new Point(0, 0)     // destination for lower-left point of original
+                        new Point(H, 0),  // 左上角 destination for upper-left point of original
+                        new Point(H, W),  // 右上角 destination for upper-right point of original
+                        new Point(0, 0)   // 左下角 destination for lower-left point of original
                     };
                     g.DrawImage(bmp, destinationPoints);
                 }
@@ -879,9 +872,9 @@ namespace vcs_ImageProcessing4
                 {
                     Point[] destinationPoints =
                     {
-                        new Point(W, H), // destination for upper-left point of original
-                        new Point(0, H),// destination for upper-right point of original
-                        new Point(W, 0)     // destination for lower-left point of original
+                        new Point(W, H),  // 左上角 destination for upper-left point of original
+                        new Point(0, H),  // 右上角 destination for upper-right point of original
+                        new Point(W, 0)   // 左下角 destination for lower-left point of original
                     };
                     g.DrawImage(bmp, destinationPoints);
                 }
@@ -895,9 +888,9 @@ namespace vcs_ImageProcessing4
                 {
                     Point[] destinationPoints = 
                     {
-                        new Point(0, W), // destination for upper-left point of original
-                        new Point(0, 0),// destination for upper-right point of original
-                        new Point(H, W)    // destination for lower-left point of original
+                        new Point(0, W),  // 左上角 destination for upper-left point of original
+                        new Point(0, 0),  // 右上角 destination for upper-right point of original
+                        new Point(H, W)   // 左下角 destination for lower-left point of original
                     };
                     g.DrawImage(bmp, destinationPoints);
                 }
@@ -923,10 +916,12 @@ namespace vcs_ImageProcessing4
             Graphics g = this.pictureBox1.CreateGraphics();
             Bitmap bitmap1 = new Bitmap(filename);
             //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
-            Point[] destinationPoints = {
-new Point(400, 0), // destination for upper-left point of original
-new Point(400, 305),// destination for upper-right point of original
-new Point(0, 0)}; // destination for lower-left point of original
+            Point[] destinationPoints =
+            {
+                new Point(400, 0),    // 左上角 destination for upper-left point of original
+                new Point(400, 305),  // 右上角 destination for upper-right point of original
+                new Point(0, 0)       // 左下角 destination for lower-left point of original
+            };
             g.DrawImage(bitmap1, destinationPoints);
         }
 
@@ -936,10 +931,12 @@ new Point(0, 0)}; // destination for lower-left point of original
             Graphics g = this.pictureBox1.CreateGraphics();
             Bitmap bitmap1 = new Bitmap(filename);
             //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
-            Point[] destinationPoints = {
-new Point(0, 400), // destination for upper-left point of original
-new Point(305, 400),// destination for upper-right point of original
-new Point(0, 0)}; // destination for lower-left point of original
+            Point[] destinationPoints =
+            {
+                new Point(0, 400),    // 左上角 destination for upper-left point of original
+                new Point(305, 400),  // 右上角 destination for upper-right point of original
+                new Point(0, 0)       // 左下角 destination for lower-left point of original
+            };
             g.DrawImage(bitmap1, destinationPoints);
         }
 
@@ -949,10 +946,12 @@ new Point(0, 0)}; // destination for lower-left point of original
             Graphics g = this.pictureBox1.CreateGraphics();
             Bitmap bitmap1 = new Bitmap(filename);
             //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
-            Point[] destinationPoints = {
-new Point(0, 0), // destination for upper-left point of original
-new Point(305, 0), // destination for upper-right point of original
-new Point(100, 400)};// destination for lower-left point of original
+            Point[] destinationPoints =
+            {
+                new Point(0, 0),     // 左上角 destination for upper-left point of original
+                new Point(305, 0),   // 右上角 destination for upper-right point of original
+                new Point(100, 400)  // 左下角 destination for lower-left point of original
+            };
             g.DrawImage(bitmap1, destinationPoints);
         }
 

@@ -7,10 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-//using System.IO;
 using System.Drawing.Drawing2D;
-//using System.Drawing.Imaging;
-
 
 namespace vcs_ImageProcessing6
 {
@@ -164,7 +161,6 @@ namespace vcs_ImageProcessing6
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
-
         }
 
         // Return a Rectangle with these points as corners.
@@ -192,7 +188,9 @@ namespace vcs_ImageProcessing6
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (StartX1 < 0)
+            {
                 return;
+            }
 
             // Restore the current image.
             BoxGraphics1.DrawImage(CurrentBitmap1, 0, 0);
@@ -211,7 +209,9 @@ namespace vcs_ImageProcessing6
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             if (StartX1 < 0)
+            {
                 return;
+            }
 
             PixellateRectangle(MakeRectangle(StartX1, StartY1, e.X, e.Y));
 
@@ -248,10 +248,16 @@ namespace vcs_ImageProcessing6
                         int total_r = 0, total_g = 0, total_b = 0, num_pixels = 0;
                         for (int dy = 0; dy < box_wid; dy++)
                         {
-                            if (y + dy >= H) break;
+                            if (y + dy >= H)
+                            {
+                                break;
+                            }
                             for (int dx = 0; dx < box_wid; dx++)
                             {
-                                if (x + dx >= W) break;
+                                if (x + dx >= W)
+                                {
+                                    break;
+                                }
                                 Color pixel_color = CurrentBitmap1.GetPixel(x + dx, y + dy);
                                 total_r += pixel_color.R;
                                 total_g += pixel_color.G;
@@ -271,7 +277,6 @@ namespace vcs_ImageProcessing6
                         }
                     }
                 }
-
                 // Refresh to show the new image.
                 pictureBox1.Image = CurrentBitmap1;
                 pictureBox1.Refresh();
@@ -324,11 +329,7 @@ namespace vcs_ImageProcessing6
         private void pictureBox2_Paint(object sender, PaintEventArgs e)
         {
             if (!Selecting) return;
-            Rectangle rect = new Rectangle(
-                (int)Math.Min(Point1.X, Point2.X),
-                (int)Math.Min(Point1.Y, Point2.Y),
-                (int)Math.Abs(Point1.X - Point2.X),
-                (int)Math.Abs(Point1.Y - Point2.Y));
+            Rectangle rect = new Rectangle((int)Math.Min(Point1.X, Point2.X), (int)Math.Min(Point1.Y, Point2.Y), (int)Math.Abs(Point1.X - Point2.X), (int)Math.Abs(Point1.Y - Point2.Y));
             e.Graphics.DrawRectangle(Pens.Yellow, rect);
             using (Pen pen = new Pen(Color.Red))
             {
@@ -344,15 +345,15 @@ namespace vcs_ImageProcessing6
             // Copy the selected part of the image from the fuzzy image.
             using (Graphics gr = Graphics.FromImage(VisibleImage))
             {
-                Rectangle rect = new Rectangle(
-                    (int)Math.Min(Point1.X, Point2.X),
-                    (int)Math.Min(Point1.Y, Point2.Y),
-                    (int)Math.Abs(Point1.X - Point2.X),
-                    (int)Math.Abs(Point1.Y - Point2.Y));
+                Rectangle rect = new Rectangle((int)Math.Min(Point1.X, Point2.X), (int)Math.Min(Point1.Y, Point2.Y), (int)Math.Abs(Point1.X - Point2.X), (int)Math.Abs(Point1.Y - Point2.Y));
                 if (FuzzStyle == "Redacted")
+                {
                     gr.FillRectangle(Brushes.Black, rect);
+                }
                 else
+                {
                     gr.DrawImage(ObscuredImage, rect, rect, GraphicsUnit.Pixel);
+                }
                 pictureBox2.Refresh();
             }
         }
@@ -385,7 +386,10 @@ namespace vcs_ImageProcessing6
         // Make a pixelated copy of the image.
         private void PixelateImage()
         {
-            if (OriginalImage == null) return;
+            if (OriginalImage == null)
+            {
+                return;
+            }
 
             try
             {
@@ -405,7 +409,10 @@ namespace vcs_ImageProcessing6
         // Make a fuzzy copy of the image.
         private void FuzzImage()
         {
-            if (OriginalImage == null) return;
+            if (OriginalImage == null)
+            {
+                return;
+            }
 
             // Make a low pass filter.
             try
@@ -414,8 +421,12 @@ namespace vcs_ImageProcessing6
                 Filter.Offset = 0;
                 Filter.Kernel = new float[KernelSize, KernelSize];
                 for (int i = 0; i < KernelSize; i++)
+                {
                     for (int j = 0; j < KernelSize; j++)
+                    {
                         Filter.Kernel[i, j] = 1;
+                    }
+                }
                 Filter.Normalize();
             }
             catch (Exception ex)
@@ -445,7 +456,6 @@ namespace vcs_ImageProcessing6
 
         private void bt_reset2_Click(object sender, EventArgs e)
         {
-            //Revert
             // Revert to the original image.
             VisibleImage = new Bitmap(OriginalImage);
             pictureBox2.Image = VisibleImage;

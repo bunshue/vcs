@@ -32,6 +32,7 @@ namespace vcs_ImageProcessing3
         private void Form1_Load(object sender, EventArgs e)
         {
             reset_pictureBox();
+
             show_item_location();
         }
 
@@ -1887,7 +1888,6 @@ namespace vcs_ImageProcessing3
             return bitmap1;
         }
 
-
         private Bitmap image_processing15(string filename)
         {
             Bitmap bitmap1 = new Bitmap(filename);
@@ -2018,7 +2018,6 @@ namespace vcs_ImageProcessing3
             newpbmp.UnlockBits();
             return bmp;
         }
-
 
         private Bitmap image_processing17(string filename)
         {
@@ -2430,7 +2429,6 @@ namespace vcs_ImageProcessing3
         {
 
         }
-
 
         //黑白效果
         public Bitmap GrayImage(string filename)
@@ -2978,8 +2976,7 @@ namespace vcs_ImageProcessing3
                 }
 
                 // Lock bitmap and return bitmap data
-                bitmapData = source.LockBits(rect, ImageLockMode.ReadWrite,
-                                             source.PixelFormat);
+                bitmapData = source.LockBits(rect, ImageLockMode.ReadWrite, source.PixelFormat);
 
                 // create byte array to copy pixel values
                 int step = Depth / 8;

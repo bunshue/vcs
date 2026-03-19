@@ -54,6 +54,7 @@ namespace vcs_ImageProcessing1
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
             pictureBox1.Image = Image.FromFile(filename);
         }
 
@@ -102,6 +103,10 @@ namespace vcs_ImageProcessing1
 
             this.Size = new Size(1820, 960);
             this.Text = "vcs_ImageProcessing1";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -1038,3 +1043,4 @@ ImageLockMode.ReadWrite
 // 其中BitmapData類的Stride屬性爲每行像素所佔的字節。
 // int offset = stride - W * 3;
 // ptr += offset;//指針加上填充的空白空間
+

@@ -204,17 +204,21 @@ namespace vcs_ImageProcessing7
             int width = MyBitmap.Width;
             int height = MyBitmap.Height;
             //定義將圖片切分成四個部分的區域
-            RectangleF[] block ={
-  new RectangleF(0,0,width/2,height/2),
-  new RectangleF(width/2,0,width/2,height/2),
-  new RectangleF(0,height/2,width/2,height/2),
-  new RectangleF(width/2,height/2,width/2,height/2)};
+            RectangleF[] block =
+            {
+                new RectangleF(0,0,width/2,height/2),
+                new RectangleF(width/2,0,width/2,height/2),
+                new RectangleF(0,height/2,width/2,height/2),
+                new RectangleF(width/2,height/2,width/2,height/2)
+            };
             //分別克隆圖片的四個部分
-            Bitmap[] MyBitmapBlack ={
-  MyBitmap.Clone(block[0],System.Drawing.Imaging.PixelFormat.DontCare),
-  MyBitmap.Clone(block[1],System.Drawing.Imaging.PixelFormat.DontCare),
-  MyBitmap.Clone(block[2],System.Drawing.Imaging.PixelFormat.DontCare),
-  MyBitmap.Clone(block[3],System.Drawing.Imaging.PixelFormat.DontCare)};
+            Bitmap[] MyBitmapBlack =
+            {
+                MyBitmap.Clone(block[0],System.Drawing.Imaging.PixelFormat.DontCare),
+                MyBitmap.Clone(block[1],System.Drawing.Imaging.PixelFormat.DontCare),
+                MyBitmap.Clone(block[2],System.Drawing.Imaging.PixelFormat.DontCare),
+                MyBitmap.Clone(block[3],System.Drawing.Imaging.PixelFormat.DontCare)
+            };
             //繪制圖片的四個部分，各部分繪制時間間隔為0.5秒
             g.DrawImage(MyBitmapBlack[0], 0, 0);
             System.Threading.Thread.Sleep(1000);
@@ -345,6 +349,7 @@ namespace vcs_ImageProcessing7
                 MessageBox.Show(ex.Message, "信息提示");
             }
         }
+
         private void button11_Click(object sender, EventArgs e)
         {
             //九、以從左向右拉伸的方式顯示圖像
@@ -386,6 +391,7 @@ namespace vcs_ImageProcessing7
                 System.Threading.Thread.Sleep(50);
             }
         }
+
         private void button13_Click(object sender, EventArgs e)
         {
             //原理：主要使用了 graphics 類提供的 fillellipse() 方法和 texturebrush() 方法。

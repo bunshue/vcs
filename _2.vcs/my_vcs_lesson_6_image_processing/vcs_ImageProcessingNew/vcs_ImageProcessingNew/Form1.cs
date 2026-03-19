@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;   //for BitmapData
+using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;   //for Marshal
 
 namespace vcs_ImageProcessingNew
@@ -226,7 +226,9 @@ namespace vcs_ImageProcessingNew
                 total_brightness += i * brightness_data[i];
                 //richTextBox1.Text += brightness_data[i].ToString() + " ";
                 if (brightness_data[i] > most)
+                {
                     most = brightness_data[i];
+                }
                 /*
                 if (brightness_data[i] == 0)
                     brightness_data[i] = 5;
@@ -413,7 +415,6 @@ namespace vcs_ImageProcessingNew
 
             g4.DrawRectangle(Pens.Red, 750, hh2 - brightness_sp, width, brightness_sp - brightness_st);
 
-
             //richTextBox1.Text += "brightness data :\n";
             //printArrayData(brightness_data);
             int mm = brightness_data.Max();
@@ -424,9 +425,6 @@ namespace vcs_ImageProcessingNew
                 g4.DrawLine(Pens.Red, 750, hh2 - i, 750 + (int)(brightness_data[i] / rr), hh2 - i);
 
             }
-
-            richTextBox1.Text += "eeeee\n";
-            //return;
 
             Point[] curvePoints = new Point[256];    //一維陣列內有 256 個Point
             for (i = 0; i < 256; i++)
@@ -456,13 +454,8 @@ namespace vcs_ImageProcessingNew
             g4.DrawRectangle(Pens.Red, 800, hh2 - brightness_max_mod, width, brightness_max_mod - brightness_min_mod);
             g4.DrawLine(Pens.Red, 800, hh2 - brightness_avg, 800 + width, hh2 - brightness_avg);
 
-
-            richTextBox1.Text += "eeeee2222\n";
-
-
             pictureBox2.Image = bmp4;
         }
-
 
         void FindYMaxYMin(int[] array, out int y_min, out int y_max)
         {
@@ -660,9 +653,7 @@ namespace vcs_ImageProcessingNew
                     bitmap1.SetPixel(i, j, Color.FromArgb(ALPHA, pt.R, pt.G, 255));
                 }
             }
-
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button2_Click(object sender, EventArgs e)

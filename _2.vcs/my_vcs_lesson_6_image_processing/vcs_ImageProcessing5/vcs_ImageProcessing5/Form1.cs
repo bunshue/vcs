@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Imaging;   //for PixelFormat
 using System.IO;    //for Path
 using System.Diagnostics;   //for Stopwatch
+using System.Drawing.Imaging;   //for PixelFormat
 
 namespace vcs_ImageProcessing5
 {
@@ -565,11 +565,7 @@ namespace vcs_ImageProcessing5
                         red = (byte)(BYTE_255 - clr.R);
                         green = (byte)(BYTE_255 - clr.G);
                         blue = (byte)(BYTE_255 - clr.B);
-                        clr = Color.FromArgb(
-                            255 - clr.R,
-                            255 - clr.G,
-                            255 - clr.B);
-
+                        clr = Color.FromArgb(255 - clr.R, 255 - clr.G, 255 - clr.B);
                         bitmap1.SetPixel(x, y, Color.FromArgb(red, green, blue));
                     }
                 }
@@ -580,8 +576,6 @@ namespace vcs_ImageProcessing5
             richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
 
             richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.000000") + " 秒\n";
-
-
         }
 
         // Invert the image using Lockbits.
@@ -637,9 +631,7 @@ namespace vcs_ImageProcessing5
             Cursor = Cursors.Default;
             sw.Stop();
             richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
-
             richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.000000") + " 秒\n";
-
         }
 
         private void bt_image_process_b2_Click(object sender, EventArgs e)
@@ -713,9 +705,7 @@ namespace vcs_ImageProcessing5
             {
                 // Draw an ellispe in the center.
                 gr.Clear(Color.Black);
-                gr.FillEllipse(Brushes.White,
-                    new Rectangle((int)(bm.Width * 0.2), (int)(bm.Height * 0.2),
-                        (int)(bm.Width * 0.6), (int)(bm.Height * 0.6)));
+                gr.FillEllipse(Brushes.White, new Rectangle((int)(bm.Width * 0.2), (int)(bm.Height * 0.2), (int)(bm.Width * 0.6), (int)(bm.Height * 0.6)));
 
                 // Copy the quartered bitmap onto this one.
                 gr.DrawImage(bm, 0, 0);
@@ -728,7 +718,6 @@ namespace vcs_ImageProcessing5
             Cursor = Cursors.Default;
 
             richTextBox1.Text += "耗時 : " + string.Format("{0,10}", sw.ElapsedMilliseconds.ToString()) + "\tmsec\n";
-
             richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.000000") + " 秒\n";
         }
 

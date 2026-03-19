@@ -24,7 +24,40 @@ namespace vcs_ImageData
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+        }
 
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 10;
+            dy = 60 + 10;
+
+            //pictureBox1.Size = new Size(400, 450);
+            //pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+
+            //richTextBox1.Size = new Size(300, 690);
+            //richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            //this.Size = new Size(1273, 750);
+            this.Text = "vcs_ImageData";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -46,7 +79,6 @@ namespace vcs_ImageData
             richTextBox1.Text += "圖片大小 : " + image.Width.ToString() + " x " + image.Height.ToString() + " x " + image.ImageBit.ToString() + "bit\n";
 
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -66,7 +98,6 @@ namespace vcs_ImageData
             richTextBox1.Text += "image.Stride = " + image.Stride.ToString() + "\n";
             richTextBox1.Text += "image.Width = " + image.Width.ToString() + "\n";
             richTextBox1.Text += "image.Height = " + image.Height.ToString() + "\n";
-
 
             richTextBox1.Text += image.Width.ToString() + " x " + image.Height.ToString() + " x " + image.ImageBit.ToString() + "bit\n";
 
@@ -89,7 +120,6 @@ namespace vcs_ImageData
                 }
             }
 
-
             bitmap1 = image.ToBitmap();
 
             richTextBox1.Text += "圖片大小 : " + image.Width.ToString() + " x " + image.Height.ToString() + " x " + image.ImageBit.ToString() + "bit\n";
@@ -98,4 +128,3 @@ namespace vcs_ImageData
         }
     }
 }
-
