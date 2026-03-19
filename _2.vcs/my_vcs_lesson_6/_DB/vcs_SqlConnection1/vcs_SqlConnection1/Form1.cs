@@ -167,7 +167,7 @@ namespace vcs_SqlConnection1
             {
                 using (SqlConnection cn = new SqlConnection(cnstr))
                 {
-                    cn.Open();
+                    cn.Open();  // 打開數據庫連線
                     SqlCommand cmd = new SqlCommand();
                     cmd.CommandText = "INSERT INTO 員工(員工編號,姓名,性別,薪資)VALUES(N'" +
                         id + "',N'" +
@@ -195,7 +195,7 @@ namespace vcs_SqlConnection1
             {
                 using (SqlConnection cn = new SqlConnection(cnstr))
                 {
-                    cn.Open();
+                    cn.Open();  // 打開數據庫連線
                     SqlCommand cmd = new SqlCommand();
                     cmd.CommandText = "UPDATE 員工 SET 姓名=N'" +
                         name + "', 性別=N'" +
@@ -220,7 +220,7 @@ namespace vcs_SqlConnection1
             {
                 using (SqlConnection cn = new SqlConnection(cnstr))
                 {
-                    cn.Open();
+                    cn.Open();  // 打開數據庫連線
                     SqlCommand cmd = new SqlCommand();
                     cmd.CommandText = "DELETE FROM 員工 WHERE 員工編號=N'" + id + "'";
                     cmd.Connection = cn;
@@ -242,7 +242,7 @@ namespace vcs_SqlConnection1
             {
                 // 連接資料庫
                 cn.ConnectionString = cnstr;
-                cn.Open();
+                cn.Open();  // 打開數據庫連線
 
                 string sqlstr = "SELECT * FROM 員工";  // 宣告查詢字串
                 SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
@@ -288,97 +288,10 @@ namespace vcs_SqlConnection1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            // 成績單1
-            string db_filename = "ch17DB.mdf";
-            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-
-            // 讀出資料庫資料
-
-            using (SqlConnection cn = new SqlConnection())
-            {
-                // 連接資料庫
-                cn.ConnectionString = cnstr;
-
-                cn.Open();
-
-                SqlCommand cmd = new SqlCommand("SELECT * FROM 成績單", cn);
-
-                SqlDataReader dr = cmd.ExecuteReader();
-
-                richTextBox1.Text += "欄數 dr.FieldCount = " + dr.FieldCount.ToString() + "\n";
-
-                richTextBox1.Text += "欄位名稱\n";
-                for (int i = 0; i < dr.FieldCount; i++)
-                {
-                    richTextBox1.Text += dr.GetName(i) + "\t";
-                }
-
-                richTextBox1.Text += "\n內容\n";
-                int cnt = 0;
-                while (dr.Read())
-                {
-                    richTextBox1.Text += "第 " + cnt.ToString() + " 筆資料 :\n";
-                    cnt++;
-                    for (int i = 0; i < dr.FieldCount; i++)
-                    {
-                        richTextBox1.Text += dr[i].ToString() + "\t";
-                        //richTextBox1.Text += dr.GetValue(i).ToString() + "\t";    //same
-                    }
-                    richTextBox1.Text += "\n";
-                }
-            }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            // 成績單2
-            string db_filename = "ch17DB.mdf";
-            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-
-            using (SqlConnection cn = new SqlConnection())
-            {
-                // 連接資料庫
-                cn.ConnectionString = cnstr;
-
-                cn.Open();
-
-                SqlCommand cmd = new SqlCommand("SELECT * FROM 成績單", cn);
-
-                SqlDataReader dr = cmd.ExecuteReader();
-                for (int i = 0; i < dr.FieldCount; i++)
-                {
-                    richTextBox1.Text += dr.GetName(i) + "\t";
-                }
-                richTextBox1.Text += "\n";
-
-                while (dr.Read())
-                {
-                    richTextBox1.Text += dr["學號"].ToString() + "\t";
-                    richTextBox1.Text += dr["姓名"].ToString() + "\t";
-                    richTextBox1.Text += dr["國文"].ToString() + "\t";
-                    richTextBox1.Text += dr["英文"].ToString() + "\t";
-                    richTextBox1.Text += dr["數學"].ToString() + "\t";
-                    richTextBox1.Text += "\n";
-
-                    /*
-                    richTextBox1.Text += dr.GetString(0) + "\t";   //讀取學號
-                    richTextBox1.Text += dr.GetString(1) + "\t";   //讀取姓名
-                    richTextBox1.Text += dr.GetInt32(2).ToString() + "\t";   //讀取國文
-                    richTextBox1.Text += dr.GetInt32(3).ToString() + "\t";   //讀取英文
-                    richTextBox1.Text += dr.GetInt32(4).ToString() + "\t";   //讀取數學
-                    richTextBox1.Text += "\n";
-                    */
-
-                    /*
-                    richTextBox1.Text += dr.GetSqlString(0).ToString() + "\t";//讀取學號
-                    richTextBox1.Text += dr.GetSqlString(1).ToString() + "\t";//讀取姓名
-                    richTextBox1.Text += dr.GetSqlInt32(2).ToString() + "\t";//讀取國文
-                    richTextBox1.Text += dr.GetSqlInt32(3).ToString() + "\t";//讀取英文
-                    richTextBox1.Text += dr.GetSqlInt32(4).ToString() + "\t";//讀取數學
-                    richTextBox1.Text += "\n";
-                    */
-                }
-            }
         }
 
         // 員工資料表1 ST
@@ -426,7 +339,7 @@ namespace vcs_SqlConnection1
                 {
                     // 連接資料庫
                     cn.ConnectionString = cnstr1;
-                    cn.Open();
+                    cn.Open();  // 打開數據庫連線
 
                     /* same
                     string sqlStr = "INSERT INTO 員工(姓名, 職稱, 電話, 薪資) VALUES('" + name + "','" + position + "','" + telephone + "'," + salary + ")";
@@ -467,7 +380,7 @@ namespace vcs_SqlConnection1
                 {
                     // 連接資料庫
                     cn.ConnectionString = cnstr1;
-                    cn.Open();
+                    cn.Open();  // 打開數據庫連線
 
                     /* same
                     string sqlStr = "UPDATE 員工 SET 職稱 = '" + position2 + "',電話 = '" + telephone2 + "', 薪資 = " + salary2 + " WHERE 姓名 = '" + name + "'";
@@ -501,7 +414,7 @@ namespace vcs_SqlConnection1
             {
                 // 連接資料庫
                 cn.ConnectionString = cnstr1;
-                cn.Open();
+                cn.Open();  // 打開數據庫連線
 
                 /* same
                 string sqlStr = "DELETE FROM 員工 WHERE 姓名 = '" + name + "'";
@@ -558,162 +471,19 @@ namespace vcs_SqlConnection1
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //成績單3
-            string db_filename = "ch17DB.mdf";
-            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-
-            using (SqlConnection cn = new SqlConnection())
-            {
-                // 連接資料庫
-                cn.ConnectionString = cnstr;
-
-                DataSet ds = new DataSet();  // 建立DataSet來儲存Table
-
-                // 建立SqlDataAdapter物件da並取出成績單資料表
-                string sqlstr = "SELECT * FROM 成績單";  // 宣告查詢字串
-                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
-
-                // 將成績單資料表所有記錄填入ds物件
-                da.Fill(ds, "成績單");  // 將DataAdapter查詢之後的結果填充至DataSet
-
-                // 宣告DataTable物件dt，該dt內存放ds中的成績單DataTable
-                DataTable dt = ds.Tables["成績單"];
-                // 在richTextBox1內顯示成績單的所有欄位名稱
-                for (int i = 0; i < dt.Columns.Count; i++)
-                {
-                    richTextBox1.Text += dt.Columns[i].ColumnName + "\t";
-                }
-                richTextBox1.Text += "\n";
-
-                // 在richTextBox1內顯示成績單的所有記錄
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    for (int j = 0; j < dt.Columns.Count; j++)
-                    {
-                        richTextBox1.Text += dt.Rows[i][j].ToString() + "\t";
-                    }
-                    richTextBox1.Text += "\n";
-                }
-            }
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //成績單4
-            string db_filename = "ch17DB.mdf";
-            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-
-            using (SqlConnection cn = new SqlConnection())
-            {
-                // 連接資料庫
-                cn.ConnectionString = cnstr;
-
-                DataSet ds = new DataSet();  // 建立DataSet來儲存Table
-
-                // 建立SqlDataAdapter物件da並取出成績單資料表
-                string sqlstr = "SELECT * FROM 成績單";  // 宣告查詢字串
-                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
-
-                // 將成績單資料表所有記錄填入ds物件
-                da.Fill(ds, "成績單");  // 將DataAdapter查詢之後的結果填充至DataSet
-
-                // 宣告DataTable物件dt，該dt內存放ds中的成績單DataTable
-                DataTable dt = ds.Tables["成績單"];
-
-                // 在richTextBox1內顯示成績單的所有欄位名稱
-                for (int i = 0; i < dt.Columns.Count; i++)
-                {
-                    richTextBox1.Text += dt.Columns[i].ColumnName + "\t";
-                }
-                richTextBox1.Text += "\n";
-
-                // 在richTextBox1內顯示成績單的所有記錄
-                for (int i = 0; i < dt.Rows.Count - 1; i++)
-                {
-                    richTextBox1.Text += dt.Rows[i]["學號"].ToString() + "\t";
-                    richTextBox1.Text += dt.Rows[i]["姓名"].ToString() + "\t";
-                    richTextBox1.Text += dt.Rows[i]["國文"].ToString() + "\t";
-                    richTextBox1.Text += dt.Rows[i]["英文"].ToString() + "\t";
-                    richTextBox1.Text += dt.Rows[i]["數學"].ToString() + "\t";
-                    richTextBox1.Text += "\n";
-                }
-            }
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            //成績單 搜尋1
-
-            string db_filename = "ch17DB.mdf";
-            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-
-            string name = "阿龍";
-
-            using (SqlConnection cn = new SqlConnection())
-            {
-                // 連接資料庫
-                cn.ConnectionString = cnstr;
-                cn.Open();
-
-                // 將輸入的姓名指定給searchName字串變數
-                string searchName = name;
-                // SELECT敘述的查詢條件為姓名等於searchName
-                string selectCmd = "SELECT * FROM 成績單 WHERE 姓名 = '" + searchName + "'";
-                // 建立SqlCommand物件cmd
-                SqlCommand cmd = new SqlCommand(selectCmd, cn);
-                // 傳回查詢結果的SqlDataRadedr物件dr
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.Read())   // 若有該筆記錄則執行下面敘述
-                {
-                    richTextBox1.Text += "學號：" + dr["學號"].ToString() + "\n";
-                    richTextBox1.Text += "姓名：" + dr["姓名"].ToString() + "\n";
-                    richTextBox1.Text += "國文：" + dr["國文"].ToString() + "\n";
-                    richTextBox1.Text += "英文：" + dr["英文"].ToString() + "\n";
-                    richTextBox1.Text += "數學：" + dr["數學"].ToString() + "\n";
-                }
-                else   // 若沒有該筆記錄則執行else下面敘述
-                {
-                    richTextBox1.Text += "找不到這個學生的成績！\n";
-                }
-            }
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-            //成績單 搜尋2
 
-            string db_filename = "ch17DB.mdf";
-            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-
-            string name = "阿龍";
-
-            using (SqlConnection cn = new SqlConnection())
-            {
-                // 連接資料庫
-                cn.ConnectionString = cnstr;
-                cn.Open();
-
-                // 將輸入的姓名指定給searchName字串變數
-                string searchName = name;
-                // SELECT敘述的查詢條件為姓名等於searchName
-                string selectCmd = "SELECT * FROM 成績單 WHERE 姓名 = '" + searchName.Replace("'", "''") + "'";
-                // 建立SqlCommand物件cmd
-                SqlCommand cmd = new SqlCommand(selectCmd, cn);
-                // 傳回查詢結果的SqlDataRadedr物件dr
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.Read())   // 若有該筆記錄則執行下面敘述
-                {
-                    richTextBox1.Text += "學號：" + dr["學號"].ToString() + "\n";
-                    richTextBox1.Text += "姓名：" + dr["姓名"].ToString() + "\n";
-                    richTextBox1.Text += "國文：" + dr["國文"].ToString() + "\n";
-                    richTextBox1.Text += "英文：" + dr["英文"].ToString() + "\n";
-                    richTextBox1.Text += "數學：" + dr["數學"].ToString() + "\n";
-                }
-                else   // 若沒有該筆記錄則執行else下面敘述
-                {
-                    richTextBox1.Text += "找不到這個學生的成績！\n";
-                }
-            }
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -745,7 +515,7 @@ namespace vcs_SqlConnection1
 
                 // 連接資料庫
                 cn.ConnectionString = cnstr;
-                cn.Open();
+                cn.Open();  // 打開數據庫連線
 
                 // 建立SqlCommand物件selectCmd1，用來查詢使用者帳號是否存在
                 SqlCommand selectCmd1 = new SqlCommand("SELECT * FROM 銀行帳戶 WHERE 帳號='" + src_ID + "'", cn);
@@ -842,41 +612,6 @@ namespace vcs_SqlConnection1
 
         private void button18_Click(object sender, EventArgs e)
         {
-            //成績單+搜尋條件
-
-            string db_filename = "ch18DB.mdf";
-            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-
-            using (SqlConnection cn = new SqlConnection())
-            {
-                cn.ConnectionString = cnstr;
-
-                string sqlstr = "SELECT * FROM 成績單 ORDER BY 國文 DESC";  // 宣告查詢字串
-                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
-
-                DataSet ds = new DataSet();
-
-                da.Fill(ds, "成績單");
-
-                DataView dv;  // 宣告DataView物件dv
-
-                dv = ds.Tables["成績單"].DefaultView;
-
-                dataGridView1.DataSource = dv;
-
-                richTextBox1.Text += "------------------------------\n";  // 30個
-
-                string filter = "國文>80";  // 篩選條件, 用WHRER語法
-                string sort = "英文 DESC";  // 排序方法, 科目, ASC:遞增, DESC:遞減
-
-                richTextBox1.Text += "篩選條件 : " + filter + "\n";
-                richTextBox1.Text += "排序方法 : " + sort + "\n";
-
-                dv.RowFilter = filter;
-                dv.Sort = sort;
-
-                dataGridView1.DataSource = dv;
-            }
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -1104,42 +839,6 @@ namespace vcs_SqlConnection1
 
         private void button26_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "建立資料庫, 目前只能新增表單, 需使用既有資料庫\n";
-
-            //1 建立连接对象
-            SqlConnection cn = new SqlConnection();
-
-            //2 连接字符串(这里连接的是本地数据库，sa用户登陆，无密码)
-            //cn.ConnectionString = "server=.;uid=sa;pwd=;";  // NG
-            cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\dddd.mdf;Integrated Security=True;Connect Timeout=30";
-
-            //3 建立命令执行对象
-            SqlCommand cmd = new SqlCommand();
-
-            //4 给命令执行对象指定连接对象
-            cmd.Connection = cn;
-
-            //5 SQL语句（指定要创建数据库的SQL句）
-            //string sqlstr = "create database mydatabase2";
-            string sqlstr = "create database mydatabase3";
-
-            cmd.CommandText = sqlstr;
-
-            //6 打开数据库连接
-            cn.Open();
-
-            try  //使用try...catch...敘述來補捉異動資料可能發生的例外 
-            {
-                //7 执行命令对象里的SQL语句
-                cmd.ExecuteNonQuery();  // 執行SQL命令
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += ex.Message + ", 新增資料發生錯誤\n";
-            }
-
-            //8 执行完后关闭数据库连接
-            cn.Close();
         }
 
         private void button27_Click(object sender, EventArgs e)
@@ -1200,7 +899,7 @@ namespace vcs_SqlConnection1
             {
                 try
                 {
-                    con.Open();
+                    con.Open();  // 打開數據庫連線
                     cmd.Connection = con;
                     cmd.CommandText = sql_command;
                     cmd.ExecuteNonQuery();

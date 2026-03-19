@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_SqlConnection5", "vcs_SqlConnection5\vcs_SqlConnection5.csproj", "{84EDB58C-D530-4BCF-8524-332EBE3538F3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_SqlConnection3", "vcs_SqlConnection3\vcs_SqlConnection3.csproj", "{84EDB58C-D530-4BCF-8524-332EBE3538F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

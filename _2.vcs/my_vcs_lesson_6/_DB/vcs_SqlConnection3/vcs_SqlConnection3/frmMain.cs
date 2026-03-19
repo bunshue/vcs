@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 using System.Data.SqlClient;//使用SqlConnection, SqlCommand, SqlDataAdapter必須引用
 
-namespace vcs_SqlConnection5
+namespace vcs_SqlConnection3
 {
     public partial class frmMain : Form
     {
@@ -78,7 +78,7 @@ namespace vcs_SqlConnection5
             lb_dgv4.Text = "";
 
             this.Size = new Size(1500, 900);
-            this.Text = "vcs_SqlConnection5";
+            this.Text = "vcs_SqlConnection3";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;

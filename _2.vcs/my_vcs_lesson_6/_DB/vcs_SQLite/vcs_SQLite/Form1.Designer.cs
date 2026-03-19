@@ -40,9 +40,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 63);
+            this.button1.Location = new System.Drawing.Point(12, 78);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(112, 45);
+            this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 0;
             this.button1.Text = "增加";
             this.button1.UseVisualStyleBackColor = true;
@@ -50,9 +50,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 114);
+            this.button2.Location = new System.Drawing.Point(12, 144);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(112, 45);
+            this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 1;
             this.button2.Text = "修改";
             this.button2.UseVisualStyleBackColor = true;
@@ -62,7 +62,7 @@
             // 
             this.button0.Location = new System.Drawing.Point(12, 12);
             this.button0.Name = "button0";
-            this.button0.Size = new System.Drawing.Size(112, 45);
+            this.button0.Size = new System.Drawing.Size(200, 60);
             this.button0.TabIndex = 2;
             this.button0.Text = "查詢";
             this.button0.UseVisualStyleBackColor = true;
@@ -70,9 +70,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(12, 165);
+            this.button3.Location = new System.Drawing.Point(12, 210);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(112, 45);
+            this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 3;
             this.button3.Text = "刪除";
             this.button3.UseVisualStyleBackColor = true;
@@ -80,25 +80,25 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(12, 216);
+            this.button4.Location = new System.Drawing.Point(12, 276);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(112, 45);
+            this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 4;
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(12, 267);
+            this.button5.Location = new System.Drawing.Point(12, 342);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(112, 45);
+            this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 5;
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(161, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(227, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 6;
@@ -107,7 +107,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(189, 68);
+            this.bt_clear.Location = new System.Drawing.Point(255, 68);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(60, 32);
             this.bt_clear.TabIndex = 34;
@@ -119,7 +119,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(402, 327);
+            this.ClientSize = new System.Drawing.Size(563, 437);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button5);

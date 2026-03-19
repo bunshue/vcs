@@ -29,6 +29,7 @@ namespace vcs_SQLite
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
             richTextBox1.Text += "path : " + path + "\n";
             richTextBox1.Text += "cs : " + cs + "\n";
 
@@ -46,8 +47,8 @@ namespace vcs_SQLite
             //button
             x_st = 10;
             y_st = 10;
-            dx = 120;
-            dy = 50;
+            dx = 200 + 10;
+            dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -56,11 +57,16 @@ namespace vcs_SQLite
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
 
-            richTextBox1.Size = new Size(500, 400);
+            richTextBox1.Size = new Size(500, 690);
             richTextBox1.Location = new Point(x_st + dx * 1 + 0, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(660, 500);
+            this.Size = new Size(760, 750);
+            this.Text = "vcs_SQLite";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -84,7 +90,7 @@ namespace vcs_SQLite
             }
         }
 
-        //create database and table
+        // 建立資料庫
         private void Create_db()
         {
             if (!System.IO.File.Exists(path))

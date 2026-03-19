@@ -7,8 +7,8 @@
     <ProjectGuid>{84EDB58C-D530-4BCF-8524-332EBE3538F3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_SqlConnection5</RootNamespace>
-    <AssemblyName>vcs_SqlConnection5</AssemblyName>
+    <RootNamespace>vcs_SqlConnection3</RootNamespace>
+    <AssemblyName>vcs_SqlConnection3</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>發行\</PublishUrl>

@@ -1,4 +1,4 @@
-﻿namespace vcs_SqlConnection5
+﻿namespace vcs_SqlConnection3
 {
     partial class frmMain
     {

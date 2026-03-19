@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace vcs_SqlConnection5
+namespace vcs_SqlConnection3
 {
     static class Program
     {
