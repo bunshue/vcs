@@ -84,7 +84,7 @@ namespace HideToolBar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(542, 566);
+            this.ClientSize = new System.Drawing.Size(542, 475);
             this.Controls.Add(this.Tip);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBar1);

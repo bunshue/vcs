@@ -117,7 +117,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(606, 271);
+            this.ClientSize = new System.Drawing.Size(616, 273);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.closeButton);
@@ -129,6 +129,7 @@
             this.Name = "TaskMessageWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "任務欄通知窗口";
+            this.Load += new System.EventHandler(this.TaskMessageWindow_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

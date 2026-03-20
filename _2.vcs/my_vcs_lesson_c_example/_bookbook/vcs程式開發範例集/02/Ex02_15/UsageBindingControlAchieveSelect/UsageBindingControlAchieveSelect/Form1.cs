@@ -17,7 +17,7 @@ namespace UsageBindingControlAchieveSelect
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
 
             SqlConnection con = new SqlConnection(cnstr);
             con.Open();

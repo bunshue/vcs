@@ -6,8 +6,6 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Data.SqlClient;
-
 namespace ExchangeDatum
 {
     public partial class frmListBox : Form
@@ -19,29 +17,17 @@ namespace ExchangeDatum
 
         private void frmListBox_Load(object sender, EventArgs e)
         {
-            AddList();
+            string[] name = { "小明", "小1", "小2", "小3", "小4", "小5", "小6", "小7", "小8", "小9", "小10", "小11" };
+            //lbSocure.DataSource = name;   //list用了DataSource, 內容不可改變
+            foreach (string n in name)
+            {
+                lbSocure.Items.Add(n);
+            }
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-        }
-
-        public void AddList()//添加數據
-        {
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\db_02.mdf;Integrated Security=True;Connect Timeout=30";
-
-            SqlConnection con = new SqlConnection(cnstr);
-            con.Open();
-            SqlCommand com = new SqlCommand("select * from tb_student", con);
-            SqlDataReader dr = com.ExecuteReader();
-            this.lbSocure.Items.Clear();
-            while (dr.Read())
-            {
-                this.lbSocure.Items.Add(dr[1].ToString());
-            }
-            dr.Close();
-            con.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)//全部添加到選擇的項中
@@ -80,13 +66,6 @@ namespace ExchangeDatum
                 this.lbSocure.Items.Add(this.lbChoose.SelectedItem.ToString());
                 this.lbChoose.Items.Remove(this.lbChoose.SelectedItem);
             }
-        }
-
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            string[] name = { "小明", "小1", "小2", "小3", "小4", "小5", "小6", "小7", "小8", "小9", "小10", "小11" };
-            listBox1.DataSource = name;
         }
     }
 }

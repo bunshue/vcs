@@ -137,13 +137,13 @@ namespace vcs_SqlConnection0
                 dataGridView2.DataSource = ds.Tables[0];//设置数据源
             }
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             string db_filename = "db_TomeTwo.MDF";
             string cmd_name = "SELECT * FROM tb_Employee";
             show_database(db_filename, cmd_name);
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             // 讀出資料庫資料
 
@@ -284,6 +284,26 @@ namespace vcs_SqlConnection0
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //讀取資料庫3
+
+            string db_filename = "db_02.mdf";
+            string cmd_name = "select * from tb_student";
+            show_database(db_filename, cmd_name);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+
+            SqlConnection con = new SqlConnection(cnstr);
+            con.Open();
+            SqlCommand com = new SqlCommand("select * from tb_student", con);
+            SqlDataReader dr = com.ExecuteReader();
+            while (dr.Read())
+            {
+                richTextBox1.Text += dr[1].ToString() + "\n";
+            }
+            dr.Close();
+            con.Close();
         }
 
         private void button4_Click(object sender, EventArgs e)
