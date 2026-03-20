@@ -14,7 +14,7 @@ namespace EManageByProc
     public partial class Form1 : Form
     {
         //#region 定义全局变量及对象
-        string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_09.mdf;Integrated Security=True;Connect Timeout=30";
+        string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09.mdf;Integrated Security=True;Connect Timeout=30";
         SqlConnection sqlcon;
         SqlCommand sqlcmd;
         SqlDataAdapter sqlda;

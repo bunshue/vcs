@@ -30,7 +30,7 @@ namespace UseUpdate
 
         private void btn_Submit_Click(object sender, EventArgs e)
         {
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
 
             SqlDataAdapter P_SqlDataAdapter = new SqlDataAdapter();//创建数据适配器
 
@@ -59,7 +59,7 @@ WHERE id=@id",
         /// <returns>方法返回DataTable对象</returns>
         private void GetMessage()
         {
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
             //创建数据库连接字符串
             string P_Str_ConnectionStr = cnstr;
             //创建SQL查询字符串

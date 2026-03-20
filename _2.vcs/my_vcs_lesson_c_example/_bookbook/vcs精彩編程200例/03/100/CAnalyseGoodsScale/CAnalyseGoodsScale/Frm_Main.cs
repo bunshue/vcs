@@ -36,14 +36,14 @@ namespace CAnalyseGoodsScale
 
         private void Conn()
         {
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
             con = new SqlConnection(cnstr);
             con.Open();
         }
 
         private void showPic(float f, Brush B)
         {
-            Graphics g = this.panel1.CreateGraphics();					//通过panel1控件创建一个Graphics对象
+            Graphics g = this.panel1.CreateGraphics();  // 通过panel1控件创建一个Graphics对象
             if (TimeNum == 0.0f)
             {
                 g.FillPie(B, 0, 0, this.panel1.Width, this.panel1.Height, 0, f * 360);//绘制扇形

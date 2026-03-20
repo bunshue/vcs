@@ -35,7 +35,7 @@ namespace RefreshFormByChildForm
 
         private void Frm_Main_Load(object sender, EventArgs e)
         {
-            string ConnString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
+            string ConnString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
 
             string AdapterString = "select userID as 编号,userName as 姓名 ,phone as 电话,address as 住址 from tb_User";//用于查询的字符串
             string IDString = "select userID from tb_User";//读取数据库中用户的ID编号字符串

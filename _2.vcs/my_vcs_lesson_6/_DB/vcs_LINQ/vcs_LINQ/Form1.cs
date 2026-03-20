@@ -20,7 +20,7 @@ namespace vcs_LINQ
 {
     public partial class Form1 : Form
     {
-        //string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\{0};Integrated Security=True;Connect Timeout=30";
+        //string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
 
         public Form1()
         {
@@ -600,7 +600,7 @@ namespace vcs_LINQ
             using (SqlConnection cn = new SqlConnection())
             {
                 cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
-                    @"AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch20DB.mdf;" +
+                    @"AttachDbFilename=D:\ch20DB.mdf;" +
                     "Integrated Security=True";
                 DataContext dc = new DataContext(cn);
                 Table<Employee1> emp = dc.GetTable<Employee1>();
@@ -616,7 +616,7 @@ namespace vcs_LINQ
             using (SqlConnection cn = new SqlConnection())
             {
                 cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
-                    @"AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\ch20DB.mdf;" +
+                    @"AttachDbFilename=D:\ch20DB.mdf;" +
                             "Integrated Security=True";
                 DataContext dc = new DataContext(cn);
                 Table<Employee2> emp = dc.GetTable<Employee2>();

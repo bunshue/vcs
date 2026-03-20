@@ -20,7 +20,7 @@ namespace CollectionEnginery
 
         public static SqlConnection My_con;  //定义一个SqlConnection类型的公共变量My_con，用于判断数据库是否连接成功
 
-        public static string M_str_sqlcon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\CollectionEnginery.mdf;Integrated Security=True;Connect Timeout=30";
+        public static string M_str_sqlcon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\CollectionEnginery.mdf;Integrated Security=True;Connect Timeout=30";
 
         StreamReader SReader;
 

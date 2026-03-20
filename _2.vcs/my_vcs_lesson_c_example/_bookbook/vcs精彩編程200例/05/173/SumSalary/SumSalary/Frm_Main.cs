@@ -19,7 +19,7 @@ namespace SumSalary
         }
 
         //#region 定义全局变量及对象
-        string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+        string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
 
         SqlConnection sqlcon;//声明SqlConnection对象
         SqlDataAdapter sqlda;//声明SqlDataAdapter对象

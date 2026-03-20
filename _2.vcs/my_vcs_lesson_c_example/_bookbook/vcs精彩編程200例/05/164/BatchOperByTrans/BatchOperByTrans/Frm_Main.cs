@@ -24,7 +24,7 @@ namespace BatchOperByTrans
         private void Form1_Load(object sender, EventArgs e)
         {
             //实例化数据库连接对象
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
             m_Conn = new SqlConnection(cnstr);
             m_Cmd = new SqlCommand();//实例化执行SQL命令对象
             BindDataGridView("");//对DataGridView控件进行数据绑定

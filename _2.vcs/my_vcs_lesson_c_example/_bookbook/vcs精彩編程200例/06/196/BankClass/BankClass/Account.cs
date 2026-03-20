@@ -15,7 +15,7 @@ namespace BankClass
         {
             try
             {
-                string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_35.mdf;Integrated Security=True;Connect Timeout=30";
+                string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_35.mdf;Integrated Security=True;Connect Timeout=30";
                 SqlConnection con = new SqlConnection(cnstr);
                 con.Open();
                 SqlCommand cmd = new SqlCommand("UPDATE " + bank + " SET balance = balance + " + Convert.ToDouble(balance) + " WHERE (account = 123456)", con);
@@ -39,7 +39,7 @@ namespace BankClass
                     throw new Exception("银行：" + bank + " 账号：" + account + "余额不足！");
                 }
 
-                string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_35.mdf;Integrated Security=True;Connect Timeout=30";
+                string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_35.mdf;Integrated Security=True;Connect Timeout=30";
                 SqlConnection con = new SqlConnection(cnstr);
                 con.Open();
                 SqlCommand cmd = new SqlCommand("UPDATE " + bank + " SET balance = balance - " + Convert.ToDouble(balance) + " WHERE (account = 123456)", con);
@@ -56,7 +56,7 @@ namespace BankClass
 
         public int GetBalance(string bank, float balance, string account)
         {
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\data\db_35.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_35.mdf;Integrated Security=True;Connect Timeout=30";
             SqlConnection con = new SqlConnection(cnstr);
             SqlDataAdapter dap = new SqlDataAdapter("select * from " + bank + "where account='" + account + "'", con);
             DataSet ds = new DataSet();
