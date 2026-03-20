@@ -51,7 +51,7 @@ namespace ListWaferFacility
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
 
             SqlConnection con = new SqlConnection(cnstr);//初始化一個數據庫連接對像
             con.Open();//打開數據庫連接
@@ -102,4 +102,4 @@ namespace ListWaferFacility
     }
 }
 
-//string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+//string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";

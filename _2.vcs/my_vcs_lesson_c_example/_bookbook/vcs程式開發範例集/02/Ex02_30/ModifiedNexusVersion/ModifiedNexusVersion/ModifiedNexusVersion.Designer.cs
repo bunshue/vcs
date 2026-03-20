@@ -29,6 +29,7 @@ namespace ModifiedNexusVersion
         private void InitializeComponent()
         {
             this.treeView1 = new System.Windows.Forms.TreeView();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // treeView1
@@ -39,11 +40,20 @@ namespace ModifiedNexusVersion
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView1_AfterLabelEdit);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(318, 5);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(335, 480);
+            this.richTextBox1.TabIndex = 1;
+            this.richTextBox1.Text = "";
+            // 
             // ModifiedNexusVersion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(579, 497);
+            this.ClientSize = new System.Drawing.Size(665, 497);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.treeView1);
             this.Name = "ModifiedNexusVersion";
             this.Text = "修改TreeView控制元件中的節點文字";
@@ -55,6 +65,7 @@ namespace ModifiedNexusVersion
         #endregion
 
         private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

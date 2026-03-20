@@ -6,23 +6,24 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Data.SqlClient;//聲明與數據庫操作有關的命名空間
 
 namespace ModifiedNexusVersion
 {
     public partial class ModifiedNexusVersion : Form
     {
-        public ModifiedNexusVersion()
-        {
-            InitializeComponent();
-        }
-
         SqlCommand NexusCommand;//聲明一個執行SQL語句的對象
         SqlConnection NexusConnection;//聲明一個數據庫連接對像
 
         //定義一個數據庫連接字符串
         //private static string ConnectString = "server=.;database=db_02;integrated security=sspi";
-        private static string ConnectString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+        private static string ConnectString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+
+        public ModifiedNexusVersion()
+        {
+            InitializeComponent();
+        }
 
         private void ModifiedNexusVersion_Load(object sender, EventArgs e)
         {
@@ -36,6 +37,8 @@ namespace ModifiedNexusVersion
             TreeNode root = treeView1.Nodes.Add("產品名稱");//為treeView1控件添加根節點
             while (NexusReader.Read())//開始讀取數據中的內容
             {
+                richTextBox1.Text += NexusReader[1].ToString() + "\n";
+
                 TreeNode tempNode = new TreeNode(NexusReader[1].ToString());//將數據庫中的數據字段變換為treeView控件的節點
                 root.Nodes.Add(tempNode);//向根節點上添加數據庫字段
             }

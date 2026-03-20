@@ -92,6 +92,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(200, 60);
             this.button8.TabIndex = 133;
+            this.button8.Text = "讀取資料庫6";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -102,6 +103,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(200, 60);
             this.button7.TabIndex = 132;
+            this.button7.Text = "讀取資料庫5";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -134,6 +136,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(200, 60);
             this.button6.TabIndex = 128;
+            this.button6.Text = "讀取資料庫4";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -219,6 +222,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(200, 60);
             this.button11.TabIndex = 136;
+            this.button11.Text = "讀取資料庫7";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -229,6 +233,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(200, 60);
             this.button12.TabIndex = 137;
+            this.button12.Text = "讀取資料庫8";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 

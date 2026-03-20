@@ -29,6 +29,7 @@ namespace AmendDatum
         private void InitializeComponent()
         {
             this.listView1 = new System.Windows.Forms.ListView();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // listView1
@@ -37,17 +38,26 @@ namespace AmendDatum
             this.listView1.LabelEdit = true;
             this.listView1.Location = new System.Drawing.Point(5, 5);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(410, 401);
+            this.listView1.Size = new System.Drawing.Size(352, 401);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.listView1_AfterLabelEdit);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(387, 5);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(601, 401);
+            this.richTextBox1.TabIndex = 1;
+            this.richTextBox1.Text = "";
+            // 
             // AmendDatum
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(686, 563);
+            this.ClientSize = new System.Drawing.Size(1005, 427);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.listView1);
             this.Name = "AmendDatum";
             this.Text = "在ListView控制元件中完成修改功能";
@@ -59,6 +69,7 @@ namespace AmendDatum
         #endregion
 
         private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

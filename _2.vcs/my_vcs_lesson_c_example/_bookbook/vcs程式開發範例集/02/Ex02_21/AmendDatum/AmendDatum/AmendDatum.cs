@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Data.SqlClient;//宣告與數據庫有關的命名空間
+using System.Data.SqlClient;
 
 namespace AmendDatum
 {
@@ -17,9 +17,7 @@ namespace AmendDatum
         DataSet WidgetSet;//宣告一個數據集
         SqlConnection WidgetConnection;//宣告一個數據庫連接對像
 
-        //定義一個數據庫連接字串
-        //private string ConnectString = "server=.;database=db_02;integrated security=sspi";
-        private string ConnectString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+        private string ConnectString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
 
         public AmendDatum()
         {
@@ -28,9 +26,9 @@ namespace AmendDatum
 
         private void AmendDatum_Load(object sender, EventArgs e)
         {
-            listView1.Dock = DockStyle.Fill;//設定listView1與其父容器的停靠模式
             listView1.Columns.Add("產品名稱", 100, HorizontalAlignment.Left);//向listView1控制元件中新增「產品名稱」列
             listView1.Columns.Add("產品說明", 200, HorizontalAlignment.Center);//向listView1控制元件中新增「產品說明」列
+
             WidgetConnection = new SqlConnection(ConnectString);//初始化一個數據庫連接
             string SelectString = "select 產品名稱,產品說明 from tb_WidgetApply";//定義一個數據庫查詢字串
             WidgetAdapter = new SqlDataAdapter(SelectString, WidgetConnection);//初始化數據讀取器對像

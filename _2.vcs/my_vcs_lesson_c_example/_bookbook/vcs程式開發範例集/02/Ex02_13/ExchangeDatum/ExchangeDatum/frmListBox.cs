@@ -17,11 +17,12 @@ namespace ExchangeDatum
 
         private void frmListBox_Load(object sender, EventArgs e)
         {
-            string[] name = { "小明", "小1", "小2", "小3", "小4", "小5", "小6", "小7", "小8", "小9", "小10", "小11" };
-            //lbSocure.DataSource = name;   //list用了DataSource, 內容不可改變
-            foreach (string n in name)
+            string[] animals = { "米老鼠", "班尼牛", "跳跳虎", "彼得兔", "豆豆龍", "貪吃蛇", "草泥馬", "喜羊羊", "山道猴", "肯德雞", "貴賓狗", "佩佩豬" };
+
+            //lbSocure.DataSource = animals;   //list用了DataSource, 內容不可改變
+            foreach (string animal in animals)
             {
-                lbSocure.Items.Add(n);
+                lbSocure.Items.Add(animal);
             }
         }
 

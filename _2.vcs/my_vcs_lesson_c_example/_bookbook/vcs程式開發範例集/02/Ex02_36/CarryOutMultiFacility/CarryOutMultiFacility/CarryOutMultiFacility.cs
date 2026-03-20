@@ -17,7 +17,7 @@ namespace CarryOutMultiFacility
 
         //初始化一個數據庫連接字串
         //static string connectionString = "Data Source=.;DataBase=db_02;integrated security=sspi";
-        static string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+        static string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
 
         SqlConnection conn = new SqlConnection(connectionString);//初始化一個數據庫連接對像
         SqlDataAdapter Adapter;//宣告一個數據讀取器

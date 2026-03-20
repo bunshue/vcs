@@ -1,6 +1,0 @@
-﻿namespace UsageBindingControlAchieveSelect
-{
-}
-namespace UsageBindingControlAchieveSelect
-{
-}

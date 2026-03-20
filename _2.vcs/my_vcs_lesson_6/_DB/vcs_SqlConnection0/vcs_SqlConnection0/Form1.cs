@@ -564,14 +564,75 @@ namespace vcs_SqlConnection0
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //讀取資料庫4
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+
+            SqlConnection con = new SqlConnection(cnstr);
+            con.Open();
+            SqlCommand com = new SqlCommand("select * from tb_Land", con);
+            SqlDataReader dr = com.ExecuteReader();
+            while (dr.Read())
+            {
+                //this.listBox1.Items.Add(dr[1].ToString());
+                richTextBox1.Text += dr[1].ToString() + "\n";
+            }
+            dr.Close();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //讀取資料庫5
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+
+            SqlConnection con = new SqlConnection(cnstr);//"server=(local);integrated security=sspi;database=db_02");
+            con.Open();
+            SqlCommand com = new SqlCommand("select * from tb_02", con);
+            SqlDataReader dr = com.ExecuteReader();
+
+            while (dr.Read())
+            {
+                richTextBox1.Text += dr[0].ToString() + "\t" + dr[1].ToString() + "\t" + dr[2].ToString() + "\t" + "\n";
+            }
+            dr.Close();
+
+        }
+
+        public void getScoure(string strName)
+        {
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+
+            SqlConnection con = new SqlConnection(cnstr);
+
+            con.Open();
+
+            SqlCommand com = new SqlCommand(strName, con);
+            SqlDataReader dr = com.ExecuteReader();
+
+
+            while (dr.Read())
+            {
+
+                richTextBox1.Text += dr[0].ToString() + "\t" + dr[1].ToString() + "\t" + dr[2].ToString() + "\n";
+
+
+            }
+            dr.Close();
+            con.Close();
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
+            //讀取資料庫6
+            //取得資料
+            getScoure("select * from tb_05");
+
+            /*
+            //升冪排列
+            getScoure("select * from tb_05  order by 銷售數量 asc");
+
+            //降冪排列
+            getScoure("select * from tb_05 order by 銷售數量 desc");
+            */
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -736,10 +797,39 @@ namespace vcs_SqlConnection0
 
         private void button11_Click(object sender, EventArgs e)
         {
+            //讀取資料庫7
+
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+            SqlConnection con = new SqlConnection(cnstr);//"server=(local);integrated security=sspi;database=db_02");
+            con.Open();
+            SqlCommand com = new SqlCommand("select * from tb_06", con);
+            SqlDataReader dr = com.ExecuteReader();
+            while (dr.Read())
+            {
+                ListViewItem lv = new ListViewItem(dr[1].ToString(), 0);
+                richTextBox1.Text += dr[1].ToString() + "\n";
+
+            }
+            dr.Close();
+            con.Close();
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //讀取資料庫8
+
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+            SqlConnection con = new SqlConnection(cnstr);//"server=(local);integrated security=sspi;database=db_02");
+            con.Open();
+            SqlCommand com = new SqlCommand("select * from tb_07", con);
+            SqlDataReader dr = com.ExecuteReader();
+
+            while (dr.Read())
+            {
+                richTextBox1.Text += dr[1].ToString() + "\t" + dr[0].ToString() + "\t" + dr[3].ToString() + "\t" + dr[2].ToString() + "\n";
+            }
+            dr.Close();
+            con.Close();
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -922,6 +1012,7 @@ namespace vcs_SqlConnection0
     }
 }
 
+
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
@@ -951,3 +1042,60 @@ namespace vcs_SqlConnection0
                 }
 
 */
+
+
+
+
+
+
+
+
+/*
+            //定義數據庫連接字符串
+
+            // 無資料庫
+
+            //string ConnectString = "server=.;database=pubs;integrated security=sspi";
+            string ConnectString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02c.mdf;Integrated Security=True;Connect Timeout=30";
+
+            SqlConnection PaginationConnection;//定義數據庫連接對像
+            SqlDataAdapter PaginationAdapter;//定義填充數據集對像
+            DataSet PaginationSet = new DataSet();//定義存儲數據的集合
+            DataTable PageTable = new DataTable();//定義一個數據表
+
+
+            PaginationConnection = new SqlConnection(ConnectString);//初始化數據庫連接對像
+            string selectString = "select emp_id as 用戶編號,fname as 用戶姓名,hire_date as 工作時間 from employee";//定義一個查詢字符串變量
+            DataSet PageSet = new DataSet();// 定義一個存儲數據的集合
+            PageSet.Clear();//清空數據集中原有內容
+
+            //FillDataTable(selectString, ref PageSet);
+
+            try
+            {
+                PaginationConnection = new SqlConnection(ConnectString);//初始化數據庫連接對像
+                PaginationAdapter = new SqlDataAdapter(selectString, PaginationConnection);//初始化數據讀取對像
+                PaginationAdapter.Fill(PageSet);//填充數據集
+            }
+            catch (Exception ex)//捕獲異常
+            {
+                MessageBox.Show(ex.Message);//顯示異常信息
+            }
+            finally
+            {
+                PaginationConnection.Close();//關閉數據庫連接
+            }
+
+            //顯示數據
+            dataGridView1.Rows.Clear();//清空DataGridView中原有的數據
+            object[] item = new object[PageTable.Columns.Count];//定義一個object類型的數組
+            for (int i = 0; i < PageTable.Rows.Count; i++)//循環遍歷數據表中的每一行數據
+            {
+                for (int j = 0; j < PageTable.Columns.Count; j++)//循環遍歷數據表中每一列數據
+                {
+                    item[j] = PageTable.Rows[i][j];//保存數據表中的數據內容
+                }
+                dataGridView1.Rows.Add(item);//向DataGridView中添加數據
+            }
+*/
+
