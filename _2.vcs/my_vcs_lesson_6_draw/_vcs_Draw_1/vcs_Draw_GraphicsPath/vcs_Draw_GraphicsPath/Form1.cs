@@ -36,7 +36,7 @@ namespace vcs_Draw_GraphicsPath
 
             g = pictureBox1.CreateGraphics();
             g.Clear(SystemColors.ControlLight);
-            p = new Pen(Color.Red, 10);     //default pen
+            p = new Pen(Color.Red, 5);     //default pen
 
             //繪製圓角表單
             this.BackColor = Color.Pink;
@@ -111,8 +111,8 @@ namespace vcs_Draw_GraphicsPath
             int y_st = 20;
             int dx = 100;
             int dy = 80;
-            int w = 80;
-            int h = 60;
+            int w = 100;
+            int h = 100;
             Pen p = new Pen(Color.Red, 3);
             Font f = new Font("標楷體", 18);
 
@@ -120,29 +120,22 @@ namespace vcs_Draw_GraphicsPath
 
             GraphicsPath gp1 = new GraphicsPath();
             gp1.Reset();
-            gp1.AddLine(new Point(x_st + 0, y_st + 0), new Point(x_st + w, y_st + h));
-            gp1.AddLine(new Point(x_st + 0, y_st + h), new Point(x_st + w, y_st + 0));
-            gp1.AddRectangle(new Rectangle(x_st + w, y_st - 10, w, h));
+            gp1.AddLine(new Point(20, 20), new Point(100, 100));
+            gp1.AddLine(new Point(20, 100), new Point(100, 20));
+            gp1.AddRectangle(new Rectangle(110, 20, w, h));
+            gp1.AddEllipse(220, 20, w, h);
 
-            g.DrawPath(p, gp1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            x_st += dx * 2;
-            g.DrawString("2", f, Brushes.Red, x_st, y_st);
-
-            gp1.Reset();
-            gp1.AddLine(x_st + 0, y_st + 0, x_st + 50, y_st + 50);
-            gp1.AddEllipse(x_st + 50, y_st + 0, 100, 100);
+            //加入貝茲線
+            x_st += 150;
             gp1.AddBezier(x_st + 50 + 100, y_st + 50, x_st + 200, 0, x_st + 300, 180, x_st + 400, 20);
 
-            p = new Pen(Color.Green, 3);
             g.DrawPath(p, gp1);
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            x_st += dx * 3;
-            g.DrawString("3", f, Brushes.Red, x_st, y_st);
+            x_st += 300;
+
+            g.DrawString("2", f, Brushes.Red, x_st, y_st);
 
             GraphicsPath gp2 = new GraphicsPath();
 
@@ -168,13 +161,13 @@ namespace vcs_Draw_GraphicsPath
             x_st = 20;
             y_st = 20;
             y_st += dy * 2;
-            g.DrawString("4", f, Brushes.Red, x_st, y_st);
+            g.DrawString("3", f, Brushes.Red, x_st, y_st);
 
             GraphicsPath gp3 = new GraphicsPath();
             FontFamily family = new FontFamily("Times New Roman");
             int fontStyle = (int)FontStyle.Italic;
             int emSize = 26;
-            PointF pt = new PointF(x_st + dx, y_st);
+            PointF pt = new PointF(x_st, y_st);
             StringFormat format = StringFormat.GenericDefault;
             // GP加入字串
             String drawString = "FillPath加入文字範例";
@@ -184,20 +177,8 @@ namespace vcs_Draw_GraphicsPath
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            x_st += dx * 4;
-            //y_st += dy / 2;
-            g.DrawString("5", f, Brushes.Red, x_st, y_st);
-
-            GraphicsPath gp4 = new GraphicsPath();
-            gp4.AddLine(new Point(x_st + 10, y_st + 10), new Point(x_st + 60, y_st + 60));
-            gp4.AddLine(new Point(x_st + 60, y_st + 10), new Point(x_st + 10, y_st + 60));
-            gp4.AddRectangle(new Rectangle(x_st + 10, y_st + 10, 50, 50));
-
-            g.FillPath(new SolidBrush(Color.Cyan), gp4);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            x_st += dx * 1;
+            x_st += dx * 3;
+            g.DrawString("4", f, Brushes.Red, x_st, y_st);
 
             float x = (float)x_st;
             float y = (float)y_st;
@@ -211,16 +192,25 @@ namespace vcs_Draw_GraphicsPath
             //g.DrawPath(Pens.Red, gp); // 繪出圖形軌跡
             g.FillPath(Brushes.Lime, gp); // 繪出圖形軌跡
 
-            g.DrawString("6", f, Brushes.Red, x, y);
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //畫圓角矩形
+
+            x_st += dx * 2;
+            x_st += 50;
+            g.DrawString("5", f, Brushes.Red, x_st, y_st);
+
+            FillRoundRectangle(g, Brushes.Plum, new Rectangle(x_st, y_st, 200, 120), 50);//圓角半徑50
+            DrawRoundRectangle(g, Pens.Yellow, new Rectangle(x_st, y_st, 200, 120), 50);//圓角半徑50
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             gp = new GraphicsPath();  // GraphicsPath物件
 
             x_st = 20;
-            y_st = 300;
+            y_st = 350;
 
-            g.DrawString("7", f, Brushes.Red, x_st, y_st);
+            g.DrawString("6", f, Brushes.Red, x_st, y_st);
 
             PointF[] pts = new PointF[]
             {
@@ -243,30 +233,11 @@ namespace vcs_Draw_GraphicsPath
             gp.AddCurve(pts2, 0.6f);
             */
             gp.CloseFigure(); //  封閉目前的圖形
+
             g.DrawPath(Pens.Black, gp); // 繪出圖形軌跡
             //g.DrawPath(Pens.Black, gp); // 繪出GraphicsPath物件
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //畫圓角矩形
-
-            x_st += dx * 2;
-            y_st = 260;
-
-            g.DrawString("8", f, Brushes.Red, x_st, y_st);
-
-            FillRoundRectangle(g, Brushes.Plum, new Rectangle(x_st, y_st, 200, 150), 50);//圓角半徑50
-            DrawRoundRectangle(g, Pens.Yellow, new Rectangle(x_st, y_st, 200, 150), 50);//圓角半徑50
-
-            /* 輔助線
-            for (int i = 0; i < 8; i++)
-            {
-                g.DrawLine(Pens.Gray, 0, i * 50, 640, i * 50);//橫線
-                g.DrawLine(Pens.Gray, i * 50, 0, i * 50, 500);//直線
-            }
-            g.DrawRectangle(Pens.Red, 100, 100, 200, 200);
-            */
-
+            /*
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             //GraphicsPath - AddArc() 倒角矩形
@@ -284,58 +255,38 @@ namespace vcs_Draw_GraphicsPath
             gp.AddArc(Cx - D1, Cy - D1, 2 * D1, 2 * D1, 180 + 30, 30);
             gp.AddArc(Cx - D1, Cy - D1, 2 * D1, 2 * D1, 270 + 30, 30);
             gp.CloseFigure(); // 封閉形狀 將形狀的頭尾座標連接
-            // 將 gp 內的形狀 繪出
+
             g.DrawPath(Pens.Black, gp); // 繪出GraphicsPath物件
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             //繪製圓角矩形
 
-            p = new Pen(Color.Red, 10);     // 設定畫筆為藍色、粗細為 10 點。
-            sb = new SolidBrush(Color.Blue);
-
             x_st = 20;
             y_st = 400;
+
+            p = new Pen(Color.Red, 10);
+            sb = new SolidBrush(Color.Blue);
 
             g.DrawString("10", f, Brushes.Red, x_st - 20, y_st - 20);
 
             GraphicsPath myPath1 = DrawRoundRect(x_st, y_st, 200, 100, 30);
             g.FillPath(sb, myPath1);
 
-            GraphicsPath myPath2 = DrawRoundRect(x_st, y_st + 120, 200, 100, 50);
+            GraphicsPath myPath2 = DrawRoundRect(x_st, y_st + 110, 200, 100, 50);
             g.DrawPath(p, myPath2);
 
             richTextBox1.Text += "------------------------------\n";  // 30個
-
+            */
             gp = new GraphicsPath(); // GraphicsPath物件
-
-            x_st = 220;
-            y_st = 400;
-            Point p1 = new Point(x_st + 10, y_st + 20); // 直線的兩端
-            Point p2 = new Point(x_st + 100, y_st + 20);
-
-            //GraphicsPath - AddLine() 頭尾相連的兩條直線
-            gp.AddLine(p1, p2); // 將 直線 加入到 GraphicsPath物件
-            //gp.AddLine(10, 20, 100, 20);  same
-
-            g.DrawPath(Pens.Red, gp); // 繪出GraphicsPath物件
-            g.DrawString("11", f, Brushes.Red, x_st + 10, y_st + 20);
-
 
             //gp.CloseFigure(); // 先封閉 第一條直線
 
-            Point p3 = new Point(x_st + 10, y_st + 50); // 直線的兩端
-            Point p4 = new Point(x_st + 100, y_st + 50);
-            gp.AddLine(p3, p4); // 將第二條直線 加入到 GraphicsPath物件
-
-            g.DrawPath(Pens.Red, gp); // 繪出GraphicsPath物件
-            g.DrawString("12", f, Brushes.Red, x_st + 10, y_st + 50);
-
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            x_st = 360;
-            y_st = 420;
-            g.DrawString("13", f, Brushes.Red, x_st, y_st);
+            x_st = 250;
+            y_st = 300;
+            g.DrawString("7", f, Brushes.Red, x_st, y_st);
             //GraphicsPath - AddLines() 一系列的直線
             //GraphicsPath gp = new GraphicsPath(); // GraphicsPath物件
             Point[] pts2 = new Point[3];  // 點陣列
@@ -352,15 +303,16 @@ namespace vcs_Draw_GraphicsPath
 
             //畫聯結線條
             gp = new GraphicsPath();
-            Pen penJoin = new Pen(Color.FromArgb(255, 0, 0, 255), 20);
+            Pen penJoin = new Pen(Color.Red, 20);
 
             gp.StartFigure();
-            x_st = 660;
+            x_st = 500;
             y_st = 360;
             int D = 100;
+            g.DrawString("8", f, Brushes.Red, x_st-20, y_st);
+
             gp.AddLine(new Point(x_st, y_st), new Point(x_st + D, y_st));
             gp.AddLine(new Point(x_st + D, y_st), new Point(x_st + D, y_st + D));
-
             penJoin.LineJoin = LineJoin.Bevel;
             g.DrawPath(penJoin, gp);
         }
@@ -446,8 +398,8 @@ namespace vcs_Draw_GraphicsPath
             //GraphicsPath 大全1
 
             GraphicsPath gp = new GraphicsPath(); // GraphicsPath物件
-            int Cx = 200;
-            int Cy = 160;
+            int Cx = 150;
+            int Cy = 50;
 
             Point p1 = new Point(Cx - 100, Cy); // 計算出 直線的兩端
             Point p2 = new Point(Cx + 100, Cy);
@@ -482,7 +434,8 @@ namespace vcs_Draw_GraphicsPath
 
             g.FillRegion(Brushes.Cyan, region1); // 區域表面 繪出
 
-            g.DrawPath(Pens.Black, gp2); // 圖形軌跡 繪出
+            //g.FillPath(Brushes.Lime, gp2);
+            g.DrawPath(Pens.Red, gp2); // 圖形軌跡 繪出
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
@@ -543,7 +496,6 @@ namespace vcs_Draw_GraphicsPath
             Rectangle rect5a = new Rectangle(x_st + D - 20, y_st + D - 20, 40, 40);
             gp4.AddRectangle(rect5a); // 將 矩形 加入到 GraphicsPath物件
 
-            // 將 gp 內的形狀 繪出
             g.DrawPath(Pens.Black, gp4); // 繪出GraphicsPath物件
             //g.FillPath(Brushes.Red, gp4);
 
@@ -570,12 +522,11 @@ namespace vcs_Draw_GraphicsPath
 
             gp5.AddRectangles(rects); // 將 矩形陣列 加入到 GraphicsPath物件
 
-            // 將 gp5 內的形狀 繪出
             g.DrawPath(Pens.Red, gp5); // 繪出GraphicsPath物件
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            Rectangle rect = new Rectangle(100, 100, 400, 200);
+            Rectangle rect = new Rectangle(30, 100, 300, 150);
 
             g.DrawRectangle(Pens.Red, rect);
 
@@ -603,8 +554,9 @@ namespace vcs_Draw_GraphicsPath
             // GP加入字串
             gp.AddString("圖形路徑", new FontFamily("標楷體"), (int)FontStyle.Underline, 50, new PointF(x_st + 20, y_st + 50), new StringFormat());
 
-            // 將 gp 內的形狀 繪出
             g.DrawPath(p, gp);  // 繪出GraphicsPath物件
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //參數分開寫
             string text = "天若有情天亦老"; // 文字字串
@@ -650,25 +602,11 @@ namespace vcs_Draw_GraphicsPath
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //畫字範例
-            float size = 2.0f;
+            //GraphicsPath 整理
 
-            Graphics g = pictureBox1.CreateGraphics();//建立控制元件的Graphics類
-            g.Clear(Color.White);//以指定的顏色清除控制元件背景
 
-            FontFamily Var_FontFamily = new FontFamily("標楷體");//設定字體樣式
-            string text = size.ToString() + "\n海納百川，\n有容乃大；\n壁立千仞，\n無欲則剛。";//設定字串
 
-            GraphicsPath Var_Path = new GraphicsPath();//實例化GraphicsPath對像
-            // GP加入字串
-            Var_Path.AddString(text, Var_FontFamily, (int)FontStyle.Regular, 50, new Point(0, 0), new StringFormat());//在路徑中新增文字
-            PointF[] Var_PointS = Var_Path.PathPoints;//取得路徑中的點
-            Byte[] Car_Types = Var_Path.PathTypes;//取得對應點的類型
 
-            Matrix Var_Matrix = new Matrix((float)size, 0.0F, 0.0F, (float)size, 0.0F, 0.0F);//設定仿射矩陣
-            Var_Matrix.TransformPoints(Var_PointS);
-            GraphicsPath Var_New_Path = new GraphicsPath(Var_PointS, Car_Types);
-            g.FillPath(Brushes.Red, Var_New_Path);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -715,9 +653,6 @@ namespace vcs_Draw_GraphicsPath
         private void button4_Click(object sender, EventArgs e)
         {
             //在曲線的上下畫字
-            //在曲線的上下畫字
-            Graphics g = pictureBox1.CreateGraphics();
-
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.InterpolationMode = InterpolationMode.High;
@@ -904,6 +839,23 @@ namespace vcs_Draw_GraphicsPath
 
         private void button8_Click(object sender, EventArgs e)
         {
+            //畫字範例
+            float size = 2.0f;
+
+            FontFamily Var_FontFamily = new FontFamily("標楷體");//設定字體樣式
+            string text = size.ToString() + "\n海納百川，\n有容乃大；\n壁立千仞，\n無欲則剛。";//設定字串
+
+            GraphicsPath Var_Path = new GraphicsPath();//實例化GraphicsPath對像
+            // GP加入字串
+            Var_Path.AddString(text, Var_FontFamily, (int)FontStyle.Regular, 50, new Point(0, 0), new StringFormat());//在路徑中新增文字
+            PointF[] Var_PointS = Var_Path.PathPoints;//取得路徑中的點
+            Byte[] Car_Types = Var_Path.PathTypes;//取得對應點的類型
+
+            Matrix Var_Matrix = new Matrix((float)size, 0.0F, 0.0F, (float)size, 0.0F, 0.0F);//設定仿射矩陣
+            Var_Matrix.TransformPoints(Var_PointS);
+
+            GraphicsPath Var_New_Path = new GraphicsPath(Var_PointS, Car_Types);
+            g.FillPath(Brushes.Red, Var_New_Path);
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -1079,3 +1031,4 @@ namespace vcs_Draw_GraphicsPath
 
 // Draw a transformed arc. 放大3倍??
 //g.ScaleTransform(3, 1);
+
