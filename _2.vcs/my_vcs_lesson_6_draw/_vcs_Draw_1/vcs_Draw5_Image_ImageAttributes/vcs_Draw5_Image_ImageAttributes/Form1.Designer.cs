@@ -102,8 +102,6 @@
             this.lb_cm40 = new System.Windows.Forms.Label();
             this.lb_cm41 = new System.Windows.Forms.Label();
             this.bt_brightness = new System.Windows.Forms.Button();
-            this.bt_gray = new System.Windows.Forms.Button();
-            this.bt_sepia = new System.Windows.Forms.Button();
             this.bt_alpha = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
@@ -116,9 +114,15 @@
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.timer_FadeInFadeOut = new System.Windows.Forms.Timer(this.components);
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.radioButton_m3 = new System.Windows.Forms.RadioButton();
+            this.radioButton_m2 = new System.Windows.Forms.RadioButton();
+            this.radioButton_m0 = new System.Windows.Forms.RadioButton();
+            this.radioButton_m1 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button0
@@ -168,7 +172,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(690, 270);
+            this.pictureBox1.Location = new System.Drawing.Point(767, 236);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.TabIndex = 34;
@@ -211,7 +215,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(923, 305);
+            this.bt_clear.Location = new System.Drawing.Point(790, 373);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(66, 40);
             this.bt_clear.TabIndex = 109;
@@ -222,7 +226,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(902, 270);
+            this.richTextBox1.Location = new System.Drawing.Point(769, 338);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 108;
@@ -263,7 +267,7 @@
             // pictureBox2
             // 
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox2.Location = new System.Drawing.Point(796, 270);
+            this.pictureBox2.Location = new System.Drawing.Point(873, 236);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(100, 100);
             this.pictureBox2.TabIndex = 123;
@@ -272,7 +276,7 @@
             // bt_reset
             // 
             this.bt_reset.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_reset.Location = new System.Drawing.Point(715, 305);
+            this.bt_reset.Location = new System.Drawing.Point(792, 271);
             this.bt_reset.Name = "bt_reset";
             this.bt_reset.Size = new System.Drawing.Size(66, 40);
             this.bt_reset.TabIndex = 228;
@@ -558,9 +562,9 @@
             this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Controls.Add(this.radioButton0);
             this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Location = new System.Drawing.Point(476, 380);
+            this.groupBox1.Location = new System.Drawing.Point(435, 389);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(167, 145);
+            this.groupBox1.Size = new System.Drawing.Size(122, 145);
             this.groupBox1.TabIndex = 256;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "圖片";
@@ -876,32 +880,10 @@
             this.bt_brightness.UseVisualStyleBackColor = true;
             this.bt_brightness.Click += new System.EventHandler(this.bt_brightness_Click);
             // 
-            // bt_gray
-            // 
-            this.bt_gray.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_gray.Location = new System.Drawing.Point(873, 146);
-            this.bt_gray.Name = "bt_gray";
-            this.bt_gray.Size = new System.Drawing.Size(66, 40);
-            this.bt_gray.TabIndex = 283;
-            this.bt_gray.Text = "灰階";
-            this.bt_gray.UseVisualStyleBackColor = true;
-            this.bt_gray.Click += new System.EventHandler(this.bt_gray_Click);
-            // 
-            // bt_sepia
-            // 
-            this.bt_sepia.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_sepia.Location = new System.Drawing.Point(873, 192);
-            this.bt_sepia.Name = "bt_sepia";
-            this.bt_sepia.Size = new System.Drawing.Size(66, 40);
-            this.bt_sepia.TabIndex = 284;
-            this.bt_sepia.Text = "Sepia";
-            this.bt_sepia.UseVisualStyleBackColor = true;
-            this.bt_sepia.Click += new System.EventHandler(this.bt_sepia_Click);
-            // 
             // bt_alpha
             // 
             this.bt_alpha.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_alpha.Location = new System.Drawing.Point(945, 100);
+            this.bt_alpha.Location = new System.Drawing.Point(873, 146);
             this.bt_alpha.Name = "bt_alpha";
             this.bt_alpha.Size = new System.Drawing.Size(66, 40);
             this.bt_alpha.TabIndex = 285;
@@ -916,6 +898,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(200, 60);
             this.button15.TabIndex = 286;
+            this.button15.Text = "用Class包裝ColorMatrix";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -1012,6 +995,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(200, 60);
             this.button14.TabIndex = 295;
+            this.button14.Text = "ColorMatrix的使用";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -1019,11 +1003,71 @@
             // 
             this.timer_FadeInFadeOut.Tick += new System.EventHandler(this.timer_FadeInFadeOut_Tick);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.radioButton_m3);
+            this.groupBox2.Controls.Add(this.radioButton_m2);
+            this.groupBox2.Controls.Add(this.radioButton_m0);
+            this.groupBox2.Controls.Add(this.radioButton_m1);
+            this.groupBox2.Location = new System.Drawing.Point(563, 389);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(122, 145);
+            this.groupBox2.TabIndex = 257;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Matrix";
+            // 
+            // radioButton_m3
+            // 
+            this.radioButton_m3.AutoSize = true;
+            this.radioButton_m3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_m3.Location = new System.Drawing.Point(15, 90);
+            this.radioButton_m3.Name = "radioButton_m3";
+            this.radioButton_m3.Size = new System.Drawing.Size(58, 20);
+            this.radioButton_m3.TabIndex = 3;
+            this.radioButton_m3.Text = "負片";
+            this.radioButton_m3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_m2
+            // 
+            this.radioButton_m2.AutoSize = true;
+            this.radioButton_m2.Checked = true;
+            this.radioButton_m2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_m2.Location = new System.Drawing.Point(15, 66);
+            this.radioButton_m2.Name = "radioButton_m2";
+            this.radioButton_m2.Size = new System.Drawing.Size(60, 20);
+            this.radioButton_m2.TabIndex = 2;
+            this.radioButton_m2.TabStop = true;
+            this.radioButton_m2.Text = "Sepia";
+            this.radioButton_m2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_m0
+            // 
+            this.radioButton_m0.AutoSize = true;
+            this.radioButton_m0.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_m0.Location = new System.Drawing.Point(15, 22);
+            this.radioButton_m0.Name = "radioButton_m0";
+            this.radioButton_m0.Size = new System.Drawing.Size(58, 20);
+            this.radioButton_m0.TabIndex = 1;
+            this.radioButton_m0.Text = "標準";
+            this.radioButton_m0.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_m1
+            // 
+            this.radioButton_m1.AutoSize = true;
+            this.radioButton_m1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_m1.Location = new System.Drawing.Point(15, 44);
+            this.radioButton_m1.Name = "radioButton_m1";
+            this.radioButton_m1.Size = new System.Drawing.Size(58, 20);
+            this.radioButton_m1.TabIndex = 0;
+            this.radioButton_m1.Text = "灰階";
+            this.radioButton_m1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1059, 671);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.button13);
             this.Controls.Add(this.button12);
@@ -1035,8 +1079,6 @@
             this.Controls.Add(this.button16);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.bt_alpha);
-            this.Controls.Add(this.bt_sepia);
-            this.Controls.Add(this.bt_gray);
             this.Controls.Add(this.bt_brightness);
             this.Controls.Add(this.lb_cm44);
             this.Controls.Add(this.lb_cm43);
@@ -1113,6 +1155,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1193,8 +1237,6 @@
         private System.Windows.Forms.Label lb_cm40;
         private System.Windows.Forms.Label lb_cm41;
         private System.Windows.Forms.Button bt_brightness;
-        private System.Windows.Forms.Button bt_gray;
-        private System.Windows.Forms.Button bt_sepia;
         private System.Windows.Forms.Button bt_alpha;
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button16;
@@ -1207,6 +1249,11 @@
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Timer timer_FadeInFadeOut;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton radioButton_m3;
+        private System.Windows.Forms.RadioButton radioButton_m2;
+        private System.Windows.Forms.RadioButton radioButton_m0;
+        private System.Windows.Forms.RadioButton radioButton_m1;
     }
 }
 

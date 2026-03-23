@@ -32,7 +32,7 @@ namespace vcs_Draw5_Image_ImageAttributes
         Bitmap m_bitmap1 = null; // 淡出的圖片
         Bitmap m_bitmap2 = null; // 淡入的圖片
         G2D_Anim ani;
-        float[][] m_cmArray = // 色彩調整矩陣
+        float[][] matrix = // 色彩調整矩陣
         {
             new float[] {1, 0, 0, 0,    0},
             new float[] {0, 1, 0, 0,    0},
@@ -72,9 +72,9 @@ namespace vcs_Draw5_Image_ImageAttributes
 
         public void Draw(Graphics G)  // 畫出
         {
-            m_cmArray[3][3] = ani.GetValue();
+            matrix[3][3] = ani.GetValue();
 
-            ColorMatrix cm = new ColorMatrix(m_cmArray);
+            ColorMatrix cm = new ColorMatrix(matrix);
             ImageAttributes ia = new ImageAttributes();
             ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
@@ -85,8 +85,8 @@ namespace vcs_Draw5_Image_ImageAttributes
                 G.DrawImage(m_bitmap1, rect, 0, 0, m_bitmap1.Width, m_bitmap1.Height, GraphicsUnit.Pixel, ia);
             }
 
-            m_cmArray[3][3] = 1 - m_cmArray[3][3];
-            cm = new ColorMatrix(m_cmArray);
+            matrix[3][3] = 1 - matrix[3][3];
+            cm = new ColorMatrix(matrix);
             ia = new ImageAttributes();
             ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 

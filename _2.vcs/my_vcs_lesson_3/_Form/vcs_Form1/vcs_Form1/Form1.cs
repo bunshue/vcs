@@ -148,10 +148,17 @@ namespace vcs_Form1
             label5.Location = new Point(x_st + dx * 3, y_st + dy * 12);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
+            //this.Size = new Size(1273, 750);
+            this.Text = "vcs_Form1";
+
             //最大化螢幕
             //this.FormBorderStyle = FormBorderStyle.None;
             //this.WindowState = FormWindowState.Maximized;
             bt_exit_setup();
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_exit_Click(object sender, EventArgs e)
@@ -664,11 +671,11 @@ namespace vcs_Form1
         //此方法設定窗體有效區域為圓角矩形
         public void SetWindowRegion()
         {
-            System.Drawing.Drawing2D.GraphicsPath FormPath;
-            FormPath = new System.Drawing.Drawing2D.GraphicsPath();
+            GraphicsPath gp;
+            gp = new GraphicsPath();
             Rectangle rect = new Rectangle(0, 0, this.Width, this.Height);
-            FormPath = GetRoundedRectPath(rect, 60);
-            this.Region = new Region(FormPath);
+            gp = GetRoundedRectPath(rect, 60);
+            this.Region = new Region(gp);
         }
 
         //輔助方法:此方法用來建立圓角矩形路徑
@@ -676,24 +683,24 @@ namespace vcs_Form1
         {
             int diameter = radius;
             Rectangle arcRect = new Rectangle(rect.Location, new Size(diameter, diameter));
-            GraphicsPath path = new GraphicsPath();
+            GraphicsPath gp = new GraphicsPath();
 
             // 左上角
-            path.AddArc(arcRect, 180, 90);
+            gp.AddArc(arcRect, 180, 90);
 
             // 右上角
             arcRect.X = rect.Right - diameter;
-            path.AddArc(arcRect, 270, 90);
+            gp.AddArc(arcRect, 270, 90);
 
             // 右下角
             arcRect.Y = rect.Bottom - diameter;
-            path.AddArc(arcRect, 0, 90);
+            gp.AddArc(arcRect, 0, 90);
 
             // 左下角
             arcRect.X = rect.Left;
-            path.AddArc(arcRect, 90, 90);
-            path.CloseFigure();//閉合曲線
-            return path;
+            gp.AddArc(arcRect, 90, 90);
+            gp.CloseFigure();//閉合曲線
+            return gp;
         }
 
         //在窗體尺寸改變的時候我們需要呼叫SetWindowRegion()將窗體變成圓角的

@@ -11,11 +11,6 @@ namespace vcs_DataGridView2
 {
     public partial class Form1 : Form
     {
-        private Panel buttonPanel = new Panel();
-        private DataGridView dataGridView1 = new DataGridView();
-
-        private Button setupDataGridView = new Button();
-        private Button addDataGridView = new Button();
         private Button addNewRowButton = new Button();
         private Button deleteRowButton = new Button();
         private Button infoDataGridView = new Button();
@@ -28,7 +23,29 @@ namespace vcs_DataGridView2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            SetupLayout();
+            SetupDataGridView();
+            PopulateDataGridView();
+
+            addNewRowButton.Text = "Add Row";
+            addNewRowButton.Location = new Point(10, 10);
+            addNewRowButton.Click += new EventHandler(addNewRowButton_Click);
+
+            deleteRowButton.Text = "Delete Row";
+            deleteRowButton.Location = new Point(110, 10);
+            deleteRowButton.Click += new EventHandler(deleteRowButton_Click);
+
+            infoDataGridView.Text = "Info";
+            infoDataGridView.Location = new Point(210, 10);
+            infoDataGridView.Click += new EventHandler(infoDataGridView_Click);
+
+            clearDataGridView.Text = "Clear";
+            clearDataGridView.Location = new Point(310, 10);
+            clearDataGridView.Click += new EventHandler(clearDataGridView_Click);
+
+            this.Controls.Add(addNewRowButton);
+            this.Controls.Add(deleteRowButton);
+            this.Controls.Add(infoDataGridView);
+            this.Controls.Add(clearDataGridView);
         }
 
         private void dataGridView1_CellFormatting(object sender, System.Windows.Forms.DataGridViewCellFormattingEventArgs e)
@@ -54,16 +71,6 @@ namespace vcs_DataGridView2
             }
         }
 
-        private void setupDataGridView_Click(object sender, EventArgs e)
-        {
-            SetupDataGridView();
-        }
-
-        private void addDataGridView_Click(object sender, EventArgs e)
-        {
-            PopulateDataGridView();
-        }
-
         private void addNewRowButton_Click(object sender, EventArgs e)
         {
             this.dataGridView1.Rows.Add();
@@ -87,59 +94,14 @@ namespace vcs_DataGridView2
             this.dataGridView1.Rows.Clear();
         }
 
-        private void SetupLayout()
-        {
-            //this.Size = new Size(900, 660);
-
-            setupDataGridView.Text = "Setup DGV";
-            setupDataGridView.Location = new Point(10, 10);
-            setupDataGridView.Click += new EventHandler(setupDataGridView_Click);
-
-            addDataGridView.Text = "Add DGB";
-            addDataGridView.Location = new Point(110, 10);
-            addDataGridView.Click += new EventHandler(addDataGridView_Click);
-
-            addNewRowButton.Text = "Add Row";
-            addNewRowButton.Location = new Point(210, 10);
-            addNewRowButton.Click += new EventHandler(addNewRowButton_Click);
-
-            deleteRowButton.Text = "Delete Row";
-            deleteRowButton.Location = new Point(310, 10);
-            deleteRowButton.Click += new EventHandler(deleteRowButton_Click);
-
-            infoDataGridView.Text = "Info";
-            infoDataGridView.Location = new Point(410, 10);
-            infoDataGridView.Click += new EventHandler(infoDataGridView_Click);
-
-            clearDataGridView.Text = "Clear";
-            clearDataGridView.Location = new Point(510, 10);
-            clearDataGridView.Click += new EventHandler(clearDataGridView_Click);
-
-            buttonPanel.Controls.Add(setupDataGridView);
-            buttonPanel.Controls.Add(addDataGridView);
-            buttonPanel.Controls.Add(addNewRowButton);
-            buttonPanel.Controls.Add(deleteRowButton);
-            buttonPanel.Controls.Add(infoDataGridView);
-            buttonPanel.Controls.Add(clearDataGridView);
-            buttonPanel.Height = 50;
-            buttonPanel.Dock = DockStyle.Bottom;
-
-            this.Controls.Add(this.buttonPanel);
-        }
-
         private void SetupDataGridView()
         {
-            this.Controls.Add(dataGridView1);
-
             dataGridView1.ColumnCount = 5;
 
             dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
             dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font(dataGridView1.Font, FontStyle.Bold);
 
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Location = new Point(8, 8);
-            dataGridView1.Size = new Size(500, 250);
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.Single;
@@ -155,7 +117,6 @@ namespace vcs_DataGridView2
 
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.MultiSelect = false;
-            dataGridView1.Dock = DockStyle.Fill;
 
             dataGridView1.CellFormatting += new DataGridViewCellFormattingEventHandler(dataGridView1_CellFormatting);
         }
@@ -188,18 +149,16 @@ namespace vcs_DataGridView2
 
         void print_dataGridView_data(DataGridView dgv)
         {
-            int r;
-            int c;
             int rows = dgv.RowCount;
             int cols = dgv.ColumnCount;
             richTextBox1.Text += "ROWS = " + rows.ToString() + "\n";
             richTextBox1.Text += "COLS = " + cols.ToString() + "\n";
             richTextBox1.Text += "Content:\n";
 
-            for (r = 0; r < rows; r++)
+            for (int r = 0; r < rows; r++)
             {
                 richTextBox1.Text += "r = " + r.ToString() + "\t";
-                for (c = 0; c < cols; c++)
+                for (int c = 0; c < cols; c++)
                 {
                     //richTextBox1.Text += dataGridView1[c, r].Value + "\t";
                     DataGridViewCell dgvCell = dgv[c, r];
@@ -209,8 +168,5 @@ namespace vcs_DataGridView2
             }
             richTextBox1.Text += "\n";
         }
-
-
-
     }
 }

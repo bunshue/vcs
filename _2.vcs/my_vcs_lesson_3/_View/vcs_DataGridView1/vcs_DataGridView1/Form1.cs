@@ -35,6 +35,7 @@ namespace vcs_DataGridView1
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
             dataGridView1.CellMouseClick += new DataGridViewCellMouseEventHandler(dataGridView1_CellMouseClick);
             dataGridView1.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(dataGridView1_RowHeaderMouseClick);
         }
@@ -101,6 +102,15 @@ namespace vcs_DataGridView1
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+
+            //清除DGV資料
+            //dataGridView1.Rows.Clear();         //刪除row資料, 留下標題
+
+            dataGridView1.Columns.Clear();    //刪除標題
+
+            //clear
+            //dataGridView1.DataSource = null;//設定DGV的資料來源為無, 即清除
+            //dataGridView1.Invalidate();
         }
 
         private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -134,22 +144,30 @@ namespace vcs_DataGridView1
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             richTextBox1.Text += "CellClick\n";
-            if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            richTextBox1.Text += e.ColumnIndex.ToString() + "\n";
+            richTextBox1.Text += e.RowIndex.ToString() + "\n";
+            if (e.RowIndex > -1)
             {
-                dataGridView1.CurrentRow.Selected = true;
-                string name = dataGridView1.Rows[e.RowIndex].Cells["Name"].FormattedValue.ToString();
-                string id = dataGridView1.Rows[e.RowIndex].Cells["Id"].FormattedValue.ToString();
+                if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    dataGridView1.CurrentRow.Selected = true;
+                    richTextBox1.Text += dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value + "\n";
 
-                richTextBox1.Text += "取得資料:\t" + name + "\t" + id + "\n";
+                    //string name = dataGridView1.Rows[e.RowIndex].Cells["Name"].FormattedValue.ToString();
+                    //string id = dataGridView1.Rows[e.RowIndex].Cells["Id"].FormattedValue.ToString();
+                    //richTextBox1.Text += "取得資料:\t" + name + "\t" + id + "\n";
+                }
             }
         }
 
         private void button0_Click(object sender, EventArgs e)
         {
+            dataGridView1.Columns.Clear();
+
             //設定DGV
             dataGridView1.ColumnCount = 3;
             dataGridView1.Columns[0].Name = "英文名";
-            dataGridView1.Columns[0].Width = 200;//設置欄位寬度
+            dataGridView1.Columns[0].Width = 100;//設置欄位寬度
             dataGridView1.Columns[1].Name = "中文名";
             dataGridView1.Columns[1].Width = 100;//設置欄位寬度
             dataGridView1.Columns[2].Name = "體重";
@@ -172,31 +190,22 @@ namespace vcs_DataGridView1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            dataGridView1.Columns.Clear();
-
-            //設定DGV
-            dataGridView1.Columns.Add("英文名", "英文名");
-            dataGridView1.Columns.Add("中文名", "中文名");
-            dataGridView1.Columns.Add("體重", "體重");
-
-            dataGridView1.Rows.Add(new Object[] { "mouse", "米老鼠", "3" });
-            dataGridView1.Rows.Add(new Object[] { "ox", "班尼牛", "48" });
-            dataGridView1.Rows.Add(new Object[] { "tiger", "跳跳虎", "33" });
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            dataGridView1.Columns.Clear();
+
             //設定DGV
             dataGridView1.Columns.Add("英文名", "英文名");//添加欄位
             dataGridView1.Columns.Add("中文名", "中文名");//添加欄位
             dataGridView1.Columns.Add("體重", "體重");//添加欄位
-            dataGridView1.Columns[0].Width = 200;//設置欄位寬度
-            dataGridView1.Columns[1].Width = 200;//設置欄位寬度
-            dataGridView1.Columns[2].Width = 150;//設置欄位寬度
+            dataGridView1.Columns[0].Width = 100;//設置欄位寬度
+            dataGridView1.Columns[1].Width = 100;//設置欄位寬度
+            dataGridView1.Columns[2].Width = 100;//設置欄位寬度
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;  //設置如何選中單元格 整行一起選取
             dataGridView1.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter; //設置對其方式   此欄置中對齊
 
-            //
             dataGridView1.Rows.Add(new string[] { "mouse", "米老鼠", 3.ToString() });
             dataGridView1.Rows.Add(new string[] { "ox", "班尼牛", 48.ToString() });
             dataGridView1.Rows.Add(new string[] { "tiger", "跳跳虎", 33.ToString() });
@@ -557,7 +566,6 @@ namespace vcs_DataGridView1
             {
                 dataGridView1.Rows[i].Height = 70;//设置行高度
             }
-
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -594,14 +602,6 @@ namespace vcs_DataGridView1
 
         private void button22_Click(object sender, EventArgs e)
         {
-            //清除DGV資料
-            dataGridView1.Rows.Clear();         //刪除row資料, 留下標題
-
-            //dataGridView1.Columns.Clear();    //刪除標題
-
-            //clear
-            //dataGridView1.DataSource = null;//設定DGV的資料來源為無, 即清除
-            //dataGridView1.Invalidate();
         }
 
         private void button23_Click(object sender, EventArgs e)

@@ -45,28 +45,47 @@ namespace vcs_Draw5_Image_ImageAttributes
             new float[] {0, 0, 0, 0, 1}
         };
 
-        // 色彩調整矩陣 Sepia
-        float[][] matrix_sepia =
+        public static class ColorMatrixs
         {
-            //           紅對紅00 紅對綠01 紅對藍02
-            new float[] {0.393f,  0.349f,  0.272f,  0, 0},  // 紅
-            //           綠對紅10 綠對綠11 綠對藍12
-            new float[] {0.769f,  0.686f,  0.534f,  0, 0},  // 綠
-            //           藍對紅20 藍對綠21 藍對藍22
-            new float[] {0.189f,  0.168f,  0.131f,  0, 0},  // 藍
-            new float[] {0,       0,       0,       1, 0},
-            new float[] {0,       0,       0,       0, 1},
-        };
+            public static readonly ColorMatrix Identity = new ColorMatrix(new float[][]
+            {
+                new float[] {1, 0, 0, 0, 0},
+                new float[] {0, 1, 0, 0, 0},
+                new float[] {0, 0, 1, 0, 0},
+                new float[] {0, 0, 0, 1, 0},
+                new float[] {0, 0, 0, 0, 1}
+            });
 
-        // 色彩調整矩陣 灰階1
-        float[][] matrix_gray =
-        {
-            new float[] {0.299f, 0.299f, 0.299f, 0, 0},
-            new float[] {0.587f, 0.587f, 0.587f, 0, 0},
-            new float[] {0.114f, 0.114f, 0.114f, 0, 0},
-            new float[] {0,      0,      0,      1, 0},
-            new float[] {0,      0,      0,      0, 1}
-        };
+            public static readonly ColorMatrix GrayScale = new ColorMatrix(new float[][]
+            {
+                new float[] {0.299f, 0.299f, 0.299f, 0, 0},
+                new float[] {0.587f, 0.587f, 0.587f, 0, 0},
+                new float[] {0.114f, 0.114f, 0.114f, 0, 0},
+                new float[] {0,      0,      0,      1, 0},
+                new float[] {0,      0,      0,      0, 1}
+            });
+
+            public static readonly ColorMatrix Sepia = new ColorMatrix(new float[][]
+            {
+                //           紅對紅00 紅對綠01 紅對藍02
+                new float[] {0.393f,  0.349f,  0.272f,  0, 0},  // 紅
+                //           綠對紅10 綠對綠11 綠對藍12
+                new float[] {0.769f,  0.686f,  0.534f,  0, 0},  // 綠
+                //           藍對紅20 藍對綠21 藍對藍22
+                new float[] {0.189f,  0.168f,  0.131f,  0, 0},  // 藍
+                new float[] {0,       0,       0,       1, 0},
+                new float[] {0,       0,       0,       0, 1},
+            });
+
+            public static readonly ColorMatrix Negative = new ColorMatrix(new float[][]
+            {
+                new float[] {-1, 0, 0, 0, 0},
+                new float[] {0, -1, 0, 0, 0},
+                new float[] {0, 0, -1, 0, 0},
+                new float[] {0, 0, 0, 1, 0},
+                new float[] {1, 1, 1, 0, 1}
+            });
+        }
 
         // 淡入 / 淡出 效果 ST
         G2D_ImageFadeinFadeout2 imageObject; // 淡入淡出物件
@@ -165,7 +184,7 @@ namespace vcs_Draw5_Image_ImageAttributes
             pictureBox2.Location = new Point(x_st + dx * 6 + 100, y_st + dy * 0);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
 
-            richTextBox1.Size = new Size(300, H / 2);
+            richTextBox1.Size = new Size(300, H - 14);
             richTextBox1.Location = new Point(x_st + dx * 6 + 100, y_st + dy * 0 + H / 2 + 10);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -229,12 +248,12 @@ namespace vcs_Draw5_Image_ImageAttributes
             bt_cm_apply.Location = new Point(xx + dx * 5, yy + dy * 0 + dd);
             bt_cm_reset.Location = new Point(xx + dx * 5, yy + dy * 1 + dd);
             bt_brightness.Location = new Point(xx + dx * 5, yy + dy * 2 + dd);
-            bt_gray.Location = new Point(xx + dx * 5, yy + dy * 3 + dd);
-            bt_sepia.Location = new Point(xx + dx * 5, yy + dy * 4 + dd);
-            bt_alpha.Location = new Point(xx + dx * 6, yy + dy * 2 + dd);
+            bt_alpha.Location = new Point(xx + dx * 5, yy + dy * 3 + dd);
 
             groupBox1.Size = new Size(120, 150);
-            groupBox1.Location = new Point(xx + dx * 7 + 80, yy + dy * 0);
+            groupBox1.Location = new Point(xx + dx * 7 + 0, yy + dy * 0);
+            groupBox2.Size = new Size(120, 250);
+            groupBox2.Location = new Point(xx + dx * 7 + 140, yy + dy * 0);
 
             y_st = 20;
             dy = 30;
@@ -242,6 +261,11 @@ namespace vcs_Draw5_Image_ImageAttributes
             radioButton1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             radioButton2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             radioButton3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+
+            radioButton_m0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            radioButton_m1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            radioButton_m2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            radioButton_m3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
 
             lb_cm00.Text = "紅對紅00";
             lb_cm01.Text = "紅對綠01";
@@ -336,7 +360,6 @@ namespace vcs_Draw5_Image_ImageAttributes
             // 貼上使用CM轉換過的影像
             Bitmap bmp = new Bitmap(filename);
             g.DrawImage(bmp, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
-
             pictureBox1.Image = bitmap1;
         }
 
@@ -538,7 +561,7 @@ namespace vcs_Draw5_Image_ImageAttributes
             g.DrawImage(img, rectDest); // 呈現原圖
 
             // 色彩調整矩陣
-            float[][] cmArray =
+            float[][] matrix =
                {
                   new float[] {1, 0, 0, 0,    0},
                   new float[] {0, 1, 0, 0,    0},
@@ -547,14 +570,13 @@ namespace vcs_Draw5_Image_ImageAttributes
                   new float[] {0, 0, 0, 0,    1}
                };
 
-            ColorMatrix cm = new ColorMatrix(cmArray);
+            ColorMatrix cm = new ColorMatrix(matrix);
             ImageAttributes ia = new ImageAttributes();
             ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
             // 繪出透明的影像
             int x_st = 220;
             int y_st = 320;
-
             g.DrawImage(img2, new Rectangle(x_st - img2.Width / 2, y_st - img2.Height / 2, img2.Width, img2.Height), 0, 0, img2.Width, img2.Height, GraphicsUnit.Pixel, ia);
 
             pictureBox1.Image = bitmap1;
@@ -901,11 +923,85 @@ namespace vcs_Draw5_Image_ImageAttributes
 
         private void button14_Click(object sender, EventArgs e)
         {
+            int value = 128;
+            Bitmap bitmap2 = AdjustBrightness(bitmap1, value);
 
+            float opacity = 0.5f;
+            Bitmap bitmap3 = AdjustOpacity(bitmap1, opacity);
+        }
+
+        public static Bitmap AdjustBrightness(Bitmap bitmap1, int Value)
+        {
+            float FinalValue = (float)Value / 255.0f;
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            Bitmap bitmap2 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap2);
+            float[][] matrix ={
+                                  new float[] {1, 0, 0, 0, 0},
+                                  new float[] {0, 1, 0, 0, 0},
+                                  new float[] {0, 0, 1, 0, 0},
+                                  new float[] {0, 0, 0, 1, 0},
+                                  new float[] {FinalValue, FinalValue, FinalValue, 1, 1}
+                              };
+            ColorMatrix cm = new ColorMatrix(matrix);
+            ImageAttributes ia = new ImageAttributes();
+            ia.SetColorMatrix(cm);
+            g.DrawImage(bitmap1, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
+            ia.Dispose();
+            g.Dispose();
+            return bitmap2;
+        }
+
+        public static Bitmap AdjustOpacity(Bitmap bitmap1, float opacity)
+        {
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            Bitmap bitmap2 = new Bitmap(W, H, PixelFormat.Format32bppArgb);
+            Graphics g = Graphics.FromImage(bitmap2);
+            float[][] matrix = {
+                                   new float[] {1,  0,  0,  0, 0},
+                                   new float[] {0,  1,  0,  0, 0},
+                                   new float[] {0,  0,  1,  0, 0},
+                                   new float[] {0,  0,  0,  opacity, 0},
+                                   new float[] {0,  0,  0,  0,  1}
+                               };
+            ColorMatrix cm = new ColorMatrix(matrix);
+            ImageAttributes ia = new ImageAttributes();
+            ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+            g.DrawImage(bitmap1, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
+            ia.Dispose();
+            g.Dispose();
+            return bitmap2;
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
+            //用Class包裝ColorMatrix
+
+            //使用 color matrix
+            ColorMatrix cm = ColorMatrixs.Negative;
+            if (radioButton_m0.Checked == true)
+                cm = ColorMatrixs.Identity;
+            else if (radioButton_m1.Checked == true)
+                cm = ColorMatrixs.GrayScale;
+            else if (radioButton_m2.Checked == true)
+                cm = ColorMatrixs.Sepia;
+            else if (radioButton_m3.Checked == true)
+                cm = ColorMatrixs.Negative;
+
+
+            ImageAttributes ia = new ImageAttributes();
+            ia.SetColorMatrix(cm);
+
+            g.Clear(Color.Pink);
+            // 貼上使用CM轉換過的影像
+            Bitmap bmp = new Bitmap(filename);
+            int W = bmp.Width;
+            int H = bmp.Height;
+            g.DrawImage(bmp, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
+            pictureBox1.Image = bitmap1;
+            pictureBox2.Image = Image.FromFile(filename);
 
         }
 
@@ -931,49 +1027,49 @@ namespace vcs_Draw5_Image_ImageAttributes
             g.Clear(Color.Gray);
             int width = MyBitmap.Width;
             int height = MyBitmap.Height;
-            ImageAttributes attributes = new ImageAttributes();
-            ColorMatrix matrix = new ColorMatrix();
+            ImageAttributes ia = new ImageAttributes();
+            ColorMatrix cm = new ColorMatrix();
             //創建淡入顏色矩陣
-            matrix.Matrix00 = (float)0.0;
-            matrix.Matrix01 = (float)0.0;
-            matrix.Matrix02 = (float)0.0;
-            matrix.Matrix03 = (float)0.0;
-            matrix.Matrix04 = (float)0.0;
-            matrix.Matrix10 = (float)0.0;
-            matrix.Matrix11 = (float)0.0;
-            matrix.Matrix12 = (float)0.0;
-            matrix.Matrix13 = (float)0.0;
-            matrix.Matrix14 = (float)0.0;
-            matrix.Matrix20 = (float)0.0;
-            matrix.Matrix21 = (float)0.0;
-            matrix.Matrix22 = (float)0.0;
-            matrix.Matrix23 = (float)0.0;
-            matrix.Matrix24 = (float)0.0;
-            matrix.Matrix30 = (float)0.0;
-            matrix.Matrix31 = (float)0.0;
-            matrix.Matrix32 = (float)0.0;
-            matrix.Matrix33 = (float)0.0;
-            matrix.Matrix34 = (float)0.0;
-            matrix.Matrix40 = (float)0.0;
-            matrix.Matrix41 = (float)0.0;
-            matrix.Matrix42 = (float)0.0;
-            matrix.Matrix43 = (float)0.0;
-            matrix.Matrix44 = (float)0.0;
-            matrix.Matrix33 = (float)1.0;
-            matrix.Matrix44 = (float)1.0;
+            cm.Matrix00 = (float)0.0;
+            cm.Matrix01 = (float)0.0;
+            cm.Matrix02 = (float)0.0;
+            cm.Matrix03 = (float)0.0;
+            cm.Matrix04 = (float)0.0;
+            cm.Matrix10 = (float)0.0;
+            cm.Matrix11 = (float)0.0;
+            cm.Matrix12 = (float)0.0;
+            cm.Matrix13 = (float)0.0;
+            cm.Matrix14 = (float)0.0;
+            cm.Matrix20 = (float)0.0;
+            cm.Matrix21 = (float)0.0;
+            cm.Matrix22 = (float)0.0;
+            cm.Matrix23 = (float)0.0;
+            cm.Matrix24 = (float)0.0;
+            cm.Matrix30 = (float)0.0;
+            cm.Matrix31 = (float)0.0;
+            cm.Matrix32 = (float)0.0;
+            cm.Matrix33 = (float)0.0;
+            cm.Matrix34 = (float)0.0;
+            cm.Matrix40 = (float)0.0;
+            cm.Matrix41 = (float)0.0;
+            cm.Matrix42 = (float)0.0;
+            cm.Matrix43 = (float)0.0;
+            cm.Matrix44 = (float)0.0;
+            cm.Matrix33 = (float)1.0;
+            cm.Matrix44 = (float)1.0;
             //從0到1進行修改色彩變換矩陣主對角線上的數值
             //使三種基準色的飽和度漸增
             Single count = (float)0.0;
             while (count < 1.0)
             {
                 this.Text = count.ToString();
-                matrix.Matrix00 = (float)count;
-                matrix.Matrix11 = (float)count;
-                matrix.Matrix22 = (float)count;
-                matrix.Matrix33 = (float)count;
-                attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+                cm.Matrix00 = (float)count;
+                cm.Matrix11 = (float)count;
+                cm.Matrix22 = (float)count;
+                cm.Matrix33 = (float)count;
+                ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
                 g.DrawImage(MyBitmap, new Rectangle(0, 0, width, height),
-                0, 0, width, height, GraphicsUnit.Pixel, attributes);
+                0, 0, width, height, GraphicsUnit.Pixel, ia);
                 Thread.Sleep(20);
                 count = (float)(count + 0.02);
             }
@@ -988,49 +1084,49 @@ namespace vcs_Draw5_Image_ImageAttributes
             g.Clear(Color.Gray);
             int width = MyBitmap.Width;
             int height = MyBitmap.Height;
-            ImageAttributes attributes = new ImageAttributes();
-            ColorMatrix matrix = new ColorMatrix();
+            ImageAttributes ia = new ImageAttributes();
+            ColorMatrix cm = new ColorMatrix();
             //創建淡出顏色矩陣
-            matrix.Matrix00 = (float)0.0;
-            matrix.Matrix01 = (float)0.0;
-            matrix.Matrix02 = (float)0.0;
-            matrix.Matrix03 = (float)0.0;
-            matrix.Matrix04 = (float)0.0;
-            matrix.Matrix10 = (float)0.0;
-            matrix.Matrix11 = (float)0.0;
-            matrix.Matrix12 = (float)0.0;
-            matrix.Matrix13 = (float)0.0;
-            matrix.Matrix14 = (float)0.0;
-            matrix.Matrix20 = (float)0.0;
-            matrix.Matrix21 = (float)0.0;
-            matrix.Matrix22 = (float)0.0;
-            matrix.Matrix23 = (float)0.0;
-            matrix.Matrix24 = (float)0.0;
-            matrix.Matrix30 = (float)0.0;
-            matrix.Matrix31 = (float)0.0;
-            matrix.Matrix32 = (float)0.0;
-            matrix.Matrix33 = (float)0.0;
-            matrix.Matrix34 = (float)0.0;
-            matrix.Matrix40 = (float)0.0;
-            matrix.Matrix41 = (float)0.0;
-            matrix.Matrix42 = (float)0.0;
-            matrix.Matrix43 = (float)0.0;
-            matrix.Matrix44 = (float)0.0;
-            matrix.Matrix33 = (float)1.0;
-            matrix.Matrix44 = (float)1.0;
+            cm.Matrix00 = (float)0.0;
+            cm.Matrix01 = (float)0.0;
+            cm.Matrix02 = (float)0.0;
+            cm.Matrix03 = (float)0.0;
+            cm.Matrix04 = (float)0.0;
+            cm.Matrix10 = (float)0.0;
+            cm.Matrix11 = (float)0.0;
+            cm.Matrix12 = (float)0.0;
+            cm.Matrix13 = (float)0.0;
+            cm.Matrix14 = (float)0.0;
+            cm.Matrix20 = (float)0.0;
+            cm.Matrix21 = (float)0.0;
+            cm.Matrix22 = (float)0.0;
+            cm.Matrix23 = (float)0.0;
+            cm.Matrix24 = (float)0.0;
+            cm.Matrix30 = (float)0.0;
+            cm.Matrix31 = (float)0.0;
+            cm.Matrix32 = (float)0.0;
+            cm.Matrix33 = (float)0.0;
+            cm.Matrix34 = (float)0.0;
+            cm.Matrix40 = (float)0.0;
+            cm.Matrix41 = (float)0.0;
+            cm.Matrix42 = (float)0.0;
+            cm.Matrix43 = (float)0.0;
+            cm.Matrix44 = (float)0.0;
+            cm.Matrix33 = (float)1.0;
+            cm.Matrix44 = (float)1.0;
             //從1到0進行修改色彩變換矩陣主對角線上的數值
             //依次減少每種色彩分量
             Single count = (float)1.0;
             while (count > 0.0)
             {
                 this.Text = count.ToString();
-                matrix.Matrix00 = (float)count;
-                matrix.Matrix11 = (float)count;
-                matrix.Matrix22 = (float)count;
-                matrix.Matrix33 = (float)count;
-                attributes.SetColorMatrix(matrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+                cm.Matrix00 = (float)count;
+                cm.Matrix11 = (float)count;
+                cm.Matrix22 = (float)count;
+                cm.Matrix33 = (float)count;
+                ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
                 g.DrawImage(MyBitmap, new Rectangle(0, 0, width, height),
-                0, 0, width, height, GraphicsUnit.Pixel, attributes);
+                0, 0, width, height, GraphicsUnit.Pixel, ia);
                 Thread.Sleep(20);
                 count = (float)(count - 0.01);
             }
@@ -1432,6 +1528,27 @@ namespace vcs_Draw5_Image_ImageAttributes
             apply_color_matrix();
         }
 
+        void apply_color_matrix0(float[][] matrix)
+        {
+            print_color_matrix(matrix);
+
+            //使用 color matrix
+            ColorMatrix cm = new ColorMatrix(matrix);
+            ImageAttributes ia = new ImageAttributes();
+            //ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);same
+            //ia.SetColorMatrices(cm, null);//same
+            ia.SetColorMatrix(cm);
+
+            g.Clear(Color.Pink);
+            // 貼上使用CM轉換過的影像
+            Bitmap bmp = new Bitmap(filename);
+            int W = bmp.Width;
+            int H = bmp.Height;
+            g.DrawImage(bmp, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
+            pictureBox1.Image = bitmap1;
+            pictureBox2.Image = Image.FromFile(filename);
+        }
+
         void apply_color_matrix()
         {
             if (get_color_matrix() == false)
@@ -1443,23 +1560,7 @@ namespace vcs_Draw5_Image_ImageAttributes
             {
                 richTextBox1.Text += "取得CM OK\n";
             }
-
-            pictureBox2.Image = Image.FromFile(filename);
-            print_color_matrix(matrix);
-
-            //使用 color matrix
-            ColorMatrix cm = new ColorMatrix(matrix);
-            ImageAttributes ia = new ImageAttributes();
-            //ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);same
-            //ia.SetColorMatrices(cm, null);//same
-            ia.SetGamma(0.6f);
-            ia.SetColorMatrix(cm);
-
-            g.Clear(Color.Pink);
-            // 貼上使用CM轉換過的影像
-            Bitmap bmp = new Bitmap(filename);
-            g.DrawImage(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
-            pictureBox1.Image = bitmap1;
+            apply_color_matrix0(matrix);
         }
 
         void load_color_matrix(float[][] matrix)
@@ -1513,18 +1614,6 @@ namespace vcs_Draw5_Image_ImageAttributes
             }
 
             //調整亮度, 也可以同時調整 cm00 cm11 cm22 三原色的縮放比例
-        }
-
-        private void bt_gray_Click(object sender, EventArgs e)
-        {
-            load_color_matrix(matrix_gray);
-            apply_color_matrix();
-        }
-
-        private void bt_sepia_Click(object sender, EventArgs e)
-        {
-            load_color_matrix(matrix_sepia);
-            apply_color_matrix();
         }
 
         float transparency = 0.3f;
@@ -1676,4 +1765,8 @@ ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);same
 ia.SetColorMatrices(cm, null);//same
 */
+
+
+//ia.SetGamma(0.6f);
+
 

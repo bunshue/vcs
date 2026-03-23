@@ -109,11 +109,13 @@ namespace vcs_SqlConnection0
         void show_database(string db_filename, string cmd_name)
         {
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-            SqlConnection cn = new SqlConnection(cnstr);
-            SqlDataAdapter dap = new SqlDataAdapter(cmd_name, cn);
-            DataSet ds = new DataSet();
-            dap.Fill(ds, "table");
-            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            using (SqlConnection cn = new SqlConnection(cnstr))
+            {
+                SqlDataAdapter da = new SqlDataAdapter(cmd_name, cn);
+                DataSet ds = new DataSet();
+                da.Fill(ds, "table");
+                dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            }
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -127,12 +129,12 @@ namespace vcs_SqlConnection0
             using (SqlConnection cn = new SqlConnection(cnstr))
             {
                 //创建适配器对象
-                SqlDataAdapter sqlda = new SqlDataAdapter("SELECT * FROM tb_Employee", cn);
+                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM tb_Employee", cn);
 
                 //创建数据集
                 DataSet ds = new DataSet();
-                sqlda.Fill(ds);  // 將查詢的結果填充至DS數據集, 不指定TableName
-                //sqlda.Fill(ds, "員工");  // 將查詢的結果填充至DS數據集, 指定TableName為"員工"
+                da.Fill(ds);  // 將查詢的結果填充至DS數據集, 不指定TableName
+                //da.Fill(ds, "員工");  // 將查詢的結果填充至DS數據集, 指定TableName為"員工"
 
                 dataGridView2.DataSource = ds.Tables[0];//设置数据源
             }
@@ -146,7 +148,6 @@ namespace vcs_SqlConnection0
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             // 讀出資料庫資料
-
             using (SqlConnection cn = new SqlConnection())
             {
                 // 連接資料庫
@@ -182,7 +183,6 @@ namespace vcs_SqlConnection0
             }
 
             // 讀出資料庫資料
-
             using (SqlConnection cn = new SqlConnection(cnstr))
             {
                 cn.Open();
@@ -218,17 +218,17 @@ namespace vcs_SqlConnection0
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
 
             //创建数据库连接对象
-            SqlConnection cn = new SqlConnection(cnstr);
+            using (SqlConnection cn = new SqlConnection(cnstr))
+            {
+                //创建适配器对象
+                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM tb_Rectangle", cn);
 
-            //创建适配器对象
-            SqlDataAdapter sqlda = new SqlDataAdapter("SELECT * FROM tb_Rectangle", cn);
+                //创建数据集
+                DataSet ds = new DataSet();
+                da.Fill(ds);//填充数据集
 
-            //创建数据集
-            DataSet ds = new DataSet();
-            sqlda.Fill(ds);//填充数据集
-
-            dataGridView1.DataSource = ds.Tables[0];//设置数据源
-
+                dataGridView1.DataSource = ds.Tables[0];//设置数据源
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -311,7 +311,6 @@ namespace vcs_SqlConnection0
             // 成績單
             string db_filename = "ch17DB.mdf";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-
             using (SqlConnection cn = new SqlConnection())
             {
                 // 連接資料庫
@@ -373,7 +372,6 @@ namespace vcs_SqlConnection0
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //成績單
-
             using (SqlConnection cn = new SqlConnection())
             {
                 // 連接資料庫
@@ -411,7 +409,6 @@ namespace vcs_SqlConnection0
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //成績單
-
             using (SqlConnection cn = new SqlConnection())
             {
                 // 連接資料庫
@@ -455,7 +452,6 @@ namespace vcs_SqlConnection0
             //string db_filename = "ch17DB.mdf";
             //string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
             string name = "阿龍";
-
             using (SqlConnection cn = new SqlConnection())
             {
                 // 連接資料庫
@@ -491,7 +487,6 @@ namespace vcs_SqlConnection0
             //string db_filename = "ch17DB.mdf";
             //string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
             //string name = "阿龍";
-
             using (SqlConnection cn = new SqlConnection())
             {
                 // 連接資料庫
@@ -529,7 +524,6 @@ namespace vcs_SqlConnection0
 
             string db_filename = "ch18DB.mdf";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-
             using (SqlConnection cn = new SqlConnection())
             {
                 cn.ConnectionString = cnstr;
@@ -873,7 +867,6 @@ namespace vcs_SqlConnection0
             DatabaseName = "TestCreateDB";
 
             //先看看有沒有相同的DB存在，如果有的話卸離並移除
-
             using (SqlConnection cn = new SqlConnection(connection_string))  // 資料庫連線參數, 連接字串
             {
                 cn.Open();
@@ -922,11 +915,9 @@ namespace vcs_SqlConnection0
             }
 
             //程式建立LocalDB
-
             using (SqlConnection cn = new SqlConnection(connection_string))  // 資料庫連線參數, 連接字串
             {
                 var commandText = new StringBuilder();
-
                 //Create DB的語法
                 string cmd_text = string.Format("CREATE DATABASE {0} ON (NAME = N'{0}', FILENAME = '{1}.mdf');", DatabaseName, fileName);
                 commandText.AppendFormat(cmd_text);
@@ -1044,12 +1035,6 @@ namespace vcs_SqlConnection0
 */
 
 
-
-
-
-
-
-
 /*
             //定義數據庫連接字符串
 
@@ -1059,7 +1044,7 @@ namespace vcs_SqlConnection0
             string ConnectString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02c.mdf;Integrated Security=True;Connect Timeout=30";
 
             SqlConnection PaginationConnection;//定義數據庫連接對像
-            SqlDataAdapter PaginationAdapter;//定義填充數據集對像
+            SqlDataAdapter da;//定義填充數據集對像
             DataSet PaginationSet = new DataSet();//定義存儲數據的集合
             DataTable PageTable = new DataTable();//定義一個數據表
 
@@ -1074,8 +1059,8 @@ namespace vcs_SqlConnection0
             try
             {
                 PaginationConnection = new SqlConnection(ConnectString);//初始化數據庫連接對像
-                PaginationAdapter = new SqlDataAdapter(selectString, PaginationConnection);//初始化數據讀取對像
-                PaginationAdapter.Fill(PageSet);//填充數據集
+                da = new SqlDataAdapter(selectString, PaginationConnection);//初始化數據讀取對像
+                da.Fill(PageSet);//填充數據集
             }
             catch (Exception ex)//捕獲異常
             {

@@ -56,6 +56,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.pictureBox_progressbar = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.cb_grid = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).BeginInit();
@@ -78,7 +79,6 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(200, 60);
             this.button8.TabIndex = 133;
-            this.button8.Text = "畫字範例";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -131,7 +131,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(200, 60);
             this.button6.TabIndex = 128;
-            this.button6.Text = "製作非矩形視窗";
+            this.button6.Text = "用GP製作非矩形視窗";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -205,6 +205,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(200, 60);
             this.button10.TabIndex = 135;
+            this.button10.Text = "GraphicsPath 大全 字";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -334,11 +335,23 @@
             this.label1.TabIndex = 146;
             this.label1.Text = "繪製圓角表單  繪製圓角按鈕";
             // 
+            // cb_grid
+            // 
+            this.cb_grid.AutoSize = true;
+            this.cb_grid.Location = new System.Drawing.Point(672, 58);
+            this.cb_grid.Name = "cb_grid";
+            this.cb_grid.Size = new System.Drawing.Size(77, 16);
+            this.cb_grid.TabIndex = 147;
+            this.cb_grid.Text = "checkBox1";
+            this.cb_grid.UseVisualStyleBackColor = true;
+            this.cb_grid.CheckedChanged += new System.EventHandler(this.cb_grid_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1109, 782);
+            this.Controls.Add(this.cb_grid);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button19);
@@ -406,6 +419,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.PictureBox pictureBox_progressbar;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox cb_grid;
     }
 }
 

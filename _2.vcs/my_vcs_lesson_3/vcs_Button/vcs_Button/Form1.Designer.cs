@@ -58,7 +58,6 @@
             this.button18 = new System.Windows.Forms.Button();
             this.button1b = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.bt_bmw = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
@@ -408,7 +407,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.bt_bmw);
             this.groupBox1.Controls.Add(this.button1a);
             this.groupBox1.Controls.Add(this.button1b);
             this.groupBox1.Controls.Add(this.bt_star);
@@ -419,16 +417,6 @@
             this.groupBox1.TabIndex = 171;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "不規則形狀Button";
-            // 
-            // bt_bmw
-            // 
-            this.bt_bmw.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_bmw.Location = new System.Drawing.Point(392, 19);
-            this.bt_bmw.Name = "bt_bmw";
-            this.bt_bmw.Size = new System.Drawing.Size(128, 128);
-            this.bt_bmw.TabIndex = 176;
-            this.bt_bmw.UseVisualStyleBackColor = true;
-            this.bt_bmw.Click += new System.EventHandler(this.bt_bmw_Click);
             // 
             // bt_clear
             // 
@@ -652,7 +640,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button bt_bmw;
         private System.Windows.Forms.Button bt_puzzle3;
         private System.Windows.Forms.Button bt_puzzle2;
         private System.Windows.Forms.Button bt_puzzle1;
