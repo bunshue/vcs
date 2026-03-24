@@ -68,8 +68,14 @@ namespace vcs_Cryptography1_MD5
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            //this.Size = new Size(1273, 750);
+            this.Text = "vcs_Cryptography1_MD5";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -222,7 +228,7 @@ namespace vcs_Cryptography1_MD5
 
             //建立第一個檔案的MD5碼
             FileMD5_1 = BytesToString(md5Hash1);    //Hash轉字串
-            
+
             //取得第二個檔案MD5演算後的陣列
             byte[] input2 = File.ReadAllBytes(filename2);
             byte[] md5Hash2 = md5.ComputeHash(input2);  //算拜列之Hash值
@@ -949,6 +955,26 @@ namespace vcs_Cryptography1_MD5
 }
 
 
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+
+
+
 
 /*
 
@@ -1067,8 +1093,6 @@ public static string Decrypt(string targetValue, string key)
          #endregion
 
 
-
-
             //將字串用MD5加密
             Console.Write("請輸入密碼：");
             string P_str_Code = Console.ReadLine();//记录要加密的密码
@@ -1083,7 +1107,6 @@ public static string Decrypt(string targetValue, string key)
  
             //加密Byte[]數組
             byte[] md5Hash = md5.ComputeHash(input);    //算拜列之Hash值
-
 
 */
 

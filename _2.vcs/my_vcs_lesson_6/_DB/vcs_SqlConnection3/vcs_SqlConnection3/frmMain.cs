@@ -101,12 +101,13 @@ namespace vcs_SqlConnection3
         void show_product_data(DataGridView dgv, string mesg)
         {
             //取得產品類別, 並顯示dataGridView1上
-            using (SqlConnection cn = new SqlConnection(db_cnstr))
+            using (SqlConnection cn = new SqlConnection(db_cnstr))  // 建立資料庫連接對象cn
             {
-                SqlDataAdapter da = new SqlDataAdapter("SELECT * From 產品類別", cn);
-                DataSet ds = new DataSet();  // 建立DataSet來儲存Table
-                da.Fill(ds);  // 將DataAdapter查詢之後的結果填充至DataSet
-                dgv.DataSource = ds.Tables[0];
+                string sqlstr = "SELECT * From 產品類別";  // 查詢字串
+                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
+                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+                dgv.DataSource = ds.Tables[0];  // DGV設置數據源
                 lb_dgv1.Text = mesg;
             }
         }
@@ -116,24 +117,26 @@ namespace vcs_SqlConnection3
             //兩個表單
 
             //產品類別 => dataGridView1
-            using (SqlConnection cn = new SqlConnection(db_cnstr))
+            using (SqlConnection cn = new SqlConnection(db_cnstr))  // 建立資料庫連接對象cn
             {
-                SqlDataAdapter da = new SqlDataAdapter("SELECT * From 產品類別", cn);
-                DataSet ds = new DataSet();  // 建立DataSet來儲存Table
-                da.Fill(ds);  // 將DataAdapter查詢之後的結果填充至DataSet
-                dataGridView1.DataSource = ds.Tables[0];
+                string sqlstr = "SELECT * From 產品類別";  // 查詢字串
+                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
+                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+                dataGridView1.DataSource = ds.Tables[0];  // DGV設置數據源
                 lb_dgv1.Text = "產品類別";
             }
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             //產品資料 => dataGridView2
-            using (SqlConnection cn = new SqlConnection(db_cnstr))
+            using (SqlConnection cn = new SqlConnection(db_cnstr))  // 建立資料庫連接對象cn
             {
-                SqlDataAdapter da = new SqlDataAdapter("SELECT * From 產品資料", cn);
-                DataSet ds = new DataSet();  // 建立DataSet來儲存Table
-                da.Fill(ds);  // 將DataAdapter查詢之後的結果填充至DataSet
-                dataGridView2.DataSource = ds.Tables[0];
+                string sqlstr = "SELECT * From 產品資料";  // 查詢字串
+                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
+                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+                dataGridView2.DataSource = ds.Tables[0];  // DGV設置數據源
                 lb_dgv2.Text = "產品資料";
             }
         }
@@ -149,24 +152,26 @@ namespace vcs_SqlConnection3
             //產品資料管理
 
             //將產品類別顯示在清單中   
-            using (SqlConnection cn = new SqlConnection(db_cnstr))
+            using (SqlConnection cn = new SqlConnection(db_cnstr))  // 建立資料庫連接對象cn
             {
-                SqlDataAdapter da = new SqlDataAdapter("SELECT * From 產品類別", cn);
-                DataSet ds = new DataSet();  // 建立DataSet來儲存Table
-                da.Fill(ds);  // 將DataAdapter查詢之後的結果填充至DataSet
-                dataGridView2.DataSource = ds.Tables[0];
+                string sqlstr = "SELECT * From 產品類別";  // 查詢字串
+                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
+                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+                dataGridView2.DataSource = ds.Tables[0];  // DGV設置數據源
                 lb_dgv2.Text = "產品類別";
             }
 
             //查詢 類別編號 = 1 的資料
             int CategoryId1 = 1;
-            using (SqlConnection cn = new SqlConnection(db_cnstr))
+            using (SqlConnection cn = new SqlConnection(db_cnstr))  // 建立資料庫連接對象cn
             {
+                string sqlstr = "SELECT 產品編號,品名,單價,說明 From 產品資料 WHERE 類別編號=" + CategoryId1;  // 查詢字串
                 //依傳入的類別編號來傳回指定的產品資料的DataTable
-                SqlDataAdapter da = new SqlDataAdapter("SELECT 產品編號,品名,單價,說明 From 產品資料 WHERE 類別編號=" + CategoryId1, cn);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-                dataGridView3.DataSource = ds.Tables[0];
+                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
+                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+                dataGridView3.DataSource = ds.Tables[0];  // DGV設置數據源
                 lb_dgv3.Text = "產品資料管理";
             }
 
@@ -185,13 +190,14 @@ namespace vcs_SqlConnection3
             richTextBox1.Text += "CategoryId2 = " + CategoryId2.ToString() + "\n";
             //傳入類別編號CategoryId來取得該類別相對應的產品資料
             //接著將產品資料顯示在dataGridView4上
-            using (SqlConnection cn = new SqlConnection(db_cnstr))
+            using (SqlConnection cn = new SqlConnection(db_cnstr))  // 建立資料庫連接對象cn
             {
+                string sqlstr = "SELECT 產品編號,品名,單價,說明 From 產品資料 WHERE 類別編號=" + CategoryId2;  // 查詢字串
                 //依傳入的類別編號來傳回指定的產品資料的DataTable
-                SqlDataAdapter da = new SqlDataAdapter("SELECT 產品編號,品名,單價,說明 From 產品資料 WHERE 類別編號=" + CategoryId2, cn);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-                dataGridView4.DataSource = ds.Tables[0];
+                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
+                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+                dataGridView4.DataSource = ds.Tables[0];  // DGV設置數據源
                 lb_dgv4.Text = "產品關聯查詢";
             }
         }
@@ -261,13 +267,14 @@ namespace vcs_SqlConnection3
 
             int CategoryId1 = 1;//類別編號
             richTextBox1.Text += "CategoryId1 = " + CategoryId1.ToString() + "\n";
-            using (SqlConnection cn = new SqlConnection(db_cnstr))
+            using (SqlConnection cn = new SqlConnection(db_cnstr))  // 建立資料庫連接對象cn
             {
+                string sqlstr = "SELECT 產品編號,品名,單價,說明 From 產品資料 WHERE 類別編號=" + CategoryId1;  // 查詢字串
                 //依傳入的類別編號來傳回指定的產品資料的DataTable
-                SqlDataAdapter da = new SqlDataAdapter("SELECT 產品編號,品名,單價,說明 From 產品資料 WHERE 類別編號=" + CategoryId1, cn);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-                dataGridView1.DataSource = ds.Tables[0];
+                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
+                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+                dataGridView1.DataSource = ds.Tables[0];  // DGV設置數據源
                 lb_dgv1.Text = "新增 產品資料";
             }
 
@@ -287,13 +294,14 @@ namespace vcs_SqlConnection3
 
             int CategoryId2 = 1;//類別編號
             richTextBox1.Text += "CategoryId2 = " + CategoryId2.ToString() + "\n";
-            using (SqlConnection cn = new SqlConnection(db_cnstr))
+            using (SqlConnection cn = new SqlConnection(db_cnstr))  // 建立資料庫連接對象cn
             {
+                string sqlstr = "SELECT 產品編號,品名,單價,說明 From 產品資料 WHERE 類別編號=" + CategoryId2;  // 查詢字串
                 //依傳入的類別編號來傳回指定的產品資料的DataTable
-                SqlDataAdapter da = new SqlDataAdapter("SELECT 產品編號,品名,單價,說明 From 產品資料 WHERE 類別編號=" + CategoryId2, cn);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-                dataGridView1.DataSource = ds.Tables[0];
+                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
+                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+                dataGridView1.DataSource = ds.Tables[0];  // DGV設置數據源
                 lb_dgv1.Text = "修改 產品資料";
             }
 
@@ -305,13 +313,14 @@ namespace vcs_SqlConnection3
 
             int CategoryId3 = 1;//類別編號
             richTextBox1.Text += "CategoryId3 = " + CategoryId3.ToString() + "\n";
-            using (SqlConnection cn = new SqlConnection(db_cnstr))
+            using (SqlConnection cn = new SqlConnection(db_cnstr))  // 建立資料庫連接對象cn
             {
+                string sqlstr = "SELECT 產品編號,品名,單價,說明 From 產品資料 WHERE 類別編號=" + CategoryId3;  // 查詢字串
                 //依傳入的類別編號來傳回指定的產品資料的DataTable
-                SqlDataAdapter da = new SqlDataAdapter("SELECT 產品編號,品名,單價,說明 From 產品資料 WHERE 類別編號=" + CategoryId3, cn);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-                dataGridView1.DataSource = ds.Tables[0];
+                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
+                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+                dataGridView1.DataSource = ds.Tables[0];  // DGV設置數據源
                 lb_dgv1.Text = "刪除 產品資料";
             }
         }
@@ -339,7 +348,7 @@ namespace vcs_SqlConnection3
         {
             try
             {
-                SqlConnection cn = new SqlConnection(db_cnstr);
+                SqlConnection cn = new SqlConnection(db_cnstr);  // 建立資料庫連接對象cn
                 cn.Open();
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = SqlCmd;
