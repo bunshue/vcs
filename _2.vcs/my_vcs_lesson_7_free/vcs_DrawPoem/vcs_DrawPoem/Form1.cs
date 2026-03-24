@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
-using System.Drawing.Text;  //for InstalledFontCollection
+using System.Drawing.Text;  //for PrivateFontCollection
 
 namespace vcs_DrawPoem
 {
@@ -2492,4 +2492,3 @@ namespace vcs_DrawPoem
         }
     }
 }
-

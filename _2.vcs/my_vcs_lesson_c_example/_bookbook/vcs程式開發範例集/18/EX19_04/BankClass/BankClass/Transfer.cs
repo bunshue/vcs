@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.EnterpriseServices;
 
-
 namespace BankClass
 {
     [Transaction(TransactionOption.RequiresNew)]
@@ -11,7 +10,7 @@ namespace BankClass
 
     public class Transfer : ServicedComponent
     {
-        public bool BankTransfer(string FromBank, string FromAccount, string ToBank,string ToAccount, float balance)
+        public bool BankTransfer(string FromBank, string FromAccount, string ToBank, string ToAccount, float balance)
         {
             Account fromAccount = new BankClass.Account();
             Account toAccount = new BankClass.Account();
@@ -23,10 +22,10 @@ namespace BankClass
                 toAccount.WriteError("From Bank：" + FromAccount + " TO Bank：" + toAccount + "转帐成功");
                 return true;
             }
-            catch(System.Exception ex)
+            catch (System.Exception ex)
             {
                 ContextUtil.SetAbort();
-                toAccount.WriteError("From Bank：" + FromAccount + " TO Bank：" + toAccount + "转帐失败"+ex.Message);
+                toAccount.WriteError("From Bank：" + FromAccount + " TO Bank：" + toAccount + "转帐失败" + ex.Message);
                 return false;
             }
         }

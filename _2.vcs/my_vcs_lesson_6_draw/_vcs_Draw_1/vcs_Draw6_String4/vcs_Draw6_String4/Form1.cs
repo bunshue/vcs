@@ -13,8 +13,6 @@ using Gif.Components;
 using System.IO;
 using System.Drawing.Imaging;
 
-using System.Drawing.Text;  //for InstalledFontCollection, PrivateFontCollection
-
 namespace vcs_Draw6_String4
 {
     public partial class Form1 : Form
@@ -46,6 +44,8 @@ namespace vcs_Draw6_String4
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             string Path;
             //檢查存圖的資料夾
             Path = Application.StartupPath + "\\png2gif";
@@ -91,6 +91,27 @@ namespace vcs_Draw6_String4
             nud_w.ValueChanged += new EventHandler(setup_banner_profile);
             nud_h.ValueChanged += new EventHandler(setup_banner_profile);
             font_size = font.Size;
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 12;
+            y_st = 12;
+            dx = 200 + 10;
+            dy = 60 + 10;
+
+            //this.Size = new Size(1700, 960);
+            this.Text = "vcs_Draw6_String4";
+
+            //設定執行後的表單起始位置
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((1920 - this.Size.Width) / 2, (1080 - this.Size.Height) / 2);
         }
 
         private void setup_banner_profile(object sender, EventArgs e)

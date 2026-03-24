@@ -20,17 +20,6 @@ namespace vcs_Draw_Watermark2
             InitializeComponent();
         }
 
-        // 獲取系統字體
-        private void GetSystemFont(ToolStripComboBox cb)
-        {
-            InstalledFontCollection myFont = new InstalledFontCollection();
-            foreach (FontFamily ff in myFont.Families)
-            {
-                cb.Items.Add(ff.Name);
-            }
-            cb.SelectedItem = "宋體";
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
@@ -110,11 +99,6 @@ namespace vcs_Draw_Watermark2
             }
         }
 
-        private void trackBar1_Enter(object sender, EventArgs e)
-        {
-            lbImgList.Focus();
-        }
-
         private void btnSelect_Click(object sender, EventArgs e)
         {
             if (openFileDialog2.ShowDialog() == DialogResult.OK)
@@ -130,7 +114,6 @@ namespace vcs_Draw_Watermark2
 
         private void rbTxt_CheckedChanged(object sender, EventArgs e)
         {
-            trackBar1.Enabled = false;
             if (rbPIC.Checked)
             {
                 pbImgPreview.Image = null;
@@ -139,7 +122,6 @@ namespace vcs_Draw_Watermark2
 
         private void rbPIC_CheckedChanged(object sender, EventArgs e)
         {
-            trackBar1.Enabled = true;
             if (rbTxt.Checked)
             {
                 pbImgPreview.Image = null;
@@ -388,35 +370,16 @@ namespace vcs_Draw_Watermark2
                 effect = new Bitmap(this.new_img.Width, this.new_img.Height);
             }
             Graphics _effect = Graphics.FromImage(effect);
-            float[][] matrixItems =
-            {
-                new float[]{1,0,0,0,0},
-                new float[]{0,1,0,0,0},
-                new float[]{0,0,1,0,0},
-                new float[]{0,0,0,0,0},
-                new float[]{0,0,0,trackBar1.Value/255f,1}
-            };
-            ColorMatrix cm = new ColorMatrix(matrixItems);
-            ImageAttributes ia = new ImageAttributes();
-            ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
             if (source.Width <= 368)
             {
-                _effect.DrawImage(source, new Rectangle(0, 0, 368, 75), 0, 0, 368, 75, GraphicsUnit.Pixel, ia);
+                _effect.DrawImage(source, new Rectangle(0, 0, 368, 75), 0, 0, 368, 75, GraphicsUnit.Pixel);
             }
             else
             {
-                _effect.DrawImage(new_img, new Rectangle(0, 0, new_img.Width, new_img.Height), 0, 0, new_img.Width, new_img.Height, GraphicsUnit.Pixel, ia);
+                _effect.DrawImage(new_img, new Rectangle(0, 0, new_img.Width, new_img.Height), 0, 0, new_img.Width, new_img.Height, GraphicsUnit.Pixel);
             }
             pbImgPreview.Image = effect;
-        }
-
-        private void trackBar1_ValueChanged(object sender, EventArgs e)
-        {
-            if (rbPIC.Checked && txtWaterMarkImg.Text.Trim() != "")
-            {
-                ChangeAlpha();
-            }
         }
 
         private void btnPerform_Click(object sender, EventArgs e)

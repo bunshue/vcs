@@ -339,8 +339,8 @@ namespace vcs_SqlConnection2
             //show
             string db_filename = "db_10_Data.MDF";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-            SqlConnection con = new SqlConnection(cnstr);
-            SqlDataAdapter dap = new SqlDataAdapter("select * from 員工工資表", con);
+            SqlConnection cn = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("select * from 員工工資表", cn);
             DataSet ds = new DataSet();
             dap.Fill(ds);
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
@@ -358,11 +358,11 @@ namespace vcs_SqlConnection2
 
             string db_filename = "db_10_Data.MDF";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-            SqlConnection con = new SqlConnection(cnstr);
-            con.Open();
-            SqlCommand cmd = new SqlCommand("insert into 員工訊息表 (員工編號,員工姓名,身份證號,聯繫電話) values ('" + number + "','" + name + "','" + id + "','" + phone + "')", con);
+            SqlConnection cn = new SqlConnection(cnstr);
+            cn.Open();
+            SqlCommand cmd = new SqlCommand("insert into 員工訊息表 (員工編號,員工姓名,身份證號,聯繫電話) values ('" + number + "','" + name + "','" + id + "','" + phone + "')", cn);
             cmd.ExecuteNonQuery();
-            con.Close();
+            cn.Close();
             MessageBox.Show("數據新增成功！");
 
             richTextBox1.Text += "------------------------------\n";  // 30個
@@ -372,8 +372,8 @@ namespace vcs_SqlConnection2
             //show
             string db_filename = "db_10_Data.MDF";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-            SqlConnection con = new SqlConnection(cnstr);
-            SqlDataAdapter dap = new SqlDataAdapter("select * from 員工訊息表", con);
+            SqlConnection cn = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("select * from 員工訊息表", cn);
             DataSet ds = new DataSet();
             dap.Fill(ds);
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
@@ -387,9 +387,9 @@ namespace vcs_SqlConnection2
             /*
             string db_filename = "db_10_Data.MDF";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-            SqlConnection con = new SqlConnection(cnstr);
-            con.Open();
-            SqlCommand cmd = new SqlCommand("procInsertEmployee", con);
+            SqlConnection cn = new SqlConnection(cnstr);
+            cn.Open();
+            SqlCommand cmd = new SqlCommand("procInsertEmployee", cn);
             cmd.CommandType = CommandType.StoredProcedure;
             SqlParameter[] prams = {
 						new SqlParameter("@員工編號",  SqlDbType.VarChar, 50),
@@ -414,7 +414,7 @@ namespace vcs_SqlConnection2
                 cmd.Parameters.Add(parameter);
             }
             cmd.ExecuteNonQuery();
-            con.Close();
+            cn.Close();
             */
 
             richTextBox1.Text += "------------------------------\n";  // 30個
@@ -425,8 +425,8 @@ namespace vcs_SqlConnection2
             //show
             string db_filename = "db_10_Data.MDF";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-            SqlConnection con = new SqlConnection(cnstr);
-            SqlDataAdapter dap = new SqlDataAdapter("select * from 員工訊息表", con);
+            SqlConnection cn = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("select * from 員工訊息表", cn);
             DataSet ds = new DataSet();
             dap.Fill(ds);
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
@@ -439,9 +439,9 @@ namespace vcs_SqlConnection2
 
             string db_filename = "db_10_Data.MDF";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-            SqlConnection con = new SqlConnection(cnstr);
-            con.Open();
-            SqlCommand cmd = new SqlCommand("procUpdateEmployee", con);
+            SqlConnection cn = new SqlConnection(cnstr);
+            cn.Open();
+            SqlCommand cmd = new SqlCommand("procUpdateEmployee", cn);
             cmd.CommandType = CommandType.StoredProcedure;
             SqlParameter[] prams = {
 			        new SqlParameter("@員工編號",  SqlDbType.VarChar, 50),
@@ -568,8 +568,8 @@ namespace vcs_SqlConnection2
             //show
             string db_filename = "db_10_Data.MDF";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-            SqlConnection con = new SqlConnection(cnstr);
-            SqlDataAdapter dap = new SqlDataAdapter("SELECT * FROM 銷售表", con);
+            SqlConnection cn = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("SELECT * FROM 銷售表", cn);
             DataSet ds = new DataSet();
             dap.Fill(ds, "table");
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
@@ -583,13 +583,13 @@ namespace vcs_SqlConnection2
 
             string db_filename = "db_10_Data.MDF";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-            SqlConnection con = new SqlConnection(cnstr);
+            SqlConnection cn = new SqlConnection(cnstr);
 
             //按員工姓名分析
-            //SqlDataAdapter dap = new SqlDataAdapter("SELECT 所在部門, SUM(CASE 員工姓名 WHEN '李金明' THEN 銷售業績 ELSE NULL END)AS [李金明],SUM(CASE 員工姓名 WHEN '周可人' THEN 銷售業績 ELSE NULL END)as [周可人] ,SUM(CASE 員工姓名 WHEN '韓運' THEN 銷售業績 ELSE NULL END)AS [韓運],SUM(CASE 員工姓名 WHEN '司徒南' THEN 銷售業績 ELSE NULL END)AS [司徒南],SUM(CASE 員工姓名 WHEN '史佳金' THEN 銷售業績 ELSE NULL END)AS [史佳金]  FROM 銷售表 GROUP BY 所在部門", con);
+            //SqlDataAdapter dap = new SqlDataAdapter("SELECT 所在部門, SUM(CASE 員工姓名 WHEN '李金明' THEN 銷售業績 ELSE NULL END)AS [李金明],SUM(CASE 員工姓名 WHEN '周可人' THEN 銷售業績 ELSE NULL END)as [周可人] ,SUM(CASE 員工姓名 WHEN '韓運' THEN 銷售業績 ELSE NULL END)AS [韓運],SUM(CASE 員工姓名 WHEN '司徒南' THEN 銷售業績 ELSE NULL END)AS [司徒南],SUM(CASE 員工姓名 WHEN '史佳金' THEN 銷售業績 ELSE NULL END)AS [史佳金]  FROM 銷售表 GROUP BY 所在部門", cn);
 
             //按部門分析
-            SqlDataAdapter dap = new SqlDataAdapter("SELECT 員工姓名, SUM(CASE 所在部門 WHEN '食品部' THEN 銷售業績 ELSE NULL END) AS [食品部業績],SUM(CASE 所在部門 WHEN '家電部' THEN 銷售業績 ELSE NULL END) AS [家電部業績] FROM 銷售表 GROUP BY 員工姓名", con);
+            SqlDataAdapter dap = new SqlDataAdapter("SELECT 員工姓名, SUM(CASE 所在部門 WHEN '食品部' THEN 銷售業績 ELSE NULL END) AS [食品部業績],SUM(CASE 所在部門 WHEN '家電部' THEN 銷售業績 ELSE NULL END) AS [家電部業績] FROM 銷售表 GROUP BY 員工姓名", cn);
 
             DataSet ds = new DataSet();
             dap.Fill(ds);

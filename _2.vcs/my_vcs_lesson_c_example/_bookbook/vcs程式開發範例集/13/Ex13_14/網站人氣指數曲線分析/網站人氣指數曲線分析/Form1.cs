@@ -15,6 +15,9 @@ namespace 網站人氣指數曲線分析
     {
         static int i = 0;
 
+        // 資料庫連線參數, 連接字串
+        string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
+
         public Form1()
         {
             InitializeComponent();
@@ -85,7 +88,7 @@ namespace 網站人氣指數曲線分析
             Point[] points = new Point[12];
             x = this.Width / 10;//X的
             k = y * 12;
-            SqlConnection Con = new SqlConnection("Server=(local);DataBase=db_13;Uid=sa;Pwd=");
+            SqlConnection Con = new SqlConnection(cnstr);
             string cmdtxt2 = "SELECT * FROM tb_reticulation";
             SqlCommand Com1 = new SqlCommand(cmdtxt2, Con);
             SqlDataAdapter da = new SqlDataAdapter();
@@ -145,4 +148,3 @@ namespace 網站人氣指數曲線分析
         }
     }
 }
-

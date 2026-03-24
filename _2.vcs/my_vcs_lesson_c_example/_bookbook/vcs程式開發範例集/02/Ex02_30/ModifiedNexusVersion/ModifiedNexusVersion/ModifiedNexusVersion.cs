@@ -17,7 +17,6 @@ namespace ModifiedNexusVersion
         SqlConnection NexusConnection;//聲明一個數據庫連接對像
 
         //定義一個數據庫連接字符串
-        //private static string ConnectString = "server=.;database=db_02;integrated security=sspi";
         private static string ConnectString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
 
         public ModifiedNexusVersion()

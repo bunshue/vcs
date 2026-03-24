@@ -115,6 +115,9 @@
             this.button14 = new System.Windows.Forms.Button();
             this.timer_FadeInFadeOut = new System.Windows.Forms.Timer(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.radioButton_m6 = new System.Windows.Forms.RadioButton();
+            this.radioButton_m5 = new System.Windows.Forms.RadioButton();
+            this.radioButton_m4 = new System.Windows.Forms.RadioButton();
             this.radioButton_m3 = new System.Windows.Forms.RadioButton();
             this.radioButton_m2 = new System.Windows.Forms.RadioButton();
             this.radioButton_m0 = new System.Windows.Forms.RadioButton();
@@ -143,7 +146,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 32;
-            this.button1.Text = "透明度 Alpha";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -154,7 +156,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 32;
-            this.button2.Text = "透明度 Alpha";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -165,7 +166,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 33;
-            this.button3.Text = "透明度 Alpha";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -208,7 +208,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(200, 60);
             this.button6.TabIndex = 37;
-            this.button6.Text = "貼上半透明圖片";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -898,7 +897,6 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(200, 60);
             this.button15.TabIndex = 286;
-            this.button15.Text = "用Class包裝ColorMatrix";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -995,7 +993,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(200, 60);
             this.button14.TabIndex = 295;
-            this.button14.Text = "ColorMatrix的使用";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -1005,16 +1002,55 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.radioButton_m6);
+            this.groupBox2.Controls.Add(this.radioButton_m5);
+            this.groupBox2.Controls.Add(this.radioButton_m4);
             this.groupBox2.Controls.Add(this.radioButton_m3);
             this.groupBox2.Controls.Add(this.radioButton_m2);
             this.groupBox2.Controls.Add(this.radioButton_m0);
             this.groupBox2.Controls.Add(this.radioButton_m1);
             this.groupBox2.Location = new System.Drawing.Point(563, 389);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(122, 145);
+            this.groupBox2.Size = new System.Drawing.Size(182, 195);
             this.groupBox2.TabIndex = 257;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Matrix";
+            this.groupBox2.Text = "Color Matrix";
+            // 
+            // radioButton_m6
+            // 
+            this.radioButton_m6.AutoSize = true;
+            this.radioButton_m6.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_m6.Location = new System.Drawing.Point(15, 168);
+            this.radioButton_m6.Name = "radioButton_m6";
+            this.radioButton_m6.Size = new System.Drawing.Size(52, 20);
+            this.radioButton_m6.TabIndex = 299;
+            this.radioButton_m6.Text = "new";
+            this.radioButton_m6.UseVisualStyleBackColor = true;
+            this.radioButton_m6.CheckedChanged += new System.EventHandler(this.radioButton_cm_CheckedChanged);
+            // 
+            // radioButton_m5
+            // 
+            this.radioButton_m5.AutoSize = true;
+            this.radioButton_m5.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_m5.Location = new System.Drawing.Point(15, 142);
+            this.radioButton_m5.Name = "radioButton_m5";
+            this.radioButton_m5.Size = new System.Drawing.Size(74, 20);
+            this.radioButton_m5.TabIndex = 298;
+            this.radioButton_m5.Text = "透明度";
+            this.radioButton_m5.UseVisualStyleBackColor = true;
+            this.radioButton_m5.CheckedChanged += new System.EventHandler(this.radioButton_cm_CheckedChanged);
+            // 
+            // radioButton_m4
+            // 
+            this.radioButton_m4.AutoSize = true;
+            this.radioButton_m4.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.radioButton_m4.Location = new System.Drawing.Point(15, 116);
+            this.radioButton_m4.Name = "radioButton_m4";
+            this.radioButton_m4.Size = new System.Drawing.Size(58, 20);
+            this.radioButton_m4.TabIndex = 297;
+            this.radioButton_m4.Text = "亮度";
+            this.radioButton_m4.UseVisualStyleBackColor = true;
+            this.radioButton_m4.CheckedChanged += new System.EventHandler(this.radioButton_cm_CheckedChanged);
             // 
             // radioButton_m3
             // 
@@ -1026,6 +1062,7 @@
             this.radioButton_m3.TabIndex = 3;
             this.radioButton_m3.Text = "負片";
             this.radioButton_m3.UseVisualStyleBackColor = true;
+            this.radioButton_m3.CheckedChanged += new System.EventHandler(this.radioButton_cm_CheckedChanged);
             // 
             // radioButton_m2
             // 
@@ -1039,6 +1076,7 @@
             this.radioButton_m2.TabStop = true;
             this.radioButton_m2.Text = "Sepia";
             this.radioButton_m2.UseVisualStyleBackColor = true;
+            this.radioButton_m2.CheckedChanged += new System.EventHandler(this.radioButton_cm_CheckedChanged);
             // 
             // radioButton_m0
             // 
@@ -1050,6 +1088,7 @@
             this.radioButton_m0.TabIndex = 1;
             this.radioButton_m0.Text = "標準";
             this.radioButton_m0.UseVisualStyleBackColor = true;
+            this.radioButton_m0.CheckedChanged += new System.EventHandler(this.radioButton_cm_CheckedChanged);
             // 
             // radioButton_m1
             // 
@@ -1061,6 +1100,7 @@
             this.radioButton_m1.TabIndex = 0;
             this.radioButton_m1.Text = "灰階";
             this.radioButton_m1.UseVisualStyleBackColor = true;
+            this.radioButton_m1.CheckedChanged += new System.EventHandler(this.radioButton_cm_CheckedChanged);
             // 
             // Form1
             // 
@@ -1254,6 +1294,9 @@
         private System.Windows.Forms.RadioButton radioButton_m2;
         private System.Windows.Forms.RadioButton radioButton_m0;
         private System.Windows.Forms.RadioButton radioButton_m1;
+        private System.Windows.Forms.RadioButton radioButton_m5;
+        private System.Windows.Forms.RadioButton radioButton_m4;
+        private System.Windows.Forms.RadioButton radioButton_m6;
     }
 }
 

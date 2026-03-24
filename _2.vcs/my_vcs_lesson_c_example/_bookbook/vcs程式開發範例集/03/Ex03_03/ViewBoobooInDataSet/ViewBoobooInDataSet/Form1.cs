@@ -12,6 +12,9 @@ namespace ViewBoobooInDataSet
 {
     public partial class Form1 : Form
     {
+        // 資料庫連線參數, 連接字串
+        string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_03_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
         public Form1()
         {
             InitializeComponent();
@@ -19,7 +22,7 @@ namespace ViewBoobooInDataSet
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection("server=(local);integrated security=true;database=db_03");
+            SqlConnection con = new SqlConnection(cnstr);
             con.Open();
             SqlCommand com = new SqlCommand("select Count(*)from tb_01", con);
             MaxValue = (int)com.ExecuteScalar();
@@ -28,7 +31,7 @@ namespace ViewBoobooInDataSet
 
         public void Find(int first, int next)
         {
-            SqlConnection con = new SqlConnection("server=(local);integrated security=true;database=db_03");
+            SqlConnection con = new SqlConnection(cnstr);
             con.Open();
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter("select * from tb_01", con);

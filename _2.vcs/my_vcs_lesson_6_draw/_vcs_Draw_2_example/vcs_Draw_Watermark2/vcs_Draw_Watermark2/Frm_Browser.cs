@@ -11,11 +11,13 @@ namespace vcs_Draw_Watermark2
 {
     public partial class Frm_Browser : Form
     {
+        public Image ig = null;
+
         public Frm_Browser()
         {
             InitializeComponent();
         }
-        public Image ig = null;
+
         private void Form2_Load(object sender, EventArgs e)
         {
             pictureBox1.Image = ig;

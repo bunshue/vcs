@@ -13,7 +13,7 @@ using System.Drawing.Drawing2D; //for GraphicsPath
 GraphicsPath 圖形路徑
 路徑是通過組合直線、矩形和簡單的曲線而形成的。
 GraphicsPath對象允許將基本構造塊收集到一個單元中，
-用 DrawPath方法，就可以繪制出整個單元的直線、矩形、多邊形和曲線。
+用 DrawPath / FillPath 方法，就可以繪制出整個單元的直線、矩形、多邊形和曲線。
 */
 
 namespace vcs_Draw_GraphicsPath
@@ -157,9 +157,7 @@ namespace vcs_Draw_GraphicsPath
 
             g.DrawPath(Pens.Black, gp2); // 繪出GraphicsPath物件
 
-
             richTextBox1.Text += "------------------------------\n";  // 30個
-
 
             x_st += dx * 3;
             g.DrawString("4", f, Brushes.Red, x_st, y_st);
@@ -404,15 +402,21 @@ namespace vcs_Draw_GraphicsPath
             // 圓形的半徑
             int D = 50;
 
-            gp3.AddPolygon(new Point[]
+            //多邊形
+            PointF[] points = new PointF[]
             {
+                //new PointF(40, 80),
+                //new PointF(120, 100),
+                //new PointF(230, 70),
                 new Point(x - 2 * D,y - 3*D),
                 new Point(x + 2 * D,y - 3*D),
                 new Point(x + 5 * D,y ),
                 new Point(x + 2 * D,y + 3*D),
                 new Point(x - 2 * D,y + 3*D),
                 new Point(x - 5 * D,y),
-            });  // 多邊形
+            };
+
+            gp3.AddPolygon(points);  // 多邊形
             gp3.AddEllipse(x - D, y - D, 2 * D, 2 * D);  // 在 多邊形 正中的 圓形
 
             Region region2 = new Region(gp3); // 區域表面 物件
@@ -424,6 +428,10 @@ namespace vcs_Draw_GraphicsPath
 
             g.FillRegion(brush, region2); // 區域表面 繪出
             g.DrawPath(Pens.Black, gp3);
+
+            g.DrawLines(new Pen(Color.Blue, 10), points);
+
+            return;
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
@@ -600,25 +608,36 @@ namespace vcs_Draw_GraphicsPath
             // Make the end cap.
             CustomLineCap end_cap = new CustomLineCap(null, gp2);
             // Make a pen that uses the custom caps.
-            Pen the_pen = new Pen(Color.Red, 5);
-            the_pen.CustomStartCap = start_cap;
-            the_pen.CustomEndCap = end_cap;
+
+            Pen p1 = new Pen(Color.Red, 5);
+            p1.CustomStartCap = start_cap;
+            p1.CustomEndCap = end_cap;
+            Pen p2 = new Pen(Color.Green, 5);
+            p2.CustomStartCap = start_cap;
+            p2.CustomEndCap = end_cap;
+            Pen p3 = new Pen(Color.Blue, 5);
+            p3.CustomStartCap = start_cap;
+            p3.CustomEndCap = end_cap;
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             // Draw a line.
-            g.DrawLine(the_pen, 40, 40, 200, 40);
+            g.DrawLine(p1, 50, 50, 200, 50);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             // Draw a polygon.
             PointF[] points = new PointF[]
             {
-                new PointF(40, 80),
-                new PointF(120, 100),
-                new PointF(230, 70),
+                new PointF(40, 100),
+                new PointF(120, 120),
+                new PointF(230, 90),
             };
-            the_pen.Color = Color.Green;
-            g.DrawLines(the_pen, points);
+            g.DrawLines(p2, points);
 
-            the_pen.Color = Color.Blue;
-            g.DrawArc(the_pen, 20, 120, 70, 60, 180, 270);
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            g.DrawArc(p3, 50, 150, 150, 80, 180, 270);
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -689,14 +708,17 @@ namespace vcs_Draw_GraphicsPath
                 }
                 last_ch++;
             }
+
             if (last_ch < first_ch)
             {
                 return;
             }
+
             if (last_ch >= txt.Length)
             {
                 last_ch = txt.Length - 1;
             }
+
             string chars_that_fit = txt.Substring(first_ch, last_ch - first_ch + 1);
 
             // Rotate and translate to position the characters.
@@ -771,13 +793,10 @@ namespace vcs_Draw_GraphicsPath
             pictureBox1.Image = bitmap2;
         }
 
-        /// <summary>
         /// 圖片截圖
-        /// </summary>
         /// <param name="bitmap">原圖</param>
         /// <param name="path">裁剪路徑</param>
         /// <param name="outputBitmap">輸出圖</param>
-        /// <returns></returns>
         public static Bitmap BitmapCrop(Bitmap bitmap, GraphicsPath path, out Bitmap outputBitmap)
         {
             RectangleF rect = path.GetBounds();

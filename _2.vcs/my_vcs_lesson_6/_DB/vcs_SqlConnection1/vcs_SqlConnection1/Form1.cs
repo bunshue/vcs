@@ -879,10 +879,10 @@ namespace vcs_SqlConnection1
             string db_filename = "db_09_Data.MDF";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
-            using (SqlConnection con = new SqlConnection(cnstr))
+            using (SqlConnection cn = new SqlConnection(cnstr))
             {
                 DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter("select * from 員工表", con);
+                SqlDataAdapter da = new SqlDataAdapter("select * from 員工表", cn);
                 da.Fill(dt);
                 this.dataGridView1.DataSource = dt.DefaultView;
             }
@@ -892,9 +892,9 @@ namespace vcs_SqlConnection1
         {
             showinfo();
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
-            SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09");
+            SqlConnection cn = new SqlConnection("server=.;pwd=;uid=sa;database=db_09");
 
             //在文字框中輸入有效的SQL語句修改數據
             string sql_command = "xxxxx";
@@ -903,11 +903,11 @@ namespace vcs_SqlConnection1
             {
                 try
                 {
-                    con.Open();  // 打開數據庫連線
-                    cmd.Connection = con;
+                    cn.Open();  // 打開數據庫連線
+                    cmd.Connection = cn;
                     cmd.CommandText = sql_command;
                     cmd.ExecuteNonQuery();
-                    con.Close();
+                    cn.Close();
                     showinfo();
                     MessageBox.Show("刪除成功");
                 }
@@ -917,7 +917,6 @@ namespace vcs_SqlConnection1
                 }
             }
         }
-
     }
 }
 

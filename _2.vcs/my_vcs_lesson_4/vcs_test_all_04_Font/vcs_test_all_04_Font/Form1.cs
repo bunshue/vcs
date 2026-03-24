@@ -37,9 +37,10 @@ namespace vcs_test_all_04_Font
 
             search_installed_font();
 
-            InstalledFontCollection fonts = new InstalledFontCollection();
+            //獲取系統字體
+            InstalledFontCollection fc = new InstalledFontCollection();
             var font_names =
-                from family in fonts.Families
+                from family in fc.Families
                 select family.Name;
             comboBox1.DataSource = font_names.ToArray();
 
@@ -77,6 +78,11 @@ namespace vcs_test_all_04_Font
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1600, 920);
+            this.Text = "vcs_test_all_04_Font";
+
+            //設定執行後的表單起始位置
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((1920 - this.Size.Width) / 2, (1080 - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -84,21 +90,20 @@ namespace vcs_test_all_04_Font
             richTextBox1.Clear();
         }
 
-
         void search_installed_font()
         {
             listBox2.Items.Clear();
 
-            // List the font families.
-            InstalledFontCollection fonts = new InstalledFontCollection();
-            foreach (FontFamily font_family in fonts.Families)
+            //獲取系統字體
+            InstalledFontCollection fc = new InstalledFontCollection();
+            foreach (FontFamily font in fc.Families)
             {
                 if (cb_chinese.Checked == true)
                 {
-                    if (font_family.Name[0] < 'Z')
+                    if (font.Name[0] < 'Z')
                         continue;
                 }
-                listBox2.Items.Add(font_family.Name);
+                listBox2.Items.Add(font.Name);
             }
 
             // Select the first font.
@@ -147,8 +152,9 @@ namespace vcs_test_all_04_Font
         {
             //需要先把 listView1 的 View 屬性設成 Details
             int iii = 0;
-            //C#專案中常常要獲取系統字型
-            InstalledFontCollection fontCol = new InstalledFontCollection();
+
+            //獲取系統字體
+            InstalledFontCollection fc = new InstalledFontCollection();
 
             listView1.Clear();
 
@@ -156,15 +162,15 @@ namespace vcs_test_all_04_Font
             listView1.Columns.Add("字型", 300, HorizontalAlignment.Center);
             listView1.Columns.Add("範例", 300, HorizontalAlignment.Center);
 
-            foreach (FontFamily temp in fontCol.Families)
+            foreach (FontFamily font in fc.Families)
             {
                 iii++;
                 ListViewItem i1 = new ListViewItem(iii.ToString());
                 ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
-                sub_i1a.Text = temp.Name;
+                sub_i1a.Text = font.Name;
                 i1.SubItems.Add(sub_i1a);
                 ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
-                if (temp.Name[0] <= 'z')
+                if (font.Name[0] <= 'z')
                 {
                     if (textBox1.Text.Length > 0)
                         sub_i1b.Text = textBox1.Text;
@@ -182,7 +188,7 @@ namespace vcs_test_all_04_Font
 
                 try
                 {
-                    i1.Font = new Font(temp.Name, 24);
+                    i1.Font = new Font(font.Name, 24);
                 }
                 catch (Exception ex)
                 {   //定義產生錯誤時的例外處理程式碼
@@ -362,11 +368,11 @@ namespace vcs_test_all_04_Font
 
         private void button37_Click(object sender, EventArgs e)
         {
-            //C#專案中常常要獲取系統字型
-            InstalledFontCollection fontCol = new InstalledFontCollection();
-            foreach (FontFamily temp in fontCol.Families)
+            //獲取系統字體
+            InstalledFontCollection fc = new InstalledFontCollection();
+            foreach (FontFamily font in fc.Families)
             {
-                comboBox_font.Items.Add(temp.Name);
+                comboBox_font.Items.Add(font.Name);
             }
             comboBox_font.SelectedIndex = 0;
             //在Visual Studio 2012下編譯執行後就會在comboBox中顯示目前安裝的所有字體。
@@ -374,11 +380,11 @@ namespace vcs_test_all_04_Font
 
         private void button12_Click(object sender, EventArgs e)
         {
-            //取得計算機中已安裝的字體
-            InstalledFontCollection myFonts = new InstalledFontCollection();
-            foreach (FontFamily family in myFonts.Families)
+            //獲取系統字體
+            InstalledFontCollection fc = new InstalledFontCollection();
+            foreach (FontFamily font in fc.Families)
             {
-                richTextBox1.AppendText(family.Name + "\n");
+                richTextBox1.AppendText(font.Name + "\n");
             }
         }
 
@@ -510,6 +516,5 @@ namespace vcs_test_all_04_Font
         {
             Show_Font_by_ListView();
         }
-
     }
 }

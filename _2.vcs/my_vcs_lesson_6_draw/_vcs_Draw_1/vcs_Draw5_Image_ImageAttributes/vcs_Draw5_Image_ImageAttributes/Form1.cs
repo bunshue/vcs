@@ -266,6 +266,9 @@ namespace vcs_Draw5_Image_ImageAttributes
             radioButton_m1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             radioButton_m2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             radioButton_m3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            radioButton_m4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            radioButton_m5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            radioButton_m6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
 
             lb_cm00.Text = "紅對紅00";
             lb_cm01.Text = "紅對綠01";
@@ -308,137 +311,42 @@ namespace vcs_Draw5_Image_ImageAttributes
 
         private void button0_Click(object sender, EventArgs e)
         {
-            int W = 640;
-            int H = 480;
-            Bitmap bitmap1 = new Bitmap(W, H);
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
+            Bitmap bitmap1 = new Bitmap(filename);
 
-            //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_game\airplane.bmp";
             pictureBox2.Image = Image.FromFile(filename);
 
             Bitmap bmp = new Bitmap(filename);
 
             Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.Pink);
 
+            g.Clear(Color.Pink);
+            float alpha = 0.5f;  // 透明度
             //使用 color matrix, 設定 Alpha = 0.5
             ColorMatrix cm = new ColorMatrix();
-            //print_ColorMatrix(cm);
-            cm.Matrix33 = 0.5f;  // 設定Alpha = 0.5
-            //cm.Matrix33 = 1.0f;  // 設定Alpha = 0.5
-            //print_ColorMatrix(cm);
-
-            ImageAttributes ia = new ImageAttributes();
-
-            ia.SetColorMatrix(cm);
-
-            // Make pixels that are the same color as the
-            // one in the upper left transparent.
-            // bmp.MakeTransparent(bmp.GetPixel(5, 60));  // 設定邊角點的顏色為透明色
-
-            // 貼上使用CM轉換過的影像
-            g.DrawImage(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
-
-            pictureBox1.Image = bitmap1;
-        }
-
-        float alpha = 0f;
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //透明度
-
-            alpha += 0.1f;
-            if (alpha > 1)
-                alpha = 0;
-
-            g.Clear(Color.Pink);
-            //使用 color matrix
-            ColorMatrix cm = new ColorMatrix();
             cm.Matrix33 = alpha; // 透明度
+
             ImageAttributes ia = new ImageAttributes();
+
             ia.SetColorMatrix(cm);
 
             // 貼上使用CM轉換過的影像
-            Bitmap bmp = new Bitmap(filename);
+            int W = bmp.Width;
+            int H = bmp.Height;
             g.DrawImage(bmp, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
             pictureBox1.Image = bitmap1;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            //使用Alpha
-
-            float t = 0.60f; //transparency;
-
-            // 色彩調整矩陣 透明度
-            float[][] matrix =
-            {
-                new float[] {1, 0, 0, 0, 0},
-                new float[] {0, 1, 0, 0, 0},
-                new float[] {0, 0, 1, 0, 0},
-                new float[] {0, 0, 0, t, 0},  // Matrix33 Alpha
-                new float[] {0, 0, 0, 0, 1},
-            };
-
-            do_color_matrix(matrix);
         }
 
-        void do_color_matrix(float[][] matrix)
+        private void button2_Click(object sender, EventArgs e)
         {
-            g.Clear(Color.White);
-
-            //貼上無調整的影像(大圖)
-            string filename0 = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-            Bitmap bmp0 = new Bitmap(filename0);
-            g.DrawImage(bmp0, 0, 0, bmp0.Width, bmp0.Height);
-
-            //小圖
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\_material\ims3.bmp";
-            Bitmap bmp = new Bitmap(filename);
-            bmp.MakeTransparent(bmp.GetPixel(10, 10));  // 設定邊角點的顏色為透明色
-
-            //使用 color matrix
-            ColorMatrix cm = new ColorMatrix(matrix);
-            ImageAttributes ia = new ImageAttributes();
-            ia.SetColorMatrix(cm);
-
-            //貼上有調整的影像
-            // 貼上使用CM轉換過的影像
-            g.DrawImage(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
-
-            pictureBox1.Image = bitmap1;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //測試 ColorMatrix
-
-            // 色彩調整矩陣 透明度 20%
-            float[][] matrix =
-            {
-                new float[] {1, 0, 0, 0,    0},
-                new float[] {0, 1, 0, 0,    0},
-                new float[] {0, 0, 1, 0,    0},
-                new float[] {0, 0, 0, 0.2f, 0},  // Matrix33 Alpha
-                new float[] {0, 0, 0, 0,    1}
-            };
-            //使用 color matrix
-            ColorMatrix cm = new ColorMatrix(matrix);
-            ImageAttributes ia = new ImageAttributes();
-            ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-            pictureBox2.Image = Image.FromFile(filename);
-
-            Bitmap bmp = new Bitmap(filename);
-
-            g.DrawRectangle(Pens.Red, 100, 100, 100, 100);
-            g.DrawImage(bmp, 0, 0, bmp.Width / 2, bmp.Height / 2);
-
-            Rectangle dest2 = new Rectangle(0, 300, bmp.Width / 2, bmp.Height / 2);
-            // 貼上使用CM轉換過的影像
-            g.DrawImage(bmp, dest2, 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
-
-            pictureBox1.Image = bitmap1;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -545,41 +453,6 @@ namespace vcs_Draw5_Image_ImageAttributes
 
         private void button6_Click(object sender, EventArgs e)
         {
-            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_angry_bird\AB_red.jpg";
-
-            //貼上半透明圖片
-            Bitmap img; // Bitmap 影像
-            Bitmap img2;  // 透明的影像
-            img = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
-            //this.ClientSize = new Size(img.Width + 100, img.Height + 100);// 調整視窗客戶區寬高
-            img2 = (Bitmap)Bitmap.FromFile(filename2);	//Bitmap.FromFile出來的是Image格式
-
-            g.Clear(Color.White);
-
-            Rectangle rectDest = new Rectangle(0, 0, img.Width, img.Height);
-            g.DrawImage(img, rectDest); // 呈現原圖
-
-            // 色彩調整矩陣
-            float[][] matrix =
-               {
-                  new float[] {1, 0, 0, 0,    0},
-                  new float[] {0, 1, 0, 0,    0},
-                  new float[] {0, 0, 1, 0,    0},
-                  new float[] {0, 0, 0, 0.5f, 0},
-                  new float[] {0, 0, 0, 0,    1}
-               };
-
-            ColorMatrix cm = new ColorMatrix(matrix);
-            ImageAttributes ia = new ImageAttributes();
-            ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-
-            // 繪出透明的影像
-            int x_st = 220;
-            int y_st = 320;
-            g.DrawImage(img2, new Rectangle(x_st - img2.Width / 2, y_st - img2.Height / 2, img2.Width, img2.Height), 0, 0, img2.Width, img2.Height, GraphicsUnit.Pixel, ia);
-
-            pictureBox1.Image = bitmap1;
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -849,7 +722,6 @@ namespace vcs_Draw5_Image_ImageAttributes
             g.DrawImage(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, ia);
 
             pictureBox1.Image = bitmap1;
-
         }
 
         int cutoff_value = 0;
@@ -923,86 +795,10 @@ namespace vcs_Draw5_Image_ImageAttributes
 
         private void button14_Click(object sender, EventArgs e)
         {
-            int value = 128;
-            Bitmap bitmap2 = AdjustBrightness(bitmap1, value);
-
-            float opacity = 0.5f;
-            Bitmap bitmap3 = AdjustOpacity(bitmap1, opacity);
-        }
-
-        public static Bitmap AdjustBrightness(Bitmap bitmap1, int Value)
-        {
-            float FinalValue = (float)Value / 255.0f;
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            Bitmap bitmap2 = new Bitmap(W, H);
-            Graphics g = Graphics.FromImage(bitmap2);
-            float[][] matrix ={
-                                  new float[] {1, 0, 0, 0, 0},
-                                  new float[] {0, 1, 0, 0, 0},
-                                  new float[] {0, 0, 1, 0, 0},
-                                  new float[] {0, 0, 0, 1, 0},
-                                  new float[] {FinalValue, FinalValue, FinalValue, 1, 1}
-                              };
-            ColorMatrix cm = new ColorMatrix(matrix);
-            ImageAttributes ia = new ImageAttributes();
-            ia.SetColorMatrix(cm);
-            g.DrawImage(bitmap1, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
-            ia.Dispose();
-            g.Dispose();
-            return bitmap2;
-        }
-
-        public static Bitmap AdjustOpacity(Bitmap bitmap1, float opacity)
-        {
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            Bitmap bitmap2 = new Bitmap(W, H, PixelFormat.Format32bppArgb);
-            Graphics g = Graphics.FromImage(bitmap2);
-            float[][] matrix = {
-                                   new float[] {1,  0,  0,  0, 0},
-                                   new float[] {0,  1,  0,  0, 0},
-                                   new float[] {0,  0,  1,  0, 0},
-                                   new float[] {0,  0,  0,  opacity, 0},
-                                   new float[] {0,  0,  0,  0,  1}
-                               };
-            ColorMatrix cm = new ColorMatrix(matrix);
-            ImageAttributes ia = new ImageAttributes();
-            ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-            g.DrawImage(bitmap1, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
-            ia.Dispose();
-            g.Dispose();
-            return bitmap2;
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-            //用Class包裝ColorMatrix
-
-            //使用 color matrix
-            ColorMatrix cm = ColorMatrixs.Negative;
-            if (radioButton_m0.Checked == true)
-                cm = ColorMatrixs.Identity;
-            else if (radioButton_m1.Checked == true)
-                cm = ColorMatrixs.GrayScale;
-            else if (radioButton_m2.Checked == true)
-                cm = ColorMatrixs.Sepia;
-            else if (radioButton_m3.Checked == true)
-                cm = ColorMatrixs.Negative;
-
-
-            ImageAttributes ia = new ImageAttributes();
-            ia.SetColorMatrix(cm);
-
-            g.Clear(Color.Pink);
-            // 貼上使用CM轉換過的影像
-            Bitmap bmp = new Bitmap(filename);
-            int W = bmp.Width;
-            int H = bmp.Height;
-            g.DrawImage(bmp, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
-            pictureBox1.Image = bitmap1;
-            pictureBox2.Image = Image.FromFile(filename);
-
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -1675,6 +1471,123 @@ namespace vcs_Draw5_Image_ImageAttributes
                 imageObject.Init(pos, 10000);
             }
         }
+
+        public static Bitmap AdjustBrightness(Bitmap bitmap1, int Value)
+        {
+            float FinalValue = (float)Value / 255.0f;
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            Bitmap bitmap2 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap2);
+            float[][] matrix ={
+                                  new float[] {1, 0, 0, 0, 0},
+                                  new float[] {0, 1, 0, 0, 0},
+                                  new float[] {0, 0, 1, 0, 0},
+                                  new float[] {0, 0, 0, 1, 0},
+                                  new float[] {FinalValue, FinalValue, FinalValue, 1, 1}
+                              };
+            ColorMatrix cm = new ColorMatrix(matrix);
+            ImageAttributes ia = new ImageAttributes();
+            ia.SetColorMatrix(cm);
+            g.DrawImage(bitmap1, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
+            ia.Dispose();
+            g.Dispose();
+            return bitmap2;
+        }
+
+        public static Bitmap AdjustOpacity(Bitmap bitmap1, float opacity)
+        {
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            Bitmap bitmap2 = new Bitmap(W, H, PixelFormat.Format32bppArgb);
+            Graphics g = Graphics.FromImage(bitmap2);
+            float[][] matrix = {
+                                   new float[] {1,  0,  0,  0, 0},
+                                   new float[] {0,  1,  0,  0, 0},
+                                   new float[] {0,  0,  1,  0, 0},
+                                   new float[] {0,  0,  0,  opacity, 0},
+                                   new float[] {0,  0,  0,  0,  1}
+                               };
+            ColorMatrix cm = new ColorMatrix(matrix);
+            ImageAttributes ia = new ImageAttributes();
+            ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+            g.DrawImage(bitmap1, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
+            ia.Dispose();
+            g.Dispose();
+            return bitmap2;
+        }
+
+        private void radioButton_cm_CheckedChanged(object sender, EventArgs e)
+        {
+            //用Class包裝ColorMatrix
+
+            //使用 color matrix
+            ColorMatrix cm = ColorMatrixs.Negative;
+
+            if (radioButton_m4.Checked == true)
+            {
+                int value = 128;
+                Bitmap bmp4 = AdjustBrightness(bitmap1, value);
+                pictureBox1.Image = bmp4;
+                return;
+            }
+            else if (radioButton_m5.Checked == true)
+            {
+                float opacity = 0.5f;
+                Bitmap bmp5 = AdjustOpacity(bitmap1, opacity);
+                pictureBox1.Image = bmp5;
+                return;
+            }
+            else if (radioButton_m6.Checked == true)
+            {
+                richTextBox1.Text += "aaaaaa\n";
+                //使用Alpha
+
+                float t = 0.60f; //transparency; 60%
+
+                // 色彩調整矩陣 透明度
+                float[][] matrix =
+                {
+                    new float[] {1, 0, 0, 0, 0},
+                    new float[] {0, 1, 0, 0, 0},
+                    new float[] {0, 0, 1, 0, 0},
+                    new float[] {0, 0, 0, t, 0},  // Matrix33 Alpha, Matrix43=0
+                    new float[] {0, 0, 0, 0, 1},  // Matrix43 也是 Alpha, Matrix33=0
+                };
+                cm = new ColorMatrix(matrix);
+            }
+            else if (radioButton_m0.Checked == true)
+            {
+                cm = ColorMatrixs.Identity;//標準
+            }
+            else if (radioButton_m1.Checked == true)
+            {
+                cm = ColorMatrixs.GrayScale;//灰階
+            }
+            else if (radioButton_m2.Checked == true)
+            {
+                cm = ColorMatrixs.Sepia;//Sepia
+            }
+            else if (radioButton_m3.Checked == true)
+            {
+                cm = ColorMatrixs.Negative;//負片
+            }
+
+            print_ColorMatrix(cm);
+
+            ImageAttributes ia = new ImageAttributes();
+            ia.SetColorMatrix(cm);
+            //ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap); same
+
+            g.Clear(Color.Pink);
+            // 貼上使用CM轉換過的影像
+            Bitmap bmp = new Bitmap(filename);
+            int W = bmp.Width;
+            int H = bmp.Height;
+            g.DrawImage(bmp, new Rectangle(0, 0, W, H), 0, 0, W, H, GraphicsUnit.Pixel, ia);
+            pictureBox1.Image = bitmap1;
+            pictureBox2.Image = Image.FromFile(filename);
+        }
     }
 }
 
@@ -1684,18 +1597,17 @@ namespace vcs_Draw5_Image_ImageAttributes
 //------------------------------------------------------------
 
 //3030
+//richTextBox1.Text += "---------------\n";  // 15個
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
 //1515
+//richTextBox1.Text += "---------------\n";  // 15個
 //---------------  # 15個
-
 
 /*
             Image tmp = Image.FromFile(filename);
-
             this.pictureBox1.Image = Image.FromFile(filename);
-
             Graphics g = Graphics.FromImage(tmp);
             Rectangle destRect = new Rectangle(0, 0, tmp.Width, tmp.Height);
             g.DrawImage(tmp, destRect, 0, 0, tmp.Width, tmp.Height, GraphicsUnit.Pixel, attr);
@@ -1761,12 +1673,5 @@ ImageAttributes的使用
 ImageAttributes ia = new ImageAttributes();
 ia.SetGamma
 ia.SetGamma(0.6f);
-ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
-ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);same
-ia.SetColorMatrices(cm, null);//same
 */
-
-
-//ia.SetGamma(0.6f);
-
 

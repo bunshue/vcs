@@ -42,9 +42,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.cbbPosition = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.rbPIC = new System.Windows.Forms.RadioButton();
             this.rbTxt = new System.Windows.Forms.RadioButton();
             this.txtWaterMarkFont = new System.Windows.Forms.TextBox();
@@ -60,7 +58,6 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbImgPreview)).BeginInit();
             this.SuspendLayout();
             // 
@@ -158,9 +155,7 @@
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.cbbPosition);
-            this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Controls.Add(this.trackBar1);
             this.groupBox2.Controls.Add(this.rbPIC);
             this.groupBox2.Controls.Add(this.rbTxt);
             this.groupBox2.Controls.Add(this.txtWaterMarkFont);
@@ -209,15 +204,6 @@
             this.cbbPosition.Size = new System.Drawing.Size(65, 20);
             this.cbbPosition.TabIndex = 15;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 147);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 12);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "透明設置：";
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(315, 48);
@@ -227,20 +213,6 @@
             this.button1.Text = "字體設置";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // trackBar1
-            // 
-            this.trackBar1.AutoSize = false;
-            this.trackBar1.Enabled = false;
-            this.trackBar1.LargeChange = 1;
-            this.trackBar1.Location = new System.Drawing.Point(69, 140);
-            this.trackBar1.Maximum = 255;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(179, 22);
-            this.trackBar1.TabIndex = 12;
-            this.trackBar1.Value = 255;
-            this.trackBar1.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
-            this.trackBar1.Enter += new System.EventHandler(this.trackBar1_Enter);
             // 
             // rbPIC
             // 
@@ -364,7 +336,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbImgPreview)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -392,10 +363,8 @@
         private System.Windows.Forms.RadioButton rbPIC;
         private System.Windows.Forms.RadioButton rbTxt;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.OpenFileDialog openFileDialog2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cbbPosition;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox txtSavaPath;

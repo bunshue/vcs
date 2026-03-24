@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;    //for FileInfo
-using System.Drawing.Text;  //for InstalledFontCollection, PrivateFontCollection
+using System.Drawing.Text;  //for PrivateFontCollection
 
 namespace vcs_test_all_04_Dialog
 {
@@ -862,7 +862,6 @@ namespace vcs_test_all_04_Dialog
     }
 }
 
-
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
@@ -953,8 +952,6 @@ saveFileDialog1.Filter = "點陣圖 (*.bmp)|*.bmp|JPEG (*.JPG)|*.JPG|" + "GIF(*.
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-
-
             //openFileDialog1
             //建立處理資料流的物件note
             Stream note = null;
@@ -989,16 +986,9 @@ richTextBox1.Text += "----------------------------------------------------------
             {
             }
 
-
-
-
                 //確認沒有開啟的檔案，依預設的資料夾來開啟
                 openFileDialog1.InitialDirectory = folderName;
                 openFileDialog1.FileName = null;
-
-
-
-
 
             //savefiledialog
             //設定預設目錄, 預設欲儲存的檔案類型
@@ -1016,11 +1006,6 @@ richTextBox1.Text += "----------------------------------------------------------
             {
             }
 
-
-
-
-
 //saveFileDialog1.InitialDirectory = Application.StartupPath; //從目前目錄開始尋找檔案
 
 */
-

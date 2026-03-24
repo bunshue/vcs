@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.EnterpriseServices;
 using System.Data;
+
 using System.Data.SqlClient;
 using System.Diagnostics;
 
@@ -12,9 +13,12 @@ namespace BankClass
     {
         public void Saveing(string bank, float balance, string account)
         {
+            // 資料庫連線參數, 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_35_data.mdf;Integrated Security=True;Connect Timeout=30";
+
             try
             {
-                SqlConnection con = new SqlConnection("Server=(local),DataBase=db_35,uid=sa,pwd");
+                SqlConnection con = new SqlConnection(cnstr);
                 con.Open();
                 SqlCommand cmd = new SqlCommand("UPDATE " + bank + " SET balance = balance + " + Convert.ToDouble(balance) + " WHERE (account = 123456)", con);
                 int i = (int)cmd.ExecuteNonQuery();
@@ -64,6 +68,7 @@ namespace BankClass
         {
             EventLog.WriteEntry("示例BankClass COM+組件服務", error, EventLogEntryType.Error);
         }
+
         public void WriteInfo(string info)
         {
             EventLog.WriteEntry("示例BankClass COM+組件服務", info, EventLogEntryType.Information);
