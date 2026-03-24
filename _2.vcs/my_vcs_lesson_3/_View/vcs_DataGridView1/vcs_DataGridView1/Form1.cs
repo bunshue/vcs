@@ -190,10 +190,6 @@ namespace vcs_DataGridView1
 
         private void button1_Click(object sender, EventArgs e)
         {
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
             dataGridView1.Columns.Clear();
 
             //設定DGV
@@ -211,11 +207,7 @@ namespace vcs_DataGridView1
             dataGridView1.Rows.Add(new string[] { "tiger", "跳跳虎", 33.ToString() });
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button4_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             //設定DGV
             dataGridView1.ColumnCount = 3;
@@ -266,7 +258,7 @@ namespace vcs_DataGridView1
             //DataGridViewRowCollection rows = dataGridView1.Rows;
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
             //DataGridView 顯示序號
             //多了 RowPostPaint
@@ -327,6 +319,14 @@ namespace vcs_DataGridView1
                 Rectangle rect = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, dgv.RowHeadersWidth - 4, e.RowBounds.Height);
                 TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgv.RowHeadersDefaultCellStyle.Font, rect, dgv.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -642,57 +642,56 @@ namespace vcs_DataGridView1
 
         void show_DataGridView_content(DataGridView dgv)
         {
-            int r;
-            int c;
-            int rows = dgv.RowCount;
-            int cols = dgv.ColumnCount;
-            richTextBox1.Text += "ROWS = " + rows.ToString() + "\n";
-            richTextBox1.Text += "COLS = " + cols.ToString() + "\n";
-            richTextBox1.Text += "Content:\n";
+            richTextBox1.Text += "顯示 DataGridView 的內容\n";
+            int R = dgv.RowCount;
+            int C = dgv.ColumnCount;
+            richTextBox1.Text += "欄數 : " + C.ToString() + "\n";
+            richTextBox1.Text += "列數 : " + R.ToString() + " (包含標題)\n";
+            richTextBox1.Text += "內容 :\n";
 
-            for (r = 0; r < rows; r++)
+            for (int r = 0; r < (R - 1); r++)
             {
-                richTextBox1.Text += "r = " + r.ToString() + "\t";
-                for (c = 0; c < cols; c++)
+                richTextBox1.Text += "第" + (r + 1).ToString() + "筆 :\t";
+                for (int c = 0; c < C; c++)
                 {
                     //richTextBox1.Text += dataGridView1[c, r].Value + "\t";
                     DataGridViewCell dgvCell = dgv[c, r];
-                    richTextBox1.Text += dgvCell.Value + "\t";
+                    richTextBox1.Text += dgvCell.Value;
+                    if (c == (C - 1))
+                        richTextBox1.Text += "\n";
+                    else
+                        richTextBox1.Text += "\t";
                 }
-                richTextBox1.Text += "\n";
             }
-            richTextBox1.Text += "\n";
         }
 
         void show_DataTable_content(DataTable dt)
         {
             richTextBox1.Text += "顯示 DataTable 的內容\n";
-
-            int i;
-            int j;
-            int C = dt.Columns.Count;
             int R = dt.Rows.Count;
-
-            richTextBox1.Text += "共有資料欄位 " + C.ToString() + " 欄\n";
-            richTextBox1.Text += "共有資料 " + R.ToString() + " 筆\n";
-            richTextBox1.Text += "TableName = " + dt.TableName + "\n\n";
+            int C = dt.Columns.Count;
+            richTextBox1.Text += "欄數 : " + C.ToString() + "\n";
+            richTextBox1.Text += "列數 : " + R.ToString() + " (包含標題)\n";
+            richTextBox1.Text += "TableName = " + dt.TableName + "\n";
             richTextBox1.Text += "欄位名稱 : ";
-            for (i = 0; i < C; i++)
+            for (int i = 0; i < C; i++)
             {
                 richTextBox1.Text += dt.Columns[i] + "\t";
             }
             richTextBox1.Text += "\n";
 
             richTextBox1.Text += "內容\n";
-            for (j = 0; j < R; j++)
+            for (int j = 0; j < R; j++)
             {
-                for (i = 0; i < C; i++)
+                for (int i = 0; i < C; i++)
                 {
-                    richTextBox1.Text += dt.Rows[j].ItemArray[i] + "\t";
+                    richTextBox1.Text += dt.Rows[j].ItemArray[i];
+                    if (i == (C - 1))
+                        richTextBox1.Text += "\n";
+                    else
+                        richTextBox1.Text += "\t";
                 }
-                richTextBox1.Text += "\n";
             }
-            richTextBox1.Text += "\n";
         }
     }
 }
