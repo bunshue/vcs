@@ -13,16 +13,10 @@ namespace CarryOutMultiFacility
 {
     public partial class CarryOutMultiFacility : Form
     {
-        //#region 宣告的變數
-
-        //初始化一個數據庫連接字串
-        //static string connectionString = "Data Source=.;DataBase=db_02;integrated security=sspi";
-        static string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
-
-        SqlConnection conn = new SqlConnection(connectionString);//初始化一個數據庫連接對像
-        SqlDataAdapter Adapter;//宣告一個數據讀取器
-        DataSet dataSet = new DataSet();//初始化一個數據集
-        //#endregion
+        static string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+        SqlConnection cn = new SqlConnection(cnstr);//初始化一個數據庫連接對像
+        SqlDataAdapter da;//宣告一個數據讀取器
+        DataSet ds = new DataSet();//初始化一個數據集
 
         public CarryOutMultiFacility()
         {
@@ -39,16 +33,16 @@ namespace CarryOutMultiFacility
             excision.Enabled = true;//設定「刪除」按鈕為可用狀態
             try
             {
-                if (conn.State == ConnectionState.Closed)//當數據庫連接處於關閉狀態時
+                if (cn.State == ConnectionState.Closed)//當數據庫連接處於關閉狀態時
                 {
-                    conn.Open();//打開數據庫連接
+                    cn.Open();//打開數據庫連接
                 }
-                dataSet.Clear();//清空數據集中原有內容
+                ds.Clear();//清空數據集中原有內容
                 string selectString = "select 產品編號,產品名稱,產品說明 from tb_WidgetApply";//定義SQL查詢語句
-                Adapter = new SqlDataAdapter(selectString, conn);//初始化數據讀取器
-                Adapter.Fill(dataSet, "WidgetApply");//向數據集中填充數據
-                DataTable dataTable = dataSet.Tables["WidgetApply"];//初始化一個數據表
-                dataGridView1.DataSource = dataTable.DefaultView;//設定DataGridView控制元件的數據源
+                da = new SqlDataAdapter(selectString, cn);//初始化數據讀取器
+                da.Fill(ds, "WidgetApply");//向數據集中填充數據
+                DataTable dt = ds.Tables["WidgetApply"];//初始化一個數據表
+                dataGridView1.DataSource = dt.DefaultView;//設定DataGridView控制元件的數據源
             }
             catch (SqlException ex)//擷取異常
             {
@@ -56,7 +50,7 @@ namespace CarryOutMultiFacility
             }
             finally
             {
-                conn.Close();//關閉數據庫連接
+                cn.Close();//關閉數據庫連接
             }
         }
 
@@ -85,11 +79,11 @@ namespace CarryOutMultiFacility
 
         private void ExcisionData(int id)
         {
-            conn.Open();//打開數據庫連接
+            cn.Open();//打開數據庫連接
             string DeleteString = "delete tb_WidgetApply where 產品編號=" + id.ToString();//初始化刪除數據的字段
-            SqlCommand DeleteCommand = new SqlCommand(DeleteString, conn);//初始化執行SQL語句的對象
+            SqlCommand DeleteCommand = new SqlCommand(DeleteString, cn);//初始化執行SQL語句的對象
             DeleteCommand.ExecuteNonQuery();//執行SQL語句
-            conn.Close();//關閉數據庫連接
+            cn.Close();//關閉數據庫連接
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

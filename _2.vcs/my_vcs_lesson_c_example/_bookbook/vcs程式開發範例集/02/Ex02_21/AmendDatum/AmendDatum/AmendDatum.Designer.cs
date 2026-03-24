@@ -30,6 +30,7 @@ namespace AmendDatum
         {
             this.listView1 = new System.Windows.Forms.ListView();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.treeView1 = new System.Windows.Forms.TreeView();
             this.SuspendLayout();
             // 
             // listView1
@@ -38,7 +39,7 @@ namespace AmendDatum
             this.listView1.LabelEdit = true;
             this.listView1.Location = new System.Drawing.Point(5, 5);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(352, 401);
+            this.listView1.Size = new System.Drawing.Size(352, 286);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -46,17 +47,26 @@ namespace AmendDatum
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(387, 5);
+            this.richTextBox1.Location = new System.Drawing.Point(372, 5);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(601, 401);
+            this.richTextBox1.Size = new System.Drawing.Size(773, 598);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
+            // 
+            // treeView1
+            // 
+            this.treeView1.Location = new System.Drawing.Point(5, 297);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(352, 306);
+            this.treeView1.TabIndex = 2;
+            this.treeView1.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeView1_AfterLabelEdit);
             // 
             // AmendDatum
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1005, 427);
+            this.ClientSize = new System.Drawing.Size(1157, 615);
+            this.Controls.Add(this.treeView1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.listView1);
             this.Name = "AmendDatum";
@@ -70,6 +80,7 @@ namespace AmendDatum
 
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.TreeView treeView1;
     }
 }
 

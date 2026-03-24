@@ -44,6 +44,10 @@ namespace vcs_ListView1
             listView1.MouseMove += new MouseEventHandler(listView1_MouseMove);
             listView1.MouseClick += new MouseEventHandler(listView1_MouseClick);
 
+            //允許使用者修改listView的資料
+            listView1.LabelEdit = true;  // 允許使用者修改listView的資料
+            listView1.AfterLabelEdit += new LabelEditEventHandler(listView1_AfterLabelEdit);
+
             listView1.Size = new Size(600, 600);
             richTextBox1.Size = new Size(300, 600);
 
@@ -99,9 +103,16 @@ namespace vcs_ListView1
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            listView1.Clear();
+            richTextBox1.Clear();
+            flag_check_score_done = 0;
+        }
+
         private void listView1_MouseClick(object sender, MouseEventArgs e)
         {
-            richTextBox1.Text += "aaaa\n";
+            richTextBox1.Text += "listView1_MouseClick\n";
             listView1.SelectedItems[0].ForeColor = Color.Red;//設置當前選擇項為紅色
         }
 
@@ -159,11 +170,10 @@ namespace vcs_ListView1
             lb_main_mesg0.Text = "第 " + R.ToString() + " 列, 第 " + C.ToString() + " 欄, (不含欄位, 從0起算)";
         }
 
-        private void bt_clear_Click(object sender, EventArgs e)
+        private void listView1_AfterLabelEdit(object sender, LabelEditEventArgs e)
         {
-            listView1.Clear();
-            richTextBox1.Clear();
-            flag_check_score_done = 0;
+            //只能修改第1欄
+            richTextBox1.Text += "你修改第 1 欄 第 " + e.Item.ToString() + " 列的資料為 : " + e.Label + "\n";
         }
 
         private void button0_Click(object sender, EventArgs e)

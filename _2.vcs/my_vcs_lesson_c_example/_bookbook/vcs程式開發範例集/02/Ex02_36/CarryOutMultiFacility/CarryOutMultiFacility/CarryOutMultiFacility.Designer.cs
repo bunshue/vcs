@@ -33,6 +33,7 @@ namespace CarryOutMultiFacility
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.excision = new System.Windows.Forms.Button();
             this.print = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -91,11 +92,20 @@ namespace CarryOutMultiFacility
             this.print.UseVisualStyleBackColor = true;
             this.print.Click += new System.EventHandler(this.print_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(558, 12);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(434, 463);
+            this.richTextBox1.TabIndex = 2;
+            this.richTextBox1.Text = "";
+            // 
             // CarryOutMultiFacility
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(727, 487);
+            this.ClientSize = new System.Drawing.Size(1004, 487);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "CarryOutMultiFacility";
@@ -114,6 +124,7 @@ namespace CarryOutMultiFacility
         private System.Windows.Forms.Button excision;
         private System.Windows.Forms.Button print;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
