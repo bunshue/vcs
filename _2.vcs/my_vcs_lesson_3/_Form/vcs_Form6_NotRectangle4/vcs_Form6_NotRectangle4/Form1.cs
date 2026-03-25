@@ -32,51 +32,12 @@ namespace vcs_Form6_NotRectangle4
             //string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_png\ladybug.png"; //128X128
             string filename = @"../../matlab.png";  //圖很大 900X800, 後面要改成Zoom
             this.BackgroundImage = Bitmap.FromFile(filename);
-
             this.BackgroundImageLayout = ImageLayout.Zoom;
 
             this.FormBorderStyle = FormBorderStyle.None;
             this.TransparencyKey = Color.FromArgb(240, 240, 240);   //指名要變成透明的顏色
             //this.TransparencyKey = Color.White;   //指名要變成透明的顏色
             //全圖的指明顏色部分 都會變成透明可穿透 不只邊緣部分
-
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.WinForm_MouseDown);
-            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.WinForm_MouseUp);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.WinForm_MouseMove);
-        }
-
-        private Point mouseOffset; //記錄鼠標指針的坐標
-        private bool flag_mouse_down = false;
-        private void WinForm_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            int xOffset;
-            int yOffset;
-            if (e.Button == MouseButtons.Left)
-            {
-                xOffset = -e.X;
-                yOffset = -e.Y;
-                mouseOffset = new Point(xOffset, yOffset);
-                flag_mouse_down = true;
-            }
-        }
-
-        private void WinForm_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            if (flag_mouse_down == true)
-            {
-                Point mousePos = Control.MousePosition;
-                mousePos.Offset(mouseOffset.X, mouseOffset.Y);
-                Location = mousePos;
-            }
-        }
-
-        private void WinForm_MouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                flag_mouse_down = false;
-            }
         }
     }
 }
-

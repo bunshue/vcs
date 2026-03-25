@@ -48,7 +48,7 @@ namespace vcs_test_all_00_Usually
         public VideoCaptureDevice Cam = null;
         //WebCam SP
 
-        //移動無邊框窗體 ST
+        //移動無邊框窗體1 ST
         [DllImport("user32.dll")]
         public static extern bool ReleaseCapture();
         [DllImport("user32.dll")]
@@ -56,7 +56,32 @@ namespace vcs_test_all_00_Usually
         public const int WM_SYSCOMMAND = 0x0112;
         public const int SC_MOVE = 0xF010;
         public const int HTCAPTION = 0x0002;
-        //移動無邊框窗體 SP
+        //移動無邊框窗體1 SP
+
+        //移動無邊框窗體2 ST
+        private const int WM_NCHITTEST = 0x84;
+        private const int HTCLIENT = 0x1;
+        //private const int HTCAPTION = 0x2;
+
+        protected override void WndProc(ref Message m)
+        {
+            switch (m.Msg)
+            {
+                case WM_NCHITTEST:
+                    base.WndProc(ref m);
+                    if ((int)m.Result == HTCLIENT)
+                        m.Result = (IntPtr)HTCAPTION;
+                    return;
+                    break;
+            }
+            base.WndProc(ref m);
+        }
+        //移動無邊框窗體2 SP
+
+
+        //移動無邊框窗體3 ST
+        Point mouseOffset3;  // 移動無邊框窗體用
+        //移動無邊框窗體3 SP
 
         private const int S_OK = 0;     //system return OK
         private const int S_FALSE = 1;     //system return FALSE
@@ -116,6 +141,12 @@ namespace vcs_test_all_00_Usually
             pictureBox1.Image = Image.FromStream(fs);
             fs.Close();
             */
+
+            //移動無邊框窗體4 ST
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.WinForm_MouseDown);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.WinForm_MouseUp);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.WinForm_MouseMove);
+            //移動無邊框窗體4 SP
         }
 
         void show_item_location()
@@ -151,12 +182,20 @@ namespace vcs_test_all_00_Usually
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            button20.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 0);
+            button20.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 1 + 40);
 
-            label1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            label2.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 30);
-            label3.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 60);
-            lb_main_mesg1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 90);
+            label1a.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            label1b.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 25);
+            label1c.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 50);
+            label1d.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 75);
+            label1a.Text = "移動無邊框窗體1/5, 使用MouseDown";
+            label1b.Text = "移動無邊框窗體2, 最簡易";
+            label1c.Text = "移動無邊框窗體3, 使用MouseDown-Move-Up";
+            label1d.Text = "移動無邊框窗體4, 使用MouseDown-Move-Up";
+
+            label2.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 110);
+            label3.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 140);
+            lb_main_mesg1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 170);
 
             pictureBox1.Size = new Size(400, 450);
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 3);
@@ -258,13 +297,42 @@ namespace vcs_test_all_00_Usually
             pictureBox1.Image = bitmap1;
         }
 
-        //移動無邊框窗體 ST
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
+            //移動無邊框窗體1 ST
             ReleaseCapture();
             SendMessage(this.Handle, WM_SYSCOMMAND, SC_MOVE + HTCAPTION, 0);
+            //移動無邊框窗體1 SP
+
+            //移動無邊框窗體3 ST
+            mouseOffset3 = new Point(e.X, e.Y);
+            //移動無邊框窗體3 SP
+
+            //移動無邊框窗體5 ST
+            const int WM_NCLBUTTONDOWN = 0xA1;
+            const int HT_CAPTION = 0x2;
+            this.Capture = false;
+            Message msg = Message.Create(this.Handle, WM_NCLBUTTONDOWN, (IntPtr)HT_CAPTION, IntPtr.Zero);
+            WndProc(ref msg);
+            //移動無邊框窗體5 SP
         }
-        //移動無邊框窗體 SP
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            //移動無邊框窗體3 ST
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Left += e.X - mouseOffset3.X;
+                this.Top += e.Y - mouseOffset3.Y;
+            }
+            //移動無邊框窗體3 SP
+
+        }
+
+        private void Form1_MouseUp(object sender, MouseEventArgs e)
+        {
+
+        }
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -689,7 +757,45 @@ namespace vcs_test_all_00_Usually
             //richTextBox1.Text += "dx, dy : (" + dx.ToString() + ", " + dy.ToString() + ")\n";
             pbox.Location = new Point(pbox.Location.X + dx, pbox.Location.Y + dy);
         }
+
         //建立無邊框移動之pictureBox SP
+
+        //移動無邊框窗體4 ST
+        private Point mouseOffset4; //記錄鼠標指針的坐標
+        private bool flag_mouse_down = false;
+        private void WinForm_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            int xOffset;
+            int yOffset;
+            if (e.Button == MouseButtons.Left)
+            {
+                xOffset = -e.X;
+                yOffset = -e.Y;
+                mouseOffset4 = new Point(xOffset, yOffset);
+                flag_mouse_down = true;
+            }
+        }
+
+        private void WinForm_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if (flag_mouse_down == true)
+            {
+                Point mousePos = Control.MousePosition;
+                mousePos.Offset(mouseOffset4.X, mouseOffset4.Y);
+                Location = mousePos;
+            }
+        }
+
+        private void WinForm_MouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                flag_mouse_down = false;
+            }
+        }
+
+        //移動無邊框窗體4 SP
+
     }
 
     //3Form1之外

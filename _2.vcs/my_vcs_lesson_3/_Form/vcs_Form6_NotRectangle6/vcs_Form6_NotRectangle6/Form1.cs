@@ -38,13 +38,9 @@ namespace vcs_Form6_NotRectangle6
             float dtheta = (float)(2 * Math.PI / 10);
             for (int i = 0; i < 10; i += 2)
             {
-                pts[i] = new PointF(
-                    (float)(cx + r1 * Math.Cos(theta)),
-                    (float)(cy + r1 * Math.Sin(theta)));
+                pts[i] = new PointF((float)(cx + r1 * Math.Cos(theta)), (float)(cy + r1 * Math.Sin(theta)));
                 theta += dtheta;
-                pts[i + 1] = new PointF(
-                    (float)(cx + r2 * Math.Cos(theta)),
-                    (float)(cy + r2 * Math.Sin(theta)));
+                pts[i + 1] = new PointF((float)(cx + r2 * Math.Cos(theta)), (float)(cy + r2 * Math.Sin(theta)));
                 theta += dtheta;
             }
 
@@ -57,7 +53,6 @@ namespace vcs_Form6_NotRectangle6
 
             // Restrict the form to the region.
             this.Region = form_region;
-
         }
 
         private void bt_exit_Click(object sender, EventArgs e)
@@ -66,4 +61,3 @@ namespace vcs_Form6_NotRectangle6
         }
     }
 }
-

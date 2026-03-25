@@ -33,4 +33,3 @@ namespace vcs_Form6_NotRectangle3
         }
     }
 }
-

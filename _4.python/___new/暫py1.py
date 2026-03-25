@@ -2906,9 +2906,8 @@ MyDictionary
 
 csv檔 => 字典 = > 資料庫
 
-資料庫增刪改查搜尋
+資料庫 增查改刪
 
-增刪查改	CDRU
 CRUD 增查改刪
 
 CRUD (新增:Create , 讀取:Read, 更新: Update, 刪除:Delete)
@@ -2917,13 +2916,12 @@ CRUD (新增:Create , 讀取:Read, 更新: Update, 刪除:Delete)
 改	更新:Update	PUT
 刪	刪除:Delete
 
-增刪查改（英語：CRUD）
+CRUD 增查改刪
 增加（Create，意為「建立」）
-刪除（Delete）
 查詢（Read，意為「讀取」）
 改正（Update，意為「更新」）
-在電腦程式語言中是一連串常見的動作行為
-而其行為通常是為了針對某個特定資源所作出的舉動（例如：建立資料、讀取資料等）
+刪除（Delete）
+
 
 莫煩 python
 https://mofanpy.com/

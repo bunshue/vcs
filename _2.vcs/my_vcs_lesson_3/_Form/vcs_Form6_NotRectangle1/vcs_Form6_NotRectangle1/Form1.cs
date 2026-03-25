@@ -7,12 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-
 //製作不規則形狀表單 將部分顏色設置為透明
-
 //1. 要拉一個比圖示還要大的表單, 在 Form1_Load 設置表單屬性
 //2. 直接貼上 OnPaint 部分(重寫窗體的 OnPaint 方法)
-
 
 namespace vcs_Form6_NotRectangle1
 {
@@ -33,10 +30,8 @@ namespace vcs_Form6_NotRectangle1
         protected override void OnPaint(PaintEventArgs e)
         {
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\banner_ims.png";
-            Bitmap bitmap1;    //聲明一個System.Drawing.Bitmap類的對象bitmap1
 
-            bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             bitmap1.MakeTransparent(Color.Red);     //使用默認的透明顏色進行透明設置
             bitmap1.MakeTransparent(Color.Pink);    //使用默認的透明顏色進行透明設置
             bitmap1.MakeTransparent(Color.Blue);    //使用默認的透明顏色進行透明設置
@@ -45,4 +40,3 @@ namespace vcs_Form6_NotRectangle1
         }
     }
 }
-
