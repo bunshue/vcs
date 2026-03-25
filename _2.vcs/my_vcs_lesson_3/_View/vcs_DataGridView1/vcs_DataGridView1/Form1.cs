@@ -86,6 +86,7 @@ namespace vcs_DataGridView1
 
             dataGridView1.Size = new Size(800, 320);
             dataGridView1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            bt_info.Location = new Point(dataGridView1.Location.X + dataGridView1.Size.Width - bt_info.Size.Width, dataGridView1.Location.Y + dataGridView1.Size.Height - bt_info.Size.Height);
 
             richTextBox1.Size = new Size(800, 320);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 5);
@@ -111,6 +112,12 @@ namespace vcs_DataGridView1
             //clear
             //dataGridView1.DataSource = null;//設定DGV的資料來源為無, 即清除
             //dataGridView1.Invalidate();
+        }
+
+        private void bt_info_Click(object sender, EventArgs e)
+        {
+            //顯示DGV內容
+            show_DataGridView_content(dataGridView1);
         }
 
         private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -323,10 +330,123 @@ namespace vcs_DataGridView1
 
         private void button4_Click(object sender, EventArgs e)
         {
+            Load_DataGridView_Data1();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            Load_DataGridView_Data2();
+        }
+
+
+        void Load_DataGridView_Data1()
+        {
+            //設定DGV
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.ColumnCount = 4;
+            dataGridView1.Columns[0].Name = "Item";
+            dataGridView1.Columns[0].Width = 100;//設置欄位寬度
+            dataGridView1.Columns[1].Name = "PriceEach";
+            dataGridView1.Columns[1].Width = 100;//設置欄位寬度
+            dataGridView1.Columns[2].Name = "Quantity";
+            dataGridView1.Columns[2].Width = 100;//設置欄位寬度
+            dataGridView1.Columns[3].Name = "Total";
+            dataGridView1.Columns[3].Width = 100;//設置欄位寬度
+
+            // Make some data items.
+            dataGridView1.Rows.Add(new object[] { "Pencils, dozen", 1.24m, 4 });
+            dataGridView1.Rows.Add(new object[] { "Paper, ream", 3.75m, 3 });
+            dataGridView1.Rows.Add(new object[] { "Cookies, box", 2.17m, 12 });
+            dataGridView1.Rows.Add(new object[] { "Notebook", 1.95m, 2 });
+            dataGridView1.Rows.Add(new object[] { "Pencil sharpener", 12.95m, 1 });
+            dataGridView1.Rows.Add(new object[] { "Paper clips, 100", 0.75m, 1 });
+
+            // Define a column style at run time.
+            DataGridViewCellStyle cell_style = new DataGridViewCellStyle();
+            cell_style.BackColor = Color.LightGreen;
+            cell_style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            cell_style.Format = "C2";
+            dataGridView1.Columns[3].DefaultCellStyle = cell_style;
+
+            // Calculate totals.
+            CalculateTotals();
+        }
+
+        // Calculate the total costs and highlight totals greater than $9.99.
+        private void CalculateTotals()
+        {
+            // Make a style for values greater than $9.99.
+            DataGridViewCellStyle highlight_style = new DataGridViewCellStyle();
+            highlight_style.ForeColor = Color.Red;
+            highlight_style.BackColor = Color.Yellow;
+            highlight_style.Font = new Font(dataGridView1.Font, FontStyle.Bold);
+
+            // Calculate the total costs.
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                // Calculate total cost.
+                decimal total_cost = (decimal)row.Cells["PriceEach"].Value * (int)row.Cells["Quantity"].Value;
+
+                // Display the value.
+                row.Cells["Total"].Value = total_cost;
+
+                // Highlight the cell if the vcalue is big.
+                if (total_cost > 9.99m)
+                {
+                    row.Cells["Total"].Style = highlight_style;
+                }
+            }
+        }
+
+        void Load_DataGridView_Data2()
+        {
+            //設定DGV
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.ColumnCount = 4;
+            dataGridView1.Columns[0].Name = "Item";
+            dataGridView1.Columns[0].Width = 100;//設置欄位寬度
+            dataGridView1.Columns[1].Name = "PriceEach";
+            dataGridView1.Columns[1].Width = 100;//設置欄位寬度
+            dataGridView1.Columns[2].Name = "Quantity";
+            dataGridView1.Columns[2].Width = 100;//設置欄位寬度
+            dataGridView1.Columns[3].Name = "Total";
+            dataGridView1.Columns[3].Width = 100;//設置欄位寬度
+
+            // Make some data items.
+            OrderItem[] order_items = 
+            {
+                new OrderItem("Pencils, dozen", 1.24m, 4),
+                new OrderItem("Cookies, box", 2.17m, 1),
+                new OrderItem("Notebook", 1.95m, 2),
+                new OrderItem("Paper, ream", 3.75m, 3),
+                new OrderItem("Pencil sharpener", 12.95m, 1),
+                new OrderItem("Paper clips, 100", 0.75m, 1),
+            };
+
+            // Add the items to the DataGridView.
+            AddOrderItems(order_items);
+
+            // Define a column style at run time.
+            DataGridViewCellStyle cell_style = new DataGridViewCellStyle();
+            cell_style.BackColor = Color.LightGreen;
+            cell_style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            cell_style.Format = "C2";
+            dataGridView1.Columns[3].DefaultCellStyle = cell_style;
+        }
+
+        // Add the items to the DataGridView.
+        private void AddOrderItems(OrderItem[] order_items)
+        {
+            foreach (OrderItem item in order_items)
+            {
+                dataGridView1.Rows.Add(new object[]
+                {
+                    item.Description,item.UnitPrice,item.Quantity,item.TotalCost
+                }
+                );
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -606,8 +726,6 @@ namespace vcs_DataGridView1
 
         private void button23_Click(object sender, EventArgs e)
         {
-            //顯示DGV內容
-            show_DataGridView_content(dataGridView1);
         }
 
         private void button24_Click(object sender, EventArgs e)
@@ -692,6 +810,22 @@ namespace vcs_DataGridView1
                         richTextBox1.Text += "\t";
                 }
             }
+        }
+    }
+
+    public class OrderItem
+    {
+        public string Description;
+        public int Quantity;
+        public decimal UnitPrice, TotalCost;
+        public OrderItem(string new_description, decimal new_unitprice, int new_quantity)
+        {
+            Description = new_description;
+            UnitPrice = new_unitprice;
+            Quantity = new_quantity;
+
+            // Calculate total.
+            TotalCost = UnitPrice * Quantity;
         }
     }
 }

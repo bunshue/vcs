@@ -13,7 +13,6 @@ namespace vcs_DataGridView2
     {
         private Button addNewRowButton = new Button();
         private Button deleteRowButton = new Button();
-        private Button infoDataGridView = new Button();
         private Button clearDataGridView = new Button();
 
         public Form1()
@@ -34,17 +33,12 @@ namespace vcs_DataGridView2
             deleteRowButton.Location = new Point(110, 10);
             deleteRowButton.Click += new EventHandler(deleteRowButton_Click);
 
-            infoDataGridView.Text = "Info";
-            infoDataGridView.Location = new Point(210, 10);
-            infoDataGridView.Click += new EventHandler(infoDataGridView_Click);
-
             clearDataGridView.Text = "Clear";
-            clearDataGridView.Location = new Point(310, 10);
+            clearDataGridView.Location = new Point(210, 10);
             clearDataGridView.Click += new EventHandler(clearDataGridView_Click);
 
             this.Controls.Add(addNewRowButton);
             this.Controls.Add(deleteRowButton);
-            this.Controls.Add(infoDataGridView);
             this.Controls.Add(clearDataGridView);
         }
 
@@ -82,11 +76,6 @@ namespace vcs_DataGridView2
             {
                 this.dataGridView1.Rows.RemoveAt(this.dataGridView1.SelectedRows[0].Index);
             }
-        }
-
-        private void infoDataGridView_Click(object sender, EventArgs e)
-        {
-            print_dataGridView_data(dataGridView1);
         }
 
         private void clearDataGridView_Click(object sender, EventArgs e)
@@ -145,28 +134,6 @@ namespace vcs_DataGridView2
             dataGridView1.Columns[2].DisplayIndex = 0;
             dataGridView1.Columns[3].DisplayIndex = 1;
             dataGridView1.Columns[4].DisplayIndex = 2;
-        }
-
-        void print_dataGridView_data(DataGridView dgv)
-        {
-            int rows = dgv.RowCount;
-            int cols = dgv.ColumnCount;
-            richTextBox1.Text += "ROWS = " + rows.ToString() + "\n";
-            richTextBox1.Text += "COLS = " + cols.ToString() + "\n";
-            richTextBox1.Text += "Content:\n";
-
-            for (int r = 0; r < rows; r++)
-            {
-                richTextBox1.Text += "r = " + r.ToString() + "\t";
-                for (int c = 0; c < cols; c++)
-                {
-                    //richTextBox1.Text += dataGridView1[c, r].Value + "\t";
-                    DataGridViewCell dgvCell = dgv[c, r];
-                    richTextBox1.Text += dgvCell.Value + "\t";
-                }
-                richTextBox1.Text += "\n";
-            }
-            richTextBox1.Text += "\n";
         }
     }
 }
