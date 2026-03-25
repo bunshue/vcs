@@ -109,9 +109,9 @@ namespace vcs_Draw_Transform1
             this.Size = new Size(1600, 940);
             this.Text = "vcs_Draw_Transform1";
 
-            //設定執行後的表單起始位置
+            //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point((1920 - this.Size.Width) / 2, (1080 - this.Size.Height) / 2);
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -708,61 +708,6 @@ namespace vcs_Draw_Transform1
 
         private void button7_Click(object sender, EventArgs e)
         {
-            reset_pictureBox();
-
-            // 使用矩陣物件
-
-            Rectangle rect = new Rectangle(0, 0, 200, 200);
-
-            // 原圖
-            g.DrawRectangle(Pens.Red, rect);
-
-            // 使用矩陣物件做轉換
-            float m11 = 1.2f;  // x軸縮放1.2倍
-            float m12 = 0.7f;  // y軸歪曲0.7倍
-            float m21 = 0.3f;  // x軸歪曲0.3倍
-            float m22 = 1.8f;  // y軸縮放1.8倍
-            float mdx = 0f;  // x軸平移
-            float mdy = 0f;  // y軸平移
-            // 轉置矩陣 mtx, 直接設定Matrix參數
-            Matrix mtx = new Matrix(m11, m12, m21, m22, mdx, mdy);
-            g.Transform = mtx;  // 設定仿射矩陣, 矩陣轉置
-
-            g.DrawRectangle(Pens.Green, rect);
-
-            pictureBox1.Image = bitmap1;
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            m11 = 2.0f;  // x軸縮放2.0倍
-            m12 = 0f;  // y軸歪曲0倍
-            m21 = 0f;  // x軸歪曲0倍
-            m22 = 2.0f;  // y軸縮放2.0倍
-            mdx = 0f;  // x軸平移
-            mdy = 0f;  // y軸平移
-            // 建立一個矩陣物件
-            // 轉置矩陣 mtx, 直接設定Matrix參數
-            Matrix mtx1 = new Matrix(m11, m12, m21, m22, mdx, mdy);  // 設定仿射矩陣, 矩陣轉置
-            //mtx1.TransformPoints(Var_PointS); //不會用 TransformPoints
-            richTextBox1.Text += mtx1.ToString() + "\n";
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //測試Matrix
-
-            // 建立一個矩陣物件, 轉置矩陣 mtx
-            Matrix mtx2 = new Matrix();
-            int theta = 0;
-            int Cx = 100;
-            int Cy = 100;
-            for (int i = theta; i < 180 + theta; i += 45)
-            {
-                mtx2.Reset();
-                mtx2.Rotate(i, MatrixOrder.Append);
-                mtx2.Translate(Cx, Cy, MatrixOrder.Append);
-            }
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
         }
 
         // Return a rotation matrix to rotate around a point.
@@ -815,7 +760,7 @@ namespace vcs_Draw_Transform1
                 g.DrawLine(p, 0, i, W, i);
             }
 
-            Rectangle srcRect = new Rectangle(0, 0, W, H);   //擷取部分區域
+            Rectangle src_rect = new Rectangle(0, 0, W, H);   //擷取部分區域
             GraphicsUnit units = GraphicsUnit.Pixel;
             Image img = Image.FromFile(filename);
 
@@ -838,7 +783,7 @@ namespace vcs_Draw_Transform1
 
             g.TranslateTransform(x_st, y_st);
             g.RotateTransform(angle);//旋轉指定的角度
-            g.DrawImage(img, destRect, srcRect, units);
+            g.DrawImage(img, destRect, src_rect, units);
             g.ResetTransform();//恢復坐標軸坐標 回 0 度
 
             x_st = 350 * 1;
@@ -851,7 +796,7 @@ namespace vcs_Draw_Transform1
 
             g.TranslateTransform(x_st, y_st);
             g.RotateTransform(angle);//旋轉指定的角度
-            g.DrawImage(img, destRect, srcRect, units);
+            g.DrawImage(img, destRect, src_rect, units);
             g.ResetTransform();//恢復坐標軸坐標 回 0 度
 
             x_st = 350 * 2;
@@ -864,11 +809,10 @@ namespace vcs_Draw_Transform1
 
             g.TranslateTransform(x_st, y_st);
             g.RotateTransform(angle);//旋轉指定的角度
-            g.DrawImage(img, destRect, srcRect, units);
+            g.DrawImage(img, destRect, src_rect, units);
             g.ResetTransform();//恢復坐標軸坐標 回 0 度
 
             pictureBox1.Image = bitmap1;
-
         }
 
         //連續旋轉一張圖片 ST
@@ -944,7 +888,7 @@ namespace vcs_Draw_Transform1
             Point[] dst_points1 = new Point[]
             {
                 new Point(dx, dy),       // 左上
-                new Point(dx + dw, dy),  // 右上
+                new Point(dx + dw, dy - 50),  // 右上
                 new Point(dx - 50, dy + dh),  // 左下
             };
 
@@ -984,7 +928,7 @@ namespace vcs_Draw_Transform1
             int sh = H;
             Rectangle src_rect = new Rectangle(sx, sy, sw, sh);
 
-            //原圖
+            // 原圖
             g.DrawImage(bmp, src_rect);
             g.DrawRectangle(new Pen(Color.Blue, 10), src_rect);
 
@@ -997,7 +941,7 @@ namespace vcs_Draw_Transform1
             Point[] dst_points1 = new Point[]
             {
                 new Point(dx, dy),       // 左上
-                new Point(dx + dw, dy),  // 右上
+                new Point(dx + dw, dy - 50),  // 右上
                 new Point(dx - 50, dy + dh),  // 左下
             };
 
@@ -1006,12 +950,20 @@ namespace vcs_Draw_Transform1
             // 轉置矩陣 mtx, 矩形範圍 轉 平行四邊形範圍
             //Matrix mtx = new Matrix(src_rect, dst_points1);
 
+            // 使用矩陣物件做轉換
+            //float m11 = 1.2f;  // x軸縮放1.2倍
+            //float m12 = 0.7f;  // y軸歪曲0.7倍
+            //float m21 = 0.3f;  // x軸歪曲0.3倍
+            //float m22 = 1.8f;  // y軸縮放1.8倍
+            //float mdx = 100f;  // x軸平移
+            //float mdy = 100f;  // y軸平移
             float m11 = 1.0f;  // x軸縮放1.0倍
             float m12 = 0f;  // y軸歪曲0倍
             float m21 = -0.5f;  // x軸歪曲-0.5倍
             float m22 = 1.5f;  // y軸縮放1.5倍
             float mdx = 205f;  // x軸平移
             float mdy = 205f;  // y軸平移
+
             // 轉置矩陣 mtx, 直接設定Matrix參數
             Matrix mtx = new Matrix(m11, m12, m21, m22, mdx, mdy);
             g.Transform = mtx;  // 設定仿射矩陣, 矩陣轉置
@@ -1032,6 +984,7 @@ namespace vcs_Draw_Transform1
             show_matrix(matrix);
 
             float angle = 10;
+            richTextBox1.Text += "angle = " + angle.ToString() + "\n";
             matrix.Rotate(angle);
             show_matrix(matrix);
 
@@ -1077,6 +1030,26 @@ namespace vcs_Draw_Transform1
             }
             SizeF new_size = new SizeF(num2 - num, num4 - num3);
             richTextBox1.Text += "new_size : " + new_size.ToSize() + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //測試Matrix
+
+            // 建立一個矩陣物件, 轉置矩陣 mtx
+            Matrix mtx2 = new Matrix();
+            show_matrix(mtx2);
+
+            int theta = 0;
+            int Cx = 100;
+            int Cy = 100;
+            for (int i = theta; i < 180 + theta; i += 45)
+            {
+                richTextBox1.Text += "theta = " + i.ToString() + "\n";
+                mtx2.Reset();
+                mtx2.Rotate(i, MatrixOrder.Append);
+                mtx2.Translate(Cx, Cy, MatrixOrder.Append);
+                show_matrix(mtx2);
+            }
         }
 
         private void button16_Click(object sender, EventArgs e)
