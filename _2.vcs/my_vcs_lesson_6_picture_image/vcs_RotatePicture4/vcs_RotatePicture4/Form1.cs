@@ -115,10 +115,22 @@ namespace vcs_RotatePicture4
             ymax = ymin;
             foreach (PointF point in points)
             {
-                if (xmin > point.X) xmin = point.X;
-                if (xmax < point.X) xmax = point.X;
-                if (ymin > point.Y) ymin = point.Y;
-                if (ymax < point.Y) ymax = point.Y;
+                if (xmin > point.X)
+                {
+                    xmin = point.X;
+                }
+                if (xmax < point.X)
+                {
+                    xmax = point.X;
+                }
+                if (ymin > point.Y)
+                {
+                    ymin = point.Y;
+                }
+                if (ymax < point.Y)
+                {
+                    ymax = point.Y;
+                }
             }
         }
 
@@ -135,11 +147,11 @@ namespace vcs_RotatePicture4
         private bool DragInProgress = false;
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            // Do nothing if there's no image loaded.
             if (bitmap1 == null)
             {
                 return;
             }
+
             DragInProgress = true;
 
             // Get the initial angle from horizontal to the
@@ -151,7 +163,6 @@ namespace vcs_RotatePicture4
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            // Do nothing if there's no drag in progress.
             if (!DragInProgress)
             {
                 return;
@@ -190,4 +201,3 @@ namespace vcs_RotatePicture4
         }
     }
 }
-

@@ -597,7 +597,7 @@ namespace vcs_Draw_Brush
         }
 
         // Map from world coordinates to device coordinates.
-        private void SetTransformation(Graphics gr, RectangleF world_rect, RectangleF device_rect, bool invert_x, bool invert_y)
+        private void SetTransformation(Graphics g, RectangleF world_rect, RectangleF device_rect, bool invert_x, bool invert_y)
         {
             PointF[] device_points =
             {
@@ -619,7 +619,7 @@ namespace vcs_Draw_Brush
                 device_points[2].Y = device_rect.Top;
             }
 
-            gr.Transform = new Matrix(world_rect, device_points);
+            g.Transform = new Matrix(world_rect, device_points);  // 設定仿射矩陣, 矩陣轉置, 只能 矩形範圍 轉 平行四邊形範圍
         }
 
 

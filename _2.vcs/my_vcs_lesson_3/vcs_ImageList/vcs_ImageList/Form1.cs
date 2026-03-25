@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Collections;//for Hashtable
+
 namespace vcs_ImageList
 {
     public partial class Form1 : Form
@@ -87,6 +89,7 @@ namespace vcs_ImageList
             button2.Location = new Point(x_st + dx * 3 + 40, y_st + dy * 0 + 40 * 3);
             button3.Location = new Point(x_st + dx * 3 + 40, y_st + dy * 0 + 40 * 4);
             button4.Location = new Point(x_st + dx * 3 + 40, y_st + dy * 0 + 40 * 5);
+            button5.Location = new Point(x_st + dx * 3 + 40, y_st + dy * 0 + 40 * 6);
 
             richTextBox1.Size = new Size(300, 680);
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
@@ -156,6 +159,30 @@ namespace vcs_ImageList
             {
                 index = 0;
             }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //using System.Collections;//for Hashtable
+
+            Hashtable imageList = new Hashtable();
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Image image1 = Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            Image image2 = Image.FromFile(filename2);	//Image.FromFile出來的是Image格式
+
+            string filename3 = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
+            Image image3 = Image.FromFile(filename3);	//Image.FromFile出來的是Image格式
+
+            imageList.Add(imageList.Count + 1, image1);
+            imageList.Add(imageList.Count + 1, image2);
+            imageList.Add(imageList.Count + 1, image3);
+
+            object obj = imageList[3];
+            pictureBox1.Image = (Image)obj;
+
         }
     }
 }

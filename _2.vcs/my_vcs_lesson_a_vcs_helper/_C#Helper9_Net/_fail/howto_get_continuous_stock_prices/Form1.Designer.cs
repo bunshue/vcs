@@ -97,6 +97,7 @@
             this.Controls.Add(this.txtSymbols);
             this.Name = "Form1";
             this.Text = "howto_get_continuous_stock_prices";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picGraph)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

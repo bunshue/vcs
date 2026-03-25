@@ -8,8 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
-using System.Drawing.Imaging;   //for ImageFormat, ImageLockMode, Encoder, ImageCodecInfo, ColorMatrix, ImageAttributes
-using System.Drawing.Drawing2D;  // for GraphicsPath, Matrix, MatrixOrder
+using System.Drawing.Imaging;   //for ImageFormat, ImageLockMode, Encoder, ImageCodecInfo, ImageAttributes
+using System.Drawing.Drawing2D;
 using System.Reflection;    //for Assembly
 using System.Security.Cryptography; //for HashAlgorithm
 using System.Diagnostics;   //for Process
@@ -106,84 +106,11 @@ namespace vcs_Mix03_draw_image
             richTextBox1.Text += ((Button)sender).Text + "\n";
         }
 
-        //測試矩陣旋轉 ST
-        PointF RotationMatrix(PointF pt, double theta)
-        {
-            float xx = (float)(Math.Cos(theta) * pt.X - Math.Sin(theta) * pt.Y);
-            float yy = (float)(Math.Sin(theta) * pt.X + Math.Cos(theta) * pt.Y);
-
-            return new PointF(xx, yy);
-        }
-
         private void button0_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
 
-            //測試矩陣旋轉
-            g.Clear(Color.White);
-            Pen p = new Pen(Color.Red, 10);
-            Point point1a = new Point(0, 0);
-            Point point2a = new Point(500, 0);
-            //g.DrawLine(p, point1a, point2a);
-
-            p = new Pen(Color.Green, 10);
-
-            double theta = Math.PI / 6;
-            PointF point1aa = RotationMatrix(point1a, theta);
-            PointF point2aa = RotationMatrix(point2a, theta);
-            //g.DrawLine(p, point1aa, point2aa);
-            richTextBox1.Text += "point1aa=" + point1aa + "\n";
-            richTextBox1.Text += "point2aa=" + point2aa + "\n";
-
-            PointF[] curvePoints = new PointF[8];    //一維陣列內有 8 個Point
-            for (int i = 0; i < 8; i++)
-            {
-                curvePoints[i].X = 50 * i;
-                curvePoints[i].Y = 0;
-            }
-            Pen redPen = new Pen(Color.Red, 3);
-            Pen grayPen = new Pen(Color.Gray, 10);
-            g.DrawLines(grayPen, curvePoints);   //畫直線
-            for (int i = 0; i < 8; i++)
-            {
-                curvePoints[i] = RotationMatrix(curvePoints[i], theta);
-            }
-
-            g.DrawLines(redPen, curvePoints);   //畫直線
-            for (int i = 0; i < 8; i++)
-            {
-                g.FillEllipse(Brushes.Red, curvePoints[i].X - 10, curvePoints[i].Y - 10, 20, 20);
-            }
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Bitmap bmp = new Bitmap(filename);
-            Rectangle src_area = new Rectangle(100, 100, 100, 100);//要截取的矩形區域
-            Rectangle dst_area = new Rectangle(400, 50, 100, 100);//要截取的矩形區域
-            //g.DrawImage(bmp, dst_area, src_area, GraphicsUnit.Pixel);
-            g.DrawImage(bmp, src_area, src_area, GraphicsUnit.Pixel);
-
-            int x_st = 100;
-            int y_st = 100;
-            int w = 100;
-            int h = 100;
-            for (int j = 0; j < h; j++)
-            {
-                for (int i = 0; i < w; i++)
-                {
-                    Color clr = bitmap1.GetPixel(x_st + i, y_st + j);
-                    PointF new_pt = RotationMatrix(new PointF(x_st + i, y_st + j), theta);
-                    if ((new_pt.X > 0) && (new_pt.Y > 0))
-                    {
-                        bitmap1.SetPixel((int)new_pt.X, (int)new_pt.Y, clr);
-                    }
-
-                }
-            }
-
-            pictureBox1.Image = bitmap1;
         }
-
-        //測試矩陣旋轉 SP
 
         List<String> filenames = new List<String>();
         //多層 且指明副檔名
@@ -429,56 +356,17 @@ namespace vcs_Mix03_draw_image
             show_button_text(sender);
         }
 
-        float theta = 0; // 旋轉角度
+        
 
         private void button8_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Bitmap bm = new Bitmap(filename);
-
-            theta = theta + 2;  // 旋轉角度 遞增
-
-            Graphics g = this.pictureBox1.CreateGraphics();
-
-            //畫布轉換矩陣的旋轉設定 - 在固定點自轉
-            int Cx = this.pictureBox1.ClientSize.Width / 2; // 視窗客戶區正中心點
-            int Cy = this.pictureBox1.ClientSize.Height / 2;//
-
-            g.ResetTransform(); // 畫布的矩陣 = 單位矩陣
-
-            g.TranslateTransform(-bm.Width / 2, -bm.Height / 2, MatrixOrder.Append);
-            g.RotateTransform(theta, MatrixOrder.Append);  // 乘上 旋轉矩陣
-            g.TranslateTransform(Cx, Cy, MatrixOrder.Append); // 再搬到視窗客戶區正中心點
-
-            g.DrawImage(bm, 0, 0); // 繪出圖形
 
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //using System.Collections;//for Hashtable
-
-            Hashtable imageList = new Hashtable();
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Image image1 = Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-
-            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-            Image image2 = Image.FromFile(filename2);	//Image.FromFile出來的是Image格式
-
-            string filename3 = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
-            Image image3 = Image.FromFile(filename3);	//Image.FromFile出來的是Image格式
-
-            imageList.Add(imageList.Count + 1, image1);
-            imageList.Add(imageList.Count + 1, image2);
-            imageList.Add(imageList.Count + 1, image3);
-
-            object obj = imageList[3];
-            pictureBox1.Image = (Image)obj;
         }
 
         private void button10_Click(object sender, EventArgs e)

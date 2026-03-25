@@ -136,6 +136,23 @@ namespace vcs_Draw_Transform1
             pictureBox1.Image = bitmap1;
         }
 
+        void draw_grid(Graphics g)
+        {
+            int W = this.pictureBox1.Width;
+            int H = this.pictureBox1.Height;
+            int i;
+            int j;
+
+            for (i = 0; i <= W; i += 100)
+            {
+                g.DrawLine(Pens.Gray, i, 0, i, H);
+            }
+            for (j = 0; j <= H; j += 100)
+            {
+                g.DrawLine(Pens.Gray, 0, j, W, j);
+            }
+        }
+
         //平移, 旋轉
         private void button0_Click(object sender, EventArgs e)
         {
@@ -836,13 +853,99 @@ namespace vcs_Draw_Transform1
         }
         //連續旋轉一張圖片 SP
 
+        float theta = 0; // 旋轉角度
         private void button12_Click(object sender, EventArgs e)
         {
+            //連續旋轉一張圖片
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Bitmap bm = new Bitmap(filename);
 
+            theta = theta + 2;  // 旋轉角度 遞增
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+
+            //畫布轉換矩陣的旋轉設定 - 在固定點自轉
+            int Cx = this.pictureBox1.ClientSize.Width / 2; // 視窗客戶區正中心點
+            int Cy = this.pictureBox1.ClientSize.Height / 2;//
+
+            g.ResetTransform(); // 畫布的矩陣 = 單位矩陣
+
+            g.TranslateTransform(-bm.Width / 2, -bm.Height / 2, MatrixOrder.Append);
+            g.RotateTransform(theta, MatrixOrder.Append);  // 乘上 旋轉矩陣
+            g.TranslateTransform(Cx, Cy, MatrixOrder.Append); // 再搬到視窗客戶區正中心點
+
+            g.DrawImage(bm, 0, 0); // 繪出圖形
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //轉換範例
+            reset_pictureBox();
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //來源矩形
+            float sx = -50f;
+            float sy = -50f;
+            int sw = 100;
+            int sh = 100;
+            // 原始資料範圍 rect
+            RectangleF src_rect = new RectangleF(sx, sy, sw, sh);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            g.ResetTransform();  // 重置轉換, 恢復
+
+            // 畫在原點, 只看到右下角
+            DrawFigure(g, Color.Red);
+
+            // 水平垂直放大2倍, 
+            // g.ScaleTransform(2.0f, 2.0f);  // 縮放, 水平縮放, 垂直縮放
+
+            // 原點平移, 右移, 下移
+            g.TranslateTransform(150, 50, MatrixOrder.Append);
+            DrawFigure(g, Color.Green);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            // 矩陣轉置
+
+            // 目標矩形, 平移 + 縮放
+            // 欲映射的繪圖範圍
+            float dx = 300f;
+            float dy = 50f;
+            int dw = 200;
+            int dh = 200;
+            PointF[] dst_points1 = new PointF[]
+            {
+                new PointF(dx, dy),     // 左上
+                new PointF(dx+dw, dy),  // 右上
+                new PointF(dx, dy+dh),  // 左下
+            };
+
+            // 轉置
+            // 建立一個矩陣物件
+            Matrix map_matrix = new Matrix(src_rect, dst_points1);  // 設定仿射矩陣, 矩陣轉置, 只能 矩形範圍 轉 平行四邊形範圍
+            g.Transform = map_matrix;
+            //richTextBox1.Text += map_matrix..Elements.ToString() + "\n";
+
+            DrawFigure(g, Color.Blue);
+
+
+            richTextBox1.Text += "\n\n";
+
+            richTextBox1.Text += "src_rect : " + src_rect.ToString() + "\n";
+            richTextBox1.Text += "dst_points1 : " + dst_points1.ToString() + "\n";
+
+            //richTextBox1.Text += map_matrix.Elements.Length.ToString() + "\n";
+            richTextBox1.Text += map_matrix.Elements[0].ToString() + "\n";
+            richTextBox1.Text += map_matrix.Elements[1].ToString() + "\n";
+            richTextBox1.Text += map_matrix.Elements[2].ToString() + "\n";
+            richTextBox1.Text += map_matrix.Elements[3].ToString() + "\n";
+            richTextBox1.Text += map_matrix.Elements[4].ToString() + "\n";
+            richTextBox1.Text += map_matrix.Elements[5].ToString() + "\n";
+
+
 
         }
 
@@ -873,94 +976,6 @@ namespace vcs_Draw_Transform1
 
         private void button19_Click(object sender, EventArgs e)
         {
-            g.Clear(Color.Pink);
-
-            //原始資料
-            int N = 10;
-            PointF[] pts = new PointF[N];
-            for (int i = 0; i < N; i++)
-            {
-                pts[i].X = 30 * i;
-                pts[i].Y = 30 * i;
-            }
-
-            Matrix matrix = new Matrix();
-
-            for (int i = 0; i < N; i++)
-            {
-                g.FillEllipse(Brushes.Red, pts[i].X - 15, pts[i].Y - 15, 30, 30);
-            }
-            g.DrawString("原始資料", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(470, 0));
-
-            //float angle = 45;
-            //matrix.Rotate(angle);  // 旋轉
-            //matrix.Translate(100, 100);  // 平移, 右移下移
-            //matrix.Scale(1.5f, 1.5f);  //縮放, 水平 垂直
-
-            // 使用矩陣物件做轉換
-            float m11 = 1.0f;  // x軸縮放1.0倍
-            float m12 = 0.0f;  // y軸歪曲0.0倍
-            float m21 = 0.0f;  // x軸歪曲0.0倍
-            float m22 = 1.0f;  // y軸縮放1.0倍
-            float dx = 0.0f;  // x軸平移
-            float dy = 0.0f;  // y軸平移
-            Matrix matrix2 = new Matrix(m11, m12, m21, m22, dx, dy);  // 設定仿射矩陣, 矩陣轉置, 只能 矩形範圍 轉 平行四邊形範圍
-            matrix.Multiply(matrix2);
-
-            //平移倍數
-            float scaleX = 1.0f;  // x軸平移 1.0倍
-            float scaleY = 1.0f;  // x軸平移 1.5倍
-            matrix.Scale(scaleX, scaleY);
-
-            // 剪切, 歪曲
-            float shearX = 0.0f;  // x軸歪曲0.0倍
-            float shearY = 0.0f;  // y軸歪曲0.0倍
-            matrix.Shear(shearX, shearY);
-
-            matrix.TransformPoints(pts);
-
-            for (int i = 0; i < N; i++)
-            {
-                g.FillEllipse(Brushes.Green, pts[i].X - 10, pts[i].Y - 10, 20, 20);
-            }
-
-            /*
-            matrix.Reset();
-            //matrix.Translate(100, 100);  // 平移, 右移下移
-            matrix.TransformPoints(pts);
-
-            for (int i = 0; i < N; i++)
-            {
-                g.FillEllipse(Brushes.Blue, pts[i].X - 5, pts[i].Y - 5, 10, 10);
-            }
-
-            matrix.Reset();
-            matrix.Translate(100, 100);  // 平移, 右移下移
-            matrix.TransformPoints(pts);
-
-            for (int i = 0; i < N; i++)
-            {
-                g.FillEllipse(Brushes.Lime, pts[i].X - 5, pts[i].Y - 5, 10, 10);
-            }
-            */
-            pictureBox1.Image = bitmap1;
-        }
-
-        void draw_grid(Graphics g)
-        {
-            int W = this.pictureBox1.Width;
-            int H = this.pictureBox1.Height;
-            int i;
-            int j;
-
-            for (i = 0; i <= W; i += 100)
-            {
-                g.DrawLine(Pens.Gray, i, 0, i, H);
-            }
-            for (j = 0; j <= H; j += 100)
-            {
-                g.DrawLine(Pens.Gray, 0, j, W, j);
-            }
         }
 
         float angle1 = 0;

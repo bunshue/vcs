@@ -82,11 +82,11 @@ namespace vcs_RotatePicture6
         private bool DragInProgress = false;
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            // Do nothing if there's no image loaded.
             if (OriginalBitmap == null)
             {
                 return;
             }
+
             DragInProgress = true;
 
             // Get the initial angle from horizontal to the
@@ -100,7 +100,6 @@ namespace vcs_RotatePicture6
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            // Do nothing if there's no drag in progress.
             if (!DragInProgress)
             {
                 return;

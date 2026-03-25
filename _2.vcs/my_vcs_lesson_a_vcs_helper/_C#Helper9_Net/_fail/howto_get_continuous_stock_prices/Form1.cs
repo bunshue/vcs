@@ -71,10 +71,10 @@ namespace howto_get_continuous_stock_prices
         }
 
         // Draw the graph.
-        private void DrawGraph(Graphics gr)
+        private void DrawGraph(Graphics g)
         {
-            gr.Clear(Color.White);
-            gr.SmoothingMode = SmoothingMode.AntiAlias;
+            g.Clear(Color.White);
+            g.SmoothingMode = SmoothingMode.AntiAlias;
             if (Prices == null)
             {
                 return;
@@ -107,10 +107,10 @@ namespace howto_get_continuous_stock_prices
                 new PointF(wid, hgt), 
                 new PointF(0, 0) 
             };
-            gr.Transform = new Matrix(rect, points);
+            g.Transform = new Matrix(rect, points);  // 設定仿射矩陣, 矩陣轉置, 只能 矩形範圍 轉 平行四邊形範圍
 
             // Draw the grid lines.
-            Matrix inverse = gr.Transform.Clone();
+            Matrix inverse = g.Transform.Clone();
             inverse.Invert();
             using (StringFormat string_format = new StringFormat())
             {
@@ -118,11 +118,11 @@ namespace howto_get_continuous_stock_prices
                 {
                     for (int y = 0; y <= max_price; y += 10)
                     {
-                        gr.DrawLine(thin_pen, 0, y, MaxNumPrices, y);
+                        g.DrawLine(thin_pen, 0, y, MaxNumPrices, y);
                     }
                     for (int x = 0; x < MaxNumPrices; x++)
                     {
-                        gr.DrawLine(thin_pen, x, min_price, x, min_price + 2);
+                        g.DrawLine(thin_pen, x, min_price, x, min_price + 2);
                     }
                 }
             }
@@ -135,36 +135,36 @@ namespace howto_get_continuous_stock_prices
                 using (Pen thin_pen = new Pen(clr, 0))
                 {
                     // Plot the prices.
-                    gr.DrawLines(thin_pen, Prices[i].ToArray());
+                    g.DrawLines(thin_pen, Prices[i].ToArray());
 
                     // Draw the symbol's name.
-                    DrawSymbolName(gr, Symbols[i], Prices[i][0].Y, clr);
+                    DrawSymbolName(g, Symbols[i], Prices[i][0].Y, clr);
                 }
             }
         }
 
         // Draw the text at the specified location.
-        private void DrawSymbolName(Graphics gr, string txt, float y, Color clr)
+        private void DrawSymbolName(Graphics g, string txt, float y, Color clr)
         {
             // See where the point is in PictureBox coordinates.
-            Matrix old_transformation = gr.Transform;
+            Matrix old_transformation = g.Transform;
             PointF[] pt = { new PointF(0, y) };
-            gr.Transform.TransformPoints(pt);
+            g.Transform.TransformPoints(pt);
 
             // Reset the transformation.
-            gr.ResetTransform();
+            g.ResetTransform();
 
             // Draw the text.
             using (Font small_font = new Font("Arial", 8))
             {
                 using (SolidBrush br = new SolidBrush(clr))
                 {
-                    gr.DrawString(txt, small_font, br, 0, pt[0].Y);
+                    g.DrawString(txt, small_font, br, 0, pt[0].Y);
                 }
             }
 
             // Restore the original transformation.
-            gr.Transform = old_transformation;
+            g.Transform = old_transformation;
         }
 
         // Get the latest prices and then redraw the graph.
@@ -276,6 +276,11 @@ namespace howto_get_continuous_stock_prices
                 // Return the result.
                 return result;
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

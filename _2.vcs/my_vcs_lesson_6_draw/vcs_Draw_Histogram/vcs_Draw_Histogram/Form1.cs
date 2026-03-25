@@ -332,7 +332,7 @@ namespace vcs_Draw_Histogram
                     new PointF(pic.ClientSize.Width, pic.ClientSize.Height),
                     new PointF(0, 0),
                 };
-                g.Transform = new Matrix(rect, pts);
+                g.Transform = new Matrix(rect, pts);  // 設定仿射矩陣, 矩陣轉置, 只能 矩形範圍 轉 平行四邊形範圍
 
                 // Fill the histogram.
                 for (int i = 0; i < counts.Length; i++)

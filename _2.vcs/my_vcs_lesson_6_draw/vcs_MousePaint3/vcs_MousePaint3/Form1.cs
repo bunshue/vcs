@@ -226,12 +226,11 @@ namespace vcs_MousePaint3
             this.Text = "切變矩陣 (" + shearX.ToString() + ", " + shearY.ToString() + ")";
 
             Matrix A = new Matrix(); // 轉換矩陣
-            A.Shear(shearX, shearY, MatrixOrder.Append);// shearX, shearY, MatrixOrder.Append);  // 乘上 切變矩陣
+            A.Shear(shearX, shearY, MatrixOrder.Append);  // 乘上 切變矩陣
             A.Translate(Cx, Cy, MatrixOrder.Append); // 再搬到視窗客戶區正中心點
 
             e.Graphics.Transform = A;  // 畫布的矩陣 = 矩陣 A
-            e.Graphics.DrawEllipse(Pens.Red, 0 - D, 0 - D, 2 * D, 2 * D); //畫出縮放後的圓 
-
+            e.Graphics.DrawEllipse(Pens.Red, 0 - D, 0 - D, 2 * D, 2 * D); //畫出縮放後的圓
         }
 
         private void pictureBox3_MouseDown(object sender, MouseEventArgs e)
@@ -411,7 +410,6 @@ namespace vcs_MousePaint3
         {
             theta = theta + 1; // 旋轉角度 遞增
             this.pictureBox3.Invalidate(); // 要求表單重畫
-
         }
     }
 }
