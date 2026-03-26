@@ -41,8 +41,9 @@ namespace vcs_StartupScreen2
             InitializeComponent();
 
             // 設置窗體的類型
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             StartPosition = FormStartPosition.CenterScreen;
+            
             ShowInTaskbar = false;
 
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";

@@ -45,7 +45,7 @@ namespace vcs_Form1
             //建立一個新的視窗物件
             using (Form f = new Form())
             {
-                f.FormBorderStyle = FormBorderStyle.None;//視窗無邊界
+                f.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
                 f.BackColor = Color.Yellow;//視窗背景顏色
                 f.Opacity = 0.5;//視窗透明度
                 f.Size = new Size(500, 300);
@@ -152,8 +152,9 @@ namespace vcs_Form1
             this.Text = "vcs_Form1";
 
             //最大化螢幕
-            //this.FormBorderStyle = FormBorderStyle.None;
+            //this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             //this.WindowState = FormWindowState.Maximized;
+            
             bt_exit_setup();
 
             //設定執行後的表單起始位置, 正中央
@@ -268,7 +269,7 @@ namespace vcs_Form1
                 WindowState為Maximized，視窗最大化。
                 TopMost為true，最上層。
 
-            this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             this.WindowState = FormWindowState.Maximized;
             this.TopMost = true;
             */
@@ -430,7 +431,7 @@ namespace vcs_Form1
                 flag_full_screen = true;
                 button27.Text = "恢復一般螢幕";
 
-                this.FormBorderStyle = FormBorderStyle.None;
+                this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
                 //this.WindowState = FormWindowState.Maximized;
                 this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
             }
@@ -456,10 +457,10 @@ namespace vcs_Form1
                 button28.Text = "恢復外框";
 
                 //same
-                //this.FormBorderStyle = FormBorderStyle.None;
+                //this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
 
                 //same
-                FormBorderStyle = FormBorderStyle.None;
+                FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             }
             else
             {

@@ -192,7 +192,7 @@ namespace vcs_MyPdfReader
                 flag_already_use_webbrowser = true;
             }
 
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             this.StartPosition = FormStartPosition.CenterScreen;
             this.ControlBox = false;
             this.MaximizeBox = false;

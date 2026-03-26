@@ -17,7 +17,6 @@ namespace vcs_ScreenCapture2
         private Bitmap originBmp;//用來保存原始圖像
         private Rectangle CatchRect;//用來保存截圖的矩形
 
-
         public Form2()
         {
             InitializeComponent();
@@ -27,22 +26,19 @@ namespace vcs_ScreenCapture2
         {
             ////FormBorderStyle為None,WindowState為Maximized．
 
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
-
 
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
             this.UpdateStyles();
             //以上兩句是為了設置控件樣式為雙緩沖，這可以有效減少圖片閃爍的問題，關於這個大家可以自己去搜索下
             originBmp = new Bitmap(this.BackgroundImage);//BackgroundImage為全屏圖片，我們另用變量來保存全屏圖片
 
-
             this.MouseClick += new MouseEventHandler(Form2_MouseClick);
             this.MouseDown += new MouseEventHandler(Form2_MouseDown);
             this.MouseMove += new MouseEventHandler(Form2_MouseMove);
             this.MouseUp += new MouseEventHandler(Form2_MouseUp);
             this.MouseDoubleClick += new MouseEventHandler(Form2_MouseDoubleClick);
-
         }
 
         //鼠標右鍵點擊結束截圖

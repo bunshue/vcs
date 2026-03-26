@@ -33,7 +33,8 @@ namespace vcs_LCDTest
             message += "按 上下鍵及Click 循環測試\n\n";
             message += "按 S 鍵 設定螢幕解析度\n";
             MessageBox.Show(message, "LCD螢幕壞點測試操作說明");
-            this.FormBorderStyle = FormBorderStyle.None;
+            
+            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             //this.WindowState = FormWindowState.Maximized;
             this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
             ShowColor(color);

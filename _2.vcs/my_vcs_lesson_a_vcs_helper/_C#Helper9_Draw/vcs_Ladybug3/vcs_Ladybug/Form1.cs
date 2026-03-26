@@ -37,7 +37,7 @@ namespace vcs_Ladybug
             pictureBox1.Location = new Point(0, 0);
 
             //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             //this.WindowState = FormWindowState.Maximized;
             this.Size = new Size(1920 / 2, 1080 / 2);
             richTextBox1.Visible = false;

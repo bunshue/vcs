@@ -47,7 +47,7 @@ namespace vcs_ColorPicker1
             else
                 this.Location = new System.Drawing.Point(1200, 0);  //FHD
 
-            this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
 
             if (flag_measure_8_points == false)  // 一般模式
             {

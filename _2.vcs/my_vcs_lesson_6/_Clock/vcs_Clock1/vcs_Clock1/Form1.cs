@@ -54,7 +54,7 @@ namespace vcs_Clock1
 
         void show_item_location()
         {
-            this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
 
             if (flag_debug == false)
             {

@@ -77,7 +77,7 @@ namespace vcs_ClockE
         {
             this.ClientSize = new Size(R * 2, R * 2);
 
-            this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             this.TransparencyKey = Color.White;
 
             //設定執行後的表單起始位置, 指定位置

@@ -27,7 +27,7 @@ namespace vcs_CountDown
             this.ShowInTaskbar = false;
 
             //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             //this.WindowState = FormWindowState.Maximized;
 
             //離開按鈕的寫法

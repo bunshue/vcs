@@ -81,8 +81,9 @@ namespace vcs_test_all_01_Control
             MakeButtonTransparent(button35);
 
             //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             this.WindowState = FormWindowState.Maximized;
+            
             bt_exit_setup();
 
             Opacity = 0;//指定窗體完全透明

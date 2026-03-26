@@ -118,7 +118,7 @@ namespace vcs_ShowPicture
             MinimizeBox = false;
             ShowIcon = false;
             ShowInTaskbar = false;
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             StartPosition = FormStartPosition.CenterScreen;
             if (flag_operation_mode == MODE_0)
             {

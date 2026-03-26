@@ -16,7 +16,7 @@ namespace vcs_MyToolbox
             InitializeComponent();
 
             //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             this.WindowState = FormWindowState.Maximized;
             //this.Size = new Size(1920, 1040);
             //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示

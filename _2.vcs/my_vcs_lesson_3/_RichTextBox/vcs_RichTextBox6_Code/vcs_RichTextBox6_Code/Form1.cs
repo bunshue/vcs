@@ -41,9 +41,11 @@ namespace vcs_RichTextBox6_Code
             //    from byte b in File.ReadAllBytes(Application.ExecutablePath)
             //    select Convert.ToString(b, 2).PadLeft(8, '0');
             //richTextBox1.Text = string.Join(" ", query.ToArray());
+            
             //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             this.WindowState = FormWindowState.Maximized;
+            
             bt_exit_setup();
         }
 

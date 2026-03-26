@@ -1433,7 +1433,8 @@ namespace vcs_DrawPoem
             System.Drawing.StringFormat drawFormat = new System.Drawing.StringFormat();
             drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
 
-            this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
+            
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.Location = new System.Drawing.Point(0, 0);
 
@@ -1792,7 +1793,8 @@ namespace vcs_DrawPoem
             System.Drawing.StringFormat drawFormat = new System.Drawing.StringFormat();
             drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
 
-            this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
+            
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.Location = new System.Drawing.Point(0, 0);
 

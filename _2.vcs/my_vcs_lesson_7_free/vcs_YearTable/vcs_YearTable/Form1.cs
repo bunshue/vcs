@@ -58,7 +58,7 @@ namespace vcs_YearTable
             p = new Pen(Color.Red, 3);
             sb = new SolidBrush(Color.Red);
 
-            this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             this.WindowState = FormWindowState.Normal;
             this.Size = new Size(1920, 1080);
 

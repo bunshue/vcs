@@ -78,7 +78,7 @@ namespace vcs_MyClock
             digitalDisplayControl1.DigitText = DateTime.Now.ToString("HH:mm:ss");
             lb_mesg.Text = "";
             lb_alarm_target.Text = "";
-            //this.FormBorderStyle = FormBorderStyle.None;
+            //this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             time_pause_start = DateTime.Now;
             time_pause_stop = time_pause_start;
 

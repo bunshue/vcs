@@ -243,7 +243,7 @@ namespace vcs_MyPlayer3
             }
 
             this.pictureBox1.Size = new Size(this.pictureBox1.Size.Width, mp3_player_height);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             this.StartPosition = FormStartPosition.CenterScreen;
             this.ControlBox = false;
             this.MaximizeBox = false;

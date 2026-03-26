@@ -41,7 +41,7 @@ namespace vcs_MyPlayer4
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             this.StartPosition = FormStartPosition.CenterScreen;
             this.ControlBox = false;
             this.MaximizeBox = false;
@@ -52,7 +52,6 @@ namespace vcs_MyPlayer4
             this.TopMost = true;
 
             Init_WMP();
-
         }
 
         void Init_WMP()

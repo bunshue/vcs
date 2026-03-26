@@ -165,7 +165,7 @@ namespace vcs_CheckVideoFiles
             button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
 
             //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             this.WindowState = FormWindowState.Maximized;
 
             int w = 0;

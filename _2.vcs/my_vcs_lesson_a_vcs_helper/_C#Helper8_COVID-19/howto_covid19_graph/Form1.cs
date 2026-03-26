@@ -67,8 +67,9 @@ namespace howto_covid19_graph
             pictureBox2.Image = null;
 
             //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             this.WindowState = FormWindowState.Maximized;
+            
             bt_exit_setup();
         }
 

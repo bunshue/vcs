@@ -95,7 +95,8 @@ namespace vcs_MyToolbox
 
             groupBox2.Visible = false;
 
-            this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
+            
             //離開按鈕的寫法
             bt_exit_setup();
         }

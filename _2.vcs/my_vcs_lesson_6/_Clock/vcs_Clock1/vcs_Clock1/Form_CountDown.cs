@@ -208,8 +208,9 @@ namespace vcs_Clock1
             else
             {
                 //最大化螢幕
-                this.FormBorderStyle = FormBorderStyle.None;
+                this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
                 this.WindowState = FormWindowState.Maximized;
+                
                 pictureBox1.Location = new Point(0, 0);
                 pictureBox1.Size = new Size(1920, 1080);
             }
@@ -284,8 +285,9 @@ namespace vcs_Clock1
                 EventDate = DateTime.Now + new TimeSpan(0, hh, mm, ss);    //現在時間 + 0天hh時mm分ss秒
 
                 //最大化螢幕
-                this.FormBorderStyle = FormBorderStyle.None;
+                this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
                 this.WindowState = FormWindowState.Maximized;
+                
                 pictureBox1.Location = new Point(0, 0);
                 pictureBox1.Size = new Size(1920, 1080);
                 flag_countdown_start = true;

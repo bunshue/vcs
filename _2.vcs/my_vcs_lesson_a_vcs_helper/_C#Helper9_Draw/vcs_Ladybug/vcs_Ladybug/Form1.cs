@@ -39,12 +39,9 @@ namespace vcs_Ladybug
             pictureBox2.Location = new Point(0, 0);
 
             //最大化螢幕
-            //this.FormBorderStyle = FormBorderStyle.None;
+            //this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             //this.WindowState = FormWindowState.Maximized;
-
-
         }
-
 
         //漫遊演算法 ST
         private void pictureBox2_MouseDown(object sender, MouseEventArgs e)

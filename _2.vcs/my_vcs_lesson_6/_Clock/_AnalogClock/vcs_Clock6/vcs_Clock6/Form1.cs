@@ -30,7 +30,7 @@ namespace vcs_Clock6
         // Prepare the form.
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.FormBorderStyle = FormBorderStyle.None;//設定無邊框
+            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
 
             //表單 連結 ContextMenuStrip (快捷功能表 / 右鍵選單)
             ContextMenuStrip = contextMenuStrip1;

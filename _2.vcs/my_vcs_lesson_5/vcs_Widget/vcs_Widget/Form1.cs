@@ -33,7 +33,7 @@ namespace vcs_Widget
         private void Form1_Load(object sender, EventArgs e)
         {
             //自製類似widget的桌面小玩意
-            this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             this.AutoSize = true;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;     //讓表單大小可以自動隨著圖片大小變化。
             this.TransparencyKey = SystemColors.ControlLight;   //將表單的TransparencyKey設為Control，這樣可以去掉桌面小玩意外圍多餘的部份

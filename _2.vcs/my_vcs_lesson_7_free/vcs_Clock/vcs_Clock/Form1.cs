@@ -120,7 +120,7 @@ namespace vcs_Clock
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //this.FormBorderStyle = FormBorderStyle.None;//設定無邊框
+            //this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             //this.WindowState = FormWindowState.Minimized;
             //this.ShowInTaskbar = false;
 

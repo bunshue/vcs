@@ -98,7 +98,7 @@ namespace RemoteDesktop
 
     private void mnuFull_Click(object sender, EventArgs e)
     {
-      this.FormBorderStyle = FormBorderStyle.None;
+      this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
       this.WindowState = FormWindowState.Maximized;
     }
 
@@ -160,7 +160,7 @@ namespace RemoteDesktop
             this.connected = true;
             timer1.Enabled = true;
 
-            this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             this.WindowState = FormWindowState.Maximized;
 
             this.mnuView.Visible = true;

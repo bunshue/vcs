@@ -209,7 +209,7 @@ namespace vcs_test_all_00_Usually
             this.Text = "vcs_test_all_00_Usually";
 
             //最大化螢幕
-            //this.FormBorderStyle = FormBorderStyle.None;
+            //this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             //this.WindowState = FormWindowState.Maximized;
 
             //離開按鈕的寫法

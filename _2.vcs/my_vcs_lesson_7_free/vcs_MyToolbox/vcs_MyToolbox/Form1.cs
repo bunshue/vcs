@@ -364,7 +364,7 @@ namespace vcs_MyToolbox
             this.Location = new System.Drawing.Point(1900, 100);
 
             //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             //this.WindowState = FormWindowState.Maximized;
         }
 

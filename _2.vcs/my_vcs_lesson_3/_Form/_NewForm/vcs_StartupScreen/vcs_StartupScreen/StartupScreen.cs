@@ -42,8 +42,9 @@ namespace vcs_StartupScreen
 
             // 設置窗體的類型  
             const string showInfo = "程式啟動中，請稍候...";
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             StartPosition = FormStartPosition.CenterScreen;
+            
             ShowInTaskbar = false;
             bitmap = new Bitmap(Properties.Resources.elephant);
             ClientSize = bitmap.Size;

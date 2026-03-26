@@ -88,7 +88,7 @@ namespace ImageViewer
         void show_item_location()
         {
             //最大化螢幕
-            //this.FormBorderStyle = FormBorderStyle.None;
+            //this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             //this.WindowState = FormWindowState.Maximized;
             //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
 

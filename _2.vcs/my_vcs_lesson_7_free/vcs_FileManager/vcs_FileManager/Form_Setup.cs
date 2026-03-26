@@ -44,7 +44,7 @@ namespace vcs_FileManager
         void show_item_location()
         {
             //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             //this.FormBorderStyle = FormBorderStyle.FixedSingle;
             //this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
 

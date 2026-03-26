@@ -66,7 +66,7 @@ namespace vcs_Class3
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
             //最大化螢幕
-            //this.FormBorderStyle = FormBorderStyle.None;
+            //this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             //this.WindowState = FormWindowState.Maximized;
 
             int w = 0;
