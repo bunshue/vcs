@@ -15,6 +15,9 @@ namespace ViewBoobooInDataSet
         // 資料庫連線參數, 連接字串
         string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_03_Data.mdf;Integrated Security=True;Connect Timeout=30";
 
+        int MaxValue = 0;//表示表中的記錄
+        int State = 1;//狀態記錄
+
         public Form1()
         {
             InitializeComponent();
@@ -26,6 +29,7 @@ namespace ViewBoobooInDataSet
             con.Open();
             SqlCommand com = new SqlCommand("select Count(*)from tb_01", con);
             MaxValue = (int)com.ExecuteScalar();
+            richTextBox1.Text += "MaxValue = " + MaxValue.ToString() + "\n";
             con.Close();
         }
 
@@ -48,8 +52,6 @@ namespace ViewBoobooInDataSet
             }
         }
 
-        int MaxValue = 0;//表示表中的記錄
-        int State = 1;//狀態記錄
         private void button1_Click(object sender, EventArgs e)
         {
             if (MaxValue > 0)
@@ -69,3 +71,4 @@ namespace ViewBoobooInDataSet
         }
     }
 }
+

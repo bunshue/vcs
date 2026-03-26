@@ -1233,7 +1233,8 @@ namespace vcs_SqlConnection1
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //test 1 ch17DB2
+            richTextBox1.Text += "測試 ExecuteScalar()\n";
+
             string db_filename = "ch17DB.mdf";
             // 連接字串
             string cnstr = string.Format(db_cnstr, db_filename);
@@ -1255,7 +1256,7 @@ namespace vcs_SqlConnection1
                 string sqlstr1 = "SELECT COUNT(*) FROM 員工";
                 SqlCommand cmd1 = new SqlCommand(sqlstr1, cn);
                 richTextBox1.Text += "員工資料表共 " + cmd1.ExecuteScalar().ToString() + " 筆記錄\n";
-
+                /*
                 // 查詢字串 取薪資加總
                 string sqlstr2 = "SELECT SUM(薪資) FROM 員工";
                 SqlCommand cmd2 = new SqlCommand(sqlstr2, cn);
@@ -1275,6 +1276,7 @@ namespace vcs_SqlConnection1
                 string sqlstr5 = "SELECT Min(薪資) FROM 員工";
                 SqlCommand cmd5 = new SqlCommand(sqlstr5, cn);
                 richTextBox1.Text += "最低薪為 " + cmd5.ExecuteScalar().ToString() + "\n";
+                */
             }
         }
 
@@ -1368,6 +1370,82 @@ namespace vcs_SqlConnection1
 
         private void button15_Click(object sender, EventArgs e)
         {
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+
+            richTextBox1.Text += "取得一個資料庫的所有Table名稱 1\n";
+
+            //這樣會列出所有 實際的資料表（不包含檢視表）
+
+            using (SqlConnection cn = new SqlConnection(cnstr))
+            {
+                cn.Open();
+
+                string query = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'";
+
+                using (SqlCommand cmd = new SqlCommand(query, cn))
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        richTextBox1.Text += dr["TABLE_NAME"] + "\n";
+                    }
+                }
+            }
+
+            //3030
+            richTextBox1.Text += "取得一個資料庫的所有Table名稱 2\n";
+
+            using (SqlConnection cn = new SqlConnection(cnstr))
+            {
+                cn.Open();
+
+                string query = "SELECT name FROM sys.tables";
+                //string query = "SELECT name FROM sysdatabases";
+                //string query = "SELECT NAME FROM master.dbo.sysdatabases";
+                //string query = "select count(*) from master.dbo.sysdatabases where name='db_02'";
+                //string query = "SELECT * FROM 員工", cn);//執行一條SQL查詢語句
+                //string query = "SELECT * FROM master..sysdatabases WHERE name = N'ch17DB'", cn);//執行一條SQL查詢語句
+
+
+                //這個方式直接從 SQL Server 的系統目錄取出所有表格名稱
+
+                using (SqlCommand cmd = new SqlCommand(query, cn))
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        for (int i = 0; i < dr.FieldCount; i++)
+                        {
+                            richTextBox1.Text += dr[i].ToString();
+                            if (i == (dr.FieldCount - 1))
+                            {
+                                richTextBox1.Text += "\n";
+                            }
+                            else
+                            {
+                                richTextBox1.Text += "\t";
+                            }
+                        }
+                    }
+                }
+            }
+
+            return;
+
+            //3030
+            richTextBox1.Text += "取得一個資料庫的所有Table名稱 3\n";
+
+            using (SqlConnection conn = new SqlConnection(cnstr))
+            {
+                conn.Open();
+                var schema = conn.GetSchema("Tables");
+                foreach (System.Data.DataRow row in schema.Rows)
+                {
+                    //Console.WriteLine(row["TABLE_NAME"]);
+                    richTextBox1.Text += row["TABLE_NAME"] + "\n";
+                }
+            }
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -2052,3 +2130,21 @@ cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\c
 
 
 
+
+
+//            string sqlstr = "select job_id as 工作编号,job_desc as 工作次序,min_lvl as 最低水平,max_lvl as 最高水平 from jobs";
+
+
+/*
+            SqlConnection cn = new SqlConnection(cnstr);//初始化數據庫連接對像
+            string sqlstr = "select au_id as 使用者編號,au_lname as 姓名,phone as 電話號碼 from authors";//初始化SQL查詢語句
+            SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);//初始化一個數據讀取器
+            DataSet ds = new DataSet();//初始化一個數據集
+            da.Fill(ds, "authors");//向數據集中填充內容
+            dataGridView1.DataSource = ds.Tables["authors"].DefaultView;//為DataGridView控制元件填充數據源
+            for (int i = 0; i < dataGridView1.Columns.Count; i++)//循環搜尋DataGridView控制元件中的每一列
+            {
+                //禁用DataGridView控制元件列表頭自動排序功能
+                dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;//設定每一列的排序類型為不排序
+            }
+*/

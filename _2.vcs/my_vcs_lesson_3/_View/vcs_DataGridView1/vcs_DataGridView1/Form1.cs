@@ -811,6 +811,59 @@ namespace vcs_DataGridView1
                 }
             }
         }
+
+        //繪製單元格事件
+        private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            /*
+            richTextBox1.Text += "A";
+            // 对第1列相同单元格进行合并     
+            if (e.ColumnIndex == 2 && e.RowIndex != -1 || e.ColumnIndex == 3 && e.RowIndex != -1)
+            {
+                richTextBox1.Text += "B";
+                //Brush datagridBrush = new SolidBrush(dataGridView1.GridColor);
+                //SolidBrush groupLineBrush = new SolidBrush(e.CellStyle.BackColor);
+                Brush datagridBrush = new SolidBrush(Color.Red);
+                SolidBrush groupLineBrush = new SolidBrush(Color.Red);
+                using (Pen datagridLinePen = new Pen(datagridBrush))
+                {
+                    // 清除单元格
+                    e.Graphics.FillRectangle(groupLineBrush, e.CellBounds);
+                    if (e.RowIndex < dataGridView1.Rows.Count - 1 && dataGridView1.Rows[e.RowIndex + 1].Cells[e.ColumnIndex].Value != null && dataGridView1.Rows[e.RowIndex + 1].Cells[e.ColumnIndex].Value.ToString() != e.Value.ToString())
+                    {
+                        //绘制底边线
+                        e.Graphics.DrawLine(datagridLinePen, e.CellBounds.Left, e.CellBounds.Bottom - 1, e.CellBounds.Right, e.CellBounds.Bottom - 1);
+                        // 画右边线
+                        e.Graphics.DrawLine(datagridLinePen, e.CellBounds.Right - 1, e.CellBounds.Top, e.CellBounds.Right - 1, e.CellBounds.Bottom);
+                    }
+                    else
+                    {
+                        // 画右边线
+                        e.Graphics.DrawLine(datagridLinePen, e.CellBounds.Right - 1, e.CellBounds.Top, e.CellBounds.Right - 1, e.CellBounds.Bottom);
+                    }
+                    //对最后一条记录只画底边线
+                    if (e.RowIndex == dataGridView1.Rows.Count - 1)
+                    {
+                        //绘制底边线
+                        e.Graphics.DrawLine(datagridLinePen, e.CellBounds.Left, e.CellBounds.Bottom - 1, e.CellBounds.Right, e.CellBounds.Bottom - 1);
+                    }
+                    // 填写单元格内容，相同的内容的单元格只填写第一个                        
+                    if (e.Value != null)
+                    {
+                        if (e.RowIndex > 0 && dataGridView1.Rows[e.RowIndex - 1].Cells[e.ColumnIndex].Value.ToString() == e.Value.ToString())
+                        {
+                        }
+                        else
+                        {
+                            //绘制单元格内容
+                            e.Graphics.DrawString(e.Value.ToString(), e.CellStyle.Font, Brushes.Black, e.CellBounds.X + 2, e.CellBounds.Y + 5, StringFormat.GenericDefault);
+                        }
+                    }
+                    e.Handled = true;
+                }
+            }
+            */
+        }
     }
 
     public class OrderItem
