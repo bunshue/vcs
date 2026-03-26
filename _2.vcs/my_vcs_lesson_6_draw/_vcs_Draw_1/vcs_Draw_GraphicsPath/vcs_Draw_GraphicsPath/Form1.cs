@@ -37,12 +37,6 @@ namespace vcs_Draw_GraphicsPath
             g = pictureBox1.CreateGraphics();
             g.Clear(SystemColors.ControlLight);
             p = new Pen(Color.Red, 5);     //default pen
-
-            //繪製圓角表單
-            this.BackColor = Color.Pink;
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.Region = null;
-            SetWindowRegion();
         }
 
         void show_item_location()
@@ -53,8 +47,8 @@ namespace vcs_Draw_GraphicsPath
             int dy;
 
             //button
-            x_st = 50;
-            y_st = 50;
+            x_st = 10;
+            y_st = 10;
             dx = 200 + 10;
             dy = 60 + 10;
 
@@ -90,7 +84,7 @@ namespace vcs_Draw_GraphicsPath
             richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0 + 30);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1680, 900);
+            this.Size = new Size(1600, 820);
             this.Text = "vcs_Draw_GraphicsPath";
 
             //設定執行後的表單起始位置, 正中央
@@ -749,18 +743,6 @@ namespace vcs_Draw_GraphicsPath
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //用GP製作非矩形視窗
-
-            //先製作非矩形的GP
-            GraphicsPath gp = new GraphicsPath();
-            gp.AddPie(0, 0, this.Width, this.Height * 2, 190, 160);
-
-            //將此GP設定給表單的Region參數
-            //Region的用法
-            Region region = new Region(gp);
-            this.Region = region;
-            //this.Region = new Region(gp); //same
-            this.FormBorderStyle = FormBorderStyle.None;
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -999,36 +981,6 @@ namespace vcs_Draw_GraphicsPath
 
         private void Form1_Resize(object sender, EventArgs e)
         {
-            this.Region = null;
-            SetWindowRegion();
-        }
-
-        public void SetWindowRegion()
-        {
-            Rectangle rect = new Rectangle(0, 22, this.Width, this.Height - 22);
-
-            GraphicsPath FormPath = GetRoundedRectPath(rect, 30);
-            this.Region = new Region(FormPath);
-        }
-
-        private GraphicsPath GetRoundedRectPath(Rectangle rect, int radius)
-        {
-            int diameter = radius;
-            Rectangle arcRect = new Rectangle(rect.Location, new Size(diameter, diameter));
-            GraphicsPath path = new GraphicsPath();
-            // 左上
-            path.AddArc(arcRect, 180, 90);
-            // 右上
-            arcRect.X = rect.Right - diameter;
-            path.AddArc(arcRect, 270, 90);
-            // 右下
-            arcRect.Y = rect.Bottom - diameter;
-            path.AddArc(arcRect, 0, 90);
-            // 左下
-            arcRect.X = rect.Left;
-            path.AddArc(arcRect, 90, 90);
-            path.CloseFigure();
-            return path;
         }
 
         private void cb_grid_CheckedChanged(object sender, EventArgs e)
