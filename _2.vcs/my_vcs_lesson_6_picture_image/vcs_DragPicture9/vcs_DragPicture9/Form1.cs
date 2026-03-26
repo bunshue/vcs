@@ -36,7 +36,7 @@ namespace vcs_DragPicture9
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //設定執行後的表單起始位置
+            //設定執行後的表單起始位置, 指定位置
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new System.Drawing.Point(0, 0);
 

@@ -114,7 +114,7 @@ namespace vcs_Draw9_Example5a_vcsh
 
         void show_item_location()
         {
-            //設定執行後的表單起始位置
+            //設定執行後的表單起始位置, 指定位置
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new System.Drawing.Point(0, 0);
 

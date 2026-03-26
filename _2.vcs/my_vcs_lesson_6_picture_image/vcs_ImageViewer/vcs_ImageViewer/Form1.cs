@@ -115,7 +115,7 @@ namespace vcs_ImageViewer
             //this.WindowState = FormWindowState.Maximized;
             //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
 
-            //設定執行後的表單起始位置
+            //設定執行後的表單起始位置, 指定位置
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(0, 0);
 

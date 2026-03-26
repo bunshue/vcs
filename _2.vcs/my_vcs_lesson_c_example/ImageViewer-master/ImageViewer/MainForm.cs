@@ -92,13 +92,13 @@ namespace ImageViewer
             //this.WindowState = FormWindowState.Maximized;
             //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
 
-            //設定執行後的表單起始位置
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point(0, 0);
+            pictureBox1.Size = new Size(1920 * 7 / 10, 500);
 
             this.Size = new Size(1920 * 9 / 10, 900);
 
-            pictureBox1.Size = new Size(1920 * 7 / 10, 500);
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
 
             int x_st = this.Width - 250;
             int y_st = 50;

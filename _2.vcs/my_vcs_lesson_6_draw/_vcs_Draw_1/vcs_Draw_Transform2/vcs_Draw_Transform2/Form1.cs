@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.Drawing.Drawing2D; // for HatchBrush, Matrix, MatrixOrder
 
-namespace vcs_Draw_Transform3
+namespace vcs_Draw_Transform2
 {
     public partial class Form1 : Form
     {
@@ -72,7 +72,7 @@ namespace vcs_Draw_Transform3
             label5.Text = "";
 
             this.Size = new Size(1740, 940);
-            this.Text = "vcs_Draw_Transform3";
+            this.Text = "vcs_Draw_Transform2";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
@@ -87,17 +87,18 @@ namespace vcs_Draw_Transform3
 
         private void pictureBox0_Paint(object sender, PaintEventArgs e)
         {
+            //視窗客戶區正中心點
             int Cx = this.pictureBox0.ClientSize.Width / 2;
-            int Cy = this.pictureBox0.ClientSize.Height / 2;//
+            int Cy = this.pictureBox0.ClientSize.Height / 2;
 
             e.Graphics.ResetTransform(); // 畫布的矩陣 = 單位矩陣
 
-            Matrix A = new Matrix(); // 轉換矩陣
-            A.Translate(-bitmap0.Width / 2, -bitmap0.Height / 2, MatrixOrder.Append);  // 先將圖形的中心點平移到原點
-            A.Rotate(theta0, MatrixOrder.Append);  // 乘上 旋轉矩陣
-            A.Translate(Cx, Cy, MatrixOrder.Append); // 再搬到視窗客戶區正中心點
+            Matrix mtx = new Matrix(); // 轉換矩陣
+            mtx.Translate(-bitmap0.Width / 2, -bitmap0.Height / 2, MatrixOrder.Append);  // 先將圖形的中心點平移到原點
+            mtx.Rotate(theta0, MatrixOrder.Append);  // 乘上 旋轉矩陣
+            mtx.Translate(Cx, Cy, MatrixOrder.Append); // 再搬到視窗客戶區正中心點
 
-            e.Graphics.Transform = A;
+            e.Graphics.Transform = mtx;
             e.Graphics.DrawImage(bitmap0, 0, 0); // 繪出圖形
         }
 
@@ -111,8 +112,9 @@ namespace vcs_Draw_Transform3
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-            int Cx = this.pictureBox1.ClientSize.Width / 2; // 視窗客戶區正中心點
-            int Cy = this.pictureBox1.ClientSize.Height / 2;//
+            //視窗客戶區正中心點
+            int Cx = this.pictureBox1.ClientSize.Width / 2;
+            int Cy = this.pictureBox1.ClientSize.Height / 2;
             int D = 20; // 球本身的半徑
             int D2 = 100; // 球旋轉的半徑
 
@@ -120,14 +122,13 @@ namespace vcs_Draw_Transform3
             e.Graphics.FillEllipse(Brushes.Gray, Cx - D, Cy - D, 2 * D, 2 * D); //畫出正中心圓點 
             e.Graphics.DrawEllipse(Pens.Silver, Cx - D2, Cy - D2, 2 * D2, 2 * D2); //畫出軌道
 
-            Matrix A = new Matrix(); // 轉換矩陣
-            A.Translate(D2, 0, MatrixOrder.Append);  // 先平移到 旋轉的半徑邊緣
-            A.Rotate(theta1, MatrixOrder.Append);  // 乘上 旋轉矩陣
-            A.Translate(Cx, Cy, MatrixOrder.Append); // 再搬到視窗客戶區正中心點
+            Matrix mtx = new Matrix(); // 轉換矩陣
+            mtx.Translate(D2, 0, MatrixOrder.Append);  // 先平移到 旋轉的半徑邊緣
+            mtx.Rotate(theta1, MatrixOrder.Append);  // 乘上 旋轉矩陣
+            mtx.Translate(Cx, Cy, MatrixOrder.Append); // 再搬到視窗客戶區正中心點
 
-            e.Graphics.Transform = A;  // 畫布的矩陣 = 矩陣 A
+            e.Graphics.Transform = mtx;  // 畫布的矩陣 = 矩陣 A
             e.Graphics.FillEllipse(myBrush1, 0 - D, 0 - D, 2 * D, 2 * D); //畫出旋轉的圓點 
-
         }
 
         private void bt_plus_Click(object sender, EventArgs e)
@@ -150,6 +151,7 @@ namespace vcs_Draw_Transform3
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
+            //視窗客戶區正中心點
             int Cx = this.pictureBox2.ClientSize.Width / 2;
             int Cy = this.pictureBox2.ClientSize.Height / 2;
             int D = 100; // 球本身的半徑
@@ -157,11 +159,11 @@ namespace vcs_Draw_Transform3
             e.Graphics.ResetTransform(); // 畫布的矩陣 = 單位矩陣
             e.Graphics.DrawEllipse(Pens.Silver, Cx - D, Cy - D, 2 * D, 2 * D); //畫出開始的圓
 
-            Matrix A = new Matrix(); // 轉換矩陣
-            A.Scale(xScale, 1, MatrixOrder.Append);  // 乘上 縮放矩陣
-            A.Translate(Cx, Cy, MatrixOrder.Append); // 再搬到視窗客戶區正中心點
+            Matrix mtx = new Matrix(); // 轉換矩陣
+            mtx.Scale(xScale, 1, MatrixOrder.Append);  // 乘上 縮放矩陣
+            mtx.Translate(Cx, Cy, MatrixOrder.Append); // 再搬到視窗客戶區正中心點
 
-            e.Graphics.Transform = A;  // 畫布的矩陣 = 矩陣 A
+            e.Graphics.Transform = mtx;  // 畫布的矩陣 = 矩陣 A
             e.Graphics.DrawEllipse(Pens.Red, 0 - D, 0 - D, 2 * D, 2 * D); //畫出縮放後的圓 
         }
     }

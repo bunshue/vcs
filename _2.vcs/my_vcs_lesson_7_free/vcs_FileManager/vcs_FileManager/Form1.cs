@@ -194,7 +194,8 @@ namespace vcs_FileManager
 
             //設定執行後的表單大小
             this.Size = new Size(1920, 1040);
-            //設定執行後的表單起始位置
+            
+            //設定執行後的表單起始位置, 指定位置
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new System.Drawing.Point(0, 0);
 

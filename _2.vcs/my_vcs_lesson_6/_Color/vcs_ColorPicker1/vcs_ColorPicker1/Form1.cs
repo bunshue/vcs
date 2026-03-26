@@ -40,7 +40,7 @@ namespace vcs_ColorPicker1
 
             this.TopMost = true;
 
-            //設定執行後的表單起始位置
+            //設定執行後的表單起始位置, 指定位置
             this.StartPosition = FormStartPosition.Manual;
             if (Screen.PrimaryScreen.Bounds.Width < 1920)
                 this.Location = new System.Drawing.Point(850, 0);  //SD

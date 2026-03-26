@@ -32,17 +32,14 @@ namespace vcs_SaveImage
             lb_main_mesg.Text = "";
 
             //this.FormBorderStyle = FormBorderStyle.None;
-            //設定執行後的表單起始位置
+            
+            //設定執行後的表單起始位置, 指定位置
             this.StartPosition = FormStartPosition.Manual;
-
-            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
-            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+            this.Location = new System.Drawing.Point(Screen.PrimaryScreen.Bounds.Width - this.Width - 50, Screen.PrimaryScreen.Bounds.Height - this.Height - 400);
+            this.BackColor = Color.Gold;
 
             bt_open_folder.BackgroundImage = Properties.Resources.folder_open;
             bt_open_folder.BackgroundImageLayout = ImageLayout.Zoom;
-
-            this.Location = new System.Drawing.Point(screenWidth - this.Width - 50, screenHeight - this.Height - 400);
-            this.BackColor = Color.Gold;
 
             if (Directory.Exists(foldername) == false)     //確認資料夾是否存在
             {

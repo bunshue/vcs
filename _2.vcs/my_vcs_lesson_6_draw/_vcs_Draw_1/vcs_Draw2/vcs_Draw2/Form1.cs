@@ -83,9 +83,9 @@ namespace vcs_Draw2
             this.Size = new Size(1600, 750);
             this.Text = "vcs_Draw2";
 
-            //設定執行後的表單起始位置
+            //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point((1920 - this.Size.Width) / 2, (1080 - this.Size.Height) / 2);
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -1096,3 +1096,23 @@ namespace vcs_Draw2
         }
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+

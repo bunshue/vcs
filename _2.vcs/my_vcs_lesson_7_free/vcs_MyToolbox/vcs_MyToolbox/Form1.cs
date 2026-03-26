@@ -359,7 +359,7 @@ namespace vcs_MyToolbox
             //int H = Screen.PrimaryScreen.Bounds.Height;
             //this.Size = new Size(W / 4, H * 4 / 5);
 
-            //設定執行後的表單起始位置
+            //設定執行後的表單起始位置, 指定位置
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new System.Drawing.Point(1900, 100);
 

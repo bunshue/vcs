@@ -283,13 +283,10 @@ namespace vcs_RegisterHotKey
 
             this.Size = new Size(300, 300);
             this.FormBorderStyle = FormBorderStyle.None;
-            //設定執行後的表單起始位置
+            
+            //設定執行後的表單起始位置, 指定位置
             this.StartPosition = FormStartPosition.Manual;
-
-            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
-            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
-
-            this.Location = new Point(screenWidth - this.Width - 50, screenHeight - this.Height - 50);
+            this.Location = new Point(Screen.PrimaryScreen.Bounds.Width - this.Width - 50, Screen.PrimaryScreen.Bounds.Height - this.Height - 50);
 
             bt_exit_setup();
         }

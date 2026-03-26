@@ -41,7 +41,7 @@ namespace vcs_PLC_Communication1
             this.Size = new Size(PLC_PANEL_WIDTH + BORDER * 4, PLC_PANEL_HEIGHT + groupBox1.Height + BORDER * 6);
             groupBox1.Location = new Point(BORDER, PLC_PANEL_HEIGHT + BORDER * 1);
 
-            //設定執行後的表單起始位置
+            //設定執行後的表單起始位置, 指定位置
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(10, 10);
 

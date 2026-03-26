@@ -80,7 +80,7 @@ namespace vcs_ClockE
             this.FormBorderStyle = FormBorderStyle.None;
             this.TransparencyKey = Color.White;
 
-            //設定執行後的表單起始位置
+            //設定執行後的表單起始位置, 指定位置
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(0, 0);
             this.TopMost = true;

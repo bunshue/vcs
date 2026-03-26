@@ -109,9 +109,9 @@ namespace vcs_Draw6_String4
             //this.Size = new Size(1700, 960);
             this.Text = "vcs_Draw6_String4";
 
-            //設定執行後的表單起始位置
+            //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point((1920 - this.Size.Width) / 2, (1080 - this.Size.Height) / 2);
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void setup_banner_profile(object sender, EventArgs e)

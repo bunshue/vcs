@@ -1710,7 +1710,7 @@ namespace vcs_DrawPoem
 
             if (flag_release_mode == true)
             {
-                //設定執行後的表單起始位置
+                //設定執行後的表單起始位置, 指定位置
                 this.StartPosition = FormStartPosition.Manual;
                 if (align_direction == '0')
                 {   //靠右置中
@@ -1751,7 +1751,7 @@ namespace vcs_DrawPoem
             {
                 //pictureBox1.Location = new System.Drawing.Point(0 + flag_right_left_cnt * move_step, (this.Size.Height - H) / 2 + flag_down_up_cnt * move_step);
                 pictureBox1.Location = new System.Drawing.Point(0 + flag_right_left_cnt * move_step, 0 + flag_down_up_cnt * move_step);
-                //設定執行後的表單起始位置
+                //設定執行後的表單起始位置, 指定位置
                 this.StartPosition = FormStartPosition.Manual;
                 this.Location = new System.Drawing.Point(0, 0);
                 richTextBox1.Text += "目前W = " + W.ToString() + " H = " + H.ToString() + "\n";
@@ -1975,7 +1975,7 @@ namespace vcs_DrawPoem
 
             if (flag_release_mode == true)
             {
-                //設定執行後的表單起始位置
+                //設定執行後的表單起始位置, 指定位置
                 this.StartPosition = FormStartPosition.Manual;
                 if (align_direction == '0')
                 {   //靠右置中
@@ -2007,7 +2007,7 @@ namespace vcs_DrawPoem
             else
             {
                 pictureBox1.Location = new System.Drawing.Point(0 + flag_right_left_cnt * move_step, (this.Size.Height - H) / 2 + flag_down_up_cnt * move_step);
-                //設定執行後的表單起始位置
+                //設定執行後的表單起始位置, 指定位置
                 this.StartPosition = FormStartPosition.Manual;
                 this.Location = new System.Drawing.Point(0, 0);
             }

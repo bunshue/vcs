@@ -70,7 +70,7 @@ namespace vcs_Clock1
             int ScreenWidth = Screen.PrimaryScreen.WorkingArea.Width;
             int ScreenHeight = Screen.PrimaryScreen.WorkingArea.Height;
 
-            //設定執行後的表單起始位置
+            //設定執行後的表單起始位置, 指定位置
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(ScreenWidth - this.Width, ScreenHeight - this.Height);
         }

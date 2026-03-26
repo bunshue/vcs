@@ -28,7 +28,7 @@ namespace vcs_Class3
 
         void show_item_location()
         {
-            //設定執行後的表單起始位置
+            //設定執行後的表單起始位置, 指定位置
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(0, 0);
 
