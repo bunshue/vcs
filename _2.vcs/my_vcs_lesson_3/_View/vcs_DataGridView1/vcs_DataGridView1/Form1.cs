@@ -773,6 +773,7 @@ namespace vcs_DataGridView1
                 for (int c = 0; c < C; c++)
                 {
                     //richTextBox1.Text += dataGridView1[c, r].Value + "\t";
+                    //dataGridView1.Rows[r].Cells[c].Style.BackColor = Color.Red; 改變背景色
                     DataGridViewCell dgvCell = dgv[c, r];
                     richTextBox1.Text += dgvCell.Value;
                     if (c == (C - 1))
@@ -815,6 +816,55 @@ namespace vcs_DataGridView1
         //繪製單元格事件
         private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
+            richTextBox1.Text += "------------------------------\n";  // 30個
+            //richTextBox1.Text += "欄數 : " + dataGridView1.Columns.Count.ToString() + "\t";
+            //richTextBox1.Text += "列數 : " + dataGridView1.Rows.Count.ToString() + ", 包含標題列\n";
+            richTextBox1.Text += "列 : " + e.RowIndex.ToString() + "\t欄 : " + e.ColumnIndex.ToString() + "\n";
+            //richTextBox1.Text += "CellBounds : " + e.CellBounds.ToString() + "\n";
+            //richTextBox1.Text += "CellStyle : " + e.CellStyle.ToString() + "\n";
+            //richTextBox1.Text += "CellStyle.Font : " + e.CellStyle.Font.ToString() + "\n";
+            richTextBox1.Text += "CellStyle.BackColor : " + e.CellStyle.BackColor.ToString() + "\n";
+
+            if (e.Value != null)
+            {
+                richTextBox1.Text += "Value : " + e.Value.ToString() + "\n";
+                if (e.Value.ToString() == "48")
+                {
+                    e.CellStyle.BackColor = Color.Lime;
+                }
+            }
+
+            //richTextBox1.Text += "Value2 : " + dataGridView1.Rows[e.RowIndex - 1].Cells[e.ColumnIndex - 1].Value.ToString() + "\n";
+
+            /*
+            dataGridView1.Rows[e.RowIndex + 1].Cells[e.ColumnIndex].Value
+            dataGridView1.Rows[e.RowIndex + 1].Cells[e.ColumnIndex].Value.ToString()
+            dataGridView1.Rows[e.RowIndex - 1].Cells[e.ColumnIndex].Value.ToString()
+            */
+
+            /* 印出DGV的內容
+            int R = dataGridView1.RowCount;
+            int C = dataGridView1.ColumnCount;
+            richTextBox1.Text += "欄數 : " + C.ToString() + "\n";
+            richTextBox1.Text += "列數 : " + R.ToString() + " (包含標題)\n";
+            richTextBox1.Text += "內容 :\n";
+
+            for (int r = 0; r < (R - 1); r++)
+            {
+                richTextBox1.Text += "第" + (r + 1).ToString() + "筆 :\t";
+                for (int c = 0; c < C; c++)
+                {
+                    //richTextBox1.Text += "R = " + r.ToString() + ", C = " + c.ToString() + "\n";
+                    richTextBox1.Text += dataGridView1.Rows[r].Cells[c].Value.ToString();
+                    if (c == (C - 1))
+                        richTextBox1.Text += "\n";
+                    else
+                        richTextBox1.Text += "\t";
+                }
+            }
+            */
+
+
             /*
             richTextBox1.Text += "A";
             // 对第1列相同单元格进行合并     
@@ -882,3 +932,22 @@ namespace vcs_DataGridView1
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+ */
+
+

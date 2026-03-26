@@ -109,14 +109,83 @@ namespace vcs_SqlConnection1
             richTextBox1.Clear();
         }
 
+        int select = 0;
         private void button0_Click(object sender, EventArgs e)
         {
-            //讀取資料庫 至 DGV, 要先知道資料庫檔案(.mdf)和表單名稱(tb_Employee)
+            //讀取資料庫 至 DGV, 要先知道資料庫檔案(.mdf)和表單名稱(table_name)和查詢條件
+
 
             // 連接字串
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
             // 查詢字串
             string sqlstr = "SELECT * FROM tb_Employee";
+            string db_filename = "ch18DB.mdf";
+
+            if (select == 0)
+            {
+                richTextBox1.Text += "第 0 種\n";
+            }
+            else if (select == 1)
+            {
+                richTextBox1.Text += "第 1 種\n";
+                // 連接字串
+                cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+                // 查詢字串
+                sqlstr = string.Format("SELECT * FROM tb_Grade");
+            }
+            else if (select == 2)
+            {
+                richTextBox1.Text += "第 2 種\n";
+                // 連接字串
+                cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+                // 查詢字串, 查询第10到第20名的数据
+                sqlstr = string.Format(@"SELECT TOP 10 * FROM (SELECT TOP 20 * FROM tb_Grade ORDER BY 总分 DESC) AS st ORDER BY 总分 ASC");
+            }
+            else if (select == 3)
+            {
+                richTextBox1.Text += "第 3 種\n";
+                // 連接字串
+                cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+                // 查詢字串
+                sqlstr = string.Format("SELECT * FROM tb_Book");
+            }
+            else if (select == 4)
+            {
+                richTextBox1.Text += "第 4 種\n";
+                // 連接字串
+                cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+                // 查詢字串, 查询销售量占前50%的图书信息, 查询数据库信息
+                sqlstr = string.Format(@"SELECT TOP 50 PERCENT 书号,书名,sum(销售数量)as 合计销售数量 FROM tb_Book group by 书号,书名,作者 order by 3 desc");
+            }
+            else if (select == 5)
+            {
+                richTextBox1.Text += "第 5 種\n";
+                //員工資料
+                db_filename = "ch18DB.mdf";
+                // 連接字串
+                cnstr = string.Format(db_cnstr, db_filename);
+                // 查詢字串
+                sqlstr = "SELECT * FROM 員工";
+            }
+            else if (select == 6)
+            {
+                richTextBox1.Text += "第 6 種\n";
+                //員工資料
+                db_filename = "ch18DB.mdf";
+                // 連接字串
+                cnstr = string.Format(db_cnstr, db_filename);
+                // 查詢字串, 員工資料 排序 薪資 降冪
+                sqlstr = "SELECT * FROM 員工 ORDER BY 薪資 DESC";
+            }
+            else
+            {
+                richTextBox1.Text += "xxxxxxx\n";
+            }
+            select++;
+            if (select > 6)
+                select = 0;
+
+
 
             //讀取資料庫至DGV
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
@@ -127,104 +196,6 @@ namespace vcs_SqlConnection1
                 //da.Fill(ds, "員工");  // da將查詢的結果填充至數據集ds, 指定TableName為"員工"
                 dataGridView1.DataSource = ds.Tables[0].DefaultView;  // DGV設置數據源
                 dataGridView2.DataSource = ds.Tables[0];  // DGV設置數據源, same
-            }
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            // 連接字串
-            cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
-
-            // 查詢字串
-            sqlstr = string.Format("SELECT * FROM tb_Grade");
-
-            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
-            {
-                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
-
-                DataTable dt = new DataTable();  // 建立DT
-                da.Fill(dt);  // da將查詢的結果填充至數據集ds, 不指定TableName
-                dataGridView3.DataSource = dt;  // DGV設置數據源
-
-                richTextBox1.Text += "------------------------------\n";  // 30個
-
-                // 查詢字串
-                sqlstr = string.Format(@"SELECT TOP 10 * FROM (SELECT TOP 20 * FROM tb_Grade ORDER BY 总分 DESC) AS st ORDER BY 总分 ASC");
-
-                da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
-
-                dt = new DataTable();  // 建立DT
-                da.Fill(dt);  // da將查詢的結果填充至數據集ds, 不指定TableName
-                //查询第10到第20名的数据
-                dataGridView4.DataSource = dt;  // DGV設置數據源
-            }
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //員工資料
-            string db_filename = "ch18DB.mdf";
-            // 連接字串
-            cnstr = string.Format(db_cnstr, db_filename);
-            // 查詢字串
-            sqlstr = "SELECT * FROM 員工";
-
-            //讀取資料庫至DGV
-            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
-            {
-                //cn.ConnectionString = cnstr;
-
-                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
-                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-                da.Fill(ds, "員工");  // da將查詢的結果填充至數據集ds, 指定TableName為"員工"
-
-                // DataGridView控制項資料繫結
-                dataGridView1.DataSource = ds;  // DGV設置數據源
-                dataGridView1.DataMember = "員工";
-                lb_dgv1.Text = "員工資料";
-
-                richTextBox1.Text += "------------------------------\n";  // 30個
-
-                // 查詢字串
-                sqlstr = "SELECT * FROM 員工 ORDER BY 薪資 DESC";
-                da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
-                ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-                da.Fill(ds, "員工");  // da將查詢的結果填充至數據集ds, 指定TableName為"員工"
-
-                // DataGridView控制項資料繫結
-                dataGridView2.DataSource = ds;  // DGV設置數據源
-                dataGridView2.DataMember = "員工";
-                lb_dgv2.Text = "員工資料 排序 薪資 降冪";
-            }
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            // 查询销售量占前50%的图书信息
-            // 查询数据库信息
-
-            // 連接字串
-            cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
-            // 查詢字串
-            sqlstr = string.Format("SELECT * FROM tb_Book");
-
-            //讀取資料庫至DGV
-            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
-            {
-                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
-                DataTable dt = new DataTable();  // 建立DT
-                da.Fill(dt);  // da將查詢的結果填充至數據集ds, 不指定TableName
-                dataGridView1.DataSource = dt;//设置数据源
-
-                richTextBox1.Text += "------------------------------\n";  // 30個
-
-                // 查询销售量占前50%的图书信息
-                // 查询数据库信息
-
-                // 查詢字串
-                sqlstr = string.Format(@"SELECT TOP 50 PERCENT 书号,书名,sum(销售数量)as 合计销售数量 FROM tb_Book group by 书号,书名,作者 order by 3 desc");
-
-                da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
-                dt = new DataTable();  // 建立DT
-                da.Fill(dt);  // da將查詢的結果填充至數據集ds, 不指定TableName
-                dataGridView1.DataSource = dt;//设置数据源
             }
 
         }
@@ -241,13 +212,22 @@ namespace vcs_SqlConnection1
             //讀取資料庫
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
-                //cn.ConnectionString = cnstr;  // 連接字串
-
+                //cn.ConnectionString = cnstr;  // 連接字串, 可有可無
                 cn.Open();  // 打開資料庫連線
+
                 // 查詢字串
                 sqlstr = "SELECT * FROM tb_Employee";
                 SqlCommand cmd = new SqlCommand(sqlstr, cn);
                 SqlDataReader dr = cmd.ExecuteReader();
+
+                //讀出所有欄位資訊
+                DataTable schema = dr.GetSchemaTable();  // 建立DT
+                foreach (DataRow schema_row in schema.Rows)
+                {
+                    richTextBox1.Text += "欄位名稱 : " + schema_row.Field<string>("ColumnName") + "\t";
+                    richTextBox1.Text += "資料型態 : " + schema_row.Field<Type>("DataType").ToString() + "\n";
+                }
+
                 richTextBox1.Text += "欄數 dr.FieldCount = " + dr.FieldCount.ToString() + "\n";
                 richTextBox1.Text += "欄位名稱\n";
                 for (int i = 0; i < dr.FieldCount; i++)
@@ -395,7 +375,7 @@ namespace vcs_SqlConnection1
 
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
-                //cn.ConnectionString = cnstr;  // 連接字串
+                //cn.ConnectionString = cnstr;  // 連接字串, 可有可無
 
                 richTextBox1.Text += "連接資料庫前\t資料庫連接狀態 : " + cn.State + "\n";  // ConnectionState.Closed
                 cn.Open();  // 打開資料庫連線
@@ -429,7 +409,7 @@ namespace vcs_SqlConnection1
 
                 DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
 
-                //cn.ConnectionString = cnstr;  // 連接字串
+                //cn.ConnectionString = cnstr;  // 連接字串, 可有可無
 
                 // 建立三個DataAdapter物件，用來取得員工, 客戶, 產品類別資料表
                 // 再將三個資料表放入ds(DataSet)物件中
@@ -482,9 +462,9 @@ namespace vcs_SqlConnection1
 
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
-                //cn.ConnectionString = cnstr;  // 連接字串
-
+                //cn.ConnectionString = cnstr;  // 連接字串, 可有可無
                 cn.Open();  // 打開資料庫連線
+
                 // 查詢字串
                 string sqlstr = "SELECT * FROM 成績單";
                 SqlCommand cmd = new SqlCommand(sqlstr, cn);
@@ -541,7 +521,7 @@ namespace vcs_SqlConnection1
             //成績單
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
-                //cn.ConnectionString = cnstr;  // 連接字串
+                //cn.ConnectionString = cnstr;  // 連接字串, 可有可無
 
                 DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
 
@@ -578,7 +558,7 @@ namespace vcs_SqlConnection1
             //成績單
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
-                //cn.ConnectionString = cnstr;  // 連接字串
+                //cn.ConnectionString = cnstr;  // 連接字串, 可有可無
 
                 DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
 
@@ -622,8 +602,7 @@ namespace vcs_SqlConnection1
             string name = "阿龍";
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
-                //cn.ConnectionString = cnstr;  // 連接字串
-
+                //cn.ConnectionString = cnstr;  // 連接字串, 可有可無
                 cn.Open();  // 打開資料庫連線
 
                 // 將輸入的姓名指定給searchName字串變數
@@ -658,8 +637,7 @@ namespace vcs_SqlConnection1
             //string name = "阿龍";
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
-                //cn.ConnectionString = cnstr;  // 連接字串
-
+                //cn.ConnectionString = cnstr;  // 連接字串, 可有可無
                 cn.Open();  // 打開資料庫連線
 
                 // 將輸入的姓名指定給searchName字串變數
@@ -699,7 +677,7 @@ namespace vcs_SqlConnection1
 
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
-                //cn.ConnectionString = cnstr;  // 連接字串
+                //cn.ConnectionString = cnstr;  // 連接字串, 可有可無
 
                 SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
 
@@ -736,7 +714,7 @@ namespace vcs_SqlConnection1
             // DB => DS => dataGridView1
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
-                //cn.ConnectionString = cnstr;
+                //cn.ConnectionString = cnstr;  // 連接字串, 可有可無
 
                 SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
 
@@ -765,7 +743,7 @@ namespace vcs_SqlConnection1
                 string dst_ID = "A004";
                 int money = 500;
 
-                //cn.ConnectionString = cnstr;
+                //cn.ConnectionString = cnstr;  // 連接字串, 可有可無
                 cn.Open();  // 打開資料庫連線
 
                 // 建立SqlCommand物件cmd1，用來查詢使用者帳號是否存在
@@ -859,7 +837,7 @@ namespace vcs_SqlConnection1
 
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
-                //cn.ConnectionString = cnstr;
+                //cn.ConnectionString = cnstr;  // 連接字串, 可有可無
 
                 SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
 
@@ -892,7 +870,7 @@ namespace vcs_SqlConnection1
             {
                 using (SqlConnection cn = new SqlConnection(cnstr1))  // 建立資料庫連接對象cn
                 {
-                    //cn.ConnectionString = cnstr1;
+                    //cn.ConnectionString = cnstr1;  // 連接字串, 可有可無
                     cn.Open();  // 打開資料庫連線
 
                     /* same
@@ -934,7 +912,7 @@ namespace vcs_SqlConnection1
             {
                 using (SqlConnection cn = new SqlConnection(cnstr1))  // 建立資料庫連接對象cn
                 {
-                    //cn.ConnectionString = cnstr1;
+                    //cn.ConnectionString = cnstr1;  // 連接字串, 可有可無
                     cn.Open();  // 打開資料庫連線
 
                     /* same
@@ -969,7 +947,7 @@ namespace vcs_SqlConnection1
 
             using (SqlConnection cn = new SqlConnection(cnstr1))  // 建立資料庫連接對象cn
             {
-                //cn.ConnectionString = cnstr1;
+                //cn.ConnectionString = cnstr1;  // 連接字串, 可有可無
                 cn.Open();  // 打開資料庫連線
 
                 /* same
@@ -1174,8 +1152,8 @@ namespace vcs_SqlConnection1
             using (SqlConnection cn = new SqlConnection(cnstr23))  // 建立資料庫連接對象cn
             {
                 //cn.ConnectionString = cnstr23;  // 連接字串
-
                 cn.Open();  // 打開資料庫連線
+
                 SqlCommand cmd = new SqlCommand(sqlstr, cn);
                 cmd.Parameters.Add(new SqlParameter("@BookId", SqlDbType.NVarChar));
                 cmd.Parameters.Add(new SqlParameter("@BookName", SqlDbType.NVarChar));
@@ -1197,8 +1175,8 @@ namespace vcs_SqlConnection1
             using (SqlConnection cn = new SqlConnection(cnstr23))  // 建立資料庫連接對象cn
             {
                 //cn.ConnectionString = cnstr23;  // 連接字串
-
                 cn.Open();  // 打開資料庫連線
+
                 SqlCommand cmd = new SqlCommand(sqlstr, cn);
                 cmd.Parameters.Add(new SqlParameter("@BookId", SqlDbType.NVarChar));
                 cmd.Parameters.Add(new SqlParameter("@BookName", SqlDbType.NVarChar));
@@ -1220,8 +1198,8 @@ namespace vcs_SqlConnection1
             using (SqlConnection cn = new SqlConnection(cnstr23))  // 建立資料庫連接對象cn
             {
                 //cn.ConnectionString = cnstr23;  // 連接字串
-
                 cn.Open();  // 打開資料庫連線
+
                 SqlCommand cmd = new SqlCommand(sqlstr, cn);
                 cmd.Parameters.Add(new SqlParameter("@BookId", SqlDbType.NVarChar));
                 cmd.Parameters["@BookId"].Value = 書號;
@@ -1243,8 +1221,9 @@ namespace vcs_SqlConnection1
 
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
-                //cn.ConnectionString = cnstr;
+                //cn.ConnectionString = cnstr;  // 連接字串, 可有可無
                 cn.Open();  // 打開資料庫連線
+
                 SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
                 DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
                 da.Fill(ds, "員工");  // da將查詢的結果填充至數據集ds, 指定TableName為"員工"
@@ -1337,7 +1316,7 @@ namespace vcs_SqlConnection1
 
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
-                //cn.ConnectionString = cnstr;
+                //cn.ConnectionString = cnstr;  // 連接字串, 可有可無
 
                 SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
                 da.Fill(ds, "員工");  // da將查詢的結果填充至數據集ds, 指定TableName為"員工"
@@ -1393,20 +1372,20 @@ namespace vcs_SqlConnection1
                 }
             }
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
             richTextBox1.Text += "取得一個資料庫的所有Table名稱 2\n";
 
             using (SqlConnection cn = new SqlConnection(cnstr))
             {
                 cn.Open();
 
-                string query = "SELECT name FROM sys.tables";
+                string query = "SELECT NAME FROM sys.tables";
                 //string query = "SELECT name FROM sysdatabases";
                 //string query = "SELECT NAME FROM master.dbo.sysdatabases";
-                //string query = "select count(*) from master.dbo.sysdatabases where name='db_02'";
-                //string query = "SELECT * FROM 員工", cn);//執行一條SQL查詢語句
-                //string query = "SELECT * FROM master..sysdatabases WHERE name = N'ch17DB'", cn);//執行一條SQL查詢語句
-
+                //string query = "select count(*) from master.dbo.sysdatabases where name='db_02'";//NG
+                //string query = "SELECT * FROM master..sysdatabases WHERE name = N'tb_09'";
+                //string query = "SELECT * FROM master..sysdatabases";
 
                 //這個方式直接從 SQL Server 的系統目錄取出所有表格名稱
 
@@ -1431,18 +1410,16 @@ namespace vcs_SqlConnection1
                 }
             }
 
-            return;
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
-            //3030
             richTextBox1.Text += "取得一個資料庫的所有Table名稱 3\n";
 
-            using (SqlConnection conn = new SqlConnection(cnstr))
+            using (SqlConnection cn = new SqlConnection(cnstr))
             {
-                conn.Open();
-                var schema = conn.GetSchema("Tables");
+                cn.Open();
+                var schema = cn.GetSchema("TABLES");
                 foreach (System.Data.DataRow row in schema.Rows)
                 {
-                    //Console.WriteLine(row["TABLE_NAME"]);
                     richTextBox1.Text += row["TABLE_NAME"] + "\n";
                 }
             }
@@ -1474,10 +1451,10 @@ namespace vcs_SqlConnection1
             //讀取資料庫至DGV
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
-                DataTable dt = new DataTable();  // 建立DT
+                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
                 SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM 員工表", cn);  // 建立資料庫適配器對象da
-                da.Fill(dt);  // da將查詢的結果填充至數據集ds, 不指定TableName
-                this.dataGridView1.DataSource = dt.DefaultView;  // DGV設置數據源
+                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+                dataGridView1.DataSource = ds.Tables[0].DefaultView;  // DGV設置數據源
             }
 
             richTextBox1.Text += "------------------------------\n";  // 30個
@@ -1511,10 +1488,10 @@ namespace vcs_SqlConnection1
             //讀取DB的資料到dataGridView2
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
-                DataTable dt = new DataTable();  // 建立DT
+                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
                 SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM 員工表", cn);  // 建立資料庫適配器對象da
-                da.Fill(dt);  // da將查詢的結果填充至數據集ds, 不指定TableName
-                this.dataGridView2.DataSource = dt.DefaultView;  // DGV設置數據源
+                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+                dataGridView1.DataSource = ds.Tables[0].DefaultView;  // DGV設置數據源
             }
         }
 
@@ -1603,7 +1580,7 @@ namespace vcs_SqlConnection1
 
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
-                //cn.ConnectionString = cnstr;  // 連接字串
+                //cn.ConnectionString = cnstr;  // 連接字串, 可有可無
 
                 SqlCommand cmd = new SqlCommand();
 
@@ -1975,6 +1952,7 @@ namespace vcs_SqlConnection1
 //------------------------------  # 30個
 
 //1515
+//richTextBox1.Text += "---------------\n";  // 15個
 //---------------  # 15個
 
 
@@ -1982,18 +1960,6 @@ namespace vcs_SqlConnection1
 
  */
 
-
-
-/* schema 應無用
-                SqlDataReader dr = cmd.ExecuteReader();
-                DataTable schema = dr.GetSchemaTable();  // 建立DT
-                foreach (DataRow schema_row in schema.Rows)
-                {
-                    richTextBox1.Text += "欄位名稱 : "+schema_row.Field<string>("ColumnName") + "\t";
-                    richTextBox1.Text += "資料型態 : "+schema_row.Field<Type>("DataType").ToString() + "\n";
-                }
-
-*/
 
 
 /*
@@ -2127,13 +2093,7 @@ cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\c
             sqlstr = "SELECT TOP 4 * FROM tb_Employee order by 工资 desc";
 */
 
-
-
-
-
-
 //            string sqlstr = "select job_id as 工作编号,job_desc as 工作次序,min_lvl as 最低水平,max_lvl as 最高水平 from jobs";
-
 
 /*
             SqlConnection cn = new SqlConnection(cnstr);//初始化數據庫連接對像
@@ -2148,3 +2108,10 @@ cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\c
                 dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;//設定每一列的排序類型為不排序
             }
 */
+
+/*
+                // DataGridView控制項資料繫結
+                dataGridView1.DataSource = ds;  // DGV設置數據源
+                dataGridView1.DataMember = "員工";                
+*/
+
