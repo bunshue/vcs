@@ -451,6 +451,99 @@ namespace vcs_DataGridView1
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //建立DGV 6, 使用 CellFormatting
+            SetupDataGridView();
+            PopulateDataGridView();
+
+            /*
+            //新增
+            this.dataGridView1.Rows.Add();
+
+            //刪除
+            if (this.dataGridView1.SelectedRows.Count > 0 && this.dataGridView1.SelectedRows[0].Index != this.dataGridView1.Rows.Count - 1)
+            {
+                this.dataGridView1.Rows.RemoveAt(this.dataGridView1.SelectedRows[0].Index);
+            }
+
+            //清除
+            this.dataGridView1.Rows.Clear();
+            */
+        }
+
+        private void dataGridView1_CellFormatting(object sender, System.Windows.Forms.DataGridViewCellFormattingEventArgs e)
+        {
+            if (e != null)
+            {
+                if (this.dataGridView1.Columns[e.ColumnIndex].Name == "Release Date")
+                {
+                    if (e.Value != null)
+                    {
+                        try
+                        {
+                            e.Value = DateTime.Parse(e.Value.ToString())
+                                .ToLongDateString();
+                            e.FormattingApplied = true;
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("{0} is not a valid date.", e.Value.ToString());
+                        }
+                    }
+                }
+            }
+        }
+
+        private void SetupDataGridView()
+        {
+            dataGridView1.ColumnCount = 5;
+
+            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
+            dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font(dataGridView1.Font, FontStyle.Bold);
+
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            dataGridView1.GridColor = Color.Black;
+            dataGridView1.RowHeadersVisible = false;
+
+            dataGridView1.Columns[0].Name = "Release Date";
+            dataGridView1.Columns[1].Name = "Track";
+            dataGridView1.Columns[2].Name = "Title";
+            dataGridView1.Columns[3].Name = "Artist";
+            dataGridView1.Columns[4].Name = "Album";
+            dataGridView1.Columns[4].DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Italic);
+
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.MultiSelect = false;
+
+            dataGridView1.CellFormatting += new DataGridViewCellFormattingEventHandler(dataGridView1_CellFormatting);
+        }
+
+        private void PopulateDataGridView()
+        {
+            string[] row0 = { "11/22/1968", "29", "Revolution 9", "Beatles", "The Beatles [White Album]" };
+            string[] row1 = { "1960", "6", "Fools Rush In", "Frank Sinatra", "Nice 'N' Easy" };
+            string[] row2 = { "11/11/1971", "1", "One of These Days", "Pink Floyd", "Meddle" };
+            string[] row3 = { "1988", "7", "Where Is My Mind?", "Pixies", "Surfer Rosa" };
+            string[] row4 = { "5/1981", "9", "Can't Find My Mind", "Cramps", "Psychedelic Jungle" };
+            string[] row5 = { "6/10/2003", "13", "Scatterbrain. (As Dead As Leaves.)", "Radiohead", "Hail to the Thief" };
+            string[] row6 = { "6/30/1992", "3", "Dress", "P J Harvey", "Dry" };
+
+            dataGridView1.Rows.Add(row0);
+            dataGridView1.Rows.Add(row1);
+            dataGridView1.Rows.Add(row2);
+            dataGridView1.Rows.Add(row3);
+            dataGridView1.Rows.Add(row4);
+            dataGridView1.Rows.Add(row5);
+            dataGridView1.Rows.Add(row6);
+
+            //dataGridView 顯示欄排序
+            dataGridView1.Columns[0].DisplayIndex = 3;
+            dataGridView1.Columns[1].DisplayIndex = 4;
+            dataGridView1.Columns[2].DisplayIndex = 0;
+            dataGridView1.Columns[3].DisplayIndex = 1;
+            dataGridView1.Columns[4].DisplayIndex = 2;
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -458,6 +551,14 @@ namespace vcs_DataGridView1
         }
 
         private void button8_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button10_Click(object sender, EventArgs e)
         {
             // 建立DataTable
             DataTable dt = new DataTable("動物資料表");
@@ -504,7 +605,7 @@ namespace vcs_DataGridView1
             dataGridView1.AutoResizeColumns();
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void button11_Click(object sender, EventArgs e)
         {
             //可以用F2修改 DataGridView 的內容
             //可以用Tab跳欄
@@ -560,7 +661,7 @@ namespace vcs_DataGridView1
             e.Cancel = false;
         }
 
-        private void button10_Click(object sender, EventArgs e)
+        private void button12_Click(object sender, EventArgs e)
         {
             //建立DataTable資料並匯出到DataGridView
 
@@ -595,7 +696,7 @@ namespace vcs_DataGridView1
             //dataGridView1.DataBind();
         }
 
-        private void button11_Click(object sender, EventArgs e)
+        private void button13_Click(object sender, EventArgs e)
         {
             //建立DataTable
             DataTable dt = new DataTable();
@@ -618,7 +719,7 @@ namespace vcs_DataGridView1
             dataGridView1.DataSource = dt;//設定DGV的資料來源為DataTable
         }
 
-        private void button12_Click(object sender, EventArgs e)
+        private void button14_Click(object sender, EventArgs e)
         {
             //DT轉DGV
             richTextBox1.Text += "將List的資料連結到 DataGridView 裏\n";
@@ -633,14 +734,6 @@ namespace vcs_DataGridView1
                 Points.Add(new Point(i_st, j_st));
             }
             dataGridView1.DataSource = Points;//設定DGV的資料來源為List<Point>
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -682,7 +775,8 @@ namespace vcs_DataGridView1
             };
             dataGridView1.Columns[0].HeaderText = "图片";//设置列文本
             dataGridView1.Columns[0].Width = 70;//设置列宽度
-            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            int R = dataGridView1.Rows.Count;  // 列數, 包含標題列
+            for (int i = 0; i < R; i++)
             {
                 dataGridView1.Rows[i].Height = 70;//设置行高度
             }
@@ -695,20 +789,59 @@ namespace vcs_DataGridView1
 
         private void button19_Click(object sender, EventArgs e)
         {
-            //DGV 隔行換色
-            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            //DGV 改行列背景色
+            int R = dataGridView1.Rows.Count;  // 列數, 包含標題列
+            for (int i = 0; i < R; i++)
             {
-                if (i % 2 == 0)
+                if (i % 3 == 0)
                 {
-                    dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.LightYellow;   //隔行更換背景色
+                    dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.LightPink;  // 更換背景色, 列
+                }
+                else if (i % 3 == 1)
+                {
+                    dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.LightGreen;  // 更換背景色, 列
+                }
+                else
+                {
+                    dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.LightBlue;  // 更換背景色, 列
                 }
             }
+            /*
+            int C = dataGridView1.Columns.Count;
+            for (int i = 0; i < C; i++)
+            {
+                if (i % 3 == 0)
+                {
+                    dataGridView1.Columns[i].DefaultCellStyle.BackColor = Color.Red;  // 更換背景色, 欄
+                }
+                else if (i % 3 == 1)
+                {
+                    dataGridView1.Columns[i].DefaultCellStyle.BackColor = Color.Green;  // 更換背景色, 欄
+                }
+                else
+                {
+                    dataGridView1.Columns[i].DefaultCellStyle.BackColor = Color.Blue;  // 更換背景色, 欄
+                }
+            }
+            */
+            /* 一樣
+            int R1 = dataGridView1.RowCount;
+            int C1 = dataGridView1.ColumnCount;
+            richTextBox1.Text += "欄數 : " + C1.ToString() + "\n";
+            richTextBox1.Text += "列數 : " + R1.ToString() + " (包含標題)\n";
+
+            int R2 = dataGridView1.Rows.Count;
+            int C2 = dataGridView1.Columns.Count;
+            richTextBox1.Text += "欄數 : " + C2.ToString() + "\n";
+            richTextBox1.Text += "列數 : " + R2.ToString() + " (包含標題)\n";
+            */
         }
 
         private void button20_Click(object sender, EventArgs e)
         {
             //DGV 刪除
-            if (this.dataGridView1.SelectedRows.Count > 0 && this.dataGridView1.SelectedRows[0].Index != this.dataGridView1.Rows.Count - 1)
+            int R = dataGridView1.Rows.Count;  // 列數, 包含標題列
+            if (this.dataGridView1.SelectedRows.Count > 0 && this.dataGridView1.SelectedRows[0].Index != (R - 1))
             {
                 this.dataGridView1.Rows.RemoveAt(this.dataGridView1.SelectedRows[0].Index);
             }
@@ -816,18 +949,19 @@ namespace vcs_DataGridView1
         //繪製單元格事件
         private void dataGridView1_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            richTextBox1.Text += "------------------------------\n";  // 30個
+            //richTextBox1.Text += "------------------------------\n";  // 30個
+            int R = dataGridView1.Rows.Count;  // 列數, 包含標題列
             //richTextBox1.Text += "欄數 : " + dataGridView1.Columns.Count.ToString() + "\t";
             //richTextBox1.Text += "列數 : " + dataGridView1.Rows.Count.ToString() + ", 包含標題列\n";
-            richTextBox1.Text += "列 : " + e.RowIndex.ToString() + "\t欄 : " + e.ColumnIndex.ToString() + "\n";
+            //richTextBox1.Text += "列 : " + e.RowIndex.ToString() + "\t欄 : " + e.ColumnIndex.ToString() + "\n";
             //richTextBox1.Text += "CellBounds : " + e.CellBounds.ToString() + "\n";
             //richTextBox1.Text += "CellStyle : " + e.CellStyle.ToString() + "\n";
             //richTextBox1.Text += "CellStyle.Font : " + e.CellStyle.Font.ToString() + "\n";
-            richTextBox1.Text += "CellStyle.BackColor : " + e.CellStyle.BackColor.ToString() + "\n";
+            //richTextBox1.Text += "CellStyle.BackColor : " + e.CellStyle.BackColor.ToString() + "\n";
 
             if (e.Value != null)
             {
-                richTextBox1.Text += "Value : " + e.Value.ToString() + "\n";
+                //richTextBox1.Text += "Value : " + e.Value.ToString() + "\n";
                 if (e.Value.ToString() == "48")
                 {
                     e.CellStyle.BackColor = Color.Lime;

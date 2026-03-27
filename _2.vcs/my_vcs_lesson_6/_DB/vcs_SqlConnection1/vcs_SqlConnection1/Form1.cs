@@ -109,6 +109,25 @@ namespace vcs_SqlConnection1
             richTextBox1.Clear();
         }
 
+        void show_database(string db_filename, string sqlstr, DataGridView dgv)
+        {
+            string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
+
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);
+
+            //讀取資料庫至DGV
+            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
+            {
+                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
+                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+                //da.Fill(ds, "table");  // da將查詢的結果填充至數據集ds, 指定TableName為"table"
+                dgv.DataSource = ds.Tables[0].DefaultView;  // DGV設置數據源
+                //dgv.DataSource = ds.Tables[0];  // DGV設置數據源, same
+            }
+        }
+
         int select = 0;
         private void button0_Click(object sender, EventArgs e)
         {
@@ -119,7 +138,7 @@ namespace vcs_SqlConnection1
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
             // 查詢字串
             string sqlstr = "SELECT * FROM tb_Employee";
-            string db_filename = "ch18DB.mdf";
+            string db_filename = "db_TomeTwo.mdf";
 
             if (select == 0)
             {
@@ -185,19 +204,7 @@ namespace vcs_SqlConnection1
             if (select > 6)
                 select = 0;
 
-
-
-            //讀取資料庫至DGV
-            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
-            {
-                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
-                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
-                //da.Fill(ds, "員工");  // da將查詢的結果填充至數據集ds, 指定TableName為"員工"
-                dataGridView1.DataSource = ds.Tables[0].DefaultView;  // DGV設置數據源
-                dataGridView2.DataSource = ds.Tables[0];  // DGV設置數據源, same
-            }
-
+            show_database(db_filename, sqlstr, dataGridView1);
         }
 
         private void button1_Click(object sender, EventArgs e)
