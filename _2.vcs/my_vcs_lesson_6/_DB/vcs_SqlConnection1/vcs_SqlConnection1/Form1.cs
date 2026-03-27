@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;
 using System.Data.SqlClient;  // for SqlConnection, SqlCommand, SqlDataAdapter
+using System.Collections;  // for Hashtable
 
 namespace vcs_SqlConnection1
 {
@@ -133,12 +134,12 @@ namespace vcs_SqlConnection1
         {
             //讀取資料庫 至 DGV, 要先知道資料庫檔案(.mdf)和表單名稱(table_name)和查詢條件
 
-
             // 連接字串
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            // 資料庫檔案
+            string db_filename = "db_TomeTwo.mdf";
             // 查詢字串
             string sqlstr = "SELECT * FROM tb_Employee";
-            string db_filename = "db_TomeTwo.mdf";
 
             if (select == 0)
             {
@@ -1300,6 +1301,7 @@ namespace vcs_SqlConnection1
             }
             */
 
+            /*
             //new 2
 
             // 查詢字串
@@ -1339,6 +1341,68 @@ namespace vcs_SqlConnection1
             catch (Exception ey)
             {
                 MessageBox.Show(ey.Message);
+            }
+            */
+
+
+            //new 3
+
+            /*
+            // 資料庫檔案
+            string db_filename = "db_TomeTwo.mdf";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM tb_Employee";
+
+            show_database(db_filename, sqlstr, dataGridView1);
+            */
+            //----------------------------------
+
+            int SumNum;
+            SqlConnection con;
+            SqlCommand cmd;
+            Hashtable ht = new Hashtable();
+
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
+            con = new SqlConnection(cnstr);
+            con.Open();
+
+            using (cmd = new SqlCommand("select Sum(t_Num)  from tb_product", con))
+            {
+                SumNum = Convert.ToInt32(cmd.ExecuteScalar());
+                richTextBox1.Text += "SumNum = " + SumNum.ToString() + "\n";
+            }
+
+            //paint
+
+
+            ht.Clear();
+
+            cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
+            con = new SqlConnection(cnstr);
+            con.Open();
+
+            Random rnd = new Random();								//生成随机数
+            using (cmd = new SqlCommand("select t_Name,sum(t_Num) as Num  from tb_product group by t_Name", con))
+            {
+                richTextBox1.Text += "\n";
+
+                SqlDataReader dr = cmd.ExecuteReader();					//创建SqlDataReader对象
+                while (dr.Read())									//读取数据
+                {
+                    ht.Add(dr[0], Convert.ToInt32(dr[1]));					//将数据添加到Hashtable中
+                    richTextBox1.Text += dr[0] + "\t" + dr[1] + "\n";
+                }
+
+                float[] flo = new float[ht.Count];
+                int T = 0;
+                foreach (DictionaryEntry de in ht)						//遍历Hashtable
+                {
+                    flo[T] = Convert.ToSingle((Convert.ToDouble(de.Value) / SumNum).ToString().Substring(0, 6));
+
+                    //商品及百分比
+                    richTextBox1.Text += de.Key + "  " + flo[T] * 100 + "%\n";
+                    T++;
+                }
             }
         }
 
