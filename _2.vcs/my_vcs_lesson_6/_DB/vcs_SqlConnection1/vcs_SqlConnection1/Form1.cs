@@ -1268,6 +1268,93 @@ namespace vcs_SqlConnection1
 
         private void button12_Click(object sender, EventArgs e)
         {
+            /*
+            //new 1
+
+            string time_st = "2004/1/1";
+            string time_sp = "2008/1/1";
+
+            string sqlstr = "select * from tb_lottery where t_year between '" + time_st + "' and '" + time_sp + "' order by t_year";
+
+            try
+            {
+                string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
+                SqlConnection con = new SqlConnection(cnstr);
+                con.Open();
+
+                SqlCommand cmd = new SqlCommand(sqlstr, con);								//实例化SqlCommand
+                SqlDataReader dr = cmd.ExecuteReader();								//创建SqlDataReader对象
+
+                while (dr.Read())													//开始读取数据库中的数据
+                {
+                    richTextBox1.Text += "取得資料 :\t";
+
+                    richTextBox1.Text += dr[0].ToString() + "\t" + dr[1].ToString() + "\n";
+                }
+                dr.Close();														//关闭SqlDataReader对象
+            }
+            catch
+            {
+                MessageBox.Show("此范围内没有任何信息！！！");
+                return;
+            }
+            */
+
+            //new 2
+
+            // 查詢字串
+            //select ShowYear from tb_Stat
+            string sqlstr = "select * from tb_Stat";
+            string db_filename = "db_TomeOne.mdf";
+
+            show_database(db_filename, sqlstr, dataGridView1);
+
+            //3030
+
+            int Year = 2006;
+
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
+
+            try
+            {
+                string cmdtxt2 = "SELECT * FROM tb_Stat WHERE ShowYear=" + Year + "";
+
+                SqlConnection Con = new SqlConnection(cnstr);
+                Con.Open();
+                SqlCommand Com = new SqlCommand(cmdtxt2, Con);
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = Com;
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+
+                for (int j = 0; j < 12; j++)
+                {
+                    richTextBox1.Text += ds.Tables[0].Rows[0][j + 1].ToString() + "\n";
+                }
+
+                int number = SumYear(Year);
+                richTextBox1.Text += "number = " + number.ToString() + "\n";
+
+            }
+            catch (Exception ey)
+            {
+                MessageBox.Show(ey.Message);
+            }
+        }
+
+        private int SumYear(int Year)
+        {
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
+            string cmdtxt2 = "SELECT SUM(Year_M1+Year_M2+Year_M3+Year_M4+Year_M5+Year_M6+Year_M7+Year_M8+Year_M9+Year_M10+Year_M11+Year_M12) AS number FROM tb_Stat WHERE ShowYear=" + Year + "";
+
+            using (SqlConnection Con = new SqlConnection(cnstr))
+            {
+                Con.Open();
+                SqlDataAdapter dap = new SqlDataAdapter(cmdtxt2, Con);
+                DataSet ds = new DataSet();
+                dap.Fill(ds);
+                return Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString());
+            }
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -1434,6 +1521,144 @@ namespace vcs_SqlConnection1
 
         private void button16_Click(object sender, EventArgs e)
         {
+            //一次test
+
+            // 建立資料庫 (如果不存在)
+
+            // 連接字串
+            string masterConnStr = @"Data Source=(LocalDB)\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection conn = new SqlConnection(masterConnStr))
+            {
+                conn.Open();
+
+                string createDb = @"
+                    IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'my_db_test_db')
+                    CREATE DATABASE my_db_test_db";
+                /*
+                string createDb = @"
+                    IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'my_db_test_db')
+                    CREATE DATABASE my_db_test_db
+                    ON PRIMARY (
+                        NAME = my_db_test_db,
+                        FILENAME = 'D:\\my_db_test_db.mdf',
+                        SIZE = 5MB,
+                        MAXSIZE = 100MB,
+                        FILEGROWTH = 10%)
+                    LOG ON (
+                        NAME = my_db_test_db_log,
+                        FILENAME = 'D:\\my_db_test_db.ldf',
+                        SIZE = 1MB,
+                        MAXSIZE = 25MB,
+                        FILEGROWTH = 5MB)";
+                */
+                using (SqlCommand cmd = new SqlCommand(createDb, conn))
+                {
+                    cmd.ExecuteNonQuery();
+                    richTextBox1.Text += "已建立資料庫\n";
+                }
+            }
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //建立資料表, 不能重複建立
+            //建立資料表 my_db_test_table
+            //建立好資料庫後，你需要連線到 my_db_test_db，再執行 CREATE TABLE：
+
+            // 建立資料表 (如果不存在)
+
+            // 連接字串
+            string dbConnStr = @"Data Source=(LocalDB)\MSSQLLocalDB;Database=my_db_test_db;Integrated Security=True;Connect Timeout=30";
+            using (SqlConnection conn = new SqlConnection(dbConnStr))
+            {
+                conn.Open();
+
+                string createTable = @"
+                IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='my_db_test_table' AND xtype='U')
+                CREATE TABLE my_db_test_table (
+                    id INT PRIMARY KEY,
+                    name NVARCHAR(100),
+                    score INT
+                )";
+
+                using (SqlCommand cmd = new SqlCommand(createTable, conn))
+                {
+                    cmd.ExecuteNonQuery();
+                    richTextBox1.Text += "已建立資料庫表單\n";
+                }
+
+                richTextBox1.Text += "------------------------------\n";  // 30個
+
+                // 插入資料
+                string insertData = "INSERT INTO my_db_test_table (id, name, score) VALUES (1, 'Alice', 90)";
+                using (SqlCommand cmd = new SqlCommand(insertData, conn))
+                {
+                    cmd.ExecuteNonQuery();
+                    richTextBox1.Text += "Data inserted.\n";
+                }
+
+                richTextBox1.Text += "------------------------------\n";  // 30個
+
+                // 查詢資料
+                string selectData = "SELECT id, name, score FROM my_db_test_table";
+                using (SqlCommand cmd = new SqlCommand(selectData, conn))
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    richTextBox1.Text += "Query results:\n";
+                    while (reader.Read())
+                    {
+                        richTextBox1.Text += "取得 : " + reader["id"] + "\t" + reader["name"] + "\t" + reader["score"] + "\n";
+                    }
+                }
+
+                richTextBox1.Text += "------------------------------\n";  // 30個
+
+                // 更新資料
+                string updateData = "UPDATE my_db_test_table SET score = 95 WHERE id = 1";
+                using (SqlCommand cmd = new SqlCommand(updateData, conn))
+                {
+                    cmd.ExecuteNonQuery();
+                    richTextBox1.Text += "Data updated.\n";
+                }
+
+                richTextBox1.Text += "------------------------------\n";  // 30個
+
+                // 再次查詢確認更新
+                string selectUpdated = "SELECT id, name, score FROM my_db_test_table";
+                using (SqlCommand cmd = new SqlCommand(selectUpdated, conn))
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    richTextBox1.Text += "Updated results:\n";
+                    while (reader.Read())
+                    {
+                        richTextBox1.Text += "取得 : " + reader["id"] + "\t" + reader["name"] + "\t" + reader["score"] + "\n";
+                    }
+                }
+
+                richTextBox1.Text += "------------------------------\n";  // 30個
+
+                // 刪除資料
+                string deleteData = "DELETE FROM my_db_test_table WHERE id = 1";
+                using (SqlCommand cmd = new SqlCommand(deleteData, conn))
+                {
+                    cmd.ExecuteNonQuery();
+                    richTextBox1.Text += "Data deleted.\n";
+                }
+
+                richTextBox1.Text += "------------------------------\n";  // 30個
+
+                // 最後查詢確認刪除
+                string selectFinal = "SELECT id, name, score FROM my_db_test_table";
+                using (SqlCommand cmd = new SqlCommand(selectFinal, conn))
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    richTextBox1.Text += "Final results (after delete):\n";
+                    while (reader.Read())
+                    {
+                        richTextBox1.Text += "取得 : " + reader["id"] + "\t" + reader["name"] + "\t" + reader["score"] + "\n";
+                    }
+                }
+            }
         }
 
         private void button17_Click(object sender, EventArgs e)
