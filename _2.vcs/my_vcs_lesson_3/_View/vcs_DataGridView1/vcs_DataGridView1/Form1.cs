@@ -116,6 +116,12 @@ namespace vcs_DataGridView1
 
         private void bt_info_Click(object sender, EventArgs e)
         {
+            /*
+            richTextBox1.Text += dataGridView1.CurrentRow.Cells + "\n";
+            richTextBox1.Text += dataGridView1.CurrentRow.Cells[0].Value + "\n";
+            richTextBox1.Text += dataGridView1.CurrentRow.Cells[1].Value + "\n";
+            richTextBox1.Text += dataGridView1.CurrentRow.Cells[2].Value + "\n";
+            */
             //顯示DGV內容
             show_DataGridView_content(dataGridView1);
         }

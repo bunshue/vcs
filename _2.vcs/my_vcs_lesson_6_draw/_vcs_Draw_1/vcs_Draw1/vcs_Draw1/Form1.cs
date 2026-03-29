@@ -745,6 +745,9 @@ namespace vcs_Draw1
         //基本畫圖2
         private void button1_Click(object sender, EventArgs e)
         {
+            sb = new SolidBrush(Color.Blue);
+            f = new Font("Times New Roman", 14);
+
             //初始化畫布
             reset_bitmap1(1100, 750);
 
@@ -987,9 +990,6 @@ namespace vcs_Draw1
                 g.DrawString("群曜醫電", new Font("標楷體", 80), b, x_st + i, y_st + i);
             }
             //重疊部分 筆色加深
-
-            pictureBox1.Image = bitmap1;
-
 
             pictureBox1.Image = bitmap1;
         }
