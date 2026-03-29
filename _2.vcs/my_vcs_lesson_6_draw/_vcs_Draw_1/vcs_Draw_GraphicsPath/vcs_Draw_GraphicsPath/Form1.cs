@@ -147,7 +147,7 @@ namespace vcs_Draw_GraphicsPath
             };
 
             gp2.AddCurve(pts, 0.6f); // 加入曲線
-            gp2.CloseFigure(); //  封閉目前的圖形
+            gp2.CloseFigure();  // 封閉圖形路徑, 將圖形的頭尾座標連接
 
             g.DrawPath(Pens.Black, gp2); // 繪出GraphicsPath物件
 
@@ -203,7 +203,7 @@ namespace vcs_Draw_GraphicsPath
             gp.AddArc(Cx - D1, Cy - D1, 2 * D1, 2 * D1, 90 + 30, 30);
             gp.AddArc(Cx - D1, Cy - D1, 2 * D1, 2 * D1, 180 + 30, 30);
             gp.AddArc(Cx - D1, Cy - D1, 2 * D1, 2 * D1, 270 + 30, 30);
-            gp.CloseFigure(); // 封閉形狀 將形狀的頭尾座標連接
+            gp.CloseFigure();  // 封閉圖形路徑, 將圖形的頭尾座標連接
 
             g.DrawPath(Pens.Black, gp); // 繪出GraphicsPath物件
 
@@ -229,7 +229,7 @@ namespace vcs_Draw_GraphicsPath
 
             gp = new GraphicsPath(); // GraphicsPath物件
 
-            //gp.CloseFigure(); // 先封閉 第一條直線
+            //gp.CloseFigure();  // 封閉圖形路徑, 將圖形的頭尾座標連接, 先封閉 第一條直線
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
@@ -244,7 +244,7 @@ namespace vcs_Draw_GraphicsPath
             pts2[2] = new Point(x_st + 220, y_st + 120);
 
             gp.AddLines(pts2); // 將 一系列的直線 加入到 GraphicsPath物件
-            //gp.CloseFigure(); // 封閉 該形狀
+            //gp.CloseFigure();  // 封閉圖形路徑, 將圖形的頭尾座標連接
 
             g.DrawPath(Pens.Red, gp); // 繪出GraphicsPath物件
 
@@ -279,23 +279,23 @@ namespace vcs_Draw_GraphicsPath
             roundedRect.AddLine(rect.Right - cornerRadius * 2, rect.Bottom, rect.X + cornerRadius * 2, rect.Bottom);
             roundedRect.AddArc(rect.X, rect.Bottom - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 90, 90);
             roundedRect.AddLine(rect.X, rect.Bottom - cornerRadius * 2, rect.X, rect.Y + cornerRadius * 2);
-            roundedRect.CloseFigure();
+            roundedRect.CloseFigure();  // 封閉圖形路徑, 將圖形的頭尾座標連接
             return roundedRect;
         }
 
         public static void DrawRoundRectangle(Graphics g, Pen pen, Rectangle rect, int cornerRadius)
         {
-            using (GraphicsPath path = CreateRoundedRectanglePath(rect, cornerRadius))
+            using (GraphicsPath gp = CreateRoundedRectanglePath(rect, cornerRadius))
             {
-                g.DrawPath(pen, path);
+                g.DrawPath(pen, gp);
             }
         }
 
         public static void FillRoundRectangle(Graphics g, Brush brush, Rectangle rect, int cornerRadius)
         {
-            using (GraphicsPath path = CreateRoundedRectanglePath(rect, cornerRadius))
+            using (GraphicsPath gp = CreateRoundedRectanglePath(rect, cornerRadius))
             {
-                g.FillPath(brush, path);
+                g.FillPath(brush, gp);
                 /*
                 //左上
                 g.DrawArc(Pens.Red, rect.X, rect.Y, cornerRadius * 2, cornerRadius * 2, 180, 90);
@@ -336,7 +336,7 @@ namespace vcs_Draw_GraphicsPath
             roundedRect.AddArc(rect.X, rect.Bottom - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 90, 90);
             //左
             roundedRect.AddLine(rect.X, rect.Bottom - cornerRadius * 2, rect.X, rect.Y + cornerRadius * 2);
-            roundedRect.CloseFigure();
+            roundedRect.CloseFigure();  // 封閉圖形路徑, 將圖形的頭尾座標連接
             return roundedRect;
         }
 
@@ -536,7 +536,7 @@ namespace vcs_Draw_GraphicsPath
             path.AddArc(l + w - d, t, d, d, 270, 90); // topright
             path.AddArc(l + w - d, t + h - d, d, d, 0, 90); // bottomright
             path.AddArc(l, t + h - d, d, d, 90, 90); // bottomleft
-            path.CloseFigure();
+            path.CloseFigure();  // 封閉圖形路徑, 將圖形的頭尾座標連接
             return path;
         }
 
@@ -875,6 +875,56 @@ namespace vcs_Draw_GraphicsPath
 
         private void button11_Click(object sender, EventArgs e)
         {
+
+            //原本畫在原點
+            Point center = new Point(200, 200);
+            //int radius = 100;
+            PointF[] pt = new PointF[6];    //一維陣列內有6個Point
+
+            pt[0] = new Point(200, 100);
+            pt[1] = new Point(295, 170);
+            pt[2] = new Point(258, 280);
+            pt[3] = new Point(142, 280);
+            pt[4] = new Point(105, 170);
+            pt[5] = new Point(200, 100);
+            /*
+            g.FillEllipse(Brushes.Red, pt[0].X, pt[0].Y, 20, 20);
+            g.FillEllipse(Brushes.Green, pt[1].X, pt[1].Y, 20, 20);
+            g.FillEllipse(Brushes.Blue, pt[2].X, pt[2].Y, 20, 20);
+            g.FillEllipse(Brushes.Cyan, pt[3].X, pt[3].Y, 20, 20);
+            g.FillEllipse(Brushes.Magenta, pt[4].X, pt[4].Y, 20, 20);
+            //g.FillEllipse(Brushes.Yellow, pt[5].X, pt[5].Y, 20, 20);
+            */
+
+            GraphicsPath gp = new GraphicsPath();
+            /*
+            gp.AddLine(pt[0], pt[1]);
+            gp.AddLine(pt[1], pt[2]);
+            gp.AddLine(pt[2], pt[3]);
+            gp.AddLine(pt[3], pt[4]);
+
+            //gp.CloseFigure();  // 封閉圖形路徑, 將圖形的頭尾座標連接
+
+            Pen penJoin = new Pen(Color.Red, 5);
+            //penJoin.LineJoin = LineJoin.Bevel;//看不出效果 會不會是給AddLines用的?
+
+            g.DrawPath(penJoin, gp);
+            //g.FillPath(Brushes.Yellow, gp);  // FillPath會自動CloseFigure()
+            */
+            //3030
+
+            //GraphicsPath gp = new GraphicsPath(); // GraphicsPath物件
+            Point[] pts2 = new Point[5];  // 點陣列
+            pts2[0] = new Point(200, 100);
+            pts2[1] = new Point(295, 170);
+            pts2[2] = new Point(258, 280);
+            pts2[3] = new Point(142, 280);
+            pts2[4] = new Point(105, 170);
+
+            gp.AddLines(pts2); // 將 一系列的直線 加入到 GraphicsPath物件
+            gp.CloseFigure();  // 封閉圖形路徑, 將圖形的頭尾座標連接
+
+            g.DrawPath(Pens.Red, gp); // 繪出GraphicsPath物件
         }
 
         private void button12_Click(object sender, EventArgs e)
