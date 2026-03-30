@@ -15,7 +15,11 @@ namespace DataAbduct
     {
         DataTable dt = null;
         TextBox[] txtBox;
-        SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09");
+
+        // 連接字串
+        string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09.mdf;Integrated Security=True;Connect Timeout=30";
+
+        SqlConnection con;
 
         public Form1()
         {
@@ -24,6 +28,8 @@ namespace DataAbduct
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            con = new SqlConnection(cnstr);
+
             showList();
         }
 

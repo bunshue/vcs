@@ -15,6 +15,9 @@ namespace DeleteTableNote
     {
         public static string str = "";
 
+        // 連接字串
+        string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09.mdf;Integrated Security=True;Connect Timeout=30";
+
         public Form1()
         {
             InitializeComponent();
@@ -41,7 +44,7 @@ namespace DeleteTableNote
             {
                 if (str != "")
                 {
-                    using (SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09"))
+                    using (SqlConnection con = new SqlConnection(cnstr))
                     {
                         con.Open();
                         SqlCommand cmd = new SqlCommand("delete from 員工表 where 員工編號='" + str + "'", con);
@@ -57,7 +60,7 @@ namespace DeleteTableNote
 
         private void showinfo()
         {
-            using (SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09"))
+            using (SqlConnection con = new SqlConnection(cnstr))
             {
                 DataTable dt = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter("select * from 員工表", con);

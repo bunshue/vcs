@@ -1293,11 +1293,11 @@ namespace vcs_SqlConnection1
 
             try
             {
-                string cmdtxt2 = "SELECT * FROM tb_Stat WHERE ShowYear=" + Year + "";
+                string sqlstr = "SELECT * FROM tb_Stat WHERE ShowYear=" + Year + "";
 
                 SqlConnection cn = new SqlConnection(cnstr);
                 cn.Open();
-                SqlCommand Com = new SqlCommand(cmdtxt2, cn);
+                SqlCommand Com = new SqlCommand(sqlstr, cn);
                 SqlDataAdapter da = new SqlDataAdapter();
                 da.SelectCommand = Com;
                 DataSet ds = new DataSet();
@@ -1364,13 +1364,16 @@ namespace vcs_SqlConnection1
 
         private int SumYear(int Year)
         {
+            // 連接字串
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
-            string cmdtxt2 = "SELECT SUM(Year_M1+Year_M2+Year_M3+Year_M4+Year_M5+Year_M6+Year_M7+Year_M8+Year_M9+Year_M10+Year_M11+Year_M12) AS number FROM tb_Stat WHERE ShowYear=" + Year + "";
+
+            // 查詢字串
+            string sqlstr = "SELECT SUM(Year_M1+Year_M2+Year_M3+Year_M4+Year_M5+Year_M6+Year_M7+Year_M8+Year_M9+Year_M10+Year_M11+Year_M12) AS number FROM tb_Stat WHERE ShowYear=" + Year + "";
 
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
                 cn.Open();
-                SqlDataAdapter dap = new SqlDataAdapter(cmdtxt2, cn);
+                SqlDataAdapter dap = new SqlDataAdapter(sqlstr, cn);
                 DataSet ds = new DataSet();
                 dap.Fill(ds);
                 return Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString());
@@ -1761,7 +1764,85 @@ namespace vcs_SqlConnection1
 
         private void button20_Click(object sender, EventArgs e)
         {
+            int query_year = 2001;  // 有資料的年份 2001~2007
+
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
+
+            // 查詢字串
+            string sqlstr = "select ShowYear from tb_Stat";
+
+            using (SqlConnection Con = new SqlConnection(cnstr))
+            {
+                DataTable dt = new DataTable();
+                SqlCommand cmd = new SqlCommand(sqlstr, Con);
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = cmd;
+                da.Fill(dt);
+
+                int C = dt.Columns.Count;
+                int R = dt.Rows.Count;
+                richTextBox1.Text += "R = " + R.ToString() + "\n";
+                richTextBox1.Text += "C = " + C.ToString() + "\n";
+                for (int i = 0; i < R; i++)
+                {
+                    richTextBox1.Text += dt.Rows[i][0].ToString() + "\n";
+                }
+            }
+
+            //3030
+
+            int Year = query_year;
+
+            try
+            {
+                int[] Count = new int[12];
+                // 查詢字串
+                sqlstr = "SELECT * FROM tb_Stat WHERE ShowYear=" + Year + "";
+
+                SqlConnection Con = new SqlConnection(cnstr);
+                Con.Open();
+                SqlCommand Com = new SqlCommand(sqlstr, Con);
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = Com;
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+                int j = 0;
+                int number = SumYear2(Year);
+                richTextBox1.Text += "年度總和 : " + number.ToString() + "\n";
+                for (j = 0; j < 12; j++)
+                {
+                    richTextBox1.Text += ds.Tables[0].Rows[0][j + 1].ToString() + "\t";
+                    Count[j] = Convert.ToInt32(ds.Tables[0].Rows[0][j + 1].ToString()) * 100 / number;
+                    richTextBox1.Text += Count[j].ToString() + "\n";
+                }
+            }
+            catch (Exception ey)
+            {
+                MessageBox.Show(ey.Message);
+            }
+
+
         }
+
+        private int SumYear2(int Year)
+        {
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
+
+            // 查詢字串
+            string sqlstr = "SELECT SUM(Year_M1+Year_M2+Year_M3+Year_M4+Year_M5+Year_M6+Year_M7+Year_M8+Year_M9+Year_M10+Year_M11+Year_M12) AS number FROM tb_Stat WHERE ShowYear=" + Year + "";
+
+            using (SqlConnection Con = new SqlConnection(cnstr))
+            {
+                Con.Open();
+                SqlDataAdapter dap = new SqlDataAdapter(sqlstr, Con);
+                DataSet ds = new DataSet();
+                dap.Fill(ds);
+                return Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString());
+            }
+        }
+
 
         private void button21_Click(object sender, EventArgs e)
         {

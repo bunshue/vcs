@@ -20,7 +20,10 @@ namespace 多曲線數據分析
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            using (SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_13"))
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection con = new SqlConnection(cnstr))
             {
                 SqlDataAdapter da = new SqlDataAdapter("select Years from tb_curve", con);
                 DataTable dt = new DataTable();
@@ -33,6 +36,9 @@ namespace 多曲線數據分析
 
         private void CreateImage(int ID)
         {
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
+
             int height = 440, width = 600;
             System.Drawing.Bitmap image = new System.Drawing.Bitmap(width, height);
             Graphics g = Graphics.FromImage(image);
@@ -52,7 +58,7 @@ namespace 多曲線數據分析
                 Brush brush2 = new SolidBrush(Color.SaddleBrown);
 
                 string str = "SELECT * FROM tb_curve WHERE Years=" + ID + "";
-                SqlConnection Con = new SqlConnection("server=.;pwd=;uid=sa;database=db_13");
+                SqlConnection Con = new SqlConnection(cnstr);
                 Con.Open();
                 SqlCommand Com = new SqlCommand(str, Con);
                 SqlDataReader dr = Com.ExecuteReader();
@@ -182,4 +188,3 @@ namespace 多曲線數據分析
         }
     }
 }
-

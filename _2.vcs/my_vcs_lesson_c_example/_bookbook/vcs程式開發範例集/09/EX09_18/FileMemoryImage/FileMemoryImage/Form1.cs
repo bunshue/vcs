@@ -14,7 +14,11 @@ namespace FileMemoryImage
 {
     public partial class Form1 : Form
     {
-        SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09");
+        // 連接字串
+        string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09.mdf;Integrated Security=True;Connect Timeout=30";
+
+        SqlConnection con;
+
         string strPath = "";
 
         public Form1()
@@ -24,6 +28,8 @@ namespace FileMemoryImage
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            con = new SqlConnection(cnstr);
+
             string[] strSex = { "男", "女" };
             this.comboBox1.DataSource = strSex;
             string[] strCall = { "員工", "主幹人員", "部門經理", "經理" };

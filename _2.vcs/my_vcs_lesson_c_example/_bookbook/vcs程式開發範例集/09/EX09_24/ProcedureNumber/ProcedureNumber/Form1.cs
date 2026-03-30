@@ -14,6 +14,9 @@ namespace ProcedureNumber
 {
     public partial class Form1 : Form
     {
+        // 連接字串
+        string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09.mdf;Integrated Security=True;Connect Timeout=30";
+
         public Form1()
         {
             InitializeComponent();
@@ -136,7 +139,7 @@ namespace ProcedureNumber
 
         private void AutoID()
         {
-            using (SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09"))
+            using (SqlConnection con = new SqlConnection(cnstr))
             {
                 con.Open();
                 SqlCommand cmd = new SqlCommand();
@@ -156,7 +159,7 @@ namespace ProcedureNumber
 
         private void InsertInfo()
         {
-            using (SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09"))
+            using (SqlConnection con = new SqlConnection(cnstr))
             {
                 con.Open();
                 SqlCommand cmd = new SqlCommand();

@@ -13,9 +13,13 @@ namespace DataObjectUpData
 {
     public partial class Form1 : Form
     {
+        // 連接字串
+        string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09.mdf;Integrated Security=True;Connect Timeout=30";
+
+        SqlConnection con;
+
         static int Num = 0;
         int Count = 0;
-        SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09");
 
         public Form1()
         {
@@ -24,6 +28,8 @@ namespace DataObjectUpData
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            con = new SqlConnection(cnstr);
+
             Resultinfo(Num);
             using (SqlCommand cmd = new SqlCommand("select Count(*) from 員工表", con))
             {

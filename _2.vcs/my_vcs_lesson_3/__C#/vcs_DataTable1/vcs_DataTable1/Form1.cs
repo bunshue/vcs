@@ -95,11 +95,11 @@ namespace vcs_DataTable1
 
             show_data_table(dt);//顯示 DataTable 的內容
 
-            int rows = dt.Rows.Count;
+            int R = dt.Rows.Count;
 
             string a = "";
 
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < R; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
@@ -176,9 +176,11 @@ namespace vcs_DataTable1
             show_data_table(dt);//顯示 DataTable 的內容
 
             StringBuilder strXml = new StringBuilder();
-            for (int i = 0; i < dt.Rows.Count; i++)
+            int R = dt.Rows.Count;
+            int C = dt.Columns.Count;
+            for (int i = 0; i < R; i++)
             {
-                for (int j = 0; j < dt.Columns.Count; j++)
+                for (int j = 0; j < C; j++)
                 {
                     strXml.AppendLine("<" + dt.Columns[j].ColumnName + ">" + dt.Rows[i][j] + "</" + dt.Columns[j].ColumnName + ">");
                 }
@@ -202,7 +204,6 @@ namespace vcs_DataTable1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            int i;
             //建立DataTable 2
             //1.創建表實例
             DataTable dt = new DataTable();
@@ -212,8 +213,8 @@ namespace vcs_DataTable1
             show_data_table(dt);//顯示 DataTable 的內容
 
             richTextBox1.Text += "由 姓名 項列出資料\n";
-            int rows = dt.Rows.Count;
-            for (i = 0; i < rows; i++)
+            int R = dt.Rows.Count;
+            for (int i = 0; i < R; i++)
             {
                 richTextBox1.Text += "找到\t" + dt.Rows[i]["姓名"].ToString() + "\n";
             }
@@ -223,8 +224,8 @@ namespace vcs_DataTable1
             show_data_table(dt);//顯示 DataTable 的內容
 
             richTextBox1.Text += "由 姓名 項列出資料\n";
-            rows = dt.Rows.Count;
-            for (i = 0; i < rows; i++)
+            R = dt.Rows.Count;
+            for (int i = 0; i < R; i++)
             {
                 richTextBox1.Text += "找到\t" + dt.Rows[i]["姓名"].ToString() + "\n";
             }
@@ -447,21 +448,20 @@ namespace vcs_DataTable1
                 //Method(dt);//显示数据表中内容
             }
 
-            int len1 = dt.Columns.Count;
-            int len2 = dt.Rows.Count;
+            int C = dt.Columns.Count;
+            int R = dt.Rows.Count;
+            richTextBox1.Text += "C = " + C.ToString() + "\n";
+            richTextBox1.Text += "R = " + R.ToString() + "\n";
 
-            richTextBox1.Text += "len1 = " + len1.ToString() + "\n";
-            richTextBox1.Text += "len2 = " + len2.ToString() + "\n";
-
-            for (i = 0; i < len1; i++)
+            for (i = 0; i < C; i++)
             {
                 richTextBox1.Text += dt.Columns[i].ToString() + "\t";
             }
             richTextBox1.Text += "\n";
 
-            for (j = 0; j < len2; j++)
+            for (j = 0; j < R; j++)
             {
-                for (i = 0; i < len1; i++)
+                for (i = 0; i < C; i++)
                 {
                     richTextBox1.Text += dt.Rows[j][i].ToString() + "\t";
                 }
@@ -503,21 +503,20 @@ namespace vcs_DataTable1
                 }
             }
 
-            len1 = dt.Columns.Count;
-            len2 = dt.Rows.Count;
+            C = dt.Columns.Count;
+            R = dt.Rows.Count;
+            richTextBox1.Text += "C = " + C.ToString() + "\n";
+            richTextBox1.Text += "R = " + R.ToString() + "\n";
 
-            richTextBox1.Text += "len1 = " + len1.ToString() + "\n";
-            richTextBox1.Text += "len2 = " + len2.ToString() + "\n";
-
-            for (i = 0; i < len1; i++)
+            for (i = 0; i < C; i++)
             {
                 richTextBox1.Text += dt.Columns[i].ToString() + "\t";
             }
             richTextBox1.Text += "\n";
 
-            for (j = 0; j < len2; j++)
+            for (j = 0; j < R; j++)
             {
-                for (i = 0; i < len1; i++)
+                for (i = 0; i < C; i++)
                 {
                     richTextBox1.Text += dt.Rows[j][i].ToString() + "\t";
                 }
@@ -584,7 +583,8 @@ namespace vcs_DataTable1
             dt.BeginLoadData();
             dt.EndLoadData();
 
-            for (int i = 0; i < dt.Columns.Count; i++)
+            int C = dt.Columns.Count;
+            for (int i = 0; i < C; i++)
             {
                 Console.Write(dt.Columns[i].ColumnName + "\t");
                 richTextBox1.Text += dt.Columns[i].ColumnName + "\t";
@@ -593,7 +593,8 @@ namespace vcs_DataTable1
             Console.WriteLine();
             richTextBox1.Text += "\n";
 
-            for (int i = 0; i < dt.Columns.Count; i++)
+            C = dt.Columns.Count;
+            for (int i = 0; i < C; i++)
             {
                 Console.Write(row[i].ToString() + "\t");
                 richTextBox1.Text += row[i].ToString() + "\t";
@@ -769,11 +770,12 @@ namespace vcs_DataTable1
         {
             ArrayList indexList = new ArrayList();
             // 找出待删除的行索引   
-            for (int i = 0; i < dt.Rows.Count - 1; i++)
+            int R = dt.Rows.Count;
+            for (int i = 0; i < R - 1; i++)
             {
                 if (!IsContain(indexList, i))
                 {
-                    for (int j = i + 1; j < dt.Rows.Count; j++)
+                    for (int j = i + 1; j < R; j++)
                     {
                         if (dt.Rows[i][Field].ToString() == dt.Rows[j][Field].ToString())
                         {
