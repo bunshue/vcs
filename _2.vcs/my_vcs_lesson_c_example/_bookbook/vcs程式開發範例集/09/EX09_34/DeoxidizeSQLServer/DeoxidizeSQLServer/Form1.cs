@@ -23,7 +23,10 @@ namespace DeoxidizeSQLServer
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            using (SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=master"))
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection con = new SqlConnection(cnstr))
             {
                 DataTable dt = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter("select name from sysdatabases", con);

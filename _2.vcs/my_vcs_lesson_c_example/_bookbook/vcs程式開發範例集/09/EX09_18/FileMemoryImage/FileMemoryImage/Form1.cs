@@ -15,7 +15,7 @@ namespace FileMemoryImage
     public partial class Form1 : Form
     {
         // 連接字串
-        string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09.mdf;Integrated Security=True;Connect Timeout=30";
+        string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
 
         SqlConnection con;
 
@@ -32,12 +32,24 @@ namespace FileMemoryImage
 
             string[] strSex = { "男", "女" };
             this.comboBox1.DataSource = strSex;
+
             string[] strCall = { "員工", "主幹人員", "部門經理", "經理" };
             this.comboBox2.DataSource = strCall;
-            string[] strHunYin = { "以婚", "未婚", "離異" };
+
+            string[] strHunYin = { "已婚", "未婚", "離異" };
             this.comboBox3.DataSource = strHunYin;
+
             string[] strJianKang = { "很好", "良好", "一般" };
             this.comboBox4.DataSource = strJianKang;
+
+            textBox1.Text = "A123456";//	檔案編號
+            textBox2.Text = "1234";//	工號
+            textBox3.Text = "david";//	姓名
+            textBox4.Text = "2006/03/11";//	生日
+            textBox5.Text = "Taiwan";//	籍貫
+            textBox6.Text = "5";//	工齡
+            textBox7.Text = "研發部";//	部門名稱
+            textBox8.Text = "0912345678";//	電話
         }
 
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
@@ -52,7 +64,7 @@ namespace FileMemoryImage
                 if (insertInfo())
                 {
                     MessageBox.Show("新增成功");
-                    clearText();
+                    //clearText();
                 }
             }
             else
@@ -107,6 +119,9 @@ namespace FileMemoryImage
                 strSql.Append("insert into 檔案訊息 values(@檔案編號,@工號,");
                 strSql.Append("@姓名,@照片,@性別,@出生日期,@籍貫,@工齡,@電話,");
                 strSql.Append("@部門名稱,@技術職稱,@婚姻狀態,@健康狀態)");
+
+                richTextBox1.Text += "strSql : " + strSql + "\n";
+
                 SqlCommand cmd = new SqlCommand(strSql.ToString(), con);
                 cmd.Parameters.Add("@檔案編號", SqlDbType.Text).Value = this.textBox1.Text.Trim().ToString();
                 cmd.Parameters.Add("@工號", SqlDbType.Text).Value = this.textBox2.Text.Trim().ToString();
@@ -132,7 +147,7 @@ namespace FileMemoryImage
 
         }
 
-        #region//存取器
+        //#region//存取器
         private string 檔案編號;
         private string 工號;
         private string 姓名;
@@ -212,13 +227,7 @@ namespace FileMemoryImage
             get { return 健康狀態; }
             set { 健康狀態 = value; }
         }
-
-        #endregion
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
+        //#endregion
     }
 }
 

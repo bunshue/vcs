@@ -13,7 +13,10 @@ namespace 利用多餅型圖分析企業人力資源情況
 {
     public partial class Form1 : Form
     {
-        SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_13");
+        // 連接字串
+        string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
+
+        SqlConnection con;
         SqlCommand cmd;
         static int ConutNum = 0;
         static float floatNum = 0.0f;
@@ -25,6 +28,8 @@ namespace 利用多餅型圖分析企業人力資源情況
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            con = new SqlConnection(cnstr);
+
             using (cmd = new SqlCommand("select sum(t_Num) from tb_manpower ", con))
             {
                 con.Open();

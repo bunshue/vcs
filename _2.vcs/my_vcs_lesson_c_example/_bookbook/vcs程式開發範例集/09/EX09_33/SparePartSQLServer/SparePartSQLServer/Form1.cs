@@ -26,7 +26,10 @@ namespace SparePartSQLServer
             string db_filename = "db_09_Data.MDF";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
-            using (SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=master"))
+            // 連接字串
+            //string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection con = new SqlConnection(cnstr))
             {
                 DataTable dt = new DataTable();
                 SqlDataAdapter da = new SqlDataAdapter("select name from sysdatabases", con);
@@ -58,11 +61,10 @@ namespace SparePartSQLServer
                     if (!File.Exists(sd.FileName.ToString()))
                     {
                         SqlConnection con = new SqlConnection();		//利用程式碼完成連接資料庫
-                        
-            // 連接字串
-            //string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Database1.mdf;Integrated Security=True;Connect Timeout=30";
-                        
-                        
+
+                        // 連接字串
+                        //string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Database1.mdf;Integrated Security=True;Connect Timeout=30";
+
                         con.ConnectionString = "server=.;uid=sa;pwd=;database='" + this.comboBox1.Text + "'";
                         con.Open();
                         SqlCommand com = new SqlCommand();

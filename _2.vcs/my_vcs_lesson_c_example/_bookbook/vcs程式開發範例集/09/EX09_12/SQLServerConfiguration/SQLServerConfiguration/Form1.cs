@@ -34,7 +34,6 @@ namespace SQLServerConfiguration
             string db_filename = "db_09_Data.MDF";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
-            //using (SqlConnection con = new SqlConnection("server=.;uid=sa;pwd=;database=master"))
             using (SqlConnection con = new SqlConnection(cnstr))
             {
                 SqlDataAdapter da = new SqlDataAdapter("select name from sysdatabases ", con);
@@ -53,7 +52,7 @@ namespace SQLServerConfiguration
             return;
             
             // 連接字串
-            //string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Database1.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
 
             using (SqlConnection con = new SqlConnection("server=.;uid=sa;pwd=;database='" + strDatabase + "'"))
             {

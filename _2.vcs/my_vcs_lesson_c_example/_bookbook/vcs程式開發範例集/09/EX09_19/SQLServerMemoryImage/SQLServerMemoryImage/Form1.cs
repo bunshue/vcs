@@ -15,7 +15,7 @@ namespace SQLServerMemoryImage
     public partial class Form1 : Form
     {
         // 連接字串
-        string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09.mdf;Integrated Security=True;Connect Timeout=30";
+        string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
 
         SqlConnection con;
 
@@ -35,6 +35,15 @@ namespace SQLServerMemoryImage
             string strSql = "select 員工編號,姓名,性別,籍貫,電話,部門名稱 from 員工訊息";
             this.dataGridView1.DataSource = DataBinding(strSql).DefaultView;
             this.button1.Enabled = false;
+
+            //textBox1.Text = "A123456";//	檔案編號
+            textBox2.Text = "1234";//	工號
+            textBox3.Text = "david";//	姓名
+            textBox4.Text = "2006/03/11";//	生日
+            textBox5.Text = "Taiwan";//	籍貫
+            textBox6.Text = "5";//	工齡
+            textBox7.Text = "研發部";//	部門名稱
+            textBox8.Text = "0912345678";//	電話
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -65,11 +74,6 @@ namespace SQLServerMemoryImage
                 MessageBox.Show("您選擇的圖片不能被讀取或文件類型不對！", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 this.pictureBox1.Image = null;
             }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -125,7 +129,6 @@ namespace SQLServerMemoryImage
             catch (Exception ey)
             {
                 this.button1.Enabled = true;
-                this.button2.Enabled = false;
                 return false;
             }
         }

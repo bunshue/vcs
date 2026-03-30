@@ -27,8 +27,8 @@ namespace ByteImage
         SqlDataAdapter sqlda;       //声明数据桥接器对象
         DataSet myds;               //声明数据集对象
 
-	// 連接字串
-	string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09.mdf;Integrated Security=True;Connect Timeout=30";
+        // 連接字串
+        string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
 
         //#endregion
 

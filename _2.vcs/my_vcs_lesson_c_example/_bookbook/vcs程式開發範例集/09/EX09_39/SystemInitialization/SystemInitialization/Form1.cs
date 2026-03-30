@@ -20,7 +20,10 @@ namespace SystemInitialization
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            using (SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09"))
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection con = new SqlConnection(cnstr))
             {
                 SqlDataAdapter da = new SqlDataAdapter("select name from tb_power", con);
                 DataTable dt = new DataTable();
@@ -35,7 +38,11 @@ namespace SystemInitialization
         {
             uncheck("false");//設定所有的CheckBox控制元件為不選取狀態
             string str = null;
-            using (SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09"))//連接資料庫
+
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection con = new SqlConnection(cnstr))//連接資料庫
             {
                 SqlCommand cmd = new SqlCommand("select power from tb_power where name='" + this.listBox1.Text + "'", con);//連接SQL語句與數擾庫的連接
                 cmd.Connection = con;
@@ -165,7 +172,10 @@ namespace SystemInitialization
                 strValue += "0";
             }
 
-            using (SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09"))
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection con = new SqlConnection(cnstr))
             {
                 SqlCommand cmd = new SqlCommand("update tb_Power set power='" + strValue + "' where name='" + this.listBox1.Text + "' ", con);
                 cmd.Connection = con;

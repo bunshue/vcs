@@ -57,13 +57,16 @@ namespace AddOnsSQLServer
 
         private void fujia()
         {
-            using (SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=master"))
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection cn = new SqlConnection(cnstr))
             {
                 try
                 {
                     SqlCommand cmd = new SqlCommand();
-                    con.Open();
-                    cmd.Connection = con;
+                    cn.Open();
+                    cmd.Connection = cn;
                     StringBuilder sb = new StringBuilder();
                     sb.Append("sp_attach_db @dbname='" + this.textBox1.Text + "',");
                     sb.Append("@filename1='" + this.textBox3.Text + "'");

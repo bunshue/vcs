@@ -49,7 +49,10 @@ namespace AddOnsOddSQLServer
 
         private void fujia()
         {
-            using (SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=master"))
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection con = new SqlConnection(cnstr))
             {
                 try
                 {

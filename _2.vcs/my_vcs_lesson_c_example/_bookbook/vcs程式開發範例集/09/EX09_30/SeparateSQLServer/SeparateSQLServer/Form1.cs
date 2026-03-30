@@ -30,11 +30,10 @@ namespace SeparateSQLServer
             string db_filename = "db_09_Data.MDF";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
-            //using (SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=master"))
-            using (SqlConnection con = new SqlConnection(cnstr))
+            using (SqlConnection cn = new SqlConnection(cnstr))
             {
                 DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter("select name from sysdatabases", con);
+                SqlDataAdapter da = new SqlDataAdapter("select name from sysdatabases", cn);
                 da.Fill(dt);
                 this.comboBox1.DataSource = dt.DefaultView;
                 this.comboBox1.DisplayMember = "name";
@@ -49,14 +48,13 @@ namespace SeparateSQLServer
             string db_filename = "db_09_Data.MDF";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
-            //using (SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=master"))
-            using (SqlConnection con = new SqlConnection(cnstr))
+            using (SqlConnection cn = new SqlConnection(cnstr))
             {
                 try
                 {
                     SqlCommand cmd = new SqlCommand();
-                    con.Open();
-                    cmd.Connection = con;
+                    cn.Open();
+                    cmd.Connection = cn;
                     cmd.CommandText = "sp_detach_db @dbname='" + this.comboBox1.Text + "'";
                     cmd.ExecuteNonQuery();
                     richTextBox1.Text += "分離成功\n";

@@ -14,7 +14,7 @@ namespace PROCEDUREWrite
     public partial class Form1 : Form
     {
         // 連接字串
-        string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09.mdf;Integrated Security=True;Connect Timeout=30";
+        string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
 
         SqlConnection con;
 
@@ -27,12 +27,7 @@ namespace PROCEDUREWrite
         {
             con = new SqlConnection(cnstr);
 
-            showinfo();
-        }
-
-        //自定義方法，顯示數據
-        private void showinfo()
-        {
+            //顯示數據
             using (SqlDataAdapter da = new SqlDataAdapter("select * from 員工表", con))//建立SQL語旬與數據庫的連接
             {
                 DataTable dt = new DataTable();//實例化DataTable類
@@ -118,9 +113,17 @@ namespace PROCEDUREWrite
                 {
                     MessageBox.Show("新增過程失敗");
                 }
-                showinfo();//顯示新增後的結果
+
+                //顯示新增後的結果
+                //顯示數據
+                using (SqlDataAdapter da = new SqlDataAdapter("select * from 員工表", con))//建立SQL語旬與數據庫的連接
+                {
+                    DataTable dt = new DataTable();//實例化DataTable類
+                    da.Fill(dt);//新增SQL語句並執行
+                    DataView dv = new DataView(dt);//實例化DataView
+                    this.dataGridView1.DataSource = dv;//顯示數據
+                }
             }
         }
     }
 }
-
