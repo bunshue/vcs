@@ -204,44 +204,10 @@ namespace vcs_SqlConnection2
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-
-
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //查詢特定數據列
-            string db_filename = "db_10_Data.MDF";
-            string sqlstr = "SELECT 學生編號,學生姓名 FROM tb_01";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            //3030
-
-            //在列上加入計算
-            db_filename = "db_10_Data.MDF";
-            sqlstr = "SELECT 產品編號,產品名稱,產品單價,產品數量,(產品數量*產品單價) AS 總金額 FROM tb_03";
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-
-
-            //3030
-
-
-            //使用內連接選擇一個表與另一個表中行相關的所有行
-            db_filename = "db_10_Data.MDF";
-            sqlstr = "SELECT 員工訊息表.員工編號, 員工訊息表.員工姓名 FROM 員工訊息表 INNER JOIN 員工工資表 ON 員工訊息表.員工編號 = 員工工資表.員工編號";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            //3030
-
-            //複雜內連接查詢
-            //員工訊息表、員工工資表和加班訊息表中，使用內連接查詢出加班員工的基本訊息。
-            db_filename = "db_10_Data.MDF";
-            sqlstr = "SELECT 員工訊息表.員工編號, 員工訊息表.員工姓名, 員工工資表.基本工資, 加班訊息表.加班天數, 加班訊息表.加班費 FROM 員工訊息表 INNER JOIN 加班訊息表 ON 員工訊息表.員工編號 = 加班訊息表.員工編號 INNER JOIN 員工工資表 ON 加班訊息表.員工編號 = 員工工資表.員工編號";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -327,18 +293,6 @@ namespace vcs_SqlConnection2
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //按倉庫分組統計圖書庫存（多列）
-            string db_filename = "db_10_Data.MDF";
-            string sqlstr = "SELECT * FROM tb_rkb";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //按倉庫分組統計圖書庫存（多列）
-            //按倉庫名、圖書名稱進行分組，並統計其庫存數量
-
-            sqlstr = "SELECT 存放位置,書名,sum(庫存數量) as 合計庫存數量 FROM tb_rkb group by 存放位置,書名 order by 1";
-            sql_read_database(db_filename, sqlstr, dataGridView2);
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -747,9 +701,8 @@ namespace vcs_SqlConnection2
 
             //tmp string sqlstr = "SELECT DISTINCT 所屬部門, COUNT(*) AS 部門人數, MAX(基本工資) AS 最高工資, AVG(基本工資) AS 平均工資 FROM 部門工資統計表 GROUP BY 所屬部門 HAVING (AVG(基本工資) > 1000)";
 
-            //動態 交叉表 查詢
             /*
-            //動態交叉表查詢
+            //動態 交叉表 查詢
             // 查詢字串
             string sqlstr = "Corss";
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
@@ -769,57 +722,119 @@ namespace vcs_SqlConnection2
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //用子查詢作表達式
+            /*
+            //show
+            string db_filename = "db_10_Data.MDF";
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);
+            // 查詢字串
+            string sqlstr = "SELECT * FROM tb_Stud";
+            
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            */
+
+            //用子查詢作表達式
+
+            //查詢 計算機 課程的平均成績
+
+            string course = "計算機";
+
+            string db_filename = "db_10_Data.MDF";
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);
+            // 查詢字串
+            string sqlstr = "SELECT distinct (SELECT AVG(成績) FROM tb_Stud  WHERE 課程='" + course + "') as 平均成績  FROM tb_Stud ";
+
+            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
+            {
+                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
+                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+                richTextBox1.Text += "查詢 計算機 課程的平均成績 : " + ds.Tables[0].Rows[0][0].ToString() + "\n";
+            }
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-            //對聯合查詢後的結果進行排序
+            //查詢庫存數量占後20%的圖書訊息
 
             string db_filename = "db_10_Data.MDF";
+            string sqlstr = "SELECT * FROM tb_kcb";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
 
-            //降序排序
-            //string sqlstr = "SELECT cast(成績 AS varchar(20)) AS 成績 FROM 學生成績表 UNION SELECT DISTINCT 課程編號 FROM 學生訊息表 UNION SELECT 課程名稱 FROM 課程表 WHERE 課程名稱 = '計算機英語' UNION SELECT CONVERT(varchar(20), 出勤率) FROM 學生考勤表 WHERE 出勤率 > 0.8 ORDER BY 成績 DESC";
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
-            //升序排序
-            string sqlstr = "SELECT cast(成績 AS varchar(20)) AS 成績 FROM 學生成績表 UNION SELECT DISTINCT 課程編號 FROM 學生訊息表 UNION SELECT 課程名稱 FROM 課程表 WHERE 課程名稱 = '計算機英語' UNION SELECT CONVERT(varchar(20), 出勤率) FROM 學生考勤表 WHERE 出勤率 > 0.8";
+            //對數據進行降序查詢
+            //查詢圖書訊息並按現存數量降序排序
+            sqlstr = "SELECT distinct 書號,書名,作者,出版社,現存數量 FROM tb_kcb order by 現存數量 desc ";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
 
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //查詢庫存數量占後20%的圖書訊息
+            sqlstr = "SELECT top 20 percent * FROM tb_kcb order by 現存數量 asc";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //查詢前10名數據
+            sqlstr = "SELECT top 10* FROM tb_kcb order by 現存數量 desc";
             sql_read_database(db_filename, sqlstr, dataGridView1);
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
-            //多表聯合查詢
-            string db_filename = "db_10_Data.MDF";
-            string sqlstr = "SELECT 姓名 From 學生訊息表 UNION SELECT 課程名稱 From 課程表 WHERE 課程名稱='計算機英語' UNION SELECT convert(varchar(20),成績) FROM 學生成績表 WHERE 成績 > 90 UNION Select convert(varchar(20),出勤率) From 學生考勤表 WHERE 出勤率 > 0.8";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
-            //用子查詢作派生的表
+            //使用COMPUTE BY
             string db_filename = "db_10_Data.MDF";
-            string sqlstr = "SELECT * FROM tb_Stu";
+            string sqlstr = "SELECT * FROM 工資表";
             sql_read_database(db_filename, sqlstr, dataGridView1);
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            //顯示學生編號排在前10位，而且具有相同名字的學生個數
-            sqlstr = "SELECT 學生姓名, count(*) AS 相同數量 FROM (SELECT top 10 學生姓名 FROM tb_Stu order BY 學生編號 asc )as T GROUP BY 學生姓名";
+            //使用COMPUTE BY
+            sqlstr = "SELECT * FROM 工資表 order by 所屬部門 compute sum(工資) by 所屬部門";
+
+            // some error
             sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            //richTextBox1.Text += "ASP部門工資統計：" + ds.Tables[1].Rows[0][0].ToString() + "\n";
+            //richTextBox1.Text += "設計部門工資統計：" + ds.Tables[3].Rows[0][0].ToString() + "\n";
+            //richTextBox1.Text += "檔案部門工資統計：" + ds.Tables[5].Rows[0][0].ToString() + "\n";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //使用COMPUTE
+            //利用COMPUTE子句對工資表中全部員工的工資情況進行匯總
+
+            sqlstr = "SELECT * FROM 工資表 order by 所屬部門 compute sum(工資)";
+            // some error
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            //richTextBox1.Text += ds.Tables[1].Rows[0][0].ToString();
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //在分組查詢中使用ROLLUP
+
+            sqlstr = "SELECT 所屬部門,性別, avg(工資) as 平均工資 FROM 工資表 group by 所屬部門,性別 with ROLLUP";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //在分組查詢中使用CUBE運算符
+            sqlstr = "SELECT 所屬部門,性別,avg(工資)as 平均工資 FROM 工資表 group by 所屬部門,性別 with cube";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
-            string db_filename = "db_10_Data.MDF";
-            string sqlstr = "SELECT * FROM 工資數據表, 部門表";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //複雜內嵌查詢
-            //查詢學歷是本科的部門經理的2005年10月份的工資情況
-            sqlstr = "SELECT * FROM 工資數據表 WHERE 工資月份=10 AND 人員姓名 IN( SELECT 負責人 FROM 部門表 WHERE 負責人 IN(SELECT 人員姓名 FROM 人員表 WHERE 學歷='本科')) order by 人員編號";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -1004,218 +1019,43 @@ namespace vcs_SqlConnection2
 
         private void button20_Click(object sender, EventArgs e)
         {
-            string db_filename = "db_10_Data.MDF";
-            string sqlstr = "SELECT * FROM tb_stu ,tb_mark";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //簡單內嵌查詢
-            //查詢總分在５８０分以上的學生訊息
-
-            sqlstr = "SELECT distinct 學生姓名,學生編號, 性別,出生年月,年齡,所在學院,所學專業 FROM tb_stu WHERE 學生姓名 IN (SELECT  學生姓名 FROM tb_mark WHERE 總分>=580)";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
-            string db_filename = "db_10_Data.MDF";
-            string sqlstr = "SELECT * FROM 顧客表, 僱員表";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //合併多個結果集
-            //利用UNION運算符完成將顧客表和僱員表中的編號、姓名、地址、郵編字段合併到一個表中。
-            sqlstr = "SELECT 顧客編號 as 編號,顧客姓名 as 姓名,所在城市,郵編 FROM 顧客表 union SELECT 僱員編號,僱員名稱,家庭住址,郵編 FROM 僱員表";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
-            string db_filename = "db_10_Data.MDF";
-            string sqlstr = "SELECT * FROM tb_stu,tb_mark";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //使用表別名
-            //利用表的別名查詢計算機分院學生的成績
-            //string db_filename = "db_10_Data.MDF";
-            sqlstr = "SELECT distinct S.學生編號,S.學生姓名,M.高數,M.外語,M.馬經,S.所在學院 FROM tb_stu as S,tb_mark as M WHERE S.學生編號=M.學生編號 AND S.所在學院='計算機學院'";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
         }
 
         private void button23_Click(object sender, EventArgs e)
         {
-            string db_filename = "db_10_Data.MDF";
-            string sqlstr = "SELECT * FROM tb_stu s ,tb_mark";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //利用FROM子句進行多表查詢
-            //查詢高數成績大於85分的學生的詳細訊息
-            //string db_filename = "db_10_Data.MDF";
-            sqlstr = "SELECT distinct s.學生編號,s.學生姓名,s.性別,s.出生年月,s.年齡,s.所在學院,s.所學專業,m.高數 FROM tb_stu s ,tb_mark m WHERE s.學生編號=m.學生編號 AND m.高數 >85";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
         }
 
         private void button24_Click(object sender, EventArgs e)
         {
-            //用子查詢作表達式
-            /*
-            //show
-            string db_filename = "db_10_Data.MDF";
-            // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);
-            // 查詢字串
-            string sqlstr = "SELECT * FROM tb_Stud";
-            
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            */
-
-            //用子查詢作表達式
-
-            //查詢 計算機 課程的平均成績
-
-            string course = "計算機";
-
-            string db_filename = "db_10_Data.MDF";
-            // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);
-            // 查詢字串
-            string sqlstr = "SELECT distinct (SELECT AVG(成績) FROM tb_Stud  WHERE 課程='" + course + "') as 平均成績  FROM tb_Stud ";
-
-            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
-            {
-                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
-                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
-                richTextBox1.Text += "查詢 計算機 課程的平均成績 : " + ds.Tables[0].Rows[0][0].ToString() + "\n";
-            }
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
-            //查詢庫存數量占後20%的圖書訊息
-            string db_filename = "db_10_Data.MDF";
-            string sqlstr = "SELECT * FROM tb_kcb";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //對數據進行降序查詢
-            //查詢圖書訊息並按現存數量降序排序
-            sqlstr = "SELECT distinct 書號,書名,作者,出版社,現存數量 FROM tb_kcb order by 現存數量 desc ";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //查詢庫存數量占後20%的圖書訊息
-            sqlstr = "SELECT top 20 percent * FROM tb_kcb order by 現存數量 asc";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //查詢前10名數據
-            sqlstr = "SELECT top 10* FROM tb_kcb order by 現存數量 desc";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
-            string db_filename = "db_10_Data.MDF";
-            string sqlstr = "SELECT * FROM tb_BookSell";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //在分組查詢中使用ALL關鍵字
-            //在圖書銷售表中對機械出版社出版的不同圖書的銷售情況進行統計，並列出其他出版社的圖書（不作統計）
-            sqlstr = "SELECT 書名,出版社,sum(金額) as 總計金額 FROM tb_BookSell WHERE 出版社='機械' group by all 書名,出版社 ";
-            sql_read_database(db_filename, sqlstr, dataGridView2);
         }
 
         private void button27_Click(object sender, EventArgs e)
         {
-            string db_filename = "db_10_Data.MDF";
-            string sqlstr = "SELECT * FROM 工資表";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //使用COMPUTE BY
-            sqlstr = "SELECT * FROM 工資表 order by 所屬部門 compute sum(工資) by 所屬部門";
-
-            // some error
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            //richTextBox1.Text += "ASP部門工資統計：" + ds.Tables[1].Rows[0][0].ToString() + "\n";
-            //richTextBox1.Text += "設計部門工資統計：" + ds.Tables[3].Rows[0][0].ToString() + "\n";
-            //richTextBox1.Text += "檔案部門工資統計：" + ds.Tables[5].Rows[0][0].ToString() + "\n";
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //使用COMPUTE
-            //利用COMPUTE子句對工資表中全部員工的工資情況進行匯總
-
-            sqlstr = "SELECT * FROM 工資表 order by 所屬部門 compute sum(工資)";
-            // some error
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            //richTextBox1.Text += ds.Tables[1].Rows[0][0].ToString();
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //在分組查詢中使用ROLLUP
-
-            sqlstr = "SELECT 所屬部門,性別, avg(工資) as 平均工資 FROM 工資表 group by 所屬部門,性別 with ROLLUP";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //在分組查詢中使用CUBE運算符
-            sqlstr = "SELECT 所屬部門,性別,avg(工資)as 平均工資 FROM 工資表 group by 所屬部門,性別 with cube";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
-            //查詢字串
-            //請輸入查詢院系名稱：
-            //計算機
-
-            string db_filename = "db_10_Data.MDF";
-            string search_college = "計算機";
-            string sqlstr = "SELECT * FROM tb_05 WHERE 所在院系 LIKE '%" + search_college + "%'";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            /*
-            //查詢數字
-            //查詢年齡為：23
-
-            string db_filename = "db_10_Data.MDF";
-            int age = 23;
-            string sqlstr = "SELECT * FROM tb_05 WHERE 學生年齡=" + age.ToString();
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            */
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
-            string db_filename = "db_10_Data.MDF";
-            string sqlstr = "SELECT * FROM xsb";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //多表分組統計
-            //查詢圖書的銷售數量和現存數量，並按書號、書名等分組
-            sqlstr = "SELECT k.書號,k.書名,x.作者, sum(k.現存數量)as 現存數量 ,sum(x.銷售數量)as 銷售數量 FROM xsb x ,kcb k WHERE x.書號=k.書號  group by k.書號,k.書名,x.作者, k.現存數量 order by 1";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
         }
     }
 }
@@ -1239,8 +1079,6 @@ namespace vcs_SqlConnection2
 
 
 /*
-
-
             //取得數據庫中的全部使用者圖示
             string db_filename = "db_10_Data.MDF";
             string sqlstr = "SELECT name as 圖示名稱,crdate as 建立日期,refDate as 最後修改時間 FROM sysobjects";
