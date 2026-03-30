@@ -58,6 +58,11 @@ namespace SparePartSQLServer
                     if (!File.Exists(sd.FileName.ToString()))
                     {
                         SqlConnection con = new SqlConnection();		//利用程式碼完成連接資料庫
+                        
+            // 連接字串
+            //string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Database1.mdf;Integrated Security=True;Connect Timeout=30";
+                        
+                        
                         con.ConnectionString = "server=.;uid=sa;pwd=;database='" + this.comboBox1.Text + "'";
                         con.Open();
                         SqlCommand com = new SqlCommand();

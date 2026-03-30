@@ -17,7 +17,7 @@ namespace XmlToDatabase
     {
         //Employee.xml 不知道寫到哪?
         static string strPath = "Employee.xml";  // 记录XML文件路径
-        //定义数据库连接字符串
+        // 連接字串
         string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
         linqtosqlDataContext linq;  // 创建Linq连接对象
 

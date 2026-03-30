@@ -20,7 +20,9 @@ namespace 柱形圖表分析商品走勢
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            using (SqlConnection Con = new SqlConnection("server=.;uid=sa;pwd=;database=db_13"))
+		// 連接字串
+		string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
+            using (SqlConnection Con = new SqlConnection(cnstr))
             {
                 DataTable dt = new DataTable();
                 SqlCommand cmd = new SqlCommand("select ShowYear from tb_Stat", Con);
@@ -36,7 +38,11 @@ namespace 柱形圖表分析商品走勢
         private int SumYear(int Year)
         {
             string cmdtxt2 = "SELECT SUM(Year_M1+Year_M2+Year_M3+Year_M4+Year_M5+Year_M6+Year_M7+Year_M8+Year_M9+Year_M10+Year_M11+Year_M12) AS number FROM tb_Stat WHERE ShowYear=" + Year + "";
-            using (SqlConnection Con = new SqlConnection("server=.;uid=sa;pwd=;database=db_13"))
+
+		// 連接字串
+		string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection Con = new SqlConnection(cnstr))
             {
                 Con.Open();
                 SqlDataAdapter dap = new SqlDataAdapter(cmdtxt2, Con);
@@ -112,7 +118,11 @@ namespace 柱形圖表分析商品走勢
 
                 int[] Count = new int[12];
                 string cmdtxt2 = "SELECT * FROM tb_Stat WHERE ShowYear=" + Year + "";
-                SqlConnection Con = new SqlConnection("server=.;uid=sa;pwd=;database=db_13");
+
+		// 連接字串
+		string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
+
+                SqlConnection Con = new SqlConnection(cnstr);
                 Con.Open();
                 SqlCommand Com = new SqlCommand(cmdtxt2, Con);
                 SqlDataAdapter da = new SqlDataAdapter();

@@ -34,7 +34,9 @@ namespace 在柱形圖的指定位置顯示說明文字
 
         private void Conn()
         {
-            con = new SqlConnection("server=.;uid=sa;pwd=;database=db_13");
+		// 連接字串
+		string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
+            con = new SqlConnection(cnstr);
             con.Open();
         }
 

@@ -60,9 +60,9 @@ WHERE id=@id",
         private void GetMessage()
         {
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
-            //创建数据库连接字符串
+            // 連接字串
             string P_Str_ConnectionStr = cnstr;
-            //创建SQL查询字符串
+            // 查詢字串
             string P_Str_SqlStr = string.Format("SELECT * FROM tb_Student_Copy");
             //创建数据适配器
             SqlDataAdapter P_SqlDataAdapter = new SqlDataAdapter(P_Str_SqlStr, P_Str_ConnectionStr);

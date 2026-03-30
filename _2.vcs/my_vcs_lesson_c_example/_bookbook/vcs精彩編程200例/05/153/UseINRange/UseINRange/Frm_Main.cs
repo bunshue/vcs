@@ -36,9 +36,9 @@ namespace UseINRange
         /// <returns>方法返回DataTable对象</returns>
         private DataTable GetStudent(string Begin, string end)
         {
-            //创建数据库连接字符串
+            // 連接字串
             String P_Str_ConnectionStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
-            //创建SQL查询字符串
+            // 查詢字串
             string P_Str_SqlStr = string.Format(@"SELECT 学生姓名,性别,年龄 FROM tb_Student WHERE 学生编号 IN (SELECT 学生编号 FROM tb_Grade WHERE 总分>{0} AND 总分<{1})", Begin, end);
             //创建数据适配器
             SqlDataAdapter P_SqlDataAdapter = new SqlDataAdapter(P_Str_SqlStr, P_Str_ConnectionStr);

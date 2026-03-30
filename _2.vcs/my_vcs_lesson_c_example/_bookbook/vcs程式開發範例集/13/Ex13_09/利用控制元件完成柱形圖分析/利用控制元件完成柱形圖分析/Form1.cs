@@ -20,7 +20,10 @@ namespace 利用控制元件完成柱形圖分析
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            using (SqlConnection con = new SqlConnection("server=.;uid=sa;pwd=;database=db_13"))
+		// 連接字串
+		string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
+        
+            using (SqlConnection con = new SqlConnection(cnstr))
             {
                 int XValse = 20;
                 DataSet ds = new DataSet();

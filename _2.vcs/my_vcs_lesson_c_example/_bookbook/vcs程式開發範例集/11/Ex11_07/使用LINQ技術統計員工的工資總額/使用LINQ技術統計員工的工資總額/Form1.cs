@@ -13,7 +13,8 @@ namespace 使用LINQ技術統計員工的工資總額
 {
     public partial class Form1 : Form
     {
-        string strCon = "Data Source=(local);database=db_11;uid=sa;pwd=;";
+    		// 連接字串
+		string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_11.mdf;Integrated Security=True;Connect Timeout=30";
         SqlConnection sqlcon;
         SqlDataAdapter sqlda;
         DataSet myds;

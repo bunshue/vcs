@@ -36,8 +36,10 @@ namespace 製作一個可以旋轉的餅型圖
 
         private void Conn()
         {
-            con = new SqlConnection("server=.;uid=sa;pwd=;database=db_13");
-            con.Open();
+		// 連接字串
+		string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
+		con = new SqlConnection(cnstr);
+		con.Open();
         }
 
         Bitmap bt;

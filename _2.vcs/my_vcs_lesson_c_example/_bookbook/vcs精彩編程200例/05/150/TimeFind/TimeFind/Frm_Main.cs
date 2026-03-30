@@ -35,10 +35,10 @@ namespace TimeFind
         /// <returns>方法返回DataTable对象</returns>
         private DataTable GetBook(DateTime dt1, DateTime dt2)
         {
-            //创建数据库连接字符串
+            // 連接字串
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
             string P_Str_ConnectionStr = cnstr;
-            //创建SQL查询字符串
+            // 查詢字串
             string P_Str_SqlStr = string.Format("SELECT * FROM tb_Book WHERE 日期 BETWEEN '{0}' AND '{1}'", dt1, dt2);
             //创建数据适配器
             SqlDataAdapter P_SqlDataAdapter = new SqlDataAdapter(P_Str_SqlStr, P_Str_ConnectionStr);
@@ -53,10 +53,10 @@ namespace TimeFind
         /// <returns>方法返回DataTable对象</returns>
         private DataTable GetMessage()
         {
-            //创建数据库连接字符串
+            // 連接字串
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
             string P_Str_ConnectionStr = string.Format(cnstr);
-            //创建SQL查询字符串
+            // 查詢字串
             string P_Str_SqlStr = string.Format("SELECT * FROM tb_Book");
             //创建数据适配器
             SqlDataAdapter P_SqlDataAdapter = new SqlDataAdapter(P_Str_SqlStr, P_Str_ConnectionStr);

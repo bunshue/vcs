@@ -29,7 +29,9 @@ namespace 利用餅型圖分析公司男女比率
 
         private void Conn()
         {
-            con = new SqlConnection("server=.;uid=sa;pwd=;database=db_13");
+		// 連接字串
+		string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
+            con = new SqlConnection(cnstr);
             con.Open();
         }
 

@@ -11,7 +11,8 @@ namespace 使用LINQ技術在SQL數據庫中修改數據
 {
     public partial class Form1 : Form
     {
-        string strCon = "Data Source=(local);database=db_11;uid=sa;pwd=;";
+    		// 連接字串
+		string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_11.mdf;Integrated Security=True;Connect Timeout=30";
 
         public Form1()
         {

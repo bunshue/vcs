@@ -159,7 +159,7 @@ namespace vcs_SqlConnection1
             }
         }
 
-        int select = 0;
+        int select = 7;
         private void button0_Click(object sender, EventArgs e)
         {
             //讀取資料庫 至 DGV, 要先知道資料庫檔案(.mdf)和表單名稱(table_name)和查詢條件
@@ -227,12 +227,22 @@ namespace vcs_SqlConnection1
                 // 查詢字串, 員工資料 排序 薪資 降冪
                 sqlstr = "SELECT * FROM 員工 ORDER BY 薪資 DESC";
             }
+            else if (select == 7)
+            {
+                richTextBox1.Text += "第 7 種\n";
+                db_filename = "vcs_sql01_db.mdf";
+                // 連接字串
+                cnstr = string.Format(db_cnstr, db_filename);
+                // 查詢字串
+                sqlstr = "SELECT * FROM vcs_sql01_table";
+            }
             else
             {
                 richTextBox1.Text += "xxxxxxx\n";
             }
-            select++;
-            if (select > 6)
+
+            //select++;
+            if (select > 7)
                 select = 0;
 
             sql_read_database(db_filename, sqlstr, dataGridView1);
@@ -1560,22 +1570,22 @@ namespace vcs_SqlConnection1
                 /*
                 //未指名資料庫檔案路徑, 則放在 C:\Users\bunsh\ 之下
                 string createDb = @"
-                    IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'vcs_sql08_db')
-                    CREATE DATABASE vcs_sql08_db";
+                    IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'vcs_sql01_db')
+                    CREATE DATABASE vcs_sql01_db";
                 */
                 //指名資料庫檔案路徑
                 string createDb = @"
-                    IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'vcs_sql08_db')
-                    CREATE DATABASE vcs_sql08_db
+                    IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'vcs_sql01_db')
+                    CREATE DATABASE vcs_sql01_db
                     ON PRIMARY (
-                        NAME = vcs_sql08_db,
-                        FILENAME = 'D:\\vcs_sql08_db.mdf',
+                        NAME = vcs_sql01_db,
+                        FILENAME = 'D:\\vcs_sql01_db.mdf',
                         SIZE = 5MB,
                         MAXSIZE = 100MB,
                         FILEGROWTH = 10%)
                     LOG ON (
-                        NAME = vcs_sql08_db_log,
-                        FILENAME = 'D:\\vcs_sql08_db.ldf',
+                        NAME = vcs_sql01_db_log,
+                        FILENAME = 'D:\\vcs_sql01_db.ldf',
                         SIZE = 1MB,
                         MAXSIZE = 25MB,
                         FILEGROWTH = 5MB)";
@@ -1590,27 +1600,27 @@ namespace vcs_SqlConnection1
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             //建立資料表, 不能重複建立
-            //建立資料表 vcs_sql08_table
-            //建立好資料庫後，你需要連線到 vcs_sql08_db，再執行 CREATE TABLE：
+            //建立資料表 vcs_sql01_table
+            //建立好資料庫後，你需要連線到 vcs_sql01_db，再執行 CREATE TABLE：
 
             richTextBox1.Text += "建立資料表 (如果不存在)\n";
 
             // 連接字串
-            cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\vcs_sql08_db.mdf;Integrated Security=True;Connect Timeout=30";
+            cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\vcs_sql01_db.mdf;Integrated Security=True;Connect Timeout=30";
 
             using (SqlConnection cn = new SqlConnection(cnstr))
             {
                 cn.Open();
 
                 string createTable = @"
-                IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='vcs_sql08_table' AND xtype='U')
-                CREATE TABLE vcs_sql08_table (
-                    id INT,
-                    ename NVARCHAR(100),
-                    cname NVARCHAR(100),
-                    weight INT
+                IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='vcs_sql01_table' AND xtype='U')
+                CREATE TABLE vcs_sql01_table (
+                    編號 INT,
+                    英文名 NVARCHAR(100),
+                    中文名 NVARCHAR(100),
+                    體重 INT
                 )";
-                //id INT PRIMARY KEY,
+                //編號 INT PRIMARY KEY,  //設定主鍵
 
                 using (SqlCommand cmd = new SqlCommand(createTable, cn))
                 {
@@ -1624,39 +1634,39 @@ namespace vcs_SqlConnection1
             richTextBox1.Text += "新增5筆資料\n";
 
             // 資料庫檔案
-            string db_filename = "vcs_sql08_db.mdf";
+            string db_filename = "vcs_sql01_db.mdf";
 
             // 插入資料, N是必要的(中文之前都要N)
-            string sqlstr = "INSERT INTO vcs_sql08_table (id, ename, cname, weight) VALUES (1, N'mouse', N'米老鼠', 3)";
+            string sqlstr = "INSERT INTO vcs_sql01_table (編號, 英文名, 中文名, 體重) VALUES (1, N'mouse', N'米老鼠', 3)";
             sql_write_database(db_filename, sqlstr);
-            sqlstr = "INSERT INTO vcs_sql08_table (id, ename, cname, weight) VALUES (2, N'ox', N'班尼牛', 48)";
+            sqlstr = "INSERT INTO vcs_sql01_table (編號, 英文名, 中文名, 體重) VALUES (2, N'ox', N'班尼牛', 48)";
             sql_write_database(db_filename, sqlstr);
-            sqlstr = "INSERT INTO vcs_sql08_table (id, ename, cname, weight) VALUES (3, N'tiger', N'跳跳虎', 33)";
+            sqlstr = "INSERT INTO vcs_sql01_table (編號, 英文名, 中文名, 體重) VALUES (3, N'tiger', N'跳跳虎', 33)";
             sql_write_database(db_filename, sqlstr);
-            sqlstr = "INSERT INTO vcs_sql08_table (id, ename, cname, weight) VALUES (4, N'rabbit', N'彼得兔', 8)";
+            sqlstr = "INSERT INTO vcs_sql01_table (編號, 英文名, 中文名, 體重) VALUES (4, N'rabbit', N'彼得兔', 8)";
             sql_write_database(db_filename, sqlstr);
-            sqlstr = "INSERT INTO vcs_sql08_table (id, ename, cname, weight) VALUES (5, N'dragon', N'逗逗龍', 38)";
+            sqlstr = "INSERT INTO vcs_sql01_table (編號, 英文名, 中文名, 體重) VALUES (5, N'dragon', N'逗逗龍', 38)";
             sql_write_database(db_filename, sqlstr);
-            sqlstr = "INSERT INTO vcs_sql08_table (id, ename, cname, weight) VALUES (6, N'snake', N'貪吃蛇', 16)";
+            sqlstr = "INSERT INTO vcs_sql01_table (編號, 英文名, 中文名, 體重) VALUES (6, N'snake', N'貪吃蛇', 16)";
             sql_write_database(db_filename, sqlstr);
-            sqlstr = "INSERT INTO vcs_sql08_table (id, ename, cname, weight) VALUES (7, N'horse', N'草泥馬', 31)";
+            sqlstr = "INSERT INTO vcs_sql01_table (編號, 英文名, 中文名, 體重) VALUES (7, N'horse', N'草泥馬', 31)";
             sql_write_database(db_filename, sqlstr);
-            sqlstr = "INSERT INTO vcs_sql08_table (id, ename, cname, weight) VALUES (8, N'goat', N'喜羊羊', 29)";
+            sqlstr = "INSERT INTO vcs_sql01_table (編號, 英文名, 中文名, 體重) VALUES (8, N'goat', N'喜羊羊', 29)";
             sql_write_database(db_filename, sqlstr);
-            sqlstr = "INSERT INTO vcs_sql08_table (id, ename, cname, weight) VALUES (9, N'monkey', N'山道猴', 22)";
+            sqlstr = "INSERT INTO vcs_sql01_table (編號, 英文名, 中文名, 體重) VALUES (9, N'monkey', N'山道猴', 22)";
             sql_write_database(db_filename, sqlstr);
-            sqlstr = "INSERT INTO vcs_sql08_table (id, ename, cname, weight) VALUES (10, N'chicken', N'肯德雞', 5)";
+            sqlstr = "INSERT INTO vcs_sql01_table (編號, 英文名, 中文名, 體重) VALUES (10, N'chicken', N'肯德雞', 5)";
             sql_write_database(db_filename, sqlstr);
-            sqlstr = "INSERT INTO vcs_sql08_table (id, ename, cname, weight) VALUES (11, N'dog', N'布丁狗', 17)";
+            sqlstr = "INSERT INTO vcs_sql01_table (編號, 英文名, 中文名, 體重) VALUES (11, N'dog', N'布丁狗', 17)";
             sql_write_database(db_filename, sqlstr);
-            sqlstr = "INSERT INTO vcs_sql08_table (id, ename, cname, weight) VALUES (12, N'dogpig', N'佩佩豬', 42)";
+            sqlstr = "INSERT INTO vcs_sql01_table (編號, 英文名, 中文名, 體重) VALUES (12, N'dogpig', N'佩佩豬', 42)";
             sql_write_database(db_filename, sqlstr);
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             richTextBox1.Text += "查詢資料\n";
 
-            string selectData = "SELECT id, ename, cname, weight FROM vcs_sql08_table";
+            string selectData = "SELECT 編號, 英文名, 中文名, 體重 FROM vcs_sql01_table";
             sql_read_database(db_filename, selectData, dataGridView1);
             lb_dgv1.Text = "新增5筆資料";
 
@@ -1666,37 +1676,69 @@ namespace vcs_SqlConnection1
 
             richTextBox1.Text += "更新資料\n";
 
-            string updateData = "UPDATE vcs_sql08_table SET weight = 25 WHERE id = 2";
+            string updateData = "UPDATE vcs_sql01_table SET 體重 = 25 WHERE 編號 = 2";
             sql_write_database(db_filename, updateData);
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             richTextBox1.Text += "再次查詢確認更新\n";
-            string selectUpdated = "SELECT id, ename, cname, weight FROM vcs_sql08_table";
+            string selectUpdated = "SELECT 編號, 英文名, 中文名, 體重 FROM vcs_sql01_table";
             sql_read_database(db_filename, selectUpdated, dataGridView2);
-            lb_dgv2.Text = "更新後資料 id=2, weight=25";
+            lb_dgv2.Text = "更新後資料 編號=2, 體重=25";
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             richTextBox1.Text += "刪除資料\n";
-            string deleteData = "DELETE FROM vcs_sql08_table WHERE id = 4";
+            string deleteData = "DELETE FROM vcs_sql01_table WHERE 編號 = 4";
             sql_write_database(db_filename, deleteData);
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             richTextBox1.Text += "最後查詢確認刪除\n";
 
-            string selectFinal = "SELECT id, ename, cname, weight FROM vcs_sql08_table";
+            string selectFinal = "SELECT 編號, 英文名, 中文名, 體重 FROM vcs_sql01_table";
             sql_read_database(db_filename, selectFinal, dataGridView3);
-            lb_dgv3.Text = "刪除後資料, 刪除id=4";
+            lb_dgv3.Text = "刪除後資料, 刪除 編號=4";
 
             richTextBox1.Text += "完成\n";
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
+            // 有條件刪除資料
+
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\vcs_sql01_db.mdf;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection cn = new SqlConnection(cnstr))
+            {
+                cn.Open();
+                string sql = "DELETE FROM vcs_sql01_table WHERE 體重 > 20";  // 刪除所有資料
+                using (SqlCommand cmd = new SqlCommand(sql, cn))
+                {
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    richTextBox1.Text += "已刪除 : " + rowsAffected + " 筆資料\n";
+                }
+            }
+
+            //3030
+
+             //清空整個表單
+
+            using (SqlConnection conn = new SqlConnection(cnstr))
+            {
+                conn.Open();
+                string sql = "TRUNCATE TABLE vcs_sql01_table";  // 清空整個表格
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.ExecuteNonQuery();
+                    richTextBox1.Text += "已清空整個表單\n";
+                }
+            }
+
 
         }
+
 
         private void button18_Click(object sender, EventArgs e)
         {
@@ -1968,6 +2010,19 @@ namespace vcs_SqlConnection1
 /*  可搬出
 
  */
+
+//其實 Server= 和 Data Source= 在 SQL Server 的 Connection String 裡是等價的，兩者都是用來指定要連線的伺服器或資料來源。
+
+/*
+SQL不同的連線方式
+1. Database=new_db;
+這種寫法表示你要連線到 SQL Server 已經註冊的資料庫。
+- Database=new_db; → 連線到 SQL Server 已經掛載的資料庫。
+
+2. AttachDbFilename=D:\new_db.mdf;
+這種寫法表示你要直接 附加 (Attach) 一個 MDF 檔案，讓 SQL Server 在執行時載入它。
+直接附加 MDF 檔案，常用於 LocalDB 或測試。
+*/
 
 
 

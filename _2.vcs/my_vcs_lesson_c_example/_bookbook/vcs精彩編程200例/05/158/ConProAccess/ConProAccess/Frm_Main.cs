@@ -43,7 +43,8 @@ namespace ConProAccess
             {
                 if (textBox2.Text != "")//判断是否输入了密码
                 {
-                    strCon = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + textBox1.Text + ";JET OLEDB:Database Password=" + textBox2.Text + ";";//组合Access数据库连接字符串
+                    // 連接字串
+                    strCon = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + textBox1.Text + ";JET OLEDB:Database Password=" + textBox2.Text + ";";
                 }
                 else
                 {
@@ -56,7 +57,7 @@ namespace ConProAccess
             {
                 oledbcon.Open();//打开数据库连接
                 richTextBox1.Clear();//清空文本框
-                richTextBox1.Text = strCon + "\n连接成功……";//显示数据库连接字符串
+                richTextBox1.Text = strCon + "\n连接成功……";// 顯示 連接字串
             }
             catch
             {

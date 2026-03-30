@@ -35,10 +35,10 @@ namespace UseInsertSelect
         /// <returns>方法返回DataTable对象</returns>
         private void InsertData()
         {
-            //创建数据库连接字符串
+            // 連接字串
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
             string P_Str_ConnectionStr = cnstr;
-            //创建SQL查询字符串
+            // 查詢字串
             string P_Str_SqlStr = string.Format(
                 @"INSERT INTO tb_Student_Copy(学生姓名,学生年龄,性别,家庭住址)
 SELECT 学生姓名,年龄,性别,家庭住址 FROM tb_Student");
@@ -70,10 +70,10 @@ SELECT 学生姓名,年龄,性别,家庭住址 FROM tb_Student");
         /// <returns>方法返回DataTable对象</returns>
         private DataTable GetMessage()
         {
-            //创建数据库连接字符串
+            // 連接字串
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
             string P_Str_ConnectionStr = cnstr;
-            //创建SQL查询字符串
+            // 查詢字串
             string P_Str_SqlStr = string.Format("SELECT * FROM tb_Student_Copy");
             //创建数据适配器
             SqlDataAdapter P_SqlDataAdapter = new SqlDataAdapter(P_Str_SqlStr, P_Str_ConnectionStr);

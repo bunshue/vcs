@@ -125,7 +125,9 @@ namespace RefreshFormByChildForm
         public void DisplayData()
         {
             PubsSet.Clear();
-            string ConnString = "Data Source=WRET-MOSY688YVW\\MRGLL;DataBase=db_TomeOne;UID=sa;Pwd=;";//数据库连接字符串
+
+            // 連接字串
+            string ConnString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
             ConnPubs = new SqlConnection(ConnString);//建立数据库连接
             string DisplayString = "select userId as 编号,userName as 姓名 ,phone as 电话,address as 住址 from tb_User";//定义读取数据库的字段
             SqlDataAdapter PersonalAdapter = new SqlDataAdapter(DisplayString, ConnPubs); //定义一个读取数据库数据的读取器

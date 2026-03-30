@@ -51,6 +51,9 @@ namespace SQLServerConfiguration
 
             richTextBox1.Text += "你選擇了 : " + strDatabase + "\n";
             return;
+            
+            // 連接字串
+            //string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Database1.mdf;Integrated Security=True;Connect Timeout=30";
 
             using (SqlConnection con = new SqlConnection("server=.;uid=sa;pwd=;database='" + strDatabase + "'"))
             {
@@ -66,6 +69,10 @@ namespace SQLServerConfiguration
         private void listBox1_Click(object sender, EventArgs e)
         {
             string strTableName = this.listBox1.SelectedValue.ToString();
+
+            // 連接字串
+            //string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Database1.mdf;Integrated Security=True;Connect Timeout=30";
+
             using (SqlConnection con = new SqlConnection("server=.;uid=sa;pwd=;database='" + strDatabase + "'"))
             {
                 string strSql = "select  name 字段名, xusertype 類型編號, length 長度 into hy_Linshibiao from  syscolumns  where id=object_id('" + strTableName + "') ";

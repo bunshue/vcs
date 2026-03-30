@@ -26,8 +26,10 @@ namespace ByteImage
         SqlConnection sqlcon;       //声明数据库连接对象
         SqlDataAdapter sqlda;       //声明数据桥接器对象
         DataSet myds;               //声明数据集对象
-        //定义数据库连接字符串
-        string strCon = "Data Source=XIAOKE;Database=db_09;uid=sa;pwd=;";
+
+	// 連接字串
+	string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09.mdf;Integrated Security=True;Connect Timeout=30";
+
         //#endregion
 
         private void Form1_Load(object sender, EventArgs e)

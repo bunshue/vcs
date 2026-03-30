@@ -105,9 +105,9 @@ namespace vcs_Draw_GraphicsPath
             int x_st = 20;
             int y_st = 20;
             int dx = 100;
-            int dy = 80;
-            int w = 100;
-            int h = 100;
+            //int dy = 80;
+            //int w = 100;
+            //int h = 100;
             Pen p = new Pen(Color.Red, 3);
             Font f = new Font("標楷體", 18);
 
@@ -156,14 +156,14 @@ namespace vcs_Draw_GraphicsPath
             x_st += dx * 3;
             g.DrawString("4", f, Brushes.Red, x_st, y_st);
 
-            float x = (float)x_st;
-            float y = (float)y_st;
-            float width = 200;
-            float height = 100;
-            float cornerRadius = 20;
+            int x = x_st;
+            int y = y_st;
+            int width = 200;
+            int height = 100;
+            int cornerRadius = 20;
 
             //GraphicsPath gp = new GraphicsPath();  // GraphicsPath物件
-            GraphicsPath gp = DrawRoundRect(x, y, width, height, cornerRadius);
+            GraphicsPath gp = CreateRoundedRectanglePath(new Rectangle(x, y, width, height), cornerRadius);
 
             //g.DrawPath(Pens.Red, gp);
             g.FillPath(Brushes.Lime, gp);
@@ -219,10 +219,10 @@ namespace vcs_Draw_GraphicsPath
 
             g.DrawString("10", f, Brushes.Red, x_st - 20, y_st - 20);
 
-            GraphicsPath myPath1 = DrawRoundRect(x_st, y_st, 200, 100, 30);
+            GraphicsPath myPath1 = CreateRoundedRectanglePath(new Rectangle(x_st, y_st, 200, 100), 30);
             g.FillPath(sb, myPath1);
 
-            GraphicsPath myPath2 = DrawRoundRect(x_st, y_st + 110, 200, 100, 50);
+            GraphicsPath myPath2 = CreateRoundedRectanglePath(new Rectangle(x_st, y_st + 110, 200, 100), 50);
             g.DrawPath(p, myPath2);
 
             richTextBox1.Text += "------------------------------\n";  // 30個
@@ -266,24 +266,7 @@ namespace vcs_Draw_GraphicsPath
             g.DrawPath(penJoin, gp);
         }
 
-        //繪製圓角矩形
-        private GraphicsPath DrawRoundRect(float x, float y, float width, float height, float cornerRadius)
-        {
-            GraphicsPath roundedRect = new GraphicsPath();
-            Rectangle rect = new Rectangle((int)x, (int)y, (int)width, (int)height);
-            roundedRect.AddArc(rect.X, rect.Y, cornerRadius * 2, cornerRadius * 2, 180, 90);
-            roundedRect.AddLine(rect.X + cornerRadius, rect.Y, rect.Right - cornerRadius * 2, rect.Y);
-            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y, cornerRadius * 2, cornerRadius * 2, 270, 90);
-            roundedRect.AddLine(rect.Right, rect.Y + cornerRadius * 2, rect.Right, rect.Y + rect.Height - cornerRadius * 2);
-            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y + rect.Height - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 0, 90);
-            roundedRect.AddLine(rect.Right - cornerRadius * 2, rect.Bottom, rect.X + cornerRadius * 2, rect.Bottom);
-            roundedRect.AddArc(rect.X, rect.Bottom - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 90, 90);
-            roundedRect.AddLine(rect.X, rect.Bottom - cornerRadius * 2, rect.X, rect.Y + cornerRadius * 2);
-            roundedRect.CloseFigure();  // 封閉圖形路徑, 將圖形的頭尾座標連接
-            return roundedRect;
-        }
-
-        public static void DrawRoundRectangle(Graphics g, Pen pen, Rectangle rect, int cornerRadius)
+        public void DrawRoundRectangle(Graphics g, Pen pen, Rectangle rect, int cornerRadius)
         {
             using (GraphicsPath gp = CreateRoundedRectanglePath(rect, cornerRadius))
             {
@@ -291,7 +274,7 @@ namespace vcs_Draw_GraphicsPath
             }
         }
 
-        public static void FillRoundRectangle(Graphics g, Brush brush, Rectangle rect, int cornerRadius)
+        public void FillRoundRectangle(Graphics g, Brush brush, Rectangle rect, int cornerRadius)
         {
             using (GraphicsPath gp = CreateRoundedRectanglePath(rect, cornerRadius))
             {
@@ -317,7 +300,8 @@ namespace vcs_Draw_GraphicsPath
             }
         }
 
-        internal static GraphicsPath CreateRoundedRectanglePath(Rectangle rect, int cornerRadius)
+        //繪製圓角矩形
+        private GraphicsPath CreateRoundedRectanglePath(Rectangle rect, int cornerRadius)
         {
             GraphicsPath roundedRect = new GraphicsPath();
             //左上
@@ -548,11 +532,11 @@ namespace vcs_Draw_GraphicsPath
 
             int x_st = 0;
             int y_st = 0;
-            int dx = 100;
-            int dy = 80;
-            int w = 100;
-            int h = 100;
-            int R = 100;
+            //int dx = 100;
+            //int dy = 80;
+            //int w = 100;
+            //int h = 100;
+            //int R = 100;
             Pen p = new Pen(Color.Red, 1);
             Font f = new Font("標楷體", 18);
 
@@ -577,9 +561,6 @@ namespace vcs_Draw_GraphicsPath
             gp1.AddBezier(x_st + 50 + 100, y_st + 50, x_st + 200, 0, x_st + 300, 180, x_st + 400, 20);
 
             g.DrawPath(p, gp1);
-
-
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -666,10 +647,10 @@ namespace vcs_Draw_GraphicsPath
 
             // Draw characters.
             int start_ch = 0;
-            PointF start_point = path.PathPoints[0];
+            PointF start_point = path.PathPoints[0];  // 取得路徑中的點 第0點
             for (int i = 1; i < path.PointCount; i++)
             {
-                PointF end_point = path.PathPoints[i];
+                PointF end_point = path.PathPoints[i];  // 取得路徑中的點 第i點
                 DrawTextOnSegment2(gr, brush, font, txt, ref start_ch, ref start_point, end_point, text_above_path);
                 if (start_ch >= txt.Length)
                 {
@@ -861,8 +842,14 @@ namespace vcs_Draw_GraphicsPath
             // GP加入字串
             gp1.AddString(text, font_family, (int)FontStyle.Regular, 36, new Point(0, 0), new StringFormat());//在路徑中新增文字
 
-            PointF[] Var_PointS = gp1.PathPoints;//取得路徑中的點
-            Byte[] Car_Types = gp1.PathTypes;//取得對應點的類型
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //取出圖形路徑的所有點 => 矩陣轉換 => 轉 圖形路徑gp => 畫出來
+
+            PointF[] Var_PointS = gp1.PathPoints;  // 取得路徑中的點
+            Byte[] Car_Types = gp1.PathTypes;  // 取得對應點的類型
+
+            //richTextBox1.Text += "len = " + Var_PointS.Length.ToString() + "\n";
 
             Matrix matrix = new Matrix((float)size, 0.0F, 0.0F, (float)size, 0.0F, 0.0F);//設定仿射矩陣
             matrix.TransformPoints(Var_PointS);
@@ -875,60 +862,67 @@ namespace vcs_Draw_GraphicsPath
 
         private void button11_Click(object sender, EventArgs e)
         {
+            //測試AddLine AddLines AddEllipse
 
             //原本畫在原點
             Point center = new Point(200, 200);
-            //int radius = 100;
-            PointF[] pt = new PointF[6];    //一維陣列內有6個Point
-
-            pt[0] = new Point(200, 100);
-            pt[1] = new Point(295, 170);
-            pt[2] = new Point(258, 280);
-            pt[3] = new Point(142, 280);
-            pt[4] = new Point(105, 170);
-            pt[5] = new Point(200, 100);
-            /*
-            g.FillEllipse(Brushes.Red, pt[0].X, pt[0].Y, 20, 20);
-            g.FillEllipse(Brushes.Green, pt[1].X, pt[1].Y, 20, 20);
-            g.FillEllipse(Brushes.Blue, pt[2].X, pt[2].Y, 20, 20);
-            g.FillEllipse(Brushes.Cyan, pt[3].X, pt[3].Y, 20, 20);
-            g.FillEllipse(Brushes.Magenta, pt[4].X, pt[4].Y, 20, 20);
-            //g.FillEllipse(Brushes.Yellow, pt[5].X, pt[5].Y, 20, 20);
-            */
+            int radius1 = 100;
+            int radius2 = 60;
+            PointF[] pts = new PointF[10];    //一維陣列內有10個Point
+            for (int i = 0; i < 10; i++)
+            {
+                int angle = -90 + 36 * i;
+                if (i % 2 == 0)
+                {
+                    pts[i].X = (int)(radius1 * Math.Cos(angle * Math.PI / 180));
+                    pts[i].Y = (int)(radius1 * Math.Sin(angle * Math.PI / 180));
+                }
+                else
+                {
+                    pts[i].X = (int)(radius2 * Math.Cos(angle * Math.PI / 180));
+                    pts[i].Y = (int)(radius2 * Math.Sin(angle * Math.PI / 180));
+                }
+                pts[i].X += center.X;
+                pts[i].Y += center.Y;
+                richTextBox1.Text += "pts[" + i.ToString() + "].X " + pts[i].X.ToString() + "   " + "pts[" + i.ToString() + "].Y " + pts[i].Y.ToString() + "\n";
+            }
+            //g.DrawEllipse(new Pen(Color.Red, 0), center.X - radius1, center.Y - radius1, radius1 * 2, radius1 * 2);
 
             GraphicsPath gp = new GraphicsPath();
+            gp.StartFigure();
+            gp.AddLine(pts[0], pts[1]);
+            gp.AddLine(pts[1], pts[2]);
+            gp.AddLine(pts[2], pts[3]);
+            gp.AddLine(pts[3], pts[4]);
+            gp.AddLine(pts[4], pts[5]);
+            gp.AddLine(pts[5], pts[6]);
+            gp.AddLine(pts[6], pts[7]);
+            gp.AddLine(pts[7], pts[8]);
+            gp.AddLine(pts[8], pts[9]);
+            gp.CloseFigure();  // 封閉圖形路徑, 將圖形的頭尾座標連接
+            gp.AddEllipse(center.X - radius1, center.Y - radius1, radius1 * 2, radius1 * 2);
+            gp.AddRectangle(new Rectangle(center.X - radius1, center.Y - radius1, radius1 * 2, radius1 * 2));
+
+            //g.DrawPath(Pens.Red, gp); // 繪出GraphicsPath物件
+            g.FillPath(Brushes.Red, gp);  // FillPath會自動CloseFigure()
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
             /*
-            gp.AddLine(pt[0], pt[1]);
-            gp.AddLine(pt[1], pt[2]);
-            gp.AddLine(pt[2], pt[3]);
-            gp.AddLine(pt[3], pt[4]);
+            GraphicsPath gp = new GraphicsPath(); // GraphicsPath物件
+            gp.StartFigure();
 
-            //gp.CloseFigure();  // 封閉圖形路徑, 將圖形的頭尾座標連接
-
-            Pen penJoin = new Pen(Color.Red, 5);
-            //penJoin.LineJoin = LineJoin.Bevel;//看不出效果 會不會是給AddLines用的?
-
-            g.DrawPath(penJoin, gp);
-            //g.FillPath(Brushes.Yellow, gp);  // FillPath會自動CloseFigure()
-            */
-            //3030
-
-            //GraphicsPath gp = new GraphicsPath(); // GraphicsPath物件
-            Point[] pts2 = new Point[5];  // 點陣列
-            pts2[0] = new Point(200, 100);
-            pts2[1] = new Point(295, 170);
-            pts2[2] = new Point(258, 280);
-            pts2[3] = new Point(142, 280);
-            pts2[4] = new Point(105, 170);
-
-            gp.AddLines(pts2); // 將 一系列的直線 加入到 GraphicsPath物件
+            gp.AddLines(pts); // 將 一系列的直線 加入到 GraphicsPath物件
             gp.CloseFigure();  // 封閉圖形路徑, 將圖形的頭尾座標連接
 
             g.DrawPath(Pens.Red, gp); // 繪出GraphicsPath物件
+            //g.FillPath(Brushes.Yellow, gp);  // FillPath會自動CloseFigure()
+            */
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
+
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -1074,5 +1068,10 @@ namespace vcs_Draw_GraphicsPath
 
 //填滿組合路徑 fill
 // 繪出文字字串//繪出組合路徑 draw
+
+
+
+//  Pen penJoin = new Pen(Color.Red, 5);
+//  penJoin.LineJoin = LineJoin.Bevel;//看不出效果
 
 
