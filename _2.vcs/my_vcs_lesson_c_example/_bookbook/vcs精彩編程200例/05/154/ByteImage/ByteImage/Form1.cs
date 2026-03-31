@@ -42,7 +42,7 @@ namespace ByteImage
             if (strName != "")
             {
                 // 連接字串
-                string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo2.mdf;Integrated Security=True;Connect Timeout=30";
+                string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
 
                 SqlConnection cn = new SqlConnection(cnstr);     //实例化数据库连接对象
 
@@ -94,7 +94,7 @@ namespace ByteImage
             richTextBox1.Text += "影像檔案 : " + strImage + "\n";
 
             // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo2.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
 
             SqlConnection cn = new SqlConnection(cnstr);
 

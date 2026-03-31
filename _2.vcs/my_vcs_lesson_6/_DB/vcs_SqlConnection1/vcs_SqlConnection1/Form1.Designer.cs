@@ -233,7 +233,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(200, 60);
             this.button12.TabIndex = 137;
-            this.button12.Text = "new";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -244,7 +243,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(200, 60);
             this.button13.TabIndex = 138;
-            this.button13.Text = "SQL 1";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -255,7 +253,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(200, 60);
             this.button14.TabIndex = 139;
-            this.button14.Text = "SQL 2";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -299,7 +296,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(200, 60);
             this.button18.TabIndex = 143;
-            this.button18.Text = "新加入";
+            this.button18.Text = "SQL 使用 合集, 新加入";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -329,7 +326,7 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(200, 60);
             this.button20.TabIndex = 146;
-            this.button20.Text = "SQL 使用";
+            this.button20.Text = "SQL 使用 合集, 新加入";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
