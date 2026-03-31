@@ -43,7 +43,6 @@ namespace SetPrintRange
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
 
             //创建数据库连接对象
@@ -290,4 +289,3 @@ select 学生姓名,所在学院,家庭住址 from tb_Student", sqlcon);
         }
     }
 }
-

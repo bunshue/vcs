@@ -57,10 +57,7 @@ namespace CrossAnalyse
             }
         }
 
-        //#region 按指定的条件使用交叉表查询数据
-        /// <summary>
-        /// 按指定的条件使用交叉表查询数据
-        /// </summary>
+        //  按指定的条件使用交叉表查询数据
         protected void bindInfo()
         {
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09.mdf;Integrated Security=True;Connect Timeout=30";
@@ -88,6 +85,5 @@ namespace CrossAnalyse
             dataGridView1.DataSource = myds.Tables[0];
             dataGridView1.Columns[1].Width = 120;
         }
-        //#endregion
     }
 }

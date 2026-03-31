@@ -860,6 +860,30 @@ namespace vcs_Draw_GraphicsPath
             g.DrawPath(p, gp2);
         }
 
+        PointF[] get_star_points(int cx, int cy, int R1, int R2)
+        {
+            PointF[] pts = new PointF[10];    //一維陣列內有10個Point
+
+            for (int i = 0; i < 10; i++)
+            {
+                int angle = -90 + 36 * i;
+                if (i % 2 == 0)
+                {
+                    pts[i].X = (int)(R1 * Math.Cos(angle * Math.PI / 180));
+                    pts[i].Y = (int)(R1 * Math.Sin(angle * Math.PI / 180));
+                }
+                else
+                {
+                    pts[i].X = (int)(R2 * Math.Cos(angle * Math.PI / 180));
+                    pts[i].Y = (int)(R2 * Math.Sin(angle * Math.PI / 180));
+                }
+                pts[i].X += cx;
+                pts[i].Y += cy;
+                //richTextBox1.Text += "pts[" + i.ToString() + "].X " + pts[i].X.ToString() + "   " + "pts[" + i.ToString() + "].Y " + pts[i].Y.ToString() + "\n";
+            }
+            return pts;
+        }
+
         private void button11_Click(object sender, EventArgs e)
         {
             //測試AddLine AddLines AddEllipse
@@ -868,24 +892,7 @@ namespace vcs_Draw_GraphicsPath
             Point center = new Point(200, 200);
             int radius1 = 100;
             int radius2 = 60;
-            PointF[] pts = new PointF[10];    //一維陣列內有10個Point
-            for (int i = 0; i < 10; i++)
-            {
-                int angle = -90 + 36 * i;
-                if (i % 2 == 0)
-                {
-                    pts[i].X = (int)(radius1 * Math.Cos(angle * Math.PI / 180));
-                    pts[i].Y = (int)(radius1 * Math.Sin(angle * Math.PI / 180));
-                }
-                else
-                {
-                    pts[i].X = (int)(radius2 * Math.Cos(angle * Math.PI / 180));
-                    pts[i].Y = (int)(radius2 * Math.Sin(angle * Math.PI / 180));
-                }
-                pts[i].X += center.X;
-                pts[i].Y += center.Y;
-                richTextBox1.Text += "pts[" + i.ToString() + "].X " + pts[i].X.ToString() + "   " + "pts[" + i.ToString() + "].Y " + pts[i].Y.ToString() + "\n";
-            }
+            PointF[] pts = get_star_points(center.X, center.Y, radius1, radius2);
             //g.DrawEllipse(new Pen(Color.Red, 0), center.X - radius1, center.Y - radius1, radius1 * 2, radius1 * 2);
 
             GraphicsPath gp = new GraphicsPath();

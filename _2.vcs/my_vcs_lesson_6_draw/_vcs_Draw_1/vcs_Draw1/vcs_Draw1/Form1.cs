@@ -334,16 +334,14 @@ namespace vcs_Draw1
             }
         }
 
-        //基本畫圖1
         private void button0_Click(object sender, EventArgs e)
         {
+            // 基本畫圖 0
+
             int W = 1100;
             int H = 750;
 
-            //初始化畫布
-            reset_bitmap1(1100, 750);
-
-            //基本畫圖
+            reset_bitmap1(1100, 750);  // 初始化畫布
 
             p = new Pen(Color.Green, 3);
             sb = new SolidBrush(Color.Blue);
@@ -742,16 +740,15 @@ namespace vcs_Draw1
             g.DrawRectangle(p, 0 + p.Width / 2, 0 + p.Width / 2, bitmap1.Width - p.Width, bitmap1.Height - p.Width);
         }
 
-        //基本畫圖2
         private void button1_Click(object sender, EventArgs e)
         {
+            //基本畫圖 1
+
             sb = new SolidBrush(Color.Blue);
             f = new Font("Times New Roman", 14);
 
-            //初始化畫布
-            reset_bitmap1(1100, 750);
+            reset_bitmap1(1100, 750);  // 初始化畫布
 
-            //基本畫圖
             p = new Pen(Color.Green, 3);
 
             //Rectangle rec;
@@ -805,24 +802,13 @@ namespace vcs_Draw1
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            //組合路徑
-            x_st = 20;
-            y_st = 20;
-            y_st += dy;
-            g.DrawString("DrawPath", f, sb, new PointF(x_st, y_st));
-
-            x_st += dx;
-            x_st += dx / 2;
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
             //畫多個Rectangles
             x_st = 20;
             y_st = 20;
-            y_st += dy * 4;
+            y_st += dy * 2;
             g.DrawString("畫多個Rectangles", f, sb, new PointF(x_st, y_st - 25));
 
-            Rectangle[] R = new Rectangle[20];
+            Rectangle[] R = new Rectangle[15];
             for (int i = 0; i < R.Length; i++)
             {
                 //R[i] = new Rectangle(0 + 30 * i, 0 + 30 * i);
@@ -833,8 +819,7 @@ namespace vcs_Draw1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //初始化畫布
-            reset_bitmap1(1100, 750);
+            reset_bitmap1(1100, 750);  // 初始化畫布
 
             //畫點圓形星形
 
@@ -1300,8 +1285,7 @@ namespace vcs_Draw1
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //初始化畫布
-            reset_bitmap1(800, 600);
+            reset_bitmap1(800, 600);  // 初始化畫布
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -1741,6 +1725,8 @@ namespace vcs_Draw1
 
         void reset_bitmap1(int W, int H)
         {
+            // 初始化畫布
+
             richTextBox1.Text += "建立一個 " + W.ToString() + " X " + H.ToString() + " 的空畫布\n";
             //指定畫布大小
             pictureBox1.Width = W;
@@ -1814,8 +1800,7 @@ namespace vcs_Draw1
             //製作圖面的標記文字
             if (bitmap1 == null)
             {
-                //初始化畫布
-                reset_bitmap1(800, 600);
+                reset_bitmap1(800, 600);  // 初始化畫布
 
                 //製作圖面的標記文字
                 bitmap1 = new Bitmap(filename);
@@ -2270,8 +2255,7 @@ namespace vcs_Draw1
 
         private void button31_Click(object sender, EventArgs e)
         {
-            //初始化畫布
-            reset_bitmap1(800, 600);
+            reset_bitmap1(800, 600);  // 初始化畫布
 
             Color red = Color.FromArgb(0x30, 0xff, 0, 0);
             Brush redBrush = new SolidBrush(red);
