@@ -23,6 +23,11 @@ namespace vcs_NAudio
             show_item_location();
         }
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DisposeWave();
+        }
+
         private void show_item_location()
         {
             int x_st;
@@ -67,40 +72,17 @@ namespace vcs_NAudio
         private NAudio.Wave.WaveFileReader wave = null;
         private NAudio.Wave.DirectSoundOut output = null;
         private NAudio.Wave.BlockAlignReductionStream stream = null;
-        
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //使用 NAudio 播放 wave檔
+            //使用 NAudio 播放 wave檔, 使用 WaveFileReader
 
-            DisposeWave();
-
-            string filename = @"D:\_git\vcs\_vcs_new_test1\vcs_NAudio\tutorial1.wav";
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Player\vcs_NAudio\tutorial1.wav";
 
             wave = new NAudio.Wave.WaveFileReader(filename);
             output = new NAudio.Wave.DirectSoundOut();
             output.Init(new NAudio.Wave.WaveChannel32(wave));
             output.Play();
-
-            richTextBox1.Text += "2\n";
-
-
-            /*
-            if (output != null)
-            {
-                if (output.PlaybackState == NAudio.Wave.PlaybackState.Playing)
-                    output.Pause();
-                else if (output.PlaybackState == NAudio.Wave.PlaybackState.Paused)
-                    output.Play();
-            }
-            */
-
-            richTextBox1.Text += "3\n";
-
-            //DisposeWave();
-
-            richTextBox1.Text += "4\n";
-
         }
 
         private void DisposeWave()
@@ -129,31 +111,35 @@ namespace vcs_NAudio
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //string filename = @"D:\_git\vcs\_vcs_new_test1\vcs_NAudio\tutorial1.wav";
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
+            //使用 NAudio 播放 wave檔, 使用 BlockAlignReductionStream
 
-            DisposeWave();
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Player\vcs_NAudio\tutorial1.wav";
 
-            if (filename.EndsWith(".mp3"))
-            {
-                NAudio.Wave.WaveStream pcm = NAudio.Wave.WaveFormatConversionStream.CreatePcmStream(new NAudio.Wave.Mp3FileReader(filename));
-                stream = new NAudio.Wave.BlockAlignReductionStream(pcm);
-            }
-            else if (filename.EndsWith(".wav"))
-            {
-                NAudio.Wave.WaveStream pcm = new NAudio.Wave.WaveChannel32(new NAudio.Wave.WaveFileReader(filename));
-                stream = new NAudio.Wave.BlockAlignReductionStream(pcm);
-            }
-            else throw new InvalidOperationException("Not a correct audio file type.");
+            NAudio.Wave.WaveStream pcm = new NAudio.Wave.WaveChannel32(new NAudio.Wave.WaveFileReader(filename));
+            stream = new NAudio.Wave.BlockAlignReductionStream(pcm);
 
             output = new NAudio.Wave.DirectSoundOut();
             output.Init(stream);
             output.Play();
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
+        {
+            //使用 NAudio 播放 mp3檔
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
+
+            DisposeWave();
+
+            NAudio.Wave.WaveStream pcm = NAudio.Wave.WaveFormatConversionStream.CreatePcmStream(new NAudio.Wave.Mp3FileReader(filename));
+            stream = new NAudio.Wave.BlockAlignReductionStream(pcm);
+
+            output = new NAudio.Wave.DirectSoundOut();
+            output.Init(stream);
+            output.Play();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
         {
             //mp3轉wave
             /*
@@ -172,12 +158,6 @@ namespace vcs_NAudio
                 }
             }
             */
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -198,7 +178,7 @@ namespace vcs_NAudio
         private void button7_Click(object sender, EventArgs e)
         {
             //播放
-            output.Play();            
+            output.Play();
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -209,6 +189,9 @@ namespace vcs_NAudio
 
         private void button9_Click(object sender, EventArgs e)
         {
+            if (output == null)
+                return;
+
             //狀態
             if (output.PlaybackState == NAudio.Wave.PlaybackState.Playing)
                 richTextBox1.Text += "播放中\n";
@@ -219,13 +202,3 @@ namespace vcs_NAudio
         }
     }
 }
-
-/*
-            if (output != null)
-            {
-                if (output.PlaybackState == NAudio.Wave.PlaybackState.Playing)
-                    output.Pause();
-                else if (output.PlaybackState == NAudio.Wave.PlaybackState.Paused)
-                    output.Play();
-            }
-*/

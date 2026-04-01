@@ -5874,6 +5874,8 @@ pip install package_name==2.0.2
 
 pip install urllib3==1.26.6
 
+python -m pip install SomePackage==1.0.4    # 明確版本
+python -m pip install "SomePackage>=1.0.4"  # 最小版本
 
 C:\Users\david>python -m pip install -U scipy==1.9.1
 C:\Users\david>python -m pip install -U scikit-image==0.19.3
