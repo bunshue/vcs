@@ -36,6 +36,7 @@
             this.txt_Name = new System.Windows.Forms.TextBox();
             this.txt_Age = new System.Windows.Forms.TextBox();
             this.txt_Address = new System.Windows.Forms.TextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Message)).BeginInit();
             this.SuspendLayout();
             // 
@@ -109,11 +110,20 @@
             this.txt_Address.TabIndex = 7;
             this.txt_Address.Text = "吉林";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(22, 254);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(772, 278);
+            this.richTextBox1.TabIndex = 8;
+            this.richTextBox1.Text = "";
+            // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(806, 544);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.txt_Address);
             this.Controls.Add(this.txt_Age);
             this.Controls.Add(this.txt_Name);
@@ -141,6 +151,7 @@
         private System.Windows.Forms.TextBox txt_Name;
         private System.Windows.Forms.TextBox txt_Age;
         private System.Windows.Forms.TextBox txt_Address;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

@@ -30,8 +30,10 @@ namespace XmlToDatabase
         {
             if (File.Exists(strPath))
             {
+                richTextBox1.Text += "111111111111111111\n";
                 getXmlInfo();
             }
+            richTextBox1.Text += "2222222222222222222222\n";
         }
 
         //将数据更新到数据库
@@ -63,5 +65,11 @@ namespace XmlToDatabase
             dataGridView1.DataSource = myds.Tables[0];//在DataGridView中显示XML文件中的信息
         }
         //#endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

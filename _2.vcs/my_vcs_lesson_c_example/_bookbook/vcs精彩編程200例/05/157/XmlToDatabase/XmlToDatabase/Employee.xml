@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Peoples>
+  <People ID="001">
+    <Name>小王</Name>
+    <Sex>男</Sex>
+    <Salary>1500</Salary>
+  </People>
+  <People ID="002">
+    <Name>书娟</Name>
+    <Sex>女</Sex>
+    <Salary>2000</Salary>
+  </People>
+  <People ID="003">
+    <Name>小科</Name>
+    <Sex>男</Sex>
+    <Salary>2000</Salary>
+  </People>
+  <People ID="004">
+    <Name>小刘</Name>
+    <Sex>男</Sex>
+    <Salary>2000</Salary>
+  </People>
+</Peoples>

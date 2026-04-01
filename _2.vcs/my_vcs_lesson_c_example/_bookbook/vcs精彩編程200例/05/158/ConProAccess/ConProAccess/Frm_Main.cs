@@ -29,6 +29,10 @@ namespace ConProAccess
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //Access 資料庫 *.mdb
+            //string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\db_Test.mdb";
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\vcs精彩編程200例\05\158\ConProAccess\db.mdb";
+
             //openFileDialog1.Filter = "*.mdb(Access数据库文件)|*.mdb|*.xls(Excel文件)|*.xls|*.*(所有文件)|*.*";
             //if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
