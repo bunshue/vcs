@@ -1,5 +1,39 @@
 
 
+建立 Python虛擬環境
+
+Python venv(Virtual Environment)，用於建立及管理虛擬環境，
+虛擬環境可以讓你在同一台電腦上管理多個Python專案，
+每個專案都可以擁有獨立的套件和dependencies，避免不同專案之間的衝突。
+
+1.
+建立虛擬環境：
+打開終端機，使用以下命令建立一個名為 "venv_test1" 的虛擬環境
+python -m venv venv_test1
+這個命令會在當前目錄中創建一個新的虛擬環境。
+
+2.
+進入虛擬環境：
+在終端機中，使用以下命令進入虛擬環境：
+venv_test1\Scripts\activate
+成功之後你的終端機最前面會有一個（venv_test1)
+
+3.
+安裝套件：
+pip install xxxxxxx
+
+4.
+離開虛擬環境：
+deactivate
+
+
+
+
+
+
+
+
+
 
 # ch13_8.ipynb
 class Banks():
