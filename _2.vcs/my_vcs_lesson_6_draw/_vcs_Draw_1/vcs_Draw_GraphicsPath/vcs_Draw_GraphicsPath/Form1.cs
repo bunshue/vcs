@@ -860,9 +860,9 @@ namespace vcs_Draw_GraphicsPath
             g.DrawPath(p, gp2);
         }
 
-        PointF[] get_star_points(int cx, int cy, int R1, int R2)
+        Point[] get_star_points(Point center,int R1, int R2)
         {
-            PointF[] pts = new PointF[10];    //一維陣列內有10個Point
+            Point[] pts = new Point[10];    //一維陣列內有10個Point
 
             for (int i = 0; i < 10; i++)
             {
@@ -877,8 +877,8 @@ namespace vcs_Draw_GraphicsPath
                     pts[i].X = (int)(R2 * Math.Cos(angle * Math.PI / 180));
                     pts[i].Y = (int)(R2 * Math.Sin(angle * Math.PI / 180));
                 }
-                pts[i].X += cx;
-                pts[i].Y += cy;
+                pts[i].X += center.X;
+                pts[i].Y += center.Y;
                 //richTextBox1.Text += "pts[" + i.ToString() + "].X " + pts[i].X.ToString() + "   " + "pts[" + i.ToString() + "].Y " + pts[i].Y.ToString() + "\n";
             }
             return pts;
@@ -892,10 +892,10 @@ namespace vcs_Draw_GraphicsPath
             Point center = new Point(200, 200);
             int radius1 = 100;
             int radius2 = 60;
-            PointF[] pts = get_star_points(center.X, center.Y, radius1, radius2);
-            //g.DrawEllipse(new Pen(Color.Red, 0), center.X - radius1, center.Y - radius1, radius1 * 2, radius1 * 2);
+            Point[] pts = get_star_points(center, radius1, radius2);
 
             GraphicsPath gp = new GraphicsPath();
+
             gp.StartFigure();
             gp.AddLine(pts[0], pts[1]);
             gp.AddLine(pts[1], pts[2]);
@@ -915,17 +915,23 @@ namespace vcs_Draw_GraphicsPath
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            /*
-            GraphicsPath gp = new GraphicsPath(); // GraphicsPath物件
+            center = new Point(450, 200);
+            radius1 = 100;
+            radius2 = 60;
+            pts = get_star_points(center, radius1, radius2);
+
+            //GraphicsPath gp = new GraphicsPath(); // GraphicsPath物件
+
+            gp.Reset();
             gp.StartFigure();
 
             gp.AddLines(pts); // 將 一系列的直線 加入到 GraphicsPath物件
             gp.CloseFigure();  // 封閉圖形路徑, 將圖形的頭尾座標連接
 
             g.DrawPath(Pens.Red, gp); // 繪出GraphicsPath物件
-            //g.FillPath(Brushes.Yellow, gp);  // FillPath會自動CloseFigure()
-            */
+            g.FillPath(Brushes.Yellow, gp);  // FillPath會自動CloseFigure()
         }
+
 
         private void button12_Click(object sender, EventArgs e)
         {
