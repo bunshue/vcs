@@ -547,10 +547,6 @@ namespace vcs_FolderInfo
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //轉出一層 標準版
-            //轉出一層 標準版
-            richTextBox1.Text += "你按了 " + ((Button)sender).Name + "\n";
-
             richTextBox1.Text += "轉出一層 標準版\n";
 
             this.Cursor = Cursors.WaitCursor;   // set busy cursor
@@ -630,9 +626,6 @@ namespace vcs_FolderInfo
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //轉出全部 標準版
-
-            //轉出全部 標準版
             richTextBox1.Text += "轉出全部 標準版\n";
 
             this.Cursor = Cursors.WaitCursor;   // set busy cursor
@@ -712,6 +705,30 @@ namespace vcs_FolderInfo
 
         private void button9_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "轉出全部 標準版\n";
+
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_book_magazine";
+
+            richTextBox1.Text += "\n搜尋路徑" + foldername + "\n";
+
+            if (System.IO.File.Exists(foldername) == true)
+            {
+                // This path is a file
+                richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
+                ProcessFile(foldername);
+                richTextBox1.Text += "\n資料夾 " + foldername + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size2)) + "\n";
+            }
+            else if (Directory.Exists(foldername) == true)
+            {
+                // This path is a directory
+                FolederName = foldername;
+                ProcessDirectory(foldername);
+                richTextBox1.Text += "\n資料夾 " + foldername + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size2)) + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "非合法路徑或檔案b\n";
+            }
 
         }
 

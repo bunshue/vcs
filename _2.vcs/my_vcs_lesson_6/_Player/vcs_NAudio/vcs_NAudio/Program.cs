@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_SpeechSynthesis1
+namespace vcs_NAudio
 {
     static class Program
     {

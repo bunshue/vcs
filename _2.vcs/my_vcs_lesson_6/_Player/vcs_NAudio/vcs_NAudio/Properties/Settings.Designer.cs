@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_SpeechSynthesis1.Properties
+namespace vcs_NAudio.Properties
 {
 
 

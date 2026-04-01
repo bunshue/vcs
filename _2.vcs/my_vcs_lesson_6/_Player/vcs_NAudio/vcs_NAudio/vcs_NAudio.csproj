@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B1569FF9-7B43-495D-BAF3-C814752E06C3}</ProjectGuid>
+    <ProjectGuid>{851F3B94-4418-4B26-BA7C-BDE594CE10EF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_SpeechSynthesis1</RootNamespace>
-    <AssemblyName>vcs_SpeechSynthesis1</AssemblyName>
+    <RootNamespace>vcs_NAudio</RootNamespace>
+    <AssemblyName>vcs_NAudio</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -34,9 +34,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NAudio">
+      <HintPath>dll\NAudio.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Speech" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
