@@ -13,18 +13,16 @@ namespace SumSalary
 {
     public partial class Frm_Main : Form
     {
-        public Frm_Main()
-        {
-            InitializeComponent();
-        }
-
-        //#region 定义全局变量及对象
         string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
 
         SqlConnection sqlcon;//声明SqlConnection对象
         SqlDataAdapter sqlda;//声明SqlDataAdapter对象
         DataSet myds;//声明DataSet数据集对象
-        //#endregion
+
+        public Frm_Main()
+        {
+            InitializeComponent();
+        }
 
         //窗体加载时显示所有数据
         private void Form1_Load(object sender, EventArgs e)
@@ -33,9 +31,11 @@ namespace SumSalary
             sqlda = new SqlDataAdapter("select * from tb_Salary", sqlcon);//创建数据库桥接器对象
             myds = new DataSet();//创建数据集对象
             sqlda.Fill(myds, "tb_Salary");//填充DataSet数据集
+
             var query = from salary in myds.Tables["tb_Salary"].AsEnumerable()//使用LINQ从数据集中查询所有数据
                         select salary;
             DataTable myDTable = query.CopyToDataTable<DataRow>();//将查询结果转化为DataTable对象
+
             dataGridView1.DataSource = myDTable;//显示查询到的数据集中的信息
         }
 
@@ -46,10 +46,12 @@ namespace SumSalary
             sqlda = new SqlDataAdapter("select * from tb_Salary", sqlcon);//创建数据库桥接器对象
             myds = new DataSet();//创建数据集对象
             sqlda.Fill(myds, "tb_Salary");//填充DataSet数据集
+
             var query = from salary in myds.Tables["tb_Salary"].AsEnumerable()//查询DataSet数据集中所有薪水
                         where salary.Field<int>("Salary") > 0
                         select salary;
             int intSum = query.Sum(salary => salary.Field<int>("Salary"));//汇总薪水
+
             DataTable myDTable = new DataTable();//创建DataTable对象
             myDTable.Columns.Add("公司每月总薪水");//在数据表中添加列
             DataRow myDRow = myDTable.NewRow();//创建DataRow对象

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;
 
 namespace GetFInfoByLINQ
@@ -35,7 +36,9 @@ namespace GetFInfoByLINQ
                 foreach (var vFiles in values)
                 {
                     foreach (var f in vFiles)
+                    {
                         listView1.Items.Add(f.FullName);
+                    }
                 }
             }
         }
@@ -67,6 +70,11 @@ namespace GetFInfoByLINQ
                     textBox7.Text = v.ReadOnly.ToString();//显示文件是否只读
                 }
             }
+        }
+
+        private void Frm_Main_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

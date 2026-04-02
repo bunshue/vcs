@@ -46,9 +46,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listView1 = new System.Windows.Forms.ListView();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -79,7 +80,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(88, 21);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(199, 21);
+            this.textBox1.Size = new System.Drawing.Size(199, 22);
             this.textBox1.TabIndex = 1;
             // 
             // label1
@@ -96,7 +97,7 @@
             this.textBox7.Location = new System.Drawing.Point(270, 78);
             this.textBox7.Name = "textBox7";
             this.textBox7.ReadOnly = true;
-            this.textBox7.Size = new System.Drawing.Size(57, 21);
+            this.textBox7.Size = new System.Drawing.Size(57, 22);
             this.textBox7.TabIndex = 14;
             // 
             // label8
@@ -113,7 +114,7 @@
             this.textBox6.Location = new System.Drawing.Point(95, 106);
             this.textBox6.Name = "textBox6";
             this.textBox6.ReadOnly = true;
-            this.textBox6.Size = new System.Drawing.Size(232, 21);
+            this.textBox6.Size = new System.Drawing.Size(232, 22);
             this.textBox6.TabIndex = 12;
             // 
             // label7
@@ -152,7 +153,7 @@
             this.textBox5.Location = new System.Drawing.Point(70, 78);
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(127, 21);
+            this.textBox5.Size = new System.Drawing.Size(127, 22);
             this.textBox5.TabIndex = 10;
             // 
             // label6
@@ -169,7 +170,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(310, 52);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(17, 12);
+            this.label5.Size = new System.Drawing.Size(21, 12);
             this.label5.TabIndex = 8;
             this.label5.Text = "KB";
             // 
@@ -178,7 +179,7 @@
             this.textBox4.Location = new System.Drawing.Point(233, 48);
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(75, 21);
+            this.textBox4.Size = new System.Drawing.Size(75, 22);
             this.textBox4.TabIndex = 7;
             // 
             // label4
@@ -195,7 +196,7 @@
             this.textBox3.Location = new System.Drawing.Point(70, 48);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(95, 21);
+            this.textBox3.Size = new System.Drawing.Size(95, 22);
             this.textBox3.TabIndex = 5;
             // 
             // label3
@@ -212,7 +213,7 @@
             this.textBox2.Location = new System.Drawing.Point(70, 19);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(257, 21);
+            this.textBox2.Size = new System.Drawing.Size(257, 22);
             this.textBox2.TabIndex = 3;
             // 
             // label2
@@ -243,17 +244,27 @@
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
-            // Form1
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(405, 12);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(715, 565);
+            this.richTextBox1.TabIndex = 6;
+            this.richTextBox1.Text = "";
+            // 
+            // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(361, 339);
+            this.ClientSize = new System.Drawing.Size(1132, 589);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.listView1);
-            this.Name = "Form1";
+            this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "使用LINQ技术获取文件详细信息";
+            this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -285,6 +296,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

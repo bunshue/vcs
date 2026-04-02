@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -42,25 +43,14 @@
             this.dataGridView1.Location = new System.Drawing.Point(5, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(349, 200);
+            this.dataGridView1.Size = new System.Drawing.Size(779, 358);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.button5);
-            this.groupBox1.Controls.Add(this.button4);
-            this.groupBox1.Location = new System.Drawing.Point(359, 4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(127, 200);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "操作";
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(11, 167);
+            this.button5.Location = new System.Drawing.Point(790, 69);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(106, 28);
+            this.button5.Size = new System.Drawing.Size(106, 43);
             this.button5.TabIndex = 2;
             this.button5.Text = "刷新";
             this.button5.UseVisualStyleBackColor = true;
@@ -68,27 +58,47 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(11, 133);
+            this.button4.Location = new System.Drawing.Point(790, 12);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(106, 28);
+            this.button4.Size = new System.Drawing.Size(106, 43);
             this.button4.TabIndex = 2;
             this.button4.Text = "公司每月总薪水";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(933, 4);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(323, 674);
+            this.richTextBox1.TabIndex = 2;
+            this.richTextBox1.Text = "";
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(5, 368);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowTemplate.Height = 23;
+            this.dataGridView2.Size = new System.Drawing.Size(779, 358);
+            this.dataGridView2.TabIndex = 3;
+            // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(778, 536);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(1268, 744);
+            this.Controls.Add(this.dataGridView2);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "使用LINQ技术统计员工的工资总额";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -96,9 +106,10 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.DataGridView dataGridView2;
     }
 }
 
