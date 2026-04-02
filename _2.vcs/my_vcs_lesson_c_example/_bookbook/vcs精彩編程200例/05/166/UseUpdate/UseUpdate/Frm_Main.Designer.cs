@@ -31,8 +31,11 @@
             this.dgv_Message = new System.Windows.Forms.DataGridView();
             this.btn_Submit = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Message)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dgv_Message
@@ -41,7 +44,7 @@
             this.dgv_Message.Location = new System.Drawing.Point(0, 1);
             this.dgv_Message.Name = "dgv_Message";
             this.dgv_Message.RowTemplate.Height = 23;
-            this.dgv_Message.Size = new System.Drawing.Size(449, 284);
+            this.dgv_Message.Size = new System.Drawing.Size(716, 284);
             this.dgv_Message.TabIndex = 0;
             this.dgv_Message.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Message_CellEndEdit);
             // 
@@ -58,18 +61,37 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btn_Submit);
-            this.groupBox1.Location = new System.Drawing.Point(0, 291);
+            this.groupBox1.Location = new System.Drawing.Point(722, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(449, 56);
+            this.groupBox1.Size = new System.Drawing.Size(356, 56);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "在DataGridView控件中更新数据后，点击提交更改按钮更新数据";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(725, 104);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(346, 574);
+            this.richTextBox1.TabIndex = 3;
+            this.richTextBox1.Text = "";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 291);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.Size = new System.Drawing.Size(716, 387);
+            this.dataGridView1.TabIndex = 4;
             // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(870, 531);
+            this.ClientSize = new System.Drawing.Size(1083, 690);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgv_Message);
             this.Name = "Frm_Main";
@@ -78,6 +100,7 @@
             this.Load += new System.EventHandler(this.Frm_Main_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Message)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -87,6 +110,8 @@
         private System.Windows.Forms.DataGridView dgv_Message;
         private System.Windows.Forms.Button btn_Submit;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 

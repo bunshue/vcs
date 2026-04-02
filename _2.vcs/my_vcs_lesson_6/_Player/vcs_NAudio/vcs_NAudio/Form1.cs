@@ -9,6 +9,8 @@ using System.Windows.Forms;
 
 //參考/加入參考/NAudio.dll
 
+using NAudio.Wave;
+
 namespace vcs_NAudio
 {
     public partial class Form1 : Form
@@ -142,13 +144,9 @@ namespace vcs_NAudio
         private void button3_Click(object sender, EventArgs e)
         {
             //mp3轉wave
-            /*
+
             string mp3_filename = @"D:\_git\vcs\_1.data\______test_files1\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
-            string wave_filename = "aaaaa.wav";
-
-            OpenFileDialog open = new OpenFileDialog();
-
-            SaveFileDialog save = new SaveFileDialog();
+            string wave_filename = "tmp_aaaaa.wav";
 
             using (Mp3FileReader mp3 = new Mp3FileReader(mp3_filename))
             {
@@ -157,7 +155,6 @@ namespace vcs_NAudio
                     WaveFileWriter.CreateWaveFile(wave_filename, pcm);
                 }
             }
-            */
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -172,7 +169,8 @@ namespace vcs_NAudio
 
         private void button6_Click(object sender, EventArgs e)
         {
-
+            //停止
+            output.Stop();
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -197,6 +195,8 @@ namespace vcs_NAudio
                 richTextBox1.Text += "播放中\n";
             else if (output.PlaybackState == NAudio.Wave.PlaybackState.Paused)
                 richTextBox1.Text += "暫停中\n";
+            else if (output.PlaybackState == NAudio.Wave.PlaybackState.Stopped)
+                richTextBox1.Text += "停止\n";
             else
                 richTextBox1.Text += "XXXXXX\n";
         }

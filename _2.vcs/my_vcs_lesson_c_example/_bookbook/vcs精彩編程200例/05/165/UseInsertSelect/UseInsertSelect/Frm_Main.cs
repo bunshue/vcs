@@ -20,12 +20,16 @@ namespace UseInsertSelect
 
         private void Frm_Main_Load(object sender, EventArgs e)
         {
-            dgv_Message.DataSource = GetMessage();//设置数据源
+
+
+
+            dataGridView1.DataSource = GetMessage();//设置数据源
         }
 
         private void btn_Insert_Click(object sender, EventArgs e)
         {
             InsertData();//插入多条数据记录
+
             dgv_Message.DataSource = GetMessage();//设置数据源
         }
 

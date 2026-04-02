@@ -44,6 +44,7 @@
             this.toolDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolExit = new System.Windows.Forms.ToolStripButton();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPRProduceInfo)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -175,7 +176,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(963, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1165, 25);
             this.toolStrip1.TabIndex = 72;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -189,11 +190,20 @@
             this.toolExit.Text = "退出";
             this.toolExit.Click += new System.EventHandler(this.toolExit_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(683, 140);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(470, 355);
+            this.richTextBox1.TabIndex = 73;
+            this.richTextBox1.Text = "";
+            // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(963, 507);
+            this.ClientSize = new System.Drawing.Size(1165, 507);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.dgvPRProduceInfo);
             this.Controls.Add(this.toolStrip1);
             this.Name = "Frm_Main";
@@ -225,6 +235,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn StartDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn EndDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn IsComplete;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
