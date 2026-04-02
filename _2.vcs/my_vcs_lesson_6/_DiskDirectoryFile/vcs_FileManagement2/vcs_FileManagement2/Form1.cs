@@ -18,7 +18,7 @@ using MediaInfoNET;
 加入/現有項目/選 MediaInfo.dll, 改屬性為 永遠複製
 */
 
-namespace vcs_FolderInfo
+namespace vcs_FileManagement2
 {
     public partial class Form1 : Form
     {
@@ -68,7 +68,7 @@ namespace vcs_FolderInfo
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1000, 750);
-            this.Text = "vcs_FolderInfo";
+            this.Text = "vcs_FileManagement2";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
@@ -81,126 +81,10 @@ namespace vcs_FolderInfo
             listView1.Clear();
         }
 
-        //獲得指定目錄下的所有文檔 ST
-
-        double total_size1 = 0;
-        int no_files = 0;
-        int no_folders = 0;
-
         private void button0_Click(object sender, EventArgs e)
         {
-            //獲得指定目錄下的所有文檔
-            total_size1 = 0;
-            no_files = 0;
-            no_folders = 0;
-
-            listView1.Columns.Add("名稱", 200, HorizontalAlignment.Center);
-            listView1.Columns.Add("大小", 200, HorizontalAlignment.Center);
-            listView1.Columns.Add("修改日期", 200, HorizontalAlignment.Center);
-            //string filePath = @"D:/_git/vcs/_1.data/______test_files1/";
-            string filePath = @"D:\_git\vcs\_1.data\______test_files1\__pic\_book_magazine";
-
-            /*
-            richTextBox1.Text += "轉出一層,獲得指定目錄下的所有文檔：\n";
-            List<FileInfo> list1 = GetFilesByDir(filePath);
-            foreach (FileInfo fi in list1)
-            {
-                //richTextBox1.Text += "完整路徑：" + fi.FullName.ToString() + " 文檔名：" + fi.Name + "\n";
-                //richTextBox1.Text += "資料夾：" + fi.Directory + "\n";
-                richTextBox1.Text += "檔名：" + fi.Name + "\t";
-                richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + "\t";
-                richTextBox1.Text += "修改日期：" + fi.LastWriteTime.ToString() + "\n";
-
-                total_size1 += fi.Length;
-                no_files++;
-
-                ListViewItem i1 = new ListViewItem(fi.Name);
-                ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
-                sub_i1a.Text = fi.Length.ToString();
-                i1.SubItems.Add(sub_i1a);
-                ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
-                sub_i1b.Text = fi.LastWriteTime.ToString();
-                i1.SubItems.Add(sub_i1b);
-
-                listView1.Items.Add(i1);
-                //設置ListView最後一行可見
-                listView1.Items[listView1.Items.Count - 1].EnsureVisible();
-            }
-            */
-
-            richTextBox1.Text += "轉出全部,列出指定目錄下及所有子目錄及子目錄裏更深層目錄裏的文檔：\n";
-            GetAllFiles(filePath);
-
-            label1.Text = "路徑：" + filePath + "\n大小：" + total_size1.ToString() + " 位元組\n內含：" + no_files.ToString() + " 個檔案，" + (no_folders - 1).ToString() + " 個資料夾";
-
-            //大小：	xxxxx 位元組
-            //內含：   143個檔案，18個資料夾
-
         }
 
-        /// <summary>
-        /// 獲得指定目錄下的所有文檔
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        public List<FileInfo> GetFilesByDir(string path)
-        {
-            DirectoryInfo di = new DirectoryInfo(path);
-
-            //找到該目錄下的文檔
-            FileInfo[] fi = di.GetFiles();
-
-            //把FileInfo[]數組轉換為List
-            List<FileInfo> list = fi.ToList<FileInfo>();
-            return list;
-        }
-
-        /// <summary>
-        /// 列出指定目錄下及所其有子目錄及子目錄裏更深層目錄裏的文檔（需要遞歸）
-        /// </summary>
-        /// <param name="path"></param>
-        public void GetAllFiles(string path)
-        {
-            DirectoryInfo dir = new DirectoryInfo(path);
-
-            //找到該目錄下的文檔
-            FileInfo[] fi = dir.GetFiles();
-            foreach (FileInfo f in fi)
-            {
-                //richTextBox1.Text += "完整路徑：" + f.FullName.ToString() + " 文檔名：" + f.Name + "\n";
-                //richTextBox1.Text += "資料夾：" + f.Directory + "\n";
-                richTextBox1.Text += "檔名：" + f.Name + "\t";
-                richTextBox1.Text += "大小：" + f.Length.ToString() + "\t";
-                richTextBox1.Text += "日期：" + f.LastWriteTime.ToString() + "\n";
-
-                total_size1 += f.Length;
-                no_files++;
-
-                ListViewItem i1 = new ListViewItem(f.Name);
-                ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
-                sub_i1a.Text = f.Length.ToString();
-                i1.SubItems.Add(sub_i1a);
-                ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
-                sub_i1b.Text = f.LastWriteTime.ToString();
-                i1.SubItems.Add(sub_i1b);
-
-                listView1.Items.Add(i1);
-                //設置ListView最後一行可見
-                listView1.Items[listView1.Items.Count - 1].EnsureVisible();
-
-
-            }
-
-            //找到該目錄下的所有目錄再遞歸
-            DirectoryInfo[] subDir = dir.GetDirectories();
-            no_folders++;
-            foreach (DirectoryInfo d in subDir)
-            {
-                GetAllFiles(d.FullName);
-            }
-        }
-
-        //獲得指定目錄下的所有文檔 SP
 
         //轉出一層 標準版 ST
 

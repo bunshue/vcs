@@ -1,4 +1,4 @@
-﻿namespace vcs_FolderInfo
+﻿namespace vcs_FileManagement2
 {
     partial class Form1
     {
@@ -82,7 +82,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(200, 60);
             this.button0.TabIndex = 141;
-            this.button0.Text = "獲得指定目錄下的所有文檔";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 

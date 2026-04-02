@@ -8,8 +8,8 @@
     <ProjectGuid>{9BBD46E9-4790-4804-885E-490D5E246423}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_FolderInfo</RootNamespace>
-    <AssemblyName>vcs_FolderInfo</AssemblyName>
+    <RootNamespace>vcs_FileManagement2</RootNamespace>
+    <AssemblyName>vcs_FileManagement2</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -69,6 +69,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

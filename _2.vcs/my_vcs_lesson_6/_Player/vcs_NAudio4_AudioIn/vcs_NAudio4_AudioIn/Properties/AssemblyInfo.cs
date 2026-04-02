@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("vcs_FolderInfo")]
+[assembly: AssemblyTitle("vcs_NAudio4_AudioIn")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("vcs_FolderInfo")]
+[assembly: AssemblyProduct("vcs_NAudio4_AudioIn")]
 [assembly: AssemblyCopyright("Copyright ©  2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
-[assembly: Guid("cf6ced90-6332-4eac-a3f5-c855bf841dbb")]
+[assembly: Guid("8bcb9995-3850-4323-9b6c-2430c1e07cb0")]
 
 // 組件的版本資訊是由下列四項值構成:
 //

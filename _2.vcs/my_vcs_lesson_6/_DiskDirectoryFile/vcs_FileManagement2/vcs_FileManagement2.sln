@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_FolderInfo", "vcs_FolderInfo\vcs_FolderInfo.csproj", "{9BBD46E9-4790-4804-885E-490D5E246423}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_FileManagement2", "vcs_FileManagement2\vcs_FileManagement2.csproj", "{9BBD46E9-4790-4804-885E-490D5E246423}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
