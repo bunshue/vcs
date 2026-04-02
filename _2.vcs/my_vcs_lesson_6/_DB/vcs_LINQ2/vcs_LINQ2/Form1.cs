@@ -141,17 +141,6 @@ namespace vcs_LINQ2
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //IEnumerable + LINQ
-            Random rand = new Random();//创建一个随机数生成器
-            int intCount = 5;//要生成随机数的组数
-            //生成一个包含指定个数的重复元素值的序列，
-            //由于Linq的延迟性，所以此时并不产生随机数，而是在枚举randomSeq的时候生成随机数
-            IEnumerable<int> randomSeq = Enumerable.Repeat<int>(1, intCount).Select(i => rand.Next());
-            richTextBox1.Text += "將產生" + intCount.ToString() + "個隨機數:\n";
-            foreach (int item in randomSeq)//通过枚举序列来生成随机数，
-            {
-                richTextBox1.Text += item.ToString() + "\n";//输出若干组随机数
-            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -192,41 +181,6 @@ namespace vcs_LINQ2
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //使用LINQ实现销售单查询
-
-            //创建销售单列表
-            List<SaleBill> bills = new List<SaleBill>
-            {
-            new SaleBill("XS001","王*科",Convert.ToDateTime("2010-1-1")),
-            new SaleBill("XS002","王*军",Convert.ToDateTime("2010-2-1")),
-            new SaleBill("XS003","赵*东",Convert.ToDateTime("2010-3-1"))
-            };
-
-            //创建销售商品列表
-            List<SaleProduct> products = new List<SaleProduct>
-            {
-            new SaleProduct("XS001","冰箱",1,2000),
-            new SaleProduct("XS001","洗衣机",2,600),
-            new SaleProduct("XS002","电暖风",3,50),
-            new SaleProduct("XS002","吸尘器",4,200),
-            new SaleProduct("XS003","手机",1,990)
-            };
-
-            //关联销售单列表和销售商品列表        
-            var query = bills.Join(products,
-                               b => b.SaleBillCode,
-                               p => p.SaleBillCode,
-                               (b, p) => new
-                               {
-                                   销售单号 = b.SaleBillCode,
-                                   销售日期 = b.SaleDate,
-                                   销售员 = b.SaleMan,
-                                   商品名称 = p.ProductName,
-                                   数量 = p.Quantity,
-                                   单价 = p.Price,
-                                   金额 = p.Quantity * p.Price
-                               });
-            dataGridView1.DataSource = query.ToList();//数据绑定
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -305,34 +259,6 @@ namespace vcs_LINQ2
         private void button29_Click(object sender, EventArgs e)
         {
         }
-    }
-
-    class SaleBill//销售单据类
-    {
-        public SaleBill(string saleBillCode, string saleMan, DateTime saleDate)
-        {
-            this.SaleBillCode = saleBillCode;
-            this.SaleMan = saleMan;
-            this.SaleDate = saleDate;
-        }
-        public string SaleBillCode { get; set; }//销售单号
-        public string SaleMan { get; set; }//销售员
-        public DateTime SaleDate { get; set; }//销售日期
-    }
-
-    class SaleProduct//销售商品类
-    {
-        public SaleProduct(string saleBillCode, string productName, int quantity, double price)
-        {
-            this.SaleBillCode = saleBillCode;
-            this.ProductName = productName;
-            this.Quantity = quantity;
-            this.Price = price;
-        }
-        public string SaleBillCode { get; set; }//销售单号
-        public string ProductName { get; set; }//商品名称
-        public int Quantity { get; set; }//数量
-        public double Price { get; set; }//单价
     }
 
 }
