@@ -34,6 +34,7 @@
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -50,14 +51,14 @@
             // 
             this.txtKey.Location = new System.Drawing.Point(270, 12);
             this.txtKey.Name = "txtKey";
-            this.txtKey.Size = new System.Drawing.Size(87, 21);
+            this.txtKey.Size = new System.Drawing.Size(87, 22);
             this.txtKey.TabIndex = 2;
             // 
             // txtValue
             // 
             this.txtValue.Location = new System.Drawing.Point(270, 53);
             this.txtValue.Name = "txtValue";
-            this.txtValue.Size = new System.Drawing.Size(87, 21);
+            this.txtValue.Size = new System.Drawing.Size(87, 22);
             this.txtValue.TabIndex = 3;
             // 
             // treeView1
@@ -72,7 +73,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(211, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 5;
             this.label1.Text = "键    名";
             // 
@@ -85,11 +86,20 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "键对应值";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(388, 9);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(384, 511);
+            this.richTextBox1.TabIndex = 7;
+            this.richTextBox1.Text = "";
+            // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(363, 132);
+            this.ClientSize = new System.Drawing.Size(784, 532);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.treeView1);
@@ -112,6 +122,7 @@
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

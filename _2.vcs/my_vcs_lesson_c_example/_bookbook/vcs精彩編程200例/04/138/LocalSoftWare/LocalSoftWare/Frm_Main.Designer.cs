@@ -59,6 +59,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Frm_Main";
             this.Text = "获取本机安装的软件清单";
+            this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.ResumeLayout(false);
 
         }

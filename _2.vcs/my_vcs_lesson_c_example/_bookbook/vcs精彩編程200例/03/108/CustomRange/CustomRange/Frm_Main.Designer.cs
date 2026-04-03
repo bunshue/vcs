@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Main));
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dgv_Message = new System.Windows.Forms.DataGridView();
             this.btn_Print = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -41,46 +38,16 @@
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_Message)).BeginInit();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.dgv_Message);
-            this.groupBox1.Controls.Add(this.btn_Print);
-            this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Location = new System.Drawing.Point(9, 8);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(387, 346);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "打印设置";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 319);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 12);
-            this.label1.TabIndex = 1;
-            // 
-            // dgv_Message
-            // 
-            this.dgv_Message.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_Message.Location = new System.Drawing.Point(6, 19);
-            this.dgv_Message.Name = "dgv_Message";
-            this.dgv_Message.RowTemplate.Height = 23;
-            this.dgv_Message.Size = new System.Drawing.Size(371, 210);
-            this.dgv_Message.TabIndex = 4;
             // 
             // btn_Print
             // 
-            this.btn_Print.Location = new System.Drawing.Point(320, 314);
+            this.btn_Print.Location = new System.Drawing.Point(599, 98);
             this.btn_Print.Name = "btn_Print";
-            this.btn_Print.Size = new System.Drawing.Size(57, 23);
+            this.btn_Print.Size = new System.Drawing.Size(82, 53);
             this.btn_Print.TabIndex = 3;
             this.btn_Print.Text = "打印";
             this.btn_Print.UseVisualStyleBackColor = true;
@@ -92,7 +59,7 @@
             this.groupBox2.Controls.Add(this.txt_Range);
             this.groupBox2.Controls.Add(this.rb_Range);
             this.groupBox2.Controls.Add(this.rb_All);
-            this.groupBox2.Location = new System.Drawing.Point(6, 235);
+            this.groupBox2.Location = new System.Drawing.Point(599, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(371, 71);
             this.groupBox2.TabIndex = 2;
@@ -157,36 +124,44 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(402, 8);
+            this.richTextBox1.Location = new System.Drawing.Point(599, 196);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(532, 481);
+            this.richTextBox1.Size = new System.Drawing.Size(377, 417);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(527, 331);
+            this.dataGridView1.TabIndex = 2;
             // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(946, 501);
+            this.ClientSize = new System.Drawing.Size(1019, 625);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.btn_Print);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.groupBox1);
             this.MaximizeBox = false;
             this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "自定义打印页码范围";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_Message)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton rb_All;
         private System.Windows.Forms.Button btn_Print;
@@ -195,9 +170,8 @@
         private System.Windows.Forms.RadioButton rb_Range;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
         private System.Drawing.Printing.PrintDocument printDocument1;
-        private System.Windows.Forms.DataGridView dgv_Message;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.DataGridView dataGridView1;
 
     }
 }

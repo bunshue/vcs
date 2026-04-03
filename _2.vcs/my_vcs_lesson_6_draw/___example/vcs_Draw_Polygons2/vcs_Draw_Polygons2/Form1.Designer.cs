@@ -28,108 +28,91 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.picCanvas = new System.Windows.Forms.PictureBox();
             this.hscrPixels = new System.Windows.Forms.HScrollBar();
             this.lblPixels = new System.Windows.Forms.Label();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFileNew = new System.Windows.Forms.ToolStripMenuItem();
-            ((System.ComponentModel.ISupportInitialize)(this.picCanvas)).BeginInit();
-            this.menuStrip1.SuspendLayout();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // picCanvas
-            // 
-            this.picCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.picCanvas.BackColor = System.Drawing.Color.White;
-            this.picCanvas.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.picCanvas.Location = new System.Drawing.Point(12, 47);
-            this.picCanvas.Name = "picCanvas";
-            this.picCanvas.Size = new System.Drawing.Size(754, 457);
-            this.picCanvas.TabIndex = 0;
-            this.picCanvas.TabStop = false;
-            this.picCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.picCanvas_Paint);
-            this.picCanvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picCanvas_MouseDown);
-            this.picCanvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picCanvas_MouseMove);
             // 
             // hscrPixels
             // 
-            this.hscrPixels.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.hscrPixels.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.hscrPixels.Location = new System.Drawing.Point(12, 506);
             this.hscrPixels.Maximum = 109;
             this.hscrPixels.Name = "hscrPixels";
-            this.hscrPixels.Size = new System.Drawing.Size(721, 15);
+            this.hscrPixels.Size = new System.Drawing.Size(1003, 15);
             this.hscrPixels.TabIndex = 1;
             this.hscrPixels.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hscrPixels_Scroll);
             // 
             // lblPixels
             // 
             this.lblPixels.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPixels.Location = new System.Drawing.Point(736, 506);
+            this.lblPixels.Location = new System.Drawing.Point(1018, 506);
             this.lblPixels.Name = "lblPixels";
             this.lblPixels.Size = new System.Drawing.Size(30, 14);
             this.lblPixels.TabIndex = 2;
             this.lblPixels.Text = "0";
             this.lblPixels.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // menuStrip1
+            // pictureBox1
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(778, 24);
-            this.menuStrip1.TabIndex = 3;
-            this.menuStrip1.Text = "menuStrip1";
+            this.pictureBox1.BackColor = System.Drawing.Color.White;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(585, 427);
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             // 
-            // toolStripMenuItem1
+            // button1
             // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuFileNew});
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(38, 20);
-            this.toolStripMenuItem1.Text = "&File";
+            this.button1.Location = new System.Drawing.Point(615, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(78, 47);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // mnuFileNew
+            // richTextBox1
             // 
-            this.mnuFileNew.Name = "mnuFileNew";
-            this.mnuFileNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.mnuFileNew.Size = new System.Drawing.Size(145, 22);
-            this.mnuFileNew.Text = "&New";
-            this.mnuFileNew.Click += new System.EventHandler(this.mnuFileNew_Click);
+            this.richTextBox1.Location = new System.Drawing.Point(615, 65);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(433, 374);
+            this.richTextBox1.TabIndex = 6;
+            this.richTextBox1.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(778, 528);
+            this.ClientSize = new System.Drawing.Size(1060, 528);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblPixels);
             this.Controls.Add(this.hscrPixels);
-            this.Controls.Add(this.picCanvas);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "vcs_Draw_Polygons2";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.picCanvas)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox picCanvas;
         private System.Windows.Forms.HScrollBar hscrPixels;
         private System.Windows.Forms.Label lblPixels;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem mnuFileNew;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

@@ -765,7 +765,7 @@
             this.dgvInfo.Location = new System.Drawing.Point(6, 438);
             this.dgvInfo.Name = "dgvInfo";
             this.dgvInfo.RowTemplate.Height = 23;
-            this.dgvInfo.Size = new System.Drawing.Size(657, 209);
+            this.dgvInfo.Size = new System.Drawing.Size(1207, 209);
             this.dgvInfo.TabIndex = 29;
             this.dgvInfo.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dgvInfo.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
@@ -774,7 +774,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(723, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(490, 506);
+            this.richTextBox1.Size = new System.Drawing.Size(490, 420);
             this.richTextBox1.TabIndex = 30;
             this.richTextBox1.Text = "";
             // 
@@ -782,7 +782,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1225, 649);
+            this.ClientSize = new System.Drawing.Size(1225, 661);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.dgvInfo);
             this.Controls.Add(this.groupBox1);

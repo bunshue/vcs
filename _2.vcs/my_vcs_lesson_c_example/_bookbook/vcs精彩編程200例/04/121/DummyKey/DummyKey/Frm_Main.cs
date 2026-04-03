@@ -19,8 +19,11 @@ namespace DummyKey
         public Frm_Main()
         {
             InitializeComponent();
+        }
 
-            #region 将指定的按钮值添加到键类型中
+        private void Frm_Main_Load(object sender, EventArgs e)
+        {
+            //#region 将指定的按钮值添加到键类型中
             spacialVKButtonsMap = new Dictionary<short, IList<FecitButton>>();
             combinationVKButtonsMap = new Dictionary<short, IList<FecitButton>>();
             IList<FecitButton> buttonList = new List<FecitButton>();//实例化IList<FecitButton>(按照索引单独访问的一组对象)
@@ -39,7 +42,7 @@ namespace DummyKey
             buttonList = new List<FecitButton>();//实例化IList<FecitButton>
             buttonList.Add(this.btnLOCK);//添加LOCK键
             spacialVKButtonsMap.Add(KeyboardConstaint.VK_CAPITAL, buttonList);//添加LOCK键值
-            #endregion
+            //#endregion
 
             foreach (Control ctrl in this.Controls)
             {
@@ -49,7 +52,7 @@ namespace DummyKey
                     continue;
                 }
 
-                #region 设置按键的消息值
+                //#region 设置按键的消息值
                 short key = 0;//记录键值
                 bool isSpacialKey = true;
                 //记录快捷键的键值
@@ -178,7 +181,7 @@ namespace DummyKey
                     key = (short)button.Name[3];//获取按钮的键值
                 }
                 button.Tag = key;//在按钮的Tag属性中记录相应的键值
-                #endregion
+                //#endregion
                 button.Click += ButtonOnClick;//重载按钮的单击事件
             }
             this.hook = new HookEx.UserActivityHook(true, true);
@@ -196,7 +199,9 @@ namespace DummyKey
         {
             FecitButton btnKey = sender as FecitButton;//获取当前按键的信息
             if (btnKey == null)//如果按键为空值
+            {
                 return;
+            }
             SendKeyCommand(btnKey);//发送按键的信息
 
             richTextBox1.Text += btnKey.Text;
@@ -284,7 +289,9 @@ namespace DummyKey
         {
             IList<FecitButton> buttonList = FindButtonList(args);//查找当有键
             if (buttonList.Count <= 0)//如果没有找到
+            {
                 return;//退出本次操作
+            }
             short key = (short)args.KeyValue;//获取当前键的键值
             if (spacialVKButtonsMap.ContainsKey(key))//如果键/值列表中有该键
             {
@@ -299,7 +306,9 @@ namespace DummyKey
                 foreach (FecitButton button in buttonList)//遍历IList中的所有按钮
                 {
                     if (button == null)//如果按钮为空
+                    {
                         break;//退出循环
+                    }
                     button.Checked = isDown;//设置按钮的状态
                 }
             }
@@ -363,7 +372,9 @@ namespace DummyKey
             {
                 FecitButton button = ctrl as FecitButton;//如果当前控件是FecitButton按钮
                 if (button == null)//如果当前按钮为空
+                {
                     continue;//重新循环
+                }
                 short theKey = Convert.ToInt16(button.Tag.ToString());//获取当前按钮的键值
                 if (theKey == key)//如果与当前操作的按钮相同
                 {

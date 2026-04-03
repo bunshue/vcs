@@ -6,23 +6,32 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using Microsoft.Win32;
+
 namespace RunManage
 {
     public partial class Form1 : Form
     {
+        string[] Machine;
+        string[] User;
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        string[] Machine;
-        string[] User;
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            getMachineInfo();
+            getUserInfo();
+        }
+
         private void getMachineInfo()//读取HKEY_LOCAL_MACHINE分支下的启动项
         {
             string[] reginfo = new string[2];
-            RegistryKey rk= Registry.LocalMachine;
-            RegistryKey rk2=rk.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
+            RegistryKey rk = Registry.LocalMachine;
+            RegistryKey rk2 = rk.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run", true);
             string[] MachineFiles = rk2.GetValueNames();
             Machine = rk2.GetValueNames();
             foreach (string name in MachineFiles)
@@ -62,12 +71,6 @@ namespace RunManage
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            getMachineInfo();
-            getUserInfo();
-        }
-
         private bool IsMachine(string name)
         {
             bool flag = false;
@@ -84,7 +87,7 @@ namespace RunManage
         private bool IsUser(string name)
         {
             bool flag = false;
-            for (int i = 0; i <User.Length; i++)
+            for (int i = 0; i < User.Length; i++)
             {
                 if (User[i] == name)
                 {

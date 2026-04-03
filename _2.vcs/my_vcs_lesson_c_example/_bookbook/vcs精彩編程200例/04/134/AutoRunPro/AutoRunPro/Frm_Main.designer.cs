@@ -34,6 +34,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -61,7 +62,7 @@
             this.textBox1.Enabled = false;
             this.textBox1.Location = new System.Drawing.Point(107, 6);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(216, 21);
+            this.textBox1.Size = new System.Drawing.Size(216, 22);
             this.textBox1.TabIndex = 2;
             // 
             // openFileDialog1
@@ -88,19 +89,29 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // Form1
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(14, 107);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(604, 384);
+            this.richTextBox1.TabIndex = 5;
+            this.richTextBox1.Text = "";
+            // 
+            // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(378, 99);
+            this.ClientSize = new System.Drawing.Size(630, 503);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
-            this.Name = "Form1";
+            this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "使应用程序开机自动运行";
+            this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -114,6 +125,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

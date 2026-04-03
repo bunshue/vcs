@@ -6,18 +6,26 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Runtime.InteropServices;
 
 namespace SystemLock
 {
     public partial class Form1 : Form
     {
+        private Point mouseOffset;//鼠标位置
+        private bool isMouseDown = false;//表示鼠标是否按下
+
         public Form1()
         {
             InitializeComponent();
         }
-        private Point mouseOffset;//鼠标位置
-        private bool isMouseDown = false;//表示鼠标是否按下
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             Application.Exit();//窗体的关闭按钮
@@ -85,11 +93,6 @@ namespace SystemLock
                     return;
                 }
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

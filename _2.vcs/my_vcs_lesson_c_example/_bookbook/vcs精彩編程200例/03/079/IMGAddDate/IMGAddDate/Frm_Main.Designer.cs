@@ -82,9 +82,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(340, 273);
+            this.button4.Location = new System.Drawing.Point(321, 230);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(96, 23);
+            this.button4.Size = new System.Drawing.Size(115, 47);
             this.button4.TabIndex = 2;
             this.button4.Text = "印上拍照日期";
             this.button4.UseVisualStyleBackColor = true;
@@ -97,9 +97,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(17, 311);
+            this.richTextBox1.Location = new System.Drawing.Point(448, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(419, 196);
+            this.richTextBox1.Size = new System.Drawing.Size(489, 518);
             this.richTextBox1.TabIndex = 6;
             this.richTextBox1.Text = "";
             // 
@@ -107,7 +107,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(564, 542);
+            this.ClientSize = new System.Drawing.Size(949, 542);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.groupBox1);

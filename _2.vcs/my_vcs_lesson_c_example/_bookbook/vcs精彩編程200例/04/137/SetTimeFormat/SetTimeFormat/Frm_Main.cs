@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using Microsoft.Win32;
 using System.Diagnostics;
 
@@ -17,6 +18,12 @@ namespace SetTimeFormat
         {
             InitializeComponent();
         }
+
+        private void Frm_Main_Load(object sender, EventArgs e)
+        {
+
+        }
+
         public void RefreshSystem()
         {
             Process[] mprocess;
@@ -26,6 +33,7 @@ namespace SetTimeFormat
                 mp.Kill();
             }
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (comboBox1.Text != "")

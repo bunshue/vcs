@@ -42,10 +42,10 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(483, 293);
+            this.dataGridView1.Size = new System.Drawing.Size(1051, 293);
             this.dataGridView1.TabIndex = 0;
             // 
             // printDocument1
@@ -65,7 +65,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(422, 300);
+            this.button1.Location = new System.Drawing.Point(476, 330);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(60, 33);
             this.button1.TabIndex = 1;
@@ -79,9 +79,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(510, 3);
+            this.richTextBox1.Location = new System.Drawing.Point(542, 330);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(521, 523);
+            this.richTextBox1.Size = new System.Drawing.Size(521, 258);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
@@ -89,7 +89,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1043, 538);
+            this.ClientSize = new System.Drawing.Size(1075, 600);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);

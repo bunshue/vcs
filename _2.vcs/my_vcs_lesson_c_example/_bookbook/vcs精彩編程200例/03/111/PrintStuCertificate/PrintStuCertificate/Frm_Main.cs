@@ -14,12 +14,6 @@ namespace PrintStuCertificate
 {
     public partial class Frm_Main : Form
     {
-        public Frm_Main()
-        {
-            InitializeComponent();
-        }
-
-        //#region 定义全局变量及对象
         string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
         public static string strName = "";
         public static string strSex = "";
@@ -49,7 +43,11 @@ namespace PrintStuCertificate
         SqlCommand sqlcmd;
         SqlDataAdapter sqlda;
         DataSet myds;
-        //#endregion
+
+        public Frm_Main()
+        {
+            InitializeComponent();
+        }
 
         //窗体初始化时，自动编号并显示所有学生信息
         private void Form1_Load(object sender, EventArgs e)

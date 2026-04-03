@@ -33,7 +33,7 @@ namespace vcs_Draw_Polygons
         }
 
         // Start or continue drawing a new polygon.
-        private void picCanvas_MouseDown(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             // See if we are already drawing a polygon.
             if (NewPolygon != null)
@@ -67,26 +67,26 @@ namespace vcs_Draw_Polygons
             }
 
             // Redraw.
-            picCanvas.Invalidate();
+            pictureBox1.Invalidate();
         }
 
         // Move the next point in the new polygon.
-        private void picCanvas_MouseMove(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (NewPolygon == null)
             {
                 return;
             }
             NewPoint = e.Location;
-            picCanvas.Invalidate();
+            pictureBox1.Invalidate();
         }
 
         // Redraw old polygons in blue. Draw the new polygon in green.
         // Draw the final segment dashed.
-        private void picCanvas_Paint(object sender, PaintEventArgs e)
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            e.Graphics.Clear(picCanvas.BackColor);
+            e.Graphics.Clear(pictureBox1.BackColor);
 
             e.Graphics.DrawString("左鍵點選頂點", new Font("標楷體", 30), new SolidBrush(Color.Green), new PointF(10, 10));
             e.Graphics.DrawString("右鍵結束", new Font("標楷體", 30), new SolidBrush(Color.Green), new PointF(10, 10 + 40));

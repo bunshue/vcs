@@ -15,12 +15,6 @@ namespace PrintStuCertificate
 {
     public partial class Frm_Main : Form
     {
-        public Frm_Main()
-        {
-            InitializeComponent();
-        }
-
-        //#region 定义全局变量及对象
         string strID = "";
         string strName = "";
         string strSex = "";
@@ -35,7 +29,11 @@ namespace PrintStuCertificate
         Brush myBrush = new SolidBrush(Color.Black);
         Pen mypen = new Pen(Color.Black);
         Font myFont = new Font("宋体", 10);
-        //#endregion
+
+        public Frm_Main()
+        {
+            InitializeComponent();
+        }
 
         //窗体加载时显示所有学生信息
         private void Form1_Load(object sender, EventArgs e)
@@ -49,23 +47,27 @@ namespace PrintStuCertificate
             //#region 记录的打印的学生信息
             if (lists.Count > 0)
             {
-                DataSet myds = BindInfo("编号",//获得数据集对象
+                //获得数据集对象
+                DataSet myds = BindInfo("编号",
                     dataGridView1.Rows[Convert.ToInt32(lists[currentPage - 1])].
                     Cells[0].Value.ToString());
-                strID = dataGridView1.Rows[Convert.ToInt32(//获得学生编号
+                //获得学生编号
+                strID = dataGridView1.Rows[Convert.ToInt32(
                     lists[currentPage - 1])].Cells[0].Value.ToString();
                 strName = myds.Tables[0].Rows[0][1].ToString();//获得学生姓名
                 strSex = myds.Tables[0].Rows[0][2].ToString();//获得学生性别
-                DateTime dt = Convert.ToDateTime(//获得系统时间
+                //获得系统时间
+                DateTime dt = Convert.ToDateTime(
                     myds.Tables[0].Rows[0][3].ToString());
                 strBirthday = dt.Year + "年" + dt.Month + "月";//获得生日信息
                 strNPlace = myds.Tables[0].Rows[0][4].ToString();//获得籍贯信息
-                strRXSJ = Convert.ToDateTime(myds.Tables[0].//获得入学时间
-                    Rows[0][5].ToString()).ToLongDateString();
+                //获得入学时间
+                strRXSJ = Convert.ToDateTime(myds.Tables[0].Rows[0][5].ToString()).ToLongDateString();
                 strZY = myds.Tables[0].Rows[0][6].ToString();//获得专业信息
                 strFZRQ = DateTime.Now.ToLongDateString();//获得当前系统时间
-                MemoryStream memoryImage =//创建内存流对象
-                    new MemoryStream((byte[])myds.Tables[0].Rows[0][7]);
+
+                //创建内存流对象
+                MemoryStream memoryImage = new MemoryStream((byte[])myds.Tables[0].Rows[0][7]);
                 imgPhoto = Image.FromStream(memoryImage);//获得图像对象
             }
             //#endregion

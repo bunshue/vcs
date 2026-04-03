@@ -152,11 +152,6 @@ namespace CompressImg
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
         private void rbPercent_Enter(object sender, EventArgs e)
         {
             groupBox1.Focus();

@@ -13,12 +13,6 @@ namespace PagesPrint
 {
     public partial class Frm_Main : Form
     {
-        public Frm_Main()
-        {
-            InitializeComponent();
-        }
-
-        //#region 定义全局对象及变量
         int intPage = 0;//总页数
         int intRows = 0;//每页行数
         int EndRows = 0;//最后一页行数
@@ -35,7 +29,11 @@ namespace PagesPrint
         int buttommargin = 80;//底边距 
         int columnWidth1 = 57;//第一列宽度
         int columnWidth2 = 335;//第二列宽度
-        //#endregion
+
+        public Frm_Main()
+        {
+            InitializeComponent();
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -64,7 +62,7 @@ namespace PagesPrint
             {
                 intPage = Convert.ToInt32((dataGridView1.Rows.Count - 2) / intRows);
             }
-            label2.Text = "总页数：" + intPage + "页";
+            richTextBox1.Text += "总页数：" + intPage + "页\n";
         }
 
         //设置分页
@@ -84,7 +82,7 @@ namespace PagesPrint
                     {
                         intPage = Convert.ToInt32((dataGridView1.Rows.Count - 2) / intRows);
                     }
-                    label2.Text = "总页数：" + intPage + "页";
+                    richTextBox1.Text += "总页数：" + intPage + "页\n";
                 }
             }
         }
@@ -95,15 +93,12 @@ namespace PagesPrint
             printPreviewDialog1.ShowDialog();
         }
 
-        //退出当前应用程序
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
         //设置打印内容
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
+            int R = dataGridView1.Rows.Count;
+            richTextBox1.Text += "printDocument1_PrintPage, R = " + R.ToString() + "\n";
+
             if (dataGridView1.Rows.Count > 0)
             {
                 PrintPageWidth = e.PageBounds.Width;//获取打印线张的宽度
@@ -149,6 +144,39 @@ namespace PagesPrint
                     currentpageindex = 1;//当前打印的页编号设为1
                 }
                 //#endregion
+            }
+        }
+
+        void sql_read_database(string db_filename, string sqlstr, DataGridView dgv)
+        {
+            string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
+
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);
+
+            //讀取資料庫至DGV
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
+                {
+                    SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
+                    DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+                    da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+                    //da.Fill(ds, "table");  // da將查詢的結果填充至數據集ds, 指定TableName為"table"
+                    dgv.DataSource = ds.Tables[0].DefaultView;  // DGV設置數據源
+                    //dgv.DataSource = ds.Tables[0];  // DGV設置數據源, same
+
+                    /*
+                    //也可改成用 DataTable
+                    DataTable dt = new DataTable();//创建数据表
+                    da.Fill(dt);//填充数据表
+                    dgv.DataSource = dt;
+                    */
+                }
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.Message + "\n";
             }
         }
     }

@@ -23,15 +23,21 @@ namespace SwitchInput
             foreach (InputLanguage mInput in mInputs)
             {
                 this.comboBox1.Items.Add(mInput.LayoutName);
+                richTextBox1.Text += mInput.LayoutName + "\n";
             }
             //获取当前输入法信息
             InputLanguage CurrentInput = InputLanguage.CurrentInputLanguage;
             this.textBox1.Text = CurrentInput.LayoutName;
+            richTextBox1.Text += "获取当前输入法信息 : " + CurrentInput.LayoutName + "\n";
+
             //获取输入法的语言区域
             this.textBox3.Text = CurrentInput.Culture.DisplayName;
+            richTextBox1.Text += "获取输入法的语言区域 : " + CurrentInput.Culture.DisplayName + "\n";
+
             //获取默认的输入法信息
             InputLanguage dInput = InputLanguage.DefaultInputLanguage;
             this.textBox2.Text = dInput.LayoutName;
+            richTextBox1.Text += "获取默认的输入法信息 : " + dInput.LayoutName + "\n";
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)

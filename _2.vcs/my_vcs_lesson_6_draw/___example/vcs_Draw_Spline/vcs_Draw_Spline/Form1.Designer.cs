@@ -35,13 +35,14 @@
             this.rb2 = new System.Windows.Forms.RadioButton();
             this.rb1 = new System.Windows.Forms.RadioButton();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.trkTension)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtTension
             // 
-            this.txtTension.Location = new System.Drawing.Point(227, 12);
+            this.txtTension.Location = new System.Drawing.Point(279, 17);
             this.txtTension.Name = "txtTension";
             this.txtTension.ReadOnly = true;
             this.txtTension.Size = new System.Drawing.Size(45, 22);
@@ -51,12 +52,12 @@
             // 
             // trkTension
             // 
-            this.trkTension.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.trkTension.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.trkTension.Location = new System.Drawing.Point(66, 12);
             this.trkTension.Maximum = 50;
             this.trkTension.Name = "trkTension";
-            this.trkTension.Size = new System.Drawing.Size(155, 45);
+            this.trkTension.Size = new System.Drawing.Size(207, 45);
             this.trkTension.TabIndex = 5;
             this.trkTension.Value = 5;
             this.trkTension.Scroll += new System.EventHandler(this.trkTension_Scroll);
@@ -105,7 +106,7 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(734, 15);
+            this.bt_clear.Location = new System.Drawing.Point(786, 17);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(75, 23);
             this.bt_clear.TabIndex = 8;
@@ -113,11 +114,20 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(612, 101);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(249, 445);
+            this.richTextBox1.TabIndex = 9;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(821, 558);
+            this.ClientSize = new System.Drawing.Size(873, 558);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtTension);
@@ -145,6 +155,7 @@
         private System.Windows.Forms.RadioButton rb2;
         private System.Windows.Forms.RadioButton rb1;
         private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

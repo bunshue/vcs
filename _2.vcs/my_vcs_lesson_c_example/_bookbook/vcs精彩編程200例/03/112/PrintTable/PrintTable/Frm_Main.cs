@@ -13,12 +13,6 @@ namespace PrintTable
 {
     public partial class Frm_Main : Form
     {
-        public Frm_Main()
-        {
-            InitializeComponent();
-        }
-
-        //#region 定义全局变量及对象
         string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
         public static string strID = "";
         public static string strInPeople = "";
@@ -37,7 +31,11 @@ namespace PrintTable
         SqlCommand sqlcmd;
         SqlDataAdapter sqlda;
         DataSet myds;
-        //#endregion
+
+        public Frm_Main()
+        {
+            InitializeComponent();
+        }
 
         //窗体初始化时显示所有入库信息
         private void Form1_Load(object sender, EventArgs e)
@@ -60,7 +58,9 @@ namespace PrintTable
             try
             {
                 if (txtGNum.Text != "")
+                {
                     txtSMoney.Text = (Convert.ToDecimal(txtGMoney.Text) * Convert.ToInt32(txtGNum.Text)).ToString();
+                }
             }
             catch { }
         }
@@ -70,7 +70,9 @@ namespace PrintTable
             try
             {
                 if (txtGMoney.Text != "")
+                {
                     txtSMoney.Text = (Convert.ToDecimal(txtGMoney.Text) * Convert.ToInt32(txtGNum.Text)).ToString();
+                }
             }
             catch { }
         }

@@ -3,7 +3,9 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+
 using Microsoft.Win32;
+
 namespace WriteRegedit
 {
     public partial class Frm_Main : Form
@@ -31,6 +33,7 @@ namespace WriteRegedit
             treeView1.Nodes.Add(tn1);//向树形控件添加一级节点
             treeView1.ExpandAll();//展开树形控件
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             try

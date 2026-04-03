@@ -32,84 +32,11 @@ namespace vcs_Draw_Polygons2
 
         }
 
-        private void picCanvas_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.Clear(picCanvas.BackColor);
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-
-            e.Graphics.DrawString("左鍵點選頂點", new Font("標楷體", 30), new SolidBrush(Color.Green), new PointF(10, 10));
-            e.Graphics.DrawString("右鍵結束", new Font("標楷體", 30), new SolidBrush(Color.Green), new PointF(10, 10 + 40));
-
-            if (Drawing)
-            {
-                if (Points.Count >= 2)
-                {
-                    e.Graphics.DrawLines(Pens.Red, Points.ToArray());
-                }
-                e.Graphics.DrawLine(Pens.Pink, Points[Points.Count - 1], CurrentPoint);
-            }
-            else
-            {
-                if (Points.Count >= 3)
-                {
-                    e.Graphics.DrawPolygon(Pens.Red, Points.ToArray());
-                    if (EnlargeBy > 0)
-                    {
-                        DrawEnlargedPolygon(e.Graphics);
-                    }
-                }
-            }
-        }
-
-        private void picCanvas_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                if (Drawing)
-                {
-                    Drawing = false;
-
-                    // Make sure the polygon is oriented counter clockwise.
-                    if (PolygonIsOrientedClockwise(Points))
-                    {
-                        // Reverse the points.
-                        List<PointF> pts = new List<PointF>();
-                        for (int i = Points.Count - 1; i >= 0; i--)
-                        {
-                            pts.Add(Points[i]);
-                        }
-                        Points = pts;
-                    }
-                }
-            }
-            else
-            {
-                if (!Drawing)
-                {
-                    Drawing = true;
-                    Points = new List<PointF>();
-                }
-                CurrentPoint = e.Location;
-                Points.Add(CurrentPoint);
-            }
-            picCanvas.Refresh();
-        }
-
-        private void picCanvas_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (!Drawing)
-            {
-                return;
-            }
-            CurrentPoint = e.Location;
-            picCanvas.Refresh();
-        }
-
         private void hscrPixels_Scroll(object sender, ScrollEventArgs e)
         {
             lblPixels.Text = hscrPixels.Value.ToString();
             EnlargeBy = hscrPixels.Value;
-            picCanvas.Refresh();
+            pictureBox1.Refresh();
         }
 
         // Enlarge the polygon and draw it.
@@ -253,12 +180,87 @@ namespace vcs_Draw_Polygons2
             return area;
         }
 
-        // Clear the Points list.
-        private void mnuFileNew_Click(object sender, EventArgs e)
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (Drawing)
+                {
+                    Drawing = false;
+
+                    // Make sure the polygon is oriented counter clockwise.
+                    if (PolygonIsOrientedClockwise(Points))
+                    {
+                        // Reverse the points.
+                        List<PointF> pts = new List<PointF>();
+                        for (int i = Points.Count - 1; i >= 0; i--)
+                        {
+                            pts.Add(Points[i]);
+                        }
+                        Points = pts;
+                    }
+                }
+            }
+            else
+            {
+                if (!Drawing)
+                {
+                    Drawing = true;
+                    Points = new List<PointF>();
+                }
+                CurrentPoint = e.Location;
+                Points.Add(CurrentPoint);
+            }
+            pictureBox1.Refresh();
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!Drawing)
+            {
+                return;
+            }
+            CurrentPoint = e.Location;
+            pictureBox1.Refresh();
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.Clear(pictureBox1.BackColor);
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            e.Graphics.DrawString("左鍵點選頂點", new Font("標楷體", 30), new SolidBrush(Color.Green), new PointF(10, 10));
+            e.Graphics.DrawString("右鍵結束", new Font("標楷體", 30), new SolidBrush(Color.Green), new PointF(10, 10 + 40));
+
+            if (Drawing)
+            {
+                if (Points.Count >= 2)
+                {
+                    e.Graphics.DrawLines(Pens.Red, Points.ToArray());
+                }
+                e.Graphics.DrawLine(Pens.Pink, Points[Points.Count - 1], CurrentPoint);
+            }
+            else
+            {
+                if (Points.Count >= 3)
+                {
+                    e.Graphics.DrawPolygon(Pens.Red, Points.ToArray());
+                    if (EnlargeBy > 0)
+                    {
+                        DrawEnlargedPolygon(e.Graphics);
+                    }
+                }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //New
+            // Clear the Points list.
             Points = new List<PointF>();
-            picCanvas.Refresh();
+            pictureBox1.Refresh();
             hscrPixels.Value = 0;
+
         }
     }
 }

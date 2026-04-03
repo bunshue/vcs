@@ -387,16 +387,16 @@
             // dgvInfo
             // 
             this.dgvInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvInfo.Location = new System.Drawing.Point(6, 255);
+            this.dgvInfo.Location = new System.Drawing.Point(7, 390);
             this.dgvInfo.Name = "dgvInfo";
             this.dgvInfo.RowTemplate.Height = 23;
-            this.dgvInfo.Size = new System.Drawing.Size(673, 209);
+            this.dgvInfo.Size = new System.Drawing.Size(1161, 209);
             this.dgvInfo.TabIndex = 16;
             this.dgvInfo.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInfo_CellClick);
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(604, 468);
+            this.btnPrint.Location = new System.Drawing.Point(604, 353);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(75, 31);
             this.btnPrint.TabIndex = 31;
@@ -423,7 +423,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(740, 10);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(428, 489);
+            this.richTextBox1.Size = new System.Drawing.Size(428, 374);
             this.richTextBox1.TabIndex = 32;
             this.richTextBox1.Text = "";
             // 
@@ -431,7 +431,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1180, 542);
+            this.ClientSize = new System.Drawing.Size(1180, 611);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.groupBox1);
