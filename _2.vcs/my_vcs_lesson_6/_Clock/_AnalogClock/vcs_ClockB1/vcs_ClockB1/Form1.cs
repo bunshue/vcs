@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Drawing2D;  // for SmoothingMode, LineCap
+
 namespace vcs_ClockB1
 {
     public partial class Form1 : Form
@@ -20,17 +22,20 @@ namespace vcs_ClockB1
         public Form1()
         {
             InitializeComponent();
-            this.ClientSize = new Size(300, 300); // 預設視窗寬高
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            this.Invalidate(); // 要求重畫
+            this.ClientSize = new Size(280, 280); // 預設視窗寬高
+
+            MyPen_H.EndCap = LineCap.ArrowAnchor;  // 時針用箭頭
+            MyPen_M.EndCap = LineCap.ArrowAnchor;  // 分針用箭頭
+            MyPen_S.EndCap = LineCap.ArrowAnchor;  // 秒針用箭頭
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
             e.Graphics.ResetTransform(); // 表單畫布 設為預設值
             // 表單畫布的原點 平移到 視窗客戶區的 中心點
@@ -77,11 +82,9 @@ namespace vcs_ClockB1
             e.Graphics.FillEllipse(Brushes.Brown, -10, -10, 20, 20);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
-            MyPen_H.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
-            MyPen_M.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
-            MyPen_S.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+            this.Invalidate();
         }
     }
 }

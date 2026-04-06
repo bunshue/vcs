@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Drawing.Drawing2D;
 
 namespace vcs_ClockB2
@@ -23,12 +24,16 @@ namespace vcs_ClockB2
         public Form1()
         {
             InitializeComponent();
-            this.ClientSize = new Size(300, 300); // 預設視窗寬高
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            this.Invalidate(); // 要求重畫
+            this.ClientSize = new Size(300, 300); // 預設視窗寬高
+
+            MyPen_H.EndCap = LineCap.ArrowAnchor;
+            MyPen_M.EndCap = LineCap.ArrowAnchor;
+            MyPen_S.EndCap = LineCap.ArrowAnchor;
+            MyPen_AL.EndCap = LineCap.RoundAnchor;
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -84,14 +89,6 @@ namespace vcs_ClockB2
             e.Graphics.FillEllipse(Brushes.Brown, -10, -10, 20, 20);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            MyPen_H.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
-            MyPen_M.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
-            MyPen_S.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
-            MyPen_AL.EndCap = System.Drawing.Drawing2D.LineCap.RoundAnchor;
-        }
-
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -130,6 +127,11 @@ namespace vcs_ClockB2
                 current.Y = e.Y;
                 this.Invalidate();
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            this.Invalidate(); // 要求重畫
         }
     }
 }
