@@ -1554,23 +1554,24 @@ namespace vcs_SqlConnection1
             //product_name = "订单号";
 
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data2.mdf;Integrated Security=True;Connect Timeout=30";
-            SqlConnection sqlcon = new SqlConnection(cnstr);
+            SqlConnection cn = new SqlConnection(cnstr);
 
-            SqlCommand sqlcom = new SqlCommand("proc_across_table", sqlcon);
-            sqlcom.CommandType = CommandType.StoredProcedure;
-            sqlcom.Parameters.Add("@TableName", SqlDbType.VarChar, 50).Value = "商品销售表";
+            // 查詢字串
+            string sqlstr = "proc_across_table";
+            SqlCommand cmd = new SqlCommand(sqlstr, cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@TableName", SqlDbType.VarChar, 50).Value = "商品销售表";
 
-            sqlcom.Parameters.Add("@NewColumn", SqlDbType.VarChar, 50).Value = header_name;  // 表頭字段
-            sqlcom.Parameters.Add("@GroupColumn", SqlDbType.VarChar, 50).Value = product_name;  // 分組字段
-            sqlcom.Parameters.Add("@StatColumn", SqlDbType.VarChar, 50).Value = "订货数量";
-            sqlcom.Parameters.Add("@Operator", SqlDbType.VarChar, 10).Value = "SUM";
+            cmd.Parameters.Add("@NewColumn", SqlDbType.VarChar, 50).Value = header_name;  // 表頭字段
+            cmd.Parameters.Add("@GroupColumn", SqlDbType.VarChar, 50).Value = product_name;  // 分組字段
+            cmd.Parameters.Add("@StatColumn", SqlDbType.VarChar, 50).Value = "订货数量";
+            cmd.Parameters.Add("@Operator", SqlDbType.VarChar, 10).Value = "SUM";
             SqlDataAdapter myda = new SqlDataAdapter();
-            myda.SelectCommand = sqlcom;
+            myda.SelectCommand = cmd;
             DataSet myds = new DataSet();
             myda.Fill(myds);
             dataGridView1.DataSource = myds.Tables[0];
             dataGridView1.Columns[1].Width = 120;
-
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -1588,9 +1589,9 @@ namespace vcs_SqlConnection1
             {
                 cn.Open();
 
-                string query = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'";
+                string sqlstr = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'";
 
-                using (SqlCommand cmd = new SqlCommand(query, cn))
+                using (SqlCommand cmd = new SqlCommand(sqlstr, cn))
                 using (SqlDataReader dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
@@ -1608,16 +1609,14 @@ namespace vcs_SqlConnection1
             {
                 cn.Open();
 
-                string query = "SELECT NAME FROM sys.tables";
-                //string query = "SELECT name FROM sysdatabases";
-                //string query = "SELECT NAME FROM master.dbo.sysdatabases";
-                //string query = "SELECT count(*) FROM master.dbo.sysdatabases where name='db_02'";//NG
-                //string query = "SELECT * FROM master..sysdatabases WHERE name = N'tb_09'";
-                //string query = "SELECT * FROM master..sysdatabases";
+                string sqlstr = "SELECT NAME FROM sys.tables";
+                //string sqlstr = "SELECT name FROM sysdatabases";
+                //string sqlstr = "SELECT * FROM master..sysdatabases WHERE name = N'tb_09'";
+                //string sqlstr = "SELECT * FROM master..sysdatabases";
 
                 //這個方式直接從 SQL Server 的系統目錄取出所有表格名稱
 
-                using (SqlCommand cmd = new SqlCommand(query, cn))
+                using (SqlCommand cmd = new SqlCommand(sqlstr, cn))
                 using (SqlDataReader dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
@@ -1828,8 +1827,8 @@ namespace vcs_SqlConnection1
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
                 cn.Open();
-                string sql = "DELETE FROM vcs_sql09_table WHERE 體重 > 20";  // 刪除所有資料
-                using (SqlCommand cmd = new SqlCommand(sql, cn))
+                string sqlstr = "DELETE FROM vcs_sql09_table WHERE 體重 > 20";  // 刪除所有資料
+                using (SqlCommand cmd = new SqlCommand(sqlstr, cn))
                 {
                     int rowsAffected = cmd.ExecuteNonQuery();
                     richTextBox1.Text += "已刪除 : " + rowsAffected + " 筆資料\n";
@@ -1843,8 +1842,8 @@ namespace vcs_SqlConnection1
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
                 cn.Open();
-                string sql = "TRUNCATE TABLE vcs_sql09_table";  // 清空整個表格
-                using (SqlCommand cmd = new SqlCommand(sql, cn))
+                string sqlstr = "TRUNCATE TABLE vcs_sql09_table";  // 清空整個表格
+                using (SqlCommand cmd = new SqlCommand(sqlstr, cn))
                 {
                     cmd.ExecuteNonQuery();
                     richTextBox1.Text += "已清空整個表單\n";
@@ -1867,10 +1866,12 @@ namespace vcs_SqlConnection1
             /*
             // 連接字串
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
-            SqlConnection con = new SqlConnection(cnstr);
-            con.Open();
+            SqlConnection cn = new SqlConnection(cnstr);
+            cn.Open();
 
-            using (SqlCommand cmd = new SqlCommand("SELECT TOP 3 * FROM tb_Rectangle order by t_Num desc", con))
+            // 查詢字串
+            string sqlstr = "SELECT TOP 3 * FROM tb_Rectangle ORDER BY t_Num DESC";
+            using (SqlCommand cmd = new SqlCommand(sqlstr, cn))
             {
                 SqlDataReader dr = cmd.ExecuteReader();
                 for (int j = 0; j < 4; j++)
@@ -1884,19 +1885,23 @@ namespace vcs_SqlConnection1
             */
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
             /*
-            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30");
+            SqlConnection cn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30");
 
             int Sum = 1;
 
-            using (SqlCommand cmd = new SqlCommand("select sum(t_Num) from tb_manpower ", con))
+            // 查詢字串
+            string sqlstr = "SELECT sum(t_Num) FROM tb_manpower";
+            using (SqlCommand cmd = new SqlCommand(sqlstr, cn))
             {
-                con.Open();
+                cn.Open();
                 Sum = Convert.ToInt32(cmd.ExecuteScalar());
                 richTextBox1.Text += "Sum = " + Sum.ToString() + "\n";
-                con.Close();
+                cn.Close();
             }
 
-            using (SqlCommand cmd = new SqlCommand("select t_Point,sum(t_Num) from tb_manpower group by t_Point order by sum(t_Num) desc", con))
+            // 查詢字串
+            string sqlstr = "SELECT t_Point,sum(t_Num) FROM tb_manpower group by t_Point ORDER BY sum(t_Num) DESC";
+            using (SqlCommand cmd = new SqlCommand(sqlstr, cn))
             {
                 cmd.Connection.Open();
                 SqlDataReader dr = cmd.ExecuteReader();							//创建SqlDataReader对象
@@ -1907,7 +1912,7 @@ namespace vcs_SqlConnection1
 
                 }
                 dr.Close();												//关闭SqlDataReader对象
-                con.Close();												//关闭数据库连接
+                cn.Close();												//关闭数据库连接
             }
             */
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -1954,7 +1959,6 @@ namespace vcs_SqlConnection1
             */
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-
             // 資料庫檔案
             string db_filename = "db_TomeTwo.mdf";
             string sqlstr = string.Format("SELECT * FROM tb_Student");
@@ -1962,7 +1966,6 @@ namespace vcs_SqlConnection1
 
             sqlstr = string.Format("SELECT * FROM tb_Grade");
             sql_read_database(db_filename, sqlstr, dataGridView2);
-
 
             //使用IN引入子查询限定查询范围
             //查詢學生總分在 500 ~ 600 之間
@@ -1972,7 +1975,6 @@ namespace vcs_SqlConnection1
             // 查詢字串
             sqlstr = string.Format(@"SELECT 学生姓名,性别,年龄 FROM tb_Student WHERE 学生编号 IN (SELECT 学生编号 FROM tb_Grade WHERE 总分>{0} AND 总分<{1})", Begin, end);
             sql_read_database(db_filename, sqlstr, dataGridView3);
-
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -2148,8 +2150,8 @@ namespace vcs_SqlConnection1
                 richTextBox1.Text += "------------------------------\n";  // 30個
 
                 //从头开始提取生日小于2009-7-1之前的员工信息
-                IEnumerable<DataRow> query = ds.Tables["EmployeeInfo"].AsEnumerable().TakeWhile(itm => itm.Field<DateTime>("Birthday") < Convert.ToDateTime("2009-7-1"));
-                dataGridView2.DataSource = query.CopyToDataTable();  // DGV設置數據源
+                IEnumerable<DataRow> sqlstr2 = ds.Tables["EmployeeInfo"].AsEnumerable().TakeWhile(itm => itm.Field<DateTime>("Birthday") < Convert.ToDateTime("2009-7-1"));
+                dataGridView2.DataSource = sqlstr2.CopyToDataTable();  // DGV設置數據源
             }
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -2249,7 +2251,7 @@ namespace vcs_SqlConnection1
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
                 //SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da old
-                SqlDataAdapter da = new SqlDataAdapter("SELECT Name, Pwd FROM tb_Login where Name=@name AND Pwd=@pwd", cn);  // 建立資料庫適配器對象da
+                SqlDataAdapter da = new SqlDataAdapter("SELECT Name, Pwd FROM tb_Login WHERE Name=@name AND Pwd=@pwd", cn);  // 建立資料庫適配器對象da
 
                 //为SQL语句中的参数赋值
                 string id_name = "david";
@@ -2280,7 +2282,7 @@ namespace vcs_SqlConnection1
 
             //多表聯合查詢
             string db_filename = "db_10_Data.MDF";
-            string sqlstr = "SELECT 姓名 FROM 學生訊息表 UNION SELECT 課程名稱 FROM 課程表 WHERE 課程名稱='計算機英語' UNION SELECT convert(varchar(20),成績) FROM 學生成績表 WHERE 成績 > 90 UNION Select convert(varchar(20),出勤率) FROM 學生考勤表 WHERE 出勤率 > 0.8";
+            string sqlstr = "SELECT 姓名 FROM 學生訊息表 UNION SELECT 課程名稱 FROM 課程表 WHERE 課程名稱='計算機英語' UNION SELECT convert(varchar(20),成績) FROM 學生成績表 WHERE 成績 > 90 UNION SELECT convert(varchar(20),出勤率) FROM 學生考勤表 WHERE 出勤率 > 0.8";
             sql_read_database(db_filename, sqlstr, dataGridView1);
 
             richTextBox1.Text += "------------------------------\n";  // 30個
@@ -2336,8 +2338,8 @@ namespace vcs_SqlConnection1
                 lb_dgv1.Text = "全部資料 EmployeeInfo";
 
                 //跳过生日小于2009-7-1的员工信息
-                IEnumerable<DataRow> query = ds.Tables["EmployeeInfo"].AsEnumerable().SkipWhile(itm => itm.Field<DateTime>("Birthday") < Convert.ToDateTime("2009-7-1"));
-                dataGridView2.DataSource = query.CopyToDataTable();//设置dataGridView1数据源
+                IEnumerable<DataRow> sqlstr2 = ds.Tables["EmployeeInfo"].AsEnumerable().SkipWhile(itm => itm.Field<DateTime>("Birthday") < Convert.ToDateTime("2009-7-1"));
+                dataGridView2.DataSource = sqlstr2.CopyToDataTable();//设置dataGridView1数据源
                 lb_dgv2.Text = "過濾資料";
             }
         }
@@ -2502,6 +2504,60 @@ namespace vcs_SqlConnection1
 
         private void button29_Click(object sender, EventArgs e)
         {
+            //SysDatabases
+
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
+            {
+                cn.Open();
+
+                //獲取所有數據庫名稱
+                //string sqlstr = "SELECT NAME FROM master.dbo.sysdatabases";
+                //string sqlstr = "SELECT Name FROM Master.dbo.SysDatabases ORDER BY Name";
+                //string sqlstr = "SELECT count(*) FROM master.dbo.sysdatabases WHERE name='DB_02'";//NG
+
+                //獲取所有表單名稱
+                //string sqlstr = "SELECT Name FROM SysObjects WHERE XType='U' ORDER BY Name";
+                //XType='U':表示所有用户表;
+                //XType='S':表示所有系统表;
+                //string sqlstr = "SELECT name FROM sysobjects WHERE type = 'U'";
+
+                //獲取所有的字段名
+                //string sqlstr = "Select Name FROM SysColumns Where id=Object_Id('tb_student')";
+                string sqlstr = "SELECT syscolumns.name,systypes.name,syscolumns.isnullable,syscolumns.length FROM syscolumns, systypes WHERE syscolumns.xusertype = systypes.xusertype AND syscolumns.id = object_id('tb_student')";
+
+
+                using (SqlCommand cmd = new SqlCommand(sqlstr, cn))
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    //while (dr.Read())
+                    {
+                        //richTextBox1.Text += dr["TABLE_NAME"] + "\n";
+                    }
+
+                    richTextBox1.Text += "cnt = " + dr.FieldCount.ToString() + "\n";
+                    richTextBox1.Text += dr + "\n";
+
+                    while (dr.Read())
+                    {
+                        for (int i = 0; i < dr.FieldCount; i++)
+                        {
+                            richTextBox1.Text += dr[i].ToString();
+                            //richTextBox1.Text += dr.GetValue(i).ToString();  // same
+                            if (i == (dr.FieldCount - 1))
+                            {
+                                richTextBox1.Text += "\n";
+                            }
+                            else
+                            {
+                                richTextBox1.Text += "\t";
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -2585,36 +2641,25 @@ SQL不同的連線方式
             string sqlstr = "SELECT TOP 4 * FROM tb_Rectangle ORDER BY t_Num DESC";
 
             // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Database1.mdf;Integrated Security=True;Connect Timeout=30";
-  // 查詢字串
+           string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Database1.mdf;Integrated Security=True;Connect Timeout=30";
+// 查詢字串
             string sqlstr = "SELECT * FROM 產品類別";
- *   // 查詢字串
+// 查詢字串
             //string sqlstr = "SELECT * FROM 產品資料";
 
 */
 
 
-
-
-
-// 連接字串
-//string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\MyDB.mdf;Integrated Security=True;Connect Timeout=30";
-//cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\ch17DB.mdf;Integrated Security=True";
-//string cnstr1 = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|ch17DB.mdf;Integrated Security=True";
-//cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\ch17DB.mdf;Integrated Security=True;Connect Timeout=30";
-
 /*
-有v11.0的, 就不可以, 要改用MSSQLLocalDB
+用MSSQLLocalDB
 AttachDbFilename=|DataDirectory|ch17DB.mdf  是 mdf 在 |DataDirectory|之下
 AttachDbFilename=D:\ch17DB.mdf 是 指定 mdf 的位置
-固定的寫法 :
-Integrated Security=True";
-其他參數 :
-Connect Timeout=30
 
-cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;       AttachDbFilename=|DataDirectory|ch17DB.mdf;                                   ;
-cn.ConnectionString = @"Data Source=(LocalDB)\v11.0;       AttachDbFilename=D:\ch17DB.mdf;      ;
-cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\ch17DB.mdf; ;
+連接字串固定的寫法 :
+Data Source=(LocalDB)\MSSQLLocalDB;
+AttachDbFilename=xxxxx.mdf;
+Integrated Security=True";
+Connect Timeout=30
 */
 
 //宣告cnStr連線字串置於事件處理函式外，以提供給其他事件處理函式共用
@@ -2717,27 +2762,11 @@ cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\c
 */
 
 
-
-/*
-//using System.Collections;  // for Hashtable
-            //Hashtable 的使用
-            Hashtable ht = new Hashtable();
-            ht.Clear();
-            ht.Add("aaa", 123);
-            ht.Add("bbb", 456);
-            ht.Add("ccc", 789);
-            foreach (DictionaryEntry de in ht)  // 遍历Hashtable
-            {
-                richTextBox1.Text += de.Key + " / " + de.Value + "\n";
-            }
-
-*/
-
 //SqlDataAdapter 資料庫適配器對象 数据库桥接器对象 數據讀取器
 
 
 /*
 Q : 如何清空一個資料庫表單
-
+drop?
 */
 

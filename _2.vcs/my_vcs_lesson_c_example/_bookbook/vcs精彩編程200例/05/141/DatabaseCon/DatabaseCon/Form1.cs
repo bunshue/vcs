@@ -44,7 +44,7 @@ namespace DatabaseCon
         {
             Form2 frm = new Form2();
             frm.ShowDialog();
-            textBox6.Text = Form2.strServer;
+            textBox6.Text = Form2.strServer;  // 將Form2的參數取出來
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -207,15 +207,27 @@ namespace DatabaseCon
             comboBox1.DisplayMember = "name";
             comboBox1.ValueMember = "name";
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
+            string db_filename = "db_09_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            richTextBox2.Text += "cnstr : " + cnstr + "\n";
+
+            comboBox1.DataSource = getTable(cnstr);
+            comboBox1.DisplayMember = "name";
+            comboBox1.ValueMember = "name";
+            comboBox1.Enabled = true;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //test form2
+
+            Form2 frm = new Form2();
+            frm.ShowDialog();
+            textBox6.Text = Form2.strServer;  // 將Form2的參數取出來
+        }
     }
 }
-
-
-/*
-string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
-
-string db_filename = "db_09_Data.MDF";
-string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-*/
-
-

@@ -25,11 +25,14 @@ namespace GetDataStruct
         private void Form1_Load(object sender, EventArgs e)
         {
             toolStripTextBox1.Items.Clear();//清空列表
+
             //枚举本地网络中的SQL Server所有可用实例
             SqlDataSourceEnumerator instance = SqlDataSourceEnumerator.Instance;
             DataTable table = instance.GetDataSources();//获取所有数据源，并存储到DataTable中
+            richTextBox1.Text += table + "\n";
             foreach (DataRow row in table.Rows)//遍历获取到的数据源
             {
+                richTextBox1.Text += row + "\n";
                 toolStripTextBox1.Items.Add(row["ServerName"]);//向列表中添加遍历到的服务器名
             }
             toolStripTextBox1.Text = "(local)";
@@ -72,7 +75,10 @@ namespace GetDataStruct
             {
                 listBox1.DataSource = null;
                 listBox1.Items.Clear();
-                string strCon = "Data Source=" + toolStripTextBox1.Text + ";DataBase=" + comboBox1.Text + ";uid=" + toolStripTextBox2.Text + ";pwd=" + toolStripTextBox3.Text;
+                //string strCon = "Data Source=" + toolStripTextBox1.Text + ";DataBase=" + comboBox1.Text + ";uid=" + toolStripTextBox2.Text + ";pwd=" + toolStripTextBox3.Text;
+                //string strCon = "Data Source=" + toolStripTextBox1.Text + ";DataBase=" + comboBox1.Text + ";uid=" + toolStripTextBox2.Text + ";pwd=" + toolStripTextBox3.Text;
+                string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.MDF;DataBase=" + comboBox1.Text + ";Integrated Security=True;Connect Timeout=30";
+
                 DataTable dt = null;
                 if (comboBox2.Text == "数据表")
                 {
@@ -86,8 +92,8 @@ namespace GetDataStruct
                 {
                     dt = getTable(strCon, "SELECT name FROM sysobjects WHERE xtype='p'", "sysobjects");
                 }
-                listBox1.DataSource = dt.DefaultView;
-                listBox1.DisplayMember = "name";
+                //listBox1.DataSource = dt.DefaultView;
+                //listBox1.DisplayMember = "name";
             }
         }
 
@@ -151,26 +157,45 @@ namespace GetDataStruct
 
         private DataTable getTable(string strCon, string strSql, string strTable)
         {
+            richTextBox1.Text += "strCon : " + strCon + "\n";
+            richTextBox1.Text += "strSql : " + strSql + "\n";
+            richTextBox1.Text += "strTable : " + strTable + "\n";
+
             try
             {
                 SqlConnection sqlcon = new SqlConnection(strCon);
                 SqlDataAdapter da = new SqlDataAdapter(strSql, sqlcon);
                 DataTable dt = new DataTable(strTable);
                 da.Fill(dt);
+                richTextBox1.Text += "OK dt\n";
                 return dt;
             }
             catch
             {
+                richTextBox1.Text += "NG dt\n";
                 return null;
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
+            string db_filename = "db_09_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            richTextBox1.Text += "cnstr : " + cnstr + "\n";
+
+
+
+            comboBox1.DataSource = getTable(cnstr, "select name from sysdatabases", "sysdatabases");
+            comboBox1.DisplayMember = "name";
+            comboBox1.ValueMember = "name";
+
+            comboBox1.Enabled = true;
+
+
         }
     }
 }
 
-/*
-string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
 
-string db_filename = "db_09_Data.MDF";
-string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-*/
-
+//string strCon = "Data Source=" + toolStripTextBox1.Text + ";DataBase=" + comboBox1.Text + ";uid=" + toolStripTextBox2.Text + ";pwd=" + toolStripTextBox3.Text;

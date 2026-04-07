@@ -211,7 +211,7 @@ namespace vcs_Clock6
             int height = int.Parse(text.Split('x')[1]);
             ClientSize = new Size(width, height);
 
-            // Set the form's region.
+            // 設定圓形表單
             GraphicsPath path = new GraphicsPath();
             path.AddEllipse(this.ClientRectangle);
             this.Region = new Region(path);
