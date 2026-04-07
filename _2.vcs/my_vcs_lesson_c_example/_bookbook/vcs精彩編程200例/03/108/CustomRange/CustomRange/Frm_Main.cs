@@ -44,44 +44,6 @@ namespace SetPrintRange
             //txt_Range.Text = "1,2,3-5";
             txt_Range.Text = "1-2";
 
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
-
-            //创建数据库连接对象
-            SqlConnection sqlcon = new SqlConnection(cnstr);
-
-            //创建数据适配器
-            SqlDataAdapter sqlda = new SqlDataAdapter(
-                @"select 学生姓名,性别,家庭住址 from tb_Student
-union
-select 学生姓名,convert(varchar,年龄),家庭住址 from tb_Student
-union
-select 学生姓名,convert(varchar,出生年月),家庭住址 from tb_Student
-union
-select 学生姓名,所在学院,家庭住址 from tb_Student", sqlcon);
-
-            //创建数据集
-            DataSet ds = new DataSet();
-            sqlda.Fill(ds);//填充数据集
-            dataGridView1.DataSource = ds.Tables[0];//设置数据源
-
-            int R = dataGridView1.Rows.Count;
-            EndRows = (R - 2) % intRows;//去掉标题和最后一行的空行
-            if (EndRows > 0)
-            {
-                //计算页数
-                intPage = Convert.ToInt32((R - 2) / intRows) + 1;
-            }
-            else
-            {
-                //计算页数
-                intPage = Convert.ToInt32((R - 2) / intRows);
-            }
-
-            richTextBox1.Text += "資料總數 : " + (R - 2).ToString() + " 行\n";
-            richTextBox1.Text += "總頁數 : " + intPage.ToString() + " 頁\n";
-
-            //----------------------------------------------------------------------------------
-            /*
             // 資料庫檔案
             string db_filename = "db_TomeTwo.MDF";
             // 查詢字串
@@ -97,7 +59,21 @@ union
 select 学生姓名,所在学院,家庭住址 from tb_Student";
 
             sql_read_database(db_filename, sqlstr, dataGridView1);
-            */
+
+            int R = dataGridView1.Rows.Count;
+            EndRows = (R - 2) % intRows;//去掉标题和最后一行的空行
+            if (EndRows > 0)
+            {
+                //计算页数
+                intPage = Convert.ToInt32((R - 2) / intRows) + 1;
+            }
+            else
+            {
+                //计算页数
+                intPage = Convert.ToInt32((R - 2) / intRows);
+            }
+            richTextBox1.Text += "資料總數 : " + (R - 2).ToString() + " 行\n";
+            richTextBox1.Text += "總頁數 : " + intPage.ToString() + " 頁\n";
         }
 
         //标识全部打印
@@ -210,28 +186,39 @@ select 学生姓名,所在学院,家庭住址 from tb_Student";
 
                 if (rb_All.Checked)
                 {
-                    //打印全部
-                    richTextBox1.Text += "打印全部, currentpageindex = " + currentpageindex.ToString() + "\n";
+                    //打印全部                    
 
                     int intPrintRows = currentpageindex * intRows;//每页最后一个记录的索引
+
+                    richTextBox1.Text += "打印全部, currentpageindex = " + currentpageindex.ToString() + "\n";
+                    richTextBox1.Text += "打印全部, intRows = " + intRows.ToString() + "\n";
+                    richTextBox1.Text += "打印全部, intPrintRows = " + intPrintRows.ToString() + "\n";
+
                     int j = 0;
                     for (int i = 0 + (intPrintRows - 30); i < intPrintRows; i++)
                     {
                         if (i <= R - 2)
                         {
+                            richTextBox1.Text += "i = " + i.ToString() + "\t" + dataGridView1.Rows[i].Cells[0].Value.ToString() + "\t" +
+                                dataGridView1.Rows[i].Cells[1].Value.ToString() + "\t" +
+                                dataGridView1.Rows[i].Cells[2].Value.ToString() + "\n";
+
                             e.Graphics.DrawString(dataGridView1.Rows[i].Cells[0].Value.ToString(),
                                 myFont, myBrush, leftmargin + 5, topmargin + j * rowgap + 5);
                             e.Graphics.DrawString(dataGridView1.Rows[i].Cells[1].Value.ToString(),
                                 myFont, myBrush, leftmargin + columnWidth1 + 5, topmargin + j * rowgap + 5);
                             e.Graphics.DrawString(dataGridView1.Rows[i].Cells[2].Value.ToString(),
                                 myFont, myBrush, leftmargin + columnWidth1 + columnWidth2 + 5, topmargin + j * rowgap + 5);
-                            e.Graphics.DrawLine(myPen, leftmargin, topmargin + j * rowgap + 1,
+
+                            //myPen
+                            e.Graphics.DrawLine(Pens.Red, leftmargin, topmargin + j * rowgap + 1,
                                 PrintPageWidth - leftmargin - rightmargin, topmargin + j * rowgap + 1);
-                            e.Graphics.DrawLine(myPen, leftmargin + columnWidth1, topmargin + j * rowgap,
+                            e.Graphics.DrawLine(Pens.Green, leftmargin + columnWidth1, topmargin + j * rowgap,
                                 leftmargin + columnWidth1, PrintPageHeight - topmargin - buttommargin);
-                            e.Graphics.DrawLine(myPen, leftmargin + columnWidth1 + columnWidth2,
+                            e.Graphics.DrawLine(Pens.Blue, leftmargin + columnWidth1 + columnWidth2,
                                 topmargin + j * rowgap, leftmargin + columnWidth1 + columnWidth2,
                                 PrintPageHeight - topmargin - buttommargin);
+
                             e.Graphics.DrawString("共 " + intPage + " 页   第 " +
                                 currentpageindex + " 页", myFont, myBrush, PrintPageWidth - 200,
                                 (int)(PrintPageHeight - buttommargin / 2));
@@ -264,18 +251,25 @@ select 学生姓名,所在学院,家庭住址 from tb_Student";
                             {
                                 if (i <= R - 2)
                                 {
+                                    richTextBox1.Text += "i = " + i.ToString() + "\t" + dataGridView1.Rows[i].Cells[0].Value.ToString() + "\t" +
+                                        dataGridView1.Rows[i].Cells[1].Value.ToString() + "\t" +
+                                        dataGridView1.Rows[i].Cells[2].Value.ToString() + "\n";
+
                                     e.Graphics.DrawString(dataGridView1.Rows[i].Cells[0].Value.ToString(),
                                         myFont, myBrush, leftmargin + 5, topmargin + j * rowgap + 5);
                                     e.Graphics.DrawString(dataGridView1.Rows[i].Cells[1].Value.ToString(),
                                         myFont, myBrush, leftmargin + columnWidth1 + 5, topmargin + j * rowgap + 5);
                                     e.Graphics.DrawString(dataGridView1.Rows[i].Cells[2].Value.ToString(),
                                         myFont, myBrush, leftmargin + columnWidth1 + columnWidth2 + 5, topmargin + j * rowgap + 5);
-                                    e.Graphics.DrawLine(myPen, leftmargin, topmargin + j * rowgap + 1,
+
+                                    //myPen
+                                    e.Graphics.DrawLine(Pens.Red, leftmargin, topmargin + j * rowgap + 1,
                                         PrintPageWidth - leftmargin - rightmargin, topmargin + j * rowgap + 1);
-                                    e.Graphics.DrawLine(myPen, leftmargin + columnWidth1, topmargin + j * rowgap,
+                                    e.Graphics.DrawLine(Pens.Green, leftmargin + columnWidth1, topmargin + j * rowgap,
                                         leftmargin + columnWidth1, PrintPageHeight - topmargin - buttommargin);
-                                    e.Graphics.DrawLine(myPen, leftmargin + columnWidth1 + columnWidth2, topmargin +
+                                    e.Graphics.DrawLine(Pens.Blue, leftmargin + columnWidth1 + columnWidth2, topmargin +
                                         j * rowgap, leftmargin + columnWidth1 + columnWidth2, PrintPageHeight - topmargin - buttommargin);
+
                                     e.Graphics.DrawString("共 " + intPage + " 页   第 " + page + " 页", myFont,
                                         myBrush, PrintPageWidth - 500, (int)(PrintPageHeight - buttommargin / 2));
                                     j++;
@@ -303,6 +297,7 @@ select 学生姓名,所在学院,家庭住址 from tb_Student";
                                         myFont, myBrush, leftmargin + columnWidth1 + 5, topmargin + j * rowgap + 5);
                                     e.Graphics.DrawString(dataGridView1.Rows[i].Cells[2].Value.ToString(),
                                         myFont, myBrush, leftmargin + columnWidth1 + columnWidth2 + 5, topmargin + j * rowgap + 5);
+
                                     e.Graphics.DrawLine(myPen, leftmargin, topmargin + j * rowgap + 1,
                                         PrintPageWidth - leftmargin - rightmargin, topmargin + j * rowgap + 1);
                                     e.Graphics.DrawLine(myPen, leftmargin + columnWidth1, topmargin + j * rowgap,
@@ -310,6 +305,7 @@ select 学生姓名,所在学院,家庭住址 from tb_Student";
                                     e.Graphics.DrawLine(myPen, leftmargin + columnWidth1 + columnWidth2,
                                         topmargin + j * rowgap, leftmargin + columnWidth1 + columnWidth2,
                                         PrintPageHeight - topmargin - buttommargin);
+
                                     e.Graphics.DrawString("共 " + intPage + " 页   第 " + startPage + " 页",
                                         myFont, myBrush, PrintPageWidth - 200, (int)(PrintPageHeight - buttommargin / 2));
                                     j++;

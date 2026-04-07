@@ -62,20 +62,9 @@ namespace PrintStuCertificate
             txtID.Text = outValue.Value.ToString();
             dgvInfo.DataSource = SelectStuInfo("", "").Tables[0];
             cboxHunYin.SelectedIndex = cboxNation.SelectedIndex = cboxQZLX.SelectedIndex = cboxSex.SelectedIndex = cboxXueLi.SelectedIndex = 0;
-        }
 
-        //选择学生头像
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //定义可选择的头像类型
-            openFileDialog1.Filter = "*.jpg,*jpeg,*.bmp,*.ico,*.png,*.tif,*.wmf|*.jpg;*jpeg;*.bmp;*.ico;*.png;*.tif;*.wmf";
-            openFileDialog1.Title = "选择头像";
-            //判断是否选择了头像
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                //显示选择的学生头像
-                pictureBox1.Image = Image.FromFile(openFileDialog1.FileName);
-            }
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_angry_bird\AB_red.jpg";
+            pictureBox1.Image = Image.FromFile(filename);
         }
 
         //添加学生信息
@@ -94,6 +83,7 @@ namespace PrintStuCertificate
             sqlcmd.Parameters.Add("@sgao", SqlDbType.Int).Value = Convert.ToInt32(txtShenGao.Text);
             sqlcmd.Parameters.Add("@tzhong", SqlDbType.Int).Value = Convert.ToInt32(txtTiZhong.Text);
             sqlcmd.Parameters.Add("@hunyin", SqlDbType.Char, 4).Value = cboxHunYin.Text;
+
             if (openFileDialog1.FileName != "")
             {
                 FileStream FStream = new FileStream(openFileDialog1.FileName, FileMode.Open, FileAccess.Read);
@@ -105,6 +95,7 @@ namespace PrintStuCertificate
             {
                 sqlcmd.Parameters.Add("@photo", SqlDbType.Image).Value = null;
             }
+
             sqlcmd.Parameters.Add("@gzjl", SqlDbType.Text).Value = rtxtGZJL.Text;
             sqlcmd.Parameters.Add("@byyx", SqlDbType.VarChar, 100).Value = txtBYYX.Text;
             sqlcmd.Parameters.Add("@xueli", SqlDbType.Char, 10).Value = cboxXueLi.Text;

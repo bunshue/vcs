@@ -39,15 +39,14 @@ namespace PagesPrint
         {
             intRows = Convert.ToInt32(textBox1.Text);
 
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            // 資料庫檔案
+            string db_filename = "db_TomeTwo.MDF";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 員工表";
 
-            SqlConnection sqlcon = new SqlConnection(cnstr);
+            sqlstr = "SELECT 学生姓名,所学专业,家庭住址 FROM tb_Student";
 
-            SqlDataAdapter sqlda = new SqlDataAdapter("select 学生姓名,所学专业,家庭住址 from tb_Student", sqlcon);
-
-            DataSet ds = new DataSet();
-            sqlda.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0];
+            sql_read_database(db_filename, sqlstr, dataGridView1);
 
             //设置每列的宽度
             dataGridView1.Columns[0].Width = 57;
@@ -111,10 +110,13 @@ namespace PagesPrint
             {
                 PrintPageWidth = e.PageBounds.Width;//获取打印线张的宽度
                 PrintPageHeight = e.PageBounds.Height;//获取打印线张的高度
-                e.Graphics.DrawLine(myPen, leftmargin, topmargin, PrintPageWidth - leftmargin - rightmargin, topmargin);
-                e.Graphics.DrawLine(myPen, leftmargin, topmargin, leftmargin, PrintPageHeight - topmargin - buttommargin);
-                e.Graphics.DrawLine(myPen, leftmargin, PrintPageHeight - topmargin - buttommargin, PrintPageWidth - leftmargin - rightmargin, PrintPageHeight - topmargin - buttommargin);
-                e.Graphics.DrawLine(myPen, PrintPageWidth - leftmargin - rightmargin, topmargin, PrintPageWidth - leftmargin - rightmargin, PrintPageHeight - topmargin - buttommargin);
+
+                //myPen
+                e.Graphics.DrawLine(Pens.Red, leftmargin, topmargin, PrintPageWidth - leftmargin - rightmargin, topmargin);
+                e.Graphics.DrawLine(Pens.Green, leftmargin, topmargin, leftmargin, PrintPageHeight - topmargin - buttommargin);
+                e.Graphics.DrawLine(Pens.Blue, leftmargin, PrintPageHeight - topmargin - buttommargin, PrintPageWidth - leftmargin - rightmargin, PrintPageHeight - topmargin - buttommargin);
+                e.Graphics.DrawLine(Pens.Cyan, PrintPageWidth - leftmargin - rightmargin, topmargin, PrintPageWidth - leftmargin - rightmargin, PrintPageHeight - topmargin - buttommargin);
+
                 //#region 打印
                 int intPrintRows = currentpageindex * intRows;//当前页最后一条记录的索引
                 //计算行高度
@@ -124,18 +126,25 @@ namespace PagesPrint
                 {
                     if (i <= R - 2)
                     {
+                        richTextBox1.Text += "i = " + i.ToString() + "\t" + dataGridView1.Rows[i].Cells[0].Value.ToString() + "\t" +
+    dataGridView1.Rows[i].Cells[1].Value.ToString() + "\t" +
+    dataGridView1.Rows[i].Cells[2].Value.ToString() + "\n";
+
                         e.Graphics.DrawString(dataGridView1.Rows[i].Cells[0].Value.ToString(),
                             myFont, myBrush, leftmargin + 5, topmargin + j * rowgap + 5);
                         e.Graphics.DrawString(dataGridView1.Rows[i].Cells[1].Value.ToString(),
                             myFont, myBrush, leftmargin + columnWidth1 + 5, topmargin + j * rowgap + 5);
                         e.Graphics.DrawString(dataGridView1.Rows[i].Cells[2].Value.ToString(),
                             myFont, myBrush, leftmargin + columnWidth1 + columnWidth2 + 5, topmargin + j * rowgap + 5);
-                        e.Graphics.DrawLine(myPen, leftmargin, topmargin + j * rowgap + 1,
+
+                        //myPen
+                        e.Graphics.DrawLine(Pens.Red, leftmargin, topmargin + j * rowgap + 1,
                             PrintPageWidth - leftmargin - rightmargin, topmargin + j * rowgap + 1);
-                        e.Graphics.DrawLine(myPen, leftmargin + columnWidth1, topmargin +
+                        e.Graphics.DrawLine(Pens.Green, leftmargin + columnWidth1, topmargin +
                             j * rowgap, leftmargin + columnWidth1, PrintPageHeight - topmargin - buttommargin);
-                        e.Graphics.DrawLine(myPen, leftmargin + columnWidth1 + columnWidth2,
+                        e.Graphics.DrawLine(Pens.Blue, leftmargin + columnWidth1 + columnWidth2,
                             topmargin + j * rowgap, leftmargin + columnWidth1 + columnWidth2, PrintPageHeight - topmargin - buttommargin);
+
                         e.Graphics.DrawString("共 " + intPage + " 页   第 " + currentpageindex
                             + " 页", myFont, myBrush, PrintPageWidth - 200, (int)(PrintPageHeight - buttommargin / 2));
                         j++;//记数器

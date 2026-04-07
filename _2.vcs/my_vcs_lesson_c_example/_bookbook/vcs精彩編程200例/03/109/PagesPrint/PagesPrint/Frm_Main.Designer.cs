@@ -48,7 +48,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(6, 6);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(660, 416);
+            this.dataGridView1.Size = new System.Drawing.Size(660, 472);
             this.dataGridView1.TabIndex = 0;
             // 
             // groupBox1
@@ -57,7 +57,7 @@
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 507);
+            this.groupBox1.Location = new System.Drawing.Point(672, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(435, 67);
             this.groupBox1.TabIndex = 1;
@@ -119,9 +119,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(672, 6);
+            this.richTextBox1.Location = new System.Drawing.Point(672, 194);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(406, 504);
+            this.richTextBox1.Size = new System.Drawing.Size(575, 347);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
@@ -129,7 +129,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1090, 632);
+            this.ClientSize = new System.Drawing.Size(1259, 632);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
