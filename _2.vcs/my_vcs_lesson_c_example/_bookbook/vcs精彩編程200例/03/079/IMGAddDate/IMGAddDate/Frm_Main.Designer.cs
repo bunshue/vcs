@@ -33,8 +33,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.button4 = new System.Windows.Forms.Button();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -42,11 +40,12 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.listBox1);
             this.groupBox1.Location = new System.Drawing.Point(10, 7);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(432, 207);
+            this.groupBox1.Size = new System.Drawing.Size(432, 279);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "需要加上拍照日期的图片列表";
@@ -82,18 +81,13 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(321, 230);
+            this.button4.Location = new System.Drawing.Point(293, 216);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(115, 47);
             this.button4.TabIndex = 2;
             this.button4.Text = "印上拍照日期";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.Filter = "数码照片|*.JPG";
-            this.openFileDialog1.Multiselect = true;
             // 
             // richTextBox1
             // 
@@ -109,7 +103,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(949, 542);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.button4);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -131,8 +124,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

@@ -51,6 +51,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.button13 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
@@ -268,6 +270,8 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.button13);
+            this.groupBox4.Controls.Add(this.button12);
             this.groupBox4.Controls.Add(this.button10);
             this.groupBox4.Controls.Add(this.button9);
             this.groupBox4.Controls.Add(this.button8);
@@ -279,9 +283,29 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "檔案加密解密";
             // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(25, 292);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(120, 40);
+            this.button13.TabIndex = 8;
+            this.button13.Text = "檔案解密3";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(25, 244);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(120, 40);
+            this.button12.TabIndex = 7;
+            this.button12.Text = "檔案加密3";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(25, 205);
+            this.button10.Location = new System.Drawing.Point(25, 193);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(120, 40);
             this.button10.TabIndex = 6;
@@ -291,7 +315,7 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(25, 145);
+            this.button9.Location = new System.Drawing.Point(25, 141);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(120, 40);
             this.button9.TabIndex = 5;
@@ -394,6 +418,8 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button button12;
     }
 }
 

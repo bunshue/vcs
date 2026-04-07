@@ -25,12 +25,13 @@ namespace IMGAddDate
         Graphics g;
         Thread td;
 
-        //字串陣列的寫法(一維)：
-        string[] pic_array = { 
-            @"D:\_git\vcs\_1.data\______test_files1\p3.jpg", 
-            @"D:\_git\vcs\_1.data\______test_files1\p3.jpg", 
-            @"D:\_git\vcs\_1.data\______test_files1\p3.jpg", 
-                             };
+        //字串一維陣列
+        string[] pic_array =
+        {
+            @"D:\_git\vcs\_1.data\______test_files1\p3.jpg",
+            @"D:\_git\vcs\_1.data\______test_files1\p3.jpg",
+            @"D:\_git\vcs\_1.data\______test_files1\p3.jpg",
+        };
 
         public Frm_Main()
         {
@@ -52,20 +53,12 @@ namespace IMGAddDate
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //string[] IMG;
             listBox1.Items.Clear();
-            //if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            for (int i = 0; i < pic_array.Length; i++)
             {
-                //IMG = openFileDialog1.FileNames;
-                //if (IMG.Length > 0)
-                {
-                    for (int i = 0; i < pic_array.Length; i++)
-                    {
-                        listBox1.Items.Add(pic_array[i]);
-                    }
-                }
-                flag = pic_array.Length.ToString();
+                listBox1.Items.Add(pic_array[i]);
             }
+            flag = pic_array.Length.ToString();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -101,6 +94,7 @@ namespace IMGAddDate
                 //获取元数据中的拍照日期时间，以字符串形式保存
                 TakePicDateTime = GetDateTime(pi);
                 richTextBox1.Text += "1取得相片的拍攝時間 : " + TakePicDateTime + "\n";
+
                 //分析字符串分别保存拍照日期和时间的标准格式
                 SpaceLocation = TakePicDateTime.IndexOf(" ");
                 pdt = TakePicDateTime.Substring(0, SpaceLocation);
@@ -120,7 +114,9 @@ namespace IMGAddDate
 
                 //将添加日期/时间戳后的图像进行保存
 
-                bitmap1.Save(Application.StartupPath + "\\" + Path.GetFileName(listBox1.Items[i].ToString()));
+                string filename = Application.StartupPath + "\\" + Path.GetFileName(listBox1.Items[i].ToString());
+                bitmap1.Save(filename);
+                richTextBox1.Text += "已存檔 : " + filename + "\n";
 
                 //释放内存位图对象
                 bitmap1.Dispose();
@@ -131,14 +127,13 @@ namespace IMGAddDate
                     listBox1.Items.Clear();
                 }
                 kk++;
-
                 //System.Threading.Thread.Sleep(3500);
                 //Application.DoEvents();
             }
         }
 
-        //#region 获取数码相片的拍摄日期
-        //获取图像文件的所有元数据属性，保存倒PropertyItem数组
+        // 获取数码相片的拍摄日期
+        // 获取图像文件的所有元数据属性，保存倒PropertyItem数组
         public static PropertyItem[] GetExif(string fileName)
         {
             FileStream Mystream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
@@ -163,6 +158,5 @@ namespace IMGAddDate
             //若没有相关的EXIF信息则返回N/A
             return "N/A";
         }
-        //#endregion
     }
 }

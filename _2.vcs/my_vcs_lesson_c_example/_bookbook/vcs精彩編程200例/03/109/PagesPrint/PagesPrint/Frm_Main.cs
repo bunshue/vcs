@@ -53,14 +53,18 @@ namespace PagesPrint
             dataGridView1.Columns[0].Width = 57;
             dataGridView1.Columns[1].Width = 260;
             dataGridView1.Columns[2].Width = 280;
-            EndRows = (dataGridView1.Rows.Count - 2) % intRows;//去掉标题和最后一行的空行
+
+            int R = dataGridView1.Rows.Count;
+            richTextBox1.Text += "資料總數 : " + R.ToString() + " 行\n";
+
+            EndRows = (R - 2) % intRows;//去掉标题和最后一行的空行
             if (EndRows > 0)
             {
-                intPage = Convert.ToInt32((dataGridView1.Rows.Count - 2) / intRows) + 1;
+                intPage = Convert.ToInt32((R - 2) / intRows) + 1;
             }
             else
             {
-                intPage = Convert.ToInt32((dataGridView1.Rows.Count - 2) / intRows);
+                intPage = Convert.ToInt32((R - 2) / intRows);
             }
             richTextBox1.Text += "总页数：" + intPage + "页\n";
         }
@@ -72,17 +76,21 @@ namespace PagesPrint
             {
                 if (e.KeyChar == 13)
                 {
+                    int R = dataGridView1.Rows.Count;
+                    richTextBox1.Text += "資料總數 : " + R.ToString() + " 行\n";
+
                     intRows = Convert.ToInt32(textBox1.Text);
-                    EndRows = (dataGridView1.Rows.Count - 2) % intRows;//去掉标题和最后一行的空行
+                    EndRows = (R - 2) % intRows;//去掉标题和最后一行的空行
                     if (EndRows > 0)
                     {
-                        intPage = Convert.ToInt32((dataGridView1.Rows.Count - 2) / intRows) + 1;
+                        intPage = Convert.ToInt32((R - 2) / intRows) + 1;
                     }
                     else
                     {
-                        intPage = Convert.ToInt32((dataGridView1.Rows.Count - 2) / intRows);
+                        intPage = Convert.ToInt32((R - 2) / intRows);
                     }
-                    richTextBox1.Text += "总页数：" + intPage + "页\n";
+                    richTextBox1.Text += "每頁行數 : " + intRows.ToString() + " 行\n";
+                    richTextBox1.Text += "總頁數 : " + intPage.ToString() + " 頁\n";
                 }
             }
         }
@@ -99,7 +107,7 @@ namespace PagesPrint
             int R = dataGridView1.Rows.Count;
             richTextBox1.Text += "printDocument1_PrintPage, R = " + R.ToString() + "\n";
 
-            if (dataGridView1.Rows.Count > 0)
+            if (R > 0)
             {
                 PrintPageWidth = e.PageBounds.Width;//获取打印线张的宽度
                 PrintPageHeight = e.PageBounds.Height;//获取打印线张的高度
@@ -114,7 +122,7 @@ namespace PagesPrint
                 int j = 0;//记录正在打印的行数
                 for (int i = 0 + (intPrintRows - intRows); i < intPrintRows; i++)
                 {
-                    if (i <= dataGridView1.Rows.Count - 2)
+                    if (i <= R - 2)
                     {
                         e.Graphics.DrawString(dataGridView1.Rows[i].Cells[0].Value.ToString(),
                             myFont, myBrush, leftmargin + 5, topmargin + j * rowgap + 5);

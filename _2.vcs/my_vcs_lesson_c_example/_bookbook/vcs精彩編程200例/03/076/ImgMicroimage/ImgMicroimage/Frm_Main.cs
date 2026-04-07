@@ -8,13 +8,20 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
-using System.Drawing.Imaging;
 using System.Threading;
+using System.Drawing.Imaging;
 
 namespace ImgMicroimage
 {
     public partial class Frm_Main : Form
     {
+        string filePath;
+        public Image ResourceImage;
+        private int ImageWidth;
+        private int ImageHeight;
+        public string ErrMessage;
+        public Thread td;
+
         public class CustomListView : ListView
         {
             public CustomListView()
@@ -30,12 +37,26 @@ namespace ImgMicroimage
             InitializeComponent();
         }
 
-        string filePath;
-        public Image ResourceImage;
-        private int ImageWidth;
-        private int ImageHeight;
-        public string ErrMessage;
-        public Thread td;
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            CheckForIllegalCrossThreadCalls = false;
+            panel1.Controls.Add(clv);
+            clv.Dock = DockStyle.Fill;
+            clv.LargeImageList = imageList1;
+            clv.View = View.LargeIcon;
+            clv.DoubleClick += new EventHandler(clv_DoubleClick);
+            clv.Click += new EventHandler(clv_Click);
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (td != null)
+            {
+                td.Abort();
+            }
+            deletefile();
+        }
+
         public bool GetReducedImage(double Percent, string targetFilePath)
         {
             try
@@ -75,6 +96,7 @@ namespace ImgMicroimage
         {
             return false;
         }
+
         private void a()
         {
             double percent;
@@ -136,8 +158,10 @@ namespace ImgMicroimage
             }
             td.Abort();
         }
+
         private void toolStripButton1_Click_1(object sender, EventArgs e)
         {
+            folderBrowserDialog1.SelectedPath = @"D:\_git\vcs\_1.data\______test_files1\_pic";
 
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -168,17 +192,6 @@ namespace ImgMicroimage
             {
                 deletefile();
             }
-        }
-
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
-        {
-
-            if (td != null)
-            {
-                td.Abort();
-            }
-            deletefile();
-
         }
 
         private void clv_Click(object sender, EventArgs e)
@@ -213,17 +226,6 @@ namespace ImgMicroimage
                     tsslPath.Text = "图片路径：" + filePath + "\\" + pName;
                 }
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            CheckForIllegalCrossThreadCalls = false;
-            panel1.Controls.Add(clv);
-            clv.Dock = DockStyle.Fill;
-            clv.LargeImageList = imageList1;
-            clv.View = View.LargeIcon;
-            clv.DoubleClick += new EventHandler(clv_DoubleClick);
-            clv.Click += new EventHandler(clv_Click);
         }
     }
 }

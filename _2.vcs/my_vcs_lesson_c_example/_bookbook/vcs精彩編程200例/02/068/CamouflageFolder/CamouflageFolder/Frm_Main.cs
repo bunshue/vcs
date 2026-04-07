@@ -47,17 +47,8 @@ namespace CamouflageFolder
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                if (folderBrowserDialog1.SelectedPath.Length >= 4)
-                {
-                    txtFolPath.Text = folderBrowserDialog1.SelectedPath;
-                }
-                else
-                {
-                    MessageBox.Show("不能对盘符进行伪装", "提示信息", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
+            string foldername = @"D:\_git\vcs\_1.data\______test_files2\_book_magazine";
+            txtFolPath.Text = foldername;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)

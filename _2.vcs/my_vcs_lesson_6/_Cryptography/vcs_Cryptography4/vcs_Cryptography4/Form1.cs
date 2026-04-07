@@ -373,9 +373,94 @@ namespace vcs_Cryptography4
             }
             return crc;
         }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //檔案加密3
+
+            //使用對稱算法加密文件
+
+            string myFile = @"D:\_git\vcs\_1.data\______test_files1\__pic\20240226_230519.jpg";
+            string myPassword = "12345678";
+            string myEnFile = @"C:\dddddddddd\dddddddddddddddd.jpg";
+
+            richTextBox1.Text += "原檔案 : " + myFile + "\n";
+            richTextBox1.Text += "加密密碼 : " + myPassword + "\n";
+            richTextBox1.Text += "加密後檔案 : " + myEnFile + "\n";
+
+            try
+            {
+                byte[] myIV = { 0x12, 0x34, 0x56, 0x78, 0x90, 0xAB, 0xCD, 0xEF };
+                byte[] myKey = System.Text.Encoding.UTF8.GetBytes(myPassword);
+                FileStream myInStream = new FileStream(myFile, FileMode.Open, FileAccess.Read);
+                FileStream myOutStream = new FileStream(myEnFile, FileMode.OpenOrCreate, FileAccess.Write);
+                myOutStream.SetLength(0);
+                byte[] myBytes = new byte[100];
+                long myInLength = 0;
+                long myLength = myInStream.Length;
+                DES myProvider = new DESCryptoServiceProvider();
+                CryptoStream myCryptoStream = new CryptoStream(myOutStream, myProvider.CreateEncryptor(myKey, myIV), CryptoStreamMode.Write);
+                while (myInLength < myLength)
+                {
+                    int mylen = myInStream.Read(myBytes, 0, 100);
+                    myCryptoStream.Write(myBytes, 0, mylen);
+                    myInLength += mylen;
+                }
+                myCryptoStream.Close();
+                myInStream.Close();
+                myOutStream.Close();
+                MessageBox.Show("加密文件成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            //檔案解密3
+
+            //使用對稱算法解密文件
+
+            string str1 = @"C:\dddddddddd\dddddddddddddddd.jpg";
+            string strPwd = "12345678";
+            string str2 = @"C:\dddddddddd\dddddddddddddddd22222.jpg";
+
+            richTextBox1.Text += "原檔案 : " + str1 + "\n";
+            richTextBox1.Text += "加密密碼 : " + strPwd + "\n";
+            richTextBox1.Text += "加密後檔案 : " + str2 + "\n";
+
+            try
+            {
+                byte[] myIV = { 0x12, 0x34, 0x56, 0x78, 0x90, 0xAB, 0xCD, 0xEF };
+                byte[] myKey = System.Text.Encoding.UTF8.GetBytes(strPwd);
+                FileStream myFileIn = new FileStream(str1, FileMode.Open, FileAccess.Read);
+                FileStream myFileOut = new FileStream(str2, FileMode.OpenOrCreate, FileAccess.Write);
+                myFileOut.SetLength(0);
+                byte[] myBytes = new byte[100];
+                long myLength = myFileIn.Length;
+                long myInLength = 0;
+                DES myProvider = new DESCryptoServiceProvider();
+                CryptoStream myDeStream = new CryptoStream(myFileOut, myProvider.CreateDecryptor(myKey, myIV), CryptoStreamMode.Write);
+                while (myInLength < myLength)
+                {
+                    int mylen = myFileIn.Read(myBytes, 0, 100);
+                    myDeStream.Write(myBytes, 0, mylen);
+                    myInLength += mylen;
+                }
+                myDeStream.Close();
+                myFileOut.Close();
+                myFileIn.Close();
+                MessageBox.Show("解密文件成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
     }
 }
-
 
 namespace DESFile
 {

@@ -64,21 +64,21 @@ select 学生姓名,所在学院,家庭住址 from tb_Student", sqlcon);
             sqlda.Fill(ds);//填充数据集
             dataGridView1.DataSource = ds.Tables[0];//设置数据源
 
-
-            EndRows = (dataGridView1.Rows.Count - 2) % intRows;//去掉标题和最后一行的空行
+            int R = dataGridView1.Rows.Count;
+            EndRows = (R - 2) % intRows;//去掉标题和最后一行的空行
             if (EndRows > 0)
             {
                 //计算页数
-                intPage = Convert.ToInt32((dataGridView1.Rows.Count - 2) / intRows) + 1;
+                intPage = Convert.ToInt32((R - 2) / intRows) + 1;
             }
             else
             {
                 //计算页数
-                intPage = Convert.ToInt32((dataGridView1.Rows.Count - 2) / intRows);
+                intPage = Convert.ToInt32((R - 2) / intRows);
             }
 
-            //显示页数
-            richTextBox1.Text += "共有" + (dataGridView1.Rows.Count - 2) + "条数据  共" + intPage + "页\n";
+            richTextBox1.Text += "資料總數 : " + (R - 2).ToString() + " 行\n";
+            richTextBox1.Text += "總頁數 : " + intPage.ToString() + " 頁\n";
 
             //----------------------------------------------------------------------------------
             /*
@@ -197,7 +197,7 @@ select 学生姓名,所在学院,家庭住址 from tb_Student";
             int R = dataGridView1.Rows.Count;
             richTextBox1.Text += "printDocument1_PrintPage, R = " + R.ToString() + "\n";
 
-            if (dataGridView1.Rows.Count > 0)
+            if (R > 0)
             {
                 PrintPageWidth = e.PageBounds.Width;//获取打印线张的宽度
                 PrintPageHeight = e.PageBounds.Height;//获取打印线张的高度
@@ -217,7 +217,7 @@ select 学生姓名,所在学院,家庭住址 from tb_Student";
                     int j = 0;
                     for (int i = 0 + (intPrintRows - 30); i < intPrintRows; i++)
                     {
-                        if (i <= dataGridView1.Rows.Count - 2)
+                        if (i <= R - 2)
                         {
                             e.Graphics.DrawString(dataGridView1.Rows[i].Cells[0].Value.ToString(),
                                 myFont, myBrush, leftmargin + 5, topmargin + j * rowgap + 5);
@@ -262,7 +262,7 @@ select 学生姓名,所在学院,家庭住址 from tb_Student";
                             int j = 0;
                             for (int i = 0 + (intPrintRows - 30); i < intPrintRows; i++)
                             {
-                                if (i <= dataGridView1.Rows.Count - 2)
+                                if (i <= R - 2)
                                 {
                                     e.Graphics.DrawString(dataGridView1.Rows[i].Cells[0].Value.ToString(),
                                         myFont, myBrush, leftmargin + 5, topmargin + j * rowgap + 5);
@@ -295,7 +295,7 @@ select 学生姓名,所在学院,家庭住址 from tb_Student";
                             int j = 0;
                             for (int i = 0 + (intPrintRows - 30); i < intPrintRows; i++)
                             {
-                                if (i <= dataGridView1.Rows.Count - 2)
+                                if (i <= R - 2)
                                 {
                                     e.Graphics.DrawString(dataGridView1.Rows[i].Cells[0].Value.ToString(),
                                         myFont, myBrush, leftmargin + 5, topmargin + j * rowgap + 5);
