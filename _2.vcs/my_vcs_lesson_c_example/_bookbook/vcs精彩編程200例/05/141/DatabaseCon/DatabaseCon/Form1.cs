@@ -11,6 +11,8 @@ using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.IO;
 
+using System.Data.Sql;  // for SqlDataSourceEnumerator
+
 namespace DatabaseCon
 {
     public partial class Form1 : Form
@@ -42,9 +44,6 @@ namespace DatabaseCon
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Form2 frm = new Form2();
-            frm.ShowDialog();
-            textBox6.Text = Form2.strServer;  // 將Form2的參數取出來
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -223,11 +222,18 @@ namespace DatabaseCon
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //test form2
+            //当前网络上运行的SQL服务器
 
-            Form2 frm = new Form2();
-            frm.ShowDialog();
-            textBox6.Text = Form2.strServer;  // 將Form2的參數取出來
+            //枚举本地网络中的SQL Server所有可用实例
+            SqlDataSourceEnumerator instance = SqlDataSourceEnumerator.Instance;
+            DataTable table = instance.GetDataSources();//获取所有数据源，并存储到DataTable中
+            richTextBox1.Text += table + "\n";
+            foreach (DataRow row in table.Rows)//遍历获取到的数据源
+            {
+                richTextBox1.Text += row + "\n";
+                //listBox1.Items.Add(row["ServerName"]);//向列表中添加遍历到的服务器名
+            }
+
         }
     }
 }

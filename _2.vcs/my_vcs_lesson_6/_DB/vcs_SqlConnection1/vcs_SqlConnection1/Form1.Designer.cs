@@ -68,6 +68,8 @@
             this.lb_dgv2 = new System.Windows.Forms.Label();
             this.lb_dgv3 = new System.Windows.Forms.Label();
             this.lb_dgv4 = new System.Windows.Forms.Label();
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.listView1 = new System.Windows.Forms.ListView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
@@ -309,6 +311,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(200, 60);
             this.button19.TabIndex = 144;
+            this.button19.Text = "讀取資料庫資料到 listView / treeView";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -495,11 +498,29 @@
             this.lb_dgv4.TabIndex = 172;
             this.lb_dgv4.Text = "lb_dgv4";
             // 
+            // treeView1
+            // 
+            this.treeView1.Location = new System.Drawing.Point(746, 116);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(100, 100);
+            this.treeView1.TabIndex = 173;
+            // 
+            // listView1
+            // 
+            this.listView1.Location = new System.Drawing.Point(746, 225);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(100, 100);
+            this.listView1.TabIndex = 174;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(866, 642);
+            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.treeView1);
             this.Controls.Add(this.lb_dgv4);
             this.Controls.Add(this.lb_dgv3);
             this.Controls.Add(this.lb_dgv2);
@@ -594,6 +615,8 @@
         private System.Windows.Forms.Label lb_dgv2;
         private System.Windows.Forms.Label lb_dgv3;
         private System.Windows.Forms.Label lb_dgv4;
+        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.ListView listView1;
     }
 }
 

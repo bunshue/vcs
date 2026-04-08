@@ -34,6 +34,7 @@
             this.resultLabel = new System.Windows.Forms.Label();
             this.startAsyncButton = new System.Windows.Forms.Button();
             this.cancelAsyncButton = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -42,8 +43,8 @@
             this.backgroundWorker1.WorkerReportsProgress = true;
             this.backgroundWorker1.WorkerSupportsCancellation = true;
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
             // numericUpDown1
             // 
@@ -104,11 +105,20 @@
             this.cancelAsyncButton.UseVisualStyleBackColor = true;
             this.cancelAsyncButton.Click += new System.EventHandler(this.cancelAsyncButton_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(12, 193);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(530, 333);
+            this.richTextBox1.TabIndex = 7;
+            this.richTextBox1.Text = "";
+            // 
             // frmBackgroundWorker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(362, 140);
+            this.ClientSize = new System.Drawing.Size(554, 538);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.cancelAsyncButton);
             this.Controls.Add(this.startAsyncButton);
             this.Controls.Add(this.resultLabel);
@@ -130,5 +140,6 @@
         private System.Windows.Forms.Label resultLabel;
         private System.Windows.Forms.Button startAsyncButton;
         private System.Windows.Forms.Button cancelAsyncButton;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

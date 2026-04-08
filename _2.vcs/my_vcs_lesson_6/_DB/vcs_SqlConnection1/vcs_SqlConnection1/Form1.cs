@@ -89,8 +89,12 @@ namespace vcs_SqlConnection1
             lb_dgv3.Text = "";
             lb_dgv4.Text = "";
 
-            richTextBox1.Size = new Size(300, 820);
-            richTextBox1.Location = new Point(x_st + dx * 7 + 110, y_st + dy * 0);
+            listView1.Size = new Size(150, 290);
+            listView1.Location = new Point(x_st + dx * 7 + 110, y_st + dy * 0);
+            treeView1.Size = new Size(150, 290);
+            treeView1.Location = new Point(x_st + dx * 7 + 110 + 152, y_st + dy * 0);
+            richTextBox1.Size = new Size(300, 820 - 300);
+            richTextBox1.Location = new Point(x_st + dx * 7 + 110, y_st + dy * 0 + 300);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1920, 890);
@@ -179,51 +183,53 @@ namespace vcs_SqlConnection1
             }
         }
 
-        int select = 7;
+        int select = 0;
         private void button0_Click(object sender, EventArgs e)
         {
             //讀取資料庫 至 DGV, 要先知道資料庫檔案(.mdf)和表單名稱(table_name)和查詢條件
 
-            // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
             // 資料庫檔案
-            string db_filename = "db_TomeTwo.mdf";
+            string db_filename = string.Empty;
             // 查詢字串
-            string sqlstr = "SELECT * FROM tb_Employee";
+            string sqlstr = string.Empty;
 
             if (select == 0)
             {
                 richTextBox1.Text += "第 0 種\n";
+                // 資料庫檔案
+                db_filename = "db_TomeOne.mdf";
+                // 查詢字串
+                sqlstr = "SELECT * FROM tb_lottery ORDER BY t_year";
             }
             else if (select == 1)
             {
                 richTextBox1.Text += "第 1 種\n";
-                // 連接字串
-                cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+                // 資料庫檔案
+                db_filename = "db_TomeTwo.mdf";
                 // 查詢字串
                 sqlstr = string.Format("SELECT * FROM tb_Grade");
             }
             else if (select == 2)
             {
                 richTextBox1.Text += "第 2 種\n";
-                // 連接字串
-                cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+                // 資料庫檔案
+                db_filename = "db_TomeTwo.mdf";
                 // 查詢字串, 查询第10到第20名的数据
                 sqlstr = string.Format(@"SELECT TOP 10 * FROM (SELECT TOP 20 * FROM tb_Grade ORDER BY 总分 DESC) AS st ORDER BY 总分 ASC");
             }
             else if (select == 3)
             {
                 richTextBox1.Text += "第 3 種\n";
-                // 連接字串
-                cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+                // 資料庫檔案
+                db_filename = "db_TomeTwo.mdf";
                 // 查詢字串
                 sqlstr = string.Format("SELECT * FROM tb_Book");
             }
             else if (select == 4)
             {
                 richTextBox1.Text += "第 4 種\n";
-                // 連接字串
-                cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+                // 資料庫檔案
+                db_filename = "db_TomeTwo.mdf";
                 // 查詢字串, 查询销售量占前50%的图书信息, 查询数据库信息
                 sqlstr = string.Format(@"SELECT TOP 50 PERCENT 书号,书名,SUM(销售数量)AS 合计销售数量 FROM tb_Book GROUP BY 书号,书名,作者 ORDER BY 3 DESC");
             }
@@ -231,9 +237,8 @@ namespace vcs_SqlConnection1
             {
                 richTextBox1.Text += "第 5 種\n";
                 //員工資料
+                // 資料庫檔案
                 db_filename = "ch18DB.mdf";
-                // 連接字串
-                cnstr = string.Format(db_cnstr, db_filename);
                 // 查詢字串
                 sqlstr = "SELECT * FROM 員工";
             }
@@ -241,18 +246,16 @@ namespace vcs_SqlConnection1
             {
                 richTextBox1.Text += "第 6 種\n";
                 //員工資料
+                // 資料庫檔案
                 db_filename = "ch18DB.mdf";
-                // 連接字串
-                cnstr = string.Format(db_cnstr, db_filename);
                 // 查詢字串, 員工資料 排序 薪資 降冪
                 sqlstr = "SELECT * FROM 員工 ORDER BY 薪資 DESC";
             }
             else if (select == 7)
             {
                 richTextBox1.Text += "第 7 種\n";
+                // 資料庫檔案
                 db_filename = "vcs_sql09_db.mdf";
-                // 連接字串
-                cnstr = string.Format(db_cnstr, db_filename);
                 // 查詢字串
                 sqlstr = "SELECT * FROM vcs_sql09_table";
             }
@@ -261,17 +264,14 @@ namespace vcs_SqlConnection1
                 richTextBox1.Text += "xxxxxxx\n";
             }
 
-            //select++;
+            select++;
             if (select > 7)
                 select = 0;
 
             sql_read_database(db_filename, sqlstr, dataGridView1);
 
             /* 準備加入
-            string sqlstr = "SELECT * FROM tb_lottery ORDER BY t_year";
-            // 資料庫檔案
-            string db_filename = "db_TomeOne.mdf";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
+            
             */
         }
 
@@ -1857,6 +1857,52 @@ namespace vcs_SqlConnection1
 
         private void button19_Click(object sender, EventArgs e)
         {
+            //讀取資料庫資料到 listView / treeView
+
+            SqlDataAdapter da;//宣告一個數據讀取器
+            DataSet ds;//宣告一個數據集
+            SqlConnection cn;//宣告一個數據庫連接對像
+            SqlCommand NexusCommand;//聲明一個執行SQL語句的對象
+
+            //定義一個數據庫連接字符串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+
+
+            listView1.Columns.Add("產品名稱", 100, HorizontalAlignment.Left);//向listView1控制元件中新增「產品名稱」列
+            listView1.Columns.Add("產品說明", 200, HorizontalAlignment.Center);//向listView1控制元件中新增「產品說明」列
+
+            cn = new SqlConnection(cnstr);//初始化一個數據庫連接
+            string sqlstr = "select 產品名稱,產品說明 from tb_WidgetApply";//定義一個數據庫查詢字串
+            da = new SqlDataAdapter(sqlstr, cn);//初始化數據讀取器對像
+            ds = new DataSet();//初始化數據集
+            da.Fill(ds, "WidgetApply");//填充數據集
+            for (int i = 0; i < ds.Tables["WidgetApply"].Rows.Count; i++)//循環搜尋數據集中的每一行數據
+            {
+                listView1.Items.Add(ds.Tables["WidgetApply"].Rows[i][0].ToString()).SubItems.Add(ds.Tables["WidgetApply"].Rows[i][1].ToString());//向listView1控制元件中新增數據
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //修改TreeView控制元件中的節點文字
+
+            cn = new SqlConnection(cnstr);//初始化一個數據庫連接對像
+            cn.Open();//打開數據庫連接
+            sqlstr = "select 產品編號,產品名稱 from tb_WidgetApply";//定義一個數據庫查詢字符串
+            NexusCommand = new SqlCommand(sqlstr, cn);//初始化執行SQL語句對像
+            SqlDataReader NexusReader = NexusCommand.ExecuteReader();//定義一個數據讀取器
+            treeView1.Nodes.Clear();//清空treeView1原有的數據內容
+            TreeNode root = treeView1.Nodes.Add("產品名稱");//為treeView1控件添加根節點
+            while (NexusReader.Read())//開始讀取數據中的內容
+            {
+                richTextBox1.Text += NexusReader[1].ToString() + "\n";
+
+                TreeNode tempNode = new TreeNode(NexusReader[1].ToString());//將數據庫中的數據字段變換為treeView控件的節點
+                root.Nodes.Add(tempNode);//向根節點上添加數據庫字段
+            }
+            NexusReader.Close();//關閉數據讀取器
+            root.ExpandAll();//展開treeView1中的所有節點
+            cn.Close();//關閉數據庫連接
+
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -2769,4 +2815,28 @@ Connect Timeout=30
 Q : 如何清空一個資料庫表單
 drop?
 */
+
+
+
+
+
+
+/*
+更新資料 UPDATE
+string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+
+        string sqlstr = "update tb_WidgetApply set 產品名稱='" + e.Label + "' where 產品編號=" + (e.Node.Index + 1).ToString();
+
+        string sqlstr = "update tb_WidgetApply set 產品名稱='" + e.Label + "' where 產品編號=" + e.Item + (1).ToString();
+        SqlCommand cmd = new SqlCommand(sqlstr, cn);
+        cmd.ExecuteNonQuery();//執行SQL語句
+        cn.Close();//關閉數據庫連接
+        richTextBox1.Text += "修改成功\n";
+
+
+*/
+
+
+
+
 

@@ -11,6 +11,8 @@ namespace vcs_FormSendData4
 {
     public partial class Form2 : Form
     {
+        public static string message_from_form2 = "";  // 設定公用變數給其他表單用
+
         public Form2()
         {
             InitializeComponent();
@@ -41,9 +43,16 @@ namespace vcs_FormSendData4
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Size.Width - bt_clear2.Size.Width, richTextBox2.Location.Y + richTextBox2.Size.Height - bt_clear2.Size.Height);
             label1.Text = "來自表單1的訊息";
             label2.Text = "發給表單1的訊息";
+            richTextBox2.TextChanged += new EventHandler(richTextBox2_TextChanged);
 
             this.Size = new Size(W + 40, H * 2 + 130);
             this.Text = "vcs_FormSendData4 表單 2";
+            this.Location = new Point(800, 300);
+        }
+
+        private void richTextBox2_TextChanged(object sender, EventArgs e)
+        {
+            message_from_form2 = richTextBox2.Text;
         }
 
         private void bt_clear1_Click(object sender, EventArgs e)

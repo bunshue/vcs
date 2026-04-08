@@ -68,6 +68,15 @@ namespace vcs_TreeView1
             setup_treeView3(treeView3);
 
             button1_Click(sender, e);
+
+            treeView0.LabelEdit = true;  // 允許使用者修改treeView的資料
+            treeView0.AfterLabelEdit += new NodeLabelEditEventHandler(treeView0_AfterLabelEdit);
+        }
+
+        private void treeView0_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
+        {
+            richTextBox1.Text += "e.Node.Index : " + e.Node.Index + "\t";
+            richTextBox1.Text += "e.Label : " + e.Label + "\n";
         }
 
         void show_item_location()
@@ -108,10 +117,14 @@ namespace vcs_TreeView1
 
             richTextBox1.Size = new Size(300, 600);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1580, 840);
+            this.Text = "vcs_TreeView1";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)

@@ -34,27 +34,30 @@ namespace vcs_ListView1
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
-        }
 
-        void show_item_location()
-        {
-            //listView1的共同設定
-            //listView1.ContextMenuStrip = contextMenuStrip1;
+            // listView1的共同設定
+            // listView1.ContextMenuStrip = contextMenuStrip1;
             listView1.KeyDown += new KeyEventHandler(listView1_KeyDown);
             listView1.MouseMove += new MouseEventHandler(listView1_MouseMove);
             listView1.MouseClick += new MouseEventHandler(listView1_MouseClick);
 
-            //允許使用者修改listView的資料
+            // 允許使用者修改listView的資料
             listView1.LabelEdit = true;  // 允許使用者修改listView的資料
             listView1.AfterLabelEdit += new LabelEditEventHandler(listView1_AfterLabelEdit);
+        }
 
-            listView1.Size = new Size(600, 600);
-            richTextBox1.Size = new Size(300, 600);
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
 
-            int x_st = 10;
-            int y_st = 10;
-            int dx = 150 + 5;
-            int dy = 60 + 5;
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 10;
+            dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -88,14 +91,16 @@ namespace vcs_ListView1
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
             lb_main_mesg0.Location = new Point(x_st + dx * 3, y_st + dy * 9 + 24);
             lb_main_mesg0.Text = "";
-            lb_main_mesg1.Location = new Point(x_st + dx * 6, y_st + dy * 9 + 18);
+            lb_main_mesg1.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 9 + 18);
             lb_main_mesg1.Text = "listView1 屬性 的 ContextMenuStrip\n加 contextMenuStrip1";
 
+            listView1.Size = new Size(600, 600);
             listView1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
+            richTextBox1.Size = new Size(300, 600);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1430, 700);
+            this.Size = new Size(1600, 800);
             this.Text = "vcs_ListView1";
 
             //設定執行後的表單起始位置, 正中央
@@ -174,6 +179,9 @@ namespace vcs_ListView1
         {
             //只能修改第1欄
             richTextBox1.Text += "你修改第 1 欄 第 " + e.Item.ToString() + " 列的資料為 : " + e.Label + "\n";
+
+            richTextBox1.Text += "e.Item : " + e.Item + "\t";
+            richTextBox1.Text += "e.Label : " + e.Label + "\n";
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -1585,7 +1593,6 @@ namespace vcs_ListView1
         }
     }
 }
-
 
 /*
 ListView 之 排序

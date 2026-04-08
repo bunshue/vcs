@@ -19,6 +19,10 @@ namespace vcs_FormSendData4
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            //開啟子表單, 父子表單共存
+            Form2 f2 = new Form2();
+            f2.Show();
         }
 
         void show_item_location()
@@ -32,7 +36,7 @@ namespace vcs_FormSendData4
 
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             richTextBox1.Size = new Size(W, H);
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0+30);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 30);
             bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear1.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear1.Size.Height);
 
             label2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -44,6 +48,7 @@ namespace vcs_FormSendData4
 
             this.Size = new Size(W + 40, H * 2 + 130);
             this.Text = "vcs_FormSendData4 表單 1";
+            this.Location = new Point(250, 300);
         }
 
         private void bt_clear1_Click(object sender, EventArgs e)
@@ -56,5 +61,10 @@ namespace vcs_FormSendData4
             richTextBox2.Clear();
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //每一秒去看Form2有沒有傳資料過來
+            richTextBox1.Text = Form2.message_from_form2;  // 將Form2的參數取出來
+        }
     }
 }

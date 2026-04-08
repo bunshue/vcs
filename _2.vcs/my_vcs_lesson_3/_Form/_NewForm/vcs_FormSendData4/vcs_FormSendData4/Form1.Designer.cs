@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.bt_clear1 = new System.Windows.Forms.Button();
             this.bt_clear2 = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -94,6 +96,12 @@
             this.bt_clear2.UseVisualStyleBackColor = true;
             this.bt_clear2.Click += new System.EventHandler(this.bt_clear2_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -121,6 +129,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button bt_clear1;
         private System.Windows.Forms.Button bt_clear2;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

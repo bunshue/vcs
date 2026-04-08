@@ -1,21 +1,21 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace AmendDatum
+namespace vcs_AForgeMathTest2
 {
     static class Program
     {
         /// <summary>
-        /// 應用程序的主入口點。
+        /// 應用程式的主要進入點。
         /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AmendDatum());
+            Application.Run(new Form1());
         }
     }
 }
