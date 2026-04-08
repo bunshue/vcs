@@ -180,11 +180,11 @@ namespace vcs_DataGridView1
             //設定DGV
             dataGridView1.ColumnCount = 3;
             dataGridView1.Columns[0].Name = "英文名";
-            dataGridView1.Columns[0].Width = 100;//設置欄位寬度
+            dataGridView1.Columns[0].Width = 100;  // 設定欄寬
             dataGridView1.Columns[1].Name = "中文名";
-            dataGridView1.Columns[1].Width = 100;//設置欄位寬度
+            dataGridView1.Columns[1].Width = 100;  // 設定欄寬
             dataGridView1.Columns[2].Name = "體重";
-            dataGridView1.Columns[2].Width = 100;//設置欄位寬度
+            dataGridView1.Columns[2].Width = 100;  // 設定欄寬
 
             //dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;//佔滿整個DGV
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;  //設置如何選中單元格 整行一起選取
@@ -206,12 +206,12 @@ namespace vcs_DataGridView1
             dataGridView1.Columns.Clear();
 
             //設定DGV
-            dataGridView1.Columns.Add("英文名", "英文名");//添加欄位
-            dataGridView1.Columns.Add("中文名", "中文名");//添加欄位
-            dataGridView1.Columns.Add("體重", "體重");//添加欄位
-            dataGridView1.Columns[0].Width = 100;//設置欄位寬度
-            dataGridView1.Columns[1].Width = 100;//設置欄位寬度
-            dataGridView1.Columns[2].Width = 100;//設置欄位寬度
+            dataGridView1.Columns.Add("英文名", "英文名");  // 添加欄位
+            dataGridView1.Columns.Add("中文名", "中文名");  // 添加欄位
+            dataGridView1.Columns.Add("體重", "體重");  // 添加欄位
+            dataGridView1.Columns[0].Width = 100;  // 設定欄寬
+            dataGridView1.Columns[1].Width = 100;  // 設定欄寬
+            dataGridView1.Columns[2].Width = 100;  // 設定欄寬
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;  //設置如何選中單元格 整行一起選取
             dataGridView1.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter; //設置對其方式   此欄置中對齊
 
@@ -352,13 +352,13 @@ namespace vcs_DataGridView1
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.ColumnCount = 4;
             dataGridView1.Columns[0].Name = "Item";
-            dataGridView1.Columns[0].Width = 100;//設置欄位寬度
+            dataGridView1.Columns[0].Width = 100;  // 設定欄寬
             dataGridView1.Columns[1].Name = "PriceEach";
-            dataGridView1.Columns[1].Width = 100;//設置欄位寬度
+            dataGridView1.Columns[1].Width = 100;  // 設定欄寬
             dataGridView1.Columns[2].Name = "Quantity";
-            dataGridView1.Columns[2].Width = 100;//設置欄位寬度
+            dataGridView1.Columns[2].Width = 100;  // 設定欄寬
             dataGridView1.Columns[3].Name = "Total";
-            dataGridView1.Columns[3].Width = 100;//設置欄位寬度
+            dataGridView1.Columns[3].Width = 100;  // 設定欄寬
 
             // Make some data items.
             dataGridView1.Rows.Add(new object[] { "Pencils, dozen", 1.24m, 4 });
@@ -412,13 +412,13 @@ namespace vcs_DataGridView1
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.ColumnCount = 4;
             dataGridView1.Columns[0].Name = "Item";
-            dataGridView1.Columns[0].Width = 100;//設置欄位寬度
+            dataGridView1.Columns[0].Width = 100;  // 設定欄寬
             dataGridView1.Columns[1].Name = "PriceEach";
-            dataGridView1.Columns[1].Width = 100;//設置欄位寬度
+            dataGridView1.Columns[1].Width = 100;  // 設定欄寬
             dataGridView1.Columns[2].Name = "Quantity";
-            dataGridView1.Columns[2].Width = 100;//設置欄位寬度
+            dataGridView1.Columns[2].Width = 100;  // 設定欄寬
             dataGridView1.Columns[3].Name = "Total";
-            dataGridView1.Columns[3].Width = 100;//設置欄位寬度
+            dataGridView1.Columns[3].Width = 100;  // 設定欄寬
 
             // Make some data items.
             OrderItem[] order_items = 
@@ -589,9 +589,9 @@ namespace vcs_DataGridView1
             column3.DefaultValue = 0;
 
             //將欄位加入表格中
-            dt.Columns.Add(column1);//添加欄位
-            dt.Columns.Add(column2);//添加欄位
-            dt.Columns.Add(column3);//添加欄位
+            dt.Columns.Add(column1);  // 添加欄位
+            dt.Columns.Add(column2);  // 添加欄位
+            dt.Columns.Add(column3);  // 添加欄位
 
             //建立二個DataRow並給定其對應欄位內容值
             DataRow row;
@@ -625,9 +625,9 @@ namespace vcs_DataGridView1
             DataTable dt = new DataTable("動物資料表");
 
             //將欄位加入表格中
-            dt.Columns.Add("英文名", System.Type.GetType("System.String"));
-            dt.Columns.Add("中文名", System.Type.GetType("System.String"));
-            dt.Columns.Add("體重", System.Type.GetType("System.Int32"));
+            dt.Columns.Add("英文名", System.Type.GetType("System.String"));  // 添加欄位
+            dt.Columns.Add("中文名", System.Type.GetType("System.String"));  // 添加欄位
+            dt.Columns.Add("體重", System.Type.GetType("System.Int32"));  // 添加欄位
 
             // Make all columns required.
             for (int i = 0; i < dt.Columns.Count; i++)
@@ -708,9 +708,9 @@ namespace vcs_DataGridView1
             DataTable dt = new DataTable();
 
             //將欄位加入表格中
-            dt.Columns.Add("編號", typeof(System.String));
-            dt.Columns.Add("英文名", typeof(System.String));
-            dt.Columns.Add("中文名", typeof(System.String));
+            dt.Columns.Add("編號", typeof(System.String));  // 添加欄位
+            dt.Columns.Add("英文名", typeof(System.String));  // 添加欄位
+            dt.Columns.Add("中文名", typeof(System.String));  // 添加欄位
 
             DataRow dr = dt.NewRow();
             dr[0] = "1";
@@ -758,7 +758,7 @@ namespace vcs_DataGridView1
             dgvc.Items.Add("彼得兔");//向集合中添加元素
             dgvc.HeaderText = "動物資料表";//設置列標題文本
 
-            dataGridView1.Columns.Add(dgvc);//將列添加到集合
+            dataGridView1.Columns.Add(dgvc);  // 添加欄位, 將列添加到集合
         }
 
         class Images
@@ -780,7 +780,8 @@ namespace vcs_DataGridView1
                 new Images(){Im=Image.FromFile("..//..//images//7.bmp")}
             };
             dataGridView1.Columns[0].HeaderText = "图片";//设置列文本
-            dataGridView1.Columns[0].Width = 70;//设置列宽度
+            dataGridView1.Columns[0].Width = 70;  // 設定欄寬
+
             int R = dataGridView1.Rows.Count;  // 列數, 包含標題列
             for (int i = 0; i < R; i++)
             {

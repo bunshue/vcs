@@ -363,5 +363,30 @@ select 学生姓名,所在学院,家庭住址 from tb_Student";
                 richTextBox1.Text += ex.Message + "\n";
             }
         }
+
+
+        void add_datagridview(DataGridView dgv)
+        {
+            dgv.Columns.Clear();
+
+            //設定DGV
+            dgv.ColumnCount = 3;
+            dgv.Columns[0].Name = "英文名";
+            dgv.Columns[0].Width = 100;//設置欄位寬度
+            dgv.Columns[1].Name = "中文名";
+            dgv.Columns[1].Width = 100;//設置欄位寬度
+            dgv.Columns[2].Name = "體重";
+            dgv.Columns[2].Width = 100;//設置欄位寬度
+
+            for (int i = 0; i < 100; i++)
+            {
+                dgv.Rows.Add(new Object[] { (i + 1).ToString("D4"), "班尼牛", 48 });
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            add_datagridview(dataGridView2);
+        }
     }
 }

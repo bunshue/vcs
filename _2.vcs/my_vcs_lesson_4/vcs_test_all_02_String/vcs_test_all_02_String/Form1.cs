@@ -1205,16 +1205,16 @@ namespace vcs_test_all_02_String
             int value1 = 12345;
             double value2 = 123.456;
             double value3 = 1234.5678;
-            tb_number0.Text = value1.ToString("D");
-            tb_number1.Text = value1.ToString("D8");
-            tb_number2.Text = value1.ToString("X");
-            tb_number3.Text = value1.ToString("X8");
+            tb_number0.Text = value1.ToString("D");  // 十進位顯示
+            tb_number1.Text = value1.ToString("D8");  // 十進位顯示(8位)
+            tb_number2.Text = value1.ToString("X");  // 十六進位顯示
+            tb_number3.Text = value1.ToString("X8");  // 十六進位顯示(8位)
 
-            tb_number4.Text = value2.ToString("F4");
-            //tb_number4.Text = value2.ToString("F0");  //四捨五入到整數
-            //tb_number4.Text = value2.ToString("F1");  //四捨五入到小數點下一位
-            tb_number5.Text = value3.ToString("#0.00");         //格式化，小數點後留2位，四捨五入
-            tb_number6.Text = value3.ToString("#00000.000");   //格式化，小數點前5位，小數點後留3位四捨五入
+            tb_number4.Text = value2.ToString("F4");  // 小數點後4位
+            //tb_number4.Text = value2.ToString("F0");  // 四捨五入到整數
+            //tb_number4.Text = value2.ToString("F1");  // 四捨五入到小數點下一位
+            tb_number5.Text = value3.ToString("#0.00");  // 格式化，小數點後留2位，四捨五入
+            tb_number6.Text = value3.ToString("#00000.000");  // 格式化，小數點前5位，小數點後留3位四捨五入
 
             lb_number0.Text = "十進位顯示";
             lb_number1.Text = "十進位顯示(8位)";
