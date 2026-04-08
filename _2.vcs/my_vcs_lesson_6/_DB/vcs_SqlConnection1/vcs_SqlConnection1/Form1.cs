@@ -2273,6 +2273,42 @@ namespace vcs_SqlConnection1
 
         private void button21_Click(object sender, EventArgs e)
         {
+            //讀取資料庫資料到 listView
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
+            SqlConnection con = new SqlConnection(cnstr);
+
+            listView1.View = View.Details;//圖示
+            listView1.GridLines = true;//網格線
+            using (SqlDataAdapter da = new SqlDataAdapter("select * from 員工表", con))
+            {
+                //產生結果集
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                ColumnHeader ch;
+                for (int i = 0; i < dt.Columns.Count; i++)//列
+                {
+                    ch = new ColumnHeader();
+                    ch.Text = dt.Columns[i].ColumnName.ToString();
+                    ch.Name = dt.Columns[i].ColumnName.ToString();
+                    ch.Width = 72;
+
+                    this.listView1.Columns.Add(ch);
+                }
+
+                listView1.Items.Clear();
+                ListViewItem listItem = null;
+                for (int j = 0; j < dt.Rows.Count; j++)
+                {
+                    listItem = new ListViewItem(dt.Rows[j][0].ToString());
+                    for (int k = 1; k < dt.Columns.Count; k++)
+                    {
+                        listItem.SubItems.Add(dt.Rows[j][k].ToString());
+                    }
+                    listView1.Items.Add(listItem);
+                }
+            }
         }
 
         private void button22_Click(object sender, EventArgs e)

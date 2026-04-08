@@ -11,6 +11,7 @@ using System.Drawing.Imaging;  // for PixelFormat
 
 using AForge;
 using AForge.Math;
+using AForge.Math.Geometry;
 using AForge.Imaging;
 
 namespace vcs_AForgeMathTest
@@ -54,14 +55,24 @@ namespace vcs_AForgeMathTest
             button7.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 9);
 
             pictureBox1.Size = new Size(500, 300);
-            pictureBox1.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 0);
+            pictureBox1.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 0);
             richTextBox1.Size = new Size(500, 690-310);
-            richTextBox1.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 0+310);
+            richTextBox1.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 0+310);
             bt_clear.Location = new System.Drawing.Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(800, 750);
+            this.Size = new Size(960, 750);
             this.Text = "vcs_AForgeMathTest";
 
             //設定執行後的表單起始位置, 正中央
@@ -72,7 +83,6 @@ namespace vcs_AForgeMathTest
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
-
         }
 
         public void Matrix3x3Test()
@@ -425,6 +435,27 @@ namespace vcs_AForgeMathTest
 
         private void button5_Click(object sender, EventArgs e)
         {
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
             int[] values = new int[] { 1, 2, 2, 3, 3, 3 };
             int mode = Statistics.Mode(values);
             //Assert.AreEqual(3, mode);
@@ -451,7 +482,7 @@ namespace vcs_AForgeMathTest
             richTextBox1.Text += "mode = " + mode.ToString() + "\n";
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void button11_Click(object sender, EventArgs e)
         {
             //歐基里德距離 就是 sqrt(x^2+y^2)
             IntPoint point = new IntPoint(3, 4);
@@ -460,7 +491,7 @@ namespace vcs_AForgeMathTest
         }
 
         private IntegralImage integralImage = null;
-        private void button7_Click(object sender, EventArgs e)
+        private void button12_Click(object sender, EventArgs e)
         {
             UnmanagedImage uImage = UnmanagedImage.Create(10, 10, PixelFormat.Format8bppIndexed);
 
@@ -476,17 +507,163 @@ namespace vcs_AForgeMathTest
             integralImage = IntegralImage.FromBitmap(uImage);
 
 
-            pictureBox1.Image = integralImage;
+            //pictureBox1.Image = integralImage;
 
+
+            int x1 = 0;
+            int y1 = 0;
+            int x2 = 5;
+            int y2 = 5;
+
+            uint sum = integralImage.GetRectangleSum(x1, y1, x2, y2);
+            richTextBox1.Text += "sum = " + sum.ToString() + "\n";
+
+            int xx = 3;
+            int yy = 3;
+            int radius = 2;
+            sum = integralImage.GetRectangleSum(xx, yy, radius);
+
+            richTextBox1.Text += "sum = " + sum.ToString() + "\n";
+
+
+            float mean = integralImage.GetRectangleMean(x1, y1, x2, y2);
+            richTextBox1.Text += "mean = " + mean.ToString() + "\n";
+
+            int valueX = integralImage.GetHaarXWavelet(xx, yy, radius);
+            richTextBox1.Text += "valueX = " + valueX.ToString() + "\n";
+
+            int valueY = integralImage.GetHaarYWavelet(xx, yy, radius);
+            richTextBox1.Text += "valueY = " + valueY.ToString() + "\n";
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            //LineTest
+
+            float x;
+            float y;
+            float theta;
+            x = 1;
+            y = 1;
+            theta = 45f;
+            /*
+            [Row( 1, 1, 45, 1.41421356f, -1, 2 )]
+            [Row( -2, 2, 135, 2 * 1.41421356f, 1, 4 )]
+            [Row( -0.5, -1.73205081f / 2, 240, 1, -1 / 1.73205081f, -2 / 1.73205081f )]
+            [Row( 1, 0, 0, 1, float.NegativeInfinity, 1 )]
+            [Row( 0, -1, 270, 1, 0, -1 )]
+            */
+
+            AForge.Point pt = new AForge.Point(x, y);
+
+            // test Point-Theta factory
+            Line line = Line.FromPointTheta(pt, theta);
+            richTextBox1.Text += "aaaa " + line.Slope + "\n";
+            richTextBox1.Text += "aaaa " + line.Intercept + "\n";
+
+            // calculate radius
+            float radius = pt.EuclideanNorm();
+            richTextBox1.Text += "radius " + radius + "\n";
+
+            // test R-Theta factory
+            line = Line.FromRTheta(radius, theta);
+            richTextBox1.Text += "bbbb " + line.Slope + "\n";
+            richTextBox1.Text += "bbbb " + line.Intercept + "\n";
+
+
+            //檢查一直線是否垂直
+            int sx = 0;
+            int sy = 0;
+            int ex = 100;
+            int ey = 100;
+
+            line = Line.FromPoints(new AForge.Point(sx, sy), new AForge.Point(ex, ey));
+            richTextBox1.Text += "cccc " + line.Slope + "\n";
+            richTextBox1.Text += "cccc " + line.Intercept + "\n";
+            richTextBox1.Text += "cccc " + line.IsVertical + "\n";
+            richTextBox1.Text += "cccc " + line.IsHorizontal + "\n";
+
+            //兩直線的夾角
+            int sx1 = 0;
+            int sy1 = 0;
+            int ex1 = 100;
+            int ey1 = 0;
+            int sx2 = 0;
+            int sy2 = 0;
+            int ex2 = 0;
+            int ey2 = 100;
+
+            Line line1 = Line.FromPoints(new AForge.Point(sx1, sy1), new AForge.Point(ex1, ey1));
+            Line line2 = Line.FromPoints(new AForge.Point(sx2, sy2), new AForge.Point(ex2, ey2));
+
+            float angle = line1.GetAngleBetweenLines(line2);
+            richTextBox1.Text += "夾角 : " + angle + " 度\n";
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            //求兩直線的交叉點座標
+            //GetIntersectionPointTest
+            float sx1 = 0f;
+            float sy1 = 0f;
+            float ex1 = 100f;
+            float ey1 = 100f;
+            float sx2 = 100f;
+            float sy2 = 0f;
+            float ex2 = 0f;
+            float ey2 = 100f;
+
+            sx2 = 100f;
+            sy2 = 0f;
+            ex2 = 200f;
+            ey2 = 100f;
+
+            Line line1 = Line.FromPoints(new AForge.Point(sx1, sy1), new AForge.Point(ex1, ey1));
+            Line line2 = Line.FromPoints(new AForge.Point(sx2, sy2), new AForge.Point(ex2, ey2));
+
+            AForge.Point? result = line1.GetIntersectionWith(line2);
+            if (result == null)
+                richTextBox1.Text += "無交叉點\n";
+            else
+                richTextBox1.Text += result.ToString() + "\n";
+
+            //點到線的距離
+            int x = 0;
+            int y = 0;
+            int x1 = 100;
+            int y1 = 0;
+            int x2 = 0;
+            int y2 = 100;
+            AForge.Point pt = new AForge.Point(x, y);
+            AForge.Point pt1 = new AForge.Point(x1, y1);
+            AForge.Point pt2 = new AForge.Point(x2, y2);
+            Line line = Line.FromPoints(pt1, pt2);
+            float distance = line.DistanceToPoint(pt);
+            richTextBox1.Text += "點到線的距離 : " + distance + "\n";
 
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        private void button15_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
         {
 
         }

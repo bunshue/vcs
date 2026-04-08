@@ -38,7 +38,6 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnExit = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
@@ -98,9 +97,9 @@
             this.listView1.AllowColumnReorder = true;
             this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.listView1.FullRowSelect = true;
-            this.listView1.Location = new System.Drawing.Point(10, 118);
+            this.listView1.Location = new System.Drawing.Point(10, 175);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(290, 97);
+            this.listView1.Size = new System.Drawing.Size(290, 140);
             this.listView1.TabIndex = 9;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.List;
@@ -124,7 +123,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnExit);
             this.groupBox1.Controls.Add(this.btnUpdate);
             this.groupBox1.Controls.Add(this.textBox5);
             this.groupBox1.Controls.Add(this.textBox4);
@@ -136,24 +134,14 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(10, 8);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(287, 102);
+            this.groupBox1.Size = new System.Drawing.Size(287, 144);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "數據訊息";
             // 
-            // btnExit
-            // 
-            this.btnExit.Location = new System.Drawing.Point(199, 72);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(75, 23);
-            this.btnExit.TabIndex = 12;
-            this.btnExit.Text = "退出(&E)";
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(117, 72);
+            this.btnUpdate.Location = new System.Drawing.Point(94, 97);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.TabIndex = 11;
@@ -199,7 +187,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

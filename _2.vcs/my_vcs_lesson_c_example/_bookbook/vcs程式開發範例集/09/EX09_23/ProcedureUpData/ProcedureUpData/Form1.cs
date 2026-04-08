@@ -30,21 +30,31 @@ namespace ProcedureUpData
             con = new SqlConnection(cnstr);
 
             showList();
+
+            string id = "P1005";  // textbox1 員工編號
+            string name = "david";  // textbox2 員工姓名
+            string money = "34567";  // textbox4 基本工資
+            string talk = "Very good";  // textbox5 工作評價
+            textBox1.Text = id;
+            textBox2.Text = name;
+            textBox4.Text = money;
+            textBox5.Text = talk;
         }
 
         private void listView1_Click(object sender, EventArgs e)
         {
             string str = this.listView1.SelectedItems[0].Text.ToString();
+            richTextBox1.Text += "你選擇了 : " + str + "\n";
             showInfo(str);
-        }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            string id = "P1005";  // textbox1 員工編號
+            string name = "david";  // textbox2 員工姓名
+            string money = "34567";  // textbox4 基本工資
+            string talk = "Very good";  // textbox5 工作評價
+
             if (TextClear())
             {
                 using (SqlCommand cmd = new SqlCommand())
@@ -114,23 +124,19 @@ namespace ProcedureUpData
 
                     this.listView1.Columns.Add(ch);
                 }
-                //建立結構
-                Method(dt);
-            }
-        }
 
-        private void Method(DataTable dt)
-        {
-            listView1.Items.Clear();
-            ListViewItem listItem = null;
-            for (int j = 0; j < dt.Rows.Count; j++)
-            {
-                listItem = new ListViewItem(dt.Rows[j][0].ToString());
-                for (int k = 1; k < dt.Columns.Count; k++)
+                //建立結構
+                listView1.Items.Clear();
+                ListViewItem listItem = null;
+                for (int j = 0; j < dt.Rows.Count; j++)
                 {
-                    listItem.SubItems.Add(dt.Rows[j][k].ToString());
+                    listItem = new ListViewItem(dt.Rows[j][0].ToString());
+                    for (int k = 1; k < dt.Columns.Count; k++)
+                    {
+                        listItem.SubItems.Add(dt.Rows[j][k].ToString());
+                    }
+                    listView1.Items.Add(listItem);
                 }
-                listView1.Items.Add(listItem);
             }
         }
 
