@@ -7,7 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Imaging;  // for PixelFormat
+
+using AForge;
 using AForge.Math;
+using AForge.Imaging;
 
 namespace vcs_AForgeMathTest
 {
@@ -40,27 +44,29 @@ namespace vcs_AForgeMathTest
             dx = 200 + 10;
             dy = 60 + 10;
 
-            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button0.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 9);
 
-            richTextBox1.Size = new Size(500, 690);
-            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            pictureBox1.Size = new Size(500, 300);
+            pictureBox1.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 0);
+            richTextBox1.Size = new Size(500, 690-310);
+            richTextBox1.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 0+310);
+            bt_clear.Location = new System.Drawing.Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(800, 750);
             this.Text = "vcs_AForgeMathTest";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+            this.Location = new System.Drawing.Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -69,8 +75,9 @@ namespace vcs_AForgeMathTest
 
         }
 
-        private void button0_Click(object sender, EventArgs e)
+        public void Matrix3x3Test()
         {
+            // prepare 1st argument
             a1.V00 = 1;
             a1.V01 = 2;
             a1.V02 = 3;
@@ -95,19 +102,10 @@ namespace vcs_AForgeMathTest
             a2.V20 = 3;
             a2.V21 = 2;
             a2.V22 = 1;
-
-            /*
-            Vector3 row0 = new Vector3(1, 2, 3);
-            Vector3 row1 = new Vector3(4, 5, 6);
-            Vector3 row2 = new Vector3(7, 8, 9);
-            Matrix3x3 matrix = Matrix3x3.CreateFromRows(row0, row1, row2);
-            */
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public void ToArrayTest()
         {
-            richTextBox1.Text += "測試 ToArray()\n";
-
             Matrix3x3 matrix = new Matrix3x3();
 
             matrix.V00 = 1;
@@ -126,13 +124,12 @@ namespace vcs_AForgeMathTest
 
             for (int i = 0; i < 9; i++)
             {
-                richTextBox1.Text += array[i] + "\n";
+                //Assert.AreEqual<float>( array[i], (float) ( i + 1 ) );
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        public void CreateFromRowsTest()
         {
-            //CreateFromRowsTest
             Vector3 row0 = new Vector3(1, 2, 3);
             Vector3 row1 = new Vector3(4, 5, 6);
             Vector3 row2 = new Vector3(7, 8, 9);
@@ -142,22 +139,20 @@ namespace vcs_AForgeMathTest
 
             for (int i = 0; i < 9; i++)
             {
-
+                //Assert.AreEqual<float>( array[i], (float) ( i + 1 ) );
             }
 
-            //Assert.AreEqual<Vector3>(row0, matrix.GetRow(0));
-            //Assert.AreEqual<Vector3>(row1, matrix.GetRow(1));
-            //Assert.AreEqual<Vector3>(row2, matrix.GetRow(2));
+            //Assert.AreEqual<Vector3>( row0, matrix.GetRow( 0 ) );
+            //Assert.AreEqual<Vector3>( row1, matrix.GetRow( 1 ) );
+            //Assert.AreEqual<Vector3>( row2, matrix.GetRow( 2 ) );
 
             //matrix.GetRow(-1);
 
             //matrix.GetRow(3);
-
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        public void CreateFromColumnsTest()
         {
-            //CreateFromColumnsTest
             Vector3 column0 = new Vector3(1, 4, 7);
             Vector3 column1 = new Vector3(2, 5, 8);
             Vector3 column2 = new Vector3(3, 6, 9);
@@ -167,14 +162,15 @@ namespace vcs_AForgeMathTest
 
             for (int i = 0; i < 9; i++)
             {
+                //Assert.AreEqual<float>( array[i], (float) ( i + 1 ) );
             }
 
-            //Assert.AreEqual<Vector3>(column0, matrix.GetColumn(0));
-            //Assert.AreEqual<Vector3>(column1, matrix.GetColumn(1));
-            //Assert.AreEqual<Vector3>(column2, matrix.GetColumn(2));
+            //Assert.AreEqual<Vector3>( column0, matrix.GetColumn( 0 ) );
+            //Assert.AreEqual<Vector3>( column1, matrix.GetColumn( 1 ) );
+            //Assert.AreEqual<Vector3>( column2, matrix.GetColumn( 2 ) );
 
-            //matrix.GetColumn(-1);
-            //matrix.GetColumn(3);
+            //matrix.GetColumn( -1 );
+            //matrix.GetColumn( 3 );
         }
 
         public void CreateRotationYTest(float angle)
@@ -406,7 +402,21 @@ namespace vcs_AForgeMathTest
             );
         }
 
+        private void button0_Click(object sender, EventArgs e)
+        {
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+        }
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -415,16 +425,59 @@ namespace vcs_AForgeMathTest
 
         private void button5_Click(object sender, EventArgs e)
         {
+            int[] values = new int[] { 1, 2, 2, 3, 3, 3 };
+            int mode = Statistics.Mode(values);
+            //Assert.AreEqual(3, mode);
+            richTextBox1.Text += "mode = " + mode.ToString() + "\n";
 
+            values = new int[] { 1, 1, 1, 2, 2, 2 };
+            mode = Statistics.Mode(values);
+            //Assert.AreEqual(3, mode);
+            richTextBox1.Text += "mode = " + mode.ToString() + "\n";
+
+            values = new int[] { 2, 2, 2, 1, 1, 1 };
+            mode = Statistics.Mode(values);
+            //Assert.AreEqual(0, mode);
+            richTextBox1.Text += "mode = " + mode.ToString() + "\n";
+
+            values = new int[] { 0, 0, 0, 0, 0, 0 };
+            mode = Statistics.Mode(values);
+            //Assert.AreEqual(0, mode);
+            richTextBox1.Text += "mode = " + mode.ToString() + "\n";
+
+            values = new int[] { 1, 1, 2, 3, 6, 8, 11, 12, 7, 3 };
+            mode = Statistics.Mode(values);
+            //Assert.AreEqual(7, mode);
+            richTextBox1.Text += "mode = " + mode.ToString() + "\n";
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-
+            //歐基里德距離 就是 sqrt(x^2+y^2)
+            IntPoint point = new IntPoint(3, 4);
+            float cc = point.EuclideanNorm();
+            richTextBox1.Text += cc.ToString() + "\n";
         }
 
+        private IntegralImage integralImage = null;
         private void button7_Click(object sender, EventArgs e)
         {
+            UnmanagedImage uImage = UnmanagedImage.Create(10, 10, PixelFormat.Format8bppIndexed);
+
+            for (int y = 0; y < 10; y++)
+            {
+                for (int x = 0; x < 10; x++)
+                {
+                    uImage.SetPixel(x, y, ((x + y) % 2 == 0) ? Color.FromArgb(0, 0, 0) : Color.FromArgb(1, 1, 1));
+                }
+            }
+
+
+            integralImage = IntegralImage.FromBitmap(uImage);
+
+
+            pictureBox1.Image = integralImage;
+
 
         }
 

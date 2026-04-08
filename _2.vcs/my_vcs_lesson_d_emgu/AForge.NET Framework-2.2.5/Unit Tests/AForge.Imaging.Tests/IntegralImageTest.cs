@@ -15,17 +15,6 @@ namespace AForge.Imaging.Tests
 
         public IntegralImageTest( )
         {
-            UnmanagedImage uImage = UnmanagedImage.Create( 10, 10, PixelFormat.Format8bppIndexed );
-
-            for ( int y = 0; y < 10; y++ )
-            {
-                for ( int x = 0; x < 10; x++ )
-                {
-                    uImage.SetPixel( x, y, ( ( x + y ) % 2 == 0 ) ? Color.FromArgb( 0, 0, 0 ) : Color.FromArgb( 1, 1, 1 ) );
-                }
-            }
-
-            integralImage = IntegralImage.FromBitmap( uImage );
         }
 
         [Test]
