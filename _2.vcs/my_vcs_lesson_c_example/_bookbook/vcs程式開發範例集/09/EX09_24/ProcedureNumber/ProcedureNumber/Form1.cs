@@ -25,6 +25,19 @@ namespace ProcedureNumber
         private void Form1_Load(object sender, EventArgs e)
         {
             AutoID();
+
+
+            string id = "P1013";  // textbox1 員工編號
+            string name = "david";  // textbox2 員工姓名
+            string age = "18";  // textbox3 員工年齡
+            string money = "34567";  // textbox5 基本工資
+            string idcard = "P123456789";  // textbox4 身分證號
+
+            //textBox1.Text = id;
+            textBox2.Text = name;
+            textBox3.Text = age;
+            textBox5.Text = money;
+            textBox4.Text = idcard;
         }
 
         private void textBox3_Validating(object sender, CancelEventArgs e)
@@ -56,6 +69,7 @@ namespace ProcedureNumber
                 {
                     if (IDCard(this.textBox4.Text))
                     {
+                        richTextBox1.Text += "做 InsertInfo()\n";
                         InsertInfo();
                     }
                     else
@@ -72,6 +86,7 @@ namespace ProcedureNumber
 
         public bool IDCard(string ID)
         {
+            richTextBox1.Text += "檢查身份證號格式\n";
             if (!Regex.IsMatch(ID, @"^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$"))  //15ID
             {
                 if (Regex.IsMatch(ID,
@@ -180,3 +195,4 @@ namespace ProcedureNumber
         }
     }
 }
+

@@ -37,11 +37,13 @@ namespace SystemInitialization
         private void listBox1_Click(object sender, EventArgs e)
         {
             uncheck("false");//設定所有的CheckBox控制元件為不選取狀態
+
             string str = null;
 
             // 連接字串
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
 
+            richTextBox1.Text += "aaaaa : " + this.listBox1.Text + "\n";
             using (SqlConnection con = new SqlConnection(cnstr))//連接資料庫
             {
                 SqlCommand cmd = new SqlCommand("select power from tb_power where name='" + this.listBox1.Text + "'", con);//連接SQL語句與數擾庫的連接
@@ -52,6 +54,7 @@ namespace SystemInitialization
                 {
                     dr.Read();//讀取下一行
                     str = dr[0].ToString();//取得權限值
+                    richTextBox1.Text += "str = " + str + "\n";
                 }
                 dr.Close();//關閉
                 con.Close();//關閉連接
@@ -182,6 +185,50 @@ namespace SystemInitialization
                 cmd.Connection.Open();
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("授權成功！！！");
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            // 資料庫檔案
+            string db_filename = "db_09_Data.mdf";
+
+            string sqlstr = "select name from tb_power";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+        }
+
+        void sql_read_database(string db_filename, string sqlstr, DataGridView dgv)
+        {
+            string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
+
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);
+
+            //讀取資料庫至DGV
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
+                {
+                    SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
+                    DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+                    da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+                    //da.Fill(ds, "table");  // da將查詢的結果填充至數據集ds, 指定TableName為"table"
+                    dgv.DataSource = ds.Tables[0].DefaultView;  // DGV設置數據源
+                    //dgv.DataSource = ds.Tables[0];  // DGV設置數據源, same
+
+                    /*
+                    //也可改成用 DataTable
+                    DataTable dt = new DataTable();//创建数据表
+                    da.Fill(dt);//填充数据表
+                    dgv.DataSource = dt;
+                    */
+                }
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.Message + "\n";
             }
         }
     }
