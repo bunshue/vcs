@@ -52,7 +52,7 @@ namespace PrintTable
             cboxGUnit.SelectedIndex = 0;
         }
 
-        //#region 计算总金额
+        // 计算总金额
         private void txtGMoney_TextChanged(object sender, EventArgs e)
         {
             try
@@ -76,14 +76,16 @@ namespace PrintTable
             }
             catch { }
         }
-        //#endregion
 
         //根据选中的入库单显示其详细信息
         private void dgvInfo_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            richTextBox1.Text += "你選擇了 : " + dgvInfo.Rows[e.RowIndex].Cells[0].Value.ToString() + "\n";
+
             try
             {
                 myds = SelectIGInfo("编号", dgvInfo.Rows[e.RowIndex].Cells[0].Value.ToString());
+
                 txtID.Text = myds.Tables[0].Rows[0][0].ToString();
                 txtInPeople.Text = myds.Tables[0].Rows[0][1].ToString();
                 txtInProvider.Text = myds.Tables[0].Rows[0][2].ToString();
@@ -264,23 +266,15 @@ namespace PrintTable
             e.Graphics.DrawString(strRemark, myFont, myBrush, new Point(left + 82, top + 170));
         }
 
-        //#region 获得数据库连接
-        /// <summary>
-        /// 获得数据库连接
-        /// </summary>
-        /// <returns>返回SqlConnection对象</returns>
+        // 获得数据库连接
         private SqlConnection getCon()
         {
             sqlcon = new SqlConnection(strCon);
             sqlcon.Open();
             return sqlcon;
         }
-        //#endregion
 
-        //#region 查询商品入库信息
-        /// <summary>
         /// 查询商品入库信息
-        /// </summary>
         /// <param name="str">查询条件</param>
         /// <param name="str">查询关键字</param>
         /// <returns>DataSet数据集对象</returns>
@@ -305,6 +299,5 @@ namespace PrintTable
             sqlcon.Close();
             return myds;
         }
-        //#endregion
     }
 }

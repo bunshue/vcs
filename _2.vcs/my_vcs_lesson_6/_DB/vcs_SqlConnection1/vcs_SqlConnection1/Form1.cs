@@ -89,12 +89,8 @@ namespace vcs_SqlConnection1
             lb_dgv3.Text = "";
             lb_dgv4.Text = "";
 
-            listView1.Size = new Size(150, 290);
-            listView1.Location = new Point(x_st + dx * 7 + 110, y_st + dy * 0);
-            treeView1.Size = new Size(150, 290);
-            treeView1.Location = new Point(x_st + dx * 7 + 110 + 152, y_st + dy * 0);
-            richTextBox1.Size = new Size(300, 820 - 300);
-            richTextBox1.Location = new Point(x_st + dx * 7 + 110, y_st + dy * 0 + 300);
+            richTextBox1.Size = new Size(300, 820);
+            richTextBox1.Location = new Point(x_st + dx * 7 + 110, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1920, 890);
@@ -416,6 +412,83 @@ namespace vcs_SqlConnection1
             string sqlstr4 = "SELECT * FROM tb_05 ORDER BY 銷售數量 DESC";
             getScoure(sqlstr4);
             */
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+            /*
+            //讀取資料庫資料
+
+            SqlDataAdapter da;//宣告一個數據讀取器
+            DataSet ds;//宣告一個數據集
+            SqlConnection cn;//宣告一個數據庫連接對像
+
+            //定義一個數據庫連接字符串
+            cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+
+            cn = new SqlConnection(cnstr);//初始化一個數據庫連接
+            sqlstr = "SELECT 產品名稱,產品說明 FROM tb_WidgetApply";//定義一個數據庫查詢字串
+            da = new SqlDataAdapter(sqlstr, cn);//初始化數據讀取器對像
+            ds = new DataSet();//初始化數據集
+            da.Fill(ds, "WidgetApply");//填充數據集
+
+            dataGridView1.DataSource = ds.Tables["WidgetApply"];  // DGV設置數據源
+            lb_dgv1.Text = "產品名稱,產品說明\n";
+
+            for (int i = 0; i < ds.Tables["WidgetApply"].Rows.Count; i++)//循環搜尋數據集中的每一行數據
+            {
+                richTextBox1.Text += ds.Tables["WidgetApply"].Rows[i][0].ToString() + "\t" + ds.Tables["WidgetApply"].Rows[i][1].ToString() + "\n";
+            }
+            */
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            /*
+            cn = new SqlConnection(cnstr);//初始化一個數據庫連接對像
+            cn.Open();//打開數據庫連接
+            sqlstr = "SELECT 產品編號,產品名稱 FROM tb_WidgetApply";//定義一個數據庫查詢字符串
+            SqlCommand cmd = new SqlCommand(sqlstr, cn);//初始化執行SQL語句對像
+            SqlDataReader dr = cmd.ExecuteReader();//定義一個數據讀取器
+
+            while (dr.Read())//開始讀取數據中的內容
+            {
+                richTextBox1.Text += dr[1].ToString() + "\n";
+            }
+            dr.Close();//關閉數據讀取器
+            cn.Close();//關閉數據庫連接
+            */
+
+            //6060
+
+            // 讀取資料庫資料到 DataTable
+            // 連接字串
+            cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
+            SqlConnection con = new SqlConnection(cnstr);
+
+            using (SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM 員工表", con))
+            {
+                //產生結果集
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                richTextBox1.Text += "欄名 :\t";
+                for (int i = 0; i < dt.Columns.Count; i++)//列
+                {
+                    richTextBox1.Text += dt.Columns[i].ColumnName.ToString() + "\t";
+                }
+                richTextBox1.Text += "\n";
+
+                int R = dt.Rows.Count;
+                richTextBox1.Text += "R = " + R.ToString() + "\n";
+
+                for (int j = 0; j < R; j++)
+                {
+                    richTextBox1.Text += "第 " + (j + 1).ToString() + " 筆資料\t";
+                    richTextBox1.Text += dt.Rows[j][0].ToString() + "\t";
+                    for (int k = 1; k < dt.Columns.Count; k++)
+                    {
+                        richTextBox1.Text += dt.Rows[j][k].ToString() + "\t";
+                    }
+                    richTextBox1.Text += "\n";
+                }
+            }
+
         }
 
         public void getScoure(string sqlstr)
@@ -791,7 +864,9 @@ namespace vcs_SqlConnection1
                 richTextBox1.Text += "\n";
 
                 // 在richTextBox1內顯示成績單的所有記錄
-                for (int i = 0; i < dt.Rows.Count; i++)
+                int R = dt.Rows.Count;
+                richTextBox1.Text += "R = " + R.ToString() + "\n";
+                for (int i = 0; i < R; i++)
                 {
                     for (int j = 0; j < dt.Columns.Count; j++)
                     {
@@ -829,7 +904,9 @@ namespace vcs_SqlConnection1
                 richTextBox1.Text += "\n";
 
                 // 在richTextBox1內顯示成績單的所有記錄
-                for (int i = 0; i < dt.Rows.Count - 1; i++)
+                int R = dt.Rows.Count;
+                richTextBox1.Text += "R = " + R.ToString() + "\n";
+                for (int i = 0; i < R - 1; i++)
                 {
                     richTextBox1.Text += dt.Rows[i]["學號"].ToString() + "\t";
                     richTextBox1.Text += dt.Rows[i]["姓名"].ToString() + "\t";
@@ -1857,52 +1934,6 @@ namespace vcs_SqlConnection1
 
         private void button19_Click(object sender, EventArgs e)
         {
-            //讀取資料庫資料到 listView / treeView
-
-            SqlDataAdapter da;//宣告一個數據讀取器
-            DataSet ds;//宣告一個數據集
-            SqlConnection cn;//宣告一個數據庫連接對像
-            SqlCommand NexusCommand;//聲明一個執行SQL語句的對象
-
-            //定義一個數據庫連接字符串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
-
-
-            listView1.Columns.Add("產品名稱", 100, HorizontalAlignment.Left);//向listView1控制元件中新增「產品名稱」列
-            listView1.Columns.Add("產品說明", 200, HorizontalAlignment.Center);//向listView1控制元件中新增「產品說明」列
-
-            cn = new SqlConnection(cnstr);//初始化一個數據庫連接
-            string sqlstr = "select 產品名稱,產品說明 from tb_WidgetApply";//定義一個數據庫查詢字串
-            da = new SqlDataAdapter(sqlstr, cn);//初始化數據讀取器對像
-            ds = new DataSet();//初始化數據集
-            da.Fill(ds, "WidgetApply");//填充數據集
-            for (int i = 0; i < ds.Tables["WidgetApply"].Rows.Count; i++)//循環搜尋數據集中的每一行數據
-            {
-                listView1.Items.Add(ds.Tables["WidgetApply"].Rows[i][0].ToString()).SubItems.Add(ds.Tables["WidgetApply"].Rows[i][1].ToString());//向listView1控制元件中新增數據
-            }
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //修改TreeView控制元件中的節點文字
-
-            cn = new SqlConnection(cnstr);//初始化一個數據庫連接對像
-            cn.Open();//打開數據庫連接
-            sqlstr = "select 產品編號,產品名稱 from tb_WidgetApply";//定義一個數據庫查詢字符串
-            NexusCommand = new SqlCommand(sqlstr, cn);//初始化執行SQL語句對像
-            SqlDataReader NexusReader = NexusCommand.ExecuteReader();//定義一個數據讀取器
-            treeView1.Nodes.Clear();//清空treeView1原有的數據內容
-            TreeNode root = treeView1.Nodes.Add("產品名稱");//為treeView1控件添加根節點
-            while (NexusReader.Read())//開始讀取數據中的內容
-            {
-                richTextBox1.Text += NexusReader[1].ToString() + "\n";
-
-                TreeNode tempNode = new TreeNode(NexusReader[1].ToString());//將數據庫中的數據字段變換為treeView控件的節點
-                root.Nodes.Add(tempNode);//向根節點上添加數據庫字段
-            }
-            NexusReader.Close();//關閉數據讀取器
-            root.ExpandAll();//展開treeView1中的所有節點
-            cn.Close();//關閉數據庫連接
-
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -2273,42 +2304,6 @@ namespace vcs_SqlConnection1
 
         private void button21_Click(object sender, EventArgs e)
         {
-            //讀取資料庫資料到 listView
-            // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
-
-            SqlConnection con = new SqlConnection(cnstr);
-
-            listView1.View = View.Details;//圖示
-            listView1.GridLines = true;//網格線
-            using (SqlDataAdapter da = new SqlDataAdapter("select * from 員工表", con))
-            {
-                //產生結果集
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                ColumnHeader ch;
-                for (int i = 0; i < dt.Columns.Count; i++)//列
-                {
-                    ch = new ColumnHeader();
-                    ch.Text = dt.Columns[i].ColumnName.ToString();
-                    ch.Name = dt.Columns[i].ColumnName.ToString();
-                    ch.Width = 72;
-
-                    this.listView1.Columns.Add(ch);
-                }
-
-                listView1.Items.Clear();
-                ListViewItem listItem = null;
-                for (int j = 0; j < dt.Rows.Count; j++)
-                {
-                    listItem = new ListViewItem(dt.Rows[j][0].ToString());
-                    for (int k = 1; k < dt.Columns.Count; k++)
-                    {
-                        listItem.SubItems.Add(dt.Rows[j][k].ToString());
-                    }
-                    listView1.Items.Add(listItem);
-                }
-            }
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -2463,7 +2458,6 @@ namespace vcs_SqlConnection1
 
         private void button26_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button27_Click(object sender, EventArgs e)
@@ -2704,7 +2698,9 @@ SQL不同的連線方式
             //顯示數據 DataTable => DGV
             dataGridView1.Rows.Clear();//清空DataGridView中原有的數據
             object[] item = new object[dt.Columns.Count];//定義一個object類型的數組
-            for (int i = 0; i < dt.Rows.Count; i++)//循環遍歷數據表中的每一行數據
+                int R = dt.Rows.Count;
+                richTextBox1.Text += "R = " + R.ToString() + "\n";
+            for (int i = 0; i < R; i++)//循環遍歷數據表中的每一行數據
             {
                 for (int j = 0; j < dt.Columns.Count; j++)//循環遍歷數據表中每一列數據
                 {
@@ -2872,7 +2868,20 @@ string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.md
 
 */
 
+//listView1.View = View.Details;//圖示
+//listView1.GridLines = true;//網格線
+//listView1.Columns.Add("產品名稱", 100, HorizontalAlignment.Left);//向listView1控制元件中新增「產品名稱」列
+//listView1.Columns.Add("產品說明", 200, HorizontalAlignment.Center);//向listView1控制元件中新增「產品說明」列
 
+/* treeview
+            treeView1.Nodes.Clear();//清空treeView1原有的數據內容
+            TreeNode root = treeView1.Nodes.Add("產品名稱");  // 為treeView1控件添加根節點
 
-
+            for (int i = 0; i < 5; i++)
+            {
+                TreeNode tempNode = new TreeNode("AAAAA");//將數據庫中的數據字段變換為treeView控件的節點
+                root.Nodes.Add(tempNode);//向根節點上添加數據庫字段
+            }
+            root.ExpandAll();//展開treeView1中的所有節點
+*/
 

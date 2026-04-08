@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Data.SqlClient;
 using System.Collections;
 
 namespace SetPrintRange
@@ -44,21 +43,7 @@ namespace SetPrintRange
             //txt_Range.Text = "1,2,3-5";
             txt_Range.Text = "1-2";
 
-            // 資料庫檔案
-            string db_filename = "db_TomeTwo.MDF";
-            // 查詢字串
-            string sqlstr = "SELECT * FROM 員工表";
-
-            sqlstr =
-    @"select 学生姓名,性别,家庭住址 from tb_Student
-union
-select 学生姓名,convert(varchar,年龄),家庭住址 from tb_Student
-union
-select 学生姓名,convert(varchar,出生年月),家庭住址 from tb_Student
-union
-select 学生姓名,所在学院,家庭住址 from tb_Student";
-
-            sql_read_database(db_filename, sqlstr, dataGridView1);
+            add_datagridview(dataGridView1);
 
             int R = dataGridView1.Rows.Count;
             EndRows = (R - 2) % intRows;//去掉标题和最后一行的空行
@@ -331,40 +316,6 @@ select 学生姓名,所在学院,家庭住址 from tb_Student";
             }
         }
 
-        void sql_read_database(string db_filename, string sqlstr, DataGridView dgv)
-        {
-            string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
-
-            // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);
-
-            //讀取資料庫至DGV
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
-                {
-                    SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
-                    DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-                    da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
-                    //da.Fill(ds, "table");  // da將查詢的結果填充至數據集ds, 指定TableName為"table"
-                    dgv.DataSource = ds.Tables[0].DefaultView;  // DGV設置數據源
-                    //dgv.DataSource = ds.Tables[0];  // DGV設置數據源, same
-
-                    /*
-                    //也可改成用 DataTable
-                    DataTable dt = new DataTable();//创建数据表
-                    da.Fill(dt);//填充数据表
-                    dgv.DataSource = dt;
-                    */
-                }
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += ex.Message + "\n";
-            }
-        }
-
-
         void add_datagridview(DataGridView dgv)
         {
             dgv.Columns.Clear();
@@ -386,7 +337,9 @@ select 学生姓名,所在学院,家庭住址 from tb_Student";
 
         private void button1_Click(object sender, EventArgs e)
         {
-            add_datagridview(dataGridView2);
+
         }
     }
 }
+
+

@@ -198,6 +198,8 @@ namespace PrintStuCertificate
         //根据学生编号显示其详细信息
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            richTextBox1.Text += "你選擇了 : " + dgvInfo.Rows[e.RowIndex].Cells[0].Value.ToString() + "\n";
+
             try
             {
                 myds = SelectStuInfo("编号", dgvInfo.Rows[e.RowIndex].Cells[0].Value.ToString());
@@ -238,6 +240,8 @@ namespace PrintStuCertificate
         //打印选中的学生简历
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            richTextBox1.Text += "你選擇了 : " + dgvInfo.Rows[e.RowIndex].Cells[0].Value.ToString() + "\n";
+
             try
             {
                 myds = SelectStuInfo("编号", dgvInfo.Rows[e.RowIndex].Cells[0].Value.ToString());
@@ -266,6 +270,7 @@ namespace PrintStuCertificate
                 strTECHANG = myds.Tables[0].Rows[0][23].ToString();
                 strTel = myds.Tables[0].Rows[0][24].ToString();
                 strEmail = myds.Tables[0].Rows[0][25].ToString();
+
                 frmPrint frmprint = new frmPrint();
                 frmprint.Show();
             }
@@ -281,28 +286,22 @@ namespace PrintStuCertificate
             Form1_Load(sender, e);
         }
 
-        //#region 获得数据库连接
-        /// <summary>
-        /// 获得数据库连接
-        /// </summary>
-        /// <returns>返回SqlConnection对象</returns>
+        // 获得数据库连接
         private SqlConnection getCon()
         {
             sqlcon = new SqlConnection(strCon);
             sqlcon.Open();
             return sqlcon;
         }
-        //#endregion
 
-        //#region 查询学生信息
-        /// <summary>
-        /// 查询学生信息
-        /// </summary>
+        // 查询学生信息
         /// <param name="str">查询条件</param>
         /// <param name="str">查询关键字</param>
         /// <returns>DataSet数据集对象</returns>
         private DataSet SelectStuInfo(string str, string strKeyWord)
         {
+            richTextBox1.Text += "查詢學生信息, " + str + "\t" + strKeyWord + "\n";
+
             sqlcon = getCon();
             sqlda = new SqlDataAdapter();
             sqlcmd = new SqlCommand("proc_SelectStuInfo", sqlcon);
@@ -322,6 +321,5 @@ namespace PrintStuCertificate
             sqlcon.Close();
             return myds;
         }
-        //#endregion
     }
 }

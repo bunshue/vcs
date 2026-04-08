@@ -63,24 +63,21 @@ namespace PrintStuCertificate
         }
 
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
-        public static extern long BitBlt(IntPtr hdcDest,
-            int nXDest, int nYDest, int nWidth, int nHeight,
-            IntPtr hdcSrc, int nXSrc, int nYSrc, int dwRop);
+        public static extern long BitBlt(IntPtr hdcDest, int nXDest, int nYDest, int nWidth, int nHeight, IntPtr hdcSrc, int nXSrc, int nYSrc, int dwRop);
         private Bitmap memoryImage;
 
         private void CaptureScreen()
         {
             Graphics mygraphics = panel1.CreateGraphics();//创建绘图对象
             Size s = panel1.Size;//得到面板宽度和高度
-            memoryImage = new Bitmap(s.Width, s.Height,//创建Bitmap对象
-                mygraphics);
-            Graphics memoryGraphics = Graphics.FromImage(//创建新的绘图对象
-                memoryImage);
+            //创建Bitmap对象
+            memoryImage = new Bitmap(s.Width, s.Height, mygraphics);
+            //创建新的绘图对象
+            Graphics memoryGraphics = Graphics.FromImage(memoryImage);
             IntPtr dc1 = mygraphics.GetHdc();//得到绘图上下文
             IntPtr dc2 = memoryGraphics.GetHdc();//得到绘图上下文
-            BitBlt(dc2, 0, 0, panel1.ClientRectangle.Width,//得到Panel面板中的图像
-                panel1.ClientRectangle.Height, dc1, 0, 0,
-                13369376);
+            //得到Panel面板中的图像
+            BitBlt(dc2, 0, 0, panel1.ClientRectangle.Width, panel1.ClientRectangle.Height, dc1, 0, 0, 13369376);
             mygraphics.ReleaseHdc(dc1);//释放上下文
             memoryGraphics.ReleaseHdc(dc2);//释放上下文
         }

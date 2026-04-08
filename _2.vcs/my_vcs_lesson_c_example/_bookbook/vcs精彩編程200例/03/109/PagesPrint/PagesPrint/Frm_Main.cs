@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Data.SqlClient;
-
 namespace PagesPrint
 {
     public partial class Frm_Main : Form
@@ -39,14 +37,7 @@ namespace PagesPrint
         {
             intRows = Convert.ToInt32(textBox1.Text);
 
-            // 資料庫檔案
-            string db_filename = "db_TomeTwo.MDF";
-            // 查詢字串
-            string sqlstr = "SELECT * FROM 員工表";
-
-            sqlstr = "SELECT 学生姓名,所学专业,家庭住址 FROM tb_Student";
-
-            sql_read_database(db_filename, sqlstr, dataGridView1);
+            add_datagridview(dataGridView1);
 
             //設置欄位寬度
             dataGridView1.Columns[0].Width = 57;
@@ -164,39 +155,6 @@ namespace PagesPrint
             }
         }
 
-        void sql_read_database(string db_filename, string sqlstr, DataGridView dgv)
-        {
-            string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
-
-            // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);
-
-            //讀取資料庫至DGV
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
-                {
-                    SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
-                    DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-                    da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
-                    //da.Fill(ds, "table");  // da將查詢的結果填充至數據集ds, 指定TableName為"table"
-                    dgv.DataSource = ds.Tables[0].DefaultView;  // DGV設置數據源
-                    //dgv.DataSource = ds.Tables[0];  // DGV設置數據源, same
-
-                    /*
-                    //也可改成用 DataTable
-                    DataTable dt = new DataTable();//创建数据表
-                    da.Fill(dt);//填充数据表
-                    dgv.DataSource = dt;
-                    */
-                }
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += ex.Message + "\n";
-            }
-        }
-
         void add_datagridview(DataGridView dgv)
         {
             dgv.Columns.Clear();
@@ -210,7 +168,7 @@ namespace PagesPrint
             dgv.Columns[2].Name = "體重";
             dgv.Columns[2].Width = 100;//設置欄位寬度
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 23; i++)
             {
                 dgv.Rows.Add(new Object[] { (i + 1).ToString("D4"), "班尼牛", 48 });
             }
@@ -218,7 +176,8 @@ namespace PagesPrint
 
         private void button2_Click(object sender, EventArgs e)
         {
-            add_datagridview(dataGridView2);
+
         }
     }
 }
+
