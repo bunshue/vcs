@@ -69,11 +69,12 @@
             this.lb_dgv3 = new System.Windows.Forms.Label();
             this.lb_dgv4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btn_sql_test = new System.Windows.Forms.Button();
-            this.bt_previous = new System.Windows.Forms.Button();
-            this.bt_next = new System.Windows.Forms.Button();
-            this.tb_sql = new System.Windows.Forms.TextBox();
             this.lb_index = new System.Windows.Forms.Label();
+            this.tb_sql = new System.Windows.Forms.TextBox();
+            this.bt_next = new System.Windows.Forms.Button();
+            this.bt_previous = new System.Windows.Forms.Button();
+            this.btn_sql_test = new System.Windows.Forms.Button();
+            this.bt_new = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
@@ -316,6 +317,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(200, 60);
             this.button19.TabIndex = 144;
+            this.button19.Text = "簡易測試";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -432,6 +434,7 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(200, 60);
             this.button29.TabIndex = 155;
+            this.button29.Text = "測試";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
@@ -504,6 +507,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.bt_new);
             this.groupBox1.Controls.Add(this.lb_index);
             this.groupBox1.Controls.Add(this.tb_sql);
             this.groupBox1.Controls.Add(this.bt_next);
@@ -514,27 +518,25 @@
             this.groupBox1.TabIndex = 173;
             this.groupBox1.TabStop = false;
             // 
-            // btn_sql_test
+            // lb_index
             // 
-            this.btn_sql_test.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btn_sql_test.Location = new System.Drawing.Point(628, 559);
-            this.btn_sql_test.Name = "btn_sql_test";
-            this.btn_sql_test.Size = new System.Drawing.Size(200, 60);
-            this.btn_sql_test.TabIndex = 174;
-            this.btn_sql_test.Text = "簡易  測試";
-            this.btn_sql_test.UseVisualStyleBackColor = true;
-            this.btn_sql_test.Click += new System.EventHandler(this.btn_sql_test_Click);
+            this.lb_index.AutoSize = true;
+            this.lb_index.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_index.ForeColor = System.Drawing.Color.Red;
+            this.lb_index.Location = new System.Drawing.Point(6, 106);
+            this.lb_index.Name = "lb_index";
+            this.lb_index.Size = new System.Drawing.Size(78, 24);
+            this.lb_index.TabIndex = 175;
+            this.lb_index.Text = "mesg1";
             // 
-            // bt_previous
+            // tb_sql
             // 
-            this.bt_previous.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_previous.Location = new System.Drawing.Point(13, 21);
-            this.bt_previous.Name = "bt_previous";
-            this.bt_previous.Size = new System.Drawing.Size(66, 40);
-            this.bt_previous.TabIndex = 175;
-            this.bt_previous.Text = "上一個";
-            this.bt_previous.UseVisualStyleBackColor = true;
-            this.bt_previous.Click += new System.EventHandler(this.bt_previous_Click);
+            this.tb_sql.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_sql.Location = new System.Drawing.Point(13, 117);
+            this.tb_sql.Multiline = true;
+            this.tb_sql.Name = "tb_sql";
+            this.tb_sql.Size = new System.Drawing.Size(66, 77);
+            this.tb_sql.TabIndex = 177;
             // 
             // bt_next
             // 
@@ -547,25 +549,38 @@
             this.bt_next.UseVisualStyleBackColor = true;
             this.bt_next.Click += new System.EventHandler(this.bt_next_Click);
             // 
-            // tb_sql
+            // bt_previous
             // 
-            this.tb_sql.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_sql.Location = new System.Drawing.Point(13, 117);
-            this.tb_sql.Multiline = true;
-            this.tb_sql.Name = "tb_sql";
-            this.tb_sql.Size = new System.Drawing.Size(66, 77);
-            this.tb_sql.TabIndex = 177;
+            this.bt_previous.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_previous.Location = new System.Drawing.Point(13, 21);
+            this.bt_previous.Name = "bt_previous";
+            this.bt_previous.Size = new System.Drawing.Size(66, 40);
+            this.bt_previous.TabIndex = 175;
+            this.bt_previous.Text = "上一個";
+            this.bt_previous.UseVisualStyleBackColor = true;
+            this.bt_previous.Click += new System.EventHandler(this.bt_previous_Click);
             // 
-            // lb_index
+            // btn_sql_test
             // 
-            this.lb_index.AutoSize = true;
-            this.lb_index.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_index.ForeColor = System.Drawing.Color.Red;
-            this.lb_index.Location = new System.Drawing.Point(6, 106);
-            this.lb_index.Name = "lb_index";
-            this.lb_index.Size = new System.Drawing.Size(78, 24);
-            this.lb_index.TabIndex = 175;
-            this.lb_index.Text = "mesg1";
+            this.btn_sql_test.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btn_sql_test.Location = new System.Drawing.Point(628, 559);
+            this.btn_sql_test.Name = "btn_sql_test";
+            this.btn_sql_test.Size = new System.Drawing.Size(200, 60);
+            this.btn_sql_test.TabIndex = 174;
+            this.btn_sql_test.Text = "簡易測試";
+            this.btn_sql_test.UseVisualStyleBackColor = true;
+            this.btn_sql_test.Click += new System.EventHandler(this.btn_sql_test_Click);
+            // 
+            // bt_new
+            // 
+            this.bt_new.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_new.Location = new System.Drawing.Point(13, 140);
+            this.bt_new.Name = "bt_new";
+            this.bt_new.Size = new System.Drawing.Size(66, 40);
+            this.bt_new.TabIndex = 178;
+            this.bt_new.Text = "新進";
+            this.bt_new.UseVisualStyleBackColor = true;
+            this.bt_new.Click += new System.EventHandler(this.bt_new_Click);
             // 
             // Form1
             // 
@@ -676,6 +691,7 @@
         private System.Windows.Forms.Button bt_next;
         private System.Windows.Forms.Button bt_previous;
         private System.Windows.Forms.Label lb_index;
+        private System.Windows.Forms.Button bt_new;
     }
 }
 

@@ -32,6 +32,10 @@ namespace ImgMicroimage
         }
         CustomListView clv = new CustomListView();
 
+        //存放縮略圖的路徑
+        string foldername = @"C:\\dddddddddd\\LsTemp";
+
+
         public Frm_Main()
         {
             InitializeComponent();
@@ -103,7 +107,7 @@ namespace ImgMicroimage
             string[] a = new string[2];
             DirectoryInfo di = new DirectoryInfo(filePath);
             FileSystemInfo[] fi = di.GetFileSystemInfos();
-            DirectoryInfo di2 = new DirectoryInfo("c:\\dddddddddd\\LsTemp");
+            DirectoryInfo di2 = new DirectoryInfo(foldername);//存放縮略圖的路徑
             for (int i = 0; i < fi.Length; i++)
             {
                 string imgType = fi[i].ToString().Substring(fi[i].ToString().LastIndexOf(".") + 1, fi[i].ToString().Length - 1 - fi[i].ToString().LastIndexOf("."));
@@ -131,10 +135,11 @@ namespace ImgMicroimage
                     }
                     if (!di2.Exists)
                     {
-                        Directory.CreateDirectory("c:\\dddddddddd\\LsTemp");
-                        if (GetReducedImage(percent, "c:\\dddddddddd\\LsTemp\\_" + imgName + ".JPG"))
+                        //存放縮略圖的路徑
+                        Directory.CreateDirectory(foldername);
+                        if (GetReducedImage(percent, foldername + "\\_" + imgName + ".JPG"))
                         {
-                            imageList1.Images.Add(i.ToString(), Image.FromFile("c:\\dddddddddd\\LsTemp\\_" + imgName + ".JPG"));
+                            imageList1.Images.Add(i.ToString(), Image.FromFile(foldername + "\\_" + imgName + ".JPG"));
                             a[0] = imgName + "." + imgType;
                             ListViewItem lvi = new ListViewItem(a);
                             lvi.ImageKey = i.ToString();
@@ -143,9 +148,10 @@ namespace ImgMicroimage
                     }
                     else
                     {
-                        if (GetReducedImage(percent, "c:\\dddddddddd\\LsTemp\\_" + imgName + ".JPG"))
+                        //存放縮略圖的路徑
+                        if (GetReducedImage(percent, foldername + "\\_" + imgName + ".JPG"))
                         {
-                            imageList1.Images.Add(i.ToString(), Image.FromFile("c:\\dddddddddd\\LsTemp\\_" + imgName + ".JPG"));
+                            imageList1.Images.Add(i.ToString(), Image.FromFile(foldername + "\\_" + imgName + ".JPG"));
                             a[0] = imgName + "." + imgType;
                             ListViewItem lvi = new ListViewItem(a);
                             lvi.ImageKey = i.ToString();
@@ -163,11 +169,11 @@ namespace ImgMicroimage
         {
             try
             {
-                DirectoryInfo di2 = new DirectoryInfo("c:\\dddddddddd\\LsTemp");
+                DirectoryInfo di2 = new DirectoryInfo(foldername);
                 if (di2.Exists)
                 {
                     Scripting.FileSystemObject fso = new Scripting.FileSystemObject();
-                    fso.DeleteFolder("c:\\dddddddddd\\LsTemp", true);
+                    fso.DeleteFolder(foldername, true);
                 }
             }
             catch
@@ -212,16 +218,12 @@ namespace ImgMicroimage
 
         private void button1_Click(object sender, EventArgs e)
         {
-            folderBrowserDialog1.SelectedPath = @"D:\_git\vcs\_1.data\______test_files1\_pic";
+            string folder = @"D:\_git\vcs\_1.data\______test_files1\__pic\_animals";
 
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                clv.Items.Clear();
-                filePath = folderBrowserDialog1.SelectedPath;
-                thread_ex = new Thread(new ThreadStart(a));
-                thread_ex.Start();
-            }
-
+            clv.Items.Clear();
+            filePath = folder;
+            thread_ex = new Thread(new ThreadStart(a));
+            thread_ex.Start();
         }
 
         private void button2_Click(object sender, EventArgs e)

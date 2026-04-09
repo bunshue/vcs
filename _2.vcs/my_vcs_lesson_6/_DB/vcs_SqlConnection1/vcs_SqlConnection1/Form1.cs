@@ -1903,6 +1903,101 @@ namespace vcs_SqlConnection1
 
         private void button19_Click(object sender, EventArgs e)
         {
+            //簡易測試
+
+            string db_filename = string.Empty;
+            string sqlstr = string.Empty;
+
+            // 資料庫檔案
+            db_filename = "Northwind.mdf";
+            /* ok
+            // 查詢字串
+            sqlstr = "SELECT * FROM 產品類別";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "全部資料 產品類別 有圖片";
+            */
+
+            /* ok
+            // 資料庫檔案
+            db_filename = "Northwind.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM 產品資料";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+            lb_dgv2.Text = "全部資料 產品資料";
+            */
+
+            /*
+            // 資料庫檔案
+            db_filename = "db_TomeOne.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM tb_Rectangle";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            // 資料庫檔案
+            db_filename = "db_TomeOne.mdf";
+            sqlstr = "SELECT TOP 4 * FROM tb_Rectangle ORDER BY t_Num DESC";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+
+            // 資料庫檔案
+            db_filename = "Database1.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM 產品類別";
+            sql_read_database(db_filename, sqlstr, dataGridView3);
+
+            // 資料庫檔案
+            db_filename = "Database1.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM 產品資料";
+            sql_read_database(db_filename, sqlstr, dataGridView4);
+            */
+
+            /*
+            // 資料庫檔案
+            db_filename = "db_TomeTwo.mdf";
+            // 查詢字串, 搜尋 表單 tb_Employee 欄位 工资 前4筆 降冪排列
+            sqlstr = "SELECT TOP 4 * FROM tb_Employee ORDER BY 工资 DESC";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            */
+
+            /*
+            // 資料庫檔案
+            db_filename = "db_TomeOne.mdf";
+            //string time_st = "2005/8/15";
+            //string time_sp = "2006/4/15";
+            //sqlstr = "SELECT * FROM tb_lottery WHERE t_year BETWEEN '" + time_st + "' AND '" + time_sp + "' ORDER BY t_year";
+            sqlstr = "SELECT * FROM tb_lottery WHERE t_year BETWEEN '2005/8/15' AND '2006/4/15' ORDER BY t_year";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "查詢使用指定時段 BETWEEN";
+
+            //查询指定时间段的数据
+
+            string time_st = "2005/7/1";
+            string time_sp = "2005/8/31";
+            // 查詢字串
+            sqlstr = string.Format("SELECT * FROM tb_Book WHERE 日期 BETWEEN '{0}' AND '{1}'", time_st, time_sp);
+            // 資料庫檔案
+            db_filename = "db_TomeTwo.mdf";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+            lb_dgv2.Text = "查詢使用指定時段 BETWEEN";
+            */
+
+            /*
+            // 資料庫檔案
+            db_filename = "db_TomeTwo.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM tb_Book";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            //查询已销售图书情况
+            // 資料庫檔案
+            db_filename = "db_TomeTwo.mdf";
+
+            // 查詢字串, 列出数据中的重复记录和记录条数
+            sqlstr = string.Format(@"SELECT COUNT(书号)AS 记录条数, 书号,书名,作者 FROM tb_Book GROUP BY 书号,书名,作者 HAVING COUNT(书号)>1");
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+            */
+
+
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -1960,48 +2055,6 @@ namespace vcs_SqlConnection1
                 dr.Close();												//关闭SqlDataReader对象
                 cn.Close();												//关闭数据库连接
             }
-            */
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-            /*
-            //全部資料
-
-            // 連接字串
-            //string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
-            // 資料庫檔案
-            string db_filename = "db_TomeTwo.mdf";
-            // 查詢字串
-            string sqlstr = "SELECT * FROM tb_Book";
-
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //查询指定时间段的数据
-
-            string time_st = "2005/7/1";
-            string time_sp = "2005/8/31";
-            richTextBox1.Text += "time_st\t" + time_st.ToString() + "\n";
-            richTextBox1.Text += "time_sp\t" + time_sp.ToString() + "\n";
-
-            // 查詢字串
-            sqlstr = string.Format("SELECT * FROM tb_Book WHERE 日期 BETWEEN '{0}' AND '{1}'", time_st, time_sp);
-            // 資料庫檔案
-            db_filename = "db_TomeTwo.mdf";
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-            */
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-            /*
-            // 資料庫檔案
-            string db_filename = "db_TomeTwo.mdf";
-            string sqlstr = string.Format("SELECT * FROM tb_Book");
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-            
-            //查询已销售图书情况
-            // 查詢字串, 列出数据中的重复记录和记录条数
-            sqlstr = string.Format(@"SELECT COUNT(书号)AS 记录条数, 书号,书名,作者 FROM tb_Book GROUP BY 书号,书名,作者 HAVING COUNT(书号)>1");
-            sql_read_database(db_filename, sqlstr, dataGridView2);
             */
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -2247,8 +2300,6 @@ namespace vcs_SqlConnection1
             {
                 richTextBox1.Text += ex.Message + "\n";
             }
-
-
         }
 
         private int SumYear(int Year)
@@ -2608,6 +2659,7 @@ namespace vcs_SqlConnection1
         private void btn_sql_test_Click(object sender, EventArgs e)
         {
             //SQL 簡易測試
+
             dataGridView1.Size = new Size(900, 400);
             dataGridView2.Visible = false;
             dataGridView3.Visible = false;
@@ -2618,7 +2670,8 @@ namespace vcs_SqlConnection1
 
             bt_previous.Location = new Point(40, 40);
             bt_next.Location = new Point(40, 40 + 100);
-            lb_index.Location = new Point(40+20, 40 + 56);
+            bt_new.Location = new Point(40, 40 + 100 + 100);
+            lb_index.Location = new Point(40 + 20, 40 + 56);
             tb_sql.Size = new Size(700, 200);
             tb_sql.Location = new Point(140, 40);
             lb_index.Text = "";
@@ -2694,7 +2747,9 @@ namespace vcs_SqlConnection1
             { "8", "vcs_sql09_db.mdf", "SELECT * FROM vcs_sql09_table", ""},
         };
 
-
+        private void bt_new_Click(object sender, EventArgs e)
+        {
+        }
     }
 }
 
@@ -2771,23 +2826,6 @@ SQL不同的連線方式
 
 
 /*
-            //可用的資料庫與表單
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
-            // 查詢字串
-            string sqlstr = "SELECT * FROM tb_Rectangle";
-            string sqlstr = "SELECT TOP 4 * FROM tb_Rectangle ORDER BY t_Num DESC";
-
-            // 連接字串
-           string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Database1.mdf;Integrated Security=True;Connect Timeout=30";
-// 查詢字串
-            string sqlstr = "SELECT * FROM 產品類別";
-// 查詢字串
-            //string sqlstr = "SELECT * FROM 產品資料";
-
-*/
-
-
-/*
 用MSSQLLocalDB
 AttachDbFilename=|DataDirectory|ch17DB.mdf  是 mdf 在 |DataDirectory|之下
 AttachDbFilename=D:\ch17DB.mdf 是 指定 mdf 的位置
@@ -2842,15 +2880,6 @@ Connect Timeout=30
 
 */
 
-
-/*
-可用
-            // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
-            // 查詢字串, 搜尋 表單 tb_Employee 欄位 工资 前4筆 降冪排列
-            sqlstr = "SELECT TOP 4 * FROM tb_Employee ORDER BY 工资 DESC";
-*/
-
 //            string sqlstr = "SELECT job_id AS 工作编号,job_desc AS 工作次序,min_lvl AS 最低水平,max_lvl AS 最高水平 FROM jobs";
 
 /*
@@ -2874,29 +2903,6 @@ Connect Timeout=30
                 dataGridView1.DataSource = ds;  // DGV設置數據源
                 dataGridView1.DataMember = "員工";                
 */
-/*
-            // 資料庫檔案
-            string db_filename = "Northwind.mdf";
-            // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);
-
-            // 查詢字串
-            string sqlstr1b = "SELECT * FROM 產品類別";
-            sql_read_database(db_filename, sqlstr1b, dataGridView1);
-            lb_dgv1.Text = "全部資料 產品類別";                 
-
-            // 查詢字串
-            string sqlstr2b = "SELECT * FROM 產品資料";
-            sql_read_database(db_filename, sqlstr2b, dataGridView2);
-            lb_dgv2.Text = "全部資料 產品資料";
-*/
-
-/*  準備加入
-            cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
-            string time_st = "2005/8/15";
-            string time_sp = "2006/4/15";
-            sqlstr = "SELECT * FROM tb_lottery WHERE t_year BETWEEN '" + time_st + "' AND '" + time_sp + "' ORDER BY t_year";
-*/
 
 
 //SqlDataAdapter 資料庫適配器對象 数据库桥接器对象 數據讀取器
@@ -2906,11 +2912,6 @@ Connect Timeout=30
 Q : 如何清空一個資料庫表單
 drop?
 */
-
-
-
-
-
 
 /*
 更新資料 UPDATE
@@ -2923,8 +2924,6 @@ string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.md
         cmd.ExecuteNonQuery();//執行SQL語句
         cn.Close();//關閉數據庫連接
         richTextBox1.Text += "修改成功\n";
-
-
 */
 
 //listView1.View = View.Details;//圖示
