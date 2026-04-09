@@ -9,7 +9,6 @@ using System.Windows.Forms;
 
 using System.IO;
 using System.Drawing.Imaging;
-using System.Threading;
 
 namespace IMGAddDate
 {
@@ -23,7 +22,6 @@ namespace IMGAddDate
         string ptm;
         Bitmap bitmap1;
         Graphics g;
-        Thread td;
 
         //字串一維陣列
         string[] pic_array =
@@ -45,10 +43,6 @@ namespace IMGAddDate
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (td != null)
-            {
-                td.Abort();
-            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -76,8 +70,7 @@ namespace IMGAddDate
             }
             else
             {
-                td = new Thread(new ThreadStart(AddDate));
-                td.Start();
+                AddDate();
             }
         }
 

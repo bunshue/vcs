@@ -27,6 +27,7 @@ namespace vcs_Thread
         private Thread thread_ex8a;
         private Thread thread_ex8b;
         private Thread thread_ex10;
+        private Thread thread_ex11;
 
         private bool flag_thread_running0 = false;
         private bool flag_thread_running2a = false;
@@ -108,6 +109,11 @@ namespace vcs_Thread
             }
             */
 
+            if (thread_ex11 != null)
+            {
+                thread_ex11.Abort();
+            }
+
             //C# 強制關閉 Process
             Process.GetCurrentProcess().Kill();
 
@@ -139,6 +145,7 @@ namespace vcs_Thread
             groupBox8.Size = new Size(W, H);
             groupBox9.Size = new Size(W, H);
             groupBox10.Size = new Size(W, H);
+            groupBox13.Size = new Size(W, H);
             groupBox12.Size = new Size(W * 2 / 3, H + 50);
 
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -153,6 +160,7 @@ namespace vcs_Thread
             groupBox8.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             groupBox9.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             groupBox10.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            groupBox13.Location = new Point(x_st + dx * 3, y_st + dy * 2);
             groupBox11.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             richTextBox1.Size = new Size(220, 540);
             richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
@@ -906,11 +914,8 @@ namespace vcs_Thread
 
 
         //Thread使用範例 CPU使用率 ST
-
         Thread td;
         int mheight = 0;
-
-
         private void CreateImage()
         {
             int i = panel3.Height / 100;
@@ -923,9 +928,6 @@ namespace vcs_Thread
             panel3.BackgroundImage = image;
         }
 
-
-
-
         int cpu_count = 0;
         private void myUser()
         {
@@ -933,21 +935,78 @@ namespace vcs_Thread
             lb_cpu2.Text = "CPU使用率：" + lb_cpu1.Text;
             mheight = Convert.ToInt32(cpu_count.ToString());
             if (mheight == 100)
+            {
                 panel3.Height = 100;
+            }
             CreateImage();
             cpu_count += 3;
             if (cpu_count > 100)
+            {
                 cpu_count -= 100;
+            }
         }
-
 
         private void timer11_Tick(object sender, EventArgs e)
         {
             td = new Thread(new ThreadStart(myUser));
             td.Start();
         }
-
         //Thread使用範例 CPU使用率 SP
+
+        private void button110_Click(object sender, EventArgs e)
+        {
+            thread_ex11 = new Thread(new ThreadStart(ThreadProc_ex11));
+            thread_ex11.Start();
+
+            /*
+            //看 thread的狀態
+            while (thread_ex11.ThreadState != ThreadState.Stopped)
+            {
+                richTextBox1.Text += "忙碌中\n";
+                richTextBox1.Text += thread_ex11.IsBackground + "\n";//看是否為後台/前台線程
+                Application.DoEvents();
+                Thread.Sleep(500);//當前執行緒 休息100ms
+            }
+            richTextBox1.Text += "完成\n";
+            */
+
+            /*
+            //執行緒等待
+            thread_ex11.Join(500);//最多等待500ms
+            Console.WriteLine("最多等待500ms");
+            thread_ex11.Join();//主執行緒等待thread_ex11完成, 主執行緒會卡在這裡, 等thread_ex11做完
+            */
+        }
+
+        private void ThreadProc_ex11()
+        {
+            richTextBox1.Text += "要做很久的事 ST\t";
+            delay(5000);
+            richTextBox1.Text += "要做很久的事 SP\t";
+        }
+
+        //delay 10000 約 10秒
+        //C# 不lag的延遲時間
+        private void delay(double delay_milliseconds)
+        {
+            delay_milliseconds *= 2;
+            DateTime time_before = DateTime.Now;
+            while (((TimeSpan)(DateTime.Now - time_before)).TotalMilliseconds < delay_milliseconds)
+            {
+                Application.DoEvents();
+            }
+        }
+
+        private void button111_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button112_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 
     // This class's Run method displays a count in the Output window.
@@ -1156,6 +1215,25 @@ namespace vcs_Thread
 }
 
 
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+
+
 /*
 
                 //一秒執行一次
@@ -1166,3 +1244,4 @@ namespace vcs_Thread
 
  
 */
+

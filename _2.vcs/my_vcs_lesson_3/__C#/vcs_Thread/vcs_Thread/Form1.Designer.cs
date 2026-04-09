@@ -94,6 +94,10 @@
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.button101 = new System.Windows.Forms.Button();
             this.button100 = new System.Windows.Forms.Button();
+            this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.button112 = new System.Windows.Forms.Button();
+            this.button111 = new System.Windows.Forms.Button();
+            this.button110 = new System.Windows.Forms.Button();
             this.groupBox0.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -108,6 +112,7 @@
             this.groupBox12.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox10.SuspendLayout();
+            this.groupBox13.SuspendLayout();
             this.SuspendLayout();
             // 
             // bt_clear
@@ -764,7 +769,7 @@
             this.groupBox10.Size = new System.Drawing.Size(150, 150);
             this.groupBox10.TabIndex = 34;
             this.groupBox10.TabStop = false;
-            this.groupBox10.Text = "Thread使用範例9";
+            this.groupBox10.Text = "Thread使用範例10";
             // 
             // button101
             // 
@@ -785,11 +790,54 @@
             this.button100.UseVisualStyleBackColor = true;
             this.button100.Click += new System.EventHandler(this.button100_Click);
             // 
+            // groupBox13
+            // 
+            this.groupBox13.Controls.Add(this.button112);
+            this.groupBox13.Controls.Add(this.button111);
+            this.groupBox13.Controls.Add(this.button110);
+            this.groupBox13.Location = new System.Drawing.Point(480, 325);
+            this.groupBox13.Name = "groupBox13";
+            this.groupBox13.Size = new System.Drawing.Size(150, 150);
+            this.groupBox13.TabIndex = 34;
+            this.groupBox13.TabStop = false;
+            this.groupBox13.Text = "Thread使用範例11";
+            // 
+            // button112
+            // 
+            this.button112.Location = new System.Drawing.Point(23, 104);
+            this.button112.Name = "button112";
+            this.button112.Size = new System.Drawing.Size(90, 30);
+            this.button112.TabIndex = 2;
+            this.button112.Text = "狀態";
+            this.button112.UseVisualStyleBackColor = true;
+            this.button112.Click += new System.EventHandler(this.button112_Click);
+            // 
+            // button111
+            // 
+            this.button111.Location = new System.Drawing.Point(23, 59);
+            this.button111.Name = "button111";
+            this.button111.Size = new System.Drawing.Size(90, 30);
+            this.button111.TabIndex = 1;
+            this.button111.Text = "停止";
+            this.button111.UseVisualStyleBackColor = true;
+            this.button111.Click += new System.EventHandler(this.button111_Click);
+            // 
+            // button110
+            // 
+            this.button110.Location = new System.Drawing.Point(23, 21);
+            this.button110.Name = "button110";
+            this.button110.Size = new System.Drawing.Size(90, 30);
+            this.button110.TabIndex = 0;
+            this.button110.Text = "啟動";
+            this.button110.UseVisualStyleBackColor = true;
+            this.button110.Click += new System.EventHandler(this.button110_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(781, 601);
+            this.Controls.Add(this.groupBox13);
             this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.groupBox12);
             this.Controls.Add(this.groupBox11);
@@ -827,6 +875,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.groupBox10.ResumeLayout(false);
+            this.groupBox13.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -898,6 +947,10 @@
         private System.Windows.Forms.GroupBox groupBox10;
         private System.Windows.Forms.Button button101;
         private System.Windows.Forms.Button button100;
+        private System.Windows.Forms.GroupBox groupBox13;
+        private System.Windows.Forms.Button button112;
+        private System.Windows.Forms.Button button111;
+        private System.Windows.Forms.Button button110;
     }
 }
 

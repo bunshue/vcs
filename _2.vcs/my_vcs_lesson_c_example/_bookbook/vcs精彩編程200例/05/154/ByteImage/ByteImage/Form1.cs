@@ -24,12 +24,7 @@ namespace ByteImage
             string pic_filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             pictureBox1.Image = Image.FromFile(pic_filename);
 
-
-            // 資料庫檔案
-            string db_filename = "db_TomeTwo.mdf";
-            //da = new SqlDataAdapter("select name as 用户名称 from tb_Image", cn);
-            string sqlstr = string.Format("SELECT * FROM tb_Image");
-            sql_read_database(db_filename, sqlstr, dataGridView1);
+            show_data();
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -65,8 +60,10 @@ namespace ByteImage
 
         private void button2_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "添加用戶訊息\n";
+
             string pic_filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            string user_name = "david wang aaa";  // 用戶名稱
+            string user_name = "david wang aaaccc";  // 用戶名稱
 
             //添加用户信息
             if (AddInfo(user_name, pic_filename))
@@ -78,11 +75,7 @@ namespace ByteImage
                 richTextBox1.Text += "加入用戶信息 NG, 已經存在該用戶\n";
             }
 
-            // 資料庫檔案
-            string db_filename = "db_TomeTwo.mdf";
-            //da = new SqlDataAdapter("select name as 用户名称 from tb_Image", cn);
-            string sqlstr = string.Format("SELECT * FROM tb_Image");
-            sql_read_database(db_filename, sqlstr, dataGridView2);
+            show_data();
         }
 
         // 添加用户信息
@@ -125,6 +118,15 @@ namespace ByteImage
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        void show_data()
+        {
+            // 資料庫檔案
+            string db_filename = "db_TomeTwo.mdf";
+            //da = new SqlDataAdapter("select name as 用户名称 from tb_Image", cn);
+            string sqlstr = string.Format("SELECT * FROM tb_Image");
+            sql_read_database(db_filename, sqlstr, dataGridView1);
         }
 
         void sql_read_database(string db_filename, string sqlstr, DataGridView dgv)

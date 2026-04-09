@@ -26,12 +26,12 @@ namespace GetDataStruct
 
         private void frmOutData_Load(object sender, EventArgs e)
         {
-            groupBox1.Text = "数据表名称：" + OutTable;
+            groupBox1.Text = "计沮嘿" + OutTable;
             try
             {
                 using (SqlConnection con = new SqlConnection("Server=" + strserver + ";database=" + OutData + ";Uid=" + struser + ";Pwd=" + strpwd))
                 {
-                    string strSql = "select * from "+OutTable+"";
+                    string strSql = "select * from " + OutTable + "";
                     con.Open();
                     SqlDataAdapter da = new SqlDataAdapter(strSql, con);
                     System.Data.DataTable dt = new System.Data.DataTable();
@@ -42,7 +42,7 @@ namespace GetDataStruct
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(ex.Message, "牡", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -51,10 +51,10 @@ namespace GetDataStruct
             this.Close();
         }
 
-        public void ExportData(DataGridView srcDgv,string fileName)//导出数据,传入一个datagridview和一个文件路径
+        public void ExportData(DataGridView srcDgv, string fileName)//旧计沮,肚datagridview㎝ゅン隔畖
         {
-            string type = fileName.Substring(fileName.IndexOf(".")+1);//获得数据类型
-            if (type.Equals("xls", StringComparison.CurrentCultureIgnoreCase))//Excel文档
+            string type = fileName.Substring(fileName.IndexOf(".") + 1);//莉眔计沮摸
+            if (type.Equals("xls", StringComparison.CurrentCultureIgnoreCase))//Excelゅ郎
             {
                 Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
                 try
@@ -62,11 +62,11 @@ namespace GetDataStruct
                     excel.DisplayAlerts = false;
                     excel.Workbooks.Add(true);
                     excel.Visible = false;
-                    for (int i = 0; i < srcDgv.Columns.Count; i++)//设置标题
+                    for (int i = 0; i < srcDgv.Columns.Count; i++)//砞竚夹肈
                     {
                         excel.Cells[2, i + 1] = srcDgv.Columns[i].HeaderText;
                     }
-                    for (int i = 0; i < srcDgv.Rows.Count; i++)//填充数据
+                    for (int i = 0; i < srcDgv.Rows.Count; i++)//恶计沮
                     {
                         for (int j = 0; j < srcDgv.Columns.Count; j++)
                         {
@@ -80,7 +80,7 @@ namespace GetDataStruct
                             }
                         }
                     }
-                    excel.Workbooks[1].SaveCopyAs(fileName);//保存
+                    excel.Workbooks[1].SaveCopyAs(fileName);//玂
                 }
                 finally
                 {
@@ -88,24 +88,24 @@ namespace GetDataStruct
                 }
                 return;
             }
-            //保存Word文件
+            //玂Wordゅン
             if (type.Equals("doc", StringComparison.CurrentCultureIgnoreCase))
             {
                 object path = fileName;
                 Object none = System.Reflection.Missing.Value;
                 Microsoft.Office.Interop.Word.Application wordApp = new Microsoft.Office.Interop.Word.Application();
                 Microsoft.Office.Interop.Word.Document document = wordApp.Documents.Add(ref none, ref none, ref none, ref none);
-                //建立表格
+                //ミ
                 Microsoft.Office.Interop.Word.Table table = document.Tables.Add(document.Paragraphs.Last.Range, srcDgv.Rows.Count + 1, srcDgv.Columns.Count, ref none, ref none);
                 try
                 {
 
-                    for (int i = 0; i < srcDgv.Columns.Count; i++)//设置标题
+                    for (int i = 0; i < srcDgv.Columns.Count; i++)//砞竚夹肈
                     {
                         table.Cell(1, i + 1).Range.Text = srcDgv.Columns[i].HeaderText;
                     }
 
-                    for (int i = 0; i < srcDgv.Rows.Count; i++)//填充数据
+                    for (int i = 0; i < srcDgv.Rows.Count; i++)//恶计沮
                     {
                         for (int j = 0; j < srcDgv.Columns.Count; j++)
                         {
@@ -113,10 +113,10 @@ namespace GetDataStruct
                             if (a == "System.Byte[]")
                             {
                                 PictureBox pp = new PictureBox();
-                                byte[] pic = (byte[])(srcDgv[j, i].Value); //将数据库中的图片转换成二进制流
-                                MemoryStream ms = new MemoryStream(pic);	//将字节数组存入到二进制流中
-                                pp.Image = Image.FromStream(ms);           //二进制流Image控件中显示
-                                pp.Image.Save(@"C:\wxk.bmp");               //将图片存入到指定的路径
+                                byte[] pic = (byte[])(srcDgv[j, i].Value); //盢计沮畐い瓜锣传Θ秈瑈
+                                MemoryStream ms = new MemoryStream(pic);	//盢竊计舱秈瑈い
+                                pp.Image = Image.FromStream(ms);           //秈瑈Image北ンい陪ボ
+                                pp.Image.Save(@"C:\wxk.bmp");               //盢瓜﹚隔畖
                                 object aaa = table.Cell(i + 2, j + 1).Range;
                                 wordApp.Selection.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
                                 wordApp.Selection.InlineShapes.AddPicture(@"C:\wxk.bmp", ref none, ref none, ref aaa);

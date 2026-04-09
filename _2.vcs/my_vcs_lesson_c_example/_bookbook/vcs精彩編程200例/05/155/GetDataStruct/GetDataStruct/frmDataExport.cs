@@ -6,41 +6,39 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Data.SqlClient;
+
 using System.IO;
+using System.Data.SqlClient;
 
 namespace GetDataStruct
 {
     public partial class frmDataExport : Form
     {
-        public frmDataExport()
-        {
-            InitializeComponent();
-        }
-        public string OutData ="";
+        public string OutData = "";
         public string OutTable = "";
         public string strserver = "";
         public string struser = "";
         public string strpwd = "";
 
-        private void button2_Click(object sender, EventArgs e)
+        public frmDataExport()
         {
-            this.Close();
+            InitializeComponent();
         }
 
         private void frmDataExport_Load(object sender, EventArgs e)
         {
-            groupBox1.Text = "数据表名称：" + OutTable ;
+            groupBox1.Text = "计沮嘿" + OutTable;
+
             try
             {
                 using (SqlConnection con = new SqlConnection("Server=" + strserver + ";database=" + OutData + ";Uid=" + struser + ";Pwd=" + strpwd))
                 {
-                    string strSql = "select  name 字段名, xusertype 类型编号, length 长度 into hy_Linshibiao from  syscolumns  where id=object_id('" + OutTable + "') ";
-                    strSql += "select name 类型,xusertype 类型编号 into angel_Linshibiao from systypes where xusertype in (select xusertype from syscolumns where id=object_id('" + OutTable + "'))";
+                    string strSql = "select  name 琿, xusertype 摸絪腹, length  into hy_Linshibiao from  syscolumns  where id=object_id('" + OutTable + "') ";
+                    strSql += "select name 摸,xusertype 摸絪腹 into angel_Linshibiao from systypes where xusertype in (select xusertype from syscolumns where id=object_id('" + OutTable + "'))";
                     con.Open();
                     SqlCommand cmd = new SqlCommand(strSql, con);
                     cmd.ExecuteNonQuery();
-                    SqlDataAdapter da = new SqlDataAdapter("select 字段名,类型,长度 from hy_Linshibiao t,angel_Linshibiao b where t.类型编号=b.类型编号", con);
+                    SqlDataAdapter da = new SqlDataAdapter("select 琿,摸, from hy_Linshibiao t,angel_Linshibiao b where t.摸絪腹=b.摸絪腹", con);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
                     this.dataGridView1.DataSource = dt.DefaultView;
@@ -51,11 +49,11 @@ namespace GetDataStruct
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(ex.Message, "牡", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
-        private void SaveAs() //导出成Excel
+        private void SaveAs() //旧ΘExcel
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Execl files (*.xls)|*.xls";
@@ -70,17 +68,17 @@ namespace GetDataStruct
             string str = "";
             try
             {
-                //写标题
+                //糶夹肈
                 for (int i = 0; i < dataGridView1.ColumnCount; i++)
                 {
-                   if (i > 0)
+                    if (i > 0)
                     {
                         str += "\t";
                     }
                     str += dataGridView1.Columns[i].HeaderText;
                 }
                 sw.WriteLine(str);
-                //写内容
+                //糶ず甧
                 for (int j = 0; j < dataGridView1.Rows.Count; j++)
                 {
                     string tempStr = "";
@@ -108,14 +106,14 @@ namespace GetDataStruct
             }
         }
 
-        public void ExportData(DataGridView srcDgv, string fileName)//导出数据,传入一个datagridview和一个文件路径
+        public void ExportData(DataGridView srcDgv, string fileName)//旧计沮,肚datagridview㎝ゅン隔畖
         {
-            string type = fileName.Substring(fileName.IndexOf(".") + 1);//获得数据类型
-            if (type.Equals("xls", StringComparison.CurrentCultureIgnoreCase))//Excel文档
+            string type = fileName.Substring(fileName.IndexOf(".") + 1);//莉眔计沮摸
+            if (type.Equals("xls", StringComparison.CurrentCultureIgnoreCase))//Excelゅ郎
             {
                 SaveAs();
             }
-            //保存Word文件
+            //玂Wordゅン
             if (type.Equals("doc", StringComparison.CurrentCultureIgnoreCase))
             {
 
@@ -123,15 +121,15 @@ namespace GetDataStruct
                 Object none = System.Reflection.Missing.Value;
                 Microsoft.Office.Interop.Word.Application wordApp = new Microsoft.Office.Interop.Word.Application();
                 Microsoft.Office.Interop.Word.Document document = wordApp.Documents.Add(ref none, ref none, ref none, ref none);
-                //建立表格
+                //ミ
                 Microsoft.Office.Interop.Word.Table table = document.Tables.Add(document.Paragraphs.Last.Range, srcDgv.Rows.Count + 1, srcDgv.Columns.Count, ref none, ref none);
                 try
                 {
-                    for (int i = 0; i < srcDgv.Columns.Count; i++)//设置标题
+                    for (int i = 0; i < srcDgv.Columns.Count; i++)//砞竚夹肈
                     {
                         table.Cell(1, i + 1).Range.Text = srcDgv.Columns[i].HeaderText;
                     }
-                    for (int i = 0; i < srcDgv.Rows.Count; i++)//填充数据
+                    for (int i = 0; i < srcDgv.Rows.Count; i++)//恶计沮
                     {
                         for (int j = 0; j < srcDgv.Columns.Count; j++)
                         {
@@ -163,7 +161,12 @@ namespace GetDataStruct
             if (radioButton2.Checked == true)
             {
                 SaveAs();
-            }  
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
