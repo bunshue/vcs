@@ -19,7 +19,7 @@ namespace ScanPort
         //實例化DirectoryEntry對象，以便獲得局域網組名和計算機名
         DirectoryEntry DEMain = new DirectoryEntry("WinNT:");
         TcpClient TClient = null;       //實例化連接偵聽對象
-        private Thread myThread;        //實例化線程對象
+        private Thread thread_ex;        //實例化線程對象
         string strName = "";            //記錄選擇的計算機名稱
         int intflag = 0;                //掃描到的端口號
         int intport = 0;                //記錄已用端口號
@@ -34,6 +34,7 @@ namespace ScanPort
         private void Form1_Load(object sender, EventArgs e)
         {
             richTextBox1.Text += "遍歷局域網中的工作組，并顯示在下拉列表控件中\n";
+
             //遍歷局域網中的工作組，并顯示在下拉列表控件中
             foreach (DirectoryEntry DEGroup in DEMain.Children)
             {
@@ -80,8 +81,8 @@ namespace ScanPort
                     intstart = Convert.ToInt32(textBox1.Text);  //為開始掃描的端口號賦值
                     intend = Convert.ToInt32(textBox2.Text);    //為結束掃描的端口號賦值
                     //使用自定義方法StartScan實例化線程對象
-                    myThread = new Thread(new ThreadStart(this.StartScan));
-                    myThread.Start();                           //開始運行掃描端口號的線程
+                    thread_ex = new Thread(new ThreadStart(this.StartScan));
+                    thread_ex.Start();                           //開始運行掃描端口號的線程
                 }
                 else
                 {
@@ -89,12 +90,12 @@ namespace ScanPort
                     timer1.Stop();              //停止運行計時器
                     //設置進度條的值為最大值
                     progressBar1.Value = Convert.ToInt32(textBox2.Text);
-                    if (myThread != null)       //判斷線程對象是否為空
+                    if (thread_ex != null)       //判斷線程對象是否為空
                     {
                         //判斷掃描端口號的線程是否正在運行
-                        if (myThread.ThreadState == ThreadState.Running)
+                        if (thread_ex.ThreadState == ThreadState.Running)
                         {
-                            myThread.Abort();   //終止線程
+                            thread_ex.Abort();   //終止線程
                         }
                     }
                 }
@@ -104,12 +105,12 @@ namespace ScanPort
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (myThread != null)               //判斷線程對象是否為空
+            if (thread_ex != null)               //判斷線程對象是否為空
             {
                 //判斷掃描端口號的線程是否正在運行
-                if (myThread.ThreadState == ThreadState.Running)
+                if (thread_ex.ThreadState == ThreadState.Running)
                 {
-                    myThread.Abort();           //終止線程
+                    thread_ex.Abort();           //終止線程
                 }
             }
         }
@@ -154,9 +155,7 @@ namespace ScanPort
             }
         }
 
-        /// <summary>
-        /// 掃描端口號
-        /// </summary>
+        // 掃描端口號
         private void StartScan()
         {
             while (true)
@@ -178,4 +177,3 @@ namespace ScanPort
         }
     }
 }
-

@@ -50,7 +50,7 @@ namespace vcs_Thread
             Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
 
             //CheckForIllegalCrossThreadCalls = false; 另法
-            myUser();
+            get_cpu_useage();
 
             Thread.CurrentThread.Name = "MainThread";
 
@@ -129,8 +129,8 @@ namespace vcs_Thread
             int dx = 140 + 50;
             int dy = 50 + 15;
 
-            W = 150;
-            H = 150;
+            W = 180;
+            H = 180;
             dx = W + BORDER;
             dy = H + BORDER;
 
@@ -146,7 +146,7 @@ namespace vcs_Thread
             groupBox9.Size = new Size(W, H);
             groupBox10.Size = new Size(W, H);
             groupBox13.Size = new Size(W, H);
-            groupBox12.Size = new Size(W * 2 / 3, H + 50);
+            groupBox12.Size = new Size(W * 2 / 3, H + 40);
 
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
@@ -162,8 +162,8 @@ namespace vcs_Thread
             groupBox10.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             groupBox13.Location = new Point(x_st + dx * 3, y_st + dy * 2);
             groupBox11.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            richTextBox1.Size = new Size(220, 540);
-            richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
+            richTextBox1.Size = new Size(370, 690);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 130, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             x_st = BORDER * 2;
@@ -207,7 +207,7 @@ namespace vcs_Thread
             button100.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button101.Location = new Point(x_st + dx * 0, y_st + dy * 2);
 
-            this.Size = new Size(1000, 650);
+            this.Size = new Size(1300, 750);
             this.Text = "vcs_Thread";
 
             //設定執行後的表單起始位置, 正中央
@@ -239,14 +239,14 @@ namespace vcs_Thread
             richTextBox1.Text += "啟動 thread 0\n";
 
             flag_thread_running0 = true;
-            //thread_ex0 = new Thread(new ThreadStart(ThreadProc_ex0)); same
-            thread_ex0 = new Thread(ThreadProc_ex0);
 
+            //thread_ex0 = new Thread(ThreadProc_ex0);//same
+            thread_ex0 = new Thread(new ThreadStart(ThreadProc_ex0));
             thread_ex0.Name = "Thread_ex0";
-            //thread_ex0.IsBackground = true;  //設定為背景執行緒
-            richTextBox1.Text += "啟動 thread 0, 名稱 : " + thread_ex0.Name + "\n";
-
+            //thread_ex0.IsBackground = true;  //設定為背景執行緒, 這樣能隨主程序一起結束
             thread_ex0.Start();
+
+            richTextBox1.Text += "啟動 thread 0, 名稱 : " + thread_ex0.Name + "\n";
         }
 
         private void button01_Click(object sender, EventArgs e)
@@ -277,6 +277,7 @@ namespace vcs_Thread
 
                 if (thread_ex0.IsAlive == true)
                 {
+                    //是否為 背景執行緒
                     richTextBox1.Text += "IsBackground\t" + thread_ex0.IsBackground.ToString() + "\n";
                 }
             }
@@ -322,16 +323,9 @@ namespace vcs_Thread
             richTextBox1.Text += "開啟thread, 編號 " + thread_num.ToString() + "\n";
             thread_num++;
 
-            // Make a thread to run the object's Run method.
-            Thread thread_ex9 = new Thread(new_counter.ThreadProc_ex9);
-
-            // Make this a background thread so it automatically
-            // aborts when the main program stops.
-            thread_ex9.IsBackground = true;
-
-            // Start the thread.
-            thread_ex9.Start();
-
+            Thread thread_ex9a = new Thread(new_counter.ThreadProc_ex9);
+            thread_ex9a.IsBackground = true;  //設定為背景執行緒, 這樣能隨主程序一起結束
+            thread_ex9a.Start();
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -473,7 +467,7 @@ namespace vcs_Thread
                 }
             }));
             thread_ex3.Name = " --start tray thread";
-            thread_ex3.IsBackground = true;
+            thread_ex3.IsBackground = true;  //設定為背景執行緒, 這樣能隨主程序一起結束
             thread_ex3.Priority = ThreadPriority.Lowest;
             thread_ex3.Start(null);
         }
@@ -505,8 +499,6 @@ namespace vcs_Thread
             }
             richTextBox1.Text += "\n結束 ThreadProc_ex10\n";
         }
-
-
 
         private void button40_Click(object sender, EventArgs e)
         {
@@ -626,7 +618,7 @@ namespace vcs_Thread
             Counter2 new_counter = new Counter2(thread_name);
             Thread thread = new Thread(new_counter.ThreadProc_ex7);
             thread.Priority = thread_priority;
-            thread.IsBackground = true;
+            thread.IsBackground = true;  //設定為背景執行緒, 這樣能隨主程序一起結束
             thread.Name = thread_name;
 
             // Start the thread.
@@ -704,7 +696,7 @@ namespace vcs_Thread
                 flag_thread_running8a = true;
                 thread_ex8a = new Thread(ThreadProc_ex8a);
                 thread_ex8a.Priority = ThreadPriority.BelowNormal;
-                thread_ex8a.IsBackground = true;
+                thread_ex8a.IsBackground = true;  //設定為背景執行緒, 這樣能隨主程序一起結束
                 thread_ex8a.Start();
             }
         }
@@ -732,7 +724,7 @@ namespace vcs_Thread
                 richTextBox1.Text += "等thread_ex8a 執行完，thread_ex8b 再繼續執行\n";
                 thread_ex8b = new Thread(ThreadProc_ex8b);
                 thread_ex8b.Priority = ThreadPriority.BelowNormal;
-                thread_ex8b.IsBackground = true;
+                thread_ex8b.IsBackground = true;  //設定為背景執行緒, 這樣能隨主程序一起結束
                 thread_ex8b.Start();
                 flag_thread_running8b = true;
             }
@@ -765,7 +757,6 @@ namespace vcs_Thread
         //Thread使用範例9 ST
 
         //開啟一個線程
-        int thread_ex9_count = 0;
 
         //給文本框賦值
         private void SetValue(string str, object obj)
@@ -777,22 +768,23 @@ namespace vcs_Thread
             }
         }
 
+        int thread_ex9b_count = 0;
         private void button90_Click(object sender, EventArgs e)
         {
             //將委托的方法和主窗體傳過去
             NEWThreadClass threadOneClass = new NEWThreadClass(SetValue, this);
 
-            thread_ex9_count++;
-            string thread_name = "Thread測試_" + thread_ex9_count.ToString();
+            thread_ex9b_count++;
+            string thread_name = "Thread測試_" + thread_ex9b_count.ToString();
 
-            Thread TheThreadOne = new Thread(threadOneClass.threadOne);//不需要ThreadStart()也可以
-            TheThreadOne.Name = thread_name;
+            Thread thread_ex9b = new Thread(threadOneClass.threadOne);//不需要ThreadStart()也可以
+            thread_ex9b.Name = thread_name;
 
-            richTextBox1.Text += "開啟thread, 名稱 : " + TheThreadOne.Name + "\n";
+            richTextBox1.Text += "開啟thread, 名稱 : " + thread_ex9b.Name + "\n";
 
             //讓線程變為後台線程（默認是前台的），這樣主線程結束了，這個線程也會結束。要不然，任何前台線程在運行都會保持程序存活。
-            TheThreadOne.IsBackground = true;
-            TheThreadOne.Start();
+            thread_ex9b.IsBackground = true;  //設定為背景執行緒, 這樣能隨主程序一起結束
+            thread_ex9b.Start();
         }
 
         private void button91_Click(object sender, EventArgs e)
@@ -808,7 +800,7 @@ namespace vcs_Thread
 
         delegate void Delegate_do();
 
-        static void ThreadRun()
+        static void ThreadProc_ex10b()
         {
             try
             {
@@ -852,11 +844,10 @@ namespace vcs_Thread
 
         private void button100_Click(object sender, EventArgs e)
         {
-            //主線程中啟動一個支線程,執行doSomething這樣的一個方法。
-            Thread thread = new Thread(new ThreadStart(ThreadRun));
-            thread.IsBackground = true;//這樣能隨主程序一起結束
-            thread.Start();
-
+            //主線程中啟動一個支線程, 執行doSomething這樣的一個方法。
+            Thread thread_ex10b = new Thread(new ThreadStart(ThreadProc_ex10b));
+            thread_ex10b.IsBackground = true;  //設定為背景執行緒, 這樣能隨主程序一起結束
+            thread_ex10b.Start();
         }
 
         private void button101_Click(object sender, EventArgs e)
@@ -914,7 +905,7 @@ namespace vcs_Thread
 
 
         //Thread使用範例 CPU使用率 ST
-        Thread td;
+        Thread thread_cpu;
         int mheight = 0;
         private void CreateImage()
         {
@@ -929,7 +920,7 @@ namespace vcs_Thread
         }
 
         int cpu_count = 0;
-        private void myUser()
+        private void get_cpu_useage()
         {
             lb_cpu1.Text = cpu_count.ToString() + " %";
             lb_cpu2.Text = "CPU使用率：" + lb_cpu1.Text;
@@ -948,8 +939,8 @@ namespace vcs_Thread
 
         private void timer11_Tick(object sender, EventArgs e)
         {
-            td = new Thread(new ThreadStart(myUser));
-            td.Start();
+            thread_cpu = new Thread(new ThreadStart(get_cpu_useage));
+            thread_cpu.Start();
         }
         //Thread使用範例 CPU使用率 SP
 
@@ -1004,6 +995,7 @@ namespace vcs_Thread
 
         private void button112_Click(object sender, EventArgs e)
         {
+            //狀態
 
         }
 
@@ -1214,7 +1206,6 @@ namespace vcs_Thread
     }
 }
 
-
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
@@ -1236,12 +1227,12 @@ namespace vcs_Thread
 
 /*
 
-                //一秒執行一次
-                Thread.Sleep(1000); //停一秒
+//一秒執行一次
+Thread.Sleep(1000); //停一秒
 
-                    //richTextBox1.Text += "XX ";
-                    Console.Write("XX ");
+//richTextBox1.Text += "XX ";
+Console.Write("XX ");
 
- 
+
 */
 

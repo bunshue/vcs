@@ -8,10 +8,10 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
+using System.Threading;
 using System.Collections;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
-using System.Threading;
 
 namespace CompressImg
 {
@@ -22,7 +22,7 @@ namespace CompressImg
         ArrayList al = new ArrayList();
         string ImgSavePath = "";
         string strSourcePath = "";
-        Thread td;
+        Thread thread_ex;
         Image ig = null;
         string strSavePath = "";
 
@@ -36,15 +36,11 @@ namespace CompressImg
             CheckForIllegalCrossThreadCalls = false;
         }
 
-        /// <summary>
-        /// 无损图片缩放
-        /// </summary>
+        // 无损图片缩放
         /// <param name="sFile">图片的原始路径</param>
         /// <param name="dFile">缩放后图片的保存路径</param>
         /// <param name="dHeight">缩放后图片的高度</param>
         /// <param name="dWidth">缩放后图片的宽度</param>
-        /// <returns></returns>
-
         public static bool GetPicThumbnail(string sFile, string dFile, int dHeight, int dWidth)
         {
             Image iSource = Image.FromFile(sFile);
@@ -213,8 +209,8 @@ namespace CompressImg
                 pictureBox1.Enabled = false;
                 pictureBox2.Enabled = false;
                 rbPercent.Enabled = false;
-                td = new Thread(new ThreadStart(this.CompleteIMG));
-                td.Start();
+                thread_ex = new Thread(new ThreadStart(this.CompleteIMG));
+                thread_ex.Start();
             }
             else
             {
@@ -238,9 +234,9 @@ namespace CompressImg
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (td != null)
+            if (thread_ex != null)
             {
-                td.Abort();
+                thread_ex.Abort();
             }
         }
     }

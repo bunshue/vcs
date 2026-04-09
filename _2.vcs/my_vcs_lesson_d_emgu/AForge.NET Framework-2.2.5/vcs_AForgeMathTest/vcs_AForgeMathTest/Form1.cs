@@ -12,6 +12,7 @@ using System.Drawing.Imaging;  // for PixelFormat
 using AForge;
 using AForge.Math;
 using AForge.Math.Geometry;
+using AForge.Math.Metrics;
 using AForge.Imaging;
 
 namespace vcs_AForgeMathTest
@@ -65,14 +66,24 @@ namespace vcs_AForgeMathTest
             button17.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 9);
+            button20.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 9);
 
             pictureBox1.Size = new Size(500, 300);
-            pictureBox1.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 0);
+            pictureBox1.Location = new System.Drawing.Point(x_st + dx * 3, y_st + dy * 0);
             richTextBox1.Size = new Size(500, 690 - 310);
-            richTextBox1.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 0 + 310);
+            richTextBox1.Location = new System.Drawing.Point(x_st + dx * 3, y_st + dy * 0 + 310);
             bt_clear.Location = new System.Drawing.Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(960, 750);
+            this.Size = new Size(1170, 750);
             this.Text = "vcs_AForgeMathTest";
 
             //設定執行後的表單起始位置, 正中央
@@ -941,26 +952,1343 @@ namespace vcs_AForgeMathTest
             //Assert.AreEqual<bool>(Vector3.Cross(vector1, vector2) == expectedResult, true);
         }
 
-
+        //------------------------------------------------------------  # 60個
 
         private void button16_Click(object sender, EventArgs e)
         {
-
+            //在下面
         }
+
+        // test data
+        private double[] p0 = new double[] { 1, 0.5 };
+        private double[] q0 = new double[] { 0.5, 1 };
+
+        private double[] p1 = new double[] { 4.5, 1 };
+        private double[] q1 = new double[] { 4, 2 };
+
+        private double[] p2 = new double[] { 0, 0, 0 };
+        private double[] q2 = new double[] { 0, 0, 0 };
+
+        private double[] p3 = new double[] { 1, 1, 1 };
+        private double[] q3 = new double[] { 1, 1, 1 };
+
+        private double[] p4 = new double[] { 2.5, 3.5, 3.0, 3.5, 2.5, 3.0 };
+        private double[] q4 = new double[] { 3.0, 3.5, 1.5, 5.0, 3.5, 3.0 };
+
+        private double[] p5 = new double[] { 1, 3, 5, 6, 8, 9, 6, 4, 3, 2 };
+        private double[] q5 = new double[] { 2, 5, 6, 6, 7, 7, 5, 3, 1, 1 };
+
+
+        public void CosineDistanceTest()
+        {
+            CosineDistance dist = new CosineDistance();
+
+            //Assert.Throws<ArgumentException>( ( ) => dist.GetDistance( p0, q4 ) );
+
+            double result = dist.GetDistance(p0, q0);
+            //Assert.AreApproximatelyEqual( result, .2, 0.00001 );
+
+            result = dist.GetDistance(p1, q1);
+            //Assert.AreApproximatelyEqual( result, 0.029857, 0.00001 );
+
+            result = dist.GetDistance(p2, q2);
+            //Assert.AreEqual( result, 1 );
+
+            result = dist.GetDistance(p3, q3);
+            //Assert.AreApproximatelyEqual( result, 0, 0.00001 );
+
+            result = dist.GetDistance(p4, q4);
+            //Assert.AreApproximatelyEqual( result, 0.039354, 0.00001 );
+
+            result = dist.GetDistance(p5, q5);
+            //Assert.AreApproximatelyEqual( result, 0.031026, 0.00001 );
+        }
+
+        public void CosineSimilarityTest()
+        {
+            CosineSimilarity sim = new CosineSimilarity();
+
+            //Assert.Throws<ArgumentException>( ( ) => sim.GetSimilarityScore( p0, q4 ) );
+
+            double result = sim.GetSimilarityScore(p0, q0);
+            //Assert.AreApproximatelyEqual( result, .8, 0.00001 );
+
+            result = sim.GetSimilarityScore(p1, q1);
+            //Assert.AreApproximatelyEqual( result, 0.97014, 0.00001 );
+
+            result = sim.GetSimilarityScore(p2, q2);
+            //Assert.AreEqual( result, 0 );
+
+            result = sim.GetSimilarityScore(p3, q3);
+            //Assert.AreApproximatelyEqual( result, 1, 0.00001 );
+
+            result = sim.GetSimilarityScore(p4, q4);
+            //Assert.AreApproximatelyEqual( result, 0.96065, 0.00001 );
+
+            result = sim.GetSimilarityScore(p5, q5);
+            //Assert.AreApproximatelyEqual( result, 0.96897, 0.00001 );
+        }
+
+        public void EuclideanDistanceTest()
+        {
+            EuclideanDistance dist = new EuclideanDistance();
+
+            //Assert.Throws<ArgumentException>( ( ) => dist.GetDistance( p0, q4 ) );
+
+            double result = dist.GetDistance(p0, q0);
+            //Assert.AreApproximatelyEqual( result, .70711, 0.00001 );
+
+            result = dist.GetDistance(p1, q1);
+            //Assert.AreApproximatelyEqual( result, 1.11803, 0.00001 );
+
+            result = dist.GetDistance(p2, q2);
+            //Assert.AreEqual( result, 0 );
+
+            result = dist.GetDistance(p3, q3);
+            //Assert.AreEqual( result, 0 );
+
+            result = dist.GetDistance(p4, q4);
+            //Assert.AreApproximatelyEqual( result, 2.39792, 0.00001 );
+
+            result = dist.GetDistance(p5, q5);
+            //Assert.AreApproximatelyEqual( result, 4.24264, 0.00001 );
+        }
+
+        public void EuclideanSimilarityTest()
+        {
+            EuclideanSimilarity sim = new EuclideanSimilarity();
+
+            //Assert.Throws<ArgumentException>( ( ) => sim.GetSimilarityScore( p0, q4 ) );
+
+            double result = sim.GetSimilarityScore(p0, q0);
+            //Assert.AreApproximatelyEqual( result, 0.58578, 0.00001 );
+
+            result = sim.GetSimilarityScore(p1, q1);
+            //Assert.AreApproximatelyEqual( result, 0.47213, 0.00001 );
+
+            result = sim.GetSimilarityScore(p2, q2);
+            //Assert.AreEqual( result, 1 );
+
+            result = sim.GetSimilarityScore(p3, q3);
+            //Assert.AreEqual( result, 1 );
+
+            result = sim.GetSimilarityScore(p4, q4);
+            //Assert.AreApproximatelyEqual( result, 0.2943, 0.00001 );
+
+            result = sim.GetSimilarityScore(p5, q5);
+            //Assert.AreApproximatelyEqual( result, 0.19074, 0.00001 );
+        }
+
+        public void HammingDistanceTest()
+        {
+            HammingDistance dist = new HammingDistance();
+
+            //Assert.Throws<ArgumentException>( ( ) => dist.GetDistance( p0, q4 ) );
+
+            double result = dist.GetDistance(p0, q0);
+            //Assert.AreEqual( result, 2 );
+
+            result = dist.GetDistance(p1, q1);
+            //Assert.AreEqual( result, 2 );
+
+            result = dist.GetDistance(p2, q2);
+            //Assert.AreEqual( result, 0 );
+
+            result = dist.GetDistance(p3, q3);
+            //Assert.AreEqual( result, 0 );
+
+            result = dist.GetDistance(p4, q4);
+            //Assert.AreEqual( result, 4 );
+
+            result = dist.GetDistance(p5, q5);
+            //Assert.AreEqual( result, 9 );
+        }
+
+        public void JaccardDistanceTest()
+        {
+            JaccardDistance dist = new JaccardDistance();
+
+            //Assert.Throws<ArgumentException>( ( ) => dist.GetDistance( p0, q4 ) );
+
+            double result = dist.GetDistance(p0, q0);
+            //Assert.AreEqual( result, 1 );
+
+            result = dist.GetDistance(p1, q1);
+            //Assert.AreEqual( result, 1 );
+
+            result = dist.GetDistance(p2, q2);
+            //Assert.AreEqual( result, 0 );
+
+            result = dist.GetDistance(p3, q3);
+            //Assert.AreEqual( result, 0 );
+
+            result = dist.GetDistance(p4, q4);
+            //Assert.AreApproximatelyEqual( result, 0.66666, 0.00001 );
+
+            result = dist.GetDistance(p5, q5);
+            //Assert.AreApproximatelyEqual( result, 0.9, 0.1 );
+        }
+
+        public void ManhattanDistanceTest()
+        {
+            ManhattanDistance dist = new ManhattanDistance();
+
+            //Assert.Throws<ArgumentException>( ( ) => dist.GetDistance( p0, q4 ) );
+
+            double result = dist.GetDistance(p0, q0);
+            //Assert.AreEqual( result, 1 );
+
+            result = dist.GetDistance(p1, q1);
+            //Assert.AreEqual( result, 1.5 );
+
+            result = dist.GetDistance(p2, q2);
+            //Assert.AreEqual( result, 0 );
+
+            result = dist.GetDistance(p3, q3);
+            //Assert.AreEqual( result, 0 );
+
+            result = dist.GetDistance(p4, q4);
+            //Assert.AreEqual( result, 4.5 );
+
+            result = dist.GetDistance(p5, q5);
+            //Assert.AreEqual( result, 12 );
+        }
+
+        public void PearsonCorrelationTest()
+        {
+            PearsonCorrelation sim = new PearsonCorrelation();
+
+            //Assert.Throws<ArgumentException>( ( ) => sim.GetSimilarityScore( p0, q4 ) );
+
+            double result = sim.GetSimilarityScore(p0, q0);
+            //Assert.AreEqual( result, -1 );
+
+            result = sim.GetSimilarityScore(p1, q1);
+            //Assert.AreEqual( result, 1 );
+
+            result = sim.GetSimilarityScore(p2, q2);
+            //Assert.AreEqual( result, 0 );
+
+            result = sim.GetSimilarityScore(p3, q3);
+            //Assert.AreEqual( result, 0 );
+
+            result = sim.GetSimilarityScore(p4, q4);
+            //Assert.AreApproximatelyEqual( result, 0.396059, 0.00001 );
+
+            result = sim.GetSimilarityScore(p5, q5);
+            //Assert.AreApproximatelyEqual( result, 0.85470, 0.00001 );
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button17_Click(object sender, EventArgs e)
         {
+            //在下面
 
         }
 
+        /*
+        [Row( 0, 0, 10, 0, 100, 0, 0 )]
+        [Row( 0, 0, 10, 10, 100, 100, 0 )]
+        [Row( 0, 0, 10, 0, 0, 100, 90 )]
+        [Row( 0, 0, 10, 0, 100, 100, 45 )]
+        [Row( 0, 0, 10, 10, -100, 100, 90 )]
+        [Row( 0, 0, 10, 0, -100, 100, 135 )]
+        [Row( 0, 0, 10, 0, -100, 0, 180 )]
+        [Row( 0, 0, 10, 0, -100, -100, 135 )]
+        */
+        public void GetAngleBetweenVectorsTest(int sx, int sy, int ex1, int ey1, int ex2, int ey2, float expectedAngle)
+        {
+            IntPoint startPoint = new IntPoint(sx, sy);
+            IntPoint vector1end = new IntPoint(ex1, ey1);
+            IntPoint vector2end = new IntPoint(ex2, ey2);
+
+            float angle = GeometryTools.GetAngleBetweenVectors(startPoint, vector1end, vector2end);
+
+            //Assert.AreApproximatelyEqual<float, float>( expectedAngle,  angle, 0.00001f );
+        }
+
+        /*
+        [Row( 0, 0, 10, 0, 0, 10, 10, 10, 0 )]
+        [Row( 0, 0, 10, 0, 0, 10, 0, 20, 90 )]
+        [Row( 0, 0, 10, 0, 1, 1, 10, 10, 45 )]
+        [Row( 0, 0, 10, 0, 1, 1, -8, 10, 45 )]
+        [Row( 0, 0, 10, 10, 0, 0, -100, 100, 90 )]
+        */
+        public void GetAngleBetweenLinesTest(int sx1, int sy1, int ex1, int ey1, int sx2, int sy2, int ex2, int ey2, float expectedAngle)
+        {
+            IntPoint line1start = new IntPoint(sx1, sy1);
+            IntPoint line1end = new IntPoint(ex1, ey1);
+            IntPoint line2start = new IntPoint(sx2, sy2);
+            IntPoint line2end = new IntPoint(ex2, ey2);
+
+            float angle = GeometryTools.GetAngleBetweenLines(line1start, line1end, line2start, line2end);
+
+            //Assert.AreApproximatelyEqual<float, float>( expectedAngle, angle, 0.00001f );
+        }
+
+        //------------------------------------------------------------  # 60個
+
         private void button18_Click(object sender, EventArgs e)
+        {
+            //在下面
+        }
+
+        private List<IntPoint> pointsList0 = new List<IntPoint>();
+        private List<IntPoint> pointsList1 = new List<IntPoint>();
+        private List<IntPoint> pointsList2 = new List<IntPoint>();
+        private List<IntPoint> pointsList3 = new List<IntPoint>();
+        private List<IntPoint> pointsList4 = new List<IntPoint>();
+        private List<IntPoint> pointsList5 = new List<IntPoint>();
+        private List<IntPoint> pointsList6 = new List<IntPoint>();
+
+        private List<IntPoint> pointsList7 = new List<IntPoint>();
+        private List<IntPoint> pointsList8 = new List<IntPoint>();
+        private List<IntPoint> pointsList9 = new List<IntPoint>();
+
+        private List<IntPoint> expectedHull8 = new List<IntPoint>();
+
+        private List<List<IntPoint>> pointsLists = new List<List<IntPoint>>();
+        private List<List<IntPoint>> expectedHulls = new List<List<IntPoint>>();
+
+        public void GrahamConvexHullTest()
+        {
+            // prepare 0st list
+            pointsList0.Add(new IntPoint(0, 0));
+
+            // prepare 1st list
+            pointsList1.Add(new IntPoint(0, 0));
+            pointsList1.Add(new IntPoint(100, 0));
+
+            // prepare 2nd list
+            pointsList2.AddRange(pointsList1);
+            pointsList2.Add(new IntPoint(100, 100));
+
+            // prepare 3rd list
+            pointsList3.AddRange(pointsList2);
+            pointsList3.Add(new IntPoint(0, 100));
+
+            // prepare 4th list
+            pointsList4.AddRange(pointsList2);
+            pointsList4.Add(new IntPoint(60, 40));
+
+            // prepare 5th list
+            pointsList5.AddRange(pointsList3);
+            pointsList5.Add(new IntPoint(50, 50));
+
+            // prepare 6th list
+            pointsList6.AddRange(pointsList3);
+            pointsList6.Add(new IntPoint(0, 0));
+
+            // prepare 7th list
+            pointsList7.AddRange(pointsList3);
+            pointsList7.AddRange(pointsList3);
+
+            // prepare 8th list
+            pointsList8.AddRange(pointsList3);
+            pointsList8.Add(new IntPoint(50, -10));
+            pointsList8.Add(new IntPoint(110, 50));
+            pointsList8.Add(new IntPoint(50, 110));
+
+            expectedHull8.AddRange(pointsList3);
+            expectedHull8.Insert(1, new IntPoint(50, -10));
+            expectedHull8.Insert(3, new IntPoint(110, 50));
+            expectedHull8.Insert(5, new IntPoint(50, 110));
+
+            // prepare 9th list
+            pointsList9.AddRange(pointsList8);
+            pointsList9.Add(new IntPoint(50, 10));
+            pointsList9.Add(new IntPoint(90, 50));
+            pointsList9.Add(new IntPoint(50, 90));
+            pointsList9.Add(new IntPoint(10, 50));
+
+            // now prepare list of tests
+            pointsLists.Add(pointsList0);
+            pointsLists.Add(pointsList1);
+            pointsLists.Add(pointsList2);
+            pointsLists.Add(pointsList3);
+
+            expectedHulls.AddRange(pointsLists);
+
+            pointsLists.Add(pointsList4);
+            expectedHulls.Add(pointsList2);
+
+            pointsLists.Add(pointsList5);
+            expectedHulls.Add(pointsList3);
+
+            pointsLists.Add(pointsList6);
+            expectedHulls.Add(pointsList3);
+
+            pointsLists.Add(pointsList7);
+            expectedHulls.Add(pointsList3);
+
+            pointsLists.Add(pointsList8);
+            expectedHulls.Add(expectedHull8);
+
+            pointsLists.Add(pointsList9);
+            expectedHulls.Add(expectedHull8);
+        }
+
+        public void FindHullTest()
+        {
+            GrahamConvexHull grahamHull = new GrahamConvexHull();
+
+            for (int i = 0, n = pointsLists.Count; i < n; i++)
+            {
+                ComparePointsLists(grahamHull.FindHull(pointsLists[i]), expectedHulls[i]);
+            }
+        }
+
+        private void ComparePointsLists(List<IntPoint> list1, List<IntPoint> list2)
+        {
+            //Assert.AreEqual<int>( list1.Count, list2.Count );
+
+            if (list1.Count == list2.Count)
+            {
+                for (int i = 0, n = list1.Count; i < n; i++)
+                {
+                    //Assert.AreEqual<IntPoint>( list2[i], list1[i] );
+                }
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            //SimpleShapeChecker
+
+            //在下面
+        }
+
+        private SimpleShapeChecker shapeChecker = new SimpleShapeChecker();
+
+        private List<IntPoint> idealCicle = new List<IntPoint>();
+        private List<IntPoint> distorredCircle = new List<IntPoint>();
+
+        private List<IntPoint> square1 = new List<IntPoint>();
+        private List<IntPoint> square1Test = new List<IntPoint>();
+        private List<IntPoint> square2 = new List<IntPoint>();
+        private List<IntPoint> square2Test = new List<IntPoint>();
+        private List<IntPoint> square3 = new List<IntPoint>();
+        private List<IntPoint> rectangle = new List<IntPoint>();
+
+        private List<IntPoint> triangle1 = new List<IntPoint>();
+        private List<IntPoint> isoscelesTriangle = new List<IntPoint>();
+        private List<IntPoint> equilateralTriangle = new List<IntPoint>();
+        private List<IntPoint> rectangledTriangle = new List<IntPoint>();
+
+        public void SimpleShapeCheckerTest()
+        {
+            System.Random rand = new System.Random();
+
+            // generate sample circles
+            double radius = 100;
+
+            for (int i = 0; i < 360; i += 10)
+            {
+                double angle = (double)i / 180 * System.Math.PI;
+
+                // add point to ideal circle
+                idealCicle.Add(new IntPoint(
+                    (int)(radius * System.Math.Cos(angle)),
+                    (int)(radius * System.Math.Sin(angle))));
+
+                // add a bit distortion for distorred cirlce
+                double distorredRadius = radius + rand.Next(7) - 3;
+
+                distorredCircle.Add(new IntPoint(
+                    (int)(distorredRadius * System.Math.Cos(angle)),
+                    (int)(distorredRadius * System.Math.Sin(angle))));
+            }
+
+            // generate sample squares
+            square1.Add(new IntPoint(0, 0));
+            square1.Add(new IntPoint(50, 0));
+            square1.Add(new IntPoint(100, 0));
+            square1.Add(new IntPoint(100, 50));
+            square1.Add(new IntPoint(100, 100));
+            square1.Add(new IntPoint(50, 100));
+            square1.Add(new IntPoint(0, 100));
+            square1.Add(new IntPoint(0, 50));
+
+            square2.Add(new IntPoint(50, 0));
+            square2.Add(new IntPoint(75, 25));
+            square2.Add(new IntPoint(100, 50));
+            square2.Add(new IntPoint(75, 75));
+            square2.Add(new IntPoint(50, 100));
+            square2.Add(new IntPoint(25, 75));
+            square2.Add(new IntPoint(0, 50));
+            square2.Add(new IntPoint(25, 25));
+
+            // these should be obtained as corners
+            square1Test.Add(new IntPoint(0, 0));
+            square1Test.Add(new IntPoint(100, 0));
+            square1Test.Add(new IntPoint(100, 100));
+            square1Test.Add(new IntPoint(0, 100));
+
+            square2Test.Add(new IntPoint(50, 0));
+            square2Test.Add(new IntPoint(100, 50));
+            square2Test.Add(new IntPoint(50, 100));
+            square2Test.Add(new IntPoint(0, 50));
+
+            // special square, which may look like circle, but should be recognized as circle
+            square3.Add(new IntPoint(50, 0));
+            square3.Add(new IntPoint(100, 50));
+            square3.Add(new IntPoint(50, 100));
+            square3.Add(new IntPoint(0, 50));
+
+            // generate sample rectangle
+            rectangle.Add(new IntPoint(0, 0));
+            rectangle.Add(new IntPoint(50, 0));
+            rectangle.Add(new IntPoint(100, 0));
+            rectangle.Add(new IntPoint(100, 20));
+            rectangle.Add(new IntPoint(100, 40));
+            rectangle.Add(new IntPoint(50, 40));
+            rectangle.Add(new IntPoint(0, 40));
+            rectangle.Add(new IntPoint(0, 20));
+
+            // generate some triangles
+            triangle1.Add(new IntPoint(0, 0));
+            triangle1.Add(new IntPoint(50, 10));
+            triangle1.Add(new IntPoint(100, 20));
+            triangle1.Add(new IntPoint(90, 50));
+            triangle1.Add(new IntPoint(80, 80));
+            triangle1.Add(new IntPoint(40, 40));
+
+            isoscelesTriangle.Add(new IntPoint(0, 0));
+            isoscelesTriangle.Add(new IntPoint(50, 0));
+            isoscelesTriangle.Add(new IntPoint(100, 0));
+            isoscelesTriangle.Add(new IntPoint(75, 20));
+            isoscelesTriangle.Add(new IntPoint(50, 40));
+            isoscelesTriangle.Add(new IntPoint(25, 20));
+
+            equilateralTriangle.Add(new IntPoint(0, 0));
+            equilateralTriangle.Add(new IntPoint(50, 0));
+            equilateralTriangle.Add(new IntPoint(100, 0));
+            equilateralTriangle.Add(new IntPoint(75, 43));
+            equilateralTriangle.Add(new IntPoint(50, 86));
+            equilateralTriangle.Add(new IntPoint(25, 43));
+
+            rectangledTriangle.Add(new IntPoint(0, 0));
+            rectangledTriangle.Add(new IntPoint(20, 0));
+            rectangledTriangle.Add(new IntPoint(40, 0));
+            rectangledTriangle.Add(new IntPoint(20, 50));
+            rectangledTriangle.Add(new IntPoint(0, 100));
+            rectangledTriangle.Add(new IntPoint(0, 50));
+        }
+
+        public void IsCircleTest()
+        {
+            //Assert.AreEqual( true, shapeChecker.IsCircle( idealCicle ) );
+            //Assert.AreEqual( true, shapeChecker.IsCircle( distorredCircle ) );
+
+            //Assert.AreEqual( false, shapeChecker.IsCircle( square1 ) );
+            //Assert.AreEqual( false, shapeChecker.IsCircle( square2 ) );
+            //Assert.AreEqual( false, shapeChecker.IsCircle( square3 ) );
+            //Assert.AreEqual( false, shapeChecker.IsCircle( rectangle ) );
+
+            //Assert.AreEqual( false, shapeChecker.IsCircle( triangle1 ) );
+            //Assert.AreEqual( false, shapeChecker.IsCircle( equilateralTriangle ) );
+            //Assert.AreEqual( false, shapeChecker.IsCircle( isoscelesTriangle ) );
+            //Assert.AreEqual( false, shapeChecker.IsCircle( rectangledTriangle ) );
+        }
+
+        public void IsQuadrilateralTest()
+        {
+            //Assert.AreEqual( true, shapeChecker.IsQuadrilateral( square1 ) );
+            //Assert.AreEqual( true, shapeChecker.IsQuadrilateral( square2 ) );
+            //Assert.AreEqual( true, shapeChecker.IsQuadrilateral( square3 ) );
+            //Assert.AreEqual( true, shapeChecker.IsQuadrilateral( rectangle ) );
+
+            //Assert.AreEqual( false, shapeChecker.IsQuadrilateral( idealCicle ) );
+            //Assert.AreEqual( false, shapeChecker.IsQuadrilateral( distorredCircle ) );
+
+            //Assert.AreEqual( false, shapeChecker.IsQuadrilateral( triangle1 ) );
+            //Assert.AreEqual( false, shapeChecker.IsQuadrilateral( equilateralTriangle ) );
+            //Assert.AreEqual( false, shapeChecker.IsQuadrilateral( isoscelesTriangle ) );
+            //Assert.AreEqual( false, shapeChecker.IsQuadrilateral( rectangledTriangle ) );
+        }
+
+        public void CheckQuadrilateralCornersTest()
+        {
+            List<IntPoint> corners;
+
+            //Assert.AreEqual( true, shapeChecker.IsQuadrilateral( square1, out corners ) );
+            //Assert.AreEqual( 4, corners.Count );
+            //Assert.AreEqual( true, CompareShape( corners, square1Test ) );
+
+            //Assert.AreEqual( true, shapeChecker.IsQuadrilateral( square2, out corners ) );
+            //Assert.AreEqual( 4, corners.Count );
+            //Assert.AreEqual( true, CompareShape( corners, square2Test ) );
+        }
+
+        public void IsTriangleTest()
+        {
+            //Assert.AreEqual( true, shapeChecker.IsTriangle( triangle1 ) );
+            //Assert.AreEqual( true, shapeChecker.IsTriangle( equilateralTriangle ) );
+            //Assert.AreEqual( true, shapeChecker.IsTriangle( isoscelesTriangle ) );
+            //Assert.AreEqual( true, shapeChecker.IsTriangle( rectangledTriangle ) );
+
+            //Assert.AreEqual( false, shapeChecker.IsTriangle( idealCicle ) );
+            //Assert.AreEqual( false, shapeChecker.IsTriangle( distorredCircle ) );
+
+            //Assert.AreEqual( false, shapeChecker.IsTriangle( square1 ) );
+            //Assert.AreEqual( false, shapeChecker.IsTriangle( square2 ) );
+            //Assert.AreEqual( false, shapeChecker.IsTriangle( square3 ) );
+            //Assert.AreEqual( false, shapeChecker.IsTriangle( rectangle ) );
+        }
+
+        public void IsConvexPolygon()
+        {
+            List<IntPoint> corners;
+
+            //Assert.AreEqual( true, shapeChecker.IsConvexPolygon( triangle1, out corners ) );
+            //Assert.AreEqual( 3, corners.Count );
+            //Assert.AreEqual( true, shapeChecker.IsConvexPolygon( equilateralTriangle, out corners ) );
+            //Assert.AreEqual( 3, corners.Count );
+            //Assert.AreEqual( true, shapeChecker.IsConvexPolygon( isoscelesTriangle, out corners ) );
+            //Assert.AreEqual( 3, corners.Count );
+            //Assert.AreEqual( true, shapeChecker.IsConvexPolygon( rectangledTriangle, out corners ) );
+            //Assert.AreEqual( 3, corners.Count );
+
+            //Assert.AreEqual( true, shapeChecker.IsConvexPolygon( square1, out corners ) );
+            //Assert.AreEqual( 4, corners.Count );
+            //Assert.AreEqual( true, shapeChecker.IsConvexPolygon( square2, out corners ) );
+            //Assert.AreEqual( 4, corners.Count );
+            //Assert.AreEqual( true, shapeChecker.IsConvexPolygon( square3, out corners ) );
+            //Assert.AreEqual( 4, corners.Count );
+            //Assert.AreEqual( true, shapeChecker.IsConvexPolygon( rectangle, out corners ) );
+            //Assert.AreEqual( 4, corners.Count );
+
+            //Assert.AreEqual( false, shapeChecker.IsConvexPolygon( idealCicle, out corners ) );
+            //Assert.AreEqual( false, shapeChecker.IsConvexPolygon( distorredCircle, out corners ) );
+        }
+
+        public void CheckShapeTypeTest()
+        {
+            //Assert.AreEqual( ShapeType.Circle, shapeChecker.CheckShapeType( idealCicle ) );
+            //Assert.AreEqual( ShapeType.Circle, shapeChecker.CheckShapeType( distorredCircle ) );
+
+            //Assert.AreEqual( ShapeType.Quadrilateral, shapeChecker.CheckShapeType( square1 ) );
+            //Assert.AreEqual( ShapeType.Quadrilateral, shapeChecker.CheckShapeType( square2 ) );
+            //Assert.AreEqual( ShapeType.Quadrilateral, shapeChecker.CheckShapeType( square3 ) );
+            //Assert.AreEqual( ShapeType.Quadrilateral, shapeChecker.CheckShapeType( rectangle ) );
+
+            //Assert.AreEqual( ShapeType.Triangle, shapeChecker.CheckShapeType( triangle1 ) );
+            //Assert.AreEqual( ShapeType.Triangle, shapeChecker.CheckShapeType( equilateralTriangle ) );
+            //Assert.AreEqual( ShapeType.Triangle, shapeChecker.CheckShapeType( isoscelesTriangle ) );
+            //Assert.AreEqual( ShapeType.Triangle, shapeChecker.CheckShapeType( rectangledTriangle ) );
+        }
+
+        private bool CompareShape(List<IntPoint> shape1, List<IntPoint> shape2)
+        {
+            if (shape1.Count != shape2.Count)
+                return false;
+            if (shape1.Count == 0)
+                return true;
+
+            int index = shape1.IndexOf(shape2[0]);
+
+            if (index == -1)
+                return false;
+
+            index++;
+
+            for (int i = 1; i < shape2.Count; i++, index++)
+            {
+                if (index >= shape1.Count)
+                    index = 0;
+
+                if (!shape1[index].Equals(shape2[i]))
+                    return false;
+            }
+
+            return true;
+        }
+
+        /*
+        [Row( PolygonSubType.Unknown, new int[] { 0, 0, 100, 0, 90, 10 } )]     // just a triangle
+        [Row( PolygonSubType.IsoscelesTriangle, new int[] { 0, 0, 100, 0, 50, 10 } )]
+        [Row( PolygonSubType.IsoscelesTriangle, new int[] { 0, 0, 100, 0, 50, 200 } )]
+        [Row( PolygonSubType.EquilateralTriangle, new int[] { 0, 0, 100, 0, 50, 86 } )]
+        [Row( PolygonSubType.RectangledIsoscelesTriangle, new int[] { 0, 0, 100, 0, 50, 50 } )]
+        [Row( PolygonSubType.RectangledIsoscelesTriangle, new int[] { 0, 0, 100, 0, 0, 100 } )]
+        [Row( PolygonSubType.RectangledTriangle, new int[] { 0, 0, 100, 0, 0, 50 } )]
+        [Row( PolygonSubType.Unknown, new int[] { 0, 0, 100, 0, 90, 50, 10, 70 } )]     // just a quadrilateral
+        [Row( PolygonSubType.Trapezoid, new int[] { 0, 0, 100, 0, 90, 50, 10, 50 } )]
+        [Row( PolygonSubType.Trapezoid, new int[] { 0, 0, 100, 0, 90, 50, 0, 50 } )]
+        [Row( PolygonSubType.Trapezoid, new int[] { 0, 0, 100, 0, 90, 50, 0, 53 } )]    // a bit disformed
+        [Row( PolygonSubType.Parallelogram, new int[] { 0, 0, 100, 0, 120, 50, 20, 50 } )]
+        [Row( PolygonSubType.Parallelogram, new int[] { 0, 0, 100, 0, 70, 50, -30, 50 } )]
+        [Row( PolygonSubType.Rectangle, new int[] { 0, 0, 100, 0, 100, 50, 0, 50 } )]
+        [Row( PolygonSubType.Rectangle, new int[] { 0, 0, 100, 0, 100, 52, -3, 50 } )]   // a bit disformed
+        [Row( PolygonSubType.Square, new int[] { 0, 0, 100, 0, 100, 100, 0, 100 } )]
+        [Row( PolygonSubType.Square, new int[] { 50, 0, 100, 50, 50, 100, 0, 50 } )]
+        [Row( PolygonSubType.Square, new int[] { 51, 0, 100, 49, 50, 101, 1, 50 } )]    // a bit disformed
+        [Row( PolygonSubType.Rhombus, new int[] { 30, 0, 60, 50, 30, 100, 0, 50 } )]
+        [Row( PolygonSubType.Rhombus, new int[] { 0, 0, 100, 0, 130, 95, 30, 95 } )]
+        [Row( PolygonSubType.Unknown, new int[] { 0, 0, 100, 0, 90, 50, 40, 70, 10, 40 } )]     // unknown if 5 corners or more
+        */
+        public void CheckPolygonSubTypeTest(PolygonSubType expectedSubType, int[] corners)
+        {
+            //Assert.AreEqual( expectedSubType, shapeChecker.CheckPolygonSubType( GetListOfPointFromArray( corners ) ) );
+        }
+
+        private List<IntPoint> GetListOfPointFromArray(int[] points)
+        {
+            List<IntPoint> list = new List<IntPoint>();
+
+            for (int i = 0, n = points.Length; i < n; i += 2)
+            {
+                list.Add(new IntPoint(points[i], points[i + 1]));
+            }
+
+            return list;
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            //LineSegmentTest
+
+            //在下面
+        }
+
+
+        /*
+        [Row( 0, 0, 10, 0, 10 )]
+        [Row( 0, 0, 0, 10, 10 )]
+        [Row( 0, 0, 3, 4, 5 )]
+        [Row( 0, 0, -3, 4, 5 )]
+        [Row( 0, 0, -3, -4, 5 )]
+        */
+        public void LengthTest(float sx, float sy, float ex, float ey, float expectedResult)
+        {
+            LineSegment segment = new LineSegment(new AForge.Point(sx, sy), new AForge.Point(ex, ey));
+
+            //Assert.AreEqual( expectedResult, segment.Length );
+        }
+
+        /*
+        [Row( 0, 0, 5, 0, 8, 0, 5 )]
+        [Row( 6, 2.5, 5, 0, 8, 0, 2.5 )]
+        [Row( 2.5, 6, 0, 5, 0, 8, 2.5 )]
+        [Row( 9, 0, 5, 0, 8, 0, 1 )]
+        [Row( 3, 4, 0, 0, -10, 0, 5 )]
+        */
+        public void DistanceToPointTest(float x, float y, float x1, float y1, float x2, float y2, float expectedDistance)
+        {
+            AForge.Point pt = new AForge.Point(x, y);
+            AForge.Point pt1 = new AForge.Point(x1, y1);
+            AForge.Point pt2 = new AForge.Point(x2, y2);
+            LineSegment segment = new LineSegment(pt1, pt2);
+
+            //Assert.AreEqual( expectedDistance, segment.DistanceToPoint( pt ) );
+        }
+
+        // Denotes which versions of the test are supposed to return non-null values:
+        // SegmentA means that the segment A1-A2 intersects with the line B1-B2, but not
+        // with the segment B1-B2.
+        public enum IntersectionType { None, LinesOnly, SegmentA, SegmentB, AllFour };
+
+        /*
+        [Row( 0, 0, 4, 4, 0, 4, 4, 0, 2, 2, IntersectionType.AllFour )]
+        [Row( 0, 0, 4, 0, 0, 0, 0, 4, 0, 0, IntersectionType.AllFour )]
+        [Row( 0, 0, 4, 4, 4, 8, 8, 4, 6, 6, IntersectionType.SegmentB )]
+        [Row( -4, -4, 0, 0, 4, 0, 8, -4, 2, 2, IntersectionType.LinesOnly )]
+        [Row( 0, 0, 6, 0, 5, 1, 5, 5, 5, 0, IntersectionType.SegmentA )]
+        [Row( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, IntersectionType.LinesOnly, ExpectedException = typeof( ArgumentException ), ExpectedExceptionMessage = "Start point of the line cannot be the same as its end point." )]
+        [Row( 0, 0, 0, 5, 1, 0, 1, 5, 0, 0, IntersectionType.None)]
+        */
+        public void IntersectionPointTest(float ax1, float ay1, float ax2, float ay2, float bx1, float by1, float bx2, float by2, float ix, float iy, IntersectionType type)
+        {
+            LineSegment segA = new LineSegment(new AForge.Point(ax1, ay1), new AForge.Point(ax2, ay2));
+            LineSegment segB = new LineSegment(new AForge.Point(bx1, by1), new AForge.Point(bx2, by2));
+            AForge.Point expectedIntersection = new AForge.Point(ix, iy);
+            /*
+            Assert.DoesNotThrow(() =>
+            {
+                AForge.Point? segSeg = segA.GetIntersectionWith(segB);
+                AForge.Point? segLine = segA.GetIntersectionWith((Line)segB);
+                AForge.Point? lineSeg = ((Line)segA).GetIntersectionWith(segB);
+
+                if (type == IntersectionType.AllFour)
+                {
+                    //Assert.AreEqual( expectedIntersection, segSeg );
+                }
+                else
+                {
+                    //Assert.AreEqual( null, segSeg );
+                }
+
+                if ((type == IntersectionType.AllFour) || (type == IntersectionType.SegmentA))
+                {
+                    //Assert.AreEqual( expectedIntersection, segLine );
+                }
+                else
+                {
+                    //Assert.AreEqual( null, segLine );
+                }
+
+                if ((type == IntersectionType.AllFour) || (type == IntersectionType.SegmentB))
+                {
+                    //Assert.AreEqual( expectedIntersection, lineSeg );
+                }
+                else
+                {
+                    //Assert.AreEqual( null, lineSeg );
+                }
+            });
+            */
+
+            AForge.Point? lineLine = ((Line)segA).GetIntersectionWith((Line)segB);
+
+            if (type != IntersectionType.None)
+            {
+                //Assert.AreEqual( expectedIntersection, lineLine );
+            }
+            else
+            {
+                //Assert.AreEqual( null, lineLine );
+            }
+        }
+
+        /*
+        [Row( 0, 0, 0, 1, 1, 1, 1, 2 )]
+        [Row( 0, 0, 4, 4, 3, -1, 7, 3 )]
+        [Row( 0, 0, 1, 0, 1, 1, 2, 1 )]
+        */
+        public void ParallelIntersectionPointTest(float ax1, float ay1, float ax2, float ay2, float bx1, float by1, float bx2, float by2)
+        {
+            LineSegment segA = new LineSegment(new AForge.Point(ax1, ay1), new AForge.Point(ax2, ay2));
+            LineSegment segB = new LineSegment(new AForge.Point(bx1, by1), new AForge.Point(bx2, by2));
+
+            // are we really parallel?
+            //Assert.AreEqual( null, ( (Line) segA ).GetIntersectionWith( (Line) segB ) );
+
+            //Assert.AreEqual( null, segA.GetIntersectionWith( (Line) segB ) );
+            //Assert.AreEqual( null, ( (Line) segA ).GetIntersectionWith( segB ) );
+            //Assert.AreEqual( null, segB.GetIntersectionWith( (Line) segA ) );
+            //Assert.AreEqual( null, ( (Line) segB ).GetIntersectionWith( segA ) );
+            //Assert.AreEqual( null, segB.GetIntersectionWith( segA ) );
+            //Assert.AreEqual( null, segA.GetIntersectionWith( segB ) );
+        }
+
+        /*
+        [Row( 0, 0, 1, 1, 2, 2, 3, 3 )]
+        [Row( 0, 1, 0, 2, 0, 3, 0, 4 )]
+        [Row( 0, 0, -1, 1, -2, 2, -3, 3, -4, 4 )]
+        [Row( 1, 0, 2, 0, 3, 0, 4, 0 )]
+        [Row(0, 0, 0, 1, 0, 2, 0, 3 )]
+        */
+        public void CollinearIntersectionPointTest(float ax1, float ay1, float ax2, float ay2, float bx1, float by1, float bx2, float by2)
+        {
+            LineSegment segA = new LineSegment(new AForge.Point(ax1, ay1), new AForge.Point(ax2, ay2));
+            LineSegment segB = new LineSegment(new AForge.Point(bx1, by1), new AForge.Point(bx2, by2));
+
+            // are we really collinear?
+            //Assert.Throws<InvalidOperationException>( ( ) => ( (Line) segA ).GetIntersectionWith( (Line) segB ) );
+
+            //Assert.Throws<InvalidOperationException>( ( ) => segA.GetIntersectionWith( (Line) segB ) );
+            //Assert.Throws<InvalidOperationException>( ( ) => ( (Line) segA ).GetIntersectionWith( segB ) );
+            //Assert.Throws<InvalidOperationException>( ( ) => segB.GetIntersectionWith( (Line) segA ) );
+            //Assert.Throws<InvalidOperationException>( ( ) => ( (Line) segB ).GetIntersectionWith( segA ) );
+            //Assert.AreEqual( null, segB.GetIntersectionWith( segA ) );
+            //Assert.AreEqual( null, segA.GetIntersectionWith( segB ) );
+        }
+
+        /*
+        [Row( 0, 0, 1, 1, 1, 1, 3, 3, 1, 1 )]
+        [Row( 0, 0, 1, 1, 3, 3, 1, 1, 1, 1 )]
+        [Row( 0, 0, 1, 1, 0, 0, -3, -3, 0, 0 )]
+        [Row( 0, 0, 1, 1, -1, -1, 0, 0, 0, 0 )]
+        [Row( 0, 1, 0, 2, 0, 1, 0, 0, 0, 1 )]
+        [Row( 0, 1, 0, 2, 0, 2, 0, 4, 0, 2 )]
+        [Row( 0, 1, 0, 2, 0, 0, 0, 1, 0, 1 )]
+        [Row( 0, 1, 0, 2, 0, 3, 0, 2, 0, 2 )]
+        */
+        public void CommonIntersectionPointTest(float ax1, float ay1, float ax2, float ay2, float bx1, float by1, float bx2, float by2, float ix, float iy)
+        {
+            LineSegment segA = new LineSegment(new AForge.Point(ax1, ay1), new AForge.Point(ax2, ay2));
+            LineSegment segB = new LineSegment(new AForge.Point(bx1, by1), new AForge.Point(bx2, by2));
+            AForge.Point expectedIntersection = new AForge.Point(ix, iy);
+
+            // are we really collinear?
+            //Assert.Throws<InvalidOperationException>( ( ) => ( (Line) segA ).GetIntersectionWith( (Line) segB ) );
+
+            //Assert.Throws<InvalidOperationException>( ( ) => segA.GetIntersectionWith( (Line) segB ) );
+            //Assert.Throws<InvalidOperationException>( ( ) => ( (Line) segA ).GetIntersectionWith( segB ) );
+            //Assert.Throws<InvalidOperationException>( ( ) => segB.GetIntersectionWith( (Line) segA ) );
+            //Assert.Throws<InvalidOperationException>( ( ) => ( (Line) segB ).GetIntersectionWith( segA ) );
+            //Assert.AreEqual( expectedIntersection, segB.GetIntersectionWith( segA ) );
+            //Assert.AreEqual( expectedIntersection, segA.GetIntersectionWith( segB ) );
+        }
+
+        /*
+        [Row( 0, 0, 0, 2, 0, 1, 0, 3 )]
+        [Row( 1, 2, 3, 4, 2, 3, 4, 5 )]
+        [Row( 0, 0, 2, 0, 3, 0, 1, 0 )]
+        */
+        public void OverlappingSegmentIntersectionPointTest(float ax1, float ay1, float ax2, float ay2, float bx1, float by1, float bx2, float by2)
+        {
+            LineSegment segA = new LineSegment(new AForge.Point(ax1, ay1), new AForge.Point(ax2, ay2));
+            LineSegment segB = new LineSegment(new AForge.Point(bx1, by1), new AForge.Point(bx2, by2));
+
+            // are we really collinear?
+            //Assert.Throws<InvalidOperationException>( ( ) => ( (Line) segA ).GetIntersectionWith( (Line) segB ) );
+
+            //Assert.Throws<InvalidOperationException>( ( ) => segA.GetIntersectionWith( (Line) segB ) );
+            //Assert.Throws<InvalidOperationException>( ( ) => ( (Line) segA ).GetIntersectionWith( segB ) );
+            //Assert.Throws<InvalidOperationException>( ( ) => segB.GetIntersectionWith( (Line) segA ) );
+            //Assert.Throws<InvalidOperationException>( ( ) => ( (Line) segB ).GetIntersectionWith( segA ) );
+            //Assert.Throws<InvalidOperationException>( ( ) => segB.GetIntersectionWith( segA ) );
+            //Assert.Throws<InvalidOperationException>( ( ) => segA.GetIntersectionWith( segB ) );
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            //UnmanagedImageTest
+
+            //在下面
+        }
+
+
+        public void Collect8bppPixelValuesTest_Grayscale()
+        {
+            // create grayscale image
+            UnmanagedImage image = UnmanagedImage.Create(320, 240, PixelFormat.Format8bppIndexed);
+
+            // draw vertical and horizontal lines
+            Drawing.Line(image, new IntPoint(10, 10), new IntPoint(20, 10), Color.FromArgb(128, 128, 128));
+            Drawing.Line(image, new IntPoint(20, 20), new IntPoint(20, 30), Color.FromArgb(64, 64, 64));
+
+            // prepare lists with coordinates
+            List<IntPoint> horizontal = new List<IntPoint>();
+            List<IntPoint> horizontalU = new List<IntPoint>();
+            List<IntPoint> horizontalD = new List<IntPoint>();
+
+            for (int x = 10; x <= 20; x++)
+            {
+                horizontal.Add(new IntPoint(x, 10));  // on the line
+                horizontalU.Add(new IntPoint(x, 9));  // above
+                horizontalD.Add(new IntPoint(x, 11)); // below
+            }
+
+            List<IntPoint> vertical = new List<IntPoint>();
+            List<IntPoint> verticalL = new List<IntPoint>();
+            List<IntPoint> verticalR = new List<IntPoint>();
+
+            for (int y = 20; y <= 30; y++)
+            {
+                vertical.Add(new IntPoint(20, y));    // on the line
+                verticalL.Add(new IntPoint(19, y));   // left
+                verticalR.Add(new IntPoint(21, y));   // right
+            }
+
+            // collect all pixel's values
+            byte[] horizontalValues = image.Collect8bppPixelValues(horizontal);
+            byte[] horizontalUValues = image.Collect8bppPixelValues(horizontalU);
+            byte[] horizontalDValues = image.Collect8bppPixelValues(horizontalD);
+            byte[] verticalValues = image.Collect8bppPixelValues(vertical);
+            byte[] verticalLValues = image.Collect8bppPixelValues(verticalL);
+            byte[] verticalRValues = image.Collect8bppPixelValues(verticalR);
+
+            //Assert.AreEqual( horizontal.Count, horizontalValues.Length );
+            //Assert.AreEqual( vertical.Count, verticalValues.Length );
+
+            // check all pixel values
+            for (int i = 0, n = horizontalValues.Length; i < n; i++)
+            {
+                //Assert.AreEqual<byte>( 128, horizontalValues[i] );
+                //Assert.AreEqual<byte>( 0, horizontalUValues[i] );
+                //Assert.AreEqual<byte>( 0, horizontalDValues[i] );
+            }
+
+            for (int i = 0, n = verticalValues.Length; i < n; i++)
+            {
+                //Assert.AreEqual<byte>( 64, verticalValues[i] );
+                //Assert.AreEqual<byte>( 0, verticalLValues[i] );
+                //Assert.AreEqual<byte>( 0, verticalRValues[i] );
+            }
+        }
+
+        public void Collect8bppPixelValuesTest_RGB()
+        {
+            // create grayscale image
+            UnmanagedImage image = UnmanagedImage.Create(320, 240, PixelFormat.Format24bppRgb);
+
+            // draw vertical and horizontal lines
+            Drawing.Line(image, new IntPoint(10, 10), new IntPoint(20, 10), Color.FromArgb(128, 129, 130));
+            Drawing.Line(image, new IntPoint(20, 20), new IntPoint(20, 30), Color.FromArgb(64, 65, 66));
+
+            // prepare lists with coordinates
+            List<IntPoint> horizontal = new List<IntPoint>();
+            List<IntPoint> horizontalU = new List<IntPoint>();
+            List<IntPoint> horizontalD = new List<IntPoint>();
+
+            for (int x = 10; x <= 20; x++)
+            {
+                horizontal.Add(new IntPoint(x, 10));  // on the line
+                horizontalU.Add(new IntPoint(x, 9));  // above
+                horizontalD.Add(new IntPoint(x, 11)); // below
+            }
+
+            List<IntPoint> vertical = new List<IntPoint>();
+            List<IntPoint> verticalL = new List<IntPoint>();
+            List<IntPoint> verticalR = new List<IntPoint>();
+
+            for (int y = 20; y <= 30; y++)
+            {
+                vertical.Add(new IntPoint(20, y));    // on the line
+                verticalL.Add(new IntPoint(19, y));   // left
+                verticalR.Add(new IntPoint(21, y));   // right
+            }
+
+            // collect all pixel's values
+            byte[] horizontalValues = image.Collect8bppPixelValues(horizontal);
+            byte[] horizontalUValues = image.Collect8bppPixelValues(horizontalU);
+            byte[] horizontalDValues = image.Collect8bppPixelValues(horizontalD);
+            byte[] verticalValues = image.Collect8bppPixelValues(vertical);
+            byte[] verticalLValues = image.Collect8bppPixelValues(verticalL);
+            byte[] verticalRValues = image.Collect8bppPixelValues(verticalR);
+
+            //Assert.AreEqual( horizontal.Count * 3, horizontalValues.Length );
+            //Assert.AreEqual( vertical.Count * 3, verticalValues.Length );
+
+            // check all pixel values
+            for (int i = 0, n = horizontalValues.Length; i < n; i += 3)
+            {
+                //Assert.AreEqual<byte>( 128, horizontalValues[i] );
+                //Assert.AreEqual<byte>( 129, horizontalValues[i + 1] );
+                //Assert.AreEqual<byte>( 130, horizontalValues[i + 2] );
+
+                //Assert.AreEqual<byte>( 0, horizontalUValues[i] );
+                //Assert.AreEqual<byte>( 0, horizontalUValues[i + 1] );
+                //Assert.AreEqual<byte>( 0, horizontalUValues[i + 2] );
+
+                //Assert.AreEqual<byte>( 0, horizontalDValues[i] );
+                //Assert.AreEqual<byte>( 0, horizontalDValues[i + 1] );
+                //Assert.AreEqual<byte>( 0, horizontalDValues[i + 2] );
+            }
+
+            for (int i = 0, n = verticalValues.Length; i < n; i += 3)
+            {
+                //Assert.AreEqual<byte>( 64, verticalValues[i] );
+                //Assert.AreEqual<byte>( 65, verticalValues[i + 1] );
+                //Assert.AreEqual<byte>( 66, verticalValues[i + 2] );
+
+                //Assert.AreEqual<byte>( 0, verticalLValues[i] );
+                //Assert.AreEqual<byte>( 0, verticalLValues[i + 1] );
+                //Assert.AreEqual<byte>( 0, verticalLValues[i + 2] );
+
+                //Assert.AreEqual<byte>( 0, verticalRValues[i] );
+                //Assert.AreEqual<byte>( 0, verticalRValues[i + 1] );
+                //Assert.AreEqual<byte>( 0, verticalRValues[i + 2] );
+            }
+        }
+
+        public void CollectActivePixelsTest()
+        {
+            // create grayscale image
+            UnmanagedImage image24 = UnmanagedImage.Create(7, 7, PixelFormat.Format24bppRgb);
+            UnmanagedImage image8 = UnmanagedImage.Create(7, 7, PixelFormat.Format8bppIndexed);
+
+            Drawing.FillRectangle(image24, new Rectangle(1, 1, 5, 5), Color.FromArgb(255, 255, 255));
+            Drawing.FillRectangle(image24, new Rectangle(2, 2, 3, 3), Color.FromArgb(1, 1, 1));
+            Drawing.FillRectangle(image24, new Rectangle(3, 3, 1, 1), Color.FromArgb(0, 0, 0));
+
+            Drawing.FillRectangle(image8, new Rectangle(1, 1, 5, 5), Color.FromArgb(255, 255, 255));
+            Drawing.FillRectangle(image8, new Rectangle(2, 2, 3, 3), Color.FromArgb(1, 1, 1));
+            Drawing.FillRectangle(image8, new Rectangle(3, 3, 1, 1), Color.FromArgb(0, 0, 0));
+
+            List<IntPoint> pixels24 = image24.CollectActivePixels();
+            List<IntPoint> pixels8 = image8.CollectActivePixels();
+
+            //Assert.AreEqual<int>( pixels24.Count, 24 );
+            //Assert.AreEqual<int>( pixels8.Count, 24 );
+
+            for (int i = 1; i < 6; i++)
+            {
+                for (int j = 1; j < 6; j++)
+                {
+                    if ((i == 3) && (j == 3))
+                        continue;
+
+                    //Assert.IsTrue( pixels24.Contains( new IntPoint( j, i ) ) );
+                    //Assert.IsTrue( pixels8.Contains( new IntPoint( j, i ) ) );
+                }
+            }
+
+            pixels24 = image24.CollectActivePixels(new Rectangle(1, 0, 5, 4));
+            pixels8 = image8.CollectActivePixels(new Rectangle(1, 0, 5, 4));
+
+            //Assert.AreEqual<int>( pixels24.Count, 14 );
+            //Assert.AreEqual<int>( pixels8.Count, 14 );
+
+            for (int i = 1; i < 4; i++)
+            {
+                for (int j = 1; j < 6; j++)
+                {
+                    if ((i == 3) && (j == 3))
+                        continue;
+
+                    //Assert.IsTrue( pixels24.Contains( new IntPoint( j, i ) ) );
+                    //Assert.IsTrue( pixels8.Contains( new IntPoint( j, i ) ) );
+                }
+            }
+        }
+
+        /*
+        [Row( PixelFormat.Format8bppIndexed )]
+        [Row( PixelFormat.Format24bppRgb )]
+        [Row( PixelFormat.Format32bppArgb)]
+        [Row( PixelFormat.Format32bppRgb )]
+        [Row( PixelFormat.Format16bppGrayScale )]
+        [Row( PixelFormat.Format48bppRgb )]
+        [Row( PixelFormat.Format64bppArgb )]
+        [Row( PixelFormat.Format32bppPArgb, ExpectedException = typeof( UnsupportedImageFormatException ) )]
+        */
+        public void SetPixelTest(PixelFormat pixelFormat)
+        {
+            UnmanagedImage image = UnmanagedImage.Create(320, 240, pixelFormat);
+            Color color = Color.White;
+            byte value = 255;
+
+            image.SetPixel(0, 0, color);
+            image.SetPixel(319, 0, color);
+            image.SetPixel(0, 239, color);
+            image.SetPixel(319, 239, value);
+            image.SetPixel(160, 120, value);
+
+            image.SetPixel(-1, -1, color);
+            image.SetPixel(320, 0, color);
+            image.SetPixel(0, 240, value);
+            image.SetPixel(320, 240, value);
+
+            List<IntPoint> pixels = image.CollectActivePixels();
+
+            //Assert.AreEqual<int>( 5, pixels.Count );
+
+            //Assert.IsTrue( pixels.Contains( new IntPoint( 0, 0 ) ) );
+            //Assert.IsTrue( pixels.Contains( new IntPoint( 319, 0 ) ) );
+            //Assert.IsTrue( pixels.Contains( new IntPoint( 0, 239 ) ) );
+            //Assert.IsTrue( pixels.Contains( new IntPoint( 319, 239 ) ) );
+            //Assert.IsTrue( pixels.Contains( new IntPoint( 160, 120 ) ) );
+        }
+
+        public void SetGetPixelGrayscale()
+        {
+            UnmanagedImage image = UnmanagedImage.Create(320, 240, PixelFormat.Format8bppIndexed);
+
+            image.SetPixel(0, 0, 255);
+            image.SetPixel(319, 0, 127);
+            image.SetPixel(0, 239, Color.FromArgb(64, 64, 64));
+
+            Color color1 = image.GetPixel(0, 0);
+            Color color2 = image.GetPixel(319, 0);
+            Color color3 = image.GetPixel(0, 239);
+
+            //Assert.AreEqual<int>( 255, color1.R );
+            //Assert.AreEqual<int>( 255, color1.G );
+            //Assert.AreEqual<int>( 255, color1.B );
+
+            //Assert.AreEqual<int>( 127, color2.R );
+            //Assert.AreEqual<int>( 127, color2.G );
+            //Assert.AreEqual<int>( 127, color2.B );
+
+            //Assert.AreEqual<int>( 64, color3.R );
+            //Assert.AreEqual<int>( 64, color3.G );
+            //Assert.AreEqual<int>( 64, color3.B );
+        }
+
+        /*
+        [Row( PixelFormat.Format24bppRgb )]
+        [Row( PixelFormat.Format32bppArgb )]
+        [Row( PixelFormat.Format32bppRgb )]
+        */
+        public void SetGetPixelColor(PixelFormat pixelFormat)
+        {
+            UnmanagedImage image = UnmanagedImage.Create(320, 240, pixelFormat);
+
+            image.SetPixel(0, 0, Color.FromArgb(255, 10, 20, 30));
+            image.SetPixel(319, 0, Color.FromArgb(127, 110, 120, 130));
+            image.SetPixel(0, 239, Color.FromArgb(64, 210, 220, 230));
+
+            Color color1 = image.GetPixel(0, 0);
+            Color color2 = image.GetPixel(319, 0);
+            Color color3 = image.GetPixel(0, 239);
+
+            //Assert.AreEqual<int>( 10, color1.R );
+            //Assert.AreEqual<int>( 20, color1.G );
+            //Assert.AreEqual<int>( 30, color1.B );
+
+            //Assert.AreEqual<int>( 110, color2.R );
+            //Assert.AreEqual<int>( 120, color2.G );
+            //Assert.AreEqual<int>( 130, color2.B );
+
+            //Assert.AreEqual<int>( 210, color3.R );
+            //Assert.AreEqual<int>( 220, color3.G );
+            //Assert.AreEqual<int>( 230, color3.B );
+
+            if (pixelFormat == PixelFormat.Format32bppArgb)
+            {
+                //Assert.AreEqual<int>( 255, color1.A );
+                //Assert.AreEqual<int>( 127, color2.A );
+                //Assert.AreEqual<int>( 64, color3.A );
+            }
+        }
+
+        /*
+        [Row( PixelFormat.Format8bppIndexed )]
+        [Row( PixelFormat.Format24bppRgb )]
+        [Row( PixelFormat.Format32bppArgb )]
+        [Row( PixelFormat.Format32bppRgb )]
+        [Row( PixelFormat.Format16bppGrayScale )]
+        [Row( PixelFormat.Format48bppRgb )]
+        [Row( PixelFormat.Format64bppArgb )]
+        [Row( PixelFormat.Format32bppPArgb, ExpectedException = typeof( UnsupportedImageFormatException ) )]
+        */
+        public void SetPixelsTest(PixelFormat pixelFormat)
+        {
+            UnmanagedImage image = UnmanagedImage.Create(320, 240, pixelFormat);
+            Color color = Color.White;
+            List<IntPoint> points = new List<IntPoint>();
+
+            points.Add(new IntPoint(0, 0));
+            points.Add(new IntPoint(319, 0));
+            points.Add(new IntPoint(0, 239));
+            points.Add(new IntPoint(319, 239));
+            points.Add(new IntPoint(160, 120));
+
+            points.Add(new IntPoint(-1, -1));
+            points.Add(new IntPoint(320, 0));
+            points.Add(new IntPoint(0, 240));
+            points.Add(new IntPoint(320, 240));
+
+            image.SetPixels(points, color);
+
+            List<IntPoint> pixels = image.CollectActivePixels();
+
+            //Assert.AreEqual<int>( 5, pixels.Count );
+
+            //Assert.IsTrue( pixels.Contains( new IntPoint( 0, 0 ) ) );
+            //Assert.IsTrue( pixels.Contains( new IntPoint( 319, 0 ) ) );
+            //Assert.IsTrue( pixels.Contains( new IntPoint( 0, 239 ) ) );
+            //Assert.IsTrue( pixels.Contains( new IntPoint( 319, 239 ) ) );
+            //Assert.IsTrue( pixels.Contains( new IntPoint( 160, 120 ) ) );
+        }
+
+        /*
+        [Row( PixelFormat.Format24bppRgb,   1,   1, 240,   0,   0 )]
+        [Row( PixelFormat.Format24bppRgb, 318,   1,   0, 240,   0 )]
+        [Row( PixelFormat.Format24bppRgb, 318, 238, 240, 240,   0 )]
+        [Row( PixelFormat.Format24bppRgb,   1, 238,   0,   0, 240 )]
+        [Row( PixelFormat.Format24bppRgb, 160, 120, 240, 240, 240 )]
+
+        [Row( PixelFormat.Format32bppArgb,   1,   1, 240,   0,   0 )]
+        [Row( PixelFormat.Format32bppArgb, 318,   1,   0, 240,   0 )]
+        [Row( PixelFormat.Format32bppArgb, 318, 238, 240, 240,   0 )]
+        [Row( PixelFormat.Format32bppArgb,   1, 238,   0,   0, 240 )]
+        [Row( PixelFormat.Format32bppArgb, 160, 120, 240, 240, 240 )]
+
+        [Row( PixelFormat.Format32bppRgb,   1,   1, 240,   0,   0 )]
+        [Row( PixelFormat.Format32bppRgb, 318,   1,   0, 240,   0 )]
+        [Row( PixelFormat.Format32bppRgb, 318, 238, 240, 240,   0 )]
+        [Row( PixelFormat.Format32bppRgb,   1, 238,   0,   0, 240 )]
+        [Row( PixelFormat.Format32bppRgb, 160, 120, 240, 240, 240 )]
+
+        [Row( PixelFormat.Format8bppIndexed,   1,   1, 128, 128, 128 )]
+        [Row( PixelFormat.Format8bppIndexed, 318,   1,  96,  96,  96 )]
+        [Row( PixelFormat.Format8bppIndexed, 318, 238, 192, 192, 192 )]
+        [Row( PixelFormat.Format8bppIndexed,   1, 238,  32,  32,  32 )]
+        [Row( PixelFormat.Format8bppIndexed, 160, 120, 255, 255, 255 )]
+        */
+        public void ToManagedImageTest(PixelFormat pixelFormat, int x, int y, byte red, byte green, byte blue)
+        {
+            UnmanagedImage image = UnmanagedImage.Create(320, 240, pixelFormat);
+
+            image.SetPixel(new IntPoint(x, y), Color.FromArgb(255, red, green, blue));
+
+            Bitmap bitmap = image.ToManagedImage();
+
+            // check colors of pixels
+            //Assert.AreEqual<Color>( Color.FromArgb( 255, red, green, blue ), bitmap.GetPixel( x, y ) );
+
+            // make sure there are only 1 pixel
+            UnmanagedImage temp = UnmanagedImage.FromManagedImage(bitmap);
+
+            List<IntPoint> pixels = temp.CollectActivePixels();
+            //Assert.AreEqual<int>( 1, pixels.Count );
+
+            image.Dispose();
+            bitmap.Dispose();
+            temp.Dispose();
+        }
+
+        //------------------------------------------------------------  # 60個
+
+
+        private void button22_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button19_Click(object sender, EventArgs e)
+        private void button23_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button29_Click(object sender, EventArgs e)
         {
 
         }
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+

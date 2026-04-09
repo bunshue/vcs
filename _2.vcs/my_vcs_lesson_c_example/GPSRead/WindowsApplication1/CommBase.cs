@@ -19,7 +19,7 @@ namespace JH.CommBase
     {
         private IntPtr hPort;
         private IntPtr ptrUWO = IntPtr.Zero;
-        private Thread rxThread = null;
+        private Thread thread_ex = null;
         private bool online = false;
         private bool auto = false;
         private bool checkSends = true;
@@ -564,10 +564,10 @@ namespace JH.CommBase
 
             rxException = null;
             rxExceptionReported = false;
-            rxThread = new Thread(new ThreadStart(this.ReceiveThread));
-            rxThread.Name = "CommBaseRx";
-            rxThread.Priority = ThreadPriority.AboveNormal;
-            rxThread.Start();
+            thread_ex = new Thread(new ThreadStart(this.ReceiveThread));
+            thread_ex.Name = "CommBaseRx";
+            thread_ex.Priority = ThreadPriority.AboveNormal;
+            thread_ex.Start();
 
             //JH1.2: More robust thread start-up wait.
             startEvent.WaitOne(500, false);
@@ -603,12 +603,12 @@ namespace JH.CommBase
         private void InternalClose()
         {
             Win32Com.CancelIo(hPort);
-            if (rxThread != null)
+            if (thread_ex != null)
             {
-                rxThread.Abort();
+                thread_ex.Abort();
                 //JH 1.3: Improve robustness of Close in case were followed by Open:
-                rxThread.Join(100);
-                rxThread = null;
+                thread_ex.Join(100);
+                thread_ex = null;
             }
             Win32Com.CloseHandle(hPort);
             if (ptrUWO != IntPtr.Zero) Marshal.FreeHGlobal(ptrUWO);
@@ -649,7 +649,7 @@ namespace JH.CommBase
         /// <param name="reason">Description of fault</param>
         protected void ThrowException(string reason)
         {
-            if (Thread.CurrentThread == rxThread)
+            if (Thread.CurrentThread == thread_ex)
             {
                 throw new CommPortException(reason);
             }

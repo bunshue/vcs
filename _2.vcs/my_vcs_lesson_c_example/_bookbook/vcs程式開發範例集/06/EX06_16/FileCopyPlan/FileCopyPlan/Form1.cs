@@ -8,13 +8,13 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
-using System.Threading;//線程序的命名空間
+using System.Threading;  // 線程序的命名空間
 
 namespace FileCopyPlan
 {
     public partial class Form1 : Form
     {
-        private System.Threading.Thread thdAddFile; //建立一個線程
+        private Thread thread_ex; //建立一個線程
         private string str = "";
         FileStream FormerOpen;//實例化FileStream類
         FileStream ToFileOpen;//實例化FileStream類
@@ -58,8 +58,8 @@ namespace FileCopyPlan
             {
                 str = textBox1.Text;//記錄源文件的路徑
                 str = "\\" + str.Substring(str.LastIndexOf('\\') + 1, str.Length - str.LastIndexOf('\\') - 1);//取得源文件的名稱
-                thdAddFile = new Thread(new ThreadStart(SetAddFile));//建立一個線程
-                thdAddFile.Start();//執行目前線程
+                thread_ex = new Thread(new ThreadStart(SetAddFile));//建立一個線程
+                thread_ex.Start();//執行目前線程
             }
         }
 
@@ -78,7 +78,7 @@ namespace FileCopyPlan
         public void RunAddFile()
         {
             CopyFile(textBox1.Text, textBox2.Text + str, 1024, progressBar1);//複製文件
-            thdAddFile.Abort();//關閉線程
+            thread_ex.Abort();//關閉線程
         }
 
         /// <summary>
@@ -144,4 +144,3 @@ namespace FileCopyPlan
         }
     }
 }
-

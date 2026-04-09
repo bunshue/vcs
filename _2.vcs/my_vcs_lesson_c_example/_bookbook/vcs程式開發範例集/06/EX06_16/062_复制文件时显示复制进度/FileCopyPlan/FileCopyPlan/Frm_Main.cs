@@ -14,7 +14,7 @@ namespace FileCopyPlan
 {
     public partial class Frm_Main : Form
     {
-        private System.Threading.Thread thdAddFile; //创建一个线程
+        private Thread thread_ex; //创建一个线程
         private string str = "";
         FileStream FormerOpen;//实例化FileStream类
         FileStream ToFileOpen;//实例化FileStream类
@@ -56,8 +56,8 @@ namespace FileCopyPlan
             }
             str = textBox1.Text;//记录源文件的路径
             str = "\\" + str.Substring(str.LastIndexOf('\\') + 1, str.Length - str.LastIndexOf('\\') - 1);//获取源文件的名称
-            thdAddFile = new Thread(new ThreadStart(SetAddFile));//创建一个线程
-            thdAddFile.Start();//执行当前线程
+            thread_ex = new Thread(new ThreadStart(SetAddFile));//创建一个线程
+            thread_ex.Start();//执行当前线程
         }
 
         public delegate void AddFile();//定义委托
@@ -75,7 +75,7 @@ namespace FileCopyPlan
         public void RunAddFile()
         {
             CopyFile(textBox1.Text, textBox2.Text + str, 1024, progressBar1);//复制文件
-            thdAddFile.Abort();//关闭线程
+            thread_ex.Abort();//关闭线程
         }
 
         /// <summary>

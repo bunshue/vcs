@@ -6,21 +6,38 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;
 using System.Collections;
 using System.Threading;
+
 namespace FileBatchChangeName
 {
     public partial class Frm_Main : Form
     {
+        string[] files;//选择文件的集合
+        FileInfo fi;//创建一个FileInfo对象，用于获取文件信息
+        string[] lvFiles = new string[7];//向控件中添加的行信息
+        Thread thread_ex;//处理批量更名方法的线程
+
         public Frm_Main()
         {
             InitializeComponent();
         }
-        string[] files;//选择文件的集合
-        FileInfo fi;//创建一个FileInfo对象，用于获取文件信息
-        string[] lvFiles = new string[7];//向控件中添加的行信息
-        Thread td;//处理批量更名方法的线程
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            CheckForIllegalCrossThreadCalls = false;
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (thread_ex != null)
+            {
+                thread_ex.Abort();
+            }
+        }
+
         private void 添加文件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -53,7 +70,6 @@ namespace FileBatchChangeName
                 tsslSum.Text = listView1.Items.Count.ToString();
             }
         }
-
 
         bool flag = true;
         private void 总在最前ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -292,14 +308,9 @@ namespace FileBatchChangeName
                     listView1.Items[i].SubItems[6].Text = "";
                 }
                 tsslError.Text = "";
-                td = new Thread(new ThreadStart(ChangeName));
-                td.Start();
+                thread_ex = new Thread(new ThreadStart(ChangeName));
+                thread_ex.Start();
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            CheckForIllegalCrossThreadCalls = false;
         }
 
         private void 导出文件列表ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -357,14 +368,6 @@ namespace FileBatchChangeName
                     string name1 = SimplifiedChineseToTraditionalChinese(name);
                     listView1.Items[i].SubItems[1].Text = name1;
                 }
-            }
-        }
-
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (td != null)
-            {
-                td.Abort();
             }
         }
     }

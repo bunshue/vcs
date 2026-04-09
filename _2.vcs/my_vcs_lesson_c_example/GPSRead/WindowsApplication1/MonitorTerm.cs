@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+
 using System.IO;
 using JH.CommBase; 
 using System.Text;
@@ -7,16 +8,16 @@ using System.Threading;
 
 namespace WinBaseTerm
 {
-     public   class MonitorTerm : CommBase
+    public class MonitorTerm : CommBase
     {
 
-         public static GPSReadForm form;
+        public static GPSReadForm form;
         public static MonitorTerm term;
         public static CommBaseTermSettings settings;
         public static string settingsFileName = "";
 
         private int lineCount = 0;
-         public static int messgeCount = 0;
+        public static int messgeCount = 0;
         public class CommBaseTermSettings : CommBaseSettings
         {
             public bool showAsHex = false;
@@ -61,15 +62,15 @@ namespace WinBaseTerm
             Application.Run(form);
             return 0;
         }
-        public bool Immediate = false;       
+        public bool Immediate = false;
 
         protected override CommBaseSettings CommSettings()
         {
             return settings;
         }
 
-         string message = "";
-         bool isNoend=true;
+        string message = "";
+        bool isNoend = true;
         protected override void OnRxChar(byte c)
         {
             string s; bool nl = false;
@@ -96,23 +97,17 @@ namespace WinBaseTerm
                     s = new string((char)c, 1);
                 }
             }
-            lock(message)
+            lock (message)
             {
                 message += s;
                 if (s.ToLower() == "<lf>")
                 {
                     messgeCount = messgeCount + 1;
                     form.ShowRevMsg(message, messgeCount);
-               
 
                     message = "";
                 }
             }
-
-         
         }
-  
-     
-       
     }
 }

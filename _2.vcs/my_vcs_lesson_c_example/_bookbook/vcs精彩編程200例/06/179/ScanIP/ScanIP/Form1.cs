@@ -15,7 +15,7 @@ namespace ScanIP
     public partial class Form1 : Form
     {
         //實例化類對象及公共變量
-        private Thread myThread;
+        private Thread thread_ex;
         string StartIPAddress = "";
         string EndIPAddress = "";
         int intStrat = 0;                          //開始掃描地址
@@ -35,12 +35,12 @@ namespace ScanIP
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (myThread != null)               //判斷線程對象是否為空
+            if (thread_ex != null)               //判斷線程對象是否為空
             {
                 //判斷掃描IP地址的線程是否正在運行
-                if (myThread.ThreadState == ThreadState.Running)
+                if (thread_ex.ThreadState == ThreadState.Running)
                 {
-                    myThread.Abort();           //終止線程
+                    thread_ex.Abort();           //終止線程
                 }
             }
         }
@@ -70,8 +70,8 @@ namespace ScanIP
                     timer1.Start();             //開始運行計時器
                     button1.Text = "停止";      //設置按鈕文本為停止
                     //使用自定義方法StartScan實例化線程對象
-                    myThread = new Thread(new ThreadStart(this.StartScan));
-                    myThread.Start();                           //開始運行掃描IP的線程
+                    thread_ex = new Thread(new ThreadStart(this.StartScan));
+                    thread_ex.Start();                           //開始運行掃描IP的線程
                 }
                 else
                 {
@@ -80,12 +80,12 @@ namespace ScanIP
                     timer1.Stop();              //停止運行計時器
                     //設置進度條的值為最大值
                     progressBar1.Value = intEnd;
-                    if (myThread != null)       //判斷線程對象是否為空
+                    if (thread_ex != null)       //判斷線程對象是否為空
                     {
                         //判斷掃描IP地址的線程是否正在運行
-                        if (myThread.ThreadState == ThreadState.Running)
+                        if (thread_ex.ThreadState == ThreadState.Running)
                         {
-                            myThread.Abort();   //終止線程
+                            thread_ex.Abort();   //終止線程
                         }
                     }
                 }
@@ -115,8 +115,10 @@ namespace ScanIP
                         }
                     }
                     else
+                    {
                         //向列表匯總添加掃描到的已用IP地址
                         listView1.Items.Add(strIP);
+                    }
                 }
                 else
                 {
@@ -145,10 +147,7 @@ namespace ScanIP
             }
         }
 
-        //掃描局域網IP地址
-        /// <summary>
-        /// 掃描局域網IP地址
-        /// </summary>
+        // 掃描局域網IP地址
         private void StartScan()
         {
             //掃描的操作
@@ -165,9 +164,13 @@ namespace ScanIP
                     //獲取主機名
                     string strHostName = myScanHost.HostName.ToString();
                     if (strIP == "")
+                    {
                         strIP += strScanIP + "->" + strHostName;
+                    }
                     else
+                    {
                         strIP += "," + strScanIP + "->" + strHostName;
+                    }
                 }
                 catch (Exception ex)
                 {

@@ -98,7 +98,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(597, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(683, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -158,7 +158,7 @@
             // 
             this.更名ToolStripMenuItem.Image = global::FileBatchChangeName.Properties.Resources.图标;
             this.更名ToolStripMenuItem.Name = "更名ToolStripMenuItem";
-            this.更名ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.更名ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.更名ToolStripMenuItem.Text = "应用";
             this.更名ToolStripMenuItem.Click += new System.EventHandler(this.更名ToolStripMenuItem_Click);
             // 
@@ -166,7 +166,7 @@
             // 
             this.繁体转简体ToolStripMenuItem.Image = global::FileBatchChangeName.Properties.Resources.netspell;
             this.繁体转简体ToolStripMenuItem.Name = "繁体转简体ToolStripMenuItem";
-            this.繁体转简体ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.繁体转简体ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.繁体转简体ToolStripMenuItem.Text = "繁体转简体";
             this.繁体转简体ToolStripMenuItem.Click += new System.EventHandler(this.繁体转简体ToolStripMenuItem_Click);
             // 
@@ -174,7 +174,7 @@
             // 
             this.简体转繁体ToolStripMenuItem.Image = global::FileBatchChangeName.Properties.Resources.netspell;
             this.简体转繁体ToolStripMenuItem.Name = "简体转繁体ToolStripMenuItem";
-            this.简体转繁体ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.简体转繁体ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.简体转繁体ToolStripMenuItem.Text = "简体转繁体";
             this.简体转繁体ToolStripMenuItem.Click += new System.EventHandler(this.简体转繁体ToolStripMenuItem_Click);
             // 
@@ -187,9 +187,9 @@
             this.toolStripStatusLabel3,
             this.toolStripProgressBar1,
             this.tsslError});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 412);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 498);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(597, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(683, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -243,8 +243,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.listView1);
-            this.splitContainer1.Size = new System.Drawing.Size(597, 388);
-            this.splitContainer1.SplitterDistance = 121;
+            this.splitContainer1.Size = new System.Drawing.Size(683, 474);
+            this.splitContainer1.SplitterDistance = 147;
             this.splitContainer1.SplitterWidth = 1;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -256,7 +256,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(597, 121);
+            this.tabControl1.Size = new System.Drawing.Size(683, 147);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -266,7 +266,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(589, 95);
+            this.tabPage1.Size = new System.Drawing.Size(675, 121);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本设置";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -471,7 +471,7 @@
             this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(597, 266);
+            this.listView1.Size = new System.Drawing.Size(683, 326);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -527,7 +527,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(597, 434);
+            this.ClientSize = new System.Drawing.Size(683, 520);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);

@@ -37,6 +37,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,7 +56,7 @@
             // 
             this.txtAdd.Location = new System.Drawing.Point(137, 25);
             this.txtAdd.Name = "txtAdd";
-            this.txtAdd.Size = new System.Drawing.Size(193, 21);
+            this.txtAdd.Size = new System.Drawing.Size(193, 22);
             this.txtAdd.TabIndex = 0;
             // 
             // button1
@@ -100,11 +101,20 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(8, 134);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(565, 289);
+            this.richTextBox1.TabIndex = 4;
+            this.richTextBox1.Text = "";
+            // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(363, 100);
+            this.ClientSize = new System.Drawing.Size(585, 435);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -112,8 +122,8 @@
             this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "實現動態系統托盤圖標";
-            this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Frm_Main_FormClosed);
+            this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -129,5 +139,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

@@ -117,7 +117,7 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(665, 83);
+            this.bt_clear.Location = new System.Drawing.Point(786, 324);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(71, 30);
             this.bt_clear.TabIndex = 27;
@@ -127,7 +127,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(636, 13);
+            this.richTextBox1.Location = new System.Drawing.Point(766, 282);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 26;
@@ -140,7 +140,7 @@
             this.groupBox0.Controls.Add(this.button00);
             this.groupBox0.Location = new System.Drawing.Point(12, 13);
             this.groupBox0.Name = "groupBox0";
-            this.groupBox0.Size = new System.Drawing.Size(150, 150);
+            this.groupBox0.Size = new System.Drawing.Size(180, 180);
             this.groupBox0.TabIndex = 28;
             this.groupBox0.TabStop = false;
             this.groupBox0.Text = "Thread使用範例0";
@@ -180,9 +180,9 @@
             this.groupBox1.Controls.Add(this.button12);
             this.groupBox1.Controls.Add(this.button11);
             this.groupBox1.Controls.Add(this.button10);
-            this.groupBox1.Location = new System.Drawing.Point(168, 12);
+            this.groupBox1.Location = new System.Drawing.Point(198, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(150, 150);
+            this.groupBox1.Size = new System.Drawing.Size(180, 180);
             this.groupBox1.TabIndex = 29;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thread使用範例1";
@@ -222,9 +222,9 @@
             this.groupBox2.Controls.Add(this.button22);
             this.groupBox2.Controls.Add(this.button21);
             this.groupBox2.Controls.Add(this.button20);
-            this.groupBox2.Location = new System.Drawing.Point(324, 12);
+            this.groupBox2.Location = new System.Drawing.Point(383, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(150, 150);
+            this.groupBox2.Size = new System.Drawing.Size(180, 180);
             this.groupBox2.TabIndex = 30;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thread使用範例2";
@@ -264,9 +264,9 @@
             this.groupBox3.Controls.Add(this.button32);
             this.groupBox3.Controls.Add(this.button31);
             this.groupBox3.Controls.Add(this.button30);
-            this.groupBox3.Location = new System.Drawing.Point(480, 13);
+            this.groupBox3.Location = new System.Drawing.Point(568, 13);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(150, 150);
+            this.groupBox3.Size = new System.Drawing.Size(180, 180);
             this.groupBox3.TabIndex = 30;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Thread使用範例3";
@@ -306,9 +306,9 @@
             this.groupBox7.Controls.Add(this.button72);
             this.groupBox7.Controls.Add(this.button71);
             this.groupBox7.Controls.Add(this.button70);
-            this.groupBox7.Location = new System.Drawing.Point(480, 169);
+            this.groupBox7.Location = new System.Drawing.Point(568, 197);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(150, 150);
+            this.groupBox7.Size = new System.Drawing.Size(180, 180);
             this.groupBox7.TabIndex = 33;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Thread使用範例7";
@@ -348,9 +348,9 @@
             this.groupBox6.Controls.Add(this.button62);
             this.groupBox6.Controls.Add(this.button61);
             this.groupBox6.Controls.Add(this.button60);
-            this.groupBox6.Location = new System.Drawing.Point(324, 168);
+            this.groupBox6.Location = new System.Drawing.Point(383, 196);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(150, 150);
+            this.groupBox6.Size = new System.Drawing.Size(180, 180);
             this.groupBox6.TabIndex = 34;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Thread使用範例6";
@@ -390,9 +390,9 @@
             this.groupBox5.Controls.Add(this.button52);
             this.groupBox5.Controls.Add(this.button51);
             this.groupBox5.Controls.Add(this.button50);
-            this.groupBox5.Location = new System.Drawing.Point(168, 168);
+            this.groupBox5.Location = new System.Drawing.Point(198, 196);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(150, 150);
+            this.groupBox5.Size = new System.Drawing.Size(180, 180);
             this.groupBox5.TabIndex = 32;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Thread使用範例5";
@@ -435,9 +435,9 @@
             this.groupBox4.Controls.Add(this.button41);
             this.groupBox4.Controls.Add(this.lb_R);
             this.groupBox4.Controls.Add(this.button40);
-            this.groupBox4.Location = new System.Drawing.Point(12, 169);
+            this.groupBox4.Location = new System.Drawing.Point(12, 197);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(150, 150);
+            this.groupBox4.Size = new System.Drawing.Size(180, 180);
             this.groupBox4.TabIndex = 31;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Thread使用範例4";
@@ -515,9 +515,9 @@
             this.groupBox8.Controls.Add(this.button82);
             this.groupBox8.Controls.Add(this.button81a);
             this.groupBox8.Controls.Add(this.button80a);
-            this.groupBox8.Location = new System.Drawing.Point(12, 325);
+            this.groupBox8.Location = new System.Drawing.Point(12, 379);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(150, 150);
+            this.groupBox8.Size = new System.Drawing.Size(180, 180);
             this.groupBox8.TabIndex = 34;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Thread使用範例8";
@@ -583,9 +583,9 @@
             this.groupBox9.Controls.Add(this.button92);
             this.groupBox9.Controls.Add(this.button91);
             this.groupBox9.Controls.Add(this.button90);
-            this.groupBox9.Location = new System.Drawing.Point(168, 325);
+            this.groupBox9.Location = new System.Drawing.Point(198, 379);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(150, 150);
+            this.groupBox9.Size = new System.Drawing.Size(180, 180);
             this.groupBox9.TabIndex = 33;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Thread使用範例9";
@@ -629,7 +629,7 @@
             this.groupBox11.Controls.Add(this.label2);
             this.groupBox11.Controls.Add(this.label4);
             this.groupBox11.Controls.Add(this.label3);
-            this.groupBox11.Location = new System.Drawing.Point(12, 501);
+            this.groupBox11.Location = new System.Drawing.Point(12, 564);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(374, 88);
             this.groupBox11.TabIndex = 35;
@@ -710,7 +710,7 @@
             // 
             this.groupBox12.Controls.Add(this.lb_cpu2);
             this.groupBox12.Controls.Add(this.panel1);
-            this.groupBox12.Location = new System.Drawing.Point(636, 168);
+            this.groupBox12.Location = new System.Drawing.Point(766, 12);
             this.groupBox12.Name = "groupBox12";
             this.groupBox12.Size = new System.Drawing.Size(133, 264);
             this.groupBox12.TabIndex = 34;
@@ -764,9 +764,9 @@
             // 
             this.groupBox10.Controls.Add(this.button101);
             this.groupBox10.Controls.Add(this.button100);
-            this.groupBox10.Location = new System.Drawing.Point(324, 325);
+            this.groupBox10.Location = new System.Drawing.Point(383, 379);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(150, 150);
+            this.groupBox10.Size = new System.Drawing.Size(180, 180);
             this.groupBox10.TabIndex = 34;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Thread使用範例10";
@@ -795,9 +795,9 @@
             this.groupBox13.Controls.Add(this.button112);
             this.groupBox13.Controls.Add(this.button111);
             this.groupBox13.Controls.Add(this.button110);
-            this.groupBox13.Location = new System.Drawing.Point(480, 325);
+            this.groupBox13.Location = new System.Drawing.Point(568, 379);
             this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(150, 150);
+            this.groupBox13.Size = new System.Drawing.Size(180, 180);
             this.groupBox13.TabIndex = 34;
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "Thread使用範例11";
@@ -818,7 +818,6 @@
             this.button111.Name = "button111";
             this.button111.Size = new System.Drawing.Size(90, 30);
             this.button111.TabIndex = 1;
-            this.button111.Text = "停止";
             this.button111.UseVisualStyleBackColor = true;
             this.button111.Click += new System.EventHandler(this.button111_Click);
             // 
@@ -836,7 +835,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(781, 601);
+            this.ClientSize = new System.Drawing.Size(928, 659);
             this.Controls.Add(this.groupBox13);
             this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.groupBox12);

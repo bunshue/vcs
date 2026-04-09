@@ -20,7 +20,7 @@ namespace ImgMicroimage
         private int ImageWidth;
         private int ImageHeight;
         public string ErrMessage;
-        public Thread td;
+        public Thread thread_ex;
 
         public class CustomListView : ListView
         {
@@ -50,9 +50,9 @@ namespace ImgMicroimage
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (td != null)
+            if (thread_ex != null)
             {
-                td.Abort();
+                thread_ex.Abort();
             }
             deletefile();
         }
@@ -154,27 +154,9 @@ namespace ImgMicroimage
                     }
                     ResourceImage.Dispose();
                 }
-                tsslText.Text = "共有" + this.clv.Items.Count.ToString() + "张图片";
+                richTextBox1.Text += "共有" + this.clv.Items.Count.ToString() + "张图片\n";
             }
-            td.Abort();
-        }
-
-        private void toolStripButton1_Click_1(object sender, EventArgs e)
-        {
-            folderBrowserDialog1.SelectedPath = @"D:\_git\vcs\_1.data\______test_files1\_pic";
-
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                clv.Items.Clear();
-                filePath = folderBrowserDialog1.SelectedPath;
-                td = new Thread(new ThreadStart(a));
-                td.Start();
-            }
-        }
-
-        private void toolStripButton2_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
+            thread_ex.Abort();
         }
 
         private void deletefile()
@@ -201,11 +183,11 @@ namespace ImgMicroimage
                 string pName = clv.SelectedItems[0].Text;
                 if (filePath.Length == 3)
                 {
-                    tsslPath.Text = "图片路径：" + filePath + pName;
+                    richTextBox1.Text += "图片路径：" + filePath + pName + "\n";
                 }
                 else
                 {
-                    tsslPath.Text = "图片路径：" + filePath + "\\" + pName;
+                    richTextBox1.Text += "图片路径：" + filePath + "\\" + pName + "\n";
                 }
             }
         }
@@ -218,14 +200,33 @@ namespace ImgMicroimage
                 if (filePath.Length == 3)
                 {
                     System.Diagnostics.Process.Start(filePath + pName);
-                    tsslPath.Text = "图片路径：" + filePath + pName;
+                    richTextBox1.Text += "图片路径：" + filePath + pName + "\n";
                 }
                 else
                 {
                     System.Diagnostics.Process.Start(filePath + "\\" + pName);
-                    tsslPath.Text = "图片路径：" + filePath + "\\" + pName;
+                    richTextBox1.Text += "图片路径：" + filePath + "\\" + pName + "\n";
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            folderBrowserDialog1.SelectedPath = @"D:\_git\vcs\_1.data\______test_files1\_pic";
+
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                clv.Items.Clear();
+                filePath = folderBrowserDialog1.SelectedPath;
+                thread_ex = new Thread(new ThreadStart(a));
+                thread_ex.Start();
+            }
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

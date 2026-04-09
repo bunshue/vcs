@@ -7,22 +7,45 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Net.Sockets;
-using System.Threading;
 using System.IO;
 using System.Net;
+using System.Threading;
+using System.Net.Sockets;
 
 namespace DynamicTaskStock
 {
     public partial class Frm_Main : Form
     {
+        private Thread thread_ex;//創建一個線程
+        private TcpListener tcpListener;//實例化偵聽對象
+        string message = "";//記錄傳輸的內容
+
         public Frm_Main()
         {
             InitializeComponent();
         }
-        private Thread td;//創建一個線程
-        private TcpListener tcpListener;//實例化偵聽對象
-        string message = "";//記錄傳輸的內容
+
+        private void Frm_Main_Load(object sender, EventArgs e)
+        {
+            thread_ex = new Thread(new ThreadStart(this.StartListen));//通過線程調用StartListen方法
+            thread_ex.Start();//開始運行線程
+        }
+
+        private void Frm_Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (this.tcpListener != null)
+            {
+                tcpListener.Stop();//停止偵聽對象
+            }
+            if (thread_ex != null)
+            {
+                if (thread_ex.ThreadState == ThreadState.Running)//判斷線程是否運行
+                {
+                    thread_ex.Abort();//終止線程
+                }
+            }
+        }
+
         private void StartListen()
         {
             tcpListener = new TcpListener(888);//創建TcpListener實例
@@ -34,26 +57,6 @@ namespace DynamicTaskStock
                 byte[] mbyte = new byte[1024];//建立緩存
                 int i = nstream.Read(mbyte, 0, mbyte.Length);//將數據流寫入緩存
                 message = Encoding.Default.GetString(mbyte, 0, i);//獲取傳輸的內容
-            }
-        }
-        private void Frm_Main_Load(object sender, EventArgs e)
-        {
-            td = new Thread(new ThreadStart(this.StartListen));//通過線程調用StartListen方法
-            td.Start();//開始運行線程
-        }
-
-        private void Frm_Main_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (this.tcpListener != null)
-            {
-                tcpListener.Stop();//停止偵聽對象
-            }
-            if (td != null)
-            {
-                if (td.ThreadState == ThreadState.Running)//判斷線程是否運行
-                {
-                    td.Abort();//終止線程
-                }
             }
         }
 
