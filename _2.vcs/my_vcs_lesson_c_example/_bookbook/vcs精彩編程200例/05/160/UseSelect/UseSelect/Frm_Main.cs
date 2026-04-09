@@ -14,14 +14,12 @@ namespace UseSelect
 {
     public partial class Frm_Main : Form
     {
-        //#region 定义公共对象及变量
         SqlConnection sqlcon;
         SqlDataAdapter sqlda;
         DataSet myds;
         string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
         string strSql = "select ID as 职工编号,Name as 职工姓名,Sex as 性别,Age as 年龄,Tel as 联系电话,Address as 家庭地址,QQ as QQ号码,Email as Email地址 from tb_Employee";
         public static string FindValue = "";  //存储查询条件
-        //#endregion
 
         public Frm_Main()
         {
@@ -176,58 +174,36 @@ namespace UseSelect
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            labCount.Text = "共有" + (txt_Message.Rows.Count - 1) + "条记录";
+            //labCount.Text = "共有" + (dataGridView1.Rows.Count - 1) + "条记录";
+            richTextBox1.Text += "共有" + (dataGridView1.Rows.Count - 1) + "条记录\n";
         }
 
-        //#region 根据条件查询职工信息
-        /// <summary>
-        /// 根据条件查询职工信息
-        /// </summary>
-        /// <param name="strsql">设置查询条件的SQL语句</param>
+        // 根据条件查询职工信息
         private void GetAllInfo(string strsql)
         {
             sqlcon = new SqlConnection(strCon);
             sqlda = new SqlDataAdapter(strsql, sqlcon);
             myds = new DataSet();
             sqlda.Fill(myds);
-            txt_Message.DataSource = myds.Tables[0];
+            dataGridView1.DataSource = myds.Tables[0];
         }
-        //#endregion
 
-        //#region  验证输入为数字
-        /// <summary>
-        /// 验证输入为数字
-        /// </summary>
-        /// <param name="str"></param>
-        /// <returns></returns>
+        // 验证输入为数字
         public bool validateNum(string str)
         {
             return Regex.IsMatch(str, "^[0-9]*[1-9][0-9]*$");
         }
-        //#endregion
 
-        //#region  验证输入为电话号码
-        /// <summary>
-        /// 验证输入为电话号码
-        /// </summary>
-        /// <param name="str"></param>
-        /// <returns></returns>
+        // 验证输入为电话号码
         public bool validatePhone(string str)
         {
             return Regex.IsMatch(str, @"^(\d{3,4})-(\d{7,8})$");
         }
-        //#endregion
 
-        //#region  验证输入为Email
-        /// <summary>
-        /// 验证输入为Email
-        /// </summary>
-        /// <param name="str"></param>
-        /// <returns></returns>
+        // 验证输入为Email
         public bool validateEmail(string str)
         {
             return Regex.IsMatch(str, @"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*");
         }
-        //#endregion
     }
 }

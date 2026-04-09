@@ -58,12 +58,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Release\AForge.Math.dll</HintPath>
     </Reference>
-    <Reference Include="Gallio, Version=3.1.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
-    <Reference Include="MbUnit, Version=3.1.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -78,18 +72,12 @@
     <Compile Include="Geometry\GrahamConvexHullTest.cs" />
     <Compile Include="Geometry\LineSegmentTest.cs" />
     <Compile Include="Geometry\LineStraighteningOptimizerTest.cs" />
-    <Compile Include="Geometry\LineTest.cs" />
     <Compile Include="Geometry\ShapeOptimizerTestBase.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Geometry\SimpleShapeCheckerTest.cs" />
-    <Compile Include="Matrix3x3Test.cs" />
-    <Compile Include="Matrix4x4Test.cs" />
     <Compile Include="Metrics\MetricsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StatisticsTest.cs" />
-    <Compile Include="ToolsTest.cs" />
-    <Compile Include="Vector3Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

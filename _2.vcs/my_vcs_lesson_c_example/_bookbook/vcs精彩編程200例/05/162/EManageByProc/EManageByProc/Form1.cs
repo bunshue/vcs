@@ -13,13 +13,11 @@ namespace EManageByProc
 {
     public partial class Form1 : Form
     {
-        //#region 定义全局变量及对象
         string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data2.mdf;Integrated Security=True;Connect Timeout=30";
         SqlConnection sqlcon;
         SqlCommand sqlcmd;
         SqlDataAdapter sqlda;
         DataSet myds;
-        //#endregion
 
         public Form1()
         {
@@ -135,23 +133,15 @@ namespace EManageByProc
             dgvInfo.DataSource = SelectEInfo(cboxCondition.Text, txtKeyWord.Text).Tables[0];
         }
 
-        //#region 获得数据库连接
-        /// <summary>
-        /// 获得数据库连接
-        /// </summary>
-        /// <returns>返回SqlConnection对象</returns>
+        // 获得数据库连接
         private SqlConnection getCon()
         {
             sqlcon = new SqlConnection(strCon);
             sqlcon.Open();
             return sqlcon;
         }
-        //#endregion
 
-        //#region 查询职工信息
-        /// <summary>
-        /// 查询职工信息
-        /// </summary>
+        // 查询职工信息
         /// <param name="str">查询条件</param>
         /// <param name="str">查询关键字</param>
         /// <returns>DataSet数据集对象</returns>
@@ -190,6 +180,5 @@ namespace EManageByProc
             sqlcon.Close();
             return myds;
         }
-        //#endregion
     }
 }

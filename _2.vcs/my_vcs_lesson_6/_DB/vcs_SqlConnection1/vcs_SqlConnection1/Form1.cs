@@ -69,6 +69,9 @@ namespace vcs_SqlConnection1
             button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            btn_sql_test.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            btn_sql_test.BackColor = Color.Pink;
+            groupBox1.Visible = false;
 
             int dd = 26;
             dataGridView1.Size = new Size(510, 380);
@@ -192,68 +195,34 @@ namespace vcs_SqlConnection1
             if (select == 0)
             {
                 richTextBox1.Text += "第 0 種\n";
-                // 資料庫檔案
-                db_filename = "db_TomeOne.mdf";
-                // 查詢字串
-                sqlstr = "SELECT * FROM tb_lottery ORDER BY t_year";
             }
             else if (select == 1)
             {
                 richTextBox1.Text += "第 1 種\n";
-                // 資料庫檔案
-                db_filename = "db_TomeTwo.mdf";
-                // 查詢字串
-                sqlstr = string.Format("SELECT * FROM tb_Grade");
             }
             else if (select == 2)
             {
                 richTextBox1.Text += "第 2 種\n";
-                // 資料庫檔案
-                db_filename = "db_TomeTwo.mdf";
-                // 查詢字串, 查询第10到第20名的数据
-                sqlstr = string.Format(@"SELECT TOP 10 * FROM (SELECT TOP 20 * FROM tb_Grade ORDER BY 总分 DESC) AS st ORDER BY 总分 ASC");
             }
             else if (select == 3)
             {
                 richTextBox1.Text += "第 3 種\n";
-                // 資料庫檔案
-                db_filename = "db_TomeTwo.mdf";
-                // 查詢字串
-                sqlstr = string.Format("SELECT * FROM tb_Book");
             }
             else if (select == 4)
             {
                 richTextBox1.Text += "第 4 種\n";
-                // 資料庫檔案
-                db_filename = "db_TomeTwo.mdf";
-                // 查詢字串, 查询销售量占前50%的图书信息, 查询数据库信息
-                sqlstr = string.Format(@"SELECT TOP 50 PERCENT 书号,书名,SUM(销售数量)AS 合计销售数量 FROM tb_Book GROUP BY 书号,书名,作者 ORDER BY 3 DESC");
             }
             else if (select == 5)
             {
                 richTextBox1.Text += "第 5 種\n";
-                //員工資料
-                // 資料庫檔案
-                db_filename = "ch18DB.mdf";
-                // 查詢字串
-                sqlstr = "SELECT * FROM 員工";
             }
             else if (select == 6)
             {
                 richTextBox1.Text += "第 6 種\n";
-                //員工資料
-                // 資料庫檔案
-                db_filename = "ch18DB.mdf";
-                // 查詢字串, 員工資料 排序 薪資 降冪
-                sqlstr = "SELECT * FROM 員工 ORDER BY 薪資 DESC";
             }
             else if (select == 7)
             {
                 richTextBox1.Text += "第 7 種\n";
-                // 資料庫檔案
-                db_filename = "vcs_sql09_db.mdf";
-                // 查詢字串
-                sqlstr = "SELECT * FROM vcs_sql09_table";
             }
             else
             {
@@ -2635,6 +2604,97 @@ namespace vcs_SqlConnection1
                 }
             }
         }
+
+        private void btn_sql_test_Click(object sender, EventArgs e)
+        {
+            //SQL 簡易測試
+            dataGridView1.Size = new Size(900, 400);
+            dataGridView2.Visible = false;
+            dataGridView3.Visible = false;
+            dataGridView4.Visible = false;
+            lb_dgv2.Visible = false;
+            lb_dgv3.Visible = false;
+            lb_dgv4.Visible = false;
+
+            bt_previous.Location = new Point(40, 40);
+            bt_next.Location = new Point(40, 40 + 100);
+            lb_index.Location = new Point(40+20, 40 + 56);
+            tb_sql.Size = new Size(700, 200);
+            tb_sql.Location = new Point(140, 40);
+            lb_index.Text = "";
+
+            groupBox1.Size = new Size(900, 300);
+            groupBox1.Location = new Point(640, 500);
+            groupBox1.Visible = true;
+
+            show_data_by_sqlcmd(sqlcmd_index);
+        }
+
+        void show_data_by_sqlcmd(int idx)
+        {
+            //richTextBox1.Text += "idx = " + idx.ToString() + "\n";
+            string index = sqlcmd[idx, 0];
+            string db_filename = sqlcmd[idx, 1];
+            string sqlstr = sqlcmd[idx, 2];
+            string description = sqlcmd[idx, 3];
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = description;
+
+            string mesg = "編號 :\t" + index + Environment.NewLine +
+                "資料庫檔案 :\t" + db_filename + Environment.NewLine +
+                "查詢字串 :\t" + sqlstr + Environment.NewLine +
+                "說明 :\t" + description;
+            tb_sql.Text = mesg;
+        }
+
+        int sqlcmd_index = 0;
+
+        private void bt_previous_Click(object sender, EventArgs e)
+        {
+            //上一個
+            int total_sqlcmd = sqlcmd.GetUpperBound(0) + 1;
+            //richTextBox1.Text += "total_sqlcmd = " + total_sqlcmd.ToString() + "\n";
+            if (sqlcmd_index == 0)
+            {
+                sqlcmd_index = total_sqlcmd - 1;
+            }
+            else
+            {
+                sqlcmd_index--;
+            }
+            lb_index.Text = sqlcmd_index.ToString();
+            show_data_by_sqlcmd(sqlcmd_index);
+        }
+
+        private void bt_next_Click(object sender, EventArgs e)
+        {
+            //下一個
+            int total_sqlcmd = sqlcmd.GetUpperBound(0) + 1;
+            //richTextBox1.Text += "total_sqlcmd = " + total_sqlcmd.ToString() + "\n";
+            sqlcmd_index++;
+            if (sqlcmd_index >= total_sqlcmd)
+            {
+                sqlcmd_index = 0;
+            }
+            lb_index.Text = sqlcmd_index.ToString();
+            show_data_by_sqlcmd(sqlcmd_index);
+        }
+
+        //二維字串串列
+        string[,] sqlcmd = new string[,]
+        {
+            //idx  /  資料庫檔案  /  查詢字串  /  說明
+            { "1", "db_TomeOne.mdf", "SELECT * FROM tb_lottery ORDER BY t_year", ""},
+            { "2", "db_TomeTwo.mdf", "SELECT * FROM tb_Grade", ""},
+            { "3", "db_TomeTwo.mdf", "SELECT TOP 10 * FROM (SELECT TOP 20 * FROM tb_Grade ORDER BY 总分 DESC) AS st ORDER BY 总分 ASC", "查询第10到第20名的数据"},
+            { "4", "db_TomeTwo.mdf", "SELECT * FROM tb_Book", ""},
+            { "5", "db_TomeTwo.mdf", "SELECT TOP 50 PERCENT 书号,书名,SUM(销售数量)AS 合计销售数量 FROM tb_Book GROUP BY 书号,书名,作者 ORDER BY 3 DESC", "查询销售量占前50%的图书信息, 查询数据库信息"},
+            { "6", "ch18DB.mdf", "SELECT * FROM 員工", "員工資料"},
+            { "7", "ch18DB.mdf", "SELECT * FROM 員工 ORDER BY 薪資 DESC", "員工資料 排序 薪資 降冪"},
+            { "8", "vcs_sql09_db.mdf", "SELECT * FROM vcs_sql09_table", ""},
+        };
+
+
     }
 }
 
@@ -2672,7 +2732,6 @@ SQL不同的連線方式
 
 
 /*
-
 // 查詢字串
             string sqlstr = "SELECT emp_id AS 用戶編號,fname AS 用戶姓名,hire_date AS 工作時間 FROM employee";//定義一個查詢字符串變量
 

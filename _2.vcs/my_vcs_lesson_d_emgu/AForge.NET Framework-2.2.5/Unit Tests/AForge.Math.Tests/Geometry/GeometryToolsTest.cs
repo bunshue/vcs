@@ -1,7 +1,6 @@
 ﻿using System;
 using AForge;
 using AForge.Math.Geometry;
-using MbUnit.Framework;
 
 namespace AForge.Math.Geometry.Tests
 {

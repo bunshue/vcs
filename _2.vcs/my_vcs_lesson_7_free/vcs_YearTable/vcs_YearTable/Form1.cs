@@ -1305,12 +1305,12 @@ namespace vcs_YearTable
 
         private void button5_Click(object sender, EventArgs e)
         {
-        
+
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-        
+
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -1433,7 +1433,7 @@ namespace vcs_YearTable
 
         private void button9_Click(object sender, EventArgs e)
         {
-        
+
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -1443,7 +1443,7 @@ namespace vcs_YearTable
 
         private void button11_Click(object sender, EventArgs e)
         {
-        
+
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -1668,8 +1668,5 @@ namespace vcs_YearTable
         {
             Application.Exit();
         }
-
-
-
     }
 }

@@ -19,7 +19,7 @@ namespace SQLServerDistill
         public Form2(string strname)
         {
             InitializeComponent();
-            this.Text = strname + "±í½á¹¹";
+            this.Text = strname + "ªíµ²ºc";
         }
 
         private void Form2_Load(object sender, EventArgs e)
