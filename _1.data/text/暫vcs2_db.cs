@@ -1,0 +1,461 @@
+﻿//撈出簡易的 資料庫檔案/連接字串 + 查詢字串
+
+
+//------------------------------------------------------------  # 60個
+
+
+
+ 搜尋所有
+"server=.;pwd=;uid=sa;database=db_13"
+
+
+改 db_09.mdf 為 db_09_Data.MDF
+	        db_09_Data
+
+        // 連接字串
+        string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
+        // 連接字串
+        string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
+
+似乎 database接的是資料庫檔名 前檔名
+
+        SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09");
+
+            using (SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09"))
+            //using (SqlConnection con = new SqlConnection("server=.;uid=sa;pwd=;database=master"))
+
+
+我使用Visual C# 做 SQL 程式，出現以下訊息，該如何解決呢?
+An attempt to attach an auto-named database for file D:\db_TomeTwo3.mdf failed. A database with the same name exists, or specified file cannot be opened, or it is located on UNC share.
+
+
+我使用Visual C# 做 SQL 程式，出現以下訊息，該如何解決呢?
+Cannot open database "D:\DB_TOMETWO.MDF" requested by the login. The login failed. Login failed for user 'M-100028\070601'.
+
+
+Cannot open database "D:\DB_TOMETWO.MDF" requested by the login. The login failed.
+Login failed for user 'M-100028\070601'.
+
+
+
+//------------------------------------------------------------  # 60個
+
+
+
+//------------------------------------------------------------  # 60個
+
+
+
+//------------------------------------------------------------  # 60個
+
+
+
+//------------------------------------------------------------  # 60個
+
+
+
+//------------------------------------------------------------  # 60個
+
+
+
+
+//------------------------------------------------------------  # 60個
+
+
+
+//------------------------------------------------------------  # 60個
+
+
+
+//------------------------------------------------------------  # 60個
+
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection con = new SqlConnection(cnstr))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.Connection.Open();
+                    string str = "xxxxxxx";
+                    cmd.CommandText = str;
+                    cmd.ExecuteNonQuery();
+                    this.label3.Text = "已成功完成訊息拷貝";
+                }
+                catch (Exception ey)
+                {
+                    MessageBox.Show(ey.Message);
+                }
+            }
+
+
+
+
+//------------------------------------------------------------  # 60個
+
+
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                con.Open();
+                cmd.Connection = con;
+                cmd.CommandText = this.textBox1.Text;
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+
+//------------------------------------------------------------  # 60個
+
+
+            //枚举本地网络中的SQL Server所有可用实例
+            SqlDataSourceEnumerator instance = SqlDataSourceEnumerator.Instance;
+            DataTable table = instance.GetDataSources();//获取所有数据源，并存储到DataTable中
+            richTextBox1.Text += table + "\n";
+            foreach (DataRow row in table.Rows)//遍历获取到的数据源
+            {
+                richTextBox1.Text += row + "\n";
+                richTextBox1.Text += row["ServerName"] + "\n";
+            }
+
+
+//------------------------------------------------------------  # 60個
+
+
+
+
+/*
+
+            // 資料庫檔案
+            string db_filename = "db_TomeTwo.MDF";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 員工表";
+
+            sqlstr =
+    @"select 学生姓名,性别,家庭住址 from tb_Student
+union
+select 学生姓名,convert(varchar,年龄),家庭住址 from tb_Student
+union
+select 学生姓名,convert(varchar,出生年月),家庭住址 from tb_Student
+union
+select 学生姓名,所在学院,家庭住址 from tb_Student";
+
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+*/
+
+
+
+//------------------------------------------------------------  # 60個
+
+
+
+//------------------------------------------------------------  # 60個
+
+
+
+//------------------------------------------------------------  # 60個
+
+
+
+//------------------------------------------------------------  # 60個
+
+SQL Server 數據庫檔案 (.mdf)
+Microsoft SQL Server 的主資料庫檔案（Master Database File），通常與 .ldf（日誌文件）成對出現。
+
+開啟方式： Microsoft SQL Server 或 Visual Studio 的「伺服器總管」。 
+
+
+
+    
+    
+    
+    建立SQL Server資料庫連接
+    
+    
+                    string ConStr = "server=(local);user id=sa;pwd=;database=db_09.mdf";
+                SqlConnection con = new SqlConnection(ConStr);
+                string SqlStr = "select * from 帳單";
+                SqlDataAdapter ada = new SqlDataAdapter(SqlStr, con);
+                DataSet ds = new DataSet();
+                ada.Fill(ds);
+                this.dataGridView1.DataSource = ds.Tables[0].DefaultView;
+
+
+
+
+//------------------------------------------------------------  # 60個
+
+
+伺服器資料型別
+BigInt
+NChar(4)
+NVarChar(50)
+NVarChar(50)
+NVarChar(60) NOT NULL
+NVarChar(30) NOT NULL
+NVarChar(15) NOT NULL
+UniqueIdentifier NOT NULL
+DateTime NOT NULL
+Int NOT NULL
+NVarChar(60)
+Int NOT NULL IDENTITY
+
+
+string (System.String)
+long (System.Int64)
+
+
+//------------------------------------------------------------  # 60個
+
+
+
+開始前先確認有安裝 SQL Server LocalDB，找得到 SQLLocalDB.exe，
+使用 SQLLocalDB.exe info 查詢 LocalDB 的預設個體名稱，一般會是 MSSQLLocalDB。
+PS C:\Users\070601> sqllocaldb info
+MSSQLLocalDB
+
+
+Data Source=(local)\MSSQLLocalDB，執行以下指令即可建立空白資料庫及 mdf、ldf 檔案：
+
+CREATE DATABASE <db_name>
+ON PRIMARY ( 
+    NAME=<db_name>_data, 
+    FILENAME = '<path>\<db_name>_data.mdf'
+) 
+LOG ON (
+    NAME=<db_name>_log, 
+    FILENAME = '<paht>\<db_name>_log.ldf'
+)
+
+
+
+
+PS C:\Users\070601> sqllocaldb info
+MSSQLLocalDB
+PS C:\Users\070601> sqllocaldb info MSSQLLocalDB
+Name:               MSSQLLocalDB
+Version:            15.0.4153.1
+Shared name:
+Owner:              M-100028\070601
+Auto-create:        Yes
+State:              Stopped
+Last start time:    2026/4/7 13:16:33
+Instance pipe name:
+
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+//6060
+
+
+//6060
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                try
+                {
+                    con.Open();
+                    cmd.Connection = con;
+                    cmd.CommandText = this.textBox1.Text;
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    showinfo();
+                    MessageBox.Show("刪除成功");
+                    this.textBox1.Focus();
+                    this.textBox1.SelectAll();
+                }
+                catch
+                {
+                    MessageBox.Show("SQL語句有誤");
+                    this.textBox1.Focus();
+                    this.textBox1.SelectAll();
+                }
+            }
+        }
+
+        private void showinfo()
+        {
+            using (SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09"))
+            {
+                DataTable dt = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter("select * from 員工表", con);
+                da.Fill(dt);
+                this.dataGridView1.DataSource = dt.DefaultView;
+            }    
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            showinfo();
+        }
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            SqlConnection con = new SqlConnection("server=(local);integrated security=sspi;database=db_02");
+            con.Open();
+            SqlCommand com = new SqlCommand("select * from tb_Land", con);
+            SqlDataReader dr = com.ExecuteReader();
+            while (dr.Read())
+            {
+                this.listBox1.Items.Add(dr[1].ToString());
+            }
+            dr.Close();
+            con.Close();
+
+    
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+OleDbDataAdapter
+DataTable的用法 
+                    OleDbDataAdapter OledbDat = new OleDbDataAdapter("select top 1 * from 帳單", strOledbCon);
+                    DataTable dt = new DataTable();
+                    OledbDat.Fill(dt);
+                    this.textBox1.Text = dt.Rows[0][0].ToString().Trim();
+                    this.textBox2.Text = dt.Rows[0][1].ToString().Trim();
+                    this.textBox3.Text = dt.Rows[0][3].ToString().Trim();
+                    this.textBox4.Text = dt.Rows[0][4].ToString().Trim();
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+九、連接SQL Server數據庫：
+using System;
+using System.Data.SqlClIEnt;
+
+public class TestADO
+{
+    public static void Main()
+    {
+        SqlConnection conn = new SqlConnection(Data Source=localhost; Integrated Security=SSPI; Initial Catalog=pubs);
+
+SqlCommand  cmd = new SqlCommand(SELECT * FROM employees, conn);
+        try
+        {        
+            conn.Open();
+
+            SqlDataReader reader = cmd.ExecuteReader();            
+            while (reader.Read())
+            {
+                Console.WriteLine(First Name: {0}, Last Name: {1}, reader.GetString(0), reader.GetString(1));
+            }
+        
+            reader.Close();
+            conn.Close();
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(Exception Occured -->> {0},e);
+        }        
+    }
+}
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+十、從SQL內讀數據到XML：
+using System;
+using System.Data;
+using System.XML;
+using System.Data.SqlClIEnt; 
+using System.IO; 
+
+public class TestWriteXML
+{ 
+    public static void Main()
+    { 
+
+        String strFileName=c:/temp/output.XML;
+
+        SqlConnection conn = new SqlConnection(server=localhost;uid=sa;pwd=;database=db);
+
+        String strSql = SELECT FirstName, LastName FROM employees; 
+
+        SqlDataAdapter adapter = new SqlDataAdapter(); 
+
+        adapter.SelectCommand = new SqlCommand(strSql,conn);
+
+        // Build the DataSet
+        DataSet ds = new DataSet();
+
+        adapter.Fill(ds, employees);
+
+        // Get a FileStream object
+        FileStream fs = new FileStream(strFileName,FileMode.OpenOrCreate,FileAccess.Write);
+
+        // Apply the WriteXml method to write an XML document
+        ds.WriteXML(fs);
+
+        fs.Close();
+
+    }
+}
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+----------------常用的程式片段 ST cccc----------------
+
+
+string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+string filename = @"D:\_git\vcs\_1.data\______test_files1\__text\war_and_peace.txt";
+
+//以下複製到每個檔案
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+

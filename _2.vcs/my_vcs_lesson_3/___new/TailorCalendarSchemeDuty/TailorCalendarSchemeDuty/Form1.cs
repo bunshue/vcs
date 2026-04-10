@@ -59,7 +59,6 @@ namespace TailorCalendarSchemeDuty
         public void getDateTime(string strFalg)
         {
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
-            //SqlConnection con = new SqlConnection("server=(local);integrated security=sspi;database=db_02_1");
             SqlConnection con = new SqlConnection(cnstr);
             con.Open();
             SqlCommand com = new SqlCommand("select * from tb_10", con);
@@ -123,9 +122,8 @@ namespace TailorCalendarSchemeDuty
         public string getStrName(string strName)
         {
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
-
             string strDataName = null;
-            //SqlConnection con = new SqlConnection("server=(local);integrated security=sspi;database=db_02_1");
+
             SqlConnection con = new SqlConnection(cnstr);
             con.Open();
             SqlCommand com = new SqlCommand("select * from tb_10 where strdate='" + Convert.ToDateTime(strName) + "'", con);
@@ -149,7 +147,7 @@ namespace TailorCalendarSchemeDuty
 
                     monthCalendar1.AddBoldedDate(monthCalendar1.SelectionStart);
                     monthCalendar1.UpdateBoldedDates();
-                    //SqlConnection con = new SqlConnection("server=(local);integrated security=sspi;database=db_02_1");
+
                     SqlConnection con = new SqlConnection(cnstr);
                     con.Open();
                     SqlCommand com = new SqlCommand("select * from tb_10 where strdate='" + monthCalendar1.SelectionStart.ToShortDateString() + "'", con);
@@ -333,7 +331,6 @@ namespace TailorCalendarSchemeDuty
         {
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
 
-            //SqlConnection con = new SqlConnection("server=(local);integrated security=sspi;database=db_02_1");
             SqlConnection con = new SqlConnection(cnstr);
             con.Open();
             SqlCommand com = new SqlCommand();
@@ -365,7 +362,6 @@ namespace TailorCalendarSchemeDuty
         {
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
 
-            //SqlConnection con = new SqlConnection("server=(local);integrated security=sspi;database=db_02_1");
             SqlConnection con = new SqlConnection(cnstr);
             con.Open();
             SqlCommand com = new SqlCommand();
@@ -400,7 +396,6 @@ namespace TailorCalendarSchemeDuty
             string strSelect = null;
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
 
-            ///SqlConnection con = new SqlConnection("server=(local);integrated security=sspi;database=db_02_1");
             SqlConnection con = new SqlConnection(cnstr);
 
             con.Open();
@@ -453,4 +448,3 @@ namespace TailorCalendarSchemeDuty
         }
     }
 }
-

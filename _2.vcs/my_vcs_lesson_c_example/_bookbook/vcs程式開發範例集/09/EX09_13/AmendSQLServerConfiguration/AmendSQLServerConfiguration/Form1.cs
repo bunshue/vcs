@@ -13,9 +13,12 @@ namespace AmendSQLServerConfiguration
 {
     public partial class Form1 : Form
     {
-        string tag = "null";
-        SqlConnection con = new SqlConnection("Data Source=(local);Initial Catalog=db_09;Integrated Security=SSPI");
+        string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
+        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30");
         DataTable dt;
+
+        string tag = "null";
 
         public Form1()
         {
@@ -26,14 +29,6 @@ namespace AmendSQLServerConfiguration
         {
             showTrack();
             types();
-        }
-
-        private void dataGridView1_Click(object sender, EventArgs e)
-        {
-            this.textBox1.Text = this.dataGridView1.SelectedCells[0].Value.ToString();
-            this.comboBox1.Text = this.dataGridView1.SelectedCells[1].Value.ToString();
-            this.textBox2.Text = this.dataGridView1.SelectedCells[2].Value.ToString();
-            this.textBox1.Enabled = false;
         }
 
         private void showTrack()
@@ -57,6 +52,19 @@ namespace AmendSQLServerConfiguration
             this.comboBox1.DataSource = strtype;
         }
 
+        private void dataGridView1_Click(object sender, EventArgs e)
+        {
+            this.textBox1.Text = this.dataGridView1.SelectedCells[0].Value.ToString();
+            this.comboBox1.Text = this.dataGridView1.SelectedCells[1].Value.ToString();
+            this.textBox2.Text = this.dataGridView1.SelectedCells[2].Value.ToString();
+            this.textBox1.Enabled = false;
+
+            richTextBox1.Text += "dataGridView1_Click\n";
+            richTextBox1.Text += "aaa : " + this.dataGridView1.SelectedCells[0].Value.ToString() + "\n";
+            richTextBox1.Text += "bbb : " + this.dataGridView1.SelectedCells[1].Value.ToString() + "\n";
+            richTextBox1.Text += "ccc : " + this.dataGridView1.SelectedCells[2].Value.ToString() + "\n";
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             this.button4.Enabled = true;
@@ -77,9 +85,9 @@ namespace AmendSQLServerConfiguration
             if (MessageBox.Show("是否刪除", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
                 con.Open();
-                string str = "alter table tb_11 drop column " + this.textBox1.Text + "";
+                string sqlstr = "alter table tb_11 drop column " + this.textBox1.Text + "";
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = str;
+                cmd.CommandText = sqlstr;
                 cmd.Connection = con;
                 cmd.ExecuteNonQuery();
                 con.Close();
@@ -92,19 +100,19 @@ namespace AmendSQLServerConfiguration
             try
             {
                 con.Open();
-                string str = string.Empty;
+                string sqlstr = string.Empty;
                 if (tag == "add")
                 {
-                    str += "alter table tb_11 add " + this.textBox1.Text + " ";
-                    str += "" + this.comboBox1.Text + "(" + this.textBox2.Text + ")";
+                    sqlstr += "alter table tb_11 add " + this.textBox1.Text + " ";
+                    sqlstr += "" + this.comboBox1.Text + "(" + this.textBox2.Text + ")";
                 }
                 else if (tag == "update")
                 {
-                    str += "alter table tb_11 alter column " + this.textBox1.Text + " ";
-                    str += "" + this.comboBox1.Text + "(" + this.textBox2.Text + ")";
+                    sqlstr += "alter table tb_11 alter column " + this.textBox1.Text + " ";
+                    sqlstr += "" + this.comboBox1.Text + "(" + this.textBox2.Text + ")";
                 }
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = str;
+                cmd.CommandText = sqlstr;
                 cmd.Connection = con;
                 cmd.ExecuteNonQuery();
                 con.Close();

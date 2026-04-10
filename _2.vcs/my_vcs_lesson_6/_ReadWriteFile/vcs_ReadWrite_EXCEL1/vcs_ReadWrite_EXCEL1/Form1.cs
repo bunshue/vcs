@@ -622,7 +622,39 @@ namespace vcs_ReadWrite_EXCEL1
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //DGV轉Excel
+            ExportDataGridview(dataGridView1, true);
+        }
 
+        public bool ExportDataGridview(DataGridView dgv, bool isShowExcle)
+        {
+            if (dgv.Rows.Count == 0)
+                return false;
+            //建立Excel對像
+            Excel.Application excel = new Excel.Application();
+            excel.Application.Workbooks.Add(true);
+            excel.Visible = isShowExcle;
+            //產生字段名稱
+            for (int i = 0; i < dgv.ColumnCount; i++)
+            {
+                excel.Cells[1, i + 1] = dgv.Columns[i].HeaderText;
+            }
+            //填充數據
+            for (int i = 0; i < dgv.RowCount - 1; i++)
+            {
+                for (int j = 0; j < dgv.ColumnCount; j++)
+                {
+                    if (dgv[j, i].ValueType == typeof(string))
+                    {
+                        excel.Cells[i + 2, j + 1] = "'" + dgv[j, i].Value.ToString();
+                    }
+                    else
+                    {
+                        excel.Cells[i + 2, j + 1] = dgv[j, i].Value.ToString();
+                    }
+                }
+            }
+            return true;
         }
 
         private void button8_Click(object sender, EventArgs e)

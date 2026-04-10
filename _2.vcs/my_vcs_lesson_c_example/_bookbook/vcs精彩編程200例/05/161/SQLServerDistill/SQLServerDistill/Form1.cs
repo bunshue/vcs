@@ -158,17 +158,18 @@ namespace SQLServerDistill
 
         public SqlConnection getCon(string strDatabase)
         {
+            // 這種 cnstr Integrated Security=SSPI 應該都沒有用了
             SqlConnection con = null; ;
             if (radioButton1.Checked == true)
             {
-                string strCOn = "Integrated Security=SSPI;Persist Security Info=False;Initial Catalog= '" + strDatabase + "';Data Source='" + comboBox1.Text + "'";
-                con = new SqlConnection(strCOn);
+                string cnstr = "Integrated Security=SSPI;Persist Security Info=False;Initial Catalog= '" + strDatabase + "';Data Source='" + comboBox1.Text + "'";
+                con = new SqlConnection(cnstr);
                 con.Open();
             }
             if (radioButton2.Checked == true)
             {
-                string strcon = "server='" + comboBox1.Text + "';uid='" + textBox1.Text.Trim() + "';pwd='" + textBox2.Text + "';database='" + strDatabase + "'";
-                con = new SqlConnection(strcon);
+                string cnstr = "server='" + comboBox1.Text + "';uid='" + textBox1.Text.Trim() + "';pwd='" + textBox2.Text + "';database='" + strDatabase + "'";
+                con = new SqlConnection(cnstr);
                 con.Open();
             }
             return con;

@@ -1903,100 +1903,7 @@ namespace vcs_SqlConnection1
 
         private void button19_Click(object sender, EventArgs e)
         {
-            //簡易測試
-
-            string db_filename = string.Empty;
-            string sqlstr = string.Empty;
-
-            // 資料庫檔案
-            db_filename = "Northwind.mdf";
-            /* ok
-            // 查詢字串
-            sqlstr = "SELECT * FROM 產品類別";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "全部資料 產品類別 有圖片";
-            */
-
-            /* ok
-            // 資料庫檔案
-            db_filename = "Northwind.mdf";
-            // 查詢字串
-            sqlstr = "SELECT * FROM 產品資料";
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-            lb_dgv2.Text = "全部資料 產品資料";
-            */
-
-            /*
-            // 資料庫檔案
-            db_filename = "db_TomeOne.mdf";
-            // 查詢字串
-            sqlstr = "SELECT * FROM tb_Rectangle";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            // 資料庫檔案
-            db_filename = "db_TomeOne.mdf";
-            sqlstr = "SELECT TOP 4 * FROM tb_Rectangle ORDER BY t_Num DESC";
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-
-            // 資料庫檔案
-            db_filename = "Database1.mdf";
-            // 查詢字串
-            sqlstr = "SELECT * FROM 產品類別";
-            sql_read_database(db_filename, sqlstr, dataGridView3);
-
-            // 資料庫檔案
-            db_filename = "Database1.mdf";
-            // 查詢字串
-            sqlstr = "SELECT * FROM 產品資料";
-            sql_read_database(db_filename, sqlstr, dataGridView4);
-            */
-
-            /*
-            // 資料庫檔案
-            db_filename = "db_TomeTwo.mdf";
-            // 查詢字串, 搜尋 表單 tb_Employee 欄位 工资 前4筆 降冪排列
-            sqlstr = "SELECT TOP 4 * FROM tb_Employee ORDER BY 工资 DESC";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            */
-
-            /*
-            // 資料庫檔案
-            db_filename = "db_TomeOne.mdf";
-            //string time_st = "2005/8/15";
-            //string time_sp = "2006/4/15";
-            //sqlstr = "SELECT * FROM tb_lottery WHERE t_year BETWEEN '" + time_st + "' AND '" + time_sp + "' ORDER BY t_year";
-            sqlstr = "SELECT * FROM tb_lottery WHERE t_year BETWEEN '2005/8/15' AND '2006/4/15' ORDER BY t_year";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "查詢使用指定時段 BETWEEN";
-
-            //查询指定时间段的数据
-
-            string time_st = "2005/7/1";
-            string time_sp = "2005/8/31";
-            // 查詢字串
-            sqlstr = string.Format("SELECT * FROM tb_Book WHERE 日期 BETWEEN '{0}' AND '{1}'", time_st, time_sp);
-            // 資料庫檔案
-            db_filename = "db_TomeTwo.mdf";
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-            lb_dgv2.Text = "查詢使用指定時段 BETWEEN";
-            */
-
-            /*
-            // 資料庫檔案
-            db_filename = "db_TomeTwo.mdf";
-            // 查詢字串
-            sqlstr = "SELECT * FROM tb_Book";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            //查询已销售图书情况
-            // 資料庫檔案
-            db_filename = "db_TomeTwo.mdf";
-
-            // 查詢字串, 列出数据中的重复记录和记录条数
-            sqlstr = string.Format(@"SELECT COUNT(书号)AS 记录条数, 书号,书名,作者 FROM tb_Book GROUP BY 书号,书名,作者 HAVING COUNT(书号)>1");
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-            */
-
+            //test
 
         }
 
@@ -2523,6 +2430,63 @@ namespace vcs_SqlConnection1
 
         private void button26_Click(object sender, EventArgs e)
         {
+            //測試
+            //SysDatabases
+
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
+            {
+                cn.Open();
+
+                //獲取所有數據庫名稱
+                //試一下  把 master 改成 dbo
+                // 'dbo.tb_XML'.
+                //string sqlstr = "SELECT NAME FROM master.dbo.sysdatabases";
+                //string sqlstr = "SELECT Name FROM Master.dbo.SysDatabases ORDER BY Name";
+                //string sqlstr = "SELECT count(*) FROM master.dbo.sysdatabases WHERE name='DB_02'";//NG
+
+                //獲取所有表單名稱
+                //string sqlstr = "SELECT Name FROM SysObjects WHERE XType='U' ORDER BY Name";
+                //XType='U':表示所有用户表;
+                //XType='S':表示所有系统表;
+                //string sqlstr = "SELECT name FROM sysobjects WHERE type = 'U'";
+
+                //獲取所有的字段名
+                //string sqlstr = "Select Name FROM SysColumns Where id=Object_Id('tb_student')";
+                string sqlstr = "SELECT syscolumns.name,systypes.name,syscolumns.isnullable,syscolumns.length FROM syscolumns, systypes WHERE syscolumns.xusertype = systypes.xusertype AND syscolumns.id = object_id('tb_student')";
+
+
+                using (SqlCommand cmd = new SqlCommand(sqlstr, cn))
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    //while (dr.Read())
+                    {
+                        //richTextBox1.Text += dr["TABLE_NAME"] + "\n";
+                    }
+
+                    richTextBox1.Text += "cnt = " + dr.FieldCount.ToString() + "\n";
+                    richTextBox1.Text += dr + "\n";
+
+                    while (dr.Read())
+                    {
+                        for (int i = 0; i < dr.FieldCount; i++)
+                        {
+                            richTextBox1.Text += dr[i].ToString();
+                            //richTextBox1.Text += dr.GetValue(i).ToString();  // same
+                            if (i == (dr.FieldCount - 1))
+                            {
+                                richTextBox1.Text += "\n";
+                            }
+                            else
+                            {
+                                richTextBox1.Text += "\t";
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void button27_Click(object sender, EventArgs e)
@@ -2645,62 +2609,123 @@ namespace vcs_SqlConnection1
 
         private void button29_Click(object sender, EventArgs e)
         {
-            //SysDatabases
+            //簡易測試
 
-            // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+            string db_filename = string.Empty;
+            string sqlstr = string.Empty;
 
-            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
-            {
-                cn.Open();
+            // 資料庫檔案
+            db_filename = "Northwind.mdf";
+            /* ok
+            // 查詢字串
+            sqlstr = "SELECT * FROM 產品類別";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "全部資料 產品類別 有圖片";
+            */
 
-                //獲取所有數據庫名稱
-                //試一下  把 master 改成 dbo
-                // 'dbo.tb_XML'.
-                //string sqlstr = "SELECT NAME FROM master.dbo.sysdatabases";
-                //string sqlstr = "SELECT Name FROM Master.dbo.SysDatabases ORDER BY Name";
-                //string sqlstr = "SELECT count(*) FROM master.dbo.sysdatabases WHERE name='DB_02'";//NG
+            /* ok
+            // 資料庫檔案
+            db_filename = "Northwind.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM 產品資料";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+            lb_dgv2.Text = "全部資料 產品資料";
+            */
 
-                //獲取所有表單名稱
-                //string sqlstr = "SELECT Name FROM SysObjects WHERE XType='U' ORDER BY Name";
-                //XType='U':表示所有用户表;
-                //XType='S':表示所有系统表;
-                //string sqlstr = "SELECT name FROM sysobjects WHERE type = 'U'";
+            /*
+            // 資料庫檔案
+            db_filename = "db_TomeOne.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM tb_Rectangle";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
 
-                //獲取所有的字段名
-                //string sqlstr = "Select Name FROM SysColumns Where id=Object_Id('tb_student')";
-                string sqlstr = "SELECT syscolumns.name,systypes.name,syscolumns.isnullable,syscolumns.length FROM syscolumns, systypes WHERE syscolumns.xusertype = systypes.xusertype AND syscolumns.id = object_id('tb_student')";
+            // 資料庫檔案
+            db_filename = "db_TomeOne.mdf";
+            sqlstr = "SELECT TOP 4 * FROM tb_Rectangle ORDER BY t_Num DESC";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+
+            // 資料庫檔案
+            db_filename = "Database1.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM 產品類別";
+            sql_read_database(db_filename, sqlstr, dataGridView3);
+
+            // 資料庫檔案
+            db_filename = "Database1.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM 產品資料";
+            sql_read_database(db_filename, sqlstr, dataGridView4);
+            */
+
+            /*
+            // 資料庫檔案
+            db_filename = "db_TomeTwo.mdf";
+            // 查詢字串, 搜尋 表單 tb_Employee 欄位 工资 前4筆 降冪排列
+            sqlstr = "SELECT TOP 4 * FROM tb_Employee ORDER BY 工资 DESC";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            */
+
+            /*
+            // 資料庫檔案
+            db_filename = "db_TomeOne.mdf";
+            //string time_st = "2005/8/15";
+            //string time_sp = "2006/4/15";
+            //sqlstr = "SELECT * FROM tb_lottery WHERE t_year BETWEEN '" + time_st + "' AND '" + time_sp + "' ORDER BY t_year";
+            sqlstr = "SELECT * FROM tb_lottery WHERE t_year BETWEEN '2005/8/15' AND '2006/4/15' ORDER BY t_year";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "查詢使用指定時段 BETWEEN";
+
+            //查询指定时间段的数据
+
+            string time_st = "2005/7/1";
+            string time_sp = "2005/8/31";
+            // 查詢字串
+            sqlstr = string.Format("SELECT * FROM tb_Book WHERE 日期 BETWEEN '{0}' AND '{1}'", time_st, time_sp);
+            // 資料庫檔案
+            db_filename = "db_TomeTwo.mdf";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+            lb_dgv2.Text = "查詢使用指定時段 BETWEEN";
+            */
+
+            /*
+            // 資料庫檔案
+            db_filename = "db_TomeTwo.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM tb_Book";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            //查询已销售图书情况
+            // 資料庫檔案
+            db_filename = "db_TomeTwo.mdf";
+
+            // 查詢字串, 列出数据中的重复记录和记录条数
+            sqlstr = string.Format(@"SELECT COUNT(书号)AS 记录条数, 书号,书名,作者 FROM tb_Book GROUP BY 书号,书名,作者 HAVING COUNT(书号)>1");
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+            */
 
 
-                using (SqlCommand cmd = new SqlCommand(sqlstr, cn))
-                using (SqlDataReader dr = cmd.ExecuteReader())
-                {
-                    //while (dr.Read())
-                    {
-                        //richTextBox1.Text += dr["TABLE_NAME"] + "\n";
-                    }
+            // 資料庫檔案
+            db_filename = "db_09.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM 帳單";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
 
-                    richTextBox1.Text += "cnt = " + dr.FieldCount.ToString() + "\n";
-                    richTextBox1.Text += dr + "\n";
 
-                    while (dr.Read())
-                    {
-                        for (int i = 0; i < dr.FieldCount; i++)
-                        {
-                            richTextBox1.Text += dr[i].ToString();
-                            //richTextBox1.Text += dr.GetValue(i).ToString();  // same
-                            if (i == (dr.FieldCount - 1))
-                            {
-                                richTextBox1.Text += "\n";
-                            }
-                            else
-                            {
-                                richTextBox1.Text += "\t";
-                            }
-                        }
-                    }
-                }
-            }
+
+            // 資料庫檔案
+            db_filename = "db_09.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM 員工表";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+
+
+            // 資料庫檔案
+            db_filename = "db_02.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM tb_Land";
+            sql_read_database(db_filename, sqlstr, dataGridView3);
+
+
         }
 
         private void btn_sql_test_Click(object sender, EventArgs e)
@@ -2792,7 +2817,11 @@ namespace vcs_SqlConnection1
             { "6", "ch18DB.mdf", "SELECT * FROM 員工", "員工資料"},
             { "7", "ch18DB.mdf", "SELECT * FROM 員工 ORDER BY 薪資 DESC", "員工資料 排序 薪資 降冪"},
             { "8", "vcs_sql09_db.mdf", "SELECT * FROM vcs_sql09_table", ""},
+            { "9", "db_TomeTwo.MDF", "SELECT 学生姓名,所学专业,家庭住址 FROM tb_Student", ""},
         };
+
+
+
 
         private void bt_new_Click(object sender, EventArgs e)
         {
@@ -2989,4 +3018,3 @@ string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.md
             }
             root.ExpandAll();//展開treeView1中的所有節點
 */
-

@@ -21,7 +21,7 @@ namespace DatabaseCon
 
         string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_09_Data.MDF";
 
-        public static string strCon = "";
+        public static string cnstr = "";
 
         public Form1()
         {
@@ -58,24 +58,24 @@ namespace DatabaseCon
                     {
                         if (textBox2.Text != "")
                         {
-                            strCon = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + textBox1.Text + ";UID=" + textBox2.Text + ";PWD=" + textBox3.Text + ";";
+                            cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + textBox1.Text + ";UID=" + textBox2.Text + ";PWD=" + textBox3.Text + ";";
                         }
                         else
                         {
-                            strCon = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + textBox1.Text + ";";
+                            cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + textBox1.Text + ";";
                         }
                     }
                     else if (strExtention.ToLower() == ".xls")
                     {
-                        strCon = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + textBox1.Text + ";Extended Properties=Excel 8.0;";
+                        cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + textBox1.Text + ";Extended Properties=Excel 8.0;";
                     }
                 }
-                OleDbConnection oledbcon = new OleDbConnection(strCon);
+                OleDbConnection oledbcon = new OleDbConnection(cnstr);
                 try
                 {
                     oledbcon.Open();
                     richTextBox1.Clear();
-                    richTextBox1.Text = strCon + "\n连接成功……";
+                    richTextBox1.Text = cnstr + "\n连接成功……";
                 }
                 catch
                 {
@@ -84,21 +84,22 @@ namespace DatabaseCon
             }
             else if (radioButton2.Checked == true)
             {
+                // 這種 cnstr Integrated Security=SSPI 應該都沒有用了
                 if (checkBox1.Checked == true)
                 {
-                    strCon = "Data Source=" + textBox6.Text + ";Initial Catalog =" + comboBox1.Text + ";Integrated Security=SSPI;";
+                    cnstr = "Data Source=" + textBox6.Text + ";Initial Catalog =" + comboBox1.Text + ";Integrated Security=SSPI;";
                 }
                 else if (checkBox2.Checked == true)
                 {
-                    strCon = "Data Source=" + textBox6.Text + ";Database=" + comboBox1.Text + ";Uid=" + textBox5.Text + ";Pwd=" + textBox4.Text + ";";
+                    cnstr = "Data Source=" + textBox6.Text + ";Database=" + comboBox1.Text + ";Uid=" + textBox5.Text + ";Pwd=" + textBox4.Text + ";";
                 }
 
-                SqlConnection sqlcon = new SqlConnection(strCon);
+                SqlConnection sqlcon = new SqlConnection(cnstr);
                 try
                 {
                     sqlcon.Open();
                     richTextBox1.Clear();
-                    richTextBox1.Text = strCon + "\n连接成功……";
+                    richTextBox1.Text = cnstr + "\n连接成功……";
                 }
                 catch
                 {
@@ -153,8 +154,11 @@ namespace DatabaseCon
             {
                 checkBox2.Checked = false;
                 textBox4.Enabled = textBox5.Enabled = false;
-                string str = "server=" + textBox6.Text + ";database=master;Integrated Security=SSPI;";
-                comboBox1.DataSource = getTable(str);
+
+                // 這種 cnstr Integrated Security=SSPI 應該都沒有用了
+                string cnstr = "server=" + textBox6.Text + ";database=master;Integrated Security=SSPI;";
+
+                comboBox1.DataSource = getTable(cnstr);
                 comboBox1.DisplayMember = "name";
                 comboBox1.ValueMember = "name";
             }
@@ -167,11 +171,11 @@ namespace DatabaseCon
             textBox5.Focus();
         }
 
-        private DataTable getTable(string str)
+        private DataTable getTable(string cnstr)
         {
             try
             {
-                SqlConnection sqlcon = new SqlConnection(str);
+                SqlConnection sqlcon = new SqlConnection(cnstr);
                 SqlDataAdapter da = new SqlDataAdapter("select name from sysdatabases ", sqlcon);
                 DataTable dt = new DataTable("sysdatabases");
                 da.Fill(dt);
@@ -201,8 +205,9 @@ namespace DatabaseCon
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string str = "server=" + textBox6.Text + ";database=master;Uid=" + textBox5.Text + ";Pwd=" + textBox4.Text + ";";
-            comboBox1.DataSource = getTable(str);
+            // 這種 cnstr Uid Pwd 應該都沒有用了
+            string cnstr = "server=" + textBox6.Text + ";database=master;Uid=" + textBox5.Text + ";Pwd=" + textBox4.Text + ";";
+            comboBox1.DataSource = getTable(cnstr);
             comboBox1.DisplayMember = "name";
             comboBox1.ValueMember = "name";
         }

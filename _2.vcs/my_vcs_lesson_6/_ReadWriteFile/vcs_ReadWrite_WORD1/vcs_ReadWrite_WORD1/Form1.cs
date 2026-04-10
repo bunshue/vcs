@@ -104,16 +104,25 @@ namespace vcs_ReadWrite_WORD1
             button29.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 9);
 
             groupBox1.Location = new System.Drawing.Point(x_st + dx * 3, y_st + dy * 0);
-            richTextBox1.Size = new Size(600, 440);
-            richTextBox1.Location = new System.Drawing.Point(x_st + dx * 3, y_st + dy * 0 + 200);
+
+            dataGridView1.Size = new Size(600, 150);
+            dataGridView1.Location = new System.Drawing.Point(x_st + dx * 3, y_st + dy * 0 + 110);
+
+            richTextBox1.Size = new Size(600, 370);
+            richTextBox1.Location = new System.Drawing.Point(x_st + dx * 3, y_st + dy * 0 + 270);
             bt_clear.Location = new System.Drawing.Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1260, 700);
+            this.Text = "vcs_ReadWrite_WORD1";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new System.Drawing.Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Clear();
         }
 
         // Select an item containing the target string.
@@ -530,11 +539,49 @@ namespace vcs_ReadWrite_WORD1
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //DGV轉Word
 
+            ExportDataGridview(dataGridView1, true);
+        }
+
+        public bool ExportDataGridview(DataGridView dgv, bool isShowWord)
+        {
+            Word.Document mydoc = new Word.Document();
+            Word.Table mytable;
+            Word.Selection mysel;
+            Object myobj;
+            if (dgv.Rows.Count == 0)
+                return false;
+            //建立Word對像
+            Word.Application word = new Word.Application();
+            myobj = System.Reflection.Missing.Value;
+            mydoc = word.Documents.Add(ref myobj, ref myobj, ref myobj, ref myobj);
+            word.Visible = isShowWord;
+            mydoc.Select();
+            mysel = word.Selection;
+            //將數據產生Word表格文件
+            mytable = mydoc.Tables.Add(mysel.Range, dgv.RowCount, dgv.ColumnCount, ref myobj, ref myobj);
+            //設定列寬
+            mytable.Columns.SetWidth(30, Word.WdRulerStyle.wdAdjustNone);
+            //輸出列標題數據
+            for (int i = 0; i < dgv.ColumnCount; i++)
+            {
+                mytable.Cell(1, i + 1).Range.InsertAfter(dgv.Columns[i].HeaderText);
+            }
+            //輸出控制元件中的記錄
+            for (int i = 0; i < dgv.RowCount - 1; i++)
+            {
+                for (int j = 0; j < dgv.ColumnCount; j++)
+                {
+                    mytable.Cell(i + 2, j + 1).Range.InsertAfter(dgv[j, i].Value.ToString());
+                }
+            }
+            return true;
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+
 
         }
 
@@ -710,4 +757,3 @@ namespace vcs_ReadWrite_WORD1
         }
     }
 }
-

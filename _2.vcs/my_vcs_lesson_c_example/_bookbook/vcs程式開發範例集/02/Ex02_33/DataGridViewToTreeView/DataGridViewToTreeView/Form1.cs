@@ -15,18 +15,19 @@ namespace DataGridViewToTreeView
 {
     public partial class Form1 : Form
     {
+        //宣告本程序需要的變數
+        public static string[,] recordInfo;
+
         public Form1()
         {
             InitializeComponent();
         }
-        //宣告本程序需要的變數
-        public static string[,] recordInfo;
 
         //視窗加載時，顯示原有的數據
         private void Form1_Load(object sender, EventArgs e)
         {
             //#region 在DataGridView及TreeView中顯示數據
-            string connString = "server=.;database=pubs;integrated security=sspi";
+            string connString = "server=.;database=pubs;............."; // NG
             SqlConnection conn = new SqlConnection(connString);
             conn.Open();
             string selectString = "select au_id as 使用者編號,au_lname as 使用者名,phone as 聯繫電話 from authors";
