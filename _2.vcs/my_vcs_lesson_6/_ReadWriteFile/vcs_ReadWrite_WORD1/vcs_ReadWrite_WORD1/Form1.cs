@@ -757,3 +757,56 @@ namespace vcs_ReadWrite_WORD1
         }
     }
 }
+
+/*
+                //保存Word文件
+                object path = fileName;
+                Object none = System.Reflection.Missing.Value;
+                Word.Application wordApp = new Word.Application();
+                Word.Document document = wordApp.Documents.Add(ref none, ref none, ref none, ref none);
+                //建立表格
+                Word.Table table = document.Tables.Add(document.Paragraphs.Last.Range, srcDgv.Rows.Count + 1, srcDgv.Columns.Count, ref none, ref none);
+                try
+                {
+
+                    for (int i = 0; i < srcDgv.Columns.Count; i++)//设置标题
+                    {
+                        table.Cell(1, i + 1).Range.Text = srcDgv.Columns[i].HeaderText;
+                    }
+
+                    for (int i = 0; i < srcDgv.Rows.Count; i++)//填充数据
+                    {
+                        for (int j = 0; j < srcDgv.Columns.Count; j++)
+                        {
+                            string a = srcDgv[j, i].ValueType.ToString();
+                            if (a == "System.Byte[]")
+                            {
+                                PictureBox pp = new PictureBox();
+                                byte[] pic = (byte[])(srcDgv[j, i].Value); //将数据库中的图片转换成二进制流
+                                MemoryStream ms = new MemoryStream(pic);	//将字节数组存入到二进制流中
+                                pp.Image = Image.FromStream(ms);           //二进制流Image控件中显示
+                                pp.Image.Save(@"C:\22.bmp");               //将图片存入到指定的路径
+                                object aaa = table.Cell(i + 2, j + 1).Range;
+                                wordApp.Selection.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                                wordApp.Selection.InlineShapes.AddPicture(@"C:\22.bmp", ref none, ref none, ref aaa);
+                                pp.Dispose();
+                            }
+                            else
+                            {
+                                table.Cell(i + 2, j + 1).Range.Text = srcDgv[j, i].Value.ToString();
+                            }
+                        }
+                    }
+                    document.SaveAs(ref path, ref none, ref none, ref none, ref none, ref none, ref none, ref none, ref none, ref none, ref none);
+                    document.Close(ref none, ref none, ref none);
+                    if (File.Exists(@"C:\22.bmp"))
+                    {
+                        File.Delete(@"C:\22.bmp");
+                    }
+                }
+                finally
+                {
+                    wordApp.Quit(ref none, ref none, ref none);
+                }
+
+*/

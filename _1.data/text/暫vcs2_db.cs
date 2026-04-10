@@ -167,25 +167,6 @@ Microsoft SQL Server 的主資料庫檔案（Master Database File），通常與
 
 開啟方式： Microsoft SQL Server 或 Visual Studio 的「伺服器總管」。 
 
-
-
-    
-    
-    
-    建立SQL Server資料庫連接
-    
-    
-                    string ConStr = "server=(local);user id=sa;pwd=;database=db_09.mdf";
-                SqlConnection con = new SqlConnection(ConStr);
-                string SqlStr = "select * from 帳單";
-                SqlDataAdapter ada = new SqlDataAdapter(SqlStr, con);
-                DataSet ds = new DataSet();
-                ada.Fill(ds);
-                this.dataGridView1.DataSource = ds.Tables[0].DefaultView;
-
-
-
-
 //------------------------------------------------------------  # 60個
 
 
@@ -251,13 +232,6 @@ Instance pipe name:
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-
-
-//6060
-
-
-//6060
-
         private void button1_Click(object sender, EventArgs e)
         {
             using (SqlCommand cmd = new SqlCommand())
@@ -269,7 +243,6 @@ richTextBox1.Text += "----------------------------------------------------------
                     cmd.CommandText = this.textBox1.Text;
                     cmd.ExecuteNonQuery();
                     con.Close();
-                    showinfo();
                     MessageBox.Show("刪除成功");
                     this.textBox1.Focus();
                     this.textBox1.SelectAll();
@@ -283,39 +256,35 @@ richTextBox1.Text += "----------------------------------------------------------
             }
         }
 
-        private void showinfo()
-        {
-            using (SqlConnection con = new SqlConnection("server=.;pwd=;uid=sa;database=db_09"))
-            {
-                DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter("select * from 員工表", con);
-                da.Fill(dt);
-                this.dataGridView1.DataSource = dt.DefaultView;
-            }    
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            showinfo();
-        }
-
-
-
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            SqlConnection con = new SqlConnection("server=(local);integrated security=sspi;database=db_02");
-            con.Open();
-            SqlCommand com = new SqlCommand("select * from tb_Land", con);
-            SqlDataReader dr = com.ExecuteReader();
-            while (dr.Read())
+
+
+        // 固定查詢
+        private void ShowData3(string cnstr)
+        {
+            // DB => DS => dataGridView1
+            using (SqlConnection cn = new SqlConnection())  // 建立資料庫連接對象cn
             {
-                this.listBox1.Items.Add(dr[1].ToString());
+                // 連接資料庫
+                cn.ConnectionString = cnstr;
+
+                string sqlstr = "SELECT * FROM 銀行帳戶";  // 宣告查詢字串
+                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
+
+                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+                da.Fill(ds, "銀行帳戶");  // 將DataAdapter查詢之後的結果填充至DataSet
+
+                dataGridView1.DataSource = ds.Tables["銀行帳戶"];
             }
-            dr.Close();
-            con.Close();
+        }
 
-    
+
+//欲刪除關鍵字
+//SqlConnection con = new SqlConnection("Data Source=.;DataBase=master;integrated security=sspi");//初始化一個數據庫連接對像
+//static string connectionString = "Data Source=.;DataBase=db_02;integrated security=sspi";
+            //string cnstr = string.Format(@"server=MR-PC\YL;database=db_TomeTwo;uid=sa;pwd=");
 
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個

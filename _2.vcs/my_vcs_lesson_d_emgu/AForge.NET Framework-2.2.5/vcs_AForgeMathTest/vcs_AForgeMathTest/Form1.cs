@@ -467,6 +467,8 @@ namespace vcs_AForgeMathTest
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //不知道 mode是什麼意思, 也不是眾數
+
             int[] values = new int[] { 1, 2, 2, 3, 3, 3 };
             int mode = Statistics.Mode(values);
             //Assert.AreEqual(3, mode);
@@ -504,7 +506,7 @@ namespace vcs_AForgeMathTest
         private IntegralImage integralImage = null;
         private void button12_Click(object sender, EventArgs e)
         {
-            UnmanagedImage uImage = UnmanagedImage.Create(10, 10, PixelFormat.Format8bppIndexed);
+            UnmanagedImage uImage = UnmanagedImage.Create(100, 100, PixelFormat.Format8bppIndexed);
 
             for (int y = 0; y < 10; y++)
             {
@@ -514,12 +516,11 @@ namespace vcs_AForgeMathTest
                 }
             }
 
-
             integralImage = IntegralImage.FromBitmap(uImage);
 
+            Bitmap bmp = uImage.ToManagedImage();
 
-            //pictureBox1.Image = integralImage;
-
+            pictureBox1.Image = bmp;
 
             int x1 = 0;
             int y1 = 0;
@@ -535,7 +536,6 @@ namespace vcs_AForgeMathTest
             sum = integralImage.GetRectangleSum(xx, yy, radius);
 
             richTextBox1.Text += "sum = " + sum.ToString() + "\n";
-
 
             float mean = integralImage.GetRectangleMean(x1, y1, x2, y2);
             richTextBox1.Text += "mean = " + mean.ToString() + "\n";
@@ -558,29 +558,38 @@ namespace vcs_AForgeMathTest
             y = 1;
             theta = 45f;
             /*
-            [Row( 1, 1, 45, 1.41421356f, -1, 2 )]
-            [Row( -2, 2, 135, 2 * 1.41421356f, 1, 4 )]
+            [Row(  1,                  1,  45, 1.41421356f, -1, 2 )]
+            [Row( -2,                  2, 135, 2 * 1.41421356f, 1, 4 )]
             [Row( -0.5, -1.73205081f / 2, 240, 1, -1 / 1.73205081f, -2 / 1.73205081f )]
-            [Row( 1, 0, 0, 1, float.NegativeInfinity, 1 )]
-            [Row( 0, -1, 270, 1, 0, -1 )]
+            [Row(  1,                  0,   0, 1, float.NegativeInfinity, 1 )]
+            [Row(  0,                 -1, 270, 1, 0, -1 )]
             */
 
             AForge.Point pt = new AForge.Point(x, y);
 
             // test Point-Theta factory
             Line line = Line.FromPointTheta(pt, theta);
-            richTextBox1.Text += "aaaa " + line.Slope + "\n";
-            richTextBox1.Text += "aaaa " + line.Intercept + "\n";
+            richTextBox1.Text += "Slope :\t" + line.Slope + "\n";
+            richTextBox1.Text += "Intercept :\t" + line.Intercept + "\n";
+            richTextBox1.Text += "IsHorizontal :\t" + line.IsHorizontal + "\n";
+            richTextBox1.Text += "IsVertical :\t" + line.IsVertical + "\n";
+
+            richTextBox1.Text += "---------------\n";  // 15個
 
             // calculate radius
             float radius = pt.EuclideanNorm();
             richTextBox1.Text += "radius " + radius + "\n";
 
+            richTextBox1.Text += "---------------\n";  // 15個
+
             // test R-Theta factory
             line = Line.FromRTheta(radius, theta);
-            richTextBox1.Text += "bbbb " + line.Slope + "\n";
-            richTextBox1.Text += "bbbb " + line.Intercept + "\n";
+            richTextBox1.Text += "Slope :\t" + line.Slope + "\n";
+            richTextBox1.Text += "Intercept :\t" + line.Intercept + "\n";
+            richTextBox1.Text += "IsHorizontal :\t" + line.IsHorizontal + "\n";
+            richTextBox1.Text += "IsVertical :\t" + line.IsVertical + "\n";
 
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //檢查一直線是否垂直
             int sx = 0;
@@ -589,10 +598,12 @@ namespace vcs_AForgeMathTest
             int ey = 100;
 
             line = Line.FromPoints(new AForge.Point(sx, sy), new AForge.Point(ex, ey));
-            richTextBox1.Text += "cccc " + line.Slope + "\n";
-            richTextBox1.Text += "cccc " + line.Intercept + "\n";
-            richTextBox1.Text += "cccc " + line.IsVertical + "\n";
-            richTextBox1.Text += "cccc " + line.IsHorizontal + "\n";
+            richTextBox1.Text += "Slope :\t" + line.Slope + "\n";
+            richTextBox1.Text += "Intercept :\t" + line.Intercept + "\n";
+            richTextBox1.Text += "IsHorizontal :\t" + line.IsHorizontal + "\n";
+            richTextBox1.Text += "IsVertical :\t" + line.IsVertical + "\n";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //兩直線的夾角
             int sx1 = 0;
@@ -623,20 +634,26 @@ namespace vcs_AForgeMathTest
             float sy2 = 0f;
             float ex2 = 0f;
             float ey2 = 100f;
-
+            /*
             sx2 = 100f;
             sy2 = 0f;
             ex2 = 200f;
             ey2 = 100f;
-
+            */
             Line line1 = Line.FromPoints(new AForge.Point(sx1, sy1), new AForge.Point(ex1, ey1));
             Line line2 = Line.FromPoints(new AForge.Point(sx2, sy2), new AForge.Point(ex2, ey2));
 
             AForge.Point? result = line1.GetIntersectionWith(line2);
             if (result == null)
+            {
                 richTextBox1.Text += "無交叉點\n";
+            }
             else
-                richTextBox1.Text += result.ToString() + "\n";
+            {
+                richTextBox1.Text += "交叉點 : " + result.ToString() + "\n";
+            }
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //點到線的距離
             int x = 0;
@@ -651,312 +668,220 @@ namespace vcs_AForgeMathTest
             Line line = Line.FromPoints(pt1, pt2);
             float distance = line.DistanceToPoint(pt);
             richTextBox1.Text += "點到線的距離 : " + distance + "\n";
-
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
             Vector3 v1 = new Vector3(1, 2, 3);
             Vector3 v2 = new Vector3(-1, -2, -3);
-            Vector3 v3 = new Vector3(7);
+            Vector3 v3 = new Vector3(7);  // X Y Z 都設為7
+            // v1.X  v1.Y  v1.Z
+            // v2.X  v2.Y  v2.Z
+            // v3.X  v3.Y  v3.Z
 
-            //在下面
-        }
-
-        public void ConstructorTest()
-        {
-            Vector3 v1 = new Vector3(1, 2, 3);
-            Vector3 v2 = new Vector3(-1, -2, -3);
-            Vector3 v3 = new Vector3(7);//X Y Z 都設為7
-
-            // v1.X v1.Y v1.Z
-            /*
-            Assert.AreEqual<float>(v1.X, 1);
-            Assert.AreEqual<float>(v1.Y, 2);
-            Assert.AreEqual<float>(v1.Z, 3);
-
-            Assert.AreEqual<float>(v2.X, -1);
-            Assert.AreEqual<float>(v2.Y, -2);
-            Assert.AreEqual<float>(v2.Z, -3);
-
-            Assert.AreEqual<float>(v3.X, 7);
-            Assert.AreEqual<float>(v3.Y, 7);
-            Assert.AreEqual<float>(v3.Z, 7);
-            */
-        }
-
-        /*
-        [Row(0, 0, 0, 0, 0, 0, 0)]
-        [Row(0, 7, 7, 0, 7, 0, 1)]
-        [Row(0, 0, 7, 0, 7, 0, 2)]
-        [Row(0, 7, 0, 0, 7, 0, 1)]
-        [Row(7, 0, 7, 0, 7, 1, 0)]
-        [Row(5, 7, 9, 5, 9, 0, 2)]
-        [Row(5, 9, 7, 5, 9, 0, 1)]
-        [Row(7, 5, 9, 5, 9, 1, 2)]
-        [Row(7, 9, 5, 5, 9, 2, 1)]
-        [Row(9, 5, 7, 5, 9, 1, 0)]
-        [Row(9, 7, 5, 5, 9, 2, 0)]
-        */
-        public void MinMaxTest(float x, float y, float z, float expectedMin, float expectedMax,
-            int expectedMinIndex, int expectedMaxIndex)
-        {
+            float x = 7;
+            float y = 2;
+            float z = 8;
             Vector3 vector = new Vector3(x, y, z);
 
-            //取出
-            //vector.Min
-            //vector.Max
-            //vector.MinIndex
-            //vector.MaxIndex
-        }
+            richTextBox1.Text += "最大 :\t" + vector.Max + "\n";
+            richTextBox1.Text += "最大位置 :\t" + vector.MaxIndex + "\n";
+            richTextBox1.Text += "最小 :\t" + vector.Min + "\n";
+            richTextBox1.Text += "最小位置 :\t" + vector.MinIndex + "\n";
 
-        /*
-        [Row(0, 0, 0, 0)]
-        [Row(1, 0, 0, 1)]
-        [Row(0, 2, 0, 2)]
-        [Row(0, 0, 3, 3)]
-        [Row(3, 4, 0, 5)]
-        [Row(-3, -4, 0, 5)]
-        */
-        public void NormTest(float x, float y, float z, float expectedNorm)
-        {
-            Vector3 vector = new Vector3(x, y, z);
+            richTextBox1.Text += "Norm :\t" + vector.Norm + "\n";//float
+            richTextBox1.Text += "Square :\t" + vector.Square + "\n";
 
-            float norm = vector.Norm;
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
-            //Assert.AreEqual<float>(norm, expectedNorm);
-            //Assert.AreEqual<float>(norm * norm, vector.Square);
-        }
+            //向量加法
 
-        /*
-        [Row(1, 2, 3, 1, 2, 3, true)]
-        [Row(-1, -2, -3, -1, -2, -3, true)]
-        [Row(-1, -2, -3, -1, -2, 3, false)]
-        */
-        public void EqualityTest(float x1, float y1, float z1, float x2, float y2, float z2, bool expected)
-        {
+            float x1 = 1;
+            float y1 = 2;
+            float z1 = 3;
+            float x2 = 4;
+            float y2 = 5;
+            float z2 = 6;
+
             Vector3 vector1 = new Vector3(x1, y1, z1);
             Vector3 vector2 = new Vector3(x2, y2, z2);
-
-            /*
-            Assert.AreEqual<bool>(vector1 == vector2, expected);
-            Assert.AreEqual<bool>(vector1 != vector2, !expected);
-
-            Assert.AreEqual<bool>(vector1.Equals(vector2), expected);
-            Assert.AreEqual<bool>(vector1.Equals((object)vector2), expected);
-            */
-        }
-
-        /*
-        [Row(1, 2, 3, 4, 5, 6, 5, 7, 9)]
-        [Row(1, 2, 3, -4, -5, -6, -3, -3, -3)]
-        */
-        public void AdditionTest(float x1, float y1, float z1, float x2, float y2, float z2,
-            float expectedX, float expectedY, float expectedZ)
-        {
-            Vector3 vector1 = new Vector3(x1, y1, z1);
-            Vector3 vector2 = new Vector3(x2, y2, z2);
-            Vector3 expectedResult = new Vector3(expectedX, expectedY, expectedZ);
 
             Vector3 result1 = vector1 + vector2;
             Vector3 result2 = Vector3.Add(vector1, vector2);
 
-            //Assert.AreEqual<bool>(expectedResult == result1, true);
-            //Assert.AreEqual<bool>(expectedResult == result2, true);
-        }
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
-        /*
-        [Row(1, 2, 3, 4, 5, 6, 7)]
-        [Row(1, 2, 3, -4, -3, -2, -1)]
-        */
-        public void AdditionWithConstTest(float x, float y, float z, float value,
-            float expectedX, float expectedY, float expectedZ)
-        {
-            Vector3 vector = new Vector3(x, y, z);
-            Vector3 expectedResult = new Vector3(expectedX, expectedY, expectedZ);
+            //加上常數
+            float value = 5;
+            vector = new Vector3(x, y, z);
 
-            Vector3 result1 = vector + value;
-            Vector3 result2 = Vector3.Add(vector, value);
+            result1 = vector + value;
+            result2 = Vector3.Add(vector, value);
 
-            //Assert.AreEqual<bool>(expectedResult == result1, true);
-            //Assert.AreEqual<bool>(expectedResult == result2, true);
-        }
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
-        /*
-        [Row(1, 2, 3, 4, 5, 6, -3, -3, -3)]
-        [Row(1, 2, 3, -4, -5, -6, 5, 7, 9)]
-        */
-        public void SubtractionTest(float x1, float y1, float z1, float x2, float y2, float z2,
-            float expectedX, float expectedY, float expectedZ)
-        {
-            Vector3 vector1 = new Vector3(x1, y1, z1);
-            Vector3 vector2 = new Vector3(x2, y2, z2);
-            Vector3 expectedResult = new Vector3(expectedX, expectedY, expectedZ);
+            //向量減法
+            vector1 = new Vector3(x1, y1, z1);
+            vector2 = new Vector3(x2, y2, z2);
 
-            Vector3 result1 = vector1 - vector2;
-            Vector3 result2 = Vector3.Subtract(vector1, vector2);
+            result1 = vector1 - vector2;
+            result2 = Vector3.Subtract(vector1, vector2);
 
-            //Assert.AreEqual<bool>(expectedResult == result1, true);
-            //Assert.AreEqual<bool>(expectedResult == result2, true);
-        }
+            //減去常數
+            vector = new Vector3(x, y, z);
+            result1 = vector - value;
+            result2 = Vector3.Subtract(vector, value);
 
-        /*
-        [Row(1, 2, 3, 4, -3, -2, -1)]
-        [Row(1, 2, 3, -4, 5, 6, 7)]
-        */
-        public void SubtractionWithConstTest(float x, float y, float z, float value,
-            float expectedX, float expectedY, float expectedZ)
-        {
-            Vector3 vector = new Vector3(x, y, z);
-            Vector3 expectedResult = new Vector3(expectedX, expectedY, expectedZ);
+            //向量相乘
+            x1 = 1;
+            y1 = 2;
+            z1 = 3;
+            x2 = -4;
+            y2 = -5;
+            z2 = -6;
 
-            Vector3 result1 = vector - value;
-            Vector3 result2 = Vector3.Subtract(vector, value);
+            vector1 = new Vector3(x1, y1, z1);
+            vector2 = new Vector3(x2, y2, z2);
 
-            //Assert.AreEqual<bool>(expectedResult == result1, true);
-            //Assert.AreEqual<bool>(expectedResult == result2, true);
-        }
+            result1 = vector1 * vector2;
+            result2 = Vector3.Multiply(vector1, vector2);
 
-        /*
-        [Row(1, 2, 3, 4, 5, 6, 4, 10, 18)]
-        [Row(1, 2, 3, -4, -5, -6, -4, -10, -18)]
-        */
-        public void MultiplicationTest(float x1, float y1, float z1, float x2, float y2, float z2,
-            float expectedX, float expectedY, float expectedZ)
-        {
-            Vector3 vector1 = new Vector3(x1, y1, z1);
-            Vector3 vector2 = new Vector3(x2, y2, z2);
-            Vector3 expectedResult = new Vector3(expectedX, expectedY, expectedZ);
+            richTextBox1.Text += "result1 :\t" + result1 + "\n";
+            richTextBox1.Text += "result2 :\t" + result2 + "\n";
 
-            Vector3 result1 = vector1 * vector2;
-            Vector3 result2 = Vector3.Multiply(vector1, vector2);
+            //乘上常數
+            x = 1;
+            y = 2;
+            z = 3;
+            value = -4;
 
-            //Assert.AreEqual<bool>(expectedResult == result1, true);
-            //Assert.AreEqual<bool>(expectedResult == result2, true);
-        }
+            vector = new Vector3(x, y, z);
+            result1 = vector * value;
+            result2 = Vector3.Multiply(vector, value);
+            richTextBox1.Text += "result1 :\t" + result1 + "\n";
+            richTextBox1.Text += "result2 :\t" + result2 + "\n";
 
-        /*
-        [Row(1, 2, 3, 4, 4, 8, 12)]
-        [Row(1, 2, 3, -4, -4, -8, -12)]
-        */
-        public void MultiplicationWithConstTest(float x, float y, float z, float value,
-            float expectedX, float expectedY, float expectedZ)
-        {
-            Vector3 vector = new Vector3(x, y, z);
-            Vector3 expectedResult = new Vector3(expectedX, expectedY, expectedZ);
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
-            Vector3 result1 = vector * value;
-            Vector3 result2 = Vector3.Multiply(vector, value);
+            //除法測試
 
-            //Assert.AreEqual<bool>(expectedResult == result1, true);
-            //Assert.AreEqual<bool>(expectedResult == result2, true);
-        }
+            x1 = 1;
+            y1 = 2;
+            z1 = 3;
+            x2 = -1;
+            y2 = -4;
+            z2 = -2;
 
-        /*
-        [Row(1, 2, 3, 1, 4, 2, 1, 0.5, 1.5)]
-        [Row(1, 2, 3, -1, -4, -2, -1, -0.5, -1.5)]
-        */
-        public void DivisionTest(float x1, float y1, float z1, float x2, float y2, float z2,
-            float expectedX, float expectedY, float expectedZ)
-        {
-            Vector3 vector1 = new Vector3(x1, y1, z1);
-            Vector3 vector2 = new Vector3(x2, y2, z2);
-            Vector3 expectedResult = new Vector3(expectedX, expectedY, expectedZ);
+            vector1 = new Vector3(x1, y1, z1);
+            vector2 = new Vector3(x2, y2, z2);
 
-            Vector3 result1 = vector1 / vector2;
-            Vector3 result2 = Vector3.Divide(vector1, vector2);
+            result1 = vector1 / vector2;
+            result2 = Vector3.Divide(vector1, vector2);
 
-            //Assert.AreEqual<bool>(expectedResult == result1, true);
-            //Assert.AreEqual<bool>(expectedResult == result2, true);
-        }
+            richTextBox1.Text += "result1 :\t" + result1 + "\n";
+            richTextBox1.Text += "result2 :\t" + result2 + "\n";
 
-        /*
-        [Row(1, 2, 3, 2, 0.5, 1, 1.5)]
-        [Row(1, 2, 3, -2, -0.5, -1, -1.5)]
-        */
-        public void DivisionWithConstTest(float x, float y, float z, float value,
-            float expectedX, float expectedY, float expectedZ)
-        {
-            Vector3 vector = new Vector3(x, y, z);
-            Vector3 expectedResult = new Vector3(expectedX, expectedY, expectedZ);
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
-            Vector3 result1 = vector / value;
-            Vector3 result2 = Vector3.Divide(vector, value);
+            //除以常數
 
-            //Assert.AreEqual<bool>(expectedResult == result1, true);
-            //Assert.AreEqual<bool>(expectedResult == result2, true);
-        }
+            x = 1;
+            y = 2;
+            z = 3;
+            value = -2;
+            vector = new Vector3(x, y, z);
+            result1 = vector / value;
+            result2 = Vector3.Divide(vector, value);
+            richTextBox1.Text += "result1 :\t" + result1 + "\n";
+            richTextBox1.Text += "result2 :\t" + result2 + "\n";
 
-        /*
-        [Row(1, 0, 0, 1, 0, 0)]
-        [Row(0, 1, 0, 0, 1, 0)]
-        [Row(0, 0, 1, 0, 0, 1)]
-        [Row(3, 4, 0, 0.6, 0.8, 0)]
-        [Row(3, 0, 4, 0.6, 0, 0.8)]
-        */
-        public void NormalizeTest(float x, float y, float z, float expectedX, float expectedY, float expectedZ)
-        {
-            Vector3 vector = new Vector3(x, y, z);
-            Vector3 expectedResult = new Vector3(expectedX, expectedY, expectedZ);
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //正規化 Normalize
+
+            x = 3;
+            y = 4;
+            z = 0;
+
+            vector = new Vector3(x, y, z);
 
             float norm1 = vector.Norm;
             float norm2 = vector.Normalize();
+            richTextBox1.Text += "正規化 :\t" + norm1 + "\n";
+            richTextBox1.Text += "正規化 :\t" + norm2 + "\n";
 
-            //Assert.AreEqual<bool>(expectedResult == vector, true);
-            //Assert.AreEqual<float>(norm1, norm2);
-        }
+            //反向測試 Inverse
 
-        /*
-        [Row(1, 0, 0, 1, 0, 0)]
-        [Row(0, 0, 0, 0, 0, 0)]
-        [Row(2, 4, 8, 0.5, 0.25, 0.125)]
-        [Row(-2, -4, -8, -0.5, -0.25, -0.125)]
-        [Row(0.5, 0.25, 0.125, 2, 4, 8)]
-        */
-        public void InverseTest(float x, float y, float z, float expectedX, float expectedY, float expectedZ)
-        {
-            Vector3 vector = new Vector3(x, y, z);
-            Vector3 expectedResult = new Vector3(expectedX, expectedY, expectedZ);
+            x = 2;
+            y = 4;
+            z = 8;
 
+            vector = new Vector3(x, y, z);
             Vector3 result = vector.Inverse();
+            richTextBox1.Text += "倒數/反向測試 :\t" + result + "\n";
 
-            //Assert.AreEqual<bool>(expectedResult == result, true);
-        }
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
-        /*
-        [Row(1, 2, 3, 0, 0, 0, 0)]
-        [Row(1, 2, 3, 1, 1, 1, 6)]
-        [Row(1, 2, 3, 3, 2, 1, 10)]
-        [Row(1, 2, 3, -3, -2, -1, -10)]
-        */
-        public void DotTest(float x1, float y1, float z1, float x2, float y2, float z2, float expectedResult)
-        {
-            Vector3 vector1 = new Vector3(x1, y1, z1);
-            Vector3 vector2 = new Vector3(x2, y2, z2);
+            //內積測試
 
-            //Assert.AreEqual<float>(Vector3.Dot(vector1, vector2), expectedResult);
-        }
+            x1 = 1;
+            y1 = 2;
+            z1 = 3;
+            x2 = -3;
+            y2 = -2;
+            z2 = -1;
 
-        /*
-        [Row(1, 0, 0, 0, 1, 0, 0, 0, 1)]
-        [Row(1, 1, 1, 1, 1, 1, 0, 0, 0)]
-        [Row(1, 2, 3, 4, 5, 6, -3, 6, -3)]
-        */
-        public void CrossTest(float x1, float y1, float z1, float x2, float y2, float z2,
-            float expectedX, float expectedY, float expectedZ)
-        {
-            Vector3 vector1 = new Vector3(x1, y1, z1);
-            Vector3 vector2 = new Vector3(x2, y2, z2);
-            Vector3 expectedResult = new Vector3(expectedX, expectedY, expectedZ);
+            vector1 = new Vector3(x1, y1, z1);
+            vector2 = new Vector3(x2, y2, z2);
 
-            //Assert.AreEqual<bool>(Vector3.Cross(vector1, vector2) == expectedResult, true);
+            float cc = Vector3.Dot(vector1, vector2);
+            richTextBox1.Text += "內積測試 : " + cc + "\n";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //外積測試
+
+            x1 = 1;
+            y1 = 2;
+            z1 = 3;
+            x2 = 4;
+            y2 = 5;
+            z2 = 6;
+            vector1 = new Vector3(x1, y1, z1);
+            vector2 = new Vector3(x2, y2, z2);
+
+            var ccc = Vector3.Cross(vector1, vector2);
+            richTextBox1.Text += "外積測試 : " + ccc + "\n";
+
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button16_Click(object sender, EventArgs e)
         {
-            //在下面
+            richTextBox1.Text += "CosineDistanceTest()\n";
+            CosineDistanceTest();
+            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "CosineSimilarityTest()\n";
+            CosineSimilarityTest();
+            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "EuclideanDistanceTest()\n";
+            EuclideanDistanceTest();
+            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "EuclideanSimilarityTest()\n";
+            EuclideanSimilarityTest();
+            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "HammingDistanceTest()\n";
+            HammingDistanceTest();
+            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "JaccardDistanceTest()\n";
+            JaccardDistanceTest();
+            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "ManhattanDistanceTest()\n";
+            ManhattanDistanceTest();
+            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "PearsonCorrelationTest()\n";
+            PearsonCorrelationTest();
         }
 
         // test data
@@ -983,255 +908,234 @@ namespace vcs_AForgeMathTest
         {
             CosineDistance dist = new CosineDistance();
 
-            //Assert.Throws<ArgumentException>( ( ) => dist.GetDistance( p0, q4 ) );
-
             double result = dist.GetDistance(p0, q0);
-            //Assert.AreApproximatelyEqual( result, .2, 0.00001 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
 
             result = dist.GetDistance(p1, q1);
-            //Assert.AreApproximatelyEqual( result, 0.029857, 0.00001 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
 
             result = dist.GetDistance(p2, q2);
-            //Assert.AreEqual( result, 1 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
 
             result = dist.GetDistance(p3, q3);
-            //Assert.AreApproximatelyEqual( result, 0, 0.00001 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
 
             result = dist.GetDistance(p4, q4);
-            //Assert.AreApproximatelyEqual( result, 0.039354, 0.00001 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
 
             result = dist.GetDistance(p5, q5);
-            //Assert.AreApproximatelyEqual( result, 0.031026, 0.00001 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
         }
 
         public void CosineSimilarityTest()
         {
             CosineSimilarity sim = new CosineSimilarity();
 
-            //Assert.Throws<ArgumentException>( ( ) => sim.GetSimilarityScore( p0, q4 ) );
-
             double result = sim.GetSimilarityScore(p0, q0);
-            //Assert.AreApproximatelyEqual( result, .8, 0.00001 );
+            richTextBox1.Text += "GetSimilarityScore :\t" + result + "\n";
 
             result = sim.GetSimilarityScore(p1, q1);
-            //Assert.AreApproximatelyEqual( result, 0.97014, 0.00001 );
+            richTextBox1.Text += "GetSimilarityScore :\t" + result + "\n";
 
             result = sim.GetSimilarityScore(p2, q2);
-            //Assert.AreEqual( result, 0 );
+            richTextBox1.Text += "GetSimilarityScore :\t" + result + "\n";
 
             result = sim.GetSimilarityScore(p3, q3);
-            //Assert.AreApproximatelyEqual( result, 1, 0.00001 );
+            richTextBox1.Text += "GetSimilarityScore :\t" + result + "\n";
 
             result = sim.GetSimilarityScore(p4, q4);
-            //Assert.AreApproximatelyEqual( result, 0.96065, 0.00001 );
+            richTextBox1.Text += "GetSimilarityScore :\t" + result + "\n";
 
             result = sim.GetSimilarityScore(p5, q5);
-            //Assert.AreApproximatelyEqual( result, 0.96897, 0.00001 );
+            richTextBox1.Text += "GetSimilarityScore :\t" + result + "\n";
         }
 
         public void EuclideanDistanceTest()
         {
             EuclideanDistance dist = new EuclideanDistance();
 
-            //Assert.Throws<ArgumentException>( ( ) => dist.GetDistance( p0, q4 ) );
-
             double result = dist.GetDistance(p0, q0);
-            //Assert.AreApproximatelyEqual( result, .70711, 0.00001 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
 
             result = dist.GetDistance(p1, q1);
-            //Assert.AreApproximatelyEqual( result, 1.11803, 0.00001 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
 
             result = dist.GetDistance(p2, q2);
-            //Assert.AreEqual( result, 0 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
 
             result = dist.GetDistance(p3, q3);
-            //Assert.AreEqual( result, 0 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
 
             result = dist.GetDistance(p4, q4);
-            //Assert.AreApproximatelyEqual( result, 2.39792, 0.00001 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
 
             result = dist.GetDistance(p5, q5);
-            //Assert.AreApproximatelyEqual( result, 4.24264, 0.00001 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
         }
 
         public void EuclideanSimilarityTest()
         {
             EuclideanSimilarity sim = new EuclideanSimilarity();
 
-            //Assert.Throws<ArgumentException>( ( ) => sim.GetSimilarityScore( p0, q4 ) );
-
             double result = sim.GetSimilarityScore(p0, q0);
-            //Assert.AreApproximatelyEqual( result, 0.58578, 0.00001 );
+            richTextBox1.Text += "GetSimilarityScore :\t" + result + "\n";
 
             result = sim.GetSimilarityScore(p1, q1);
-            //Assert.AreApproximatelyEqual( result, 0.47213, 0.00001 );
+            richTextBox1.Text += "GetSimilarityScore :\t" + result + "\n";
 
             result = sim.GetSimilarityScore(p2, q2);
-            //Assert.AreEqual( result, 1 );
+            richTextBox1.Text += "GetSimilarityScore :\t" + result + "\n";
 
             result = sim.GetSimilarityScore(p3, q3);
-            //Assert.AreEqual( result, 1 );
+            richTextBox1.Text += "GetSimilarityScore :\t" + result + "\n";
 
             result = sim.GetSimilarityScore(p4, q4);
-            //Assert.AreApproximatelyEqual( result, 0.2943, 0.00001 );
+            richTextBox1.Text += "GetSimilarityScore :\t" + result + "\n";
 
             result = sim.GetSimilarityScore(p5, q5);
-            //Assert.AreApproximatelyEqual( result, 0.19074, 0.00001 );
+            richTextBox1.Text += "GetSimilarityScore :\t" + result + "\n";
         }
 
         public void HammingDistanceTest()
         {
             HammingDistance dist = new HammingDistance();
 
-            //Assert.Throws<ArgumentException>( ( ) => dist.GetDistance( p0, q4 ) );
-
             double result = dist.GetDistance(p0, q0);
-            //Assert.AreEqual( result, 2 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
 
             result = dist.GetDistance(p1, q1);
-            //Assert.AreEqual( result, 2 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
 
             result = dist.GetDistance(p2, q2);
-            //Assert.AreEqual( result, 0 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
 
             result = dist.GetDistance(p3, q3);
-            //Assert.AreEqual( result, 0 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
 
             result = dist.GetDistance(p4, q4);
-            //Assert.AreEqual( result, 4 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
 
             result = dist.GetDistance(p5, q5);
-            //Assert.AreEqual( result, 9 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
         }
 
         public void JaccardDistanceTest()
         {
             JaccardDistance dist = new JaccardDistance();
 
-            //Assert.Throws<ArgumentException>( ( ) => dist.GetDistance( p0, q4 ) );
-
             double result = dist.GetDistance(p0, q0);
-            //Assert.AreEqual( result, 1 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
 
             result = dist.GetDistance(p1, q1);
-            //Assert.AreEqual( result, 1 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
 
             result = dist.GetDistance(p2, q2);
-            //Assert.AreEqual( result, 0 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
 
             result = dist.GetDistance(p3, q3);
-            //Assert.AreEqual( result, 0 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
 
             result = dist.GetDistance(p4, q4);
-            //Assert.AreApproximatelyEqual( result, 0.66666, 0.00001 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
 
             result = dist.GetDistance(p5, q5);
-            //Assert.AreApproximatelyEqual( result, 0.9, 0.1 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
         }
 
         public void ManhattanDistanceTest()
         {
             ManhattanDistance dist = new ManhattanDistance();
 
-            //Assert.Throws<ArgumentException>( ( ) => dist.GetDistance( p0, q4 ) );
-
             double result = dist.GetDistance(p0, q0);
-            //Assert.AreEqual( result, 1 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
 
             result = dist.GetDistance(p1, q1);
-            //Assert.AreEqual( result, 1.5 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
 
             result = dist.GetDistance(p2, q2);
-            //Assert.AreEqual( result, 0 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
 
             result = dist.GetDistance(p3, q3);
-            //Assert.AreEqual( result, 0 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
 
             result = dist.GetDistance(p4, q4);
-            //Assert.AreEqual( result, 4.5 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
 
             result = dist.GetDistance(p5, q5);
-            //Assert.AreEqual( result, 12 );
+            richTextBox1.Text += "GetDistance :\t" + result + "\n";
         }
 
         public void PearsonCorrelationTest()
         {
             PearsonCorrelation sim = new PearsonCorrelation();
 
-            //Assert.Throws<ArgumentException>( ( ) => sim.GetSimilarityScore( p0, q4 ) );
-
             double result = sim.GetSimilarityScore(p0, q0);
-            //Assert.AreEqual( result, -1 );
+            richTextBox1.Text += "GetSimilarityScore :\t" + result + "\n";
 
             result = sim.GetSimilarityScore(p1, q1);
-            //Assert.AreEqual( result, 1 );
+            richTextBox1.Text += "GetSimilarityScore :\t" + result + "\n";
 
             result = sim.GetSimilarityScore(p2, q2);
-            //Assert.AreEqual( result, 0 );
+            richTextBox1.Text += "GetSimilarityScore :\t" + result + "\n";
 
             result = sim.GetSimilarityScore(p3, q3);
-            //Assert.AreEqual( result, 0 );
+            richTextBox1.Text += "GetSimilarityScore :\t" + result + "\n";
 
             result = sim.GetSimilarityScore(p4, q4);
-            //Assert.AreApproximatelyEqual( result, 0.396059, 0.00001 );
+            richTextBox1.Text += "GetSimilarityScore :\t" + result + "\n";
 
             result = sim.GetSimilarityScore(p5, q5);
-            //Assert.AreApproximatelyEqual( result, 0.85470, 0.00001 );
+            richTextBox1.Text += "GetSimilarityScore :\t" + result + "\n";
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button17_Click(object sender, EventArgs e)
         {
-            //在下面
+            int sx = 0;
+            int sy = 0;
+            int ex1 = 10;
+            int ey1 = 0;
+            int ex2 = -100;
+            int ey2 = 100;
 
-        }
-
-        /*
-        [Row( 0, 0, 10, 0, 100, 0, 0 )]
-        [Row( 0, 0, 10, 10, 100, 100, 0 )]
-        [Row( 0, 0, 10, 0, 0, 100, 90 )]
-        [Row( 0, 0, 10, 0, 100, 100, 45 )]
-        [Row( 0, 0, 10, 10, -100, 100, 90 )]
-        [Row( 0, 0, 10, 0, -100, 100, 135 )]
-        [Row( 0, 0, 10, 0, -100, 0, 180 )]
-        [Row( 0, 0, 10, 0, -100, -100, 135 )]
-        */
-        public void GetAngleBetweenVectorsTest(int sx, int sy, int ex1, int ey1, int ex2, int ey2, float expectedAngle)
-        {
             IntPoint startPoint = new IntPoint(sx, sy);
             IntPoint vector1end = new IntPoint(ex1, ey1);
             IntPoint vector2end = new IntPoint(ex2, ey2);
 
             float angle = GeometryTools.GetAngleBetweenVectors(startPoint, vector1end, vector2end);
 
-            //Assert.AreApproximatelyEqual<float, float>( expectedAngle,  angle, 0.00001f );
-        }
+            richTextBox1.Text += "取得角度 : " + angle + " 度\n";
 
-        /*
-        [Row( 0, 0, 10, 0, 0, 10, 10, 10, 0 )]
-        [Row( 0, 0, 10, 0, 0, 10, 0, 20, 90 )]
-        [Row( 0, 0, 10, 0, 1, 1, 10, 10, 45 )]
-        [Row( 0, 0, 10, 0, 1, 1, -8, 10, 45 )]
-        [Row( 0, 0, 10, 10, 0, 0, -100, 100, 90 )]
-        */
-        public void GetAngleBetweenLinesTest(int sx1, int sy1, int ex1, int ey1, int sx2, int sy2, int ex2, int ey2, float expectedAngle)
-        {
+            //3030
+
+            int sx1 = 0;
+            int sy1 = 0;
+            ex1 = 10;
+            ey1 = 10;
+            int sx2 = 0;
+            int sy2 = 0;
+            ex2 = -100;
+            ey2 = 100;
+
             IntPoint line1start = new IntPoint(sx1, sy1);
             IntPoint line1end = new IntPoint(ex1, ey1);
             IntPoint line2start = new IntPoint(sx2, sy2);
             IntPoint line2end = new IntPoint(ex2, ey2);
 
-            float angle = GeometryTools.GetAngleBetweenLines(line1start, line1end, line2start, line2end);
-
-            //Assert.AreApproximatelyEqual<float, float>( expectedAngle, angle, 0.00001f );
+            angle = GeometryTools.GetAngleBetweenLines(line1start, line1end, line2start, line2end);
+            richTextBox1.Text += "取得角度 : " + angle + " 度\n";
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button18_Click(object sender, EventArgs e)
         {
-            //在下面
+            richTextBox1.Text += "GrahamConvexHullTest()\n";
+            GrahamConvexHullTest();
+            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "FindHullTest()\n";
+            FindHullTest();
         }
 
         private List<IntPoint> pointsList0 = new List<IntPoint>();
@@ -1358,7 +1262,28 @@ namespace vcs_AForgeMathTest
         {
             //SimpleShapeChecker
 
-            //在下面
+            richTextBox1.Text += "SimpleShapeCheckerTest()\n";
+            SimpleShapeCheckerTest();
+            /*
+            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "IsCircleTest()\n";
+            IsCircleTest();
+            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "IsQuadrilateralTest()\n";
+            IsQuadrilateralTest();
+            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "CheckQuadrilateralCornersTest()\n";
+            CheckQuadrilateralCornersTest();
+            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "IsTriangleTest()\n";
+            IsTriangleTest();
+            */
+            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "IsConvexPolygon()\n";
+            IsConvexPolygon();
+            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "CheckShapeTypeTest()\n";
+            CheckShapeTypeTest();
         }
 
         private SimpleShapeChecker shapeChecker = new SimpleShapeChecker();
@@ -1390,16 +1315,12 @@ namespace vcs_AForgeMathTest
                 double angle = (double)i / 180 * System.Math.PI;
 
                 // add point to ideal circle
-                idealCicle.Add(new IntPoint(
-                    (int)(radius * System.Math.Cos(angle)),
-                    (int)(radius * System.Math.Sin(angle))));
+                idealCicle.Add(new IntPoint((int)(radius * System.Math.Cos(angle)), (int)(radius * System.Math.Sin(angle))));
 
                 // add a bit distortion for distorred cirlce
                 double distorredRadius = radius + rand.Next(7) - 3;
 
-                distorredCircle.Add(new IntPoint(
-                    (int)(distorredRadius * System.Math.Cos(angle)),
-                    (int)(distorredRadius * System.Math.Sin(angle))));
+                distorredCircle.Add(new IntPoint((int)(distorredRadius * System.Math.Cos(angle)), (int)(distorredRadius * System.Math.Sin(angle))));
             }
 
             // generate sample squares
@@ -1480,105 +1401,158 @@ namespace vcs_AForgeMathTest
 
         public void IsCircleTest()
         {
-            //Assert.AreEqual( true, shapeChecker.IsCircle( idealCicle ) );
-            //Assert.AreEqual( true, shapeChecker.IsCircle( distorredCircle ) );
-
-            //Assert.AreEqual( false, shapeChecker.IsCircle( square1 ) );
-            //Assert.AreEqual( false, shapeChecker.IsCircle( square2 ) );
-            //Assert.AreEqual( false, shapeChecker.IsCircle( square3 ) );
-            //Assert.AreEqual( false, shapeChecker.IsCircle( rectangle ) );
-
-            //Assert.AreEqual( false, shapeChecker.IsCircle( triangle1 ) );
-            //Assert.AreEqual( false, shapeChecker.IsCircle( equilateralTriangle ) );
-            //Assert.AreEqual( false, shapeChecker.IsCircle( isoscelesTriangle ) );
-            //Assert.AreEqual( false, shapeChecker.IsCircle( rectangledTriangle ) );
+            bool result;
+            result = shapeChecker.IsCircle(idealCicle);
+            richTextBox1.Text += "是否為圓 :\t" + result + "\n";
+            result = shapeChecker.IsCircle(distorredCircle);
+            richTextBox1.Text += "是否為圓 :\t" + result + "\n";
+            result = shapeChecker.IsCircle(square1);
+            richTextBox1.Text += "是否為圓 :\t" + result + "\n";
+            result = shapeChecker.IsCircle(square2);
+            richTextBox1.Text += "是否為圓 :\t" + result + "\n";
+            result = shapeChecker.IsCircle(square3);
+            richTextBox1.Text += "是否為圓 :\t" + result + "\n";
+            result = shapeChecker.IsCircle(rectangle);
+            richTextBox1.Text += "是否為圓 :\t" + result + "\n";
+            result = shapeChecker.IsCircle(triangle1);
+            richTextBox1.Text += "是否為圓 :\t" + result + "\n";
+            result = shapeChecker.IsCircle(equilateralTriangle);
+            richTextBox1.Text += "是否為圓 :\t" + result + "\n";
+            result = shapeChecker.IsCircle(isoscelesTriangle);
+            richTextBox1.Text += "是否為圓 :\t" + result + "\n";
+            result = shapeChecker.IsCircle(rectangledTriangle);
+            richTextBox1.Text += "是否為圓 :\t" + result + "\n";
         }
 
         public void IsQuadrilateralTest()
         {
-            //Assert.AreEqual( true, shapeChecker.IsQuadrilateral( square1 ) );
-            //Assert.AreEqual( true, shapeChecker.IsQuadrilateral( square2 ) );
-            //Assert.AreEqual( true, shapeChecker.IsQuadrilateral( square3 ) );
-            //Assert.AreEqual( true, shapeChecker.IsQuadrilateral( rectangle ) );
-
-            //Assert.AreEqual( false, shapeChecker.IsQuadrilateral( idealCicle ) );
-            //Assert.AreEqual( false, shapeChecker.IsQuadrilateral( distorredCircle ) );
-
-            //Assert.AreEqual( false, shapeChecker.IsQuadrilateral( triangle1 ) );
-            //Assert.AreEqual( false, shapeChecker.IsQuadrilateral( equilateralTriangle ) );
-            //Assert.AreEqual( false, shapeChecker.IsQuadrilateral( isoscelesTriangle ) );
-            //Assert.AreEqual( false, shapeChecker.IsQuadrilateral( rectangledTriangle ) );
+            bool result;
+            result = shapeChecker.IsQuadrilateral(square1);
+            richTextBox1.Text += "是否為四邊形 :\t" + result + "\n";
+            result = shapeChecker.IsQuadrilateral(square2);
+            richTextBox1.Text += "是否為四邊形 :\t" + result + "\n";
+            result = shapeChecker.IsQuadrilateral(square3);
+            richTextBox1.Text += "是否為四邊形 :\t" + result + "\n";
+            result = shapeChecker.IsQuadrilateral(rectangle);
+            richTextBox1.Text += "是否為四邊形 :\t" + result + "\n";
+            result = shapeChecker.IsQuadrilateral(idealCicle);
+            richTextBox1.Text += "是否為四邊形 :\t" + result + "\n";
+            result = shapeChecker.IsQuadrilateral(distorredCircle);
+            richTextBox1.Text += "是否為四邊形 :\t" + result + "\n";
+            result = shapeChecker.IsQuadrilateral(triangle1);
+            richTextBox1.Text += "是否為四邊形 :\t" + result + "\n";
+            result = shapeChecker.IsQuadrilateral(equilateralTriangle);
+            richTextBox1.Text += "是否為四邊形 :\t" + result + "\n";
+            result = shapeChecker.IsQuadrilateral(isoscelesTriangle);
+            richTextBox1.Text += "是否為四邊形 :\t" + result + "\n";
+            result = shapeChecker.IsQuadrilateral(rectangledTriangle);
+            richTextBox1.Text += "是否為四邊形 :\t" + result + "\n";
         }
 
         public void CheckQuadrilateralCornersTest()
         {
             List<IntPoint> corners;
 
-            //Assert.AreEqual( true, shapeChecker.IsQuadrilateral( square1, out corners ) );
-            //Assert.AreEqual( 4, corners.Count );
-            //Assert.AreEqual( true, CompareShape( corners, square1Test ) );
+            bool result;
+            result = shapeChecker.IsQuadrilateral(square1, out corners);
+            richTextBox1.Text += "是否為四邊形 :\t" + result + "\n";
+            richTextBox1.Text += "Count :\t" + corners.Count + "\n";
+            result = CompareShape(corners, square1Test);
+            richTextBox1.Text += "是否OK :\t" + result + "\n";
 
-            //Assert.AreEqual( true, shapeChecker.IsQuadrilateral( square2, out corners ) );
-            //Assert.AreEqual( 4, corners.Count );
-            //Assert.AreEqual( true, CompareShape( corners, square2Test ) );
+
+            result = shapeChecker.IsQuadrilateral(square2, out corners);
+            richTextBox1.Text += "是否為四邊形 :\t" + result + "\n";
+            richTextBox1.Text += "Count :\t" + corners.Count + "\n";
+            result = CompareShape(corners, square2Test);
+            richTextBox1.Text += "是否OK :\t" + result + "\n";
         }
 
         public void IsTriangleTest()
         {
-            //Assert.AreEqual( true, shapeChecker.IsTriangle( triangle1 ) );
-            //Assert.AreEqual( true, shapeChecker.IsTriangle( equilateralTriangle ) );
-            //Assert.AreEqual( true, shapeChecker.IsTriangle( isoscelesTriangle ) );
-            //Assert.AreEqual( true, shapeChecker.IsTriangle( rectangledTriangle ) );
+            bool result;
+            result = shapeChecker.IsTriangle(triangle1);
+            richTextBox1.Text += "是否為三角形 :\t" + result + "\n";
+            result = shapeChecker.IsTriangle(equilateralTriangle);
+            richTextBox1.Text += "是否為三角形 :\t" + result + "\n";
+            result = shapeChecker.IsTriangle(isoscelesTriangle);
+            richTextBox1.Text += "是否為三角形 :\t" + result + "\n";
+            result = shapeChecker.IsTriangle(rectangledTriangle);
+            richTextBox1.Text += "是否為三角形 :\t" + result + "\n";
 
-            //Assert.AreEqual( false, shapeChecker.IsTriangle( idealCicle ) );
-            //Assert.AreEqual( false, shapeChecker.IsTriangle( distorredCircle ) );
+            result = shapeChecker.IsTriangle(idealCicle);
+            richTextBox1.Text += "是否為三角形 :\t" + result + "\n";
+            result = shapeChecker.IsTriangle(distorredCircle);
+            richTextBox1.Text += "是否為三角形 :\t" + result + "\n";
 
-            //Assert.AreEqual( false, shapeChecker.IsTriangle( square1 ) );
-            //Assert.AreEqual( false, shapeChecker.IsTriangle( square2 ) );
-            //Assert.AreEqual( false, shapeChecker.IsTriangle( square3 ) );
-            //Assert.AreEqual( false, shapeChecker.IsTriangle( rectangle ) );
+            result = shapeChecker.IsTriangle(square1);
+            richTextBox1.Text += "是否為三角形 :\t" + result + "\n";
+            result = shapeChecker.IsTriangle(square2);
+            richTextBox1.Text += "是否為三角形 :\t" + result + "\n";
+            result = shapeChecker.IsTriangle(square3);
+            richTextBox1.Text += "是否為三角形 :\t" + result + "\n";
+            result = shapeChecker.IsTriangle(rectangle);
+            richTextBox1.Text += "是否為三角形 :\t" + result + "\n";
         }
 
         public void IsConvexPolygon()
         {
+            bool result;
+
             List<IntPoint> corners;
 
-            //Assert.AreEqual( true, shapeChecker.IsConvexPolygon( triangle1, out corners ) );
-            //Assert.AreEqual( 3, corners.Count );
-            //Assert.AreEqual( true, shapeChecker.IsConvexPolygon( equilateralTriangle, out corners ) );
-            //Assert.AreEqual( 3, corners.Count );
-            //Assert.AreEqual( true, shapeChecker.IsConvexPolygon( isoscelesTriangle, out corners ) );
-            //Assert.AreEqual( 3, corners.Count );
-            //Assert.AreEqual( true, shapeChecker.IsConvexPolygon( rectangledTriangle, out corners ) );
-            //Assert.AreEqual( 3, corners.Count );
+            result = shapeChecker.IsConvexPolygon(triangle1, out corners);
+            richTextBox1.Text += "是否為凸多邊形 :\t" + result + "\n";
+            richTextBox1.Text += "Count :\t" + corners.Count + "\n";
+            result = shapeChecker.IsConvexPolygon(equilateralTriangle, out corners);
+            richTextBox1.Text += "是否為凸多邊形 :\t" + result + "\n";
+            richTextBox1.Text += "Count :\t" + corners.Count + "\n";
+            result = shapeChecker.IsConvexPolygon(isoscelesTriangle, out corners);
+            richTextBox1.Text += "是否為凸多邊形 :\t" + result + "\n";
+            richTextBox1.Text += "Count :\t" + corners.Count + "\n";
+            result = shapeChecker.IsConvexPolygon(rectangledTriangle, out corners);
+            richTextBox1.Text += "是否為凸多邊形 :\t" + result + "\n";
+            richTextBox1.Text += "Count :\t" + corners.Count + "\n";
 
-            //Assert.AreEqual( true, shapeChecker.IsConvexPolygon( square1, out corners ) );
-            //Assert.AreEqual( 4, corners.Count );
-            //Assert.AreEqual( true, shapeChecker.IsConvexPolygon( square2, out corners ) );
-            //Assert.AreEqual( 4, corners.Count );
-            //Assert.AreEqual( true, shapeChecker.IsConvexPolygon( square3, out corners ) );
-            //Assert.AreEqual( 4, corners.Count );
-            //Assert.AreEqual( true, shapeChecker.IsConvexPolygon( rectangle, out corners ) );
-            //Assert.AreEqual( 4, corners.Count );
+            result = shapeChecker.IsConvexPolygon(square1, out corners);
+            richTextBox1.Text += "是否為凸多邊形 :\t" + result + "\n";
+            richTextBox1.Text += "Count :\t" + corners.Count + "\n";
+            result = shapeChecker.IsConvexPolygon(square2, out corners);
+            richTextBox1.Text += "是否為凸多邊形 :\t" + result + "\n";
+            richTextBox1.Text += "Count :\t" + corners.Count + "\n";
+            result = shapeChecker.IsConvexPolygon(square3, out corners);
+            richTextBox1.Text += "是否為凸多邊形 :\t" + result + "\n";
+            richTextBox1.Text += "Count :\t" + corners.Count + "\n";
+            result = shapeChecker.IsConvexPolygon(rectangle, out corners);
+            richTextBox1.Text += "是否為凸多邊形 :\t" + result + "\n";
+            richTextBox1.Text += "Count :\t" + corners.Count + "\n";
 
-            //Assert.AreEqual( false, shapeChecker.IsConvexPolygon( idealCicle, out corners ) );
-            //Assert.AreEqual( false, shapeChecker.IsConvexPolygon( distorredCircle, out corners ) );
+            result = shapeChecker.IsConvexPolygon(idealCicle, out corners);
+            richTextBox1.Text += "是否為凸多邊形 :\t" + result + "\n";
+
+            result = shapeChecker.IsConvexPolygon(distorredCircle, out corners);
+            richTextBox1.Text += "是否為凸多邊形 :\t" + result + "\n";
         }
 
         public void CheckShapeTypeTest()
         {
-            //Assert.AreEqual( ShapeType.Circle, shapeChecker.CheckShapeType( idealCicle ) );
-            //Assert.AreEqual( ShapeType.Circle, shapeChecker.CheckShapeType( distorredCircle ) );
+            richTextBox1.Text += "測試 CheckShapeType\n";
 
-            //Assert.AreEqual( ShapeType.Quadrilateral, shapeChecker.CheckShapeType( square1 ) );
-            //Assert.AreEqual( ShapeType.Quadrilateral, shapeChecker.CheckShapeType( square2 ) );
-            //Assert.AreEqual( ShapeType.Quadrilateral, shapeChecker.CheckShapeType( square3 ) );
-            //Assert.AreEqual( ShapeType.Quadrilateral, shapeChecker.CheckShapeType( rectangle ) );
+            richTextBox1.Text += "ShapeType.Circle :\t" + ShapeType.Circle + "\n";
+            richTextBox1.Text += "取得形狀 :\t" + shapeChecker.CheckShapeType(idealCicle) + "\n";
+            richTextBox1.Text += "取得形狀 :\t" + shapeChecker.CheckShapeType(distorredCircle) + "\n";
 
-            //Assert.AreEqual( ShapeType.Triangle, shapeChecker.CheckShapeType( triangle1 ) );
-            //Assert.AreEqual( ShapeType.Triangle, shapeChecker.CheckShapeType( equilateralTriangle ) );
-            //Assert.AreEqual( ShapeType.Triangle, shapeChecker.CheckShapeType( isoscelesTriangle ) );
-            //Assert.AreEqual( ShapeType.Triangle, shapeChecker.CheckShapeType( rectangledTriangle ) );
+            richTextBox1.Text += "ShapeType.Quadrilateral :\t" + ShapeType.Quadrilateral + "\n";
+            richTextBox1.Text += "取得形狀 :\t" + shapeChecker.CheckShapeType(square1) + "\n";
+            richTextBox1.Text += "取得形狀 :\t" + shapeChecker.CheckShapeType(square2) + "\n";
+            richTextBox1.Text += "取得形狀 :\t" + shapeChecker.CheckShapeType(square3) + "\n";
+            richTextBox1.Text += "取得形狀 :\t" + shapeChecker.CheckShapeType(rectangle) + "\n";
+
+            richTextBox1.Text += "ShapeType.Triangle :\t" + ShapeType.Triangle + "\n";
+            richTextBox1.Text += "取得形狀 :\t" + shapeChecker.CheckShapeType(triangle1) + "\n";
+            richTextBox1.Text += "取得形狀 :\t" + shapeChecker.CheckShapeType(equilateralTriangle) + "\n";
+            richTextBox1.Text += "取得形狀 :\t" + shapeChecker.CheckShapeType(isoscelesTriangle) + "\n";
+            richTextBox1.Text += "取得形狀 :\t" + shapeChecker.CheckShapeType(rectangledTriangle) + "\n";
         }
 
         private bool CompareShape(List<IntPoint> shape1, List<IntPoint> shape2)
@@ -1632,6 +1606,7 @@ namespace vcs_AForgeMathTest
         */
         public void CheckPolygonSubTypeTest(PolygonSubType expectedSubType, int[] corners)
         {
+            //還沒測
             //Assert.AreEqual( expectedSubType, shapeChecker.CheckPolygonSubType( GetListOfPointFromArray( corners ) ) );
         }
 
@@ -1653,39 +1628,39 @@ namespace vcs_AForgeMathTest
         {
             //LineSegmentTest
 
-            //在下面
-        }
-
-
-        /*
-        [Row( 0, 0, 10, 0, 10 )]
-        [Row( 0, 0, 0, 10, 10 )]
-        [Row( 0, 0, 3, 4, 5 )]
-        [Row( 0, 0, -3, 4, 5 )]
-        [Row( 0, 0, -3, -4, 5 )]
-        */
-        public void LengthTest(float sx, float sy, float ex, float ey, float expectedResult)
-        {
+            float sx = 0;
+            float sy = 0;
+            float ex = -3;
+            float ey = -4;
             LineSegment segment = new LineSegment(new AForge.Point(sx, sy), new AForge.Point(ex, ey));
+            richTextBox1.Text += "長度 : " + segment.Length + "\n";
 
-            //Assert.AreEqual( expectedResult, segment.Length );
-        }
+            //3030
+            float x = 2.5f;
+            float y = 6;
+            float x1 = 0;
+            float y1 = 5;
+            float x2 = 0;
+            float y2 = 8;
 
-        /*
-        [Row( 0, 0, 5, 0, 8, 0, 5 )]
-        [Row( 6, 2.5, 5, 0, 8, 0, 2.5 )]
-        [Row( 2.5, 6, 0, 5, 0, 8, 2.5 )]
-        [Row( 9, 0, 5, 0, 8, 0, 1 )]
-        [Row( 3, 4, 0, 0, -10, 0, 5 )]
-        */
-        public void DistanceToPointTest(float x, float y, float x1, float y1, float x2, float y2, float expectedDistance)
-        {
             AForge.Point pt = new AForge.Point(x, y);
             AForge.Point pt1 = new AForge.Point(x1, y1);
             AForge.Point pt2 = new AForge.Point(x2, y2);
-            LineSegment segment = new LineSegment(pt1, pt2);
+            segment = new LineSegment(pt1, pt2);
 
-            //Assert.AreEqual( expectedDistance, segment.DistanceToPoint( pt ) );
+            richTextBox1.Text += "長度 : " + segment.DistanceToPoint(pt) + "\n";
+
+            /*
+            [Row( 0, 0, 5, 0, 8, 0, 5 )]
+            [Row( 6, 2.5, 5, 0, 8, 0, 2.5 )]
+            [Row( 2.5, 6, 0, 5, 0, 8, 2.5 )]
+            [Row( 9, 0, 5, 0, 8, 0, 1 )]
+            [Row( 3, 4, 0, 0, -10, 0, 5 )]
+            */
+
+            //3030
+
+
         }
 
         // Denotes which versions of the test are supposed to return non-null values:
@@ -1853,9 +1828,13 @@ namespace vcs_AForgeMathTest
         {
             //UnmanagedImageTest
 
-            //在下面
-        }
+            Collect8bppPixelValuesTest_Grayscale();
+            Collect8bppPixelValuesTest_RGB();
+            CollectActivePixelsTest();
 
+            //還有
+
+        }
 
         public void Collect8bppPixelValuesTest_Grayscale()
         {
@@ -2285,6 +2264,7 @@ namespace vcs_AForgeMathTest
 //------------------------------  # 30個
 
 //1515
+//richTextBox1.Text += "---------------\n";  // 15個
 //---------------  # 15個
 
 

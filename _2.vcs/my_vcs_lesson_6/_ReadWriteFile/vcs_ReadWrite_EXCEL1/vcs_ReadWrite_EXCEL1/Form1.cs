@@ -865,3 +865,45 @@ namespace vcs_ReadWrite_EXCEL1
         }
     }
 }
+
+
+/*
+
+                //保存Excel文件
+                Excel.Application excel = new Excel.Application();
+                try
+                {
+                    excel.DisplayAlerts = false;
+                    excel.Workbooks.Add(true);
+                    excel.Visible = false;
+
+                    for (int i = 0; i < srcDgv.Columns.Count; i++)//设置标题
+                    {
+                        excel.Cells[2, i + 1] = srcDgv.Columns[i].HeaderText;
+                    }
+
+                    for (int i = 0; i < srcDgv.Rows.Count; i++)//填充数据
+                    {
+                        for (int j = 0; j < srcDgv.Columns.Count; j++)
+                        {
+                            if (srcDgv[j, i].ValueType.ToString() == "System.Byte[]")
+                            {
+                                excel.Cells[i + 3, j + 1] = "System.Byte[]";
+                            }
+                            else
+                            {
+                                excel.Cells[i + 3, j + 1] = srcDgv[j, i].Value;
+                            }
+                        }
+                    }
+
+                    excel.Workbooks[1].SaveCopyAs(fileName);//保存
+                }
+                finally
+                {
+                    excel.Quit();
+                }
+                return;
+
+
+*/
