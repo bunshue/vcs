@@ -2324,6 +2324,51 @@ namespace vcs_SqlConnection1
 
         private void button21_Click(object sender, EventArgs e)
         {
+            //使用LINQ技术统计员工的工资总额
+
+            string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+
+            SqlConnection sqlcon;//声明SqlConnection对象
+            SqlDataAdapter sqlda;//声明SqlDataAdapter对象
+            DataSet myds;//声明DataSet数据集对象
+
+            sqlcon = new SqlConnection(strCon);//创建数据库连接对象
+            sqlda = new SqlDataAdapter("select * from tb_Salary", sqlcon);//创建数据库桥接器对象
+            myds = new DataSet();//创建数据集对象
+            sqlda.Fill(myds, "tb_Salary");//填充DataSet数据集
+
+            var query = from salary in myds.Tables["tb_Salary"].AsEnumerable()//使用LINQ从数据集中查询所有数据
+                        select salary;
+            DataTable dt = query.CopyToDataTable<DataRow>();//将查询结果转化为DataTable对象
+
+            dataGridView1.DataSource = dt;//显示查询到的数据集中的信息
+
+
+
+            //3030
+
+            //公司每月总薪水
+
+            sqlcon = new SqlConnection(strCon);//创建数据库连接对象
+            sqlda = new SqlDataAdapter("select * from tb_Salary", sqlcon);//创建数据库桥接器对象
+            myds = new DataSet();//创建数据集对象
+            sqlda.Fill(myds, "tb_Salary");//填充DataSet数据集
+
+            query = from salary in myds.Tables["tb_Salary"].AsEnumerable()//查询DataSet数据集中所有薪水
+                    where salary.Field<int>("Salary") > 0
+                    select salary;
+            int intSum = query.Sum(salary => salary.Field<int>("Salary"));//汇总薪水
+
+            dt = new DataTable();//创建DataTable对象
+            dt.Columns.Add("公司每月总薪水");//在数据表中添加列
+            DataRow myDRow = dt.NewRow();//创建DataRow对象
+            myDRow["公司每月总薪水"] = intSum;//为DataRow中的行赋值
+            dt.Rows.Add(myDRow);//将DataRow添加到DataTable的行集合中
+            //dataGridView1.DataSource = dt;//显示查询到的数据集中的信息
+            //dataGridView1.Columns[0].Width = 120;//设置DataGridView控件的列宽
+
+            richTextBox1.Text += "公司每月总薪水 : " + intSum + "\n";
+
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -2610,6 +2655,8 @@ namespace vcs_SqlConnection1
                 cn.Open();
 
                 //獲取所有數據庫名稱
+                //試一下  把 master 改成 dbo
+                // 'dbo.tb_XML'.
                 //string sqlstr = "SELECT NAME FROM master.dbo.sysdatabases";
                 //string sqlstr = "SELECT Name FROM Master.dbo.SysDatabases ORDER BY Name";
                 //string sqlstr = "SELECT count(*) FROM master.dbo.sysdatabases WHERE name='DB_02'";//NG

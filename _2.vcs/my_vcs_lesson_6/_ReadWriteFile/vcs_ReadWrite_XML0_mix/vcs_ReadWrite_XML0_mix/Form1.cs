@@ -35,10 +35,10 @@ namespace vcs_ReadWrite_XML0_mix
             int dy;
 
             //button
-            x_st = 15;
-            y_st = 15;
-            dx = 180;
-            dy = 90;
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 10;
+            dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -48,35 +48,42 @@ namespace vcs_ReadWrite_XML0_mix
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            button8.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button9.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            dataGridView1.Size = new Size(400, 190);
+            dataGridView1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
-            button16.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button17.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button18.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button19.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button21.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button23.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            richTextBox1.Size = new Size(400, 490);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 200);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            button24.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button25.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button26.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button27.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button28.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            button29.Location = new Point(x_st + dx * 3, y_st + dy * 5);
-            button30.Location = new Point(x_st + dx * 3, y_st + dy * 6);
-            button31.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            this.Size = new Size(1070, 750);
+            this.Text = "vcs_ReadWrite_XML0_mix";
 
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -971,11 +978,31 @@ namespace vcs_ReadWrite_XML0_mix
                     richTextBox1.Text += xn2b.InnerText + "\n";  //顯示子節點點文本
                 }
             }
-
         }
 
         private void button20_Click(object sender, EventArgs e)
         {
+            //XML轉DGV
+
+            string strPath = "../../Employee.xml";  // 记录XML文件路径
+
+            // 将XML文件内容绑定到DataGridView控件
+            DataSet myds = new DataSet();//创建DataSet数据集对象
+            myds.ReadXml(strPath);//读取XML结构
+            dataGridView1.DataSource = myds.Tables[0];//在DataGridView中显示XML文件中的信息
+
+
+            //取得dgv的所有資料
+            int R = dataGridView1.Rows.Count;
+            richTextBox1.Text += "R = " + R.ToString() + "\n";
+            for (int i = 0; i < R - 1; i++)//遍历所有行
+            {
+                richTextBox1.Text += "ID : " + dataGridView1.Rows[i].Cells[3].Value.ToString() + "\n";
+                richTextBox1.Text += "Name : " + dataGridView1.Rows[i].Cells[0].Value.ToString() + "\n";
+                richTextBox1.Text += "Sex : " + dataGridView1.Rows[i].Cells[1].Value.ToString() + "\n";
+                richTextBox1.Text += "Salary : " + Convert.ToInt32(dataGridView1.Rows[i].Cells[2].Value) + "\n";
+            }
+
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -1064,6 +1091,26 @@ namespace vcs_ReadWrite_XML0_mix
             finally
             {
             }
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

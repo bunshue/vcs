@@ -69,12 +69,12 @@
             this.lb_dgv3 = new System.Windows.Forms.Label();
             this.lb_dgv4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt_new = new System.Windows.Forms.Button();
             this.lb_index = new System.Windows.Forms.Label();
             this.tb_sql = new System.Windows.Forms.TextBox();
             this.bt_next = new System.Windows.Forms.Button();
             this.bt_previous = new System.Windows.Forms.Button();
             this.btn_sql_test = new System.Windows.Forms.Button();
-            this.bt_new = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
@@ -348,6 +348,7 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(200, 60);
             this.button21.TabIndex = 147;
+            this.button21.Text = "LINQ";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -518,6 +519,17 @@
             this.groupBox1.TabIndex = 173;
             this.groupBox1.TabStop = false;
             // 
+            // bt_new
+            // 
+            this.bt_new.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_new.Location = new System.Drawing.Point(13, 140);
+            this.bt_new.Name = "bt_new";
+            this.bt_new.Size = new System.Drawing.Size(66, 40);
+            this.bt_new.TabIndex = 178;
+            this.bt_new.Text = "新進";
+            this.bt_new.UseVisualStyleBackColor = true;
+            this.bt_new.Click += new System.EventHandler(this.bt_new_Click);
+            // 
             // lb_index
             // 
             this.lb_index.AutoSize = true;
@@ -570,17 +582,6 @@
             this.btn_sql_test.Text = "簡易測試";
             this.btn_sql_test.UseVisualStyleBackColor = true;
             this.btn_sql_test.Click += new System.EventHandler(this.btn_sql_test_Click);
-            // 
-            // bt_new
-            // 
-            this.bt_new.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_new.Location = new System.Drawing.Point(13, 140);
-            this.bt_new.Name = "bt_new";
-            this.bt_new.Size = new System.Drawing.Size(66, 40);
-            this.bt_new.TabIndex = 178;
-            this.bt_new.Text = "新進";
-            this.bt_new.UseVisualStyleBackColor = true;
-            this.bt_new.Click += new System.EventHandler(this.bt_new_Click);
             // 
             // Form1
             // 
