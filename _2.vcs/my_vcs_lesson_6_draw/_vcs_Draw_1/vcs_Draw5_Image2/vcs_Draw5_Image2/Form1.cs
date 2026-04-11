@@ -44,17 +44,12 @@ namespace vcs_Draw5_Image2
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 200 + 10;
-            dy = 60 + 10;
-
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+            
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox1.Size = new System.Drawing.Size(450, 450);
             pictureBox1.Location = new Point(20, 100);

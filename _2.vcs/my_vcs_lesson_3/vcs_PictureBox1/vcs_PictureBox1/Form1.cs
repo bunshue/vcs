@@ -58,17 +58,12 @@ namespace vcs_PictureBox1
 
             reset_picturebox_setting();
 
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 120 + 10;
-            dy = 40 + 10;
-
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 120 + 10;
+            int dy = 40 + 10;
+            
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button7.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);

@@ -71,41 +71,11 @@ Login failed for user 'M-100028\070601'.
 
 //------------------------------------------------------------  # 60個
 
-            // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
-
-            using (SqlConnection con = new SqlConnection(cnstr))
-            {
-                try
-                {
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.Connection = con;
-                    cmd.Connection.Open();
-                    string str = "xxxxxxx";
-                    cmd.CommandText = str;
-                    cmd.ExecuteNonQuery();
-                    this.label3.Text = "已成功完成訊息拷貝";
-                }
-                catch (Exception ey)
-                {
-                    MessageBox.Show(ey.Message);
-                }
-            }
-
-
 
 
 //------------------------------------------------------------  # 60個
 
 
-            using (SqlCommand cmd = new SqlCommand())
-            {
-                con.Open();
-                cmd.Connection = con;
-                cmd.CommandText = this.textBox1.Text;
-                cmd.ExecuteNonQuery();
-                con.Close();
-            }
 
 //------------------------------------------------------------  # 60個
 
@@ -120,14 +90,9 @@ Login failed for user 'M-100028\070601'.
                 richTextBox1.Text += row["ServerName"] + "\n";
             }
 
-
 //------------------------------------------------------------  # 60個
 
-
-
-
 /*
-
             // 資料庫檔案
             string db_filename = "db_TomeTwo.MDF";
             // 查詢字串
@@ -232,35 +197,6 @@ Instance pipe name:
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            using (SqlCommand cmd = new SqlCommand())
-            {
-                try
-                {
-                    con.Open();
-                    cmd.Connection = con;
-                    cmd.CommandText = this.textBox1.Text;
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                    MessageBox.Show("刪除成功");
-                    this.textBox1.Focus();
-                    this.textBox1.SelectAll();
-                }
-                catch
-                {
-                    MessageBox.Show("SQL語句有誤");
-                    this.textBox1.Focus();
-                    this.textBox1.SelectAll();
-                }
-            }
-        }
-
-richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-
-
         // 固定查詢
         private void ShowData3(string cnstr)
         {
@@ -302,22 +238,12 @@ DataTable的用法
                     this.textBox3.Text = dt.Rows[0][3].ToString().Trim();
                     this.textBox4.Text = dt.Rows[0][4].ToString().Trim();
 
-
-
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-九、連接SQL Server數據庫：
-using System;
-using System.Data.SqlClIEnt;
-
-public class TestADO
-{
-    public static void Main()
-    {
         SqlConnection conn = new SqlConnection(Data Source=localhost; Integrated Security=SSPI; Initial Catalog=pubs);
 
-SqlCommand  cmd = new SqlCommand(SELECT * FROM employees, conn);
+	SqlCommand cmd = new SqlCommand(SELECT * FROM employees, conn);
         try
         {        
             conn.Open();
@@ -362,7 +288,7 @@ public class TestWriteXML
 
         SqlDataAdapter adapter = new SqlDataAdapter(); 
 
-        adapter.SelectCommand = new SqlCommand(strSql,conn);
+        adapter.SelectCommand = new SqlCommand(strSql, conn);
 
         // Build the DataSet
         DataSet ds = new DataSet();

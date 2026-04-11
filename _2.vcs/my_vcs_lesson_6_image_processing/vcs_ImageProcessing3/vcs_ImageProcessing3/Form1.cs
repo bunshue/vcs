@@ -45,9 +45,11 @@ namespace vcs_ImageProcessing3
 
         void show_item_location()
         {
+            //button
             int x_st = 10;
             int y_st = 10;
             int dx = 200 + 10;
+            //int dy = 60 + 10;
             int dy = 40 + 10;
             int W = 200 + 20;
             int H = 380;

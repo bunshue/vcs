@@ -69,17 +69,12 @@ namespace vcs_TabControl
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 200 + 10;
-            dy = 60 + 10;
-
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+            
             label6.Location = new Point(tabControl2.Location.X, tabControl2.Location.Y - 30);
             richTextBox1.Size = new Size(300, 300);
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 4 + 60);

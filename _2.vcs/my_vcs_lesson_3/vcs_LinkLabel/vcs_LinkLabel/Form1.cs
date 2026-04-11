@@ -55,17 +55,12 @@ namespace vcs_LinkLabel
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 200 + 10;
-            dy = 60 + 10;
-
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+            
             //this.Size = new Size(1273, 784);
             this.Text = "vcs_test_all_00_Usually";
 

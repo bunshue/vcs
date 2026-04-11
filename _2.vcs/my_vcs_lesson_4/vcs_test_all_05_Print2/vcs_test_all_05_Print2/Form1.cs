@@ -61,16 +61,12 @@ namespace vcs_test_all_05_Print2
 
         private void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 200 + 10;
-            dy = 280 + 10;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 280 + 10;
+            
             groupBox0.Size = new Size(200, 280);
             groupBox1.Size = new Size(200, 280);
             groupBox2.Size = new Size(200, 280);

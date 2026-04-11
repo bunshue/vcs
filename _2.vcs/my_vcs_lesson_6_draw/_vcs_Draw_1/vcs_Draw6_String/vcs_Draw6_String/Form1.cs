@@ -41,17 +41,12 @@ namespace vcs_Draw6_String
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 1260;
-            y_st = 40;
-            dx = 200 + 10;
-            dy = 60 + 10;
-
+            int x_st = 1260;
+            int y_st = 40;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+            
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);

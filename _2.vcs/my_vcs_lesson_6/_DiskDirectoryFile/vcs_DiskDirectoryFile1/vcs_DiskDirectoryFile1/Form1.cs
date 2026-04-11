@@ -28,17 +28,12 @@ namespace vcs_DiskDirectoryFile1
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 30;
-            dx = 200 + 10;
-            dy = 50 + 5;
-
+            int x_st = 10;
+            int y_st = 30;
+            int dx = 200 + 10;
+            int dy = 50 + 5;
+            
             label0.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 20);
             label1.Location = new Point(x_st + dx * 1, y_st + dy * 0 - 20);
             label2.Location = new Point(x_st + dx * 2, y_st + dy * 0 - 20);

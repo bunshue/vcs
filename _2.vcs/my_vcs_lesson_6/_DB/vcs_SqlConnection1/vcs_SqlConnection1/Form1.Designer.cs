@@ -69,7 +69,6 @@
             this.lb_dgv3 = new System.Windows.Forms.Label();
             this.lb_dgv4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.bt_new = new System.Windows.Forms.Button();
             this.lb_index = new System.Windows.Forms.Label();
             this.tb_sql = new System.Windows.Forms.TextBox();
             this.bt_next = new System.Windows.Forms.Button();
@@ -166,7 +165,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 126;
-            this.button5.Text = "成績單2";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -177,7 +175,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 125;
-            this.button4.Text = "成績單1";
+            this.button4.Text = "成績單";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -317,7 +315,6 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(200, 60);
             this.button19.TabIndex = 144;
-            this.button19.Text = "test";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -509,7 +506,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.bt_new);
             this.groupBox1.Controls.Add(this.lb_index);
             this.groupBox1.Controls.Add(this.tb_sql);
             this.groupBox1.Controls.Add(this.bt_next);
@@ -519,17 +515,6 @@
             this.groupBox1.Size = new System.Drawing.Size(100, 200);
             this.groupBox1.TabIndex = 173;
             this.groupBox1.TabStop = false;
-            // 
-            // bt_new
-            // 
-            this.bt_new.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_new.Location = new System.Drawing.Point(13, 140);
-            this.bt_new.Name = "bt_new";
-            this.bt_new.Size = new System.Drawing.Size(66, 40);
-            this.bt_new.TabIndex = 178;
-            this.bt_new.Text = "新進";
-            this.bt_new.UseVisualStyleBackColor = true;
-            this.bt_new.Click += new System.EventHandler(this.bt_new_Click);
             // 
             // lb_index
             // 
@@ -575,13 +560,14 @@
             // 
             // btn_sql_test
             // 
+            this.btn_sql_test.BackColor = System.Drawing.Color.Pink;
             this.btn_sql_test.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btn_sql_test.Location = new System.Drawing.Point(628, 559);
             this.btn_sql_test.Name = "btn_sql_test";
             this.btn_sql_test.Size = new System.Drawing.Size(200, 60);
             this.btn_sql_test.TabIndex = 174;
             this.btn_sql_test.Text = "簡易測試";
-            this.btn_sql_test.UseVisualStyleBackColor = true;
+            this.btn_sql_test.UseVisualStyleBackColor = false;
             this.btn_sql_test.Click += new System.EventHandler(this.btn_sql_test_Click);
             // 
             // Form1
@@ -693,7 +679,6 @@
         private System.Windows.Forms.Button bt_next;
         private System.Windows.Forms.Button bt_previous;
         private System.Windows.Forms.Label lb_index;
-        private System.Windows.Forms.Button bt_new;
     }
 }
 
