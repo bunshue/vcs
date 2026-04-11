@@ -1194,53 +1194,6 @@ namespace vcs_SqlConnection1
 
         private void button11_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "測試 ExecuteScalar()\n";
-
-            // 資料庫檔案
-            string db_filename = "ch17DB.mdf";
-            // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);
-            // 查詢字串
-            string sqlstr = "SELECT * FROM 員工";
-
-            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
-            {
-                //cn.ConnectionString = cnstr;  // 連接字串, 可有可無
-                cn.Open();  // 打開資料庫連線
-
-                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
-                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-                da.Fill(ds, "員工");  // da將查詢的結果填充至數據集ds, 指定TableName為"員工"
-                dataGridView1.DataSource = ds.Tables["員工"];  // DGV設置數據源
-                lb_dgv1.Text = "全部資料 員工\n";
-
-                richTextBox1.Text += "------------------------------\n";  // 30個
-
-                // 查詢字串 取員工資料筆數
-                string sqlstr1 = "SELECT COUNT(*) FROM 員工";
-                SqlCommand cmd1 = new SqlCommand(sqlstr1, cn);
-                richTextBox1.Text += "員工資料表共 " + cmd1.ExecuteScalar().ToString() + " 筆記錄\n";
-
-                // 查詢字串 取薪資加總
-                string sqlstr2 = "SELECT SUM(薪資) FROM 員工";
-                SqlCommand cmd2 = new SqlCommand(sqlstr2, cn);
-                richTextBox1.Text += "員工資料表薪資加總共 " + cmd2.ExecuteScalar().ToString() + "\n";
-
-                // 查詢字串 取薪資平均
-                string sqlstr3 = "SELECT AVG(薪資) FROM 員工";
-                SqlCommand cmd3 = new SqlCommand(sqlstr3, cn);
-                richTextBox1.Text += "員工資料表薪資平均為 " + cmd3.ExecuteScalar().ToString() + "\n";
-
-                // 查詢字串 取薪資最高薪
-                string sqlstr4 = "SELECT Max(薪資) FROM 員工";
-                SqlCommand cmd4 = new SqlCommand(sqlstr4, cn);
-                richTextBox1.Text += "最高薪為 " + cmd4.ExecuteScalar().ToString() + "\n";
-
-                // 查詢字串 取薪資最低薪
-                string sqlstr5 = "SELECT Min(薪資) FROM 員工";
-                SqlCommand cmd5 = new SqlCommand(sqlstr5, cn);
-                richTextBox1.Text += "最低薪為 " + cmd5.ExecuteScalar().ToString() + "\n";
-            }
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -1607,6 +1560,70 @@ namespace vcs_SqlConnection1
 
         private void button19_Click(object sender, EventArgs e)
         {
+            // 十二生肖整理
+
+            // 資料庫檔案
+            string db_filename = "vcs_sql09_db.mdf";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM vcs_sql09_table";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "十二生肖全部資料";
+            /*
+            // 查詢字串, 欄名使用AS
+            sqlstr = "SELECT 英文名 AS ename, 中文名 AS cname, 體重 AS weight FROM vcs_sql09_table";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+            lb_dgv2.Text = "十二生肖全部資料 欄名使用AS";
+
+            // 查詢字串, 依體重排序 DESC/降冪, ASC/升冪
+            sqlstr = "SELECT * FROM vcs_sql09_table ORDER BY 體重 DESC";
+            sql_read_database(db_filename, sqlstr, dataGridView3);
+            lb_dgv3.Text = "十二生肖全部資料 依體重降冪排序";
+
+            // 查詢字串, 依體重排序 DESC/降冪, ASC/升冪, 前五名
+            sqlstr = "SELECT TOP 5 * FROM vcs_sql09_table ORDER BY 體重 DESC";
+            sql_read_database(db_filename, sqlstr, dataGridView4);
+            lb_dgv4.Text = "十二生肖全部資料 依體重降冪排序 前五名";
+            */
+
+            //某一欄資料處理 COUNT SUM AVG MAX MIN, 使用 ExecuteScalar()
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);
+            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
+            {
+                //cn.ConnectionString = cnstr;  // 連接字串, 可有可無
+                cn.Open();  // 打開資料庫連線
+
+                // 查詢字串 資料筆數 COUNT
+                sqlstr = "SELECT COUNT(*) FROM vcs_sql09_table";
+                SqlCommand cmd = new SqlCommand(sqlstr, cn);
+                richTextBox1.Text += "共 " + cmd.ExecuteScalar().ToString() + " 筆記錄\n";
+
+                // 查詢字串 取總和 SUM()
+                sqlstr = "SELECT SUM(體重) FROM vcs_sql09_table";
+                cmd = new SqlCommand(sqlstr, cn);
+                richTextBox1.Text += "總和 :\t" + cmd.ExecuteScalar().ToString() + "\n";
+                int SumNum = Convert.ToInt32(cmd.ExecuteScalar());
+                richTextBox1.Text += "總和 :\t" + SumNum.ToString() + "\n";
+
+                // 查詢字串 取平均 AVG()
+                sqlstr = "SELECT AVG(體重) FROM vcs_sql09_table";
+                cmd = new SqlCommand(sqlstr, cn);
+                richTextBox1.Text += "平均 :\t" + cmd.ExecuteScalar().ToString() + "\n";
+
+                // 查詢字串 取最大 MAX()
+                sqlstr = "SELECT MAX(體重) FROM vcs_sql09_table";
+                cmd = new SqlCommand(sqlstr, cn);
+                richTextBox1.Text += "最大 :\t" + cmd.ExecuteScalar().ToString() + "\n";
+
+                // 查詢字串 取最小 MIN()
+                sqlstr = "SELECT MIN(體重) FROM vcs_sql09_table";
+                cmd = new SqlCommand(sqlstr, cn);
+                richTextBox1.Text += "最小 :\t" + cmd.ExecuteScalar().ToString() + "\n";
+            }
+
+            //as
+            //t_Name
+            //sqlstr = "SELECT t_Name, SUM(t_Num) AS Num FROM tb_product GROUP BY t_Name";
 
         }
 
@@ -1638,20 +1655,6 @@ namespace vcs_SqlConnection1
             cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
-                int Sum = 1;
-
-                // 查詢字串
-                sqlstr = "SELECT SUM(t_Num) FROM tb_manpower";
-                using (SqlCommand cmd = new SqlCommand(sqlstr, cn))
-                {
-                    cn.Open();
-                    Sum = Convert.ToInt32(cmd.ExecuteScalar());
-                    cn.Close();
-                }
-                richTextBox1.Text += "Sum = " + Sum.ToString() + "\n";
-
-                richTextBox1.Text += "------------------------------\n";  // 30個
-
                 // 查詢字串
                 sqlstr = "SELECT t_Point,SUM(t_Num) FROM tb_manpower group by t_Point ORDER BY SUM(t_Num) DESC";
                 using (SqlCommand cmd = new SqlCommand(sqlstr, cn))
@@ -1796,21 +1799,6 @@ namespace vcs_SqlConnection1
             sqlstr = "SELECT SUM(t_Num) FROM tb_product";
             //將 t_Num 加總起來
             sql_read_database(db_filename, sqlstr, dataGridView2);
-
-            cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
-
-            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
-            {
-                cn.Open();
-
-                //將 t_Num 加總起來
-                sqlstr = "SELECT SUM(t_Num) FROM tb_product";
-                using (SqlCommand cmd = new SqlCommand(sqlstr, cn))
-                {
-                    int SumNum = Convert.ToInt32(cmd.ExecuteScalar());
-                    richTextBox1.Text += "SumNum = " + SumNum.ToString() + "\n";
-                }
-            }
 
             //3030
             
@@ -2323,17 +2311,6 @@ namespace vcs_SqlConnection1
 
             /*
             // 資料庫檔案
-            db_filename = "db_TomeOne.mdf";
-            // 查詢字串
-            sqlstr = "SELECT * FROM tb_Rectangle";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            // 資料庫檔案
-            db_filename = "db_TomeOne.mdf";
-            sqlstr = "SELECT TOP 4 * FROM tb_Rectangle ORDER BY t_Num DESC";
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-
-            // 資料庫檔案
             db_filename = "Database1.mdf";
             // 查詢字串
             sqlstr = "SELECT * FROM 產品類別";
@@ -2344,14 +2321,6 @@ namespace vcs_SqlConnection1
             // 查詢字串
             sqlstr = "SELECT * FROM 產品資料";
             sql_read_database(db_filename, sqlstr, dataGridView4);
-            */
-
-            /*
-            // 資料庫檔案
-            db_filename = "db_TomeTwo.mdf";
-            // 查詢字串, 搜尋 表單 tb_Employee 欄位 工资 前4筆 降冪排列
-            sqlstr = "SELECT TOP 4 * FROM tb_Employee ORDER BY 工资 DESC";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
             */
 
             /*
@@ -2483,14 +2452,14 @@ namespace vcs_SqlConnection1
         string[,] sqlcmd = new string[,]
         {
             //idx  /  資料庫檔案  /  查詢字串  /  說明
-            { "1", "db_TomeOne.mdf", "SELECT * FROM tb_lottery ORDER BY t_year", ""},
+            //{ "1", "", "", ""},
             { "2", "db_TomeTwo.mdf", "SELECT * FROM tb_Grade", ""},
             { "3", "db_TomeTwo.mdf", "SELECT TOP 10 * FROM (SELECT TOP 20 * FROM tb_Grade ORDER BY 总分 DESC) AS st ORDER BY 总分 ASC", "查询第10到第20名的数据"},
             { "4", "db_TomeTwo.mdf", "SELECT * FROM tb_Book", ""},
             { "5", "db_TomeTwo.mdf", "SELECT TOP 50 PERCENT 书号,书名,SUM(销售数量)AS 合计销售数量 FROM tb_Book GROUP BY 书号,书名,作者 ORDER BY 3 DESC", "查询销售量占前50%的图书信息, 查询数据库信息"},
-            { "6", "ch18DB.mdf", "SELECT * FROM 員工", "員工資料"},
-            { "7", "ch18DB.mdf", "SELECT * FROM 員工 ORDER BY 薪資 DESC", "員工資料 排序 薪資 降冪"},
-            { "8", "vcs_sql09_db.mdf", "SELECT * FROM vcs_sql09_table", ""},
+            { "6", "", "", ""},
+            { "7", "", "", ""},
+            //{ "8", "", "", ""},
             { "9", "db_TomeTwo.MDF", "SELECT 学生姓名,所学专业,家庭住址 FROM tb_Student", ""},
             { "10", "db_09_Data.mdf", "SELECT * FROM 帳單", ""},
             { "11", "db_09_Data.mdf", "SELECT * FROM 員工表", ""},
@@ -2679,37 +2648,10 @@ string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.md
             root.ExpandAll();//展開treeView1中的所有節點
 */
 
-
-
-
-
-//debug
-/* ok1
-// 資料庫檔案
-db_filename = "db_13.mdf";
-sqlstr = "SELECT TOP 3 * FROM tb_Rectangle ORDER BY t_Num DESC";
-sql_read_database(db_filename, sqlstr, dataGridView1);
-*/
-
-
-
 //richTextBox1.Text += dr["TABLE_NAME"] + "\n";
-
-
-
 
             //db_02.mdf
             //string sqlstr2 = "SELECT * FROM tb_05";
-
-            /*
-            //升冪排列 查詢字串
-            //db_02.mdf
-            string sqlstr3 = "SELECT * FROM tb_05  ORDER BY 銷售數量 ASC";
-
-            //降冪排列 查詢字串
-            //db_02.mdf
-            string sqlstr4 = "SELECT * FROM tb_05 ORDER BY 銷售數量 DESC";
-            */
 
 
 
@@ -2722,8 +2664,4 @@ sql_read_database(db_filename, sqlstr, dataGridView1);
             sql_read_database(db_filename, sqlstr, dataGridView3);
             lb_dgv3.Text = "全部資料 員工表";
 */
-
-
-
-
 

@@ -82,10 +82,10 @@ namespace vcs_SqlConnection2
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
             int dd = 26;
-            dataGridView1.Size = new Size(500, 380);
-            dataGridView2.Size = new Size(500, 380);
-            dataGridView3.Size = new Size(300, 380);
-            dataGridView4.Size = new Size(300, 380);
+            dataGridView1.Size = new Size(510, 380);
+            dataGridView2.Size = new Size(510, 380);
+            dataGridView3.Size = new Size(420, 380);
+            dataGridView4.Size = new Size(420, 380);
 
             lb_dgv1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             dataGridView1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + dd);
@@ -95,16 +95,16 @@ namespace vcs_SqlConnection2
             dataGridView3.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 0 + dd);
             lb_dgv4.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 6);
             dataGridView4.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 6 + dd);
-            lb_dgv1.Text = "dataGridView1";
-            lb_dgv2.Text = "dataGridView2";
-            lb_dgv3.Text = "dataGridView3";
-            lb_dgv4.Text = "dataGridView4";
+            lb_dgv1.Text = "";
+            lb_dgv2.Text = "";
+            lb_dgv3.Text = "";
+            lb_dgv4.Text = "";
 
-            richTextBox1.Size = new Size(400, 820);
-            richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
+            richTextBox1.Size = new Size(300, 820);
+            richTextBox1.Location = new Point(x_st + dx * 7 + 110, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1910, 890);
+            this.Size = new Size(1920, 890);
             this.Text = "vcs_SqlConnection2";
 
             //設定執行後的表單起始位置, 正中央
@@ -135,12 +135,32 @@ namespace vcs_SqlConnection2
                     //da.Fill(ds, "table");  // da將查詢的結果填充至數據集ds, 指定TableName為"table"
                     dgv.DataSource = ds.Tables[0].DefaultView;  // DGV設置數據源
                     //dgv.DataSource = ds.Tables[0];  // DGV設置數據源, same
+
+                    /*
+                    //也可改成用 DataTable
+                    DataTable dt = new DataTable();//创建数据表
+                    da.Fill(dt);//填充数据表
+                    dgv.DataSource = dt;
+                    */
                 }
             }
             catch (Exception ex)
             {
                 richTextBox1.Text += ex.Message + "\n";
             }
+            if (dgv == dataGridView1)
+            {
+                lb_dgv1.Text = "";
+                lb_dgv2.Text = "";
+                lb_dgv3.Text = "";
+                lb_dgv4.Text = "";
+            }
+            else if (dgv == dataGridView2)
+                lb_dgv2.Text = "";
+            else if (dgv == dataGridView3)
+                lb_dgv3.Text = "";
+            else if (dgv == dataGridView4)
+                lb_dgv4.Text = "";
         }
 
         void sql_write_database(string db_filename, string sqlstr)
