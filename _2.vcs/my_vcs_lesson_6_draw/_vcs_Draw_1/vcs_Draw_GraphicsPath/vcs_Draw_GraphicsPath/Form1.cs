@@ -46,7 +46,7 @@ namespace vcs_Draw_GraphicsPath
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
+
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -855,7 +855,7 @@ namespace vcs_Draw_GraphicsPath
             g.DrawPath(p, gp2);
         }
 
-        Point[] get_star_points(Point center,int R1, int R2)
+        Point[] get_star_points(Point center, int R1, int R2)
         {
             Point[] pts = new Point[10];    //一維陣列內有10個Point
 
@@ -927,10 +927,61 @@ namespace vcs_Draw_GraphicsPath
             g.FillPath(Brushes.Yellow, gp);  // FillPath會自動CloseFigure()
         }
 
+        int vertex_num = 3;
+
+        Point[] get_vertex_points(Point center, int R, int vertex_num)
+        {
+            richTextBox1.Text += "NUM = " + vertex_num.ToString() + "\n";
+
+            Point[] pts = new Point[vertex_num];    //一維陣列內有10個Point
+
+            for (int i = 0; i < vertex_num; i++)
+            {
+                //int angle = -90 + (360/vertex_num) * i;
+                int angle = -90 + (360 / vertex_num) * i;
+                pts[i].X = (int)(R * Math.Cos(angle * Math.PI / 180));
+                pts[i].Y = (int)(R * Math.Sin(angle * Math.PI / 180));
+                pts[i].X += center.X;
+                pts[i].Y += center.Y;
+                richTextBox1.Text += "angle = " + angle.ToString() + "\n";
+                richTextBox1.Text += "pts[" + i.ToString() + "].X " + pts[i].X.ToString() + "   " + "pts[" + i.ToString() + "].Y " + pts[i].Y.ToString() + "\n";
+            }
+            return pts;
+        }
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //原本畫在原點
+            Point center = new Point(200, 200);
+            center = new Point(100, 100);
+            int radius = 100;
 
+            Point[] pts = get_vertex_points(center, radius, vertex_num);
+
+            GraphicsPath gp = new GraphicsPath();
+
+            gp.StartFigure();
+            gp.AddLines(pts); // 將 一系列的直線 加入到 GraphicsPath物件
+            gp.CloseFigure();  // 封閉圖形路徑, 將圖形的頭尾座標連接
+
+            for (int i = 0; i < vertex_num; i++)
+            {
+                gp.AddLine(center, pts[i]);
+            }
+
+            g.Clear(pictureBox1.BackColor);
+            g.DrawPath(Pens.Red, gp); // 繪出GraphicsPath物件
+            //g.FillPath(Brushes.Red, gp);  // FillPath會自動CloseFigure()
+
+            g.FillEllipse(Brushes.Red, pts[0].X - 10, pts[0].Y - 10, 20, 20);
+            g.FillEllipse(Brushes.Green, pts[1].X - 10, pts[1].Y - 10, 20, 20);
+            g.FillEllipse(Brushes.Blue, pts[2].X - 10, pts[2].Y - 10, 20, 20);
+
+            vertex_num++;
+            if (vertex_num > 10)
+            {
+                vertex_num = 3;
+            }
         }
 
         private void button13_Click(object sender, EventArgs e)

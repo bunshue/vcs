@@ -99,7 +99,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(200, 60);
             this.button8.TabIndex = 133;
-            this.button8.Text = "員工資料MyDB";
+            this.button8.Text = "mmmm 4";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -228,6 +228,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(200, 60);
             this.button11.TabIndex = 136;
+            this.button11.Text = "SQL 使用 合集, 新加入";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -238,6 +239,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(200, 60);
             this.button12.TabIndex = 137;
+            this.button12.Text = "測試登錄功能";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -270,7 +272,6 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(200, 60);
             this.button15.TabIndex = 140;
-            this.button15.Text = "取得一個資料庫的所有Table名稱";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -281,7 +282,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(200, 60);
             this.button16.TabIndex = 141;
-            this.button16.Text = "建立資料庫檔案";
+            this.button16.Text = "mmmm 3";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -303,7 +304,6 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(200, 60);
             this.button18.TabIndex = 143;
-            this.button18.Text = "SQL 使用 合集, 新加入";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -334,7 +334,7 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(200, 60);
             this.button20.TabIndex = 146;
-            this.button20.Text = "SQL 使用 合集, 新加入";
+            this.button20.Text = "建立資料庫檔案";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -345,7 +345,7 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(200, 60);
             this.button21.TabIndex = 147;
-            this.button21.Text = "LINQ";
+            this.button21.Text = "取得一個資料庫的所有Table名稱";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -356,7 +356,7 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(200, 60);
             this.button22.TabIndex = 148;
-            this.button22.Text = "測試登錄功能";
+            this.button22.Text = "LINQ";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -367,7 +367,6 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(200, 60);
             this.button23.TabIndex = 149;
-            this.button23.Text = "mmmm 3";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -389,7 +388,6 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(200, 60);
             this.button25.TabIndex = 151;
-            this.button25.Text = "mmmm 4";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -411,7 +409,6 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(200, 60);
             this.button27.TabIndex = 153;
-            this.button27.Text = "新增 修改 刪除";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
@@ -422,7 +419,6 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(200, 60);
             this.button28.TabIndex = 154;
-            this.button28.Text = "新增 修改 刪除";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
