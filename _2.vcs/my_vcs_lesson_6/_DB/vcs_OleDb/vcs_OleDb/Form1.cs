@@ -149,8 +149,6 @@ namespace vcs_OleDb
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //連線OleDb 1, 使用 連線字串
-
             string cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\\Northwind.mdb";
             using (OleDbConnection cn = new OleDbConnection(cnstr))  // 建立資料庫連接對象cn
             {
@@ -170,9 +168,10 @@ namespace vcs_OleDb
                 }
             }
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
+            //6060
 
-            //連線OleDb 2, 使用 OleDbConnectionStringBuilder
+
+
 
         }
 
@@ -181,8 +180,12 @@ namespace vcs_OleDb
             //OleDb
             //第一種方式
 
+            string db_filename = "Northwind.mdb";
+
             OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder();
-            builder.ConnectionString = @"Data Source=D:\Northwind.mdb";
+            builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
+            builder["Data Source"] = "D:\\" + db_filename;
+            builder["User Id"] = "Admin";
 
             // 使用Add()方法以明確地加入key/value pairs
             builder.Add("Provider", "Microsoft.Jet.Oledb.4.0");
@@ -211,9 +214,12 @@ namespace vcs_OleDb
 
             //第三種方式
             // 使用indexer加入必要的key/value pairs
+
+            db_filename = "Northwind.mdb";
+
             builder = new OleDbConnectionStringBuilder();
             builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
-            builder["Data Source"] = "D:\\Northwind.mdb";
+            builder["Data Source"] = "D:\\" + db_filename;
             builder["User Id"] = "Admin;NewValue=Bad";
         }
 
@@ -228,9 +234,11 @@ namespace vcs_OleDb
 
             //3030
 
+            db_filename = "Northwind.mdb";
+
             OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder();
             builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
-            builder["Data Source"] = @"D:\Northwind.mdb";
+            builder["Data Source"] = "D:\\" + db_filename;
             builder["User Id"] = "Admin";
 
             // 查詢字串, 取出員工資料表中所有欄位的內容
@@ -255,8 +263,6 @@ namespace vcs_OleDb
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //OleDb
-
             // 資料庫檔案
             string db_filename = "Northwind.mdb";
 
@@ -281,9 +287,10 @@ namespace vcs_OleDb
 
             string cityParam = "新竹市";
 
+            string db_filename = "Northwind.mdb";
             OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder();
             builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
-            builder["Data Source"] = @"D:\Northwind.mdb";
+            builder["Data Source"] = "D:\\" + db_filename;
             builder["User Id"] = "Admin";
 
             using (OleDbConnection cn = new OleDbConnection(builder.ConnectionString))  // 建立資料庫連接對象cn
@@ -311,13 +318,14 @@ namespace vcs_OleDb
 
         private void button5_Click(object sender, EventArgs e)
         {
+            string db_filename = "Northwind2.mdb";
+
             //取得資料
-            OleDbConnectionStringBuilder builder;
             string sqlstr;
             //string cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\\Northwind.mdb";
-            builder = new OleDbConnectionStringBuilder();
+            OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder();
             builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
-            builder["Data Source"] = @"D:\Northwind2.mdb";
+            builder["Data Source"] = "D:\\" + db_filename;
             builder["User Id"] = "Admin";
 
             // 查詢字串, 取出員工資料表中所有欄位的內容
@@ -381,12 +389,14 @@ namespace vcs_OleDb
         private void button6_Click(object sender, EventArgs e)
         {
             //取得部分資料
-            OleDbConnectionStringBuilder builder;
+
+            string db_filename = "Northwind2.mdb";
+
             string sqlstr;
             //string cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\\Northwind.mdb";
-            builder = new OleDbConnectionStringBuilder();
+            OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder();
             builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
-            builder["Data Source"] = @"D:\Northwind2.mdb";
+            builder["Data Source"] = "D:\\" + db_filename;
             builder["User Id"] = "Admin";
 
             // 查詢字串, 取出員工資料表中所有欄位的內容
@@ -448,9 +458,11 @@ namespace vcs_OleDb
             "台中","南投","高雄","屏東","花蓮"
             */
 
+            string db_filename = "Northwind.mdb";
+
             OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder();
             builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
-            builder["Data Source"] = @"D:\Northwind.mdb";
+            builder["Data Source"] = "D:\\" + db_filename;
             builder["User Id"] = "Admin";
 
             // 查詢字串
@@ -510,20 +522,25 @@ namespace vcs_OleDb
 
             //Access 資料庫 *.mdb
             //string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\db_Test.mdb";
+
+            // 找一下 db.mdb
             string db_filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\vcs精彩編程200例\05\158\ConProAccess\db.mdb";
+            db_filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\db_Test.mdb";
 
             string password = "12345";
             // 連接字串
-            string strCon = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + db_filename + ";JET OLEDB:Database Password=" + password + ";";
-            strCon = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + db_filename + ";";//连接无密码的数据库
+            string cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + db_filename + ";JET OLEDB:Database Password=" + password + ";";
+            richTextBox1.Text += "cnstr : " + cnstr + "\n";
+            cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + db_filename + ";";//连接无密码的数据库
+            richTextBox1.Text += "cnstr : " + cnstr + "\n";
 
-            using (OleDbConnection cn = new OleDbConnection(strCon))  // 建立資料庫連接對象cn
+            using (OleDbConnection cn = new OleDbConnection(cnstr))  // 建立資料庫連接對象cn
             {
                 try
                 {
                     cn.Open();//打开数据库连接
                     richTextBox1.Clear();//清空文本框
-                    richTextBox1.Text = strCon + "\n连接成功……";// 顯示 連接字串
+                    richTextBox1.Text = cnstr + "\n连接成功……";// 顯示 連接字串
                 }
                 catch
                 {
@@ -536,7 +553,6 @@ namespace vcs_OleDb
         {
         }
 
-        OleDbConnectionStringBuilder builder;
         OleDbConnection cn;
         OleDbCommand cmd;
         OleDbParameter parameter;
@@ -556,9 +572,11 @@ namespace vcs_OleDb
 
             //(1/4)讀取
 
+            string db_filename = "Northwind.mdb";
+
             OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder();
             builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
-            builder["Data Source"] = @"D:\Northwind.mdb";
+            builder["Data Source"] = "D:\\" + db_filename;
             builder["User Id"] = "Admin";
 
             cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
@@ -569,7 +587,6 @@ namespace vcs_OleDb
             ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
             da.Fill(ds, "客戶Table");
             dataGridView1.DataSource = ds.Tables["客戶Table"];
-
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -613,8 +630,8 @@ namespace vcs_OleDb
             cmd.Parameters["@CompanyName"].Value = company_name_new;//公司名稱
 
             cmd.ExecuteNonQuery();
-            DataChanged();
 
+            DataChanged();
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -631,6 +648,7 @@ namespace vcs_OleDb
             cmd.ExecuteNonQuery();
 
             ds.Tables["客戶Table"].AcceptChanges();
+
             DataChanged();
         }
 

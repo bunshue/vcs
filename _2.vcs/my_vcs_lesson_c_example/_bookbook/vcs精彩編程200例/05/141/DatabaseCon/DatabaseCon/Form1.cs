@@ -28,16 +28,8 @@ namespace DatabaseCon
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            textBox6.Text = "(local)";
+            textBox6.Text = "(local)";  // 伺服器
             textBox1.Text = filename;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -94,7 +86,9 @@ namespace DatabaseCon
         {
             if (checkBox1.Checked)
             {
+                //                           伺服器
                 string cnstr = "server=" + textBox6.Text + ";database=master;Integrated Security=SSPI;";
+
                 comboBox1.DataSource = getTable(cnstr);
                 comboBox1.DisplayMember = "name";
                 comboBox1.ValueMember = "name";
@@ -107,6 +101,7 @@ namespace DatabaseCon
 
         private DataTable getTable(string cnstr)
         {
+            // 取得資料庫的表單名稱
             try
             {
                 SqlConnection sqlcon = new SqlConnection(cnstr);
@@ -140,6 +135,7 @@ namespace DatabaseCon
         private void button4_Click(object sender, EventArgs e)
         {
             // 這種 cnstr Uid Pwd 應該都沒有用了
+            //                           伺服器                                     用戶名                    密碼
             string cnstr = "server=" + textBox6.Text + ";database=master;Uid=" + textBox5.Text + ";Pwd=" + textBox4.Text + ";";
             comboBox1.DataSource = getTable(cnstr);
             comboBox1.DisplayMember = "name";
@@ -154,14 +150,10 @@ namespace DatabaseCon
             richTextBox2.Text += "cnstr : " + cnstr + "\n";
 
             comboBox1.DataSource = getTable(cnstr);
+
             comboBox1.DisplayMember = "name";
             comboBox1.ValueMember = "name";
             comboBox1.Enabled = true;
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
