@@ -51,8 +51,6 @@ vcs
 poem+一頁模式
 
 this.acceptButton = btn.....
-ListView之View選Details/LargeIcon
-
 
 
 豁免條款
@@ -60,23 +58,12 @@ ListView之View選Details/LargeIcon
 消毒	disinfection	物理性或化學性、微生物
 滅菌	sterilization
 
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-
 
 TextBox設定星號
 
             toolStripTextBox3.TextBox.PasswordChar = '*';
-
-
-
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -1971,19 +1958,6 @@ richTextBox1.Text += "----------------------------------------------------------
             this.BackgroundImage = bitmap1;//顯示在 表單中
 
 
-
-
-        private void listView1_KeyDown(object sender, KeyEventArgs e)
-        {
-            //listView接受鍵盤的Delete鍵
-            if (e.KeyCode == Keys.Delete)
-            {
-                if (listView1.SelectedItems.Count > 0)
-                {
-                    listView1.SelectedItems[0].Remove();
-                }
-            }
-        }
         
             string filename = @"../../net/net1.net";
 
@@ -2023,30 +1997,6 @@ gr.DrawString(txt, this.Font, text_brush, node.Location.X - txt_size.Width / 2, 
             e.Graphics.DrawRectangle(Pens.Red, 5, 5, this.Width - 10, this.Height - 10);
         }
 
-        void load_listview_data()
-        {
-            DateTime dt = DateTime.Now;
-
-            listView1.Items.Add(new ListViewItem(new String[] { "ToLongDateString", "D", dt.ToLongDateString() }));
-            listView1.Items.Add(new ListViewItem(new String[] { "ToLongTimeString", "T", dt.ToLongTimeString() }));
-            listView1.Items.Add(new ListViewItem(new String[] { "ToShortDateString", "d", dt.ToShortDateString() }));
-            listView1.Items.Add(new ListViewItem(new String[] { "ToShortTimeString", "t", dt.ToShortTimeString() }));
-            listView1.Items.Add(new ListViewItem(new String[] { "ToString", "G", dt.ToString() }));
-        }
-
-        private void bt3_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "c = " + listView1.Items.Count.ToString() + "\n";
-            for (int i = 0; i < listView1.Items.Count; i++)
-            {
-                for (int j = 0; j < listView1.Items[i].SubItems.Count; j++)
-                {
-                    //richTextBox1.Text += "c2 = " + listView1.Items[i].SubItems.Count.ToString() + "\n";
-                    richTextBox1.Text += "i = " + i.ToString() + listView1.Items[i] + "\tj = " + j.ToString() + listView1.Items[i].SubItems[j] + "\n";
-                }
-            }
-        }
-
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -2064,18 +2014,6 @@ richTextBox1.Text += "----------------------------------------------------------
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
 
-            ListViewItem i1 = new ListViewItem("aaaaaaa");
-            ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
-            sub_i1a.Text = "bbbbb";
-            i1.SubItems.Add(sub_i1a);
-            listView1.Items.Add(i1);
-
-
-            //設置ListView最後一行可見
-            listView1.Items[listView1.Items.Count - 1].EnsureVisible();
-
-richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
 splitContainer1
 
@@ -2115,44 +2053,6 @@ vcs_ListView3_ContextMenuStrip
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-
-this.TreeViewFile.Dock = System.Windows.Forms.DockStyle.Fill;
-
-
-richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-
-TreeView 加 圖片icon設定
-
-魏
-	曹操
-		曹昂
-		曹丕	曹叡
-		曹彰
-		曹植
-		曹沖
-
-	司馬懿
-		司馬師
-		司馬昭	司馬炎
-		司馬倫
-
-蜀
-	劉備	劉禪、劉永、劉理
-	關羽	關平 關興
-	張飛	張苞 張紹
-吳
-
-	孫堅
-		孫策	孫紹
-		孫權	孫登
-			孫和
-			孫休
-			孫亮
-
-richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
 //把控件當引數傳遞
 result = image_processing19(pictureBox1, cx, cy, R, 150F);
@@ -7252,46 +7152,7 @@ P2P，英文Peer-to-Peer的縮寫，中譯為對等互聯或點對點技術。
 下面是程序中具體實現代碼：
 button1.MouseLeave += new Syetem.EvenHandler（button1_MLeave）；
 
-
-其中，getSubNode為一方法，用於獲取子目錄，以創建目錄樹節點，參數：PathName為獲取的子目錄在此節點下創建子節點，參數isEnd：結束標志,true則結束。
-
-private void getSubNode(TreeNode PathName,bool isEnd)
-
-vcs_Splitter
-
-然後，添加TreeView控件，命名為treeView，Dock屬性設為Left，再添加Splitter控件，同樣將Dock屬性設為Left。最後添加ListView控件，命名為listView，Dock屬性設為Fill。
-　　　Splitter(用於允許用戶調整TreeView和ListView的大小)；
-
-
-
-
-            //顯示詳細信息
-            listView1.View = View.Details;
-
-            //選中整行
-            listView1.FullRowSelect = true;
-
-            //顯示checkbox
-            listView1.CheckBoxes = true;
-
-                //添加項
-                listView1.Items.Add(zhuxiang);
-
-            if (listView1.SelectedItems.Count > 0)
-            {
-                MessageBox.Show(listView1.SelectedItems[0].Text);
-            }
-
-            string s = "";
-
-            foreach (ListViewItem item in listView1.CheckedItems)
-            {
-                s += item.Text + "--";
-            }
-
-            MessageBox.Show(s);
-
-
+6060
         //實現控件中捕獲按鍵 只要補上這個函數就好
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
@@ -7323,9 +7184,6 @@ vcs_Splitter
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
-
-
-
 
 
 停止一個線程
@@ -7673,48 +7531,11 @@ using System.Runtime.InteropServices;
 
 關於MCI Command String多媒體設備的程序接口的詳細資料，可以參看http://blog.csdn.net/psongchao/article/details/1487788
 
-  
-  
-
-
 
 用WMI查serial port可否知道是ims的comport，
 若可以知道，直接連線看看～～～
-
-
-
-
-ListView添加內容範例
-        /// <summary>
-        /// listview1 顯示搜索主機
-        /// </summary>
-        private void listLanHost()
-        {
-            listView1.View = View.List;
-
-            ListViewItem aa;
-            for (int i = 0; i < 255; i++)
-            {
-                if (LanHost[i, 0] != "")
-                {
-                    aa = new ListViewItem();
-                    aa.Text = LanHost[i, 1];
-                    aa.Tag = LanHost[i, 0];
-                    listView1.Items.Add(aa);
-                }
-            }
-
-        }
-
-
         				
 //--------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
 
 Graphics g = Graphics.FromImage(ThumbNail);
 
@@ -7727,9 +7548,6 @@ g.SmoothingMode = SmoothingMode.AntiAlias;	//反鋸齒
 g.SmoothingMode = SmoothingMode.HighQuality;
 g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 g.InterpolationMode = InterpolationMode.HighQualityBilinear;
-
-
-
 
 //--------------------------------------------------------------------------------------------------------------------------
 
@@ -12898,25 +12716,6 @@ private void Form1_Load(object sender, EventArgs e)
                 richTextBox1.Text += name + "\n";
             }
             richTextBox1.Text += "\n";
-
-
-從第5項填資料到ListView
-            //測試中
-            ListViewItem i1 = new ListViewItem("File_add.txt");
-            ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
-            sub_i1a.Text = "3333";
-            i1.SubItems.Add(sub_i1a);
-            ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
-            sub_i1b.Text = "2016/5/25 02:10上午";
-            i1.SubItems.Add(sub_i1b);
-
-            listView1.Items.Add(i1);
-
-            //設置ListView最後一行可見
-            listView1.Items[listView1.Items.Count - 1].EnsureVisible();
-
-
-
 
 
         private void nudgeWindow()

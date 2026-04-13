@@ -373,9 +373,9 @@ namespace vcs_TreeView1
                         TNode.Tag = 1;
                     }
                 }
-                FileSystemInfo[] files = dirD.GetFileSystemInfos();//取得文件夾中所有文件和文件夾
+                FileSystemInfo[] files = dirD.GetFileSystemInfos();  // 取得文件夾中所有文件和文件夾
                 //對單個FileSystemInfo進行判斷,如果是文件夾則進行遞歸操作
-                foreach (FileSystemInfo FSys in files)
+                foreach (FileSystemInfo FSys in files)  // 遍歷獲取到的文件
                 {
                     FileInfo file = FSys as FileInfo;
                     if (file != null)//如果是文件的話，進行文件的複製操作
@@ -440,5 +440,87 @@ namespace vcs_TreeView1
 
 //1515
 //---------------  # 15個
+
+
+/*
+            
+treeView1 + treeView1_AfterSelect
+        // Display the appropriate Panel.
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            int index = int.Parse(e.Node.Tag.ToString());
+            看看index
+            DisplayPanel(index);
+        }
+
+6060
+
+this.TreeViewFile.Dock = System.Windows.Forms.DockStyle.Fill;
+
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+TreeView 加 圖片icon設定
+
+魏
+	曹操
+		曹昂
+		曹丕	曹叡
+		曹彰
+		曹植
+		曹沖
+
+	司馬懿
+		司馬師
+		司馬昭	司馬炎
+		司馬倫
+
+蜀
+	劉備	劉禪、劉永、劉理
+	關羽	關平 關興
+	張飛	張苞 張紹
+吳
+
+	孫堅
+		孫策	孫紹
+		孫權	孫登
+			孫和
+			孫休
+			孫亮
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+其中，getSubNode為一方法，用於獲取子目錄，以創建目錄樹節點，參數：PathName為獲取的子目錄在此節點下創建子節點，參數isEnd：
+結束標志,true則結束。
+
+private void getSubNode(TreeNode PathName,bool isEnd)
+
+vcs_Splitter
+
+然後，添加TreeView控件，命名為treeView，Dock屬性設為Left，再添加Splitter控件，同樣將Dock屬性設為Left。
+最後添加ListView控件，命名為listView，Dock屬性設為Fill。
+Splitter(用於允許用戶調整TreeView和ListView的大小)；
+
+*/
+
+
+
+
+/* treeview
+            treeView1.Nodes.Clear();//清空treeView1原有的數據內容
+            TreeNode root = treeView1.Nodes.Add("產品名稱");  // 為treeView1控件添加根節點
+
+            for (int i = 0; i < 5; i++)
+            {
+                TreeNode tempNode = new TreeNode("AAAAA");//將數據庫中的數據字段變換為treeView控件的節點
+                root.Nodes.Add(tempNode);//向根節點上添加數據庫字段
+            }
+            root.ExpandAll();//展開treeView1中的所有節點
+*/
+
 
 

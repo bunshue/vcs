@@ -47,7 +47,7 @@ namespace vcs_DataGridView1
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
+
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -100,9 +100,9 @@ namespace vcs_DataGridView1
             richTextBox1.Clear();
 
             //清除DGV資料
-            //dataGridView1.Rows.Clear();         //刪除row資料, 留下標題
+            //dataGridView1.Rows.Clear();  // 刪除row資料, 留下標題
 
-            dataGridView1.Columns.Clear();    //刪除標題
+            dataGridView1.Columns.Clear();  // 刪除標題
 
             //clear
             //dataGridView1.DataSource = null;//設定DGV的資料來源為無, 即清除

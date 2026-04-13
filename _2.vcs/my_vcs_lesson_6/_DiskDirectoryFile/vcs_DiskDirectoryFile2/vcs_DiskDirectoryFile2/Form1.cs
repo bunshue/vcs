@@ -763,8 +763,8 @@ namespace vcs_DiskDirectoryFile2
             //實例化DirectoryInfo對象
             DirectoryInfo dinfo = new DirectoryInfo(foldername);
             //獲取指定目錄下的所有子目錄及文件類型
-            FileSystemInfo[] fsinfos = dinfo.GetFileSystemInfos();
-            foreach (FileSystemInfo fsinfo in fsinfos)
+            FileSystemInfo[] fsinfos = dinfo.GetFileSystemInfos();  // 獲取所有的文件
+            foreach (FileSystemInfo fsinfo in fsinfos)  // 遍歷獲取到的文件
             {
                 if (fsinfo is DirectoryInfo)    //判斷是否文件夾
                 {

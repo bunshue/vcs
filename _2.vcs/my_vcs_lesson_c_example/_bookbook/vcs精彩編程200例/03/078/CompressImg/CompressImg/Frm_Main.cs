@@ -124,8 +124,8 @@ namespace CompressImg
                 txtPicPath.Text = folderBrowserDialog1.SelectedPath;
                 ImgPath = txtPicPath.Text.Trim();
                 DirectoryInfo di = new DirectoryInfo(txtPicPath.Text);
-                fsi = di.GetFileSystemInfos();
-                for (int i = 0; i < fsi.Length; i++)
+                fsi = di.GetFileSystemInfos();//獲取所有的文件
+                for (int i = 0; i < fsi.Length; i++)//遍歷獲取到的文件
                 {
                     string ofile = fsi[i].ToString();
                     string fileType = ofile.Substring(ofile.LastIndexOf(".") + 1, ofile.Length - ofile.LastIndexOf(".") - 1);

@@ -59,8 +59,8 @@ namespace vcs_PictureSlideShow4
 
         public void GetAllFiles(DirectoryInfo dir)
         {
-            FileSystemInfo[] fileinfo = dir.GetFileSystemInfos();
-            foreach (FileSystemInfo i in fileinfo)
+            FileSystemInfo[] fileinfo = dir.GetFileSystemInfos();  // 獲取所有的文件
+            foreach (FileSystemInfo i in fileinfo)  // 遍歷獲取到的文件
             {
                 if (i is DirectoryInfo)
                 {

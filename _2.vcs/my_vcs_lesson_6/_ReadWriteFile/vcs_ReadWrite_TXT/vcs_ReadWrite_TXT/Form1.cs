@@ -1113,8 +1113,8 @@ namespace vcs_ReadWrite_TXT
         {
             DirectoryInfo di = new DirectoryInfo(foldername);
             //richTextBox1.Text += "資料夾 : " + di.FullName + "\n";
-            FileSystemInfo[] fileinfo = di.GetFileSystemInfos();
-            foreach (FileSystemInfo fi in fileinfo)
+            FileSystemInfo[] fileinfo = di.GetFileSystemInfos();  // 獲取所有的文件
+            foreach (FileSystemInfo fi in fileinfo)  // 遍歷獲取到的文件
             {
                 if (fi is DirectoryInfo)
                 {

@@ -34,8 +34,8 @@ namespace vcs_SearchFile2
         public void SerachFile(string fileDirectory)
         {
             DirectoryInfo dir = new DirectoryInfo(fileDirectory);
-            FileSystemInfo[] f = dir.GetFileSystemInfos();
-            foreach (FileSystemInfo i in f)
+            FileSystemInfo[] f = dir.GetFileSystemInfos();  // 獲取所有的文件
+            foreach (FileSystemInfo i in f)  // 遍歷獲取到的文件
             {
                 if (i is DirectoryInfo)
                 {

@@ -106,9 +106,9 @@ namespace ImgMicroimage
             double percent;
             string[] a = new string[2];
             DirectoryInfo di = new DirectoryInfo(filePath);
-            FileSystemInfo[] fi = di.GetFileSystemInfos();
+            FileSystemInfo[] fi = di.GetFileSystemInfos();//獲取所有的文件
             DirectoryInfo di2 = new DirectoryInfo(foldername);//存放縮略圖的路徑
-            for (int i = 0; i < fi.Length; i++)
+            for (int i = 0; i < fi.Length; i++)//遍歷獲取到的文件
             {
                 string imgType = fi[i].ToString().Substring(fi[i].ToString().LastIndexOf(".") + 1, fi[i].ToString().Length - 1 - fi[i].ToString().LastIndexOf("."));
                 if (imgType.ToLower() == "jpeg" || imgType.ToLower() == "gif" || imgType.ToLower() == "png" || imgType.ToLower() == "jpg" || imgType.ToLower() == "bmp")

@@ -1616,3 +1616,212 @@ listView1.Font = new Font("Microsoft Sans Serif", 12.75F, FontStyle.Regular, Gra
 
 
 
+
+
+//listView1.View = View.Details;//圖示
+//listView1.GridLines = true;//網格線
+//listView1.Columns.Add("產品名稱", 100, HorizontalAlignment.Left);//向listView1控制元件中新增「產品名稱」列
+//listView1.Columns.Add("產品說明", 200, HorizontalAlignment.Center);//向listView1控制元件中新增「產品說明」列
+
+
+/*
+            listView1.BackgroundImageTiled = true;
+            listView1.View = View.LargeIcon;
+            listView1.LargeImageList = imageList1;
+            //   listView1.BackgroundImage = imageList1.Images[1];
+
+
+
+//6060
+            listView1.View = View.Details;
+            listView1.GridLines = true;
+            listView1.FullRowSelect = true;
+            listView1.Items.Clear();
+
+            ListViewItem lv = new ListViewItem(dr[0].ToString());
+            lv.SubItems.Add(dr[1].ToString());
+            lv.SubItems.Add(dr[2].ToString());
+            listView1.Items.Add(lv);
+
+//6060
+
+listView的設定
+設定格線
+listView1.GridLines = true;
+listView1.LabelEdit = true;
+listView1.LabelEdit = true;//設定listView1的可編輯屬性為真 listView可修改Label
+
+listView1.View = View.Details;
+
+listView1.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(listView1_AfterLabelEdit);
+
+
+
+listView1.View = View.Details;
+listView1.FullRowSelect = true;
+
+//6060
+
+//增加資料到listView中
+ListViewItem lv = new ListViewItem(dr[0].ToString());
+lv.SubItems.Add(dr[1].ToString());
+lv.SubItems.Add(dr[2].ToString());
+listView1.Items.Add(lv);
+                
+
+//6060                
+listView1清除資料
+listView1.Items.Clear();
+
+//6060
+
+private void listBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+{
+    if (listBox1.SelectedItem.ToString() != null)
+    {
+        richTextBox1.Text += "你選擇了 : " + listBox1.SelectedItem.ToString() + "\n";
+    }
+}
+
+//6060
+
+ListView添加內容範例
+        /// <summary>
+        /// listview1 顯示搜索主機
+        /// </summary>
+        private void listLanHost()
+        {
+            listView1.View = View.List;
+
+            ListViewItem aa;
+            for (int i = 0; i < 255; i++)
+            {
+                if (LanHost[i, 0] != "")
+                {
+                    aa = new ListViewItem();
+                    aa.Text = LanHost[i, 1];
+                    aa.Tag = LanHost[i, 0];
+                    listView1.Items.Add(aa);
+                }
+            }
+
+        }
+
+
+從第5項填資料到ListView
+            //測試中
+            ListViewItem i1 = new ListViewItem("File_add.txt");
+            ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+            sub_i1a.Text = "3333";
+            i1.SubItems.Add(sub_i1a);
+            ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
+            sub_i1b.Text = "2016/5/25 02:10上午";
+            i1.SubItems.Add(sub_i1b);
+
+            listView1.Items.Add(i1);
+
+            //設置ListView最後一行可見
+            listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+
+
+
+ListView之View選Details/LargeIcon
+
+
+
+        private void listView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            //listView接受鍵盤的Delete鍵
+            if (e.KeyCode == Keys.Delete)
+            {
+                if (listView1.SelectedItems.Count > 0)
+                {
+                    listView1.SelectedItems[0].Remove();
+                }
+            }
+        }
+
+
+        void load_listview_data()
+        {
+            DateTime dt = DateTime.Now;
+
+            listView1.Items.Add(new ListViewItem(new String[] { "ToLongDateString", "D", dt.ToLongDateString() }));
+            listView1.Items.Add(new ListViewItem(new String[] { "ToLongTimeString", "T", dt.ToLongTimeString() }));
+            listView1.Items.Add(new ListViewItem(new String[] { "ToShortDateString", "d", dt.ToShortDateString() }));
+            listView1.Items.Add(new ListViewItem(new String[] { "ToShortTimeString", "t", dt.ToShortTimeString() }));
+            listView1.Items.Add(new ListViewItem(new String[] { "ToString", "G", dt.ToString() }));
+        }
+
+        private void bt3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "c = " + listView1.Items.Count.ToString() + "\n";
+            for (int i = 0; i < listView1.Items.Count; i++)
+            {
+                for (int j = 0; j < listView1.Items[i].SubItems.Count; j++)
+                {
+                    //richTextBox1.Text += "c2 = " + listView1.Items[i].SubItems.Count.ToString() + "\n";
+                    richTextBox1.Text += "i = " + i.ToString() + listView1.Items[i] + "\tj = " + j.ToString() + listView1.Items[i].SubItems[j] + "\n";
+                }
+            }
+        }
+
+
+//6060
+
+            ListViewItem i1 = new ListViewItem("aaaaaaa");
+            ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+            sub_i1a.Text = "bbbbb";
+            i1.SubItems.Add(sub_i1a);
+            listView1.Items.Add(i1);
+
+
+            //設置ListView最後一行可見
+            listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+
+ListView ListGridView DataGridView可否做到
+按Tab跳欄 按F2修改內容
+
+
+ListView 無法做到按F2修改每個項目的內容 也無法做到用Tab跳欄    DataGridView就可以
+
+
+
+listView有沒有辦法做到點選某個子項 可以讓這個子項反白並修改內容
+
+6060
+
+            //顯示詳細信息
+            listView1.View = View.Details;
+
+            //選中整行
+            listView1.FullRowSelect = true;
+
+            //顯示checkbox
+            listView1.CheckBoxes = true;
+
+                //添加項
+                listView1.Items.Add(zhuxiang);
+
+            if (listView1.SelectedItems.Count > 0)
+            {
+                MessageBox.Show(listView1.SelectedItems[0].Text);
+            }
+
+            string s = "";
+
+            foreach (ListViewItem item in listView1.CheckedItems)
+            {
+                s += item.Text + "--";
+            }
+
+            MessageBox.Show(s);
+            
+
+*/

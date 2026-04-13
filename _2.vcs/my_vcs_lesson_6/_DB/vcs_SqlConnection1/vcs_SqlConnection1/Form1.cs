@@ -102,6 +102,14 @@ namespace vcs_SqlConnection1
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+            dataGridView1.DataSource = null;  // 設定DGV的資料來源為無, 即清除
+            dataGridView2.DataSource = null;  // 設定DGV的資料來源為無, 即清除
+            dataGridView3.DataSource = null;  // 設定DGV的資料來源為無, 即清除
+            dataGridView4.DataSource = null;  // 設定DGV的資料來源為無, 即清除
+            lb_dgv1.Text = "";
+            lb_dgv2.Text = "";
+            lb_dgv3.Text = "";
+            lb_dgv4.Text = "";
         }
 
         void sql_read_database_dr(string db_filename, string sqlstr)
@@ -788,8 +796,6 @@ namespace vcs_SqlConnection1
 
                     cmd3.ExecuteNonQuery();  // 執行SQL命令
 
-                    //throw new Exception("電腦當機");
-
                     cmd4.ExecuteNonQuery();  // 執行SQL命令
 
                     tran.Commit(); // 認可交易
@@ -810,143 +816,45 @@ namespace vcs_SqlConnection1
             }
         }
 
-        // 員工資料表1 ST
-
         private void button7_Click(object sender, EventArgs e)
         {
-            //員工資料表1    讀取 新增 修改 刪除
+            //mmmm 3 簡單範例4個
 
-            // 資料庫檔案
-            string db_filename = "ch17DB.mdf";
-            // 連接字串
-            string cnstr1 = string.Format(db_cnstr, db_filename);
-
-            // 查詢字串
-            string sqlstr = "SELECT * FROM 員工 ORDER BY 編號 DESC";
+            //多表聯合查詢
+            string db_filename = "db_10_Data.MDF";
+            string sqlstr = "SELECT 姓名 FROM 學生訊息表 UNION SELECT 課程名稱 FROM 課程表 WHERE 課程名稱='計算機英語' UNION SELECT convert(varchar(20),成績) FROM 學生成績表 WHERE 成績 > 90 UNION SELECT convert(varchar(20),出勤率) FROM 學生考勤表 WHERE 出勤率 > 0.8";
             sql_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "全部資料 員工 DESC";
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            //新增
-
-            string name = "david";
-            string position = "engineering";
-            string telephone = "0912345678";
-            int salary = 55555;
-
-            try  //使用try...catch...敘述來補捉異動資料可能發生的例外 
-            {
-                using (SqlConnection cn = new SqlConnection(cnstr1))  // 建立資料庫連接對象cn
-                {
-                    //cn.ConnectionString = cnstr1;  // 連接字串, 可有可無
-                    cn.Open();  // 打開資料庫連線
-
-                    /* same
-                    // 查詢字串
-                    string sqlstr = "INSERT INTO 員工(姓名, 職稱, 電話, 薪資) VALUES('" + name + "','" + position + "','" + telephone + "'," + salary + ")";
-                    SqlCommand cmd = new SqlCommand(sqlstr, cn);
-                    cmd.ExecuteNonQuery();  // 執行SQL命令
-                    */
-
-                    // 查詢字串
-                    sqlstr = "INSERT INTO 員工(姓名, 職稱, 電話, 薪資)" + "VALUES(@name, @position, @tel, @salary)";
-                    SqlCommand cmd = new SqlCommand(sqlstr, cn);
-                    cmd.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@position", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@tel", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@salary", SqlDbType.Int));
-                    cmd.Parameters["@name"].Value = name;
-                    cmd.Parameters["@position"].Value = position;
-                    cmd.Parameters["@tel"].Value = telephone;
-                    cmd.Parameters["@salary"].Value = salary;
-                    cmd.ExecuteNonQuery();  // 執行SQL命令
-                }
-
-                // 查詢字串
-                sqlstr = "SELECT * FROM 員工 ORDER BY 編號 DESC";
-                sql_read_database(db_filename, sqlstr, dataGridView2);
-                lb_dgv2.Text = "(後)全部資料 員工 DESC";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += ex.Message + ", 新增資料發生錯誤\n";
-            }
+            //用子查詢作派生的表
+            db_filename = "db_10_Data.MDF";
+            sqlstr = "SELECT * FROM tb_Stu";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+            lb_dgv2.Text = "全部資料 tb_Stu";
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            //修改
-
-            string position2 = "manager";
-            string telephone2 = "0987654321";
-            int salary2 = 66666;
-
-            try	//使用try...catch...敘述來補捉異動資料可能發生的例外
-            {
-                using (SqlConnection cn = new SqlConnection(cnstr1))  // 建立資料庫連接對象cn
-                {
-                    //cn.ConnectionString = cnstr1;  // 連接字串, 可有可無
-                    cn.Open();  // 打開資料庫連線
-
-                    /* same
-                    // 查詢字串
-                    string sqlstr = "UPDATE 員工 SET 職稱 = '" + position2 + "',電話 = '" + telephone2 + "', 薪資 = " + salary2 + " WHERE 姓名 = '" + name + "'";
-                    SqlCommand cmd = new SqlCommand(sqlstr, cn);
-                    cmd.ExecuteNonQuery();  // 執行SQL命令
-                    */
-                    // 查詢字串
-                    sqlstr = "UPDATE 員工 SET 職稱=@position," + "電話=@tel, 薪資=@salary WHERE 姓名=@name";
-                    SqlCommand cmd = new SqlCommand(sqlstr, cn);
-                    cmd.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@position", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@tel", SqlDbType.NVarChar));
-                    cmd.Parameters.Add(new SqlParameter("@salary", SqlDbType.Int));
-                    cmd.Parameters["@name"].Value = name;
-                    cmd.Parameters["@position"].Value = position2;
-                    cmd.Parameters["@tel"].Value = telephone2;
-                    cmd.Parameters["@salary"].Value = salary2;
-                    cmd.ExecuteNonQuery();  // 執行SQL命令
-                }
-
-                // 查詢字串
-                sqlstr = "SELECT * FROM 員工 ORDER BY 編號 DESC";
-                sql_read_database(db_filename, sqlstr, dataGridView3);
-                lb_dgv3.Text = "(後)全部資料 員工 DESC";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += ex.Message + ", 修改資料發生錯誤\n";
-            }
+            //顯示學生編號排在前10位，而且具有相同名字的學生個數
+            sqlstr = "SELECT 學生姓名, count(*) AS 相同數量 FROM (SELECT top 10 學生姓名 FROM tb_Stu order BY 學生編號 ASC )AS T GROUP BY 學生姓名";
+            sql_read_database(db_filename, sqlstr, dataGridView3);
+            lb_dgv3.Text = "";
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            //刪除
-
-            using (SqlConnection cn = new SqlConnection(cnstr1))  // 建立資料庫連接對象cn
-            {
-                //cn.ConnectionString = cnstr1;  // 連接字串, 可有可無
-                cn.Open();  // 打開資料庫連線
-
-                /* same
-                  // 查詢字串
-                string sqlstr = "DELETE FROM 員工 WHERE 姓名 = '" + name + "'";
-                SqlCommand cmd = new SqlCommand(sqlstr, cn);
-                cmd.ExecuteNonQuery();  // 執行SQL命令
-                */
-                // 查詢字串
-                sqlstr = "DELETE FROM 員工 WHERE 姓名 = @name";
-                SqlCommand cmd = new SqlCommand(sqlstr, cn);
-                cmd.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar));
-                cmd.Parameters["@name"].Value = name;
-                cmd.ExecuteNonQuery();  // 執行SQL命令
-            }
-
-            // 查詢字串
-            sqlstr = "SELECT * FROM 員工 ORDER BY 編號 DESC";
+            db_filename = "db_10_Data.MDF";
+            sqlstr = "SELECT * FROM 工資數據表, 部門表";
             sql_read_database(db_filename, sqlstr, dataGridView4);
-            lb_dgv4.Text = "(後)全部資料 員工 DESC";
+            lb_dgv4.Text = "全部資料 工資數據表, 部門表";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //複雜內嵌查詢
+            //查詢學歷是本科的部門經理的2005年10月份的工資情況
+            sqlstr = "SELECT * FROM 工資數據表 WHERE 工資月份=10 AND 人員姓名 IN( SELECT 負責人 FROM 部門表 WHERE 負責人 IN(SELECT 人員姓名 FROM 人員表 WHERE 學歷='本科')) ORDER BY 人員編號";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "";
         }
-        // 員工資料表1 SP
 
         private void button8_Click(object sender, EventArgs e)
         {
@@ -1161,9 +1069,13 @@ namespace vcs_SqlConnection1
         {
             //SQL 使用 合集, 新加入
 
-            string cnstr = string.Empty;
+            // 資料庫檔案
             string db_filename = string.Empty;
+            // 連接字串
+            string cnstr = string.Empty;
+            // 查詢字串
             string sqlstr = string.Empty;
+
             int query_year = 2006;
 
             /*
@@ -1498,7 +1410,7 @@ namespace vcs_SqlConnection1
             // 連接字串
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
             // 查詢字串
-            string sqlstr = "SELECT  学生姓名,年龄,性别,家庭住址 FROM tb_Student";
+            string sqlstr = "SELECT 学生姓名,年龄,性别,家庭住址 FROM tb_Student";
 
             SqlDataAdapter da = new SqlDataAdapter(sqlstr, cnstr);  // 建立資料庫適配器對象da
             DataTable dt = new DataTable();//创建数据表
@@ -1569,42 +1481,6 @@ namespace vcs_SqlConnection1
 
         private void button16_Click(object sender, EventArgs e)
         {
-            //mmmm 3 簡單範例4個
-
-            //多表聯合查詢
-            string db_filename = "db_10_Data.MDF";
-            string sqlstr = "SELECT 姓名 FROM 學生訊息表 UNION SELECT 課程名稱 FROM 課程表 WHERE 課程名稱='計算機英語' UNION SELECT convert(varchar(20),成績) FROM 學生成績表 WHERE 成績 > 90 UNION SELECT convert(varchar(20),出勤率) FROM 學生考勤表 WHERE 出勤率 > 0.8";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //用子查詢作派生的表
-            db_filename = "db_10_Data.MDF";
-            sqlstr = "SELECT * FROM tb_Stu";
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-            lb_dgv2.Text = "全部資料 tb_Stu";
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //顯示學生編號排在前10位，而且具有相同名字的學生個數
-            sqlstr = "SELECT 學生姓名, count(*) AS 相同數量 FROM (SELECT top 10 學生姓名 FROM tb_Stu order BY 學生編號 ASC )AS T GROUP BY 學生姓名";
-            sql_read_database(db_filename, sqlstr, dataGridView3);
-            lb_dgv3.Text = "";
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            db_filename = "db_10_Data.MDF";
-            sqlstr = "SELECT * FROM 工資數據表, 部門表";
-            sql_read_database(db_filename, sqlstr, dataGridView4);
-            lb_dgv4.Text = "全部資料 工資數據表, 部門表";
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //複雜內嵌查詢
-            //查詢學歷是本科的部門經理的2005年10月份的工資情況
-            sqlstr = "SELECT * FROM 工資數據表 WHERE 工資月份=10 AND 人員姓名 IN( SELECT 負責人 FROM 部門表 WHERE 負責人 IN(SELECT 人員姓名 FROM 人員表 WHERE 學歷='本科')) ORDER BY 人員編號";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "";
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -1620,7 +1496,7 @@ namespace vcs_SqlConnection1
                 string sqlstr = "DELETE FROM animals1_table WHERE 體重 > 20";  // 刪除所有資料
                 using (SqlCommand cmd = new SqlCommand(sqlstr, cn))
                 {
-                    int rowsAffected = cmd.ExecuteNonQuery();
+                    int rowsAffected = cmd.ExecuteNonQuery();  // 執行SQL命令
                     richTextBox1.Text += "已刪除 : " + rowsAffected + " 筆資料\n";
                 }
             }
@@ -1635,7 +1511,7 @@ namespace vcs_SqlConnection1
                 string sqlstr = "TRUNCATE TABLE animals1_table";  // 清空整個表格
                 using (SqlCommand cmd = new SqlCommand(sqlstr, cn))
                 {
-                    cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();  // 執行SQL命令
                     richTextBox1.Text += "已清空整個表單\n";
                 }
             }
@@ -2164,8 +2040,13 @@ namespace vcs_SqlConnection1
             //測試
             //SysDatabases
 
+            // 資料庫檔案
+            //string db_filename = "db_02.mdf";
+            string db_filename = "animals1_db.mdf";
             // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = string.Format(db_cnstr, db_filename);
+            // 查詢字串
+            string sqlstr = string.Empty;
 
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
@@ -2174,19 +2055,21 @@ namespace vcs_SqlConnection1
                 //獲取所有數據庫名稱
                 //試一下  把 master 改成 dbo
                 // 'dbo.tb_XML'.
-                //string sqlstr = "SELECT NAME FROM master.dbo.sysdatabases";
-                //string sqlstr = "SELECT Name FROM Master.dbo.SysDatabases ORDER BY Name";
-                //string sqlstr = "SELECT count(*) FROM master.dbo.sysdatabases WHERE name='DB_02'";//NG
+                sqlstr = "SELECT NAME FROM master.dbo.sysdatabases";
+                sqlstr = "SELECT Name FROM Master.dbo.SysDatabases ORDER BY Name";
+                sqlstr = "SELECT count(*) FROM master.dbo.sysdatabases WHERE name='DB_02'";//NG
 
                 //獲取所有表單名稱
-                //string sqlstr = "SELECT Name FROM SysObjects WHERE XType='U' ORDER BY Name";
+                sqlstr = "SELECT Name FROM SysObjects WHERE XType='U' ORDER BY Name";
                 //XType='U':表示所有用户表;
                 //XType='S':表示所有系统表;
-                //string sqlstr = "SELECT name FROM sysobjects WHERE type = 'U'";
+                sqlstr = "SELECT name FROM sysobjects WHERE type = 'U'";
 
                 //獲取所有的字段名
-                //string sqlstr = "Select Name FROM SysColumns Where id=Object_Id('tb_student')";
-                string sqlstr = "SELECT syscolumns.name,systypes.name,syscolumns.isnullable,syscolumns.length FROM syscolumns, systypes WHERE syscolumns.xusertype = systypes.xusertype AND syscolumns.id = object_id('tb_student')";
+                sqlstr = "SELECT Name FROM SysColumns WHERE id=Object_Id('animals1_table')";
+
+                //取得表單格式           欄名             格式                基本大小              總長度
+                sqlstr = "SELECT syscolumns.name, systypes.name, syscolumns.isnullable, syscolumns.length FROM syscolumns, systypes WHERE syscolumns.xusertype = systypes.xusertype AND syscolumns.id = object_id('animals1_table')";
 
                 using (SqlCommand cmd = new SqlCommand(sqlstr, cn))
                 {
@@ -2197,6 +2080,15 @@ namespace vcs_SqlConnection1
 
                     while (dr.Read())  // 讀取一筆資料到dr
                     {
+                        richTextBox1.Text += "---------------\n";  // 15個
+
+                        richTextBox1.Text += "欄數 dr.FieldCount = " + dr.FieldCount.ToString() + "\t欄位名稱 :\n";
+                        for (int i = 0; i < dr.FieldCount; i++)
+                        {
+                            richTextBox1.Text += dr.GetName(i) + "\t";
+                        }
+                        richTextBox1.Text += "\n";
+
                         for (int i = 0; i < dr.FieldCount; i++)
                         {
                             richTextBox1.Text += dr[i].ToString();
@@ -2211,6 +2103,7 @@ namespace vcs_SqlConnection1
                             }
                         }
                     }
+                    richTextBox1.Text += "---------------\n";  // 15個
                 }
             }
         }
@@ -2227,7 +2120,9 @@ namespace vcs_SqlConnection1
         {
             //簡易測試
 
+            // 資料庫檔案
             string db_filename = string.Empty;
+            // 查詢字串
             string sqlstr = string.Empty;
 
             // 資料庫檔案
@@ -2388,17 +2283,17 @@ namespace vcs_SqlConnection1
         {
             //idx  /  資料庫檔案  /  查詢字串  /  說明
             //{ "1", "", "", ""},
-            { "2", "db_TomeTwo.mdf", "SELECT * FROM tb_Grade", ""},
+            { "2", "db_09_Data.mdf", "SELECT * FROM 員工表", ""},
             { "3", "db_TomeTwo.mdf", "SELECT TOP 10 * FROM (SELECT TOP 20 * FROM tb_Grade ORDER BY 总分 DESC) AS st ORDER BY 总分 ASC", "查询第10到第20名的数据"},
             { "4", "db_TomeTwo.mdf", "SELECT * FROM tb_Book", ""},
             { "5", "db_TomeTwo.mdf", "SELECT TOP 50 PERCENT 书号,书名,SUM(销售数量)AS 合计销售数量 FROM tb_Book GROUP BY 书号,书名,作者 ORDER BY 3 DESC", "查询销售量占前50%的图书信息, 查询数据库信息"},
             //{ "6", "", "", ""},
             //{ "7", "", "", ""},
             //{ "8", "", "", ""},
-            { "9", "db_TomeTwo.MDF", "SELECT 学生姓名,所学专业,家庭住址 FROM tb_Student", ""},
-            { "10", "db_09_Data.mdf", "SELECT * FROM 帳單", ""},
-            { "11", "db_09_Data.mdf", "SELECT * FROM 員工表", ""},
-            { "12", "db_02.mdf", "SELECT * FROM tb_Land", ""},
+            //{ "9", "", "", ""},
+            //{ "10", "", "", ""},
+            //{ "11", "", "", ""},
+            //{ "12", "", "", ""},
             //{ "13", "xxxx.MDF", "xxxx", ""},
         };
     }
@@ -2553,27 +2448,84 @@ Connect Timeout=30
 
 //SqlDataAdapter 資料庫適配器對象 数据库桥接器对象 數據讀取器
 
-/*
-*/
-
-//listView1.View = View.Details;//圖示
-//listView1.GridLines = true;//網格線
-//listView1.Columns.Add("產品名稱", 100, HorizontalAlignment.Left);//向listView1控制元件中新增「產品名稱」列
-//listView1.Columns.Add("產品說明", 200, HorizontalAlignment.Center);//向listView1控制元件中新增「產品說明」列
-
-/* treeview
-            treeView1.Nodes.Clear();//清空treeView1原有的數據內容
-            TreeNode root = treeView1.Nodes.Add("產品名稱");  // 為treeView1控件添加根節點
-
-            for (int i = 0; i < 5; i++)
-            {
-                TreeNode tempNode = new TreeNode("AAAAA");//將數據庫中的數據字段變換為treeView控件的節點
-                root.Nodes.Add(tempNode);//向根節點上添加數據庫字段
-            }
-            root.ExpandAll();//展開treeView1中的所有節點
-*/
-
 //richTextBox1.Text += dr["TABLE_NAME"] + "\n";
 
             //db_02.mdf
             //string sqlstr2 = "SELECT * FROM tb_05";
+
+
+
+
+
+
+            //新增
+            //string name = "david";
+            //string position = "engineering";
+            //string telephone = "0912345678";
+            //int salary = 55555;
+
+                    /* same
+                    // 查詢字串
+                    string sqlstr = "INSERT INTO 員工(姓名, 職稱, 電話, 薪資) VALUES('" + name + "','" + position + "','" + telephone + "'," + salary + ")";
+                    SqlCommand cmd = new SqlCommand(sqlstr, cn);
+                    cmd.ExecuteNonQuery();  // 執行SQL命令
+                    */
+/*
+                    // 查詢字串
+                    sqlstr = "INSERT INTO 員工(姓名, 職稱, 電話, 薪資)" + "VALUES(@name, @position, @tel, @salary)";
+                    SqlCommand cmd = new SqlCommand(sqlstr, cn);
+                    cmd.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@position", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@tel", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@salary", SqlDbType.Int));
+                    cmd.Parameters["@name"].Value = name;
+                    cmd.Parameters["@position"].Value = position;
+                    cmd.Parameters["@tel"].Value = telephone;
+                    cmd.Parameters["@salary"].Value = salary;
+                    cmd.ExecuteNonQuery();  // 執行SQL命令
+*/
+            
+            //修改
+
+            //string position2 = "manager";
+            //string telephone2 = "0987654321";
+//int salary2 = 66666;
+
+                    /* same
+                    // 查詢字串
+                    string sqlstr = "UPDATE 員工 SET 職稱 = '" + position2 + "',電話 = '" + telephone2 + "', 薪資 = " + salary2 + " WHERE 姓名 = '" + name + "'";
+                    SqlCommand cmd = new SqlCommand(sqlstr, cn);
+                    cmd.ExecuteNonQuery();  // 執行SQL命令
+                    */
+/*
+                    // 查詢字串
+                    sqlstr = "UPDATE 員工 SET 職稱=@position," + "電話=@tel, 薪資=@salary WHERE 姓名=@name";
+                    SqlCommand cmd = new SqlCommand(sqlstr, cn);
+                    cmd.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@position", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@tel", SqlDbType.NVarChar));
+                    cmd.Parameters.Add(new SqlParameter("@salary", SqlDbType.Int));
+                    cmd.Parameters["@name"].Value = name;
+                    cmd.Parameters["@position"].Value = position2;
+                    cmd.Parameters["@tel"].Value = telephone2;
+                    cmd.Parameters["@salary"].Value = salary2;
+                    cmd.ExecuteNonQuery();  // 執行SQL命令
+*/
+
+            //刪除
+
+                /* same
+                  // 查詢字串
+                string sqlstr = "DELETE FROM 員工 WHERE 姓名 = '" + name + "'";
+                SqlCommand cmd = new SqlCommand(sqlstr, cn);
+                cmd.ExecuteNonQuery();  // 執行SQL命令
+                */
+/*
+                // 查詢字串
+                sqlstr = "DELETE FROM 員工 WHERE 姓名 = @name";
+                SqlCommand cmd = new SqlCommand(sqlstr, cn);
+                cmd.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar));
+                cmd.Parameters["@name"].Value = name;
+                cmd.ExecuteNonQuery();  // 執行SQL命令
+*/
+
