@@ -11,8 +11,6 @@ using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.IO;
 
-using System.Data.Sql;  // for SqlDataSourceEnumerator
-
 namespace DatabaseCon
 {
     public partial class Form1 : Form
@@ -31,15 +29,11 @@ namespace DatabaseCon
         private void Form1_Load(object sender, EventArgs e)
         {
             textBox6.Text = "(local)";
+            textBox1.Text = filename;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //openFileDialog1.Filter = "*.mdb(Access数据库文件)|*.mdb|*.xls(Excel文件)|*.xls|*.*(所有文件)|*.*";
-            //if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                textBox1.Text = filename;
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -50,6 +44,7 @@ namespace DatabaseCon
         {
             if (radioButton1.Checked == true)
             {
+                //Access 或 EXCEL
                 if (textBox1.Text != "")
                 {
                     FileInfo FInfo = new FileInfo(textBox1.Text);
@@ -84,80 +79,22 @@ namespace DatabaseCon
             }
             else if (radioButton2.Checked == true)
             {
-                // 這種 cnstr Integrated Security=SSPI 應該都沒有用了
-                if (checkBox1.Checked == true)
-                {
-                    cnstr = "Data Source=" + textBox6.Text + ";Initial Catalog =" + comboBox1.Text + ";Integrated Security=SSPI;";
-                }
-                else if (checkBox2.Checked == true)
-                {
-                    cnstr = "Data Source=" + textBox6.Text + ";Database=" + comboBox1.Text + ";Uid=" + textBox5.Text + ";Pwd=" + textBox4.Text + ";";
-                }
-
-                SqlConnection sqlcon = new SqlConnection(cnstr);
-                try
-                {
-                    sqlcon.Open();
-                    richTextBox1.Clear();
-                    richTextBox1.Text = cnstr + "\n连接成功……";
-                }
-                catch
-                {
-                    richTextBox1.Text = "连接失败";
-                }
             }
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioButton1.Checked)
-            {
-                textBox1.Enabled = true;
-                textBox2.Enabled = true;
-                textBox3.Enabled = true;
-                button1.Enabled = true;
-                radioButton2.Checked = false;
-
-                textBox4.Enabled = false;
-                textBox5.Enabled = false;
-                textBox6.Enabled = false;
-                button2.Enabled = false;
-                checkBox1.Enabled = false;
-                checkBox2.Enabled = false;
-                comboBox1.Enabled = false;
-            }
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioButton2.Checked)
-            {
-                radioButton1.Checked = false;
-                textBox1.Enabled = false;
-                textBox2.Enabled = false;
-                textBox3.Enabled = false;
-                button1.Enabled = false;
-                textBox4.Enabled = false;
-                textBox5.Enabled = false;
-
-                textBox6.Enabled = true;
-                button2.Enabled = true;
-                checkBox1.Enabled = true;
-                checkBox2.Enabled = true;
-                comboBox1.Enabled = true;
-            }
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox1.Checked)
             {
-                checkBox2.Checked = false;
-                textBox4.Enabled = textBox5.Enabled = false;
-
-                // 這種 cnstr Integrated Security=SSPI 應該都沒有用了
                 string cnstr = "server=" + textBox6.Text + ";database=master;Integrated Security=SSPI;";
-
                 comboBox1.DataSource = getTable(cnstr);
                 comboBox1.DisplayMember = "name";
                 comboBox1.ValueMember = "name";
@@ -166,9 +103,6 @@ namespace DatabaseCon
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            checkBox1.Checked = false;
-            textBox4.Enabled = textBox5.Enabled = true;
-            textBox5.Focus();
         }
 
         private DataTable getTable(string cnstr)
@@ -227,17 +161,6 @@ namespace DatabaseCon
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //当前网络上运行的SQL服务器
-
-            //枚举本地网络中的SQL Server所有可用实例
-            SqlDataSourceEnumerator instance = SqlDataSourceEnumerator.Instance;
-            DataTable table = instance.GetDataSources();//获取所有数据源，并存储到DataTable中
-            richTextBox1.Text += table + "\n";
-            foreach (DataRow row in table.Rows)//遍历获取到的数据源
-            {
-                richTextBox1.Text += row + "\n";
-                //listBox1.Items.Add(row["ServerName"]);//向列表中添加遍历到的服务器名
-            }
 
         }
     }

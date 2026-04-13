@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;
 using System.Data.SqlClient;  // for SqlConnection, SqlCommand, SqlDataAdapter
+using System.Data.Sql;  // for SqlDataSourceEnumerator
 
 namespace vcs_SqlConnection1
 {
@@ -2001,6 +2002,18 @@ namespace vcs_SqlConnection1
 
         private void button23_Click(object sender, EventArgs e)
         {
+            //當前網路上運行的SQL伺服器
+
+            //枚举本地网络中的SQL Server所有可用实例
+            SqlDataSourceEnumerator instance = SqlDataSourceEnumerator.Instance;
+            DataTable table = instance.GetDataSources();//获取所有数据源，并存储到DataTable中
+            richTextBox1.Text += table + "\n";
+            foreach (DataRow row in table.Rows)//遍历获取到的数据源
+            {
+                richTextBox1.Text += row + "\n";
+                richTextBox1.Text += row["ServerName"] + "\n";
+                //listBox1.Items.Add(row["ServerName"]);//向列表中添加遍历到的服务器名
+            }
         }
 
         private void button24_Click(object sender, EventArgs e)

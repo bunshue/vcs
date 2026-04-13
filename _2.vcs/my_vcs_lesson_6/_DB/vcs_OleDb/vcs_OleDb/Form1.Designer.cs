@@ -62,8 +62,16 @@
             this.button28 = new System.Windows.Forms.Button();
             this.button29 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.lb_dgv4 = new System.Windows.Forms.Label();
+            this.lb_dgv3 = new System.Windows.Forms.Label();
+            this.lb_dgv2 = new System.Windows.Forms.Label();
+            this.lb_dgv1 = new System.Windows.Forms.Label();
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             this.SuspendLayout();
             // 
             // button9
@@ -83,6 +91,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(200, 60);
             this.button8.TabIndex = 133;
+            this.button8.Text = "OleDb";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -416,11 +425,75 @@
             this.dataGridView2.Size = new System.Drawing.Size(100, 100);
             this.dataGridView2.TabIndex = 156;
             // 
+            // lb_dgv4
+            // 
+            this.lb_dgv4.AutoSize = true;
+            this.lb_dgv4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_dgv4.Location = new System.Drawing.Point(650, 500);
+            this.lb_dgv4.Name = "lb_dgv4";
+            this.lb_dgv4.Size = new System.Drawing.Size(68, 19);
+            this.lb_dgv4.TabIndex = 178;
+            this.lb_dgv4.Text = "lb_dgv4";
+            // 
+            // lb_dgv3
+            // 
+            this.lb_dgv3.AutoSize = true;
+            this.lb_dgv3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_dgv3.Location = new System.Drawing.Point(650, 477);
+            this.lb_dgv3.Name = "lb_dgv3";
+            this.lb_dgv3.Size = new System.Drawing.Size(68, 19);
+            this.lb_dgv3.TabIndex = 177;
+            this.lb_dgv3.Text = "lb_dgv3";
+            // 
+            // lb_dgv2
+            // 
+            this.lb_dgv2.AutoSize = true;
+            this.lb_dgv2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_dgv2.Location = new System.Drawing.Point(650, 458);
+            this.lb_dgv2.Name = "lb_dgv2";
+            this.lb_dgv2.Size = new System.Drawing.Size(68, 19);
+            this.lb_dgv2.TabIndex = 176;
+            this.lb_dgv2.Text = "lb_dgv2";
+            // 
+            // lb_dgv1
+            // 
+            this.lb_dgv1.AutoSize = true;
+            this.lb_dgv1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_dgv1.Location = new System.Drawing.Point(650, 439);
+            this.lb_dgv1.Name = "lb_dgv1";
+            this.lb_dgv1.Size = new System.Drawing.Size(68, 19);
+            this.lb_dgv1.TabIndex = 175;
+            this.lb_dgv1.Text = "lb_dgv1";
+            // 
+            // dataGridView4
+            // 
+            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4.Location = new System.Drawing.Point(650, 330);
+            this.dataGridView4.Name = "dataGridView4";
+            this.dataGridView4.RowTemplate.Height = 24;
+            this.dataGridView4.Size = new System.Drawing.Size(100, 100);
+            this.dataGridView4.TabIndex = 174;
+            // 
+            // dataGridView3
+            // 
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.Location = new System.Drawing.Point(650, 224);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.RowTemplate.Height = 24;
+            this.dataGridView3.Size = new System.Drawing.Size(100, 100);
+            this.dataGridView3.TabIndex = 173;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 642);
+            this.Controls.Add(this.lb_dgv4);
+            this.Controls.Add(this.lb_dgv3);
+            this.Controls.Add(this.lb_dgv2);
+            this.Controls.Add(this.lb_dgv1);
+            this.Controls.Add(this.dataGridView4);
+            this.Controls.Add(this.dataGridView3);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.button29);
             this.Controls.Add(this.button28);
@@ -460,7 +533,10 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -500,6 +576,12 @@
         private System.Windows.Forms.Button button28;
         private System.Windows.Forms.Button button29;
         private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Label lb_dgv4;
+        private System.Windows.Forms.Label lb_dgv3;
+        private System.Windows.Forms.Label lb_dgv2;
+        private System.Windows.Forms.Label lb_dgv1;
+        private System.Windows.Forms.DataGridView dataGridView4;
+        private System.Windows.Forms.DataGridView dataGridView3;
     }
 }
 

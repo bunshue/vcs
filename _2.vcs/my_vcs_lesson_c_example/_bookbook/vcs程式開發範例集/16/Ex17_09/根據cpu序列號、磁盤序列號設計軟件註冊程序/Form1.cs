@@ -6,8 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Microsoft.Win32;
+
 using System.Management;
+using Microsoft.Win32;
 
 namespace 根據cpu序列號_磁盤序列號設計軟件註冊程序
 {
@@ -54,8 +55,7 @@ namespace 根據cpu序列號_磁盤序列號設計軟件註冊程序
             richTextBox1.Text += "CPU : " + getCpu() + "\n";
             richTextBox1.Text += "HDD : " + GetDiskVolumeSerialNumber() + "\n";
 
-
-            string[] strid = new string[24];//
+            string[] strid = new string[24];
             for (int i = 0; i < 24; i++)//把字符賦給數組
             {
                 strid[i] = label2.Text.Substring(i, 1);
@@ -67,7 +67,6 @@ namespace 根據cpu序列號_磁盤序列號設計軟件註冊程序
             {
                 label2.Text += strid[rdid.Next(0, 24)];
             }
-
             richTextBox1.Text += "strid : " + label2.Text + "\n";
         }
 
@@ -80,6 +79,7 @@ namespace 根據cpu序列號_磁盤序列號設計軟件註冊程序
                 intCode[i] = ra.Next(0, 9);
             }
         }
+
         public int[] intNumber = new int[25];//用於存機器碼的Ascii值
         public char[] Charcode = new char[25];//儲存機器碼字
 
@@ -93,7 +93,7 @@ namespace 根據cpu序列號_磁盤序列號設計軟件註冊程序
                 for (int i = 1; i < Charcode.Length; i++)//把機器碼存入數組中
                 {
                     Charcode[i] = Convert.ToChar(label2.Text.Substring(i - 1, 1));
-                }//
+                }
                 for (int j = 1; j < intNumber.Length; j++)//把字符的ASCII值存入一個整數組中。
                 {
                     intNumber[j] = intCode[Convert.ToInt32(Charcode[j])] + Convert.ToInt32(Charcode[j]);
@@ -118,16 +118,16 @@ namespace 根據cpu序列號_磁盤序列號設計軟件註冊程序
                     else//判斷字符ASCII值不在以上範圍內
                     {
                         if (intNumber[j] > 122)//判斷字符ASCII值是否大於z
-                        { strAsciiName += Convert.ToChar(intNumber[j] - 10).ToString(); }
+                        {
+                            strAsciiName += Convert.ToChar(intNumber[j] - 10).ToString();
+                        }
                         else
                         {
                             strAsciiName += Convert.ToChar(intNumber[j] - 9).ToString();
                         }
-
                     }
                     label3.Text = strAsciiName;//得到註冊碼
                     richTextBox1.Text += "得到註冊碼 : " + strAsciiName + "\n";
-
                 }
             }
             else
@@ -155,12 +155,12 @@ namespace 根據cpu序列號_磁盤序列號設計軟件註冊程序
                 else
                 {
                     MessageBox.Show("註冊碼輸入錯誤");
-
                 }
-
             }
-            else { MessageBox.Show("請產生註冊碼", "註冊提示"); }
-
+            else
+            {
+                MessageBox.Show("請產生註冊碼", "註冊提示");
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -169,4 +169,3 @@ namespace 根據cpu序列號_磁盤序列號設計軟件註冊程序
         }
     }
 }
-
