@@ -11,6 +11,7 @@ using System.IO;
 using System.Data.SqlClient;  // for SqlConnection, SqlCommand, SqlDataAdapter
 using System.Collections;  // for Hashtable
 //using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;  // for LinearGradientBrush
 
 namespace vcs_SqlConnection4
 {
@@ -149,6 +150,7 @@ namespace vcs_SqlConnection4
                             richTextBox1.Text += "\t";
                         }
                     }
+                    //richTextBox1.Text += dr[0].ToString() + "\t" + Convert.ToDouble(dr[1].ToString()) + "\n";
                     //直接印出 richTextBox1.Text += dr[0].ToString() + "\t" + dr[1].ToString() + "\t" + dr[2].ToString() + "\n";
                 }
                 dr.Close();
@@ -220,75 +222,19 @@ namespace vcs_SqlConnection4
             }
         }
 
-        //對排序數據進行分析 ST
-
-        SqlConnection con;
-        SqlCommand cmd;
-
-        private void Conn()
-        {
-            // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
-            con = new SqlConnection(cnstr);
-            con.Open();
-        }
-
-        private void ShowPic(string str)
-        {
-            Conn();
-            using (cmd = new SqlCommand("SELECT TOP 3 * FROM tb_Rectangle order by t_Num " + str, con))
-            {
-                SqlDataReader dr = cmd.ExecuteReader();
-
-                Bitmap bitM = new Bitmap(this.panel1.Width, this.panel1.Height);
-                Graphics g = Graphics.FromImage(bitM);
-                g.Clear(Color.White);
-                for (int i = 0; i < 5; i++)
-                {
-                    g.DrawLine(new Pen(new SolidBrush(Color.Red), 2.0f), 50, this.panel1.Height - 20 - i * 20, this.panel1.Width - 40, this.panel1.Height - 20 - i * 20);
-                    g.DrawString(Convert.ToString(i * 100), new Font("Times New Roman", 10, FontStyle.Regular), new SolidBrush(Color.Black), 20, this.panel1.Height - 27 - i * 20);
-                }
-
-                for (int j = 0; j < 4; j++)
-                {
-                    g.DrawLine(new Pen(new SolidBrush(Color.Red), 1.0f), 50 + 40 * j, this.panel1.Height - 20, 50 + 40 * j, 50);
-                    if (dr.Read())
-                    {
-                        int x, y, w, h;
-                        g.DrawString(dr[0].ToString(), new Font("宋本", 8, FontStyle.Regular), new SolidBrush(Color.Black), 76 + 40 * j, this.panel1.Height - 16);
-                        x = 78 + 40 * j;
-                        y = this.panel1.Height - 20 - Convert.ToInt32((Convert.ToDouble(Convert.ToDouble(dr[1].ToString()) * 20 / 100)));
-                        w = 24;
-                        h = Convert.ToInt32(Convert.ToDouble(dr[1].ToString()) * 20 / 100);
-                        g.FillRectangle(new SolidBrush(Color.FromArgb(56, 129, 78)), x, y, w, h);
-                    }
-
-                }
-                if (str == "desc")
-                {
-                    g.DrawString("熱賣前三名", new Font("細明體", 9), new SolidBrush(Color.Red), this.panel1.Width / 2 - 26, 20);
-                }
-                else if (str == "asc")
-                {
-                    g.DrawString("熱賣後三名", new Font("細明體", 9), new SolidBrush(Color.Red), this.panel1.Width / 2 - 26, 20);
-                }
-                this.panel1.BackgroundImage = bitM;
-            }
-        }
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //對排序數據進行分析 升冪
-            ShowPic("asc");
+
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //對排序數據進行分析 降冪
-            ShowPic("desc");
         }
 
-        //對排序數據進行分析 SP
 
         //------------------------------------------------------------  # 60個
 
@@ -303,98 +249,56 @@ namespace vcs_SqlConnection4
 
             using (SqlConnection con = new SqlConnection(cnstr))
             {
-                int XValse = 20;
                 DataSet ds = new DataSet();
                 SqlCommand cmd = new SqlCommand("select * from tb_Rectangle select Sum(t_Num) from tb_Rectangle", con);
                 SqlDataAdapter da = new SqlDataAdapter();
                 da.SelectCommand = cmd;
                 da.Fill(ds);
-                Panel[] p = new Panel[ds.Tables[0].Rows.Count];
+
                 int Values = Convert.ToInt32(ds.Tables[1].Rows[0][0].ToString());
+                richTextBox1.Text += "總數 : " + Values.ToString() + "\n";
+
+                richTextBox1.Text += "資料筆數 : " + ds.Tables[0].Rows.Count.ToString() + "\n";
+
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
                     ds.Tables[0].Rows[i][0].ToString();
-                    float f = Convert.ToInt32(ds.Tables[0].Rows[i][1].ToString());
-                    Size s = new Size();
-                    s.Width = 30;
-                    s.Height = Convert.ToInt32(f / Values * 200);
 
-                    Point pint = new Point();
-                    pint.X = XValse;
-                    pint.Y = this.Height - 50 - s.Height;
-                    p[i] = new Panel();
-                    p[i].Location = pint;
-                    p[i].BackColor = Color.Red;
-                    p[i].Size = s;
-                    XValse += 40;
-                    Label lbl = new Label();
-                    lbl.Text = ds.Tables[0].Rows[i][0].ToString();
-                    lbl.Font = new Font("細明體", 9, FontStyle.Regular);
-                    lbl.ForeColor = Color.White;
-                    p[i].Controls.Add(lbl);
-                    this.Controls.Add(p[i]);
+                    richTextBox1.Text += ds.Tables[0].Rows[i][0].ToString() + "\t";
+                    richTextBox1.Text += ds.Tables[0].Rows[i][1].ToString() + "\n";
                 }
             }
         }
 
         //------------------------------------------------------------  # 60個
 
-        //SqlConnection con;
-        //SqlCommand cmd;
-
-        private void Conn2()
+        private void button3_Click(object sender, EventArgs e)
         {
+            //在柱形圖的指定位置顯示說明文字
+
+            //商品分析
+
+            SqlConnection con;
+            SqlCommand cmd;
+
             // 連接字串
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
             con = new SqlConnection(cnstr);
             con.Open();
-        }
 
-        private void ShowPic2()
-        {
-            Conn2();
-            using (cmd = new SqlCommand("SELECT TOP 3 * FROM tb_Rectangle order by t_Num desc", con))
+            using (cmd = new SqlCommand("SELECT TOP 3 * FROM tb_Rectangle order by t_Num DESC", con))//降冪
             {
                 SqlDataReader dr = cmd.ExecuteReader();
 
-                Bitmap bitM = new Bitmap(this.panel1.Width, this.panel1.Height);
-                Graphics g = Graphics.FromImage(bitM);
-                Pen p = new Pen(new SolidBrush(Color.SlateGray), 1.0f);
-                p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-                g.Clear(Color.White);
-                for (int i = 0; i < 5; i++)
-                {
-                    g.DrawLine(p, 50, this.panel1.Height - 20 - i * 20, this.panel1.Width - 40, this.panel1.Height - 20 - i * 20);
-                    g.DrawString(Convert.ToString(i * 100), new Font("Times New Roman", 10, FontStyle.Regular), new SolidBrush(Color.Black), 20, this.panel1.Height - 27 - i * 20);
-                }
-
                 for (int j = 0; j < 4; j++)
                 {
-                    g.DrawLine(p, 50, this.panel1.Height - 20, 50, 20);
                     if (dr.Read())
                     {
-                        int x, y, w, h;
-                        g.DrawString(dr[0].ToString(), new Font("細明體", 9, FontStyle.Regular), new SolidBrush(Color.Black), 76 + 40 * j, this.panel1.Height - 16);
-                        x = 78 + 40 * j;
-                        y = this.panel1.Height - 20 - Convert.ToInt32((Convert.ToDouble(Convert.ToDouble(dr[1].ToString()) * 20 / 100)));
-                        w = 24;
-                        h = Convert.ToInt32(Convert.ToDouble(dr[1].ToString()) * 20 / 100);
-                        g.FillRectangle(new SolidBrush(Color.SlateGray), x, y, w, h);
-                        g.DrawString((h * 100 / 20).ToString(), new Font("細明體", 8, FontStyle.Bold), new SolidBrush(Color.Tomato), new Point(x + 4, y - 10));
+                        richTextBox1.Text += dr[0].ToString() + "\t" + Convert.ToDouble(dr[1].ToString()) + "\n";
                     }
-
                 }
-                this.panel1.BackgroundImage = bitM;
             }
         }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //在柱形圖的指定位置顯示說明文字
-            //商品分析
-            ShowPic2();
-        }
-
         //------------------------------------------------------------  # 60個
 
         private void button4_Click(object sender, EventArgs e)
@@ -413,7 +317,6 @@ namespace vcs_SqlConnection4
             DataSet ds;
 
             //t_year 在 2005/4/1 ~ 2006/10/1 有資料
-
             string time_st = "2005/8/15";
             string time_sp = "2006/4/15";
 
@@ -421,13 +324,6 @@ namespace vcs_SqlConnection4
 
             try
             {
-                System.Drawing.Bitmap bmp = new Bitmap(this.panel1.Width, this.panel1.Height);
-                Graphics g = Graphics.FromImage(bmp);
-                g.Clear(Color.White);
-                Brush bru = new SolidBrush(Color.Blue);
-                Pen p = new Pen(bru);
-                Font font = new Font("Arial", 9, FontStyle.Bold);
-
                 // 連接字串
                 string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
                 con = new SqlConnection(cnstr);
@@ -436,31 +332,31 @@ namespace vcs_SqlConnection4
                 cmd = new SqlCommand(sqlstr, con);
                 SqlDataReader dr = cmd.ExecuteReader();
                 int i = 0;
-                Pen pLine = new Pen(Color.Orange, 4.0f);
                 string str = null;
                 float f = 0.0f;
                 while (dr.Read())
                 {
                     i++;
-                    g.DrawString(dr[0].ToString().Substring(0, 7) + "月---", font, bru, 10, 15.0f * i);
-                    g.DrawString(dr[1].ToString(), font, bru, this.panel1.Width - 50, 15.0f * i);
+
+                    richTextBox1.Text += dr[0].ToString() + "\t" + Convert.ToDouble(dr[1].ToString()) + "\n";
+                    richTextBox1.Text += dr[0].ToString().Substring(0, 7) + "月---" + "\n";
+
+                    richTextBox1.Text += dr[1].ToString() + "\n";
+
                     str += dr[1].ToString() + "#";
                     f += Convert.ToSingle(dr[1].ToString());
                 }
                 dr.Close();
-                this.panel1.BackgroundImage = bmp;
 
-                Bitmap bmpP = new Bitmap(this.panel1.Width, this.panel1.Height);
+                richTextBox1.Text += "str = " + str + "\n";
+                richTextBox1.Text += "總數 : " + f + "\n";
 
-                Graphics gP = Graphics.FromImage(bmpP);
-                gP.Clear(Color.White);
-                Brush bruImg = new SolidBrush(Color.Orange);
-                Pen Pg = new Pen(bruImg, 1.0f);
                 string[] strCount = str.Split('#');
                 int[] ICount = new int[strCount.Length];
                 for (int l = 0; l < strCount.Length - 1; l++)
                 {
                     ICount[l] = Convert.ToInt32(strCount[l]);
+                    richTextBox1.Text += "strCount[l] = " + strCount[l] + "\tICount[l] = " + ICount[l] + "\n";
                 }
 
                 Point[] P = new Point[ICount.Length - 1];
@@ -471,53 +367,55 @@ namespace vcs_SqlConnection4
                 }
                 f = 0.0f;
                 str = null;
-                gP.DrawLines(new Pen(new SolidBrush(Color.Red)), P);
-
-                gP.DrawString("分析結果走勢圖", new Font("細明體", 16), bru, this.panel1.Width / 2 - 80, 10);
-                this.panel1.BackgroundImage = bmpP;
             }
             catch
             {
                 MessageBox.Show("此範圍內沒有任何訊息！！！");
                 return;
             }
-
         }
 
         //------------------------------------------------------------  # 60個
 
-        private void CreateImage(int ID)
+        private void button6_Click(object sender, EventArgs e)
         {
+            //多曲線數據分析
+
             // 連接字串
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
 
-            int height = 440, width = 600;
-            System.Drawing.Bitmap image = new System.Drawing.Bitmap(width, height);
+            //有資料的年份
+            //1999, 2000, 2001, 2004, 2005, 2006, 2007
+            int query_year = 1999;
+
+            int height = 440;
+            int width = 600;
+            Bitmap image = new Bitmap(width, height);
             Graphics g = Graphics.FromImage(image);
 
-            try
+            //清空圖片背景色
+            g.Clear(Color.White);
+
+            Font font = new Font("Arial", 9, FontStyle.Regular);
+            Font font1 = new Font("細明體", 12, FontStyle.Regular);
+            Font font2 = new Font("Arial", 8, FontStyle.Regular);
+
+            LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 0, image.Width, image.Height), Color.Blue, Color.Blue, 1.2f, true);
+            g.FillRectangle(Brushes.AliceBlue, 0, 0, width, height);
+            Brush brush1 = new SolidBrush(Color.Blue);
+            Brush brush2 = new SolidBrush(Color.SaddleBrown);
+
+            string sqlstr = "SELECT * FROM tb_curve WHERE Years=" + query_year + "";
+
+            using (SqlConnection Con = new SqlConnection(cnstr))
             {
-                //清空圖片背景色
-                g.Clear(Color.White);
-
-                Font font = new System.Drawing.Font("Arial", 9, FontStyle.Regular);
-                Font font1 = new System.Drawing.Font("細明體", 12, FontStyle.Regular);
-                Font font2 = new System.Drawing.Font("Arial", 8, FontStyle.Regular);
-
-                System.Drawing.Drawing2D.LinearGradientBrush brush = new System.Drawing.Drawing2D.LinearGradientBrush(new Rectangle(0, 0, image.Width, image.Height), Color.Blue, Color.Blue, 1.2f, true);
-                g.FillRectangle(Brushes.AliceBlue, 0, 0, width, height);
-                Brush brush1 = new SolidBrush(Color.Blue);
-                Brush brush2 = new SolidBrush(Color.SaddleBrown);
-
-                string str = "SELECT * FROM tb_curve WHERE Years=" + ID + "";
-                SqlConnection Con = new SqlConnection(cnstr);
                 Con.Open();
-                SqlCommand Com = new SqlCommand(str, Con);
+                SqlCommand Com = new SqlCommand(sqlstr, Con);
                 SqlDataReader dr = Com.ExecuteReader();
                 dr.Read();
                 if (dr.HasRows)
                 {
-                    g.DrawString("" + ID + "年公司內部人員統計表", font1, brush1, new PointF(160, 30));
+                    g.DrawString("" + query_year + "年公司內部人員統計表", font1, brush1, new PointF(160, 30));
                 }
                 dr.Close();
                 //畫圖片的邊框線
@@ -568,7 +466,7 @@ namespace vcs_SqlConnection4
                 int[] Count1 = new int[12];
                 int[] Count2 = new int[12];
                 string[] NumChr = new string[12];
-                string cmdtxt2 = "SELECT * FROM tb_curve WHERE Years=" + ID + "";
+                string cmdtxt2 = "SELECT * FROM tb_curve WHERE Years=" + query_year + "";
                 SqlCommand Com1 = new SqlCommand(cmdtxt2, Con);
                 SqlDataAdapter da = new SqlDataAdapter();
                 da.SelectCommand = Com1;
@@ -630,39 +528,14 @@ namespace vcs_SqlConnection4
 
                 this.panel1.BackgroundImage = image;
             }
-            catch
-            { }
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            //多曲線數據分析
-
-            //取得年分
-
-            // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
-
-            using (SqlConnection con = new SqlConnection(cnstr))
-            {
-                SqlDataAdapter da = new SqlDataAdapter("select Years from tb_curve", con);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                this.comboBox1.DataSource = dt.DefaultView;
-                this.comboBox1.DisplayMember = "Years";
-                this.comboBox1.ValueMember = "Years";
-            }
-
-            //分析
-
-            this.CreateImage(Convert.ToInt32(this.comboBox1.Text));
         }
 
         //------------------------------------------------------------  # 60個
 
-        private void draw_picture()
+        private void button7_Click(object sender, EventArgs e)
         {
             //網站人氣指數曲線分析
+
             // 資料庫連線參數, 連接字串
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
 
@@ -672,8 +545,8 @@ namespace vcs_SqlConnection4
             //繪製畫筆
             Pen p = new Pen(Color.Blue);
             //可能要用到的字體
-            Font fontO = new System.Drawing.Font("Arial", 9, FontStyle.Regular);
-            Font fontT = new System.Drawing.Font("華文新魏", 16, FontStyle.Regular);
+            Font fontO = new Font("Arial", 9, FontStyle.Regular);
+            Font fontT = new Font("華文新魏", 16, FontStyle.Regular);
             //給制邊框與顯示字體
             Point pointStart = new Point(0, 0);
             Size sizeWindows = new Size(this.Width - 8, this.Height - 34);
@@ -775,79 +648,37 @@ namespace vcs_SqlConnection4
             g.DrawLines(mypen, points);  //繪製折線      
         }
 
-        private void button7_Click(object sender, EventArgs e)
-        {
-            //網站人氣指數曲線分析
-
-            draw_picture();
-        }
-
         //------------------------------------------------------------  # 60個
-
-        private void ShowPic3(string SexCode, float f)
-        {
-            Graphics g = this.panel1.CreateGraphics();
-            Pen p = new Pen(new SolidBrush(Color.Blue));
-            Point p1 = new Point(0, 0);
-            Size s = new Size(this.panel1.Width, this.panel1.Height);
-            Rectangle trct = new Rectangle(p1, s);
-            g.FillEllipse(new SolidBrush(Color.Red), trct);
-            g.FillPie(new SolidBrush(Color.Blue), trct, 180, f * 360);
-            Graphics ginfo = this.pictureBox1.CreateGraphics();
-            Font font = new Font("細明體", 10, FontStyle.Regular);
-            ginfo.DrawString(SexCode + " " + f.ToString().Substring(0, 4), font, new SolidBrush(Color.Blue), 0, 5);
-            ginfo.DrawString("女" + " " + (1.0 - Convert.ToDouble(f.ToString().Substring(0, 4))).ToString().Substring(0, 4), font, new SolidBrush(Color.Red), 0, 25);
-        }
 
         private void button8_Click(object sender, EventArgs e)
         {
             //利用餅型圖分析公司男女比率
 
-            SqlConnection con;
-            SqlCommand cmd;
-
             // 連接字串
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
-            con = new SqlConnection(cnstr);
+            SqlConnection con = new SqlConnection(cnstr);
             con.Open();
 
-            using (cmd = new SqlCommand("SELECT sex,COUNT(sex) num FROM tb_sex group by sex", con))
+            // 查詢字串
+            string sqlstr = "SELECT sex,COUNT(sex) num FROM tb_sex group by sex";
+
+            using (SqlCommand cmd = new SqlCommand(sqlstr, con))
             {
                 SqlDataReader dr = cmd.ExecuteReader();
-                string[] str = new string[2];
-                int i = 0;
                 while (dr.Read())
                 {
-                    str[i] = dr[0].ToString() + "," + dr[1].ToString();
-                    i++;
+                    richTextBox1.Text += dr[0].ToString() + "\t" + dr[1].ToString() + "\n";
                 }
-                float N = Convert.ToInt16(str[0].Substring(2)) + Convert.ToInt16(str[1].Substring(2));
-                float f = Convert.ToInt16(str[0].Substring(2)) / N;
-                ShowPic3(str[0].Substring(0, 1), f);
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         static int SumNum;
         static float TimeNum;
-        //SqlConnection con;
-        //SqlCommand cmd;
+        SqlConnection con;
+        SqlCommand cmd;
         Hashtable ht = new Hashtable();
-
-        private void showPic4(float f, Brush B)
-        {
-            Graphics g = this.panel1.CreateGraphics();
-            if (TimeNum == 0.0f)
-            {
-                g.FillPie(B, 0, 0, this.panel1.Width, this.panel1.Height, 0, f * 360);
-            }
-            else
-            {
-                g.FillPie(B, 0, 0, this.panel1.Width, this.panel1.Height, TimeNum, f * 360);
-            }
-            TimeNum += f * 360;
-        }
 
         private void button9_Click(object sender, EventArgs e)
         {
@@ -857,10 +688,10 @@ namespace vcs_SqlConnection4
 
             // 連接字串
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
-            con = new SqlConnection(cnstr);
+            SqlConnection con = new SqlConnection(cnstr);
             con.Open();
 
-            using (cmd = new SqlCommand("select Sum(t_Num)  from tb_product", con))
+            using (SqlCommand cmd = new SqlCommand("select Sum(t_Num)  from tb_product", con))
             {
                 SumNum = Convert.ToInt32(cmd.ExecuteScalar());
             }
@@ -881,17 +712,30 @@ namespace vcs_SqlConnection4
                     flo[T] = Convert.ToSingle((Convert.ToDouble(de.Value) / SumNum).ToString().Substring(0, 6));
                     Brush Bru = new SolidBrush(Color.FromArgb(rnd.Next(255), rnd.Next(255), rnd.Next(255)));
                     g2.DrawString(de.Key + "        " + flo[T] * 100 + "%", new Font("Arial", 8, FontStyle.Regular), Bru, 7, 5 + T * 18);
-                    showPic4(flo[T], Bru);
+
+                    float f = flo[T];
+
+                    Graphics g = this.panel1.CreateGraphics();
+                    if (TimeNum == 0.0f)
+                    {
+                        g.FillPie(Bru, 0, 0, this.panel1.Width, this.panel1.Height, 0, f * 360);
+                    }
+                    else
+                    {
+                        g.FillPie(Bru, 0, 0, this.panel1.Width, this.panel1.Height, TimeNum, f * 360);
+                    }
+                    TimeNum += f * 360;
+
                     T++;
                 }
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void ShowPic5(int Sum)
         {
-            using (cmd = new SqlCommand("select t_Point,sum(t_Num) from tb_manpower group by t_Point order by sum(t_Num) desc", con))
+            using (cmd = new SqlCommand("select t_Point,sum(t_Num) from tb_manpower group by t_Point order by sum(t_Num) DESC", con))//降冪
             {
                 Bitmap bmp = new Bitmap(this.panel1.Width, this.panel1.Height);
                 Graphics g = Graphics.FromImage(bmp);
@@ -899,6 +743,7 @@ namespace vcs_SqlConnection4
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
+                    richTextBox1.Text += dr[0].ToString() + "\t" + Convert.ToDouble(dr[1].ToString()) + "\n";
                     float f = Convert.ToSingle(dr[1]) / Sum;
                     string str = dr[0].ToString();
                     draw_sub_picture(g, f, str);
@@ -966,11 +811,12 @@ namespace vcs_SqlConnection4
                 con.Close();
                 ShowPic5(Sum);
             }
-
         }
 
-        //6060
 
+
+
+        //------------------------------------------------------------  # 60個
 
         private void button11_Click(object sender, EventArgs e)
         {
@@ -978,8 +824,7 @@ namespace vcs_SqlConnection4
             //D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\vcs程式開發範例集\13\Ex13_18\製作一個可以旋轉的餅型圖\製作一個可以旋轉的餅型圖
         }
 
-        //6060
-
+        //------------------------------------------------------------  # 60個
 
         private void button12_Click(object sender, EventArgs e)
         {
@@ -1015,14 +860,6 @@ namespace vcs_SqlConnection4
 
         private void button20_Click(object sender, EventArgs e)
         {
-            //只是看一下db
-            // 資料庫檔案
-            string db_filename = "db_13.mdf";
-            // 查詢字串
-            string sqlstr = "SELECT * FROM tb_lottery";
-
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "全部資料 tb_Employee";
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -1059,6 +896,42 @@ namespace vcs_SqlConnection4
 
         private void button29_Click(object sender, EventArgs e)
         {
+            //show db
+
+            //只是看一下db
+            // 資料庫檔案
+            string db_filename = "db_13.mdf";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM tb_Rectangle";
+
+            /*
+            //sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "";
+
+            sqlstr = "select Sum(t_Num) from tb_Rectangle";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+            lb_dgv2.Text = "";
+
+            sqlstr = "select * from tb_Rectangle select Sum(t_Num) from tb_Rectangle";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            //lb_dgv3.Text = "";
+
+            string sort_type = "ASC";  // 升冪
+            sort_type = "DESC";  // 降冪
+            //string sqlstr = "SELECT TOP 3 * FROM tb_Rectangle order by t_Num " + sort_type;
+            */
+
+
+            db_filename = "db_13.mdf";
+            //sqlstr = "select * from tb_lottery";
+            sqlstr = "select * from tb_curve";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+
+            sqlstr = "select Years from tb_curve";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+
+
         }
     }
 }

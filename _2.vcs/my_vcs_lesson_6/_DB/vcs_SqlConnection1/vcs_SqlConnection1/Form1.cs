@@ -643,7 +643,7 @@ namespace vcs_SqlConnection1
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "成績單 全部資料";
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //成績單 搜尋1
 
@@ -654,7 +654,7 @@ namespace vcs_SqlConnection1
             //sqlstr = "SELECT * FROM 成績單 WHERE 姓名 = '" + name.Replace("'", "''") + "'";//有些名字有'
             sql_read_database(db_filename, sqlstr, dataGridView2);
 
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             // 成績單 2 ch18DB.mdf
 
@@ -1235,7 +1235,7 @@ namespace vcs_SqlConnection1
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "全部資料 tb_product 兩欄 t_Name t_Num\n";
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             // 資料庫檔案
             db_filename = "db_TomeOne.mdf";
@@ -1243,7 +1243,7 @@ namespace vcs_SqlConnection1
             //將 t_Num 加總起來
             sql_read_database(db_filename, sqlstr, dataGridView2);
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
             
             cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
 
@@ -1610,7 +1610,7 @@ namespace vcs_SqlConnection1
             sql_read_database(db_filename, sqlstr, dataGridView2);
             lb_dgv2.Text = "十二生肖全部資料 更新資料後";
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //新增資料
 
