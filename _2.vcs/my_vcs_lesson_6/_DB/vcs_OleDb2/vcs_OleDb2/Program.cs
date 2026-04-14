@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_ReadWrite_EXCEL7
+namespace vcs_OleDb2
 {
     static class Program
     {

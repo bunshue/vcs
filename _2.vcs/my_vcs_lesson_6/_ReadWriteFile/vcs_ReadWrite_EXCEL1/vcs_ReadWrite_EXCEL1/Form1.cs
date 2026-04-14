@@ -532,7 +532,8 @@ namespace vcs_ReadWrite_EXCEL1
             string FilePath = filename;
 
             //2.提供者名稱  Microsoft.Jet.OLEDB.4.0適用於2003以前版本，Microsoft.ACE.OLEDB.12.0 適用於2007以後的版本處理 xlsx 檔案
-            string ProviderName = "Microsoft.ACE.OLEDB.12.0;";
+            //string ProviderName = "Microsoft.ACE.OLEDB.12.0;";
+            string ProviderName = "Microsoft.Jet.OLEDB.4.0";
 
             //3.Excel版本，Excel 8.0 針對Excel2000及以上版本，Excel5.0 針對Excel97。
             string ExtendedString = "'Excel 8.0;";
@@ -816,6 +817,109 @@ namespace vcs_ReadWrite_EXCEL1
 
         private void button20_Click(object sender, EventArgs e)
         {
+            //製作EXCEL檔案1
+            // 設定儲存檔名，不用設定副檔名，系統自動判斷 excel 版本，產生 .xls 或 .xlsx 副檔名
+            string filename = Application.StartupPath + "\\excel_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+
+            Excel.Application excelApp;
+            Excel._Workbook wBook;
+            Excel._Worksheet wSheet;
+            Excel.Range wRange;
+
+            // 開啟一個新的應用程式
+            excelApp = new Excel.Application();
+
+            // 讓Excel文件可見
+            excelApp.Visible = true;
+
+            // 停用警告訊息
+            excelApp.DisplayAlerts = false;
+
+            // 加入新的活頁簿
+            excelApp.Workbooks.Add(Type.Missing);
+
+            // 引用第一個活頁簿
+            wBook = excelApp.Workbooks[1];
+
+            // 設定活頁簿焦點
+            wBook.Activate();
+
+            // 引用第一個工作表
+            wSheet = (Excel._Worksheet)wBook.Worksheets[1];
+
+            // 命名工作表的名稱
+            wSheet.Name = "Sheet1";
+
+            // 設定工作表焦點
+            wSheet.Activate();
+
+            // 設定第1列資料
+            excelApp.Cells[1, 1] = "名稱";
+            excelApp.Cells[1, 2] = "重量";
+            excelApp.Cells[1, 3] = "生日";
+            // 設定第1列顏色
+            wRange = wSheet.Range[wSheet.Cells[1, 1], wSheet.Cells[1, 3]];
+            wRange.Select();
+            wRange.Font.Color = ColorTranslator.ToOle(Color.White);
+            wRange.Interior.Color = ColorTranslator.ToOle(Color.DimGray);
+
+            // 設定第2列資料
+            excelApp.Cells[2, 1] = "elephant";
+            excelApp.Cells[2, 2] = "895";
+            excelApp.Cells[2, 3] = "2013/5/10";
+
+            // 設定第3列資料
+            excelApp.Cells[3, 1] = "lion";
+            excelApp.Cells[3, 2] = "250";
+            excelApp.Cells[3, 3] = "2010/01/31";
+
+            // 設定第4列資料
+            excelApp.Cells[4, 1] = "cat";
+            excelApp.Cells[4, 2] = "15";
+            excelApp.Cells[4, 3] = "2008/12/05";
+
+            // 設定第5列資料
+            excelApp.Cells[5, 1] = "dog";
+            excelApp.Cells[5, 2] = "25";
+            excelApp.Cells[5, 3] = "2003/9/28";
+
+            // 設定第6列資料
+            excelApp.Cells[6, 1] = "光26";
+            excelApp.Cells[6, 2] = "123";
+            excelApp.Cells[6, 3] = "1900/1/1";
+
+            // 設定第7列資料
+            //excelApp.Cells[7, 1] = "總計";
+            // 設定總和公式 =SUM(B2:B4)
+            //excelApp.Cells[7, 2].Formula = string.Format("=SUM(B{0}:B{1})", 2, 5);
+            // 設定第7列顏色
+            //wRange = wSheet.Range[wSheet.Cells[7, 1], wSheet.Cells[7, 3]];
+            wRange.Select();
+            wRange.Font.Color = ColorTranslator.ToOle(Color.Red);
+            wRange.Interior.Color = ColorTranslator.ToOle(Color.Yellow);
+
+            // 自動調整欄寬
+            wRange = wSheet.Range[wSheet.Cells[1, 1], wSheet.Cells[6, 3]];
+            wRange.Select();
+            wRange.Columns.AutoFit();
+            //另存活頁簿
+            wBook.SaveAs(filename, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Excel.XlSaveAsAccessMode.xlNoChange, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+
+            //關閉活頁簿
+            wBook.Close(false, Type.Missing, Type.Missing);
+
+            //關閉Excel
+            excelApp.Quit();
+
+            //釋放Excel資源
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
+            wBook = null;
+            wSheet = null;
+            wRange = null;
+            excelApp = null;
+            GC.Collect();
+
+            richTextBox1.Text += "存檔檔名: " + filename + ",  xls or xlsx\n";
 
         }
 

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
 using System.Data.OleDb;
 
 namespace vcs_OleDb
@@ -678,23 +679,416 @@ namespace vcs_OleDb
 
         private void button20_Click(object sender, EventArgs e)
         {
+            //讀取EXCEL檔案
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\excel_20210602_131921.xls";
+
+            //string filename = pathFile + ".xls";
+            if (File.Exists(filename) == false)
+            {
+                richTextBox1.Text += "檔案: " + filename + " 不存在，無法開啟。\n";
+                return;
+            }
+            else
+            {
+                richTextBox1.Text += "開啟檔案: " + filename + "\n";
+            }
+
+            //string xlsPath = @"C:\tttt.xls";
+
+            //string sheetName = "Sheet1";
+
+            /*步驟1：設定Excel的屬性、路徑*/
+            //設定讀取的Excel屬性
+            string strCon = "Provider=Microsoft.Jet.OLEDB.4.0;" +
+                //路徑(檔案讀取路徑)
+            "Data Source=D:\\_git\\vcs\\_1.data\\______test_files1\\__RW\\_excel\\vcs_test_excel.xls;" +
+                //選擇Excel版本
+                //Excel 12.0 針對Excel 2010、2007版本(OLEDB.12.0)
+                //Excel 8.0 針對Excel 97-2003版本(OLEDB.4.0)
+                //Excel 5.0 針對Excel 97(OLEDB.4.0)
+            "Extended Properties='Excel 8.0;" +
+                //開頭是否為資料
+                //若指定值為 Yes，代表 Excel 檔中的工作表第一列是欄位名稱，oleDB直接從第二列讀取
+                //若指定值為 No，代表 Excel 檔中的工作表第一列就是資料了，沒有欄位名稱，oleDB直接從第一列讀取
+            "HDR=NO;" +
+                //IMEX=0 為「匯出模式」，能對檔案進行寫入的動作。
+                //IMEX=1 為「匯入模式」，能對檔案進行讀取的動作。
+                //IMEX=2 為「連結模式」，能對檔案進行讀取與寫入的動作。
+            "IMEX=1'";
+            /*步驟2：依照Excel的屬性及路徑開啟檔案*/
+            //Excel路徑及相關資訊匯入
+            OleDbConnection GetXLS = new OleDbConnection(strCon);
+            //打開檔案
+            GetXLS.Open();
+            /*步驟3：搜尋此Excel的所有工作表，找到特定工作表進行讀檔，並將其資料存入List*/
+            //搜尋xls的工作表(工作表名稱需要加$字串)
+            DataTable Table = GetXLS.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+            //查詢此Excel所有的工作表名稱
+            string SelectSheetName = "";
+            foreach (DataRow row in Table.Rows)
+            {
+                //抓取Xls各個Sheet的名稱(+'$')-有的名稱需要加名稱''，有的不用
+                SelectSheetName = (string)row["TABLE_NAME"];
+                richTextBox1.Text += "\n" + "工作表: " + SelectSheetName + "\n";
+                //工作表名稱有特殊字元、空格，需加'工作表名稱$'，ex：'Sheet_A$'
+                //工作表名稱沒有特殊字元、空格，需加工作表名稱$，ex：SheetA$
+                //所有工作表名稱為Sheet1，讀取此工作表的內容
+                //if (SelectSheetName == "SheetA$")
+                if (SelectSheetName == "Sheet1$")   //第一頁
+                {
+                    //select 工作表名稱
+                    OleDbCommand cmSheetA = new OleDbCommand(" SELECT * FROM [Sheet1$] ", GetXLS);
+                    OleDbDataReader drSheetA = cmSheetA.ExecuteReader();
+
+                    //讀取工作表SheetA資料
+                    //List<string> ListSheetA = new List<string>();
+                    int cnt = 0;
+                    while (drSheetA.Read())
+                    {
+                        //工作表SheetA的資料存入List
+                        //ListSheetA.Add(drSheetA[cnt].ToString());
+                        richTextBox1.Text += "列" + cnt.ToString() + "\t" + drSheetA[0].ToString() + "\t" + drSheetA[1].ToString() + "\t" + drSheetA[2].ToString() + "\n";
+                        cnt++;
+                    }
+                    /*步驟4：關閉檔案*/
+                    //結束關閉讀檔(必要，不關會有error)
+                    drSheetA.Close();
+                    GetXLS.Close();
+                }
+            }
         }
+
+        //6060
 
         private void button21_Click(object sender, EventArgs e)
         {
+            //讀取EXCEL檔案到dataGridView
+            //sugar can not use this
+            //Excel數據導入到dataGridView
+            //http://weisico.com/program/2018/0531/370.html
+
+            string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\vcs_ReadWrite_EXCEL2.xls";
+
+            try
+            {
+                string tableName = GetExcelFirstTableName(filename);
+                richTextBox1.Text += "tableName = " + tableName + "\n";
+                //設置T_Sql
+                string TSql = "SELECT  * FROM [" + tableName + "]";
+                richTextBox1.Text += "TSql = " + TSql + "\n";
+                //讀取數據
+                DataTable table = ExcelToDataSet(filename, TSql).Tables[0];
+                dataGridView1.DataSource = table;
+
+                int cols = table.Columns.Count;
+                int rows = table.Rows.Count;
+                richTextBox1.Text += "cols = " + cols.ToString() + "\n";
+                richTextBox1.Text += "rows = " + rows.ToString() + "\n";
+                int i;
+                int j;
+                for (i = 0; i < cols; i++)
+                {
+                    richTextBox1.Text += table.Columns[i] + "\t";
+                }
+                richTextBox1.Text += "\n";
+                for (i = 0; i < rows; i++)
+                {
+                    for (j = 0; j < cols; j++)
+                    {
+                        richTextBox1.Text += table.Rows[i][j] + "\t";
+                    }
+                    richTextBox1.Text += "\n";
+                }
+                richTextBox1.Text += "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+            }
         }
+
+        /// <summary>
+        /// 動態取Excel表名
+        /// </summary>
+        /// <param name="fullPath">文件路徑</param>
+        /// <returns></returns>
+        public string GetExcelFirstTableName(string fullPath)
+        {
+            string tableName = null;
+            if (File.Exists(fullPath))
+            {
+                using (OleDbConnection conn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;Data Source=" + fullPath))
+                {
+                    conn.Open();
+
+                    richTextBox1.Text += "t0 = " + conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null).Rows[0][0].ToString().Trim() + "\n";
+                    richTextBox1.Text += "t1 = " + conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null).Rows[0][1].ToString().Trim() + "\n";
+
+                    richTextBox1.Text += "s1 = " + conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null).Rows[0][2].ToString().Trim() + "\n";
+                    richTextBox1.Text += "s2 = " + conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null).Rows[1][2].ToString().Trim() + "\n";
+                    richTextBox1.Text += "s3 = " + conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null).Rows[2][2].ToString().Trim() + "\n";
+
+                    richTextBox1.Text += "t3 = " + conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null).Rows[0][3].ToString().Trim() + "\n";
+
+                    richTextBox1.Text += "\n\n";
+
+                    tableName = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null).Rows[0][2].ToString().Trim();
+                    richTextBox1.Text += "GetExcelFirstTableName tableName = " + tableName + "\n";
+                }
+            }
+            return tableName;
+        }
+
+
+        /// <summary>
+        /// 返回Excel數據源
+        /// </summary>
+        /// <param name="filename">文件路徑</param>
+        /// <param name="TSql">TSql</param>
+        /// <returns>DataSet</returns>
+        public static DataSet ExcelToDataSet(string filename, string TSql)
+        {
+            DataSet ds;
+            string strCon = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;data source=" + filename;
+            OleDbConnection myConn = new OleDbConnection(strCon);
+            string strCom = TSql;
+            myConn.Open();
+            OleDbDataAdapter myCommand = new OleDbDataAdapter(strCom, myConn);
+            ds = new DataSet();
+            myCommand.Fill(ds);
+            myConn.Close();
+            return ds;
+        }
+
+        //6060
+        //配置Excel的OleDb連接字符串
+        public const string OledbConnString = "Provider = Microsoft.Jet.OLEDB.4.0 ; Data Source = {0};Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;'"; //Excel的 OleDb 連接字符串
 
         private void button22_Click(object sender, EventArgs e)
         {
+            //讀取EXCEL檔案到dataGridView
+            //讀取EXCEL檔案到dataGridView
+            //another
+            //C# Excel文件導入操作
+
+            string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\excel_test_data.xls";
+
+            richTextBox1.Text += "開啟檔案 : " + filename + "\n";
+
+            DataTable excelTbl = this.GetExcelTable(filename);  //調用函數獲取Excel中的信息
+            if (excelTbl == null)
+            {
+                return;
+            }
+
+            dataGridView1.DataSource = excelTbl;
         }
+
+        /// 
+        /// 獲取Excel文件中的信息，保存到一個DataTable中
+        /// 
+
+        /// 文件路徑
+        /// 返回生成的DataTable
+        private DataTable GetExcelTable(string path)
+        {
+            try
+            {
+                //獲取excel數據
+                DataTable dt1 = new DataTable("excelTable");
+                string strConn = string.Format(OledbConnString, path);
+                OleDbConnection conn = new OleDbConnection(strConn);
+                conn.Open();
+                DataTable dt = conn.GetSchema("Tables");
+                //判斷excel的sheet頁數量，查詢第1頁
+                if (dt.Rows.Count > 0)
+                {
+                    string selSqlStr = string.Format("select * from [{0}]", dt.Rows[0]["TABLE_NAME"]);
+                    OleDbDataAdapter oleDa = new OleDbDataAdapter(selSqlStr, conn);
+                    oleDa.Fill(dt1);
+                }
+                conn.Close();
+                return dt1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excel轉換DataTable出錯：" + ex.Message);
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                return null;
+            }
+        }
+
+        //6060
+
+        //顯示資料庫的內容 ST
+        void show_dataset_content(DataSet ds)
+        {
+            richTextBox1.Text += "顯示資料庫的內容\n";
+
+            richTextBox1.Text += "Tables.Count = " + ds.Tables.Count.ToString() + "\n";
+            richTextBox1.Text += "Columns = " + ds.Tables[0].Columns.Count.ToString() + "\n";
+            richTextBox1.Text += "Rows = " + ds.Tables[0].Rows.Count.ToString() + "\n";
+            richTextBox1.Text += "TableName = " + ds.Tables[0].TableName + "\n\n";
+
+            richTextBox1.Text += "標題\n";
+            int i;
+            int j;
+            int C = ds.Tables[0].Columns.Count;
+            int R = ds.Tables[0].Rows.Count;
+            for (i = 0; i < C; i++)
+            {
+                richTextBox1.Text += ds.Tables[0].Columns[i] + "\t";
+            }
+            richTextBox1.Text += "\n\n";
+
+            richTextBox1.Text += "內容\n";
+            for (j = 0; j < R; j++)
+            {
+                for (i = 0; i < C; i++)
+                {
+                    richTextBox1.Text += ds.Tables[0].Rows[j].ItemArray[i] + "\t";
+                }
+                richTextBox1.Text += "\n";
+            }
+            richTextBox1.Text += "\n";
+        }
+        //顯示資料庫的內容 SP
 
         private void button23_Click(object sender, EventArgs e)
         {
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\db_09.mdb";
+
+            //"Provider=Microsoft.Jet.OleDb.4.0;"是指數據提供者,這裡使用的是Microsoft Jet引擎,也就是Access中的數據引擎,asp.net就是靠這個和Access的數據庫連接的.
+            //"Data Source=XXXXX.mdb"是指明數據源的位置
+
+            string connection_string = "Provider=Microsoft.ACE.OLEDB.12.0;Data source=" + filename;  //sugar
+            //string connection_string = "Provider=Microsoft.Jet.OLEDB.4.0;Data source=" + filename;     //kilo
+
+            OleDbConnection connection = new OleDbConnection(connection_string);
+
+            connection.Open();  // 打開數據庫連接
+
+            OleDbDataAdapter OleDat = new OleDbDataAdapter("select * from 帳目", connection);
+            DataSet ds = new DataSet();
+            OleDat.Fill(ds, "帳目");
+            this.dataGridView1.DataSource = ds.Tables[0].DefaultView;   //將所有資料都匯出到dataGridView上
+
+            show_dataset_content(ds);   //顯示資料庫的內容
+
+            connection.Close(); // 關閉數據庫連接
+
+            connection.Dispose();
         }
+
+        //6060
 
         private void button24_Click(object sender, EventArgs e)
         {
+            return; //TBD
+
+            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\db_09.mdb";
+
+            string connection_string = "Provider=Microsoft.ACE.OLEDB.12.0;Data source=" + filename;  //sugar
+            //string connection_string = "Provider=Microsoft.Jet.OLEDB.4.0;Data source=" + filename;     //kilo
+
+            OleDbConnection connection = new OleDbConnection(connection_string);
+
+            OleDbDataReader reader;
+
+            // 獲得Person裡面的所以數據記錄
+
+            string strCommand = "SELECT * FROM Persons";
+
+            connection.Open();  // 打開數據連接
+
+            OleDbCommand cmd = new OleDbCommand(strCommand, connection);
+
+            reader = cmd.ExecuteReader();   //獲得數據集
+
+            /*
+            //（2）.對列表進行初始化，並使得列表的顯示條件符合數據記錄的條件。需要說明的是在下面源代碼中，lv是在Class中定義的一個ListView的一個實例
+
+            // 初始化ListView
+
+            listView1.Left = 0;
+
+            listView1.Top = 0;
+
+            listView1.Width = 700;
+
+            //listView1.Height = this.ClientRectangle.Height ;
+
+            listView1.GridLines = true;	//顯示各個記錄的分隔線
+
+            listView1.FullRowSelect = true;	//要選擇就是一行
+
+            listView1.View = View.Details;	//定義列表顯示的方式
+
+            listView1.Scrollable = true;	//需要時候顯示滾動條
+
+            listView1.MultiSelect = false; // 不可以多行選擇
+
+            listView1.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+
+            // 針對數據庫的字段名稱，建立與之適應顯示表頭
+
+            listView1.Columns.Add("姓名", 60, HorizontalAlignment.Right);
+
+            listView1.Columns.Add("住宅電話", 100, HorizontalAlignment.Left);
+
+
+            listView1.Columns.Add("辦公電話", 100, HorizontalAlignment.Left);
+
+            listView1.Columns.Add("移動電話", 100, HorizontalAlignment.Left);
+
+            listView1.Columns.Add("居住地點", 100, HorizontalAlignment.Left);
+
+            listView1.Columns.Add("工作單位", 100, HorizontalAlignment.Left);
+
+            listView1.Columns.Add("電子郵件", 100, HorizontalAlignment.Left);
+
+            listView1.Visible = true;
+
+            while (reader.Read())
+            {
+
+                ListViewItem li = new ListViewItem();
+
+                li.SubItems.Clear();
+
+                li.SubItems[0].Text = reader["name"].ToString();
+
+                li.SubItems.Add(reader["HomePhone"].ToString());
+
+
+                li.SubItems.Add(reader["WorkPhone"].ToString());
+
+                li.SubItems.Add(reader["MobilePhone"].ToString());
+
+                li.SubItems.Add(reader["City"].ToString());
+
+                li.SubItems.Add(reader["Address"].ToString());
+
+                li.SubItems.Add(reader["Email"].ToString());
+
+                listView1.Items.Add(li);
+            }
+            */
+
+            reader.Close();	//關閉數據集
+
+            connection.Close();	//關閉數據連接
+
+            /*          
+          如果訪問的數據庫是SQL Server 7.0，只需要把上面源代碼中的一條語句：
+          private static string strConnect = "Provider = Microsoft.Jet.OLEDB.4.0 ; Data Source = " + Application.StartupPath + "\\MY.MDB" ;
+          改變成：
+          private static string strConnect = "Provider=SQLOLEDB.1 ; Persist Security Info=False ; User ID = sa ; Initial Catalog=數據庫名稱; Data Source = 服務器名稱 " ;
+          即可。
+          */
         }
+
+        //6060
 
         private void button25_Click(object sender, EventArgs e)
         {
