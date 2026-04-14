@@ -2046,7 +2046,50 @@ namespace vcs_SqlConnection1
 
         private void button25_Click(object sender, EventArgs e)
         {
+            //取得資料庫的表單名稱
+
+            // 資料庫檔案
+            string db_filename = "db_09_Data.MDF";
+            // 查詢字串
+            string sqlstr = "select name from sysdatabases";
+
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            //---------------------------------------
+
+            //SQL数据库连接
+
+            //SQL DB
+            string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
+            db_filename = "db_09_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            richTextBox1.Text += "cnstr : " + cnstr + "\n";
+
+            /*
+            comboBox1.DataSource = getTable(cnstr);
+            comboBox1.DisplayMember = "name";
+            comboBox1.ValueMember = "name";
+            comboBox1.Enabled = true;
+            */
         }
+
+        private DataTable getTable(string cnstr)
+        {
+            // 取得資料庫的表單名稱
+            try
+            {
+                SqlConnection sqlcon = new SqlConnection(cnstr);
+                SqlDataAdapter da = new SqlDataAdapter("select name from sysdatabases ", sqlcon);
+                DataTable dt = new DataTable("sysdatabases");
+                da.Fill(dt);
+                return dt;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
 
         private void button26_Click(object sender, EventArgs e)
         {

@@ -182,12 +182,6 @@ namespace vcs_OleDb
                     richTextBox1.Text += ex.Message + "\n";
                 }
             }
-
-            //6060
-
-
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -247,7 +241,7 @@ namespace vcs_OleDb
             string sqlstr = "SELECT * FROM 員工";
             oledb_read_database(db_filename, sqlstr, dataGridView1);
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             db_filename = "Northwind.mdb";
 
@@ -772,7 +766,7 @@ namespace vcs_OleDb
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button21_Click(object sender, EventArgs e)
         {
@@ -874,7 +868,8 @@ namespace vcs_OleDb
             return ds;
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
+
         //配置Excel的OleDb連接字符串
         public const string OledbConnString = "Provider = Microsoft.Jet.OLEDB.4.0 ; Data Source = {0};Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;'"; //Excel的 OleDb 連接字符串
 
@@ -932,7 +927,7 @@ namespace vcs_OleDb
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         //顯示資料庫的內容 ST
         void show_dataset_content(DataSet ds)
@@ -994,7 +989,7 @@ namespace vcs_OleDb
             connection.Dispose();
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button24_Click(object sender, EventArgs e)
         {
@@ -1102,7 +1097,7 @@ namespace vcs_OleDb
           */
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button25_Click(object sender, EventArgs e)
         {
@@ -1165,12 +1160,57 @@ namespace vcs_OleDb
             db_connection.Close();  // 關閉數據庫連接
             db_connection.Dispose();
             MessageBox.Show("關閉數據庫連接成功");
-
-
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
+            //OleDb 9
+
+            string cnstr = string.Empty;
+
+            //Access或Excel数据库连接
+
+            //OleDB
+
+            //Access 或 EXCEL
+
+            //mdb
+            string db_filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_09_Data.MDF";
+
+            FileInfo FInfo = new FileInfo(db_filename);
+            string strExtention = FInfo.Extension;
+            if (strExtention.ToLower() == ".mdb")
+            {
+                //MDB
+                string db_path = "aaaaaaaa";  // 數據庫路徑
+                string user_name = "david";  // 用戶名
+                string password = "12345";  // 密碼
+
+                //使用帳號密碼
+                cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + db_path + ";UID=" + user_name + ";PWD=" + password + ";";
+
+                //不使用帳號密碼
+                cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + db_path + ";";
+            }
+            else if (strExtention.ToLower() == ".xls")
+            {
+                //EXCEL
+                string db_path = "bbbbb";  // 數據庫路徑
+                cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + db_path + ";Extended Properties=Excel 8.0;";
+            }
+
+            OleDbConnection oledbcon = new OleDbConnection(cnstr);
+
+            try
+            {
+                oledbcon.Open();
+                richTextBox1.Clear();
+                richTextBox1.Text = cnstr + "\n连接成功……";
+            }
+            catch
+            {
+                richTextBox1.Text = "连接失败";
+            }
         }
 
         private void button27_Click(object sender, EventArgs e)
