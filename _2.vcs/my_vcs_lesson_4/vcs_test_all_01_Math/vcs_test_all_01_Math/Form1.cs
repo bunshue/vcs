@@ -108,6 +108,11 @@ namespace vcs_test_all_01_Math
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1520, 860);
+            this.Text = "vcs_test_all_01_Math";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -204,6 +209,39 @@ namespace vcs_test_all_01_Math
             {
                 richTextBox1.Text += "x = " + x.ToString() + "\t" + (rad(x) / Math.PI).ToString() + " pi rad\t" + 100 * sind(x) + "\n";
             }
+
+            //畫出角度關係
+
+            Graphics g = this.CreateGraphics();
+            Font f = new Font("標楷體", 14);
+            int R = 100;
+            int angle = 0;
+
+            Point center = new Point(300, 750);
+            Point pt = new Point();
+
+            pt.X = center.X + (int)(R * Math.Cos(angle * Math.PI / 180));
+            pt.Y = center.Y + (int)(R * Math.Sin(angle * Math.PI / 180));
+            g.DrawLine(new Pen(Color.Red, 5), center, pt);
+            g.DrawString(angle.ToString() + " 度", f, Brushes.Magenta, pt);
+
+            angle = 30;
+            pt.X = center.X + (int)(R * Math.Cos(angle * Math.PI / 180));
+            pt.Y = center.Y + (int)(R * Math.Sin(angle * Math.PI / 180));
+            g.DrawLine(new Pen(Color.Green, 5), center, pt);
+            g.DrawString(angle.ToString() + " 度", f, Brushes.Magenta, pt);
+
+            angle = 150;
+            pt.X = center.X + (int)(R * Math.Cos(angle * Math.PI / 180));
+            pt.Y = center.Y + (int)(R * Math.Sin(angle * Math.PI / 180));
+            g.DrawLine(new Pen(Color.Blue, 5), center, pt);
+            g.DrawString(angle.ToString() + " 度", f, Brushes.Magenta, pt);
+
+            angle = -120;
+            pt.X = center.X + (int)(R * Math.Cos(angle * Math.PI / 180));
+            pt.Y = center.Y + (int)(R * Math.Sin(angle * Math.PI / 180));
+            g.DrawLine(new Pen(Color.Cyan, 5), center, pt);
+            g.DrawString(angle.ToString() + " 度", f, Brushes.Magenta, pt);
         }
 
         /// <summary> 

@@ -316,6 +316,7 @@ namespace vcs_Draw_GraphicsPath
             //左
             roundedRect.AddLine(rect.X, rect.Bottom - cornerRadius * 2, rect.X, rect.Y + cornerRadius * 2);
             roundedRect.CloseFigure();  // 封閉圖形路徑, 將圖形的頭尾座標連接
+
             return roundedRect;
         }
 
@@ -534,7 +535,6 @@ namespace vcs_Draw_GraphicsPath
             //int R = 100;
             Pen p = new Pen(Color.Red, 1);
             Font f = new Font("標楷體", 18);
-
             g.DrawString("1", f, Brushes.Red, x_st, y_st);
 
             GraphicsPath gp1 = new GraphicsPath();
@@ -986,6 +986,7 @@ namespace vcs_Draw_GraphicsPath
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //測試 圓角矩形
         }
 
         private void button14_Click(object sender, EventArgs e)

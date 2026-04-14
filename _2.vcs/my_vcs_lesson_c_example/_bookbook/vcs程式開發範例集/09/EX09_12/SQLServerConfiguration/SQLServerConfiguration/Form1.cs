@@ -16,6 +16,7 @@ namespace SQLServerConfiguration
     public partial class Form1 : Form
     {
         string strDatabase = null;
+
         public Form1()
         {
             InitializeComponent();
@@ -50,7 +51,7 @@ namespace SQLServerConfiguration
 
             richTextBox1.Text += "你選擇了 : " + strDatabase + "\n";
             return;
-            
+
             // 連接字串
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
 
