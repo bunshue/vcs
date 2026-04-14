@@ -82,6 +82,8 @@ namespace 利用網卡序列號設計軟件註冊程序
         //註冊
         private void button2_Click(object sender, EventArgs e)
         {
+            //利用網卡號碼設計軟體註冊程序
+
             if (label5.Text == "")
             {
                 MessageBox.Show("請產生註冊碼");

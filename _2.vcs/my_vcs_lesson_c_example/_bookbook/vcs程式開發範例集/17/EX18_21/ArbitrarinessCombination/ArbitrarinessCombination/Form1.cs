@@ -84,6 +84,7 @@ namespace ArbitrarinessCombination
             for (int i = 0; i < List.Count; i++)
             {
                 listBox1.Items.Add(List[i].ToString());
+                richTextBox1.Text += List[i].ToString() + " ";
             }
             listBox1.Items.Add("Total:" + listBox1.Items.Count.ToString());//顯示一共執行了幾行
         }

@@ -21,7 +21,6 @@ namespace vcs_RegistryKey3
             InitializeComponent();
         }
 
-
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
@@ -29,16 +28,11 @@ namespace vcs_RegistryKey3
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 12;
-            y_st = 12;
-            dx = 185;
-            dy = 55;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -57,8 +51,21 @@ namespace vcs_RegistryKey3
             button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
             button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
             button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
+            richTextBox1.Size = new Size(400, 690);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(920, 750);
+            this.Text = "vcs_RegistryKey3";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -98,10 +105,6 @@ namespace vcs_RegistryKey3
 
             richTextBox1.Text += "Owner :\t" + owner_string.ToString() + "\n";
             richTextBox1.Text += "Company :\t" + company_string.ToString() + "\n";
-
-
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -126,8 +129,6 @@ namespace vcs_RegistryKey3
         {
 
         }
-
-
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -178,7 +179,6 @@ namespace vcs_RegistryKey3
         {
             string new_wallpaper_path = @"C:\Windows\Web\Wallpaper\Theme1\img3.jpg";
             SetImage(new_wallpaper_path);
-
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -192,7 +192,6 @@ namespace vcs_RegistryKey3
 
         private void button9_Click(object sender, EventArgs e)
         {
-
 
         }
 
@@ -268,6 +267,48 @@ namespace vcs_RegistryKey3
             reg.DeleteValue("Window Title", false);
             MessageBox.Show("恢復成功");
         }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            //利用註冊表設計軟體註冊程序
+
+            string company_name = "ccccc";//公司名稱
+            string user_name = "uuuuu";//使用者名稱
+            string serial_no = "sssss";//註冊碼
+
+            //實例RegistryKey 類對像
+            // Microsoft.Win32.RegistryKey retkey1 = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("software").OpenSubKey("ZHY").OpenSubKey("ZHY.INI", true);
+            Microsoft.Win32.RegistryKey retkey1 = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("software", true).CreateSubKey("ZHY").CreateSubKey("ZHY.INI");
+            foreach (string strName in retkey1.GetSubKeyNames())//判斷註冊碼是否過期
+            {
+                if (strName == serial_no)
+                {
+                    MessageBox.Show("此註冊碼已經過期");
+                    return;
+                }
+            }
+
+            //開始註冊訊息
+            Microsoft.Win32.RegistryKey retkey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("software", true).CreateSubKey("ZHY").CreateSubKey("ZHY.INI").CreateSubKey(serial_no);
+            retkey.SetValue("UserName", user_name);
+            retkey.SetValue("capataz", company_name);
+            retkey.SetValue("Code", serial_no);
+            MessageBox.Show("註冊成功，您可以使用本軟件");
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
-

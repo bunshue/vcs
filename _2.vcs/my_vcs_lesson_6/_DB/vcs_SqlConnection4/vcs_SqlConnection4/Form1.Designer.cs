@@ -1,4 +1,4 @@
-﻿namespace vcs_OleDb
+﻿namespace vcs_SqlConnection4
 {
     partial class Form1
     {
@@ -62,16 +62,13 @@
             this.button28 = new System.Windows.Forms.Button();
             this.button29 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.lb_dgv4 = new System.Windows.Forms.Label();
-            this.lb_dgv3 = new System.Windows.Forms.Label();
-            this.lb_dgv2 = new System.Windows.Forms.Label();
             this.lb_dgv1 = new System.Windows.Forms.Label();
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.lb_dgv2 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button9
@@ -91,7 +88,6 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(200, 60);
             this.button8.TabIndex = 133;
-            this.button8.Text = "OleDb 5";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -102,14 +98,13 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(200, 60);
             this.button7.TabIndex = 132;
-            this.button7.Text = "取得供應商資料";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(788, 48);
+            this.bt_clear.Location = new System.Drawing.Point(766, 46);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(66, 40);
             this.bt_clear.TabIndex = 131;
@@ -124,7 +119,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(200, 60);
             this.button0.TabIndex = 129;
-            this.button0.Text = "OleDb 0";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -135,7 +129,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(200, 60);
             this.button6.TabIndex = 128;
-            this.button6.Text = "取得部分資料";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -146,7 +139,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 127;
-            this.button1.Text = "OleDb 1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -157,7 +149,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 126;
-            this.button5.Text = "取得資料";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -168,7 +159,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 125;
-            this.button4.Text = "OleDb 4";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -179,7 +169,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 124;
-            this.button3.Text = "OleDb 3";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -190,14 +179,13 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 123;
-            this.button2.Text = "OleDb 2";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(768, 14);
+            this.richTextBox1.Location = new System.Drawing.Point(746, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 122;
@@ -210,7 +198,6 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(200, 60);
             this.button10.TabIndex = 135;
-            this.button10.Text = "(1/4)讀取";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -221,7 +208,6 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(200, 60);
             this.button11.TabIndex = 136;
-            this.button11.Text = "(2/4)新增";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -232,7 +218,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(200, 60);
             this.button12.TabIndex = 137;
-            this.button12.Text = "(3/4)修改";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -243,7 +228,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(200, 60);
             this.button13.TabIndex = 138;
-            this.button13.Text = "(4/4)刪除";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -310,7 +294,7 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(650, 12);
+            this.dataGridView1.Location = new System.Drawing.Point(628, 10);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(100, 100);
@@ -323,7 +307,6 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(200, 60);
             this.button20.TabIndex = 146;
-            this.button20.Text = "讀取EXCEL檔案";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -334,7 +317,6 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(200, 60);
             this.button21.TabIndex = 147;
-            this.button21.Text = "讀取EXCEL檔案到dataGridView";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -345,7 +327,6 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(200, 60);
             this.button22.TabIndex = 148;
-            this.button22.Text = "讀取EXCEL檔案到dataGridView";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -356,7 +337,6 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(200, 60);
             this.button23.TabIndex = 149;
-            this.button23.Text = "OleDb 6";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -367,7 +347,6 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(200, 60);
             this.button24.TabIndex = 150;
-            this.button24.Text = "OleDb 7";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
@@ -378,7 +357,6 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(200, 60);
             this.button25.TabIndex = 151;
-            this.button25.Text = "OleDb 8";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -425,81 +403,58 @@
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(650, 118);
+            this.dataGridView2.Location = new System.Drawing.Point(628, 116);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 24;
             this.dataGridView2.Size = new System.Drawing.Size(100, 100);
             this.dataGridView2.TabIndex = 156;
             // 
-            // lb_dgv4
+            // lb_dgv1
             // 
-            this.lb_dgv4.AutoSize = true;
-            this.lb_dgv4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_dgv4.Location = new System.Drawing.Point(650, 500);
-            this.lb_dgv4.Name = "lb_dgv4";
-            this.lb_dgv4.Size = new System.Drawing.Size(68, 19);
-            this.lb_dgv4.TabIndex = 178;
-            this.lb_dgv4.Text = "lb_dgv4";
-            // 
-            // lb_dgv3
-            // 
-            this.lb_dgv3.AutoSize = true;
-            this.lb_dgv3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_dgv3.Location = new System.Drawing.Point(650, 477);
-            this.lb_dgv3.Name = "lb_dgv3";
-            this.lb_dgv3.Size = new System.Drawing.Size(68, 19);
-            this.lb_dgv3.TabIndex = 177;
-            this.lb_dgv3.Text = "lb_dgv3";
+            this.lb_dgv1.AutoSize = true;
+            this.lb_dgv1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_dgv1.Location = new System.Drawing.Point(628, 236);
+            this.lb_dgv1.Name = "lb_dgv1";
+            this.lb_dgv1.Size = new System.Drawing.Size(68, 19);
+            this.lb_dgv1.TabIndex = 169;
+            this.lb_dgv1.Text = "lb_dgv1";
             // 
             // lb_dgv2
             // 
             this.lb_dgv2.AutoSize = true;
             this.lb_dgv2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_dgv2.Location = new System.Drawing.Point(650, 458);
+            this.lb_dgv2.Location = new System.Drawing.Point(628, 255);
             this.lb_dgv2.Name = "lb_dgv2";
             this.lb_dgv2.Size = new System.Drawing.Size(68, 19);
-            this.lb_dgv2.TabIndex = 176;
+            this.lb_dgv2.TabIndex = 170;
             this.lb_dgv2.Text = "lb_dgv2";
             // 
-            // lb_dgv1
+            // panel1
             // 
-            this.lb_dgv1.AutoSize = true;
-            this.lb_dgv1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_dgv1.Location = new System.Drawing.Point(650, 439);
-            this.lb_dgv1.Name = "lb_dgv1";
-            this.lb_dgv1.Size = new System.Drawing.Size(68, 19);
-            this.lb_dgv1.TabIndex = 175;
-            this.lb_dgv1.Text = "lb_dgv1";
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Location = new System.Drawing.Point(628, 299);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(100, 100);
+            this.panel1.TabIndex = 171;
             // 
-            // dataGridView4
+            // pictureBox1
             // 
-            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Location = new System.Drawing.Point(650, 330);
-            this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.RowTemplate.Height = 24;
-            this.dataGridView4.Size = new System.Drawing.Size(100, 100);
-            this.dataGridView4.TabIndex = 174;
-            // 
-            // dataGridView3
-            // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(650, 224);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.RowTemplate.Height = 24;
-            this.dataGridView3.Size = new System.Drawing.Size(100, 100);
-            this.dataGridView3.TabIndex = 173;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(628, 405);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.TabIndex = 172;
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(921, 642);
-            this.Controls.Add(this.lb_dgv4);
-            this.Controls.Add(this.lb_dgv3);
+            this.ClientSize = new System.Drawing.Size(1209, 642);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.lb_dgv2);
             this.Controls.Add(this.lb_dgv1);
-            this.Controls.Add(this.dataGridView4);
-            this.Controls.Add(this.dataGridView3);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.button29);
             this.Controls.Add(this.button28);
@@ -539,8 +494,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -582,12 +536,10 @@
         private System.Windows.Forms.Button button28;
         private System.Windows.Forms.Button button29;
         private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.Label lb_dgv4;
-        private System.Windows.Forms.Label lb_dgv3;
-        private System.Windows.Forms.Label lb_dgv2;
         private System.Windows.Forms.Label lb_dgv1;
-        private System.Windows.Forms.DataGridView dataGridView4;
-        private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.Label lb_dgv2;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

@@ -17,12 +17,18 @@ namespace vcs_ReadWritePrivateProfileString
         string filename = @"../../vcs_ReadWrite_INI5.ini";
         public string ini_filename = @"../../vcs_ReadWritePrivateProfileString.ini";
         public string path;
+
+        //C＃申明INI文件的寫操作函數WritePrivateProfileString（）： 
         //[DllImport("kernel32")]
         [DllImport("kernel32", CharSet = CharSet.Unicode)]
         private static extern long WritePrivateProfileString(string section, string key, string val, string filePath);
+        //參數說明：section：INI文件中的段落；key：INI文件中的關鍵字；val：INI文件中關鍵字的數值；filePath：INI文件的完整的路徑和名稱。
+
         //[DllImport("kernel32")]
         [DllImport("kernel32", CharSet = CharSet.Unicode)]
         private static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string filePath);
+        //參數說明：section：INI文件中的段落名稱；key：INI文件中的關鍵字；def：無法讀取時候時候的缺省數值；retVal：讀取數值；size：數值的大小；filePath：INI文件的完整路徑和名稱。
+
         public void IniWriteValue(string section, string key, string value, string path)
         {
             WritePrivateProfileString(section, key, value, path);
@@ -77,6 +83,11 @@ namespace vcs_ReadWritePrivateProfileString
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(860, 670);
+            this.Text = "vcs_ReadWritePrivateProfileString";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -161,6 +172,39 @@ namespace vcs_ReadWritePrivateProfileString
             {
                 string sResult = oTINI.getKeyValue("Test5", "1");　//Test5： Section；1：Key
                 richTextBox1.Text += sResult + "\n";
+            }
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //Write
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            //Read
+            //利用INI文件對軟件進行註冊
+            //textBox1 名稱
+            //textBox2 密碼
+            //textBox3 註冊碼
+
+            string key = "name";//INI文件中的關鍵字
+            string keyValue = "password";//INI文件中的關鍵字
+            string section = "softwre code";//INI文件中的段落
+
+            string FileName = "C:\\desck.ini";//NI文件的完整的路徑和名稱。
+
+            StringBuilder temp = new StringBuilder(200);
+
+            int i = GetPrivateProfileString(section, key, "無法讀取對應數值！", temp, 200, FileName);//判斷是否註冊過
+            if (temp.ToString() == "無法讀取對應數值！")
+            {
+                WritePrivateProfileString(section, key, keyValue, FileName);
+                MessageBox.Show("註冊成功寫入INI文件！", "訊息");
+            }
+            else
+            {
+                MessageBox.Show("此訊息已註冊過了");
             }
         }
     }
