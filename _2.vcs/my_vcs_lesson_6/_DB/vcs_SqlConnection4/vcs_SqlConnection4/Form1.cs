@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.IO;
 using System.Data.SqlClient;  // for SqlConnection, SqlCommand, SqlDataAdapter
 
+//using System.Drawing.Imaging;
+
 namespace vcs_SqlConnection4
 {
     public partial class Form1 : Form
@@ -218,24 +220,187 @@ namespace vcs_SqlConnection4
             }
         }
 
+        //對排序數據進行分析 ST
+
+        SqlConnection con;
+        SqlCommand cmd;
+
+        private void Conn()
+        {
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
+            con = new SqlConnection(cnstr);
+            con.Open();
+        }
+
+        private void ShowPic(string str)
+        {
+            Conn();
+            using (cmd = new SqlCommand("SELECT TOP 3 * FROM tb_Rectangle order by t_Num " + str, con))
+            {
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                Bitmap bitM = new Bitmap(this.panel1.Width, this.panel1.Height);
+                Graphics g = Graphics.FromImage(bitM);
+                g.Clear(Color.White);
+                for (int i = 0; i < 5; i++)
+                {
+                    g.DrawLine(new Pen(new SolidBrush(Color.Red), 2.0f), 50, this.panel1.Height - 20 - i * 20, this.panel1.Width - 40, this.panel1.Height - 20 - i * 20);
+                    g.DrawString(Convert.ToString(i * 100), new Font("Times New Roman", 10, FontStyle.Regular), new SolidBrush(Color.Black), 20, this.panel1.Height - 27 - i * 20);
+                }
+
+                for (int j = 0; j < 4; j++)
+                {
+                    g.DrawLine(new Pen(new SolidBrush(Color.Red), 1.0f), 50 + 40 * j, this.panel1.Height - 20, 50 + 40 * j, 50);
+                    if (dr.Read())
+                    {
+                        int x, y, w, h;
+                        g.DrawString(dr[0].ToString(), new Font("宋本", 8, FontStyle.Regular), new SolidBrush(Color.Black), 76 + 40 * j, this.panel1.Height - 16);
+                        x = 78 + 40 * j;
+                        y = this.panel1.Height - 20 - Convert.ToInt32((Convert.ToDouble(Convert.ToDouble(dr[1].ToString()) * 20 / 100)));
+                        w = 24;
+                        h = Convert.ToInt32(Convert.ToDouble(dr[1].ToString()) * 20 / 100);
+                        g.FillRectangle(new SolidBrush(Color.FromArgb(56, 129, 78)), x, y, w, h);
+                    }
+
+                }
+                if (str == "desc")
+                {
+                    g.DrawString("熱賣前三名", new Font("細明體", 9), new SolidBrush(Color.Red), this.panel1.Width / 2 - 26, 20);
+                }
+                else if (str == "asc")
+                {
+                    g.DrawString("熱賣後三名", new Font("細明體", 9), new SolidBrush(Color.Red), this.panel1.Width / 2 - 26, 20);
+                }
+                this.panel1.BackgroundImage = bitM;
+            }
+        }
+
         private void button0_Click(object sender, EventArgs e)
         {
+            //對排序數據進行分析 升冪
+            ShowPic("asc");
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //對排序數據進行分析 降冪
+            ShowPic("desc");        
         }
+
+        //對排序數據進行分析 SP
+
+        //6060
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //利用控制元件完成柱形圖分析
+
+            //水果出售情況統計表
+
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection con = new SqlConnection(cnstr))
+            {
+                int XValse = 20;
+                DataSet ds = new DataSet();
+                SqlCommand cmd = new SqlCommand("select * from tb_Rectangle select Sum(t_Num) from tb_Rectangle", con);
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = cmd;
+                da.Fill(ds);
+                Panel[] p = new Panel[ds.Tables[0].Rows.Count];
+                int Values = Convert.ToInt32(ds.Tables[1].Rows[0][0].ToString());
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    ds.Tables[0].Rows[i][0].ToString();
+                    float f = Convert.ToInt32(ds.Tables[0].Rows[i][1].ToString());
+                    Size s = new Size();
+                    s.Width = 30;
+                    s.Height = Convert.ToInt32(f / Values * 200);
+
+                    Point pint = new Point();
+                    pint.X = XValse;
+                    pint.Y = this.Height - 50 - s.Height;
+                    p[i] = new Panel();
+                    p[i].Location = pint;
+                    p[i].BackColor = Color.Red;
+                    p[i].Size = s;
+                    XValse += 40;
+                    Label lbl = new Label();
+                    lbl.Text = ds.Tables[0].Rows[i][0].ToString();
+                    lbl.Font = new Font("細明體", 9, FontStyle.Regular);
+                    lbl.ForeColor = Color.White;
+                    p[i].Controls.Add(lbl);
+                    this.Controls.Add(p[i]);
+                }
+            }
+        }
+
+        //6060
+
+        //SqlConnection con;
+        //SqlCommand cmd;
+
+                private void Conn2()
+        {
+		// 連接字串
+		string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
+            con = new SqlConnection(cnstr);
+            con.Open();
+        }
+
+        private void ShowPic2()
+        {
+            Conn2();
+            using (cmd = new SqlCommand("SELECT TOP 3 * FROM tb_Rectangle order by t_Num desc", con))
+            {
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                Bitmap bitM = new Bitmap(this.panel1.Width, this.panel1.Height);
+                Graphics g = Graphics.FromImage(bitM);
+                Pen p = new Pen(new SolidBrush(Color.SlateGray), 1.0f);
+                p.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+                g.Clear(Color.White);
+                for (int i = 0; i < 5; i++)
+                {
+                    g.DrawLine(p, 50, this.panel1.Height - 20 - i * 20, this.panel1.Width - 40, this.panel1.Height - 20 - i * 20);
+                    g.DrawString(Convert.ToString(i * 100), new Font("Times New Roman", 10, FontStyle.Regular), new SolidBrush(Color.Black), 20, this.panel1.Height - 27 - i * 20);
+                }
+
+                for (int j = 0; j < 4; j++)
+                {
+                    g.DrawLine(p, 50, this.panel1.Height - 20, 50, 20);
+                    if (dr.Read())
+                    {
+                        int x, y, w, h;
+                        g.DrawString(dr[0].ToString(), new Font("細明體", 9, FontStyle.Regular), new SolidBrush(Color.Black), 76 + 40 * j, this.panel1.Height - 16);
+                        x = 78 + 40 * j;
+                        y = this.panel1.Height - 20 - Convert.ToInt32((Convert.ToDouble(Convert.ToDouble(dr[1].ToString()) * 20 / 100)));
+                        w = 24;
+                        h = Convert.ToInt32(Convert.ToDouble(dr[1].ToString()) * 20 / 100);
+                        g.FillRectangle(new SolidBrush(Color.SlateGray), x, y, w, h);
+                        g.DrawString((h * 100 / 20).ToString(), new Font("細明體", 8, FontStyle.Bold), new SolidBrush(Color.Tomato), new Point(x + 4, y - 10));
+                    }
+
+                }
+                this.panel1.BackgroundImage = bitM;
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //在柱形圖的指定位置顯示說明文字
+            //商品分析
+            ShowPic2();
         }
+
+        //6060
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //利用圖表分析產品銷售走勢
+            //D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\vcs程式開發範例集\13\Ex13_11\利用圖表分析產品銷售走勢\利用圖表分析產品銷售走勢
         }
 
         private void button5_Click(object sender, EventArgs e)

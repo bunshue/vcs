@@ -416,6 +416,51 @@ namespace vcs_AForgeMathTest2
 
         private void button0_Click(object sender, EventArgs e)
         {
+            Matrix4x4Test();
+            ToArrayTest();
+
+            CreateFromRowsTest();
+            CreateFromColumnsTest();
+
+            float angle = 30f;
+
+            CreateRotationXTest(angle);
+            CreateRotationYTest(angle);
+            CreateRotationZTest(angle);
+
+            float yaw = -30;
+            float pitch = -60;
+            float roll = -90;
+            CreateFromYawPitchRollTest(yaw, pitch, roll);
+            ExtractYawPitchRollTest(yaw, pitch, roll);
+
+            float v00 = -1;
+            float v11 = -2;
+            float v22 = -3;
+            float v33 = -4;
+            CreateDiagonalTest(v00, v11, v22, v33);
+
+            //matrix.Determinant 3X3矩陣的determinant
+
+            //反矩陣 matrix.Inverse()
+            //Matrix3x3 inverse = matrix.Inverse();
+
+            //單一矩陣
+            //Matrix3x3 identity = matrix * inverse;
+            //Matrix3x3.Identity
+
+
+            //矩陣相加/減/乘
+            AddMatricesTest();
+            SubtractMatricesTest();
+            MultiplyMatricesTest();
+
+
+            //矩陣與陣列比較
+            //CompareMatrixWithArray( Matrix3x3 matrix, float[] array )
+
+            //矩陣之大約相等
+            //ApproximateEquals( Matrix3x3 matrix1, Matrix3x3 matrix2 )
         }
 
         private void button1_Click(object sender, EventArgs e)
