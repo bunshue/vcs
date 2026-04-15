@@ -28,7 +28,17 @@ namespace AmendSQLServerConfiguration
         private void Form1_Load(object sender, EventArgs e)
         {
             showTrack();
+
             types();
+
+
+            //以下為debug
+            // 資料庫檔案
+            string db_filename = "db_09_Data.mdf";
+            // 查詢字串
+            string sqlstr = "Poc_Linshi";
+
+            sql_read_database(db_filename, sqlstr, dataGridView2);
         }
 
         private void showTrack()
@@ -67,6 +77,7 @@ namespace AmendSQLServerConfiguration
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //新增
             this.button4.Enabled = true;
             this.textBox1.Enabled = true;
             this.textBox1.Text = "";
@@ -76,12 +87,14 @@ namespace AmendSQLServerConfiguration
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //修改
             this.button4.Enabled = true;
             tag = "update";
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //刪除
             if (MessageBox.Show("是否刪除", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
                 con.Open();
@@ -97,6 +110,7 @@ namespace AmendSQLServerConfiguration
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //執行
             try
             {
                 con.Open();
@@ -111,6 +125,7 @@ namespace AmendSQLServerConfiguration
                     sqlstr += "alter table tb_11 alter column " + this.textBox1.Text + " ";
                     sqlstr += "" + this.comboBox1.Text + "(" + this.textBox2.Text + ")";
                 }
+                richTextBox1.Text += "查詢字串 : " + sqlstr + "\n";
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = sqlstr;
                 cmd.Connection = con;
@@ -128,6 +143,55 @@ namespace AmendSQLServerConfiguration
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
+        }
+
+        //以下為debug ----------------------------------------------------------------------------------------------------  # 100個
+
+        void sql_read_database(string db_filename, string sqlstr, DataGridView dgv)
+        {
+            string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
+
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);
+
+            //讀取資料庫至DGV
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
+                {
+                    SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
+                    DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+                    da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+                    //da.Fill(ds, "table");  // da將查詢的結果填充至數據集ds, 指定TableName為"table"
+                    dgv.DataSource = ds.Tables[0].DefaultView;  // DGV設置數據源
+                    //dgv.DataSource = ds.Tables[0];  // DGV設置數據源, same
+
+                    /*
+                    //也可改成用 DataTable
+                    DataTable dt = new DataTable();//创建数据表
+                    da.Fill(dt);//填充数据表
+                    dgv.DataSource = dt;
+                    */
+                }
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.Message + "\n";
+            }
+        }
+
+        //以下為debug ----------------------------------------------------------------------------------------------------  # 100個
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //以下為debug
+            // 資料庫檔案
+            string db_filename = "db_09_Data.mdf";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM tb_11";
+
+            sql_read_database(db_filename, sqlstr, dataGridView1);
 
         }
     }

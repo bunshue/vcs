@@ -58,16 +58,7 @@ namespace FunctionCondition
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
         }
 
-        //------------------------------------------------------------  # 60個
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            // 資料庫檔案
-            string db_filename = "db_10_Data.mdf";
-
-            string sqlstr = "SELECT * FROM tb_01";
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-        }
+        //以下為debug ----------------------------------------------------------------------------------------------------  # 100個
 
         void sql_read_database(string db_filename, string sqlstr, DataGridView dgv)
         {
@@ -100,6 +91,17 @@ namespace FunctionCondition
             {
                 richTextBox1.Text += ex.Message + "\n";
             }
+        }
+
+        //以下為debug ----------------------------------------------------------------------------------------------------  # 100個
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // 資料庫檔案
+            string db_filename = "db_10_Data.mdf";
+
+            string sqlstr = "SELECT * FROM tb_01";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
         }
     }
 }

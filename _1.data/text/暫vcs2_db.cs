@@ -1,4 +1,49 @@
-﻿            // 資料庫檔案
+﻿        private Boolean TextInfo()
+        {
+            foreach (Control c in groupBox1.Controls)
+            {
+                if (c is TextBox)
+                {
+                    if (c.Text == "")
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+            }
+            return true;
+        }
+
+
+
+        private void clearText()
+        {
+            foreach (Control c in groupBox1.Controls)
+            {
+                if (c is TextBox)
+                {
+                    c.Text = "";
+                }
+            }
+            pictureBox1.Image = null;
+        }
+
+
+
+
+            string[] strCall = { "員工", "主幹人員", "部門經理", "經理" };
+            this.comboBox2.DataSource = strCall;
+
+
+
+
+//6060
+
+
+            // 資料庫檔案
             string db_filename = "Northwind.mdb";
 
             // 查詢字串
@@ -276,6 +321,48 @@ Login failed for user 'M-100028\070601'.
 
 
 //------------------------------------------------------------  # 60個
+
+
+            textBox1.Text="david";  // 員工姓名
+            textBox2.Text="12345";  // 基本工資
+            textBox3.Text="2000";  // 獎金
+            textBox4.Text="1000";  // 扣款
+            textBox5.Text="1500";  // 午餐
+            textBox6.Text="22222";  // 實際工資
+
+//textBox1 員工姓名
+//textBox2 基本工資
+//textBox3 獎金
+//textBox4 扣款
+//textBox5 午餐
+//textBox6 實際工資
+
+            //解析回資料庫
+            using (SqlDataAdapter da = new SqlDataAdapter())
+            {
+                SqlCommand command = new SqlCommand("INSERT INTO 帳單 " +
+                "VALUES (@員工姓名, @基本工資,@獎金,@扣款,@午餐,@實際工資)", con);
+                // Add the parameters for the InsertCommand.
+                command.Parameters.Add("@員工姓名", SqlDbType.VarChar, 10, "員工姓名");
+                command.Parameters.Add("@基本工資", SqlDbType.VarChar, 10, "基本工資");
+                command.Parameters.Add("@獎金", SqlDbType.VarChar, 10, "獎金");
+                command.Parameters.Add("@扣款", SqlDbType.VarChar, 10, "扣款");
+                command.Parameters.Add("@午餐", SqlDbType.VarChar, 10, "午餐");
+                command.Parameters.Add("@實際工資", SqlDbType.VarChar, 10, "實際工資");
+                da.InsertCommand = command;
+                MessageBox.Show("以成功能將訊息解析回資料庫");
+            }
+
+
+
+
+
+            // 資料庫檔案
+            string db_filename = "db_09_Data.mdf";
+            // 查詢字串
+            string sqlstr = "select * from 帳單";
+
+            sql_read_database(db_filename, sqlstr, dataGridView1);
 
 
 

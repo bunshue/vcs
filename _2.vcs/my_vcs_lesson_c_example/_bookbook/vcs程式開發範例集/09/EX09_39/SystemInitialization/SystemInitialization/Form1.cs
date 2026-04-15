@@ -188,16 +188,7 @@ namespace SystemInitialization
             }
         }
 
-        //------------------------------------------------------------  # 60個
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            // 資料庫檔案
-            string db_filename = "db_09_Data.mdf";
-
-            string sqlstr = "select name from tb_power";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-        }
+        //以下為debug ----------------------------------------------------------------------------------------------------  # 100個
 
         void sql_read_database(string db_filename, string sqlstr, DataGridView dgv)
         {
@@ -231,5 +222,17 @@ namespace SystemInitialization
                 richTextBox1.Text += ex.Message + "\n";
             }
         }
+
+        //以下為debug ----------------------------------------------------------------------------------------------------  # 100個
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            // 資料庫檔案
+            string db_filename = "db_09_Data.mdf";
+
+            string sqlstr = "select name from tb_power";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+        }
+
     }
 }

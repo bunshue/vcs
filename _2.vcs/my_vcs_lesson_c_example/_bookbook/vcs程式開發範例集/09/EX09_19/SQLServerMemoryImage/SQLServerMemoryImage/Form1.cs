@@ -36,14 +36,18 @@ namespace SQLServerMemoryImage
             this.dataGridView1.DataSource = DataBinding(strSql).DefaultView;
             this.button1.Enabled = false;
 
-            //textBox1.Text = "A123456";//	檔案編號
-            textBox2.Text = "1234";//	工號
-            textBox3.Text = "david";//	姓名
-            textBox4.Text = "2006/03/11";//	生日
-            textBox5.Text = "Taiwan";//	籍貫
-            textBox6.Text = "5";//	工齡
-            textBox7.Text = "研發部";//	部門名稱
-            textBox8.Text = "0912345678";//	電話
+            //textBox1.Text = "A123456";  // 檔案編號
+            textBox2.Text = "1234";  // 工號
+            textBox3.Text = "david";  // 姓名
+            textBox4.Text = "2006/03/11";  // 出生日期
+            textBox5.Text = "Taiwan";  // 籍貫
+            textBox6.Text = "5";  // 工齡
+            textBox7.Text = "研發部";  // 部門名稱
+            textBox8.Text = "0912345678";  // 電話
+            comboBox1.Text = "男";  // 性別
+
+            //string pic_filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            //this.pictureBox1.Image = Image.FromFile(pic_filename);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -251,6 +255,55 @@ namespace SQLServerMemoryImage
             this.button3.Enabled = false;
             imgBytesIn = null;
             clearText();
+        }
+
+        //以下為debug ----------------------------------------------------------------------------------------------------  # 100個
+
+        void sql_read_database(string db_filename, string sqlstr, DataGridView dgv)
+        {
+            string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
+
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);
+
+            //讀取資料庫至DGV
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
+                {
+                    SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
+                    DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+                    da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+                    //da.Fill(ds, "table");  // da將查詢的結果填充至數據集ds, 指定TableName為"table"
+                    dgv.DataSource = ds.Tables[0].DefaultView;  // DGV設置數據源
+                    //dgv.DataSource = ds.Tables[0];  // DGV設置數據源, same
+
+                    /*
+                    //也可改成用 DataTable
+                    DataTable dt = new DataTable();//创建数据表
+                    da.Fill(dt);//填充数据表
+                    dgv.DataSource = dt;
+                    */
+                }
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.Message + "\n";
+            }
+        }
+
+        //以下為debug ----------------------------------------------------------------------------------------------------  # 100個
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //以下為debug
+            // 資料庫檔案
+            string db_filename = "db_09_Data.mdf";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 員工訊息";
+
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+
         }
     }
 }

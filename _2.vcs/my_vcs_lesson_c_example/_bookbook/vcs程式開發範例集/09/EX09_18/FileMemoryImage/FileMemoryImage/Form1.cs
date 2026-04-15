@@ -7,20 +7,12 @@ using System.Text;
 using System.Linq;
 using System.Windows.Forms;
 
-using System.IO;
 using System.Data.SqlClient;
 
 namespace FileMemoryImage
 {
     public partial class Form1 : Form
     {
-        // 連接字串
-        string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
-
-        SqlConnection con;
-
-        string strPath = "";
-
         public Form1()
         {
             InitializeComponent();
@@ -28,90 +20,37 @@ namespace FileMemoryImage
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            con = new SqlConnection(cnstr);
 
-            string[] strSex = { "男", "女" };
-            this.comboBox1.DataSource = strSex;
-
-            string[] strCall = { "員工", "主幹人員", "部門經理", "經理" };
-            this.comboBox2.DataSource = strCall;
-
-            string[] strHunYin = { "已婚", "未婚", "離異" };
-            this.comboBox3.DataSource = strHunYin;
-
-            string[] strJianKang = { "很好", "良好", "一般" };
-            this.comboBox4.DataSource = strJianKang;
-
-            textBox1.Text = "A123456";//	檔案編號
-            textBox2.Text = "1234";//	工號
-            textBox3.Text = "david";//	姓名
-            textBox4.Text = "2006/03/11";//	生日
-            textBox5.Text = "Taiwan";//	籍貫
-            textBox6.Text = "5";//	工齡
-            textBox7.Text = "研發部";//	部門名稱
-            textBox8.Text = "0912345678";//	電話
         }
 
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
         {
-            this.openFileImage.ShowDialog();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (TextInfo())
-            {
-                if (insertInfo())
-                {
-                    MessageBox.Show("新增成功");
-                    //clearText();
-                }
-            }
-            else
-            {
-                MessageBox.Show("請輸入正確訊息");
-            }
-        }
+            string pic_filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            this.pictureBox1.Image = Image.FromFile(pic_filename);
 
-        private void clearText()
-        {
-            foreach (Control c in groupBox1.Controls)
-            {
-                if (c is TextBox)
-                {
-                    c.Text = "";
-                }
-            }
-            pictureBox1.Image = null;
-        }
+            textBox1.Text = "A123456";  // 檔案編號
+            textBox2.Text = "1234";  // 工號
+            textBox3.Text = "david";  // 姓名
+            textBox4.Text = "2006/03/11";  // 出生日期
+            textBox5.Text = "Taiwan";  // 籍貫
+            textBox6.Text = "5";  // 工齡
+            textBox7.Text = "研發部";  // 部門名稱
+            textBox8.Text = "0912345678";  // 電話
 
-        private Boolean TextInfo()
-        {
-            foreach (Control c in groupBox1.Controls)
-            {
-                if (c is TextBox)
-                {
-                    if (c.Text == "")
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        return true;
-                    }
-                }
-            }
-            return true;
-        }
+            comboBox1.Text = "男";  // 性別
+            comboBox2.Text = "員工";  // 技術職稱
+            comboBox3.Text = "已婚";  // 婚姻狀態
+            comboBox4.Text = "良好";  // 健康狀態
 
-        private void openFileImage_FileOk(object sender, CancelEventArgs e)
-        {
-            strPath = this.openFileImage.FileName;
-            this.pictureBox1.Image = Image.FromFile(strPath);
-        }
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
 
-        private bool insertInfo()
-        {
+            SqlConnection con = new SqlConnection(cnstr);
+
             try
             {
                 con.Open();
@@ -126,7 +65,7 @@ namespace FileMemoryImage
                 cmd.Parameters.Add("@檔案編號", SqlDbType.Text).Value = this.textBox1.Text.Trim().ToString();
                 cmd.Parameters.Add("@工號", SqlDbType.Text).Value = this.textBox2.Text.Trim().ToString();
                 cmd.Parameters.Add("@姓名", SqlDbType.Text).Value = this.textBox3.Text.Trim().ToString();
-                cmd.Parameters.Add("@照片", SqlDbType.Text).Value = strPath;
+                cmd.Parameters.Add("@照片", SqlDbType.Text).Value = pic_filename;
                 cmd.Parameters.Add("@性別", SqlDbType.Text).Value = this.comboBox1.Text.Trim().ToString();
                 cmd.Parameters.Add("@出生日期", SqlDbType.Text).Value = this.textBox4.Text.Trim().ToString();
                 cmd.Parameters.Add("@籍貫", SqlDbType.Text).Value = this.textBox5.Text.Trim().ToString();
@@ -138,13 +77,12 @@ namespace FileMemoryImage
                 cmd.Parameters.Add("@健康狀態", SqlDbType.Text).Value = this.comboBox4.Text.Trim().ToString();
                 cmd.ExecuteNonQuery();
                 con.Close();
-                return true;
+                MessageBox.Show("新增成功");
             }
             catch (Exception ey)
             {
-                return false;
+                MessageBox.Show("新增失敗");
             }
-
         }
 
         //#region//存取器
@@ -227,7 +165,57 @@ namespace FileMemoryImage
             get { return 健康狀態; }
             set { 健康狀態 = value; }
         }
+
         //#endregion
+
+
+        //以下為debug ----------------------------------------------------------------------------------------------------  # 100個
+
+        void sql_read_database(string db_filename, string sqlstr, DataGridView dgv)
+        {
+            string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
+
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);
+
+            //讀取資料庫至DGV
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
+                {
+                    SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
+                    DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+                    da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+                    //da.Fill(ds, "table");  // da將查詢的結果填充至數據集ds, 指定TableName為"table"
+                    dgv.DataSource = ds.Tables[0].DefaultView;  // DGV設置數據源
+                    //dgv.DataSource = ds.Tables[0];  // DGV設置數據源, same
+
+                    /*
+                    //也可改成用 DataTable
+                    DataTable dt = new DataTable();//创建数据表
+                    da.Fill(dt);//填充数据表
+                    dgv.DataSource = dt;
+                    */
+                }
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.Message + "\n";
+            }
+        }
+
+        //以下為debug ----------------------------------------------------------------------------------------------------  # 100個
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //以下為debug
+            // 資料庫檔案
+            string db_filename = "db_09_Data.mdf";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 檔案訊息";
+
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+        }
     }
 }
-
