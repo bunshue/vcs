@@ -250,7 +250,7 @@ namespace vcs_SqlConnection4
             using (SqlConnection con = new SqlConnection(cnstr))
             {
                 DataSet ds = new DataSet();
-                SqlCommand cmd = new SqlCommand("select * from tb_Rectangle select Sum(t_Num) from tb_Rectangle", con);
+                SqlCommand cmd = new SqlCommand("SELECT * FROM tb_Rectangle SELECT SUM(t_Num) FROM tb_Rectangle", con);
                 SqlDataAdapter da = new SqlDataAdapter();
                 da.SelectCommand = cmd;
                 da.Fill(ds);
@@ -286,7 +286,7 @@ namespace vcs_SqlConnection4
             con = new SqlConnection(cnstr);
             con.Open();
 
-            using (cmd = new SqlCommand("SELECT TOP 3 * FROM tb_Rectangle order by t_Num DESC", con))//降冪
+            using (cmd = new SqlCommand("SELECT TOP 3 * FROM tb_Rectangle ORDER BY t_Num DESC", con))//降冪
             {
                 SqlDataReader dr = cmd.ExecuteReader();
 
@@ -311,68 +311,55 @@ namespace vcs_SqlConnection4
         {
             //利用圖表分析彩票中獎情況
 
-            SqlConnection con;
-            SqlCommand cmd;
-            SqlDataAdapter da;
-            DataSet ds;
-
             //t_year 在 2005/4/1 ~ 2006/10/1 有資料
             string time_st = "2005/8/15";
             string time_sp = "2006/4/15";
 
             string sqlstr = "SELECT * FROM tb_lottery WHERE t_year BETWEEN '" + time_st + "' AND '" + time_sp + "' ORDER BY t_year";
 
-            try
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
+            SqlConnection con = new SqlConnection(cnstr);
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand(sqlstr, con);
+            SqlDataReader dr = cmd.ExecuteReader();
+            int i = 0;
+            string str = null;
+            float f = 0.0f;
+            while (dr.Read())
             {
-                // 連接字串
-                string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
-                con = new SqlConnection(cnstr);
-                con.Open();
+                i++;
 
-                cmd = new SqlCommand(sqlstr, con);
-                SqlDataReader dr = cmd.ExecuteReader();
-                int i = 0;
-                string str = null;
-                float f = 0.0f;
-                while (dr.Read())
-                {
-                    i++;
+                richTextBox1.Text += dr[0].ToString() + "\t" + Convert.ToDouble(dr[1].ToString()) + "\n";
+                richTextBox1.Text += dr[0].ToString().Substring(0, 7) + "月---" + "\n";
 
-                    richTextBox1.Text += dr[0].ToString() + "\t" + Convert.ToDouble(dr[1].ToString()) + "\n";
-                    richTextBox1.Text += dr[0].ToString().Substring(0, 7) + "月---" + "\n";
+                richTextBox1.Text += dr[1].ToString() + "\n";
 
-                    richTextBox1.Text += dr[1].ToString() + "\n";
-
-                    str += dr[1].ToString() + "#";
-                    f += Convert.ToSingle(dr[1].ToString());
-                }
-                dr.Close();
-
-                richTextBox1.Text += "str = " + str + "\n";
-                richTextBox1.Text += "總數 : " + f + "\n";
-
-                string[] strCount = str.Split('#');
-                int[] ICount = new int[strCount.Length];
-                for (int l = 0; l < strCount.Length - 1; l++)
-                {
-                    ICount[l] = Convert.ToInt32(strCount[l]);
-                    richTextBox1.Text += "strCount[l] = " + strCount[l] + "\tICount[l] = " + ICount[l] + "\n";
-                }
-
-                Point[] P = new Point[ICount.Length - 1];
-                for (int j = 0; j < ICount.Length - 1; j++)
-                {
-                    P[j].X = 35 + 28 * j;
-                    P[j].Y = this.panel1.Height - 20 - Convert.ToInt32(ICount[j] / f * (this.panel1.Height + 20));
-                }
-                f = 0.0f;
-                str = null;
+                str += dr[1].ToString() + "#";
+                f += Convert.ToSingle(dr[1].ToString());
             }
-            catch
+            dr.Close();
+
+            richTextBox1.Text += "str = " + str + "\n";
+            richTextBox1.Text += "總數 : " + f + "\n";
+
+            string[] strCount = str.Split('#');
+            int[] ICount = new int[strCount.Length];
+            for (int l = 0; l < strCount.Length - 1; l++)
             {
-                MessageBox.Show("此範圍內沒有任何訊息！！！");
-                return;
+                ICount[l] = Convert.ToInt32(strCount[l]);
+                richTextBox1.Text += "strCount[l] = " + strCount[l] + "\tICount[l] = " + ICount[l] + "\n";
             }
+
+            Point[] P = new Point[ICount.Length - 1];
+            for (int j = 0; j < ICount.Length - 1; j++)
+            {
+                P[j].X = 35 + 28 * j;
+                P[j].Y = this.panel1.Height - 20 - Convert.ToInt32(ICount[j] / f * (this.panel1.Height + 20));
+            }
+            f = 0.0f;
+            str = null;
         }
 
         //------------------------------------------------------------  # 60個
@@ -444,8 +431,7 @@ namespace vcs_SqlConnection4
                 g.DrawLine(mypen1, 60, y, 540, y);
 
                 //x軸
-                String[] n = {"  一月", "  二月", "  三月", "  四月", "  五月", "  六月", "  七月",
-                     "  八月", "  九月", "  十月", "十一月", "十二月"};
+                String[] n = { "  一月", "  二月", "  三月", "  四月", "  五月", "  六月", "  七月", "  八月", "  九月", "  十月", "十一月", "十二月" };
                 x = 35;
                 for (int i = 0; i < 12; i++)
                 {
@@ -454,8 +440,7 @@ namespace vcs_SqlConnection4
                 }
 
                 //y軸
-                String[] m = {"900人", " 800人", " 700人", "600人", " 500人", " 400人", " 300人", " 200人",
-                     " 100人"};
+                String[] m = { "900人", " 800人", " 700人", "600人", " 500人", " 400人", " 300人", " 200人", " 100人" };
                 y = 100;
                 for (int i = 0; i < 9; i++)
                 {
@@ -566,8 +551,7 @@ namespace vcs_SqlConnection4
                 x = x + (this.Width - 34) / 14;
             }
             //Y軸
-            String[] n = {" 1月", " 2月", " 3月", " 4月", " 5月", " 6月", " 7月",
-                     " 8月", " 9月", "10月", "11月", "12月"};
+            String[] n = { " 1月", " 2月", " 3月", " 4月", " 5月", " 6月", " 7月", " 8月", " 9月", "10月", "11月", "12月" };
             x = this.Width / 10 - 16;
             for (int i = 0; i < 12; i++)
             {
@@ -582,8 +566,7 @@ namespace vcs_SqlConnection4
             }
             //X軸
             int h = k;
-            String[] m = {"5500","5000","4500", "4000", "3500", "3000", "2500", "2000", "1500", "1000",
-                     "  500"};
+            String[] m = { "5500", "5000", "4500", "4000", "3500", "3000", "2500", "2000", "1500", "1000", "  500" };
             k = y * 12;
             for (int i = 0; i < 11; i++)
             {
@@ -652,24 +635,7 @@ namespace vcs_SqlConnection4
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //利用餅型圖分析公司男女比率
 
-            // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
-            SqlConnection con = new SqlConnection(cnstr);
-            con.Open();
-
-            // 查詢字串
-            string sqlstr = "SELECT sex,COUNT(sex) num FROM tb_sex group by sex";
-
-            using (SqlCommand cmd = new SqlCommand(sqlstr, con))
-            {
-                SqlDataReader dr = cmd.ExecuteReader();
-                while (dr.Read())
-                {
-                    richTextBox1.Text += dr[0].ToString() + "\t" + dr[1].ToString() + "\n";
-                }
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -684,6 +650,12 @@ namespace vcs_SqlConnection4
         {
             //利用餅型圖分析產品市場佔有率
 
+            // debug ST
+            string db_filename = "db_13.mdf";
+            string sqlstr = "SELECT * FROM tb_product";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            // debug SP
+
             ht.Clear();
 
             // 連接字串
@@ -691,13 +663,14 @@ namespace vcs_SqlConnection4
             SqlConnection con = new SqlConnection(cnstr);
             con.Open();
 
-            using (SqlCommand cmd = new SqlCommand("select Sum(t_Num)  from tb_product", con))
+            using (SqlCommand cmd = new SqlCommand("SELECT SUM(t_Num) FROM tb_product", con))
             {
                 SumNum = Convert.ToInt32(cmd.ExecuteScalar());
             }
 
             Random rnd = new Random();
-            using (cmd = new SqlCommand("select t_Name,sum(t_Num) as Num  from tb_product group by t_Name", con))
+
+            using (cmd = new SqlCommand("SELECT t_Name, SUM(t_Num) AS Num FROM tb_product GROUP BY t_Name", con))
             {
                 Graphics g2 = this.pictureBox1.CreateGraphics();
                 SqlDataReader dr = cmd.ExecuteReader();
@@ -733,31 +706,9 @@ namespace vcs_SqlConnection4
 
         //------------------------------------------------------------  # 60個
 
-        private void ShowPic5(int Sum)
-        {
-            using (cmd = new SqlCommand("select t_Point,sum(t_Num) from tb_manpower group by t_Point order by sum(t_Num) DESC", con))//降冪
-            {
-                Bitmap bmp = new Bitmap(this.panel1.Width, this.panel1.Height);
-                Graphics g = Graphics.FromImage(bmp);
-                cmd.Connection.Open();
-                SqlDataReader dr = cmd.ExecuteReader();
-                while (dr.Read())
-                {
-                    richTextBox1.Text += dr[0].ToString() + "\t" + Convert.ToDouble(dr[1].ToString()) + "\n";
-                    float f = Convert.ToSingle(dr[1]) / Sum;
-                    string str = dr[0].ToString();
-                    draw_sub_picture(g, f, str);
-                }
-                g.DrawLine(new Pen(Color.Black), 0, this.panel1.Height / 2, this.panel1.Width, this.panel1.Height / 2);
-                g.DrawLine(new Pen(Color.Black), this.panel1.Width / 2, 0, this.panel1.Width / 2, this.panel1.Height);
-                this.panel1.BackgroundImage = bmp;
-                dr.Close();
-                con.Close();
-            }
-        }
-
         private void draw_sub_picture(Graphics g, float f, string str)
         {
+            richTextBox1.Text += "ConutNum = " + ConutNum.ToString() + "\t" + f.ToString() + "\t" + str + "\n";
             if (ConutNum == 0)
             {
                 g.FillPie(new SolidBrush(Color.Black), 0, 0, (this.panel1.Width) / 2, (this.panel1.Height - 10) / 2, 0, 360 * f);
@@ -793,8 +744,6 @@ namespace vcs_SqlConnection4
         // 連接字串
         string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
 
-        //SqlConnection con;
-        //SqlCommand cmd;
         static int ConutNum = 0;
         static float floatNum = 0.0f;
 
@@ -802,19 +751,45 @@ namespace vcs_SqlConnection4
         {
             //利用多餅型圖分析企業人力資源情況
 
-            con = new SqlConnection(cnstr);
+            // debug ST
+            string db_filename = "db_13.mdf";
+            string sqlstr = "SELECT * FROM tb_manpower";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            // debug SP
 
-            using (cmd = new SqlCommand("select sum(t_Num) from tb_manpower ", con))
+            SqlConnection con = new SqlConnection(cnstr);
+
+            int Sum = 100;
+            using (SqlCommand cmd = new SqlCommand("SELECT SUM(t_Num) FROM tb_manpower ", con))
             {
                 con.Open();
-                int Sum = Convert.ToInt32(cmd.ExecuteScalar());
+                Sum = Convert.ToInt32(cmd.ExecuteScalar());
+                richTextBox1.Text += "Sum = " + Sum.ToString() + "\n";
                 con.Close();
-                ShowPic5(Sum);
+            }
+
+            richTextBox1.Text += "Sum = " + Sum.ToString() + "\n";
+
+            using (SqlCommand cmd = new SqlCommand("SELECT t_Point, SUM(t_Num) FROM tb_manpower GROUP BY t_Point ORDER BY SUM(t_Num) DESC", con))//降冪
+            {
+                Bitmap bmp = new Bitmap(this.panel1.Width, this.panel1.Height);
+                Graphics g = Graphics.FromImage(bmp);
+                cmd.Connection.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    richTextBox1.Text += dr[0].ToString() + "\t" + Convert.ToDouble(dr[1].ToString()) + "\n";
+                    float f = Convert.ToSingle(dr[1]) / Sum;
+                    string str = dr[0].ToString();
+                    draw_sub_picture(g, f, str);
+                }
+                g.DrawLine(new Pen(Color.Black), 0, this.panel1.Height / 2, this.panel1.Width, this.panel1.Height / 2);
+                g.DrawLine(new Pen(Color.Black), this.panel1.Width / 2, 0, this.panel1.Width / 2, this.panel1.Height);
+                this.panel1.BackgroundImage = bmp;
+                dr.Close();
+                con.Close();
             }
         }
-
-
-
 
         //------------------------------------------------------------  # 60個
 
@@ -908,27 +883,27 @@ namespace vcs_SqlConnection4
             //sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "";
 
-            sqlstr = "select Sum(t_Num) from tb_Rectangle";
+            sqlstr = "SELECT SUM(t_Num) FROM tb_Rectangle";
             sql_read_database(db_filename, sqlstr, dataGridView2);
             lb_dgv2.Text = "";
 
-            sqlstr = "select * from tb_Rectangle select Sum(t_Num) from tb_Rectangle";
+            sqlstr = "SELECT * FROM tb_Rectangle SELECT SUM(t_Num) FROM tb_Rectangle";
             sql_read_database(db_filename, sqlstr, dataGridView1);
             //lb_dgv3.Text = "";
 
             string sort_type = "ASC";  // 升冪
             sort_type = "DESC";  // 降冪
-            //string sqlstr = "SELECT TOP 3 * FROM tb_Rectangle order by t_Num " + sort_type;
+            //string sqlstr = "SELECT TOP 3 * FROM tb_Rectangle ORDER BY t_Num " + sort_type;
             */
 
 
             db_filename = "db_13.mdf";
-            //sqlstr = "select * from tb_lottery";
-            sqlstr = "select * from tb_curve";
+            //sqlstr = "SELECT * FROM tb_lottery";
+            sqlstr = "SELECT * FROM tb_curve";
             sql_read_database(db_filename, sqlstr, dataGridView1);
 
 
-            sqlstr = "select Years from tb_curve";
+            sqlstr = "SELECT Years FROM tb_curve";
             sql_read_database(db_filename, sqlstr, dataGridView2);
 
 
@@ -953,4 +928,15 @@ namespace vcs_SqlConnection4
 /*  可搬出
 
  */
+
+
+/*
+            // 分析公司男女比率
+            string db_filename = "db_13.mdf";
+            string sqlstr = "SELECT * FROM tb_sex";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            sqlstr = "SELECT sex, COUNT(sex) num FROM tb_sex GROUP BY sex";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+*/
+
 
