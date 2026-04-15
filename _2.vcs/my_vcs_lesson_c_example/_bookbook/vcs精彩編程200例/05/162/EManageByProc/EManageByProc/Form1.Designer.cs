@@ -57,6 +57,7 @@
             this.dgvInfo = new System.Windows.Forms.DataGridView();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInfo)).BeginInit();
@@ -323,32 +324,43 @@
             this.dgvInfo.Location = new System.Drawing.Point(4, 191);
             this.dgvInfo.Name = "dgvInfo";
             this.dgvInfo.RowTemplate.Height = 23;
-            this.dgvInfo.Size = new System.Drawing.Size(522, 184);
+            this.dgvInfo.Size = new System.Drawing.Size(742, 283);
             this.dgvInfo.TabIndex = 7;
             this.dgvInfo.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInfo_CellClick);
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(549, 96);
+            this.richTextBox1.Location = new System.Drawing.Point(752, 96);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(487, 530);
+            this.richTextBox1.Size = new System.Drawing.Size(487, 629);
             this.richTextBox1.TabIndex = 9;
             this.richTextBox1.Text = "";
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(4, 381);
+            this.dataGridView1.Location = new System.Drawing.Point(4, 480);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(522, 245);
+            this.dataGridView1.Size = new System.Drawing.Size(742, 245);
             this.dataGridView1.TabIndex = 10;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(752, 22);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(93, 53);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "test";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1048, 638);
+            this.ClientSize = new System.Drawing.Size(1251, 737);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox2);
@@ -399,6 +411,7 @@
         private System.Windows.Forms.DataGridView dgvInfo;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button button1;
     }
 }
 

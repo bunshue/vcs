@@ -17,7 +17,6 @@ namespace Player
     {
         private Stopwatch stopwatch = null;
 
-        // Class constructor
         public MainForm()
         {
             InitializeComponent();
@@ -25,7 +24,7 @@ namespace Player
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-
+            lb_fps.Text = "";
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -117,7 +116,7 @@ namespace Player
                     stopwatch.Stop();
 
                     float fps = 1000.0f * framesReceived / stopwatch.ElapsedMilliseconds;
-                    fpsLabel.Text = fps.ToString("F2") + " fps";
+                    lb_fps.Text = fps.ToString("F2") + " fps";
 
                     stopwatch.Reset();
                     stopwatch.Start();
@@ -210,8 +209,5 @@ namespace Player
         {
             this.Close();
         }
-
-
-
     }
 }

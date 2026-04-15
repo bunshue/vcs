@@ -40,6 +40,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.bt_exit = new System.Windows.Forms.Button();
+            this.lb_fps = new System.Windows.Forms.Label();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -145,11 +146,23 @@
             this.bt_exit.UseVisualStyleBackColor = true;
             this.bt_exit.Click += new System.EventHandler(this.bt_exit_Click);
             // 
+            // lb_fps
+            // 
+            this.lb_fps.AutoSize = true;
+            this.lb_fps.Font = new System.Drawing.Font("細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_fps.ForeColor = System.Drawing.Color.Black;
+            this.lb_fps.Location = new System.Drawing.Point(12, 9);
+            this.lb_fps.Name = "lb_fps";
+            this.lb_fps.Size = new System.Drawing.Size(54, 27);
+            this.lb_fps.TabIndex = 240;
+            this.lb_fps.Text = "fps";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 528);
+            this.Controls.Add(this.lb_fps);
             this.Controls.Add(this.bt_exit);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -183,6 +196,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button bt_exit;
+        private System.Windows.Forms.Label lb_fps;
     }
 }
 

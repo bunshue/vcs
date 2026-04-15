@@ -91,6 +91,20 @@ namespace vcs_AForgeMathTest
             richTextBox1.Clear();
         }
 
+        public void print_matrix3(Matrix3x3 matrix)
+        {
+            float[] array = matrix.ToArray();
+
+            for (int i = 0; i < 9; i++)
+            {
+                richTextBox1.Text += array[i];
+                if ((i % 3) == 2)
+                    richTextBox1.Text += "\n";
+                else
+                    richTextBox1.Text += "\t";
+            }
+        }
+
         public void Matrix3x3Test()
         {
             // prepare 1st argument
@@ -191,8 +205,17 @@ namespace vcs_AForgeMathTest
 
         public void CreateRotationYTest(float angle)
         {
+            richTextBox1.Text = "CreateRotationYTest, angle = " + angle + "\n";
+
             float radians = (float)(angle * System.Math.PI / 180);
-            Matrix3x3 matrix = Matrix3x3.CreateRotationY(radians);
+
+            Matrix3x3 matrix = new Matrix3x3();
+            richTextBox1.Text += "matrix :\n";
+            print_matrix3(matrix);
+
+            matrix = Matrix3x3.CreateRotationY(radians);
+            richTextBox1.Text += "matrix :\n";
+            print_matrix3(matrix);
 
             float sin = (float)System.Math.Sin(radians);
             float cos = (float)System.Math.Cos(radians);
@@ -207,8 +230,17 @@ namespace vcs_AForgeMathTest
 
         public void CreateRotationXTest(float angle)
         {
+            richTextBox1.Text = "CreateRotationXTest, angle = " + angle + "\n";
+
             float radians = (float)(angle * System.Math.PI / 180);
-            Matrix3x3 matrix = Matrix3x3.CreateRotationX(radians);
+
+            Matrix3x3 matrix = new Matrix3x3();
+            richTextBox1.Text += "matrix :\n";
+            print_matrix3(matrix);
+
+            matrix = Matrix3x3.CreateRotationX(radians);
+            richTextBox1.Text += "matrix :\n";
+            print_matrix3(matrix);
 
             float sin = (float)System.Math.Sin(radians);
             float cos = (float)System.Math.Cos(radians);
@@ -223,8 +255,17 @@ namespace vcs_AForgeMathTest
 
         public void CreateRotationZTest(float angle)
         {
+            richTextBox1.Text = "CreateRotationZTest, angle = " + angle + "\n";
+
             float radians = (float)(angle * System.Math.PI / 180);
-            Matrix3x3 matrix = Matrix3x3.CreateRotationZ(radians);
+
+            Matrix3x3 matrix = new Matrix3x3();
+            richTextBox1.Text += "matrix :\n";
+            print_matrix3(matrix);
+
+            matrix = Matrix3x3.CreateRotationZ(radians);
+            richTextBox1.Text += "matrix :\n";
+            print_matrix3(matrix);
 
             float sin = (float)System.Math.Sin(radians);
             float cos = (float)System.Math.Cos(radians);
@@ -321,73 +362,12 @@ namespace vcs_AForgeMathTest
             matrix.V21 = v21;
             matrix.V22 = v22;
 
-            Matrix3x3 inverse = matrix.Inverse();
-            Matrix3x3 identity = matrix * inverse;
+            Matrix3x3 inverse = matrix.Inverse();  // 反矩陣
+            Matrix3x3 identity = matrix * inverse;  // 矩陣 * 反矩陣
+
+            //Matrix3x3.Identity  // 單一矩陣
 
             //Assert.AreEqual<bool>( true, ApproximateEquals( identity, Matrix3x3.Identity ) );
-        }
-
-        public void AddMatricesTest()
-        {
-            Matrix3x3 expectedResult = new Matrix3x3();
-
-            expectedResult.V00 = 3;
-            expectedResult.V01 = 3;
-            expectedResult.V02 = 6;
-
-            expectedResult.V10 = 4;
-            expectedResult.V11 = 5;
-            expectedResult.V12 = 3;
-
-            expectedResult.V20 = 4;
-            expectedResult.V21 = 5;
-            expectedResult.V22 = 3;
-
-            Matrix3x3 result = a1 + a2;
-
-            //Assert.AreEqual<bool>( true, ApproximateEquals( result, expectedResult ) );
-        }
-
-        public void SubtractMatricesTest()
-        {
-            Matrix3x3 expectedResult = new Matrix3x3();
-
-            expectedResult.V00 = -1;
-            expectedResult.V01 = 1;
-            expectedResult.V02 = 0;
-
-            expectedResult.V10 = 2;
-            expectedResult.V11 = -1;
-            expectedResult.V12 = -1;
-
-            expectedResult.V20 = -2;
-            expectedResult.V21 = 1;
-            expectedResult.V22 = 1;
-
-            Matrix3x3 result = a1 - a2;
-
-            //Assert.AreEqual<bool>( true, ApproximateEquals( result, expectedResult ) );
-        }
-
-        public void MultiplyMatricesTest()
-        {
-            Matrix3x3 expectedResult = new Matrix3x3();
-
-            expectedResult.V00 = 13;
-            expectedResult.V01 = 13;
-            expectedResult.V02 = 10;
-
-            expectedResult.V10 = 11;
-            expectedResult.V11 = 11;
-            expectedResult.V12 = 14;
-
-            expectedResult.V20 = 11;
-            expectedResult.V21 = 14;
-            expectedResult.V22 = 11;
-
-            Matrix3x3 result = a1 * a2;
-
-            //Assert.AreEqual<bool>( true, ApproximateEquals( result, expectedResult ) );
         }
 
         private void CompareMatrixWithArray(Matrix3x3 matrix, float[] array)
@@ -402,16 +382,15 @@ namespace vcs_AForgeMathTest
 
         private bool ApproximateEquals(Matrix3x3 matrix1, Matrix3x3 matrix2)
         {
-            // TODO: better algorithm should be put into the framework actually
+            //兩個矩陣的每個元素是否都很接近
+
             return (
                 (System.Math.Abs(matrix1.V00 - matrix2.V00) <= Epsilon) &&
                 (System.Math.Abs(matrix1.V01 - matrix2.V01) <= Epsilon) &&
                 (System.Math.Abs(matrix1.V02 - matrix2.V02) <= Epsilon) &&
-
                 (System.Math.Abs(matrix1.V10 - matrix2.V10) <= Epsilon) &&
                 (System.Math.Abs(matrix1.V11 - matrix2.V11) <= Epsilon) &&
                 (System.Math.Abs(matrix1.V12 - matrix2.V12) <= Epsilon) &&
-
                 (System.Math.Abs(matrix1.V20 - matrix2.V20) <= Epsilon) &&
                 (System.Math.Abs(matrix1.V21 - matrix2.V21) <= Epsilon) &&
                 (System.Math.Abs(matrix1.V22 - matrix2.V22) <= Epsilon)
@@ -426,11 +405,21 @@ namespace vcs_AForgeMathTest
             CreateFromRowsTest();
             CreateFromColumnsTest();
 
-            float angle = 30f;
+            float angle = 45f;
 
             CreateRotationXTest(angle);
+
             CreateRotationYTest(angle);
+            
             CreateRotationZTest(angle);
+
+            //第一张是绕x轴旋转pitch， 上下點頭
+            //第二张绕y轴旋转yaw，左右搖頭
+            //第三张是绕z轴旋转roll。
+            //绕三个轴的旋转值pitch，yaw，roll来自航空界的叫法，翻译为俯仰角，偏航角，翻滚角，非常形象
+            //roll:是卷；滚动，转动；辗的意思；
+            //yaw是（火箭、飞机、宇宙飞船等）偏航的意思；
+            //pitch是倾斜；投掷；搭帐篷；坠落的意思；
 
             float yaw = -30;
             float pitch = -60;
@@ -452,12 +441,16 @@ namespace vcs_AForgeMathTest
             //Matrix3x3 identity = matrix * inverse;
             //Matrix3x3.Identity
 
-
             //矩陣相加/減/乘
-            AddMatricesTest();
-            SubtractMatricesTest();
-            MultiplyMatricesTest();
 
+            //矩陣+矩陣
+            Matrix3x3 result1 = a1 + a2;
+
+            //矩陣-矩陣
+            Matrix3x3 result2 = a1 - a2;
+
+            //矩陣X矩陣
+            Matrix3x3 result3 = a1 * a2;
 
             //矩陣與陣列比較
             //CompareMatrixWithArray( Matrix3x3 matrix, float[] array )

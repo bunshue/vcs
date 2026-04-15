@@ -23,26 +23,24 @@ namespace ByteImage
         {
             string pic_filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             pictureBox1.Image = Image.FromFile(pic_filename);
-
-            show_data();
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //记录选择的用户名
-            string strName = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+            string user_name = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
 
-            richTextBox1.Text += "CellClick : " + strName + "\n";
-
-            if (strName != "")
+            if (user_name != "")
             {
+                richTextBox1.Text += "你點選的用戶名 : " + user_name + "\n";
+
                 // 連接字串
                 string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
 
                 SqlConnection cn = new SqlConnection(cnstr);     //实例化数据库连接对象
 
                 // 查詢字串
-                string sqlstr = "select * from tb_Image where name='" + strName + "'";
+                string sqlstr = "SELECT * FROM tb_Image WHERE name='" + user_name + "'";
                 richTextBox1.Text += sqlstr + "\n";
 
                 SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
@@ -55,6 +53,7 @@ namespace ByteImage
                 //使用数据库中存储的二进制头像实例化内存数据流
                 MemoryStream MStream = new MemoryStream((byte[])ds.Tables[0].Rows[0][2]); // 圖片
                 pictureBox1.Image = Image.FromStream(MStream);  //显示用户头像
+
             }
         }
 
@@ -62,29 +61,16 @@ namespace ByteImage
         {
             richTextBox1.Text += "添加用戶訊息\n";
 
+            //選擇的頭像名稱
             string pic_filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            string user_name = "david wang aaaccc";  // 用戶名稱
+
+            //string user_name = "david wang aaaccc";  // 用戶名稱
+            string user_name = textBox1.Text;  // 用戶名稱
 
             //添加用户信息
-            if (AddInfo(user_name, pic_filename))
-            {
-                richTextBox1.Text += "加入用戶信息 OK\n";
-            }
-            else
-            {
-                richTextBox1.Text += "加入用戶信息 NG, 已經存在該用戶\n";
-            }
 
-            show_data();
-        }
-
-        // 添加用户信息
-        /// <param name="strName">用户名称</param>
-        /// <param name="strImage">选择的头像名称</param>
-        private bool AddInfo(string strName, string strImage)
-        {
-            richTextBox1.Text += "用戶名稱 : " + strName + "\n";
-            richTextBox1.Text += "影像檔案 : " + strImage + "\n";
+            richTextBox1.Text += "用戶名稱 : " + user_name + "\n";
+            richTextBox1.Text += "影像檔案 : " + pic_filename + "\n";
 
             // 連接字串
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
@@ -92,26 +78,27 @@ namespace ByteImage
             SqlConnection cn = new SqlConnection(cnstr);
 
             // 查詢字串
-            string sqlstr = "select * from tb_Image where name='" + strName + "'";
+            string sqlstr = "SELECT * FROM tb_Image WHERE name='" + user_name + "'";
             SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
             DataSet ds = new DataSet();                   //实例化数据集对象
             da.Fill(ds);                       //填充数据集
             if (ds.Tables[0].Rows.Count <= 0)
             {
-                FileStream FStream = new FileStream(strImage, FileMode.Open, FileAccess.Read);
+                FileStream FStream = new FileStream(pic_filename, FileMode.Open, FileAccess.Read);
                 BinaryReader BReader = new BinaryReader(FStream);
                 byte[] byteImage = BReader.ReadBytes((int)FStream.Length);
                 SqlCommand sqlcmd = new SqlCommand("insert into tb_Image(name,photo) values(@name,@photo)", cn);
-                sqlcmd.Parameters.Add("@name", SqlDbType.VarChar, 50).Value = strName;
+                sqlcmd.Parameters.Add("@name", SqlDbType.VarChar, 50).Value = user_name;
                 sqlcmd.Parameters.Add("@photo", SqlDbType.Image).Value = byteImage;
                 cn.Open();
                 sqlcmd.ExecuteNonQuery();
                 cn.Close();
-                return true;
+                richTextBox1.Text += "加入用戶信息 OK\n";
+
             }
             else
             {
-                return false;
+                richTextBox1.Text += "加入用戶信息 NG, 已經存在該用戶\n";
             }
         }
 
@@ -120,14 +107,7 @@ namespace ByteImage
 
         }
 
-        void show_data()
-        {
-            // 資料庫檔案
-            string db_filename = "db_TomeTwo.mdf";
-            //da = new SqlDataAdapter("select name as 用户名称 from tb_Image", cn);
-            string sqlstr = string.Format("SELECT * FROM tb_Image");
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-        }
+        //以下為debug ----------------------------------------------------------------------------------------------------  # 100個
 
         void sql_read_database(string db_filename, string sqlstr, DataGridView dgv)
         {
@@ -160,6 +140,19 @@ namespace ByteImage
             {
                 richTextBox1.Text += ex.Message + "\n";
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //以下為debug
+            // 資料庫檔案
+            string db_filename = "db_TomeTwo.mdf";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM tb_Image";
+            //da = new SqlDataAdapter("select name as 用户名称 from tb_Image", cn);
+
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
         }
     }
 }

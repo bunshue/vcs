@@ -365,7 +365,9 @@ namespace vcs_SqlConnection1
 
             using (SqlConnection cn = new SqlConnection(cnstr))
             {
-                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM 員工表", cn);
+                // 查詢字串
+                sqlstr = "SELECT * FROM 員工表";
+                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
 
                 //產生結果集
                 DataTable dt = new DataTable();
@@ -837,7 +839,7 @@ namespace vcs_SqlConnection1
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             //顯示學生編號排在前10位，而且具有相同名字的學生個數
-            sqlstr = "SELECT 學生姓名, count(*) AS 相同數量 FROM (SELECT top 10 學生姓名 FROM tb_Stu order BY 學生編號 ASC )AS T GROUP BY 學生姓名";
+            sqlstr = "SELECT 學生姓名, COUNT(*) AS 相同數量 FROM (SELECT top 10 學生姓名 FROM tb_Stu order BY 學生編號 ASC )AS T GROUP BY 學生姓名";
             sql_read_database(db_filename, sqlstr, dataGridView3);
             lb_dgv3.Text = "";
 
@@ -1911,7 +1913,7 @@ namespace vcs_SqlConnection1
 
                 string sqlstr = "SELECT NAME FROM sys.tables";  // 看NAME欄位就好
                 //string sqlstr = "SELECT NAME FROM sysdatabases";  // 很多
-                //string sqlstr = "SELECT * FROM master..sysdatabases";  // 很多
+                //string sqlstr = "SELECT * FROM master..sysdatabases";  // 很多 等同上
 
                 //這個方式直接從 SQL Server 的系統目錄取出所有表格名稱
 
@@ -1964,7 +1966,7 @@ namespace vcs_SqlConnection1
             DataSet myds;//声明DataSet数据集对象
 
             cn = new SqlConnection(cnstr);  // 建立資料庫連接對象cn
-            sqlda = new SqlDataAdapter("select * from tb_Salary", cn);//创建数据库桥接器对象
+            sqlda = new SqlDataAdapter("SELECT * FROM tb_Salary", cn);//创建数据库桥接器对象
             myds = new DataSet();//创建数据集对象
             sqlda.Fill(myds, "tb_Salary");//填充DataSet数据集
 
@@ -1979,7 +1981,7 @@ namespace vcs_SqlConnection1
             //公司每月总薪水
 
             cn = new SqlConnection(cnstr);  // 建立資料庫連接對象cn
-            sqlda = new SqlDataAdapter("select * from tb_Salary", cn);//创建数据库桥接器对象
+            sqlda = new SqlDataAdapter("SELECT * FROM tb_Salary", cn);//创建数据库桥接器对象
             myds = new DataSet();//创建数据集对象
             sqlda.Fill(myds, "tb_Salary");//填充DataSet数据集
 
@@ -2046,54 +2048,26 @@ namespace vcs_SqlConnection1
 
         private void button25_Click(object sender, EventArgs e)
         {
-            //取得資料庫的表單名稱
+            // 取得資料庫的表單名稱 1
 
             // 資料庫檔案
             string db_filename = "db_09_Data.MDF";
+
             // 查詢字串
-            string sqlstr = "select name from sysdatabases";
+            string sqlstr = "SELECT NAME FROM sysdatabases";
+            sqlstr = "SELECT NAME FROM master..sysdatabases";
+            sqlstr = "SELECT NAME FROM master.dbo.sysdatabases";
+            sqlstr = "SELECT NAME FROM master.dbo.sysdatabases ORDER BY Name";
+            sqlstr = "SELECT NAME FROM master.dbo.sysdatabases WHERE name='new_db'";
+            sqlstr = "SELECT COUNT(*) FROM master.dbo.sysdatabases WHERE name='new_db'";  // 找個數
+            sqlstr = "SELECT COUNT(*) FROM master.dbo.sysdatabases";  // 找個數
 
             sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            //---------------------------------------
-
-            //SQL数据库连接
-
-            //SQL DB
-            string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
-            db_filename = "db_09_Data.MDF";
-            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-            richTextBox1.Text += "cnstr : " + cnstr + "\n";
-
-            /*
-            comboBox1.DataSource = getTable(cnstr);
-            comboBox1.DisplayMember = "name";
-            comboBox1.ValueMember = "name";
-            comboBox1.Enabled = true;
-            */
         }
-
-        private DataTable getTable(string cnstr)
-        {
-            // 取得資料庫的表單名稱
-            try
-            {
-                SqlConnection sqlcon = new SqlConnection(cnstr);
-                SqlDataAdapter da = new SqlDataAdapter("select name from sysdatabases ", sqlcon);
-                DataTable dt = new DataTable("sysdatabases");
-                da.Fill(dt);
-                return dt;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
 
         private void button26_Click(object sender, EventArgs e)
         {
-            //測試
+            // 取得資料庫的表單名稱 2
             //SysDatabases
 
             // 資料庫檔案
@@ -2112,8 +2086,8 @@ namespace vcs_SqlConnection1
                 //試一下  把 master 改成 dbo
                 // 'dbo.tb_XML'.
                 sqlstr = "SELECT NAME FROM master.dbo.sysdatabases";
-                sqlstr = "SELECT Name FROM Master.dbo.SysDatabases ORDER BY Name";
-                sqlstr = "SELECT count(*) FROM master.dbo.sysdatabases WHERE name='DB_02'";//NG
+                sqlstr = "SELECT NAME FROM Master.dbo.SysDatabases ORDER BY Name";
+                sqlstr = "SELECT COUNT(*) FROM master.dbo.sysdatabases WHERE name='new_db'";//NG
 
                 //獲取所有表單名稱
                 sqlstr = "SELECT Name FROM SysObjects WHERE XType='U' ORDER BY Name";

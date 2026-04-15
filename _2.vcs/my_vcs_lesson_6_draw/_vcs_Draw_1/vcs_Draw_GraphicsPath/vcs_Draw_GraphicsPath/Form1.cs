@@ -1126,3 +1126,26 @@ namespace vcs_Draw_GraphicsPath
 //  Pen penJoin = new Pen(Color.Red, 5);
 //  penJoin.LineJoin = LineJoin.Bevel;//看不出效果
 
+
+
+/*
+        //繪製圓角矩形 DrawRoundRetangle
+        private GraphicsPath DrawRoundRect(float x, float y, float width, float height, float cornerRadius)
+        {
+            GraphicsPath roundedRect = new GraphicsPath();
+            Rectangle rect = new Rectangle((int)x, (int)y, (int)width, (int)height);
+            roundedRect.AddArc(rect.X, rect.Y, cornerRadius * 2, cornerRadius * 2, 180, 90);
+            roundedRect.AddLine(rect.X + cornerRadius, rect.Y, rect.Right - cornerRadius * 2, rect.Y);
+            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y, cornerRadius * 2, cornerRadius * 2, 270, 90);
+            roundedRect.AddLine(rect.Right, rect.Y + cornerRadius * 2, rect.Right, rect.Y + rect.Height - cornerRadius * 2);
+            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y + rect.Height - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 0, 90);
+            roundedRect.AddLine(rect.Right - cornerRadius * 2, rect.Bottom, rect.X + cornerRadius * 2, rect.Bottom);
+            roundedRect.AddArc(rect.X, rect.Bottom - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 90, 90);
+            roundedRect.AddLine(rect.X, rect.Bottom - cornerRadius * 2, rect.X, rect.Y + cornerRadius * 2);
+            roundedRect.CloseFigure();
+            return roundedRect;
+        }
+
+*/
+
+

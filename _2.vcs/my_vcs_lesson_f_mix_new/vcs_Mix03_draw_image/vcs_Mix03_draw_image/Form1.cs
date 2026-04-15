@@ -49,16 +49,11 @@ namespace vcs_Mix03_draw_image
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 200 + 5;
-            dy = 60 + 5;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -88,7 +83,7 @@ namespace vcs_Mix03_draw_image
             richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1560, 710);
+            this.Size = new Size(1600, 790);
             this.Text = "vcs_Mix03_draw_image";
 
             //設定執行後的表單起始位置, 正中央
@@ -397,13 +392,13 @@ namespace vcs_Mix03_draw_image
             myPen2.EndCap = LineCap.ArrowAnchor;
             g.DrawLine(myPen2, 20, 100, 300, 100); // 繪製箭形直線
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             System.Drawing.StringFormat drawFormat = new System.Drawing.StringFormat();
             drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
             g.DrawString("畫字串畫直的", this.Font, new SolidBrush(Color.Black), 300, 100, drawFormat);
 
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             Pen p = new Pen(Color.Red);  // 建立一支紅色的筆
 
@@ -411,7 +406,7 @@ namespace vcs_Mix03_draw_image
             g.DrawLine(p, 90, 50, 180, 100);       // 畫線
             g.DrawArc(p, 90, 30, 90, 90, 0, 250);  // 畫弧形
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //從pictureBox開始畫圖
 
@@ -435,25 +430,8 @@ namespace vcs_Mix03_draw_image
             // Draw curve to screen.
             //gc.DrawCurve(redPen, curvePoints); //畫曲線
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
-        }
-
-        //繪製圓角矩形 DrawRoundRetangle
-        private GraphicsPath DrawRoundRect(float x, float y, float width, float height, float cornerRadius)
-        {
-            GraphicsPath roundedRect = new GraphicsPath();
-            Rectangle rect = new Rectangle((int)x, (int)y, (int)width, (int)height);
-            roundedRect.AddArc(rect.X, rect.Y, cornerRadius * 2, cornerRadius * 2, 180, 90);
-            roundedRect.AddLine(rect.X + cornerRadius, rect.Y, rect.Right - cornerRadius * 2, rect.Y);
-            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y, cornerRadius * 2, cornerRadius * 2, 270, 90);
-            roundedRect.AddLine(rect.Right, rect.Y + cornerRadius * 2, rect.Right, rect.Y + rect.Height - cornerRadius * 2);
-            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y + rect.Height - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 0, 90);
-            roundedRect.AddLine(rect.Right - cornerRadius * 2, rect.Bottom, rect.X + cornerRadius * 2, rect.Bottom);
-            roundedRect.AddArc(rect.X, rect.Bottom - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 90, 90);
-            roundedRect.AddLine(rect.X, rect.Bottom - cornerRadius * 2, rect.X, rect.Y + cornerRadius * 2);
-            roundedRect.CloseFigure();
-            return roundedRect;
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -486,7 +464,7 @@ namespace vcs_Mix03_draw_image
             g.DrawPath(Pens.Black, gp1); // 圖形軌跡 繪出
             g.DrawPath(Pens.Black, gp2); // 圖形軌跡 繪出
 
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             Cx = 200;
             Cy = 200;
@@ -514,7 +492,7 @@ namespace vcs_Mix03_draw_image
             g.DrawPath(Pens.Black, gp1); // 圖形軌跡 繪出
             g.DrawPath(Pens.Black, gp2); // 圖形軌跡 繪出
 
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             Cx = 200;
             Cy = 330;
@@ -606,3 +584,23 @@ namespace vcs_Mix03_draw_image
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+
+

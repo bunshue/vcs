@@ -206,17 +206,7 @@ namespace UseSelect
             return Regex.IsMatch(str, @"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*");
         }
 
-        //------------------------------------------------------------  # 60個
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            // 資料庫檔案
-            string db_filename = "db_TomeTwo.mdf";
-            // 查詢字串
-            string sqlstr = "SELECT * FROM tb_Employee";
-
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-        }
+        //以下為debug ----------------------------------------------------------------------------------------------------  # 100個
 
         void sql_read_database(string db_filename, string sqlstr, DataGridView dgv)
         {
@@ -250,6 +240,18 @@ namespace UseSelect
                 richTextBox1.Text += ex.Message + "\n";
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // 資料庫檔案
+            string db_filename = "db_TomeTwo.mdf";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM tb_Employee";
+
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+        }
+
+
 
 
     }
