@@ -218,22 +218,22 @@ namespace vcs_Draw_GraphicsPath
         //繪製圓角矩形1, 把圓角矩形分成八段直線弧線的組合，依次加到路徑中
         private GraphicsPath CreateRoundedRectanglePath(Rectangle rect, int R)
         {
-            int L = R * 2;
+            int D = R * 2;
             GraphicsPath gp = new GraphicsPath();
             //左上
-            gp.AddArc(new Rectangle(rect.X, rect.Y, L, L), 180, 90);
+            gp.AddArc(new Rectangle(rect.X, rect.Y, D, D), 180, 90);
             //上
             gp.AddLine(new Point(rect.X + R, rect.Y), new Point(rect.Right - R, rect.Y));
             //右上
-            gp.AddArc(new Rectangle(rect.Right - L, rect.Y, L, L), 270, 90);
+            gp.AddArc(new Rectangle(rect.Right - D, rect.Y, D, D), 270, 90);
             //右
             gp.AddLine(new Point(rect.Right, rect.Y + R), new Point(rect.Right, rect.Bottom - R));
             //右下
-            gp.AddArc(new Rectangle(rect.Right - L, rect.Bottom - L, L, L), 0, 90);
+            gp.AddArc(new Rectangle(rect.Right - D, rect.Bottom - D, D, D), 0, 90);
             //下
             gp.AddLine(new Point(rect.Right - R, rect.Bottom), new Point(rect.X + R, rect.Bottom));
             //左下
-            gp.AddArc(new Rectangle(rect.X, rect.Bottom - L, L, L), 90, 90);
+            gp.AddArc(new Rectangle(rect.X, rect.Bottom - D, D, D), 90, 90);
             //左
             gp.AddLine(new Point(rect.X, rect.Bottom - R), new Point(rect.X, rect.Y + R));
             gp.CloseFigure();  // 封閉圖形路徑, 將圖形的頭尾座標連接
@@ -915,11 +915,10 @@ namespace vcs_Draw_GraphicsPath
             int cornerRadius = 50;  // 圓角半徑
             int dy = 230;
 
-            GraphicsPath gp = new GraphicsPath();  // GraphicsPath物件
-
             Rectangle rect = new Rectangle(x_st, y_st, W, H);
 
-            gp = CreateRoundedRectanglePath(rect, cornerRadius);
+            // GraphicsPath物件
+            GraphicsPath gp = CreateRoundedRectanglePath(rect, cornerRadius);
 
             p = new Pen(Color.Red, 20);
             sb = new SolidBrush(Color.Blue);
@@ -941,6 +940,38 @@ namespace vcs_Draw_GraphicsPath
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //設定圓角表單
+            //繪製圓角表單
+            this.Region = null;
+            SetWindowRegion2();
+        }
+
+        public void SetWindowRegion2()
+        {
+            Rectangle rect = new Rectangle(0, 22, this.Width, this.Height - 22);
+
+            GraphicsPath gp = GetRoundedRectPath2(rect, 30);
+            this.Region = new Region(gp);
+        }
+
+        private GraphicsPath GetRoundedRectPath2(Rectangle rect, int radius)
+        {
+            int diameter = radius;
+            Rectangle arcRect = new Rectangle(rect.Location, new Size(diameter, diameter));
+            GraphicsPath gp = new GraphicsPath();
+            // 左上
+            gp.AddArc(arcRect, 180, 90);
+            // 右上
+            arcRect.X = rect.Right - diameter;
+            gp.AddArc(arcRect, 270, 90);
+            // 右下
+            arcRect.Y = rect.Bottom - diameter;
+            gp.AddArc(arcRect, 0, 90);
+            // 左下
+            arcRect.X = rect.Left;
+            gp.AddArc(arcRect, 90, 90);
+            gp.CloseFigure();
+            return gp;
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -1009,9 +1040,49 @@ namespace vcs_Draw_GraphicsPath
 
         }
 
+        #region 引用方法:為窗體繪製圓角(新增至窗體Resize事件)
+        //此方法設定窗體有效區域為圓角矩形
+        public void SetWindowRegion()
+        {
+            GraphicsPath gp;
+            gp = new GraphicsPath();
+            Rectangle rect = new Rectangle(0, 0, this.Width, this.Height);
+            gp = GetRoundedRectPath(rect, 60);
+            this.Region = new Region(gp);
+        }
+
+        //輔助方法:此方法用來建立圓角矩形路徑
+        //繪製圓角矩形2, 把圓角矩形分成八段直線弧線的組合，依次加到路徑中
+        private GraphicsPath GetRoundedRectPath(Rectangle rect, int R)
+        {
+            int diameter = R;
+            Rectangle arcRect = new Rectangle(rect.Location, new Size(diameter, diameter));
+            GraphicsPath gp = new GraphicsPath();
+
+            // 左上角
+            gp.AddArc(arcRect, 180, 90);
+
+            // 右上角
+            arcRect.X = rect.Right - diameter;
+            gp.AddArc(arcRect, 270, 90);
+
+            // 右下角
+            arcRect.Y = rect.Bottom - diameter;
+            gp.AddArc(arcRect, 0, 90);
+
+            // 左下角
+            arcRect.X = rect.Left;
+            gp.AddArc(arcRect, 90, 90);
+            gp.CloseFigure();//閉合曲線
+            return gp;
+        }
+
+        //在窗體尺寸改變的時候我們需要呼叫SetWindowRegion()將窗體變成圓角的
         private void Form1_Resize(object sender, EventArgs e)
         {
+            SetWindowRegion();
         }
+        #endregion
 
         private void cb_grid_CheckedChanged(object sender, EventArgs e)
         {

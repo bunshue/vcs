@@ -26,7 +26,6 @@ namespace ProcedureNumber
         {
             AutoID();
 
-
             string id = "P1013";  // textbox1 員工編號
             string name = "david";  // textbox2 員工姓名
             string age = "18";  // textbox3 員工年齡
@@ -195,4 +194,3 @@ namespace ProcedureNumber
         }
     }
 }
-

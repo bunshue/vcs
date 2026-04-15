@@ -74,7 +74,6 @@ namespace vcs_Form1
             this.TopMost = true;
             F2.TopMost = true;
 
-
             //表單的背景圖案 法一
             //方案總管/加入/現有項目/選圖片
             //圖片之屬性 複製到輸出目錄 改成 有更新時才複製
@@ -85,16 +84,11 @@ namespace vcs_Form1
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 12;
-            y_st = 12;
-            dx = 205;
-            dy = 65;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -106,46 +100,45 @@ namespace vcs_Form1
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
-
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button20.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button21.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            button22.Location = new Point(x_st + dx * 1, y_st + dy * 10);
-            button23.Location = new Point(x_st + dx * 1, y_st + dy * 11);
-
-            button24.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button25.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button28.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button29.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button30.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button31.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button32.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button33.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-            button34.Location = new Point(x_st + dx * 2, y_st + dy * 10);
-            button35.Location = new Point(x_st + dx * 2, y_st + dy * 11);
-
-            button36.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button37.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button38.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button39.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button40.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            button41.Location = new Point(x_st + dx * 3, y_st + dy * 5);
-            button42.Location = new Point(x_st + dx * 3, y_st + dy * 6);
-            button43.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            button30.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button34.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button35.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button36.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
+            button40.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            button41.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            button42.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            button43.Location = new Point(x_st + dx * 4, y_st + dy * 3);
 
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
             label5.Location = new Point(x_st + dx * 3, y_st + dy * 12);
+            richTextBox1.Size = new Size(300, 300);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 4);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //this.Size = new Size(1273, 750);
@@ -154,7 +147,7 @@ namespace vcs_Form1
             //最大化螢幕
             //this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             //this.WindowState = FormWindowState.Maximized;
-            
+
             bt_exit_setup();
 
             //設定執行後的表單起始位置, 正中央
@@ -333,7 +326,6 @@ namespace vcs_Form1
             // TransparencyKey只支持透明或不透明，不支持过度色，比如PNG图片中的从不透明到透明的过渡色会显示出讨厌的效果
             this.BackColor = Color.Black;
             this.TransparencyKey = Color.Black;
-
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -482,7 +474,6 @@ namespace vcs_Form1
             {
                 button29.Text = "停止閃爍外框";
                 timer1.Enabled = true;
-
             }
             else
             {
@@ -580,7 +571,6 @@ namespace vcs_Form1
             //整個窗體都變成半透明
             this.Opacity = 0.5;
 
-
             //this.Opacity = 0; //使窗體不可見 
         }
 
@@ -663,53 +653,10 @@ namespace vcs_Form1
             byte r = slateBlue.R;
             byte a = slateBlue.A;
             string text = String.Format("用OnPaint寫字範例\nSlate Blue has these ARGB values:\n A:{0}, " + "R:{1}, G: {2}, B {3}", new object[] { a, r, g, b });
-            int x_st = label1.Location.X + 630;
+            int x_st = label1.Location.X + 100;
             int y_st = label1.Location.Y - 100;
             e.Graphics.DrawString(text, new Font(this.Font, FontStyle.Italic), new SolidBrush(slateBlue), new RectangleF(new PointF(x_st, y_st), this.Size));
         }
-
-        #region 引用方法:為窗體繪製圓角(新增至窗體Resize事件)
-        //此方法設定窗體有效區域為圓角矩形
-        public void SetWindowRegion()
-        {
-            GraphicsPath gp;
-            gp = new GraphicsPath();
-            Rectangle rect = new Rectangle(0, 0, this.Width, this.Height);
-            gp = GetRoundedRectPath(rect, 60);
-            this.Region = new Region(gp);
-        }
-
-        //輔助方法:此方法用來建立圓角矩形路徑
-        private GraphicsPath GetRoundedRectPath(Rectangle rect, int radius)
-        {
-            int diameter = radius;
-            Rectangle arcRect = new Rectangle(rect.Location, new Size(diameter, diameter));
-            GraphicsPath gp = new GraphicsPath();
-
-            // 左上角
-            gp.AddArc(arcRect, 180, 90);
-
-            // 右上角
-            arcRect.X = rect.Right - diameter;
-            gp.AddArc(arcRect, 270, 90);
-
-            // 右下角
-            arcRect.Y = rect.Bottom - diameter;
-            gp.AddArc(arcRect, 0, 90);
-
-            // 左下角
-            arcRect.X = rect.Left;
-            gp.AddArc(arcRect, 90, 90);
-            gp.CloseFigure();//閉合曲線
-            return gp;
-        }
-
-        //在窗體尺寸改變的時候我們需要呼叫SetWindowRegion()將窗體變成圓角的
-        private void Form1_Resize(object sender, EventArgs e)
-        {
-            SetWindowRegion();
-        }
-        #endregion
 
         // On left button, let the user drag the form.
         private void label2_MouseDown(object sender, MouseEventArgs e)
@@ -722,9 +669,7 @@ namespace vcs_Form1
                 // Create and send a WM_NCLBUTTONDOWN message.
                 const int WM_NCLBUTTONDOWN = 0x00A1;
                 const int HTCAPTION = 2;
-                Message msg =
-                    Message.Create(this.Handle, WM_NCLBUTTONDOWN,
-                        new IntPtr(HTCAPTION), IntPtr.Zero);
+                Message msg = Message.Create(this.Handle, WM_NCLBUTTONDOWN, new IntPtr(HTCAPTION), IntPtr.Zero);
                 this.DefWndProc(ref msg);
             }
         }
@@ -743,4 +688,24 @@ namespace vcs_Form1
         }
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+
 

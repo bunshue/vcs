@@ -142,7 +142,7 @@ namespace vcs_Button
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //文字化按鈕 button4 ST
-            GraphicsPath gpstirng = new GraphicsPath();
+            GraphicsPath gp_text = new GraphicsPath();
             FontFamily family = new FontFamily("細明體");
             int fontStyle = (int)FontStyle.Italic;
             int emSize = 40;
@@ -150,8 +150,8 @@ namespace vcs_Button
             Point origin = new Point(0, 0);
             StringFormat format = StringFormat.GenericDefault;
 
-            gpstirng.AddString("文字化按鈕", family, fontStyle, emSize, origin, format);
-            button4.Region = new Region(gpstirng);
+            gp_text.AddString("文字化按鈕", family, fontStyle, emSize, origin, format);
+            button4.Region = new Region(gp_text);
             //文字化按鈕 button4 SP
 
             bt_exit_setup();
@@ -367,15 +367,15 @@ namespace vcs_Button
         {
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_icon\star.bmp";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-            GraphicsPath graphicsPath = CalculateControlGraphicsPath(bitmap1);
-            this.bt_star.Region = new Region(graphicsPath);
+            GraphicsPath gp = CalculateControlGraphicsPath(bitmap1);
+            this.bt_star.Region = new Region(gp);
 
             this.bt_star.Cursor = Cursors.Hand;
         }
 
         private static GraphicsPath CalculateControlGraphicsPath(Bitmap bitmap)
         {
-            GraphicsPath graphicsPath = new GraphicsPath();
+            GraphicsPath gp = new GraphicsPath();
             Color colorTransparent = bitmap.GetPixel(0, 0);
             //Color colorTransparent = Color.Black;
             int colOpaquePixel = 0;
@@ -396,12 +396,12 @@ namespace vcs_Button
                                 break;
                             }
                         }
-                        graphicsPath.AddRectangle(new Rectangle(colOpaquePixel, row, colNext - colOpaquePixel, 1));
+                        gp.AddRectangle(new Rectangle(colOpaquePixel, row, colNext - colOpaquePixel, 1));
                         col = colNext;
                     }
                 }
             }
-            return graphicsPath;
+            return gp;
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -739,5 +739,4 @@ namespace vcs_Button
 /*  可搬出
 
 */
-
 

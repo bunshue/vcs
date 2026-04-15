@@ -136,9 +136,13 @@ namespace vcs_Draw_Captcha1
             richTextBox1.Size = new Size(400, 890);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-            this.Location = new Point(100, 100);
+
             this.Size = new Size(1670, 850 + 100);
             this.Text = "vcs_Draw_Captcha1";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -711,8 +715,8 @@ namespace vcs_Draw_Captcha1
         void draw_captcha08()
         {
             int digits = 10;
-            string captcha = validation08(digits);
-            pictureBox08.Image = drawImg08(captcha);
+            string captchacode08 = CaptchaCode08(digits);
+            pictureBox08.Image = drawImg08(captchacode08);
         }
 
         /// <summary>
@@ -720,7 +724,7 @@ namespace vcs_Draw_Captcha1
         /// </summary>
         /// <param name="len">幾位</param>
         /// <returns></returns>
-        public static string validation08(int cd)
+        public static string CaptchaCode08(int cd)
         {
             var ran = new Random();
             int num, tem;
@@ -834,10 +838,10 @@ namespace vcs_Draw_Captcha1
             string tmp = RndNum(4);
             //HttpCookie a = new HttpCookie("ImageV ", tmp);
             //Response.Cookies.Add(a);
-            this.ValidateCode10(tmp);
+            this.CaptchaCode10(tmp);
         }
 
-        private void ValidateCode10(string VNum)
+        private void CaptchaCode10(string VNum)
         {
             Bitmap bitmap1 = null;
             Graphics g = null;
@@ -876,8 +880,8 @@ namespace vcs_Draw_Captcha1
             方法GetImgWithValidateCode()返回生成的驗證碼圖片，
             方法 IsRight(string inputValCode) 判斷用戶輸入的驗證碼 inputValCode與圖片顯示的字符是否一致，不區分大小寫
             */
-            DrawValImg drawimg = new DrawValImg();
-            Image img = drawimg.GetImgWithValidateCode();
+            CaptchaCode11 captchacode11 = new CaptchaCode11();
+            Image img = captchacode11.GetImgWithValidateCode();
             pictureBox11.Image = img;
         }
         //Captcha 11 SP
@@ -1029,17 +1033,18 @@ namespace vcs_Draw_Captcha1
             //產生圖片驗證碼(很複雜)
 
             //首先實例化驗證碼的類
-            ValidateCode validateCode = new ValidateCode();
+            CaptchaCode14 captchacode14 = new CaptchaCode14();
+
             //生成驗證碼指定的長度
-            string code = validateCode.GetRandomString(4);
+            string code = captchacode14.GetRandomString(4);
+
+            //設定Border, 但看不出差異
+            captchacode14.Border = CaptchaCode14.BorderStyle.RoundRectangle;
+
             //創建驗證碼的圖片
-            Bitmap bitmap1 = validateCode.CreateImage(code);
+            Bitmap bitmap1 = captchacode14.CreateImage(code);
 
             pictureBox14.Image = bitmap1;
-
-            //最後將驗證碼返回
-            //return File(bytes, @"image/jpeg");
-            //File(bytes, @"image/jpeg");
         }
         //Captcha 14 SP
 
@@ -2363,17 +2368,17 @@ namespace vcs_Draw_Captcha1
         }
     }
 
-    public class DrawValImg
+    public class CaptchaCode11
     {
         /// <summary>
         /// 無參構造
         /// </summary>
-        public DrawValImg() { }
+        public CaptchaCode11() { }
         /// <summary>
         /// 帶有生成字符個數的構造
         /// </summary>
         /// <param name="charNum">驗證碼中包含隨機字符的個數</param>
-        public DrawValImg(int charNum)
+        public CaptchaCode11(int charNum)
         {
             this.CharNum = charNum;
         }
@@ -2382,7 +2387,7 @@ namespace vcs_Draw_Captcha1
         /// </summary>
         /// <param name="width">驗證碼圖片寬度</param>
         /// <param name="height">驗證碼圖片高度</param>
-        public DrawValImg(int width, int height)
+        public CaptchaCode11(int width, int height)
         {
             this.width = width;
             this.height = height;
@@ -2393,7 +2398,7 @@ namespace vcs_Draw_Captcha1
         /// <param name="charNum">驗證碼中包含隨機字符的個數</param>
         /// <param name="width">驗證碼圖片寬度</param>
         /// <param name="height">驗證碼圖片高度</param>
-        public DrawValImg(int charNum, int width, int height)
+        public CaptchaCode11(int charNum, int width, int height)
         {
             this.CharNum = charNum;
             this.width = width;
@@ -2607,7 +2612,7 @@ namespace vcs_Draw_Captcha1
     /// <summary>
     /// 驗證碼生成類
     /// </summary>
-    public class ValidateCode
+    public class CaptchaCode14
     {
         //#region 定義和初始化配置字段
         //用戶存取驗證碼字符串
@@ -3598,8 +3603,8 @@ namespace vcs_Draw_Captcha1
             // 由於邊框也需要一定寬度，需要對矩形進行修正
             //rectangle = new Rectangle(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height);
             Pen p = new Pen(borderColor, borderWidth);
-            // 調用 getRoundRectangle 得到圓角矩形的路徑，然後再進行繪製
-            g.DrawPath(p, getRoundRectangle(rectangle, r));
+            // 調用 CreateRoundedRectanglePath 得到圓角矩形的路徑，然後再進行繪製
+            g.DrawPath(p, CreateRoundedRectanglePath(rectangle, r));
         }
         //#endregion
 
@@ -3610,22 +3615,28 @@ namespace vcs_Draw_Captcha1
         /// <param name="rectangle">原始矩形</param>
         /// <param name="r">半徑</param>
         /// <returns>圖形路徑</returns>
-        private static GraphicsPath getRoundRectangle(Rectangle rectangle, int r)
+        //繪製圓角矩形3, 把圓角矩形分成八段直線弧線的組合，依次加到路徑中
+        private static GraphicsPath CreateRoundedRectanglePath(Rectangle rect, int R)
         {
-            int l = 2 * r;
-            // 把圓角矩形分成八段直線、弧的組合，依次加到路徑中
+            int D = R * 2;
             GraphicsPath gp = new GraphicsPath();
-            gp.AddLine(new Point(rectangle.X + r, rectangle.Y), new Point(rectangle.Right - r, rectangle.Y));
-            gp.AddArc(new Rectangle(rectangle.Right - l, rectangle.Y, l, l), 270F, 90F);
-
-            gp.AddLine(new Point(rectangle.Right, rectangle.Y + r), new Point(rectangle.Right, rectangle.Bottom - r));
-            gp.AddArc(new Rectangle(rectangle.Right - l, rectangle.Bottom - l, l, l), 0F, 90F);
-
-            gp.AddLine(new Point(rectangle.Right - r, rectangle.Bottom), new Point(rectangle.X + r, rectangle.Bottom));
-            gp.AddArc(new Rectangle(rectangle.X, rectangle.Bottom - l, l, l), 90F, 90F);
-
-            gp.AddLine(new Point(rectangle.X, rectangle.Bottom - r), new Point(rectangle.X, rectangle.Y + r));
-            gp.AddArc(new Rectangle(rectangle.X, rectangle.Y, l, l), 180F, 90F);
+            //左上
+            gp.AddArc(new Rectangle(rect.X, rect.Y, D, D), 180, 90);
+            //上
+            gp.AddLine(new Point(rect.X + R, rect.Y), new Point(rect.Right - R, rect.Y));
+            //右上
+            gp.AddArc(new Rectangle(rect.Right - D, rect.Y, D, D), 270, 90);
+            //右
+            gp.AddLine(new Point(rect.Right, rect.Y + R), new Point(rect.Right, rect.Bottom - R));
+            //右下
+            gp.AddArc(new Rectangle(rect.Right - D, rect.Bottom - D, D, D), 0, 90);
+            //下
+            gp.AddLine(new Point(rect.Right - R, rect.Bottom), new Point(rect.X + R, rect.Bottom));
+            //左下
+            gp.AddArc(new Rectangle(rect.X, rect.Bottom - D, D, D), 90, 90);
+            //左
+            gp.AddLine(new Point(rect.X, rect.Bottom - R), new Point(rect.X, rect.Y + R));
+            gp.CloseFigure();  // 封閉圖形路徑, 將圖形的頭尾座標連接
             return gp;
         }
         //#endregion
@@ -4401,3 +4412,21 @@ namespace vcs_Draw_Captcha1
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*
+
+*/
+

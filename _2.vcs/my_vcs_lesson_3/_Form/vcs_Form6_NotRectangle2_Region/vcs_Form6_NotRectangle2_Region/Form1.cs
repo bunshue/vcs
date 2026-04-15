@@ -56,9 +56,6 @@ namespace vcs_Form6_NotRectangle2_Region
             }
             else if (mode == 2)
             {
-                //繪製圓角表單
-                this.Region = null;
-                SetWindowRegion();
             }
             else if (mode == 3)
             {
@@ -105,33 +102,5 @@ namespace vcs_Form6_NotRectangle2_Region
             }
         }
 
-        public void SetWindowRegion()
-        {
-            Rectangle rect = new Rectangle(0, 22, this.Width, this.Height - 22);
-
-            GraphicsPath gp = GetRoundedRectPath(rect, 30);
-            this.Region = new Region(gp);
-        }
-
-        private GraphicsPath GetRoundedRectPath(Rectangle rect, int radius)
-        {
-            int diameter = radius;
-            Rectangle arcRect = new Rectangle(rect.Location, new Size(diameter, diameter));
-            GraphicsPath gp = new GraphicsPath();
-            // 左上
-            gp.AddArc(arcRect, 180, 90);
-            // 右上
-            arcRect.X = rect.Right - diameter;
-            gp.AddArc(arcRect, 270, 90);
-            // 右下
-            arcRect.Y = rect.Bottom - diameter;
-            gp.AddArc(arcRect, 0, 90);
-            // 左下
-            arcRect.X = rect.Left;
-            gp.AddArc(arcRect, 90, 90);
-            gp.CloseFigure();
-            return gp;
-        }
     }
 }
-
