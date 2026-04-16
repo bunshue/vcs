@@ -1,4 +1,16 @@
-﻿        private Boolean TextInfo()
+﻿
+listView1參數
+            this.listView1.AllowColumnReorder = true;
+            this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.listView1.FullRowSelect = true;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.GridLines = true;//網格線
+            string str = this.listView1.SelectedItems[0].Text.ToString(); // 取出第0欄的資料, 員工編號
+            richTextBox1.Text += str + "\n";
+
+
+
+        private Boolean TextInfo()
         {
             foreach (Control c in groupBox1.Controls)
             {
@@ -407,6 +419,55 @@ Login failed for user 'M-100028\070601'.
 
 
 //------------------------------------------------------------  # 60個
+
+
+D:\db_09_Data.mdf
+
+            richTextBox1.Text += "員工編號 : " + strid + "\n";
+            using (SqlCommand cmd = new SqlCommand("SELECT * FROM 員工表 WHERE 員工編號='" + strid + "'", con))
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                    this.textBox1.Text = dr[0].ToString();
+                    this.textBox2.Text = dr[1].ToString();
+                    this.textBox4.Text = dr[2].ToString();
+                    this.textBox5.Text = dr[3].ToString();
+                }
+                dr.Close();
+                con.Close();
+                this.tbUpdate.Enabled = true;
+            }
+
+
+        private bool Updateinfo()
+        {
+            richTextBox1.Text += "測試 UPDATE\n";
+            richTextBox1.Text += "員工編號 : " + textBox1.Text +"\n";
+            richTextBox1.Text += "員工姓名 : " + textBox2.Text +"\n";
+            richTextBox1.Text += "基本工資 : " + textBox4.Text +"\n";
+            richTextBox1.Text += "工作評價 : " + textBox5.Text +"\n";
+
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                try
+                {
+                    cmd.CommandText = "update 員工表 set 員工姓名='" + this.textBox2.Text + "',基本工資='" + this.textBox4.Text + "',工作評價='" + this.textBox5.Text + "' where 員工編號='" + this.textBox1.Text + "'";
+                    con.Open();
+                    cmd.Connection = con;
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+
 
 
 

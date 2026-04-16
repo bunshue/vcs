@@ -117,7 +117,17 @@ namespace vcs_HtmlAgility
             groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             groupBox3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+
+            richTextBox1.Size = new Size(400, 840);
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1450, 920);
+            this.Text = "vcs_HtmlAgility";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -1736,7 +1746,7 @@ namespace vcs_HtmlAgility
             List<Data> datas = new List<Data>();//定義1個列表用於保存結果  
 
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            
+
             doc.LoadHtml(strWebContent);//加載HTML字符串，如果是文件可以用htmlDocument.Load方法加載
             //doc.LoadHtml(url);    fail
 
@@ -1856,3 +1866,22 @@ namespace vcs_HtmlAgility
             protocol_Tls12 = (SecurityProtocolType)3072;
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+

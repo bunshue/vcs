@@ -29,7 +29,7 @@ namespace vcs_ImageProcessing1
 {
     public partial class Form1 : Form
     {
-        string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
+        string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_哆啦A夢\doraemon1.jpg";
         //string filename = @"D:\_git\vcs\_1.data\______test_files1\pic_256X100.bmp";
         //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_map_city/global.c.gif";   //超大圖, 要很久
         //string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";

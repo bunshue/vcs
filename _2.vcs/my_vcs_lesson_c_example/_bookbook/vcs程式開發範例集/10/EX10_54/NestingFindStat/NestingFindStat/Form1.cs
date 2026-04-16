@@ -9,6 +9,8 @@ using System.Linq;
 
 using System.Data.SqlClient;
 
+//內嵌查詢在查詢統計中的運用
+
 namespace NestingFindStat
 {
     public partial class Form1 : Form
@@ -22,21 +24,27 @@ namespace NestingFindStat
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // 成績單 10個學生 學號 姓名 數學 語文 英語 生物 歷史 化學
+
+            // 資料庫檔案
             string db_filename = "db_10_Data.MDF";
-            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-            SqlConnection cn = new SqlConnection(cnstr);
-            SqlDataAdapter dap = new SqlDataAdapter("select * from cjd ", cn);
-            DataSet ds = new DataSet();
-            dap.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            // 查詢字串
+            string sqlstr = "SELECT * FROM cjd";
+
+            sql_read_database(db_filename, sqlstr, dataGridView1);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            // 資料庫檔案
             string db_filename = "db_10_Data.MDF";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM cjd WHERE " + comboBox1.Text + " " + comboBox2.Text + " " + comboBox3.Text + "(SELECT " + comboBox1.Text + " FROM cjd WHERE 姓名 IN('" + textBox1.Text + "','" + textBox2.Text + "'))";
+            richTextBox1.Text += sqlstr + "\n";
+
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
             SqlConnection cn = new SqlConnection(cnstr);
-            SqlDataAdapter dap = new SqlDataAdapter("select * from cjd where " + comboBox1.Text + " " + comboBox2.Text + " " + comboBox3.Text + "(select " + comboBox1.Text + " from cjd where 姓名 in('" + textBox1.Text + "','" + textBox2.Text + "'))", cn);
+            SqlDataAdapter dap = new SqlDataAdapter("SELECT * FROM cjd WHERE " + comboBox1.Text + " " + comboBox2.Text + " " + comboBox3.Text + "(SELECT " + comboBox1.Text + " FROM cjd WHERE 姓名 IN('" + textBox1.Text + "','" + textBox2.Text + "'))", cn);
             DataSet ds = new DataSet();
             dap.Fill(ds);
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
@@ -81,13 +89,7 @@ namespace NestingFindStat
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //以下為debug
-            // 資料庫檔案
-            string db_filename = "db_09_Data.mdf";
-            // 查詢字串
-            string sqlstr = "SELECT * FROM 員工表";
-
-            sql_read_database(db_filename, sqlstr, dataGridView1);
+            //ok
         }
 
     }

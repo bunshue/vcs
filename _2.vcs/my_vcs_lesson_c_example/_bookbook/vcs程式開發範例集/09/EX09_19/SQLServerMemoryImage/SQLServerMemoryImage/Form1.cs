@@ -83,6 +83,8 @@ namespace SQLServerMemoryImage
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             string str = this.dataGridView1[0, e.RowIndex].Value.ToString();
+            richTextBox1.Text += "取得第 " + e.RowIndex + " 列的第 0 筆資料 : " + str + "\n";
+
             if (str != "")
             {
                 string strSql = "select * from 員工訊息 where 員工編號='" + str + "'";
@@ -152,6 +154,8 @@ namespace SQLServerMemoryImage
 
         private void getValue()
         {
+            richTextBox1.Text += "getValue()\n";
+
             this.textBox2.Text = NumID;
             this.textBox3.Text = name;
             MemoryStream ms = new MemoryStream(pic);			//二進制流
