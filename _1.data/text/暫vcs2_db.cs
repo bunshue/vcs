@@ -474,22 +474,181 @@ D:\db_09_Data.mdf
 //------------------------------------------------------------  # 60個
 
 
+            //新增資料
+            string pic_filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string file_no = "A123456";  // 檔案編號
+            string work_no = "1234";  // 工號
+            string name = "david";  // 姓名
+            string birthday = "2006/03/11";  // 出生日期
+            string city = "Taiwan";  // 籍貫
+            string work_year = "5";  // 工齡
+            string department = "研發部";  // 部門名稱
+            string telephone = "0912345678";  // 電話
+            string sex = "男";  // 性別
+            string position = "員工";  // 技術職稱
+            string marriage = "已婚";  // 婚姻狀態
+            string health = "良好";  // 健康狀態
+
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
+            SqlConnection con = new SqlConnection(cnstr);
+
+            try
+            {
+                con.Open();
+
+                // 查詢字串
+                string sqlstr = "INSERT INTO 檔案訊息 values(@檔案編號,@工號,@姓名,@照片,@性別,@出生日期,@籍貫,@工齡,@電話,@部門名稱,@技術職稱,@婚姻狀態,@健康狀態)";
+
+                SqlCommand cmd = new SqlCommand(sqlstr, con);
+                cmd.Parameters.Add("@檔案編號", SqlDbType.Text).Value = file_no;
+                cmd.Parameters.Add("@工號", SqlDbType.Text).Value = work_no;
+                cmd.Parameters.Add("@姓名", SqlDbType.Text).Value = name;
+                cmd.Parameters.Add("@照片", SqlDbType.Text).Value = pic_filename;
+                cmd.Parameters.Add("@性別", SqlDbType.Text).Value = sex;
+                cmd.Parameters.Add("@出生日期", SqlDbType.Text).Value = birthday;
+                cmd.Parameters.Add("@籍貫", SqlDbType.Text).Value = city;
+                cmd.Parameters.Add("@工齡", SqlDbType.Int).Value = Convert.ToInt16(work_year);
+                cmd.Parameters.Add("@電話", SqlDbType.Text).Value = telephone;
+                cmd.Parameters.Add("@部門名稱", SqlDbType.Text).Value = department;
+                cmd.Parameters.Add("@技術職稱", SqlDbType.Text).Value = position;
+                cmd.Parameters.Add("@婚姻狀態", SqlDbType.Text).Value = marriage;
+                cmd.Parameters.Add("@健康狀態", SqlDbType.Text).Value = health;
+                cmd.ExecuteNonQuery();
+                con.Close();
+                MessageBox.Show("新增成功");
+            }
+            catch (Exception ey)
+            {
+                MessageBox.Show("新增失敗");
+            }
+
+            //讀取全部
+
+            // 資料庫檔案
+            string db_filename = "db_09_Data.mdf";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 檔案訊息";
+
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
 
 
 //------------------------------------------------------------  # 60個
 
+            //刪除資料
+
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection con = new SqlConnection(cnstr))
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("delete from 員工表 where 員工編號='" + str + "'", con);
+                cmd.Connection = con;
+                cmd.ExecuteNonQuery();
+                con.Close();
+                MessageBox.Show("刪除成功");
+            }
 
 
 //------------------------------------------------------------  # 60個
 
+            //更新資料範例
+            //SqlDataAdapter da = new SqlDataAdapter("select name from tb_power", con);
+
+            string strValue = null;
+                strValue += "1,";
+                strValue += "1,";
+                strValue += "1,";
+                strValue += "1,";
+                strValue += "1,";
+                strValue += "1,";
+                strValue += "1,";
+                strValue += "1";
+
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection con = new SqlConnection(cnstr))
+            {
+                SqlCommand cmd = new SqlCommand("update tb_Power set power='" + strValue + "' where name='" + this.listBox1.Text + "' ", con);
+                cmd.Connection = con;
+                cmd.Connection.Open();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("授權成功！！！");
+            }
+
+//3030
+
+            //查詢範例
+
+            string str = null;
+
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+            richTextBox1.Text += "aaaaa : " + this.listBox1.Text + "\n";
+            using (SqlConnection con = new SqlConnection(cnstr))//連接資料庫
+            {
+                SqlCommand cmd = new SqlCommand("select power from tb_power where name='" + this.listBox1.Text + "'", con);//連接SQL語句與數擾庫的連接
+                cmd.Connection = con;
+                cmd.Connection.Open();//打開資料庫的連接
+                SqlDataReader dr = cmd.ExecuteReader();//執行SQL語句
+                if (dr.HasRows)//如果有記錄
+                {
+                    dr.Read();//讀取下一行
+                    str = dr[0].ToString();//取得權限值
+                    richTextBox1.Text += "取得權限值 = " + str + "\n";
+                }
+                dr.Close();//關閉
+                con.Close();//關閉連接
+                con.Dispose();
+            }
+
 
 
 //------------------------------------------------------------  # 60個
 
+            // 斷開服務
+
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection con = new SqlConnection(cnstr))
+            {
+                try
+                {
+                    string strShutdown = "SHUTDOWN WITH NOWAIT";
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.Connection.Open();
+                    cmd.CommandText = strShutdown;
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("已成功斷開服務");
+                }
+                catch (Exception euy)
+                {
+                    MessageBox.Show(euy.Message);
+                }
+            }
 
 
 //------------------------------------------------------------  # 60個
 
+using System.Diagnostics;
+            //開啟 Sql Server 服務
+            Process pro = new Process();
+            pro.StartInfo.FileName = "cmd.exe";
+            pro.StartInfo.UseShellExecute = false;
+            pro.StartInfo.RedirectStandardInput = true;
+            pro.StartInfo.RedirectStandardOutput = true;
+            pro.StartInfo.RedirectStandardError = true;
+            pro.StartInfo.CreateNoWindow = true;
+            pro.Start();
+            pro.StandardInput.WriteLine("net start mssqlserver");
+            pro.StandardInput.WriteLine("exit");
+            MessageBox.Show("已成功開啟服務");
 
 
 //------------------------------------------------------------  # 60個

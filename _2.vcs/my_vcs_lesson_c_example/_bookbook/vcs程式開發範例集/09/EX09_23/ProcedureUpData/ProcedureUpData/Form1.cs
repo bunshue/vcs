@@ -109,7 +109,11 @@ namespace ProcedureUpData
         {
             listView1.View = View.Details;//圖示
             listView1.GridLines = true;//網格線
-            using (SqlDataAdapter da = new SqlDataAdapter("select * from 員工表", con))
+
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 員工表";
+
+            using (SqlDataAdapter da = new SqlDataAdapter(sqlstr, con))
             {
                 //產生結果集
                 dt = new DataTable();
@@ -142,7 +146,10 @@ namespace ProcedureUpData
 
         private void showInfo(string strid)
         {
-            using (SqlCommand cmd = new SqlCommand("select * from 員工表 where 員工編號='" + strid + "'", con))
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 員工表 WHERE 員工編號='" + strid + "'";
+
+            using (SqlCommand cmd = new SqlCommand(sqlstr, con))
             {
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();

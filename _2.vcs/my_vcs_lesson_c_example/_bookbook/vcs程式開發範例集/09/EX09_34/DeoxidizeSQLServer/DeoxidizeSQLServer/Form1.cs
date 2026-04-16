@@ -56,11 +56,11 @@ namespace DeoxidizeSQLServer
         {
             string path = this.textBox1.Text; //獲得備份路徑及資料庫名稱
             string dbname = this.comboBox1.Text;
-            
-		// 連接字串
+
+            // 連接字串
             //string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Database1.mdf;Integrated Security=True;Connect Timeout=30";
 
-            
+
             string SqlStr1 = "Server=(local);database='" + this.comboBox1.Text + "';Uid=sa;Pwd=";
             string SqlStr2 = "use master restore database " + dbname + " from disk='" + path + "'";
             using (SqlConnection con = new SqlConnection(SqlStr1))

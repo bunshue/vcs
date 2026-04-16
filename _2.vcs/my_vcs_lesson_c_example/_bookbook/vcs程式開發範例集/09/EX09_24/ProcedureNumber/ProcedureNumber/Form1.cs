@@ -155,9 +155,12 @@ namespace ProcedureNumber
         {
             using (SqlConnection con = new SqlConnection(cnstr))
             {
+                // 查詢字串
+                string sqlstr = "SELECT Max(tb_ID) FROM 員工個人訊息";
+
                 con.Open();
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "select Max(tb_ID) from 員工個人訊息";
+                cmd.CommandText = sqlstr;
                 cmd.Connection = con;
                 string str = cmd.ExecuteScalar().ToString();
                 if (str == "")
@@ -231,10 +234,10 @@ namespace ProcedureNumber
             // 資料庫檔案
             string db_filename = "db_09_Data.mdf";
             // 查詢字串
-            string sqlstr = "SELECT * FROM 員工表";
+            string sqlstr = "SELECT Max(tb_ID) FROM 員工個人訊息";
+            sqlstr = "SELECT * FROM 員工個人訊息";
 
             sql_read_database(db_filename, sqlstr, dataGridView1);
-
         }
     }
 }

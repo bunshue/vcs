@@ -12,27 +12,16 @@ namespace MenuHistory
 {
     public partial class Form1 : Form
     {
-        string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_ini\Menu.ini";
+        string ini_filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_ini\Menu.ini";
 
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void 打開ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            openFileDialog1.FileName = "";
-            this.openFileDialog1.ShowDialog();
-            StreamWriter s = new StreamWriter(filename, true);
-            s.WriteLine(openFileDialog1.FileName);
-            s.Flush();
-            s.Close();
-            ShowWindows(openFileDialog1.FileName);
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
-            StreamReader sr = new StreamReader(filename);
+            StreamReader sr = new StreamReader(ini_filename);
             int i = this.文件ToolStripMenuItem.DropDownItems.Count - 2;
             while (sr.Peek() >= 0)
             {
@@ -44,11 +33,23 @@ namespace MenuHistory
             sr.Close();
         }
 
+        private void 打開ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.FileName = "";
+            this.openFileDialog1.ShowDialog();
+            StreamWriter s = new StreamWriter(ini_filename, true);
+            s.WriteLine(openFileDialog1.FileName);
+            s.Flush();
+            s.Close();
+            ShowWindows(openFileDialog1.FileName);
+        }
+
         private void menuitem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem menu = (ToolStripMenuItem)sender;
             ShowWindows(menu.Text);
         }
+
         public void ShowWindows(string fileName)
         {
             Image p = Image.FromFile(fileName);
@@ -64,5 +65,4 @@ namespace MenuHistory
         }
     }
 }
-
 

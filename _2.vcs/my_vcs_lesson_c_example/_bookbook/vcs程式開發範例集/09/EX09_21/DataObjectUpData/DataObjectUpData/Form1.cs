@@ -31,7 +31,11 @@ namespace DataObjectUpData
             con = new SqlConnection(cnstr);
 
             Resultinfo(Num);
-            using (SqlCommand cmd = new SqlCommand("select Count(*) from 員工表", con))
+
+            // 查詢字串
+            string sqlstr = "select Count(*) from 員工表";
+
+            using (SqlCommand cmd = new SqlCommand(sqlstr, con))
             {
                 con.Open();
                 Count = Convert.ToInt32(cmd.ExecuteScalar());
@@ -48,7 +52,10 @@ namespace DataObjectUpData
         {
             using (SqlDataAdapter da = new SqlDataAdapter())
             {
-                da.SelectCommand = new SqlCommand("select * from 員工表", con);
+                // 查詢字串
+                string sqlstr = "SELECT * FROM 員工表";
+
+                da.SelectCommand = new SqlCommand(sqlstr, con);
                 DataSet ds = new DataSet();
                 da.Fill(ds, i, i + 1, "員工表");
                 return ds;
@@ -116,8 +123,10 @@ namespace DataObjectUpData
 
         private bool update()
         {
-            using (SqlCommand command = new SqlCommand("update 員工表 set" +
-               " 員工姓名=@員工姓名,基本工資=@基本工資,工作評價=@工作評價 where 員工編號=@員工編號 ", con))
+            // 查詢字串
+            string sqlstr = "update 員工表 set 員工姓名=@員工姓名,基本工資=@基本工資,工作評價=@工作評價 where 員工編號=@員工編號";
+
+            using (SqlCommand command = new SqlCommand(sqlstr, con))
             {
                 con.Open();
                 try

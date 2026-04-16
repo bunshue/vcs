@@ -32,8 +32,8 @@ namespace SQLServerMemoryImage
 
             string[] strSex = { "男", "女" };
             this.comboBox1.DataSource = strSex;
-            string strSql = "select 員工編號,姓名,性別,籍貫,電話,部門名稱 from 員工訊息";
-            this.dataGridView1.DataSource = DataBinding(strSql).DefaultView;
+            string sqlstr = "select 員工編號,姓名,性別,籍貫,電話,部門名稱 from 員工訊息";
+            this.dataGridView1.DataSource = DataBinding(sqlstr).DefaultView;
             this.button1.Enabled = false;
 
             //textBox1.Text = "A123456";  // 檔案編號
@@ -54,8 +54,8 @@ namespace SQLServerMemoryImage
         {
             setValue();
             insertInfo();
-            string strSql = "select 員工編號,姓名,性別,籍貫,電話,部門名稱 from 員工訊息";
-            this.dataGridView1.DataSource = DataBinding(strSql).DefaultView;
+            string sqlstr = "select 員工編號,姓名,性別,籍貫,電話,部門名稱 from 員工訊息";
+            this.dataGridView1.DataSource = DataBinding(sqlstr).DefaultView;
         }
 
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
@@ -87,8 +87,9 @@ namespace SQLServerMemoryImage
 
             if (str != "")
             {
-                string strSql = "select * from 員工訊息 where 員工編號='" + str + "'";
-                DataTable dt = DataBinding(strSql);
+                string sqlstr = "SELECT * FROM 員工訊息 WHERE 員工編號='" + str + "'";
+
+                DataTable dt = DataBinding(sqlstr);
                 if (dt.Rows.Count > 0)
                 {
                     NumID = dt.Rows[0][0].ToString();
@@ -111,11 +112,12 @@ namespace SQLServerMemoryImage
             try
             {
                 con.Open();
-                StringBuilder strSql = new StringBuilder();
-                strSql.Append("insert into 員工訊息 values(@員工編號,");
-                strSql.Append("@姓名,@照片,@性別,@出生日期,@籍貫,@工齡,@電話,");
-                strSql.Append("@部門名稱)");
-                SqlCommand cmd = new SqlCommand(strSql.ToString(), con);
+
+                // 查詢字串
+                string sqlstr = "INSERT INTO 員工訊息 values(@員工編號,@姓名,@照片,@性別,@出生日期,@籍貫,@工齡,@電話,@部門名稱)";
+
+                SqlCommand cmd = new SqlCommand(sqlstr, con);
+
                 cmd.Parameters.Add("@員工編號", SqlDbType.Text).Value = NumID;
                 cmd.Parameters.Add("@姓名", SqlDbType.Text).Value = name;
                 cmd.Parameters.Add("@照片", SqlDbType.Binary).Value = pic;

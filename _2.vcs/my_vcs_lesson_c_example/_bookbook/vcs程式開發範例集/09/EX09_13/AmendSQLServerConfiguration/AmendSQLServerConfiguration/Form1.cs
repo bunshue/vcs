@@ -31,7 +31,6 @@ namespace AmendSQLServerConfiguration
 
             types();
 
-
             //以下為debug
             // 資料庫檔案
             string db_filename = "db_09_Data.mdf";
