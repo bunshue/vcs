@@ -14,11 +14,7 @@ namespace UseSelect
 {
     public partial class Frm_Main : Form
     {
-        SqlConnection sqlcon;
-        SqlDataAdapter sqlda;
-        DataSet myds;
-        string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
-        string strSql = "select ID as 职工编号,Name as 职工姓名,Sex as 性别,Age as 年龄,Tel as 联系电话,Address as 家庭地址,QQ as QQ号码,Email as Email地址 from tb_Employee";
+        string sqlstr = "SELECT ID AS 职工编号, Name AS 职工姓名, Sex AS 性别, Age AS 年龄, Tel AS 联系电话, Address AS 家庭地址, QQ AS QQ号码, Email AS Email地址 FROM tb_Employee";
         public static string FindValue = "";  //存储查询条件
 
         public Frm_Main()
@@ -29,15 +25,18 @@ namespace UseSelect
         //窗体初始化时显示所有职工信息
         private void Form1_Load(object sender, EventArgs e)
         {
-            GetAllInfo(strSql);
+            string db_filename = "db_TomeTwo.mdf";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
             cbox_Sex.SelectedIndex = 0;
         }
 
-        //综合查询职工信息
         private void btnQuery_Click(object sender, EventArgs e)
         {
+            //综合查询职工信息
+
             FindValue = "";//得到空字符串对象
-            string Find_SQL = strSql;//得到SQL字符串对象
+            string Find_SQL = sqlstr;//得到SQL字符串对象
+
             if (FindValue.Length > 0)
             {
                 FindValue = FindValue + "and";//组合SQL字符串
@@ -155,7 +154,9 @@ namespace UseSelect
             {
                 Find_SQL = Find_SQL + " where " + FindValue;//组合SQL字符串
             }
-            GetAllInfo(Find_SQL);//按照SQL字符串进行查询
+
+            string db_filename = "db_TomeTwo.mdf";
+            sql_read_database(db_filename, Find_SQL, dataGridView1);//按照SQL字符串进行查询
         }
 
         //清空文本框
@@ -174,18 +175,7 @@ namespace UseSelect
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            //labCount.Text = "共有" + (dataGridView1.Rows.Count - 1) + "条记录";
             richTextBox1.Text += "共有" + (dataGridView1.Rows.Count - 1) + "条记录\n";
-        }
-
-        // 根据条件查询职工信息
-        private void GetAllInfo(string strsql)
-        {
-            sqlcon = new SqlConnection(strCon);
-            sqlda = new SqlDataAdapter(strsql, sqlcon);
-            myds = new DataSet();
-            sqlda.Fill(myds);
-            dataGridView1.DataSource = myds.Tables[0];
         }
 
         // 验证输入为数字
@@ -214,6 +204,8 @@ namespace UseSelect
 
             // 連接字串
             string cnstr = string.Format(db_cnstr, db_filename);
+
+            richTextBox1.Text += "cnstr : " + cnstr + "\n";
 
             //讀取資料庫至DGV
             try
@@ -247,12 +239,9 @@ namespace UseSelect
             string db_filename = "db_TomeTwo.mdf";
             // 查詢字串
             string sqlstr = "SELECT * FROM tb_Employee";
+            //string sqlstr = "SELECT ID AS 职工编号, Name AS 职工姓名, Sex AS 性别, Age AS 年龄, Tel AS 联系电话, Address AS 家庭地址, QQ AS QQ号码, Email AS Email地址 FROM tb_Employee";
 
             sql_read_database(db_filename, sqlstr, dataGridView1);
         }
-
-
-
-
     }
 }

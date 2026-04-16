@@ -74,11 +74,13 @@
             this.bt_next = new System.Windows.Forms.Button();
             this.bt_previous = new System.Windows.Forms.Button();
             this.btn_sql_test = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button9
@@ -410,6 +412,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(200, 60);
             this.button27.TabIndex = 153;
+            this.button27.Text = "取出資料庫中的影像";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
@@ -567,11 +570,22 @@
             this.btn_sql_test.UseVisualStyleBackColor = false;
             this.btn_sql_test.Click += new System.EventHandler(this.btn_sql_test_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(852, 10);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.TabIndex = 175;
+            this.pictureBox1.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1209, 642);
+            this.Controls.Add(this.bt_clear);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btn_sql_test);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lb_dgv4);
@@ -605,7 +619,6 @@
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
-            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button1);
@@ -623,6 +636,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -676,6 +690,7 @@
         private System.Windows.Forms.Button bt_next;
         private System.Windows.Forms.Button bt_previous;
         private System.Windows.Forms.Label lb_index;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

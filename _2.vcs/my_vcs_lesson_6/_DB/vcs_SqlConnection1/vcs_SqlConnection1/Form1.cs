@@ -25,6 +25,9 @@ namespace vcs_SqlConnection1
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            string pic_filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            pictureBox1.Image = Image.FromFile(pic_filename);
         }
 
         private void show_item_location()
@@ -91,6 +94,10 @@ namespace vcs_SqlConnection1
             richTextBox1.Size = new Size(300, 820);
             richTextBox1.Location = new Point(x_st + dx * 7 + 110, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            pictureBox1.Size = new Size(250, 250);
+            pictureBox1.Location = new Point(x_st + dx * 7 + 110+10, y_st + dy * 8);
+            pictureBox1.Visible = false;
 
             this.Size = new Size(1920, 890);
             this.Text = "vcs_SqlConnection1";
@@ -2140,6 +2147,97 @@ namespace vcs_SqlConnection1
 
         private void button27_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "取出資料庫中的影像, DGV 加上 CellClick\n";
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.Visible = true;
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //加入一筆影像資料
+
+            richTextBox1.Text += "添加用戶訊息\n";
+
+            //選擇的頭像名稱
+            string pic_filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
+            string user_name = "david wang aaacccddd";  // 用戶名稱
+
+            //添加用户信息
+
+            richTextBox1.Text += "用戶名稱 : " + user_name + "\n";
+            richTextBox1.Text += "影像檔案 : " + pic_filename + "\n";
+
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+
+            SqlConnection cn = new SqlConnection(cnstr);
+
+            // 查詢字串
+            string sqlstr = "SELECT * FROM tb_Image WHERE name='" + user_name + "'";
+            SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
+            DataSet ds = new DataSet();                   //实例化数据集对象
+            da.Fill(ds);                       //填充数据集
+            if (ds.Tables[0].Rows.Count <= 0)
+            {
+                FileStream FStream = new FileStream(pic_filename, FileMode.Open, FileAccess.Read);
+                BinaryReader BReader = new BinaryReader(FStream);
+                byte[] byteImage = BReader.ReadBytes((int)FStream.Length);
+                SqlCommand sqlcmd = new SqlCommand("insert into tb_Image(name,photo) values(@name,@photo)", cn);
+                sqlcmd.Parameters.Add("@name", SqlDbType.VarChar, 50).Value = user_name;
+                sqlcmd.Parameters.Add("@photo", SqlDbType.Image).Value = byteImage;
+                cn.Open();
+                sqlcmd.ExecuteNonQuery();
+                cn.Close();
+                richTextBox1.Text += "加入用戶信息 OK\n";
+
+            }
+            else
+            {
+                richTextBox1.Text += "加入用戶信息 NG, 已經存在該用戶\n";
+            }
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            // 資料庫檔案
+            string db_filename = "db_TomeTwo.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM tb_Image";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            dataGridView1.CellClick += new DataGridViewCellEventHandler(dataGridView1_CellClick);
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //记录选择的用户名
+            string user_name = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+
+            if (user_name != "")
+            {
+                richTextBox1.Text += "你點選的用戶名 : " + user_name + "\n";
+
+                // 連接字串
+                string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+
+                SqlConnection cn = new SqlConnection(cnstr);     //实例化数据库连接对象
+
+                // 查詢字串
+                string sqlstr = "SELECT * FROM tb_Image WHERE name='" + user_name + "'";
+                richTextBox1.Text += sqlstr + "\n";
+
+                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
+
+                DataSet ds = new DataSet();                   //实例化数据集对象
+                da.Fill(ds);                       //填充数据集
+
+                richTextBox1.Text += "取得用戶名稱 : " + ds.Tables[0].Rows[0][1].ToString() + "\n";
+
+                //使用数据库中存储的二进制头像实例化内存数据流
+                MemoryStream MStream = new MemoryStream((byte[])ds.Tables[0].Rows[0][2]); // 圖片
+                pictureBox1.Image = Image.FromStream(MStream);  //显示用户头像
+
+            }
+
         }
 
         private void button28_Click(object sender, EventArgs e)
