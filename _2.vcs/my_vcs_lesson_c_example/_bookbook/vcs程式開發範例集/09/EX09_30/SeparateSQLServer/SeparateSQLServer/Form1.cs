@@ -22,18 +22,23 @@ namespace SeparateSQLServer
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            biandingiInfo();
-        }
-
-        private void biandingiInfo()
-        {
+            // 資料庫檔案
             string db_filename = "db_09_Data.MDF";
+            // 查詢字串, 檢視 SQL Server 上的資料庫清單
+            string sqlstr = "SELECT name FROM sysdatabases";
+            //sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            // 查詢字串, 檢視 SQL Server 上的資料庫清單, same
+            sqlstr = "SELECT name, database_id, create_date FROM sys.databases";  // same
+            //sql_read_database(db_filename, sqlstr, dataGridView2);
+
+
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
             using (SqlConnection cn = new SqlConnection(cnstr))
             {
                 DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter("select name from sysdatabases", cn);
+                SqlDataAdapter da = new SqlDataAdapter("SELECT name FROM sysdatabases", cn);
                 da.Fill(dt);
                 this.comboBox1.DataSource = dt.DefaultView;
                 this.comboBox1.DisplayMember = "name";
@@ -108,12 +113,13 @@ namespace SeparateSQLServer
 
         private void button7_Click(object sender, EventArgs e)
         {
+            return;
+
             //以下為debug
             // 資料庫檔案
             string db_filename = "db_09_Data.mdf";
             // 查詢字串
             string sqlstr = "SELECT * FROM ddddd";
-
             sql_read_database(db_filename, sqlstr, dataGridView1);
         }
     }

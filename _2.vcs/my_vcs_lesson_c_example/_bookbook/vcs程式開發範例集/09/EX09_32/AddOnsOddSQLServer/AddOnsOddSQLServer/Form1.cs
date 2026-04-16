@@ -39,38 +39,33 @@ namespace AddOnsOddSQLServer
         {
             if (this.textBox2.Text != "")
             {
-                fujia();
+                // 連接字串
+                string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
+                using (SqlConnection con = new SqlConnection(cnstr))
+                {
+                    try
+                    {
+                        SqlCommand cmd = new SqlCommand();
+                        con.Open();
+                        cmd.Connection = con;
+                        StringBuilder sb = new StringBuilder();
+                        sb.Append("sp_attach_single_file_db @dbname='" + this.textBox2.Text + "',");
+                        sb.Append("@physname='" + this.textBox1.Text + "'");
+
+                        cmd.CommandText = sb.ToString();
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("附加成功");
+                    }
+                    catch (Exception ety)
+                    {
+                        MessageBox.Show(ety.Message);
+                    }
+                }
             }
             else
             {
                 MessageBox.Show("請寫入資料庫名稱");
-            }
-        }
-
-        private void fujia()
-        {
-            // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
-
-            using (SqlConnection con = new SqlConnection(cnstr))
-            {
-                try
-                {
-                    SqlCommand cmd = new SqlCommand();
-                    con.Open();
-                    cmd.Connection = con;
-                    StringBuilder sb = new StringBuilder();
-                    sb.Append("sp_attach_single_file_db @dbname='" + this.textBox2.Text + "',");
-                    sb.Append("@physname='" + this.textBox1.Text + "'");
-
-                    cmd.CommandText = sb.ToString();
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("附加成功");
-                }
-                catch (Exception ety)
-                {
-                    MessageBox.Show(ety.Message);
-                }
             }
         }
 
@@ -113,6 +108,8 @@ namespace AddOnsOddSQLServer
 
         private void button7_Click(object sender, EventArgs e)
         {
+            return;
+
             //以下為debug
             // 資料庫檔案
             string db_filename = "db_09_Data.mdf";

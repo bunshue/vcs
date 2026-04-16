@@ -26,7 +26,11 @@ namespace FunctionCondition
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
             SqlConnection cn = new SqlConnection(cnstr);
             cn.Open();
-            SqlDataAdapter dap = new SqlDataAdapter("SELECT * FROM tb_01", cn);
+
+            // 查詢字串
+            string sqlstr = "SELECT * FROM tb_01";
+
+            SqlDataAdapter dap = new SqlDataAdapter(sqlstr, cn);
             DataSet ds = new DataSet();
             dap.Fill(ds, "Table");
             string[] arylist = new string[ds.Tables[0].Columns.Count];
@@ -45,14 +49,20 @@ namespace FunctionCondition
         {
             string db_filename = "db_10_Data.MDF";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+
             if (textBox1.Text == "" || comboBox1.Text == "")
             {
                 MessageBox.Show("文字框不能為空！");
                 return;
             }
+
             SqlConnection cn = new SqlConnection(cnstr);
             cn.Open();
-            SqlDataAdapter dap = new SqlDataAdapter("SELECT 學生編號," + comboBox1.Text + " FROM tb_01 WHERE len(" + comboBox1.Text + ")=" + textBox1.Text, cn);
+
+            // 查詢字串
+            string sqlstr = "SELECT 學生編號," + comboBox1.Text + " FROM tb_01 WHERE len(" + comboBox1.Text + ")=" + textBox1.Text;
+
+            SqlDataAdapter dap = new SqlDataAdapter(sqlstr, cn);
             DataSet ds = new DataSet();
             dap.Fill(ds, "Table");
             dataGridView1.DataSource = ds.Tables[0].DefaultView;

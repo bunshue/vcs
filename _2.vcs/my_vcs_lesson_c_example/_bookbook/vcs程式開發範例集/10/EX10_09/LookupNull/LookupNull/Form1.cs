@@ -89,6 +89,8 @@ namespace LookupNull
 
         private void button1_Click(object sender, EventArgs e)
         {
+            return;
+
             //以下為debug
             // 資料庫檔案
             string db_filename = "db_09_Data.mdf";
@@ -99,4 +101,3 @@ namespace LookupNull
         }
     }
 }
-

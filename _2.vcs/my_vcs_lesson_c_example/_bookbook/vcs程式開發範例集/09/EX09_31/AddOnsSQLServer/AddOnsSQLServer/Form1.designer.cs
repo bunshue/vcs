@@ -134,7 +134,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(446, 9);
+            this.richTextBox1.Location = new System.Drawing.Point(786, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(453, 461);
             this.richTextBox1.TabIndex = 9;
@@ -161,7 +161,7 @@
             // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(911, 482);
+            this.ClientSize = new System.Drawing.Size(1251, 643);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.richTextBox1);

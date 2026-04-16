@@ -32,7 +32,7 @@ namespace SQLServerMemoryImage
 
             string[] strSex = { "男", "女" };
             this.comboBox1.DataSource = strSex;
-            string sqlstr = "select 員工編號,姓名,性別,籍貫,電話,部門名稱 from 員工訊息";
+            string sqlstr = "SELECT 員工編號,姓名,性別,籍貫,電話,部門名稱 FROM 員工訊息";
             this.dataGridView1.DataSource = DataBinding(sqlstr).DefaultView;
             this.button1.Enabled = false;
 
@@ -52,10 +52,59 @@ namespace SQLServerMemoryImage
 
         private void button1_Click(object sender, EventArgs e)
         {
-            setValue();
-            insertInfo();
-            string sqlstr = "select 員工編號,姓名,性別,籍貫,電話,部門名稱 from 員工訊息";
-            this.dataGridView1.DataSource = DataBinding(sqlstr).DefaultView;
+            string new_num_id = "A12345";  // 員工編號
+            string new_name = "david wang";  // 姓名
+            string new_sex = "男";  // 性別
+            string new_birthday = "2006/03/11";  // 出生日期
+            string new_city = "hsinchu";  // 籍貫
+            string new_work_year = "5";  // 工齡
+            string new_telephone = "0912345678";  // 電話
+            string new_department = "RD";  // 部門名稱
+
+            ////string new_picture_filename = "";  // 照片路徑
+
+            NumID = new_num_id;
+            name = new_name;
+            pic = imgBytesIn;
+            sex = new_sex;
+            birthday = new_birthday;
+            city = new_city;
+            years = Convert.ToInt16(new_work_year);
+            phone = new_telephone;
+            part = new_department;
+
+            richTextBox1.Text += "增加資料\n";
+            try
+            {
+                con.Open();
+
+                // 查詢字串
+                string sqlstr = "INSERT INTO 員工訊息 values(@員工編號,@姓名,@照片,@性別,@出生日期,@籍貫,@工齡,@電話,@部門名稱)";
+
+                SqlCommand cmd = new SqlCommand(sqlstr, con);
+
+                cmd.Parameters.Add("@員工編號", SqlDbType.Text).Value = NumID;
+                cmd.Parameters.Add("@姓名", SqlDbType.Text).Value = name;
+                cmd.Parameters.Add("@照片", SqlDbType.Binary).Value = pic;
+                cmd.Parameters.Add("@性別", SqlDbType.Text).Value = sex;
+                cmd.Parameters.Add("@出生日期", SqlDbType.Text).Value = birthday;
+                cmd.Parameters.Add("@籍貫", SqlDbType.Text).Value = city;
+                cmd.Parameters.Add("@工齡", SqlDbType.Int).Value = years;
+                cmd.Parameters.Add("@電話", SqlDbType.Text).Value = phone;
+                cmd.Parameters.Add("@部門名稱", SqlDbType.Text).Value = part;
+                cmd.ExecuteNonQuery();
+                con.Close();
+                MessageBox.Show("OK");
+                this.button3.Enabled = true;
+                this.button1.Enabled = false;
+            }
+            catch (Exception ey)
+            {
+                this.button1.Enabled = true;
+            }
+
+            //string sqlstr = "SELECT 員工編號,姓名,性別,籍貫,電話,部門名稱 FROM 員工訊息";
+            //this.dataGridView1.DataSource = DataBinding(sqlstr).DefaultView;
         }
 
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
@@ -103,71 +152,20 @@ namespace SQLServerMemoryImage
                     part = dt.Rows[0][8].ToString();
                 }
             }
-            getValue();
-        }
 
-        //#region method
-        private bool insertInfo()
-        {
-            try
-            {
-                con.Open();
-
-                // 查詢字串
-                string sqlstr = "INSERT INTO 員工訊息 values(@員工編號,@姓名,@照片,@性別,@出生日期,@籍貫,@工齡,@電話,@部門名稱)";
-
-                SqlCommand cmd = new SqlCommand(sqlstr, con);
-
-                cmd.Parameters.Add("@員工編號", SqlDbType.Text).Value = NumID;
-                cmd.Parameters.Add("@姓名", SqlDbType.Text).Value = name;
-                cmd.Parameters.Add("@照片", SqlDbType.Binary).Value = pic;
-                cmd.Parameters.Add("@性別", SqlDbType.Text).Value = sex;
-                cmd.Parameters.Add("@出生日期", SqlDbType.Text).Value = birthday;
-                cmd.Parameters.Add("@籍貫", SqlDbType.Text).Value = city;
-                cmd.Parameters.Add("@工齡", SqlDbType.Int).Value = years;
-                cmd.Parameters.Add("@電話", SqlDbType.Text).Value = phone;
-                cmd.Parameters.Add("@部門名稱", SqlDbType.Text).Value = part;
-                cmd.ExecuteNonQuery();
-                con.Close();
-                MessageBox.Show("OK");
-                this.button3.Enabled = true;
-                this.button1.Enabled = false;
-                return true;
-            }
-            catch (Exception ey)
-            {
-                this.button1.Enabled = true;
-                return false;
-            }
-        }
-
-        private void setValue()
-        {
-            NumID = this.textBox2.Text;
-            name = this.textBox3.Text;
-            pic = imgBytesIn;
-            sex = comboBox1.Text;
-            birthday = this.textBox4.Text;
-            city = this.textBox5.Text;
-            years = Convert.ToInt16(this.textBox6.Text);
-            phone = this.textBox7.Text;
-            part = this.textBox8.Text;
-        }
-
-        private void getValue()
-        {
             richTextBox1.Text += "getValue()\n";
+            richTextBox1.Text += "員工編號 : " + NumID + "\n";
+            richTextBox1.Text += "姓名 : " + name + "\n";
+            richTextBox1.Text += "性別 : " + sex + "\n";
+            richTextBox1.Text += "出生日期 : " + birthday + "\n";
+            richTextBox1.Text += "籍貫 : " + city + "\n";
+            richTextBox1.Text += "工齡 : " + years.ToString() + "\n";
+            richTextBox1.Text += "電話 : " + phone + "\n";
+            richTextBox1.Text += "部門名稱 : " + part + "\n";
+            richTextBox1.Text += "照片路徑 : " + pic + "\n";
 
-            this.textBox2.Text = NumID;
-            this.textBox3.Text = name;
             MemoryStream ms = new MemoryStream(pic);			//二進制流
             this.pictureBox1.Image = Image.FromStream(ms);
-            comboBox1.Text = sex;
-            this.textBox4.Text = birthday;
-            this.textBox5.Text = city;
-            this.textBox6.Text = years.ToString();
-            this.textBox7.Text = phone;
-            this.textBox8.Text = part;
         }
 
         private DataTable DataBinding(string Sql)
@@ -196,7 +194,6 @@ namespace SQLServerMemoryImage
                 }
             }
         }
-        //#endregion
 
         //#region//存取器
         private string 員工編號;

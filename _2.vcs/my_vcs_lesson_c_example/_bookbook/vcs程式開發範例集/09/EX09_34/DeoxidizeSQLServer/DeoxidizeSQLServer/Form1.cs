@@ -13,9 +13,6 @@ namespace DeoxidizeSQLServer
 {
     public partial class Form1 : Form
     {
-        // 資料庫連線參數, 連接字串
-        string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_03_Data.mdf;Integrated Security=True;Connect Timeout=30";
-
         public Form1()
         {
             InitializeComponent();
@@ -49,20 +46,14 @@ namespace DeoxidizeSQLServer
         {
             //還原SQL Server資料庫
 
-            Restore();
-        }
-
-        private void Restore()
-        {
             string path = this.textBox1.Text; //獲得備份路徑及資料庫名稱
             string dbname = this.comboBox1.Text;
 
             // 連接字串
             //string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Database1.mdf;Integrated Security=True;Connect Timeout=30";
-
-
             string SqlStr1 = "Server=(local);database='" + this.comboBox1.Text + "';Uid=sa;Pwd=";
             string SqlStr2 = "use master restore database " + dbname + " from disk='" + path + "'";
+
             using (SqlConnection con = new SqlConnection(SqlStr1))
             {
                 con.Open();
@@ -126,6 +117,8 @@ namespace DeoxidizeSQLServer
 
         private void button3_Click(object sender, EventArgs e)
         {
+            return;
+
             //以下為debug
             // 資料庫檔案
             string db_filename = "db_09_Data.mdf";

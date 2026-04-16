@@ -31,14 +31,14 @@ namespace ProcedureUpData
 
             showList();
 
-            string id = "P1005";  // textbox1 員工編號
-            string name = "david";  // textbox2 員工姓名
-            string money = "34567";  // textbox4 基本工資
-            string talk = "Very good";  // textbox5 工作評價
+            string id = "P1005";  // 員工編號
+            string name = "david";  // 員工姓名
+            string money = "34567";  // 基本工資
+            string description = "Very good";  // 工作評價
             textBox1.Text = id;
             textBox2.Text = name;
             textBox4.Text = money;
-            textBox5.Text = talk;
+            textBox5.Text = description;
         }
 
         private void listView1_Click(object sender, EventArgs e)
@@ -50,10 +50,10 @@ namespace ProcedureUpData
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            string id = "P1005";  // textbox1 員工編號
-            string name = "david";  // textbox2 員工姓名
-            string money = "34567";  // textbox4 基本工資
-            string talk = "Very good";  // textbox5 工作評價
+            string new_id = "P1005";  // 員工編號
+            string new_name = "david";  // 員工姓名
+            string new_money = "34567";  // 基本工資
+            string new_description = "Very good";  // 工作評價
 
             if (TextClear())
             {
@@ -65,10 +65,10 @@ namespace ProcedureUpData
                     cmd.CommandText = "proc_Update";
                     SqlParameter[] par =
                     { 
-                        new SqlParameter("@id",this.textBox1.Text), 
-                        new SqlParameter("@name",this.textBox2.Text),
-                        new SqlParameter("@money",this.textBox4.Text),
-                        new SqlParameter("@talk",this.textBox5.Text)
+                        new SqlParameter("@id", new_id),
+                        new SqlParameter("@name", new_name),
+                        new SqlParameter("@money", new_money),
+                        new SqlParameter("@description", new_description)
                     };
                     foreach (SqlParameter parms in par)
                     {
@@ -156,10 +156,18 @@ namespace ProcedureUpData
                 if (dr.HasRows)
                 {
                     dr.Read();
-                    this.textBox1.Text = dr[0].ToString();
-                    this.textBox2.Text = dr[1].ToString();
-                    this.textBox4.Text = dr[2].ToString();
-                    this.textBox5.Text = dr[3].ToString();
+                    string new_id = dr[0].ToString();  // 員工編號
+                    string new_name = dr[1].ToString();  // 員工姓名
+                    string new_money = dr[2].ToString();  // 基本工資
+                    string new_description = dr[3].ToString();  // 工作評價
+                    this.textBox1.Text = new_id;
+                    this.textBox2.Text = new_name;
+                    this.textBox4.Text = new_money;
+                    this.textBox5.Text = new_description;
+                    richTextBox1.Text += "員工編號 : " + new_id + "\n";
+                    richTextBox1.Text += "員工姓名 : " + new_name + "\n";
+                    richTextBox1.Text += "基本工資 : " + new_money + "\n";
+                    richTextBox1.Text += "工作評價 : " + new_description + "\n";
                 }
                 dr.Close();
                 con.Close();
@@ -212,7 +220,6 @@ namespace ProcedureUpData
             string sqlstr = "SELECT * FROM 員工表";
 
             sql_read_database(db_filename, sqlstr, dataGridView1);
-
         }
     }
 }

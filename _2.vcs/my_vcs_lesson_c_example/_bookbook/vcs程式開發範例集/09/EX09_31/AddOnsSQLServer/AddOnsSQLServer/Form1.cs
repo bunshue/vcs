@@ -13,9 +13,6 @@ namespace AddOnsSQLServer
 {
     public partial class Form1 : Form
     {
-        // 連接字串
-        string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
-
         public Form1()
         {
             InitializeComponent();
@@ -47,42 +44,39 @@ namespace AddOnsSQLServer
         {
             if (this.textBox3.Text != "")
             {
-                fujia();
+                //附加
+
+                // 連接字串
+                string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
+                using (SqlConnection cn = new SqlConnection(cnstr))
+                {
+                    try
+                    {
+                        SqlCommand cmd = new SqlCommand();
+                        cn.Open();
+                        cmd.Connection = cn;
+                        StringBuilder sb = new StringBuilder();
+                        sb.Append("sp_attach_db @dbname='" + this.textBox1.Text + "',");
+                        sb.Append("@filename1='" + this.textBox3.Text + "'");
+                        if (this.textBox2.Text != "")
+                        {
+                            sb.Append(",@filename2='" + this.textBox2.Text + "'");
+                        }
+                        cmd.CommandText = sb.ToString();
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("附加成功");
+                        this.button3.Enabled = false;
+                    }
+                    catch (Exception ety)
+                    {
+                        MessageBox.Show(ety.Message);
+                    }
+                }
             }
             else
             {
                 MessageBox.Show("請輸入資料庫名");
-            }
-        }
-
-        private void fujia()
-        {
-            // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
-
-            using (SqlConnection cn = new SqlConnection(cnstr))
-            {
-                try
-                {
-                    SqlCommand cmd = new SqlCommand();
-                    cn.Open();
-                    cmd.Connection = cn;
-                    StringBuilder sb = new StringBuilder();
-                    sb.Append("sp_attach_db @dbname='" + this.textBox1.Text + "',");
-                    sb.Append("@filename1='" + this.textBox3.Text + "'");
-                    if (this.textBox2.Text != "")
-                    {
-                        sb.Append(",@filename2='" + this.textBox2.Text + "'");
-                    }
-                    cmd.CommandText = sb.ToString();
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("附加成功");
-                    this.button3.Enabled = false;
-                }
-                catch (Exception ety)
-                {
-                    MessageBox.Show(ety.Message);
-                }
             }
         }
 
@@ -125,6 +119,8 @@ namespace AddOnsSQLServer
 
         private void button4_Click(object sender, EventArgs e)
         {
+            return;
+
             //以下為debug
             // 資料庫檔案
             string db_filename = "db_09_Data.mdf";

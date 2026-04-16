@@ -2322,6 +2322,20 @@ namespace vcs_SqlConnection1
             sqlstr = string.Format(@"SELECT COUNT(书号)AS 记录条数, 书号,书名,作者 FROM tb_Book GROUP BY 书号,书名,作者 HAVING COUNT(书号)>1");
             sql_read_database(db_filename, sqlstr, dataGridView2);
             */
+
+            //6060
+
+            // 分析公司男女比率
+            db_filename = "db_13.mdf";
+            sqlstr = "SELECT * FROM tb_sex";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            sqlstr = "SELECT sex, COUNT(sex) num FROM tb_sex GROUP BY sex";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+
+            //6060
+
+
         }
 
         private void btn_sql_test_Click(object sender, EventArgs e)

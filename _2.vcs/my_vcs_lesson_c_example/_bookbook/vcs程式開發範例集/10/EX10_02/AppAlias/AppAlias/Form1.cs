@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+
 using System.Data.SqlClient;
 
 namespace AppAlias
@@ -26,9 +27,15 @@ namespace AppAlias
 
             SqlConnection cn = new SqlConnection(cnstr);
             cn.Open();
-            SqlDataAdapter dap = new SqlDataAdapter("SELECT * FROM tb_02", cn);
+
+            // 查詢字串
+            string sqlstr = "SELECT * FROM tb_02";
+            SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
             DataSet ds = new DataSet();
-            dap.Fill(ds, "tabel");
+            da.Fill(ds, "tabel");
+
+            richTextBox1.Text += "個數 : " + ds.Tables[0].Columns.Count.ToString() + "\n";
+
             string[] arylist = new string[ds.Tables[0].Columns.Count];
             for (int i = 0; i < ds.Tables[0].Columns.Count; i++)
             {
@@ -37,6 +44,7 @@ namespace AppAlias
             for (int j = 0; j < ds.Tables[0].Columns.Count; j++)
             {
                 comboBox1.Items.Add(arylist[j]);
+                richTextBox1.Text += "加到 comboBox1 : " + arylist[j] + "\n";
             }
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
         }
@@ -51,12 +59,16 @@ namespace AppAlias
                 MessageBox.Show("列名和別名不能為空!");
                 return;
             }
+
             SqlConnection cn = new SqlConnection(cnstr);
             cn.Open();
-            string str = "SELECT " + comboBox1.Text + "," + comboBox1.Text + " AS " + textBox1.Text.Trim() + " FROM tb_02";
-            SqlDataAdapter dap = new SqlDataAdapter(str, cn);
+
+            // 查詢字串
+            string sqlstr = "SELECT " + comboBox1.Text + "," + comboBox1.Text + " AS " + textBox1.Text.Trim() + " FROM tb_02";
+
+            SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
             DataSet ds = new DataSet();
-            dap.Fill(ds, "table");
+            da.Fill(ds, "table");
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
         }
 
@@ -102,6 +114,7 @@ namespace AppAlias
             // 資料庫檔案
             string db_filename = "db_10_Data.mdf";
 
+            // 查詢字串
             string sqlstr = "SELECT * FROM tb_02";
             sql_read_database(db_filename, sqlstr, dataGridView2);
         }

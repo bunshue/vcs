@@ -176,11 +176,17 @@ namespace ProcedureNumber
 
         private void InsertInfo()
         {
+            string new_id = "P1018";  // 員工編號
+            string new_name = "david";  // 員工姓名
+            string new_age = "18";  // 員工年齡
+            string new_money = "34567";  // 基本工資
+            string new_idcard = "P123456789";  // 身分證號
+            
             using (SqlConnection con = new SqlConnection(cnstr))
             {
                 con.Open();
                 SqlCommand cmd = new SqlCommand();
-                string strSql = "insert into 員工個人訊息 values ('" + this.textBox1.Text + "','" + this.textBox2.Text + "','" + this.textBox3.Text + "','" + this.textBox5.Text + "','" + this.textBox4.Text + "')";
+                string strSql = "insert into 員工個人訊息 values ('" + new_id + "','" + new_name + "','" + new_age + "','" + new_money + "','" + new_idcard + "')";
                 cmd.CommandText = strSql;
                 cmd.Connection = con;
                 cmd.ExecuteNonQuery();

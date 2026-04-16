@@ -26,9 +26,6 @@ namespace SparePartSQLServer
             string db_filename = "db_09_Data.MDF";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
-            // 連接字串
-            //string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
-
             using (SqlConnection con = new SqlConnection(cnstr))
             {
                 DataTable dt = new DataTable();
@@ -42,11 +39,8 @@ namespace SparePartSQLServer
 
         private void button1_Click(object sender, EventArgs e)
         {
-            beifenInfo();
-        }
+            //備份
 
-        public void beifenInfo()
-        {
             string db_filename = "db_09_Data.MDF";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
@@ -130,6 +124,8 @@ namespace SparePartSQLServer
 
         private void button2_Click(object sender, EventArgs e)
         {
+            return;
+
             //以下為debug
             // 資料庫檔案
             string db_filename = "db_09_Data.mdf";

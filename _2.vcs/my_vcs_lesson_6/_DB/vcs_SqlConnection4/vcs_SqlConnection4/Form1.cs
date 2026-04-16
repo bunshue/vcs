@@ -13,6 +13,8 @@ using System.Collections;  // for Hashtable
 using System.Drawing.Drawing2D;  // for LinearGradientBrush
 //using System.Drawing.Imaging;
 
+//對資料庫操作 增茶改山
+
 namespace vcs_SqlConnection4
 {
     public partial class Form1 : Form
@@ -803,15 +805,18 @@ namespace vcs_SqlConnection4
 
         private void button12_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "SQL 12\n";
+            richTextBox1.Text += "SQL 12 查詢日期數據\n";
 
-            // 分析公司男女比率
-            string db_filename = "db_13.mdf";
-            string sqlstr = "SELECT * FROM tb_sex";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
+            string birthday = "1984/1/24";
 
-            sqlstr = "SELECT sex, COUNT(sex) num FROM tb_sex GROUP BY sex";
-            sql_read_database(db_filename, sqlstr, dataGridView2);
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection cn = new SqlConnection(cnstr);
+            cn.Open();
+            SqlDataAdapter dap = new SqlDataAdapter("SELECT * FROM tb_07 WHERE 出生日期='" + birthday + "'", cn);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -919,7 +924,7 @@ namespace vcs_SqlConnection4
 
             richTextBox1.Text += "------------------------------\n";  // 30個
             /*
-            richTextBox1.Text += "測試 UPDATE\n";
+            richTextBox1.Text += "測試 UPDATE 修改\n";
             richTextBox1.Text += "員工編號 : " + textBox1.Text + "\n";
             richTextBox1.Text += "員工姓名 : " + textBox2.Text + "\n";
             richTextBox1.Text += "基本工資 : " + textBox4.Text + "\n";
@@ -1170,68 +1175,94 @@ namespace vcs_SqlConnection4
         {
             richTextBox1.Text += "SQL 17\n";
 
-            //更新資料範例
-            //SqlDataAdapter da = new SqlDataAdapter("SELECT name FROM tb_power", con);
+            string db_filename = "db_09_Data.mdf";
+            string sqlstr = "SELECT * FROM tb_power";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
 
-            string strValue = null;
-            strValue += "1,";
-            strValue += "1,";
-            strValue += "1,";
-            strValue += "1,";
-            strValue += "1,";
-            strValue += "1,";
-            strValue += "1,";
-            strValue += "1";
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //更新資料範例
+
+            string name = "hywork";
+            string strValue = "1234";
 
             // 連接字串
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
-            /*
+
             using (SqlConnection con = new SqlConnection(cnstr))
             {
-                SqlCommand cmd = new SqlCommand("UPDATE tb_Power SET power='" + strValue + "' WHERE name='" + this.listBox1.Text + "' ", con);
+                 //修改
+                SqlCommand cmd = new SqlCommand("UPDATE tb_Power SET power='" + strValue + "' WHERE name='" + name + "' ", con);
                 cmd.Connection = con;
                 cmd.Connection.Open();
                 cmd.ExecuteNonQuery();
-                richTextBox1.Text += "授權成功！！！\n";
+                richTextBox1.Text += "更新成功！！！\n";
             }
-            */
+
+            db_filename = "db_09_Data.mdf";
+            sqlstr = "SELECT * FROM tb_power";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             //查詢範例
 
-            string str = null;
-
             // 連接字串
-            //string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
-            //richTextBox1.Text += "aaaaa : " + this.listBox1.Text + "\n";
-            /*
+            cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
             using (SqlConnection con = new SqlConnection(cnstr))//連接資料庫
             {
-                SqlCommand cmd = new SqlCommand("SELECT power FROM tb_power WHERE name='" + this.listBox1.Text + "'", con);//連接SQL語句與數擾庫的連接
+                SqlCommand cmd = new SqlCommand("SELECT power FROM tb_power WHERE name='" + name + "'", con);//連接SQL語句與數擾庫的連接
                 cmd.Connection = con;
                 cmd.Connection.Open();//打開資料庫的連接
                 SqlDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
                 if (dr.HasRows)//如果有記錄
                 {
                     dr.Read();//讀取下一行
-                    str = dr[0].ToString();//取得權限值
+                    string str = dr[0].ToString();//取得權限值
                     richTextBox1.Text += "取得權限值 = " + str + "\n";
                 }
                 dr.Close();//關閉
                 con.Close();//關閉連接
                 con.Dispose();
             }
-            */
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "SQL 18\n";
+            richTextBox1.Text += "SQL 18 利用變數查詢日期型數據\n";
+
+            // 資料庫檔案
+            string db_filename = "db_10_Data.MDF";
+            // 查詢字串
+            string sqlstr = "select * from tb_stu";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            //3030
+
+            db_filename = "db_10_Data.MDF";
+            string birthday = "1983/4/2";
+            // 查詢字串
+            sqlstr = "select * from tb_stu where 出生年月='" + birthday + "'";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "SQL 19\n";
+            richTextBox1.Text += "SQL 19 利用_通配符進行查詢\n";
+
+            // 資料庫檔案
+            string db_filename = "db_10_Data.MDF";
+            // 查詢字串
+            string sqlstr = "select * from tb_stu";
+
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            string student_id = "20014103";
+            sqlstr = "select * from tb_stu where 學生編號 like '" + student_id + "'";
+
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+
         }
 
         private void button20_Click(object sender, EventArgs e)
