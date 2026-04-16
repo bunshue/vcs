@@ -9,7 +9,6 @@ using System.Windows.Forms;
 
 using System.IO;
 using System.Drawing.Printing;
-using System.Data.SqlClient;  // for SqlConnection, SqlCommand, SqlDataAdapter
 
 /*
 預覽列印
@@ -66,7 +65,7 @@ namespace vcs_test_all_05_Print2
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 280 + 10;
-            
+
             groupBox0.Size = new Size(200, 280);
             groupBox1.Size = new Size(200, 280);
             groupBox2.Size = new Size(200, 280);

@@ -303,7 +303,6 @@ namespace SQLServerMemoryImage
             string sqlstr = "SELECT * FROM 員工訊息";
 
             sql_read_database(db_filename, sqlstr, dataGridView2);
-
         }
     }
 }

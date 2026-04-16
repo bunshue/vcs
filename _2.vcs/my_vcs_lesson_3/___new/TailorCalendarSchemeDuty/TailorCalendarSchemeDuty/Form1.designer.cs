@@ -40,6 +40,9 @@ namespace TailorCalendarSchemeDuty
             this.button6 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.button7 = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // monthCalendar1
@@ -161,11 +164,32 @@ namespace TailorCalendarSchemeDuty
             this.richTextBox1.TabIndex = 14;
             this.richTextBox1.Text = "";
             // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(996, 12);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(114, 63);
+            this.button7.TabIndex = 15;
+            this.button7.Text = "test";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(654, 117);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(456, 482);
+            this.dataGridView1.TabIndex = 16;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(877, 611);
+            this.ClientSize = new System.Drawing.Size(1122, 611);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button6);
@@ -182,6 +206,7 @@ namespace TailorCalendarSchemeDuty
             this.Text = "製作日曆計劃任務";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.DoubleClick += new System.EventHandler(this.Form1_DoubleClick);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -201,6 +226,8 @@ namespace TailorCalendarSchemeDuty
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 

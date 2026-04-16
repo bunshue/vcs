@@ -36,16 +36,20 @@ namespace DataGridViewToTreeView
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // 清空內容ToolStripMenuItem
             // 
             this.清空內容ToolStripMenuItem.Name = "清空內容ToolStripMenuItem";
-            this.清空內容ToolStripMenuItem.Size = new System.Drawing.Size(118,22);
+            this.清空內容ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.清空內容ToolStripMenuItem.Text = "清空內容";
             this.清空內容ToolStripMenuItem.Click += new System.EventHandler(this.清空內容ToolStripMenuItem_Click);
             // 
@@ -56,26 +60,26 @@ namespace DataGridViewToTreeView
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridView1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(-4,12);
+            this.dataGridView1.Location = new System.Drawing.Point(-4, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(321,380);
+            this.dataGridView1.Size = new System.Drawing.Size(321, 380);
             this.dataGridView1.TabIndex = 5;
             this.dataGridView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseDown);
             // 
             // 追加節點ToolStripMenuItem
             // 
             this.追加節點ToolStripMenuItem.Name = "追加節點ToolStripMenuItem";
-            this.追加節點ToolStripMenuItem.Size = new System.Drawing.Size(118,22);
+            this.追加節點ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.追加節點ToolStripMenuItem.Text = "追加節點";
             this.追加節點ToolStripMenuItem.Click += new System.EventHandler(this.追加節點ToolStripMenuItem_Click);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dataGridView1);
-            this.groupBox1.Location = new System.Drawing.Point(0,26);
+            this.groupBox1.Location = new System.Drawing.Point(0, 26);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(318,392);
+            this.groupBox1.Size = new System.Drawing.Size(318, 392);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "DataGridView控制元件";
@@ -86,15 +90,15 @@ namespace DataGridViewToTreeView
             this.追加節點ToolStripMenuItem,
             this.清空內容ToolStripMenuItem});
             this.操作類型ToolStripMenuItem.Name = "操作類型ToolStripMenuItem";
-            this.操作類型ToolStripMenuItem.Size = new System.Drawing.Size(65,20);
+            this.操作類型ToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.操作類型ToolStripMenuItem.Text = "操作類型";
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.treeView1);
-            this.groupBox2.Location = new System.Drawing.Point(324,26);
+            this.groupBox2.Location = new System.Drawing.Point(324, 26);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(315,392);
+            this.groupBox2.Size = new System.Drawing.Size(315, 392);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "TreeView控制元件";
@@ -102,9 +106,9 @@ namespace DataGridViewToTreeView
             // treeView1
             // 
             this.treeView1.AllowDrop = true;
-            this.treeView1.Location = new System.Drawing.Point(1,12);
+            this.treeView1.Location = new System.Drawing.Point(1, 12);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(312,380);
+            this.treeView1.Size = new System.Drawing.Size(312, 380);
             this.treeView1.TabIndex = 4;
             this.treeView1.MouseEnter += new System.EventHandler(this.treeView1_MouseEnter);
             // 
@@ -112,17 +116,47 @@ namespace DataGridViewToTreeView
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.操作類型ToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0,0);
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(638,24);
+            this.menuStrip1.Size = new System.Drawing.Size(1238, 24);
             this.menuStrip1.TabIndex = 16;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(659, 26);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowTemplate.Height = 24;
+            this.dataGridView2.Size = new System.Drawing.Size(567, 485);
+            this.dataGridView2.TabIndex = 18;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(659, 517);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(89, 49);
+            this.button1.TabIndex = 19;
+            this.button1.Text = "test";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(0, 424);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(637, 181);
+            this.richTextBox1.TabIndex = 20;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F,12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(638,416);
+            this.ClientSize = new System.Drawing.Size(1238, 617);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.menuStrip1);
@@ -135,6 +169,7 @@ namespace DataGridViewToTreeView
             this.groupBox2.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -150,6 +185,9 @@ namespace DataGridViewToTreeView
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
