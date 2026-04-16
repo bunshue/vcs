@@ -74,19 +74,16 @@ namespace SparePartSQLServer
                         com.ExecuteNonQuery();						    //執行
                         con.Close();
                         con.Dispose();
-                        //MessageBox.Show("數據備份成功！");
                         richTextBox1.Text += "數據備份成功\n";
                     }
                     else
                     {
-                        //MessageBox.Show("請重新命名！");
                         richTextBox1.Text += "請重新命名\n";
                     }
                 }
             }
             catch (Exception k)
             {
-                //MessageBox.Show(k.Message);
                 richTextBox1.Text += "數據備份失敗, 原因 : \n";
                 richTextBox1.Text += k.Message + "\n";
 
@@ -137,7 +134,7 @@ namespace SparePartSQLServer
             // 資料庫檔案
             string db_filename = "db_09_Data.mdf";
             // 查詢字串
-            string sqlstr = "SELECT * FROM 員工表";
+            string sqlstr = "SELECT * FROM ddddd";
 
             sql_read_database(db_filename, sqlstr, dataGridView1);
         }

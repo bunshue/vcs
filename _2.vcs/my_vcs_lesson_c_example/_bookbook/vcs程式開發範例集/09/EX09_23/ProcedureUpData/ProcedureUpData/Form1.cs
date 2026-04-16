@@ -76,13 +76,13 @@ namespace ProcedureUpData
                     }
                     cmd.ExecuteNonQuery();
                     con.Close();
-                    MessageBox.Show("修改成功");
+                    richTextBox1.Text += "修改成功\n";
                     showList();
                 }
             }
             else
             {
-                MessageBox.Show("請選擇訊息");
+                richTextBox1.Text += "請選擇訊息\n";
             }
         }
 

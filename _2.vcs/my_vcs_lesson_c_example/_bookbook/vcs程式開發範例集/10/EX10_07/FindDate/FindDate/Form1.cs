@@ -80,7 +80,7 @@ namespace FindDate
             // 資料庫檔案
             string db_filename = "db_09_Data.mdf";
             // 查詢字串
-            string sqlstr = "SELECT * FROM 員工表";
+            string sqlstr = "SELECT * FROM ddddd";
 
             sql_read_database(db_filename, sqlstr, dataGridView1);
         }

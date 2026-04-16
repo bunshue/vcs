@@ -33,7 +33,7 @@ namespace DataObjectUpData
             Resultinfo(Num);
 
             // 查詢字串
-            string sqlstr = "select Count(*) from 員工表";
+            string sqlstr = "select COUNT(*) from 員工表";
 
             using (SqlCommand cmd = new SqlCommand(sqlstr, con))
             {
@@ -41,15 +41,13 @@ namespace DataObjectUpData
                 Count = Convert.ToInt32(cmd.ExecuteScalar());
                 con.Close();
             }
-        }
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
+            richTextBox1.Text += "取得資料總數 : " + Count.ToString() + " 筆\n";
         }
 
         private DataSet DtReslut(int i)
         {
+            richTextBox1.Text += "讀取第 " + i.ToString() + " 筆資料\n";
             using (SqlDataAdapter da = new SqlDataAdapter())
             {
                 // 查詢字串
@@ -62,15 +60,10 @@ namespace DataObjectUpData
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Num = 0;
-            Resultinfo(Num);
-        }
-
         private void Resultinfo(int j)
         {
             DataSet dsNew = DtReslut(j);
+
             this.textBox1.Text = dsNew.Tables[0].Rows[0][0].ToString();
             this.textBox2.Text = dsNew.Tables[0].Rows[0][1].ToString();
             this.textBox4.Text = dsNew.Tables[0].Rows[0][2].ToString();
@@ -86,7 +79,7 @@ namespace DataObjectUpData
             }
             else
             {
-                MessageBox.Show("現已是首條記錄");
+                richTextBox1.Text += "現已是首條記錄\n";
                 Num = 0;
                 return; ;
             }
@@ -101,27 +94,13 @@ namespace DataObjectUpData
             }
             else
             {
-                MessageBox.Show("現已是末條記錄");
+                richTextBox1.Text += "現已是末條記錄\n";
                 Num = Count - 1;
                 return;
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            Num = Count;
-            Resultinfo(Num - 1);
-        }
-
         private void button5_Click(object sender, EventArgs e)
-        {
-            if (update())
-            {
-                MessageBox.Show("成功修改");
-            }
-        }
-
-        private bool update()
         {
             // 查詢字串
             string sqlstr = "update 員工表 set 員工姓名=@員工姓名,基本工資=@基本工資,工作評價=@工作評價 where 員工編號=@員工編號";
@@ -137,11 +116,11 @@ namespace DataObjectUpData
                     command.Parameters.Add("@工作評價", SqlDbType.VarChar, 50, "工作評價").Value = this.textBox5.Text;
                     command.ExecuteNonQuery();
                     con.Close();
-                    return true;
+                    richTextBox1.Text += "成功修改\n";
                 }
                 catch
                 {
-                    return false;
+                    richTextBox1.Text += "成功失敗\n";
                 }
             }
         }
