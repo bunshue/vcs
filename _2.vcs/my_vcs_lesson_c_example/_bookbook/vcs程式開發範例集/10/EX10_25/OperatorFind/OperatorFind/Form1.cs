@@ -66,20 +66,21 @@ namespace OperatorFind
             for (int i = 0; i < nint; i++)//將表中的字段名新增到ComboBox控制元件中
             {
                 combox.Items.Add(SqlRead.Tables[0].Rows[i][0].ToString());
+                richTextBox1.Text += "加入 : " + SqlRead.Tables[0].Rows[i][0].ToString() + "\n";
             }
         }
         //#endregion
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            DataSet Dset = getDataSet("select * from 銷售表", "銷售表");
+            DataSet Dset = getDataSet("SELECT * FROM 銷售表", "銷售表");
             dataGridView1.DataSource = Dset.Tables[0];
             GetFBewrite("銷售表", comboBox1);
         }
 
         public string BuildSQL(string TableName, string FieldName, string Condition, string FieldValue)
         {
-            string StrSQL = "select * from " + TableName;//組合運算符的SQL查詢語句
+            string StrSQL = "SELECT * FROM " + TableName;//組合運算符的SQL查詢語句
             bool blur = false;//如果為True，則新增模糊查詢
             if (FieldValue.Trim().Length > 0)//如果查詢條件不為空
             {
@@ -164,13 +165,12 @@ namespace OperatorFind
         {
             //以下為debug
             // 資料庫檔案
-            string db_filename = "db_09_Data.mdf";
+            string db_filename = "db_10_Data.MDF";
             // 查詢字串
-            string sqlstr = "SELECT * FROM ddddd";
+            string sqlstr = "SELECT * FROM 銷售表";
 
             sql_read_database(db_filename, sqlstr, dataGridView1);
 
         }
     }
 }
-

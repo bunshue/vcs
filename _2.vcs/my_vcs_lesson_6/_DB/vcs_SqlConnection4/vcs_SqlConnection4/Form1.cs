@@ -229,14 +229,51 @@ namespace vcs_SqlConnection4
         private void button0_Click(object sender, EventArgs e)
         {
 
+            // 資料庫檔案
+            string db_filename = "animals1_db.mdf";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM animals1_table";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            //查詢操作列長度
+
+            // 查詢字串
+            sqlstr = "SELECT 編號," + "英文名" + " FROM animals1_table WHERE len(" + "英文名" + ")=5";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
-        }
+            //全部資料
+            // 資料庫檔案
+            string db_filename = "db_10_Data.MDF";
+            // 查詢字串
+            string sqlstr = "select 書號,書名,作者,單價,銷售數量,金額,日期 from tb_xsb";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
 
+
+            //查詢指定日期的數據
+
+            string datetime = "2005/7/22";
+            // 資料庫檔案
+            db_filename = "db_10_Data.MDF";
+
+            // 查詢字串
+            sqlstr = "select 書號,書名,作者,單價,銷售數量,金額,日期 from tb_xsb where 日期='" + datetime + "'";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+
+            //查詢指定時間段的數據
+
+            string datetime_st = "2005/5/1";
+            string datetime_sp = "2005/9/30";
+
+            db_filename = "db_10_Data.MDF";
+            sqlstr = "select 書號,書名,作者,單價,銷售數量,金額,日期 from tb_xsb where 日期 between'" + datetime_st + "'and '" + datetime_sp + "' order by 日期";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+        }
 
         //------------------------------------------------------------  # 60個
 
@@ -809,14 +846,11 @@ namespace vcs_SqlConnection4
 
             string birthday = "1984/1/24";
 
+            // 資料庫檔案
             string db_filename = "db_10_Data.MDF";
-            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-            SqlConnection cn = new SqlConnection(cnstr);
-            cn.Open();
-            SqlDataAdapter dap = new SqlDataAdapter("SELECT * FROM tb_07 WHERE 出生日期='" + birthday + "'", cn);
-            DataSet ds = new DataSet();
-            dap.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            // 查詢字串
+            string sqlstr = "SELECT * FROM tb_07 WHERE 出生日期='" + birthday + "'";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -1191,7 +1225,7 @@ namespace vcs_SqlConnection4
 
             using (SqlConnection con = new SqlConnection(cnstr))
             {
-                 //修改
+                //修改
                 SqlCommand cmd = new SqlCommand("UPDATE tb_Power SET power='" + strValue + "' WHERE name='" + name + "' ", con);
                 cmd.Connection = con;
                 cmd.Connection.Open();
@@ -1379,6 +1413,17 @@ namespace vcs_SqlConnection4
 
         private void button23_Click(object sender, EventArgs e)
         {
+            //按年、月或日查詢數據
+
+            // 資料庫檔案
+            string db_filename = "db_10_Data.MDF";
+            // 查詢字串
+            string sqlstr = "select 書號,書名,銷售數量,日期 from tb_xsb";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            // 查詢字串
+            sqlstr = "select 書號,書名,銷售數量,日期 from tb_xsb where year(日期)='2005' and month(日期)='10' and day(日期)='1'";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
         }
 
         private void button24_Click(object sender, EventArgs e)
@@ -1437,8 +1482,6 @@ namespace vcs_SqlConnection4
 
             sqlstr = "SELECT Years FROM tb_curve";
             sql_read_database(db_filename, sqlstr, dataGridView2);
-
-
         }
     }
 }

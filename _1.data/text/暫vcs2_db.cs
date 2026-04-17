@@ -1,5 +1,12 @@
 ﻿
 
+            // 查詢字串, 使用別名 AS
+            string sqlstr = "SELECT " + comboBox1.Text + "," + comboBox1.Text + " AS " + textBox1.Text.Trim() + " FROM tb_02";
+
+
+            SqlDataAdapter dap = new SqlDataAdapter("SELECT * FROM tb_08 WHERE " + comboBox1.Text + " IS null OR " + comboBox1.Text + "=''", cn);//透過SQL語句查詢數據表中的空數據
+
+
 
 //------------------------------------------------------------  # 60個
 
