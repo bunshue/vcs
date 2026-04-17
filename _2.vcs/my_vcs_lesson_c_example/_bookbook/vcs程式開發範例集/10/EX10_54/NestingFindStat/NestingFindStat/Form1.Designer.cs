@@ -48,9 +48,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(296, 84);
+            this.button1.Location = new System.Drawing.Point(405, 27);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(66, 23);
+            this.button1.Size = new System.Drawing.Size(107, 66);
             this.button1.TabIndex = 0;
             this.button1.Text = "查詢";
             this.button1.UseVisualStyleBackColor = true;
@@ -189,7 +189,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(660, 112);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(626, 536);
+            this.richTextBox1.Size = new System.Drawing.Size(441, 536);
             this.richTextBox1.TabIndex = 6;
             this.richTextBox1.Text = "";
             // 
@@ -197,7 +197,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1309, 688);
+            this.ClientSize = new System.Drawing.Size(1113, 659);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.dataGridView1);

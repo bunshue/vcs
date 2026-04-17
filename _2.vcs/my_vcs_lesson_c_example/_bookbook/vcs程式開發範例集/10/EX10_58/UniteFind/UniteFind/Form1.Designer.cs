@@ -52,35 +52,35 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 44);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 58);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(312, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(526, 212);
             this.dataGridView1.TabIndex = 1;
             // 
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(330, 44);
+            this.dataGridView2.Location = new System.Drawing.Point(544, 58);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 23;
-            this.dataGridView2.Size = new System.Drawing.Size(321, 150);
+            this.dataGridView2.Size = new System.Drawing.Size(486, 212);
             this.dataGridView2.TabIndex = 1;
             // 
             // dataGridView3
             // 
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(14, 200);
+            this.dataGridView3.Location = new System.Drawing.Point(12, 276);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.RowTemplate.Height = 23;
-            this.dataGridView3.Size = new System.Drawing.Size(637, 150);
+            this.dataGridView3.Size = new System.Drawing.Size(1018, 177);
             this.dataGridView3.TabIndex = 1;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(544, 12);
+            this.button1.Location = new System.Drawing.Point(544, 5);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(94, 36);
             this.button1.TabIndex = 2;
             this.button1.Text = "查　詢";
             this.button1.UseVisualStyleBackColor = true;
@@ -88,7 +88,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(14, 370);
+            this.button2.Location = new System.Drawing.Point(544, 459);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(94, 43);
             this.button2.TabIndex = 3;
@@ -98,9 +98,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(657, 9);
+            this.richTextBox1.Location = new System.Drawing.Point(657, 459);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(373, 674);
+            this.richTextBox1.Size = new System.Drawing.Size(373, 224);
             this.richTextBox1.TabIndex = 4;
             this.richTextBox1.Text = "";
             // 

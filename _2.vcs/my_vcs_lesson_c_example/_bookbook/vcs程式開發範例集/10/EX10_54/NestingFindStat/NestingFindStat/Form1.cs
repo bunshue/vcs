@@ -15,8 +15,8 @@ namespace NestingFindStat
 {
     public partial class Form1 : Form
     {
-    	string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
-    	
+        string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
+
         public Form1()
         {
             InitializeComponent();
@@ -36,6 +36,13 @@ namespace NestingFindStat
 
         private void button1_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += comboBox1.Text + "\n";
+            richTextBox1.Text += comboBox2.Text + "\n";
+            richTextBox1.Text += comboBox3.Text + "\n";
+            richTextBox1.Text += comboBox1.Text + "\n";
+            richTextBox1.Text += textBox1.Text + "\n";
+            richTextBox1.Text += textBox2.Text + "\n";
+
             // 資料庫檔案
             string db_filename = "db_10_Data.MDF";
             // 查詢字串

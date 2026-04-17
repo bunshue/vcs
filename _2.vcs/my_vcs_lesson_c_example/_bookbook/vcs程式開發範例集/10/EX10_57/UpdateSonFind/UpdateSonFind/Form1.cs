@@ -90,9 +90,9 @@ namespace UpdateSonFind
         {
             //以下為debug
             // 資料庫檔案
-            string db_filename = "db_09_Data.mdf";
+            string db_filename = "db_10_Data.MDF";
             // 查詢字串
-            string sqlstr = "SELECT * FROM ddddd";
+            string sqlstr = "select * from 員工工資表 select * from 規定工資表";
 
             sql_read_database(db_filename, sqlstr, dataGridView1);
         }

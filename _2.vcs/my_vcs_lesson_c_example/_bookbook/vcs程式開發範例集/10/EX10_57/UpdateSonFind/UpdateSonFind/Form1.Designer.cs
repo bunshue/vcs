@@ -52,24 +52,24 @@
             this.dataGridView1.Location = new System.Drawing.Point(4, 16);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(352, 145);
+            this.dataGridView1.Size = new System.Drawing.Size(477, 314);
             this.dataGridView1.TabIndex = 0;
             // 
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(4, 20);
+            this.dataGridView2.Location = new System.Drawing.Point(6, 20);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 23;
-            this.dataGridView2.Size = new System.Drawing.Size(256, 138);
+            this.dataGridView2.Size = new System.Drawing.Size(604, 310);
             this.dataGridView2.TabIndex = 0;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dataGridView1);
-            this.groupBox1.Location = new System.Drawing.Point(2, 32);
+            this.groupBox1.Location = new System.Drawing.Point(2, 49);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(362, 167);
+            this.groupBox1.Size = new System.Drawing.Size(487, 345);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "員工工資表";
@@ -77,9 +77,9 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dataGridView2);
-            this.groupBox2.Location = new System.Drawing.Point(367, 32);
+            this.groupBox2.Location = new System.Drawing.Point(495, 49);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(265, 167);
+            this.groupBox2.Size = new System.Drawing.Size(616, 345);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "規定工資表";
@@ -113,9 +113,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(520, 5);
+            this.button1.Location = new System.Drawing.Point(455, 6);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(85, 37);
             this.button1.TabIndex = 3;
             this.button1.Text = "修改";
             this.button1.UseVisualStyleBackColor = true;
@@ -145,7 +145,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(6, 205);
+            this.button2.Location = new System.Drawing.Point(495, 400);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(118, 56);
             this.button2.TabIndex = 6;
@@ -155,9 +155,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(6, 282);
+            this.richTextBox1.Location = new System.Drawing.Point(8, 400);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(626, 401);
+            this.richTextBox1.Size = new System.Drawing.Size(475, 292);
             this.richTextBox1.TabIndex = 7;
             this.richTextBox1.Text = "";
             // 
@@ -165,7 +165,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1033, 695);
+            this.ClientSize = new System.Drawing.Size(1123, 695);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.comboBox1);

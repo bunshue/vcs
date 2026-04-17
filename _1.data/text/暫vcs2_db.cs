@@ -11,7 +11,18 @@
 //------------------------------------------------------------  # 60個
 
 
+//NOT與謂詞進行組合條件的查詢
 
+string db_filename = "db_10_Data.MDF";
+
+// 查詢字串
+string sqlstr = "select * from tb_kf";
+// 查詢字串, 查詢空閒客房訊息
+// string sqlstr = "select * from tb_kf where 房態='空房 '";
+// 查詢字串, 查詢使用客房訊息
+// string sqlstr = "select * from tb_kf where 房態='入住'";
+// 查詢字串, 查詢空閒客房而且客房價格不在８０-１５０之間的客房訊息
+// string sqlstr = "select * from tb_kf where 房態='空房 ' and not(價格 between 80 and 150 )";
 
 
 //------------------------------------------------------------  # 60個

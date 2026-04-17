@@ -27,25 +27,25 @@ namespace OperatorFind
         /// <param M_str_sqlstr="string">SQL語句</param>
         /// <param M_str_table="string">表名</param>
         /// <returns>傳回DataSet對像</returns>
-        public DataSet getDataSet(string SQLstr, string tableName)
+        public DataSet getDataSet(string sqlstr, string tableName)
         {
             string db_filename = "db_10_Data.MDF";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
             SqlConnection My_con = new SqlConnection(cnstr);   //用SqlConnection對象與指定的數據庫相連接
             My_con.Open();  //打開數據庫連接
-            SqlDataAdapter SQLda = new SqlDataAdapter(SQLstr, My_con);  //建立一個SqlDataAdapter對象，並取得指定數據表的訊息
-            DataSet My_DataSet = new DataSet(); //建立DataSet對像
+            SqlDataAdapter SQLda = new SqlDataAdapter(sqlstr, My_con);  //建立一個SqlDataAdapter對象，並取得指定數據表的訊息
+            DataSet ds = new DataSet(); //建立DataSet對像
             if (tableName == "")
             {
-                SQLda.Fill(My_DataSet);
+                SQLda.Fill(ds);
             }
             else
             {
-                SQLda.Fill(My_DataSet, tableName);  //透過SqlDataAdapter對象的的Fill()方法，將數據表訊息新增到DataSet對像中
+                SQLda.Fill(ds, tableName);  //透過SqlDataAdapter對象的的Fill()方法，將數據表訊息新增到DataSet對像中
             }
             My_con.Close();    //關閉數據庫的連接
-            return My_DataSet;  //傳回DataSet對象的訊息
+            return ds;  //傳回DataSet對象的訊息
         }
         //#endregion
 
@@ -61,20 +61,20 @@ namespace OperatorFind
             string SBewrite = "";//儲存SQL語句
             //取得SQL Server 2000中數據表中的字段名
             SBewrite = "select c.name from syscolumns c,sysobjects a where a.name='" + TabN + "' and a.id=c.id";
-            DataSet SqlRead = getDataSet(SBewrite, "");//將尋找的訊息存入到DataSet對像
-            int nint = SqlRead.Tables[0].Rows.Count;//取得尋找數據的行數
+            DataSet ds = getDataSet(SBewrite, "");//將尋找的訊息存入到DataSet對像
+            int nint = ds.Tables[0].Rows.Count;//取得尋找數據的行數
             for (int i = 0; i < nint; i++)//將表中的字段名新增到ComboBox控制元件中
             {
-                combox.Items.Add(SqlRead.Tables[0].Rows[i][0].ToString());
-                richTextBox1.Text += "加入 : " + SqlRead.Tables[0].Rows[i][0].ToString() + "\n";
+                combox.Items.Add(ds.Tables[0].Rows[i][0].ToString());
+                richTextBox1.Text += "加入 : " + ds.Tables[0].Rows[i][0].ToString() + "\n";
             }
         }
         //#endregion
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            DataSet Dset = getDataSet("SELECT * FROM 銷售表", "銷售表");
-            dataGridView1.DataSource = Dset.Tables[0];
+            DataSet ds = getDataSet("SELECT * FROM 銷售表", "銷售表");
+            dataGridView1.DataSource = ds.Tables[0];
             GetFBewrite("銷售表", comboBox1);
         }
 
@@ -120,8 +120,10 @@ namespace OperatorFind
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DataSet Dset = getDataSet(BuildSQL("銷售表", comboBox1.Text, comboBox2.Text, textBox1.Text), "");//呼叫自定義方法組合SQL語句，並查詢
-            dataGridView1.DataSource = Dset.Tables[0];//顯示查詢後的結果
+            richTextBox1.Text += "查詢條件 : " + comboBox1.Text + "\t" + comboBox2.Text + "\t" + textBox1.Text + "\n";
+
+            DataSet ds = getDataSet(BuildSQL("銷售表", comboBox1.Text, comboBox2.Text, textBox1.Text), "");//呼叫自定義方法組合SQL語句，並查詢
+            dataGridView1.DataSource = ds.Tables[0];//顯示查詢後的結果
         }
 
         //以下為debug ----------------------------------------------------------------------------------------------------  # 100個
@@ -170,7 +172,6 @@ namespace OperatorFind
             string sqlstr = "SELECT * FROM 銷售表";
 
             sql_read_database(db_filename, sqlstr, dataGridView1);
-
         }
     }
 }
