@@ -39,6 +39,7 @@
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.comboBox4b = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // bt_clear
@@ -151,11 +152,21 @@
             this.label4.TabIndex = 79;
             this.label4.Text = "使用 DataSource";
             // 
+            // comboBox4b
+            // 
+            this.comboBox4b.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox4b.FormattingEnabled = true;
+            this.comboBox4b.Location = new System.Drawing.Point(12, 494);
+            this.comboBox4b.Name = "comboBox4b";
+            this.comboBox4b.Size = new System.Drawing.Size(209, 29);
+            this.comboBox4b.TabIndex = 80;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 782);
+            this.Controls.Add(this.comboBox4b);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.label3);
@@ -188,6 +199,7 @@
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox comboBox4b;
     }
 }
 

@@ -25,16 +25,11 @@ namespace vcs_GetLogicalDrives
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 140;
-            dy = 70;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
 
             button00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -44,13 +39,19 @@ namespace vcs_GetLogicalDrives
             button05.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button06.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             button07.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button08.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button09.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
-            richTextBox1.Size = new Size(600, 600);
+            richTextBox1.Size = new Size(600, 690);
             richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(800, 680);
+            this.Size = new Size(900, 750);
+            this.Text = "vcs_test_all_00_Usually";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -60,6 +61,8 @@ namespace vcs_GetLogicalDrives
 
         private void button00_Click(object sender, EventArgs e)
         {
+            // 取得目前本機所有的磁碟機, GetLogicalDrives
+
             richTextBox1.Text += "列出Logical Drives\n";
             foreach (string drive in Environment.GetLogicalDrives())
             {
@@ -72,7 +75,6 @@ namespace vcs_GetLogicalDrives
             richTextBox1.Text += string.Format("系統磁碟機：{0}", string.Join(", ", drives)) + "\n";
 
             //取得所有邏輯分區
-            //取得所有邏輯分區
             //取得本地磁盤目錄
             richTextBox1.Text += "取得所有邏輯分區\n";
             string[] logicdrives = Directory.GetLogicalDrives();
@@ -80,7 +82,6 @@ namespace vcs_GetLogicalDrives
             {
                 richTextBox1.Text += "取得: " + logicdrives[i] + "\n";
             }
-
         }
 
         private void button01_Click(object sender, EventArgs e)
@@ -108,8 +109,7 @@ namespace vcs_GetLogicalDrives
             }
             catch (System.Security.SecurityException)
             {
-                System.Console.WriteLine("The caller does not have the " +
-                    "required permission.");
+                System.Console.WriteLine("The caller does not have the required permission.");
             }
         }
 
@@ -164,6 +164,7 @@ namespace vcs_GetLogicalDrives
         private void button04_Click(object sender, EventArgs e)
         {
         }
+
         private void button05_Click(object sender, EventArgs e)
         {
         }
@@ -177,5 +178,34 @@ namespace vcs_GetLogicalDrives
         {
 
         }
+
+        private void button08_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button09_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+

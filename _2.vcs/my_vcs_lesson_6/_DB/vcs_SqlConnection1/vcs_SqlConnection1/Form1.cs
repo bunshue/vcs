@@ -1577,7 +1577,6 @@ namespace vcs_SqlConnection1
                     dr.Close();
                 }
             }
-
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -2730,5 +2729,34 @@ Connect Timeout=30
                 cmd.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar));
                 cmd.Parameters["@name"].Value = name;
                 cmd.ExecuteNonQuery();  // 執行SQL命令
+*/
+
+
+
+/*
+//------------------------------------------------------------  # 60個
+
+// 查詢字串, 使用別名 AS
+string sqlstr = "SELECT " + comboBox1.Text + "," + comboBox1.Text + " AS " + textBox1.Text.Trim() + " FROM tb_02";
+
+
+SqlDataAdapter dap = new SqlDataAdapter("SELECT * FROM tb_08 WHERE " + comboBox1.Text + " IS null OR " + comboBox1.Text + "=''", cn);//透過SQL語句查詢數據表中的空數據
+
+//------------------------------------------------------------  # 60個
+
+//NOT與謂詞進行組合條件的查詢
+
+string db_filename = "db_10_Data.MDF";
+
+// 查詢字串
+string sqlstr = "select * from tb_kf";
+// 查詢字串, 查詢空閒客房訊息
+// string sqlstr = "select * from tb_kf where 房態='空房 '";
+// 查詢字串, 查詢使用客房訊息
+// string sqlstr = "select * from tb_kf where 房態='入住'";
+// 查詢字串, 查詢空閒客房而且客房價格不在８０-１５０之間的客房訊息
+// string sqlstr = "select * from tb_kf where 房態='空房 ' and not(價格 between 80 and 150 )";
+
+//------------------------------------------------------------  # 60個
 */
 

@@ -2023,10 +2023,7 @@ splitContainer1 預設兩個Panel, Panel1 和 Panel2，Dock 選 DockStyle.Fill
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-
-
 listView1 屬性 的 ContextMenuStrip 加 contextMenuStrip1
-
 
 vcs_ListView3_ContextMenuStrip
 
@@ -2034,7 +2031,6 @@ vcs_ListView3_ContextMenuStrip
 
 使ListView控制元件中的選擇項目以高亮度方式顯示
 使ListView控制元件中的選擇項目以高亮度方式顯示
-
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -4372,20 +4368,12 @@ richTextBox1.Text += "----------------------------------------------------------
         }
 
 
-
-
-取得目前本基所有的磁碟機
-           this.comboBox2.DataSource = Environment.GetLogicalDrives();
-
-
             //checkedListBox1
             // 將chkListLot核取清單方塊所有項目設為不勾選
             for (int i = 0; i < checkedListBox1.Items.Count; i++)
             {
                 checkedListBox1.SetItemChecked(i, false);
             }
-
-
 
 
 檔名資料夾名處理 大整理 在 vcs_Mix00

@@ -121,6 +121,10 @@ namespace vcs_ComboBox0
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
+            //comboBox4b
+
+            string[] strCall = { "AAA", "BBB", "CCC", "DDD" };
+            comboBox4b.DataSource = strCall;
 
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -151,7 +155,7 @@ namespace vcs_ComboBox0
             label3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             comboBox3.Location = new Point(x_st + dx * 0, y_st + dy * 3 + dd);
             label4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            //comboBox4.Location = new Point(x_st + dx * 0, y_st + dy * 4 + dd);
+            comboBox4b.Location = new Point(x_st + dx * 0, y_st + dy * 5 + dd);
             richTextBox1.Text += "location : " + (new Point(x_st + dx * 0, y_st + dy * 4 + dd)).ToString() + "\n";
 
             int w = 400;

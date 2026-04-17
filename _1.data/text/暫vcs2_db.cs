@@ -1,38 +1,33 @@
 ﻿
-
-            // 查詢字串, 使用別名 AS
-            string sqlstr = "SELECT " + comboBox1.Text + "," + comboBox1.Text + " AS " + textBox1.Text.Trim() + " FROM tb_02";
+SELECT name FROM sysdatabases
 
 
-            SqlDataAdapter dap = new SqlDataAdapter("SELECT * FROM tb_08 WHERE " + comboBox1.Text + " IS null OR " + comboBox1.Text + "=''", cn);//透過SQL語句查詢數據表中的空數據
+FROM sysdatabases
 
-
-
-//------------------------------------------------------------  # 60個
-
-
-//NOT與謂詞進行組合條件的查詢
-
-string db_filename = "db_10_Data.MDF";
-
-// 查詢字串
-string sqlstr = "select * from tb_kf";
-// 查詢字串, 查詢空閒客房訊息
-// string sqlstr = "select * from tb_kf where 房態='空房 '";
-// 查詢字串, 查詢使用客房訊息
-// string sqlstr = "select * from tb_kf where 房態='入住'";
-// 查詢字串, 查詢空閒客房而且客房價格不在８０-１５０之間的客房訊息
-// string sqlstr = "select * from tb_kf where 房態='空房 ' and not(價格 between 80 and 150 )";
-
-
-//------------------------------------------------------------  # 60個
+SELECT name, database_id, create_date
+FROM sys.databases;
+GO
 
 
 
+SELECT name,
+       user_access_desc,
+       is_read_only,
+       state_desc,
+       recovery_model_desc
+FROM sys.databases;
 
 
-
-//------------------------------------------------------------  # 60個
+-- Execute from the master database.
+SELECT a.name,
+       a.state_desc,
+       b.start_date,
+       b.modify_date,
+       b.percent_complete
+FROM sys.databases AS a
+     INNER JOIN sys.dm_database_copies AS b
+         ON a.database_id = b.database_id
+WHERE a.state = 7;
 
 
 
@@ -49,16 +44,16 @@ string sqlstr = "select * from tb_kf";
 
 
 
-listView1參數
-            this.listView1.AllowColumnReorder = true;
-            this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.listView1.FullRowSelect = true;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            this.listView1.GridLines = true;//網格線
-            string str = this.listView1.SelectedItems[0].Text.ToString(); // 取出第0欄的資料, 員工編號
-            richTextBox1.Text += str + "\n";
 
 
+//------------------------------------------------------------  # 60個
+
+
+
+
+
+
+//------------------------------------------------------------  # 60個
 
         private Boolean TextInfo()
         {
@@ -94,35 +89,7 @@ listView1參數
         }
 
 
-
-
-            string[] strCall = { "員工", "主幹人員", "部門經理", "經理" };
-            this.comboBox2.DataSource = strCall;
-
-
-
-
 //6060
-
-
-            // 資料庫檔案
-            string db_filename = "Northwind.mdb";
-
-            // 查詢字串
-            string sqlstr = "SELECT * FROM 員工";
-            oledb_read_database(db_filename, sqlstr, dataGridView1);
-
-            //3030
-
-            db_filename = "Northwind.mdb";
-
-            OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder();
-            builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
-            builder["Data Source"] = "D:\\" + db_filename;
-            builder["User Id"] = "Admin";
-
-
-
 
 
 //撈出簡易的 資料庫檔案/連接字串 + 查詢字串
@@ -462,9 +429,9 @@ string filename = @"D:\_git\vcs\_1.data\______test_files1\__text\war_and_peace.t
         {
             // 以下為debug
             // 資料庫檔案
-            string db_filename = "db_TomeTwo.mdf";
+            string db_filename = "ddddddd.mdf";
             // 查詢字串
-            string sqlstr = "SELECT * FROM tb_Employee";
+            string sqlstr = "SELECT * FROM ddddddd";
 
             sql_read_database(db_filename, sqlstr, dataGridView1);
 

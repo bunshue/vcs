@@ -150,6 +150,23 @@ namespace vcs_OleDb2
 
         private void button0_Click(object sender, EventArgs e)
         {
+            // 資料庫檔案
+            string db_filename = "Northwind.mdb";
+
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 員工";
+            oledb_read_database(db_filename, sqlstr, dataGridView1);
+
+            //3030
+
+            db_filename = "Northwind.mdb";
+
+            OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder();
+            builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
+            builder["Data Source"] = "D:\\" + db_filename;
+            builder["User Id"] = "Admin";
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
