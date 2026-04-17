@@ -32,7 +32,10 @@ namespace SQLServerMemoryImage
 
             string[] strSex = { "男", "女" };
             this.comboBox1.DataSource = strSex;
-            string sqlstr = "SELECT 員工編號,姓名,性別,籍貫,電話,部門名稱 FROM 員工訊息";
+
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 員工訊息";
+
             this.dataGridView1.DataSource = DataBinding(sqlstr).DefaultView;
             this.button1.Enabled = false;
 
@@ -94,13 +97,15 @@ namespace SQLServerMemoryImage
                 cmd.Parameters.Add("@部門名稱", SqlDbType.Text).Value = part;
                 cmd.ExecuteNonQuery();
                 con.Close();
-                MessageBox.Show("OK");
+
                 this.button3.Enabled = true;
                 this.button1.Enabled = false;
+                richTextBox1.Text += "加入資料 OK\n";
             }
             catch (Exception ey)
             {
                 this.button1.Enabled = true;
+                richTextBox1.Text += "加入資料 NG\n";
             }
 
             //string sqlstr = "SELECT 員工編號,姓名,性別,籍貫,電話,部門名稱 FROM 員工訊息";
@@ -109,24 +114,18 @@ namespace SQLServerMemoryImage
 
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
         {
-            this.openFileImage.ShowDialog();
+            string pic_filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            pictureBox1.Image = Image.FromFile(pic_filename);
+
+            //pictureBox1.Image = Image.FromStream(this.openFileImage.OpenFile());
+
+            FileStream fs = new FileStream(pic_filename, FileMode.Open, FileAccess.Read);
+            BinaryReader br = new BinaryReader(fs);
+            imgBytesIn = br.ReadBytes((int)fs.Length);
         }
 
         private void openFileImage_FileOk(object sender, CancelEventArgs e)
         {
-            try
-            {
-                this.pictureBox1.Image = Image.FromStream(this.openFileImage.OpenFile());
-                string strimg = openFileImage.FileName.ToString();
-                FileStream fs = new FileStream(strimg, FileMode.Open, FileAccess.Read);
-                BinaryReader br = new BinaryReader(fs);
-                imgBytesIn = br.ReadBytes((int)fs.Length);
-            }
-            catch
-            {
-                MessageBox.Show("您選擇的圖片不能被讀取或文件類型不對！", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                this.pictureBox1.Image = null;
-            }
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -256,7 +255,7 @@ namespace SQLServerMemoryImage
         {
             this.button1.Enabled = true;
             this.button3.Enabled = false;
-            imgBytesIn = null;
+            //imgBytesIn = null;
             clearText();
         }
 

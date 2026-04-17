@@ -6,23 +6,25 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Data.SqlClient;
+
 using System.IO;
+using System.Data.SqlClient;
 using Microsoft.Office.Interop.Excel;
 
 namespace GetDataStruct
 {
     public partial class frmOutData : Form
     {
-        public frmOutData()
-        {
-            InitializeComponent();
-        }
         public string OutData = "";
         public string OutTable = "";
         public string strserver = "";
         public string struser = "";
         public string strpwd = "";
+
+        public frmOutData()
+        {
+            InitializeComponent();
+        }
 
         private void frmOutData_Load(object sender, EventArgs e)
         {
@@ -88,6 +90,7 @@ namespace GetDataStruct
                 }
                 return;
             }
+
             //保存Word文件
             if (type.Equals("doc", StringComparison.CurrentCultureIgnoreCase))
             {
@@ -99,7 +102,6 @@ namespace GetDataStruct
                 Microsoft.Office.Interop.Word.Table table = document.Tables.Add(document.Paragraphs.Last.Range, srcDgv.Rows.Count + 1, srcDgv.Columns.Count, ref none, ref none);
                 try
                 {
-
                     for (int i = 0; i < srcDgv.Columns.Count; i++)//設置標題
                     {
                         table.Cell(1, i + 1).Range.Text = srcDgv.Columns[i].HeaderText;

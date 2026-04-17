@@ -37,12 +37,12 @@ namespace GetDataStruct
 
                 using (SqlConnection con = new SqlConnection(strCon))
                 {
-                    string strSql = "select  name 字段名, xusertype 类型编号, length 长度 into hy_Linshibiao from  syscolumns  where id=object_id('" + listBox1.Text + "') ";
-                    strSql += "select name 类型,xusertype 类型编号 into angel_Linshibiao from systypes where xusertype in (select xusertype from syscolumns where id=object_id('" + listBox1.Text + "'))";
+                    string strSql = "SELECT name 字段名, xusertype 类型编号, length 长度 into hy_Linshibiao FROM syscolumns WHERE id=object_id('" + listBox1.Text + "') ";
+                    strSql += "SELECT name 类型,xusertype 类型编号 into angel_Linshibiao FROM systypes WHERE xusertype in (SELECT xusertype FROM syscolumns WHERE id=object_id('" + listBox1.Text + "'))";
                     con.Open();
                     SqlCommand cmd = new SqlCommand(strSql, con);
                     cmd.ExecuteNonQuery();
-                    SqlDataAdapter da = new SqlDataAdapter("select 字段名,类型,长度 from hy_Linshibiao t,angel_Linshibiao b where t.类型编号=b.类型编号", con);
+                    SqlDataAdapter da = new SqlDataAdapter("SELECT 字段名,类型,长度 FROM hy_Linshibiao t,angel_Linshibiao b WHERE t.类型编号=b.类型编号", con);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
                     dataGridView1.DataSource = dt.DefaultView;
@@ -124,7 +124,7 @@ namespace GetDataStruct
             string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.MDF;DataBase=" + db + ";Integrated Security=True;Connect Timeout=30";
             richTextBox1.Text += "strCon : " + strCon + "\n";
 
-            comboBox1.DataSource = getTable(cnstr, "select name from sysdatabases", "sysdatabases");
+            comboBox1.DataSource = getTable(cnstr, "SELECT name FROM sysdatabases", "sysdatabases");
             comboBox1.DisplayMember = "name";
             comboBox1.ValueMember = "name";
 
@@ -166,12 +166,15 @@ namespace GetDataStruct
             }
         }
 
+        //以下為debug ----------------------------------------------------------------------------------------------------  # 100個
+
         private void button3_Click(object sender, EventArgs e)
         {
+            // 以下為debug
             // 資料庫檔案
             string db_filename = "db_TomeTwo.mdf";
             // 查詢字串
-            string sqlstr = "SELECT * FROM tb_Employee";
+            string sqlstr = "SELECT name FROM sysdatabases";
 
             sql_read_database(db_filename, sqlstr, dataGridView1);
         }
@@ -188,10 +191,10 @@ namespace GetDataStruct
     //数据表
     dt = getTable(strCon, "SELECT name FROM sysobjects WHERE type = 'U' and name<>'dtproperties'", "sysobjects");
     //"视图"
-    dt = getTable(strCon, "select name from sysobjects where xtype='v'", "sysobjects");
+    dt = getTable(strCon, "SELECT name FROM sysobjects WHERE xtype='v'", "sysobjects");
     //"存储过程"
     dt = getTable(strCon, "SELECT name FROM sysobjects WHERE xtype='p'", "sysobjects");
 */
 
-//comboBox1.DataSource = getTable(str, "select name from sysdatabases", "sysdatabases");
+//comboBox1.DataSource = getTable(str, "SELECT name FROM sysdatabases", "sysdatabases");
 

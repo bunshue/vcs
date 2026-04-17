@@ -403,7 +403,7 @@ string filename = @"D:\_git\vcs\_1.data\______test_files1\__text\war_and_peace.t
 
 */
 
-        //以下為debug ----------------------------------------------------------------------------------------------------  # 100個
+        // 以下為debug ----------------------------------------------------------------------------------------------------  # 100個
 
         void sql_read_database(string db_filename, string sqlstr, DataGridView dgv)
         {
@@ -438,11 +438,11 @@ string filename = @"D:\_git\vcs\_1.data\______test_files1\__text\war_and_peace.t
             }
         }
         
-//以下為debug ----------------------------------------------------------------------------------------------------  # 100個
+// 以下為debug ----------------------------------------------------------------------------------------------------  # 100個
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //以下為debug
+            // 以下為debug
             // 資料庫檔案
             string db_filename = "db_TomeTwo.mdf";
             // 查詢字串

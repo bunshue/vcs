@@ -1366,16 +1366,6 @@ namespace vcs_SqlConnection4
 
 //------------------------------------------------------------  # 60個
 
-            // 資料庫檔案
-            db_filename = "db_09_Data.MDF";
-            // 查詢字串
-            sqlstr = "SELECT name FROM sysdatabases ";  // 系統查詢資料庫名稱
-            //sqlstr = "SELECT filename FROM sysdatabases ";  // 系統查詢資料庫檔案
-
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-//------------------------------------------------------------  # 60個
-
 //查看表格結構
             // 查詢字串
             //"SELECT name FROM sysobjects WHERE type = 'U' and name<>'dtproperties' "

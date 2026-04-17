@@ -198,19 +198,7 @@ namespace SQLServerDistill
             }
         }
 
-
-        //以下為debug ------------------------------------------------------------  # 60個
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //以下為debug
-            // 資料庫檔案
-            string db_filename = "db_TomeTwo.mdf";
-            // 查詢字串
-            string sqlstr = "SELECT * FROM tb_Employee";
-
-            //sql_read_database(db_filename, sqlstr, dataGridView1);
-        }
+        // 以下為debug ----------------------------------------------------------------------------------------------------  # 100個
 
         void sql_read_database(string db_filename, string sqlstr, DataGridView dgv)
         {
@@ -245,15 +233,18 @@ namespace SQLServerDistill
             }
         }
 
+        // 以下為debug ----------------------------------------------------------------------------------------------------  # 100個
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //以下為debug
+            // 資料庫檔案
+            string db_filename = "db_TomeTwo.mdf";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM tb_Employee";
 
+            //sql_read_database(db_filename, sqlstr, dataGridView1);
+        }
     }
 }
-
-/*
-string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
-
-string db_filename = "db_09_Data.MDF";
-string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-*/
 

@@ -1919,7 +1919,6 @@ namespace vcs_SqlConnection1
                 cn.Open();
 
                 string sqlstr = "SELECT NAME FROM sys.tables";  // 看NAME欄位就好
-                //string sqlstr = "SELECT NAME FROM sysdatabases";  // 很多
                 //string sqlstr = "SELECT * FROM master..sysdatabases";  // 很多 等同上
 
                 //這個方式直接從 SQL Server 的系統目錄取出所有表格名稱
@@ -2242,6 +2241,42 @@ namespace vcs_SqlConnection1
 
         private void button28_Click(object sender, EventArgs e)
         {
+            //檢視 SQL Server 上的資料庫清單
+
+            // 資料庫檔案
+            string db_filename = "db_09_Data.MDF";
+            // 查詢字串, 檢視 SQL Server 上的資料庫清單
+            string sqlstr = "SELECT name, filename FROM sysdatabases";  // 系統查詢資料庫名稱
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            // 查詢字串, 檢視 SQL Server 上的資料庫清單, same
+            sqlstr = "SELECT name, database_id, create_date FROM sys.databases";  // same
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+
+
+
+            /*
+            // 資料庫檔案
+            string db_filename = "db_09_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+
+            using (SqlConnection cn = new SqlConnection(cnstr))
+            {
+                DataTable dt = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter("SELECT name FROM sysdatabases", cn);
+                da.Fill(dt);
+                this.comboBox1.DataSource = dt.DefaultView;
+                this.comboBox1.DisplayMember = "name";
+                this.comboBox1.ValueMember = "name";
+
+                listBox1.DataSource = dt.DefaultView;
+                listBox1.DisplayMember = "name";
+                listBox1.ValueMember = "name";
+
+                richTextBox1.Text += "共 : " + comboBox1.Items.Count.ToString() + " 項\n";
+            }
+            */
+
         }
 
         private void button29_Click(object sender, EventArgs e)
