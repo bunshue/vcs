@@ -1174,8 +1174,7 @@ namespace vcs_OleDb
 
             //Access 或 EXCEL
 
-            //mdb
-            string db_filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_09_Data.MDF";
+            string db_filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\db_09.mdb";
 
             FileInfo FInfo = new FileInfo(db_filename);
             string strExtention = FInfo.Extension;

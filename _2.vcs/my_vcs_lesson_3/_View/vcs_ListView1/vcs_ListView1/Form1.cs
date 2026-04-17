@@ -53,7 +53,7 @@ namespace vcs_ListView1
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
+
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -1064,6 +1064,15 @@ namespace vcs_ListView1
 
         private void button20_Click(object sender, EventArgs e)
         {
+            //測試 listView1_Click
+
+            listView1.Click += new EventHandler(listView1_Click);
+        }
+
+        private void listView1_Click(object sender, EventArgs e)
+        {
+            string str = this.listView1.SelectedItems[0].Text.ToString();
+            richTextBox1.Text += "你選擇了 : " + str + "\n";
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -1825,3 +1834,6 @@ listView有沒有辦法做到點選某個子項 可以讓這個子項反白並�
             
 
 */
+
+
+

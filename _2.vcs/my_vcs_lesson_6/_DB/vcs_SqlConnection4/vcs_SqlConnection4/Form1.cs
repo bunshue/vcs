@@ -1267,14 +1267,114 @@ namespace vcs_SqlConnection4
 
         private void button20_Click(object sender, EventArgs e)
         {
+            //更新資料
+            string number = "P1003";
+            string name = "david wang";
+            string money = "12345";
+            string description = "very good";
+
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+            SqlConnection con = new SqlConnection(cnstr);
+
+            // 查詢字串
+            string sqlstr = "update 員工表 set 員工姓名=@員工姓名,基本工資=@基本工資,工作評價=@工作評價 where 員工編號=@員工編號";
+
+            using (SqlCommand command = new SqlCommand(sqlstr, con))
+            {
+                con.Open();
+                try
+                {
+                    command.Parameters.Add("@員工編號", SqlDbType.VarChar, 50, "員工編號").Value = number;
+                    command.Parameters.Add("@員工姓名", SqlDbType.VarChar, 50, "員工姓名").Value = name;
+                    command.Parameters.Add("@基本工資", SqlDbType.Float, 8, "基本工資").Value = Convert.ToString(money);
+                    command.Parameters.Add("@工作評價", SqlDbType.VarChar, 50, "工作評價").Value = description;
+                    command.ExecuteNonQuery();
+                    con.Close();
+                    richTextBox1.Text += "成功修改\n";
+                }
+                catch
+                {
+                    richTextBox1.Text += "成功失敗\n";
+                }
+            }
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
+            //查詢資料
+            string strid = "P1005";  // 員工編號
+
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 員工表 WHERE 員工編號='" + strid + "'";
+
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
+            SqlConnection con = new SqlConnection(cnstr);
+
+            using (SqlCommand cmd = new SqlCommand(sqlstr, con))
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                    string new_id = dr[0].ToString();  // 員工編號
+                    string new_name = dr[1].ToString();  // 員工姓名
+                    string new_money = dr[2].ToString();  // 基本工資
+                    string new_description = dr[3].ToString();  // 工作評價
+                    //this.textBox1.Text = new_id;
+                    //this.textBox2.Text = new_name;
+                    //this.textBox4.Text = new_money;
+                    //this.textBox5.Text = new_description;
+                    richTextBox1.Text += "員工編號 : " + new_id + "\n";
+                    richTextBox1.Text += "員工姓名 : " + new_name + "\n";
+                    richTextBox1.Text += "基本工資 : " + new_money + "\n";
+                    richTextBox1.Text += "工作評價 : " + new_description + "\n";
+                }
+                dr.Close();
+                con.Close();
+            }
+
+
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
+            // some NG
+            //更新資料
+            string new_id = "P1005";  // 員工編號
+            string new_name = "david";  // 員工姓名
+            string new_money = "34567";  // 基本工資
+            string new_description = "Very good3333";  // 工作評價
+
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
+            SqlConnection con = new SqlConnection(cnstr);
+
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                con.Open();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "proc_Update";
+                SqlParameter[] par =
+                    { 
+                        new SqlParameter("@id", new_id),
+                        new SqlParameter("@name", new_name),
+                        new SqlParameter("@money", new_money),
+                        new SqlParameter("@description", new_description)
+                    };
+                foreach (SqlParameter parms in par)
+                {
+                    cmd.Parameters.Add(parms);
+                }
+                cmd.ExecuteNonQuery();
+                con.Close();
+                richTextBox1.Text += "修改成功\n";
+            }
         }
 
         private void button23_Click(object sender, EventArgs e)

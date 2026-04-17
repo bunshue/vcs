@@ -14,8 +14,8 @@ namespace GetDataStruct
 {
     public partial class Form1 : Form
     {
-        //string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_09_Data.MDF";
-        //string filename = @"D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_09_Log.LDF";   another
+        //string filename = @"D:\db_09_Data.MDF";
+        //string filename = @"D:\db_09_Log.LDF";   another
 
         public Form1()
         {
@@ -117,7 +117,7 @@ namespace GetDataStruct
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
             richTextBox1.Text += "cnstr  : " + cnstr + "\n";
 
-            cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_09_Data.MDF;Integrated Security=True;Connect Timeout=30";
+            cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.MDF;Integrated Security=True;Connect Timeout=30";
             richTextBox1.Text += "cnstr  : " + cnstr + "\n";
 
             string db = "master";
@@ -185,7 +185,7 @@ namespace GetDataStruct
 /*
     //測試 getTable
 
-    string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_1.data\______test_files1\_vcs200_db\db_09_Data.MDF;DataBase=" + comboBox1.Text + ";Integrated Security=True;Connect Timeout=30";
+    string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.MDF;DataBase=" + comboBox1.Text + ";Integrated Security=True;Connect Timeout=30";
 
     DataTable dt = null;
     //数据表

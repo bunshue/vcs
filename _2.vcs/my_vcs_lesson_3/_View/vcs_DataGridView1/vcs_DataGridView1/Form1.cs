@@ -7,22 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-/*
-        idx	英文名	中文名	體重
-第 1筆 :  1	mouse	米老鼠	3
-第 2筆 :  2	ox	    班尼牛	48
-第 3筆 :  3	tiger	跳跳虎	33
-第 4筆 :  4	rabbit	彼得兔	8
-第 5筆 :  5	dragon	逗逗龍	38
-第 6筆 :  6	snake	貪吃蛇	16
-第 7筆 :  7	horse	草泥馬	31
-第 8筆 :  8	goat	喜羊羊	29
-第 9筆 :  9	monkey	山道猴	22
-第10筆 : 10	chicken	肯德雞	5
-第11筆 : 11	dog	    布丁狗	17
-第12筆 : 12	pig	    佩佩豬	42
-*/
-
 namespace vcs_DataGridView1
 {
     public partial class Form1 : Form
@@ -152,6 +136,10 @@ namespace vcs_DataGridView1
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             richTextBox1.Text += "CellClick\n";
+
+            string str = this.dataGridView1[0, e.RowIndex].Value.ToString();
+            richTextBox1.Text += "取得第 " + e.RowIndex + " 列的第 0 筆資料 : " + str + "\n";
+
             richTextBox1.Text += e.ColumnIndex.ToString() + "\n";
             richTextBox1.Text += e.RowIndex.ToString() + "\n";
             if (e.RowIndex > -1)

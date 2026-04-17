@@ -13,8 +13,8 @@ namespace TailorCalendarSchemeDuty
 {
     public partial class Form1 : Form
     {
-        public int Falg;//0１表示添加//2表示修改
-        public string strFalg;//表示要修改的日期
+        public int Falg;  // 0１表示添加//2表示修改
+        public string strFalg;  // 表示要修改的日期
 
         public Form1()
         {
@@ -27,13 +27,12 @@ namespace TailorCalendarSchemeDuty
             monthCalendar1.TrailingForeColor = System.Drawing.Color.Red;
             monthCalendar1.TitleForeColor = System.Drawing.Color.Yellow;
 
-            getDateTime("four");// 修改數據
-            getDateTime("one");//查找今天是否有任務在執行
+            getDateTime("four");  // 修改數據
+            getDateTime("one");  // 查找今天是否有任務在執行
+
             if (strName != null)
             {
-                textBox2.Text = "今天有任務" + ":" + "任務說明：" + strName + "任務日期:" + strDate;
-                textBox2.BackColor = Color.Beige;
-                textBox2.ForeColor = Color.Red;
+                richTextBox1.Text += "今天有任務" + ":" + "任務說明：" + strName + "任務日期:" + strDate + "\n";
             }
         }
 
@@ -61,13 +60,14 @@ namespace TailorCalendarSchemeDuty
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
             SqlConnection con = new SqlConnection(cnstr);
             con.Open();
-            SqlCommand com = new SqlCommand("select * from tb_10", con);
+            SqlCommand com = new SqlCommand("SELECT * FROM tb_10", con);
             SqlDataReader dr = com.ExecuteReader();
             while (dr.Read())
             {
                 switch (strFalg)//任務操作標記
                 {
-                    case "one"://查找末完成的任務的時間
+                    case "one":
+                        richTextBox1.Text += "查找末完成的任務的時間\n";
                         // string a = dr.GetValue(3).ToString();
                         if (dr.GetValue(3).ToString() != "True")
                         {
@@ -86,7 +86,8 @@ namespace TailorCalendarSchemeDuty
 
                         }
                         break;
-                    case "two"://查找末完成的任務
+                    case "two":
+                        richTextBox1.Text += "查找末完成的任務\n";
                         if (dr.GetValue(3).ToString() != "True")
                         {
 
@@ -94,26 +95,26 @@ namespace TailorCalendarSchemeDuty
                         }
 
                         break;
-                    case "three"://查找已完成的任務
+                    case "three":
+                        richTextBox1.Text += "查找已完成的任務\n";
                         if (dr.GetValue(3).ToString() == "True")
                         {
                             DateTime dt = Convert.ToDateTime(dr[1].ToString());
                             listBox1.Items.Add(dt.ToShortDateString());
                         }
                         break;
-                    case "four"://修改
+                    case "four":
                         //任務t時間小於現在時間，並且是末完成的任務取消
+                        richTextBox1.Text += "修改\n";
                         string str1 = Convert.ToDateTime(dr[1].ToString()).ToString();
                         string str2 = DateTime.Now.ToShortDateString();
                         int intt = DateTime.Compare(Convert.ToDateTime(dr[1].ToString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
                         if ((intt < 0) && (dr.GetValue(3).ToString() != "True"))
                         {
                             string strg = strDatDelteUpdate(Convert.ToDateTime(dr[1].ToString()), "", 1, 1);
-
                         }
                         break;
                 }
-
             }
             dr.Close();
         }
@@ -126,7 +127,7 @@ namespace TailorCalendarSchemeDuty
 
             SqlConnection con = new SqlConnection(cnstr);
             con.Open();
-            SqlCommand com = new SqlCommand("select * from tb_10 where strdate='" + Convert.ToDateTime(strName) + "'", con);
+            SqlCommand com = new SqlCommand("SELECT * FROM tb_10 WHERE strdate='" + Convert.ToDateTime(strName) + "'", con);
             SqlDataReader dr = com.ExecuteReader();
             while (dr.Read())
             {
@@ -150,7 +151,7 @@ namespace TailorCalendarSchemeDuty
 
                     SqlConnection con = new SqlConnection(cnstr);
                     con.Open();
-                    SqlCommand com = new SqlCommand("select * from tb_10 where strdate='" + monthCalendar1.SelectionStart.ToShortDateString() + "'", con);
+                    SqlCommand com = new SqlCommand("SELECT * FROM tb_10 WHERE strdate='" + monthCalendar1.SelectionStart.ToShortDateString() + "'", con);
                     int intstr = Convert.ToInt32(com.ExecuteScalar());
                     if (intstr == 0)
                     {
@@ -254,9 +255,13 @@ namespace TailorCalendarSchemeDuty
         //添加任務
         private void button5_Click(object sender, EventArgs e)
         {
+            //richTextBox1.Text += "button5_Click flag = " + Flag + "\n";
+
             //添加
             if (Falg == 1)
             {
+                richTextBox1.Text += "添加任務\n";
+
                 if (textBox1.Text != "")
                 {
                     if (MessageBox.Show("任務日期是否為\n" + listBox1.Items[listBox1.Items.Count - 1].ToString(), "任務日期提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -308,6 +313,7 @@ namespace TailorCalendarSchemeDuty
             //修改
             if (Falg == 2)
             {   //修改內容確定
+                richTextBox1.Text += "修改任務\n";
                 if (MessageBox.Show("任務日期為：" + strFalg + "\n" + "修改任務說明為：\n" + textBox1.Text.ToString(), "修改提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     if (strDatDelteUpdate(Convert.ToDateTime(strFalg), textBox1.Text, 0, 0) == "Update")
@@ -402,10 +408,10 @@ namespace TailorCalendarSchemeDuty
             switch (strFalg)
             {
                 case "one":
-                    strSelect = "select * from tb_10 where strdate='" + Convert.ToDateTime(strName) + "'";
+                    strSelect = "SELECT * FROM tb_10 WHERE strdate='" + Convert.ToDateTime(strName) + "'";
                     break;
                 case "two":
-                    strSelect = "select * from tb_10 where strName='" + strName + "'";
+                    strSelect = "SELECT * FROM tb_10 WHERE strName='" + strName + "'";
                     break;
             }
 
@@ -488,9 +494,9 @@ namespace TailorCalendarSchemeDuty
         {
             //以下為debug
             // 資料庫檔案
-            string db_filename = "db_09_Data.mdf";
+            string db_filename = "db_02.mdf";
             // 查詢字串
-            string sqlstr = "SELECT * FROM 員工訊息";
+            string sqlstr = "SELECT * FROM tb_10";
 
             sql_read_database(db_filename, sqlstr, dataGridView1);
         }

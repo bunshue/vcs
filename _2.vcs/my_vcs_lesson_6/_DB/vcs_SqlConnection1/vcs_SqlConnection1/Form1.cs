@@ -241,6 +241,20 @@ namespace vcs_SqlConnection1
             }
         }
 
+        object sql_get_database_data(string db_filename, string sqlstr)
+        {
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);
+
+            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
+            {
+                cn.Open();  // 打開資料庫連線
+                SqlCommand cmd = new SqlCommand(sqlstr, cn);
+                object obj = cmd.ExecuteScalar();
+                return obj;
+            }
+        }
+
         int select = 0;
         private void button0_Click(object sender, EventArgs e)
         {
@@ -1529,6 +1543,41 @@ namespace vcs_SqlConnection1
 
         private void button18_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "取出資料庫中的影像2\n";
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.Visible = true;
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            // 資料庫檔案
+            string db_filename = "db_09_Data.mdf";
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);
+
+            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
+            {
+                cn.Open();
+
+                string str = "003";
+
+                // 查詢字串
+                string sqlstr = "SELECT * FROM 員工訊息 WHERE 員工編號='" + str + "'";
+
+                using (SqlCommand cmd = new SqlCommand(sqlstr, cn))
+                {
+                    SqlDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
+                    while (dr.Read())  // 讀取一筆資料到dr
+                    {
+                        richTextBox1.Text += "員工編號 : " + dr[0] + "\n";
+                        richTextBox1.Text += "員工姓名 : " + dr[1] + "\n";
+                        byte[] pic = (byte[])dr[2];
+                        MemoryStream ms = new MemoryStream(pic);			//二進制流
+                        this.pictureBox1.Image = Image.FromStream(ms);
+                    }
+                    dr.Close();
+                }
+            }
+
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -1557,47 +1606,41 @@ namespace vcs_SqlConnection1
             sql_read_database(db_filename, sqlstr, dataGridView4);
             lb_dgv4.Text = "十二生肖全部資料 依體重降冪排序 前五名";
             */
-            /*
+
             //某一欄資料處理 COUNT SUM AVG MAX MIN, 使用 ExecuteScalar()
-            // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);
-            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
-            {
-                //cn.ConnectionString = cnstr;  // 連接字串, 可有可無
-                cn.Open();  // 打開資料庫連線
 
-                // 查詢字串 資料筆數 COUNT
-                sqlstr = "SELECT COUNT(*) FROM animals1_table";
-                SqlCommand cmd = new SqlCommand(sqlstr, cn);
-                richTextBox1.Text += "共 " + cmd.ExecuteScalar().ToString() + " 筆記錄\n";
+            // 查詢字串 資料筆數 COUNT
+            sqlstr = "SELECT COUNT(*) FROM animals1_table";
+            object obj = sql_get_database_data(db_filename, sqlstr);
+            richTextBox1.Text += "共 " + obj.ToString() + " 筆記錄\n";
 
-                // 查詢字串 取總和 SUM()
-                sqlstr = "SELECT SUM(體重) FROM animals1_table";
-                cmd = new SqlCommand(sqlstr, cn);
-                richTextBox1.Text += "總和 :\t" + cmd.ExecuteScalar().ToString() + "\n";
-                int SumNum = Convert.ToInt32(cmd.ExecuteScalar());
-                richTextBox1.Text += "總和 :\t" + SumNum.ToString() + "\n";
+            // 查詢字串 取總和 SUM()
+            sqlstr = "SELECT SUM(體重) FROM animals1_table";
+            obj = sql_get_database_data(db_filename, sqlstr);
+            richTextBox1.Text += "總和 :\t" + obj.ToString() + "\n";
+            int SumNum = Convert.ToInt32(obj);
+            richTextBox1.Text += "總和 :\t" + SumNum.ToString() + "\n";
 
-                // 查詢字串 取平均 AVG()
-                sqlstr = "SELECT AVG(體重) FROM animals1_table";
-                cmd = new SqlCommand(sqlstr, cn);
-                richTextBox1.Text += "平均 :\t" + cmd.ExecuteScalar().ToString() + "\n";
+            // 查詢字串 取平均 AVG()
+            sqlstr = "SELECT AVG(體重) FROM animals1_table";
+            obj = sql_get_database_data(db_filename, sqlstr);
+            richTextBox1.Text += "平均 :\t" + obj.ToString() + "\n";
 
-                // 查詢字串 取最大 MAX()
-                sqlstr = "SELECT MAX(體重) FROM animals1_table";
-                cmd = new SqlCommand(sqlstr, cn);
-                richTextBox1.Text += "最大 :\t" + cmd.ExecuteScalar().ToString() + "\n";
+            // 查詢字串 取最大 MAX()
+            sqlstr = "SELECT MAX(體重) FROM animals1_table";
+            obj = sql_get_database_data(db_filename, sqlstr);
+            richTextBox1.Text += "最大 :\t" + obj.ToString() + "\n";
 
-                // 查詢字串 取最小 MIN()
-                sqlstr = "SELECT MIN(體重) FROM animals1_table";
-                cmd = new SqlCommand(sqlstr, cn);
-                richTextBox1.Text += "最小 :\t" + cmd.ExecuteScalar().ToString() + "\n";
-            }
-            */
+            // 查詢字串 取最小 MIN()
+            sqlstr = "SELECT MIN(體重) FROM animals1_table";
+            obj = sql_get_database_data(db_filename, sqlstr);
+            richTextBox1.Text += "最小 :\t" + obj.ToString() + "\n";
 
             //as
             //t_Name
             //sqlstr = "SELECT t_Name, SUM(t_Num) AS Num FROM tb_product GROUP BY t_Name";
+
+            return;
 
             // 更新資料 UPDATE
 
@@ -1714,22 +1757,6 @@ namespace vcs_SqlConnection1
             lb_dgv2.Text = "修改 產品資料";
             */
         }
-
-        /*      id  ename   cname   weight
-                idx	英文名	中文名	體重
-        第 1筆 :  1	mouse	米老鼠	3
-        第 2筆 :  2	ox	    班尼牛	48
-        第 3筆 :  3	tiger	跳跳虎	33
-        第 4筆 :  4	rabbit	彼得兔	8
-        第 5筆 :  5	dragon	逗逗龍	38
-        第 6筆 :  6	snake	貪吃蛇	16
-        第 7筆 :  7	horse	草泥馬	31
-        第 8筆 :  8	goat	喜羊羊	29
-        第 9筆 :  9	monkey	山道猴	22
-        第10筆 : 10	chicken	肯德雞	5
-        第11筆 : 11	dog	    布丁狗	17
-        第12筆 : 12	pig	    佩佩豬	42
-        */
 
         private void button20_Click(object sender, EventArgs e)
         {
@@ -2369,7 +2396,6 @@ namespace vcs_SqlConnection1
             sql_read_database(db_filename, sqlstr, dataGridView2);
 
             //6060
-
 
         }
 

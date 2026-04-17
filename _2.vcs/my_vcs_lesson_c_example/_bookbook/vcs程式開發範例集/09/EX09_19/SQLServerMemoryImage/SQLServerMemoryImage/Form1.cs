@@ -17,8 +17,6 @@ namespace SQLServerMemoryImage
         // 連接字串
         string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
 
-        SqlConnection con;
-
         byte[] imgBytesIn;
 
         public Form1()
@@ -28,34 +26,25 @@ namespace SQLServerMemoryImage
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            con = new SqlConnection(cnstr);
-
-            string[] strSex = { "男", "女" };
-            this.comboBox1.DataSource = strSex;
-
+            // 資料庫檔案
+            string db_filename = "db_09_Data.mdf";
             // 查詢字串
             string sqlstr = "SELECT * FROM 員工訊息";
-
-            this.dataGridView1.DataSource = DataBinding(sqlstr).DefaultView;
-            this.button1.Enabled = false;
-
-            //textBox1.Text = "A123456";  // 檔案編號
-            textBox2.Text = "1234";  // 工號
-            textBox3.Text = "david";  // 姓名
-            textBox4.Text = "2006/03/11";  // 出生日期
-            textBox5.Text = "Taiwan";  // 籍貫
-            textBox6.Text = "5";  // 工齡
-            textBox7.Text = "研發部";  // 部門名稱
-            textBox8.Text = "0912345678";  // 電話
-            comboBox1.Text = "男";  // 性別
-
-            //string pic_filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            //this.pictureBox1.Image = Image.FromFile(pic_filename);
+            sql_read_database(db_filename, sqlstr, dataGridView1);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string new_num_id = "A12345";  // 員工編號
+            richTextBox1.Text += "寫入影像資料\n";
+
+            string pic_filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            pictureBox1.Image = Image.FromFile(pic_filename);
+
+            FileStream fs = new FileStream(pic_filename, FileMode.Open, FileAccess.Read);
+            BinaryReader br = new BinaryReader(fs);
+            imgBytesIn = br.ReadBytes((int)fs.Length);
+
+            string new_num_id = "A12aaa";  // 員工編號
             string new_name = "david wang";  // 姓名
             string new_sex = "男";  // 性別
             string new_birthday = "2006/03/11";  // 出生日期
@@ -77,6 +66,9 @@ namespace SQLServerMemoryImage
             part = new_department;
 
             richTextBox1.Text += "增加資料\n";
+
+            SqlConnection con = new SqlConnection(cnstr);
+
             try
             {
                 con.Open();
@@ -98,14 +90,12 @@ namespace SQLServerMemoryImage
                 cmd.ExecuteNonQuery();
                 con.Close();
 
-                this.button3.Enabled = true;
-                this.button1.Enabled = false;
                 richTextBox1.Text += "加入資料 OK\n";
             }
             catch (Exception ey)
             {
-                this.button1.Enabled = true;
-                richTextBox1.Text += "加入資料 NG\n";
+                richTextBox1.Text += "加入資料 NG, 原因\n";
+                richTextBox1.Text += ey.Message.ToString() + "\n";
             }
 
             //string sqlstr = "SELECT 員工編號,姓名,性別,籍貫,電話,部門名稱 FROM 員工訊息";
@@ -114,84 +104,10 @@ namespace SQLServerMemoryImage
 
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
         {
-            string pic_filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            pictureBox1.Image = Image.FromFile(pic_filename);
-
-            //pictureBox1.Image = Image.FromStream(this.openFileImage.OpenFile());
-
-            FileStream fs = new FileStream(pic_filename, FileMode.Open, FileAccess.Read);
-            BinaryReader br = new BinaryReader(fs);
-            imgBytesIn = br.ReadBytes((int)fs.Length);
-        }
-
-        private void openFileImage_FileOk(object sender, CancelEventArgs e)
-        {
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            string str = this.dataGridView1[0, e.RowIndex].Value.ToString();
-            richTextBox1.Text += "取得第 " + e.RowIndex + " 列的第 0 筆資料 : " + str + "\n";
-
-            if (str != "")
-            {
-                string sqlstr = "SELECT * FROM 員工訊息 WHERE 員工編號='" + str + "'";
-
-                DataTable dt = DataBinding(sqlstr);
-                if (dt.Rows.Count > 0)
-                {
-                    NumID = dt.Rows[0][0].ToString();
-                    name = dt.Rows[0][1].ToString();
-                    pic = (byte[])dt.Rows[0][2];
-                    sex = dt.Rows[0][3].ToString();
-                    birthday = dt.Rows[0][4].ToString();
-                    city = dt.Rows[0][5].ToString();
-                    years = Convert.ToInt16(dt.Rows[0][6].ToString());
-                    phone = dt.Rows[0][7].ToString();
-                    part = dt.Rows[0][8].ToString();
-                }
-            }
-
-            richTextBox1.Text += "getValue()\n";
-            richTextBox1.Text += "員工編號 : " + NumID + "\n";
-            richTextBox1.Text += "姓名 : " + name + "\n";
-            richTextBox1.Text += "性別 : " + sex + "\n";
-            richTextBox1.Text += "出生日期 : " + birthday + "\n";
-            richTextBox1.Text += "籍貫 : " + city + "\n";
-            richTextBox1.Text += "工齡 : " + years.ToString() + "\n";
-            richTextBox1.Text += "電話 : " + phone + "\n";
-            richTextBox1.Text += "部門名稱 : " + part + "\n";
-            richTextBox1.Text += "照片路徑 : " + pic + "\n";
-
-            MemoryStream ms = new MemoryStream(pic);			//二進制流
-            this.pictureBox1.Image = Image.FromStream(ms);
-        }
-
-        private DataTable DataBinding(string Sql)
-        {
-            using (SqlDataAdapter da = new SqlDataAdapter())
-            {
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = con;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "proc_select";
-                cmd.Parameters.Add("@Sql", SqlDbType.VarChar, 500).Value = Sql;
-                da.SelectCommand = cmd;
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                return dt;
-            }
-        }
-
-        private void clearText()
-        {
-            foreach (Control cl in this.groupBox1.Controls)
-            {
-                if (cl is TextBox)
-                {
-                    cl.Text = "";
-                }
-            }
         }
 
         //#region//存取器
@@ -251,14 +167,6 @@ namespace SQLServerMemoryImage
         }
         //#endregion
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            this.button1.Enabled = true;
-            this.button3.Enabled = false;
-            //imgBytesIn = null;
-            clearText();
-        }
-
         //以下為debug ----------------------------------------------------------------------------------------------------  # 100個
 
         void sql_read_database(string db_filename, string sqlstr, DataGridView dgv)
@@ -298,12 +206,10 @@ namespace SQLServerMemoryImage
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //以下為debug
             // 資料庫檔案
             string db_filename = "db_09_Data.mdf";
             // 查詢字串
             string sqlstr = "SELECT * FROM 員工訊息";
-
             sql_read_database(db_filename, sqlstr, dataGridView2);
         }
     }
