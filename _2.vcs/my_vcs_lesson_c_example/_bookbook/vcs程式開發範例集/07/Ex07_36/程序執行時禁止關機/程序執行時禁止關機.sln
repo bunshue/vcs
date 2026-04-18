@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "程序執行時禁止關機", "程序執行時禁止關機\程序執行時禁止關機.csproj", "{F143B5B8-693F-4F77-8372-495261C5C8A8}"
 EndProject
 Global

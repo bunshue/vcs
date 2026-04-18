@@ -11,12 +11,9 @@ namespace 程序執行時禁止關機
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
         private int isClose = 0;
         private const int WM_QUERYENDSESSION = 0x0011;
+
         protected override void WndProc(ref Message m)
         {
             switch (m.Msg)
@@ -25,16 +22,29 @@ namespace 程序執行時禁止關機
                     m.Result = (IntPtr)isClose;
                     break;
                 default:
-                base.WndProc(ref m);
-                break;
+                    base.WndProc(ref m);
+                    break;
             }
-            
+
         }
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             isClose = 0;
             MessageBox.Show("禁止關閉操作系統");
         }
+
         private void button2_Click(object sender, EventArgs e)
         {
             isClose = 1;
@@ -42,3 +52,4 @@ namespace 程序執行時禁止關機
         }
     }
 }
+

@@ -20,7 +20,7 @@ namespace vcs_LINQ1
 {
     public partial class Form1 : Form
     {
-        //string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
+        string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
 
         public Form1()
         {
@@ -628,11 +628,101 @@ namespace vcs_LINQ1
 
         private void button17_Click(object sender, EventArgs e)
         {
+            //LINQ
+            //使用LINQ技术统计员工的工资总额
+
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+
+            SqlConnection cn;//声明SqlConnection对象
+            SqlDataAdapter sqlda;//声明SqlDataAdapter对象
+            DataSet myds;//声明DataSet数据集对象
+
+            cn = new SqlConnection(cnstr);  // 建立資料庫連接對象cn
+            sqlda = new SqlDataAdapter("SELECT * FROM tb_Salary", cn);//创建数据库桥接器对象
+            myds = new DataSet();//创建数据集对象
+            sqlda.Fill(myds, "tb_Salary");//填充DataSet数据集
+
+            var query = from salary in myds.Tables["tb_Salary"].AsEnumerable()//使用LINQ从数据集中查询所有数据
+                        select salary;
+            DataTable dt = query.CopyToDataTable<DataRow>();//将查询结果转化为DataTable对象
+
+            dataGridView1.DataSource = dt;//显示查询到的数据集中的信息
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //公司每月总薪水
+
+            cn = new SqlConnection(cnstr);  // 建立資料庫連接對象cn
+            sqlda = new SqlDataAdapter("SELECT * FROM tb_Salary", cn);//创建数据库桥接器对象
+            myds = new DataSet();//创建数据集对象
+            sqlda.Fill(myds, "tb_Salary");//填充DataSet数据集
+
+            query = from salary in myds.Tables["tb_Salary"].AsEnumerable()//查询DataSet数据集中所有薪水
+                    where salary.Field<int>("Salary") > 0
+                    select salary;
+            int intSum = query.Sum(salary => salary.Field<int>("Salary"));//汇总薪水
+
+            dt = new DataTable();//创建DataTable对象
+            dt.Columns.Add("公司每月总薪水");//在数据表中添加列
+            DataRow myDRow = dt.NewRow();//创建DataRow对象
+            myDRow["公司每月总薪水"] = intSum;//为DataRow中的行赋值
+            dt.Rows.Add(myDRow);//将DataRow添加到DataTable的行集合中
+            //dataGridView1.DataSource = dt;//显示查询到的数据集中的信息
+            //dataGridView1.Columns[0].Width = 120;//设置DataGridView控件的列宽
+
+            richTextBox1.Text += "公司每月总薪水 : " + intSum + "\n";
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
+            //SQL 2
+
+            // 資料庫檔案
+            string db_filename = "ch20DB.mdf";
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 員工 ORDER BY 編號 DESC";
+
+            //LINQ 1
+            //建立DataSet物件ds，ds建立於所有事件處理函式之外以便所有事件一起共用
+            DataSet ds2 = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+
+            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
+            {
+                //cn.ConnectionString = cnstr;  // 連接字串, 可有可無
+
+                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
+                da.Fill(ds2, "員工");  // da將查詢的結果填充至數據集ds, 指定TableName為"員工"
+                dataGridView1.DataSource = ds2.Tables["員工"];  // DGV設置數據源
+                lb_dgv1.Text = "全部資料 員工 DESC\n";
+            }
+
+            int money = 25000;
+            richTextBox1.Text += "搜尋 薪資 > " + money.ToString() + " 的資料\n";
+            try
+            {
+                DataTable dtEmp = ds2.Tables["員工"];
+                var emp = from p in dtEmp.AsEnumerable()
+                          where p.Field<int>("薪資") >= money
+                          orderby p.Field<int>("薪資") descending
+                          select new
+                          {
+                              員工編號 = p.Field<int>("編號"),
+                              員工姓名 = p.Field<string>("姓名"),
+                              員工電話 = p.Field<string>("電話"),
+                              員工職稱 = p.Field<string>("職稱"),
+                              員工薪資 = p.Field<int>("薪資")
+                          };
+                dataGridView1.DataSource = emp.ToList();  // DGV設置數據源
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.Message + "\n";
+            }
         }
+
+
 
         private void button19_Click(object sender, EventArgs e)
         {

@@ -427,6 +427,7 @@ string filename = @"D:\_git\vcs\_1.data\______test_files1\__text\war_and_peace.t
 
         private void button1_Click(object sender, EventArgs e)
         {
+            return;
             // 以下為debug
             // 資料庫檔案
             string db_filename = "ddddddd.mdf";
@@ -434,5 +435,23 @@ string filename = @"D:\_git\vcs\_1.data\______test_files1\__text\war_and_peace.t
             string sqlstr = "SELECT * FROM ddddddd";
 
             sql_read_database(db_filename, sqlstr, dataGridView1);
-
         }
+
+
+
+
+// 簡易OK 資料庫檔案 + 查詢字串
+
+
+            // 資料庫檔案
+            db_filename = "db_10_Data.MDF";
+            // 查詢字串, 查詢邏輯型數據, 查詢是否為國家統招學生
+            string select_type = "是";  // "是/否"
+            sqlstr = "SELECT * FROM tb_08 WHERE 統招否='" + select_type + "'";
+
+
+// OK 查詢字串
+
+
+
+

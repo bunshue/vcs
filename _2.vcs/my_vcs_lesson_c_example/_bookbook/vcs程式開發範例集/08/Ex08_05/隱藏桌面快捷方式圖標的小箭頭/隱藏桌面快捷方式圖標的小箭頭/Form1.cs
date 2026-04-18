@@ -6,8 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using Microsoft.Win32;
 using System.Diagnostics;
+
 namespace 隱藏桌面快捷方式圖標的小箭頭
 {
     public partial class Form1 : Form
@@ -15,6 +17,11 @@ namespace 隱藏桌面快捷方式圖標的小箭頭
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         public void RefreshSystem()
@@ -26,6 +33,7 @@ namespace 隱藏桌面快捷方式圖標的小箭頭
                 mp.Kill();
             }
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             RegistryKey mreg;

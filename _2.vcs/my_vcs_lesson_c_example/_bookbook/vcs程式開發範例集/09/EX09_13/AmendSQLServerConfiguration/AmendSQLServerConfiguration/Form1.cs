@@ -31,18 +31,17 @@ namespace AmendSQLServerConfiguration
 
             types();
 
-            //以下為debug
             // 資料庫檔案
             string db_filename = "db_09_Data.mdf";
-            // 查詢字串
+            // 查詢字串, 預處理程序
             string sqlstr = "Poc_Linshi";
-
             sql_read_database(db_filename, sqlstr, dataGridView2);
         }
 
         private void showTrack()
         {
             con.Open();
+
             dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter();
             SqlCommand cmd = new SqlCommand();
@@ -51,7 +50,9 @@ namespace AmendSQLServerConfiguration
             cmd.Connection = con;
             da.SelectCommand = cmd;
             da.Fill(dt);
+
             this.dataGridView1.DataSource = dt.DefaultView;
+
             con.Close();
         }
 
@@ -68,10 +69,10 @@ namespace AmendSQLServerConfiguration
             this.textBox2.Text = this.dataGridView1.SelectedCells[2].Value.ToString();
             this.textBox1.Enabled = false;
 
-            richTextBox1.Text += "dataGridView1_Click\n";
-            richTextBox1.Text += "aaa : " + this.dataGridView1.SelectedCells[0].Value.ToString() + "\n";
-            richTextBox1.Text += "bbb : " + this.dataGridView1.SelectedCells[1].Value.ToString() + "\n";
-            richTextBox1.Text += "ccc : " + this.dataGridView1.SelectedCells[2].Value.ToString() + "\n";
+            richTextBox1.Text += "dataGridView1_Click, 取得資料 :\n";
+            richTextBox1.Text += "第0項 : " + this.dataGridView1.SelectedCells[0].Value.ToString() + "\n";
+            richTextBox1.Text += "第1項 : " + this.dataGridView1.SelectedCells[1].Value.ToString() + "\n";
+            richTextBox1.Text += "第2項 : " + this.dataGridView1.SelectedCells[2].Value.ToString() + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)

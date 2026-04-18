@@ -6,8 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using Microsoft.Win32;
 using System.Diagnostics;
+
 namespace 禁用任務欄的右鍵菜單
 {
     public partial class Form1 : Form
@@ -16,6 +18,12 @@ namespace 禁用任務欄的右鍵菜單
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         public void RefreshSystem()
         {
             Process[] mprocess;
@@ -25,6 +33,7 @@ namespace 禁用任務欄的右鍵菜單
                 mp.Kill();
             }
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -43,11 +52,6 @@ namespace 禁用任務欄的右鍵菜單
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void button2_Click(object sender, EventArgs e)

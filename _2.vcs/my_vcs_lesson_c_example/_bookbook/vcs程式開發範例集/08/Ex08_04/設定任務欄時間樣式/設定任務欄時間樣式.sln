@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "設定任務欄時間樣式", "設定任務欄時間樣式\設定任務欄時間樣式.csproj", "{51BD1692-B3B9-4FFB-A33B-DA89E741F995}"
 EndProject
 Global

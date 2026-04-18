@@ -16,10 +16,17 @@ namespace 新增程序托盤
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (this.WindowState == FormWindowState.Minimized)
+            {
                 this.WindowState = FormWindowState.Normal;
+            }
             this.Activate();
         }
 
@@ -27,10 +34,6 @@ namespace 新增程序托盤
         {
             this.Close();
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
+

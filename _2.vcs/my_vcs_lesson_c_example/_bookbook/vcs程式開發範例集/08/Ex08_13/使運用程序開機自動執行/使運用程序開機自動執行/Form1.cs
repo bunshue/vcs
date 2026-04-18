@@ -6,8 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using Microsoft.Win32;
 using System.Diagnostics;
+
 namespace 使運用程序開機自動執行
 {
     public partial class Form1 : Form
@@ -16,6 +18,12 @@ namespace 使運用程序開機自動執行
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         public void RefreshSystem()
         {
             Process[] mprocess;
@@ -25,6 +33,7 @@ namespace 使運用程序開機自動執行
                 mp.Kill();
             }
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -69,11 +78,6 @@ namespace 使運用程序開機自動執行
                     RefreshSystem();
                 }
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

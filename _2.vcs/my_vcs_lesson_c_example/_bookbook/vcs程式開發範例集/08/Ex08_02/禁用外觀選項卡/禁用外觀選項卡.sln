@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "禁用外觀選項卡", "禁用外觀選項卡\禁用外觀選項卡.csproj", "{D246E3C1-818D-4012-9A94-63553527EB35}"
 EndProject
 Global

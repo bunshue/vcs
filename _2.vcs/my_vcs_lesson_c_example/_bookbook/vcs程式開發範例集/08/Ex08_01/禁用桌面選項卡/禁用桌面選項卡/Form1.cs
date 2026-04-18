@@ -6,8 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using Microsoft.Win32;
 using System.Diagnostics;
+
 namespace 禁用桌面選項卡
 {
     public partial class Form1 : Form
@@ -16,6 +18,12 @@ namespace 禁用桌面選項卡
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         public void RefreshSystem()
         {
             Process[] mprocess;
@@ -25,12 +33,13 @@ namespace 禁用桌面選項卡
                 mp.Kill();
             }
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             RegistryKey mreg;
             mreg = Registry.CurrentUser;
             mreg = mreg.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Policies\System");
-            mreg.SetValue("NoDispBackgroundPage",1);
+            mreg.SetValue("NoDispBackgroundPage", 1);
             mreg.Close();
             if (MessageBox.Show("設定完畢") == DialogResult.OK)
             {
@@ -54,11 +63,6 @@ namespace 禁用桌面選項卡
             {
                 RefreshSystem();
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
