@@ -1,4 +1,5 @@
 ﻿
+
 SELECT name FROM sysdatabases
 
 
@@ -36,7 +37,25 @@ WHERE a.state = 7;
 //------------------------------------------------------------  # 60個
 
 
+            /*
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.Click += new EventHandler(dataGridView1_Click);
+            */
 
+
+        private void dataGridView1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "dataGridView1_Click, 取得資料 :\n";
+            richTextBox1.Text += "第0欄 : " + this.dataGridView1.SelectedCells[0].Value.ToString() + "\n";
+            richTextBox1.Text += "第1欄 : " + this.dataGridView1.SelectedCells[1].Value.ToString() + "\n";
+            richTextBox1.Text += "第2欄 : " + this.dataGridView1.SelectedCells[2].Value.ToString() + "\n";
+            richTextBox1.Text += "第3欄 : " + this.dataGridView1.SelectedCells[3].Value.ToString() + "\n";
+        }
+
+
+            dataGridView1.Columns[0].Width = 150;//設置欄位寬度
+            dataGridView1.Columns[1].Width = 150;//設置欄位寬度
+            dataGridView1.Columns[2].Width = 150;//設置欄位寬度
 
 
 

@@ -18,7 +18,7 @@ namespace 新增程序托盤
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            this.WindowState = FormWindowState.Minimized;
         }
 
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
