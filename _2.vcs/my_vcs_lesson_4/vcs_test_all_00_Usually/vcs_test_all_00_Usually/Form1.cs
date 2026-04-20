@@ -149,6 +149,61 @@ namespace vcs_test_all_00_Usually
             //移動無邊框窗體4 SP
         }
 
+
+        private void show_groupBox_player_location(int xx, int yy)
+        {
+            //button
+            int x_st = 14;
+            int y_st = 20;
+            int dx = 64 + 6;
+            int dy = 64 + 6;
+            btn_play.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            btn_pause.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            btn_stop.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            btn_next.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            btn_previous.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            btn_record.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            groupBox_player.Text = "";
+            groupBox_player.Size = new Size(440, 20 + 64 + 10 + 4);
+            groupBox_player.Location = new Point(xx, yy);
+            btn_play.Click += new EventHandler(btn_play_Click);
+            btn_pause.Click += new EventHandler(btn_pause_Click);
+            btn_stop.Click += new EventHandler(btn_stop_Click);
+            btn_next.Click += new EventHandler(btn_next_Click);
+            btn_previous.Click += new EventHandler(btn_previous_Click);
+            btn_record.Click += new EventHandler(btn_record_Click);
+        }
+
+        private void btn_play_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void btn_pause_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void btn_stop_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void btn_next_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void btn_previous_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void btn_record_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         void show_item_location()
         {
             //button
@@ -192,9 +247,11 @@ namespace vcs_test_all_00_Usually
             label3.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 140);
             lb_main_mesg1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 170);
 
-            pictureBox1.Size = new Size(400, 450);
-            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            pictureBox1.Size = new Size(400, 410);
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 3 - 10);
             bt_reset.Location = new Point(pictureBox1.Location.X + pictureBox1.Size.Width - bt_reset.Size.Width, pictureBox1.Location.Y);
+
+            show_groupBox_player_location(x_st + dx * 2, y_st + dy * 9 - 24);
 
             richTextBox1.Size = new Size(300, 690);
             richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);

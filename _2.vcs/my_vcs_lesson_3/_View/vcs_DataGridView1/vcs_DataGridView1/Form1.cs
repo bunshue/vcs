@@ -22,6 +22,7 @@ namespace vcs_DataGridView1
 
             dataGridView1.CellMouseClick += new DataGridViewCellMouseEventHandler(dataGridView1_CellMouseClick);
             dataGridView1.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(dataGridView1_RowHeaderMouseClick);
+            dataGridView1.MouseDown += new MouseEventHandler(dataGridView1_MouseDown);
         }
 
         void show_item_location()
@@ -130,6 +131,29 @@ namespace vcs_DataGridView1
             {
                 //加入顯示右鍵彈出菜單
                 richTextBox1.Text += "標題行上點擊右鍵，出現快捷菜單   無用\n";
+            }
+        }
+
+        //DataGridView的按下滑鼠游標事件
+        public static string[,] recordInfo;
+        private void dataGridView1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (dataGridView1.SelectedCells.Count != 0)
+            {
+                //定義一個二維數組，數組中的每一行代表DataGridView中的一條記錄
+                recordInfo = new string[dataGridView1.Rows.Count, dataGridView1.Columns.Count];
+
+                //當按下滑鼠游標左鍵時，首先取得選定行，記錄每一行對應的訊息
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                {
+                    if (dataGridView1.Rows[i].Selected)
+                    {
+                        for (int j = 0; j < dataGridView1.Columns.Count; j++)
+                        {
+                            recordInfo[i, j] = dataGridView1.Rows[i].Cells[j].Value.ToString();
+                        }
+                    }
+                }
             }
         }
 
@@ -451,7 +475,7 @@ namespace vcs_DataGridView1
             //刪除
             if (this.dataGridView1.SelectedRows.Count > 0 && this.dataGridView1.SelectedRows[0].Index != this.dataGridView1.Rows.Count - 1)
             {
-                this.dataGridView1.Rows.RemoveAt(this.dataGridView1.SelectedRows[0].Index);
+                this.dataGridView1.Rows.RemoveAt(this.dataGridView1.SelectedRows[0].Index);  // 刪除處於選定狀態的記錄
             }
 
             //清除
@@ -833,7 +857,7 @@ namespace vcs_DataGridView1
             int R = dataGridView1.Rows.Count;  // 列數, 包含標題列
             if (this.dataGridView1.SelectedRows.Count > 0 && this.dataGridView1.SelectedRows[0].Index != (R - 1))
             {
-                this.dataGridView1.Rows.RemoveAt(this.dataGridView1.SelectedRows[0].Index);
+                this.dataGridView1.Rows.RemoveAt(this.dataGridView1.SelectedRows[0].Index);  // 刪除處於選定狀態的記錄
             }
         }
 
@@ -845,6 +869,31 @@ namespace vcs_DataGridView1
 
         private void button22_Click(object sender, EventArgs e)
         {
+            //test recordInfo
+            if (recordInfo != null && recordInfo.Length != 0)
+            {
+                //用雙重for循環搜尋數組recordInfo中的內容
+                for (int i = 0; i < recordInfo.GetLength(0); i++)
+                {
+                    for (int j = 0; j < recordInfo.GetLength(1); j++)
+                    {
+                        //判斷數組中的值是否為空
+                        if (recordInfo[i, j] != null)
+                        {
+                            //xxxx
+                        }
+                    }
+                }
+            }
+
+            //清空recordInfo中的記錄
+            for (int m = 0; m < recordInfo.GetLength(0); m++)
+            {
+                for (int n = 0; n < recordInfo.GetLength(1); n++)
+                {
+                    //recordInfo[m, n] = null;
+                }
+            }
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -1073,5 +1122,4 @@ namespace vcs_DataGridView1
 /*  可搬出
 
  */
-
 

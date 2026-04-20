@@ -1,4 +1,29 @@
-﻿
+﻿            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_03_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
+            int MaxValue = 0;//表示表中的記錄
+
+            SqlConnection con = new SqlConnection(cnstr);
+            con.Open();
+            SqlCommand com = new SqlCommand("select Count(*)from tb_01", con);
+            MaxValue = (int)com.ExecuteScalar();
+            richTextBox1.Text += "MaxValue = " + MaxValue.ToString() + "\n";
+            con.Close();
+            
+-------------------------            
+
+string selectString = "select au_id as 使用者編號,作者 as 使用者名,phone as 聯繫電話 from authors";
+
+SqlCommand cmd = new SqlCommand("update 系統管理員表 set 使用者名稱='" + textBox1.Text + "',密碼='" + textBox2.Text + "'", con);
+
+-------------------------
+
+
+
+
+
+
+
+
 
 SELECT name FROM sysdatabases
 

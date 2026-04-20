@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button0 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -62,7 +63,15 @@
             this.label1b = new System.Windows.Forms.Label();
             this.label1c = new System.Windows.Forms.Label();
             this.label1d = new System.Windows.Forms.Label();
+            this.groupBox_player = new System.Windows.Forms.GroupBox();
+            this.btn_record = new System.Windows.Forms.Button();
+            this.btn_previous = new System.Windows.Forms.Button();
+            this.btn_next = new System.Windows.Forms.Button();
+            this.btn_stop = new System.Windows.Forms.Button();
+            this.btn_pause = new System.Windows.Forms.Button();
+            this.btn_play = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox_player.SuspendLayout();
             this.SuspendLayout();
             // 
             // button0
@@ -399,11 +408,87 @@
             this.label1d.TabIndex = 242;
             this.label1d.Text = "移動無邊框窗體";
             // 
+            // groupBox_player
+            // 
+            this.groupBox_player.Controls.Add(this.btn_record);
+            this.groupBox_player.Controls.Add(this.btn_previous);
+            this.groupBox_player.Controls.Add(this.btn_next);
+            this.groupBox_player.Controls.Add(this.btn_stop);
+            this.groupBox_player.Controls.Add(this.btn_pause);
+            this.groupBox_player.Controls.Add(this.btn_play);
+            this.groupBox_player.Location = new System.Drawing.Point(424, 566);
+            this.groupBox_player.Name = "groupBox_player";
+            this.groupBox_player.Size = new System.Drawing.Size(445, 97);
+            this.groupBox_player.TabIndex = 243;
+            this.groupBox_player.TabStop = false;
+            this.groupBox_player.Text = "groupBox1";
+            // 
+            // btn_record
+            // 
+            this.btn_record.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_record.BackgroundImage")));
+            this.btn_record.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_record.Location = new System.Drawing.Point(365, 21);
+            this.btn_record.Name = "btn_record";
+            this.btn_record.Size = new System.Drawing.Size(64, 64);
+            this.btn_record.TabIndex = 5;
+            this.btn_record.UseVisualStyleBackColor = true;
+            // 
+            // btn_previous
+            // 
+            this.btn_previous.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_previous.BackgroundImage")));
+            this.btn_previous.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_previous.Location = new System.Drawing.Point(295, 21);
+            this.btn_previous.Name = "btn_previous";
+            this.btn_previous.Size = new System.Drawing.Size(64, 64);
+            this.btn_previous.TabIndex = 4;
+            this.btn_previous.UseVisualStyleBackColor = true;
+            // 
+            // btn_next
+            // 
+            this.btn_next.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_next.BackgroundImage")));
+            this.btn_next.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_next.Location = new System.Drawing.Point(225, 21);
+            this.btn_next.Name = "btn_next";
+            this.btn_next.Size = new System.Drawing.Size(64, 64);
+            this.btn_next.TabIndex = 3;
+            this.btn_next.UseVisualStyleBackColor = true;
+            // 
+            // btn_stop
+            // 
+            this.btn_stop.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_stop.BackgroundImage")));
+            this.btn_stop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_stop.Location = new System.Drawing.Point(155, 21);
+            this.btn_stop.Name = "btn_stop";
+            this.btn_stop.Size = new System.Drawing.Size(64, 64);
+            this.btn_stop.TabIndex = 2;
+            this.btn_stop.UseVisualStyleBackColor = true;
+            // 
+            // btn_pause
+            // 
+            this.btn_pause.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_pause.BackgroundImage")));
+            this.btn_pause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_pause.Location = new System.Drawing.Point(85, 21);
+            this.btn_pause.Name = "btn_pause";
+            this.btn_pause.Size = new System.Drawing.Size(64, 64);
+            this.btn_pause.TabIndex = 1;
+            this.btn_pause.UseVisualStyleBackColor = true;
+            // 
+            // btn_play
+            // 
+            this.btn_play.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_play.BackgroundImage")));
+            this.btn_play.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_play.Location = new System.Drawing.Point(15, 21);
+            this.btn_play.Name = "btn_play";
+            this.btn_play.Size = new System.Drawing.Size(64, 64);
+            this.btn_play.TabIndex = 0;
+            this.btn_play.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(824, 691);
+            this.Controls.Add(this.groupBox_player);
             this.Controls.Add(this.label1d);
             this.Controls.Add(this.label1c);
             this.Controls.Add(this.label1b);
@@ -444,6 +529,7 @@
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox_player.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -484,6 +570,13 @@
         private System.Windows.Forms.Label label1b;
         private System.Windows.Forms.Label label1c;
         private System.Windows.Forms.Label label1d;
+        private System.Windows.Forms.GroupBox groupBox_player;
+        private System.Windows.Forms.Button btn_record;
+        private System.Windows.Forms.Button btn_previous;
+        private System.Windows.Forms.Button btn_next;
+        private System.Windows.Forms.Button btn_stop;
+        private System.Windows.Forms.Button btn_pause;
+        private System.Windows.Forms.Button btn_play;
     }
 }
 

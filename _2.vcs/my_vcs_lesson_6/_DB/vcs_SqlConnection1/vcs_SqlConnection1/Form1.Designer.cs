@@ -68,9 +68,7 @@
             this.lb_dgv2 = new System.Windows.Forms.Label();
             this.lb_dgv3 = new System.Windows.Forms.Label();
             this.lb_dgv4 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lb_index = new System.Windows.Forms.Label();
-            this.tb_sql = new System.Windows.Forms.TextBox();
             this.bt_next = new System.Windows.Forms.Button();
             this.bt_previous = new System.Windows.Forms.Button();
             this.btn_sql_test = new System.Windows.Forms.Button();
@@ -79,7 +77,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -509,42 +506,21 @@
             this.lb_dgv4.TabIndex = 172;
             this.lb_dgv4.Text = "lb_dgv4";
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.lb_index);
-            this.groupBox1.Controls.Add(this.tb_sql);
-            this.groupBox1.Controls.Add(this.bt_next);
-            this.groupBox1.Controls.Add(this.bt_previous);
-            this.groupBox1.Location = new System.Drawing.Point(746, 116);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(100, 200);
-            this.groupBox1.TabIndex = 173;
-            this.groupBox1.TabStop = false;
-            // 
             // lb_index
             // 
             this.lb_index.AutoSize = true;
             this.lb_index.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_index.ForeColor = System.Drawing.Color.Red;
-            this.lb_index.Location = new System.Drawing.Point(6, 106);
+            this.lb_index.Location = new System.Drawing.Point(778, 195);
             this.lb_index.Name = "lb_index";
             this.lb_index.Size = new System.Drawing.Size(78, 24);
             this.lb_index.TabIndex = 175;
             this.lb_index.Text = "mesg1";
             // 
-            // tb_sql
-            // 
-            this.tb_sql.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_sql.Location = new System.Drawing.Point(13, 117);
-            this.tb_sql.Multiline = true;
-            this.tb_sql.Name = "tb_sql";
-            this.tb_sql.Size = new System.Drawing.Size(66, 77);
-            this.tb_sql.TabIndex = 177;
-            // 
             // bt_next
             // 
             this.bt_next.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_next.Location = new System.Drawing.Point(13, 71);
+            this.bt_next.Location = new System.Drawing.Point(818, 145);
             this.bt_next.Name = "bt_next";
             this.bt_next.Size = new System.Drawing.Size(66, 40);
             this.bt_next.TabIndex = 176;
@@ -555,7 +531,7 @@
             // bt_previous
             // 
             this.bt_previous.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_previous.Location = new System.Drawing.Point(13, 21);
+            this.bt_previous.Location = new System.Drawing.Point(746, 145);
             this.bt_previous.Name = "bt_previous";
             this.bt_previous.Size = new System.Drawing.Size(66, 40);
             this.bt_previous.TabIndex = 175;
@@ -589,10 +565,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1209, 642);
+            this.Controls.Add(this.lb_index);
             this.Controls.Add(this.bt_clear);
+            this.Controls.Add(this.bt_next);
             this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.bt_previous);
             this.Controls.Add(this.btn_sql_test);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lb_dgv4);
             this.Controls.Add(this.lb_dgv3);
             this.Controls.Add(this.lb_dgv2);
@@ -639,8 +617,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -689,9 +665,7 @@
         private System.Windows.Forms.Label lb_dgv2;
         private System.Windows.Forms.Label lb_dgv3;
         private System.Windows.Forms.Label lb_dgv4;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btn_sql_test;
-        private System.Windows.Forms.TextBox tb_sql;
         private System.Windows.Forms.Button bt_next;
         private System.Windows.Forms.Button bt_previous;
         private System.Windows.Forms.Label lb_index;

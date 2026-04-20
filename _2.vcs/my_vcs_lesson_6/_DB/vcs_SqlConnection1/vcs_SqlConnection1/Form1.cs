@@ -87,7 +87,9 @@ namespace vcs_SqlConnection1
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
             btn_sql_test.Location = new Point(x_st + dx * 0, y_st + dy * 10);
             btn_sql_test.BackColor = Color.Pink;
-            groupBox1.Visible = false;
+            bt_previous.Visible = false;
+            bt_next.Visible = false;
+            lb_index.Visible = false;
 
             int dd = 26;
             dataGridView1.Size = new Size(510, 380);
@@ -1531,7 +1533,7 @@ namespace vcs_SqlConnection1
 
         private void button17_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "刪除資料 與 清空表單\n";
+            richTextBox1.Text += "刪除資料 與 清空表單, DELETE 和 DELETE FROM 一樣\n";
 
             // 資料庫檔案
             string db_filename = "animals1_db.mdf";
@@ -1541,7 +1543,7 @@ namespace vcs_SqlConnection1
             lb_dgv1.Text = "十二生肖全部資料";
 
             // 刪除資料
-            string id = "50";
+            string id = "12";
             // 資料庫檔案
             db_filename = "animals1_db.mdf";
             // 查詢字串, 刪除符合條件的項目
@@ -1564,9 +1566,6 @@ namespace vcs_SqlConnection1
             sqlstr = "TRUNCATE TABLE animals1_table";  // 清空整個表單
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令
             */
-
-            //是不是沒有FROM也可以
-            //string DeleteString = "delete tb_WidgetApply where 產品編號=" + id.ToString();//初始化刪除數據的字段
 
         }
 
@@ -2183,11 +2182,11 @@ namespace vcs_SqlConnection1
                 FileStream FStream = new FileStream(pic_filename, FileMode.Open, FileAccess.Read);
                 BinaryReader BReader = new BinaryReader(FStream);
                 byte[] byteImage = BReader.ReadBytes((int)FStream.Length);
-                SqlCommand sqlcmd = new SqlCommand("insert into tb_Image(name,photo) values(@name,@photo)", cn);
-                sqlcmd.Parameters.Add("@name", SqlDbType.VarChar, 50).Value = user_name;
-                sqlcmd.Parameters.Add("@photo", SqlDbType.Image).Value = byteImage;
+                SqlCommand cmd = new SqlCommand("insert into tb_Image(name,photo) values(@name,@photo)", cn);
+                cmd.Parameters.Add("@name", SqlDbType.VarChar, 50).Value = user_name;
+                cmd.Parameters.Add("@photo", SqlDbType.Image).Value = byteImage;
                 cn.Open();
-                sqlcmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
                 cn.Close();
                 richTextBox1.Text += "加入用戶信息 OK\n";
             }
@@ -2284,10 +2283,15 @@ namespace vcs_SqlConnection1
             // 查詢字串
             string sqlstr = string.Empty;
 
+
             // 資料庫檔案
-            db_filename = "Northwind.mdf";
+            db_filename = "animals1_db.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM animals1_table";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+            lb_dgv2.Text = "十二生肖全部資料";
 
-
+            return;
 
             // 資料庫檔案
             db_filename = "db_09_Data.mdf";
@@ -2297,12 +2301,14 @@ namespace vcs_SqlConnection1
             lb_dgv1.Text = "全部資料 產品類別 有圖片";
 
 
-            
+
 
             return;
 
 
             /* ok
+            // 資料庫檔案
+            db_filename = "Northwind.mdf";
             // 查詢字串
             sqlstr = "SELECT * FROM 產品類別";
             sql_read_database(db_filename, sqlstr, dataGridView1);
@@ -2395,52 +2401,123 @@ namespace vcs_SqlConnection1
         private void btn_sql_test_Click(object sender, EventArgs e)
         {
             //SQL 簡易測試
-
-            dataGridView1.Size = new Size(1250, 400);
-            dataGridView2.Visible = false;
-            dataGridView3.Visible = false;
+            dataGridView1.BringToFront();
+            dataGridView2.BringToFront();
+            dataGridView3.BringToFront();
+            lb_dgv1.BringToFront();
+            lb_dgv2.BringToFront();
+            lb_dgv3.BringToFront();
+            button0.Visible = false;
+            button1.Visible = false;
+            button2.Visible = false;
+            button3.Visible = false;
+            button4.Visible = false;
+            button5.Visible = false;
+            button6.Visible = false;
+            button7.Visible = false;
+            button8.Visible = false;
+            button9.Visible = false;
+            button10.Visible = false;
+            button11.Visible = false;
+            button12.Visible = false;
+            button13.Visible = false;
+            button14.Visible = false;
+            button15.Visible = false;
+            button16.Visible = false;
+            button17.Visible = false;
+            button18.Visible = false;
+            button19.Visible = false;
+            button20.Visible = false;
+            button21.Visible = false;
+            button22.Visible = false;
+            button23.Visible = false;
+            button24.Visible = false;
+            button25.Visible = false;
+            button26.Visible = false;
+            button27.Visible = false;
+            button28.Visible = false;
+            button29.Visible = false;
+            btn_sql_test.Visible = false;
             dataGridView4.Visible = false;
-            lb_dgv2.Visible = false;
-            lb_dgv3.Visible = false;
             lb_dgv4.Visible = false;
 
+            int W = 930;
+            int H = 430;
             int x_st = 10;
             int y_st = 10;
-            int dx = 200 + 10;
-            int dy = 60 + 10;
+            int dx = W + 10;
+            int dy = H + 10 + 30;
+            int dd = 26;
 
-            richTextBox1.Size = new Size(300, 820 - 430);
-            richTextBox1.Location = new Point(x_st + dx * 7 + 110, y_st + dy * 0 + 430);
+            dataGridView1.Size = new Size(W, H);
+            dataGridView2.Size = new Size(W, H);
+            dataGridView3.Size = new Size(W, H);
+            richTextBox1.Size = new Size(W, H);
+
+            lb_dgv1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            dataGridView1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + dd);
+            lb_dgv2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            dataGridView2.Location = new Point(x_st + dx * 0, y_st + dy * 1 + dd);
+            lb_dgv3.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            dataGridView3.Location = new Point(x_st + dx * 1, y_st + dy * 0 + dd);
+
+            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 1 + 50);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            bt_previous.Location = new Point(20, 40);
-            bt_next.Location = new Point(20, 40 + 100);
-            lb_index.Location = new Point(20 + 20, 40 + 56);
-            tb_sql.Size = new Size(700 + 30 + 60 + 30, 200);
-            tb_sql.Location = new Point(110, 40);
+            bt_previous.Visible = true;
+            bt_next.Visible = true;
+            lb_index.Visible = true;
+            bt_previous.Location = new Point(x_st + dx * 1, y_st + dy * 1); //new Point(20, 40);
+            bt_next.Location = new Point(x_st + dx * 1 + 150, y_st + dy * 1); //new Point(20, 40 + 100);
+            lb_index.Location = new Point(x_st + dx * 1 + 90, y_st + dy * 1); //new Point(20 + 20, 40 + 56);
             lb_index.Text = "";
 
-            groupBox1.Size = new Size(900 + 40, 300);
-            groupBox1.Location = new Point(640, 500);
-            groupBox1.Visible = true;
+            this.Size = new Size(1920, 890 + 100);
+            this.Text = "vcs_SqlConnection1";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
 
             show_data_by_sqlcmd(sqlcmd_index);
         }
 
         void show_data_by_sqlcmd(int idx)
         {
+            // 0          1            2            3           4          5           6        7
+            //idx  /  資料庫檔案  /  查詢字串1  /  說明1 /  查詢字串2  /  說明2/  查詢字串3  /  說明3
             //richTextBox1.Text += "idx = " + idx.ToString() + "\n";
             string index = sqlcmd[idx, 0];
             string db_filename = sqlcmd[idx, 1];
+            lb_index.Text = index;
+            richTextBox1.Clear();
+            richTextBox1.Text += "編號 :\t" + index + "\t資料庫檔案 :\t" + db_filename + "\n";            
+
             string sqlstr = sqlcmd[idx, 2];
             string description = sqlcmd[idx, 3];
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = description;
+            string mesg = "查詢字串 :\t" + sqlstr + "\n說明 :\t" + description;
+            richTextBox1.Text += mesg + "\n";
 
-            string mesg = "編號 :\t" + index + Environment.NewLine + "資料庫檔案 :\t" + db_filename + Environment.NewLine +
-                "查詢字串 :\t" + sqlstr + Environment.NewLine + "說明 :\t" + description;
-            tb_sql.Text = mesg;
-            lb_index.Text = index;
+            if (sqlcmd[idx, 4] != "")
+            {
+                sqlstr = sqlcmd[idx, 4];
+                description = sqlcmd[idx, 5];
+                sql_read_database(db_filename, sqlstr, dataGridView2);
+                lb_dgv2.Text = description;
+                mesg = "查詢字串 :\t" + sqlstr + "\n說明 :\t" + description;
+                richTextBox1.Text += mesg + "\n";
+            }
+            if (sqlcmd[idx, 6] != "")
+            {
+                sqlstr = sqlcmd[idx, 6];
+                description = sqlcmd[idx, 7];
+                sql_read_database(db_filename, sqlstr, dataGridView3);
+                lb_dgv3.Text = description;
+                mesg = "查詢字串 :\t" + sqlstr + "\n說明 :\t" + description;
+                richTextBox1.Text += mesg + "\n";
+            }
         }
 
         int sqlcmd_index = 0;
@@ -2477,20 +2554,27 @@ namespace vcs_SqlConnection1
         //二維字串串列
         string[,] sqlcmd = new string[,]
         {
-            //idx  /  資料庫檔案  /  查詢字串  /  說明
-            //{ "1", "", "", ""},
-            { "2", "db_09_Data.mdf", "SELECT * FROM 員工表", ""},
-            { "3", "db_TomeTwo.mdf", "SELECT TOP 10 * FROM (SELECT TOP 20 * FROM tb_Grade ORDER BY 总分 DESC) AS st ORDER BY 总分 ASC", "查询第10到第20名的数据"},
-            { "4", "db_TomeTwo.mdf", "SELECT * FROM tb_Book", ""},
-            { "5", "db_TomeTwo.mdf", "SELECT TOP 50 PERCENT 书号,书名,SUM(销售数量)AS 合计销售数量 FROM tb_Book GROUP BY 书号,书名,作者 ORDER BY 3 DESC", "查询销售量占前50%的图书信息, 查询数据库信息"},
-            //{ "6", "", "", ""},
-            //{ "7", "", "", ""},
-            //{ "8", "", "", ""},
-            //{ "9", "", "", ""},
-            //{ "10", "", "", ""},
-            //{ "11", "", "", ""},
-            //{ "12", "", "", ""},
-            //{ "13", "xxxx.MDF", "xxxx", ""},
+            //idx  /  資料庫檔案  /  查詢字串1  /  說明1 /  查詢字串2  /  說明2/  查詢字串3  /  說明3
+            //{ "1", "", "", "", "", "", "", ""},
+            { "2", "db_09_Data.mdf",
+                "SELECT * FROM 員工表", "", "", "", "", ""},
+            { "3", "db_TomeTwo.mdf",
+                "SELECT TOP 10 * FROM (SELECT TOP 20 * FROM tb_Grade ORDER BY 总分 DESC) AS st ORDER BY 总分 ASC", "查询第10到第20名的数据", "", "", "", ""},
+            { "4", "db_TomeTwo.mdf",
+                "SELECT * FROM tb_Book", "", "", "", "", ""},
+            { "5", "db_TomeTwo.mdf",
+                "SELECT TOP 50 PERCENT 书号,书名,SUM(销售数量)AS 合计销售数量 FROM tb_Book GROUP BY 书号,书名,作者 ORDER BY 3 DESC", "查询销售量占前50%的图书信息, 查询数据库信息", "", "", "", ""},
+            { "6", "db_10_Data.MDF",
+                "SELECT * FROM 員工訊息表", "員工訊息表",
+                "SELECT * FROM 員工工資表", "員工工資表",
+                "SELECT 員工訊息表.員工姓名, 員工訊息表.員工編號, 員工訊息表.聯繫電話, 員工工資表.基本工資 FROM 員工訊息表 INNER JOIN 員工工資表 ON 員工訊息表.員工編號 = 員工工資表.員工編號", "簡單 內連接 查詢 INNER JOIN"},
+            //{ "7", "", "", "", "", "", "", ""},
+            //{ "8", "", "", "", "", "", "", ""},
+            //{ "9", "", "", "", "", "", "", ""},
+            //{ "10", "", "", "", "", "", "", ""},
+            //{ "11", "", "", "", "", "", "", ""},
+            //{ "12", "", "", "", "", "", "", ""},
+            //{ "13", "xxxx.MDF", "xxxx", "", "", "", "", ""},
         };
     }
 }
