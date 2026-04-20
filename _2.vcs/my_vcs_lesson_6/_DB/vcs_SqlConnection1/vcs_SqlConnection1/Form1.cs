@@ -918,12 +918,12 @@ namespace vcs_SqlConnection1
 
                     cmd4.ExecuteNonQuery();  // 執行SQL命令
 
-                    tran.Commit(); // 認可交易
+                    tran.Commit();  // 認可交易
                     richTextBox1.Text += "轉帳成功, 交易成功\n";
                 }
                 catch (Exception ex)
                 {
-                    tran.Rollback();// 回復交易
+                    tran.Rollback();  // 回復交易
                     richTextBox1.Text += "轉帳失敗" + ex.Message + "交易失敗\n";
                 }
 
@@ -1540,17 +1540,17 @@ namespace vcs_SqlConnection1
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "十二生肖全部資料";
 
-            /*
             // 刪除資料
-            string id = "11";
+            string id = "50";
             // 資料庫檔案
             db_filename = "animals1_db.mdf";
             // 查詢字串, 刪除符合條件的項目
             sqlstr = "DELETE FROM animals1_table WHERE 編號=N'" + id + "'";
+
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令
 
             richTextBox1.Text += "------------------------------\n";  // 30個
-
+            /*
             // 查詢字串, 有條件刪除資料 體重 > 40 的所有資料
             sqlstr = "DELETE FROM animals1_table WHERE 體重 > 80";  // 刪除所有資料
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令
@@ -1564,6 +1564,10 @@ namespace vcs_SqlConnection1
             sqlstr = "TRUNCATE TABLE animals1_table";  // 清空整個表單
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令
             */
+
+            //是不是沒有FROM也可以
+            //string DeleteString = "delete tb_WidgetApply where 產品編號=" + id.ToString();//初始化刪除數據的字段
+
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -1972,6 +1976,35 @@ namespace vcs_SqlConnection1
 
         private void button22_Click(object sender, EventArgs e)
         {
+            //使用聯合查詢
+            /*
+            透過union語句，
+            將高考成績表中總成績大於500的考生與高考學生訊息表中籍貫為中國北京的考生訊息，
+            一起顯示在顯示出來。
+            */
+            string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection con = new SqlConnection(cnstr);
+            // 查詢字串
+            string sqlstr = "select * From 高考學生訊息表 select * from 高考成績表";
+            SqlDataAdapter da = new SqlDataAdapter(sqlstr, con);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            dataGridView2.DataSource = ds.Tables[1].DefaultView;
+
+            //3030
+
+            db_filename = "db_10_Data.MDF";
+            cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            con = new SqlConnection(cnstr);
+            // 查詢字串
+            sqlstr = "select 考生編號,姓名,考生類別 From 高考學生訊息表 where 籍貫='中國北京' UNION select 考生編號,姓名,考生類別 from 高考成績表  where 總成績 > 500 AND 考生類別='文科考生'";
+            da = new SqlDataAdapter(sqlstr, con);
+            ds = new DataSet();
+            da.Fill(ds);
+            dataGridView3.DataSource = ds.Tables[0].DefaultView;
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -2253,6 +2286,21 @@ namespace vcs_SqlConnection1
 
             // 資料庫檔案
             db_filename = "Northwind.mdf";
+
+
+
+            // 資料庫檔案
+            db_filename = "db_09_Data.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM 員工表";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "全部資料 產品類別 有圖片";
+
+
+            
+
+            return;
+
 
             /* ok
             // 查詢字串
@@ -2656,23 +2704,6 @@ Connect Timeout=30
                     cmd.ExecuteNonQuery();  // 執行SQL命令
 */
 
-            //刪除
-
-                /* same
-                  // 查詢字串
-                string sqlstr = "DELETE FROM 員工 WHERE 姓名 = '" + name + "'";
-                SqlCommand cmd = new SqlCommand(sqlstr, cn);
-                cmd.ExecuteNonQuery();  // 執行SQL命令
-                */
-/*
-                // 查詢字串
-                sqlstr = "DELETE FROM 員工 WHERE 姓名 = @name";
-                SqlCommand cmd = new SqlCommand(sqlstr, cn);
-                cmd.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar));
-                cmd.Parameters["@name"].Value = name;
-                cmd.ExecuteNonQuery();  // 執行SQL命令
-*/
-
 
 
 /*
@@ -2702,6 +2733,22 @@ string sqlstr = "SELECT * FROM tb_kf";
 */
 
 
-
 // OK 的 SQL語法
 
+
+/* same
+// 查詢字串
+string sqlstr = "DELETE FROM 員工 WHERE 姓名 = '" + name + "'";
+SqlCommand cmd = new SqlCommand(sqlstr, cn);
+cmd.ExecuteNonQuery();  // 執行SQL命令
+
+// 查詢字串
+sqlstr = "DELETE FROM 員工 WHERE 姓名 = @name";
+SqlCommand cmd = new SqlCommand(sqlstr, cn);
+cmd.Parameters.Add(new SqlParameter("@name", SqlDbType.NVarChar));
+cmd.Parameters["@name"].Value = name;
+cmd.ExecuteNonQuery();  // 執行SQL命令
+*/
+
+
+// AS 的用法 "select au_id as 使用者編號,au_lname as 使用者名,phone as 聯繫電話 from authors";

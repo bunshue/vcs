@@ -1353,6 +1353,10 @@ namespace vcs_Mix00
 
         private void button24_Click(object sender, EventArgs e)
         {
+            //測試 ErrorProvider
+            errorProvider1.BlinkRate = 100;
+            errorProvider1.BlinkStyle = ErrorBlinkStyle.AlwaysBlink;
+            errorProvider1.SetError(button39, "測試 ErrorProvider");
         }
 
         private void button25_Click(object sender, EventArgs e)

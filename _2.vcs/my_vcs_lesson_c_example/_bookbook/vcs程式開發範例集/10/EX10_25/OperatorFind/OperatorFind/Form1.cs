@@ -32,19 +32,19 @@ namespace OperatorFind
             string db_filename = "db_10_Data.MDF";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
 
-            SqlConnection My_con = new SqlConnection(cnstr);   //用SqlConnection對象與指定的數據庫相連接
-            My_con.Open();  //打開數據庫連接
-            SqlDataAdapter SQLda = new SqlDataAdapter(sqlstr, My_con);  //建立一個SqlDataAdapter對象，並取得指定數據表的訊息
+            SqlConnection cn = new SqlConnection(cnstr);   //用SqlConnection對象與指定的數據庫相連接
+            cn.Open();  //打開數據庫連接
+            SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  //建立一個SqlDataAdapter對象，並取得指定數據表的訊息
             DataSet ds = new DataSet(); //建立DataSet對像
             if (tableName == "")
             {
-                SQLda.Fill(ds);
+                da.Fill(ds);
             }
             else
             {
-                SQLda.Fill(ds, tableName);  //透過SqlDataAdapter對象的的Fill()方法，將數據表訊息新增到DataSet對像中
+                da.Fill(ds, tableName);  //透過SqlDataAdapter對象的的Fill()方法，將數據表訊息新增到DataSet對像中
             }
-            My_con.Close();    //關閉數據庫的連接
+            cn.Close();    //關閉數據庫的連接
             return ds;  //傳回DataSet對象的訊息
         }
         //#endregion
@@ -58,10 +58,11 @@ namespace OperatorFind
         public void GetFBewrite(string TabN, ComboBox combox)
         {
             combox.Items.Clear();
-            string SBewrite = "";//儲存SQL語句
+
             //取得SQL Server 2000中數據表中的字段名
-            SBewrite = "select c.name from syscolumns c,sysobjects a where a.name='" + TabN + "' and a.id=c.id";
-            DataSet ds = getDataSet(SBewrite, "");//將尋找的訊息存入到DataSet對像
+            string sqlstr = "select c.name from syscolumns c,sysobjects a where a.name='" + TabN + "' and a.id=c.id";
+
+            DataSet ds = getDataSet(sqlstr, "");//將尋找的訊息存入到DataSet對像
             int nint = ds.Tables[0].Rows.Count;//取得尋找數據的行數
             for (int i = 0; i < nint; i++)//將表中的字段名新增到ComboBox控制元件中
             {
@@ -75,32 +76,49 @@ namespace OperatorFind
         {
             DataSet ds = getDataSet("SELECT * FROM 銷售表", "銷售表");
             dataGridView1.DataSource = ds.Tables[0];
+
             GetFBewrite("銷售表", comboBox1);
+
+            //-----------------------------
+
+            // 資料庫檔案
+            string db_filename = "db_10_Data.MDF";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 銷售表";
+
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+
+            //------------
+
+            comboBox1.SelectedIndex = 3;
+            comboBox2.SelectedIndex = 5;
+            textBox1.Text = "李";
         }
 
         public string BuildSQL(string TableName, string FieldName, string Condition, string FieldValue)
         {
-            string StrSQL = "SELECT * FROM " + TableName;//組合運算符的SQL查詢語句
+            string sqlstr = "SELECT * FROM " + TableName;//組合運算符的SQL查詢語句
             bool blur = false;//如果為True，則新增模糊查詢
+
             if (FieldValue.Trim().Length > 0)//如果查詢條件不為空
             {
                 switch (Condition)
                 {
                     case "%like%"://左右模糊查詢
                         {
-                            StrSQL = StrSQL + " where " + FieldName + " like '%" + FieldValue + "%'";//組合SQL查詢語句
+                            sqlstr = sqlstr + " where " + FieldName + " like '%" + FieldValue + "%'";//組合SQL查詢語句
                             blur = true;
                             break;
                         }
                     case "%like"://左模糊查詢
                         {
-                            StrSQL = StrSQL + " where " + FieldName + " like '%" + FieldValue + "'";//組合SQL查詢語句
+                            sqlstr = sqlstr + " where " + FieldName + " like '%" + FieldValue + "'";//組合SQL查詢語句
                             blur = true;
                             break;
                         }
                     case "like%"://右模糊查詢
                         {
-                            StrSQL = StrSQL + " where " + FieldName + " like '" + FieldValue + "%'";//組合SQL查詢語句
+                            sqlstr = sqlstr + " where " + FieldName + " like '" + FieldValue + "%'";//組合SQL查詢語句
                             blur = true;
                             break;
                         }
@@ -108,14 +126,14 @@ namespace OperatorFind
                 }
                 if (!blur)//如是不是模糊查詢
                 {
-                    StrSQL = StrSQL + " where " + FieldName + Condition + "'" + FieldValue + "'";//組合算數運算符查詢語句
+                    sqlstr = sqlstr + " where " + FieldName + Condition + "'" + FieldValue + "'";//組合算數運算符查詢語句
                 }
             }
             else//查詢條件為空
             {
-                StrSQL = StrSQL + " where " + FieldName + " IS null or " + FieldName + "=''";
+                sqlstr = sqlstr + " where " + FieldName + " IS null or " + FieldName + "=''";
             }
-            return StrSQL;//傳回SQL語句
+            return sqlstr;//傳回SQL語句
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -165,13 +183,7 @@ namespace OperatorFind
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //以下為debug
-            // 資料庫檔案
-            string db_filename = "db_10_Data.MDF";
-            // 查詢字串
-            string sqlstr = "SELECT * FROM 銷售表";
-
-            sql_read_database(db_filename, sqlstr, dataGridView1);
+            // ok
         }
     }
 }

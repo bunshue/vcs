@@ -690,24 +690,6 @@ namespace vcs_SqlConnection4
                 }
             }
             */
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //刪除資料
-            /*
-            // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
-
-            using (SqlConnection con = new SqlConnection(cnstr))
-            {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("DELETE FROM 員工表 WHERE 員工編號='" + str + "'", con);
-                cmd.Connection = con;
-                cmd.ExecuteNonQuery();
-                con.Close();
-                richTextBox1.Text += "刪除成功\n";
-            }
-            */
         }
 
         private void button14_Click(object sender, EventArgs e)

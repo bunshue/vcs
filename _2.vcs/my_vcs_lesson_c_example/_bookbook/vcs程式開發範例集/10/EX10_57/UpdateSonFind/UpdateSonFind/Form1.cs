@@ -25,6 +25,8 @@ namespace UpdateSonFind
             string db_filename = "db_10_Data.MDF";
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
             SqlConnection cn = new SqlConnection(cnstr);
+
+            //同時查詢兩次, 把資料放到DataSet的兩頁
             SqlDataAdapter dap = new SqlDataAdapter("select * from 員工工資表 select * from 規定工資表", cn);
             DataSet ds = new DataSet();
             dap.Fill(ds);
@@ -38,10 +40,11 @@ namespace UpdateSonFind
             string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
             SqlConnection con = new SqlConnection(cnstr);
             con.Open();
-            string SqlStr = "update 員工工資表 set 基本工資=(select 基本工資 from 規定工資表 where 工作時間='" + comboBox1.Text + "') where 員工姓名='" + textBox1.Text + "'";
-            SqlCommand cmd = new SqlCommand(SqlStr, con);
+            string sqlstr = "update 員工工資表 set 基本工資=(select 基本工資 from 規定工資表 where 工作時間='" + comboBox1.Text + "') where 員工姓名='" + textBox1.Text + "'";
+            SqlCommand cmd = new SqlCommand(sqlstr, con);
             cmd.ExecuteNonQuery();
             con.Close();
+
             //SqlDataAdapter dap = new SqlDataAdapter("select * from 員工工資表", con);
             //DataSet ds = new DataSet();
             //dap.Fill(ds);
