@@ -246,11 +246,53 @@ namespace vcs_SqlConnection2
 
         private void button2_Click(object sender, EventArgs e)
         {
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection con = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("SELECT * FROM 員工訊息表 SELECT * FROM 員工工資表", con);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            dataGridView2.DataSource = ds.Tables[1].DefaultView;
+
+            //簡單 內連接 查詢
+
+            db_filename = "db_10_Data.MDF";
+            cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            con = new SqlConnection(cnstr);
+            dap = new SqlDataAdapter("SELECT 員工訊息表.員工姓名, 員工訊息表.員工編號, 員工訊息表.聯繫電話, 員工工資表.基本工資 FROM 員工訊息表 INNER JOIN 員工工資表 ON 員工訊息表.員工編號 = 員工工資表.員工編號", con);
+            ds = new DataSet();
+            dap.Fill(ds, "table");
+            dataGridView3.DataSource = ds.Tables[0].DefaultView;
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection con = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("SELECT * FROM 明細工資表", con);
+            DataSet ds = new DataSet();
+            dap.Fill(ds, "table");
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+
+
+            //3030
+
+            int money_low = 1000;
+            int money_high = 1500;
+
+            db_filename = "db_10_Data.MDF";
+            cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            con = new SqlConnection(cnstr);
+            dap = new SqlDataAdapter("SELECT * FROM 明細工資表 WHERE (基本工資 IN (SELECT 基本工資 FROM 明細工資表 WHERE 基本工資 > " + money_low.ToString() + " AND 基本工資 < " + money_high.ToString() + "))", con);
+            ds = new DataSet();
+            dap.Fill(ds, "table");
+            dataGridView2.DataSource = ds.Tables[0].DefaultView;
+
+
+
         }
 
         private void button4_Click(object sender, EventArgs e)

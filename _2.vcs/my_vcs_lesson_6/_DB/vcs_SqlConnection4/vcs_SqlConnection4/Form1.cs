@@ -544,8 +544,25 @@ namespace vcs_SqlConnection4
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //製作一個可以旋轉的餅型圖
-            //D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\vcs程式開發範例集\13\Ex13_18\製作一個可以旋轉的餅型圖\製作一個可以旋轉的餅型圖
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection con = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("select * from v10_01", con);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+
+            /*
+            //更新資料
+            db_filename = "db_10_Data.MDF";
+            cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            con = new SqlConnection(cnstr);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("update v10_01 set 基本工資='" + textBox2.Text + "' where 員工編號='" + textBox1.Text + "'", con);
+            cmd.ExecuteNonQuery();
+            con.Close();
+            */
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -1122,10 +1139,63 @@ namespace vcs_SqlConnection4
 
         private void button24_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "SQL 24\n";
+
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection con = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("select * from 部門工資統計表 select * from 明細工資表", con);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            dataGridView2.DataSource = ds.Tables[1].DefaultView;
+
+
+            /*
+            // 修改資料
+
+            db_filename = "db_10_Data.MDF";
+            cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            con = new SqlConnection(cnstr);
+            SqlCommand cmd = new SqlCommand("update 部門工資統計表 set 基本工資=" + Convert.ToInt32(textBox2.Text) + "where 員工姓名 = '" + textBox1.Text + "'", con);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+            */
+
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
+            //SQL 24 跨表單查詢
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection cn = new SqlConnection(cnstr);
+
+            //同時查詢兩次, 把資料放到DataSet的兩頁
+            SqlDataAdapter dap = new SqlDataAdapter("select * from 員工工資表 select * from 規定工資表", cn);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            dataGridView2.DataSource = ds.Tables[1].DefaultView;
+
+            /*
+            //3030
+
+            string db_filename = "db_10_Data.MDF";
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection con = new SqlConnection(cnstr);
+            con.Open();
+            string sqlstr = "update 員工工資表 set 基本工資=(select 基本工資 from 規定工資表 where 工作時間='" + comboBox1.Text + "') where 員工姓名='" + textBox1.Text + "'";
+            SqlCommand cmd = new SqlCommand(sqlstr, con);
+            cmd.ExecuteNonQuery();
+            con.Close();
+
+            //SqlDataAdapter dap = new SqlDataAdapter("select * from 員工工資表", con);
+            //DataSet ds = new DataSet();
+            //dap.Fill(ds);
+            //dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            */
         }
 
         private void button26_Click(object sender, EventArgs e)
