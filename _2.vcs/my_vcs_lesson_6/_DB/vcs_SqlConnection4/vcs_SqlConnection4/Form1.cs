@@ -274,25 +274,7 @@ namespace vcs_SqlConnection4
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //商品分析
 
-            // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
-            SqlConnection con = new SqlConnection(cnstr);
-            con.Open();
-
-            using (SqlCommand cmd = new SqlCommand("SELECT TOP 3 * FROM tb_Rectangle ORDER BY t_Num DESC", con))//降冪
-            {
-                SqlDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
-
-                for (int j = 0; j < 4; j++)
-                {
-                    if (dr.Read())
-                    {
-                        richTextBox1.Text += dr[0].ToString() + "\t" + Convert.ToDouble(dr[1].ToString()) + "\n";
-                    }
-                }
-            }
         }
         //------------------------------------------------------------  # 60個
 
@@ -361,7 +343,7 @@ namespace vcs_SqlConnection4
         private void button5_Click(object sender, EventArgs e)
         {
         }
-        
+
         //------------------------------------------------------------  # 60個
 
         private void button6_Click(object sender, EventArgs e)
@@ -575,15 +557,7 @@ namespace vcs_SqlConnection4
 
         private void button12_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "SQL 12 查詢日期數據\n";
-
-            string birthday = "1984/1/24";
-
-            // 資料庫檔案
-            string db_filename = "db_10_Data.MDF";
-            // 查詢字串
-            string sqlstr = "SELECT * FROM tb_07 WHERE 出生日期='" + birthday + "'";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
+            richTextBox1.Text += "SQL 12\n";
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -982,43 +956,12 @@ namespace vcs_SqlConnection4
 
         private void button18_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "SQL 18 利用變數查詢日期型數據\n";
-
-            // 資料庫檔案
-            string db_filename = "db_10_Data.MDF";
-            // 查詢字串
-            string sqlstr = "SELECT * FROM tb_stu";
-
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            // 資料庫檔案
-            db_filename = "db_10_Data.MDF";
-            string birthday = "1983/4/2";
-            // 查詢字串
-            sqlstr = "SELECT * FROM tb_stu WHERE 出生年月='" + birthday + "'";
-
-            sql_read_database(db_filename, sqlstr, dataGridView2);
+            richTextBox1.Text += "SQL 18\n";
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "SQL 19 利用_通配符進行查詢\n";
-
-            // 資料庫檔案
-            string db_filename = "db_10_Data.MDF";
-            // 查詢字串
-            string sqlstr = "SELECT * FROM tb_stu";
-
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            string student_id = "20014103";
-            // 查詢字串
-            sqlstr = "SELECT * FROM tb_stu WHERE 學生編號 like '" + student_id + "'";
-
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-
+            richTextBox1.Text += "SQL 19\n";
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -1092,8 +1035,6 @@ namespace vcs_SqlConnection4
                 dr.Close();
                 con.Close();
             }
-
-
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -1135,68 +1076,16 @@ namespace vcs_SqlConnection4
 
         private void button23_Click(object sender, EventArgs e)
         {
-            //按年、月或日查詢數據
-
-            // 資料庫檔案
-            string db_filename = "db_10_Data.MDF";
-            // 查詢字串
-            string sqlstr = "SELECT 書號,書名,銷售數量,日期 FROM tb_xsb";
-
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            // 查詢字串
-            sqlstr = "SELECT 書號,書名,銷售數量,日期 FROM tb_xsb WHERE year(日期)='2005' AND month(日期)='10' AND day(日期)='1'";
-
-            sql_read_database(db_filename, sqlstr, dataGridView2);
         }
 
         private void button24_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "SQL 24\n";
-
-            // 資料庫檔案
-            string db_filename = "db_10_Data.MDF";
-
-            // 查詢字串
-            string sqlstr = "SELECT * FROM 部門工資統計表";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            // 修改資料
-            string name = "江南";
-            string money = "2345";
-            sqlstr = "update 部門工資統計表 set 基本工資=" + money + "WHERE 員工姓名 = '" + name + "'";
-            sql_write_database(db_filename, sqlstr);
-
-            // 查詢字串
-            sqlstr = "SELECT * FROM 部門工資統計表";
-            sql_read_database(db_filename, sqlstr, dataGridView2);
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "SQL 25 跨表單查詢 依 規定工資表 修改 員工工資表\n";
-
-            // 資料庫檔案
-            string db_filename = "db_10_Data.MDF";
-
-            // 查詢字串
-            string sqlstr = "SELECT * FROM 員工工資表";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            // 查詢字串
-            sqlstr = "SELECT * FROM 規定工資表";
-            //sql_read_database(db_filename, sqlstr, dataGridView2);
-
-            string work_year = "3年";
-            string name = "江南";
-
-            // 查詢字串
-            sqlstr = "update 員工工資表 set 基本工資=(SELECT 基本工資 FROM 規定工資表 WHERE 工作時間='" + work_year + "') WHERE 員工姓名='" + name + "'";
-            sql_write_database(db_filename, sqlstr);
-
-            // 查詢字串
-            sqlstr = "SELECT * FROM 員工工資表";
-            sql_read_database(db_filename, sqlstr, dataGridView2);
+            richTextBox1.Text += "SQL 25\n";
         }
 
         private void button26_Click(object sender, EventArgs e)
@@ -1215,29 +1104,11 @@ namespace vcs_SqlConnection4
         {
             //show db
 
-            //只是看一下db
             // 資料庫檔案
-            string db_filename = "db_13.mdf";
+            string db_filename = string.Empty;
             // 查詢字串
-            string sqlstr = "SELECT * FROM tb_Rectangle";
+            string sqlstr = "dddddddd";
 
-            /*
-            //sql_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "";
-            // 查詢字串
-            sqlstr = "SELECT SUM(t_Num) FROM tb_Rectangle";
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-            lb_dgv2.Text = "";
-            // 查詢字串
-            sqlstr = "SELECT * FROM tb_Rectangle SELECT SUM(t_Num) FROM tb_Rectangle";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            //lb_dgv3.Text = "";
-
-            string sort_type = "ASC";  // 升冪
-            sort_type = "DESC";  // 降冪
-            // 查詢字串
-            //string sqlstr = "SELECT TOP 3 * FROM tb_Rectangle ORDER BY t_Num " + sort_type;
-            */
 
             // 資料庫檔案
             db_filename = "db_13.mdf";

@@ -13,8 +13,7 @@ namespace SQLServerDistill
 {
     public partial class Form1 : Form
     {
-        string filename = @"D:\db_20.mdf";
-        //string filename = @"D:\db_20_log.LDF";   another
+        string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
 
         public Form1()
         {
@@ -28,101 +27,67 @@ namespace SQLServerDistill
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            textBox1.Enabled = true;
+            textBox2.Enabled = true;
+            textBox1.Text = "david";
+            textBox2.Text = "12345";
+
+            comboBox1.Text = "";
+            comboBox2.Items.Clear();
+            comboBox3.Items.Clear();
+            radioButton1.Checked = true;
+            radioButton2.Checked = true;
+            comboBox2.Enabled = true;
+            comboBox3.Enabled = true;
 
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioButton2.Checked == true)
-            {
-                textBox1.Enabled = true;
-                textBox2.Enabled = true;
-            }
-            else
-            {
-                textBox1.Text = "";
-                textBox2.Text = "";
-                textBox1.Enabled = false;
-                textBox2.Enabled = false;
-            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            comboBox1.Text = "";
-            comboBox2.Items.Clear();
-            comboBox2.Enabled = false;
-            comboBox3.Items.Clear();
-            comboBox3.Enabled = false;
-            radioButton1.Checked = false;
-            radioButton2.Checked = false;
         }
 
-        // 登录服务器
         private void button2_Click(object sender, EventArgs e)
         {
-            if (comboBox1.Text == "")
+            // 登录服务器
+
+            // 資料庫檔案
+            string db_filename = "db_20.mdf";
+            // 查詢字串
+            string sqlstr = "select name from sysdatabases";
+
+
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);
+
+            using (SqlConnection con = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
-                MessageBox.Show("请选择服务器名称：");
-                comboBox1.Focus();
-                return;
-            }// end if 
-            else
-            {
-
-                if (radioButton1.Checked == false && radioButton2.Checked == false)
+                con.Open();  // 打開資料庫連線
+                SqlCommand com = new SqlCommand(sqlstr, con);
+                SqlDataReader dr = com.ExecuteReader();
+                while (dr.Read())
                 {
-                    MessageBox.Show("请选择登录方式");
-                    return;
+                    comboBox2.Items.Add(dr[0].ToString());
+                    richTextBox1.Text += dr[0].ToString() + "\n";
                 }
-
-                //Windows身份验证
-                if (radioButton1.Checked == true)
-                {
-
-                    SqlConnection con = getCon("master");
-                    SqlCommand com = new SqlCommand("select name from sysdatabases", con);
-                    SqlDataReader dr = com.ExecuteReader();
-                    while (dr.Read())
-                    {
-                        comboBox2.Items.Add(dr[0].ToString());
-                    }
-                    dr.Close();
-                    con.Close();
-                    MessageBox.Show("登录成功");
-                    comboBox2.Enabled = true;
-                    comboBox3.Enabled = true;
-                }
-
-                //Server身份验证
-                if (radioButton2.Checked == true)
-                {
-                    try
-                    {
-                        SqlConnection con = getCon("master");
-                        SqlCommand com = new SqlCommand("select name from sysdatabases", con);
-                        SqlDataReader dr = com.ExecuteReader();
-                        while (dr.Read())
-                        {
-                            comboBox2.Items.Add(dr[0].ToString());
-                        }
-                        dr.Close();
-                        con.Close();
-                        MessageBox.Show("登录成功");
-                        comboBox2.Enabled = true;
-                        comboBox3.Enabled = true;
-                    }
-                    catch (Exception ee)
-                    {
-                        MessageBox.Show(ee.Message);
-                    }
-                }
+                dr.Close();
+                con.Close();
+                MessageBox.Show("登录成功");
             }
         }
 
         //提取表结构
         private void button3_Click(object sender, EventArgs e)
         {
+            // 資料庫檔案
+            string db_filename = "db_20.mdf";
+
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);
+
             if (comboBox2.Text == "" && comboBox3.Text == "")
             {
                 MessageBox.Show("请选择提取的表");
@@ -131,7 +96,7 @@ namespace SQLServerDistill
             {
                 if (comboBox3.Text != "")//选择要提取的表
                 {
-                    SqlConnection con = getCon(comboBox2.Text);
+                    SqlConnection con = new SqlConnection(cnstr);
                     SqlCommand com = new SqlCommand();
                     com.CommandText = "sp_mshelpcolumns";//存储过程名
                     com.CommandType = CommandType.StoredProcedure;
@@ -152,32 +117,12 @@ namespace SQLServerDistill
                     con.Close();
                     frm2.Show();
                 }
-
             }
         }//是以何种方式登录，是Windows集成方式，不是SQlserver方式。
 
-        public SqlConnection getCon(string strDatabase)
+        public void getTables(string cnstr, string U)
         {
-            // 這種 cnstr Integrated Security=SSPI 應該都沒有用了
-            SqlConnection con = null; ;
-            if (radioButton1.Checked == true)
-            {
-                string cnstr = "Integrated Security=SSPI;Persist Security Info=False;Initial Catalog= '" + strDatabase + "';Data Source='" + comboBox1.Text + "'";
-                con = new SqlConnection(cnstr);
-                con.Open();
-            }
-            if (radioButton2.Checked == true)
-            {
-                string cnstr = "server='" + comboBox1.Text + "';uid='" + textBox1.Text.Trim() + "';pwd='" + textBox2.Text + "';database='" + strDatabase + "'";
-                con = new SqlConnection(cnstr);
-                con.Open();
-            }
-            return con;
-        }//end block
-
-        public void getTables(string strDataBase, string U)
-        {
-            SqlConnection con = getCon(strDataBase);
+            SqlConnection con = new SqlConnection(cnstr);
             SqlCommand com = new SqlCommand("select name from sysobjects where Xtype='" + U + "'", con);
             SqlDataReader dr = com.ExecuteReader();
             comboBox3.Items.Clear();
@@ -237,14 +182,13 @@ namespace SQLServerDistill
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //以下為debug
             // 資料庫檔案
-            string db_filename = "db_TomeTwo.mdf";
-            // 查詢字串
-            string sqlstr = "SELECT * FROM tb_Employee";
+            string db_filename = "db_20.mdf";
 
-            //sql_read_database(db_filename, sqlstr, dataGridView1);
+            // 查詢字串
+            string sqlstr = "select name from sysdatabases";
+
+            sql_read_database(db_filename, sqlstr, dataGridView1);
         }
     }
 }
-

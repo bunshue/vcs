@@ -28,9 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btn_Reset = new System.Windows.Forms.Button();
             this.btn_Select = new System.Windows.Forms.Button();
             this.txt_Address = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -50,7 +48,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txt_id = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
@@ -60,7 +57,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btn_Reset);
             this.groupBox1.Controls.Add(this.btn_Select);
             this.groupBox1.Controls.Add(this.txt_Address);
             this.groupBox1.Controls.Add(this.label9);
@@ -87,19 +83,9 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "设置查询条件";
             // 
-            // btn_Reset
-            // 
-            this.btn_Reset.Location = new System.Drawing.Point(391, 135);
-            this.btn_Reset.Name = "btn_Reset";
-            this.btn_Reset.Size = new System.Drawing.Size(75, 30);
-            this.btn_Reset.TabIndex = 18;
-            this.btn_Reset.Text = "重置";
-            this.btn_Reset.UseVisualStyleBackColor = true;
-            this.btn_Reset.Click += new System.EventHandler(this.btnReset_Click);
-            // 
             // btn_Select
             // 
-            this.btn_Select.Location = new System.Drawing.Point(310, 135);
+            this.btn_Select.Location = new System.Drawing.Point(391, 136);
             this.btn_Select.Name = "btn_Select";
             this.btn_Select.Size = new System.Drawing.Size(75, 30);
             this.btn_Select.TabIndex = 18;
@@ -256,32 +242,26 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "职工编号：";
             // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(671, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(508, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(462, 520);
+            this.richTextBox1.Size = new System.Drawing.Size(625, 330);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(8, 185);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 348);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(657, 268);
+            this.dataGridView1.Size = new System.Drawing.Size(1121, 288);
             this.dataGridView1.TabIndex = 3;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 482);
+            this.button1.Location = new System.Drawing.Point(12, 291);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(82, 40);
             this.button1.TabIndex = 4;
@@ -330,9 +310,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txt_Address;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button btn_Reset;
         private System.Windows.Forms.Button btn_Select;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;

@@ -28,6 +28,8 @@ namespace GetDataStruct
 
         private void frmOutData_Load(object sender, EventArgs e)
         {
+            //導出數據
+
             groupBox1.Text = "數據表名稱：" + OutTable;
             try
             {

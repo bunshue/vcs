@@ -71,7 +71,6 @@
             this.lb_index = new System.Windows.Forms.Label();
             this.bt_next = new System.Windows.Forms.Button();
             this.bt_previous = new System.Windows.Forms.Button();
-            this.btn_sql_test = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -87,7 +86,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(200, 60);
             this.button9.TabIndex = 134;
-            this.button9.Text = "mmmm 6";
+            this.button9.Text = "取出資料庫中的影像";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -98,7 +97,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(200, 60);
             this.button8.TabIndex = 133;
-            this.button8.Text = "mmmm 4";
+            this.button8.Text = "圖片相關";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -109,7 +108,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(200, 60);
             this.button7.TabIndex = 132;
-            this.button7.Text = "mmmm 3";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -186,7 +184,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 124;
-            this.button3.Text = "簡單SQL命令";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -250,7 +247,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(200, 60);
             this.button13.TabIndex = 138;
-            this.button13.Text = "复杂的模糊查询";
+            this.button13.Text = "複雜的模糊查詢";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -283,7 +280,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(200, 60);
             this.button16.TabIndex = 141;
-            this.button16.Text = "取出資料庫中的影像2";
+            this.button16.Text = "getTable";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -413,7 +410,6 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(200, 60);
             this.button27.TabIndex = 153;
-            this.button27.Text = "取出資料庫中的影像";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
@@ -430,13 +426,14 @@
             // 
             // button29
             // 
+            this.button29.BackColor = System.Drawing.Color.Pink;
             this.button29.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button29.Location = new System.Drawing.Point(422, 559);
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(200, 60);
             this.button29.TabIndex = 155;
             this.button29.Text = "簡易測試";
-            this.button29.UseVisualStyleBackColor = true;
+            this.button29.UseVisualStyleBackColor = false;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
             // dataGridView2
@@ -539,18 +536,6 @@
             this.bt_previous.UseVisualStyleBackColor = true;
             this.bt_previous.Click += new System.EventHandler(this.bt_previous_Click);
             // 
-            // btn_sql_test
-            // 
-            this.btn_sql_test.BackColor = System.Drawing.Color.Pink;
-            this.btn_sql_test.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btn_sql_test.Location = new System.Drawing.Point(628, 559);
-            this.btn_sql_test.Name = "btn_sql_test";
-            this.btn_sql_test.Size = new System.Drawing.Size(200, 60);
-            this.btn_sql_test.TabIndex = 174;
-            this.btn_sql_test.Text = "簡易測試";
-            this.btn_sql_test.UseVisualStyleBackColor = false;
-            this.btn_sql_test.Click += new System.EventHandler(this.btn_sql_test_Click);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -570,7 +555,6 @@
             this.Controls.Add(this.bt_next);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.bt_previous);
-            this.Controls.Add(this.btn_sql_test);
             this.Controls.Add(this.lb_dgv4);
             this.Controls.Add(this.lb_dgv3);
             this.Controls.Add(this.lb_dgv2);
@@ -665,7 +649,6 @@
         private System.Windows.Forms.Label lb_dgv2;
         private System.Windows.Forms.Label lb_dgv3;
         private System.Windows.Forms.Label lb_dgv4;
-        private System.Windows.Forms.Button btn_sql_test;
         private System.Windows.Forms.Button bt_next;
         private System.Windows.Forms.Button bt_previous;
         private System.Windows.Forms.Label lb_index;

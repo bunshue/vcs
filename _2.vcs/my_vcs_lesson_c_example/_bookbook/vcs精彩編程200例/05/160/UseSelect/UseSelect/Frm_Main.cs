@@ -22,11 +22,16 @@ namespace UseSelect
             InitializeComponent();
         }
 
-        //窗体初始化时显示所有职工信息
         private void Form1_Load(object sender, EventArgs e)
         {
+            // 資料庫檔案
             string db_filename = "db_TomeTwo.mdf";
+            // 查詢字串
+            //string sqlstr = "SELECT * FROM tb_Employee";
+            //string sqlstr = "SELECT ID AS 职工编号, Name AS 职工姓名, Sex AS 性别, Age AS 年龄, Tel AS 联系电话, Address AS 家庭地址, QQ AS QQ号码, Email AS Email地址 FROM tb_Employee";
+
             sql_read_database(db_filename, sqlstr, dataGridView1);
+
             cbox_Sex.SelectedIndex = 0;
         }
 
@@ -159,25 +164,6 @@ namespace UseSelect
             sql_read_database(db_filename, Find_SQL, dataGridView1);//按照SQL字符串进行查询
         }
 
-        //清空文本框
-        private void btnReset_Click(object sender, EventArgs e)
-        {
-            foreach (Control ctl in groupBox1.Controls)
-            {
-                if (ctl.GetType().ToString() == "System.Windows.Forms.TextBox")
-                {
-                    ctl.Text = "";
-                }
-            }
-            txt_id.Focus();
-            cbox_Sex.SelectedIndex = 0;
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "共有" + (dataGridView1.Rows.Count - 1) + "条记录\n";
-        }
-
         // 验证输入为数字
         public bool validateNum(string str)
         {
@@ -235,13 +221,10 @@ namespace UseSelect
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // 資料庫檔案
-            string db_filename = "db_TomeTwo.mdf";
-            // 查詢字串
-            string sqlstr = "SELECT * FROM tb_Employee";
-            //string sqlstr = "SELECT ID AS 职工编号, Name AS 职工姓名, Sex AS 性别, Age AS 年龄, Tel AS 联系电话, Address AS 家庭地址, QQ AS QQ号码, Email AS Email地址 FROM tb_Employee";
-
-            sql_read_database(db_filename, sqlstr, dataGridView1);
+            // ok
         }
     }
 }
+
+//richTextBox1.Text += "共有" + (dataGridView1.Rows.Count - 1) + "条记录\n";
+

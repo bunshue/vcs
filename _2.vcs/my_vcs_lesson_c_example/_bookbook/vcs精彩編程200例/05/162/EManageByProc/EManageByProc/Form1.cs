@@ -36,26 +36,53 @@ namespace EManageByProc
             sqlcon.Close();
             txtID.Text = outValue.Value.ToString();
             dgvInfo.DataSource = SelectEInfo("", "").Tables[0];
+
+
+            richTextBox1.Text += "取得 txtID : " + txtID.Text + "\n";
+
+            string name = "david";
+            //string sex = "M";
+            string age = "28";
+            string telephone = "0912345678";
+            string address = "taiwan hsinchu";
+            string qq = "12345678";
+            string email = "david@lion.mouse";
+            txtName.Text = name;  // 職工姓名
+            cboxSex.SelectedIndex=0;  // 性別
+            txtAge.Text = age;  // 年齡
+            txtTel.Text = telephone;  // 電話
+            txtAddress.Text = address;  // 地址
+            txtQQ.Text = qq;  // QQ號碼
+            txtEmail.Text = email;  // Email地址
         }
 
         //添加职工信息
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            string name = "david";  // 職工姓名
+            string sex = "男";  // 性別
+            string age = "28";  // 年齡
+            string telephone = "0912345678";  // 電話
+            string address = "taiwan hsinchu";  // 地址
+            string qq = "12345678";  // QQ號碼
+            string email = "david@lion.mouse";  // Email地址
+
             sqlcon = getCon();
             sqlcmd = new SqlCommand("proc_InsertEInfo", sqlcon);
             sqlcmd.CommandType = CommandType.StoredProcedure;
             sqlcmd.Parameters.Add("@id", SqlDbType.VarChar, 20).Value = txtID.Text;
-            sqlcmd.Parameters.Add("@name", SqlDbType.VarChar, 30).Value = txtName.Text;
-            sqlcmd.Parameters.Add("@sex", SqlDbType.Char, 4).Value = cboxSex.Text;
-            sqlcmd.Parameters.Add("@age", SqlDbType.Int).Value = Convert.ToInt32(txtAge.Text);
-            sqlcmd.Parameters.Add("@tel", SqlDbType.VarChar, 20).Value = txtTel.Text;
-            sqlcmd.Parameters.Add("@address", SqlDbType.VarChar, 100).Value = txtAddress.Text;
-            sqlcmd.Parameters.Add("@qq", SqlDbType.BigInt).Value = Convert.ToInt32(txtQQ.Text);
-            sqlcmd.Parameters.Add("@email", SqlDbType.VarChar, 50).Value = txtEmail.Text;
+            sqlcmd.Parameters.Add("@name", SqlDbType.VarChar, 30).Value = name;
+            sqlcmd.Parameters.Add("@sex", SqlDbType.Char, 4).Value = sex;
+            sqlcmd.Parameters.Add("@age", SqlDbType.Int).Value = Convert.ToInt32(age);
+            sqlcmd.Parameters.Add("@tel", SqlDbType.VarChar, 20).Value = telephone;
+            sqlcmd.Parameters.Add("@address", SqlDbType.VarChar, 100).Value = address;
+            sqlcmd.Parameters.Add("@qq", SqlDbType.BigInt).Value = Convert.ToInt32(qq);
+            sqlcmd.Parameters.Add("@email", SqlDbType.VarChar, 50).Value = email;
             SqlParameter returnValue = sqlcmd.Parameters.Add("@returnValue", SqlDbType.Int);
             returnValue.Direction = ParameterDirection.ReturnValue;
             sqlcmd.ExecuteNonQuery();
             sqlcon.Close();
+
             int int_returnValue = (int)returnValue.Value;
             if (int_returnValue == 0)
             {
