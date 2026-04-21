@@ -17,36 +17,48 @@ namespace vcs_Draw_Polygons3
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         private List<PointF> Points = new List<PointF>();
         private PointF CurrentPoint;
         private bool Drawing = false;
         private int EnlargeBy = 0;
 
-
-
-
-
-        private void picCanvas_Paint(object sender, PaintEventArgs e)
+        public Form1()
         {
+            InitializeComponent();
+        }
+
+        // Make a sample polygon with some colinear points.
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // Test polygon 1.
+            Points = new List<PointF>()
+            {
+                new PointF(200, 100),
+                new PointF(125, 75),
+                new PointF(50, 50),
+                new PointF(50, 150),
+                new PointF(100, 100),
+                new PointF(150, 175),
+            };
+
+            // Test polygon 2.
+            //Points = new List<PointF>()
+            //{
+            //    new PointF(50, 50),
+            //    new PointF(50, 100),
+            //    new PointF(50, 150),
+            //    new PointF(100, 150),
+            //    new PointF(150, 150),
+            //    new PointF(150, 100),
+            //    new PointF(150, 50),
+            //    new PointF(100, 50),
+            //};
         }
 
         private void DrawPoint(Graphics gr, Brush brush, PointF point, float radius)
         {
             RectangleF rect = new RectangleF(point.X - radius, point.Y - radius, 2 * radius, 2 * radius);
             gr.FillEllipse(brush, rect);
-        }
-
-        private void picCanvas_MouseDown(object sender, MouseEventArgs e)
-        {
-        }
-
-        private void picCanvas_MouseMove(object sender, MouseEventArgs e)
-        {
         }
 
         private void hscrPixels_Scroll(object sender, ScrollEventArgs e)
@@ -208,34 +220,6 @@ namespace vcs_Draw_Polygons3
             return area;
         }
 
-        // Make a sample polygon with some colinear points.
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            // Test polygon 1.
-            Points = new List<PointF>()
-            {
-                new PointF(200, 100),
-                new PointF(125, 75),
-                new PointF(50, 50),
-                new PointF(50, 150),
-                new PointF(100, 100),
-                new PointF(150, 175),
-            };
-
-            // Test polygon 2.
-            //Points = new List<PointF>()
-            //{
-            //    new PointF(50, 50),
-            //    new PointF(50, 100),
-            //    new PointF(50, 150),
-            //    new PointF(100, 150),
-            //    new PointF(150, 150),
-            //    new PointF(150, 100),
-            //    new PointF(150, 50),
-            //    new PointF(100, 50),
-            //};
-        }
-
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -326,7 +310,6 @@ namespace vcs_Draw_Polygons3
             Points = new List<PointF>();
             pictureBox1.Refresh();
             hscrPixels.Value = 0;
-
         }
     }
 }

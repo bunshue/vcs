@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Drawing2D; //for SmoothingMode
+using System.Drawing.Drawing2D;  // for SmoothingMode
 
 // 滑鼠操作畫圖相關
 
@@ -15,9 +15,18 @@ namespace vcs_MousePaint5
 {
     public partial class Form1 : Form
     {
-        //pictureBox0 直線連線 ST
+        //pictureBox0 畫多邊形 ST
 
-        //pictureBox0 直線連線 SP
+        // Each polygon is represented by a List<Point>.
+        private List<List<Point>> Polygons0 = new List<List<Point>>();
+
+        // Points for the new polygon.
+        private List<Point> NewPolygon0 = null;
+
+        // The current mouse position while drawing a new polygon.
+        private Point NewPoint0;
+
+        //pictureBox0 直多邊形 SP
 
         public Form1()
         {
@@ -49,6 +58,12 @@ namespace vcs_MousePaint5
             pictureBox3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             pictureBox4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             pictureBox5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+
+            hScrollBar1.Size = new Size(W, 20);
+            hScrollBar2.Size = new Size(W, 20);
+            hScrollBar1.Location = new Point(x_st + dx * 1, y_st + dy * 0 + H - 20);
+            hScrollBar2.Location = new Point(x_st + dx * 2, y_st + dy * 0 + H - 20);
+
             int dd = 26;
             label0.Location = new Point(x_st + dx * 0, y_st + dy * 0 - dd);
             label1.Location = new Point(x_st + dx * 1, y_st + dy * 0 - dd);
@@ -85,20 +100,95 @@ namespace vcs_MousePaint5
             Environment.Exit(0);
         }
 
+        // Start or continue drawing a new polygon.
         private void pictureBox0_MouseDown(object sender, MouseEventArgs e)
         {
+            // See if we are already drawing a polygon.
+            if (NewPolygon0 != null)
+            {
+                // We are already drawing a polygon.
+                // If it's the right mouse button, finish this polygon.
+                if (e.Button == MouseButtons.Right)
+                {
+                    // Finish this polygon.
+                    if (NewPolygon0.Count > 2)
+                    {
+                        Polygons0.Add(NewPolygon0);
+                    }
+                    NewPolygon0 = null;
+                }
+                else
+                {
+                    // Add a point to this polygon.
+                    if (NewPolygon0[NewPolygon0.Count - 1] != e.Location)
+                    {
+                        NewPolygon0.Add(e.Location);
+                    }
+                }
+            }
+            else
+            {
+                // Start a new polygon.
+                NewPolygon0 = new List<Point>();
+                NewPoint0 = e.Location;
+                NewPolygon0.Add(e.Location);
+            }
+
+            // Redraw.
+            pictureBox0.Invalidate();
         }
 
+        // Move the next point in the new polygon.
         private void pictureBox0_MouseMove(object sender, MouseEventArgs e)
         {
+            if (NewPolygon0 == null)
+            {
+                return;
+            }
+            NewPoint0 = e.Location;
+            pictureBox0.Invalidate();
         }
 
         private void pictureBox0_MouseUp(object sender, MouseEventArgs e)
         {
         }
 
+        // Redraw old polygons in blue. Draw the new polygon in green.
+        // Draw the final segment dashed.
         private void pictureBox0_Paint(object sender, PaintEventArgs e)
         {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            e.Graphics.Clear(pictureBox0.BackColor);
+
+            e.Graphics.DrawString("左鍵點選頂點", new Font("標楷體", 30), new SolidBrush(Color.Green), new PointF(10, 10));
+            e.Graphics.DrawString("右鍵結束", new Font("標楷體", 30), new SolidBrush(Color.Green), new PointF(10, 10 + 40));
+
+            // Draw the old polygons.
+            foreach (List<Point> polygon in Polygons0)
+            {
+                e.Graphics.FillPolygon(Brushes.White, polygon.ToArray());
+                e.Graphics.DrawPolygon(Pens.Blue, polygon.ToArray());
+            }
+
+            // Draw the new polygon.
+            if (NewPolygon0 != null)
+            {
+                // Draw the new polygon.
+                if (NewPolygon0.Count > 1)
+                {
+                    e.Graphics.DrawLines(Pens.Green, NewPolygon0.ToArray());
+                }
+
+                // Draw the newest edge.
+                if (NewPolygon0.Count > 0)
+                {
+                    using (Pen dashed_pen = new Pen(Color.Green))
+                    {
+                        dashed_pen.DashPattern = new float[] { 3, 3 };
+                        e.Graphics.DrawLine(dashed_pen, NewPolygon0[NewPolygon0.Count - 1], NewPoint0);
+                    }
+                }
+            }
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
