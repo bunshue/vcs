@@ -1,4 +1,17 @@
 ﻿
+
+
+
+
+
+string.Format 範例
+            string Begin = "550";
+            string end = "570";
+            sqlstr = string.Format(@"SELECT 学生姓名,性别,年龄 FROM tb_Student WHERE 学生编号 IN (SELECT 学生编号 FROM tb_Grade WHERE 总分>{0} AND 总分<{1})", Begin, end);
+            
+
+
+
 		
 		    public class Book
     {

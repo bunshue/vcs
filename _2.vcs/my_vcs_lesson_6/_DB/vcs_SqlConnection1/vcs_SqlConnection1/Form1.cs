@@ -308,50 +308,7 @@ namespace vcs_SqlConnection1
             // 查詢字串
             sqlstr = "drop table hy_Linshibiao,angel_Linshibiao";
             */
-
-
-
-
             return;
-
-            /* ok
-            // 資料庫檔案
-            db_filename = "Northwind.mdf";
-            // 查詢字串
-            sqlstr = "SELECT * FROM 產品資料";
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-            lb_dgv2.Text = "全部資料 產品資料";
-            */
-
-            /*
-            // 資料庫檔案
-            db_filename = "Database1.mdf";
-            // 查詢字串
-            sqlstr = "SELECT * FROM 產品類別";
-            sql_read_database(db_filename, sqlstr, dataGridView3);
-
-            // 資料庫檔案
-            db_filename = "Database1.mdf";
-            // 查詢字串
-            sqlstr = "SELECT * FROM 產品資料";
-            sql_read_database(db_filename, sqlstr, dataGridView4);
-            */
-
-            /*
-            // 資料庫檔案
-            db_filename = "db_TomeTwo.mdf";
-            // 查詢字串
-            sqlstr = "SELECT * FROM tb_Book";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            //查询已销售图书情况
-            // 資料庫檔案
-            db_filename = "db_TomeTwo.mdf";
-
-            // 查詢字串, 列出数据中的重复记录和记录条数
-            sqlstr = string.Format(@"SELECT COUNT(书号)AS 记录条数, 书号,书名,作者 FROM tb_Book GROUP BY 书号,书名,作者 HAVING COUNT(书号)>1");
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-            */
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -1017,12 +974,30 @@ namespace vcs_SqlConnection1
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             //新增
-            string 書號 = "IMS0311";
+            string 書號 = "IMS0311";  // 書號 為 PK, 不可重複
             string 書名 = "膠囊內視鏡";
             int 單價 = 12345;
             int 數量 = 20;
 
-            InsertBook(書號, 書名, 單價, 數量);
+            // 查詢字串
+            sqlstr = "INSERT INTO 書籍(書號, 書名, 單價, 數量)" + "VALUES(@BookId, @BookName, @Price, @Qty)";
+
+            using (SqlConnection cn = new SqlConnection(cnstr23))  // 建立資料庫連接對象cn
+            {
+                //cn.ConnectionString = cnstr23;  // 連接字串
+                cn.Open();  // 打開資料庫連線
+
+                SqlCommand cmd = new SqlCommand(sqlstr, cn);
+                cmd.Parameters.Add(new SqlParameter("@BookId", SqlDbType.NVarChar));
+                cmd.Parameters.Add(new SqlParameter("@BookName", SqlDbType.NVarChar));
+                cmd.Parameters.Add(new SqlParameter("@Price", SqlDbType.Int));
+                cmd.Parameters.Add(new SqlParameter("@Qty", SqlDbType.Int));
+                cmd.Parameters["@BookId"].Value = 書號;
+                cmd.Parameters["@BookName"].Value = 書名;
+                cmd.Parameters["@Price"].Value = 單價;
+                cmd.Parameters["@Qty"].Value = 數量;
+                cmd.ExecuteNonQuery();  // 執行SQL命令
+            }
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
@@ -1035,11 +1010,31 @@ namespace vcs_SqlConnection1
 
             //更新
             書號 = "IMS0311";//以書號為準
-            書名 = "ims EGD";
-            單價 = 123;
-            數量 = 18;
+            書名 = "ims EGDaxx";
+            單價 = 1231;
+            數量 = 181;
 
-            UpdateBook(書號, 書名, 單價, 數量);
+            // 查詢字串
+            sqlstr = "UPDATE 書籍 SET 書名=@BookName," + "單價=@Price, 數量=@Qty WHERE 書號=@BookId";
+
+            using (SqlConnection cn = new SqlConnection(cnstr23))  // 建立資料庫連接對象cn
+            {
+                //cn.ConnectionString = cnstr23;  // 連接字串
+                cn.Open();  // 打開資料庫連線
+
+                SqlCommand cmd = new SqlCommand(sqlstr, cn);
+                cmd.Parameters.Add(new SqlParameter("@BookId", SqlDbType.NVarChar));
+                cmd.Parameters.Add(new SqlParameter("@BookName", SqlDbType.NVarChar));
+                cmd.Parameters.Add(new SqlParameter("@Price", SqlDbType.Int));
+                cmd.Parameters.Add(new SqlParameter("@Qty", SqlDbType.Int));
+                cmd.Parameters["@BookId"].Value = 書號;
+                cmd.Parameters["@BookName"].Value = 書名;
+                cmd.Parameters["@Price"].Value = 單價;
+                cmd.Parameters["@Qty"].Value = 數量;
+                cmd.ExecuteNonQuery();  // 執行SQL命令
+            }
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             // 查詢字串, 讀取全部資料庫
             sqlstr = "SELECT * FROM 書籍";
@@ -1051,75 +1046,26 @@ namespace vcs_SqlConnection1
             //刪除
             書號 = "IMS0311";//以書號為準
 
-            DeleteBook(書號);
+            // 查詢字串
+            sqlstr = "DELETE FROM 書籍 WHERE 書號 = @BookId";
+
+            using (SqlConnection cn = new SqlConnection(cnstr23))  // 建立資料庫連接對象cn
+            {
+                //cn.ConnectionString = cnstr23;  // 連接字串
+                cn.Open();  // 打開資料庫連線
+
+                SqlCommand cmd = new SqlCommand(sqlstr, cn);
+                cmd.Parameters.Add(new SqlParameter("@BookId", SqlDbType.NVarChar));
+                cmd.Parameters["@BookId"].Value = 書號;
+                cmd.ExecuteNonQuery();  // 執行SQL命令
+            }
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             // 查詢字串, 讀取全部資料庫
             sqlstr = "SELECT * FROM 書籍";
             sql_read_database(db_filename, sqlstr, dataGridView4);
             lb_dgv4.Text = "全部資料 書籍\n";
-        }
-
-        public void InsertBook(string 書號, string 書名, int 單價, int 數量)
-        {
-            // 查詢字串
-            string sqlstr = "INSERT INTO 書籍(書號, 書名, 單價, 數量)" + "VALUES(@BookId, @BookName, @Price, @Qty)";
-
-            using (SqlConnection cn = new SqlConnection(cnstr23))  // 建立資料庫連接對象cn
-            {
-                //cn.ConnectionString = cnstr23;  // 連接字串
-                cn.Open();  // 打開資料庫連線
-
-                SqlCommand cmd = new SqlCommand(sqlstr, cn);
-                cmd.Parameters.Add(new SqlParameter("@BookId", SqlDbType.NVarChar));
-                cmd.Parameters.Add(new SqlParameter("@BookName", SqlDbType.NVarChar));
-                cmd.Parameters.Add(new SqlParameter("@Price", SqlDbType.Int));
-                cmd.Parameters.Add(new SqlParameter("@Qty", SqlDbType.Int));
-                cmd.Parameters["@BookId"].Value = 書號;
-                cmd.Parameters["@BookName"].Value = 書名;
-                cmd.Parameters["@Price"].Value = 單價;
-                cmd.Parameters["@Qty"].Value = 數量;
-                cmd.ExecuteNonQuery();  // 執行SQL命令
-            }
-        }
-
-        public void UpdateBook(string 書號, string 書名, int 單價, int 數量)
-        {
-            // 查詢字串
-            string sqlstr = "UPDATE 書籍 SET 書名=@BookName," + "單價=@Price, 數量=@Qty WHERE 書號=@BookId";
-
-            using (SqlConnection cn = new SqlConnection(cnstr23))  // 建立資料庫連接對象cn
-            {
-                //cn.ConnectionString = cnstr23;  // 連接字串
-                cn.Open();  // 打開資料庫連線
-
-                SqlCommand cmd = new SqlCommand(sqlstr, cn);
-                cmd.Parameters.Add(new SqlParameter("@BookId", SqlDbType.NVarChar));
-                cmd.Parameters.Add(new SqlParameter("@BookName", SqlDbType.NVarChar));
-                cmd.Parameters.Add(new SqlParameter("@Price", SqlDbType.Int));
-                cmd.Parameters.Add(new SqlParameter("@Qty", SqlDbType.Int));
-                cmd.Parameters["@BookId"].Value = 書號;
-                cmd.Parameters["@BookName"].Value = 書名;
-                cmd.Parameters["@Price"].Value = 單價;
-                cmd.Parameters["@Qty"].Value = 數量;
-                cmd.ExecuteNonQuery();  // 執行SQL命令
-            }
-        }
-
-        public void DeleteBook(string 書號)
-        {
-            // 查詢字串
-            string sqlstr = "DELETE FROM 書籍 WHERE 書號 = @BookId";
-
-            using (SqlConnection cn = new SqlConnection(cnstr23))  // 建立資料庫連接對象cn
-            {
-                //cn.ConnectionString = cnstr23;  // 連接字串
-                cn.Open();  // 打開資料庫連線
-
-                SqlCommand cmd = new SqlCommand(sqlstr, cn);
-                cmd.Parameters.Add(new SqlParameter("@BookId", SqlDbType.NVarChar));
-                cmd.Parameters["@BookId"].Value = 書號;
-                cmd.ExecuteNonQuery();  // 執行SQL命令
-            }
         }
 
         // CRUD 增查改刪 0 SP
@@ -1134,43 +1080,6 @@ namespace vcs_SqlConnection1
             string cnstr = string.Empty;
             // 查詢字串
             string sqlstr = string.Empty;
-
-            /*
-            db_filename = "db_TomeOne.mdf";
-            sqlstr = "SELECT * FROM tb_manpower";  // 有兩欄資料 t_Point t_Num
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            db_filename = "db_TomeOne.mdf";
-            sqlstr = "SELECT SUM(t_Num) FROM tb_manpower"; // 將 t_Num 加總
-            //合併 t_Point 資料, 降冪排序, 將 t_Num 加總
-            sqlstr = "SELECT t_Point, SUM(t_Num) FROM tb_manpower group by t_Point ORDER BY SUM(t_Num) DESC";
-            // 查詢字串 有合併資料
-            sqlstr = "SELECT t_Point,SUM(t_Num) FROM tb_manpower group by t_Point ORDER BY SUM(t_Num) DESC";
-            */
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-            /*
-            // 資料庫檔案
-            db_filename = "db_TomeTwo.mdf";
-            sqlstr = string.Format("SELECT * FROM tb_Student");
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "tb_Student 的 所有資料";
-
-            // 資料庫檔案
-            db_filename = "db_TomeTwo.mdf";
-            sqlstr = string.Format("SELECT * FROM tb_Grade");
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-            lb_dgv2.Text = "tb_Grade 的 所有資料";
-
-            //使用IN引入子查询限定查询范围
-            //查詢學生總分在 500 ~ 600 之間
-            string Begin = "550";
-            string end = "570";
-            // 查 tb_Student 的 資料, 由 tb_Grade 總分在 500 ~ 600 之間
-            sqlstr = string.Format(@"SELECT 学生姓名,性别,年龄 FROM tb_Student WHERE 学生编号 IN (SELECT 学生编号 FROM tb_Grade WHERE 总分>{0} AND 总分<{1})", Begin, end);
-            sql_read_database(db_filename, sqlstr, dataGridView3);
-            lb_dgv3.Text = "IN引入子查詢 成績符合條件 讀取學生資料";
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             // 資料庫檔案
             db_filename = "db_TomeOne.mdf";
@@ -1195,7 +1104,7 @@ namespace vcs_SqlConnection1
                 da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
                 int sum_year = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString());
                 richTextBox1.Text += "年度總和 : " + sum_year.ToString() + "\n";
-            }            
+            }
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
@@ -1235,34 +1144,6 @@ namespace vcs_SqlConnection1
             }
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            // 資料庫檔案
-            db_filename = "db_TomeOne.mdf";
-            // 查詢字串
-            sqlstr = "SELECT * FROM tb_product";
-
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "全部資料 tb_product 兩欄 t_Name t_Num\n";
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            // 資料庫檔案
-            db_filename = "db_TomeOne.mdf";
-            // 查詢字串, 將 t_Num 加總
-            sqlstr = "SELECT SUM(t_Num) FROM tb_product"; // 將 t_Num 加總
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-            lb_dgv2.Text = "將 t_Num 加總";
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-            
-            // 資料庫檔案
-            db_filename = "db_TomeOne.mdf";
-            // 查詢字串, 將 t_Name 同項合併
-            sqlstr = "SELECT t_Name, SUM(t_Num) AS Num FROM tb_product GROUP BY t_Name";
-            sql_read_database(db_filename, sqlstr, dataGridView3);
-            lb_dgv3.Text = "將 t_Name 同項合併";
-
-            */
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             // 資料庫檔案
@@ -2324,15 +2205,21 @@ namespace vcs_SqlConnection1
             { "23", "db_10_Data.MDF", "SELECT * FROM 工資數據表", "全部資料 工資數據表", "SELECT * FROM 部門表", "全部資料 部門表", "SELECT * FROM 工資數據表 WHERE 工資月份=10 AND 人員姓名 IN( SELECT 負責人 FROM 部門表 WHERE 負責人 IN(SELECT 人員姓名 FROM 人員表 WHERE 學歷='本科')) ORDER BY 人員編號", "複雜內嵌查詢, 查詢學歷是本科的部門經理的2005年10月份的工資情況"},
             { "24", "db_10_Data.MDF", "SELECT * FROM tb_stu s ,tb_mark", "全部資料 tb_stu, tb_mark 兩表單一起顯示", "SELECT distinct S.學生編號,S.學生姓名,M.高數,M.外語,M.馬經,S.所在學院 FROM tb_stu AS S,tb_mark AS M WHERE S.學生編號=M.學生編號 AND S.所在學院='計算機學院'", "使用表別名, 利用表的別名查詢計算機分院學生的成績", "SELECT distinct s.學生編號,s.學生姓名,s.性別,s.出生年月,s.年齡,s.所在學院,s.所學專業,m.高數 FROM tb_stu s ,tb_mark m WHERE s.學生編號=m.學生編號 AND m.高數 >85", "利用FROM子句進行多表查詢, 查詢高數成績大於85分的學生的詳細訊息"},
             { "25", "db_10_Data.MDF", "SELECT * FROM tb_BookSell", "全部資料 tb_BookSell", "SELECT 書名,出版社,SUM(金額) AS 總計金額 FROM tb_BookSell WHERE 出版社='機械' GROUP BY all 書名,出版社", "在分組查詢中使用ALL關鍵字, 在圖書銷售表中對機械出版社出版的不同圖書的銷售情況進行統計，並列出其他出版社的圖書（不作統計）", "", ""},
-            { "26", "", "", "", "", "", "", ""},
-            { "27", "", "", "", "", "", "", ""},
+            { "26", "db_TomeOne.mdf", "SELECT * FROM tb_manpower", "有兩欄資料 t_Point t_Num", "SELECT SUM(t_Num) FROM tb_manpower", "將 t_Num 加總", "SELECT t_Point, SUM(t_Num) FROM tb_manpower group by t_Point ORDER BY SUM(t_Num) DESC", "合併 t_Point 資料, 降冪排序, 將 t_Num 加總 有合併資料"},
+            { "27", "db_TomeTwo.mdf", "SELECT * FROM tb_Student", "tb_Student 的 所有資料", "SELECT * FROM tb_Grade", "tb_Grade 的 所有資料", "SELECT 学生姓名,性别,年龄 FROM tb_Student WHERE 学生编号 IN (SELECT 学生编号 FROM tb_Grade WHERE 总分>550 AND 总分<570)", "使用IN引入子查詢限定查詢範圍, 查詢學生總分在 550 ~ 570 之間, 查 tb_Student 的 資料, 由 tb_Grade 總分在 500 ~ 600 之間"},
+            { "28", "db_TomeOne.mdf", "SELECT * FROM tb_product", "全部資料 tb_product 兩欄 t_Name t_Num", "SELECT SUM(t_Num) FROM tb_product", "將 t_Num 加總", "SELECT t_Name, SUM(t_Num) AS Num FROM tb_product GROUP BY t_Name", "將 t_Name 同項合併"},
+            { "29", "db_10_Data.MDF", "SELECT * FROM tb_kf WHERE 房態='空房 '", "查詢空閒客房訊息", "SELECT * FROM tb_kf WHERE 房態='入住'", "查詢使用客房訊息", "SELECT * FROM tb_kf WHERE 房態='空房 ' AND NOT(價格 between 80 and 150 )", "NOT與謂詞進行組合條件的查詢, 查詢空閒客房而且客房價格不在８０-１５０之間的客房訊息"},
+            { "30", "db_TomeTwo.mdf", "SELECT * FROM tb_Book", "全部資料 tb_Book", "SELECT COUNT(书号)AS 记录条数, 书号,书名,作者 FROM tb_Book GROUP BY 书号,书名,作者 HAVING COUNT(书号)>1", "查询已销售图书情况, 列出数据中的重复记录和记录条数", "", ""},
+            { "31", "", "", "", "", "", "", ""},
+            { "32", "", "", "", "", "", "", ""},
+            { "33", "", "", "", "", "", "", ""},
+            { "34", "", "", "", "", "", "", ""},
+            { "35", "", "", "", "", "", "", ""},
 
             //{ "編號", "檔案", "查詢1", "說明1", "查詢2", "說明2", "查詢3", "說明3"},
         };
     }
 }
-
-
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -2474,20 +2361,12 @@ Connect Timeout=30
             }
 */
 
-/*
-                // DataGridView控制項資料繫結
-                dataGridView1.DataSource = ds;  // DGV設置數據源
-                dataGridView1.DataMember = "員工";                
-*/
-
-
 //SqlDataAdapter 資料庫適配器對象 数据库桥接器对象 數據讀取器
 
 //richTextBox1.Text += dr["TABLE_NAME"] + "\n";
 
             //db_02.mdf
             //string sqlstr2 = "SELECT * FROM tb_05";
-
 
             //新增
             //string name = "david";
@@ -2548,25 +2427,6 @@ Connect Timeout=30
 /*
 //------------------------------------------------------------  # 60個
 
-// 查詢字串, 使用別名 AS
-string sqlstr = "SELECT " + comboBox1.Text + "," + comboBox1.Text + " AS " + textBox1.Text.Trim() + " FROM tb_02";
-
-SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM tb_08 WHERE " + comboBox1.Text + " IS null OR " + comboBox1.Text + "=''", cn);//透過SQL語句查詢數據表中的空數據
-
-//------------------------------------------------------------  # 60個
-
-//NOT與謂詞進行組合條件的查詢
-
-string db_filename = "db_10_Data.MDF";
-
-// 查詢字串
-string sqlstr = "SELECT * FROM tb_kf";
-// 查詢字串, 查詢空閒客房訊息
-// string sqlstr = "SELECT * FROM tb_kf WHERE 房態='空房 '";
-// 查詢字串, 查詢使用客房訊息
-// string sqlstr = "SELECT * FROM tb_kf WHERE 房態='入住'";
-// 查詢字串, 查詢空閒客房而且客房價格不在８０-１５０之間的客房訊息
-// string sqlstr = "SELECT * FROM tb_kf WHERE 房態='空房 ' AND NOT(價格 between 80 and 150 )";
 
 //------------------------------------------------------------  # 60個
 */
@@ -2589,5 +2449,10 @@ cmd.Parameters["@name"].Value = name;
 cmd.ExecuteNonQuery();  // 執行SQL命令
 */
 
-
+/*
 // AS 的用法 "select au_id as 使用者編號,au_lname as 使用者名,phone as 聯繫電話 from authors";
+// 查詢字串, 使用別名 AS
+"SELECT " + comboBox1.Text + "," + comboBox1.Text + " AS " + textBox1.Text.Trim() + " FROM tb_02";
+"SELECT * FROM tb_08 WHERE " + comboBox1.Text + " IS null OR " + comboBox1.Text + "=''", cn);//透過SQL語句查詢數據表中的空數據
+*/
+

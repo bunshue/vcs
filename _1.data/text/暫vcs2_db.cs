@@ -17,16 +17,7 @@ SqlCommand cmd = new SqlCommand("update 系統管理員表 set 使用者名稱='
 
 -------------------------
 
-
-
-
-
-
-
-
-
 SELECT name FROM sysdatabases
-
 
 FROM sysdatabases
 
@@ -270,30 +261,8 @@ State:              Stopped
 Last start time:    2026/4/7 13:16:33
 Instance pipe name:
 
-
-
-
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-        // 固定查詢
-        private void ShowData3(string cnstr)
-        {
-            // DB => DS => dataGridView1
-            using (SqlConnection cn = new SqlConnection())  // 建立資料庫連接對象cn
-            {
-                // 連接資料庫
-                cn.ConnectionString = cnstr;
-
-                string sqlstr = "SELECT * FROM 銀行帳戶";  // 宣告查詢字串
-                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
-
-                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-                da.Fill(ds, "銀行帳戶");  // 將DataAdapter查詢之後的結果填充至DataSet
-
-                dataGridView1.DataSource = ds.Tables["銀行帳戶"];
-            }
-        }
 
 
 //欲刪除關鍵字
@@ -304,7 +273,6 @@ richTextBox1.Text += "----------------------------------------------------------
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
 
 
 OleDbDataAdapter
@@ -320,28 +288,11 @@ DataTable的用法
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-        SqlConnection conn = new SqlConnection(Data Source=localhost; Integrated Security=SSPI; Initial Catalog=pubs);
-
-	SqlCommand cmd = new SqlCommand(SELECT * FROM employees, conn);
-        try
-        {        
-            conn.Open();
-
             SqlDataReader reader = cmd.ExecuteReader();            
             while (reader.Read())
             {
                 Console.WriteLine(First Name: {0}, Last Name: {1}, reader.GetString(0), reader.GetString(1));
             }
-        
-            reader.Close();
-            conn.Close();
-        }
-        catch(Exception e)
-        {
-            Console.WriteLine(Exception Occured -->> {0},e);
-        }        
-    }
-}
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -384,19 +335,6 @@ public class TestWriteXML
 
     }
 }
-
-
-richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-
-
-richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-
-richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
