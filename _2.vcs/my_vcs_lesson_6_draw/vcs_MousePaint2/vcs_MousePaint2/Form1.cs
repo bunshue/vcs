@@ -141,6 +141,11 @@ namespace vcs_MousePaint2
             checkBox5.Location = new Point(pictureBox5.Location.X + pictureBox5.Size.Width - checkBox5.Size.Width, pictureBox5.Location.Y);
 
             this.Size = new Size(1740, 940);
+            this.Text = "vcs_MousePaint2";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)

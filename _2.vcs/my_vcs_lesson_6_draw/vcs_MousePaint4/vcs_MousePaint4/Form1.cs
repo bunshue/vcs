@@ -40,6 +40,11 @@ namespace vcs_MousePaint4
             pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
             pictureBox1.Paint += new PaintEventHandler(pictureBox1_Paint);
 
+            this.Text = "vcs_MousePaint4";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         int x_old = 0;
@@ -182,3 +187,22 @@ namespace vcs_MousePaint4
         }
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+

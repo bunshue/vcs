@@ -716,7 +716,6 @@ namespace vcs_MousePaint1
             gp.AddPath(gp2, false); // 將 gp2 加入 gp 中
             e.Graphics.DrawPath(Pens.Black, gp); // 圖形軌跡 繪出
         }
-
     }
 }
 

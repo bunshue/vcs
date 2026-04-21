@@ -20,6 +20,15 @@ namespace vcs_DataGridView1
         {
             show_item_location();
 
+            //DGV的共同設定
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;  //設置如何選中單元格 整行一起選取
+
+            dataGridView1.MultiSelect = false;
+
+            //dataGridView1.Dock = DockStyle.Fill;
+            //dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;//佔滿整個DGV
+
+            dataGridView1.CellClick += new DataGridViewCellEventHandler(dataGridView1_CellClick);
             dataGridView1.CellMouseClick += new DataGridViewCellMouseEventHandler(dataGridView1_CellMouseClick);
             dataGridView1.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(dataGridView1_RowHeaderMouseClick);
             dataGridView1.MouseDown += new MouseEventHandler(dataGridView1_MouseDown);
@@ -64,15 +73,15 @@ namespace vcs_DataGridView1
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            dataGridView1.Size = new Size(800, 320);
+            dataGridView1.Size = new Size(800, 340);
             dataGridView1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_info.Location = new Point(dataGridView1.Location.X + dataGridView1.Size.Width - bt_info.Size.Width, dataGridView1.Location.Y + dataGridView1.Size.Height - bt_info.Size.Height);
 
-            richTextBox1.Size = new Size(800, 320);
+            richTextBox1.Size = new Size(800, 340);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 5);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1500, 780);
+            this.Size = new Size(1470, 750);
             this.Text = "vcs_DataGridView1";
 
             //設定執行後的表單起始位置, 正中央
@@ -87,7 +96,7 @@ namespace vcs_DataGridView1
             //清除DGV資料
             //dataGridView1.Rows.Clear();  // 刪除row資料, 留下標題
 
-            dataGridView1.Columns.Clear();  // 刪除標題
+            dataGridView1.Columns.Clear();  // 刪除DGV欄位與資料
 
             //clear
             //dataGridView1.DataSource = null;//設定DGV的資料來源為無, 即清除
@@ -159,13 +168,11 @@ namespace vcs_DataGridView1
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            richTextBox1.Text += "CellClick\n";
+            richTextBox1.Text += "CellClick[" + e.ColumnIndex.ToString() + ", " + e.RowIndex.ToString() + "]\n";
 
             string str = this.dataGridView1[0, e.RowIndex].Value.ToString();
             richTextBox1.Text += "取得第 " + e.RowIndex + " 列的第 0 筆資料 : " + str + "\n";
 
-            richTextBox1.Text += e.ColumnIndex.ToString() + "\n";
-            richTextBox1.Text += e.RowIndex.ToString() + "\n";
             if (e.RowIndex > -1)
             {
                 if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
@@ -182,20 +189,16 @@ namespace vcs_DataGridView1
 
         private void button0_Click(object sender, EventArgs e)
         {
-            dataGridView1.Columns.Clear();
+            dataGridView1.Columns.Clear();  // 刪除DGV欄位與資料
 
             //設定DGV
             dataGridView1.ColumnCount = 3;
             dataGridView1.Columns[0].Name = "英文名";
-            dataGridView1.Columns[0].Width = 100;  // 設定欄寬
             dataGridView1.Columns[1].Name = "中文名";
-            dataGridView1.Columns[1].Width = 100;  // 設定欄寬
             dataGridView1.Columns[2].Name = "體重";
+            dataGridView1.Columns[0].Width = 100;  // 設定欄寬
+            dataGridView1.Columns[1].Width = 100;  // 設定欄寬
             dataGridView1.Columns[2].Width = 100;  // 設定欄寬
-
-            //dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;//佔滿整個DGV
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;  //設置如何選中單元格 整行一起選取
-            dataGridView1.CellClick += new DataGridViewCellEventHandler(dataGridView1_CellClick);
 
             //填入資料
             string ENAME = "mouse";
@@ -210,7 +213,7 @@ namespace vcs_DataGridView1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            dataGridView1.Columns.Clear();
+            dataGridView1.Columns.Clear();  // 刪除DGV欄位與資料
 
             //設定DGV
             dataGridView1.Columns.Add("英文名", "英文名");  // 添加欄位
@@ -219,7 +222,6 @@ namespace vcs_DataGridView1
             dataGridView1.Columns[0].Width = 100;  // 設定欄寬
             dataGridView1.Columns[1].Width = 100;  // 設定欄寬
             dataGridView1.Columns[2].Width = 100;  // 設定欄寬
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;  //設置如何選中單元格 整行一起選取
             dataGridView1.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter; //設置對其方式   此欄置中對齊
 
             dataGridView1.Rows.Add(new string[] { "mouse", "米老鼠", 3.ToString() });
@@ -246,10 +248,6 @@ namespace vcs_DataGridView1
             dataGridView1.Columns[1].Name = "中文名";
             dataGridView1.Columns[2].Name = "體重";
             dataGridView1.Columns[2].DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Italic);
-
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;  //設置如何選中單元格 整行一起選取
-            dataGridView1.MultiSelect = false;
-            //dataGridView1.Dock = DockStyle.Fill;
 
             //dataGridView1.CellFormatting += new DataGridViewCellFormattingEventHandler(songsDataGridView_CellFormatting);
 
@@ -280,8 +278,7 @@ namespace vcs_DataGridView1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //DataGridView 顯示序號
-            //多了 RowPostPaint
+            // DataGridView 顯示序號, 多了 RowPostPaint
 
             //設定DGV
             dataGridView1.ColumnCount = 4;
@@ -301,10 +298,6 @@ namespace vcs_DataGridView1
             dataGridView1.Columns[2].Name = "中文名";
             dataGridView1.Columns[3].Name = "體重";
             dataGridView1.Columns[3].DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Italic);
-
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;  //設置如何選中單元格 整行一起選取
-            dataGridView1.MultiSelect = false;
-            //dataGridView1.Dock = DockStyle.Fill;
 
             //dataGridView1.CellFormatting += new DataGridViewCellFormattingEventHandler(songsDataGridView_CellFormatting);
 
@@ -327,7 +320,7 @@ namespace vcs_DataGridView1
             dataGridView1.Columns[2].DisplayIndex = 0;
             */
 
-            //自動畫上編號
+            // 自動畫上編號
             dataGridView1.RowPostPaint += new DataGridViewRowPostPaintEventHandler(dataGridView1_RowPostPaint);
         }
 
@@ -343,28 +336,17 @@ namespace vcs_DataGridView1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Load_DataGridView_Data1();
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            Load_DataGridView_Data2();
-        }
-
-
-        void Load_DataGridView_Data1()
-        {
             //設定DGV
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.ColumnCount = 4;
             dataGridView1.Columns[0].Name = "Item";
-            dataGridView1.Columns[0].Width = 100;  // 設定欄寬
             dataGridView1.Columns[1].Name = "PriceEach";
-            dataGridView1.Columns[1].Width = 100;  // 設定欄寬
             dataGridView1.Columns[2].Name = "Quantity";
-            dataGridView1.Columns[2].Width = 100;  // 設定欄寬
             dataGridView1.Columns[3].Name = "Total";
+            dataGridView1.Columns[0].Width = 100;  // 設定欄寬            
+            dataGridView1.Columns[1].Width = 100;  // 設定欄寬            
+            dataGridView1.Columns[2].Width = 100;  // 設定欄寬            
             dataGridView1.Columns[3].Width = 100;  // 設定欄寬
 
             // Make some data items.
@@ -384,6 +366,43 @@ namespace vcs_DataGridView1
 
             // Calculate totals.
             CalculateTotals();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //設定DGV
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.ColumnCount = 4;
+            dataGridView1.Columns[0].Name = "Item";
+            dataGridView1.Columns[1].Name = "PriceEach";
+            dataGridView1.Columns[2].Name = "Quantity";
+            dataGridView1.Columns[3].Name = "Total";
+            dataGridView1.Columns[0].Width = 100;  // 設定欄寬
+            dataGridView1.Columns[1].Width = 100;  // 設定欄寬
+            dataGridView1.Columns[2].Width = 100;  // 設定欄寬
+            dataGridView1.Columns[3].Width = 100;  // 設定欄寬
+
+            // Make some data items.
+            OrderItem[] order_items = 
+            {
+                new OrderItem("Pencils, dozen", 1.24m, 4),
+                new OrderItem("Cookies, box", 2.17m, 1),
+                new OrderItem("Notebook", 1.95m, 2),
+                new OrderItem("Paper, ream", 3.75m, 3),
+                new OrderItem("Pencil sharpener", 12.95m, 1),
+                new OrderItem("Paper clips, 100", 0.75m, 1),
+            };
+
+            // Add the items to the DataGridView.
+            AddOrderItems(order_items);
+
+            // Define a column style at run time.
+            DataGridViewCellStyle cell_style = new DataGridViewCellStyle();
+            cell_style.BackColor = Color.LightGreen;
+            cell_style.Alignment = DataGridViewContentAlignment.MiddleRight;
+            cell_style.Format = "C2";
+            dataGridView1.Columns[3].DefaultCellStyle = cell_style;
         }
 
         // Calculate the total costs and highlight totals greater than $9.99.
@@ -410,43 +429,6 @@ namespace vcs_DataGridView1
                     row.Cells["Total"].Style = highlight_style;
                 }
             }
-        }
-
-        void Load_DataGridView_Data2()
-        {
-            //設定DGV
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.ColumnCount = 4;
-            dataGridView1.Columns[0].Name = "Item";
-            dataGridView1.Columns[0].Width = 100;  // 設定欄寬
-            dataGridView1.Columns[1].Name = "PriceEach";
-            dataGridView1.Columns[1].Width = 100;  // 設定欄寬
-            dataGridView1.Columns[2].Name = "Quantity";
-            dataGridView1.Columns[2].Width = 100;  // 設定欄寬
-            dataGridView1.Columns[3].Name = "Total";
-            dataGridView1.Columns[3].Width = 100;  // 設定欄寬
-
-            // Make some data items.
-            OrderItem[] order_items = 
-            {
-                new OrderItem("Pencils, dozen", 1.24m, 4),
-                new OrderItem("Cookies, box", 2.17m, 1),
-                new OrderItem("Notebook", 1.95m, 2),
-                new OrderItem("Paper, ream", 3.75m, 3),
-                new OrderItem("Pencil sharpener", 12.95m, 1),
-                new OrderItem("Paper clips, 100", 0.75m, 1),
-            };
-
-            // Add the items to the DataGridView.
-            AddOrderItems(order_items);
-
-            // Define a column style at run time.
-            DataGridViewCellStyle cell_style = new DataGridViewCellStyle();
-            cell_style.BackColor = Color.LightGreen;
-            cell_style.Alignment = DataGridViewContentAlignment.MiddleRight;
-            cell_style.Format = "C2";
-            dataGridView1.Columns[3].DefaultCellStyle = cell_style;
         }
 
         // Add the items to the DataGridView.
@@ -526,9 +508,6 @@ namespace vcs_DataGridView1
             dataGridView1.Columns[3].Name = "Artist";
             dataGridView1.Columns[4].Name = "Album";
             dataGridView1.Columns[4].DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Italic);
-
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.MultiSelect = false;
 
             dataGridView1.CellFormatting += new DataGridViewCellFormattingEventHandler(dataGridView1_CellFormatting);
         }
