@@ -228,6 +228,45 @@ namespace vcs_SqlConnection4
 
         private void button0_Click(object sender, EventArgs e)
         {
+            //插入多筆紀錄
+            // 資料庫檔案
+            string db_filename = "db_TomeTwo.mdf";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM tb_Student";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+
+            // 插入多条数据记录
+
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            // 查詢字串
+            sqlstr = string.Format(@"INSERT INTO tb_Student_Copy(学生姓名,学生年龄,性别,家庭住址) SELECT 学生姓名,年龄,性别,家庭住址 FROM tb_Student");
+
+            //创建SQL连接对象
+            SqlConnection cn = new SqlConnection(cnstr);
+            cn.Open();//打开数据库连接
+            //创建命令对象
+            SqlCommand P_cmd = new SqlCommand(sqlstr, cn);
+            if (P_cmd.ExecuteNonQuery() != 0)//写入数据并判断是否成功
+            {
+                richTextBox1.Text += "寫入數據 OK\n";
+            }
+            else
+            {
+                richTextBox1.Text += "寫入數據 NG\n";
+            }
+            cn.Close();//关闭数据库连接
+
+
+            // 顯示出來
+
+            // 資料庫檔案
+            db_filename = "db_TomeTwo.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM tb_Student_Copy";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -240,34 +279,6 @@ namespace vcs_SqlConnection4
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //利用控制元件完成柱形圖分析
-
-            //水果出售情況統計表
-
-            // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
-
-            using (SqlConnection con = new SqlConnection(cnstr))
-            {
-                DataSet ds = new DataSet();
-                SqlCommand cmd = new SqlCommand("SELECT * FROM tb_Rectangle SELECT SUM(t_Num) FROM tb_Rectangle", con);
-                SqlDataAdapter da = new SqlDataAdapter();
-                da.SelectCommand = cmd;
-                da.Fill(ds);
-
-                int Values = Convert.ToInt32(ds.Tables[1].Rows[0][0].ToString());
-                richTextBox1.Text += "總數 : " + Values.ToString() + "\n";
-
-                richTextBox1.Text += "資料筆數 : " + ds.Tables[0].Rows.Count.ToString() + "\n";
-
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                {
-                    ds.Tables[0].Rows[i][0].ToString();
-
-                    richTextBox1.Text += ds.Tables[0].Rows[i][0].ToString() + "\t";
-                    richTextBox1.Text += ds.Tables[0].Rows[i][1].ToString() + "\n";
-                }
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -284,13 +295,16 @@ namespace vcs_SqlConnection4
 
             // 資料庫檔案
             string db_filename = "db_13.mdf";
-            // 查詢字串, 相同項合併
-            string sqlstr = "SELECT distinct(t_name) FROM tb_merchandise";
 
-            // 查詢字串
-            sqlstr = "SELECT * FROM tb_merchandise";
-
+            // 查詢字串, 全部
+            string sqlstr = "SELECT * FROM tb_merchandise";
             sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "查詢字串, 全部";
+
+            // 查詢字串, 相同項合併
+            sqlstr = "SELECT distinct(t_name) FROM tb_merchandise";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+            lb_dgv2.Text = "查詢字串, 相同項合併";
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
@@ -329,10 +343,8 @@ namespace vcs_SqlConnection4
                     DataSet ds = new DataSet();
                     da.Fill(ds);
 
-                    int Num = ds.Tables[0].Rows.Count;
-                    richTextBox1.Text += "取得資料 : " + Num.ToString() + " 筆\n";
-
-                    for (int i = 0; i < Num; i++)
+                    richTextBox1.Text += "取得資料 : " + ds.Tables[0].Rows.Count.ToString() + " 筆\n";
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                     {
                         richTextBox1.Text += ds.Tables[0].Rows[i][2].ToString() + "\t" + ds.Tables[0].Rows[i][3].ToString() + "\n";
                     }
@@ -369,7 +381,6 @@ namespace vcs_SqlConnection4
             {
                 Con.Open();
 
-                string[] NumChr = new string[12];
                 string cmdtxt2 = "SELECT * FROM tb_curve WHERE Years=" + query_year + "";
                 SqlCommand Com1 = new SqlCommand(cmdtxt2, Con);
                 SqlDataAdapter da = new SqlDataAdapter();
@@ -379,7 +390,6 @@ namespace vcs_SqlConnection4
                 for (int i = 0; i < 12; i++)
                 {
                     richTextBox1.Text += ds.Tables[0].Rows[0][i + 1].ToString() + "\n";
-                    NumChr[i] = ds.Tables[0].Rows[0][i + 1].ToString();
                 }
             }
         }
@@ -423,11 +433,6 @@ namespace vcs_SqlConnection4
 
         //------------------------------------------------------------  # 60個
 
-        static int SumNum;
-        SqlConnection con;
-        SqlCommand cmd;
-        Hashtable ht = new Hashtable();
-
         private void button9_Click(object sender, EventArgs e)
         {
             //利用餅型圖分析產品市場佔有率
@@ -440,6 +445,7 @@ namespace vcs_SqlConnection4
             sql_read_database(db_filename, sqlstr, dataGridView1);
             // debug SP
 
+            Hashtable ht = new Hashtable();
             ht.Clear();
 
             // 連接字串
@@ -450,7 +456,7 @@ namespace vcs_SqlConnection4
 
             using (SqlCommand cmd = new SqlCommand("SELECT SUM(t_Num) FROM tb_product", con))
             {
-                SumNum = Convert.ToInt32(cmd.ExecuteScalar());
+                int SumNum = Convert.ToInt32(cmd.ExecuteScalar());
                 richTextBox1.Text += "SumNum = " + SumNum.ToString() + "\n";
             }
 
@@ -461,22 +467,14 @@ namespace vcs_SqlConnection4
                 SqlDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
                 while (dr.Read())
                 {
-                    ht.Add(dr[0], Convert.ToInt32(dr[1]));
+                    ht.Add(dr[0], Convert.ToInt32(dr[1]));  // 加入到 Hashtable
                     richTextBox1.Text += dr[0] + "\t" + Convert.ToInt32(dr[1]) + "\n";
                 }
-                float[] flo = new float[ht.Count];
-                int T = 0;
+
                 foreach (DictionaryEntry de in ht)
                 {
                     richTextBox1.Text += "de.Value = " + de.Value + "\tde.Key = " + de.Key + "\n";
-
-                    flo[T] = Convert.ToSingle((Convert.ToDouble(de.Value) / SumNum).ToString().Substring(0, 6));
-
-                    richTextBox1.Text += de.Key + "        " + flo[T] * 100 + "%\n";
-
-                    T++;
                 }
-                richTextBox1.Text += "T = " + T.ToString() + "\n";
             }
         }
 
@@ -507,7 +505,6 @@ namespace vcs_SqlConnection4
                 richTextBox1.Text += "Sum = " + Sum.ToString() + "\n";
                 con.Close();
             }
-
             richTextBox1.Text += "Sum = " + Sum.ToString() + "\n";
 
             using (SqlCommand cmd = new SqlCommand("SELECT t_Point, SUM(t_Num) FROM tb_manpower GROUP BY t_Point ORDER BY SUM(t_Num) DESC", con))//降冪
@@ -550,7 +547,6 @@ namespace vcs_SqlConnection4
             cmd.ExecuteNonQuery();
             con.Close();
             */
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -691,13 +687,16 @@ namespace vcs_SqlConnection4
             */
         }
 
+        SqlConnection con;
+        SqlCommand cmd;
+
         private void button14_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "SQL 14\n";
 
             // 連接字串
             string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
-            con = new SqlConnection(cnstr);
+            SqlConnection con = new SqlConnection(cnstr);
 
             //新增
 

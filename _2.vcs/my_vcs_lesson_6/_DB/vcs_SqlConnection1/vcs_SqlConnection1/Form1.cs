@@ -283,7 +283,7 @@ namespace vcs_SqlConnection1
             string db_filename = string.Empty;
             // 查詢字串
             string sqlstr = string.Empty;
-
+            /*
             // 資料庫檔案
             db_filename = "db_09_Data.MDF";
             // 查詢字串
@@ -301,17 +301,16 @@ namespace vcs_SqlConnection1
             sql_read_database(db_filename, sqlstr, dataGridView3);
             lb_dgv3.Text = "xxxxx";
 
-            /*
             // 查詢字串
-            sqlstr = "SELECT 字段名,类型,长度 FROM hy_Linshibiao t,angel_Linshibiao b WHERE t.类型编号=b.类型编号";
+            //sqlstr = "SELECT 字段名,类型,长度 FROM hy_Linshibiao t,angel_Linshibiao b WHERE t.类型编号=b.类型编号";
 
             // 查詢字串
-            sqlstr = "drop table hy_Linshibiao,angel_Linshibiao";
-            */
+            //sqlstr = "drop table hy_Linshibiao,angel_Linshibiao";
+
             return;
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
+            */
             // 分析公司男女比率
             db_filename = "db_13.mdf";
             sqlstr = "SELECT * FROM tb_sex";
@@ -1102,6 +1101,8 @@ namespace vcs_SqlConnection1
                 SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
                 DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
                 da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+
+                //資料放在表格的第[0][0]格
                 int sum_year = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString());
                 richTextBox1.Text += "年度總和 : " + sum_year.ToString() + "\n";
             }
@@ -1404,7 +1405,7 @@ namespace vcs_SqlConnection1
             object obj = sql_get_database_data(db_filename, sqlstr);
             richTextBox1.Text += "共 " + obj.ToString() + " 筆記錄\n";
 
-            // 查詢字串 取總和 SUM()
+            // 查詢字串 取總和 SUM(), 計算某一欄的和
             sqlstr = "SELECT SUM(體重) FROM animals1_table";
             obj = sql_get_database_data(db_filename, sqlstr);
             richTextBox1.Text += "總和 :\t" + obj.ToString() + "\n";

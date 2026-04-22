@@ -28,6 +28,17 @@ namespace BatchOperByTrans
             m_Conn = new SqlConnection(cnstr);
             m_Cmd = new SqlCommand();//实例化执行SQL命令对象
             BindDataGridView("");//对DataGridView控件进行数据绑定
+
+
+
+
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //刪除
+
         }
 
         private void toolDelete_Click(object sender, EventArgs e)
@@ -151,7 +162,6 @@ namespace BatchOperByTrans
         {
             this.Close();//关闭当前窗体
         }
-
 
         // 以下為debug ----------------------------------------------------------------------------------------------------  # 100個
 

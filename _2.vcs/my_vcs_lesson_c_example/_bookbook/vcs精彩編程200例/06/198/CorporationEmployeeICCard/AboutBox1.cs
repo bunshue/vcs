@@ -21,7 +21,7 @@ namespace CorporationEmployeeICCard
             this.textBoxDescription.Text = "本系统是为企业内部员工IC卡考勤而开发的，功能强大，使用方便，是中小型企业必备之软件！";
         }
 
-        #region 程序集属性访问器
+        //#region 程序集属性访问器
 
         public string AssemblyTitle
         {
@@ -99,7 +99,7 @@ namespace CorporationEmployeeICCard
                 return ((AssemblyCompanyAttribute)attributes[0]).Company;
             }
         }
-        #endregion
+        //#endregion
 
         private void AboutBox1_Load(object sender, EventArgs e)
         {

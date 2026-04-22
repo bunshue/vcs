@@ -50,9 +50,9 @@
             // 
             // btn_Submit
             // 
-            this.btn_Submit.Location = new System.Drawing.Point(185, 22);
+            this.btn_Submit.Location = new System.Drawing.Point(210, 67);
             this.btn_Submit.Name = "btn_Submit";
-            this.btn_Submit.Size = new System.Drawing.Size(75, 23);
+            this.btn_Submit.Size = new System.Drawing.Size(104, 55);
             this.btn_Submit.TabIndex = 1;
             this.btn_Submit.Text = "提交更改";
             this.btn_Submit.UseVisualStyleBackColor = true;
@@ -63,16 +63,16 @@
             this.groupBox1.Controls.Add(this.btn_Submit);
             this.groupBox1.Location = new System.Drawing.Point(722, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(356, 56);
+            this.groupBox1.Size = new System.Drawing.Size(356, 150);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "在DataGridView控件中更新数据后，点击提交更改按钮更新数据";
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(725, 104);
+            this.richTextBox1.Location = new System.Drawing.Point(725, 231);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(346, 574);
+            this.richTextBox1.Size = new System.Drawing.Size(346, 447);
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = "";
             // 

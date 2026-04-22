@@ -32,6 +32,8 @@ namespace vcs_DataGridView1
             dataGridView1.CellMouseClick += new DataGridViewCellMouseEventHandler(dataGridView1_CellMouseClick);
             dataGridView1.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(dataGridView1_RowHeaderMouseClick);
             dataGridView1.MouseDown += new MouseEventHandler(dataGridView1_MouseDown);
+            //DGV編輯後事件
+            dataGridView1.CellEndEdit += new DataGridViewCellEventHandler(dataGridView1_CellEndEdit);
         }
 
         void show_item_location()
@@ -164,6 +166,12 @@ namespace vcs_DataGridView1
                     }
                 }
             }
+        }
+
+        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            richTextBox1.Text += "執行 CellEndEdit\n";
+            richTextBox1.Text += "資料 : " + dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value + "\n";
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)

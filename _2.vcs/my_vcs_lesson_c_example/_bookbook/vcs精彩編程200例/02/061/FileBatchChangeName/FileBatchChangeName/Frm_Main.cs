@@ -268,7 +268,6 @@ namespace FileBatchChangeName
             }
         }
 
-
         private void ChangeName()
         {
             int flag = 0;
