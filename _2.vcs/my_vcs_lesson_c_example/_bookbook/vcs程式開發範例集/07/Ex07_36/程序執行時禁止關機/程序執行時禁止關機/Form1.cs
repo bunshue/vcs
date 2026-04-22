@@ -25,14 +25,12 @@ namespace 程序執行時禁止關機
                     base.WndProc(ref m);
                     break;
             }
-
         }
 
         public Form1()
         {
             InitializeComponent();
         }
-
 
         private void Form1_Load(object sender, EventArgs e)
         {

@@ -3,12 +3,33 @@
 
 
 
+自訂格式化輸出
+
+            richTextBox1.Text += "自訂格式化輸出\n";
+            richTextBox1.Text += String.Format("{0:##,##0.00}", 8567.1) + "\n";
+            richTextBox1.Text += String.Format("{0:###0.00}", 566.7) + "\n";
+            richTextBox1.Text += String.Format("{0:0.00%}", 8) + "\n";
+
+
 
 string.Format 範例
             string Begin = "550";
             string end = "570";
             sqlstr = string.Format(@"SELECT 学生姓名,性别,年龄 FROM tb_Student WHERE 学生编号 IN (SELECT 学生编号 FROM tb_Grade WHERE 总分>{0} AND 总分<{1})", Begin, end);
             
+
+            //string.Format 範例
+            string Name = "李";
+            int Age = 2;
+            string Address = "吉林";
+            richTextBox1.Text += "Name : " + Name + "\tAge : " + Age.ToString() + "\tAddress : " + Address + "\n";
+
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            // 查詢字串
+            sqlstr = string.Format(@"SELECT 学生姓名,年龄,性别,家庭住址 FROM tb_Student WHERE 学生姓名 LIKE '{0}%' and 年龄 LIKE '{1}%' and 家庭住址 LIKE '{2}%'", Name, Age, Address);
+
+
 
 
 
@@ -1540,6 +1561,9 @@ C# 6.0 旨在讓代碼更精簡，是 .NET 開發中一個重要的生產力提�
 2.字串插補 (String Interpolation)： 使用 $ 符號直接在字串中嵌入變數，比 string.Format 更直觀。
 	var s = $"Hello, {name}";
 
+C# 7.0 引入 具名 Tuple 語法
+
+
 6060
 
 //放大和縮小圖像
@@ -1549,7 +1573,6 @@ C# 6.0 旨在讓代碼更精簡，是 .NET 開發中一個重要的生產力提�
 
             pictureBox1.Height = Convert.ToInt32(myImage.Height * Convert.ToSingle(textBox1.Text.Trim()));
             pictureBox1.Width = Convert.ToInt32(myImage.Width * Convert.ToSingle(textBox1.Text.Trim()) * 4 / 3);
-
 
 6060
 

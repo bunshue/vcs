@@ -61,7 +61,7 @@ namespace vcs_SystemTray2
 
             //Form1 的設定放在這裡, 畫面才不會閃一下
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = FormStartPosition.CenterScreen;
             this.WindowState = FormWindowState.Minimized;
 
             NotifyIcon ni = new NotifyIcon() { Icon = this.Icon, Visible = true };
