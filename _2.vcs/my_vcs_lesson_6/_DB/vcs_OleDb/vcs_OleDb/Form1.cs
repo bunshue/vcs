@@ -540,13 +540,6 @@ namespace vcs_OleDb
         OleDbDataAdapter da;
         DataSet ds;
 
-        private void DataChanged()
-        {
-            ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-            da.Fill(ds, "客戶Table");
-            dataGridView1.DataSource = ds.Tables["客戶Table"];
-        }
-
         private void button10_Click(object sender, EventArgs e)
         {
             //ExecuteNonQuery範例(4)
@@ -555,79 +548,130 @@ namespace vcs_OleDb
 
             // 資料庫檔案
             string db_filename = "Northwind.mdb";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 客戶";
+            oledb_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "原本資料";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //(2/4)新增
+
+            // 資料庫檔案
+            db_filename = "Northwind.mdb";
             OleDbConnectionStringBuilder builder = get_builder(db_filename);
+            using (OleDbConnection cn = new OleDbConnection(builder.ConnectionString))  // 建立資料庫連接對象cn
+            {
+                cn.Open();
 
-            cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
-            cn.Open();
+                string customer_id = "12345";
+                string company_name = "lion-mouse";
+                // 新增
+                // 建構Insert
+                OleDbCommand cmd = new OleDbCommand();
+                cmd.CommandText = "INSERT INTO 客戶 (客戶編號, 公司名稱) VALUES (?, ?)";
+                cmd.Connection = cn;
 
-            // 取出所有客戶資料並交由DataGridView物件顯示
-            da = new OleDbDataAdapter("SELECT * FROM 客戶", cn);  // 建立資料庫適配器對象da
-            ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-            da.Fill(ds, "客戶Table");
-            dataGridView1.DataSource = ds.Tables["客戶Table"];
+                cmd.Parameters.Add("CustomerID", OleDbType.Char, 5);
+                cmd.Parameters.Add("CompanyName", OleDbType.VarChar, 40);
+                cmd.Parameters["CustomerID"].Value = customer_id;//客戶編號
+                cmd.Parameters["CompanyName"].Value = company_name;//公司名稱
+                cmd.ExecuteNonQuery();
+            }
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            // 資料庫檔案
+            db_filename = "Northwind.mdb";
+            // 查詢字串
+            sqlstr = "SELECT * FROM 客戶";
+            oledb_read_database(db_filename, sqlstr, dataGridView2);
+            lb_dgv2.Text = "新增資料後";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //(3/4)修改
+
+            // 資料庫檔案
+            db_filename = "Northwind.mdb";
+            builder = get_builder(db_filename);
+            using (OleDbConnection cn = new OleDbConnection(builder.ConnectionString))  // 建立資料庫連接對象cn
+            {
+                cn.Open();
+
+                string customer_id = "12345";
+                string company_name_new = "cat-dog";
+
+                // 修改
+                // 建構Update
+                cmd = new OleDbCommand();
+                cmd.CommandText =
+                    "UPDATE 客戶 SET " +
+                        "客戶編號 = @CustomerID, " +
+                        "公司名稱 = @CompanyName " +
+                        "WHERE 客戶編號 = @CustomerID";
+                cmd.Connection = cn;
+
+                cmd.Parameters.Add("@CustomerID", OleDbType.Char, 5);
+                cmd.Parameters.Add("@CompanyName", OleDbType.VarChar, 40);
+                cmd.Parameters["@CustomerID"].Value = customer_id;//客戶編號
+                cmd.Parameters["@CompanyName"].Value = company_name_new;//公司名稱
+
+                cmd.ExecuteNonQuery();
+            }
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            // 資料庫檔案
+            db_filename = "Northwind.mdb";
+            // 查詢字串
+            sqlstr = "SELECT * FROM 客戶";
+            oledb_read_database(db_filename, sqlstr, dataGridView3);
+            lb_dgv3.Text = "修改資料後";
+
+            //(4/4)刪除
+
+            // 資料庫檔案
+            db_filename = "Northwind.mdb";
+            builder = get_builder(db_filename);
+            using (OleDbConnection cn = new OleDbConnection(builder.ConnectionString))  // 建立資料庫連接對象cn
+            {
+                cn.Open();
+
+                string customer_id = "12345";
+                // 刪除
+                // 建構Delete
+                cmd = new OleDbCommand();
+                cmd.CommandText = "DELETE * FROM 客戶 " + "WHERE 客戶編號 = @CustomerID";
+                cmd.Connection = cn;
+
+                parameter = cmd.Parameters.Add("@CustomerID", OleDbType.Char, 5);
+                cmd.Parameters["@CustomerID"].Value = customer_id;//客戶編號
+                cmd.ExecuteNonQuery();
+            }
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            // 資料庫檔案
+            db_filename = "Northwind.mdb";
+            // 查詢字串
+            sqlstr = "SELECT * FROM 客戶";
+            oledb_read_database(db_filename, sqlstr, dataGridView4);
+            lb_dgv4.Text = "刪除資料後";
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            string customer_id = "12345";
-            string company_name = "lion-mouse";
-            // 新增
-            // 建構Insert
-            cmd = new OleDbCommand();
-            cmd.CommandText = "INSERT INTO 客戶 (客戶編號, 公司名稱) VALUES (?, ?)";
-            cmd.Connection = cn;
 
-            cmd.Parameters.Add("CustomerID", OleDbType.Char, 5);
-            cmd.Parameters.Add("CompanyName", OleDbType.VarChar, 40);
-            cmd.Parameters["CustomerID"].Value = customer_id;//客戶編號
-            cmd.Parameters["CompanyName"].Value = company_name;//公司名稱
-            cmd.ExecuteNonQuery();
-
-            ds.Tables["客戶Table"].AcceptChanges();
-            DataChanged();
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            string customer_id = "12345";
-            string company_name_new = "cat-dog";
 
-            // 修改
-            // 建構Update
-            cmd = new OleDbCommand();
-            cmd.CommandText =
-                "UPDATE 客戶 SET " +
-                    "客戶編號 = @CustomerID, " +
-                    "公司名稱 = @CompanyName " +
-                    "WHERE 客戶編號 = @CustomerID";
-            cmd.Connection = cn;
-
-            cmd.Parameters.Add("@CustomerID", OleDbType.Char, 5);
-            cmd.Parameters.Add("@CompanyName", OleDbType.VarChar, 40);
-            cmd.Parameters["@CustomerID"].Value = customer_id;//客戶編號
-            cmd.Parameters["@CompanyName"].Value = company_name_new;//公司名稱
-
-            cmd.ExecuteNonQuery();
-
-            DataChanged();
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-            string customer_id = "12345";
-            // 刪除
-            // 建構Delete
-            cmd = new OleDbCommand();
-            cmd.CommandText = "DELETE * FROM 客戶 " + "WHERE 客戶編號 = @CustomerID";
-            cmd.Connection = cn;
-
-            parameter = cmd.Parameters.Add("@CustomerID", OleDbType.Char, 5);
-            cmd.Parameters["@CustomerID"].Value = customer_id;//客戶編號
-            cmd.ExecuteNonQuery();
-
-            ds.Tables["客戶Table"].AcceptChanges();
-
-            DataChanged();
         }
 
         private void button14_Click(object sender, EventArgs e)

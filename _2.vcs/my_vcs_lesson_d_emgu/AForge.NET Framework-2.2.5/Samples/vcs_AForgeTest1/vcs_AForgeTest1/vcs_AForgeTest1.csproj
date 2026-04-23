@@ -41,6 +41,9 @@
     <Reference Include="AForge.Controls">
       <HintPath>dll\AForge.Controls.dll</HintPath>
     </Reference>
+    <Reference Include="AForge.Genetic">
+      <HintPath>dll\AForge.Genetic.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

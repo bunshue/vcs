@@ -311,7 +311,7 @@ namespace vcs_SqlConnection4
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-           string str = "24K";
+            string str = "24K";
             richTextBox1.Text += "搜尋 : " + str + " 項目\n";
 
             // 資料庫檔案
@@ -713,10 +713,11 @@ namespace vcs_SqlConnection4
 
             // 資料庫檔案
             string db_filename = "db_09_Data.mdf";
+
             // 連接字串
             string cnstr = string.Format(db_cnstr, db_filename);
 
-            SqlConnection con = new SqlConnection(cnstr);
+            con = new SqlConnection(cnstr);
 
             //新增
 
@@ -753,7 +754,9 @@ namespace vcs_SqlConnection4
                     prams[3].Value = description;
                     //新增參數
                     foreach (SqlParameter parameter in prams)
+                    {
                         cmd.Parameters.Add(parameter);
+                    }
                     SqlParameter sqlpar = cmd.Parameters.Add("@Return", SqlDbType.Int);
                     sqlpar.Direction = ParameterDirection.ReturnValue;//取得傳回值
                     cmd.ExecuteNonQuery();//執行SQL語句
@@ -766,6 +769,7 @@ namespace vcs_SqlConnection4
                     con.Close();
                     return;
                 }
+
                 int i = Convert.ToInt16(cmd.Parameters["@Return"].Value.ToString());//傳回影響的行數
                 if (i == 1)
                 {
@@ -1153,7 +1157,6 @@ namespace vcs_SqlConnection4
         }
     }
 }
-
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個

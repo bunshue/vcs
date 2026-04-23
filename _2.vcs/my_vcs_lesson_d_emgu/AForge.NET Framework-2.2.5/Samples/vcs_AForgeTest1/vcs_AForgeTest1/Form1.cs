@@ -11,12 +11,14 @@ using System.IO;
 
 using AForge;
 using AForge.Controls;
+using AForge.Genetic;
 
 namespace vcs_AForgeTest1
 {
     public partial class Form1 : Form
     {
         private double[,] data = null;
+        private UserFunction userFunction = new UserFunction();
 
         public Form1()
         {
@@ -29,6 +31,11 @@ namespace vcs_AForgeTest1
 
             chart1.AddDataSeries("data", Color.Red, Chart.SeriesType.Dots, 5);
             chart1.AddDataSeries("solution", Color.Blue, Chart.SeriesType.Line, 1);
+
+            // add data series to chart
+            chart2.AddDataSeries("function", Color.Red, Chart.SeriesType.Line, 1);
+            chart2.AddDataSeries("solution", Color.Blue, Chart.SeriesType.Dots, 5);
+            UpdateChart();
 
             this.listView1.FullRowSelect = true;
             this.listView1.GridLines = true;
@@ -179,9 +186,37 @@ namespace vcs_AForgeTest1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            userFunction.Range = new Range(userFunction.Range.Min + 5, userFunction.Range.Max - 5);
+            UpdateChart();
         }
 
-        //6060
+        private void UpdateChart()
+        {
+            // update chart range
+            chart2.RangeX = userFunction.Range;
+
+            double[,] data = null;
+
+            if (chart2.RangeX.Length > 0)
+            {
+                // prepare data
+                data = new double[501, 2];
+
+                double minX = userFunction.Range.Min;
+                double length = userFunction.Range.Length;
+
+                for (int i = 0; i <= 500; i++)
+                {
+                    data[i, 0] = minX + length * i / 500;
+                    data[i, 1] = userFunction.OptimizationFunction(data[i, 0]);
+                }
+            }
+
+            // update chart series
+            chart2.UpdateDataSeries("function", data);
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -220,6 +255,18 @@ namespace vcs_AForgeTest1
 
         }
     }
+
+    // Function to optimize
+    public class UserFunction : OptimizationFunction1D
+    {
+        public UserFunction() : base(new Range(0, 255)) { }
+
+        public override double OptimizationFunction(double x)
+        {
+            return Math.Cos(x / 23) * Math.Sin(x / 50) + 2;
+        }
+    }
+
 }
 
 
