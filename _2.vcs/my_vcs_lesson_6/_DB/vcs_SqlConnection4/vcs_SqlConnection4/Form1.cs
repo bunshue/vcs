@@ -238,8 +238,11 @@ namespace vcs_SqlConnection4
 
             // 插入多条数据记录
 
+            // 資料庫檔案
+            db_filename = "db_TomeTwo.mdf";
             // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = string.Format(db_cnstr, db_filename);
+
             // 查詢字串
             sqlstr = string.Format(@"INSERT INTO tb_Student_Copy(学生姓名,学生年龄,性别,家庭住址) SELECT 学生姓名,年龄,性别,家庭住址 FROM tb_Student");
 
@@ -308,12 +311,14 @@ namespace vcs_SqlConnection4
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            string str = "24K";
+           string str = "24K";
+            richTextBox1.Text += "搜尋 : " + str + " 項目\n";
 
-            richTextBox1.Text += "DrowPic : " + str + "\n";
-
+            // 資料庫檔案
+            db_filename = "db_13.mdf";
             // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = string.Format(db_cnstr, db_filename);
+
             using (SqlConnection con = new SqlConnection(cnstr))
             {
                 // 查詢字串, 找最大值
@@ -374,8 +379,10 @@ namespace vcs_SqlConnection4
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
+            // 資料庫檔案
+            db_filename = "db_13.mdf";
             // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = string.Format(db_cnstr, db_filename);
 
             using (SqlConnection Con = new SqlConnection(cnstr))
             {
@@ -408,8 +415,10 @@ namespace vcs_SqlConnection4
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            // 資料庫連線參數, 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
+            // 資料庫檔案
+            db_filename = "db_13.mdf";
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);
 
             SqlConnection Con = new SqlConnection(cnstr);
             string cmdtxt2 = "SELECT * FROM tb_reticulation";
@@ -448,8 +457,10 @@ namespace vcs_SqlConnection4
             Hashtable ht = new Hashtable();
             ht.Clear();
 
+            // 資料庫檔案
+            db_filename = "db_13.mdf";
             // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = string.Format(db_cnstr, db_filename);
 
             SqlConnection con = new SqlConnection(cnstr);
             con.Open();
@@ -568,8 +579,10 @@ namespace vcs_SqlConnection4
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
+            // 資料庫檔案
+            db_filename = "db_09_Data.mdf";
             // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = string.Format(db_cnstr, db_filename);
 
             SqlConnection con = new SqlConnection(cnstr);
 
@@ -600,8 +613,10 @@ namespace vcs_SqlConnection4
             string money = "12345";  // 基本工資
             string description = "well done";  // 工作評價
 
+            // 資料庫檔案
+            db_filename = "db_09_Data.mdf";
             // 連接字串
-            cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+            cnstr = string.Format(db_cnstr, db_filename);
 
             con = new SqlConnection(cnstr);
 
@@ -638,8 +653,10 @@ namespace vcs_SqlConnection4
             // 查詢字串
             sqlstr = "INSERT INTO 員工表(員工編號, 員工姓名,基本工資,工作評價) values('" + id + "','" + name + "','" + Convert.ToSingle(money) + "','" + description + "')";
 
+            // 資料庫檔案
+            db_filename = "db_09_Data.mdf";
             // 連接字串
-            cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+            cnstr = string.Format(db_cnstr, db_filename);
 
             con = new SqlConnection(cnstr);
 
@@ -694,8 +711,11 @@ namespace vcs_SqlConnection4
         {
             richTextBox1.Text += "SQL 14\n";
 
+            // 資料庫檔案
+            string db_filename = "db_09_Data.mdf";
             // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = string.Format(db_cnstr, db_filename);
+
             SqlConnection con = new SqlConnection(cnstr);
 
             //新增
@@ -850,8 +870,10 @@ namespace vcs_SqlConnection4
             string marriage = "已婚";  // 婚姻狀態
             string health = "良好";  // 健康狀態
 
+            // 資料庫檔案
+            string db_filename = "db_09_Data.mdf";
             // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = string.Format(db_cnstr, db_filename);
 
             SqlConnection con = new SqlConnection(cnstr);
 
@@ -932,8 +954,10 @@ namespace vcs_SqlConnection4
 
             //查詢範例
 
+            // 資料庫檔案
+            db_filename = "db_09_Data.mdf";
             // 連接字串
-            cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+            cnstr = string.Format(db_cnstr, db_filename);
 
             using (SqlConnection con = new SqlConnection(cnstr))//連接資料庫
             {
@@ -971,8 +995,11 @@ namespace vcs_SqlConnection4
             string money = "12345";
             string description = "very good";
 
+            // 資料庫檔案
+            string db_filename = "db_09_Data.mdf";
             // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = string.Format(db_cnstr, db_filename);
+
             SqlConnection con = new SqlConnection(cnstr);
 
             // 查詢字串
@@ -1000,16 +1027,17 @@ namespace vcs_SqlConnection4
 
         private void button21_Click(object sender, EventArgs e)
         {
-            //查詢資料
-            string strid = "P1005";  // 員工編號
-
-            // 查詢字串
-            string sqlstr = "SELECT * FROM 員工表 WHERE 員工編號='" + strid + "'";
-
+            // 資料庫檔案
+            string db_filename = "db_09_Data.mdf";
             // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = string.Format(db_cnstr, db_filename);
 
             SqlConnection con = new SqlConnection(cnstr);
+
+            //查詢資料
+            string strid = "P1005";  // 員工編號
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 員工表 WHERE 員工編號='" + strid + "'";
 
             using (SqlCommand cmd = new SqlCommand(sqlstr, con))
             {
@@ -1045,8 +1073,10 @@ namespace vcs_SqlConnection4
             string new_money = "34567";  // 基本工資
             string new_description = "Very good3333";  // 工作評價
 
+            // 資料庫檔案
+            string db_filename = "db_09_Data.mdf";
             // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = string.Format(db_cnstr, db_filename);
 
             SqlConnection con = new SqlConnection(cnstr);
 
@@ -1171,8 +1201,10 @@ namespace vcs_SqlConnection4
 
             // 斷開服務
 
+             // 資料庫檔案
+            string db_filename = "db_09_Data.mdf";
             // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+            string cnstr = string.Format(db_cnstr, db_filename);
 
             using (SqlConnection con = new SqlConnection(cnstr))
             {

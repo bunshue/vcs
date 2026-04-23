@@ -381,7 +381,7 @@ namespace vcs_OleDb2
 
             string ID = "D007";
             // 查詢字串
-            string sqlstr = "Delete From 科系代碼資料表 WHERE 系碼='" + ID + "'";
+            string sqlstr = "DELETE FROM 科系代碼資料表 WHERE 系碼='" + ID + "'";
 
             OleDbConnectionStringBuilder builder = get_builder(db_filename);
             cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
@@ -486,7 +486,7 @@ namespace vcs_OleDb2
 
             string CourseID = "C006";  // 課號
             // 查詢字串
-            string sqlstr = "Delete From 課程資料表 WHERE 課號='" + CourseID + "'";
+            string sqlstr = "DELETE FROM 課程資料表 WHERE 課號='" + CourseID + "'";
 
             OleDbConnectionStringBuilder builder = get_builder(db_filename);
             cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
@@ -613,7 +613,7 @@ namespace vcs_OleDb2
             string db_filename = "DBMS1.mdb";
             string ID = "96005";  // 學號
             // 查詢字串
-            string sqlstr = "Delete From 學生資料表 WHERE 學號='" + ID + "'";
+            string sqlstr = "DELETE FROM 學生資料表 WHERE 學號='" + ID + "'";
 
             OleDbConnectionStringBuilder builder = get_builder(db_filename);
             cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
@@ -820,14 +820,74 @@ namespace vcs_OleDb2
 
         private void button24_Click(object sender, EventArgs e)
         {
+            //取得一個資料庫的所有Table名稱
+            richTextBox1.Text += "取得一個資料庫的所有Table名稱\n";
+
+            // 資料庫檔案
+            string db_filename = "DBMS1.mdb";
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);
+
+            //這樣會列出所有 實際的資料表（不包含檢視表）
+
+            OleDbConnectionStringBuilder builder = get_builder(db_filename);
+
+            using (OleDbConnection cn = new OleDbConnection(builder.ConnectionString))  // 建立資料庫連接對象cn
+            {
+                cn.Open();
+                var schema = cn.GetSchema("TABLES");
+                foreach (System.Data.DataRow row in schema.Rows)
+                {
+                    richTextBox1.Text += row["TABLE_NAME"] + "\n";
+                }
+            }
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
+            // 資料庫檔案
+            string db_filename = "DBMS1.mdb";
+
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 科系代碼資料表";
+            oledb_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "全部 科系代碼資料表";
+
+            // 查詢字串
+            sqlstr = "SELECT * FROM 課程資料表";
+            oledb_read_database(db_filename, sqlstr, dataGridView2);
+            lb_dgv2.Text = "全部 課程資料表";
+
+            // 查詢字串
+            sqlstr = "SELECT * FROM 學生資料表";
+            oledb_read_database(db_filename, sqlstr, dataGridView3);
+            lb_dgv3.Text = "全部 學生資料表";
+
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
+            // 資料庫檔案
+            string db_filename = "DBMS1.mdb";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 選課資料表";
+            oledb_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "全部 選課資料表";
+
+            // 查詢字串
+            sqlstr = "SELECT * FROM 查詢科系名稱";
+            oledb_read_database(db_filename, sqlstr, dataGridView2);
+            lb_dgv2.Text = "全部 查詢科系名稱";
+
+            // 查詢字串
+            sqlstr = "SELECT * FROM 變更欄位名稱";
+            oledb_read_database(db_filename, sqlstr, dataGridView3);
+            lb_dgv3.Text = "全部 變更欄位名稱";
+
+            // 查詢字串
+            sqlstr = "SELECT * FROM 查詢1";
+            oledb_read_database(db_filename, sqlstr, dataGridView4);
+            lb_dgv4.Text = "全部 查詢1";
         }
 
         private void button27_Click(object sender, EventArgs e)
