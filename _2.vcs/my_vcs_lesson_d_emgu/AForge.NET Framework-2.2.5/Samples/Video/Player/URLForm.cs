@@ -30,7 +30,7 @@ namespace Player
         {
             set
             {
-                urlBox.Items.AddRange( value );
+                urlBox.Items.AddRange(value);
             }
         }
 
@@ -42,13 +42,13 @@ namespace Player
         }
 
         // Constructor
-        public URLForm( )
+        public URLForm()
         {
-            InitializeComponent( );
+            InitializeComponent();
         }
 
         // On "Ok" button clicked
-        private void okButton_Click( object sender, EventArgs e )
+        private void okButton_Click(object sender, EventArgs e)
         {
             url = urlBox.Text;
         }

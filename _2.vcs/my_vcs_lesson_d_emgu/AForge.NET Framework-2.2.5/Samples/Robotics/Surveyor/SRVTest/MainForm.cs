@@ -22,7 +22,7 @@ namespace SRVTest
 {
     public partial class MainForm : Form
     {
-        private SRV1 srv = new SRV1( );
+        private SRV1 srv = new SRV1();
 
         // statistics length
         private const int statLength = 15;
@@ -42,43 +42,43 @@ namespace SRVTest
 
         private int maxMotorPower = 90;
         private int minMotorPower = 50;
-     
+
         // Class constructor
-        public MainForm( )
+        public MainForm()
         {
-            InitializeComponent( );
-            EnableContols( false );
+            InitializeComponent();
+            EnableContols(false);
 
             minPowerUpDown.Value = minMotorPower;
             maxPowerUpDown.Value = maxMotorPower;
         }
 
         // On form closing
-        private void MainForm_FormClosing( object sender, FormClosingEventArgs e )
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Disconnect( );
+            Disconnect();
         }
 
         // Enable/disable connection controls
-        private void EnableContols( bool enable )
+        private void EnableContols(bool enable)
         {
-            ipBox.Enabled              = !enable;
-            portUpDown.Enabled         = !enable;
-            connectButton.Enabled      = !enable;
-            disconnectButton.Enabled   = enable;
-            qualityCombo.Enabled       = enable;
-            resolutionCombo.Enabled    = enable;
-            srvDriverControl.Enabled   = enable;
+            ipBox.Enabled = !enable;
+            portUpDown.Enabled = !enable;
+            connectButton.Enabled = !enable;
+            disconnectButton.Enabled = enable;
+            qualityCombo.Enabled = enable;
+            resolutionCombo.Enabled = enable;
+            srvDriverControl.Enabled = enable;
             manipulatorControl.Enabled = enable;
-            turnControl.Enabled        = enable;
+            turnControl.Enabled = enable;
         }
 
         // On "Connect" button click
-        private void connectButton_Click( object sender, EventArgs e )
+        private void connectButton_Click(object sender, EventArgs e)
         {
-            if ( Connect( ipBox.Text, (int) portUpDown.Value ) )
+            if (Connect(ipBox.Text, (int)portUpDown.Value))
             {
-                EnableContols( true );
+                EnableContols(true);
                 statusLabel.Text = "Connected";
 
                 qualityCombo.SelectedIndex = 6;
@@ -86,134 +86,134 @@ namespace SRVTest
             }
             else
             {
-                MessageBox.Show( "Failed connecting to SRV-1.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
+                MessageBox.Show("Failed connecting to SRV-1.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         // On "Disconnect" buttong click
-        private void disconnectButton_Click( object sender, EventArgs e )
+        private void disconnectButton_Click(object sender, EventArgs e)
         {
-            Disconnect( );
-            statusLabel.Text  = "Disconnected";
-            fpsLabel.Text     = string.Empty;
+            Disconnect();
+            statusLabel.Text = "Disconnected";
+            fpsLabel.Text = string.Empty;
             versionLabel.Text = string.Empty;
         }
 
         // Connect to SRV-1
-        private bool Connect( string host, int port )
+        private bool Connect(string host, int port)
         {
             bool result = true;
 
             try
             {
-                srv.Connect( host, port);
-                srv.EnableFailsafeMode( 0, 0 );
+                srv.Connect(host, port);
+                srv.EnableFailsafeMode(0, 0);
 
-                srv.FlipVideo( false );
-                srv.SetQuality( 7 );
-                srv.SetResolution( SRV1.VideoResolution.Small );
+                srv.FlipVideo(false);
+                srv.SetQuality(7);
+                srv.SetResolution(SRV1.VideoResolution.Small);
 
                 // start left camera
-                SRV1Camera camera = srv.GetCamera( );
+                SRV1Camera camera = srv.GetCamera();
                 cameraPlayer.VideoSource = camera;
-                cameraPlayer.Start( );
+                cameraPlayer.Start();
 
-                versionLabel.Text = srv.GetVersion( );
+                versionLabel.Text = srv.GetVersion();
                 receivedFirstDrivingCommand = false;
 
                 // reset statistics
                 statIndex = statReady = 0;
 
                 // start timer
-                timer.Start( );
+                timer.Start();
             }
             catch
             {
                 result = false;
-                Disconnect( );
+                Disconnect();
             }
 
             return result;
         }
 
         // Disconnect from SRV-1
-        private void Disconnect( )
+        private void Disconnect()
         {
-            if ( srv.IsConnected )
+            if (srv.IsConnected)
             {
-                timer.Stop( );
+                timer.Stop();
 
-                if ( cameraPlayer.VideoSource != null )
+                if (cameraPlayer.VideoSource != null)
                 {
-                    cameraPlayer.VideoSource.SignalToStop( );
-                    cameraPlayer.VideoSource.WaitForStop( );
+                    cameraPlayer.VideoSource.SignalToStop();
+                    cameraPlayer.VideoSource.WaitForStop();
                     cameraPlayer.VideoSource = null;
                 }
 
-                srv.StopMotors( );
-                srv.Disconnect( );
+                srv.StopMotors();
+                srv.Disconnect();
 
-                EnableContols( false );
+                EnableContols(false);
             }
         }
 
         // On timer's tick
-        private void timer_Tick( object sender, EventArgs e )
+        private void timer_Tick(object sender, EventArgs e)
         {
             // update camaeras' FPS
-            if ( cameraPlayer.VideoSource != null )
+            if (cameraPlayer.VideoSource != null)
             {
                 // get number of frames for the last second
                 statCount[statIndex] = cameraPlayer.VideoSource.FramesReceived;
 
                 // increment indexes
-                if ( ++statIndex >= statLength )
+                if (++statIndex >= statLength)
                     statIndex = 0;
-                if ( statReady < statLength )
+                if (statReady < statLength)
                     statReady++;
 
                 float fps = 0;
 
                 // calculate average value
-                for ( int i = 0; i < statReady; i++ )
+                for (int i = 0; i < statReady; i++)
                 {
                     fps += statCount[i];
                 }
                 fps /= statReady;
 
-                fpsLabel.Text = string.Format( "Camera: {0:F2} fps", fps );
+                fpsLabel.Text = string.Format("Camera: {0:F2} fps", fps);
             }
         }
 
         // Set video quality
-        private void qualityCombo_SelectedIndexChanged( object sender, EventArgs e )
+        private void qualityCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ( srv.IsConnected )
+            if (srv.IsConnected)
             {
                 try
                 {
-                    srv.SetQuality( qualityCombo.SelectedIndex + 1 );
+                    srv.SetQuality(qualityCombo.SelectedIndex + 1);
 
                     // reset FPS statistics
                     statIndex = statReady = 0;
                 }
-                catch ( Exception ex )
+                catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine( "## " + ex.Message );
+                    System.Diagnostics.Debug.WriteLine("## " + ex.Message);
                 }
             }
         }
 
         // Set video resolution
-        private void resolutionCombo_SelectedIndexChanged( object sender, EventArgs e )
+        private void resolutionCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ( srv.IsConnected )
+            if (srv.IsConnected)
             {
                 try
                 {
                     SRV1.VideoResolution resolution = SRV1.VideoResolution.Small;
 
-                    switch ( resolutionCombo.SelectedIndex )
+                    switch (resolutionCombo.SelectedIndex)
                     {
                         case 0:
                             resolution = SRV1.VideoResolution.Tiny;
@@ -223,40 +223,40 @@ namespace SRVTest
                             break;
                     }
 
-                    srv.SetResolution( resolution );
+                    srv.SetResolution(resolution);
 
                     // reset FPS statistics
                     statIndex = statReady = 0;
                 }
-                catch ( Exception ex )
+                catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine( "## " + ex.Message );
+                    System.Diagnostics.Debug.WriteLine("## " + ex.Message);
                 }
             }
         }
 
-        private void srvDriverControl_SrvDrivingCommand( object sender, SRV1.MotorCommand command )
+        private void srvDriverControl_SrvDrivingCommand(object sender, SRV1.MotorCommand command)
         {
-            if ( srv.IsConnected )
+            if (srv.IsConnected)
             {
                 try
                 {
-                    if ( !receivedFirstDrivingCommand )
+                    if (!receivedFirstDrivingCommand)
                     {
                         // use one direct control command first
-                        srv.StopMotors( );
+                        srv.StopMotors();
                     }
 
                     // send new command
-                    srv.ControlMotors( command );
+                    srv.ControlMotors(command);
 
-                    if ( ( ( command == SRV1.MotorCommand.DecreaseSpeed ) ||
-                           ( command == SRV1.MotorCommand.IncreaseSpeed ) ) &&
-                           ( receivedFirstDrivingCommand ) &&
-                           ( lastMotorCommand != SRV1.MotorCommand.Stop ) )
+                    if (((command == SRV1.MotorCommand.DecreaseSpeed) ||
+                           (command == SRV1.MotorCommand.IncreaseSpeed)) &&
+                           (receivedFirstDrivingCommand) &&
+                           (lastMotorCommand != SRV1.MotorCommand.Stop))
                     {
                         // resend last command to get effect of speed increase/decrease
-                        srv.ControlMotors( lastMotorCommand  );
+                        srv.ControlMotors(lastMotorCommand);
                     }
                     else
                     {
@@ -264,15 +264,15 @@ namespace SRVTest
                         lastMotorCommand = command;
                     }
                 }
-                catch ( Exception ex )
+                catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine( "## " + ex.Message );
+                    System.Diagnostics.Debug.WriteLine("## " + ex.Message);
                 }
             }
         }
 
         // Switch control type
-        private void directControlRadio_CheckedChanged( object sender, EventArgs e )
+        private void directControlRadio_CheckedChanged(object sender, EventArgs e)
         {
             bool directControlEnabled = directControlRadio.Checked;
 
@@ -287,101 +287,106 @@ namespace SRVTest
         }
 
         // Driving with "software joystick"
-        private void manipulatorControl_PositionChanged( object sender, ManipulatorControl.PositionEventArgs eventArgs )
+        private void manipulatorControl_PositionChanged(object sender, ManipulatorControl.PositionEventArgs eventArgs)
         {
             float leftMotorPower = 0f, rightMotorPower = 0f;
 
             // calculate robot's direction and speed
-            if ( ( eventArgs.X != 0 ) || ( eventArgs.Y != 0 ) )
+            if ((eventArgs.X != 0) || (eventArgs.Y != 0))
             {
                 // radius (distance from center)
                 double r = eventArgs.R;
                 // theta
                 double t = eventArgs.Theta;
 
-                if ( t > 180 )
+                if (t > 180)
                     t -= 180;
 
                 // index of maximum power
-                int maxPowerIndex = (int) ( t / 180 * maxPowers.Length );
+                int maxPowerIndex = (int)(t / 180 * maxPowers.Length);
 
                 // check direction to move
-                if ( eventArgs.Y > 0 )
+                if (eventArgs.Y > 0)
                 {
                     // forward direction
-                    leftMotorPower  = (float) ( r * maxPowers[maxPowers.Length - maxPowerIndex - 1] );
-                    rightMotorPower = (float) ( r * maxPowers[maxPowerIndex] );
+                    leftMotorPower = (float)(r * maxPowers[maxPowers.Length - maxPowerIndex - 1]);
+                    rightMotorPower = (float)(r * maxPowers[maxPowerIndex]);
                 }
                 else
                 {
                     // backward direction
-                    leftMotorPower  = (float) ( -r * maxPowers[maxPowerIndex] );
-                    rightMotorPower = (float) ( -r * maxPowers[maxPowers.Length - maxPowerIndex - 1] );
+                    leftMotorPower = (float)(-r * maxPowers[maxPowerIndex]);
+                    rightMotorPower = (float)(-r * maxPowers[maxPowers.Length - maxPowerIndex - 1]);
                 }
             }
 
-            DriveMotors( leftMotorPower, rightMotorPower );
+            DriveMotors(leftMotorPower, rightMotorPower);
         }
 
         // Robot turning on place - opposite directions for motors
-        private void turnControl_PositionChanged( object sender, float x )
+        private void turnControl_PositionChanged(object sender, float x)
         {
-            DriveMotors( x, -x );
+            DriveMotors(x, -x);
         }
 
-        private void DriveMotors( float leftMotor, float rightMotor )
+        private void DriveMotors(float leftMotor, float rightMotor)
         {
-            int leftMotorVelocity  = 0;
+            int leftMotorVelocity = 0;
             int rightMotorVelocity = 0;
 
             // make sure velocities are in [min, max] range
             int delta = maxMotorPower - minMotorPower;
 
-            if ( leftMotor != 0 )
+            if (leftMotor != 0)
             {
-                if ( leftMotor > 0 )
-                    leftMotorVelocity =  minMotorPower + (int) ( delta * leftMotor );
+                if (leftMotor > 0)
+                    leftMotorVelocity = minMotorPower + (int)(delta * leftMotor);
                 else
-                    leftMotorVelocity = -minMotorPower + (int) ( delta * leftMotor );
+                    leftMotorVelocity = -minMotorPower + (int)(delta * leftMotor);
             }
-            if ( rightMotor != 0 )
+            if (rightMotor != 0)
             {
-                if ( rightMotor > 0 )
-                    rightMotorVelocity =  minMotorPower + (int) ( delta * rightMotor );
+                if (rightMotor > 0)
+                    rightMotorVelocity = minMotorPower + (int)(delta * rightMotor);
                 else
-                    rightMotorVelocity = -minMotorPower + (int) ( delta * rightMotor );
+                    rightMotorVelocity = -minMotorPower + (int)(delta * rightMotor);
             }
 
-            System.Diagnostics.Debug.WriteLine( string.Format( "l: {0}, r: {1}", leftMotorVelocity, rightMotorVelocity ) );
-            if ( srv.IsConnected )
+            System.Diagnostics.Debug.WriteLine(string.Format("l: {0}, r: {1}", leftMotorVelocity, rightMotorVelocity));
+            if (srv.IsConnected)
             {
                 try
                 {
-                    srv.RunMotors( leftMotorVelocity, rightMotorVelocity, 0 );
+                    srv.RunMotors(leftMotorVelocity, rightMotorVelocity, 0);
                 }
-                catch ( Exception ex )
+                catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine( "## " + ex.Message );
+                    System.Diagnostics.Debug.WriteLine("## " + ex.Message);
                 }
             }
         }
 
         // Changing motors' power limits
-        private void minPowerUpDown_ValueChanged( object sender, EventArgs e )
+        private void minPowerUpDown_ValueChanged(object sender, EventArgs e)
         {
-            minMotorPower = (int) minPowerUpDown.Value;
+            minMotorPower = (int)minPowerUpDown.Value;
         }
 
-        private void maxPowerUpDown_ValueChanged( object sender, EventArgs e )
+        private void maxPowerUpDown_ValueChanged(object sender, EventArgs e)
         {
-            maxMotorPower = (int) maxPowerUpDown.Value;
+            maxMotorPower = (int)maxPowerUpDown.Value;
         }
 
-        private void aboutButton_Click( object sender, EventArgs e )
+        private void aboutButton_Click(object sender, EventArgs e)
         {
-            AboutForm form = new AboutForm( );
+            AboutForm form = new AboutForm();
 
-            form.ShowDialog( );
+            form.ShowDialog();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
