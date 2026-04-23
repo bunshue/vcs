@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.bt_clear = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button0 = new System.Windows.Forms.Button();
@@ -41,13 +42,16 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
+            this.chart1 = new AForge.Controls.Chart();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.chart2 = new AForge.Controls.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(308, 156);
+            this.bt_clear.Location = new System.Drawing.Point(366, 155);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(66, 40);
             this.bt_clear.TabIndex = 133;
@@ -58,7 +62,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(288, 118);
+            this.richTextBox1.Location = new System.Drawing.Point(346, 117);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 132;
@@ -107,7 +111,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(288, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(228, 117);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.TabIndex = 138;
@@ -173,11 +177,42 @@
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
+            // chart1
+            // 
+            this.chart1.Location = new System.Drawing.Point(346, 11);
+            this.chart1.Name = "chart1";
+            this.chart1.RangeX = ((AForge.Range)(resources.GetObject("chart1.RangeX")));
+            this.chart1.RangeY = ((AForge.Range)(resources.GetObject("chart1.RangeY")));
+            this.chart1.Size = new System.Drawing.Size(100, 100);
+            this.chart1.TabIndex = 146;
+            this.chart1.Text = "chart1";
+            // 
+            // listView1
+            // 
+            this.listView1.Location = new System.Drawing.Point(228, 11);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(100, 100);
+            this.listView1.TabIndex = 147;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
+            // chart2
+            // 
+            this.chart2.Location = new System.Drawing.Point(463, 11);
+            this.chart2.Name = "chart2";
+            this.chart2.RangeX = ((AForge.Range)(resources.GetObject("chart2.RangeX")));
+            this.chart2.RangeY = ((AForge.Range)(resources.GetObject("chart2.RangeY")));
+            this.chart2.Size = new System.Drawing.Size(100, 100);
+            this.chart2.TabIndex = 148;
+            this.chart2.Text = "chart2";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(711, 643);
+            this.Controls.Add(this.chart2);
+            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.chart1);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
@@ -214,6 +249,9 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
+        private AForge.Controls.Chart chart1;
+        private System.Windows.Forms.ListView listView1;
+        private AForge.Controls.Chart chart2;
     }
 }
 
