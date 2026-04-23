@@ -512,6 +512,7 @@ namespace Classifier
             this.Name = "MainForm";
             this.Text = "Classifier using Delta Rule Learning";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.MainForm_Closing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -1012,5 +1013,10 @@ namespace Classifier
 			// enable settings controls
 			EnableControls( true );
 		}
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
 	}
 }

@@ -123,14 +123,65 @@ namespace vcs__Mix00
 
         private void button0_Click(object sender, EventArgs e)
         {
+            //DriveInfo測試
+
+            DriveInfo[] allDrives = DriveInfo.GetDrives();
+
+            foreach (DriveInfo d in allDrives)
+            {
+                richTextBox1.Text += "磁碟名稱 : " + d.Name + "\n";
+                richTextBox1.Text += "  磁碟類型 : " + d.DriveType + "\n";
+                if (d.IsReady == true)
+                {
+                    richTextBox1.Text += "  檔案系統名稱 : " + d.DriveFormat + "\n";
+                    richTextBox1.Text += "  目前可用空間量: \t{0, 15} bytes" + d.AvailableFreeSpace + "\n";
+                    richTextBox1.Text += "  可用空間總量: \t{0, 15} bytes" + d.TotalFreeSpace + "\n";
+                    richTextBox1.Text += "  可儲存空間總量: \t{0, 15} bytes " + d.TotalSize + "\n";
+                }
+           }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //從檔案完整路徑分離出資料夾,檔案名稱,副檔名
+            string full_filename = @"D:\_git\vcs\_1.data\______test_files1\_case1\_case1a\_case1aa\eula.3081a.txt";
+            //取得資料夾路徑
+            string foldername = full_filename.Substring(0, full_filename.LastIndexOf("\\") + 1);
+            //取得檔案名稱
+            string short_filename =
+                full_filename.Substring(full_filename.LastIndexOf("\\") + 1,
+                full_filename.LastIndexOf(".") -
+                (full_filename.LastIndexOf("\\") + 1));
+            //取得副檔名
+            string ext_filename =
+                full_filename.Substring(full_filename.LastIndexOf(".") + 1,
+                full_filename.Length - full_filename.LastIndexOf(".") - 1);
 
+            richTextBox1.Text += "檔案完整路徑:\t" + full_filename + "\n";
+            richTextBox1.Text += "資料夾路徑:\t" + foldername + "\n";
+            richTextBox1.Text += "檔案名稱:\t" + short_filename + "\n";
+            richTextBox1.Text += "副檔名:\t" + ext_filename + "\n";
         }
+
         private void button2_Click(object sender, EventArgs e)
         {
+            //檔名處理
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
+            richTextBox1.Text += "全檔名 : " + filename + "\n";
+
+            string d_name = Path.GetDirectoryName(filename);
+            string f_name = Path.GetFileNameWithoutExtension(filename);
+            string ext_name = Path.GetExtension(filename);
+
+            string filename2 = "tmp_" + f_name + "_new" + ext_name;
+
+            richTextBox1.Text += "新全檔名 : " + filename2 + "\n";
+
+            //自動檔名 與 存檔語法
+            string filename3 = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            richTextBox1.Text += "新全檔名 : " + filename3 + "\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
