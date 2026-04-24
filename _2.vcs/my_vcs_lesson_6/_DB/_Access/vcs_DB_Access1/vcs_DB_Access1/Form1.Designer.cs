@@ -45,13 +45,16 @@
             this.cboField2 = new System.Windows.Forms.ComboBox();
             this.cboOperator2 = new System.Windows.Forms.ComboBox();
             this.dgvBookInfo = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBookInfo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnQuery
             // 
             this.btnQuery.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnQuery.Location = new System.Drawing.Point(555, 123);
+            this.btnQuery.Location = new System.Drawing.Point(503, 123);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 21);
             this.btnQuery.TabIndex = 12;
@@ -238,14 +241,36 @@
             this.dgvBookInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBookInfo.Location = new System.Drawing.Point(15, 150);
             this.dgvBookInfo.Name = "dgvBookInfo";
-            this.dgvBookInfo.Size = new System.Drawing.Size(1158, 494);
+            this.dgvBookInfo.Size = new System.Drawing.Size(563, 486);
             this.dgvBookInfo.TabIndex = 13;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.button1.Location = new System.Drawing.Point(599, 123);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 21);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "test";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(599, 150);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(574, 486);
+            this.dataGridView1.TabIndex = 15;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1185, 655);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.dgvBookInfo);
             this.Controls.Add(this.txtValue3);
             this.Controls.Add(this.cboField3);
@@ -267,6 +292,7 @@
             this.Text = "vcs_DB_Access1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBookInfo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -291,6 +317,8 @@
         private System.Windows.Forms.ComboBox cboField2;
         private System.Windows.Forms.ComboBox cboOperator2;
         private System.Windows.Forms.DataGridView dgvBookInfo;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridView dataGridView1;
 
     }
 }

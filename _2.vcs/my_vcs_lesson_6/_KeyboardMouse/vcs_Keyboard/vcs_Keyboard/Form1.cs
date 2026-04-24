@@ -11,7 +11,6 @@ namespace vcs_Keyboard
     public partial class Form1 : Form
     {
         Label[] labelList = new Label[27]; // A ~ Z和空白鍵
-
         Color groupBox_keyboard_backcolor = Color.LightSalmon;
         Color key_color = Color.Pink;
         Color key_press_color = Color.Red;
@@ -23,7 +22,19 @@ namespace vcs_Keyboard
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             setup_keyboard();
+        }
+
+        void show_item_location()
+        {
+            this.Size = new Size(664, 560);
+            this.Text = "vcs_Keyboard";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         void setup_keyboard()
@@ -95,4 +106,3 @@ namespace vcs_Keyboard
         }
     }
 }
-

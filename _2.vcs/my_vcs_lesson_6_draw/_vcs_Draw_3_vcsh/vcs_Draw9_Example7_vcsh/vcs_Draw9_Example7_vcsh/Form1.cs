@@ -185,7 +185,7 @@ namespace vcs_Draw9_Example7_vcsh
             pictureBox13.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             pictureBox14.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             pictureBox15.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            groupBox1.Location = new Point(x_st + dx * 2+40, y_st + dy * 3 - 45);
+            groupBox1.Location = new Point(x_st + dx * 2 + 40, y_st + dy * 3 - 45);
             richTextBox_ransom_note.Location = new Point(x_st + dx * 3, y_st + dy * 2);
             pictureBox_ransom_note.Location = new Point(x_st + dx * 4, y_st + dy * 2);
             richTextBox_ransom_note_result.Location = new Point(x_st + dx * 5, y_st + dy * 2);
@@ -318,7 +318,7 @@ namespace vcs_Draw9_Example7_vcsh
             return points;
         }
 
-                // Make the Octagon objects and redraw.
+        // Make the Octagon objects and redraw.
         private void MakeOctagons()
         {
             // Build the Root.
@@ -2615,25 +2615,17 @@ namespace vcs_Draw9_Example7_vcsh
                     }
 
                 // Draw the main body.
-                gr.DrawPath(pen, MakeRoundedRect(
-                    body_rect, thickness, thickness,
-                    true, true, true, true));
+                gr.DrawPath(pen, MakeRoundedRect(body_rect, thickness, thickness, true, true, true, true));
 
                 // Draw the positive terminal.
-                RectangleF terminal_rect = new RectangleF(
-                    wid / 2f - thickness, 0,
-                    2 * thickness, thickness);
-                gr.DrawPath(pen, MakeRoundedRect(
-                    terminal_rect, thickness / 2f, thickness / 2f,
-                    true, true, false, false));
+                RectangleF terminal_rect = new RectangleF(wid / 2f - thickness, 0, 2 * thickness, thickness);
+                gr.DrawPath(pen, MakeRoundedRect(terminal_rect, thickness / 2f, thickness / 2f, true, true, false, false));
             }
         }
 
         // Draw a rectangle in the indicated Rectangle
         // rounding the indicated corners.
-        private GraphicsPath MakeRoundedRect(
-            RectangleF rect, float xradius, float yradius,
-            bool round_ul, bool round_ur, bool round_lr, bool round_ll)
+        private GraphicsPath MakeRoundedRect(RectangleF rect, float xradius, float yradius, bool round_ul, bool round_ur, bool round_lr, bool round_ll)
         {
             // Make a GraphicsPath to draw the rectangle.
             PointF point1, point2;
@@ -2642,9 +2634,7 @@ namespace vcs_Draw9_Example7_vcsh
             // Upper left corner.
             if (round_ul)
             {
-                RectangleF corner = new RectangleF(
-                    rect.X, rect.Y,
-                    2 * xradius, 2 * yradius);
+                RectangleF corner = new RectangleF(rect.X, rect.Y, 2 * xradius, 2 * yradius);
                 path.AddArc(corner, 180, 90);
                 point1 = new PointF(rect.X + xradius, rect.Y);
             }
@@ -2652,17 +2642,19 @@ namespace vcs_Draw9_Example7_vcsh
 
             // Top side.
             if (round_ur)
+            {
                 point2 = new PointF(rect.Right - xradius, rect.Y);
+            }
             else
+            {
                 point2 = new PointF(rect.Right, rect.Y);
+            }
             path.AddLine(point1, point2);
 
             // Upper right corner.
             if (round_ur)
             {
-                RectangleF corner = new RectangleF(
-                    rect.Right - 2 * xradius, rect.Y,
-                    2 * xradius, 2 * yradius);
+                RectangleF corner = new RectangleF(rect.Right - 2 * xradius, rect.Y, 2 * xradius, 2 * yradius);
                 path.AddArc(corner, 270, 90);
                 point1 = new PointF(rect.Right, rect.Y + yradius);
             }
@@ -2670,36 +2662,42 @@ namespace vcs_Draw9_Example7_vcsh
 
             // Right side.
             if (round_lr)
+            {
                 point2 = new PointF(rect.Right, rect.Bottom - yradius);
+            }
             else
+            {
                 point2 = new PointF(rect.Right, rect.Bottom);
+            }
             path.AddLine(point1, point2);
 
             // Lower right corner.
             if (round_lr)
             {
-                RectangleF corner = new RectangleF(
-                    rect.Right - 2 * xradius,
-                    rect.Bottom - 2 * yradius,
-                    2 * xradius, 2 * yradius);
+                RectangleF corner = new RectangleF(rect.Right - 2 * xradius, rect.Bottom - 2 * yradius, 2 * xradius, 2 * yradius);
                 path.AddArc(corner, 0, 90);
                 point1 = new PointF(rect.Right - xradius, rect.Bottom);
             }
-            else point1 = new PointF(rect.Right, rect.Bottom);
+            else
+            {
+                point1 = new PointF(rect.Right, rect.Bottom);
+            }
 
             // Bottom side.
             if (round_ll)
+            {
                 point2 = new PointF(rect.X + xradius, rect.Bottom);
+            }
             else
+            {
                 point2 = new PointF(rect.X, rect.Bottom);
+            }
             path.AddLine(point1, point2);
 
             // Lower left corner.
             if (round_ll)
             {
-                RectangleF corner = new RectangleF(
-                    rect.X, rect.Bottom - 2 * yradius,
-                    2 * xradius, 2 * yradius);
+                RectangleF corner = new RectangleF(rect.X, rect.Bottom - 2 * yradius, 2 * xradius, 2 * yradius);
                 path.AddArc(corner, 90, 90);
                 point1 = new PointF(rect.X, rect.Bottom - yradius);
             }
@@ -2707,9 +2705,13 @@ namespace vcs_Draw9_Example7_vcsh
 
             // Left side.
             if (round_ul)
+            {
                 point2 = new PointF(rect.X, rect.Y + yradius);
+            }
             else
+            {
                 point2 = new PointF(rect.X, rect.Y);
+            }
             path.AddLine(point1, point2);
 
             // Join with the start point.
@@ -2729,46 +2731,32 @@ namespace vcs_Draw9_Example7_vcsh
             // Top rectangle.
             const float margin = 10;
             float hgt = (picSamples.ClientSize.Height - 3 * margin) / 2f;
-            RectangleF rect = new RectangleF(
-                margin, margin,
-                picSamples.ClientSize.Width - 2 * margin,
-                hgt);
+            RectangleF rect = new RectangleF(margin, margin, picSamples.ClientSize.Width - 2 * margin, hgt);
             using (Pen pen = new Pen(Color.Green, 5))
             {
-                GraphicsPath path = MakeRoundedRect(
-                    rect, xradius, yradius, true, true, true, true);
+                GraphicsPath path = MakeRoundedRect(rect, xradius, yradius, true, true, true, true);
                 e.Graphics.FillPath(Brushes.LightGreen, path);
                 e.Graphics.DrawPath(pen, path);
             }
 
             // Bottom left rectangle.
             float wid = (picSamples.ClientSize.Width - 3 * margin) / 2f;
-            rect = new RectangleF(
-                margin, hgt + 2 * margin, wid, hgt);
+            rect = new RectangleF(margin, hgt + 2 * margin, wid, hgt);
             using (Pen pen = new Pen(Color.Green, 5))
             {
-                GraphicsPath path = MakeRoundedRect(
-                    rect, xradius, yradius, false, true, false, true);
-                e.Graphics.FillPath(Brushes.LightGreen, path);
-                e.Graphics.DrawPath(pen, path);
+                GraphicsPath path = MakeRoundedRect(rect, xradius, yradius, false, true, false, true); e.Graphics.FillPath(Brushes.LightGreen, path); e.Graphics.DrawPath(pen, path);
             }
 
             // Bottom right rectangle.
-            rect = new RectangleF(
-                wid + 2 * margin, hgt + 2 * margin, wid, hgt);
+            rect = new RectangleF(wid + 2 * margin, hgt + 2 * margin, wid, hgt);
             using (Pen pen = new Pen(Color.Green, 5))
             {
-                GraphicsPath path = MakeRoundedRect(
-                    rect, xradius, yradius, true, false, true, false);
+                GraphicsPath path = MakeRoundedRect(rect, xradius, yradius, true, false, true, false);
                 e.Graphics.FillPath(Brushes.LightGreen, path);
                 e.Graphics.DrawPath(pen, path);
             }
 
             e.Graphics.DrawString("畫矩形圓邊", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(55, 22));
-
         }
-
-
-
     }
 }

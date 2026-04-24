@@ -29,6 +29,8 @@ namespace MouseControl
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             this.hScrollBar1.Value = 200;
 
             this.listBox1.Items.Add("None");
@@ -44,7 +46,8 @@ namespace MouseControl
                     this.comboBox1.Items.Add(item);
                 }
             }
-            //-------------------------------
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             this.comboBox1.SelectedIndex = this.comboBox1.Items.IndexOf(System.Windows.Forms.Keys.F1.ToString());
             this.listBox1.SelectedIndex = 0;
@@ -53,18 +56,21 @@ namespace MouseControl
             this.HotKey = new GlobalHotKey(this.Handle, (System.Windows.Forms.Keys)Enum.Parse(typeof(System.Windows.Forms.Keys), this.comboBox1.Text), Keys.None);
 
             this.HotKey.OnHotkey += new GlobalHotKey.HotkeyEventHandler(HotKey_OnHotkey);
-            //-------------------------------
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //開始監聽按鍵資料
             WindwosHook.KeyboardHook.Enabled = true;
 
             WindwosHook.KeyboardHook.GlobalKeyDown += new EventHandler<WindwosHook.KeyboardHook.KeyEventArgs>(KeyboardHook_GlobalKeyDown);
             //WindwosHook.KeyboardHook.GlobalKeyUp += new EventHandler<WindwosHook.KeyboardHook.KeyEventArgs>(KeyboardHook_GlobalKeyUp);
-            //-------------------------------
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //開始監聽滑鼠位置
             System.Threading.ThreadPool.QueueUserWorkItem(new System.Threading.WaitCallback(AutoGetCursorPosition), null);
-            //-------------------------------
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
 
@@ -77,6 +83,25 @@ namespace MouseControl
             this.Icon = notifyicon1.Icon;
             notifyicon1.Click += new EventHandler(notifyicon1_Click);
             this.pictureBox1.Image = GenerateBitmap(Color.Green);
+        }
+
+        void show_item_location()
+        {
+            richTextBox1.Size = new Size(500, 600);
+            richTextBox1.Location = new Point(360, 10);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(890, 660);
+            this.Text = "MouseControl";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         void notifyicon1_Click(object sender, EventArgs e)
@@ -289,5 +314,25 @@ namespace MouseControl
                 }
             }
         }
+
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+

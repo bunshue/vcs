@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Data.OleDb;
+//using System.Data.OleDb;
+using System.IO;
+using System.Data.OleDb;    //讀取Access需使用OLEDB
 
 namespace vcs_DB_Access1
 {
@@ -109,8 +111,7 @@ namespace vcs_DB_Access1
             for (int i = 0; i < CboField.Length; i++)
             {
                 // See if the field and operator are non-blank.
-                if ((CboField[i].SelectedIndex <= 0) ||
-                    (CboOperator[i].SelectedIndex <= 0))
+                if ((CboField[i].SelectedIndex <= 0) || (CboOperator[i].SelectedIndex <= 0))
                 {
                     // Don't use this row. Clear it to prevent confusion.
                     CboField[i].SelectedIndex = 0;
@@ -135,19 +136,22 @@ namespace vcs_DB_Access1
                     }
 
                     // Add the constraint to the WHERE clause.
-                    where_clause += " AND " +
-                        CboField[i].SelectedItem.ToString() + " " +
-                        CboOperator[i].SelectedItem.ToString() + " " +
-                        delimiter + value + delimiter;
+                    where_clause += " AND " + CboField[i].SelectedItem.ToString() + " " + CboOperator[i].SelectedItem.ToString() + " " + delimiter + value + delimiter;
                 }   // if field and operator are selected.
             }   // for (int i = 0; i < CboField.Length; i++)
 
             // If where_clause is non-blank, remove the initial " AND ".
-            if (where_clause.Length > 0) where_clause = where_clause.Substring(5);
+            if (where_clause.Length > 0)
+            {
+                where_clause = where_clause.Substring(5);
+            }
 
             // Compose the query.
             string query = "SELECT * FROM " + TableName;
-            if (where_clause.Length > 0) query += " WHERE " + where_clause;
+            if (where_clause.Length > 0)
+            {
+                query += " WHERE " + where_clause;
+            }
             // Console.WriteLine("Query: " + query);
 
             // Create a DataAdapter to load the data.
@@ -166,6 +170,48 @@ namespace vcs_DB_Access1
 
             // Bind the DataGridView to the DataTable.
             dgvBookInfo.DataSource = data_table;
+        }
+
+        // 以下為debug ----------------------------------------------------------------------------------------------------  # 100個
+
+        OleDbConnectionStringBuilder get_builder(string db_filename)
+        {
+            OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder();
+            builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
+            builder["Data Source"] = "D:\\" + db_filename;
+            builder["User Id"] = "Admin";
+            return builder;
+        }
+
+        //讀取資料庫至DGV
+        void oledb_read_database(string db_filename, string sqlstr, DataGridView dgv)
+        {
+            OleDbConnectionStringBuilder builder = get_builder(db_filename);
+            using (OleDbConnection cn = new OleDbConnection(builder.ConnectionString))  // 建立資料庫連接對象cn
+            {
+                OleDbCommand cmd = new OleDbCommand(builder.ConnectionString);
+                cn.Open();  // 打開資料庫連線
+
+                // 建構DataSet及其組成分子
+                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+                OleDbDataAdapter da = new OleDbDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
+                // da.Fill(ds, "table");  // da將查詢的結果填充至數據集ds, 指定TableName為"table"
+                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+                //dgv.DataSource = ds.Tables["table"];  // DGV設置數據源, same
+                dgv.DataSource = ds.Tables[0];  // DGV設置數據源
+            }
+        }
+
+        // 以下為debug ----------------------------------------------------------------------------------------------------  # 100個
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // 資料庫檔案
+            string db_filename = "DBMS1.mdb";
+            // 查詢字串, 顯示 科系代碼表, 由系碼排序
+            string sqlstr = "SELECT * FROM 科系代碼資料表 ORDER BY 系碼 ASC";
+            oledb_read_database(db_filename, sqlstr, dataGridView1);
+
         }
     }
 }

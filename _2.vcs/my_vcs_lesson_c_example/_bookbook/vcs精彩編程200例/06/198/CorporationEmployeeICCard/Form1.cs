@@ -20,6 +20,9 @@ namespace CorporationEmployeeICCard
         {
             lblTime.Text = DateTime.Now.ToString();//当进行考勤的时候在窗体中显示当前时间
             tsslTime.Text = DateTime.Now.ToString();//在任务栏中显示当前时间
+
+            richTextBox1.Text += "lblTime : " + DateTime.Now.ToString() + "\n";//当进行考勤的时候在窗体中显示当前时间
+
         }
 
         private void 添加员工ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -30,7 +33,6 @@ namespace CorporationEmployeeICCard
 
         private void 系统信息ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("MSINFO32.EXE");
         }
 
         private void 开始考勤ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -61,7 +63,7 @@ namespace CorporationEmployeeICCard
             }
             else//如果有IC卡进行考勤
             {
-                if (flag ==-1)//只有当flag为-1的时候执行
+                if (flag == -1)//只有当flag为-1的时候执行
                 {
                     string icID = txtICCard.Text.Trim();//获取读取的IC卡编号
                     if (baseClass.isCheck(icID))//isCheck方法判断是否参加过考勤
@@ -93,7 +95,7 @@ namespace CorporationEmployeeICCard
                         //声明一个字符串，用于存储一条插入语句，实现将考勤信息插入到数据表中
                         string str = "insert into CheckNote(C_CardID,C_Name,C_Sex,C_Job,C_Folk,C_Dept,C_Time) values('" + icID + "','" + name + "','" + sex + "','" + job + "','" + folk + "','" + dept + "','" + DateTime.Now.ToShortDateString() + "')";
                         baseClass.ExecuteSQL(str);//ExecuteSQL方法执行SQL语句
-                        tsslEinfo.Text = "已经有"+baseClass.GetNum(DateTime.Now.ToShortDateString())+"人参加考勤";
+                        tsslEinfo.Text = "已经有" + baseClass.GetNum(DateTime.Now.ToShortDateString()) + "人参加考勤";
                     }
                 }
                 flag = 0;//改变flag的值实现一张IC卡只存储一次信息
@@ -109,6 +111,7 @@ namespace CorporationEmployeeICCard
         private void timer2_Tick(object sender, EventArgs e)
         {
             lblTime.Text = DateTime.Now.ToString();
+            richTextBox1.Text += "lblTime : " + DateTime.Now.ToString() + "\n";//当进行考勤的时候在窗体中显示当前时间
         }
 
         private void 考勤结束ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -129,12 +132,11 @@ namespace CorporationEmployeeICCard
         private void timer3_Tick(object sender, EventArgs e)
         {
             tsslTime.Text = DateTime.Now.ToString();
+            richTextBox1.Text += "tsslTime : " + DateTime.Now.ToString() + "\n";//当进行考勤的时候在窗体中显示当前时间
         }
 
         private void 关于ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AboutBox1 ab = new AboutBox1();
-            ab.ShowDialog();
         }
     }
 }

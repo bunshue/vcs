@@ -74,9 +74,20 @@ namespace vcs_Keyboard5
 
         private void keyboard2_Load(object sender, EventArgs e)
         {
-            this.Size = new Size(660, 230);
-            this.BackColor = Color.Pink;
+            show_item_location();
+
             setup_keyboard();
+        }
+
+        void show_item_location()
+        {
+            this.Size = new Size(660, 230);
+            this.Text = "vcs_Keyboard5";
+            this.BackColor = Color.Pink;
+
+            //設定執行後的表單起始位置, 正中央
+            //this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         void setup_keyboard()

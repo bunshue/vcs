@@ -41,6 +41,10 @@
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.系统信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tsslEinfo = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsslTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTime = new System.Windows.Forms.Label();
@@ -59,11 +63,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.tsslEinfo = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tsslTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -79,7 +80,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(533, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1004, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -90,27 +91,27 @@
             this.考勤结束ToolStripMenuItem,
             this.退出系统ToolStripMenuItem});
             this.文件FToolStripMenuItem.Name = "文件FToolStripMenuItem";
-            this.文件FToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.文件FToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.文件FToolStripMenuItem.Text = "文件(&F)";
             // 
             // 开始考勤ToolStripMenuItem
             // 
             this.开始考勤ToolStripMenuItem.Name = "开始考勤ToolStripMenuItem";
-            this.开始考勤ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.开始考勤ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.开始考勤ToolStripMenuItem.Text = "开始考勤";
             this.开始考勤ToolStripMenuItem.Click += new System.EventHandler(this.开始考勤ToolStripMenuItem_Click);
             // 
             // 考勤结束ToolStripMenuItem
             // 
             this.考勤结束ToolStripMenuItem.Name = "考勤结束ToolStripMenuItem";
-            this.考勤结束ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.考勤结束ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.考勤结束ToolStripMenuItem.Text = "考勤结束";
             this.考勤结束ToolStripMenuItem.Click += new System.EventHandler(this.考勤结束ToolStripMenuItem_Click);
             // 
             // 退出系统ToolStripMenuItem
             // 
             this.退出系统ToolStripMenuItem.Name = "退出系统ToolStripMenuItem";
-            this.退出系统ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.退出系统ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.退出系统ToolStripMenuItem.Text = "退出系统";
             this.退出系统ToolStripMenuItem.Click += new System.EventHandler(this.退出系统ToolStripMenuItem_Click);
             // 
@@ -120,20 +121,20 @@
             this.添加员工ToolStripMenuItem,
             this.考勤记录ToolStripMenuItem});
             this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
-            this.设置ToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.设置ToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.设置ToolStripMenuItem.Text = "设置(&S)";
             // 
             // 添加员工ToolStripMenuItem
             // 
             this.添加员工ToolStripMenuItem.Name = "添加员工ToolStripMenuItem";
-            this.添加员工ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.添加员工ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.添加员工ToolStripMenuItem.Text = "员工设置";
             this.添加员工ToolStripMenuItem.Click += new System.EventHandler(this.添加员工ToolStripMenuItem_Click);
             // 
             // 考勤记录ToolStripMenuItem
             // 
             this.考勤记录ToolStripMenuItem.Name = "考勤记录ToolStripMenuItem";
-            this.考勤记录ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.考勤记录ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.考勤记录ToolStripMenuItem.Text = "考勤记录";
             this.考勤记录ToolStripMenuItem.Click += new System.EventHandler(this.考勤记录ToolStripMenuItem_Click);
             // 
@@ -143,20 +144,20 @@
             this.关于ToolStripMenuItem,
             this.系统信息ToolStripMenuItem});
             this.帮助HToolStripMenuItem.Name = "帮助HToolStripMenuItem";
-            this.帮助HToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.帮助HToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.帮助HToolStripMenuItem.Text = "帮助(&H)";
             // 
             // 关于ToolStripMenuItem
             // 
             this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
-            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.关于ToolStripMenuItem.Text = "关于";
             this.关于ToolStripMenuItem.Click += new System.EventHandler(this.关于ToolStripMenuItem_Click);
             // 
             // 系统信息ToolStripMenuItem
             // 
             this.系统信息ToolStripMenuItem.Name = "系统信息ToolStripMenuItem";
-            this.系统信息ToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.系统信息ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.系统信息ToolStripMenuItem.Text = "系统信息";
             this.系统信息ToolStripMenuItem.Click += new System.EventHandler(this.系统信息ToolStripMenuItem_Click);
             // 
@@ -167,11 +168,41 @@
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel3,
             this.tsslTime});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 303);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 518);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(533, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1004, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // tsslEinfo
+            // 
+            this.tsslEinfo.AutoSize = false;
+            this.tsslEinfo.BackColor = System.Drawing.Color.Transparent;
+            this.tsslEinfo.Name = "tsslEinfo";
+            this.tsslEinfo.Size = new System.Drawing.Size(160, 17);
+            this.tsslEinfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.AutoSize = false;
+            this.toolStripStatusLabel2.BackColor = System.Drawing.Color.Transparent;
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(200, 17);
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.BackColor = System.Drawing.Color.Transparent;
+            this.toolStripStatusLabel3.ForeColor = System.Drawing.SystemColors.ButtonShadow;
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel3.Text = "|";
+            // 
+            // tsslTime
+            // 
+            this.tsslTime.BackColor = System.Drawing.Color.Transparent;
+            this.tsslTime.Name = "tsslTime";
+            this.tsslTime.Size = new System.Drawing.Size(128, 17);
+            this.tsslTime.Text = "toolStripStatusLabel4";
             // 
             // timer1
             // 
@@ -184,7 +215,6 @@
             this.panel1.Controls.Add(this.lblTime);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(533, 279);
@@ -241,7 +271,7 @@
             this.txtFolk.Location = new System.Drawing.Point(75, 93);
             this.txtFolk.Name = "txtFolk";
             this.txtFolk.ReadOnly = true;
-            this.txtFolk.Size = new System.Drawing.Size(129, 21);
+            this.txtFolk.Size = new System.Drawing.Size(129, 22);
             this.txtFolk.TabIndex = 12;
             // 
             // txtSex
@@ -250,7 +280,7 @@
             this.txtSex.Location = new System.Drawing.Point(75, 57);
             this.txtSex.Name = "txtSex";
             this.txtSex.ReadOnly = true;
-            this.txtSex.Size = new System.Drawing.Size(129, 21);
+            this.txtSex.Size = new System.Drawing.Size(129, 22);
             this.txtSex.TabIndex = 11;
             // 
             // label6
@@ -268,7 +298,7 @@
             this.txtDept.Location = new System.Drawing.Point(268, 93);
             this.txtDept.Name = "txtDept";
             this.txtDept.ReadOnly = true;
-            this.txtDept.Size = new System.Drawing.Size(129, 21);
+            this.txtDept.Size = new System.Drawing.Size(129, 22);
             this.txtDept.TabIndex = 9;
             // 
             // label5
@@ -286,7 +316,7 @@
             this.txtJob.Location = new System.Drawing.Point(268, 57);
             this.txtJob.Name = "txtJob";
             this.txtJob.ReadOnly = true;
-            this.txtJob.Size = new System.Drawing.Size(129, 21);
+            this.txtJob.Size = new System.Drawing.Size(129, 22);
             this.txtJob.TabIndex = 7;
             // 
             // label4
@@ -313,7 +343,7 @@
             this.txtICCard.Location = new System.Drawing.Point(75, 22);
             this.txtICCard.Name = "txtICCard";
             this.txtICCard.ReadOnly = true;
-            this.txtICCard.Size = new System.Drawing.Size(129, 21);
+            this.txtICCard.Size = new System.Drawing.Size(129, 22);
             this.txtICCard.TabIndex = 1;
             // 
             // txtName
@@ -322,7 +352,7 @@
             this.txtName.Location = new System.Drawing.Point(268, 22);
             this.txtName.Name = "txtName";
             this.txtName.ReadOnly = true;
-            this.txtName.Size = new System.Drawing.Size(129, 21);
+            this.txtName.Size = new System.Drawing.Size(129, 22);
             this.txtName.TabIndex = 3;
             // 
             // label2
@@ -348,49 +378,27 @@
             this.timer2.Interval = 1000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
-            // tsslEinfo
-            // 
-            this.tsslEinfo.AutoSize = false;
-            this.tsslEinfo.BackColor = System.Drawing.Color.Transparent;
-            this.tsslEinfo.Name = "tsslEinfo";
-            this.tsslEinfo.Size = new System.Drawing.Size(160, 17);
-            this.tsslEinfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // toolStripStatusLabel2
-            // 
-            this.toolStripStatusLabel2.AutoSize = false;
-            this.toolStripStatusLabel2.BackColor = System.Drawing.Color.Transparent;
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(200, 17);
-            // 
-            // toolStripStatusLabel3
-            // 
-            this.toolStripStatusLabel3.BackColor = System.Drawing.Color.Transparent;
-            this.toolStripStatusLabel3.ForeColor = System.Drawing.SystemColors.ButtonShadow;
-            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(11, 17);
-            this.toolStripStatusLabel3.Text = "|";
-            // 
-            // tsslTime
-            // 
-            this.tsslTime.BackColor = System.Drawing.Color.Transparent;
-            this.tsslTime.Name = "tsslTime";
-            this.tsslTime.Size = new System.Drawing.Size(131, 17);
-            this.tsslTime.Text = "toolStripStatusLabel4";
-            // 
             // timer3
             // 
             this.timer3.Enabled = true;
             this.timer3.Interval = 1000;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(556, 24);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(436, 480);
+            this.richTextBox1.TabIndex = 3;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.BackgroundImage = global::CorporationEmployeeICCard.Properties.Resources.IC_card;
-            this.ClientSize = new System.Drawing.Size(533, 325);
+            this.ClientSize = new System.Drawing.Size(1004, 540);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -451,6 +459,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel tsslTime;
         private System.Windows.Forms.Timer timer3;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

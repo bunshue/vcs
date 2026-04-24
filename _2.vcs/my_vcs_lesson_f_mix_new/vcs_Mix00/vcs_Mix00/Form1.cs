@@ -198,6 +198,10 @@ namespace vcs_Mix00
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            richTextBox1.Text += "開啟 系統信息 表單\n";
+
+            System.Diagnostics.Process.Start("MSINFO32.EXE");
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -923,6 +927,12 @@ namespace vcs_Mix00
 
         private void button21_Click(object sender, EventArgs e)
         {
+            //開啟 關於 表單
+
+            richTextBox1.Text += "開啟 關於 表單\n";
+
+            AboutBox1 ab = new AboutBox1();
+            ab.ShowDialog();
         }
 
         private void button22_Click(object sender, EventArgs e)

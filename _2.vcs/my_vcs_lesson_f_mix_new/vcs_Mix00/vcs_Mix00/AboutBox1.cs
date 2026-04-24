@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace CorporationEmployeeICCard
+namespace vcs_Mix00
 {
     partial class AboutBox1 : Form
     {

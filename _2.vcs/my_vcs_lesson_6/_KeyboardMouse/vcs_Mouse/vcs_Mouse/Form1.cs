@@ -23,7 +23,19 @@ namespace vcs_Mouse
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             this.MouseWheel += new MouseEventHandler(label_Zoom);
+        }
+
+        void show_item_location()
+        {
+            this.Size = new Size(921, 647);
+            this.Text = "vcs_Mouse";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void label_Zoom(object sender, MouseEventArgs e)
@@ -189,11 +201,6 @@ namespace vcs_Mouse
             Screen[] screens = Screen.AllScreens;
             this.Cursor = new Cursor(Cursor.Current.Handle);
             Cursor.Clip = screens[0].Bounds;
-
         }
-
-
-
-
     }
 }

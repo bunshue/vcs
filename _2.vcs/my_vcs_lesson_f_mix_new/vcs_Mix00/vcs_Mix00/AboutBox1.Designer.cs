@@ -1,4 +1,4 @@
-﻿namespace CorporationEmployeeICCard
+﻿namespace vcs_Mix00
 {
     partial class AboutBox1
     {

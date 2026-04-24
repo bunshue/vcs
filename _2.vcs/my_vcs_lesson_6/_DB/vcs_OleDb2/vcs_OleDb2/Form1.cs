@@ -826,7 +826,7 @@ namespace vcs_OleDb2
             // 資料庫檔案
             string db_filename = "DBMS1.mdb";
             // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);
+            //string cnstr = string.Format(db_cnstr, db_filename);
 
             //這樣會列出所有 實際的資料表（不包含檢視表）
 

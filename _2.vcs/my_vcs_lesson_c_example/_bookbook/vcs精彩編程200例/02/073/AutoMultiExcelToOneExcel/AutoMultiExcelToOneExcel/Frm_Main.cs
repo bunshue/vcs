@@ -79,9 +79,13 @@ namespace AutoMultiExcelToOneExcel
         private void Frm_Main_Load(object sender, EventArgs e)
         {
             txt_MultiExcel.Text = ReadString("Set", "MultiExcel", "", M_str_Name);//读取默认的多个Excel文件
+
             txt_Excel.Text = ReadString("Set", "Excel", "", M_str_Name);//读取目标Excel文件
+
             nudown_Hour.Value = Convert.ToInt32(ReadString("Set", "Hour", "", M_str_Name));//读取小时
+
             nudown_Min.Value = Convert.ToInt32(ReadString("Set", "Min", "", M_str_Name));//读取分钟
+
             timer1.Start();//启动计时器
         }
 
@@ -126,6 +130,7 @@ namespace AutoMultiExcelToOneExcel
             string[] P_str_Names = txt_MultiExcel.Text.Split(',');//存储所有选择的Excel文件名
             string P_str_Name = "";//存储遍历到的Excel文件名
             List<string> P_list_SheetNames = new List<string>();//实例化泛型集合对象，用来存储工作表名称
+            /*
             Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();//实例化Excel对象
             //打开指定的Excel文件
             Microsoft.Office.Interop.Excel.Workbook workbook = excel.Application.Workbooks.Open(txt_Excel.Text, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing);
@@ -151,6 +156,7 @@ namespace AutoMultiExcelToOneExcel
             workbook.Close(false, missing, missing);//关闭目标工作簿
             MessageBox.Show("程序在" + DateTime.Now.ToShortTimeString() + "分时自动汇总了多个Excel文件！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             CloseProcess("EXCEL");//关闭所有Excel进程
+            */
         }
 
         private void btn_Browse_Click(object sender, EventArgs e)
