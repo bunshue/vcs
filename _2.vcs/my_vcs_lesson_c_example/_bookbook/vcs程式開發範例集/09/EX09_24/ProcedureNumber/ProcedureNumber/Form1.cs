@@ -41,23 +41,7 @@ namespace ProcedureNumber
 
         private void textBox3_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-                int x = Int32.Parse(textBox3.Text);
 
-                if (x < 60 && x > 20)
-                {
-                    errorage.SetError(this.textBox3, "");
-                }
-                else
-                {
-                    errorage.SetError(this.textBox3, "數值應在20-60之間");
-                }
-            }
-            catch
-            {
-                errorage.SetError(this.textBox3, "應為整數");
-            }
         }
 
         private void button1_Click(object sender, EventArgs e)

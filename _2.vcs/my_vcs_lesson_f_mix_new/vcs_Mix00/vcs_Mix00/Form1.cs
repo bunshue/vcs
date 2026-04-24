@@ -199,9 +199,83 @@ namespace vcs_Mix00
         {
             show_button_text(sender);
 
-            richTextBox1.Text += "開啟 系統信息 表單\n";
+            /*
+            richTextBox1.Text += "開啟 系統資訊 設定\n";
+            Process.Start("MSINFO32.EXE");
 
-            System.Diagnostics.Process.Start("MSINFO32.EXE");
+            richTextBox1.Text += "開啟 顯示器 設定\n";
+            Process.Start("desk.cpl");
+            */
+            richTextBox1.Text += "開啟 滑鼠 設定\n";
+            //Process.Start("main.cpl");
+
+
+            richTextBox1.Text += "開啟 網路連線 設定\n";
+            //Process.Start("ncpa.cpl");
+
+
+            richTextBox1.Text += "開啟 聲音 設定\n";
+            //Process.Start("mmsys.cpl");
+
+            richTextBox1.Text += "開啟 寄信程式\n";
+            //Process.Start("mailto:david@insighteyes.com");
+
+
+            //NG
+            //Process.Start(Environment.SystemDirectory + "/osk.exe");
+            //NG
+            //Process.Start("osk.exe");
+
+            richTextBox1.Text += "開啟 控制台\n";
+            //Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL");
+
+            richTextBox1.Text += "用預設程式開啟檔案\n";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            //Process.Start("explorer.exe", filename);
+
+            richTextBox1.Text += "開啟 小畫家\n";
+            //Process.Start("mspaint.exe");
+
+
+            richTextBox1.Text += "開啟 WordPad\n";
+            //Process.Start("write.exe");
+
+            richTextBox1.Text += "開啟 Windows Media Player\n";
+            //Process.Start("dvdplay.exe");
+
+            richTextBox1.Text += "開啟 Windows 版本宣告\n";
+            //Process.Start("winver.exe");
+
+            richTextBox1.Text += "開啟 CMD\n";
+            //Process.Start("cmd.exe");
+
+            richTextBox1.Text += "開啟 檔案總管 D槽\n";
+            //Process.Start("d:");
+
+            richTextBox1.Text += "開啟 登錄編輯程式 regedit\n";
+            //Process.Start("regedit.exe");
+
+            richTextBox1.Text += "開啟 Windows Media Player\n";
+            //Process.Start("mplayer2.exe");
+
+            richTextBox1.Text += "開啟 檔案總管\n";
+            //Process.Start("explorer.exe");
+
+            richTextBox1.Text += "開啟 工作管理員\n";
+            //Process.Start("taskmgr.exe");
+
+            richTextBox1.Text += "開啟 事件檢視器\n";
+            //Process.Start("eventvwr.exe");
+
+            //NG
+            //Process.Start("winmsd.exe");
+
+            //NG
+            //Process.Start("ntbackup.exe");
+
+            richTextBox1.Text += "開啟 Chrome 指定網頁\n";
+            filename = @"D:\_git\vcs\_1.data\_html\朱冶蕙老師的電腦教室.html";
+            //Process.Start("chrome.exe", filename);
         }
 
         private void button2_Click(object sender, EventArgs e)

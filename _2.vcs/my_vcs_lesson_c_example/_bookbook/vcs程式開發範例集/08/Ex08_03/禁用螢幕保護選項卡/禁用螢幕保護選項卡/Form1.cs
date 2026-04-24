@@ -36,6 +36,7 @@ namespace 禁用螢幕保護選項卡
 
         private void button2_Click(object sender, EventArgs e)
         {
+        //開啟顯示器設定
             System.Diagnostics.Process.Start("desk.cpl");
         }
 

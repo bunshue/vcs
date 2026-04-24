@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -42,11 +41,9 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.errorage = new System.Windows.Forms.ErrorProvider(this.components);
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button3 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.errorage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -134,7 +131,6 @@
             // 
             // textBox3
             // 
-            this.errorage.SetIconPadding(this.textBox3, 4);
             this.textBox3.Location = new System.Drawing.Point(65, 59);
             this.textBox3.MaxLength = 3;
             this.textBox3.Name = "textBox3";
@@ -166,10 +162,6 @@
             this.label7.Size = new System.Drawing.Size(77, 12);
             this.label7.TabIndex = 14;
             this.label7.Text = "員工個人訊息";
-            // 
-            // errorage
-            // 
-            this.errorage.ContainerControl = this;
             // 
             // richTextBox1
             // 
@@ -222,7 +214,6 @@
             this.Name = "Form1";
             this.Text = "判斷輸入數據是否符合要求";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.errorage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -241,7 +232,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.ErrorProvider errorage;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.TextBox textBox4;
