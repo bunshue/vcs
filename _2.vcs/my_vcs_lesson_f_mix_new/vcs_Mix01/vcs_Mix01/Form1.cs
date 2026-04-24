@@ -42,7 +42,7 @@ namespace vcs_Mix01
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
+
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -880,28 +880,9 @@ namespace vcs_Mix01
             show_button_text(sender);
         }
 
-        //计算两点GPS坐标距离 
-        /// <summary>
-        ///计算两点GPS坐标的距离
-        /// </summary>
-        /// <param name="n1">第一点的纬度坐标</param>
-        /// <param name="e1">第一点的经度坐标</param>
-        /// <param name="n2">第二点的纬度坐标</param>
-        /// <param name="e2">第二点的经度坐标</param>
-        /// <returns></returns>
-        public static double Distance(double n1, double e1, double n2, double e2)
-        {
-            double jl_jd = 102834.74258026089786013677476285;   // 米/度
-            double jl_wd = 111712.69150641055729984301412873;   // 米/度
-            double b = Math.Abs((e1 - e2) * jl_jd);
-            double a = Math.Abs((n1 - n2) * jl_wd);
-            return Math.Sqrt((a * a + b * b));
-        }
-
         private void button20_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            // above
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -992,17 +973,15 @@ namespace vcs_Mix01
 }
 
 //6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
+//------------------------------------------------------------
 
 //3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
 //1515
-//---------------  # 15個
-
-//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-//richTextBox1.Text += "------------------------------\n";  // 30個
 //richTextBox1.Text += "---------------\n";  // 15個
-
-
+//---------------  # 15個
 

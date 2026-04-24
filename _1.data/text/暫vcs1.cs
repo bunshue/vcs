@@ -1,40 +1,9 @@
 ﻿
-
-
-
-
-自訂格式化輸出
-
-            richTextBox1.Text += "自訂格式化輸出\n";
-            richTextBox1.Text += String.Format("{0:##,##0.00}", 8567.1) + "\n";
-            richTextBox1.Text += String.Format("{0:###0.00}", 566.7) + "\n";
-            richTextBox1.Text += String.Format("{0:0.00%}", 8) + "\n";
-
-
-
-string.Format 範例
-            string Begin = "550";
-            string end = "570";
-            sqlstr = string.Format(@"SELECT 学生姓名,性别,年龄 FROM tb_Student WHERE 学生编号 IN (SELECT 学生编号 FROM tb_Grade WHERE 总分>{0} AND 总分<{1})", Begin, end);
-            
-
-            //string.Format 範例
-            string Name = "李";
-            int Age = 2;
-            string Address = "吉林";
-            richTextBox1.Text += "Name : " + Name + "\tAge : " + Age.ToString() + "\tAddress : " + Address + "\n";
-
-            // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
-            // 查詢字串
-            sqlstr = string.Format(@"SELECT 学生姓名,年龄,性别,家庭住址 FROM tb_Student WHERE 学生姓名 LIKE '{0}%' and 年龄 LIKE '{1}%' and 家庭住址 LIKE '{2}%'", Name, Age, Address);
-
-
-
-
+使用即時運算視窗
+System.Diagnostics.Debug.WriteLine("aaaaaaaaaaaaaaaaaaaaaaa");
 
 		
-		    public class Book
+    public class Book
     {
         public string Id { get; set; }
         public string BkName { get; set; }
@@ -108,22 +77,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
-
-
-            //在RTB內貼入圖片
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Image myImage = Image.FromFile(filename);
-            Clipboard.SetImage(myImage);
-
-            DataFormats.Format df = DataFormats.GetFormat(DataFormats.Bitmap);
-            if (richTextBox1.CanPaste(df))
-            {
-                richTextBox1.Paste(df);
-            }
-
-
 
             //RTB的操作 貼上
             richTextBox2.Paste();
@@ -2099,12 +2052,6 @@ public Image image_processing19(string filename, int x, int y, int R, float bett
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-String.Format("{0，–10}",text)
-//要将字符串向左对齐使用负数，正对齐使用正数，里面的值为当前所占字符的格子。例如:
-
-String aaa = String.Format("{0,-30} | {1,-20} | {2,5}", "a", "b", 3);
-String bbb = String.Format("{0,-30} | {1,-20} | {2,5}", "aaaaaaaaaaaaaaaaaaaaaaaa", "b", 3);
-String ccc = String.Format("{0,-30} | {1,-20} | {2,5}", "aaaa", "b", 3);
 
 
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -2647,7 +2594,7 @@ private const string mapurl = "http://maps.google.com/mapdata?latitude_e6={0}&lo
 
 string.Format(mapurl, this.Latitude, this.Longitude, this.Zoom, this.Width.Value, this.Height.Value)
 			
-			url : http://maps.google.com/mapdata?latitude_e6=100&longitude_e6=123&zm=200&w=640&h=480&cc=&min_priority=2
+url : http://maps.google.com/mapdata?latitude_e6=100&longitude_e6=123&zm=200&w=640&h=480&cc=&min_priority=2
 
 ------------------------------------------------------------
 ------------------------------------------------------------

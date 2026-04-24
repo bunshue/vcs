@@ -35,16 +35,11 @@ namespace vcs_GeoCoordinate
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 12;
-            y_st = 12;
-            dx = 110;
-            dy = 48;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -58,7 +53,18 @@ namespace vcs_GeoCoordinate
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
+            groupBox1.Size = new Size(480, 170);
+            groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            richTextBox1.Size = new Size(300, 690);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1200, 750);
+            this.Text = "vcs_GeoCoordinate";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -497,10 +503,34 @@ namespace vcs_GeoCoordinate
 
         }
 
+        //------------------------------------------------------------  # 60個
+
+        //计算两点GPS坐标距离 
+        /// <param name="n1">第一点的纬度坐标</param>
+        /// <param name="e1">第一点的经度坐标</param>
+        /// <param name="n2">第二点的纬度坐标</param>
+        /// <param name="e2">第二点的经度坐标</param>
+        public static double Distance(double n1, double e1, double n2, double e2)
+        {
+            double jl_jd = 102834.74258026089786013677476285;   // 米/度
+            double jl_wd = 111712.69150641055729984301412873;   // 米/度
+            double b = Math.Abs((e1 - e2) * jl_jd);
+            double a = Math.Abs((n1 - n2) * jl_wd);
+            return Math.Sqrt((a * a + b * b));
+        }
+
         private void button6_Click(object sender, EventArgs e)
         {
+            //計算兩點GPS座標距離
+            //台北車站	25.047778, 121.517033 
+            //新竹車站	24.801604, 120.971655
 
+            //double distanceInKm = Distance(緯度1, 經度1, 緯度2, 經度2);
+            double distanceInKm = Distance(25.047778, 121.517033, 24.801604, 120.971655);
+            richTextBox1.Text += "兩點距離 " + (distanceInKm / 1000).ToString() + " KM.\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button7_Click(object sender, EventArgs e)
         {
@@ -793,11 +823,25 @@ namespace vcs_GeoCoordinate
                             Math.Cos(radLat1) * Math.Cos(radLat2) * Math.Pow(Math.Sin(distLng / 2), 2)));
             dblResult = dblResult * EARTH_RADIUS;
 
-            dblResult = Math.Round(dblResult * 10000) /10000;  //這回傳變成公里,少3個0變公尺
+            dblResult = Math.Round(dblResult * 10000) / 10000;  //這回傳變成公里,少3個0變公尺
             //dblResult = Math.Round(dblResult * 10000) / 10; //公尺
 
             return dblResult;
         }
     }
-
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//richTextBox1.Text += "---------------\n";  // 15個
+//---------------  # 15個
+
+

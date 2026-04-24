@@ -60,9 +60,9 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.Location = new System.Drawing.Point(12, 60);
+            this.button1.Location = new System.Drawing.Point(12, 73);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(217, 42);
+            this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 0;
             this.button1.Text = "計算兩點距離2";
             this.button1.UseVisualStyleBackColor = true;
@@ -71,9 +71,9 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(721, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(235, 216);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(494, 585);
+            this.richTextBox1.Size = new System.Drawing.Size(300, 250);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "1. 加入參考.NET System.Device.dll.\n2. 加 using System.Device.Location;\n\nAssembly:  Sys" +
                 "tem.Device (in System.Device.dll)\nNamespace:   System.Device.Location\n";
@@ -81,9 +81,9 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.Location = new System.Drawing.Point(12, 108);
+            this.button2.Location = new System.Drawing.Point(12, 135);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(217, 42);
+            this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 2;
             this.button2.Text = "計算兩點距離3";
             this.button2.UseVisualStyleBackColor = true;
@@ -92,9 +92,9 @@
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button3.Location = new System.Drawing.Point(12, 156);
+            this.button3.Location = new System.Drawing.Point(12, 197);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(217, 42);
+            this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 3;
             this.button3.Text = "算方位 與 距離";
             this.button3.UseVisualStyleBackColor = true;
@@ -103,9 +103,9 @@
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button4.Location = new System.Drawing.Point(12, 204);
+            this.button4.Location = new System.Drawing.Point(12, 258);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(217, 42);
+            this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 4;
             this.button4.Text = "取得目前的GPS座標";
             this.button4.UseVisualStyleBackColor = true;
@@ -114,9 +114,9 @@
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button5.Location = new System.Drawing.Point(12, 252);
+            this.button5.Location = new System.Drawing.Point(12, 320);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(217, 42);
+            this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 5;
             this.button5.Text = "GPS定位，经纬度附近地点查询–C#实现方法";
             this.button5.UseVisualStyleBackColor = true;
@@ -125,20 +125,20 @@
             // button6
             // 
             this.button6.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button6.Location = new System.Drawing.Point(12, 300);
+            this.button6.Location = new System.Drawing.Point(12, 381);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(217, 42);
+            this.button6.Size = new System.Drawing.Size(200, 60);
             this.button6.TabIndex = 6;
-            this.button6.Text = "xxx";
+            this.button6.Text = "計算兩點GPS座標距離";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button7
             // 
             this.button7.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button7.Location = new System.Drawing.Point(12, 352);
+            this.button7.Location = new System.Drawing.Point(12, 442);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(217, 42);
+            this.button7.Size = new System.Drawing.Size(200, 60);
             this.button7.TabIndex = 7;
             this.button7.Text = "xxx";
             this.button7.UseVisualStyleBackColor = true;
@@ -147,9 +147,9 @@
             // button8
             // 
             this.button8.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button8.Location = new System.Drawing.Point(12, 400);
+            this.button8.Location = new System.Drawing.Point(12, 504);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(217, 42);
+            this.button8.Size = new System.Drawing.Size(200, 60);
             this.button8.TabIndex = 8;
             this.button8.Text = "xxx";
             this.button8.UseVisualStyleBackColor = true;
@@ -158,9 +158,9 @@
             // button9
             // 
             this.button9.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button9.Location = new System.Drawing.Point(12, 448);
+            this.button9.Location = new System.Drawing.Point(12, 566);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(217, 42);
+            this.button9.Size = new System.Drawing.Size(200, 60);
             this.button9.TabIndex = 9;
             this.button9.Text = "xxx";
             this.button9.UseVisualStyleBackColor = true;
@@ -169,9 +169,9 @@
             // button0
             // 
             this.button0.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button0.Location = new System.Drawing.Point(12, 12);
+            this.button0.Location = new System.Drawing.Point(10, 10);
             this.button0.Name = "button0";
-            this.button0.Size = new System.Drawing.Size(217, 42);
+            this.button0.Size = new System.Drawing.Size(200, 60);
             this.button0.TabIndex = 25;
             this.button0.Text = "計算兩點距離1";
             this.button0.UseVisualStyleBackColor = true;
@@ -180,7 +180,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(1111, 555);
+            this.bt_clear.Location = new System.Drawing.Point(346, 381);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(74, 42);
             this.bt_clear.TabIndex = 26;
@@ -337,7 +337,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1227, 609);
+            this.ClientSize = new System.Drawing.Size(777, 637);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button0);

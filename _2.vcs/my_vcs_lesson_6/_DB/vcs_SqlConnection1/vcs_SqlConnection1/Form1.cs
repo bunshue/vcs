@@ -1607,6 +1607,16 @@ namespace vcs_SqlConnection1
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "十二生肖全部資料";
 
+            // 測試基礎聚合函式(Aggregate Functions), 最大值MAX、最小值MIN、平均值AVG、總和SUM、數數COUNT
+            // 查詢字串
+            sqlstr = "SELECT * FROM animals1_table";
+            sqlstr = "SELECT COUNT(*) AS order_cnt, SUM(體重) AS gmv, ROUND(AVG(體重), 2) AS avg_order_value, MAX(體重) AS max_order, MIN(體重) AS min_order FROM animals1_table";
+
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+            lb_dgv2.Text = "十二生肖全部資料";
+
+            return;
+
 
             //查詢操作列長度
 
@@ -2236,6 +2246,7 @@ namespace vcs_SqlConnection1
         string[,] sqlcmd = new string[,]
         {
             //idx  /  資料庫檔案  /  查詢字串1  /  說明1 /  查詢字串2  /  說明2/  查詢字串3  /  說明3
+            /*
             { "1", "animals1_db.mdf", "SELECT * FROM animals1_table", "十二生肖全部資料", "", "", "", ""},
             { "2", "db_09_Data.mdf",
                 "SELECT * FROM 員工表", "", "", "", "", ""},
@@ -2281,8 +2292,9 @@ namespace vcs_SqlConnection1
             { "27", "db_TomeTwo.mdf", "SELECT * FROM tb_Student", "tb_Student 的 所有資料", "SELECT * FROM tb_Grade", "tb_Grade 的 所有資料", "SELECT 学生姓名,性别,年龄 FROM tb_Student WHERE 学生编号 IN (SELECT 学生编号 FROM tb_Grade WHERE 总分>550 AND 总分<570)", "使用IN引入子查詢限定查詢範圍, 查詢學生總分在 550 ~ 570 之間, 查 tb_Student 的 資料, 由 tb_Grade 總分在 500 ~ 600 之間"},
             { "28", "db_TomeOne.mdf", "SELECT * FROM tb_product", "全部資料 tb_product 兩欄 t_Name t_Num", "SELECT SUM(t_Num) FROM tb_product", "將 t_Num 加總", "SELECT t_Name, SUM(t_Num) AS Num FROM tb_product GROUP BY t_Name", "將 t_Name 同項合併"},
             { "29", "db_10_Data.MDF", "SELECT * FROM tb_kf WHERE 房態='空房 '", "查詢空閒客房訊息", "SELECT * FROM tb_kf WHERE 房態='入住'", "查詢使用客房訊息", "SELECT * FROM tb_kf WHERE 房態='空房 ' AND NOT(價格 between 80 and 150 )", "NOT與謂詞進行組合條件的查詢, 查詢空閒客房而且客房價格不在８０-１５０之間的客房訊息"},
+            */
             { "30", "db_TomeTwo.mdf", "SELECT * FROM tb_Book", "全部資料 tb_Book", "SELECT COUNT(书号)AS 记录条数, 书号,书名,作者 FROM tb_Book GROUP BY 书号,书名,作者 HAVING COUNT(书号)>1", "查询已销售图书情况, 列出数据中的重复记录和记录条数", "", ""},
-            { "31", "", "", "", "", "", "", ""},
+            { "31", "db_13.mdf", "SELECT * FROM tb_Rectangle", "全部資料", "SELECT SUM(t_Num) FROM tb_Rectangle", "水果出售情況統計表", "", ""},
             { "32", "", "", "", "", "", "", ""},
             { "33", "", "", "", "", "", "", ""},
             { "34", "", "", "", "", "", "", ""},
