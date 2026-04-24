@@ -45,6 +45,7 @@
             this.chart1 = new AForge.Controls.Chart();
             this.listView1 = new System.Windows.Forms.ListView();
             this.chart2 = new AForge.Controls.Chart();
+            this.cellWorld1 = new vcs_AForgeTest1.CellWorld();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -105,6 +106,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 134;
+            this.button2.Text = "map";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -205,11 +207,22 @@
             this.chart2.TabIndex = 148;
             this.chart2.Text = "chart2";
             // 
+            // cellWorld1
+            // 
+            this.cellWorld1.Coloring = null;
+            this.cellWorld1.Location = new System.Drawing.Point(228, 223);
+            this.cellWorld1.Map = null;
+            this.cellWorld1.Name = "cellWorld1";
+            this.cellWorld1.Size = new System.Drawing.Size(100, 100);
+            this.cellWorld1.TabIndex = 149;
+            this.cellWorld1.Text = "cellWorld1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(711, 643);
+            this.Controls.Add(this.cellWorld1);
             this.Controls.Add(this.chart2);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.chart1);
@@ -252,6 +265,7 @@
         private AForge.Controls.Chart chart1;
         private System.Windows.Forms.ListView listView1;
         private AForge.Controls.Chart chart2;
+        private CellWorld cellWorld1;
     }
 }
 

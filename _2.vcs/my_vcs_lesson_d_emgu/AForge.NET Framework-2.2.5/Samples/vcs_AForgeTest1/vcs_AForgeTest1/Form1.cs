@@ -20,6 +20,18 @@ namespace vcs_AForgeTest1
         private double[,] data = null;
         private UserFunction userFunction = new UserFunction();
 
+        // map and its dimension
+        private int[,] map = null;
+        private int[,] mapToDisplay = null;
+        private int mapWidth;
+        private int mapHeight;
+
+        // agent' start and stop position
+        private int agentStartX;
+        private int agentStartY;
+        private int agentStopX;
+        private int agentStopY;
+
         public Form1()
         {
             InitializeComponent();
@@ -51,6 +63,10 @@ namespace vcs_AForgeTest1
             ch2.Text = "Y";
             ch2.Width = 100;
             listView1.Columns.Add(ch2);
+
+
+            // set world colors
+            cellWorld1.Coloring = new Color[] { Color.White, Color.Green, Color.Black, Color.Red };
         }
 
         private void show_item_location()
@@ -79,6 +95,8 @@ namespace vcs_AForgeTest1
             chart1.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 5);
             chart2.Size = new Size(400, 200);
             chart2.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 8);
+            cellWorld1.Size = new Size(200, 200);
+            cellWorld1.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 11);
 
             pictureBox1.Size = new Size(100, 100);
             pictureBox1.Location = new System.Drawing.Point(x_st + dx * 3, y_st + dy * 0);
@@ -220,7 +238,119 @@ namespace vcs_AForgeTest1
 
         private void button2_Click(object sender, EventArgs e)
         {
+            string map_filename1 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\AForge.NET Framework-2.2.5\Samples\vcs_AForgeTest1\vcs_AForgeTest1\data\sample1.map";
+            string map_filename2 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\AForge.NET Framework-2.2.5\Samples\vcs_AForgeTest1\vcs_AForgeTest1\data\sample2.map";
+            string map_filename3 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\AForge.NET Framework-2.2.5\Samples\vcs_AForgeTest1\vcs_AForgeTest1\data\test1.map";
+            string map_filename4 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\AForge.NET Framework-2.2.5\Samples\vcs_AForgeTest1\vcs_AForgeTest1\data\test2.map";
+            string map_filename5 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\AForge.NET Framework-2.2.5\Samples\vcs_AForgeTest1\vcs_AForgeTest1\data\test3.map";
+
+            StreamReader reader = null;
+
+            try
+            {
+                // open selected file
+                reader = File.OpenText(map_filename1);
+                string str = null;
+                // line counter
+                int lines = 0;
+                int j = 0;
+
+                // read the file
+                while ((str = reader.ReadLine()) != null)
+                {
+                    str = str.Trim();
+
+                    // skip comments and empty lines
+                    if ((str == string.Empty) || (str[0] == ';') || (str[0] == '\0'))
+                    {
+                        continue;
+                    }
+
+                    // split the string
+                    string[] strs = str.Split(' ');
+
+                    // check the line
+                    if (lines == 0)
+                    {
+                        // get world size
+                        mapWidth = int.Parse(strs[0]);
+                        mapHeight = int.Parse(strs[1]);
+                        map = new int[mapHeight, mapWidth];
+                    }
+                    else if (lines == 1)
+                    {
+                        // get agents count
+                        if (int.Parse(strs[0]) != 1)
+                        {
+                            MessageBox.Show("The application supports only 1 agent in the worlds", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        }
+                    }
+                    else if (lines == 2)
+                    {
+                        // agent position
+                        agentStartX = int.Parse(strs[0]);
+                        agentStartY = int.Parse(strs[1]);
+                        agentStopX = int.Parse(strs[2]);
+                        agentStopY = int.Parse(strs[3]);
+
+                        // check position
+                        if (
+                            (agentStartX < 0) || (agentStartX >= mapWidth) ||
+                            (agentStartY < 0) || (agentStartY >= mapHeight) ||
+                            (agentStopX < 0) || (agentStopX >= mapWidth) ||
+                            (agentStopY < 0) || (agentStopY >= mapHeight)
+                            )
+                        {
+                            MessageBox.Show("Agent's start and stop coordinates should be inside the world area ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        }
+                    }
+                    else if (lines > 2)
+                    {
+                        // map lines
+                        if (j < mapHeight)
+                        {
+                            for (int i = 0; i < mapWidth; i++)
+                            {
+                                map[j, i] = int.Parse(strs[i]);
+                                if (map[j, i] > 1)
+                                {
+                                    map[j, i] = 1;
+                                }
+                            }
+                            j++;
+                        }
+                    }
+                    lines++;
+                }
+
+                // set world's map
+                mapToDisplay = (int[,])map.Clone();
+                mapToDisplay[agentStartY, agentStartX] = 2;
+                mapToDisplay[agentStopY, agentStopX] = 3;
+                cellWorld1.Map = mapToDisplay;
+
+                richTextBox1.Text += "大小 : " + string.Format("{0} x {1}", mapWidth, mapHeight) + "\n";
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Failed reading the map file", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            finally
+            {
+                // close file
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+            }
+
+
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -266,9 +396,7 @@ namespace vcs_AForgeTest1
             return Math.Cos(x / 23) * Math.Sin(x / 50) + 2;
         }
     }
-
 }
-
 
 
 //6060

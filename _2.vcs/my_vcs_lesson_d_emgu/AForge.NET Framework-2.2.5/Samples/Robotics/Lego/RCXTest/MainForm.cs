@@ -2,7 +2,7 @@
 // AForge.NET framework
 // http://www.aforgenet.com/framework/
 //
-// Copyright © AForge.NET, 2006-2011
+// Copyright ?AForge.NET, 2006-2011
 // contacts@aforgenet.com
 //
 
@@ -21,7 +21,7 @@ namespace RCXTest
     public partial class MainForm : Form
     {
         // Lego RCX device
-        private RCXBrick rcx = new RCXBrick( );
+        private RCXBrick rcx = new RCXBrick();
 
         // available motors
         private static RCXBrick.Motor[] motors = new RCXBrick.Motor[] {
@@ -30,9 +30,9 @@ namespace RCXTest
         };
 
         // Constructor
-        public MainForm( )
+        public MainForm()
         {
-            InitializeComponent( );
+            InitializeComponent();
 
             soundTypeCombo.SelectedIndex = 0;
             sensorCombo.SelectedIndex = 0;
@@ -44,18 +44,18 @@ namespace RCXTest
         }
 
         // On Connect button
-        private void connectButton_Click( object sender, EventArgs e )
+        private void connectButton_Click(object sender, EventArgs e)
         {
-            if ( rcx.Connect( RCXBrick.IRTowerType.USB ) )
+            if (rcx.Connect(RCXBrick.IRTowerType.USB))
             {
-                EnableConnectionControls( true );
+                EnableConnectionControls(true);
 
-                rcx.SetTransmitterRange( true );
+                rcx.SetTransmitterRange(true);
 
                 // get version
                 string romVersion, firmwareVersion;
 
-                if ( rcx.GetVersion( out romVersion, out firmwareVersion ) )
+                if (rcx.GetVersion(out romVersion, out firmwareVersion))
                 {
                     romVersionBox.Text = romVersion;
                     firmwareVersionBox.Text = firmwareVersion;
@@ -63,27 +63,26 @@ namespace RCXTest
 
                 int power;
 
-                if ( rcx.GetBatteryPower( out power ) )
+                if (rcx.GetBatteryPower(out power))
                 {
-                    powerBox.Text = ( (double) power / 1000 ).ToString( "F3" );
+                    powerBox.Text = ((double)power / 1000).ToString("F3");
                 }
             }
             else
             {
-                MessageBox.Show( "Failed connecting to Lego RCX", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error );
+                MessageBox.Show("Failed connecting to Lego RCX", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         // On Disconnect button
-        private void disconnectButton_Click( object sender, EventArgs e )
+        private void disconnectButton_Click(object sender, EventArgs e)
         {
-            rcx.Disconnect( );
-            EnableConnectionControls( false );
+            rcx.Disconnect();
+            EnableConnectionControls(false);
         }
 
         // Enable/disable controls available on connection
-        private void EnableConnectionControls( bool enable )
+        private void EnableConnectionControls(bool enable)
         {
             connectButton.Enabled = !enable;
             disconnectButton.Enabled = enable;
@@ -98,19 +97,19 @@ namespace RCXTest
         }
 
         // Play sound
-        private void playButton_Click( object sender, EventArgs e )
+        private void playButton_Click(object sender, EventArgs e)
         {
-            rcx.PlaySound( (RCXBrick.SoundType) soundTypeCombo.SelectedIndex );
+            rcx.PlaySound((RCXBrick.SoundType)soundTypeCombo.SelectedIndex);
         }
 
         // Get value
-        private void getValueButton_Click( object sender, EventArgs e )
+        private void getValueButton_Click(object sender, EventArgs e)
         {
             short value;
 
-            if ( rcx.GetSensorValue( (RCXBrick.Sensor) sensorCombo.SelectedIndex, out value ) )
+            if (rcx.GetSensorValue((RCXBrick.Sensor)sensorCombo.SelectedIndex, out value))
             {
-                valueBox.Text = value.ToString( );
+                valueBox.Text = value.ToString();
             }
             else
             {
@@ -119,50 +118,46 @@ namespace RCXTest
         }
 
         // Clear sensor's value
-        private void clearSensorButton_Click( object sender, EventArgs e )
+        private void clearSensorButton_Click(object sender, EventArgs e)
         {
-            rcx.ClearSensor( (RCXBrick.Sensor) sensorCombo.SelectedIndex );
+            rcx.ClearSensor((RCXBrick.Sensor)sensorCombo.SelectedIndex);
         }
 
         // Set sensor's type
-        private void setSensorTypeButton_Click( object sender, EventArgs e )
+        private void setSensorTypeButton_Click(object sender, EventArgs e)
         {
-            rcx.SetSensorType( (RCXBrick.Sensor) sensorCombo.SelectedIndex,
-                (RCXBrick.SensorType) sensorTypeCombo.SelectedIndex );
+            rcx.SetSensorType((RCXBrick.Sensor)sensorCombo.SelectedIndex, (RCXBrick.SensorType)sensorTypeCombo.SelectedIndex);
         }
 
         // Set sensor's mode
-        private void setSensorModeButton_Click( object sender, EventArgs e )
+        private void setSensorModeButton_Click(object sender, EventArgs e)
         {
-            rcx.SetSensorMode( (RCXBrick.Sensor) sensorCombo.SelectedIndex,
-                (RCXBrick.SensorMode) sensorModeCombo.SelectedIndex );
+            rcx.SetSensorMode((RCXBrick.Sensor)sensorCombo.SelectedIndex, (RCXBrick.SensorMode)sensorModeCombo.SelectedIndex);
         }
 
         // Turm motor ON
-        private void motorOnButton_Click( object sender, EventArgs e )
+        private void motorOnButton_Click(object sender, EventArgs e)
         {
             // set direction
-            rcx.SetMotorDirection( motors[motorCombo.SelectedIndex],
-                directionCombo.SelectedIndex == 0 );
+            rcx.SetMotorDirection(motors[motorCombo.SelectedIndex], directionCombo.SelectedIndex == 0);
             // set power
-            rcx.SetMotorPower( motors[motorCombo.SelectedIndex],
-                (byte) powerCombo.SelectedIndex );
+            rcx.SetMotorPower(motors[motorCombo.SelectedIndex], (byte)powerCombo.SelectedIndex);
             // turm motor on
-            rcx.SetMotorOn( motors[motorCombo.SelectedIndex], true );
+            rcx.SetMotorOn(motors[motorCombo.SelectedIndex], true);
         }
 
         // Turn motor OFF
-        private void motorOffButton_Click( object sender, EventArgs e )
+        private void motorOffButton_Click(object sender, EventArgs e)
         {
-            rcx.SetMotorOn( motors[motorCombo.SelectedIndex], false );
+            rcx.SetMotorOn(motors[motorCombo.SelectedIndex], false);
         }
 
         // Turn Off Lego RCX brick
-        private void turnDeviceOffButton_Click( object sender, EventArgs e )
+        private void turnDeviceOffButton_Click(object sender, EventArgs e)
         {
-            rcx.PowerOff( );
-            rcx.Disconnect( );
-            EnableConnectionControls( false );
+            rcx.PowerOff();
+            rcx.Disconnect();
+            EnableConnectionControls(false);
         }
     }
 }

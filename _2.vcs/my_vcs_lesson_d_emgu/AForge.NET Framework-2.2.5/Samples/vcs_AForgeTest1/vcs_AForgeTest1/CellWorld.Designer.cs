@@ -1,4 +1,4 @@
-namespace Animat
+namespace vcs_AForgeTest1
 {
     partial class CellWorld
     {

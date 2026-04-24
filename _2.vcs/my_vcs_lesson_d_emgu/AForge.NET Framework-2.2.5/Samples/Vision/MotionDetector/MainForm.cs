@@ -195,8 +195,11 @@ namespace MotionDetectorSample
             {
                 Thread.Sleep(100);
             }
+
             if (videoSourcePlayer.IsRunning)
+            {
                 videoSourcePlayer.Stop();
+            }
 
             // stop timers
             timer.Stop();
@@ -206,7 +209,9 @@ namespace MotionDetectorSample
 
             // reset motion detector
             if (detector != null)
+            {
                 detector.Reset();
+            }
 
             videoSourcePlayer.BorderColor = Color.Black;
             this.Cursor = Cursors.Default;
@@ -246,7 +251,9 @@ namespace MotionDetectorSample
                     }
 
                     if (showMotionHistoryToolStripMenuItem.Checked)
+                    {
                         DrawMotionHistory(image);
+                    }
                 }
             }
         }
@@ -264,8 +271,7 @@ namespace MotionDetectorSample
             Color yellowColor = Color.FromArgb(128, 255, 255, 0);
             Color redColor = Color.FromArgb(128, 255, 0, 0);
 
-            BitmapData bitmapData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height),
-                ImageLockMode.ReadWrite, image.PixelFormat);
+            BitmapData bitmapData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadWrite, image.PixelFormat);
 
             int t1 = (int)(motionAlarmLevel * 500);
             int t2 = (int)(0.075 * 500);
@@ -275,10 +281,14 @@ namespace MotionDetectorSample
                 int motionBarLength = (int)(motionHistory[n - i] * 500);
 
                 if (motionBarLength == 0)
+                {
                     continue;
+                }
 
                 if (motionBarLength > 50)
+                {
                     motionBarLength = 50;
+                }
 
                 Drawing.Line(bitmapData,
                     new IntPoint(image.Width - i, image.Height - 1),
@@ -402,9 +412,7 @@ namespace MotionDetectorSample
 
                 if (detectionAlgorithm is TwoFramesDifferenceDetector)
                 {
-                    if (
-                        (detector.MotionProcessingAlgorithm is MotionBorderHighlighting) ||
-                        (detector.MotionProcessingAlgorithm is BlobCountingObjectsProcessing))
+                    if ((detector.MotionProcessingAlgorithm is MotionBorderHighlighting) || (detector.MotionProcessingAlgorithm is BlobCountingObjectsProcessing))
                     {
                         motionProcessingType = 1;
                         SetMotionProcessingAlgorithm(new MotionAreaHighlighting());
@@ -430,6 +438,7 @@ namespace MotionDetectorSample
                 noneToolStripMenuItem1, twoFramesDifferenceToolStripMenuItem,
                 simpleBackgroundModelingToolStripMenuItem
             };
+
             ToolStripMenuItem[] motionProcessingItems = new ToolStripMenuItem[]
             {
                 noneToolStripMenuItem2, motionAreaHighlightingToolStripMenuItem,
@@ -471,26 +480,24 @@ namespace MotionDetectorSample
                         Rectangle[] rects = form.MotionRectangles;
 
                         if (rects.Length == 0)
+                        {
                             rects = null;
+                        }
 
                         detector.MotionZones = rects;
                     }
-
                     return;
                 }
             }
 
-            MessageBox.Show("It is required to start video source and receive at least first video frame before setting motion zones.",
-                "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("It is required to start video source and receive at least first video frame before setting motion zones.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         // On opening of Tools menu
         private void toolsToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
         {
-            localVideoCaptureSettingsToolStripMenuItem.Enabled =
-                ((videoSource != null) && (videoSource is VideoCaptureDevice));
-            crossbarVideoSettingsToolStripMenuItem.Enabled =
-                ((videoSource != null) && (videoSource is VideoCaptureDevice) && (videoSource.IsRunning));
+            localVideoCaptureSettingsToolStripMenuItem.Enabled = ((videoSource != null) && (videoSource is VideoCaptureDevice));
+            crossbarVideoSettingsToolStripMenuItem.Enabled = ((videoSource != null) && (videoSource is VideoCaptureDevice) && (videoSource.IsRunning));
         }
 
         // Display properties of local capture device
