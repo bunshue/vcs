@@ -18,12 +18,7 @@ namespace EncryptDataReport
 {
     public partial class Frm_Main : Form
     {
-        public Frm_Main()
-        {
-            InitializeComponent();
-        }
-
-        #region 定义全局对象及变量
+        //#region 定义全局对象及变量
         private IPEndPoint Server;//服务器端
         private IPEndPoint Client;//客户端
         private Socket mySocket;//套接字
@@ -35,7 +30,12 @@ namespace EncryptDataReport
         int SendNum2, ReceiveNum2, DisNum2; //记录当前已发送\已接收\丢失的数据报
         int SendNum3, ReceiveNum3, DisNum3; //缓存已发送\已接收\丢失的数据报
         int port;//端口号
-        #endregion
+        //#endregion
+
+        public Frm_Main()
+        {
+            InitializeComponent();
+        }
 
         //异步接收信息
         private void StartLister(IAsyncResult IAResult)
@@ -165,7 +165,7 @@ namespace EncryptDataReport
 
         private static byte[] Keys = { 0x12, 0x34, 0x56, 0x78, 0x90, 0xAB, 0xCD, 0xEF };//密钥
 
-        #region DES加密字符串
+        //#region DES加密字符串
         ///<summary>   
         ///DES加密字符串   
         ///</summary>   
@@ -191,9 +191,9 @@ namespace EncryptDataReport
                 return str;
             }
         }
-        #endregion
+        //#endregion
 
-        #region DES解密字符串
+        //#region DES解密字符串
         ///<summary>   
         ///DES解密字符串   
         ///</summary>   
@@ -219,7 +219,6 @@ namespace EncryptDataReport
                 return str;
             }
         }
-        #endregion
+        //#endregion
     }
 }
-

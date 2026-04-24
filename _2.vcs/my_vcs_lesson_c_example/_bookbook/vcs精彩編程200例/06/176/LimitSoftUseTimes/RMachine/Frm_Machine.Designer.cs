@@ -34,6 +34,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // button2
@@ -61,7 +62,7 @@
             this.textBox2.Location = new System.Drawing.Point(61, 43);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(196, 21);
+            this.textBox2.Size = new System.Drawing.Size(196, 22);
             this.textBox2.TabIndex = 9;
             // 
             // label2
@@ -77,7 +78,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(61, 13);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(196, 21);
+            this.textBox1.Size = new System.Drawing.Size(196, 22);
             this.textBox1.TabIndex = 7;
             // 
             // label1
@@ -89,11 +90,20 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "机器码：";
             // 
-            // frmRMachine
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(288, 12);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(488, 490);
+            this.richTextBox1.TabIndex = 12;
+            this.richTextBox1.Text = "";
+            // 
+            // Frm_Machine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(272, 109);
+            this.ClientSize = new System.Drawing.Size(788, 514);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox2);
@@ -102,9 +112,10 @@
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmRMachine";
+            this.Name = "Frm_Machine";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "注册机";
+            this.Load += new System.EventHandler(this.Frm_Machine_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -118,5 +129,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

@@ -11,14 +11,16 @@ namespace SystemLock
 {
     public partial class Form3 : Form
     {
-        public Form3()
-        {
-            InitializeComponent();
-        }
         public int x;//鼠标活动区域的X坐标
         public int y;//鼠标活动区域的Y坐标
         public string infos;//挂机界面显示的信息
         public string pwd;//解锁密码
+
+        public Form3()
+        {
+            InitializeComponent();
+        }
+
         private void Form3_Load(object sender, EventArgs e)
         {
             this.TopMost = true;//设置停靠在最前端

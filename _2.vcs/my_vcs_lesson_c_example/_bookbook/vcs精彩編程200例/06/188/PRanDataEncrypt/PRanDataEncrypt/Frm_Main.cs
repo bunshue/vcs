@@ -16,6 +16,11 @@ namespace PRanDataEncrypt
             InitializeComponent();
         }
 
+        private void Frm_Main_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (textBox3.Text != "")
@@ -41,7 +46,7 @@ namespace PRanDataEncrypt
         //定义加密用户密码所用的伪随机数
         private string randStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
 
-        #region 使用伪随机数加密用户登录密码
+        //#region 使用伪随机数加密用户登录密码
         /// <summary>
         /// 使用伪随机数加密用户登录密码
         /// </summary>
@@ -65,9 +70,9 @@ namespace PRanDataEncrypt
             }
             return sb.ToString();
         }
-        #endregion
+        //#endregion
 
-        #region 解密用户登录密码
+        //#region 解密用户登录密码
         /// <summary>
         /// 解密用户登录密码
         /// </summary>
@@ -94,6 +99,6 @@ namespace PRanDataEncrypt
             }
             catch { return ""; }
         }
-        #endregion
+        //#endregion
     }
 }

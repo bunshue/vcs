@@ -6,30 +6,33 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Runtime.InteropServices;
+
 namespace EncryptDog
 {
     public partial class Form1 : Form
     {
+        string str;
+        string cn = "";
+
         public Form1()
         {
             InitializeComponent();
         }
-        string str;
-        string cn="";
+
         private void Form1_Load(object sender, EventArgs e)
         {
-
             Dog dog = new Dog(100);
-            dog.DogAddr = 0;			
-            dog.DogBytes = 10;			
+            dog.DogAddr = 0;
+            dog.DogBytes = 10;
             str = "19820112";
             for (int i = 0; i < str.Length; i++)
             {
                 dog.DogData[i] = (byte)str[i];
             }
             dog.WriteDog();
-            label1.Location = new Point(this.Width/4,30);
+            label1.Location = new Point(this.Width / 4, 30);
             label1.ForeColor = Color.White;
         }
 
@@ -37,8 +40,8 @@ namespace EncryptDog
         {
             string dogdata = "";
             Dog dog = new Dog(100);
-            dog.DogAddr = 0;			
-            dog.DogBytes = 10;			
+            dog.DogAddr = 0;
+            dog.DogBytes = 10;
             dog.ReadDog();
             if (dog.Retcode == 0)
             {
@@ -71,11 +74,11 @@ namespace EncryptDog
             cn = textBox1.Text.Trim();
         }
     }
+
     [StructLayout(LayoutKind.Sequential)]
     //这个类用于读写加密狗。
     public unsafe class Dog
     {
-
         public uint DogBytes, DogAddr;  //设置加密狗起始地址
         public byte[] DogData;          //设置数据的长度
         public uint Retcode;

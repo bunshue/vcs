@@ -171,7 +171,7 @@
             this.textBox3.Location = new System.Drawing.Point(20, 132);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(77, 21);
+            this.textBox3.Size = new System.Drawing.Size(77, 22);
             this.textBox3.TabIndex = 7;
             // 
             // label5
@@ -188,7 +188,7 @@
             this.textBox2.Location = new System.Drawing.Point(20, 86);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(77, 21);
+            this.textBox2.Size = new System.Drawing.Size(77, 22);
             this.textBox2.TabIndex = 7;
             // 
             // label4
@@ -205,7 +205,7 @@
             this.textBox1.Location = new System.Drawing.Point(20, 40);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(77, 21);
+            this.textBox1.Size = new System.Drawing.Size(77, 22);
             this.textBox1.TabIndex = 6;
             // 
             // label3
@@ -230,7 +230,7 @@
             // 
             this.textBox4.Location = new System.Drawing.Point(20, 40);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(77, 21);
+            this.textBox4.Size = new System.Drawing.Size(77, 22);
             this.textBox4.TabIndex = 0;
             this.textBox4.Text = "8888";
             // 
@@ -260,7 +260,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(555, 372);
+            this.ClientSize = new System.Drawing.Size(1011, 644);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.splitContainer1);

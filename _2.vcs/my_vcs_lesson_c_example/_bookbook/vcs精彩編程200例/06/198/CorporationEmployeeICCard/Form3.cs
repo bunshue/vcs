@@ -16,6 +16,11 @@ namespace CorporationEmployeeICCard
             InitializeComponent();
         }
 
+        private void Form3_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)//查询
         {
             //BinddataGridView方法根据选择的日期查询相应的考勤信息
@@ -44,12 +49,8 @@ namespace CorporationEmployeeICCard
                     //调用ExportData方法将数据导出到指定的文件中
                     baseClass.ExportData(dataGridView1, savePath);
                 }
-            }     
-        }
-
-        private void Form3_Load(object sender, EventArgs e)
-        {
-
+            }
         }
     }
 }
+

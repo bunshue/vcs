@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using Microsoft.Win32;
 using ClassLibrary1;
 
@@ -13,11 +14,14 @@ namespace LimitSoftUseTimes
 {
     public partial class Frm_Main : Form
     {
+        SoftReg softreg = new SoftReg();//实例化公共类对象
+
         public Frm_Main()
         {
             InitializeComponent();
         }
-        SoftReg softreg = new SoftReg();//实例化公共类对象
+
+
         private void frmMain_Load(object sender, EventArgs e)
         {
             RegistryKey retkey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey("software", true).CreateSubKey("mrwxk").CreateSubKey("mrwxk.ini");				//打开注册表项

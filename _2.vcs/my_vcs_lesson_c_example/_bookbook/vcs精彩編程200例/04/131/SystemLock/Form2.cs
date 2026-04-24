@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Diagnostics;
 
 namespace SystemLock
@@ -24,7 +25,7 @@ namespace SystemLock
         myHook h = new myHook();//实例化公共类
         private void Form2_Load(object sender, EventArgs e)
         {
-            label1.Location = new Point(x,y-50);//设置显示挂机信息的位置
+            label1.Location = new Point(x, y - 50);//设置显示挂机信息的位置
             label1.Text = infos;//显示挂机信息
             base.Opacity = 0.5;//设置挂机界面透明度
             h.InsertHook();//安装钩子

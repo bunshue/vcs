@@ -77,7 +77,7 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(70, 53);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(196, 21);
+            this.textBox2.Size = new System.Drawing.Size(196, 22);
             this.textBox2.TabIndex = 4;
             // 
             // label2
@@ -94,7 +94,7 @@
             this.textBox1.Location = new System.Drawing.Point(70, 23);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(196, 21);
+            this.textBox1.Size = new System.Drawing.Size(196, 22);
             this.textBox1.TabIndex = 2;
             // 
             // label1
@@ -106,15 +106,15 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "机器码：";
             // 
-            // frmRegister
+            // Frm_Register
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(296, 117);
+            this.ClientSize = new System.Drawing.Size(670, 464);
             this.Controls.Add(this.groupBox1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmRegister";
+            this.Name = "Frm_Register";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "软件注册";
             this.Load += new System.EventHandler(this.frmRegister_Load);

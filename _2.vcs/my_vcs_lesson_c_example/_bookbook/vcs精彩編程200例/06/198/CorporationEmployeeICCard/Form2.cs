@@ -6,7 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Text.RegularExpressions;
+
 namespace CorporationEmployeeICCard
 {
     public partial class Form2 : Form
@@ -38,7 +40,7 @@ namespace CorporationEmployeeICCard
                 string name = txtName.Text.Trim();//员工姓名
                 string sex = cbSex.Text.Trim();//员工性别
                 string job = txtJob.Text.Trim();//员工职位
-                string folk= cbFolk.Text.Trim();//员工民族
+                string folk = cbFolk.Text.Trim();//员工民族
                 string dept = txtDept.Text.Trim();//员工部门
                 if (baseClass.CheckID(icID))//CheckID方法检查编号是否存在
                 {
@@ -49,7 +51,7 @@ namespace CorporationEmployeeICCard
                     if (baseClass.WriteIC(icID) == 0)//WriteIC方法将编号写入IC卡，如果成功则返回0
                     {
                         //声明一条语句，用于将员工其他信息插入到数据表中
-                        string strSQL = "insert into Employee(CardID,E_Name,E_Sex,E_Job,E_Folk,E_Dept,E_Time) values('" + icID + "','" + name + "','" + sex + "','" + job + "','" + folk + "','" + dept + "','"+DateTime.Now.ToShortDateString()+"')";
+                        string strSQL = "insert into Employee(CardID,E_Name,E_Sex,E_Job,E_Folk,E_Dept,E_Time) values('" + icID + "','" + name + "','" + sex + "','" + job + "','" + folk + "','" + dept + "','" + DateTime.Now.ToShortDateString() + "')";
                         if (baseClass.ExecuteSQL(strSQL))//ExecuteSQL方法执行这条语句
                         {
                             MessageBox.Show("IC卡注册完毕！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -22,7 +22,6 @@ namespace CorporationEmployeeICCard
             tsslTime.Text = DateTime.Now.ToString();//在任务栏中显示当前时间
 
             richTextBox1.Text += "lblTime : " + DateTime.Now.ToString() + "\n";//当进行考勤的时候在窗体中显示当前时间
-
         }
 
         private void 添加员工ToolStripMenuItem_Click(object sender, EventArgs e)
