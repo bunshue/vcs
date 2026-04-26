@@ -81,6 +81,16 @@ namespace vcs_AForgeTest1
             chart3.AddDataSeries("window", Color.LightGray, Chart.SeriesType.Line, 1, false);
             chart3.AddDataSeries("prediction", Color.Gray, Chart.SeriesType.Line, 1, false);
 
+            //3030
+
+            // set up map control
+            chart4.RangeX = new Range(0, 1000);
+            chart4.RangeY = new Range(0, 1000);
+            chart4.AddDataSeries("map", Color.Red, Chart.SeriesType.Dots, 5, false);
+            chart4.AddDataSeries("path", Color.Blue, Chart.SeriesType.Line, 1, false);
+
+
+
         }
 
         private void show_item_location()
@@ -115,6 +125,10 @@ namespace vcs_AForgeTest1
             chart3.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 11);
             pictureBox1.Size = new Size(100, 100);
             pictureBox1.Location = new System.Drawing.Point(x_st + dx * 3, y_st + dy * 0);
+            chart4.Size = new Size(200, 200);
+            chart4.Location = new System.Drawing.Point(x_st + dx *3, y_st + dy * 5);
+
+
 
             richTextBox1.Size = new Size(400, 800);
             richTextBox1.Location = new System.Drawing.Point(x_st + dx * 4 + 30, y_st + dy * 0);
@@ -251,6 +265,7 @@ namespace vcs_AForgeTest1
 
         //------------------------------------------------------------  # 60個
 
+        int map_index = 1;
         private void button2_Click(object sender, EventArgs e)
         {
             string map_filename1 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\AForge.NET Framework-2.2.5\Samples\vcs_AForgeTest1\vcs_AForgeTest1\data\sample1.map";
@@ -259,12 +274,36 @@ namespace vcs_AForgeTest1
             string map_filename4 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\AForge.NET Framework-2.2.5\Samples\vcs_AForgeTest1\vcs_AForgeTest1\data\test2.map";
             string map_filename5 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\AForge.NET Framework-2.2.5\Samples\vcs_AForgeTest1\vcs_AForgeTest1\data\test3.map";
 
+            string map_filename = string.Empty;
+            if (map_index == 1)
+            {
+                map_filename = map_filename1;
+            }
+            else if (map_index == 2)
+            {
+                map_filename = map_filename2;
+            }
+            else if (map_index == 3)
+            {
+                map_filename = map_filename3;
+            }
+            else if (map_index == 4)
+            {
+                map_filename = map_filename4;
+            }
+            else if (map_index == 5)
+            {
+                map_filename = map_filename5;
+            }
+            map_index++;
+            if (map_index > 5)
+                map_index = 1;
+
             StreamReader reader = null;
 
             try
             {
-                // open selected file
-                reader = File.OpenText(map_filename1);
+                reader = File.OpenText(map_filename);
                 string str = null;
                 // line counter
                 int lines = 0;
@@ -365,6 +404,7 @@ namespace vcs_AForgeTest1
 
         //------------------------------------------------------------  # 60個
 
+        int csv_index = 1;
         private void button3_Click(object sender, EventArgs e)
         {
             listView1.Clear();
@@ -385,6 +425,31 @@ namespace vcs_AForgeTest1
             string csv_filename4 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\AForge.NET Framework-2.2.5\Samples\vcs_AForgeTest1\vcs_AForgeTest1\data_time_series\sigmoid.csv";
             string csv_filename5 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\AForge.NET Framework-2.2.5\Samples\vcs_AForgeTest1\vcs_AForgeTest1\data_time_series\sinusoid.csv";
 
+            string csv_filename = string.Empty;
+            if (csv_index == 1)
+            {
+                csv_filename = csv_filename1;
+            }
+            else if (csv_index == 2)
+            {
+                csv_filename = csv_filename2;
+            }
+            else if (csv_index == 3)
+            {
+                csv_filename = csv_filename3;
+            }
+            else if (csv_index == 4)
+            {
+                csv_filename = csv_filename4;
+            }
+            else if (csv_index == 5)
+            {
+                csv_filename = csv_filename5;
+            }
+            csv_index++;
+            if (csv_index > 5)
+                csv_index = 1;
+
             StreamReader reader = null;
             // read maximum 50 points
             double[] tempData = new double[50];
@@ -392,7 +457,7 @@ namespace vcs_AForgeTest1
             try
             {
                 // open selected file
-                reader = File.OpenText(csv_filename2);
+                reader = File.OpenText(csv_filename);
                 string str = null;
                 int i = 0;
 
@@ -463,12 +528,40 @@ namespace vcs_AForgeTest1
             }
         }
 
-
         //------------------------------------------------------------  # 60個
+
+        private int citiesCount = 20;
+        private double[,] map4 = null;
 
         private void button4_Click(object sender, EventArgs e)
         {
+            citiesCount = 10;  // 個數
+
+            GenerateMap();
         }
+
+        // Generate new map for the Traivaling Salesman problem
+        private void GenerateMap()
+        {
+            Random rand = new Random((int)DateTime.Now.Ticks);
+
+            // create coordinates array
+            map4 = new double[citiesCount, 2];
+
+            for (int i = 0; i < citiesCount; i++)
+            {
+                map4[i, 0] = rand.Next(1001);
+                map4[i, 1] = rand.Next(1001);
+            }
+
+            // set the map
+            chart4.UpdateDataSeries("map", map4);
+            // erase path if it is
+            chart4.UpdateDataSeries("path", null);
+        }
+
+
+        //------------------------------------------------------------  # 60個
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -507,7 +600,6 @@ namespace vcs_AForgeTest1
         }
     }
 }
-
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個

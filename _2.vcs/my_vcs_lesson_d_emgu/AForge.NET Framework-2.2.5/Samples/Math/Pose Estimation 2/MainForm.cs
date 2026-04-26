@@ -663,9 +663,7 @@ namespace PoseEstimation
 
         private void UpdateEstimationInformation()
         {
-            estimatedTransformationMatrixControl.SetMatrix(
-                Matrix4x4.CreateTranslation(translationVector) *
-                Matrix4x4.CreateFromRotation(rotationMatrix));
+            estimatedTransformationMatrixControl.SetMatrix(Matrix4x4.CreateTranslation(translationVector) * Matrix4x4.CreateFromRotation(rotationMatrix));
 
             float estimatedYaw;
             float estimatedPitch;

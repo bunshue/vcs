@@ -1,4 +1,105 @@
-﻿            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_03_Data.mdf;Integrated Security=True;Connect Timeout=30";
+﻿
+            Hashtable ht = new Hashtable();
+            ht.Clear();
+            for (int i = 0; i < 10; i++)
+            {
+                ht.Add("aaa" + i.ToString(), 123);  // 加入到 Hashtable, Key不能重複
+            }
+
+            foreach (DictionaryEntry de in ht)
+            {
+                richTextBox1.Text += "de.Value = " + de.Value + "\tde.Key = " + de.Key + "\n";
+            }
+
+
+
+一次執行多個SQL指令, 若有指令失敗, 可以回復指令
+SqlTransaction
+                // 建立SqlTransaction交易物件tran
+                SqlTransaction tran = cn.BeginTransaction();
+                try
+                {
+                    // 查詢字串
+                    sqlstr = "UPDATE 銀行帳戶 SET 餘額=餘額-" + money + " WHERE 帳號='" + src_ID + "'";
+                    SqlCommand cmd3 = new SqlCommand(sqlstr, cn, tran);
+
+                    // 設定轉入帳號匯款的SQL語法
+                    // 查詢字串
+                    sqlstr = "UPDATE 銀行帳戶 SET 餘額=餘額+" + money + " WHERE 帳號='" + dst_ID + "'";
+                    SqlCommand cmd4 = new SqlCommand(sqlstr, cn, tran);
+
+                    cmd3.ExecuteNonQuery();  // 執行SQL命令
+
+                    cmd4.ExecuteNonQuery();  // 執行SQL命令
+
+                    tran.Commit();  // 認可交易
+                    richTextBox1.Text += "轉帳成功, 交易成功\n";
+                }
+                catch (Exception ex)
+                {
+                    tran.Rollback();  // 回復交易
+                    richTextBox1.Text += "轉帳失敗" + ex.Message + "交易失敗\n";
+                }
+
+
+
+//6060
+
+using System.Management;
+using Microsoft.Win32;
+
+
+            richTextBox1.Text += "你的計算機名稱 : " + Environment.MachineName.ToString() + "\n";
+            richTextBox1.Text += "你的網卡序號 : " + GetNetCardMacAddress() + "\n";
+
+
+        //获得网卡信息函数
+        public string GetNetCardMacAddress()
+        {
+            //创建ManagementClass对象
+            ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
+            ManagementObjectCollection moc = mc.GetInstances();//创建ManagementObjectCollection对象
+            string str = "";//用于存储网卡序列号
+            foreach (ManagementObject mo in moc)//遍历得到的集合
+            {
+                if ((bool)mo["IPEnabled"] == true)//判断IPEnabled属性是否为true
+                    str = mo["MacAddress"].ToString();//获取网卡序列号
+            }
+            return str;//返回网卡序列号
+        }
+
+
+//---------------------------------------
+
+            //設定regedit資料
+            string strNumber = "IMS12345";
+            richTextBox1.Text += "CreateSubKey : " + strNumber.TrimEnd() + "\n";
+            Microsoft.Win32.RegistryKey retkey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("software", true).CreateSubKey("IMS1").CreateSubKey("IMS.INI").CreateSubKey(strNumber.TrimEnd());
+            retkey.SetValue("Name", "群曜醫電");  // 設置註冊名
+            retkey.SetValue("Serial", "0912345678");  //設置註冊序號
+
+            richTextBox1.Text += "註冊成功\n";
+
+//---------------------------------------
+
+            //取得regedit資料
+            Microsoft.Win32.RegistryKey retkey1 = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("software", true).CreateSubKey("IMS1").CreateSubKey("IMS.INI");
+            foreach (string strName in retkey1.GetSubKeyNames())//判断注册码是否过期
+            {
+                richTextBox1.Text += strName  + "\n";
+            }
+
+
+//---------------------------------------
+
+
+
+
+
+
+
+
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_03_Data.mdf;Integrated Security=True;Connect Timeout=30";
 
             int MaxValue = 0;//表示表中的記錄
 

@@ -122,7 +122,6 @@ namespace PoseEstimation
             UpdateViewMatrix();
         }
 
-
         private void StartUpdating()
         {
             updating++;
@@ -307,9 +306,7 @@ namespace PoseEstimation
             float rPitch = (float)(pitch / 180 * Math.PI);
             float rRoll = (float)(roll / 180 * Math.PI);
 
-            transformationMatrix =
-                Matrix4x4.CreateTranslation(new Vector3(xObject, yObject, zObject)) *
-                Matrix4x4.CreateFromYawPitchRoll(rYaw, rPitch, rRoll);
+            transformationMatrix = Matrix4x4.CreateTranslation(new Vector3(xObject, yObject, zObject)) * Matrix4x4.CreateFromYawPitchRoll(rYaw, rPitch, rRoll);
 
             worldRendererControl.WorldMatrix = transformationMatrix;
             transformationMatrixControl.SetMatrix(transformationMatrix);
@@ -322,9 +319,7 @@ namespace PoseEstimation
         // Calculate new view transformation matrix
         private void UpdateViewMatrix()
         {
-            viewMatrix = Matrix4x4.CreateLookAt(
-                new Vector3(xCamera, yCamera, zCamera),
-                new Vector3(xLookAt, yLookAt, zLookAt));
+            viewMatrix = Matrix4x4.CreateLookAt(new Vector3(xCamera, yCamera, zCamera), new Vector3(xLookAt, yLookAt, zLookAt));
 
             worldRendererControl.ViewMatrix = viewMatrix;
             viewMatrixControl.SetMatrix(viewMatrix);
@@ -386,9 +381,7 @@ namespace PoseEstimation
                 coposit.EstimatePose(projectedPoints, out rotationMatrix, out translationVector);
             }
 
-            estimatedTransformationMatrixControl.SetMatrix(
-                Matrix4x4.CreateTranslation(translationVector) *
-                Matrix4x4.CreateFromRotation(rotationMatrix));
+            estimatedTransformationMatrixControl.SetMatrix(Matrix4x4.CreateTranslation(translationVector) * Matrix4x4.CreateFromRotation(rotationMatrix));
 
             float estimatedYaw;
             float estimatedPitch;
