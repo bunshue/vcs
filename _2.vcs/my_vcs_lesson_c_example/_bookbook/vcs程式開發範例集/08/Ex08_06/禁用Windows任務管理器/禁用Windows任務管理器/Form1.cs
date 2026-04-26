@@ -36,6 +36,8 @@ namespace 禁用Windows任務管理器
 
         private void button1_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "禁用Windows工作管理員\n";
+
             RegistryKey mreg;
             mreg = Registry.LocalMachine;
             mreg = mreg.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\policies\system");
@@ -54,6 +56,8 @@ namespace 禁用Windows任務管理器
 
         private void button2_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "啟用Windows工作管理員\n";
+
             RegistryKey mreg;
             mreg = Registry.LocalMachine;
             mreg = mreg.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\policies\system");

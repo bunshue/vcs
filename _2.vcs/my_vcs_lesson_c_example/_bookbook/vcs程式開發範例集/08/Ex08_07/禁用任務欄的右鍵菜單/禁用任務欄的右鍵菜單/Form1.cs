@@ -36,6 +36,8 @@ namespace 禁用任務欄的右鍵菜單
 
         private void button1_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "禁用任務列的右鍵選單\n";
+
             try
             {
                 RegistryKey mreg;
@@ -56,6 +58,8 @@ namespace 禁用任務欄的右鍵菜單
 
         private void button2_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "允許任務列的右鍵選單\n";
+
             try
             {
                 RegistryKey mreg;

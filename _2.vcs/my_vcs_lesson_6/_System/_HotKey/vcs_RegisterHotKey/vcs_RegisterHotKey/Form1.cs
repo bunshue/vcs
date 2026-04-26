@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;                //for Directory
-using System.Drawing.Imaging;   //for ImageFormat
-using System.Runtime.InteropServices;   //for DllImport
-using System.Diagnostics;       //for Process
+using System.IO;  // for Directory
+using System.Drawing.Imaging;  // for ImageFormat
+using System.Runtime.InteropServices;  // for DllImport
+using System.Diagnostics;  // for Process
 
 //註冊熱鍵
 
@@ -88,32 +88,32 @@ namespace vcs_RegisterHotKey
                 case WM_HOTKEY:
                     switch (m.WParam.ToInt32())
                     {
-                        case 11:
-                            do_hotkey_11();
+                        case 911:
+                            do_hotkey_911();
                             break;
-                        case 22:
-                            do_hotkey_22();
+                        case 922:
+                            do_hotkey_922();
                             break;
-                        case 33:
-                            do_hotkey_33();
+                        case 933:
+                            do_hotkey_933();
                             break;
-                        case 44:
-                            do_hotkey_44();
+                        case 944:
+                            do_hotkey_944();
                             break;
-                        case 55:
-                            do_hotkey_55();
+                        case 955:
+                            do_hotkey_955();
                             break;
-                        case 91:
-                            do_hotkey_91();
+                        case 991:
+                            do_hotkey_991();
                             break;
-                        case 92:
-                            do_hotkey_92();
+                        case 992:
+                            do_hotkey_992();
                             break;
-                        case 93:
-                            do_hotkey_93();
+                        case 993:
+                            do_hotkey_993();
                             break;
-                        case 94:
-                            do_hotkey_94();
+                        case 994:
+                            do_hotkey_994();
                             break;
                         default:
                             break;
@@ -125,53 +125,53 @@ namespace vcs_RegisterHotKey
             base.WndProc(ref m); //將系統消息傳遞自父類的WndProc
         }
 
-        void do_hotkey_11()
+        void do_hotkey_911()
         {
             //按下的是ESC
-            richTextBox1.Text += "你按了快捷鍵ID=11\n";
-            Application.Exit();
+            richTextBox1.Text += "你按了快捷鍵ID=911 ESC 偽執行\n";
+            //Application.Exit();
         }
 
-        void do_hotkey_22()
+        void do_hotkey_922()
         {
-            richTextBox1.Text += "你按了快捷鍵ID=22\n";
+            richTextBox1.Text += "你按了快捷鍵ID=922\n";
             save_fullscreen_to_local_drive();       //全螢幕截圖
         }
 
-        void do_hotkey_33()
+        void do_hotkey_933()
         {
-            richTextBox1.Text += "你按了快捷鍵ID=33\n";
+            richTextBox1.Text += "你按了快捷鍵ID=933\n";
         }
 
-        void do_hotkey_44()
+        void do_hotkey_944()
         {
             //按下的是WIN+F10
-            richTextBox1.Text += "你按了快捷鍵ID=44\n";
+            richTextBox1.Text += "你按了快捷鍵ID=944\n";
             richTextBox1.Text += "你按了 WIN+F10\n";
         }
 
-        void do_hotkey_55()
+        void do_hotkey_955()
         {
-            richTextBox1.Text += "你按了快捷鍵ID=55\n";
+            richTextBox1.Text += "你按了快捷鍵ID=955\n";
             Process.Start(@"C:\WINDOWS\system32\calc.exe");
         }
 
-        void do_hotkey_91()
+        void do_hotkey_991()
         {
             richTextBox1.Text += "你按了 Ctrl + 左\n";
         }
 
-        void do_hotkey_92()
+        void do_hotkey_992()
         {
             richTextBox1.Text += "你按了 Ctrl + 右\n";
         }
 
-        void do_hotkey_93()
+        void do_hotkey_993()
         {
             richTextBox1.Text += "你按了 Ctrl + 上\n";
         }
 
-        void do_hotkey_94()
+        void do_hotkey_994()
         {
             richTextBox1.Text += "你按了 Ctrl + 下\n";
         }
@@ -209,19 +209,19 @@ namespace vcs_RegisterHotKey
             show_item_location();
 
             //註冊快捷鍵	    快捷鍵ID     輔助鍵      快捷鍵內容
-            RegisterHotKey(Handle, 11, KeyModifiers.NONE, Keys.Escape); // ESC
-            RegisterHotKey(Handle, 22, KeyModifiers.CTRL, Keys.P); // Ctrl + P 全螢幕截圖
-            RegisterHotKey(Handle, 33, KeyModifiers.SHIFT, Keys.F); // Shift + F            
-            RegisterHotKey(Handle, 44, KeyModifiers.WINDOWS_KEY, Keys.F10);
+            RegisterHotKey(Handle, 911, KeyModifiers.NONE, Keys.Escape); // ESC
+            RegisterHotKey(Handle, 922, KeyModifiers.CTRL, Keys.P); // Ctrl + P 全螢幕截圖
+            RegisterHotKey(Handle, 933, KeyModifiers.SHIFT, Keys.F); // Shift + F            
+            RegisterHotKey(Handle, 944, KeyModifiers.WINDOWS_KEY, Keys.F10);
 
             //組合鍵  ALT + CTRL + C
             KeyModifiers ctrlHotKey = KeyModifiers.ALT | KeyModifiers.CTRL;
-            RegisterHotKey(Handle, 55, ctrlHotKey, Keys.C);
+            RegisterHotKey(Handle, 955, ctrlHotKey, Keys.C);
 
-            RegisterHotKey(Handle, 91, KeyModifiers.CTRL, Keys.Left);  // 熱鍵一 : Ctrl + 左
-            RegisterHotKey(Handle, 92, KeyModifiers.CTRL, Keys.Right); // 熱鍵二 : Ctrl + 右
-            RegisterHotKey(Handle, 93, KeyModifiers.CTRL, Keys.Up);    // 熱鍵三 : Ctrl + 上
-            RegisterHotKey(Handle, 94, KeyModifiers.CTRL, Keys.Down);  // 熱鍵四 : Ctrl + 下
+            RegisterHotKey(Handle, 991, KeyModifiers.CTRL, Keys.Left);  // 熱鍵一 : Ctrl + 左
+            RegisterHotKey(Handle, 992, KeyModifiers.CTRL, Keys.Right); // 熱鍵二 : Ctrl + 右
+            RegisterHotKey(Handle, 993, KeyModifiers.CTRL, Keys.Up);    // 熱鍵三 : Ctrl + 上
+            RegisterHotKey(Handle, 994, KeyModifiers.CTRL, Keys.Down);  // 熱鍵四 : Ctrl + 下
 
             //按 PrintScreen 全螢幕截圖
 
@@ -230,7 +230,7 @@ namespace vcs_RegisterHotKey
             RegisterHotKey1.ModKey = RegisterHotKeyClass.KeyModifiers.NONE;
             RegisterHotKey1.WindowHandle = this.Handle;
             RegisterHotKey1.HotKey += new RegisterHotKeyClass.HotKeyPass(Register_HotKey_Function1);
-            RegisterHotKey1.StarHotKey();
+            //RegisterHotKey1.StarHotKey();  // NG
 
             /*  目前不能做到依照不同的快捷鍵做不同的事
             RegisterHotKey2.Keys = Keys.C;
@@ -256,16 +256,16 @@ namespace vcs_RegisterHotKey
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             //取消註冊快捷鍵
-            UnregisterHotKey(Handle, 11);
-            UnregisterHotKey(Handle, 22);
-            UnregisterHotKey(Handle, 33);
-            UnregisterHotKey(Handle, 44);
-            UnregisterHotKey(Handle, 55);
+            UnregisterHotKey(Handle, 911);
+            UnregisterHotKey(Handle, 922);
+            UnregisterHotKey(Handle, 933);
+            UnregisterHotKey(Handle, 944);
+            UnregisterHotKey(Handle, 955);
 
-            UnregisterHotKey(Handle, 91);
-            UnregisterHotKey(Handle, 92);
-            UnregisterHotKey(Handle, 93);
-            UnregisterHotKey(Handle, 94);
+            UnregisterHotKey(Handle, 991);
+            UnregisterHotKey(Handle, 992);
+            UnregisterHotKey(Handle, 993);
+            UnregisterHotKey(Handle, 994);
         }
 
         void show_item_location()
@@ -283,7 +283,7 @@ namespace vcs_RegisterHotKey
 
             this.Size = new Size(300, 300);
             this.FormBorderStyle = FormBorderStyle.None;
-            
+
             //設定執行後的表單起始位置, 指定位置
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(Screen.PrimaryScreen.Bounds.Width - this.Width - 50, Screen.PrimaryScreen.Bounds.Height - this.Height - 50);

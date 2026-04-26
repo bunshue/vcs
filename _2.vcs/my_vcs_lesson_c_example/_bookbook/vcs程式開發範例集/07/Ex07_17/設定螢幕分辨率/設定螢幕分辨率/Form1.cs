@@ -82,7 +82,6 @@ namespace 設定螢幕分辨率
             Size s = SystemInformation.PrimaryMonitorSize;
             dWidth = s.Width;
             dHeight = s.Height;
-            lblDisInfo.Text = dWidth.ToString() + " × " + dHeight.ToString() + " 像素";
 
             richTextBox1.Text += "目前解析度 : " + dWidth.ToString() + " × " + dHeight.ToString() + "\n";
         }
@@ -92,12 +91,15 @@ namespace 設定螢幕分辨率
             GetDis();
             ChangeDis(1);
         }
-        private void ChangeDis(int i)//變換分辨率
+        private void ChangeDis(int i)  // 變換分辨率
         {
             int dValue;
             dValue = trackBar1.Value;
+            richTextBox1.Text += "dValue = " + dValue.ToString() + "\n";
+
             if (i == 0)
             {
+                richTextBox1.Text += "aaaa0\n";
                 switch (dValue)
                 {
                     case 0: dWidth = 800; dHeight = 600; break;
@@ -112,11 +114,13 @@ namespace 設定螢幕分辨率
                     case 9: dWidth = 1600; dHeight = 900; break;
                     case 10: dWidth = 1600; dHeight = 1200; break;
                 }
-                lblDisInfo.Text = dWidth.ToString() + " × " + dHeight.ToString() + " 像素";
+                richTextBox1.Text += dWidth.ToString() + " × " + dHeight.ToString() + " 像素\n";
             }
             else
             {
+                richTextBox1.Text += "bbbb1\n";
                 int dSum = dWidth + dHeight;
+                richTextBox1.Text += "dSum = " + dSum.ToString() + "\n";
                 switch (dSum)
                 {
                     case 1400: trackBar1.Value = 0; break;

@@ -38,9 +38,6 @@ namespace vcs_AssemblyInfo
             richTextBox1.Text += "GUID : " + info.Guid + "\n";
             richTextBox1.Text += "Neutral Language : " + info.NeutralLanguage + "\n";
             richTextBox1.Text += "COM Visible : " + info.IsComVisible.ToString() + "\n";
-
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -65,7 +62,6 @@ namespace vcs_AssemblyInfo
             richTextBox1.Text += "GUID\t" + info.Guid + "\n";
             richTextBox1.Text += "Neutral Language\t" + info.NeutralLanguage + "\n";
             richTextBox1.Text += "COM Visible\t" + info.IsComVisible.ToString() + "\n";
-
         }
     }
 }

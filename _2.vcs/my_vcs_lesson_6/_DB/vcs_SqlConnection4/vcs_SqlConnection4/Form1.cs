@@ -384,14 +384,14 @@ namespace vcs_SqlConnection4
             // 連接字串
             string cnstr = string.Format(db_cnstr, db_filename);
 
-            using (SqlConnection Con = new SqlConnection(cnstr))
+            using (SqlConnection cn = new SqlConnection(cnstr))
             {
-                Con.Open();
+                cn.Open();
 
-                string cmdtxt2 = "SELECT * FROM tb_curve WHERE Years=" + query_year + "";
-                SqlCommand Com1 = new SqlCommand(cmdtxt2, Con);
+                sqlstr = "SELECT * FROM tb_curve WHERE Years=" + query_year + "";
+                SqlCommand cmd = new SqlCommand(sqlstr, cn);
                 SqlDataAdapter da = new SqlDataAdapter();
-                da.SelectCommand = Com1;
+                da.SelectCommand = cmd;
                 DataSet ds = new DataSet();
                 da.Fill(ds);
                 for (int i = 0; i < 12; i++)
@@ -410,7 +410,7 @@ namespace vcs_SqlConnection4
             // 資料庫檔案
             string db_filename = "db_13.mdf";
             // 查詢字串
-            string sqlstr = "SELECT * FROM tb_reticulation";
+            string sqlstr = "SELECT * FROM tb_reticulation";  // 網眼,網狀,網狀物
             sql_read_database(db_filename, sqlstr, dataGridView1);
 
             richTextBox1.Text += "------------------------------\n";  // 30個
@@ -420,11 +420,11 @@ namespace vcs_SqlConnection4
             // 連接字串
             string cnstr = string.Format(db_cnstr, db_filename);
 
-            SqlConnection Con = new SqlConnection(cnstr);
-            string cmdtxt2 = "SELECT * FROM tb_reticulation";
-            SqlCommand Com1 = new SqlCommand(cmdtxt2, Con);
+            SqlConnection cn = new SqlConnection(cnstr);
+            sqlstr = "SELECT * FROM tb_reticulation";
+            SqlCommand cmd = new SqlCommand(sqlstr, cn);
             SqlDataAdapter da = new SqlDataAdapter();
-            da.SelectCommand = Com1;
+            da.SelectCommand = cmd;
             DataSet ds = new DataSet();
             da.Fill(ds);
             for (int j = 0; j < 12; j++)
@@ -437,7 +437,6 @@ namespace vcs_SqlConnection4
 
         private void button8_Click(object sender, EventArgs e)
         {
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -454,9 +453,6 @@ namespace vcs_SqlConnection4
             sql_read_database(db_filename, sqlstr, dataGridView1);
             // debug SP
 
-            Hashtable ht = new Hashtable();
-            ht.Clear();
-
             // 資料庫檔案
             db_filename = "db_13.mdf";
             // 連接字串
@@ -465,28 +461,17 @@ namespace vcs_SqlConnection4
             SqlConnection con = new SqlConnection(cnstr);
             con.Open();
 
-            using (SqlCommand cmd = new SqlCommand("SELECT SUM(t_Num) FROM tb_product", con))
+            // 查詢字串
+            sqlstr = "SELECT SUM(t_Num) FROM tb_product";
+            using (SqlCommand cmd = new SqlCommand(sqlstr, con))
             {
                 int SumNum = Convert.ToInt32(cmd.ExecuteScalar());
-                richTextBox1.Text += "SumNum = " + SumNum.ToString() + "\n";
+                richTextBox1.Text += "總和 : " + SumNum.ToString() + "\n\n";
             }
 
-            Random rnd = new Random();
-
-            using (cmd = new SqlCommand("SELECT t_Name, SUM(t_Num) AS Num FROM tb_product GROUP BY t_Name", con))
-            {
-                SqlDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
-                while (dr.Read())
-                {
-                    ht.Add(dr[0], Convert.ToInt32(dr[1]));  // 加入到 Hashtable
-                    richTextBox1.Text += dr[0] + "\t" + Convert.ToInt32(dr[1]) + "\n";
-                }
-
-                foreach (DictionaryEntry de in ht)
-                {
-                    richTextBox1.Text += "de.Value = " + de.Value + "\tde.Key = " + de.Key + "\n";
-                }
-            }
+            // 查詢字串, 重複的Name要合併GROUP BY
+            sqlstr = "SELECT t_Name, SUM(t_Num) AS Num FROM tb_product GROUP BY t_Name";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
         }
 
         //------------------------------------------------------------  # 60個
@@ -504,6 +489,7 @@ namespace vcs_SqlConnection4
             // 查詢字串
             string sqlstr = "SELECT * FROM tb_manpower";
             sql_read_database(db_filename, sqlstr, dataGridView1);
+
             // debug SP
 
             SqlConnection con = new SqlConnection(cnstr);
@@ -540,24 +526,12 @@ namespace vcs_SqlConnection4
         {
             // 資料庫檔案
             string db_filename = "db_10_Data.MDF";
-            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-            SqlConnection con = new SqlConnection(cnstr);
-            SqlDataAdapter dap = new SqlDataAdapter("SELECT * FROM v10_01", con);
-            DataSet ds = new DataSet();
-            dap.Fill(ds);
-            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            // 查詢字串
+            string sqlstr = "SELECT * FROM v10_01";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
 
-            /*
-            //更新資料
-            // 資料庫檔案
-            db_filename = "db_10_Data.MDF";
-            cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-            con = new SqlConnection(cnstr);
-            con.Open();
-            SqlCommand cmd = new SqlCommand("update v10_01 set 基本工資='" + textBox2.Text + "' WHERE 員工編號='" + textBox1.Text + "'", con);
-            cmd.ExecuteNonQuery();
-            con.Close();
-            */
+            // 更新資料
+            //SqlCommand cmd = new SqlCommand("update v10_01 set 基本工資='" + textBox2.Text + "' WHERE 員工編號='" + textBox1.Text + "'", con);
         }
 
         //------------------------------------------------------------  # 60個

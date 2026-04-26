@@ -546,75 +546,6 @@ namespace vcs_SqlConnection1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            // 成績單 1 ch17DB.mdf
-
-            // 資料庫檔案
-            string db_filename = "ch17DB.mdf";
-            // 查詢字串
-            string sqlstr = "SELECT * FROM 成績單";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "成績單 全部資料";
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //成績單 搜尋1
-
-            // 資料庫檔案
-            db_filename = "ch17DB.mdf";
-            string name = "阿龍";
-            sqlstr = "SELECT * FROM 成績單 WHERE 姓名 = '" + name + "'";
-            //sqlstr = "SELECT * FROM 成績單 WHERE 姓名 = '" + name.Replace("'", "''") + "'";//有些名字有'
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            // 成績單 2 ch18DB.mdf
-
-            // 資料庫檔案
-            db_filename = "ch18DB.mdf";
-            // 查詢字串
-            sqlstr = "SELECT * FROM 成績單";
-            sql_read_database(db_filename, sqlstr, dataGridView3);
-            lb_dgv3.Text = "成績單 全部資料 原始資料";
-
-            //成績單+搜尋條件
-
-            // 資料庫檔案
-            db_filename = "ch18DB.mdf";
-            // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);
-            // 查詢字串
-            sqlstr = "SELECT * FROM 成績單 ORDER BY 國文 DESC";
-
-            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
-            {
-                //cn.ConnectionString = cnstr;  // 連接字串, 可有可無
-
-                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
-
-                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-                da.Fill(ds, "成績單");  // da將查詢的結果填充至數據集ds, 指定TableName為"成績單"
-
-                DataView dv;  // 宣告DataView物件dv
-
-                dv = ds.Tables["成績單"].DefaultView;
-
-                //依國文成績降冪排列
-                dataGridView4.DataSource = dv;  // DGV設置數據源
-                lb_dgv4.Text = "成績單 依國文成績降冪排列";
-
-                //國文成績 > 70 的, 依英文成績降冪排列
-                string filter = "國文>70";  // 篩選條件, 用WHRER語法
-                string sort = "英文 DESC";  // 排序方法, 科目, ASC:遞增, DESC:遞減
-                richTextBox1.Text += "篩選條件 : " + filter + "\n";
-                richTextBox1.Text += "排序方法 : " + sort + "\n";
-
-                dv.RowFilter = filter;
-                dv.Sort = sort;
-
-                dataGridView4.DataSource = dv;  // DGV設置數據源
-                lb_dgv4.Text = "國文成績 > 70 的, 依英文成績降冪排列";
-            }
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -697,108 +628,6 @@ namespace vcs_SqlConnection1
 
         private void button6_Click(object sender, EventArgs e)
         {
-            // 轉帳
-
-            // 資料庫檔案
-            string db_filename = "ch17DB.mdf";
-            // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);
-            string table_name = "銀行帳戶";
-            // 查詢字串
-            string sqlstr = "SELECT * FROM " + table_name;
-
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "全部資料 " + table_name;
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
-            {
-                string src_ID = "A003";
-                string dst_ID = "A004";
-                int money = 500;
-
-                //cn.ConnectionString = cnstr;  // 連接字串, 可有可無
-                cn.Open();  // 打開資料庫連線
-
-                // 查詢字串, 查詢使用者帳號是否存在
-                sqlstr = "SELECT * FROM 銀行帳戶 WHERE 帳號='" + src_ID + "'";
-                SqlCommand cmd1 = new SqlCommand(sqlstr, cn);
-
-                // 查詢字串, 查詢轉入帳號是否存在
-                sqlstr = "SELECT * FROM 銀行帳戶 WHERE 帳號='" + dst_ID + "'";
-                SqlCommand cmd2 = new SqlCommand(sqlstr, cn);
-
-                // 傳回SqlDataReader物件dr1，用來查詢使用者帳號是否存在
-                SqlDataReader dr1 = cmd1.ExecuteReader();  // 建立數據讀取器
-                if (!dr1.Read())  // 讀取一筆資料到dr !不存在
-                {
-                    richTextBox1.Text += "你的帳號" + src_ID + "錯誤\n";
-                    return;
-                }
-
-                // 取得使用者的餘額並定給myMoney
-                int myMoney = int.Parse(dr1["餘額"].ToString());
-                dr1.Close();  // 關閉SqlDataRader物件dr1
-
-                // 傳回SqlDataReader物件dr2，用來查詢轉入帳號是否存在
-                SqlDataReader dr2 = cmd2.ExecuteReader();  // 建立數據讀取器
-                if (!dr2.Read())  // 讀取一筆資料到dr !不存在
-                {
-                    richTextBox1.Text += "轉入帳號" + dst_ID + "錯誤\n";
-                    return;
-                }
-                dr2.Close();  // 關閉SqlDataRader物件dr2
-
-                try
-                {
-                    // 若使用者餘額小於轉入金額，則執行下列敘述
-                    if (myMoney < money)
-                    {
-                        richTextBox1.Text += src_ID + "帳號沒這麼多存款\n";
-                        return;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += ex.Message + ", 金額請輸入數值\n";
-                    return;
-                }
-
-                // 建立SqlTransaction交易物件tran
-                SqlTransaction tran = cn.BeginTransaction();
-                try
-                {
-                    // 使用者帳號扣款的SQL語法
-                    // 查詢字串
-                    sqlstr = "UPDATE 銀行帳戶 SET 餘額=餘額-" + money + " WHERE 帳號='" + src_ID + "'";
-                    SqlCommand cmd3 = new SqlCommand(sqlstr, cn, tran);
-
-                    // 設定轉入帳號匯款的SQL語法
-                    // 查詢字串
-                    sqlstr = "UPDATE 銀行帳戶 SET 餘額=餘額+" + money + " WHERE 帳號='" + dst_ID + "'";
-                    SqlCommand cmd4 = new SqlCommand(sqlstr, cn, tran);
-
-                    cmd3.ExecuteNonQuery();  // 執行SQL命令
-
-                    cmd4.ExecuteNonQuery();  // 執行SQL命令
-
-                    tran.Commit();  // 認可交易
-                    richTextBox1.Text += "轉帳成功, 交易成功\n";
-                }
-                catch (Exception ex)
-                {
-                    tran.Rollback();  // 回復交易
-                    richTextBox1.Text += "轉帳失敗" + ex.Message + "交易失敗\n";
-                }
-
-                table_name = "銀行帳戶";
-                // 查詢字串
-                sqlstr = "SELECT * FROM " + table_name;
-
-                sql_read_database(db_filename, sqlstr, dataGridView2);
-                lb_dgv2.Text = "全部資料 " + table_name;
-            }
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -1125,102 +954,23 @@ namespace vcs_SqlConnection1
             db_filename = "db_TomeOne.mdf";
             // 查詢字串
             sqlstr = "SELECT * FROM tb_Stat";
+            // 查詢字串
+            sqlstr = "SELECT * FROM tb_Stat WHERE ShowYear=" + 2006 + "";
 
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "全部資料 tb_Stat\n";
+            //sql_read_database(db_filename, sqlstr, dataGridView1);
+            //lb_dgv1.Text = "全部資料 tb_Stat";
 
             int query_year = 2006;  // 有資料的年份 2001~2007
 
             // 連接字串
             cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
 
-            // 查詢字串
+            // 查詢字串, 將符合條件的資料取資料總和
             sqlstr = "SELECT SUM(Year_M1+Year_M2+Year_M3+Year_M4+Year_M5+Year_M6+Year_M7+Year_M8+Year_M9+Year_M10+Year_M11+Year_M12) AS number FROM tb_Stat WHERE ShowYear=" + query_year + "";
-
-            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
-            {
-                cn.Open();
-                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
-                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
-
-                //資料放在表格的第[0][0]格
-                int sum_year = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString());
-                richTextBox1.Text += "年度總和 : " + sum_year.ToString() + "\n";
-            }
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            // 資料庫檔案
-            db_filename = "db_TomeOne.mdf";
-
-            //上面有查到, 有資料的年份是 2001~2007
-            query_year = 2006;  // 有資料的年份 2001~2007
-            // 查詢字串
-            sqlstr = "SELECT * FROM tb_Stat WHERE ShowYear=" + query_year + "";
-
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            // 連接字串
-            cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeOne.mdf;Integrated Security=True;Connect Timeout=30";
-
-            // 查詢字串
-            sqlstr = "SELECT ShowYear FROM tb_Stat";
-
-            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
-            {
-                DataTable dt = new DataTable();
-                SqlCommand cmd = new SqlCommand(sqlstr, cn);
-                SqlDataAdapter da = new SqlDataAdapter();  // 建立資料庫適配器對象da
-                da.SelectCommand = cmd;
-                da.Fill(dt);
-
-                int C = dt.Columns.Count;
-                int R = dt.Rows.Count;
-                richTextBox1.Text += "R = " + R.ToString() + "\n";
-                richTextBox1.Text += "C = " + C.ToString() + "\n";
-                for (int i = 0; i < R; i++)
-                {
-                    richTextBox1.Text += dt.Rows[i][0].ToString() + "\n";
-                }
-            }
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            // 資料庫檔案
-            db_filename = "db_TomeTwo.mdf";
-            // 查詢字串
-            sqlstr = "SELECT * FROM EmployeeInfo";
-
             sql_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "全部資料 EmployeeInfo\n";
+            lb_dgv1.Text = "11111";
 
-            //从头开始提取满足指定条件的记录
-
-            // 資料庫檔案
-            db_filename = "db_TomeTwo.mdf";
-            // 連接字串
-            cnstr = string.Format(db_cnstr, db_filename);
-            // 查詢字串
-            sqlstr = "SELECT * FROM EmployeeInfo";
-
-            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
-            {
-                SqlCommand cmd = new SqlCommand(sqlstr, cn);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);  // 建立資料庫適配器對象da
-                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-                da.Fill(ds, "EmployeeInfo");  // da將查詢的結果填充至數據集ds, 指定TableName為"EmployeeInfo"
-
-                richTextBox1.Text += "------------------------------\n";  // 30個
-
-                //从头开始提取生日小于2009-7-1之前的员工信息
-                IEnumerable<DataRow> sqlstr2 = ds.Tables["EmployeeInfo"].AsEnumerable().TakeWhile(itm => itm.Field<DateTime>("Birthday") < Convert.ToDateTime("2009-7-1"));
-                dataGridView2.DataSource = sqlstr2.CopyToDataTable();  // DGV設置數據源
-            }
-
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
         }
@@ -1415,7 +1165,6 @@ namespace vcs_SqlConnection1
             sqlstr = "TRUNCATE TABLE animals1_table";  // 清空整個表單
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令
             */
-
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -1616,7 +1365,6 @@ namespace vcs_SqlConnection1
             lb_dgv2.Text = "十二生肖全部資料";
 
             return;
-
 
             //查詢操作列長度
 
@@ -1906,30 +1654,7 @@ namespace vcs_SqlConnection1
 
         private void button24_Click(object sender, EventArgs e)
         {
-            //跳过满足指定条件的记录
-            //跳过生日小于2009-7-1的员工:
 
-            // 資料庫檔案
-            string db_filename = "db_TomeTwo.mdf";
-            // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);
-            // 查詢字串
-            string sqlstr = "SELECT * FROM EmployeeInfo";
-
-            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
-            {
-                SqlCommand cmd = new SqlCommand(sqlstr, cn);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);  // 建立資料庫適配器對象da
-                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-                da.Fill(ds, "EmployeeInfo");  // da將查詢的結果填充至數據集ds, 指定TableName為"EmployeeInfo"
-                dataGridView1.DataSource = ds.Tables[0];  // DGV設置數據源
-                lb_dgv1.Text = "全部資料 EmployeeInfo";
-
-                //跳过生日小于2009-7-1的员工信息
-                IEnumerable<DataRow> sqlstr2 = ds.Tables["EmployeeInfo"].AsEnumerable().SkipWhile(itm => itm.Field<DateTime>("Birthday") < Convert.ToDateTime("2009-7-1"));
-                dataGridView2.DataSource = sqlstr2.CopyToDataTable();//设置dataGridView1数据源
-                lb_dgv2.Text = "過濾資料";
-            }
         }
 
         private void button25_Click(object sender, EventArgs e)
@@ -2539,3 +2264,47 @@ cmd.ExecuteNonQuery();  // 執行SQL命令
 "SELECT * FROM tb_08 WHERE " + comboBox1.Text + " IS null OR " + comboBox1.Text + "=''", cn);//透過SQL語句查詢數據表中的空數據
 */
 
+
+
+/*
+
+            //搜尋範例
+            string name = "阿龍";
+            sqlstr = "SELECT * FROM 成績單 WHERE 姓名 = '" + name + "'";
+            //sqlstr = "SELECT * FROM 成績單 WHERE 姓名 = '" + name.Replace("'", "''") + "'";//有些名字有'
+*/
+
+
+/*
+            string db_filename = "ch18DB.mdf";
+            string sqlstr = "SELECT * FROM 成績單";
+            // 查詢字串, 依國文成績降冪排列
+            sqlstr = "SELECT * FROM 成績單 ORDER BY 國文 DESC";
+*/
+
+/*
+            // 資料庫檔案
+            string db_filename = "ch17DB.mdf";
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 銀行帳戶";
+
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "全部資料 銀行帳戶";
+
+            string src_ID = "A003";
+            string dst_ID = "A004";
+            sqlstr = "SELECT * FROM 銀行帳戶 WHERE 帳號='" + src_ID + "'";
+            sqlstr = "SELECT * FROM 銀行帳戶 WHERE 帳號='" + dst_ID + "'";
+            // 查詢字串
+            sqlstr = "SELECT * FROM 銀行帳戶";
+
+*/
+
+
+/*
+                //資料放在表格的第[0][0]格
+                int sum_year = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString());
+                richTextBox1.Text += "年度總和 : " + sum_year.ToString() + "\n";
+*/

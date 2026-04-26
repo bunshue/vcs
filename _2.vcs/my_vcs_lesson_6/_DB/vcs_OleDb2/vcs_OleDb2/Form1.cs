@@ -721,93 +721,10 @@ namespace vcs_OleDb2
 
         private void button20_Click(object sender, EventArgs e)
         {
-            //OleDB 20
-
-            // 資料庫檔案
-            string db_filename = "Northwind.mdb";
-
-            // 查詢字串
-            string sqlstr = "SELECT * FROM 員工";
-            oledb_read_database(db_filename, sqlstr, dataGridView1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            db_filename = "Northwind.mdb";
-
-            OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder();
-            builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
-            builder["Data Source"] = "D:\\" + db_filename;
-            builder["User Id"] = "Admin";
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
-            //OleDB 21
-
-            // 資料庫檔案
-            string db_filename = "DBMS.mdb";
-            // 查詢字串
-            string sqlstr = "SELECT * FROM 學生資料表";
-
-            oledb_read_database(db_filename, sqlstr, dataGridView1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //string dbpath = "C:\\Inetpub\\wwwroot\\CS\\ch08\\App_Data\\DBMS.mdb";
-
-            // 資料庫檔案
-            db_filename = "DBMS.mdb";
-            // 查詢字串
-            sqlstr = "SELECT * FROM 學生資料表";
-
-            OleDbConnectionStringBuilder builder = get_builder(db_filename);
-
-            OleDbConnection cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
-
-            cn.Open();  // 打開資料庫連線
-
-            OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
-            OleDbDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
-
-            //顯示資料表欄位名稱
-            for (int i = 0; i <= dr.FieldCount - 1; i++)
-            {
-                richTextBox1.Text += dr.GetName(i) + "\n";
-            }
-
-            //顯示資料表欄位的所有資料
-            while (dr.Read())
-            {
-                for (int i = 0; i <= dr.FieldCount - 1; i++)
-                {
-                    richTextBox1.Text += dr.GetValue(i) + "\n";
-                }
-            }
-            cn.Close();
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            // 資料庫檔案
-            db_filename = "DBMS.mdb";
-            builder = get_builder(db_filename);
-
-            //string dbpath = "C:\\Inetpub\\wwwroot\\ASPNET\\ch14\\App_Data\\DBMS.mdb";
-
-            cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
-
-            cn.Open();  // 打開資料庫連線
-
-            // 查詢字串
-            sqlstr = "SELECT * FROM 學生資料表";
-
-            OleDbDataAdapter da;
-            DataSet ds;
-            da = new OleDbDataAdapter(sqlstr, cn);
-            ds = new DataSet();
-            //讀取資料表
-            da.Fill(ds, "Table");
-            dataGridView2.DataSource = ds.Tables["Table"];
-            cn.Close();
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -820,74 +737,14 @@ namespace vcs_OleDb2
 
         private void button24_Click(object sender, EventArgs e)
         {
-            //取得一個資料庫的所有Table名稱
-            richTextBox1.Text += "取得一個資料庫的所有Table名稱\n";
-
-            // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
-            // 連接字串
-            //string cnstr = string.Format(db_cnstr, db_filename);
-
-            //這樣會列出所有 實際的資料表（不包含檢視表）
-
-            OleDbConnectionStringBuilder builder = get_builder(db_filename);
-
-            using (OleDbConnection cn = new OleDbConnection(builder.ConnectionString))  // 建立資料庫連接對象cn
-            {
-                cn.Open();
-                var schema = cn.GetSchema("TABLES");
-                foreach (System.Data.DataRow row in schema.Rows)
-                {
-                    richTextBox1.Text += row["TABLE_NAME"] + "\n";
-                }
-            }
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
-            // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
-
-            // 查詢字串
-            string sqlstr = "SELECT * FROM 科系代碼資料表";
-            oledb_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "全部 科系代碼資料表";
-
-            // 查詢字串
-            sqlstr = "SELECT * FROM 課程資料表";
-            oledb_read_database(db_filename, sqlstr, dataGridView2);
-            lb_dgv2.Text = "全部 課程資料表";
-
-            // 查詢字串
-            sqlstr = "SELECT * FROM 學生資料表";
-            oledb_read_database(db_filename, sqlstr, dataGridView3);
-            lb_dgv3.Text = "全部 學生資料表";
-
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
-            // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
-            // 查詢字串
-            string sqlstr = "SELECT * FROM 選課資料表";
-            oledb_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "全部 選課資料表";
-
-            // 查詢字串
-            sqlstr = "SELECT * FROM 查詢科系名稱";
-            oledb_read_database(db_filename, sqlstr, dataGridView2);
-            lb_dgv2.Text = "全部 查詢科系名稱";
-
-            // 查詢字串
-            sqlstr = "SELECT * FROM 變更欄位名稱";
-            oledb_read_database(db_filename, sqlstr, dataGridView3);
-            lb_dgv3.Text = "全部 變更欄位名稱";
-
-            // 查詢字串
-            sqlstr = "SELECT * FROM 查詢1";
-            oledb_read_database(db_filename, sqlstr, dataGridView4);
-            lb_dgv4.Text = "全部 查詢1";
         }
 
         private void button27_Click(object sender, EventArgs e)

@@ -8,8 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
-using System.Reflection;    //for Assembly
-using System.Diagnostics;   //for FileVersionInfo
+using System.Reflection;  // for Assembly
+using System.Diagnostics;  // for FileVersionInfo
 
 namespace vcs_Assembly
 {
@@ -32,7 +32,7 @@ namespace vcs_Assembly
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
+
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -99,15 +99,10 @@ namespace vcs_Assembly
             //AssemblyName updatedAssemblyName = updatedAssembly.GetName();
 
             richTextBox1.Text += currentAssembly.GetName() + "\n";
-
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //通過exe文件獲得版本
-
             //通過exe文件獲得版本
 
             //string path = @"C:\Program Files (x86)\ArcGIS\Desktop10.8\bin\ArcMap.exe";
@@ -311,8 +306,6 @@ namespace vcs_Assembly
         {
             //取得專案內所有表單名稱
 
-            //取得專案內所有表單名稱
-
             Assembly a = Assembly.GetExecutingAssembly();       //取得目前組件
 
             richTextBox1.Text += "目前組件 : " + a.ToString() + "\n";
@@ -348,14 +341,9 @@ namespace vcs_Assembly
             Assembly asm = Assembly.GetExecutingAssembly();
             string name = asm.GetName().Name;
             richTextBox1.Text += "name : " + name + "\n";
-
-
         }
     }
 }
-
-
-
 
 /*
 

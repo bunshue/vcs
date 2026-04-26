@@ -33,12 +33,15 @@ namespace vcs_ErrorProvider
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
-            richTextBox1.Size = new Size(640, 276);
-            //richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
+
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+
+            richTextBox1.Size = new Size(640, 220);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            //this.Size = new Size(1273, 750);
+            this.Size = new Size(700, 700);
             this.Text = "vcs_ErrorProvider";
 
             //設定執行後的表單起始位置, 正中央

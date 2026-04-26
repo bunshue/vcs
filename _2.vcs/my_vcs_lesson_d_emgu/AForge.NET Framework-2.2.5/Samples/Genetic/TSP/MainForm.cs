@@ -20,71 +20,63 @@ using AForge.Controls;
 
 namespace TSP
 {
-	/// <summary>
-	/// Summary description for Form1.
-	/// </summary>
-	public class MainForm : System.Windows.Forms.Form
+    /// <summary>
+    /// Summary description for Form1.
+    /// </summary>
+    public class MainForm : System.Windows.Forms.Form
     {
-		private AForge.Controls.Chart mapControl;
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.TextBox citiesCountBox;
+        private AForge.Controls.Chart mapControl;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox citiesCountBox;
         private System.Windows.Forms.Button generateMapButton;
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		private System.ComponentModel.Container components = null;
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.Container components = null;
 
-		private int citiesCount = 20;
-		private int populationSize = 40;
-		private int iterations = 100;
-		private int selectionMethod = 0;
-		private bool greedyCrossover = true;
+        private int citiesCount = 20;
+        private double[,] map = null;
 
-		private double[,]	map = null;
+        // Constructor
+        public MainForm()
+        {
+            //
+            // Required for Windows Form Designer support
+            //
+            InitializeComponent();
 
-        private Thread workerThread = null;
-		private volatile bool needToStop = false;
+            // set up map control
+            mapControl.RangeX = new Range(0, 1000);
+            mapControl.RangeY = new Range(0, 1000);
+            mapControl.AddDataSeries("map", Color.Red, Chart.SeriesType.Dots, 5, false);
+            mapControl.AddDataSeries("path", Color.Blue, Chart.SeriesType.Line, 1, false);
 
-		// Constructor
-		public MainForm( )
-		{
-			//
-			// Required for Windows Form Designer support
-			//
-			InitializeComponent();
+            UpdateSettings();
+            GenerateMap();
+        }
 
-			// set up map control
-			mapControl.RangeX = new Range( 0, 1000 );
-			mapControl.RangeY = new Range( 0, 1000 );
-			mapControl.AddDataSeries( "map", Color.Red, Chart.SeriesType.Dots, 5, false );
-			mapControl.AddDataSeries( "path", Color.Blue, Chart.SeriesType.Line, 1, false );
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
-			UpdateSettings( );
-			GenerateMap( );
-		}
-
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if (components != null) 
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
-
-		#region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        #region Windows Form Designer generated code
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.generateMapButton = new System.Windows.Forms.Button();
             this.citiesCountBox = new System.Windows.Forms.TextBox();
@@ -128,7 +120,7 @@ namespace TSP
             // MainForm
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 15);
-            this.ClientSize = new System.Drawing.Size(515, 515);
+            this.ClientSize = new System.Drawing.Size(857, 636);
             this.Controls.Add(this.generateMapButton);
             this.Controls.Add(this.citiesCountBox);
             this.Controls.Add(this.mapControl);
@@ -142,28 +134,28 @@ namespace TSP
             this.ResumeLayout(false);
             this.PerformLayout();
 
-		}
-		#endregion
+        }
+        #endregion
 
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
-		[STAThread]
-		static void Main( ) 
-		{
-			Application.Run( new MainForm( ) );
-		}
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            Application.Run(new MainForm());
+        }
 
         // Delegates to enable async calls for setting controls properties
-        private delegate void SetTextCallback( System.Windows.Forms.Control control, string text );
+        private delegate void SetTextCallback(System.Windows.Forms.Control control, string text);
 
         // Thread safe updating of control's text property
-        private void SetText( System.Windows.Forms.Control control, string text )
+        private void SetText(System.Windows.Forms.Control control, string text)
         {
-            if ( control.InvokeRequired )
+            if (control.InvokeRequired)
             {
-                SetTextCallback d = new SetTextCallback( SetText );
-                Invoke( d, new object[] { control, text } );
+                SetTextCallback d = new SetTextCallback(SetText);
+                Invoke(d, new object[] { control, text });
             }
             else
             {
@@ -171,84 +163,76 @@ namespace TSP
             }
         }
 
-        // On main form closing
-		private void MainForm_Closing( object sender, System.ComponentModel.CancelEventArgs e )
-		{
-			// check if worker thread is running
-			if ( ( workerThread != null ) && ( workerThread.IsAlive ) )
-			{
-				needToStop = true;
-                while ( !workerThread.Join( 100 ) )
-                    Application.DoEvents( );
-			}
-		}
+        private void MainForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+        }
 
-		// Update settings controls
-		private void UpdateSettings( )
-		{
-			citiesCountBox.Text		= citiesCount.ToString( );
-		}
+        // Update settings controls
+        private void UpdateSettings()
+        {
+            citiesCountBox.Text = citiesCount.ToString();
+        }
 
         // Delegates to enable async calls for setting controls properties
-        private delegate void EnableCallback( bool enable );
+        private delegate void EnableCallback(bool enable);
 
         // Enable/disale controls (safe for threading)
-        private void EnableControls( bool enable )
-		{
-            if ( InvokeRequired )
+        private void EnableControls(bool enable)
+        {
+            if (InvokeRequired)
             {
-                EnableCallback d = new EnableCallback( EnableControls );
-                Invoke( d, new object[] { enable } );
+                EnableCallback d = new EnableCallback(EnableControls);
+                Invoke(d, new object[] { enable });
             }
             else
             {
-                citiesCountBox.Enabled      = enable;
+                citiesCountBox.Enabled = enable;
 
-                generateMapButton.Enabled   = enable;
+                generateMapButton.Enabled = enable;
             }
-		}
+        }
 
-		// Generate new map for the Traivaling Salesman problem
-		private void GenerateMap( )
-		{
-			Random rand = new Random( (int) DateTime.Now.Ticks );
+        // Generate new map for the Traivaling Salesman problem
+        private void GenerateMap()
+        {
+            Random rand = new Random((int)DateTime.Now.Ticks);
 
-			// create coordinates array
-			map = new double[citiesCount, 2];
+            // create coordinates array
+            map = new double[citiesCount, 2];
 
-			for ( int i = 0; i < citiesCount; i++ )
-			{
-				map[i, 0] = rand.Next( 1001 );
-				map[i, 1] = rand.Next( 1001 );
-			}
+            for (int i = 0; i < citiesCount; i++)
+            {
+                map[i, 0] = rand.Next(1001);
+                map[i, 1] = rand.Next(1001);
+            }
 
-			// set the map
-			mapControl.UpdateDataSeries( "map", map );
-			// erase path if it is
-			mapControl.UpdateDataSeries( "path", null );
-		}
+            // set the map
+            mapControl.UpdateDataSeries("map", map);
+            // erase path if it is
+            mapControl.UpdateDataSeries("path", null);
+        }
 
-		// On "Generate" button click - generate map
-		private void generateMapButton_Click( object sender, System.EventArgs e )
-		{
-			// get cities count
-			try
-			{
-				citiesCount = Math.Max( 5, Math.Min( 50, int.Parse( citiesCountBox.Text ) ) );
-			}
-			catch
-			{
-				citiesCount = 20;
-			}
-			citiesCountBox.Text = citiesCount.ToString( );
+        // On "Generate" button click - generate map
+        private void generateMapButton_Click(object sender, System.EventArgs e)
+        {
+            // get cities count
+            try
+            {
+                citiesCount = Math.Max(5, Math.Min(50, int.Parse(citiesCountBox.Text)));
+            }
+            catch
+            {
+                citiesCount = 20;
+            }
+            citiesCountBox.Text = citiesCount.ToString();
 
-			// regenerate map
-			GenerateMap( );
-		}
+            // regenerate map
+            GenerateMap();
+        }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
 
         }
-	}
+    }
 }

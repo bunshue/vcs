@@ -36,12 +36,14 @@ namespace 禁用外觀選項卡
 
         private void button2_Click(object sender, EventArgs e)
         {
-        //開啟顯示器設定
+            richTextBox1.Text += "檢視顯示屬性視窗, 開啟顯示器設定\n";
             System.Diagnostics.Process.Start("desk.cpl");
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "禁用外觀選項\n";
+
             RegistryKey mreg;
             mreg = Registry.CurrentUser;
             mreg = mreg.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Policies\System");
@@ -56,6 +58,8 @@ namespace 禁用外觀選項卡
 
         private void button3_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "啟用外觀選項\n";
+
             RegistryKey mreg;
             mreg = Registry.CurrentUser;
             mreg = mreg.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Policies\System");

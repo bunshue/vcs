@@ -32,6 +32,13 @@ namespace vcs_AForgeTest1
         private int agentStopX;
         private int agentStopY;
 
+        private double[] data3 = null;
+        private double[,] dataToShow = null;
+        private double[,] windowDelimiter = new double[2, 2] { { 0, 0 }, { 0, 0 } };
+        private double[,] predictionDelimiter = new double[2, 2] { { 0, 0 }, { 0, 0 } };
+        private int windowSize = 5;
+        private int predictionSize = 1;
+
         public Form1()
         {
             InitializeComponent();
@@ -64,9 +71,16 @@ namespace vcs_AForgeTest1
             ch2.Width = 100;
             listView1.Columns.Add(ch2);
 
-
             // set world colors
             cellWorld1.Coloring = new Color[] { Color.White, Color.Green, Color.Black, Color.Red };
+
+            //3030
+
+            chart3.AddDataSeries("data", Color.Red, Chart.SeriesType.Dots, 5);
+            chart3.AddDataSeries("solution", Color.Blue, Chart.SeriesType.Line, 1);
+            chart3.AddDataSeries("window", Color.LightGray, Chart.SeriesType.Line, 1, false);
+            chart3.AddDataSeries("prediction", Color.Gray, Chart.SeriesType.Line, 1, false);
+
         }
 
         private void show_item_location()
@@ -97,7 +111,8 @@ namespace vcs_AForgeTest1
             chart2.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 8);
             cellWorld1.Size = new Size(200, 200);
             cellWorld1.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 11);
-
+            chart3.Size = new Size(400, 200);
+            chart3.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 11);
             pictureBox1.Size = new Size(100, 100);
             pictureBox1.Location = new System.Drawing.Point(x_st + dx * 3, y_st + dy * 0);
 
@@ -346,15 +361,110 @@ namespace vcs_AForgeTest1
                     reader.Close();
                 }
             }
-
-
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button3_Click(object sender, EventArgs e)
         {
+            listView1.Clear();
+            //設定欄位
+            ColumnHeader ch1 = new ColumnHeader();
+            ch1.Text = "Y-Real";
+            ch1.Width = 100;
+            listView1.Columns.Add(ch1);
+
+            ColumnHeader ch2 = new ColumnHeader();
+            ch2.Text = "Y-Estimated";
+            ch2.Width = 100;
+            listView1.Columns.Add(ch2);
+
+            string csv_filename1 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\AForge.NET Framework-2.2.5\Samples\vcs_AForgeTest1\vcs_AForgeTest1\data_time_series\exponent.csv";
+            string csv_filename2 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\AForge.NET Framework-2.2.5\Samples\vcs_AForgeTest1\vcs_AForgeTest1\data_time_series\growing sinusoid.csv";
+            string csv_filename3 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\AForge.NET Framework-2.2.5\Samples\vcs_AForgeTest1\vcs_AForgeTest1\data_time_series\parabola.csv";
+            string csv_filename4 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\AForge.NET Framework-2.2.5\Samples\vcs_AForgeTest1\vcs_AForgeTest1\data_time_series\sigmoid.csv";
+            string csv_filename5 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\AForge.NET Framework-2.2.5\Samples\vcs_AForgeTest1\vcs_AForgeTest1\data_time_series\sinusoid.csv";
+
+            StreamReader reader = null;
+            // read maximum 50 points
+            double[] tempData = new double[50];
+
+            try
+            {
+                // open selected file
+                reader = File.OpenText(csv_filename2);
+                string str = null;
+                int i = 0;
+
+                // read the data
+                while ((i < 50) && ((str = reader.ReadLine()) != null))
+                {
+                    // parse the value
+                    tempData[i] = double.Parse(str);
+
+                    i++;
+                }
+
+                // allocate and set data
+                data3 = new double[i];
+                dataToShow = new double[i, 2];
+                Array.Copy(tempData, 0, data3, 0, i);
+                for (int j = 0; j < i; j++)
+                {
+                    dataToShow[j, 0] = j;
+                    dataToShow[j, 1] = data3[j];
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Failed reading the file", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            finally
+            {
+                // close file
+                if (reader != null)
+                    reader.Close();
+            }
+
+            // update list and chart
+            UpdateDataListView3();
+            chart3.RangeX = new Range(0, data3.Length - 1);
+            chart3.UpdateDataSeries("data", dataToShow);
+            chart3.UpdateDataSeries("solution", null);
+            // set delimiters
+            UpdateDelimiters();
         }
+
+        // Update delimiters on the chart
+        private void UpdateDelimiters()
+        {
+            // window delimiter
+            windowDelimiter[0, 0] = windowDelimiter[1, 0] = windowSize;
+            windowDelimiter[0, 1] = chart3.RangeY.Min;
+            windowDelimiter[1, 1] = chart3.RangeY.Max;
+            chart3.UpdateDataSeries("window", windowDelimiter);
+            // prediction delimiter
+            predictionDelimiter[0, 0] = predictionDelimiter[1, 0] = data3.Length - 1 - predictionSize;
+            predictionDelimiter[0, 1] = chart3.RangeY.Min;
+            predictionDelimiter[1, 1] = chart3.RangeY.Max;
+            chart3.UpdateDataSeries("prediction", predictionDelimiter);
+        }
+
+        // Update data in list view
+        private void UpdateDataListView3()
+        {
+            // remove all current records
+            listView1.Items.Clear();
+            // add new records
+            for (int i = 0, n = data3.GetLength(0); i < n; i++)
+            {
+                listView1.Items.Add(data3[i].ToString());
+            }
+        }
+
+
+        //------------------------------------------------------------  # 60個
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -417,4 +527,18 @@ namespace vcs_AForgeTest1
 */
 
 
+/*
+        // Clear current solution
+        private void ClearSolution()
+        {
+            // remove solution form chart
+            chart3.UpdateDataSeries("solution", null);
 
+            // remove it from data list view
+            for (int i = 0, n = dataList.Items.Count; i < n; i++)
+            {
+                if (dataList.Items[i].SubItems.Count > 1)
+                    dataList.Items[i].SubItems.RemoveAt(1);
+            }
+        }
+*/

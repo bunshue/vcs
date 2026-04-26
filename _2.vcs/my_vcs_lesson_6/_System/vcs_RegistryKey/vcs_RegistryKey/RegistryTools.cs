@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using System.Windows.Forms;
+
 using Microsoft.Win32;  //for RegistryKey
 
 namespace vcs_RegistryKey
@@ -13,17 +13,14 @@ namespace vcs_RegistryKey
         // Remove all settings for this app.
         public static void ClearSettings(string app_name)
         {
-            RegistryKey reg_key =
-                Registry.CurrentUser.OpenSubKey("Software", true);
+            RegistryKey reg_key = Registry.CurrentUser.OpenSubKey("Software", true);
             reg_key.DeleteSubKeyTree(app_name);
         }
 
         // Save a value.
-        public static void SaveSetting(string app_name,
-            string name, object value)
+        public static void SaveSetting(string app_name, string name, object value)
         {
-            RegistryKey reg_key =
-                Registry.CurrentUser.OpenSubKey("Software", true);
+            RegistryKey reg_key = Registry.CurrentUser.OpenSubKey("Software", true);
             RegistryKey sub_key = reg_key.CreateSubKey(app_name);
             sub_key.SetValue(name, value);
         }
@@ -45,8 +42,7 @@ namespace vcs_RegistryKey
                 (int)GetSetting(app_name, "FormTop", frm.Top),
                 (int)GetSetting(app_name, "FormWidth", frm.Width),
                 (int)GetSetting(app_name, "FormHeight", frm.Height));
-            frm.WindowState = (FormWindowState)GetSetting(app_name, 
-                "FormWindowState", frm.WindowState);
+            frm.WindowState = (FormWindowState)GetSetting(app_name, "FormWindowState", frm.WindowState);
 
             // Load the controls' values.
             LoadChildSettings(app_name, frm);
@@ -67,13 +63,11 @@ namespace vcs_RegistryKey
                         break;
                     case "CheckBox":
                         CheckBox chk = child as CheckBox;
-                        chk.Checked = bool.Parse(GetSetting(app_name, 
-                            child.Name, chk.Checked.ToString()).ToString());
+                        chk.Checked = bool.Parse(GetSetting(app_name, child.Name, chk.Checked.ToString()).ToString());
                         break;
                     case "RadioButton":
                         RadioButton rad = child as RadioButton;
-                        rad.Checked = bool.Parse(GetSetting(app_name, 
-                            child.Name, rad.Checked.ToString()).ToString());
+                        rad.Checked = bool.Parse(GetSetting(app_name, child.Name, rad.Checked.ToString()).ToString());
                         break;
                     case "VScrollBar":
                         VScrollBar vscr = child as VScrollBar;
@@ -97,10 +91,8 @@ namespace vcs_RegistryKey
                             lst.SetItemChecked(i, is_checked);
                         }
                         break;
-
                     // Add other control types here.
                 }
-
                 // Recursively restore the child's children.
                 LoadChildSettings(app_name, child);
             }
@@ -126,19 +118,15 @@ namespace vcs_RegistryKey
                 // Save bounds when we're restored.
                 SaveSetting(app_name, "FormLeft", frm.RestoreBounds.Left);
                 SaveSetting(app_name, "FormTop", frm.RestoreBounds.Top);
-                SaveSetting(app_name, "FormWidth",
-                    frm.RestoreBounds.Width);
-                SaveSetting(app_name, "FormHeight",
-                    frm.RestoreBounds.Height);
+                SaveSetting(app_name, "FormWidth", frm.RestoreBounds.Width);
+                SaveSetting(app_name, "FormHeight", frm.RestoreBounds.Height);
             }
-
             // Save the controls' values.
             SaveChildSettings(app_name, frm);
         }
 
         // Save all child control settings.
-        public static void SaveChildSettings(string app_name,
-            Control parent)
+        public static void SaveChildSettings(string app_name, Control parent)
         {
             foreach (Control child in parent.Controls)
             {
@@ -152,8 +140,7 @@ namespace vcs_RegistryKey
                         break;
                     case "CheckBox":
                         CheckBox chk = child as CheckBox;
-                        SaveSetting(app_name, child.Name,
-                            chk.Checked.ToString());
+                        SaveSetting(app_name, child.Name, chk.Checked.ToString());
                         break;
                     case "RadioButton":
                         RadioButton rad = child as RadioButton;

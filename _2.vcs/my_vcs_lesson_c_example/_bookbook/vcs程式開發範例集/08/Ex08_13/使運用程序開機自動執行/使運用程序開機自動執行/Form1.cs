@@ -44,15 +44,21 @@ namespace 使運用程序開機自動執行
 
         private void button2_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "開機自動執行\n";
+
             if (textBox1.Text != "")
             {
                 string strName = textBox1.Text.Trim();
                 if (!System.IO.File.Exists(strName))
+                {
                     return;
+                }
                 string strnewName = strName.Substring(strName.LastIndexOf("\\") + 1);
                 RegistryKey RKey = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
                 if (RKey == null)
+                {
                     RKey = Registry.LocalMachine.CreateSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run");
+                }
                 RKey.SetValue(strnewName, strName);
                 if (MessageBox.Show("設定完畢") == DialogResult.OK)
                 {
@@ -63,15 +69,21 @@ namespace 使運用程序開機自動執行
 
         private void button3_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "取消開機自動執行\n";
+
             if (textBox1.Text != "")
             {
                 string strName = textBox1.Text.Trim();
                 if (!System.IO.File.Exists(strName))
+                {
                     return;
+                }
                 string strnewName = strName.Substring(strName.LastIndexOf("\\") + 1);
                 RegistryKey RKey = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
                 if (RKey == null)
+                {
                     RKey = Registry.LocalMachine.CreateSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run");
+                }
                 RKey.DeleteValue(strnewName, false);
                 if (MessageBox.Show("設定完畢") == DialogResult.OK)
                 {

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblDisInfo = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
@@ -41,30 +40,20 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.lblDisInfo);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.trackBar1);
             this.groupBox1.Location = new System.Drawing.Point(30, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(161, 81);
+            this.groupBox1.Size = new System.Drawing.Size(438, 81);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "螢幕分辨率";
             // 
-            // lblDisInfo
-            // 
-            this.lblDisInfo.AutoSize = true;
-            this.lblDisInfo.Location = new System.Drawing.Point(36, 57);
-            this.lblDisInfo.Name = "lblDisInfo";
-            this.lblDisInfo.Size = new System.Drawing.Size(33, 12);
-            this.lblDisInfo.TabIndex = 3;
-            this.lblDisInfo.Text = "label3";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(134, 29);
+            this.label2.Location = new System.Drawing.Point(379, 29);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(17, 12);
             this.label2.TabIndex = 2;
@@ -84,13 +73,13 @@
             this.trackBar1.AutoSize = false;
             this.trackBar1.Location = new System.Drawing.Point(33, 26);
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(95, 23);
+            this.trackBar1.Size = new System.Drawing.Size(340, 23);
             this.trackBar1.TabIndex = 0;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(68, 105);
+            this.button1.Location = new System.Drawing.Point(30, 117);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -128,7 +117,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label lblDisInfo;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TrackBar trackBar1;

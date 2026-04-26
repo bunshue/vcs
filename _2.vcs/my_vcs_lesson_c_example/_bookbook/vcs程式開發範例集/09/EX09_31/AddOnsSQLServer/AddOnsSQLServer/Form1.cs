@@ -20,24 +20,19 @@ namespace AddOnsSQLServer
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            string mdf_filename = @"D:\_git\vcs\db_09_Data.MDF";
+            string ldf_filename = @"D:\_git\vcs\db_09_Log.LDF";
+            textBox3.Text = mdf_filename;
+            textBox2.Text = ldf_filename;
+            this.button3.Enabled = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                this.textBox3.Text = this.openFileDialog1.FileName;
-                this.button3.Enabled = true;
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (this.openFileDialog2.ShowDialog() == DialogResult.OK)
-            {
-                this.textBox2.Text = this.openFileDialog2.FileName;
-            }
         }
 
         private void button3_Click(object sender, EventArgs e)
