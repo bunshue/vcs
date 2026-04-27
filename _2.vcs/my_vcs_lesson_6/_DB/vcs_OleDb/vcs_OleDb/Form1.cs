@@ -556,7 +556,7 @@ namespace vcs_OleDb
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button9_Click(object sender, EventArgs e)
         {
@@ -661,8 +661,7 @@ namespace vcs_OleDb
             richTextBox1.Text += "\n";
         }
 
-
-        //6060
+        //------------------------------------------------------------  # 60個
 
         OleDbConnection cn;
         OleDbCommand cmd;
@@ -867,14 +866,82 @@ namespace vcs_OleDb
 
         private void button15_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "OleDb 15\n";
+
+            // 資料庫檔案
+            string db_filename = "book.TrasformAnalyse.mdb";
+
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 圖書排行";
+            oledb_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "全部資料 圖書排行";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //利用Trasform分析數據
+            // 查詢字串
+            sqlstr = "transform  sum(數量) as 庫存數量 select 語言類別 from 圖書排行 where 語言類別 in( 'c','VB','java') group by (語言類別) pivot 分析時間";
+            oledb_read_database(db_filename, sqlstr, dataGridView2);
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "OleDb 16\n";
+
+            // 資料庫檔案
+            string db_filename = "dt.trasformDynamic.mdb";
+
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 部門銷售額表";
+            oledb_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "全部資料 部門銷售額表";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //利用trasform動態分析數據
+
+            //區間範圍 軟件部 硬件部 網絡部
+            string search_dept = "軟件部','硬件部','網絡部";
+            string column1 = "銷售金額";
+            string column2 = "季度";
+            string column3 = "部門名稱";
+
+            // 查詢字串
+            sqlstr = "transform  sum(" + column1 + ") as 數據 select " + column3 + " from 部門銷售額表 where " + column3 + "  in('" + search_dept + "')  group by (" + column3 + ")  pivot " + column2 + "";
+            oledb_read_database(db_filename, sqlstr, dataGridView2);
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "OleDb 17\n";
+
+            // 資料庫檔案
+            string db_filename = "db_Test.mdb";
+
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 員工生日表";
+            oledb_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "全部資料 員工生日表";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            // 在查詢中使用日期函數
+            // 使用日期函數DateDiff計算年齡
+            // 自動計算年齡
+
+            // 查詢字串
+            sqlstr = "SELECT [員工生日表].[員工姓名], [員工生日表].[出生日期], DateDiff('yyyy',[員工生日表].[出生日期],DATE()) AS 年齡 FROM 員工生日表";
+            oledb_read_database(db_filename, sqlstr, dataGridView2);
+
+            //6060
+
+            //db_Test.StringFunctionFind.mdb
+
+            //"SELECT * FROM 員工生日表"
+            //在查詢語句中使用字串函數
+            //顯示出生年月
+
+            //"SELECT [員工生日表].[員工姓名], format([員工生日表].[出生日期],'yyyy年mm月dd日') AS 出生日期, mid([員工生日表].[出生日期],1,7) AS 出生年月 FROM 員工生日表;", con);
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -1233,8 +1300,6 @@ namespace vcs_OleDb
         {
             richTextBox1.Text += "OleDb 26\n";
 
-            //OleDb 9
-
             string cnstr = string.Empty;
 
             //Access或Excel数据库连接
@@ -1354,13 +1419,55 @@ namespace vcs_OleDb
 
         private void button28_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "OleDb 28\n";
+
+            // 資料庫檔案
+            string db_filename = "db_database.mdb";
+
+            // 查詢字串
+            string sqlstr = "SELECT * FROM tab_booksort";
+            oledb_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "全部資料 tab_booksort";
+
+            oledb_read_database_dr(db_filename, sqlstr);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //第一名
+            sqlstr = "select first(BookNames)as Bookname,first(author)as peo,first(sellsum)as slm from tab_booksort";
+            oledb_read_database(db_filename, sqlstr, dataGridView2);
+
+            //最後一名
+            sqlstr = "select Last(BookNames) as Bookname,Last(author)as peo,Last(sellsum)as slm from tab_booksort";
+            oledb_read_database(db_filename, sqlstr, dataGridView3);
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "OleDb 29\n";
+
+            // 資料庫檔案
+            string db_filename = "db_Test.FormatFind.mdb";
+
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 員工生日表";
+            oledb_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "全部資料 員工生日表";
+
+            oledb_read_database_dr(db_filename, sqlstr);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //在查詢語句中使用格式化函數
+            //將出生日期格式化為「年月日」的格式
+
+            // 查詢字串
+            sqlstr = "SELECT [員工生日表].[員工姓名], 出生日期 as 格式化前出生日期,format([員工生日表].[出生日期],'yyyy年mm月dd日') AS 格式化後出生日期 FROM 員工生日表;";
+            oledb_read_database(db_filename, sqlstr, dataGridView2);
         }
     }
 }
+
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
