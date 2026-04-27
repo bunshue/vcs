@@ -52,6 +52,9 @@
             this.ht2 = new System.Windows.Forms.Button();
             this.ht1 = new System.Windows.Forms.Button();
             this.ht0 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -94,6 +97,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 109;
+            this.button5.Text = "Hashtable的用法5";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -133,7 +137,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(563, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(230, 561);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 113;
@@ -142,7 +146,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(583, 46);
+            this.bt_clear.Location = new System.Drawing.Point(250, 595);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(66, 40);
             this.bt_clear.TabIndex = 114;
@@ -168,7 +172,7 @@
             this.groupBox1.Controls.Add(this.ht0);
             this.groupBox1.Location = new System.Drawing.Point(221, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(312, 352);
+            this.groupBox1.Size = new System.Drawing.Size(366, 420);
             this.groupBox1.TabIndex = 115;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "HashTable";
@@ -176,9 +180,9 @@
             // ht13
             // 
             this.ht13.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.ht13.Location = new System.Drawing.Point(164, 297);
+            this.ht13.Location = new System.Drawing.Point(182, 345);
             this.ht13.Name = "ht13";
-            this.ht13.Size = new System.Drawing.Size(140, 40);
+            this.ht13.Size = new System.Drawing.Size(160, 50);
             this.ht13.TabIndex = 76;
             this.ht13.UseVisualStyleBackColor = true;
             this.ht13.Click += new System.EventHandler(this.ht13_Click);
@@ -186,9 +190,9 @@
             // ht12
             // 
             this.ht12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.ht12.Location = new System.Drawing.Point(164, 251);
+            this.ht12.Location = new System.Drawing.Point(182, 291);
             this.ht12.Name = "ht12";
-            this.ht12.Size = new System.Drawing.Size(140, 40);
+            this.ht12.Size = new System.Drawing.Size(160, 50);
             this.ht12.TabIndex = 75;
             this.ht12.UseVisualStyleBackColor = true;
             this.ht12.Click += new System.EventHandler(this.ht12_Click);
@@ -196,9 +200,9 @@
             // ht11
             // 
             this.ht11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.ht11.Location = new System.Drawing.Point(164, 205);
+            this.ht11.Location = new System.Drawing.Point(182, 237);
             this.ht11.Name = "ht11";
-            this.ht11.Size = new System.Drawing.Size(140, 40);
+            this.ht11.Size = new System.Drawing.Size(160, 50);
             this.ht11.TabIndex = 74;
             this.ht11.UseVisualStyleBackColor = true;
             this.ht11.Click += new System.EventHandler(this.ht11_Click);
@@ -206,9 +210,9 @@
             // ht10
             // 
             this.ht10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.ht10.Location = new System.Drawing.Point(164, 159);
+            this.ht10.Location = new System.Drawing.Point(182, 183);
             this.ht10.Name = "ht10";
-            this.ht10.Size = new System.Drawing.Size(140, 40);
+            this.ht10.Size = new System.Drawing.Size(160, 50);
             this.ht10.TabIndex = 73;
             this.ht10.UseVisualStyleBackColor = true;
             this.ht10.Click += new System.EventHandler(this.ht10_Click);
@@ -216,9 +220,9 @@
             // ht9
             // 
             this.ht9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.ht9.Location = new System.Drawing.Point(164, 113);
+            this.ht9.Location = new System.Drawing.Point(182, 129);
             this.ht9.Name = "ht9";
-            this.ht9.Size = new System.Drawing.Size(140, 40);
+            this.ht9.Size = new System.Drawing.Size(160, 50);
             this.ht9.TabIndex = 72;
             this.ht9.Text = "Hashtable test";
             this.ht9.UseVisualStyleBackColor = true;
@@ -227,9 +231,9 @@
             // ht8
             // 
             this.ht8.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.ht8.Location = new System.Drawing.Point(164, 67);
+            this.ht8.Location = new System.Drawing.Point(182, 75);
             this.ht8.Name = "ht8";
-            this.ht8.Size = new System.Drawing.Size(140, 40);
+            this.ht8.Size = new System.Drawing.Size(160, 50);
             this.ht8.TabIndex = 71;
             this.ht8.Text = "遍歷Hashtable 的幾種方法";
             this.ht8.UseVisualStyleBackColor = true;
@@ -238,9 +242,9 @@
             // ht7
             // 
             this.ht7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.ht7.Location = new System.Drawing.Point(164, 21);
+            this.ht7.Location = new System.Drawing.Point(182, 21);
             this.ht7.Name = "ht7";
-            this.ht7.Size = new System.Drawing.Size(140, 40);
+            this.ht7.Size = new System.Drawing.Size(160, 50);
             this.ht7.TabIndex = 70;
             this.ht7.Text = "Hashtable 物件";
             this.ht7.UseVisualStyleBackColor = true;
@@ -249,9 +253,9 @@
             // ht6
             // 
             this.ht6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.ht6.Location = new System.Drawing.Point(18, 297);
+            this.ht6.Location = new System.Drawing.Point(18, 345);
             this.ht6.Name = "ht6";
-            this.ht6.Size = new System.Drawing.Size(140, 40);
+            this.ht6.Size = new System.Drawing.Size(160, 50);
             this.ht6.TabIndex = 69;
             this.ht6.Text = "獲取鍵的集合";
             this.ht6.UseVisualStyleBackColor = true;
@@ -260,9 +264,9 @@
             // ht5
             // 
             this.ht5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.ht5.Location = new System.Drawing.Point(18, 251);
+            this.ht5.Location = new System.Drawing.Point(18, 291);
             this.ht5.Name = "ht5";
-            this.ht5.Size = new System.Drawing.Size(140, 40);
+            this.ht5.Size = new System.Drawing.Size(160, 50);
             this.ht5.TabIndex = 68;
             this.ht5.Text = "sort";
             this.ht5.UseVisualStyleBackColor = true;
@@ -271,9 +275,9 @@
             // ht4
             // 
             this.ht4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.ht4.Location = new System.Drawing.Point(18, 205);
+            this.ht4.Location = new System.Drawing.Point(18, 237);
             this.ht4.Name = "ht4";
-            this.ht4.Size = new System.Drawing.Size(140, 40);
+            this.ht4.Size = new System.Drawing.Size(160, 50);
             this.ht4.TabIndex = 67;
             this.ht4.Text = "clear";
             this.ht4.UseVisualStyleBackColor = true;
@@ -282,9 +286,9 @@
             // ht3
             // 
             this.ht3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.ht3.Location = new System.Drawing.Point(18, 159);
+            this.ht3.Location = new System.Drawing.Point(18, 183);
             this.ht3.Name = "ht3";
-            this.ht3.Size = new System.Drawing.Size(140, 40);
+            this.ht3.Size = new System.Drawing.Size(160, 50);
             this.ht3.TabIndex = 66;
             this.ht3.Text = "modify";
             this.ht3.UseVisualStyleBackColor = true;
@@ -293,9 +297,9 @@
             // ht2
             // 
             this.ht2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.ht2.Location = new System.Drawing.Point(18, 113);
+            this.ht2.Location = new System.Drawing.Point(18, 129);
             this.ht2.Name = "ht2";
-            this.ht2.Size = new System.Drawing.Size(140, 40);
+            this.ht2.Size = new System.Drawing.Size(160, 50);
             this.ht2.TabIndex = 65;
             this.ht2.Text = "remove";
             this.ht2.UseVisualStyleBackColor = true;
@@ -304,9 +308,9 @@
             // ht1
             // 
             this.ht1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.ht1.Location = new System.Drawing.Point(18, 67);
+            this.ht1.Location = new System.Drawing.Point(18, 75);
             this.ht1.Name = "ht1";
-            this.ht1.Size = new System.Drawing.Size(140, 40);
+            this.ht1.Size = new System.Drawing.Size(160, 50);
             this.ht1.TabIndex = 64;
             this.ht1.Text = "add";
             this.ht1.UseVisualStyleBackColor = true;
@@ -317,17 +321,50 @@
             this.ht0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.ht0.Location = new System.Drawing.Point(18, 21);
             this.ht0.Name = "ht0";
-            this.ht0.Size = new System.Drawing.Size(140, 40);
+            this.ht0.Size = new System.Drawing.Size(160, 50);
             this.ht0.TabIndex = 63;
             this.ht0.Text = "show hashtable";
             this.ht0.UseVisualStyleBackColor = true;
             this.ht0.Click += new System.EventHandler(this.ht0_Click);
             // 
+            // button7
+            // 
+            this.button7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button7.Location = new System.Drawing.Point(12, 475);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(200, 60);
+            this.button7.TabIndex = 116;
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button8
+            // 
+            this.button8.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button8.Location = new System.Drawing.Point(12, 538);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(200, 60);
+            this.button8.TabIndex = 117;
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button9
+            // 
+            this.button9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button9.Location = new System.Drawing.Point(12, 604);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(200, 60);
+            this.button9.TabIndex = 118;
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1250, 793);
+            this.ClientSize = new System.Drawing.Size(687, 673);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
@@ -372,6 +409,9 @@
         private System.Windows.Forms.Button ht2;
         private System.Windows.Forms.Button ht1;
         private System.Windows.Forms.Button ht0;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
     }
 }
 

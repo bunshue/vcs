@@ -21,74 +21,38 @@ namespace DateToTreeView
         public static string[,] recordInfo;
 
         //窗体加载时，显示原有的数据
-        private void Form1_Load(object sender,EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
             //创建数据库连接字符串
             string P_Connection = string.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=..//..//test.mdb;User Id=Admin");    //sugar
             //string P_Connection = string.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=..//..//test.mdb;User Id=Admin");    //kilo
             OleDbDataAdapter P_OLeDbDataAdapter = new OleDbDataAdapter("select au_id as 用户编号,au_lname as 用户名,phone as 联系电话  from authors", P_Connection);
             DataSet ds = new DataSet();
-            P_OLeDbDataAdapter.Fill(ds,"UserInfo");
+            P_OLeDbDataAdapter.Fill(ds, "UserInfo");
             dataGridView1.DataSource = ds.Tables["UserInfo"].DefaultView;   //將所有資料都匯出到dataGridView上
 
-            show_dataset_content(ds);   //顯示資料庫的內容
-
-            TreeNode treeNode = new TreeNode("用户信息",0,0);
+            TreeNode treeNode = new TreeNode("用户信息", 0, 0);
             treeView1.Nodes.Add(treeNode);
             //默认情况下追加节点
             追加节点ToolStripMenuItem.Checked = true;
         }
 
-        //顯示資料庫的內容 ST
-        void show_dataset_content(DataSet ds)
-        {
-            richTextBox1.Text += "顯示資料庫的內容\n";
-
-            richTextBox1.Text += "Tables.Count = " + ds.Tables.Count.ToString() + "\n";
-            richTextBox1.Text += "Columns = " + ds.Tables[0].Columns.Count.ToString() + "\n";
-            richTextBox1.Text += "Rows = " + ds.Tables[0].Rows.Count.ToString() + "\n";
-            richTextBox1.Text += "TableName = " + ds.Tables[0].TableName + "\n\n";
-
-            richTextBox1.Text += "標題\n";
-            int i;
-            int j;
-            int C = ds.Tables[0].Columns.Count;
-            int R = ds.Tables[0].Rows.Count;
-            for (i = 0; i < C; i++)
-            {
-                richTextBox1.Text += ds.Tables[0].Columns[i] + "\t";
-            }
-            richTextBox1.Text += "\n\n";
-
-            richTextBox1.Text += "內容\n";
-            for (j = 0; j < R; j++)
-            {
-                for (i = 0; i < C; i++)
-                {
-                    richTextBox1.Text += ds.Tables[0].Rows[j].ItemArray[i] + "\t";
-                }
-                richTextBox1.Text += "\n";
-            }
-            richTextBox1.Text += "\n";
-        }
-        //顯示資料庫的內容 SP
-
         //DataGridView的按下鼠标事件
-        private void dataGridView1_MouseDown(object sender,MouseEventArgs e)
+        private void dataGridView1_MouseDown(object sender, MouseEventArgs e)
         {
-            if(dataGridView1.SelectedCells.Count != 0)
+            if (dataGridView1.SelectedCells.Count != 0)
             {
                 //定义一个二维数组，数组中的每一行代表DataGridView中的一条记录
-                recordInfo = new string[dataGridView1.Rows.Count,dataGridView1.Columns.Count];
+                recordInfo = new string[dataGridView1.Rows.Count, dataGridView1.Columns.Count];
 
                 //当按下鼠标左键时，首先获取选定行，记录每一行对应的信息
-                for(int i = 0; i < dataGridView1.Rows.Count; i++)
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 {
-                    if(dataGridView1.Rows[i].Selected)
+                    if (dataGridView1.Rows[i].Selected)
                     {
-                        for(int j = 0; j < dataGridView1.Columns.Count; j++)
+                        for (int j = 0; j < dataGridView1.Columns.Count; j++)
                         {
-                            recordInfo[i,j] = dataGridView1.Rows[i].Cells[j].Value.ToString();
+                            recordInfo[i, j] = dataGridView1.Rows[i].Cells[j].Value.ToString();
                         }
                     }
                 }
@@ -96,32 +60,32 @@ namespace DateToTreeView
         }
 
         //当鼠标进入TreeView控件时，触发的操作
-        private void treeView1_MouseEnter(object sender,EventArgs e)
+        private void treeView1_MouseEnter(object sender, EventArgs e)
         {
-            if(追加节点ToolStripMenuItem.Checked == true)
+            if (追加节点ToolStripMenuItem.Checked == true)
             {
-                #region 代码区域
-                if(recordInfo != null && recordInfo.Length != 0)
+                //#region 代码区域
+                if (recordInfo != null && recordInfo.Length != 0)
                 {
                     //用双重for循环遍历数组recordInfo中的内容
-                    for(int i = 0; i < recordInfo.GetLength(0); i++)
+                    for (int i = 0; i < recordInfo.GetLength(0); i++)
                     {
-                        for(int j = 0; j < recordInfo.GetLength(1); j++)
+                        for (int j = 0; j < recordInfo.GetLength(1); j++)
                         {
                             //判断数组中的值是否为空
-                            if(recordInfo[i,j] != null)
+                            if (recordInfo[i, j] != null)
                             {
-                                if(j == 0)
+                                if (j == 0)
                                 {
                                     //向TreeView中加入节点
-                                    TreeNode Node1 = new TreeNode(recordInfo[i,j].ToString());
+                                    TreeNode Node1 = new TreeNode(recordInfo[i, j].ToString());
                                     treeView1.SelectedNode.Nodes.Add(Node1);
                                     treeView1.SelectedNode = Node1;
                                 }
                                 else
                                 {
                                     //添加子级节点下的子节点
-                                    TreeNode Node2 = new TreeNode(recordInfo[i,j].ToString());
+                                    TreeNode Node2 = new TreeNode(recordInfo[i, j].ToString());
                                     treeView1.SelectedNode.Nodes.Add(Node2);
                                 }
                             }
@@ -131,47 +95,46 @@ namespace DateToTreeView
                         treeView1.ExpandAll();
                     }
                     //清空recordInfo中的记录
-                    for(int m = 0; m < recordInfo.GetLength(0); m++)
+                    for (int m = 0; m < recordInfo.GetLength(0); m++)
                     {
-                        for(int n = 0; n < recordInfo.GetLength(1); n++)
+                        for (int n = 0; n < recordInfo.GetLength(1); n++)
                         {
-                            recordInfo[m,n] = null;
+                            recordInfo[m, n] = null;
                         }
                     }
                 }
-
-                #endregion
+                //#endregion
             }
-            if(清空内容ToolStripMenuItem.Checked == true)
+            if (清空内容ToolStripMenuItem.Checked == true)
             {
-                if(treeView1.SelectedNode.Nodes.Count != 0)
+                if (treeView1.SelectedNode.Nodes.Count != 0)
                 {
                     treeView1.SelectedNode.Remove();
-                    TreeNode treeNode = new TreeNode("用户信息",0,0);
+                    TreeNode treeNode = new TreeNode("用户信息", 0, 0);
                     treeView1.Nodes.Add(treeNode);
                     treeView1.SelectedNode = treeNode;
-                    #region 代码区域
-                    if(recordInfo != null && recordInfo.Length != 0)
+                    //#region 代码区域
+                    if (recordInfo != null && recordInfo.Length != 0)
                     {
                         //用双重for循环遍历数组recordInfo中的内容
-                        for(int i = 0; i < recordInfo.GetLength(0); i++)
+                        for (int i = 0; i < recordInfo.GetLength(0); i++)
                         {
-                            for(int j = 0; j < recordInfo.GetLength(1); j++)
+                            for (int j = 0; j < recordInfo.GetLength(1); j++)
                             {
                                 //判断数组中的值是否为空
-                                if(recordInfo[i,j] != null)
+                                if (recordInfo[i, j] != null)
                                 {
-                                    if(j == 0)
+                                    if (j == 0)
                                     {
                                         //向TreeView中加入节点
-                                        TreeNode Node1 = new TreeNode(recordInfo[i,j].ToString());
+                                        TreeNode Node1 = new TreeNode(recordInfo[i, j].ToString());
                                         treeView1.SelectedNode.Nodes.Add(Node1);
                                         treeView1.SelectedNode = Node1;
                                     }
                                     else
                                     {
                                         //添加子级节点下的子节点
-                                        TreeNode Node2 = new TreeNode(recordInfo[i,j].ToString());
+                                        TreeNode Node2 = new TreeNode(recordInfo[i, j].ToString());
                                         treeView1.SelectedNode.Nodes.Add(Node2);
                                     }
                                 }
@@ -181,16 +144,16 @@ namespace DateToTreeView
                             treeView1.ExpandAll();
                         }
                         //清空recordInfo中的记录
-                        for(int m = 0; m < recordInfo.GetLength(0); m++)
+                        for (int m = 0; m < recordInfo.GetLength(0); m++)
                         {
-                            for(int n = 0; n < recordInfo.GetLength(1); n++)
+                            for (int n = 0; n < recordInfo.GetLength(1); n++)
                             {
-                                recordInfo[m,n] = null;
+                                recordInfo[m, n] = null;
                             }
                         }
                     }
 
-                    #endregion
+                    //#endregion
                     追加节点ToolStripMenuItem.Checked = true;
                     清空内容ToolStripMenuItem.Checked = false;
                 }
@@ -198,25 +161,24 @@ namespace DateToTreeView
             }
         }
 
-        #region 默认项的设置
-        private void 清空内容ToolStripMenuItem_Click(object sender,EventArgs e)
+        //#region 默认项的设置
+        private void 清空内容ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(追加节点ToolStripMenuItem.Checked == true)
+            if (追加节点ToolStripMenuItem.Checked == true)
             {
                 清空内容ToolStripMenuItem.Checked = true;
                 追加节点ToolStripMenuItem.Checked = false;
             }
         }
 
-        private void 追加节点ToolStripMenuItem_Click(object sender,EventArgs e)
+        private void 追加节点ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(清空内容ToolStripMenuItem.Checked == true)
+            if (清空内容ToolStripMenuItem.Checked == true)
             {
                 追加节点ToolStripMenuItem.Checked = true;
                 清空内容ToolStripMenuItem.Checked = false;
             }
         }
-
-        #endregion
+        //#endregion
     }
 }

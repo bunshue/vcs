@@ -1,16 +1,4 @@
 ﻿
-            Hashtable ht = new Hashtable();
-            ht.Clear();
-            for (int i = 0; i < 10; i++)
-            {
-                ht.Add("aaa" + i.ToString(), 123);  // 加入到 Hashtable, Key不能重複
-            }
-
-            foreach (DictionaryEntry de in ht)
-            {
-                richTextBox1.Text += "de.Value = " + de.Value + "\tde.Key = " + de.Key + "\n";
-            }
-
 
 
 一次執行多個SQL指令, 若有指令失敗, 可以回復指令

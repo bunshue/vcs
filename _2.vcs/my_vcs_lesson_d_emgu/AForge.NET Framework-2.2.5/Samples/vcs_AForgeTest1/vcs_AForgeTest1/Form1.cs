@@ -74,14 +74,14 @@ namespace vcs_AForgeTest1
             // set world colors
             cellWorld1.Coloring = new Color[] { Color.White, Color.Green, Color.Black, Color.Red };
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             chart3.AddDataSeries("data", Color.Red, Chart.SeriesType.Dots, 5);
             chart3.AddDataSeries("solution", Color.Blue, Chart.SeriesType.Line, 1);
             chart3.AddDataSeries("window", Color.LightGray, Chart.SeriesType.Line, 1, false);
             chart3.AddDataSeries("prediction", Color.Gray, Chart.SeriesType.Line, 1, false);
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             // set up map control
             chart4.RangeX = new Range(0, 1000);
@@ -126,9 +126,7 @@ namespace vcs_AForgeTest1
             pictureBox1.Size = new Size(100, 100);
             pictureBox1.Location = new System.Drawing.Point(x_st + dx * 3, y_st + dy * 0);
             chart4.Size = new Size(200, 200);
-            chart4.Location = new System.Drawing.Point(x_st + dx *3, y_st + dy * 5);
-
-
+            chart4.Location = new System.Drawing.Point(x_st + dx * 3, y_st + dy * 5);
 
             richTextBox1.Size = new Size(400, 800);
             richTextBox1.Location = new System.Drawing.Point(x_st + dx * 4 + 30, y_st + dy * 0);

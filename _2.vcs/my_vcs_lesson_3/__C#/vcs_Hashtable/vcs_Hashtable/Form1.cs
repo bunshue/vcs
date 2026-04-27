@@ -30,7 +30,6 @@ namespace vcs_Hashtable
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -38,13 +37,21 @@ namespace vcs_Hashtable
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
+            groupBox1.Size = new Size(360, 440);
             groupBox1.Location = new Point(x_st + dx * 1 + 10, y_st + dy * 0);
+
+            richTextBox1.Size = new Size(370, 690);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             x_st = 15;
             y_st = 15;
-            dx = 140 + 5;
-            dy = 40 + 5;
+            dx = 160 + 10;
+            dy = 50 + 10;
 
             ht0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             ht1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -62,11 +69,7 @@ namespace vcs_Hashtable
             ht12.Location = new Point(x_st + dx * 1, y_st + dy * 5);
             ht13.Location = new Point(x_st + dx * 1, y_st + dy * 6);
 
-            richTextBox1.Size = new Size(500, 600);
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-            this.Size = new Size(1273, 784);
+            this.Size = new Size(1040, 750);
             this.Text = "vcs_Hashtable";
 
             //設定執行後的表單起始位置, 正中央
@@ -267,13 +270,40 @@ namespace vcs_Hashtable
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //Hashtable的用法5
+
+            Hashtable ht = new Hashtable();
+            ht.Clear();
+            for (int i = 0; i < 10; i++)
+            {
+                ht.Add("aaa" + i.ToString(), 123);  // 加入到 Hashtable, Key不能重複
+            }
+
+            foreach (DictionaryEntry de in ht)
+            {
+                richTextBox1.Text += "de.Value = " + de.Value + "\tde.Key = " + de.Key + "\n";
+            }
+
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
         }
 
+        private void button7_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
 
         //Hashtable 測試 ST
 
@@ -586,12 +616,7 @@ namespace vcs_Hashtable
         {
 
         }
-
-
         //Hashtable 測試 SP
-
-
-
     }
 
     class Member
