@@ -83,13 +83,6 @@ namespace vcs_AForgeTest1
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            // set up map control
-            chart4.RangeX = new Range(0, 1000);
-            chart4.RangeY = new Range(0, 1000);
-            chart4.AddDataSeries("map", Color.Red, Chart.SeriesType.Dots, 5, false);
-            chart4.AddDataSeries("path", Color.Blue, Chart.SeriesType.Line, 1, false);
-
-
 
         }
 
@@ -125,8 +118,6 @@ namespace vcs_AForgeTest1
             chart3.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 11);
             pictureBox1.Size = new Size(100, 100);
             pictureBox1.Location = new System.Drawing.Point(x_st + dx * 3, y_st + dy * 0);
-            chart4.Size = new Size(200, 200);
-            chart4.Location = new System.Drawing.Point(x_st + dx * 3, y_st + dy * 5);
 
             richTextBox1.Size = new Size(400, 800);
             richTextBox1.Location = new System.Drawing.Point(x_st + dx * 4 + 30, y_st + dy * 0);
@@ -528,36 +519,9 @@ namespace vcs_AForgeTest1
 
         //------------------------------------------------------------  # 60個
 
-        private int citiesCount = 20;
-        private double[,] map4 = null;
-
         private void button4_Click(object sender, EventArgs e)
         {
-            citiesCount = 10;  // 個數
-
-            GenerateMap();
         }
-
-        // Generate new map for the Traivaling Salesman problem
-        private void GenerateMap()
-        {
-            Random rand = new Random((int)DateTime.Now.Ticks);
-
-            // create coordinates array
-            map4 = new double[citiesCount, 2];
-
-            for (int i = 0; i < citiesCount; i++)
-            {
-                map4[i, 0] = rand.Next(1001);
-                map4[i, 1] = rand.Next(1001);
-            }
-
-            // set the map
-            chart4.UpdateDataSeries("map", map4);
-            // erase path if it is
-            chart4.UpdateDataSeries("path", null);
-        }
-
 
         //------------------------------------------------------------  # 60個
 
