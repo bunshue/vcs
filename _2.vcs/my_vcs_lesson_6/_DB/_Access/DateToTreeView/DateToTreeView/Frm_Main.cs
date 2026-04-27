@@ -13,12 +13,13 @@ namespace DateToTreeView
 {
     public partial class Frm_Main : Form
     {
+        //声明本程序需要的变量
+        public static string[,] recordInfo;
+
         public Frm_Main()
         {
             InitializeComponent();
         }
-        //声明本程序需要的变量
-        public static string[,] recordInfo;
 
         //窗体加载时，显示原有的数据
         private void Form1_Load(object sender, EventArgs e)
@@ -89,7 +90,6 @@ namespace DateToTreeView
                                     treeView1.SelectedNode.Nodes.Add(Node2);
                                 }
                             }
-
                         }
                         treeView1.SelectedNode = treeView1.Nodes[0];
                         treeView1.ExpandAll();
@@ -105,6 +105,7 @@ namespace DateToTreeView
                 }
                 //#endregion
             }
+
             if (清空内容ToolStripMenuItem.Checked == true)
             {
                 if (treeView1.SelectedNode.Nodes.Count != 0)
@@ -157,7 +158,6 @@ namespace DateToTreeView
                     追加节点ToolStripMenuItem.Checked = true;
                     清空内容ToolStripMenuItem.Checked = false;
                 }
-
             }
         }
 
@@ -182,3 +182,4 @@ namespace DateToTreeView
         //#endregion
     }
 }
+

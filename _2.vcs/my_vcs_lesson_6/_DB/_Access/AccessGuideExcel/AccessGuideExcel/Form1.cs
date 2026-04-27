@@ -21,6 +21,7 @@ namespace AccessGuideExcel
         private void Form1_Load(object sender, EventArgs e)
         {
             textBox1.Text = filename;
+
             GetTable(filename, comboBox1);
 
             textBox2.Text = Application.StartupPath;
@@ -83,3 +84,4 @@ namespace AccessGuideExcel
         }
     }
 }
+

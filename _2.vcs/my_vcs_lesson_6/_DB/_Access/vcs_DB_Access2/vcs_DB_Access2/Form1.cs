@@ -57,17 +57,10 @@ namespace vcs_DB_Access2
                 "Year", 60, HorizontalAlignment.Right);
 
             // Connect to the database
-            using (OleDbConnection conn =
-                new OleDbConnection(
-                    "Provider=Microsoft.ACE.OLEDB.12.0;" +
-                    "Data Source=" + filename + ";" +
-                    "Mode=Share Deny None"))
+            using (OleDbConnection conn = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;" + "Data Source=" + filename + ";" + "Mode=Share Deny None"))
             {
                 // Get the book information.
-                OleDbCommand cmd = new OleDbCommand(
-                    "SELECT Title, URL, ISBN, CoverUrl, " +
-                    "Pages, Year, CoverImage FROM Books ORDER BY Year DESC",
-                    conn);
+                OleDbCommand cmd = new OleDbCommand("SELECT Title, URL, ISBN, CoverUrl, " + "Pages, Year, CoverImage FROM Books ORDER BY Year DESC", conn);
                 conn.Open();
                 using (OleDbDataReader reader = cmd.ExecuteReader())
                 {
@@ -84,16 +77,10 @@ namespace vcs_DB_Access2
                             float source_aspect = bm.Width / (float)bm.Height;
 
                             // Make the large image.
-                            AddImageToImageList(imlLargeIcons,
-                                bm, reader[0].ToString(),
-                                imlLargeIcons.ImageSize.Width,
-                                imlLargeIcons.ImageSize.Height);
+                            AddImageToImageList(imlLargeIcons, bm, reader[0].ToString(), imlLargeIcons.ImageSize.Width, imlLargeIcons.ImageSize.Height);
 
                             // Make the small image.
-                            AddImageToImageList(imlSmallIcons,
-                                bm, reader[0].ToString(),
-                                imlLargeIcons.ImageSize.Width,
-                                imlLargeIcons.ImageSize.Height);
+                            AddImageToImageList(imlSmallIcons, bm, reader[0].ToString(), imlLargeIcons.ImageSize.Width, imlLargeIcons.ImageSize.Height);
                         }
 
                         // Add the data row.

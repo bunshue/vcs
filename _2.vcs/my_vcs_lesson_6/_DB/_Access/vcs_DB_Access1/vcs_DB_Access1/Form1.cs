@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-//using System.Data.OleDb;
 using System.IO;
 using System.Data.OleDb;    //讀取Access需使用OLEDB
 
@@ -15,11 +14,6 @@ namespace vcs_DB_Access1
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         // The connection object.
         private OleDbConnection Conn;
 
@@ -31,6 +25,11 @@ namespace vcs_DB_Access1
         private ComboBox[] CboField, CboOperator;
         private TextBox[] TxtValue;
         private List<Type> DataTypes = new List<Type>();
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
 
         // Make a list of the table's fields.
         private void Form1_Load(object sender, EventArgs e)
@@ -49,10 +48,7 @@ namespace vcs_DB_Access1
             TableName = table_name;
 
             // Make the connection object.
-            Conn = new OleDbConnection(
-                "Provider=Microsoft.ACE.OLEDB.12.0;" +
-                "Data Source=" + db_name + ";" +
-                "Mode=Share Deny None");
+            Conn = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;" + "Data Source=" + db_name + ";" + "Mode=Share Deny None");
 
             // Get the fields in the BookInfo table.
             // Make a command object to represent the command.
@@ -211,7 +207,6 @@ namespace vcs_DB_Access1
             // 查詢字串, 顯示 科系代碼表, 由系碼排序
             string sqlstr = "SELECT * FROM 科系代碼資料表 ORDER BY 系碼 ASC";
             oledb_read_database(db_filename, sqlstr, dataGridView1);
-
         }
     }
 }

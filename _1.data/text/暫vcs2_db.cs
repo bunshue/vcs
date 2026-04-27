@@ -1,6 +1,23 @@
 ﻿
 
 
+//"Provider=Microsoft.Jet.OleDb.4.0;"是指數據提供者,這裡使用的是Microsoft Jet引擎,也就是Access中的數據引擎,asp.net就是靠這個和Access的數據庫連接的.
+//"Data Source=XXXXX.mdb"是指明數據源的位置
+
+
+/*
+如果訪問的數據庫是SQL Server 7.0，只需要把上面源代碼中的一條語句：
+private static string strConnect = "Provider = Microsoft.Jet.OLEDB.4.0 ; Data Source = " + Application.StartupPath + "\\MY.MDB" ;
+改變成：
+private static string strConnect = "Provider=SQLOLEDB.1 ; Persist Security Info=False ; User ID = sa ; Initial Catalog=數據庫名稱; Data Source = 服務器名稱 " ;
+即可。
+*/
+
+
+
+
+
+
 一次執行多個SQL指令, 若有指令失敗, 可以回復指令
 SqlTransaction
                 // 建立SqlTransaction交易物件tran
