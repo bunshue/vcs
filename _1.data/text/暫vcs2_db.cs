@@ -1,4 +1,39 @@
 ﻿
+//查看資料庫內有那些表單
+//SqlDataAdapter da = new SqlDataAdapter("select name from sysdatabases", con);
+
+
+            //備份資料庫
+            // 把資料庫檔案A的所有資料 備份到 資料庫檔案B
+
+            string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
+
+            string backup_filename = "aaaaaaaa.bak";
+            string db_filename = "db_09_Data.MDF";
+
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+
+            SqlConnection con = new SqlConnection();		//利用程式碼完成連接資料庫
+            con.ConnectionString = cnstr;
+            con.Open();
+            SqlCommand com = new SqlCommand();
+            com.CommandText = "BACKUP DATABASE " + "animals1_db" + " TO DISK = '" + backup_filename + "'";
+            com.Connection = con;							//連接
+            com.ExecuteNonQuery();						    //執行
+            con.Close();
+            con.Dispose();
+            richTextBox1.Text += "數據備份成功\n";
+
+
+
+
+
+
+
+
+
+
 
 
 //"Provider=Microsoft.Jet.OleDb.4.0;"是指數據提供者,這裡使用的是Microsoft Jet引擎,也就是Access中的數據引擎,asp.net就是靠這個和Access的數據庫連接的.

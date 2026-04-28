@@ -139,7 +139,6 @@ namespace DateToTreeView
                                         treeView1.SelectedNode.Nodes.Add(Node2);
                                     }
                                 }
-
                             }
                             treeView1.SelectedNode = treeView1.Nodes[0];
                             treeView1.ExpandAll();
@@ -182,4 +181,3 @@ namespace DateToTreeView
         //#endregion
     }
 }
-
