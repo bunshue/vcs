@@ -30,14 +30,17 @@ namespace GetDataStruct
         {
             //導出數據
 
-            groupBox1.Text = "數據表名稱：" + OutTable;
+            string table_name = "animals1_table";
+
+            groupBox1.Text = "數據表名稱：" + table_name;
+
             try
             {
                 using (SqlConnection con = new SqlConnection("Server=" + strserver + ";database=" + OutData + ";Uid=" + struser + ";Pwd=" + strpwd))
                 {
-                    string strSql = "select * from " + OutTable + "";
+                    string sqlstr = "select * from " + table_name + "";
                     con.Open();
-                    SqlDataAdapter da = new SqlDataAdapter(strSql, con);
+                    SqlDataAdapter da = new SqlDataAdapter(sqlstr, con);
                     System.Data.DataTable dt = new System.Data.DataTable();
                     da.Fill(dt);
                     this.dataGridView1.DataSource = dt.DefaultView;

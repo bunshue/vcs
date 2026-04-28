@@ -1,4 +1,59 @@
 ﻿
+//richTextBox1.Text += "共有" + (dataGridView1.Rows.Count - 1) + "条记录\n";
+
+
+
+                    //刪除表單
+                    //SqlCommand cmdnew = new SqlCommand("drop table animals1_table", con);
+                    //cmdnew.ExecuteNonQuery();
+
+
+
+
+
+sqlstr : select  name 字段名, xusertype 類型編號, length 長度 into animals1_table222 from syscolumns where id=object_id('') 
+sqlstr : select  name 字段名, xusertype 類型編號, length 長度 into animals1_table    from syscolumns where id=object_id('') 
+
+            // 查詢字串, 一次搜尋多個
+            string sqlstr = "SELECT * FROM cjd WHERE 姓名 IN('張三', '劉心')";
+
+
+//6060
+
+
+
+            // 取出某表單的 欄位名稱
+            string db_filename = "db_10_Data.MDF";
+            string table_name = "銷售表";
+            string sqlstr = "select c.name from syscolumns c,sysobjects a where a.name='" + table_name + "' and a.id=c.id";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+
+
+
+
+利用運算符查詢指定條件的數據
+
+            string sqlstr = "SELECT * FROM " + TableName;//組合運算符的SQL查詢語句
+
+            //左右模糊查詢
+            sqlstr = sqlstr + " where " + FieldName + " like '%" + FieldValue + "%'";//組合SQL查詢語句
+
+            //左模糊查詢
+            sqlstr = sqlstr + " where " + FieldName + " like '%" + FieldValue + "'";//組合SQL查詢語句
+            //右模糊查詢
+            sqlstr = sqlstr + " where " + FieldName + " like '" + FieldValue + "%'";//組合SQL查詢語句
+            //如是不是模糊查詢
+            sqlstr = sqlstr + " where " + FieldName + Condition + "'" + FieldValue + "'";//組合算數運算符查詢語句
+            //查詢條件為空
+            sqlstr = sqlstr + " where " + FieldName + " IS null or " + FieldName + "=''";
+
+
+
+
+//6060
+
+
+
 //查看資料庫內有那些表單
 //SqlDataAdapter da = new SqlDataAdapter("select name from sysdatabases", con);
 

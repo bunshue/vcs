@@ -82,43 +82,54 @@ namespace SQLServerDistill
         //提取表结构
         private void button3_Click(object sender, EventArgs e)
         {
+            Form2 frm2 = new Form2("ddddd");
+            frm2.listView1.Items.Clear();
+
             // 資料庫檔案
-            string db_filename = "db_20.mdf";
+            string db_filename = "animals1_db.mdf";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM animals1_table";
 
             // 連接字串
             string cnstr = string.Format(db_cnstr, db_filename);
 
-            if (comboBox2.Text == "" && comboBox3.Text == "")
+            //讀取資料庫
+            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
-                MessageBox.Show("请选择提取的表");
-            }
-            else
-            {
-                if (comboBox3.Text != "")//选择要提取的表
+                //cn.ConnectionString = cnstr;  // 連接字串, 可有可無
+                cn.Open();  // 打開資料庫連線
+
+                SqlCommand cmd = new SqlCommand(sqlstr, cn);
+                SqlDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
+
+                while (dr.Read())  // 讀取一筆資料到dr
                 {
-                    SqlConnection con = new SqlConnection(cnstr);
-                    SqlCommand com = new SqlCommand();
-                    com.CommandText = "sp_mshelpcolumns";//存储过程名
-                    com.CommandType = CommandType.StoredProcedure;
-                    com.Connection = con;
-                    com.Parameters.Add("@tablename", SqlDbType.NVarChar, 517);
-                    com.Parameters["@tablename"].Value = comboBox3.Text;
-                    SqlDataReader dr = com.ExecuteReader();
-                    Form2 frm2 = new Form2(comboBox3.Text);
-                    frm2.listView1.Items.Clear();
-                    while (dr.Read())
+                    for (int i = 0; i < dr.FieldCount; i++)
                     {
-                        ListViewItem lt = new ListViewItem(dr[0].ToString());
-                        lt.SubItems.Add(dr[2].ToString());
-                        lt.SubItems.Add(dr[3].ToString());
-                        frm2.listView1.Items.Add(lt);
+                        richTextBox1.Text += dr[i].ToString();
+                        //richTextBox1.Text += dr.GetValue(i).ToString();  // same
+                        if (i == (dr.FieldCount - 1))
+                        {
+                            richTextBox1.Text += "\n";
+                        }
+                        else
+                        {
+                            richTextBox1.Text += "\t";
+                        }
                     }
-                    dr.Close();
-                    con.Close();
-                    frm2.Show();
+
+
+                    ListViewItem lt = new ListViewItem(dr[0].ToString());
+                    lt.SubItems.Add(dr[2].ToString());
+                    lt.SubItems.Add(dr[3].ToString());
+                    frm2.listView1.Items.Add(lt);
+
                 }
+                dr.Close();
             }
-        }//是以何种方式登录，是Windows集成方式，不是SQlserver方式。
+
+            frm2.Show();
+        }
 
         public void getTables(string cnstr, string U)
         {

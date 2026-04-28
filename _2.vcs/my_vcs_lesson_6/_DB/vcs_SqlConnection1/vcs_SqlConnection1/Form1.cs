@@ -194,6 +194,7 @@ namespace vcs_SqlConnection1
         {
             // 連接字串
             string cnstr = string.Format(db_cnstr, db_filename);
+            //richTextBox1.Text += cnstr + "\n";
 
             //讀取資料庫至DGV
             try
@@ -632,6 +633,15 @@ namespace vcs_SqlConnection1
 
         private void button7_Click(object sender, EventArgs e)
         {
+            // 資料庫檔案
+            string db_filename = "animals1_db.mdf";
+            // 查詢字串
+            //string sqlstr = "SELECT * FROM animals1_table";
+
+            string sqlstr = "select name 字段名, xusertype 類型編號, length 長度 from syscolumns";
+
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "十二生肖全部資料";
         }
 
         private void button8_Click(object sender, EventArgs e)
