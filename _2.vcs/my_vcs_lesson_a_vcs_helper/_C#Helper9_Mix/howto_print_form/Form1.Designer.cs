@@ -48,6 +48,7 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.pdocForm = new System.Drawing.Printing.PrintDocument();
             this.ppdForm = new System.Windows.Forms.PrintPreviewDialog();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -57,9 +58,9 @@
             // btnClientArea
             // 
             this.btnClientArea.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClientArea.Location = new System.Drawing.Point(279, 41);
+            this.btnClientArea.Location = new System.Drawing.Point(273, 39);
             this.btnClientArea.Name = "btnClientArea";
-            this.btnClientArea.Size = new System.Drawing.Size(75, 23);
+            this.btnClientArea.Size = new System.Drawing.Size(75, 21);
             this.btnClientArea.TabIndex = 7;
             this.btnClientArea.Text = "Client Area";
             this.btnClientArea.UseVisualStyleBackColor = true;
@@ -68,9 +69,9 @@
             // btnPage2
             // 
             this.btnPage2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPage2.Location = new System.Drawing.Point(279, 128);
+            this.btnPage2.Location = new System.Drawing.Point(273, 119);
             this.btnPage2.Name = "btnPage2";
-            this.btnPage2.Size = new System.Drawing.Size(75, 23);
+            this.btnPage2.Size = new System.Drawing.Size(75, 21);
             this.btnPage2.TabIndex = 11;
             this.btnPage2.Text = "Page 2";
             this.btnPage2.UseVisualStyleBackColor = true;
@@ -79,9 +80,9 @@
             // btnPage1
             // 
             this.btnPage1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPage1.Location = new System.Drawing.Point(279, 99);
+            this.btnPage1.Location = new System.Drawing.Point(273, 92);
             this.btnPage1.Name = "btnPage1";
-            this.btnPage1.Size = new System.Drawing.Size(75, 23);
+            this.btnPage1.Size = new System.Drawing.Size(75, 21);
             this.btnPage1.TabIndex = 9;
             this.btnPage1.Text = "Page 1";
             this.btnPage1.UseVisualStyleBackColor = true;
@@ -90,9 +91,9 @@
             // btnGroupBox
             // 
             this.btnGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGroupBox.Location = new System.Drawing.Point(279, 70);
+            this.btnGroupBox.Location = new System.Drawing.Point(273, 66);
             this.btnGroupBox.Name = "btnGroupBox";
-            this.btnGroupBox.Size = new System.Drawing.Size(75, 23);
+            this.btnGroupBox.Size = new System.Drawing.Size(75, 21);
             this.btnGroupBox.TabIndex = 8;
             this.btnGroupBox.Text = "GroupBox";
             this.btnGroupBox.UseVisualStyleBackColor = true;
@@ -101,9 +102,9 @@
             // btnForm
             // 
             this.btnForm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnForm.Location = new System.Drawing.Point(279, 12);
+            this.btnForm.Location = new System.Drawing.Point(273, 12);
             this.btnForm.Name = "btnForm";
-            this.btnForm.Size = new System.Drawing.Size(75, 23);
+            this.btnForm.Size = new System.Drawing.Size(75, 21);
             this.btnForm.TabIndex = 5;
             this.btnForm.Text = "Form";
             this.btnForm.UseVisualStyleBackColor = true;
@@ -116,10 +117,10 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 157);
+            this.tabControl1.Location = new System.Drawing.Point(12, 145);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(342, 149);
+            this.tabControl1.Size = new System.Drawing.Size(681, 361);
             this.tabControl1.TabIndex = 10;
             // 
             // tabPage1
@@ -128,7 +129,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(334, 123);
+            this.tabPage1.Size = new System.Drawing.Size(673, 335);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -138,7 +139,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Comic Sans MS", 10F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(77, 43);
+            this.label1.Location = new System.Drawing.Point(77, 40);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(54, 19);
             this.label1.TabIndex = 0;
@@ -150,7 +151,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(334, 123);
+            this.tabPage2.Size = new System.Drawing.Size(334, 112);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -160,7 +161,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Comic Sans MS", 10F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.Blue;
-            this.label2.Location = new System.Drawing.Point(77, 43);
+            this.label2.Location = new System.Drawing.Point(77, 40);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 19);
             this.label2.TabIndex = 1;
@@ -175,9 +176,9 @@
             this.groupBox1.Controls.Add(this.checkBox2);
             this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(12, 11);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(217, 99);
+            this.groupBox1.Size = new System.Drawing.Size(217, 91);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
@@ -186,7 +187,7 @@
             // 
             this.radioButton3.AutoSize = true;
             this.radioButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton3.Location = new System.Drawing.Point(113, 67);
+            this.radioButton3.Location = new System.Drawing.Point(113, 62);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(85, 17);
             this.radioButton3.TabIndex = 5;
@@ -198,7 +199,7 @@
             // 
             this.radioButton2.AutoSize = true;
             this.radioButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton2.Location = new System.Drawing.Point(113, 44);
+            this.radioButton2.Location = new System.Drawing.Point(113, 41);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(85, 17);
             this.radioButton2.TabIndex = 4;
@@ -210,7 +211,7 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton1.Location = new System.Drawing.Point(113, 22);
+            this.radioButton1.Location = new System.Drawing.Point(113, 20);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(85, 17);
             this.radioButton1.TabIndex = 3;
@@ -222,7 +223,7 @@
             // 
             this.checkBox3.AutoSize = true;
             this.checkBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox3.Location = new System.Drawing.Point(15, 68);
+            this.checkBox3.Location = new System.Drawing.Point(15, 63);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(80, 17);
             this.checkBox3.TabIndex = 2;
@@ -233,7 +234,7 @@
             // 
             this.checkBox2.AutoSize = true;
             this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox2.Location = new System.Drawing.Point(15, 45);
+            this.checkBox2.Location = new System.Drawing.Point(15, 42);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(80, 17);
             this.checkBox2.TabIndex = 1;
@@ -244,7 +245,7 @@
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(15, 22);
+            this.checkBox1.Location = new System.Drawing.Point(15, 20);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(80, 17);
             this.checkBox1.TabIndex = 0;
@@ -266,11 +267,20 @@
             this.ppdForm.Name = "ppdForm";
             this.ppdForm.Visible = false;
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(365, 6);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(321, 155);
+            this.richTextBox1.TabIndex = 12;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(366, 318);
+            this.ClientSize = new System.Drawing.Size(705, 517);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btnClientArea);
             this.Controls.Add(this.btnPage2);
             this.Controls.Add(this.btnPage1);
@@ -280,6 +290,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "howto_print_form";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -312,6 +323,7 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Drawing.Printing.PrintDocument pdocForm;
         private System.Windows.Forms.PrintPreviewDialog ppdForm;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

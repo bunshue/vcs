@@ -23,12 +23,11 @@ namespace howto_thumbnail_web_table
         private void Form1_Load(object sender, EventArgs e)
         {
             DirectoryInfo dir_info;
-            dir_info = new DirectoryInfo(
-                Path.Combine(Application.StartupPath, "..\\..\\Input"));
+            dir_info = new DirectoryInfo(Path.Combine(Application.StartupPath, "..\\..\\Input"));
             txtInputDir.Text = dir_info.FullName;
 
-            dir_info = new DirectoryInfo(
-                Path.Combine(Application.StartupPath, "..\\..\\Output"));
+            dir_info = new DirectoryInfo(Path.Combine(Application.StartupPath, "..\\..\\Output"));
+
             txtOutputDir.Text = dir_info.FullName;
         }
 
@@ -57,17 +56,28 @@ namespace howto_thumbnail_web_table
         {
             // Get inputs.
             string input_dir = txtInputDir.Text;
-            if (!input_dir.EndsWith("\\")) input_dir += "\\";
+            if (!input_dir.EndsWith("\\"))
+            {
+                input_dir += "\\";
+            }
+
             string output_dir = txtOutputDir.Text;
-            if (!output_dir.EndsWith("\\")) output_dir += "\\";
+            if (!output_dir.EndsWith("\\"))
+            {
+                output_dir += "\\";
+            }
+
             string url_prefix = txtUrlPrefix.Text;
-            if ((url_prefix.Length > 0) && (!url_prefix.EndsWith("/"))) url_prefix += "/";
+            if ((url_prefix.Length > 0) && (!url_prefix.EndsWith("/")))
+            {
+                url_prefix += "/";
+            }
+
             int thumb_width = int.Parse(txtThumbWidth.Text);
             int thumb_height = int.Parse(txtThumbHeight.Text);
 
             // Do the work.
-            MakeWebPage(input_dir, output_dir, url_prefix,
-                txtWebPage.Text, thumb_width, thumb_height);
+            MakeWebPage(input_dir, output_dir, url_prefix, txtWebPage.Text, thumb_width, thumb_height);
         }
 
         // Make the web page and thumbnails.
@@ -88,8 +98,7 @@ namespace howto_thumbnail_web_table
                 int thumbs_this_row = 0;
 
                 // Make a list of the image files.
-                List<string> files =
-                    FindFiles(input_dir, "*.bmp;*.gif;*.jpg;*.png;*.tif", false);
+                List<string> files = FindFiles(input_dir, "*.bmp;*.gif;*.jpg;*.png;*.tif", false);
 
                 // Process the files.
                 foreach (string image_filename in files)
@@ -103,17 +112,13 @@ namespace howto_thumbnail_web_table
                     using (Bitmap bm = new Bitmap(image_filename))
                     {
                         // Get the original size.
-                        Rectangle src_rect =
-                            new Rectangle(0, 0, bm.Width, bm.Height);
+                        Rectangle src_rect = new Rectangle(0, 0, bm.Width, bm.Height);
 
                         // Shrink the image.
-                        double scale = Math.Min(
-                            (double)thumb_width / bm.Width,
-                            (double)thumb_height / bm.Height);
+                        double scale = Math.Min((double)thumb_width / bm.Width, (double)thumb_height / bm.Height);
                         int shrunk_width = (int)(bm.Width * scale);
                         int shrunk_height = (int)(bm.Height * scale);
-                        Rectangle dest_rect =
-                            new Rectangle(0, 0, shrunk_width, shrunk_height);
+                        Rectangle dest_rect = new Rectangle(0, 0, shrunk_width, shrunk_height);
 
                         using (Bitmap thumbnail = new Bitmap(shrunk_width, shrunk_height))
                         {
@@ -124,10 +129,7 @@ namespace howto_thumbnail_web_table
                             }
 
                             // Save the thumbnail image.
-                            string thumb_filename =
-                                dest_filename.Substring(0,
-                                    dest_filename.Length - image_fileinfo.Extension.Length) +
-                                "_thumb.png";
+                            string thumb_filename = dest_filename.Substring(0, dest_filename.Length - image_fileinfo.Extension.Length) + "_thumb.png";
                             thumbnail.Save(thumb_filename, ImageFormat.Png);
 
                             // Add the thumbnail image to the HTML page.

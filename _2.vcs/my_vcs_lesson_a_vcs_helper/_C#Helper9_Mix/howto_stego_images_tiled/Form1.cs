@@ -16,6 +16,11 @@ namespace howto_stego_images_tiled
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         // Hide and then recover the image.
         private void btnGo_Click(object sender, EventArgs e)
         {

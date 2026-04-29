@@ -18,6 +18,11 @@ namespace howto_stego_images_tiled2
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         // Hide and then recover the image.
         private void btnGo_Click(object sender, EventArgs e)
         {
@@ -37,8 +42,7 @@ namespace howto_stego_images_tiled2
 
             // Recover the hidden images.
             Bitmap hidden1, hidden2, hidden3, hidden4;
-            RecoverResizedTiledImages(combined, out hidden1,
-                out hidden2, out hidden3, out hidden4, num_bits);
+            RecoverResizedTiledImages(combined, out hidden1, out hidden2, out hidden3, out hidden4, num_bits);
             picHiddenRecovered1.Image = hidden1;
             picHiddenRecovered2.Image = hidden2;
             picHiddenRecovered3.Image = hidden3;
@@ -90,9 +94,7 @@ namespace howto_stego_images_tiled2
         }
 
         // Hide the four hidden images inside bm_visible and return the result.
-        public Bitmap HideTiledImages(Bitmap bm_visible,
-            Bitmap hidden1, Bitmap hidden2, Bitmap hidden3,
-            Bitmap hidden4, int hidden_bits)
+        public Bitmap HideTiledImages(Bitmap bm_visible, Bitmap hidden1, Bitmap hidden2, Bitmap hidden3, Bitmap hidden4, int hidden_bits)
         {
             // Tile the hidden images onto a
             // bitmap sized to fit the visible image.
@@ -121,9 +123,7 @@ namespace howto_stego_images_tiled2
         }
 
         // Recover four hidden images.
-        public void RecoverTiledImages(Bitmap bm_combined,
-            out Bitmap hidden1, out Bitmap hidden2,
-            out Bitmap hidden3, out Bitmap hidden4, int hidden_bits)
+        public void RecoverTiledImages(Bitmap bm_combined, out Bitmap hidden1, out Bitmap hidden2, out Bitmap hidden3, out Bitmap hidden4, int hidden_bits)
         {
             // Recover the tiled image.
             Bitmap bm = RecoverImage(bm_combined, hidden_bits);
@@ -164,9 +164,7 @@ namespace howto_stego_images_tiled2
         }
 
         // Hide the four hidden images inside bm_visible and return the result.
-        public Bitmap HideResizedTiledImages(Bitmap bm_visible,
-            Bitmap hidden1, Bitmap hidden2, Bitmap hidden3,
-            Bitmap hidden4, int hidden_bits)
+        public Bitmap HideResizedTiledImages(Bitmap bm_visible, Bitmap hidden1, Bitmap hidden2, Bitmap hidden3, Bitmap hidden4, int hidden_bits)
         {
             // Resize the hidden images to fit.
             int wid = bm_visible.Width / 2;
@@ -174,40 +172,35 @@ namespace howto_stego_images_tiled2
             Rectangle dest = new Rectangle(0, 0, wid, hgt);
 
             Bitmap bm1 = new Bitmap(wid, hgt);
-            Rectangle source = new Rectangle(0, 0,
-                hidden1.Width, hidden1.Height);
+            Rectangle source = new Rectangle(0, 0, hidden1.Width, hidden1.Height);
             using (Graphics gr = Graphics.FromImage(bm1))
             {
                 gr.DrawImage(hidden1, dest, source, GraphicsUnit.Pixel);
             }
 
             Bitmap bm2 = new Bitmap(wid, hgt);
-            source = new Rectangle(0, 0,
-                hidden2.Width, hidden2.Height);
+            source = new Rectangle(0, 0, hidden2.Width, hidden2.Height);
             using (Graphics gr = Graphics.FromImage(bm2))
             {
                 gr.DrawImage(hidden2, dest, source, GraphicsUnit.Pixel);
             }
 
             Bitmap bm3 = new Bitmap(wid, hgt);
-            source = new Rectangle(0, 0,
-                hidden3.Width, hidden3.Height);
+            source = new Rectangle(0, 0, hidden3.Width, hidden3.Height);
             using (Graphics gr = Graphics.FromImage(bm3))
             {
                 gr.DrawImage(hidden3, dest, source, GraphicsUnit.Pixel);
             }
 
             Bitmap bm4 = new Bitmap(wid, hgt);
-            source = new Rectangle(0, 0,
-                hidden4.Width, hidden4.Height);
+            source = new Rectangle(0, 0, hidden4.Width, hidden4.Height);
             using (Graphics gr = Graphics.FromImage(bm4))
             {
                 gr.DrawImage(hidden4, dest, source, GraphicsUnit.Pixel);
             }
 
             // Hide the resized images.
-            Bitmap combined = HideTiledImages(bm_visible,
-                bm1, bm2, bm3, bm4, hidden_bits);
+            Bitmap combined = HideTiledImages(bm_visible, bm1, bm2, bm3, bm4, hidden_bits);
 
             // Hide the sizes of the original images in the result.
             int[] sizes =
@@ -241,20 +234,16 @@ namespace howto_stego_images_tiled2
         }
 
         // Recover four resized tiled images.
-        public void RecoverResizedTiledImages(Bitmap bm_combined,
-            out Bitmap hidden1, out Bitmap hidden2,
-            out Bitmap hidden3, out Bitmap hidden4, int hidden_bits)
+        public void RecoverResizedTiledImages(Bitmap bm_combined, out Bitmap hidden1, out Bitmap hidden2, out Bitmap hidden3, out Bitmap hidden4, int hidden_bits)
         {
             // Get the image sizes.
             int x = 0, y = 0;
-            byte[] bytes = DecodeBytes(ref x, ref y,
-                4 * 2 * sizeof(int), bm_combined);
+            byte[] bytes = DecodeBytes(ref x, ref y, 4 * 2 * sizeof(int), bm_combined);
             int[] sizes = ByteArrayToIntArray(bytes);
 
             // Recover the resized tiled images.
             Bitmap bm1, bm2, bm3, bm4;
-            RecoverTiledImages(bm_combined, out bm1,
-                out bm2, out bm3, out bm4, hidden_bits);
+            RecoverTiledImages(bm_combined, out bm1, out bm2, out bm3, out bm4, hidden_bits);
 
             // Restore the images' original sizes.
             Rectangle dest;
@@ -317,10 +306,12 @@ namespace howto_stego_images_tiled2
             int message_length = message_bytes.Length;
             int space_available = bm.Width * bm.Height;
             if (message_length + 4 > space_available)
+            {
                 throw new InvalidDataException(
                     "Message length " + message_bytes.Length +
                     " is too long. This image can hold only " +
                     space_available + " bytes.");
+            }
 
             int total_length = message_length + 4;
 
@@ -346,7 +337,9 @@ namespace howto_stego_images_tiled2
         {
             // Encode the bytes.
             for (int i = 0; i < bytes.Length; i++)
+            {
                 EncodeByte(ref x, ref y, bm, bytes[i]);
+            }
         }
 
         // Encode a single byte at pixel (row, col).
@@ -361,8 +354,7 @@ namespace howto_stego_images_tiled2
         // positions from the left of the bits in b to encode.
         // Value dest_bit gives the bit in the pixel that should
         // hold the values. It should be 0 or 1.
-        private void EncodeBits(ref int x, ref int y, Bitmap bm,
-            byte b, int pos1, int pos2, int pos3, int pos4, int dest_bit)
+        private void EncodeBits(ref int x, ref int y, Bitmap bm, byte b, int pos1, int pos2, int pos3, int pos4, int dest_bit)
         {
             // Get the pixel's color.
             Color color = bm.GetPixel(x, y);
@@ -395,7 +387,10 @@ namespace howto_stego_images_tiled2
             bm.SetPixel(x, y, Color.FromArgb(alpha, red, green, blue));
 
             // Move to the next pixel.
-            if (dest_bit == 1) NextRowCol(ref x, ref y, bm);
+            if (dest_bit == 1)
+            {
+                NextRowCol(ref x, ref y, bm);
+            }
         }
 
         // Increment row and col to the next pixel in the image.
@@ -437,7 +432,9 @@ namespace howto_stego_images_tiled2
         {
             byte[] bytes = new byte[num_bytes];
             for (int i = 0; i < num_bytes; i++)
+            {
                 bytes[i] = DecodeByte(ref x, ref y, bm);
+            }
             return bytes;
         }
 
@@ -455,8 +452,7 @@ namespace howto_stego_images_tiled2
         // positions from the left of the bits in b to decode.
         // Value dest_bit gives the bit in the pixel that should
         // hold the values. It should be 0 or 1.
-        private void DecodeBits(ref int x, ref int y, Bitmap bm,
-            ref byte b, int pos1, int pos2, int pos3, int pos4, int dest_bit)
+        private void DecodeBits(ref int x, ref int y, Bitmap bm, ref byte b, int pos1, int pos2, int pos3, int pos4, int dest_bit)
         {
             // Get the pixel's color.
             Color color = bm.GetPixel(x, y);
@@ -482,7 +478,10 @@ namespace howto_stego_images_tiled2
             b |= (byte)(bit4 << pos4);
 
             // Move to the next pixel.
-            if (dest_bit == 1) NextRowCol(ref x, ref y, bm);
+            if (dest_bit == 1)
+            {
+                NextRowCol(ref x, ref y, bm);
+            }
         }
 
         // Return a byte as a string containing 0s and 1s.

@@ -63,7 +63,6 @@ namespace CamouflageFolder
                 txtID.ReadOnly = true;
                 txtID.Text = GetFolType();
             }
-
         }
 
         private void Camouflage(string str)									//用于创建desktop.ini文件

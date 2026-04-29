@@ -13,19 +13,23 @@ namespace howto_stego_bytes
 {
     public partial class Form1 : Form
     {
+        // A bitmap to record which pixels are used.
+        private Bitmap UsedBitmap;
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        // A bitmap to record which pixels are used.
-        private Bitmap UsedBitmap;
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
 
         // Encode the message.
         private void btnEncode_Click(object sender, EventArgs e)
         {
-            picEncoded.Image = EncodeMesssage(
-                picOriginal.Image as Bitmap, txtMessage.Text);
+            picEncoded.Image = EncodeMesssage(picOriginal.Image as Bitmap, txtMessage.Text);
             txtMessage.Clear();
             btnDecode.Enabled = true;
 
@@ -49,14 +53,15 @@ namespace howto_stego_bytes
             int message_length = message_bytes.Length;
             int space_available = bm.Width * bm.Height;
             if (message_length + 4 > space_available)
+            {
                 throw new InvalidDataException(
                     "Message length " + message_bytes.Length +
                     " is too long. This image can hold only " +
                     space_available + " bytes.");
+            }
 
             int total_length = message_length + 4;
-            lblResult.Text = "Encoded " +
-                total_length.ToString("N0") + " bytes";
+            lblResult.Text = "Encoded " + total_length.ToString("N0") + " bytes";
 
             // Make the result Bitmap.
             Bitmap result = bm.Clone() as Bitmap;
@@ -81,7 +86,9 @@ namespace howto_stego_bytes
         {
             // Encode the bytes.
             for (int i = 0; i < bytes.Length; i++)
+            {
                 EncodeByte(ref x, ref y, bm, bytes[i]);
+            }
         }
 
         // Encode a single byte at pixel (row, col).
@@ -96,8 +103,7 @@ namespace howto_stego_bytes
         // positions from the left of the bits in b to encode.
         // Value dest_bit gives the bit in the pixel that should
         // hold the values. It should be 0 or 1.
-        private void EncodeBits(ref int x, ref int y, Bitmap bm,
-            byte b, int pos1, int pos2, int pos3, int pos4, int dest_bit)
+        private void EncodeBits(ref int x, ref int y, Bitmap bm, byte b, int pos1, int pos2, int pos3, int pos4, int dest_bit)
         {
             // Get the pixel's color.
             Color color = bm.GetPixel(x, y);
@@ -131,7 +137,10 @@ namespace howto_stego_bytes
             UsedBitmap.SetPixel(x, y, Color.Red);
 
             // Move to the next pixel.
-            if (dest_bit == 1) NextRowCol(ref x, ref y, bm);
+            if (dest_bit == 1)
+            {
+                NextRowCol(ref x, ref y, bm);
+            }
         }
 
         // Increment row and col to the next pixel in the image.
@@ -179,7 +188,9 @@ namespace howto_stego_bytes
         {
             byte[] bytes = new byte[num_bytes];
             for (int i = 0; i < num_bytes; i++)
+            {
                 bytes[i] = DecodeByte(ref x, ref y, bm);
+            }
             return bytes;
         }
 
@@ -197,8 +208,7 @@ namespace howto_stego_bytes
         // positions from the left of the bits in b to decode.
         // Value dest_bit gives the bit in the pixel that should
         // hold the values. It should be 0 or 1.
-        private void DecodeBits(ref int x, ref int y, Bitmap bm,
-            ref byte b, int pos1, int pos2, int pos3, int pos4, int dest_bit)
+        private void DecodeBits(ref int x, ref int y, Bitmap bm, ref byte b, int pos1, int pos2, int pos3, int pos4, int dest_bit)
         {
             // Get the pixel's color.
             Color color = bm.GetPixel(x, y);
@@ -224,7 +234,10 @@ namespace howto_stego_bytes
             b |= (byte)(bit4 << pos4);
 
             // Move to the next pixel.
-            if (dest_bit == 1) NextRowCol(ref x, ref y, bm);
+            if (dest_bit == 1)
+            {
+                NextRowCol(ref x, ref y, bm);
+            }
         }
 
         // Return a byte as a string containing 0s and 1s.
@@ -234,8 +247,14 @@ namespace howto_stego_bytes
             string result = "";
             for (int i = 0; i < 8; i++)
             {
-                if ((b & mask) == 0) result = "0" + result;
-                else result = "1" + result;
+                if ((b & mask) == 0)
+                {
+                    result = "0" + result;
+                }
+                else
+                {
+                    result = "1" + result;
+                }
                 mask <<= 1;
             }
             return result;

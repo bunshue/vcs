@@ -19,6 +19,11 @@ namespace howto_print_form
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnForm_Click(object sender, EventArgs e)
         {
             ShowControlImage(this);
@@ -91,9 +96,7 @@ namespace howto_print_form
                 Bitmap bm = new Bitmap(wid, hgt);
                 using (Graphics gr = Graphics.FromImage(bm))
                 {
-                    gr.DrawImage(whole_form, 0, 0,
-                        new Rectangle(dx, dy, wid, hgt),
-                        GraphicsUnit.Pixel);
+                    gr.DrawImage(whole_form, 0, 0, new Rectangle(dx, dy, wid, hgt), GraphicsUnit.Pixel);
                 }
                 return bm;
             }
@@ -117,9 +120,7 @@ namespace howto_print_form
             // Center the image.
             int cx = e.MarginBounds.X + e.MarginBounds.Width / 2;
             int cy = e.MarginBounds.Y + e.MarginBounds.Height / 2;
-            Rectangle rect = new Rectangle(
-                cx - ImageToPrint.Width / 2, cy - ImageToPrint.Height / 2,
-                ImageToPrint.Width, ImageToPrint.Height);
+            Rectangle rect = new Rectangle(cx - ImageToPrint.Width / 2, cy - ImageToPrint.Height / 2, ImageToPrint.Width, ImageToPrint.Height);
 
             e.Graphics.InterpolationMode = InterpolationMode.High;
             e.Graphics.DrawImage(ImageToPrint, rect);

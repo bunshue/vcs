@@ -321,5 +321,13 @@ namespace BatchDecompression
             }
             catch { }
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //測試壓縮一個檔案 資料夾 => 檔案
+
+            Zip("D:\\TTTTT", "D:\\ttttt.zip");
+            MessageBox.Show("压缩文件成功");
+        }
     }
 }

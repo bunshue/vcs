@@ -14,7 +14,6 @@ namespace IMGAddDate
 {
     public partial class Frm_Main : Form
     {
-        public string flag = null;
         PropertyItem[] pi;
         string TakePicDateTime;
         int SpaceLocation;
@@ -39,47 +38,27 @@ namespace IMGAddDate
         private void Form1_Load(object sender, EventArgs e)
         {
             CheckForIllegalCrossThreadCalls = false;
+
+            listBox1.Items.Clear();
+            for (int i = 0; i < pic_array.Length; i++)
+            {
+                listBox1.Items.Add(pic_array[i]);
+            }
+
+            this.Text = pic_array.Length.ToString();
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            listBox1.Items.Clear();
-            for (int i = 0; i < pic_array.Length; i++)
-            {
-                listBox1.Items.Add(pic_array[i]);
-            }
-            flag = pic_array.Length.ToString();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            listBox1.Items.Clear();
-            flag = null;
-        }
-
         private void button4_Click(object sender, EventArgs e)
         {
-            if (flag == null)
-            {
-                richTextBox1.Text += "尚未添加圖片\n";
-                return;
-            }
-            else
-            {
-                AddDate();
-            }
-        }
+            richTextBox1.Text += "印上拍照日期\n";
+            richTextBox1.Text += "开始添加数码相片拍摄日期\n";
 
-        private void AddDate()
-        {
             Font normalContentFont = new Font("宋体", 36, FontStyle.Bold);
             Color normalContentColor = Color.Red;
-            int kk = 1;
-            richTextBox1.Text += "开始添加数码相片拍摄日期\n";
 
             for (int i = 0; i < listBox1.Items.Count; i++)
             {
@@ -113,16 +92,12 @@ namespace IMGAddDate
 
                 //释放内存位图对象
                 bitmap1.Dispose();
-                if (kk == listBox1.Items.Count)
-                {
-                    richTextBox1.Text += "全部数码相片拍摄日期添加成功\n";
-                    flag = null;
-                    listBox1.Items.Clear();
-                }
-                kk++;
+
                 //System.Threading.Thread.Sleep(3500);
                 //Application.DoEvents();
             }
+
+            richTextBox1.Text += "全部数码相片拍摄日期添加成功\n";
         }
 
         // 获取数码相片的拍摄日期
