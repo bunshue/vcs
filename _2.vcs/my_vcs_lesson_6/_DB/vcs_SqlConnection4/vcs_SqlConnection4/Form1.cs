@@ -678,108 +678,12 @@ namespace vcs_SqlConnection4
             */
         }
 
-        SqlConnection con;
-        SqlCommand cmd;
-
         private void button14_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "SQL 14\n";
-
-            // 資料庫檔案
-            string db_filename = "db_09_Data.mdf";
-
-            // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);
-
-            con = new SqlConnection(cnstr);
-
-            //新增
-
-            string get_new_id = ID();  // 自定義方法，自動產生編號
-            richTextBox1.Text += "自動產生編號 : " + get_new_id + "\n";
-
-            //保存
-
-            //利用預儲程序登入數據
-
-            string id = "P1006";  // 員工編號1
-            string name = "mary";  // 員工姓名2
-            string money = "12345";  // 基本工資4
-            string description = "well done";  // 工作評價5
-
-            using (SqlCommand cmd = new SqlCommand())//實例化SqlCommand類
-            {
-                try
-                {
-                    cmd.Connection = con;//建立資料庫的連接
-                    con.Open();//打開資料庫的連接
-                    cmd.CommandType = CommandType.StoredProcedure;//設定類型為預儲程序
-                    cmd.CommandText = "proc_insert";//預儲程序我
-                    SqlParameter[] prams =
-                        {
-						        new SqlParameter("@id", SqlDbType.VarChar, 8),
-                                new SqlParameter("@name", SqlDbType.VarChar, 50),
-                                new SqlParameter("@money", SqlDbType.Float),
-                                new SqlParameter("@talk", SqlDbType.VarChar, 50)
-				        };//新增預儲程序的參數名
-                    prams[0].Value = id;//設定參數值
-                    prams[1].Value = name;
-                    prams[2].Value = money;
-                    prams[3].Value = description;
-                    //新增參數
-                    foreach (SqlParameter parameter in prams)
-                    {
-                        cmd.Parameters.Add(parameter);
-                    }
-                    SqlParameter sqlpar = cmd.Parameters.Add("@Return", SqlDbType.Int);
-                    sqlpar.Direction = ParameterDirection.ReturnValue;//取得傳回值
-                    cmd.ExecuteNonQuery();//執行SQL語句
-                    con.Close();//關閉資料庫的連接
-                }
-                catch (Exception eu)
-                {
-                    richTextBox1.Text += "訊息有誤！！！\n";
-                    richTextBox1.Text += eu.Message.ToString() + "\n";
-                    con.Close();
-                    return;
-                }
-
-                int i = Convert.ToInt16(cmd.Parameters["@Return"].Value.ToString());//傳回影響的行數
-                if (i == 1)
-                {
-                    richTextBox1.Text += "新增過程成功\n";
-                }
-                else if (i == -1)
-                {
-                    richTextBox1.Text += "新增過程失敗\n";
-                }
-            }
         }
 
-        //自定義方法
-        private string ID()
-        {
-            try
-            {
-                SqlCommand cmd = new SqlCommand();//實例化SqlCommand類
-                cmd.Connection = con;//設定資料庫的連接
-                con.Open();//打開資料庫的連接
-                cmd.CommandType = CommandType.StoredProcedure;//設定類型為預儲程序
-                cmd.CommandText = "proc_Id";//預儲程序的名稱
-                SqlParameter sqlOutput = new SqlParameter("@Id", SqlDbType.VarChar, 8);//取得最後一個記錄的編號
-                sqlOutput.Direction = ParameterDirection.Output;//參數輸出
-                cmd.Parameters.Add(sqlOutput);//新增編號
-                cmd.ExecuteNonQuery();//執行SQL語句
-                con.Close();//關閉連接
-                richTextBox1.Text += "新增編號 : " + cmd.Parameters["@Id"].Value.ToString() + "\n";
-                return cmd.Parameters["@Id"].Value.ToString();//傳回編號的值
-            }
-            catch (Exception ey)
-            {
-                richTextBox1.Text += ey.Message + "\n";
-                return null;
-            }
-        }
+        SqlConnection con;
+        SqlCommand cmd;
 
         private void button15_Click(object sender, EventArgs e)
         {

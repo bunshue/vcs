@@ -1035,45 +1035,12 @@ namespace vcs_SqlConnection1
 
         private void button14_Click(object sender, EventArgs e)
         {
-            //使用交叉表实现商品销售统计
-
-            richTextBox1.Text += "按指定的条件使用交叉表查询数据\n";
-
-            //表头字段
-            string header_name = "订单号";
-
-            //分组字段
-            string product_name = "商品名";
-
-            //或者交換
-            //header_name = "商品名";
-            //product_name = "订单号";
-
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data2.mdf;Integrated Security=True;Connect Timeout=30";
-            SqlConnection cn = new SqlConnection(cnstr);  // 建立資料庫連接對象cn
-
-            // 查詢字串
-            string sqlstr = "proc_across_table";
-            SqlCommand cmd = new SqlCommand(sqlstr, cn);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@TableName", SqlDbType.VarChar, 50).Value = "商品销售表";
-
-            cmd.Parameters.Add("@NewColumn", SqlDbType.VarChar, 50).Value = header_name;  // 表頭字段
-            cmd.Parameters.Add("@GroupColumn", SqlDbType.VarChar, 50).Value = product_name;  // 分組字段
-            cmd.Parameters.Add("@StatColumn", SqlDbType.VarChar, 50).Value = "订货数量";
-            cmd.Parameters.Add("@Operator", SqlDbType.VarChar, 10).Value = "SUM";
-            SqlDataAdapter da = new SqlDataAdapter();  // 建立資料庫適配器對象da
-            da.SelectCommand = cmd;
-            DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-            da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
-            dataGridView1.DataSource = ds.Tables[0];
-            dataGridView1.Columns[1].Width = 120;
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
             //sysobjects
-            //取得數據庫中全部的預儲程序
+            //取得數據庫中全部的預儲程序, 但是取得後, 也不能利用, 因為不知道其內容
 
             // 資料庫檔案
             string db_filename = string.Empty;

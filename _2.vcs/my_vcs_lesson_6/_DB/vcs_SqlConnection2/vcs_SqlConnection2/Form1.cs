@@ -464,48 +464,6 @@ namespace vcs_SqlConnection2
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            //運用預儲程序新增數據
-
-            //員工基本訊息註冊
-
-            // 資料庫檔案
-            db_filename = "db_10_Data.MDF";
-            // 連接字串
-            cnstr = string.Format(db_cnstr, db_filename);
-
-            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
-            {
-                cn.Open();
-                SqlCommand cmd = new SqlCommand("procInsertEmployee", cn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                SqlParameter[] prams = {
-						new SqlParameter("@員工編號",  SqlDbType.VarChar, 50),
-                		new SqlParameter("@員工姓名",  SqlDbType.VarChar, 50),
-                		new SqlParameter("@身份證號",  SqlDbType.VarChar, 50),
-                        new SqlParameter("@聯繫電話",  SqlDbType.VarChar, 50) 
-			};
-
-                number = "123";
-                name = "david";
-                id = "A123456789";
-                phone = "0912345678";
-
-                prams[0].Value = number;
-                prams[1].Value = name;
-                prams[2].Value = id;
-                prams[3].Value = phone;
-
-                // 新增參數
-                foreach (SqlParameter parameter in prams)
-                {
-                    cmd.Parameters.Add(parameter);
-                }
-                cmd.ExecuteNonQuery();
-                cn.Close();
-            }
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
             //運用預儲程序修改數據
 
             //show
@@ -517,43 +475,6 @@ namespace vcs_SqlConnection2
             sqlstr = "SELECT * FROM 員工訊息表";
 
             sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //運用預儲程序修改數據
-
-            // 資料庫檔案
-            db_filename = "db_10_Data.MDF";
-            // 連接字串
-            cnstr = string.Format(db_cnstr, db_filename);
-            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
-            {
-                cn.Open();
-                SqlCommand cmd = new SqlCommand("procUpdateEmployee", cn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                SqlParameter[] prams = {
-			        new SqlParameter("@員工編號",  SqlDbType.VarChar, 50),
-                	new SqlParameter("@員工姓名",  SqlDbType.VarChar, 50),
-                	new SqlParameter("@身份證號",  SqlDbType.VarChar, 50),
-                    new SqlParameter("@聯繫電話",  SqlDbType.VarChar, 50)
-			};
-
-                number = "123";
-                name = "david";
-                id = "A123456789";
-                phone = "0912345678";
-
-                prams[0].Value = number;
-                prams[1].Value = name;
-                prams[2].Value = id;
-                prams[3].Value = phone;
-                // 依次把參數傳入命令文字
-                foreach (SqlParameter parameter in prams)
-                {
-                    cmd.Parameters.Add(parameter);
-                }
-                cmd.ExecuteNonQuery();
-            }
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -727,20 +648,6 @@ namespace vcs_SqlConnection2
 
             // 查詢字串
             //tmp string sqlstr = "SELECT DISTINCT 所屬部門, COUNT(*) AS 部門人數, MAX(基本工資) AS 最高工資, AVG(基本工資) AS 平均工資 FROM 部門工資統計表 GROUP BY 所屬部門 HAVING (AVG(基本工資) > 1000)";
-
-            /*
-            //動態 交叉表 查詢
-            // 查詢字串
-            string sqlstr = "Corss";
-            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
-            {
-            SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
-            da.SelectCommand.CommandType = CommandType.StoredProcedure;  // ????
-            DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-            da.Fill(ds, "table");  // da將查詢的結果填充至數據集ds, 指定TableName為"table"
-            dataGridView1.DataSource = ds.Tables[0].DefaultView;  // DGV設置數據源
-            }
-            */
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -1085,81 +992,6 @@ namespace vcs_SqlConnection2
 
         private void button20_Click(object sender, EventArgs e)
         {
-            // 預儲程序
-
-            // 運用查詢預儲程序
-
-            // 資料庫檔案
-            string db_filename = "db_10_Data.MDF";
-            // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);
-            // 查詢字串, 運用預儲程序, 其實就是 sqlstr = "SELECT * FROM 員工訊息表";
-            string sqlstr = "getAllEmployee";
-
-            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
-            {
-                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
-                da.SelectCommand.CommandType = CommandType.StoredProcedure;  // 運用預儲程序
-                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-                da.Fill(ds, "table");  // da將查詢的結果填充至數據集ds, 指定TableName為"table"
-                dataGridView1.DataSource = ds.Tables[0].DefaultView;  // DGV設置數據源
-            }
-
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            /* NG
-            // 運用查詢預儲程序
-            // 查詢字串
-            sqlstr = "getEmployeeOrName";
-
-            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
-            {
-                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
-                da.SelectCommand.CommandType = CommandType.StoredProcedure;  // ????
-                SqlParameter prams = new SqlParameter("@員工姓名", SqlDbType.VarChar, 50);
-                prams.Value = "李丹";
-                // 依次把參數傳入命令文字
-                da.SelectCommand.Parameters.Add(prams);
-                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
-                dataGridView3.DataSource = ds.Tables[0].DefaultView;  // DGV設置數據源
-            }
-            */
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            /* NG
-            //運用預儲程序刪除數據
-            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
-            {
-                cn.Open();
-                SqlCommand cmd = new SqlCommand("procDeleteEmployee", cn);
-                cmd.CommandType = CommandType.StoredProcedure;  // ????
-                SqlParameter pares = new SqlParameter("@員工編號", SqlDbType.VarChar, 50);
-                cmd.Parameters.Add(pares);
-                cmd.Parameters["@員工編號"].Value = "12345";
-                cmd.ExecuteNonQuery();
-                cn.Close();
-            }
-            */
-
-            //再取得資料庫的內容
-
-            // 資料庫檔案
-            db_filename = "db_10_Data.MDF";
-            // 連接字串
-            cnstr = string.Format(db_cnstr, db_filename);
-            // 查詢字串
-            sqlstr = "SELECT * FROM 員工訊息表";
-
-            //取得資料庫的內容
-            sql_read_database(db_filename, sqlstr, dataGridView4);
-
-
-
-
 
         }
 
