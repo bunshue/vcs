@@ -29,6 +29,9 @@ namespace vcs_FormSendData5
             listView1.Columns.Add("英文名", 150, HorizontalAlignment.Left);
             listView1.Columns.Add("中文名", 150, HorizontalAlignment.Left);
             listView1.Columns.Add("體重", 120, HorizontalAlignment.Left);
+
+            pictureBox1.Image = Form1.imgPhoto;
+            this.Text = "圖片檔案 : " + Form1.filename;
         }
 
         private void show_item_location()
@@ -36,12 +39,15 @@ namespace vcs_FormSendData5
             listView1.Size = new Size(460, 440);
             listView1.Location = new Point(10, 10);
 
-            //this.Size = new Size(1920, 890);
+            pictureBox1.Size = new Size(310, 440);
+            pictureBox1.Location = new Point(10 + 460 + 10, 10);
+
+            this.Size = new Size(830, 500);
             this.Text = "vcs_FormSendData5 2";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point(100+510, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+            this.Location = new Point(100+710, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
     }
 }

@@ -11,20 +11,6 @@ namespace PrintTable
 {
     public partial class Frm_Main : Form
     {
-        public static string strID = "";
-        public static string strInPeople = "";
-        public static string strInProvider = "";
-        public static string strPlace = "";
-        public static string strGID = "";
-        public static string strGName = "";
-        public static string strGSpec = "";
-        public static string strGUnit = "";
-        public static string strGMoney = "";
-        public static string strGNum = "";
-        public static string strSMoney = "";
-        public static string strInDate = "";
-        public static string strRemark = "";
-
         public Frm_Main()
         {
             InitializeComponent();
@@ -46,22 +32,6 @@ namespace PrintTable
         {
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void btnDel_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void btnReflush_Click(object sender, EventArgs e)
-        {
-        }
-
         //打印
         private void btnPrint_Click(object sender, EventArgs e)
         {
@@ -71,6 +41,21 @@ namespace PrintTable
         //设置打印的商品入库单据
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
+            string strID = "A123456";  // 單據號
+            string strInPeople = "david";  // 入庫人
+            string strInProvider = "IMS";  // 供應商
+            string strPlace = "Hsinchu";  // 產地
+            string strGID = "P0123";  // 商品編號
+            string strGName = "IMS EGD";  // 名稱
+            string strGSpec = "XL";  // 規格
+            string strGUnit = "PCS";  // 單位
+            string strGMoney = "1234";  // 單價
+            string strGNum = "12";  // 數量
+            string strSMoney = "23456";  // 金額
+            string strInDate = "2026/05/01";  // 入庫日期
+            string strRemark = "請盡速安排出貨";  // 備註
+
+
             int printWidth = e.PageBounds.Width;//页面宽度
             int printHeight = e.PageBounds.Height;//页面高度
             int left = printWidth / 2 - 305;

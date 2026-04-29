@@ -48,17 +48,13 @@ namespace PrintStuCertificate
             if (lists.Count > 0)
             {
                 //获得数据集对象
-                DataSet myds = BindInfo("编号",
-                    dataGridView1.Rows[Convert.ToInt32(lists[currentPage - 1])].
-                    Cells[0].Value.ToString());
+                DataSet myds = BindInfo("编号", dataGridView1.Rows[Convert.ToInt32(lists[currentPage - 1])].Cells[0].Value.ToString());
                 //获得学生编号
-                strID = dataGridView1.Rows[Convert.ToInt32(
-                    lists[currentPage - 1])].Cells[0].Value.ToString();
+                strID = dataGridView1.Rows[Convert.ToInt32(lists[currentPage - 1])].Cells[0].Value.ToString();
                 strName = myds.Tables[0].Rows[0][1].ToString();//获得学生姓名
                 strSex = myds.Tables[0].Rows[0][2].ToString();//获得学生性别
                 //获得系统时间
-                DateTime dt = Convert.ToDateTime(
-                    myds.Tables[0].Rows[0][3].ToString());
+                DateTime dt = Convert.ToDateTime(myds.Tables[0].Rows[0][3].ToString());
                 strBirthday = dt.Year + "年" + dt.Month + "月";//获得生日信息
                 strNPlace = myds.Tables[0].Rows[0][4].ToString();//获得籍贯信息
                 //获得入学时间

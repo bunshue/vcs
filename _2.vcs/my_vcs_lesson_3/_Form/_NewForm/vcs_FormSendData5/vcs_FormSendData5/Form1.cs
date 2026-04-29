@@ -7,11 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
+
 namespace vcs_FormSendData5
 {
     public partial class Form1 : Form
     {
         Form2 f2 = new Form2("ddddd");
+        public static Image imgPhoto = null;
+        public static string filename = string.Empty;
 
         public Form1()
         {
@@ -21,6 +25,13 @@ namespace vcs_FormSendData5
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_angry_bird\AB_red.jpg";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            pictureBox1.Image = Image.FromFile(filename);
+
+            FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            imgPhoto = Image.FromStream(fs);
         }
 
         private void show_item_location()
@@ -36,11 +47,14 @@ namespace vcs_FormSendData5
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             //button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
 
-            richTextBox1.Size = new Size(300, 820);
-            richTextBox1.Location = new Point(x_st + dx * 7 + 110, y_st + dy * 0);
+            pictureBox1.Size = new Size(310, 440);
+            pictureBox1.Location = new Point(10 + 310 + 10, 10);
+
+            richTextBox1.Size = new Size(300, 230);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            //this.Size = new Size(1920, 890);
+            this.Size = new Size(680, 500);
             this.Text = "vcs_FormSendData5 1";
 
             //設定執行後的表單起始位置, 正中央
@@ -77,4 +91,3 @@ namespace vcs_FormSendData5
         }
     }
 }
-
