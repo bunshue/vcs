@@ -177,6 +177,7 @@ namespace vcs_DataGridView1
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             richTextBox1.Text += "CellClick[" + e.ColumnIndex.ToString() + ", " + e.RowIndex.ToString() + "]\n";
+            richTextBox1.Text += "你選擇了 : " + dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString() + "\n";
 
             string str = this.dataGridView1[0, e.RowIndex].Value.ToString();
             richTextBox1.Text += "取得第 " + e.RowIndex + " 列的第 0 筆資料 : " + str + "\n";
@@ -191,6 +192,8 @@ namespace vcs_DataGridView1
                     //string name = dataGridView1.Rows[e.RowIndex].Cells["Name"].FormattedValue.ToString();
                     //string id = dataGridView1.Rows[e.RowIndex].Cells["Id"].FormattedValue.ToString();
                     //richTextBox1.Text += "取得資料:\t" + name + "\t" + id + "\n";
+
+                    richTextBox1.Text += "取得資料:\t" + dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
                 }
             }
         }
@@ -204,9 +207,9 @@ namespace vcs_DataGridView1
             dataGridView1.Columns[0].Name = "英文名";
             dataGridView1.Columns[1].Name = "中文名";
             dataGridView1.Columns[2].Name = "體重";
-            dataGridView1.Columns[0].Width = 100;  // 設定欄寬
-            dataGridView1.Columns[1].Width = 100;  // 設定欄寬
-            dataGridView1.Columns[2].Width = 100;  // 設定欄寬
+            dataGridView1.Columns[0].Width = 100;  // 設定欄寬, 第0欄
+            dataGridView1.Columns[1].Width = 100;  // 設定欄寬, 第1欄
+            dataGridView1.Columns[2].Width = 100;  // 設定欄寬, 第2欄
 
             //填入資料
             string ENAME = "mouse";
@@ -217,6 +220,21 @@ namespace vcs_DataGridView1
 
             dataGridView1.Rows.Add(new Object[] { "ox", "班尼牛", 48 });
             dataGridView1.Rows.Add(new Object[] { "tiger", "跳跳虎", 33 });
+
+            //dataGridView1.Columns[0].Visible = false;  // 隱藏第0欄
+
+            /*
+            dataGridView1.Columns[0].HeaderText = "编号";
+            dataGridView1.Columns[0].Width = 40;
+            dataGridView1.Columns[1].HeaderText = "书名";
+            dataGridView1.Columns[1].Width = 140;
+            dataGridView1.Columns[2].HeaderText = "条形码";
+            dataGridView1.Columns[2].Width = 80;
+            dataGridView1.Columns[3].HeaderText = "累加值";
+            dataGridView1.Columns[3].Width = 80;
+            dataGridView1.Columns[4].HeaderText = "总计";
+            dataGridView1.Columns[4].Width = 40;
+            */
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -227,9 +245,9 @@ namespace vcs_DataGridView1
             dataGridView1.Columns.Add("英文名", "英文名");  // 添加欄位
             dataGridView1.Columns.Add("中文名", "中文名");  // 添加欄位
             dataGridView1.Columns.Add("體重", "體重");  // 添加欄位
-            dataGridView1.Columns[0].Width = 100;  // 設定欄寬
-            dataGridView1.Columns[1].Width = 100;  // 設定欄寬
-            dataGridView1.Columns[2].Width = 100;  // 設定欄寬
+            dataGridView1.Columns[0].Width = 100;  // 設定欄寬, 第0欄
+            dataGridView1.Columns[1].Width = 100;  // 設定欄寬, 第1欄
+            dataGridView1.Columns[2].Width = 100;  // 設定欄寬, 第2欄
             dataGridView1.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter; //設置對其方式   此欄置中對齊
 
             dataGridView1.Rows.Add(new string[] { "mouse", "米老鼠", 3.ToString() });
@@ -352,10 +370,10 @@ namespace vcs_DataGridView1
             dataGridView1.Columns[1].Name = "PriceEach";
             dataGridView1.Columns[2].Name = "Quantity";
             dataGridView1.Columns[3].Name = "Total";
-            dataGridView1.Columns[0].Width = 100;  // 設定欄寬            
-            dataGridView1.Columns[1].Width = 100;  // 設定欄寬            
-            dataGridView1.Columns[2].Width = 100;  // 設定欄寬            
-            dataGridView1.Columns[3].Width = 100;  // 設定欄寬
+            dataGridView1.Columns[0].Width = 100;  // 設定欄寬, 第0欄
+            dataGridView1.Columns[1].Width = 100;  // 設定欄寬, 第1欄
+            dataGridView1.Columns[2].Width = 100;  // 設定欄寬, 第2欄
+            dataGridView1.Columns[3].Width = 100;  // 設定欄寬, 第3欄
 
             // Make some data items.
             dataGridView1.Rows.Add(new object[] { "Pencils, dozen", 1.24m, 4 });
@@ -386,10 +404,10 @@ namespace vcs_DataGridView1
             dataGridView1.Columns[1].Name = "PriceEach";
             dataGridView1.Columns[2].Name = "Quantity";
             dataGridView1.Columns[3].Name = "Total";
-            dataGridView1.Columns[0].Width = 100;  // 設定欄寬
-            dataGridView1.Columns[1].Width = 100;  // 設定欄寬
-            dataGridView1.Columns[2].Width = 100;  // 設定欄寬
-            dataGridView1.Columns[3].Width = 100;  // 設定欄寬
+            dataGridView1.Columns[0].Width = 100;  // 設定欄寬, 第0欄
+            dataGridView1.Columns[1].Width = 100;  // 設定欄寬, 第1欄
+            dataGridView1.Columns[2].Width = 100;  // 設定欄寬, 第2欄
+            dataGridView1.Columns[3].Width = 100;  // 設定欄寬, 第3欄
 
             // Make some data items.
             OrderItem[] order_items = 
@@ -774,7 +792,7 @@ namespace vcs_DataGridView1
                 new Images(){Im=Image.FromFile("..//..//images//7.bmp")}
             };
             dataGridView1.Columns[0].HeaderText = "图片";//设置列文本
-            dataGridView1.Columns[0].Width = 70;  // 設定欄寬
+            dataGridView1.Columns[0].Width = 70;  // 設定欄寬, 第0欄
 
             int R = dataGridView1.Rows.Count;  // 列數, 包含標題列
             for (int i = 0; i < R; i++)

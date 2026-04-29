@@ -74,17 +74,20 @@ namespace AutoMultiExcelToOneExcel
         }
         //#endregion
 
-        string M_str_Name = Application.StartupPath + "\\Set.ini";//定义要读取的INI文件
+        string ini_filename = Application.StartupPath + "\\Set.ini";//定义要读取的INI文件
 
         private void Frm_Main_Load(object sender, EventArgs e)
         {
-            txt_MultiExcel.Text = ReadString("Set", "MultiExcel", "", M_str_Name);//读取默认的多个Excel文件
+            txt_MultiExcel.Text = ReadString("Set", "MultiExcel", "", ini_filename);//读取默认的多个Excel文件
+            txt_Excel.Text = ReadString("Set", "Excel", "", ini_filename);//读取目标Excel文件
+            richTextBox1.Text += "取得 : " + txt_MultiExcel.Text + "\n";
+            richTextBox1.Text += "取得 : " + txt_Excel.Text + "\n";
 
-            txt_Excel.Text = ReadString("Set", "Excel", "", M_str_Name);//读取目标Excel文件
+            nudown_Hour.Value = Convert.ToInt32(ReadString("Set", "Hour", "", ini_filename));//读取小时
+            nudown_Min.Value = Convert.ToInt32(ReadString("Set", "Min", "", ini_filename));//读取分钟
 
-            nudown_Hour.Value = Convert.ToInt32(ReadString("Set", "Hour", "", M_str_Name));//读取小时
-
-            nudown_Min.Value = Convert.ToInt32(ReadString("Set", "Min", "", M_str_Name));//读取分钟
+            richTextBox1.Text += "取得 時 : " + nudown_Hour.Text + "\n";
+            richTextBox1.Text += "取得 分 : " + nudown_Min.Text + "\n";
 
             timer1.Start();//启动计时器
         }
@@ -116,16 +119,19 @@ namespace AutoMultiExcelToOneExcel
 
         private void btn_Set_Click(object sender, EventArgs e)
         {
-            WritePrivateProfileString("Set", "MultiExcel", txt_MultiExcel.Text, M_str_Name);//设置多个Excel文件路径
-            WritePrivateProfileString("Set", "Excel", txt_Excel.Text, M_str_Name);//设置目标Excel文件路径
-            WritePrivateProfileString("Set", "Hour", nudown_Hour.Value.ToString(), M_str_Name);//设置小时
-            WritePrivateProfileString("Set", "Min", nudown_Min.Value.ToString(), M_str_Name);//设置分钟
+            WritePrivateProfileString("Set", "MultiExcel", txt_MultiExcel.Text, ini_filename);//设置多个Excel文件路径
+            WritePrivateProfileString("Set", "Excel", txt_Excel.Text, ini_filename);//设置目标Excel文件路径
+            WritePrivateProfileString("Set", "Hour", nudown_Hour.Value.ToString(), ini_filename);//设置小时
+            WritePrivateProfileString("Set", "Min", nudown_Min.Value.ToString(), ini_filename);//设置分钟
             MessageBox.Show("配置文件设置成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             timer1.Start();//启动计时器
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            richTextBox1.Text += "A ";
+
             object missing = System.Reflection.Missing.Value;//定义object缺省值
             string[] P_str_Names = txt_MultiExcel.Text.Split(',');//存储所有选择的Excel文件名
             string P_str_Name = "";//存储遍历到的Excel文件名

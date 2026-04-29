@@ -948,41 +948,6 @@ namespace vcs_SqlConnection4
 
         private void button22_Click(object sender, EventArgs e)
         {
-            // some NG
-            //更新資料
-            string new_id = "P1005";  // 員工編號
-            string new_name = "david";  // 員工姓名
-            string new_money = "34567";  // 基本工資
-            string new_description = "Very good3333";  // 工作評價
-
-            // 資料庫檔案
-            string db_filename = "db_09_Data.mdf";
-            // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);
-
-            SqlConnection con = new SqlConnection(cnstr);
-
-            using (SqlCommand cmd = new SqlCommand())
-            {
-                con.Open();
-                cmd.Connection = con;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "proc_Update";
-                SqlParameter[] par =
-                    { 
-                        new SqlParameter("@id", new_id),
-                        new SqlParameter("@name", new_name),
-                        new SqlParameter("@money", new_money),
-                        new SqlParameter("@description", new_description)
-                    };
-                foreach (SqlParameter parms in par)
-                {
-                    cmd.Parameters.Add(parms);
-                }
-                cmd.ExecuteNonQuery();
-                con.Close();
-                richTextBox1.Text += "修改成功\n";
-            }
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -991,12 +956,12 @@ namespace vcs_SqlConnection4
 
         private void button24_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "SQL 24\n";
+
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "SQL 25\n";
+
         }
 
         private void button26_Click(object sender, EventArgs e)

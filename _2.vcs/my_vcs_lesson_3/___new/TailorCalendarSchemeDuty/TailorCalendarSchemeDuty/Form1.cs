@@ -111,7 +111,7 @@ namespace TailorCalendarSchemeDuty
                         int intt = DateTime.Compare(Convert.ToDateTime(dr[1].ToString()), Convert.ToDateTime(DateTime.Now.ToShortDateString()));
                         if ((intt < 0) && (dr.GetValue(3).ToString() != "True"))
                         {
-                            string strg = strDatDelteUpdate(Convert.ToDateTime(dr[1].ToString()), "", 1, 1);
+                            //string strg = strDatDelteUpdate(Convert.ToDateTime(dr[1].ToString()), "", 1, 1);
                         }
                         break;
                 }
@@ -189,10 +189,6 @@ namespace TailorCalendarSchemeDuty
                 {
                     if (MessageBox.Show("是否真的取消任務", "任務取消提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        if (strDatDelteUpdate(Convert.ToDateTime(listBox1.SelectedItem.ToString()), textBox1.Text, 0, 2) == "DeleteFalg")
-                        {
-                            MessageBox.Show("取消成功", "取消提示 ");
-                        }
                         listBox1.Items.Remove(listBox1.SelectedItem.ToString());
                     }
                 }
@@ -266,33 +262,11 @@ namespace TailorCalendarSchemeDuty
                 {
                     if (MessageBox.Show("任務日期是否為\n" + listBox1.Items[listBox1.Items.Count - 1].ToString(), "任務日期提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        if (strDatInsert(Convert.ToDateTime(listBox1.Items[listBox1.Items.Count - 1].ToString()), textBox1.Text, 0) == "YAdd")
-                        {
-                            MessageBox.Show("任務日期已有任務，請選擇別的日期", "添加提示");
-                        }
-                        else
-                        {
-                            MessageBox.Show("任務日期，添加成功", "添加提示");
-                            textBox1.Text = "";
-                            Falg = 0;
-                            return;
-                        }
                     }//判斷ListBox最後是項是否為添加日期，不是請重新選擇
                     else
                     {
                         if (MessageBox.Show("請選擇添加作任務日期否則\n" + "此次操作將不會保存到數據庫中", "重要提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {
-                            if (strDatInsert(Convert.ToDateTime(listBox1.SelectedItem.ToString()), textBox1.Text, 0) == "YAdd")
-                            {
-                                MessageBox.Show("任務日期已有任務，請選擇別的日期", "添加提示");
-                            }
-                            else
-                            {
-                                MessageBox.Show("任務日期，添加成功", "添加提示");
-                                textBox1.Text = "";
-                                Falg = 0;
-                                return;
-                            }
                         }
                         else
                         {
@@ -316,12 +290,6 @@ namespace TailorCalendarSchemeDuty
                 richTextBox1.Text += "修改任務\n";
                 if (MessageBox.Show("任務日期為：" + strFalg + "\n" + "修改任務說明為：\n" + textBox1.Text.ToString(), "修改提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    if (strDatDelteUpdate(Convert.ToDateTime(strFalg), textBox1.Text, 0, 0) == "Update")
-                    {
-                        MessageBox.Show("修改成功", "修改提示 ");
-                        textBox1.Text = "";
-                        Falg = 0;
-                    }
                 }
                 else
                 {
@@ -332,62 +300,11 @@ namespace TailorCalendarSchemeDuty
             }
         }
 
-        // 添加任務的方法
-        public string strDatInsert(DateTime strDate, string strName, int intFalg)
-        {
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
-
-            SqlConnection con = new SqlConnection(cnstr);
-            con.Open();
-            SqlCommand com = new SqlCommand();
-            com.CommandText = "insertDate";
-            com.CommandType = CommandType.StoredProcedure;
-            com.Connection = con;
-            com.Parameters.Add("@strDate", SqlDbType.DateTime, 8);
-            com.Parameters["@strDate"].Value = strDate;
-            com.Parameters.Add("@strName", SqlDbType.VarChar, 100);
-            com.Parameters["@strName"].Value = strName;
-            com.Parameters.Add("@strFalg", SqlDbType.Bit, 1);
-            com.Parameters["@strFalg"].Value = intFalg;
-            SqlParameter sqlpar = com.Parameters.Add("@strResult", SqlDbType.VarChar, 20);
-
-            sqlpar.Direction = ParameterDirection.Output;
-            com.ExecuteNonQuery();
-            return com.Parameters["@strResult"].Value.ToString();
-        }
-
         //已完成的任務
         private void button6_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
             getDateTime("three");
-        }
-
-        //修改冊除任務 
-        public string strDatDelteUpdate(DateTime strDate, string strName, int intFalg, int Falg)
-        {
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
-
-            SqlConnection con = new SqlConnection(cnstr);
-            con.Open();
-            SqlCommand com = new SqlCommand();
-            com.CommandText = "StrDateUpDelect";
-            com.CommandType = CommandType.StoredProcedure;
-            com.Connection = con;
-            com.Parameters.Add("@strDate", SqlDbType.DateTime, 8);
-            com.Parameters["@strDate"].Value = strDate;
-            com.Parameters.Add("@strName", SqlDbType.VarChar, 100);
-            com.Parameters["@strName"].Value = strName;
-
-            com.Parameters.Add("@strFalg", SqlDbType.Bit, 1);
-            com.Parameters["@strFalg"].Value = intFalg;
-
-            com.Parameters.Add("@Falg", SqlDbType.Int);
-            com.Parameters["@Falg"].Value = Falg;
-            SqlParameter sqlpar = com.Parameters.Add("@strResult", SqlDbType.VarChar, 20);
-            sqlpar.Direction = ParameterDirection.Output;
-            com.ExecuteNonQuery();
-            return com.Parameters["@strResult"].Value.ToString();
         }
 
         //驗證日期類型

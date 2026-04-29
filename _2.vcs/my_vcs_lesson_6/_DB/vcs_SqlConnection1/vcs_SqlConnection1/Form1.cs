@@ -1031,6 +1031,64 @@ namespace vcs_SqlConnection1
 
         private void button13_Click(object sender, EventArgs e)
         {
+            // 用 SqlTransaction 一次執行一些 SQL 命令, 若有失敗者 即全部恢復
+
+            // 資料庫檔案
+            string db_filename = "animals1_db.mdf";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM animals1_table";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "十二生肖全部資料";
+
+            //1515
+
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\animals1_db.mdf;Integrated Security=True;Connect Timeout=30";
+            SqlConnection m_Conn = new SqlConnection(cnstr);
+            SqlCommand m_Cmd = new SqlCommand();
+            m_Conn.Open();
+
+            List<string> sqlstrs = new List<string>();//SQL语句集合
+            sqlstr = "INSERT INTO animals1_table (編號, 英文名, 中文名, 體重) VALUES (90, N'aaa', N'AAA', 20)";
+            sqlstrs.Add(sqlstr);
+            sqlstrs.Add(sqlstr);
+            sqlstrs.Add(sqlstr);
+            sqlstrs.Add(sqlstr);
+            sqlstrs.Add(sqlstr);
+
+            SqlTransaction sqlTran = m_Conn.BeginTransaction();//实例化事务对象
+            try
+            {
+                m_Cmd.Connection = m_Conn;//指定SqlCommand对象的连接对象
+                m_Cmd.Transaction = sqlTran;//指定SqlCommand对象的事务对象
+                foreach (string item in sqlstrs)//遍历List泛型集合中的所有SQL命令
+                {
+                    m_Cmd.CommandType = CommandType.Text;//指定SqlCommand对象的执行命令方式
+                    m_Cmd.CommandText = item;//指定SqlCommand对象要执行的SQL命令
+                    m_Cmd.ExecuteNonQuery();//执行SQL命令
+                }
+                sqlTran.Commit();//提交数据库
+                richTextBox1.Text += "OK\n";
+            }
+            catch
+            {
+                sqlTran.Rollback();//事务回滚
+                richTextBox1.Text += "發生錯誤\n";
+            }
+            finally
+            {
+                m_Conn.Close();//关闭数据库连接
+                sqlstrs.Clear();//清空List泛型集合
+                richTextBox1.Text += "dddddddddd\n";
+            }
+
+            //1515
+
+            // 資料庫檔案
+            db_filename = "animals1_db.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM animals1_table";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+            lb_dgv1.Text = "十二生肖全部資料";
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -1155,6 +1213,9 @@ namespace vcs_SqlConnection1
 
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "十二生肖全部資料";
+
+            return;
+
             /*
             // 查詢字串, 欄名使用AS
             sqlstr = "SELECT 英文名 AS ename, 中文名 AS cname, 體重 AS weight FROM animals1_table";
@@ -2285,3 +2346,25 @@ cmd.ExecuteNonQuery();  // 執行SQL命令
                 int sum_year = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString());
                 richTextBox1.Text += "年度總和 : " + sum_year.ToString() + "\n";
 */
+
+
+
+
+/*
+
+                //加入資料庫之圖片處理 sqldb
+                FileStream FStream = new FileStream(openFileDialog1.FileName, FileMode.Open, FileAccess.Read);
+                BinaryReader BReader = new BinaryReader(FStream);
+                byte[] byteImage = BReader.ReadBytes((int)FStream.Length);
+                sqlcmd.Parameters.Add("@photo", SqlDbType.Image).Value = byteImage;
+
+
+從資料庫取出圖片資料 sqldb
+                MemoryStream MStream = new MemoryStream((byte[])myds.Tables[0].Rows[0][10]);
+                imgPhoto = Image.FromStream(MStream);  //记录学生头像
+*/                
+
+
+//            sqlstr = "DELETE FROM PRProduceItem WHERE PRProduceCode = '" + strPRProduceCode + "'";
+            //sqlstr = "DELETE FROM PRProduce     WHERE PRProduceCode = '" + strPRProduceCode + "'";
+

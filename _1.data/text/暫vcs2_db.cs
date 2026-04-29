@@ -1,4 +1,44 @@
 ﻿
+SQL DB 有用到的資料型態
+
+SqlDbType.DateTime, 8);
+SqlDbType.VarChar, 100);
+SqlDbType.Bit, 1);
+SqlDbType.VarChar, 20);
+
+
+            com.Parameters.Add("@strDate", SqlDbType.DateTime, 8);
+            com.Parameters.Add("@strName", SqlDbType.VarChar, 100);
+            com.Parameters.Add("@strFalg", SqlDbType.Bit, 1);
+            com.Parameters.Add("@Falg", SqlDbType.Int);
+            SqlParameter sqlpar = com.Parameters.Add("@strResult", SqlDbType.VarChar, 20);
+
+
+            cmd.Parameters.Add("@id", SqlDbType.Int, 10, "id");//设置参数
+            cmd.Parameters.Add("@name", SqlDbType.VarChar, 10, "学生姓名");//设置参数
+            cmd.Parameters.Add("@age", SqlDbType.Int, 10, "学生年龄");//设置参数
+            cmd.Parameters.Add("@sex", SqlDbType.NChar, 2, "性别");//设置参数
+            cmd.Parameters.Add("address", SqlDbType.VarChar, 50, "家庭住址");//设置参数
+
+
+
+
+            // 資料庫檔案
+            string db_filename = "db_20.mdf";
+
+            // 查詢字串
+            //string sqlstr = "select name from sysdatabases";
+            string sqlstr = "select name from sysobjects where Xtype='U'";
+
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+
+            // 查詢字串
+            sqlstr = "select name from sysdatabases";
+
+
+
+
 //richTextBox1.Text += "共有" + (dataGridView1.Rows.Count - 1) + "条记录\n";
 
 
