@@ -17,13 +17,27 @@ namespace vcs_ReadWritePrivateProfileString2
         string ini_filename = @"../../config.ini";
 
         [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern bool WritePrivateProfileString(string lpAppName, string lpKeyName, string lpString, string lpFileName);
+        private static extern bool WritePrivateProfileString(
+            string lpAppName,
+            string lpKeyName,
+            string lpString,
+            string lpFileName);
 
         [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern int GetPrivateProfileString(string lpAppName, string lpKeyName, string lpDefault, StringBuilder lpReturnedString, int nSize, string lpFileName);
+        private static extern int GetPrivateProfileString(
+            string lpAppName,
+            string lpKeyName,
+            string lpDefault,
+            StringBuilder lpReturnedString,
+            int nSize,
+            string lpFileName);
 
         [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern int GetPrivateProfileInt(string lpAppName, string lpKeyName, int lpDefault, string lpFileName);
+        private static extern int GetPrivateProfileInt(
+            string lpAppName,
+            string lpKeyName,
+            int lpDefault,
+            string lpFileName);
 
         public Form1()
         {

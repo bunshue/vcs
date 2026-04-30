@@ -19,20 +19,53 @@ namespace vcs_ReadWritePrivateProfileString
         public string path;
 
         //C＃申明INI文件的寫操作函數WritePrivateProfileString（）： 
+        // 修改INI文件中內容 ST
+        /// <summary>
+        /// 修改INI文件中內容
+        /// </summary>
+        /// <param name="lpApplicationName">欲在其中寫入的節點名稱</param>
+        /// <param name="lpKeyName">欲設置的項名</param>
+        /// <param name="lpString">要寫入的新字符串</param>
+        /// <param name="lpFileName">INI文件名</param>
+        /// <returns>非零表示成功，零表示失敗</returns>
         //[DllImport("kernel32")]
         [DllImport("kernel32", CharSet = CharSet.Unicode)]
-        private static extern long WritePrivateProfileString(string section, string key, string val, string filePath);
+        private static extern long WritePrivateProfileString(
+            string section,
+            string key,
+            string val,
+            string filePath);
         //參數說明：section：INI文件中的段落；key：INI文件中的關鍵字；val：INI文件中關鍵字的數值；filePath：INI文件的完整的路徑和名稱。
+        // 修改INI文件中內容 SP
 
+        // 為INI文件中指定的節點取得字符串 ST
+        /// <summary>
+        /// 為INI文件中指定的節點取得字符串
+        /// </summary>
+        /// <param name="lpAppName">欲在其中查找關鍵字的節點名稱</param>
+        /// <param name="lpKeyName">欲獲取的項名</param>
+        /// <param name="lpDefault">指定的項沒有找到時返回的默認值</param>
+        /// <param name="lpReturnedString">指定一個字串緩沖區，長度至少為nSize</param>
+        /// <param name="nSize">指定裝載到lpReturnedString緩沖區的最大字符數量</param>
+        /// <param name="lpFileName">INI文件名</param>
+        /// <returns>復制到lpReturnedString緩沖區的字節數量，其中不包括那些NULL中止字符</returns>
         //[DllImport("kernel32")]
         [DllImport("kernel32", CharSet = CharSet.Unicode)]
-        private static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string filePath);
+        private static extern int GetPrivateProfileString(
+            string section,
+            string key,
+            string def,
+            StringBuilder retVal,
+            int size,
+            string filePath);
         //參數說明：section：INI文件中的段落名稱；key：INI文件中的關鍵字；def：無法讀取時候時候的缺省數值；retVal：讀取數值；size：數值的大小；filePath：INI文件的完整路徑和名稱。
+        // 為INI文件中指定的節點取得字符串 SP
 
         public void IniWriteValue(string section, string key, string value, string path)
         {
             WritePrivateProfileString(section, key, value, path);
         }
+
         public string IniReadValue(string section, string key, string path)
         {
             StringBuilder temp = new StringBuilder(255);

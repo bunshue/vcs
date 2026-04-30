@@ -15,17 +15,17 @@ namespace vcs_ReadWritePrivateProfileString3
     {
         string ini_filename0 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_System\_InitialSetup\vcs_ReadWritePrivateProfileString3\vcs_ReadWritePrivateProfileString3\ini\setup0.ini";
 
-        //#region 为INI文件中指定的节点取得字符串
+        // 為INI文件中指定的節點取得字符串 ST
         /// <summary>
-        /// 为INI文件中指定的节点取得字符串
+        /// 為INI文件中指定的節點取得字符串
         /// </summary>
-        /// <param name="lpAppName">欲在其中查找关键字的节点名称</param>
-        /// <param name="lpKeyName">欲获取的项名</param>
-        /// <param name="lpDefault">指定的项没有找到时返回的默认值</param>
-        /// <param name="lpReturnedString">指定一个字串缓冲区，长度至少为nSize</param>
-        /// <param name="nSize">指定装载到lpReturnedString缓冲区的最大字符数量</param>
+        /// <param name="lpAppName">欲在其中查找關鍵字的節點名稱</param>
+        /// <param name="lpKeyName">欲獲取的項名</param>
+        /// <param name="lpDefault">指定的項沒有找到時返回的默認值</param>
+        /// <param name="lpReturnedString">指定一個字串緩沖區，長度至少為nSize</param>
+        /// <param name="nSize">指定裝載到lpReturnedString緩沖區的最大字符數量</param>
         /// <param name="lpFileName">INI文件名</param>
-        /// <returns>复制到lpReturnedString缓冲区的字节数量，其中不包括那些NULL中止字符</returns>
+        /// <returns>復制到lpReturnedString緩沖區的字節數量，其中不包括那些NULL中止字符</returns>
         [DllImport("kernel32")]
         public static extern int GetPrivateProfileString(
             string lpAppName,
@@ -34,41 +34,41 @@ namespace vcs_ReadWritePrivateProfileString3
             StringBuilder lpReturnedString,
             int nSize,
             string lpFileName);
-        //#endregion
+        // 為INI文件中指定的節點取得字符串 SP
 
-        //#region 修改INI文件中内容
+        // 修改INI文件中內容 ST
         /// <summary>
-        /// 修改INI文件中内容
+        /// 修改INI文件中內容
         /// </summary>
-        /// <param name="lpApplicationName">欲在其中写入的节点名称</param>
-        /// <param name="lpKeyName">欲设置的项名</param>
-        /// <param name="lpString">要写入的新字符串</param>
+        /// <param name="lpApplicationName">欲在其中寫入的節點名稱</param>
+        /// <param name="lpKeyName">欲設置的項名</param>
+        /// <param name="lpString">要寫入的新字符串</param>
         /// <param name="lpFileName">INI文件名</param>
-        /// <returns>非零表示成功，零表示失败</returns>
+        /// <returns>非零表示成功，零表示失敗</returns>
         [DllImport("kernel32")]
         public static extern int WritePrivateProfileString(
             string lpApplicationName,
             string lpKeyName,
             string lpString,
             string lpFileName);
-        //#endregion
+        // 修改INI文件中內容 SP
 
-        //#region 从INI文件中读取指定节点的内容
+        // 從INI文件中讀取指定節點的內容 ST
         /// <summary>
-        /// 从INI文件中读取指定节点的内容
+        /// 從INI文件中讀取指定節點的內容
         /// </summary>
-        /// <param name="section">INI节点</param>
-        /// <param name="key">节点下的项</param>
-        /// <param name="def">没有找到内容时返回的默认值</param>
-        /// <param name="def">要读取的INI文件</param>
-        /// <returns>读取的节点内容</returns>
-        public string ReadString(string section, string key, string def, string fileName)
+        /// <param name="section">INI節點</param>
+        /// <param name="key">節點下的項</param>
+        /// <param name="def">沒有找到內容時返回的默認值</param>
+        /// <param name="def">要讀取的INI文件</param>
+        /// <returns>讀取的節點內容</returns>
+        public static string ReadString(string section, string key, string def, string fileName)
         {
             StringBuilder temp = new StringBuilder(1024);
             GetPrivateProfileString(section, key, def, temp, 1024, fileName);
             return temp.ToString();
         }
-        //#endregion
+        // 從INI文件中讀取指定節點的內容 SP
 
         public Form1()
         {
@@ -114,13 +114,13 @@ namespace vcs_ReadWritePrivateProfileString3
         {
             //讀取 ini
 
-            string str1 = ReadString("Set", "MultiExcel", "", ini_filename0);//读取默认的多个Excel文件
-            string str2 = ReadString("Set", "Excel", "", ini_filename0);//读取目标Excel文件
+            string str1 = ReadString("Set", "MultiExcel", "", ini_filename0);//讀取默認的多個Excel文件
+            string str2 = ReadString("Set", "Excel", "", ini_filename0);//讀取目標Excel文件
             richTextBox1.Text += "取得 : " + str1 + "\n";
             richTextBox1.Text += "取得 : " + str2 + "\n";
 
-            string str3 = ReadString("Set", "Hour", "", ini_filename0);//读取小时
-            string str4 = ReadString("Set", "Min", "", ini_filename0);//读取分钟
+            string str3 = ReadString("Set", "Hour", "", ini_filename0);//讀取小時
+            string str4 = ReadString("Set", "Min", "", ini_filename0);//讀取分鐘
 
             richTextBox1.Text += "取得 時 : " + str3 + "\n";
             richTextBox1.Text += "取得 分 : " + str4 + "\n";
@@ -135,22 +135,24 @@ namespace vcs_ReadWritePrivateProfileString3
             string str3 = "123";
             string str4 = "456";
             /*
-            WritePrivateProfileString("Set", "MultiExcel", str1, ini_filename0);//设置多个Excel文件路径
-            WritePrivateProfileString("Set", "Excel", str2, ini_filename0);//设置目标Excel文件路径
-            WritePrivateProfileString("Set", "Hour", str3, ini_filename0);//设置小时
-            WritePrivateProfileString("Set", "Min", str4, ini_filename0);//设置分钟
+            WritePrivateProfileString("Set", "MultiExcel", str1, ini_filename0);//設置多個Excel文件路徑
+            WritePrivateProfileString("Set", "Excel", str2, ini_filename0);//設置目標Excel文件路徑
+            WritePrivateProfileString("Set", "Hour", str3, ini_filename0);//設置小時
+            WritePrivateProfileString("Set", "Min", str4, ini_filename0);//設置分鐘
             */
             richTextBox1.Text += "寫入 ini 完成\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //讀取文件存放的默認路徑
+            richTextBox1.Text += ReadString("SysSet", "RootPath", "", Application.StartupPath + "\\SysSet.ini");
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            WritePrivateProfileString("SysSet", "RootPath", "AAAAAAAA", Application.StartupPath + "\\SysSet.ini");
         }
     }
 }

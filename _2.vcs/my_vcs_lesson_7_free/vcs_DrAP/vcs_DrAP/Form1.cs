@@ -188,11 +188,11 @@ namespace vcs_DrAP
 
             //設定執行後的表單大小
             this.Size = new Size(1920, 1040);
-            
+
             //設定執行後的表單起始位置, 指定位置
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new System.Drawing.Point(0, 0);
-            
+
             this.listBox1.BorderStyle = BorderStyle.Fixed3D;
             this.listView1.Size = new System.Drawing.Size(1900, 500);
             this.richTextBox2.Size = new System.Drawing.Size(594, 388);
@@ -477,25 +477,11 @@ namespace vcs_DrAP
                     catch (UnauthorizedAccessException ex)
                     {
                         richTextBox1.Text += ex.Message + "\n";
-                        //MessageBox.Show(ex.Message);
-                        /*
-                        FileAttributes attr = (new FileInfo(filePath)).Attributes;
-                        Console.Write("UnAuthorizedAccessException: Unable to access file. ");
-                        if ((attr & FileAttributes.ReadOnly) > 0)
-                            Console.Write("The file is read-only.");
-                        */
                     }
                 }
                 catch (IOException ex)
                 {
                     richTextBox1.Text += "IOException, " + ex.GetType().Name + "\n";
-                    /*
-                    Console.WriteLine(
-                        "{0}: The write operation could not " +
-                        "be performed because the specified " +
-                        "part of the file is locked.",
-                        e.GetType().Name);
-                    */
                 }
 
                 richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
@@ -504,7 +490,6 @@ namespace vcs_DrAP
             }
             else
             {
-                //Console.WriteLine("{0} is not a valid file or directory.", path);
                 richTextBox1.Text += "非合法路徑或檔案a\n";
                 flag_search_done = 0;
             }
@@ -583,25 +568,11 @@ namespace vcs_DrAP
                 catch (UnauthorizedAccessException ex)
                 {
                     richTextBox1.Text += ex.Message + "\n";
-                    //MessageBox.Show(ex.Message);
-                    /*
-                    FileAttributes attr = (new FileInfo(filePath)).Attributes;
-                    Console.Write("UnAuthorizedAccessException: Unable to access file. ");
-                    if ((attr & FileAttributes.ReadOnly) > 0)
-                        Console.Write("The file is read-only.");
-                    */
                 }
             }
             catch (IOException e)
             {
                 richTextBox1.Text += "IOException, " + e.GetType().Name + "\n";
-                /*
-                Console.WriteLine(
-                    "{0}: The write operation could not " +
-                    "be performed because the specified " +
-                    "part of the file is locked.",
-                    e.GetType().Name);
-                */
             }
         }
 
@@ -1130,7 +1101,6 @@ namespace vcs_DrAP
                 }
                 else
                 {
-                    //Console.WriteLine("{0} is not a valid file or directory.", path);
                     richTextBox1.Text += "非合法路徑或檔案b\n";
                     flag_search_done = 0;
                 }
@@ -2235,25 +2205,11 @@ namespace vcs_DrAP
                 catch (UnauthorizedAccessException ex)
                 {
                     richTextBox1.Text += ex.Message + "\n";
-                    //MessageBox.Show(ex.Message);
-                    /*
-                    FileAttributes attr = (new FileInfo(filePath)).Attributes;
-                    Console.Write("UnAuthorizedAccessException: Unable to access file. ");
-                    if ((attr & FileAttributes.ReadOnly) > 0)
-                        Console.Write("The file is read-only.");
-                    */
                 }
             }
             catch (IOException e)
             {
                 richTextBox1.Text += "IOException, " + e.GetType().Name + "\n";
-                /*
-                Console.WriteLine(
-                    "{0}: The write operation could not " +
-                    "be performed because the specified " +
-                    "part of the file is locked.",
-                    e.GetType().Name);
-                */
             }
         }
 
@@ -2377,12 +2333,7 @@ namespace vcs_DrAP
                 {
                     richTextBox1.Text += "取得檔案 : " + file.FullName + "\n";
                     total_number_files++;
-
-                    //Console.WriteLine(file.FullName);
                 }
-
-
-
             }
 
             richTextBox1.Text += "目錄 : " + foldername + " 下\n";
@@ -2392,8 +2343,6 @@ namespace vcs_DrAP
             {
                 richTextBox1.Text += "取得檔案 : " + file.FullName + "\n";
                 total_number_files++;
-
-                //Console.WriteLine(file.FullName);
             }
             richTextBox1.Text += "共取得檔案 " + total_number_files.ToString() + " 個\n";
         }
@@ -2589,7 +2538,6 @@ namespace vcs_DrAP
             }
             else
             {
-                //Console.WriteLine("{0} is not a valid file or directory.", path);
                 richTextBox1.Text += "非合法路徑或檔案c\n";
                 flag_search_done = 0;
             }
@@ -2671,30 +2619,14 @@ namespace vcs_DrAP
                 catch (UnauthorizedAccessException ex)
                 {
                     richTextBox1.Text += ex.Message + "\n";
-                    //MessageBox.Show(ex.Message);
-                    /*
-                    FileAttributes attr = (new FileInfo(filePath)).Attributes;
-                    Console.Write("UnAuthorizedAccessException: Unable to access file. ");
-                    if ((attr & FileAttributes.ReadOnly) > 0)
-                        Console.Write("The file is read-only.");
-                    */
                 }
             }
             catch (IOException e)
             {
                 richTextBox1.Text += "IOException, " + e.GetType().Name + "\n";
-                /*
-                Console.WriteLine(
-                    "{0}: The write operation could not " +
-                    "be performed because the specified " +
-                    "part of the file is locked.",
-                    e.GetType().Name);
-                */
             }
             richTextBox1.Text += "處理資料夾 : " + targetDirectory + " 結束\n";
             //此目錄狀況
-
-
         }
 
         // Insert logic for processing found files here.
@@ -2795,7 +2727,6 @@ namespace vcs_DrAP
                     }
                     else
                     {
-                        //Console.WriteLine("{0} is not a valid file or directory.", path);
                         richTextBox1.Text += "非合法路徑或檔案d\n";
                     }
                 }
@@ -2830,7 +2761,6 @@ namespace vcs_DrAP
                 }
                 else
                 {
-                    //Console.WriteLine("{0} is not a valid file or directory.", path);
                     richTextBox1.Text += "非合法路徑或檔案e\n";
                 }
             }
@@ -2883,10 +2813,8 @@ namespace vcs_DrAP
                     }
                     else
                     {
-                        //Console.WriteLine("{0} is not a valid file or directory.", path);
                         richTextBox1.Text += "非合法路徑或檔案f\n";
                     }
-
                 }
                 filename = "AP." + hddname + DateTime.Now.ToString(".yyyy.MMdd.HHmm") + ".txt";
             }
@@ -3217,33 +3145,40 @@ namespace vcs_DrAP
             winmerge_path = Properties.Settings.Default.winmerge_path;
 
             if (Properties.Settings.Default.search_path != "")
+            {
                 search_path = Properties.Settings.Default.search_path;
+            }
 
             if (System.IO.File.Exists(Properties.Settings.Default.video_player_path) == false)
             {
                 result_str += "播放影片程式不存在 : " + Properties.Settings.Default.video_player_path + "\n使用Windows預設播放影片程式\n";
                 video_player_path = String.Empty;
             }
+
             if (System.IO.File.Exists(Properties.Settings.Default.audio_player_path) == false)
             {
                 result_str += "播放音樂程式不存在 : " + Properties.Settings.Default.audio_player_path + "\n使用Windows預設播放音樂程式\n";
                 audio_player_path = String.Empty;
             }
+
             if (System.IO.File.Exists(Properties.Settings.Default.picture_viewer_path) == false)
             {
                 result_str += "播放圖片程式不存在 : " + Properties.Settings.Default.picture_viewer_path + "\n使用Windows預設播放圖片程式\n";
                 picture_viewer_path = String.Empty;
             }
+
             if (System.IO.File.Exists(Properties.Settings.Default.text_editor_path) == false)
             {
                 result_str += "文字編輯程式不存在 : " + Properties.Settings.Default.text_editor_path + "\n使用Windows預設文字編輯程式\n";
                 text_editor_path = String.Empty;
             }
+
             if (System.IO.File.Exists(Properties.Settings.Default.python_editor_path) == false)
             {
                 result_str += "python編輯程式不存在 : " + Properties.Settings.Default.python_editor_path + "\n使用Windows預設文字編輯程式\n";
                 python_editor_path = String.Empty;
             }
+
             if (System.IO.File.Exists(Properties.Settings.Default.winmerge_path) == false)
             {
                 result_str += "winmerge程式不存在 : " + Properties.Settings.Default.winmerge_path + "\n使用Windows預設文字編輯程式\n";
@@ -3364,7 +3299,6 @@ namespace vcs_DrAP
             string path = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw";
             //string path = search_path;
 
-
             //folder_name.Clear();
 
             //richTextBox1.Text += "搜尋資料夾: " + path + "\n\n";
@@ -3396,7 +3330,6 @@ namespace vcs_DrAP
                 // Process the list of files found in the directory.
                 try
                 {
-
                     string[] fileEntries = Directory.GetFiles(targetDirectory);
                     file_cnt = fileEntries.Length;
                     Array.Sort(fileEntries);
@@ -3411,7 +3344,6 @@ namespace vcs_DrAP
                     foreach (string subdirectory in subdirectoryEntries)
                     {
                         //richTextBox1.Text += "subdirectory = " + subdirectory + "\n";
-
                         DirectoryInfo di = new DirectoryInfo(subdirectory);
                         ProcessDirectory3(subdirectory);
                     }

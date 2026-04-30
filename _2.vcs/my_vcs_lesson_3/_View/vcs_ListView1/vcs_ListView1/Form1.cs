@@ -188,7 +188,7 @@ namespace vcs_ListView1
 
         private void button0_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "建立listView 0\n";
+            richTextBox1.Text += "建立listView 0 標準簡易\n";
             listView1.Clear();
             apply_listView00();
         }
@@ -1563,9 +1563,6 @@ listView1.Font = new Font("Microsoft Sans Serif", 12.75F, FontStyle.Regular, Gra
 */
 
 
-
-
-
 //listView1.Columns.Add("產品名稱", 100, HorizontalAlignment.Left);//向listView1控制元件中新增「產品名稱」列
 //listView1.Columns.Add("產品說明", 200, HorizontalAlignment.Center);//向listView1控制元件中新增「產品說明」列
 
@@ -1739,3 +1736,4 @@ listView1參數
             string str = this.listView1.SelectedItems[0].Text.ToString(); // 取出第0欄的資料, 員工編號
             richTextBox1.Text += str + "\n";
 */
+

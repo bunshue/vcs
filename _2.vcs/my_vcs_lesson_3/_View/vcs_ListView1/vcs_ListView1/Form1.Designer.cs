@@ -76,7 +76,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(200, 60);
             this.button0.TabIndex = 113;
-            this.button0.Text = "建立listView 0";
+            this.button0.Text = "建立listView 0 標準簡易";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 

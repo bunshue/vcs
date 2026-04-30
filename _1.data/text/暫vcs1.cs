@@ -1118,14 +1118,8 @@ PasswordChar
 
 禁止使用滑鼠右鍵
 
-            dataGridView1.DataSource = nemployees.ToList();
-            dataGridView1.Columns[0].Width = 250;
-            dataGridView1.Columns[1].Width = 100;
-
 
 json load 出來後是字典
-
-
 
 
              //Console.WriteLine (ex.ToString() + "\n" + ex.HelpLink + "\n" + ex.StackTrace );
@@ -1195,11 +1189,6 @@ CustomSource 和 None。 預設為 None。
     {
     //xxxx
     }
-
-
-WaferAdapter.Fill(WaferSet, "商品");//向數據集中填充數據
-WaferTable = WaferSet.Tables["商品"];//向數據表中填充數據
-this.dataGridView1.DataSource = WaferSet.Tables["商品"].DefaultView;//為DataGridView控件綁定數據源
 
 
 printPreviewDialog1     .ShowDialog();
@@ -2497,10 +2486,6 @@ richTextBox1.Text += "----------------------------------------------------------
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-dgv1
-            //// Make the columns autosize.
-            //foreach (DataGridViewColumn col in dataGridView1.Columns)
-            //    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
 ------------------------------------------------------------
 ------------------------------------------------------------
@@ -7022,19 +7007,8 @@ http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/192842.html
 
 //============================================================================================================================
 
-
-
-List 與 DataTable的比較
-
-綁定的顯示控件？
-DataGridView??
-
-
 List比較像陣列
 DataTable可以加標題 比較像EXCEL表單
-
-
-
 
 //============================================================================================================================
 
@@ -8411,19 +8385,7 @@ using System.Reflection;
             Console.WriteLine("\r\n字符{0}的ASCII值是：{1}", c, (int)c); 
             Console.ReadKey(false); 
 
-
-
-DataGridView 指定欄位排序
-
-// 根據 資料行1 (Name) 做 大到小 排序
-dataGridView1.Sort(dataGridView1.Columns[1], System.ComponentModel.ListSortDirection.Descending); 
-
-// 根據 資料行1 (Name) 做 小到大 排序 
-dataGridView1.Sort(dataGridView1.Columns[1], System.ComponentModel.ListSortDirection.Ascending); 
-
-
-
-    
+   
     
             //                    來源位置             目的位置      要傳輸的區域大小  判斷在像素複製作業中來源色彩如何與目的色彩結合以產生最後的色彩
             //g.CopyFromScreen(new Point(x_st, y_st), new Point(0, 0), new Size(w, h), CopyPixelOperation.SourceInvert);
@@ -10681,75 +10643,11 @@ Random rd = new Random((int)DateTime.Now.Ticks);
         				
 //--------------------------------------------------------------------------------------------------------------------------
 
-
-
-直接把DataTable的資料貼到DataGridView上
-
-	//C#之界面上依次出現表格（DataTable和DataGridView提高）
-	
-	C#之界面上依次出現表格（DataTable和DataGridView提高）
-	
-	效果圖：
-	
-	在textBox控件中輸入信息，點擊增加
-	
-	\
-	
-	出現如圖：
-	
-	\
-	
-	繼續：
-	
-	\
-	
-	代碼（沒用csdn插入代碼功能是插入的代碼增刪改不能選中，特別費事，所以下面代碼可能會看的有點亂）：
-	
-	//創建坡口形式選擇數據表
-	dt = new DataTable();
-	
-	//建九列
-	
-	dt.Columns.Add("name", typeof(System.String));
-	dt.Columns.Add("sex", typeof(System.String));
-	dt.Columns.Add("age", typeof(System.String));
-	
-	//將MongoDB中數據插入到該一行對應的各列中（我這裡是數據存入MongoDB中，在之前取出bson,然後foreach）
-	foreach (BsonDocument result in resultList)
-	{
-	//建一行
-	DataRow dr = dt.NewRow();
-	//行信息
-	dr[0] = 你的數據
-	dr[1] = 你的數據
-	dr[2] = 你的數據
-	//將上述該行加入DataTable中
-	dt.Rows.Add(dr);
-	
-	//綁定在sorce上
-	dataGridView1.DataSource = dt;
-
-
-
-
-//--------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-//--------------------------------------------------------------------------------------------------------------------------
-
-
-
 C#_把dataTable數據導出到CSV,XLS文件
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/190579.html
 https://blog.csdn.net/happmaoo/article/details/83814604
-
-
         				
 //--------------------------------------------------------------------------------------------------------------------------
-
 
 ffmpeg的用法
 

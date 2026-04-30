@@ -28,6 +28,7 @@ namespace vcs_DataGridView1
             //dataGridView1.Dock = DockStyle.Fill;
             //dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;//佔滿整個DGV
 
+            dataGridView1.Click += new EventHandler(dataGridView1_Click);
             dataGridView1.CellClick += new DataGridViewCellEventHandler(dataGridView1_CellClick);
             dataGridView1.CellMouseClick += new DataGridViewCellMouseEventHandler(dataGridView1_CellMouseClick);
             dataGridView1.RowHeaderMouseClick += new DataGridViewCellMouseEventHandler(dataGridView1_RowHeaderMouseClick);
@@ -174,6 +175,14 @@ namespace vcs_DataGridView1
             richTextBox1.Text += "資料 : " + dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value + "\n";
         }
 
+        private void dataGridView1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "dataGridView1_Click, 取得資料 :\n";
+            richTextBox1.Text += "第0項 : " + this.dataGridView1.SelectedCells[0].Value.ToString() + "\n";
+            richTextBox1.Text += "第1項 : " + this.dataGridView1.SelectedCells[1].Value.ToString() + "\n";
+            richTextBox1.Text += "第2項 : " + this.dataGridView1.SelectedCells[2].Value.ToString() + "\n";
+        }
+
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             richTextBox1.Text += "CellClick[" + e.ColumnIndex.ToString() + ", " + e.RowIndex.ToString() + "]\n";
@@ -200,6 +209,8 @@ namespace vcs_DataGridView1
 
         private void button0_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "建立DGV 0 標準簡易\n";
+
             dataGridView1.Columns.Clear();  // 刪除DGV欄位與資料
 
             //設定DGV
@@ -239,6 +250,8 @@ namespace vcs_DataGridView1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "建立DGV 1\n";
+
             dataGridView1.Columns.Clear();  // 刪除DGV欄位與資料
 
             //設定DGV
@@ -257,6 +270,8 @@ namespace vcs_DataGridView1
 
         private void button2_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "建立DGV 2\n";
+
             //設定DGV
             dataGridView1.ColumnCount = 3;
 
@@ -304,6 +319,8 @@ namespace vcs_DataGridView1
 
         private void button3_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "建立DGV 3\n";
+
             // DataGridView 顯示序號, 多了 RowPostPaint
 
             //設定DGV
@@ -362,6 +379,8 @@ namespace vcs_DataGridView1
 
         private void button4_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "建立DGV 4\n";
+
             //設定DGV
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
@@ -396,6 +415,8 @@ namespace vcs_DataGridView1
 
         private void button5_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "建立DGV 5\n";
+
             //設定DGV
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
@@ -472,6 +493,8 @@ namespace vcs_DataGridView1
 
         private void button6_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "建立DGV 6\n";
+
             //建立DGV 6, 使用 CellFormatting
             SetupDataGridView();
             PopulateDataGridView();
@@ -791,13 +814,13 @@ namespace vcs_DataGridView1
                 new Images(){Im=Image.FromFile("..//..//images//6.bmp")},
                 new Images(){Im=Image.FromFile("..//..//images//7.bmp")}
             };
-            dataGridView1.Columns[0].HeaderText = "图片";//设置列文本
+            dataGridView1.Columns[0].HeaderText = "图片";//設定欄標題
             dataGridView1.Columns[0].Width = 70;  // 設定欄寬, 第0欄
 
             int R = dataGridView1.Rows.Count;  // 列數, 包含標題列
             for (int i = 0; i < R; i++)
             {
-                dataGridView1.Rows[i].Height = 70;//设置行高度
+                dataGridView1.Rows[i].Height = 70;  // 設定行高
             }
         }
 
@@ -1127,4 +1150,95 @@ namespace vcs_DataGridView1
 /*  可搬出
 
  */
+
+
+
+
+
+
+
+            /*
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.Click += new EventHandler(dataGridView1_Click);
+            */
+
+/*
+        private void dataGridView1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "dataGridView1_Click, 取得資料 :\n";
+            richTextBox1.Text += "第0欄 : " + this.dataGridView1.SelectedCells[0].Value.ToString() + "\n";
+            richTextBox1.Text += "第1欄 : " + this.dataGridView1.SelectedCells[1].Value.ToString() + "\n";
+            richTextBox1.Text += "第2欄 : " + this.dataGridView1.SelectedCells[2].Value.ToString() + "\n";
+            richTextBox1.Text += "第3欄 : " + this.dataGridView1.SelectedCells[3].Value.ToString() + "\n";
+        }
+
+
+            dataGridView1.Columns[0].Width = 150;//設置欄位寬度
+            dataGridView1.Columns[1].Width = 150;//設置欄位寬度
+            dataGridView1.Columns[2].Width = 150;//設置欄位寬度
+
+
+            dataGridView1.DataSource = nemployees.ToList();
+            dataGridView1.Columns[0].Width = 250;
+            dataGridView1.Columns[1].Width = 100;
+
+
+
+WaferAdapter.Fill(WaferSet, "商品");//向數據集中填充數據
+WaferTable = WaferSet.Tables["商品"];//向數據表中填充數據
+this.dataGridView1.DataSource = WaferSet.Tables["商品"].DefaultView;//為DataGridView控件綁定數據源
+
+
+
+
+dgv1
+            //// Make the columns autosize.
+            //foreach (DataGridViewColumn col in dataGridView1.Columns)
+            //    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
+
+
+
+DataGridView 指定欄位排序
+
+// 根據 資料行1 (Name) 做 大到小 排序
+dataGridView1.Sort(dataGridView1.Columns[1], System.ComponentModel.ListSortDirection.Descending); 
+
+// 根據 資料行1 (Name) 做 小到大 排序 
+dataGridView1.Sort(dataGridView1.Columns[1], System.ComponentModel.ListSortDirection.Ascending); 
+
+
+//3030
+
+直接把DataTable的資料貼到DataGridView上
+
+	DataTable dt = new DataTable();
+	
+	//建九列
+	
+	dt.Columns.Add("name", typeof(System.String));
+	dt.Columns.Add("sex", typeof(System.String));
+	dt.Columns.Add("age", typeof(System.String));
+	
+	//將MongoDB中數據插入到該一行對應的各列中（我這裡是數據存入MongoDB中，在之前取出bson,然後foreach）
+	foreach (BsonDocument result in resultList)
+	{
+	//建一行
+	DataRow dr = dt.NewRow();
+	//行信息
+	dr[0] = 你的數據
+	dr[1] = 你的數據
+	dr[2] = 你的數據
+	//將上述該行加入DataTable中
+	dt.Rows.Add(dr);
+	
+	//綁定在sorce上
+	dataGridView1.DataSource = dt;
+
+
+//3030
+
+
+
+*/
 

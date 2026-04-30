@@ -37,12 +37,6 @@ SqlDbType.VarChar, 20);
             sqlstr = "select name from sysdatabases";
 
 
-
-
-//richTextBox1.Text += "共有" + (dataGridView1.Rows.Count - 1) + "条记录\n";
-
-
-
                     //刪除表單
                     //SqlCommand cmdnew = new SqlCommand("drop table animals1_table", con);
                     //cmdnew.ExecuteNonQuery();
@@ -60,8 +54,6 @@ sqlstr : select  name 字段名, xusertype 類型編號, length 長度 into anim
 
 //6060
 
-
-
             // 取出某表單的 欄位名稱
             string db_filename = "db_10_Data.MDF";
             string table_name = "銷售表";
@@ -69,7 +61,7 @@ sqlstr : select  name 字段名, xusertype 類型編號, length 長度 into anim
             sql_read_database(db_filename, sqlstr, dataGridView2);
 
 
-
+//6060
 
 利用運算符查詢指定條件的數據
 
@@ -283,31 +275,7 @@ FROM sys.databases AS a
 WHERE a.state = 7;
 
 
-
-
-
 //------------------------------------------------------------  # 60個
-
-
-            /*
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Click += new EventHandler(dataGridView1_Click);
-            */
-
-
-        private void dataGridView1_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "dataGridView1_Click, 取得資料 :\n";
-            richTextBox1.Text += "第0欄 : " + this.dataGridView1.SelectedCells[0].Value.ToString() + "\n";
-            richTextBox1.Text += "第1欄 : " + this.dataGridView1.SelectedCells[1].Value.ToString() + "\n";
-            richTextBox1.Text += "第2欄 : " + this.dataGridView1.SelectedCells[2].Value.ToString() + "\n";
-            richTextBox1.Text += "第3欄 : " + this.dataGridView1.SelectedCells[3].Value.ToString() + "\n";
-        }
-
-
-            dataGridView1.Columns[0].Width = 150;//設置欄位寬度
-            dataGridView1.Columns[1].Width = 150;//設置欄位寬度
-            dataGridView1.Columns[2].Width = 150;//設置欄位寬度
 
 
 
