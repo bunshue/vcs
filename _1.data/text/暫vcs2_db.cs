@@ -1,4 +1,179 @@
 ﻿
+基础聚合函数（COUNT、SUM、AVG、MAX、MIN）
+
+SELECT COUNT(*) AS total_orders FROM orders WHERE create_time BETWEEN '2025-06-01' AND '2025-06-30';
+SELECT COUNT(*) AS valid_orders FROM orders WHERE order_status IN ('已支付', '已完成') AND create_time BETWEEN '2025-06-01' AND '2025-06-30';
+
+
+COUNT(*)          -- 统计所有行（包括NULL）
+COUNT(列名)       -- 统计该列非NULL的行数
+COUNT(DISTINCT 列名) -- 统计去重后的数量
+
+
+SELECT COUNT(*) AS total_orders FROM orders;
+
+
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    shop_name VARCHAR(50) NOT NULL,
+    product_name VARCHAR(100),
+    amount DECIMAL(10,2) NOT NULL,
+    quantity INT NOT NULL DEFAULT 1,
+    order_status VARCHAR(20) NOT NULL,
+    create_time DATETIME NOT NULL
+);
+
+INSERT INTO orders (user_id, shop_name, product_name, amount, quantity, order_status, create_time) VALUES
+(1001, '女装旗舰店', '碎花连衣裙', 299.00, 2, '已支付', '2025-06-01 10:00:00'),
+(1002, '女装旗舰店', '纯棉T恤', 189.00, 3, '已取消', '2025-06-01 11:00:00'),
+(1003, '男装专营店', '牛仔裤', 599.00, 1, '已支付', '2025-06-02 09:30:00'),
+(1001, '女装旗舰店', '雪纺衫', 399.00, 1, '已支付', '2025-06-03 14:20:00'),
+(1004, '童装店', '儿童T恤', 99.00, 5, '已完成', '2025-06-03 16:00:00'),
+(1005, '女装旗舰店', '真丝连衣裙', 1299.00, 1, '已支付', '2025-06-04 08:30:00'),
+(1002, '男装专营店', '休闲短裤', 89.00, 2, '已取消', '2025-06-04 10:00:00'),
+(1006, '女装旗舰店', '基础打底衫', 89.00, 10, '已支付', '2025-06-05 09:00:00'),
+(1007, '男装专营店', 'Polo衫', 259.00, 1, '已支付', '2025-06-05 14:00:00');
+
+
+
+CREATE TABLE products (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(100),
+    price DECIMAL(10,2)
+);
+
+INSERT INTO products VALUES (1, '连衣裙', 299), (2, 'T恤', 89), (3, '牛仔裤', 199);
+
+SELECT MAX(price), MIN(price) FROM products;
+
+
+
+
+
+/*
+
+                // 查詢字串, 取得欄資料的最大值
+                string sqlstr = "SELECT MAX(tb_ID) FROM 員工個人訊息";
+                string str = cmd.ExecuteScalar().ToString();
+*/
+
+
+            string new_id = "P1018";  // 員工編號
+            string new_name = "david";  // 員工姓名
+            string new_age = "18";  // 員工年齡
+            string new_money = "34567";  // 基本工資
+            string new_idcard = "P123456789";  // 身分證號
+            string strSql = "insert into 員工個人訊息 values ('" + new_id + "','" + new_name + "','" + new_age + "','" + new_money + "','" + new_idcard + "')";
+
+
+
+
+
+            getScoure("select * from [tb_ware]");
+            //升冪排列
+            getScoure("select * from [tb_ware]  order by [销售数量] asc");
+            //降冪排列
+            getScoure("select * from [tb_ware] order by [销售数量] Desc");
+
+
+
+            OleDat = new OleDbDataAdapter("select * from 帳目", Olecon);
+            MaxValue = Convert.ToInt32(new OleDbCommand("select Count(*) from 帳目", Olecon).ExecuteScalar());
+
+
+
+準備搬進 簡易測試 的
+
+//idx  /  資料庫檔案  /  查詢字串1  /  說明1 /  查詢字串2  /  說明2/  查詢字串3  /  說明3
+
+
+
+-------------------------------------------------------------------
+
+
+-------------------------------------------------------------------
+            //查詢字串/數字
+
+            //查詢字串
+            //請輸入查詢院系名稱：
+            //計算機
+
+            db_filename = "db_10_Data.MDF";
+            string search_college = "計算機";
+            sqlstr = "SELECT * FROM tb_05 WHERE 所在院系 LIKE '%" + search_college + "%'";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "全部資料 tb_05 + WHERE";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            /*
+            //查詢數字
+            //查詢年齡為：23
+
+            string db_filename = "db_10_Data.MDF";
+            int age = 23;
+            string sqlstr = "SELECT * FROM tb_05 WHERE 學生年齡=" + age.ToString();
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "全部資料 tb_05 + WHERE";
+            */
+
+
+
+//3030
+            // 資料庫檔案
+            string db_filename = "db_10_Data.MDF";
+
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 部門工資統計表";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            // 修改資料
+            string name = "江南";
+            string money = "2345";
+            sqlstr = "update 部門工資統計表 set 基本工資=" + money + "WHERE 員工姓名 = '" + name + "'";
+            sql_write_database(db_filename, sqlstr);
+
+            // 查詢字串
+            sqlstr = "SELECT * FROM 部門工資統計表";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+
+3030
+
+
+            // 資料庫檔案
+            string db_filename = "db_10_Data.MDF";
+
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 員工工資表";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            // 查詢字串
+            sqlstr = "SELECT * FROM 規定工資表";
+            //sql_read_database(db_filename, sqlstr, dataGridView2);
+
+            string work_year = "3年";
+            string name = "江南";
+
+            // 查詢字串, 跨表單查詢 依 規定工資表 修改 員工工資表
+            sqlstr = "update 員工工資表 set 基本工資=(SELECT 基本工資 FROM 規定工資表 WHERE 工作時間='" + work_year + "') WHERE 員工姓名='" + name + "'";
+            sql_write_database(db_filename, sqlstr);
+
+            // 查詢字串
+            sqlstr = "SELECT * FROM 員工工資表";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+
+
+
+
+
+
+//string sqlstr = "SELECT * FROM tb_Rectangle SELECT SUM(t_Num) FROM tb_Rectangle";  // 存成兩個table
+
+
+
+
+
 SQL DB 有用到的資料型態
 
 SqlDbType.DateTime, 8);
