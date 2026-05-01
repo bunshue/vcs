@@ -32,6 +32,13 @@ namespace vcs_SqlConnection1
 {
     public partial class Form1 : Form
     {
+        // 資料庫檔案
+        string db_filename = string.Empty;
+        // 連接字串
+        string cnstr = string.Empty;
+        // 查詢字串
+        string sqlstr = string.Empty;
+        // 連接字串
         string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
 
         public Form1()
@@ -141,9 +148,7 @@ namespace vcs_SqlConnection1
         void sql_read_database_dr(string db_filename, string sqlstr)
         {
             // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);
-
-            //讀取資料庫
+            cnstr = string.Format(db_cnstr, db_filename);
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
                 //cn.ConnectionString = cnstr;  // 連接字串, 可有可無
@@ -192,13 +197,11 @@ namespace vcs_SqlConnection1
 
         void sql_read_database(string db_filename, string sqlstr, DataGridView dgv)
         {
-            // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);
-            //richTextBox1.Text += cnstr + "\n";
-
             //讀取資料庫至DGV
             try
             {
+                // 連接字串
+                cnstr = string.Format(db_cnstr, db_filename);
                 using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
                 {
                     SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
@@ -241,12 +244,11 @@ namespace vcs_SqlConnection1
         {
             //依傳入的SQL陳述式對指定的資料表進行新增、修改、刪除 應該都只是操作 並不能取出資料
 
-            // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);
-
             //對資料庫操作 增茶改山
             try
             {
+                // 連接字串
+                cnstr = string.Format(db_cnstr, db_filename);
                 using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
                 {
                     cn.Open();  // 打開資料庫連線
@@ -266,8 +268,7 @@ namespace vcs_SqlConnection1
         object sql_get_database_data(string db_filename, string sqlstr)
         {
             // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);
-
+            cnstr = string.Format(db_cnstr, db_filename);
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
                 cn.Open();  // 打開資料庫連線
@@ -281,45 +282,16 @@ namespace vcs_SqlConnection1
         {
             //簡易測試 資料庫檔案+查詢字串+DGV
 
-            // 資料庫檔案
-            string db_filename = string.Empty;
-            // 查詢字串
-            string sqlstr = string.Empty;
-            /*
-            // 資料庫檔案
-            db_filename = "db_09_Data.MDF";
-            // 查詢字串
-            sqlstr = "SELECT * FROM syscolumns";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "xxxxx";
-
-            // 查詢字串
-            sqlstr = "SELECT name 字段名, xusertype 类型编号, length 长度 FROM syscolumns";
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-            lb_dgv2.Text = "xxxxx";
-
-            // 查詢字串
-            sqlstr = "SELECT name 类型,xusertype 类型编号 FROM systypes";
-            sql_read_database(db_filename, sqlstr, dataGridView3);
-            lb_dgv3.Text = "xxxxx";
-
-            // 查詢字串
-            //sqlstr = "SELECT 字段名,类型,长度 FROM hy_Linshibiao t,angel_Linshibiao b WHERE t.类型编号=b.类型编号";
-
-            // 查詢字串
-            //sqlstr = "drop table hy_Linshibiao,angel_Linshibiao";
-
-            return;
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-            */
             // 分析公司男女比率
 
             db_filename = "db_13.mdf";
+
+            // 查詢字串
             sqlstr = "SELECT * FROM tb_employee";
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "全部資料";
 
+            // 查詢字串
             sqlstr = "SELECT * FROM tb_employee GROUP BY sex";
             sql_read_database(db_filename, sqlstr, dataGridView2);
             lb_dgv2.Text = "同項合併";
@@ -328,9 +300,11 @@ namespace vcs_SqlConnection1
             sql_read_database(db_filename, sqlstr, dataGridView3);
             lb_dgv3.Text = "同項合併 統計數字";
 
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             db_filename = "db_TomeOne.mdf";
+
+            // 查詢字串
             sqlstr = "SELECT * FROM tb_product";
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "全部資料";
@@ -338,27 +312,25 @@ namespace vcs_SqlConnection1
             sqlstr = "SELECT t_Name, SUM(t_Num) AS Num FROM tb_product GROUP BY t_Name";
             sql_read_database(db_filename, sqlstr, dataGridView2);
             lb_dgv2.Text = "同項合併";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             //讀取資料庫 解讀, 要先知道資料庫檔案(.mdf)和表單名稱(tb_Employee)
 
-            // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
-            // 資料庫檔案
-            string db_filename = "db_TomeTwo.mdf";
-            // 查詢字串
-            string sqlstr = "SELECT * FROM tb_Employee";
-
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "全部資料 tb_Employee";
-
-
             // 資料庫檔案
             db_filename = "db_TomeTwo.mdf";
             // 查詢字串
             sqlstr = "SELECT * FROM tb_Employee";
+
+            //顯示在DGV
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "全部資料 tb_Employee";
+
+            //顯示在RTB
             sql_read_database_dr(db_filename, sqlstr);
 
             return;
@@ -372,10 +344,11 @@ namespace vcs_SqlConnection1
             DataSet ds;//宣告一個數據集
             SqlConnection cn;//宣告一個數據庫連接對像
 
-            //定義一個數據庫連接字符串
+            // 連接字串
             cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_02.mdf;Integrated Security=True;Connect Timeout=30";
-
             cn = new SqlConnection(cnstr);  // 建立資料庫連接對象cn
+            
+            // 查詢字串
             sqlstr = "SELECT 產品名稱,產品說明 FROM tb_WidgetApply";//定義一個數據庫查詢字串
             da = new SqlDataAdapter(sqlstr, cn);//初始化數據讀取器對像
             ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
@@ -410,9 +383,9 @@ namespace vcs_SqlConnection1
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             // 讀取資料庫資料到 DataTable
+
             // 連接字串
             cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
-
             using (SqlConnection cn = new SqlConnection(cnstr))
             {
                 // 查詢字串
@@ -447,11 +420,164 @@ namespace vcs_SqlConnection1
 
         private void button2_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "SQL 2\n";
+
             // 資料庫檔案
-            string db_filename = "Northwind.mdf";
+            string db_filename = "db_10_Data.MDF";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM v10_01";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            // 更新資料
+            //SqlCommand cmd = new SqlCommand("update v10_01 set 基本工資='" + textBox2.Text + "' WHERE 員工編號='" + textBox1.Text + "'", con);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "SQL 3 員工表\n";
+
+            // 資料庫檔案
+            string db_filename = "db_09_Data.mdf";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 員工表";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            // 資料庫檔案
+            db_filename = "db_09_Data.mdf";
             // 連接字串
             string cnstr = string.Format(db_cnstr, db_filename);
 
+            SqlConnection con = new SqlConnection(cnstr);
+
+            con.Open();
+
+            using (SqlCommand cmd = new SqlCommand("SELECT Max(員工編號) FROM 員工表", con))
+            {
+                //找到目前最大的員工編號 再加1，做為新增資料的員工編號
+                if (Convert.ToString(cmd.ExecuteScalar()) != "")
+                {
+                    richTextBox1.Text += "aaaaaaaaaaaaaaaaa\n";
+                    string strID = Convert.ToString(cmd.ExecuteScalar());
+                    richTextBox1.Text += "取出員工表中最大的員工編號 : " + strID + "\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "bbbbbbbbbbbbbbbbbb\n";
+                }
+            }
+            con.Close();
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //新增
+
+            string id = "P1007";  // 員工編號
+            string name = "mary";  // 員工姓名
+            string money = "12345";  // 基本工資
+            string description = "well done";  // 工作評價
+
+            // 資料庫檔案
+            db_filename = "db_09_Data.mdf";
+            // 連接字串
+            cnstr = string.Format(db_cnstr, db_filename);
+
+            con = new SqlConnection(cnstr);
+
+            con.Open();
+
+            // 查詢字串
+            sqlstr = "INSERT INTO 員工表 " + "VALUES (@員工編號, @員工姓名,@基本工資,@工作評價)";
+
+            using (SqlCommand command = new SqlCommand(sqlstr, con))
+            {
+                // Add the parameters for the InsertCommand.
+                command.Parameters.Add("@員工編號", SqlDbType.VarChar, 50, "員工編號").Value = id;
+                command.Parameters.Add("@員工姓名", SqlDbType.VarChar, 50, "員工姓名").Value = name;
+                command.Parameters.Add("@基本工資", SqlDbType.Float, 8, "基本工資").Value = Convert.ToString(money);
+                command.Parameters.Add("@工作評價", SqlDbType.VarChar, 50, "工作評價").Value = description;
+                command.ExecuteNonQuery();
+                richTextBox1.Text += "OK\n";
+            }
+
+            con.Close();
+
+            // 查詢字串
+            sqlstr = "SELECT * FROM 員工表";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //新增資料
+            id = "P1008";  // 員工編號
+            name = "mary";  // 員工姓名
+            money = "12345";  // 基本工資
+            description = "well done";  // 工作評價
+
+            // 查詢字串
+            sqlstr = "INSERT INTO 員工表(員工編號, 員工姓名,基本工資,工作評價) values('" + id + "','" + name + "','" + Convert.ToSingle(money) + "','" + description + "')";
+
+            // 資料庫檔案
+            db_filename = "db_09_Data.mdf";
+            // 連接字串
+            cnstr = string.Format(db_cnstr, db_filename);
+
+            con = new SqlConnection(cnstr);
+
+            using (SqlCommand cmd = new SqlCommand(sqlstr, con))
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+                richTextBox1.Text += "OK\n";
+                con.Close();
+            }
+
+            // 查詢字串
+            sqlstr = "SELECT * FROM 員工表";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            string strid = "P1008";  // 員工編號
+            richTextBox1.Text += "員工編號 : " + strid + "\n";
+            //SqlCommand cmd = new SqlCommand("SELECT * FROM 員工表 WHERE 員工編號='" + strid + "'", con))
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+            /*
+            richTextBox1.Text += "測試 UPDATE 修改\n";
+            richTextBox1.Text += "員工編號 : " + textBox1.Text + "\n";
+            richTextBox1.Text += "員工姓名 : " + textBox2.Text + "\n";
+            richTextBox1.Text += "基本工資 : " + textBox4.Text + "\n";
+            richTextBox1.Text += "工作評價 : " + textBox5.Text + "\n";
+
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                try
+                {
+                    cmd.CommandText = "UPDATE 員工表 SET 員工姓名='" + this.textBox2.Text + "',基本工資='" + this.textBox4.Text + "',工作評價='" + this.textBox5.Text + "' WHERE 員工編號='" + this.textBox1.Text + "'";
+                    con.Open();
+                    cmd.Connection = con;
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+                catch
+                {
+
+                }
+            }
+            */
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //系統相關
+            /*
+            // 資料庫檔案
+            db_filename = "Northwind.mdf";
+
+            // 連接字串
+            cnstr = string.Format(db_cnstr, db_filename);
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
                 //cn.ConnectionString = cnstr;  // 連接字串, 可有可無
@@ -477,63 +603,232 @@ namespace vcs_SqlConnection1
                 richTextBox1.Text += "資料來源：" + cn.DataSource + "\n";
             }
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            */
+            // 資料庫檔案
+            db_filename = "db_09_Data.MDF";
+            db_filename = "animals1_db.mdf";
 
-            //讀取資料庫2
+            // 查詢字串, 所有資料庫的欄位
+            sqlstr = "SELECT * FROM syscolumns";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "syscolumns 所有資料庫的欄位";
 
+            // 查詢字串, 所有資料庫的欄位, 看 3 欄
+            sqlstr = "SELECT name, xusertype, length FROM syscolumns";
+            // 查詢字串, 所有資料庫的欄位, 看 3 欄, 欄位改名
+            sqlstr = "SELECT name 字段名, xusertype 類型編號, length 長度 FROM syscolumns";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+            lb_dgv2.Text = "syscolumns";
+
+            // 查詢字串, 所有資料庫欄位的資料型態
+            sqlstr = "SELECT name, xusertype FROM systypes";
+            // 查詢字串, 所有資料庫欄位的資料型態, 欄位改名
+            sqlstr = "SELECT name 類型,xusertype 類型編號 FROM systypes";
+
+            sql_read_database(db_filename, sqlstr, dataGridView3);
+            lb_dgv3.Text = "systypes";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //檢視 SQL Server 上的資料庫清單
+
+            // 資料庫檔案
+            db_filename = "db_09_Data.MDF";
+            // 查詢字串, 檢視 SQL Server 上的資料庫清單
+            sqlstr = "SELECT name, filename FROM sysdatabases";  // 系統查詢資料庫名稱
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            // 查詢字串, 檢視 SQL Server 上的資料庫清單, same
+            sqlstr = "SELECT name, database_id, create_date FROM sys.databases";  // same
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+
+            /*
+            // 資料庫檔案
+            db_filename = "db_09_Data.MDF";
+            
+            // 連接字串
+            cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            using (SqlConnection cn = new SqlConnection(cnstr))
+            {
+                DataTable dt = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter("SELECT name FROM sysdatabases", cn);
+                da.Fill(dt);
+                this.comboBox1.DataSource = dt.DefaultView;
+                this.comboBox1.DisplayMember = "name";
+                this.comboBox1.ValueMember = "name";
+
+                listBox1.DataSource = dt.DefaultView;
+                listBox1.DisplayMember = "name";
+                listBox1.ValueMember = "name";
+
+                richTextBox1.Text += "共 : " + comboBox1.Items.Count.ToString() + " 項\n";
+            }
+            */
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //sysobjects
+            //取得數據庫中全部的預儲程序, 但是取得後, 也不能利用, 因為不知道其內容
+
+            // 連接字串
+            cnstr = string.Format(db_cnstr, db_filename);
+
+            // 資料庫檔案
+            db_filename = "db_10_Data.MDF";
+            // 查詢字串, 改顯示欄位名稱AS
+            sqlstr = "SELECT * FROM sysobjects";  // 有很多欄位
+            //sqlstr = "SELECT name, crdate, refdate FROM sysobjects";  // 只看3個欄位
+            //sqlstr = "SELECT name AS 預儲程序名稱, crdate AS 建立時間, refdate AS 最後修改時間 FROM sysobjects";  // 只看3個欄位+改欄名
+
+            sql_read_database(db_filename, sqlstr, dataGridView4);
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //當前網路上運行的SQL伺服器
+
+            //枚举本地网络中的SQL Server所有可用实例
+            SqlDataSourceEnumerator instance = SqlDataSourceEnumerator.Instance;
+            DataTable table = instance.GetDataSources();//获取所有数据源，并存储到DataTable中
+            richTextBox1.Text += table + "\n";
+            foreach (DataRow row in table.Rows)//遍历获取到的数据源
+            {
+                richTextBox1.Text += row + "\n";
+                richTextBox1.Text += row["ServerName"] + "\n";
+                //listBox1.Items.Add(row["ServerName"]);//向列表中添加遍历到的服务器名
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //SysDatabases
+
+            // 資料庫檔案
+            //db_filename = "db_02.mdf";
+            db_filename = "animals1_db.mdf";
+
+            // 連接字串
+            cnstr = string.Format(db_cnstr, db_filename);
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
-                //多次查詢 分別放置一個DS的多個Table中
-                //不同DGV顯示不同Table的資料
+                cn.Open();
 
-                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+                //獲取所有數據庫名稱
+                //試一下  把 master 改成 dbo
+                // 'dbo.tb_XML'.
+                sqlstr = "SELECT NAME FROM master.dbo.sysdatabases";
+                sqlstr = "SELECT NAME FROM Master.dbo.SysDatabases";
+                sqlstr = "SELECT COUNT(*) FROM master.dbo.sysdatabases WHERE name='new_db'";//NG
 
-                //cn.ConnectionString = cnstr;  // 連接字串, 可有可無
+                //獲取所有表單名稱
+                sqlstr = "SELECT Name FROM SysObjects WHERE XType = 'U'";
+                //XType='U':表示所有用户表;
+                //XType='S':表示所有系统表;
+                sqlstr = "SELECT name FROM sysobjects WHERE type = 'U'";
 
-                // 建立三個DataAdapter物件，用來取得員工, 客戶, 產品類別資料表
-                // 再將三個資料表放入ds(DataSet)物件中
-                // 查詢字串
-                string sqlstr1 = "SELECT * FROM 員工";
-                SqlDataAdapter da1 = new SqlDataAdapter(sqlstr1, cn);  // 建立資料庫適配器對象da1
-                da1.Fill(ds, "員工");  // da將查詢的結果填充至數據集ds, 指定TableName為"員工"
+                //獲取所有的字段名
+                sqlstr = "SELECT Name FROM SysColumns WHERE id=Object_Id('animals1_table')";
 
-                // 查詢字串
-                string sqlstr2 = "SELECT * FROM 客戶";
-                SqlDataAdapter da2 = new SqlDataAdapter(sqlstr2, cn);  // 建立資料庫適配器對象da2
-                da2.Fill(ds, "客戶");  // da將查詢的結果填充至數據集ds, 指定TableName為"客戶"
+                //取得表單格式           欄名             格式                基本大小              總長度
+                sqlstr = "SELECT syscolumns.name, systypes.name, syscolumns.isnullable, syscolumns.length FROM syscolumns, systypes WHERE syscolumns.xusertype = systypes.xusertype AND syscolumns.id = object_id('animals1_table')";
 
-                // 查詢字串
-                string sqlstr3 = "SELECT * FROM 產品類別";
-                SqlDataAdapter da3 = new SqlDataAdapter(sqlstr3, cn);  // 建立資料庫適配器對象da3
-                da3.Fill(ds, "產品類別");  // da將查詢的結果填充至數據集ds, 指定TableName為"產品類別"
-
-                // 將ds物件內三個DataTable
-                for (int i = 0; i < ds.Tables.Count; i++)
+                using (SqlCommand cmd = new SqlCommand(sqlstr, cn))
                 {
-                    richTextBox1.Text += "取得 資料表 : " + ds.Tables[i].TableName + "\n";
+                    SqlDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
+
+                    richTextBox1.Text += "cnt = " + dr.FieldCount.ToString() + "\n";
+                    richTextBox1.Text += dr + "\n";
+
+                    while (dr.Read())  // 讀取一筆資料到dr
+                    {
+                        richTextBox1.Text += "---------------\n";  // 15個
+
+                        richTextBox1.Text += "欄數 dr.FieldCount = " + dr.FieldCount.ToString() + "\t欄位名稱 :\n";
+                        for (int i = 0; i < dr.FieldCount; i++)
+                        {
+                            richTextBox1.Text += dr.GetName(i) + "\t";
+                        }
+                        richTextBox1.Text += "\n";
+
+                        for (int i = 0; i < dr.FieldCount; i++)
+                        {
+                            richTextBox1.Text += dr[i].ToString();
+                            //richTextBox1.Text += dr.GetValue(i).ToString();  // same
+                            if (i == (dr.FieldCount - 1))
+                            {
+                                richTextBox1.Text += "\n";
+                            }
+                            else
+                            {
+                                richTextBox1.Text += "\t";
+                            }
+                        }
+                    }
+                    richTextBox1.Text += "---------------\n";  // 15個
                 }
-
-                richTextBox1.Text += "TableName1 : " + ds.Tables["員工"].TableName + "\n";
-                richTextBox1.Text += "TableName2 : " + ds.Tables["客戶"].TableName + "\n";
-                richTextBox1.Text += "TableName3 : " + ds.Tables["產品類別"].TableName + "\n";
-
-                dataGridView1.DataSource = ds.Tables["員工"];  // DGV設置數據源
-                lb_dgv1.Text = "員工";
-
-                dataGridView2.DataSource = ds.Tables["客戶"];  // DGV設置數據源
-                lb_dgv2.Text = "客戶";
-
-                dataGridView3.DataSource = ds.Tables["產品類別"];  // DGV設置數據源
-                lb_dgv3.Text = "產品類別";
             }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            // 取得資料庫的表單名稱 1
+
+            // 資料庫檔案
+            db_filename = "db_09_Data.MDF";
+
+            // 查詢字串
+            sqlstr = "SELECT NAME FROM sysdatabases";
+            sqlstr = "SELECT NAME FROM master..sysdatabases";
+            sqlstr = "SELECT NAME FROM master.dbo.sysdatabases";
+            sqlstr = "SELECT NAME FROM master.dbo.sysdatabases WHERE name='new_db'";
+            sqlstr = "SELECT COUNT(*) FROM master.dbo.sysdatabases WHERE name='new_db'";  // 找個數
+            sqlstr = "SELECT COUNT(*) FROM master.dbo.sysdatabases";  // 找個數
+
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //測試 getTable
+
+            //comboBox1.DataSource = getTable(cnstr, "SELECT name FROM sysdatabases", "sysdatabases");
+
+            /*
+            //測試 getTable
+
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.MDF;DataBase=" + comboBox1.Text + ";Integrated Security=True;Connect Timeout=30";
+
+            DataTable dt = null;
+            //数据表
+            dt = getTable(cnstr, "SELECT name FROM sysobjects WHERE type = 'U' and name<>'dtproperties'", "sysobjects");
+            //"视图"
+            dt = getTable(cnstr, "SELECT name FROM sysobjects WHERE xtype='v'", "sysobjects");
+            //"存储过程"
+            dt = getTable(cnstr, "SELECT name FROM sysobjects WHERE xtype='p'", "sysobjects");
+            */
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private DataTable getTable(string cnstr, string sqlstr, string strTable)
         {
-        }
+            richTextBox1.Text += "cnstr : " + cnstr + "\n";
+            richTextBox1.Text += "sqlstr : " + sqlstr + "\n";
+            richTextBox1.Text += "strTable : " + strTable + "\n";
 
-        private void button4_Click(object sender, EventArgs e)
-        {
+            try
+            {
+                SqlConnection cn = new SqlConnection(cnstr);
+                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
+                DataTable dt = new DataTable(strTable);
+                da.Fill(dt);
+                richTextBox1.Text += "OK dt\n";
+
+                dataGridView2.DataSource = dt;
+                dataGridView2.Columns[0].Width = 350;
+
+                return dt;
+            }
+            catch
+            {
+                richTextBox1.Text += "NG dt\n";
+                return null;
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -544,11 +839,14 @@ namespace vcs_SqlConnection1
 
             //全部資料
             // 資料庫檔案
-            string db_filename = "db_10_Data.MDF";
-            // 查詢字串
-            string sqlstr = "SELECT 書號,書名,作者,單價,銷售數量,金額,日期 FROM tb_xsb";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
+            db_filename = "db_10_Data.MDF";
 
+            // 查詢字串, 全部欄位
+            sqlstr = "SELECT * FROM tb_xsb";
+            // 查詢字串, 全部資料, 幾個欄位
+            sqlstr = "SELECT 書號,書名,作者,單價,銷售數量,金額,日期 FROM tb_xsb";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "全部資料";
 
             //查詢指定日期的數據
 
@@ -556,9 +854,10 @@ namespace vcs_SqlConnection1
             // 資料庫檔案
             db_filename = "db_10_Data.MDF";
 
-            // 查詢字串
+            // 查詢字串, 指定日期
             sqlstr = "SELECT 書號,書名,作者,單價,銷售數量,金額,日期 FROM tb_xsb WHERE 日期='" + datetime + "'";
             sql_read_database(db_filename, sqlstr, dataGridView2);
+            lb_dgv2.Text = "指定日期 WHERE";
 
             //查詢指定時間段的數據
 
@@ -566,81 +865,167 @@ namespace vcs_SqlConnection1
             string datetime_sp = "2005/9/30";
 
             db_filename = "db_10_Data.MDF";
+            // 查詢字串, 指定日期區間 BETWEEN
             sqlstr = "SELECT 書號,書名,作者,單價,銷售數量,金額,日期 FROM tb_xsb WHERE 日期 BETWEEN'" + datetime_st + "'AND '" + datetime_sp + "' ORDER BY 日期";
-            sql_read_database(db_filename, sqlstr, dataGridView2);
+            sql_read_database(db_filename, sqlstr, dataGridView3);
+            lb_dgv3.Text = "指定日期區間 WHERE+BETWEEN";
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //利用圖表分析彩票中獎情況
 
+            // 資料庫檔案
+            db_filename = "db_13.mdf";  // same
+            //db_filename = "db_TomeOne.mdf";
+
             //t_year 在 2005/4/1 ~ 2006/10/1 有資料
             string time_st = "2005/8/15";
             string time_sp = "2006/4/15";
 
+            // 查詢字串
             sqlstr = "SELECT * FROM tb_lottery WHERE t_year BETWEEN '" + time_st + "' AND '" + time_sp + "' ORDER BY t_year";
+            //sqlstr = "SELECT * FROM tb_lottery WHERE t_year BETWEEN '2005/8/15' AND '2006/4/15' ORDER BY t_year";
 
-            // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
-            SqlConnection con = new SqlConnection(cnstr);
-            con.Open();
-            SqlCommand cmd = new SqlCommand(sqlstr, con);
-            SqlDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
-            while (dr.Read())
-            {
-                richTextBox1.Text += dr[0].ToString() + "\t" + Convert.ToDouble(dr[1].ToString()) + "\n";
-            }
-            dr.Close();
+            sql_read_database(db_filename, sqlstr, dataGridView4);
+            lb_dgv4.Text = "指定日期區間 WHERE+BETWEEN";
 
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            //3030
 
             // 資料庫檔案
-            db_filename = "db_TomeOne.mdf";
-            //string time_st = "2005/8/15";
-            //string time_sp = "2006/4/15";
-            //sqlstr = "SELECT * FROM tb_lottery WHERE t_year BETWEEN '" + time_st + "' AND '" + time_sp + "' ORDER BY t_year";
-            sqlstr = "SELECT * FROM tb_lottery WHERE t_year BETWEEN '2005/8/15' AND '2006/4/15' ORDER BY t_year";
-            sql_read_database(db_filename, sqlstr, dataGridView3);
-            lb_dgv1.Text = "查詢使用指定時段 BETWEEN";
+            db_filename = "db_TomeTwo.mdf";
 
             //查询指定时间段的数据
-
             time_st = "2005/7/1";
             time_sp = "2005/8/31";
             // 查詢字串
             sqlstr = string.Format("SELECT * FROM tb_Book WHERE 日期 BETWEEN '{0}' AND '{1}'", time_st, time_sp);
-            // 資料庫檔案
-            db_filename = "db_TomeTwo.mdf";
             sql_read_database(db_filename, sqlstr, dataGridView4);
-            lb_dgv2.Text = "查詢使用指定時段 BETWEEN";
+            lb_dgv4.Text = "查詢使用指定時段 BETWEEN";
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            // 資料庫檔案
-            string db_filename = "animals1_db.mdf";
-            // 查詢字串
-            //string sqlstr = "SELECT * FROM animals1_table";
+            richTextBox1.Text += "SQL 6\n";
 
-            string sqlstr = "select name 字段名, xusertype 類型編號, length 長度 from syscolumns";
+            // 資料庫檔案
+            string db_filename = "db_09_Data.mdf";
+            /*
+            textBox1.Text = "david";  // 員工姓名
+            textBox2.Text = "12345";  // 基本工資
+            textBox3.Text = "2000";  // 獎金
+            textBox4.Text = "1000";  // 扣款
+            textBox5.Text = "1500";  // 午餐
+            textBox6.Text = "22222";  // 實際工資
+            */
+            //textBox1 員工姓名
+            //textBox2 基本工資
+            //textBox3 獎金
+            //textBox4 扣款
+            //textBox5 午餐
+            //textBox6 實際工資
+
+            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
+            {
+                //解析回資料庫
+                using (SqlDataAdapter da = new SqlDataAdapter())
+                {
+                    SqlCommand command = new SqlCommand("INSERT INTO 帳單 " + "VALUES (@員工姓名, @基本工資,@獎金,@扣款,@午餐,@實際工資)", cn);
+                    // Add the parameters for the InsertCommand.
+                    command.Parameters.Add("@員工姓名", SqlDbType.VarChar, 10, "員工姓名");
+                    command.Parameters.Add("@基本工資", SqlDbType.VarChar, 10, "基本工資");
+                    command.Parameters.Add("@獎金", SqlDbType.VarChar, 10, "獎金");
+                    command.Parameters.Add("@扣款", SqlDbType.VarChar, 10, "扣款");
+                    command.Parameters.Add("@午餐", SqlDbType.VarChar, 10, "午餐");
+                    command.Parameters.Add("@實際工資", SqlDbType.VarChar, 10, "實際工資");
+                    da.InsertCommand = command;
+                    richTextBox1.Text += "已成功能將訊息解析回資料庫\n";
+                }
+            }
+
+            // 看一下結果
+
+            // 資料庫檔案
+            db_filename = "db_09_Data.mdf";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 帳單";
 
             sql_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "十二生肖全部資料";
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "SQL 7\n";
+
+            //D:\db_09_Data.mdf
+
+            //新增資料
+            string pic_filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string file_no = "A123456";  // 檔案編號
+            string work_no = "1234";  // 工號
+            string name = "david";  // 姓名
+            string birthday = "2006/03/11";  // 出生日期
+            string city = "Taiwan";  // 籍貫
+            string work_year = "5";  // 工齡
+            string department = "研發部";  // 部門名稱
+            string telephone = "0912345678";  // 電話
+            string sex = "男";  // 性別
+            string position = "員工";  // 技術職稱
+            string marriage = "已婚";  // 婚姻狀態
+            string health = "良好";  // 健康狀態
+
+            // 資料庫檔案
+            string db_filename = "db_09_Data.mdf";
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);
+
+            SqlConnection con = new SqlConnection(cnstr);
+
+            try
+            {
+                con.Open();
+
+                // 查詢字串
+                string sqlstr = "INSERT INTO 檔案訊息 values(@檔案編號,@工號,@姓名,@照片,@性別,@出生日期,@籍貫,@工齡,@電話,@部門名稱,@技術職稱,@婚姻狀態,@健康狀態)";
+
+                SqlCommand cmd = new SqlCommand(sqlstr, con);
+                cmd.Parameters.Add("@檔案編號", SqlDbType.Text).Value = file_no;
+                cmd.Parameters.Add("@工號", SqlDbType.Text).Value = work_no;
+                cmd.Parameters.Add("@姓名", SqlDbType.Text).Value = name;
+                cmd.Parameters.Add("@照片", SqlDbType.Text).Value = pic_filename;
+                cmd.Parameters.Add("@性別", SqlDbType.Text).Value = sex;
+                cmd.Parameters.Add("@出生日期", SqlDbType.Text).Value = birthday;
+                cmd.Parameters.Add("@籍貫", SqlDbType.Text).Value = city;
+                cmd.Parameters.Add("@工齡", SqlDbType.Int).Value = Convert.ToInt16(work_year);
+                cmd.Parameters.Add("@電話", SqlDbType.Text).Value = telephone;
+                cmd.Parameters.Add("@部門名稱", SqlDbType.Text).Value = department;
+                cmd.Parameters.Add("@技術職稱", SqlDbType.Text).Value = position;
+                cmd.Parameters.Add("@婚姻狀態", SqlDbType.Text).Value = marriage;
+                cmd.Parameters.Add("@健康狀態", SqlDbType.Text).Value = health;
+                cmd.ExecuteNonQuery();
+                con.Close();
+                richTextBox1.Text += "新增成功\n";
+            }
+            catch (Exception ey)
+            {
+                richTextBox1.Text += "新增失敗\n";
+                richTextBox1.Text += ey.Message.ToString() + "\n";
+            }
+
+            /*
+            //讀取全部
+
+            // 資料庫檔案
+            string db_filename = "db_09_Data.mdf";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 檔案訊息";
+
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            */
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
             //圖片相關
-
-            // 資料庫檔案
-            string db_filename = string.Empty;
-            // 查詢字串
-            string sqlstr = string.Empty;
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             pictureBox1.Visible = true;
 
@@ -659,148 +1044,73 @@ namespace vcs_SqlConnection1
             db_filename = "Northwind.mdf";
             // 查詢字串
             sqlstr = "SELECT * FROM 產品類別";
-
             sql_read_database(db_filename, sqlstr, dataGridView2);
             lb_dgv2.Text = "全部資料, 有圖片, 取出資料庫中的影像, DGV 加上 CellClick";
             dataGridView2.CellClick += new DataGridViewCellEventHandler(dataGridView2_CellClick_pic);
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            /*
-            //加入一筆影像資料
-
-            richTextBox1.Text += "添加用戶訊息\n";
+            richTextBox1.Text += "加入一筆影像資料\n";
 
             //選擇的頭像名稱
             string pic_filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-
-            string user_name = "david wang aaacccddd";  // 用戶名稱
-
-            //添加用户信息
+            string user_name = "david" + DateTime.Now.ToString();  // 用戶名稱
 
             richTextBox1.Text += "用戶名稱 : " + user_name + "\n";
             richTextBox1.Text += "影像檔案 : " + pic_filename + "\n";
 
+            // 資料庫檔案
+            db_filename = "db_TomeTwo.mdf";
             // 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_TomeTwo.mdf;Integrated Security=True;Connect Timeout=30";
+            cnstr = string.Format(db_cnstr, db_filename);
 
-            SqlConnection cn = new SqlConnection(cnstr);
-
-            // 查詢字串
-            sqlstr = "SELECT * FROM tb_Image WHERE name='" + user_name + "'";
-            
-            SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
-            DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-            da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
-
-            richTextBox1.Text += "取得資料 : " + ds.Tables[0].Rows.Count.ToString() + " 筆\n";
-
-            if (ds.Tables[0].Rows.Count <= 0)
+            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
-                FileStream fs = new FileStream(pic_filename, FileMode.Open, FileAccess.Read);
-                BinaryReader BReader = new BinaryReader(fs);
-                byte[] byteImage = BReader.ReadBytes((int)fs.Length);  // 二進制流
-                SqlCommand cmd = new SqlCommand("insert into tb_Image(name,photo) values(@name,@photo)", cn);
-                cmd.Parameters.Add("@name", SqlDbType.VarChar, 50).Value = user_name;
-                cmd.Parameters.Add("@photo", SqlDbType.Image).Value = byteImage;
                 cn.Open();
-                cmd.ExecuteNonQuery();
-                cn.Close();
-                richTextBox1.Text += "加入用戶信息 OK\n";
-            }
-            else
-            {
-                richTextBox1.Text += "加入用戶信息 NG, 已經存在該用戶\n";
-            }
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
-            */
+                // 查詢字串
+                sqlstr = "SELECT * FROM tb_Image WHERE name='" + user_name + "'";
+
+                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
+                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+
+                richTextBox1.Text += "取得資料 : " + ds.Tables[0].Rows.Count.ToString() + " 筆, 若沒有資料, 才可以加入資料\n";
+
+                if (ds.Tables[0].Rows.Count <= 0)
+                {
+                    FileStream fs = new FileStream(pic_filename, FileMode.Open, FileAccess.Read);
+                    BinaryReader BReader = new BinaryReader(fs);
+                    byte[] byteImage = BReader.ReadBytes((int)fs.Length);  // 二進制流
+                    SqlCommand cmd = new SqlCommand("INSERT INTO tb_Image(name,photo) VALUES(@name,@photo)", cn);
+                    cmd.Parameters.Add("@name", SqlDbType.VarChar, 50).Value = user_name;
+                    cmd.Parameters.Add("@photo", SqlDbType.Image).Value = byteImage;
+                    cmd.ExecuteNonQuery();
+                    richTextBox1.Text += "加入用戶信息 OK\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "加入用戶信息 NG, 已經存在該用戶\n";
+                }
+            }
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-        }
-
-        private void dataGridView1_CellClick_pic(object sender, DataGridViewCellEventArgs e)
-        {
-            // 資料庫檔案
-            string db_filename = "db_TomeTwo.mdf";
-            // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);
-
-            string user_name = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-            //richTextBox1.Text += "你點選的用戶名 : " + user_name + "\n";
-            // 查詢字串
-            string sqlstr = "SELECT * FROM tb_Image WHERE name='" + user_name + "'";
-            //richTextBox1.Text += sqlstr + "\n";
-
-            if (user_name != "")
-            {
-                SqlConnection cn = new SqlConnection(cnstr);
-                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
-                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
-
-                // 取出圖片 在第2欄
-                byte[] byteImage = (byte[])ds.Tables[0].Rows[0][2];  // 二進制流
-                //使用数据库中存储的二进制头像实例化内存数据流
-                MemoryStream ms = new MemoryStream(byteImage);  // 二進制流
-                pictureBox1.Image = Image.FromStream(ms);
-            }
-        }
-
-        void dataGridView2_CellClick_pic(object sender, DataGridViewCellEventArgs e)
-        {
-            // 資料庫檔案
-            string db_filename = "Northwind.mdf";
-            // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);
-
-            string user_name = dataGridView2.Rows[e.RowIndex].Cells[1].Value.ToString();
-            //richTextBox1.Text += "你點選的類別名稱 : " + user_name + "\n";
-            // 查詢字串
-            string sqlstr = "SELECT * FROM 產品類別 WHERE 類別名稱='" + user_name + "'";
-            richTextBox1.Text += sqlstr + "\n";
-
-            if (user_name != "")
-            {
-                SqlConnection cn = new SqlConnection(cnstr);
-                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
-                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
-
-                richTextBox1.Text += ds.Tables[0].Rows[0][0] + "\n";
-                richTextBox1.Text += ds.Tables[0].Rows[0][1] + "\n";
-                richTextBox1.Text += ds.Tables[0].Rows[0][2] + "\n";
-                /* NG
-                // 取出圖片 在第3欄
-                byte[] byteImage = (byte[])ds.Tables[0].Rows[0][3];  // 二進制流
-                //使用数据库中存储的二进制头像实例化内存数据流
-                MemoryStream ms = new MemoryStream(byteImage);  // 二進制流
-                pictureBox1.Image = Image.FromStream(ms);
-                */
-            }
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "取出資料庫中的影像2\n";
-            pictureBox1.Visible = true;
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "取出資料庫中的影像\n";
 
             // 資料庫檔案
-            string db_filename = "db_09_Data.mdf";
+            db_filename = "db_09_Data.mdf";
             // 查詢字串
-            string sqlstr = "SELECT * FROM 員工訊息";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
+            sqlstr = "SELECT * FROM 員工訊息";
+            sql_read_database(db_filename, sqlstr, dataGridView3);
             lb_dgv1.Text = "全部資料 員工訊息";
 
-            // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);
             string str = "P1002";
             // 查詢字串
             sqlstr = "SELECT * FROM 員工訊息 WHERE 員工編號='" + str + "'";
 
+            // 連接字串
+            cnstr = string.Format(db_cnstr, db_filename);
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
                 cn.Open();
@@ -821,6 +1131,128 @@ namespace vcs_SqlConnection1
             }
         }
 
+        private void dataGridView1_CellClick_pic(object sender, DataGridViewCellEventArgs e)
+        {
+            // 資料庫檔案
+            db_filename = "db_TomeTwo.mdf";
+
+            string user_name = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+            richTextBox1.Text += "你點選的項目 : " + user_name + "\n";
+
+            // 查詢字串
+            sqlstr = "SELECT * FROM tb_Image WHERE name='" + user_name + "'";
+            //richTextBox1.Text += sqlstr + "\n";
+
+            if (user_name != "")
+            {
+                // 連接字串
+                cnstr = string.Format(db_cnstr, db_filename);
+                SqlConnection cn = new SqlConnection(cnstr);
+
+                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
+                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+
+                // 取出圖片 在第2欄
+                byte[] byteImage = (byte[])ds.Tables[0].Rows[0][2];  // 二進制流
+                //使用数据库中存储的二进制头像实例化内存数据流
+                MemoryStream ms = new MemoryStream(byteImage);  // 二進制流
+                pictureBox1.Image = Image.FromStream(ms);
+            }
+        }
+
+        private void dataGridView2_CellClick_pic(object sender, DataGridViewCellEventArgs e)
+        {
+            // 資料庫檔案
+            db_filename = "Northwind.mdf";
+
+            string user_name = dataGridView2.Rows[e.RowIndex].Cells[1].Value.ToString();
+            richTextBox1.Text += "你點選的項目 : " + user_name + "\n";
+
+            // 查詢字串
+            sqlstr = "SELECT * FROM 產品類別 WHERE 類別名稱='" + user_name + "'";
+            //richTextBox1.Text += sqlstr + "\n";
+
+            if (user_name != "")
+            {
+                // 連接字串
+                cnstr = string.Format(db_cnstr, db_filename);
+                SqlConnection cn = new SqlConnection(cnstr);
+
+                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
+                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+
+                richTextBox1.Text += "第0欄 : " + ds.Tables[0].Rows[0][0] + "\n";
+                richTextBox1.Text += "第1欄 : " + ds.Tables[0].Rows[0][1] + "\n";
+                richTextBox1.Text += "第2欄 : " + ds.Tables[0].Rows[0][2] + "\n";
+
+                /* NG
+                // 取出圖片 在第3欄
+                byte[] byteImage = (byte[])ds.Tables[0].Rows[0][3];  // 二進制流
+                //使用数据库中存储的二进制头像实例化内存数据流
+                MemoryStream ms = new MemoryStream(byteImage);  // 二進制流
+                pictureBox1.Image = Image.FromStream(ms);
+                */
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "SQL 9\n";
+
+            // 資料庫檔案
+            string db_filename = "db_09_Data.mdf";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM tb_power";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //更新資料範例
+
+            string name = "hywork";
+            string strValue = "12345";
+
+            // 查詢字串
+            sqlstr = "UPDATE tb_Power SET power='" + strValue + "' WHERE name='" + name + "' ";
+            sql_write_database(db_filename, sqlstr);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            // 資料庫檔案
+            db_filename = "db_09_Data.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM tb_power";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //查詢範例
+
+            // 資料庫檔案
+            db_filename = "db_09_Data.mdf";
+            // 連接字串
+            cnstr = string.Format(db_cnstr, db_filename);
+
+            using (SqlConnection con = new SqlConnection(cnstr))//連接資料庫
+            {
+                SqlCommand cmd = new SqlCommand("SELECT power FROM tb_power WHERE name='" + name + "'", con);//連接SQL語句與數擾庫的連接
+                cmd.Connection = con;
+                cmd.Connection.Open();//打開資料庫的連接
+                SqlDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
+                if (dr.HasRows)//如果有記錄
+                {
+                    dr.Read();//讀取下一行
+                    string str = dr[0].ToString();//取得權限值
+                    richTextBox1.Text += "取得權限值 = " + str + "\n";
+                }
+                dr.Close();//關閉
+                con.Close();//關閉連接
+                con.Dispose();
+            }
+        }
+
         // CRUD 增查改刪 0 ST
 
         // 連接字串
@@ -829,12 +1261,12 @@ namespace vcs_SqlConnection1
         private void button10_Click(object sender, EventArgs e)
         {
             // 資料庫檔案
-            string db_filename = "ch23DB.mdf";
+            db_filename = "ch23DB.mdf";
 
             //CRUD 增查改刪 0
 
             // 查詢字串, 讀取全部資料庫
-            string sqlstr = "SELECT * FROM 書籍";
+            sqlstr = "SELECT * FROM 書籍";
 
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "全部資料 書籍";
@@ -946,13 +1378,6 @@ namespace vcs_SqlConnection1
             //SQL 使用 合集, 新加入
 
             // 資料庫檔案
-            string db_filename = string.Empty;
-            // 連接字串
-            string cnstr = string.Empty;
-            // 查詢字串
-            string sqlstr = string.Empty;
-
-            // 資料庫檔案
             db_filename = "db_TomeOne.mdf";
             // 查詢字串
             sqlstr = "SELECT * FROM tb_Stat";
@@ -973,71 +1398,66 @@ namespace vcs_SqlConnection1
             lb_dgv1.Text = "11111";
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            //測試登錄功能
-
-            //先看一下資料庫內容
+            //SQL 12 更新資料
+            //更新資料
+            string number = "P1003";
+            string name = "david wang";
+            string money = "12345";
+            string description = "very good";
 
             // 資料庫檔案
-            string db_filename = "db_TomeTwo.mdf";
+            string db_filename = "db_09_Data.mdf";
             // 連接字串
             string cnstr = string.Format(db_cnstr, db_filename);
 
-            string sqlstr = "SELECT * FROM tb_Login";
+            SqlConnection con = new SqlConnection(cnstr);
 
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "全部資料 tb_Login";
+            // 查詢字串
+            string sqlstr = "update 員工表 set 員工姓名=@員工姓名,基本工資=@基本工資,工作評價=@工作評價 WHERE 員工編號=@員工編號";
 
-            sqlstr = "SELECT Name, Pwd FROM tb_Login WHERE Name='mr' AND Pwd='mrsoft'";
-
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-            lb_dgv2.Text = "全部資料 tb_Login + WHERE 過濾資料";
-
-            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
+            using (SqlCommand command = new SqlCommand(sqlstr, con))
             {
-                SqlDataAdapter da = new SqlDataAdapter("SELECT Name, Pwd FROM tb_Login WHERE Name=@name AND Pwd=@pwd", cn);  // 建立資料庫適配器對象da
-
-                //为SQL语句中的参数赋值
-                string id_name = "david";
-                string password = "123456";
-                id_name = "mr";
-                password = "mrsoft";
-                da.SelectCommand.Parameters.Add("@name", SqlDbType.NChar, 10).Value = id_name;
-                da.SelectCommand.Parameters.Add("@pwd", SqlDbType.NChar, 10).Value = password;
-
-                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
-
-                dataGridView3.DataSource = ds.Tables[0];  // DGV設置數據源
-
-                richTextBox1.Text += "取得資料 : " + ds.Tables[0].Rows.Count.ToString() + " 筆\n";
-
-                // 若能取到資料, 表示 帳號/密碼 有在資料庫內
+                con.Open();
+                try
+                {
+                    command.Parameters.Add("@員工編號", SqlDbType.VarChar, 50, "員工編號").Value = number;
+                    command.Parameters.Add("@員工姓名", SqlDbType.VarChar, 50, "員工姓名").Value = name;
+                    command.Parameters.Add("@基本工資", SqlDbType.Float, 8, "基本工資").Value = Convert.ToString(money);
+                    command.Parameters.Add("@工作評價", SqlDbType.VarChar, 50, "工作評價").Value = description;
+                    command.ExecuteNonQuery();
+                    con.Close();
+                    richTextBox1.Text += "成功修改\n";
+                }
+                catch
+                {
+                    richTextBox1.Text += "成功失敗\n";
+                }
             }
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-            // 用 SqlTransaction 一次執行一些 SQL 命令, 若有失敗者 即全部恢復
+            // 用 SqlTransaction 一次執行多個 SQL 命令, 若有指令失敗, 可以恢復指令
 
             // 資料庫檔案
-            string db_filename = "animals1_db.mdf";
+            db_filename = "animals1_db.mdf";
             // 查詢字串
-            string sqlstr = "SELECT * FROM animals1_table";
+            sqlstr = "SELECT * FROM animals1_table";
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "十二生肖全部資料";
 
-            //1515
+            richTextBox1.Text += "---------------\n";  // 15個
 
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\animals1_db.mdf;Integrated Security=True;Connect Timeout=30";
-            SqlConnection m_Conn = new SqlConnection(cnstr);
-            SqlCommand m_Cmd = new SqlCommand();
-            m_Conn.Open();
+            // 連接字串
+            cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\animals1_db.mdf;Integrated Security=True;Connect Timeout=30";
+            SqlConnection cn = new SqlConnection(cnstr);
+
+            SqlCommand cmd = new SqlCommand();
+            cn.Open();
 
             List<string> sqlstrs = new List<string>();//SQL语句集合
             sqlstr = "INSERT INTO animals1_table (編號, 英文名, 中文名, 體重) VALUES (90, N'aaa', N'AAA', 20)";
@@ -1047,33 +1467,48 @@ namespace vcs_SqlConnection1
             sqlstrs.Add(sqlstr);
             sqlstrs.Add(sqlstr);
 
-            SqlTransaction sqlTran = m_Conn.BeginTransaction();//实例化事务对象
+            // 建立SqlTransaction交易物件sqlTran
+            SqlTransaction sqlTran = cn.BeginTransaction();//实例化事务对象
+
             try
             {
-                m_Cmd.Connection = m_Conn;//指定SqlCommand对象的连接对象
-                m_Cmd.Transaction = sqlTran;//指定SqlCommand对象的事务对象
+                /*
+                // 查詢字串
+                sqlstr = "aaaaa";
+                SqlCommand cmd3 = new SqlCommand(sqlstr, cn, sqlTran);
+
+                // 查詢字串
+                sqlstr = "bbbb";
+                SqlCommand cmd4 = new SqlCommand(sqlstr, cn, sqlTran);
+
+                cmd3.ExecuteNonQuery();  // 執行SQL命令
+                cmd4.ExecuteNonQuery();  // 執行SQL命令
+                */
+
+                cmd.Connection = cn;//指定SqlCommand对象的连接对象
+                cmd.Transaction = sqlTran;//指定SqlCommand对象的事务对象
                 foreach (string item in sqlstrs)//遍历List泛型集合中的所有SQL命令
                 {
-                    m_Cmd.CommandType = CommandType.Text;//指定SqlCommand对象的执行命令方式
-                    m_Cmd.CommandText = item;//指定SqlCommand对象要执行的SQL命令
-                    m_Cmd.ExecuteNonQuery();//执行SQL命令
+                    cmd.CommandType = CommandType.Text;//指定SqlCommand对象的执行命令方式
+                    cmd.CommandText = item;//指定SqlCommand对象要执行的SQL命令
+                    cmd.ExecuteNonQuery();//执行SQL命令
                 }
                 sqlTran.Commit();//提交数据库
                 richTextBox1.Text += "OK\n";
             }
-            catch
+            catch (Exception ex)
             {
-                sqlTran.Rollback();//事务回滚
-                richTextBox1.Text += "發生錯誤\n";
+                sqlTran.Rollback();  // 回復交易
+                richTextBox1.Text += "發生錯誤 : " + ex.Message + "\n";
             }
             finally
             {
-                m_Conn.Close();//关闭数据库连接
+                cn.Close();//关闭数据库连接
                 sqlstrs.Clear();//清空List泛型集合
                 richTextBox1.Text += "dddddddddd\n";
             }
 
-            //1515
+            richTextBox1.Text += "---------------\n";  // 15個
 
             // 資料庫檔案
             db_filename = "animals1_db.mdf";
@@ -1085,76 +1520,121 @@ namespace vcs_SqlConnection1
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //SQL 14 查詢資料
+
+            // 資料庫檔案
+            string db_filename = "db_09_Data.mdf";
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);
+
+            SqlConnection con = new SqlConnection(cnstr);
+
+            //查詢資料
+            string strid = "P1005";  // 員工編號
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 員工表 WHERE 員工編號='" + strid + "'";
+
+            using (SqlCommand cmd = new SqlCommand(sqlstr, con))
+            {
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                    string new_id = dr[0].ToString();  // 員工編號
+                    string new_name = dr[1].ToString();  // 員工姓名
+                    string new_money = dr[2].ToString();  // 基本工資
+                    string new_description = dr[3].ToString();  // 工作評價
+                    //this.textBox1.Text = new_id;
+                    //this.textBox2.Text = new_name;
+                    //this.textBox4.Text = new_money;
+                    //this.textBox5.Text = new_description;
+                    richTextBox1.Text += "員工編號 : " + new_id + "\n";
+                    richTextBox1.Text += "員工姓名 : " + new_name + "\n";
+                    richTextBox1.Text += "基本工資 : " + new_money + "\n";
+                    richTextBox1.Text += "工作評價 : " + new_description + "\n";
+                }
+                dr.Close();
+                con.Close();
+            }
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-            //sysobjects
-            //取得數據庫中全部的預儲程序, 但是取得後, 也不能利用, 因為不知道其內容
+            //SQL 15 分析企業人力資源情況
+            //分析企業人力資源情況
 
+            // debug ST
             // 資料庫檔案
-            string db_filename = string.Empty;
-            // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);
+            string db_filename = "db_13.mdf";
             // 查詢字串
-            string sqlstr = string.Empty;
-
-            // 資料庫檔案
-            db_filename = "db_10_Data.MDF";
-            // 查詢字串, 改顯示欄位名稱AS
-            sqlstr = "SELECT * FROM sysobjects";  // 有很多欄位
-            //sqlstr = "SELECT name, crdate, refdate FROM sysobjects";  // 只看3個欄位
-            //sqlstr = "SELECT name AS 預儲程序名稱, crdate AS 建立時間, refdate AS 最後修改時間 FROM sysobjects";  // 只看3個欄位+改欄名
-
+            string sqlstr = "SELECT * FROM tb_manpower";
             sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            // debug SP
+
+            // 連接字串
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_13.mdf;Integrated Security=True;Connect Timeout=30";
+
+            SqlConnection con = new SqlConnection(cnstr);
+
+            int Sum = 100;
+            using (SqlCommand cmd = new SqlCommand("SELECT SUM(t_Num) FROM tb_manpower ", con))
+            {
+                con.Open();
+                Sum = Convert.ToInt32(cmd.ExecuteScalar());
+                richTextBox1.Text += "Sum = " + Sum.ToString() + "\n";
+                con.Close();
+            }
+            richTextBox1.Text += "Sum = " + Sum.ToString() + "\n";
+
+            using (SqlCommand cmd = new SqlCommand("SELECT t_Point, SUM(t_Num) FROM tb_manpower GROUP BY t_Point ORDER BY SUM(t_Num) DESC", con))//降冪
+            {
+                cmd.Connection.Open();
+                SqlDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
+                while (dr.Read())
+                {
+                    richTextBox1.Text += dr[0].ToString() + "\t" + Convert.ToDouble(dr[1].ToString()) + "\n";
+                    float f = Convert.ToSingle(dr[1]) / Sum;
+                    string str = dr[0].ToString();
+                    richTextBox1.Text += "str : " + str + "\n";
+                }
+                dr.Close();
+                con.Close();
+            }
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
-            //測試 getTable
+            //SQL 16 分析產品市場佔有率
 
-            //comboBox1.DataSource = getTable(cnstr, "SELECT name FROM sysdatabases", "sysdatabases");
+            // debug ST
+            // 資料庫檔案
+            string db_filename = "db_13.mdf";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM tb_product";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            // debug SP
 
-            /*
-            //測試 getTable
+            // 資料庫檔案
+            db_filename = "db_13.mdf";
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);
 
-            string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.MDF;DataBase=" + comboBox1.Text + ";Integrated Security=True;Connect Timeout=30";
+            SqlConnection con = new SqlConnection(cnstr);
+            con.Open();
 
-            DataTable dt = null;
-            //数据表
-            dt = getTable(strCon, "SELECT name FROM sysobjects WHERE type = 'U' and name<>'dtproperties'", "sysobjects");
-            //"视图"
-            dt = getTable(strCon, "SELECT name FROM sysobjects WHERE xtype='v'", "sysobjects");
-            //"存储过程"
-            dt = getTable(strCon, "SELECT name FROM sysobjects WHERE xtype='p'", "sysobjects");
-            */
-
-        }
-
-        private DataTable getTable(string strCon, string strSql, string strTable)
-        {
-            richTextBox1.Text += "strCon : " + strCon + "\n";
-            richTextBox1.Text += "strSql : " + strSql + "\n";
-            richTextBox1.Text += "strTable : " + strTable + "\n";
-
-            try
+            // 查詢字串
+            sqlstr = "SELECT SUM(t_Num) FROM tb_product";
+            using (SqlCommand cmd = new SqlCommand(sqlstr, con))
             {
-                SqlConnection sqlcon = new SqlConnection(strCon);
-                SqlDataAdapter da = new SqlDataAdapter(strSql, sqlcon);
-                DataTable dt = new DataTable(strTable);
-                da.Fill(dt);
-                richTextBox1.Text += "OK dt\n";
-
-                dataGridView2.DataSource = dt;
-                dataGridView2.Columns[0].Width = 350;
-
-                return dt;
+                int SumNum = Convert.ToInt32(cmd.ExecuteScalar());
+                richTextBox1.Text += "總和 : " + SumNum.ToString() + "\n\n";
             }
-            catch
-            {
-                richTextBox1.Text += "NG dt\n";
-                return null;
-            }
+
+            // 查詢字串, 重複的Name要合併GROUP BY
+            sqlstr = "SELECT t_Name, SUM(t_Num) AS Num FROM tb_product GROUP BY t_Name";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -1162,9 +1642,9 @@ namespace vcs_SqlConnection1
             richTextBox1.Text += "刪除資料 與 清空表單, DELETE 和 DELETE FROM 一樣\n";
 
             // 資料庫檔案
-            string db_filename = "animals1_db.mdf";
+            db_filename = "animals1_db.mdf";
             // 查詢字串
-            string sqlstr = "SELECT * FROM animals1_table";
+            sqlstr = "SELECT * FROM animals1_table";
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "十二生肖全部資料";
 
@@ -1199,10 +1679,9 @@ namespace vcs_SqlConnection1
             // 十二生肖整理1
 
             // 資料庫檔案
-            string db_filename = "animals1_db.mdf";
+            db_filename = "animals1_db.mdf";
             // 查詢字串
-            string sqlstr = "SELECT * FROM animals1_table";
-
+            sqlstr = "SELECT * FROM animals1_table";
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "十二生肖全部資料";
 
@@ -1310,7 +1789,7 @@ namespace vcs_SqlConnection1
 
             /*
             // 查詢字串
-            string sqlstr = "xxxxx";
+            sqlstr = "xxxxx";
             string new_item = "麥當勞";
             //傳入INSERT陳述式新增產品類別記錄
             sqlstr = "INSERT INTO 產品類別(類別名稱)VALUES(N'" + new_item + "')";
@@ -1327,7 +1806,7 @@ namespace vcs_SqlConnection1
             */
             /*
             // 資料庫檔案
-            string db_filename = "Database1.mdf";
+            db_filename = "Database1.mdf";
 
             //新增 修改 刪除
             richTextBox1.Text += "新增\n";
@@ -1335,7 +1814,7 @@ namespace vcs_SqlConnection1
             int price = 12345;//單價
             string mesg = "電話訂購";//說明
 
-            string sqlstr = "INSERT INTO 產品資料(類別編號,品名,單價,說明)VALUES(1,N'" + new_item + "'," + price.ToString() + ",N'" + mesg + "')";
+            sqlstr = "INSERT INTO 產品資料(類別編號,品名,單價,說明)VALUES(1,N'" + new_item + "'," + price.ToString() + ",N'" + mesg + "')";
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令
 
             //產品資料管理, 查詢 類別編號 = 1 的資料
@@ -1372,11 +1851,11 @@ namespace vcs_SqlConnection1
         {
             // 十二生肖整理2
 
+            /*
             // 資料庫檔案
-            string db_filename = "animals1_db.mdf";
+            db_filename = "animals1_db.mdf";
             // 查詢字串
-            string sqlstr = "SELECT * FROM animals1_table";
-
+            sqlstr = "SELECT * FROM animals1_table";
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "十二生肖全部資料";
 
@@ -1397,12 +1876,52 @@ namespace vcs_SqlConnection1
 
             sql_read_database(db_filename, sqlstr, dataGridView2);
 
-
-            //過濾資料 WHERE + AND + N中文
+            // 查詢字串, 過濾資料 WHERE + AND + N中文
             sqlstr = "SELECT * FROM animals1_table WHERE 中文名=N'彼得兔' AND 英文名='rabbit'";
 
             sql_read_database(db_filename, sqlstr, dataGridView3);
             lb_dgv3.Text = "WHERE + AND 過濾資料";
+            */
+
+            //SqlDataAdapter 語法
+
+            // 資料庫檔案
+            db_filename = "animals1_db.mdf";
+            // 查詢字串, 全部資料
+            sqlstr = "SELECT * FROM animals1_table";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "十二生肖全部資料";
+            lb_dgv1.Text = "全部資料 animals1_table";
+
+            //一般查詢的寫法
+            // 查詢字串, 全部資料 animals1_table + WHERE 過濾資料
+            sqlstr = "SELECT * FROM animals1_table WHERE 英文名='rabbit' AND 中文名=N'彼得兔'";  //中文字串前面要寫N
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+            lb_dgv2.Text = "全部資料 animals1_table + WHERE 過濾資料";
+
+            //另一種查詢的寫法
+            // 連接字串
+            cnstr = string.Format(db_cnstr, db_filename);
+            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
+            {
+                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM animals1_table WHERE 英文名=@ename AND 中文名=@cname", cn);  // 建立資料庫適配器對象da
+
+                //为SQL语句中的参数赋值
+                string ename = "rabbit";
+                string cname = "彼得兔";
+                da.SelectCommand.Parameters.Add("@ename", SqlDbType.NChar, 10).Value = ename;
+                da.SelectCommand.Parameters.Add("@cname", SqlDbType.NChar, 10).Value = cname;
+
+                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+
+                dataGridView3.DataSource = ds.Tables[0];  // DGV設置數據源
+
+                richTextBox1.Text += "取得資料 : " + ds.Tables[0].Rows.Count.ToString() + " 筆\n";
+            }
+            //6060
+
+
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -1413,9 +1932,8 @@ namespace vcs_SqlConnection1
 
             richTextBox1.Text += "建立資料庫 (如果不存在)\n";
 
-            // 建立資料庫 的 連接字串
-            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30";
-
+            // 連接字串
+            cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30";
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
                 cn.Open();  // 打開資料庫連線
@@ -1459,7 +1977,6 @@ namespace vcs_SqlConnection1
 
             // 連接字串
             cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\animals1_db.mdf;Integrated Security=True;Connect Timeout=30";
-
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
                 cn.Open();
@@ -1486,10 +2003,10 @@ namespace vcs_SqlConnection1
             richTextBox1.Text += "新增5筆資料\n";
 
             // 資料庫檔案
-            string db_filename = "animals1_db.mdf";
+            db_filename = "animals1_db.mdf";
 
             // 插入資料, N是必要的(中文之前都要N)
-            string sqlstr = "INSERT INTO animals1_table (編號, 英文名, 中文名, 體重) VALUES (1, N'mouse', N'米老鼠', 3)";
+            sqlstr = "INSERT INTO animals1_table (編號, 英文名, 中文名, 體重) VALUES (1, N'mouse', N'米老鼠', 3)";
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令
             sqlstr = "INSERT INTO animals1_table (編號, 英文名, 中文名, 體重) VALUES (2, N'ox', N'班尼牛', 48)";
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令
@@ -1545,19 +2062,19 @@ namespace vcs_SqlConnection1
             richTextBox1.Text += "取得一個資料庫的所有Table名稱 3 個方法\n";
 
             // 資料庫檔案
-            string db_filename = "db_02.mdf";
-            // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);
+            db_filename = "db_02.mdf";
 
             richTextBox1.Text += "取得一個資料庫的所有Table名稱 1\n";
 
             //這樣會列出所有 實際的資料表（不包含檢視表）
 
+            // 連接字串
+            cnstr = string.Format(db_cnstr, db_filename);
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
                 cn.Open();
 
-                string sqlstr = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'";
+                sqlstr = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'";
 
                 using (SqlCommand cmd = new SqlCommand(sqlstr, cn))
                 {
@@ -1578,8 +2095,9 @@ namespace vcs_SqlConnection1
             {
                 cn.Open();
 
-                string sqlstr = "SELECT NAME FROM sys.tables";  // 看NAME欄位就好
-                //string sqlstr = "SELECT * FROM master..sysdatabases";  // 很多 等同上
+                // 查詢字串
+                sqlstr = "SELECT NAME FROM sys.tables";  // 看NAME欄位就好
+                //sqlstr = "SELECT * FROM master..sysdatabases";  // 很多 等同上
 
                 //這個方式直接從 SQL Server 的系統目錄取出所有表單名稱
 
@@ -1622,8 +2140,6 @@ namespace vcs_SqlConnection1
 
         private void button22_Click(object sender, EventArgs e)
         {
-
-
             //使用聯合查詢
             /*
             透過UNION語句，
@@ -1631,14 +2147,15 @@ namespace vcs_SqlConnection1
             一起顯示在顯示出來。
             */
             // 資料庫檔案
-            string db_filename = "db_10_Data.MDF";
-            // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            db_filename = "db_10_Data.MDF";
             // 查詢字串
-            string sqlstr = "SELECT * FROM 高考學生訊息表 SELECT * FROM 高考成績表";
+            sqlstr = "SELECT * FROM 高考學生訊息表 SELECT * FROM 高考成績表";
 
-            SqlConnection con = new SqlConnection(cnstr);
-            SqlDataAdapter da = new SqlDataAdapter(sqlstr, con);
+            // 連接字串
+            cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            SqlConnection cn = new SqlConnection(cnstr);
+
+            SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);
             DataSet ds = new DataSet();
             da.Fill(ds);
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
@@ -1648,13 +2165,14 @@ namespace vcs_SqlConnection1
 
             // 資料庫檔案
             db_filename = "db_10_Data.MDF";
-            // 連接字串
-            cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
             // 查詢字串
             sqlstr = "SELECT 考生編號,姓名,考生類別 FROM 高考學生訊息表 WHERE 籍貫='中國北京' UNION SELECT 考生編號,姓名,考生類別 FROM 高考成績表 WHERE 總成績 > 500 AND 考生類別='文科考生'";
 
-            con = new SqlConnection(cnstr);
-            da = new SqlDataAdapter(sqlstr, con);
+            // 連接字串
+            cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+            cn = new SqlConnection(cnstr);
+
+            da = new SqlDataAdapter(sqlstr, cn);
             ds = new DataSet();
             da.Fill(ds);
             dataGridView3.DataSource = ds.Tables[0].DefaultView;
@@ -1662,114 +2180,180 @@ namespace vcs_SqlConnection1
 
         private void button23_Click(object sender, EventArgs e)
         {
-            //當前網路上運行的SQL伺服器
+            //SQL 23 網站人氣指數曲線分析
 
-            //枚举本地网络中的SQL Server所有可用实例
-            SqlDataSourceEnumerator instance = SqlDataSourceEnumerator.Instance;
-            DataTable table = instance.GetDataSources();//获取所有数据源，并存储到DataTable中
-            richTextBox1.Text += table + "\n";
-            foreach (DataRow row in table.Rows)//遍历获取到的数据源
+            // 資料庫檔案
+            string db_filename = "db_13.mdf";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM tb_reticulation";  // 網眼,網狀,網狀物
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            // 資料庫檔案
+            db_filename = "db_13.mdf";
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);
+
+            SqlConnection cn = new SqlConnection(cnstr);
+            sqlstr = "SELECT * FROM tb_reticulation";
+            SqlCommand cmd = new SqlCommand(sqlstr, cn);
+            SqlDataAdapter da = new SqlDataAdapter();
+            da.SelectCommand = cmd;
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            for (int j = 0; j < 12; j++)
             {
-                richTextBox1.Text += row + "\n";
-                richTextBox1.Text += row["ServerName"] + "\n";
-                //listBox1.Items.Add(row["ServerName"]);//向列表中添加遍历到的服务器名
+                richTextBox1.Text += ds.Tables[0].Rows[0][j + 2].ToString() + "\n";
             }
         }
 
         private void button24_Click(object sender, EventArgs e)
         {
+            //SQL 24 數據分析
 
+            //有資料的年份
+            //1999, 2000, 2001, 2004, 2005, 2006, 2007
+            int query_year = 1999;
+
+            // 資料庫檔案
+            string db_filename = "db_13.mdf";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM tb_curve WHERE Years=" + query_year + "";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            // 資料庫檔案
+            db_filename = "db_13.mdf";
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);
+
+            using (SqlConnection cn = new SqlConnection(cnstr))
+            {
+                cn.Open();
+
+                sqlstr = "SELECT * FROM tb_curve WHERE Years=" + query_year + "";
+                SqlCommand cmd = new SqlCommand(sqlstr, cn);
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = cmd;
+                DataSet ds = new DataSet();
+                da.Fill(ds);
+                for (int i = 0; i < 12; i++)
+                {
+                    richTextBox1.Text += ds.Tables[0].Rows[0][i + 1].ToString() + "\n";
+                }
+            }
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
-            // 取得資料庫的表單名稱 1
+            //SQL 25 分析產品銷售走勢
 
             // 資料庫檔案
-            string db_filename = "db_09_Data.MDF";
+            string db_filename = "db_13.mdf";
 
-            // 查詢字串
-            string sqlstr = "SELECT NAME FROM sysdatabases";
-            sqlstr = "SELECT NAME FROM master..sysdatabases";
-            sqlstr = "SELECT NAME FROM master.dbo.sysdatabases";
-            sqlstr = "SELECT NAME FROM master.dbo.sysdatabases WHERE name='new_db'";
-            sqlstr = "SELECT COUNT(*) FROM master.dbo.sysdatabases WHERE name='new_db'";  // 找個數
-            sqlstr = "SELECT COUNT(*) FROM master.dbo.sysdatabases";  // 找個數
-
+            // 查詢字串, 全部
+            string sqlstr = "SELECT * FROM tb_merchandise";
             sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "查詢字串, 全部";
+
+            // 查詢字串, 相同項合併
+            sqlstr = "SELECT distinct(t_name) FROM tb_merchandise";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+            lb_dgv2.Text = "查詢字串, 相同項合併";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            string str = "24K";
+            richTextBox1.Text += "搜尋 : " + str + " 項目\n";
+
+            // 資料庫檔案
+            db_filename = "db_13.mdf";
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);
+
+            using (SqlConnection con = new SqlConnection(cnstr))
+            {
+                // 查詢字串, 找最大值
+                sqlstr = "SELECT Max(t_price) FROM tb_merchandise WHERE t_name='" + str + "'";
+                using (SqlCommand cmd = new SqlCommand(sqlstr, con))
+                {
+                    con.Open();
+                    int MaxValue = Convert.ToInt16(cmd.ExecuteScalar());
+                    richTextBox1.Text += "取得最大值 : " + MaxValue.ToString() + "\n";
+                    con.Close();
+                }
+
+                // 查詢字串, 找最小值
+                sqlstr = "SELECT Min(t_price) FROM tb_merchandise WHERE t_name='" + str + "'";
+                using (SqlCommand cmd = new SqlCommand(sqlstr, con))
+                {
+                    con.Open();
+                    int MinValue = Convert.ToInt16(cmd.ExecuteScalar());
+                    richTextBox1.Text += "取得最小值 : " + MinValue.ToString() + "\n";
+                    con.Close();
+                }
+
+                // 查詢字串
+                sqlstr = "SELECT * FROM tb_merchandise WHERE t_name='" + str + "' order by t_date";
+                using (SqlDataAdapter da = new SqlDataAdapter(sqlstr, con))
+                {
+                    DataSet ds = new DataSet();
+                    da.Fill(ds);
+
+                    richTextBox1.Text += "取得資料 : " + ds.Tables[0].Rows.Count.ToString() + " 筆\n";
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        richTextBox1.Text += ds.Tables[0].Rows[i][2].ToString() + "\t" + ds.Tables[0].Rows[i][3].ToString() + "\n";
+                    }
+                }
+            }
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
-            // 取得資料庫的表單名稱 2
-            //SysDatabases
+            //插入多筆紀錄
+            // 資料庫檔案
+            string db_filename = "db_TomeTwo.mdf";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM tb_Student";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+
+            // 插入多条数据记录
 
             // 資料庫檔案
-            //string db_filename = "db_02.mdf";
-            string db_filename = "animals1_db.mdf";
+            db_filename = "db_TomeTwo.mdf";
             // 連接字串
             string cnstr = string.Format(db_cnstr, db_filename);
+
             // 查詢字串
-            string sqlstr = string.Empty;
+            sqlstr = string.Format(@"INSERT INTO tb_Student_Copy(学生姓名,学生年龄,性别,家庭住址) SELECT 学生姓名,年龄,性别,家庭住址 FROM tb_Student");
 
-            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
+            //创建SQL连接对象
+            SqlConnection cn = new SqlConnection(cnstr);
+            cn.Open();//打开数据库连接
+            //创建命令对象
+            SqlCommand P_cmd = new SqlCommand(sqlstr, cn);
+            if (P_cmd.ExecuteNonQuery() != 0)//写入数据并判断是否成功
             {
-                cn.Open();
-
-                //獲取所有數據庫名稱
-                //試一下  把 master 改成 dbo
-                // 'dbo.tb_XML'.
-                sqlstr = "SELECT NAME FROM master.dbo.sysdatabases";
-                sqlstr = "SELECT NAME FROM Master.dbo.SysDatabases";
-                sqlstr = "SELECT COUNT(*) FROM master.dbo.sysdatabases WHERE name='new_db'";//NG
-
-                //獲取所有表單名稱
-                sqlstr = "SELECT Name FROM SysObjects WHERE XType = 'U'";
-                //XType='U':表示所有用户表;
-                //XType='S':表示所有系统表;
-                sqlstr = "SELECT name FROM sysobjects WHERE type = 'U'";
-
-                //獲取所有的字段名
-                sqlstr = "SELECT Name FROM SysColumns WHERE id=Object_Id('animals1_table')";
-
-                //取得表單格式           欄名             格式                基本大小              總長度
-                sqlstr = "SELECT syscolumns.name, systypes.name, syscolumns.isnullable, syscolumns.length FROM syscolumns, systypes WHERE syscolumns.xusertype = systypes.xusertype AND syscolumns.id = object_id('animals1_table')";
-
-                using (SqlCommand cmd = new SqlCommand(sqlstr, cn))
-                {
-                    SqlDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
-
-                    richTextBox1.Text += "cnt = " + dr.FieldCount.ToString() + "\n";
-                    richTextBox1.Text += dr + "\n";
-
-                    while (dr.Read())  // 讀取一筆資料到dr
-                    {
-                        richTextBox1.Text += "---------------\n";  // 15個
-
-                        richTextBox1.Text += "欄數 dr.FieldCount = " + dr.FieldCount.ToString() + "\t欄位名稱 :\n";
-                        for (int i = 0; i < dr.FieldCount; i++)
-                        {
-                            richTextBox1.Text += dr.GetName(i) + "\t";
-                        }
-                        richTextBox1.Text += "\n";
-
-                        for (int i = 0; i < dr.FieldCount; i++)
-                        {
-                            richTextBox1.Text += dr[i].ToString();
-                            //richTextBox1.Text += dr.GetValue(i).ToString();  // same
-                            if (i == (dr.FieldCount - 1))
-                            {
-                                richTextBox1.Text += "\n";
-                            }
-                            else
-                            {
-                                richTextBox1.Text += "\t";
-                            }
-                        }
-                    }
-                    richTextBox1.Text += "---------------\n";  // 15個
-                }
+                richTextBox1.Text += "寫入數據 OK\n";
             }
+            else
+            {
+                richTextBox1.Text += "寫入數據 NG\n";
+            }
+            cn.Close();//关闭数据库连接
+
+
+            // 顯示出來
+
+            // 資料庫檔案
+            db_filename = "db_TomeTwo.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM tb_Student_Copy";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
         }
 
         private void button27_Click(object sender, EventArgs e)
@@ -1778,40 +2362,6 @@ namespace vcs_SqlConnection1
 
         private void button28_Click(object sender, EventArgs e)
         {
-            //檢視 SQL Server 上的資料庫清單
-
-            // 資料庫檔案
-            string db_filename = "db_09_Data.MDF";
-            // 查詢字串, 檢視 SQL Server 上的資料庫清單
-            string sqlstr = "SELECT name, filename FROM sysdatabases";  // 系統查詢資料庫名稱
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            // 查詢字串, 檢視 SQL Server 上的資料庫清單, same
-            sqlstr = "SELECT name, database_id, create_date FROM sys.databases";  // same
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-
-            /*
-            // 資料庫檔案
-            string db_filename = "db_09_Data.MDF";
-            // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
-
-            using (SqlConnection cn = new SqlConnection(cnstr))
-            {
-                DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter("SELECT name FROM sysdatabases", cn);
-                da.Fill(dt);
-                this.comboBox1.DataSource = dt.DefaultView;
-                this.comboBox1.DisplayMember = "name";
-                this.comboBox1.ValueMember = "name";
-
-                listBox1.DataSource = dt.DefaultView;
-                listBox1.DisplayMember = "name";
-                listBox1.ValueMember = "name";
-
-                richTextBox1.Text += "共 : " + comboBox1.Items.Count.ToString() + " 項\n";
-            }
-            */
         }
 
         private void button29_Click(object sender, EventArgs e)
@@ -1918,7 +2468,7 @@ namespace vcs_SqlConnection1
             //idx  /  資料庫檔案  /  查詢字串1  /  說明1 /  查詢字串2  /  說明2/  查詢字串3  /  說明3
             //richTextBox1.Text += "idx = " + idx.ToString() + "\n";
             string index = sqlcmd[idx, 0];
-            string db_filename = sqlcmd[idx, 1];
+            db_filename = sqlcmd[idx, 1];
             lb_index.Text = index;
             richTextBox1.Clear();
 
@@ -1932,7 +2482,7 @@ namespace vcs_SqlConnection1
                 richTextBox1.Text += "編號 :\t" + index + "\t資料庫檔案 :\t" + db_filename + "\n";
             }
 
-            string sqlstr = sqlcmd[idx, 2];
+            sqlstr = sqlcmd[idx, 2];
             string description = sqlcmd[idx, 3];
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = description + "\n" + sqlstr;
@@ -2086,7 +2636,7 @@ SQL不同的連線方式
 
 /*
 // 查詢字串
-            string sqlstr = "SELECT emp_id AS 用戶編號,fname AS 用戶姓名,hire_date AS 工作時間 FROM employee";//定義一個查詢字符串變量
+            sqlstr = "SELECT emp_id AS 用戶編號,fname AS 用戶姓名,hire_date AS 工作時間 FROM employee";//定義一個查詢字符串變量
 
             DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
             ds.Clear();//清空數據集中原有內容
@@ -2135,9 +2685,9 @@ Connect Timeout=30
 */
 
 //宣告cnStr連線字串置於事件處理函式外，以提供給其他事件處理函式共用
-//string cnStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\MyDB.mdf;Integrated Security=True;Connect Timeout=30";
+// cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\MyDB.mdf;Integrated Security=True;Connect Timeout=30";
 // 連接字串
-// String cnStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\VisualC#2015基礎必修課\2015範例程式\data\MyDB.mdf;Integrated Security=True;Connect Timeout=30";
+// cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\VisualC#2015基礎必修課\2015範例程式\data\MyDB.mdf;Integrated Security=True;Connect Timeout=30";
 
 //combobox 類別編號
 //cboCategoryId.DisplayMember = "類別名稱";//指定Text屬性繫結的是類別名稱
@@ -2174,12 +2724,12 @@ Connect Timeout=30
         this.pictureBox1.BackgroundImage = bitM;  // 显示绘制的图形
 */
 
-// string sqlstr = "SELECT job_id AS 工作编号, job_desc AS 工作次序, min_lvl AS 最低水平, max_lvl AS 最高水平 FROM jobs";
+// sqlstr = "SELECT job_id AS 工作编号, job_desc AS 工作次序, min_lvl AS 最低水平, max_lvl AS 最高水平 FROM jobs";
 
 /*
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
-                string sqlstr = "SELECT au_id AS 使用者編號,au_lname AS 姓名,phone AS 電話號碼 FROM authors";//初始化SQL查詢語句
+                sqlstr = "SELECT au_id AS 使用者編號,au_lname AS 姓名,phone AS 電話號碼 FROM authors";//初始化SQL查詢語句
                 SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
                 DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
                 da.Fill(ds, "authors");  // da將查詢的結果填充至數據集ds, 指定TableName為"authors"
@@ -2197,20 +2747,19 @@ Connect Timeout=30
 //richTextBox1.Text += dr["TABLE_NAME"] + "\n";
 
             //db_02.mdf
-            //string sqlstr2 = "SELECT * FROM tb_05";
+//sqlstr = "SELECT * FROM tb_05";
 
-            //新增
+            //新增 INSERT INTO 寫法 
             //string name = "david";
             //string position = "engineering";
             //string telephone = "0912345678";
             //int salary = 55555;
-
-                    /* same
-                    // 查詢字串
-                    string sqlstr = "INSERT INTO 員工(姓名, 職稱, 電話, 薪資) VALUES('" + name + "','" + position + "','" + telephone + "'," + salary + ")";
-                    SqlCommand cmd = new SqlCommand(sqlstr, cn);
-                    cmd.ExecuteNonQuery();  // 執行SQL命令
-                    */
+/* same
+// 查詢字串
+sqlstr = "INSERT INTO 員工(姓名, 職稱, 電話, 薪資) VALUES('" + name + "','" + position + "','" + telephone + "'," + salary + ")";
+SqlCommand cmd = new SqlCommand(sqlstr, cn);
+cmd.ExecuteNonQuery();  // 執行SQL命令
+*/
 /*
                     // 查詢字串
                     sqlstr = "INSERT INTO 員工(姓名, 職稱, 電話, 薪資)" + "VALUES(@name, @position, @tel, @salary)";
@@ -2232,12 +2781,12 @@ Connect Timeout=30
             //string telephone2 = "0987654321";
 //int salary2 = 66666;
 
-                    /* same
-                    // 查詢字串
-                    string sqlstr = "UPDATE 員工 SET 職稱 = '" + position2 + "',電話 = '" + telephone2 + "', 薪資 = " + salary2 + " WHERE 姓名 = '" + name + "'";
-                    SqlCommand cmd = new SqlCommand(sqlstr, cn);
-                    cmd.ExecuteNonQuery();  // 執行SQL命令
-                    */
+/* same
+// 查詢字串
+sqlstr = "UPDATE 員工 SET 職稱 = '" + position2 + "',電話 = '" + telephone2 + "', 薪資 = " + salary2 + " WHERE 姓名 = '" + name + "'";
+SqlCommand cmd = new SqlCommand(sqlstr, cn);
+cmd.ExecuteNonQuery();  // 執行SQL命令
+*/
 /*
                     // 查詢字串
                     sqlstr = "UPDATE 員工 SET 職稱=@position," + "電話=@tel, 薪資=@salary WHERE 姓名=@name";
@@ -2268,7 +2817,7 @@ Connect Timeout=30
 
 /* same
 // 查詢字串
-string sqlstr = "DELETE FROM 員工 WHERE 姓名 = '" + name + "'";
+sqlstr = "DELETE FROM 員工 WHERE 姓名 = '" + name + "'";
 SqlCommand cmd = new SqlCommand(sqlstr, cn);
 cmd.ExecuteNonQuery();  // 執行SQL命令
 
@@ -2291,4 +2840,482 @@ cmd.ExecuteNonQuery();  // 執行SQL命令
                 //資料放在表格的第[0][0]格
                 int sum_year = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString());
                 richTextBox1.Text += "年度總和 : " + sum_year.ToString() + "\n";
+*/
+
+
+
+
+
+// 查詢字串 查詢兩個表單
+//sqlstr = "SELECT 字段名,类型,长度 FROM hy_Linshibiao t,angel_Linshibiao b WHERE t.类型编号=b.类型编号";
+
+// 查詢字串
+//sqlstr = "drop table hy_Linshibiao, angel_Linshibiao";
+
+
+
+/*
+
+基础聚合函数（COUNT、SUM、AVG、MAX、MIN）
+
+SELECT COUNT(*) AS total_orders FROM orders WHERE create_time BETWEEN '2025-06-01' AND '2025-06-30';
+SELECT COUNT(*) AS valid_orders FROM orders WHERE order_status IN ('已支付', '已完成') AND create_time BETWEEN '2025-06-01' AND '2025-06-30';
+
+
+COUNT(*)          -- 统计所有行（包括NULL）
+COUNT(列名)       -- 统计该列非NULL的行数
+COUNT(DISTINCT 列名) -- 统计去重后的数量
+
+
+SELECT COUNT(*) AS total_orders FROM orders;
+
+
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    shop_name VARCHAR(50) NOT NULL,
+    product_name VARCHAR(100),
+    amount DECIMAL(10,2) NOT NULL,
+    quantity INT NOT NULL DEFAULT 1,
+    order_status VARCHAR(20) NOT NULL,
+    create_time DATETIME NOT NULL
+);
+
+INSERT INTO orders (user_id, shop_name, product_name, amount, quantity, order_status, create_time) VALUES
+(1001, '女装旗舰店', '碎花连衣裙', 299.00, 2, '已支付', '2025-06-01 10:00:00'),
+(1002, '女装旗舰店', '纯棉T恤', 189.00, 3, '已取消', '2025-06-01 11:00:00'),
+(1003, '男装专营店', '牛仔裤', 599.00, 1, '已支付', '2025-06-02 09:30:00'),
+(1001, '女装旗舰店', '雪纺衫', 399.00, 1, '已支付', '2025-06-03 14:20:00'),
+(1004, '童装店', '儿童T恤', 99.00, 5, '已完成', '2025-06-03 16:00:00'),
+(1005, '女装旗舰店', '真丝连衣裙', 1299.00, 1, '已支付', '2025-06-04 08:30:00'),
+(1002, '男装专营店', '休闲短裤', 89.00, 2, '已取消', '2025-06-04 10:00:00'),
+(1006, '女装旗舰店', '基础打底衫', 89.00, 10, '已支付', '2025-06-05 09:00:00'),
+(1007, '男装专营店', 'Polo衫', 259.00, 1, '已支付', '2025-06-05 14:00:00');
+
+
+
+CREATE TABLE products (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(100),
+    price DECIMAL(10,2)
+);
+
+INSERT INTO products VALUES (1, '连衣裙', 299), (2, 'T恤', 89), (3, '牛仔裤', 199);
+
+SELECT MAX(price), MIN(price) FROM products;
+
+//------------------------------------------------------------  # 60個
+
+                // 查詢字串, 取得欄資料的最大值
+                string sqlstr = "SELECT MAX(tb_ID) FROM 員工個人訊息";
+                string str = cmd.ExecuteScalar().ToString();
+
+//------------------------------------------------------------  # 60個
+            string new_id = "P1018";  // 員工編號
+            string new_name = "david";  // 員工姓名
+            string new_age = "18";  // 員工年齡
+            string new_money = "34567";  // 基本工資
+            string new_idcard = "P123456789";  // 身分證號
+            string sqlstr = "INSERT INTO 員工個人訊息 VALUES ('" + new_id + "','" + new_name + "','" + new_age + "','" + new_money + "','" + new_idcard + "')";
+//------------------------------------------------------------  # 60個
+
+            getScoure("select * from [tb_ware]");
+            //升冪排列
+            getScoure("select * from [tb_ware]  order by [销售数量] asc");
+            //降冪排列
+            getScoure("select * from [tb_ware] order by [销售数量] Desc");
+
+//------------------------------------------------------------  # 60個
+
+            //查詢字串/數字
+
+            //查詢字串
+            //請輸入查詢院系名稱：
+            //計算機
+
+            db_filename = "db_10_Data.MDF";
+            string search_college = "計算機";
+            sqlstr = "SELECT * FROM tb_05 WHERE 所在院系 LIKE '%" + search_college + "%'";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "全部資料 tb_05 + WHERE";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //查詢數字
+            //查詢年齡為：23
+
+            string db_filename = "db_10_Data.MDF";
+            int age = 23;
+            string sqlstr = "SELECT * FROM tb_05 WHERE 學生年齡=" + age.ToString();
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "全部資料 tb_05 + WHERE";
+
+//------------------------------------------------------------  # 60個
+
+            // 資料庫檔案
+            string db_filename = "db_10_Data.MDF";
+
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 部門工資統計表";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            // 修改資料
+            string name = "江南";
+            string money = "2345";
+            sqlstr = "update 部門工資統計表 set 基本工資=" + money + "WHERE 員工姓名 = '" + name + "'";
+            sql_write_database(db_filename, sqlstr);
+
+            // 查詢字串
+            sqlstr = "SELECT * FROM 部門工資統計表";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+
+//------------------------------------------------------------  # 60個
+
+            // 資料庫檔案
+            string db_filename = "db_10_Data.MDF";
+
+            // 查詢字串
+            string sqlstr = "SELECT * FROM 員工工資表";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            // 查詢字串
+            sqlstr = "SELECT * FROM 規定工資表";
+            //sql_read_database(db_filename, sqlstr, dataGridView2);
+
+            string work_year = "3年";
+            string name = "江南";
+
+            // 查詢字串, 跨表單查詢 依 規定工資表 修改 員工工資表
+            sqlstr = "update 員工工資表 set 基本工資=(SELECT 基本工資 FROM 規定工資表 WHERE 工作時間='" + work_year + "') WHERE 員工姓名='" + name + "'";
+            sql_write_database(db_filename, sqlstr);
+
+            // 查詢字串
+            sqlstr = "SELECT * FROM 員工工資表";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+
+//string sqlstr = "SELECT * FROM tb_Rectangle SELECT SUM(t_Num) FROM tb_Rectangle";  // 存成兩個table
+
+SQL DB 有用到的資料型態
+
+SqlDbType.DateTime, 8);
+SqlDbType.VarChar, 100);
+SqlDbType.Bit, 1);
+SqlDbType.VarChar, 20);
+
+            com.Parameters.Add("@strDate", SqlDbType.DateTime, 8);
+            com.Parameters.Add("@strName", SqlDbType.VarChar, 100);
+            com.Parameters.Add("@strFalg", SqlDbType.Bit, 1);
+            com.Parameters.Add("@Falg", SqlDbType.Int);
+            SqlParameter sqlpar = com.Parameters.Add("@strResult", SqlDbType.VarChar, 20);
+
+            cmd.Parameters.Add("@id", SqlDbType.Int, 10, "id");//设置参数
+            cmd.Parameters.Add("@name", SqlDbType.VarChar, 10, "学生姓名");//设置参数
+            cmd.Parameters.Add("@age", SqlDbType.Int, 10, "学生年龄");//设置参数
+            cmd.Parameters.Add("@sex", SqlDbType.NChar, 2, "性别");//设置参数
+            cmd.Parameters.Add("address", SqlDbType.VarChar, 50, "家庭住址");//设置参数
+
+            // 資料庫檔案
+            string db_filename = "db_20.mdf";
+
+            // 查詢字串
+            //string sqlstr = "select name from sysdatabases";
+            string sqlstr = "select name from sysobjects where Xtype='U'";
+
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            // 查詢字串
+            sqlstr = "select name from sysdatabases";
+
+                    //刪除表單
+                    //SqlCommand cmdnew = new SqlCommand("drop table animals1_table", con);
+                    //cmdnew.ExecuteNonQuery();
+
+sqlstr : select  name 字段名, xusertype 類型編號, length 長度 into animals1_table from syscolumns where id=object_id('') 
+
+            // 查詢字串, 一次搜尋多個
+            string sqlstr = "SELECT * FROM cjd WHERE 姓名 IN('張三', '劉心')";
+
+//------------------------------------------------------------  # 60個
+
+            // 取出某表單的 欄位名稱
+            string db_filename = "db_10_Data.MDF";
+            string table_name = "銷售表";
+            string sqlstr = "select c.name from syscolumns c,sysobjects a where a.name='" + table_name + "' and a.id=c.id";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+
+//------------------------------------------------------------  # 60個
+
+利用運算符查詢指定條件的數據
+
+            string sqlstr = "SELECT * FROM " + TableName;//組合運算符的SQL查詢語句
+
+            //左右模糊查詢
+            sqlstr = sqlstr + " where " + FieldName + " like '%" + FieldValue + "%'";//組合SQL查詢語句
+
+            //左模糊查詢
+            sqlstr = sqlstr + " where " + FieldName + " like '%" + FieldValue + "'";//組合SQL查詢語句
+            //右模糊查詢
+            sqlstr = sqlstr + " where " + FieldName + " like '" + FieldValue + "%'";//組合SQL查詢語句
+            //如是不是模糊查詢
+            sqlstr = sqlstr + " where " + FieldName + Condition + "'" + FieldValue + "'";//組合算數運算符查詢語句
+            //查詢條件為空
+            sqlstr = sqlstr + " where " + FieldName + " IS null or " + FieldName + "=''";
+
+//------------------------------------------------------------  # 60個
+
+//查看資料庫內有那些表單
+//SqlDataAdapter da = new SqlDataAdapter("select name from sysdatabases", con);
+
+            //備份資料庫
+            // 把資料庫檔案A的所有資料 備份到 資料庫檔案B
+
+            string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
+
+            string backup_filename = "aaaaaaaa.bak";
+            string db_filename = "db_09_Data.MDF";
+
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);  // 資料庫連線參數, 連接字串
+
+            SqlConnection con = new SqlConnection();		//利用程式碼完成連接資料庫
+            con.ConnectionString = cnstr;
+            con.Open();
+            SqlCommand com = new SqlCommand();
+            com.CommandText = "BACKUP DATABASE " + "animals1_db" + " TO DISK = '" + backup_filename + "'";
+            com.Connection = con;							//連接
+            com.ExecuteNonQuery();						    //執行
+            con.Close();
+            con.Dispose();
+            richTextBox1.Text += "數據備份成功\n";
+
+//---------------------------------------
+
+            SqlDataReader reader = cmd.ExecuteReader();            
+            while (reader.Read())
+            {
+                Console.WriteLine(First Name: {0}, Last Name: {1}, reader.GetString(0), reader.GetString(1));
+            }
+
+//---------------------------------------
+
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_03_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
+            int MaxValue = 0;//表示表中的記錄
+
+            SqlConnection con = new SqlConnection(cnstr);
+            con.Open();
+            SqlCommand com = new SqlCommand("select Count(*)from tb_01", con);
+            MaxValue = (int)com.ExecuteScalar();
+            richTextBox1.Text += "MaxValue = " + MaxValue.ToString() + "\n";
+            con.Close();
+            
+-------------------------            
+
+string selectString = "select au_id as 使用者編號,作者 as 使用者名,phone as 聯繫電話 from authors";
+
+SqlCommand cmd = new SqlCommand("update 系統管理員表 set 使用者名稱='" + textBox1.Text + "',密碼='" + textBox2.Text + "'", con);
+
+-------------------------
+
+SELECT name FROM sysdatabases
+
+FROM sysdatabases
+
+SELECT name, database_id, create_date
+FROM sys.databases;
+GO
+
+
+
+SELECT name,
+       user_access_desc,
+       is_read_only,
+       state_desc,
+       recovery_model_desc
+FROM sys.databases;
+
+
+-- Execute from the master database.
+SELECT a.name,
+       a.state_desc,
+       b.start_date,
+       b.modify_date,
+       b.percent_complete
+FROM sys.databases AS a
+     INNER JOIN sys.dm_database_copies AS b
+         ON a.database_id = b.database_id
+WHERE a.state = 7;
+
+
+
+伺服器資料型別
+BigInt
+NChar(4)
+NVarChar(50)
+NVarChar(50)
+NVarChar(60) NOT NULL
+NVarChar(30) NOT NULL
+NVarChar(15) NOT NULL
+UniqueIdentifier NOT NULL
+DateTime NOT NULL
+Int NOT NULL
+NVarChar(60)
+Int NOT NULL IDENTITY
+
+
+string (System.String)
+long (System.Int64)
+
+
+//------------------------------------------------------------  # 60個
+
+
+
+開始前先確認有安裝 SQL Server LocalDB，找得到 SQLLocalDB.exe，
+使用 SQLLocalDB.exe info 查詢 LocalDB 的預設個體名稱，一般會是 MSSQLLocalDB。
+PS C:\Users\070601> sqllocaldb info
+MSSQLLocalDB
+
+
+Data Source=(local)\MSSQLLocalDB，執行以下指令即可建立空白資料庫及 mdf、ldf 檔案：
+
+CREATE DATABASE <db_name>
+ON PRIMARY ( 
+    NAME=<db_name>_data, 
+    FILENAME = '<path>\<db_name>_data.mdf'
+) 
+LOG ON (
+    NAME=<db_name>_log, 
+    FILENAME = '<paht>\<db_name>_log.ldf'
+)
+
+
+
+
+PS C:\Users\070601> sqllocaldb info
+MSSQLLocalDB
+PS C:\Users\070601> sqllocaldb info MSSQLLocalDB
+Name:               MSSQLLocalDB
+Version:            15.0.4153.1
+Shared name:
+Owner:              M-100028\070601
+Auto-create:        Yes
+State:              Stopped
+Last start time:    2026/4/7 13:16:33
+Instance pipe name:
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+十、從SQL內讀數據到XML：
+using System;
+using System.Data;
+using System.XML;
+using System.Data.SqlClIEnt; 
+using System.IO; 
+
+public class TestWriteXML
+{ 
+    public static void Main()
+    { 
+        String strFileName=c:/temp/output.XML;
+        SqlConnection cn = new SqlConnection(cnstr);
+        String sqlstr = SELECT FirstName, LastName FROM employees; 
+        SqlDataAdapter da = new SqlDataAdapter(); 
+        da.SelectCommand = new SqlCommand(sqlstr, cn);
+
+        // Build the DataSet
+        DataSet ds = new DataSet();
+        da.Fill(ds, employees);
+
+        // Get a FileStream object
+        FileStream fs = new FileStream(strFileName,FileMode.OpenOrCreate,FileAccess.Write);
+        // Apply the WriteXml method to write an XML document
+        ds.WriteXML(fs);
+        fs.Close();
+    }
+}
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+//------------------------------------------------------------  # 60個
+
+//查看表格結構
+            // 查詢字串
+            //"SELECT name FROM sysobjects WHERE type = 'U' AND name<>'dtproperties' "
+
+            string strTableName = "table_name";
+ // 查詢字串
+            string sqlstr = "SELECT name 字段名, xusertype 類型編號, length 長度 into hy_Linshibiao FROM syscolumns WHERE id=object_id('" + strTableName + "') ";
+            sqlstr += "SELECT name 類型, xusertype 類型編號 into angel_Linshibiao FROM systypes WHERE xusertype in (SELECT xusertype FROM syscolumns WHERE id=object_id('" + strTableName + "'))";
+
+            SqlDataAdapter da = new SqlDataAdapter("SELECT 字段名, 類型, 長度 FROM hy_Linshibiao t,angel_Linshibiao b WHERE t.類型編號=b.類型編號", con);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            this.dataGridView1.DataSource = dt.DefaultView;
+
+            SqlCommand cmdnew = new SqlCommand("drop table hy_Linshibiao,angel_Linshibiao", con);
+            con.Open();
+            cmdnew.ExecuteNonQuery();
+            con.Close();
+
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------  # 60個
+
+            // 斷開服務
+
+             // 資料庫檔案
+            string db_filename = "db_09_Data.mdf";
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);
+
+            using (SqlConnection con = new SqlConnection(cnstr))
+            {
+                try
+                {
+                    string strShutdown = "SHUTDOWN WITH NOWAIT";
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = con;
+                    cmd.Connection.Open();
+                    cmd.CommandText = strShutdown;
+                    cmd.ExecuteNonQuery();
+                    richTextBox1.Text += "已成功斷開服務\n";
+                }
+                catch (Exception euy)
+                {
+                    richTextBox1.Text += euy.Message + "\n" ;
+                }
+            }
+
+//------------------------------------------------------------  # 60個
+
+            //枚举本地网络中的SQL Server所有可用实例
+            SqlDataSourceEnumerator instance = SqlDataSourceEnumerator.Instance;
+            DataTable table = instance.GetDataSources();//获取所有数据源，并存储到DataTable中
+            richTextBox1.Text += table + "\n";
+            foreach (DataRow row in table.Rows)//遍历获取到的数据源
+            {
+                richTextBox1.Text += row + "\n";
+                richTextBox1.Text += row["ServerName"] + "\n";
+            }
+
+//------------------------------------------------------------  # 60個
+
+            // 資料庫檔案
+            string db_filename = "db_TomeTwo.MDF";
+            // 查詢字串
+            string sqlstr =
+    @"SELECT 学生姓名,性别,家庭住址 FROM tb_Student
+union
+SELECT 学生姓名,convert(varchar,年龄),家庭住址 FROM tb_Student
+union
+SELECT 学生姓名,convert(varchar,出生年月),家庭住址 FROM tb_Student
+union
+SELECT 学生姓名,所在学院,家庭住址 FROM tb_Student";
+
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+//------------------------------------------------------------  # 60個
+
 */

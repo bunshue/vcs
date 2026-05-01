@@ -292,7 +292,7 @@ namespace vcs_OleDb
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -399,7 +399,7 @@ namespace vcs_OleDb
             oledb_read_database(db_filename, sqlstr, dataGridView2);
             lb_dgv2.Text = "客戶資料 新竹市+花蓮市";
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //取得供應商資料
             /*
@@ -683,7 +683,7 @@ namespace vcs_OleDb
             sqlstr = "SELECT [員工生日表].[員工姓名], [員工生日表].[出生日期], DateDiff('yyyy',[員工生日表].[出生日期],DATE()) AS 年齡 FROM 員工生日表";
             oledb_read_database(db_filename, sqlstr, dataGridView2);
 
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //db_Test.StringFunctionFind.mdb
 
@@ -1394,4 +1394,42 @@ string cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;D
 //NG
 //string insert_cnstr = "INSERT INTO 客戶 (客戶編號, 公司名稱, 連絡人, 連絡人職稱, 地址, 城市, 行政區, 郵遞區號, 國家地區, 電話, 傳真電話) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}')";
 //sqlstr = string.Format(insert_cnstr, customer_id, company_name, "aa", "aa", "aa", "aa", "aa", "aa", "aa", "aa", "aa");
+
+/*
+
+            OleDat = new OleDbDataAdapter("select * from 帳目", Olecon);
+            MaxValue = Convert.ToInt32(new OleDbCommand("select Count(*) from 帳目", Olecon).ExecuteScalar());
+
+-------------------------------------------------------------------
+//"Provider=Microsoft.Jet.OleDb.4.0;"是指數據提供者,這裡使用的是Microsoft Jet引擎,也就是Access中的數據引擎,asp.net就是靠這個和Access的數據庫連接的.
+//"Data Source=XXXXX.mdb"是指明數據源的位置
+
+如果訪問的數據庫是SQL Server 7.0，只需要把上面源代碼中的一條語句：
+private static string strConnect = "Provider = Microsoft.Jet.OLEDB.4.0 ; Data Source = " + Application.StartupPath + "\\MY.MDB" ;
+改變成：
+private static string strConnect = "Provider=SQLOLEDB.1 ; Persist Security Info=False ; User ID = sa ; Initial Catalog=數據庫名稱; Data Source = 服務器名稱 " ;
+即可。
+
+-------------------------------------------------------------------
+
+OleDbDataAdapter
+DataTable的用法 
+                    OleDbDataAdapter OledbDat = new OleDbDataAdapter("select top 1 * from 帳單", strOledbCon);
+                    DataTable dt = new DataTable();
+                    OledbDat.Fill(dt);
+                    this.textBox1.Text = dt.Rows[0][0].ToString().Trim();
+                    this.textBox2.Text = dt.Rows[0][1].ToString().Trim();
+                    this.textBox3.Text = dt.Rows[0][3].ToString().Trim();
+                    this.textBox4.Text = dt.Rows[0][4].ToString().Trim();
+
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+*/
+
+
+
+
 
