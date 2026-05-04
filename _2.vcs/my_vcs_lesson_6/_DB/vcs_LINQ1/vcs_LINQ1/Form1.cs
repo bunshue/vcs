@@ -39,7 +39,7 @@ namespace vcs_LINQ1
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
+
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -726,6 +726,30 @@ namespace vcs_LINQ1
 
         private void button19_Click(object sender, EventArgs e)
         {
+            //LINQ19
+            //使用LINQ技術統計員工的工資總額
+
+            //取得每個月的工資總額
+
+            // 資料庫檔案
+            string db_filename = "db_11_Data.MDF";
+
+            // 連接字串
+            string strCon = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_11_Data.MDF;Integrated Security=True;Connect Timeout=30";
+            SqlConnection sqlcon;
+            SqlDataAdapter sqlda;
+            DataSet myds;
+
+            sqlcon = new SqlConnection(strCon);
+            sqlda = new SqlDataAdapter("select * from tb_User", sqlcon);
+            myds = new DataSet();
+            sqlda.Fill(myds, "tb_User");
+            var query = from salary in myds.Tables["tb_User"].AsEnumerable()
+                        where salary.Field<int>("User_Pay") > 0
+                        select salary;
+            int intSum = query.Sum(salary => salary.Field<int>("User_Pay"));
+
+            richTextBox1.Text += "工資總額：" + intSum.ToString() + "元\n";
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -1097,7 +1121,6 @@ namespace vcs_LINQ1
         public double Price { get; set; }//单价
     }
 }
-
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個

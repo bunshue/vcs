@@ -14,7 +14,6 @@ using System.EnterpriseServices;
 [assembly: AssemblyCopyright("Copyright ©  2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyKeyFile("CallClass.snk")]
 [assembly: ApplicationName("ComBankCallClass")]
 
 

@@ -72,6 +72,10 @@
             this.bt_next = new System.Windows.Forms.Button();
             this.bt_previous = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lb_dgv4b = new System.Windows.Forms.Label();
+            this.lb_dgv3b = new System.Windows.Forms.Label();
+            this.lb_dgv2b = new System.Windows.Forms.Label();
+            this.lb_dgv1b = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
@@ -86,7 +90,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(200, 60);
             this.button9.TabIndex = 134;
-            this.button9.Text = "SQL 9 UPDATE";
+            this.button9.Text = "圖片相關";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -97,7 +101,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(200, 60);
             this.button8.TabIndex = 133;
-            this.button8.Text = "圖片相關";
+            this.button8.Text = "系統相關";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -108,7 +112,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(200, 60);
             this.button7.TabIndex = 132;
-            this.button7.Text = "SQL 7";
+            this.button7.Text = "使用COMPUTE BY";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -141,6 +145,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(200, 60);
             this.button6.TabIndex = 128;
+            this.button6.Text = "聚合函數MIN/COUNT";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -173,7 +178,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 125;
-            this.button4.Text = "系統相關";
+            this.button4.Text = "UNION";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -184,7 +189,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 124;
-            this.button3.Text = "SQL 3 員工表";
+            this.button3.Text = "LIKE";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -225,7 +230,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(200, 60);
             this.button11.TabIndex = 136;
-            this.button11.Text = "SQL 使用 合集, 新加入";
+            this.button11.Text = "SQL 11 插入多筆紀錄";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -247,7 +252,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(200, 60);
             this.button13.TabIndex = 138;
-            this.button13.Text = "測試 SqlTransaction";
+            this.button13.Text = "SQL 13 分析產品銷售走勢";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -269,7 +274,6 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(200, 60);
             this.button15.TabIndex = 140;
-            this.button15.Text = "向資料庫存入圖片";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -280,6 +284,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(200, 60);
             this.button16.TabIndex = 141;
+            this.button16.Text = "使用IN引入子查詢限制查詢範圍";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -354,7 +359,7 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(200, 60);
             this.button22.TabIndex = 148;
-            this.button22.Text = "UNION";
+            this.button22.Text = "測試 SqlTransaction";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -365,7 +370,7 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(200, 60);
             this.button23.TabIndex = 149;
-            this.button23.Text = "LIKE";
+            this.button23.Text = "通配符";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -376,7 +381,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(200, 60);
             this.button24.TabIndex = 150;
-            this.button24.Text = "聚合函數MIN/COUNT";
+            this.button24.Text = "查詢庫存數量占後20%的圖書訊息";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
@@ -387,7 +392,6 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(200, 60);
             this.button25.TabIndex = 151;
-            this.button25.Text = "SQL 25 分析產品銷售走勢";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -398,7 +402,6 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(200, 60);
             this.button26.TabIndex = 152;
-            this.button26.Text = "SQL 26 插入多筆紀錄";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -409,6 +412,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(200, 60);
             this.button27.TabIndex = 153;
+            this.button27.Text = "SQL 使用 合集, 新加入";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
@@ -544,11 +548,55 @@
             this.pictureBox1.TabIndex = 175;
             this.pictureBox1.TabStop = false;
             // 
+            // lb_dgv4b
+            // 
+            this.lb_dgv4b.AutoSize = true;
+            this.lb_dgv4b.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_dgv4b.Location = new System.Drawing.Point(629, 582);
+            this.lb_dgv4b.Name = "lb_dgv4b";
+            this.lb_dgv4b.Size = new System.Drawing.Size(68, 16);
+            this.lb_dgv4b.TabIndex = 180;
+            this.lb_dgv4b.Text = "lb_dgv4b";
+            // 
+            // lb_dgv3b
+            // 
+            this.lb_dgv3b.AutoSize = true;
+            this.lb_dgv3b.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_dgv3b.Location = new System.Drawing.Point(629, 559);
+            this.lb_dgv3b.Name = "lb_dgv3b";
+            this.lb_dgv3b.Size = new System.Drawing.Size(68, 16);
+            this.lb_dgv3b.TabIndex = 179;
+            this.lb_dgv3b.Text = "lb_dgv3b";
+            // 
+            // lb_dgv2b
+            // 
+            this.lb_dgv2b.AutoSize = true;
+            this.lb_dgv2b.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_dgv2b.Location = new System.Drawing.Point(629, 540);
+            this.lb_dgv2b.Name = "lb_dgv2b";
+            this.lb_dgv2b.Size = new System.Drawing.Size(68, 16);
+            this.lb_dgv2b.TabIndex = 178;
+            this.lb_dgv2b.Text = "lb_dgv2b";
+            // 
+            // lb_dgv1b
+            // 
+            this.lb_dgv1b.AutoSize = true;
+            this.lb_dgv1b.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_dgv1b.Location = new System.Drawing.Point(629, 521);
+            this.lb_dgv1b.Name = "lb_dgv1b";
+            this.lb_dgv1b.Size = new System.Drawing.Size(68, 16);
+            this.lb_dgv1b.TabIndex = 177;
+            this.lb_dgv1b.Text = "lb_dgv1b";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1209, 642);
+            this.Controls.Add(this.lb_dgv4b);
+            this.Controls.Add(this.lb_dgv3b);
+            this.Controls.Add(this.lb_dgv2b);
+            this.Controls.Add(this.lb_dgv1b);
             this.Controls.Add(this.lb_index);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.bt_next);
@@ -652,6 +700,10 @@
         private System.Windows.Forms.Button bt_previous;
         private System.Windows.Forms.Label lb_index;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lb_dgv4b;
+        private System.Windows.Forms.Label lb_dgv3b;
+        private System.Windows.Forms.Label lb_dgv2b;
+        private System.Windows.Forms.Label lb_dgv1b;
     }
 }
 
