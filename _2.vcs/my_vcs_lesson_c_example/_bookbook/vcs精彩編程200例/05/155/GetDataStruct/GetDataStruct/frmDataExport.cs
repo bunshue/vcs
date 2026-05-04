@@ -28,20 +28,11 @@ namespace GetDataStruct
         private void frmDataExport_Load(object sender, EventArgs e)
         {
             //導出表結構
-       }
+        }
 
         private void SaveAs() //導出成Excel
         {
             richTextBox1.Text += "匯出到 EXCEL\n";
-            /*
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Execl files (*.xls)|*.xls";
-            saveFileDialog.FilterIndex = 0;
-            saveFileDialog.RestoreDirectory = true;
-            saveFileDialog.CreatePrompt = true;
-            saveFileDialog.Title = "Export Excel File To";
-            saveFileDialog.ShowDialog();
-            */
             string tmp_excel_filename = "tmp_aaaa.xls";
             FileStream filestream = File.Open(tmp_excel_filename, FileMode.Create);
             StreamWriter sw = new StreamWriter(filestream, System.Text.Encoding.GetEncoding(-0));
@@ -127,27 +118,24 @@ namespace GetDataStruct
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
         {
-            string savePath = "";
-            if (radioButton1.Checked == true)
-            {
-                saveFileDialog1.Filter = "WORD(*.doc)|*.doc";
-                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    savePath = saveFileDialog1.FileName;
-                    ExportData(dataGridView1, savePath);
-                }
-            }
+            //匯出到 WORD
+            string doc_filename = "tmp_aaaa.doc";
+            ExportData(dataGridView1, doc_filename);
+        }
 
-            if (radioButton2.Checked == true)
-            {
-                SaveAs();
-            }
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //匯出到 EXCEL
+            //string excel_filename = "tmp_aaaa.xls";
+
+            SaveAs();
+
         }
 
 
-
+        //debug -------------------------------------------------------------------------------------------------------------
 
         string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
 
@@ -186,26 +174,12 @@ namespace GetDataStruct
 
         private void button3_Click(object sender, EventArgs e)
         {
-
             // 資料庫檔案
             string db_filename = "animals1_db.mdf";
             // 查詢字串
             string sqlstr = "SELECT * FROM animals1_table";
 
             sql_read_database(db_filename, sqlstr, dataGridView1);
-
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //匯出到 WORD
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            //匯出到 EXCEL
-
         }
     }
 }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,11 +28,11 @@ namespace GetDataStruct
 
         private void frmOutData_Load(object sender, EventArgs e)
         {
-            //�ɥX�ƾ�
+            //導出數據
 
             string table_name = "animals1_table";
 
-            groupBox1.Text = "�ƾڪ��W�١G" + table_name;
+            richTextBox1.Text += "數據表名稱：" + table_name + "\n";
 
             try
             {
@@ -49,19 +49,14 @@ namespace GetDataStruct
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ĵ�i", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(ex.Message, "警告", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        public void ExportData(DataGridView srcDgv, string fileName)//導出數據,傳入一個datagridview和一個文件路徑
         {
-            this.Close();
-        }
-
-        public void ExportData(DataGridView srcDgv, string fileName)//�ɥX�ƾ�,�ǤJ�@��datagridview�M�@�Ӥ����|
-        {
-            string type = fileName.Substring(fileName.IndexOf(".") + 1);//��o�ƾ�����
-            if (type.Equals("xls", StringComparison.CurrentCultureIgnoreCase))//Excel����
+            string type = fileName.Substring(fileName.IndexOf(".") + 1);//獲得數據類型
+            if (type.Equals("xls", StringComparison.CurrentCultureIgnoreCase))//Excel文檔
             {
                 Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
                 try
@@ -69,11 +64,11 @@ namespace GetDataStruct
                     excel.DisplayAlerts = false;
                     excel.Workbooks.Add(true);
                     excel.Visible = false;
-                    for (int i = 0; i < srcDgv.Columns.Count; i++)//�]�m���D
+                    for (int i = 0; i < srcDgv.Columns.Count; i++)//設置標題
                     {
                         excel.Cells[2, i + 1] = srcDgv.Columns[i].HeaderText;
                     }
-                    for (int i = 0; i < srcDgv.Rows.Count; i++)//��R�ƾ�
+                    for (int i = 0; i < srcDgv.Rows.Count; i++)//填充數據
                     {
                         for (int j = 0; j < srcDgv.Columns.Count; j++)
                         {
@@ -87,7 +82,7 @@ namespace GetDataStruct
                             }
                         }
                     }
-                    excel.Workbooks[1].SaveCopyAs(fileName);//�O�s
+                    excel.Workbooks[1].SaveCopyAs(fileName);//保存
                 }
                 finally
                 {
@@ -96,23 +91,23 @@ namespace GetDataStruct
                 return;
             }
 
-            //�O�sWord���
+            //保存Word文件
             if (type.Equals("doc", StringComparison.CurrentCultureIgnoreCase))
             {
                 object path = fileName;
                 Object none = System.Reflection.Missing.Value;
                 Microsoft.Office.Interop.Word.Application wordApp = new Microsoft.Office.Interop.Word.Application();
                 Microsoft.Office.Interop.Word.Document document = wordApp.Documents.Add(ref none, ref none, ref none, ref none);
-                //�إߪ���
+                //建立表格
                 Microsoft.Office.Interop.Word.Table table = document.Tables.Add(document.Paragraphs.Last.Range, srcDgv.Rows.Count + 1, srcDgv.Columns.Count, ref none, ref none);
                 try
                 {
-                    for (int i = 0; i < srcDgv.Columns.Count; i++)//�]�m���D
+                    for (int i = 0; i < srcDgv.Columns.Count; i++)//設置標題
                     {
                         table.Cell(1, i + 1).Range.Text = srcDgv.Columns[i].HeaderText;
                     }
 
-                    for (int i = 0; i < srcDgv.Rows.Count; i++)//��R�ƾ�
+                    for (int i = 0; i < srcDgv.Rows.Count; i++)//填充數據
                     {
                         for (int j = 0; j < srcDgv.Columns.Count; j++)
                         {
@@ -120,10 +115,10 @@ namespace GetDataStruct
                             if (a == "System.Byte[]")
                             {
                                 PictureBox pp = new PictureBox();
-                                byte[] pic = (byte[])(srcDgv[j, i].Value); //�N�ƾڮw�����Ϥ��ഫ���G�i��y
-                                MemoryStream ms = new MemoryStream(pic);	//�N�r�`�Ʋզs�J��G�i��y��
-                                pp.Image = Image.FromStream(ms);           //�G�i��yImage�������
-                                pp.Image.Save(@"C:\wxk.bmp");               //�N�Ϥ��s�J����w�����|
+                                byte[] pic = (byte[])(srcDgv[j, i].Value); //將數據庫中的圖片轉換成二進制流
+                                MemoryStream ms = new MemoryStream(pic);	//將字節數組存入到二進制流中
+                                pp.Image = Image.FromStream(ms);           //二進制流Image控件中顯示
+                                pp.Image.Save(@"C:\wxk.bmp");               //將圖片存入到指定的路徑
                                 object aaa = table.Cell(i + 2, j + 1).Range;
                                 wordApp.Selection.ParagraphFormat.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
                                 wordApp.Selection.InlineShapes.AddPicture(@"C:\wxk.bmp", ref none, ref none, ref aaa);
@@ -149,27 +144,65 @@ namespace GetDataStruct
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
         {
-            string savePath = "";
-            if (radioButton1.Checked == true)
+            //word
+            string doc_filename = "tmp_aaaa.doc";
+            ExportData(dataGridView1, doc_filename);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //excel
+            string excel_filename = "tmp_aaaa.xls";
+            ExportData(dataGridView1, excel_filename);
+        }
+
+        //debug -------------------------------------------------------------------------------------------------------------
+
+        string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
+
+        void sql_read_database(string db_filename, string sqlstr, DataGridView dgv)
+        {
+            // 連接字串
+            string cnstr = string.Format(db_cnstr, db_filename);
+            richTextBox1.Text += cnstr + "\n";
+
+            //讀取資料庫至DGV
+            try
             {
-                saveFileDialog1.Filter = "WORD(*.doc)|*.doc";
-                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
                 {
-                    savePath = saveFileDialog1.FileName;
-                    ExportData(dataGridView1, savePath);
+                    SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
+                    DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+                    da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+                    //da.Fill(ds, "table");  // da將查詢的結果填充至數據集ds, 指定TableName為"table"
+                    dgv.DataSource = ds.Tables[0].DefaultView;  // DGV設置數據源
+                    //dgv.DataSource = ds.Tables[0];  // DGV設置數據源, same
+                    richTextBox1.Text += "取得資料 : " + ds.Tables[0].Rows.Count.ToString() + " 筆\n";
+
+                    /*
+                    //也可改成用 DataTable
+                    DataTable dt = new DataTable();//创建数据表
+                    da.Fill(dt);//填充数据表
+                    dgv.DataSource = dt;
+                    */
                 }
             }
-            if (radioButton2.Checked == true)
+            catch (Exception ex)
             {
-                saveFileDialog1.Filter = "EXCEL(*.xls)|*.xls";
-                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    savePath = saveFileDialog1.FileName;
-                    ExportData(dataGridView1, savePath);
-                }
+                richTextBox1.Text += ex.Message + "\n";
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            // 資料庫檔案
+            string db_filename = "animals1_db.mdf";
+            // 查詢字串
+            string sqlstr = "SELECT * FROM animals1_table";
+
+            sql_read_database(db_filename, sqlstr, dataGridView1);
         }
     }
 }

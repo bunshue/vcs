@@ -1,6 +1,67 @@
 ﻿
 
 
+
+//6060
+
+
+
+//6060
+
+        public void Saveing(string bank, float balance, string account)
+        {
+            try
+            {
+                string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_35.mdf;Integrated Security=True;Connect Timeout=30";
+                SqlConnection con = new SqlConnection(cnstr);
+                con.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE " + bank + " SET balance = balance + " + Convert.ToDouble(balance) + " WHERE (account = 123456)", con);
+                int i = (int)cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void Fetch(string bank, float balance, string account)
+        {
+            try
+            {
+                if (balance > Convert.ToSingle(GetBalance(bank, balance, account)))
+                {
+                    throw new Exception("银行：" + bank + " 账号：" + account + "余额不足！");
+                }
+
+                string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_35.mdf;Integrated Security=True;Connect Timeout=30";
+                SqlConnection con = new SqlConnection(cnstr);
+                con.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE " + bank + " SET balance = balance - " + Convert.ToDouble(balance) + " WHERE (account = 123456)", con);
+                int i = (int)cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public int GetBalance(string bank, float balance, string account)
+        {
+            string cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_35.mdf;Integrated Security=True;Connect Timeout=30";
+            SqlConnection con = new SqlConnection(cnstr);
+            SqlDataAdapter dap = new SqlDataAdapter("select * from " + bank + "where account='" + account + "'", con);
+            DataSet ds = new DataSet();
+            dap.Fill(ds);
+            return int.Parse(ds.Tables[0].Rows[0]["balance"].ToString());
+        }
+
+
+
+
+
+
 準備搬進 簡易測試 的
 
 //idx  /  資料庫檔案  /  查詢字串1  /  說明1 /  查詢字串2  /  說明2/  查詢字串3  /  說明3
