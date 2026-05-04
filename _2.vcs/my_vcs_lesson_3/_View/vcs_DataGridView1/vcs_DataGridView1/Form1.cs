@@ -597,6 +597,26 @@ namespace vcs_DataGridView1
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //DataGridView顯示圖片
+
+            dataGridView1.DataSource = new List<Images>()//绑定到图片集合//設定DGV的資料來源為List<圖片>
+            { 
+                new Images(){Im=Image.FromFile("..//..//images//1.bmp")},
+                new Images(){Im=Image.FromFile("..//..//images//2.bmp")},
+                new Images(){Im=Image.FromFile("..//..//images//3.bmp")},
+                new Images(){Im=Image.FromFile("..//..//images//4.bmp")},
+                new Images(){Im=Image.FromFile("..//..//images//5.bmp")},
+                new Images(){Im=Image.FromFile("..//..//images//6.bmp")},
+                new Images(){Im=Image.FromFile("..//..//images//7.bmp")}
+            };
+            dataGridView1.Columns[0].HeaderText = "圖片";//設定欄標題
+            dataGridView1.Columns[0].Width = 70;  // 設定欄寬, 第0欄
+
+            int R = dataGridView1.Rows.Count;  // 列數, 包含標題列
+            for (int i = 0; i < R; i++)
+            {
+                dataGridView1.Rows[i].Height = 70;  // 設定行高
+            }
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -803,25 +823,6 @@ namespace vcs_DataGridView1
 
         private void button17_Click(object sender, EventArgs e)
         {
-            //DataGridView顯示圖片
-            dataGridView1.DataSource = new List<Images>()//绑定到图片集合//設定DGV的資料來源為List<圖片>
-            { 
-                new Images(){Im=Image.FromFile("..//..//images//1.bmp")},
-                new Images(){Im=Image.FromFile("..//..//images//2.bmp")},
-                new Images(){Im=Image.FromFile("..//..//images//3.bmp")},
-                new Images(){Im=Image.FromFile("..//..//images//4.bmp")},
-                new Images(){Im=Image.FromFile("..//..//images//5.bmp")},
-                new Images(){Im=Image.FromFile("..//..//images//6.bmp")},
-                new Images(){Im=Image.FromFile("..//..//images//7.bmp")}
-            };
-            dataGridView1.Columns[0].HeaderText = "图片";//設定欄標題
-            dataGridView1.Columns[0].Width = 70;  // 設定欄寬, 第0欄
-
-            int R = dataGridView1.Rows.Count;  // 列數, 包含標題列
-            for (int i = 0; i < R; i++)
-            {
-                dataGridView1.Rows[i].Height = 70;  // 設定行高
-            }
         }
 
         private void button18_Click(object sender, EventArgs e)

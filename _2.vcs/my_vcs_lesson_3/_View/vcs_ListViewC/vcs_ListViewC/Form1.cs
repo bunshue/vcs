@@ -249,6 +249,5 @@ namespace vcs_ListViewC
             Console.WriteLine(ListViewToHtmlTable(listView4, 1, 0, 5));
             Console.WriteLine(ListViewToHtmlTable(listView5, 1, 0, 5));
         }
-
     }
 }

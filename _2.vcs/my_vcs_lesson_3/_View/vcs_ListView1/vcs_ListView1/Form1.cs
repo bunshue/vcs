@@ -139,7 +139,7 @@ namespace vcs_ListView1
         {
             int R = 0;
             int C = 0;
-            /*
+
             //方法一 : Use HitTest and IndexOf.
             ListViewHitTestInfo hti = listView1.HitTest(e.Location);
             if (hti.Item == null) return;
@@ -147,8 +147,6 @@ namespace vcs_ListView1
 
             R = item.Index;
             C = item.SubItems.IndexOf(hti.SubItem);
-            */
-
             /*
             //方法二 : Use HitTest.
             ListViewHitTestInfo hti = listView1.HitTest(e.Location);
@@ -167,13 +165,6 @@ namespace vcs_ListView1
             }
             */
 
-            //方法三 : Use the FindListViewRowColumn method.
-            int row, column;
-            if (listView1.FindListViewRowColumn(e.X, e.Y, out row, out column))
-            {
-                R = row;
-                C = column;
-            }
             lb_main_mesg0.Text = "第 " + R.ToString() + " 列, 第 " + C.ToString() + " 欄, (不含欄位, 從0起算)";
         }
 
@@ -361,6 +352,13 @@ namespace vcs_ListView1
             listView1.Columns.Add("英文名", 80, HorizontalAlignment.Left);
             listView1.Columns.Add("中文名", 80, HorizontalAlignment.Left);
             listView1.Columns.Add("體重", 60, HorizontalAlignment.Left);
+
+            //設定欄寬
+            foreach (ColumnHeader col in listView1.Columns)
+            {
+                //col.Width = -1;  // 設定欄寬 符合 欄名長度
+                col.Width = -2;  // 設定欄寬 符合 欄名長度 與 資料長度
+            }
 
             //加入項目(列資料)
             apply_data();
@@ -988,6 +986,17 @@ namespace vcs_ListView1
 
         private void button15_Click(object sender, EventArgs e)
         {
+            //imageList1屬性/Images/集合/加入圖片
+
+            //ListView 使用 ImageList
+            listView1.View = View.LargeIcon;//设置显示方式
+            listView1.LargeImageList = imageList1;//设置ImageList属性
+
+            listView1.Items.Add("aaaa", 0);
+            listView1.Items.Add("bbbb", 1);
+            listView1.Items.Add("cccc", 2);
+            listView1.Items.Add("dddd", 3);
+            listView1.Items.Add("eeee", 4);
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -1102,31 +1111,6 @@ namespace vcs_ListView1
 
         private void button23_Click(object sender, EventArgs e)
         {
-            //各種排序2
-
-            //各種View
-            if (type == 0)
-            {
-                richTextBox1.Text += "無排序\n";
-                listView1.SetSortMode(ListViewExtensions.SortMode.SortNone);
-            }
-            else if (type == 1)
-            {
-                richTextBox1.Text += "Sort on all columns\n";
-                listView1.SetSortMode(ListViewExtensions.SortMode.SortOnAllColumns);
-            }
-            else if (type == 2)
-            {
-                richTextBox1.Text += "Sort on clicked columns\n";
-                listView1.SetSortMode(ListViewExtensions.SortMode.SortOnClickedColumn);
-            }
-            else
-            {
-                richTextBox1.Text += "xxxxxxxx\n";
-            }
-            type++;
-            if (type > 2)
-                type = 0;
         }
 
         private void button24_Click(object sender, EventArgs e)

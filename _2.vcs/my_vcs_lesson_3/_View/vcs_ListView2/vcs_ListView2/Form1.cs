@@ -187,62 +187,11 @@ namespace vcs_ListView2
              */
         }
 
-        private ColumnHeader SortingColumn = null;
-
         private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            richTextBox1.Text += "你按了第 " + e.Column.ToString() + " 欄, 依此欄排序\n";
-            // Get the new sorting column.
-            ColumnHeader new_sorting_column = listView1.Columns[e.Column];
-
-            // Figure out the new sorting order.
-            System.Windows.Forms.SortOrder sort_order;
-            if (SortingColumn == null)
-            {
-                // New column. Sort ascending.
-                sort_order = SortOrder.Ascending;
-            }
-            else
-            {
-                // See if this is the same column.
-                if (new_sorting_column == SortingColumn)
-                {
-                    // Same column. Switch the sort order.
-                    if (SortingColumn.Text.StartsWith("> "))
-                    {
-                        sort_order = SortOrder.Descending;
-                    }
-                    else
-                    {
-                        sort_order = SortOrder.Ascending;
-                    }
-                }
-                else
-                {
-                    // New column. Sort ascending.
-                    sort_order = SortOrder.Ascending;
-                }
-
-                // Remove the old sort indicator.
-                SortingColumn.Text = SortingColumn.Text.Substring(2);
-            }
-
-            // Display the new sort order.
-            SortingColumn = new_sorting_column;
-            if (sort_order == SortOrder.Ascending)
-            {
-                SortingColumn.Text = "> " + SortingColumn.Text;
-            }
-            else
-            {
-                SortingColumn.Text = "< " + SortingColumn.Text;
-            }
-
-            // Create a comparer.
-            listView1.ListViewItemSorter = new ListViewComparer(e.Column, sort_order);
-
-            // Sort.
-            listView1.Sort();
+            richTextBox1.Text += "你按了第 " + e.Column.ToString() + " 欄\n";
+            richTextBox1.Text += "aaa : " + listView1.Columns[e.Column] + "\n";
+            richTextBox1.Text += "bbb : " + e.Column.ToString() + "\n";
         }
 
         void listView1_ItemActivate(object sender, EventArgs e)
@@ -270,8 +219,6 @@ namespace vcs_ListView2
             }
             */
         }
-
-
 
         //檔案拖拽進入
         private void Files_DragEnter(object sender, DragEventArgs e)

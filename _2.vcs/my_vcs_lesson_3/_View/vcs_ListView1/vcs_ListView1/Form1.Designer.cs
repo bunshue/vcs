@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button0 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -66,6 +67,7 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.lb_main_mesg0 = new System.Windows.Forms.Label();
             this.lb_main_mesg1 = new System.Windows.Forms.Label();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -252,6 +254,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(200, 60);
             this.button15.TabIndex = 123;
+            this.button15.Text = "ListView 使用 ImageList";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -335,7 +338,6 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(200, 60);
             this.button23.TabIndex = 131;
-            this.button23.Text = "各種排序2";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -460,6 +462,27 @@
             this.lb_main_mesg1.TabIndex = 142;
             this.lb_main_mesg1.Text = "mesg1";
             // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "1345915697_Gmail.ico");
+            this.imageList1.Images.SetKeyName(1, "1345915707_YouTube.ico");
+            this.imageList1.Images.SetKeyName(2, "1345915717_FireFox.ico");
+            this.imageList1.Images.SetKeyName(3, "1345915795_GMail.ico");
+            this.imageList1.Images.SetKeyName(4, "1345918094_preferences-system-login.ico");
+            this.imageList1.Images.SetKeyName(5, "favicon.ico");
+            this.imageList1.Images.SetKeyName(6, "Print.ico");
+            this.imageList1.Images.SetKeyName(7, "Rotate1.ico");
+            this.imageList1.Images.SetKeyName(8, "Rotate2.ico");
+            this.imageList1.Images.SetKeyName(9, "Rotate3.ico");
+            this.imageList1.Images.SetKeyName(10, "Rotate4.ico");
+            this.imageList1.Images.SetKeyName(11, "Save.ico");
+            this.imageList1.Images.SetKeyName(12, "spyder_reset.ico");
+            this.imageList1.Images.SetKeyName(13, "SysReqMet.ico");
+            this.imageList1.Images.SetKeyName(14, "VeryCD.ico");
+            this.imageList1.Images.SetKeyName(15, "warn.ico");
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -548,6 +571,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 刪除項目ToolStripMenuItem;
         private System.Windows.Forms.Label lb_main_mesg1;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }
 
