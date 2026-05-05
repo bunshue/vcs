@@ -2,19 +2,8 @@
 
 
 using System.Diagnostics;
+using System.Diagnostics;   //for Process
 
-            //開啟 Sql Server 服務
-            Process pro = new Process();
-            pro.StartInfo.FileName = "cmd.exe";
-            pro.StartInfo.UseShellExecute = false;
-            pro.StartInfo.RedirectStandardInput = true;
-            pro.StartInfo.RedirectStandardOutput = true;
-            pro.StartInfo.RedirectStandardError = true;
-            pro.StartInfo.CreateNoWindow = true;
-            pro.Start();
-            pro.StandardInput.WriteLine("net start mssqlserver");
-            pro.StandardInput.WriteLine("exit");
-            MessageBox.Show("已成功開啟服務");
 
 
 

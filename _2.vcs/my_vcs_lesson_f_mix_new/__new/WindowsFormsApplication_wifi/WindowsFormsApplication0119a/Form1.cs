@@ -9,7 +9,6 @@ using System.Windows.Forms;
 
 using System.Diagnostics;
 
-
 //C#中調用命令行cmd開啟wifi熱點的實例代碼
 
 /*
@@ -74,10 +73,10 @@ namespace WindowsFormsApplication0119a
             richTextBox1.Text += "已關閉wifi熱點\n";
         }
 
-        //在cmd控制台輸入命令，
+        //在cmd控制台輸入命令
         private void create(string str)
         {
-		string exe_filename = "cmd.exe";    //要執行的程序名稱
+            string exe_filename = "cmd.exe";    //要執行的程序名稱
             Process process = new Process();    //創建一個進程用於調用外部程序
 
             process.StartInfo.FileName = exe_filename;  //設定要啟動的程式

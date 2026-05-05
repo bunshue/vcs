@@ -15,6 +15,7 @@ namespace vcs_Process7
 {
     public partial class Form1 : Form
     {
+        int process_id = 24104;
         public Form1()
         {
             InitializeComponent();
@@ -31,11 +32,15 @@ namespace vcs_Process7
             process1.StartInfo.FileName = "notepad";
             process1.StartInfo.CreateNoWindow = true;
             process1.Start();
+
+            process_id = process1.Id;
+
+            richTextBox1.Text += process_id.ToString() + "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process localById = System.Diagnostics.Process.GetProcessById(19772);
+            System.Diagnostics.Process localById = System.Diagnostics.Process.GetProcessById(process_id);
             MessageBox.Show("電腦名稱：" + localById.MachineName + Environment.NewLine + "處理序名稱：" + localById.ProcessName);
             richTextBox1.Text += "電腦名稱：" + localById.MachineName + Environment.NewLine + "處理序名稱：" + localById.ProcessName + "\n";
         }

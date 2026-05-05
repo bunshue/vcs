@@ -294,6 +294,7 @@
             // 
             // bt_clear
             // 
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_clear.Location = new System.Drawing.Point(929, 569);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(65, 33);
@@ -459,6 +460,7 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(200, 60);
             this.button33.TabIndex = 34;
+            this.button33.Text = "用WordPad編輯rtf檔";
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
@@ -490,6 +492,7 @@
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(200, 60);
             this.button36.TabIndex = 37;
+            this.button36.Text = "test Process()";
             this.button36.UseVisualStyleBackColor = true;
             this.button36.Click += new System.EventHandler(this.button36_Click);
             // 
@@ -528,6 +531,7 @@
             this.groupBox1.Controls.Add(this.bt_system1);
             this.groupBox1.Controls.Add(this.bt_system2);
             this.groupBox1.Controls.Add(this.bt_system0);
+            this.groupBox1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.groupBox1.Location = new System.Drawing.Point(829, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(196, 274);
@@ -537,6 +541,7 @@
             // 
             // bt_system1
             // 
+            this.bt_system1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_system1.Location = new System.Drawing.Point(17, 77);
             this.bt_system1.Name = "bt_system1";
             this.bt_system1.Size = new System.Drawing.Size(160, 50);
@@ -547,6 +552,7 @@
             // 
             // bt_system2
             // 
+            this.bt_system2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_system2.Location = new System.Drawing.Point(17, 133);
             this.bt_system2.Name = "bt_system2";
             this.bt_system2.Size = new System.Drawing.Size(160, 50);
@@ -557,6 +563,7 @@
             // 
             // bt_system0
             // 
+            this.bt_system0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_system0.Location = new System.Drawing.Point(17, 21);
             this.bt_system0.Name = "bt_system0";
             this.bt_system0.Size = new System.Drawing.Size(160, 50);

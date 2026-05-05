@@ -22,6 +22,8 @@ namespace vcs_Process4
 
         private void getProcessInfo()
         {
+            richTextBox1.Text += "取得進程資訊\n";
+
             try
             {
                 listView1.Items.Clear();
@@ -39,6 +41,7 @@ namespace vcs_Process4
                     Minfo[5] = Convert.ToString(process.VirtualMemorySize / 1024) + "K";
                     ListViewItem lvi = new ListViewItem(Minfo, "process");
                     listView1.Items.Add(lvi);
+                    richTextBox1.Text += "加入一項\n";
                 }
             }
             catch { }
@@ -72,7 +75,7 @@ namespace vcs_Process4
             {
                 string ProcessName = listView1.SelectedItems[0].Text;
                 Process[] processes = Process.GetProcessesByName(ProcessName);
-                
+
                 Process process = new Process();
                 //設定程序名
                 process.StartInfo.FileName = "cmd.exe";
@@ -87,7 +90,7 @@ namespace vcs_Process4
                 //設置不顯示窗口
                 process.StartInfo.CreateNoWindow = true;
                 //執行強制結束命令
-                
+
                 process.Start();
                 process.StandardInput.WriteLine("ntsd -c q -p " + (processes[0].Id).ToString());
                 process.StandardInput.WriteLine("Exit");
@@ -97,6 +100,8 @@ namespace vcs_Process4
 
         private void SetBasePriority(int i)
         {
+            richTextBox1.Text += "設定優先序 i = " + i.ToString() + "\n";
+
             string ProcessName = listView1.SelectedItems[0].Text;
             Process[] processes = Process.GetProcessesByName(ProcessName);
             switch (i)

@@ -508,31 +508,8 @@ namespace vcs_RichTextBox1
         {
         }
 
-        //用WordPad編輯rtf檔
-        // Allow the user to edit the file with WordPad.
         private void button19_Click(object sender, EventArgs e)
         {
-            string rtf_filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf\text.rtf";
-
-            // Hide.
-            this.ShowInTaskbar = false;
-            this.Hide();
-
-            // We will open rtf_filename with wordpad.exe.
-            ProcessStartInfo start_info = new ProcessStartInfo("wordpad.exe", rtf_filename);
-            start_info.WindowStyle = ProcessWindowStyle.Maximized;
-
-            // Open wordpad.
-            Process process = new Process();
-            process.StartInfo = start_info;
-            process.Start();
-
-            // Wait for wordpad to finish.
-            process.WaitForExit();
-
-            // Unhide.
-            this.ShowInTaskbar = true;
-            this.Show();
         }
 
         private void button20_Click(object sender, EventArgs e)

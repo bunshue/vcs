@@ -100,11 +100,16 @@ namespace vcs_Process1
             bt_system1.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 10);
             bt_system2.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 10);
 
-            richTextBox1.Size = new Size(360, 700);
+            richTextBox1.Size = new Size(360, 690);
             richTextBox1.Location = new Point(x_st + dx * 5 - 10, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1440, 760);
+            this.Size = new Size(1440, 750);
+            this.Text = "vcs_Process1";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -191,8 +196,6 @@ namespace vcs_Process1
 
                 richTextBox1.Text += process.ProcessName + "\n";
             }
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -740,6 +743,30 @@ namespace vcs_Process1
 
         private void button33_Click(object sender, EventArgs e)
         {
+            //用WordPad編輯rtf檔
+            // Allow the user to edit the file with WordPad.
+
+            string rtf_filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf\text.rtf";
+
+            // Hide.
+            this.ShowInTaskbar = false;
+            this.Hide();
+
+            // We will open rtf_filename with wordpad.exe.
+            ProcessStartInfo start_info = new ProcessStartInfo("wordpad.exe", rtf_filename);
+            start_info.WindowStyle = ProcessWindowStyle.Maximized;
+
+            // Open wordpad.
+            Process process = new Process();
+            process.StartInfo = start_info;
+            process.Start();
+
+            // Wait for wordpad to finish.
+            process.WaitForExit();
+
+            // Unhide.
+            this.ShowInTaskbar = true;
+            this.Show();
         }
 
         private void button34_Click(object sender, EventArgs e)
@@ -759,11 +786,22 @@ namespace vcs_Process1
 
             //Process.ProcessorAffinity 設置當前CPU的屏蔽字，0x0001表示選用一號CPU，0x0002表示選用2號CPU。
 
-
         }
 
         private void button36_Click(object sender, EventArgs e)
         {
+            //test Process()
+            //在cmd控制台輸入命令
+            Process process = new Process();    //創建一個進程用於調用外部程序
+            process.StartInfo.FileName = "cmd.exe";//設定要啟動的程式
+            process.StartInfo.UseShellExecute = false;  // 是否指定操作系統外殼進程啟動程序
+            process.StartInfo.RedirectStandardInput = true;//可能接受來自調用程序的輸入信息, 重定向標准輸入
+            process.StartInfo.RedirectStandardOutput = true;//重定向標准輸出
+            process.StartInfo.RedirectStandardError = true;//重定向錯誤輸出
+            process.StartInfo.CreateNoWindow = true;  // 是否顯示程序視窗, true:不顯示, false:顯示
+            process.Start();//啟動程序
+            //process.StandardInput.WriteLine("net start mssqlserver");//輸入命令
+            //process.StandardInput.WriteLine("exit");//一定要關閉。
         }
 
         private void button37_Click(object sender, EventArgs e)
@@ -800,7 +838,6 @@ namespace vcs_Process1
         }
     }
 }
-
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -861,8 +898,6 @@ namespace vcs_Process1
 
             return 0;
         }
-        
-
 */
 
 

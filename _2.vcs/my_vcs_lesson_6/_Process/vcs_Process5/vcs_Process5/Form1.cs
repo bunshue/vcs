@@ -39,10 +39,13 @@ namespace vcs_Process5
             Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效
 
             if (flag_keep_program_running == true)
+            {
                 richTextBox1.Text += "維持程式運行模式\n";
+            }
             else
+            {
                 richTextBox1.Text += "監控模式\n";
-
+            }
             label1.Text = "偵測程式 : " + program_name;
             richTextBox1.Text += "偵測程式 : " + program_name + " 開始, 時間 : " + DateTime.Now.ToString() + "\n";
         }
@@ -59,6 +62,7 @@ namespace vcs_Process5
         int count = 0;
         private void timer1_Tick(object sender, EventArgs e)
         {
+            richTextBox1.Text += "A ";
             if (flag_keep_program_running == true)
             {
                 if (flag_program_running == true)
@@ -105,3 +109,4 @@ namespace vcs_Process5
         }
     }
 }
+
