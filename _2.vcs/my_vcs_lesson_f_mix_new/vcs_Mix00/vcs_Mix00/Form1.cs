@@ -1665,6 +1665,20 @@ namespace vcs_Mix00
 
         private void button33_Click(object sender, EventArgs e)
         {
+            // send message to another computer
+            // 在局域網內發送訊息
+            // NG
+
+            string strIP = "192.168.1.106";
+            string strInfo = "send message to another computer";
+
+            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo();
+            psi.FileName = @"cmd.exe";
+            psi.Arguments = @"/c net send " + strIP + " " + strInfo + "";
+            psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            System.Diagnostics.Process.Start(psi);
+
+            richTextBox1.Text += "done\n";
         }
 
         private void CallOut(out int x, out int y)

@@ -1,21 +1,8 @@
 ﻿
+
 //6060
 
-機器名/IP:
-            //在局域網內發送訊息  用 kilo / tango 測一下
-            
-                       對方的機器名/IP:     訊息
-            sendInfo(this.textBox1.Text, this.richTextBox1.Text.Replace("\n", ""));
 
-
-        private void sendInfo(string strIP, string strInfo)
-        {
-            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo();
-            psi.FileName = @"cmd.exe";
-            psi.Arguments = @"/c net send " + strIP + " " + strInfo + "";
-            psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            System.Diagnostics.Process.Start(psi);
-        }
 
 
 //6060
@@ -174,7 +161,6 @@
 //6060
 
 
-
 把一個ENUM的內容用foreach加到一個combobox裡
 點選combobox的項目 套用之
 
@@ -290,12 +276,8 @@ TextBox設定星號
 
 //------------------------------------------------------------  # 60個
 
-
-//------------------------------------------------------------  # 60個
-
             //RTB的操作 貼上
             richTextBox2.Paste();
-
 
             //RTB的操作 全選 拷貝
 

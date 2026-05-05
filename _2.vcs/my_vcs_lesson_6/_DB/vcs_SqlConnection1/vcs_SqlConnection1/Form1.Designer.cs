@@ -112,7 +112,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(200, 60);
             this.button7.TabIndex = 132;
-            this.button7.Text = "使用COMPUTE BY";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
