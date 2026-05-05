@@ -178,14 +178,21 @@ namespace vcs_DataGridView1
         private void dataGridView1_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "dataGridView1_Click, 取得資料 :\n";
-            richTextBox1.Text += "第0項 : " + this.dataGridView1.SelectedCells[0].Value.ToString() + "\n";
-            richTextBox1.Text += "第1項 : " + this.dataGridView1.SelectedCells[1].Value.ToString() + "\n";
-            richTextBox1.Text += "第2項 : " + this.dataGridView1.SelectedCells[2].Value.ToString() + "\n";
+            richTextBox1.Text += "第0欄 : " + this.dataGridView1.SelectedCells[0].Value.ToString() + "\n";
+            richTextBox1.Text += "第1欄 : " + this.dataGridView1.SelectedCells[1].Value.ToString() + "\n";
+            richTextBox1.Text += "第2欄 : " + this.dataGridView1.SelectedCells[2].Value.ToString() + "\n";
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             richTextBox1.Text += "CellClick[" + e.ColumnIndex.ToString() + ", " + e.RowIndex.ToString() + "]\n";
+
+            if (e.RowIndex < 0)
+            {
+                //選中標題
+                return;
+            }
+
             richTextBox1.Text += "你選擇了 : " + dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString() + "\n";
 
             string str = this.dataGridView1[0, e.RowIndex].Value.ToString();
@@ -927,6 +934,13 @@ namespace vcs_DataGridView1
 
         private void button23_Click(object sender, EventArgs e)
         {
+            //DataGridView 指定欄位排序
+
+            // 根據 第N欄 做 降冪 排序
+            dataGridView1.Sort(dataGridView1.Columns[0], System.ComponentModel.ListSortDirection.Descending);
+
+            // 根據 第N欄 做 升冪 排序
+            dataGridView1.Sort(dataGridView1.Columns[0], System.ComponentModel.ListSortDirection.Ascending);
         }
 
         private void button24_Click(object sender, EventArgs e)
@@ -1153,61 +1167,23 @@ namespace vcs_DataGridView1
  */
 
 
-
-
-
-
-
-            /*
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Click += new EventHandler(dataGridView1_Click);
-            */
-
 /*
-        private void dataGridView1_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "dataGridView1_Click, 取得資料 :\n";
-            richTextBox1.Text += "第0欄 : " + this.dataGridView1.SelectedCells[0].Value.ToString() + "\n";
-            richTextBox1.Text += "第1欄 : " + this.dataGridView1.SelectedCells[1].Value.ToString() + "\n";
-            richTextBox1.Text += "第2欄 : " + this.dataGridView1.SelectedCells[2].Value.ToString() + "\n";
-            richTextBox1.Text += "第3欄 : " + this.dataGridView1.SelectedCells[3].Value.ToString() + "\n";
-        }
-
-
             dataGridView1.Columns[0].Width = 150;//設置欄位寬度
             dataGridView1.Columns[1].Width = 150;//設置欄位寬度
             dataGridView1.Columns[2].Width = 150;//設置欄位寬度
-
 
             dataGridView1.DataSource = nemployees.ToList();
             dataGridView1.Columns[0].Width = 250;
             dataGridView1.Columns[1].Width = 100;
 
-
-
 WaferAdapter.Fill(WaferSet, "商品");//向數據集中填充數據
 WaferTable = WaferSet.Tables["商品"];//向數據表中填充數據
 this.dataGridView1.DataSource = WaferSet.Tables["商品"].DefaultView;//為DataGridView控件綁定數據源
-
-
-
 
 dgv1
             //// Make the columns autosize.
             //foreach (DataGridViewColumn col in dataGridView1.Columns)
             //    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-
-
-
-
-DataGridView 指定欄位排序
-
-// 根據 資料行1 (Name) 做 大到小 排序
-dataGridView1.Sort(dataGridView1.Columns[1], System.ComponentModel.ListSortDirection.Descending); 
-
-// 根據 資料行1 (Name) 做 小到大 排序 
-dataGridView1.Sort(dataGridView1.Columns[1], System.ComponentModel.ListSortDirection.Ascending); 
-
 
 //3030
 
@@ -1238,7 +1214,6 @@ dataGridView1.Sort(dataGridView1.Columns[1], System.ComponentModel.ListSortDirec
 
 
 //3030
-
 
 
 */
