@@ -37,6 +37,14 @@ namespace vcs_Mix03_draw_image
 
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             pictureBox1.Image = Image.FromFile(filename);
+
+            /*
+            //根據桌面大小調整視窗大小
+            int DeskWidth = Screen.PrimaryScreen.WorkingArea.Width; //PrimaryScreen為取得主顯示器，WorkingArea可取得顯示器的工作區(不包含工作列…等)
+            int DeskHeight = Screen.PrimaryScreen.WorkingArea.Height;
+            this.Width = Convert.ToInt32(DeskWidth * 0.8);
+            this.Height = Convert.ToInt32(DeskHeight * 0.8);
+            */
         }
 
         /*
@@ -351,7 +359,7 @@ namespace vcs_Mix03_draw_image
             show_button_text(sender);
         }
 
-        
+
 
         private void button8_Click(object sender, EventArgs e)
         {
@@ -637,6 +645,36 @@ namespace vcs_Mix03_draw_image
 
         private void button19_Click(object sender, EventArgs e)
         {
+            /*
+            //本程式截圖
+            Graphics g = this.CreateGraphics();
+            Size s = this.Size;
+            Bitmap bitmap1 = new Bitmap(s.Width, s.Height, g);
+            Graphics memoryGraphics = Graphics.FromImage(bitmap1);
+            memoryGraphics.CopyFromScreen(this.Location.X, this.Location.Y, 0, 0, s);
+
+            pictureBox1.Image = bitmap1;
+
+            //e.Graphics.DrawImage(memoryImage, 0, 0);
+
+            //6060
+            */
+
+            g.DrawRectangle(Pens.Red, 100, 100, 200, 200);
+
+            //c#畫三角形、並填充顏色
+            //目前知道有兩種方法：畫多邊形、GraphicsPath。但是用畫多邊形的方式畫三角形不太好。老畫不正的，截圖放大就明顯了。
+
+            Point point1 = new Point(0, 0);
+            Point point2 = new Point(110, 0);
+            Point point3 = new Point(50, 80);
+            Point[] pntArr = { point1, point2, point3 };
+
+            g.FillPolygon(Brushes.Red, pntArr);
+
+
+            pictureBox1.Image = bitmap1;
+
 
         }
     }
@@ -658,6 +696,3 @@ namespace vcs_Mix03_draw_image
 /*  可搬出
 
 */
-
-
-

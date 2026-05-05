@@ -699,6 +699,12 @@ namespace vcs_ImageProcessing2_CCRR
 
         private void button11_Click(object sender, EventArgs e)
         {
+            //圖片裁剪與縮放
+
+            //TBD
+
+            //使用 class
+
         }
 
         private void button12_Click(object sender, EventArgs e)

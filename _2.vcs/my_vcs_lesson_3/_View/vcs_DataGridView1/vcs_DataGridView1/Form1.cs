@@ -1218,3 +1218,39 @@ dgv1
 
 */
 
+
+
+
+
+
+/*
+
+            //顯示數據 DataTable => DGV
+            dataGridView1.Rows.Clear();//清空DataGridView中原有的數據
+            object[] item = new object[dt.Columns.Count];//定義一個object類型的數組
+                int R = dt.Rows.Count;
+                richTextBox1.Text += "R = " + R.ToString() + "\n";
+            for (int i = 0; i < R; i++)//循環遍歷數據表中的每一行數據
+            {
+                for (int j = 0; j < dt.Columns.Count; j++)//循環遍歷數據表中每一列數據
+                {
+                    item[j] = dt.Rows[i][j];//保存數據表中的數據內容
+                }
+                dataGridView1.Rows.Add(item);//向DataGridView中添加數據
+            }
+*/
+
+
+//dataGridView1.CurrentRow.Cells[0].Value
+//dataGridView1.CurrentRow.Cells[0].Value
+
+/*
+
+                dataGridView1.DataSource = ds.Tables["authors"].DefaultView;//為DataGridView控制元件填充數據源
+                for (int i = 0; i < dataGridView1.Columns.Count; i++)//循環搜尋DataGridView控制元件中的每一列
+                {
+                    //禁用DataGridView控制元件列表頭自動排序功能
+                    dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;//設定每一列的排序類型為不排序
+                }
+*/
+

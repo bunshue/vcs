@@ -1721,3 +1721,13 @@ listView1參數
             richTextBox1.Text += str + "\n";
 */
 
+
+
+
+/*
+
+C# listview中顯示imagelist中的圖片
+https://www.itread01.com/content/1546725619.html
+
+*/
+
