@@ -1,10 +1,24 @@
 ﻿
+//6060
+
+機器名/IP:
+            //在局域網內發送訊息  用 kilo / tango 測一下
+            
+                       對方的機器名/IP:     訊息
+            sendInfo(this.textBox1.Text, this.richTextBox1.Text.Replace("\n", ""));
 
 
-using System.Diagnostics;
-using System.Diagnostics;   //for Process
+        private void sendInfo(string strIP, string strInfo)
+        {
+            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo();
+            psi.FileName = @"cmd.exe";
+            psi.Arguments = @"/c net send " + strIP + " " + strInfo + "";
+            psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            System.Diagnostics.Process.Start(psi);
+        }
 
 
+//6060
 
 
 
@@ -13,6 +27,7 @@ using System.Diagnostics;   //for Process
                     if ((attr & FileAttributes.ReadOnly) > 0)
                         Console.Write("The file is read-only.");
 
+//6060
 
         //清空文本框
         private void btnReset_Click(object sender, EventArgs e)

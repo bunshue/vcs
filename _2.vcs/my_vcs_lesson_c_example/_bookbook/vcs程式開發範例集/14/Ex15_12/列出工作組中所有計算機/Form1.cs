@@ -14,32 +14,32 @@ namespace 列出工作組中所有計算機
     {
         public Form1()
         {
-            InitializeComponent(); 
+            InitializeComponent();
         }
-        //
+
         private void Form1_Load(object sender, EventArgs e)
         {
-           GroupInfo();
+            GroupInfo();
         }
-        //
+
         private void GroupInfo()
         {
-            
             DirectoryEntry MainGroup = new DirectoryEntry("WinNT:");
             foreach (DirectoryEntry domain in MainGroup.Children)
             {
                 listBox1.Text = "";
                 listBox1.Items.Add(domain.Name);
-            }   
+                richTextBox1.Text += "取得 : " + domain.Name + "\n";
+            }
         }
-        //
+
         private void ComputerInfo(string strname)
         {
-            
+
             DirectoryEntry MainGroup = new DirectoryEntry("WinNT:");
             foreach (DirectoryEntry domain in MainGroup.Children)
             {
-               
+
                 if (domain.Name == strname)
                 {
                     foreach (DirectoryEntry pc in domain.Children)
@@ -51,14 +51,14 @@ namespace 列出工作組中所有計算機
             }
             MessageBox.Show("檢索完成");
         }
-        //
+
         private void listBox1_Click(object sender, EventArgs e)
         {
             MessageBox.Show("開始檢索請稍等。。。");
             listBox2.Items.Clear();
             ComputerInfo(this.listBox1.Text);
         }
-        //
+
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
