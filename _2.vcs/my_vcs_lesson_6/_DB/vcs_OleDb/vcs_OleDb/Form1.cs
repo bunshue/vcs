@@ -755,7 +755,7 @@ namespace vcs_OleDb
         {
             // EXCEL資料庫檔案
             //string excel_filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\excel_20210602_131921.xls";
-            string excel_filename = @"D:\\_git\\vcs\\_1.data\\______test_files1\\__RW\\_excel\\vcs_test_excel.xls";
+            string excel_filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_excel\vcs_test_excel.xls";
 
             // 工作表名稱
             //string sheetName = "Sheet1";
@@ -780,48 +780,48 @@ namespace vcs_OleDb
                 //IMEX=1 為「匯入模式」，能對檔案進行讀取的動作。
                 //IMEX=2 為「連結模式」，能對檔案進行讀取與寫入的動作。
             "IMEX=1'";
+
             /*步驟2：依照Excel的屬性及路徑開啟檔案*/
             //Excel路徑及相關資訊匯入
-            OleDbConnection cn = new OleDbConnection(cnstr);  // 建立資料庫連接對象cn
-            //打開檔案
-            cn.Open();
-            /*步驟3：搜尋此Excel的所有工作表，找到特定工作表進行讀檔，並將其資料存入List*/
-            //搜尋xls的工作表(工作表名稱需要加$字串)
-            DataTable Table = cn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
-            //查詢此Excel所有的工作表名稱
-            foreach (DataRow row in Table.Rows)
+            richTextBox1.Text += "讀取 Excel檔案 的 : " + cnstr + "\n";
+            using (OleDbConnection cn = new OleDbConnection(cnstr))  // 建立資料庫連接對象cn
             {
-                //抓取Xls各個Sheet的名稱(+'$')-有的名稱需要加名稱''，有的不用
-                string sheetName0 = (string)row["TABLE_NAME"];
-                richTextBox1.Text += "取得工作表 : " + sheetName0 + "\n";
-                //工作表名稱有特殊字元、空格，需加'工作表名稱$'，ex：'Sheet_A$'
-                //工作表名稱沒有特殊字元、空格，需加工作表名稱$，ex：SheetA$
-                //所有工作表名稱為Sheet1，讀取此工作表的內容
-                //if (sheetName0 == "SheetA$")
-                if (sheetName0 == "Sheet1$")   //第一頁
+                cn.Open();
+                /*步驟3：搜尋此Excel的所有工作表，找到特定工作表進行讀檔，並將其資料存入List*/
+                //搜尋xls的工作表(工作表名稱需要加$字串)
+                DataTable Table = cn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+                //查詢此Excel所有的工作表名稱
+                foreach (DataRow row in Table.Rows)
                 {
-                    // 工作表名稱
-                    string sheetName = "Sheet1";
-                    // 查詢字串, 選取工作表名稱
-                    string sqlstr = "SELECT * FROM [" + sheetName + "$]";
-
-                    OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
-                    OleDbDataReader dr = cmd.ExecuteReader();
-
-                    //讀取工作表SheetA資料
-                    //List<string> ListSheetA = new List<string>();
-                    int cnt = 0;
-                    while (dr.Read())
+                    //抓取Xls各個Sheet的名稱(+'$')-有的名稱需要加名稱''，有的不用
+                    string sheetName0 = (string)row["TABLE_NAME"];
+                    richTextBox1.Text += "取得工作表 : " + sheetName0 + "\n";
+                    //工作表名稱有特殊字元、空格，需加'工作表名稱$'，ex：'Sheet_A$'
+                    //工作表名稱沒有特殊字元、空格，需加工作表名稱$，ex：SheetA$
+                    //所有工作表名稱為Sheet1，讀取此工作表的內容
+                    //if (sheetName0 == "SheetA$")
+                    if (sheetName0 == "Sheet1$")   //第一頁
                     {
-                        //工作表SheetA的資料存入List
-                        //ListSheetA.Add(dr[cnt].ToString());
-                        richTextBox1.Text += "列" + cnt.ToString() + "\t" + dr[0].ToString() + "\t" + dr[1].ToString() + "\t" + dr[2].ToString() + "\n";
-                        cnt++;
+                        // 工作表名稱
+                        string sheetName = "Sheet1";
+                        // 查詢字串, 選取工作表名稱
+                        string sqlstr = "SELECT * FROM [" + sheetName + "$]";
+
+                        OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
+                        OleDbDataReader dr = cmd.ExecuteReader();
+
+                        //讀取工作表SheetA資料
+                        //List<string> ListSheetA = new List<string>();
+                        int cnt = 0;
+                        while (dr.Read())
+                        {
+                            //工作表SheetA的資料存入List
+                            //ListSheetA.Add(dr[cnt].ToString());
+                            richTextBox1.Text += "列" + cnt.ToString() + "\t" + dr[0].ToString() + "\t" + dr[1].ToString() + "\t" + dr[2].ToString() + "\n";
+                            cnt++;
+                        }
+                        dr.Close();
                     }
-                    /*步驟4：關閉檔案*/
-                    //結束關閉讀檔(必要，不關會有error)
-                    dr.Close();
-                    cn.Close();
                 }
             }
         }
@@ -879,20 +879,21 @@ namespace vcs_OleDb
             // 連接字串
             string cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;';Data Source=" + excel_filename;
 
-            OleDbConnection cn = new OleDbConnection(cnstr);  // 建立資料庫連接對象cn
-            cn.Open();
-            DataTable dt = cn.GetSchema("Tables");
-            //判斷excel的sheet頁數量，查詢第1頁
-            if (dt.Rows.Count > 0)
+            using (OleDbConnection cn = new OleDbConnection(cnstr))  // 建立資料庫連接對象cn
             {
-                string sqlstr = string.Format("SELECT * FROM [{0}]", dt.Rows[0]["TABLE_NAME"]);
-                richTextBox1.Text += sqlstr + "\n";
-                OleDbDataAdapter da = new OleDbDataAdapter(sqlstr, cn);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-                dataGridView1.DataSource = ds.Tables[0];
+                cn.Open();
+                DataTable dt = cn.GetSchema("Tables");
+                //判斷excel的sheet頁數量，查詢第1頁
+                if (dt.Rows.Count > 0)
+                {
+                    string sqlstr = string.Format("SELECT * FROM [{0}]", dt.Rows[0]["TABLE_NAME"]);
+                    richTextBox1.Text += sqlstr + "\n";
+                    OleDbDataAdapter da = new OleDbDataAdapter(sqlstr, cn);
+                    DataSet ds = new DataSet();
+                    da.Fill(ds);
+                    dataGridView1.DataSource = ds.Tables[0];
+                }
             }
-            cn.Close();
         }
 
         //------------------------------------------------------------  # 60個
@@ -905,14 +906,14 @@ namespace vcs_OleDb
             richTextBox1.Text += "A ";
 
             object missing = System.Reflection.Missing.Value;//定义object缺省值
-            string[] P_str_Names = all_files.Split(',');//存储所有选择的Excel文件名
+            string[] excel_filenames = all_files.Split(',');//存储所有选择的Excel文件名
 
-            for (int i = 0; i < P_str_Names.Length - 1; i++)//遍历所有选择的Excel文件名
+            for (int i = 0; i < excel_filenames.Length - 1; i++)//遍历所有选择的Excel文件名
             {
-                richTextBox1.Text += P_str_Names[i] + "\n";
+                richTextBox1.Text += excel_filenames[i] + "\n";
             }
 
-            string P_str_Name = "";//存储遍历到的Excel文件名
+            string excel_filename = "";//存储遍历到的Excel文件名
             List<string> P_list_SheetNames = new List<string>();//实例化泛型集合对象，用来存储工作表名称
 
             Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();//实例化Excel对象
@@ -921,12 +922,12 @@ namespace vcs_OleDb
             Microsoft.Office.Interop.Excel.Worksheet newWorksheet = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Worksheets.Add(missing, missing, missing, missing);//创建新工作表
             //if (DateTime.Now.Hour == nudown_Hour.Value && DateTime.Now.Minute == nudown_Min.Value)
             {
-                for (int i = 0; i < P_str_Names.Length - 1; i++)//遍历所有选择的Excel文件名
+                for (int i = 0; i < excel_filenames.Length - 1; i++)//遍历所有选择的Excel文件名
                 {
-                    P_str_Name = P_str_Names[i];//记录遍历到的Excel文件名
+                    excel_filename = excel_filenames[i];//记录遍历到的Excel文件名
                     //指定要复制的工作簿
-                    Microsoft.Office.Interop.Excel.Workbook Tempworkbook = excel.Application.Workbooks.Open(P_str_Name, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing);
-                    P_list_SheetNames = GetSheetName(P_str_Name);//获取Excel文件中的所有工作表名
+                    Microsoft.Office.Interop.Excel.Workbook Tempworkbook = excel.Application.Workbooks.Open(excel_filename, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing, missing);
+                    P_list_SheetNames = GetSheetName(excel_filename);//获取Excel文件中的所有工作表名
                     for (int j = 0; j < P_list_SheetNames.Count; j++)//遍历所有工作表
                     {
                         //指定要复制的工作表
@@ -942,19 +943,18 @@ namespace vcs_OleDb
             CloseProcess("EXCEL");//关闭所有Excel进程
         }
 
-
-        private List<string> GetSheetName(string P_str_Excel)//获取所有工作表名称
+        private List<string> GetSheetName(string excel_filename)//获取所有工作表名称
         {
             List<string> P_list_SheetName = new List<string>();//实例化泛型集合对象
 
             // 連接字串
-            //string cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;Data Source=" + P_str_Excel;
+            string cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;Data Source=" + excel_filename;
 
             //连接Excel数据库
-            //string cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;Data Source=" + P_str_Excel;
-            OleDbConnection olecon = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;Data Source=" + P_str_Excel);
-            olecon.Open();//打开数据库连接
-            System.Data.DataTable DTable = olecon.GetSchema("Tables");//实例化表对象
+            OleDbConnection cn = new OleDbConnection(cnstr);  // 建立資料庫連接對象cn
+
+            cn.Open();//打开数据库连接
+            System.Data.DataTable DTable = cn.GetSchema("Tables");//实例化表对象
             DataTableReader DTReader = new DataTableReader(DTable);//实例化表读取对象
             while (DTReader.Read())//循环读取
             {
@@ -966,7 +966,7 @@ namespace vcs_OleDb
             }
             DTable = null;//清空表对象
             DTReader = null;//清空表读取对象
-            olecon.Close();//关闭数据库连接
+            cn.Close();//关闭数据库连接
             return P_list_SheetName;//返回得到的泛型集合
         }
 
@@ -1007,13 +1007,9 @@ namespace vcs_OleDb
                     "Extended Properties=" + ExtendedString +
                     "HDR=" + HDR +
                     "IMEX=" + IMEX;
-
             richTextBox1.Text += cnstr + "\n";
 
             cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;Data Source=" + excel_filename;
-
-            richTextBox1.Text += cnstr + "\n";
-
             using (OleDbConnection cn = new OleDbConnection(cnstr))  // 建立資料庫連接對象cn
             {
                 cn.Open();
@@ -1074,7 +1070,7 @@ namespace vcs_OleDb
             // 工作表名稱
             //string sheetName = "Sheet1";
 
-            using (OleDbConnection cn = new OleDbConnection(cnstr))
+            using (OleDbConnection cn = new OleDbConnection(cnstr))  // 建立資料庫連接對象cn
             {
                 cn.Open();
                 string sqlstr = "select * from [" + sheetName + "$]";
@@ -1122,17 +1118,18 @@ namespace vcs_OleDb
                 cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;Data Source=" + excel_filename;
             }
 
-            OleDbConnection cn = new OleDbConnection(cnstr);  // 建立資料庫連接對象cn
-
-            try
+            using (OleDbConnection cn = new OleDbConnection(cnstr))  // 建立資料庫連接對象cn
             {
-                cn.Open();
-                richTextBox1.Clear();
-                richTextBox1.Text = cnstr + "\n连接成功……";
-            }
-            catch
-            {
-                richTextBox1.Text = "连接失败";
+                try
+                {
+                    cn.Open();
+                    richTextBox1.Clear();
+                    richTextBox1.Text = cnstr + "\n连接成功……";
+                }
+                catch
+                {
+                    richTextBox1.Text = "连接失败";
+                }
             }
         }
 
@@ -1158,28 +1155,28 @@ namespace vcs_OleDb
 
             OleDbConnectionStringBuilder builder = get_builder(db_filename);
 
-            OleDbConnection cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
-
-            cn.Open();  // 打開資料庫連線
-
-            OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
-            OleDbDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
-
-            //顯示資料表欄位名稱
-            for (int i = 0; i <= dr.FieldCount - 1; i++)
+            using (OleDbConnection cn = new OleDbConnection(builder.ConnectionString))  // 建立資料庫連接對象cn
             {
-                richTextBox1.Text += dr.GetName(i) + "\n";
-            }
+                cn.Open();  // 打開資料庫連線
 
-            //顯示資料表欄位的所有資料
-            while (dr.Read())
-            {
+                OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
+                OleDbDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
+
+                //顯示資料表欄位名稱
                 for (int i = 0; i <= dr.FieldCount - 1; i++)
                 {
-                    richTextBox1.Text += dr.GetValue(i) + "\n";
+                    richTextBox1.Text += dr.GetName(i) + "\n";
+                }
+
+                //顯示資料表欄位的所有資料
+                while (dr.Read())
+                {
+                    for (int i = 0; i <= dr.FieldCount - 1; i++)
+                    {
+                        richTextBox1.Text += dr.GetValue(i) + "\n";
+                    }
                 }
             }
-            cn.Close();
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
@@ -1189,19 +1186,19 @@ namespace vcs_OleDb
 
             //string dbpath = "C:\\Inetpub\\wwwroot\\ASPNET\\ch14\\App_Data\\DBMS.mdb";
 
-            cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
+            using (OleDbConnection cn = new OleDbConnection(builder.ConnectionString))  // 建立資料庫連接對象cn
+            {
+                cn.Open();  // 打開資料庫連線
 
-            cn.Open();  // 打開資料庫連線
+                // 查詢字串
+                sqlstr = "SELECT * FROM 學生資料表";
 
-            // 查詢字串
-            sqlstr = "SELECT * FROM 學生資料表";
-
-            OleDbDataAdapter da = new OleDbDataAdapter(sqlstr, cn);
-            DataSet ds = new DataSet();
-            //讀取資料表
-            da.Fill(ds, "Table");
-            dataGridView2.DataSource = ds.Tables["Table"];
-            cn.Close();
+                OleDbDataAdapter da = new OleDbDataAdapter(sqlstr, cn);
+                DataSet ds = new DataSet();
+                //讀取資料表
+                da.Fill(ds, "Table");
+                dataGridView2.DataSource = ds.Tables["Table"];
+            }
         }
 
         private void button28_Click(object sender, EventArgs e)
@@ -1334,9 +1331,6 @@ private static string strConnect = "Provider=SQLOLEDB.1 ; Persist Security Info=
 */
 
 
-
-
-
 /*
 一律把上改下
                 //string cnstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Persist Security Info=False;Data Source=./2006年圖書銷售情況.xls;Extended Properties=Excel 8.0";
@@ -1357,14 +1351,8 @@ string cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;D
             builder["User Id"] = "Admin";
 */
 
-
-
 //                richTextBox1.Text += dr["CustomerID"].ToString().PadRight(10, ' ');
 //                richTextBox1.Text += dr["CustomerID"].ToString();
-
-
-
-
 
 /*
             // 資料庫檔案
@@ -1376,31 +1364,19 @@ string cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;D
             //cnstr = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + db_filename+ ";Uid=Admin;Pwd=jcvadmin;";              //有帳號密碼的
             //cnstr = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + db_filename+ ";Jet OLEDB:Database Password=workbill"  //有帳號密碼的
             cnstr = @"Provider=Microsoft.Jet.OLEDB.4.0;" + "Data Source=" + db_filename;
-            OleDbConnection cn = new OleDbConnection(cnstr);  // 建立資料庫連接對象cn
-
-            // 打開數據庫連接
-            cn.Open();
-            richTextBox1.Text += "打開數據庫連接成功\n";
-
-            cn.Close();  // 關閉數據庫連接
-            cn.Dispose();
-            richTextBox1.Text += "關閉數據庫連接成功\n";
 */
 
-
 //string cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + db_filename + ";";
-
 
 //NG
 //string insert_cnstr = "INSERT INTO 客戶 (客戶編號, 公司名稱, 連絡人, 連絡人職稱, 地址, 城市, 行政區, 郵遞區號, 國家地區, 電話, 傳真電話) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}')";
 //sqlstr = string.Format(insert_cnstr, customer_id, company_name, "aa", "aa", "aa", "aa", "aa", "aa", "aa", "aa", "aa");
 
 /*
+            OleDat = new OleDbDataAdapter("select * from 帳目", cn);
+            MaxValue = Convert.ToInt32(new OleDbCommand("select Count(*) from 帳目", cn).ExecuteScalar());
 
-            OleDat = new OleDbDataAdapter("select * from 帳目", Olecon);
-            MaxValue = Convert.ToInt32(new OleDbCommand("select Count(*) from 帳目", Olecon).ExecuteScalar());
-
--------------------------------------------------------------------
+//------------------------------------------------------------  # 60個
 //"Provider=Microsoft.Jet.OleDb.4.0;"是指數據提供者,這裡使用的是Microsoft Jet引擎,也就是Access中的數據引擎,asp.net就是靠這個和Access的數據庫連接的.
 //"Data Source=XXXXX.mdb"是指明數據源的位置
 
@@ -1409,9 +1385,7 @@ private static string strConnect = "Provider = Microsoft.Jet.OLEDB.4.0 ; Data So
 改變成：
 private static string strConnect = "Provider=SQLOLEDB.1 ; Persist Security Info=False ; User ID = sa ; Initial Catalog=數據庫名稱; Data Source = 服務器名稱 " ;
 即可。
-
--------------------------------------------------------------------
-
+//------------------------------------------------------------  # 60個
 OleDbDataAdapter
 DataTable的用法 
                     OleDbDataAdapter OledbDat = new OleDbDataAdapter("select top 1 * from 帳單", strOledbCon);
