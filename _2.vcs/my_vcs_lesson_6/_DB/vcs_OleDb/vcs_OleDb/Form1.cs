@@ -28,8 +28,16 @@ namespace vcs_OleDb
 {
     public partial class Form1 : Form
     {
-        //string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
-
+        // 資料庫檔案
+        string db_filename = string.Empty;
+        // 連接字串
+        string cnstr = string.Empty;
+        // 查詢字串
+        string sqlstr = string.Empty;
+        // 連接字串
+        // string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
+        // 工作表名稱
+        string sheetName = "Sheet1";
         public Form1()
         {
             InitializeComponent();
@@ -144,6 +152,7 @@ namespace vcs_OleDb
         void oledb_read_database(string db_filename, string sqlstr, DataGridView dgv)
         {
             OleDbConnectionStringBuilder builder = get_builder(db_filename);
+            //richTextBox1.Text += builder.ConnectionString + "\n";
             using (OleDbConnection cn = new OleDbConnection(builder.ConnectionString))  // 建立資料庫連接對象cn
             {
                 OleDbCommand cmd = new OleDbCommand(builder.ConnectionString);
@@ -156,6 +165,7 @@ namespace vcs_OleDb
                 da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
                 //dgv.DataSource = ds.Tables["table"];  // DGV設置數據源, same
                 dgv.DataSource = ds.Tables[0];  // DGV設置數據源
+                richTextBox1.Text += "取得資料 : " + ds.Tables[0].Rows.Count.ToString() + " 筆\n";
             }
 
             if (dgv == dataGridView1)
@@ -248,8 +258,7 @@ namespace vcs_OleDb
         void oledb_read_excel_database(string excel_filename, string sqlstr, DataGridView dgv)
         {
             // 連接字串
-            string cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;Data Source=" + excel_filename;
-
+            cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;Data Source=" + excel_filename;
             using (OleDbConnection cn = new OleDbConnection(cnstr))  // 建立資料庫連接對象cn
             {
                 cn.Open();
@@ -296,96 +305,147 @@ namespace vcs_OleDb
 
         private void button0_Click(object sender, EventArgs e)
         {
+            //讀取資料庫 至 DGV, 新進
+
             // 資料庫檔案
-            string db_filename = "Northwind.mdb";
+            db_filename = "Northwind.mdb";
+            // 查詢字串
+            sqlstr = "SELECT * FROM 員工";
+            oledb_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "全部資料 員工";
+
+
+            return;
+            oledb_read_database_dr(db_filename, sqlstr);
+
+
+            return;
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            // 資料庫檔案
+            db_filename = "Northwind2.mdb";
+            // 查詢字串, 取出員工資料表中所有欄位的內容
+            sqlstr = "SELECT * FROM 員工";
+
+            oledb_read_database(db_filename, sqlstr, dataGridView1);
+
+            // 查詢字串 資料筆數 COUNT
+            sqlstr = "SELECT COUNT(*) FROM 員工";
+            object obj = oledb_get_database_data(db_filename, sqlstr);
+            richTextBox1.Text += "共 " + obj.ToString() + " 筆記錄\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //OleDb 27
+
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
+            // 查詢字串
+            sqlstr = "SELECT * FROM 學生資料表";
+            oledb_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "全部資料 學生資料表";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
+            // 查詢字串
+            sqlstr = "SELECT * FROM 學生資料表";
+
             OleDbConnectionStringBuilder builder = get_builder(db_filename);
+
             using (OleDbConnection cn = new OleDbConnection(builder.ConnectionString))  // 建立資料庫連接對象cn
             {
-                try
-                {
-                    cn.Open();
+                cn.Open();  // 打開資料庫連線
 
-                    richTextBox1.Text += "連接字串 : " + cn.ConnectionString + "\n";
-                    richTextBox1.Text += string.Format("資料庫 : {0} 伺服器名稱或檔案名稱： {1}", cn.Database, cn.DataSource) + "\n";
-                    richTextBox1.Text += string.Format("伺服器版本 : {0} 提供者名稱：{1}", cn.ServerVersion, cn.Provider) + "\n";
-                    richTextBox1.Text += "目前的連線狀態 : " + cn.State + "\n";
-                }
-                catch (Exception ex)
+                OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
+                OleDbDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
+
+                //顯示資料表欄位名稱
+                for (int i = 0; i <= dr.FieldCount - 1; i++)
                 {
-                    richTextBox1.Text += ex.Message + "\n";
+                    richTextBox1.Text += dr.GetName(i) + "\t";
+                }
+                richTextBox1.Text += "\n";
+
+                //顯示資料表欄位的所有資料
+                while (dr.Read())
+                {
+                    for (int i = 0; i <= dr.FieldCount - 1; i++)
+                    {
+                        richTextBox1.Text += dr.GetValue(i) + "\t";
+                    }
+                    richTextBox1.Text += "\n";
                 }
             }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //OleDb
-            //第一種方式
-
-            // 資料庫檔案
-            string db_filename = "Northwind.mdb";
-
-            OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder();
-            builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
-            builder["Data Source"] = "D:\\" + db_filename;
-            builder["User Id"] = "Admin";
-
-            // 使用Add()方法以明確地加入key/value pairs
-            builder.Add("Provider", "Microsoft.Jet.Oledb.4.0");
-            builder.Add("Jet OLEDB:Database Password", "p@ssw0rd");
-            builder.Add("Jet OLEDB:System Database", @"C:\Workgroup.mdb");
-            richTextBox1.Text += builder.ConnectionString + "\n";
-
-            // 清除所有值，並回復到預設值
-            builder.Clear();
-
-            //第二種方式
-            // 資料庫檔案
-            db_filename = "Northwind.mdb";
-            builder = get_builder(db_filename);
-            richTextBox1.Text += builder.ConnectionString + "\n";
-
-            // 呼叫Remove()方法移除key/value pairs 
-            builder.Remove("User ID");
-            richTextBox1.Text += builder.ConnectionString + "\n";
-
-            // 使用indexer加入新值 
-            // necessary.
-            builder["User ID"] = "Admin";
-            builder["Password"] = "p@ssw0rd";
-            richTextBox1.Text += builder.ConnectionString + "\n";
-
-            //第三種方式
-            // 使用indexer加入必要的key/value pairs
-
-            // 資料庫檔案
-            db_filename = "Northwind.mdb";
-            builder = new OleDbConnectionStringBuilder();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "OleDb 2\n";
+
             // 資料庫檔案
-            string db_filename = "Northwind.mdb";
+            db_filename = "db_Test.FormatFind.mdb";
 
             // 查詢字串
-            string sqlstr = "SELECT * FROM 員工";
+            sqlstr = "SELECT * FROM 員工生日表";
             oledb_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "全部資料 員工";
+            lb_dgv1.Text = "全部資料 員工生日表";
 
             oledb_read_database_dr(db_filename, sqlstr);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //在查詢語句中使用格式化函數
+            //將出生日期格式化為「年月日」的格式
+
+            // 查詢字串
+            sqlstr = "SELECT [員工生日表].[員工姓名], 出生日期 AS 格式化前出生日期,format([員工生日表].[出生日期],'yyyy年mm月dd日') AS 格式化後出生日期 FROM 員工生日表;";
+            oledb_read_database(db_filename, sqlstr, dataGridView2);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "OleDb 3\n";
+
+            // 資料庫檔案
+            db_filename = "db_database.mdb";
+
+            // 查詢字串
+            sqlstr = "SELECT * FROM tab_booksort";
+            oledb_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "全部資料 tab_booksort";
+
+            oledb_read_database_dr(db_filename, sqlstr);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //第一名
+            sqlstr = "SELECT first(BookNames) AS Bookname, first(author) AS peo, first(sellsum) AS slm FROM tab_booksort";
+            oledb_read_database(db_filename, sqlstr, dataGridView2);
+
+            //最後一名
+            sqlstr = "SELECT Last(BookNames) AS Bookname, Last(author) AS peo, Last(sellsum) AS slm FROM tab_booksort";
+            oledb_read_database(db_filename, sqlstr, dataGridView3);
+
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             // 資料庫檔案
-            string db_filename = "Northwind.mdb";
+            db_filename = "Northwind.mdb";
             // 查詢字串
-            string sqlstr = "SELECT * FROM 客戶";
+            sqlstr = "SELECT * FROM 客戶";
             oledb_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "全部資料 客戶";
 
@@ -425,18 +485,6 @@ namespace vcs_OleDb
 
         private void button5_Click(object sender, EventArgs e)
         {
-            // 資料庫檔案
-            string db_filename = "Northwind2.mdb";
-
-            // 查詢字串, 取出員工資料表中所有欄位的內容
-            string sqlstr = "SELECT * FROM 員工";
-
-            oledb_read_database(db_filename, sqlstr, dataGridView1);
-
-            // 查詢字串 資料筆數 COUNT
-            sqlstr = "SELECT COUNT(*) FROM 員工";
-            object obj = oledb_get_database_data(db_filename, sqlstr);
-            richTextBox1.Text += "共 " + obj.ToString() + " 筆記錄\n";
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -444,10 +492,9 @@ namespace vcs_OleDb
             //取得部分資料
 
             // 資料庫檔案
-            string db_filename = "Northwind2.mdb";  // 或者 Northwind.mdb ??
-
+            db_filename = "Northwind2.mdb";  // 或者 Northwind.mdb ??
             // 查詢字串, 取出員工資料表中所有欄位的內容
-            string sqlstr = "SELECT * FROM 員工";
+            sqlstr = "SELECT * FROM 員工";
 
             oledb_read_database(db_filename, sqlstr, dataGridView1);
 
@@ -503,18 +550,107 @@ namespace vcs_OleDb
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //系統相關
+            /*
+            // 資料庫檔案
+            db_filename = "Northwind.mdb";
+            OleDbConnectionStringBuilder builder = get_builder(db_filename);
+            using (OleDbConnection cn = new OleDbConnection(builder.ConnectionString))  // 建立資料庫連接對象cn
+            {
+                try
+                {
+                    cn.Open();
+
+                    richTextBox1.Text += "連接字串 : " + cn.ConnectionString + "\n";
+                    richTextBox1.Text += string.Format("資料庫 : {0} 伺服器名稱或檔案名稱： {1}", cn.Database, cn.DataSource) + "\n";
+                    richTextBox1.Text += string.Format("伺服器版本 : {0} 提供者名稱：{1}", cn.ServerVersion, cn.Provider) + "\n";
+                    richTextBox1.Text += "目前的連線狀態 : " + cn.State + "\n";
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += ex.Message + "\n";
+                }
+            }
+            */
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "取得一個資料庫的所有Table名稱\n";
+
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
+
+            OleDbConnectionStringBuilder builder = get_builder(db_filename);
+            using (OleDbConnection cn = new OleDbConnection(builder.ConnectionString))  // 建立資料庫連接對象cn
+            {
+                cn.Open();
+                var schema = cn.GetSchema("TABLES");
+                dataGridView1.DataSource = schema;  // 可以看到所有表單的所有資訊
+                foreach (DataRow row in schema.Rows)
+                {
+                    //只看 "TABLE_NAME" 這一欄的資料
+                    richTextBox1.Text += row["TABLE_NAME"] + "\n";
+                }
+            }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //OleDb
+            //第一種方式
+
+            // 資料庫檔案
+            db_filename = "Northwind.mdb";
+
+            builder = new OleDbConnectionStringBuilder();
+            builder["Provider"] = "Microsoft.Jet.OLEDB.4.0";
+            builder["Data Source"] = "D:\\" + db_filename;
+            builder["User Id"] = "Admin";
+
+            // 使用Add()方法以明確地加入key/value pairs
+            builder.Add("Provider", "Microsoft.Jet.Oledb.4.0");
+            builder.Add("Jet OLEDB:Database Password", "p@ssw0rd");
+            builder.Add("Jet OLEDB:System Database", @"C:\Workgroup.mdb");
+            richTextBox1.Text += builder.ConnectionString + "\n";
+
+            // 清除所有值，並回復到預設值
+            builder.Clear();
+
+            //第二種方式
+            // 資料庫檔案
+            db_filename = "Northwind.mdb";
+            builder = get_builder(db_filename);
+            richTextBox1.Text += builder.ConnectionString + "\n";
+
+            // 呼叫Remove()方法移除key/value pairs 
+            builder.Remove("User ID");
+            richTextBox1.Text += builder.ConnectionString + "\n";
+
+            // 使用indexer加入新值 
+            // necessary.
+            builder["User ID"] = "Admin";
+            builder["Password"] = "p@ssw0rd";
+            richTextBox1.Text += builder.ConnectionString + "\n";
+
+            //第三種方式
+            // 使用indexer加入必要的key/value pairs
+
+            // 資料庫檔案
+            db_filename = "Northwind.mdb";
+            builder = new OleDbConnectionStringBuilder();
+
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //CRUD 增查改刪 0
+
             //(1/4)讀取
 
             // 資料庫檔案
-            string db_filename = "Northwind.mdb";
+            db_filename = "Northwind.mdb";
             // 查詢字串
-            string sqlstr = "SELECT * FROM 客戶";
+            sqlstr = "SELECT * FROM 客戶";
             oledb_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "原本資料";
 
@@ -522,7 +658,7 @@ namespace vcs_OleDb
 
             //(2/4)新增
 
-            string customer_id = "113";  // 最多5拜
+            string customer_id = "ABCDE";  // 最多5拜
             string company_name = "lion-mouse";  // 最多40拜
             string insert_cnstr = "INSERT INTO 客戶 (客戶編號, 公司名稱) VALUES ('{0}', '{1}')";
             // 查詢字串
@@ -537,6 +673,9 @@ namespace vcs_OleDb
             oledb_read_database(db_filename, sqlstr, dataGridView2);
             lb_dgv2.Text = "新增資料後";
 
+            dataGridView2.Rows[92].DefaultCellStyle.BackColor = Color.LightPink;  // 更換背景色, 列
+            dataGridView2.Rows[92].Cells[0].Style.BackColor = Color.Red;  // 改變背景色
+
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             //(3/4)修改
@@ -544,8 +683,8 @@ namespace vcs_OleDb
             // 資料庫檔案
             db_filename = "Northwind.mdb";
 
-            customer_id = "XYZ";  // 最多5拜
-            company_name = "KKKKK again ddddd";  // 最多40拜
+            customer_id = "ABCDE";  // 最多5拜
+            company_name = "lion-mouse-cat-dog";  // 最多40拜
             string contact_name = "david";
             string update_cnstr = "UPDATE 客戶 SET 公司名稱='{0}', 連絡人='{1}' WHERE 客戶編號='{2}'";
             // 查詢字串
@@ -560,14 +699,17 @@ namespace vcs_OleDb
             oledb_read_database(db_filename, sqlstr, dataGridView3);
             lb_dgv3.Text = "修改資料後";
 
+            dataGridView3.Rows[92].DefaultCellStyle.BackColor = Color.LightPink;  // 更換背景色, 列
+            dataGridView3.Rows[92].Cells[0].Style.BackColor = Color.Red;  // 改變背景色
+
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             //(4/4)刪除
 
             // 資料庫檔案
             db_filename = "Northwind.mdb";
-            customer_id = "XYZ";
-            sqlstr = "DELETE * FROM 客戶 " + "WHERE 客戶編號='" + customer_id + "'";
+            customer_id = "ABCDE";
+            sqlstr = "DELETE * FROM 客戶 WHERE 客戶編號='" + customer_id + "'";
 
             oledb_write_database(db_filename, sqlstr);  // 執行SQL命令
 
@@ -587,26 +729,6 @@ namespace vcs_OleDb
 
         private void button12_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "取得一個資料庫的所有Table名稱\n";
-
-            // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
-            // 連接字串
-            //string cnstr = string.Format(db_cnstr, db_filename);
-
-            //這樣會列出所有 實際的資料表（不包含檢視表）
-
-            OleDbConnectionStringBuilder builder = get_builder(db_filename);
-
-            using (OleDbConnection cn = new OleDbConnection(builder.ConnectionString))  // 建立資料庫連接對象cn
-            {
-                cn.Open();
-                var schema = cn.GetSchema("TABLES");
-                foreach (System.Data.DataRow row in schema.Rows)
-                {
-                    richTextBox1.Text += row["TABLE_NAME"] + "\n";
-                }
-            }
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -622,9 +744,9 @@ namespace vcs_OleDb
             richTextBox1.Text += "OleDb 15\n";
 
             // 資料庫檔案
-            string db_filename = "book.TrasformAnalyse.mdb";
+            db_filename = "book.TrasformAnalyse.mdb";
             // 查詢字串
-            string sqlstr = "SELECT * FROM 圖書排行";
+            sqlstr = "SELECT * FROM 圖書排行";
             oledb_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "全部資料 圖書排行";
 
@@ -632,18 +754,17 @@ namespace vcs_OleDb
 
             //利用Trasform分析數據
             // 查詢字串
-            sqlstr = "transform  sum(數量) as 庫存數量 select 語言類別 from 圖書排行 where 語言類別 in( 'c','VB','java') group by (語言類別) pivot 分析時間";
+            sqlstr = "transform SUM(數量) AS 庫存數量 SELECT 語言類別 FROM 圖書排行 WHERE 語言類別 in( 'c','VB','java') GROUP BY (語言類別) pivot 分析時間";
             oledb_read_database(db_filename, sqlstr, dataGridView2);
-        }
 
-        private void button16_Click(object sender, EventArgs e)
-        {
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
             richTextBox1.Text += "OleDb 16\n";
 
             // 資料庫檔案
-            string db_filename = "dt.trasformDynamic.mdb";
+            db_filename = "dt.trasformDynamic.mdb";
             // 查詢字串
-            string sqlstr = "SELECT * FROM 部門銷售額表";
+            sqlstr = "SELECT * FROM 部門銷售額表";
             oledb_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "全部資料 部門銷售額表";
 
@@ -658,8 +779,12 @@ namespace vcs_OleDb
             string column3 = "部門名稱";
 
             // 查詢字串
-            sqlstr = "transform  sum(" + column1 + ") as 數據 select " + column3 + " from 部門銷售額表 where " + column3 + "  in('" + search_dept + "')  group by (" + column3 + ")  pivot " + column2 + "";
+            sqlstr = "transform SUM(" + column1 + ") AS 數據 SELECT " + column3 + " FROM 部門銷售額表 WHERE " + column3 + "  in('" + search_dept + "') GROUP BY (" + column3 + ")  pivot " + column2 + "";
             oledb_read_database(db_filename, sqlstr, dataGridView2);
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -667,9 +792,9 @@ namespace vcs_OleDb
             richTextBox1.Text += "OleDb 17\n";
 
             // 資料庫檔案
-            string db_filename = "db_Test.mdb";
+            db_filename = "db_Test.mdb";
             // 查詢字串
-            string sqlstr = "SELECT * FROM 員工生日表";
+            sqlstr = "SELECT * FROM 員工生日表";
             oledb_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "全部資料 員工生日表";
 
@@ -705,9 +830,9 @@ namespace vcs_OleDb
             //讀取圖片資料庫中的圖片
 
             // 資料庫檔案
-            string db_filename = "books_with_images.mdb";
+            db_filename = "books_with_images.mdb";
             // 查詢字串, 顯示 科系代碼表, 由系碼排序
-            string sqlstr = "SELECT * FROM Books";
+            sqlstr = "SELECT * FROM Books";
             oledb_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "科系代碼資料表, 由系碼排序";
 
@@ -754,34 +879,11 @@ namespace vcs_OleDb
         private void button20_Click(object sender, EventArgs e)
         {
             // EXCEL資料庫檔案
-            //string excel_filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\excel_20210602_131921.xls";
-            string excel_filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_excel\vcs_test_excel.xls";
-
-            // 工作表名稱
-            //string sheetName = "Sheet1";
-
-            /*步驟1：設定Excel的屬性、路徑*/
-            //設定讀取的Excel屬性
+            string excel_filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_excel\vcs_ReadWrite_EXCEL2.xls";
 
             // 連接字串
-            string cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;" +
-                //路徑(檔案讀取路徑)
-            "Data Source=" + excel_filename + ";" +
-                //選擇Excel版本
-                //Excel 12.0 針對Excel 2010、2007版本(OLEDB.12.0)
-                //Excel 8.0 針對Excel 97-2003版本(OLEDB.4.0)
-                //Excel 5.0 針對Excel 97(OLEDB.4.0)
-            "Extended Properties='Excel 8.0;" +
-                //開頭是否為資料
-                //若指定值為 Yes，代表 Excel 檔中的工作表第一列是欄位名稱，oleDB直接從第二列讀取
-                //若指定值為 No，代表 Excel 檔中的工作表第一列就是資料了，沒有欄位名稱，oleDB直接從第一列讀取
-            "HDR=NO;" +
-                //IMEX=0 為「匯出模式」，能對檔案進行寫入的動作。
-                //IMEX=1 為「匯入模式」，能對檔案進行讀取的動作。
-                //IMEX=2 為「連結模式」，能對檔案進行讀取與寫入的動作。
-            "IMEX=1'";
+            cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + excel_filename + ";Extended Properties='Excel 8.0;HDR=NO;IMEX=1'";
 
-            /*步驟2：依照Excel的屬性及路徑開啟檔案*/
             //Excel路徑及相關資訊匯入
             richTextBox1.Text += "讀取 Excel檔案 的 : " + cnstr + "\n";
             using (OleDbConnection cn = new OleDbConnection(cnstr))  // 建立資料庫連接對象cn
@@ -796,16 +898,16 @@ namespace vcs_OleDb
                     //抓取Xls各個Sheet的名稱(+'$')-有的名稱需要加名稱''，有的不用
                     string sheetName0 = (string)row["TABLE_NAME"];
                     richTextBox1.Text += "取得工作表 : " + sheetName0 + "\n";
-                    //工作表名稱有特殊字元、空格，需加'工作表名稱$'，ex：'Sheet_A$'
-                    //工作表名稱沒有特殊字元、空格，需加工作表名稱$，ex：SheetA$
+                    //工作表名稱 有   特殊字元、空格，需加 '工作表名稱$'，ex：'Sheet_A$'
+                    //工作表名稱 沒有 特殊字元、空格，需加  工作表名稱$， ex： SheetA$
                     //所有工作表名稱為Sheet1，讀取此工作表的內容
                     //if (sheetName0 == "SheetA$")
                     if (sheetName0 == "Sheet1$")   //第一頁
                     {
                         // 工作表名稱
-                        string sheetName = "Sheet1";
+                        sheetName = "Sheet1";
                         // 查詢字串, 選取工作表名稱
-                        string sqlstr = "SELECT * FROM [" + sheetName + "$]";
+                        sqlstr = "SELECT * FROM [" + sheetName + "$]";
 
                         OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
                         OleDbDataReader dr = cmd.ExecuteReader();
@@ -833,13 +935,11 @@ namespace vcs_OleDb
             //讀取EXCEL檔案到dataGridView
 
             // EXCEL資料庫檔案
-            string excel_filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\vcs_OleDb\vcs_OleDb\vcs_ReadWrite_EXCEL2.xls";
-
+            string excel_filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_excel\vcs_ReadWrite_EXCEL2.xls";
             // 工作表名稱
-            string sheetName = "Sheet1";
+            sheetName = "Sheet1";
             // 查詢字串, 選取工作表名稱
-            string sqlstr = "SELECT * FROM [" + sheetName + "$]";
-
+            sqlstr = "SELECT * FROM [" + sheetName + "$]";
             oledb_read_excel_database(excel_filename, sqlstr, dataGridView1);
 
             richTextBox1.Text += "------------------------------\n";  // 30個
@@ -850,7 +950,6 @@ namespace vcs_OleDb
             sheetName = "Sheet1";
             // 查詢字串, 選取工作表名稱
             sqlstr = "SELECT * FROM [" + sheetName + "$]";
-
             oledb_read_excel_database(excel_filename, sqlstr, dataGridView2);
 
             richTextBox1.Text += "------------------------------\n";  // 30個
@@ -861,9 +960,7 @@ namespace vcs_OleDb
             sheetName = "BookSell";
             // 查詢字串, 選取工作表名稱
             sqlstr = "SELECT * FROM [" + sheetName + "$]";
-
             oledb_read_excel_database(excel_filename, sqlstr, dataGridView3);
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -877,7 +974,7 @@ namespace vcs_OleDb
             string excel_filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_excel\2006年圖書銷售情況.xls";
 
             // 連接字串
-            string cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;';Data Source=" + excel_filename;
+            cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;';Data Source=" + excel_filename;
 
             using (OleDbConnection cn = new OleDbConnection(cnstr))  // 建立資料庫連接對象cn
             {
@@ -886,7 +983,7 @@ namespace vcs_OleDb
                 //判斷excel的sheet頁數量，查詢第1頁
                 if (dt.Rows.Count > 0)
                 {
-                    string sqlstr = string.Format("SELECT * FROM [{0}]", dt.Rows[0]["TABLE_NAME"]);
+                    sqlstr = string.Format("SELECT * FROM [{0}]", dt.Rows[0]["TABLE_NAME"]);
                     richTextBox1.Text += sqlstr + "\n";
                     OleDbDataAdapter da = new OleDbDataAdapter(sqlstr, cn);
                     DataSet ds = new DataSet();
@@ -900,7 +997,7 @@ namespace vcs_OleDb
 
         private void button23_Click(object sender, EventArgs e)
         {
-            //Excel多檔合一檔
+            // EXCEL資料庫檔案, 多檔合一檔
             string all_files = "D:\\excel_test_data1.xls,D:\\excel_test_data2.xls,D:\\excel_test_data3.xls,";
             string output_file = "D:\\excel_all.xls";
             richTextBox1.Text += "A ";
@@ -948,13 +1045,13 @@ namespace vcs_OleDb
             List<string> P_list_SheetName = new List<string>();//实例化泛型集合对象
 
             // 連接字串
-            string cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;Data Source=" + excel_filename;
+            cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;Data Source=" + excel_filename;
 
-            //连接Excel数据库
+            //連接Excel数据库
             OleDbConnection cn = new OleDbConnection(cnstr);  // 建立資料庫連接對象cn
 
-            cn.Open();//打开数据库连接
-            System.Data.DataTable DTable = cn.GetSchema("Tables");//实例化表对象
+            cn.Open();//打开数据库連接
+            DataTable DTable = cn.GetSchema("Tables");//实例化表对象
             DataTableReader DTReader = new DataTableReader(DTable);//实例化表读取对象
             while (DTReader.Read())//循环读取
             {
@@ -966,7 +1063,7 @@ namespace vcs_OleDb
             }
             DTable = null;//清空表对象
             DTReader = null;//清空表读取对象
-            cn.Close();//关闭数据库连接
+            cn.Close();//关闭数据库連接
             return P_list_SheetName;//返回得到的泛型集合
         }
 
@@ -986,27 +1083,12 @@ namespace vcs_OleDb
         {
             // EXCEL資料庫檔案
             string excel_filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_excel\vcs_ReadWrite_EXCEL2.xls";
+            string HDR = "No;";  // 第一行是否為標題(;結尾區隔)
+            string IMEX = "0';";  // IMEX=1 通知驅動程序始終將「互混」數據列作為文本讀取(;結尾區隔,'文字結尾)
 
-            //2.提供者名稱  Microsoft.Jet.OLEDB.4.0適用於2003以前版本，Microsoft.ACE.OLEDB.12.0 適用於2007以後的版本處理 xlsx 檔案
-            //string ProviderName = "Microsoft.ACE.OLEDB.12.0;";
-            string ProviderName = "Microsoft.Jet.OLEDB.4.0";
-
-            //3.Excel版本，Excel 8.0 針對Excel2000及以上版本，Excel5.0 針對Excel97。
-            string ExtendedString = "'Excel 8.0;";
-
-            //4.第一行是否為標題(;結尾區隔)
-            string HDR = "No;";
-
-            //5.IMEX=1 通知驅動程序始終將「互混」數據列作為文本讀取(;結尾區隔,'文字結尾)
-            string IMEX = "0';";
-
-            //連線字串
-            string cnstr =
-                    "Data Source=" + excel_filename + ";" +
-                    "Provider=" + ProviderName + ";" +
-                    "Extended Properties=" + ExtendedString +
-                    "HDR=" + HDR +
-                    "IMEX=" + IMEX;
+            //連接字串
+            cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;Data Source=" + excel_filename + ";" +
+                    "HDR=" + HDR + "IMEX=" + IMEX;
             richTextBox1.Text += cnstr + "\n";
 
             cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;Data Source=" + excel_filename;
@@ -1015,9 +1097,9 @@ namespace vcs_OleDb
                 cn.Open();
 
                 // 工作表名稱
-                string sheetName = "Sheet1";
+                sheetName = "Sheet1";
                 // 查詢字串, 選取工作表名稱
-                string sqlstr = "SELECT * FROM [" + sheetName + "$]";
+                sqlstr = "SELECT * FROM [" + sheetName + "$]";
                 using (OleDbDataAdapter da = new OleDbDataAdapter(sqlstr, cn))
                 {
                     DataTable dt = new DataTable();
@@ -1036,44 +1118,23 @@ namespace vcs_OleDb
             //excel
 
             // EXCEL資料庫檔案
-            //string excel_filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\excel_20210602_131921.xls";
-            //string excel_filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_excel\excel_20210602_131921.xls";
             //string excel_filename = "C:\\Users\\user\\documents\\visual studio 2010\\Projects\\WindowsFormsApplication1\\WindowsFormsApplication1\\Data\\Book1.xlsx";
 
             // EXCEL資料庫檔案
             string excel_filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_excel\2006年圖書銷售情況.xls";
             // 工作表名稱
-            string sheetName = "BookSell";
+            sheetName = "BookSell";
 
-
-            /*
-            //連線字串
-       //2.提供者名稱  Microsoft.Jet.OLEDB.4.0適用於2003以前版本，Microsoft.ACE.OLEDB.12.0 適用於2007以後的版本處理 xlsx 檔案
-        //private const string ProviderName = "Microsoft.ACE.OLEDB.12.0;";
-        private const string ProviderName = "Microsoft.Jet.OLEDB.4.0;";
-        //3.Excel版本，Excel 8.0 針對Excel2000及以上版本，Excel5.0 針對Excel97。
-        private const string ExtendedString = "'Excel 8.0;";
-        //4.第一行是否為標題
-        private const string Hdr = "Yes;";
-        //5.IMEX=1 通知驅動程序始終將「互混」數據列作為文本讀取
-        private const string IMEX = "0';";
-            string cnstr =
-                    "Data Source=" + excel_filename + ";" +
-                    "Provider=" + ProviderName + ";" +
-                    "Extended Properties=" + ExtendedString + ";" +
-                    "HDR=" + Hdr +
-                    "IMEX=" + IMEX;
-            */
-            //string cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;';Data Source=" + excel_filename;
-            string cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;Data Source=" + excel_filename;
+            //cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;';Data Source=" + excel_filename;
+            cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;Data Source=" + excel_filename;
 
             // 工作表名稱
-            //string sheetName = "Sheet1";
+            //sheetName = "Sheet1";
 
             using (OleDbConnection cn = new OleDbConnection(cnstr))  // 建立資料庫連接對象cn
             {
                 cn.Open();
-                string sqlstr = "select * from [" + sheetName + "$]";
+                sqlstr = "SELECT * FROM [" + sheetName + "$]";
                 using (OleDbDataAdapter dr = new OleDbDataAdapter(sqlstr, cn))
                 {
                     DataTable dt = new DataTable();
@@ -1085,169 +1146,52 @@ namespace vcs_OleDb
 
         private void button26_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "OleDb 26\n";
-
-            // 連接字串
-            string cnstr = string.Empty;
-
-            // 資料庫檔案
-            string db_filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\db_09.mdb";
-
-            FileInfo FInfo = new FileInfo(db_filename);
-            string strExtention = FInfo.Extension;
-            if (strExtention.ToLower() == ".mdb")
-            {
-                //MDB
-                string db_path = "aaaaaaaa";  // 數據庫路徑
-                string user_name = "david";  // 用戶名
-                string password = "12345";  // 密碼
-
-                //使用帳號密碼
-                // 連接字串
-                cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + db_path + ";UID=" + user_name + ";PWD=" + password + ";";
-
-                //不使用帳號密碼
-                // 連接字串
-                cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + db_path + ";";
-            }
-            else if (strExtention.ToLower() == ".xls")
-            {
-                //EXCEL
-                string excel_filename = "bbbbb";  // 數據庫路徑
-                // 連接字串
-                cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;Data Source=" + excel_filename;
-            }
-
-            using (OleDbConnection cn = new OleDbConnection(cnstr))  // 建立資料庫連接對象cn
-            {
-                try
-                {
-                    cn.Open();
-                    richTextBox1.Clear();
-                    richTextBox1.Text = cnstr + "\n连接成功……";
-                }
-                catch
-                {
-                    richTextBox1.Text = "连接失败";
-                }
-            }
         }
 
         private void button27_Click(object sender, EventArgs e)
         {
-            //OleDb 27
-
-            // 資料庫檔案
-            string db_filename = "DBMS.mdb";
-            // 查詢字串
-            string sqlstr = "SELECT * FROM 學生資料表";
-
-            oledb_read_database(db_filename, sqlstr, dataGridView1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //string dbpath = "C:\\Inetpub\\wwwroot\\CS\\ch08\\App_Data\\DBMS.mdb";
-
-            // 資料庫檔案
-            db_filename = "DBMS.mdb";
-            // 查詢字串
-            sqlstr = "SELECT * FROM 學生資料表";
-
-            OleDbConnectionStringBuilder builder = get_builder(db_filename);
-
-            using (OleDbConnection cn = new OleDbConnection(builder.ConnectionString))  // 建立資料庫連接對象cn
-            {
-                cn.Open();  // 打開資料庫連線
-
-                OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
-                OleDbDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
-
-                //顯示資料表欄位名稱
-                for (int i = 0; i <= dr.FieldCount - 1; i++)
-                {
-                    richTextBox1.Text += dr.GetName(i) + "\n";
-                }
-
-                //顯示資料表欄位的所有資料
-                while (dr.Read())
-                {
-                    for (int i = 0; i <= dr.FieldCount - 1; i++)
-                    {
-                        richTextBox1.Text += dr.GetValue(i) + "\n";
-                    }
-                }
-            }
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            // 資料庫檔案
-            db_filename = "DBMS.mdb";
-            builder = get_builder(db_filename);
-
-            //string dbpath = "C:\\Inetpub\\wwwroot\\ASPNET\\ch14\\App_Data\\DBMS.mdb";
-
-            using (OleDbConnection cn = new OleDbConnection(builder.ConnectionString))  // 建立資料庫連接對象cn
-            {
-                cn.Open();  // 打開資料庫連線
-
-                // 查詢字串
-                sqlstr = "SELECT * FROM 學生資料表";
-
-                OleDbDataAdapter da = new OleDbDataAdapter(sqlstr, cn);
-                DataSet ds = new DataSet();
-                //讀取資料表
-                da.Fill(ds, "Table");
-                dataGridView2.DataSource = ds.Tables["Table"];
-            }
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "OleDb 28\n";
+            //臨時看資料庫與刪除資料用
+
+            // 臨時看資料庫
 
             // 資料庫檔案
-            string db_filename = "db_database.mdb";
-
+            db_filename = "Northwind.mdb";
             // 查詢字串
-            string sqlstr = "SELECT * FROM tab_booksort";
+            sqlstr = "SELECT * FROM 客戶";
             oledb_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "全部資料 tab_booksort";
-
-            oledb_read_database_dr(db_filename, sqlstr);
+            lb_dgv1.Text = "全部資料 客戶";
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
-            //第一名
-            sqlstr = "select first(BookNames)as Bookname,first(author)as peo,first(sellsum)as slm from tab_booksort";
-            oledb_read_database(db_filename, sqlstr, dataGridView2);
+            //臨時刪除資料
 
-            //最後一名
-            sqlstr = "select Last(BookNames) as Bookname,Last(author)as peo,Last(sellsum)as slm from tab_booksort";
-            oledb_read_database(db_filename, sqlstr, dataGridView3);
+            sqlstr = "DELETE FROM 員工訊息 WHERE 員工編號=N'" + "P1008" + "'";
+
+            // 用 LIKE 看看 左右模糊
+            sqlstr = "DELETE FROM 員工訊息 WHERE 員工編號 LIKE '%" + "A12345" + "%'";
+
+            // 資料庫檔案
+            db_filename = "Northwind.mdb";
+            string customer_id = "XYZCA";
+            sqlstr = "DELETE * FROM 客戶 WHERE 客戶編號='" + customer_id + "'";
+
+            // 用 LIKE 看看 左右模糊
+            sqlstr = "DELETE FROM 客戶 WHERE 客戶編號 LIKE '%" + "11" + "%'";
+
+            customer_id = "lion-mouse";
+            sqlstr = "DELETE * FROM 客戶 WHERE 公司名稱='" + customer_id + "'";
+
+            // 執行
+            oledb_write_database(db_filename, sqlstr);  // 執行SQL命令
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "OleDb 29\n";
-
-            // 資料庫檔案
-            string db_filename = "db_Test.FormatFind.mdb";
-
-            // 查詢字串
-            string sqlstr = "SELECT * FROM 員工生日表";
-            oledb_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "全部資料 員工生日表";
-
-            oledb_read_database_dr(db_filename, sqlstr);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //在查詢語句中使用格式化函數
-            //將出生日期格式化為「年月日」的格式
-
-            // 查詢字串
-            sqlstr = "SELECT [員工生日表].[員工姓名], 出生日期 as 格式化前出生日期,format([員工生日表].[出生日期],'yyyy年mm月dd日') AS 格式化後出生日期 FROM 員工生日表;";
-            oledb_read_database(db_filename, sqlstr, dataGridView2);
+            //簡易測試
         }
     }
 }
@@ -1282,10 +1226,10 @@ dgv.DataSource = dt;
 /*
 OK 可以讀到資料的
             // 資料庫檔案
-            string db_filename = "Northwind.mdb";
+            db_filename = "Northwind.mdb";
 
             // 查詢字串
-            string sqlstr = "SELECT * FROM 供應商";
+            sqlstr = "SELECT * FROM 供應商";
             oledb_read_database(db_filename, sqlstr, dataGridView1);
 
             // 查詢字串
@@ -1294,33 +1238,8 @@ OK 可以讀到資料的
 */
 
 
-//string cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\\Northwind.mdb";
-//                Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\Northwind.mdb;User ID=Admin
-
-
-
-/*
-            // 初始化ListView
-            listView1.GridLines = true;	//顯示各個記錄的分隔線
-            listView1.FullRowSelect = true;	//要選擇就是一行
-            listView1.View = View.Details;	//定義列表顯示的方式
-            listView1.Scrollable = true;	//需要時候顯示滾動條
-            listView1.MultiSelect = false; // 不可以多行選擇
-            listView1.HeaderStyle = ColumnHeaderStyle.Nonclickable;
-
-            // 針對數據庫的字段名稱，建立與之適應顯示表頭
-
-            listView1.Columns.Add("姓名", 60, HorizontalAlignment.Right);
-            listView1.Columns.Add("住宅電話", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("辦公電話", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("移動電話", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("居住地點", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("工作單位", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("電子郵件", 100, HorizontalAlignment.Left);
-            listView1.Visible = true;
-
-*/
-
+//cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\\Northwind.mdb";
+//         Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\Northwind.mdb;User ID=Admin
 
 /*          
 如果訪問的數據庫是SQL Server 7.0，只需要把上面源代碼中的一條語句：
@@ -1329,18 +1248,6 @@ private static string strConnect = "Provider = Microsoft.Jet.OLEDB.4.0 ; Data So
 private static string strConnect = "Provider=SQLOLEDB.1 ; Persist Security Info=False ; User ID = sa ; Initial Catalog=數據庫名稱; Data Source = 服務器名稱 " ;
 即可。
 */
-
-
-/*
-一律把上改下
-                //string cnstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Persist Security Info=False;Data Source=./2006年圖書銷售情況.xls;Extended Properties=Excel 8.0";
-                //string cnstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Persist Security Info=False;Data Source=D:\\_git\\vcs\\_2.vcs\\my_vcs_lesson_6\\_DB\\__db\\_excel\\2006年圖書銷售情況.xls;Extended Properties=Excel 8.0";
-                //string cnstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Persist Security Info=False;Data Source=" + excel_filename + ";Extended Properties=Excel 8.0";
-
-string cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;Data Source=" + excel_filename;
-
-*/
-
 
 /*
             db_filename = "Northwind.mdb";
@@ -1356,27 +1263,24 @@ string cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;D
 
 /*
             // 資料庫檔案
-            //string db_filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\tt04.mdb";
-            string db_filename = @"D:\Northwind.mdb";
-            string cnstr = string.Empty;
+            //db_filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\tt04.mdb";
+            db_filename = @"D:\Northwind.mdb";
 
-            //Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.Windows.Forms.Application.StartupPath + "\\mydb.accdb;"  accdb
             //cnstr = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + db_filename+ ";Uid=Admin;Pwd=jcvadmin;";              //有帳號密碼的
             //cnstr = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + db_filename+ ";Jet OLEDB:Database Password=workbill"  //有帳號密碼的
-            cnstr = @"Provider=Microsoft.Jet.OLEDB.4.0;" + "Data Source=" + db_filename;
+            cnstr = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + db_filename;
 */
-
-//string cnstr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + db_filename + ";";
 
 //NG
 //string insert_cnstr = "INSERT INTO 客戶 (客戶編號, 公司名稱, 連絡人, 連絡人職稱, 地址, 城市, 行政區, 郵遞區號, 國家地區, 電話, 傳真電話) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}')";
 //sqlstr = string.Format(insert_cnstr, customer_id, company_name, "aa", "aa", "aa", "aa", "aa", "aa", "aa", "aa", "aa");
 
 /*
-            OleDat = new OleDbDataAdapter("select * from 帳目", cn);
-            MaxValue = Convert.ToInt32(new OleDbCommand("select Count(*) from 帳目", cn).ExecuteScalar());
+            OleDat = new OleDbDataAdapter("SELECT * FROM 帳目", cn);
+            MaxValue = Convert.ToInt32(new OleDbCommand("SELECT COUNT(*) FROM 帳目", cn).ExecuteScalar());
 
 //------------------------------------------------------------  # 60個
+
 //"Provider=Microsoft.Jet.OleDb.4.0;"是指數據提供者,這裡使用的是Microsoft Jet引擎,也就是Access中的數據引擎,asp.net就是靠這個和Access的數據庫連接的.
 //"Data Source=XXXXX.mdb"是指明數據源的位置
 
@@ -1385,10 +1289,12 @@ private static string strConnect = "Provider = Microsoft.Jet.OLEDB.4.0 ; Data So
 改變成：
 private static string strConnect = "Provider=SQLOLEDB.1 ; Persist Security Info=False ; User ID = sa ; Initial Catalog=數據庫名稱; Data Source = 服務器名稱 " ;
 即可。
+
 //------------------------------------------------------------  # 60個
+
 OleDbDataAdapter
 DataTable的用法 
-                    OleDbDataAdapter OledbDat = new OleDbDataAdapter("select top 1 * from 帳單", strOledbCon);
+                    OleDbDataAdapter OledbDat = new OleDbDataAdapter("SELECT TOP 1 * FROM 帳單", strOledbCon);
                     DataTable dt = new DataTable();
                     OledbDat.Fill(dt);
                     this.textBox1.Text = dt.Rows[0][0].ToString().Trim();
@@ -1396,14 +1302,30 @@ DataTable的用法
                     this.textBox3.Text = dt.Rows[0][3].ToString().Trim();
                     this.textBox4.Text = dt.Rows[0][4].ToString().Trim();
 
-richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
 
+// 所有 Provider=Microsoft.ACE.OLEDB.12.0;Persist Security Info=False 改成 Provider=Microsoft.Jet.OLEDB.4.0
 
+// 提供者名稱Provider
+   Microsoft.Jet.OLEDB.4.0  適用於2003以前版本，
+   Microsoft.ACE.OLEDB.12.0 適用於2007以後的版本處理 xlsx 檔案, 測試是否給 accdb用?
 
+//選擇Excel版本
+"Extended Properties='Excel 8.0;" +
+        //Excel 12.0 針對Excel 2010、2007版本(OLEDB.12.0)
+        //Excel 8.0 針對Excel 97-2003版本(OLEDB.4.0)
+        //Excel 5.0 針對Excel 97(OLEDB.4.0)
+//Excel版本，Excel 8.0 針對Excel2000及以上版本，Excel5.0 針對Excel97。
+
+第一行是否為標題(;結尾區隔)
+"HDR=NO;" +
+    //HDR開頭是否為資料
+    //HDR若指定值為 Yes，代表 Excel 檔中的工作表第一列是欄位名稱，oleDB直接從第二列讀取
+    //HDR若指定值為 No，代表 Excel 檔中的工作表第一列就是資料了，沒有欄位名稱，oleDB直接從第一列讀取
+
+IMEX=1 通知驅動程序始終將「互混」數據列作為文本讀取(;結尾區隔,'文字結尾)
+"IMEX=1'";
+    //IMEX=0 為「匯出模式」，能對檔案進行寫入的動作。
+    //IMEX=1 為「匯入模式」，能對檔案進行讀取的動作。
+    //IMEX=2 為「連結模式」，能對檔案進行讀取與寫入的動作。
 */
-
-
-
-
-
