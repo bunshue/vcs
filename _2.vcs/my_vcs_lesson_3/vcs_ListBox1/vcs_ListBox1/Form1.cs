@@ -93,11 +93,9 @@ namespace vcs_ListBox1
             drawListBox0.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 0 + dd);
             drawListBox1.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 1 + dd);
 
-            richTextBox1.Size = new Size(240, 765 + 30);
+            richTextBox1.Size = new Size(300, 690 + 40);
             richTextBox1.Location = new Point(x_st + dx * 6 + 100, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-            this.Size = new Size(1640, 830 + 20);
 
             label0.Text = "(0)各種方法";
             label1.Text = "(1)點選+增加";
@@ -111,6 +109,13 @@ namespace vcs_ListBox1
             label9.Text = "(9)";
             label10.Text = "(10)多顏色背景表示\n     自建ListBox";
             label11.Text = "(11)多顏色背景表示\n     建ListBox";
+
+            this.Size = new Size(1640, 750 + 40);
+            this.Text = "vcs_ListBox1";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -243,8 +248,13 @@ namespace vcs_ListBox1
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //將第一個清單方塊選取的科目加到第二個清單方塊
-            listBox1.Items.Add(listBox1.SelectedItems[0].ToString());
+            if (listBox1.SelectedItem.ToString() != null)
+            {
+                richTextBox1.Text += "你選擇了 : " + listBox1.SelectedItem.ToString() + "\n";
+
+                //將第一個清單方塊選取的科目加到第二個清單方塊
+                listBox1.Items.Add(listBox1.SelectedItems[0].ToString());
+            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -358,20 +368,21 @@ namespace vcs_ListBox1
 
             // Draw the picture.
             float scale = PictureHeight / planet.Picture.Height;
-            RectangleF source_rect = new RectangleF(
-                0, 0, planet.Picture.Width, planet.Picture.Height);
+            RectangleF source_rect = new RectangleF(0, 0, planet.Picture.Width, planet.Picture.Height);
             float picture_width = scale * planet.Picture.Width;
-            RectangleF dest_rect = new RectangleF(
-                e.Bounds.Left + ItemMargin8, e.Bounds.Top + ItemMargin8,
-                picture_width, PictureHeight);
+            RectangleF dest_rect = new RectangleF(e.Bounds.Left + ItemMargin8, e.Bounds.Top + ItemMargin8, picture_width, PictureHeight);
             e.Graphics.DrawImage(planet.Picture, dest_rect, source_rect, GraphicsUnit.Pixel);
 
             // See if the item is selected.
             Brush br;
             if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            {
                 br = SystemBrushes.HighlightText;
+            }
             else
+            {
                 br = new SolidBrush(e.ForeColor);
+            }
 
             // Find the area in which to put the text.
             float x = e.Bounds.Left + picture_width + 3 * ItemMargin8;
@@ -434,3 +445,4 @@ namespace vcs_ListBox1
 /*  可搬出
 
 */
+

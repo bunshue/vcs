@@ -420,6 +420,13 @@ namespace vcs_Mix00
         private void button4_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //測試 PadRight / PadLeft
+
+            int number = 1234;
+            richTextBox1.Text += number.ToString() + "\n";
+            richTextBox1.Text += number.ToString().PadRight(20, '-') + "\n";
+            richTextBox1.Text += number.ToString().PadLeft(20, '-') + "\n";
+            richTextBox1.Text += number.ToString() + "\n";
         }
 
         private void button5_Click(object sender, EventArgs e)

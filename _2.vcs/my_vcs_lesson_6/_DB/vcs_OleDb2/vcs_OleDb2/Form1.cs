@@ -14,6 +14,13 @@ namespace vcs_OleDb2
 {
     public partial class Form1 : Form
     {
+        // 資料庫檔案
+        string db_filename = string.Empty;
+        // 連接字串
+        string cnstr = string.Empty;
+        // 查詢字串
+        string sqlstr = string.Empty;
+        // 連接字串
         //string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
         OleDbConnection cn;
 
@@ -203,9 +210,9 @@ namespace vcs_OleDb2
         void Show_Record1()
         {
             // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
+            db_filename = "DBMS1.mdb";
             // 查詢字串, 顯示 科系代碼表, 由系碼排序
-            string sqlstr = "SELECT * FROM 科系代碼資料表 ORDER BY 系碼 ASC";
+            sqlstr = "SELECT * FROM 科系代碼資料表 ORDER BY 系碼 ASC";
             oledb_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "科系代碼資料表, 由系碼排序";
         }
@@ -213,9 +220,9 @@ namespace vcs_OleDb2
         void Show_Record2()
         {
             // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
+            db_filename = "DBMS1.mdb";
             // 查詢字串, 顯示 課程管理表, 由課號排序
-            string sqlstr = "SELECT * FROM 課程資料表 ORDER BY 課號 ASC";
+            sqlstr = "SELECT * FROM 課程資料表 ORDER BY 課號 ASC";
             oledb_read_database(db_filename, sqlstr, dataGridView2);
             lb_dgv2.Text = "課程管理表, 由課號排序";
         }
@@ -223,9 +230,9 @@ namespace vcs_OleDb2
         void Show_Record3()
         {
             // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
+            db_filename = "DBMS1.mdb";
             // 查詢字串, 顯示 學生管理表, 由學號排序
-            string sqlstr = "SELECT 學號,姓名,系名 FROM 學生資料表,科系代碼資料表 WHERE 學生資料表.系碼=科系代碼資料表.系碼 ORDER BY 學號";
+            sqlstr = "SELECT 學號,姓名,系名 FROM 學生資料表,科系代碼資料表 WHERE 學生資料表.系碼=科系代碼資料表.系碼 ORDER BY 學號";
             oledb_read_database(db_filename, sqlstr, dataGridView3);
             lb_dgv3.Text = "學生管理表, 由學號排序";
         }
@@ -233,9 +240,9 @@ namespace vcs_OleDb2
         void Show_Record4()
         {
             // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
+            db_filename = "DBMS1.mdb";
             // 查詢字串, 顯示 學生資料表
-            string sqlstr = "SELECT * FROM 學生資料表";
+            sqlstr = "SELECT * FROM 學生資料表";
             oledb_read_database(db_filename, sqlstr, dataGridView4);
             lb_dgv4.Text = "學生資料表";
         }
@@ -243,13 +250,13 @@ namespace vcs_OleDb2
         void Show_Dept_No()
         {
             // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
+            db_filename = "DBMS1.mdb";
             OleDbConnectionStringBuilder builder = get_builder(db_filename);
             cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
             cn.Open();  // 打開資料庫連線
 
             // 查詢字串, 全部資料 科系代碼資料表
-            string sqlstr = "SELECT Distinct * FROM 科系代碼資料表";
+            sqlstr = "SELECT Distinct * FROM 科系代碼資料表";
 
             OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
             OleDbDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
@@ -264,13 +271,13 @@ namespace vcs_OleDb2
         void Show_Subject()
         {
             // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
+            db_filename = "DBMS1.mdb";
             OleDbConnectionStringBuilder builder = get_builder(db_filename);
             cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
             cn.Open();  // 打開資料庫連線
 
             // 查詢字串
-            string sqlstr = "SELECT * FROM 課程資料表";
+            sqlstr = "SELECT * FROM 課程資料表";
 
             OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
             OleDbDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
@@ -285,13 +292,13 @@ namespace vcs_OleDb2
         void Display_Student()
         {
             // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
+            db_filename = "DBMS1.mdb";
             OleDbConnectionStringBuilder builder = get_builder(db_filename);
             cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
             cn.Open();  // 打開資料庫連線
 
             // 查詢字串
-            string sqlstr = "SELECT * FROM 學生資料表";
+            sqlstr = "SELECT * FROM 學生資料表";
 
             OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
             OleDbDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
@@ -307,11 +314,11 @@ namespace vcs_OleDb2
         private void button1_Click(object sender, EventArgs e)
         {
             // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
+            db_filename = "DBMS1.mdb";
 
             string ID = "D002";
             // 查詢字串
-            string sqlstr = "SELECT * FROM 科系代碼資料表 WHERE 系碼='" + ID + "'";
+            sqlstr = "SELECT * FROM 科系代碼資料表 WHERE 系碼='" + ID + "'";
 
             OleDbConnectionStringBuilder builder = get_builder(db_filename);
             cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
@@ -333,13 +340,13 @@ namespace vcs_OleDb2
         private void button2_Click(object sender, EventArgs e)
         {
             // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
+            db_filename = "DBMS1.mdb";
 
             string ID = "D007";  // 系碼
             string DNAME = "化學系";  // 系名
             string DTEACHER = "Peter";  // 系主任
             // 查詢字串
-            string sqlstr = "INSERT INTO 科系代碼資料表(系碼,系名,系主任) Values('" + ID + "','" + DNAME + "','" + DTEACHER + "')";
+            sqlstr = "INSERT INTO 科系代碼資料表(系碼,系名,系主任) Values('" + ID + "','" + DNAME + "','" + DTEACHER + "')";
 
             oledb_write_database(db_filename, sqlstr);
 
@@ -351,13 +358,13 @@ namespace vcs_OleDb2
         private void button3_Click(object sender, EventArgs e)
         {
             // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
+            db_filename = "DBMS1.mdb";
 
             string ID = "D007";
             string DNAME = "物理系";  // 系名
             string DTEACHER = "David";  // 系主任
             // 查詢字串
-            string sqlstr = "UPDATE 科系代碼資料表 SET 系碼='" + ID + "',系名='" + DNAME + "' ,系主任='" + DTEACHER + "' WHERE 系碼='" + ID + "'";
+            sqlstr = "UPDATE 科系代碼資料表 SET 系碼='" + ID + "',系名='" + DNAME + "' ,系主任='" + DTEACHER + "' WHERE 系碼='" + ID + "'";
 
             OleDbConnectionStringBuilder builder = get_builder(db_filename);
             cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
@@ -377,11 +384,11 @@ namespace vcs_OleDb2
         private void button4_Click(object sender, EventArgs e)
         {
             // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
+            db_filename = "DBMS1.mdb";
 
             string ID = "D007";
             // 查詢字串
-            string sqlstr = "DELETE FROM 科系代碼資料表 WHERE 系碼='" + ID + "'";
+            sqlstr = "DELETE FROM 科系代碼資料表 WHERE 系碼='" + ID + "'";
 
             OleDbConnectionStringBuilder builder = get_builder(db_filename);
             cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
@@ -401,11 +408,11 @@ namespace vcs_OleDb2
         private void button5_Click(object sender, EventArgs e)
         {
             // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
+            db_filename = "DBMS1.mdb";
 
             string CourseID = "C005";  // 課號
             // 查詢字串
-            string sqlstr = "SELECT * FROM 課程資料表 WHERE 課號='" + CourseID + "'";
+            sqlstr = "SELECT * FROM 課程資料表 WHERE 課號='" + CourseID + "'";
 
             OleDbConnectionStringBuilder builder = get_builder(db_filename);
             cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
@@ -428,14 +435,14 @@ namespace vcs_OleDb2
         private void button6_Click(object sender, EventArgs e)
         {
             // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
+            db_filename = "DBMS1.mdb";
 
             string CourseID = "C006";  // 課號
             string CourseName = "離散數學";  // 課名
             string CourseCredit = "3";  // 學分數
             string sp = "選";  // 必選修
             // 查詢字串
-            string sqlstr = "INSERT INTO 課程資料表(課號,課名,學分數,必選修) Values('" + CourseID + "','" + CourseName + "','" + CourseCredit + "','" + sp + "')";
+            sqlstr = "INSERT INTO 課程資料表(課號,課名,學分數,必選修) Values('" + CourseID + "','" + CourseName + "','" + CourseCredit + "','" + sp + "')";
 
             OleDbConnectionStringBuilder builder = get_builder(db_filename);
             cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
@@ -455,14 +462,14 @@ namespace vcs_OleDb2
         private void button7_Click(object sender, EventArgs e)
         {
             // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
+            db_filename = "DBMS1.mdb";
 
             string CourseID = "C006";  // 課號
             string CourseName = "機率";  // 課名
             string CourseCredit = "4";  // 學分數
             string sp = "必";  // 必選修
             // 查詢字串
-            string sqlstr = "UPDATE 課程資料表 SET 課號='" + CourseID + "',課名='" + CourseName + "' ,學分數='" + CourseCredit + "', 必選修='" + sp + "' WHERE 課號='" + CourseID + "'";
+            sqlstr = "UPDATE 課程資料表 SET 課號='" + CourseID + "',課名='" + CourseName + "' ,學分數='" + CourseCredit + "', 必選修='" + sp + "' WHERE 課號='" + CourseID + "'";
 
             OleDbConnectionStringBuilder builder = get_builder(db_filename);
             cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
@@ -482,11 +489,11 @@ namespace vcs_OleDb2
         private void button8_Click(object sender, EventArgs e)
         {
             // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
+            db_filename = "DBMS1.mdb";
 
             string CourseID = "C006";  // 課號
             // 查詢字串
-            string sqlstr = "DELETE FROM 課程資料表 WHERE 課號='" + CourseID + "'";
+            sqlstr = "DELETE FROM 課程資料表 WHERE 課號='" + CourseID + "'";
 
             OleDbConnectionStringBuilder builder = get_builder(db_filename);
             cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
@@ -506,11 +513,11 @@ namespace vcs_OleDb2
         private void button9_Click(object sender, EventArgs e)
         {
             // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
+            db_filename = "DBMS1.mdb";
 
             string ID = "96003";  // 學號
             // 查詢字串
-            string sqlstr = "SELECT * FROM 學生資料表 WHERE 學號='" + ID + "'";
+            sqlstr = "SELECT * FROM 學生資料表 WHERE 學號='" + ID + "'";
 
             OleDbConnectionStringBuilder builder = get_builder(db_filename);
             cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
@@ -558,13 +565,13 @@ namespace vcs_OleDb2
             //科系代碼資料表
 
             // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
+            db_filename = "DBMS1.mdb";
 
             string ID = "96006";  // 學號
             string NAME = "劉備";  // 姓名
             string DID = "D008";  // 系碼
             // 查詢字串
-            string sqlstr = "INSERT INTO 學生資料表(學號,姓名,系碼) Values('" + ID + "','" + NAME + "','" + DID + "')";
+            sqlstr = "INSERT INTO 學生資料表(學號,姓名,系碼) Values('" + ID + "','" + NAME + "','" + DID + "')";
 
             OleDbConnectionStringBuilder builder = get_builder(db_filename);
             cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
@@ -584,13 +591,13 @@ namespace vcs_OleDb2
         private void button11_Click(object sender, EventArgs e)
         {
             // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
+            db_filename = "DBMS1.mdb";
 
             string ID = "96005";  // 學號
             string NAME = "李白";  // 姓名
             string DID = "D008";  // 系碼
             // 查詢字串
-            string sqlstr = "UPDATE 學生資料表 SET 學號='" + ID + "',姓名='" + NAME + "' ,系碼='" + DID + "' WHERE 學號='" + ID + "'";
+            sqlstr = "UPDATE 學生資料表 SET 學號='" + ID + "',姓名='" + NAME + "' ,系碼='" + DID + "' WHERE 學號='" + ID + "'";
 
             OleDbConnectionStringBuilder builder = get_builder(db_filename);
             cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
@@ -610,10 +617,10 @@ namespace vcs_OleDb2
         private void button12_Click(object sender, EventArgs e)
         {
             // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
+            db_filename = "DBMS1.mdb";
             string ID = "96005";  // 學號
             // 查詢字串
-            string sqlstr = "DELETE FROM 學生資料表 WHERE 學號='" + ID + "'";
+            sqlstr = "DELETE FROM 學生資料表 WHERE 學號='" + ID + "'";
 
             OleDbConnectionStringBuilder builder = get_builder(db_filename);
             cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
@@ -632,10 +639,10 @@ namespace vcs_OleDb2
         private void button13_Click(object sender, EventArgs e)
         {
             // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
+            db_filename = "DBMS1.mdb";
             string CourseCredit = "3";  // 學分數
             // 查詢字串
-            string sqlstr = "SELECT 學生資料表.學號,姓名,課名,學分數 FROM 科系代碼資料表,學生資料表,選課資料表,課程資料表 WHERE 學生資料表.系碼=科系代碼資料表.系碼 AND 學生資料表.學號=選課資料表.學號 AND 選課資料表.課號=課程資料表.課號 AND 選課資料表.學號='" + CourseCredit + "'";
+            sqlstr = "SELECT 學生資料表.學號,姓名,課名,學分數 FROM 科系代碼資料表,學生資料表,選課資料表,課程資料表 WHERE 學生資料表.系碼=科系代碼資料表.系碼 AND 學生資料表.學號=選課資料表.學號 AND 選課資料表.課號=課程資料表.課號 AND 選課資料表.學號='" + CourseCredit + "'";
 
             OleDbConnectionStringBuilder builder = get_builder(db_filename);
             cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
@@ -655,11 +662,11 @@ namespace vcs_OleDb2
         private void button14_Click(object sender, EventArgs e)
         {
             // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
+            db_filename = "DBMS1.mdb";
             string Str1 = "aaaa";  // 學號
             string Str2 = "bbbb";  // 課號
             // 查詢字串
-            string sqlstr = "INSERT INTO 選課資料表(學號,課號) Values('" + Str1 + "','" + Str2 + "')";
+            sqlstr = "INSERT INTO 選課資料表(學號,課號) Values('" + Str1 + "','" + Str2 + "')";
 
             OleDbConnectionStringBuilder builder = get_builder(db_filename);
 
@@ -675,11 +682,11 @@ namespace vcs_OleDb2
         private void button15_Click(object sender, EventArgs e)
         {
             // 資料庫檔案
-            string db_filename = "DBMS1.mdb";
+            db_filename = "DBMS1.mdb";
 
             string Stu_ID = "96001";
             // 查詢字串
-            string sqlstr = "SELECT * FROM 學生資料表 WHERE 學號='" + Stu_ID + "' ";
+            sqlstr = "SELECT * FROM 學生資料表 WHERE 學號='" + Stu_ID + "' ";
 
             OleDbConnectionStringBuilder builder = get_builder(db_filename);
             cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
