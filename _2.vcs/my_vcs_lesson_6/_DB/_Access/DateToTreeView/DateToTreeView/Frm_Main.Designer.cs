@@ -28,14 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.清空内容ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.追加节点ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.操作类型ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -43,15 +39,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // 清空内容ToolStripMenuItem
-            // 
-            this.清空内容ToolStripMenuItem.Name = "清空内容ToolStripMenuItem";
-            this.清空内容ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.清空内容ToolStripMenuItem.Text = "清空内容";
-            this.清空内容ToolStripMenuItem.Click += new System.EventHandler(this.清空内容ToolStripMenuItem_Click);
             // 
             // dataGridView1
             // 
@@ -67,36 +55,20 @@
             this.dataGridView1.TabIndex = 5;
             this.dataGridView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseDown);
             // 
-            // 追加节点ToolStripMenuItem
-            // 
-            this.追加节点ToolStripMenuItem.Name = "追加节点ToolStripMenuItem";
-            this.追加节点ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.追加节点ToolStripMenuItem.Text = "追加节点";
-            this.追加节点ToolStripMenuItem.Click += new System.EventHandler(this.追加节点ToolStripMenuItem_Click);
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dataGridView1);
-            this.groupBox1.Location = new System.Drawing.Point(0, 26);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(318, 392);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "DataGridView控件";
             // 
-            // 操作类型ToolStripMenuItem
-            // 
-            this.操作类型ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.追加节点ToolStripMenuItem,
-            this.清空内容ToolStripMenuItem});
-            this.操作类型ToolStripMenuItem.Name = "操作类型ToolStripMenuItem";
-            this.操作类型ToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
-            this.操作类型ToolStripMenuItem.Text = "操作类型";
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.treeView1);
-            this.groupBox2.Location = new System.Drawing.Point(324, 26);
+            this.groupBox2.Location = new System.Drawing.Point(336, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(315, 392);
             this.groupBox2.TabIndex = 15;
@@ -112,19 +84,9 @@
             this.treeView1.TabIndex = 4;
             this.treeView1.MouseEnter += new System.EventHandler(this.treeView1_MouseEnter);
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.操作类型ToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(965, 24);
-            this.menuStrip1.TabIndex = 16;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(0, 424);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 410);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(637, 245);
             this.richTextBox1.TabIndex = 18;
@@ -132,67 +94,61 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(652, 424);
+            this.button1.Location = new System.Drawing.Point(670, 24);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(92, 43);
             this.button1.TabIndex = 19;
-            this.button1.Text = "button1";
+            this.button1.Text = "追加節點";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(652, 473);
+            this.button2.Location = new System.Drawing.Point(670, 73);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(92, 43);
             this.button2.TabIndex = 20;
-            this.button2.Text = "button2";
+            this.button2.Text = "清空內容";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(652, 522);
+            this.button3.Location = new System.Drawing.Point(670, 122);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(92, 43);
             this.button3.TabIndex = 21;
-            this.button3.Text = "button3";
+            this.button3.Text = "test";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(965, 684);
+            this.ClientSize = new System.Drawing.Size(801, 665);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Frm_Main";
             this.Text = "从DataGridView中拖放数据到TreeView";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ToolStripMenuItem 清空内容ToolStripMenuItem;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.ToolStripMenuItem 追加节点ToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ToolStripMenuItem 操作类型ToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;

@@ -68,6 +68,21 @@
             this.lb_dgv1 = new System.Windows.Forms.Label();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.txtValue3 = new System.Windows.Forms.TextBox();
+            this.cboField3 = new System.Windows.Forms.ComboBox();
+            this.cboOperator3 = new System.Windows.Forms.ComboBox();
+            this.txtValue2 = new System.Windows.Forms.TextBox();
+            this.cboField2 = new System.Windows.Forms.ComboBox();
+            this.cboOperator2 = new System.Windows.Forms.ComboBox();
+            this.txtValue1 = new System.Windows.Forms.TextBox();
+            this.cboField1 = new System.Windows.Forms.ComboBox();
+            this.cboOperator1 = new System.Windows.Forms.ComboBox();
+            this.txtValue0 = new System.Windows.Forms.TextBox();
+            this.cboField0 = new System.Windows.Forms.ComboBox();
+            this.cboOperator0 = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
@@ -472,11 +487,197 @@
             this.dataGridView3.Size = new System.Drawing.Size(100, 100);
             this.dataGridView3.TabIndex = 173;
             // 
+            // txtValue3
+            // 
+            this.txtValue3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtValue3.Location = new System.Drawing.Point(761, 530);
+            this.txtValue3.Name = "txtValue3";
+            this.txtValue3.Size = new System.Drawing.Size(148, 22);
+            this.txtValue3.TabIndex = 190;
+            // 
+            // cboField3
+            // 
+            this.cboField3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboField3.FormattingEnabled = true;
+            this.cboField3.Location = new System.Drawing.Point(768, 276);
+            this.cboField3.Name = "cboField3";
+            this.cboField3.Size = new System.Drawing.Size(138, 20);
+            this.cboField3.TabIndex = 188;
+            // 
+            // cboOperator3
+            // 
+            this.cboOperator3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboOperator3.FormattingEnabled = true;
+            this.cboOperator3.Items.AddRange(new object[] {
+            "",
+            "<",
+            ">",
+            "=",
+            "<=",
+            ">=",
+            "<>",
+            "LIKE"});
+            this.cboOperator3.Location = new System.Drawing.Point(768, 408);
+            this.cboOperator3.Name = "cboOperator3";
+            this.cboOperator3.Size = new System.Drawing.Size(66, 20);
+            this.cboOperator3.TabIndex = 189;
+            // 
+            // txtValue2
+            // 
+            this.txtValue2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtValue2.Location = new System.Drawing.Point(761, 505);
+            this.txtValue2.Name = "txtValue2";
+            this.txtValue2.Size = new System.Drawing.Size(148, 22);
+            this.txtValue2.TabIndex = 187;
+            // 
+            // cboField2
+            // 
+            this.cboField2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboField2.FormattingEnabled = true;
+            this.cboField2.Location = new System.Drawing.Point(768, 250);
+            this.cboField2.Name = "cboField2";
+            this.cboField2.Size = new System.Drawing.Size(138, 20);
+            this.cboField2.TabIndex = 185;
+            // 
+            // cboOperator2
+            // 
+            this.cboOperator2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboOperator2.FormattingEnabled = true;
+            this.cboOperator2.Items.AddRange(new object[] {
+            "",
+            "<",
+            ">",
+            "=",
+            "<=",
+            ">=",
+            "<>",
+            "LIKE"});
+            this.cboOperator2.Location = new System.Drawing.Point(768, 382);
+            this.cboOperator2.Name = "cboOperator2";
+            this.cboOperator2.Size = new System.Drawing.Size(66, 20);
+            this.cboOperator2.TabIndex = 186;
+            // 
+            // txtValue1
+            // 
+            this.txtValue1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtValue1.Location = new System.Drawing.Point(761, 480);
+            this.txtValue1.Name = "txtValue1";
+            this.txtValue1.Size = new System.Drawing.Size(148, 22);
+            this.txtValue1.TabIndex = 184;
+            // 
+            // cboField1
+            // 
+            this.cboField1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboField1.FormattingEnabled = true;
+            this.cboField1.Location = new System.Drawing.Point(768, 224);
+            this.cboField1.Name = "cboField1";
+            this.cboField1.Size = new System.Drawing.Size(138, 20);
+            this.cboField1.TabIndex = 182;
+            // 
+            // cboOperator1
+            // 
+            this.cboOperator1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboOperator1.FormattingEnabled = true;
+            this.cboOperator1.Items.AddRange(new object[] {
+            "",
+            "<",
+            ">",
+            "=",
+            "<=",
+            ">=",
+            "<>",
+            "LIKE"});
+            this.cboOperator1.Location = new System.Drawing.Point(768, 356);
+            this.cboOperator1.Name = "cboOperator1";
+            this.cboOperator1.Size = new System.Drawing.Size(66, 20);
+            this.cboOperator1.TabIndex = 183;
+            // 
+            // txtValue0
+            // 
+            this.txtValue0.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtValue0.Location = new System.Drawing.Point(761, 455);
+            this.txtValue0.Name = "txtValue0";
+            this.txtValue0.Size = new System.Drawing.Size(148, 22);
+            this.txtValue0.TabIndex = 181;
+            // 
+            // cboField0
+            // 
+            this.cboField0.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboField0.FormattingEnabled = true;
+            this.cboField0.Location = new System.Drawing.Point(768, 198);
+            this.cboField0.Name = "cboField0";
+            this.cboField0.Size = new System.Drawing.Size(138, 20);
+            this.cboField0.TabIndex = 179;
+            // 
+            // cboOperator0
+            // 
+            this.cboOperator0.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboOperator0.FormattingEnabled = true;
+            this.cboOperator0.Items.AddRange(new object[] {
+            "",
+            "<",
+            ">",
+            "=",
+            "<=",
+            ">=",
+            "<>",
+            "LIKE"});
+            this.cboOperator0.Location = new System.Drawing.Point(768, 330);
+            this.cboOperator0.Name = "cboOperator0";
+            this.cboOperator0.Size = new System.Drawing.Size(66, 20);
+            this.cboOperator0.TabIndex = 180;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(766, 182);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(31, 12);
+            this.label1.TabIndex = 191;
+            this.label1.Text = "Field:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(766, 312);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(49, 12);
+            this.label2.TabIndex = 192;
+            this.label2.Text = "Operator:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(766, 437);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 12);
+            this.label3.TabIndex = 193;
+            this.label3.Text = "Value:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 642);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtValue3);
+            this.Controls.Add(this.cboField3);
+            this.Controls.Add(this.cboOperator3);
+            this.Controls.Add(this.txtValue2);
+            this.Controls.Add(this.cboField2);
+            this.Controls.Add(this.cboOperator2);
+            this.Controls.Add(this.txtValue1);
+            this.Controls.Add(this.cboField1);
+            this.Controls.Add(this.cboOperator1);
+            this.Controls.Add(this.txtValue0);
+            this.Controls.Add(this.cboField0);
+            this.Controls.Add(this.cboOperator0);
             this.Controls.Add(this.lb_dgv4);
             this.Controls.Add(this.lb_dgv3);
             this.Controls.Add(this.lb_dgv2);
@@ -571,6 +772,21 @@
         private System.Windows.Forms.Label lb_dgv1;
         private System.Windows.Forms.DataGridView dataGridView4;
         private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.TextBox txtValue3;
+        private System.Windows.Forms.ComboBox cboField3;
+        private System.Windows.Forms.ComboBox cboOperator3;
+        private System.Windows.Forms.TextBox txtValue2;
+        private System.Windows.Forms.ComboBox cboField2;
+        private System.Windows.Forms.ComboBox cboOperator2;
+        private System.Windows.Forms.TextBox txtValue1;
+        private System.Windows.Forms.ComboBox cboField1;
+        private System.Windows.Forms.ComboBox cboOperator1;
+        private System.Windows.Forms.TextBox txtValue0;
+        private System.Windows.Forms.ComboBox cboField0;
+        private System.Windows.Forms.ComboBox cboOperator0;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }
 

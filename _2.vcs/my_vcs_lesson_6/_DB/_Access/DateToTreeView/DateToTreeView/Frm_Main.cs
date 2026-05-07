@@ -16,6 +16,9 @@ namespace DateToTreeView
         //声明本程序需要的变量
         public static string[,] recordInfo;
 
+        bool flag_add_node = true;  //追加節點
+        bool flag_clear_data = false; //清空內容
+
         public Frm_Main()
         {
             InitializeComponent();
@@ -35,7 +38,7 @@ namespace DateToTreeView
             TreeNode treeNode = new TreeNode("用户信息", 0, 0);
             treeView1.Nodes.Add(treeNode);
             //默认情况下追加节点
-            追加节点ToolStripMenuItem.Checked = true;
+            flag_add_node = true;
         }
 
         //DataGridView的按下鼠标事件
@@ -63,7 +66,7 @@ namespace DateToTreeView
         //当鼠标进入TreeView控件时，触发的操作
         private void treeView1_MouseEnter(object sender, EventArgs e)
         {
-            if (追加节点ToolStripMenuItem.Checked == true)
+            if (flag_add_node == true)
             {
                 //#region 代码区域
                 if (recordInfo != null && recordInfo.Length != 0)
@@ -106,7 +109,7 @@ namespace DateToTreeView
                 //#endregion
             }
 
-            if (清空内容ToolStripMenuItem.Checked == true)
+            if (flag_clear_data == true)
             {
                 if (treeView1.SelectedNode.Nodes.Count != 0)
                 {
@@ -154,8 +157,8 @@ namespace DateToTreeView
                     }
 
                     //#endregion
-                    追加节点ToolStripMenuItem.Checked = true;
-                    清空内容ToolStripMenuItem.Checked = false;
+                    flag_add_node = true;
+                    flag_clear_data = false;
                 }
             }
         }
@@ -163,21 +166,40 @@ namespace DateToTreeView
         //#region 默认项的设置
         private void 清空内容ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (追加节点ToolStripMenuItem.Checked == true)
+            if (flag_add_node == true)
             {
-                清空内容ToolStripMenuItem.Checked = true;
-                追加节点ToolStripMenuItem.Checked = false;
+                flag_clear_data = true;
+                flag_add_node = false;
             }
         }
 
         private void 追加节点ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (清空内容ToolStripMenuItem.Checked == true)
+            if (flag_clear_data == true)
             {
-                追加节点ToolStripMenuItem.Checked = true;
-                清空内容ToolStripMenuItem.Checked = false;
+                flag_add_node = true;
+                flag_clear_data = false;
             }
         }
         //#endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //追加節點
+            flag_add_node = true;  //追加節點
+            flag_clear_data = false; //清空內容
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //清空內容
+            flag_add_node = false;  //追加節點
+            flag_clear_data = true; //清空內容
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
