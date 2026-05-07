@@ -40,6 +40,39 @@ namespace vcs_DB_Access1
 
             // Prepare the form for use.
             PrepareForm(filename, "BookInfo");
+
+
+            test(filename, "BookInfo");
+        }
+
+        private void test(string db_name, string table_name)
+        {
+            TableName = table_name;
+
+            string cnstr = "Provider=Microsoft.ACE.OLEDB.12.0;" + "Data Source=" + db_name + ";" + "Mode=Share Deny None";
+
+            string sqlstr = "SELECT * FROM " + table_name;
+
+            OleDbConnection cn = new OleDbConnection(cnstr);
+
+            richTextBox1.Text += cnstr + "\n\n";
+
+            richTextBox1.Text += "\n\n";
+
+            OleDbCommand cmd = new OleDbCommand();
+            cmd.Connection = cn;
+            cmd.CommandText = sqlstr;
+
+            cn.Open();
+
+            // 建構DataSet及其組成分子
+            DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+            OleDbDataAdapter da = new OleDbDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
+            // da.Fill(ds, "table");  // da將查詢的結果填充至數據集ds, 指定TableName為"table"
+            da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+            //dataGridView1.DataSource = ds.Tables["table"];  // DGV設置數據源, same
+            dataGridView1.DataSource = ds.Tables[0];  // DGV設置數據源
+            richTextBox1.Text += "取得資料 : " + ds.Tables[0].Rows.Count.ToString() + " 筆\n";
         }
 
         // Make a list of the table's field names and prepare the first ComboBox.
@@ -49,6 +82,10 @@ namespace vcs_DB_Access1
 
             // Make the connection object.
             Conn = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;" + "Data Source=" + db_name + ";" + "Mode=Share Deny None");
+
+            richTextBox1.Text += "Provider=Microsoft.ACE.OLEDB.12.0;" + "Data Source=" + db_name + ";" + "Mode=Share Deny None" + "\n";
+
+            richTextBox1.Text += "\n\n";
 
             // Get the fields in the BookInfo table.
             // Make a command object to represent the command.
@@ -210,3 +247,6 @@ namespace vcs_DB_Access1
         }
     }
 }
+
+
+//cmd.CommandText = "SELECT TOP 1 * FROM " + table_name;

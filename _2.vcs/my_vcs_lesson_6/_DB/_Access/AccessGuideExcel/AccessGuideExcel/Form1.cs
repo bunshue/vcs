@@ -11,7 +11,7 @@ namespace AccessGuideExcel
 {
     public partial class Form1 : Form
     {
-        string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\db1.mdb";
+        string db_filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_access\db1.mdb";
 
         public Form1()
         {
@@ -20,14 +20,14 @@ namespace AccessGuideExcel
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            textBox1.Text = filename;
+            textBox1.Text = db_filename;
 
-            GetTable(filename, comboBox1);
+            GetTable(db_filename, comboBox1);
 
             textBox2.Text = Application.StartupPath;
         }
 
-        public void AccessGuideJoinExcel(string Access, string AccTable, string filename)
+        public void AccessGuideJoinExcel(string Access, string AccTable, string excel_filename)
         {
             try
             {
@@ -40,13 +40,13 @@ namespace AccessGuideExcel
                 tem_comm = new System.Data.OleDb.OleDbCommand(tem_sql, tem_conn);//實例化OleDbCommand類
                 int RecordCount = (int)tem_comm.ExecuteScalar();//執行SQL語句，並傳回結果
                 //每個Sheet只能最多保存65536條記錄。
-                tem_sql = @"select top 65535 * into [Excel 8.0;database=" + filename + @".xls].[Sheet1] from Paging";//記錄連接Excel的語句
+                tem_sql = @"select top 65535 * into [Excel 8.0;database=" + excel_filename + @".xls].[Sheet1] from Paging";//記錄連接Excel的語句
                 tem_comm = new System.Data.OleDb.OleDbCommand(tem_sql, tem_conn);//實例化OleDbCommand類
                 tem_comm.ExecuteNonQuery();//執行SQL語句，將數據表的內容導入到Excel中
                 tem_conn.Close();//關閉連接
                 tem_conn.Dispose();//釋放資源
                 tem_conn = null;
-                richTextBox1.Text += "導入完成, 檔名 : " + filename + "\n";
+                richTextBox1.Text += "導入完成, 檔名 : " + excel_filename + "\n";
             }
             catch
             {
@@ -56,6 +56,8 @@ namespace AccessGuideExcel
 
         public void GetTable(string Apath, ComboBox ComBox)
         {
+            richTextBox1.Text += "GetTable : " + Apath + "\n";
+
             string connstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Apath + ";Persist Security Info=True";
             System.Data.OleDb.OleDbConnection tem_OleConn = new System.Data.OleDb.OleDbConnection(connstr);
             tem_OleConn.Open();
@@ -77,10 +79,10 @@ namespace AccessGuideExcel
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = "xls_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xls";
-            textBox3.Text = filename;
+            string excel_filename = "tmp_xls_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".xls";
+            textBox3.Text = excel_filename;
 
-            AccessGuideJoinExcel(textBox1.Text, comboBox1.Text, textBox2.Text + "\\" + filename);
+            AccessGuideJoinExcel(textBox1.Text, comboBox1.Text, textBox2.Text + "\\" + excel_filename);
         }
     }
 }

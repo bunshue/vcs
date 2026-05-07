@@ -1732,3 +1732,31 @@ https://www.itread01.com/content/1546725619.html
 
 */
 
+
+
+
+
+/*
+            // 初始化ListView
+            listView1.GridLines = true;	//顯示各個記錄的分隔線
+            listView1.FullRowSelect = true;	//要選擇就是一行
+            listView1.View = View.Details;	//定義列表顯示的方式
+            listView1.Scrollable = true;	//需要時候顯示滾動條
+            listView1.MultiSelect = false; // 不可以多行選擇
+            listView1.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+
+            // 針對數據庫的字段名稱，建立與之適應顯示表頭
+
+            listView1.Columns.Add("姓名", 60, HorizontalAlignment.Right);
+            listView1.Columns.Add("住宅電話", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("辦公電話", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("移動電話", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("居住地點", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("工作單位", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("電子郵件", 100, HorizontalAlignment.Left);
+            listView1.Visible = true;
+
+*/
+
+
+

@@ -47,6 +47,7 @@
             this.dgvBookInfo = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBookInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -54,7 +55,7 @@
             // btnQuery
             // 
             this.btnQuery.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnQuery.Location = new System.Drawing.Point(503, 123);
+            this.btnQuery.Location = new System.Drawing.Point(643, 123);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 21);
             this.btnQuery.TabIndex = 12;
@@ -122,7 +123,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtValue0.Location = new System.Drawing.Point(231, 24);
             this.txtValue0.Name = "txtValue0";
-            this.txtValue0.Size = new System.Drawing.Size(942, 22);
+            this.txtValue0.Size = new System.Drawing.Size(1221, 22);
             this.txtValue0.TabIndex = 2;
             // 
             // txtValue1
@@ -131,7 +132,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtValue1.Location = new System.Drawing.Point(231, 49);
             this.txtValue1.Name = "txtValue1";
-            this.txtValue1.Size = new System.Drawing.Size(942, 22);
+            this.txtValue1.Size = new System.Drawing.Size(1221, 22);
             this.txtValue1.TabIndex = 5;
             // 
             // cboField1
@@ -167,7 +168,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtValue3.Location = new System.Drawing.Point(231, 99);
             this.txtValue3.Name = "txtValue3";
-            this.txtValue3.Size = new System.Drawing.Size(942, 22);
+            this.txtValue3.Size = new System.Drawing.Size(1221, 22);
             this.txtValue3.TabIndex = 11;
             // 
             // cboField3
@@ -203,7 +204,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtValue2.Location = new System.Drawing.Point(231, 74);
             this.txtValue2.Name = "txtValue2";
-            this.txtValue2.Size = new System.Drawing.Size(942, 22);
+            this.txtValue2.Size = new System.Drawing.Size(1221, 22);
             this.txtValue2.TabIndex = 8;
             // 
             // cboField2
@@ -241,13 +242,13 @@
             this.dgvBookInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBookInfo.Location = new System.Drawing.Point(15, 150);
             this.dgvBookInfo.Name = "dgvBookInfo";
-            this.dgvBookInfo.Size = new System.Drawing.Size(563, 486);
+            this.dgvBookInfo.Size = new System.Drawing.Size(582, 486);
             this.dgvBookInfo.TabIndex = 13;
             // 
             // button1
             // 
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button1.Location = new System.Drawing.Point(599, 123);
+            this.button1.Location = new System.Drawing.Point(739, 123);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 21);
             this.button1.TabIndex = 14;
@@ -261,14 +262,23 @@
             this.dataGridView1.Location = new System.Drawing.Point(599, 150);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(574, 486);
+            this.dataGridView1.Size = new System.Drawing.Size(504, 486);
             this.dataGridView1.TabIndex = 15;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(1109, 150);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(322, 486);
+            this.richTextBox1.TabIndex = 16;
+            this.richTextBox1.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1185, 655);
+            this.ClientSize = new System.Drawing.Size(1464, 655);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dgvBookInfo);
@@ -319,6 +329,7 @@
         private System.Windows.Forms.DataGridView dgvBookInfo;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
 
     }
 }
