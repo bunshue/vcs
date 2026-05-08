@@ -917,7 +917,7 @@ richTextBox1.Text += p.A.ToString("X2") + p.R.ToString("X2") + p.G.ToString("X2"
 
 畫布轉換矩陣的平移設定 (↑↓←→按鍵)
 
-        Bitmap bm = new Bitmap(Properties.Resources.Butterfly);
+        Bitmap bitmap1 = new Bitmap(Properties.Resources.Butterfly);
         Point pos = new Point(); // 圖形的位置
                 // 向上
                 pos = new Point(pos.X, pos.Y - 10);
@@ -932,8 +932,8 @@ richTextBox1.Text += p.A.ToString("X2") + p.R.ToString("X2") + p.G.ToString("X2"
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.TranslateTransform(pos.X, pos.Y);
-            e.Graphics.DrawImage(bm, 0, 0); // 繪出圖形
-            //e.Graphics.DrawImage(bm, pos); // 繪出圖形
+            e.Graphics.DrawImage(bitmap1, 0, 0); // 繪出圖形
+            //e.Graphics.DrawImage(bitmap1, pos); // 繪出圖形
         }
 
 
@@ -1667,31 +1667,31 @@ richTextBox1.Text += "影像旋轉，存檔完成，檔名：" + filename + "\n"
         // Save the file with the appropriate format.
         // Throw a NotSupportedException if the file
         // has an unknown extension.
-        public void SaveBitmapUsingExtension(Bitmap bm,
+        public void SaveBitmapUsingExtension(Bitmap bitmap1,
             string filename)
         {
             string extension = Path.GetExtension(filename);
             switch (extension.ToLower())
             {
                 case ".bmp":
-                    bm.Save(filename, ImageFormat.Bmp);
+                    bitmap1.Save(filename, ImageFormat.Bmp);
                     break;
                 case ".exif":
-                    bm.Save(filename, ImageFormat.Exif);
+                    bitmap1.Save(filename, ImageFormat.Exif);
                     break;
                 case ".gif":
-                    bm.Save(filename, ImageFormat.Gif);
+                    bitmap1.Save(filename, ImageFormat.Gif);
                     break;
                 case ".jpg":
                 case ".jpeg":
-                    bm.Save(filename, ImageFormat.Jpeg);
+                    bitmap1.Save(filename, ImageFormat.Jpeg);
                     break;
                 case ".png":
-                    bm.Save(filename, ImageFormat.Png);
+                    bitmap1.Save(filename, ImageFormat.Png);
                     break;
                 case ".tif":
                 case ".tiff":
-                    bm.Save(filename, ImageFormat.Tiff);
+                    bitmap1.Save(filename, ImageFormat.Tiff);
                     break;
                 default:
                     throw new NotSupportedException(
@@ -2021,30 +2021,30 @@ vcs 之 radioButton 可以用Image, Text設為空
 
 SaveBitmapUsingExtension(TheBitmap, sfdImage.FileName);
 
-        public void SaveBitmapUsingExtension(Bitmap bm, string filename)
+        public void SaveBitmapUsingExtension(Bitmap bitmap1, string filename)
         {
             string extension = Path.GetExtension(filename);
             switch (extension.ToLower())
             {
                 case ".bmp":
-                    bm.Save(filename, ImageFormat.Bmp);
+                    bitmap1.Save(filename, ImageFormat.Bmp);
                     break;
                 case ".exif":
-                    bm.Save(filename, ImageFormat.Exif);
+                    bitmap1.Save(filename, ImageFormat.Exif);
                     break;
                 case ".gif":
-                    bm.Save(filename, ImageFormat.Gif);
+                    bitmap1.Save(filename, ImageFormat.Gif);
                     break;
                 case ".jpg":
                 case ".jpeg":
-                    bm.Save(filename, ImageFormat.Jpeg);
+                    bitmap1.Save(filename, ImageFormat.Jpeg);
                     break;
                 case ".png":
-                    bm.Save(filename, ImageFormat.Png);
+                    bitmap1.Save(filename, ImageFormat.Png);
                     break;
                 case ".tif":
                 case ".tiff":
-                    bm.Save(filename, ImageFormat.Tiff);
+                    bitmap1.Save(filename, ImageFormat.Tiff);
                     break;
                 default:
                     throw new NotSupportedException(
@@ -5882,30 +5882,30 @@ https://www.zhangshengrong.com/p/yOXD5ejR1B/
 
 vcs helper的  根據副檔名 決定檔案儲存格式
 
-        public void SaveBitmapUsingExtension(Bitmap bm, string filename)
+        public void SaveBitmapUsingExtension(Bitmap bitmap1, string filename)
         {
             string extension = Path.GetExtension(filename);
             switch (extension.ToLower())
             {
                 case ".bmp":
-                    bm.Save(filename, ImageFormat.Bmp);
+                    bitmap1.Save(filename, ImageFormat.Bmp);
                     break;
                 case ".exif":
-                    bm.Save(filename, ImageFormat.Exif);
+                    bitmap1.Save(filename, ImageFormat.Exif);
                     break;
                 case ".gif":
-                    bm.Save(filename, ImageFormat.Gif);
+                    bitmap1.Save(filename, ImageFormat.Gif);
                     break;
                 case ".jpg":
                 case ".jpeg":
-                    bm.Save(filename, ImageFormat.Jpeg);
+                    bitmap1.Save(filename, ImageFormat.Jpeg);
                     break;
                 case ".png":
-                    bm.Save(filename, ImageFormat.Png);
+                    bitmap1.Save(filename, ImageFormat.Png);
                     break;
                 case ".tif":
                 case ".tiff":
-                    bm.Save(filename, ImageFormat.Tiff);
+                    bitmap1.Save(filename, ImageFormat.Tiff);
                     break;
                 default:
                     throw new NotSupportedException(
@@ -8023,18 +8023,12 @@ int main(int argc,char* argv[])
 
 	return 0;
 }
-        
-        
-        
-        
-
-
 
 Display_Cam1
 
             //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
             bm = (Bitmap)eventArgs.Frame.Clone();
-            //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
+            //bitmap1.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
             pictureBox1.Image = bm;
 
             GC.Collect();       //回收資源
@@ -8044,10 +8038,10 @@ Display_Cam1
             //录像
             //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
             bm = (Bitmap)eventArgs.Frame.Clone();
-            //bm.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
+            //bitmap1.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
 			
             Graphics g = Graphics.FromImage(image);
-			
+
 			
 										SolidBrush drawBrush = new SolidBrush(Color.Yellow);
 
@@ -8125,20 +8119,14 @@ string text = fileReader.ReadToEnd();
 Console.WriteLine(text);			
 
 
-
 使用 C# 中的 FileInfo.Length 屬性獲取檔案大小
 FileInfo fileinfo = new FileInfo("dark.jpg");
 Console.WriteLine(fileinfo.Length);
 FileInfo 類提供了用於在 C# 中建立，開啟，複製，刪除和移動檔案的方法。
 
-
-
 //打开注册表
 string regeditstr = Environment.GetEnvironmentVariable("WinDir");//WinDir系统环境变量的名称
 Process.Start(regeditstr + "\\regedit.exe");//打开注册表
-
-
-
 
 //開啟檔案總管到指定的目錄
 string Path = @"C:\dddddddddd";
@@ -11650,10 +11638,6 @@ axWindowsMediaPlayer1.DisplaySize　　　　　　　?置播放?象大小
 axWindowsMediaPlayer1.settings.balance = 1; 伴唱
 axWindowsMediaPlayer1.settings.balance = -1;原唱
 
-
-
-
-
 windows media player
 在視頻播放之後,可以通過如下方式讀取源視頻的寬度和高度,然後設置其還原為原始的大小.
          private void ResizeOriginal()
@@ -11663,17 +11647,9 @@ windows media player
              axWindowsMediaPlayer1.Width = intWidth + 2;
              axWindowsMediaPlayer1.Height = intHeight + 2;
          }
-         
-         
-         
-         
-
-
 
 //Wait
 System.Threading.Thread.Sleep( 5000 ); // wait 5 seconds (5000 milliseconds)
-
-
 
 //Take a screenshot 
 
@@ -11691,9 +11667,6 @@ System.Drawing.Bitmap printscreen = new System.Drawing.Bitmap( width, height );
 System.Drawing.Graphics graphics = System.Drawing.Graphics.FromImage( printscreen as Image );
 graphics.CopyFromScreen( top, left, 0, 0, printscreen.Size );
 printscreen.Save( outputfile, imagetype );
-
-
-
 
 PNG 轉 BMP
 using System.Drawing.Imaging;   //for PixelFormat
@@ -11720,10 +11693,7 @@ vcs人物分類
 帝王類
 其他
 
-
 vcs照片+文字、照片+浮水印
-
-
 
 vcs history
 大scale
@@ -11745,16 +11715,12 @@ bmp
 如何把bmp檔讀出所有點 直接去改裡面數字 另存新檔
 看能不能做到顏色平移的效果
 
-
+//------------------------------------------------------------  # 60個
 
 vcs
 ImageViewer is from _Yusuf Shakeel_CSharp
 
-
-
-            
-            
-            
+//------------------------------------------------------------  # 60個            
 "
 Bitmap Image (.bmp)|*.bmp|
 Gif Image (.gif)|*.gif|
@@ -11765,15 +11731,8 @@ Wmf Image (.wmf)|*.wmf
 
 ";
 
-
-
-
-
-
-
 vcs開啟一個純文字檔到richtextbox裡面
 目前沒辦法處理正中、簡中、日文同時存在的純文字檔
-
 
 //開啟檔案
 FileStream myFile = File.Open(@"C:\myWriter.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
@@ -11812,9 +11771,6 @@ openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.wmf|*.jpg;*.jpe
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "jpg (*.jpg)|*.jpg|bmp (*.bmp)|*.bmp|png (*.png)|*.png";
 
-
-            
-
         //----選到textbox時，選取全部文字
         private void TextBox_Enter(object sender, EventArgs e)
         {
@@ -11822,30 +11778,16 @@ openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.wmf|*.jpg;*.jpe
             tb.SelectAll();
         }
 
-
-
         //縮小pictureBox1
         //pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;/*AutoSize可能無法縮小圖片*/
         //先改成等比例縮小圖片SizeMode
         pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
 
-
-
-
-
-
-
-
-
-
-
+//------------------------------------------------------------  # 60個
 
 改變pictureBox大小改變表單位置
 
 pictureBox1.Image.Save(@"D:\bbbbb.jpg");
-
-
-
 
 改變部分字體顏色
             richTextBox1.SelectionStart = 10;
@@ -11853,7 +11795,7 @@ pictureBox1.Image.Save(@"D:\bbbbb.jpg");
             richTextBox1.SelectionColor = Color.Red;
             richTextBox1.SelectionBackColor = Color.Green;
 
-
+//------------------------------------------------------------  # 60個
 
 Pen blackPen = new Pen(Color.FromArgb(255, 0, 0, 0), 5);
 DrawImage(bmp, 0, 0);
@@ -11874,8 +11816,6 @@ this.PictureBox1.Height);
 Graphics myDraw = Graphics.FromImage(bmp);
 MyDraw.Clear(this.pictureBox1.BackColor); //畫布背景色
 MyDraw.DrawLine(new pen(Color.Red,2),x,y,e.X,e.Y); //可
-
-
 
 王濬樓船下益州，金陵王氣黯然收。
 千尋鐵鎖沉江底，一片降幡出石頭。
@@ -11917,7 +11857,6 @@ char[] bbv={'江','一','人'};
             richTextBox2.Text += "dd = " + dd.ToString() + "\n";
             richTextBox2.Text += "ee = " + ee.ToString() + "\n";
 
-
 //------------------------------------------------------------  # 60個
 
             int[] x = { 0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360, 390, 420, 450, 480, 510, 540, 570, 600 };
@@ -11953,7 +11892,6 @@ char[] bbv={'江','一','人'};
 
 //------------------------------------------------------------  # 60個
 
-
 XML 註解	<!-- --> 的內容。
 
 
@@ -11981,9 +11919,7 @@ Graphics myDraw = Graphics.FromImage(bmp);
 MyDraw.Clear(this.pictureBox1.BackColor); //畫布背景色
 MyDraw.DrawLine(new pen(Color.Red,2),x,y,e.X,e.Y); //可以繪圖了
 
-
 //------------------------------------------------------------  # 60個
-
 
 繪製圖形物件的方法
 
@@ -12023,8 +11959,7 @@ DrawClosedCurve
 	private void DrawPixel(int xx, int yy)
 	{
 		
-	}
-	
+	}	
 
 //------------------------------------------------------------  # 60個
 
@@ -12100,21 +12035,20 @@ a.Y=10;
 
 blackPen.StartCap=LineCap.ArrowAnchor;
 
-
 //------------------------------------------------------------  # 60個
 
 自己繪製bitmap圖片保存,生成ico文件或者對象
 今天回答一個問題的時候的隨筆
 
-Bitmap bit = new Bitmap(100, 30);
-Graphics g = Graphics.FromImage(bit);
+Bitmap bitmap1 = new Bitmap(100, 30);
+Graphics g = Graphics.FromImage(bitmap1);
 SolidBrush sb = new SolidBrush(Color.Blue);
-Rectangle rg = new Rectangle(new Point(0, 0), bit.Size);
+Rectangle rg = new Rectangle(new Point(0, 0), bitmap1.Size);
 g.FillRectangle(sb, rg);
 g.DrawString("測試測試呵呵", this.Font, new SolidBrush(Color.White), new PointF(0, 0));
-bit.Save("d://123.bmp");//保存下來這個可以看生成的圖片 
+bitmap1.Save("d://123.bmp");//保存下來這個可以看生成的圖片 
                 
-//------------------------------------------------------------  # 60個                
+//------------------------------------------------------------  # 60個
 
 vcs
 Form2的元件的Modifiers要改成Internal, 預設為private
@@ -12122,7 +12056,7 @@ Form2的元件的Modifiers要改成Internal, 預設為private
 //char * wday[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 在預設的情況下，C# 不能使用指標，若要用指標的話，要在編譯器設定中啟用 unsafe 模式才行。
 
-
+//------------------------------------------------------------  # 60個
 
 共用事件範例	WinEventHandler
 
@@ -12247,7 +12181,6 @@ using System.Security.Cryptography; //for MD5
             }
 
         }
-        
 
 //------------------------------------------------------------  # 60個
 
