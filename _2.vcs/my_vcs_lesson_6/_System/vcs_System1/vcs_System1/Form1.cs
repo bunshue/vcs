@@ -16,7 +16,6 @@ using System.Runtime.InteropServices;   //for DllImport, StructLayout
 using System.Diagnostics;       //for Process
 using System.Reflection;        //for Assembly
 using System.Drawing.Imaging;   //for ImageFormat
-using System.Drawing.Printing;  //for PrinterSettings
 using System.Threading;
 using System.ServiceProcess;    //for ServiceController     參考/加入參考/.NET/System.ServiceProcess
 
@@ -54,8 +53,8 @@ namespace vcs_System1
             //button
             x_st = 10;
             y_st = 10;
-            dx = 200 + 5;
-            dy = 60 + 5;
+            dx = 200 + 10;
+            dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -115,11 +114,11 @@ namespace vcs_System1
             groupBox1.Size = new Size(200, 150);//Windows 開關機(偽執行)
             groupBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
 
-            richTextBox1.Size = new Size(300, 640);
+            richTextBox1.Size = new Size(300, 690);
             richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1600, 700);
+            this.Size = new Size(1600, 750);
             this.Text = "vcs_System1";
 
             //設定執行後的表單起始位置, 正中央
@@ -709,10 +708,8 @@ namespace vcs_System1
                 richTextBox1.Text += "著作權AssemblyCopyright : " + AssemblyCopyright + "\n";
             }
 
-
             string AssemblyVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             richTextBox1.Text += "組件版本AssemblyVersion : " + AssemblyVersion + "\n";
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -985,9 +982,12 @@ namespace vcs_System1
         {
             //(A)關於
             //方案總管/vcs_System1/右鍵/加入/Windows Form/關於對話方塊/新增
+            //開啟 關於 表單
 
-            AboutBox1 formab = new AboutBox1();
-            formab.ShowDialog();
+            richTextBox1.Text += "開啟 關於 表單\n";
+
+            AboutBox1 ab = new AboutBox1();
+            ab.ShowDialog();
 
             //方案總管空白處按右鍵/屬性/組件資訊, 修改要顯示的程式資訊
         }
@@ -1078,36 +1078,6 @@ namespace vcs_System1
 
         private void button33_Click(object sender, EventArgs e)
         {
-            //系統已經安裝的打印機訊息
-            foreach (string mPrinterName in PrinterSettings.InstalledPrinters)
-            {
-                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-                richTextBox1.Text += "打印機名稱：" + mPrinterName + "\n";
-                PrinterSettings mprinter = new PrinterSettings();
-                mprinter.PrinterName = mPrinterName;
-                if (mprinter.IsValid)
-                {
-                    foreach (PrinterResolution resolution in mprinter.PrinterResolutions)
-                    {
-                        richTextBox1.Text += "分  辨  率：" + resolution.ToString() + "\n";
-                    }
-                    string prinsize = "";
-                    foreach (PaperSize size in mprinter.PaperSizes)
-                    {
-                        if (Enum.IsDefined(size.Kind.GetType(), size.Kind))
-                        {
-                            prinsize += size.ToString() + "\n";
-                        }
-                    }
-                    //many
-                    //richTextBox1.AppendText("打 印 尺寸：\n" + prinsize + "\n");
-                }
-                else
-                {
-                    richTextBox1.Text += "XXXXXXXX\n";
-                }
-            }
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
         }
 
         private void button34_Click(object sender, EventArgs e)

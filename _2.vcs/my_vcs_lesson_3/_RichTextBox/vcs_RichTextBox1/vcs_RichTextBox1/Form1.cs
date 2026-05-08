@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;    //for FILE
-using System.Diagnostics;   //for Process, Stopwatch
+using System.IO;  // for FILE
+using System.Diagnostics;  // for Process, Stopwatch
 
 namespace vcs_RichTextBox1
 {
@@ -65,7 +65,7 @@ namespace vcs_RichTextBox1
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
+
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -514,6 +514,17 @@ namespace vcs_RichTextBox1
 
         private void button20_Click(object sender, EventArgs e)
         {
+            //在RTB內貼入圖片
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Image myImage = Image.FromFile(filename);
+            Clipboard.SetImage(myImage);
+
+            DataFormats.Format df = DataFormats.GetFormat(DataFormats.Bitmap);
+            if (richTextBox1.CanPaste(df))
+            {
+                richTextBox1.Paste(df);
+            }
         }
 
         private void button21_Click(object sender, EventArgs e)

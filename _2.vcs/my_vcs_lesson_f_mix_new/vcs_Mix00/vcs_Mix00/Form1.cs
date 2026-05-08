@@ -230,7 +230,7 @@ namespace vcs_Mix00
             //Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL");
 
             richTextBox1.Text += "用預設程式開啟檔案\n";
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             //Process.Start("explorer.exe", filename);
 
             richTextBox1.Text += "開啟 小畫家\n";
@@ -274,7 +274,7 @@ namespace vcs_Mix00
             //Process.Start("ntbackup.exe");
 
             richTextBox1.Text += "開啟 Chrome 指定網頁\n";
-            filename = @"D:\_git\vcs\_1.data\_html\朱冶蕙老師的電腦教室.html";
+            //filename = @"D:\_git\vcs\_1.data\_html\朱冶蕙老師的電腦教室.html";
             //Process.Start("chrome.exe", filename);
         }
 
@@ -992,28 +992,10 @@ namespace vcs_Mix00
 
         private void button20_Click(object sender, EventArgs e)
         {
-            //在RTB內貼入圖片
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Image myImage = Image.FromFile(filename);
-            Clipboard.SetImage(myImage);
-
-            DataFormats.Format df = DataFormats.GetFormat(DataFormats.Bitmap);
-            if (richTextBox1.CanPaste(df))
-            {
-                richTextBox1.Paste(df);
-            }
-
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
-            //開啟 關於 表單
-
-            richTextBox1.Text += "開啟 關於 表單\n";
-
-            AboutBox1 ab = new AboutBox1();
-            ab.ShowDialog();
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -1200,7 +1182,7 @@ namespace vcs_Mix00
         {
             // 宣告私有變數_x, _y用來表示目前車子的X, Y座標位置
             private int _x, _y;
-            private Bitmap bmp;
+            //private Bitmap bmp;
 
             // 宣告_speed為私有變數，表示該變數只能在Car類別內使用
             private int _speed = 0;

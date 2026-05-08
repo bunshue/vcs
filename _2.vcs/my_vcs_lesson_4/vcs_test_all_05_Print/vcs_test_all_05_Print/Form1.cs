@@ -47,16 +47,11 @@ namespace vcs_test_all_05_Print
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 12;
-            y_st = 12;
-            dx = 200;
-            dy = 50;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -68,10 +63,6 @@ namespace vcs_test_all_05_Print
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-
-            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            groupBox_control.Location = new Point(x_st + dx * 0, y_st + dy * 13);
-
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -81,17 +72,37 @@ namespace vcs_test_all_05_Print
             button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
             comboBox_PageSize.Location = new Point(x_st + dx * 1, y_st + dy * 7);
 
-            printPreviewControl1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
-            bt_print.Location = new Point(x_st + dx * 5, y_st + dy * 2 + 30);
-            bt_print3.Location = new Point(x_st + dx * 5 + 110, y_st + dy * 2 + 30);
-            groupBox3.Location = new Point(x_st + dx * 5, y_st + dy * 3 + 50);
+            pictureBox1.Size = new Size(305, 400);
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
-            richTextBox1.Size = new Size(240, 400);
-            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 8);
+            //預覽列印 Star
+            groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            //control
+            groupBox_control.Location = new Point(x_st + dx * 2, y_st + dy * 8 + 20);
+
+            //列出印表機資訊
+            groupBox2.Location = new Point(x_st + dx * 4 - 80, y_st + dy * 0);
+
+            pictureBox_star.Size = new Size(200, 200);
+            pictureBox_star.Location = new Point(x_st + dx * 4 - 80, y_st + dy * 5 + 10);
+            dataGridView1.Size = new Size(200, 200);
+            dataGridView1.Location = new Point(x_st + dx * 4 - 80, y_st + dy * 5 + 220);
+
+            printPreviewControl1.Location = new Point(x_st + dx * 5 + 50, y_st + dy * 0);
+            bt_print.Location = new Point(x_st + dx * 5 + 50, y_st + dy * 2 + 30);
+            bt_print3.Location = new Point(x_st + dx * 5 + 50 + 110, y_st + dy * 2 + 30);
+            groupBox3.Location = new Point(x_st + dx * 5 + 50, y_st + dy * 3 + 20);
+
+            richTextBox1.Size = new Size(360, 420);
+            richTextBox1.Location = new Point(x_st + dx * 5 + 50, y_st + dy * 6);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1280, 910);
+            this.Size = new Size(1500, 910);
             this.Text = "vcs_test_all_05_Print";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -869,7 +880,36 @@ namespace vcs_test_all_05_Print
 
         private void button9_Click(object sender, EventArgs e)
         {
-
+            //系統已經安裝的打印機訊息
+            foreach (string mPrinterName in PrinterSettings.InstalledPrinters)
+            {
+                richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+                richTextBox1.Text += "打印機名稱：" + mPrinterName + "\n";
+                PrinterSettings mprinter = new PrinterSettings();
+                mprinter.PrinterName = mPrinterName;
+                if (mprinter.IsValid)
+                {
+                    foreach (PrinterResolution resolution in mprinter.PrinterResolutions)
+                    {
+                        richTextBox1.Text += "分  辨  率：" + resolution.ToString() + "\n";
+                    }
+                    string prinsize = "";
+                    foreach (PaperSize size in mprinter.PaperSizes)
+                    {
+                        if (Enum.IsDefined(size.Kind.GetType(), size.Kind))
+                        {
+                            prinsize += size.ToString() + "\n";
+                        }
+                    }
+                    //many
+                    //richTextBox1.AppendText("打 印 尺寸：\n" + prinsize + "\n");
+                }
+                else
+                {
+                    richTextBox1.Text += "XXXXXXXX\n";
+                }
+            }
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
         }
 
         // Draw the smiley face.
@@ -1695,13 +1735,8 @@ namespace vcs_test_all_05_Print
         }
         //#endregion
 
-
-
-
     }
 }
-
-
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
