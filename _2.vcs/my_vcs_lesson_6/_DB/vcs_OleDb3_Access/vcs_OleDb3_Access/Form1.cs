@@ -361,6 +361,14 @@ namespace vcs_OleDb3_Access
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //创建数据库连接字符串
+            string P_Connection = string.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=..//..//test.mdb;User Id=Admin");    //sugar
+            //string P_Connection = string.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=..//..//test.mdb;User Id=Admin");    //kilo
+            OleDbDataAdapter P_OLeDbDataAdapter = new OleDbDataAdapter("select au_id as 用户编号,au_lname as 用户名,phone as 联系电话  from authors", P_Connection);
+            DataSet ds = new DataSet();
+            P_OLeDbDataAdapter.Fill(ds, "UserInfo");
+            dataGridView1.DataSource = ds.Tables["UserInfo"].DefaultView;   //將所有資料都匯出到dataGridView上
+
         }
 
         private void button11_Click(object sender, EventArgs e)

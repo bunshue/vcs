@@ -84,6 +84,31 @@ namespace AccessGuideExcel
 
             AccessGuideJoinExcel(textBox1.Text, comboBox1.Text, textBox2.Text + "\\" + excel_filename);
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //GetTable
+            //GetTable(db_filename, comboBox1);
+
+            richTextBox1.Text += "GetTable : " + db_filename + "\n";
+
+            string connstr = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + db_filename + ";Persist Security Info=True";
+            System.Data.OleDb.OleDbConnection tem_OleConn = new System.Data.OleDb.OleDbConnection(connstr);
+            tem_OleConn.Open();
+            DataTable tem_DataTable = tem_OleConn.GetOleDbSchemaTable(System.Data.OleDb.OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
+            tem_OleConn.Close();
+            //ComBox.Items.Clear();
+
+            richTextBox1.Text += "Access資料庫的表名 個數" + tem_DataTable.Rows.Count.ToString() + "\n";
+            for (int i = 0; i < tem_DataTable.Rows.Count; i++)
+            {
+                //                                 ComBox.Items.Add(tem_DataTable.Rows[i][2]);
+                richTextBox1.Text += "加入 Access資料庫的表名 : " + tem_DataTable.Rows[i][2] + "\n";
+            }
+
+
+
+        }
     }
 }
 
