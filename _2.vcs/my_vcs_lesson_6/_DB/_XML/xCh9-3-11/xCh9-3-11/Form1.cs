@@ -25,12 +25,11 @@ namespace xCh9_3_11
 
             MakeParentTable();
             MakeChildTable();
-            MakeDataRelation();
 
             dataGridView1.DataSource = dataSet;
             dataGridView1.DataMember = "ParentTable";
             dataGridView2.DataSource = dataSet;
-            dataGridView2.DataMember = "ParentTable.parent2Child";
+            dataGridView2.DataMember = "childTable";
         }
 
         private void MakeParentTable()
@@ -141,14 +140,6 @@ namespace xCh9_3_11
                 row["客戶編號"] = 2;
                 table.Rows.Add(row);
             }
-        }
-
-        private void MakeDataRelation()
-        {
-            DataColumn parentColumn = dataSet.Tables["ParentTable"].Columns["客戶編號"];
-            DataColumn childColumn = dataSet.Tables["ChildTable"].Columns["客戶編號"];
-            DataRelation relation = new DataRelation("parent2Child", parentColumn, childColumn);
-            dataSet.Tables["ChildTable"].ParentRelations.Add(relation);
         }
     }
 }

@@ -71,12 +71,13 @@ namespace xCh9_4_1_11
             try
             {
                 // 將studentsDataSet寫成XML文件
-                string xmlFilename = @"C:\\XmlDocument-" + DateTime.Now.Millisecond.ToString() + ".xml";
-                System.IO.FileStream streamWrite = new System.IO.FileStream(xmlFilename, System.IO.FileMode.Create);
+                //string xml_filename = @"C:\\XmlDocument-" + DateTime.Now.Millisecond.ToString() + ".xml";
+                string xml_filename = @"tmp_xml_" + DateTime.Now.Millisecond.ToString() + ".xml";
+                System.IO.FileStream streamWrite = new System.IO.FileStream(xml_filename, System.IO.FileMode.Create);
                 studentsDataSet.WriteXml(streamWrite);
                 streamWrite.Dispose();
 
-                MessageBox.Show("已建構完成XML文件：" + xmlFilename);
+                MessageBox.Show("已建構完成XML文件：" + xml_filename);
             }
             catch (Exception ex)
             {
@@ -90,8 +91,8 @@ namespace xCh9_4_1_11
             studentsDataSet = new DataSet("StudentsDataSet");
 
             // 讀入XML文件 
-            string xmlFilename = @"C:\\XmlDocument-432.xml";
-            System.IO.FileStream streamRead = new System.IO.FileStream(xmlFilename, System.IO.FileMode.Open);
+            string xml_filename = @"C:\\XmlDocument-432.xml";
+            System.IO.FileStream streamRead = new System.IO.FileStream(xml_filename, System.IO.FileMode.Open);
             studentsDataSet.ReadXml(streamRead);
             streamRead.Dispose();
 
@@ -100,4 +101,3 @@ namespace xCh9_4_1_11
         }
     }
 }
-

@@ -111,7 +111,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(10, 106);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(356, 234);
+            this.dataGridView1.Size = new System.Drawing.Size(383, 411);
             this.dataGridView1.TabIndex = 19;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);

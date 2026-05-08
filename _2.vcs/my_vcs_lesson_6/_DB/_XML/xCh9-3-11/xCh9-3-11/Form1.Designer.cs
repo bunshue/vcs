@@ -38,10 +38,10 @@
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(10, 133);
+            this.dataGridView2.Location = new System.Drawing.Point(10, 342);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 24;
-            this.dataGridView2.Size = new System.Drawing.Size(303, 161);
+            this.dataGridView2.Size = new System.Drawing.Size(425, 372);
             this.dataGridView2.TabIndex = 5;
             // 
             // dataGridView1
@@ -50,14 +50,14 @@
             this.dataGridView1.Location = new System.Drawing.Point(10, 11);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(303, 116);
+            this.dataGridView1.Size = new System.Drawing.Size(425, 325);
             this.dataGridView1.TabIndex = 4;
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(10, 300);
+            this.richTextBox1.Location = new System.Drawing.Point(441, 11);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(817, 248);
+            this.richTextBox1.Size = new System.Drawing.Size(512, 703);
             this.richTextBox1.TabIndex = 6;
             this.richTextBox1.Text = "";
             // 
@@ -65,7 +65,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(839, 560);
+            this.ClientSize = new System.Drawing.Size(965, 726);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);

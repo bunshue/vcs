@@ -38,17 +38,17 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(10, 50);
+            this.dataGridView1.Location = new System.Drawing.Point(10, 105);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(363, 87);
+            this.dataGridView1.Size = new System.Drawing.Size(431, 606);
             this.dataGridView1.TabIndex = 5;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(100, 11);
+            this.button2.Location = new System.Drawing.Point(138, 13);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(98, 62);
             this.button2.TabIndex = 4;
             this.button2.Text = "讀取Schema";
             this.button2.UseVisualStyleBackColor = true;
@@ -56,9 +56,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(10, 11);
+            this.button1.Location = new System.Drawing.Point(10, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(98, 62);
             this.button1.TabIndex = 3;
             this.button1.Text = "寫入Schema";
             this.button1.UseVisualStyleBackColor = true;
@@ -66,9 +66,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(10, 143);
+            this.richTextBox1.Location = new System.Drawing.Point(447, 13);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(620, 260);
+            this.richTextBox1.Size = new System.Drawing.Size(363, 698);
             this.richTextBox1.TabIndex = 6;
             this.richTextBox1.Text = "";
             // 
@@ -76,7 +76,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(642, 415);
+            this.ClientSize = new System.Drawing.Size(822, 723);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button2);

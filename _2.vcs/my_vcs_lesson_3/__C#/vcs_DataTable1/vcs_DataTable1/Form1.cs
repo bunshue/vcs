@@ -30,7 +30,7 @@ namespace vcs_DataTable1
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
+
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -1228,7 +1228,54 @@ namespace vcs_DataTable1
 
         private void button22_Click(object sender, EventArgs e)
         {
+            DataSet studentsDataSet;
 
+            // 建構DataSet及其組成分子
+            studentsDataSet = new DataSet("StudentsDataSet");
+            DataTable studentTable = new DataTable("StudentTable");
+
+            // 這個資料表的資料列中的初始開始大小。預設值為 50。
+            studentTable.MinimumCapacity = 50;
+
+            // 建構資料欄
+            DataColumn idColumn = new DataColumn("編號", Type.GetType("System.Int32"));
+            // 設定「編號」資料欄為自動增加數值
+            idColumn.AutoIncrement = true;
+            DataColumn nameColumn = new DataColumn("姓名");
+            DataColumn schoolColumn = new DataColumn("學歷");
+
+            studentTable.Columns.Add(idColumn);
+            studentTable.Columns.Add(nameColumn);
+            studentTable.Columns.Add(schoolColumn);
+
+            studentsDataSet.Tables.Add(studentTable);
+
+            // 加入記錄
+            DataRow newRow;
+            newRow = studentTable.NewRow();
+            newRow["姓名"] = "唐三藏";
+            newRow["學歷"] = "碩士";
+            studentTable.Rows.Add(newRow);
+
+            newRow = studentTable.NewRow();
+            newRow["姓名"] = "孫悟空";
+            newRow["學歷"] = "學士";
+            studentTable.Rows.Add(newRow);
+
+            newRow = studentTable.NewRow();
+            newRow["姓名"] = "豬八戒";
+            newRow["學歷"] = "高中";
+            studentTable.Rows.Add(newRow);
+
+            newRow = studentTable.NewRow();
+            newRow["姓名"] = "牛魔王";
+            newRow["學歷"] = "學士";
+            studentTable.Rows.Add(newRow);
+
+            newRow = studentTable.NewRow();
+            newRow["姓名"] = "如來佛";
+            newRow["學歷"] = "博士";
+            studentTable.Rows.Add(newRow);
         }
 
         private void button23_Click(object sender, EventArgs e)
