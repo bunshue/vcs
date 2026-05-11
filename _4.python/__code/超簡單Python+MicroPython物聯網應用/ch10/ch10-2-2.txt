@@ -1,0 +1,3 @@
+你是MicroPython專家，請用繁體中文寫出一個MicroPython程式，這是使用同一目錄下xtools.py的connect_wifi_led()函式來連線WiFi，此函式沒有參數，在成功連線WiFi後，可以取得和顯示URL網址https://fchart.github.io/json/Example3.json的JSON資料。
+請使用from/import語法來匯入所需的物件。
+不需要主程式。

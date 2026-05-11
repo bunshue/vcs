@@ -1,0 +1,240 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="~j{f2/6:.s_)`zL[)|4?">ip_address</variable>
+    <variable id="@2a6O[[Q3|kQeWjQhvuh">ledR</variable>
+    <variable id=":pzS-.FXYvV2Jlz5|[wd">html</variable>
+  </variables>
+  <block type="variables_set" id="(jCT#_`2|[3,,p`FO*BH" x="138" y="12">
+    <field name="VAR" id="~j{f2/6:.s_)`zL[)|4?">ip_address</field>
+    <value name="VALUE">
+      <block type="xtools_connect_wifi_ip" id="Q9/g5`-%^4K:atOBZ5@L">
+        <value name="ssid">
+          <shadow type="text" id="RLXdrS.W+ryc6A}~H6HP">
+            <field name="TEXT"/>
+          </shadow>
+        </value>
+        <value name="pwd">
+          <shadow type="text" id="SEkkTLe3)I{*}Gl1FS,P">
+            <field name="TEXT"/>
+          </shadow>
+        </value>
+        <value name="timeout">
+          <shadow type="math_number" id="3;aTX(MS6zZseM?W5TIF">
+            <field name="NUM">15</field>
+          </shadow>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="exec_python" id="fJ)~c0-pf=vsfvtvCHDE">
+        <value name="command">
+          <shadow type="text" id="it2c34qoRGP{R?^0W;lX">
+            <field name="TEXT">id = xtools.get_id()</field>
+          </shadow>
+          <block type="text" id="U+IJ5RYbg)?.?;~-#5KT">
+            <field name="TEXT">html= &amp;quot;&amp;quot;&amp;quot; &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html&amp;gt; &amp;lt;head&amp;gt;   &amp;lt;meta charset=&amp;quot;utf-8&amp;quot;/&amp;gt;   &amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width,initial-scale=1&amp;quot;/&amp;gt;   &amp;lt;script&amp;gt;     var xhttp = new XMLHttpRequest();     xhttp.onreadystatechange = function () {       if (this.readyState == 4 &amp;amp;&amp;amp; this.status == 200) {         document.getElementById(&amp;#39;status&amp;#39;).innerHTML=xhttp.responseText;       }     };     function turnOn() {       document.getElementById(&amp;#39;status&amp;#39;).innerHTML = &amp;#39;點亮中...&amp;#39;;       xhttp.open(&amp;#39;GET&amp;#39;, &amp;#39;/on&amp;#39;, true);       xhttp.send();     }     function turnOff() {       document.getElementById(&amp;#39;status&amp;#39;).innerHTML = &amp;#39;熄滅中...&amp;#39;;       xhttp.open(&amp;#39;GET&amp;#39;, &amp;#39;/off&amp;#39;, true);       xhttp.send();     }   &amp;lt;/script&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt;   &amp;lt;h1&amp;gt;LED: &amp;lt;span id=&amp;#39;status&amp;#39;&amp;gt;熄滅&amp;lt;/span&amp;gt;&amp;lt;/h1&amp;gt;&amp;lt;hr&amp;gt;   &amp;lt;p&amp;gt;&amp;lt;button style=&amp;quot;font-size:40px&amp;quot; onclick=&amp;#39;turnOn()&amp;#39;&amp;gt;開啟&amp;lt;/button&amp;gt;&amp;lt;/p&amp;gt;   &amp;lt;p&amp;gt;&amp;lt;button style=&amp;quot;font-size:40px&amp;quot; onclick=&amp;#39;turnOff()&amp;#39;&amp;gt;關閉&amp;lt;/button&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; &amp;quot;&amp;quot;&amp;quot;</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="lr2d_I|`R!0l.)icj|f}">
+            <field name="VAR" id="@2a6O[[Q3|kQeWjQhvuh">ledR</field>
+            <value name="VALUE">
+              <block type="gpio_create_pinobj" id="P-L554Nm.7U={$/DG8/t">
+                <field name="type">OUT</field>
+                <value name="pin">
+                  <shadow type="pinout" id="dZ}1C:{^k;}pv70)R?,=">
+                    <field name="PIN">15</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="gpio_set_pinobj" id="4M6pNOXR}dge}}9?S3C2">
+                <value name="obj">
+                  <block type="variables_get" id="=!0ckIZ=s#v](b4qcm#4">
+                    <field name="VAR" id="@2a6O[[Q3|kQeWjQhvuh">ledR</field>
+                  </block>
+                </value>
+                <value name="value">
+                  <shadow type="logic_boolean" id="Zm^NDUX])ItwH;hl#K8,">
+                    <field name="BOOL">FALSE</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="net_http_on_path" id="O!o/`fcXdIv-;`-xk#%y">
+                    <value name="path">
+                      <shadow type="text" id="JZwTHV^E:EZI!%87NfcU">
+                        <field name="TEXT">/</field>
+                      </shadow>
+                    </value>
+                    <value name="callback">
+                      <shadow type="text" id="rZD7.mB~(@(0@,fy1]Q]">
+                        <field name="TEXT">handleRoot</field>
+                      </shadow>
+                    </value>
+                    <statement name="do">
+                      <block type="net_http_server_send_response_ok" id="RRoAbhq(%IbBuPEfsPwA">
+                        <value name="status">
+                          <shadow type="math_number" id=":x^+^E*u{WeT.XX@T1{m">
+                            <field name="NUM">200</field>
+                          </shadow>
+                        </value>
+                        <value name="content">
+                          <shadow type="text" id="gA)mM+iTiH;aImR]TG@+">
+                            <field name="TEXT">You reached MicroPython WebServer!</field>
+                          </shadow>
+                          <block type="variables_get" id="U{i`F@:Ajy{[pJe/:~=~">
+                            <field name="VAR" id=":pzS-.FXYvV2Jlz5|[wd">html</field>
+                          </block>
+                        </value>
+                        <value name="mime">
+                          <shadow type="text" id="B~pTuwds[4ApmmcLE@:V">
+                            <field name="TEXT">text/html</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="net_http_on_path" id="5m]kR%MSVj#N|LzIX@ic">
+                        <value name="path">
+                          <shadow type="text" id="Dp;2jGd[EL97#jR=mlgZ">
+                            <field name="TEXT">/on</field>
+                          </shadow>
+                        </value>
+                        <value name="callback">
+                          <shadow type="text" id="Qp,ig,Ss]C~Vl?,F_Spm">
+                            <field name="TEXT">handleOn</field>
+                          </shadow>
+                        </value>
+                        <statement name="do">
+                          <block type="gpio_set_pinobj" id="`s2cMLVYT(ipjUD98{CJ">
+                            <value name="obj">
+                              <block type="variables_get" id="Kn1?Wjca/mG!C|G!l^dO">
+                                <field name="VAR" id="@2a6O[[Q3|kQeWjQhvuh">ledR</field>
+                              </block>
+                            </value>
+                            <value name="value">
+                              <shadow type="logic_boolean" id="^5x^TJzHk?t-H4k_FiJn">
+                                <field name="BOOL">TRUE</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="net_http_server_send_response_ok" id="w+e$yVEFKJ=FqTAZZ8Ju">
+                                <value name="status">
+                                  <shadow type="math_number" id="EW1Xn-%$FSeRJpHhYRIj">
+                                    <field name="NUM">200</field>
+                                  </shadow>
+                                </value>
+                                <value name="content">
+                                  <shadow type="text" id="~Tv_rz~(G;((V6pnPd6+">
+                                    <field name="TEXT">You reached MicroPython WebServer!</field>
+                                  </shadow>
+                                  <block type="text" id="_t7I5zi6!J-5,3]=)_!A">
+                                    <field name="TEXT">點亮</field>
+                                  </block>
+                                </value>
+                                <value name="mime">
+                                  <shadow type="text" id="=SB@MF;Wf6Fo$Lw(cTUS">
+                                    <field name="TEXT">text/html</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="net_http_on_path" id="2m$jSh`pk,GVLj49b*Ca">
+                            <value name="path">
+                              <shadow type="text" id="T?znf2W%1=[Eg-]Sw[vS">
+                                <field name="TEXT">/off</field>
+                              </shadow>
+                            </value>
+                            <value name="callback">
+                              <shadow type="text" id="[elQ;)kAi;NpsFm[ifFY">
+                                <field name="TEXT">handleOff</field>
+                              </shadow>
+                            </value>
+                            <statement name="do">
+                              <block type="gpio_set_pinobj" id="XsG]Qr+1,8y4FpI,fzkz">
+                                <value name="obj">
+                                  <block type="variables_get" id="0Q~H$lC`];2kM@Ay8ZFM">
+                                    <field name="VAR" id="@2a6O[[Q3|kQeWjQhvuh">ledR</field>
+                                  </block>
+                                </value>
+                                <value name="value">
+                                  <shadow type="logic_boolean" id="zf-r,1v}~N^3b]Svb[h0">
+                                    <field name="BOOL">FALSE</field>
+                                  </shadow>
+                                </value>
+                                <next>
+                                  <block type="net_http_server_send_response_ok" id="m93]mELGWI_T2kbp(jWl">
+                                    <value name="status">
+                                      <shadow type="math_number" id="d_sBVw2(a.ohDO2=)tJj">
+                                        <field name="NUM">200</field>
+                                      </shadow>
+                                    </value>
+                                    <value name="content">
+                                      <shadow type="text">
+                                        <field name="TEXT">You reached MicroPython WebServer!</field>
+                                      </shadow>
+                                      <block type="text" id="bg}/S*[`h?JQk=0]5[ZL">
+                                        <field name="TEXT">熄滅</field>
+                                      </block>
+                                    </value>
+                                    <value name="mime">
+                                      <shadow type="text" id="Fy-=xyZ,Hp,;UtsQf*Vq">
+                                        <field name="TEXT">text/html</field>
+                                      </shadow>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="net_http_server_begin" id=":QJolQn97r`E/dPe(}9!">
+                                <value name="port">
+                                  <shadow type="math_number" id="sB@!A:J~Hl_hfvRsDLI2">
+                                    <field name="NUM">80</field>
+                                  </shadow>
+                                </value>
+                                <next>
+                                  <block type="text_print" id="sm{EZXgLOJ]ezO,2mV{)">
+                                    <value name="TEXT">
+                                      <shadow type="text" id="n1O2_T@n0!77PBscjB1I">
+                                        <field name="TEXT">abc</field>
+                                      </shadow>
+                                      <block type="text_join" id="6K_DVYhOcReg%3J0ovPQ">
+                                        <mutation items="2"/>
+                                        <value name="ADD0">
+                                          <block type="text" id="{B^F5C5~Ow4{*mub,~([">
+                                            <field name="TEXT">Web伺服器的 IP 位址: </field>
+                                          </block>
+                                        </value>
+                                        <value name="ADD1">
+                                          <block type="variables_get" id="B4){!NZaQ{)a4il@+#Wq">
+                                            <field name="VAR" id="~j{f2/6:.s_)`zL[)|4?">ip_address</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="net_http_server_start" id="Lz4$Pz~C3[Mayk#`f(.["/>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

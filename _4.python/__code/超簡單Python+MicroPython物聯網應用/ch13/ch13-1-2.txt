@@ -1,0 +1,4 @@
+你是MicroPython專家，請用繁體中文寫出一個MicroPython程式，使用ntptime從網路取得中原標準時間，然後顯示年、月、日、時、分和秒。
+首先使用from/import語法匯入所需模組後，使用同一目錄下xtools.py的connect_wifi_led()函式來連線WiFi，不需寫出此函式，而且此函式並沒有參數。
+在取得的時間後，需調整成中原標準時間。
+不需要主程式。

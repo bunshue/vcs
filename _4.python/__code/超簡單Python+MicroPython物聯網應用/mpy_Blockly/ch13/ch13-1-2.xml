@@ -1,0 +1,57 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="xtools_connect_wifi" id="Bgg^)e~iJ}C`_(KwM`c(" x="63" y="13">
+    <value name="ssid">
+      <shadow type="text" id="uI:T3jVer(E3E!,OYK*w">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <value name="pwd">
+      <shadow type="text" id="+_~;ZJwcc339*993H2E3">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <value name="timeout">
+      <shadow type="math_number" id="tO?u/{-e#n7+{4}o0A8J">
+        <field name="NUM">15</field>
+      </shadow>
+    </value>
+    <next>
+      <block type="net_ntp_sync" id="QtF*:.m-b3RRt7F,8:@2">
+        <value name="tz">
+          <shadow type="math_number" id="O-*[@OtCWG?j=$Ub_!oD">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="text_print" id="0[b.T}d%fg8EoSq0]8?,">
+            <value name="TEXT">
+              <shadow type="text" id="!b8b{2))snyrhf8Eaw?}">
+                <field name="TEXT">abc</field>
+              </shadow>
+              <block type="get_rtc" id="PT;Iz4xwbtpCY-K{6z[g">
+                <field name="MSG_GET_RTC">Get RTC value</field>
+              </block>
+            </value>
+            <next>
+              <block type="text_print" id="{DrXiFmFh}FrlP^dv;uA">
+                <value name="TEXT">
+                  <shadow type="text" id="#YAqRK{4U!]4GI.HvUw9">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                  <block type="exec_python_func" id="4[g]QP86_cz6:a-P24+2">
+                    <field name="EXEC_PYTHON_FUNC">Call custom Python func</field>
+                    <value name="command">
+                      <shadow type="text" id="kws?H|6fm/w,ZFqU!vW?">
+                        <field name="TEXT">utime.localtime()</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

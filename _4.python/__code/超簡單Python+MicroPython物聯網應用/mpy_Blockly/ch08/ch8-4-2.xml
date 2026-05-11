@@ -1,0 +1,45 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="3zvxwO*1ZMVq6Dl)kUu,">led_pwm</variable>
+  </variables>
+  <block type="variables_set" id="s;=vM{t*[uGG,$A`^/s." x="13" y="64">
+    <field name="VAR" id="3zvxwO*1ZMVq6Dl)kUu,">led_pwm</field>
+    <value name="VALUE">
+      <block type="gpio_create_pwmobj" id="6pVfIC{K{2[ORV3oDr(~">
+        <value name="pin">
+          <shadow type="pinout" id="DGk-HqhJ7-7nvd$sD7=4">
+            <field name="PIN">15</field>
+          </shadow>
+        </value>
+        <value name="frequency">
+          <shadow type="math_number" id="D,-SPczn4bg/12Wv9m~I">
+            <field name="NUM">1000</field>
+          </shadow>
+        </value>
+        <value name="duty">
+          <shadow type="math_number" id="5HUr.{}K[kdF-H[`GG%o">
+            <field name="NUM">512</field>
+          </shadow>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="delay" id=".kxr5JoyAkf??1`HdxsX">
+        <value name="time">
+          <shadow type="math_number" id="-@Hh/MunbKrrkHfWPD_:">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="gpio_pwmobj_deinit" id="Um;?;1,eyjz.7k)HQN]y">
+            <value name="obj">
+              <block type="variables_get" id="op`.9=xBRcWF)VD2bYBF">
+                <field name="VAR" id="3zvxwO*1ZMVq6Dl)kUu,">led_pwm</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

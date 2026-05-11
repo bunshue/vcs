@@ -1,0 +1,132 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="3zvxwO*1ZMVq6Dl)kUu,">led_pwm</variable>
+    <variable id="7tx1%V(9Onw2(qL:dO|{">i</variable>
+  </variables>
+  <block type="variables_set" id="s;=vM{t*[uGG,$A`^/s." x="-312" y="-12">
+    <field name="VAR" id="3zvxwO*1ZMVq6Dl)kUu,">led_pwm</field>
+    <value name="VALUE">
+      <block type="gpio_create_pwmobj" id="6pVfIC{K{2[ORV3oDr(~">
+        <value name="pin">
+          <shadow type="pinout" id="DGk-HqhJ7-7nvd$sD7=4">
+            <field name="PIN">15</field>
+          </shadow>
+        </value>
+        <value name="frequency">
+          <shadow type="math_number" id="D,-SPczn4bg/12Wv9m~I">
+            <field name="NUM">1000</field>
+          </shadow>
+        </value>
+        <value name="duty">
+          <shadow type="math_number" id="5HUr.{}K[kdF-H[`GG%o">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="controls_whileUntil" id="nj~-.o];IjKGL157NZTn">
+        <field name="MODE">WHILE</field>
+        <value name="BOOL">
+          <block type="logic_boolean" id="ZUebWODzk!xHcm;zvjR$">
+            <field name="BOOL">TRUE</field>
+          </block>
+        </value>
+        <statement name="DO">
+          <block type="controls_for" id=":TL_C{n*z||Y|?5%bUz9">
+            <field name="VAR" id="7tx1%V(9Onw2(qL:dO|{">i</field>
+            <field name="ORDER">TRUE</field>
+            <value name="FROM">
+              <shadow type="math_number" id="j0(]X?:SnPWGN]zS!t,M">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+            <value name="TO">
+              <shadow type="math_number" id="P~|$/:r8HF$7V4jIFCBi">
+                <field name="NUM">1023</field>
+              </shadow>
+            </value>
+            <value name="BY">
+              <shadow type="math_number" id="=y+_w+oWizJGQ?7mq(5u">
+                <field name="NUM">10</field>
+              </shadow>
+            </value>
+            <statement name="DO">
+              <block type="gpio_pwmobj_duty" id="^D_l{MU6=(EnJO5Qw~*4">
+                <value name="obj">
+                  <block type="variables_get" id="Pt$nXr=w*~bHw5FLl8?{">
+                    <field name="VAR" id="3zvxwO*1ZMVq6Dl)kUu,">led_pwm</field>
+                  </block>
+                </value>
+                <value name="duty">
+                  <shadow type="math_number" id="`o17tuhyNsMBmFq0h}kW">
+                    <field name="NUM">50</field>
+                  </shadow>
+                  <block type="variables_get" id="y+h[-a;tg^`{%)VwnVJD">
+                    <field name="VAR" id="7tx1%V(9Onw2(qL:dO|{">i</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="delay" id="z~uN9r2@bj*%u9bQ.AN^">
+                    <value name="time">
+                      <shadow type="math_number" id="ELTk@dC.Blu/Wkv9z44i">
+                        <field name="NUM">0.001</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="controls_for" id="KOOu!,|{26EGqP~ho/QK">
+                <field name="VAR" id="7tx1%V(9Onw2(qL:dO|{">i</field>
+                <field name="ORDER">FALSE</field>
+                <value name="FROM">
+                  <shadow type="math_number" id="]DLd_0RkTP~7}fz2,0N;">
+                    <field name="NUM">0</field>
+                  </shadow>
+                </value>
+                <value name="TO">
+                  <shadow type="math_number" id="rJQoi]2VY/Zi^tmOG:::">
+                    <field name="NUM">1023</field>
+                  </shadow>
+                </value>
+                <value name="BY">
+                  <shadow type="math_number" id="f,Vw+5.(FlI(,lUg{7qy">
+                    <field name="NUM">10</field>
+                  </shadow>
+                </value>
+                <statement name="DO">
+                  <block type="gpio_pwmobj_duty" id="ER;oe=cSWmEe+DM+:i@2">
+                    <value name="obj">
+                      <block type="variables_get" id="}.7E^DCu0f(BQZ*,uaFf">
+                        <field name="VAR" id="3zvxwO*1ZMVq6Dl)kUu,">led_pwm</field>
+                      </block>
+                    </value>
+                    <value name="duty">
+                      <shadow type="math_number">
+                        <field name="NUM">50</field>
+                      </shadow>
+                      <block type="variables_get" id="Sxx3S{8pZ:.yZD!H=Mn6">
+                        <field name="VAR" id="7tx1%V(9Onw2(qL:dO|{">i</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="delay" id="=as)jCZYZ..]!`Ab^mt4">
+                        <value name="time">
+                          <shadow type="math_number" id="P_]rzEAJ$ZTz=*b7BShb">
+                            <field name="NUM">0.001</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

@@ -1,0 +1,70 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="~j{f2/6:.s_)`zL[)|4?">ip_address</variable>
+  </variables>
+  <block type="variables_set" id="(jCT#_`2|[3,,p`FO*BH" x="138" y="12">
+    <field name="VAR" id="~j{f2/6:.s_)`zL[)|4?">ip_address</field>
+    <value name="VALUE">
+      <block type="xtools_connect_wifi_ip" id="Q9/g5`-%^4K:atOBZ5@L">
+        <value name="ssid">
+          <shadow type="text" id="RLXdrS.W+ryc6A}~H6HP">
+            <field name="TEXT"/>
+          </shadow>
+        </value>
+        <value name="pwd">
+          <shadow type="text" id="SEkkTLe3)I{*}Gl1FS,P">
+            <field name="TEXT"/>
+          </shadow>
+        </value>
+        <value name="timeout">
+          <shadow type="math_number" id="3;aTX(MS6zZseM?W5TIF">
+            <field name="NUM">15</field>
+          </shadow>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="net_http_server_begin" id=":QJolQn97r`E/dPe(}9!">
+        <value name="port">
+          <shadow type="math_number" id="sB@!A:J~Hl_hfvRsDLI2">
+            <field name="NUM">80</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="net_http_server_setdocpath" id=")DSql25,#d4y)P6TMgj@">
+            <value name="path">
+              <shadow type="text" id="_PmmgX0wBi](`Ko*8o?D">
+                <field name="TEXT">/www</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="text_print" id="sm{EZXgLOJ]ezO,2mV{)">
+                <value name="TEXT">
+                  <shadow type="text" id="n1O2_T@n0!77PBscjB1I">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                  <block type="text_join" id="6K_DVYhOcReg%3J0ovPQ">
+                    <mutation items="2"/>
+                    <value name="ADD0">
+                      <block type="text" id="{B^F5C5~Ow4{*mub,~([">
+                        <field name="TEXT">Web伺服器的 IP 位址: </field>
+                      </block>
+                    </value>
+                    <value name="ADD1">
+                      <block type="variables_get" id="B4){!NZaQ{)a4il@+#Wq">
+                        <field name="VAR" id="~j{f2/6:.s_)`zL[)|4?">ip_address</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="net_http_server_start" id="Lz4$Pz~C3[Mayk#`f(.["/>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

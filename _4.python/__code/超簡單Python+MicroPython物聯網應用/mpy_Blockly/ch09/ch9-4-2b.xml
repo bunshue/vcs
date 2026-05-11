@@ -1,0 +1,91 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="R@2SSdEHW)BLpZ0[/ND:">json_str</variable>
+    <variable id="QFj4lLm|4cEGK9fakwZG">parsed</variable>
+  </variables>
+  <block type="variables_set" id="27/vQ}D;Ol:CBC%[/w4]" x="-862" y="138">
+    <field name="VAR" id="R@2SSdEHW)BLpZ0[/ND:">json_str</field>
+    <value name="VALUE">
+      <block type="text" id="wUDL4N4l]E9m@7Mih?jk">
+        <field name="TEXT">{"device":"temperature","id":543,"values":[1,2,3]}</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="rVxt+,5%|re(yA5MO#AH">
+        <field name="VAR" id="QFj4lLm|4cEGK9fakwZG">parsed</field>
+        <value name="VALUE">
+          <block type="ujson_loads" id="!mTG6aW%CBP!+ZQeL:t7">
+            <value name="json_str">
+              <block type="variables_get" id="YE3]7`*XDv[9@3~G~^#o">
+                <field name="VAR" id="R@2SSdEHW)BLpZ0[/ND:">json_str</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="text_print" id="YUohxuQ^j}PX`8ndICug">
+            <value name="TEXT">
+              <shadow type="text" id="*?V.3e.$5kr!H,-E!kQL">
+                <field name="TEXT">abc</field>
+              </shadow>
+              <block type="net_response_json_get" id="4DF^i=/wcRi?y/h:)U)v">
+                <value name="item">
+                  <block type="text" id="!,)P0Z4[CZ![jj5~x7UO">
+                    <field name="TEXT">device</field>
+                  </block>
+                </value>
+                <value name="json">
+                  <block type="variables_get" id="Yqb}v(n~Q5I)R3B`i.sw">
+                    <field name="VAR" id="QFj4lLm|4cEGK9fakwZG">parsed</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="text_print" id="BUsP0A{)hzGi?x*tyx/~">
+                <value name="TEXT">
+                  <shadow type="text">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                  <block type="net_response_json_get" id="m71F/4@-5eT8![B@dK0u">
+                    <value name="item">
+                      <block type="text" id="@t7$2-7%^+BwQ1Xzu*}W">
+                        <field name="TEXT">id</field>
+                      </block>
+                    </value>
+                    <value name="json">
+                      <block type="variables_get" id="r(9gY=D-h2Bp(=^Fl{0f">
+                        <field name="VAR" id="QFj4lLm|4cEGK9fakwZG">parsed</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_print" id=";]RoziO*U-/oJL~]lORc">
+                    <value name="TEXT">
+                      <shadow type="text">
+                        <field name="TEXT">abc</field>
+                      </shadow>
+                      <block type="net_response_json_get" id="-Uqz)zTBGyFp6pWlx/:Q">
+                        <value name="item">
+                          <block type="text" id="wmTW!LMBi|Fq6sG^=ark">
+                            <field name="TEXT">values</field>
+                          </block>
+                        </value>
+                        <value name="json">
+                          <block type="variables_get" id="}~S2B)CS;-/Ca2Jg3b!Z">
+                            <field name="VAR" id="QFj4lLm|4cEGK9fakwZG">parsed</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

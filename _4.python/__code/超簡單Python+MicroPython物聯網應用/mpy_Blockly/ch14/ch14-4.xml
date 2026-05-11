@@ -1,0 +1,29 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="net_ap_mode" id="qW8%}b{E`6Q+L~P!p/U2" x="88" y="37">
+    <field name="NAME">Configure Access Point Mode</field>
+    <field name="NET_NETWORK_NAME">Network name</field>
+    <field name="NET_NETWORK_KEY">Network password</field>
+    <value name="wifi_essid">
+      <shadow type="text" id="m8L}D1QNv3(mOSejE3$/">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <value name="wifi_key">
+      <shadow type="text" id="Ui(sEErS|~QGc*;kN(i!">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <next>
+      <block type="text_print" id="3cU1@!`oDWnNbT]b/B7H">
+        <value name="TEXT">
+          <shadow type="text" id="LJeyL4N{IH7E%[Q]lW=V">
+            <field name="TEXT">abc</field>
+          </shadow>
+          <block type="text" id="irZ;]gw@l@0)6y}{JDdp">
+            <field name="TEXT">WiFi基地台已經啟用...</field>
+          </block>
+        </value>
+      </block>
+    </next>
+  </block>
+</xml>

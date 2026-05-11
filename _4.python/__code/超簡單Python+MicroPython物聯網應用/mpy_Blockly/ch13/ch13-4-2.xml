@@ -1,0 +1,182 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="dcf/YL@zo5}}qs-M7nRB">DB</variable>
+    <variable id="-YN;gHZ`0KtyA7m04J5-">URL</variable>
+    <variable id="?LjE_UV$a$8l_$HeLn*)">distance</variable>
+    <variable id="S4Q1*m(*IMpqmJV)M933">data</variable>
+    <variable id="*QW;CxL#v24+0~Q[sH:s">r</variable>
+  </variables>
+  <block type="xtools_connect_wifi" id="9!l$rYzvJ.]w_Mm!Z^!K" x="88" y="38">
+    <value name="ssid">
+      <shadow type="text" id="*7+R=97tL*IoR2XsArdW">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <value name="pwd">
+      <shadow type="text" id="OdJK_%,T$(R*e!`*[}*g">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <value name="timeout">
+      <shadow type="math_number" id="o4Kvwbj++dOY@R~!Ra}4">
+        <field name="NUM">15</field>
+      </shadow>
+    </value>
+    <next>
+      <block type="net_ntp_sync" id=")Ljx?e.ZNug=GqZRR_NB">
+        <value name="tz">
+          <shadow type="math_number" id="j$T!b(Ua3S3{%Zi`65{P">
+            <field name="NUM">8</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="variables_set" id="~-_xwc~^4bf/jiA.^A^|">
+            <field name="VAR" id="dcf/YL@zo5}}qs-M7nRB">DB</field>
+            <value name="VALUE">
+              <block type="text" id="FbFuKC|h4Qaaz(4aq?^/">
+                <field name="TEXT">iot-distance-?????-default-rtdb</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="r]#1%z$wjl*.HI77/E-/">
+                <field name="VAR" id="-YN;gHZ`0KtyA7m04J5-">URL</field>
+                <value name="VALUE">
+                  <block type="text_join" id="-uwI=K-}Gb{mbBAY8S(U">
+                    <mutation items="3"/>
+                    <value name="ADD0">
+                      <block type="text" id="u?R3XE$6Nnb]9S|s+{.L">
+                        <field name="TEXT">https://</field>
+                      </block>
+                    </value>
+                    <value name="ADD1">
+                      <block type="variables_get" id="zU{QN+mkmi2ck#CSm3nn">
+                        <field name="VAR" id="dcf/YL@zo5}}qs-M7nRB">DB</field>
+                      </block>
+                    </value>
+                    <value name="ADD2">
+                      <block type="text" id="C,:[-,FN)n|[c10R3l)@">
+                        <field name="TEXT">.firebaseio.com/Team-IOT/data.json</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="controls_whileUntil" id="[W:/8x|I^2-/i@7W|cFj">
+                    <field name="MODE">WHILE</field>
+                    <value name="BOOL">
+                      <block type="logic_boolean" id="r_J_sG9zX*o8}Vp|b`^%">
+                        <field name="BOOL">TRUE</field>
+                      </block>
+                    </value>
+                    <statement name="DO">
+                      <block type="text_print" id="t6z+e!_Qyz}EyfX5:oI_">
+                        <value name="TEXT">
+                          <shadow type="text" id="D-.xnK~t4,8A*wP#j-]w">
+                            <field name="TEXT">abc</field>
+                          </shadow>
+                          <block type="text" id="l5#cDoeGiQ02#QC|Hs,S">
+                            <field name="TEXT">儲存距離資料!</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="variables_set" id="ynf5zX_s.(usO#K4v.u-">
+                            <field name="VAR" id="?LjE_UV$a$8l_$HeLn*)">distance</field>
+                            <value name="VALUE">
+                              <block type="adc" id="UM*31OV(Fz4[wL]Y*|rL">
+                                <value name="pin">
+                                  <shadow type="math_number" id="Hc]*zI77C5Lv^OIlWQJw">
+                                    <field name="NUM">0</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="variables_set" id="6Oa4`RhaXnFWgK{=aj%I">
+                                <field name="VAR" id="S4Q1*m(*IMpqmJV)M933">data</field>
+                                <value name="VALUE">
+                                  <block type="dicts_create_with" id="?%6s_o5skbuO@CqN*1)1">
+                                    <mutation xmlns="http://www.w3.org/1999/xhtml" items="2"></mutation>
+                                    <value name="KEY0">
+                                      <block type="text" id="=xly:V#F#N$vY[viu;qm">
+                                        <field name="TEXT">datetime</field>
+                                      </block>
+                                    </value>
+                                    <value name="VALUE0">
+                                      <block type="exec_python_func" id="`=h|2kW.G(1g.0ZhJ?|/">
+                                        <field name="EXEC_PYTHON_FUNC">Call custom Python func</field>
+                                        <value name="command">
+                                          <shadow type="text" id="6-LAF?J(t_-kEjHkt#ng">
+                                            <field name="TEXT">xtools.format_datetime(utime.localtime())</field>
+                                          </shadow>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <value name="KEY1">
+                                      <block type="text" id="e#bNK96{C@m@o;*Ldf[J">
+                                        <field name="TEXT">distance</field>
+                                      </block>
+                                    </value>
+                                    <value name="VALUE1">
+                                      <block type="variables_get" id="iyMae_PbQud/nX9[y(S2">
+                                        <field name="VAR" id="?LjE_UV$a$8l_$HeLn*)">distance</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="variables_set" id="kdH%#w+QLSE(..t%+.AP">
+                                    <field name="VAR" id="*QW;CxL#v24+0~Q[sH:s">r</field>
+                                    <value name="VALUE">
+                                      <block type="exec_python_func" id="7lAVqPi/pGkL=92+#lpV">
+                                        <field name="EXEC_PYTHON_FUNC">Call custom Python func</field>
+                                        <value name="command">
+                                          <shadow type="text" id="hMLM:{:dalx3Pi.JeS~D">
+                                            <field name="TEXT">urequests.put(URL, json=data)</field>
+                                          </shadow>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="text_print" id="gq5w95oqroobfk.-^AQ1">
+                                        <value name="TEXT">
+                                          <shadow type="text" id="F^*e${@?FtK(*JgT]}2j">
+                                            <field name="TEXT">abc</field>
+                                          </shadow>
+                                          <block type="net_response_text" id="2!=EOkL2jR~zAK1i,y,i">
+                                            <field name="BLOCK_NET_TEXT">Get text</field>
+                                            <value name="response">
+                                              <block type="variables_get" id="c[tyT,h:M5HdkwfmazB^">
+                                                <field name="VAR" id="*QW;CxL#v24+0~Q[sH:s">r</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="delay" id="C]6!Rxd{i*{/OSoWAd~)">
+                                            <value name="time">
+                                              <shadow type="math_number" id="Z0|03vlS6yKSTi=3tlx4">
+                                                <field name="NUM">5</field>
+                                              </shadow>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

@@ -1,0 +1,1 @@
+請將閃爍LED的MicroPython程式碼改成blink()函式，參數是間隔的秒數。

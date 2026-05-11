@@ -1,0 +1,319 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="]eh670#QyTVJvOq?j+Sb">ledR</variable>
+    <variable id="xA7kUD}_siyB_1*iZDL.">ADAFRUIT_IO_USERNAME</variable>
+    <variable id=".WlCU[fS)(6RNUgLYS_x">ADAFRUIT_IO_KEY</variable>
+    <variable id=":O8PT9M`rCua~:2r}f3U">FEED</variable>
+    <variable id="KzeEt(ZAt-XcTX?q5#4-">callback_msg</variable>
+    <variable type="String" id="NZPl^OC0p#XeA@%T[,M^">callback_topic</variable>
+    <variable id="*!/9o`3lB_wC]gfD@_FZ">topic</variable>
+  </variables>
+  <block type="xtools_connect_wifi" id="K`HF`tx1mPq|rlNpJl:}" x="138" y="38">
+    <value name="ssid">
+      <shadow type="text" id="NjR/Krw^1L1JW4vI5sRX">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <value name="pwd">
+      <shadow type="text" id=".ZPqeW:#YDnFO((H^WFY">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <value name="timeout">
+      <shadow type="math_number" id="Z%_II9Z_oT(!2Z{m+m]1">
+        <field name="NUM">15</field>
+      </shadow>
+    </value>
+    <next>
+      <block type="variables_set" id="B;$xu96D-:=ENKyjlh?[">
+        <field name="VAR" id="]eh670#QyTVJvOq?j+Sb">ledR</field>
+        <value name="VALUE">
+          <block type="gpio_create_pinobj" id="@k_b{eJCq81}F=fRp;Z,">
+            <field name="type">OUT</field>
+            <value name="pin">
+              <shadow type="pinout" id="t~Ve}h$.]y%Qj#zT5{^M">
+                <field name="PIN">15</field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="gpio_set_pinobj" id="H:Xoimy/+DZ#f.Z.K^iP">
+            <value name="obj">
+              <block type="variables_get" id="WMXwRYSg;AYf}B1#8KKy">
+                <field name="VAR" id="]eh670#QyTVJvOq?j+Sb">ledR</field>
+              </block>
+            </value>
+            <value name="value">
+              <shadow type="logic_boolean" id="M{Abwz1k9UirB.8%aSb;">
+                <field name="BOOL">FALSE</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="variables_set" id="7v55]O.#Ym8T|P6-Tclv">
+                <field name="VAR" id="xA7kUD}_siyB_1*iZDL.">ADAFRUIT_IO_USERNAME</field>
+                <value name="VALUE">
+                  <block type="text" id=",ni%Ny7d@HUx0CDw%3`6">
+                    <field name="TEXT">hueyanchen2014</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="N1^xPG!T;KWsKv#H@xoP">
+                    <field name="VAR" id=".WlCU[fS)(6RNUgLYS_x">ADAFRUIT_IO_KEY</field>
+                    <value name="VALUE">
+                      <block type="text" id="btHkL!2V:acN=ET(%E`:">
+                        <field name="TEXT">&lt;AIO KEY&gt;</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="ObRQn}H-z8Tjv3kmuoCI">
+                        <field name="VAR" id=":O8PT9M`rCua~:2r}f3U">FEED</field>
+                        <value name="VALUE">
+                          <block type="text" id="|AY{B$-%U6fRR45+TCjf">
+                            <field name="TEXT">lights</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="mqtt_init" id="5cWEA52UW%[2+]gBV[j1">
+                            <field name="BLOCK_MQTT_INIT">Init MQTT client</field>
+                            <field name="MQTT_CLIENT_ID">client ID</field>
+                            <field name="MQTT_SERVER">server address</field>
+                            <field name="MQTT_PORT">server port</field>
+                            <field name="MQTT_USER">username</field>
+                            <field name="MQTT_PASSWORD">password</field>
+                            <value name="clientid">
+                              <shadow type="text" id="uHW8ryXa4pcceC(j5]3d">
+                                <field name="TEXT">mqtt_client_id</field>
+                              </shadow>
+                              <block type="xtools_get_id" id="?X1.Es-P6.EL5y%b?0M["/>
+                            </value>
+                            <value name="server">
+                              <shadow type="text" id="P[O5oPw~,m~I}E86DXui">
+                                <field name="TEXT"/>
+                              </shadow>
+                              <block type="text" id=")c1x8-uJ=YOhX[]AvR/!">
+                                <field name="TEXT">io.adafruit.com</field>
+                              </block>
+                            </value>
+                            <value name="port">
+                              <shadow type="math_number" id="`jIgLchY2OSe:PU5~`E;">
+                                <field name="NUM">1883</field>
+                              </shadow>
+                            </value>
+                            <value name="user">
+                              <block type="variables_get" id="A..,hAFWS}VZnvdwy_#V">
+                                <field name="VAR" id="xA7kUD}_siyB_1*iZDL.">ADAFRUIT_IO_USERNAME</field>
+                              </block>
+                            </value>
+                            <value name="password">
+                              <block type="variables_get" id="t5(;Q/x.E-kyfUJcQe0r">
+                                <field name="VAR" id=".WlCU[fS)(6RNUgLYS_x">ADAFRUIT_IO_KEY</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="mqtt_set_callback" id="o`-Mk?ME@yVIX9B~F_sy">
+                                <field name="BLOCK_MQTT_SET_CALLBACK">Set callback to MQTT messages</field>
+                                <field name="MQTT_DATA_VAR" id="KzeEt(ZAt-XcTX?q5#4-">callback_msg</field>
+                                <field name="MQTT_TOPIC_VAR" id="NZPl^OC0p#XeA@%T[,M^" variabletype="String">callback_topic</field>
+                                <statement name="do">
+                                  <block type="controls_if" id=".!uLD`K_w#U:#zck?k29">
+                                    <value name="IF0">
+                                      <block type="logic_compare" id="BgO[~ho4.+#wL)IOBa.1">
+                                        <field name="OP">EQ</field>
+                                        <value name="A">
+                                          <block type="decode_bytes_to_text" id="r,p$=X_ZO#`a3l0s=d@^">
+                                            <field name="VAR">decode bytes to text</field>
+                                            <value name="var">
+                                              <block type="variables_get" id="ox!KJ2:1.bY~49y0Z_:2">
+                                                <field name="VAR" id="KzeEt(ZAt-XcTX?q5#4-">callback_msg</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="text" id="tj:i34gC=jN37qH^#t8S">
+                                            <field name="TEXT">ON</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <statement name="DO0">
+                                      <block type="gpio_set_pinobj" id="qZT(9t/C8*GtQkfajH=d">
+                                        <value name="obj">
+                                          <block type="variables_get" id="5l`r4[fXNXrT5gN*z-r{">
+                                            <field name="VAR" id="]eh670#QyTVJvOq?j+Sb">ledR</field>
+                                          </block>
+                                        </value>
+                                        <value name="value">
+                                          <shadow type="logic_boolean" id="l9}}R,N5I%8dg7K7.3d0">
+                                            <field name="BOOL">TRUE</field>
+                                          </shadow>
+                                        </value>
+                                      </block>
+                                    </statement>
+                                    <next>
+                                      <block type="controls_if" id="f%@FdDCqKQOd!4!xjN)f">
+                                        <value name="IF0">
+                                          <block type="logic_compare" id="8=,HOoD1~Cb$5#p@n@NL">
+                                            <field name="OP">EQ</field>
+                                            <value name="A">
+                                              <block type="decode_bytes_to_text" id="[pa/o@usR4{yR4.}!$vL">
+                                                <field name="VAR">decode bytes to text</field>
+                                                <value name="var">
+                                                  <block type="variables_get" id="buFlixnrepXXY)S|lQF}">
+                                                    <field name="VAR" id="KzeEt(ZAt-XcTX?q5#4-">callback_msg</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="text" id="mbz*l~}7NE,^!muZ_z7Q">
+                                                <field name="TEXT">OFF</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="DO0">
+                                          <block type="gpio_set_pinobj" id=",q1l=E*Y;;4nPt(L%hH0">
+                                            <value name="obj">
+                                              <block type="variables_get" id=":Tr6K4Ahv0WIX^kOiG8s">
+                                                <field name="VAR" id="]eh670#QyTVJvOq?j+Sb">ledR</field>
+                                              </block>
+                                            </value>
+                                            <value name="value">
+                                              <shadow type="logic_boolean" id="`rm=m^$`VHo/Py?1s1WM">
+                                                <field name="BOOL">TRUE</field>
+                                              </shadow>
+                                            </value>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="text_print" id="=)Fx,f`?%{hu#EPT8Qo%">
+                                            <value name="TEXT">
+                                              <shadow type="text" id="clICaTi+=g%+/3qOD,?F">
+                                                <field name="TEXT">abc</field>
+                                              </shadow>
+                                              <block type="text_join" id=",(0G9Joui^#/.dExWpsc">
+                                                <mutation items="2"/>
+                                                <value name="ADD0">
+                                                  <block type="text" id="jo8;e$HJ0x[wppls76Tu">
+                                                    <field name="TEXT">收到訊息: </field>
+                                                  </block>
+                                                </value>
+                                                <value name="ADD1">
+                                                  <block type="decode_bytes_to_text" id="^cSvC9N,%4G{?L~+eS9?">
+                                                    <field name="VAR">decode bytes to text</field>
+                                                    <value name="var">
+                                                      <block type="variables_get" id="a{H;pADH3$WBw_.$p!.e">
+                                                        <field name="VAR" id="KzeEt(ZAt-XcTX?q5#4-">callback_msg</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <block type="mqtt_connect" id="w9+*;_?sCDQiX)$6elwy">
+                                    <field name="BLOCK_MQTT_CONNECT">Connect MQTT client</field>
+                                    <next>
+                                      <block type="variables_set" id="P~9t(D%JWU`JwQiR=Lg=">
+                                        <field name="VAR" id="*!/9o`3lB_wC]gfD@_FZ">topic</field>
+                                        <value name="VALUE">
+                                          <block type="text_join" id="H2XGO_a;1|pqUTim{SZ!">
+                                            <mutation items="3"/>
+                                            <value name="ADD0">
+                                              <block type="variables_get" id="b~=D8+^@}V:nNVDT8,~$">
+                                                <field name="VAR" id="xA7kUD}_siyB_1*iZDL.">ADAFRUIT_IO_USERNAME</field>
+                                              </block>
+                                            </value>
+                                            <value name="ADD1">
+                                              <block type="text" id="6_ucq1~CJEL[AUHHwuCa">
+                                                <field name="TEXT">/feeds/</field>
+                                              </block>
+                                            </value>
+                                            <value name="ADD2">
+                                              <block type="variables_get" id="WSIMRd1)dFear6X4u;z5">
+                                                <field name="VAR" id=":O8PT9M`rCua~:2r}f3U">FEED</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="text_print" id="8:uh*.7HYy#m(WiN$BMW">
+                                            <value name="TEXT">
+                                              <shadow type="text" id="{M88C}kn/M;1NZy`BeF%">
+                                                <field name="TEXT">abc</field>
+                                              </shadow>
+                                              <block type="variables_get" id="v,MFDbbaIF|`Z?{9[}tM">
+                                                <field name="VAR" id="*!/9o`3lB_wC]gfD@_FZ">topic</field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="mqtt_subscribe" id="iWx;f)~=O[~22$H-IkWk">
+                                                <field name="BLOCK_MQTT_SUBSCRIBE">Subscribe to MQTT topic</field>
+                                                <field name="MQTT_TOPIC">topic</field>
+                                                <value name="topic">
+                                                  <shadow type="text" id="0w}3^u#k5x,^xdB^G#fz">
+                                                    <field name="TEXT"/>
+                                                  </shadow>
+                                                  <block type="variables_get" id="*j0eip$~.7{m|)9Iy{^{">
+                                                    <field name="VAR" id="*!/9o`3lB_wC]gfD@_FZ">topic</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="controls_whileUntil" id="G)HQN5fXu$c+*faPD4@q">
+                                                    <field name="MODE">WHILE</field>
+                                                    <value name="BOOL">
+                                                      <block type="logic_boolean" id="DZTuBE#%Xxdy`~n4*7FA">
+                                                        <field name="BOOL">TRUE</field>
+                                                      </block>
+                                                    </value>
+                                                    <statement name="DO">
+                                                      <block type="mqtt_check_msg" id="0hr|*mF??~Q`E;oQ,|tV">
+                                                        <field name="BLOCK_MQTT_CHECK_MSG">Check for MQTT server messages</field>
+                                                        <next>
+                                                          <block type="delay" id="^aih=dOk3z/?jhX}R.Bc">
+                                                            <value name="time">
+                                                              <shadow type="math_number" id="=482zzOQtTPO`c2llDfa">
+                                                                <field name="NUM">0</field>
+                                                              </shadow>
+                                                              <block type="math_number" id="S-``+0Doqu0K(rBb5[9O">
+                                                                <field name="NUM">1</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </statement>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

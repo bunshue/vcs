@@ -1,0 +1,278 @@
+[
+    {
+        "id": "61149825.311908",
+        "type": "mqtt in",
+        "z": "1a7e0abb458fda2e",
+        "name": "",
+        "topic": "sensors/123456/temp",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "b23ae2df.ec019",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 180,
+        "y": 600,
+        "wires": [
+            [
+                "433b6a60.7670a4",
+                "178bec29.f86ca4",
+                "f7cced9ec857432d"
+            ]
+        ]
+    },
+    {
+        "id": "433b6a60.7670a4",
+        "type": "debug",
+        "z": "1a7e0abb458fda2e",
+        "name": "顯示溫度",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "d5bb51ef.53a9d",
+        "type": "ui_chart",
+        "z": "1a7e0abb458fda2e",
+        "name": "",
+        "group": "248cbbb0.18e794",
+        "order": 3,
+        "width": 14,
+        "height": 5,
+        "label": "溫溼度:",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "20",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 680,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "943b60e1.eb1b3",
+        "type": "mqtt in",
+        "z": "1a7e0abb458fda2e",
+        "name": "",
+        "topic": "sensors/123456/humi",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "b23ae2df.ec019",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 700,
+        "wires": [
+            [
+                "f03f26e8.d409b8",
+                "7c4e1697.fad358",
+                "e7e1db4095455c16"
+            ]
+        ]
+    },
+    {
+        "id": "f03f26e8.d409b8",
+        "type": "change",
+        "z": "1a7e0abb458fda2e",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "溼度",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 700,
+        "wires": [
+            [
+                "d5bb51ef.53a9d"
+            ]
+        ]
+    },
+    {
+        "id": "178bec29.f86ca4",
+        "type": "change",
+        "z": "1a7e0abb458fda2e",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "溫度",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 600,
+        "wires": [
+            [
+                "d5bb51ef.53a9d"
+            ]
+        ]
+    },
+    {
+        "id": "7c4e1697.fad358",
+        "type": "debug",
+        "z": "1a7e0abb458fda2e",
+        "name": "顯示溼度",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "f7cced9ec857432d",
+        "type": "ui_gauge",
+        "z": "1a7e0abb458fda2e",
+        "name": "",
+        "group": "248cbbb0.18e794",
+        "order": 1,
+        "width": 7,
+        "height": 5,
+        "gtype": "gage",
+        "title": "溫度",
+        "label": "度",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 450,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "e7e1db4095455c16",
+        "type": "ui_gauge",
+        "z": "1a7e0abb458fda2e",
+        "name": "",
+        "group": "248cbbb0.18e794",
+        "order": 2,
+        "width": 7,
+        "height": 5,
+        "gtype": "gage",
+        "title": "溼度",
+        "label": "RH",
+        "format": "{{value}}",
+        "min": "50",
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 450,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "b23ae2df.ec019",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "248cbbb0.18e794",
+        "type": "ui_group",
+        "name": "溫溼度監控",
+        "tab": "3f79c420.cfc1bc",
+        "order": 1,
+        "disp": true,
+        "width": 14,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3f79c420.cfc1bc",
+        "type": "ui_tab",
+        "name": "樹莓派Pico溫溼度監控儀表板",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]

@@ -1,0 +1,56 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="$?+8[J596XdI,qj~/Xl,">contents</variable>
+  </variables>
+  <block type="file_open_read" id="Z_HVWgB6K)UlOE)z1l26" x="-612" y="-38">
+    <value name="filename">
+      <shadow type="text" id="w`kIbfnyW1SRJI5o2,$g">
+        <field name="TEXT">file.txt</field>
+      </shadow>
+      <block type="text" id="8XIVK2^:`*H7T3u+u?g+">
+        <field name="TEXT">data.txt</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="3W=3cfX$xHmIzLkVFsj+">
+        <field name="VAR" id="$?+8[J596XdI,qj~/Xl,">contents</field>
+        <value name="VALUE">
+          <block type="file_read" id="H}ZI%agxhOM~gtRv}.mp">
+            <value name="filename">
+              <shadow type="text" id=")TclTGws$0#2UG-EPMrH">
+                <field name="TEXT">file.txt</field>
+              </shadow>
+              <block type="text" id="U,ur~)auc1NLP8lGE8hs">
+                <field name="TEXT">data.txt</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="text_print" id="wc@GT@p;mE-xTeLhu7YX">
+            <value name="TEXT">
+              <shadow type="text" id="2U~Y?a$U+YT2AuWmnU_]">
+                <field name="TEXT">abc</field>
+              </shadow>
+              <block type="variables_get" id="T55[@0%%G_1FH2B?*+}J">
+                <field name="VAR" id="$?+8[J596XdI,qj~/Xl,">contents</field>
+              </block>
+            </value>
+            <next>
+              <block type="file_close" id="C@)K^^Y.q)VDKfc7p+Mw">
+                <value name="filename">
+                  <shadow type="text" id="3u($Kw8=78He0~gCtWBk">
+                    <field name="TEXT">file.txt</field>
+                  </shadow>
+                  <block type="text" id="L}tHOiq;Xok@kcocg(Sm">
+                    <field name="TEXT">data.txt</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

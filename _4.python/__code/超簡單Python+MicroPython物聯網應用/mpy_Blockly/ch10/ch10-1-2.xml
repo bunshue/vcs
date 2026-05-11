@@ -1,0 +1,44 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="file_open_write" id="jqmu5!cSYVtitC%h-$9J" x="-613" y="-12">
+    <value name="filename">
+      <shadow type="text" id="oi.uDDKI+/#4@ptX)/*c">
+        <field name="TEXT">data.txt</field>
+      </shadow>
+      <block type="text" id="U,ur~)auc1NLP8lGE8hs">
+        <field name="TEXT">data.txt</field>
+      </block>
+    </value>
+    <next>
+      <block type="file_write" id="Z}dd-e2[q=3TE~qED6wl">
+        <value name="filename">
+          <shadow type="text" id="#3B$t.~13/v|4z7_9f_M">
+            <field name="TEXT">file.txt</field>
+          </shadow>
+          <block type="text" id="p/25{*jT;^lT@TEYA3tK">
+            <field name="TEXT">data.txt</field>
+          </block>
+        </value>
+        <value name="data">
+          <shadow type="text" id="Z)ZMr;?{7%)tMS-k;!1%">
+            <field name="TEXT">File contents</field>
+          </shadow>
+          <block type="text" id="v,CCE-X#=26GeVDR)t1f">
+            <field name="TEXT">陳會安</field>
+          </block>
+        </value>
+        <next>
+          <block type="file_close" id="C@)K^^Y.q)VDKfc7p+Mw">
+            <value name="filename">
+              <shadow type="text" id="3u($Kw8=78He0~gCtWBk">
+                <field name="TEXT">file.txt</field>
+              </shadow>
+              <block type="text" id="L}tHOiq;Xok@kcocg(Sm">
+                <field name="TEXT">data.txt</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

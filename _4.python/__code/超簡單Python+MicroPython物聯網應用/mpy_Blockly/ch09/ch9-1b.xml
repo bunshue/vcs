@@ -1,0 +1,55 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="wifi_client_connect" id="UX37:Ow7j43sZf]2$A^7" x="-788" y="62">
+    <field name="NAME">Connect to Wifi network</field>
+    <field name="WIFI_CLIENT_NET_NAME">Network name</field>
+    <field name="WIFI_CLIENT_NET_KEY">Network key</field>
+    <value name="wifi_client_essid">
+      <shadow type="text" id="Ojoh=oE3-f-po8;qEt#3">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <value name="wifi_client_key">
+      <shadow type="text" id="~w0]MJh(2l*CxXU/X/A0">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <next>
+      <block type="text_print" id="DwOW]9to`C78AE!](64`">
+        <value name="TEXT">
+          <shadow type="text" id="h4;4fbKx|m}%pdPES}Q6">
+            <field name="TEXT">abc</field>
+          </shadow>
+          <block type="text_join" id="AP77C/}1/EYhwT{B-(,d">
+            <mutation items="2"/>
+            <value name="ADD0">
+              <block type="text" id=";wIq!ozPteZg!ufQ6+gs">
+                <field name="TEXT">network config:</field>
+              </block>
+            </value>
+            <value name="ADD1">
+              <block type="net_ifconfig" id="y$z[E-I}pyCI%Ip$k^(H">
+                <field name="NET_IFCONFIG">Wifi current IP</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="net_disconnect" id=".21uDkfU{o,+F,nBunB4">
+            <next>
+              <block type="text_print" id="9$_x,!Kd{ddR*r0INv5D">
+                <value name="TEXT">
+                  <shadow type="text" id="$-O_XgQVJ!)Jz|0gMI)|">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                  <block type="net_isconnected" id="Tfwy$fdh|,Qa2Kn7LW(J">
+                    <field name="NET_ISCONNECTED">Wifi is connected?</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

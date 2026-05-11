@@ -1,0 +1,47 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="set_rtc" id="7Z}:?m.Uu!3L1GMY=]~M" x="-537" y="88">
+    <field name="SET_RTC">Set RTC value</field>
+    <value name="year">
+      <block type="math_number" id="%6aA/Dzv43C_-|`R2oYp">
+        <field name="NUM">2022</field>
+      </block>
+    </value>
+    <value name="month">
+      <block type="math_number" id="5Lqx3;13=m{t@G~H#?qq">
+        <field name="NUM">9</field>
+      </block>
+    </value>
+    <value name="day">
+      <block type="math_number" id="?_nCv}Wfm4]RF^Q)Wl$/">
+        <field name="NUM">24</field>
+      </block>
+    </value>
+    <value name="hour">
+      <block type="math_number" id="[c!cy9RHH1/!pC/w5m{n">
+        <field name="NUM">18</field>
+      </block>
+    </value>
+    <value name="minute">
+      <block type="math_number" id="r~o8TzoZlX(pCn=kK2#t">
+        <field name="NUM">0</field>
+      </block>
+    </value>
+    <value name="second">
+      <block type="math_number" id=")F)BL4Fy-LzKZ^4l;((a">
+        <field name="NUM">0</field>
+      </block>
+    </value>
+    <next>
+      <block type="text_print" id="*xINa=J(Ek)vd9?$t{*%">
+        <value name="TEXT">
+          <shadow type="text" id="hJbSL04MY6!|CL@fj1_K">
+            <field name="TEXT">abc</field>
+          </shadow>
+          <block type="get_rtc" id="UKJggiSm!xO*wt-.Y1Zy">
+            <field name="MSG_GET_RTC">Get RTC value</field>
+          </block>
+        </value>
+      </block>
+    </next>
+  </block>
+</xml>

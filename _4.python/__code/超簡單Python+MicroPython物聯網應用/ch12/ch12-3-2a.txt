@@ -1,0 +1,49 @@
+你是MicroPython專家，請用繁體中文改寫下列MicroPython程式，首先完全刪除Pin物件ledG和ledG.value()，然後刪除MQTT出版部分client.publish()方法，並且改為不用user和password的MQTT Broker：broker.hivemq.com，訂閱主題是sensors/1234/temp，可以間隔5秒鐘檢查是否有收到訊息，這是在sub_cb函式顯示收到的溫度資料，如下所示：
+from machine import Pin 
+from umqtt.simple import MQTTClient
+import utime, xtools
+
+xtools.connect_wifi_led()
+ledG = Pin(12, Pin.OUT)
+ledG.value(0)
+
+ADAFRUIT_AIO_USERNAME = "<USERNAME>"
+ADAFRUIT_AIO_KEY = "<AIO KEY>"
+FEED = "lights"
+
+# MQTT 客戶端
+client = MQTTClient (
+    client_id = xtools.get_id(),
+    server = "io.adafruit.com",
+    user = ADAFRUIT_AIO_USERNAME,
+    password = ADAFRUIT_AIO_KEY,
+    ssl = False,
+)
+
+def sub_cb(topic, msg):
+    global ledG
+    print("收到訊息: ", msg.decode())
+    if msg.decode() == "ON":
+        ledG.value(1)
+    if msg.decode() == "OFF":
+        ledG.value(0)
+
+client.set_callback(sub_cb)   # 指定回撥函數來接收訊息
+client.connect()              # 連線
+
+topic = ADAFRUIT_AIO_USERNAME + "/feeds/" +FEED
+print(topic)
+client.subscribe(topic)      # 訂閱主題
+
+while True:
+    print("送出訊息: ON")
+    client.publish(topic, "ON")
+    utime.sleep(2)
+    client.check_msg()
+    print("送出訊息: OFF")
+    client.publish(topic, "OFF")
+    utime.sleep(2)
+    client.check_msg()
+    
+請使用from/import語法來匯入所需的物件。
+不需要主程式。

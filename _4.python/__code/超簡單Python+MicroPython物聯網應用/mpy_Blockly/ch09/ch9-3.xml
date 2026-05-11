@@ -1,0 +1,147 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="MK(B)#`kST1)EgNu/5CV">name</variable>
+    <variable id="Ngvc.7eF$^fXza$rR77l">passwd</variable>
+    <variable id="gv+nB*[n|-O[N;n0%dvF">SSID</variable>
+    <variable id="S^rs)=6oSpOWu}O7E#oQ">PASSWORD</variable>
+    <variable id="neS(nH:jSb0JIe?^yt-?">r</variable>
+  </variables>
+  <block type="procedures_defnoreturn" id="HuC@hzimt?Xf0[?$DL,c" x="-888" y="12">
+    <mutation>
+      <arg name="name" varid="MK(B)#`kST1)EgNu/5CV"/>
+      <arg name="passwd" varid="Ngvc.7eF$^fXza$rR77l"/>
+    </mutation>
+    <field name="NAME">connect_wifi</field>
+    <comment pinned="false" h="80" w="160">Describe this function...</comment>
+    <statement name="STACK">
+      <block type="wifi_client_connect" id="UX37:Ow7j43sZf]2$A^7">
+        <field name="NAME">Connect to Wifi network</field>
+        <field name="WIFI_CLIENT_NET_NAME">Network name</field>
+        <field name="WIFI_CLIENT_NET_KEY">Network key</field>
+        <value name="wifi_client_essid">
+          <shadow type="text" id="Ojoh=oE3-f-po8;qEt#3">
+            <field name="TEXT"/>
+          </shadow>
+          <block type="variables_get" id="mkQ!YP]d$liO0f|J|.Ka">
+            <field name="VAR" id="MK(B)#`kST1)EgNu/5CV">name</field>
+          </block>
+        </value>
+        <value name="wifi_client_key">
+          <shadow type="text" id="~w0]MJh(2l*CxXU/X/A0">
+            <field name="TEXT"/>
+          </shadow>
+          <block type="variables_get" id="D+pn1{iT(-LK3K/8FKu9">
+            <field name="VAR" id="Ngvc.7eF$^fXza$rR77l">passwd</field>
+          </block>
+        </value>
+        <next>
+          <block type="text_print" id="DwOW]9to`C78AE!](64`">
+            <value name="TEXT">
+              <shadow type="text" id="h4;4fbKx|m}%pdPES}Q6">
+                <field name="TEXT">abc</field>
+              </shadow>
+              <block type="text_join" id="AP77C/}1/EYhwT{B-(,d">
+                <mutation items="2"/>
+                <value name="ADD0">
+                  <block type="text" id=";wIq!ozPteZg!ufQ6+gs">
+                    <field name="TEXT">network config:</field>
+                  </block>
+                </value>
+                <value name="ADD1">
+                  <block type="net_ifconfig" id="y$z[E-I}pyCI%Ip$k^(H">
+                    <field name="NET_IFCONFIG">Wifi current IP</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="variables_set" id="}kS#5ixuw*K1=jT:dwxG" x="-888" y="212">
+    <field name="VAR" id="gv+nB*[n|-O[N;n0%dvF">SSID</field>
+    <value name="VALUE">
+      <block type="text" id="R[YcX.}jY|T#_uc.}/OY">
+        <field name="TEXT">&lt;WiFi名稱&gt;</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="#jToJfHf-3U@?6aeeqF/">
+        <field name="VAR" id="S^rs)=6oSpOWu}O7E#oQ">PASSWORD</field>
+        <value name="VALUE">
+          <block type="text" id="GxzIdNEfHXGQy82,;C@e">
+            <field name="TEXT">&lt;WiFi密碼&gt;</field>
+          </block>
+        </value>
+        <next>
+          <block type="procedures_callnoreturn" id="AqNr+{;C]PIiU.T%{@ZX">
+            <mutation name="connect_wifi">
+              <arg name="name"/>
+              <arg name="passwd"/>
+            </mutation>
+            <value name="ARG0">
+              <block type="variables_get" id="ikgTmy=t@)~~@Pv8Uk|]">
+                <field name="VAR" id="gv+nB*[n|-O[N;n0%dvF">SSID</field>
+              </block>
+            </value>
+            <value name="ARG1">
+              <block type="variables_get" id="[Y8GDHihe8)^6!U`$(]#">
+                <field name="VAR" id="S^rs)=6oSpOWu}O7E#oQ">PASSWORD</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="7}47pz[jUt/LVm+[*0kL">
+                <field name="VAR" id="neS(nH:jSb0JIe?^yt-?">r</field>
+                <value name="VALUE">
+                  <block type="net_get_request" id="eNCMDbw`jc9IL}s7SjoJ">
+                    <field name="BLOCK_NET_GET">Make HTTP GET Request URL</field>
+                    <value name="URL">
+                      <block type="text" id="}tNyw3j]e$;{lpNpE.-,">
+                        <field name="TEXT">http://httpbin.org/get</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_print" id="2gjTj7qr]HuDv2;0oWhQ">
+                    <value name="TEXT">
+                      <shadow type="text" id="FCN+EJ[k3]~dx}yS{%Ye">
+                        <field name="TEXT">abc</field>
+                      </shadow>
+                      <block type="net_response_statuscode" id="5R8W2jR}G|D5!Hs7irL8">
+                        <field name="BLOCK_NET_STATUSCODE">Get status code</field>
+                        <value name="response">
+                          <block type="variables_get" id="|6*juWz#fMGQw`PmHCg$">
+                            <field name="VAR" id="neS(nH:jSb0JIe?^yt-?">r</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="text_print" id="v7Xo(g-h3t6syNtd9h,*">
+                        <value name="TEXT">
+                          <shadow type="text" id="l}k({r$jE.i3R=s.e]%1">
+                            <field name="TEXT">abc</field>
+                          </shadow>
+                          <block type="net_response_text" id="p%0UbpZD+Euv(?W1pVpl">
+                            <field name="BLOCK_NET_TEXT">Get text</field>
+                            <value name="response">
+                              <block type="variables_get" id="Wi,tE.(pFO[fQAF{9r@`">
+                                <field name="VAR" id="neS(nH:jSb0JIe?^yt-?">r</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

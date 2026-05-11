@@ -1,0 +1,63 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="delay" id="Z9FkWd{)kX9?J6}qS62?" x="63" y="62">
+    <value name="time">
+      <shadow type="math_number" id="`R%C3IudweEic$Y8b:|j">
+        <field name="NUM">1</field>
+      </shadow>
+    </value>
+    <next>
+      <block type="text_print" id="KmG@E~nS{O*|u|D`btk0">
+        <value name="TEXT">
+          <shadow type="text" id="{!d?S~613D.Q6`?d1m_$">
+            <field name="TEXT">abc</field>
+          </shadow>
+          <block type="text" id="*8_NprO/~}Dwh291aT|(">
+            <field name="TEXT">等1秒</field>
+          </block>
+        </value>
+        <next>
+          <block type="delay_ms" id="0JlLVku+1t8CRi%[c$Ts">
+            <value name="time">
+              <shadow type="math_number" id="=:r#X{@YEU5PDfy6WI|S">
+                <field name="NUM">1000</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="text_print" id="K_q]rYdK|:4%@pnWb3rt">
+                <value name="TEXT">
+                  <shadow type="text">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                  <block type="text" id="RD7)fqzcHX/cQBi|gdMp">
+                    <field name="TEXT">等1秒</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="delay_us" id="wy5,il..=u|`CJ{8(`M]">
+                    <value name="time">
+                      <shadow type="math_number" id="+K6]bscW++YL_8Ss.g?h">
+                        <field name="NUM">1000000</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="text_print" id="-(,Euxn2qyS2XkhlBBGO">
+                        <value name="TEXT">
+                          <shadow type="text">
+                            <field name="TEXT">abc</field>
+                          </shadow>
+                          <block type="text" id="L/*uf0@5+.+=ph7+6s|U">
+                            <field name="TEXT">等1秒</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

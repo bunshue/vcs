@@ -1,0 +1,63 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="vz)n:F-i2fEZ-LiL]8UE">led2</variable>
+  </variables>
+  <block type="variables_set" id="2^jVqbwjCXGCsKXOrWm9" x="138" y="87">
+    <field name="VAR" id="vz)n:F-i2fEZ-LiL]8UE">led2</field>
+    <value name="VALUE">
+      <block type="gpio_create_pinobj" id="Tl*qqf$(8H0{1o0#4QtW">
+        <field name="type">OUT</field>
+        <value name="pin">
+          <shadow type="pinout" id=":JJFFrlTd|s.m6^#2D;O">
+            <field name="PIN">2</field>
+          </shadow>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="gpio_set_pinobj" id="?7c.m}#?{,1zsmrnE$X-">
+        <value name="obj">
+          <block type="variables_get" id="+-Ms^Dfp.1dl{iajy8/A">
+            <field name="VAR" id="vz)n:F-i2fEZ-LiL]8UE">led2</field>
+          </block>
+        </value>
+        <value name="value">
+          <shadow type="logic_boolean" id="(=S?NW*HF9NW`S+HyBli">
+            <field name="BOOL">FALSE</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="timer" id="0CStIz7am(6{Z*+QTQ?O">
+            <field name="timerNumber">0</field>
+            <field name="interval">1000</field>
+            <statement name="statements">
+              <block type="gpio_set_pinobj" id="=H{l*kus#h,MVoc?+v/7">
+                <value name="obj">
+                  <block type="variables_get" id="%H-4|wK/2iw-YJmV50A)">
+                    <field name="VAR" id="vz)n:F-i2fEZ-LiL]8UE">led2</field>
+                  </block>
+                </value>
+                <value name="value">
+                  <shadow type="logic_boolean" id="Aulw00w,`9(uzMm$0~vb">
+                    <field name="BOOL">FALSE</field>
+                  </shadow>
+                  <block type="logic_negate" id="izCAo=jrr5K_5bu$:m5Z">
+                    <value name="BOOL">
+                      <block type="gpio_get_pinobj" id="`x$oPD|2Nhd%POKgbi4/">
+                        <value name="obj">
+                          <block type="variables_get" id="L4Quz*1q1fOWU%1zi.lT">
+                            <field name="VAR" id="vz)n:F-i2fEZ-LiL]8UE">led2</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

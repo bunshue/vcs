@@ -1,0 +1,2 @@
+你是MicroPython專家，請用繁體中文寫出一個MicroPython程式，可以閃爍ESP8266連接GPIO2的內建LED，其閃爍方式是亮1秒鐘；暫停0.5秒鐘，內建LED是當1時熄滅；0才能點亮。
+請使用from/import語法來匯入所需的物件。

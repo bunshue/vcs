@@ -1,0 +1,1 @@
+請改用from/import語法來匯入Pin物件。

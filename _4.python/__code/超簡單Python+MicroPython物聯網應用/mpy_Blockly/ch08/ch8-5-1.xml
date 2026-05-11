@@ -1,0 +1,16 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="text_print" id="#lu;hEle4Zm9yW}j?373" x="-613" y="62">
+    <value name="TEXT">
+      <shadow type="text" id="9)o@U[~y8PQr8Fk~*;+}">
+        <field name="TEXT">abc</field>
+      </shadow>
+      <block type="adc" id="=G)|GYCUn]QWfz55KNg=">
+        <value name="pin">
+          <shadow type="math_number" id="OQLhG(reJV]*k:]4f;Yk">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+    </value>
+  </block>
+</xml>

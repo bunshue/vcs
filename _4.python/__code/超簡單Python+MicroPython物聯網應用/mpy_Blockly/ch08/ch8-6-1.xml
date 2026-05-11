@@ -1,0 +1,168 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="@;yOJNnA40mWlN?-qh4E">led</variable>
+  </variables>
+  <block type="controls_repeat_ext" id="7ux;#]+B$=fam~5%0yym" x="-713" y="-112">
+    <value name="TIMES">
+      <shadow type="math_number" id="q6L,|iG.FU|#{5G:V?FM">
+        <field name="NUM">10</field>
+      </shadow>
+    </value>
+    <statement name="DO">
+      <block type="variables_set" id="^xtdCe|?[{]h(+*yh6-O">
+        <field name="VAR" id="@;yOJNnA40mWlN?-qh4E">led</field>
+        <value name="VALUE">
+          <block type="gpio_create_pinobj" id="eAdO.}2ki=!oLW|2CDf)">
+            <field name="type">OUT</field>
+            <value name="pin">
+              <shadow type="pinout" id="l!yo1NUpX!!TN3ru~)-K">
+                <field name="PIN">15</field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="gpio_set_pinobj" id="av,c#EVA7zyR(_vA]GnX">
+            <value name="obj">
+              <block type="variables_get" id="pL,O4Zb~`xUv=UqDt/!B">
+                <field name="VAR" id="@;yOJNnA40mWlN?-qh4E">led</field>
+              </block>
+            </value>
+            <value name="value">
+              <shadow type="logic_boolean" id=",N`zx.2.n1;s+l$e{A*/">
+                <field name="BOOL">TRUE</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="delay" id="#O|sC~(9SFPQSz?=6h]q">
+                <value name="time">
+                  <shadow type="math_number" id="iqL@OTB;*Uai;j5Kkc/R">
+                    <field name="NUM">0.3</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="gpio_set_pinobj" id="Zjz;HNg6u]v7P,0[NDe~">
+                    <value name="obj">
+                      <block type="variables_get" id="P/)=G.B.@Knc8U}rF)ew">
+                        <field name="VAR" id="@;yOJNnA40mWlN?-qh4E">led</field>
+                      </block>
+                    </value>
+                    <value name="value">
+                      <shadow type="logic_boolean" id="CsL1V5._(Sh=:4xrTV!-">
+                        <field name="BOOL">FALSE</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="#0+Us=ZC@`vivjjT={HQ">
+                        <field name="VAR" id="@;yOJNnA40mWlN?-qh4E">led</field>
+                        <value name="VALUE">
+                          <block type="gpio_create_pinobj" id="+u;|Ik0I5)!S%R_MV]D;">
+                            <field name="type">OUT</field>
+                            <value name="pin">
+                              <shadow type="pinout" id="=6)X34UT%PLho`#$^*)%">
+                                <field name="PIN">13</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="gpio_set_pinobj" id="dR}B6a!6I)rfu1nqQNsx">
+                            <value name="obj">
+                              <block type="variables_get" id="(s+b6D6?o[TodnI}t19O">
+                                <field name="VAR" id="@;yOJNnA40mWlN?-qh4E">led</field>
+                              </block>
+                            </value>
+                            <value name="value">
+                              <shadow type="logic_boolean" id="GCzn)@^%LD?XBz?1pxgG">
+                                <field name="BOOL">TRUE</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="delay" id="m!B-e5@MMwm#fJi:y-kc">
+                                <value name="time">
+                                  <shadow type="math_number" id="j?H5^r8];%$H)x@4[{9F">
+                                    <field name="NUM">0.3</field>
+                                  </shadow>
+                                </value>
+                                <next>
+                                  <block type="gpio_set_pinobj" id="%~M-kxBca~h28-I0XFLa">
+                                    <value name="obj">
+                                      <block type="variables_get" id="@K$wD1IePB8TA80NOs;K">
+                                        <field name="VAR" id="@;yOJNnA40mWlN?-qh4E">led</field>
+                                      </block>
+                                    </value>
+                                    <value name="value">
+                                      <shadow type="logic_boolean" id="uD:drN8:m+;KkIO+W~A]">
+                                        <field name="BOOL">FALSE</field>
+                                      </shadow>
+                                    </value>
+                                    <next>
+                                      <block type="variables_set" id="ooLL1/c|M@Y))or*I(TD">
+                                        <field name="VAR" id="@;yOJNnA40mWlN?-qh4E">led</field>
+                                        <value name="VALUE">
+                                          <block type="gpio_create_pinobj" id="YSS%(#b,{j{=0Dw0/}W5">
+                                            <field name="type">OUT</field>
+                                            <value name="pin">
+                                              <shadow type="pinout" id="@W+Ig?bs(u+:R8_BUWRr">
+                                                <field name="PIN">12</field>
+                                              </shadow>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="gpio_set_pinobj" id="GZh,VrPLf$:=cCctIDaj">
+                                            <value name="obj">
+                                              <block type="variables_get" id="m6`AD|!.sZ6lrfnrIlN/">
+                                                <field name="VAR" id="@;yOJNnA40mWlN?-qh4E">led</field>
+                                              </block>
+                                            </value>
+                                            <value name="value">
+                                              <shadow type="logic_boolean" id="RiTL=O.U3XIOttaH$m@Z">
+                                                <field name="BOOL">TRUE</field>
+                                              </shadow>
+                                            </value>
+                                            <next>
+                                              <block type="delay" id="Z17JM]Mz99aTz8o9)DPy">
+                                                <value name="time">
+                                                  <shadow type="math_number" id="?0UmNt/9Y6x!0zR~s0Pv">
+                                                    <field name="NUM">0.3</field>
+                                                  </shadow>
+                                                </value>
+                                                <next>
+                                                  <block type="gpio_set_pinobj" id="7UbD2kOWaj*1At*|=_fz">
+                                                    <value name="obj">
+                                                      <block type="variables_get" id="MAxz}z.QL}_sckO!$x)*">
+                                                        <field name="VAR" id="@;yOJNnA40mWlN?-qh4E">led</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="value">
+                                                      <shadow type="logic_boolean" id="EYrk/!pq17?f$Oo3_5!G">
+                                                        <field name="BOOL">FALSE</field>
+                                                      </shadow>
+                                                    </value>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

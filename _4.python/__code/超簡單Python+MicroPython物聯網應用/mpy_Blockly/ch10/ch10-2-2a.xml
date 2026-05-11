@@ -1,0 +1,319 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="gv+nB*[n|-O[N;n0%dvF">ip</variable>
+    <variable id="1*|y(YTCGf4EQ.czVYM%">url</variable>
+    <variable id="neS(nH:jSb0JIe?^yt-?">r</variable>
+    <variable id="ZG3OhxZ[`gr|Y}(.M8~3">info</variable>
+    <variable id="A71e+_87!^2uOOF7RYC7">item</variable>
+    <variable id="#K0,(!F7DWv?C,5s@,RY">book</variable>
+  </variables>
+  <block type="variables_set" id="}kS#5ixuw*K1=jT:dwxG" x="-913" y="-12">
+    <field name="VAR" id="gv+nB*[n|-O[N;n0%dvF">ip</field>
+    <value name="VALUE">
+      <block type="xtools_connect_wifi_ip" id="p_B:!R:U=K]Rzr$e-|?I">
+        <value name="ssid">
+          <shadow type="text" id="zmMUI3I@`{!!;2v4S$!G">
+            <field name="TEXT"/>
+          </shadow>
+        </value>
+        <value name="pwd">
+          <shadow type="text" id="3}hY0U:?|8J|(K4;-f(,">
+            <field name="TEXT"/>
+          </shadow>
+        </value>
+        <value name="timeout">
+          <shadow type="math_number" id="/Upr-UlM$kWdnik$m#HD">
+            <field name="NUM">15</field>
+          </shadow>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="text_print" id="AJPI%p5yChyTg:s#2frp">
+        <value name="TEXT">
+          <shadow type="text" id="h^L)N`vRX8?JC7f5KyX^">
+            <field name="TEXT">abc</field>
+          </shadow>
+          <block type="variables_get" id="PLXAkQc/5pIvA#~$[Q.i">
+            <field name="VAR" id="gv+nB*[n|-O[N;n0%dvF">ip</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="xQFJ0Ub4x!!Ni(WANXtY">
+            <field name="VAR" id="1*|y(YTCGf4EQ.czVYM%">url</field>
+            <value name="VALUE">
+              <block type="text" id="}tNyw3j]e$;{lpNpE.-,">
+                <field name="TEXT">https://www.googleapis.com/books/v1/volumes?maxResults=3&amp;q=Python&amp;projection=lite</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="7}47pz[jUt/LVm+[*0kL">
+                <field name="VAR" id="neS(nH:jSb0JIe?^yt-?">r</field>
+                <value name="VALUE">
+                  <block type="net_get_request" id="eNCMDbw`jc9IL}s7SjoJ">
+                    <field name="BLOCK_NET_GET">Make HTTP GET Request URL</field>
+                    <value name="URL">
+                      <block type="variables_get" id="jXtdQH#kM*j(qR5Tw!WJ">
+                        <field name="VAR" id="1*|y(YTCGf4EQ.czVYM%">url</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="controls_if" id="38Jn@fWT2MFD8^t3ePO)">
+                    <mutation else="1"/>
+                    <value name="IF0">
+                      <block type="logic_compare" id="T|w[365Fd*-ej{l%$Tht">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                          <block type="net_response_statuscode" id="5R8W2jR}G|D5!Hs7irL8">
+                            <field name="BLOCK_NET_STATUSCODE">Get status code</field>
+                            <value name="response">
+                              <block type="variables_get" id="|6*juWz#fMGQw`PmHCg$">
+                                <field name="VAR" id="neS(nH:jSb0JIe?^yt-?">r</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number" id="?*}/Rt9t#k2e~yuw5BS0">
+                            <field name="NUM">200</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="text_print" id="49seOVd^%Dhqp/|q[[DJ">
+                        <value name="TEXT">
+                          <shadow type="text" id="2r*OAN[A$Fk;nvfNxB1s">
+                            <field name="TEXT">abc</field>
+                          </shadow>
+                          <block type="text_join" id="ll=7Ltr7W=7F|Y]r)PSJ">
+                            <mutation items="3"/>
+                            <value name="ADD0">
+                              <block type="text" id="38%f?!3x+b3zE2V*Hg(l">
+                                <field name="TEXT">下載: </field>
+                              </block>
+                            </value>
+                            <value name="ADD1">
+                              <block type="text_length" id="c96zTd)dW|%.G,nN6`2[">
+                                <value name="VALUE">
+                                  <shadow type="text" id="p;K%$aF+)@kxPT9E=`9a">
+                                    <field name="TEXT">abc</field>
+                                  </shadow>
+                                  <block type="net_response_text" id="?:FcV%xgP7ZA$J!n7LvN">
+                                    <field name="BLOCK_NET_TEXT">Get text</field>
+                                    <value name="response">
+                                      <block type="variables_get" id="}tosD,A!Y0F[Q8m#R1EJ">
+                                        <field name="VAR" id="neS(nH:jSb0JIe?^yt-?">r</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="ADD2">
+                              <block type="text" id="%Z$;Mjk;|VnDsU$qMWGT">
+                                <field name="TEXT">字元</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="variables_set" id="w~AdoE_.h]O2X$.`59|9">
+                            <field name="VAR" id="ZG3OhxZ[`gr|Y}(.M8~3">info</field>
+                            <value name="VALUE">
+                              <block type="ujson_loads" id="PG:u9}6|gXT:yGvEX=2p">
+                                <value name="json_str">
+                                  <block type="net_response_text" id="roM?{)8TeR5UE}~a[fg?">
+                                    <field name="BLOCK_NET_TEXT">Get text</field>
+                                    <value name="response">
+                                      <block type="variables_get" id="_[jaa(XNI-GuHlE#Z`A5">
+                                        <field name="VAR" id="neS(nH:jSb0JIe?^yt-?">r</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="text_print" id="_).E3CvNL629W^I`smI?">
+                                <value name="TEXT">
+                                  <shadow type="text" id=":Qy(f{fTxf_/)l)VY|}5">
+                                    <field name="TEXT">abc</field>
+                                  </shadow>
+                                  <block type="text" id="EtLM0)tjjJ:QJF[Ie4q+">
+                                    <field name="TEXT">--------------------------</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="controls_forEach" id="8qje=bD9%}ivZRd!PHn%">
+                                    <field name="VAR" id="A71e+_87!^2uOOF7RYC7">item</field>
+                                    <value name="LIST">
+                                      <block type="net_response_json_get" id="[;LdMcNg~Ed2CW8`Zc1-">
+                                        <value name="item">
+                                          <block type="text" id="mF]m_mD!eD^=hWW6]FEO">
+                                            <field name="TEXT">items</field>
+                                          </block>
+                                        </value>
+                                        <value name="json">
+                                          <block type="variables_get" id="PQ4!#tALL)NcGqbxZ,7Q">
+                                            <field name="VAR" id="ZG3OhxZ[`gr|Y}(.M8~3">info</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <statement name="DO">
+                                      <block type="variables_set" id="8+fUe0ui#(-:=rVX[w%s">
+                                        <field name="VAR" id="#K0,(!F7DWv?C,5s@,RY">book</field>
+                                        <value name="VALUE">
+                                          <block type="net_response_json_get" id="Zf9ydYVGHLRm%GxqV~Yb">
+                                            <value name="item">
+                                              <block type="text" id="a[2{lR5O,g@PDqn.G[+Z">
+                                                <field name="TEXT">volumeInfo</field>
+                                              </block>
+                                            </value>
+                                            <value name="json">
+                                              <block type="variables_get" id="*0w/lN)MN=EOh6p4{-P|">
+                                                <field name="VAR" id="A71e+_87!^2uOOF7RYC7">item</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="text_print" id="v7Xo(g-h3t6syNtd9h,*">
+                                            <value name="TEXT">
+                                              <shadow type="text" id="l}k({r$jE.i3R=s.e]%1">
+                                                <field name="TEXT">abc</field>
+                                              </shadow>
+                                              <block type="text_join" id="iStDutr|:_YQ2Lt84AB9">
+                                                <mutation items="2"/>
+                                                <value name="ADD0">
+                                                  <block type="text" id="7gpRe$-a}UG~jax]?0i!">
+                                                    <field name="TEXT">圖書名: </field>
+                                                  </block>
+                                                </value>
+                                                <value name="ADD1">
+                                                  <block type="net_response_json_get" id="iJrnz#8eDC6SrE/zQw0?">
+                                                    <value name="item">
+                                                      <block type="text" id="J.J,#pj*s_*|/?F!J2(S">
+                                                        <field name="TEXT">title</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="json">
+                                                      <block type="variables_get" id="h}/z2F5M,:Se@CiPy#h,">
+                                                        <field name="VAR" id="#K0,(!F7DWv?C,5s@,RY">book</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="text_print" id="UWIC9`G,s5=/|W}(XSXd">
+                                                <value name="TEXT">
+                                                  <shadow type="text">
+                                                    <field name="TEXT">abc</field>
+                                                  </shadow>
+                                                  <block type="text_join" id=";3iu7,bXPD0fb$|4#FZ=">
+                                                    <mutation items="2"/>
+                                                    <value name="ADD0">
+                                                      <block type="text" id="!7VPUAAo?]AM-+}vGF^`">
+                                                        <field name="TEXT">出版商: </field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="ADD1">
+                                                      <block type="net_response_json_get" id="s1#9t5{nV)_k^O9bda*?">
+                                                        <value name="item">
+                                                          <block type="text" id="H;G`,MV[GJMELT,tX#,9">
+                                                            <field name="TEXT">publisher</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="json">
+                                                          <block type="variables_get" id="{#W%VV3.-ZvVF@VTbbUE">
+                                                            <field name="VAR" id="#K0,(!F7DWv?C,5s@,RY">book</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="text_print" id="LoeOVSJ45JsZvq4)VFm|">
+                                                    <value name="TEXT">
+                                                      <shadow type="text">
+                                                        <field name="TEXT">abc</field>
+                                                      </shadow>
+                                                      <block type="text_join" id="p=/*IKa?iU|zUm)$,(WV">
+                                                        <mutation items="2"/>
+                                                        <value name="ADD0">
+                                                          <block type="text" id="Yg=Dq[.2cZ4}5N|IrP-8">
+                                                            <field name="TEXT">出版日: </field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="ADD1">
+                                                          <block type="net_response_json_get" id="vk#2J=YRbB*[E-AB/rlr">
+                                                            <value name="item">
+                                                              <block type="text" id="NF086uIu5,0BH|1At1^(">
+                                                                <field name="TEXT">publishedDate</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="json">
+                                                              <block type="variables_get" id="/FK(j@hjw:{@i+iPzT@{">
+                                                                <field name="VAR" id="#K0,(!F7DWv?C,5s@,RY">book</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="text_print" id="~v{OJrg0f+Taq(qRRe]n">
+                                                        <value name="TEXT">
+                                                          <shadow type="text" id="zJy[1r_JpTH]1Os4F+}-">
+                                                            <field name="TEXT">abc</field>
+                                                          </shadow>
+                                                          <block type="text" id=",[Y/g!39NeA4d;gk,?td">
+                                                            <field name="TEXT">--------------------------</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <statement name="ELSE">
+                      <block type="text_print" id="Mu!9O+vG1u^)|%7T`;?@">
+                        <value name="TEXT">
+                          <shadow type="text">
+                            <field name="TEXT">abc</field>
+                          </shadow>
+                          <block type="text" id="d-Q7i_lt?M`#4s$`xkM~">
+                            <field name="TEXT">沒有圖書資料</field>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

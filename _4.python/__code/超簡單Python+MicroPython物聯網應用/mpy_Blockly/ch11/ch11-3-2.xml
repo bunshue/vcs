@@ -1,0 +1,351 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="tf-PkvK=1fLB~*18W60n">ADAFRUIT_IO_USERNAME</variable>
+    <variable id="Y)jk+,N0wJv^)_#e0X_)">ADAFRUIT_IO_KEY</variable>
+    <variable id="gzb9!OkRheP8TBobGmp*">FEED1</variable>
+    <variable id="R]o!QFnFmm,p~n9R3jnr">FEED2</variable>
+    <variable id="YpAx:htTku6YKFB2lLr`">temp</variable>
+    <variable id="suvkN(;#eA1=;ABjd~t%">hum</variable>
+    <variable id="BX^WzNv%_1?t6k*~aleZ">url</variable>
+    <variable id="Uj$oB#70UJTmz!*$4hb0">data1</variable>
+    <variable id="T`Bcwrq@z,?TX6mgnyr)">data2</variable>
+  </variables>
+  <block type="xtools_connect_wifi" id="iuTt3.k9`JHiGZNk9x@?" x="113" y="63">
+    <value name="ssid">
+      <shadow type="text" id="wS`Kdpt%Oz.W+0SrevWr">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <value name="pwd">
+      <shadow type="text" id="BD#m/(gDLeYCkF$?y{aF">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <value name="timeout">
+      <shadow type="math_number" id="U^D%l(Z6q1LG7G.4yjwa">
+        <field name="NUM">15</field>
+      </shadow>
+    </value>
+    <next>
+      <block type="variables_set" id="3w^V.s#2s:I6%AAJJ7nr">
+        <field name="VAR" id="tf-PkvK=1fLB~*18W60n">ADAFRUIT_IO_USERNAME</field>
+        <value name="VALUE">
+          <block type="text" id="?!F_]rC33cDiB8-arn.3">
+            <field name="TEXT">hueyanchen2014</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="nJMAxyiWGuROh#4p?do5">
+            <field name="VAR" id="Y)jk+,N0wJv^)_#e0X_)">ADAFRUIT_IO_KEY</field>
+            <value name="VALUE">
+              <block type="text" id="cU,JCJnM77:).C!4rSb[">
+                <field name="TEXT">&lt;AIO KEY&gt;</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="xJ8t:%|nF|2VEDJ;jd:L">
+                <field name="VAR" id="gzb9!OkRheP8TBobGmp*">FEED1</field>
+                <value name="VALUE">
+                  <block type="text" id="bt]CN|SSC~Lah018gQ-K">
+                    <field name="TEXT">temperature</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="lH0dZb7s#Z}ddF~)Chy(">
+                    <field name="VAR" id="R]o!QFnFmm,p~n9R3jnr">FEED2</field>
+                    <value name="VALUE">
+                      <block type="text" id="RmNK%tO|-%)9DB#Q#sst">
+                        <field name="TEXT">humidity</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="controls_whileUntil" id="#KOYE=Q;i,2)K7XC/pNF">
+                        <field name="MODE">WHILE</field>
+                        <value name="BOOL">
+                          <block type="logic_boolean" id=",_9^dx05*?ykXBD)G4/|">
+                            <field name="BOOL">TRUE</field>
+                          </block>
+                        </value>
+                        <statement name="DO">
+                          <block type="variables_set" id="]lf.Fyr9qN1zk6/Vh?mM">
+                            <field name="VAR" id="YpAx:htTku6YKFB2lLr`">temp</field>
+                            <value name="VALUE">
+                              <block type="xtools_random_in_range" id="l9EH0[k)2;Q-kWlHGobQ">
+                                <value name="low">
+                                  <shadow type="math_number" id="fd7_]kYu9KBOkjH{U).#">
+                                    <field name="NUM">10</field>
+                                  </shadow>
+                                </value>
+                                <value name="high">
+                                  <shadow type="math_number" id="ITpz}Zt{!0:J$y`,=l0O">
+                                    <field name="NUM">35</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="variables_set" id="wQHD#v4-^,5(A%KJ_^YG">
+                                <field name="VAR" id="suvkN(;#eA1=;ABjd~t%">hum</field>
+                                <value name="VALUE">
+                                  <block type="xtools_random_in_range" id="q[nzKr0%2e-6qgZq5]e@">
+                                    <value name="low">
+                                      <shadow type="math_number" id=":=x^,ZO*(2LWbc!x?lwl">
+                                        <field name="NUM">60</field>
+                                      </shadow>
+                                    </value>
+                                    <value name="high">
+                                      <shadow type="math_number" id="@MWLf$2QiPad$-IdcWz9">
+                                        <field name="NUM">90</field>
+                                      </shadow>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="text_print" id="/T-N-y@bT.eY2)QLqXm`">
+                                    <value name="TEXT">
+                                      <shadow type="text" id="z/W1J~uN$6Rgoo|yqOtD">
+                                        <field name="TEXT">abc</field>
+                                      </shadow>
+                                      <block type="text_join" id="bQNmqL1s4GEOPazKn6!4">
+                                        <mutation items="4"/>
+                                        <value name="ADD0">
+                                          <block type="text" id="{jw}hN=o14p(%5EPh9;h">
+                                            <field name="TEXT">儲存溫度和濕度資料: </field>
+                                          </block>
+                                        </value>
+                                        <value name="ADD1">
+                                          <block type="variables_get" id="6mS]:4p.}ZE?QGrZm9[b">
+                                            <field name="VAR" id="YpAx:htTku6YKFB2lLr`">temp</field>
+                                          </block>
+                                        </value>
+                                        <value name="ADD2">
+                                          <block type="text" id="X:`rmJMpNZJW;w?}K)~L">
+                                            <field name="TEXT"> </field>
+                                          </block>
+                                        </value>
+                                        <value name="ADD3">
+                                          <block type="variables_get" id="PQp2gEzsiEC:,p4r@(:j">
+                                            <field name="VAR" id="suvkN(;#eA1=;ABjd~t%">hum</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="variables_set" id="qAN,EH!1),]x%b+;HR7j">
+                                        <field name="VAR" id="BX^WzNv%_1?t6k*~aleZ">url</field>
+                                        <value name="VALUE">
+                                          <block type="text_join" id="+}jv^Ybgpt)zzC-$MahK">
+                                            <mutation items="6"/>
+                                            <value name="ADD0">
+                                              <block type="text" id="($t,!Bb(Z1Ul3WCO{Xm?">
+                                                <field name="TEXT">https://io.adafruit.com/api/v2/</field>
+                                              </block>
+                                            </value>
+                                            <value name="ADD1">
+                                              <block type="variables_get" id="9jTOzS*-Y.}*FNoAmV(;">
+                                                <field name="VAR" id="tf-PkvK=1fLB~*18W60n">ADAFRUIT_IO_USERNAME</field>
+                                              </block>
+                                            </value>
+                                            <value name="ADD2">
+                                              <block type="text" id="f-VP|m!CLzpx74#Vl/sV">
+                                                <field name="TEXT">/feeds/</field>
+                                              </block>
+                                            </value>
+                                            <value name="ADD3">
+                                              <block type="variables_get" id="*]=lwlpSzr8A/9X.l9:3">
+                                                <field name="VAR" id="gzb9!OkRheP8TBobGmp*">FEED1</field>
+                                              </block>
+                                            </value>
+                                            <value name="ADD4">
+                                              <block type="text" id=".u3FEt7oEJ})EN6jvMyx">
+                                                <field name="TEXT">/data?X-AIO-Key=</field>
+                                              </block>
+                                            </value>
+                                            <value name="ADD5">
+                                              <block type="variables_get" id="DRH}ToY7G3:O%7!!{y%3">
+                                                <field name="VAR" id="Y)jk+,N0wJv^)_#e0X_)">ADAFRUIT_IO_KEY</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="text_print" id="T:oz7qQPG#nqp,a;bx(+">
+                                            <value name="TEXT">
+                                              <shadow type="text" id="o:J20%1P22]`=nqKme;6">
+                                                <field name="TEXT">abc</field>
+                                              </shadow>
+                                              <block type="text_join" id="kgykL:#^jvX#-hTbur!v">
+                                                <mutation items="2"/>
+                                                <value name="ADD0">
+                                                  <block type="text" id="Q0ak0gB/{{gp9tEYF{|m">
+                                                    <field name="TEXT">ur1=</field>
+                                                  </block>
+                                                </value>
+                                                <value name="ADD1">
+                                                  <block type="variables_get" id="o`4).gM)iYco/?/yHfmV">
+                                                    <field name="VAR" id="BX^WzNv%_1?t6k*~aleZ">url</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="variables_set" id="5:)Zboi}qok[8f$C12bo">
+                                                <field name="VAR" id="Uj$oB#70UJTmz!*$4hb0">data1</field>
+                                                <value name="VALUE">
+                                                  <block type="dicts_create_with" id="^qoa!sD1[JBW0;3Qf(=W">
+                                                    <mutation xmlns="http://www.w3.org/1999/xhtml" items="1"></mutation>
+                                                    <value name="KEY0">
+                                                      <block type="text" id=".,M]@${.NSR:J}?DEiJK">
+                                                        <field name="TEXT">value</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="VALUE0">
+                                                      <block type="variables_get" id="2vube(K^4jjOyJt.kN9#">
+                                                        <field name="VAR" id="YpAx:htTku6YKFB2lLr`">temp</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="xtools_webhook_post" id=";8K=!ZWI7lAyPr%h[ieU">
+                                                    <value name="URL">
+                                                      <block type="variables_get" id="VL)G%G9L?)kM`NkXonhE">
+                                                        <field name="VAR" id="BX^WzNv%_1?t6k*~aleZ">url</field>
+                                                      </block>
+                                                    </value>
+                                                    <value name="json">
+                                                      <block type="variables_get" id="[SfZqMAqRu,~Oi^.Caj!">
+                                                        <field name="VAR" id="Uj$oB#70UJTmz!*$4hb0">data1</field>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="variables_set" id="3Kcog@bY1JN?0pp964`r">
+                                                        <field name="VAR" id="BX^WzNv%_1?t6k*~aleZ">url</field>
+                                                        <value name="VALUE">
+                                                          <block type="text_join" id="=*iSe4VOgH0+{eO9|QKp">
+                                                            <mutation items="6"/>
+                                                            <value name="ADD0">
+                                                              <block type="text" id="7a-jR3hwib0XMrCV_/aq">
+                                                                <field name="TEXT">https://io.adafruit.com/api/v2/</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="ADD1">
+                                                              <block type="variables_get" id="kFSh5!GMuA,C$U~b.?u)">
+                                                                <field name="VAR" id="tf-PkvK=1fLB~*18W60n">ADAFRUIT_IO_USERNAME</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="ADD2">
+                                                              <block type="text" id="#Cj({u|Q^Sy;]r+5(?Hb">
+                                                                <field name="TEXT">/feeds/</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="ADD3">
+                                                              <block type="variables_get" id="vQ/=lk~3O_7coIxHPIn,">
+                                                                <field name="VAR" id="R]o!QFnFmm,p~n9R3jnr">FEED2</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="ADD4">
+                                                              <block type="text" id="VD9HL*{MmIwRA#:UNU`I">
+                                                                <field name="TEXT">/data?X-AIO-Key=</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="ADD5">
+                                                              <block type="variables_get" id="82gj0D9$kb?jee7RG:a[">
+                                                                <field name="VAR" id="Y)jk+,N0wJv^)_#e0X_)">ADAFRUIT_IO_KEY</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="text_print" id="p$fsS9~AmsDc-PS+v!T:">
+                                                            <value name="TEXT">
+                                                              <shadow type="text">
+                                                                <field name="TEXT">abc</field>
+                                                              </shadow>
+                                                              <block type="text_join" id="w{/~17;#U%39w@0|@w9X">
+                                                                <mutation items="2"/>
+                                                                <value name="ADD0">
+                                                                  <block type="text" id="kGD#^jS_kKKtyb*Q{wp$">
+                                                                    <field name="TEXT">ur2=</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="ADD1">
+                                                                  <block type="variables_get" id="pZU%g1E{x}R6.[YMxY{K">
+                                                                    <field name="VAR" id="BX^WzNv%_1?t6k*~aleZ">url</field>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </value>
+                                                            <next>
+                                                              <block type="variables_set" id="=%coEV74z(5V!H0n.(Gy">
+                                                                <field name="VAR" id="T`Bcwrq@z,?TX6mgnyr)">data2</field>
+                                                                <value name="VALUE">
+                                                                  <block type="dicts_create_with" id="c_]/lTrPd4%{Q8qP[*h3">
+                                                                    <mutation xmlns="http://www.w3.org/1999/xhtml" items="1"></mutation>
+                                                                    <value name="KEY0">
+                                                                      <block type="text" id="w|F[xjUSny|H35(]*^$Z">
+                                                                        <field name="TEXT">value</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="VALUE0">
+                                                                      <block type="variables_get" id="p@FgN2$]dT5Kdd@F#q)@">
+                                                                        <field name="VAR" id="suvkN(;#eA1=;ABjd~t%">hum</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </value>
+                                                                <next>
+                                                                  <block type="xtools_webhook_post" id="Op=IMpAF/E9mro3G?ApX">
+                                                                    <value name="URL">
+                                                                      <block type="variables_get" id="iTRFD,RaOxakX}k+6/?A">
+                                                                        <field name="VAR" id="BX^WzNv%_1?t6k*~aleZ">url</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <value name="json">
+                                                                      <block type="variables_get" id="e7!h+-oDGj!-(w{!A)*%">
+                                                                        <field name="VAR" id="T`Bcwrq@z,?TX6mgnyr)">data2</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <next>
+                                                                      <block type="delay" id="wMzMacY9H--XDc$y/94z">
+                                                                        <value name="time">
+                                                                          <shadow type="math_number" id="y)bB$a_HrNO=wDk$8WqB">
+                                                                            <field name="NUM">15</field>
+                                                                          </shadow>
+                                                                        </value>
+                                                                      </block>
+                                                                    </next>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

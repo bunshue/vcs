@@ -1,0 +1,40 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="QFj4lLm|4cEGK9fakwZG">json_str</variable>
+    <variable id="R@2SSdEHW)BLpZ0[/ND:">parsed</variable>
+  </variables>
+  <block type="variables_set" id="rVxt+,5%|re(yA5MO#AH" x="-863" y="63">
+    <field name="VAR" id="QFj4lLm|4cEGK9fakwZG">json_str</field>
+    <value name="VALUE">
+      <block type="text" id="lShh_)OLW!8`0_:qF=wa">
+        <field name="TEXT">{"name":"John"}</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="27/vQ}D;Ol:CBC%[/w4]">
+        <field name="VAR" id="R@2SSdEHW)BLpZ0[/ND:">parsed</field>
+        <value name="VALUE">
+          <block type="ujson_loads" id="~3)#:!r3al![Lm/pcajW">
+            <value name="json_str">
+              <block type="variables_get" id="F5WpNL$z15r}~p`Nkt~G">
+                <field name="VAR" id="QFj4lLm|4cEGK9fakwZG">json_str</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="text_print" id="YUohxuQ^j}PX`8ndICug">
+            <value name="TEXT">
+              <shadow type="text" id="*?V.3e.$5kr!H,-E!kQL">
+                <field name="TEXT">abc</field>
+              </shadow>
+              <block type="variables_get" id="Yqb}v(n~Q5I)R3B`i.sw">
+                <field name="VAR" id="R@2SSdEHW)BLpZ0[/ND:">parsed</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

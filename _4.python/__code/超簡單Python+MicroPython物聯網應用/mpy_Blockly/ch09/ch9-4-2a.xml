@@ -1,0 +1,85 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="QFj4lLm|4cEGK9fakwZG">dic</variable>
+    <variable id="R@2SSdEHW)BLpZ0[/ND:">json_str</variable>
+  </variables>
+  <block type="variables_set" id="rVxt+,5%|re(yA5MO#AH" x="-887" y="163">
+    <field name="VAR" id="QFj4lLm|4cEGK9fakwZG">dic</field>
+    <value name="VALUE">
+      <block type="dicts_create_with" id="85OvuhwJ7?yND:Sny%4I">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" items="3"></mutation>
+        <value name="KEY0">
+          <block type="text" id="lShh_)OLW!8`0_:qF=wa">
+            <field name="TEXT">device</field>
+          </block>
+        </value>
+        <value name="VALUE0">
+          <block type="text" id="{qRi`k3`J*7?I8Jv*+,.">
+            <field name="TEXT">temperature</field>
+          </block>
+        </value>
+        <value name="KEY1">
+          <block type="text" id="d!ZRzhc[F,03;~dEC.GG">
+            <field name="TEXT">id</field>
+          </block>
+        </value>
+        <value name="VALUE1">
+          <block type="math_number" id="~)t}%(XRgS9IT8TnHAq0">
+            <field name="NUM">543</field>
+          </block>
+        </value>
+        <value name="KEY2">
+          <block type="text" id="Tg3smKmra9$4Eq4-U%MH">
+            <field name="TEXT">values</field>
+          </block>
+        </value>
+        <value name="VALUE2">
+          <block type="lists_create_with" id="/Ub%bgsyo#Gp*(uRf/{f">
+            <mutation items="3"/>
+            <value name="ADD0">
+              <block type="math_number" id="%::L3*7b5zNaZc1Qll|X">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+            <value name="ADD1">
+              <block type="math_number" id="@9e;~k#.N}C:9dU@=L{n">
+                <field name="NUM">2</field>
+              </block>
+            </value>
+            <value name="ADD2">
+              <block type="math_number" id=";Z.4_byB4TG_%FUWP7XG">
+                <field name="NUM">3</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="27/vQ}D;Ol:CBC%[/w4]">
+        <field name="VAR" id="R@2SSdEHW)BLpZ0[/ND:">json_str</field>
+        <value name="VALUE">
+          <block type="ujson_dumps" id="S`;sFfa_lsO4f^j-FdP)">
+            <value name="dic">
+              <block type="variables_get" id="F5WpNL$z15r}~p`Nkt~G">
+                <field name="VAR" id="QFj4lLm|4cEGK9fakwZG">dic</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="text_print" id="YUohxuQ^j}PX`8ndICug">
+            <value name="TEXT">
+              <shadow type="text" id="*?V.3e.$5kr!H,-E!kQL">
+                <field name="TEXT">abc</field>
+              </shadow>
+              <block type="variables_get" id="Yqb}v(n~Q5I)R3B`i.sw">
+                <field name="VAR" id="R@2SSdEHW)BLpZ0[/ND:">json_str</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

@@ -1,0 +1,24 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="text_print" id="7Q.mCms@Lao;Z=({Epvy" x="-863" y="62">
+    <value name="TEXT">
+      <shadow type="text" id="zS.C+nds^50pb~wkA(/9">
+        <field name="TEXT">abc</field>
+      </shadow>
+      <block type="net_isconnected" id="@z!ZpT(lX*16B9Chgn$p">
+        <field name="NET_ISCONNECTED">Wifi is connected?</field>
+      </block>
+    </value>
+    <next>
+      <block type="text_print" id="?Dg}Q-6{wvbvBEM4%Ch-">
+        <value name="TEXT">
+          <shadow type="text" id="3fL/2!p]lS;Oi$7;8j*_">
+            <field name="TEXT">abc</field>
+          </shadow>
+          <block type="wifi_client_scan_networks" id="tJF+LmYG29F8@S/l7a1(">
+            <field name="NET_SCAN_WIFI">Scan Wifi networks</field>
+          </block>
+        </value>
+      </block>
+    </next>
+  </block>
+</xml>

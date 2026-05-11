@@ -1,0 +1,11 @@
+你是MicroPython專家，請用繁體中文改寫下列MicroPython程式成blink()函式來閃爍LED，第1個參數是閃爍次數，第2個參數是間隔秒數，while迴圈是呼叫blink(10, 0.5)和blink(5, 1.5)函式來閃爍LED。
+import utime 
+from machine import Pin
+
+led = Pin(2, Pin.OUT)
+led.value(1)
+while True:
+    v = not led.value()
+    print("狀態值", v)
+    led.value(v)
+    utime.sleep(1)

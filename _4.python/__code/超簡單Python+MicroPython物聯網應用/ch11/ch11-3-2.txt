@@ -1,0 +1,31 @@
+你是MicroPython專家，現在，我有一塊ESP8266開發板連接一個光敏電阻，並且新增一個Adafruit.IO儀表板，可以繪出FEED是distance的光敏電阻值來模擬距離資料，Adafruit帳戶名稱和金鑰，如下所示：
+ADAFRUIT_AIO_USERNAME：hueyanchen2014
+ADAFRUIT_AIO_KEY：aio_mHuM------------------4OkiJ4
+請直接用繁體中文改寫下列MicroPython程式，改為上傳讀取光敏電阻值的距離至Adafruit.IO，如下所示：
+import xtools, utime
+
+xtools.connect_wifi_led()
+
+ADAFRUIT_AIO_USERNAME = "<USERNAME>"
+ADAFRUIT_AIO_KEY = "<AIO KEY>"
+FEED1 = "temperature"
+FEED2 = "humidity"
+
+while True:
+    temp = xtools.random_in_range(10, 35)
+    hum = xtools.random_in_range(60, 90)
+    print("儲存溫度和濕度資料: ", temp, hum)
+    url = "https://io.adafruit.com/api/v2/" + ADAFRUIT_AIO_USERNAME
+    url+= "/feeds/"+ FEED1 + "/data?X-AIO-Key=" + ADAFRUIT_AIO_KEY
+    print('url1=', url)
+    data1 = {"value": temp}
+    xtools.webhook_post(url, data1)
+    url = "https://io.adafruit.com/api/v2/" + ADAFRUIT_AIO_USERNAME
+    url+= "/feeds/"+ FEED2 + "/data?X-AIO-Key=" + ADAFRUIT_AIO_KEY
+    print('url2=', url)
+    data2 = {"value": hum}
+    xtools.webhook_post(url, data2)        
+    utime.sleep(5)
+
+請使用from/import語法來匯入所需的物件。
+

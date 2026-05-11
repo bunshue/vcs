@@ -1,0 +1,20 @@
+你是MicroPython專家，現在，我有一塊ESP8266開發板連接一個光敏電阻，並且新增了一個ThingSpeak Channel頻道和Field1欄位，WRITE API金鑰是"RDLW---------PT75Y"，請用繁體中文改寫下列MicroPython程式，改為上傳讀取的光敏電阻值至field1，如下所示：
+import xtools, utime
+
+xtools.connect_wifi_led()
+
+WRITE_API_KEY = "<WRITE API金鑰>"
+
+while True:
+    temp = xtools.random_in_range(10, 35)
+    hum = xtools.random_in_range(60, 90)
+    print("儲存溫度和濕度資料: ", temp, hum)
+    url = "http://api.thingspeak.com/update?"
+    url += "api_key=" + WRITE_API_KEY
+    url += "&field1=" + str(temp)
+    url += "&field2=" + str(hum)
+    print(url)
+    xtools.webhook_get(url)
+    utime.sleep(15)
+
+使用from/import語法來匯入所需的物件。

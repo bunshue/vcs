@@ -1,0 +1,6 @@
+當剖析JSON資料時，我們可以找出取得指定鍵值的每一層鍵的路徑值，例如：取得"lat"鍵的值，可以使用鍵路徑：
+"JSON鍵" -> "lat"
+例如：取得"description"鍵的值，因為有JSON陣列，所以使用索引值0的第1個元素，其鍵路徑如下：
+"JSON鍵" -> 0 -> "description"
+請依據上述說明，找出"description"、"temp"和"humidity"鍵的鍵路徑，JSON資料如下：
+{"coord":{"lon":121.4672,"lat":25.0143},"weather":[{"id":803,"main":"Clouds","description":"broken clouds","icon":"04d"}],"base":"stations","main":{"temp":20.71,"feels_like":20.06,"temp_min":19.73,"temp_max":22.24,"pressure":1017,"humidity":47},"visibility":10000,"wind":{"speed":6.17,"deg":80},"clouds":{"all":75},"dt":1681006827,"sys":{"type":2,"id":68223,"country":"TW","sunrise":1680989893,"sunset":1681035191},"timezone":28800,"id":1670029,"name":"Banqiao District","cod":200}

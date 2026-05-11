@@ -1,0 +1,32 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="A9tpORcP%d;v67_%$]E8">led</variable>
+  </variables>
+  <block type="variables_set" id="f;5IQ=|aBTVL`S$W)X!p" x="63" y="63">
+    <field name="VAR" id="A9tpORcP%d;v67_%$]E8">led</field>
+    <value name="VALUE">
+      <block type="gpio_create_pinobj" id="Xb{|vnw,}TBaLF?z)?Q5">
+        <field name="type">OUT</field>
+        <value name="pin">
+          <shadow type="pinout" id="0G?fJE$oMdrv9$#klPAh">
+            <field name="PIN">2</field>
+          </shadow>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="gpio_set_pinobj" id="Db6aMe-tI_r_h7@u#^-Z">
+        <value name="obj">
+          <block type="variables_get" id="XD@]aO/-Xd2vpQT][AW1">
+            <field name="VAR" id="A9tpORcP%d;v67_%$]E8">led</field>
+          </block>
+        </value>
+        <value name="value">
+          <shadow type="logic_boolean" id="lQ_V[F9YLdOiCCJY46_n">
+            <field name="BOOL">FALSE</field>
+          </shadow>
+        </value>
+      </block>
+    </next>
+  </block>
+</xml>

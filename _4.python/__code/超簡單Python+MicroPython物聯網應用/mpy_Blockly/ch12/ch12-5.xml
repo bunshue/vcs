@@ -1,0 +1,309 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="xA7kUD}_siyB_1*iZDL.">HOST</variable>
+    <variable id=".WlCU[fS)(6RNUgLYS_x">CHANNEL_ID</variable>
+    <variable id=":O8PT9M`rCua~:2r}f3U">CLIENT_ID</variable>
+    <variable id="F9EE30]h/ba~6Te;;qu9">USERNAME</variable>
+    <variable id="=L_Ib{e9Xq%f)Ge`!7Wa">PASSWORD</variable>
+    <variable id="*!/9o`3lB_wC]gfD@_FZ">topic</variable>
+    <variable id="KzeEt(ZAt-XcTX?q5#4-">temp</variable>
+    <variable id="*YxNCLvn%N;Bbv2_*POZ">hum</variable>
+    <variable id="9J)^JkR}QLTAjjG[Z6Ff">payload</variable>
+  </variables>
+  <block type="xtools_connect_wifi" id="K`HF`tx1mPq|rlNpJl:}" x="138" y="38">
+    <value name="ssid">
+      <shadow type="text" id="NjR/Krw^1L1JW4vI5sRX">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <value name="pwd">
+      <shadow type="text" id=".ZPqeW:#YDnFO((H^WFY">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <value name="timeout">
+      <shadow type="math_number" id="Z%_II9Z_oT(!2Z{m+m]1">
+        <field name="NUM">15</field>
+      </shadow>
+    </value>
+    <next>
+      <block type="variables_set" id="7v55]O.#Ym8T|P6-Tclv">
+        <field name="VAR" id="xA7kUD}_siyB_1*iZDL.">HOST</field>
+        <value name="VALUE">
+          <block type="text" id=",ni%Ny7d@HUx0CDw%3`6">
+            <field name="TEXT">mqtt3.thingspeak.com</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="N1^xPG!T;KWsKv#H@xoP">
+            <field name="VAR" id=".WlCU[fS)(6RNUgLYS_x">CHANNEL_ID</field>
+            <value name="VALUE">
+              <block type="text" id="btHkL!2V:acN=ET(%E`:">
+                <field name="TEXT">&lt;CHANNEL _ID&gt;</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="ObRQn}H-z8Tjv3kmuoCI">
+                <field name="VAR" id=":O8PT9M`rCua~:2r}f3U">CLIENT_ID</field>
+                <value name="VALUE">
+                  <block type="text" id="|AY{B$-%U6fRR45+TCjf">
+                    <field name="TEXT">&lt;CLIENT ID&gt;</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="Nwe@1KBni^;FYry=M[r~">
+                    <field name="VAR" id="F9EE30]h/ba~6Te;;qu9">USERNAME</field>
+                    <value name="VALUE">
+                      <block type="text" id="`0.OCrw4FuKT~]oFy%C8">
+                        <field name="TEXT">&lt;USERNAME&gt;</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="ud`44h|=7.nK!k*Y*]IR">
+                        <field name="VAR" id="=L_Ib{e9Xq%f)Ge`!7Wa">PASSWORD</field>
+                        <value name="VALUE">
+                          <block type="text" id="K-{tD*3!v,-~tx$X5k~M">
+                            <field name="TEXT">&lt;PASSWORD&gt;</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="variables_set" id="P~9t(D%JWU`JwQiR=Lg=">
+                            <field name="VAR" id="*!/9o`3lB_wC]gfD@_FZ">topic</field>
+                            <value name="VALUE">
+                              <block type="text_join" id="H2XGO_a;1|pqUTim{SZ!">
+                                <mutation items="3"/>
+                                <value name="ADD0">
+                                  <block type="text" id="6_ucq1~CJEL[AUHHwuCa">
+                                    <field name="TEXT">channels/</field>
+                                  </block>
+                                </value>
+                                <value name="ADD1">
+                                  <block type="variables_get" id="b~=D8+^@}V:nNVDT8,~$">
+                                    <field name="VAR" id=".WlCU[fS)(6RNUgLYS_x">CHANNEL_ID</field>
+                                  </block>
+                                </value>
+                                <value name="ADD2">
+                                  <block type="text" id="2$1Wp}+o:u,BXh@~#eb!">
+                                    <field name="TEXT">/publish</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="mqtt_init" id="5cWEA52UW%[2+]gBV[j1">
+                                <field name="BLOCK_MQTT_INIT">Init MQTT client</field>
+                                <field name="MQTT_CLIENT_ID">client ID</field>
+                                <field name="MQTT_SERVER">server address</field>
+                                <field name="MQTT_PORT">server port</field>
+                                <field name="MQTT_USER">username</field>
+                                <field name="MQTT_PASSWORD">password</field>
+                                <value name="clientid">
+                                  <shadow type="text" id="uHW8ryXa4pcceC(j5]3d">
+                                    <field name="TEXT">mqtt_client_id</field>
+                                  </shadow>
+                                  <block type="variables_get" id="{]s/]?tD+su_DYthL~^6">
+                                    <field name="VAR" id=":O8PT9M`rCua~:2r}f3U">CLIENT_ID</field>
+                                  </block>
+                                </value>
+                                <value name="server">
+                                  <shadow type="text" id="P[O5oPw~,m~I}E86DXui">
+                                    <field name="TEXT"/>
+                                  </shadow>
+                                  <block type="variables_get" id="A..,hAFWS}VZnvdwy_#V">
+                                    <field name="VAR" id="xA7kUD}_siyB_1*iZDL.">HOST</field>
+                                  </block>
+                                </value>
+                                <value name="port">
+                                  <shadow type="math_number" id="`jIgLchY2OSe:PU5~`E;">
+                                    <field name="NUM">1883</field>
+                                  </shadow>
+                                </value>
+                                <value name="user">
+                                  <block type="variables_get" id="lN^t_mZkS35KwS*NV5I^">
+                                    <field name="VAR" id="F9EE30]h/ba~6Te;;qu9">USERNAME</field>
+                                  </block>
+                                </value>
+                                <value name="password">
+                                  <block type="variables_get" id="?`:-ZgIq~vc/$!03mmYZ">
+                                    <field name="VAR" id="=L_Ib{e9Xq%f)Ge`!7Wa">PASSWORD</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="controls_whileUntil" id="G)HQN5fXu$c+*faPD4@q">
+                                    <field name="MODE">WHILE</field>
+                                    <value name="BOOL">
+                                      <block type="logic_boolean" id="DZTuBE#%Xxdy`~n4*7FA">
+                                        <field name="BOOL">TRUE</field>
+                                      </block>
+                                    </value>
+                                    <statement name="DO">
+                                      <block type="text_print" id="gn$7|qT@Vi7i!i=SpcY?">
+                                        <value name="TEXT">
+                                          <shadow type="text" id="TEf890=|jpEt3J=GD_$;">
+                                            <field name="TEXT">abc</field>
+                                          </shadow>
+                                          <block type="text" id="W-3Me5zapR5d~);x7nNB">
+                                            <field name="TEXT">儲存溫度和濕度資料!</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="variables_set" id="t(_4/xrY%,DkXZ6`gY;/">
+                                            <field name="VAR" id="KzeEt(ZAt-XcTX?q5#4-">temp</field>
+                                            <value name="VALUE">
+                                              <block type="xtools_random_in_range" id="N7v//MpZZCnu6%K;UnL|">
+                                                <value name="low">
+                                                  <shadow type="math_number" id="Wc9q`Yrg-e(;0KnCfC}E">
+                                                    <field name="NUM">10</field>
+                                                  </shadow>
+                                                </value>
+                                                <value name="high">
+                                                  <shadow type="math_number" id="9R!I89U*TFlaXlRoD.fM">
+                                                    <field name="NUM">35</field>
+                                                  </shadow>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="variables_set" id="gT@E0]yU?rgyjgeHIvnL">
+                                                <field name="VAR" id="*YxNCLvn%N;Bbv2_*POZ">hum</field>
+                                                <value name="VALUE">
+                                                  <block type="xtools_random_in_range" id="~Gm6!0ijbxzlP~fZiS#S">
+                                                    <value name="low">
+                                                      <shadow type="math_number" id="]I*b/C232$+nxfhH4~3[">
+                                                        <field name="NUM">60</field>
+                                                      </shadow>
+                                                    </value>
+                                                    <value name="high">
+                                                      <shadow type="math_number" id="B=P~%~AOR!=w[[IX1gS4">
+                                                        <field name="NUM">90</field>
+                                                      </shadow>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="text_print" id="-k+1Q8.KDjm=H^6mA{+=">
+                                                    <value name="TEXT">
+                                                      <shadow type="text">
+                                                        <field name="TEXT">abc</field>
+                                                      </shadow>
+                                                      <block type="text_join" id=".V,j~*8]vp9uHhrr,{x-">
+                                                        <mutation items="3"/>
+                                                        <value name="ADD0">
+                                                          <block type="variables_get" id="QD?~TG,7TI@3,L}$7{QL">
+                                                            <field name="VAR" id="KzeEt(ZAt-XcTX?q5#4-">temp</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="ADD1">
+                                                          <block type="text" id="j!I`Iowp[Fl@yewET?qj">
+                                                            <field name="TEXT">/</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="ADD2">
+                                                          <block type="variables_get" id="yg{#..!N[j2b}Vf9B@!|">
+                                                            <field name="VAR" id="*YxNCLvn%N;Bbv2_*POZ">hum</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="variables_set" id="eyax4!u`xYS9*o=NFjQb">
+                                                        <field name="VAR" id="9J)^JkR}QLTAjjG[Z6Ff">payload</field>
+                                                        <value name="VALUE">
+                                                          <block type="text_join" id="mtrK+dD).}:)685Cq=;M">
+                                                            <mutation items="4"/>
+                                                            <value name="ADD0">
+                                                              <block type="text" id="5yy}2zjU:N;:EP%2Wrya">
+                                                                <field name="TEXT">field1=</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="ADD1">
+                                                              <block type="variables_get" id="miq`rY0U[rPr/a6K,]9;">
+                                                                <field name="VAR" id="KzeEt(ZAt-XcTX?q5#4-">temp</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="ADD2">
+                                                              <block type="text" id="Kf4nppf);_T%0jW.a5JM">
+                                                                <field name="TEXT">&amp;field2=</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="ADD3">
+                                                              <block type="variables_get" id="NMue)4^wd$ZGP-NYN10x">
+                                                                <field name="VAR" id="*YxNCLvn%N;Bbv2_*POZ">hum</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="mqtt_connect" id="w9+*;_?sCDQiX)$6elwy">
+                                                            <field name="BLOCK_MQTT_CONNECT">Connect MQTT client</field>
+                                                            <next>
+                                                              <block type="mqtt_publish_payload" id="80m6#{bpvUizJ`nR0Hr?">
+                                                                <field name="BLOCK_MQTT_PUBLISH">Publish payload to MQTT topic</field>
+                                                                <field name="MQTT_TOPIC">topic</field>
+                                                                <field name="MQTT_PAYLOAD">payload</field>
+                                                                <field name="MQTT_QOS">0</field>
+                                                                <value name="topic">
+                                                                  <shadow type="text" id="aWf8*=M;C6q)F|2CJ{+#">
+                                                                    <field name="TEXT"/>
+                                                                  </shadow>
+                                                                  <block type="variables_get" id="Er)sIdULU_16z@[0o7TQ">
+                                                                    <field name="VAR" id="*!/9o`3lB_wC]gfD@_FZ">topic</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="payload">
+                                                                  <shadow type="text" id="cx]t^:iocF+vKu#IPSMz">
+                                                                    <field name="TEXT"/>
+                                                                  </shadow>
+                                                                  <block type="variables_get" id="Rl$[=|WYxVtFIs(h.9Zs">
+                                                                    <field name="VAR" id="9J)^JkR}QLTAjjG[Z6Ff">payload</field>
+                                                                  </block>
+                                                                </value>
+                                                                <next>
+                                                                  <block type="mqtt_disconnect" id="V6?ua%kvj[F9~Wk}5-NT">
+                                                                    <field name="BLOCK_MQTT_DISCONNECT">Disconnect MQTT client</field>
+                                                                    <next>
+                                                                      <block type="delay" id="fE]~uuWW^7s25[xAy_z}">
+                                                                        <value name="time">
+                                                                          <shadow type="math_number">
+                                                                            <field name="NUM">0</field>
+                                                                          </shadow>
+                                                                          <block type="math_number" id="Q2[ydUw::JWU{Nl8-1Nq">
+                                                                            <field name="NUM">15</field>
+                                                                          </block>
+                                                                        </value>
+                                                                      </block>
+                                                                    </next>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

@@ -1,0 +1,10 @@
+你是MicroPython專家，請用繁體中文改寫下列MicroPython程式，改為使用Timer計時器，可以間隔1秒鐘來讀取光敏電阻值，如下所示：
+from machine import ADC
+import utime
+
+adc = ADC(0)
+
+while True:
+    adc_value = adc.read()
+    print(adc_value)
+    utime.sleep(0.5)

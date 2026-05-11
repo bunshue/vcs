@@ -1,0 +1,136 @@
+[
+    {
+        "id": "d38ae776e3ac0eb4",
+        "type": "http in",
+        "z": "49db86cb205ca811",
+        "name": "",
+        "url": "/make/:domain/:token/:value",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 60,
+        "wires": [
+            [
+                "f03667a810f5d618"
+            ]
+        ]
+    },
+    {
+        "id": "c122eb37b31dfe07",
+        "type": "http response",
+        "z": "49db86cb205ca811",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 550,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "f03667a810f5d618",
+        "type": "function",
+        "z": "49db86cb205ca811",
+        "name": "Rebuild Make's HTTPS URL ",
+        "func": "var domain = msg.req.params.domain;\nvar token = msg.req.params.token;\nvar value = msg.req.params.value;\n\n// http://localhost:1880/hook.eu2.make.com/yzr1of---lbde2bnauk19sanf7es0d6bz/time,2024-05-15,value,161\n// http://192.168.1.102:1880/hook.eu2.make.com/yzr1of---lbde2bnauk19sanf7es0d6bz/time,2024-05-15,value,161\n\nconst pairs = value.split(',');\nlet queryString = '';\n\nfor (let i = 0; i < pairs.length; i += 2) {\n    const key = pairs[i];\n    const value = pairs[i + 1].replace('_', ' ');\n    queryString += `${key}=${value}&`;\n}\n// 移除最後一個&\nqueryString = queryString.slice(0, -1);\n\nmsg.topic = \"https://\" + domain + \"/\" + token + \"?\" + queryString;\nmsg.payload = \"<p>轉址至Make的Webhook URL</p>\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 120,
+        "wires": [
+            [
+                "c122eb37b31dfe07",
+                "cc1166537e0a007f",
+                "3e5bdca2d7b1b34a"
+            ]
+        ]
+    },
+    {
+        "id": "cc1166537e0a007f",
+        "type": "debug",
+        "z": "49db86cb205ca811",
+        "name": "debug URL",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "fb174a58ce5facd1",
+        "type": "http request",
+        "z": "49db86cb205ca811",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 380,
+        "y": 200,
+        "wires": [
+            [
+                "d982c5665f63c9e2"
+            ]
+        ]
+    },
+    {
+        "id": "d982c5665f63c9e2",
+        "type": "debug",
+        "z": "49db86cb205ca811",
+        "name": "debug HTTP Request",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "3e5bdca2d7b1b34a",
+        "type": "change",
+        "z": "49db86cb205ca811",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "topic",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 190,
+        "y": 200,
+        "wires": [
+            [
+                "fb174a58ce5facd1"
+            ]
+        ]
+    }
+]

@@ -1,0 +1,48 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="a:maW`yN,}z+={;1_*yz">adc_value</variable>
+  </variables>
+  <block type="controls_whileUntil" id="R7=?cU6bjUODe]jEPnj+" x="-612" y="38">
+    <field name="MODE">WHILE</field>
+    <value name="BOOL">
+      <block type="logic_boolean" id="^.i{-%YVxK,fmC2B[W+O">
+        <field name="BOOL">TRUE</field>
+      </block>
+    </value>
+    <statement name="DO">
+      <block type="variables_set" id="5n$.Gd4`-2AREP1XG~(a">
+        <field name="VAR" id="a:maW`yN,}z+={;1_*yz">adc_value</field>
+        <value name="VALUE">
+          <block type="adc" id="=G)|GYCUn]QWfz55KNg=">
+            <value name="pin">
+              <shadow type="math_number" id="OQLhG(reJV]*k:]4f;Yk">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="text_print" id="#lu;hEle4Zm9yW}j?373">
+            <value name="TEXT">
+              <shadow type="text" id="9)o@U[~y8PQr8Fk~*;+}">
+                <field name="TEXT">abc</field>
+              </shadow>
+              <block type="variables_get" id="Izfh6Bi_HxGoh@SV]{:l">
+                <field name="VAR" id="a:maW`yN,}z+={;1_*yz">adc_value</field>
+              </block>
+            </value>
+            <next>
+              <block type="delay" id="rr(YM/RmnYpWQ=PZS7)b">
+                <value name="time">
+                  <shadow type="math_number" id="%bUyu8C_E^k(HiLB;Iwn">
+                    <field name="NUM">0.5</field>
+                  </shadow>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

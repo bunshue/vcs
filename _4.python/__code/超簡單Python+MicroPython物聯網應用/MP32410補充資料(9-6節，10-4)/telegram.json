@@ -1,0 +1,136 @@
+[
+    {
+        "id": "f6b1ce809948872c",
+        "type": "http in",
+        "z": "42d69fd168c9b288",
+        "name": "",
+        "url": "/telegram/:chatid/:token/:msg",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 220,
+        "y": 80,
+        "wires": [
+            [
+                "b9d733f8928b8f71"
+            ]
+        ]
+    },
+    {
+        "id": "afa0d70bfae86835",
+        "type": "http response",
+        "z": "42d69fd168c9b288",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 570,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "b9d733f8928b8f71",
+        "type": "function",
+        "z": "42d69fd168c9b288",
+        "name": "Rebuild Telegram's HTTPS URL ",
+        "func": "var chat_id = msg.req.params.chatid;\nvar token = msg.req.params.token;\nvar message = msg.req.params.msg;\nvar url;\n\nurl = \"https://api.telegram.org/bot\" + token;\nurl += \"/sendMessage?text=\" + message;\nurl += \"&chat_id=\" + chat_id;\nmsg.topic = url;\nmsg.payload = \"<p>轉址至Telegram的Notification通知訊息</p>\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 140,
+        "wires": [
+            [
+                "4c5e41fb2428532d",
+                "36c7faa54d84c9ab",
+                "afa0d70bfae86835"
+            ]
+        ]
+    },
+    {
+        "id": "4c5e41fb2428532d",
+        "type": "debug",
+        "z": "42d69fd168c9b288",
+        "name": "debug URL",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "a6b9701046b15d7d",
+        "type": "http request",
+        "z": "42d69fd168c9b288",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 400,
+        "y": 220,
+        "wires": [
+            [
+                "51f961412b1fb623"
+            ]
+        ]
+    },
+    {
+        "id": "51f961412b1fb623",
+        "type": "debug",
+        "z": "42d69fd168c9b288",
+        "name": "debug HTTP Request",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "36c7faa54d84c9ab",
+        "type": "change",
+        "z": "42d69fd168c9b288",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "topic",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 210,
+        "y": 220,
+        "wires": [
+            [
+                "a6b9701046b15d7d"
+            ]
+        ]
+    }
+]

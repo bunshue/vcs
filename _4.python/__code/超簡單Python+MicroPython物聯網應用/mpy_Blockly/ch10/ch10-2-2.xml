@@ -1,0 +1,39 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="ijx@DI%peFxZD.|TfO9C">ip</variable>
+  </variables>
+  <block type="variables_set" id="3S3APxX@lmIq4H4#d/Ry" x="-538" y="13">
+    <field name="VAR" id="ijx@DI%peFxZD.|TfO9C">ip</field>
+    <value name="VALUE">
+      <block type="xtools_connect_wifi_ip" id="W@_h00k?_mj$Y)tEW0;8">
+        <value name="ssid">
+          <shadow type="text" id="hNH]Bw`()~z8C5Ud3;la">
+            <field name="TEXT"/>
+          </shadow>
+        </value>
+        <value name="pwd">
+          <shadow type="text" id="aU5tdv~cKW[KiCU?4rA-">
+            <field name="TEXT"/>
+          </shadow>
+        </value>
+        <value name="timeout">
+          <shadow type="math_number" id="$%^/6/gvTPICm(zkkwjF">
+            <field name="NUM">15</field>
+          </shadow>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="text_print" id="w4g*,jda.2LLc.5fe.Mz">
+        <value name="TEXT">
+          <shadow type="text" id="R!O@y]x6@dY}.PwAqS#L">
+            <field name="TEXT">abc</field>
+          </shadow>
+          <block type="variables_get" id="[rMI]zUxFk?`ER5JgAOw">
+            <field name="VAR" id="ijx@DI%peFxZD.|TfO9C">ip</field>
+          </block>
+        </value>
+      </block>
+    </next>
+  </block>
+</xml>

@@ -1,0 +1,73 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="IIXg{queUSpev+f+ddTu">led</variable>
+  </variables>
+  <block type="variables_set" id="X2XA8p8Y~0ujY.3d9[/|" x="113" y="38">
+    <field name="VAR" id="IIXg{queUSpev+f+ddTu">led</field>
+    <value name="VALUE">
+      <block type="gpio_create_pinobj" id="s]q6:BdbW0ziV[~Z7)R^">
+        <field name="type">OUT</field>
+        <value name="pin">
+          <shadow type="pinout" id="}..WF*aF[{^RZ+P):N(/">
+            <field name="PIN">2</field>
+          </shadow>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="controls_repeat_ext" id="D+51i~Sn8.iUMy:E-kVO">
+        <value name="TIMES">
+          <shadow type="math_number" id="iG2}`/z-_F5x#*h-~X1E">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+        <statement name="DO">
+          <block type="gpio_set_pinobj" id="}wW+A2bTg+=k-/`vFBI:">
+            <value name="obj">
+              <block type="variables_get" id="l8.hWj(smCRxoOVD`NZi">
+                <field name="VAR" id="IIXg{queUSpev+f+ddTu">led</field>
+              </block>
+            </value>
+            <value name="value">
+              <shadow type="logic_boolean" id="XO^sgAgxOE=8XBX:NWm/">
+                <field name="BOOL">FALSE</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="delay" id="Z9FkWd{)kX9?J6}qS62?">
+                <value name="time">
+                  <shadow type="math_number" id="`R%C3IudweEic$Y8b:|j">
+                    <field name="NUM">1</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="gpio_set_pinobj" id="G!oj`,]rZ/KQ9jZb0M%]">
+                    <value name="obj">
+                      <block type="variables_get" id=",M#wz^A-lK`q@#00/%iS">
+                        <field name="VAR" id="IIXg{queUSpev+f+ddTu">led</field>
+                      </block>
+                    </value>
+                    <value name="value">
+                      <shadow type="logic_boolean" id="Zt+Y=Iuj(Xdl?xl6J.fQ">
+                        <field name="BOOL">TRUE</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="delay" id="ZO{6Y3K$|{UR4t(]|vuV">
+                        <value name="time">
+                          <shadow type="math_number" id="cBLcBoI0Bn+lODdm{)x[">
+                            <field name="NUM">1</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>

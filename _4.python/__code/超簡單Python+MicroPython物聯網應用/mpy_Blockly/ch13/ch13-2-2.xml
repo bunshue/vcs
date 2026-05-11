@@ -1,0 +1,144 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="dcf/YL@zo5}}qs-M7nRB">API_KEY</variable>
+    <variable id="BOHx)_Kj#14bg-48nU:)">EVENT_NAME</variable>
+    <variable id="-YN;gHZ`0KtyA7m04J5-">WEBHOOK_URL</variable>
+    <variable id="?LjE_UV$a$8l_$HeLn*)">distance</variable>
+  </variables>
+  <block type="xtools_connect_wifi" id="9!l$rYzvJ.]w_Mm!Z^!K" x="88" y="38">
+    <value name="ssid">
+      <shadow type="text" id="*7+R=97tL*IoR2XsArdW">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <value name="pwd">
+      <shadow type="text" id="OdJK_%,T$(R*e!`*[}*g">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <value name="timeout">
+      <shadow type="math_number" id="o4Kvwbj++dOY@R~!Ra}4">
+        <field name="NUM">15</field>
+      </shadow>
+    </value>
+    <next>
+      <block type="variables_set" id="~-_xwc~^4bf/jiA.^A^|">
+        <field name="VAR" id="dcf/YL@zo5}}qs-M7nRB">API_KEY</field>
+        <value name="VALUE">
+          <block type="text" id="FbFuKC|h4Qaaz(4aq?^/">
+            <field name="TEXT">&lt;API金鑰&gt;</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="]J6cB^EQJ+2q~t]Vh9L,">
+            <field name="VAR" id="BOHx)_Kj#14bg-48nU:)">EVENT_NAME</field>
+            <value name="VALUE">
+              <block type="text" id="we,MV|dwYAW1R8s2C~i]">
+                <field name="TEXT">distance</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="r]#1%z$wjl*.HI77/E-/">
+                <field name="VAR" id="-YN;gHZ`0KtyA7m04J5-">WEBHOOK_URL</field>
+                <value name="VALUE">
+                  <block type="text_join" id="-uwI=K-}Gb{mbBAY8S(U">
+                    <mutation items="5"/>
+                    <value name="ADD0">
+                      <block type="text" id="u?R3XE$6Nnb]9S|s+{.L">
+                        <field name="TEXT">https://maker.ifttt.com/trigger/</field>
+                      </block>
+                    </value>
+                    <value name="ADD1">
+                      <block type="variables_get" id="zU{QN+mkmi2ck#CSm3nn">
+                        <field name="VAR" id="BOHx)_Kj#14bg-48nU:)">EVENT_NAME</field>
+                      </block>
+                    </value>
+                    <value name="ADD2">
+                      <block type="text" id="C,:[-,FN)n|[c10R3l)@">
+                        <field name="TEXT">/with/key/</field>
+                      </block>
+                    </value>
+                    <value name="ADD3">
+                      <block type="variables_get" id="rro[=/;]^dCx]DXM#,WZ">
+                        <field name="VAR" id="dcf/YL@zo5}}qs-M7nRB">API_KEY</field>
+                      </block>
+                    </value>
+                    <value name="ADD4">
+                      <block type="text" id="6Cmg{AwzJH-AuYL!Sr~j">
+                        <field name="TEXT">/?value1=</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="controls_whileUntil" id="[W:/8x|I^2-/i@7W|cFj">
+                    <field name="MODE">WHILE</field>
+                    <value name="BOOL">
+                      <block type="logic_boolean" id="r_J_sG9zX*o8}Vp|b`^%">
+                        <field name="BOOL">TRUE</field>
+                      </block>
+                    </value>
+                    <statement name="DO">
+                      <block type="text_print" id="t6z+e!_Qyz}EyfX5:oI_">
+                        <value name="TEXT">
+                          <shadow type="text" id="D-.xnK~t4,8A*wP#j-]w">
+                            <field name="TEXT">abc</field>
+                          </shadow>
+                          <block type="text" id="l5#cDoeGiQ02#QC|Hs,S">
+                            <field name="TEXT">儲存距離資料!</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="variables_set" id="ynf5zX_s.(usO#K4v.u-">
+                            <field name="VAR" id="?LjE_UV$a$8l_$HeLn*)">distance</field>
+                            <value name="VALUE">
+                              <block type="adc" id="UM*31OV(Fz4[wL]Y*|rL">
+                                <value name="pin">
+                                  <shadow type="math_number" id="Hc]*zI77C5Lv^OIlWQJw">
+                                    <field name="NUM">0</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="xtools_webhook_get" id="6skD-d]xsqvbet[fXLZU">
+                                <value name="URL">
+                                  <block type="text_join" id=";@JCxKIhdci$jiF2wPap">
+                                    <mutation items="2"/>
+                                    <value name="ADD0">
+                                      <block type="variables_get" id="Arw8FHR=dmmCWkKDD_Gk">
+                                        <field name="VAR" id="-YN;gHZ`0KtyA7m04J5-">WEBHOOK_URL</field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD1">
+                                      <block type="variables_get" id="CKL7F`:UId]$CF5^bjH7">
+                                        <field name="VAR" id="?LjE_UV$a$8l_$HeLn*)">distance</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="delay" id="C]6!Rxd{i*{/OSoWAd~)">
+                                    <value name="time">
+                                      <shadow type="math_number" id="Z0|03vlS6yKSTi=3tlx4">
+                                        <field name="NUM">5</field>
+                                      </shadow>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

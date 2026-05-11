@@ -1,0 +1,71 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="F[-:HMN1F+Vpscg|XATw">value1</variable>
+    <variable id="uwO`}M_jr,X/}oHErj3v">value2</variable>
+    <variable id="$lgnrS./#Z_aU}%?2@2g">params</variable>
+  </variables>
+  <block type="variables_set" id="Zq{Y88:BoWj;^w3iry$Y" x="-788" y="-38">
+    <field name="VAR" id="F[-:HMN1F+Vpscg|XATw">value1</field>
+    <value name="VALUE">
+      <block type="math_number" id="%7HF8O5aP[.-:CjzF{*p">
+        <field name="NUM">100</field>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="If/-)58i@Ru^h(*7zMO@">
+        <field name="VAR" id="uwO`}M_jr,X/}oHErj3v">value2</field>
+        <value name="VALUE">
+          <block type="text" id="kNy4FlO9E!ud}4pH)Dou">
+            <field name="TEXT">陳會安</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="bD-^EkXEGhZ7KUz2VyW1">
+            <field name="VAR" id="$lgnrS./#Z_aU}%?2@2g">params</field>
+            <value name="VALUE">
+              <block type="dicts_create_with" id="37`y3b:/;J#O6.mC4?-F">
+                <mutation xmlns="http://www.w3.org/1999/xhtml" items="2"></mutation>
+                <value name="KEY0">
+                  <block type="text" id="iy?/!-S1Y[s1SDofe}[+">
+                    <field name="TEXT">value1</field>
+                  </block>
+                </value>
+                <value name="VALUE0">
+                  <block type="variables_get" id="W9xU]NQ1Lr8I`foXMmAm">
+                    <field name="VAR" id="F[-:HMN1F+Vpscg|XATw">value1</field>
+                  </block>
+                </value>
+                <value name="KEY1">
+                  <block type="text" id="XZ@(Ia]h5{1D_+ZIM_#$">
+                    <field name="TEXT">value2</field>
+                  </block>
+                </value>
+                <value name="VALUE1">
+                  <block type="variables_get" id="Tg3R{L(Ej:+Q1|lOek`a">
+                    <field name="VAR" id="uwO`}M_jr,X/}oHErj3v">value2</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="text_print" id="[1@:B)$#/~YnC~o2%yW4">
+                <value name="TEXT">
+                  <shadow type="text" id="M-vXPm{h$/k5N.Dv4cRj">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                  <block type="urlencode_urlencode" id="^wJGh0);`ZP0c;SZ7HK{">
+                    <value name="data_dic">
+                      <block type="variables_get" id="?,{/Riy9*xbwfqK|RJ;J">
+                        <field name="VAR" id="$lgnrS./#Z_aU}%?2@2g">params</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

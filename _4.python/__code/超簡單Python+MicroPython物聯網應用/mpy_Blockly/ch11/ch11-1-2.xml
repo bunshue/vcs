@@ -1,0 +1,185 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="Y)jk+,N0wJv^)_#e0X_)">WRITE_API_KEY</variable>
+    <variable id="YpAx:htTku6YKFB2lLr`">temp</variable>
+    <variable id="suvkN(;#eA1=;ABjd~t%">hum</variable>
+    <variable id="BX^WzNv%_1?t6k*~aleZ">url</variable>
+  </variables>
+  <block type="xtools_connect_wifi" id="iuTt3.k9`JHiGZNk9x@?" x="113" y="63">
+    <value name="ssid">
+      <shadow type="text" id="wS`Kdpt%Oz.W+0SrevWr">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <value name="pwd">
+      <shadow type="text" id="BD#m/(gDLeYCkF$?y{aF">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <value name="timeout">
+      <shadow type="math_number" id="U^D%l(Z6q1LG7G.4yjwa">
+        <field name="NUM">15</field>
+      </shadow>
+    </value>
+    <next>
+      <block type="variables_set" id="nJMAxyiWGuROh#4p?do5">
+        <field name="VAR" id="Y)jk+,N0wJv^)_#e0X_)">WRITE_API_KEY</field>
+        <value name="VALUE">
+          <block type="text" id="cU,JCJnM77:).C!4rSb[">
+            <field name="TEXT">&lt;WRITE API金鑰&gt;</field>
+          </block>
+        </value>
+        <next>
+          <block type="controls_whileUntil" id="#KOYE=Q;i,2)K7XC/pNF">
+            <field name="MODE">WHILE</field>
+            <value name="BOOL">
+              <block type="logic_boolean" id=",_9^dx05*?ykXBD)G4/|">
+                <field name="BOOL">TRUE</field>
+              </block>
+            </value>
+            <statement name="DO">
+              <block type="variables_set" id="]lf.Fyr9qN1zk6/Vh?mM">
+                <field name="VAR" id="YpAx:htTku6YKFB2lLr`">temp</field>
+                <value name="VALUE">
+                  <block type="xtools_random_in_range" id="l9EH0[k)2;Q-kWlHGobQ">
+                    <value name="low">
+                      <shadow type="math_number" id="fd7_]kYu9KBOkjH{U).#">
+                        <field name="NUM">10</field>
+                      </shadow>
+                    </value>
+                    <value name="high">
+                      <shadow type="math_number" id="ITpz}Zt{!0:J$y`,=l0O">
+                        <field name="NUM">35</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="wQHD#v4-^,5(A%KJ_^YG">
+                    <field name="VAR" id="suvkN(;#eA1=;ABjd~t%">hum</field>
+                    <value name="VALUE">
+                      <block type="xtools_random_in_range" id="q[nzKr0%2e-6qgZq5]e@">
+                        <value name="low">
+                          <shadow type="math_number" id=":=x^,ZO*(2LWbc!x?lwl">
+                            <field name="NUM">60</field>
+                          </shadow>
+                        </value>
+                        <value name="high">
+                          <shadow type="math_number" id="@MWLf$2QiPad$-IdcWz9">
+                            <field name="NUM">90</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="text_print" id="/T-N-y@bT.eY2)QLqXm`">
+                        <value name="TEXT">
+                          <shadow type="text" id="z/W1J~uN$6Rgoo|yqOtD">
+                            <field name="TEXT">abc</field>
+                          </shadow>
+                          <block type="text_join" id="bQNmqL1s4GEOPazKn6!4">
+                            <mutation items="4"/>
+                            <value name="ADD0">
+                              <block type="text" id="{jw}hN=o14p(%5EPh9;h">
+                                <field name="TEXT">儲存溫度和濕度資料: </field>
+                              </block>
+                            </value>
+                            <value name="ADD1">
+                              <block type="variables_get" id="6mS]:4p.}ZE?QGrZm9[b">
+                                <field name="VAR" id="YpAx:htTku6YKFB2lLr`">temp</field>
+                              </block>
+                            </value>
+                            <value name="ADD2">
+                              <block type="text" id="X:`rmJMpNZJW;w?}K)~L">
+                                <field name="TEXT"> </field>
+                              </block>
+                            </value>
+                            <value name="ADD3">
+                              <block type="variables_get" id="PQp2gEzsiEC:,p4r@(:j">
+                                <field name="VAR" id="suvkN(;#eA1=;ABjd~t%">hum</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="variables_set" id="qAN,EH!1),]x%b+;HR7j">
+                            <field name="VAR" id="BX^WzNv%_1?t6k*~aleZ">url</field>
+                            <value name="VALUE">
+                              <block type="text_join" id="+}jv^Ybgpt)zzC-$MahK">
+                                <mutation items="6"/>
+                                <value name="ADD0">
+                                  <block type="text" id="($t,!Bb(Z1Ul3WCO{Xm?">
+                                    <field name="TEXT">http://api.thingspeak.com/update?api_key=</field>
+                                  </block>
+                                </value>
+                                <value name="ADD1">
+                                  <block type="variables_get" id="9jTOzS*-Y.}*FNoAmV(;">
+                                    <field name="VAR" id="Y)jk+,N0wJv^)_#e0X_)">WRITE_API_KEY</field>
+                                  </block>
+                                </value>
+                                <value name="ADD2">
+                                  <block type="text" id="f-VP|m!CLzpx74#Vl/sV">
+                                    <field name="TEXT">&amp;field1=</field>
+                                  </block>
+                                </value>
+                                <value name="ADD3">
+                                  <block type="variables_get" id="*]=lwlpSzr8A/9X.l9:3">
+                                    <field name="VAR" id="YpAx:htTku6YKFB2lLr`">temp</field>
+                                  </block>
+                                </value>
+                                <value name="ADD4">
+                                  <block type="text" id=".u3FEt7oEJ})EN6jvMyx">
+                                    <field name="TEXT">&amp;field2=</field>
+                                  </block>
+                                </value>
+                                <value name="ADD5">
+                                  <block type="variables_get" id="DRH}ToY7G3:O%7!!{y%3">
+                                    <field name="VAR" id="suvkN(;#eA1=;ABjd~t%">hum</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="text_print" id="T:oz7qQPG#nqp,a;bx(+">
+                                <value name="TEXT">
+                                  <shadow type="text" id="o:J20%1P22]`=nqKme;6">
+                                    <field name="TEXT">abc</field>
+                                  </shadow>
+                                  <block type="variables_get" id="o`4).gM)iYco/?/yHfmV">
+                                    <field name="VAR" id="BX^WzNv%_1?t6k*~aleZ">url</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="xtools_webhook_get" id="T~d|XSa;rPIwuZSzKYZn">
+                                    <value name="URL">
+                                      <block type="variables_get" id="VL)G%G9L?)kM`NkXonhE">
+                                        <field name="VAR" id="BX^WzNv%_1?t6k*~aleZ">url</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="delay" id="wMzMacY9H--XDc$y/94z">
+                                        <value name="time">
+                                          <shadow type="math_number" id="y)bB$a_HrNO=wDk$8WqB">
+                                            <field name="NUM">15</field>
+                                          </shadow>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

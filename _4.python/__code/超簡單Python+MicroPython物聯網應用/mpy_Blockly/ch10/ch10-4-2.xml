@@ -1,0 +1,57 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="Ge2pQPWQBXPprz4Rm.}e">token</variable>
+    <variable id="x^JSzDV|yASmg^zVa*Ar">message</variable>
+  </variables>
+  <block type="xtools_connect_wifi" id="cd)Lv*S$#J;Q|Cq)HW|3" x="-687" y="38">
+    <value name="ssid">
+      <shadow type="text" id="r)7ZAtm^4,Oy~36`G]xG">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <value name="pwd">
+      <shadow type="text" id="P-BH^I%$xAE_njzR1MmT">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <value name="timeout">
+      <shadow type="math_number" id="4o=RHlle,V[8f,sCC4eh">
+        <field name="NUM">15</field>
+      </shadow>
+    </value>
+    <next>
+      <block type="variables_set" id="sP.g/=9{$F]kHJ`cN^/n">
+        <field name="VAR" id="Ge2pQPWQBXPprz4Rm.}e">token</field>
+        <value name="VALUE">
+          <block type="text" id="OQ,o(hNhi-EP4HUUzd{y">
+            <field name="TEXT">&lt;存取權杖&gt;</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="%N=,Oyh3aH+y{-;NF)lH">
+            <field name="VAR" id="x^JSzDV|yASmg^zVa*Ar">message</field>
+            <value name="VALUE">
+              <block type="text" id="~Xk,lgeSQw[ieyLT9mbO">
+                <field name="TEXT">使用MicroPython送出Notify通知訊息</field>
+              </block>
+            </value>
+            <next>
+              <block type="xtools_line_msg" id="pt~y,f3FGH;7?^aV43xN">
+                <value name="token">
+                  <block type="variables_get" id="+u%4G!9~pSOj*O[CJG?;">
+                    <field name="VAR" id="Ge2pQPWQBXPprz4Rm.}e">token</field>
+                  </block>
+                </value>
+                <value name="message">
+                  <block type="variables_get" id="A$le-z`JzZ)vC,!a*t{.">
+                    <field name="VAR" id="x^JSzDV|yASmg^zVa*Ar">message</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

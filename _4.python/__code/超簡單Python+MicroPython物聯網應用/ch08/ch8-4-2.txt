@@ -1,0 +1,13 @@
+你是MicroPython專家，請用繁體中文改寫下列MicroPython程式的PWM呼吸燈，在ESP8266新增連接GPIO12的綠色LED，GPIO15是紅色LED，在使用breathe_led()函式顯示紅色LED的呼吸燈後，再顯示綠色LED的呼吸燈。
+from machine import Pin, PWM
+import utime 
+
+led_pwm = PWM(Pin(15))
+
+while True:
+    for i in range(0, 1024, 10):   #  從0至1023
+        led_pwm.duty(i)
+        utime.sleep(0.01)
+    for i in range(1023, -1, -10): #  從1023至0
+        led_pwm.duty(i)
+        utime.sleep(0.01)

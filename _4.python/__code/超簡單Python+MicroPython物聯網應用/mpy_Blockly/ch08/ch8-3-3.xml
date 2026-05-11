@@ -1,0 +1,135 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="RFV%MoRVP?V6L~iSeJjL">led</variable>
+    <variable id="ixS4hp`].2A{;|{tnV25">button</variable>
+    <variable id="+Ve$SKO*iWE76=S0~Hd2">value</variable>
+  </variables>
+  <block type="variables_set" id="fw?lilYjhK7Z0h/mG+~h" x="13" y="13">
+    <field name="VAR" id="RFV%MoRVP?V6L~iSeJjL">led</field>
+    <value name="VALUE">
+      <block type="gpio_create_pinobj" id="v2JeKq|Msc@1S=pp,oZD">
+        <field name="type">OUT</field>
+        <value name="pin">
+          <shadow type="pinout" id="kaggq*`SEU!bL~+T@HSO">
+            <field name="PIN">2</field>
+          </shadow>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="variables_set" id="U:Nh:r592jsDQj}WQ[5~">
+        <field name="VAR" id="ixS4hp`].2A{;|{tnV25">button</field>
+        <value name="VALUE">
+          <block type="gpio_create_pinobj" id="w2#~@$5M{/`UEg,el}1S">
+            <field name="type">IN</field>
+            <value name="pin">
+              <shadow type="pinout" id="$R8m2c7sS$]%yJ6dK69U">
+                <field name="PIN">4</field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="gpio_set_pinobj" id="%m}#.96Ig3c9_S]rhyh/">
+            <value name="obj">
+              <block type="variables_get" id="sq=!2f-.yT.iY?V7tK+[">
+                <field name="VAR" id="RFV%MoRVP?V6L~iSeJjL">led</field>
+              </block>
+            </value>
+            <value name="value">
+              <shadow type="logic_boolean" id="H[$W(0/fBnuSN/#O]]n_">
+                <field name="BOOL">TRUE</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="controls_whileUntil" id="lWAgOLfy+vHy=LFGSOCY">
+                <field name="MODE">WHILE</field>
+                <value name="BOOL">
+                  <block type="logic_boolean" id="FA@7:,J$F:VAc5lZQ.j9">
+                    <field name="BOOL">TRUE</field>
+                  </block>
+                </value>
+                <statement name="DO">
+                  <block type="variables_set" id=";:;Fr$.YdTYsT}:o:3jH">
+                    <field name="VAR" id="+Ve$SKO*iWE76=S0~Hd2">value</field>
+                    <value name="VALUE">
+                      <block type="gpio_get_pinobj" id="Mg-#hsh1Le}YE+u+:9=;">
+                        <value name="obj">
+                          <block type="variables_get" id="TEk+Wfa3OY|FD+a)Q(TQ">
+                            <field name="VAR" id="ixS4hp`].2A{;|{tnV25">button</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="controls_if" id="bJtzUvlneLIj0Bi`t]QI">
+                        <mutation else="1"/>
+                        <value name="IF0">
+                          <block type="variables_get" id="wF,^?YH,8[_vH9smMDr$">
+                            <field name="VAR" id="+Ve$SKO*iWE76=S0~Hd2">value</field>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="text_print" id="}(b7S?+iNchkNC:er[E{">
+                            <value name="TEXT">
+                              <shadow type="text" id="U7Ej.b$-,7.jdagete}0">
+                                <field name="TEXT">abc</field>
+                              </shadow>
+                              <block type="variables_get" id="zS2IVXf){s2vWVOk`-7i">
+                                <field name="VAR" id="+Ve$SKO*iWE76=S0~Hd2">value</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="gpio_set_pinobj" id="m$V(%I0oX5QW{!R|UGG%">
+                                <value name="obj">
+                                  <block type="variables_get" id="Nqa1-vTw%=vs2Y!{L=@*">
+                                    <field name="VAR" id="RFV%MoRVP?V6L~iSeJjL">led</field>
+                                  </block>
+                                </value>
+                                <value name="value">
+                                  <shadow type="logic_boolean" id="7sWwE*Z0Xk_e5fD2XLGg">
+                                    <field name="BOOL">TRUE</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <statement name="ELSE">
+                          <block type="text_print" id="Ns}G/rC0^j~*aO6/_}Cj">
+                            <value name="TEXT">
+                              <shadow type="text">
+                                <field name="TEXT">abc</field>
+                              </shadow>
+                              <block type="variables_get" id="h`1fD5!m:L_T5@x`uS!d">
+                                <field name="VAR" id="+Ve$SKO*iWE76=S0~Hd2">value</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="gpio_set_pinobj" id="#8Us2QlUj*m!#%#h1$^e">
+                                <value name="obj">
+                                  <block type="variables_get" id="TODh_S}.g3.=O)*O,KxX">
+                                    <field name="VAR" id="RFV%MoRVP?V6L~iSeJjL">led</field>
+                                  </block>
+                                </value>
+                                <value name="value">
+                                  <shadow type="logic_boolean" id="1pi@nZ$NvH,DnZh}#X;3">
+                                    <field name="BOOL">FALSE</field>
+                                  </shadow>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

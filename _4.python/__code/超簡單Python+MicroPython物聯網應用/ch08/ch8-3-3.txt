@@ -1,0 +1,2 @@
+你是MicroPython專家，請用繁體中文寫出一個MicroPython程式，可以使用ESP8266連接GPIO4的按鍵開關，來建立一個計數器，按1次是增加1次，可以使用print()函式顯示目前的計數值。
+請使用from/import語法來匯入所需的物件。

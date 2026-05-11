@@ -1,0 +1,38 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="uos_rmdir" id="HBz/}3Mre~6$[sBb4@U#" x="-713" y="-137">
+    <value name="path">
+      <block type="text" id="Ma,d6F;Eshh14IzbW.PF">
+        <field name="TEXT">test</field>
+      </block>
+    </value>
+    <next>
+      <block type="text_print" id="8js+rJcwE2vutzwXk8]$">
+        <value name="TEXT">
+          <shadow type="text" id="WC?T=*TGe_o{wOqcYwSF">
+            <field name="TEXT">abc</field>
+          </shadow>
+          <block type="uos_listdir" id="L8Ttuci2sQV?*pj%c1PB"/>
+        </value>
+        <next>
+          <block type="uos_remove" id="?/GQ]Rabu^)vYvet||e4">
+            <value name="file">
+              <block type="text" id="aUd*@=s@@Q^{?ys`Y8wX">
+                <field name="TEXT">data.txt</field>
+              </block>
+            </value>
+            <next>
+              <block type="text_print" id="tHyEsJ[M,gg-nOwWM-^|">
+                <value name="TEXT">
+                  <shadow type="text">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                  <block type="uos_listdir" id="dem)vJb![a^XWQruP[4!"/>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

@@ -1,0 +1,40 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="xtools_connect_wifi" id="KgE^M,3odqUg;B9u{rTw" x="88" y="63">
+    <value name="ssid">
+      <shadow type="text" id="VDI@dZ;W1dJ9;IGIEGYh">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <value name="pwd">
+      <shadow type="text" id="D-+DJP8UZiBG5p3*}:v$">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <value name="timeout">
+      <shadow type="math_number" id="8!N:.8;k6UrvGMI6b(6r">
+        <field name="NUM">15</field>
+      </shadow>
+    </value>
+    <next>
+      <block type="net_ntp_sync" id="[r(g#,X:[piai(!AzZhd">
+        <value name="tz">
+          <shadow type="math_number" id="/m(^iS_hVP:I,|K_Drx1">
+            <field name="NUM">8</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="text_print" id="V0xCk`1;P==d_4#8;s2V">
+            <value name="TEXT">
+              <shadow type="text" id="#GDl8,/2LLLh{u/9sEVA">
+                <field name="TEXT">abc</field>
+              </shadow>
+              <block type="get_rtc" id="K$uzKP@owVYLnSoi8EoC">
+                <field name="MSG_GET_RTC">Get RTC value</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

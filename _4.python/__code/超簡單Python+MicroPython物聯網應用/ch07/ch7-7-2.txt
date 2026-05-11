@@ -1,0 +1,1 @@
+你是MicroPython專家，現在，我有一塊ESP8266開發板，在GPIO15是連接紅色的LED，請寫出一個MicroPython程式可以間隔1秒鐘來閃爍紅色LED。

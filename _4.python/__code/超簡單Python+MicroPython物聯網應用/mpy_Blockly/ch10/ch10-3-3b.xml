@@ -1,0 +1,199 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="sE+AH^nKK^Ii$~.]kQQ=">button</variable>
+    <variable id="hD2k8S^jMsX%x_lkbbB7">APIKEY</variable>
+    <variable id="F[-:HMN1F+Vpscg|XATw">value1</variable>
+    <variable id="uwO`}M_jr,X/}oHErj3v">value2</variable>
+    <variable id="$lgnrS./#Z_aU}%?2@2g">params</variable>
+    <variable id="-JcNaWqcBkDu[J}NrBT6">WEBHOOK_URL</variable>
+  </variables>
+  <block type="xtools_connect_wifi" id="jy[ZsR3NiwLCt/)y#y=}" x="-762" y="-13">
+    <value name="ssid">
+      <shadow type="text" id="n^Un?De.*7uX+wO2ku^y">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <value name="pwd">
+      <shadow type="text" id=";hd.eng,w/nNa:aMZ]vO">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <value name="timeout">
+      <shadow type="math_number" id="O@4BtQ4I)%FYlqRt,vuK">
+        <field name="NUM">15</field>
+      </shadow>
+    </value>
+    <next>
+      <block type="variables_set" id="d%A35UvjvG3D!-#qo9Y#">
+        <field name="VAR" id="sE+AH^nKK^Ii$~.]kQQ=">button</field>
+        <value name="VALUE">
+          <block type="gpio_create_pinobj" id="_F9t%a(U6Vz^!(NsE^%]">
+            <field name="type">IN</field>
+            <value name="pin">
+              <shadow type="pinout" id="13k$}7_.IHpYfY_BMy37">
+                <field name="PIN">4</field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="/Zms_:v+UAh=BBHlb(lK">
+            <field name="VAR" id="hD2k8S^jMsX%x_lkbbB7">APIKEY</field>
+            <value name="VALUE">
+              <block type="text" id="V=*yrOe:0r^*QvviXUQh">
+                <field name="TEXT">&lt;API金鑰&gt;</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="Zq{Y88:BoWj;^w3iry$Y">
+                <field name="VAR" id="F[-:HMN1F+Vpscg|XATw">value1</field>
+                <value name="VALUE">
+                  <block type="math_number" id="%7HF8O5aP[.-:CjzF{*p">
+                    <field name="NUM">100</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="If/-)58i@Ru^h(*7zMO@">
+                    <field name="VAR" id="uwO`}M_jr,X/}oHErj3v">value2</field>
+                    <value name="VALUE">
+                      <block type="text" id="kNy4FlO9E!ud}4pH)Dou">
+                        <field name="TEXT">陳會安</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="bD-^EkXEGhZ7KUz2VyW1">
+                        <field name="VAR" id="$lgnrS./#Z_aU}%?2@2g">params</field>
+                        <value name="VALUE">
+                          <block type="dicts_create_with" id="37`y3b:/;J#O6.mC4?-F">
+                            <mutation xmlns="http://www.w3.org/1999/xhtml" items="2"></mutation>
+                            <value name="KEY0">
+                              <block type="text" id="iy?/!-S1Y[s1SDofe}[+">
+                                <field name="TEXT">value1</field>
+                              </block>
+                            </value>
+                            <value name="VALUE0">
+                              <block type="variables_get" id="W9xU]NQ1Lr8I`foXMmAm">
+                                <field name="VAR" id="F[-:HMN1F+Vpscg|XATw">value1</field>
+                              </block>
+                            </value>
+                            <value name="KEY1">
+                              <block type="text" id="XZ@(Ia]h5{1D_+ZIM_#$">
+                                <field name="TEXT">value2</field>
+                              </block>
+                            </value>
+                            <value name="VALUE1">
+                              <block type="variables_get" id="Tg3R{L(Ej:+Q1|lOek`a">
+                                <field name="VAR" id="uwO`}M_jr,X/}oHErj3v">value2</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="variables_set" id="Ke4;YkffPTU=^X$bXJhS">
+                            <field name="VAR" id="-JcNaWqcBkDu[J}NrBT6">WEBHOOK_URL</field>
+                            <value name="VALUE">
+                              <block type="text_join" id="U?F4fwXX[?K;ZKed[ri!">
+                                <mutation items="4"/>
+                                <value name="ADD0">
+                                  <block type="text" id="^5Y@]*QPtE*7.+6kD#Es">
+                                    <field name="TEXT">https://maker.ifttt.com/trigger/ButtonClick/with/key/</field>
+                                  </block>
+                                </value>
+                                <value name="ADD1">
+                                  <block type="variables_get" id="U6@1N8;P5vbjJA|Pu|)S">
+                                    <field name="VAR" id="hD2k8S^jMsX%x_lkbbB7">APIKEY</field>
+                                  </block>
+                                </value>
+                                <value name="ADD2">
+                                  <block type="text" id="Js)?w+iA)c%R5^Z}/p%+">
+                                    <field name="TEXT">/?</field>
+                                  </block>
+                                </value>
+                                <value name="ADD3">
+                                  <block type="urlencode_urlencode" id="Niv?{ER{e`R]p8ZXNoDj">
+                                    <value name="data_dic">
+                                      <block type="variables_get" id="HQ,G5aysJS|pIZ3oK:xx">
+                                        <field name="VAR" id="$lgnrS./#Z_aU}%?2@2g">params</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="text_print" id="[1@:B)$#/~YnC~o2%yW4">
+                                <value name="TEXT">
+                                  <shadow type="text" id="M-vXPm{h$/k5N.Dv4cRj">
+                                    <field name="TEXT">abc</field>
+                                  </shadow>
+                                  <block type="text" id="g6ZW#dOofLJ-^Y.ddN`=">
+                                    <field name="TEXT">請按下按鍵開關來送出Email…</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="controls_whileUntil" id="+T8,L{VRBIRJnQlQcm%+">
+                                    <field name="MODE">WHILE</field>
+                                    <value name="BOOL">
+                                      <block type="logic_boolean" id="`czU{DL7[NuY9?HGHm%(">
+                                        <field name="BOOL">TRUE</field>
+                                      </block>
+                                    </value>
+                                    <statement name="DO">
+                                      <block type="controls_if" id="8;kBB}9T)J??{]rp1M]@">
+                                        <value name="IF0">
+                                          <block type="logic_compare" id="%yo^w_T9=~j)~q=*wxE9">
+                                            <field name="OP">EQ</field>
+                                            <value name="A">
+                                              <block type="gpio_get_pinobj" id=".YQVk7VCYu#+9tmp5LxI">
+                                                <value name="obj">
+                                                  <block type="variables_get" id="+G][hB3gL@jyh;,z7Y0k">
+                                                    <field name="VAR" id="sE+AH^nKK^Ii$~.]kQQ=">button</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="math_number" id="^$FuxqX0k1xS4^|D%gSw">
+                                                <field name="NUM">0</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="DO0">
+                                          <block type="xtools_webhook_get" id="wg|R/uA,%;qf}om|$9ZB">
+                                            <value name="URL">
+                                              <block type="variables_get" id="V@Vi8]7(z4Lrbq:y*=rh">
+                                                <field name="VAR" id="-JcNaWqcBkDu[J}NrBT6">WEBHOOK_URL</field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="delay" id="NGa^S9xYfr_hR-R5I4R-">
+                                                <value name="time">
+                                                  <shadow type="math_number" id="rHZmoH8@:1zmHt}40$sX">
+                                                    <field name="NUM">10</field>
+                                                  </shadow>
+                                                </value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

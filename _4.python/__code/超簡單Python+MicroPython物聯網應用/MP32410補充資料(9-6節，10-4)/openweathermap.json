@@ -1,0 +1,136 @@
+[
+    {
+        "id": "38a5175adff418b2",
+        "type": "http in",
+        "z": "1d286cbf40413689",
+        "name": "",
+        "url": "/weather/:city/:country/:apikey",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 200,
+        "y": 80,
+        "wires": [
+            [
+                "649ccdd5b5b9b02b"
+            ]
+        ]
+    },
+    {
+        "id": "649ccdd5b5b9b02b",
+        "type": "function",
+        "z": "1d286cbf40413689",
+        "name": "Rebuild OpenWeatherMap's HTTPS URL ",
+        "func": "var city = msg.req.params.city;\nvar country = msg.req.params.country;\nvar apikey = msg.req.params.apikey;\nvar url;\n\nurl = \"https://api.openweathermap.org/data/2.5/weather?\";\nurl += \"q=\" + city + \",\" + country;   // 城市與國別\nurl += \"&units=metric&lang=zh_tw&\";   // 單位\nurl += \"appid=\" + apikey;\nmsg.topic = url;\n//msg.payload = \"<p>轉址至OpenWeatherMap</p>\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 140,
+        "wires": [
+            [
+                "84262e374809bcd6",
+                "555aae118e227c25"
+            ]
+        ]
+    },
+    {
+        "id": "84262e374809bcd6",
+        "type": "debug",
+        "z": "1d286cbf40413689",
+        "name": "debug URL",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "d998df67cb2b1788",
+        "type": "http request",
+        "z": "1d286cbf40413689",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 380,
+        "y": 220,
+        "wires": [
+            [
+                "eeed082e8b7a3d4a",
+                "dd563ddde516a411"
+            ]
+        ]
+    },
+    {
+        "id": "eeed082e8b7a3d4a",
+        "type": "debug",
+        "z": "1d286cbf40413689",
+        "name": "debug HTTP Request",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "555aae118e227c25",
+        "type": "change",
+        "z": "1d286cbf40413689",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "topic",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 190,
+        "y": 220,
+        "wires": [
+            [
+                "d998df67cb2b1788"
+            ]
+        ]
+    },
+    {
+        "id": "dd563ddde516a411",
+        "type": "http response",
+        "z": "1d286cbf40413689",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 550,
+        "y": 260,
+        "wires": []
+    }
+]

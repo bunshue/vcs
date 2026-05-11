@@ -1,0 +1,15 @@
+你是MicroPython專家，請用繁體中文改寫下列MicroPython程式成為4個LED的跑馬燈，新增GPIO2的內建LED，請注意！內建LED是當1時熄滅；0才能點亮，和其他3個LED相反。
+from machine import Pin
+import utime 
+
+pin15 = Pin(15, Pin.OUT)
+pin13 = Pin(13, Pin.OUT)
+pin12 = Pin(12, Pin.OUT)
+leds = [pin15, pin13, pin12]
+
+for i in range(10):
+    for led in leds:
+        led.value(1)
+        utime.sleep(0.3)
+        led.value(0)
+

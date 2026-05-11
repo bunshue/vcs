@@ -1,0 +1,2 @@
+你是MicroPython專家，請用繁體中文寫出一個MicroPython程式，首先匯入同一目錄下ch9_1_gpt.py的connect_wifi, SSID, PASSWORD，然後呼叫connect_wifi()函式連線WiFi，參數依序是SSID和PASSWORD，在連線WiFi後，可以取得和顯示URL網址https://fchart.github.io/json/Example.json的JSON資料。
+請使用from/import語法來匯入所需的物件。

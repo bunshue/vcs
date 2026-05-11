@@ -1,0 +1,67 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="Q7-2-uQe;UjMv.jUuV7j">now</variable>
+    <variable id=")7;QT?3SBKf3*uGIvE3A">local</variable>
+  </variables>
+  <block type="exec_import_python_module" id="@dU?v}%t/2-nWk%1W-EO" x="38" y="63">
+    <value name="command">
+      <shadow type="text" id=",gz/r@V*(C^`u/zOyS$E">
+        <field name="TEXT">import utime</field>
+      </shadow>
+    </value>
+    <next>
+      <block type="variables_set" id="UOVkWnjgifu`,1#n^pg]">
+        <field name="VAR" id="Q7-2-uQe;UjMv.jUuV7j">now</field>
+        <value name="VALUE">
+          <block type="exec_python_func" id="p~j1S/)4lwbu,=X(R4qN">
+            <field name="EXEC_PYTHON_FUNC">Call custom Python func</field>
+            <value name="command">
+              <shadow type="text" id="(~vMc,rfAi/t5Iqwb_gH">
+                <field name="TEXT">utime.time()</field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="text_print" id="@u,tGuJY|-!yN5-H9_zg">
+            <value name="TEXT">
+              <shadow type="text" id="Z]Qw0+Keu+/=8=BiOTYL">
+                <field name="TEXT">abc</field>
+              </shadow>
+              <block type="variables_get" id="|;jznEw;BC9hF(?SUPzZ">
+                <field name="VAR" id="Q7-2-uQe;UjMv.jUuV7j">now</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="*Lp=M!ek;5#+qMo^+xy#">
+                <field name="VAR" id=")7;QT?3SBKf3*uGIvE3A">local</field>
+                <value name="VALUE">
+                  <block type="exec_python_func" id="H#NABnIOK*e!#6+:,fUr">
+                    <field name="EXEC_PYTHON_FUNC">Call custom Python func</field>
+                    <value name="command">
+                      <shadow type="text" id="0{3SDPj_l8)r7[wHY@]1">
+                        <field name="TEXT">utime.localtime(now)</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_print" id="/~9|rw,{O0d1-f+zbelL">
+                    <value name="TEXT">
+                      <shadow type="text">
+                        <field name="TEXT">abc</field>
+                      </shadow>
+                      <block type="variables_get" id="Z/}K8731aES@Z?#!9+Nv">
+                        <field name="VAR" id=")7;QT?3SBKf3*uGIvE3A">local</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

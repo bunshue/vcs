@@ -1,0 +1,3 @@
+我使用MicroPython寫了一個和Arduino相同功能的map()函式，可是執行結果並不正確，請幫我更正程式碼的錯誤，和使用程式框來顯示程式碼，如下所示：
+def map_range(x, in_min, in_max, out_min, out_max):
+   return int((x-out_min) * (out_max-out_min) / (in_max-in_min) + out_min)

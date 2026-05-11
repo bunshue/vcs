@@ -1,0 +1,34 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="ixS4hp`].2A{;|{tnV25">button</variable>
+  </variables>
+  <block type="variables_set" id="U:Nh:r592jsDQj}WQ[5~" x="13" y="38">
+    <field name="VAR" id="ixS4hp`].2A{;|{tnV25">button</field>
+    <value name="VALUE">
+      <block type="gpio_create_pinobj" id="w2#~@$5M{/`UEg,el}1S">
+        <field name="type">IN</field>
+        <value name="pin">
+          <shadow type="pinout" id="$R8m2c7sS$]%yJ6dK69U">
+            <field name="PIN">4</field>
+          </shadow>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="text_print" id=";ARvs{bkR8_PDV:/4HBF">
+        <value name="TEXT">
+          <shadow type="text" id="ict_2ess=*}ammbwfLRl">
+            <field name="TEXT">abc</field>
+          </shadow>
+          <block type="gpio_get_pinobj" id="Mg-#hsh1Le}YE+u+:9=;">
+            <value name="obj">
+              <block type="variables_get" id="TEk+Wfa3OY|FD+a)Q(TQ">
+                <field name="VAR" id="ixS4hp`].2A{;|{tnV25">button</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+    </next>
+  </block>
+</xml>

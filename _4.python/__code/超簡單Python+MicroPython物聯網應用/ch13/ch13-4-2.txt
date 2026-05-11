@@ -1,0 +1,3 @@
+你是MicroPython專家，請用繁體中文寫出一個MicroPython程式，可以讀取Firebase即時資料庫的JSON資料，rtdb名稱是iot-distance-?????-default-rtdb，其鍵路徑是：Team-IOT/Members/M3。
+首先使用from/import語法匯入所需模組後，使用同一目錄下xtools.py的connect_wifi_led()函式來連線WiFi，不需寫出此函式，而且此函式並沒有參數。
+不需要主程式。

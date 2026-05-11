@@ -1,0 +1,119 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="IIXg{queUSpev+f+ddTu">led</variable>
+    <variable id="*t^o5*z`ayqG[]pZi7{}">v</variable>
+  </variables>
+  <block type="variables_set" id="X2XA8p8Y~0ujY.3d9[/|" x="-38" y="-37">
+    <field name="VAR" id="IIXg{queUSpev+f+ddTu">led</field>
+    <value name="VALUE">
+      <block type="gpio_create_pinobj" id="s]q6:BdbW0ziV[~Z7)R^">
+        <field name="type">OUT</field>
+        <value name="pin">
+          <shadow type="pinout" id="}..WF*aF[{^RZ+P):N(/">
+            <field name="PIN">2</field>
+          </shadow>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="gpio_set_pinobj" id="}wW+A2bTg+=k-/`vFBI:">
+        <value name="obj">
+          <block type="variables_get" id="l8.hWj(smCRxoOVD`NZi">
+            <field name="VAR" id="IIXg{queUSpev+f+ddTu">led</field>
+          </block>
+        </value>
+        <value name="value">
+          <shadow type="logic_boolean" id="XO^sgAgxOE=8XBX:NWm/">
+            <field name="BOOL">FALSE</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="variables_set" id="=U_WI*2aVrM?up`Z{v@S">
+            <field name="VAR" id="*t^o5*z`ayqG[]pZi7{}">v</field>
+            <value name="VALUE">
+              <block type="gpio_get_pinobj" id="8UI.#PIf%J_-(xDn%eIQ">
+                <value name="obj">
+                  <block type="variables_get" id="6O4P{+ztRpE*u_n4!6!c">
+                    <field name="VAR" id="IIXg{queUSpev+f+ddTu">led</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="text_print" id="8E{~fz*T1a.rRQK!+^X-">
+                <value name="TEXT">
+                  <shadow type="text" id="KDx.(EGh8~l[le#@k0%j">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                  <block type="text_join" id="5])qGLml2WwS^U$QW[|k">
+                    <mutation items="2"/>
+                    <value name="ADD0">
+                      <block type="text" id="L85LHL!dCkIVg$GREsbY">
+                        <field name="TEXT">狀態值</field>
+                      </block>
+                    </value>
+                    <value name="ADD1">
+                      <block type="variables_get" id="0K6PyT)/V`A+6JAv9Vt1">
+                        <field name="VAR" id="*t^o5*z`ayqG[]pZi7{}">v</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="gpio_set_pinobj" id="ry#cY=mlI;JD/(]Z?^T/">
+                    <value name="obj">
+                      <block type="variables_get" id="Xx!ND0o@a7dyQUAzPV3h">
+                        <field name="VAR" id="IIXg{queUSpev+f+ddTu">led</field>
+                      </block>
+                    </value>
+                    <value name="value">
+                      <shadow type="logic_boolean" id="US%E,iCRle`2wQ#at`AX">
+                        <field name="BOOL">TRUE</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="+,Ky2$Vxs+t).#1rXr|F">
+                        <field name="VAR" id="*t^o5*z`ayqG[]pZi7{}">v</field>
+                        <value name="VALUE">
+                          <block type="gpio_get_pinobj" id="dX@S{r5~fOL,LLWhv3x|">
+                            <value name="obj">
+                              <block type="variables_get" id="DG@$#yv/yt/@B1/AB9]+">
+                                <field name="VAR" id="IIXg{queUSpev+f+ddTu">led</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="text_print" id="G$M.VVxd[YQ(F{]~yl!$">
+                            <value name="TEXT">
+                              <shadow type="text">
+                                <field name="TEXT">abc</field>
+                              </shadow>
+                              <block type="text_join" id="-|F-!_T_EiJwrT3f[~{?">
+                                <mutation items="2"/>
+                                <value name="ADD0">
+                                  <block type="text" id="a.:I38q=qtI(PGklwN1d">
+                                    <field name="TEXT">狀態值</field>
+                                  </block>
+                                </value>
+                                <value name="ADD1">
+                                  <block type="variables_get" id="WdO10ACZVM*:JnNG?|nN">
+                                    <field name="VAR" id="*t^o5*z`ayqG[]pZi7{}">v</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

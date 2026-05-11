@@ -1,0 +1,57 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="NIG{z^nEOgpwC$.f|@Sk">count</variable>
+  </variables>
+  <block type="timer" id="0CStIz7am(6{Z*+QTQ?O" x="88" y="187">
+    <field name="timerNumber">0</field>
+    <field name="interval">1000</field>
+    <statement name="statements">
+      <block type="variables_set" id="1.~/^|w8}j+%c8P/P7b]">
+        <field name="VAR" id="NIG{z^nEOgpwC$.f|@Sk">count</field>
+        <value name="VALUE">
+          <block type="math_arithmetic" id="I(!,Pp+BEl`2.!Y+btZ4">
+            <field name="OP">ADD</field>
+            <value name="A">
+              <shadow type="math_number" id="lUXuccZJ#[@F6-Vx^k{0">
+                <field name="NUM">1</field>
+              </shadow>
+              <block type="variables_get" id="6Ns3AUU)Gr%#jdvQks~0">
+                <field name="VAR" id="NIG{z^nEOgpwC$.f|@Sk">count</field>
+              </block>
+            </value>
+            <value name="B">
+              <shadow type="math_number" id="F9(O35Q0570Kw=**r(Na">
+                <field name="NUM">1</field>
+              </shadow>
+              <block type="math_number" id="0omu.]b-X^79(St8U/2q">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="text_print" id="vVKa4]pEe8FC,,Leefy,">
+            <value name="TEXT">
+              <shadow type="text" id="Y`@W]px){Bp2JP#ktGPM">
+                <field name="TEXT">abc</field>
+              </shadow>
+              <block type="text_join" id="whZoL:N-`lj,?Sj=TR$]">
+                <mutation items="2"/>
+                <value name="ADD0">
+                  <block type="text" id="rF!%dc`TjM:c^f}DE.X5">
+                    <field name="TEXT">計數: </field>
+                  </block>
+                </value>
+                <value name="ADD1">
+                  <block type="variables_get" id="y]K-tu+,wFt1u`ecw^]i">
+                    <field name="VAR" id="NIG{z^nEOgpwC$.f|@Sk">count</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

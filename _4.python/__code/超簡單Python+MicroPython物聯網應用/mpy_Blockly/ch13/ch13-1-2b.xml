@@ -1,0 +1,223 @@
+﻿<xml xmlns="https://developers.google.com/blockly/xml">
+  <variables>
+    <variable id="y7j[1v[JsAqrFjLv8n:,">year</variable>
+    <variable id="oErh=th;|#vv0x@sW^+5">month</variable>
+    <variable id="!JmI%2sDYo;^2Z-{sQ}s">day</variable>
+    <variable id="^!lj;B^TUVHIO|PX4BM^">hour</variable>
+    <variable id="La~U(BdScz5mD@_)?1w(">minute</variable>
+    <variable id="KE(N(h:YBB/:1F5$WNr.">second</variable>
+  </variables>
+  <block type="xtools_connect_wifi" id="KgE^M,3odqUg;B9u{rTw" x="88" y="63">
+    <value name="ssid">
+      <shadow type="text" id="VDI@dZ;W1dJ9;IGIEGYh">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <value name="pwd">
+      <shadow type="text" id="D-+DJP8UZiBG5p3*}:v$">
+        <field name="TEXT"/>
+      </shadow>
+    </value>
+    <value name="timeout">
+      <shadow type="math_number" id="8!N:.8;k6UrvGMI6b(6r">
+        <field name="NUM">15</field>
+      </shadow>
+    </value>
+    <next>
+      <block type="net_ntp_sync" id="[r(g#,X:[piai(!AzZhd">
+        <value name="tz">
+          <shadow type="math_number" id="/m(^iS_hVP:I,|K_Drx1">
+            <field name="NUM">8</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="net_get_ntp" id="fh3,lU0Y!m+z|$LJaTrg">
+            <field name="GET_NTP_LOCALTIME">Get NTP localtime</field>
+            <value name="year">
+              <block type="variables_get" id="^ZDqc`LwT38)_ns`LDdv">
+                <field name="VAR" id="y7j[1v[JsAqrFjLv8n:,">year</field>
+              </block>
+            </value>
+            <value name="month">
+              <block type="variables_get" id="GAWuBL%lm/:%VDta;h@|">
+                <field name="VAR" id="oErh=th;|#vv0x@sW^+5">month</field>
+              </block>
+            </value>
+            <value name="day">
+              <block type="variables_get" id="1hr]b6Zp/VhKwWE}y_7o">
+                <field name="VAR" id="!JmI%2sDYo;^2Z-{sQ}s">day</field>
+              </block>
+            </value>
+            <value name="hour">
+              <block type="variables_get" id="kR~YBV~0m#*c{v4.Z,ym">
+                <field name="VAR" id="^!lj;B^TUVHIO|PX4BM^">hour</field>
+              </block>
+            </value>
+            <value name="minute">
+              <block type="variables_get" id="49xb03|#DyzKL{@2_Z;]">
+                <field name="VAR" id="La~U(BdScz5mD@_)?1w(">minute</field>
+              </block>
+            </value>
+            <value name="second">
+              <block type="variables_get" id="-ZKuKAA!Na_noaaz;Ah.">
+                <field name="VAR" id="KE(N(h:YBB/:1F5$WNr.">second</field>
+              </block>
+            </value>
+            <next>
+              <block type="text_print" id="V0xCk`1;P==d_4#8;s2V">
+                <value name="TEXT">
+                  <shadow type="text" id="#GDl8,/2LLLh{u/9sEVA">
+                    <field name="TEXT">abc</field>
+                  </shadow>
+                  <block type="text_join" id=";MbjbaCM`Xw_Db|cZx0M">
+                    <mutation items="2"/>
+                    <value name="ADD0">
+                      <block type="text" id="4tCqvu?o!/*.rc)gjx$_">
+                        <field name="TEXT">年:</field>
+                      </block>
+                    </value>
+                    <value name="ADD1">
+                      <block type="variables_get" id="u5=spe(o}-Evnx~(dUWA">
+                        <field name="VAR" id="y7j[1v[JsAqrFjLv8n:,">year</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="text_print" id="Yxx:0zrG0z2NV6CcHF/r">
+                    <value name="TEXT">
+                      <shadow type="text">
+                        <field name="TEXT">abc</field>
+                      </shadow>
+                      <block type="text_join" id="@`TO(dsvJRy4dN1MFbmO">
+                        <mutation items="2"/>
+                        <value name="ADD0">
+                          <block type="text" id="aE9)7%.qkx.1`v=udwW4">
+                            <field name="TEXT">月:</field>
+                          </block>
+                        </value>
+                        <value name="ADD1">
+                          <block type="variables_get" id="`;Ok:mlH}VE+`RGs+wKe">
+                            <field name="VAR" id="oErh=th;|#vv0x@sW^+5">month</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="text_print" id="*=/i1l=1Au]l8GcBXy[_">
+                        <value name="TEXT">
+                          <shadow type="text">
+                            <field name="TEXT">abc</field>
+                          </shadow>
+                          <block type="text_join" id="8d,IulL@;D]C[}GLR#F.">
+                            <mutation items="2"/>
+                            <value name="ADD0">
+                              <block type="text" id="P#nIEJP+2~WW+F2sK:,F">
+                                <field name="TEXT">日:</field>
+                              </block>
+                            </value>
+                            <value name="ADD1">
+                              <block type="variables_get" id="LH#-5]/h(QHr44M8[vyU">
+                                <field name="VAR" id="!JmI%2sDYo;^2Z-{sQ}s">day</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="text_print" id="[!H)Yo.vvJuwo=[6iRZh">
+                            <value name="TEXT">
+                              <shadow type="text">
+                                <field name="TEXT">abc</field>
+                              </shadow>
+                              <block type="text_join" id="0d$O|`K,$yuplQ5b.nL.">
+                                <mutation items="2"/>
+                                <value name="ADD0">
+                                  <block type="text" id="CZxEIJb#*t!c?_z2ddR:">
+                                    <field name="TEXT">時:</field>
+                                  </block>
+                                </value>
+                                <value name="ADD1">
+                                  <block type="variables_get" id="I1)eYFPa=VB^94rEiRX3">
+                                    <field name="VAR" id="^!lj;B^TUVHIO|PX4BM^">hour</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="text_print" id="bgu!e!PsutQ}9PiT49Dk">
+                                <value name="TEXT">
+                                  <shadow type="text">
+                                    <field name="TEXT">abc</field>
+                                  </shadow>
+                                  <block type="text_join" id="qV4znqOWFnpH34GOAm|^">
+                                    <mutation items="2"/>
+                                    <value name="ADD0">
+                                      <block type="text" id="wvpt0[1eG,VbxMqP}s3-">
+                                        <field name="TEXT">分:</field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD1">
+                                      <block type="variables_get" id="!_RI,rqY@D3+gA]GB7,N">
+                                        <field name="VAR" id="La~U(BdScz5mD@_)?1w(">minute</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="text_print" id="ie*_O),61;lh9WiR*T*f">
+                                    <value name="TEXT">
+                                      <shadow type="text" id="Ip)mTLewqFxMPBppmJ0R">
+                                        <field name="TEXT">abc</field>
+                                      </shadow>
+                                      <block type="text_join" id="Vm.oeJO1[]3Vbf]H:!0n">
+                                        <mutation items="2"/>
+                                        <value name="ADD0">
+                                          <block type="text" id="J|H+~79N^Rz*^9^kC`Xl">
+                                            <field name="TEXT">秒:</field>
+                                          </block>
+                                        </value>
+                                        <value name="ADD1">
+                                          <block type="variables_get" id="ibVSl,{g$x_v2pSeWeQE">
+                                            <field name="VAR" id="KE(N(h:YBB/:1F5$WNr.">second</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="text_print" id="X[`rV%p,-Zu|:!=}gN`9">
+                                        <value name="TEXT">
+                                          <shadow type="text" id="05|*A)Xhe9g)Id$hZ=4Q">
+                                            <field name="TEXT">abc</field>
+                                          </shadow>
+                                          <block type="exec_python_func" id="XVO9?gwl4_czpMB5)%T/">
+                                            <field name="EXEC_PYTHON_FUNC">Call custom Python func</field>
+                                            <value name="command">
+                                              <shadow type="text" id="d,waf1PC[7XZ?~C}rOYB">
+                                                <field name="TEXT">xtools.get_num('Price: 199.9')</field>
+                                              </shadow>
+                                              <block type="text" id="*y^1M+IM4Pi+k0P{m?t5">
+                                                <field name="TEXT">xtools.format_datetime(utime.localtime(utc+28800))</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
