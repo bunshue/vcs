@@ -1,1 +1,0 @@
-請問random模組的randint()方法需要如何使用？

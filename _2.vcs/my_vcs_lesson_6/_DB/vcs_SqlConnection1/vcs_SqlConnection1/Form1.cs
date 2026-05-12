@@ -11,6 +11,8 @@ using System.IO;
 using System.Data.SqlClient;  // for SqlConnection, SqlCommand, SqlDataAdapter
 using System.Data.Sql;  // for SqlDataSourceEnumerator
 
+using System.Xml;
+
 /*
 在 sysobjects 中, xtype 表示 資料庫物件的種類，以字母代碼區分。
 - U  → 使用者表 (User table)
@@ -1283,6 +1285,7 @@ namespace vcs_SqlConnection1
 
             /*
             //測試 getTable
+            // 是否 DataBase就是table?
 
             cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.MDF;DataBase=" + comboBox1.Text + ";Integrated Security=True;Connect Timeout=30";
 
@@ -1460,6 +1463,8 @@ namespace vcs_SqlConnection1
 
             // 連接字串
             cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_09_Data.mdf;Integrated Security=True;Connect Timeout=30";
+
+            richTextBox1.Text += "cnstr = " + cnstr + "\n";
 
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
@@ -2461,6 +2466,34 @@ namespace vcs_SqlConnection1
 
         private void button27_Click(object sender, EventArgs e)
         {
+            // DB 轉 XML
+            test_xml();
+        }
+
+        void test_xml()
+        {
+            // 資料庫檔案
+            db_filename = "animals1_db.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM animals1_table";
+
+            cnstr = string.Format(db_cnstr, db_filename);
+            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
+            {
+                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
+                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
+                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
+                //da.Fill(ds, "table");  // da將查詢的結果填充至數據集ds, 指定TableName為"table"
+                richTextBox1.Text += "取得資料 : " + ds.Tables[0].Rows.Count.ToString() + " 筆\n";
+
+                //轉 xml
+
+                String xml_filename = "tmp_output.XML";
+                FileStream fs = new FileStream(xml_filename, FileMode.OpenOrCreate, FileAccess.Write);
+                // Apply the WriteXml method to write an XML document
+                ds.WriteXml(fs);
+                fs.Close();
+            }
         }
 
         private void button28_Click(object sender, EventArgs e)
@@ -2745,13 +2778,6 @@ SQL不同的連線方式
 直接附加 MDF 檔案，常用於 LocalDB 或測試。
 */
 
-//combobox 類別編號
-//cboCategoryId.DisplayMember = "類別名稱";//指定Text屬性繫結的是類別名稱
-//cboCategoryId.ValueMember = "類別編號";  //指定Value屬性繫結的是類別編號
-//int CategoryId1 = int.Parse(cboCategoryId.SelectedValue.ToString());
-//int CategoryId2 = int.Parse(cboCategoryId.SelectedValue.ToString());
-//int CategoryId3 = int.Parse(cboCategoryId.SelectedValue.ToString());
-
 //SqlDataAdapter 資料庫適配器對象 数据库桥接器对象 數據讀取器
 
 //richTextBox1.Text += dr["TABLE_NAME"] + "\n";
@@ -2886,35 +2912,6 @@ Instance pipe name:
 
 //------------------------------------------------------------  # 60個
 
-十、從SQL內讀數據到XML：
-using System;
-using System.Data;
-using System.XML;
-using System.Data.SqlClIEnt; 
-using System.IO; 
-
-public class TestWriteXML
-{ 
-    public static void Main()
-    { 
-        String strFileName=c:/temp/output.XML;
-        SqlConnection cn = new SqlConnection(cnstr);
-        sqlstr = SELECT FirstName, LastName FROM employees; 
-        SqlDataAdapter da = new SqlDataAdapter(); 
-        da.SelectCommand = new SqlCommand(sqlstr, cn);
-
-        DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-        da.Fill(ds, employees);
-
-        // Get a FileStream object
-        FileStream fs = new FileStream(strFileName,FileMode.OpenOrCreate,FileAccess.Write);
-        // Apply the WriteXml method to write an XML document
-        ds.WriteXML(fs);
-        fs.Close();
-    }
-}
-
-//------------------------------------------------------------  # 60個
             // 斷開服務
 
              // 資料庫檔案
@@ -2939,61 +2936,6 @@ public class TestWriteXML
                     richTextBox1.Text += euy.Message + "\n" ;
                 }
             }
-
-//------------------------------------------------------------  # 60個
-
-*/
-
-
-/*
-        public void Saveing(string bank, float balance, string account)
-        {
-            try
-            {
-                cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_35.mdf;Integrated Security=True;Connect Timeout=30";
-                SqlConnection con = new SqlConnection(cnstr);
-                con.Open();
-                SqlCommand cmd = new SqlCommand("UPDATE " + bank + " SET balance = balance + " + Convert.ToDouble(balance) + " WHERE (account = 123456)", con);
-                int i = (int)cmd.ExecuteNonQuery();
-                con.Close();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        public void Fetch(string bank, float balance, string account)
-        {
-            try
-            {
-                if (balance > Convert.ToSingle(GetBalance(bank, balance, account)))
-                {
-                    throw new Exception("银行：" + bank + " 账号：" + account + "余额不足！");
-                }
-
-                cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_35.mdf;Integrated Security=True;Connect Timeout=30";
-                SqlConnection con = new SqlConnection(cnstr);
-                con.Open();
-                SqlCommand cmd = new SqlCommand("UPDATE " + bank + " SET balance = balance - " + Convert.ToDouble(balance) + " WHERE (account = 123456)", con);
-                int i = (int)cmd.ExecuteNonQuery();
-                con.Close();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        public int GetBalance(string bank, float balance, string account)
-        {
-            cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\db_35.mdf;Integrated Security=True;Connect Timeout=30";
-            SqlConnection con = new SqlConnection(cnstr);
-            SqlDataAdapter dap = new SqlDataAdapter("select * FROM " + bank + "where account='" + account + "'", con);
-            DataSet ds = new DataSet();
-            dap.Fill(ds);
-            return int.Parse(ds.Tables[0].Rows[0]["balance"].ToString());
-        }
 
 //------------------------------------------------------------  # 60個
 
@@ -3028,4 +2970,8 @@ Microsoft SQL Server 的主資料庫檔案（Master Database File），通常與
 
 // 查詢字串, 欄名使用別名AS
 //sqlstr = "SELECT DISTINCT 所屬部門, COUNT(*) AS 部門人數, MAX(基本工資) AS 最高工資, AVG(基本工資) AS 平均工資 FROM 部門工資統計表 GROUP BY 所屬部門 HAVING (AVG(基本工資) > 1000)";
+
+//指定讀出某列某欄資料
+//  return int.Parse(ds.Tables[0].Rows[0]["balance"].ToString());
+
 
