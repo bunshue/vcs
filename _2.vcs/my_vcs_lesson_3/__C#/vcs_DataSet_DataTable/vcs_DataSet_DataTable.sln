@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_DataTable1", "vcs_DataTable1\vcs_DataTable1.csproj", "{EFFFF04A-47BB-45A6-99C4-714F252A757F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_DataSet_DataTable", "vcs_DataSet_DataTable\vcs_DataSet_DataTable.csproj", "{EFFFF04A-47BB-45A6-99C4-714F252A757F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

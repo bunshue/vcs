@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_DataTable1
+namespace vcs_DataSet_DataTable
 {
     static class Program
     {

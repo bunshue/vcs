@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_DataTable1.Properties {
+namespace vcs_DataSet_DataTable.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

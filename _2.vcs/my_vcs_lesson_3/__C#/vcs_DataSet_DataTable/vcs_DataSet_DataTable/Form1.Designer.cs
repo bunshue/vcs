@@ -1,4 +1,4 @@
-﻿namespace vcs_DataTable1
+﻿namespace vcs_DataSet_DataTable
 {
     partial class Form1
     {
