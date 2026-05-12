@@ -181,36 +181,26 @@ namespace vcs_ListView1
         private void button0_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "建立listView 0 標準簡易\n";
-            listView1.Clear();
-            apply_listView00();
+            //listView1.Clear();
+
+            //加入項目(列資料)
+            apply_data();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "建立listView 1\n";
-            listView1.Clear();
-            apply_listView01();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "建立listView 2 二維陣列轉ListView\n";
-            listView1.Clear();
-            apply_listView02();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "建立listView 3\n";
-            listView1.Clear();
-            apply_listView03();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "建立listView 4\n";
-            listView1.Clear();
-            apply_listView04();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -290,9 +280,9 @@ namespace vcs_ListView1
 
             ListViewItem li = new ListViewItem();
             li.SubItems.Clear();
-            li.SubItems[0].Text = "rabbit";
-            li.SubItems.Add("彼得兔");
-            li.SubItems.Add("8");
+            li.SubItems[0].Text = "dragon";
+            li.SubItems.Add("逗逗龍");
+            li.SubItems.Add("38");
             listView1.Items.Add(li);
 
 
@@ -341,161 +331,6 @@ namespace vcs_ListView1
             item2.SubItems.Add(item2_sub);
             listView1.Items.Add(item2);
             */
-        }
-
-        void apply_listView00()
-        {
-            //listView1.AllowColumnReorder = true;//允許使用者拖曳欄位
-            listView1.Font = new Font("Microsoft Sans Serif", 12.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
-
-            //設定欄位, 欄名, 欄寬, 對齊方式
-            listView1.Columns.Add("英文名", 120, HorizontalAlignment.Left);
-            listView1.Columns.Add("中文名", 120, HorizontalAlignment.Center);
-            listView1.Columns.Add("體重", 80, HorizontalAlignment.Right);
-
-            //設定欄寬
-            foreach (ColumnHeader col in listView1.Columns)
-            {
-                //col.Width = -1;  // 設定欄寬 符合 欄名長度
-                //col.Width = -2;  // 設定欄寬 符合 欄名長度 與 資料長度
-            }
-
-            //加入項目(列資料)
-            apply_data();
-            apply_data();
-            apply_data();
-            apply_data();
-        }
-
-        void apply_listView01()
-        {
-            //清除所有的欄位
-            listView1.Columns.Clear();//看似與清除整個listView一樣
-
-            //設定欄位, 欄名, 欄寬, 對齊方式, 寬度-2代表自動欄寬??
-            listView1.Columns.Add("英文名", -1, HorizontalAlignment.Center);
-            listView1.Columns.Add("中文名", -1, HorizontalAlignment.Left);
-            listView1.Columns.Add("體重", -1, HorizontalAlignment.Right);
-
-            //設定欄寬 1
-            foreach (ColumnHeader col in listView1.Columns)
-            {
-                //col.Width = -2;   //自動欄寬, 寬度-2代表自動欄寬
-                col.Width = 80;     //固定欄寬
-            }
-
-            //設定欄寬 2
-            int C = listView1.Columns.Count;//欄數
-            for (int i = 0; i < C; i++)
-            {
-                //listView1.Columns[i].Width = -2;//寬度-2代表自動欄寬
-            }
-
-            //加入項目(列資料)
-            apply_data();
-        }
-
-        // Copy a two-dimensional array of data into a ListView.
-        private void CopyArrayToListView(ListView lvw, string[,] data)
-        {
-            int max_row = data.GetUpperBound(0);
-            int max_col = data.GetUpperBound(1);
-            for (int row = 0; row <= max_row; row++)
-            {
-                ListViewItem new_item = lvw.Items.Add(data[row, 0]);
-                for (int col = 1; col <= max_col; col++)
-                {
-                    new_item.SubItems.Add(data[row, col]);
-                }
-            }
-        }
-
-        void apply_listView02()
-        {
-            // Remove any existing items.
-            listView1.Items.Clear();
-
-            // Create some data.
-            // Name, URL, ISBN, pages, year.
-            string[,] data =
-            {
-                { "mouse", "米老鼠", "3"},
-                { "ox", "班尼牛", "48"},
-                { "tiger", "跳跳虎", "33"},
-                { "rabbit", "彼得兔", "8"},
-            };
-
-            // Make the ListView's column headers.
-            listView1.Columns.Clear();
-
-            //設定欄位, 欄名, 欄寬, 對齊方式
-            listView1.Columns.Add("英文名", 200);
-            listView1.Columns.Add("中文名", 200);
-            listView1.Columns.Add("體重", 100, HorizontalAlignment.Right);
-
-            // Add the data.
-            CopyArrayToListView(listView1, data);
-
-            /* 自動格式化listView
-            // Size the columns to fit the data and colummn headers.
-            listView1.SizeColumns(-2);
-
-            // Make the form big enough to show the ListView.
-            Rectangle item_rect = listView1.GetItemRect(listView1.Items.Count - 1);
-            this.ClientSize = new Size(
-                item_rect.Left + item_rect.Width + 25,
-                item_rect.Top + item_rect.Height + 75);
-            */
-
-
-        }
-
-        void apply_listView03()
-        {
-            //設定欄位
-            ColumnHeader ch1 = new ColumnHeader();
-            ch1.Text = "英文名";
-            ch1.Width = 85;
-            listView1.Columns.Add(ch1);
-
-            ColumnHeader ch2 = new ColumnHeader();
-            ch2.Text = "中文名";
-            ch2.Width = 85;
-            listView1.Columns.Add(ch2);
-
-            ColumnHeader ch3 = new ColumnHeader();
-            ch3.Text = "體重";
-            ch3.Width = 85;
-            listView1.Columns.Add(ch3);
-
-            //加入項目(列資料)
-            apply_data();
-        }
-
-        void apply_listView04()
-        {
-            //設定欄位, 欄名, 欄寬, 對齊方式
-            ColumnHeader colHead;
-            colHead = new ColumnHeader();
-            colHead.Text = "英文名";
-            colHead.Width = 200;
-            colHead.TextAlign = HorizontalAlignment.Left;  // 對齊方式
-            listView1.Columns.Add(colHead);
-
-            colHead = new ColumnHeader();
-            colHead.Text = "中文名";
-            colHead.Width = 100;
-            colHead.TextAlign = HorizontalAlignment.Left;  // 對齊方式
-            listView1.Columns.Add(colHead);
-
-            colHead = new ColumnHeader();
-            colHead.Text = "體重";
-            colHead.Width = 200;
-            colHead.TextAlign = HorizontalAlignment.Left;  // 對齊方式
-            listView1.Columns.Add(colHead);
-
-            //加入項目(列資料)
-            apply_data();
         }
 
         void apply_listView05()
@@ -1000,7 +835,72 @@ namespace vcs_ListView1
 
         private void button16_Click(object sender, EventArgs e)
         {
+            //各種欄位設定方式
 
+            //清除所有的欄位
+            listView1.Columns.Clear();  // 看似與清除整個listView一樣
+
+            //listView1.AllowColumnReorder = true;//允許使用者拖曳欄位
+            listView1.Font = new Font("Microsoft Sans Serif", 12.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+
+            //設定欄位, 欄名, 欄寬, 對齊方式
+            listView1.Columns.Add("英文名", 120, HorizontalAlignment.Left);
+            listView1.Columns.Add("中文名", 120, HorizontalAlignment.Center);
+            listView1.Columns.Add("體重", 80, HorizontalAlignment.Right);
+            /*
+            //設定欄位, 欄名, 欄寬, 對齊方式, 寬度-2代表自動欄寬??
+            listView1.Columns.Add("英文名", -1, HorizontalAlignment.Center);
+            listView1.Columns.Add("中文名", -1, HorizontalAlignment.Left);
+            listView1.Columns.Add("體重", -1, HorizontalAlignment.Right);
+            */
+
+            /*
+            //設定欄位, 欄名, 欄寬, 對齊方式
+            listView1.Columns.Add("英文名", 200);
+            listView1.Columns.Add("中文名", 200);
+            listView1.Columns.Add("體重", 100, HorizontalAlignment.Right);
+            */
+
+            //設定欄寬
+            foreach (ColumnHeader col in listView1.Columns)
+            {
+                //col.Width = -1;  // 設定欄寬 符合 欄名長度
+                //col.Width = -2;  // 設定欄寬 符合 欄名長度 與 資料長度
+            }
+            //設定欄寬 1
+            foreach (ColumnHeader col in listView1.Columns)
+            {
+                //col.Width = -2;   //自動欄寬, 寬度-2代表自動欄寬
+                col.Width = 80;     //固定欄寬
+            }
+
+            //設定欄寬 2
+            int C = listView1.Columns.Count;//欄數
+            for (int i = 0; i < C; i++)
+            {
+                //listView1.Columns[i].Width = -2;//寬度-2代表自動欄寬
+            }
+
+
+
+            //設定欄位, 欄名, 欄寬, 對齊方式
+            ColumnHeader ch1 = new ColumnHeader();
+            ch1.Text = "英文名";
+            ch1.Width = 200;
+            ch1.TextAlign = HorizontalAlignment.Left;  // 對齊方式
+            listView1.Columns.Add(ch1);
+
+            ColumnHeader ch2 = new ColumnHeader();
+            ch2.Text = "中文名";
+            ch2.Width = 100;
+            ch2.TextAlign = HorizontalAlignment.Left;  // 對齊方式
+            listView1.Columns.Add(ch2);
+
+            ColumnHeader ch3 = new ColumnHeader();
+            ch3.Text = "體重";
+            ch3.Width = 200;
+            ch3.TextAlign = HorizontalAlignment.Left;  // 對齊方式
+            listView1.Columns.Add(ch3);
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -1526,7 +1426,6 @@ namespace vcs_ListView1
     }
 }
 
-
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
@@ -1558,24 +1457,11 @@ listView1.Font = new Font("Microsoft Sans Serif", 12.75F, FontStyle.Regular, Gra
 
 //------------------------------------------------------------  # 60個
 
-            ListViewItem lv = new ListViewItem(dr[0].ToString());
-            lv.SubItems.Add(dr[1].ToString());
-            lv.SubItems.Add(dr[2].ToString());
-            listView1.Items.Add(lv);
-
-//------------------------------------------------------------  # 60個
-
 //增加資料到listView中
 ListViewItem lv = new ListViewItem(dr[0].ToString());
 lv.SubItems.Add(dr[1].ToString());
 lv.SubItems.Add(dr[2].ToString());
 listView1.Items.Add(lv);
-
-//------------------------------------------------------------  # 60個
-
-listView1清除資料
-listView1.Items.Clear();
-listView1.Items.Clear();
 
 //------------------------------------------------------------  # 60個
 
@@ -1687,3 +1573,4 @@ C# listview中顯示imagelist中的圖片
 https://www.itread01.com/content/1546725619.html
 
 */
+
