@@ -1,5 +1,0 @@
-name1 = str("陳會安Joe")
-print(name1[0])
-print(name1[1])
-print(name1[-1])
-print(name1[-2])

@@ -353,7 +353,7 @@ for x in range(0x2160, 0x216A):
 print()
 
 print("字元轉數值")
-cc = ord("豬")
+cc = ord("豬")  # ord()取出字串的Unicode的編碼值
 print(cc)
 
 print("數值轉字元")
@@ -363,9 +363,9 @@ print(cc)
 
 # ord()回傳參數字元對應的的編碼位置
 print("==Test1==")
-print(ord("H"))
-print(ord("你"))
-print(ord("好"))
+print(ord("H"))  # ord()取出字串的Unicode的編碼值
+print(ord("你"))  # ord()取出字串的Unicode的編碼值
+print(ord("好"))  # ord()取出字串的Unicode的編碼值
 
 # chr()回傳參數編碼位置對應的字元
 print("==Test2==")
@@ -412,7 +412,7 @@ print(x2)  # 輸出數值97的字元
 x3 = ord(x2)
 print(x3)  # 輸出字元x3的Unicode(10進位)碼值
 x4 = "魁"
-print(hex(ord(x4)))  # 輸出字元"魁"的Unicode(16進位)碼值
+print(hex(ord(x4)))  # 輸出字元"魁"的Unicode(16進位)碼值  # ord()取出字串的Unicode的編碼值
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個

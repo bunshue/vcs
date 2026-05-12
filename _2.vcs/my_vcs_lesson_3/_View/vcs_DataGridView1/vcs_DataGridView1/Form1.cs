@@ -908,6 +908,8 @@ namespace vcs_DataGridView1
             //test recordInfo
             if (recordInfo != null && recordInfo.Length != 0)
             {
+                richTextBox1.Text += recordInfo.Length.ToString() + "\n";
+
                 //用雙重for循環搜尋數組recordInfo中的內容
                 for (int i = 0; i < recordInfo.GetLength(0); i++)
                 {
@@ -916,7 +918,7 @@ namespace vcs_DataGridView1
                         //判斷數組中的值是否為空
                         if (recordInfo[i, j] != null)
                         {
-                            //xxxx
+                            richTextBox1.Text += recordInfo[i, j].ToString() + "\n";
                         }
                     }
                 }

@@ -311,7 +311,7 @@ namespace vcs_SqlConnection1
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //簡易測試 資料庫檔案+查詢字串+DGV
+            //簡易測試 資料庫檔案 + 查詢字串 + DGV
             //SQL 使用 合集, 新加入 以6060區隔
 
             // 分析公司男女比率
@@ -2168,7 +2168,7 @@ namespace vcs_SqlConnection1
 
         private void button20_Click(object sender, EventArgs e)
         {
-            // 建立資料庫檔案
+            // 建立資料庫檔案, 先 CREATE DATABASE, 再 CREATE TABLE
             // 完整測試資料庫
             // 建立資料庫、建立表單、增茶改刪
 
@@ -2213,7 +2213,7 @@ namespace vcs_SqlConnection1
 
             //建立資料表, 不能重複建立
             //建立資料表 animals1_table
-            //建立好資料庫後，你需要連線到 animals1_db，再執行 CREATE TABLE：
+            //建立好資料庫後，你需要連線到 animals1_db.mdf，再執行 CREATE TABLE：
 
             richTextBox1.Text += "建立資料表 (如果不存在)\n";
 
@@ -2462,6 +2462,124 @@ namespace vcs_SqlConnection1
 
         private void button26_Click(object sender, EventArgs e)
         {
+            // 建立資料庫檔案, 先 CREATE DATABASE, 再 CREATE TABLE
+            // 完整測試資料庫
+            // 建立資料庫、建立表單、增茶改刪
+
+            richTextBox1.Text += "建立資料庫 (如果不存在)\n";
+
+            // 連接字串
+            cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30";
+            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
+            {
+                cn.Open();  // 打開資料庫連線
+                /*
+                //未指名資料庫檔案路徑, 則放在 C:\Users\bunsh\ 之下
+                string createDb = @"
+                    IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'new_order7_db')
+                    CREATE DATABASE new_order7_db";
+                */
+                //指名資料庫檔案路徑
+                string createDb = @"
+                    IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'new_order7_db')
+                    CREATE DATABASE new_order7_db
+                    ON PRIMARY (
+                        NAME = new_order7_db,
+                        FILENAME = 'D:\\new_order7_db.mdf',
+                        SIZE = 5MB,
+                        MAXSIZE = 100MB,
+                        FILEGROWTH = 10%)
+                    LOG ON (
+                        NAME = new_order7_db_log,
+                        FILENAME = 'D:\\new_order7_db.ldf',
+                        SIZE = 1MB,
+                        MAXSIZE = 25MB,
+                        FILEGROWTH = 5MB)";
+
+                using (SqlCommand cmd = new SqlCommand(createDb, cn))
+                {
+                    cmd.ExecuteNonQuery();  // 執行SQL命令
+                    richTextBox1.Text += "已建立資料庫\n";
+                }
+            }
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //建立資料表, 不能重複建立
+            //建立資料表 animals1_table
+            //建立好資料庫後，你需要連線到 new_order7_db.mdf，再執行 CREATE TABLE：
+
+            richTextBox1.Text += "建立資料表 (如果不存在)\n";
+
+            // 資料庫檔案
+            db_filename = "new_order7_db.mdf";
+            // 連接字串
+            cnstr = string.Format(db_cnstr, db_filename);
+            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
+            {
+                cn.Open();
+
+                string createTable = @"
+                IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='new_order7_table' AND xtype='U')
+                CREATE TABLE new_order7_table (
+                    order_id     INT,
+                    user_id      INT NOT NULL,
+                    shop_name    VARCHAR(50) NOT NULL,
+                    product_name VARCHAR(100),
+                    amount       DECIMAL(10,2) NOT NULL,
+                    quantity     INT NOT NULL DEFAULT 1,
+                    order_status VARCHAR(20) NOT NULL,
+                    create_time  DATETIME NOT NULL
+                )";
+                //product_id INT PRIMARY KEY,
+                //order_id     INT PRIMARY KEY AUTO_INCREMENT,
+                //編號 INT PRIMARY KEY,  //設定主鍵
+
+                using (SqlCommand cmd = new SqlCommand(createTable, cn))
+                {
+                    cmd.ExecuteNonQuery();  // 執行SQL命令
+                    richTextBox1.Text += "已建立資料庫表單\n";
+                }
+            }
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            richTextBox1.Text += "新增5筆資料bbbb\n";
+
+            // 查詢字串
+            //sqlstr = @"INSERT INTO new_order7_table VALUES (1, N'连衣裙', 299), (2, N'T恤', 89), (3, N'牛仔裤', 199)";
+            //sqlstr = @"INSERT INTO new_order7_table VALUES (1, N'连衣裙', 299), (2, N'T恤', 89), (3, N'牛仔裤', 199)";
+            sqlstr = @"
+INSERT INTO new_order7_table (user_id, shop_name, product_name, amount, quantity, order_status, create_time) VALUES
+(1001, '女装旗舰店', '碎花连衣裙', 299.00,  2, '已支付', '2025-06-01 10:00:00'),
+(1002, '女装旗舰店', '纯棉T恤',    189.00,  3, '已取消', '2025-06-01 11:00:00'),
+(1003, '男装专营店', '牛仔裤',     599.00,  1, '已支付', '2025-06-02 09:30:00'),
+(1001, '女装旗舰店', '雪纺衫',     399.00,  1, '已支付', '2025-06-03 14:20:00'),
+(1004, '童装店',     '儿童T恤',    99.00,   5, '已完成', '2025-06-03 16:00:00'),
+(1005, '女装旗舰店', '真丝连衣裙', 1299.00, 1, '已支付', '2025-06-04 08:30:00'),
+(1002, '男装专营店', '休闲短裤',   89.00,   2, '已取消', '2025-06-04 10:00:00'),
+(1006, '女装旗舰店', '基础打底衫', 89.00,   9, '已支付', '2025-06-05 09:00:00'),
+(1007, '男装专营店', 'Polo衫',     259.00,  1, '已支付', '2025-06-05 14:00:00')";
+
+
+            sql_write_database(db_filename, sqlstr);  // 執行SQL命令
+
+            // 資料庫檔案
+            db_filename = "new_order7_db.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM new_order7_table";
+
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "全部資料 new_order7_table";
+
+
+            /*
+            基礎聚合函數（COUNT()、SUM()、AVG()、MAX()、MIN()）
+
+SELECT COUNT(*) AS total_orders FROM new_order7_table WHERE create_time BETWEEN '2025-06-01' AND '2025-06-30';
+SELECT COUNT(*) AS valid_orders FROM new_order7_table WHERE order_status IN ('已支付', '已完成') AND create_time BETWEEN '2025-06-01' AND '2025-06-30';
+SELECT COUNT(*) AS total_orders FROM new_order7_table;
+            */
         }
 
         private void button27_Click(object sender, EventArgs e)
@@ -2783,41 +2901,7 @@ SQL不同的連線方式
 //richTextBox1.Text += dr["TABLE_NAME"] + "\n";
 
 /*
-基礎聚合函數（COUNT()、SUM()、AVG()、MAX()、MIN()）
 
-SELECT COUNT(*) AS total_orders FROM orders WHERE create_time BETWEEN '2025-06-01' AND '2025-06-30';
-SELECT COUNT(*) AS valid_orders FROM orders WHERE order_status IN ('已支付', '已完成') AND create_time BETWEEN '2025-06-01' AND '2025-06-30';
-SELECT COUNT(*) AS total_orders FROM orders;
-
-CREATE TABLE orders (
-    order_id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id INT NOT NULL,
-    shop_name VARCHAR(50) NOT NULL,
-    product_name VARCHAR(100),
-    amount DECIMAL(10,2) NOT NULL,
-    quantity INT NOT NULL DEFAULT 1,
-    order_status VARCHAR(20) NOT NULL,
-    create_time DATETIME NOT NULL
-);
-
-INSERT INTO orders (user_id, shop_name, product_name, amount, quantity, order_status, create_time) VALUES
-(1001, '女装旗舰店', '碎花连衣裙', 299.00, 2, '已支付', '2025-06-01 10:00:00'),
-(1002, '女装旗舰店', '纯棉T恤', 189.00, 3, '已取消', '2025-06-01 11:00:00'),
-(1003, '男装专营店', '牛仔裤', 599.00, 1, '已支付', '2025-06-02 09:30:00'),
-(1001, '女装旗舰店', '雪纺衫', 399.00, 1, '已支付', '2025-06-03 14:20:00'),
-(1004, '童装店', '儿童T恤', 99.00, 5, '已完成', '2025-06-03 16:00:00'),
-(1005, '女装旗舰店', '真丝连衣裙', 1299.00, 1, '已支付', '2025-06-04 08:30:00'),
-(1002, '男装专营店', '休闲短裤', 89.00, 2, '已取消', '2025-06-04 10:00:00'),
-(1006, '女装旗舰店', '基础打底衫', 89.00, 10, '已支付', '2025-06-05 09:00:00'),
-(1007, '男装专营店', 'Polo衫', 259.00, 1, '已支付', '2025-06-05 14:00:00');
-
-CREATE TABLE products (
-    product_id INT PRIMARY KEY,
-    product_name VARCHAR(100),
-    price DECIMAL(10,2)
-);
-
-INSERT INTO products VALUES (1, '连衣裙', 299), (2, 'T恤', 89), (3, '牛仔裤', 199);
 
 //------------------------------------------------------------  # 60個
 // 查詢字串

@@ -3065,6 +3065,7 @@ print(response.text)
 print("------------------------------------------------------------")  # 60個
 
 """ fail
+# proxies 設置代理IP
 proxy = {'http': 'http://109.161.48.141:3128',
          'https': 'https://109.161.48.141:3128'}
 response = requests.get("http://httpbin.org/ip", proxies=proxy)
@@ -3074,6 +3075,7 @@ print(response.text)
 print("------------------------------------------------------------")  # 60個
 
 """ fail
+# proxies 設置代理IP
 from fake_useragent import UserAgent
 import random
 
