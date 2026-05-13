@@ -49,51 +49,45 @@ namespace vcs_DynamicAddRemoveControls1
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 370;
-            y_st = 600;
-            dx = 200 + 5;
-            dy = 60 + 5;
-
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button5.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button2.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-
-            button7.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button8.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button9.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button10.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button11.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button12.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button13.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button14.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button30.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            button31.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-            button32.Location = new Point(x_st + dx * 4, y_st + dy * 2);
-            button33.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button12.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            button13.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button30.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button31.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button32.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button33.Location = new Point(x_st + dx * 1, y_st + dy * 4);
 
             x_st = 10;
             y_st = 600;
             dx = 200 + 5;
             dy = 60 + 5;
-
             y_st = 20;
-            panel1.Size = new Size(280, 220);
-            panel1.Location = new Point(1110, y_st + dy * 5);
-            lb_panel.Location = new Point(1110, y_st + dy * 5 - 20);
             button31.BackColor = Color.Orange;
             button32.BackColor = Color.Orange;
 
-            richTextBox1.Size = new Size(280, 640);
-            richTextBox1.Location = new Point(1400, y_st + dy * 1);
             button18.Location = new Point(1400, y_st + dy * 0);
+
+            panel1.Size = new Size(280, 220);
+            panel1.Location = new Point(1400, y_st + dy * 1 + 30);
+            lb_panel.Location = new Point(1400, y_st + dy * 1 + 10);
+
+            richTextBox1.Size = new Size(280, 500);
+            richTextBox1.Location = new Point(1400, y_st + dy * 5);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1710, 900);
@@ -176,6 +170,9 @@ namespace vcs_DynamicAddRemoveControls1
             //當有多個按鈕需要產生時, 如何用loop方式動態產生, 並加入對應的click event
             //產生一個新的form, 並在該form上面產生MxN組的按鈕
 
+            int x_st = 410;
+            int y_st = 10;
+
             for (int j = 0; j < ROWS; j++)
             {
                 for (int i = 0; i < COLUMNS; i++)
@@ -183,8 +180,8 @@ namespace vcs_DynamicAddRemoveControls1
                     // 實例化按鈕
                     Button btn = new Button();
                     // 設定按鈕參數
-                    btn.Left = LEFT_ANCHOR + w * i;
-                    btn.Top = TOP_ANCHOR + h * j;
+                    btn.Left = x_st + LEFT_ANCHOR + w * i;
+                    btn.Top = y_st + TOP_ANCHOR + h * j;
                     btn.Width = w;
                     btn.Height = h;
                     btn.BackColor = Color.Gray;
@@ -203,14 +200,14 @@ namespace vcs_DynamicAddRemoveControls1
             // 實例化按鈕
             label1.Text = "動態加入pictureBox1";
             label1.AutoSize = true;
-            label1.Left = 20;
+            label1.Left = 220;
             label1.Top = 445;
             this.Controls.Add(label1);//將控件加入 到 表單 容器
 
             pictureBox1.Size = new Size(340, 370);
             pictureBox1.BackColor = Color.Pink;
 
-            pictureBox1.Left = 20;
+            pictureBox1.Left = 220;
             pictureBox1.Top = 470;
 
             pictureBox1.Tag = "dynamic";
@@ -1050,31 +1047,22 @@ namespace vcs_DynamicAddRemoveControls1
         {
             e.Graphics.DrawRectangle(Pens.Red, 5, 5, this.ClientSize.Width - 10, this.ClientSize.Height - 10);
 
-            int x_st = 400;
-            int x_sp = 400 + 700;
+            int x_st = 790;
+            int x_sp = x_st + 600;
             int y_st = 10;
             int y_sp = this.ClientSize.Height - 20;
-            for (x_st = 400; x_st <= 1100; x_st += 100)
+
+            for (int xx = x_st; xx <= x_sp; xx += 100)
             {
-                e.Graphics.DrawLine(Pens.Red, x_st, y_st, x_st, y_sp);
+                e.Graphics.DrawLine(Pens.Red, xx, y_st, xx, y_sp);
             }
-
-            x_st = 400;
-            x_sp = 400 + 700;
-            for (y_st = 10; y_st <= 910; y_st += 100)
+            for (int yy = y_st; yy <= y_sp; yy += 100)
             {
-                e.Graphics.DrawLine(Pens.Red, x_st, y_st, x_sp, y_st);
+                e.Graphics.DrawLine(Pens.Red, x_st, yy, x_sp, yy);
             }
-            //e.Graphics.DrawRectangle(Pens.Red, 800, 10, 300, this.ClientSize.Height - 20);
-
-            //e.Graphics.DrawRectangle(Pens.Red, 900, 10, 100, this.ClientSize.Height - 20);
-
-            //int x_st = 800;
-            //int y_st = 10;
         }
     }
 }
-
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
