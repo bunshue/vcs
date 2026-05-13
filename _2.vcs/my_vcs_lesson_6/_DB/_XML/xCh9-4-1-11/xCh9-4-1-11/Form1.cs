@@ -60,6 +60,16 @@ namespace xCh9_4_1_11
             newRow["學歷"] = "學士";
             studentTable.Rows.Add(newRow);
 
+            newRow = studentTable.NewRow();
+            newRow["姓名"] = "牛魔王";
+            newRow["學歷"] = "學士";
+            studentTable.Rows.Add(newRow);
+
+            newRow = studentTable.NewRow();
+            newRow["姓名"] = "如來佛";
+            newRow["學歷"] = "博士";
+            studentTable.Rows.Add(newRow);
+
             studentsDataSet.AcceptChanges();
 
             // 秀出剛動態建構出來的DataSet 

@@ -34,17 +34,11 @@ namespace vcs_Cryptography1_MD5
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 12;
-            y_st = 12;
-            dx = 200;
-            dy = 65;
-
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -55,7 +49,6 @@ namespace vcs_Cryptography1_MD5
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -67,10 +60,11 @@ namespace vcs_Cryptography1_MD5
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
+            richTextBox1.Size = new Size(440, 690);
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            //this.Size = new Size(1273, 750);
+            this.Size = new Size(900, 750);
             this.Text = "vcs_Cryptography1_MD5";
 
             //設定執行後的表單起始位置, 正中央
@@ -954,7 +948,6 @@ namespace vcs_Cryptography1_MD5
     }
 }
 
-
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
@@ -971,8 +964,6 @@ namespace vcs_Cryptography1_MD5
 /*  可搬出
 
 */
-
-
 
 
 
@@ -1051,13 +1042,7 @@ public static string Decrypt(string targetValue, string key)
     return Encoding.Default.GetString(ms.ToArray());
 }
 
-
-
-
-//--------------------------------------------------------------------------------------------------------------------------
-
-
-
+//------------------------------------------------------------  # 60個
 
          #region MD5加密
  
@@ -1085,20 +1070,17 @@ public static string Decrypt(string targetValue, string key)
          public static string MD5Encrypt16b(string input, Encoding encode)
          {
              MD5 md5 = MD5.Create();    //創建MD5對象
- * 
              string result = BitConverter.ToString(md5.ComputeHash(encode.GetBytes(input)), 4, 8);
              result = result.Replace("-", "");
              return result;
          }
          #endregion
 
-
             //將字串用MD5加密
             Console.Write("請輸入密碼：");
             string P_str_Code = Console.ReadLine();//记录要加密的密码
             Program program = new Program();//创建Program对象
             Console.WriteLine("結果:\n" + program.Encrypt2(P_str_Code));//输出加密后的字符串
-
 
  //獲取要加密的字段，並轉化為Byte[]數組
             byte[] input = Encoding.Unicode.GetBytes(str.ToCharArray());    //字串轉拜列
@@ -1109,6 +1091,4 @@ public static string Decrypt(string targetValue, string key)
             byte[] md5Hash = md5.ComputeHash(input);    //算拜列之Hash值
 
 */
-
-
 

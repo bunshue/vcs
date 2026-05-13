@@ -55,7 +55,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(907, 610);
+            this.bt_clear.Location = new System.Drawing.Point(440, 63);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(60, 35);
             this.bt_clear.TabIndex = 55;
@@ -65,30 +65,30 @@
             // 
             // button9
             // 
-            this.button9.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button9.Location = new System.Drawing.Point(12, 582);
+            this.button9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button9.Location = new System.Drawing.Point(12, 563);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(180, 55);
+            this.button9.Size = new System.Drawing.Size(200, 60);
             this.button9.TabIndex = 44;
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button8
             // 
-            this.button8.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button8.Location = new System.Drawing.Point(12, 521);
+            this.button8.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button8.Location = new System.Drawing.Point(12, 502);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(180, 55);
+            this.button8.Size = new System.Drawing.Size(200, 60);
             this.button8.TabIndex = 43;
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button0
             // 
-            this.button0.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button0.Location = new System.Drawing.Point(12, 12);
             this.button0.Name = "button0";
-            this.button0.Size = new System.Drawing.Size(180, 55);
+            this.button0.Size = new System.Drawing.Size(200, 60);
             this.button0.TabIndex = 42;
             this.button0.Text = "MD5(用自建函數)";
             this.button0.UseVisualStyleBackColor = true;
@@ -96,78 +96,78 @@
             // 
             // button7
             // 
-            this.button7.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button7.Location = new System.Drawing.Point(12, 460);
+            this.button7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button7.Location = new System.Drawing.Point(12, 441);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(180, 55);
+            this.button7.Size = new System.Drawing.Size(200, 60);
             this.button7.TabIndex = 41;
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(414, 11);
+            this.richTextBox1.Location = new System.Drawing.Point(422, 11);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(565, 649);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 40;
             this.richTextBox1.Text = "";
             // 
             // button6
             // 
-            this.button6.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button6.Location = new System.Drawing.Point(12, 399);
+            this.button6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button6.Location = new System.Drawing.Point(12, 380);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(180, 55);
+            this.button6.Size = new System.Drawing.Size(200, 60);
             this.button6.TabIndex = 39;
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button5
             // 
-            this.button5.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button5.Location = new System.Drawing.Point(12, 327);
+            this.button5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button5.Location = new System.Drawing.Point(12, 318);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(180, 55);
+            this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 38;
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button4
             // 
-            this.button4.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button4.Location = new System.Drawing.Point(12, 256);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(180, 55);
+            this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 37;
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 
-            this.button3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button3.Location = new System.Drawing.Point(12, 195);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(180, 55);
+            this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 36;
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
-            this.button2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button2.Location = new System.Drawing.Point(12, 134);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(180, 55);
+            this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 35;
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button1.Location = new System.Drawing.Point(12, 73);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(180, 55);
+            this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 34;
             this.button1.Text = "MD5(用類別)";
             this.button1.UseVisualStyleBackColor = true;
@@ -175,10 +175,10 @@
             // 
             // button10
             // 
-            this.button10.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button10.Location = new System.Drawing.Point(198, 12);
+            this.button10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button10.Location = new System.Drawing.Point(216, 12);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(180, 55);
+            this.button10.Size = new System.Drawing.Size(200, 60);
             this.button10.TabIndex = 56;
             this.button10.Text = "用MD5比較兩個檔案";
             this.button10.UseVisualStyleBackColor = true;
@@ -186,10 +186,10 @@
             // 
             // button11
             // 
-            this.button11.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button11.Location = new System.Drawing.Point(198, 73);
+            this.button11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button11.Location = new System.Drawing.Point(216, 73);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(180, 55);
+            this.button11.Size = new System.Drawing.Size(200, 60);
             this.button11.TabIndex = 57;
             this.button11.Text = "用MD5比較兩個檔案";
             this.button11.UseVisualStyleBackColor = true;
@@ -197,10 +197,10 @@
             // 
             // button12
             // 
-            this.button12.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button12.Location = new System.Drawing.Point(198, 134);
+            this.button12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button12.Location = new System.Drawing.Point(216, 134);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(180, 55);
+            this.button12.Size = new System.Drawing.Size(200, 60);
             this.button12.TabIndex = 58;
             this.button12.Text = "算一個檔案的MD5值";
             this.button12.UseVisualStyleBackColor = true;
@@ -208,20 +208,20 @@
             // 
             // button13
             // 
-            this.button13.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button13.Location = new System.Drawing.Point(198, 195);
+            this.button13.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button13.Location = new System.Drawing.Point(216, 195);
             this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(180, 55);
+            this.button13.Size = new System.Drawing.Size(200, 60);
             this.button13.TabIndex = 59;
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // button14
             // 
-            this.button14.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button14.Location = new System.Drawing.Point(198, 256);
+            this.button14.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button14.Location = new System.Drawing.Point(216, 256);
             this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(180, 55);
+            this.button14.Size = new System.Drawing.Size(200, 60);
             this.button14.TabIndex = 60;
             this.button14.Text = "算一個檔案的MD5值";
             this.button14.UseVisualStyleBackColor = true;
@@ -229,10 +229,10 @@
             // 
             // button15
             // 
-            this.button15.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button15.Location = new System.Drawing.Point(198, 327);
+            this.button15.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button15.Location = new System.Drawing.Point(216, 318);
             this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(180, 55);
+            this.button15.Size = new System.Drawing.Size(200, 60);
             this.button15.TabIndex = 61;
             this.button15.Text = "算一個檔案的MD5值";
             this.button15.UseVisualStyleBackColor = true;
@@ -240,10 +240,10 @@
             // 
             // button16
             // 
-            this.button16.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button16.Location = new System.Drawing.Point(198, 399);
+            this.button16.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button16.Location = new System.Drawing.Point(216, 380);
             this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(180, 55);
+            this.button16.Size = new System.Drawing.Size(200, 60);
             this.button16.TabIndex = 62;
             this.button16.Text = "算一個檔案的MD5值";
             this.button16.UseVisualStyleBackColor = true;
@@ -251,30 +251,30 @@
             // 
             // button17
             // 
-            this.button17.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button17.Location = new System.Drawing.Point(198, 460);
+            this.button17.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button17.Location = new System.Drawing.Point(216, 441);
             this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(180, 55);
+            this.button17.Size = new System.Drawing.Size(200, 60);
             this.button17.TabIndex = 63;
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
             // button18
             // 
-            this.button18.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button18.Location = new System.Drawing.Point(198, 521);
+            this.button18.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button18.Location = new System.Drawing.Point(216, 502);
             this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(180, 55);
+            this.button18.Size = new System.Drawing.Size(200, 60);
             this.button18.TabIndex = 64;
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
             // button19
             // 
-            this.button19.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button19.Location = new System.Drawing.Point(198, 582);
+            this.button19.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button19.Location = new System.Drawing.Point(216, 563);
             this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(180, 55);
+            this.button19.Size = new System.Drawing.Size(200, 60);
             this.button19.TabIndex = 65;
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
@@ -283,7 +283,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(990, 672);
+            this.ClientSize = new System.Drawing.Size(540, 634);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.button18);
             this.Controls.Add(this.button17);

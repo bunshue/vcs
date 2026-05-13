@@ -403,6 +403,50 @@ namespace vcs_Process1
 
         private void button11_Click(object sender, EventArgs e)
         {
+            //取得目前的Process
+            using (Process curProcess = Process.GetCurrentProcess())
+            {
+                richTextBox1.Text += "aaaa = " + curProcess.ProcessName + "\n";
+                richTextBox1.Text += "aaaa = " + curProcess.MainModule + "\n";
+                richTextBox1.Text += "aaaa = " + curProcess.MainWindowTitle + "\n";
+                richTextBox1.Text += "aaaa = " + curProcess.ProcessorAffinity + "\n";
+                richTextBox1.Text += "處理序的名稱 :\t" + curProcess.ProcessName.ToString().Trim() + "\n";//取得處理序的名稱
+                richTextBox1.Text += "主視窗標題 :\t" + curProcess.MainWindowTitle + "\n";   //取得處理序的主視窗標題
+                richTextBox1.Text += "處理序啟動的時間 :\t" + curProcess.StartTime.ToString() + "\n";   //取得處理序的主視窗標題
+                richTextBox1.Text += "這個處理序的總處理器時間 :\t" + curProcess.TotalProcessorTime.ToString() + "\n";   //取得處理序的主視窗標題
+
+                //程序的退出
+                //Process.GetCurrentProcess().Kill();
+            }
+
+            Process proc = Process.GetCurrentProcess();
+
+            richTextBox1.Text += "aaa : " + proc.MinWorkingSet + " 拜\n";
+            richTextBox1.Text += "bbb : " + proc.MaxWorkingSet + " 拜\n";
+            richTextBox1.Text += "ccc : " + proc.NonpagedSystemMemorySize64 + " 拜\n";
+            richTextBox1.Text += "ddd : " + proc.PagedMemorySize64 + " 拜\n";
+            richTextBox1.Text += "eee : " + proc.PagedSystemMemorySize64 + " 拜\n";
+
+            richTextBox1.Text += "aaa : " + proc.PeakPagedMemorySize64 + " 拜\n";
+            richTextBox1.Text += "bbb : " + proc.PeakVirtualMemorySize64 + " 拜\n";
+            richTextBox1.Text += "ccc : " + proc.PeakWorkingSet64 + " 拜\n";
+            richTextBox1.Text += "ddd : " + proc.VirtualMemorySize64 + " 拜\n";
+            richTextBox1.Text += "eee : " + proc.WorkingSet64 + " 拜\n";
+
+            //取得記憶體使用狀態
+
+            richTextBox1.Text += "Property\t\t\tValue\n";
+            richTextBox1.Text += "Min Working Set" + "\t" + ((double)proc.MinWorkingSet).ToFileSize() + "\n";
+            richTextBox1.Text += "Max Working Set" + "\t" + ((double)proc.MaxWorkingSet).ToFileSize() + "\n";
+            richTextBox1.Text += "Non-paged Memory Size" + "\t" + ((double)proc.NonpagedSystemMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Paged Memory Size" + "\t" + ((double)proc.PagedMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Paged System Memory Size" + "\t" + ((double)proc.PagedSystemMemorySize64).ToFileSize() + "\n";
+
+            richTextBox1.Text += "Peak Paged Memory Size" + "\t" + ((double)proc.PeakPagedMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Peak Virtual Memory Size" + "\t" + ((double)proc.PeakVirtualMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Peak Working Set" + "\t" + ((double)proc.PeakWorkingSet64).ToFileSize() + "\n";
+            richTextBox1.Text += "Virtual Memory Size" + "\t" + ((double)proc.VirtualMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Working Set" + "\t" + ((double)proc.WorkingSet64).ToFileSize() + "\n";
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -837,6 +881,68 @@ namespace vcs_Process1
             //Process.Start("shutdown", "-r -t 0");
         }
     }
+
+    public static class MyExtensions
+    {
+        [DllImport("Shlwapi.dll", CharSet = CharSet.Auto)]
+        public static extern Int32 StrFormatByteSize(
+            long fileSize,
+            [MarshalAs(UnmanagedType.LPTStr)] StringBuilder buffer,
+            int bufferSize);
+
+        // Return a file size created by the StrFormatByteSize API function.
+        public static string ToFileSizeApi(this long file_size)
+        {
+            StringBuilder sb = new StringBuilder(20);
+            StrFormatByteSize(file_size, sb, 20);
+            return sb.ToString();
+        }
+
+        // Return a string describing the value as a file size.
+        // For example, 1.23 MB.
+        public static string ToFileSize(this double value)
+        {
+            string[] suffixes = { "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
+            for (int i = 0; i < suffixes.Length; i++)
+            {
+                if (value <= (Math.Pow(1024, i + 1)))
+                {
+                    return ThreeNonZeroDigits(value / Math.Pow(1024, i)) + " " + suffixes[i];
+                }
+            }
+
+            return ThreeNonZeroDigits(value / Math.Pow(1024, suffixes.Length - 1)) +
+                " " + suffixes[suffixes.Length - 1];
+        }
+
+        // Return the value formatted to include at most three
+        // non-zero digits and at most two digits after the
+        // decimal point. Examples:
+        //         1
+        //       123
+        //        12.3
+        //         1.23
+        //         0.12
+        private static string ThreeNonZeroDigits(double value)
+        {
+            if (value >= 100)
+            {
+                // No digits after the decimal.
+                return value.ToString("0,0");
+            }
+            else if (value >= 10)
+            {
+                // One digit after the decimal.
+                return value.ToString("0.0");
+            }
+            else
+            {
+                // Two digits after the decimal.
+                return value.ToString("0.00");
+            }
+        }
+    }
+
 }
 
 //6060

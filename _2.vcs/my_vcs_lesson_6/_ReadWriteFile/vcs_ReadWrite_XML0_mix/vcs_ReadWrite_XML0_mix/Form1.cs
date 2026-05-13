@@ -34,7 +34,6 @@ namespace vcs_ReadWrite_XML0_mix
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -276,6 +275,37 @@ namespace vcs_ReadWrite_XML0_mix
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //讀入XML結構範例
+            //讀入XML文件結構
+            // 讀入coffeeData.xml的XML文件結構
+            DataSet dataSet = new DataSet();
+            dataSet.InferXmlSchema(@"../../coffeeData.xml", new string[] { "urn:schemas-microsoft-com:officedata" });
+
+            //dataGridView1.DataSource = dataSet.Tables["Products"];
+
+            // 加入記錄
+            DataRow newRow;
+
+            newRow = dataSet.Tables["Products"].NewRow();
+            newRow["ProductID"] = "A001";
+            newRow["ReorderLevel"] = 10;
+            newRow["Discontinued"] = 0;
+            dataSet.Tables["Products"].Rows.Add(newRow);
+
+            newRow = dataSet.Tables["Products"].NewRow();
+            newRow["ProductID"] = "A002";
+            newRow["ReorderLevel"] = 20;
+            newRow["Discontinued"] = 0;
+            dataSet.Tables["Products"].Rows.Add(newRow);
+
+            newRow = dataSet.Tables["Products"].NewRow();
+            newRow["ProductID"] = "A003";
+            newRow["ReorderLevel"] = 30;
+            newRow["Discontinued"] = 1;
+            dataSet.Tables["Products"].Rows.Add(newRow);
+
+            dataSet.Tables["Products"].AcceptChanges();
+            //dataGridView2.DataSource = dataSet.Tables["Products"];
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -1090,6 +1120,35 @@ namespace vcs_ReadWrite_XML0_mix
 
         private void button26_Click(object sender, EventArgs e)
         {
+            //讀寫XML Schema範例
+
+            //寫入 Schema
+            DataSet studentsDataSet = new DataSet("StudentsDataSet");
+            DataTable studentTable = new DataTable("StudentTable");
+
+            DataColumn idColumn = new DataColumn("編號", Type.GetType("System.Int32"));
+            DataColumn nameColumn = new DataColumn("姓名");
+            DataColumn schoolColumn = new DataColumn("學歷");
+
+            studentTable.Columns.Add(idColumn);
+            studentTable.Columns.Add(nameColumn);
+            studentTable.Columns.Add(schoolColumn);
+
+            studentsDataSet.Tables.Add(studentTable);
+
+            studentsDataSet.WriteXmlSchema(@"tmp_Students.xsd");
+
+            MessageBox.Show("成功寫入Students.xsd");
+
+            //3030
+
+            // 讀取Schema
+
+            DataSet dataSet = new DataSet();
+            dataSet.ReadXmlSchema(@"tmp_Students.xsd");
+
+            dataGridView1.DataSource = dataSet.Tables["StudentTable"];
+
 
         }
 

@@ -4446,3 +4446,298 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+"""
+Python中包括下面的列表的方法
+SN 	方法及描述
+1 	list.append(obj)	添加obj對象到列表
+2 	list.count(obj)		計算返回obj出現在列表的次數
+3 	list.extend(seq)	附加序列seq內容到列表
+4 	list.index(obj)		返回列表中出現obj的最小索引
+5 	list.insert(index, obj)	插入obj對象在列表偏移索引位置
+6 	list.pop(obj=list[-1])	移除並返回列表最後一個對象或obj
+7 	list.remove(obj)	從列表中移除obj對象
+8 	list.reverse()		反轉列表的對象
+9 	list.sort([func])	排序列表中的對象，使用func比較（如果給定）
+
+
+
+
+
+
+x = [1, 2, 2, 3, 5, 2, 5]
+x.count(2)
+3
+x.count(5)
+2
+x.count(4)
+0
+
+
+
+"""
+
+
+# 串列的 count 與 index
+print('用串列的count統計串列元素出現的次數')
+
+word = [
+    "holiday",
+    "happy",
+    "birth",
+    "yesterday",
+    "holiday",
+    "car",
+    "yellow",
+    "happy",
+    "mobile",
+    "cup",
+    "happy",
+    "holiday",
+    "holiday",
+    "desk",
+    "birth",
+]
+print("holiday 出現的次數", word.count("holiday"))
+
+print('用串列的index找出串列元素出現的位置')
+search_str = "yellow"
+print("單字 %s 第一次出現的索引值%d" % (search_str, word.index(search_str)))
+
+print("------------------------------------------------------------")  # 60個
+
+no = [105, 25, 8, 179, 60, 57]
+print("排序前的資料順序：", no)
+
+no.sort()  # 省略reverse參數, 遞增排序
+print("遞增排序：", no)
+
+zoo = ["tiger", "elephant", "lion", "rabbit"]
+print("排序前的資料順序：")
+print(zoo)
+
+zoo.sort(reverse=True)  # 依字母做遞減排序
+print("依單字字母遞減排序：")
+print(zoo)
+
+print("------------------------------------------------------------")  # 60個
+
+print("集合")# 集合改成高中分組課程
+
+friendA = {"Andy", "Axel", "Michael", "May"}
+friendB = {"Peter", "Axel", "Andy", "Julia"}
+print(friendA & friendB)
+print(friendA | friendB)
+print(friendA - friendB)
+print(friendA ^ friendB)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+tup = (28, 39, 58, 67, 97, 54)
+print("目前元組內的所有元素：")
+for item in range(len(tup)):
+    print("tup[%2d] %3d" % (item, tup[item]))
+
+print("------------------------------------------------------------")  # 60個
+
+# 排序
+salary = (86000, 72000, 83000, 47000, 55000)
+
+# 由小而大
+print("薪資由小而大排序：", sorted(salary))
+print("--------------------------------")
+# 遞減排序
+print("薪資由大而小排序：", sorted(salary, reverse=True))
+print("--------------------------------")
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+original = [
+    "abase",
+    "abate",
+    "abdicate",
+    "abhor",
+    "abate",
+    "acrid",
+    "appoint",
+    "abate",
+    "kindle",
+]
+print("單字收集的原始內容: ")
+print(original)
+set1 = set(original)
+not_duplicatd = list(set1)
+print("刪除重複單字的最佳內容: ")
+print(not_duplicatd)
+print("按照字母的排列順序: ")
+not_duplicatd.sort()
+print(not_duplicatd)
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+phrase = ["三陽開泰", "事事如意", "五福臨門"]
+for index, x in enumerate(phrase):
+    print("{0}--{1}".format(index, x))
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+# 串列的 count 與 index
+
+word = [
+    "holiday",
+    "happy",
+    "birth",
+    "yesterday",
+    "holiday",
+    "car",
+    "yellow",
+    "happy",
+    "mobile",
+    "cup",
+    "happy",
+    "holiday",
+    "holiday",
+    "desk",
+    "birth",
+]
+print("holiday 出現的次數", word.count("holiday"))
+
+print("------------------------------------------------------------")  # 60個
+
+# 串列的 count 與 index
+
+word = [
+    "holiday",
+    "happy",
+    "birth",
+    "yesterday",
+    "holiday",
+    "car",
+    "yellow",
+    "happy",
+    "mobile",
+    "cup",
+    "happy",
+    "holiday",
+    "holiday",
+    "desk",
+    "birth",
+]
+search_str = "yellow"
+print("單字 %s 第一次出現的索引值%d" % (search_str, word.index(search_str)))
+
+print("------------------------------------------------------------")  # 60個
+
+# 串列的 count 與 index
+word = [
+    "holiday",
+    "happy",
+    "birth",
+    "yesterday",
+    "holiday",
+    "car",
+    "yellow",
+    "happy",
+    "mobile",
+    "cup",
+    "happy",
+    "holiday",
+    "holiday",
+    "desk",
+    "birth",
+]
+print("holiday 出現的次數", word.count("holiday"))
+
+print("------------------------------------------------------------")  # 60個
+
+# 串列的 count 與 index
+str1 = "do your best what you can do"
+s1 = str1.count("do", 0)
+s2 = str1.count("o", 0, 20)
+print("{}\n「do」出現{}次,「o」出現{}次".format(str1, s1, s2))
+
+print("------------------------------------------------------------")  # 60個
+
+# 串列的 count 與 index
+
+word = "maintenance"
+word.count("n")
+
+len("thunderbolt")
+
+animal = ["cat", "dog", "duck"]
+len(animal)
+
+max(100, 10, 50)
+min(300, 30, 3000)
+
+print("------------------------------------------------------------")  # 60個
+
+# dict01.py
+
+dictBook = {"A001": ["木偶奇遇記", 199], "A002": ["三隻小豬", 120], "A003": ["白雪公主", 99]}
+print(dictBook)
+# 印出 dictBook所有元素
+print("書號A001：", dictBook["A001"])  # 印出dictBook字典鍵A001的值 ["木偶奇遇記", 199]
+print("書號A002：", dictBook["A002"])  # 印出dictBook字典鍵A002的值 ["三隻小豬", 120]
+print("書號A003：", dictBook["A003"])  # 印出dictBook字典鍵A003的值 ["白雪公主", 99]
+
+
+print("------------------------------------------------------------")  # 60個
+
+# dict02.py
+
+tupleBookId = ("A001", "A002", "A003")
+dictBook = {"A001": ["木偶奇遇記", 199], "A002": ["三隻小豬", 120], "A003": ["白雪公主", 99]}
+print("書號\t書名\t單價")
+print("========================")
+
+for key in list(tupleBookId):
+    print(key, end="\t")
+    for col in dictBook[key]:
+        print(col, end="\t")
+    print()
+
+
+print("------------------------------------------------------------")  # 60個
+
+# dict03.py
+
+dictBook = {"A001": ["木偶奇遇記", 199]}
+print("編輯前字典內容：", dictBook)
+
+dictBook["A002"] = ["三隻小豬", 120]
+print("新增後字典內容：", dictBook)
+
+dictBook["A002"] = ["白雪公主", 120]
+print("修改後字典內容：", dictBook)
+
+print("是否有書號A001的書籍：", "A001" in dictBook)
+
+del dictBook["A001"]
+print("刪除後字典內容：", dictBook)
+
+print("是否有書號A001的書籍：", "A001" in dictBook)
+
+
+print("------------------------------------------------------------")  # 60個
+
+# 一次改變一個數列
+celsius = [21, 25, 29]
+fahrenheit = [(x * 9 / 5 + 32) for x in celsius]
+print(fahrenheit)
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+

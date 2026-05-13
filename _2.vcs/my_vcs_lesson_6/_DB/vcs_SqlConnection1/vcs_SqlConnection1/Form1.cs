@@ -732,83 +732,10 @@ namespace vcs_SqlConnection1
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //BETWEEN
-
-            //查詢指定日期的數據
-
-            //全部資料
-            // 資料庫檔案
-            db_filename = "db_10_Data.MDF";
-
-            // 查詢字串, 全部欄位
-            sqlstr = "SELECT * FROM tb_xsb";
-            // 查詢字串, 全部資料, 幾個欄位
-            sqlstr = "SELECT 書號, 書名, 作者, 單價, 銷售數量, 金額, 日期 FROM tb_xsb";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "全部資料";
-
-            //查詢指定日期的數據
-            string datetime = "2005/7/22";
-            // 查詢字串, 指定日期
-            sqlstr = "SELECT 書號, 書名, 作者, 單價, 銷售數量, 金額, 日期 FROM tb_xsb WHERE 日期='" + datetime + "'";
-
-            //查詢指定時間段的數據
-            string datetime_st = "2005/5/1";
-            string datetime_sp = "2005/9/30";
-
-            // 資料庫檔案
-            db_filename = "db_10_Data.MDF";
-            // 查詢字串, 指定日期區間 BETWEEN
-            sqlstr = "SELECT 書號, 書名, 作者, 單價, 銷售數量, 金額, 日期 FROM tb_xsb WHERE 日期 BETWEEN'" + datetime_st + "'AND '" + datetime_sp + "' ORDER BY 日期";
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-            lb_dgv3.Text = "指定日期區間 WHERE+BETWEEN";
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            //利用圖表分析彩票中獎情況
-
-            // 資料庫檔案
-            db_filename = "db_13.mdf";  // same
-            //db_filename = "db_TomeOne.mdf";
-
-            // 查詢字串
-            sqlstr = "SELECT * FROM tb_lottery";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            //t_year 在 2005/4/1 ~ 2006/10/1 有資料
-            string time_st = "2005/8/15";
-            string time_sp = "2006/4/15";
-
-            // 查詢字串
-            sqlstr = "SELECT * FROM tb_lottery WHERE t_year BETWEEN '" + time_st + "' AND '" + time_sp + "' ORDER BY t_year";
-            //sqlstr = "SELECT * FROM tb_lottery WHERE t_year BETWEEN '2005/8/15' AND '2006/4/15' ORDER BY t_year";
-
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-            lb_dgv2.Text = "指定日期區間 WHERE+BETWEEN";
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            // 資料庫檔案
-            db_filename = "db_TomeTwo.mdf";
-
-            //查询指定时间段的数据
-            time_st = "2005/7/1";
-            time_sp = "2005/8/31";
-            // 查詢字串
-            sqlstr = string.Format("SELECT * FROM tb_Book WHERE 日期 BETWEEN '{0}' AND '{1}'", time_st, time_sp);
-            sql_read_database(db_filename, sqlstr, dataGridView3);
-            lb_dgv3.Text = "查詢使用指定時段 BETWEEN";
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //排序, DESC降冪, ASC升冪",
-            // 查詢字串
-            sqlstr = "SELECT * FROM tb_ware";
-            // 查詢字串, 升冪排列
-            sqlstr = "SELECT * FROM tb_ware ORDER BY 销售数量 ASC";
-            // 查詢字串, 降冪排列
-            sqlstr = "SELECT * FROM tb_ware ORDER BY 销售数量 DESC";
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -2088,6 +2015,133 @@ namespace vcs_SqlConnection1
 
             // 資料庫檔案
             db_filename = "animals2_db.mdf";
+
+            // 查詢字串
+            sqlstr = "SELECT * FROM animals2_table";
+
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "查詢字串, 全部";
+
+            // 查詢字串, 相同項合併
+            sqlstr = "SELECT DISTINCT 中文名 FROM animals2_table";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+            lb_dgv2.Text = "查詢字串, 相同項合併";
+
+
+            // 查詢字串, COUNT(DISTINCT 列名) 統計去重後的數量
+            sqlstr = "SELECT COUNT(DISTINCT 中文名) FROM animals2_table";
+            sql_read_database(db_filename, sqlstr, dataGridView3);
+
+
+            sqlstr = "SELECT DISTINCT * FROM animals2_table";
+            sql_read_database(db_filename, sqlstr, dataGridView4);
+
+            return;
+
+
+            //BETWEEN
+
+
+            // 資料庫檔案
+            db_filename = "animals2_db.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM animals2_table";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "十二生肖全部資料";
+
+
+            //查詢指定日期的數據
+            string dt = "2025/5/5 16:29:26";
+            // 查詢字串, 指定日期
+            sqlstr = "SELECT * FROM animals2_table WHERE 登錄時間='" + dt + "'";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+
+            //查詢指定時間段的數據
+            string datetime_st = "2025/2/1";
+            string datetime_sp = "2025/6/30";
+            // 資料庫檔案
+            db_filename = "animals2_db.mdf";
+            // 查詢字串, 指定日期區間 BETWEEN
+            sqlstr = "SELECT * FROM animals2_table WHERE 登錄時間 BETWEEN'" + datetime_st + "'AND '" + datetime_sp + "' ORDER BY 登錄時間";
+            sql_read_database(db_filename, sqlstr, dataGridView3);
+            lb_dgv3.Text = "指定日期區間 WHERE+BETWEEN";
+
+
+            return;
+
+            //6060
+
+
+
+            //BETWEEN
+
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //利用圖表分析彩票中獎情況
+
+            // 資料庫檔案
+            db_filename = "db_13.mdf";  // same
+            //db_filename = "db_TomeOne.mdf";
+
+            // 查詢字串
+            sqlstr = "SELECT * FROM tb_lottery";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+
+            //t_year 在 2005/4/1 ~ 2006/10/1 有資料
+            string time_st = "2005/8/15";
+            string time_sp = "2006/4/15";
+
+            // 查詢字串
+            sqlstr = "SELECT * FROM tb_lottery WHERE t_year BETWEEN '" + time_st + "' AND '" + time_sp + "' ORDER BY t_year";
+            //sqlstr = "SELECT * FROM tb_lottery WHERE t_year BETWEEN '2005/8/15' AND '2006/4/15' ORDER BY t_year";
+
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+            lb_dgv2.Text = "指定日期區間 WHERE+BETWEEN";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            // 資料庫檔案
+            db_filename = "db_TomeTwo.mdf";
+
+            //查询指定时间段的数据
+            time_st = "2005/7/1";
+            time_sp = "2005/8/31";
+            // 查詢字串
+            sqlstr = string.Format("SELECT * FROM tb_Book WHERE 日期 BETWEEN '{0}' AND '{1}'", time_st, time_sp);
+            sql_read_database(db_filename, sqlstr, dataGridView3);
+            lb_dgv3.Text = "查詢使用指定時段 BETWEEN";
+
+
+
+
+
+
+            return;
+            /*
+            //排序
+                                    { "7", "db_13.mdf",
+                "SELECT * FROM tb_Rectangle",
+                "",
+                "SELECT TOP 3 * FROM tb_Rectangle ORDER BY t_Num DESC",
+                "排序, DESC降冪, ASC升冪",
+                "SELECT SUM(t_Num) FROM tb_Rectangle",
+                ""},
+
+            //排序, DESC降冪, ASC升冪",
+            // 查詢字串
+            sqlstr = "SELECT * FROM tb_ware";
+            // 查詢字串, 升冪排列
+            sqlstr = "SELECT * FROM tb_ware ORDER BY 销售数量 ASC";
+            // 查詢字串, 降冪排列
+            sqlstr = "SELECT * FROM tb_ware ORDER BY 销售数量 DESC";
+            */
+
+            return;
+
+
+            // 資料庫檔案
+            db_filename = "animals2_db.mdf";
             // 查詢字串
             sqlstr = "SELECT * FROM animals2_table";
             sql_read_database(db_filename, sqlstr, dataGridView1);
@@ -2711,13 +2765,6 @@ namespace vcs_SqlConnection1
                 "SELECT * FROM tb_Book", "", "", "", "", ""},
             { "5", "db_TomeTwo.mdf",
                 "SELECT TOP 50 PERCENT 书号, 书名, SUM(销售数量) AS 合计销售数量 FROM tb_Book GROUP BY 书号, 书名, 作者 ORDER BY 3 DESC", "查询销售量占前50%的图书信息, 查询数据库信息", "", "", "", ""},
-            { "7", "db_13.mdf",
-                "SELECT * FROM tb_Rectangle",
-                "",
-                "SELECT TOP 3 * FROM tb_Rectangle ORDER BY t_Num DESC",
-                "排序, DESC降冪, ASC升冪",
-                "SELECT SUM(t_Num) FROM tb_Rectangle",
-                ""},
             { "8", "db_10_Data.MDF", "SELECT * FROM tb_07", "全部資料", "SELECT * FROM tb_07 WHERE 出生日期='1984/1/24'", "查詢日期數據", "", ""},
             { "9", "db_10_Data.MDF", "SELECT * FROM tb_stu", "全部資料", "SELECT * FROM tb_stu WHERE 出生年月='1983/4/2'", "查詢日期數據", "", ""},
             { "11", "db_10_Data.MDF", "SELECT 書號,書名,銷售數量,日期 FROM tb_xsb", "全部資料", "SELECT 書號,書名,銷售數量,日期 FROM tb_xsb WHERE year(日期)='2005' AND month(日期)='10' AND day(日期)='1'", "按年、月或日查詢數據", "", ""},

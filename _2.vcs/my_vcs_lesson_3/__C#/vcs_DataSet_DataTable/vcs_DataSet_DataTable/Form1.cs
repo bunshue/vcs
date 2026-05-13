@@ -63,12 +63,14 @@ namespace vcs_DataSet_DataTable
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
             dataGridView1.Size = new Size(400, 150);
-            dataGridView1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 40);
-            richTextBox1.Size = new Size(500, 500);
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            dataGridView1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 30);
+            dataGridView2.Size = new Size(400, 150);
+            dataGridView2.Location = new Point(x_st + dx * 3, y_st + dy * 2 + 50);
+            richTextBox1.Size = new Size(500, 340);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 5);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1273, 784);
+            this.Size = new Size(1170, 750);
             this.Text = "vcs_DataSet_DataTable";
 
             //設定執行後的表單起始位置, 正中央
@@ -1046,53 +1048,12 @@ namespace vcs_DataSet_DataTable
 
         private void button19_Click(object sender, EventArgs e)
         {
-            //DataSet轉DataTable
-            //動態建構DataSet
-
-            // 建構DataSet及其組成的資料表
-            DataSet studentsDataSet = new DataSet("StudentsDataSet");
-            DataTable studentTable = new DataTable("StudentTable");
-
-            // 建構資料欄
-            DataColumn idColumn = new DataColumn("編號");
-            DataColumn nameColumn = new DataColumn("姓名");
-            DataColumn schoolColumn = new DataColumn("學歷");
-
-            // 設定「編號」資料欄為自動增加數值
-            idColumn.DataType = Type.GetType("System.Int32");
-            idColumn.AutoIncrement = true;
-
-            // 加入資料欄
-            studentTable.Columns.Add(idColumn);
-            studentTable.Columns.Add(nameColumn);
-            studentTable.Columns.Add(schoolColumn);
-
-            // 將資料表加入DataSet
-            studentsDataSet.Tables.Add(studentTable);
-
-            // 加入記錄
-            DataRow newRow;
-            newRow = studentTable.NewRow();
-            newRow["姓名"] = "唐三藏";
-            newRow["學歷"] = "博士";
-            studentTable.Rows.Add(newRow);
-
-            newRow = studentTable.NewRow();
-            newRow["姓名"] = "孫悟空";
-            newRow["學歷"] = "碩士";
-            studentTable.Rows.Add(newRow);
-
-            newRow = studentTable.NewRow();
-            newRow["姓名"] = "豬八戒";
-            newRow["學歷"] = "學士";
-            studentTable.Rows.Add(newRow);
-
-            // 秀出剛動態建構出來的DataSet 
-            dataGridView1.DataSource = studentsDataSet.Tables["StudentTable"];
         }
 
         private void button20_Click(object sender, EventArgs e)
         {
+            //DataSet轉DataTable
+
             //動態建構DataSet
 
             // 建構DataSet及其組成的資料表
@@ -1133,7 +1094,20 @@ namespace vcs_DataSet_DataTable
             newRow["學歷"] = "學士";
             studentTable.Rows.Add(newRow);
 
-            // 秀出剛動態建構出來的DataSet 
+            newRow = studentTable.NewRow();
+            newRow["姓名"] = "牛魔王";
+            newRow["學歷"] = "學士";
+            studentTable.Rows.Add(newRow);
+
+            newRow = studentTable.NewRow();
+            newRow["姓名"] = "如來佛";
+            newRow["學歷"] = "博士";
+            studentTable.Rows.Add(newRow);
+
+            // 秀出剛動態建構出來的DataSet
+
+            dataGridView1.DataSource = studentsDataSet.Tables["StudentTable"];
+
             // 巡覽每一資料表
             foreach (DataTable thisTable in studentsDataSet.Tables)
             {
@@ -1244,27 +1218,29 @@ namespace vcs_DataSet_DataTable
             DataColumn nameColumn = new DataColumn("姓名");
             DataColumn schoolColumn = new DataColumn("學歷");
 
+            // 加入資料欄
             studentTable.Columns.Add(idColumn);
             studentTable.Columns.Add(nameColumn);
             studentTable.Columns.Add(schoolColumn);
 
+            // 將資料表加入DataSet
             studentsDataSet.Tables.Add(studentTable);
 
             // 加入記錄
             DataRow newRow;
             newRow = studentTable.NewRow();
             newRow["姓名"] = "唐三藏";
-            newRow["學歷"] = "碩士";
+            newRow["學歷"] = "博士";
             studentTable.Rows.Add(newRow);
 
             newRow = studentTable.NewRow();
             newRow["姓名"] = "孫悟空";
-            newRow["學歷"] = "學士";
+            newRow["學歷"] = "碩士";
             studentTable.Rows.Add(newRow);
 
             newRow = studentTable.NewRow();
             newRow["姓名"] = "豬八戒";
-            newRow["學歷"] = "高中";
+            newRow["學歷"] = "學士";
             studentTable.Rows.Add(newRow);
 
             newRow = studentTable.NewRow();
@@ -1276,11 +1252,144 @@ namespace vcs_DataSet_DataTable
             newRow["姓名"] = "如來佛";
             newRow["學歷"] = "博士";
             studentTable.Rows.Add(newRow);
+
+            // 秀出剛動態建構出來的DataSet 
+            // 巡覽每一資料表
+            foreach (DataTable thisTable in studentsDataSet.Tables)
+            {
+                // 巡覽每一資料列
+                foreach (DataRow row in thisTable.Rows)
+                {
+                    // 巡覽每一資料欄
+                    foreach (DataColumn column in thisTable.Columns)
+                    {
+                        richTextBox1.AppendText(row[column].ToString());
+                        richTextBox1.AppendText("\t");
+                    }
+                    richTextBox1.AppendText(Environment.NewLine);
+                }
+            }
         }
 
         private void button23_Click(object sender, EventArgs e)
         {
+            //DataSet轉DGV
 
+            // 建立一個 DataSet, 裏面有兩個 DataTable
+
+            DataSet ds = new DataSet();
+
+            DataTable dt1 = new DataTable("ParentTable");
+            DataColumn column1;
+            DataRow row1;
+
+            column1 = new DataColumn();
+            column1.DataType = System.Type.GetType("System.Int32");
+            column1.ColumnName = "客戶編號";
+            column1.ReadOnly = true;
+            column1.Unique = true;
+            dt1.Columns.Add(column1);
+
+            column1 = new DataColumn();
+            column1.DataType = System.Type.GetType("System.String");
+            column1.ColumnName = "客戶名稱";
+            column1.AutoIncrement = false;
+            column1.Caption = "客戶名稱";
+            column1.ReadOnly = false;
+            column1.Unique = false;
+            dt1.Columns.Add(column1);
+
+            // 設定客戶編號欄為primary key
+            DataColumn[] PrimaryKeyColumns = new DataColumn[1];
+            PrimaryKeyColumns[0] = dt1.Columns["客戶編號"];
+            dt1.PrimaryKey = PrimaryKeyColumns;
+
+            ds.Tables.Add(dt1);
+
+            string[] names = new string[] { "張三", "李四", "王五" };
+            for (int i = 0; i <= 2; i++)
+            {
+                row1 = dt1.NewRow();
+                row1["客戶編號"] = i;
+                row1["客戶名稱"] = names[i];
+                dt1.Rows.Add(row1);
+            }
+
+            //3030
+
+            DataTable dt2 = new DataTable("childTable");
+            DataColumn column2;
+            DataRow row2;
+
+            column2 = new DataColumn();
+            column2.DataType = System.Type.GetType("System.Int32");
+            column2.ColumnName = "訂單編號";
+            column2.AutoIncrement = true;
+            column2.Caption = "訂單編號";
+            column2.ReadOnly = true;
+            column2.Unique = true;
+            dt2.Columns.Add(column2);
+
+            column2 = new DataColumn();
+            column2.DataType = System.Type.GetType("System.String");
+            column2.ColumnName = "品名";
+            column2.AutoIncrement = false;
+            column2.Caption = "品名";
+            column2.ReadOnly = false;
+            column2.Unique = false;
+            dt2.Columns.Add(column2);
+
+            column2 = new DataColumn();
+            column2.DataType = System.Type.GetType("System.Int32");
+            column2.ColumnName = "客戶編號";
+            column2.AutoIncrement = false;
+            column2.Caption = "客戶編號";
+            column2.ReadOnly = false;
+            column2.Unique = false;
+            dt2.Columns.Add(column2);
+
+            ds.Tables.Add(dt2);
+
+            string[] items = new string[] { 
+                "螢幕",
+                "滑鼠", 
+                "鍵盤", 
+                "隨身碟", 
+                "MP3撥放器" 
+            };
+
+            for (int i = 0; i <= 2; i++)
+            {
+                row2 = dt2.NewRow();
+                row2["訂單編號"] = i;
+                row2["品名"] = items[i];
+                row2["客戶編號"] = 0;
+                dt2.Rows.Add(row2);
+            }
+
+            for (int i = 0; i <= 2; i++)
+            {
+                row2 = dt2.NewRow();
+                row2["訂單編號"] = i + 5;
+                row2["品名"] = items[i];
+                row2["客戶編號"] = 1;
+                dt2.Rows.Add(row2);
+            }
+
+            for (int i = 0; i <= 2; i++)
+            {
+                row2 = dt2.NewRow();
+                row2["訂單編號"] = i + 10;
+                row2["品名"] = items[i];
+                row2["客戶編號"] = 2;
+                dt2.Rows.Add(row2);
+            }
+
+            dataGridView1.DataSource = ds;
+            dataGridView1.DataMember = "ParentTable";
+
+            dataGridView2.DataSource = ds;
+            dataGridView2.DataMember = "childTable";
         }
 
         private void button24_Click(object sender, EventArgs e)

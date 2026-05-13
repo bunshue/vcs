@@ -1,5 +1,4 @@
 
-
 建立 Python虛擬環境
 
 Python venv(Virtual Environment)，用於建立及管理虛擬環境，
@@ -1267,20 +1266,6 @@ SN 	函數及描述
 3 	max(list)		從列表中，項目的最大值
 4 	min(list)		從列表中，項目的最小值
 5 	list(seq)		一個元組到列表的轉換
-
-Python中包括下面的列表的方法
-SN 	方法及描述
-1 	list.append(obj)	添加obj對象到列表
-2 	list.count(obj)		計算返回obj出現在列表的次數
-3 	list.extend(seq)	附加序列seq內容到列表
-4 	list.index(obj)		返回列表中出現obj的最小索引
-5 	list.insert(index, obj)	插入obj對象在列表偏移索引位置
-6 	list.pop(obj=list[-1])	移除並返回列表最後一個對象或obj
-7 	list.remove(obj)	從列表中移除obj對象
-8 	list.reverse()		反轉列表的對象
-9 	list.sort([func])	排序列表中的對象，使用func比較（如果給定）
-
-
 
 數據類型轉換：
 函數 			描述
@@ -5119,20 +5104,6 @@ if __name__ == '__main__':
 
 ------------------------------------------------------------
 
-x = [1, 2, 2, 3, 5, 2, 5]
-x.count(2)
-3
-x.count(5)
-2
-x.count(4)
-0
-
-
-保留 -----------------------------------------
-
-
----
-
 你可使用 os.path 和 os 函式庫，尤其是os.path.join()、os.mkdir() 和os.rename()。
 
 ### 20.4.1 ###
@@ -5142,10 +5113,6 @@ create empty zipfile
 for each file
     write into zipfile
     remove original file
-
-### 20.4.2 ###
-
-你可以改書中的範例程式碼，再加上目前月份與檔案月份的核對即可。
 
 ------------------------------------------------------------
 
@@ -5243,15 +5210,6 @@ for i, n in enumerate(x):                               #1
 >>> z = zip(x, y)
 >>> list(z)
 [(1, 'a'), (2, 'b'), (3, 'c')]    #B
-
-
->>> x = [1, 2, 2, 3, 5, 2, 5]
->>> x.count(2)
-3
->>> x.count(5)
-2
->>> x.count(4)
-0
 
 ------------------------------------------------------------
 

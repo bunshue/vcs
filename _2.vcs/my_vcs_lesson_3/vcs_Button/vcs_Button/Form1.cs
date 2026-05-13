@@ -167,6 +167,13 @@ namespace vcs_Button
             btn_word_22.BackgroundImage = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_臨江仙\28夕.jpeg");
             btn_word_23.BackgroundImage = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_臨江仙\29陽.jpeg");
             btn_word_24.BackgroundImage = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_臨江仙\30紅.jpeg");
+
+
+            //6060
+
+            //長按Button離開程式
+            button9.MouseDown += new MouseEventHandler(button_long_click_MouseDown);
+            button9.MouseUp += new MouseEventHandler(button_long_click_MouseUp);
         }
 
         void show_item_location()
@@ -719,6 +726,36 @@ namespace vcs_Button
             {
                 cnt = 0;
             }
+        }
+
+        int long_click = 0;
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //長按Button離開程式
+            richTextBox1.Text += "Click\n";
+        }
+
+        void button_long_click_MouseDown(object sender, MouseEventArgs e)
+        {
+            long_click = 0;
+            timer1.Enabled = true;
+            button9.Text = "0 / 5";
+        }
+
+        void button_long_click_MouseUp(object sender, MouseEventArgs e)
+        {
+            long_click = 0;
+            timer1.Enabled = false;
+            button9.Text = "長按Button離開程式";
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "T ";
+            long_click++;
+            button9.Text = long_click.ToString() + " / 5";
+            if (long_click > 5)
+                Application.Exit();
         }
     }
 }

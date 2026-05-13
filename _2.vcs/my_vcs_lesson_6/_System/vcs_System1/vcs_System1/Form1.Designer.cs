@@ -108,7 +108,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 2;
-            this.button2.Text = "取得目前的Process";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -532,7 +531,7 @@
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(200, 60);
             this.button31.TabIndex = 82;
-            this.button31.Text = "光碟機 開門";
+            this.button31.Text = "光碟機 開/關 門";
             this.button31.UseVisualStyleBackColor = true;
             this.button31.Click += new System.EventHandler(this.button31_Click);
             // 
@@ -543,7 +542,6 @@
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(200, 60);
             this.button32.TabIndex = 83;
-            this.button32.Text = "光碟機 關門";
             this.button32.UseVisualStyleBackColor = true;
             this.button32.Click += new System.EventHandler(this.button32_Click);
             // 

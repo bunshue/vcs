@@ -220,6 +220,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 19;
+            this.button2.Text = "讀入XML文件結構";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -358,6 +359,7 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(200, 60);
             this.button26.TabIndex = 45;
+            this.button26.Text = "讀寫XML Schema範例";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -414,7 +416,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1179, 730);
+            this.ClientSize = new System.Drawing.Size(859, 652);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button29);

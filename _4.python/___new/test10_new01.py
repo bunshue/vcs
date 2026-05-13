@@ -1667,27 +1667,6 @@ my_dict = create_dict(keys, values)
 print(my_dict)  # 輸出: {"apple": 1, "banana": 2, "orange": 3}
 
 print("------------------------------------------------------------")  # 60個
-'''
-
-print("------------------------------------------------------------")  # 60個
-
-lst1 = [x for x in range(10)]
-print(lst1)
-lst2 = [x + 1 for x in range(10)]
-print(lst2)
-lst3 = [x for x in range(10) if x % 2 == 1]
-print(lst3)
-lst4 = [x * 2 for x in range(10) if x % 2 == 1]
-print(lst4)
-
-print("------------------------------------------------------------")  # 60個
-
-d1 = {x: x * x for x in range(10)}
-print(d1)
-d2 = {x: x * x for x in range(10) if x % 2 == 0}
-print(d2)
-
-print("------------------------------------------------------------")  # 60個
 
 # 串列的 count 與 index
 print('用串列的count統計串列元素出現的次數')
@@ -1978,119 +1957,7 @@ while index <= 10:
         continue  # 不往下執行
     print(index)  # 輸出偶數
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-print(bool(0))
-print(bool(""))
-print(bool(" "))
-print(bool(1))
-print(bool("XYZ"))
-
-print("------------------------------------------------------------")  # 60個
-
-str = "{1} * {0} = {2}"
-a = 3
-b = "5"
-print(str.format(a, b, a * int(b)))
-
-print("------------------------------------------------------------")  # 60個
-
-year = 2024
-month = 1
-day = 20
-print("日期：%s-%s-%s" % (year, month, day))
-
-print("------------------------------------------------------------")  # 60個
-
-print("{0:10}收入：{1:_^12}".format("Axel", 52000))
-print("{0:10}收入：{1:>12}".format("Michael", 87000))
-print("{0:10}收入：{1:*<12}".format("May", 36000))
-
-print("------------------------------------------------------------")  # 60個
-
-num = 168
-print("數字 %s 的浮點數：%5.1f" % (num, num))
-
-print("------------------------------------------------------------")  # 60個
-
-print("編號 姓名    底薪  業務獎金 加給補貼")
-print("%3d %3s %6d %6d %6d" % (801, "朱正富", 32000, 10000, 5000))
-print("%3d %3s %6d %6d %6d" % (805, "曾自強", 35000, 8000, 7000))
-print("%3d %3s %6d %6d %6d" % (811, "陳威動", 43000, 15000, 6000))
-
-print("------------------------------------------------------------")  # 60個
-
-print("13579")
-print("1+2")
-print("Hello, how are you?")
-print("I'm all right, but it's raining.")
-print("I'm all right, but it's raining.")
-
-print("------------------------------------------------------------")  # 60個
-
-print(type(23))  # 輸出結果 <class "int">
-print(type(3.14))  # 輸出結果 <class "float">
-print(type("happy birthday"))  # 輸出結果 <class "str">
-print(type(True))  # 輸出結果 <class "bool">
-
-print("------------------------------------------------------------")  # 60個
-
-num1 = 30
-print(num1)
-num1 = "happy"
-print(num1)
-a = b = 12
-print(a, b)
-name, salary, weight = "陳大富", 60000, 85.7
-print(name, salary, weight)
-
-print("------------------------------------------------------------")  # 60個
-
-num = 8
-num *= 9
-print(num)
-num += 1
-print(num)
-num //= 9
-print(num)
-num %= 5
-print(num)
-num -= 2
-print(num)
-
-print("------------------------------------------------------------")  # 60個
-
-a, b, c = 5, 10, 6
-result = a > b and b > c
-# 條件式a>b的傳回值與條件式b>c的傳回值做and運算
-result = a < b or c != a
-# 條件式a<b的傳回值與條件式c!=a的傳回值做or運算
-result = not result
-# 將result的值做not運算
-
-print("------------------------------------------------------------")  # 60個
-
-a, b, c = 3, 5, 7  # 宣告a、b及c三個整數變
-print("a= %d b= %d c= %d" % (a, b, c))
-print("====================================")
-print("a<b and b<c or c<a = %d" % (a < b and b < c or c < a))
-print("not(a==b)and (not a<b) = %d" % (not (a == b) and (not a < b)))
-# 包含關係與邏輯運算子的運算式求值
-
-print("------------------------------------------------------------")  # 60個
-
-b = 13
-print(b << 2)
-print(b >> 1)
-
-print("------------------------------------------------------------")  # 60個
-
-phrase = ["三陽開泰", "事事如意", "五福臨門"]
-for index, x in enumerate(phrase):
-    print("{0}--{1}".format(index, x))
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 for a in range(1, 6):  # 外層for迴圈控制
@@ -2169,6 +2036,8 @@ for j in range(5):
     z = i + j
     print("小寫：%x\t大寫：%X" % (z, z))
 
+
+sys.exit()
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -2210,20 +2079,6 @@ dictStudent = dictStudent.fromkeys(strFieldName.split(","))
 
 isHasKeyAndNotNone()
 """
-print("------------------------------------------------------------")  # 60個
-
-print("\n不足數位補0：%06.2f\n" % (1.2345))
-print("不足數位預設空格：%6.2f\n" % (1.2345))
-print("小數點保留2位：%.2f\n" % (1.2345))
-print("不足數位補0(以*替代)：%0*.2f\n" % (6, 1.2345))
-
-print("------------------------------------------------------------")  # 60個
-
-print("\n不足數位補0：%05d\n" % (66))
-print("不足數位預設空格：%5d\n" % (66))
-print("小於位數則輸出全部：%2d\n" % (666))
-print("不足數位補0(以*替代)：%0*d\n" % (5, 66))
-
 print("------------------------------------------------------------")  # 60個
 
 list1 = ["A", True, 10, 3.14, "G"]
@@ -2372,98 +2227,6 @@ print(f"<鳳>出現的次數 : {msg.count('鳳')}")
 
 print("------------------------------------------------------------")  # 60個
 
-# 串列的 count 與 index
-
-word = [
-    "holiday",
-    "happy",
-    "birth",
-    "yesterday",
-    "holiday",
-    "car",
-    "yellow",
-    "happy",
-    "mobile",
-    "cup",
-    "happy",
-    "holiday",
-    "holiday",
-    "desk",
-    "birth",
-]
-print("holiday 出現的次數", word.count("holiday"))
-
-print("------------------------------------------------------------")  # 60個
-
-# 串列的 count 與 index
-
-word = [
-    "holiday",
-    "happy",
-    "birth",
-    "yesterday",
-    "holiday",
-    "car",
-    "yellow",
-    "happy",
-    "mobile",
-    "cup",
-    "happy",
-    "holiday",
-    "holiday",
-    "desk",
-    "birth",
-]
-search_str = "yellow"
-print("單字 %s 第一次出現的索引值%d" % (search_str, word.index(search_str)))
-
-print("------------------------------------------------------------")  # 60個
-
-# 串列的 count 與 index
-word = [
-    "holiday",
-    "happy",
-    "birth",
-    "yesterday",
-    "holiday",
-    "car",
-    "yellow",
-    "happy",
-    "mobile",
-    "cup",
-    "happy",
-    "holiday",
-    "holiday",
-    "desk",
-    "birth",
-]
-print("holiday 出現的次數", word.count("holiday"))
-
-print("------------------------------------------------------------")  # 60個
-
-# 串列的 count 與 index
-str1 = "do your best what you can do"
-s1 = str1.count("do", 0)
-s2 = str1.count("o", 0, 20)
-print("{}\n「do」出現{}次,「o」出現{}次".format(str1, s1, s2))
-
-print("------------------------------------------------------------")  # 60個
-
-# 串列的 count 與 index
-
-word = "maintenance"
-word.count("n")
-
-len("thunderbolt")
-
-animal = ["cat", "dog", "duck"]
-len(animal)
-
-max(100, 10, 50)
-min(300, 30, 3000)
-
-print("------------------------------------------------------------")  # 60個
-
 
 def getSevSegStr(number, minWidth=0):
     """Return a seven-segment display string of number. The returned
@@ -2555,62 +2318,6 @@ greeting("Nelson")
 # 用help(函數名稱)列出此函數的文件字串
 
 help(greeting)
-
-print("------------------------------------------------------------")  # 60個
-
-# dict01.py
-
-dictBook = {"A001": ["木偶奇遇記", 199], "A002": ["三隻小豬", 120], "A003": ["白雪公主", 99]}
-print(dictBook)
-# 印出 dictBook所有元素
-print("書號A001：", dictBook["A001"])  # 印出dictBook字典鍵A001的值 ["木偶奇遇記", 199]
-print("書號A002：", dictBook["A002"])  # 印出dictBook字典鍵A002的值 ["三隻小豬", 120]
-print("書號A003：", dictBook["A003"])  # 印出dictBook字典鍵A003的值 ["白雪公主", 99]
-
-
-print("------------------------------------------------------------")  # 60個
-
-# dict02.py
-
-tupleBookId = ("A001", "A002", "A003")
-dictBook = {"A001": ["木偶奇遇記", 199], "A002": ["三隻小豬", 120], "A003": ["白雪公主", 99]}
-print("書號\t書名\t單價")
-print("========================")
-
-for key in list(tupleBookId):
-    print(key, end="\t")
-    for col in dictBook[key]:
-        print(col, end="\t")
-    print()
-
-
-print("------------------------------------------------------------")  # 60個
-
-# dict03.py
-
-dictBook = {"A001": ["木偶奇遇記", 199]}
-print("編輯前字典內容：", dictBook)
-
-dictBook["A002"] = ["三隻小豬", 120]
-print("新增後字典內容：", dictBook)
-
-dictBook["A002"] = ["白雪公主", 120]
-print("修改後字典內容：", dictBook)
-
-print("是否有書號A001的書籍：", "A001" in dictBook)
-
-del dictBook["A001"]
-print("刪除後字典內容：", dictBook)
-
-print("是否有書號A001的書籍：", "A001" in dictBook)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 一次改變一個數列
-celsius = [21, 25, 29]
-fahrenheit = [(x * 9 / 5 + 32) for x in celsius]
-print(fahrenheit)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2907,59 +2614,6 @@ for function_name in builtin_functions:
 
 print("------------------------------------------------------------")  # 60個
 
-str1 = "Hello!\nPython"
-print("不含r字元的輸出")
-print(str1)
-str2 = r"Hello!\nPython"
-print("含r字元的輸出 忠實保留雙引號內的資料內容")
-print(str2)
-
-print("------------------------------------------------------------")  # 60個
-
-x = 47.5
-print("以下輸出round(x)函數的應用")
-print("x = ", x)  # 輸出x變數
-print("round(47.5) = ", round(x))  # 輸出round(x)
-
-x = 48.5
-print("x = ", x)  # 輸出x變數
-print("round(48.5) = ", round(x))  # 輸出round(x)
-
-x = 49.5
-print("x = ", x)  # 輸出x變數
-print("round(49.5) = ", round(x))  # 輸出round(x)
-print("以下輸出round(x,n)函數的應用")
-
-x = 2.15
-print("x = ", x)  # 輸出x變數
-print("round(2.15,1) = ", round(x, 1))  # 輸出round(x,1)
-
-x = 2.25
-print("x = ", x)  # 輸出x變數
-print("round(2.25,1) = ", round(x, 1))  # 輸出round(x,1)
-
-x = 2.151
-print("x = ", x)  # 輸出x變數
-print("round(2.151,1) = ", round(x, 1))  # 輸出round(x,1)
-
-x = 2.251
-print("x = ", x)  # 輸出x變數
-print("round(2.251,1) = ", round(x, 1))  # 輸出round(x,1)
-
-print("------------------------------------------------------------")  # 60個
-
-x = 12345678
-print("/%10.1e/" % x)
-print("/%10.2E/" % x)
-print("/%-10.2E/" % x)
-print("/%+10.2E/" % x)
-print("=" * 60)
-string = "abcdefg"
-print("/%10.3s/" % string)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print("置換網址資料")
 url = "https://maps.apis.com/json?city="
 city = "taipei"
@@ -2973,36 +2627,6 @@ my_url = url + f"{city}&radius={r}&type={type_}"
 print(my_url)
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-x = 100
-print("x=/%6d/" % x)
-y = 10.5
-print("y=/%6.2f/" % y)
-s = "Deep"
-print("s=/%6s/" % s)
-print("以下是保留格數空間不足的實例")
-print("x=/%2d/" % x)
-print("y=/%3.2f/" % y)
-print("s=/%2s/" % s)
-
-
-print("------------------------------------------------------------")  # 60個
-
-x = 100
-print("x=/%-8d/" % x)
-y = 10.5
-print("y=/%-8.2f/" % y)
-s = "Deep"
-print("s=/%-8s/" % s)
-
-print("------------------------------------------------------------")  # 60個
-
-x = 10
-print("x=/%+8d/" % x)
-y = 10.5
-print("y=/%+8.2f/" % y)
-
 print("------------------------------------------------------------")  # 60個
 
 print("判斷輸入字元類別")
