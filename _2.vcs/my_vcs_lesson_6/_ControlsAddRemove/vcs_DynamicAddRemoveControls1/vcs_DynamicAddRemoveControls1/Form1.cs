@@ -44,33 +44,40 @@ namespace vcs_DynamicAddRemoveControls1
             //動態產生button並且綁定click事件
             int x_st = 220;
             int y_st = 10;
-            DynamicGenerateButton1(x_st, y_st);
+            DynamicAddControls1(x_st, y_st);
 
             x_st = 600;
             y_st = 10;
-            DynamicGenerateButton2(x_st, y_st);
+            DynamicAddControls2(x_st, y_st);
 
             x_st = 850;
             y_st = 10;
-            DynamicGenerateButton3(x_st, y_st);
+            DynamicAddControls3(x_st, y_st);
 
             x_st = 850;
             y_st = 210;
-            DynamicGenerateButton4(x_st, y_st);
+            DynamicAddControls4(x_st, y_st);
 
             x_st = 220;
             y_st = 610;
-            DynamicGenerateButton5(x_st, y_st);
+            DynamicAddControls5(x_st, y_st);
 
             x_st = 220;
             y_st = 760;
-            DynamicGenerateButton6(x_st, y_st);
+            DynamicAddControls6(x_st, y_st);
 
             x_st = 1120;
             y_st = 10;
-            DynamicGenerateButton7(x_st, y_st);
+            DynamicAddControls7(x_st, y_st);
 
-            //Add_Controls_pictureBox1();//加入控件 pictureBox1
+            x_st = 1320;
+            y_st = 420;
+            DynamicAddControls8(x_st, y_st);
+
+            //動態創建控件和事件 Panel
+            richTextBox1.Text += "在panel1上新增控件於其上\n";
+            DynamicAddControlsOnPanel(panel1);
+
         }
 
         void show_item_location()
@@ -93,20 +100,14 @@ namespace vcs_DynamicAddRemoveControls1
             button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
             button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
 
-            x_st = 10;
-            y_st = 600;
-            dx = 200 + 5;
-            dy = 60 + 5;
-            y_st = 20;
-            button6.BackColor = Color.Orange;
-            button7.BackColor = Color.Orange;
+            y_st = 10;
 
             lb_panel.Location = new Point(1530, y_st + dy * 0);
             panel1.Size = new Size(260, 220);
             panel1.Location = new Point(1530, y_st + dy * 0 + 20);
 
             richTextBox1.Size = new Size(260, 580);
-            richTextBox1.Location = new Point(1530, y_st + dy * 4 - 10);
+            richTextBox1.Location = new Point(1530, y_st + dy * 4 - 20);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1820, 900);
@@ -122,53 +123,9 @@ namespace vcs_DynamicAddRemoveControls1
             richTextBox1.Clear();
         }
 
-        int cnt = 1;
-        private void Form1_MouseDown(object sender, MouseEventArgs e)
-        {
-            Button btn = new Button();
+        //------------------------------------------------------------  # 60個
 
-            //設定新控件的名稱和Text屬性，以及產生的位置
-            btn.Left = e.X;
-            btn.Top = e.Y;
-            btn.Name = "Button " + cnt;
-            btn.Text = "Button" + cnt;
-            btn.Size = new Size(70, 35);
-
-            //為產生的新的Button控件設定事件
-            btn.Click += new EventHandler(btn_ClickEvent1);
-            this.Controls.Add(btn);//將控件加入 到 表單 容器
-
-            richTextBox1.Text += "新增控件 " + btn.Text + "\n";
-            cnt++;
-        }
-
-        private void btn_ClickEvent1(object sender, EventArgs e)
-        {
-            if (sender.GetType() == typeof(Button))
-            {
-                Button btn = (Button)sender;//將觸發此事件的對象轉換為該Button對象
-                richTextBox1.Text += "你按了 " + btn.Text + "\n";
-                richTextBox1.Text += "你按了 " + btn.Name + "\n";
-                /*
-                richTextBox1.Text += "控件種類 : " + sender.ToString() + "\t";
-                richTextBox1.Text += "索引 :  " + btn.TabIndex.ToString() + "\n";
-                */
-            }
-        }
-
-        private void btn_MouseEnter(object sender, EventArgs e)
-        {
-            Button btn = (Button)sender;
-            btn.BackColor = Color.Yellow;  // 設定按鈕的背景色
-        }
-
-        private void btn_MouseLeave(object sender, EventArgs e)
-        {
-            Button btn = (Button)sender;
-            btn.BackColor = Color.FromArgb(55, 65, 85);  // 設定按鈕的背景色
-        }
-
-        private void DynamicGenerateButton1(int x_st, int y_st)
+        private void DynamicAddControls1(int x_st, int y_st)
         {
             int btn_size;
             int w = 60;
@@ -214,25 +171,302 @@ namespace vcs_DynamicAddRemoveControls1
             }
         }
 
-        void Add_Controls_pictureBox1()
+        private void DynamicAddControls2(int x_st, int y_st)
         {
+            int w = 60;
+            int h = 60;
+            int count = 3;
+            Button[] btn = new Button[count];//建立Button物件, 一維Button陣列
+            for (int i = 0; i < count; i++)
+            {
+                btn[i] = new Button();//實體化Button
+                btn[i].Size = new Size(w, h);
+                btn[i].BackColor = Color.Yellow;
+                btn[i].Text = "Dynamic " + i.ToString();
+                btn[i].Name = "btn" + i;
+                //btn[i].AutoSize = true;//true:依文字長度改變大小
+                btn[i].Location = new Point(x_st + 80 * (i % 3), y_st + 80 * (i / 3));
+                btn[i].Font = new Font("微軟正黑體", 12);
+                btn[i].ForeColor = Color.White;
+                btn[i].FlatStyle = FlatStyle.Flat;
+                btn[i].FlatAppearance.BorderColor = Color.FromArgb(255, 65, 85);
+                btn[i].BackColor = Color.FromArgb(55, 65, 85);
+                btn[i].Click += new EventHandler(btn_ClickEvent1);// 加入按鈕事件
+                btn[i].MouseEnter += new EventHandler(btn_MouseEnter);
+                btn[i].MouseLeave += new EventHandler(btn_MouseLeave);
+
+                this.Controls.Add(btn[i]);//將控件加入 到 表單 容器
+            }
+            //this.Controls.AddRange(btn);//將控件批次加入 到 表單 容器
+
+            Button btn2 = new Button();//創建一個新的按鈕
+            btn2.Size = new Size(w, h);
+            btn2.Name = "NNN";
+            btn2.Text = "TTT";
+            btn2.Location = new Point(x_st, y_st + 1 * h);
+            this.Controls.Add(btn2);//將控件加入 到 表單 容器
+
+            y_st += 150;
+
+            int ss = 40;
+            PictureBox pb_new = new PictureBox();
+            pb_new.Size = new Size(ss * 3, ss * 3);
+            pb_new.Left = x_st;
+            pb_new.Top = y_st;
+            pb_new.BackColor = Color.Pink;
+            this.Controls.Add(pb_new);//將控件加入 到 表單 容器
+
+            Button btn3 = new Button();
+            this.Controls.Add(btn3);//將控件加入 到 表單 容器
+            btn3.BringToFront();
+            //btn3.Location = new Point(button10.Location.X, button10.Location.Y + 60);   same
+            btn3.Left = x_st + ss;
+            btn3.Top = y_st + ss;
+            btn3.Size = new Size(ss, ss);
+            btn3.BackColor = Color.Red;
+            btn3.Text = "新增控件";
+            btn3.Click += new EventHandler(btn_ClickEvent1);// 加入按鈕事件
+        }
+
+        private void DynamicAddControls3(int x_st, int y_st)
+        {
+            richTextBox1.Text += "建立新表單並新增控件於其上\n";
+            //當有多個按鈕需要產生時, 如何用loop方式動態產生, 並加入對應的click event
+            //產生一個新的form, 並在該form上面產生MxN組的按鈕
+
+            for (int i = 0; i < m_cols; i++)
+            {
+                for (int j = 0; j < m_rows; j++)
+                {
+                    Button btn = new Button();
+                    this.AcceptButton = btn;
+                    this.Controls.Add(btn);//將控件加入 到 表單 容器
+                    btn.Left = x_st + m_btnWidth * i;
+                    btn.Top = y_st + m_btnHeight * j;
+                    btn.Width = m_btnWidth;
+                    btn.Height = m_btnHeight;
+                    btn.Text = (j + 1).ToString() + ", " + (i + 1).ToString();
+                    btn.Click += new EventHandler(btn_ClickEvent1);// 加入按鈕事件
+                }
+            }
+        }
+
+        private void DynamicAddControls4(int x_st, int y_st)
+        {
+            int w = 60;
+            int h = 60;
+            Button[,] btn = new Button[3, 2];
+            Font font = new Font("微軟正黑體", 12);
+            for (int x = 0; x < btn.GetLength(0); x++)
+            {
+                for (int y = 0; y < btn.GetLength(1); y++)
+                {
+                    btn[x, y] = new Button();
+                    btn[x, y].Size = new Size(w, h);
+                    btn[x, y].Text = "AA";
+                    btn[x, y].Location = new Point(x_st + x * w, y_st + y * h);
+                    btn[x, y].Font = font;
+                    btn[x, y].Name = "( " + x.ToString() + ", " + y.ToString() + ")";
+                    btn[x, y].Click += btn_ClickEvent3;// 加入按鈕事件
+                    this.Controls.Add(btn[x, y]);//將控件加入 到 表單 容器
+                }
+            }
+        }
+
+        private void DynamicAddControls5(int x_st, int y_st)
+        {
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_臨江仙";
+
+            int w = 44;
+            int h = 44;
+            int dx = w + 4;
+            int dy = h + 4;
+
+            // Find the images.
+            int num = 0;
+            foreach (string filename in Directory.GetFiles(foldername, "*.jpeg"))
+            {
+                // Make a new Button.
+                Button btn = new Button();
+                btn.Parent = this;
+                btn.BackgroundImage = new Bitmap(filename);
+                btn.BackgroundImageLayout = ImageLayout.Zoom;
+                btn.Size = new Size(w, h);
+                btn.Location = new Point(x_st + dx * (num % 20), y_st + dy * (num / 20));
+                num++;
+
+                FileInfo file_info = new FileInfo(filename);
+                toolTip1.SetToolTip(btn, file_info.Name);
+            }
+        }
+
+        private void DynamicAddControls6(int x_st, int y_st)
+        {
+            // Display all of the images in the Buttons folder.
+
+            int w = 44;
+            int h = 44;
+            int dx = w + 4;
+            int dy = h + 4;
+
+            // Find the images.
+            int num = 0;
+            foreach (string filename in Directory.GetFiles("Buttons", "*.png"))
+            {
+                // Make a new Button.
+                Button btn = new Button();
+                btn.Parent = this;
+                btn.Image = new Bitmap(filename);
+                btn.Size = new Size(w, h);
+                btn.Location = new Point(x_st + dx * (num % 32), y_st + dy * (num / 32));
+
+                num++;
+
+                FileInfo file_info = new FileInfo(filename);
+                toolTip1.SetToolTip(btn, file_info.Name);
+            }
+        }
+
+
+        Color[] colorSet = { Color.Red, Color.Orange, Color.Yellow, Color.Lime };
+        Label[] new_label = new Label[100];
+
+        private void DynamicAddControls7(int xx, int yy)
+        {
+            Panel panel1 = new Panel();
+            panel1.Size = new Size(400, 400);
+            panel1.BackColor = Color.Pink;
+            panel1.Location = new Point(xx, yy);
+            this.Controls.Add(panel1);//將控件加入 到 表單 容器
+
+            int x_st = 0;
+            int y_st = 0;
+            int W = 45;
+            int H = 45;
+            int dx = W + 5;
+            int dy = H + 5;
+            int not_empty = 0;
+
+            //-----------隨機產生空位
+            Random rand = new Random();
+            not_empty = rand.Next(1, 100);
+
+            richTextBox1.Text += "not_empty = " + not_empty.ToString() + "\n";
+
+            //動態產生元件並指定屬性與事件
+            for (int i = 0; i < new_label.Length; i++)
+            {
+                new_label[i] = new Label();
+                new_label[i].AutoSize = false;//true:依文字長度改變大小, false: 固定大小
+                new_label[i].Name = "label" + i.ToString();
+                new_label[i].Text = (i + 1).ToString();
+                new_label[i].MouseHover += MouseHover_Handler;
+                new_label[i].MouseLeave += MouseLeave_Handler;
+                new_label[i].Click += btn_ClickEvent2;// 加入按鈕事件
+                new_label[i].Location = new Point(x_st, y_st);
+                new_label[i].Size = new Size(W, H);
+                if (i > not_empty)  //空位
+                {
+                    new_label[i].Tag = "sample : " + i.ToString() + " is " + "empty";
+                    new_label[i].BackColor = Color.Gray;
+                }
+                else
+                {
+                    new_label[i].Tag = "sample : " + i.ToString() + " is " + "red";
+                    new_label[i].BackColor = Color.Red;
+                }
+                //this.Controls.Add(new_label[i]);//將控件加入 到 表單 容器
+                panel1.Controls.Add(new_label[i]);//將控件加入 到 panel1 容器
+                x_st += dx;
+
+                if ((i % 10) == 9)
+                {
+                    x_st = 0;
+                    y_st += dy;
+                }
+            }
+        }
+
+        private void DynamicAddControls8(int x_st, int y_st)
+        {
+            //動態加入控件 Controls.Add()
+
+            Label myLabel = new Label();
+            myLabel.Text = "Sample Label";
+            Panel pp = new Panel();
+            pp.Controls.Add(myLabel);
+            pp.BackColor = Color.Red;
+            pp.BringToFront();
+            pp.Size = new Size(150, 100);
+            pp.Location = new Point(x_st, y_st);
+            this.Controls.Add(pp);//將控件加入 到 表單 容器
+
+            y_st += 120;
+
             // 實例化按鈕
             label1.Text = "動態加入pictureBox1";
             label1.AutoSize = true;
-            label1.Left = 220;
-            label1.Top = 445;
+            label1.Left = x_st;
+            label1.Top = y_st;
             this.Controls.Add(label1);//將控件加入 到 表單 容器
 
-            pictureBox1.Size = new Size(340, 370);
+            y_st += 30;
+            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox1.Size = new Size(150, 100);
             pictureBox1.BackColor = Color.Pink;
-
-            pictureBox1.Left = 220;
-            pictureBox1.Top = 470;
-
+            pictureBox1.Left = x_st;
+            pictureBox1.Top = y_st;
             pictureBox1.Tag = "dynamic";
 
             //this.AcceptButton = pictureBox1;
             this.Controls.Add(pictureBox1);//將控件加入 到 表單 容器
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        int cnt = 1;
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            Button btn = new Button();
+
+            //設定新控件的名稱和Text屬性，以及產生的位置
+            btn.Left = e.X;
+            btn.Top = e.Y;
+            btn.Name = "Button " + cnt;
+            btn.Text = "Button" + cnt;
+            btn.Size = new Size(70, 35);
+
+            //為產生的新的Button控件設定事件
+            btn.Click += new EventHandler(btn_ClickEvent1);
+            this.Controls.Add(btn);//將控件加入 到 表單 容器
+
+            richTextBox1.Text += "新增控件 " + btn.Text + "\n";
+            cnt++;
+        }
+
+        private void btn_ClickEvent1(object sender, EventArgs e)
+        {
+            if (sender.GetType() == typeof(Button))
+            {
+                Button btn = (Button)sender;//將觸發此事件的對象轉換為該Button對象
+                richTextBox1.Text += "你按了 " + btn.Text + "\t" + btn.Name + "\n";
+                /*
+                richTextBox1.Text += "控件種類 : " + sender.ToString() + "\t";
+                richTextBox1.Text += "索引 :  " + btn.TabIndex.ToString() + "\n";
+                */
+            }
+        }
+
+        private void btn_MouseEnter(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            btn.BackColor = Color.Yellow;  // 設定按鈕的背景色
+        }
+
+        private void btn_MouseLeave(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            btn.BackColor = Color.FromArgb(55, 65, 85);  // 設定按鈕的背景色
         }
 
         private void btn_ClickEvent4(object sender, EventArgs e)
@@ -290,7 +524,7 @@ namespace vcs_DynamicAddRemoveControls1
             //動態產生button並且綁定click事件
             int x_st = 220;
             int y_st = 10;
-            DynamicGenerateButton1(x_st, y_st);
+            DynamicAddControls1(x_st, y_st);
 
             foreach (Control con in this.Controls)
             {
@@ -534,9 +768,9 @@ namespace vcs_DynamicAddRemoveControls1
 
             foreach (Control con in this.Controls)
             {
-                System.String strControl = con.GetType().ToString();//获得控件的类型
-                System.String strControlName = con.Name.ToString();//获得控件的名称
-                //System.String strControlTag = con.Tag.ToString();//获得控件的標籤, 不能用此, 因為不一定有Tag可以ToString
+                System.String strControl = con.GetType().ToString();  // 获得控件的类型
+                System.String strControlName = con.Name.ToString();  // 获得控件的名称
+                //System.String strControlTag = con.Tag.ToString();  // 获得控件的標籤, 不能用此, 因為不一定有Tag可以ToString
 
                 //richTextBox1.Text += "Type:\t" + strControl + "\tName:\t" + strControlName + "\tColor:\t" + con.BackColor + "\n";
                 //if (strControlTag == "dynamic")
@@ -567,136 +801,22 @@ namespace vcs_DynamicAddRemoveControls1
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //動態創建控件和事件8 NewForm
+            //動態創建控件和事件9 NewForm
             int x_st = 100;
             int y_st = 100;
-            DynamicGenerateButton8(x_st, y_st);
+            DynamicAddControls9(x_st, y_st);
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //動態創建控件和事件 Panel
-            richTextBox1.Text += "在panel1上新增控件於其上\n";
-            DynamicGenerateButtonOnPanel(panel1);
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //動態移除控件和事件 Panel
-            richTextBox1.Text += "移除panel1上的控件\n";
-            DynamicRemoveButtonOnPanel(panel1);
-        }
-
-        private void DynamicGenerateButton2(int x_st, int y_st)
-        {
-            int w = 60;
-            int h = 60;
-            int count = 3;
-            Button[] btn = new Button[count];//建立Button物件, 一維Button陣列
-            for (int i = 0; i < count; i++)
-            {
-                btn[i] = new Button();//實體化Button
-                btn[i].Size = new Size(w, h);
-                btn[i].BackColor = Color.Yellow;
-                btn[i].Text = "Dynamic " + i.ToString();
-                btn[i].Name = "btn" + i;
-                //btn[i].AutoSize = true;//true:依文字長度改變大小
-                btn[i].Location = new Point(x_st + 80 * (i % 3), y_st + 80 * (i / 3));
-                btn[i].Font = new Font("微軟正黑體", 12);
-                btn[i].ForeColor = Color.White;
-                btn[i].FlatStyle = FlatStyle.Flat;
-                btn[i].FlatAppearance.BorderColor = Color.FromArgb(255, 65, 85);
-                btn[i].BackColor = Color.FromArgb(55, 65, 85);
-                btn[i].Click += new EventHandler(btn_ClickEvent1);// 加入按鈕事件
-                btn[i].MouseEnter += new EventHandler(btn_MouseEnter);
-                btn[i].MouseLeave += new EventHandler(btn_MouseLeave);
-
-                this.Controls.Add(btn[i]);//將控件加入 到 表單 容器
-            }
-            //this.Controls.AddRange(btn);//將控件批次加入 到 表單 容器
-
-            Button btn2 = new Button();//創建一個新的按鈕
-            btn2.Size = new Size(w, h);
-            btn2.Name = "NNN";
-            btn2.Text = "TTT";
-            btn2.Location = new Point(x_st, y_st + 1 * h);
-            this.Controls.Add(btn2);//將控件加入 到 表單 容器
-
-            y_st += 150;
-
-            int ss = 40;
-            PictureBox pb_new = new PictureBox();
-            pb_new.Size = new Size(ss * 3, ss * 3);
-            pb_new.Left = x_st;
-            pb_new.Top = y_st;
-            pb_new.BackColor = Color.Pink;
-            this.Controls.Add(pb_new);//將控件加入 到 表單 容器
-
-            Button bt_new = new Button();
-            this.Controls.Add(bt_new);//將控件加入 到 表單 容器
-            bt_new.BringToFront();
-            //bt_new.Location = new Point(button10.Location.X, button10.Location.Y + 60);   same
-            bt_new.Left = x_st + ss;
-            bt_new.Top = y_st + ss;
-            bt_new.Size = new Size(ss, ss);
-            bt_new.BackColor = Color.Red;
-            bt_new.Text = "新增控件";
-            bt_new.Click += new EventHandler(btn_ClickEvent1);// 加入按鈕事件
-
-            y_st += 150;
-            w = 60;
-            h = 60;
-            for (int i = 0; i < 3; i++)
-            {
-                Button btn3 = new Button();
-                btn3.Size = new Size(w, h);
-                btn3.Text = i.ToString();
-                btn3.Location = new Point(x_st + w * i, y_st);
-                btn3.Click += btn_ClickEvent1;// 加入按鈕事件
-                this.Controls.Add(btn3);//將控件加入 到 表單 容器
-            }
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //動態加入控制項( Controls.Add() )
-
-            Label myLabel = new Label();
-            myLabel.Text = "Sample Label";
-
-            Panel pp = new Panel();
-            pp.Controls.Add(myLabel);
-            pp.BackColor = Color.Red;
-            pp.BringToFront();
-            pp.Location = new Point(600, 300);
-
-            this.Controls.Add(pp);//將控件加入 到 表單 容器
-        }
-
-        private void DynamicGenerateButton3(int x_st, int y_st)
-        {
-            richTextBox1.Text += "建立新表單並新增控件於其上\n";
-            //當有多個按鈕需要產生時, 如何用loop方式動態產生, 並加入對應的click event
-            //產生一個新的form, 並在該form上面產生MxN組的按鈕
-
-            int i;
-            int j;
-
-            for (i = 0; i < m_cols; i++)
-            {
-                for (j = 0; j < m_rows; j++)
-                {
-                    Button btn = new Button();
-                    this.AcceptButton = btn;
-                    this.Controls.Add(btn);//將控件加入 到 表單 容器
-                    btn.Left = x_st + m_btnWidth * i;
-                    btn.Top = y_st + m_btnHeight * j;
-                    btn.Width = m_btnWidth;
-                    btn.Height = m_btnHeight;
-                    btn.Text = (j + 1).ToString() + ", " + (i + 1).ToString();
-                    btn.Click += new EventHandler(btn_ClickEvent1);// 加入按鈕事件
-                }
-            }
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -704,28 +824,11 @@ namespace vcs_DynamicAddRemoveControls1
             //移除控件
             //this.Controls.Remove(myButton); // 移除特定控制項
             this.Controls.Clear();          // 清空容器內所有控制項
-        }
 
-        private void DynamicGenerateButton4(int x_st, int y_st)
-        {
-            int w = 60;
-            int h = 60;
-            Button[,] btn = new Button[3, 2];
-            Font font = new Font("微軟正黑體", 12);
-            for (int x = 0; x < btn.GetLength(0); x++)
-            {
-                for (int y = 0; y < btn.GetLength(1); y++)
-                {
-                    btn[x, y] = new Button();
-                    btn[x, y].Size = new Size(w, h);
-                    btn[x, y].Text = "AA";
-                    btn[x, y].Location = new Point(x_st + x * w, y_st + y * h);
-                    btn[x, y].Font = font;
-                    btn[x, y].Name = "( " + x.ToString() + ", " + y.ToString() + ")";
-                    btn[x, y].Click += btn_ClickEvent3;// 加入按鈕事件
-                    this.Controls.Add(btn[x, y]);//將控件加入 到 表單 容器
-                }
-            }
+
+            //動態移除控件和事件 Panel
+            richTextBox1.Text += "移除panel1上的控件\n";
+            DynamicRemoveButtonOnPanel(panel1);
         }
 
         private void btn_ClickEvent3(object sender, EventArgs e)
@@ -798,92 +901,6 @@ namespace vcs_DynamicAddRemoveControls1
             button11.Enabled = false;
         }
 
-        private void DynamicGenerateButton6(int x_st, int y_st)
-        {
-            // Display all of the images in the Buttons folder.
-
-            int w = 44;
-            int h = 44;
-            int dx = w + 4;
-            int dy = h + 4;
-
-            // Find the images.
-            int num = 0;
-            foreach (string filename in Directory.GetFiles("Buttons", "*.png"))
-            {
-                // Make a new Button.
-                Button btn = new Button();
-                btn.Parent = this;
-                btn.Image = new Bitmap(filename);
-                btn.Size = new Size(w, h);
-                btn.Location = new Point(x_st + dx * (num % 32), y_st + dy * (num / 32));
-
-                num++;
-
-                FileInfo file_info = new FileInfo(filename);
-                toolTip1.SetToolTip(btn, file_info.Name);
-            }
-        }
-
-        Color[] colorSet = { Color.Red, Color.Orange, Color.Yellow, Color.Lime };
-        Label[] new_label = new Label[100];
-
-        private void DynamicGenerateButton7(int xx, int yy)
-        {
-            Panel panel1 = new Panel();
-            panel1.Size = new Size(400, 400);
-            panel1.BackColor = Color.Pink;
-            panel1.Location = new Point(xx, yy);
-            this.Controls.Add(panel1);//將控件加入 到 表單 容器
-
-            int x_st = 0;
-            int y_st = 0;
-            int W = 45;
-            int H = 45;
-            int dx = W + 5;
-            int dy = H + 5;
-            int not_empty = 0;
-
-            //-----------隨機產生空位
-            Random rand = new Random();
-            not_empty = rand.Next(1, 100);
-
-            richTextBox1.Text += "not_empty = " + not_empty.ToString() + "\n";
-
-            //動態產生元件並指定屬性與事件
-            for (int i = 0; i < new_label.Length; i++)
-            {
-                new_label[i] = new Label();
-                new_label[i].AutoSize = false;//true:依文字長度改變大小, false: 固定大小
-                new_label[i].Name = "label" + i.ToString();
-                new_label[i].Text = (i + 1).ToString();
-                new_label[i].MouseHover += MouseHover_Handler;
-                new_label[i].MouseLeave += MouseLeave_Handler;
-                new_label[i].Click += btn_ClickEvent2;// 加入按鈕事件
-                new_label[i].Location = new Point(x_st, y_st);
-                new_label[i].Size = new Size(W, H);
-                if (i > not_empty)  //空位
-                {
-                    new_label[i].Tag = "sample : " + i.ToString() + " is " + "empty";
-                    new_label[i].BackColor = Color.Gray;
-                }
-                else
-                {
-                    new_label[i].Tag = "sample : " + i.ToString() + " is " + "red";
-                    new_label[i].BackColor = Color.Red;
-                }
-                //this.Controls.Add(new_label[i]);//將控件加入 到 表單 容器
-                panel1.Controls.Add(new_label[i]);//將控件加入 到 panel1 容器
-                x_st += dx;
-
-                if ((i % 10) == 9)
-                {
-                    x_st = 0;
-                    y_st += dy;
-                }
-            }
-        }
-
         private void MouseHover_Handler(object sender, EventArgs e)
         {
             //Application.DoEvents();
@@ -943,41 +960,15 @@ namespace vcs_DynamicAddRemoveControls1
             }
         }
 
-        private void DynamicGenerateButton5(int x_st, int y_st)
-        {
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_臨江仙";
+        //------------------------------------------------------------  # 60個
 
-            int w = 44;
-            int h = 44;
-            int dx = w + 4;
-            int dy = h + 4;
-
-            // Find the images.
-            int num = 0;
-            foreach (string filename in Directory.GetFiles(foldername, "*.jpeg"))
-            {
-                // Make a new Button.
-                Button btn = new Button();
-                btn.Parent = this;
-                btn.BackgroundImage = new Bitmap(filename);
-                btn.BackgroundImageLayout = ImageLayout.Zoom;
-                btn.Size = new Size(w, h);
-                btn.Location = new Point(x_st + dx * (num % 20), y_st + dy * (num / 20));
-                num++;
-
-                FileInfo file_info = new FileInfo(filename);
-                toolTip1.SetToolTip(btn, file_info.Name);
-            }
-        }
-
-        //groupBox3的
         //C# 動態產生或移除多組按鈕
         int m_cols = 4;
         int m_rows = 3;
         int m_btnWidth = 50;
         int m_btnHeight = 50;
 
-        private void DynamicGenerateButton8(int x_st, int y_st)
+        private void DynamicAddControls9(int x_st, int y_st)
         {
             richTextBox1.Text += "建立新表單並新增控件於其上\n";
             //當有多個按鈕需要產生時, 如何用loop方式動態產生, 並加入對應的click event
@@ -1004,15 +995,12 @@ namespace vcs_DynamicAddRemoveControls1
         }
 
         //指派一個panel, 在該panels上面產生MxN組的按鈕
-        public void DynamicGenerateButtonOnPanel(Panel panel)
+        public void DynamicAddControlsOnPanel(Panel panel)
         {
-            int i;
-            int j;
-
             DynamicRemoveButtonOnPanel(panel);
-            for (i = 0; i < m_cols; i++)
+            for (int i = 0; i < m_cols; i++)
             {
-                for (j = 0; j < m_rows; j++)
+                for (int j = 0; j < m_rows; j++)
                 {
                     Button btn = new Button();
                     panel.Controls.Add(btn);
@@ -1025,6 +1013,8 @@ namespace vcs_DynamicAddRemoveControls1
                 }
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
@@ -1071,6 +1061,10 @@ namespace vcs_DynamicAddRemoveControls1
             x_st = 1120 - 20;
             y_st = 10;
             e.Graphics.DrawString("7", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st, y_st));
+
+            x_st = 1320 - 20;
+            y_st = 420;
+            e.Graphics.DrawString("8", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st, y_st));
         }
     }
 }
@@ -1125,5 +1119,7 @@ myButton.BringToFront() 或 myButton.SendToBack() 調整。
             tb4.Name = "tb4";
             tb4.Location = new Point(10, 10);
             this.panel1.Controls.Add(tb4)
-
 */
+
+// DynamicAddControls1(x_st, y_st);
+

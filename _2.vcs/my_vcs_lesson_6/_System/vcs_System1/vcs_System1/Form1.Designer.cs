@@ -691,6 +691,7 @@
             this.button46.Name = "button46";
             this.button46.Size = new System.Drawing.Size(200, 60);
             this.button46.TabIndex = 97;
+            this.button46.Text = "使用Class取得系統資訊";
             this.button46.UseVisualStyleBackColor = true;
             this.button46.Click += new System.EventHandler(this.button46_Click);
             // 

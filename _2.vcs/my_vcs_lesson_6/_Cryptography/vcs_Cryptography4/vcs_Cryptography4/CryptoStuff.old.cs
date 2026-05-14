@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 using System.IO;
 using System.Security;
 using System.Security.Cryptography;
 using System.Diagnostics;
+using System.Linq;
 
-namespace vcs_Crypto
+namespace CryptoStuffNamespace
 {
     static class CryptoStuff
     {
@@ -124,6 +124,7 @@ namespace vcs_Crypto
         {
             // Make an AES service provider.
             AesCryptoServiceProvider aes_provider = new AesCryptoServiceProvider();
+            //aes_provider.Padding = PaddingMode.Zeros;
 
             // Find a valid key size for this provider.
             int key_size_bits = 0;

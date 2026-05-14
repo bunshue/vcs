@@ -12,6 +12,15 @@ using System.Security.Cryptography;  // for RijndaelManaged
 
 //文件校驗工具的開發及問題，校驗工具開發
 
+using CryptoStuffNamespace;
+
+/*
+    明碼 clear code
+    密碼 password
+    明碼經使用密碼編碼後 Ciphertext
+    編碼經使用密碼解密後 Deciphered
+*/
+
 namespace vcs_Cryptography4
 {
     public partial class Form1 : Form
@@ -34,12 +43,46 @@ namespace vcs_Cryptography4
             int dx = 200 + 10;
             int dy = 60 + 10;
 
-            this.Size = new Size(1300, 720);
+            groupBox1.Size = new Size(1100, 180);
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            groupBox6.Size = new Size(1100, 300);
+            groupBox6.Location = new Point(x_st + dx * 0, y_st + dy * 3-30);
+            groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            groupBox3.Location = new Point(x_st + dx * 0, y_st + dy * 9+30);
+            groupBox4.Location = new Point(x_st + dx * 1+80, y_st + dy * 7);
+            groupBox5.Location = new Point(x_st + dx * 2+70, y_st + dy * 7);
+
+            richTextBox1.Size = new Size(400, 600);
+            richTextBox1.Location = new Point(x_st + dx * 5+100, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+
+            x_st = 20;
+            y_st = 20;
+            dx = 180;
+            dy = 50;
+            richTextBox_rot13a.Size = new Size(350, 150);
+            richTextBox_rot13b.Size = new Size(350, 150);
+            richTextBox_rot13c.Size = new Size(350, 150);
+            richTextBox_rot13a.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            richTextBox_rot13b.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            richTextBox_rot13c.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 2-50, y_st + dy * 1 + 60);
+            button2.Location = new Point(x_st + dx * 4-50, y_st + dy * 1 + 60);
+            button1.BringToFront();
+            button2.BringToFront();
+
+            this.Size = new Size(1600, 900);
             this.Text = "vcs_Cryptography2_SHA1";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         public string ROT13Encode(string InputText)
@@ -453,6 +496,64 @@ namespace vcs_Cryptography4
             {
                 MessageBox.Show(ex.Message, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            string clear_code = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; //明碼
+            string password = "SecretPassword";         //密碼
+            string encrypted = "0D BC 23 DF 7B 43 58 28 1C BC 83 B8 97 45 DB 7A 9D A4 A7 E5 4C 68 C3 09 65 83 29 08 EA 32 A3 69";         //明碼經使用密碼編碼後的編碼
+            byte[] bytes;
+            byte[] ciphertext;
+            string result1;
+            string result2;
+
+            richTextBox1.Text += "明碼 : \t" + clear_code + "\n";
+            richTextBox1.Text += "密碼 : \t" + password + "\n";
+            richTextBox1.Text += "編碼 : \t" + encrypted + "\n";
+
+            // Encrypt the text. 加密
+            bytes = clear_code.Encrypt(password);
+            result1 = bytes.ToHex();
+            richTextBox1.Text += "明碼經使用密碼加密後 : \t" + result1 + "\n";
+
+            // Decrypt the text. 解密
+            ciphertext = encrypted.ToBytes();
+            result2 = ciphertext.Decrypt(password);
+            richTextBox1.Text += "編碼經使用密碼解密後 : \t" + result2 + "\n";
+
+            clear_code = tb_clear_code.Text;
+            password = tb_password.Text;
+            richTextBox1.Text += "明碼 : \t" + clear_code + "\n";
+            richTextBox1.Text += "密碼 : \t" + password + "\n";
+            // Encrypt the text. 加密
+            bytes = clear_code.Encrypt(password);
+            result1 = bytes.ToHex();
+            richTextBox1.Text += "明碼經使用密碼加密後 : \t" + result1 + "\n";
+            tb_encrypted.Text = result1;
+            encrypted = result1;
+
+            richTextBox1.Text += "編碼 : \t" + encrypted + "\n";
+            // Decrypt the text. 解密
+            ciphertext = encrypted.ToBytes();
+            result2 = ciphertext.Decrypt(password);
+            richTextBox1.Text += "編碼經使用密碼解密後 : \t" + result2 + "\n";
+            tb_decrypted.Text = result2;
+
+        }
+
+        // Encrypt the text.
+        private void btnEncrypt_Click(object sender, EventArgs e)
+        {
+            byte[] bytes = tb_clear_code.Text.Encrypt(tb_password.Text);
+            tb_encrypted.Text = bytes.ToHex();
+        }
+
+        // Decrypt the text.
+        private void btnDecrypt_Click(object sender, EventArgs e)
+        {
+            byte[] ciphertext = tb_encrypted.Text.ToBytes();
+            tb_decrypted.Text = ciphertext.Decrypt(tb_password.Text);
         }
     }
 }

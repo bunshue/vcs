@@ -736,6 +736,38 @@ namespace vcs_SqlConnection1
 
         private void button6_Click(object sender, EventArgs e)
         {
+            // 十二生肖整理3
+            // 資料庫檔案
+            db_filename = "animals2_db.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM animals2_table";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "十二生肖全部資料";
+
+            // 資料庫檔案
+            db_filename = "db_10_Data.MDF";
+            // 查詢字串, 查詢邏輯型數據, 查詢是否為國家統招學生
+            string select_type = "是";  // "是/否"
+            sqlstr = "SELECT * FROM tb_08 WHERE 統招否='" + select_type + "'";
+
+
+
+            //待測試
+            //查詢銷售量占前50%的圖書訊息
+            //sqlstr = "SELECT TOP 50 percent 書號, 書名, SUM(銷售數量) AS 合計銷售數量 FROM tb_xsb GROUP BY 書號, 書名, 作者 ORDER BY 3 DESC";
+            //取出數據統計結果後10名數據//設定統計查詢的SQL語句
+            //sqlstr = "SELECT TOP 10 書號, 書名, SUM(銷售數量) AS 合計銷售數量 FROM tb_xsb GROUP BY 書號, 書名, 作者 ORDER BY 3 ASC";
+
+            // 查詢字串, 欄名使用別名AS
+            //sqlstr = "SELECT DISTINCT 所屬部門, COUNT(*) AS 部門人數, MAX(基本工資) AS 最高工資, AVG(基本工資) AS 平均工資 FROM 部門工資統計表 GROUP BY 所屬部門 HAVING (AVG(基本工資) > 1000)";
+
+
+
+
+
+
+
+
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -743,16 +775,13 @@ namespace vcs_SqlConnection1
             // 基礎聚合函數(Aggregate Functions), 數量COUNT()、總和SUM()、最大MAX()、最小MIN()、平均AVG()
             // 某一欄資料處理 COUNT SUM AVG MAX MIN, 使用 ExecuteScalar()
 
-            // 一次執行多個 基礎聚合函數(Aggregate Functions)
-            //sqlstr = "SELECT COUNT(*), MAX(體重), AVG(體重) FROM animals2_table";
-
             // 資料庫檔案
             db_filename = "animals2_db.mdf";
             // 查詢字串
             sqlstr = "SELECT * FROM animals2_table";
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "十二生肖全部資料";
-            /*
+
             // 查詢字串, 數量COUNT()
             sqlstr = "SELECT COUNT(*) FROM animals2_table";
             obj = sql_get_database_data(db_filename, sqlstr);
@@ -778,12 +807,16 @@ namespace vcs_SqlConnection1
             obj = sql_get_database_data(db_filename, sqlstr);
             richTextBox1.Text += "平均 :\t" + obj.ToString() + "\n";
 
-            // 查詢字串, 欄名使用別名AS
+            // 查詢字串, 欄名使用別名AS, 一次執行多個 基礎聚合函數(Aggregate Functions)
             sqlstr = "SELECT * FROM animals2_table";
             sqlstr = "SELECT COUNT(*) AS 個數, SUM(體重) AS 總重, ROUND(AVG(體重), 2) AS 平均, MAX(體重) AS 最大, MIN(體重) AS 最小 FROM animals2_table";
-
             sql_read_database(db_filename, sqlstr, dataGridView2);
-            lb_dgv2.Text = "十二生肖全部資料";
+            lb_dgv2.Text = "一次執行多個 基礎聚合函數";
+
+            // 查詢字串, 體重 最大值 那列資料
+            sqlstr = "SELECT * FROM animals2_table WHERE 體重 IN(SELECT MAX(體重) FROM animals2_table)";
+            sql_read_database(db_filename, sqlstr, dataGridView3);
+            lb_dgv3.Text = "體重 最大值 那列資料 animals2_table";
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
@@ -802,147 +835,21 @@ namespace vcs_SqlConnection1
             obj = sql_get_database_data(db_filename, sqlstr);
             richTextBox1.Text += "共 " + obj.ToString() + " 筆記錄c\n";
 
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-            */
-
-            /*
-            // 資料庫檔案
-            db_filename = "db_10_Data.MDF";
-            // 連接字串
-            cnstr = string.Format(db_cnstr, db_filename);
-            // 查詢字串
-            sqlstr = "SELECT * FROM tb_sell";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //利用聚合函數MIN求銷售額、利潤最少的商品
-
-            // 資料庫檔案
-            db_filename = "db_10_Data.MDF";
-            // 連接字串
-            cnstr = string.Format(db_cnstr, db_filename);
-
+            // 待加入
             // 查詢字串, 查詢銷售額最少的商品訊息
-            sqlstr = "SELECT * FROM tb_sell WHERE 銷價 IN(SELECT MIN(銷價) FROM tb_sell)";
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-
+            // sqlstr = "SELECT * FROM tb_sell WHERE 銷價 IN(SELECT MIN(銷價) FROM tb_sell)";
             // 查詢字串, 查詢利潤最少的商品訊息
-            sqlstr = "SELECT * FROM tb_sell WHERE 利潤 IN(SELECT MIN(利潤) FROM tb_sell)";
-            sql_read_database(db_filename, sqlstr, dataGridView3);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //利用聚合函數COUNT求日銷售額大於某值的商品數
-
-            // 資料庫檔案
-            db_filename = "db_10_Data.MDF";
-            // 連接字串
-            cnstr = string.Format(db_cnstr, db_filename);
+            // sqlstr = "SELECT * FROM tb_sell WHERE 利潤 IN(SELECT MIN(利潤) FROM tb_sell)";
             // 查詢字串, 欄名使用別名AS
-            sqlstr = "SELECT COUNT(DISTINCT 日期) AS 商品數 FROM tb_sell WHERE 銷價>500";
-
-            obj = sql_get_database_data(db_filename, sqlstr);
-            richTextBox1.Text += "查詢日銷售額大於５００的銷售商品種數 : " + obj.ToString() + "\n";
-            */
+            // sqlstr = "SELECT COUNT(DISTINCT 日期) AS 商品數 FROM tb_sell WHERE 銷價>500";
+            // obj = sql_get_database_data(db_filename, sqlstr);
+            // richTextBox1.Text += "查詢日銷售額大於５００的銷售商品種數 : " + obj.ToString() + "\n";
+            // 基礎聚合函數（COUNT()、SUM()、AVG()、MAX()、MIN()）
+            // SELECT COUNT(*) AS total_orders FROM animals2_table WHERE create_time BETWEEN '2025-06-01' AND '2025-06-30';
+            // SELECT COUNT(*) AS valid_orders FROM animals2_table WHERE order_status IN ('已支付', '已完成') AND create_time BETWEEN '2025-06-01' AND '2025-06-30';
+            // SELECT COUNT(*) AS total_orders FROM animals2_table;
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-            /*
-            // 資料庫檔案
-            db_filename = "db_10_Data.MDF";
-            // 查詢字串
-            sqlstr = "SELECT * FROM tb_sellInfo";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "全部資料 tb_sellInfo";
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            // 查詢字串
-            sqlstr = "SELECT MAX(銷售額) FROM tb_sellInfo";
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-            lb_dgv2.Text = "銷售額 最大值 tb_sellInfo";
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //利用聚合函數MAX()求月銷售額完成最多的員工
-            //查詢銷售額最多的員工及相關訊息
-            // 查詢字串, 銷售額 最大值 那列資料
-            sqlstr = "SELECT * FROM tb_sellInfo WHERE 銷售額 IN(SELECT MAX(銷售額) FROM tb_sellInfo)";
-            sql_read_database(db_filename, sqlstr, dataGridView3);
-            lb_dgv3.Text = "銷售額 最大值 那列資料 tb_sellInfo";
-
-            //------------------------------------------------------------  # 60個
-            */
-            // 資料庫檔案
-            db_filename = "db_10_Data.MDF";
-            // 查詢字串
-            sqlstr = "SELECT * FROM tb_xsb";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "全部資料 tb_xsb";
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            // 對統計結果進行排序
-            // 查詢字串, 銷售數量前五名的書籍按降序排序, 欄名使用別名AS
-            sqlstr = "SELECT TOP 5 書號, 書名, 作者, 出版社, SUM(銷售數量) AS 合計銷售數量 FROM tb_xsb GROUP BY 書號, 書名, 作者, 出版社 ORDER BY 5 DESC";
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            // 對數據進行多條件排序
-            // 查詢字串, 按序號升序排序並日期降序排序
-            sqlstr = "SELECT DISTINCT 書號, 書名, 作者, 銷售數量, 日期 FROM tb_xsb ORDER BY 書號 ASC, 日期 DESC";
-            sql_read_database(db_filename, sqlstr, dataGridView3);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            // 列出數據中的重複記錄和記錄條數
-            // 查詢字串, 查詢已銷售圖書情況, 欄名使用別名AS
-            sqlstr = "SELECT COUNT(書號) AS 記錄條數, 書號, 書名, 作者 FROM tb_xsb GROUP BY 書號, 書名, 作者 Having COUNT(書號)>1";
-            sql_read_database(db_filename, sqlstr, dataGridView4);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //查詢銷售量占前50%的圖書訊息
-            // 查詢字串, 欄名使用別名AS
-            sqlstr = "SELECT TOP 50 percent 書號, 書名, SUM(銷售數量) AS 合計銷售數量 FROM tb_xsb GROUP BY 書號, 書名, 作者 ORDER BY 3 DESC";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //取出數據統計結果後10名數據//設定統計查詢的SQL語句
-            // 查詢字串, 欄名使用別名AS
-            sqlstr = "SELECT TOP 10 書號, 書名, SUM(銷售數量) AS 合計銷售數量 FROM tb_xsb GROUP BY 書號, 書名, 作者 ORDER BY 3 ASC";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-            /*
-            // 資料庫檔案
-            db_filename = "db_10_Data.MDF";
-            // 查詢字串
-            sqlstr = "SELECT DISTINCT 書號, 條形碼, 書名, 作者, 出版社 FROM tb_xsb";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            */
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //查詢時不顯示重複記錄
-            //查詢已銷售圖書情況
-
-            // 查詢字串
-            sqlstr = "SELECT DISTINCT 書號, 條形碼, 書名, 作者, 出版社 FROM tb_xsb";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-            /*
-            //數據分組統計（單列）
-            //庫存圖書按出版社統計圖書庫存金額，並按金額降序排序。
-            // 資料庫檔案
-            db_filename = "db_10_Data.MDF";
-            // 查詢字串, 欄名使用別名AS
-            sqlstr = "SELECT 出版社, SUM(金額) AS 合計金額 FROM tb_xsb GROUP BY 出版社 ORDER BY 2 DESC";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            */
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -1705,64 +1612,6 @@ namespace vcs_SqlConnection1
 
         private void button13_Click(object sender, EventArgs e)
         {
-            //SQL 13 分析產品銷售走勢
-
-            // 資料庫檔案
-            db_filename = "db_13.mdf";
-
-            // 查詢字串, 全部
-            sqlstr = "SELECT * FROM tb_merchandise";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "查詢字串, 全部";
-
-            // 查詢字串, 相同項合併
-            sqlstr = "SELECT DISTINCT (t_name) FROM tb_merchandise";
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-            lb_dgv2.Text = "查詢字串, 相同項合併";
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            string str = "24K";
-            richTextBox1.Text += "搜尋 : " + str + " 項目\n";
-
-            // 資料庫檔案
-            db_filename = "db_13.mdf";
-            // 連接字串
-            cnstr = string.Format(db_cnstr, db_filename);
-
-            using (SqlConnection cn = new SqlConnection(cnstr))
-            {
-                cn.Open();
-                // 查詢字串, 找最大值
-                sqlstr = "SELECT MAX(t_price) FROM tb_merchandise WHERE t_name='" + str + "'";
-                using (SqlCommand cmd = new SqlCommand(sqlstr, cn))
-                {
-                    int MaxValue = Convert.ToInt16(cmd.ExecuteScalar());
-                    richTextBox1.Text += "取得最大值 : " + MaxValue.ToString() + "\n";
-                }
-
-                // 查詢字串, 找最小值
-                sqlstr = "SELECT MIN(t_price) FROM tb_merchandise WHERE t_name='" + str + "'";
-                using (SqlCommand cmd = new SqlCommand(sqlstr, cn))
-                {
-                    int MinValue = Convert.ToInt16(cmd.ExecuteScalar());
-                    richTextBox1.Text += "取得最小值 : " + MinValue.ToString() + "\n";
-                }
-
-                // 查詢字串
-                sqlstr = "SELECT * FROM tb_merchandise WHERE t_name='" + str + "' ORDER BY t_date";
-                using (SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn))
-                {
-                    DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-                    da.Fill(ds);
-
-                    richTextBox1.Text += "取得資料 : " + ds.Tables[0].Rows.Count.ToString() + " 筆\n";
-                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                    {
-                        richTextBox1.Text += ds.Tables[0].Rows[i][2].ToString() + "\t" + ds.Tables[0].Rows[i][3].ToString() + "\n";
-                    }
-                }
-            }
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -1906,6 +1755,7 @@ namespace vcs_SqlConnection1
 
             // 查詢字串, 依體重排序 DESC/降冪, ASC/升冪
             sqlstr = "SELECT * FROM animals2_table ORDER BY 體重 DESC";
+            //test order by 寫兩個  sqlstr = "SELECT DISTINCT 書號, 書名, 作者, 銷售數量, 日期 FROM tb_xsb ORDER BY 書號 ASC, 日期 DESC";
 
             sql_read_database(db_filename, sqlstr, dataGridView3);
             lb_dgv3.Text = "十二生肖全部資料 依體重降冪排序";
@@ -1948,7 +1798,7 @@ namespace vcs_SqlConnection1
             weight = 345;
             DateTime dt = DateTime.Now;
 
-           // 查詢字串
+            // 查詢字串
             sqlstr = "INSERT INTO animals2_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (N'" + id + "',N'" + ename + "',N'" + cname + "'," + weight.ToString() + ",'" + dt.ToString() + "')";
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令
 
@@ -2022,25 +1872,25 @@ namespace vcs_SqlConnection1
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "查詢字串, 全部";
 
-            // 查詢字串, 相同項合併
-            sqlstr = "SELECT DISTINCT 中文名 FROM animals2_table";
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-            lb_dgv2.Text = "查詢字串, 相同項合併";
-
-
-            // 查詢字串, COUNT(DISTINCT 列名) 統計去重後的數量
-            sqlstr = "SELECT COUNT(DISTINCT 中文名) FROM animals2_table";
-            sql_read_database(db_filename, sqlstr, dataGridView3);
-
-
+            // 查詢字串, 相同項合併, 去除重複項
             sqlstr = "SELECT DISTINCT * FROM animals2_table";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+            lb_dgv2.Text = "查詢字串, 相同項合併, 去除重複";
+
+            // 查詢字串, 相同項合併, 看 中文名 項, 去除重複項
+            sqlstr = "SELECT DISTINCT 中文名 FROM animals2_table";
+            sql_read_database(db_filename, sqlstr, dataGridView3);
+            lb_dgv3.Text = "查詢字串, 相同項合併, 去除重複";
+
+            // 查詢字串, COUNT(DISTINCT 列名) 統計去除重複後的數量
+            sqlstr = "SELECT COUNT(DISTINCT 中文名) FROM animals2_table";
             sql_read_database(db_filename, sqlstr, dataGridView4);
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             return;
 
-
             //BETWEEN
-
 
             // 資料庫檔案
             db_filename = "animals2_db.mdf";
@@ -2757,16 +2607,12 @@ namespace vcs_SqlConnection1
         string[,] sqlcmd = new string[,]
         {
             //idx  /  資料庫檔案  /  查詢字串1  /  說明1 /  查詢字串2  /  說明2/  查詢字串3  /  說明3
-            /*
             { "1", "animals2_db.mdf", "SELECT * FROM animals2_table", "十二生肖全部資料", "", "", "", ""},
-            { "3", "db_TomeTwo.mdf",
-                "SELECT TOP 10 * FROM (SELECT TOP 20 * FROM tb_Grade ORDER BY 总分 DESC) AS st ORDER BY 总分 ASC", "查询第10到第20名的数据", "", "", "", ""},
-            { "4", "db_TomeTwo.mdf",
-                "SELECT * FROM tb_Book", "", "", "", "", ""},
-            { "5", "db_TomeTwo.mdf",
-                "SELECT TOP 50 PERCENT 书号, 书名, SUM(销售数量) AS 合计销售数量 FROM tb_Book GROUP BY 书号, 书名, 作者 ORDER BY 3 DESC", "查询销售量占前50%的图书信息, 查询数据库信息", "", "", "", ""},
+            { "3", "db_TomeTwo.mdf", "SELECT TOP 10 * FROM (SELECT TOP 20 * FROM tb_Grade ORDER BY 总分 DESC) AS st ORDER BY 总分 ASC", "查询第10到第20名的数据", "", "", "", ""},
+            { "5", "db_TomeTwo.mdf", "SELECT TOP 50 PERCENT 书号, 书名, SUM(销售数量) AS 合计销售数量 FROM tb_Book GROUP BY 书号, 书名, 作者 ORDER BY 3 DESC", "查询销售量占前50%的图书信息, 查询数据库信息", "", "", "", ""},
             { "8", "db_10_Data.MDF", "SELECT * FROM tb_07", "全部資料", "SELECT * FROM tb_07 WHERE 出生日期='1984/1/24'", "查詢日期數據", "", ""},
             { "9", "db_10_Data.MDF", "SELECT * FROM tb_stu", "全部資料", "SELECT * FROM tb_stu WHERE 出生年月='1983/4/2'", "查詢日期數據", "", ""},
+            { "10", "db_10_Data.MDF", "SELECT * FROM tb_xsb", "全部資料 tb_xsb", "SELECT 出版社, SUM(金額) AS 合計金額 FROM tb_xsb GROUP BY 出版社 ORDER BY 2 DESC", "數據分組統計（單列）,庫存圖書按出版社統計圖書庫存金額，並按金額降序排序", "", ""},
             { "11", "db_10_Data.MDF", "SELECT 書號,書名,銷售數量,日期 FROM tb_xsb", "全部資料", "SELECT 書號,書名,銷售數量,日期 FROM tb_xsb WHERE year(日期)='2005' AND month(日期)='10' AND day(日期)='1'", "按年、月或日查詢數據", "", ""},
             { "12", "Database1.mdf", "SELECT * FROM 產品資料", "全部資料, 產品資料", "SELECT 產品編號,品名,單價,說明 FROM 產品資料 WHERE 類別編號=1", "查詢 類別編號 = 1 的資料", "", ""},
             { "13", "db_10_Data.MDF", "SELECT * FROM tb_stu, tb_mark", "全部資料 tb_stu, tb_mark", "SELECT DISTINCT 學生姓名,學生編號, 性別,出生年月,年齡,所在學院,所學專業 FROM tb_stu WHERE 學生姓名 IN (SELECT  學生姓名 FROM tb_mark WHERE 總分>=580)", "簡單內嵌查詢, 查詢總分在580分以上的學生訊息", "", ""},
@@ -2785,7 +2631,6 @@ namespace vcs_SqlConnection1
             { "27", "db_TomeTwo.mdf", "SELECT * FROM tb_Student", "tb_Student 的 所有資料", "SELECT * FROM tb_Grade", "tb_Grade 的 所有資料", "SELECT 学生姓名,性别,年龄 FROM tb_Student WHERE 学生编号 IN (SELECT 学生编号 FROM tb_Grade WHERE 总分>550 AND 总分<570)", "使用IN引入子查詢限定查詢範圍, 查詢學生總分在 550 ~ 570 之間, 查 tb_Student 的 資料, 由 tb_Grade 總分在 500 ~ 600 之間"},
             { "28", "db_TomeOne.mdf", "SELECT * FROM tb_product", "全部資料 tb_product 兩欄 t_Name t_Num", "SELECT SUM(t_Num) FROM tb_product", "將 t_Num 加總", "SELECT t_Name, SUM(t_Num) AS Num FROM tb_product GROUP BY t_Name", "將 t_Name 同項合併"},
             { "29", "db_10_Data.MDF", "SELECT * FROM tb_kf WHERE 房態='空房 '", "查詢空閒客房訊息", "SELECT * FROM tb_kf WHERE 房態='入住'", "查詢使用客房訊息", "SELECT * FROM tb_kf WHERE 房態='空房 ' AND NOT(價格 between 80 and 150 )", "NOT與謂詞進行組合條件的查詢, 查詢空閒客房而且客房價格不在８０-１５０之間的客房訊息"},
-            */
             { "30", "db_TomeTwo.mdf", "SELECT * FROM tb_Book", "全部資料 tb_Book", "SELECT COUNT(书号)AS 记录条数, 书号,书名,作者 FROM tb_Book GROUP BY 书号,书名,作者 HAVING COUNT(书号)>1", "查询已销售图书情况, 列出数据中的重复记录和记录条数", "", ""},
             { "31", "db_13.mdf", "SELECT * FROM tb_Rectangle", "全部資料", "SELECT SUM(t_Num) FROM tb_Rectangle", "水果出售情況統計表", "", ""},
             { "32", "", "", "", "", "", "", ""},
@@ -2825,14 +2670,10 @@ SQL不同的連線方式
 2. AttachDbFilename=D:\new_db.mdf;
 這種寫法表示你要直接 附加 (Attach) 一個 MDF 檔案，讓 SQL Server 在執行時載入它。
 直接附加 MDF 檔案，常用於 LocalDB 或測試。
-*/
 
 //SqlDataAdapter 資料庫適配器對象 数据库桥接器对象 數據讀取器
 
 //richTextBox1.Text += dr["TABLE_NAME"] + "\n";
-
-/*
-
 
 //------------------------------------------------------------  # 60個
 // 查詢字串
@@ -2930,47 +2771,6 @@ Instance pipe name:
 
 //------------------------------------------------------------  # 60個
 
-            // 斷開服務
-
-             // 資料庫檔案
-            db_filename = "db_09_Data.mdf";
-            // 連接字串
-            cnstr = string.Format(db_cnstr, db_filename);
-
-            using (SqlConnection cn = new SqlConnection(cnstr))
-            {
-                try
-                {
-                    string strShutdown = "SHUTDOWN WITH NOWAIT";
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.Connection = cn;
-                    cmd.Connection.Open();
-                    cmd.CommandText = strShutdown;
-                    cmd.ExecuteNonQuery();
-                    richTextBox1.Text += "已成功斷開服務\n";
-                }
-                catch (Exception euy)
-                {
-                    richTextBox1.Text += euy.Message + "\n" ;
-                }
-            }
-
-//------------------------------------------------------------  # 60個
-
-            // 資料庫檔案
-            db_filename = "db_10_Data.MDF";
-            // 查詢字串, 查詢邏輯型數據, 查詢是否為國家統招學生
-            string select_type = "是";  // "是/否"
-            sqlstr = "SELECT * FROM tb_08 WHERE 統招否='" + select_type + "'";
-
-//------------------------------------------------------------  # 60個
-
-準備搬進 簡易測試 的
-
-//idx  /  資料庫檔案  /  查詢字串1  /  說明1 /  查詢字串2  /  說明2/  查詢字串3  /  說明3
-
-//------------------------------------------------------------  # 60個
-
 COMPUTE 子句在 SQL Server 2012 之後的版本中已被棄用（Deprecated）。
 現代開發通常不再使用它，因為它返回的是多個結果集，對應用程式處理並不友好。
 現代替代方案：如果你使用的是較新版本的數據庫，建議使用 GROUP BY 配合 ROLLUP 來實現類似的匯總功能。
@@ -2984,21 +2784,10 @@ Microsoft SQL Server 的主資料庫檔案（Master Database File），通常與
 
 //------------------------------------------------------------  # 60個
 
-*/
-
-// 查詢字串, 欄名使用別名AS
-//sqlstr = "SELECT DISTINCT 所屬部門, COUNT(*) AS 部門人數, MAX(基本工資) AS 最高工資, AVG(基本工資) AS 平均工資 FROM 部門工資統計表 GROUP BY 所屬部門 HAVING (AVG(基本工資) > 1000)";
-
 //指定讀出某列某欄資料
 //  return int.Parse(ds.Tables[0].Rows[0]["balance"].ToString());
 
-
-
-
-
-/*
             richTextBox1.Text += "新增5筆資料bbbb\n";
-
             // 查詢字串
             //sqlstr = @"INSERT INTO animals2_table VALUES (1, N'连衣裙', 299), (2, N'T恤', 89), (3, N'牛仔裤', 199)";
             //sqlstr = @"INSERT INTO animals2_table VALUES (1, N'连衣裙', 299), (2, N'T恤', 89), (3, N'牛仔裤', 199)";
@@ -3013,18 +2802,4 @@ INSERT INTO animals2_table (user_id, shop_name, product_name, amount, quantity, 
 (1002, '男装专营店', '休闲短裤',   89.00,   2, '已取消', '2025-06-04 10:00:00'),
 (1006, '女装旗舰店', '基础打底衫', 89.00,   9, '已支付', '2025-06-05 09:00:00'),
 (1007, '男装专营店', 'Polo衫',     259.00,  1, '已支付', '2025-06-05 14:00:00')";
-
 */
-
-
-
-
-/*
-基礎聚合函數（COUNT()、SUM()、AVG()、MAX()、MIN()）
-
-SELECT COUNT(*) AS total_orders FROM animals2_table WHERE create_time BETWEEN '2025-06-01' AND '2025-06-30';
-SELECT COUNT(*) AS valid_orders FROM animals2_table WHERE order_status IN ('已支付', '已完成') AND create_time BETWEEN '2025-06-01' AND '2025-06-30';
-SELECT COUNT(*) AS total_orders FROM animals2_table;
-*/
-
-

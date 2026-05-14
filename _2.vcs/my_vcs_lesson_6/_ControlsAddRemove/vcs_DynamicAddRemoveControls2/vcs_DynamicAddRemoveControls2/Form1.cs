@@ -57,7 +57,7 @@ namespace vcs_DynamicAddRemoveControls2
             richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1273, 750+30);
+            this.Size = new Size(1273, 750 + 30);
             this.Text = "vcs_DynamicAddRemoveControls2";
 
             //設定執行後的表單起始位置, 正中央
@@ -128,7 +128,6 @@ namespace vcs_DynamicAddRemoveControls2
                     //.................
                 }
             }
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -149,7 +148,6 @@ namespace vcs_DynamicAddRemoveControls2
                     }
                 }
             }
-
         }
 
         private void button3_Click(object sender, EventArgs e)

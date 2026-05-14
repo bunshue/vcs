@@ -1315,7 +1315,7 @@ namespace vcs_DataSet_DataTable
                 dt1.Rows.Add(row1);
             }
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             DataTable dt2 = new DataTable("childTable");
             DataColumn column2;
@@ -1394,7 +1394,97 @@ namespace vcs_DataSet_DataTable
 
         private void button24_Click(object sender, EventArgs e)
         {
+            //DataSet與XML範例
 
+            //動態建構DataSet
+
+            DataSet studentsDataSet;
+            DataTable studentTable;
+
+            // 建構DataSet及其組成分子
+            studentsDataSet = new DataSet("StudentsDataSet");
+            studentTable = new DataTable("StudentTable");
+
+            DataColumn idColumn = new DataColumn("id", Type.GetType("System.Int32"));
+            idColumn.AutoIncrement = true;
+            DataColumn nameColumn = new DataColumn("姓名");
+            DataColumn schoolColumn = new DataColumn("學歷");
+
+            studentTable.Columns.Add(idColumn);
+            studentTable.Columns.Add(nameColumn);
+            studentTable.Columns.Add(schoolColumn);
+
+            studentsDataSet.Tables.Add(studentTable);
+
+            // 加入記錄
+            DataRow newRow;
+
+            newRow = studentTable.NewRow();
+            newRow["姓名"] = "唐三藏";
+            newRow["學歷"] = "博士";
+            studentTable.Rows.Add(newRow);
+
+            newRow = studentTable.NewRow();
+            newRow["姓名"] = "孫悟空";
+            newRow["學歷"] = "碩士";
+            studentTable.Rows.Add(newRow);
+
+            newRow = studentTable.NewRow();
+            newRow["姓名"] = "豬八戒";
+            newRow["學歷"] = "學士";
+            studentTable.Rows.Add(newRow);
+
+            newRow = studentTable.NewRow();
+            newRow["姓名"] = "牛魔王";
+            newRow["學歷"] = "學士";
+            studentTable.Rows.Add(newRow);
+
+            newRow = studentTable.NewRow();
+            newRow["姓名"] = "如來佛";
+            newRow["學歷"] = "博士";
+            studentTable.Rows.Add(newRow);
+
+            studentsDataSet.AcceptChanges();
+
+            // 秀出剛動態建構出來的DataSet 
+            dataGridView1.DataSource = studentsDataSet.Tables["StudentTable"];
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //寫成XML文件
+
+            string xml_filename = string.Empty;
+            try
+            {
+                // 將studentsDataSet寫成XML文件
+                //string xml_filename = @"C:\\XmlDocument-" + DateTime.Now.Millisecond.ToString() + ".xml";
+                xml_filename = @"tmp_xml_" + DateTime.Now.Millisecond.ToString() + ".xml";
+                System.IO.FileStream streamWrite = new System.IO.FileStream(xml_filename, System.IO.FileMode.Create);
+                studentsDataSet.WriteXml(streamWrite);
+                streamWrite.Dispose();
+
+                MessageBox.Show("已建構完成XML文件：" + xml_filename);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            //讀入XML文件
+
+            // 建構DataSet物件
+            studentsDataSet = new DataSet("StudentsDataSet");
+
+            // 讀入XML文件 
+            xml_filename = "../../XmlDocument-432.xml";
+            System.IO.FileStream streamRead = new System.IO.FileStream(xml_filename, System.IO.FileMode.Open);
+            studentsDataSet.ReadXml(streamRead);
+            streamRead.Dispose();
+
+            // 秀出讀入的XML文件
+            dataGridView2.DataSource = studentsDataSet.Tables["StudentTable"];
         }
 
         private void button25_Click(object sender, EventArgs e)
@@ -1454,3 +1544,23 @@ namespace vcs_DataSet_DataTable
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+
+
