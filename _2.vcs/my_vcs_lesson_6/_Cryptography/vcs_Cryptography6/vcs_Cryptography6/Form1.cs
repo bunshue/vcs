@@ -32,20 +32,18 @@ namespace vcs_Cryptography6
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 12;
-            y_st = 12;
-            dx = 200;
-            dy = 65;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
 
+
+            richTextBox1.Size = new Size(600, 500);
+            richTextBox1.Location = new Point(x_st + dx * 3 + 110, y_st + dy * 1);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            //this.Size = new Size(1273, 750);
+            this.Size = new Size(1450, 700);
             this.Text = "vcs_Cryptography2_SHA1";
 
             //設定執行後的表單起始位置, 正中央
@@ -95,7 +93,6 @@ namespace vcs_Cryptography6
             ciphertext = encrypted.ToBytes();
             result2 = ciphertext.Decrypt(password);
             richTextBox1.Text += "編碼經使用密碼解密後 : \t" + result2 + "\n";
-
 
             clear_code = tb_clear_code.Text;
             password = tb_password.Text;

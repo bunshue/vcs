@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
-using System.Security.Cryptography; //for RijndaelManaged
+using System.Security.Cryptography;  // for RijndaelManaged
 
 //文件校驗工具的開發及問題，校驗工具開發
 
@@ -28,18 +28,13 @@ namespace vcs_Cryptography4
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 12;
-            y_st = 12;
-            dx = 200;
-            dy = 65;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
 
-            //this.Size = new Size(1273, 750);
+            this.Size = new Size(1300, 720);
             this.Text = "vcs_Cryptography2_SHA1";
 
             //設定執行後的表單起始位置, 正中央

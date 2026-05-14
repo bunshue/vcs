@@ -16,150 +16,6 @@
 
 //------------------------------------------------------------  # 60個
 
-        //清空文本框
-        private void btnReset_Click(object sender, EventArgs e)
-        {
-            foreach (Control ctl in groupBox1.Controls)
-            {
-                if (ctl.GetType().ToString() == "System.Windows.Forms.TextBox")
-                {
-                    ctl.Text = "";
-                }
-            }
-            txt_id.Focus();
-            cbox_Sex.SelectedIndex = 0;
-        }
-
-
-            //遍歷所有控件, 找出TextBox, 檢查是否為空
-            foreach (object ct in Controls)
-            {
-                if (ct.GetType().ToString() == "System.Windows.Forms.TextBox")
-                {
-                    TextBox tx = (TextBox)ct;
-                    if (tx.Text == "")
-                    {
-                        MessageBox.Show(tx.Tag.ToString() + "不能為空");
-                    }
-                }
-            }
-
-//------------------------------------------------------------  # 60個
-
-                    ControlInfo(true);
-            ControlInfo(false);
-
-
-        private void ControlInfo(Boolean B)
-        {
-            foreach (Control ct in this.groupBox1.Controls)
-            {
-                if (ct is TextBox)
-                {
-                    if (B)
-                    {
-                        ct.Enabled = true;
-                    }
-                    else
-                    {
-                        ct.Enabled = false;
-                    }
-                }
-            }
-        }
-
-//------------------------------------------------------------  # 60個
-
-            ControlInfo(false);
-            ControlInfo(false);
-            ControlInfo(true);
-        private void ControlInfo(Boolean B)
-        {
-            foreach (Control ct in this.groupBox1.Controls)
-            {
-                if (ct is TextBox)
-                {
-                    ct.Text = "";
-                    if (B)
-                    {
-                        ct.Enabled = true;
-                    }
-                    else
-                    {
-                        ct.Enabled = false;
-                    }
-                }
-            }
-        }
-
-
-        private Boolean TextClear()
-        {
-            foreach (Control c in this.groupBox1.Controls)
-            {
-                if (c is TextBox)
-                {
-                    if (c.Text == "")
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        return true;
-                    }
-                }
-            }
-            return true;
-        }
-
-
-        private void clearText()
-        {
-            foreach (Control cl in this.groupBox1.Controls)
-            {
-                if (cl is TextBox)
-                {
-                    cl.Text = "";
-                }
-            }
-        }
-
-
-        private Boolean TextInfo()
-        {
-            foreach (Control c in groupBox1.Controls)
-            {
-                if (c is TextBox)
-                {
-                    if (c.Text == "")
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        return true;
-                    }
-                }
-            }
-            return true;
-        }
-
-
-
-        private void clearText()
-        {
-            foreach (Control c in groupBox1.Controls)
-            {
-                if (c is TextBox)
-                {
-                    c.Text = "";
-                }
-            }
-            pictureBox1.Image = null;
-        }
-
-//------------------------------------------------------------  # 60個
-
 把一個ENUM的內容用foreach加到一個combobox裡
 點選combobox的項目 套用之
 
@@ -1050,30 +906,6 @@ radioButton1屬性
             }
 
 //------------------------------------------------------------  # 60個
-
-//將 ToolStrip 加入 toolStripContainer1 的 TopToolStripPanel
-//將 toolStripContainer1 加入 表單
-
-
-        ToolStripContainer toolStripContainer1;
-        ToolStrip toolStrip1;
-
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-
-            toolStrip1 = new System.Windows.Forms.ToolStrip();
-            toolStrip1.Items.Add("新增檔案");
-            toolStrip1.Items.Add("開啟檔案");
-            toolStrip1.Items.Add("儲存檔案");
-            toolStrip1.Items.Add("關閉檔案");
-            toolStripContainer1.TopToolStripPanel.Controls.Add(toolStrip1);
-
-            Controls.Add(toolStripContainer1);
-        }
-
-
 
 北風.accdb
 
@@ -7889,34 +7721,14 @@ string appPath = Application.ExecutablePath;
 panel1.BackColor = Color.FromA#41ccd4;
 注意：在设计时手动输入这些值，不要用颜色选取
 
-        //執行時期 顯示 屬性編輯視窗
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            PropertyGrid PG = new PropertyGrid();
-            Form PGForm = new Form();
-            PGForm.Owner = this;
-            PGForm.StartPosition = FormStartPosition.Manual;
-            PGForm.Left = this.Left + this.Width;
-            PGForm.Top = this.Top;
-            PGForm.ShowInTaskbar = false;
-            PGForm.Controls.Add(PG);
-            PG.Dock = DockStyle.Fill;
-            PG.SelectedObject = this.label1;  //選擇要顯示的控件名稱
-            PGForm.Text = "Label 屬性編輯視窗";
-            PGForm.Show();
-        }
-
-
-
-
-
+6060
 
 陣列
 一群資料型態相同的變數集合在一起
 
 反向運算子
 
-
+6060
 
 要顯示 & 以 ＆amp;取代
 要顯示 < 以 ＆lt;取代
@@ -7975,21 +7787,12 @@ console mode讀取字串
 #include <stdio.h>
 int main(int argc,char* argv[])
 {
-
-
-
     /*
 	int i;
-
 	time_t time_ptr;
-
 	printf("david: This is a c template.\n");
-
 	printf("function: %s:%s(%d) debug message\r\n",__FILE__,__func__,__LINE__);
-
-
 	time(&time_ptr);
-
 	printf("現在時間 : %s\n", asctime(localtime(&time_ptr)));
 */
 
@@ -8006,31 +7809,22 @@ int main(int argc,char* argv[])
     for(i=0;i<sizeof(now);i++)
     {
         printf("%c\n", now[i]);
-
-
     }
-
-
-
     //srand(123);
     srand(now[0]);
 
     for(i=0;i<10;i++)
     {
         printf("%c\n", 'A' + rand() % 26);
-
     }
-
 	return 0;
 }
 
 Display_Cam1
-
             //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
             bm = (Bitmap)eventArgs.Frame.Clone();
             //bitmap1.RotateFlip(RotateFlipType.RotateNoneFlipY);    //反轉
             pictureBox1.Image = bm;
-
             GC.Collect();       //回收資源
 
 //--------------------------
@@ -8088,11 +7882,7 @@ Display_Cam1
 										}
             }
 
-
-
 fileFullPath : C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_video\OperateCamera\bin\Debug\V12021-08-20-15-39-07
-
-
 
 關掉AForge的VSP
         // Close currently open camera if any
@@ -8108,7 +7898,6 @@ fileFullPath : C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_video\OperateCamera\b
             }
         }		
 
-
 在 C# 中使用 File.ReadAllText() 方法將檔案讀取為字串
 string text = File.ReadAllText(@"C:\File\file.txt");
 Console.WriteLine(text);
@@ -8117,7 +7906,6 @@ Console.WriteLine(text);
 StreamReader fileReader = new StreamReader(@"C:\File\file.txt");
 string text = fileReader.ReadToEnd();
 Console.WriteLine(text);			
-
 
 使用 C# 中的 FileInfo.Length 屬性獲取檔案大小
 FileInfo fileinfo = new FileInfo("dark.jpg");
@@ -8144,9 +7932,6 @@ MainMenu選了之後會有打勾記號
             centeredSizeItem.Checked = (pictureBox.SizeMode == PictureBoxSizeMode.CenterImage);
         }
 
-
-
-
         private void button1_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "檢查IP合法性\n";
@@ -8165,23 +7950,11 @@ MainMenu選了之後會有打勾記號
                 }
             }
             richTextBox1.Text += "合法\n";
-			
-
         }
 
-
-
-
 如何清除播放清單
-
 顯示播放清單的內容
-
 播放清單移除特定檔案
-
-
-
-
-
 
         public override string show()
         {
@@ -8203,9 +7976,6 @@ MainMenu選了之後會有打勾記號
 
             return res;
         }
-
-
-
 
 計算程式執行的時間
 

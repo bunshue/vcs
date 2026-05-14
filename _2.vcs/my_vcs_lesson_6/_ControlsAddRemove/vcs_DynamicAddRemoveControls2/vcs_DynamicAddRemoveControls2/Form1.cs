@@ -20,6 +20,11 @@ namespace vcs_DynamicAddRemoveControls2
         Label label6 = new Label();
         Label label7 = new Label();
 
+        //將 ToolStrip 加入 toolStripContainer1 的 TopToolStripPanel
+        //將 toolStripContainer1 加入 表單
+        ToolStripContainer toolStripContainer1;
+        ToolStrip toolStrip1;
+
         public Form1()
         {
             InitializeComponent();
@@ -34,7 +39,7 @@ namespace vcs_DynamicAddRemoveControls2
         {
             //button
             int x_st = 10;
-            int y_st = 10;
+            int y_st = 10 + 30;
             int dx = 200 + 10;
             int dy = 60 + 10;
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -52,7 +57,7 @@ namespace vcs_DynamicAddRemoveControls2
             richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1273, 750);
+            this.Size = new Size(1273, 750+30);
             this.Text = "vcs_DynamicAddRemoveControls2";
 
             //設定執行後的表單起始位置, 正中央
@@ -160,7 +165,6 @@ namespace vcs_DynamicAddRemoveControls2
                     child.Text = temp.ToString();
                 }
             }
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -178,12 +182,32 @@ namespace vcs_DynamicAddRemoveControls2
 
         private void button5_Click(object sender, EventArgs e)
         {
+            toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
 
+            toolStrip1 = new System.Windows.Forms.ToolStrip();
+            toolStrip1.Items.Add("新增檔案");
+            toolStrip1.Items.Add("開啟檔案");
+            toolStrip1.Items.Add("儲存檔案");
+            toolStrip1.Items.Add("關閉檔案");
+            toolStripContainer1.TopToolStripPanel.Controls.Add(toolStrip1);
+
+            Controls.Add(toolStripContainer1);
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-
+            PropertyGrid PG = new PropertyGrid();
+            Form PGForm = new Form();
+            PGForm.Owner = this;
+            PGForm.StartPosition = FormStartPosition.Manual;
+            PGForm.Left = this.Left + this.Width;
+            PGForm.Top = this.Top;
+            PGForm.ShowInTaskbar = false;
+            PGForm.Controls.Add(PG);
+            PG.Dock = DockStyle.Fill;
+            PG.SelectedObject = this.label1;  //選擇要顯示的控件名稱
+            PGForm.Text = "Label 屬性編輯視窗";
+            PGForm.Show();
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -202,3 +226,174 @@ namespace vcs_DynamicAddRemoveControls2
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+
+
+
+/*
+
+        //清空文本框
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            foreach (Control ctl in groupBox1.Controls)
+            {
+                if (ctl.GetType().ToString() == "System.Windows.Forms.TextBox")
+                {
+                    ctl.Text = "";
+                }
+            }
+            txt_id.Focus();
+            cbox_Sex.SelectedIndex = 0;
+        }
+
+
+            //遍歷所有控件, 找出TextBox, 檢查是否為空
+            foreach (object ct in Controls)
+            {
+                if (ct.GetType().ToString() == "System.Windows.Forms.TextBox")
+                {
+                    TextBox tx = (TextBox)ct;
+                    if (tx.Text == "")
+                    {
+                        MessageBox.Show(tx.Tag.ToString() + "不能為空");
+                    }
+                }
+            }
+
+//------------------------------------------------------------  # 60個
+
+                    ControlInfo(true);
+            ControlInfo(false);
+
+
+        private void ControlInfo(Boolean B)
+        {
+            foreach (Control ct in this.groupBox1.Controls)
+            {
+                if (ct is TextBox)
+                {
+                    if (B)
+                    {
+                        ct.Enabled = true;
+                    }
+                    else
+                    {
+                        ct.Enabled = false;
+                    }
+                }
+            }
+        }
+
+//------------------------------------------------------------  # 60個
+
+            ControlInfo(false);
+            ControlInfo(false);
+            ControlInfo(true);
+        private void ControlInfo(Boolean B)
+        {
+            foreach (Control ct in this.groupBox1.Controls)
+            {
+                if (ct is TextBox)
+                {
+                    ct.Text = "";
+                    if (B)
+                    {
+                        ct.Enabled = true;
+                    }
+                    else
+                    {
+                        ct.Enabled = false;
+                    }
+                }
+            }
+        }
+
+
+        private Boolean TextClear()
+        {
+            foreach (Control c in this.groupBox1.Controls)
+            {
+                if (c is TextBox)
+                {
+                    if (c.Text == "")
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+            }
+            return true;
+        }
+
+
+        private void clearText()
+        {
+            foreach (Control cl in this.groupBox1.Controls)
+            {
+                if (cl is TextBox)
+                {
+                    cl.Text = "";
+                }
+            }
+        }
+
+
+        private Boolean TextInfo()
+        {
+            foreach (Control c in groupBox1.Controls)
+            {
+                if (c is TextBox)
+                {
+                    if (c.Text == "")
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+            }
+            return true;
+        }
+
+
+
+        private void clearText()
+        {
+            foreach (Control c in groupBox1.Controls)
+            {
+                if (c is TextBox)
+                {
+                    c.Text = "";
+                }
+            }
+            pictureBox1.Image = null;
+        }
+
+//------------------------------------------------------------  # 60個
+
+
+
+*/
+

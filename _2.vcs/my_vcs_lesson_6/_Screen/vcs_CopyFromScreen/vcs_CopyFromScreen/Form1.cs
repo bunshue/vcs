@@ -44,16 +44,11 @@ namespace vcs_CopyFromScreen
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 120 + 10;
-            dy = 50 + 10;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -76,29 +71,36 @@ namespace vcs_CopyFromScreen
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
+            pictureBox1.Size = new Size(600, 600);
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
-            this.Location = new Point(200, 100);
+            richTextBox1.Size = new Size(300, 600);
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1400, 750);
+            this.Text = "vcs_CopyFromScreen";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void button0_Click(object sender, EventArgs e)
         {
             //抓屏將生成的圖片顯示在pictureBox
-
             Image image1 = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-
             Graphics g = Graphics.FromImage(image1);
-
             g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height));
-
             //IntPtr dc1 = g.GetHdc();      //此處這兩句多餘，具體看最後GetHdc()定義
-
-            //g.ReleaseHdc(dc1);           
-
+            //g.ReleaseHdc(dc1);
             g.Dispose();
-
             this.pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-
             this.pictureBox1.Image = image1;
         }
 
@@ -580,4 +582,22 @@ namespace vcs_CopyFromScreen
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
 
