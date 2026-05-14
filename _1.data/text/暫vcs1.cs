@@ -9,10 +9,6 @@
 
 
 
-                    FileAttributes attr = (new FileInfo(filePath)).Attributes;
-                    Console.Write("UnAuthorizedAccessException: Unable to access file. ");
-                    if ((attr & FileAttributes.ReadOnly) > 0)
-                        Console.Write("The file is read-only.");
 
 //------------------------------------------------------------  # 60個
 
@@ -22,31 +18,6 @@
 列舉系統的所有Color並以ComboBox顯示
 
 comboBox自行繪制顯示的內容，在這邊需要將comboBox中的屬性'DrawMode'設為'OwnerDrawFixed'，並新的DrawItem事件
-
-//------------------------------------------------------------  # 60個
-
-using System.Management;
-using Microsoft.Win32;
-
-
-            richTextBox1.Text += "你的計算機名稱 : " + Environment.MachineName.ToString() + "\n";
-            richTextBox1.Text += "你的網卡序號 : " + GetNetCardMacAddress() + "\n";
-
-
-        //获得网卡信息函数
-        public string GetNetCardMacAddress()
-        {
-            //创建ManagementClass对象
-            ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
-            ManagementObjectCollection moc = mc.GetInstances();//创建ManagementObjectCollection对象
-            string str = "";//用于存储网卡序列号
-            foreach (ManagementObject mo in moc)//遍历得到的集合
-            {
-                if ((bool)mo["IPEnabled"] == true)//判断IPEnabled属性是否为true
-                    str = mo["MacAddress"].ToString();//获取网卡序列号
-            }
-            return str;//返回网卡序列号
-        }
 
 //------------------------------------------------------------  # 60個
 
@@ -61,14 +32,14 @@ using Microsoft.Win32;
 
 //------------------------------------------------------------  # 60個
 
+using Microsoft.Win32;
+
             //取得regedit資料
             Microsoft.Win32.RegistryKey retkey1 = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("software", true).CreateSubKey("IMS1").CreateSubKey("IMS.INI");
             foreach (string strName in retkey1.GetSubKeyNames())//判断注册码是否过期
             {
-                richTextBox1.Text += strName  + "\n";
+                richTextBox1.Text += strName + "\n";
             }
-
-
 
 
 
@@ -188,10 +159,6 @@ TextBox設定星號
 		   sw.Close ();
 
 //------------------------------------------------------------  # 60個
-
-RTB load純文字檔 filename.txt
-                richTextBox1.LoadFile("filename.txt", RichTextBoxStreamType.PlainText);
-
 
             richTextBox1.Text += "你按了 開檔\n";
 

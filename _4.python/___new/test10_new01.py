@@ -1957,7 +1957,6 @@ while index <= 10:
         continue  # 不往下執行
     print(index)  # 輸出偶數
 
-'''
 print("------------------------------------------------------------")  # 60個
 
 for a in range(1, 6):  # 外層for迴圈控制
@@ -6863,22 +6862,6 @@ sorted
 """
 print("------------------------------------------------------------")  # 60個
 
-print(time.time(), " 秒")
-print(time.time_ns(), " 微秒")
-
-"""
-time.ctime 本地時間
-time.localtime() 轉換為struct_time格式的本地時間
-time.gmtime() 回傳UTC時間
-
-time.mktime(t) 將struct_time格式的時間轉換回秒數
-time.asctime() 將struct_time格式的時間轉換為文字顯示
-time.strftime() 將時間轉換為特定格式字串
-time.strptime() 將特定格式的字串轉換為struct_time格式的時間
-"""
-
-print("------------------------------------------------------------")  # 60個
-
 """
 n = 20                   # 設定進度條總長
 for i in range(n+1):
@@ -6892,9 +6875,7 @@ icon = "⋮⋰⋯⋱"          # 建立旋轉的符號清單
 for i in range(n+1):
     print(f"\r{icon[i%4]} {i*100/n}%", end="")
     time.sleep(0.1)
-
 """
-
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
@@ -6948,145 +6929,6 @@ func = my_menu()
 print(func())
 
 print("------------------------------------------------------------")  # 60個
-
-name = "鼠"
-weight = 3
-print("動物{0}的體重是{1}公斤".format(name, weight))
-
-print("動物%s的體重是%d公斤" % (name, weight))
-
-
-"""
-name = input("輸入品名：")
-num = int(input("輸入數量："))
-price = float(input("輸入單價："))
-print()
-print("品名\t\t數量\t單價\t金額")
-print("=========================================")
-print("%-14s%-9d%-9.1f%-9.1f" %(name,num,price,num*price))
-
-
-
-data = []
-site = input("請輸入平台名稱：")
-data.append(input("請輸入帳號："))
-data.append(input("請輸入密碼："))
-print(f"{site}的帳號：{data[0]}；密碼：{data[1]}")
-
-
-radius = int(input("請輸入球半徑(公分) :"))
-volume = compute(radius)
-print(f"球半徑 = {radius}公分  球體積 = {volume}立方公分")
-"""
-
-
-from random import randint
-
-rand = set()
-
-while len(rand) < 7:
-    rand.add(randint(1, 49))
-print("本期樂透彩號碼：")
-for idx, num in enumerate(rand, 1):
-    print(f"({idx})={num}", end="  ")
-
-
-print("------------------------------------------------------------")  # 60個
-
-print(543.21)  # 顯示浮點數常值 543.21
-print(5.4321e2)  # 顯示浮點數常值 543.21
-print(5.4321e6)  # 顯示浮點數常值 5432100.0
-print(5.4321e-3)  # 顯示浮點數常值 0.0054321
-
-print("------------------------------------------------------------")  # 60個
-
-name = "李金星"  # 宣告字串變數name，初值設為"李金星"
-score = 73  # 宣告整數變數score，初值設為73
-msg = "{}的成績是{}分".format(name, score)
-print(msg)
-
-name = "李金星"  # 宣告字串變數name，初值設為"李金星"
-score = 73  # 宣告整數變數score，初值設為73
-msg = "{0}的成績是{1}分".format(name, score)
-print(msg)
-
-name = "李金星"  # 宣告字串變數name，初值設為"李金星"
-score = 73  # 宣告整數變數score，初值設為73
-print("{0}的成績是{1}".format(name, score))
-
-print("------------------------------------------------------------")  # 60個
-
-price = 100
-qty = 30
-print("單價：{0}  數量：{1}".format(price, qty))
-print("打八折後,總金額：{0}".format(price * qty * 0.8))
-
-print("------------------------------------------------------------")  # 60個
-
-print("%s風景區在%s境內" % ("日月潭", "南投縣"))
-wt = 3
-price = 25
-print("%s%d斤，共%d元" % ("香蕉", wt, wt * price))
-
-print("------------------------------------------------------------")  # 60個
-
-print("%d" % 1234)  # 顯示整數,未設寬度
-print("%8d" % 1234)  # 顯示整數,寬度有剩補空格,靠右對齊
-print("%8d" % -1234)  # 顯示整數,寬度有剩補空格,靠右對齊
-print("%3d" % -1234)  # 顯示整數,寬度不足設定無效
-
-print("------------------------------------------------------------")  # 60個
-
-print("%f" % 123.456)  # 顯示數值「123.456000」,小數預設6位
-print("%f" % -123.456)  # 顯示數值「-123.456000」,小數預設6位
-print("%.2f" % 123.456)  # 顯示數值「123.46」,小數2位,第3位四捨五入
-print("%8.2f" % -12.3456)  # 顯示「ΔΔ-12.35」,總寬度8位,小數2位
-print("%3.1f" % 123.456)  # 顯示「123.5」,寬度不足設定無效,小數位數1位
-print("%8.0f" % -123.456)  # 顯示數值「ΔΔΔ-1235」,小數第1位四捨五入
-print("%8.0f" % 123.456)  # 顯示數值「ΔΔΔ1235」,小數第1位四捨五入
-print("%g" % 12345.6789)  # 顯示數值「12345.7」,總寬度預設7位
-print("%g" % 1.23456789)  # 顯示數值「1.23457」,總寬度預設7位
-print("%g" % 12.3)  # 顯示數值「12.3」, 寬度低於預設,直接顯示
-print("%g" % 123456.789)  # 顯示數值「123457」,最後1位為小數點不顯示
-print("%g" % 1234567.89)  # 顯示數值「1.23457e+06」,整數7位以上,
-# 改用科學記號顯示,指數位數佔2位(不含+-號)
-print("%10.3G" % 1234.5)  # 顯示「ΔΔ1.23E+03」,寬度10位,E及小數3位
-
-print("------------------------------------------------------------")  # 60個
-
-print("%c" % "M")  # 顯示字元「M」
-print("%4c" % "M")  # 顯示字元「ΔΔΔM」,靠右對齊,寬度有剩補空格
-print("%c" % 65)  # 顯示字元「A」,65的ASCII碼為「A」
-print("%s" % "ABCDE")  # 顯示字串「ABCDE」
-print("%8s" % "ABCDE")  # 顯示字串「ΔΔΔABCDE」
-print("%3s" % "ABCDE")  # 顯示字串「ABCDE」,總寬度不足設定無效
-print("%6.2s" % "ABCDE")  # 顯示字串「ΔΔΔΔAB」,寬度設為6,顯示2字元
-
-print("------------------------------------------------------------")  # 60個
-
-print("%+8d" % 12345)  # 顯示「ΔΔ+12345」,靠右對齊,正數值前加「+」號
-print("%+8d" % -12345)  # 顯示「ΔΔ-12345」,靠右對齊,負數值前加「-」號
-print("%-8d" % 12345)  # 顯示「12345ΔΔΔ」,靠左對齊,正數值前不加號
-print("%-8d" % -12345)  # 顯示「-12345ΔΔ」,靠左對齊,負數值前加「-」號
-print("%+8.2f" % 12.345)  # 顯示「ΔΔ+12.35」,靠右對齊,正數值加「+」號
-print("%-8.2f" % 12.345)  # 顯示「12.35ΔΔΔ」,靠左對齊,正數值不加號
-print("%-8.2f" % -12.345)  # 顯示「-12.35ΔΔ」,靠左對齊,負數值加「-」號
-print("%-8s" % "ABCDE")  # 顯示字串「ABCDEΔΔΔ」,靠左對齊,寬度有剩補空格
-print("%-6.2s" % "ABCDE")  # 顯示字串「ABΔΔΔΔ」,寬度設為6,顯示2個字元
-
-print("------------------------------------------------------------")  # 60個
-
-print("1234567890!\a")  # 出現音效聲,游標位置在"!"字元後面
-print("12345\b67890!")  # 顯示字串「123467890!」,刪除字元"5"
-print("1234567890!\n")  # 顯示字串「123467890!」,游標跳到下一行行首
-print("123\r4567890!")  # 游標跳到行首,刪除"123",顯示字串「4567890!」
-print("123\t45\\67")  # 顯示字串「123ΔΔΔΔΔ45\67」
-print('123"45"67')  # 顯示字串「123"45"67」
-print("123'4'567")  # 顯示字串「123'4'567」
-print("ASCII碼41(Hex):\x41")  # 顯示字串「ASCII碼41(Hex):A」
-
-print("------------------------------------------------------------")  # 60個
-
 a = 100
 b = 20
 print(a, b)  # 輸出a和b的變數值,分別為100,20
@@ -7474,20 +7316,6 @@ n = list(range(10)) * 10
 
 print("------------------------------------------------------------")  # 60個
 
-W = 5
-H = 5
-nextCells = {}  # 字典
-for x in range(H):
-    for y in range(W):
-        if random.randint(0, 1) == 0:
-            nextCells[(x, y)] = "Y"
-        else:
-            nextCells[(x, y)] = "N"
-print(type(nextCells))
-print(nextCells)
-
-print("------------------------------------------------------------")  # 60個
-
 print("10位 靠右對齊")
 
 text = "abcdefg"
@@ -7506,38 +7334,6 @@ print(f"{year}年{month}月{day}日是{year}年的第{total}天")
 
 print("------------------------------------------------------------")  # 60個
 
-N = 10
-lst = list(range(N))
-print(lst)
-random.shuffle(lst)
-print(lst)
-
-lst.sort()
-print(lst)
-
-print("------------------------------------------------------------")  # 60個
-
-print("random.choice 多選一")
-animals = ["鼠", "牛", "虎", "兔", "龍", "蛇"]
-
-cc = random.choice(animals)
-print(cc)
-
-print("random.sample 多選多")
-cc = random.sample(animals, 3)
-print(cc)
-
-animals = "鼠牛虎兔龍蛇"
-print("random.sample 多選多")
-cc = random.sample(animals, 3)
-print(cc)
-
-print("------------------------------------------------------------")  # 60個
-
-number = 1234.5678
-print("Number :", format(number, ".2f"))
-
-print("------------------------------------------------------------")  # 60個
 """
 PAUSE = 0.02
 
@@ -9341,13 +9137,13 @@ print("執行一百萬次浮點數運算的時間：" + str(timeend - timestart)
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
+'''
 import time as t
 
 week = ["一", "二", "三", "四", "五", "六", "日"]
 dst = ["無日光節約時間", "有日光節約時間"]
 time1 = t.localtime()
-show = "現在時刻：中華民國 " + str(int(time1.tm_year) - 1911) + " 年 "
+show = "現在時刻：民國 " + str(int(time1.tm_year) - 1911) + " 年 "
 show += str(time1.tm_mon) + " 月 " + str(time1.tm_mday) + " 日 "
 show += str(time1.tm_hour) + " 點 " + str(time1.tm_min) + " 分 "
 show += str(time1.tm_sec) + " 秒 星期" + week[time1.tm_wday] + "\n"
@@ -9363,7 +9159,16 @@ for i in range(0, 1000):
     for j in range(0, 1000):
         n = i * j
 timeend = t.perf_counter()
-print("執行一百萬次整數運算的時間：" + str(timeend - timestart) + " 秒")
+print("執行一百萬次 整數 運算的時間：" + str(timeend - timestart) + " 秒")
+
+import time as t
+
+timestart = t.perf_counter()
+for i in range (0,1000):
+    for j in range (0,1000):
+        n = float(i) * float(j)
+timeend = t.perf_counter()
+print("執行一百萬次 浮點數 運算的時間：" + str(timeend-timestart) + " 秒")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -9388,36 +9193,11 @@ print(show)
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-import time as t
-
-timestart = t.perf_counter() ()
-for i in range (0,1000):
-    for j in range (0,1000):
-        n = float(i) * float(j)
-timeend = t.perf_counter() ()
-print("執行一百萬次浮點數運算的時間：" + str(timeend-timestart) + " 秒")
-"""
-print("------------------------------------------------------------")  # 60個
-
 time1 = "10:23:41"
 time1 = time1.replace(":", " 點 ", 1)
 time1 = time1.replace(":", " 分 ", 1)
 time1 += " 秒"
 print(time1)
-
-print("------------------------------------------------------------")  # 60個
-
-list1 = random.sample(range(1, 50), 7)
-special = list1.pop()
-list1.sort()
-print("本期大樂透中獎號碼為：", end="")
-for i in range(0, 6):
-    if i == 5:
-        print(str(list1[i]))
-    else:
-        print(str(list1[i]), end=", ")
-print("本期大樂透特別號為：" + str(special))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -9435,6 +9215,7 @@ show += str(hour) + " 點 " + str(time1.tm_min) + " 分 "
 show += str(time1.tm_sec) + " 秒"
 print(show)
 
+print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 dict1 = {"A": "內向穩重", "B": "外向樂觀", "O": "堅強自信", "AB": "聰明自然"}
@@ -9579,17 +9360,6 @@ for i in range(0, 3):
 
 print("------------------------------------------------------------")  # 60個
 
-list1 = random.sample(range(0, 10), 4)
-list1.sort()
-print("本期四星彩中獎號碼為：", end="")
-for i in range(0, 4):
-    if i == 3:
-        print(str(list1[i]))
-    else:
-        print(str(list1[i]), end=", ")
-
-print("------------------------------------------------------------")  # 60個
-
 
 def disp_data():  # 顯示串列的自訂程序
     for item in datas:
@@ -9665,72 +9435,6 @@ print(
 
 print("------------------------------------------------------------")  # 60個
 
-print("產生N個 從 MIN 到 MAX 不重複的整數(包含頭尾)")
-N = 7
-MIN = 1
-MAX = 50
-list1 = random.sample(range(MIN, MAX), N)
-print(type(list1))
-print(list1)
-list1 = random.sample(range(MIN, MAX), N)
-print(list1)
-list1 = random.sample(range(MIN, MAX), N)
-print(list1)
-list1 = random.sample(range(MIN, MAX), N)
-print(list1)
-list1 = random.sample(range(MIN, MAX), N)
-print(list1)
-
-print("------------------------------------------------------------")  # 60個
-
-N = 10
-MIN = 80
-MAX = 100
-scores = random.sample(range(MIN, MAX), N)
-print("原成績：", scores)
-
-print("人數：%d" % len(scores))
-print("最高分為：%d" % max(scores))
-print("最低分為：%d" % min(scores))
-print("總分為：%d" % sum(scores))
-print("平均為：%6.2f" % (sum(scores) / N))
-
-scores2 = sorted(scores, reverse=True)  # 由大到小排序
-print("成績由大到小排序：", scores2)
-
-scores2 = sorted(scores, reverse=False)  # 由小到大排序
-print("成績由小到大排序：", scores2)
-
-print("------------------------------------------------------------")  # 60個
-
-N = 10
-MIN = 80
-MAX = 100
-scores = random.sample(range(MIN, MAX), N)
-
-
-def disp_scores():  # 顯示串列的自訂程序
-    for score in scores:
-        print(score, end=" ")
-    print()
-
-
-print("排序前：", end=" ")
-disp_scores()  # 顯示排序前串列
-
-n = len(scores) - 1  # 串列長度-1
-
-for i in range(0, n):
-    for j in range(0, n - i):
-        if scores[j] < scores[j + 1]:  # 由大到小排序
-            scores[j], scores[j + 1] = scores[j + 1], scores[j]  # 兩數互換
-
-print("成績由大到小排序：", end="")
-disp_scores()  # 顯示排序後串列
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -9768,35 +9472,6 @@ for i in range(0, n):
     for j in range(0, n - i):
         if names[j] > names[j + 1]:  # 由小到大排序
             names[j], names[j + 1] = names[j + 1], names[j]  # 互換
-print("------------------------------------------------------------")  # 60個
-
-print("姓名    成績")
-print("%-4s  %3d" % (name1, score1))
-print("%-4s  %3d" % (name2, score2))
-
-print("------------------------------------------------------------")  # 60個
-
-# 過度擬合 (overfitting)
-
-# 拉格朗日 (Lagrange) 插值法
-
-x = np.linspace(0, 1, 200)
-y = -((x - 1) ** 2) + 1
-plt.plot(x, y, "lime")
-
-X = np.linspace(0, 1, 20)
-Y = -((X - 1) ** 2) + 1 + 0.08 * np.random.randn(20)
-plt.scatter(X, Y, c="b", s=50)
-
-z = np.polyfit(X, Y, 19)
-p = np.poly1d(z)
-plt.plot(x, p(x), "r")
-
-xmin, xmax, ymin, ymax = 0, 1, 0, 1.5
-plt.axis([xmin, xmax, ymin, ymax])  # 設定各軸顯示範圍
-
-show()
-
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -9892,7 +9567,6 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-
 # lambda: 臨時要使用的函數
 currency = 32.1357851  # 1美元 = 32.13台幣    台灣銀行 現金賣出價
 
@@ -9942,46 +9616,6 @@ print('matplotlib 真的「看到的」字型')
 for f in fm.fontManager.ttflist:
     print(f.name)
 """
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# Create a deck of cards
-deck = [x for x in range(0, 52)]
-
-# Create suits and ranks lists
-suits = ["Spades", "Hearts", "Diamonds", "Clubs"]
-ranks = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
-
-# Shuffle the cards
-random.shuffle(deck)
-
-# Display the first four cards
-for i in range(4):
-    suit = suits[deck[i] // 13]
-    rank = ranks[deck[i] % 13]
-    print("Card number", deck[i], "is", rank, "of", suit)
-
-print("------------------------------------------------------------")  # 60個
-
-from random import randint
-
-# Open file for writing data
-outfile = open("tmp_Numbers.txt", "w")
-for i in range(10):
-    outfile.write(str(randint(0, 9)) + " ")
-outfile.close()  # Close the file
-
-# Open file for reading data
-infile = open("tmp_Numbers.txt", "r")
-s = infile.read()
-numbers = [eval(x) for x in s.split()]
-for number in numbers:
-    print(number, end=" ")
-infile.close()  # Close the file
-
-print()
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 """
@@ -10119,15 +9753,6 @@ infile = open(filename, "r")
 print("\n(4) Using readlines(): ")
 print(infile.readlines())
 infile.close()  # Close the input file
-
-print("------------------------------------------------------------")  # 60個
-
-currentTime = time.time()  # Get current time
-
-# Obtain the total seconds since midnight, Jan 1, 1970
-totalSeconds = int(currentTime)
-
-print(totalSeconds)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -10943,25 +10568,6 @@ print(
 
 print("------------------------------------------------------------")  # 60個
 
-N = 30  # 數據數量
-
-trains = np.random.randint(0, 100, size=(N, 2))
-
-# 建立分類, 未來 0 代表 red,  1 代表 blue
-labels = np.random.randint(0, 2, (N, 1))
-
-# 列出紅色方塊訓練數據
-red = trains[labels.ravel() == 0]
-plt.scatter(red[:, 0], red[:, 1], 50, "r", "s")  # 50是繪圖點大小
-
-# 列出藍色三角形訓練數據
-blue = trains[labels.ravel() == 1]
-plt.scatter(blue[:, 0], blue[:, 1], 50, "b", "^")  # 50是繪圖點大小
-show()
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 # np.where的用法
 # 建立三角波
 N = 50
@@ -11327,31 +10933,6 @@ print("Day is", today)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print(time.time())  # 输出：1638348236.3917518
-print(time.sleep(2))  # 括号里是2，程序睡两秒再执行，打印会显示None
-print(time.time_ns())  # 输出：1638348716267450500
-print(
-    time.gmtime()
-)  # 输出：time.struct_time(tm_year=1974, tm_mon=12, tm_mday=15, tm_hour=1, tm_min=6, tm_sec=0, tm_wday=6, tm_yday=349, tm_isdst=0)
-print(
-    time.gmtime(10000000)
-)  #  输出： time.struct_time(tm_year=1970, tm_mon=4, tm_mday=26, tm_hour=17, tm_min=46, tm_sec=40, tm_wday=6, tm_yday=116, tm_isdst=0)
-print(time.ctime(123123))  # 输出：Fri Jan  2 18:12:03 1970
-print(time.ctime())  # 输出：Wed Dec  1 18:53:33 2021
-print(time.strptime("2021-12-1", "%Y-%m-%d"))  # 将其转化为机构化时间，前后必须对应
-a = time.strptime("2021-12-1", "%Y-%m-%d")
-print(a.tm_year)  # 可以通过这种方式去取
-# 输出：2025
-
-print(time.localtime())  # 返回结构化时间，里面加参数，就从计算机元年开始算
-a = time.localtime()
-print(a.tm_year)  # 可以通过这种方式去取
-# 输出：2021
-print(time.mktime(time.localtime()))  # 输出： 1638358856.0
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 """
 start = time()
 # do something
@@ -11409,32 +10990,6 @@ for i in range(0, 3):
         str(listenglish[i]).rjust(5),
     )
 
-print("------------------------------------------------------------")  # 60個
-
-week = [" 一", " 二", " 三", " 四", " 五", " 六", " 日"]
-dst = [" 無日光節約時間", " 有日光節約時間"]
-time1 = time.localtime()
-mesg = "現在時刻：中華民國 " + str(int(time1.tm_year) - 1911) + " 年 "
-mesg += str(time1.tm_mon) + " 月 " + str(time1.tm_mday) + " 日 "
-mesg += str(time1.tm_hour) + " 點 " + str(time1.tm_min) + " 分 "
-mesg += str(time1.tm_sec) + " 秒 星期" + week[time1.tm_wday] + "\n"
-mesg += "今天是今年的第 " + str(time1.tm_yday) + " 天，此地" + dst[time1.tm_isdst]
-print(mesg)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# ch05\spenttime.py
-
-start = time.time()  # 開始執行時間
-print("開始時間：{}".format(start))
-for i in range(100):
-    time.sleep(0.001)
-end = time.time()  # 結束執行時間
-print("結束時間：{}".format(end))
-print("使用時間：%7.3f 秒" % (end - start))
-
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 import msvcrt
@@ -14548,3 +14103,472 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+list1 = random.sample(range(1, 50), 7)
+special = list1.pop()
+list1.sort()
+print("本期大樂透中獎號碼為：", end="")
+for i in range(0, 6):
+    if i == 5:
+        print(str(list1[i]))
+    else:
+        print(str(list1[i]), end=", ")
+print("本期大樂透特別號為：" + str(special))
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+W = 5
+H = 5
+nextCells = {}  # 字典
+for x in range(H):
+    for y in range(W):
+        if random.randint(0, 1) == 0:
+            nextCells[(x, y)] = "Y"
+        else:
+            nextCells[(x, y)] = "N"
+print(type(nextCells))
+print(nextCells)
+
+print("------------------------------------------------------------")  # 60個
+
+
+N = 10
+lst = list(range(N))
+print(lst)
+random.shuffle(lst)
+print(lst)
+
+lst.sort()
+print(lst)
+
+print("------------------------------------------------------------")  # 60個
+
+print("random.choice 多選一")
+animals = ["鼠", "牛", "虎", "兔", "龍", "蛇"]
+
+cc = random.choice(animals)
+print(cc)
+
+print("random.sample 多選多")
+cc = random.sample(animals, 3)
+print(cc)
+
+animals = "鼠牛虎兔龍蛇"
+print("random.sample 多選多")
+cc = random.sample(animals, 3)
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+number = 1234.5678
+print("Number :", format(number, ".2f"))
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+list1 = random.sample(range(0, 10), 4)
+list1.sort()
+print("本期四星彩中獎號碼為：", end="")
+for i in range(0, 4):
+    if i == 3:
+        print(str(list1[i]))
+    else:
+        print(str(list1[i]), end=", ")
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("產生N個 從 MIN 到 MAX 不重複的整數(包含頭尾)")
+N = 7
+MIN = 1
+MAX = 50
+list1 = random.sample(range(MIN, MAX), N)
+print(type(list1))
+print(list1)
+list1 = random.sample(range(MIN, MAX), N)
+print(list1)
+list1 = random.sample(range(MIN, MAX), N)
+print(list1)
+list1 = random.sample(range(MIN, MAX), N)
+print(list1)
+list1 = random.sample(range(MIN, MAX), N)
+print(list1)
+
+print("------------------------------------------------------------")  # 60個
+
+N = 10
+MIN = 80
+MAX = 100
+scores = random.sample(range(MIN, MAX), N)
+print("原成績：", scores)
+
+print("人數：%d" % len(scores))
+print("最高分為：%d" % max(scores))
+print("最低分為：%d" % min(scores))
+print("總分為：%d" % sum(scores))
+print("平均為：%6.2f" % (sum(scores) / N))
+
+scores2 = sorted(scores, reverse=True)  # 由大到小排序
+print("成績由大到小排序：", scores2)
+
+scores2 = sorted(scores, reverse=False)  # 由小到大排序
+print("成績由小到大排序：", scores2)
+
+print("------------------------------------------------------------")  # 60個
+
+N = 10
+MIN = 80
+MAX = 100
+scores = random.sample(range(MIN, MAX), N)
+
+
+def disp_scores():  # 顯示串列的自訂程序
+    for score in scores:
+        print(score, end=" ")
+    print()
+
+
+print("排序前：", end=" ")
+disp_scores()  # 顯示排序前串列
+
+n = len(scores) - 1  # 串列長度-1
+
+for i in range(0, n):
+    for j in range(0, n - i):
+        if scores[j] < scores[j + 1]:  # 由大到小排序
+            scores[j], scores[j + 1] = scores[j + 1], scores[j]  # 兩數互換
+
+print("成績由大到小排序：", end="")
+disp_scores()  # 顯示排序後串列
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+# Create a deck of cards
+deck = [x for x in range(0, 52)]
+
+# Create suits and ranks lists
+suits = ["Spades", "Hearts", "Diamonds", "Clubs"]
+ranks = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
+
+# Shuffle the cards
+random.shuffle(deck)
+
+# Display the first four cards
+for i in range(4):
+    suit = suits[deck[i] // 13]
+    rank = ranks[deck[i] % 13]
+    print("Card number", deck[i], "is", rank, "of", suit)
+
+print("------------------------------------------------------------")  # 60個
+
+from random import randint
+
+# Open file for writing data
+outfile = open("tmp_Numbers.txt", "w")
+for i in range(10):
+    outfile.write(str(randint(0, 9)) + " ")
+outfile.close()  # Close the file
+
+# Open file for reading data
+infile = open("tmp_Numbers.txt", "r")
+s = infile.read()
+numbers = [eval(x) for x in s.split()]
+for number in numbers:
+    print(number, end=" ")
+infile.close()  # Close the file
+
+print()
+
+# 6060
+N = 30  # 數據數量
+
+trains = np.random.randint(0, 100, size=(N, 2))
+
+# 建立分類, 未來 0 代表 red,  1 代表 blue
+labels = np.random.randint(0, 2, (N, 1))
+
+# 列出紅色方塊訓練數據
+red = trains[labels.ravel() == 0]
+plt.scatter(red[:, 0], red[:, 1], 50, "r", "s")  # 50是繪圖點大小
+
+# 列出藍色三角形訓練數據
+blue = trains[labels.ravel() == 1]
+plt.scatter(blue[:, 0], blue[:, 1], 50, "b", "^")  # 50是繪圖點大小
+show()
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+name = "鼠"
+weight = 3
+print("動物{0}的體重是{1}公斤".format(name, weight))
+
+print("動物%s的體重是%d公斤" % (name, weight))
+
+
+"""
+name = input("輸入品名：")
+num = int(input("輸入數量："))
+price = float(input("輸入單價："))
+print()
+print("品名\t\t數量\t單價\t金額")
+print("=========================================")
+print("%-14s%-9d%-9.1f%-9.1f" %(name,num,price,num*price))
+
+
+
+data = []
+site = input("請輸入平台名稱：")
+data.append(input("請輸入帳號："))
+data.append(input("請輸入密碼："))
+print(f"{site}的帳號：{data[0]}；密碼：{data[1]}")
+
+
+radius = int(input("請輸入球半徑(公分) :"))
+volume = compute(radius)
+print(f"球半徑 = {radius}公分  球體積 = {volume}立方公分")
+"""
+
+
+from random import randint
+
+rand = set()
+
+while len(rand) < 7:
+    rand.add(randint(1, 49))
+print("本期樂透彩號碼：")
+for idx, num in enumerate(rand, 1):
+    print(f"({idx})={num}", end="  ")
+
+
+print("------------------------------------------------------------")  # 60個
+
+print(543.21)  # 顯示浮點數常值 543.21
+print(5.4321e2)  # 顯示浮點數常值 543.21
+print(5.4321e6)  # 顯示浮點數常值 5432100.0
+print(5.4321e-3)  # 顯示浮點數常值 0.0054321
+
+print("------------------------------------------------------------")  # 60個
+
+name = "李金星"  # 宣告字串變數name，初值設為"李金星"
+score = 73  # 宣告整數變數score，初值設為73
+msg = "{}的成績是{}分".format(name, score)
+print(msg)
+
+name = "李金星"  # 宣告字串變數name，初值設為"李金星"
+score = 73  # 宣告整數變數score，初值設為73
+msg = "{0}的成績是{1}分".format(name, score)
+print(msg)
+
+name = "李金星"  # 宣告字串變數name，初值設為"李金星"
+score = 73  # 宣告整數變數score，初值設為73
+print("{0}的成績是{1}".format(name, score))
+
+print("------------------------------------------------------------")  # 60個
+
+price = 100
+qty = 30
+print("單價：{0}  數量：{1}".format(price, qty))
+print("打八折後,總金額：{0}".format(price * qty * 0.8))
+
+print("------------------------------------------------------------")  # 60個
+
+print("%s風景區在%s境內" % ("日月潭", "南投縣"))
+wt = 3
+price = 25
+print("%s%d斤，共%d元" % ("香蕉", wt, wt * price))
+
+print("------------------------------------------------------------")  # 60個
+
+print("%d" % 1234)  # 顯示整數,未設寬度
+print("%8d" % 1234)  # 顯示整數,寬度有剩補空格,靠右對齊
+print("%8d" % -1234)  # 顯示整數,寬度有剩補空格,靠右對齊
+print("%3d" % -1234)  # 顯示整數,寬度不足設定無效
+
+print("------------------------------------------------------------")  # 60個
+
+print("%f" % 123.456)  # 顯示數值「123.456000」,小數預設6位
+print("%f" % -123.456)  # 顯示數值「-123.456000」,小數預設6位
+print("%.2f" % 123.456)  # 顯示數值「123.46」,小數2位,第3位四捨五入
+print("%8.2f" % -12.3456)  # 顯示「ΔΔ-12.35」,總寬度8位,小數2位
+print("%3.1f" % 123.456)  # 顯示「123.5」,寬度不足設定無效,小數位數1位
+print("%8.0f" % -123.456)  # 顯示數值「ΔΔΔ-1235」,小數第1位四捨五入
+print("%8.0f" % 123.456)  # 顯示數值「ΔΔΔ1235」,小數第1位四捨五入
+print("%g" % 12345.6789)  # 顯示數值「12345.7」,總寬度預設7位
+print("%g" % 1.23456789)  # 顯示數值「1.23457」,總寬度預設7位
+print("%g" % 12.3)  # 顯示數值「12.3」, 寬度低於預設,直接顯示
+print("%g" % 123456.789)  # 顯示數值「123457」,最後1位為小數點不顯示
+print("%g" % 1234567.89)  # 顯示數值「1.23457e+06」,整數7位以上,
+# 改用科學記號顯示,指數位數佔2位(不含+-號)
+print("%10.3G" % 1234.5)  # 顯示「ΔΔ1.23E+03」,寬度10位,E及小數3位
+
+print("------------------------------------------------------------")  # 60個
+
+print("%c" % "M")  # 顯示字元「M」
+print("%4c" % "M")  # 顯示字元「ΔΔΔM」,靠右對齊,寬度有剩補空格
+print("%c" % 65)  # 顯示字元「A」,65的ASCII碼為「A」
+print("%s" % "ABCDE")  # 顯示字串「ABCDE」
+print("%8s" % "ABCDE")  # 顯示字串「ΔΔΔABCDE」
+print("%3s" % "ABCDE")  # 顯示字串「ABCDE」,總寬度不足設定無效
+print("%6.2s" % "ABCDE")  # 顯示字串「ΔΔΔΔAB」,寬度設為6,顯示2字元
+
+print("------------------------------------------------------------")  # 60個
+
+print("%+8d" % 12345)  # 顯示「ΔΔ+12345」,靠右對齊,正數值前加「+」號
+print("%+8d" % -12345)  # 顯示「ΔΔ-12345」,靠右對齊,負數值前加「-」號
+print("%-8d" % 12345)  # 顯示「12345ΔΔΔ」,靠左對齊,正數值前不加號
+print("%-8d" % -12345)  # 顯示「-12345ΔΔ」,靠左對齊,負數值前加「-」號
+print("%+8.2f" % 12.345)  # 顯示「ΔΔ+12.35」,靠右對齊,正數值加「+」號
+print("%-8.2f" % 12.345)  # 顯示「12.35ΔΔΔ」,靠左對齊,正數值不加號
+print("%-8.2f" % -12.345)  # 顯示「-12.35ΔΔ」,靠左對齊,負數值加「-」號
+print("%-8s" % "ABCDE")  # 顯示字串「ABCDEΔΔΔ」,靠左對齊,寬度有剩補空格
+print("%-6.2s" % "ABCDE")  # 顯示字串「ABΔΔΔΔ」,寬度設為6,顯示2個字元
+
+print("------------------------------------------------------------")  # 60個
+
+print("1234567890!\a")  # 出現音效聲,游標位置在"!"字元後面
+print("12345\b67890!")  # 顯示字串「123467890!」,刪除字元"5"
+print("1234567890!\n")  # 顯示字串「123467890!」,游標跳到下一行行首
+print("123\r4567890!")  # 游標跳到行首,刪除"123",顯示字串「4567890!」
+print("123\t45\\67")  # 顯示字串「123ΔΔΔΔΔ45\67」
+print('123"45"67')  # 顯示字串「123"45"67」
+print("123'4'567")  # 顯示字串「123'4'567」
+print("ASCII碼41(Hex):\x41")  # 顯示字串「ASCII碼41(Hex):A」
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("姓名    成績")
+print("%-4s  %3d" % (name1, score1))
+print("%-4s  %3d" % (name2, score2))
+
+print("------------------------------------------------------------")  # 60個
+
+# 過度擬合 (overfitting)
+
+# 拉格朗日 (Lagrange) 插值法
+
+x = np.linspace(0, 1, 200)
+y = -((x - 1) ** 2) + 1
+plt.plot(x, y, "lime")
+
+X = np.linspace(0, 1, 20)
+Y = -((X - 1) ** 2) + 1 + 0.08 * np.random.randn(20)
+plt.scatter(X, Y, c="b", s=50)
+
+z = np.polyfit(X, Y, 19)
+p = np.poly1d(z)
+plt.plot(x, p(x), "r")
+
+xmin, xmax, ymin, ymax = 0, 1, 0, 1.5
+plt.axis([xmin, xmax, ymin, ymax])  # 設定各軸顯示範圍
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+print(time.time(), " 秒")
+print(time.time_ns(), " 微秒")
+
+"""
+time.ctime 本地時間
+time.localtime() 轉換為struct_time格式的本地時間
+time.gmtime() 回傳UTC時間
+
+time.mktime(t) 將struct_time格式的時間轉換回秒數
+time.asctime() 將struct_time格式的時間轉換為文字顯示
+time.strftime() 將時間轉換為特定格式字串
+time.strptime() 將特定格式的字串轉換為struct_time格式的時間
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print(time.time())  # 输出：1638348236.3917518
+print(time.sleep(2))  # 括号里是2，程序睡两秒再执行，打印会显示None
+print(time.time_ns())  # 输出：1638348716267450500
+print(
+    time.gmtime()
+)  # 输出：time.struct_time(tm_year=1974, tm_mon=12, tm_mday=15, tm_hour=1, tm_min=6, tm_sec=0, tm_wday=6, tm_yday=349, tm_isdst=0)
+print(
+    time.gmtime(10000000)
+)  #  输出： time.struct_time(tm_year=1970, tm_mon=4, tm_mday=26, tm_hour=17, tm_min=46, tm_sec=40, tm_wday=6, tm_yday=116, tm_isdst=0)
+print(time.ctime(123123))  # 输出：Fri Jan  2 18:12:03 1970
+print(time.ctime())  # 输出：Wed Dec  1 18:53:33 2021
+print(time.strptime("2021-12-1", "%Y-%m-%d"))  # 将其转化为机构化时间，前后必须对应
+a = time.strptime("2021-12-1", "%Y-%m-%d")
+print(a.tm_year)  # 可以通过这种方式去取
+# 输出：2025
+
+print(time.localtime())  # 返回结构化时间，里面加参数，就从计算机元年开始算
+a = time.localtime()
+print(a.tm_year)  # 可以通过这种方式去取
+# 输出：2021
+print(time.mktime(time.localtime()))  # 输出： 1638358856.0
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+
+week = [" 一", " 二", " 三", " 四", " 五", " 六", " 日"]
+dst = [" 無日光節約時間", " 有日光節約時間"]
+time1 = time.localtime()
+mesg = "現在時刻：中華民國 " + str(int(time1.tm_year) - 1911) + " 年 "
+mesg += str(time1.tm_mon) + " 月 " + str(time1.tm_mday) + " 日 "
+mesg += str(time1.tm_hour) + " 點 " + str(time1.tm_min) + " 分 "
+mesg += str(time1.tm_sec) + " 秒 星期" + week[time1.tm_wday] + "\n"
+mesg += "今天是今年的第 " + str(time1.tm_yday) + " 天，此地" + dst[time1.tm_isdst]
+print(mesg)
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# ch05\spenttime.py
+
+start = time.time()  # 開始執行時間
+print("開始時間：{}".format(start))
+for i in range(100):
+    time.sleep(0.001)
+end = time.time()  # 結束執行時間
+print("結束時間：{}".format(end))
+print("使用時間：%7.3f 秒" % (end - start))
+
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+
+# Get the current time from the computer's clock:
+currentTime = time.localtime()
+# % 12 so we use a 12-hour clock, not 24:
+hours = str(currentTime.tm_hour % 12)
+if hours == "0":
+    hours = "12"  # 12-hour clocks show 12:00, not 00:00.
+minutes = str(currentTime.tm_min)
+seconds = str(currentTime.tm_sec)
+
+print(hours, minutes, seconds)
+
+print("------------------------------------------------------------")  # 60個
+
+currentTime = time.time()  # Get current time
+
+# Obtain the total seconds since midnight, Jan 1, 1970
+totalSeconds = int(currentTime)
+
+print(totalSeconds)
+
+print("------------------------------------------------------------")  # 60個
+
+

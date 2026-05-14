@@ -992,10 +992,39 @@ namespace vcs_Mix00
 
         private void button20_Click(object sender, EventArgs e)
         {
+            //FileInfo
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            FileAttributes attr = (new FileInfo(filename)).Attributes;
+            if ((attr & FileAttributes.ReadOnly) > 0)
+            {
+                richTextBox1.Text += "唯讀檔案\n";
+            }
+            else
+            {
+                richTextBox1.Text += "一般檔案\n";
+            }
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
+            //获得网卡信息函数
+            richTextBox1.Text += "你的計算機名稱 : " + Environment.MachineName.ToString() + "\n";
+            richTextBox1.Text += "你的網卡序號 : " + GetNetCardMacAddress() + "\n";
+        }
+
+        //获得网卡信息函数
+        public string GetNetCardMacAddress()
+        {
+            //创建ManagementClass对象
+            ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
+            ManagementObjectCollection moc = mc.GetInstances();//创建ManagementObjectCollection对象
+            string str = "";//用于存储网卡序列号
+            foreach (ManagementObject mo in moc)//遍历得到的集合
+            {
+                if ((bool)mo["IPEnabled"] == true)//判断IPEnabled属性是否为true
+                    str = mo["MacAddress"].ToString();//获取网卡序列号
+            }
+            return str;//返回网卡序列号
         }
 
         private void button22_Click(object sender, EventArgs e)

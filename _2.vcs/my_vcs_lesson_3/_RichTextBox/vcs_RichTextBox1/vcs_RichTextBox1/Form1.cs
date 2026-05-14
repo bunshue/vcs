@@ -35,6 +35,13 @@ namespace vcs_RichTextBox1
                 "維基百科：https://zh.wikipedia.org/wiki/Wikipedia:%E9%A6%96%E9%A1%B5\n" +
                 "雅虎字典：https://tw.dictionary.search.yahoo.com/\n";
             richTextBox1.LinkClicked += new LinkClickedEventHandler(richTextBox1_LinkClicked);
+
+            radioButton2.Checked = true;
+
+            label3.Text = "";
+            label4.Text = "";
+
+            richTextBox_search_TextChanged(sender, e);    //顯示文字總長
         }
 
         private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
@@ -65,7 +72,6 @@ namespace vcs_RichTextBox1
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -76,7 +82,6 @@ namespace vcs_RichTextBox1
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -88,39 +93,32 @@ namespace vcs_RichTextBox1
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             int dd = 30;
-            lb_richtextbox1_fx1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + dd * 0);
-            lb_richtextbox1_fx2.Location = new Point(x_st + dx * 3, y_st + dy * 0 + dd * 1);
-            lb_richtextbox1_fx3.Location = new Point(x_st + dx * 3, y_st + dy * 0 + dd * 2);
-            lb_richtextbox1_fx5.Location = new Point(x_st + dx * 3 + 360, y_st + dy * 0 + dd * 1);
-            lb_richtextbox1_fx6.Location = new Point(x_st + dx * 3 + 360, y_st + dy * 0 + dd * 3 - 10);
-            lb_richtextbox1_fx4.Location = new Point(x_st + dx * 3 + 360, y_st + dy * 0 + dd * 0);
-            lb_richtextbox1_text.Location = new Point(x_st + dx * 3 + 360 + 260, y_st + dy * 0 + dd * 0);
+            lb_richtextbox1_fx1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd * 0);
+            lb_richtextbox1_fx2.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd * 1);
+            lb_richtextbox1_fx3.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd * 2);
+            lb_richtextbox1_fx5.Location = new Point(x_st + dx * 2 + 360, y_st + dy * 0 + dd * 1);
+            lb_richtextbox1_fx6.Location = new Point(x_st + dx * 2 + 360, y_st + dy * 0 + dd * 3 - 10);
+            lb_richtextbox1_fx4.Location = new Point(x_st + dx * 2 + 360, y_st + dy * 0 + dd * 0);
+            lb_richtextbox1_text.Location = new Point(x_st + dx * 2 + 360 + 260, y_st + dy * 0 + dd * 0);
 
-            lb_richtextbox1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + dd * 4);
-            richTextBox1.Size = new Size(850, 290);
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + dd * 5);
+            richTextBox_search.Size = new Size(500, 400);
+            richTextBox_search.Location = new Point(x_st + dx * 5+110, y_st + dy * 0 + dd * 0);
+            groupBox1.Location = new Point(x_st + dx * 5 + 110, y_st + dy * 0 + dd * 0 + 410);
 
-            lb_richtextbox2.Location = new Point(x_st + dx * 3, y_st + dy * 7);
-            richTextBox2.Size = new Size(400, 200);
-            richTextBox2.Location = new Point(x_st + dx * 3, y_st + dy * 7 + dd);
+            lb_richtextbox1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd * 4);
+            richTextBox1.Size = new Size(700, 290);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd * 5);
 
-            lb_richtextbox_rtf.Location = new Point(x_st + dx * 5, y_st + dy * 7);
-            richTextBox_rtf.Size = new Size(430, 200);
-            richTextBox_rtf.Location = new Point(x_st + dx * 5, y_st + dy * 7 + dd);
+            lb_richtextbox2.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            richTextBox2.Size = new Size(350, 200);
+            richTextBox2.Location = new Point(x_st + dx * 2, y_st + dy * 7 + dd);
+
+            lb_richtextbox_rtf.Location = new Point(x_st + dx * 4, y_st + dy * 7);
+            richTextBox_rtf.Size = new Size(350, 200);
+            richTextBox_rtf.Location = new Point(x_st + dx * 4-60, y_st + dy * 7 + dd);
 
             dd = 45;
             bt_open_rtf.Location = new Point(richTextBox_rtf.Location.X + richTextBox_rtf.Width - dd * 2, richTextBox_rtf.Location.Y);
@@ -151,7 +149,7 @@ namespace vcs_RichTextBox1
             lb_richtextbox_rtf.Text = "richTextBox_rtf";
             lb_richtextbox1_text.Text = "抓出游標所指的字";
 
-            this.Size = new Size(1500 + 20, 780);
+            this.Size = new Size(1700, 880);
             this.Text = "vcs_RichTextBox1";
 
             //設定執行後的表單起始位置, 正中央
@@ -250,6 +248,20 @@ namespace vcs_RichTextBox1
             richTextBox1.Rtf = richTextBox1.Rtf.Replace("@@@", table.ToString());
             // 在RichTextBox最後加入表格 Insert the table at the end.
             richTextBox1.Rtf = richTextBox1.Rtf.Trim().TrimEnd('}') + table.ToString() + "}";
+
+            //3030
+
+            //在RTB內貼入圖片
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Image myImage = Image.FromFile(filename);
+            Clipboard.SetImage(myImage);
+
+            DataFormats.Format df = DataFormats.GetFormat(DataFormats.Bitmap);
+            if (richTextBox1.CanPaste(df))
+            {
+                richTextBox1.Paste(df);
+            }
         }
 
         int flag_rtb_sort = 0;
@@ -510,58 +522,10 @@ namespace vcs_RichTextBox1
 
         private void button19_Click(object sender, EventArgs e)
         {
+            //讀寫RTF檔
         }
 
-        private void button20_Click(object sender, EventArgs e)
-        {
-            //在RTB內貼入圖片
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            Image myImage = Image.FromFile(filename);
-            Clipboard.SetImage(myImage);
-
-            DataFormats.Format df = DataFormats.GetFormat(DataFormats.Bitmap);
-            if (richTextBox1.CanPaste(df))
-            {
-                richTextBox1.Paste(df);
-            }
-        }
-
-        private void button21_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button22_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button24_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button25_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button26_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button27_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button28_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button29_Click(object sender, EventArgs e)
-        {
-        }
+        //6060
 
         /// <summary>自定义方法 -- 
         ///  获取文本中(行和列)--光标--坐标位置的调用方法
@@ -901,6 +865,326 @@ namespace vcs_RichTextBox1
             //richTextBox_rtf.SaveFile(rtf_filename, RichTextBoxStreamType.RichText);
             richTextBox2.Text += "已存檔 : " + rtf_filename + "\n";
         }
+
+        //6060
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            //搜尋
+            if (flag_search_pattern_start == false)
+            {
+                flag_search_pattern_start = true;
+                start = this.richTextBox_search.SelectionStart;
+                richTextBox2.Text += "目前游標位置 : " + start.ToString() + "\n";
+            }
+
+            RichTextBox rbox = this.richTextBox_search;
+            string str = this.textBox1.Text;
+            if (this.checkBox1.Checked) //是否区分大小写
+            {
+                this.FindDownM(rbox, str);
+            }
+            else
+            {
+                if (this.radioButton2.Checked)
+                {
+                    this.FindDown(rbox, str);
+                }
+                else
+                {
+                    this.FindUp(rbox, str);
+                }
+            }
+
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            //替換
+            string str0 = this.textBox1.Text, str1 = this.textBox2.Text;
+            this.Replace(str0, str1);
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            //全部替換
+            //Form_Mxdr f1 = (Form_Mxdr)this.Owner;
+            RichTextBox rbox = this.richTextBox_search;
+            string str0 = textBox1.Text, str1 = textBox2.Text;
+            this.ReplaceAll(rbox, str0, str1);
+            sum = 0;
+            start = 0;
+            flag_search_pattern_start = false;
+        }
+
+        #region ***********全局变量*************
+        bool flag_search_pattern_start = false;
+        int start = 0;
+        int sum = 0;
+        #endregion
+
+        #region =★*★*★=    〖查找替换〗 函数     =★*★*★=
+        /// <summary>向上查找指定字符 或 字符串 (不区分大小写)<para>　<para>
+        /// 参数1(rbox):内容文本框,指定为 RichTextBox 文本框类型<para>
+        /// 参数2(str):用户指定要查找的字符串</para>
+        /// </para></para> </summary>
+        /// <param name="rbox">内容文本框,指定为 RichTextBox 文本框类型</param>
+        /// <param name="str">用户指定要查找的字符串</param>
+        private void FindUp(RichTextBox rbox, string str)
+        {
+            richTextBox2.Text += "FindUp\n";
+            int rboxL = rbox.SelectionStart;
+            int index = rbox.Find(str, 0, rboxL, RichTextBoxFinds.Reverse);
+
+            richTextBox2.Text += "index = " + index.ToString() + "\t" +
+    "rboxL = " + rboxL.ToString() + "\t" +
+    "sum = " + sum.ToString() + "\n";
+
+            if (index > -1)
+            {
+                rbox.SelectionStart = index;
+                rbox.SelectionLength = str.Length;
+                sum++;
+                rbox.Focus();
+            }
+            else if (index < 0)
+            {
+                seeks(str);
+
+                //richTextBox2.Text += "搜尋到底了, sum = " + sum.ToString() + "\n";
+
+                if ((checkBox3.Checked == true) && (sum > 0))
+                {
+                    sum = 0;
+                    richTextBox2.Text += "a搜尋到底了, 再搜尋\n";
+                    //如果还想再找一遍,添加下面这句
+                    rbox.SelectionStart = rbox.Text.Length;
+                    FindUp(rbox, str);
+                }
+                else
+                    sum = 0;
+            }
+        }
+
+        /// <summary>向下查找指定字符 或 字符串 (不区分大小写)<para>　<para>
+        /// 参数1(rbox):内容文本框,指定为 RichTextBox 文本框类型
+        /// <para>参数2(str):用户指定要查找的字符串</para>
+        /// </para></para> </summary>
+        /// <param name="rbox">内容文本框,指定为 RichTextBox 文本框类型</param>
+        /// <param name="str">用户指定要查找的字符串</param>
+        private void FindDown(RichTextBox rbox, string str)
+        {
+            richTextBox2.Text += "FindDown\n";
+            int rboxL = rbox.Text.Length;
+
+            richTextBox2.Text += "start = " + start.ToString() + "\t" +
+                "rboxL = " + rboxL.ToString() + "\t" +
+                "sum = " + sum.ToString() + "\n";
+
+            if (start < rboxL)
+            {
+                start = rbox.Find(str, start, RichTextBoxFinds.None);
+                int los = rbox.SelectionStart + str.Length;
+                richTextBox2.Text += "1111 start = " + start.ToString() + "\tlos = " + los.ToString() + "\n";
+
+                if ((start < 0) || (start > rboxL))
+                {
+                    //richTextBox2.Text += "cannot find pattern\n";
+                    this.seeks(str);
+
+                    if ((checkBox3.Checked == true) && (sum > 0))
+                    {
+                        richTextBox2.Text += "b搜尋到底了, 再搜尋\n";
+                        start = 0;
+                        FindDown(rbox, str);
+                    }
+                    else
+                    {
+                        richTextBox2.Text += "c搜尋到底了\n";
+                        start = los;
+                    }
+                    sum = 0;
+                }
+                else if (start == rboxL || start < 0)
+                {
+                    richTextBox2.Text += "1111b\n";
+                    this.seeks(str);
+                    start = los;
+                    sum = 0;
+                }
+                else
+                {
+                    richTextBox2.Text += "1111c\n";
+                    sum++;
+                    start = los;
+                    rbox.Focus();
+                }
+            }
+            else if (start == rboxL || start < 0)
+            {
+                richTextBox2.Text += "2222\n";
+                int los = rbox.SelectionStart + str.Length;
+                this.seeks(str);
+                start = los;
+                sum = 0;
+            }
+            else
+            {
+                richTextBox2.Text += "3333\n";
+                int los = rbox.SelectionStart + str.Length;
+                this.seeks(str);
+                start = los;
+                sum = 0;
+            }
+        }
+
+
+        /// <summary>向下查找指定字符 或 字符串 (限定大小写)<para>　<para>
+        /// 参数1(rbox):内容文本框,指定为 RichTextBox 文本框类型
+        /// <para>参数2(str):用户指定要查找的字符串</para>
+        /// </para></para> </summary>
+        /// <param name="rbox">内容文本框,指定为 RichTextBox 文本框类型</param>
+        /// <param name="str">用户指定要查找的字符串</param>
+        private void FindDownM(RichTextBox rbox, string str)
+        {
+            richTextBox2.Text += "FindDownM\n";
+            int rboxL = rbox.Text.Length;
+
+            if (start < rboxL)
+            {
+                start = rbox.Find(str, start, RichTextBoxFinds.MatchCase);
+                int los = rbox.SelectionStart + str.Length;
+
+
+                if ((start < 0) || (start > rboxL))
+                {
+                    this.seeks(str);
+                    start = los;
+                    sum = 0;
+                }
+                else if (start == rboxL || start < 0)
+                {
+                    this.seeks(str);
+                    start = los;
+                    sum = 0;
+                }
+                else
+                {
+                    sum++;
+                    start = los;
+                    rbox.Focus();
+                }
+            }
+            else if (start == rboxL || start < 0)
+            {
+                int los = rbox.SelectionStart + str.Length;
+                this.seeks(str);
+                start = los;
+                sum = 0;
+            }
+            else
+            {
+                int los = rbox.SelectionStart + str.Length;
+                this.seeks(str);
+                start = los;
+                sum = 0;
+            }
+        }
+
+
+        /// <summary> 消息提示,提示用户查找结果<para>　<para>
+        /// 参数1(str):用户指定要查找的字符串</para></para> </summary>
+        /// <param name="str">用户指定要查找的字符串</param>
+        private void seeks(string str)
+        {
+            if (sum != 0)
+            {
+                richTextBox2.Text += "已結束搜尋文件, 總共找到 " + sum.ToString() + " 筆資料\t\"" + str + "\"\n";
+            }
+            else
+            {
+                richTextBox2.Text += "搜尋的字串找不到!\t\"" + str + "\"\n";
+            }
+        }
+
+
+        /// <summary> 全部替换指定〖字符 或 字符串〗<para>　<para>
+        /// 参数1(rbox):要替换内容的文本框,指定为 RichTextBox 文本框类型<para>
+        /// 参数2(str0):指定〖原有〗的内容(查找内容)</para><para>
+        /// 参数3(str1):指定〖新〗的内容(替换内容)</para></para></para> </summary>
+        /// <param name="rbox">要替换内容的文本框,指定为 RichTextBox 文本框类型</param>
+        /// <param name="str0">指定〖原有〗的内容(查找内容)</param>
+        /// <param name="str1">指定〖新〗的内容(替换内容)</param>
+        private void ReplaceAll(RichTextBox rbox, string str0, string str1)
+        {
+            richTextBox2.Text += "ReplaceAll\n";
+            rbox.Text = rbox.Text.Replace(str0, str1);
+        }
+
+
+        /// <summary>单次替换字符或字符串<para>　<para>
+        /// 参数1(str0):查找的内容<para>
+        /// 参数2(str1):要替换的内容
+        /// </para> </para></para> </summary>
+        /// <param name="str0">查找的内容</param>
+        /// <param name="str1">要替换的内容</param>
+        private void Replace(string str0, string str1)
+        {
+            //Replace 把所有的 "蘇子換成 "蘇東坡
+            richTextBox2.Text += "Replace 把所有的 \"" + str0 + "\" 換成 \"" + str1 + "\"\n";
+            //Form_Mxdr f1 = (Form_Mxdr)this.Owner;
+            RichTextBox rbox = this.richTextBox_search;
+            rbox.SelectionLength = str0.Length;
+            rbox.SelectedText = str1;//textBox2中放要替换的字符
+        }
+        #endregion
+
+        private void richTextBox_search_TextChanged(object sender, EventArgs e)
+        {
+            label3.Text = "文字總長: " + richTextBox_search.TextLength.ToString();
+        }
+
+        private void richTextBox_search_SelectionChanged(object sender, EventArgs e)
+        {
+            if (richTextBox_search.SelectionLength > 0)
+                label4.Text = "選取長度: " + richTextBox_search.SelectionLength.ToString();
+            else
+                label4.Text = "";
+
+            /*   暫不改變字體
+            if (richTextBox_search.SelectionLength == 0)
+            {
+                // 將RichTextBox中選取的文字，透過 FontFamily 類別 
+                // 同時設定 粗體文字 FontStyle.Bold 與 斜體文字 FontStyle.Italic 
+                //Font MyFont = new Font(new FontFamily("新細明體"), 12, FontStyle.Bold | FontStyle.Italic);
+                Font MyFont = new Font(new FontFamily("新細明體"), 12, FontStyle.Regular);
+                //this.richTextBox_search.Font = DefaultFont; fail
+                this.richTextBox_search.Font = MyFont;
+            }
+            else
+            {
+                // 將RichTextBox中選取的文字，透過 FontFamily 類別 
+                // 同時設定 粗體文字 FontStyle.Bold 與 斜體文字 FontStyle.Italic 
+                Font MyFont = new Font(new FontFamily("標楷體"), 16, FontStyle.Bold | FontStyle.Italic);
+                //this.richTextBox_search.Font = DefaultFont; fail
+                this.richTextBox_search.SelectionFont = MyFont;
+            }
+            */
+        }
+
+        private void richTextBox_search_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Control.ModifierKeys == Keys.Control)
+            {
+                if (e.KeyCode == Keys.F)
+                {
+                    richTextBox2.Text += "你按了 ctrl + F\n";
+                }
+            }
+        }
+
+        //6060
+
     }
 }
 
@@ -922,5 +1206,17 @@ namespace vcs_RichTextBox1
 */
 
 
+
+
+
+/*
+/// <summary>获取 Form_Mxdr.RichTextBox<para>　<para>
+/// 获取 RichTextBox 的读写操作权限</para></para> </summary>
+public RichTextBox RichTxtBox
+{
+    get { return this.txtInput; }
+    set { this.txtInput = value; }
+}
+*/
 
 

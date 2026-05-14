@@ -70,4 +70,3 @@ namespace vcs_RichTextBox9
         }
     }
 }
-
