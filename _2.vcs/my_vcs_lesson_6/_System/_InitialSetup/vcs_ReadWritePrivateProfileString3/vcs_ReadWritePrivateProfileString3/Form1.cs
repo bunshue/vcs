@@ -124,7 +124,6 @@ namespace vcs_ReadWritePrivateProfileString3
 
             richTextBox1.Text += "取得 時 : " + str3 + "\n";
             richTextBox1.Text += "取得 分 : " + str4 + "\n";
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -146,13 +145,12 @@ namespace vcs_ReadWritePrivateProfileString3
         private void button2_Click(object sender, EventArgs e)
         {
             //讀取文件存放的默認路徑
-            richTextBox1.Text += ReadString("SysSet", "RootPath", "", Application.StartupPath + "\\SysSet.ini");
-
+            richTextBox1.Text += ReadString("SysSet", "RootPath", "", "tmp_SysSet.ini");
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            WritePrivateProfileString("SysSet", "RootPath", "AAAAAAAA", Application.StartupPath + "\\SysSet.ini");
+            WritePrivateProfileString("SysSet", "RootPath", "AAAAAAAA", "tmp_SysSet.ini");
         }
     }
 }

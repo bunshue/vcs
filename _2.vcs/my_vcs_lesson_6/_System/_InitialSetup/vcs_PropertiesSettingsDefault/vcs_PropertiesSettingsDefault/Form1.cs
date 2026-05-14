@@ -9,15 +9,10 @@ using System.Windows.Forms;
 
 /*
 點開 方案總管/vcs_XXXXX/Properties/Settings.settings
-
 加入要儲存的參數 的 名稱 型別 預設值
-
 若是數字 一定要給預設值
-
 儲存參數到 Properties.Settings.Default
-
 方案總管/Properties/Settings.settings點開 加入名稱 型別 範圍/預設值
- 
 */
 
 namespace vcs_PropertiesSettingsDefault
@@ -112,7 +107,5 @@ namespace vcs_PropertiesSettingsDefault
             richTextBox1.Text += "Default.Size" + "\t" + Properties.Settings.Default.Size.ToString() + "\n";
             richTextBox1.Text += "Default.Delay" + "\t" + Properties.Settings.Default.Delay.ToString() + "\n";
         }
-
     }
 }
-

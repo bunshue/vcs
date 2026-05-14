@@ -73,7 +73,7 @@ namespace vcs_Cryptography4
             button2.BringToFront();
 
             this.Size = new Size(1600, 900);
-            this.Text = "vcs_Cryptography2_SHA1";
+            this.Text = "vcs_Cryptography4";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;

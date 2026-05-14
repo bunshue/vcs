@@ -30,7 +30,7 @@ namespace vcs_DynamicAddRemoveControls1
 
         Bitmap bitmap1;
         PictureBox pictureBox1 = new PictureBox();
-        Label label1 = new Label();
+        Label label_new = new Label();
 
         public Form1()
         {
@@ -50,28 +50,28 @@ namespace vcs_DynamicAddRemoveControls1
             y_st = 10;
             DynamicAddControls2(x_st, y_st);
 
-            x_st = 850;
-            y_st = 10;
+            x_st = 600;
+            y_st = 110;
             DynamicAddControls3(x_st, y_st);
 
-            x_st = 850;
-            y_st = 210;
+            x_st = 600;
+            y_st = 280;
             DynamicAddControls4(x_st, y_st);
 
-            x_st = 220;
-            y_st = 610;
+            x_st = 620;
+            y_st = 510;
             DynamicAddControls5(x_st, y_st);
 
-            x_st = 220;
-            y_st = 760;
+            x_st = 620;
+            y_st = 710;
             DynamicAddControls6(x_st, y_st);
 
-            x_st = 1120;
+            x_st = 920;
             y_st = 10;
             DynamicAddControls7(x_st, y_st);
 
-            x_st = 1320;
-            y_st = 420;
+            x_st = 1360;
+            y_st = 10;
             DynamicAddControls8(x_st, y_st);
 
             //動態創建控件和事件 Panel
@@ -99,6 +99,12 @@ namespace vcs_DynamicAddRemoveControls1
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
             button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
             button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 11);
 
             y_st = 10;
 
@@ -198,34 +204,6 @@ namespace vcs_DynamicAddRemoveControls1
                 this.Controls.Add(btn[i]);//將控件加入 到 表單 容器
             }
             //this.Controls.AddRange(btn);//將控件批次加入 到 表單 容器
-
-            Button btn2 = new Button();//創建一個新的按鈕
-            btn2.Size = new Size(w, h);
-            btn2.Name = "NNN";
-            btn2.Text = "TTT";
-            btn2.Location = new Point(x_st, y_st + 1 * h);
-            this.Controls.Add(btn2);//將控件加入 到 表單 容器
-
-            y_st += 150;
-
-            int ss = 40;
-            PictureBox pb_new = new PictureBox();
-            pb_new.Size = new Size(ss * 3, ss * 3);
-            pb_new.Left = x_st;
-            pb_new.Top = y_st;
-            pb_new.BackColor = Color.Pink;
-            this.Controls.Add(pb_new);//將控件加入 到 表單 容器
-
-            Button btn3 = new Button();
-            this.Controls.Add(btn3);//將控件加入 到 表單 容器
-            btn3.BringToFront();
-            //btn3.Location = new Point(button10.Location.X, button10.Location.Y + 60);   same
-            btn3.Left = x_st + ss;
-            btn3.Top = y_st + ss;
-            btn3.Size = new Size(ss, ss);
-            btn3.BackColor = Color.Red;
-            btn3.Text = "新增控件";
-            btn3.Click += new EventHandler(btn_ClickEvent1);// 加入按鈕事件
         }
 
         private void DynamicAddControls3(int x_st, int y_st)
@@ -292,7 +270,7 @@ namespace vcs_DynamicAddRemoveControls1
                 btn.BackgroundImage = new Bitmap(filename);
                 btn.BackgroundImageLayout = ImageLayout.Zoom;
                 btn.Size = new Size(w, h);
-                btn.Location = new Point(x_st + dx * (num % 20), y_st + dy * (num / 20));
+                btn.Location = new Point(x_st + dx * (num % 15), y_st + dy * (num / 15));
                 num++;
 
                 FileInfo file_info = new FileInfo(filename);
@@ -318,7 +296,7 @@ namespace vcs_DynamicAddRemoveControls1
                 btn.Parent = this;
                 btn.Image = new Bitmap(filename);
                 btn.Size = new Size(w, h);
-                btn.Location = new Point(x_st + dx * (num % 32), y_st + dy * (num / 32));
+                btn.Location = new Point(x_st + dx * (num % 24), y_st + dy * (num / 24));
 
                 num++;
 
@@ -404,11 +382,11 @@ namespace vcs_DynamicAddRemoveControls1
             y_st += 120;
 
             // 實例化按鈕
-            label1.Text = "動態加入pictureBox1";
-            label1.AutoSize = true;
-            label1.Left = x_st;
-            label1.Top = y_st;
-            this.Controls.Add(label1);//將控件加入 到 表單 容器
+            label_new.Text = "動態加入pictureBox1";
+            label_new.AutoSize = true;
+            label_new.Left = x_st;
+            label_new.Top = y_st;
+            this.Controls.Add(label_new);//將控件加入 到 表單 容器
 
             y_st += 30;
             pictureBox1.BorderStyle = BorderStyle.Fixed3D;
@@ -809,58 +787,16 @@ namespace vcs_DynamicAddRemoveControls1
 
         private void button6_Click(object sender, EventArgs e)
         {
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
             //移除控件
             //this.Controls.Remove(myButton); // 移除特定控制項
             this.Controls.Clear();          // 清空容器內所有控制項
-
 
             //動態移除控件和事件 Panel
             richTextBox1.Text += "移除panel1上的控件\n";
             DynamicRemoveButtonOnPanel(panel1);
         }
 
-        private void btn_ClickEvent3(object sender, EventArgs e)
-        {
-            Button btn = sender as Button;
-            richTextBox1.Text += "你按了 " + btn.Text + "\n";
-            richTextBox1.Text += "你按了 " + btn.Name + "\n";
-
-            if (btn.BackColor != Color.Pink)
-                btn.BackColor = Color.Pink;
-            else
-                btn.BackColor = SystemColors.ControlLight;
-
-            /*
-            if (btn.Text == "" && count < 9)
-            {
-                btn.Text = nowIndex == true ? symbol2 : symbol1;
-                nowIndex = !nowIndex;
-                label.Text = nowIndex == true ? "玩家二，請選擇。" : "玩家一，請選擇。";
-                Check();
-                count++;
-                if (count == 9)
-                {
-                    label.Text = "GameOver!";
-                    GameOver("GameOver");
-                }
-                Console.WriteLine(count);
-            }
-            */
-        }
-
-        private void button10_Click(object sender, EventArgs e)
+        private void button7_Click(object sender, EventArgs e)
         {
             //清除這些新增的控件
             for (int j = 0; j < 10; j++)
@@ -893,12 +829,202 @@ namespace vcs_DynamicAddRemoveControls1
             }
         }
 
-        private void button11_Click(object sender, EventArgs e)
+        private void button8_Click(object sender, EventArgs e)
         {
             //單擊視窗的任何地方都會產生Button控件
 
             this.MouseDown += new MouseEventHandler(Form1_MouseDown);
             button11.Enabled = false;
+        }
+
+        private void btn_ClickEvent3(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            richTextBox1.Text += "你按了 " + btn.Text + "\n";
+            richTextBox1.Text += "你按了 " + btn.Name + "\n";
+
+            if (btn.BackColor != Color.Pink)
+                btn.BackColor = Color.Pink;
+            else
+                btn.BackColor = SystemColors.ControlLight;
+
+            /*
+            if (btn.Text == "" && count < 9)
+            {
+                btn.Text = nowIndex == true ? symbol2 : symbol1;
+                nowIndex = !nowIndex;
+                label.Text = nowIndex == true ? "玩家二，請選擇。" : "玩家一，請選擇。";
+                Check();
+                count++;
+                if (count == 9)
+                {
+                    label.Text = "GameOver!";
+                    GameOver("GameOver");
+                }
+                Console.WriteLine(count);
+            }
+            */
+        }
+
+        Label label0 = new Label();
+        Label label1 = new Label();
+        Label label2 = new Label();
+        Label label3 = new Label();
+        Label label4 = new Label();
+        Label label5 = new Label();
+        Label label6 = new Label();
+        Label label7 = new Label();
+
+        //將 ToolStrip 加入 toolStripContainer1 的 TopToolStripPanel
+        //將 toolStripContainer1 加入 表單
+        ToolStripContainer toolStripContainer1;
+        ToolStrip toolStrip1;
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //建立控件
+            //建立控件
+
+            int x_st = 250;
+            int y_st = 50;
+            int dx = 150;
+            int dy = 150;
+
+            //控件一維陣列
+            Label[] label_array = new Label[] { label0, label1, label2, label3, label4, label5, label6, label7 };
+            for (int i = 0; i < 8; i++)
+            {
+                label_array[i].BackColor = System.Drawing.SystemColors.ActiveBorder;
+                label_array[i].FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+                label_array[i].Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+                label_array[i].Size = new System.Drawing.Size(72, 90);
+                label_array[i].Text = i.ToString();
+                label_array[i].Name = "label" + i.ToString();
+                label_array[i].TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+                label_array[i].Location = new Point(x_st + dx * (i % 4), y_st + dy * (i / 4));
+                this.Controls.Add(label_array[i]);
+            }
+            for (int i = 0; i < 8; i++)
+            {
+                richTextBox1.Text += label_array[i].Name + "\n";
+            }
+
+            /*
+            //控件一維陣列
+            TextBox[] textArray = new TextBox[] { numText1a, numText2a, numText3a, numText4a, numText5a, numText6a, numText7a, numText8a };
+
+            for (int i = 0; i < 8; i++)
+            {
+                //textArray[i].BackColor = SystemColors.Window;
+                textArray[i].BackColor = Color.Pink;
+                textArray[i].Text = i.ToString();
+            }
+            */
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //全部更動
+            //this.Controls From中的所有元件控制權
+            //foreach (Control child in this.Controls)表示每次從this.Controls中取一個元件的控制權
+            foreach (Control child in this.Controls)
+            {
+                //取元件是Label的控制權
+                if (child is Label)
+                {
+                    //做想做的事
+                    child.BackColor = Color.SkyBlue;
+                    child.Text = "^^";
+                    //.................
+                    //.................
+                }
+            }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //偶數label更動
+
+            int temp = 6;
+            foreach (Control child in this.Controls)
+            {
+                if (child is Label)
+                {
+                    richTextBox1.Text += "aaaaa : " + child.Name + "\n";
+                    if (child.Name == "label" + temp.ToString())
+                    {
+                        richTextBox1.Text += "取得 : " + child.Name + "\n";
+                        temp -= 2;
+                        child.BackColor = Color.YellowGreen;
+                        child.Text = "QQ";
+                    }
+                }
+            }
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //恢復
+            int temp = 0;
+            foreach (Control child in this.Controls)
+            {
+                if (child is Label)
+                {
+                    temp++;
+                    child.BackColor = SystemColors.ActiveBorder;
+                    child.Text = temp.ToString();
+                }
+            }
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            //對控件的修改
+            foreach (Control x in Controls)
+            {
+                if (x.GetType().ToString() == "System.Windows.Forms.Button")
+                {
+                    Button Button = (System.Windows.Forms.Button)x;
+                    Button.BackColor = Color.Pink;
+                }
+            }
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            //將 toolStripContainer1 加入 表單
+            toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+
+            toolStrip1 = new System.Windows.Forms.ToolStrip();
+            toolStrip1.Items.Add("新增檔案");
+            toolStrip1.Items.Add("開啟檔案");
+            toolStrip1.Items.Add("儲存檔案");
+            toolStrip1.Items.Add("關閉檔案");
+            toolStripContainer1.TopToolStripPanel.Controls.Add(toolStrip1);
+
+            Controls.Add(toolStripContainer1);
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            //執行時期 顯示 屬性編輯視窗
+            PropertyGrid PG = new PropertyGrid();
+            Form PGForm = new Form();
+            PGForm.Owner = this;
+            PGForm.StartPosition = FormStartPosition.Manual;
+            PGForm.Left = this.Left + this.Width;
+            PGForm.Top = this.Top;
+            PGForm.ShowInTaskbar = false;
+            PGForm.Controls.Add(PG);
+            PG.Dock = DockStyle.Fill;
+            PG.SelectedObject = this.label1;  //選擇要顯示的控件名稱
+            PGForm.Text = "Label 屬性編輯視窗";
+            PGForm.Show();
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void MouseHover_Handler(object sender, EventArgs e)
@@ -1042,28 +1168,28 @@ namespace vcs_DynamicAddRemoveControls1
             y_st = 10;
             e.Graphics.DrawString("2", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st, y_st));
 
-            x_st = 850 - 20;
-            y_st = 10;
+            x_st = 600 - 20;
+            y_st = 110;
             e.Graphics.DrawString("3", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st, y_st));
 
-            x_st = 850 - 20;
-            y_st = 210;
+            x_st = 600 - 20;
+            y_st = 310;
             e.Graphics.DrawString("4", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st, y_st));
 
-            x_st = 220;
-            y_st = 610 - 20;
+            x_st = 620-20;
+            y_st = 510;
             e.Graphics.DrawString("5", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st, y_st));
 
-            x_st = 220;
-            y_st = 760 - 20;
+            x_st = 620-20;
+            y_st = 710;
             e.Graphics.DrawString("6", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st, y_st));
 
-            x_st = 1120 - 20;
+            x_st = 920 - 20;
             y_st = 10;
             e.Graphics.DrawString("7", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st, y_st));
 
-            x_st = 1320 - 20;
-            y_st = 420;
+            x_st = 1360 - 20;
+            y_st = 10;
             e.Graphics.DrawString("8", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st, y_st));
         }
     }
@@ -1121,5 +1247,159 @@ myButton.BringToFront() 或 myButton.SendToBack() 調整。
             this.panel1.Controls.Add(tb4)
 */
 
-// DynamicAddControls1(x_st, y_st);
+
+
+
+
+
+/*
+
+        //清空文本框
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            foreach (Control ctl in groupBox1.Controls)
+            {
+                if (ctl.GetType().ToString() == "System.Windows.Forms.TextBox")
+                {
+                    ctl.Text = "";
+                }
+            }
+            txt_id.Focus();
+            cbox_Sex.SelectedIndex = 0;
+        }
+
+
+            //遍歷所有控件, 找出TextBox, 檢查是否為空
+            foreach (object ct in Controls)
+            {
+                if (ct.GetType().ToString() == "System.Windows.Forms.TextBox")
+                {
+                    TextBox tx = (TextBox)ct;
+                    if (tx.Text == "")
+                    {
+                        MessageBox.Show(tx.Tag.ToString() + "不能為空");
+                    }
+                }
+            }
+
+//------------------------------------------------------------  # 60個
+
+                    ControlInfo(true);
+            ControlInfo(false);
+
+
+        private void ControlInfo(Boolean B)
+        {
+            foreach (Control ct in this.groupBox1.Controls)
+            {
+                if (ct is TextBox)
+                {
+                    if (B)
+                    {
+                        ct.Enabled = true;
+                    }
+                    else
+                    {
+                        ct.Enabled = false;
+                    }
+                }
+            }
+        }
+
+//------------------------------------------------------------  # 60個
+
+            ControlInfo(false);
+            ControlInfo(false);
+            ControlInfo(true);
+        private void ControlInfo(Boolean B)
+        {
+            foreach (Control ct in this.groupBox1.Controls)
+            {
+                if (ct is TextBox)
+                {
+                    ct.Text = "";
+                    if (B)
+                    {
+                        ct.Enabled = true;
+                    }
+                    else
+                    {
+                        ct.Enabled = false;
+                    }
+                }
+            }
+        }
+
+
+        private Boolean TextClear()
+        {
+            foreach (Control c in this.groupBox1.Controls)
+            {
+                if (c is TextBox)
+                {
+                    if (c.Text == "")
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+            }
+            return true;
+        }
+
+
+        private void clearText()
+        {
+            foreach (Control cl in this.groupBox1.Controls)
+            {
+                if (cl is TextBox)
+                {
+                    cl.Text = "";
+                }
+            }
+        }
+
+
+        private Boolean TextInfo()
+        {
+            foreach (Control c in groupBox1.Controls)
+            {
+                if (c is TextBox)
+                {
+                    if (c.Text == "")
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+            }
+            return true;
+        }
+
+
+
+        private void clearText()
+        {
+            foreach (Control c in groupBox1.Controls)
+            {
+                if (c is TextBox)
+                {
+                    c.Text = "";
+                }
+            }
+            pictureBox1.Image = null;
+        }
+
+//------------------------------------------------------------  # 60個
+
+
+
+*/
+
 

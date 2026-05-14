@@ -14,8 +14,6 @@ namespace vcs_ReadWritePrivateProfileString2
 {
     public partial class Form1 : Form
     {
-        string ini_filename = @"../../config.ini";
-
         [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
         private static extern bool WritePrivateProfileString(
             string lpAppName,
@@ -48,7 +46,6 @@ namespace vcs_ReadWritePrivateProfileString2
         {
             show_item_location();
 
-            richTextBox1.Text += "filename = " + ini_filename + "\n";
             readIniFile();
         }
 
@@ -87,19 +84,20 @@ namespace vcs_ReadWritePrivateProfileString2
         /// </summary>
         private void readIniFile()
         {
-            if (File.Exists(this.ini_filename))
+            string ini_filename = @"../../config.ini";
+            if (File.Exists(ini_filename))
             {
-                this.webAddresTxt.Text = IniFileHelper.GetValue("Web信息", "Web地址", this.ini_filename);
-                this.webLoginNameTxt.Text = IniFileHelper.GetValue("Web信息", "用户名", this.ini_filename);
-                this.webPwdTxt.Text = IniFileHelper.GetValue("Web信息", "密码", this.ini_filename);
-                this.ftpAddressTxt.Text = IniFileHelper.GetValue("FTPInfo", "address", this.ini_filename);
-                this.ftpLoginNameTxt.Text = IniFileHelper.GetValue("FTPInfo", "loginName", this.ini_filename);
-                this.ftpPwdTxt.Text = IniFileHelper.GetValue("FTPInfo", "pwd", this.ini_filename);
-                MessageBox.Show("读取文档成功");
+                this.webAddresTxt.Text = IniFileHelper.GetValue("Web信息", "Web地址", ini_filename);
+                this.webLoginNameTxt.Text = IniFileHelper.GetValue("Web信息", "用户名", ini_filename);
+                this.webPwdTxt.Text = IniFileHelper.GetValue("Web信息", "密码", ini_filename);
+                this.ftpAddressTxt.Text = IniFileHelper.GetValue("FTPInfo", "address", ini_filename);
+                this.ftpLoginNameTxt.Text = IniFileHelper.GetValue("FTPInfo", "loginName", ini_filename);
+                this.ftpPwdTxt.Text = IniFileHelper.GetValue("FTPInfo", "pwd", ini_filename);
+                richTextBox1.Text += "讀取檔案成功\n";
             }
             else
             {
-                MessageBox.Show("文件加载失败，请确认是否存在此文件：" + this.ini_filename);
+                richTextBox1.Text += "讀取檔案失敗, 檔案 : " + ini_filename + "\n";
             }
         }
 
@@ -108,18 +106,19 @@ namespace vcs_ReadWritePrivateProfileString2
         /// </summary>
         private void saveIniFile()
         {
-            if (!File.Exists(this.ini_filename))
+            string ini_filename = @"../../config.ini";
+            if (!File.Exists(ini_filename))
             {
-                using (File.Create(this.ini_filename)) { };
+                using (File.Create(ini_filename)) { };
             }
 
-            IniFileHelper.SetValue("Web信息", "Web地址", this.webAddresTxt.Text, this.ini_filename);
-            IniFileHelper.SetValue("Web信息", "用户名", this.webLoginNameTxt.Text, this.ini_filename);
-            IniFileHelper.SetValue("Web信息", "密码", this.webPwdTxt.Text, this.ini_filename);
-            IniFileHelper.SetValue("FTPInfo", "address", this.ftpAddressTxt.Text, this.ini_filename);
-            IniFileHelper.SetValue("FTPInfo", "loginName", this.ftpLoginNameTxt.Text, this.ini_filename);
-            IniFileHelper.SetValue("FTPInfo", "pwd", this.ftpPwdTxt.Text, this.ini_filename);
-            MessageBox.Show("存储成功");
+            IniFileHelper.SetValue("Web信息", "Web地址", this.webAddresTxt.Text, ini_filename);
+            IniFileHelper.SetValue("Web信息", "用户名", this.webLoginNameTxt.Text, ini_filename);
+            IniFileHelper.SetValue("Web信息", "密码", this.webPwdTxt.Text, ini_filename);
+            IniFileHelper.SetValue("FTPInfo", "address", this.ftpAddressTxt.Text, ini_filename);
+            IniFileHelper.SetValue("FTPInfo", "loginName", this.ftpLoginNameTxt.Text, ini_filename);
+            IniFileHelper.SetValue("FTPInfo", "pwd", this.ftpPwdTxt.Text, ini_filename);
+            richTextBox1.Text += "儲存檔案成功\n";
         }
 
         // 【读取ini】
@@ -137,45 +136,48 @@ namespace vcs_ReadWritePrivateProfileString2
         // 【移除section】
         private void removeSectionBtn_Click(object sender, EventArgs e)
         {
-            bool rs = IniFileHelper.RemoveSection("Web信息", this.ini_filename);
+            string ini_filename = @"../../config.ini";
+            bool rs = IniFileHelper.RemoveSection("Web信息", ini_filename);
             if (rs)
             {
-                MessageBox.Show("移除section成功");
+                richTextBox1.Text += "移除section成功\n";
             }
             else
             {
-                MessageBox.Show("移除section失败");
+                richTextBox1.Text += "移除section失敗\n";
             }
         }
 
         // 【移除key】
         private void removeKeyBtn_Click(object sender, EventArgs e)
         {
-            bool rs = IniFileHelper.Removekey("Web信息", "密码", this.ini_filename);
+            string ini_filename = @"../../config.ini";
+            bool rs = IniFileHelper.Removekey("Web信息", "密码", ini_filename);
             if (rs)
             {
-                MessageBox.Show("移除key成功");
+                richTextBox1.Text += "移除key成功\n";
             }
             else
             {
-                MessageBox.Show("移除key失败");
+                richTextBox1.Text += "移除key失敗\n";
             }
         }
 
         // 【获取所有section】
         private void getAllSectionBtn_Click(object sender, EventArgs e)
         {
-            List<string> rs = IniFileHelper.GetSectionNames(this.ini_filename);
+            string ini_filename = @"../../config.ini";
+            List<string> rs = IniFileHelper.GetSectionNames(ini_filename);
             MessageBox.Show(string.Join(",", rs));
         }
 
         // 【获取所有key】
         private void getAllKeyBtn_Click(object sender, EventArgs e)
         {
-            List<string> rs = IniFileHelper.GetKeys("Web信息", this.ini_filename);
+            string ini_filename = @"../../config.ini";
+            List<string> rs = IniFileHelper.GetKeys("Web信息", ini_filename);
             MessageBox.Show(string.Join(",", rs));
         }
-
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -357,7 +359,5 @@ namespace vcs_ReadWritePrivateProfileString2
         {
 
         }
-
     }
 }
-
