@@ -41,7 +41,9 @@ namespace vcs_Process2
         {
             var selectedProcess = listBox1.SelectedItem as Process;
             if (selectedProcess == null)
+            {
                 return;
+            }
 
             textBox2.Text = "CPU : " + selectedProcess.GetCpuUsage().ToString() + " %";
             textBox3.Text = "Owner : " + selectedProcess.GetProcessOwner();
@@ -52,7 +54,9 @@ namespace vcs_Process2
 
             var selectedProcess = listBox1.SelectedItem as Process;
             if (selectedProcess == null)
+            {
                 return;
+            }
 
             timer1.Enabled = false;
 
@@ -67,13 +71,13 @@ namespace vcs_Process2
     //擴充方法
     public static class ProcessExtension
     {
-        #region Private Static Var
+        //#region Private Static Var
         private static Dictionary<int, PerformanceCounter> _counterPool;
         private static Dictionary<int, DateTime> _updateTimePool;
         private static Dictionary<int, int> _cpuUsagePool;
-        #endregion
+        //#endregion
 
-        #region Private Static Property
+        //#region Private Static Property
         private static Dictionary<int, PerformanceCounter> m_CounterPool
         {
             get
@@ -97,9 +101,9 @@ namespace vcs_Process2
                 return _cpuUsagePool ?? (_cpuUsagePool = new Dictionary<int, int>());
             }
         }
-        #endregion
+        //#endregion
 
-        #region Private Static Method
+        //#region Private Static Method
         //透過這個這個PerformanceCounter反查到Process的Instance Name
         private static string GetProcessInstanceName(int pid)
         {
@@ -108,7 +112,6 @@ namespace vcs_Process2
             var instances = category.GetInstanceNames();
             foreach (var instance in instances)
             {
-
                 using (var counter = new PerformanceCounter(category.CategoryName, "ID Process", instance, true))
                 {
                     int val = (int)counter.RawValue;
@@ -162,9 +165,9 @@ namespace vcs_Process2
             return null;
         }
 
-        #endregion
+        //#endregion
 
-        #region Public Static Method
+        //#region Public Static Method
         public static string GetInstanceName(this Process process)
         {
             return GetProcessInstanceName(process.Id);
@@ -179,9 +182,6 @@ namespace vcs_Process2
         {
             return GetProcessOwner(process.Id);
         }
-
-        #endregion
-
-
+        //#endregion
     }
 }

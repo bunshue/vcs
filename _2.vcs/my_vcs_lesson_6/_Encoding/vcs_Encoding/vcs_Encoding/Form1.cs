@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-
 namespace vcs_Encoding
 {
     public partial class Form1 : Form
@@ -20,6 +19,8 @@ namespace vcs_Encoding
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            Get_Unicode();
         }
 
         void show_item_location()
@@ -45,6 +46,10 @@ namespace vcs_Encoding
             richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 4);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
+            tb_unicode.Size = new Size(500, 690 - 70 * 4);
+            tb_unicode.Location = new Point(x_st + dx * 3 + 90, y_st + dy * 4);
+            lb_unicode.Location = new Point(x_st + dx * 3 + 360, y_st + dy * 4 - 60);
+
             richTextBox_string1.Size = new Size(250, 270);
             richTextBox_string2.Size = new Size(250, 270);
             richTextBox_hex.Size = new Size(250, 270);
@@ -57,7 +62,7 @@ namespace vcs_Encoding
             bt_string2hex.Text = "字串\n轉\n十六進位";
             bt_hex2string.Text = "十六進位\n轉\n字串";
 
-            this.Size = new Size(1020, 750);
+            this.Size = new Size(1260, 750);
             this.Text = "vcs_Encoding";
 
             //設定執行後的表單起始位置, 正中央
@@ -410,6 +415,45 @@ namespace vcs_Encoding
             UnicodeEncoding ascii_encoder = new UnicodeEncoding();
             richTextBox_string2.Text = ascii_encoder.GetString(bytes);
         }
+
+        //------------------------------------------------------------  # 60個
+
+        void Get_Unicode()
+        {
+            tb_unicode.Clear();
+
+            Cursor = Cursors.WaitCursor;
+            Refresh();
+
+            // Set the font size.
+            float font_size = 20.0f;
+            Font font = new Font("Times New Roman", font_size);
+            tb_unicode.Font = font;
+
+            // Display the characters.
+            int min = 10000;
+            int max = 20000;
+            richTextBox1.Text += "轉換範圍 : " + min.ToString() + " ~ " + max.ToString() + "\n";
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = min; i <= max; i++)
+            {
+                sb.Append(((char)i).ToString());
+            }
+            tb_unicode.Text = sb.ToString();
+            tb_unicode.Select(0, 0);
+
+            Cursor = Cursors.Default;
+        }
+
+        private void tb_unicode_MouseMove(object sender, MouseEventArgs e)
+        {
+            char ch = tb_unicode.GetCharFromPosition(e.Location);
+
+            lb_unicode.Text = ch.ToString() + "\t" + ((int)ch).ToString();
+        }
+
+        //------------------------------------------------------------  # 60個
     }
 }
 

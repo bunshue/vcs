@@ -45,6 +45,8 @@
             this.richTextBox_string2 = new System.Windows.Forms.RichTextBox();
             this.bt_string2hex = new System.Windows.Forms.Button();
             this.bt_hex2string = new System.Windows.Forms.Button();
+            this.tb_unicode = new System.Windows.Forms.TextBox();
+            this.lb_unicode = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button0
@@ -225,11 +227,40 @@
             this.bt_hex2string.UseVisualStyleBackColor = true;
             this.bt_hex2string.Click += new System.EventHandler(this.bt_hex2string_Click);
             // 
+            // tb_unicode
+            // 
+            this.tb_unicode.BackColor = System.Drawing.Color.White;
+            this.tb_unicode.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.tb_unicode.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_unicode.Location = new System.Drawing.Point(322, 208);
+            this.tb_unicode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tb_unicode.Multiline = true;
+            this.tb_unicode.Name = "tb_unicode";
+            this.tb_unicode.ReadOnly = true;
+            this.tb_unicode.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tb_unicode.Size = new System.Drawing.Size(100, 100);
+            this.tb_unicode.TabIndex = 127;
+            this.tb_unicode.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tb_unicode_MouseMove);
+            // 
+            // lb_unicode
+            // 
+            this.lb_unicode.AutoSize = true;
+            this.lb_unicode.BackColor = System.Drawing.SystemColors.Control;
+            this.lb_unicode.Font = new System.Drawing.Font("Arial", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_unicode.ForeColor = System.Drawing.Color.Red;
+            this.lb_unicode.Location = new System.Drawing.Point(428, 208);
+            this.lb_unicode.Name = "lb_unicode";
+            this.lb_unicode.Size = new System.Drawing.Size(177, 56);
+            this.lb_unicode.TabIndex = 136;
+            this.lb_unicode.Text = "mesg1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(706, 669);
+            this.Controls.Add(this.lb_unicode);
+            this.Controls.Add(this.tb_unicode);
             this.Controls.Add(this.bt_hex2string);
             this.Controls.Add(this.bt_string2hex);
             this.Controls.Add(this.richTextBox_string2);
@@ -251,6 +282,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -273,6 +305,8 @@
         private System.Windows.Forms.RichTextBox richTextBox_string2;
         private System.Windows.Forms.Button bt_string2hex;
         private System.Windows.Forms.Button bt_hex2string;
+        private System.Windows.Forms.TextBox tb_unicode;
+        private System.Windows.Forms.Label lb_unicode;
     }
 }
 

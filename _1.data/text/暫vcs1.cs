@@ -9,6 +9,151 @@
 //------------------------------------------------------------  # 60個
 
 
+        void apply_listView02()
+        {
+
+
+            /* 自動格式化listView
+            // Size the columns to fit the data and colummn headers.
+            listView1.SizeColumns(-2);
+
+            // Make the form big enough to show the ListView.
+            Rectangle item_rect = listView1.GetItemRect(listView1.Items.Count - 1);
+            this.ClientSize = new Size(
+                item_rect.Left + item_rect.Width + 25,
+                item_rect.Top + item_rect.Height + 75);
+            */
+        }
+
+
+'Microsoft.ACE.OLEDB.12.0' 提供者並未登錄於本機電腦上。
+
+使用触发器删除相关联的两表间的数据
+
+--判断是否存在名为‘tri_delete_laborage’的触发器
+
+select name from sysobjects where name='tri_delete_laborage' and type='TR')
+
+drop trigger tri_delete_laborage--删除已经存在的触发器
+
+
+select name from sysobjects where name='proc_TransInProc'and type='p'
+
+drop proc proc_TransInProc  --删除存储过程
+
+            // Access數據庫 *.mdb
+            string db_filename = @"D:\_git\vcs\Northwind.mdb";
+            textBox1.Text = db_filename;
+            strPathMdb = db_filename;
+
+
+            //定義臨時數據庫的連接字串
+            string temp2 = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + temp;
+            string sMdb2 = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + strPathMdb;
+
+
+            //拷貝臨時數據庫到目標數據庫(覆蓋)
+            File.Copy(temp, strPathMdb, true);
+            //最後刪除臨時數據庫
+            File.Delete(temp);
+
+
+.MakeTransparent(bmp.GetPixel(10, 10));  // 設定邊角點的顏色為透明色
+
+//bitmap2.Save("ims02.duplicate.bmp", ImageFormat.Bmp);
+
+//6060
+
+
+//6060
+
+我在Visual C# 看到一個宣告
+public Point? GetIntersectionWith(Line secondLine);
+為什麼Point後面還多一個?呢?
+
+
+
+
+            /*
+            Vector3 row0 = new Vector3(1, 2, 3);
+            Vector3 row1 = new Vector3(4, 5, 6);
+            Vector3 row2 = new Vector3(7, 8, 9);
+            Matrix3x3 matrix = Matrix3x3.CreateFromRows(row0, row1, row2);
+            */
+
+
+
+            //CreateFromColumnsTest
+            Vector3 column0 = new Vector3(1, 4, 7);
+            Vector3 column1 = new Vector3(2, 5, 8);
+            Vector3 column2 = new Vector3(3, 6, 9);
+            Matrix3x3 matrix = Matrix3x3.CreateFromColumns(column0, column1, column2);
+
+            float[] array = matrix.ToArray();
+
+            for (int i = 0; i < 9; i++)
+            {
+            }
+
+            //Assert.AreEqual<Vector3>(column0, matrix.GetColumn(0));
+            //Assert.AreEqual<Vector3>(column1, matrix.GetColumn(1));
+            //Assert.AreEqual<Vector3>(column2, matrix.GetColumn(2));
+
+            //matrix.GetColumn(-1);
+            //matrix.GetColumn(3);
+            
+//------------------------------------------------------------  # 60個
+
+            //使用递归法删除文件夹中的所有文件
+            string foldername = @"D:\_git\vcs\_1.data\______test_files2\_book_magazine";
+
+            int file_no = 0;
+            DirectoryInfo DInfo = new DirectoryInfo(foldername);//创建DirectoryInfo对象
+            FileSystemInfo[] FSInfo = DInfo.GetFileSystemInfos();  // 獲取所有的文件
+            for (int i = 0; i < FSInfo.Length; i++)//遍歷獲取到的文件
+            {
+                FileInfo FInfo = new FileInfo(foldername + "\\" + FSInfo[i].ToString());//创建FileInfo对象
+                //FInfo.Delete();//删除文件
+                richTextBox1.Text += "偽刪除 " + foldername + "\\" + FSInfo[i].ToString() + "\n";
+                file_no++;
+            }
+            richTextBox1.Text += "删除成功\n共刪除 " + file_no.ToString() + " 個檔案\n";
+
+
+//------------------------------------------------------------  # 60個
+
+Windows 的 文字轉語音 (Text-to-Speech) 功能，或使用螢幕閱讀器 (Narrator) 來朗讀我的回答。
+
+好的，我來一步一步教你如何在 Windows 上讓我的文字回覆直接用電腦喇叭播放出來。這主要是透過 文字轉語音 (Text-to-Speech, TTS) 或 Windows Narrator 來完成。
+
+方法一：使用 Windows Narrator
+- 按下 Win + Ctrl + Enter，開啟 Narrator。
+- Narrator 會自動朗讀螢幕上的文字，包括我的回覆。
+- 你可以在 設定 → 輔助工具 → Narrator 裡調整語音、速度與音量。
+
+這裡給你一個完整的 Visual C# 範例程式，可以直接把文字透過電腦喇叭播放出來。它使用 System.Speech.Synthesis 命名空間，這是 .NET Framework 內建的文字轉語音 (TTS) 功能。
+
+namespace CopilotTTSExample
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        }
+    }
+}
+
+//------------------------------------------------------------  # 60個
+
+目錄下檔名轉出純文字程式
+
+
+我在Visual C#下使用Console.Beep()可以讓電腦發出聲音
+要如何將這個聲音存成wave檔呢?
+
+搜尋
+ProcessDirectory
+
 
 
 //------------------------------------------------------------  # 60個
