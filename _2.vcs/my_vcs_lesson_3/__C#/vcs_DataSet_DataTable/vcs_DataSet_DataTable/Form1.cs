@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;  // for FileStream
 using System.Collections;   //for ArrayList
 
 namespace vcs_DataSet_DataTable
@@ -1459,7 +1460,7 @@ namespace vcs_DataSet_DataTable
                 // 將studentsDataSet寫成XML文件
                 //string xml_filename = @"C:\\XmlDocument-" + DateTime.Now.Millisecond.ToString() + ".xml";
                 xml_filename = @"tmp_xml_" + DateTime.Now.Millisecond.ToString() + ".xml";
-                System.IO.FileStream streamWrite = new System.IO.FileStream(xml_filename, System.IO.FileMode.Create);
+                FileStream streamWrite = new FileStream(xml_filename, FileMode.Create);
                 studentsDataSet.WriteXml(streamWrite);
                 streamWrite.Dispose();
 
@@ -1470,6 +1471,13 @@ namespace vcs_DataSet_DataTable
                 MessageBox.Show(ex.Message);
             }
 
+            //另法
+            xml_filename = @"tmp_xml222_" + DateTime.Now.Millisecond.ToString() + ".xml";
+            FileStream fs = new FileStream(xml_filename, FileMode.OpenOrCreate, FileAccess.Write);
+            // Apply the WriteXml method to write an XML document
+            studentsDataSet.WriteXml(fs);
+            fs.Close();
+
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             //讀入XML文件
@@ -1479,7 +1487,7 @@ namespace vcs_DataSet_DataTable
 
             // 讀入XML文件 
             xml_filename = "../../XmlDocument-432.xml";
-            System.IO.FileStream streamRead = new System.IO.FileStream(xml_filename, System.IO.FileMode.Open);
+            FileStream streamRead = new FileStream(xml_filename, FileMode.Open);
             studentsDataSet.ReadXml(streamRead);
             streamRead.Dispose();
 

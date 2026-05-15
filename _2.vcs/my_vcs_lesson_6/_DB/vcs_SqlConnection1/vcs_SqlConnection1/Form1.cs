@@ -75,51 +75,45 @@ namespace vcs_SqlConnection1
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button20.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button21.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button22.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            button23.Location = new Point(x_st + dx * 1, y_st + dy * 11);
             bt_previous.Visible = false;
             bt_next.Visible = false;
             lb_index.Visible = false;
 
             int dd = 26;
-            dataGridView1.Size = new Size(510, 380);
-            dataGridView2.Size = new Size(510, 380);
-            dataGridView3.Size = new Size(420, 380);
-            dataGridView4.Size = new Size(420, 380);
+            dataGridView1.Size = new Size(600, 380);
+            dataGridView2.Size = new Size(600, 380);
+            dataGridView3.Size = new Size(540, 380);
+            dataGridView4.Size = new Size(540, 380);
 
             int ddd = 380;
-            lb_dgv1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            lb_dgv1b.Location = new Point(x_st + dx * 3 + ddd, y_st + dy * 0);
-            dataGridView1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + dd);
-            lb_dgv2.Location = new Point(x_st + dx * 3, y_st + dy * 6);
-            lb_dgv2b.Location = new Point(x_st + dx * 3 + ddd, y_st + dy * 6);
-            dataGridView2.Location = new Point(x_st + dx * 3, y_st + dy * 6 + dd);
+            lb_dgv1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            lb_dgv1b.Location = new Point(x_st + dx * 2 + ddd, y_st + dy * 0);
+            dataGridView1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd);
+            lb_dgv2.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            lb_dgv2b.Location = new Point(x_st + dx * 2 + ddd, y_st + dy * 6);
+            dataGridView2.Location = new Point(x_st + dx * 2, y_st + dy * 6 + dd);
 
             ddd = 280;
-            lb_dgv3.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 0);
-            lb_dgv3b.Location = new Point(x_st + dx * 5 + 100 + ddd, y_st + dy * 0);
-            dataGridView3.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 0 + dd);
-            lb_dgv4.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 6);
-            lb_dgv4b.Location = new Point(x_st + dx * 5 + 100 + ddd, y_st + dy * 6);
-            dataGridView4.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 6 + dd);
+            lb_dgv3.Location = new Point(x_st + dx * 5 - 20, y_st + dy * 0);
+            lb_dgv3b.Location = new Point(x_st + dx * 5 - 20 + ddd, y_st + dy * 0);
+            dataGridView3.Location = new Point(x_st + dx * 5 - 20, y_st + dy * 0 + dd);
+            lb_dgv4.Location = new Point(x_st + dx * 5 - 20, y_st + dy * 6);
+            lb_dgv4b.Location = new Point(x_st + dx * 5 - 20 + ddd, y_st + dy * 6);
+            dataGridView4.Location = new Point(x_st + dx * 5 - 20, y_st + dy * 6 + dd);
             lb_dgv1.Text = "";
             lb_dgv2.Text = "";
             lb_dgv3.Text = "";
@@ -736,7 +730,8 @@ namespace vcs_SqlConnection1
 
         private void button6_Click(object sender, EventArgs e)
         {
-            // 十二生肖整理3
+            // 測試 SqlTransaction, 用 SqlTransaction 一次執行多個 SQL 命令, 若有指令失敗, 可以恢復指令
+
             // 資料庫檔案
             db_filename = "animals2_db.mdf";
             // 查詢字串
@@ -744,30 +739,76 @@ namespace vcs_SqlConnection1
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "十二生肖全部資料";
 
+            richTextBox1.Text += "---------------\n";  // 15個
+
             // 資料庫檔案
-            db_filename = "db_10_Data.MDF";
-            // 查詢字串, 查詢邏輯型數據, 查詢是否為國家統招學生
-            string select_type = "是";  // "是/否"
-            sqlstr = "SELECT * FROM tb_08 WHERE 統招否='" + select_type + "'";
+            db_filename = "animals2_db.mdf";
+            // 連接字串
+            cnstr = string.Format(db_cnstr, db_filename);
 
+            SqlConnection cn = new SqlConnection(cnstr);
 
+            SqlCommand cmd = new SqlCommand();
+            cn.Open();
 
-            //待測試
-            //查詢銷售量占前50%的圖書訊息
-            //sqlstr = "SELECT TOP 50 percent 書號, 書名, SUM(銷售數量) AS 合計銷售數量 FROM tb_xsb GROUP BY 書號, 書名, 作者 ORDER BY 3 DESC";
-            //取出數據統計結果後10名數據//設定統計查詢的SQL語句
-            //sqlstr = "SELECT TOP 10 書號, 書名, SUM(銷售數量) AS 合計銷售數量 FROM tb_xsb GROUP BY 書號, 書名, 作者 ORDER BY 3 ASC";
+            List<string> sqlstrs = new List<string>();//SQL语句集合
+            sqlstr = "INSERT INTO animals2_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (95, N'aaa', N'AAA', 20, '2026/1/10 16:29:26')";
+            sqlstr = "INSERT INTO animals2_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (98, N'bbb', N'BBB', 35, '2026/1/20 16:29:26')";
+            sqlstrs.Add(sqlstr);
+            sqlstrs.Add(sqlstr);
+            sqlstrs.Add(sqlstr);
+            sqlstrs.Add(sqlstr);
+            sqlstrs.Add(sqlstr);
 
-            // 查詢字串, 欄名使用別名AS
-            //sqlstr = "SELECT DISTINCT 所屬部門, COUNT(*) AS 部門人數, MAX(基本工資) AS 最高工資, AVG(基本工資) AS 平均工資 FROM 部門工資統計表 GROUP BY 所屬部門 HAVING (AVG(基本工資) > 1000)";
+            // 建立SqlTransaction交易物件sqlTran
+            SqlTransaction sqlTran = cn.BeginTransaction();//实例化事务对象
 
+            try
+            {
+                /*
+                // 查詢字串
+                sqlstr = "aaaaa";
+                SqlCommand cmd3 = new SqlCommand(sqlstr, cn, sqlTran);
 
+                // 查詢字串
+                sqlstr = "bbbb";
+                SqlCommand cmd4 = new SqlCommand(sqlstr, cn, sqlTran);
 
+                cmd3.ExecuteNonQuery();  // 執行SQL命令
+                cmd4.ExecuteNonQuery();  // 執行SQL命令
+                */
 
+                cmd.Connection = cn;//指定SqlCommand对象的连接对象
+                cmd.Transaction = sqlTran;//指定SqlCommand对象的事务对象
+                foreach (string item in sqlstrs)//遍历List泛型集合中的所有SQL命令
+                {
+                    cmd.CommandType = CommandType.Text;//指定SqlCommand对象的执行命令方式
+                    cmd.CommandText = item;//指定SqlCommand对象要执行的SQL命令
+                    cmd.ExecuteNonQuery();//执行SQL命令
+                }
+                sqlTran.Commit();//提交数据库
+                richTextBox1.Text += "OK\n";
+            }
+            catch (Exception ex)
+            {
+                sqlTran.Rollback();  // 回復交易
+                richTextBox1.Text += "發生錯誤 : " + ex.Message + "\n";
+            }
+            finally
+            {
+                cn.Close();//关闭数据库连接
+                sqlstrs.Clear();//清空List泛型集合
+                richTextBox1.Text += "dddddddddd\n";
+            }
 
+            richTextBox1.Text += "---------------\n";  // 15個
 
-
-
+            // 資料庫檔案
+            db_filename = "animals2_db.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM animals2_table";
+            sql_read_database(db_filename, sqlstr, dataGridView2);
+            lb_dgv1.Text = "十二生肖全部資料";
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -1608,79 +1649,6 @@ namespace vcs_SqlConnection1
 
         private void button12_Click(object sender, EventArgs e)
         {
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-            //靜態/動態 交叉表 查詢
-
-            //靜態 交叉表 查詢
-
-            /*
-            //show
-            // 資料庫檔案
-            db_filename = "db_10_Data.MDF";
-            // 連接字串
-            cnstr = string.Format(db_cnstr, db_filename);
-            // 查詢字串
-            sqlstr = "SELECT * FROM 銷售表";
-            
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            */
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //靜態交叉表
-
-            //銷售業績分析
-
-            // 資料庫檔案
-            db_filename = "db_10_Data.MDF";
-            // 連接字串
-            cnstr = string.Format(db_cnstr, db_filename);
-
-            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
-            {
-                //按員工姓名分析
-                // 查詢字串
-                sqlstr = "SELECT 所在部門, SUM(CASE 員工姓名 WHEN '李金明' THEN 銷售業績 ELSE NULL END) AS [李金明], SUM(CASE 員工姓名 WHEN '周可人' THEN 銷售業績 ELSE NULL END) AS [周可人], SUM(CASE 員工姓名 WHEN '韓運' THEN 銷售業績 ELSE NULL END)AS [韓運],SUM(CASE 員工姓名 WHEN '司徒南' THEN 銷售業績 ELSE NULL END)AS [司徒南],SUM(CASE 員工姓名 WHEN '史佳金' THEN 銷售業績 ELSE NULL END)AS [史佳金]  FROM 銷售表 GROUP BY 所在部門";
-                //SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
-
-                //按部門分析
-                // 查詢字串
-                sqlstr = "SELECT 員工姓名, SUM(CASE 所在部門 WHEN '食品部' THEN 銷售業績 ELSE NULL END) AS [食品部業績], SUM(CASE 所在部門 WHEN '家電部' THEN 銷售業績 ELSE NULL END) AS [家電部業績] FROM 銷售表 GROUP BY 員工姓名";
-                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
-
-                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
-                dataGridView1.DataSource = ds.Tables[0].DefaultView;  // DGV設置數據源
-            }
-
-            /*
-            // 資料庫檔案
-            db_filename = "db_10_Data.MDF";
-            // 查詢字串
-            sqlstr = "SELECT * FROM 銷售表";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            */
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
             richTextBox1.Text += "刪除資料 與 清空表單, DELETE 和 DELETE FROM 一樣\n";
 
             // 資料庫檔案
@@ -1736,9 +1704,9 @@ namespace vcs_SqlConnection1
             }
         }
 
-        private void button18_Click(object sender, EventArgs e)
+        private void button13_Click(object sender, EventArgs e)
         {
-            // 十二生肖整理1
+            //十二生肖整理1
 
             // 資料庫檔案
             db_filename = "animals2_db.mdf";
@@ -1859,9 +1827,9 @@ namespace vcs_SqlConnection1
             */
         }
 
-        private void button19_Click(object sender, EventArgs e)
+        private void button14_Click(object sender, EventArgs e)
         {
-            // 十二生肖整理2
+            //十二生肖整理2
 
             // 資料庫檔案
             db_filename = "animals2_db.mdf";
@@ -2066,12 +2034,32 @@ namespace vcs_SqlConnection1
             lb_dgv2.Text = "一次搜尋多個";
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
 
         }
 
         private void button20_Click(object sender, EventArgs e)
         {
-            // 建立資料庫檔案, 先 CREATE DATABASE, 再 CREATE TABLE
+            //建立資料庫檔案, 先 CREATE DATABASE, 再 CREATE TABLE
             // 完整測試資料庫
             // 建立資料庫、建立表單、增茶改刪
 
@@ -2271,139 +2259,8 @@ namespace vcs_SqlConnection1
 
         private void button22_Click(object sender, EventArgs e)
         {
-            // 測試 SqlTransaction, 用 SqlTransaction 一次執行多個 SQL 命令, 若有指令失敗, 可以恢復指令
+            // 臨時看資料庫/刪除資料/待測試
 
-            // 資料庫檔案
-            db_filename = "animals2_db.mdf";
-            // 查詢字串
-            sqlstr = "SELECT * FROM animals2_table";
-            sql_read_database(db_filename, sqlstr, dataGridView1);
-            lb_dgv1.Text = "十二生肖全部資料";
-
-            richTextBox1.Text += "---------------\n";  // 15個
-
-            // 資料庫檔案
-            db_filename = "animals2_db.mdf";
-            // 連接字串
-            cnstr = string.Format(db_cnstr, db_filename);
-
-            SqlConnection cn = new SqlConnection(cnstr);
-
-            SqlCommand cmd = new SqlCommand();
-            cn.Open();
-
-            List<string> sqlstrs = new List<string>();//SQL语句集合
-            sqlstr = "INSERT INTO animals2_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (95, N'aaa', N'AAA', 20, '2026/1/10 16:29:26')";
-            sqlstr = "INSERT INTO animals2_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (98, N'bbb', N'BBB', 35, '2026/1/20 16:29:26')";
-            sqlstrs.Add(sqlstr);
-            sqlstrs.Add(sqlstr);
-            sqlstrs.Add(sqlstr);
-            sqlstrs.Add(sqlstr);
-            sqlstrs.Add(sqlstr);
-
-            // 建立SqlTransaction交易物件sqlTran
-            SqlTransaction sqlTran = cn.BeginTransaction();//实例化事务对象
-
-            try
-            {
-                /*
-                // 查詢字串
-                sqlstr = "aaaaa";
-                SqlCommand cmd3 = new SqlCommand(sqlstr, cn, sqlTran);
-
-                // 查詢字串
-                sqlstr = "bbbb";
-                SqlCommand cmd4 = new SqlCommand(sqlstr, cn, sqlTran);
-
-                cmd3.ExecuteNonQuery();  // 執行SQL命令
-                cmd4.ExecuteNonQuery();  // 執行SQL命令
-                */
-
-                cmd.Connection = cn;//指定SqlCommand对象的连接对象
-                cmd.Transaction = sqlTran;//指定SqlCommand对象的事务对象
-                foreach (string item in sqlstrs)//遍历List泛型集合中的所有SQL命令
-                {
-                    cmd.CommandType = CommandType.Text;//指定SqlCommand对象的执行命令方式
-                    cmd.CommandText = item;//指定SqlCommand对象要执行的SQL命令
-                    cmd.ExecuteNonQuery();//执行SQL命令
-                }
-                sqlTran.Commit();//提交数据库
-                richTextBox1.Text += "OK\n";
-            }
-            catch (Exception ex)
-            {
-                sqlTran.Rollback();  // 回復交易
-                richTextBox1.Text += "發生錯誤 : " + ex.Message + "\n";
-            }
-            finally
-            {
-                cn.Close();//关闭数据库连接
-                sqlstrs.Clear();//清空List泛型集合
-                richTextBox1.Text += "dddddddddd\n";
-            }
-
-            richTextBox1.Text += "---------------\n";  // 15個
-
-            // 資料庫檔案
-            db_filename = "animals2_db.mdf";
-            // 查詢字串
-            sqlstr = "SELECT * FROM animals2_table";
-            sql_read_database(db_filename, sqlstr, dataGridView2);
-            lb_dgv1.Text = "十二生肖全部資料";
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button24_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button25_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button26_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button27_Click(object sender, EventArgs e)
-        {
-            // DB 轉 XML
-            test_xml();
-        }
-
-        void test_xml()
-        {
-            // 資料庫檔案
-            db_filename = "animals2_db.mdf";
-            // 查詢字串
-            sqlstr = "SELECT * FROM animals2_table";
-
-            cnstr = string.Format(db_cnstr, db_filename);
-            using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
-            {
-                SqlDataAdapter da = new SqlDataAdapter(sqlstr, cn);  // 建立資料庫適配器對象da
-                DataSet ds = new DataSet();  // 建立數據集ds, 準備給da用來填充數據(Table格式)
-                da.Fill(ds);  // da將查詢的結果填充至數據集ds, 不指定TableName
-                //da.Fill(ds, "table");  // da將查詢的結果填充至數據集ds, 指定TableName為"table"
-                richTextBox1.Text += "取得資料 : " + ds.Tables[0].Rows.Count.ToString() + " 筆\n";
-
-                //轉 xml
-
-                String xml_filename = "tmp_output.XML";
-                FileStream fs = new FileStream(xml_filename, FileMode.OpenOrCreate, FileAccess.Write);
-                // Apply the WriteXml method to write an XML document
-                ds.WriteXml(fs);
-                fs.Close();
-            }
-        }
-
-        private void button28_Click(object sender, EventArgs e)
-        {
             // 臨時看資料庫
 
             // 資料庫檔案
@@ -2425,9 +2282,36 @@ namespace vcs_SqlConnection1
 
             // 執行
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令
+
+            //6060
+
+            //待測試
+
+            // 十二生肖整理3
+            // 資料庫檔案
+            db_filename = "animals2_db.mdf";
+            // 查詢字串
+            sqlstr = "SELECT * FROM animals2_table";
+            sql_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "十二生肖全部資料";
+
+            // 資料庫檔案
+            db_filename = "db_10_Data.MDF";
+            // 查詢字串, 查詢邏輯型數據, 查詢是否為國家統招學生
+            string select_type = "是";  // "是/否"
+            sqlstr = "SELECT * FROM tb_08 WHERE 統招否='" + select_type + "'";
+
+            //待測試
+            //查詢銷售量占前50%的圖書訊息
+            //sqlstr = "SELECT TOP 50 percent 書號, 書名, SUM(銷售數量) AS 合計銷售數量 FROM tb_xsb GROUP BY 書號, 書名, 作者 ORDER BY 3 DESC";
+            //取出數據統計結果後10名數據//設定統計查詢的SQL語句
+            //sqlstr = "SELECT TOP 10 書號, 書名, SUM(銷售數量) AS 合計銷售數量 FROM tb_xsb GROUP BY 書號, 書名, 作者 ORDER BY 3 ASC";
+
+            // 查詢字串, 欄名使用別名AS
+            //sqlstr = "SELECT DISTINCT 所屬部門, COUNT(*) AS 部門人數, MAX(基本工資) AS 最高工資, AVG(基本工資) AS 平均工資 FROM 部門工資統計表 GROUP BY 所屬部門 HAVING (AVG(基本工資) > 1000)";
         }
 
-        private void button29_Click(object sender, EventArgs e)
+        private void button23_Click(object sender, EventArgs e)
         {
             //SQL 簡易測試
             dataGridView1.BringToFront();
@@ -2460,12 +2344,6 @@ namespace vcs_SqlConnection1
             button21.Visible = false;
             button22.Visible = false;
             button23.Visible = false;
-            button24.Visible = false;
-            button25.Visible = false;
-            button26.Visible = false;
-            button27.Visible = false;
-            button28.Visible = false;
-            button29.Visible = false;
             dataGridView4.Visible = false;
             lb_dgv4.Visible = false;
 

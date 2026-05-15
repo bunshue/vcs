@@ -141,6 +141,154 @@ namespace vcs_ReadWrite_XMLA_DGV
                 richTextBox1.Text += "信箱：" + dr["信箱"];
             }
         }
+
+        //------------------------------------------------------------  # 60個
+
+        DataSet studentsDataSet;
+        DataTable studentTable;
+        DataRow newRow;
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //讀取XML文件
+            studentsDataSet = new DataSet();
+            studentsDataSet.ReadXml(@"../../XmlDocument-432.xml");
+            studentTable = studentsDataSet.Tables["studentTable"];
+
+            dataGridView1.DataSource = studentsDataSet.Tables["studentTable"];
+
+            int id = Convert.ToInt32(dataGridView1.Rows[0].Cells[0].Value);
+            textBox1.Text = id.ToString();
+
+            string name = (string)dataGridView1.Rows[0].Cells[1].Value;
+            textBox2.Text = name;
+
+            string school = (string)dataGridView1.Rows[0].Cells[2].Value;
+            textBox3.Text = school;
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //寫入XML文件
+            studentsDataSet.WriteXml(@"tmp_XmlDocument.xml");
+            MessageBox.Show("成功寫入");
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //新增
+            newRow = studentsDataSet.Tables["studentTable"].NewRow();
+            newRow["id"] = Convert.ToInt32(textBox1.Text);
+            newRow["姓名"] = textBox2.Text;
+            newRow["學歷"] = textBox3.Text;
+            studentsDataSet.Tables["StudentTable"].Rows.Add(newRow);
+            studentsDataSet.Tables["studentTable"].AcceptChanges();
+
+            dataGridView1.DataSource = studentsDataSet.Tables["studentTable"];
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //修改
+            bool isFound = false;// 是否找到要修改的記錄
+            bool isModified = false;// 找到的記錄是否已被修改
+            for (int i = 0; i < studentsDataSet.Tables["studentTable"].Rows.Count; i++)
+            {
+                string wantModified = studentsDataSet.Tables["studentTable"].Rows[i][0].ToString();
+                if (textBox1.Text == wantModified)
+                {
+                    isFound = true;
+                    if (MessageBox.Show("是否修改？", "小心", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    {
+                        isModified = true;
+                        studentsDataSet.Tables["studentTable"].Rows[i][1] = textBox2.Text;
+                        studentsDataSet.Tables["studentTable"].Rows[i][2] = textBox3.Text;
+                        MessageBox.Show("編號 " + textBox1.Text + " 已修改");
+                    }
+                    break;
+                }
+            }
+
+            if (isFound & isModified)
+            {
+                dataGridView1.DataSource = studentsDataSet.Tables["studentTable"];
+            }
+            else
+            {
+                if (!isFound)
+                {
+                    MessageBox.Show("找不到編號 " + textBox1.Text + " 的資料 !!!");
+                }
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //刪除
+            bool isFound = false;// 是否找到要修改的記錄
+            bool isDeleted = false;// 找到的記錄是否已被刪除
+            for (int i = 0; i < studentsDataSet.Tables["studentTable"].Rows.Count; i++)
+            {
+                string wantDeleted = studentsDataSet.Tables["studentTable"].Rows[i][0].ToString();
+                if (textBox1.Text == wantDeleted)
+                {
+                    isFound = true;
+                    if (MessageBox.Show("是否刪除？", "小心", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    {
+                        isDeleted = true;
+                        string currentID = textBox1.Text;
+                        studentsDataSet.Tables["studentTable"].Rows[i].Delete();
+                        MessageBox.Show("編號 " + currentID + " 已刪除");
+                    }
+                    break;
+                }
+            }
+
+            if (isFound & isDeleted)
+            {
+                dataGridView1.DataSource = studentsDataSet.Tables["studentTable"];
+            }
+            else
+            {
+                if (!isFound)
+                {
+                    MessageBox.Show("找不到編號 " + textBox1.Text + " 的資料 !!!");
+                }
+            }
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int id = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
+            textBox1.Text = id.ToString();
+
+            string name = (string)dataGridView1.Rows[e.RowIndex].Cells[1].Value;
+            textBox2.Text = name;
+
+            string school = (string)dataGridView1.Rows[e.RowIndex].Cells[2].Value;
+            textBox3.Text = school;
+        }
+
+        //------------------------------------------------------------  # 60個
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
 
