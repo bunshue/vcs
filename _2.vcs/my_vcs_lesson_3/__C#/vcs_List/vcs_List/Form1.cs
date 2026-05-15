@@ -1042,14 +1042,81 @@ namespace vcs_List
 
         private void button25_Click(object sender, EventArgs e)
         {
+            //二維陣列
+            string[,] data =
+            {
+                { "mouse", "米老鼠", "3"},
+                { "ox", "班尼牛", "48"},
+                { "tiger", "跳跳虎", "33"},
+                { "rabbit", "彼得兔", "8"},
+            };
+
+
+            int max_row = data.GetUpperBound(0);
+            int max_col = data.GetUpperBound(1);
+            for (int row = 0; row <= max_row; row++)
+            {
+                for (int col = 0; col <= max_col; col++)
+                {
+                    //new_item.SubItems.Add();
+                    richTextBox1.Text += data[row, col] + "\t";
+                }
+                richTextBox1.Text += "\n";
+            }
         }
+
+        struct Student
+        {
+            public int No;
+            public string Name;
+            public int Score;
+        };
 
         private void button26_Click(object sender, EventArgs e)
         {
+            //結構陣列
+
+            // 初值置入結構陣列
+            // 1001,"Paul",85,90,66
+            // 1002,"Jack",80,80,77
+            // 1003,"Mary",75,70,80
+            // 1004,"Jane",90,85,99
+            // 1005,"Nacy",70,80,60
+            // 結構陣列如何在宣告建立結構陣列時,同時設定初值
+
+            int i, j;
+            Student temp;
+
+            // Student[] bcc = new Student[5];
+            // bcc[0].No = 1001; bcc[0].Name = "Paul"; bcc[0].Score = 85;
+            // bcc[1].No = 1002; bcc[1].Name = "Jack"; bcc[1].Score = 80;
+            // bcc[2].No = 1003; bcc[2].Name = "Mary"; bcc[2].Score = 70;
+            // bcc[3].No = 1004; bcc[3].Name = "Jane"; bcc[3].Score = 90;
+            // bcc[4].No = 1005; bcc[4].Name = "Nacy"; bcc[4].Score = 75;
+
+            Student[] bcc = new Student[] {
+               new Student(){No=1001,Name="Paul", Score=85},
+               new Student(){No=1002,Name="Jack", Score=80},
+               new Student(){No=1003,Name="Mary", Score=70},
+               new Student(){No=1004,Name="Jane", Score=90},
+               new Student(){No=1005,Name="Nacy", Score=75}
+           };
+
+            for (i = 0; i < bcc.Length; i++)
+            {
+            }
+            for (i = 0; i < bcc.Length; i++)
+            {
+            }
         }
 
         private void button27_Click(object sender, EventArgs e)
         {
+            //宣告陣列並初始化
+            ushort[] score = new ushort[] { 78, 65, 92, 55, 83 };
+            Array.Sort(score);//遞增排序
+            Array.Reverse(score);//遞減排序
+
         }
 
         private void button28_Click(object sender, EventArgs e)
@@ -1146,3 +1213,24 @@ namespace vcs_List
 
  */
 
+
+/*
+
+            byte[] number = { 21, 31, 41 };
+
+            //宣告陣列並初始化
+            int[] number = { 11, 21, 78, 125 };
+
+
+
+
+C#中如何獲取一個二維陣列的兩維長度，即行數和列數？
+
+
+int[,] array = new int[,] {{1,2,3},{4,5,6},{7,8,9}};//定義一個3行3列的二維陣列
+int row = array.Rank;//獲取行數
+int col = array.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
+int col = array.GetUpperBound(0)+1;//獲取指定維度的上限，在 上一個1就是列數
+int num = array.Length;//獲取整個二維陣列的長度，即所有元 的個數
+
+*/

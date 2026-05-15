@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Web;   //for HttpUtility, 需改用.Net Framework4, 然後參考/加入參考/.Net/System.Web
 
 namespace vcs_Encoding
 {
@@ -25,16 +24,11 @@ namespace vcs_Encoding
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 180;
-            dy = 80;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -47,7 +41,28 @@ namespace vcs_Encoding
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
+            richTextBox1.Size = new Size(500, 690 - 70 * 4);
+            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 4);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            richTextBox_string1.Size = new Size(250, 270);
+            richTextBox_string2.Size = new Size(250, 270);
+            richTextBox_hex.Size = new Size(250, 270);
+            richTextBox_string1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            richTextBox_hex.Location = new Point(x_st + dx * 2 + 50, y_st + dy * 0);
+            richTextBox_string2.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 0);
+
+            bt_string2hex.Location = new Point(x_st + dx * 1 + 250 - 35, y_st + dy * 0 + 270 - 80);
+            bt_hex2string.Location = new Point(x_st + dx * 2 + 50 + 250 - 35, y_st + dy * 0 + 270 - 80);
+            bt_string2hex.Text = "字串\n轉\n十六進位";
+            bt_hex2string.Text = "十六進位\n轉\n字串";
+
+            this.Size = new Size(1020, 750);
+            this.Text = "vcs_Encoding";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -153,8 +168,6 @@ namespace vcs_Encoding
 
             richTextBox1.Text += "(b)目前無法解碼\n";
             richTextBox1.Text += "\n";
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -375,27 +388,47 @@ namespace vcs_Encoding
 
         }
 
+        private void bt_string2hex_Click(object sender, EventArgs e)
+        {
+            //字串轉十六進位
+            // Convert the string into bytes.
+            UnicodeEncoding ascii_encoder = new UnicodeEncoding();
+            byte[] bytes = ascii_encoder.GetBytes(richTextBox_string1.Text);
+
+            // Display the result as a string of hexadecimal values.
+            richTextBox_hex.Text = bytes.ToHex(' ');
+        }
+
+        private void bt_hex2string_Click(object sender, EventArgs e)
+        {
+            //十六進位轉字串
+
+            // Convert the string of hexadecimal values into an array of bytes.
+            byte[] bytes = richTextBox_hex.Text.ToBytes();
+
+            // Convert the bytes into a string and display the result.
+            UnicodeEncoding ascii_encoder = new UnicodeEncoding();
+            richTextBox_string2.Text = ascii_encoder.GetString(bytes);
+        }
     }
-
-    static class StringExtensions
-    {
-        // Extension to replace spaces with &nbsp;
-        public static string SpaceToNbsp(this string s)
-        {
-            return s.Replace(" ", "&nbsp;");
-        }
-
-        // Url encode an ASCII string.
-        public static string UrlEncode(this string s)
-        {
-            return HttpUtility.UrlEncode(s);
-        }
-
-        // Url decode an ASCII string.
-        public static string UrlDecode(this string s)
-        {
-            return HttpUtility.UrlDecode(s);
-        }
-    }
-
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+
+

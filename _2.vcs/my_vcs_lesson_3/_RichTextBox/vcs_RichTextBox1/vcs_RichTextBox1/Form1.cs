@@ -42,6 +42,9 @@ namespace vcs_RichTextBox1
             label4.Text = "";
 
             richTextBox_search_TextChanged(sender, e);    //顯示文字總長
+
+            //久.....
+            //show_matrix();  // 駭客模式顯示程式碼
         }
 
         private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
@@ -82,16 +85,20 @@ namespace vcs_RichTextBox1
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button20.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button21.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button22.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            button23.Location = new Point(x_st + dx * 1, y_st + dy * 11);
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -104,9 +111,11 @@ namespace vcs_RichTextBox1
             lb_richtextbox1_fx4.Location = new Point(x_st + dx * 2 + 360, y_st + dy * 0 + dd * 0);
             lb_richtextbox1_text.Location = new Point(x_st + dx * 2 + 360 + 260, y_st + dy * 0 + dd * 0);
 
-            richTextBox_search.Size = new Size(500, 400);
-            richTextBox_search.Location = new Point(x_st + dx * 5+110, y_st + dy * 0 + dd * 0);
-            groupBox1.Location = new Point(x_st + dx * 5 + 110, y_st + dy * 0 + dd * 0 + 410);
+            richTextBox_search.Size = new Size(500, 330);
+            richTextBox_search.Location = new Point(x_st + dx * 6, y_st + dy * 0 + dd * 0);
+            groupBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0 + dd * 0 + 340);
+            richTextBox_matrix.Size = new Size(500, 300);
+            richTextBox_matrix.Location = new Point(x_st + dx * 6, y_st + dy * 0 + dd * 0 + 340+190);
 
             lb_richtextbox1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd * 4);
             richTextBox1.Size = new Size(700, 290);
@@ -118,7 +127,7 @@ namespace vcs_RichTextBox1
 
             lb_richtextbox_rtf.Location = new Point(x_st + dx * 4, y_st + dy * 7);
             richTextBox_rtf.Size = new Size(350, 200);
-            richTextBox_rtf.Location = new Point(x_st + dx * 4-60, y_st + dy * 7 + dd);
+            richTextBox_rtf.Location = new Point(x_st + dx * 4 - 60, y_st + dy * 7 + dd);
 
             dd = 45;
             bt_open_rtf.Location = new Point(richTextBox_rtf.Location.X + richTextBox_rtf.Width - dd * 2, richTextBox_rtf.Location.Y);
@@ -149,7 +158,7 @@ namespace vcs_RichTextBox1
             lb_richtextbox_rtf.Text = "richTextBox_rtf";
             lb_richtextbox1_text.Text = "抓出游標所指的字";
 
-            this.Size = new Size(1700, 880);
+            this.Size = new Size(1800, 890);
             this.Text = "vcs_RichTextBox1";
 
             //設定執行後的表單起始位置, 正中央
@@ -249,7 +258,7 @@ namespace vcs_RichTextBox1
             // 在RichTextBox最後加入表格 Insert the table at the end.
             richTextBox1.Rtf = richTextBox1.Rtf.Trim().TrimEnd('}') + table.ToString() + "}";
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //在RTB內貼入圖片
 
@@ -462,6 +471,19 @@ namespace vcs_RichTextBox1
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //空陣列，儲存資料
+            string[] tmp = new string[6];
+
+            //將取得的資料依序放入陣列
+            tmp[0] = "aaaa";
+            tmp[1] = "bbbb";
+            tmp[2] = "cccc";
+            tmp[3] = "dddd";
+            tmp[4] = "eeee";
+            tmp[5] = "ffff";
+
+            //將陣列的內容利用屬性Lines放入文字方塊中
+            richTextBox1.Lines = tmp;
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -525,7 +547,54 @@ namespace vcs_RichTextBox1
             //讀寫RTF檔
         }
 
+        private void button20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+
+        }
+
         //6060
+
+        void show_matrix()
+        {
+            richTextBox_matrix.Font = new Font("Consolas", 16);
+
+            byte[] bytes = File.ReadAllBytes(Application.ExecutablePath);
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                string value = Convert.ToString(bytes[i], 2);
+                value = value.PadLeft(8, '0');
+                sb.Append(value + ' ');
+            }
+            richTextBox_matrix.Text = sb.ToString();
+
+            //byte[] bytes = File.ReadAllBytes(Application.ExecutablePath);
+            //string[] strings = Array.ConvertAll(bytes,
+            //    b => Convert.ToString(b, 2).PadLeft(8, '0'));
+            //richTextBox_matrix.Text = string.Join(" ", strings);
+
+            //var query =
+            //    from byte b in File.ReadAllBytes(Application.ExecutablePath)
+            //    select Convert.ToString(b, 2).PadLeft(8, '0');
+            //richTextBox_matrix.Text = string.Join(" ", query.ToArray());
+        }
+
+        //------------------------------------------------------------  # 60個
 
         /// <summary>自定义方法 -- 
         ///  获取文本中(行和列)--光标--坐标位置的调用方法
@@ -866,9 +935,9 @@ namespace vcs_RichTextBox1
             richTextBox2.Text += "已存檔 : " + rtf_filename + "\n";
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
-        private void button22_Click(object sender, EventArgs e)
+        private void btn_search_Click(object sender, EventArgs e)
         {
             //搜尋
             if (flag_search_pattern_start == false)
@@ -898,14 +967,14 @@ namespace vcs_RichTextBox1
 
         }
 
-        private void button21_Click(object sender, EventArgs e)
+        private void btn_replace_Click(object sender, EventArgs e)
         {
             //替換
             string str0 = this.textBox1.Text, str1 = this.textBox2.Text;
             this.Replace(str0, str1);
         }
 
-        private void button20_Click(object sender, EventArgs e)
+        private void btn_replace_all_Click(object sender, EventArgs e)
         {
             //全部替換
             //Form_Mxdr f1 = (Form_Mxdr)this.Owner;
@@ -917,13 +986,13 @@ namespace vcs_RichTextBox1
             flag_search_pattern_start = false;
         }
 
-        #region ***********全局变量*************
+        //#region ***********全局变量*************
         bool flag_search_pattern_start = false;
         int start = 0;
         int sum = 0;
-        #endregion
+        //#endregion
 
-        #region =★*★*★=    〖查找替换〗 函数     =★*★*★=
+        //#region =★*★*★=    〖查找替换〗 函数     =★*★*★=
         /// <summary>向上查找指定字符 或 字符串 (不区分大小写)<para>　<para>
         /// 参数1(rbox):内容文本框,指定为 RichTextBox 文本框类型<para>
         /// 参数2(str):用户指定要查找的字符串</para>
@@ -1137,7 +1206,7 @@ namespace vcs_RichTextBox1
             rbox.SelectionLength = str0.Length;
             rbox.SelectedText = str1;//textBox2中放要替换的字符
         }
-        #endregion
+        //#endregion
 
         private void richTextBox_search_TextChanged(object sender, EventArgs e)
         {
@@ -1183,7 +1252,7 @@ namespace vcs_RichTextBox1
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
     }
 }
@@ -1217,6 +1286,156 @@ public RichTextBox RichTxtBox
     get { return this.txtInput; }
     set { this.txtInput = value; }
 }
+*/
+
+
+
+/*
+            //開啟 .rtf 檔 至 RTB
+            rtxtShow.LoadFile("../../../Demo01.rtf");
+            //取得載入檔案的總字串長度
+            int result = rtxtShow.TextLength;
+            richTextBox1.Text += "字串長度 : " + result.ToString() + "\n";
+
+            //將 RTB 儲存至 .rtf 檔
+            rtxtShow.SaveFile("../../../tmp_Change.rtf", RichTextBoxStreamType.RichText);
+            int result = rtxtShow.TextLength;
+            richTextBox1.Text += "字串長度 : " + result.ToString() + "\n";
+
+//------------------------------------------------------------  # 60個
+
+            richTextBox1.Text += "你按了 開檔\n";
+
+            richTextBox1.Text += "你按了 存檔\n";
+
+            rtxtShow.LoadFile("../../../Demo01.rtf");
+            rtxtShow.SaveFile("tmp_Demo02.rtf");
+
+                            //PlainText-代表OLE物件的純文字資料流，文字中允許有空格
+                            richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.PlainText);
+
+
+            // 使用try{...}catch{...}來補捉沒有檔案可能發生的例外
+            try
+            {
+                // 將test.rtf檔的內容載入到richTextBox1豐富文字方塊內
+                // richTextBox1.LoadFile("../../../GOTOP.rtf", RichTextBoxStreamType.RichText);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
+            // 使用try{...}catch{...}來補捉沒有檔案可能發生的例外
+            try
+            {
+                // 將test.rtf檔的內容載入到richTextBox1豐富文字方塊內
+                richTextBox1.LoadFile("GOTOP.rtf", RichTextBoxStreamType.RichText);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            // 將richTextBox1豐富文字方塊內的資料儲存到test.rtf檔
+            richTextBox1.SaveFile("GOTOP.rtf", RichTextBoxStreamType.RichText);
+
+            // 將richTextBox1豐富文字方塊內的資料儲存到test.rtf檔
+            // richTextBox1.SaveFile("tmp_GOTOP.rtf", RichTextBoxStreamType.RichText);
+
+
+
+RTB load rtf 檔
+            openFileDialog1.DefaultExt = "*.rtf";
+            openFileDialog1.Filter = "RTF檔|*.rtf";
+
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK && openFileDialog1.FileName.Length > 0)
+            {
+                richTextBox1.LoadFile(openFileDialog1.FileName);
+            }
+
+
+            saveFileDialog1.Filter = "RTF檔|*.rtf";
+
+            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK && saveFileDialog1.FileName.Length > 0)
+            {
+                richTextBox1.SaveFile(saveFileDialog1.FileName);
+            }
+
+            saveFileDialog1.Filter = "RTF檔|*.rtf";
+
+            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK && saveFileDialog1.FileName.Length > 0)
+            {
+                richTextBox1.LoadFile(saveFileDialog1.FileName, RichTextBoxStreamType.PlainText);
+            }
+
+//------------------------------------------------------------  # 60個
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //測試
+            //richTextBox1.Text = "「紫釵記」以明朝湯顯祖的雜劇「紫釵記」為本，而湯顯祖的「紫釵記」亦是他重寫自己早期另一個劇本「紫簫記」 「紫簫記」的情節比較簡單，最重要的分別是欠缺了「紫釵」這個戲劇元素。湯顯祖劇作的藍本是唐代蔣防傳奇小說「霍小玉傳」。無論「紫釵記」或「紫簫記」，霍小玉都能與李益終成眷屬，而小說中之李益對小玉始亂終棄，順從母親之命，另娶富家女為妻，使小玉悲痛欲絕，「喪慟號哭數聲而絕」。小說中的李益在小玉死後，娶妻妾三人，惶惶不可終日，輒加猜忌，家宅不寧。";
+            richTextBox1.Text ="if (richTextBox1.SelectedText != 控制項)\n"+
+                "if (richTextBox1.Find(控制項, RichTextBoxFinds.WholeWord) == -1)\n"+
+                "MessageBox.Show(The text 控制項 was not found!);\n"+
+                "if (richTextBox1.SelectedText != 控制項)\n";
+
+
+            if (richTextBox1.SelectedText != "控制項")
+            {
+                if (richTextBox1.Find("控制項", RichTextBoxFinds.WholeWord) == -1)
+                {
+                    MessageBox.Show("The text \"控制項\" was not found!");
+                    return;
+                }
+            }
+            richTextBox1.SelectionProtected = true;
+
+//------------------------------------------------------------  # 60個
+
+            if (richTextBox1.SelectedText != "控制項")
+            {
+                if (richTextBox1.Find("控制項", RichTextBoxFinds.WholeWord) == -1)
+                {
+                    MessageBox.Show("The text \"控制項\" was not found!");
+                    return;
+                }
+            }
+            richTextBox1.SelectionProtected = false;
+
+        }
+
+        private void richTextBox1_Protected(object sender, EventArgs e)
+        {
+            MessageBox.Show("喔.喔.，這些字是不能改的喔！");
+        }
+
+//------------------------------------------------------------  # 60個
+
+            //RTB的操作 貼上
+            richTextBox2.Paste();
+
+            //RTB的操作 全選 拷貝
+
+            if (richTextBox1.SelectionLength == 0)
+            {
+                richTextBox1.SelectAll();
+            }
+            richTextBox1.Copy();
+
+
+            //RTB的操作 全選 剪下
+            if (richTextBox1.SelectionLength == 0)
+            {
+                richTextBox1.SelectAll();
+            }
+            richTextBox1.Cut();
+
+//------------------------------------------------------------  # 60個
+
+string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_rtf\VS2013Express.rtf";
+
 */
 
 

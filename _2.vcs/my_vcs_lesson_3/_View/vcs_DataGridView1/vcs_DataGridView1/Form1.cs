@@ -25,7 +25,6 @@ namespace vcs_DataGridView1
 
             dataGridView1.MultiSelect = false;
 
-            //dataGridView1.Dock = DockStyle.Fill;
             //dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;//佔滿整個DGV
 
             dataGridView1.Click += new EventHandler(dataGridView1_Click);
@@ -108,6 +107,9 @@ namespace vcs_DataGridView1
 
         private void bt_info_Click(object sender, EventArgs e)
         {
+            //dataGridView1.CurrentRow.Cells[0].Value
+            //dataGridView1.CurrentRow.Cells[0].Value
+
             /*
             richTextBox1.Text += dataGridView1.CurrentRow.Cells + "\n";
             richTextBox1.Text += dataGridView1.CurrentRow.Cells[0].Value + "\n";
@@ -238,21 +240,6 @@ namespace vcs_DataGridView1
 
             dataGridView1.Rows.Add(new Object[] { "ox", "班尼牛", 48 });
             dataGridView1.Rows.Add(new Object[] { "tiger", "跳跳虎", 33 });
-
-            //dataGridView1.Columns[0].Visible = false;  // 隱藏第0欄
-
-            /*
-            dataGridView1.Columns[0].HeaderText = "编号";
-            dataGridView1.Columns[0].Width = 40;
-            dataGridView1.Columns[1].HeaderText = "书名";
-            dataGridView1.Columns[1].Width = 140;
-            dataGridView1.Columns[2].HeaderText = "条形码";
-            dataGridView1.Columns[2].Width = 80;
-            dataGridView1.Columns[3].HeaderText = "累加值";
-            dataGridView1.Columns[3].Width = 80;
-            dataGridView1.Columns[4].HeaderText = "总计";
-            dataGridView1.Columns[4].Width = 40;
-            */
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -268,7 +255,6 @@ namespace vcs_DataGridView1
             dataGridView1.Columns[0].Width = 100;  // 設定欄寬, 第0欄
             dataGridView1.Columns[1].Width = 100;  // 設定欄寬, 第1欄
             dataGridView1.Columns[2].Width = 100;  // 設定欄寬, 第2欄
-            dataGridView1.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter; //設置對其方式   此欄置中對齊
 
             dataGridView1.Rows.Add(new string[] { "mouse", "米老鼠", 3.ToString() });
             dataGridView1.Rows.Add(new string[] { "ox", "班尼牛", 48.ToString() });
@@ -295,7 +281,6 @@ namespace vcs_DataGridView1
             dataGridView1.Columns[0].Name = "英文名";
             dataGridView1.Columns[1].Name = "中文名";
             dataGridView1.Columns[2].Name = "體重";
-            dataGridView1.Columns[2].DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Italic);
 
             //dataGridView1.CellFormatting += new DataGridViewCellFormattingEventHandler(songsDataGridView_CellFormatting);
 
@@ -347,7 +332,6 @@ namespace vcs_DataGridView1
             dataGridView1.Columns[1].Name = "英文名";
             dataGridView1.Columns[2].Name = "中文名";
             dataGridView1.Columns[3].Name = "體重";
-            dataGridView1.Columns[3].DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Italic);
 
             //dataGridView1.CellFormatting += new DataGridViewCellFormattingEventHandler(songsDataGridView_CellFormatting);
 
@@ -409,13 +393,6 @@ namespace vcs_DataGridView1
             dataGridView1.Rows.Add(new object[] { "Pencil sharpener", 12.95m, 1 });
             dataGridView1.Rows.Add(new object[] { "Paper clips, 100", 0.75m, 1 });
 
-            // Define a column style at run time.
-            DataGridViewCellStyle cell_style = new DataGridViewCellStyle();
-            cell_style.BackColor = Color.LightGreen;
-            cell_style.Alignment = DataGridViewContentAlignment.MiddleRight;
-            cell_style.Format = "C2";
-            dataGridView1.Columns[3].DefaultCellStyle = cell_style;
-
             // Calculate totals.
             CalculateTotals();
         }
@@ -450,13 +427,6 @@ namespace vcs_DataGridView1
 
             // Add the items to the DataGridView.
             AddOrderItems(order_items);
-
-            // Define a column style at run time.
-            DataGridViewCellStyle cell_style = new DataGridViewCellStyle();
-            cell_style.BackColor = Color.LightGreen;
-            cell_style.Alignment = DataGridViewContentAlignment.MiddleRight;
-            cell_style.Format = "C2";
-            dataGridView1.Columns[3].DefaultCellStyle = cell_style;
         }
 
         // Calculate the total costs and highlight totals greater than $9.99.
@@ -563,7 +533,6 @@ namespace vcs_DataGridView1
             dataGridView1.Columns[2].Name = "Title";
             dataGridView1.Columns[3].Name = "Artist";
             dataGridView1.Columns[4].Name = "Album";
-            dataGridView1.Columns[4].DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Italic);
 
             dataGridView1.CellFormatting += new DataGridViewCellFormattingEventHandler(dataGridView1_CellFormatting);
         }
@@ -616,7 +585,7 @@ namespace vcs_DataGridView1
                 new Images(){Im=Image.FromFile("..//..//images//6.bmp")},
                 new Images(){Im=Image.FromFile("..//..//images//7.bmp")}
             };
-            dataGridView1.Columns[0].HeaderText = "圖片";//設定欄標題
+            dataGridView1.Columns[0].Name = "圖片";//設定欄標題
             dataGridView1.Columns[0].Width = 70;  // 設定欄寬, 第0欄
 
             int R = dataGridView1.Rows.Count;  // 列數, 包含標題列
@@ -723,7 +692,7 @@ namespace vcs_DataGridView1
             e.ThrowException = false;
 
             // Display an error message.
-            richTextBox1.Text += "輸入資料錯誤, 欄位 : " + dataGridView1.Columns[e.ColumnIndex].HeaderText + "\t原因 : " + e.Exception.Message + "\n";
+            richTextBox1.Text += "輸入資料錯誤, 欄位 : " + dataGridView1.Columns[e.ColumnIndex].Name + "\t原因 : " + e.Exception.Message + "\n";
 
             // If this is true, then the user is trapped in this cell.
             e.Cancel = false;
@@ -1170,13 +1139,7 @@ namespace vcs_DataGridView1
 
 
 /*
-            dataGridView1.Columns[0].Width = 150;//設置欄位寬度
-            dataGridView1.Columns[1].Width = 150;//設置欄位寬度
-            dataGridView1.Columns[2].Width = 150;//設置欄位寬度
-
-            dataGridView1.DataSource = nemployees.ToList();
-            dataGridView1.Columns[0].Width = 250;
-            dataGridView1.Columns[1].Width = 100;
+dataGridView1.DataSource = nemployees.ToList();
 
 WaferAdapter.Fill(WaferSet, "商品");//向數據集中填充數據
 WaferTable = WaferSet.Tables["商品"];//向數據表中填充數據
@@ -1191,68 +1154,92 @@ dgv1
 
 直接把DataTable的資料貼到DataGridView上
 
-	DataTable dt = new DataTable();
+DataTable dt = new DataTable();
 	
-	//建九列
+//建九列
 	
-	dt.Columns.Add("name", typeof(System.String));
-	dt.Columns.Add("sex", typeof(System.String));
-	dt.Columns.Add("age", typeof(System.String));
+dt.Columns.Add("name", typeof(System.String));
+dt.Columns.Add("sex", typeof(System.String));
+dt.Columns.Add("age", typeof(System.String));
 	
-	//將MongoDB中數據插入到該一行對應的各列中（我這裡是數據存入MongoDB中，在之前取出bson,然後foreach）
-	foreach (BsonDocument result in resultList)
-	{
-	//建一行
-	DataRow dr = dt.NewRow();
-	//行信息
-	dr[0] = 你的數據
-	dr[1] = 你的數據
-	dr[2] = 你的數據
-	//將上述該行加入DataTable中
-	dt.Rows.Add(dr);
+//將MongoDB中數據插入到該一行對應的各列中（我這裡是數據存入MongoDB中，在之前取出bson,然後foreach）
+foreach (BsonDocument result in resultList)
+{
+//建一行
+DataRow dr = dt.NewRow();
+//行信息
+dr[0] = 你的數據
+dr[1] = 你的數據
+dr[2] = 你的數據
+//將上述該行加入DataTable中
+dt.Rows.Add(dr);
 	
-	//綁定在sorce上
-	dataGridView1.DataSource = dt;
+//綁定在sorce上
+dataGridView1.DataSource = dt;
+
+//------------------------------------------------------------  # 60個
+
+//顯示數據 DataTable => DGV
+dataGridView1.Rows.Clear();//清空DataGridView中原有的數據
+object[] item = new object[dt.Columns.Count];//定義一個object類型的數組
+    int R = dt.Rows.Count;
+    richTextBox1.Text += "R = " + R.ToString() + "\n";
+for (int i = 0; i < R; i++)//循環遍歷數據表中的每一行數據
+{
+    for (int j = 0; j < dt.Columns.Count; j++)//循環遍歷數據表中每一列數據
+    {
+        item[j] = dt.Rows[i][j];//保存數據表中的數據內容
+    }
+    dataGridView1.Rows.Add(item);//向DataGridView中添加數據
+}
+
+//------------------------------------------------------------  # 60個
 
 
-//3030
+//------------------------------------------------------------  # 60個
+
+dataGridView1.DataSource = ds.Tables["authors"].DefaultView;//為DataGridView控制元件填充數據源
+for (int i = 0; i < dataGridView1.Columns.Count; i++)//循環搜尋DataGridView控制元件中的每一列
+{
+    //禁用DataGridView控制元件列表頭自動排序功能
+    dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;//設定每一列的排序類型為不排序
+}
+//------------------------------------------------------------  # 60個
+
+DGV刪除資料
+DataRowView row;
+DataView view = (DataView)dataGridView1.DataSource;
+row = view[dataGridView1.CurrentCell.RowIndex];
+row.Delete();
+
+//------------------------------------------------------------  # 60個
 
 
 */
 
 
+//欄位設定
 
+//欄位顯示/不顯示
+//dataGridView1.Columns[0].Visible = false;  // 隱藏第0欄
 
-
+//.HeaderText = .Name, 用.Name就好
+//dataGridView1.Columns[0].HeaderText = "编号";
+//dataGridView1.Columns[0].Name = "英文名";
 
 /*
+dataGridView1.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter; //設置對其方式   此欄置中對齊
+dataGridView1.Columns[2].DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Italic);
+dataGridView1.Columns[3].DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Italic);
+dataGridView1.Columns[4].DefaultCellStyle.Font = new Font(dataGridView1.DefaultCellStyle.Font, FontStyle.Italic);
 
-            //顯示數據 DataTable => DGV
-            dataGridView1.Rows.Clear();//清空DataGridView中原有的數據
-            object[] item = new object[dt.Columns.Count];//定義一個object類型的數組
-                int R = dt.Rows.Count;
-                richTextBox1.Text += "R = " + R.ToString() + "\n";
-            for (int i = 0; i < R; i++)//循環遍歷數據表中的每一行數據
-            {
-                for (int j = 0; j < dt.Columns.Count; j++)//循環遍歷數據表中每一列數據
-                {
-                    item[j] = dt.Rows[i][j];//保存數據表中的數據內容
-                }
-                dataGridView1.Rows.Add(item);//向DataGridView中添加數據
-            }
+// Define a column style at run time.
+DataGridViewCellStyle cell_style = new DataGridViewCellStyle();
+cell_style.BackColor = Color.LightGreen;
+cell_style.Alignment = DataGridViewContentAlignment.MiddleRight;
+cell_style.Format = "C2";
+dataGridView1.Columns[3].DefaultCellStyle = cell_style;
 */
 
 
-//dataGridView1.CurrentRow.Cells[0].Value
-//dataGridView1.CurrentRow.Cells[0].Value
-
-/*
-
-                dataGridView1.DataSource = ds.Tables["authors"].DefaultView;//為DataGridView控制元件填充數據源
-                for (int i = 0; i < dataGridView1.Columns.Count; i++)//循環搜尋DataGridView控制元件中的每一列
-                {
-                    //禁用DataGridView控制元件列表頭自動排序功能
-                    dataGridView1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;//設定每一列的排序類型為不排序
-                }
-*/
 

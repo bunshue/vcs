@@ -1199,9 +1199,28 @@ namespace vcs_Mix00
             errorProvider1.SetError(button39, "測試 ErrorProvider");
         }
 
+        //------------------------------------------------------------  # 60個
+
+        public class Book
+        {
+            public string Id { get; set; }
+            public string BkName { get; set; }
+            public int Price { get; set; }
+            public string Img { get; set; }
+        }
+
         private void button25_Click(object sender, EventArgs e)
         {
+            //class 範例
+            Book[] bk = new Book[]
+            {
+                new Book(){ Id="AEL014200", BkName="Visual C# 2012 程式設計經典", Price=650, Img="images/cs2012.jpg"},
+                new Book(){ Id="AEL009400", BkName="Visual C# 2012 基礎必修課", Price=520, Img="images/cs2010.jpg"},
+                new Book(){ Id="AEL009500", BkName="Visual Basic 2010 程式設計經典", Price=520, Img="images/vb2010.jpg"}
+            };
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button26_Click(object sender, EventArgs e)
         {
@@ -1462,7 +1481,7 @@ namespace vcs_Mix00
             CallValue(a, b);
             richTextBox1.Text += string.Format("\n呼叫敘述 離開方法回原處時\t：a={0}  b={1}", a, b);
 
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //傳址
             //reference
@@ -1571,7 +1590,7 @@ namespace vcs_Mix00
                 //WriteLine();//
             }
 
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             //三維 array
             /*
@@ -1616,7 +1635,7 @@ namespace vcs_Mix00
                     }//end Main()
             */
 
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             /*
             int num = 10;

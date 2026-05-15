@@ -84,14 +84,14 @@ namespace vcs_Mix03_draw_image
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            pictureBox1.Size = new Size(600, 600);
+            pictureBox1.Size = new Size(690, 690);
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
-            richTextBox1.Size = new Size(300, 640);
+            richTextBox1.Size = new Size(300, 690);
             richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1600, 790);
+            this.Size = new Size(1600, 750);
             this.Text = "vcs_Mix03_draw_image";
 
             //設定執行後的表單起始位置, 正中央
@@ -621,10 +621,28 @@ namespace vcs_Mix03_draw_image
             return new RectangleF(x, y, wid, hgt);
         }
 
-
-
         private void button15_Click(object sender, EventArgs e)
         {
+            //一次畫一群長方形
+
+            g.Clear(Color.White);
+
+            int hwidth = 50;
+            int x_center = 100;
+            int y_center = 100;
+            //Pen pen = new Pen(Pens.Red);
+            Pen pen = new Pen(Color.Blue, 1);
+            Rectangle[] R1 = new Rectangle[25];
+            for (int i = 0; i <= 24; i++)
+            {
+                R1[i] = new Rectangle(x_center - hwidth, y_center - hwidth, 2 * hwidth, 2 * hwidth);
+                y_center += 4;
+                hwidth += 2;
+            }
+            g.DrawRectangles(pen, R1);
+
+            pictureBox1.Image = bitmap1;
+
 
         }
 
@@ -672,10 +690,7 @@ namespace vcs_Mix03_draw_image
 
             g.FillPolygon(Brushes.Red, pntArr);
 
-
             pictureBox1.Image = bitmap1;
-
-
         }
     }
 }
@@ -696,3 +711,4 @@ namespace vcs_Mix03_draw_image
 /*  可搬出
 
 */
+

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace vcs_RichTextBox5_Conversion
+using System.Web;   //for HttpUtility, 需改用.Net Framework4, 然後參考/加入參考/.Net/System.Web
+
+namespace vcs_Encoding
 {
     public static class StringExtensions
     {
@@ -29,5 +31,24 @@ namespace vcs_RichTextBox5_Conversion
                 bytes[i] = Convert.ToByte(pairs[i], 16);
             return bytes;
         }
+
+        // Extension to replace spaces with &nbsp;
+        public static string SpaceToNbsp(this string s)
+        {
+            return s.Replace(" ", "&nbsp;");
+        }
+
+        // Url encode an ASCII string.
+        public static string UrlEncode(this string s)
+        {
+            return HttpUtility.UrlEncode(s);
+        }
+
+        // Url decode an ASCII string.
+        public static string UrlDecode(this string s)
+        {
+            return HttpUtility.UrlDecode(s);
+        }
+
     }
 }

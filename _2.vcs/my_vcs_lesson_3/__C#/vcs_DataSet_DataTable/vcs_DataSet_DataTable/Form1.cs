@@ -1571,4 +1571,124 @@ namespace vcs_DataSet_DataTable
 */
 
 
+/*
+
+//關於c#在DataTable中根據條件刪除某一行，
+
+我們經常會將數據源放在DataTable裡面,但是有時候也需要移除不想要的行,下面的代碼告訴你們
+
+　　　　　　DataTable dts；
+                DataRow[] foundRow;
+                foundRow = dts.Select("ID=99", "");
+                foreach (DataRow row in foundRow)
+                {
+                    dts.Rows.Remove(row);
+                }
+
+其實就是用DataTable的Select方法
+
+上面就是如何Datatable中某一行的id為99，就移除這一行,id為字段名
+
+
+//C# DataTable 相關操作
+
+
+///判斷DataTable中某列是否包含某值
+/// <summary>
+    /// 判斷DataTable中是否包含某值
+    /// </summary>
+    /// <param name="dt">DataTable</param>
+    /// <param name="columnName">列名</param>
+    /// <param name="fieldData">值</param>
+    /// <returns></returns>
+    public Boolean IsColumnIncludeData(DataTable dt, String columnName, string fieldData)
+    {
+        if (dt == null)
+        {
+            return false;
+        }
+        else
+        {
+            DataRow[] dataRows = dt.Select(columnName + "='" + fieldData + "'");
+            if (dataRows.Length.Equals(1))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+    }
+
+ 
+
+向DataTable中添加數據
+
+DataTable dt = null;
+
+        dt = handle.ExecuteDataTable(sql, true);
+
+        #region
+
+        DataRow dr;
+
+        for (int i = 0; i < code.Length; i++)
+        {
+            if (IsColumnIncludeData(dt, "SystemCode", code[i]) == false)
+            {
+                dr = dt.NewRow();
+                dr[0] = name[i];
+                dr[1] = code[i];
+                dr[2] = 0;
+                dt.Rows.Add(dr);
+            }
+        }
+        
+        #endregion
+
+
+
+List比較像陣列
+DataTable可以加標題 比較像EXCEL表單
+
+//如何將List轉換為DataTable
+
+public static DataTable ToDataTable(List<NetworkAdapterInformation> list)
+{
+	DataTable result = new DataTable();
+	if (list.Count > 0)
+	{
+		PropertyInfo[] propertys = list[0].GetType().GetProperties();
+		foreach (PropertyInfo pi in propertys)
+		{
+			result.Columns.Add(pi.Name, pi.PropertyType);
+		}
+		for (int i = 0; i < list.Count; i++)
+		{
+			ArrayList tempList = new ArrayList();
+			foreach (PropertyInfo pi in propertys)
+			{
+				object obj = pi.GetValue(list[i], null);
+				tempList.Add(obj);
+			}
+			object[] array = tempList.ToArray();
+			result.LoadDataRow(array, true);
+		}
+	}
+	return result;
+}
+
+//------------------------------------------------------------  # 60個
+
+C#_把dataTable數據導出到CSV,XLS文件
+http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/190579.html
+https://blog.csdn.net/happmaoo/article/details/83814604
+        				
+//------------------------------------------------------------  # 60個
+*/
+
+
+
 

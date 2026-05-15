@@ -1,4 +1,5 @@
-﻿
+﻿amend
+
 
 //------------------------------------------------------------  # 60個
 
@@ -41,33 +42,12 @@ using Microsoft.Win32;
                 richTextBox1.Text += strName + "\n";
             }
 
-
-
-
 使用即時運算視窗
 System.Diagnostics.Debug.WriteLine("aaaaaaaaaaaaaaaaaaaaaaa");
-
-		
-    public class Book
-    {
-        public string Id { get; set; }
-        public string BkName { get; set; }
-        public int Price { get; set; }
-        public string Img { get; set; }
-    }
-	
-            Book[] bk = new Book[]
-            {
-                new Book(){ Id="AEL014200", BkName="Visual C# 2012 程式設計經典", Price=650, Img="images/cs2012.jpg"},
-                new Book(){ Id="AEL009400", BkName="Visual C# 2012 基礎必修課", Price=520, Img="images/cs2010.jpg"},
-                new Book(){ Id="AEL009500", BkName="Visual Basic 2010 程式設計經典", Price=520, Img="images/vb2010.jpg"}
-            };
 
 //------------------------------------------------------------  # 60個
 
         object locker = new object();
-
-
 
             lock (locker)
             {
@@ -84,8 +64,6 @@ System.Diagnostics.Debug.WriteLine("aaaaaaaaaaaaaaaaaaaaaaa");
                 lastFrame = (Bitmap)eventArgs.Frame.Clone();
             }
 
-
-
 //------------------------------------------------------------  # 60個
 
 每逢整點時跳一個clock顯示5秒即消失
@@ -99,27 +77,6 @@ this.acceptButton = btn.....
 TextBox設定星號
 
             toolStripTextBox3.TextBox.PasswordChar = '*';
-
-//------------------------------------------------------------  # 60個
-
-            //RTB的操作 貼上
-            richTextBox2.Paste();
-
-            //RTB的操作 全選 拷貝
-
-            if (richTextBox1.SelectionLength == 0)
-            {
-                richTextBox1.SelectAll();
-            }
-            richTextBox1.Copy();
-
-
-            //RTB的操作 全選 剪下
-            if (richTextBox1.SelectionLength == 0)
-            {
-                richTextBox1.SelectAll();
-            }
-            richTextBox1.Cut();
 
 //------------------------------------------------------------  # 60個
 
@@ -157,115 +114,6 @@ TextBox設定星號
 		   }
 		   sr.Close ();
 		   sw.Close ();
-
-//------------------------------------------------------------  # 60個
-
-            richTextBox1.Text += "你按了 開檔\n";
-
-            richTextBox1.Text += "你按了 存檔\n";
-
-            rtxtShow.LoadFile("../../../Demo01.rtf");
-            rtxtShow.SaveFile("tmp_Demo02.rtf");
-
-                            //PlainText-代表OLE物件的純文字資料流，文字中允許有空格
-                            richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.PlainText);
-
-
-            // 使用try{...}catch{...}來補捉沒有檔案可能發生的例外
-            try
-            {
-                // 將test.rtf檔的內容載入到richTextBox1豐富文字方塊內
-                // richTextBox1.LoadFile("../../../GOTOP.rtf", RichTextBoxStreamType.RichText);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-
-            // 使用try{...}catch{...}來補捉沒有檔案可能發生的例外
-            try
-            {
-                // 將test.rtf檔的內容載入到richTextBox1豐富文字方塊內
-                richTextBox1.LoadFile("GOTOP.rtf", RichTextBoxStreamType.RichText);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            // 將richTextBox1豐富文字方塊內的資料儲存到test.rtf檔
-            richTextBox1.SaveFile("GOTOP.rtf", RichTextBoxStreamType.RichText);
-
-            // 將richTextBox1豐富文字方塊內的資料儲存到test.rtf檔
-            // richTextBox1.SaveFile("tmp_GOTOP.rtf", RichTextBoxStreamType.RichText);
-
-
-
-RTB load rtf 檔
-            openFileDialog1.DefaultExt = "*.rtf";
-            openFileDialog1.Filter = "RTF檔|*.rtf";
-
-            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK && openFileDialog1.FileName.Length > 0)
-            {
-                richTextBox1.LoadFile(openFileDialog1.FileName);
-            }
-
-
-            saveFileDialog1.Filter = "RTF檔|*.rtf";
-
-            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK && saveFileDialog1.FileName.Length > 0)
-            {
-                richTextBox1.SaveFile(saveFileDialog1.FileName);
-            }
-
-            saveFileDialog1.Filter = "RTF檔|*.rtf";
-
-            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK && saveFileDialog1.FileName.Length > 0)
-            {
-                richTextBox1.LoadFile(saveFileDialog1.FileName, RichTextBoxStreamType.PlainText);
-            }
-
-//------------------------------------------------------------  # 60個
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            //測試
-            //richTextBox1.Text = "「紫釵記」以明朝湯顯祖的雜劇「紫釵記」為本，而湯顯祖的「紫釵記」亦是他重寫自己早期另一個劇本「紫簫記」 「紫簫記」的情節比較簡單，最重要的分別是欠缺了「紫釵」這個戲劇元素。湯顯祖劇作的藍本是唐代蔣防傳奇小說「霍小玉傳」。無論「紫釵記」或「紫簫記」，霍小玉都能與李益終成眷屬，而小說中之李益對小玉始亂終棄，順從母親之命，另娶富家女為妻，使小玉悲痛欲絕，「喪慟號哭數聲而絕」。小說中的李益在小玉死後，娶妻妾三人，惶惶不可終日，輒加猜忌，家宅不寧。";
-            richTextBox1.Text ="if (richTextBox1.SelectedText != 控制項)\n"+
-                "if (richTextBox1.Find(控制項, RichTextBoxFinds.WholeWord) == -1)\n"+
-                "MessageBox.Show(The text 控制項 was not found!);\n"+
-                "if (richTextBox1.SelectedText != 控制項)\n";
-
-
-            if (richTextBox1.SelectedText != "控制項")
-            {
-                if (richTextBox1.Find("控制項", RichTextBoxFinds.WholeWord) == -1)
-                {
-                    MessageBox.Show("The text \"控制項\" was not found!");
-                    return;
-                }
-            }
-            richTextBox1.SelectionProtected = true;
-
-//------------------------------------------------------------  # 60個
-
-            if (richTextBox1.SelectedText != "控制項")
-            {
-                if (richTextBox1.Find("控制項", RichTextBoxFinds.WholeWord) == -1)
-                {
-                    MessageBox.Show("The text \"控制項\" was not found!");
-                    return;
-                }
-            }
-            richTextBox1.SelectionProtected = false;
-
-        }
-
-        private void richTextBox1_Protected(object sender, EventArgs e)
-        {
-            MessageBox.Show("喔.喔.，這些字是不能改的喔！");
-        }
 
 //------------------------------------------------------------  # 60個
 
@@ -621,7 +469,6 @@ plt.suptitle(
 
 //------------------------------------------------------------  # 60個
 
-
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
@@ -637,7 +484,6 @@ plt.suptitle(
                 e.Handled = true;
             }
         }
-
 
         private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -688,52 +534,6 @@ richTextBox1.Text += p.A.ToString("X2") + p.R.ToString("X2") + p.G.ToString("X2"
 
 //------------------------------------------------------------  # 60個
 
-        //結構陣列
-
-        struct Student
-        {
-            public int No;
-            public string Name;
-            public int Score;
-        };
-        // 初值置入結構陣列
-        // 1001,"Paul",85,90,66
-        // 1002,"Jack",80,80,77
-        // 1003,"Mary",75,70,80
-        // 1004,"Jane",90,85,99
-        // 1005,"Nacy",70,80,60
-        // 結構陣列如何在宣告建立結構陣列時,同時設定初值
-        static void Main(string[] args)
-        {
-            int i, j;
-            Student temp;
-
-            // Student[] bcc = new Student[5];
-            // bcc[0].No = 1001; bcc[0].Name = "Paul"; bcc[0].Score = 85;
-            // bcc[1].No = 1002; bcc[1].Name = "Jack"; bcc[1].Score = 80;
-            // bcc[2].No = 1003; bcc[2].Name = "Mary"; bcc[2].Score = 70;
-            // bcc[3].No = 1004; bcc[3].Name = "Jane"; bcc[3].Score = 90;
-            // bcc[4].No = 1005; bcc[4].Name = "Nacy"; bcc[4].Score = 75;
-
-            Student[] bcc = new Student[] {
-               new Student(){No=1001,Name="Paul", Score=85},
-               new Student(){No=1002,Name="Jack", Score=80},
-               new Student(){No=1003,Name="Mary", Score=70},
-               new Student(){No=1004,Name="Jane", Score=90},
-               new Student(){No=1005,Name="Nacy", Score=75}
-           };
-
-            for (i = 0; i < bcc.Length; i++)
-            {
-            }
-            for (i = 0; i < bcc.Length; i++)
-            {
-
-//------------------------------------------------------------  # 60個
-
-
-//------------------------------------------------------------  # 60個
-
 
 //------------------------------------------------------------  # 60個
 
@@ -775,11 +575,7 @@ FBD
             folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
             folderBrowserDialog1.Description = "----資料夾瀏覽對話方塊----" + "\n請選擇所要開啟的檔案所在的資料夾";
 
-if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-            {
-                textBox1.Text = folderBrowserDialog1.SelectedPath;
-            }
-
+//待測試
     folderBrowserDialog1.ShowNewFolderButton = checkBox1.Checked;
 
 */
@@ -830,8 +626,6 @@ radioButton1屬性
                 radioButton1.CheckAlign = ContentAlignment.MiddleLeft;
             }
 
-
-
             if (radioButton2.CheckAlign == ContentAlignment.MiddleLeft)
             {
                 radioButton2.CheckAlign = ContentAlignment.MiddleRight;
@@ -840,9 +634,6 @@ radioButton1屬性
             {
                 radioButton2.CheckAlign = ContentAlignment.MiddleLeft;
             }
-
-
-
 
             if (radioButton3.CheckAlign == ContentAlignment.MiddleLeft)
             {
@@ -1078,10 +869,9 @@ CustomSource 和 None。 預設為 None。
     //xxxx
     }
 
-
 printPreviewDialog1     .ShowDialog();
-						printPreviewDialog_image.ShowDialog();
-printPreviewDialog_grid.ShowDialog();
+printPreviewDialog_image.ShowDialog();
+printPreviewDialog_grid .ShowDialog();
 printPreviewDialog_grid2.ShowDialog();
 printPreviewDialog_pages.ShowDialog();
 
@@ -1193,21 +983,9 @@ textBox 屬性設定
             WriteLine($"字元 {key}");
 
 
-
-            //宣告陣列並初始化
-            ushort[] score = new ushort[] { 78, 65, 92, 55, 83 };
-            Array.Sort(score);//遞增排序
-            Array.Reverse(score);//遞減排序
             toolStripStatusLabel1.Text = "目前時間：" + DateTime.Now.ToLongTimeString();
             this.Text = "當前時間:" + DateTime.Now.ToLongTimeString();
             this.Text = "當前時間:" + DateTime.Now.ToLongTimeString();
-
-
-//------------------------------------------------------------  # 60個
-
-
-
-
 
 //------------------------------------------------------------  # 60個
 
@@ -1244,47 +1022,10 @@ KPI: 關鍵 績效 指標
                 員工BindingSource.RemoveCurrent();
             }
 
-amend
-
-D:\\C#Lab  
-dlgFolderBrowser.SelectedPath = @"D:\USERS\LSH\Documents";
+//------------------------------------------------------------  # 60個
 
                 //取得Click事件的訊息
                 tsmiFile.PerformClick();
-
-
-            byte[] number = { 21, 31, 41 };
-
-            //宣告陣列並初始化
-            int[] number = { 11, 21, 78, 125 };
-
-
-            // 一次畫一群長方形
-            hwidth = 50;
-            Rectangle[] R1 = new Rectangle[25];
-            for (int i = 0; i <= 24; i++)
-            {
-                R1[i] = new Rectangle(x_center - hwidth, y_center - hwidth, 2 * hwidth, 2 * hwidth);
-                y_center += 4;
-                hwidth += 2;
-            }
-            g.DrawRectangles(pen, R1);
-
-
-//測試RTB
-            //空陣列，儲存資料
-            string[] tmp = new string[6];
-
-            //將取得的資料依序放入陣列
-            tmp[0] = "aaaa";
-            tmp[1] = "bbbb";
-            tmp[2] = "cccc";
-            tmp[3] = "dddd";
-            tmp[4] = "eeee";
-            tmp[5] = "ffff";
-
-            //將陣列的內容利用屬性Lines放入文字方塊中
-            richTextBox1.Lines = tmp;
 
 //------------------------------------------------------------  # 60個
 
@@ -1337,20 +1078,6 @@ Form.AcceptButton和Form.CancelButton属性的用法，
 
             DateTime dt = DateTime.Now; //取得當前時間
             $"登入時間 {dt.ToShortTimeString()}";
-
-//------------------------------------------------------------  # 60個
-
-            //開啟 .rtf 檔 至 RTB
-            rtxtShow.LoadFile("../../../Demo01.rtf");
-            //取得載入檔案的總字串長度
-            int result = rtxtShow.TextLength;
-            richTextBox1.Text += "字串長度 : " + result.ToString() + "\n";
-
-            //將 RTB 儲存至 .rtf 檔
-            rtxtShow.SaveFile("../../../tmp_Change.rtf", RichTextBoxStreamType.RichText);
-            int result = rtxtShow.TextLength;
-            richTextBox1.Text += "字串長度 : " + result.ToString() + "\n";
-
 
 //------------------------------------------------------------  # 60個
 
@@ -4969,12 +4696,6 @@ excel/excel7_item.xlsx  新舊有何不同\
  this.textBox1.AppendText(DateTime.Now.ToString() + | + a + );
   
    } 
- 
- 
-
-整理搜尋關鍵字
-DataTable
-
 
 
 pictureCrop 標準版
@@ -5250,102 +4971,14 @@ C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Player\vcs_MP3Cutter
 vcs_mp3cutter
 應該為vcs_FFMPEG大集合
 
-
-
-
-
-
-
-
-C:\_git\vcs\_2.vcs\my_vcs_lesson_6_picture_image
-和
-C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Screen
-裡面的有些混用到listBox的  應分離出來使用
-
+//------------------------------------------------------------  # 60個
 
 多層次ContextMenuStrip
 ContextMenuStrip 選取項目 按右鍵 編輯DropDownItems(E)
 
+//------------------------------------------------------------  # 60個
 
-
-//關於c#在DataTable中根據條件刪除某一行，
-
-我們經常會將數據源放在DataTable裡面,但是有時候也需要移除不想要的行,下面的代碼告訴你們
-
-　　　　　　DataTable dts；
-                DataRow[] foundRow;
-                foundRow = dts.Select("ID=99", "");
-                foreach (DataRow row in foundRow)
-                {
-                    dts.Rows.Remove(row);
-                }
-
-其實就是用DataTable的Select方法
-
-上面就是如何Datatable中某一行的id為99，就移除這一行,id為字段名
-
-
-//C# DataTable 相關操作
-
-
-///判斷DataTable中某列是否包含某值
-/// <summary>
-    /// 判斷DataTable中是否包含某值
-    /// </summary>
-    /// <param name="dt">DataTable</param>
-    /// <param name="columnName">列名</param>
-    /// <param name="fieldData">值</param>
-    /// <returns></returns>
-    public Boolean IsColumnIncludeData(DataTable dt, String columnName, string fieldData)
-    {
-        if (dt == null)
-        {
-            return false;
-        }
-        else
-        {
-            DataRow[] dataRows = dt.Select(columnName + "='" + fieldData + "'");
-            if (dataRows.Length.Equals(1))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-    }
-
- 
-
-向DataTable中添加數據
-
-DataTable dt = null;
-
-        dt = handle.ExecuteDataTable(sql, true);
-
-        #region
-
-        DataRow dr;
-
-        for (int i = 0; i < code.Length; i++)
-        {
-            if (IsColumnIncludeData(dt, "SystemCode", code[i]) == false)
-            {
-                dr = dt.NewRow();
-                dr[0] = name[i];
-                dr[1] = code[i];
-                dr[2] = 0;
-                dt.Rows.Add(dr);
-            }
-        }
-        
-        #endregion
-
-
-
-        //從沒被用到過
+//是否在圓心
         bool IsInELP(Point Cusorpostion, Point ElpCenter, int radius)
         {
             int elpX = ElpCenter.X;
@@ -5364,9 +4997,7 @@ DataTable dt = null;
             }
         }
 
-
-
-
+//------------------------------------------------------------  # 60個
 
         private DrawingMode drawingMode = DrawingMode.None;
 
@@ -5825,17 +5456,15 @@ public static string byteToHexStr(byte[] bytes)
     return returnStr;
 }
 
-//========================================================================================
+//------------------------------------------------------------  # 60個
 
+Image<Bgr, byte> image1 = capture.QueryFrame();
+image1 = capture.QueryFrame();
+ImageViewer viewer = new ImageViewer();
+viewer.Image = image1;
+viewer.ShowDialog();
 
-            Image<Bgr, byte> image1 = capture.QueryFrame();
-            image1 = capture.QueryFrame();
-            ImageViewer viewer = new ImageViewer();
-            viewer.Image = image1;
-            viewer.ShowDialog();
-
-
-
+//------------------------------------------------------------  # 60個
 
 cap.SetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FOURCC, 4);
 
@@ -6353,8 +5982,6 @@ http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/192842.html
 
 //------------------------------------------------------------  # 60個
 
-List比較像陣列
-DataTable可以加標題 比較像EXCEL表單
 
 //------------------------------------------------------------  # 60個
                 
@@ -7023,63 +6650,6 @@ class TestADO
     } 
 }  
 
-十 二、使用OLEConn連接數據庫：
-using System;
-using System.Data;   
-using System.Data.OleDb;   
-
-class TestADO
-{  
-    static void Main(string[] args)  
-    {  
-        string strDSN = Provider=Microsoft.Jet.OLEDB.4.0;DataSource=c: est.mdb;  
-        string strSQL = SELECT * FROM employee ;  
-
-        OleDbConnection conn = new OleDbConnection(strDSN);
-        OleDbDataAdapter cmd = new OleDbDataAdapter( strSQL, conn ); 
-
-        conn.Open();
-        DataSet ds = new DataSet();
-        cmd.Fill( ds, employee );
-        DataTable dt = ds.Tables[0];
-
-        foreach( DataRow dr in dt.Rows )
-        {
-            Console.WriteLine(First name: + dr[FirstName].ToString() + Last name: + dr[LastName].ToString());
-        }
-        conn.Close();  
-    } 
-}  
-十三、讀取表的屬性：
-
-using System;
-using System.Data;   
-using System.Data.OleDb;   
-
-class TestADO
-{  
-    static void Main(string[] args)  
-    {  
-        string strDSN = Provider=Microsoft.Jet.OLEDB.4.0;DataSource=c: est.mdb;  
-        string strSQL = SELECT * FROM employee ;  
-
-        OleDbConnection conn = new OleDbConnection(strDSN);
-        OleDbDataAdapter cmd = new OleDbDataAdapter( strSQL, conn ); 
-
-        conn.Open();
-        DataSet ds = new DataSet();
-        cmd.Fill( ds, employee );
-        DataTable dt = ds.Tables[0];
-
-        Console.WriteLine(FIEld Name DataType Unique AutoIncrement AllowNull);
-        Console.WriteLine(==================================================================);
-        foreach( DataColumn dc in dt.Columns )
-        {
-            Console.WriteLine(dc.ColumnName+ , +dc.DataType + ,+dc.Unique + ,+dc.AutoIncrement+ ,+dc.AllowDBNull );
-        }
-        conn.Close();  
-    } 
-} 
 
 網絡方面的：
 十八、取得IP地址：
@@ -7499,7 +7069,6 @@ AllPaintingInWmPaint
 DoubleBuffer
 如果為 true，則繪制在緩沖區中進行，完成後將結果輸出到屏幕上。雙重緩沖區可防止由控件重繪引起的閃爍。要完全啟用雙重緩沖，還必須將 UserPaint 和 AllPaintingInWmPaint 樣式位設置為 true。
 
-
 //初始化加載皮膚 
             skinEngine1.SkinFile = "MacOS.ssk"; 
 
@@ -7507,27 +7076,6 @@ DoubleBuffer
 
 
 objStreamWriter = new StreamWriter(objFileStream, Encoding.Unicode); 
-
-
-
-   private DataSet ReadExcel(string strFileName, string sheetName)//使用OLE操作數據庫的方法讀取excel數據，導入到系統 
-        { 
-            if (strFileName == string.Empty) 
-            { 
-                return null; 
-            } 
-            else 
-            { 
-                string strConnection = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source = " + strFileName + ";Extended Properties = Excel 8.0"; 
-                OleDbConnection oleConnection = new OleDbConnection(strConnection); 
-                oleConnection.Open(); 
-                DataSet dsRead = new DataSet(); 
-                OleDbDataAdapter oleAdper = new OleDbDataAdapter(" SELECT *  FROM [" + sheetName + "$]", oleConnection); 
-                oleAdper.Fill(dsRead, "result"); 
-                oleConnection.Close(); 
-                return dsRead;  
-            }                                      
-        } 
 
 //------------------------------------------------------------  # 60個
 
@@ -7688,14 +7236,14 @@ string appPath = Application.ExecutablePath;
 panel1.BackColor = Color.FromA#41ccd4;
 注意：在设计时手动输入这些值，不要用颜色选取
 
-6060
+//------------------------------------------------------------  # 60個
 
 陣列
 一群資料型態相同的變數集合在一起
 
 反向運算子
 
-6060
+//------------------------------------------------------------  # 60個
 
 要顯示 & 以 ＆amp;取代
 要顯示 < 以 ＆lt;取代
@@ -9245,46 +8793,13 @@ public static void WriteLog(string txt)
 
 //------------------------------------------------------------  # 60個
 
-//如何將List轉換為DataTable
-
-public static DataTable ToDataTable(List<NetworkAdapterInformation> list)
-{
-	DataTable result = new DataTable();
-	if (list.Count > 0)
-	{
-		PropertyInfo[] propertys = list[0].GetType().GetProperties();
-		foreach (PropertyInfo pi in propertys)
-		{
-			result.Columns.Add(pi.Name, pi.PropertyType);
-		}
-		for (int i = 0; i < list.Count; i++)
-		{
-			ArrayList tempList = new ArrayList();
-			foreach (PropertyInfo pi in propertys)
-			{
-				object obj = pi.GetValue(list[i], null);
-				tempList.Add(obj);
-			}
-			object[] array = tempList.ToArray();
-			result.LoadDataRow(array, true);
-		}
-	}
-	return result;
-}
-
-//------------------------------------------------------------  # 60個
-
 randomrandom
-
-
 
 
 使用 Random 方法產生不重複亂數 
 
 //取得非常random的數字
 Random rd = new Random((int)DateTime.Now.Ticks);
-
-
 
 
 
@@ -9334,12 +8849,6 @@ Random rd = new Random((int)DateTime.Now.Ticks);
             //}
 
 
-//------------------------------------------------------------  # 60個
-
-C#_把dataTable數據導出到CSV,XLS文件
-http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/190579.html
-https://blog.csdn.net/happmaoo/article/details/83814604
-        				
 //------------------------------------------------------------  # 60個
 
 ffmpeg的用法
@@ -9767,23 +9276,6 @@ IsDigit
                 stream.Close();
                 return Info;
             }
-
-
-
-
-
-C#中如何獲取一個二維陣列的兩維長度，即行數和列數？
-
-
-int[,] array = new int[,] {{1,2,3},{4,5,6},{7,8,9}};//定義一個3行3列的二維陣列
-int row = array.Rank;//獲取行數
-int col = array.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
-int col = array.GetUpperBound(0)+1;//獲取指定維度的上限，在 上一個1就是列數
-int num = array.Length;//獲取整個二維陣列的長度，即所有元 的個數
-
-
-
-
 
 
 1，Tag这个属性是留给程序员自己用的，也就是说你可以自己做点标记   
@@ -11833,11 +11325,7 @@ using System.IO;
 
 建立臨時檔案
 
-            FolderBrowserDialog P_FolderBrowserDialog = new FolderBrowserDialog();	//選擇資料夾
-            if (P_FolderBrowserDialog.ShowDialog() == DialogResult.OK)	//選擇資料夾
-            {
-                File.Create(P_FolderBrowserDialog.SelectedPath + "\\" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".txt");//創建文件
-            }
+File.Create("tmp_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".txt");//創建文件
 
 //------------------------------------------------------------  # 60個
 
