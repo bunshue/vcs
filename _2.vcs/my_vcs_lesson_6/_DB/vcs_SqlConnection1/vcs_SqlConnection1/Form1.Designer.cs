@@ -113,7 +113,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(766, 46);
+            this.bt_clear.Location = new System.Drawing.Point(478, 399);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 131;
@@ -200,7 +200,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(746, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(458, 365);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 122;
@@ -382,7 +382,7 @@
             this.lb_index.AutoSize = true;
             this.lb_index.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_index.ForeColor = System.Drawing.Color.Red;
-            this.lb_index.Location = new System.Drawing.Point(778, 195);
+            this.lb_index.Location = new System.Drawing.Point(454, 311);
             this.lb_index.Name = "lb_index";
             this.lb_index.Size = new System.Drawing.Size(78, 24);
             this.lb_index.TabIndex = 175;
@@ -391,7 +391,7 @@
             // bt_next
             // 
             this.bt_next.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_next.Location = new System.Drawing.Point(818, 145);
+            this.bt_next.Location = new System.Drawing.Point(494, 261);
             this.bt_next.Name = "bt_next";
             this.bt_next.Size = new System.Drawing.Size(66, 40);
             this.bt_next.TabIndex = 176;
@@ -402,7 +402,7 @@
             // bt_previous
             // 
             this.bt_previous.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_previous.Location = new System.Drawing.Point(746, 145);
+            this.bt_previous.Location = new System.Drawing.Point(422, 261);
             this.bt_previous.Name = "bt_previous";
             this.bt_previous.Size = new System.Drawing.Size(66, 40);
             this.bt_previous.TabIndex = 175;
@@ -413,7 +413,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(852, 10);
+            this.pictureBox1.Location = new System.Drawing.Point(458, 475);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.TabIndex = 175;
@@ -518,7 +518,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1209, 642);
+            this.ClientSize = new System.Drawing.Size(804, 630);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.button23);
             this.Controls.Add(this.button22);

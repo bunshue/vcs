@@ -30,7 +30,7 @@ namespace vcs_List
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
+
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -89,18 +89,13 @@ namespace vcs_List
             persons1.Add(new Person("何英", "女", 35, 3600));
             persons1.Add(new Person("何英", "女", 18, 1600));
 
-            //Console.WriteLine("泛型分组如下：");
             richTextBox1.Text += "泛型分组如下：\n";
 
             var ls = persons1.GroupBy(a => a.Sex).Select(g => (new { sex = g.Key, count = g.Count(), ageC = g.Sum(item => item.Age), moneyC = g.Sum(item => item.Money) }));
             foreach (var item in ls)
             {
-                //Console.WriteLine(item.sex + "  " + item.count + "  " + item.ageC + "   " + item.moneyC);
                 richTextBox1.Text += item.sex + "  " + item.count + "  " + item.ageC + "   " + item.moneyC + "\n";
             }
-
-            //3030
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -114,7 +109,7 @@ namespace vcs_List
             m.Add(new Member() { Name = "Tom", Select = true, Score = 85 });
             m.Add(new Member() { Name = "Jack", Select = true, Score = 95 });
 
-            Console.WriteLine(" === 泛型 LIst 操作不需強制轉換 .... \n");
+            richTextBox1.Text += " === 泛型 LIst 操作不需強制轉換 .... \n";
             foreach (var item in m)
             {
                 Console.WriteLine("姓名:{0} \t 選課:{1} \t 成績:{2} \n ", item.Name, item.Select ? "是" : "否", item.Score.ToString());
@@ -158,7 +153,7 @@ namespace vcs_List
             }
             richTextBox1.Text += "\n";
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //List之搜尋語法1
             //這裡使用Where擴展方法獲取大於4的值。
@@ -170,17 +165,17 @@ namespace vcs_List
 
             foreach (var item in maxIntList)
             {
-                Console.WriteLine(item);
+                richTextBox1.Text += item + "\n";
             }
 
             intList4.Add(6);
 
             foreach (var item in maxIntList)
             {
-                Console.WriteLine(item);
+                richTextBox1.Text += item + "\n";
             }
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //List之搜尋語法2
             //建立 一維整數串列
@@ -190,24 +185,24 @@ namespace vcs_List
 
             foreach (var item in maxIntList)
             {
-                Console.WriteLine(item);
+                richTextBox1.Text += item + "\n";
             }
 
             intList5.Add(6);
 
             foreach (var item in maxIntList)
             {
-                Console.WriteLine(item);
+                richTextBox1.Text += item + "\n";
             }
 
             maxIntList = intList5.Where(i => i > 4).ToList();//調用ToList()方法
 
             foreach (var item in maxIntList)
             {
-                Console.WriteLine(item);
+                richTextBox1.Text += item + "\n";
             }
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             int N = 10;
             Random rr = new Random();
@@ -238,7 +233,7 @@ namespace vcs_List
             richTextBox1.Text += "建立長度為 " + N.ToString() + " 的List\t內容:\n";
             show_list(intList1);
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //建立 一維整數串列
             List<int> intList2 = new List<int>();   //宣告int型態的List
@@ -334,7 +329,7 @@ namespace vcs_List
             }
             richTextBox1.Text += "\n";
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //建立 一維字串串列
             List<string> stringList2 = new List<string>();   //宣告string型態的List
@@ -365,7 +360,7 @@ namespace vcs_List
             stringList2.Insert(1, "emily");
             show_list(stringList2);
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //建立 一維字串串列
             List<String> stringList1 = new List<String>();
@@ -461,7 +456,7 @@ namespace vcs_List
                 richTextBox1.Text += showlist[0] + "\t->\t" + showlist[1] + "\n";
             }
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //二維字串串列
             List<List<string>> list8 = new List<List<string>>();
@@ -475,7 +470,7 @@ namespace vcs_List
             richTextBox1.Text += "result : " + list8[1][0] + "\n"; // 輸出: 1,0: Jack
             richTextBox1.Text += "result : " + list8[1][1] + "\n"; // 輸出: 1,1: John
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //二維字串串列
 
@@ -487,7 +482,7 @@ namespace vcs_List
             richTextBox1.Text += "Result : " + stringList4[1][1].ToString() + "\n";
             richTextBox1.Text += "Count : " + stringList4.Count.ToString() + "\n";
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //建立 二維字串串列
             List<string[]> stringList5 = new List<string[]>();
@@ -598,7 +593,7 @@ namespace vcs_List
             }
             richTextBox1.Text += "\n";
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //建立 二維字串串列
             List<string[]> stringList7 = new List<string[]>();
@@ -694,11 +689,9 @@ namespace vcs_List
             }
             richTextBox1.Text += "\n";
 
-
-
             pointList2.Clear();
 
-            //3030
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             // 收集滑鼠點數
             List<PointF> pointList1 = new List<PointF>();
@@ -770,7 +763,7 @@ namespace vcs_List
 
         private void button11_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("未實體化，學生 : " + classStudent.Number + " 個\n");
+            richTextBox1.Text += "未實體化，學生 : " + classStudent.Number + " 個\n";
 
             //類別串列2
             //建立 一維類別串列
@@ -792,7 +785,7 @@ namespace vcs_List
                 richTextBox1.Text += "Name : " + stu.Name + ", Score : " + stu.Score + "\n";
             }
 
-            Console.WriteLine("已實體化，學生 : " + classStudent.Number + " 個\n");
+            richTextBox1.Text += "已實體化，學生 : " + classStudent.Number + " 個\n";
 
             //排序
             classList2.Sort((x, y) => { return -x.Score.CompareTo(y.Score); });
@@ -958,15 +951,16 @@ namespace vcs_List
             //SortedList 0
             SortedList mySL = new SortedList(); //建立myHT為屬於Hashtable實體
 
-            Console.WriteLine("\n1.置入四筆Key&Value鍵值到SortedList串列內.");
+            richTextBox1.Text += "\n1.置入四筆Key&Value鍵值到SortedList串列內\n";
             mySL["iPhone5S"] = 22000;  //添加 key&value鍵值對
             mySL["iPhone5C"] = 18000;  //添加 key&value鍵值對
             mySL["iPad2"] = 12500;     //添加 key&value鍵值對
             mySL["iPad Mini"] = 15900;  //添加 key&value鍵值對
 
             PrintOut1(mySL);
-            Console.WriteLine(" 1.目前 SortedList串列內元素總個數 : {0}", mySL.Count);
-            Console.WriteLine(" ---------------------------------------");
+            richTextBox1.Text += " 1.目前 SortedList串列內元素總個數 : " + mySL.Count.ToString() + "\n";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             // 查詢產品單價
             Console.Write(" 2.請輸入Apple產品名稱 : ");
@@ -979,20 +973,21 @@ namespace vcs_List
             {
                 Console.WriteLine(" 2.{0}單價 : {1}", item, mySL[item]);
             }
-            Console.WriteLine(" --------------------------------------");
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             // 移除剛查詢的 Key & Value 鍵值對
             Console.WriteLine(" 3.移除剛查詢鍵值 {0}", item);
             mySL.Remove(item);
             PrintOut2(mySL);
             Console.WriteLine(" 3.目前 SortedList串列內元素總個數 : {0}", mySL.Count);
-            Console.WriteLine(" ---------------------------------------");
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //移除所有元素
-            Console.WriteLine(" 4.移除 SortedList串列內所有元素");
+            richTextBox1.Text += " 4.移除 SortedList串列內所有元素\n";
             mySL.Clear();
-            Console.WriteLine(" 4.目前 SortedList串列內元素總個數 : {0}", mySL.Count);
-            Console.WriteLine(" --------------------------------------");
+            richTextBox1.Text += " 4.目前 SortedList串列內元素總個數 : " + mySL.Count.ToString() + "\n";
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -1006,10 +1001,10 @@ namespace vcs_List
             m.Add("Jack", new Member1() { Name = "Jack", Select = true, Score = 95 });
 
             //非泛型操作
-            Console.WriteLine("=== 非泛型 SortedList 操作需強制轉換 .... \n");
+            richTextBox1.Text += "=== 非泛型 SortedList 操作需強制轉換 .... \n";
             foreach (DictionaryEntry item in m)
             {
-                Console.WriteLine(((Member1)item.Value).ToString());
+                richTextBox1.Text += ((Member1)item.Value).ToString() + "\n";
             }
         }
 
@@ -1024,11 +1019,11 @@ namespace vcs_List
             m.Add("Jack", new Member2() { Name = "Jack", Select = true, Score = 95 });
 
             //泛型陣列操作
-            Console.WriteLine("=== 泛型 SortedList 操作不需強制轉換 .... \n");
+            richTextBox1.Text += "=== 泛型 SortedList 操作不需強制轉換 .... \n";
             foreach (KeyValuePair<string, Member2> item in m)
             {
                 // Console.WriteLine (" 姓名:{0} \t 選課:{1}  \t  成績:{2}  \n" ,item.Key, item.Value.Select, item.Value.Score );
-                Console.WriteLine(item.Value.ToString());
+                richTextBox1.Text += item.Value.ToString() + "\n";
             }
         }
 
@@ -1213,24 +1208,17 @@ namespace vcs_List
 
  */
 
-
 /*
-
             byte[] number = { 21, 31, 41 };
 
             //宣告陣列並初始化
             int[] number = { 11, 21, 78, 125 };
 
-
-
-
 C#中如何獲取一個二維陣列的兩維長度，即行數和列數？
-
 
 int[,] array = new int[,] {{1,2,3},{4,5,6},{7,8,9}};//定義一個3行3列的二維陣列
 int row = array.Rank;//獲取行數
 int col = array.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
 int col = array.GetUpperBound(0)+1;//獲取指定維度的上限，在 上一個1就是列數
 int num = array.Length;//獲取整個二維陣列的長度，即所有元 的個數
-
 */

@@ -733,16 +733,16 @@ namespace vcs_SqlConnection1
             // 測試 SqlTransaction, 用 SqlTransaction 一次執行多個 SQL 命令, 若有指令失敗, 可以恢復指令
 
             // 資料庫檔案
-            db_filename = "animals2_db.mdf";
+            db_filename = "animals3_db.mdf";
             // 查詢字串
-            sqlstr = "SELECT * FROM animals2_table";
+            sqlstr = "SELECT * FROM animals3_table";
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "十二生肖全部資料";
 
             richTextBox1.Text += "---------------\n";  // 15個
 
             // 資料庫檔案
-            db_filename = "animals2_db.mdf";
+            db_filename = "animals3_db.mdf";
             // 連接字串
             cnstr = string.Format(db_cnstr, db_filename);
 
@@ -752,8 +752,8 @@ namespace vcs_SqlConnection1
             cn.Open();
 
             List<string> sqlstrs = new List<string>();//SQL语句集合
-            sqlstr = "INSERT INTO animals2_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (95, N'aaa', N'AAA', 20, '2026/1/10 16:29:26')";
-            sqlstr = "INSERT INTO animals2_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (98, N'bbb', N'BBB', 35, '2026/1/20 16:29:26')";
+            sqlstr = "INSERT INTO animals3_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (95, N'aaa', N'AAA', 20, '2026/1/10 16:29:26')";
+            sqlstr = "INSERT INTO animals3_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (98, N'bbb', N'BBB', 35, '2026/1/20 16:29:26')";
             sqlstrs.Add(sqlstr);
             sqlstrs.Add(sqlstr);
             sqlstrs.Add(sqlstr);
@@ -804,9 +804,9 @@ namespace vcs_SqlConnection1
             richTextBox1.Text += "---------------\n";  // 15個
 
             // 資料庫檔案
-            db_filename = "animals2_db.mdf";
+            db_filename = "animals3_db.mdf";
             // 查詢字串
-            sqlstr = "SELECT * FROM animals2_table";
+            sqlstr = "SELECT * FROM animals3_table";
             sql_read_database(db_filename, sqlstr, dataGridView2);
             lb_dgv1.Text = "十二生肖全部資料";
         }
@@ -817,62 +817,62 @@ namespace vcs_SqlConnection1
             // 某一欄資料處理 COUNT SUM AVG MAX MIN, 使用 ExecuteScalar()
 
             // 資料庫檔案
-            db_filename = "animals2_db.mdf";
+            db_filename = "animals3_db.mdf";
             // 查詢字串
-            sqlstr = "SELECT * FROM animals2_table";
+            sqlstr = "SELECT * FROM animals3_table";
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "十二生肖全部資料";
 
             // 查詢字串, 數量COUNT()
-            sqlstr = "SELECT COUNT(*) FROM animals2_table";
+            sqlstr = "SELECT COUNT(*) FROM animals3_table";
             obj = sql_get_database_data(db_filename, sqlstr);
             richTextBox1.Text += "共 " + obj.ToString() + " 筆記錄\n";
 
             // 查詢字串, 總和SUM(), 計算某一欄的和
-            sqlstr = "SELECT SUM(體重) FROM animals2_table";
+            sqlstr = "SELECT SUM(體重) FROM animals3_table";
             obj = sql_get_database_data(db_filename, sqlstr);
             richTextBox1.Text += "總和 :\t" + obj.ToString() + "\n";
 
             // 查詢字串, 最大MAX(), 取得欄資料的最大值
-            sqlstr = "SELECT MAX(體重) FROM animals2_table";
+            sqlstr = "SELECT MAX(體重) FROM animals3_table";
             obj = sql_get_database_data(db_filename, sqlstr);
             richTextBox1.Text += "最大 :\t" + obj.ToString() + "\n";
 
             // 查詢字串, 最小MIN(), 取得欄資料的最小值
-            sqlstr = "SELECT MIN(體重) FROM animals2_table";
+            sqlstr = "SELECT MIN(體重) FROM animals3_table";
             obj = sql_get_database_data(db_filename, sqlstr);
             richTextBox1.Text += "最小 :\t" + obj.ToString() + "\n";
 
             // 查詢字串, 平均AVG()
-            sqlstr = "SELECT AVG(體重) FROM animals2_table";
+            sqlstr = "SELECT AVG(體重) FROM animals3_table";
             obj = sql_get_database_data(db_filename, sqlstr);
             richTextBox1.Text += "平均 :\t" + obj.ToString() + "\n";
 
             // 查詢字串, 欄名使用別名AS, 一次執行多個 基礎聚合函數(Aggregate Functions)
-            sqlstr = "SELECT * FROM animals2_table";
-            sqlstr = "SELECT COUNT(*) AS 個數, SUM(體重) AS 總重, ROUND(AVG(體重), 2) AS 平均, MAX(體重) AS 最大, MIN(體重) AS 最小 FROM animals2_table";
+            sqlstr = "SELECT * FROM animals3_table";
+            sqlstr = "SELECT COUNT(*) AS 個數, SUM(體重) AS 總重, ROUND(AVG(體重), 2) AS 平均, MAX(體重) AS 最大, MIN(體重) AS 最小 FROM animals3_table";
             sql_read_database(db_filename, sqlstr, dataGridView2);
             lb_dgv2.Text = "一次執行多個 基礎聚合函數";
 
             // 查詢字串, 體重 最大值 那列資料
-            sqlstr = "SELECT * FROM animals2_table WHERE 體重 IN(SELECT MAX(體重) FROM animals2_table)";
+            sqlstr = "SELECT * FROM animals3_table WHERE 體重 IN(SELECT MAX(體重) FROM animals3_table)";
             sql_read_database(db_filename, sqlstr, dataGridView3);
-            lb_dgv3.Text = "體重 最大值 那列資料 animals2_table";
+            lb_dgv3.Text = "體重 最大值 那列資料 animals3_table";
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             // 查詢字串, COUNT(*) 統計所有行(包括NULL)
-            sqlstr = "SELECT COUNT(*) FROM animals2_table";
+            sqlstr = "SELECT COUNT(*) FROM animals3_table";
             obj = sql_get_database_data(db_filename, sqlstr);
             richTextBox1.Text += "共 " + obj.ToString() + " 筆記錄a\n";
 
             // 查詢字串, COUNT(列名) 統計該列非NULL的行數
-            sqlstr = "SELECT COUNT(體重) FROM animals2_table";
+            sqlstr = "SELECT COUNT(體重) FROM animals3_table";
             obj = sql_get_database_data(db_filename, sqlstr);
             richTextBox1.Text += "共 " + obj.ToString() + " 筆記錄b\n";
 
             // 查詢字串, COUNT(DISTINCT 列名) 統計去重後的數量
-            sqlstr = "SELECT COUNT(DISTINCT 體重) FROM animals2_table";
+            sqlstr = "SELECT COUNT(DISTINCT 體重) FROM animals3_table";
             obj = sql_get_database_data(db_filename, sqlstr);
             richTextBox1.Text += "共 " + obj.ToString() + " 筆記錄c\n";
 
@@ -886,9 +886,9 @@ namespace vcs_SqlConnection1
             // obj = sql_get_database_data(db_filename, sqlstr);
             // richTextBox1.Text += "查詢日銷售額大於５００的銷售商品種數 : " + obj.ToString() + "\n";
             // 基礎聚合函數（COUNT()、SUM()、AVG()、MAX()、MIN()）
-            // SELECT COUNT(*) AS total_orders FROM animals2_table WHERE create_time BETWEEN '2025-06-01' AND '2025-06-30';
-            // SELECT COUNT(*) AS valid_orders FROM animals2_table WHERE order_status IN ('已支付', '已完成') AND create_time BETWEEN '2025-06-01' AND '2025-06-30';
-            // SELECT COUNT(*) AS total_orders FROM animals2_table;
+            // SELECT COUNT(*) AS total_orders FROM animals3_table WHERE create_time BETWEEN '2025-06-01' AND '2025-06-30';
+            // SELECT COUNT(*) AS valid_orders FROM animals3_table WHERE order_status IN ('已支付', '已完成') AND create_time BETWEEN '2025-06-01' AND '2025-06-30';
+            // SELECT COUNT(*) AS total_orders FROM animals3_table;
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
         }
@@ -929,7 +929,7 @@ namespace vcs_SqlConnection1
             */
             // 資料庫檔案
             db_filename = "db_09_Data.MDF";
-            db_filename = "animals2_db.mdf";
+            db_filename = "animals3_db.mdf";
             /*
             // 查詢字串, 所有資料庫的欄位
             sqlstr = "SELECT * FROM syscolumns";
@@ -963,10 +963,10 @@ namespace vcs_SqlConnection1
             lb_dgv1.Text = "sysobjects";
 
             // 資料庫檔案
-            db_filename = "animals2_db.mdf";
+            db_filename = "animals3_db.mdf";
 
             //獲取所有的字段名
-            sqlstr = "SELECT Name FROM SysColumns WHERE id=Object_Id('animals2_table')";
+            sqlstr = "SELECT Name FROM SysColumns WHERE id=Object_Id('animals3_table')";
             sql_read_database(db_filename, sqlstr, dataGridView2);
 
             //------------------------------------------------------------  # 60個
@@ -984,11 +984,11 @@ namespace vcs_SqlConnection1
             // 查詢字串
             //"SELECT name FROM sysobjects WHERE type = 'U' AND name<>'dtproperties' "
 
-            string strTableName = "table_name"; // animals2_table
+            string strTableName = "table_name"; // animals3_table
             // 查詢字串
             sqlstr = "SELECT name 字段名, xusertype 類型編號, length 長度 into hy_Linshibiao FROM syscolumns WHERE id=object_id('" + strTableName + "') ";
             // 查詢字串
-            sqlstr = "SELECT name 字段名, xusertype 類型編號, length 長度 into animals2_table FROM syscolumns WHERE id=object_id('animals2_table')";
+            sqlstr = "SELECT name 字段名, xusertype 類型編號, length 長度 into animals3_table FROM syscolumns WHERE id=object_id('animals3_table')";
             // 查詢字串
             sqlstr += "SELECT name 類型, xusertype 類型編號 into angel_Linshibiao FROM systypes WHERE xusertype in (SELECT xusertype FROM syscolumns WHERE id=object_id('" + strTableName + "'))";
 
@@ -1072,7 +1072,7 @@ namespace vcs_SqlConnection1
 
             // 資料庫檔案
             //db_filename = "db_02.mdf";
-            db_filename = "animals2_db.mdf";
+            db_filename = "animals3_db.mdf";
 
             // 連接字串
             cnstr = string.Format(db_cnstr, db_filename);
@@ -1094,10 +1094,10 @@ namespace vcs_SqlConnection1
                 sqlstr = "SELECT name FROM sysobjects WHERE type = 'U'";
 
                 //獲取所有的字段名
-                sqlstr = "SELECT Name FROM SysColumns WHERE id=Object_Id('animals2_table')";
+                sqlstr = "SELECT Name FROM SysColumns WHERE id=Object_Id('animals3_table')";
 
                 //取得表單格式           欄名             格式                基本大小              總長度
-                sqlstr = "SELECT syscolumns.name, systypes.name, syscolumns.isnullable, syscolumns.length FROM syscolumns, systypes WHERE syscolumns.xusertype = systypes.xusertype AND syscolumns.id = object_id('animals2_table')";
+                sqlstr = "SELECT syscolumns.name, systypes.name, syscolumns.isnullable, syscolumns.length FROM syscolumns, systypes WHERE syscolumns.xusertype = systypes.xusertype AND syscolumns.id = object_id('animals3_table')";
 
                 using (SqlCommand cmd = new SqlCommand(sqlstr, cn))
                 {
@@ -1190,7 +1190,7 @@ namespace vcs_SqlConnection1
             {
                 cn.Open();
                 SqlCommand cmd = new SqlCommand();
-                cmd.CommandText = "BACKUP DATABASE  animals2_db TO DISK = '" + backup_filename + "'";
+                cmd.CommandText = "BACKUP DATABASE  animals3_db TO DISK = '" + backup_filename + "'";
                 cmd.Connection = cn;
                 cmd.ExecuteNonQuery();
                 richTextBox1.Text += "數據備份成功\n";
@@ -1652,48 +1652,48 @@ namespace vcs_SqlConnection1
             richTextBox1.Text += "刪除資料 與 清空表單, DELETE 和 DELETE FROM 一樣\n";
 
             // 資料庫檔案
-            db_filename = "animals2_db.mdf";
+            db_filename = "animals3_db.mdf";
             // 查詢字串
-            sqlstr = "SELECT * FROM animals2_table";
+            sqlstr = "SELECT * FROM animals3_table";
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "十二生肖全部資料";
 
             // 刪除資料
             string id = "12";
             // 資料庫檔案
-            db_filename = "animals2_db.mdf";
+            db_filename = "animals3_db.mdf";
             // 查詢字串, 刪除符合條件的項目
-            sqlstr = "DELETE FROM animals2_table WHERE 編號=N'" + id + "'";
+            sqlstr = "DELETE FROM animals3_table WHERE 編號=N'" + id + "'";
             // 不執行 sql_write_database(db_filename, sqlstr);  // 執行SQL命令
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             // 查詢字串, 有條件刪除資料 體重 > 40 的所有資料
-            sqlstr = "DELETE FROM animals2_table WHERE 體重 > 80";  // 刪除所有資料
+            sqlstr = "DELETE FROM animals3_table WHERE 體重 > 80";  // 刪除所有資料
             // 不執行 sql_write_database(db_filename, sqlstr);  // 執行SQL命令
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             // 查詢字串, 清空一個資料庫表單 TRUNCATE TABLE
-            sqlstr = "TRUNCATE TABLE animals2_table";  // 清空整個表單
+            sqlstr = "TRUNCATE TABLE animals3_table";  // 清空整個表單
             // 不執行 sql_write_database(db_filename, sqlstr);  // 執行SQL命令
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             //查詢字串, 刪除表單, 整個表單刪除, 不可再新增資料
-            sqlstr = "DROP TABLE animals2_table";
+            sqlstr = "DROP TABLE animals3_table";
             // 不執行 sql_write_database(db_filename, sqlstr);  // 執行SQL命令
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             // 查詢字串
             string cname = "AAA";
-            sqlstr = "DELETE FROM animals2_table WHERE 中文名 = '" + cname + "'";
+            sqlstr = "DELETE FROM animals3_animals3_table WHERE 中文名 = '" + cname + "'";
             // 不執行 sql_write_database(db_filename, sqlstr);  // 執行SQL命令
 
             cname = "AAA";
             // 查詢字串, 刪除資料, 使用 Parameters
-            sqlstr = "DELETE FROM animals2_table WHERE 中文名 = @cname";
+            sqlstr = "DELETE FROM animals3_table WHERE 中文名 = @cname";
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
                 cn.Open();
@@ -1709,27 +1709,27 @@ namespace vcs_SqlConnection1
             //十二生肖整理1
 
             // 資料庫檔案
-            db_filename = "animals2_db.mdf";
+            db_filename = "animals3_db.mdf";
             // 查詢字串
-            sqlstr = "SELECT * FROM animals2_table";
+            sqlstr = "SELECT * FROM animals3_table";
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "十二生肖全部資料";
 
             // 查詢字串, 欄名使用別名AS
-            sqlstr = "SELECT 英文名 AS ename, 中文名 AS cname, 體重 AS weight FROM animals2_table";
+            sqlstr = "SELECT 英文名 AS ename, 中文名 AS cname, 體重 AS weight FROM animals3_table";
 
             sql_read_database(db_filename, sqlstr, dataGridView2);
             lb_dgv2.Text = "十二生肖全部資料 欄名使用別名AS";
 
             // 查詢字串, 依體重排序 DESC/降冪, ASC/升冪
-            sqlstr = "SELECT * FROM animals2_table ORDER BY 體重 DESC";
+            sqlstr = "SELECT * FROM animals3_table ORDER BY 體重 DESC";  // 也可以 ORDER BY 4 DESC (依第4欄排序)
             //test order by 寫兩個  sqlstr = "SELECT DISTINCT 書號, 書名, 作者, 銷售數量, 日期 FROM tb_xsb ORDER BY 書號 ASC, 日期 DESC";
 
             sql_read_database(db_filename, sqlstr, dataGridView3);
             lb_dgv3.Text = "十二生肖全部資料 依體重降冪排序";
 
             // 查詢字串, 依體重排序 DESC/降冪, ASC/升冪, 前五名
-            sqlstr = "SELECT TOP 5 * FROM animals2_table ORDER BY 體重 DESC";
+            sqlstr = "SELECT TOP 5 * FROM animals3_table ORDER BY 體重 DESC";
 
             sql_read_database(db_filename, sqlstr, dataGridView4);
             lb_dgv4.Text = "十二生肖全部資料 依體重降冪排序 前五名";
@@ -1738,8 +1738,8 @@ namespace vcs_SqlConnection1
 
             // 查詢字串, 更新資料
             string new_name = "巧虎";
-            sqlstr = "UPDATE animals2_table SET 中文名=N'" + new_name + "' WHERE 編號=3";
-            //sqlstr = "UPDATE animals2_table SET 體重 = 25 WHERE 編號 = 2";
+            sqlstr = "UPDATE animals3_table SET 中文名=N'" + new_name + "' WHERE 編號=3";
+            //sqlstr = "UPDATE animals3_table SET 體重 = 25 WHERE 編號 = 2";
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令            
 
             // 查詢字串, 更新資料, 多項
@@ -1747,11 +1747,11 @@ namespace vcs_SqlConnection1
             string cname = "丹尼狗";
             string ename = "Danny Dog";
             int weight = 25;
-            sqlstr = "UPDATE animals2_table SET 中文名=N'" + cname + "', 英文名=N'" + ename + "', 體重=" + weight + " WHERE 編號=N'" + id + "'";
+            sqlstr = "UPDATE animals3_table SET 中文名=N'" + cname + "', 英文名=N'" + ename + "', 體重=" + weight + " WHERE 編號=N'" + id + "'";
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令
 
             // 查詢字串
-            sqlstr = "SELECT * FROM animals2_table";
+            sqlstr = "SELECT * FROM animals3_table";
 
             sql_read_database(db_filename, sqlstr, dataGridView2);
             lb_dgv2.Text = "十二生肖全部資料 更新資料後";
@@ -1767,11 +1767,11 @@ namespace vcs_SqlConnection1
             DateTime dt = DateTime.Now;
 
             // 查詢字串
-            sqlstr = "INSERT INTO animals2_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (N'" + id + "',N'" + ename + "',N'" + cname + "'," + weight.ToString() + ",'" + dt.ToString() + "')";
+            sqlstr = "INSERT INTO animals3_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (N'" + id + "',N'" + ename + "',N'" + cname + "'," + weight.ToString() + ",'" + dt.ToString() + "')";
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令
 
             // 查詢字串
-            sqlstr = "SELECT * FROM animals2_table";
+            sqlstr = "SELECT * FROM animals3_table";
 
             sql_read_database(db_filename, sqlstr, dataGridView3);
             lb_dgv3.Text = "十二生肖全部資料 更新資料後";
@@ -1832,26 +1832,26 @@ namespace vcs_SqlConnection1
             //十二生肖整理2
 
             // 資料庫檔案
-            db_filename = "animals2_db.mdf";
+            db_filename = "animals3_db.mdf";
 
             // 查詢字串
-            sqlstr = "SELECT * FROM animals2_table";
+            sqlstr = "SELECT * FROM animals3_table";
 
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "查詢字串, 全部";
 
             // 查詢字串, 相同項合併, 去除重複項
-            sqlstr = "SELECT DISTINCT * FROM animals2_table";
+            sqlstr = "SELECT DISTINCT * FROM animals3_table";
             sql_read_database(db_filename, sqlstr, dataGridView2);
             lb_dgv2.Text = "查詢字串, 相同項合併, 去除重複";
 
             // 查詢字串, 相同項合併, 看 中文名 項, 去除重複項
-            sqlstr = "SELECT DISTINCT 中文名 FROM animals2_table";
+            sqlstr = "SELECT DISTINCT 中文名 FROM animals3_table";
             sql_read_database(db_filename, sqlstr, dataGridView3);
             lb_dgv3.Text = "查詢字串, 相同項合併, 去除重複";
 
             // 查詢字串, COUNT(DISTINCT 列名) 統計去除重複後的數量
-            sqlstr = "SELECT COUNT(DISTINCT 中文名) FROM animals2_table";
+            sqlstr = "SELECT COUNT(DISTINCT 中文名) FROM animals3_table";
             sql_read_database(db_filename, sqlstr, dataGridView4);
 
             richTextBox1.Text += "------------------------------\n";  // 30個
@@ -1861,9 +1861,9 @@ namespace vcs_SqlConnection1
             //BETWEEN
 
             // 資料庫檔案
-            db_filename = "animals2_db.mdf";
+            db_filename = "animals3_db.mdf";
             // 查詢字串
-            sqlstr = "SELECT * FROM animals2_table";
+            sqlstr = "SELECT * FROM animals3_table";
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "十二生肖全部資料";
 
@@ -1871,16 +1871,16 @@ namespace vcs_SqlConnection1
             //查詢指定日期的數據
             string dt = "2025/5/5 16:29:26";
             // 查詢字串, 指定日期
-            sqlstr = "SELECT * FROM animals2_table WHERE 登錄時間='" + dt + "'";
+            sqlstr = "SELECT * FROM animals3_table WHERE 登錄時間='" + dt + "'";
             sql_read_database(db_filename, sqlstr, dataGridView2);
 
             //查詢指定時間段的數據
             string datetime_st = "2025/2/1";
             string datetime_sp = "2025/6/30";
             // 資料庫檔案
-            db_filename = "animals2_db.mdf";
+            db_filename = "animals3_db.mdf";
             // 查詢字串, 指定日期區間 BETWEEN
-            sqlstr = "SELECT * FROM animals2_table WHERE 登錄時間 BETWEEN'" + datetime_st + "'AND '" + datetime_sp + "' ORDER BY 登錄時間";
+            sqlstr = "SELECT * FROM animals3_table WHERE 登錄時間 BETWEEN'" + datetime_st + "'AND '" + datetime_sp + "' ORDER BY 登錄時間";
             sql_read_database(db_filename, sqlstr, dataGridView3);
             lb_dgv3.Text = "指定日期區間 WHERE+BETWEEN";
 
@@ -1959,20 +1959,20 @@ namespace vcs_SqlConnection1
 
 
             // 資料庫檔案
-            db_filename = "animals2_db.mdf";
+            db_filename = "animals3_db.mdf";
             // 查詢字串
-            sqlstr = "SELECT * FROM animals2_table";
+            sqlstr = "SELECT * FROM animals3_table";
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "十二生肖全部資料";
 
             // 查詢字串, 查詢體重佔後30%的動物訊息
-            sqlstr = "SELECT TOP 30 percent * FROM animals2_table ORDER BY 體重 ASC";
+            sqlstr = "SELECT TOP 30 percent * FROM animals3_table ORDER BY 體重 ASC";
             sql_read_database(db_filename, sqlstr, dataGridView2);
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             // 查詢字串, 查詢體重前5名數據
-            sqlstr = "SELECT TOP 5 * FROM animals2_table ORDER BY 體重 DESC";
+            sqlstr = "SELECT TOP 5 * FROM animals3_table ORDER BY 體重 DESC";
             sql_read_database(db_filename, sqlstr, dataGridView3);
 
             return;
@@ -1980,12 +1980,12 @@ namespace vcs_SqlConnection1
             //查詢操作列長度
 
             // 查詢字串
-            sqlstr = "SELECT 編號, 英文名 FROM animals2_table WHERE len(" + "英文名" + ")=5";
+            sqlstr = "SELECT 編號, 英文名 FROM animals3_table WHERE len(" + "英文名" + ")=5";
 
             sql_read_database(db_filename, sqlstr, dataGridView2);
 
             // 查詢字串, 過濾資料 WHERE + AND + N中文
-            sqlstr = "SELECT * FROM animals2_table WHERE 中文名=N'彼得兔' AND 英文名='rabbit'";
+            sqlstr = "SELECT * FROM animals3_table WHERE 中文名=N'彼得兔' AND 英文名='rabbit'";
 
             sql_read_database(db_filename, sqlstr, dataGridView3);
             lb_dgv3.Text = "WHERE + AND 過濾資料";
@@ -1993,23 +1993,23 @@ namespace vcs_SqlConnection1
             //SqlDataAdapter 語法
 
             // 查詢字串, 全部資料
-            sqlstr = "SELECT * FROM animals2_table";
+            sqlstr = "SELECT * FROM animals3_table";
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "十二生肖全部資料";
 
             /*
             //一般查詢的寫法
-            // 查詢字串, 全部資料 animals2_table + WHERE 過濾資料
-            sqlstr = "SELECT * FROM animals2_table WHERE 英文名='rabbit' AND 中文名=N'彼得兔'";  //中文字串前面要寫N
+            // 查詢字串, 全部資料 animals3_table + WHERE 過濾資料
+            sqlstr = "SELECT * FROM animals3_table WHERE 英文名='rabbit' AND 中文名=N'彼得兔'";  //中文字串前面要寫N
             sql_read_database(db_filename, sqlstr, dataGridView2);
-            lb_dgv2.Text = "全部資料 animals2_table + WHERE 過濾資料";
+            lb_dgv2.Text = "全部資料 animals3_table + WHERE 過濾資料";
 
             //另一種查詢的寫法
             // 連接字串
             cnstr = string.Format(db_cnstr, db_filename);
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
             {
-                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM animals2_table WHERE 英文名=@ename AND 中文名=@cname", cn);  // 建立資料庫適配器對象da
+                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM animals3_table WHERE 英文名=@ename AND 中文名=@cname", cn);  // 建立資料庫適配器對象da
 
                 //为SQL语句中的参数赋值
                 string ename = "rabbit";
@@ -2029,7 +2029,7 @@ namespace vcs_SqlConnection1
 
             //TBD
             // 查詢字串, 一次搜尋多個
-            sqlstr = "SELECT * FROM animals2_table WHERE 中文名 IN(N'丹尼狗', N'巧虎')";
+            sqlstr = "SELECT * FROM animals3_table WHERE 中文名 IN(N'丹尼狗', N'巧虎')";
             sql_read_database(db_filename, sqlstr, dataGridView2);
             lb_dgv2.Text = "一次搜尋多個";
 
@@ -2073,22 +2073,22 @@ namespace vcs_SqlConnection1
                 /*
                 //未指名資料庫檔案路徑, 則放在 C:\Users\bunsh\ 之下
                 string createDb = @"
-                    IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'animals2_db')
-                    CREATE DATABASE animals2_db";
+                    IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'animals3_db')
+                    CREATE DATABASE animals3_db";
                 */
                 //指名資料庫檔案路徑
                 string createDb = @"
-                    IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'animals2_db')
-                    CREATE DATABASE animals2_db
+                    IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'animals3_db')
+                    CREATE DATABASE animals3_db
                     ON PRIMARY (
-                        NAME = animals2_db,
-                        FILENAME = 'D:\\animals2_db.mdf',
+                        NAME = animals3_db,
+                        FILENAME = 'D:\\animals3_db.mdf',
                         SIZE = 5MB,
                         MAXSIZE = 100MB,
                         FILEGROWTH = 10%)
                     LOG ON (
-                        NAME = animals2_db_log,
-                        FILENAME = 'D:\\animals2_db.ldf',
+                        NAME = animals3_db_log,
+                        FILENAME = 'D:\\animals3_db.ldf',
                         SIZE = 1MB,
                         MAXSIZE = 25MB,
                         FILEGROWTH = 5MB)";
@@ -2103,13 +2103,13 @@ namespace vcs_SqlConnection1
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             //建立資料表, 不能重複建立
-            //建立資料表 animals2_table
-            //建立好資料庫後，你需要連線到 animals2_db.mdf，再執行 CREATE TABLE：
+            //建立資料表 animals3_table
+            //建立好資料庫後，你需要連線到 animals3_db.mdf，再執行 CREATE TABLE：
 
             richTextBox1.Text += "建立資料表 (如果不存在)\n";
 
             // 資料庫檔案
-            db_filename = "animals2_db.mdf";
+            db_filename = "animals3_db.mdf";
             // 連接字串
             cnstr = string.Format(db_cnstr, db_filename);
             using (SqlConnection cn = new SqlConnection(cnstr))  // 建立資料庫連接對象cn
@@ -2117,8 +2117,8 @@ namespace vcs_SqlConnection1
                 cn.Open();
 
                 string createTable = @"
-                IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='animals2_table' AND xtype='U')
-                CREATE TABLE animals2_table (
+                IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='animals3_table' AND xtype='U')
+                CREATE TABLE animals3_table (
                     編號 INT NOT NULL DEFAULT 1,
                     英文名 NVARCHAR(100),
                     中文名 NVARCHAR(100),
@@ -2140,36 +2140,36 @@ namespace vcs_SqlConnection1
             richTextBox1.Text += "新增5筆資料\n";
 
             // 資料庫檔案
-            db_filename = "animals2_db.mdf";
+            db_filename = "animals3_db.mdf";
 
             // 插入資料, N是必要的(中文之前都要N)
-            sqlstr = "INSERT INTO animals2_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (1, N'mouse', N'米老鼠', 3, '2025/1/1 16:29:26')";
+            sqlstr = "INSERT INTO animals3_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (1, N'mouse', N'米老鼠', 3, '2025/1/1 16:29:26')";
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令
-            sqlstr = "INSERT INTO animals2_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (2, N'ox', N'班尼牛', 48, '2025/2/2 16:29:26')";
+            sqlstr = "INSERT INTO animals3_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (2, N'ox', N'班尼牛', 48, '2025/2/2 16:29:26')";
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令
-            sqlstr = "INSERT INTO animals2_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (3, N'tiger', N'跳跳虎', 33, '2025/3/3 16:29:26')";
+            sqlstr = "INSERT INTO animals3_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (3, N'tiger', N'跳跳虎', 33, '2025/3/3 16:29:26')";
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令
-            sqlstr = "INSERT INTO animals2_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (4, N'rabbit', N'彼得兔', 8, '2025/4/4 16:29:26')";
+            sqlstr = "INSERT INTO animals3_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (4, N'rabbit', N'彼得兔', 8, '2025/4/4 16:29:26')";
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令
-            sqlstr = "INSERT INTO animals2_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (5, N'dragon', N'逗逗龍', 38, '2025/5/5 16:29:26')";
+            sqlstr = "INSERT INTO animals3_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (5, N'dragon', N'逗逗龍', 38, '2025/5/5 16:29:26')";
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令
-            sqlstr = "INSERT INTO animals2_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (6, N'snake', N'貪吃蛇', 16, '2025/6/6 16:29:26')";
+            sqlstr = "INSERT INTO animals3_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (6, N'snake', N'貪吃蛇', 16, '2025/6/6 16:29:26')";
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令
-            sqlstr = "INSERT INTO animals2_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (7, N'horse', N'草泥馬', 31, '2025/7/7 16:29:26')";
+            sqlstr = "INSERT INTO animals3_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (7, N'horse', N'草泥馬', 31, '2025/7/7 16:29:26')";
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令
-            sqlstr = "INSERT INTO animals2_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (8, N'goat', N'喜羊羊', 29, '2025/8/8 16:29:26')";
+            sqlstr = "INSERT INTO animals3_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (8, N'goat', N'喜羊羊', 29, '2025/8/8 16:29:26')";
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令
-            sqlstr = "INSERT INTO animals2_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (9, N'monkey', N'山道猴', 22, '2025/9/9 16:29:26')";
+            sqlstr = "INSERT INTO animals3_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (9, N'monkey', N'山道猴', 22, '2025/9/9 16:29:26')";
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令
-            sqlstr = "INSERT INTO animals2_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (10, N'chicken', N'肯德雞', 5, '2025/10/10 16:29:26')";
+            sqlstr = "INSERT INTO animals3_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (10, N'chicken', N'肯德雞', 5, '2025/10/10 16:29:26')";
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令
-            sqlstr = "INSERT INTO animals2_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (11, N'dog', N'布丁狗', 17, '2025/11/11 16:29:26')";
+            sqlstr = "INSERT INTO animals3_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (11, N'dog', N'布丁狗', 17, '2025/11/11 16:29:26')";
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令
-            sqlstr = "INSERT INTO animals2_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (12, N'dogpig', N'佩佩豬', 42, '2025/12/12 16:29:26')";
+            sqlstr = "INSERT INTO animals3_table (編號, 英文名, 中文名, 體重, 登錄時間) VALUES (12, N'dogpig', N'佩佩豬', 42, '2025/12/12 16:29:26')";
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令
 
             //看結果
-            sqlstr = "SELECT * FROM animals2_table";
+            sqlstr = "SELECT * FROM animals3_table";
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "新增5筆資料";
         }
@@ -2262,7 +2262,7 @@ namespace vcs_SqlConnection1
             // 臨時看資料庫/刪除資料/待測試
 
             // 臨時看資料庫
-
+            /*
             // 資料庫檔案
             db_filename = "db_09_Data.mdf";
             // 查詢字串
@@ -2282,33 +2282,19 @@ namespace vcs_SqlConnection1
 
             // 執行
             sql_write_database(db_filename, sqlstr);  // 執行SQL命令
-
+            */
             //6060
 
             //待測試
 
             // 十二生肖整理3
+
             // 資料庫檔案
-            db_filename = "animals2_db.mdf";
+            db_filename = "animals3_db.mdf";
             // 查詢字串
-            sqlstr = "SELECT * FROM animals2_table";
+            sqlstr = "SELECT * FROM animals3_table";
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "十二生肖全部資料";
-
-            // 資料庫檔案
-            db_filename = "db_10_Data.MDF";
-            // 查詢字串, 查詢邏輯型數據, 查詢是否為國家統招學生
-            string select_type = "是";  // "是/否"
-            sqlstr = "SELECT * FROM tb_08 WHERE 統招否='" + select_type + "'";
-
-            //待測試
-            //查詢銷售量占前50%的圖書訊息
-            //sqlstr = "SELECT TOP 50 percent 書號, 書名, SUM(銷售數量) AS 合計銷售數量 FROM tb_xsb GROUP BY 書號, 書名, 作者 ORDER BY 3 DESC";
-            //取出數據統計結果後10名數據//設定統計查詢的SQL語句
-            //sqlstr = "SELECT TOP 10 書號, 書名, SUM(銷售數量) AS 合計銷售數量 FROM tb_xsb GROUP BY 書號, 書名, 作者 ORDER BY 3 ASC";
-
-            // 查詢字串, 欄名使用別名AS
-            //sqlstr = "SELECT DISTINCT 所屬部門, COUNT(*) AS 部門人數, MAX(基本工資) AS 最高工資, AVG(基本工資) AS 平均工資 FROM 部門工資統計表 GROUP BY 所屬部門 HAVING (AVG(基本工資) > 1000)";
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -2485,7 +2471,7 @@ namespace vcs_SqlConnection1
         string[,] sqlcmd = new string[,]
         {
             //idx  /  資料庫檔案  /  查詢字串1  /  說明1 /  查詢字串2  /  說明2/  查詢字串3  /  說明3
-            { "1", "animals2_db.mdf", "SELECT * FROM animals2_table", "十二生肖全部資料", "", "", "", ""},
+            { "1", "animals3_db.mdf", "SELECT * FROM animals3_table", "十二生肖全部資料", "", "", "", ""},
             { "3", "db_TomeTwo.mdf", "SELECT TOP 10 * FROM (SELECT TOP 20 * FROM tb_Grade ORDER BY 总分 DESC) AS st ORDER BY 总分 ASC", "查询第10到第20名的数据", "", "", "", ""},
             { "5", "db_TomeTwo.mdf", "SELECT TOP 50 PERCENT 书号, 书名, SUM(销售数量) AS 合计销售数量 FROM tb_Book GROUP BY 书号, 书名, 作者 ORDER BY 3 DESC", "查询销售量占前50%的图书信息, 查询数据库信息", "", "", "", ""},
             { "8", "db_10_Data.MDF", "SELECT * FROM tb_07", "全部資料", "SELECT * FROM tb_07 WHERE 出生日期='1984/1/24'", "查詢日期數據", "", ""},
@@ -2667,10 +2653,10 @@ Microsoft SQL Server 的主資料庫檔案（Master Database File），通常與
 
             richTextBox1.Text += "新增5筆資料bbbb\n";
             // 查詢字串
-            //sqlstr = @"INSERT INTO animals2_table VALUES (1, N'连衣裙', 299), (2, N'T恤', 89), (3, N'牛仔裤', 199)";
-            //sqlstr = @"INSERT INTO animals2_table VALUES (1, N'连衣裙', 299), (2, N'T恤', 89), (3, N'牛仔裤', 199)";
+            //sqlstr = @"INSERT INTO animals3_table VALUES (1, N'连衣裙', 299), (2, N'T恤', 89), (3, N'牛仔裤', 199)";
+            //sqlstr = @"INSERT INTO animals3_table VALUES (1, N'连衣裙', 299), (2, N'T恤', 89), (3, N'牛仔裤', 199)";
             sqlstr = @"
-INSERT INTO animals2_table (user_id, shop_name, product_name, amount, quantity, order_status, create_time) VALUES
+INSERT INTO animals3_table (user_id, shop_name, product_name, amount, quantity, order_status, create_time) VALUES
 (1001, '女装旗舰店', '碎花连衣裙', 299.00,  2, '已支付', '2025-06-01 10:00:00'),
 (1002, '女装旗舰店', '纯棉T恤',    189.00,  3, '已取消', '2025-06-01 11:00:00'),
 (1003, '男装专营店', '牛仔裤',     599.00,  1, '已支付', '2025-06-02 09:30:00'),

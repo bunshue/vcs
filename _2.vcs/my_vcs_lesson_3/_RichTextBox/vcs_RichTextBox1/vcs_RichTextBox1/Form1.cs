@@ -102,7 +102,7 @@ namespace vcs_RichTextBox1
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
-            int dd = 30;
+            int dd = 24;
             lb_richtextbox1_fx1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd * 0);
             lb_richtextbox1_fx2.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd * 1);
             lb_richtextbox1_fx3.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd * 2);
@@ -121,13 +121,17 @@ namespace vcs_RichTextBox1
             richTextBox1.Size = new Size(700, 290);
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd * 5);
 
-            lb_richtextbox2.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            richTextBox2.Size = new Size(350, 200);
-            richTextBox2.Location = new Point(x_st + dx * 2, y_st + dy * 7 + dd);
+            lb_richtextbox2.Location = new Point(x_st + dx * 2, y_st + dy * 6+40);
+            richTextBox2.Size = new Size(350, 160);
+            richTextBox2.Location = new Point(x_st + dx * 2, y_st + dy * 6 + 40 + dd);
 
-            lb_richtextbox_rtf.Location = new Point(x_st + dx * 4, y_st + dy * 7);
-            richTextBox_rtf.Size = new Size(350, 200);
-            richTextBox_rtf.Location = new Point(x_st + dx * 4 - 60, y_st + dy * 7 + dd);
+            lb_richtextbox_rtf.Location = new Point(x_st + dx * 4, y_st + dy * 6 + 40);
+            richTextBox_rtf.Size = new Size(350, 160);
+            richTextBox_rtf.Location = new Point(x_st + dx * 4 - 60, y_st + dy * 6 + 40 + dd);
+
+            lb_richtextbox_lines.Location = new Point(x_st + dx * 2, y_st + dy * 8 + 86);
+            richTextBox_lines.Size = new Size(350, 160);
+            richTextBox_lines.Location = new Point(x_st + dx * 2, y_st + dy * 8 + 86 + dd);
 
             dd = 45;
             bt_open_rtf.Location = new Point(richTextBox_rtf.Location.X + richTextBox_rtf.Width - dd * 2, richTextBox_rtf.Location.Y);
@@ -483,7 +487,7 @@ namespace vcs_RichTextBox1
             tmp[5] = "ffff";
 
             //將陣列的內容利用屬性Lines放入文字方塊中
-            richTextBox1.Lines = tmp;
+            richTextBox_lines.Lines = tmp;
         }
 
         private void button14_Click(object sender, EventArgs e)

@@ -74,16 +74,12 @@ namespace vcs_Form9_RulerAndGrid
             this.Controls.Add(rectangleY);
             this.Controls.Add(panel1);
             Calcsale();
-
-
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             Graphics PenGraphics = e.Graphics;
             InitializeGraph(PenGraphics);
-
-
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -147,8 +143,6 @@ namespace vcs_Form9_RulerAndGrid
                 }
             }
         }
-
-
 
         [Browsable(true), Category("直尺尺寸"), Description("直尺长")]
         public int RulerWidth
@@ -372,6 +366,7 @@ namespace vcs_Form9_RulerAndGrid
                 }
             }
         }
+
         /// <summary>
         /// 设置画图板纵轴的刻度。
         /// </summary>
@@ -429,6 +424,7 @@ namespace vcs_Form9_RulerAndGrid
                 }
             }
         }
+
         private void DrawGrid()
         {
             Pen p = new Pen(Color.Gray, 1);
@@ -439,7 +435,7 @@ namespace vcs_Form9_RulerAndGrid
             {
                 gg.DrawLine(p, -1, (pxwidth * i * (float)(Convert.ToInt32(GridUnit)) - 1), (panel1.Width), (pxwidth * i * (float)(Convert.ToInt32(GridUnit)) - 1));
             }
-
         }
     }
 }
+
