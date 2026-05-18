@@ -60,40 +60,11 @@ namespace vcs_test_all_01_DateTime
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
-            int w = 220;
-            int h = 60;
-
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = w + 5;
-            dy = h + 5;
-
-            button0.Size = new Size(w, h);
-            button1.Size = new Size(w, h);
-            button2.Size = new Size(w, h);
-            button3.Size = new Size(w, h);
-            button4.Size = new Size(w, h);
-            button5.Size = new Size(w, h);
-            button6.Size = new Size(w, h);
-            button7.Size = new Size(w, h);
-            button8.Size = new Size(w, h);
-            button9.Size = new Size(w, h);
-            button10.Size = new Size(w, h);
-            button11.Size = new Size(w, h);
-            button12.Size = new Size(w, h);
-            button13.Size = new Size(w, h);
-            button14.Size = new Size(w, h);
-            button15.Size = new Size(w, h);
-            button16.Size = new Size(w, h);
-            button17.Size = new Size(w, h);
-            button18.Size = new Size(w, h);
-            comboBox1.Size = new Size(w, h);
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -119,16 +90,16 @@ namespace vcs_test_all_01_DateTime
 
             groupBox6.Location = new Point(x_st + dx * 2, y_st + dy * 0);//特殊曆法
             groupBox13.Location = new Point(x_st + dx * 2, y_st + dy * 2 - 20);//月相
-            lb_time2.Location = new Point(x_st + dx * 2, y_st + dy * 5 + 10);
+            lb_time2.Location = new Point(x_st + dx * 2, y_st + dy * 5 - 10);
 
-            groupBox9.Location = new Point(x_st + dx * 2, y_st + dy * 7 + 50);//Timer顯示時間
+            groupBox9.Location = new Point(x_st + dx * 2, y_st + dy * 7 + 30);//Timer顯示時間
 
             groupBox6.Size = new Size(420, 110);
             groupBox9.Size = new Size(200, 160);
             groupBox13.Size = new Size(300, 200);
 
-            richTextBox1.Size = new Size(340, 700);
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            richTextBox1.Size = new Size(400, 690);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 20, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             lb_time.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 10);
@@ -147,7 +118,7 @@ namespace vcs_test_all_01_DateTime
 
             button17.Text = "CultureInfo\n月名星期名";
 
-            this.Size = new Size(1290, 770);
+            this.Size = new Size(1300, 750);
             this.Text = "vcs_test_all_01_DateTime";
 
             //設定執行後的表單起始位置, 正中央

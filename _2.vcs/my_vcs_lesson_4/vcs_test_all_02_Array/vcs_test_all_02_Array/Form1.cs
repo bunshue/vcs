@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;                //for file read/write
-using System.Collections; //匯入集合物件      for Hashtable
+using System.IO;  // for file read/write
+using System.Collections;  // 匯入集合物件 for Hashtable
 
 namespace vcs_test_all_02_Array
 {
@@ -26,16 +26,11 @@ namespace vcs_test_all_02_Array
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 200 + 5;
-            dy = 60 + 5;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -69,7 +64,7 @@ namespace vcs_test_all_02_Array
             groupBox2.Size = new Size(470, 60);
             groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 2);
 
-            richTextBox1.Size = new Size(470, 450);
+            richTextBox1.Size = new Size(470, 480);
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 3);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -86,7 +81,7 @@ namespace vcs_test_all_02_Array
             numText8a.Location = new Point(x_st + dx * 7, y_st + dy * 0);
             bt_object.Location = new Point(x_st + dx * 8 - 10, y_st + dy * 0 - 5);
 
-            this.Size = new Size(920, 710);
+            this.Size = new Size(930, 750);
             this.Text = "vcs_test_all_02_Array";
 
             //設定執行後的表單起始位置, 正中央
@@ -134,7 +129,6 @@ namespace vcs_test_all_02_Array
             {
                 int num = rnd.Next(1, 50);
                 numArray[i] = num;
-
             }
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -261,10 +255,6 @@ namespace vcs_test_all_02_Array
             Points.Add(new Point(x_st, y_st));
 
             richTextBox1.Text += "點數 : " + Points.Count.ToString() + "\n";
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)

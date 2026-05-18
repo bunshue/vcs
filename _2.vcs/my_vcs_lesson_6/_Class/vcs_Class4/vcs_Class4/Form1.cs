@@ -21,6 +21,11 @@ namespace vcs_Class4
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender; // 三個按鈕共用一個事件
@@ -43,10 +48,7 @@ namespace vcs_Class4
             }
 
             ClassBall aBall;  // 新增 一個 ClassBall 物件
-            aBall = new ClassBall(
-                new Point(rd.Next(20, this.pictureBox1.ClientSize.Width - 20),
-                          rd.Next(40, this.pictureBox1.ClientSize.Height - 20)),
-                color);
+            aBall = new ClassBall(new Point(rd.Next(20, this.pictureBox1.ClientSize.Width - 20), rd.Next(40, this.pictureBox1.ClientSize.Height - 20)), color);
             ballList.Add(aBall); // 新增 一個 ClassBall 物件到 動態陣列
 
             this.pictureBox1.Invalidate();
@@ -103,3 +105,23 @@ namespace vcs_Class4
         }
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+

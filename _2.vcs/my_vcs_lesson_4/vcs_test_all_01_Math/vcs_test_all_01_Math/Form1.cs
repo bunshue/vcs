@@ -37,16 +37,11 @@ namespace vcs_test_all_01_Math
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 200 + 5;
-            dy = 60 + 5;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -107,7 +102,7 @@ namespace vcs_test_all_01_Math
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1520, 860);
+            this.Size = new Size(1540, 870);
             this.Text = "vcs_test_all_01_Math";
 
             //設定執行後的表單起始位置, 正中央

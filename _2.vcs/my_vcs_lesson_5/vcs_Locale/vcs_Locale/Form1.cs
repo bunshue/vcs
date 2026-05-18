@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Globalization; //for CultureInfo CultureTypes
+using System.Globalization;  // for CultureInfo CultureTypes
 
 namespace vcs_Locale
 {
@@ -20,16 +20,16 @@ namespace vcs_Locale
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             float float_value = 1234.56f;
             decimal dec_value = 1234.56m;
             DateTime now = DateTime.Now;
 
             // Loop through the locales.
-            foreach (CultureInfo info in
-                CultureInfo.GetCultures(CultureTypes.AllCultures))
+            foreach (CultureInfo info in CultureInfo.GetCultures(CultureTypes.AllCultures))
             {
-                ListViewItem item = listView1.Items.Add(
-                    info.EnglishName);
+                ListViewItem item = listView1.Items.Add(info.EnglishName);
                 item.SubItems.Add(info.NativeName);
                 item.SubItems.Add(info.Name);
 
@@ -38,7 +38,9 @@ namespace vcs_Locale
                 // look for a non-neutral ancestor.
                 CultureInfo culture = info;
                 while ((culture != null) && (culture.IsNeutralCulture))
+                {
                     culture = culture.Parent;
+                }
                 if (culture != null)
                 {
                     item.SubItems.Add(float_value.ToString("N", culture));
@@ -47,8 +49,22 @@ namespace vcs_Locale
                     item.SubItems.Add(now.ToString("t", culture));
                 }
             }
+        }
 
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
 
+            this.Size = new Size(900, 700);
+            this.Text = "vcs_Locale";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -168,8 +184,26 @@ namespace vcs_Locale
                 //richTextBox1.Text += name + "[" + i + "]" + "\t" + values[i].ToString() + "\n";
             }
         }
-
-
-
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+
+

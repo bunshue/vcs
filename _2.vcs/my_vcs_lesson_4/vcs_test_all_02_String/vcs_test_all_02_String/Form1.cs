@@ -27,16 +27,11 @@ namespace vcs_test_all_02_String
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 200 + 5;
-            dy = 60 + 5;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -71,10 +66,10 @@ namespace vcs_test_all_02_String
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            groupBox1.Size = new Size(326, 650);
+            groupBox1.Size = new Size(340, 690);
             groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
-            richTextBox1.Size = new Size(500, 650);
+            richTextBox1.Size = new Size(500, 690);
             richTextBox1.Location = new Point(x_st + dx * 5 - 70, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -104,7 +99,7 @@ namespace vcs_test_all_02_String
             tb_number5.Location = new Point(x_st + dx * 0, y_st + dy * 5 + dd);
             tb_number6.Location = new Point(x_st + dx * 0, y_st + dy * 6 + dd);
 
-            this.Size = new Size(1490, 710);
+            this.Size = new Size(1520, 750);
             this.Text = "vcs_test_all_02_String";
 
             //設定執行後的表單起始位置, 正中央

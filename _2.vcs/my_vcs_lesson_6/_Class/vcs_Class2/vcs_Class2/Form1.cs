@@ -53,5 +53,3 @@ namespace vcs_Class2
         }
     }
 }
-
-

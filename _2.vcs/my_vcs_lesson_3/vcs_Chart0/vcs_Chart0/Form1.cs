@@ -7,7 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Windows.Forms.DataVisualization.Charting;  //for Series
+using System.Windows.Forms.DataVisualization.Charting;  // for Series, Chart
+
+//參考： http://wahahastudynote.blogspot.com/2013/04/c-realtime.html
+//用 C# 建立 Realtime 圖表 
+//加入參考： 參考/加入參考/.NET/System.Windows.Forms.DataVisualization
 
 namespace vcs_Chart0
 {
@@ -26,7 +30,6 @@ namespace vcs_Chart0
         private const string XLABLE = "Degree";
         private const string YLABLE = "Amplitude";
 
-
         public Form1()
         {
             InitializeComponent();
@@ -44,7 +47,7 @@ namespace vcs_Chart0
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
+
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -76,6 +79,10 @@ namespace vcs_Chart0
 
             this.Size = new Size(1480, 800);
             this.Text = "vcs_Chart0";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -113,6 +120,12 @@ namespace vcs_Chart0
 
         private void drawChart(int mode)    //畫Chart
         {
+            //清除圖表
+            chart1.Series.Clear();
+            chart1.Titles.Clear();
+
+            //3030
+
             int i;
             int N = 10;
             Random r = new Random();
@@ -122,14 +135,10 @@ namespace vcs_Chart0
                 number[i] = r.Next(350);
             }
 
-            //清除圖表
-            chart1.Series.Clear();
-            chart1.Titles.Clear();
-
             Series series1 = new Series("Di0", 500); //初始畫線條(名稱，最大值)
             series1.Color = Color.Blue; //設定線條顏色
-            series1.Font = new System.Drawing.Font("新細明體", 10); //設定字型
-            series1.ChartType = SeriesChartType.Line; //設定線條種類
+            series1.Font = new Font("新細明體", 10); //設定字型
+            series1.ChartType = SeriesChartType.Line;  // 圖表種類 : 折線圖
             //chart1.ChartAreas[0].AxisY.Enabled= AxisEnabled.False; //隱藏Y 軸標示
             //chart1.ChartAreas[0].AxisY.MajorGrid.Enabled= true;  //隱藏Y軸標線
             series1.IsValueShownAsLabel = true; //是否把數值顯示在線上
@@ -144,6 +153,7 @@ namespace vcs_Chart0
             series1.Points.AddXY("H", number[7]);
             series1.Points.AddXY("I", number[8]);
             series1.Points.AddXY("J", number[9]);
+            series1.LegendText = "折線圖";  // 圖例文字
             chart1.Series.Add(series1);//將線畫在圖上
 
             if (mode == 0)
@@ -180,11 +190,12 @@ namespace vcs_Chart0
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //畫chart, 自定義座標軸刻度標籤
-
-            //清空chart
+            //清除圖表
             chart1.Series.Clear();
+            chart1.Titles.Clear();
             chart1.ChartAreas[0].AxisX.CustomLabels.Clear();
+
+            //畫chart, 自定義座標軸刻度標籤
 
             //不知道如何自動邊界
 
@@ -217,11 +228,11 @@ namespace vcs_Chart0
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //Chart繪製直線圖
+            //清除圖表
             chart1.Series.Clear();
             chart1.Titles.Clear();
 
-            //C#.Net 透過Chart繪製直線圖
+            //Chart繪製直線圖
 
             //x軸只顯示一條，只要將資料都加入到一個序列內即可
             //而x軸顯示多條，則需要使用多個序列存放資料
@@ -238,7 +249,7 @@ namespace vcs_Chart0
             for (int index = 0; index < _length; index++)
             {
                 series1[index] = new Series(_users[index]);
-                series1[index].ChartType = SeriesChartType.Column;
+                series1[index].ChartType = SeriesChartType.Column;  // 圖表種類 : 直條圖
                 series1[index].Color = _colors[index];
                 series1[index].IsValueShownAsLabel = true;
             }
@@ -254,17 +265,15 @@ namespace vcs_Chart0
             {
                 chart1.Series.Add(s);
             }
-
-
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //Chart繪製長條圖
+            //清除圖表
             chart1.Series.Clear();
             chart1.Titles.Clear();
 
-            //C#.Net 使用Chart繪製長條圖
+            //Chart繪製長條圖
 
             Series[] series1 = null;
             double[] _y = new double[] { 100, 57, 93, 26, 77, 88 };
@@ -278,7 +287,7 @@ namespace vcs_Chart0
             {
                 series1[index] = new Series();
                 series1[index].Color = _colors[index];
-                series1[index].ChartType = SeriesChartType.Column;
+                series1[index].ChartType = SeriesChartType.Column;  // 圖表種類 : 直條圖
                 series1[index].Name = _users[index];
                 series1[index].IsValueShownAsLabel = true;
                 series1[index].Points.Add(_y[index]);
@@ -319,13 +328,13 @@ namespace vcs_Chart0
             chart1.ChartAreas[0].AxisX.TitleForeColor = Color.Blue; //設定X軸名稱的字體顏色
             chart1.ChartAreas[0].AxisX.Enabled = AxisEnabled.True;  //顯示 或 隱藏 X 軸標示
             chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = true;    //顯示 或 隱藏 X 軸標線
-            chart1.ChartAreas[0].AxisX.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 15, System.Drawing.FontStyle.Bold);   //設定X軸刻度的字型
+            chart1.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Trebuchet MS", 15, FontStyle.Bold);   //設定X軸刻度的字型
             chart1.ChartAreas[0].AxisX.LabelStyle.Interval = 60;    //設置X軸刻度間隔的大小
             chart1.ChartAreas[0].AxisX.LabelStyle.IntervalType = DateTimeIntervalType.Number;//設置間隔大小的度量單位
-            chart1.ChartAreas[0].AxisX.LineColor = System.Drawing.Color.White;//設置X軸的線條顏色
+            chart1.ChartAreas[0].AxisX.LineColor = Color.White;//設置X軸的線條顏色
             chart1.ChartAreas[0].AxisX.MajorGrid.Interval = 100;//設置主網格線與次要網格線的間隔
             chart1.ChartAreas[0].AxisX.MajorGrid.IntervalType = DateTimeIntervalType.Number;//設置主網格線與次網格線的間隔的度量單位
-            chart1.ChartAreas[0].AxisX.MajorGrid.LineColor = System.Drawing.Color.Snow;//設置網格線的顏色
+            chart1.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Snow;//設置網格線的顏色
             chart1.ChartAreas[0].AxisX.MajorTickMark.Interval = 20;//設置刻度線的間隔
             chart1.ChartAreas[0].AxisX.MajorTickMark.IntervalType = DateTimeIntervalType.Number;//設置刻度線的間隔的度量單位
 
@@ -337,20 +346,20 @@ namespace vcs_Chart0
             chart1.ChartAreas[0].AxisY.Enabled = AxisEnabled.True;  //顯示 或 隱藏 Y 軸標示
             chart1.ChartAreas[0].AxisY.MajorGrid.Enabled = true;    //顯示 或 隱藏 Y 軸標線
 
-            chart1.ChartAreas[0].AxisY.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);//設置Y軸左側的提示信息的字體屬性
-            chart1.ChartAreas[0].AxisY.LineColor = System.Drawing.Color.DarkBlue;//設置軸的線條顏色
-            chart1.ChartAreas[0].AxisY.MajorGrid.LineColor = System.Drawing.Color.White;//設置網格線顏色
+            chart1.ChartAreas[0].AxisY.LabelStyle.Font = new Font("Trebuchet MS", 8.25F, FontStyle.Bold);//設置Y軸左側的提示信息的字體屬性
+            chart1.ChartAreas[0].AxisY.LineColor = Color.DarkBlue;//設置軸的線條顏色
+            chart1.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.White;//設置網格線顏色
 
-            #region 圖表樣式
+            //#region 圖表樣式
             chart1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;//指定圖表元素的漸變樣式(中心向外，從左到右，從上到下等等)
-            chart1.BackSecondaryColor = System.Drawing.Color.Yellow;//設置背景的輔助顏色
-            chart1.BorderlineColor = System.Drawing.Color.Yellow;//設置圖像邊框的顏色
+            chart1.BackSecondaryColor = Color.Yellow;//設置背景的輔助顏色
+            chart1.BorderlineColor = Color.Yellow;//設置圖像邊框的顏色
             chart1.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;//設置圖像邊框線的樣式(實線、虛線、點線)
             chart1.BorderlineWidth = 2;//設置圖像的邊框寬度
             chart1.BorderSkin.SkinStyle = System.Windows.Forms.DataVisualization.Charting.BorderSkinStyle.Emboss;//設置圖像的邊框外觀樣式
-            chart1.BackColor = System.Drawing.Color.Yellow;//設置圖表的背景顏色
-            #endregion
-            chart1.Titles[0].Font = new System.Drawing.Font("標楷體", 30f);//设置图表标题字体样式和大小
+            chart1.BackColor = Color.Yellow;//設置圖表的背景顏色
+            //#endregion
+            chart1.Titles[0].Font = new Font("標楷體", 30f);//设置图表标题字体样式和大小
             chart1.Legends["Legend1"].Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Right;  //設定圖標顯示停靠的位置
         }
 
@@ -366,11 +375,11 @@ namespace vcs_Chart0
             series1.Color = Color.Red; //設定線條顏色
             series1.BorderColor = Color.Navy;  //設置數據邊框的顏色
             series1.BorderWidth = 3;    //線寬
-            series1.Font = new System.Drawing.Font("新細明體", 10); //設定字型
-            series1.ChartType = SeriesChartType.Point; //設定線條種類
+            series1.Font = new Font("新細明體", 10); //設定字型
+            series1.ChartType = SeriesChartType.Point;  // 圖表種類 : 點狀圖
             series1.MarkerSize = 5;     //圖標大小
             series1.IsValueShownAsLabel = false;   //將數值顯示在線上 是否在Chart中顯示座標點值
-            series1.LegendText = "sin"; // 圖示上的文字
+            series1.LegendText = "sin";  // 圖例文字
             series1.Name = "sine";      //設置數據名稱
             series1.ShadowOffset = 10;   //設置陰影偏移量
             series1.ShadowColor = Color.Orange; //設置陰影顏色
@@ -388,7 +397,7 @@ namespace vcs_Chart0
             #INDEX 显示当前图例的索引
             #PERCENT 显示当前图例的所占的百分比
             #TOTAL 总数量
-            #LEGENDTEXT 图例文本
+            #LEGENDTEXT  圖例文字
             */
 
             //series 2
@@ -396,11 +405,11 @@ namespace vcs_Chart0
             series2.Color = Color.Green; //設定線條顏色
             series2.BorderColor = Color.Navy;  //設置數據邊框的顏色
             series2.BorderWidth = 3;    //線寬
-            series2.Font = new System.Drawing.Font("標楷體", 12); //設定字型
-            series2.ChartType = SeriesChartType.Point; //設定線條種類
+            series2.Font = new Font("標楷體", 12); //設定字型
+            series2.ChartType = SeriesChartType.Point;  // 圖表種類 : 點狀圖
             series2.MarkerSize = 5;     //圖標大小
             series2.IsValueShownAsLabel = false;   //將數值顯示在線上 是否在Chart中顯示座標點值
-            series2.LegendText = "cos"; // 圖示上的文字
+            series2.LegendText = "cos";  // 圖例文字
             series2.Name = "cos";      //設置數據名稱
             series2.ShadowOffset = 10;   //設置陰影偏移量
             series2.ShadowColor = Color.Orange; //設置陰影顏色
@@ -410,11 +419,11 @@ namespace vcs_Chart0
             series3.Color = Color.Blue; //設定線條顏色
             series3.BorderColor = Color.Navy;  //設置數據邊框的顏色
             series3.BorderWidth = 3;    //線寬
-            series3.Font = new System.Drawing.Font("標楷體", 12); //設定字型
-            series3.ChartType = SeriesChartType.Point; //設定線條種類
+            series3.Font = new Font("標楷體", 12); //設定字型
+            series3.ChartType = SeriesChartType.Point;  // 圖表種類 : 點狀圖
             series3.MarkerSize = 5;     //圖標大小
             series3.IsValueShownAsLabel = false;   //將數值顯示在線上 是否在Chart中顯示座標點值
-            series3.LegendText = "sin + cos"; // 圖示上的文字
+            series3.LegendText = "sin + cos";  // 圖例文字
             series3.Name = "sine + cos";      //設置數據名稱
             series3.ShadowOffset = 10;   //設置陰影偏移量
             series3.ShadowColor = Color.Orange; //設置陰影顏色
@@ -478,8 +487,8 @@ namespace vcs_Chart0
             {
                 series[i] = new Series(curves[i]);
                 series[i].Color = colors[i];
-                series[i].Font = new System.Drawing.Font("新細明體", 10); //設定字型
-                series[i].ChartType = SeriesChartType.Point; //設定線條種類
+                series[i].Font = new Font("新細明體", 10); //設定字型
+                series[i].ChartType = SeriesChartType.Point;  // 圖表種類 : 點狀圖
                 series[i].MarkerSize = 5;     //圖標大小
                 series[i].IsValueShownAsLabel = false;  //將數值顯示在線上
             }
@@ -498,39 +507,151 @@ namespace vcs_Chart0
 
         private void button8_Click(object sender, EventArgs e)
         {
-            if (button8.Text == "動畫 ST")
+            if (button8.Text == "動畫1 ST")
             {
-                button8.Text = "動畫 SP";
+                button8.Text = "動畫1 SP";
                 chart1_init();
                 Series series1 = new Series();
                 chart1.Series.Add(series1);
-                chart1.Series[0].ChartType = SeriesChartType.Point; //設定線條種類;
+                chart1.Series[0].ChartType = SeriesChartType.Point;  // 圖表種類 : 點狀圖
                 //chart1.Series[0].ChartType = chartType;
-                //series1.ChartType = SeriesChartType.Point; //設定線條種類
+                //series1.ChartType = SeriesChartType.Point;  // 圖表種類 : 點狀圖
                 timer1.Enabled = true;
             }
             else
             {
-                button8.Text = "動畫 ST";
+                button8.Text = "動畫1 ST";
                 timer1.Enabled = false;
             }
         }
 
+        //6060
+
+        //繪圖類別
+        public class RealtimeChart
+        {
+            private Chart chart1 = null;
+            private int chartWidth = 640;
+            private int chartHeight = 480;
+            private string nameAxisX = "X軸標題";
+            private string nameAxisY = "Y軸標題";
+
+            public RealtimeChart()
+            {
+                chart1 = new Chart();
+
+                ChartArea ctArea = new ChartArea();
+                Legend legend = new Legend();
+                Series series = new Series();
+
+                chart1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(223)))), ((int)(((byte)(193)))));
+                chart1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
+                chart1.BorderlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(64)))), ((int)(((byte)(1)))));
+                chart1.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+                chart1.BorderlineWidth = 2;
+                chart1.BorderSkin.SkinStyle = System.Windows.Forms.DataVisualization.Charting.BorderSkinStyle.Emboss;
+                chart1.Location = new System.Drawing.Point(20, 20);
+                chart1.Name = "chart1";
+                chart1.Size = new System.Drawing.Size(chartWidth, chartHeight);
+                chart1.TabIndex = 1;
+                chart1.Dock = System.Windows.Forms.DockStyle.None;
+
+                ctArea.Area3DStyle.Inclination = 15;
+                ctArea.Area3DStyle.IsClustered = true;
+                ctArea.Area3DStyle.IsRightAngleAxes = false;
+                ctArea.Area3DStyle.Perspective = 10;
+                ctArea.Area3DStyle.Rotation = 10;
+                ctArea.Area3DStyle.WallWidth = 0;
+                ctArea.AxisX.IsLabelAutoFit = false;
+                ctArea.AxisX.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
+                ctArea.AxisX.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+                ctArea.AxisX.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+                ctArea.AxisX.MinorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+                ctArea.AxisX.Title = nameAxisX;
+                ctArea.AxisY.IsLabelAutoFit = false;
+                ctArea.AxisY.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
+                ctArea.AxisY.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+                ctArea.AxisY.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+                ctArea.AxisY.Maximum = 5000D;
+                ctArea.AxisY.Minimum = 0D;
+                ctArea.AxisY.Title = nameAxisY;
+                ctArea.BackColor = System.Drawing.Color.OldLace;
+                ctArea.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
+                ctArea.BackSecondaryColor = System.Drawing.Color.White;
+                ctArea.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+                ctArea.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+                ctArea.Name = "Default";
+                ctArea.ShadowColor = System.Drawing.Color.Transparent;
+                chart1.ChartAreas.Add(ctArea);
+
+                legend.BackColor = System.Drawing.Color.Transparent;
+                legend.Enabled = false;
+                legend.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
+                legend.IsTextAutoFit = false;
+                legend.Name = "Default";
+                chart1.Legends.Add(legend);
+
+                series.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(26)))), ((int)(((byte)(59)))), ((int)(((byte)(105)))));
+                series.ChartArea = "Default";
+                series.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+                series.Legend = "Default";
+                series.Name = "Default";
+                chart1.Series.Add(series);
+            }
+
+            public Chart GetChart
+            {
+                get { return chart1; }
+            }
+        }
+
+        private int pointIndex = 0;
+        Chart chart2 = new RealtimeChart().GetChart;
+
+        bool flag_running = false;
         private void button9_Click(object sender, EventArgs e)
         {
-
+            if (flag_running == false)
+            {
+                //開啟
+                flag_running = true;
+                pointIndex = 0;
+                chart2 = new RealtimeChart().GetChart;
+                timer2.Enabled = true;
+                this.Controls.Add(chart2);
+                button9.Text = "動畫2 SP";
+                chart1.Visible = false;
+                chart2.Location = new Point(430, 10);
+            }
+            else
+            {
+                //關閉
+                flag_running = false;
+                timer2.Enabled = false;
+                this.Controls.Remove(chart2);
+                button9.Text = "動畫2 ST";
+                chart1.Visible = true;
+                chart2.Visible = false;
+            }
         }
+
+        //6060
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //清除圖表
+            chart1.Series.Clear();
+            chart1.Titles.Clear();
+
             //雷達圖1
             chart1.ChartAreas.Clear();
             chart1.Series.Clear();
-            chart1.Size = new System.Drawing.Size(500, 500);
+
+            chart1.Size = new Size(500, 500);
             ChartArea area = chart1.ChartAreas.Add("NewArea");
             Series series1 = chart1.Series.Add("雷達資料");
             series1.ChartArea = "NewArea";
-            series1.ChartType = SeriesChartType.Radar;
+            series1.ChartType = SeriesChartType.Radar;  // 圖表種類 : 雷達圖
             area.AxisY.LineColor = Color.Red;
             area.AxisY.LineWidth = 1;
 
@@ -547,14 +668,19 @@ namespace vcs_Chart0
 
         private void button11_Click(object sender, EventArgs e)
         {
+            //清除圖表
+            chart1.Series.Clear();
+            chart1.Titles.Clear();
+
             //雷達圖2
             chart1.ChartAreas.Clear();
             chart1.Series.Clear();
-            chart1.Size = new System.Drawing.Size(500, 500);
+
+            chart1.Size = new Size(500, 500);
             ChartArea area = chart1.ChartAreas.Add("NewArea");
             Series series1 = chart1.Series.Add("雷達資料");
             series1.ChartArea = "NewArea";
-            series1.ChartType = SeriesChartType.Radar;
+            series1.ChartType = SeriesChartType.Radar;  // 圖表種類 : 雷達圖
             area.AxisY.LineColor = Color.Red;
             area.AxisY.LineWidth = 1;
 
@@ -653,6 +779,62 @@ namespace vcs_Chart0
 
             x += 26;
         }
+
+        //6060
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            // Define some variables
+            int numberOfPointsInChart = 15;
+            int numberOfPointsAfterRemoval = 15;
+
+            // Simulate adding new data points
+            int x = pointIndex + 1;
+            int y = (int)(2500 * Math.Sin(Math.PI * x * 40 / 180) + 2500);
+
+            chart2.Series[0].Points.AddXY(x, y);
+            ++pointIndex;
+
+            // Adjust Y & X axis scale
+            chart2.ResetAutoValues();
+            if (chart2.ChartAreas["Default"].AxisX.Maximum < pointIndex)
+            {
+                chart2.ChartAreas["Default"].AxisX.Maximum = pointIndex;
+            }
+
+            // Keep a constant number of points by removing them from the left
+            while (chart2.Series[0].Points.Count > numberOfPointsInChart)
+            {
+                // Remove data points on the left side
+                while (chart2.Series[0].Points.Count > numberOfPointsAfterRemoval)
+                {
+                    chart2.Series[0].Points.RemoveAt(0);
+                }
+
+                // Adjust X axis scale
+                chart2.ChartAreas["Default"].AxisX.Minimum = pointIndex - numberOfPointsAfterRemoval;
+                chart2.ChartAreas["Default"].AxisX.Maximum = chart2.ChartAreas["Default"].AxisX.Minimum + numberOfPointsInChart;
+            }
+
+            // Redraw chart
+            chart2.Invalidate();
+        }
     }
 }
 
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/

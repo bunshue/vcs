@@ -27,6 +27,7 @@ namespace vcs_test_all_03_Syntax
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
             textBox_hex.ShortcutsEnabled = false;   // 不啟用快速鍵, 限制 TextBox 上不使用快速鍵與滑鼠右鍵表單
 
             //顯示特殊符號
@@ -106,8 +107,12 @@ namespace vcs_test_all_03_Syntax
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 6);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1390, 760);
+            this.Size = new Size(1380, 750);
             this.Text = "vcs_test_all_03_Syntax";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -1225,3 +1230,4 @@ namespace vcs_test_all_03_Syntax
 
 
 */
+

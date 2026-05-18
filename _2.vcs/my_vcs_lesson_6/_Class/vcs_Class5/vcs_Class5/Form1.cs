@@ -40,10 +40,7 @@ namespace vcs_Class5
             //DataTable to List conversion
             List<Teacher> newTeachers = teacherTbl.ToList<Teacher>();
 
-
             this.dataGridView2.DataSource = newTeachers;
-
-
         }
     }
 
@@ -103,14 +100,12 @@ namespace vcs_Class5
             table.Rows.Add(1, "Smith", DBNull.Value);
             table.Rows.Add(2, "Hook", 1);
 
-
             return table;
         }
     }
 
     public static class ExtensionUtility
     {
-
         /// <summary>
         /// Converts List To DataTable
         /// </summary>
@@ -137,7 +132,6 @@ namespace vcs_Class5
             }
             return dataTable;
         }
-
 
         /// <summary>
         /// Converts DataTable To List
@@ -170,5 +164,24 @@ namespace vcs_Class5
             return dataList;
         }
     }
-
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+

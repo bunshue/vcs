@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.button1 = new System.Windows.Forms.Button();
             this.bt_start = new System.Windows.Forms.Button();
@@ -54,16 +54,16 @@
             // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
-            this.chart1.Location = new System.Drawing.Point(138, 47);
+            chartArea4.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chart1.Legends.Add(legend4);
+            this.chart1.Location = new System.Drawing.Point(223, 47);
             this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chart1.Series.Add(series4);
             this.chart1.Size = new System.Drawing.Size(300, 300);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
@@ -71,9 +71,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 64);
+            this.button1.Location = new System.Drawing.Point(9, 68);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(101, 44);
+            this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 1;
             this.button1.Text = "plotChart 1";
             this.button1.UseVisualStyleBackColor = true;
@@ -81,7 +81,7 @@
             // 
             // bt_start
             // 
-            this.bt_start.Location = new System.Drawing.Point(12, 512);
+            this.bt_start.Location = new System.Drawing.Point(12, 546);
             this.bt_start.Name = "bt_start";
             this.bt_start.Size = new System.Drawing.Size(101, 44);
             this.bt_start.TabIndex = 2;
@@ -91,9 +91,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(138, 444);
+            this.richTextBox1.Location = new System.Drawing.Point(215, 446);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(791, 267);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = "";
             // 
@@ -137,7 +137,7 @@
             "PointAndFigure = 32,        //     PointAndFigure 圖表類型。",
             "Funnel = 33,        //     漏斗圖類型。",
             "Pyramid = 34,        //     金字塔圖類型。"});
-            this.comboBox1.Location = new System.Drawing.Point(138, 12);
+            this.comboBox1.Location = new System.Drawing.Point(223, 12);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(745, 29);
             this.comboBox1.TabIndex = 4;
@@ -145,9 +145,9 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(12, 622);
+            this.bt_clear.Location = new System.Drawing.Point(236, 465);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(101, 44);
+            this.bt_clear.Size = new System.Drawing.Size(64, 40);
             this.bt_clear.TabIndex = 5;
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
@@ -159,9 +159,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(12, 210);
+            this.button4.Location = new System.Drawing.Point(9, 246);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(101, 44);
+            this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 6;
             this.button4.Text = "plotChart 4";
             this.button4.UseVisualStyleBackColor = true;
@@ -169,9 +169,9 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(11, 263);
+            this.button5.Location = new System.Drawing.Point(8, 306);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(101, 44);
+            this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 7;
             this.button5.Text = "plotChart 5";
             this.button5.UseVisualStyleBackColor = true;
@@ -179,9 +179,9 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(12, 317);
+            this.button6.Location = new System.Drawing.Point(9, 365);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(101, 44);
+            this.button6.Size = new System.Drawing.Size(200, 60);
             this.button6.TabIndex = 7;
             this.button6.Text = "plotChart 6 TBD";
             this.button6.UseVisualStyleBackColor = true;
@@ -189,9 +189,9 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(12, 369);
+            this.button7.Location = new System.Drawing.Point(9, 425);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(101, 44);
+            this.button7.Size = new System.Drawing.Size(200, 60);
             this.button7.TabIndex = 8;
             this.button7.Text = "plotChart 7";
             this.button7.UseVisualStyleBackColor = true;
@@ -199,9 +199,9 @@
             // 
             // button0
             // 
-            this.button0.Location = new System.Drawing.Point(12, 14);
+            this.button0.Location = new System.Drawing.Point(10, 9);
             this.button0.Name = "button0";
-            this.button0.Size = new System.Drawing.Size(101, 44);
+            this.button0.Size = new System.Drawing.Size(200, 60);
             this.button0.TabIndex = 9;
             this.button0.Text = "plotChart 0";
             this.button0.UseVisualStyleBackColor = true;
@@ -209,9 +209,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 110);
+            this.button2.Location = new System.Drawing.Point(9, 128);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(101, 44);
+            this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 10;
             this.button2.Text = "plotChart 2";
             this.button2.UseVisualStyleBackColor = true;
@@ -219,9 +219,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(12, 160);
+            this.button3.Location = new System.Drawing.Point(9, 187);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(101, 44);
+            this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 11;
             this.button3.Text = "plotChart 3";
             this.button3.UseVisualStyleBackColor = true;
@@ -230,7 +230,7 @@
             // cb_show_data
             // 
             this.cb_show_data.AutoSize = true;
-            this.cb_show_data.Location = new System.Drawing.Point(12, 680);
+            this.cb_show_data.Location = new System.Drawing.Point(12, 643);
             this.cb_show_data.Name = "cb_show_data";
             this.cb_show_data.Size = new System.Drawing.Size(72, 16);
             this.cb_show_data.TabIndex = 12;
@@ -239,7 +239,7 @@
             // 
             // bt_save
             // 
-            this.bt_save.Location = new System.Drawing.Point(12, 562);
+            this.bt_save.Location = new System.Drawing.Point(12, 593);
             this.bt_save.Name = "bt_save";
             this.bt_save.Size = new System.Drawing.Size(101, 44);
             this.bt_save.TabIndex = 13;
@@ -249,9 +249,9 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(12, 431);
+            this.button8.Location = new System.Drawing.Point(9, 485);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(101, 44);
+            this.button8.Size = new System.Drawing.Size(200, 60);
             this.button8.TabIndex = 14;
             this.button8.Text = "plotChart 8 用滑鼠指線 顯示數值";
             this.button8.UseVisualStyleBackColor = true;
@@ -261,7 +261,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(953, 720);
+            this.ClientSize = new System.Drawing.Size(1154, 720);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.bt_save);
             this.Controls.Add(this.cb_show_data);
