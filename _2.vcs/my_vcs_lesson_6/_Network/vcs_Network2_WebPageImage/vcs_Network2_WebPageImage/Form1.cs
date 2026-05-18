@@ -22,6 +22,18 @@ namespace vcs_Network2_WebPageImage
             InitializeComponent();
         }
 
+        // Set the initial save directory.
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            txtDirectory.Text = Path.Combine(Application.StartupPath, "Images");
+        }
+
+        // Stop. This may take a little while as pending downloads complete.
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Running = false;
+        }
+
         // Navigate to the entered URL.
         private void btnGo_Click(object sender, EventArgs e)
         {
@@ -144,18 +156,6 @@ namespace vcs_Network2_WebPageImage
         {
             PictureBox pic = sender as PictureBox;
             pic.Parent = null;
-        }
-
-        // Stop. This may take a little while as pending downloads complete.
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Running = false;
-        }
-
-        // Set the initial save directory.
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            txtDirectory.Text = Path.Combine(Application.StartupPath, "Images");
         }
 
         // Save the images that have not been removed.

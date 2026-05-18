@@ -39,6 +39,7 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.btnGet = new System.Windows.Forms.Button();
             this.txtEncoder = new System.Windows.Forms.TextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -51,7 +52,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtUrl.Location = new System.Drawing.Point(12, 12);
             this.txtUrl.Name = "txtUrl";
-            this.txtUrl.Size = new System.Drawing.Size(1059, 22);
+            this.txtUrl.Size = new System.Drawing.Size(1309, 22);
             this.txtUrl.TabIndex = 0;
             this.txtUrl.Text = "http://www.163.com";
             // 
@@ -66,7 +67,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 39);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1059, 546);
+            this.tabControl1.Size = new System.Drawing.Size(678, 603);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -75,7 +76,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1051, 520);
+            this.tabPage1.Size = new System.Drawing.Size(670, 577);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "WebClient";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -88,7 +89,7 @@
             this.textBox1.Location = new System.Drawing.Point(6, 6);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(625, 509);
+            this.textBox1.Size = new System.Drawing.Size(576, 566);
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
@@ -141,7 +142,7 @@
             // btnGet
             // 
             this.btnGet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnGet.Location = new System.Drawing.Point(96, 594);
+            this.btnGet.Location = new System.Drawing.Point(96, 651);
             this.btnGet.Name = "btnGet";
             this.btnGet.Size = new System.Drawing.Size(111, 21);
             this.btnGet.TabIndex = 2;
@@ -152,23 +153,33 @@
             // txtEncoder
             // 
             this.txtEncoder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtEncoder.Location = new System.Drawing.Point(12, 594);
+            this.txtEncoder.Location = new System.Drawing.Point(12, 651);
             this.txtEncoder.Name = "txtEncoder";
             this.txtEncoder.Size = new System.Drawing.Size(78, 22);
             this.txtEncoder.TabIndex = 3;
             this.txtEncoder.Text = "utf-8";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(696, 39);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(625, 633);
+            this.richTextBox1.TabIndex = 4;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1083, 627);
+            this.ClientSize = new System.Drawing.Size(1333, 684);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.txtEncoder);
             this.Controls.Add(this.btnGet);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.txtUrl);
             this.Name = "Form1";
             this.Text = "获取HTML源代码";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -193,6 +204,7 @@
 		private System.Windows.Forms.TextBox textBox2;
 		private System.Windows.Forms.TextBox txtEncoder;
         private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.RichTextBox richTextBox1;
 	}
 }
 

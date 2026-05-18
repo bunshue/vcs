@@ -14,6 +14,7 @@ using System.Collections;   //for IEnumerator
 using System.Runtime.InteropServices;   //for DllImport
 using System.IO;            //for Stream
 using System.Diagnostics;   //for Process
+using System.Text.RegularExpressions;
 
 using Microsoft.Win32;      //for RegistryKey
 
@@ -28,6 +29,8 @@ namespace vcs_Network1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
+
             show_item_location();
 
             richTextBox1.Text += "本機IP : " + MyIP() + "\n";
@@ -141,11 +144,14 @@ namespace vcs_Network1
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
             progressBar1.Location = new Point(x_st + dx * 0 + 60, y_st + dy * 10);
 
-            richTextBox1.Size = new Size(800, 400);
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             pictureBox1.Size = new Size(800, 400);
-            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 7 - 70);
+            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            richTextBox1.Size = new Size(800, 400);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 7 - 70);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            webBrowser1.Size = new Size(410, 130);
+            webBrowser1.Location = new Point(x_st + dx * 1, y_st + dy * 10);
 
             this.Size = new Size(1470, 890);
             this.Text = "vcs_Network1";
@@ -644,7 +650,7 @@ namespace vcs_Network1
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button21_Click(object sender, EventArgs e)
         {
@@ -710,22 +716,175 @@ namespace vcs_Network1
         }
         // 以斷點續傳方式下載文件 SP
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button22_Click(object sender, EventArgs e)
         {
+            //網頁存檔
+            //網頁存檔
+            string url = "https://www.google.com.tw/";
 
+            string filename = "tmp_html_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".html";
+
+            WebClient wc = new WebClient();
+            wc.DownloadFile(url, filename);
+
+            MessageBox.Show("保存成功");
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button23_Click(object sender, EventArgs e)
         {
+            //取得網頁原始碼
 
+            string url = "https://www.google.com.tw/";
+
+            if (ValidateDate1(url))//检查输入网址是否合法
+            {
+                url = url.ToLower();
+
+                string strS = GetSource(url);//调用方法提取网页内容
+                if (strS.Length > 1)
+                {
+                    richTextBox1.Text += strS + "\n";  // 显示网页内容
+                }
+            }
+            else
+            {
+                MessageBox.Show("输入网址不正确请重新输入");
+            }
         }
+
+        //验证网址是否正确
+        public bool ValidateDate1(string input)
+        {
+            return Regex.IsMatch(input, "http(s)?://([\\w-]+\\.)+[\\w-]+(//[\\w- .//?%&=]*)?");
+        }
+
+        //提取网页内容。
+        public string GetSource(string webAddress)
+        {
+            StringBuilder strSource = new StringBuilder("");
+            try
+            {
+
+                WebRequest WReq = WebRequest.Create(webAddress);//对URl地址发出请求
+                WebResponse WResp = WReq.GetResponse();//返回服务器的响应
+                StreamReader sr = new StreamReader(WResp.GetResponseStream(), Encoding.ASCII);//从数据流中读取数据
+                string strTemp = "";
+                while ((strTemp = sr.ReadLine()) != null)//循环读出数据
+                {
+                    strSource.Append(strTemp + "\r\n");//把数据添加到字符串中
+                }
+                sr.Close();
+            }
+            catch (WebException WebExcp)
+            {
+                MessageBox.Show(WebExcp.Message, "error", MessageBoxButtons.OK);
+            }
+            return strSource.ToString();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button24_Click(object sender, EventArgs e)
         {
-
+            //下載NASA網頁的圖片
+            Cursor = Cursors.WaitCursor;
+            get_nasa_picture();
+            Cursor = Cursors.Default;
         }
+
+        void get_nasa_picture()
+        {
+            string url = "http://antwrp.gsfc.nasa.gov/apod/";
+            try
+            {
+                richTextBox1.Text += "開啟 NASA 圖片網址 : " + url + "\n";
+                webBrowser1.Navigate(url);  // Load the web page.
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "*** Error navigating to " + url + "\n";
+                richTextBox1.Text += "*** " + ex.Message + "\n";
+            }
+        }
+
+        // The web page has loaded. Get the APOTD image.
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            richTextBox1.Text += "NASA 圖片網站主頁下載完畢, 從網頁資料擷取圖片所在網址\n";
+            // Get the image's URL.
+            HtmlDocument doc = webBrowser1.Document;
+            string img_src_url = doc.Images[0].GetAttribute("src");
+
+            richTextBox1.Text += "圖片所在網址 : " + img_src_url + "\n";
+
+            try
+            {
+                //圖片下載並存檔
+                DownloadImage(img_src_url);
+                richTextBox1.Text += "圖片下載並存檔完成\n";
+
+                //圖片下來並顯示
+                Image img = GetPicture(img_src_url);
+                pictureBox1.Image = img;
+                richTextBox1.Text += "圖片下來並顯示完成\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "*** Download Error" + "\n";
+                richTextBox1.Text += "*** " + ex.Message + "\n";
+            }
+        }
+
+        // Download the indicated file.
+        private void DownloadImage(string url)
+        {
+            //richTextBox1.Text += "下載圖片 : " + url + "\n";
+
+            // Make a WebClient.
+            WebClient wc = new WebClient();
+
+            int pos = url.LastIndexOf('/');
+            string filename = url.Substring(pos + 1);
+            richTextBox1.Text += "下載圖片, 本地圖片檔名 : " + filename + "\n";
+
+            // Use one of the following.
+            // For .NET Framework 4.5 and later:
+            //ServicePointManager.SecurityProtocol =
+            //    SecurityProtocolType.Tls12;
+            // For .NET Framework 4.0 through 4.4:
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+
+            // Download the file.
+            wc.DownloadFile(url, filename);
+        }
+
+        // Download a file from the internet.
+        // Get the picture at a given URL.
+        private Image GetPicture(string url)
+        {
+            try
+            {
+                WebClient wc = new WebClient();
+
+                // Use one of the following.
+                //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+
+                MemoryStream image_stream = new MemoryStream(wc.DownloadData(url));
+                return Image.FromStream(image_stream);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "Error downloading picture " + url + '\n' + ex.Message + "\n";
+                return null;
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button25_Click(object sender, EventArgs e)
         {
@@ -752,8 +911,17 @@ namespace vcs_Network1
 
         }
     }
-}
 
+    public class Protocols
+    {
+        public const SecurityProtocolType
+            protocol_SystemDefault = 0,
+            protocol_Ssl3 = (SecurityProtocolType)48,
+            protocol_Tls = (SecurityProtocolType)192,
+            protocol_Tls11 = (SecurityProtocolType)768,
+            protocol_Tls12 = (SecurityProtocolType)3072;
+    }
+}
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個

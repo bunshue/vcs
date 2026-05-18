@@ -63,6 +63,7 @@
             this.button27 = new System.Windows.Forms.Button();
             this.button28 = new System.Windows.Forms.Button();
             this.button29 = new System.Windows.Forms.Button();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -360,6 +361,7 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(200, 60);
             this.button22.TabIndex = 60;
+            this.button22.Text = "網頁存檔";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -370,6 +372,7 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(200, 60);
             this.button23.TabIndex = 61;
+            this.button23.Text = "取得網頁原始碼";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -380,6 +383,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(200, 60);
             this.button24.TabIndex = 62;
+            this.button24.Text = "下載NASA網頁的圖片";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
@@ -433,11 +437,21 @@
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
+            // webBrowser1
+            // 
+            this.webBrowser1.Location = new System.Drawing.Point(641, 118);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(100, 100);
+            this.webBrowser1.TabIndex = 68;
+            this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(890, 720);
+            this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.button29);
             this.Controls.Add(this.button28);
             this.Controls.Add(this.button27);
@@ -519,6 +533,7 @@
         private System.Windows.Forms.Button button27;
         private System.Windows.Forms.Button button28;
         private System.Windows.Forms.Button button29;
+        private System.Windows.Forms.WebBrowser webBrowser1;
     }
 }
 

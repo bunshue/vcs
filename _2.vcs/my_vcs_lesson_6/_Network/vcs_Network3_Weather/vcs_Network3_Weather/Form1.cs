@@ -67,17 +67,15 @@ namespace vcs_Network3_Weather
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             comboBox1.Items.Add("City");
             comboBox1.Items.Add("ZIP");
             comboBox1.Items.Add("ID");
 
             comboBox1.SelectedIndex = 0;
 
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\api_key.txt";
-
 
             if (File.Exists(filename) == false)
             {
@@ -119,6 +117,39 @@ namespace vcs_Network3_Weather
                 Application.Exit();
                 return;
             }
+        }
+
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+
+            listView1.Size = new Size(620, 340);
+            listView1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            richTextBox1.Size = new Size(620, 340);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            pictureBox1.Size = new Size(620, 340);
+            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            groupBox2.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+
+            button4.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button10.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            button7.Location = new Point(x_st + dx * 5, y_st + dy * 3);
+            button3.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button11.Location = new Point(x_st + dx * 4, y_st + dy * 4);
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1300, 750);
+            this.Text = "vcs_Network3_Weather";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         void clear_data()
@@ -191,94 +222,94 @@ namespace vcs_Network3_Weather
 
 
 
-                                                        // Get the start date and time.
-                                                        XmlAttribute time_attr1 = time_node.Attributes["from"];
-                                                        XmlAttribute time_attr2 = time_node.Attributes["to"];
+                // Get the start date and time.
+                XmlAttribute time_attr1 = time_node.Attributes["from"];
+                XmlAttribute time_attr2 = time_node.Attributes["to"];
 
-                                                        aaa++;
-                                                        /* 解讀xml資料 
-                                                        richTextBox1.Text += "取得第 " + aaa.ToString() + " 筆資料 : " + time_attr1.Value + "\t" + time_attr2.Value + "\n";
+                aaa++;
+                /* 解讀xml資料 
+                richTextBox1.Text += "取得第 " + aaa.ToString() + " 筆資料 : " + time_attr1.Value + "\t" + time_attr2.Value + "\n";
 
-                                                        richTextBox1.Text += "預測時間 : " + DateTime.Parse(time_attr1.Value).ToLocalTime() + " 到 " + DateTime.Parse(time_attr2.Value).ToLocalTime()
-                                                            + "\t 中間 " + (DateTime.Parse(time_attr1.Value) + new TimeSpan(1, 30, 0)).ToLocalTime() + "\n";
+                richTextBox1.Text += "預測時間 : " + DateTime.Parse(time_attr1.Value).ToLocalTime() + " 到 " + DateTime.Parse(time_attr2.Value).ToLocalTime()
+                    + "\t 中間 " + (DateTime.Parse(time_attr1.Value) + new TimeSpan(1, 30, 0)).ToLocalTime() + "\n";
 
-                                                        richTextBox1.Text += "symbol" + "\t";
-                                                        richTextBox1.Text += time_node.SelectSingleNode("symbol").Attributes["number"].Value.ToString() + "\t";
-                                                        richTextBox1.Text += time_node.SelectSingleNode("symbol").Attributes["name"].Value.ToString() + "\t";
-                                                        richTextBox1.Text += time_node.SelectSingleNode("symbol").Attributes["var"].Value.ToString() + "\n";
+                richTextBox1.Text += "symbol" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("symbol").Attributes["number"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("symbol").Attributes["name"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("symbol").Attributes["var"].Value.ToString() + "\n";
 
-                                                        richTextBox1.Text += "precipitation" + "\t";
-                                                        richTextBox1.Text += time_node.SelectSingleNode("precipitation").Attributes["probability"].Value.ToString() + "\n";
+                richTextBox1.Text += "precipitation" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("precipitation").Attributes["probability"].Value.ToString() + "\n";
 
-                                                        richTextBox1.Text += "windDirection" + "\t";
-                                                        richTextBox1.Text += time_node.SelectSingleNode("windDirection").Attributes["deg"].Value.ToString() + "\t";
-                                                        richTextBox1.Text += time_node.SelectSingleNode("windDirection").Attributes["code"].Value.ToString() + "\t";
-                                                        richTextBox1.Text += time_node.SelectSingleNode("windDirection").Attributes["name"].Value.ToString() + "\n";
+                richTextBox1.Text += "windDirection" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("windDirection").Attributes["deg"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("windDirection").Attributes["code"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("windDirection").Attributes["name"].Value.ToString() + "\n";
 
-                                                        richTextBox1.Text += "windSpeed" + "\t";
-                                                        richTextBox1.Text += time_node.SelectSingleNode("windSpeed").Attributes["mps"].Value.ToString() + "\t";
-                                                        richTextBox1.Text += time_node.SelectSingleNode("windSpeed").Attributes["unit"].Value.ToString() + "\t";
-                                                        richTextBox1.Text += time_node.SelectSingleNode("windSpeed").Attributes["name"].Value.ToString() + "\n";
+                richTextBox1.Text += "windSpeed" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("windSpeed").Attributes["mps"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("windSpeed").Attributes["unit"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("windSpeed").Attributes["name"].Value.ToString() + "\n";
 
-                                                        richTextBox1.Text += "temperature" + "\t";
-                                                        richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["unit"].Value.ToString() + "\t";
-                                                        richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["value"].Value.ToString() + "\t";
-                                                        richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["min"].Value.ToString() + "\t";
-                                                        richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["max"].Value.ToString() + "\n";
+                richTextBox1.Text += "temperature" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["unit"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["value"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["min"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("temperature").Attributes["max"].Value.ToString() + "\n";
 
-                                                        richTextBox1.Text += "feels_like" + "\t";
-                                                        richTextBox1.Text += time_node.SelectSingleNode("feels_like").Attributes["value"].Value.ToString() + "\t";
-                                                        richTextBox1.Text += time_node.SelectSingleNode("feels_like").Attributes["unit"].Value.ToString() + "\n";
+                richTextBox1.Text += "feels_like" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("feels_like").Attributes["value"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("feels_like").Attributes["unit"].Value.ToString() + "\n";
 
-                                                        richTextBox1.Text += "pressure" + "\t";
-                                                        richTextBox1.Text += time_node.SelectSingleNode("pressure").Attributes["unit"].Value.ToString() + "\t";
-                                                        richTextBox1.Text += time_node.SelectSingleNode("pressure").Attributes["value"].Value.ToString() + "\n";
+                richTextBox1.Text += "pressure" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("pressure").Attributes["unit"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("pressure").Attributes["value"].Value.ToString() + "\n";
 
-                                                        richTextBox1.Text += "humidity" + "\t";
-                                                        richTextBox1.Text += time_node.SelectSingleNode("humidity").Attributes["value"].Value.ToString() + "\t";
-                                                        richTextBox1.Text += time_node.SelectSingleNode("humidity").Attributes["unit"].Value.ToString() + "\n";
+                richTextBox1.Text += "humidity" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("humidity").Attributes["value"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("humidity").Attributes["unit"].Value.ToString() + "\n";
 
-                                                        richTextBox1.Text += "clouds" + "\t";
-                                                        richTextBox1.Text += time_node.SelectSingleNode("clouds").Attributes["value"].Value.ToString() + "\t";
-                                                        richTextBox1.Text += time_node.SelectSingleNode("clouds").Attributes["all"].Value.ToString() + "\t";
-                                                        richTextBox1.Text += time_node.SelectSingleNode("clouds").Attributes["unit"].Value.ToString() + "\n";
+                richTextBox1.Text += "clouds" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("clouds").Attributes["value"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("clouds").Attributes["all"].Value.ToString() + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("clouds").Attributes["unit"].Value.ToString() + "\n";
 
-                                                        richTextBox1.Text += "visibility" + "\t";
-                                                        richTextBox1.Text += time_node.SelectSingleNode("visibility").Attributes["value"].Value.ToString() + "\n";
-                                                        */
+                richTextBox1.Text += "visibility" + "\t";
+                richTextBox1.Text += time_node.SelectSingleNode("visibility").Attributes["value"].Value.ToString() + "\n";
+                */
 
-                                                        DateTime start_time = DateTime.Parse(time_attr1.Value);
+                DateTime start_time = DateTime.Parse(time_attr1.Value);
 
-                                                        // Convert from UTC to local time.
-                                                        start_time = start_time.ToLocalTime();
+                // Convert from UTC to local time.
+                start_time = start_time.ToLocalTime();
 
-                                                        // Add 90 minutes to get to the middle of the interval.
-                                                        start_time += new TimeSpan(1, 30, 0);
+                // Add 90 minutes to get to the middle of the interval.
+                start_time += new TimeSpan(1, 30, 0);
 
-                                                        // Get the temperature node.
-                                                        XmlNode temp_node = time_node.SelectSingleNode("temperature");
-                                                        XmlAttribute temp_attr = temp_node.Attributes["value"];
-                                                        float temp = 0;
-                                                        if (temp_attr != null)
-                                                        {
-                                                            temp = float.Parse(temp_attr.Value.ToString());
-                                                        }
+                // Get the temperature node.
+                XmlNode temp_node = time_node.SelectSingleNode("temperature");
+                XmlAttribute temp_attr = temp_node.Attributes["value"];
+                float temp = 0;
+                if (temp_attr != null)
+                {
+                    temp = float.Parse(temp_attr.Value.ToString());
+                }
 
-                                                        ListViewItem item;
-                                                        if (start_time.DayOfWeek.ToString() == last_day)
-                                                        {
-                                                            item = listView1.Items.Add("");
-                                                        }
-                                                        else
-                                                        {
-                                                            last_day = start_time.DayOfWeek.ToString();
-                                                            item = listView1.Items.Add(last_day);
-                                                        }
-                                                        item.SubItems.Add(start_time.ToShortTimeString());
-                                                        item.SubItems.Add(temp.ToString("0.00") + " " + degrees + "F");
-                                                        item.SubItems.Add(((temp - 32) * 5 / 9).ToString("0.00") + " " + degrees + "C");
-                                                        temperature.Add((temp - 32) * 5 / 9);
-                                                        date.Add(start_time.ToShortTimeString());
+                ListViewItem item;
+                if (start_time.DayOfWeek.ToString() == last_day)
+                {
+                    item = listView1.Items.Add("");
+                }
+                else
+                {
+                    last_day = start_time.DayOfWeek.ToString();
+                    item = listView1.Items.Add(last_day);
+                }
+                item.SubItems.Add(start_time.ToShortTimeString());
+                item.SubItems.Add(temp.ToString("0.00") + " " + degrees + "F");
+                item.SubItems.Add(((temp - 32) * 5 / 9).ToString("0.00") + " " + degrees + "C");
+                temperature.Add((temp - 32) * 5 / 9);
+                date.Add(start_time.ToShortTimeString());
             }
 
             int i;
@@ -1187,3 +1218,19 @@ namespace vcs_Network3_Weather
     }
 }
 
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/

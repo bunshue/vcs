@@ -95,7 +95,7 @@
             this.columnHeader4});
             this.listView1.Location = new System.Drawing.Point(12, 12);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(620, 317);
+            this.listView1.Size = new System.Drawing.Size(400, 200);
             this.listView1.TabIndex = 24;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -125,17 +125,17 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 335);
+            this.richTextBox1.Location = new System.Drawing.Point(431, 6);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(740, 311);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 25;
             this.richTextBox1.Text = "";
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(675, 611);
+            this.bt_clear.Location = new System.Drawing.Point(442, 43);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(53, 21);
+            this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 26;
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
@@ -143,9 +143,10 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(758, 427);
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(431, 112);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(504, 219);
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.TabIndex = 27;
             this.pictureBox1.TabStop = false;
             // 
@@ -171,9 +172,10 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(793, 287);
+            this.button3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button3.Location = new System.Drawing.Point(12, 523);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(149, 30);
+            this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 30;
             this.button3.Text = "即時天氣XML解讀_簡版";
             this.button3.UseVisualStyleBackColor = true;
@@ -181,9 +183,10 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(793, 240);
+            this.button4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button4.Location = new System.Drawing.Point(12, 458);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(149, 30);
+            this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 31;
             this.button4.Text = "天氣預測XML解讀_簡版";
             this.button4.UseVisualStyleBackColor = true;
@@ -224,16 +227,16 @@
             this.groupBox1.Controls.Add(this.tb_country);
             this.groupBox1.Controls.Add(this.tb_lat);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Location = new System.Drawing.Point(781, 12);
+            this.groupBox1.Location = new System.Drawing.Point(12, 230);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(338, 211);
+            this.groupBox1.Size = new System.Drawing.Size(338, 200);
             this.groupBox1.TabIndex = 45;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "氣象資料";
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(277, 174);
+            this.button5.Location = new System.Drawing.Point(277, 159);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(47, 31);
             this.button5.TabIndex = 49;
@@ -243,7 +246,7 @@
             // 
             // tb_id
             // 
-            this.tb_id.Location = new System.Drawing.Point(50, 169);
+            this.tb_id.Location = new System.Drawing.Point(50, 154);
             this.tb_id.Name = "tb_id";
             this.tb_id.ReadOnly = true;
             this.tb_id.Size = new System.Drawing.Size(100, 22);
@@ -252,7 +255,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 126);
+            this.label3.Location = new System.Drawing.Point(6, 111);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 12);
             this.label3.TabIndex = 34;
@@ -261,7 +264,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 174);
+            this.label7.Location = new System.Drawing.Point(6, 159);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(20, 12);
             this.label7.TabIndex = 42;
@@ -269,7 +272,7 @@
             // 
             // tb_city
             // 
-            this.tb_city.Location = new System.Drawing.Point(50, 121);
+            this.tb_city.Location = new System.Drawing.Point(50, 106);
             this.tb_city.Name = "tb_city";
             this.tb_city.ReadOnly = true;
             this.tb_city.Size = new System.Drawing.Size(100, 22);
@@ -277,7 +280,7 @@
             // 
             // tb_lon
             // 
-            this.tb_lon.Location = new System.Drawing.Point(224, 145);
+            this.tb_lon.Location = new System.Drawing.Point(224, 130);
             this.tb_lon.Name = "tb_lon";
             this.tb_lon.ReadOnly = true;
             this.tb_lon.Size = new System.Drawing.Size(100, 22);
@@ -286,7 +289,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(180, 124);
+            this.label4.Location = new System.Drawing.Point(180, 109);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 12);
             this.label4.TabIndex = 36;
@@ -295,7 +298,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(180, 148);
+            this.label5.Location = new System.Drawing.Point(180, 133);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 12);
             this.label5.TabIndex = 40;
@@ -303,7 +306,7 @@
             // 
             // tb_country
             // 
-            this.tb_country.Location = new System.Drawing.Point(224, 121);
+            this.tb_country.Location = new System.Drawing.Point(224, 106);
             this.tb_country.Name = "tb_country";
             this.tb_country.ReadOnly = true;
             this.tb_country.Size = new System.Drawing.Size(100, 22);
@@ -311,7 +314,7 @@
             // 
             // tb_lat
             // 
-            this.tb_lat.Location = new System.Drawing.Point(50, 145);
+            this.tb_lat.Location = new System.Drawing.Point(50, 130);
             this.tb_lat.Name = "tb_lat";
             this.tb_lat.ReadOnly = true;
             this.tb_lat.Size = new System.Drawing.Size(100, 22);
@@ -320,7 +323,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 150);
+            this.label6.Location = new System.Drawing.Point(6, 135);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 12);
             this.label6.TabIndex = 38;
@@ -331,7 +334,7 @@
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.button6);
-            this.groupBox2.Location = new System.Drawing.Point(1128, 12);
+            this.groupBox2.Location = new System.Drawing.Point(359, 230);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(154, 169);
             this.groupBox2.TabIndex = 46;
@@ -340,9 +343,10 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(963, 240);
+            this.button10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button10.Location = new System.Drawing.Point(215, 458);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(149, 30);
+            this.button10.Size = new System.Drawing.Size(200, 60);
             this.button10.TabIndex = 48;
             this.button10.Text = "天氣預測XML解讀_詳版1";
             this.button10.UseVisualStyleBackColor = true;
@@ -350,9 +354,10 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(963, 287);
+            this.button11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button11.Location = new System.Drawing.Point(215, 523);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(149, 30);
+            this.button11.Size = new System.Drawing.Size(200, 60);
             this.button11.TabIndex = 47;
             this.button11.Text = "即時天氣XML解讀_詳版";
             this.button11.UseVisualStyleBackColor = true;
@@ -360,9 +365,10 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(1118, 240);
+            this.button7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button7.Location = new System.Drawing.Point(419, 458);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(149, 30);
+            this.button7.Size = new System.Drawing.Size(200, 60);
             this.button7.TabIndex = 49;
             this.button7.Text = "天氣預測XML解讀_詳版2";
             this.button7.UseVisualStyleBackColor = true;
@@ -372,7 +378,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1293, 661);
+            this.ClientSize = new System.Drawing.Size(771, 600);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button11);

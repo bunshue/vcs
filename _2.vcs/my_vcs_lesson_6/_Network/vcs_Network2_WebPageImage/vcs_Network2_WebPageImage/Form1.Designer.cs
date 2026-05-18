@@ -38,6 +38,7 @@
             this.txtUrl = new System.Windows.Forms.TextBox();
             this.SplitContainer1 = new System.Windows.Forms.SplitContainer();
             this.btnListImages = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer1)).BeginInit();
             this.SplitContainer1.Panel1.SuspendLayout();
             this.SplitContainer1.Panel2.SuspendLayout();
             this.SplitContainer1.SuspendLayout();
@@ -48,18 +49,18 @@
             this.wbrWebSite.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.wbrWebSite.Location = new System.Drawing.Point(8, 40);
-            this.wbrWebSite.MinimumSize = new System.Drawing.Size(20, 20);
+            this.wbrWebSite.Location = new System.Drawing.Point(8, 37);
+            this.wbrWebSite.MinimumSize = new System.Drawing.Size(20, 18);
             this.wbrWebSite.Name = "wbrWebSite";
-            this.wbrWebSite.Size = new System.Drawing.Size(352, 484);
+            this.wbrWebSite.Size = new System.Drawing.Size(428, 583);
             this.wbrWebSite.TabIndex = 0;
             this.wbrWebSite.Url = new System.Uri("http://www.csharphelper.com/articles.html", System.UriKind.Absolute);
             // 
             // btnSaveImages
             // 
-            this.btnSaveImages.Location = new System.Drawing.Point(88, 8);
+            this.btnSaveImages.Location = new System.Drawing.Point(88, 7);
             this.btnSaveImages.Name = "btnSaveImages";
-            this.btnSaveImages.Size = new System.Drawing.Size(80, 23);
+            this.btnSaveImages.Size = new System.Drawing.Size(80, 21);
             this.btnSaveImages.TabIndex = 4;
             this.btnSaveImages.Text = "Save Images";
             this.btnSaveImages.UseVisualStyleBackColor = true;
@@ -68,9 +69,9 @@
             // btnGo
             // 
             this.btnGo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGo.Location = new System.Drawing.Point(328, 8);
+            this.btnGo.Location = new System.Drawing.Point(404, 7);
             this.btnGo.Name = "btnGo";
-            this.btnGo.Size = new System.Drawing.Size(32, 24);
+            this.btnGo.Size = new System.Drawing.Size(32, 22);
             this.btnGo.TabIndex = 2;
             this.btnGo.Text = "Go";
             this.btnGo.UseVisualStyleBackColor = true;
@@ -80,9 +81,9 @@
             // 
             this.txtDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDirectory.Location = new System.Drawing.Point(176, 8);
+            this.txtDirectory.Location = new System.Drawing.Point(176, 7);
             this.txtDirectory.Name = "txtDirectory";
-            this.txtDirectory.Size = new System.Drawing.Size(280, 20);
+            this.txtDirectory.Size = new System.Drawing.Size(379, 22);
             this.txtDirectory.TabIndex = 6;
             // 
             // flpPictures
@@ -91,18 +92,18 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.flpPictures.AutoScroll = true;
-            this.flpPictures.Location = new System.Drawing.Point(0, 40);
+            this.flpPictures.Location = new System.Drawing.Point(0, 37);
             this.flpPictures.Name = "flpPictures";
-            this.flpPictures.Size = new System.Drawing.Size(464, 488);
+            this.flpPictures.Size = new System.Drawing.Size(563, 586);
             this.flpPictures.TabIndex = 7;
             // 
             // txtUrl
             // 
             this.txtUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtUrl.Location = new System.Drawing.Point(8, 8);
+            this.txtUrl.Location = new System.Drawing.Point(8, 7);
             this.txtUrl.Name = "txtUrl";
-            this.txtUrl.Size = new System.Drawing.Size(312, 20);
+            this.txtUrl.Size = new System.Drawing.Size(388, 22);
             this.txtUrl.TabIndex = 1;
             this.txtUrl.Text = "http://www.csharphelper.com/articles.html";
             // 
@@ -127,15 +128,15 @@
             this.SplitContainer1.Panel2.Controls.Add(this.txtDirectory);
             this.SplitContainer1.Panel2.Controls.Add(this.btnSaveImages);
             this.SplitContainer1.Panel2.Controls.Add(this.btnListImages);
-            this.SplitContainer1.Size = new System.Drawing.Size(828, 526);
-            this.SplitContainer1.SplitterDistance = 362;
+            this.SplitContainer1.Size = new System.Drawing.Size(1003, 622);
+            this.SplitContainer1.SplitterDistance = 438;
             this.SplitContainer1.TabIndex = 5;
             // 
             // btnListImages
             // 
-            this.btnListImages.Location = new System.Drawing.Point(0, 8);
+            this.btnListImages.Location = new System.Drawing.Point(0, 7);
             this.btnListImages.Name = "btnListImages";
-            this.btnListImages.Size = new System.Drawing.Size(80, 23);
+            this.btnListImages.Size = new System.Drawing.Size(80, 21);
             this.btnListImages.TabIndex = 3;
             this.btnListImages.Text = "List Images";
             this.btnListImages.UseVisualStyleBackColor = true;
@@ -143,18 +144,19 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(828, 526);
+            this.ClientSize = new System.Drawing.Size(1003, 622);
             this.Controls.Add(this.SplitContainer1);
             this.Name = "Form1";
             this.Text = "vcs_Network2_WebPageImage";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.SplitContainer1.Panel1.ResumeLayout(false);
             this.SplitContainer1.Panel1.PerformLayout();
             this.SplitContainer1.Panel2.ResumeLayout(false);
             this.SplitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer1)).EndInit();
             this.SplitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
 
