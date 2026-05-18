@@ -1,18 +1,14 @@
-﻿amend
-
-
-//------------------------------------------------------------  # 60個
-
-
-
+﻿
+amend
 
 //------------------------------------------------------------  # 60個
 
+
+
+//------------------------------------------------------------  # 60個
 
         void apply_listView02()
         {
-
-
             /* 自動格式化listView
             // Size the columns to fit the data and colummn headers.
             listView1.SizeColumns(-2);
@@ -25,6 +21,7 @@
             */
         }
 
+//------------------------------------------------------------  # 60個
 
 'Microsoft.ACE.OLEDB.12.0' 提供者並未登錄於本機電腦上。
 
@@ -71,8 +68,7 @@ drop proc proc_TransInProc  --删除存储过程
 public Point? GetIntersectionWith(Line secondLine);
 為什麼Point後面還多一個?呢?
 
-
-
+//------------------------------------------------------------  # 60個
 
             /*
             Vector3 row0 = new Vector3(1, 2, 3);
@@ -153,8 +149,6 @@ namespace CopilotTTSExample
 
 搜尋
 ProcessDirectory
-
-
 
 //------------------------------------------------------------  # 60個
 
@@ -8028,11 +8022,14 @@ $ 匹配一行的結束。 例如正則表達式 food$ 能夠匹配到 “he's  
 匹配首尾空白字符的正則表達式：^\s*|\s*$
 匹配HTML標記的正則表達式：<(\S*?)[^>]*>.*?</\1>|<.*? />
 匹配中文字符的正則表達式： [\u4e00-\u9fa5]
-限制網頁表單裡的文本框輸入內容：
-只能輸入中文：<input type="text" onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))" />
-只能輸入數字：<input type="text" onkeyup="value=value.replace(/[^\d]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" />
-只能輸入數字和英文：<input type="text" onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text).replace(/[^\d]/g,''))" />
 
+限制網頁表單裡的文本框輸入內容：
+
+只能輸入中文：<input type="text" onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))" />
+
+只能輸入數字：<input type="text" onkeyup="value=value.replace(/[^\d]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" />
+
+只能輸入數字和英文：<input type="text" onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text).replace(/[^\d]/g,''))" />
 
 //------------------------------------------------------------  # 60個
 
@@ -12732,10 +12729,7 @@ Ctrl + Q  => Ctrl + D => 打開Drap
 或者
 Ctrl + Shift + P
 
-
-
-
-
+6060
 
 習慣性用QQ或者TIM的人，一般是使用Ctrl+Alt+A  快捷鍵（熱鍵）快速實現截圖。
 
@@ -12747,11 +12741,15 @@ Ctrl + Shift + P
     滑鼠右鍵點選
     退出截圖模式
 
+6060
+
 Clipboard
 
 Clipboard內的影像[全部]顯示在pbx上、影像另存新檔	done
 Clipboard內的影像[部分]顯示在pbx上、影像另存新檔	done	目前無法放大/縮小 目前只能做矩形
 測試一下網頁中的"複製圖片"，是否可以用此方法變成檔案	可
+
+6060
 
 tmp
 

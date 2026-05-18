@@ -104,7 +104,7 @@ namespace vcs_Network1
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
+
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -149,6 +149,10 @@ namespace vcs_Network1
 
             this.Size = new Size(1470, 890);
             this.Text = "vcs_Network1";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -640,10 +644,73 @@ namespace vcs_Network1
             }
         }
 
+        //6060
+
         private void button21_Click(object sender, EventArgs e)
         {
-
+            //以斷點續傳方式下載文件
+            DownloadFile();
         }
+
+        // 以斷點續傳方式下載文件 ST
+        /// <summary>
+        /// 以斷點續傳方式下載文件
+        /// </summary>
+        /// <param name="strFileName">下載文件的保存路徑</param>
+        /// <param name="strUrl">文件下載地址</param>
+        public void DownloadFile()
+        {
+
+            string strFileName = @"C:\dddddddddd\aaaaa.jpg";
+            string strUrl = @"https://upload.wikimedia.org/wikipedia/commons/c/c7/St_Sebastian_Curtain.jpg";
+
+            richTextBox1.Text += "aaa : " + strFileName + "\n";
+            richTextBox1.Text += "bbb : " + strUrl + "\n";//src
+
+            //打開上次下載的文件或新建文件
+            long SPosition = 0;
+            FileStream FStream;
+            if (File.Exists(strFileName))
+            {
+                FStream = File.OpenWrite(strFileName);
+                SPosition = FStream.Length;
+                FStream.Seek(SPosition, SeekOrigin.Current);//移動文件流中的當前指針
+            }
+            else
+            {
+                richTextBox1.Text += "kkkk : " + strFileName + "\n";
+                FStream = new FileStream(strFileName, FileMode.Create);
+                SPosition = 0;
+            }
+            //打開網絡連接
+            try
+            {
+                HttpWebRequest myRequest = (HttpWebRequest)HttpWebRequest.Create(strUrl);
+                if (SPosition > 0)
+                    myRequest.AddRange((int)SPosition);//設置Range值
+                //向服務器請求，獲得服務器的回應數據流
+                Stream myStream = myRequest.GetResponse().GetResponseStream();
+                byte[] btContent = new byte[512];
+                int intSize = 0;
+                intSize = myStream.Read(btContent, 0, 512);
+                while (intSize > 0)
+                {
+                    FStream.Write(btContent, 0, intSize);
+                    intSize = myStream.Read(btContent, 0, 512);
+                }
+                FStream.Close();
+                myStream.Close();
+                MessageBox.Show("文件下載完成！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch
+            {
+                richTextBox1.Text += "XXXXXXXXXXXXXXXXXXX\n";
+                FStream.Close();
+            }
+        }
+        // 以斷點續傳方式下載文件 SP
+
+        //6060
 
         private void button22_Click(object sender, EventArgs e)
         {

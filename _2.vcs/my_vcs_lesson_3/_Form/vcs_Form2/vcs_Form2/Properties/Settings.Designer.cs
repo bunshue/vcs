@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_Form7_FormLoad1.Properties
+namespace vcs_Form2.Properties
 {
 
 

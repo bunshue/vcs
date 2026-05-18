@@ -1240,7 +1240,43 @@ namespace vcs_Mix00
 
         private void button26_Click(object sender, EventArgs e)
         {
+            //剪貼簿 + re
+
+            richTextBox1.Text += "剪貼簿 + re\n";
+
+            //監視剪貼板是否有數據
+            string data = Clipboard.GetData(DataFormats.Text).ToString();
+            richTextBox1.Text += data + "\n";
+
+            /*
+            strName = strPath.Substring(strPath.LastIndexOf("/") + 1);
+            textBox3.Text = textBox1.Text.Substring(textBox1.Text.LastIndexOf("/") + 1);
+            */
+
+
+            string url = "https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg";
+
+
+            if (url.Contains("/"))
+            {
+                string filename = url.Substring(url.LastIndexOf("/") + 1);
+                richTextBox1.Text += filename + "\n";
+            }
+
+            /*
+            //监视剪贴板是否有数据
+            string strPath = Clipboard.GetData(DataFormats.Text).ToString();
+            //验证网址格式
+            if (Regex.IsMatch(strPath, @"http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?"))
+            {
+                textBox1.Text = strPath;
+                strName = strPath.Substring(strPath.LastIndexOf("/") + 1);
+            }
+            */
         }
+
+
+        //------------------------------------------------------------  # 60個
 
         class MyImage       // 定義MyImage類別
         {
