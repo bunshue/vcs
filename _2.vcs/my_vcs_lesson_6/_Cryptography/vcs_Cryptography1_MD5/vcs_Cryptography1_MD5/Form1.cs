@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
-using System.Security.Cryptography; //for CryptoConfig
+using System.Security.Cryptography; //for CryptoConfig, MD5
 
 namespace vcs_Cryptography1_MD5
 {
@@ -171,9 +171,30 @@ namespace vcs_Cryptography1_MD5
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button3_Click(object sender, EventArgs e)
         {
+            //使用MD5加密
+            string P_str_Code = "ABCDEFG";
+            richTextBox1.Text += "使用MD5加密後的結果為：" + Encrypt(P_str_Code) + "\n";
         }
+
+        public string Encrypt(string strPwd)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();   //創建MD5對象
+            byte[] data = System.Text.Encoding.Default.GetBytes(strPwd);//將字串編碼為一個Byte序列
+            byte[] md5data = md5.ComputeHash(data);//計算dataByte的Hash值
+            md5.Clear();    //清空MD5對象
+            string str = "";//定義一個變量，用來記錄加密後的密碼
+            for (int i = 0; i < md5data.Length - 1; i++)//遍歷byte數組
+            {
+                str += md5data[i].ToString("x").PadLeft(2, '0');//對遍歷到的Byte進行加密
+            }
+            return str;//返回得到的加密字串
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button4_Click(object sender, EventArgs e)
         {

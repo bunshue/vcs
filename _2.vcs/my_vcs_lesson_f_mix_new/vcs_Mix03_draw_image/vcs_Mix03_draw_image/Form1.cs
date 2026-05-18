@@ -87,8 +87,8 @@ namespace vcs_Mix03_draw_image
             pictureBox1.Size = new Size(690, 690);
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
-            richTextBox1.Size = new Size(300, 690);
-            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            richTextBox1.Size = new Size(440, 690);
+            richTextBox1.Location = new Point(x_st + dx * 5 + 70, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1600, 750);
@@ -357,14 +357,62 @@ namespace vcs_Mix03_draw_image
         private void button7_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            int[] x = { 0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360, 390, 420, 450, 480, 510, 540, 570, 600 };
+            int[] y = { 200, 295, 368, 399, 381, 319, 228, 129, 48, 4, 8, 58, 144, 243, 331, 387, 397, 359, 282, 184, 91 };
+            Bitmap bitM = new Bitmap(this.pictureBox1.Width, this.pictureBox1.Height);
+            //MessageBox.Show("Width = " + this.pictureBox1.Width + "  Height = " + this.pictureBox1.Height);
+            Graphics g = Graphics.FromImage(bitM);
+            g.Clear(Color.WhiteSmoke);
+            Point[] points = new Point[21];
+            Random r = new Random();
+            for (int i = 0; i < 21; i++)
+            {
+                points[i].X = x[i];
+                points[i].Y = y[i];
+            }
+            g.DrawLines(new Pen(Color.FromArgb(r.Next(1, 255), r.Next(1, 255), r.Next(1, 255))), points);  //繪製折線
+
+            DrawCircle(g, 200, 200, 100);
+
+            pictureBox1.Image = bitM;
         }
 
+        private void DrawCircle(Graphics g, int center_x, int center_y, int radius)
+        {
+            int linewidth = 5;
+            // Create a Graphics object for the Control.
+            //Graphics g = pictureBox1.CreateGraphics();
+            // Create a new pen.
+            Pen PenStyle = new Pen(Color.Red, 5);
+            // Set the pen's width.
+            PenStyle.Width = linewidth;
+            // Draw the circle
+            g.DrawEllipse(PenStyle, new Rectangle(center_x - radius, center_y - radius, radius * 2, radius * 2));
+            //Dispose of the pen.
+            PenStyle.Dispose();
+        }
 
+        //------------------------------------------------------------  # 60個
 
         private void button8_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            int[] x = { 0, 40, 80, 120, 160, 200, 240, 280, 320, 360, 400, 440, 480, 520, 560, 600 };
+            int[] y = { 200, 328, 396, 373, 268, 131, 26, 3, 71, 200, 328, 396, 373, 268, 131, 26 };
 
+            for (int i = 0; i < 10; i++)
+            {
+                Application.DoEvents();
+                for (int j = 0; j < 20; j++)
+                    System.Threading.Thread.Sleep(1);
+
+                g.DrawLine(Pens.Red, new Point(x[i], 400 - y[i]), new Point(x[i + 1], 400 - y[i + 1]));
+                pictureBox1.Image = bitmap1;
+            }
+
+            pictureBox1.Image = bitmap1;
+            //MessageBox.Show("OK");
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -648,7 +696,6 @@ namespace vcs_Mix03_draw_image
 
         private void button16_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -675,7 +722,7 @@ namespace vcs_Mix03_draw_image
 
             //e.Graphics.DrawImage(memoryImage, 0, 0);
 
-            //6060
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
             */
 
             g.DrawRectangle(Pens.Red, 100, 100, 200, 200);

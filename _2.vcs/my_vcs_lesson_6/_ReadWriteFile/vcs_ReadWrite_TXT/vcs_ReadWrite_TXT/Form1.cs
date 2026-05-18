@@ -29,16 +29,11 @@ namespace vcs_ReadWrite_TXT
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 200 + 5;
-            dy = 60 + 5;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -84,11 +79,16 @@ namespace vcs_ReadWrite_TXT
             button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
             button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
-            richTextBox1.Size = new Size(440, 640);
+            richTextBox1.Size = new Size(440, 690);
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear1.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear1.Size.Height);
 
-            this.Size = new Size(1100 + 210, 700);
+            this.Size = new Size(1100 + 210, 750);
+            this.Text = "vcs_ReadWrite_TXT";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear1_Click(object sender, EventArgs e)
@@ -1738,12 +1738,8 @@ sr.ReadToEnd()  //讀取所有文字內容
             sw.Close();
             richTextBox1.Text += "存檔檔名: " + filename + "\n";
 
-
-
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-
 
             int len = richTextBox1.Lines.Length;
             //richTextBox1.Text += "lines = " + len.ToString() + "\n";
@@ -1779,3 +1775,4 @@ _C	|份|	4EFD	20221	_X	|，|	FF0C	65292	_C	|以|	4EE5	20197	_C	|及|	53CA	21450	
 _C	|本|	672C	26412	_C	|的|	7684	30340	_C	|假|	5047	20551	_C	|名|	540D	21517	_C	|組|	7D44	32068	
 _C	|合|	5408	21512	_A	|、|	3001	12289	_C	|單|	55AE	21934	_C	|位|	4F4D	20301	_A	|、|	3001	12289	
 */
+

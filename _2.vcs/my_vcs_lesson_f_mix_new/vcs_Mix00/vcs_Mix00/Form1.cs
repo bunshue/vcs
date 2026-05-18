@@ -945,6 +945,22 @@ namespace vcs_Mix00
 
         private void button17_Click(object sender, EventArgs e)
         {
+            char[] bbv = { '蕭', '一', '樓' };
+            string abc = "王濬樓船下益州，金陵王氣黯然收。千尋鐵鎖沉江底，一片降幡出石頭。人世幾回傷往事，山形依舊枕寒流。今逢四海為家日，故壘蕭蕭蘆荻秋。";
+
+            int aa = abc.IndexOfAny(bbv);
+            int bb = abc.IndexOfAny(bbv, 32);
+            int cc = abc.IndexOfAny(bbv, 32, 10);
+            int dd = abc.IndexOfAny(bbv, 32, 20);
+            int ee = abc.IndexOfAny(bbv, 32, 30);
+
+            richTextBox1.Text += "length of abc = " + abc.Length.ToString() + "\n";
+            richTextBox1.Text += "aa = " + aa.ToString() + "\n";
+            richTextBox1.Text += "bb = " + bb.ToString() + "\n";
+            richTextBox1.Text += "cc = " + cc.ToString() + "\n";
+            richTextBox1.Text += "dd = " + dd.ToString() + "\n";
+            richTextBox1.Text += "ee = " + ee.ToString() + "\n";
+
         }
 
         private void button18_Click(object sender, EventArgs e)
