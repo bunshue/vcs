@@ -29,7 +29,7 @@ namespace vcs_Process4
                 listView1.Items.Clear();
                 Process[] processes = Process.GetProcesses(); //取得所有程序
                 richTextBox1.Text += "系統中有： " + processes.Length.ToString() + " 個程序\n";
-                tsslInfo.Text = "進程總數：" + processes.Length.ToString();
+
                 string[] Minfo = new string[6];
                 foreach (Process process in processes)
                 {

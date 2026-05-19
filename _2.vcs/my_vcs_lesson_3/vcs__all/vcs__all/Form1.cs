@@ -36,6 +36,8 @@ namespace vcs__all
 
             // Handle the DoubleClick event to activate the form.
             notifyIcon1.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
+
+            SetupRandonColor();
         }
 
         void show_item_location()
@@ -75,6 +77,9 @@ namespace vcs__all
             groupBox8.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             groupBox9.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             groupBox10.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+
+            panel1.Size = new Size(W - 30, H - 45);
+            panel1.Location = new Point(15, 30);
 
             richTextBox1.Size = new Size(W, H * 2 - 30);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 2);
@@ -192,5 +197,23 @@ namespace vcs__all
             trackBar2.Value = (Int32)numericUpDown3.Value;
         }
 
+        private void panel1_Click(object sender, EventArgs e)
+        {
+            SetupRandonColor();
+        }
+
+        private void SetupRandonColor()
+        {
+            var random = new Random();
+            int rr;
+            int gg;
+            int bb;
+            rr = random.Next(0, 256);
+            gg = random.Next(0, 256);
+            bb = random.Next(0, 256);
+
+            panel1.BackColor = Color.FromArgb(rr, gg, bb);
+            groupBox9.Text = "Panel 顏色 : " + (rr).ToString() + " " + (gg).ToString() + " " + (bb).ToString();
+        }
     }
 }

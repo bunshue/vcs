@@ -76,6 +76,9 @@
             this.bt_system1 = new System.Windows.Forms.Button();
             this.bt_system2 = new System.Windows.Forms.Button();
             this.bt_system0 = new System.Windows.Forms.Button();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.lb_monitor_process = new System.Windows.Forms.Label();
+            this.timer_monitor_process = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -136,7 +139,8 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(906, 531);
+            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.richTextBox1.Location = new System.Drawing.Point(829, 531);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 5;
@@ -296,7 +300,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(929, 569);
+            this.bt_clear.Location = new System.Drawing.Point(846, 571);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(65, 33);
             this.bt_clear.TabIndex = 20;
@@ -573,11 +577,38 @@
             this.bt_system0.UseVisualStyleBackColor = true;
             this.bt_system0.Click += new System.EventHandler(this.bt_system0_Click);
             // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.richTextBox2.Location = new System.Drawing.Point(935, 531);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(100, 100);
+            this.richTextBox2.TabIndex = 45;
+            this.richTextBox2.Text = "監控外部程序運行狀態";
+            // 
+            // lb_monitor_process
+            // 
+            this.lb_monitor_process.AutoSize = true;
+            this.lb_monitor_process.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_monitor_process.Location = new System.Drawing.Point(951, 571);
+            this.lb_monitor_process.Name = "lb_monitor_process";
+            this.lb_monitor_process.Size = new System.Drawing.Size(53, 19);
+            this.lb_monitor_process.TabIndex = 111;
+            this.lb_monitor_process.Text = "label1";
+            // 
+            // timer_monitor_process
+            // 
+            this.timer_monitor_process.Enabled = true;
+            this.timer_monitor_process.Interval = 1000;
+            this.timer_monitor_process.Tick += new System.EventHandler(this.timer_monitor_process_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1092, 650);
+            this.Controls.Add(this.lb_monitor_process);
+            this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button39);
             this.Controls.Add(this.button38);
@@ -626,6 +657,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -678,6 +710,9 @@
         private System.Windows.Forms.Button bt_system1;
         private System.Windows.Forms.Button bt_system2;
         private System.Windows.Forms.Button bt_system0;
+        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.Label lb_monitor_process;
+        private System.Windows.Forms.Timer timer_monitor_process;
     }
 }
 

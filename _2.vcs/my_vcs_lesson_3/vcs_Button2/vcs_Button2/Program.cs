@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_Panel
+namespace vcs_Button2
 {
     static class Program
     {

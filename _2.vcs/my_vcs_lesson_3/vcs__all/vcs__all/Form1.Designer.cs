@@ -44,6 +44,7 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button7 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -99,7 +100,7 @@
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.bt_clear = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -116,6 +117,7 @@
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox0.SuspendLayout();
+            this.groupBox9.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -272,6 +274,18 @@
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Button / MessageBox";
+            // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.Color.Red;
+            this.button7.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button7.Location = new System.Drawing.Point(240, 49);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(110, 55);
+            this.button7.TabIndex = 33;
+            this.button7.Text = "Help";
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button4
             // 
@@ -777,12 +791,14 @@
             // 
             // groupBox9
             // 
+            this.groupBox9.Controls.Add(this.panel1);
             this.groupBox9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.groupBox9.Location = new System.Drawing.Point(475, 487);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(154, 141);
             this.groupBox9.TabIndex = 25;
             this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Panel";
             // 
             // groupBox6
             // 
@@ -853,17 +869,14 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
-            // button7
+            // panel1
             // 
-            this.button7.BackColor = System.Drawing.Color.Red;
-            this.button7.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button7.Location = new System.Drawing.Point(240, 49);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(110, 55);
-            this.button7.TabIndex = 33;
-            this.button7.Text = "Help";
-            this.button7.UseVisualStyleBackColor = false;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Location = new System.Drawing.Point(27, 29);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(100, 100);
+            this.panel1.TabIndex = 0;
+            this.panel1.Click += new System.EventHandler(this.panel1_Click);
             // 
             // Form1
             // 
@@ -915,6 +928,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox0.ResumeLayout(false);
             this.groupBox0.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
@@ -998,6 +1012,7 @@
         private System.Windows.Forms.GroupBox groupBox10;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
