@@ -107,6 +107,7 @@
             this.Name = "TriangleForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "新增三角形";
+            this.Load += new System.EventHandler(this.TriangleForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

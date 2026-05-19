@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_Class8.Properties
+namespace vcs_NewForm1.Properties
 {
 
 

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_Class8
+namespace vcs_Class_all
 {
     public partial class tForm : Form
     {

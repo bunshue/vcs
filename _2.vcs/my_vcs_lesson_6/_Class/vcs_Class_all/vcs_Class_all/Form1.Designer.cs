@@ -60,6 +60,14 @@
             this.button27 = new System.Windows.Forms.Button();
             this.button28 = new System.Windows.Forms.Button();
             this.button29 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt_class04 = new System.Windows.Forms.Button();
+            this.bt_class03 = new System.Windows.Forms.Button();
+            this.lb_count = new System.Windows.Forms.Label();
+            this.bt_class02 = new System.Windows.Forms.Button();
+            this.bt_class01 = new System.Windows.Forms.Button();
+            this.bt_class00 = new System.Windows.Forms.Button();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button9
@@ -95,7 +103,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(648, 46);
+            this.bt_clear.Location = new System.Drawing.Point(686, 553);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(66, 40);
             this.bt_clear.TabIndex = 131;
@@ -181,7 +189,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(628, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(666, 519);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 122;
@@ -390,11 +398,92 @@
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.bt_class04);
+            this.groupBox1.Controls.Add(this.bt_class03);
+            this.groupBox1.Controls.Add(this.lb_count);
+            this.groupBox1.Controls.Add(this.bt_class02);
+            this.groupBox1.Controls.Add(this.bt_class01);
+            this.groupBox1.Controls.Add(this.bt_class00);
+            this.groupBox1.Location = new System.Drawing.Point(628, 10);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(198, 292);
+            this.groupBox1.TabIndex = 156;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "groupBox1";
+            // 
+            // bt_class04
+            // 
+            this.bt_class04.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class04.Location = new System.Drawing.Point(22, 241);
+            this.bt_class04.Name = "bt_class04";
+            this.bt_class04.Size = new System.Drawing.Size(152, 41);
+            this.bt_class04.TabIndex = 19;
+            this.bt_class04.Text = "匯入";
+            this.bt_class04.UseVisualStyleBackColor = true;
+            this.bt_class04.Click += new System.EventHandler(this.bt_class04_Click);
+            // 
+            // bt_class03
+            // 
+            this.bt_class03.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class03.Location = new System.Drawing.Point(22, 194);
+            this.bt_class03.Name = "bt_class03";
+            this.bt_class03.Size = new System.Drawing.Size(152, 41);
+            this.bt_class03.TabIndex = 18;
+            this.bt_class03.Text = "儲存";
+            this.bt_class03.UseVisualStyleBackColor = true;
+            this.bt_class03.Click += new System.EventHandler(this.bt_class03_Click);
+            // 
+            // lb_count
+            // 
+            this.lb_count.AutoSize = true;
+            this.lb_count.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_count.Location = new System.Drawing.Point(18, 18);
+            this.lb_count.Name = "lb_count";
+            this.lb_count.Size = new System.Drawing.Size(37, 24);
+            this.lb_count.TabIndex = 17;
+            this.lb_count.Text = "cnt";
+            // 
+            // bt_class02
+            // 
+            this.bt_class02.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class02.Location = new System.Drawing.Point(22, 148);
+            this.bt_class02.Name = "bt_class02";
+            this.bt_class02.Size = new System.Drawing.Size(152, 41);
+            this.bt_class02.TabIndex = 16;
+            this.bt_class02.Text = "info";
+            this.bt_class02.UseVisualStyleBackColor = true;
+            this.bt_class02.Click += new System.EventHandler(this.bt_class02_Click);
+            // 
+            // bt_class01
+            // 
+            this.bt_class01.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class01.Location = new System.Drawing.Point(22, 101);
+            this.bt_class01.Name = "bt_class01";
+            this.bt_class01.Size = new System.Drawing.Size(152, 41);
+            this.bt_class01.TabIndex = 15;
+            this.bt_class01.Text = "新增學生資料";
+            this.bt_class01.UseVisualStyleBackColor = true;
+            this.bt_class01.Click += new System.EventHandler(this.bt_class01_Click);
+            // 
+            // bt_class00
+            // 
+            this.bt_class00.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class00.Location = new System.Drawing.Point(22, 54);
+            this.bt_class00.Name = "bt_class00";
+            this.bt_class00.Size = new System.Drawing.Size(152, 41);
+            this.bt_class00.TabIndex = 14;
+            this.bt_class00.Text = "新增老師資料";
+            this.bt_class00.UseVisualStyleBackColor = true;
+            this.bt_class00.Click += new System.EventHandler(this.bt_class00_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 642);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button29);
             this.Controls.Add(this.button28);
             this.Controls.Add(this.button27);
@@ -430,6 +519,8 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -468,6 +559,13 @@
         private System.Windows.Forms.Button button27;
         private System.Windows.Forms.Button button28;
         private System.Windows.Forms.Button button29;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button bt_class04;
+        private System.Windows.Forms.Button bt_class03;
+        private System.Windows.Forms.Label lb_count;
+        private System.Windows.Forms.Button bt_class02;
+        private System.Windows.Forms.Button bt_class01;
+        private System.Windows.Forms.Button bt_class00;
     }
 }
 

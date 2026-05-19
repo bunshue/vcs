@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace vcs_Class8
+namespace vcs_Class_all
 {
     class Class1
     {

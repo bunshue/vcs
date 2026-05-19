@@ -25,5 +25,10 @@ namespace vcs_Class7
 
             tObj = new Triangle(tbase, height);
         }
+
+        private void TriangleForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

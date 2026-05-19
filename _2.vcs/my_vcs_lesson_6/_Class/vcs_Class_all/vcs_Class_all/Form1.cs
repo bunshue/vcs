@@ -7,10 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;  // For FileMode
+
 namespace vcs_Class_all
 {
     public partial class Form1 : Form
     {
+        Person[] person_data = new Person[100];  //統一管理物件
+
         public Form1()
         {
             InitializeComponent();
@@ -19,6 +23,8 @@ namespace vcs_Class_all
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            showCounter();
         }
 
         private void show_item_location()
@@ -28,7 +34,7 @@ namespace vcs_Class_all
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
+
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -60,11 +66,14 @@ namespace vcs_Class_all
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            richTextBox1.Size = new Size(400, 800);
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            groupBox1.Size = new Size(200, 340);
+            groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+
+            richTextBox1.Size = new Size(400, 690);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1100, 910);
+            this.Size = new Size(1300, 750);
             this.Text = "vcs_Class_all";
 
             //設定執行後的表單起始位置, 正中央
@@ -77,7 +86,7 @@ namespace vcs_Class_all
             richTextBox1.Clear();
         }
 
-        class Student
+        class StudentScore
         {
             //第一個靜態方法-計算總分
             public static uint Total(uint a, uint b, uint c)
@@ -102,8 +111,8 @@ namespace vcs_Class_all
             uint chin = 85;
 
             //直接以類別來呼叫靜態方法Total()、Average()
-            uint score = Student.Total(math, eng, chin);
-            float avg = Student.Average("平均分數", score);
+            uint score = StudentScore.Total(math, eng, chin);
+            float avg = StudentScore.Average("平均分數", score);
 
             Console.WriteLine(name = " " + "總分 : " + score + "\t平均 : " + avg);
         }
@@ -353,7 +362,7 @@ namespace vcs_Class_all
 
         //------------------------------------------------------------  # 60個
 
-        public class Person
+        public class PersonInfo
         {
             public string Name;
             public int Age;
@@ -415,7 +424,7 @@ namespace vcs_Class_all
         private void button11_Click(object sender, EventArgs e)
         {
             //測試 MyDateTime 2
-            Person av1 = new Person();
+            PersonInfo av1 = new PersonInfo();
             av1.Name = "松島かえで";
             av1.birthday = DateTime.Parse("1982年11月07日");
             av1.Age = 18;
@@ -524,6 +533,153 @@ namespace vcs_Class_all
         private void button29_Click(object sender, EventArgs e)
         {
         }
+
+        //6060
+
+        private void showCounter()
+        {
+            lb_count.Text = "目前共有 " + Person.counter() + " 人, ";
+            lb_count.Text += "老師 " + Teacher.counter() + " 人, ";
+            lb_count.Text += "學生 " + Student.counter() + " 人";
+
+            richTextBox1.Text += "目前共有 " + Person.counter() + " 人, ";
+            richTextBox1.Text += "老師 " + Teacher.counter() + " 人, ";
+            richTextBox1.Text += "學生 " + Student.counter() + " 人\n";
+        }
+
+        private void bt_class00_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "新增老師資料, 建立新表單, 若按OK, 回傳新表單的資料\n";
+            tForm tf = new tForm();  //建立老師表單
+            if (tf.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.Text += "新增老師資料 OK\t加入tf資料之內部物件\n";
+                int pos = Person.counter() - 1;
+                person_data[pos] = tf.tObj;
+                richTextBox1.Text += "新增的老師\r\n" + person_data[pos].show() + "\n";
+                showCounter();
+            }
+            else
+            {
+                richTextBox1.Text += "新增老師資料 Cancel\n";
+            }
+            tf.Dispose(); //釋放表單資源
+        }
+
+        private void bt_class01_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "新增學生資料, 建立新表單, 若按OK, 回傳新表單的資料\n";
+            sForm sf = new sForm(); //建立學生表單
+            if (sf.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.Text += "新增學生資料 OK\t加入sf資料之內部物件\n";
+                int pos = Person.counter() - 1;
+                person_data[pos] = sf.sObj;
+                richTextBox1.Text += "新增的學生\r\n" + person_data[pos].show() + "\n";
+                showCounter();
+            }
+            else
+            {
+                richTextBox1.Text += "新增學生資料 Cancel\n";
+            }
+            sf.Dispose();  //釋放表單資源
+        }
+
+        private void bt_class02_Click(object sender, EventArgs e)
+        {
+            string str = "<<< 成員列表 >>>\r\n";
+            for (int i = 0; i < Person.counter(); i++)
+                str += person_data[i].show() + "--------------------\r\n";
+            richTextBox1.Text += str;
+
+
+
+            richTextBox1.Text += "共有成員 " + Person.counter().ToString() + " 人\n";
+            richTextBox1.Text += "<<< 成員列表 >>>\n";
+            for (int i = 0; i < Person.counter(); i++)
+            {
+                richTextBox1.Text += person_data[i].show() + "--------------------\n";
+            }
+        }
+
+        private void bt_class03_Click(object sender, EventArgs e)
+        {
+            FileStream fs = new FileStream("tmp_SchoolMemberDataFile.dat", FileMode.Create);
+
+            BinaryWriter bw = new BinaryWriter(fs);
+
+            for (int i = 0; i < Person.counter(); i++)
+            {
+                string classname = person_data[i].GetType().Name;  //類別名稱
+
+                bw.Write(classname);  //儲存類別名稱
+
+                bw.Write(person_data[i].getName());  //儲存父類別Person的成員
+                bw.Write(person_data[i].getAge());
+                bw.Write(person_data[i].getGender());
+
+                Date d = person_data[i].getDate();
+
+                bw.Write(d.getYear());
+                bw.Write(d.getMonth());
+                bw.Write(d.getDay());
+
+                if (classname == "Teacher") //儲存子類別Teacher的成員
+                {
+                    bw.Write(((Teacher)person_data[i]).getRank());
+                }
+                else if (classname == "Student") //儲存子類別Student的成員
+                {
+                    bw.Write(((Student)person_data[i]).getChinese());
+                    bw.Write(((Student)person_data[i]).getMath());
+                }
+            }
+
+            bw.Flush();
+            bw.Close();
+            fs.Close();
+        }
+
+        private void bt_class04_Click(object sender, EventArgs e)
+        {
+            FileStream fs = new FileStream("../../SchoolMemberDataFile.dat", FileMode.Open);
+
+            BinaryReader br = new BinaryReader(fs);
+
+            int i = Person.counter(); //以附加的方式匯入
+
+            while (br.PeekChar() >= 0)
+            {
+                string classname = br.ReadString(); //讀取類別名稱
+
+                string name = br.ReadString(); //讀取父類別Person的成員
+                int age = br.ReadInt32();
+                char gender = br.ReadChar();
+
+                int year = br.ReadInt32();
+                int month = br.ReadInt32();
+                int day = br.ReadInt32();
+
+                if (classname == "Teacher")
+                {
+                    //讀取子父類別Teacher的成員，建立Teacher物件                    
+                    person_data[i] = new Teacher(name, age, gender, new Date(day, month, year), br.ReadString());
+                }
+                else if (classname == "Student")
+                {
+                    //讀取子父類別Student的成員，建立Student物件
+                    person_data[i] = new Student(name, age, gender, new Date(day, month, year), br.ReadInt32(), br.ReadInt32());
+                }
+                i++;
+            }
+
+            br.Close();
+            fs.Close();
+
+            showCounter();
+        }
+
+        //6060
     }
 
     //不重複之陣列
