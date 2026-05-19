@@ -186,7 +186,7 @@ namespace vcs_Button1
             btn_word_10.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             btn_word_11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             btn_word_12.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            btn_flip.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            btn_flip.Location = new Point(x_st + dx * 3, y_st + dy * 2 - 45);
             btn_word_20.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             btn_word_21.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             btn_word_22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
@@ -400,117 +400,141 @@ namespace vcs_Button1
 
         private void btn_flip_Click(object sender, EventArgs e)
         {
-            //臨江仙 幾度夕陽紅 左右顛倒
-
-            Graphics g;
-
-            Font f = new Font("微軟正黑體", 64);
-            //f.Style = (int)FontStyle.Bold;
-
-            g = this.btn_word_10.CreateGraphics();
-            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
-            g.ScaleTransform(-1, 1);
-            g.DrawString("臨", f, Brushes.Black, -110, 0);
-
-            g = this.btn_word_11.CreateGraphics();
-            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
-            g.ScaleTransform(-1, 1);
-            g.DrawString("江", f, Brushes.Black, -110, 0);
-
-            g = this.btn_word_12.CreateGraphics();
-            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
-            g.ScaleTransform(-1, 1);
-            g.DrawString("仙", f, Brushes.Black, -110, 0);
-
-            //水平Mirror處理中~~~~~~
-            int xx;
-            int yy;
-            int ww;
-            int hh;
-
-            Bitmap bitmap1;
-            Bitmap bitmap2;
-
-            bitmap1 = new Bitmap(btn_word_20.BackgroundImage);
-            bitmap2 = new Bitmap(btn_word_20.BackgroundImage);
-            ww = bitmap2.Width / 2;
-            hh = bitmap2.Height / 1;
-            for (yy = 0; yy < hh; yy++)
+            if (btn_flip.Text == "左右顛倒")
             {
-                for (xx = 0; xx < ww; xx++)
-                {
-                    Color pp = bitmap2.GetPixel(bitmap1.Width - xx - 1, yy);
-                    bitmap2.SetPixel(bitmap2.Width - xx - 1, yy, bitmap2.GetPixel(xx, yy));
-                    bitmap2.SetPixel(xx, yy, pp);
-                }
-            }
-            btn_word_30.BackgroundImage = bitmap2;
-            Application.DoEvents();
+                btn_flip.Text = "恢復";
 
-            bitmap1 = new Bitmap(btn_word_21.BackgroundImage);
-            bitmap2 = new Bitmap(btn_word_21.BackgroundImage);
-            ww = bitmap2.Width / 2;
-            hh = bitmap2.Height / 1;
-            for (yy = 0; yy < hh; yy++)
+                //臨江仙 幾度夕陽紅 左右顛倒
+
+                Graphics g;
+
+                Font f = new Font("微軟正黑體", 64);
+                //f.Style = (int)FontStyle.Bold;
+
+                g = this.btn_word_10.CreateGraphics();
+                g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+                g.ScaleTransform(-1, 1);
+                g.DrawString("臨", f, Brushes.Black, -110, 0);
+
+                g = this.btn_word_11.CreateGraphics();
+                g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+                g.ScaleTransform(-1, 1);
+                g.DrawString("江", f, Brushes.Black, -110, 0);
+
+                g = this.btn_word_12.CreateGraphics();
+                g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+                g.ScaleTransform(-1, 1);
+                g.DrawString("仙", f, Brushes.Black, -110, 0);
+
+                //水平Mirror處理中~~~~~~
+                int xx;
+                int yy;
+                int ww;
+                int hh;
+
+                Bitmap bitmap1;
+                Bitmap bitmap2;
+
+                bitmap1 = new Bitmap(btn_word_20.BackgroundImage);
+                bitmap2 = new Bitmap(btn_word_20.BackgroundImage);
+                ww = bitmap2.Width / 2;
+                hh = bitmap2.Height / 1;
+                for (yy = 0; yy < hh; yy++)
+                {
+                    for (xx = 0; xx < ww; xx++)
+                    {
+                        Color pp = bitmap2.GetPixel(bitmap1.Width - xx - 1, yy);
+                        bitmap2.SetPixel(bitmap2.Width - xx - 1, yy, bitmap2.GetPixel(xx, yy));
+                        bitmap2.SetPixel(xx, yy, pp);
+                    }
+                }
+                btn_word_30.BackgroundImage = bitmap2;
+                Application.DoEvents();
+
+                bitmap1 = new Bitmap(btn_word_21.BackgroundImage);
+                bitmap2 = new Bitmap(btn_word_21.BackgroundImage);
+                ww = bitmap2.Width / 2;
+                hh = bitmap2.Height / 1;
+                for (yy = 0; yy < hh; yy++)
+                {
+                    for (xx = 0; xx < ww; xx++)
+                    {
+                        Color pp = bitmap2.GetPixel(bitmap1.Width - xx - 1, yy);
+                        bitmap2.SetPixel(bitmap2.Width - xx - 1, yy, bitmap2.GetPixel(xx, yy));
+                        bitmap2.SetPixel(xx, yy, pp);
+                    }
+                }
+                btn_word_31.BackgroundImage = bitmap2;
+                Application.DoEvents();
+
+                bitmap1 = new Bitmap(btn_word_22.BackgroundImage);
+                bitmap2 = new Bitmap(btn_word_22.BackgroundImage);
+                ww = bitmap2.Width / 2;
+                hh = bitmap2.Height / 1;
+                for (yy = 0; yy < hh; yy++)
+                {
+                    for (xx = 0; xx < ww; xx++)
+                    {
+                        Color pp = bitmap2.GetPixel(bitmap1.Width - xx - 1, yy);
+                        bitmap2.SetPixel(bitmap2.Width - xx - 1, yy, bitmap2.GetPixel(xx, yy));
+                        bitmap2.SetPixel(xx, yy, pp);
+                    }
+                }
+                btn_word_32.BackgroundImage = bitmap2;
+                Application.DoEvents();
+
+                bitmap1 = new Bitmap(btn_word_23.BackgroundImage);
+                bitmap2 = new Bitmap(btn_word_23.BackgroundImage);
+                ww = bitmap2.Width / 2;
+                hh = bitmap2.Height / 1;
+                for (yy = 0; yy < hh; yy++)
+                {
+                    for (xx = 0; xx < ww; xx++)
+                    {
+                        Color pp = bitmap2.GetPixel(bitmap1.Width - xx - 1, yy);
+                        bitmap2.SetPixel(bitmap2.Width - xx - 1, yy, bitmap2.GetPixel(xx, yy));
+                        bitmap2.SetPixel(xx, yy, pp);
+                    }
+                }
+                btn_word_33.BackgroundImage = bitmap2;
+                Application.DoEvents();
+
+                bitmap1 = new Bitmap(btn_word_24.BackgroundImage);
+                bitmap2 = new Bitmap(btn_word_24.BackgroundImage);
+                ww = bitmap2.Width / 2;
+                hh = bitmap2.Height / 1;
+                for (yy = 0; yy < hh; yy++)
+                {
+                    for (xx = 0; xx < ww; xx++)
+                    {
+                        Color pp = bitmap2.GetPixel(bitmap1.Width - xx - 1, yy);
+                        bitmap2.SetPixel(bitmap2.Width - xx - 1, yy, bitmap2.GetPixel(xx, yy));
+                        bitmap2.SetPixel(xx, yy, pp);
+                    }
+                }
+                btn_word_34.BackgroundImage = bitmap2;
+            }
+            else
             {
-                for (xx = 0; xx < ww; xx++)
-                {
-                    Color pp = bitmap2.GetPixel(bitmap1.Width - xx - 1, yy);
-                    bitmap2.SetPixel(bitmap2.Width - xx - 1, yy, bitmap2.GetPixel(xx, yy));
-                    bitmap2.SetPixel(xx, yy, pp);
-                }
+                btn_flip.Text = "左右顛倒";
+
+                Graphics g;
+
+                g = this.btn_word_10.CreateGraphics();
+                g.Clear(Color.LightCoral);
+
+                g = this.btn_word_11.CreateGraphics();
+                g.Clear(Color.LightCoral);
+
+                g = this.btn_word_12.CreateGraphics();
+                g.Clear(Color.LightCoral);
+
+                btn_word_30.BackgroundImage = null;
+                btn_word_31.BackgroundImage = null;
+                btn_word_32.BackgroundImage = null;
+                btn_word_33.BackgroundImage = null;
+                btn_word_34.BackgroundImage = null;
             }
-            btn_word_31.BackgroundImage = bitmap2;
-            Application.DoEvents();
-
-            bitmap1 = new Bitmap(btn_word_22.BackgroundImage);
-            bitmap2 = new Bitmap(btn_word_22.BackgroundImage);
-            ww = bitmap2.Width / 2;
-            hh = bitmap2.Height / 1;
-            for (yy = 0; yy < hh; yy++)
-            {
-                for (xx = 0; xx < ww; xx++)
-                {
-                    Color pp = bitmap2.GetPixel(bitmap1.Width - xx - 1, yy);
-                    bitmap2.SetPixel(bitmap2.Width - xx - 1, yy, bitmap2.GetPixel(xx, yy));
-                    bitmap2.SetPixel(xx, yy, pp);
-                }
-            }
-            btn_word_32.BackgroundImage = bitmap2;
-            Application.DoEvents();
-
-            bitmap1 = new Bitmap(btn_word_23.BackgroundImage);
-            bitmap2 = new Bitmap(btn_word_23.BackgroundImage);
-            ww = bitmap2.Width / 2;
-            hh = bitmap2.Height / 1;
-            for (yy = 0; yy < hh; yy++)
-            {
-                for (xx = 0; xx < ww; xx++)
-                {
-                    Color pp = bitmap2.GetPixel(bitmap1.Width - xx - 1, yy);
-                    bitmap2.SetPixel(bitmap2.Width - xx - 1, yy, bitmap2.GetPixel(xx, yy));
-                    bitmap2.SetPixel(xx, yy, pp);
-                }
-            }
-            btn_word_33.BackgroundImage = bitmap2;
-            Application.DoEvents();
-
-            bitmap1 = new Bitmap(btn_word_24.BackgroundImage);
-            bitmap2 = new Bitmap(btn_word_24.BackgroundImage);
-            ww = bitmap2.Width / 2;
-            hh = bitmap2.Height / 1;
-            for (yy = 0; yy < hh; yy++)
-            {
-                for (xx = 0; xx < ww; xx++)
-                {
-                    Color pp = bitmap2.GetPixel(bitmap1.Width - xx - 1, yy);
-                    bitmap2.SetPixel(bitmap2.Width - xx - 1, yy, bitmap2.GetPixel(xx, yy));
-                    bitmap2.SetPixel(xx, yy, pp);
-                }
-            }
-            btn_word_34.BackgroundImage = bitmap2;
-
-
         }
 
         //------------------------------------------------------------  # 60個

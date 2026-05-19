@@ -252,9 +252,9 @@
             // 
             // btn_flip
             // 
-            this.btn_flip.Location = new System.Drawing.Point(680, 351);
+            this.btn_flip.Location = new System.Drawing.Point(564, 316);
             this.btn_flip.Name = "btn_flip";
-            this.btn_flip.Size = new System.Drawing.Size(110, 34);
+            this.btn_flip.Size = new System.Drawing.Size(110, 40);
             this.btn_flip.TabIndex = 248;
             this.btn_flip.Text = "左右顛倒";
             this.btn_flip.UseVisualStyleBackColor = true;

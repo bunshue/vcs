@@ -38,6 +38,7 @@ namespace vcs_Chart2
             show_item_location();
 
             comboBox1.SelectedIndex = 0;
+
             chart1.Size = new Size(CHART_WIDTH, CHART_HEIGHT);       //改變Cahrt大小
             chart1.Series[0].ChartType = chartType;
         }
@@ -193,6 +194,7 @@ namespace vcs_Chart2
                     chartType = SeriesChartType.Point;
                     richTextBox1.Text += "點狀圖類型\n"; break;
             }
+            button0_Click(sender, e);
         }
 
         private double rad(double d)
