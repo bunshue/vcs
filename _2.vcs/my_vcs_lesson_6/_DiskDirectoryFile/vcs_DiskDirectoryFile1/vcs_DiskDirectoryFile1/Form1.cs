@@ -33,7 +33,7 @@ namespace vcs_DiskDirectoryFile1
             int y_st = 30;
             int dx = 200 + 10;
             int dy = 50 + 5;
-            
+
             label0.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 20);
             label1.Location = new Point(x_st + dx * 1, y_st + dy * 0 - 20);
             label2.Location = new Point(x_st + dx * 2, y_st + dy * 0 - 20);
@@ -80,13 +80,16 @@ namespace vcs_DiskDirectoryFile1
             bt_files11.Location = new Point(x_st + dx * 2, y_st + dy * 11);
             bt_files12.Location = new Point(x_st + dx * 2, y_st + dy * 12);
 
-            richTextBox1.Size = new Size(400, 600);
+            richTextBox1.Size = new Size(430, 710);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + 0);
-
-            //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1100, 800);
+            this.Text = "vcs_DiskDirectoryFile1";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -1279,3 +1282,22 @@ namespace vcs_DiskDirectoryFile1
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+
