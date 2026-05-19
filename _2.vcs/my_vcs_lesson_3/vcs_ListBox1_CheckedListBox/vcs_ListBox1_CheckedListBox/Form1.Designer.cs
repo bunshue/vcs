@@ -58,11 +58,11 @@
             this.button21 = new System.Windows.Forms.Button();
             this.button22 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button23 = new System.Windows.Forms.Button();
             this.button24 = new System.Windows.Forms.Button();
+            this.button23 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -294,7 +294,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(130, 50);
             this.button15.TabIndex = 21;
-            this.button15.Text = "一個字串陣列一次賦值給ListBox";
+            this.button15.Text = "字串一維陣列轉CLB";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -382,31 +382,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "使用 checkedListBox";
             // 
-            // checkedListBox2
+            // button24
             // 
-            this.checkedListBox2.FormattingEnabled = true;
-            this.checkedListBox2.Location = new System.Drawing.Point(6, 21);
-            this.checkedListBox2.Name = "checkedListBox2";
-            this.checkedListBox2.Size = new System.Drawing.Size(250, 242);
-            this.checkedListBox2.TabIndex = 0;
-            this.checkedListBox2.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox2_ItemCheck);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label3.Location = new System.Drawing.Point(261, 26);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(187, 15);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "請選擇要新增或刪除的選項";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(263, 49);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(181, 22);
-            this.textBox2.TabIndex = 8;
+            this.button24.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button24.Location = new System.Drawing.Point(356, 167);
+            this.button24.Name = "button24";
+            this.button24.Size = new System.Drawing.Size(75, 36);
+            this.button24.TabIndex = 30;
+            this.button24.Text = "刪除";
+            this.button24.UseVisualStyleBackColor = true;
+            this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
             // button23
             // 
@@ -419,16 +404,31 @@
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
-            // button24
+            // textBox2
             // 
-            this.button24.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button24.Location = new System.Drawing.Point(356, 167);
-            this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(75, 36);
-            this.button24.TabIndex = 30;
-            this.button24.Text = "刪除";
-            this.button24.UseVisualStyleBackColor = true;
-            this.button24.Click += new System.EventHandler(this.button24_Click);
+            this.textBox2.Location = new System.Drawing.Point(263, 49);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(181, 22);
+            this.textBox2.TabIndex = 8;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label3.Location = new System.Drawing.Point(261, 26);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(187, 15);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "請選擇要新增或刪除的選項";
+            // 
+            // checkedListBox2
+            // 
+            this.checkedListBox2.FormattingEnabled = true;
+            this.checkedListBox2.Location = new System.Drawing.Point(6, 21);
+            this.checkedListBox2.Name = "checkedListBox2";
+            this.checkedListBox2.Size = new System.Drawing.Size(250, 242);
+            this.checkedListBox2.TabIndex = 0;
+            this.checkedListBox2.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox2_ItemCheck);
             // 
             // Form1
             // 

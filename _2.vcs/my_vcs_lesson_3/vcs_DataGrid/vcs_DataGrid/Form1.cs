@@ -19,6 +19,7 @@ namespace vcs_DataGrid
         private System.ComponentModel.IContainer components;
         private System.Windows.Forms.DataGrid dataGrid1;
         private CourseTable courseTable;
+        private RichTextBox richTextBox1;
         public string[] curr = new string[4];
 
         public Form1()
@@ -57,7 +58,7 @@ namespace vcs_DataGrid
             base.Dispose(disposing);
         }
 
-        #region Windows 窗體設計器生成的代碼
+        //#region Windows 窗體設計器生成的代碼
         /// <summary>
         /// 設計器支持所需的方法 - 不要使用代碼編輯器修改
         /// 此方法的內容。
@@ -69,6 +70,7 @@ namespace vcs_DataGrid
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.dataGrid1 = new System.Windows.Forms.DataGrid();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -91,18 +93,26 @@ namespace vcs_DataGrid
             // dataGrid1
             // 
             this.dataGrid1.DataMember = "";
-            this.dataGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGrid1.HeaderForeColor = System.Drawing.SystemColors.ControlText;
             this.dataGrid1.Location = new System.Drawing.Point(0, 0);
             this.dataGrid1.Name = "dataGrid1";
-            this.dataGrid1.Size = new System.Drawing.Size(637, 384);
+            this.dataGrid1.Size = new System.Drawing.Size(615, 602);
             this.dataGrid1.TabIndex = 15;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(621, 0);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(461, 602);
+            this.richTextBox1.TabIndex = 16;
+            this.richTextBox1.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 15);
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.ClientSize = new System.Drawing.Size(637, 384);
+            this.ClientSize = new System.Drawing.Size(1094, 626);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.dataGrid1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -111,7 +121,7 @@ namespace vcs_DataGrid
             this.ResumeLayout(false);
 
         }
-        #endregion
+        //#endregion
 
         /// <summary>
         /// 應用程式的主要進入點。
@@ -129,6 +139,5 @@ namespace vcs_DataGrid
             curr[2] = "化學";
             curr[3] = "物理";
         }
-
     }
 }

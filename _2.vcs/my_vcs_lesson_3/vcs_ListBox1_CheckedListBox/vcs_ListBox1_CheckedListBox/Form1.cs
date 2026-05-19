@@ -142,16 +142,7 @@ namespace vcs_ListBox1_CheckedListBox
 
         private void button7_Click(object sender, EventArgs e)
         {
-            int i;
-            int len = listBox1.Items.Count;
-            string[] items = new string[len];
-            listBox1.Items.CopyTo(items, 0);    //listBox內容 拷貝 成 字串陣列
-
-            richTextBox1.Text += "共 " + len.ToString() + " 項\n";
-            for (i = 0; i < len; i++)
-            {
-                richTextBox1.Text += "第 " + i.ToString() + " 項\t" + items[i] + "\n";
-            }
+            show_ListBox_content(listBox1);
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -269,24 +260,11 @@ namespace vcs_ListBox1_CheckedListBox
 
         private void button15_Click(object sender, EventArgs e)
         {
-            //做一個字串陣列 一次賦值給ListBox
-
-            //字串陣列的寫法(一維)：
+            //字串一維陣列
             String[] weekday = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
-
-            //清除listBox
-            listBox1.DataSource = null;
-            listBox1.Items.Clear();
-
-            listBox1.DataSource = weekday;
-
-
 
             // 將Product陣列的所有選項放入checkedListBox1內
             checkedListBox1.Items.AddRange(weekday);
-
-
-
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -339,5 +317,39 @@ namespace vcs_ListBox1_CheckedListBox
             //將勾選的項目以文字方塊顯示
             textBox2.Text = checkedListBox2.SelectedItem.ToString();
         }
+
+        void show_ListBox_content(ListBox lb)
+        {
+            richTextBox1.Text += "顯示 ListBox 的內容\n";
+
+            int len = lb.Items.Count;
+            string[] items = new string[len];
+            lb.Items.CopyTo(items, 0);    //listBox內容 拷貝 成 字串陣列
+
+            richTextBox1.Text += "共 " + len.ToString() + " 項\n";
+            for (int i = 0; i < len; i++)
+            {
+                richTextBox1.Text += "第 " + i.ToString() + " 項 : " + items[i] + "\n";
+            }
+        }
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+ */
+

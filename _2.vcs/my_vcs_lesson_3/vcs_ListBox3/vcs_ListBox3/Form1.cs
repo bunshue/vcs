@@ -7,16 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-
-//listBox 的屬性 SelectionMode 改成 MultiExtended   可多選
-
-namespace vcs_ListBox2
+namespace vcs_ListBox3
 {
     public partial class Form1 : Form
     {
         public Form1()
         {
             InitializeComponent();
+        }
+
+        // Enable and disable buttons.
+        private void SetButtonsEditable()
+        {
+            button1.Enabled = (listBox1.SelectedItems.Count > 0);
+            button2.Enabled = (listBox1.Items.Count > 0);
+            button4.Enabled = (listBox2.SelectedItems.Count > 0);
+            button3.Enabled = (listBox2.Items.Count > 0);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -73,17 +79,5 @@ namespace vcs_ListBox2
         {
             SetButtonsEditable();
         }
-
-        // Enable and disable buttons.
-        private void SetButtonsEditable()
-        {
-            button1.Enabled = (listBox1.SelectedItems.Count > 0);
-            button2.Enabled = (listBox1.Items.Count > 0);
-            button4.Enabled = (listBox2.SelectedItems.Count > 0);
-            button3.Enabled = (listBox2.Items.Count > 0);
-        }
-
-
-
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_ListBox2", "vcs_ListBox2\vcs_ListBox2.csproj", "{A22D8ACB-A14E-4040-A1FF-37EFFA7600BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_ListBox3", "vcs_ListBox3\vcs_ListBox3.csproj", "{A22D8ACB-A14E-4040-A1FF-37EFFA7600BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

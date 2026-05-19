@@ -48,6 +48,8 @@ namespace vcs_test_all_00_Usually
         public VideoCaptureDevice Cam = null;
         //WebCam SP
 
+        //------------------------------------------------------------  # 60個
+
         //移動無邊框窗體1 ST
         [DllImport("user32.dll")]
         public static extern bool ReleaseCapture();
@@ -57,6 +59,8 @@ namespace vcs_test_all_00_Usually
         public const int SC_MOVE = 0xF010;
         public const int HTCAPTION = 0x0002;
         //移動無邊框窗體1 SP
+
+        //------------------------------------------------------------  # 60個
 
         //移動無邊框窗體2 ST
         private const int WM_NCHITTEST = 0x84;
@@ -78,6 +82,7 @@ namespace vcs_test_all_00_Usually
         }
         //移動無邊框窗體2 SP
 
+        //------------------------------------------------------------  # 60個
 
         //移動無邊框窗體3 ST
         Point mouseOffset3;  // 移動無邊框窗體用
@@ -149,7 +154,6 @@ namespace vcs_test_all_00_Usually
             //移動無邊框窗體4 SP
         }
 
-
         private void show_groupBox_player_location(int xx, int yy)
         {
             //button
@@ -211,7 +215,6 @@ namespace vcs_test_all_00_Usually
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -378,7 +381,6 @@ namespace vcs_test_all_00_Usually
                 this.Top += e.Y - mouseOffset3.Y;
             }
             //移動無邊框窗體3 SP
-
         }
 
         private void Form1_MouseUp(object sender, MouseEventArgs e)
@@ -435,16 +437,14 @@ namespace vcs_test_all_00_Usually
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int x;
-            int y;
             richTextBox1.Text += "y = sin(x)\n";
-            for (x = 0; x <= 360; x += 30)
+            for (int x = 0; x <= 360; x += 30)
             {
-                y = (int)(100 * sind(x));
+                int y = (int)(100 * sind(x));
                 richTextBox1.Text += "x = " + x.ToString() + ", y = " + y.ToString() + "\n";
             }
 
-            for (x = 0; x <= 360; x += 30)
+            for (int x = 0; x <= 360; x += 30)
             {
                 richTextBox1.Text += "x = " + x.ToString() + "\t" + (rad(x) / Math.PI).ToString() + " pi rad\t" + 100 * sind(x) + "\n";
             }
@@ -489,7 +489,6 @@ namespace vcs_test_all_00_Usually
                 }
             }
         }
-
 
         //WebCam ST
         private void button5_Click(object sender, EventArgs e)
@@ -570,12 +569,10 @@ namespace vcs_test_all_00_Usually
 
             Graphics g = Graphics.FromImage(bm);
 
-            int w;
-            int h;
             try
             {
-                w = bm.Width;
-                h = bm.Height;
+                int w = bm.Width;
+                int h = bm.Height;
             }
             catch (Exception ex)
             {
@@ -609,6 +606,8 @@ namespace vcs_test_all_00_Usually
         }
         //WebCam SP
 
+        //------------------------------------------------------------  # 60個
+
         //顯示訊息 ST
         int timer_display_show_main_mesg_count = 0;
         int timer_display_show_main_mesg_count_target = 0;
@@ -634,16 +633,14 @@ namespace vcs_test_all_00_Usually
                 }
             }
         }
-
         //顯示訊息 SP
+
+        //------------------------------------------------------------  # 60個
 
         private void button6_Click(object sender, EventArgs e)
         {
-            int i;
-            Int64 total_size = 0;
-
-            total_size = 123;
-            for (i = 1; i < 20; i++)
+            Int64 total_size = 123;
+            for (int i = 1; i < 20; i++)
             {
                 total_size *= i;
                 richTextBox1.Text += "total_size = " + total_size.ToString() + "\t檔案大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
@@ -824,7 +821,6 @@ namespace vcs_test_all_00_Usually
             total_files++;
             folder_size += fi.Length;
             folder_files++;
-
             richTextBox1.Text += fi.Name + "\t" + fi.Length.ToString() + "\n";
         }
 
@@ -838,7 +834,6 @@ namespace vcs_test_all_00_Usually
             foreach (DirectoryInfo dir in idr)
             {
                 richTextBox1.Text += "取得資料夾 : " + dir.FullName + "\n";
-
 
                 FileInfo[] files1 = dir.GetFiles();
 
@@ -860,7 +855,7 @@ namespace vcs_test_all_00_Usually
             richTextBox1.Text += "共取得檔案 " + total_number_files.ToString() + " 個\n";
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button12_Click(object sender, EventArgs e)
         {
@@ -965,8 +960,9 @@ namespace vcs_test_all_00_Usually
             //richTextBox1.Text += "dx, dy : (" + dx.ToString() + ", " + dy.ToString() + ")\n";
             pbox.Location = new Point(pbox.Location.X + dx, pbox.Location.Y + dy);
         }
-
         //建立無邊框移動之pictureBox SP
+
+        //------------------------------------------------------------  # 60個
 
         //移動無邊框窗體4 ST
         private Point mouseOffset4; //記錄鼠標指針的坐標
@@ -1001,7 +997,6 @@ namespace vcs_test_all_00_Usually
                 flag_mouse_down = false;
             }
         }
-
         //移動無邊框窗體4 SP
 
     }

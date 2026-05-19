@@ -1,4 +1,4 @@
-﻿namespace vcs_ListBox2
+﻿namespace vcs_ListBox3
 {
     partial class Form1
     {

@@ -121,6 +121,10 @@ namespace vcs_ListBox1
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+
+            //清除listBox
+            listBox1.DataSource = null;
+            listBox1.Items.Clear();
         }
 
         //------------------------------------------------------------  # 60個
@@ -295,7 +299,7 @@ namespace vcs_ListBox1
             string[] ZodiacSign = { "水瓶座", "雙魚座", "牡羊座", "金牛座", "雙子座", "巨蟹座" };
             listBox4.DataSource = ZodiacSign;//字串一維陣列直接餵給listBox
 
-            //3030
+            //------------------------------  # 30個
 
             richTextBox1.Text += "字串一維陣列 轉 List 轉 listBox\n";
 
@@ -303,7 +307,7 @@ namespace vcs_ListBox1
             List<string> ZodiacSignList = new List<string>(ZodiacSign);       //string 轉 List
             listBox5.DataSource = ZodiacSignList;
 
-            //3030
+            //------------------------------  # 30個
 
             //使用字串List
             List<string> ZodiacSignList2 = new List<string>() 
@@ -443,6 +447,20 @@ namespace vcs_ListBox1
 
 
 /*  可搬出
+
+*/
+
+
+/*
+
+            //字串一維陣列
+            String[] weekday = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+
+            //清除listBox
+            listBox1.DataSource = null;
+            listBox1.Items.Clear();
+
+            listBox1.DataSource = weekday;
 
 */
 
