@@ -11,7 +11,6 @@ using System.IO;        //for Directory, File
 using System.Diagnostics;   //for Process
 using System.Threading;
 using System.Threading.Tasks;
-
 using System.Collections.Concurrent;    //for ConcurrentQueue
 
 namespace vcs_LOG
@@ -55,10 +54,11 @@ namespace vcs_LOG
             int dx = 200 + 10;
             int dy = 60 + 10;
 
-            richTextBox1.Size = new Size(400, 600);
+            richTextBox1.Size = new Size(400, 690);
+            richTextBox1.Location = new Point(x_st + dx * 2 + 50, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(920, 670);
+            this.Size = new Size(920, 750);
             this.Text = "vcs_LOG";
 
             //設定執行後的表單起始位置, 正中央
@@ -111,7 +111,6 @@ namespace vcs_LOG
                 // Move the main log file.
                 File.Move(file_name, file_name + ".0001");
             }
-
             // Write the text.
             File.AppendAllText(file_name, new_text + '\n');
         }
@@ -249,9 +248,7 @@ namespace vcs_LOG
             public string Message { get; set; }
             public FlashLogLevel Level { get; set; }
             public Exception Exception { get; set; }
-
         }
-
 
         /// <summary>
         /// 记录消息Queue
