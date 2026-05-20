@@ -76,9 +76,9 @@ namespace vcs_Chart4
 
         void draw_chart0()
         {
-            //直條圖, 自定義座標軸刻度標籤
+            // 長條圖, 自定義座標軸刻度標籤
 
-            //清除圖表
+            // 清除圖表
             chart0.Series.Clear();
             chart0.Titles.Clear();
             chart0.ChartAreas[0].AxisX.CustomLabels.Clear();
@@ -116,13 +116,12 @@ namespace vcs_Chart4
 
         void draw_chart1()
         {
+            //雷達圖1
+
             //清除圖表
             chart1.Series.Clear();
             chart1.Titles.Clear();
-
-            //雷達圖1
             chart1.ChartAreas.Clear();
-            chart1.Series.Clear();
 
             chart1.Size = new Size(500, 500);
             ChartArea area = chart1.ChartAreas.Add("NewArea");
@@ -147,13 +146,12 @@ namespace vcs_Chart4
 
         void draw_chart2()
         {
+            //雷達圖2
+
             //清除圖表
             chart2.Series.Clear();
             chart2.Titles.Clear();
-
-            //雷達圖2
             chart2.ChartAreas.Clear();
-            chart2.Series.Clear();
 
             chart2.Size = new Size(500, 500);
             ChartArea area = chart2.ChartAreas.Add("NewArea");
@@ -188,11 +186,10 @@ namespace vcs_Chart4
 
             //------------------------------------------------------------  # 60個
 
-            int i;
             int N = 10;
             Random r = new Random();
             int[] number = new int[N];
-            for (i = 0; i < N; i++)
+            for (int i = 0; i < N; i++)
             {
                 number[i] = r.Next(350);
             }
@@ -280,10 +277,9 @@ namespace vcs_Chart4
             series1.Points.AddXY("James", 300);
             series1.Points.AddXY("Larry", 70);
 
-            int i;
             int count = series1.Points.Count;
             richTextBox1.Text += "共有 " + count.ToString() + " 筆資料\n";
-            for (i = 0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
                 richTextBox1.Text += "X[" + i.ToString() + "] = " + series1.Points[i].XValue.ToString() + "\t";
                 richTextBox1.Text += "Y[" + i.ToString() + "] = " + series1.Points[i].YValues[0].ToString() + "\n";
@@ -294,9 +290,7 @@ namespace vcs_Chart4
             chart5.ChartAreas[0].AxisX.Maximum = 8;//設定Y軸最大值
             chart5.ChartAreas[0].AxisY.Minimum = 0;//設定Y軸最小值
             chart5.ChartAreas[0].AxisY.Maximum = 400;//設定Y軸最大值
-
-            this.chart5.Series.Add(series1);//將線畫在圖上
-
+            chart5.Series.Add(series1);//將線畫在圖上
         }
 
         //------------------------------------------------------------  # 60個

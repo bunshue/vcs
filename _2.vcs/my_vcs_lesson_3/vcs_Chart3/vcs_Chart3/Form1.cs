@@ -88,18 +88,22 @@ namespace vcs_Chart3
 
         void draw_chart0()
         {
-            //SplineChartExample
+            // 長條圖
 
-            //清除圖表
+            // 清除圖表
             chart0.Series.Clear();
             chart0.Titles.Clear();
 
-            this.chart0.Titles.Add("Total Income");
+            chart0.Titles.Add("長條圖 Total Income");
 
-            Series series1 = this.chart0.Series.Add("平均高溫​℃");
-            Series series2 = this.chart0.Series.Add("平均低溫​℃");
-            series1.ChartType = SeriesChartType.Column;
-            series1.ChartType = SeriesChartType.Column;
+            Series series1 = chart0.Series.Add("平均高溫​℃");
+            series1.ChartType = SeriesChartType.Column;  // 長條圖
+            //series1.ChartType = SeriesChartType.Line;  // 折線圖
+
+            Series series2 = chart0.Series.Add("平均低溫​℃");
+            series2.ChartType = SeriesChartType.Column;  // 長條圖
+            //series2.ChartType = SeriesChartType.Line;  // 折線圖
+
             /*
             series.Points.AddXY("September", 100);
             series.Points.AddXY("Obtober", 300);
@@ -112,8 +116,8 @@ namespace vcs_Chart3
             string[] month = new string[] { "1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月" };
             double[] temperature_average_high = new double[] { 18.9, 19.4, 21.4, 25.2, 28.6, 31.0, 32.9, 32.6, 31.0, 27.8, 24.9, 21.2 };
             double[] temperature_average_low = new double[] { 12.9, 13.4, 15.2, 18.8, 21.8, 24.4, 25.7, 25.6, 24.1, 21.6, 18.5, 15.0 };
-            int i;
-            for (i = 0; i < 12; i++)
+
+            for (int i = 0; i < 12; i++)
             {
                 series1.Points.AddXY(month[i], temperature_average_high[i]);
                 series2.Points.AddXY(month[i], temperature_average_low[i]);
@@ -122,36 +126,34 @@ namespace vcs_Chart3
 
         void draw_chart1()
         {
-            //Bar example
+            // 長條圖
 
-            //清除圖表
+            // 清除圖表
             chart1.Series.Clear();
             chart1.Titles.Clear();
+
+            chart1.Titles.Add("長條圖 Animals");
 
             // Data arrays
             string[] seriesArray = { "Cat", "Dog", "Bird", "Monkey" };
             int[] pointsArray = { 2, 1, 7, 5 };
 
             // Set palette
-            this.chart1.Palette = ChartColorPalette.EarthTones;
-
-            // Set title
-            this.chart1.Titles.Add("Animals");
+            chart1.Palette = ChartColorPalette.EarthTones;
 
             // Add series.
             for (int i = 0; i < seriesArray.Length; i++)
             {
-                Series series = this.chart1.Series.Add(seriesArray[i]);
+                Series series = chart1.Series.Add(seriesArray[i]);
                 series.Points.Add(pointsArray[i]);
             }
-
         }
 
         void draw_chart2()
         {
-            // 繪製長條圖
+            // 長條圖
 
-            //清除圖表
+            // 清除圖表
             chart2.Series.Clear();
             chart2.Titles.Clear();
 
@@ -195,13 +197,14 @@ namespace vcs_Chart3
 
         void draw_chart3()
         {
-            // 繪製直線圖
+            // 長條圖
 
-            //清除圖表
+            // 清除圖表
             chart3.Series.Clear();
             chart3.Titles.Clear();
 
-            chart3.Titles.Add("直線圖");
+            chart3.Titles.Add("長條圖");
+
             Series[] series = new Series[3];       //預先建立3個數組   應該是不太好
             double[] _y = new double[] { 77, 35, 131 };
             Color[] colors = new Color[] { Color.Peru, Color.PowderBlue, Color.RosyBrown };
@@ -228,11 +231,14 @@ namespace vcs_Chart3
             {
                 chart3.Series.Add(s);
             }
-
         }
 
         void draw_chart4()
         {
+            // 清除圖表
+            //chart4.Series.Clear();
+            //chart4.Titles.Clear();
+
             string[] xValues = { "北部", "中部", "南部", "東部", "離島" };
             int[] yValues = { 137, 163, 237, 48, 4 };
             //ChartAreas,Series,Legends 基本設定-------------------------------------------------
@@ -241,9 +247,10 @@ namespace vcs_Chart3
                 chart4.Legends.Add(new Legend("Legends2")); //圖例集合說明
             }
             chart4.ChartAreas.Add("ChartArea2"); ////圖表區域集合
-            //chart4.Series.Add("Series3"); ////數據序列集合
+            // chart4.Series.Add("Series3"); ////數據序列集合
             // chart4.Legends.Add("Legends2"); ////圖例集合
-            ////標題集合
+
+            //標題集合
             Title Title2 = new Title
             {
                 Text = "各區域發生婦幼被害犯罪件數統計比例圖",
@@ -251,6 +258,7 @@ namespace vcs_Chart3
                 Font = new Font("Trebuchet MS", 14F, FontStyle.Bold)
             };
             chart4.Titles.Add(Title2);
+
             //設定 ChartArea2--------------------------------------------------------------------
             //設定3D
             chart4.ChartAreas["ChartArea2"].Area3DStyle.Enable3D = true; //3D效果
@@ -309,6 +317,7 @@ namespace vcs_Chart3
 
         void draw_chart5()
         {
+            // 清除圖表
             chart5.Series.Clear();
             chart5.ChartAreas.Clear();
             chart5.Legends.Clear();
@@ -351,6 +360,7 @@ namespace vcs_Chart3
                 Font = new Font("Trebuchet MS", 14F, FontStyle.Bold)
             };
             chart5.Titles.Add(Title1);
+
             //設定 ChartArea1----------------------------------------------------------------------
             chart5.ChartAreas["ChartArea1"].AxisX.Interval = 1;   //設置X軸坐標的間隔為1
             chart5.ChartAreas["ChartArea1"].AxisX.IntervalOffset = 1;  //設置X軸坐標偏移為1
@@ -386,7 +396,7 @@ namespace vcs_Chart3
             chart5.Legends["Legends1"].BorderColor = Color.FromArgb(200, 200, 200);
             //設定 Series1-----------------------------------------------------------------------
             chart5.Series["Series1"].ChartArea = "ChartArea1"; ////設定要呈現的ChartArea
-            //chart5.Series["Series1"].ChartType = SeriesChartType.Line; //直條圖(Column),折線圖(Line),橫條圖(Bar)
+            //chart5.Series["Series1"].ChartType = SeriesChartType.Line; //長條圖(Column),折線圖(Line),橫條圖(Bar)
             chart5.Series["Series1"].Points.DataBindXY(xValue, yValues);//Series1的XY數值放入圖中
             chart5.Series["Series1"].Legend = "Legends1"; ////設定要呈現哪個圖例
             chart5.Series["Series1"].LegendText = titleArr[0]; //設定圖例文字
@@ -433,5 +443,3 @@ namespace vcs_Chart3
 /*  可搬出
 
 */
-
-

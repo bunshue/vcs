@@ -24,6 +24,10 @@ namespace vcs_Button1
 
             //------------------------------------------------------------  # 60個
 
+            State = SwitchState.Off;
+
+            //------------------------------------------------------------  # 60個
+
             this.AllowDrop = true;  //for 程序執行時拖曳組件
 
             //------------------------------------------------------------  # 60個
@@ -132,8 +136,17 @@ namespace vcs_Button1
 
             //------------------------------------------------------------  # 60個
 
+            //bt_pic_position.BackgroundImage = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\_logo\csharp-programming_210700275.jpg.ashx.jpg");
+            //bt_pic_position.BackgroundImageLayout = ImageLayout.None;
+            bt_pic_position.Image = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\_logo\csharp-programming_210700275.jpg.ashx.jpg");
+            //bt_pic_position.ImageAlign = ContentAlignment.BottomRight;
 
+            //------------------------------------------------------------  # 60個
 
+            bt_pic_move.Image = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\_logo\csharp-programming_210700275.jpg.ashx.jpg");
+            bt_pic_move.ImageAlign = ContentAlignment.MiddleCenter;
+            bt_pic_move.MouseMove += new MouseEventHandler(bt_pic_move_MouseMove);
+            bt_pic_move.MouseLeave += new EventHandler(bt_pic_move_MouseLeave);
         }
 
         private void show_item_location()
@@ -333,16 +346,29 @@ namespace vcs_Button1
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //Button變大
+            richTextBox1.Text += "Button變大\n";
+            button4.Size = new Size(button4.Size.Width + 5, button4.Size.Height + 5);
+
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //Button變大變小
+            richTextBox1.Text += "Button變大變小\n";
+            button4.Size = new Size(button4.Size.Width + 5, button4.Size.Height + 5);
+
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //Button變小
+            richTextBox1.Text += "Button變小\n";
+            button4.Size = new Size(button4.Size.Width - 5, button4.Size.Height - 5);
 
         }
+
+        //6060
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -677,7 +703,168 @@ namespace vcs_Button1
 
         //------------------------------------------------------------  # 60個
 
+        private void bt_draw_image_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "在Button上畫圖\n";
+        }
 
+        //在Button上畫圖
+        private void bt_draw_image_Paint(object sender, PaintEventArgs e)
+        {
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_貓咪\cat1.png";
+            Bitmap bmp;//實例Bitmap對像
+            bmp = new Bitmap(filename);
+            Graphics g = e.Graphics;
+            TextureBrush myBrush = new TextureBrush(bmp);
+            g.FillRectangle(myBrush, this.ClientRectangle);
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        ContentAlignment image_align = ContentAlignment.TopLeft;
+        private void bt_position_Click(object sender, EventArgs e)
+        {
+            //改變圖片位置
+            if (image_align == ContentAlignment.TopLeft)
+            {
+                //     內容垂直靠上對齊，且水平置中對齊。
+                image_align = ContentAlignment.TopCenter;
+                bt_pic_position.ImageAlign = image_align;
+            }
+            else if (image_align == ContentAlignment.TopCenter)
+            {
+                //     內容垂直靠上對齊，且水平靠右對齊。
+                image_align = ContentAlignment.TopRight;
+                bt_pic_position.ImageAlign = image_align;
+            }
+            else if (image_align == ContentAlignment.TopRight)
+            {
+                //     內容垂直居中對齊，且水平靠左對齊。
+                image_align = ContentAlignment.MiddleLeft;
+                bt_pic_position.ImageAlign = image_align;
+            }
+            else if (image_align == ContentAlignment.MiddleLeft)
+            {
+                //     內容垂直居中對齊，且水平置中對齊。
+                image_align = ContentAlignment.MiddleCenter;
+                bt_pic_position.ImageAlign = image_align;
+            }
+            else if (image_align == ContentAlignment.MiddleCenter)
+            {
+                //     內容垂直居中對齊，且水平置中對齊。
+                image_align = ContentAlignment.MiddleRight;
+                bt_pic_position.ImageAlign = image_align;
+            }
+            else if (image_align == ContentAlignment.MiddleRight)
+            {
+                //     內容垂直靠下對齊，且水平靠左對齊。
+                image_align = ContentAlignment.BottomLeft;
+                bt_pic_position.ImageAlign = image_align;
+            }
+            else if (image_align == ContentAlignment.BottomLeft)
+            {
+                //     內容垂直靠下對齊，且水平置中對齊。
+                image_align = ContentAlignment.BottomCenter;
+                bt_pic_position.ImageAlign = image_align;
+            }
+            else if (image_align == ContentAlignment.BottomCenter)
+            {
+                //     內容垂直靠下對齊，且水平靠右對齊。
+                image_align = ContentAlignment.BottomRight;
+                bt_pic_position.ImageAlign = image_align;
+            }
+            else if (image_align == ContentAlignment.BottomRight)
+            {
+                //     內容垂直靠上對齊，且水平靠左對齊。
+                image_align = ContentAlignment.TopLeft;
+                bt_pic_position.ImageAlign = image_align;
+            }
+            else
+            {
+                richTextBox1.Text += "XXXXXXXXXXXXXXXXXXX\n";
+            }
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        void bt_pic_move_MouseMove(object sender, MouseEventArgs e)
+        {
+            bt_pic_move.ImageAlign = ContentAlignment.MiddleLeft;
+        }
+
+        void bt_pic_move_MouseLeave(object sender, EventArgs e)
+        {
+            bt_pic_move.ImageAlign = ContentAlignment.MiddleCenter;
+        }
+
+        private void bt_pic_move_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "測試圖片移動\n";
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_shortcut_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("你按了快捷键 Alt + F\n只要在Text改 快捷鍵 (&F) 即可");
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        public enum SwitchState
+        {
+            On,
+            Off
+        }
+
+        private SwitchState _state;
+        public SwitchState State
+        {
+            get
+            {
+                return _state;
+            }
+            set
+            {
+                if (_state == value)
+                    return;
+                _state = value;
+                AdjustOnOffButton();
+            }
+        }
+
+        private void AdjustOnOffButton()
+        {
+            switch (State)
+            {
+                case SwitchState.On:
+                    OnOffButton.Dock = DockStyle.Top;
+                    break;
+                case SwitchState.Off:
+                    OnOffButton.Dock = DockStyle.Bottom;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void Toggle()
+        {
+            State = State == SwitchState.On ? SwitchState.Off : SwitchState.On;
+        }
+
+        private void OnOffButton_Click(object sender, EventArgs e)
+        {
+            Toggle();
+        }
+
+        private void Form1_SizeChanged(object sender, EventArgs e)
+        {
+            //OnOffButton.Height = this.Height / 2;
+        }
+
+        //------------------------------------------------------------  # 60個
     }
 }
 

@@ -18,6 +18,8 @@ namespace vcs_Chart5
 {
     public partial class Form1 : Form
     {
+        bool flag_show_value = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -80,9 +82,11 @@ namespace vcs_Chart5
 
         void draw_chart0()
         {
-            //清除圖表
+            // 清除圖表
             chart0.Series.Clear();
             chart0.Titles.Clear();
+
+            chart0.Titles.Add("直線圖");
 
             //Chart繪製直線圖
 
@@ -93,8 +97,6 @@ namespace vcs_Chart5
             double[] _y = new double[] { 77, 35, 131 };
             Color[] _colors = new Color[] { Color.Peru, Color.PowderBlue, Color.RosyBrown };
             String[] _users = new String[] { "小王", "小風", "小明" };
-
-            chart0.Titles.Add("直線圖");
 
             int _length = _users.Length;
 
@@ -123,18 +125,19 @@ namespace vcs_Chart5
 
         void draw_chart1()
         {
-            //清除圖表
+            // 長條圖
+
+            // 清除圖表
             chart1.Series.Clear();
             chart1.Titles.Clear();
 
-            //Chart繪製長條圖
+            chart1.Titles.Add("長條圖");
 
             Series[] series1 = null;
             double[] _y = new double[] { 100, 57, 93, 26, 77, 88 };
             Color[] _colors = new Color[] { Color.Peru, Color.PowderBlue, Color.RosyBrown, Color.Salmon, Color.Sienna, Color.SlateBlue };
             String[] _users = new String[] { "小王", "小風", "小明", "小姿", "小玉", "小蟹" };
 
-            chart1.Titles.Add("長條圖");
             int _length = _y.Length;
             series1 = new Series[_length];
             for (int index = 0; index < _length; index++)
@@ -147,13 +150,88 @@ namespace vcs_Chart5
                 series1[index].Points.Add(_y[index]);
                 chart1.Series.Add(series1[index]);
             }
-
         }
 
         //------------------------------------------------------------  # 60個
 
         void draw_chart2()
         {
+            //用滑鼠指線 顯示數值
+            richTextBox1.Text += "用滑鼠指線 顯示數值\n";
+            FillChart();
+            flag_show_value = true;
+            this.tooltip.AutomaticDelay = 5;
+        }
+
+        private void FillChart()
+        {
+            //清除圖表
+            chart2.Series.Clear();
+            chart2.Titles.Clear();
+
+            var rand = new Random(123);
+            var items = Enumerable.Range(0, 20).Select(x => new Item(x, rand.Next(1, 100) / 2.0)).ToList();
+
+            var seriesLines = this.chart2.Series.Add("Line");
+            seriesLines.ChartType = SeriesChartType.Line; //System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            seriesLines.XValueMember = "X";
+            seriesLines.YValueMembers = "Y";
+            seriesLines.Color = Color.Red;
+
+            var seriesPoints = this.chart2.Series.Add("Points");
+            seriesPoints.ChartType = SeriesChartType.Point; //System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            seriesPoints.XValueMember = "X";
+            seriesPoints.YValueMembers = "Y";
+
+            this.chart2.DataSource = items;
+        }
+
+        internal class Item
+        {
+            public double X { get; private set; }
+            public double Y { get; private set; }
+            public Item(double x, double y)
+            {
+                this.X = x;
+                this.Y = y;
+            }
+        }
+
+        Point? prevPosition = null;     //好奇怪的寫法?
+        ToolTip tooltip = new ToolTip();
+
+        private void chart2_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (flag_show_value == true)
+            {
+                var pos = e.Location;
+                if (prevPosition.HasValue && pos == prevPosition.Value)
+                {
+                    return;
+                }
+                tooltip.RemoveAll();
+                prevPosition = pos;
+                var results = chart2.HitTest(pos.X, pos.Y, false, ChartElementType.DataPoint);
+                foreach (var result in results)
+                {
+                    if (result.ChartElementType == ChartElementType.DataPoint)
+                    {
+                        var prop = result.Object as DataPoint;
+                        if (prop != null)
+                        {
+                            var pointXPixel = result.ChartArea.AxisX.ValueToPixelPosition(prop.XValue);
+                            var pointYPixel = result.ChartArea.AxisY.ValueToPixelPosition(prop.YValues[0]);
+
+                            // check if the cursor is really close to the point (2 pixels around)
+                            if (Math.Abs(pos.X - pointXPixel) < 2 && Math.Abs(pos.Y - pointYPixel) < 2)
+                            {
+                                tooltip.Show("X=" + prop.XValue + ", Y=" + prop.YValues[0], this.chart2, pos.X, pos.Y - 15);
+                            }
+                        }
+                    }
+                }
+            }
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -186,10 +264,6 @@ namespace vcs_Chart5
 
         void chart_init(Chart chart)
         {
-            //清除圖表
-            chart.Series.Clear();
-            chart.Titles.Clear();
-
             //設定Chart大小與外觀
             //全圖
             chart.Size = new Size(CHART_WIDTH, CHART_HEIGHT);      //改變Cahrt大小
@@ -239,6 +313,10 @@ namespace vcs_Chart5
 
         void draw_chart3()
         {
+            // 清除圖表
+            chart3.Series.Clear();
+            chart3.Titles.Clear();
+
             //靜畫範例1
             chart_init(chart3);
             richTextBox1.Text += "靜畫範例1, 用獨立數組做\n\r";
@@ -345,6 +423,10 @@ namespace vcs_Chart5
 
         void draw_chart4()
         {
+            // 清除圖表
+            chart4.Series.Clear();
+            chart4.Titles.Clear();
+
             //靜畫範例2
             chart_init(chart4);
             richTextBox1.Text += "靜畫範例2, 用數組陣列做\n\r";
@@ -498,3 +580,7 @@ namespace vcs_Chart5
             chart1.Series.Clear();
 
 */
+
+// chart1.Size = new Size(CHART_WIDTH, CHART_HEIGHT);       //改變Cahrt大小
+// chart1.Series[0].ChartType = SeriesChartType.Point;
+
