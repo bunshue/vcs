@@ -71,6 +71,8 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.bt_plus = new System.Windows.Forms.Button();
             this.bt_minus = new System.Windows.Forms.Button();
+            this.lb_trackber = new System.Windows.Forms.Label();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -79,6 +81,7 @@
             this.groupBox5.SuspendLayout();
             this.groupBox0.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // bt_clear
@@ -475,7 +478,7 @@
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.domainUpDown1);
-            this.groupBox5.Location = new System.Drawing.Point(680, 278);
+            this.groupBox5.Location = new System.Drawing.Point(680, 246);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(300, 150);
             this.groupBox5.TabIndex = 87;
@@ -497,7 +500,7 @@
             this.groupBox0.Controls.Add(this.numericUpDown1);
             this.groupBox0.Controls.Add(this.bt_plus);
             this.groupBox0.Controls.Add(this.bt_minus);
-            this.groupBox0.Location = new System.Drawing.Point(361, 278);
+            this.groupBox0.Location = new System.Drawing.Point(361, 246);
             this.groupBox0.Name = "groupBox0";
             this.groupBox0.Size = new System.Drawing.Size(300, 150);
             this.groupBox0.TabIndex = 86;
@@ -533,11 +536,35 @@
             this.bt_minus.UseVisualStyleBackColor = true;
             this.bt_minus.Click += new System.EventHandler(this.bt_minus_Click);
             // 
+            // lb_trackber
+            // 
+            this.lb_trackber.AutoSize = true;
+            this.lb_trackber.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_trackber.Location = new System.Drawing.Point(370, 455);
+            this.lb_trackber.Name = "lb_trackber";
+            this.lb_trackber.Size = new System.Drawing.Size(64, 24);
+            this.lb_trackber.TabIndex = 89;
+            this.lb_trackber.Text = "label2";
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(371, 415);
+            this.trackBar1.Maximum = 100;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.trackBar1.Size = new System.Drawing.Size(367, 45);
+            this.trackBar1.TabIndex = 88;
+            this.trackBar1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBar1_MouseDown);
+            this.trackBar1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.trackBar1_MouseMove);
+            this.trackBar1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBar1_MouseUp);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1000, 742);
+            this.Controls.Add(this.lb_trackber);
+            this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox0);
             this.Controls.Add(this.panel_b);
@@ -578,6 +605,7 @@
             this.groupBox5.ResumeLayout(false);
             this.groupBox0.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -628,6 +656,8 @@
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button bt_plus;
         private System.Windows.Forms.Button bt_minus;
+        private System.Windows.Forms.Label lb_trackber;
+        private System.Windows.Forms.TrackBar trackBar1;
     }
 }
 

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_TrackBar.Properties
+namespace vcs_Chart5.Properties
 {
 
 

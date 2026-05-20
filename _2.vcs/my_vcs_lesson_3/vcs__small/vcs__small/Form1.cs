@@ -76,6 +76,10 @@ namespace vcs__small
 
             richTextBox1.Text += "目前共有 " + domainUpDown1.Items.Count + " 個選項\n";
 
+            //------------------------------------------------------------  # 60個
+
+            trackBar1.Value = 50;
+            lb_trackber.Text = "取得 : " + trackBar1.Value.ToString();
         }
 
         void show_item_location()
@@ -237,7 +241,29 @@ namespace vcs__small
             richTextBox1.Text += "Index : " + domainUpDown1.SelectedIndex.ToString() + "\t" + "內容 : " + domainUpDown1.SelectedItem.ToString() + "\n";
             richTextBox1.Text += "目前選到的是：" + domainUpDown1.Text + "\n";
             richTextBox1.Text += "目前選到的是：" + (string)domainUpDown1.SelectedItem + "\n";
+        }
 
+        //------------------------------------------------------------  # 60個
+
+        bool flag_mouse_down = false;
+        private void trackBar1_MouseDown(object sender, MouseEventArgs e)
+        {
+            flag_mouse_down = true;
+            richTextBox1.Text += "MouseDown :" + trackBar1.Value.ToString() + "\n";
+        }
+
+        private void trackBar1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (flag_mouse_down == true)
+            {
+                lb_trackber.Text = "取得 : " + trackBar1.Value.ToString();
+            }
+        }
+
+        private void trackBar1_MouseUp(object sender, MouseEventArgs e)
+        {
+            flag_mouse_down = false;
+            richTextBox1.Text += "MouseUp :" + trackBar1.Value.ToString() + "\n";
         }
 
         //------------------------------------------------------------  # 60個

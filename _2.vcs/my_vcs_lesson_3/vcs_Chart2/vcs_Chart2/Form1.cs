@@ -47,14 +47,6 @@ namespace vcs_Chart2
             int dx = 200 + 10;
             int dy = 60 + 10;
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
 
             cb_show_data.Location = new Point(x_st + dx * 0, y_st + dy * 9);
             bt_start.Location = new Point(x_st + dx * 0, y_st + dy * 9 + 20);
@@ -63,10 +55,10 @@ namespace vcs_Chart2
             chart1.Size = new Size(800, 330);
             chart1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
 
-            chart0.Size = new Size(800, 330);
-            chart0.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            //chart0.Size = new Size(800, 330);
+            //chart0.Location = new Point(x_st + dx * 1, y_st + dy * 5);
 
-            richTextBox1.Size = new Size(800, 320/2);
+            richTextBox1.Size = new Size(800, 320 / 2);
             richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 10);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -104,99 +96,43 @@ namespace vcs_Chart2
             return Math.Cos(d * Math.PI / 180.0);
         }
 
+        //------------------------------------------------------------  # 60個
+
+        //用滑鼠指 顯示數值
+
         private void button0_Click(object sender, EventArgs e)
         {
+            //plotChart 8 用滑鼠指線 顯示數值
+            richTextBox1.Text += "用滑鼠指線 顯示數值\n";
+            FillChart();
+            flag_show_value = true;
+            this.tooltip.AutomaticDelay = 5;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void FillChart()
         {
-            string[] xValues = { "一月", "二月", "三月", "四月", "五月", "六月", "七月" };
-            int[] yValues = { 25, 18, 30, 24, 35, 50, 40 };
-            var objSeries = chart1.Series.First();
-            chart1.Series[0].ChartType = SeriesChartType.Point;
-            objSeries.Points.DataBindXY(xValues, yValues);
+            var rand = new Random(123);
+            var items = Enumerable.Range(0, 20).Select(x => new Item(x, rand.Next(1, 100) / 2.0)).ToList();
 
-            //設定邊界
-            //chart1.ChartAreas[0].AxisX.Minimum = 0;//設定Y軸最小值
-            //chart1.ChartAreas[0].AxisX.Maximum = 8;//設定Y軸最大值
-            chart1.ChartAreas[0].AxisY.Minimum = 0;//設定Y軸最小值
-            chart1.ChartAreas[0].AxisY.Maximum = 60;//設定Y軸最大值
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
             //清除圖表
             chart1.Series.Clear();
             chart1.Titles.Clear();
 
-            Series series1 = new Series("Di0", 500); //初始畫線條(名稱，最大值)
-            series1.Color = Color.Blue; //設定線條顏色
-            series1.Font = new System.Drawing.Font("新細明體", 10); //設定字型
-            series1.ChartType = SeriesChartType.Column; //設定線條種類
-            //chart1.ChartAreas[0].AxisY.Minimum = 0;//設定Y軸最小值
-            //chart1.ChartAreas[0].AxisY.Maximum = 500;//設定Y軸最大值
-            //chart1.ChartAreas[0].AxisY.Enabled= AxisEnabled.False; //隱藏Y 軸標示
-            //chart1.ChartAreas[0].AxisY.MajorGrid.Enabled= true;  //隱藏Y軸標線
-            series1.IsValueShownAsLabel = true; //是否把數值顯示在線上
-            //把值加入X 軸Y 軸
-            series1.Points.AddXY("John", 200);
-            series1.Points.AddXY("Carol", 100);
-            series1.Points.AddXY("David", 100);
-            series1.Points.AddXY("Tom", 30);
-            series1.Points.AddXY("James", 300);
-            series1.Points.AddXY("Larry", 70);
+            var seriesLines = this.chart1.Series.Add("Line");
+            seriesLines.ChartType = SeriesChartType.Line; //System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            seriesLines.XValueMember = "X";
+            seriesLines.YValueMembers = "Y";
+            seriesLines.Color = Color.Red;
 
-            int i;
-            int count = series1.Points.Count;
-            richTextBox1.Text += "共有 " + count.ToString() + " 筆資料\n";
-            for (i = 0; i < count; i++)
-            {
-                richTextBox1.Text += "X[" + i.ToString() + "] = " + series1.Points[i].XValue.ToString() + "\t";
-                richTextBox1.Text += "Y[" + i.ToString() + "] = " + series1.Points[i].YValues[0].ToString() + "\n";
-            }
+            var seriesPoints = this.chart1.Series.Add("Points");
+            seriesPoints.ChartType = SeriesChartType.Point; //System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            seriesPoints.XValueMember = "X";
+            seriesPoints.YValueMembers = "Y";
 
-            //設定邊界
-            chart1.ChartAreas[0].AxisX.Minimum = 0;//設定Y軸最小值
-            chart1.ChartAreas[0].AxisX.Maximum = 8;//設定Y軸最大值
-            chart1.ChartAreas[0].AxisY.Minimum = 0;//設定Y軸最小值
-            chart1.ChartAreas[0].AxisY.Maximum = 400;//設定Y軸最大值
-
-            this.chart1.Series.Add(series1);//將線畫在圖上
+            this.chart1.DataSource = items;
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            // 繪製圓餅圖,  fail
-
-            /*  TBD
-            Series series1 = new Series();
-            double[] _y = new double[] { 77, 35, 131, 55, 77, 66 };
-            Color[] _colors = new Color[] { Color.Peru, Color.PowderBlue, Color.RosyBrown, Color.Salmon, Color.Sienna, Color.SlateBlue };
-            String[] _users = new String[] { "小王", "小風", "小明", "小姿", "小玉", "小蟹" };
-
-            series1.ChartType = SeriesChartType.Pie;
-            series1.IsValueShownAsLabel = true;
-            series1.Points.DataBindXY(_users, _y);
-            chart1.Series.Add(series1);
-            */
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-        }
+        //------------------------------------------------------------  # 60個
 
         double x = 0;
         private const int POINTS_IN_AXIS = 36;      //製作動畫時X軸要保留的點數
@@ -282,38 +218,6 @@ namespace vcs_Chart2
                 this.X = x;
                 this.Y = y;
             }
-        }
-
-        //用滑鼠指 顯示數值
-        private void button8_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "用滑鼠指線 顯示數值\n";
-            FillChart();
-            flag_show_value = true;
-            this.tooltip.AutomaticDelay = 5;
-        }
-
-        private void FillChart()
-        {
-            var rand = new Random(123);
-            var items = Enumerable.Range(0, 20).Select(x => new Item(x, rand.Next(1, 100) / 2.0)).ToList();
-
-            //清除圖表
-            chart1.Series.Clear();
-            chart1.Titles.Clear();
-
-            var seriesLines = this.chart1.Series.Add("Line");
-            seriesLines.ChartType = SeriesChartType.Line; //System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            seriesLines.XValueMember = "X";
-            seriesLines.YValueMembers = "Y";
-            seriesLines.Color = Color.Red;
-
-            var seriesPoints = this.chart1.Series.Add("Points");
-            seriesPoints.ChartType = SeriesChartType.Point; //System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            seriesPoints.XValueMember = "X";
-            seriesPoints.YValueMembers = "Y";
-
-            this.chart1.DataSource = items;
         }
 
         Point? prevPosition = null;     //好奇怪的寫法?
