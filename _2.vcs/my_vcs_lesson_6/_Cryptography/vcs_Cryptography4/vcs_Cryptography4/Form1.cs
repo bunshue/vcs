@@ -56,7 +56,6 @@ namespace vcs_Cryptography4
             richTextBox1.Location = new Point(x_st + dx * 5+100, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-
             x_st = 20;
             y_st = 20;
             dx = 180;
@@ -185,7 +184,6 @@ namespace vcs_Cryptography4
             //解密
 
             //TextDecrypt
-
         }
 
         //C#最簡單的文本加密 與 解密
@@ -606,7 +604,7 @@ namespace DESFile
         private static SymmetricAlgorithm CreateRijndael(string password, byte[] salt)
         {
             PasswordDeriveBytes pdb = new PasswordDeriveBytes(password, salt, "SHA256", 1000);
-            SymmetricAlgorithm sma = Rijndael.Create();
+            SymmetricAlgorithm sma = Rijndael.Create();  // 創建 Rijndael 對象
             sma.KeySize = 256;
             sma.Key = pdb.GetBytes(32);
             sma.Padding = PaddingMode.PKCS7;
@@ -656,7 +654,7 @@ namespace DESFile
                 fout.Write(IV, 0, IV.Length);
                 fout.Write(salt, 0, salt.Length);
                 // 創建散列加密
-                HashAlgorithm hasher = SHA256.Create();
+                HashAlgorithm hasher = SHA256.Create();  // 創建SHA256對象
                 using (CryptoStream cout = new CryptoStream(fout, sma.CreateEncryptor(), CryptoStreamMode.Write),
                 chash = new CryptoStream(Stream.Null, hasher, CryptoStreamMode.Write))
                 {
@@ -710,7 +708,7 @@ namespace DESFile
                 value = 32;
                 long lSize = -1;
                 // 創建散列對象, 校驗文件
-                HashAlgorithm hasher = SHA256.Create();
+                HashAlgorithm hasher = SHA256.Create();  // 創建SHA256對象
                 using (CryptoStream cin = new CryptoStream(fin, sma.CreateDecryptor(), CryptoStreamMode.Read),
                 chash = new CryptoStream(Stream.Null, hasher, CryptoStreamMode.Write))
                 {
@@ -776,6 +774,4 @@ namespace DESFile
 /*  可搬出
 
 */
-
-
 

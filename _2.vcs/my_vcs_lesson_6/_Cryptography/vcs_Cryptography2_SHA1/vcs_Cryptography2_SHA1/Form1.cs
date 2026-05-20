@@ -413,7 +413,7 @@ namespace vcs_Cryptography2_SHA1
         {
             using (FileStream stream = File.OpenRead(filename))
             {
-                SHA256 Sha256 = SHA256.Create();
+                SHA256 Sha256 = SHA256.Create();  // 創建SHA256對象
                 return Sha256.ComputeHash(stream);
             }
         }
@@ -520,7 +520,7 @@ namespace vcs_Cryptography2_SHA1
         public static string SHA256_Encrypt(string sourceString)
         {
             byte[] data = Encoding.UTF8.GetBytes(sourceString);
-            SHA256 shaM = SHA256.Create();
+            SHA256 shaM = SHA256.Create();  // 創建SHA256對象
             byte[] result = shaM.ComputeHash(data);
             StringBuilder EnText = new StringBuilder();
             foreach (byte iByte in result)
@@ -539,7 +539,7 @@ namespace vcs_Cryptography2_SHA1
         public static string SHA384_Encrypt(string sourceString)
         {
             byte[] data = Encoding.UTF8.GetBytes(sourceString);
-            SHA384 shaM = SHA384.Create();
+            SHA384 shaM = SHA384.Create();  // 創建SHA384對象
             byte[] result = shaM.ComputeHash(data);
             StringBuilder EnText = new StringBuilder();
             foreach (byte iByte in result)
@@ -619,7 +619,7 @@ namespace vcs_Cryptography2_SHA1
         public static string Sha1(this string str)
         {
             var buffer = Encoding.UTF8.GetBytes(str);
-            var data = SHA1.Create().ComputeHash(buffer);
+            var data = SHA1.Create().ComputeHash(buffer);  // 創建SHA1對象
 
             var sb = new StringBuilder();
             foreach (var t in data)
@@ -629,7 +629,6 @@ namespace vcs_Cryptography2_SHA1
             return sb.ToString();
         }
     }
-
 
     public class EncryptHelper2
     {
@@ -661,7 +660,7 @@ namespace vcs_Cryptography2_SHA1
         public static string GetMD5(string strPwd)
         {
             //MD5 对象创建的两种方式
-            //MD5 md5 = MD5.Create();
+            //MD5 md5 = MD5.Create();  // 創建MD5對象
             MD5 md5 = new MD5CryptoServiceProvider();
             //将输入的密码转换成字节数组
             byte[] bPwd = Encoding.UTF8.GetBytes(strPwd);
@@ -708,7 +707,7 @@ namespace vcs_Cryptography2_SHA1
         /// <returns>SHA256值</returns>
         public static string GetSHA256(string sourceString)
         {
-            SHA256 sha256 = SHA256.Create();
+            SHA256 sha256 = SHA256.Create();  // 創建SHA256對象
             return GetHash(sourceString, sha256);
         }
 
@@ -719,7 +718,7 @@ namespace vcs_Cryptography2_SHA1
         /// <returns>SHA384值</returns>
         public static string GetSHA384(string sourceString)
         {
-            SHA384 sha384 = SHA384.Create();
+            SHA384 sha384 = SHA384.Create();  // 創建SHA384對象
             return GetHash(sourceString, sha384);
         }
 
@@ -730,7 +729,7 @@ namespace vcs_Cryptography2_SHA1
         /// <returns>SHA512值</returns>
         public static string GetSHA512(string sourceString)
         {
-            SHA512 sha512 = SHA512.Create();
+            SHA512 sha512 = SHA512.Create();  // 創建SHA512對象
             return GetHash(sourceString, sha512);
         }
 
@@ -831,7 +830,7 @@ namespace vcs_Cryptography2_SHA1
 
             if (string.Compare(algName, "sha1", true) == 0)
             {
-                algorithm = System.Security.Cryptography.SHA1.Create();
+                algorithm = System.Security.Cryptography.SHA1.Create();  // 創建SHA1對象
             }
             else
             {
@@ -839,7 +838,7 @@ namespace vcs_Cryptography2_SHA1
                 {
                     throw new Exception("algName 只能使用 sha1 或 md5");
                 }
-                algorithm = System.Security.Cryptography.MD5.Create();
+                algorithm = System.Security.Cryptography.MD5.Create();  // 創建MD5對象
             }
 
             return algorithm.ComputeHash(stream);
@@ -915,19 +914,19 @@ namespace vcs_Cryptography2_SHA1
 
         public static string GetFileSHA256(string filePath)
         {
-            SHA256 sha256 = SHA256.Create();
+            SHA256 sha256 = SHA256.Create();  // 創建SHA256對象
             return GetFileHash(filePath, sha256);
         }
 
         public static string GetFileSHA384(string filePath)
         {
-            SHA384 sha384 = SHA384.Create();
+            SHA384 sha384 = SHA384.Create();  // 創建SHA384對象
             return GetFileHash(filePath, sha384);
         }
 
         public static string GetFileSHA512(string filePath)
         {
-            SHA512 sha512 = SHA512.Create();
+            SHA512 sha512 = SHA512.Create();  // 創建SHA512對象
             return GetFileHash(filePath, sha512);
         }
     }
