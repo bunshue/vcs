@@ -18,6 +18,10 @@ namespace vcs_Timer
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
             this.DoubleBuffered = true;
 
             ShowResult.BackColor = Color.Red;
@@ -35,6 +39,31 @@ namespace vcs_Timer
             toolStripStatusLabel1.Text = DateTime.Now.ToString();
 
             pictureBox_runner.Image = imageList1.Images[0];// 顯示第1張圖
+        }
+
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+
+            richTextBox1.Size = new Size(300, 300);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 4 - 50);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1200, 700);
+            this.Text = "vcs_Timer";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         int toggle = 0;
@@ -73,10 +102,11 @@ namespace vcs_Timer
         private void button4_Click(object sender, EventArgs e)
         {
             if (timer1.Interval > 50)
+            {
                 timer1.Interval -= 50;
+            }
             label1.Text = "Interval : " + timer1.Interval.ToString() + " ms";
         }
-
 
         //for countdown timer ST
         int total_second = 0;
@@ -165,8 +195,6 @@ namespace vcs_Timer
         //progress bar SP
 
         Timer _timer;
-
-
         int percentage = 0;
 
         private void TimerEventProcessor(object sender, EventArgs e)
@@ -249,3 +277,22 @@ namespace vcs_Timer
         }
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+

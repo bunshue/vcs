@@ -19,6 +19,11 @@ using System.Windows.Forms;
 //新增/加入 類別檔案 故意讓檔名,namespace,類別不一樣
 //方案總管/右鍵/現有項目 選取Class1.cs
 
+/*
+方案總管 / 右鍵 / 加入 / 新增項目 選 類別
+把 Class1.cs 改成 Color2Gray.cs
+*/
+
 using vcs_Class6XXX;    //Class1.cs之namespace不一樣, 要引用
 
 using CatTest;          //Cat.cs之namespace不一樣, 要引用
@@ -150,16 +155,18 @@ namespace vcs_Class1
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            test_picture_class();
         }
 
         void show_item_location()
         {
             int w;
             int h;
-            w = 135;
 
             //小的groupBox
-            h = 120;
+            w = 180;
+            h = 150;
             groupBox2.Size = new Size(w, h);
             groupBox3.Size = new Size(w, h);
             groupBox1.Size = new Size(w, h);
@@ -172,37 +179,31 @@ namespace vcs_Class1
             groupBox13.Size = new Size(w, h);
 
             //大的groupBox
+            w = 180;
             h = 250;
             groupBox4.Size = new Size(w, h);
             groupBox7.Size = new Size(w, h);
             groupBox9.Size = new Size(w, h);
+            groupBox14.Size = new Size(w * 2, h);
 
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
-            x_st = 12;
-            y_st = 12;
-            dx = 150;
-            dy = 140;
-
+            int x_st = 10;
+            int y_st = 10;
+            int dx = w + 10;
+            int dy = 150 + 10;
             groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox3.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             groupBox5.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             groupBox6.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-
             groupBox8.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             groupBox10.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             groupBox11.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             groupBox12.Location = new Point(x_st + dx * 3, y_st + dy * 1);
             groupBox13.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-
-
             groupBox4.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             groupBox7.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             groupBox9.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            groupBox14.Location = new Point(x_st + dx * 3, y_st + dy * 2);
 
             x_st = 15;
             y_st = 15;
@@ -254,11 +255,20 @@ namespace vcs_Class1
             button23.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button24.Location = new Point(x_st + dx * 0, y_st + dy * 3);
 
+            int W = 305 / 3;
+            int H = 400 / 3;
+            pictureBox0.Size = new Size(W, H);
+            pictureBox1.Size = new Size(W, H);
+            pictureBox2.Size = new Size(W, H);
+            pictureBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 10);
+            pictureBox1.Location = new Point(x_st + dx * 0 + 70, y_st + dy * 0 + 40 + 10);
+            pictureBox2.Location = new Point(x_st + dx * 0 + 140, y_st + dy * 0 + 80 + 10);
+
             richTextBox1.Size = new Size(300, 690);
-            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1100, 750);
+            this.Size = new Size(1600, 820);
             this.Text = "vcs_Class1";
 
             //設定執行後的表單起始位置, 正中央
@@ -854,6 +864,22 @@ namespace vcs_Class1
             richTextBox1.Text += "銷毀\n";
             GC.Collect();       // Force garbage collection.
 
+        }
+
+        void test_picture_class()
+        {
+            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
+            Color2Gray c2g; // 宣告一個物件
+
+            c2g = new Color2Gray(new Bitmap(filename2));
+            pictureBox0.Image = c2g.bitmap1;
+
+            c2g.do_Color2Gray();
+            pictureBox1.Image = c2g.bitmap2;
+
+            c2g.Draw();
+            pictureBox2.Image = c2g.bitmap3;
         }
 
         //創建一個簡單的類來表示產品，產品有ID,類別，和價格

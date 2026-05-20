@@ -23,17 +23,22 @@ namespace vcs_RadioButton
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
 
             richTextBox1.Size = new Size(340, 500);
-            //richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 5);
+            richTextBox1.Location = new Point(x_st + dx * 1 + 30, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(620, 580);
             this.Text = "vcs_RadioButton";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -69,6 +74,5 @@ namespace vcs_RadioButton
             else if (radioButton == rb_style3)
                 richTextBox1.Text += "點線\n";
         }
-
     }
 }

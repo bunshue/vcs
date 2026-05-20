@@ -5,17 +5,19 @@ using System.Text;
 
 using System.Drawing;
 
-namespace vcs_Class2
+namespace vcs_Class1
 {
     class Color2Gray
     {
         public Bitmap bitmap1; // 原圖形
         public Bitmap bitmap2; // 新圖形
+        public Bitmap bitmap3; // 新圖形
 
         public Color2Gray(Bitmap bmp)
         {
             this.bitmap1 = bmp;
             bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
+            bitmap3 = bmp;
         }
 
         public void do_Color2Gray()
@@ -41,9 +43,8 @@ namespace vcs_Class2
 
         public void Draw()
         {
-            Graphics g = Graphics.FromImage(bitmap2);
+            Graphics g = Graphics.FromImage(bitmap3);
             g.DrawRectangle(Pens.Red, 10, 10, 100, 100);
         }
     }
 }
-

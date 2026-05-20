@@ -29,14 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.button1 = new System.Windows.Forms.Button();
             this.bt_start = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.bt_clear = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.button4 = new System.Windows.Forms.Button();
@@ -54,16 +53,16 @@
             // 
             // chart1
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chart1.Legends.Add(legend4);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(223, 47);
             this.chart1.Name = "chart1";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chart1.Series.Add(series4);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(300, 300);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
@@ -91,60 +90,16 @@
             // 
             // richTextBox1
             // 
+            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox1.Location = new System.Drawing.Point(215, 446);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = "";
             // 
-            // comboBox1
-            // 
-            this.comboBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Point = 0,        //     點狀圖類型。",
-            "FastPoint = 1,        //     FastPoint 圖表類型。",
-            "Bubble = 2,        //     泡泡圖類型。",
-            "Line = 3,        //     折線圖類型。",
-            "Spline = 4,        //     曲線圖類型。",
-            "StepLine = 5,        //     StepLine 圖表類型。",
-            "FastLine = 6,        //     FastLine 圖表類型。",
-            "Bar = 7,        //     橫條圖類型。",
-            "StackedBar = 8,        //     堆疊橫條圖類型。",
-            "StackedBar100 = 9,        //     100% 堆疊橫條圖類型。",
-            "Column = 10,        //     直條圖類型。",
-            "StackedColumn = 11,        //     堆疊直條圖類型。",
-            "StackedColumn100 = 12,        //     100% 堆疊直條圖類型。",
-            "Area = 13,        //     區域圖表類型。",
-            "SplineArea = 14,        //     曲線區域圖類型。",
-            "StackedArea = 15,        //     堆疊區域圖類型。",
-            "StackedArea100 = 16,        //     100% 堆疊區域圖類型。",
-            "Pie = 17,        //     圓形圖類型。",
-            "Doughnut = 18,        //     環圈圖類型。",
-            "Stock = 19,        //     股票圖類型。",
-            "Candlestick = 20,        //     K 線圖類型。",
-            "Range = 21,        //     範圍圖類型。",
-            "SplineRange = 22,        //     曲線範圍圖類型。",
-            "RangeBar = 23,        //     範圍橫條圖類型。",
-            "RangeColumn = 24,        //     範圍直條圖類型。",
-            "Radar = 25,        //     雷達圖類型。",
-            "Polar = 26,        //     極座標圖類型。",
-            "ErrorBar = 27,        //     誤差長條圖類型。",
-            "BoxPlot = 28,        //     盒狀圖類型。",
-            "Renko = 29,        //     磚形圖類型。",
-            "ThreeLineBreak = 30,        //     ThreeLineBreak 圖表類型。",
-            "Kagi = 31,        //     Kagi 圖表類型。",
-            "PointAndFigure = 32,        //     PointAndFigure 圖表類型。",
-            "Funnel = 33,        //     漏斗圖類型。",
-            "Pyramid = 34,        //     金字塔圖類型。"});
-            this.comboBox1.Location = new System.Drawing.Point(223, 12);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(745, 29);
-            this.comboBox1.TabIndex = 4;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
             // bt_clear
             // 
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_clear.Location = new System.Drawing.Point(236, 465);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(64, 40);
@@ -203,7 +158,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(200, 60);
             this.button0.TabIndex = 9;
-            this.button0.Text = "plotChart 0";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -273,7 +227,6 @@
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.bt_clear);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.bt_start);
             this.Controls.Add(this.button1);
@@ -293,7 +246,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button bt_start;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button button4;

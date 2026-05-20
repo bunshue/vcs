@@ -25,26 +25,27 @@ namespace vcs_Class5
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            List<Student> students = Data.GetStudents();
+            List<DataStudent> students = MemberData.GetStudents();
 
             //List to DataTable conversion
             DataTable studentTbl = students.ToDataTable();
 
             //DataTable to List conversion
-            List<Student> newStudents = studentTbl.ToList<Student>();//ExtensionUtility.ToList<Student>(newStudents);
+            List<DataStudent> newStudents = studentTbl.ToList<DataStudent>();//ExtensionUtility.ToList<DataStudent>(newStudents);
             this.dataGridView1.DataSource = newStudents;
+            richTextBox1.Text += "DGV1 學生資料\n";
 
             //List to DataTable conversion
-            DataTable teacherTbl = Data.DbNullInt();
+            DataTable teacherTbl = MemberData.DbNullInt();
             //DataTable to List conversion
-            List<Teacher> newTeachers = teacherTbl.ToList<Teacher>();
+            List<DataTeacher> newTeachers = teacherTbl.ToList<DataTeacher>();
 
             this.dataGridView2.DataSource = newTeachers;
+            richTextBox1.Text += "DGV2 老師資料\n";
         }
     }
 
-    public class Student
+    public class DataStudent
     {
         public long Id { get; set; }
         public string Name { get; set; }
@@ -53,35 +54,35 @@ namespace vcs_Class5
         public bool? IsActive { get; set; }
     }
 
-    public class Teacher
+    public class DataTeacher
     {
         public long Id { get; set; }
         public string Name { get; set; }
         public Nullable<int> DepartmentId { get; set; }
     }
 
-    public class Data
+    public class MemberData
     {
-        public static List<Student> GetStudents()
+        public static List<DataStudent> GetStudents()
         {
-            var list = new List<Student>
+            var list = new List<DataStudent>
             {
-                new Student {Id = 1, Name = "Smith", Age = 18, DateOfCreation = DateTime.Now, IsActive = true},
-                new Student {Id = 2, Name = "Hook", Age = 16, DateOfCreation = DateTime.Now.AddDays(-1), IsActive = true},
-                new Student {Id = 3, Name = "Jhon", Age = 15, DateOfCreation = DateTime.Now.AddDays(-2), IsActive = true},
-                new Student {Id = 4, Name = "Alan", Age = 21, DateOfCreation = DateTime.Now.AddDays(-3), IsActive = true}
+                new DataStudent {Id = 1, Name = "Smith", Age = 18, DateOfCreation = DateTime.Now, IsActive = true},
+                new DataStudent {Id = 2, Name = "Hook", Age = 16, DateOfCreation = DateTime.Now.AddDays(-1), IsActive = true},
+                new DataStudent {Id = 3, Name = "Jhon", Age = 15, DateOfCreation = DateTime.Now.AddDays(-2), IsActive = true},
+                new DataStudent {Id = 4, Name = "Alan", Age = 21, DateOfCreation = DateTime.Now.AddDays(-3), IsActive = true}
             };
             return list;
         }
 
-        public static List<Teacher> GetTeachers()
+        public static List<DataTeacher> GetTeachers()
         {
-            var list = new List<Teacher>
+            var list = new List<DataTeacher>
             {
-                new Teacher {Id = 1, Name = "Smith", DepartmentId = 18 },
-                new Teacher {Id = 2, Name = "Hook", DepartmentId = 16 },
-                new Teacher {Id = 3, Name = "Jhon", DepartmentId = 15 },
-                new Teacher {Id = 4, Name = "Alan", DepartmentId = 21 }
+                new DataTeacher {Id = 1, Name = "Smith", DepartmentId = 18 },
+                new DataTeacher {Id = 2, Name = "Hook", DepartmentId = 16 },
+                new DataTeacher {Id = 3, Name = "Jhon", DepartmentId = 15 },
+                new DataTeacher {Id = 4, Name = "Alan", DepartmentId = 21 }
             };
             return list;
         }

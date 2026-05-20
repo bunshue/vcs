@@ -484,6 +484,18 @@ namespace vcs_Form1
 
         private void button30_Click(object sender, EventArgs e)
         {
+            //DesktopLocation的用法
+
+            richTextBox1.Text += "DesktopLocation = " + this.DesktopLocation.ToString() + "\n";
+            richTextBox1.Text += "DesktopLocation = " + this.DesktopLocation.X.ToString() + "\n";
+            richTextBox1.Text += "DesktopLocation = " + this.DesktopLocation.Y.ToString() + "\n";
+
+            Point p = new Point(this.DesktopLocation.X - 10, this.DesktopLocation.Y - 5);
+            this.DesktopLocation = p;
+
+            //指定視窗出現的地方
+            //Point p = new Point(600, 240);
+            //this.DesktopLocation = p;
         }
 
         private void button31_Click(object sender, EventArgs e)

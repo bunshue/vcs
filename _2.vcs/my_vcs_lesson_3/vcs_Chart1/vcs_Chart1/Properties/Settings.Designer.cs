@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_Class2.Properties
+namespace vcs_Chart1.Properties
 {
 
 
