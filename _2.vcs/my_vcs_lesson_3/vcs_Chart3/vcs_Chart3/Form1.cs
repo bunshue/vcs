@@ -88,18 +88,147 @@ namespace vcs_Chart3
 
         void draw_chart0()
         {
+            //SplineChartExample
+
+            //清除圖表
+            chart0.Series.Clear();
+            chart0.Titles.Clear();
+
+            this.chart0.Titles.Add("Total Income");
+
+            Series series1 = this.chart0.Series.Add("平均高溫​℃");
+            Series series2 = this.chart0.Series.Add("平均低溫​℃");
+            series1.ChartType = SeriesChartType.Column;
+            series1.ChartType = SeriesChartType.Column;
+            /*
+            series.Points.AddXY("September", 100);
+            series.Points.AddXY("Obtober", 300);
+            series.Points.AddXY("November", 800);
+            series.Points.AddXY("December", 200);
+            series.Points.AddXY("January", 600);
+            series.Points.AddXY("February", 400);
+            */
+
+            string[] month = new string[] { "1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月" };
+            double[] temperature_average_high = new double[] { 18.9, 19.4, 21.4, 25.2, 28.6, 31.0, 32.9, 32.6, 31.0, 27.8, 24.9, 21.2 };
+            double[] temperature_average_low = new double[] { 12.9, 13.4, 15.2, 18.8, 21.8, 24.4, 25.7, 25.6, 24.1, 21.6, 18.5, 15.0 };
+            int i;
+            for (i = 0; i < 12; i++)
+            {
+                series1.Points.AddXY(month[i], temperature_average_high[i]);
+                series2.Points.AddXY(month[i], temperature_average_low[i]);
+            }
         }
 
         void draw_chart1()
         {
+            //Bar example
+
+            //清除圖表
+            chart1.Series.Clear();
+            chart1.Titles.Clear();
+
+            // Data arrays
+            string[] seriesArray = { "Cat", "Dog", "Bird", "Monkey" };
+            int[] pointsArray = { 2, 1, 7, 5 };
+
+            // Set palette
+            this.chart1.Palette = ChartColorPalette.EarthTones;
+
+            // Set title
+            this.chart1.Titles.Add("Animals");
+
+            // Add series.
+            for (int i = 0; i < seriesArray.Length; i++)
+            {
+                Series series = this.chart1.Series.Add(seriesArray[i]);
+                series.Points.Add(pointsArray[i]);
+            }
+
         }
 
         void draw_chart2()
         {
+            // 繪製長條圖
+
+            //清除圖表
+            chart2.Series.Clear();
+            chart2.Titles.Clear();
+
+            Series[] series1 = null;
+            double[] _y = new double[] { 100, 57, 93, 26, 77, 88 };
+            Color[] _colors = new Color[] { Color.Peru, Color.PowderBlue, Color.RosyBrown, Color.Salmon, Color.Sienna, Color.SlateBlue };
+            String[] _users = new String[] { "小王", "小風", "小明", "小姿", "小玉", "小蟹" };
+
+            int _length = _y.Length;
+            series1 = new Series[_length];
+            for (int index = 0; index < _length; index++)
+            {
+                series1[index] = new Series();
+                series1[index].Color = _colors[index];
+                series1[index].ChartType = SeriesChartType.Column;
+                series1[index].Name = _users[index];
+                series1[index].IsValueShownAsLabel = true;
+                series1[index].Points.Add(_y[index]);
+                chart2.Series.Add(series1[index]);
+            }
+
+            /* print data TBD
+            int i;
+            int count = series1.Points.Count;
+            richTextBox1.Text += "共有 " + count.ToString() + " 筆資料\n";
+            for (i = 0; i < count; i++)
+            {
+                richTextBox1.Text += "X[" + i.ToString() + "] = " + series1.Points[i].XValue.ToString() + "\t";
+                richTextBox1.Text += "Y[" + i.ToString() + "] = " + series1.Points[i].YValues[0].ToString() + "\n";
+            }
+            */
+            /*
+            //設定邊界
+            chart2.ChartAreas[0].AxisX.Minimum = 0;//設定Y軸最小值
+            chart2.ChartAreas[0].AxisX.Maximum = 8;//設定Y軸最大值
+            chart2.ChartAreas[0].AxisY.Minimum = 0;//設定Y軸最小值
+            chart2.ChartAreas[0].AxisY.Maximum = 120;//設定Y軸最大值
+            */
+
         }
 
         void draw_chart3()
         {
+            // 繪製直線圖
+
+            //清除圖表
+            chart3.Series.Clear();
+            chart3.Titles.Clear();
+
+            chart3.Titles.Add("直線圖");
+            Series[] series = new Series[3];       //預先建立3個數組   應該是不太好
+            double[] _y = new double[] { 77, 35, 131 };
+            Color[] colors = new Color[] { Color.Peru, Color.PowderBlue, Color.RosyBrown };
+            String[] users = new String[] { "小王", "小風", "小明" };
+
+            int len = users.Length;
+
+            for (int index = 0; index < len; index++)
+            {
+                series[index] = new Series(users[index]);
+                series[index].ChartType = SeriesChartType.Column;
+                series[index].Color = colors[index];
+                series[index].IsValueShownAsLabel = true;
+            }
+
+            for (int index = 0; index < 6; index++)
+            {
+                series[0].Points.AddXY(index, _y[0] - index);
+                series[1].Points.AddXY(index, _y[1] - index);
+                series[2].Points.AddXY(index, _y[2] - index);
+            }
+
+            foreach (Series s in series)
+            {
+                chart3.Series.Add(s);
+            }
+
         }
 
         void draw_chart4()

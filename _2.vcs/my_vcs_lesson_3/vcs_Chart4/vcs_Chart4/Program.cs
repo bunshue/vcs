@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_ScrollBar
+namespace vcs_Chart4
 {
     static class Program
     {

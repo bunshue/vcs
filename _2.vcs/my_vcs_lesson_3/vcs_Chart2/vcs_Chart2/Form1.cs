@@ -15,7 +15,7 @@ namespace vcs_Chart2
     {
         //定義Chart大小與外觀
         private const int CHART_WIDTH = 800;
-        private const int CHART_HEIGHT = 400;
+        private const int CHART_HEIGHT = 330;
         private const int AXIS_X_MIN = 0;
         private const int AXIS_X_MAX = 360;
         private const int AXIS_Y_MIN = -200;
@@ -60,19 +60,33 @@ namespace vcs_Chart2
             bt_start.Location = new Point(x_st + dx * 0, y_st + dy * 9 + 20);
             bt_save.Location = new Point(x_st + dx * 0, y_st + dy * 9 + 70);
 
-            chart1.Size = new Size(800, 400);
+            chart1.Size = new Size(800, 330);
             chart1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
 
-            richTextBox1.Size = new Size(800, 320);
-            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            chart0.Size = new Size(800, 330);
+            chart0.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+
+            richTextBox1.Size = new Size(800, 320/2);
+            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 10);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1060, 800);
+            this.Size = new Size(1060, 920);
             this.Text = "vcs_Chart2";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            if (timer1.Enabled == false)
+            {
+                //清除圖表
+                chart1.Series.Clear();
+                chart1.Titles.Clear();
+            }
+            richTextBox1.Clear();
         }
 
         private double rad(double d)
@@ -152,99 +166,15 @@ namespace vcs_Chart2
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //Bar example
-
-            //清除圖表
-            chart1.Series.Clear();
-            chart1.Titles.Clear();
-
-            // Data arrays
-            string[] seriesArray = { "Cat", "Dog", "Bird", "Monkey" };
-            int[] pointsArray = { 2, 1, 7, 5 };
-
-            // Set palette
-            this.chart1.Palette = ChartColorPalette.EarthTones;
-
-            // Set title
-            this.chart1.Titles.Add("Animals");
-
-            // Add series.
-            for (int i = 0; i < seriesArray.Length; i++)
-            {
-                Series series = this.chart1.Series.Add(seriesArray[i]);
-                series.Points.Add(pointsArray[i]);
-            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //SplineChartExample
-
-            //清除圖表
-            chart1.Series.Clear();
-            chart1.Titles.Clear();
-
-            this.chart1.Titles.Add("Total Income");
-
-            Series series1 = this.chart1.Series.Add("平均高溫​℃");
-            Series series2 = this.chart1.Series.Add("平均低溫​℃");
-            series1.ChartType = SeriesChartType.Column;
-            series1.ChartType = SeriesChartType.Column;
-            /*
-            series.Points.AddXY("September", 100);
-            series.Points.AddXY("Obtober", 300);
-            series.Points.AddXY("November", 800);
-            series.Points.AddXY("December", 200);
-            series.Points.AddXY("January", 600);
-            series.Points.AddXY("February", 400);
-            */
-
-            string[] month = new string[] { "1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月" };
-            double[] temperature_average_high = new double[] { 18.9, 19.4, 21.4, 25.2, 28.6, 31.0, 32.9, 32.6, 31.0, 27.8, 24.9, 21.2 };
-            double[] temperature_average_low = new double[] { 12.9, 13.4, 15.2, 18.8, 21.8, 24.4, 25.7, 25.6, 24.1, 21.6, 18.5, 15.0 };
-            int i;
-            for (i = 0; i < 12; i++)
-            {
-                series1.Points.AddXY(month[i], temperature_average_high[i]);
-                series2.Points.AddXY(month[i], temperature_average_low[i]);
-            }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            // 繪製直線圖
 
-            //清除圖表
-            chart1.Series.Clear();
-            chart1.Titles.Clear();
-
-            chart1.Titles.Add("直線圖");
-            Series[] series = new Series[3];       //預先建立3個數組   應該是不太好
-            double[] _y = new double[] { 77, 35, 131 };
-            Color[] colors = new Color[] { Color.Peru, Color.PowderBlue, Color.RosyBrown };
-            String[] users = new String[] { "小王", "小風", "小明" };
-
-            int len = users.Length;
-
-            for (int index = 0; index < len; index++)
-            {
-                series[index] = new Series(users[index]);
-                series[index].ChartType = SeriesChartType.Column;
-                series[index].Color = colors[index];
-                series[index].IsValueShownAsLabel = true;
-            }
-
-            for (int index = 0; index < 6; index++)
-            {
-                series[0].Points.AddXY(index, _y[0] - index);
-                series[1].Points.AddXY(index, _y[1] - index);
-                series[2].Points.AddXY(index, _y[2] - index);
-            }
-
-            foreach (Series s in series)
-            {
-                chart1.Series.Add(s);
-            }
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -266,47 +196,6 @@ namespace vcs_Chart2
 
         private void button7_Click(object sender, EventArgs e)
         {
-            // 繪製長條圖
-
-            //清除圖表
-            chart1.Series.Clear();
-            chart1.Titles.Clear();
-
-            Series[] series1 = null;
-            double[] _y = new double[] { 100, 57, 93, 26, 77, 88 };
-            Color[] _colors = new Color[] { Color.Peru, Color.PowderBlue, Color.RosyBrown, Color.Salmon, Color.Sienna, Color.SlateBlue };
-            String[] _users = new String[] { "小王", "小風", "小明", "小姿", "小玉", "小蟹" };
-
-            int _length = _y.Length;
-            series1 = new Series[_length];
-            for (int index = 0; index < _length; index++)
-            {
-                series1[index] = new Series();
-                series1[index].Color = _colors[index];
-                series1[index].ChartType = SeriesChartType.Column;
-                series1[index].Name = _users[index];
-                series1[index].IsValueShownAsLabel = true;
-                series1[index].Points.Add(_y[index]);
-                chart1.Series.Add(series1[index]);
-            }
-
-            /* print data TBD
-            int i;
-            int count = series1.Points.Count;
-            richTextBox1.Text += "共有 " + count.ToString() + " 筆資料\n";
-            for (i = 0; i < count; i++)
-            {
-                richTextBox1.Text += "X[" + i.ToString() + "] = " + series1.Points[i].XValue.ToString() + "\t";
-                richTextBox1.Text += "Y[" + i.ToString() + "] = " + series1.Points[i].YValues[0].ToString() + "\n";
-            }
-            */
-            /*
-            //設定邊界
-            chart1.ChartAreas[0].AxisX.Minimum = 0;//設定Y軸最小值
-            chart1.ChartAreas[0].AxisX.Maximum = 8;//設定Y軸最大值
-            chart1.ChartAreas[0].AxisY.Minimum = 0;//設定Y軸最小值
-            chart1.ChartAreas[0].AxisY.Maximum = 120;//設定Y軸最大值
-            */
         }
 
         double x = 0;
@@ -347,17 +236,6 @@ namespace vcs_Chart2
                 bt_start.Text = "動畫 ST";
                 timer1.Enabled = false;
             }
-        }
-
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            if (timer1.Enabled == false)
-            {
-                //清除圖表
-                chart1.Series.Clear();
-                chart1.Titles.Clear();
-            }
-            richTextBox1.Clear();
         }
 
         private void bt_save_Click(object sender, EventArgs e)
