@@ -150,7 +150,7 @@ namespace vcs_Button2
             MessageBox.Show("你按了快捷键 Alt + F\n只要在Text改 快捷鍵 (&F) 即可");
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         ContentAlignment image_align = ContentAlignment.TopLeft;
         private void button5_Click(object sender, EventArgs e)
@@ -217,35 +217,8 @@ namespace vcs_Button2
 
         //------------------------------------------------------------  // 60個
 
-        int cnt = 0;
         private void button8_Click(object sender, EventArgs e)
         {
-            //設定按鈕樣式 FlatStyle
-            if (cnt == 0)
-            {
-                button8.FlatStyle = FlatStyle.Flat;
-                button8.Text = "Flat";
-            }
-            else if (cnt == 1)
-            {
-                button8.FlatStyle = FlatStyle.Popup;
-                button8.Text = "Popup";
-            }
-            else if (cnt == 2)
-            {
-                button8.FlatStyle = FlatStyle.Standard;
-                button8.Text = "Standard";
-            }
-            else if (cnt == 3)
-            {
-                button8.FlatStyle = FlatStyle.System;
-                button8.Text = "System";
-            }
-            cnt++;
-            if (cnt > 3)
-            {
-                cnt = 0;
-            }
         }
     }
 }

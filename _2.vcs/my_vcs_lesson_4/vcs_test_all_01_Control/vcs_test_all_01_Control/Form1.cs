@@ -321,6 +321,7 @@ namespace vcs_test_all_01_Control
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //遍歷所有控件
             richTextBox1.Text += "遍歷所有控件\n";
             foreach (Control con in this.Controls)
             {
@@ -329,7 +330,34 @@ namespace vcs_test_all_01_Control
 
                 richTextBox1.Text += "Type\t" + strControl + "\tName\t" + strControlName + "\n";
             }
+
+            //6060
+
+            //遍歷所有控件
+            browse_all_controls(this.Controls);
+
         }
+
+        public void browse_all_controls(Control.ControlCollection cc)
+        {
+            foreach (Control c in cc)  //撈出所有控件
+            {
+                richTextBox1.Text += c.GetType().Name;
+
+                if (c.GetType().Name == "Button")   //判斷是否為 Button 控件
+                {
+                    richTextBox1.Text += "\t" + ((Button)c).Text + " " + ((Button)c).Size.Width.ToString() + " X " + ((Button)c).Size.Height.ToString();
+
+                    if (((Button)c).Tag != null)
+                    {
+                        richTextBox1.Text += "\t" + ((Button)c).Tag.ToString().ToString();
+                    }
+                }
+                richTextBox1.Text += "\n";
+            }
+        }
+
+        //6060
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -670,26 +698,12 @@ namespace vcs_test_all_01_Control
 
         private void button41_Click(object sender, EventArgs e)
         {
-            //遍歷所有控件
-            browse_all_controls(this.Controls);
-        }
-
-        public void browse_all_controls(Control.ControlCollection cc)
-        {
-            foreach (Control c in cc)  //撈出所有控件
+            //取得某一控件的參數
+            //獲取傳入對象的所有屬性名稱
+            Type types = button41.GetType();
+            foreach (var p in types.GetProperties())
             {
-                richTextBox1.Text += c.GetType().Name;
-
-                if (c.GetType().Name == "Button")   //判斷是否為 Button 控件
-                {
-                    richTextBox1.Text += "\t" + ((Button)c).Text + " " + ((Button)c).Size.Width.ToString() + " X " + ((Button)c).Size.Height.ToString();
-
-                    if (((Button)c).Tag != null)
-                    {
-                        richTextBox1.Text += "\t" + ((Button)c).Tag.ToString().ToString();
-                    }
-                }
-                richTextBox1.Text += "\n";
+                richTextBox1.Text += "Type : \t" + p.PropertyType + "\tName : \t" + p.Name + "\n";
             }
         }
 
@@ -810,17 +824,13 @@ namespace vcs_test_all_01_Control
         private void bt_rtb_info_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "Bounds = " + richTextBox1.Bounds.ToString() + "\n";
-
             richTextBox1.Text += "左上點座標 = (x_st, y_st) = (Left, Top)\n";
             richTextBox1.Text += "x_st = Left = " + richTextBox1.Left.ToString() + "\n";
             richTextBox1.Text += "y_st = Top = " + richTextBox1.Top.ToString() + "\n";
-
             richTextBox1.Text += "右下點座標 = (x_sp, y_sp) = (x_st + W, y_st + H) = (Right, Bottom)\n";
             richTextBox1.Text += "x_sp = Right = " + richTextBox1.Right.ToString() + "\n";
             richTextBox1.Text += "y_sp = Bottom = " + richTextBox1.Bottom.ToString() + "\n";
-
             richTextBox1.Text += "BackColor = " + richTextBox1.BackColor.ToString() + "\n";
-
             richTextBox1.Text += "Size = " + richTextBox1.Size.ToString() + "\n";
             richTextBox1.Text += "ClientSize = " + richTextBox1.ClientSize.ToString() + "\n";
         }

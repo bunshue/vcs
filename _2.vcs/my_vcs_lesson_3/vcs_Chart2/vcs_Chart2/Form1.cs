@@ -96,23 +96,20 @@ namespace vcs_Chart2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            plotChart1();
-        }
-
-        private void plotChart1() //繪圖
-        {
             string[] xValues = { "一月", "二月", "三月", "四月", "五月", "六月", "七月" };
             int[] yValues = { 25, 18, 30, 24, 35, 50, 40 };
             var objSeries = chart1.Series.First();
+            chart1.Series[0].ChartType = SeriesChartType.Point;
             objSeries.Points.DataBindXY(xValues, yValues);
+
+            //設定邊界
+            //chart1.ChartAreas[0].AxisX.Minimum = 0;//設定Y軸最小值
+            //chart1.ChartAreas[0].AxisX.Maximum = 8;//設定Y軸最大值
+            chart1.ChartAreas[0].AxisY.Minimum = 0;//設定Y軸最小值
+            chart1.ChartAreas[0].AxisY.Maximum = 60;//設定Y軸最大值
         }
 
         private void button2_Click(object sender, EventArgs e)
-        {
-            plotChart2();
-        }
-
-        private void plotChart2() //繪圖
         {
             //清除圖表
             chart1.Series.Clear();
@@ -155,11 +152,6 @@ namespace vcs_Chart2
 
         private void button3_Click(object sender, EventArgs e)
         {
-            plotChart3();
-        }
-
-        private void plotChart3() //繪圖
-        {
             //Bar example
 
             //清除圖表
@@ -185,11 +177,6 @@ namespace vcs_Chart2
         }
 
         private void button4_Click(object sender, EventArgs e)
-        {
-            plotChart4();
-        }
-
-        private void plotChart4() //繪圖
         {
             //SplineChartExample
 
@@ -225,7 +212,7 @@ namespace vcs_Chart2
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //C#.Net 透過Chart繪製直線圖
+            // 繪製直線圖
 
             //清除圖表
             chart1.Series.Clear();
@@ -262,7 +249,7 @@ namespace vcs_Chart2
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //C#.Net 透過Chart繪製圓餅圖,  fail
+            // 繪製圓餅圖,  fail
 
             /*  TBD
             Series series1 = new Series();
@@ -279,7 +266,7 @@ namespace vcs_Chart2
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //C#.Net 使用Chart繪製長條圖
+            // 繪製長條圖
 
             //清除圖表
             chart1.Series.Clear();
@@ -320,8 +307,6 @@ namespace vcs_Chart2
             chart1.ChartAreas[0].AxisY.Minimum = 0;//設定Y軸最小值
             chart1.ChartAreas[0].AxisY.Maximum = 120;//設定Y軸最大值
             */
-
-
         }
 
         double x = 0;

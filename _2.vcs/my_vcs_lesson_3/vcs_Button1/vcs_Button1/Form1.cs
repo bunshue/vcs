@@ -297,9 +297,39 @@ namespace vcs_Button1
 
         //------------------------------------------------------------  // 60個
 
+        int cnt = 0;
         private void button2_Click(object sender, EventArgs e)
         {
+            //設定按鈕樣式
+            //設定按鈕樣式 FlatStyle
+            if (cnt == 0)
+            {
+                button2.FlatStyle = FlatStyle.Flat;
+                button2.Text = "Flat";
+            }
+            else if (cnt == 1)
+            {
+                button2.FlatStyle = FlatStyle.Popup;
+                button2.Text = "Popup";
+            }
+            else if (cnt == 2)
+            {
+                button2.FlatStyle = FlatStyle.Standard;
+                button2.Text = "Standard";
+            }
+            else if (cnt == 3)
+            {
+                button2.FlatStyle = FlatStyle.System;
+                button2.Text = "System";
+            }
+            cnt++;
+            if (cnt > 3)
+            {
+                cnt = 0;
+            }
         }
+
+        //------------------------------------------------------------  // 60個
 
         private void button3_Click(object sender, EventArgs e)
         {

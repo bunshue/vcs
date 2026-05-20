@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace vcs_Class_all
+namespace vcs_Class2
 {
     class Class1
     {
     }
-
 
     class Date
     {

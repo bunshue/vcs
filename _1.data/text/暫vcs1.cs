@@ -5574,24 +5574,13 @@ viewer.ShowDialog();
 
 cap.SetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FOURCC, 4);
 
-
 int codec = Emgu.CV.CvInvoke.CV_FOURCC('P', 'I', 'M', '1');
 
-
-
-
-
-
-
-VideoFileWriter	
+VideoFileWriter
 AForge用的 vcs_VideoFileWriter OK 但是在WebCam上有些問題 總是Memory不足
-
 
 VideoWriter
 EMGU用的 在sugar使用OK
-
- 
-
 
             if (File.ReadAllText("setting.txt") != null)
             {
@@ -8634,16 +8623,6 @@ currentPlaylist.Item[integer]; 獲取或設置指定項目媒體信息，其子�
                 return null;
             }
         }
-        
-//------------------------------------------------------------  # 60個
-
-            //取得某一控件的參數
-            //獲取傳入對象的所有屬性名稱
-            Type types = button1.GetType();
-            foreach (var p in types.GetProperties())
-            {
-                richTextBox1.Text += "Type : \t" + p.PropertyType + "\tName : \t" + p.Name + "\n";
-            }
 
 //------------------------------------------------------------  # 60個
 

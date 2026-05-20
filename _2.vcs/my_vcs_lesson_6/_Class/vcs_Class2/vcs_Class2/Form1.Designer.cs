@@ -1,4 +1,4 @@
-﻿namespace vcs_Class_all
+﻿namespace vcs_Class2
 {
     partial class Form1
     {
