@@ -16,17 +16,10 @@ namespace vcs_Chart1
         SeriesChartType chartType = SeriesChartType.Point;
 
         //定義Chart大小與外觀
-        private const int CHART_WIDTH = 1000;
-        private const int CHART_HEIGHT = 500;
         private const int AXIS_X_MIN = 0;
         private const int AXIS_X_MAX = 360;
         private const int AXIS_Y_MIN = -200;
         private const int AXIS_Y_MAX = 200;
-        private const string TITLE = "三角函數";
-        private const string XLABLE = "Degree";
-        private const string YLABLE = "Amplitude";
-
-        //bool flag_show_value = false;
 
         public Form1()
         {
@@ -37,7 +30,9 @@ namespace vcs_Chart1
         {
             show_item_location();
 
-            show_chart();
+            //------------------------------------------------------------  # 60個
+
+            draw_chart1();
         }
 
         void show_item_location()
@@ -162,8 +157,8 @@ namespace vcs_Chart1
             dx = 200 + 10;
             dy = 60 + 10;
 
-            chart_type.Size = new Size(1000, 500);
-            chart_type.Location = new Point(x_st + dx * 0, y_st + dy * 4 - 50);
+            chart1.Size = new Size(1000, 500);
+            chart1.Location = new Point(x_st + dx * 0, y_st + dy * 4 - 50);
 
             richTextBox1.Size = new Size(300, 500);
             richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 4 - 50);
@@ -176,6 +171,13 @@ namespace vcs_Chart1
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         void radioButton_CheckedChanged(object sender, EventArgs e)
         {
@@ -354,12 +356,7 @@ namespace vcs_Chart1
                 chartType = SeriesChartType.Pyramid;
                 richTextBox1.Text += "金字塔圖類型\n";
             }
-            show_chart();
-        }
-
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
+            draw_chart1();
         }
 
         private double sind(double d)
@@ -372,98 +369,93 @@ namespace vcs_Chart1
             return Math.Cos(d * Math.PI / 180.0);
         }
 
-        void show_chart()
+        void draw_chart1()
         {
-            //richTextBox1.Text += "靜畫範例1, 用獨立數組做\n\r";
+            // 各種圖表類型
 
-            //清除圖表
-            chart_type.Series.Clear();
-            chart_type.Titles.Clear();
+            // 清除圖表
+            chart1.Series.Clear();
+            chart1.Titles.Clear();
 
-            //設定Chart大小與外觀
-            //全圖
-            chart_type.Size = new Size(CHART_WIDTH, CHART_HEIGHT);      //改變Cahrt大小
-            chart_type.Titles.Add(TITLE + " 用獨立數組做");                               //標題
+            // 全圖設定
+            chart1.Titles.Add("各種圖表類型");  // 標題
+            chart1.Size = new Size(1000, 500);  // 設定chart大小
 
-            //X軸
-            chart_type.ChartAreas[0].AxisX.Minimum = AXIS_X_MIN;        //設定X軸最小值
-            chart_type.ChartAreas[0].AxisX.Maximum = AXIS_X_MAX;        //設定X軸最大值
-            chart_type.ChartAreas[0].AxisX.Title = XLABLE;
-            chart_type.ChartAreas[0].AxisX.Enabled = AxisEnabled.True;  //顯示 或 隱藏 X 軸標示
-            chart_type.ChartAreas[0].AxisX.MajorGrid.Enabled = true;    //顯示 或 隱藏 X 軸標線
+            // X軸設定
+            chart1.ChartAreas[0].AxisX.Minimum = AXIS_X_MIN;  // 設定X軸最小值
+            chart1.ChartAreas[0].AxisX.Maximum = AXIS_X_MAX;  // 設定X軸最大值
+            chart1.ChartAreas[0].AxisX.Title = "角度";
+            chart1.ChartAreas[0].AxisX.Enabled = AxisEnabled.True;  // 顯示 或 隱藏 X 軸標示
+            chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = true;  // 顯示 或 隱藏 X 軸標線
 
-            //Y軸
-            chart_type.ChartAreas[0].AxisY.Minimum = AXIS_Y_MIN;        //設定Y軸最小值
-            chart_type.ChartAreas[0].AxisY.Maximum = AXIS_Y_MAX;        //設定Y軸最大值
-            chart_type.ChartAreas[0].AxisY.Title = YLABLE;
-            chart_type.ChartAreas[0].AxisY.Enabled = AxisEnabled.True;   //顯示 或 隱藏 Y 軸標示
-            chart_type.ChartAreas[0].AxisY.MajorGrid.Enabled = true;    //顯示 或 隱藏 Y 軸標線
+            // Y軸設定
+            chart1.ChartAreas[0].AxisY.Minimum = AXIS_Y_MIN;  // 設定Y軸最小值
+            chart1.ChartAreas[0].AxisY.Maximum = AXIS_Y_MAX;  // 設定Y軸最大值
+            chart1.ChartAreas[0].AxisY.Title = "高度";
+            chart1.ChartAreas[0].AxisY.Enabled = AxisEnabled.True;  // 顯示 或 隱藏 Y 軸標示
+            chart1.ChartAreas[0].AxisY.MajorGrid.Enabled = true;  // 顯示 或 隱藏 Y 軸標線
 
-            //設定數列大小與外觀
-            //series 1
-            Series series1 = new Series("sin", 500); //初始畫線條(標題，最大值)
-            series1.Color = Color.Red; //設定線條顏色
-            series1.Font = new System.Drawing.Font("新細明體", 10); //設定字型
-            series1.ChartType = chartType; //設定線條種類
-            series1.MarkerSize = 5;     //圖標大小
-            series1.IsValueShownAsLabel = false;   //將數值顯示在線上
+            // 設定數列1 的 大小與外觀
+            Series series1 = new Series("sin", 500);  // 初始畫線條(標題，最大值)
+            series1.Color = Color.Red;  // 設定線條顏色
+            series1.Font = new Font("新細明體", 10);  // 設定字型
+            series1.ChartType = chartType;  // 設定線條種類
+            series1.MarkerSize = 5;  // 圖標大小
+            series1.IsValueShownAsLabel = false;  // 將數值顯示在線上
 
-            //series 2
-            Series series2 = new Series("cos", 500); //初始畫線條(標題，最大值)
-            series2.Color = Color.Green; //設定線條顏色
-            series2.Font = new System.Drawing.Font("標楷體", 12); //設定字型
+            // 設定數列2 的 大小與外觀
+            Series series2 = new Series("cos", 500);  // 初始畫線條(標題，最大值)
+            series2.Color = Color.Green;  // 設定線條顏色
+            series2.Font = new Font("標楷體", 12);  // 設定字型
+            series2.ChartType = chartType;  // 設定線條種類
+            series2.MarkerSize = 5;  // 圖標大小
+            series2.IsValueShownAsLabel = false;  // 將數值顯示在線上
 
-            series2.ChartType = chartType; //設定線條種類
-            series2.MarkerSize = 5;     //圖標大小
-            series2.IsValueShownAsLabel = false;   //將數值顯示在線上
+            // 設定數列3 的 大小與外觀
+            Series series3 = new Series("sin + cos", 500);  // 初始畫線條(標題，最大值)
+            series3.Color = Color.Blue;  // 設定線條顏色
+            series3.Font = new Font("標楷體", 12);  // 設定字型
+            series3.ChartType = chartType;  // 設定線條種類
+            series3.MarkerSize = 5;  // 圖標大小
+            series3.IsValueShownAsLabel = false;  // 將數值顯示在線上
 
-            //series 3
-            Series series3 = new Series("sin + cos", 500); //初始畫線條(標題，最大值)
-            series3.Color = Color.Blue; //設定線條顏色
-            series3.Font = new System.Drawing.Font("標楷體", 12); //設定字型
-            series3.ChartType = chartType; //設定線條種類
-            series3.MarkerSize = 5;     //圖標大小
-            series3.IsValueShownAsLabel = false;   //將數值顯示在線上
+            // 設定 數列1 數列2 數列3 的 數值
 
-            int[] array_x = new int[37];
+            int[] array_xx = new int[37];
             int[] array_y1 = new int[37];
             int[] array_y2 = new int[37];
             int[] array_y3 = new int[37];
-
-            int i;
-            for (i = 0; i <= 360; i += 10)
+            for (int i = 0; i <= 360; i += 10)
             {
-                array_x[i / 10] = i;
+                array_xx[i / 10] = i;
                 array_y1[i / 10] = (int)(110 * sind(i));
                 array_y2[i / 10] = (int)(110 * cosd(i));
                 array_y3[i / 10] = (int)(110 * sind(i) + 110 * cosd(i));
-                //richTextBox1.Text += "len = " + chart_type.Series[0].Points.Count.ToString() + "\n";
-                //chart_type.Series[0].Points.AddXY(array_x[i / 10], array_y1[i / 10]);
-                series1.Points.AddXY(array_x[i / 10], array_y1[i / 10]);    //將數值1新增至序列1
-                series2.Points.AddXY(array_x[i / 10], array_y2[i / 10]);    //將數值2新增至序列2
-                series3.Points.AddXY(array_x[i / 10], array_y3[i / 10]);    //將數值3新增至序列3
+                //chart1.Series[0].Points.AddXY(array_xx[i / 10], array_y1[i / 10]);
+                series1.Points.AddXY(array_xx[i / 10], array_y1[i / 10]);  // 將數值1新增至數列1
+                series2.Points.AddXY(array_xx[i / 10], array_y2[i / 10]);  // 將數值2新增至數列2
+                series3.Points.AddXY(array_xx[i / 10], array_y3[i / 10]);  // 將數值3新增至數列3
             }
 
-            //經過chart_type.Series.Clear()後, chart_type.Series.Count = 0
-            chart_type.Series.Add(series1);//將序列1新增到chart上
-            //此時, chart_type.Series.Count = 1
-            chart_type.Series.Add(series2);//將序列2新增到chart上
-            //此時, chart_type.Series.Count = 2
-            chart_type.Series.Add(series3);//將序列3新增到chart上
-            //此時, chart_type.Series.Count = 3
+            // 將數列新增到chart上
+            chart1.Series.Add(series1);
+            chart1.Series.Add(series2);
+            chart1.Series.Add(series3);
+            richTextBox1.Text += "目前 chart1 上的數列數  : " + chart1.Series.Count.ToString() + "\n";
+            richTextBox1.Text += "目前 Series[0] 上的點數 : " + chart1.Series[0].Points.Count.ToString() + "\n";
+            richTextBox1.Text += "目前 Series[1] 上的點數 : " + chart1.Series[1].Points.Count.ToString() + "\n";
+            richTextBox1.Text += "目前 Series[2] 上的點數 : " + chart1.Series[2].Points.Count.ToString() + "\n";
+
             /*
-            if (cb_show_data.Checked == true)
+            richTextBox1.Text += "顯示資料\n";
+            int count = series1.Points.Count;
+            richTextBox1.Text += "共有 " + count.ToString() + " 筆資料\n";
+            for (int i = 0; i < count; i++)
             {
-                richTextBox1.Text += "顯示資料\n";
-                int count = series1.Points.Count;
-                richTextBox1.Text += "共有 " + count.ToString() + " 筆資料\n";
-                for (i = 0; i < count; i++)
-                {
-                    richTextBox1.Text += "x[" + i.ToString() + "] = " + series1.Points[i].XValue.ToString() + "\t";
-                    richTextBox1.Text += "sin[" + i.ToString() + "] = " + series1.Points[i].YValues[0].ToString() + "\t";
-                    richTextBox1.Text += "cos[" + i.ToString() + "] = " + series2.Points[i].YValues[0].ToString() + "\t";
-                    richTextBox1.Text += "sin[" + i.ToString() + "] + " + "cos[" + i.ToString() + "] = " + series3.Points[i].YValues[0].ToString() + "\n";
-                }
+                richTextBox1.Text += "x[" + i.ToString() + "] = " + series1.Points[i].XValue.ToString() + "\t";
+                richTextBox1.Text += "sin[" + i.ToString() + "] = " + series1.Points[i].YValues[0].ToString() + "\t";
+                richTextBox1.Text += "cos[" + i.ToString() + "] = " + series2.Points[i].YValues[0].ToString() + "\t";
+                richTextBox1.Text += "sin[" + i.ToString() + "] + " + "cos[" + i.ToString() + "] = " + series3.Points[i].YValues[0].ToString() + "\n";
             }
             */
         }

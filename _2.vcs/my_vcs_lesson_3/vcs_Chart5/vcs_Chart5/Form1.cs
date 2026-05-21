@@ -82,17 +82,18 @@ namespace vcs_Chart5
 
         void draw_chart0()
         {
+            // 直條圖
+
             // 清除圖表
             chart0.Series.Clear();
             chart0.Titles.Clear();
 
-            chart0.Titles.Add("直線圖");
-
-            //Chart繪製直線圖
+            chart0.Titles.Add("直條圖");
 
             //x軸只顯示一條，只要將資料都加入到一個序列內即可
             //而x軸顯示多條，則需要使用多個序列存放資料
 
+            // 設定數列1 的 大小與外觀
             Series[] series1 = new Series[3];
             double[] _y = new double[] { 77, 35, 131 };
             Color[] _colors = new Color[] { Color.Peru, Color.PowderBlue, Color.RosyBrown };
@@ -133,6 +134,7 @@ namespace vcs_Chart5
 
             chart1.Titles.Add("長條圖");
 
+            // 設定數列1 的 大小與外觀
             Series[] series1 = null;
             double[] _y = new double[] { 100, 57, 93, 26, 77, 88 };
             Color[] _colors = new Color[] { Color.Peru, Color.PowderBlue, Color.RosyBrown, Color.Salmon, Color.Sienna, Color.SlateBlue };
@@ -231,7 +233,6 @@ namespace vcs_Chart5
                     }
                 }
             }
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -252,8 +253,6 @@ namespace vcs_Chart5
         }
 
         //定義Chart大小與外觀
-        private const int CHART_WIDTH = 740;
-        private const int CHART_HEIGHT = 370;
         private const int AXIS_X_MIN = 0;
         private const int AXIS_X_MAX = 360;
         private const int AXIS_Y_MIN = -200;
@@ -264,10 +263,8 @@ namespace vcs_Chart5
 
         void chart_init(Chart chart)
         {
-            //設定Chart大小與外觀
-            //全圖
-            chart.Size = new Size(CHART_WIDTH, CHART_HEIGHT);      //改變Cahrt大小
-            chart.Titles.Add(TITLE);                               //標題
+            chart.Titles.Add(TITLE);  // 標題
+            chart.Size = new Size(500, 400);  // 設定chart大小
 
             //X軸
             chart.ChartAreas[0].AxisX.Minimum = AXIS_X_MIN;        //設定X軸最小值
@@ -321,8 +318,7 @@ namespace vcs_Chart5
             chart_init(chart3);
             richTextBox1.Text += "靜畫範例1, 用獨立數組做\n\r";
 
-            //設定數列大小與外觀
-            //series 1
+            // 設定數列1 的 大小與外觀
             Series series1 = new Series("sin", 500); //初始畫線條(標題，最大數值)
             series1.Color = Color.Red; //設定線條顏色
             series1.BorderColor = Color.Navy;  //設置數據邊框的顏色
@@ -352,7 +348,7 @@ namespace vcs_Chart5
             #LEGENDTEXT  圖例文字
             */
 
-            //series 2
+            // 設定數列2 的 大小與外觀
             Series series2 = new Series("cos", 500); //初始畫線條(標題，最大數值)
             series2.Color = Color.Green; //設定線條顏色
             series2.BorderColor = Color.Navy;  //設置數據邊框的顏色
@@ -366,7 +362,7 @@ namespace vcs_Chart5
             series2.ShadowOffset = 10;   //設置陰影偏移量
             series2.ShadowColor = Color.Orange; //設置陰影顏色
 
-            //series 3
+            // 設定數列3 的 大小與外觀
             Series series3 = new Series("sin + cos", 500); //初始畫線條(標題，最大數值)
             series3.Color = Color.Blue; //設定線條顏色
             series3.BorderColor = Color.Navy;  //設置數據邊框的顏色
@@ -431,7 +427,7 @@ namespace vcs_Chart5
             chart_init(chart4);
             richTextBox1.Text += "靜畫範例2, 用數組陣列做\n\r";
 
-            //設定數列大小與外觀
+            // 設定數列1 的 大小與外觀
             Series[] series = new Series[3];       //預先建立3個數組
             double[] _y = new double[] { 77, 35, 131 };
             Color[] colors = new Color[] { Color.Red, Color.Green, Color.Blue };
@@ -581,6 +577,6 @@ namespace vcs_Chart5
 
 */
 
-// chart1.Size = new Size(CHART_WIDTH, CHART_HEIGHT);       //改變Cahrt大小
+
 // chart1.Series[0].ChartType = SeriesChartType.Point;
 

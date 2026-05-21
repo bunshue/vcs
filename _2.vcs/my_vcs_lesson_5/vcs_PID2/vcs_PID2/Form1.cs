@@ -58,7 +58,7 @@ namespace vcs_PID2
 
             //設定Chart大小與外觀
             //全圖
-            chart1.Size = new Size(CHART_WIDTH, CHART_HEIGHT);      //改變Cahrt大小
+            chart1.Size = new Size(CHART_WIDTH, CHART_HEIGHT);  // 設定chart大小
             //chart1.Titles.Add(TITLE);                               //標題
 
             //X軸
@@ -90,7 +90,7 @@ namespace vcs_PID2
             chart1.ChartAreas[0].AxisY.LineColor = System.Drawing.Color.DarkBlue;//設置軸的線條顏色
             chart1.ChartAreas[0].AxisY.MajorGrid.LineColor = System.Drawing.Color.White;//設置網格線顏色
 
-            #region 圖表樣式
+            //#region 圖表樣式
             chart1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;//指定圖表元素的漸變樣式(中心向外，從左到右，從上到下等等)
             chart1.BackSecondaryColor = System.Drawing.Color.Yellow;//設置背景的輔助顏色
             chart1.BorderlineColor = System.Drawing.Color.Yellow;//設置圖像邊框的顏色
@@ -98,7 +98,7 @@ namespace vcs_PID2
             chart1.BorderlineWidth = 2;//設置圖像的邊框寬度
             chart1.BorderSkin.SkinStyle = System.Windows.Forms.DataVisualization.Charting.BorderSkinStyle.Emboss;//設置圖像的邊框外觀樣式
             chart1.BackColor = System.Drawing.Color.Yellow;//設置圖表的背景顏色
-            #endregion
+            //#endregion
             //chart1.Titles[0].Font = new System.Drawing.Font("標楷體", 30f);//设置图表标题字体样式和大小
             //chart1.Legends["Legend1"].Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Right;  //設定圖標顯示停靠的位置
         }
@@ -339,6 +339,5 @@ namespace vcs_PID2
             lb_total_candles.Text = total_candles.ToString();
             lb_total_candles.Text = "N = " + total_candles.ToString();
         }
-
     }
 }

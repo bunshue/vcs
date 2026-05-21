@@ -85,8 +85,11 @@ namespace vcs_Chart4
 
             //不知道如何自動邊界
 
+            // 設定數列1
             Series s1 = new Series();
+            // 設定數列2
             Series s2 = new Series();
+
             Random r = new Random();
             for (int i = 1; i < 13; i++)
             {
@@ -94,20 +97,22 @@ namespace vcs_Chart4
                 s2.Points.AddXY(i, r.Next(10, 30));
             }
 
+            // 將數列新增到chart上
             chart0.Series.Add(s1);
             chart0.Series.Add(s2);
+
             chart0.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Green;
-            DateTime t = DateTime.Parse("8:30");
+            DateTime dt = DateTime.Parse("8:30");
             for (int i = 1; i < 26; i++)
             {
                 if (i % 2 == 1)
                 {
                     CustomLabel label = new CustomLabel();
-                    label.Text = t.ToShortTimeString();
+                    label.Text = dt.ToShortTimeString();
                     label.ToPosition = i;
                     chart0.ChartAreas[0].AxisX.CustomLabels.Add(label);
                     label.GridTicks = GridTickTypes.Gridline;
-                    t = t.AddHours(1);
+                    dt = dt.AddHours(1);
                 }
             }
         }
@@ -123,8 +128,12 @@ namespace vcs_Chart4
             chart1.Titles.Clear();
             chart1.ChartAreas.Clear();
 
-            chart1.Size = new Size(500, 500);
+            chart1.Titles.Add("雷達圖1");
+            chart1.Size = new Size(400, 400);
+
             ChartArea area = chart1.ChartAreas.Add("NewArea");
+
+            // 設定數列1 的 大小與外觀
             Series series1 = chart1.Series.Add("雷達資料");
             series1.ChartArea = "NewArea";
             series1.ChartType = SeriesChartType.Radar;  // 圖表種類 : 雷達圖
@@ -153,8 +162,12 @@ namespace vcs_Chart4
             chart2.Titles.Clear();
             chart2.ChartAreas.Clear();
 
-            chart2.Size = new Size(500, 500);
+            chart2.Titles.Add("雷達圖2");
+            chart2.Size = new Size(400, 400);
+
             ChartArea area = chart2.ChartAreas.Add("NewArea");
+
+            // 設定數列1 的 大小與外觀
             Series series1 = chart2.Series.Add("雷達資料");
             series1.ChartArea = "NewArea";
             series1.ChartType = SeriesChartType.Radar;  // 圖表種類 : 雷達圖
@@ -194,6 +207,7 @@ namespace vcs_Chart4
                 number[i] = r.Next(350);
             }
 
+            // 設定數列1 的 大小與外觀
             Series series1 = new Series("Di0", 500); //初始畫線條(名稱，最大值)
             series1.Color = Color.Blue; //設定線條顏色
             series1.Font = new Font("新細明體", 10); //設定字型
@@ -213,7 +227,9 @@ namespace vcs_Chart4
             series1.Points.AddXY("I", number[8]);
             series1.Points.AddXY("J", number[9]);
             series1.LegendText = "折線圖";  // 圖例文字
-            chart3.Series.Add(series1);//將線畫在圖上
+
+            // 將數列新增到chart上
+            chart3.Series.Add(series1);
 
             if (mode == 0)
             {
@@ -260,6 +276,7 @@ namespace vcs_Chart4
             chart5.Series.Clear();
             chart5.Titles.Clear();
 
+            // 設定數列1 的 大小與外觀
             Series series1 = new Series("Di0", 500); //初始畫線條(名稱，最大值)
             series1.Color = Color.Blue; //設定線條顏色
             series1.Font = new System.Drawing.Font("新細明體", 10); //設定字型
@@ -290,7 +307,9 @@ namespace vcs_Chart4
             chart5.ChartAreas[0].AxisX.Maximum = 8;//設定Y軸最大值
             chart5.ChartAreas[0].AxisY.Minimum = 0;//設定Y軸最小值
             chart5.ChartAreas[0].AxisY.Maximum = 400;//設定Y軸最大值
-            chart5.Series.Add(series1);//將線畫在圖上
+
+            // 將數列新增到chart上
+            chart5.Series.Add(series1);
         }
 
         //------------------------------------------------------------  # 60個

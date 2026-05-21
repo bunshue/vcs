@@ -23,8 +23,11 @@ namespace vcs_Exif
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
+            //6060
+
             label3.Text = "取得圖片內的方向值,\n自動轉換圖片方向";
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             string filename = @"D:\_git\vcs\_1.data\______test_files1\orient1.jpg";
 
@@ -42,6 +45,29 @@ namespace vcs_Exif
                 ExifStuff.OrientImage(oriented_bm);
                 pictureBox2.Image = oriented_bm;
             }
+        }
+
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+
+            listView1.Size = new Size(640, 400);
+            listView1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
+
+            richTextBox1.Size = new Size(640, 320);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 6);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1620, 800);
+            this.Text = "vcs_Exif";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -102,7 +128,7 @@ namespace vcs_Exif
             richTextBox1.Text += "取得相片拍攝時間:\t" + TakePicDateTime + "\n";
         }
 
-        #region 获取数码相片的拍摄日期
+        //#region 获取数码相片的拍摄日期
         //获取图像文件的所有元数据属性，保存倒PropertyItem数组
         public static PropertyItem[] GetExif(string fileName)
         {
@@ -128,7 +154,7 @@ namespace vcs_Exif
             //若没有相关的EXIF信息则返回N/A
             return "N/A";
         }
-        #endregion
+        //#endregion
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -286,16 +312,16 @@ namespace vcs_Exif
 
     public class Picturexif
     {
-        #region 构造函数
+        //#region 构造函数
         /// <summary> 
         /// 构造函数 
         /// </summary> 
         public Picturexif()
         {
         }
-        #endregion
+        //#endregion
 
-        #region 数据转换结构
+        //#region 数据转换结构
         /// <summary> 
         /// 转换数据结构 
         /// </summary> 
@@ -305,9 +331,9 @@ namespace vcs_Exif
             public string RawValueAsString;//原始值串 
             public string DisplayValue;//显示值串 
         }
-        #endregion
+        //#endregion
 
-        #region EXIF元素结构
+        //#region EXIF元素结构
         /// <summary> 
         /// 结构：存储EXIF元素信息 
         /// </summary> 
@@ -355,9 +381,9 @@ namespace vcs_Exif
             public MetadataDetail SceneType;// added  
             public MetadataDetail CfaPattern;// added  
         }
-        #endregion
+        //#endregion
 
-        #region 查找EXIF元素值
+        //#region 查找EXIF元素值
         public string LookupEXIFValue(string Description, string Value)
         {
             string DescriptionValue = null;
@@ -366,7 +392,7 @@ namespace vcs_Exif
             {
                 case "MeteringMode":
 
-                    #region  MeteringMode
+                    //#region  MeteringMode
                     {
                         switch (Value)
                         {
@@ -388,12 +414,12 @@ namespace vcs_Exif
                                 DescriptionValue = "Other"; break;
                         }
                     }
-                    #endregion
+                    //#endregion
 
                     break;
                 case "ResolutionUnit":
 
-                    #region ResolutionUnit
+                    //#region ResolutionUnit
                     {
                         switch (Value)
                         {
@@ -406,12 +432,12 @@ namespace vcs_Exif
                         }
                     }
 
-                    #endregion
+                    //#endregion
 
                     break;
                 case "Flash":
 
-                    #region Flash
+                    //#region Flash
                     {
                         switch (Value)
                         {
@@ -425,12 +451,12 @@ namespace vcs_Exif
                                 DescriptionValue = "Flash fired and strobe return light detected"; break;
                         }
                     }
-                    #endregion
+                    //#endregion
 
                     break;
                 case "ExposureProg":
 
-                    #region ExposureProg
+                    //#region ExposureProg
                     {
                         switch (Value)
                         {
@@ -457,12 +483,12 @@ namespace vcs_Exif
                         }
                     }
 
-                    #endregion
+                    //#endregion
 
                     break;
                 case "CompConfig":
 
-                    #region CompConfig
+                    //#region CompConfig
                     {
                         switch (Value)
                         {
@@ -471,19 +497,19 @@ namespace vcs_Exif
                                 DescriptionValue = "YCbCr"; break;
                         }
                     }
-                    #endregion
+                    //#endregion
 
                     break;
                 case "Aperture":
 
-                    #region Aperture
+                    //#region Aperture
                     DescriptionValue = Value;
-                    #endregion
+                    //#endregion
 
                     break;
                 case "LightSource":
 
-                    #region LightSource
+                    //#region LightSource
                     {
                         switch (Value)
                         {
@@ -515,15 +541,15 @@ namespace vcs_Exif
                     }
 
 
-                    #endregion
+                    //#endregion
                     break;
 
             }
             return DescriptionValue;
         }
-        #endregion
+        //#endregion
 
-        #region 取得图片的EXIF信息
+        //#region 取得图片的EXIF信息
         public Metadata GetEXIFMetaData(string PhotoName)
         {
             // 创建一个图片的实例 
@@ -534,7 +560,7 @@ namespace vcs_Exif
             PropertyItem[] MyPropertyItemList = new PropertyItem[MyPropertyIdList.Length];
             //创建一个图像EXIT信息的实例结构对象，并且赋初值 
 
-            #region 创建一个图像EXIT信息的实例结构对象，并且赋初值
+            //#region 创建一个图像EXIT信息的实例结构对象，并且赋初值
             Metadata MyMetadata = new Metadata();
             MyMetadata.EquipmentMake.Hex = "10f";
             MyMetadata.CameraModel.Hex = "110";
@@ -568,7 +594,7 @@ namespace vcs_Exif
             MyMetadata.SensingMethod.Hex = "a217"; //added  
             MyMetadata.SceneType.Hex = "a301";
             MyMetadata.CfaPattern.Hex = "a302";
-            #endregion
+            //#endregion
 
             // ASCII编码 
             System.Text.ASCIIEncoding Value = new System.Text.ASCIIEncoding();
@@ -582,7 +608,7 @@ namespace vcs_Exif
                     string hexVal = "";
                     MyPropertyItemList[index] = MyImage.GetPropertyItem(MyPropertyId);
 
-                    #region 初始化各属性值
+                    //#region 初始化各属性值
                     string myPropertyIdString = MyImage.GetPropertyItem(MyPropertyId).Id.ToString("x");
                     switch (myPropertyIdString)
                     {
@@ -845,7 +871,7 @@ namespace vcs_Exif
 
 
                     }
-                    #endregion
+                    //#endregion
 
                     index++;
                 }
@@ -858,8 +884,24 @@ namespace vcs_Exif
             MyImage.Dispose();
             return MyMetadata;
         }
-        #endregion
+        //#endregion
     }
-
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
 

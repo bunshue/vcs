@@ -225,8 +225,8 @@ namespace vcs_Chart2
 
             //設定Chart大小與外觀
             //全圖
-            chart.Size = new Size(CHART_WIDTH, CHART_HEIGHT);      //改變Cahrt大小
-            chart.Titles.Add(TITLE);                               //標題
+            chart.Size = new Size(CHART_WIDTH, CHART_HEIGHT);  // 設定chart大小
+            chart.Titles.Add(TITLE);
 
             //X軸
             chart.ChartAreas[0].AxisX.Minimum = AXIS_X_MIN;        //設定X軸最小值
