@@ -331,7 +331,6 @@ namespace vcs_Comport_Sample_Temperature
             }
         }
 
-
         //溫度偵測圖表
         //繪圖類別
         public class RealtimeChart
@@ -902,4 +901,3 @@ namespace vcs_Comport_Sample_Temperature
         }
     }
 }
-

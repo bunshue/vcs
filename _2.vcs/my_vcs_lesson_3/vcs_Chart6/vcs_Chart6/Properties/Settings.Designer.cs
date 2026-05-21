@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_DateTimePicker.Properties
+namespace vcs_Chart6.Properties
 {
 
 

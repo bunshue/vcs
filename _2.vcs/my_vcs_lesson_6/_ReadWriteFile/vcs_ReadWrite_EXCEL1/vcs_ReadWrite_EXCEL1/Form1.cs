@@ -64,17 +64,11 @@ namespace vcs_ReadWrite_EXCEL1
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 200 + 5;
-            dy = 60 + 5;
-
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -85,7 +79,6 @@ namespace vcs_ReadWrite_EXCEL1
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -96,7 +89,6 @@ namespace vcs_ReadWrite_EXCEL1
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-
             button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
@@ -111,11 +103,11 @@ namespace vcs_ReadWrite_EXCEL1
             dataGridView1.Size = new Size(600, 200);
             dataGridView1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
-            richTextBox1.Size = new Size(600, 640 - 210);
+            richTextBox1.Size = new Size(600, 640 - 160);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 210);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1260, 700);
+            this.Size = new Size(1260, 750);
             this.Text = "vcs_ReadWrite_EXCEL1";
 
             //設定執行後的表單起始位置, 正中央
@@ -127,6 +119,8 @@ namespace vcs_ReadWrite_EXCEL1
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -184,7 +178,6 @@ namespace vcs_ReadWrite_EXCEL1
 
             // Close the Excel server.
             excel_app.Quit();
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -209,7 +202,6 @@ namespace vcs_ReadWrite_EXCEL1
             sw.Close();     //寫入Excel檔資料
 
             richTextBox1.Text += "存檔檔名: " + filename + "，此檔不能用程式讀取。\n";
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -253,8 +245,7 @@ namespace vcs_ReadWrite_EXCEL1
             colA.ColumnWidth = 12;
 
             // Create the chart.
-            Excel.Shape chart_shape = sheet.Shapes.AddChart(
-                Excel.XlChartType.xlLine, 400, 5, 300, 200);
+            Excel.Shape chart_shape = sheet.Shapes.AddChart(Excel.XlChartType.xlLine, 400, 5, 300, 200);
             Excel.Chart chart = chart_shape.Chart;
 
             // Set the data.
@@ -283,7 +274,6 @@ namespace vcs_ReadWrite_EXCEL1
             excel_app.Quit();
 
             richTextBox1.Text += "製作一個xlsx檔案 完成\n";
-
         }
 
         public class Account
@@ -318,9 +308,6 @@ namespace vcs_ReadWrite_EXCEL1
 
             // Display the list in an Excel spreadsheet.    電子表格程序
             DisplayInExcel(bankAccounts);
-
-
-
         }
 
         void DisplayInExcel(IEnumerable<Account> accounts)
@@ -603,10 +590,8 @@ namespace vcs_ReadWrite_EXCEL1
             // Make that range of cells bold and red.
             Excel.Range header_range = sheet.get_Range("A1", "C1");
             header_range.Font.Bold = true;
-            header_range.Font.Color =
-                System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Red);
-            header_range.Interior.Color =
-                System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Pink);
+            header_range.Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Red);
+            header_range.Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Pink);
 
             // Add some data to a range of cells.
             int[,] values =
@@ -626,10 +611,7 @@ namespace vcs_ReadWrite_EXCEL1
 
 
             const int xlQualityStandard = 0;
-            sheet.ExportAsFixedFormat(
-                Excel.XlFixedFormatType.xlTypePDF,
-                filename2, xlQualityStandard, true, false,
-                Type.Missing, Type.Missing, true, Type.Missing);
+            sheet.ExportAsFixedFormat(Excel.XlFixedFormatType.xlTypePDF, filename2, xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
 
             // Save the changes and close the workbook.
             workbook.Close(true, Type.Missing, Type.Missing);
@@ -800,7 +782,6 @@ namespace vcs_ReadWrite_EXCEL1
             GC.Collect();
 
             richTextBox1.Text += "存檔檔名: " + filename + ",  xls or xlsx\n";
-
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -849,6 +830,25 @@ namespace vcs_ReadWrite_EXCEL1
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+
 
 
 /*

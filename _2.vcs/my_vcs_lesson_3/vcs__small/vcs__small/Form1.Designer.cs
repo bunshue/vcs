@@ -28,29 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.bt_clear = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox_radiobutton3 = new System.Windows.Forms.GroupBox();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.chkLunch = new System.Windows.Forms.CheckBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox_radiobutton2 = new System.Windows.Forms.GroupBox();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.chkBreakfast = new System.Windows.Forms.CheckBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.groupBox_radiobutton1 = new System.Windows.Forms.GroupBox();
             this.rb_style1 = new System.Windows.Forms.RadioButton();
             this.rb_style2 = new System.Windows.Forms.RadioButton();
             this.rb_style3 = new System.Windows.Forms.RadioButton();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox_radiobutton0 = new System.Windows.Forms.GroupBox();
             this.rb_color1 = new System.Windows.Forms.RadioButton();
             this.rb_color3 = new System.Windows.Forms.RadioButton();
             this.rb_color2 = new System.Windows.Forms.RadioButton();
-            this.panel_b = new System.Windows.Forms.Panel();
-            this.panel_g = new System.Windows.Forms.Panel();
-            this.panel_r = new System.Windows.Forms.Panel();
             this.tb_b = new System.Windows.Forms.TextBox();
             this.tb_g = new System.Windows.Forms.TextBox();
             this.tb_r = new System.Windows.Forms.TextBox();
@@ -64,30 +62,52 @@
             this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
             this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panel_rgb = new System.Windows.Forms.Panel();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.groupBox_domainupdown = new System.Windows.Forms.GroupBox();
             this.domainUpDown1 = new System.Windows.Forms.DomainUpDown();
-            this.groupBox0 = new System.Windows.Forms.GroupBox();
+            this.groupBox_numericupdown = new System.Windows.Forms.GroupBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.bt_plus = new System.Windows.Forms.Button();
             this.bt_minus = new System.Windows.Forms.Button();
             this.lb_trackber = new System.Windows.Forms.Label();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.groupBox_dtp2 = new System.Windows.Forms.GroupBox();
+            this.lb_time_interval = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
+            this.bt1 = new System.Windows.Forms.Button();
+            this.bt2 = new System.Windows.Forms.Button();
+            this.groupBox_dtp3 = new System.Windows.Forms.GroupBox();
+            this.bt_dtp_get = new System.Windows.Forms.Button();
+            this.bt_dtp_set = new System.Windows.Forms.Button();
+            this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.groupBox_rgb = new System.Windows.Forms.GroupBox();
+            this.groupBox_dtp1 = new System.Windows.Forms.GroupBox();
+            this.groupBox_trackbar = new System.Windows.Forms.GroupBox();
+            this.groupBox_radiobutton3.SuspendLayout();
+            this.groupBox_radiobutton2.SuspendLayout();
+            this.groupBox_radiobutton1.SuspendLayout();
+            this.groupBox_radiobutton0.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.groupBox5.SuspendLayout();
-            this.groupBox0.SuspendLayout();
+            this.groupBox_domainupdown.SuspendLayout();
+            this.groupBox_numericupdown.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            this.groupBox_dtp2.SuspendLayout();
+            this.groupBox_dtp3.SuspendLayout();
+            this.groupBox_rgb.SuspendLayout();
+            this.groupBox_dtp1.SuspendLayout();
+            this.groupBox_trackbar.SuspendLayout();
             this.SuspendLayout();
             // 
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(582, 44);
+            this.bt_clear.Location = new System.Drawing.Point(435, 601);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(69, 32);
             this.bt_clear.TabIndex = 10;
@@ -98,25 +118,23 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(561, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(414, 569);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 9;
             this.richTextBox1.Text = "";
             // 
-            // groupBox2
+            // groupBox_radiobutton3
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.radioButton4);
-            this.groupBox2.Controls.Add(this.radioButton5);
-            this.groupBox2.Controls.Add(this.radioButton6);
-            this.groupBox2.Controls.Add(this.chkLunch);
-            this.groupBox2.Location = new System.Drawing.Point(258, 113);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(292, 95);
-            this.groupBox2.TabIndex = 12;
-            this.groupBox2.TabStop = false;
+            this.groupBox_radiobutton3.Controls.Add(this.radioButton4);
+            this.groupBox_radiobutton3.Controls.Add(this.radioButton5);
+            this.groupBox_radiobutton3.Controls.Add(this.radioButton6);
+            this.groupBox_radiobutton3.Controls.Add(this.chkLunch);
+            this.groupBox_radiobutton3.Location = new System.Drawing.Point(155, 129);
+            this.groupBox_radiobutton3.Name = "groupBox_radiobutton3";
+            this.groupBox_radiobutton3.Size = new System.Drawing.Size(176, 95);
+            this.groupBox_radiobutton3.TabIndex = 12;
+            this.groupBox_radiobutton3.TabStop = false;
             // 
             // radioButton4
             // 
@@ -164,19 +182,17 @@
             this.chkLunch.UseVisualStyleBackColor = true;
             this.chkLunch.CheckedChanged += new System.EventHandler(this.chkLunch_CheckedChanged);
             // 
-            // groupBox1
+            // groupBox_radiobutton2
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.radioButton3);
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Controls.Add(this.chkBreakfast);
-            this.groupBox1.Location = new System.Drawing.Point(258, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(292, 95);
-            this.groupBox1.TabIndex = 11;
-            this.groupBox1.TabStop = false;
+            this.groupBox_radiobutton2.Controls.Add(this.radioButton3);
+            this.groupBox_radiobutton2.Controls.Add(this.radioButton2);
+            this.groupBox_radiobutton2.Controls.Add(this.radioButton1);
+            this.groupBox_radiobutton2.Controls.Add(this.chkBreakfast);
+            this.groupBox_radiobutton2.Location = new System.Drawing.Point(155, 24);
+            this.groupBox_radiobutton2.Name = "groupBox_radiobutton2";
+            this.groupBox_radiobutton2.Size = new System.Drawing.Size(176, 95);
+            this.groupBox_radiobutton2.TabIndex = 11;
+            this.groupBox_radiobutton2.TabStop = false;
             // 
             // radioButton3
             // 
@@ -224,17 +240,17 @@
             this.chkBreakfast.UseVisualStyleBackColor = true;
             this.chkBreakfast.CheckedChanged += new System.EventHandler(this.chkBreakfast_CheckedChanged);
             // 
-            // groupBox4
+            // groupBox_radiobutton1
             // 
-            this.groupBox4.Controls.Add(this.rb_style1);
-            this.groupBox4.Controls.Add(this.rb_style2);
-            this.groupBox4.Controls.Add(this.rb_style3);
-            this.groupBox4.Location = new System.Drawing.Point(12, 125);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(226, 99);
-            this.groupBox4.TabIndex = 68;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "樣式(RB共用函數)";
+            this.groupBox_radiobutton1.Controls.Add(this.rb_style1);
+            this.groupBox_radiobutton1.Controls.Add(this.rb_style2);
+            this.groupBox_radiobutton1.Controls.Add(this.rb_style3);
+            this.groupBox_radiobutton1.Location = new System.Drawing.Point(12, 125);
+            this.groupBox_radiobutton1.Name = "groupBox_radiobutton1";
+            this.groupBox_radiobutton1.Size = new System.Drawing.Size(137, 99);
+            this.groupBox_radiobutton1.TabIndex = 68;
+            this.groupBox_radiobutton1.TabStop = false;
+            this.groupBox_radiobutton1.Text = "樣式(RB共用函數)";
             // 
             // rb_style1
             // 
@@ -271,17 +287,17 @@
             this.rb_style3.UseVisualStyleBackColor = true;
             this.rb_style3.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
-            // groupBox3
+            // groupBox_radiobutton0
             // 
-            this.groupBox3.Controls.Add(this.rb_color1);
-            this.groupBox3.Controls.Add(this.rb_color3);
-            this.groupBox3.Controls.Add(this.rb_color2);
-            this.groupBox3.Location = new System.Drawing.Point(12, 12);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(226, 107);
-            this.groupBox3.TabIndex = 67;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "顏色(RB共用函數)";
+            this.groupBox_radiobutton0.Controls.Add(this.rb_color1);
+            this.groupBox_radiobutton0.Controls.Add(this.rb_color3);
+            this.groupBox_radiobutton0.Controls.Add(this.rb_color2);
+            this.groupBox_radiobutton0.Location = new System.Drawing.Point(12, 12);
+            this.groupBox_radiobutton0.Name = "groupBox_radiobutton0";
+            this.groupBox_radiobutton0.Size = new System.Drawing.Size(137, 107);
+            this.groupBox_radiobutton0.TabIndex = 67;
+            this.groupBox_radiobutton0.TabStop = false;
+            this.groupBox_radiobutton0.Text = "顏色(RB共用函數)";
             // 
             // rb_color1
             // 
@@ -321,54 +337,30 @@
             this.rb_color2.UseVisualStyleBackColor = true;
             this.rb_color2.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
-            // panel_b
-            // 
-            this.panel_b.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel_b.Location = new System.Drawing.Point(442, 659);
-            this.panel_b.Name = "panel_b";
-            this.panel_b.Size = new System.Drawing.Size(100, 50);
-            this.panel_b.TabIndex = 84;
-            // 
-            // panel_g
-            // 
-            this.panel_g.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel_g.Location = new System.Drawing.Point(442, 596);
-            this.panel_g.Name = "panel_g";
-            this.panel_g.Size = new System.Drawing.Size(100, 50);
-            this.panel_g.TabIndex = 85;
-            // 
-            // panel_r
-            // 
-            this.panel_r.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel_r.Location = new System.Drawing.Point(442, 529);
-            this.panel_r.Name = "panel_r";
-            this.panel_r.Size = new System.Drawing.Size(100, 50);
-            this.panel_r.TabIndex = 82;
-            // 
             // tb_b
             // 
             this.tb_b.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_b.Location = new System.Drawing.Point(336, 673);
+            this.tb_b.Location = new System.Drawing.Point(301, 104);
             this.tb_b.Name = "tb_b";
-            this.tb_b.Size = new System.Drawing.Size(75, 32);
+            this.tb_b.Size = new System.Drawing.Size(58, 32);
             this.tb_b.TabIndex = 81;
             this.tb_b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tb_g
             // 
             this.tb_g.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_g.Location = new System.Drawing.Point(336, 601);
+            this.tb_g.Location = new System.Drawing.Point(301, 68);
             this.tb_g.Name = "tb_g";
-            this.tb_g.Size = new System.Drawing.Size(75, 32);
+            this.tb_g.Size = new System.Drawing.Size(58, 32);
             this.tb_g.TabIndex = 80;
             this.tb_g.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tb_r
             // 
             this.tb_r.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_r.Location = new System.Drawing.Point(336, 538);
+            this.tb_r.Location = new System.Drawing.Point(301, 32);
             this.tb_r.Name = "tb_r";
-            this.tb_r.Size = new System.Drawing.Size(75, 32);
+            this.tb_r.Size = new System.Drawing.Size(58, 32);
             this.tb_r.TabIndex = 79;
             this.tb_r.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -376,7 +368,7 @@
             // 
             this.lb_b.AutoSize = true;
             this.lb_b.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_b.Location = new System.Drawing.Point(14, 676);
+            this.lb_b.Location = new System.Drawing.Point(6, 106);
             this.lb_b.Name = "lb_b";
             this.lb_b.Size = new System.Drawing.Size(22, 24);
             this.lb_b.TabIndex = 78;
@@ -386,7 +378,7 @@
             // 
             this.lb_g.AutoSize = true;
             this.lb_g.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_g.Location = new System.Drawing.Point(14, 603);
+            this.lb_g.Location = new System.Drawing.Point(6, 69);
             this.lb_g.Name = "lb_g";
             this.lb_g.Size = new System.Drawing.Size(22, 24);
             this.lb_g.TabIndex = 77;
@@ -396,7 +388,7 @@
             // 
             this.lb_r.AutoSize = true;
             this.lb_r.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_r.Location = new System.Drawing.Point(14, 541);
+            this.lb_r.Location = new System.Drawing.Point(6, 34);
             this.lb_r.Name = "lb_r";
             this.lb_r.Size = new System.Drawing.Size(22, 24);
             this.lb_r.TabIndex = 76;
@@ -405,7 +397,7 @@
             // hScrollBar_b
             // 
             this.hScrollBar_b.LargeChange = 1;
-            this.hScrollBar_b.Location = new System.Drawing.Point(49, 676);
+            this.hScrollBar_b.Location = new System.Drawing.Point(30, 107);
             this.hScrollBar_b.Maximum = 255;
             this.hScrollBar_b.Name = "hScrollBar_b";
             this.hScrollBar_b.Size = new System.Drawing.Size(263, 21);
@@ -415,7 +407,7 @@
             // hScrollBar_g
             // 
             this.hScrollBar_g.LargeChange = 1;
-            this.hScrollBar_g.Location = new System.Drawing.Point(49, 603);
+            this.hScrollBar_g.Location = new System.Drawing.Point(30, 70);
             this.hScrollBar_g.Maximum = 255;
             this.hScrollBar_g.Name = "hScrollBar_g";
             this.hScrollBar_g.Size = new System.Drawing.Size(263, 21);
@@ -425,7 +417,7 @@
             // hScrollBar_r
             // 
             this.hScrollBar_r.LargeChange = 1;
-            this.hScrollBar_r.Location = new System.Drawing.Point(49, 541);
+            this.hScrollBar_r.Location = new System.Drawing.Point(30, 35);
             this.hScrollBar_r.Maximum = 255;
             this.hScrollBar_r.Name = "hScrollBar_r";
             this.hScrollBar_r.Size = new System.Drawing.Size(263, 21);
@@ -435,7 +427,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 512);
+            this.label1.Location = new System.Drawing.Point(17, 509);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(33, 12);
@@ -467,50 +459,42 @@
             this.pictureBox1.TabIndex = 69;
             this.pictureBox1.TabStop = false;
             // 
-            // panel_rgb
+            // groupBox_domainupdown
             // 
-            this.panel_rgb.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel_rgb.Location = new System.Drawing.Point(417, 514);
-            this.panel_rgb.Name = "panel_rgb";
-            this.panel_rgb.Size = new System.Drawing.Size(159, 210);
-            this.panel_rgb.TabIndex = 83;
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.domainUpDown1);
-            this.groupBox5.Location = new System.Drawing.Point(680, 246);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(300, 150);
-            this.groupBox5.TabIndex = 87;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "DomainUpDown";
+            this.groupBox_domainupdown.Controls.Add(this.domainUpDown1);
+            this.groupBox_domainupdown.Location = new System.Drawing.Point(633, 12);
+            this.groupBox_domainupdown.Name = "groupBox_domainupdown";
+            this.groupBox_domainupdown.Size = new System.Drawing.Size(264, 107);
+            this.groupBox_domainupdown.TabIndex = 87;
+            this.groupBox_domainupdown.TabStop = false;
+            this.groupBox_domainupdown.Text = "DomainUpDown";
             // 
             // domainUpDown1
             // 
             this.domainUpDown1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.domainUpDown1.Location = new System.Drawing.Point(26, 59);
+            this.domainUpDown1.Location = new System.Drawing.Point(26, 33);
             this.domainUpDown1.Name = "domainUpDown1";
             this.domainUpDown1.Size = new System.Drawing.Size(226, 33);
             this.domainUpDown1.TabIndex = 0;
             this.domainUpDown1.Text = "domainUpDown1";
             this.domainUpDown1.SelectedItemChanged += new System.EventHandler(this.domainUpDown1_SelectedItemChanged);
             // 
-            // groupBox0
+            // groupBox_numericupdown
             // 
-            this.groupBox0.Controls.Add(this.numericUpDown1);
-            this.groupBox0.Controls.Add(this.bt_plus);
-            this.groupBox0.Controls.Add(this.bt_minus);
-            this.groupBox0.Location = new System.Drawing.Point(361, 246);
-            this.groupBox0.Name = "groupBox0";
-            this.groupBox0.Size = new System.Drawing.Size(300, 150);
-            this.groupBox0.TabIndex = 86;
-            this.groupBox0.TabStop = false;
-            this.groupBox0.Text = "NumericUpDown";
+            this.groupBox_numericupdown.Controls.Add(this.numericUpDown1);
+            this.groupBox_numericupdown.Controls.Add(this.bt_plus);
+            this.groupBox_numericupdown.Controls.Add(this.bt_minus);
+            this.groupBox_numericupdown.Location = new System.Drawing.Point(349, 14);
+            this.groupBox_numericupdown.Name = "groupBox_numericupdown";
+            this.groupBox_numericupdown.Size = new System.Drawing.Size(278, 105);
+            this.groupBox_numericupdown.TabIndex = 86;
+            this.groupBox_numericupdown.TabStop = false;
+            this.groupBox_numericupdown.Text = "NumericUpDown";
             // 
             // numericUpDown1
             // 
             this.numericUpDown1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.numericUpDown1.Location = new System.Drawing.Point(22, 59);
+            this.numericUpDown1.Location = new System.Drawing.Point(10, 41);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(200, 33);
             this.numericUpDown1.TabIndex = 0;
@@ -518,7 +502,7 @@
             // 
             // bt_plus
             // 
-            this.bt_plus.Location = new System.Drawing.Point(238, 40);
+            this.bt_plus.Location = new System.Drawing.Point(226, 22);
             this.bt_plus.Name = "bt_plus";
             this.bt_plus.Size = new System.Drawing.Size(32, 32);
             this.bt_plus.TabIndex = 2;
@@ -528,7 +512,7 @@
             // 
             // bt_minus
             // 
-            this.bt_minus.Location = new System.Drawing.Point(238, 78);
+            this.bt_minus.Location = new System.Drawing.Point(226, 60);
             this.bt_minus.Name = "bt_minus";
             this.bt_minus.Size = new System.Drawing.Size(32, 32);
             this.bt_minus.TabIndex = 3;
@@ -540,7 +524,7 @@
             // 
             this.lb_trackber.AutoSize = true;
             this.lb_trackber.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_trackber.Location = new System.Drawing.Point(370, 455);
+            this.lb_trackber.Location = new System.Drawing.Point(19, 62);
             this.lb_trackber.Name = "lb_trackber";
             this.lb_trackber.Size = new System.Drawing.Size(64, 24);
             this.lb_trackber.TabIndex = 89;
@@ -548,7 +532,7 @@
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(371, 415);
+            this.trackBar1.Location = new System.Drawing.Point(12, 25);
             this.trackBar1.Maximum = 100;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -558,54 +542,245 @@
             this.trackBar1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.trackBar1_MouseMove);
             this.trackBar1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBar1_MouseUp);
             // 
+            // groupBox_dtp2
+            // 
+            this.groupBox_dtp2.Controls.Add(this.lb_time_interval);
+            this.groupBox_dtp2.Controls.Add(this.textBox2);
+            this.groupBox_dtp2.Controls.Add(this.dateTimePicker3);
+            this.groupBox_dtp2.Controls.Add(this.bt1);
+            this.groupBox_dtp2.Controls.Add(this.bt2);
+            this.groupBox_dtp2.Location = new System.Drawing.Point(356, 409);
+            this.groupBox_dtp2.Name = "groupBox_dtp2";
+            this.groupBox_dtp2.Size = new System.Drawing.Size(220, 140);
+            this.groupBox_dtp2.TabIndex = 95;
+            this.groupBox_dtp2.TabStop = false;
+            this.groupBox_dtp2.Text = "DateTimePicker";
+            // 
+            // lb_time_interval
+            // 
+            this.lb_time_interval.AutoSize = true;
+            this.lb_time_interval.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_time_interval.Location = new System.Drawing.Point(9, 106);
+            this.lb_time_interval.Name = "lb_time_interval";
+            this.lb_time_interval.Size = new System.Drawing.Size(139, 21);
+            this.lb_time_interval.TabIndex = 113;
+            this.lb_time_interval.Text = "lb_time_interval";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox2.Location = new System.Drawing.Point(10, 24);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(150, 36);
+            this.textBox2.TabIndex = 49;
+            this.textBox2.Text = "10";
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // dateTimePicker3
+            // 
+            this.dateTimePicker3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.dateTimePicker3.Location = new System.Drawing.Point(10, 69);
+            this.dateTimePicker3.Name = "dateTimePicker3";
+            this.dateTimePicker3.Size = new System.Drawing.Size(150, 30);
+            this.dateTimePicker3.TabIndex = 37;
+            this.dateTimePicker3.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
+            // 
+            // bt1
+            // 
+            this.bt1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt1.Location = new System.Drawing.Point(166, 25);
+            this.bt1.Name = "bt1";
+            this.bt1.Size = new System.Drawing.Size(55, 30);
+            this.bt1.TabIndex = 70;
+            this.bt1.Text = "倒數";
+            this.bt1.UseVisualStyleBackColor = true;
+            this.bt1.Click += new System.EventHandler(this.bt1_Click);
+            // 
+            // bt2
+            // 
+            this.bt2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt2.Location = new System.Drawing.Point(166, 74);
+            this.bt2.Name = "bt2";
+            this.bt2.Size = new System.Drawing.Size(55, 30);
+            this.bt2.TabIndex = 71;
+            this.bt2.Text = "恢復";
+            this.bt2.UseVisualStyleBackColor = true;
+            this.bt2.Click += new System.EventHandler(this.bt2_Click);
+            // 
+            // groupBox_dtp3
+            // 
+            this.groupBox_dtp3.Controls.Add(this.bt_dtp_get);
+            this.groupBox_dtp3.Controls.Add(this.bt_dtp_set);
+            this.groupBox_dtp3.Controls.Add(this.dateTimePicker4);
+            this.groupBox_dtp3.Location = new System.Drawing.Point(587, 409);
+            this.groupBox_dtp3.Name = "groupBox_dtp3";
+            this.groupBox_dtp3.Size = new System.Drawing.Size(160, 140);
+            this.groupBox_dtp3.TabIndex = 94;
+            this.groupBox_dtp3.TabStop = false;
+            this.groupBox_dtp3.Text = "DateTimePicker";
+            // 
+            // bt_dtp_get
+            // 
+            this.bt_dtp_get.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_dtp_get.Location = new System.Drawing.Point(10, 63);
+            this.bt_dtp_get.Name = "bt_dtp_get";
+            this.bt_dtp_get.Size = new System.Drawing.Size(80, 35);
+            this.bt_dtp_get.TabIndex = 86;
+            this.bt_dtp_get.Text = "取得時間";
+            this.bt_dtp_get.UseVisualStyleBackColor = true;
+            this.bt_dtp_get.Click += new System.EventHandler(this.bt_dtp_get_Click);
+            // 
+            // bt_dtp_set
+            // 
+            this.bt_dtp_set.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_dtp_set.Location = new System.Drawing.Point(10, 24);
+            this.bt_dtp_set.Name = "bt_dtp_set";
+            this.bt_dtp_set.Size = new System.Drawing.Size(80, 35);
+            this.bt_dtp_set.TabIndex = 85;
+            this.bt_dtp_set.Text = "設定範圍";
+            this.bt_dtp_set.UseVisualStyleBackColor = true;
+            this.bt_dtp_set.Click += new System.EventHandler(this.bt_dtp_set_Click);
+            // 
+            // dateTimePicker4
+            // 
+            this.dateTimePicker4.Location = new System.Drawing.Point(10, 104);
+            this.dateTimePicker4.Name = "dateTimePicker4";
+            this.dateTimePicker4.Size = new System.Drawing.Size(147, 22);
+            this.dateTimePicker4.TabIndex = 83;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label2.Location = new System.Drawing.Point(18, 85);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(394, 24);
+            this.label2.TabIndex = 93;
+            this.label2.Text = "改Format為Time、ShowUpDown為True";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label3.Location = new System.Drawing.Point(18, 18);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(58, 24);
+            this.label3.TabIndex = 92;
+            this.label3.Text = "預設";
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimePicker2.Location = new System.Drawing.Point(22, 120);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.ShowUpDown = true;
+            this.dateTimePicker2.Size = new System.Drawing.Size(288, 36);
+            this.dateTimePicker2.TabIndex = 91;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.dateTimePicker1.Location = new System.Drawing.Point(22, 46);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(288, 36);
+            this.dateTimePicker1.TabIndex = 90;
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // groupBox_rgb
+            // 
+            this.groupBox_rgb.Controls.Add(this.lb_r);
+            this.groupBox_rgb.Controls.Add(this.hScrollBar_r);
+            this.groupBox_rgb.Controls.Add(this.hScrollBar_g);
+            this.groupBox_rgb.Controls.Add(this.hScrollBar_b);
+            this.groupBox_rgb.Controls.Add(this.lb_g);
+            this.groupBox_rgb.Controls.Add(this.lb_b);
+            this.groupBox_rgb.Controls.Add(this.tb_r);
+            this.groupBox_rgb.Controls.Add(this.tb_g);
+            this.groupBox_rgb.Controls.Add(this.tb_b);
+            this.groupBox_rgb.Location = new System.Drawing.Point(12, 570);
+            this.groupBox_rgb.Name = "groupBox_rgb";
+            this.groupBox_rgb.Size = new System.Drawing.Size(378, 160);
+            this.groupBox_rgb.TabIndex = 96;
+            this.groupBox_rgb.TabStop = false;
+            this.groupBox_rgb.Text = "RGB";
+            // 
+            // groupBox_dtp1
+            // 
+            this.groupBox_dtp1.Controls.Add(this.label3);
+            this.groupBox_dtp1.Controls.Add(this.dateTimePicker1);
+            this.groupBox_dtp1.Controls.Add(this.dateTimePicker2);
+            this.groupBox_dtp1.Controls.Add(this.label2);
+            this.groupBox_dtp1.Location = new System.Drawing.Point(350, 234);
+            this.groupBox_dtp1.Name = "groupBox_dtp1";
+            this.groupBox_dtp1.Size = new System.Drawing.Size(426, 168);
+            this.groupBox_dtp1.TabIndex = 97;
+            this.groupBox_dtp1.TabStop = false;
+            this.groupBox_dtp1.Text = "DateTimePicker";
+            // 
+            // groupBox_trackbar
+            // 
+            this.groupBox_trackbar.Controls.Add(this.lb_trackber);
+            this.groupBox_trackbar.Controls.Add(this.trackBar1);
+            this.groupBox_trackbar.Location = new System.Drawing.Point(350, 124);
+            this.groupBox_trackbar.Name = "groupBox_trackbar";
+            this.groupBox_trackbar.Size = new System.Drawing.Size(389, 100);
+            this.groupBox_trackbar.TabIndex = 98;
+            this.groupBox_trackbar.TabStop = false;
+            this.groupBox_trackbar.Text = "Trackbar";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1000, 742);
-            this.Controls.Add(this.lb_trackber);
-            this.Controls.Add(this.trackBar1);
-            this.Controls.Add(this.groupBox5);
-            this.Controls.Add(this.groupBox0);
-            this.Controls.Add(this.panel_b);
-            this.Controls.Add(this.panel_g);
-            this.Controls.Add(this.panel_r);
-            this.Controls.Add(this.tb_b);
-            this.Controls.Add(this.tb_g);
-            this.Controls.Add(this.tb_r);
-            this.Controls.Add(this.lb_b);
-            this.Controls.Add(this.lb_g);
-            this.Controls.Add(this.lb_r);
-            this.Controls.Add(this.hScrollBar_b);
-            this.Controls.Add(this.hScrollBar_g);
-            this.Controls.Add(this.hScrollBar_r);
+            this.Controls.Add(this.groupBox_trackbar);
+            this.Controls.Add(this.groupBox_dtp1);
+            this.Controls.Add(this.groupBox_rgb);
+            this.Controls.Add(this.groupBox_dtp2);
+            this.Controls.Add(this.groupBox_dtp3);
+            this.Controls.Add(this.groupBox_domainupdown);
+            this.Controls.Add(this.groupBox_numericupdown);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.hScrollBar1);
             this.Controls.Add(this.vScrollBar1);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.panel_rgb);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBox_radiobutton1);
+            this.Controls.Add(this.groupBox_radiobutton0);
+            this.Controls.Add(this.groupBox_radiobutton3);
+            this.Controls.Add(this.groupBox_radiobutton2);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.groupBox_radiobutton3.ResumeLayout(false);
+            this.groupBox_radiobutton3.PerformLayout();
+            this.groupBox_radiobutton2.ResumeLayout(false);
+            this.groupBox_radiobutton2.PerformLayout();
+            this.groupBox_radiobutton1.ResumeLayout(false);
+            this.groupBox_radiobutton1.PerformLayout();
+            this.groupBox_radiobutton0.ResumeLayout(false);
+            this.groupBox_radiobutton0.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox0.ResumeLayout(false);
+            this.groupBox_domainupdown.ResumeLayout(false);
+            this.groupBox_numericupdown.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            this.groupBox_dtp2.ResumeLayout(false);
+            this.groupBox_dtp2.PerformLayout();
+            this.groupBox_dtp3.ResumeLayout(false);
+            this.groupBox_rgb.ResumeLayout(false);
+            this.groupBox_rgb.PerformLayout();
+            this.groupBox_dtp1.ResumeLayout(false);
+            this.groupBox_dtp1.PerformLayout();
+            this.groupBox_trackbar.ResumeLayout(false);
+            this.groupBox_trackbar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -615,27 +790,24 @@
 
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox_radiobutton3;
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.RadioButton radioButton5;
         private System.Windows.Forms.RadioButton radioButton6;
         private System.Windows.Forms.CheckBox chkLunch;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox_radiobutton2;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.CheckBox chkBreakfast;
-        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox groupBox_radiobutton1;
         private System.Windows.Forms.RadioButton rb_style1;
         private System.Windows.Forms.RadioButton rb_style2;
         private System.Windows.Forms.RadioButton rb_style3;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox_radiobutton0;
         private System.Windows.Forms.RadioButton rb_color1;
         private System.Windows.Forms.RadioButton rb_color3;
         private System.Windows.Forms.RadioButton rb_color2;
-        private System.Windows.Forms.Panel panel_b;
-        private System.Windows.Forms.Panel panel_g;
-        private System.Windows.Forms.Panel panel_r;
         private System.Windows.Forms.TextBox tb_b;
         private System.Windows.Forms.TextBox tb_g;
         private System.Windows.Forms.TextBox tb_r;
@@ -649,15 +821,32 @@
         private System.Windows.Forms.HScrollBar hScrollBar1;
         private System.Windows.Forms.VScrollBar vScrollBar1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Panel panel_rgb;
-        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.GroupBox groupBox_domainupdown;
         private System.Windows.Forms.DomainUpDown domainUpDown1;
-        private System.Windows.Forms.GroupBox groupBox0;
+        private System.Windows.Forms.GroupBox groupBox_numericupdown;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button bt_plus;
         private System.Windows.Forms.Button bt_minus;
         private System.Windows.Forms.Label lb_trackber;
         private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.GroupBox groupBox_dtp2;
+        private System.Windows.Forms.Label lb_time_interval;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker3;
+        private System.Windows.Forms.Button bt1;
+        private System.Windows.Forms.Button bt2;
+        private System.Windows.Forms.GroupBox groupBox_dtp3;
+        private System.Windows.Forms.Button bt_dtp_get;
+        private System.Windows.Forms.Button bt_dtp_set;
+        private System.Windows.Forms.DateTimePicker dateTimePicker4;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.GroupBox groupBox_rgb;
+        private System.Windows.Forms.GroupBox groupBox_dtp1;
+        private System.Windows.Forms.GroupBox groupBox_trackbar;
     }
 }
 

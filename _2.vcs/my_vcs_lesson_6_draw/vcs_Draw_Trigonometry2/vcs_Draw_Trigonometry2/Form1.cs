@@ -17,8 +17,8 @@ namespace vcs_Draw_Trigonometry2
         public class RealtimeChart
         {
             private Chart chart1 = null;
-            private int chartWidth = 640*3/4;
-            private int chartHeight = 480*3/4;
+            private int chartWidth = 640 * 3 / 4;
+            private int chartHeight = 480 * 3 / 4;
             private string nameAxisX = "X軸標題";
             private string nameAxisY = "Y軸標題";
 
@@ -108,8 +108,6 @@ namespace vcs_Draw_Trigonometry2
         {
             //this.pictureBox1.Invalidate();
 
-
-
             // Define some variables
             int numberOfPointsInChart = 15;
             int numberOfPointsAfterRemoval = 15;
@@ -144,9 +142,6 @@ namespace vcs_Draw_Trigonometry2
 
             // Redraw chart
             chart1.Invalidate();
-
-
-
         }
 
         private double rad(double d)
@@ -214,15 +209,10 @@ namespace vcs_Draw_Trigonometry2
             e.Graphics.DrawLine(new Pen(Color.Black, 2), 200, y_st, x_st, y_st);
             e.Graphics.DrawLine(new Pen(Color.Black, 2), x_st, 200, x_st, y_st);
 
-
             pt = new PointF(x_st, y_st);
             FillCircle(e.Graphics, pt, 10, Color.Red);
 
             angle -= 6;
-
-
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -232,7 +222,6 @@ namespace vcs_Draw_Trigonometry2
             timer1.Enabled = true;
             this.Controls.Add(chart1);
             chart1.BringToFront();
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -240,7 +229,6 @@ namespace vcs_Draw_Trigonometry2
             //停止
             timer1.Enabled = false;
             this.Controls.Remove(chart1);
-
         }
     }
 }
