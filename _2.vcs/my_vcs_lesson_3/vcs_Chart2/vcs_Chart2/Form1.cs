@@ -69,28 +69,25 @@ namespace vcs_Chart2
 
         void draw_chart0()
         {
-            chart_init(chart0);
-            Series series1 = new Series();
-            chart0.Series.Add(series1);
+            //清除圖表
+            chart0.Series.Clear();
+            chart0.Titles.Clear();
+
+            //使用客製畫面
+            //chart_init(chart0);
+
+            Series series0 = new Series();
+            chart0.Series.Add(series0);
             chart0.Series[0].ChartType = SeriesChartType.Point;  // 圖表種類 : 點狀圖
-            //chart0.Series[0].ChartType = chartType;
             //series1.ChartType = SeriesChartType.Point;  // 圖表種類 : 點狀圖
             timer0.Enabled = true;
-
         }
 
         //------------------------------------------------------------  # 60個
 
         void draw_chart1()
         {
-            //清除圖表
-            chart1.Series.Clear();
-            chart1.Titles.Clear();
 
-            Series series1 = new Series();
-            chart1.Series.Add(series1);
-            chart1.Series[0].ChartType = SeriesChartType.Point;
-            timer1.Enabled = true;
         }
 
         //------------------------------------------------------------  # 60個
@@ -112,15 +109,15 @@ namespace vcs_Chart2
                 Legend legend = new Legend();
                 Series series = new Series();
 
-                chart1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(223)))), ((int)(((byte)(193)))));
-                chart1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
-                chart1.BorderlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(64)))), ((int)(((byte)(1)))));
-                chart1.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+                chart1.BackColor = Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(223)))), ((int)(((byte)(193)))));
+                chart1.BackGradientStyle = GradientStyle.TopBottom;
+                chart1.BorderlineColor = Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(64)))), ((int)(((byte)(1)))));
+                chart1.BorderlineDashStyle = ChartDashStyle.Solid;
                 chart1.BorderlineWidth = 2;
-                chart1.BorderSkin.SkinStyle = System.Windows.Forms.DataVisualization.Charting.BorderSkinStyle.Emboss;
-                chart1.Location = new System.Drawing.Point(20, 20);
+                chart1.BorderSkin.SkinStyle = BorderSkinStyle.Emboss;
+                chart1.Location = new Point(20, 20);
                 chart1.Name = "chart1";
-                chart1.Size = new System.Drawing.Size(chartWidth, chartHeight);
+                chart1.Size = new Size(chartWidth, chartHeight);
                 chart1.TabIndex = 1;
                 chart1.Dock = System.Windows.Forms.DockStyle.None;
 
@@ -131,37 +128,37 @@ namespace vcs_Chart2
                 ctArea.Area3DStyle.Rotation = 10;
                 ctArea.Area3DStyle.WallWidth = 0;
                 ctArea.AxisX.IsLabelAutoFit = false;
-                ctArea.AxisX.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
-                ctArea.AxisX.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                ctArea.AxisX.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                ctArea.AxisX.MinorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
+                ctArea.AxisX.LabelStyle.Font = new Font("Trebuchet MS", 8.25F, FontStyle.Bold);
+                ctArea.AxisX.LineColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+                ctArea.AxisX.MajorGrid.LineColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+                ctArea.AxisX.MinorGrid.LineDashStyle = ChartDashStyle.Dash;
                 ctArea.AxisX.Title = nameAxisX;
                 ctArea.AxisY.IsLabelAutoFit = false;
-                ctArea.AxisY.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
-                ctArea.AxisY.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                ctArea.AxisY.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+                ctArea.AxisY.LabelStyle.Font = new Font("Trebuchet MS", 8.25F, FontStyle.Bold);
+                ctArea.AxisY.LineColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+                ctArea.AxisY.MajorGrid.LineColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
                 ctArea.AxisY.Maximum = 5000D;
                 ctArea.AxisY.Minimum = 0D;
                 ctArea.AxisY.Title = nameAxisY;
-                ctArea.BackColor = System.Drawing.Color.OldLace;
-                ctArea.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
-                ctArea.BackSecondaryColor = System.Drawing.Color.White;
-                ctArea.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                ctArea.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+                ctArea.BackColor = Color.OldLace;
+                ctArea.BackGradientStyle = GradientStyle.TopBottom;
+                ctArea.BackSecondaryColor = Color.White;
+                ctArea.BorderColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+                ctArea.BorderDashStyle = ChartDashStyle.Solid;
                 ctArea.Name = "Default";
-                ctArea.ShadowColor = System.Drawing.Color.Transparent;
+                ctArea.ShadowColor = Color.Transparent;
                 chart1.ChartAreas.Add(ctArea);
 
-                legend.BackColor = System.Drawing.Color.Transparent;
+                legend.BackColor = Color.Transparent;
                 legend.Enabled = false;
-                legend.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
+                legend.Font = new Font("Trebuchet MS", 8.25F, FontStyle.Bold);
                 legend.IsTextAutoFit = false;
                 legend.Name = "Default";
                 chart1.Legends.Add(legend);
 
-                series.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(26)))), ((int)(((byte)(59)))), ((int)(((byte)(105)))));
+                series.BorderColor = Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(26)))), ((int)(((byte)(59)))), ((int)(((byte)(105)))));
                 series.ChartArea = "Default";
-                series.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+                series.ChartType = SeriesChartType.Line;
                 series.Legend = "Default";
                 series.Name = "Default";
                 chart1.Series.Add(series);
@@ -207,15 +204,10 @@ namespace vcs_Chart2
         }
 
         //定義Chart大小與外觀
-        private const int CHART_WIDTH = 740;
-        private const int CHART_HEIGHT = 370;
         private const int AXIS_X_MIN = 0;
         private const int AXIS_X_MAX = 360;
         private const int AXIS_Y_MIN = -200;
         private const int AXIS_Y_MAX = 200;
-        private const string TITLE = "三角函數";
-        private const string XLABLE = "Degree";
-        private const string YLABLE = "Amplitude";
 
         void chart_init(Chart chart)
         {
@@ -225,13 +217,13 @@ namespace vcs_Chart2
 
             //設定Chart大小與外觀
             //全圖
-            chart.Size = new Size(CHART_WIDTH, CHART_HEIGHT);  // 設定chart大小
-            chart.Titles.Add(TITLE);
+            chart.Size = new Size(740, 370);  // 設定chart大小
+            chart.Titles.Add("三角函數");
 
             //X軸
             chart.ChartAreas[0].AxisX.Minimum = AXIS_X_MIN;        //設定X軸最小值
             chart.ChartAreas[0].AxisX.Maximum = AXIS_X_MAX;        //設定X軸最大值
-            chart.ChartAreas[0].AxisX.Title = XLABLE;              //設定X軸名稱
+            chart.ChartAreas[0].AxisX.Title = "X軸標題";              //設定X軸名稱
             chart.ChartAreas[0].AxisX.TitleForeColor = Color.Blue; //設定X軸名稱的字體顏色
             chart.ChartAreas[0].AxisX.Enabled = AxisEnabled.True;  //顯示 或 隱藏 X 軸標示
             chart.ChartAreas[0].AxisX.MajorGrid.Enabled = true;    //顯示 或 隱藏 X 軸標線
@@ -248,7 +240,7 @@ namespace vcs_Chart2
             //Y軸
             chart.ChartAreas[0].AxisY.Minimum = AXIS_Y_MIN;        //設定Y軸最小值
             chart.ChartAreas[0].AxisY.Maximum = AXIS_Y_MAX;        //設定Y軸最大值
-            chart.ChartAreas[0].AxisY.Title = YLABLE;              //設定Y軸名稱
+            chart.ChartAreas[0].AxisY.Title = "Y軸標題";              //設定Y軸名稱
             chart.ChartAreas[0].AxisY.TitleForeColor = Color.Blue; //設定Y軸名稱的字體顏色
             chart.ChartAreas[0].AxisY.Enabled = AxisEnabled.True;  //顯示 或 隱藏 Y 軸標示
             chart.ChartAreas[0].AxisY.MajorGrid.Enabled = true;    //顯示 或 隱藏 Y 軸標線
@@ -257,59 +249,38 @@ namespace vcs_Chart2
             chart.ChartAreas[0].AxisY.LineColor = Color.DarkBlue;//設置軸的線條顏色
             chart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.White;//設置網格線顏色
 
-            //#region 圖表樣式
-            chart.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;//指定圖表元素的漸變樣式(中心向外，從左到右，從上到下等等)
+            // 圖表樣式
+            chart.BackGradientStyle = GradientStyle.TopBottom;//指定圖表元素的漸變樣式(中心向外，從左到右，從上到下等等)
             chart.BackSecondaryColor = Color.Yellow;//設置背景的輔助顏色
             chart.BorderlineColor = Color.Yellow;//設置圖像邊框的顏色
-            chart.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;//設置圖像邊框線的樣式(實線、虛線、點線)
+            chart.BorderlineDashStyle = ChartDashStyle.Solid;//設置圖像邊框線的樣式(實線、虛線、點線)
             chart.BorderlineWidth = 2;//設置圖像的邊框寬度
-            chart.BorderSkin.SkinStyle = System.Windows.Forms.DataVisualization.Charting.BorderSkinStyle.Emboss;//設置圖像的邊框外觀樣式
+            chart.BorderSkin.SkinStyle = BorderSkinStyle.Emboss;//設置圖像的邊框外觀樣式
             chart.BackColor = Color.Yellow;//設置圖表的背景顏色
-            //#endregion
-            chart.Titles[0].Font = new Font("標楷體", 30f);//设置图表标题字体样式和大小
-            chart.Legends["Legend1"].Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Right;  //設定圖標顯示停靠的位置
+
+            chart.Titles[0].Font = new Font("標楷體", 20f);//设置图表标题字体样式和大小
+            chart.Legends["Legend1"].Docking = Docking.Right;  //設定圖標顯示停靠的位置
         }
 
         //------------------------------------------------------------  # 60個
 
-        double x = 0;
+        double x0 = 0;
         private const int POINTS_IN_AXIS0 = 36;      //製作動畫時X軸要保留的點數
         private void timer0_Tick(object sender, EventArgs e)
         {
-            double y;
-            y = 110 * sind(x);
+            double y0;
+            y0 = 110 * sind(x0);
 
-            chart0.Series[0].Points.AddXY(x, y);
+            chart0.Series[0].Points.AddXY(x0, y0);
 
             if (chart0.Series[0].Points.Count > POINTS_IN_AXIS0)
                 chart0.Series[0].Points.RemoveAt(0);
 
             //製作動畫
             chart0.ChartAreas[0].AxisX.Minimum = chart0.Series[0].Points[0].XValue;
-            chart0.ChartAreas[0].AxisX.Maximum = x;
+            chart0.ChartAreas[0].AxisX.Maximum = x0;
 
-            x += 26;
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        double x1 = 0;
-        private const int POINTS_IN_AXIS1 = 36;      //製作動畫時X軸要保留的點數
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            double y;
-            y = 110 * sind(x1);
-
-            chart1.Series[0].Points.AddXY(x1, y);
-
-            if (chart1.Series[0].Points.Count > POINTS_IN_AXIS1)
-                chart1.Series[0].Points.RemoveAt(0);
-
-            //製作動畫
-            chart1.ChartAreas[0].AxisX.Minimum = chart1.Series[0].Points[0].XValue;
-            chart1.ChartAreas[0].AxisX.Maximum = x1;
-
-            x1 += 26;
+            x0 += 26;
         }
 
         //------------------------------------------------------------  # 60個

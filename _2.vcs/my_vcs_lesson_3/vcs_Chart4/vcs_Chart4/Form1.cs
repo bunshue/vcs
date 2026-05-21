@@ -86,22 +86,23 @@ namespace vcs_Chart4
             //不知道如何自動邊界
 
             // 設定數列1
-            Series s1 = new Series();
+            Series series1 = new Series();
             // 設定數列2
-            Series s2 = new Series();
+            Series series2 = new Series();
 
             Random r = new Random();
             for (int i = 1; i < 13; i++)
             {
-                s1.Points.AddXY(i, r.Next(20, 30));
-                s2.Points.AddXY(i, r.Next(10, 30));
+                series1.Points.AddXY(i, r.Next(20, 30));
+                series2.Points.AddXY(i, r.Next(10, 30));
             }
 
             // 將數列新增到chart上
-            chart0.Series.Add(s1);
-            chart0.Series.Add(s2);
+            chart0.Series.Add(series1);
+            chart0.Series.Add(series2);
 
             chart0.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Green;
+
             DateTime dt = DateTime.Parse("8:30");
             for (int i = 1; i < 26; i++)
             {
@@ -332,4 +333,8 @@ namespace vcs_Chart4
 
 */
 
+
+//數列加入資料點的方法
+//series1.Points.AddXY(index, r.Next(10) * 50);
+//objSeries.Points.DataBindXY(xValues, yValues);
 

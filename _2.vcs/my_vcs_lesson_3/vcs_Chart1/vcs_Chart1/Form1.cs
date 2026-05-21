@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Windows.Forms.DataVisualization.Charting;  //for Series
+using System.Windows.Forms.DataVisualization.Charting;  // for Series, Chart
 
 namespace vcs_Chart1
 {
@@ -378,7 +378,7 @@ namespace vcs_Chart1
             chart1.Titles.Clear();
 
             // 全圖設定
-            chart1.Titles.Add("各種圖表類型");  // 標題
+            chart1.Titles.Add("各種圖表類型, 3數列");  // 標題
             chart1.Size = new Size(1000, 500);  // 設定chart大小
 
             // X軸設定
@@ -398,7 +398,7 @@ namespace vcs_Chart1
             // 設定數列1 的 大小與外觀
             Series series1 = new Series("sin", 500);  // 初始畫線條(標題，最大值)
             series1.Color = Color.Red;  // 設定線條顏色
-            series1.Font = new Font("新細明體", 10);  // 設定字型
+            series1.Font = new Font("新細明體", 10);  // 設定顯示數值的字型
             series1.ChartType = chartType;  // 設定線條種類
             series1.MarkerSize = 5;  // 圖標大小
             series1.IsValueShownAsLabel = false;  // 將數值顯示在線上
@@ -406,7 +406,7 @@ namespace vcs_Chart1
             // 設定數列2 的 大小與外觀
             Series series2 = new Series("cos", 500);  // 初始畫線條(標題，最大值)
             series2.Color = Color.Green;  // 設定線條顏色
-            series2.Font = new Font("標楷體", 12);  // 設定字型
+            series2.Font = new Font("標楷體", 12);  // 設定顯示數值的字型
             series2.ChartType = chartType;  // 設定線條種類
             series2.MarkerSize = 5;  // 圖標大小
             series2.IsValueShownAsLabel = false;  // 將數值顯示在線上
@@ -414,7 +414,7 @@ namespace vcs_Chart1
             // 設定數列3 的 大小與外觀
             Series series3 = new Series("sin + cos", 500);  // 初始畫線條(標題，最大值)
             series3.Color = Color.Blue;  // 設定線條顏色
-            series3.Font = new Font("標楷體", 12);  // 設定字型
+            series3.Font = new Font("標楷體", 12);  // 設定顯示數值的字型
             series3.ChartType = chartType;  // 設定線條種類
             series3.MarkerSize = 5;  // 圖標大小
             series3.IsValueShownAsLabel = false;  // 將數值顯示在線上

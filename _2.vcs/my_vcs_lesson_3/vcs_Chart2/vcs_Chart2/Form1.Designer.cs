@@ -41,7 +41,6 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer0 = new System.Windows.Forms.Timer(this.components);
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart0)).BeginInit();
             this.SuspendLayout();
@@ -107,10 +106,6 @@
             // 
             this.timer0.Tick += new System.EventHandler(this.timer0_Tick);
             // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -137,7 +132,6 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Timer timer0;
-        private System.Windows.Forms.Timer timer1;
     }
 }
 

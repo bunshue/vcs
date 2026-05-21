@@ -42,7 +42,6 @@
             this.bt_save2 = new System.Windows.Forms.Button();
             this.lb_richtextbox1 = new System.Windows.Forms.Label();
             this.lb_richtextbox2 = new System.Windows.Forms.Label();
-            this.lb_richtextbox_rtf = new System.Windows.Forms.Label();
             this.lb_richtextbox1_text = new System.Windows.Forms.Label();
             this.lb_richtextbox1_fx1 = new System.Windows.Forms.Label();
             this.lb_richtextbox1_fx2 = new System.Windows.Forms.Label();
@@ -62,8 +61,6 @@
             this.bt_search = new System.Windows.Forms.Button();
             this.bt_open3 = new System.Windows.Forms.Button();
             this.bt_save3 = new System.Windows.Forms.Button();
-            this.bt_open_rtf = new System.Windows.Forms.Button();
-            this.bt_save_rtf = new System.Windows.Forms.Button();
             this.richTextBox_search = new System.Windows.Forms.RichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -107,6 +104,7 @@
             this.button0 = new System.Windows.Forms.Button();
             this.lb_richtextbox_lines = new System.Windows.Forms.Label();
             this.richTextBox_lines = new System.Windows.Forms.RichTextBox();
+            this.lb_richtextbox_rtf = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -119,7 +117,7 @@
             this.richTextBox1.Size = new System.Drawing.Size(411, 300);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "定風波\n三月七日，沙湖道中遇雨。雨具先去，同行皆狼狽，余獨不覺，已而遂晴，故作此詞。\n莫聽穿林打葉聲，何妨吟嘯且徐行。\n竹杖芒鞋輕勝馬，誰怕？一蓑煙雨任平生。\n料" +
-    "峭春風吹酒醒，微冷，山頭斜照卻相迎。\n回首向來蕭瑟處，歸去，也無風雨也無晴。\n ";
+                "峭春風吹酒醒，微冷，山頭斜照卻相迎。\n回首向來蕭瑟處，歸去，也無風雨也無晴。\n ";
             this.richTextBox1.SelectionChanged += new System.EventHandler(this.richTextBox1_SelectionChanged);
             this.richTextBox1.Click += new System.EventHandler(this.richTextBox1_Click);
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
@@ -225,16 +223,6 @@
             this.lb_richtextbox2.Size = new System.Drawing.Size(135, 21);
             this.lb_richtextbox2.TabIndex = 100;
             this.lb_richtextbox2.Text = "lb_richtextbox2";
-            // 
-            // lb_richtextbox_rtf
-            // 
-            this.lb_richtextbox_rtf.AutoSize = true;
-            this.lb_richtextbox_rtf.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_richtextbox_rtf.Location = new System.Drawing.Point(413, 365);
-            this.lb_richtextbox_rtf.Name = "lb_richtextbox_rtf";
-            this.lb_richtextbox_rtf.Size = new System.Drawing.Size(154, 21);
-            this.lb_richtextbox_rtf.TabIndex = 102;
-            this.lb_richtextbox_rtf.Text = "lb_richtextbox_rtf";
             // 
             // lb_richtextbox1_text
             // 
@@ -439,28 +427,6 @@
             this.bt_save3.TabIndex = 124;
             this.bt_save3.UseVisualStyleBackColor = true;
             this.bt_save3.Click += new System.EventHandler(this.bt_save3_Click);
-            // 
-            // bt_open_rtf
-            // 
-            this.bt_open_rtf.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_open_rtf.Location = new System.Drawing.Point(541, 552);
-            this.bt_open_rtf.Name = "bt_open_rtf";
-            this.bt_open_rtf.Size = new System.Drawing.Size(40, 40);
-            this.bt_open_rtf.TabIndex = 125;
-            this.bt_open_rtf.Text = "開";
-            this.bt_open_rtf.UseVisualStyleBackColor = true;
-            this.bt_open_rtf.Click += new System.EventHandler(this.bt_open_rtf_Click);
-            // 
-            // bt_save_rtf
-            // 
-            this.bt_save_rtf.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_save_rtf.Location = new System.Drawing.Point(570, 588);
-            this.bt_save_rtf.Name = "bt_save_rtf";
-            this.bt_save_rtf.Size = new System.Drawing.Size(40, 40);
-            this.bt_save_rtf.TabIndex = 126;
-            this.bt_save_rtf.Text = "存";
-            this.bt_save_rtf.UseVisualStyleBackColor = true;
-            this.bt_save_rtf.Click += new System.EventHandler(this.bt_save_rtf_Click);
             // 
             // richTextBox_search
             // 
@@ -928,6 +894,16 @@
             this.richTextBox_lines.TabIndex = 135;
             this.richTextBox_lines.Text = "";
             // 
+            // lb_richtextbox_rtf
+            // 
+            this.lb_richtextbox_rtf.AutoSize = true;
+            this.lb_richtextbox_rtf.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_richtextbox_rtf.Location = new System.Drawing.Point(413, 365);
+            this.lb_richtextbox_rtf.Name = "lb_richtextbox_rtf";
+            this.lb_richtextbox_rtf.Size = new System.Drawing.Size(154, 21);
+            this.lb_richtextbox_rtf.TabIndex = 102;
+            this.lb_richtextbox_rtf.Text = "lb_richtextbox_rtf";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -942,8 +918,6 @@
             this.Controls.Add(this.button20);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.richTextBox_search);
-            this.Controls.Add(this.bt_save_rtf);
-            this.Controls.Add(this.bt_open_rtf);
             this.Controls.Add(this.bt_save3);
             this.Controls.Add(this.bt_open3);
             this.Controls.Add(this.bt_search);
@@ -1021,7 +995,6 @@
         private System.Windows.Forms.Button bt_save2;
         private System.Windows.Forms.Label lb_richtextbox1;
         private System.Windows.Forms.Label lb_richtextbox2;
-        private System.Windows.Forms.Label lb_richtextbox_rtf;
         private System.Windows.Forms.Label lb_richtextbox1_text;
         private System.Windows.Forms.Label lb_richtextbox1_fx1;
         private System.Windows.Forms.Label lb_richtextbox1_fx2;
@@ -1041,8 +1014,6 @@
         private System.Windows.Forms.Button bt_search;
         private System.Windows.Forms.Button bt_open3;
         private System.Windows.Forms.Button bt_save3;
-        private System.Windows.Forms.Button bt_open_rtf;
-        private System.Windows.Forms.Button bt_save_rtf;
         private System.Windows.Forms.RichTextBox richTextBox_search;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label4;
@@ -1086,6 +1057,7 @@
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.Label lb_richtextbox_lines;
         private System.Windows.Forms.RichTextBox richTextBox_lines;
+        private System.Windows.Forms.Label lb_richtextbox_rtf;
     }
 }
 
