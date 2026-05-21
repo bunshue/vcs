@@ -309,7 +309,7 @@ namespace vcs_MessageBox
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(576, 15);
+            this.richTextBox1.Location = new System.Drawing.Point(427, 152);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 39;
@@ -336,7 +336,7 @@ namespace vcs_MessageBox
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(591, 57);
+            this.bt_clear.Location = new System.Drawing.Point(442, 194);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(60, 32);
             this.bt_clear.TabIndex = 41;
@@ -346,19 +346,23 @@ namespace vcs_MessageBox
             // 
             // button0
             // 
-            this.button0.Location = new System.Drawing.Point(438, 17);
+            this.button0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button0.Location = new System.Drawing.Point(427, 19);
             this.button0.Name = "button0";
-            this.button0.Size = new System.Drawing.Size(119, 46);
+            this.button0.Size = new System.Drawing.Size(200, 60);
             this.button0.TabIndex = 42;
+            this.button0.Text = "用WindowsAPI的訊息框";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(438, 69);
+            this.button8.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button8.Location = new System.Drawing.Point(427, 85);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(119, 46);
+            this.button8.Size = new System.Drawing.Size(200, 60);
             this.button8.TabIndex = 43;
+            this.button8.Text = "使用自建類別的訊息框";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 

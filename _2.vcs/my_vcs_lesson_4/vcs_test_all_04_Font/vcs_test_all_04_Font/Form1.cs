@@ -26,6 +26,8 @@ namespace vcs_test_all_04_Font
         {
             show_item_location();
 
+            //6060
+
             WordSize = 15;
             SelectFont = 1;
             label1.Font = new Font("標楷體", WordSize);
@@ -49,16 +51,11 @@ namespace vcs_test_all_04_Font
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 180;
-            dy = 80;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
 
             groupBox4.Size = new Size(460, 580);
             groupBox4.Location = new Point(1070, 10);
@@ -74,7 +71,7 @@ namespace vcs_test_all_04_Font
             listView1.Size = new Size(760, 270);
 
             richTextBox1.Size = new Size(460, 200);
-            richTextBox1.Location = new Point(1070, 600);
+            richTextBox1.Location = new Point(x_st + dx * 5 + 30, y_st + dy * 9);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1600, 920);
@@ -89,6 +86,8 @@ namespace vcs_test_all_04_Font
         {
             richTextBox1.Clear();
         }
+
+        //6060
 
         void search_installed_font()
         {
@@ -158,7 +157,7 @@ namespace vcs_test_all_04_Font
 
             listView1.Clear();
 
-            listView1.Columns.Add("項目", 80, HorizontalAlignment.Center);
+            listView1.Columns.Add("項目", 100, HorizontalAlignment.Center);
             listView1.Columns.Add("字型", 300, HorizontalAlignment.Center);
             listView1.Columns.Add("範例", 300, HorizontalAlignment.Center);
 
@@ -173,16 +172,24 @@ namespace vcs_test_all_04_Font
                 if (font.Name[0] <= 'z')
                 {
                     if (textBox1.Text.Length > 0)
+                    {
                         sub_i1b.Text = textBox1.Text;
+                    }
                     else
+                    {
                         sub_i1b.Text = "2026 Happy New Year";
+                    }
                 }
                 else
                 {
                     if (textBox1.Text.Length > 0)
+                    {
                         sub_i1b.Text = textBox1.Text;
+                    }
                     else
+                    {
                         sub_i1b.Text = "春水碧於天，畫船聽雨眠。";
+                    }
                 }
                 i1.SubItems.Add(sub_i1b);
 
@@ -251,58 +258,90 @@ namespace vcs_test_all_04_Font
             if ((checkBox1.Checked == true) && (checkBox2.Checked == true) && (checkBox3.Checked == true))
             {
                 if (SelectFont == 1)
+                {
                     label1.Font = new Font("標楷體", WordSize, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
+                }
                 else if (SelectFont == 2)
+                {
                     label1.Font = new Font("新細明體", WordSize, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
+                }
             }
             else if ((checkBox1.Checked == true) && (checkBox2.Checked == true) && (checkBox3.Checked == false))
             {
                 if (SelectFont == 1)
+                {
                     label1.Font = new Font("標楷體", WordSize, FontStyle.Bold | FontStyle.Italic);
+                }
                 else if (SelectFont == 2)
+                {
                     label1.Font = new Font("新細明體", WordSize, FontStyle.Bold | FontStyle.Italic);
+                }
             }
             else if ((checkBox1.Checked == true) && (checkBox2.Checked == false) && (checkBox3.Checked == true))
             {
                 if (SelectFont == 1)
+                {
                     label1.Font = new Font("標楷體", WordSize, FontStyle.Bold | FontStyle.Underline);
+                }
                 else if (SelectFont == 2)
+                {
                     label1.Font = new Font("新細明體", WordSize, FontStyle.Bold | FontStyle.Underline);
+                }
             }
             else if ((checkBox1.Checked == false) && (checkBox2.Checked == true) && (checkBox3.Checked == true))
             {
                 if (SelectFont == 1)
+                {
                     label1.Font = new Font("標楷體", WordSize, FontStyle.Italic | FontStyle.Underline);
+                }
                 else if (SelectFont == 2)
+                {
                     label1.Font = new Font("新細明體", WordSize, FontStyle.Italic | FontStyle.Underline);
+                }
             }
             else if ((checkBox1.Checked == true) && (checkBox2.Checked == false) && (checkBox3.Checked == false))
             {
                 if (SelectFont == 1)
+                {
                     label1.Font = new Font("標楷體", WordSize, FontStyle.Bold);
+                }
                 else if (SelectFont == 2)
+                {
                     label1.Font = new Font("新細明體", WordSize, FontStyle.Bold);
+                }
             }
             else if ((checkBox1.Checked == false) && (checkBox2.Checked == false) && (checkBox3.Checked == true))
             {
                 if (SelectFont == 1)
+                {
                     label1.Font = new Font("標楷體", WordSize, FontStyle.Underline);
+                }
                 else if (SelectFont == 2)
+                {
                     label1.Font = new Font("新細明體", WordSize, FontStyle.Underline);
+                }
             }
             else if ((checkBox1.Checked == false) && (checkBox2.Checked == true) && (checkBox3.Checked == false))
             {
                 if (SelectFont == 1)
+                {
                     label1.Font = new Font("標楷體", WordSize, FontStyle.Italic);
+                }
                 else if (SelectFont == 2)
+                {
                     label1.Font = new Font("新細明體", WordSize, FontStyle.Italic);
+                }
             }
             else if ((checkBox1.Checked == false) && (checkBox2.Checked == false) && (checkBox3.Checked == false))
             {
                 if (SelectFont == 1)
+                {
                     label1.Font = new Font("標楷體", WordSize, FontStyle.Regular);
+                }
                 else if (SelectFont == 2)
+                {
                     label1.Font = new Font("新細明體", WordSize, FontStyle.Regular);
+                }
             }
         }
 
@@ -410,10 +449,22 @@ namespace vcs_test_all_04_Font
         {
             // Compose the font style.
             FontStyle font_style = FontStyle.Regular;
-            if (chkBold.Checked) font_style |= FontStyle.Bold;
-            if (chkItalic.Checked) font_style |= FontStyle.Italic;
-            if (chkUnderline.Checked) font_style |= FontStyle.Underline;
-            if (chkStrikeout.Checked) font_style |= FontStyle.Strikeout;
+            if (chkBold.Checked)
+            {
+                font_style |= FontStyle.Bold;
+            }
+            if (chkItalic.Checked)
+            {
+                font_style |= FontStyle.Italic;
+            }
+            if (chkUnderline.Checked)
+            {
+                font_style |= FontStyle.Underline;
+            }
+            if (chkStrikeout.Checked)
+            {
+                font_style |= FontStyle.Strikeout;
+            }
 
             // Get the font size.
             float font_size = 8;
@@ -434,12 +485,12 @@ namespace vcs_test_all_04_Font
 
             // Set the sample's font.
             richTextBox2.Font = new Font(family_name, font_size, font_style);
-            richTextBox2.Text = "字型: " + family_name + Environment.NewLine + sample_string;
+            richTextBox2.Text = "字型: " + family_name + "\n" + sample_string;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.pictureBox1.Invalidate();
+            pictureBox1.Invalidate();
         }
 
         private void DrawSamples(Graphics gr, TextRenderingHint hint, int x, ref int y)
@@ -518,3 +569,22 @@ namespace vcs_test_all_04_Font
         }
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+

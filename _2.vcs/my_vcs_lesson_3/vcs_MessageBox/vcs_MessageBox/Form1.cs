@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Runtime.InteropServices;   //for WindowsAPI的訊息框
+
 namespace vcs_MessageBox
 {
     public partial class Form1 : Form
@@ -22,6 +24,8 @@ namespace vcs_MessageBox
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            //------------------------------------------------------------  # 60個
 
             this.Icon1.Click += new System.EventHandler(this.IconClick);
             this.Icon2.Click += new System.EventHandler(this.IconClick);
@@ -50,32 +54,34 @@ namespace vcs_MessageBox
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 200 + 5;
-            dy = 60 + 5;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
 
-            groupBox3.Location = new Point(10, 10);
+            groupBox3.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button0.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button8.Location = new Point(x_st + dx * 2, y_st + dy * 1);
 
             richTextBox1.Size = new Size(300, 540);
-            richTextBox1.Location = new Point(x_st + dx * 3-50, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(890, 600);
-        }
+            this.Size = new Size(1000, 600);
+            this.Text = "vcs_MessageBox";
 
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
 
         private void IconClick(object sender, System.EventArgs e)
         {
@@ -181,15 +187,49 @@ namespace vcs_MessageBox
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
+        //用WindowsAPI的訊息框 ST
+
+        public const int MB_OKCANCEL = 1;
+        public const int MB_ICONINFORMATION = 64;
+
+        //[DllImport("user32.dll")]
+        //public static extern int MessageBox(int hWnd, string lpText, string lpCaption, uint wType);
+
         private void button0_Click(object sender, EventArgs e)
         {
-
+            //用WindowsAPI的訊息框
+            //int iResult = MessageBox(0, "要通知的訊息內容", "使用Windows API", MB_OKCANCEL | MB_ICONINFORMATION);
         }
+        //用WindowsAPI的訊息框 SP
 
+        //------------------------------------------------------------  # 60個
+
+        //使用自建類別的訊息框
         private void button8_Click(object sender, EventArgs e)
         {
-
+            //新類別的訊息框
+            int iResult = Test.MessageBox(0, "要通知的訊息內容", "使用自建類別", Test.MB_OKCANCEL | Test.MB_ICONINFORMATION);
         }
+
+        //------------------------------------------------------------  # 60個
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
 
