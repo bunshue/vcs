@@ -89,6 +89,8 @@ namespace vcs_Cryptography1_MD5
             return result;
         }
 
+        //6060
+
         private void button0_Click(object sender, EventArgs e)
         {
             //MD5(用自建函數)
@@ -386,8 +388,55 @@ namespace vcs_Cryptography1_MD5
 
         private void button17_Click(object sender, EventArgs e)
         {
+            //測試 HashHelper
+            //算一個檔案的SHA1值
+            str_encrypted_text = HashHelper.SHA1File(filename);
+            richTextBox1.Text += "檔案：" + filename + "\tSHA1值：" + str_encrypted_text + "\n";
 
+            //算一個檔案的SHA256值
+            str_encrypted_text = BytesToString(GetHashSha256(filename));
+            richTextBox1.Text += "檔案：" + filename + "\tSHA256值：" + str_encrypted_text + "\n";
+
+            //算一個檔案的SHA256值
+            using (FileStream fs = File.OpenRead(filename))
+            {
+                SHA256Managed sha = new SHA256Managed();
+                str_encrypted_text = Convert.ToBase64String(sha.ComputeHash(fs));
+                richTextBox1.Text += "檔案：" + filename + "\tSHA256值：" + str_encrypted_text + "\n";
+            }
+
+            //------------------------------------------------------------  # 60個
+
+            //各種檔案加密1
+            string result_SHA1 = ValidHelper.GetFileSHA1(filename);
+            string result_SHA256 = ValidHelper.GetFileSHA256(filename);
+            string result_SHA384 = ValidHelper.GetFileSHA384(filename);
+            string result_SHA512 = ValidHelper.GetFileSHA512(filename);
+
+            richTextBox1.Text += "SHA1 : \t\t" + result_SHA1 + "\n";
+            richTextBox1.Text += "SHA256 : \t" + result_SHA256 + "\n";
+            richTextBox1.Text += "SHA384 : \t" + result_SHA384 + "\n";
+            richTextBox1.Text += "SHA512 : \t" + result_SHA512 + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+
+
+
+            //------------------------------------------------------------  # 60個
         }
+
+        // Compute the file's hash.
+        private byte[] GetHashSha256(string filename)
+        {
+            using (FileStream stream = File.OpenRead(filename))
+            {
+                SHA256 Sha256 = SHA256.Create();  // 創建SHA256對象
+                return Sha256.ComputeHash(stream);
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button18_Click(object sender, EventArgs e)
         {
@@ -743,6 +792,150 @@ namespace vcs_Cryptography1_MD5
         }
     }
 
+    //------------------------------------------------------------  # 60個
+
+    public class EncryptHelper2
+    {
+        /// <summary>
+        /// 获取某个哈希算法对应下的哈希值
+        /// </summary>
+        /// <param name="sourceString">源字符串</param>
+        /// <param name="algorithm">哈希算法</param>
+        /// <returns>经过计算的哈希值</returns>
+        private static string GetHash(string sourceString, HashAlgorithm algorithm)
+        {
+            byte[] sourceBytes = Encoding.UTF8.GetBytes(sourceString);
+            byte[] result = algorithm.ComputeHash(sourceBytes);
+            algorithm.Clear();
+            StringBuilder sb = new StringBuilder(32);
+            for (int i = 0; i < result.Length; i++)
+            {
+                sb.Append(result[i].ToString("X2"));
+            }
+            return sb.ToString();
+        }
+
+        /* same
+        /// <summary>
+        /// MD5加密
+        /// </summary>
+        /// <param name="strPwd">原字符串</param>
+        /// <returns>加密后字符串</returns>
+        public static string GetMD5(string strPwd)
+        {
+            //MD5 对象创建的两种方式
+            //MD5 md5 = MD5.Create();  // 創建MD5對象
+            MD5 md5 = new MD5CryptoServiceProvider();
+            //将输入的密码转换成字节数组
+            byte[] bPwd = Encoding.UTF8.GetBytes(strPwd);
+            //计算指定字节数组的哈希值
+            byte[] bMD5 = md5.ComputeHash(bPwd);
+            //释放加密服务提供类的所有资源
+            md5.Clear();
+            StringBuilder sbMD5Pwd = new StringBuilder();
+            for (int i = 0; i < bMD5.Length; i++)
+            {
+                //将每个字节数据转换为2位的16进制的字符
+                sbMD5Pwd.Append(bMD5[i].ToString("x2"));
+            }
+            return sbMD5Pwd.ToString();
+        }
+        */
+
+        /// <summary>
+        /// 获取MD5值
+        /// </summary>
+        /// <param name="sourceString">源字符串</param>
+        /// <returns>MD5值</returns>
+        public static string GetMD5(string sourceString)
+        {
+            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            return GetHash(sourceString, md5);
+        }
+
+        /// <summary>
+        /// 获取SHA1值
+        /// </summary>
+        /// <param name="sourceString">源字符串</param>
+        /// <returns>SHA1值</returns>
+        public static string GetSHA1(string sourceString)
+        {
+            SHA1 sha1 = new SHA1CryptoServiceProvider();
+            return GetHash(sourceString, sha1);
+        }
+
+        /// <summary>
+        /// 获取SHA256值
+        /// </summary>
+        /// <param name="sourceString">源字符串</param>
+        /// <returns>SHA256值</returns>
+        public static string GetSHA256(string sourceString)
+        {
+            SHA256 sha256 = SHA256.Create();  // 創建SHA256對象
+            return GetHash(sourceString, sha256);
+        }
+
+        /// <summary>
+        /// 获取SHA384值
+        /// </summary>
+        /// <param name="sourceString">源字符串</param>
+        /// <returns>SHA384值</returns>
+        public static string GetSHA384(string sourceString)
+        {
+            SHA384 sha384 = SHA384.Create();  // 創建SHA384對象
+            return GetHash(sourceString, sha384);
+        }
+
+        /// <summary>
+        /// 获取SHA512值
+        /// </summary>
+        /// <param name="sourceString">源字符串</param>
+        /// <returns>SHA512值</returns>
+        public static string GetSHA512(string sourceString)
+        {
+            SHA512 sha512 = SHA512.Create();  // 創建SHA512對象
+            return GetHash(sourceString, sha512);
+        }
+
+        public static string GetFileBase64String(string filePath)
+        {
+            using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+            {
+                using (BinaryReader reader = new BinaryReader(fs))
+                {
+                    try
+                    {
+                        return GetBase64String(reader.ReadBytes((int)fs.Length));
+                    }
+                    catch (System.Exception ex)
+                    {
+                        throw ex;
+                    }
+                }
+            }
+        }
+
+        public static string GetBase64String(string sourceString)
+        {
+            byte[] buffer = Encoding.UTF8.GetBytes(sourceString);
+            return GetBase64String(buffer);
+        }
+
+        public static string GetBase64String(string sourceString, Encoding encoding)
+        {
+            byte[] buffer = encoding.GetBytes(sourceString);
+            return GetBase64String(buffer);
+        }
+
+        public static string GetBase64String(byte[] sourceBytes)
+        {
+            string base64String = System.Convert.ToBase64String(sourceBytes);
+            return base64String;
+        }
+    }
+
+    //------------------------------------------------------------  # 60個
+
     public class My_MD5
     {
         public static string EncryptCode(string str)
@@ -775,7 +968,6 @@ namespace vcs_Cryptography1_MD5
             {
                 md5Result = md5Result + md5Hash[i].ToString("X2");
             }
-
             return md5Result;
         }
     }
@@ -847,7 +1039,6 @@ namespace vcs_Cryptography1_MD5
             FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
             byte[] hashBytes = HashData(fs, algorithm);
             fs.Close();
-
             return ByteArrayToHexString(hashBytes);
         }
 
@@ -954,19 +1145,19 @@ namespace vcs_Cryptography1_MD5
 
         public static string GetFileSHA256(string filePath)
         {
-            SHA256 sha256 = SHA256.Create();
+            SHA256 sha256 = SHA256.Create();  // 創建SHA256對象
             return GetFileHash(filePath, sha256);
         }
 
         public static string GetFileSHA384(string filePath)
         {
-            SHA384 sha384 = SHA384.Create();
+            SHA384 sha384 = SHA384.Create();  // 創建SHA384對象
             return GetFileHash(filePath, sha384);
         }
 
         public static string GetFileSHA512(string filePath)
         {
-            SHA512 sha512 = SHA512.Create();
+            SHA512 sha512 = SHA512.Create();  // 創建SHA512對象
             return GetFileHash(filePath, sha512);
         }
     }
@@ -975,7 +1166,6 @@ namespace vcs_Cryptography1_MD5
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
@@ -990,12 +1180,9 @@ namespace vcs_Cryptography1_MD5
 */
 
 
-
 /*
-
 //C#使用MD5對用戶密碼加密與驗證
 //C#中常涉及到對用戶密碼的加密於解密的算法，其中使用MD5加密是最常見的的實現方式
-
       
 5）通過DESCryptoServiceProvider對象對字符串進行加密解密
 
@@ -1069,8 +1256,7 @@ public static string Decrypt(string targetValue, string key)
 //------------------------------------------------------------  # 60個
 
          #region MD5加密
- 
-         /// <summary>
+          /// <summary>
          /// MD5對文件流加密
          /// </summary>
          /// <param name="sr"></param>
@@ -1114,8 +1300,114 @@ public static string Decrypt(string targetValue, string key)
             //加密Byte[]數組
             byte[] md5Hash = md5.ComputeHash(input);    //算拜列之Hash值
 
+//------------------------------------------------------------  # 60個
+
+MD5/SHA1說明大集合
+
+異名同義字
+ 
+            MD5 md5 = MD5.Create();    //創建MD5對象
+            MD5 md5 = MD5CryptoServiceProvider.Create();    //創建MD5對象
+            MD5 md5 = new MD5CryptoServiceProvider();
+            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            HashAlgorithm md5 = new MD5CryptoServiceProvider(); // or SHA1CryptoServiceProvider();
+            HashAlgorithm md5 = MD5.Create();
+
+
+            MD5 md5 = MD5.Create();    //創建MD5對象
+            //MD5 md5 = MD5CryptoServiceProvider.Create();    //創建MD5對象
+            //MD5 md5 = new MD5CryptoServiceProvider();
+            //MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            //HashAlgorithm md5 = new MD5CryptoServiceProvider(); // or SHA1CryptoServiceProvider();
+            //HashAlgorithm md5 = MD5.Create();
+
+//------------------------------------------------------------  # 60個
+
+string md5Result = Encoding.Default.GetString(md5Hash); //Hash轉字串
+
+各種拜列轉字串
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < md5Hash.Length; i++)
+            {
+                sb.Append(md5Hash[i].ToString("X2"));
+            }
+            md5Result = sb.ToString();
+
+            //Hash轉字串
+            for (int i = 0; i < md5Hash.Length; i++)
+            {
+                md5Result = md5Result + md5Hash[i].ToString("X2");
+            }
+
+            //Hash轉字串
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < md5Hash.Length; i++)
+            {
+                sb.Append(md5Hash[i].ToString("X2"));
+                //sb.AppendFormat("{0:X2}", md5Hash[i]);    //same
+            }
+            md5Result = sb.ToString();
+
+            //Hash轉字串
+            StringBuilder sb = new StringBuilder();
+            foreach (byte b in md5Hash)
+            {
+                sb.Append(b.ToString("X2"));
+            }
+            md5Result = sb.ToString();
+
+            for (int i = 0; i < md5Hash.Length; i++)
+            {
+                md5Result += md5Hash[i].ToString("X2");
+            }
+
+            //Hash轉字串
+            md5Result = Encoding.Default.GetString(md5Hash);
+
+            //Hash轉字串
+            md5Result = GetStringValue(md5Hash);
+
+            //Hash轉字串
+            for (int i = 0; i < md5Hash.Length; i++)
+            {
+                md5Result += md5Hash[i].ToString("X2");
+            }
+
+            for (int i = 0; i < md5Hash.Length - 1; i++)//遍歷Byte數組
+            {
+                md5Result += md5Hash[i].ToString("X2").PadLeft(2, '0');//對遍歷到的Byte進行加密
+            }
+
+            for (int i = 0; i < md5Hash.Length; i++)
+            {
+                md5Result = md5Result + md5Hash[i].ToString("X2");
+            }
+
+            //Hash轉字串
+            StringBuilder sb = new StringBuilder(16);
+            for (int i = 0; i < md5Hash.Length; i++)
+            {
+                sb.Append((md5Hash[i]).ToString("X2", System.Globalization.CultureInfo.InvariantCulture));
+            }
+            md5Result = sb.ToString();
+
+            //Hash轉字串
+            StringBuilder sb = new StringBuilder(32);
+            for (int i = 0; i < md5Hash.Length; i++)
+            {
+                sb.Append(md5Hash[i].ToString("X2").PadLeft(2, '0'));
+            }
+            md5Result = sb.ToString();
+
+            //md5Result = BitConverter.ToString(md5Hash).Replace("-", "");
+            //md5Result = Encoding.Default.GetString(md5Hash);
+
+            //Hash轉字串
+            //將加密後的數組轉化為字段(普通加密)  
+            //string testResult = Encoding.Unicode.GetString(md5Hash);    //不正確
+
+            //作為密碼方式加密
+            //需要改用.NetFramework4.0 且 參考/加入參考 .NET /System.Web
+            //md5Result = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(str, "MD5");
 */
-
-
-
-

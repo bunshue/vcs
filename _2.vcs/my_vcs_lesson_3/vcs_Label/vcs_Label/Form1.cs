@@ -12,8 +12,6 @@ using System.Drawing.Drawing2D; //for MatrixOrder
 
 //label_move 滑鼠移動此標籤 要改AutoSize為False
 
-
-
 namespace vcs_Label
 {
     public partial class Form1 : Form
@@ -31,6 +29,10 @@ namespace vcs_Label
         // Hide the labels that position the rotated text.
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
+            //6060
+
             lblRotated1.Visible = false;
             lblRotated2.Visible = false;
             lblRotated3.Visible = false;
@@ -61,6 +63,22 @@ namespace vcs_Label
             label_picture.MouseEnter += new EventHandler(label_picture_MouseEnter);
             label_picture.MouseHover += new EventHandler(label_picture_MouseHover);
             //使用滑鼠拖曳圖片 圖片藏在label裏 SP
+        }
+
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+
+            this.Size = new Size(1300, 700);
+            this.Text = "vcs_Label";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         //使用滑鼠拖曳圖片 圖片藏在label裏 ST
@@ -110,14 +128,10 @@ namespace vcs_Label
                 string_format.Alignment = StringAlignment.Center;
                 string_format.LineAlignment = StringAlignment.Center;
 
-                e.Graphics.TextRenderingHint =
-                    TextRenderingHint.AntiAliasGridFit;
-                DrawSidewaysText(e.Graphics, Font, Brushes.Black,
-                    lblRotated1.Bounds, string_format, "Row 1");
-                DrawSidewaysText(e.Graphics, Font, Brushes.Black,
-                    lblRotated2.Bounds, string_format, "Row 2");
-                DrawSidewaysText(e.Graphics, Font, Brushes.Black,
-                    lblRotated3.Bounds, string_format, "Row 3");
+                e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                DrawSidewaysText(e.Graphics, Font, Brushes.Black, lblRotated1.Bounds, string_format, "Row 1");
+                DrawSidewaysText(e.Graphics, Font, Brushes.Black, lblRotated2.Bounds, string_format, "Row 2");
+                DrawSidewaysText(e.Graphics, Font, Brushes.Black, lblRotated3.Bounds, string_format, "Row 3");
             }
         }
 
@@ -125,8 +139,7 @@ namespace vcs_Label
         private void DrawSidewaysText(Graphics gr, Font font, Brush brush, Rectangle bounds, StringFormat string_format, string txt)
         {
             // Make a rotated rectangle at the origin.
-            Rectangle rotated_bounds = new Rectangle(
-                0, 0, bounds.Height, bounds.Width);
+            Rectangle rotated_bounds = new Rectangle(0, 0, bounds.Height, bounds.Width);
 
             // Rotate.
             gr.ResetTransform();
@@ -205,14 +218,12 @@ namespace vcs_Label
         {
             //向上
             move_d = 2;
-
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             //向下
             move_d = 3;
-
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -304,7 +315,6 @@ namespace vcs_Label
         {
             //label_move
             label_move.BackColor = Color.Pink;
-
         }
 
         private void label_move_MouseMove(object sender, MouseEventArgs e)
@@ -321,3 +331,22 @@ namespace vcs_Label
         }
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+

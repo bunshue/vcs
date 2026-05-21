@@ -49,7 +49,6 @@ namespace vcs_test_all_03_Syntax
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -124,6 +123,8 @@ namespace vcs_test_all_03_Syntax
         {
             richTextBox1.Text += ((Button)sender).Text + "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -335,7 +336,9 @@ namespace vcs_test_all_03_Syntax
                 richTextBox1.Text += "是一個空字串，改成: " + string_a + "\n";
             }
             else
+            {
                 richTextBox1.Text += "不是一個空字串，內容: " + string_a + "\n";
+            }
 
             //if not default it to "SSSS"
             if (string.IsNullOrEmpty(string_b) || string_a == null)
@@ -345,7 +348,9 @@ namespace vcs_test_all_03_Syntax
                 richTextBox1.Text += "是一個空字串，改成: " + string_b + "\n";
             }
             else
+            {
                 richTextBox1.Text += "不是一個空字串，內容: " + string_b + "\n";
+            }
         }
 
         int[] pcLot = new int[6];
@@ -407,6 +412,7 @@ namespace vcs_test_all_03_Syntax
             return new StackTrace(1).GetFrame(0).GetMethod().Name;
         }
 
+        //------------------------------------------------------------  # 60個
 
         int aaa = 100;
         int bbb = 5;
@@ -459,7 +465,6 @@ namespace vcs_test_all_03_Syntax
         {
             //取得控件本身2
             show_button_text(sender);
-
 
             ((Button)sender).Text = "改 Button Text 為 AAAA";
         }
@@ -519,7 +524,6 @@ namespace vcs_test_all_03_Syntax
             else
                 return DateTime.Now.Year - year;
         }
-
 
         private void button20_Click(object sender, EventArgs e)
         {
@@ -620,7 +624,6 @@ namespace vcs_test_all_03_Syntax
                 Math.DivRem(i, 7, out r);
                 richTextBox1.Text += i.ToString() + " 除以 7 的餘數 " + r.ToString() + "\n";
             }
-
         }
 
         private void button26_Click(object sender, EventArgs e)
@@ -829,13 +832,11 @@ namespace vcs_test_all_03_Syntax
         {
             richTextBox1.Text += "GetBytes GetString 使用範例 1\n";
 
-            int len;
-
             string str = "ABCDE\n";
 
             richTextBox1.Text += "原字串 : " + str + "\n";
 
-            len = str.Length;
+            int len = str.Length;
             richTextBox1.Text += "len = " + len.ToString() + "\n";
 
             byte[] B = Encoding.Default.GetBytes(str);  //翻譯字串Str為Byte陣列B   //GetBytes : 把字串翻譯成Byte陣列
@@ -1020,7 +1021,6 @@ namespace vcs_test_all_03_Syntax
 
             float aspect_ratio = GetAspectRatio(textBox_ratio.Text);
             richTextBox1.Text += "解讀比例 : " + aspect_ratio.ToString() + "\n";
-
         }
 
         bool check_textbox_hexadecimal(KeyPressEventArgs e)
