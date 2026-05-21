@@ -88,6 +88,11 @@
             this.groupBox_rgb = new System.Windows.Forms.GroupBox();
             this.groupBox_dtp1 = new System.Windows.Forms.GroupBox();
             this.groupBox_trackbar = new System.Windows.Forms.GroupBox();
+            this.groupBox_checkedlistbox = new System.Windows.Forms.GroupBox();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.bt_clb2 = new System.Windows.Forms.Button();
+            this.bt_clb1 = new System.Windows.Forms.Button();
+            this.bt_clb0 = new System.Windows.Forms.Button();
             this.groupBox_radiobutton3.SuspendLayout();
             this.groupBox_radiobutton2.SuspendLayout();
             this.groupBox_radiobutton1.SuspendLayout();
@@ -102,12 +107,13 @@
             this.groupBox_rgb.SuspendLayout();
             this.groupBox_dtp1.SuspendLayout();
             this.groupBox_trackbar.SuspendLayout();
+            this.groupBox_checkedlistbox.SuspendLayout();
             this.SuspendLayout();
             // 
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(435, 601);
+            this.bt_clear.Location = new System.Drawing.Point(779, 445);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(69, 32);
             this.bt_clear.TabIndex = 10;
@@ -118,7 +124,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(414, 569);
+            this.richTextBox1.Location = new System.Drawing.Point(758, 413);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 9;
@@ -734,11 +740,64 @@
             this.groupBox_trackbar.TabStop = false;
             this.groupBox_trackbar.Text = "Trackbar";
             // 
+            // groupBox_checkedlistbox
+            // 
+            this.groupBox_checkedlistbox.Controls.Add(this.bt_clb2);
+            this.groupBox_checkedlistbox.Controls.Add(this.checkedListBox1);
+            this.groupBox_checkedlistbox.Controls.Add(this.bt_clb1);
+            this.groupBox_checkedlistbox.Controls.Add(this.bt_clb0);
+            this.groupBox_checkedlistbox.Location = new System.Drawing.Point(398, 569);
+            this.groupBox_checkedlistbox.Name = "groupBox_checkedlistbox";
+            this.groupBox_checkedlistbox.Size = new System.Drawing.Size(450, 161);
+            this.groupBox_checkedlistbox.TabIndex = 99;
+            this.groupBox_checkedlistbox.TabStop = false;
+            this.groupBox_checkedlistbox.Text = "CheckedListBox";
+            // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Location = new System.Drawing.Point(16, 21);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(383, 79);
+            this.checkedListBox1.TabIndex = 1;
+            // 
+            // bt_clb2
+            // 
+            this.bt_clb2.Location = new System.Drawing.Point(190, 119);
+            this.bt_clb2.Name = "bt_clb2";
+            this.bt_clb2.Size = new System.Drawing.Size(72, 36);
+            this.bt_clb2.TabIndex = 102;
+            this.bt_clb2.Text = "取消勾選";
+            this.bt_clb2.UseVisualStyleBackColor = true;
+            this.bt_clb2.Click += new System.EventHandler(this.bt_clb2_Click);
+            // 
+            // bt_clb1
+            // 
+            this.bt_clb1.Location = new System.Drawing.Point(112, 119);
+            this.bt_clb1.Name = "bt_clb1";
+            this.bt_clb1.Size = new System.Drawing.Size(72, 36);
+            this.bt_clb1.TabIndex = 101;
+            this.bt_clb1.Text = "勾選狀態";
+            this.bt_clb1.UseVisualStyleBackColor = true;
+            this.bt_clb1.Click += new System.EventHandler(this.bt_clb1_Click);
+            // 
+            // bt_clb0
+            // 
+            this.bt_clb0.Location = new System.Drawing.Point(34, 119);
+            this.bt_clb0.Name = "bt_clb0";
+            this.bt_clb0.Size = new System.Drawing.Size(72, 36);
+            this.bt_clb0.TabIndex = 100;
+            this.bt_clb0.Text = "Info";
+            this.bt_clb0.UseVisualStyleBackColor = true;
+            this.bt_clb0.Click += new System.EventHandler(this.bt_clb0_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1000, 742);
+            this.Controls.Add(this.groupBox_checkedlistbox);
             this.Controls.Add(this.groupBox_trackbar);
             this.Controls.Add(this.groupBox_dtp1);
             this.Controls.Add(this.groupBox_rgb);
@@ -781,6 +840,7 @@
             this.groupBox_dtp1.PerformLayout();
             this.groupBox_trackbar.ResumeLayout(false);
             this.groupBox_trackbar.PerformLayout();
+            this.groupBox_checkedlistbox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -847,6 +907,11 @@
         private System.Windows.Forms.GroupBox groupBox_rgb;
         private System.Windows.Forms.GroupBox groupBox_dtp1;
         private System.Windows.Forms.GroupBox groupBox_trackbar;
+        private System.Windows.Forms.GroupBox groupBox_checkedlistbox;
+        private System.Windows.Forms.Button bt_clb2;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.Button bt_clb1;
+        private System.Windows.Forms.Button bt_clb0;
     }
 }
 
