@@ -222,7 +222,7 @@ namespace vcs_Chart3
             Series series1 = new Series("Di0", 500); //初始畫線條(名稱，最大值)
             series1.Color = Color.Blue; //設定線條顏色
             series1.Font = new System.Drawing.Font("新細明體", 10); //設定字型
-            series1.ChartType = SeriesChartType.Column; //設定線條種類
+            series1.ChartType = SeriesChartType.Column;  // 直條圖
             //chart3.ChartAreas[0].AxisY.Minimum = 0;//設定Y軸最小值
             //chart3.ChartAreas[0].AxisY.Maximum = 500;//設定Y軸最大值
             //chart3.ChartAreas[0].AxisY.Enabled= AxisEnabled.False; //隱藏Y 軸標示
@@ -262,7 +262,8 @@ namespace vcs_Chart3
 
             string[] xValues = { "北部", "中部", "南部", "東部", "離島" };
             int[] yValues = { 137, 163, 237, 48, 4 };
-            //ChartAreas,Series,Legends 基本設定
+
+            //ChartAreas, Series, Legends 基本設定
             if (chart4.Legends.FindByName("Legends2") == null) //如果chart4沒有包含Legends2才將其Add
             {
                 chart4.Legends.Add(new Legend("Legends2")); //圖例集合說明
@@ -289,30 +290,36 @@ namespace vcs_Chart3
             chart4.ChartAreas["ChartArea2"].Area3DStyle.PointDepth = 10; //數據條厚度
             chart4.ChartAreas["ChartArea2"].Area3DStyle.WallWidth = 0; //外牆寬度
             chart4.ChartAreas["ChartArea2"].Area3DStyle.LightStyle = LightStyle.Realistic; //光源
+
             // 設定Title2
             chart4.Titles["Title2"].DockedToChartArea = "ChartArea2"; //設定標題停駐的ChartArea
             chart4.Titles["Title2"].IsDockedInsideChartArea = false; //設定顯示在圖表的內外部
+
             //設定 Legends2
             chart4.Legends["Legends2"].DockedToChartArea = "ChartArea2"; //設定要顯示在哪個圖表
             chart4.Legends["Legends2"].IsDockedInsideChartArea = false; //設定要顯示在圖表的內外部
             //chart4.Legends["Legends2"].Docking = Docking.Bottom; //自訂顯示位置
+
             //背景色
             chart4.Legends["Legends2"].BackColor = Color.FromArgb(235, 235, 235);
+
             //斜線背景
             chart4.Legends["Legends2"].BackHatchStyle = ChartHatchStyle.DarkDownwardDiagonal;
             chart4.Legends["Legends2"].BorderWidth = 1;
             chart4.Legends["Legends2"].BorderColor = Color.FromArgb(200, 200, 200);
+
             //設定 Series4b
             chart4.Series["Series4b"].ChartArea = "ChartArea2";  // 設定要呈現的ChartArea
-            chart4.Series["Series4b"].ChartType = SeriesChartType.Pie; //設定圖表類型
-            //chart4.Series["Series4b"].ChartType = SeriesChartType.Doughnut; //中空圓餅圖
-            chart4.Series["Series4b"].Points.DataBindXY(xValues, yValues);
+            chart4.Series["Series4b"].ChartType = SeriesChartType.Pie;  // 圓形圖
+            //chart4.Series["Series4b"].ChartType = SeriesChartType.Doughnut;  // 環圈圖
+            chart4.Series["Series4b"].Points.DataBindXY(xValues, yValues);  // xx, yy 皆為一維陣列
             chart4.Series["Series4b"].Legend = "Legends2";  // 設定要呈現哪個圖例
             // chart4.Series["Series4b"].IsValueShownAsLabel = true; // Show data points labels
             chart4.Series["Series4b"].XValueType = ChartValueType.String; //X軸的資料格式
             chart4.Series["Series4b"].LegendText = "#VALX :[ #PERCENT{P1} ]"; //X軸 + 百分比
             chart4.Series["Series4b"].Label = "#VALX\n#PERCENT{P1}"; //X軸 + 百分比
             //chart4.Series["Series4b"].LabelForeColor = Color.FromArgb(0, 90, 255); //字體顏色
+
             //字體設定
             chart4.Series["Series4b"].Font = new Font("Trebuchet MS", 10, FontStyle.Bold);
             chart4.Series["Series4b"].Points.FindMaxByValue().LabelForeColor = Color.Red; //設定特定數字之字體
@@ -323,6 +330,7 @@ namespace vcs_Chart3
             //chart4.Series["Series4b"]["PieLabelStyle"] = "Inside"; //數值顯示在圓餅內
             chart4.Series["Series4b"]["PieLabelStyle"] = "Outside"; //數值顯示在圓餅外
             //chart4.Series["Series4b"]["PieLabelStyle"] = "Disabled"; //不顯示數值
+
             //設定圓餅效果，除 Default 外其他效果3D不適用
             //chart4.Series["Series4b"]["PieDrawingStyle"] = "Default";
             //chart4.Series["Series4b"]["PieDrawingStyle"] = "SoftEdge";
@@ -371,9 +379,11 @@ namespace vcs_Chart3
 
             string[] titleArr = { "件數" };
             double[] yValues = { 20, 19, 64, 128, 8, 48, 58, 21, 18, 27, 17, 11, 4, 24, 23, 58, 5, 9, 23, 4 };
+
             chart5.ChartAreas.Add("ChartArea1");  // 圖表區域集合
             chart5.Series.Add("Series1");  // 數據序列集合
             chart5.Legends.Add("Legends1");  // 圖例集合
+
             // 標題集合
             Title Title1 = new Title
             {
@@ -397,6 +407,7 @@ namespace vcs_Chart3
             chart5.ChartAreas["ChartArea1"].AxisX.MajorGrid.LineColor = Color.FromArgb(150, 150, 150);//X 軸線顏色
             chart5.ChartAreas["ChartArea1"].AxisY.MajorGrid.LineColor = Color.FromArgb(150, 150, 150);//Y 軸線顏色
             chart5.ChartAreas["ChartArea1"].AxisY.LabelStyle.Format = "#.###";//設定小數點
+
             //設定3D
             chart5.ChartAreas["ChartArea1"].Area3DStyle.Enable3D = true; //3D效果
             chart5.ChartAreas["ChartArea1"].Area3DStyle.IsClustered = true; //並排顯示
@@ -405,48 +416,52 @@ namespace vcs_Chart3
             chart5.ChartAreas["ChartArea1"].Area3DStyle.PointDepth = 10; //數據條厚度
             chart5.ChartAreas["ChartArea1"].Area3DStyle.WallWidth = 0; //外牆寬度
             chart5.ChartAreas["ChartArea1"].Area3DStyle.LightStyle = LightStyle.Realistic; //光源
+
             // 設定Title1
             chart5.Titles["Title1"].DockedToChartArea = "ChartArea1";  // 設定要顯示在哪個圖表
             chart5.Titles["Title1"].IsDockedInsideChartArea = false;  // 設定要顯示在圖表的內外部
+
             //設定 Legends1
             chart5.Legends["Legends1"].DockedToChartArea = "ChartArea1"; //顯示在圖表內
             //chart5.Legends["Legends1"].Docking = Docking.Bottom; //自訂顯示位置
             chart5.Legends["Legends1"].BackColor = Color.FromArgb(235, 235, 235); //背景色
+
             //斜線背景
             chart5.Legends["Legends1"].BackHatchStyle = ChartHatchStyle.DarkDownwardDiagonal;
             chart5.Legends["Legends1"].BorderWidth = 1;
             chart5.Legends["Legends1"].BorderColor = Color.FromArgb(200, 200, 200);
+
             //設定 Series1
             chart5.Series["Series1"].ChartArea = "ChartArea1";  // 設定要呈現的ChartArea
             //chart5.Series["Series1"].ChartType = SeriesChartType.Line; //直條圖(Column),折線圖(Line),橫條圖(Bar)
-            chart5.Series["Series1"].Points.DataBindXY(xValue, yValues);//Series1的XY數值放入圖中
+            chart5.Series["Series1"].Points.DataBindXY(xValue, yValues);//Series1的XY數值放入圖中  // xx, yy 皆為一維陣列
             chart5.Series["Series1"].Legend = "Legends1";  // 設定要呈現哪個圖例
             chart5.Series["Series1"].LegendText = titleArr[0]; //設定圖例文字
             chart5.Series["Series1"].LabelFormat = "#.###"; //小數點
             chart5.Series["Series1"].MarkerSize = 8; //Label 範圍大小
             chart5.Series["Series1"].LabelForeColor = Color.FromArgb(0, 90, 255); //字體顏色
+
             //字體設定
             chart5.Series["Series1"].Font = new Font("Trebuchet MS", 10, System.Drawing.FontStyle.Bold);
+
             //Label 背景色
             chart5.Series["Series1"].LabelBackColor = Color.FromArgb(150, 255, 255, 255);
             chart5.Series["Series1"].Color = Color.FromArgb(240, 65, 140, 240); //背景色
             chart5.Series["Series1"].IsValueShownAsLabel = true; // Show data points labels
 
-            /*  chart5.Series["Series2"].Points.DataBindXY(xValue, yValues);
-
-              chart5.Series["Series2"].Legend = "Legends1";
-              chart5.Series["Series2"].LegendText = titleArr[1];
-              chart5.Series["Series2"].LabelFormat = "#.###"; //小數點
-              chart5.Series["Series2"].MarkerSize = 8; //Label 範圍大小
-              chart5.Series["Series2"].LabelForeColor = Color.FromArgb(255, 103, 0);
-              chart5.Series["Series2"].Font = new System.Drawing.Font("Trebuchet MS", 10, FontStyle.Bold);
-              chart5.Series["Series2"].LabelBackColor = Color.FromArgb(150, 255, 255, 255);
-              chart5.Series["Series2"].Color = Color.FromArgb(240, 252, 180, 65); //背景色
-              chart5.Series["Series2"].IsValueShownAsLabel = true; //顯示數據
-             */
+            /*  
+            chart5.Series["Series2"].Points.DataBindXY(xValue, yValues);  // xx, yy 皆為一維陣列
+            chart5.Series["Series2"].Legend = "Legends1";
+            chart5.Series["Series2"].LegendText = titleArr[1];
+            chart5.Series["Series2"].LabelFormat = "#.###"; //小數點
+            chart5.Series["Series2"].MarkerSize = 8; //Label 範圍大小
+            chart5.Series["Series2"].LabelForeColor = Color.FromArgb(255, 103, 0);
+            chart5.Series["Series2"].Font = new System.Drawing.Font("Trebuchet MS", 10, FontStyle.Bold);
+            chart5.Series["Series2"].LabelBackColor = Color.FromArgb(150, 255, 255, 255);
+            chart5.Series["Series2"].Color = Color.FromArgb(240, 252, 180, 65); //背景色
+            chart5.Series["Series2"].IsValueShownAsLabel = true; //顯示數據
+            */
         }
-
-        //6060
 
         //------------------------------------------------------------  # 60個
 
@@ -471,7 +486,7 @@ namespace vcs_Chart3
             for (int index = 0; index < len; index++)
             {
                 series1[index] = new Series(users[index]);
-                series1[index].ChartType = SeriesChartType.Column;  // 圖表種類 : 直條圖
+                series1[index].ChartType = SeriesChartType.Column;  // 直條圖
                 series1[index].Color = colors[index];
                 series1[index].IsValueShownAsLabel = true;
             }
@@ -509,7 +524,7 @@ namespace vcs_Chart3
             {
                 series1[index] = new Series();
                 series1[index].Color = _colors[index];
-                series1[index].ChartType = SeriesChartType.Column;  // 圖表種類 : 直條圖
+                series1[index].ChartType = SeriesChartType.Column;  // 直條圖
                 series1[index].Name = _users[index];
                 series1[index].IsValueShownAsLabel = true;
                 series1[index].Points.Add(_y[index]);
@@ -534,7 +549,6 @@ namespace vcs_Chart3
             chart2.ChartAreas[0].AxisY.Minimum = 0;//設定Y軸最小值
             chart2.ChartAreas[0].AxisY.Maximum = 120;//設定Y軸最大值
             */
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -557,13 +571,13 @@ namespace vcs_Chart3
             var items = Enumerable.Range(0, 20).Select(x => new Item(x, rand.Next(1, 100) / 2.0)).ToList();
 
             var seriesLines = this.chart8.Series.Add("Line");
-            seriesLines.ChartType = SeriesChartType.Line; //System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            seriesLines.ChartType = SeriesChartType.Line;  // 折線圖
             seriesLines.XValueMember = "X";
             seriesLines.YValueMembers = "Y";
             seriesLines.Color = Color.Red;
 
             var seriesPoints = this.chart8.Series.Add("Points");
-            seriesPoints.ChartType = SeriesChartType.Point; //System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            seriesPoints.ChartType = SeriesChartType.Point;  // 點狀圖
             seriesPoints.XValueMember = "X";
             seriesPoints.YValueMembers = "Y";
 

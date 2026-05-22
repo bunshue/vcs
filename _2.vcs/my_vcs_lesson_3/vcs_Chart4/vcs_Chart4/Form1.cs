@@ -108,7 +108,7 @@ namespace vcs_Chart4
 
         void draw_chart1()
         {
-            string title = "雷達圖1";
+            string title = "雷達圖";
             chart_init(chart1, title);
 
             chart1.ChartAreas.Clear();
@@ -118,7 +118,7 @@ namespace vcs_Chart4
             // 設定數列1 的 大小與外觀
             Series series1 = chart1.Series.Add("雷達資料");
             series1.ChartArea = "NewArea";
-            series1.ChartType = SeriesChartType.Radar;  // 圖表種類 : 雷達圖
+            series1.ChartType = SeriesChartType.Radar;  // 雷達圖
             area.AxisY.LineColor = Color.Red;
             area.AxisY.LineWidth = 1;
 
@@ -137,7 +137,7 @@ namespace vcs_Chart4
 
         void draw_chart2()
         {
-            string title = "雷達圖2";
+            string title = "雷達圖";
             chart_init(chart2, title);
 
             chart2.ChartAreas.Clear();
@@ -147,7 +147,7 @@ namespace vcs_Chart4
             // 設定數列1 的 大小與外觀
             Series series1 = chart2.Series.Add("雷達資料");
             series1.ChartArea = "NewArea";
-            series1.ChartType = SeriesChartType.Radar;  // 圖表種類 : 雷達圖
+            series1.ChartType = SeriesChartType.Radar;  // 雷達圖
             area.AxisY.LineColor = Color.Red;
             area.AxisY.LineWidth = 1;
 
@@ -165,11 +165,6 @@ namespace vcs_Chart4
 
             //折線圖, 固定邊界 / 變動邊界
 
-            drawChart(draw_mode);
-        }
-
-        private void drawChart(int mode)    //畫Chart
-        {
             string title = "";
             chart_init(chart3, title);
 
@@ -185,7 +180,7 @@ namespace vcs_Chart4
             Series series1 = new Series("Di0", 500); //初始畫線條(名稱，最大值)
             series1.Color = Color.Blue; //設定線條顏色
             series1.Font = new Font("新細明體", 10); //設定字型
-            series1.ChartType = SeriesChartType.Line;  // 圖表種類 : 折線圖
+            series1.ChartType = SeriesChartType.Line;  // 折線圖
             //chart3.ChartAreas[0].AxisY.Enabled= AxisEnabled.False; //隱藏Y 軸標示
             //chart3.ChartAreas[0].AxisY.MajorGrid.Enabled= true;  //隱藏Y軸標線
             series1.IsValueShownAsLabel = true; //是否把數值顯示在線上
@@ -205,14 +200,14 @@ namespace vcs_Chart4
             // 將數列新增到chart上
             chart3.Series.Add(series1);
 
-            if (mode == 0)
+            if (draw_mode == 0)
             {
                 //固定邊界
                 richTextBox1.Text += "固定邊界\n";
                 chart3.ChartAreas[0].AxisY.Minimum = 0;//設定Y軸最小值
                 chart3.ChartAreas[0].AxisY.Maximum = 500;//設定Y軸最大值
             }
-            else if (mode == 1)
+            else if (draw_mode == 1)
             {
                 //變動邊界
                 richTextBox1.Text += "變動邊界\n";
@@ -229,11 +224,12 @@ namespace vcs_Chart4
 
         void draw_chart4()
         {
-            string[] xValues = { "一月", "二月", "三月", "四月", "五月", "六月", "七月" };
-            int[] yValues = { 25, 18, 30, 24, 35, 50, 40 };
+            string[] xx = { "一月", "二月", "三月", "四月", "五月", "六月", "七月" };
+            int[] yy = { 25, 18, 30, 24, 35, 50, 40 };
+            // NG Series objSeries = chart4.Series.Add("月溫度​℃");
             var objSeries = chart4.Series.First();
-            chart4.Series[0].ChartType = SeriesChartType.Point;
-            objSeries.Points.DataBindXY(xValues, yValues);
+            chart4.Series[0].ChartType = SeriesChartType.Point;  // 點狀圖
+            objSeries.Points.DataBindXY(xx, yy);  // xx, yy 皆為一維陣列
 
             //設定邊界
             //chart4.ChartAreas[0].AxisX.Minimum = 0;//設定Y軸最小值
@@ -306,17 +302,17 @@ namespace vcs_Chart4
             chart.ChartAreas[0].AxisY.LineColor = Color.DarkBlue;//設置軸的線條顏色
             chart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.White;//設置網格線顏色
 
-            //#region 圖表樣式
-            chart.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;//指定圖表元素的漸變樣式(中心向外，從左到右，從上到下等等)
+            // 圖表樣式
+            chart.BackGradientStyle = GradientStyle.TopBottom;//指定圖表元素的漸變樣式(中心向外，從左到右，從上到下等等)
             chart.BackSecondaryColor = Color.Yellow;//設置背景的輔助顏色
             chart.BorderlineColor = Color.Yellow;//設置圖像邊框的顏色
-            chart.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;//設置圖像邊框線的樣式(實線、虛線、點線)
+            chart.BorderlineDashStyle = ChartDashStyle.Solid;//設置圖像邊框線的樣式(實線、虛線、點線)
             chart.BorderlineWidth = 2;//設置圖像的邊框寬度
-            chart.BorderSkin.SkinStyle = System.Windows.Forms.DataVisualization.Charting.BorderSkinStyle.Emboss;//設置圖像的邊框外觀樣式
+            chart.BorderSkin.SkinStyle = BorderSkinStyle.Emboss;//設置圖像的邊框外觀樣式
             chart.BackColor = Color.Yellow;//設置圖表的背景顏色
-            //#endregion
+
             chart.Titles[0].Font = new Font("標楷體", 30f);//设置图表标题字体样式和大小
-            chart.Legends["Legend1"].Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Right;  //設定圖標顯示停靠的位置
+            chart.Legends["Legend1"].Docking = Docking.Right;  //設定圖標顯示停靠的位置
         }
 
         void draw_chart6()
@@ -335,7 +331,7 @@ namespace vcs_Chart4
             series1.BorderColor = Color.Navy;  //設置數據邊框的顏色
             series1.BorderWidth = 3;    //線寬
             series1.Font = new Font("新細明體", 10); //設定字型
-            series1.ChartType = SeriesChartType.Point;  // 圖表種類 : 點狀圖
+            series1.ChartType = SeriesChartType.Point;  // 點狀圖
             series1.MarkerSize = 5;     //圖標大小
             series1.IsValueShownAsLabel = false;   //將數值顯示在線上 是否在Chart中顯示座標點值
             series1.LegendText = "sin";  // 圖例文字
@@ -365,7 +361,7 @@ namespace vcs_Chart4
             series2.BorderColor = Color.Navy;  //設置數據邊框的顏色
             series2.BorderWidth = 3;    //線寬
             series2.Font = new Font("標楷體", 12); //設定字型
-            series2.ChartType = SeriesChartType.Point;  // 圖表種類 : 點狀圖
+            series2.ChartType = SeriesChartType.Point;  // 點狀圖
             series2.MarkerSize = 5;     //圖標大小
             series2.IsValueShownAsLabel = false;   //將數值顯示在線上 是否在Chart中顯示座標點值
             series2.LegendText = "cos";  // 圖例文字
@@ -379,7 +375,7 @@ namespace vcs_Chart4
             series3.BorderColor = Color.Navy;  //設置數據邊框的顏色
             series3.BorderWidth = 3;    //線寬
             series3.Font = new Font("標楷體", 12); //設定字型
-            series3.ChartType = SeriesChartType.Point;  // 圖表種類 : 點狀圖
+            series3.ChartType = SeriesChartType.Point;  // 點狀圖
             series3.MarkerSize = 5;     //圖標大小
             series3.IsValueShownAsLabel = false;   //將數值顯示在線上 是否在Chart中顯示座標點值
             series3.LegendText = "sin + cos";  // 圖例文字
@@ -452,7 +448,7 @@ namespace vcs_Chart4
                 series[i] = new Series(curves[i]);
                 series[i].Color = colors[i];
                 series[i].Font = new Font("新細明體", 10); //設定字型
-                series[i].ChartType = SeriesChartType.Point;  // 圖表種類 : 點狀圖
+                series[i].ChartType = SeriesChartType.Point;  // 點狀圖
                 series[i].MarkerSize = 5;     //圖標大小
                 series[i].IsValueShownAsLabel = false;  //將數值顯示在線上
             }
@@ -481,6 +477,7 @@ namespace vcs_Chart4
     }
 }
 
+
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
@@ -500,10 +497,7 @@ namespace vcs_Chart4
 
 //數列加入資料點的方法
 //series1.Points.AddXY(index, r.Next(10) * 50);
-//objSeries.Points.DataBindXY(xValues, yValues);
-
-
-
+//objSeries.Points.DataBindXY(xx, yy);  // xx, yy 皆為一維陣列
 
 
 
@@ -579,25 +573,15 @@ namespace vcs_Chart4
         }
 */
 
-//清除圖表
-//chart1.Series.Clear();  //每次使用此function前先清除圖表
-//chart1.Titles.Clear();
+
 /*
 chart1.Series[0].Points.Clear();
 chart1.Series[1].Points.Clear();
 chart1.Series[2].Points.Clear();
 */
 /*
-            //same
-            //chart1.Series.Clear();  //每次使用此function前先清除圖表
-
             chart1.ChartAreas.Clear();
-            chart1.Series.Clear();
 
 */
-
-
-// chart1.Series[0].ChartType = SeriesChartType.Point;
-
 
 

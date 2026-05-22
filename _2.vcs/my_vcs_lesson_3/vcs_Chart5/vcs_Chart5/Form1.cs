@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization;
 using System.Windows.Forms.DataVisualization.Charting;  // for Series, Chart
 
-namespace vcs_Chart6
+namespace vcs_Chart5
 {
     public partial class Form1 : Form
     {
