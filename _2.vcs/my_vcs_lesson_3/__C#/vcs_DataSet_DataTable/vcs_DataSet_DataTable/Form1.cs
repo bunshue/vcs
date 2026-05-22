@@ -31,7 +31,6 @@ namespace vcs_DataSet_DataTable
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -74,6 +73,8 @@ namespace vcs_DataSet_DataTable
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -130,7 +131,6 @@ namespace vcs_DataSet_DataTable
             dt.Rows.Add(datarow1);       //將 datarow1 的內容加入到 dt.Rows 裡
 
             show_DataTable(dt);  // 顯示 DataTable 的內容
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -1152,8 +1152,6 @@ namespace vcs_DataSet_DataTable
 
             show_DataSet(ds);
 
-            richTextBox1.Text += "aaaa\n";
-
             richTextBox1.Text += "------------------------------\n";  // 30個
 
 
@@ -1198,7 +1196,6 @@ namespace vcs_DataSet_DataTable
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
@@ -1231,9 +1228,9 @@ namespace vcs_DataSet_DataTable
 
 上面就是如何Datatable中某一行的id為99，就移除這一行,id為字段名
 
+//------------------------------------------------------------  # 60個
 
-//C# DataTable 相關操作
-
+// DataTable 相關操作
 
 ///判斷DataTable中某列是否包含某值
 /// <summary>
@@ -1261,9 +1258,7 @@ namespace vcs_DataSet_DataTable
                 return false;
             }
         }
-
     }
-
  
 
 向DataTable中添加數據
@@ -1330,8 +1325,4 @@ https://blog.csdn.net/happmaoo/article/details/83814604
         				
 //------------------------------------------------------------  # 60個
 */
-
-
-//string[] names = new string[] { "張三", "李四", "王五" };
-//string[] items = new string[] { "螢幕", "滑鼠", "鍵盤" };
 

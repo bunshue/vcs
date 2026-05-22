@@ -1,4 +1,53 @@
-﻿畫圖相關
+﻿陣列 一維陣列 二維陣列
+
+//string[] names = new string[] { "張三", "李四", "王五" };
+//string[] items = new string[] { "螢幕", "滑鼠", "鍵盤" };
+
+可以累計點數，緩慢畫出的方法
+
+Points1 為 已知點數
+
+        //公用變數
+        List<PointF> Points1 = new List<PointF>();
+        List<PointF> Points2 = new List<PointF>();
+
+                Points1.Add(e.Location);
+
+使用timer
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            int len = Points1.Count;
+            Points2.Add(Points1[cnt]);
+            pictureBox2.Invalidate();
+
+            cnt++;
+            if (cnt >= len)
+            {
+                timer2.Enabled = false;
+
+            }
+        }
+        
+呼叫pictureBox2重畫
+
+        private void pictureBox2_Paint(object sender, PaintEventArgs e)
+        {
+            if (Points2.Count > 1)
+            {
+                e.Graphics.DrawCurve(Pens.Red, Points2.ToArray());
+            }
+
+        }
+
+//------------------------------------------------------------  # 60個
+
+            //int[] gray = new int[220];
+            //g.DrawLines(Pens.Red, gray.ToArray());
+
+//------------------------------------------------------------  # 60個
+
+畫圖相關
 
 ffff dddd 檔案與資料夾
 
@@ -26,10 +75,6 @@ rtb
             Console.WriteLine(sign);
 
 //------------------------------------------------------------  # 60個
-
-
-//------------------------------------------------------------  # 60個
-
 
         void apply_listView02()
         {
@@ -1205,13 +1250,13 @@ private void Form1_Load(object sender, EventArgs e)
             Pen p = new Pen(Color.Red, 0);
             p.EndCap = LineCap.ArrowAnchor;
 
-6060
+//------------------------------------------------------------  # 60個
 
             Console.WriteLine("測試多型（Polymorphism）");
             hi();
             hi("lion-mouse");
 
-6060
+//------------------------------------------------------------  # 60個
 
             Graphics g;
 
@@ -1312,11 +1357,7 @@ public void SaveBitmapUsingExtension(Bitmap bitmap1, string filename)
             }
         }
 
-
-
-            //int[] gray = new int[220];
-            //g.DrawLines(Pens.Red, gray.ToArray());
-
+//------------------------------------------------------------  # 60個
 
 Binary格式讀出一個檔案到拜列
 
@@ -1340,45 +1381,6 @@ Binary格式讀出一個檔案到拜列
 <Setting Name="Argbs" Type="System.Int32[]" Scope="User">
 
 */
-
-//------------------------------------------------------------  # 60個
-
-可以累計點數，緩慢畫出的方法
-
-Points1 為 已知點數
-
-        //公用變數
-        List<PointF> Points1 = new List<PointF>();
-        List<PointF> Points2 = new List<PointF>();
-
-                Points1.Add(e.Location);
-
-使用timer
-
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            int len = Points1.Count;
-            Points2.Add(Points1[cnt]);
-            pictureBox2.Invalidate();
-
-            cnt++;
-            if (cnt >= len)
-            {
-                timer2.Enabled = false;
-
-            }
-        }
-        
-呼叫pictureBox2重畫
-
-        private void pictureBox2_Paint(object sender, PaintEventArgs e)
-        {
-            if (Points2.Count > 1)
-            {
-                e.Graphics.DrawCurve(Pens.Red, Points2.ToArray());
-            }
-
-        }
 
 //------------------------------------------------------------  # 60個
 
@@ -3536,7 +3538,7 @@ if (frames.Count > 0)
     }
 }
 
-6060
+//------------------------------------------------------------  # 60個
 
             //serialPort2.Write(data, 0, data.Length);
             try
@@ -4223,84 +4225,6 @@ C#計算文件的MD5值實例
 
 //C#計算文件的MD5值實例
 //MD5 是 Message Digest Algorithm 5（信息摘要算法）的縮寫，MD5 一種散列(Hash)技術，廣泛用於加密、解密、數據簽名和數據完整性校驗等方面。
-
-//------------------------------------------------------------  # 60個
-
-        //MD5，SHA1，SHA256，SHA512 ST
-
-        /// <summary>
-        /// 使用DES加密（Added by niehl 2005-4-6）
-        /// </summary>
-        /// <param name="originalValue">待加密的字符串</param>
-        /// <param name="key">密鑰(最大長度8)</param>
-        /// <param name="IV">初始化向量(最大長度8)</param>
-        /// <returns>加密後的字符串</returns>
-        public string DESEncrypt(string originalValue, string key, string IV)
-        {
-            //將key和IV處理成8個字符
-            key += "12345678";
-            IV += "12345678";
-            key = key.Substring(0, 8);
-            IV = IV.Substring(0, 8);
-            SymmetricAlgorithm sa;
-            ICryptoTransform ct;
-            MemoryStream ms;
-            CryptoStream cs;
-            byte[] byt;
-            sa = new DESCryptoServiceProvider();
-            sa.Key = Encoding.UTF8.GetBytes(key);
-            sa.IV = Encoding.UTF8.GetBytes(IV);
-            ct = sa.CreateEncryptor();
-            byt = Encoding.UTF8.GetBytes(originalValue);
-            ms = new MemoryStream();
-            cs = new CryptoStream(ms, ct, CryptoStreamMode.Write);
-            cs.Write(byt, 0, byt.Length);
-            cs.FlushFinalBlock();
-            cs.Close();
-            return Convert.ToBase64String(ms.ToArray());
-        }
-
-        public string DESEncrypt(string originalValue, string key)
-        {
-            return DESEncrypt(originalValue, key, key);
-        }
-
-        /// <summary>
-        /// 使用DES解密（Added by niehl 2005-4-6）
-        /// </summary>
-        /// <param name="encryptedValue">待解密的字符串</param>
-        /// <param name="key">密鑰(最大長度8)</param>
-        /// <param name="IV">m初始化向量(最大長度8)</param>
-        /// <returns>解密後的字符串</returns>
-        public string DESDecrypt(string encryptedValue, string key, string IV)
-        {
-            //將key和IV處理成8個字符
-            key += "12345678";
-            IV += "12345678";
-            key = key.Substring(0, 8);
-            IV = IV.Substring(0, 8);
-            SymmetricAlgorithm sa;
-            ICryptoTransform ct;
-            MemoryStream ms;
-            CryptoStream cs;
-            byte[] byt;
-            sa = new DESCryptoServiceProvider();
-            sa.Key = Encoding.UTF8.GetBytes(key);
-            sa.IV = Encoding.UTF8.GetBytes(IV);
-            ct = sa.CreateDecryptor();
-            byt = Convert.FromBase64String(encryptedValue);
-            ms = new MemoryStream();
-            cs = new CryptoStream(ms, ct, CryptoStreamMode.Write);
-            cs.Write(byt, 0, byt.Length);
-            cs.FlushFinalBlock();
-            cs.Close();
-            return Encoding.UTF8.GetString(ms.ToArray());
-        }
-
-        public string DESDecrypt(string encryptedValue, string key)
-        {
-            return DESDecrypt(encryptedValue, key, key);
-        }
 
 //------------------------------------------------------------  # 60個
 
@@ -6516,7 +6440,7 @@ pntArr[2] = new Point(x - len / 2, (int)(len * Math.Sqrt(3) / 2 + y));
 
 //------------------------------------------------------------  # 60個
 
-//字符串轉數組
+//字串轉拜列
 string mystring="this is a string"
 char[] mychars=mystring.ToCharArray();
 
@@ -7412,10 +7336,7 @@ void normal(point p)
     }
 }
 
-
-
-
-
+//------------------------------------------------------------  # 60個
 
             string dir1 = @"C:\______test_files\compare1";
 
@@ -7603,11 +7524,7 @@ void runAutoTest(int argc, char** argv, const char* filename, int kernel_param)
     exit(g_TotalErrors == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 
-
-
-
-
-
+//------------------------------------------------------------  # 60個
 
     glDeleteTextures(1, &texture);
     if (imgBuf)
@@ -7616,10 +7533,7 @@ void runAutoTest(int argc, char** argv, const char* filename, int kernel_param)
         imgBuf = nullptr;
     }
 
-
-
-
-
+//------------------------------------------------------------  # 60個
 
 /** CUDA Runtime API Version */
 #define CUDART_VERSION  11070
@@ -8979,6 +8893,8 @@ richTextBox1.Text += receive_buffer_tmp[i].ToString("X2") + " ";
 
 //------------------------------------------------------------  # 60個
 
+字串 和 拜列 的轉換
+
 string和byte[]的轉換 (C#)
 
 string類型轉成byte[]：
@@ -8998,8 +8914,6 @@ byte[] byteArray = System.Text.Encoding.ASCII.GetBytes ( str );
 ASCII byte[] 轉成string：（byte[] = new byte[]{ 0x30, 0x31} 轉成 "01"）
 
 string str = System.Text.Encoding.ASCII.GetString(byteArray);
-
-
 
 string text = "是不是漢字，ABC，keleyi.com";
 for (int i = 0; i < text.Length; i++)
@@ -9138,10 +9052,7 @@ Contains('關鍵字')		判斷是否包含該關鍵字			x.Contains("Build")
 string x = "Hello world";
 Console.WriteLine(x[4]); //o
 
-
-
-
-
+//------------------------------------------------------------  # 60個
 
 改變各種滑鼠屬標
 
@@ -12496,9 +12407,9 @@ Transform需要做到
                 if (ln_points.Count > 1)
                     g.DrawLines(thick_pen, ln_points.ToArray());
 
+//------------------------------------------------------------  # 60個
 
 拉一個command line的捷徑至  C:\_git\ims2\_doc\_pic\PNG 給 file2c.exe 用
-
 
 using (Pen thick_pen = new Pen(Color.Red, 3))
 
@@ -13254,8 +13165,6 @@ int[] myArray = new int[5] ;
 
 int[] myArray = { 1, 2, 3, 4, 5 };
 
- 
-
 List->
 
 List<int> myLists = new List<int>();
@@ -13538,12 +13447,7 @@ pictureBox Double Click後 判斷位置
    
 ----------------OX_game ST----------------
 
-
-
-
 OX game 累計總戰績  N勝N敗   攻方守方
-
-
 
 遊戲進行中，把每個點都記下來
 
