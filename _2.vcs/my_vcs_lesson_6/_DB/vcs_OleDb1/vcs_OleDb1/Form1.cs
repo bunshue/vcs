@@ -25,7 +25,7 @@ using System.Data.OleDb;  // 讀取Access需使用OLEDB
     Memcached、MongoDB 和 Redis 等
 */
 
-namespace vcs_OleDb
+namespace vcs_OleDb1
 {
     public partial class Form1 : Form
     {
@@ -42,6 +42,8 @@ namespace vcs_OleDb
         // 工作表名稱
         string sheetName = "Sheet1";
 
+        OleDbConnection cn;
+
         public Form1()
         {
             InitializeComponent();
@@ -55,6 +57,30 @@ namespace vcs_OleDb
 
             string pic_filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             pictureBox1.Image = Image.FromFile(pic_filename);
+
+            //------------------------------------------------------------  # 60個
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "顯示 科系代碼資料表, 由系碼排序\n";
+            Show_Record1();
+            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "顯示 課程管理表, 由課號排序\n";
+            Show_Record2();
+            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "顯示 學生管理表, 由學號排序\n";
+            Show_Record3();
+            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "顯示 學生資料表\n";
+            Show_Record4();
+            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "取得 科系代碼資料表\n";
+            Show_Dept_No();
+            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "取得 課程資料表\n";
+            Show_Subject();
+            richTextBox1.Text += "------------------------------\n";  // 30個
+            richTextBox1.Text += "取得 學生資料表\n";
+            Display_Student();
         }
 
         private void show_item_location()
@@ -144,7 +170,7 @@ namespace vcs_OleDb
             bt_management11.Location = new Point(x_st + dx * 1, y_st + dy * 5);
 
             this.Size = new Size(1920, 890);
-            this.Text = "vcs_OleDb";
+            this.Text = "vcs_OleDb1";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
@@ -855,7 +881,7 @@ namespace vcs_OleDb
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             // EXCEL資料庫檔案
-            //excel_filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\vcs_OleDb\vcs_OleDb\excel_test_data.xls";
+            //excel_filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\vcs_OleDb1\vcs_OleDb1\excel_test_data.xls";
             excel_filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\_db_oledb\2006年圖書銷售情況.xls";
 
             // 連接字串
@@ -1050,6 +1076,73 @@ namespace vcs_OleDb
 
         private void button15_Click(object sender, EventArgs e)
         {
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
+            string CourseCredit = "3";  // 學分數
+            // 查詢字串
+            sqlstr = "SELECT 學生資料表.學號,姓名,課名,學分數 FROM 科系代碼資料表,學生資料表,選課資料表,課程資料表 WHERE 學生資料表.系碼=科系代碼資料表.系碼 AND 學生資料表.學號=選課資料表.學號 AND 選課資料表.課號=課程資料表.課號 AND 選課資料表.學號='" + CourseCredit + "'";
+
+            OleDbConnectionStringBuilder builder = get_builder(db_filename);
+            cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
+            cn.Open();  // 打開資料庫連線
+
+            OleDbDataAdapter da;
+            DataSet ds;
+            da = new OleDbDataAdapter(sqlstr, cn);
+            ds = new DataSet();
+            //讀取資料表
+            da.Fill(ds, "學生資料表");
+            dataGridView4.DataSource = ds.Tables["學生資料表"];
+            //dataGridView4.DataBind();
+            cn.Close();
+
+            //------------------------------------------------------------  # 60個
+            /*
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
+            string Str1 = "aaaa";  // 學號
+            string Str2 = "bbbb";  // 課號
+            // 查詢字串
+            sqlstr = "INSERT INTO 選課資料表(學號,課號) Values('" + Str1 + "','" + Str2 + "')";
+
+            OleDbConnectionStringBuilder builder = get_builder(db_filename);
+
+            OleDbConnection cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
+            cn.Open();  // 打開資料庫連線
+            OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
+            cmd.ExecuteNonQuery();
+            cn.Close();
+
+            richTextBox1.Text += "加選成功！\n";
+
+            //------------------------------------------------------------  # 60個
+
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
+
+            string Stu_ID = "96001";
+            // 查詢字串
+            sqlstr = "SELECT * FROM 學生資料表 WHERE 學號='" + Stu_ID + "' ";
+
+            OleDbConnectionStringBuilder builder = get_builder(db_filename);
+            cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
+            cn.Open();  // 打開資料庫連線
+
+            // =====顯示學生之學號與姓名清單==========
+
+            OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
+            OleDbDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
+            //顯示資料表欄位的所有資料
+            if (dr.Read())
+            {
+                richTextBox1.Text += "學號 : " + dr["學號"] + "\t姓名 : " + dr["姓名"] + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "您不是學員！\n";
+            }
+            cn.Close();
+            */
         }
 
         //------------------------------------------------------------  # 60個
@@ -1102,64 +1195,434 @@ namespace vcs_OleDb
 
         //綜合管理資料
 
+
+        void Show_Record1()
+        {
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
+            // 查詢字串, 顯示 科系代碼表, 由系碼排序
+            sqlstr = "SELECT * FROM 科系代碼資料表 ORDER BY 系碼 ASC";
+            oledb_read_database(db_filename, sqlstr, dataGridView1);
+            lb_dgv1.Text = "科系代碼資料表, 由系碼排序";
+        }
+
+        void Show_Record2()
+        {
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
+            // 查詢字串, 顯示 課程管理表, 由課號排序
+            sqlstr = "SELECT * FROM 課程資料表 ORDER BY 課號 ASC";
+            oledb_read_database(db_filename, sqlstr, dataGridView2);
+            lb_dgv2.Text = "課程管理表, 由課號排序";
+        }
+
+        void Show_Record3()
+        {
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
+            // 查詢字串, 顯示 學生管理表, 由學號排序
+            sqlstr = "SELECT 學號,姓名,系名 FROM 學生資料表,科系代碼資料表 WHERE 學生資料表.系碼=科系代碼資料表.系碼 ORDER BY 學號";
+            oledb_read_database(db_filename, sqlstr, dataGridView3);
+            lb_dgv3.Text = "學生管理表, 由學號排序";
+        }
+
+        void Show_Record4()
+        {
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
+            // 查詢字串, 顯示 學生資料表
+            sqlstr = "SELECT * FROM 學生資料表";
+            oledb_read_database(db_filename, sqlstr, dataGridView4);
+            lb_dgv4.Text = "學生資料表";
+        }
+
+        void Show_Dept_No()
+        {
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
+            OleDbConnectionStringBuilder builder = get_builder(db_filename);
+            cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
+            cn.Open();  // 打開資料庫連線
+
+            // 查詢字串, 全部資料 科系代碼資料表
+            sqlstr = "SELECT Distinct * FROM 科系代碼資料表";
+
+            OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
+            OleDbDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
+            //顯示資料表欄位的所有資料
+            while (dr.Read())
+            {
+                richTextBox1.Text += dr["系碼"] + "/" + dr["系名"] + "/" + dr["系主任"] + "\n";
+            }
+            cn.Close();
+        }
+
+        void Show_Subject()
+        {
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
+            OleDbConnectionStringBuilder builder = get_builder(db_filename);
+            cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
+            cn.Open();  // 打開資料庫連線
+
+            // 查詢字串
+            sqlstr = "SELECT * FROM 課程資料表";
+
+            OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
+            OleDbDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
+            //顯示資料表欄位的所有資料
+            while (dr.Read())
+            {
+                richTextBox1.Text += dr["課號"] + "/" + dr["課名"] + "/" + dr["學分數"] + "/" + dr["必選修"] + "\n";
+            }
+            cn.Close();
+        }
+
+        void Display_Student()
+        {
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
+            OleDbConnectionStringBuilder builder = get_builder(db_filename);
+            cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
+            cn.Open();  // 打開資料庫連線
+
+            // 查詢字串
+            sqlstr = "SELECT * FROM 學生資料表";
+
+            OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
+            OleDbDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
+            //顯示資料表欄位的所有資料
+            while (dr.Read())
+            {
+                richTextBox1.Text += dr["學號"] + "/" + dr["姓名"] + "/" + dr["系碼"] + "\n";
+            }
+            cn.Close();
+        }
+
+        //一、設定系碼[查詢功能]
         private void bt_management00_Click(object sender, EventArgs e)
         {
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
 
+            string ID = "D002";
+            // 查詢字串
+            sqlstr = "SELECT * FROM 科系代碼資料表 WHERE 系碼='" + ID + "'";
+
+            OleDbConnectionStringBuilder builder = get_builder(db_filename);
+            cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
+            cn.Open();  // 打開資料庫連線
+
+            OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
+            OleDbDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
+            //顯示資料表欄位的所有資料
+            while (dr.Read())
+            {
+                richTextBox1.Text += "系碼 : " + dr["系碼"].ToString() + "\n";
+                richTextBox1.Text += "系名 : " + dr["系名"].ToString() + "\n";
+                richTextBox1.Text += "系主任 : " + dr["系主任"].ToString() + "\n";
+            }
+            cn.Close();
         }
 
+        //一、設定系碼[新增功能]
         private void bt_management01_Click(object sender, EventArgs e)
         {
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
 
+            string ID = "D007";  // 系碼
+            string DNAME = "化學系";  // 系名
+            string DTEACHER = "Peter";  // 系主任
+            // 查詢字串
+            sqlstr = "INSERT INTO 科系代碼資料表(系碼,系名,系主任) Values('" + ID + "','" + DNAME + "','" + DTEACHER + "')";
+
+            oledb_write_database(db_filename, sqlstr);
+
+            richTextBox1.Text += "顯示 科系代碼資料表, 由系碼排序\n";
+            Show_Record1();
         }
 
+        //一、設定系碼[修改功能]
         private void bt_management02_Click(object sender, EventArgs e)
         {
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
 
+            string ID = "D007";
+            string DNAME = "物理系";  // 系名
+            string DTEACHER = "David";  // 系主任
+            // 查詢字串
+            sqlstr = "UPDATE 科系代碼資料表 SET 系碼='" + ID + "',系名='" + DNAME + "' ,系主任='" + DTEACHER + "' WHERE 系碼='" + ID + "'";
+
+            OleDbConnectionStringBuilder builder = get_builder(db_filename);
+            cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
+            cn.Open();  // 打開資料庫連線
+
+            OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
+            cmd.ExecuteNonQuery();
+            cn.Close();
+
+            richTextBox1.Text += "修改成功！\n";
+
+            richTextBox1.Text += "顯示 科系代碼資料表, 由系碼排序\n";
+            Show_Record1();
         }
 
+        //一、設定系碼[刪除功能]
         private void bt_management03_Click(object sender, EventArgs e)
         {
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
 
+            string ID = "D007";
+            // 查詢字串
+            sqlstr = "DELETE FROM 科系代碼資料表 WHERE 系碼='" + ID + "'";
+
+            OleDbConnectionStringBuilder builder = get_builder(db_filename);
+            cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
+            cn.Open();  // 打開資料庫連線
+
+            OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
+            cmd.ExecuteNonQuery();
+            cn.Close();
+
+            richTextBox1.Text += "刪除成功！\n";
+
+            richTextBox1.Text += "顯示 科系代碼資料表, 由系碼排序\n";
+            Show_Record1();
         }
 
+        //二、課程管理[查詢功能]
         private void bt_management04_Click(object sender, EventArgs e)
         {
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
 
+            string CourseID = "C005";  // 課號
+            // 查詢字串
+            sqlstr = "SELECT * FROM 課程資料表 WHERE 課號='" + CourseID + "'";
+
+            OleDbConnectionStringBuilder builder = get_builder(db_filename);
+            cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
+            cn.Open();  // 打開資料庫連線
+
+            OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
+            OleDbDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
+            //顯示資料表欄位的所有資料
+            while (dr.Read())
+            {
+                richTextBox1.Text += "課號 : " + dr["課號"].ToString() + "\n";
+                richTextBox1.Text += "課名 : " + dr["課名"].ToString() + "\n";
+                richTextBox1.Text += "學分數 : " + dr["學分數"].ToString() + "\n";
+                richTextBox1.Text += "必選修 : " + dr["必選修"].ToString() + "\n";
+            }
+            cn.Close();
         }
 
+        //二、課程管理[新增功能]    
         private void bt_management05_Click(object sender, EventArgs e)
         {
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
 
+            string CourseID = "C006";  // 課號
+            string CourseName = "離散數學";  // 課名
+            string CourseCredit = "3";  // 學分數
+            string sp = "選";  // 必選修
+            // 查詢字串
+            sqlstr = "INSERT INTO 課程資料表(課號,課名,學分數,必選修) Values('" + CourseID + "','" + CourseName + "','" + CourseCredit + "','" + sp + "')";
+
+            OleDbConnectionStringBuilder builder = get_builder(db_filename);
+            cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
+            cn.Open();  // 打開資料庫連線
+
+            OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
+            cmd.ExecuteNonQuery();
+            cn.Close();
+
+            richTextBox1.Text += "新增成功！\n";
+
+            richTextBox1.Text += "顯示 課程管理表, 由課號排序\n";
+            Show_Record2();
         }
 
+        //二、課程管理[修改功能]
         private void bt_management06_Click(object sender, EventArgs e)
         {
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
 
+            string CourseID = "C006";  // 課號
+            string CourseName = "機率";  // 課名
+            string CourseCredit = "4";  // 學分數
+            string sp = "必";  // 必選修
+            // 查詢字串
+            sqlstr = "UPDATE 課程資料表 SET 課號='" + CourseID + "',課名='" + CourseName + "' ,學分數='" + CourseCredit + "', 必選修='" + sp + "' WHERE 課號='" + CourseID + "'";
+
+            OleDbConnectionStringBuilder builder = get_builder(db_filename);
+            cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
+            cn.Open();  // 打開資料庫連線
+
+            OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
+            cmd.ExecuteNonQuery();
+            cn.Close();
+
+            richTextBox1.Text += "新增成功！\n";
+
+            richTextBox1.Text += "顯示 課程管理表, 由課號排序\n";
+            Show_Record2();
         }
 
+        //二、課程管理[刪除功能]
         private void bt_management07_Click(object sender, EventArgs e)
         {
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
 
+            string CourseID = "C006";  // 課號
+            // 查詢字串
+            sqlstr = "DELETE FROM 課程資料表 WHERE 課號='" + CourseID + "'";
+
+            OleDbConnectionStringBuilder builder = get_builder(db_filename);
+            cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
+            cn.Open();  // 打開資料庫連線
+
+            OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
+            cmd.ExecuteNonQuery();
+            cn.Close();
+
+            richTextBox1.Text += "刪除成功！\n";
+
+            richTextBox1.Text += "顯示 課程管理表, 由課號排序\n";
+            Show_Record2();
         }
 
+        //三、學生管理[查詢功能]
         private void bt_management08_Click(object sender, EventArgs e)
         {
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
 
+            string ID = "96003";  // 學號
+            // 查詢字串
+            sqlstr = "SELECT * FROM 學生資料表 WHERE 學號='" + ID + "'";
+
+            OleDbConnectionStringBuilder builder = get_builder(db_filename);
+            cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
+            cn.Open();  // 打開資料庫連線
+
+            OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
+            OleDbDataReader dr = cmd.ExecuteReader();  // 建立數據讀取器
+            //顯示資料表欄位的所有資料
+            while (dr.Read())
+            {
+                richTextBox1.Text += "學號 : " + dr["學號"].ToString() + "\n";
+                richTextBox1.Text += "姓名 : " + dr["姓名"].ToString() + "\n";
+                richTextBox1.Text += "系碼 : " + dr["系碼"].ToString() + "\n";
+            }
+            cn.Close();
+
+            //3030
+
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
+
+            ID = "96003";  // 學號
+            // 查詢字串
+            sqlstr = "SELECT 科系代碼資料表.系碼,系名 FROM 科系代碼資料表,學生資料表 WHERE 科系代碼資料表.系碼=學生資料表.系碼 AND 學號='" + ID + "'";
+
+            builder = get_builder(db_filename);
+            cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
+            cn.Open();  // 打開資料庫連線
+
+            cmd = new OleDbCommand(sqlstr, cn);
+            dr = cmd.ExecuteReader();  // 建立數據讀取器
+            //顯示資料表欄位的所有資料
+            while (dr.Read())
+            {
+                richTextBox1.Text += dr["系碼"] + "/" + dr["系名"] + "\n";
+            }
+            cn.Close();
         }
 
+        //三、學生管理[新增功能]
         private void bt_management09_Click(object sender, EventArgs e)
         {
+            Show_Record4();
 
+            //科系代碼資料表
+
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
+
+            string ID = "96006";  // 學號
+            string NAME = "劉備";  // 姓名
+            string DID = "D008";  // 系碼
+            // 查詢字串
+            sqlstr = "INSERT INTO 學生資料表(學號,姓名,系碼) Values('" + ID + "','" + NAME + "','" + DID + "')";
+
+            OleDbConnectionStringBuilder builder = get_builder(db_filename);
+            cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
+            cn.Open();  // 打開資料庫連線
+
+            OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
+            cmd.ExecuteNonQuery();
+            cn.Close();
+
+            richTextBox1.Text += "新增成功！\n";
+
+            richTextBox1.Text += "顯示 學生管理表, 由學號排序\n";
+            Show_Record3();
         }
 
+        //三、學生管理[修改功能]
         private void bt_management10_Click(object sender, EventArgs e)
         {
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
 
+            string ID = "96005";  // 學號
+            string NAME = "李白";  // 姓名
+            string DID = "D008";  // 系碼
+            // 查詢字串
+            sqlstr = "UPDATE 學生資料表 SET 學號='" + ID + "',姓名='" + NAME + "' ,系碼='" + DID + "' WHERE 學號='" + ID + "'";
+
+            OleDbConnectionStringBuilder builder = get_builder(db_filename);
+            cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
+            cn.Open();  // 打開資料庫連線
+
+            OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
+            cmd.ExecuteNonQuery();
+            cn.Close();
+
+            richTextBox1.Text += "修改成功！\n";
+
+            richTextBox1.Text += "顯示 學生管理表, 由學號排序\n";
+            Show_Record3();
         }
 
+        //三、學生管理[刪除功能]
         private void bt_management11_Click(object sender, EventArgs e)
         {
+            // 資料庫檔案
+            db_filename = "DBMS1.mdb";
+            string ID = "96005";  // 學號
+            // 查詢字串
+            sqlstr = "DELETE FROM 學生資料表 WHERE 學號='" + ID + "'";
 
+            OleDbConnectionStringBuilder builder = get_builder(db_filename);
+            cn = new OleDbConnection(builder.ConnectionString);  // 建立資料庫連接對象cn
+            cn.Open();  // 打開資料庫連線
+
+            OleDbCommand cmd = new OleDbCommand(sqlstr, cn);
+            cmd.ExecuteNonQuery();
+            cn.Close();
+
+            richTextBox1.Text += "刪除成功！\n";
+
+            richTextBox1.Text += "顯示 學生管理表, 由學號排序\n";
+            Show_Record4();
         }
 
         //------------------------------------------------------------  # 60個

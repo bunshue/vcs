@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_OleDb2
+namespace vcs_OleDb1
 {
     static class Program
     {

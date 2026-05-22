@@ -1,4 +1,4 @@
-﻿namespace vcs_OleDb2
+﻿namespace vcs_OleDb1
 {
     partial class Form1
     {
@@ -48,19 +48,7 @@
             this.button15 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
-            this.button18 = new System.Windows.Forms.Button();
-            this.button19 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button20 = new System.Windows.Forms.Button();
-            this.button21 = new System.Windows.Forms.Button();
-            this.button22 = new System.Windows.Forms.Button();
-            this.button23 = new System.Windows.Forms.Button();
-            this.button24 = new System.Windows.Forms.Button();
-            this.button25 = new System.Windows.Forms.Button();
-            this.button26 = new System.Windows.Forms.Button();
-            this.button27 = new System.Windows.Forms.Button();
-            this.button28 = new System.Windows.Forms.Button();
-            this.button29 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.lb_dgv4 = new System.Windows.Forms.Label();
             this.lb_dgv3 = new System.Windows.Forms.Label();
@@ -68,10 +56,30 @@
             this.lb_dgv1 = new System.Windows.Forms.Label();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lb_dgv4b = new System.Windows.Forms.Label();
+            this.lb_dgv3b = new System.Windows.Forms.Label();
+            this.lb_dgv2b = new System.Windows.Forms.Label();
+            this.lb_dgv1b = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt_management11 = new System.Windows.Forms.Button();
+            this.bt_management10 = new System.Windows.Forms.Button();
+            this.bt_management09 = new System.Windows.Forms.Button();
+            this.bt_management08 = new System.Windows.Forms.Button();
+            this.bt_management07 = new System.Windows.Forms.Button();
+            this.bt_management06 = new System.Windows.Forms.Button();
+            this.bt_management05 = new System.Windows.Forms.Button();
+            this.bt_management00 = new System.Windows.Forms.Button();
+            this.bt_management04 = new System.Windows.Forms.Button();
+            this.bt_management03 = new System.Windows.Forms.Button();
+            this.bt_management02 = new System.Windows.Forms.Button();
+            this.bt_management01 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button9
@@ -81,7 +89,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(200, 60);
             this.button9.TabIndex = 134;
-            this.button9.Text = "學生管理[查詢功能]";
+            this.button9.Text = "系統相關";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -92,7 +100,6 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(200, 60);
             this.button8.TabIndex = 133;
-            this.button8.Text = "課程管理[刪除功能]";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -103,16 +110,15 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(200, 60);
             this.button7.TabIndex = 132;
-            this.button7.Text = "課程管理[修改功能]";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // bt_clear
             // 
-            this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(788, 48);
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(791, 44);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(66, 40);
+            this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 131;
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
@@ -125,7 +131,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(200, 60);
             this.button0.TabIndex = 129;
-            this.button0.Text = "xxx";
+            this.button0.Text = "讀取資料庫 至 DGV, 新進";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -136,7 +142,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(200, 60);
             this.button6.TabIndex = 128;
-            this.button6.Text = "課程管理[新增功能]";
+            this.button6.Text = "取得部分資料";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -147,7 +153,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 127;
-            this.button1.Text = "設定系碼[查詢功能]";
+            this.button1.Text = "OleDb 1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -158,7 +164,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 126;
-            this.button5.Text = "課程管理[查詢功能]";
+            this.button5.Text = "OleDb 5";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -169,7 +175,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 125;
-            this.button4.Text = "設定系碼[刪除功能]";
+            this.button4.Text = "OleDb 4";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -180,7 +186,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 124;
-            this.button3.Text = "設定系碼[修改功能]";
+            this.button3.Text = "OleDb 3";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -191,14 +197,14 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 123;
-            this.button2.Text = "設定系碼[新增功能]";
+            this.button2.Text = "OleDb 2";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(768, 14);
+            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.richTextBox1.Location = new System.Drawing.Point(771, 10);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 122;
@@ -211,7 +217,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(200, 60);
             this.button10.TabIndex = 135;
-            this.button10.Text = "學生管理[新增功能]";
+            this.button10.Text = "CRUD 增查改刪 0";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -222,7 +228,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(200, 60);
             this.button11.TabIndex = 136;
-            this.button11.Text = "學生管理[修改功能]";
+            this.button11.Text = "讀取圖片資料庫中的圖片";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -233,7 +239,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(200, 60);
             this.button12.TabIndex = 137;
-            this.button12.Text = "學生管理[刪除功能]";
+            this.button12.Text = "讀取EXCEL檔案到DGV";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -244,6 +250,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(200, 60);
             this.button13.TabIndex = 138;
+            this.button13.Text = "讀取EXCEL檔案";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -254,6 +261,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(200, 60);
             this.button14.TabIndex = 139;
+            this.button14.Text = "Excel多檔合一檔";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -264,6 +272,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(200, 60);
             this.button15.TabIndex = 140;
+            this.button15.Text = "test";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -274,6 +283,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(200, 60);
             this.button16.TabIndex = 141;
+            this.button16.Text = "臨時看資料庫與刪除資料用";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -284,142 +294,23 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(200, 60);
             this.button17.TabIndex = 142;
+            this.button17.Text = "簡易測試";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
-            // 
-            // button18
-            // 
-            this.button18.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button18.Location = new System.Drawing.Point(216, 498);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(200, 60);
-            this.button18.TabIndex = 143;
-            this.button18.UseVisualStyleBackColor = true;
-            this.button18.Click += new System.EventHandler(this.button18_Click);
-            // 
-            // button19
-            // 
-            this.button19.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button19.Location = new System.Drawing.Point(216, 559);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(200, 60);
-            this.button19.TabIndex = 144;
-            this.button19.UseVisualStyleBackColor = true;
-            this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(650, 12);
+            this.dataGridView1.Location = new System.Drawing.Point(656, 10);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(100, 100);
             this.dataGridView1.TabIndex = 145;
             // 
-            // button20
-            // 
-            this.button20.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button20.Location = new System.Drawing.Point(422, 10);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(200, 60);
-            this.button20.TabIndex = 146;
-            this.button20.UseVisualStyleBackColor = true;
-            this.button20.Click += new System.EventHandler(this.button20_Click);
-            // 
-            // button21
-            // 
-            this.button21.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button21.Location = new System.Drawing.Point(422, 73);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(200, 60);
-            this.button21.TabIndex = 147;
-            this.button21.UseVisualStyleBackColor = true;
-            this.button21.Click += new System.EventHandler(this.button21_Click);
-            // 
-            // button22
-            // 
-            this.button22.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button22.Location = new System.Drawing.Point(422, 134);
-            this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(200, 60);
-            this.button22.TabIndex = 148;
-            this.button22.UseVisualStyleBackColor = true;
-            this.button22.Click += new System.EventHandler(this.button22_Click);
-            // 
-            // button23
-            // 
-            this.button23.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button23.Location = new System.Drawing.Point(422, 195);
-            this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(200, 60);
-            this.button23.TabIndex = 149;
-            this.button23.UseVisualStyleBackColor = true;
-            this.button23.Click += new System.EventHandler(this.button23_Click);
-            // 
-            // button24
-            // 
-            this.button24.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button24.Location = new System.Drawing.Point(422, 256);
-            this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(200, 60);
-            this.button24.TabIndex = 150;
-            this.button24.UseVisualStyleBackColor = true;
-            this.button24.Click += new System.EventHandler(this.button24_Click);
-            // 
-            // button25
-            // 
-            this.button25.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button25.Location = new System.Drawing.Point(422, 316);
-            this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(200, 60);
-            this.button25.TabIndex = 151;
-            this.button25.UseVisualStyleBackColor = true;
-            this.button25.Click += new System.EventHandler(this.button25_Click);
-            // 
-            // button26
-            // 
-            this.button26.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button26.Location = new System.Drawing.Point(422, 377);
-            this.button26.Name = "button26";
-            this.button26.Size = new System.Drawing.Size(200, 60);
-            this.button26.TabIndex = 152;
-            this.button26.UseVisualStyleBackColor = true;
-            this.button26.Click += new System.EventHandler(this.button26_Click);
-            // 
-            // button27
-            // 
-            this.button27.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button27.Location = new System.Drawing.Point(422, 437);
-            this.button27.Name = "button27";
-            this.button27.Size = new System.Drawing.Size(200, 60);
-            this.button27.TabIndex = 153;
-            this.button27.UseVisualStyleBackColor = true;
-            this.button27.Click += new System.EventHandler(this.button27_Click);
-            // 
-            // button28
-            // 
-            this.button28.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button28.Location = new System.Drawing.Point(422, 498);
-            this.button28.Name = "button28";
-            this.button28.Size = new System.Drawing.Size(200, 60);
-            this.button28.TabIndex = 154;
-            this.button28.UseVisualStyleBackColor = true;
-            this.button28.Click += new System.EventHandler(this.button28_Click);
-            // 
-            // button29
-            // 
-            this.button29.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button29.Location = new System.Drawing.Point(422, 559);
-            this.button29.Name = "button29";
-            this.button29.Size = new System.Drawing.Size(200, 60);
-            this.button29.TabIndex = 155;
-            this.button29.UseVisualStyleBackColor = true;
-            this.button29.Click += new System.EventHandler(this.button29_Click);
-            // 
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(650, 118);
+            this.dataGridView2.Location = new System.Drawing.Point(656, 116);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 24;
             this.dataGridView2.Size = new System.Drawing.Size(100, 100);
@@ -429,7 +320,7 @@
             // 
             this.lb_dgv4.AutoSize = true;
             this.lb_dgv4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_dgv4.Location = new System.Drawing.Point(650, 500);
+            this.lb_dgv4.Location = new System.Drawing.Point(767, 297);
             this.lb_dgv4.Name = "lb_dgv4";
             this.lb_dgv4.Size = new System.Drawing.Size(68, 19);
             this.lb_dgv4.TabIndex = 178;
@@ -439,7 +330,7 @@
             // 
             this.lb_dgv3.AutoSize = true;
             this.lb_dgv3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_dgv3.Location = new System.Drawing.Point(650, 477);
+            this.lb_dgv3.Location = new System.Drawing.Point(767, 274);
             this.lb_dgv3.Name = "lb_dgv3";
             this.lb_dgv3.Size = new System.Drawing.Size(68, 19);
             this.lb_dgv3.TabIndex = 177;
@@ -449,7 +340,7 @@
             // 
             this.lb_dgv2.AutoSize = true;
             this.lb_dgv2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_dgv2.Location = new System.Drawing.Point(650, 458);
+            this.lb_dgv2.Location = new System.Drawing.Point(767, 255);
             this.lb_dgv2.Name = "lb_dgv2";
             this.lb_dgv2.Size = new System.Drawing.Size(68, 19);
             this.lb_dgv2.TabIndex = 176;
@@ -459,7 +350,7 @@
             // 
             this.lb_dgv1.AutoSize = true;
             this.lb_dgv1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_dgv1.Location = new System.Drawing.Point(650, 439);
+            this.lb_dgv1.Location = new System.Drawing.Point(767, 236);
             this.lb_dgv1.Name = "lb_dgv1";
             this.lb_dgv1.Size = new System.Drawing.Size(68, 19);
             this.lb_dgv1.TabIndex = 175;
@@ -468,7 +359,7 @@
             // dataGridView4
             // 
             this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Location = new System.Drawing.Point(650, 330);
+            this.dataGridView4.Location = new System.Drawing.Point(656, 328);
             this.dataGridView4.Name = "dataGridView4";
             this.dataGridView4.RowTemplate.Height = 24;
             this.dataGridView4.Size = new System.Drawing.Size(100, 100);
@@ -477,17 +368,225 @@
             // dataGridView3
             // 
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(650, 224);
+            this.dataGridView3.Location = new System.Drawing.Point(656, 222);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.RowTemplate.Height = 24;
             this.dataGridView3.Size = new System.Drawing.Size(100, 100);
             this.dataGridView3.TabIndex = 173;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(771, 114);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.TabIndex = 179;
+            this.pictureBox1.TabStop = false;
+            // 
+            // lb_dgv4b
+            // 
+            this.lb_dgv4b.AutoSize = true;
+            this.lb_dgv4b.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_dgv4b.Location = new System.Drawing.Point(875, 298);
+            this.lb_dgv4b.Name = "lb_dgv4b";
+            this.lb_dgv4b.Size = new System.Drawing.Size(68, 16);
+            this.lb_dgv4b.TabIndex = 184;
+            this.lb_dgv4b.Text = "lb_dgv4b";
+            // 
+            // lb_dgv3b
+            // 
+            this.lb_dgv3b.AutoSize = true;
+            this.lb_dgv3b.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_dgv3b.Location = new System.Drawing.Point(875, 275);
+            this.lb_dgv3b.Name = "lb_dgv3b";
+            this.lb_dgv3b.Size = new System.Drawing.Size(68, 16);
+            this.lb_dgv3b.TabIndex = 183;
+            this.lb_dgv3b.Text = "lb_dgv3b";
+            // 
+            // lb_dgv2b
+            // 
+            this.lb_dgv2b.AutoSize = true;
+            this.lb_dgv2b.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_dgv2b.Location = new System.Drawing.Point(875, 256);
+            this.lb_dgv2b.Name = "lb_dgv2b";
+            this.lb_dgv2b.Size = new System.Drawing.Size(68, 16);
+            this.lb_dgv2b.TabIndex = 182;
+            this.lb_dgv2b.Text = "lb_dgv2b";
+            // 
+            // lb_dgv1b
+            // 
+            this.lb_dgv1b.AutoSize = true;
+            this.lb_dgv1b.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_dgv1b.Location = new System.Drawing.Point(875, 237);
+            this.lb_dgv1b.Name = "lb_dgv1b";
+            this.lb_dgv1b.Size = new System.Drawing.Size(68, 16);
+            this.lb_dgv1b.TabIndex = 181;
+            this.lb_dgv1b.Text = "lb_dgv1b";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.bt_management11);
+            this.groupBox1.Controls.Add(this.bt_management10);
+            this.groupBox1.Controls.Add(this.bt_management09);
+            this.groupBox1.Controls.Add(this.bt_management08);
+            this.groupBox1.Controls.Add(this.bt_management07);
+            this.groupBox1.Controls.Add(this.bt_management06);
+            this.groupBox1.Controls.Add(this.bt_management05);
+            this.groupBox1.Controls.Add(this.bt_management00);
+            this.groupBox1.Controls.Add(this.bt_management04);
+            this.groupBox1.Controls.Add(this.bt_management03);
+            this.groupBox1.Controls.Add(this.bt_management02);
+            this.groupBox1.Controls.Add(this.bt_management01);
+            this.groupBox1.Location = new System.Drawing.Point(422, 10);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(212, 391);
+            this.groupBox1.TabIndex = 185;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "綜合管理資料";
+            // 
+            // bt_management11
+            // 
+            this.bt_management11.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_management11.Location = new System.Drawing.Point(106, 325);
+            this.bt_management11.Name = "bt_management11";
+            this.bt_management11.Size = new System.Drawing.Size(90, 55);
+            this.bt_management11.TabIndex = 149;
+            this.bt_management11.Text = "學生管理[刪除功能]";
+            this.bt_management11.UseVisualStyleBackColor = true;
+            this.bt_management11.Click += new System.EventHandler(this.bt_management11_Click);
+            // 
+            // bt_management10
+            // 
+            this.bt_management10.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_management10.Location = new System.Drawing.Point(10, 327);
+            this.bt_management10.Name = "bt_management10";
+            this.bt_management10.Size = new System.Drawing.Size(90, 55);
+            this.bt_management10.TabIndex = 148;
+            this.bt_management10.Text = "學生管理[修改功能]";
+            this.bt_management10.UseVisualStyleBackColor = true;
+            this.bt_management10.Click += new System.EventHandler(this.bt_management10_Click);
+            // 
+            // bt_management09
+            // 
+            this.bt_management09.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_management09.Location = new System.Drawing.Point(106, 265);
+            this.bt_management09.Name = "bt_management09";
+            this.bt_management09.Size = new System.Drawing.Size(90, 55);
+            this.bt_management09.TabIndex = 147;
+            this.bt_management09.Text = "學生管理[新增功能]";
+            this.bt_management09.UseVisualStyleBackColor = true;
+            this.bt_management09.Click += new System.EventHandler(this.bt_management09_Click);
+            // 
+            // bt_management08
+            // 
+            this.bt_management08.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_management08.Location = new System.Drawing.Point(10, 265);
+            this.bt_management08.Name = "bt_management08";
+            this.bt_management08.Size = new System.Drawing.Size(90, 55);
+            this.bt_management08.TabIndex = 146;
+            this.bt_management08.Text = "學生管理[查詢功能]";
+            this.bt_management08.UseVisualStyleBackColor = true;
+            this.bt_management08.Click += new System.EventHandler(this.bt_management08_Click);
+            // 
+            // bt_management07
+            // 
+            this.bt_management07.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_management07.Location = new System.Drawing.Point(106, 204);
+            this.bt_management07.Name = "bt_management07";
+            this.bt_management07.Size = new System.Drawing.Size(90, 55);
+            this.bt_management07.TabIndex = 145;
+            this.bt_management07.Text = "課程管理[刪除功能]";
+            this.bt_management07.UseVisualStyleBackColor = true;
+            this.bt_management07.Click += new System.EventHandler(this.bt_management07_Click);
+            // 
+            // bt_management06
+            // 
+            this.bt_management06.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_management06.Location = new System.Drawing.Point(10, 204);
+            this.bt_management06.Name = "bt_management06";
+            this.bt_management06.Size = new System.Drawing.Size(90, 55);
+            this.bt_management06.TabIndex = 144;
+            this.bt_management06.Text = "課程管理[修改功能]";
+            this.bt_management06.UseVisualStyleBackColor = true;
+            this.bt_management06.Click += new System.EventHandler(this.bt_management06_Click);
+            // 
+            // bt_management05
+            // 
+            this.bt_management05.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_management05.Location = new System.Drawing.Point(106, 142);
+            this.bt_management05.Name = "bt_management05";
+            this.bt_management05.Size = new System.Drawing.Size(90, 55);
+            this.bt_management05.TabIndex = 143;
+            this.bt_management05.Text = "課程管理[新增功能]";
+            this.bt_management05.UseVisualStyleBackColor = true;
+            this.bt_management05.Click += new System.EventHandler(this.bt_management05_Click);
+            // 
+            // bt_management00
+            // 
+            this.bt_management00.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_management00.Location = new System.Drawing.Point(10, 20);
+            this.bt_management00.Name = "bt_management00";
+            this.bt_management00.Size = new System.Drawing.Size(90, 55);
+            this.bt_management00.TabIndex = 142;
+            this.bt_management00.Text = "設定系碼[查詢功能]";
+            this.bt_management00.UseVisualStyleBackColor = true;
+            this.bt_management00.Click += new System.EventHandler(this.bt_management00_Click);
+            // 
+            // bt_management04
+            // 
+            this.bt_management04.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_management04.Location = new System.Drawing.Point(10, 142);
+            this.bt_management04.Name = "bt_management04";
+            this.bt_management04.Size = new System.Drawing.Size(90, 55);
+            this.bt_management04.TabIndex = 141;
+            this.bt_management04.Text = "課程管理[查詢功能]";
+            this.bt_management04.UseVisualStyleBackColor = true;
+            this.bt_management04.Click += new System.EventHandler(this.bt_management04_Click);
+            // 
+            // bt_management03
+            // 
+            this.bt_management03.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_management03.Location = new System.Drawing.Point(106, 80);
+            this.bt_management03.Name = "bt_management03";
+            this.bt_management03.Size = new System.Drawing.Size(90, 55);
+            this.bt_management03.TabIndex = 140;
+            this.bt_management03.Text = "設定系碼[刪除功能]";
+            this.bt_management03.UseVisualStyleBackColor = true;
+            this.bt_management03.Click += new System.EventHandler(this.bt_management03_Click);
+            // 
+            // bt_management02
+            // 
+            this.bt_management02.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_management02.Location = new System.Drawing.Point(10, 80);
+            this.bt_management02.Name = "bt_management02";
+            this.bt_management02.Size = new System.Drawing.Size(90, 55);
+            this.bt_management02.TabIndex = 139;
+            this.bt_management02.Text = "設定系碼[修改功能]";
+            this.bt_management02.UseVisualStyleBackColor = true;
+            this.bt_management02.Click += new System.EventHandler(this.bt_management02_Click);
+            // 
+            // bt_management01
+            // 
+            this.bt_management01.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_management01.Location = new System.Drawing.Point(106, 19);
+            this.bt_management01.Name = "bt_management01";
+            this.bt_management01.Size = new System.Drawing.Size(90, 55);
+            this.bt_management01.TabIndex = 138;
+            this.bt_management01.Text = "設定系碼[新增功能]";
+            this.bt_management01.UseVisualStyleBackColor = true;
+            this.bt_management01.Click += new System.EventHandler(this.bt_management01_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(921, 642);
+            this.ClientSize = new System.Drawing.Size(1144, 642);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.lb_dgv4b);
+            this.Controls.Add(this.lb_dgv3b);
+            this.Controls.Add(this.lb_dgv2b);
+            this.Controls.Add(this.lb_dgv1b);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lb_dgv4);
             this.Controls.Add(this.lb_dgv3);
             this.Controls.Add(this.lb_dgv2);
@@ -495,19 +594,7 @@
             this.Controls.Add(this.dataGridView4);
             this.Controls.Add(this.dataGridView3);
             this.Controls.Add(this.dataGridView2);
-            this.Controls.Add(this.button29);
-            this.Controls.Add(this.button28);
-            this.Controls.Add(this.button27);
-            this.Controls.Add(this.button26);
-            this.Controls.Add(this.button25);
-            this.Controls.Add(this.button24);
-            this.Controls.Add(this.button23);
-            this.Controls.Add(this.button22);
-            this.Controls.Add(this.button21);
-            this.Controls.Add(this.button20);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.button19);
-            this.Controls.Add(this.button18);
             this.Controls.Add(this.button17);
             this.Controls.Add(this.button16);
             this.Controls.Add(this.button15);
@@ -535,6 +622,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -562,19 +651,7 @@
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button17;
-        private System.Windows.Forms.Button button18;
-        private System.Windows.Forms.Button button19;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button20;
-        private System.Windows.Forms.Button button21;
-        private System.Windows.Forms.Button button22;
-        private System.Windows.Forms.Button button23;
-        private System.Windows.Forms.Button button24;
-        private System.Windows.Forms.Button button25;
-        private System.Windows.Forms.Button button26;
-        private System.Windows.Forms.Button button27;
-        private System.Windows.Forms.Button button28;
-        private System.Windows.Forms.Button button29;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Label lb_dgv4;
         private System.Windows.Forms.Label lb_dgv3;
@@ -582,6 +659,24 @@
         private System.Windows.Forms.Label lb_dgv1;
         private System.Windows.Forms.DataGridView dataGridView4;
         private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lb_dgv4b;
+        private System.Windows.Forms.Label lb_dgv3b;
+        private System.Windows.Forms.Label lb_dgv2b;
+        private System.Windows.Forms.Label lb_dgv1b;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button bt_management11;
+        private System.Windows.Forms.Button bt_management10;
+        private System.Windows.Forms.Button bt_management09;
+        private System.Windows.Forms.Button bt_management08;
+        private System.Windows.Forms.Button bt_management07;
+        private System.Windows.Forms.Button bt_management06;
+        private System.Windows.Forms.Button bt_management05;
+        private System.Windows.Forms.Button bt_management00;
+        private System.Windows.Forms.Button bt_management04;
+        private System.Windows.Forms.Button bt_management03;
+        private System.Windows.Forms.Button bt_management02;
+        private System.Windows.Forms.Button bt_management01;
     }
 }
 
