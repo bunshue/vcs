@@ -243,6 +243,8 @@ namespace vcs_PictureEnhance_YUV
             return new RGB((byte)r, (byte)g, (byte)b);
         }
 
+        //------------------------------------------------------------  # 60個
+
         public Form1()
         {
             InitializeComponent();
@@ -250,6 +252,10 @@ namespace vcs_PictureEnhance_YUV
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
             //C# 跨 Thread 存取 UI
             //Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效	same
             Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
@@ -410,6 +416,13 @@ namespace vcs_PictureEnhance_YUV
             bt_exit_setup();
         }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
+
         private void bt_open_file_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -499,11 +512,6 @@ namespace vcs_PictureEnhance_YUV
 
             this.Controls.Add(bt_exit); // 將按鈕加入表單
             bt_exit.BringToFront();     //移到最上層
-        }
-
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
         }
 
         void reset_picture()
@@ -3014,3 +3022,22 @@ namespace vcs_PictureEnhance_YUV
         }
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+

@@ -49,18 +49,30 @@ namespace vcs_PictureColor
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (radioButton0.Checked == true)
-                filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp"; //stomach
-            else if (radioButton1.Checked == true)
-                filename = @"D:\_git\vcs\_1.data\______test_files1\ims04.bmp"; //normal
-            else if (radioButton2.Checked == true)
-                filename = @"D:\_git\vcs\_1.data\______test_files1\ims05.bmp"; //black
-            else if (radioButton3.Checked == true)
-                filename = @"D:\_git\vcs\_1.data\______test_files1\ims06.bmp"; //color bar
-            else
-                filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp"; //stomach
-
             show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
+            if (radioButton0.Checked == true)
+            {
+                filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp"; //stomach
+            }
+            else if (radioButton1.Checked == true)
+            {
+                filename = @"D:\_git\vcs\_1.data\______test_files1\ims04.bmp"; //normal
+            }
+            else if (radioButton2.Checked == true)
+            {
+                filename = @"D:\_git\vcs\_1.data\______test_files1\ims05.bmp"; //black
+            }
+            else if (radioButton3.Checked == true)
+            {
+                filename = @"D:\_git\vcs\_1.data\______test_files1\ims06.bmp"; //color bar
+            }
+            else
+            {
+                filename = @"D:\_git\vcs\_1.data\______test_files1\ims01.bmp"; //stomach
+            }
 
             if (checkBox1.Checked == true)
             {
@@ -112,7 +124,6 @@ namespace vcs_PictureColor
             int y_st;
             int dx;
             int dy;
-
             int W = 640;
             int H = 480;
 
@@ -254,6 +265,8 @@ namespace vcs_PictureColor
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -761,10 +774,13 @@ namespace vcs_PictureColor
 
                     double gray = ratio * (rrr - min);
                     if (gray > 255)
+                    {
                         gray = 255;
+                    }
                     else if (gray < 0)
+                    {
                         gray = 0;
-
+                    }
                     //richTextBox1.Text += gray.ToString() + " ";
 
                     Color zz = Color.FromArgb(255, (int)gray, (int)gray, (int)gray);
@@ -778,17 +794,10 @@ namespace vcs_PictureColor
                     else if (gray < 10)
                     {
                         //bitmap1.SetPixel(i, j, Color.Green);
-
                     }
-
-
                 }
-
-
             }
-
             richTextBox1.Text += "\nmax = " + max.ToString() + ", min = " + min.ToString() + "\n";
-
             pictureBox1.Image = bitmap1;
         }
 
@@ -995,4 +1004,20 @@ namespace vcs_PictureColor
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
 

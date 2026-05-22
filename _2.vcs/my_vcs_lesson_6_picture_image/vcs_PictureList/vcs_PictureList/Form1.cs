@@ -13,6 +13,14 @@ namespace vcs_PictureList
 {
     public partial class Form1 : Form
     {
+        // The currently loaded pictures.
+        private List<Bitmap> Pictures = new List<Bitmap>();
+        private const int PictureMargin = 8;
+
+        // The index of the picture we clicked or
+        // the picture before which we clicked.
+        private int ClickedIndex = -1;
+
         public Form1()
         {
             InitializeComponent();
@@ -23,13 +31,7 @@ namespace vcs_PictureList
             show_pictures();
         }
 
-        // The currently loaded pictures.
-        private List<Bitmap> Pictures = new List<Bitmap>();
-        private const int PictureMargin = 8;
-
-        // The index of the picture we clicked or
-        // the picture before which we clicked.
-        private int ClickedIndex = -1;
+        //------------------------------------------------------------  # 60個
 
         private void ArrangePanel()
         {
@@ -61,7 +63,10 @@ namespace vcs_PictureList
         private void pic_MouseDown(object sender, MouseEventArgs e)
         {
             // Ignore left mouse clicks.
-            if (e.Button != MouseButtons.Right) return;
+            if (e.Button != MouseButtons.Right)
+            {
+                return;
+            }
 
             // Display the context menu.
             PictureBox pic = sender as PictureBox;
@@ -71,7 +76,10 @@ namespace vcs_PictureList
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
             // Ignore left mouse clicks.
-            if (e.Button != MouseButtons.Right) return;
+            if (e.Button != MouseButtons.Right)
+            {
+                return;
+            }
 
             // Display the context menu.
             ShowContextMenu(e.Location);
@@ -95,9 +103,7 @@ namespace vcs_PictureList
 
         private void mnuDeletePicture_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(
-                "Are you sure you want to delete this picture?",
-                "Delete Picture?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("Are you sure you want to delete this picture?", "Delete Picture?", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 Pictures.RemoveAt(ClickedIndex);
                 ArrangePanel();
@@ -144,7 +150,7 @@ namespace vcs_PictureList
                 {
                     ClickedIndex = i;
                     break;
-                }   
+                }
 
                 // See if we are on this picture.
                 x -= panel1.Controls[i].Width;
@@ -157,10 +163,8 @@ namespace vcs_PictureList
             }
 
             // Enable and disable contect menu items.
-            mnuMoveLeft.Enabled =
-                (clicked_on_picture && (ClickedIndex > 0));
-            mnuMoveRight.Enabled =
-                (clicked_on_picture && (ClickedIndex < Pictures.Count - 1));
+            mnuMoveLeft.Enabled = (clicked_on_picture && (ClickedIndex > 0));
+            mnuMoveRight.Enabled = (clicked_on_picture && (ClickedIndex < Pictures.Count - 1));
             mnuDeletePicture.Enabled = clicked_on_picture;
             mnuInsertPicture.Enabled = !clicked_on_picture;
 
@@ -215,7 +219,9 @@ namespace vcs_PictureList
                     {
                         //richTextBox1.Text += f + "\n";
                         if (f.ToLower().EndsWith(".jpg") || f.ToLower().EndsWith(".png"))
+                        {
                             filenames.Add(f);
+                        }
                     }
                 }
                 var fnames2 = Directory.GetFiles(folder_name);
@@ -223,7 +229,9 @@ namespace vcs_PictureList
                 {
                     //richTextBox1.Text += f + "\n";
                     if (f.ToLower().EndsWith(".jpg") || f.ToLower().EndsWith(".png"))
+                    {
                         filenames.Add(f);
+                    }
                 }
             }
             catch (Exception ex)
@@ -234,3 +242,21 @@ namespace vcs_PictureList
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+

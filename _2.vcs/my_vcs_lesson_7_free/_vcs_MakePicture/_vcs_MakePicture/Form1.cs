@@ -39,28 +39,26 @@ namespace _vcs_MakePicture
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
             p = new Pen(foreground_color, 3);
             sb = new SolidBrush(foreground_color);
-
-            show_item_location();
         }
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
+            int x_st = 850;
+            int y_st = 10;
+            int dx = 65;
+            int dy = 65;
 
-            x_st = 850;
-            y_st = 10;
             groupBox1.Location = new Point(x_st - 10, y_st);
             groupBox1.ClientSize = new Size(65 * 9 + 12, 80);
 
             x_st = 10;
             y_st = 13;
-            dx = 65;
-            dy = 65;
             bt0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             bt2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
@@ -77,7 +75,6 @@ namespace _vcs_MakePicture
             y_st = 100;
             dx = 64;
             dy = 64;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
@@ -90,7 +87,6 @@ namespace _vcs_MakePicture
             button9.Location = new Point(x_st + dx * 9, y_st + dy * 0);
             button10.Location = new Point(x_st + dx * 10, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 11, y_st + dy * 0);
-
             button12.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button13.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button14.Location = new Point(x_st + dx * 2, y_st + dy * 1);
@@ -103,7 +99,6 @@ namespace _vcs_MakePicture
             button21.Location = new Point(x_st + dx * 9, y_st + dy * 1);
             button22.Location = new Point(x_st + dx * 10, y_st + dy * 1);
             button23.Location = new Point(x_st + dx * 11, y_st + dy * 1);
-
             button24.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button25.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             button26.Location = new Point(x_st + dx * 2, y_st + dy * 2);
@@ -116,7 +111,6 @@ namespace _vcs_MakePicture
             button33.Location = new Point(x_st + dx * 9, y_st + dy * 2);
             button34.Location = new Point(x_st + dx * 10, y_st + dy * 2);
             button35.Location = new Point(x_st + dx * 11, y_st + dy * 2);
-
             button36.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button37.Location = new Point(x_st + dx * 1, y_st + dy * 3);
             button38.Location = new Point(x_st + dx * 2, y_st + dy * 3);
@@ -129,7 +123,6 @@ namespace _vcs_MakePicture
             button45.Location = new Point(x_st + dx * 9, y_st + dy * 3);
             button46.Location = new Point(x_st + dx * 10, y_st + dy * 3);
             button47.Location = new Point(x_st + dx * 11, y_st + dy * 3);
-
             button48.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button49.Location = new Point(x_st + dx * 1, y_st + dy * 4);
             button50.Location = new Point(x_st + dx * 2, y_st + dy * 4);
@@ -142,7 +135,6 @@ namespace _vcs_MakePicture
             button57.Location = new Point(x_st + dx * 9, y_st + dy * 4);
             button58.Location = new Point(x_st + dx * 10, y_st + dy * 4);
             button59.Location = new Point(x_st + dx * 11, y_st + dy * 4);
-
             button60.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button61.Location = new Point(x_st + dx * 1, y_st + dy * 5);
             button62.Location = new Point(x_st + dx * 2, y_st + dy * 5);
@@ -155,7 +147,6 @@ namespace _vcs_MakePicture
             button69.Location = new Point(x_st + dx * 9, y_st + dy * 5);
             button70.Location = new Point(x_st + dx * 10, y_st + dy * 5);
             button71.Location = new Point(x_st + dx * 11, y_st + dy * 5);
-
             button72.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             button73.Location = new Point(x_st + dx * 1, y_st + dy * 6);
             button74.Location = new Point(x_st + dx * 2, y_st + dy * 6);
@@ -168,7 +159,6 @@ namespace _vcs_MakePicture
             button81.Location = new Point(x_st + dx * 9, y_st + dy * 6);
             button82.Location = new Point(x_st + dx * 10, y_st + dy * 6);
             button83.Location = new Point(x_st + dx * 11, y_st + dy * 6);
-
             button84.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button85.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button86.Location = new Point(x_st + dx * 2, y_st + dy * 7);
@@ -188,10 +178,10 @@ namespace _vcs_MakePicture
             pictureBox1.Location = new Point(10, 10);
 
             this.Size = new Size(1640, 900);
+            this.Text = "_vcs_MakePicture";
 
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             richTextBox1.Size = new Size(this.Width - richTextBox1.Location.X - 30, this.Height - richTextBox1.Location.Y - 50);
-
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //最大化螢幕
@@ -203,6 +193,10 @@ namespace _vcs_MakePicture
 
             //最小化按鈕的寫法
             bt_minimize_setup();
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         void bt_exit_setup()
@@ -269,8 +263,9 @@ namespace _vcs_MakePicture
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -4488,3 +4483,20 @@ namespace _vcs_MakePicture
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+

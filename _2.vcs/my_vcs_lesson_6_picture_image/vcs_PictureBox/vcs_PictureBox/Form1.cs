@@ -22,6 +22,8 @@ namespace vcs_PictureBox
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             //讀取圖檔
             string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             pictureBox1.Image = Image.FromFile(filename);
@@ -29,16 +31,13 @@ namespace vcs_PictureBox
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
             int W = 160;
             int H = 60;
 
-            //button
-            x_st = 10;
-            y_st = 10;
             dx = W + 10;
             dy = H + 10;
 
@@ -62,6 +61,10 @@ namespace vcs_PictureBox
 
             this.Size = new Size(1100, 820);
             this.Text = "vcs_PictureBox";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -70,6 +73,8 @@ namespace vcs_PictureBox
             pictureBox1.Image = null;
             pictureBox2.Image = null;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -327,7 +332,6 @@ namespace vcs_PictureBox
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
