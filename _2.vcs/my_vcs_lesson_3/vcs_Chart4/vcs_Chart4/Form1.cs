@@ -477,7 +477,6 @@ namespace vcs_Chart4
     }
 }
 
-
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
@@ -493,95 +492,4 @@ namespace vcs_Chart4
 /*  可搬出
 
 */
-
-
-//數列加入資料點的方法
-//series1.Points.AddXY(index, r.Next(10) * 50);
-//objSeries.Points.DataBindXY(xx, yy);  // xx, yy 皆為一維陣列
-
-
-
-
-/*
-        void save_chart_image_to_drive()
-        {
-            if (chart1 != null)
-            {
-                string filename = Application.StartupPath + "\\CHART_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                String filename1 = filename + ".jpg";
-                String filename2 = filename + ".bmp";
-                String filename3 = filename + ".png";
-
-                try
-                {
-                    chart1.SaveImage(@filename1, ChartImageFormat.Jpeg);
-                    chart1.SaveImage(@filename2, ChartImageFormat.Bmp);
-                    chart1.SaveImage(@filename3, ChartImageFormat.Png);
-
-                    richTextBox1.Text += "存檔成功\n";
-                    richTextBox1.Text += "已存檔 : " + filename1 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename3 + "\n";
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                }
-            }
-            else
-            {
-                richTextBox1.Text += "無圖可存\n";
-            }
-        }
-
-*/
-
-
-
-/*
-            save_chart_image_to_drive();
-
-
-
-        void save_chart_image_to_drive()
-        {
-            if (chart1 != null)
-            {
-                string filename = Application.StartupPath + "\\CHART_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                String filename1 = filename + ".jpg";
-                String filename2 = filename + ".bmp";
-                String filename3 = filename + ".png";
-
-                try
-                {
-                    chart1.SaveImage(@filename1, ChartImageFormat.Jpeg);
-                    chart1.SaveImage(@filename2, ChartImageFormat.Bmp);
-                    chart1.SaveImage(@filename3, ChartImageFormat.Png);
-
-                    richTextBox1.Text += "存檔成功\n";
-                    richTextBox1.Text += "已存檔 : " + filename1 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename3 + "\n";
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                }
-            }
-            else
-                richTextBox1.Text += "無圖可存\n";
-        }
-*/
-
-
-/*
-chart1.Series[0].Points.Clear();
-chart1.Series[1].Points.Clear();
-chart1.Series[2].Points.Clear();
-*/
-/*
-            chart1.ChartAreas.Clear();
-
-*/
-
 

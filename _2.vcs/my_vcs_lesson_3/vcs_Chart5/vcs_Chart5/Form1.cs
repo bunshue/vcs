@@ -14,6 +14,9 @@ namespace vcs_Chart5
 {
     public partial class Form1 : Form
     {
+        int W = 500;
+        int H = 400;
+
         public Form1()
         {
             InitializeComponent();
@@ -35,13 +38,10 @@ namespace vcs_Chart5
 
         void show_item_location()
         {
-            int W = 500;
-            int H = 400;
             int x_st = 10;
             int y_st = 10;
             int dx = W + 10;
             int dy = H + 10;
-
             chart0.Size = new Size(W, H);
             chart1.Size = new Size(W, H);
             chart2.Size = new Size(W, H);
@@ -74,62 +74,72 @@ namespace vcs_Chart5
 
         //------------------------------------------------------------  # 60個
 
-        void draw_chart0()
+        void chart_init(Chart chart1, string title)
         {
             // 清除圖表
-            chart0.Series.Clear();
-            chart0.Titles.Clear();
+            chart1.Series.Clear();
+            chart1.Titles.Clear();
+
+            chart1.Titles.Add(title);  // 標題
+            chart1.Size = new Size(W, H);  // 設定chart大小
+
+        }
+
+        void draw_chart0()
+        {
+            string title = "chart0";
+            chart_init(chart0, title);
+
         }
 
         //------------------------------------------------------------  # 60個
 
         void draw_chart1()
         {
-            // 清除圖表
-            chart1.Series.Clear();
-            chart1.Titles.Clear();
+            string title = "chart1";
+            chart_init(chart1, title);
+
         }
 
         //------------------------------------------------------------  # 60個
 
         void draw_chart2()
         {
-            // 清除圖表
-            chart2.Series.Clear();
-            chart2.Titles.Clear();
+            string title = "chart2";
+            chart_init(chart2, title);
+
         }
 
         //------------------------------------------------------------  # 60個
 
         void draw_chart3()
         {
-            // 清除圖表
-            chart3.Series.Clear();
-            chart3.Titles.Clear();
+            string title = "chart3";
+            chart_init(chart3, title);
+
         }
 
         //------------------------------------------------------------  # 60個
 
         void draw_chart4()
         {
-            // 清除圖表
-            chart4.Series.Clear();
-            chart4.Titles.Clear();
+            string title = "chart4";
+            chart_init(chart4, title);
+
         }
 
         //------------------------------------------------------------  # 60個
 
         void draw_chart5()
         {
-            // 清除圖表
-            chart5.Series.Clear();
-            chart5.Titles.Clear();
+            string title = "chart5";
+            chart_init(chart5, title);
+
         }
 
         //------------------------------------------------------------  # 60個
     }
 }
-
 
 
 //6060
@@ -169,7 +179,7 @@ namespace vcs_Chart5
 
             series1.ChartType = SeriesChartType.Pie;
             series1.IsValueShownAsLabel = true;
-            series1.Points.DataBindXY(_users, _y);
+            series1.Points.DataBindXY(_users, _y);  // xx, yy 皆為一維陣列
             chart1.Series.Add(series1);
 
 //------------------------------------------------------------  # 60個
@@ -213,7 +223,7 @@ namespace vcs_Chart5
             //設定 Series1
             Chart1.Series[Series1].ChartType = SeriesChartType.Pie;
             //Chart1.Series[Series1].ChartType = SeriesChartType.Doughnut;
-            Chart1.Series[Series1].Points.DataBindXY(xValues, yValues);
+            Chart1.Series[Series1].Points.DataBindXY(xValues, yValues);  // xx, yy 皆為一維陣列
             Chart1.Series[Series1].LegendText = "Aaaaaa";   //#VALX:    [ #PERCENT{P1} ]; //X軸 + 百分比
             Chart1.Series[Series1].Label = "bbbb";  //#VALX#PERCENT{P1}; //X軸 + 百分比
             //Chart1.Series[Series1].LabelForeColor = Color.FromArgb(0, 90, 255); //字體顏色
@@ -257,39 +267,171 @@ Legend是圖表右邊說明每一條線代表的文字,若不想要可以從Enab
 ChartAreas是可以在同一圖表裡建立2種以上圖
 從Series裡可以選擇哪一組數據要放在哪個ChartAreas上
 
-
-//6060
-
-
+//------------------------------------------------------------  # 60個
 
 chart
 
 http://kgood9999.blogspot.com/2010/04/c-chart.html
 https://wayhome23.pixnet.net/blog/post/124267643-%5Bc%23%5D-chart-%E5%9F%BA%E7%A4%8E%E7%AF%87
-clear
-chart1.Series.Clear();
-
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            //clear
-
-            chart1.Series.Clear();
-        }
-
 
 chart放在
 通用Silverlight控制項內
 
-
-//6060
-
-
-
-
-
+//------------------------------------------------------------  # 60個
 
 */
+
+
+
+
+
+
+/*
+        void save_chart_image_to_drive()
+        {
+            if (chart1 != null)
+            {
+                string filename = Application.StartupPath + "\\CHART_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                String filename1 = filename + ".jpg";
+                String filename2 = filename + ".bmp";
+                String filename3 = filename + ".png";
+
+                try
+                {
+                    chart1.SaveImage(@filename1, ChartImageFormat.Jpeg);
+                    chart1.SaveImage(@filename2, ChartImageFormat.Bmp);
+                    chart1.SaveImage(@filename3, ChartImageFormat.Png);
+
+                    richTextBox1.Text += "存檔成功\n";
+                    richTextBox1.Text += "已存檔 : " + filename1 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename3 + "\n";
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "無圖可存\n";
+            }
+        }
+
+*/
+
+//清除圖表
+//chart1.Series.Clear();  //每次使用此function前先清除圖表
+//chart1.Titles.Clear();
+/*
+chart1.Series[0].Points.Clear();
+chart1.Series[1].Points.Clear();
+chart1.Series[2].Points.Clear();
+*/
+/*
+            //same
+            //chart1.Series.Clear();  //每次使用此function前先清除圖表
+
+            chart1.ChartAreas.Clear();
+            chart1.Series.Clear();
+
+*/
+
+
+
+//數列加入資料點的方法
+//series1.Points.AddXY(index, r.Next(10) * 50);
+//objSeries.Points.DataBindXY(xx, yy);  // xx, yy 皆為一維陣列
+
+
+
+
+/*
+        void save_chart_image_to_drive()
+        {
+            if (chart1 != null)
+            {
+                string filename = Application.StartupPath + "\\CHART_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                String filename1 = filename + ".jpg";
+                String filename2 = filename + ".bmp";
+                String filename3 = filename + ".png";
+
+                try
+                {
+                    chart1.SaveImage(@filename1, ChartImageFormat.Jpeg);
+                    chart1.SaveImage(@filename2, ChartImageFormat.Bmp);
+                    chart1.SaveImage(@filename3, ChartImageFormat.Png);
+
+                    richTextBox1.Text += "存檔成功\n";
+                    richTextBox1.Text += "已存檔 : " + filename1 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename3 + "\n";
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "無圖可存\n";
+            }
+        }
+
+*/
+
+
+
+/*
+            save_chart_image_to_drive();
+
+
+
+        void save_chart_image_to_drive()
+        {
+            if (chart1 != null)
+            {
+                string filename = Application.StartupPath + "\\CHART_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                String filename1 = filename + ".jpg";
+                String filename2 = filename + ".bmp";
+                String filename3 = filename + ".png";
+
+                try
+                {
+                    chart1.SaveImage(@filename1, ChartImageFormat.Jpeg);
+                    chart1.SaveImage(@filename2, ChartImageFormat.Bmp);
+                    chart1.SaveImage(@filename3, ChartImageFormat.Png);
+
+                    richTextBox1.Text += "存檔成功\n";
+                    richTextBox1.Text += "已存檔 : " + filename1 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename3 + "\n";
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+            }
+            else
+                richTextBox1.Text += "無圖可存\n";
+        }
+*/
+
+
+/*
+chart1.Series[0].Points.Clear();
+chart1.Series[1].Points.Clear();
+chart1.Series[2].Points.Clear();
+*/
+/*
+            chart1.ChartAreas.Clear();
+
+*/
+
+
+
+
+
 
 
 

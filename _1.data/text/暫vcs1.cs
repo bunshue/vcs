@@ -1,4 +1,35 @@
 ﻿
+ffff dddd 檔案與資料夾
+
+目錄下檔名轉出純文字程式
+
+
+搜尋
+ProcessDirectory
+
+rwrw 檔案讀寫
+
+
+tttt time datetime
+
+
+ssss 字串相關 打印格式
+
+pppp
+	系統相關
+
+cccc 控件相關
+
+rtb
+            string sign = new string('*', 30);
+            Console.WriteLine(sign);
+
+//------------------------------------------------------------  # 60個
+
+
+//------------------------------------------------------------  # 60個
+
+
         void apply_listView02()
         {
             /* 自動格式化listView
@@ -128,14 +159,8 @@ namespace CopilotTTSExample
 
 //------------------------------------------------------------  # 60個
 
-目錄下檔名轉出純文字程式
-
-
 我在Visual C#下使用Console.Beep()可以讓電腦發出聲音
 要如何將這個聲音存成wave檔呢?
-
-搜尋
-ProcessDirectory
 
 //------------------------------------------------------------  # 60個
 
@@ -148,25 +173,6 @@ comboBox自行繪制顯示的內容，在這邊需要將comboBox中的屬性'Dra
 
 //------------------------------------------------------------  # 60個
 
-            //設定regedit資料
-            string strNumber = "IMS12345";
-            richTextBox1.Text += "CreateSubKey : " + strNumber.TrimEnd() + "\n";
-            Microsoft.Win32.RegistryKey retkey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("software", true).CreateSubKey("IMS1").CreateSubKey("IMS.INI").CreateSubKey(strNumber.TrimEnd());
-            retkey.SetValue("Name", "群曜醫電");  // 設置註冊名
-            retkey.SetValue("Serial", "0912345678");  //設置註冊序號
-
-            richTextBox1.Text += "註冊成功\n";
-
-//------------------------------------------------------------  # 60個
-
-using Microsoft.Win32;
-
-            //取得regedit資料
-            Microsoft.Win32.RegistryKey retkey1 = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("software", true).CreateSubKey("IMS1").CreateSubKey("IMS.INI");
-            foreach (string strName in retkey1.GetSubKeyNames())//判断注册码是否过期
-            {
-                richTextBox1.Text += strName + "\n";
-            }
 
 使用即時運算視窗
 System.Diagnostics.Debug.WriteLine("aaaaaaaaaaaaaaaaaaaaaaa");
@@ -243,6 +249,7 @@ TextBox設定星號
 
 //------------------------------------------------------------  # 60個
 
+dddd
         private void button1_Click(object sender, EventArgs e)
         {
             string path2 = @"../../data";
@@ -339,6 +346,7 @@ TextBox設定星號
             sr.Close();  //關閉資料流
         }
 
+dddd
         private void button4_Click(object sender, EventArgs e)
         {
             try
@@ -470,39 +478,6 @@ TextBox設定星號
                 richTextBox1.Text += ex.Message + "\n";
             }
         }
-
-//------------------------------------------------------------  # 60個
-
-            string sign = new string('*', 30);
-            Console.WriteLine(sign);
-
-//------------------------------------------------------------  # 60個
-
-兩個DateTime相減是TimeSpan
-
-//------------------------------------------------------------  # 60個
-
-            DateTime LoginTime, LogoffTime;
-
-            //StayTime取得停留時間
-            TimeSpan StayTime = new TimeSpan();
-
-            //取得目前登入的時間
-            LoginTime = DateTime.Now;
-            Console.WriteLine("登入時間：{LoginTime}");
-
-
-// do something
-
-                    LogoffTime = DateTime.Now;
-                    Console.WriteLine("登出時間：{LogoffTime}");
-
-                    /* DateTime結構的Subtract()方法計算時間差
-                       時間差(StayTime) = 登出時間 - 登入時間
-                       再以所得結果，換算時、分、秒   */
-                    StayTime = LogoffTime.Subtract(LoginTime);
-                    Console.WriteLine("您在此停留{StayTime.Hours,2}" + " 小時，{StayTime.Minutes} 分鐘 " + "{StayTime.Seconds} 秒");
-
 
 //------------------------------------------------------------  # 60個
 
@@ -927,7 +902,7 @@ PasswordChar
 
 json load 出來後是字典
 
-
+syntax
              //Console.WriteLine (ex.ToString() + "\n" + ex.HelpLink + "\n" + ex.StackTrace );
               Console.WriteLine(ex.ToString());
               Console.WriteLine();
@@ -1017,24 +992,6 @@ printDocument_pascal
                 listBox1.Items.Add(oneFontFamily.Name);
             }
 
-
-            //尋找字串在RTB中的位置
-            int position = richTextBox1.Find("搜尋的字串");
-
-
-RTB 的 LinkClicked
-        private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
-        {
-            System.Diagnostics.Process.Start(e.LinkText);
-        }
-
-            richTextBox1.SelectionStart = 20;
-            richTextBox1.Focus();
-
-
-            richTextBox1.ScrollToCaret();
-            richTextBox1.Focus();
-
 //------------------------------------------------------------  # 60個
 
 textBox 屬性設定
@@ -1052,14 +1009,7 @@ textBox 屬性設定
             // 動態修改Label的文字，並設定成便捷鍵N
             label1.Text = "姓名(&N)";
 
-
-            //尋找RTB裡面的位置
-            string text = "david";
-            int indexToText = richTextBox1.Find(text);
-            MessageBox.Show(indexToText.ToString());
-
-
-
+//------------------------------------------------------------  # 60個
 
 加在三Form之間
 
@@ -1112,7 +1062,6 @@ textBox 屬性設定
 
 
             toolStripStatusLabel1.Text = "目前時間：" + DateTime.Now.ToLongTimeString();
-            this.Text = "當前時間:" + DateTime.Now.ToLongTimeString();
             this.Text = "當前時間:" + DateTime.Now.ToLongTimeString();
 
 //------------------------------------------------------------  # 60個
@@ -1204,15 +1153,6 @@ Form.AcceptButton和Form.CancelButton属性的用法，
 
 //------------------------------------------------------------  # 60個
 
-            DateTime dt = DateTime.Now; //取得當前時間
-            $"登入時間 {dt.ToShortTimeString()}";
-
-//------------------------------------------------------------  # 60個
-
-label1.Text = "目前系統時間:" + DateTime.Now.ToLongTimeString();
-
-//------------------------------------------------------------  # 60個
-
 C# 6.0 是隨 Visual Studio 2015 發布的 C# 版本，專注於提升開發效率、代碼簡潔性及可讀性，
 引入了自動屬性初始化器、字串插補 ($"")、Null 傳遞運算子 (?.)、Nameof 運算子等重要特性，顯著減少了樣板代碼。
 C# 6.0 旨在讓代碼更精簡，是 .NET 開發中一個重要的生產力提升版本。
@@ -1259,22 +1199,18 @@ private void Form1_Load(object sender, EventArgs e)
             int h = g.MeasureString(str, f).ToSize().Height;
 */
 
-
 箭頭的畫法
 
             Pen p = new Pen(Color.Red, 0);
             p.EndCap = LineCap.ArrowAnchor;
 
-
-
-
+6060
 
             Console.WriteLine("測試多型（Polymorphism）");
             hi();
             hi("lion-mouse");
 
-
-
+6060
 
             Graphics g;
 
@@ -2340,7 +2276,6 @@ this.ShowCtiServer();
 
 protected void timer1_Tick(object sender, System.EventArgs e)
 {
-    // Causes the label to display the current time.
     lblDisplay.Text = DateTime.Now.ToLongTimeString();
 }
 
@@ -3600,10 +3535,7 @@ if (frames.Count > 0)
     }
 }
 
-
-
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
+6060
 
             //serialPort2.Write(data, 0, data.Length);
             try
@@ -3857,31 +3789,20 @@ clone語法
 
 Bitmap/Image存檔
 
-
-
-
-
-pikasa            
+//------------------------------------------------------------  # 60個
+pikasa
             this.ShowInTaskbar = false;
             this.MaximizeBox = false;
             this.StartPosition = FormStartPosition.CenterScreen;
 
-
-
-
+//------------------------------------------------------------  # 60個
 
               private bool IsValidChar(char input)
               {
                      return(char.IsDigit(input));   //检查是否为数字
               }
-              
         				
 //------------------------------------------------------------  # 60個
-
-
-        				
-//------------------------------------------------------------  # 60個
-
 
             richTextBox1.Text += "找出所有的COM port, ";
 
@@ -3965,47 +3886,6 @@ pikasa
             richTextBox1.Text += "W = " + W.ToString() + "\n";
             richTextBox1.Text += "H = " + H.ToString() + "\n";
 
-//------------------------------------------------------------  # 60個
-
-DateTime
-
-        // Parse a dater with format 20200517.
-        private DateTime ParseDate(string date_text)
-        {
-            int year = int.Parse(date_text.Substring(0, 4));
-            int month = int.Parse(date_text.Substring(4, 2));
-            int day = int.Parse(date_text.Substring(6));
-            return new DateTime(year, month, day);
-        }
-
-        // Return a value from the CSV file.
-        private int ParseValue(object value)
-        {
-            if (value == null) return 0;
- 
-            int result;
-            if (int.TryParse(value.ToString(), out result)) return result;
-            return 0;
-        }
-
-可能可以拿來改成分析西元前年份的部分
-        // Parse a dater with format 20200517.
-        private DateTime ParseDate(string date_text)
-        {
-            int year = int.Parse(date_text.Substring(0, 4));
-            int month = int.Parse(date_text.Substring(4, 2));
-            int day = int.Parse(date_text.Substring(6));
-            return new DateTime(year, month, day);
-        }
-
-//------------------------------------------------------------  # 60個
-
-"-123年4月5日"
-先自己解看看
-若是年份是負的 先反相再交DateTime.Parse()來解
-解出來的結果 再反相
-
-                          
 //------------------------------------------------------------  # 60個
 
             richTextBox1.Text += "取得網頁資料\n";
@@ -4912,10 +4792,9 @@ https://www.zhangshengrong.com/p/yOXD5ejR1B/
     }
 }
 
+//------------------------------------------------------------  # 60個
 
 移動鼠標
-
-
 
         [DllImport("User32")]
         public static extern void mouse_event(
@@ -5212,7 +5091,7 @@ string errorMessage;
 
 bool isContains = ValidateEmailAccount("pop3.163.com", 110, "wise_sandy@XXX.com", "************", out errorMessage); 
 
- 
+//------------------------------------------------------------  # 60個
 
 Console.WriteLine(isContains ? "用戶存在" : errorMessage); 
 
@@ -5470,8 +5349,7 @@ HtmlAgilityPack 訊息
             Console.WriteLine(node.InnerHtml);  //输出节点Html <li>年龄：21～30之间</li> <li>婚史：未婚</li> ....
             Console.WriteLine(node.Name);       //输出 ul    Html元素名 
 
-
-
+//------------------------------------------------------------  # 60個
 
 Name　　　　　　　　　　　　　　  Html元素名
 Id　　　　　　　　　　　　　　　　 获取该节点的Id属性
@@ -6572,30 +6450,6 @@ EXIF是英文ExchangeableImageFile(可交換圖像文件)的 縮寫
 
 //------------------------------------------------------------  # 60個
 
-C#對注冊表的操作
-
-C#中提供的與注冊表相關的最主要的是兩個類：
-Registry 和 RegistryKey，這兩個類屬於Microsoft.Win32命名空間
-
-Registry類包含5個公共的靜態域，分別代表5個基本主鍵分別是：
-Registry.ClassesRoot
-Registry.CurrentUser
-Registry.LocalMachine
-Registry.Users
-Registry.Current Config
-
-這5個類分別對應注冊表的第二級目錄的五個預定義主鍵
-
-RegistryKey類中提供了對注冊表操作的方法
-CreateSubKey //建立一個子鍵
-OpenSubKey //打開一個子鍵
-DeleteKey //刪除一個子鍵
-DeleteKeyTree//刪除一個鍵及其下的全部鍵
-GetValue //獲取鍵值
-SetValue //設置鍵值
-
-//------------------------------------------------------------  # 60個
-
 檢測 USB 設備撥插的 C# 類庫：USBClassLibrary
 
 private void USBPort_USBDeviceAttached(objectsender, USBClass.USBDeviceEventArgs e)
@@ -6659,7 +6513,7 @@ pntArr[2] = new Point(x - len / 2, (int)(len * Math.Sqrt(3) / 2 + y));
             //不進行背景的繪制
         }
 
-
+//------------------------------------------------------------  # 60個
 
 //字符串轉數組
 string mystring="this is a string"
@@ -6820,7 +6674,7 @@ using System.Reflection;
             Console.WriteLine("\r\n字符{0}的ASCII值是：{1}", c, (int)c); 
             Console.ReadKey(false); 
 
-   
+//------------------------------------------------------------  # 60個
     
             //                    來源位置             目的位置      要傳輸的區域大小  判斷在像素複製作業中來源色彩如何與目的色彩結合以產生最後的色彩
             //g.CopyFromScreen(new Point(x_st, y_st), new Point(0, 0), new Size(w, h), CopyPixelOperation.SourceInvert);
@@ -8329,55 +8183,30 @@ if (Thd.IsAlive)
 public static void WriteLog(string txt)
 
         {
-
             try
-
             {
-
                 string path = Application.StartupPath + @"\log\" + DateTime.Now.ToString("yyyy-MM-dd") + @"\";
-
                 if (!Directory.Exists(path))
-
                 {
-
                     Directory.CreateDirectory(path);
-
                 }
-
                 path +=  DateTime.Now.ToString("yyyyMMdd") + "-" + DateTime.Now.ToString("HH") + ".txt";
-
                 if (!File.Exists(path))
-
                 {
-
                     File.Create(path);
-
                 }
-
                 FileStream fs;
-
                 StreamWriter sw;
-
                 fs = new FileStream(path, FileMode.Append);
-
                 sw = new StreamWriter(fs, Encoding.Default);
-
                 sw.Write(DateTime.Now.ToString("HH:mm:ss") + " " + txt + "\r\n");
-
                 sw.Close();
-
                 fs.Close();
-
             }
-
             catch (Exception ex)
-
             {
-
                 WriteLog("程序發生異常（WriteLog）。詳情：" + ex.Message);
-
             }
-
         }
 
 //------------------------------------------------------------  # 60個
@@ -8701,25 +8530,9 @@ vcs可否達到systeminfo之資訊
 
 網頁加密驗證協定TLS (Transport Layer Security) 1.0及1.1版	停止支援
 
-DateTime 是一個結構型態的實值型別，是用來表示日期和時間的物件，具有以下幾個特性：
-1. 可記錄範圍：0001/1/1 12:00:00 AM ～ 9999/12/31 11:59:59 PM
-2. 時間值是以刻度（Tick）為最小單位，每個 Tick 等於 100 奈秒。
-3. Tick 值由 0001/1/1 12:00:00 AM 開始累加計算，每 100 奈秒，Tick 值加一。
-所以內建的DateTime無法處理西元前的時間
-
-String to DateTime
-1. Parse ：將指定的日期時間字串，轉換成相對應的 DateTime 型別。若轉換失敗會產生 FormatException 。
-2. TryParse ：將指定的日期時間字串，轉換成相對應的 DateTime 型別，回傳值表示轉換是否成功。
-3. ParseExact ：將指定的日期時間字串，轉換成相對應的 DateTime 型別，字串表示的格式必須完全符合指定的格式，否則會擲回例外狀況。
-4. TryParseExact ：將指定的日期時間字串，轉換成相對應的 DateTime 型別，字串表示的格式必須完全符合指定的格式，回傳值表示轉換是否成功。
-
-
-
-
+//------------------------------------------------------------  # 60個
 
 Windows Task Scheduler). I am currently using Process.Start() to launch the file (or exe) required by th
-
-
 
 Process myProcess = Process.Start("param1", "param2");
 if (myProcess != null && !myProcess.HasExited)
@@ -8738,23 +8551,15 @@ Then you can kill it normally.
 
 proc.Kill()
   
-  
-  
-		richTextBox1.Text += "系統啟動後經過的時間： " + (Environment.TickCount / 1000).ToString() + "秒" + "\n";
-
-richTextBox1.Text += "程式啟動時間: " + start_time.ToString() + " 秒\n";
-
-
-
+//------------------------------------------------------------  # 60個
 
 timer中斷中
 如果把Focus()改成若非Focused再Focus()
 看這樣會不會比較順
 
+//------------------------------------------------------------  # 60個
 
-vcs
-
-
+rtb
 如何得知richtextbox當時的游標位置
 
 這樣才可以從特定點開始搜尋，不用總是從頭開始搜尋
@@ -8764,6 +8569,8 @@ richtextbox範例 for 搜尋
 
 load一檔
 從頭搜尋到尾 搜尋到的字串變色。
+
+//------------------------------------------------------------  # 60個
 
 this.close() ; //關閉視窗
 Application.Exit() ; //結束程序
@@ -8970,22 +8777,17 @@ Console.WriteLine(loadingWatch.ElapsedMilliseconds);
 
 可以使用Reset()來重置計算時間.
 
-
-
-
-
-
-
-
+//------------------------------------------------------------  # 60個
 
 待測
 //File.AppendAllText("E:\\Time\\新建文檔夾 (2)"+"/"+strname,DateTime.Now+"\r\n");
 
-
+//------------------------------------------------------------  # 60個
 
 根據時間建立文件
 File.Create("C:\\______test_files\\" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".jpg");//建立文件
 
+//------------------------------------------------------------  # 60個
 
 windows media player
 // 播放歌曲
@@ -8995,21 +8797,7 @@ windows media player
             // 設定隨機播放
             //axWMP.settings.setMode("shuffle", true);
             
-C# - 如何讀取特定位置Registry Key
-https://barryhungmvp.pixnet.net/blog/post/88133155-c%23---%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96%E7%89%B9%E5%AE%9A%E4%BD%8D%E7%BD%AEregistry-key
-
-加一個讀取RegistryKey的範例
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            RegistryKey mreg;
-            mreg = Registry.LocalMachine;
-            mreg = mreg.CreateSubKey("software\\Microsoft\\Internet Explorer");
-            string IEVersion = "目前IE瀏覽器的版本訊息：" + (String)mreg.GetValue("Version");
-            mreg.Close();
-            richTextBox1.Text += IEVersion + "\n";
-
-        }
+//------------------------------------------------------------  # 60個
 
 桌布存放位置 win7 romeo
 C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Themes\TranscodedWallpaper.jpg
@@ -9161,8 +8949,7 @@ https://georgiosky2000.wordpress.com/2014/03/19/c-winform-%e9%a1%af%e7%a4%ba%e6%
 
         }
 
-
-
+//------------------------------------------------------------  # 60個
 
 richTextBox1.Text += "year = " + year.ToString("00") + "\n";
 richTextBox1.Text += "month = " + month.ToString("00") + "\n";
@@ -9173,20 +8960,9 @@ richTextBox1.Text += "minutes = " + minutes.ToString("00") + "\n";
 richTextBox1.Text += "seconds = " + seconds.ToString("00") + "\n";
 richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
 
-
 richTextBox1.Text += receive_buffer_tmp[i].ToString("X2") + " ";
 
-string drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-string filename = "imsLink_log.long." + DateTime.Now.ToString("yyyy.MMdd.HHmm.ss") + 
-
-string drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-
-lb_time1.Text = "PC時間 : " + DateTime.Now.ToString("yyyy" + '/' + "MM" + '/' + "dd ") + weekday + DateTime.Now.ToString(" HH" + ':' + "mm" + ':' + "ss");
-
-
-string filename = "imsLink_log." + DateTime.Now.ToString("yyyy.MMdd.HHmm.ss") + ".txt";
-
+//------------------------------------------------------------  # 60個
 
                     else if (Comport_Mode == 2)  //hex mode
                     {
@@ -9200,10 +8976,7 @@ string filename = "imsLink_log." + DateTime.Now.ToString("yyyy.MMdd.HHmm.ss") + 
                     }
 48 65 78 20 6D 6F 64 65 986F 793A 5167 5BB9 0A 
 
-
-
-
-
+//------------------------------------------------------------  # 60個
 
 string和byte[]的轉換 (C#)
 
@@ -9530,11 +9303,7 @@ string strWeek = "星期"+"日一二三四五六".Substring((int)System.DateTime
 3.最好的方法： 
 string dateString = System.DateTime.Today.ToString("yyyy-M-d dddd", new System.Globalization.CultureInfo("zh-CN")); 
 
-
-
-
-
-
+//------------------------------------------------------------  # 60個
 
 用方向鍵移動picturebox在form上的位置
 
@@ -9705,15 +9474,7 @@ private void Form1_Load(object sender, EventArgs e)
             }
         }
 
-----------------many ST----------------
-
-richTextBox1.Text += System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "\n";
-2019/05/21 14:52:41
-
-richTextBox1.Text += DateTime.Now.ToString() + "\n";
-2019/5/21 下午 02:52:42
-
-----------------many SP----------------
+//------------------------------------------------------------  # 60個
 
 using System.Windows.Media.Imaging要引用PresentationCore
 
@@ -9856,60 +9617,15 @@ Console.WriteLine("花費 {0} 毫秒", ms);
 補充說明: 不一定每次測到的時間都相同喔!
 建議值: 超過100毫秒就有點太慢囉…. (電腦爛會Lag更長)
 
-tmp code
+//------------------------------------------------------------  # 60個
 
-
-            richTextBox1.Text += "年：" + dt.Year.ToString() + "\n";
-            richTextBox1.Text += "月：" + dt.Month.ToString() + "\n";
-            richTextBox1.Text += "日：" + dt.Day.ToString() + "\n";
-            richTextBox1.Text += "天：" + dt.DayOfYear.ToString() + "\n";
-            richTextBox1.Text += "星：" + dt.DayOfWeek.ToString() + "\n";
-            richTextBox1.Text += "時：" + dt.Hour.ToString() + "\n";
-            richTextBox1.Text += "分：" + dt.Minute.ToString() + "\n";
-            richTextBox1.Text += "秒：" + dt.Second.ToString() + "\n";
-            richTextBox1.Text += "毫秒：" + dt.Millisecond.ToString() + "\n";
-            richTextBox1.Text += "Ticks：" + dt.Ticks.ToString() + "\n";
-            richTextBox1.Text += "TimeOfDay：" + dt.TimeOfDay.ToString() + "\n";
-
-            System.Globalization.TaiwanCalendar TC = new System.Globalization.TaiwanCalendar();
-            System.Globalization.TaiwanLunisolarCalendar TA = new System.Globalization.TaiwanLunisolarCalendar();
-
-            DateTime dt = DateTime.Now;
-            string message = "";
-            message += string.Format("{0}", dt.Year) + "\n";
-            message += ("西元年:" + dt.Year.ToString()) + "\n";
-            message += ("民國年:" + TC.GetYear(dt)) + "\n";
-            message += (string.Format("西元:{0}/{1}/{2}", dt.Year, dt.Month, dt.Day)) + "\n";
-            message += (string.Format("民國:{0}/{1}/{2}", TC.GetYear(dt), TC.GetMonth(dt), TC.GetDayOfMonth(dt))) + "\n";
-            message += (string.Format("農曆:{0}/{1}/{2}", TA.GetYear(dt), TA.GetMonth(dt), TA.GetDayOfMonth(dt))) + "\n";
-
-
-
-            System.DateTime dt = System.DateTime.Now;
-            richTextBox1.Text += "現在日期： " + dt.ToLongDateString() + Environment.NewLine;
-            richTextBox1.Text += "現在時間： " + dt.ToLongTimeString() + Environment.NewLine;
-
-            //現在日期加天數寫法(本例為加5天):
-            System.DateTime Add5Day = dt.AddDays(5);
-            richTextBox1.Text += "現在日期加5天： " + Add5Day.ToLongDateString() + Environment.NewLine;
-
-            //現在時間加小時寫法(本例為加12個小時):
-            System.DateTime Add12Hours = dt.AddHours(12);
-            richTextBox1.Text += "現在時間加12小時： " + Add12Hours.ToLongTimeString() + Environment.NewLine;
-
-            //現在時間減分鐘寫法(本例為減30分鐘):
-            System.DateTime Minus30Minutes = dt.AddMinutes(-30);
-            richTextBox1.Text += "現在時間減30分鐘： " + Minus30Minutes.ToLongTimeString() + Environment.NewLine;
-        }
-        
-星期一        
-
-
+ssss
 C# 取得檔案版本資訊
 using System.Diagnostics;
             richTextBox1.Text += "data : " + FileVersionInfo.GetVersionInfo(@"C:\WINDOWS\NOTEPAD.EXE").FileVersion.ToString() + "\n"; 
 data : 10.0.17134.220 (WinBuild.160101.0800)
 
+//------------------------------------------------------------  # 60個
 
 this.Cursor = System.Windows.Forms.Cursors.Hand;
 
@@ -9929,32 +9645,20 @@ this.Cursor = System.Windows.Forms.Cursors.Hand;
 21. 變更滑鼠鼠標圖案 ( 有效範圍在Form內 )。
 1             this.Cursor = new Cursor("C:\\test.ico"); // "C:\\test.ico" 改成您的圖檔，接受的影像格式為cur與ico
         
-
-
-
-
-
+//------------------------------------------------------------  # 60個
 
 C#初體驗，畫圖的讀、寫、顯示 
 https://darkblack01.blogspot.com/2014/03/c.html
 
-
-
 vs2010的c#找不到Calendar控件
-
-
-
 
 C# 程式學習 系列	30篇
 https://ithelp.ithome.com.tw/users/20023570/ironman/110
 
-
 很多C#範例
 http://fecbob.pixnet.net/blog/post/38088065-c%23-%E5%9C%93%E8%A7%92-panel
 
-
 複製部分圖片
-       
 
 [SDK] 於 C#.net 環境下, 如何將相機影像繪製於 PictureBox 中?
 https://www.aisys.com.tw/web/tech/tech.php?question_id=127
@@ -10060,35 +9764,12 @@ mute & un-mute
 
 vcs_WMP要改成可以多選檔案  或選整個或多個資料夾 一起播放
 
+//------------------------------------------------------------  # 60個
 
-
-
-
-
-
-
-vcs
-
-星期幾
-            string[] Day = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
-            string week = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
-            richTextBox1.Text += week + "\n";
-
-
-
-vcs
 ex069	讀取正中、簡中、日文，是否接OK？
 ex062	複製文件時顯示複製進度，應用慢速U盤來測
 
-
-
-string color
-color_r
-color_g
-color_b
-
-
-
+//------------------------------------------------------------  # 60個
 
 [C#]如何抓取Google Static Map
 https://dotblogs.com.tw/larrynung/2013/01/06/86807
@@ -10099,12 +9780,8 @@ https://dotblogs.com.tw/larrynung/2010/07/15/16580
 [C#]原子能委員會輻射監控非官方API
 https://dotblogs.com.tw/larrynung/2011/03/17/21890
 
-
-
-
 [C#] QRCode Generator & Reader 
 http://foxktr560.blogspot.com/2013/08/c-qrcode-generator-reader.html
-
 
 vcs
 vcs的QR code編碼解碼
@@ -10196,7 +9873,7 @@ vcs 之 WebCam 使用大集成
 #define SkyBlue			HTML2COLOR(0x87CEEB)
 /** @} */
       
-
+//------------------------------------------------------------  # 60個
 
 vcs 取得WebCam影像：		使用Emgu
 
@@ -10322,43 +9999,9 @@ mute & un-mute
 
 vcs_WMP要改成可以多選檔案  或選整個或多個資料夾 一起播放
 
-
-
-
-
-C# 如何取得兩個 DateTime 日期之間的天數
-
-取得兩個日期之間的「天數」（不足一天者採「無條件刪去法」） 
-
-    new TimeSpan(date1.Ticks - date2.Ticks).Days
-
-取得兩個日期之間的「天數」（回傳型別為 double 雙精確度）
-
-    new TimeSpan(date1.Ticks - date2.Ticks).TotalDays
-
-取得兩個日期之間的「小時數」（回傳型別為 double 雙精確度）
-
-    new TimeSpan(date1.Ticks - date2.Ticks).TotalHours
-
-取得兩個日期之間的「分鐘數」（回傳型別為 double 雙精確度） 
-
-    new TimeSpan(date1.Ticks - date2.Ticks).TotalMinutes
-
-
-
-
-DateTime date1 = new DateTime(2008, 12,31, 23,59,59, DateTimeKind.Local);
-DateTime date2 = new DateTime(2003, 2,13, 23,59,59, DateTimeKind.Local);
-TimeSpan s = new TimeSpan(date1.Ticks - date2.Ticks);    
-
-
-
-
-
-
+//------------------------------------------------------------  # 60個
 
 ID3格式
-
 
 開頭 	3 	「TAG」，標籤。
 標題 	30 	歌曲標題，最多30個英文字元。
@@ -10474,15 +10117,11 @@ vcs history
 可置換table
 處理BC數字
 
-
 VCS到某區域內，鼠標換成滴管，這樣用來檢測每個點的RGB值
 
 C#	w/ XML分析
 
 //------------------------------------------------------------  # 60個
-
-vcs RTB
-richtextbox裡，如何知道目前游標所在的line與position
 
 bmp
 如何把bmp檔讀出所有點 直接去改裡面數字 另存新檔
@@ -10752,9 +10391,6 @@ Form2的元件的Modifiers要改成Internal, 預設為private
 
 //------------------------------------------------------------  # 60個
 
-            
-//------------------------------------------------------------  # 60個
-
 建立臨時檔案
 
 File.Create("tmp_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".txt");//創建文件
@@ -11016,18 +10652,14 @@ GC.Collect();  // 強制執行記憶體回收機制
     </Setting>
   </Settings>
 
-
-
-
-
-
-
+//------------------------------------------------------------  # 60個
 
 要新版的vcs才支援的語法  例如.NET 7.0
 
 	var msg = $"new Notepad started!";
 	Logs.Add($"{DateTime.Now:HH:mm:ss} {msg}");
 
+//------------------------------------------------------------  # 60個
 
 那個讀取RGB的 可能可以做成自建模組
 可以設定字型大小  groupbox/panel大小
@@ -11806,7 +11438,7 @@ vcs_MyLibrary的屬性, 輸出類型 改為 類別庫
 
 專案(vcs_Project)/參考/加入參考, 選取vcs_MyLibrary.dll
 
-            //Registry.LocalMachine.CreateSubKey(@"SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\RUN").SetValue("MyAngel", Application.StartupPath + "\\Ex05_13.exe", RegistryValueKind.String);
+//Registry.LocalMachine.CreateSubKey(@"SOFTWARE\MICROSOFT\WINDOWS\CURRENTVERSION\RUN").SetValue("MyAngel", Application.StartupPath + "\\Ex05_13.exe", RegistryValueKind.String);
 
 //------------------------------------------------------------  # 60個
 
@@ -12882,6 +12514,7 @@ e.Graphics.DrawLines(Pens.Black, points.ToArray());
                     thick_pen.Color = Color.Red;
                     g.DrawLines(thick_pen, points.ToArray());
 
+//------------------------------------------------------------  # 60個
 
 DateTime.Parse   DateTime.TryParse	在處理西元1~99年會處理成20XX年
 
@@ -12897,6 +12530,7 @@ lblLoading.Refresh();
 // Load the recovery data.
 lblLoading.Text = "Loading recovery data...";
 
+//------------------------------------------------------------  # 60個
 
 //讀取圖檔
 string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
@@ -13349,8 +12983,7 @@ Form的設定
 
 	richTextBox1.Text += "經過時間 : " + elapsed.TotalSeconds.ToString("0.00") + " 秒\n";
 
-          
-
+//------------------------------------------------------------  # 60個
 
             for (int x = 0; x < mask_bm32.Width; x++)
             {
@@ -14645,8 +14278,7 @@ ClientSize = new Size(button2.Right + 20, richTextBox1.Bottom + 20);    //自動
             this.WindowState = FormWindowState.Minimized;   //設定表單最小化
         }
 
-
-
+//------------------------------------------------------------  # 60個
 							
 //從網址擷取檔名
             richTextBox1.Text += "從網址擷取檔名\n";
@@ -14693,7 +14325,6 @@ string foldername = @"C:\dddddddddd\_screen_capture_" + DateTime.Now.ToString("y
 
 			
 ----------------常用的程式片段 SP----------------
-
 
 待新增
 vcs 專案或功能 vcs+
@@ -15646,14 +15277,9 @@ string filename = @"D:\_git\vcs\_1.data\______test_files1\__text\war_and_peace.t
 
 //bitmap2.Save("ims02.duplicate.bmp", ImageFormat.Bmp);
 
-
-
 bmp.Save(@"D:\ssss.jpg");
 
-
-
 pictureBox1.Image.Save(@"D:\bbbbb.jpg");
-
 
 /*
 //儲存新的影像
@@ -15674,8 +15300,6 @@ pictureBox1.Image.Save(filename);
            bitmap1.Save("C:\\Output.png");
            
             pictureBox1.Image.Save(filename);
-
-
 
 存圖 
                     FileStream fs = (FileStream)saveFileDialog1.OpenFile();

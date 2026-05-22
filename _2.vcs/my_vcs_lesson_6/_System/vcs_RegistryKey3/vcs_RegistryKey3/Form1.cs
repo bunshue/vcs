@@ -312,3 +312,88 @@ namespace vcs_RegistryKey3
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+
+/*
+            //設定regedit資料
+            string strNumber = "IMS12345";
+            richTextBox1.Text += "CreateSubKey : " + strNumber.TrimEnd() + "\n";
+            Microsoft.Win32.RegistryKey retkey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("software", true).CreateSubKey("IMS1").CreateSubKey("IMS.INI").CreateSubKey(strNumber.TrimEnd());
+            retkey.SetValue("Name", "群曜醫電");  // 設置註冊名
+            retkey.SetValue("Serial", "0912345678");  //設置註冊序號
+
+            richTextBox1.Text += "註冊成功\n";
+
+//------------------------------------------------------------  # 60個
+
+using Microsoft.Win32;
+
+            //取得regedit資料
+            Microsoft.Win32.RegistryKey retkey1 = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("software", true).CreateSubKey("IMS1").CreateSubKey("IMS.INI");
+            foreach (string strName in retkey1.GetSubKeyNames())//判断注册码是否过期
+            {
+                richTextBox1.Text += strName + "\n";
+            }
+
+//------------------------------------------------------------  # 60個
+
+C#對注冊表的操作
+
+C#中提供的與注冊表相關的最主要的是兩個類：
+Registry 和 RegistryKey，這兩個類屬於Microsoft.Win32命名空間
+
+Registry類包含5個公共的靜態域，分別代表5個基本主鍵分別是：
+Registry.ClassesRoot
+Registry.CurrentUser
+Registry.LocalMachine
+Registry.Users
+Registry.Current Config
+
+這5個類分別對應注冊表的第二級目錄的五個預定義主鍵
+
+RegistryKey類中提供了對注冊表操作的方法
+CreateSubKey //建立一個子鍵
+OpenSubKey //打開一個子鍵
+DeleteKey //刪除一個子鍵
+DeleteKeyTree//刪除一個鍵及其下的全部鍵
+GetValue //獲取鍵值
+SetValue //設置鍵值
+
+//------------------------------------------------------------  # 60個
+
+C# - 如何讀取特定位置Registry Key
+https://barryhungmvp.pixnet.net/blog/post/88133155-c%23---%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96%E7%89%B9%E5%AE%9A%E4%BD%8D%E7%BD%AEregistry-key
+
+加一個讀取RegistryKey的範例
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            RegistryKey mreg;
+            mreg = Registry.LocalMachine;
+            mreg = mreg.CreateSubKey("software\\Microsoft\\Internet Explorer");
+            string IEVersion = "目前IE瀏覽器的版本訊息：" + (String)mreg.GetValue("Version");
+            mreg.Close();
+            richTextBox1.Text += IEVersion + "\n";
+
+        }
+
+//------------------------------------------------------------  # 60個
+
+*/
+

@@ -126,8 +126,8 @@ namespace vcs_RichTextBox1
             richTextBox2.Size = new Size(350, 160);
             richTextBox2.Location = new Point(x_st + dx * 2, y_st + dy * 6 + 40 + dd);
 
-            lb_richtextbox_rtf.Location = new Point(x_st + dx * 4, y_st + dy * 6 + 40);
-            richTextBox_rtf.Size = new Size(350, 160);
+            lb_richtextbox_rtf.Location = new Point(x_st + dx * 4 - 60, y_st + dy * 6 + 40);
+            richTextBox_rtf.Size = new Size(350, 340);
             richTextBox_rtf.Location = new Point(x_st + dx * 4 - 60, y_st + dy * 6 + 40 + dd);
 
             lb_richtextbox_lines.Location = new Point(x_st + dx * 2, y_st + dy * 8 + 86);
@@ -156,7 +156,7 @@ namespace vcs_RichTextBox1
 
             lb_richtextbox1.Text = "richTextBox1";
             lb_richtextbox2.Text = "richTextBox2 message";
-            lb_richtextbox_rtf.Text = "richTextBox_rtf";
+            lb_richtextbox_rtf.Text = "讀寫RTF檔";
             lb_richtextbox1_text.Text = "抓出游標所指的字";
 
             this.Size = new Size(1800, 890);
@@ -491,6 +491,26 @@ namespace vcs_RichTextBox1
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //RTB剪貼
+
+            //RTB的操作 貼上
+            richTextBox2.Paste();
+
+            //RTB的操作 全選 拷貝
+
+            if (richTextBox1.SelectionLength == 0)
+            {
+                richTextBox1.SelectAll();
+            }
+            richTextBox1.Copy();
+
+
+            //RTB的操作 全選 剪下
+            if (richTextBox1.SelectionLength == 0)
+            {
+                richTextBox1.SelectAll();
+            }
+            richTextBox1.Cut();
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -549,7 +569,6 @@ namespace vcs_RichTextBox1
         {
             //讀寫RTF檔
 
-
             //富文字格式（Rich Text Format）即RTF格式，又稱多文字格式
 
             string rtf_filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf\text.rtf";
@@ -591,8 +610,37 @@ namespace vcs_RichTextBox1
             // 將richTextBox1豐富文字方塊內的資料儲存到test.rtf檔
             // richTextBox1.SaveFile("tmp_GOTOP.rtf", RichTextBoxStreamType.RichText);
 
-
             string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_rtf\VS2013Express.rtf";
+
+            /*
+            RTB load rtf 檔
+            openFileDialog1.DefaultExt = "*.rtf";
+            openFileDialog1.Filter = "RTF檔|*.rtf";
+
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK && openFileDialog1.FileName.Length > 0)
+            {
+                richTextBox1.LoadFile(openFileDialog1.FileName);
+            }
+
+
+            saveFileDialog1.Filter = "RTF檔|*.rtf";
+
+            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK && saveFileDialog1.FileName.Length > 0)
+            {
+                richTextBox1.SaveFile(saveFileDialog1.FileName);
+            }
+
+            saveFileDialog1.Filter = "RTF檔|*.rtf";
+
+            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK && saveFileDialog1.FileName.Length > 0)
+            {
+                richTextBox1.LoadFile(saveFileDialog1.FileName, RichTextBoxStreamType.PlainText);
+            }
+            */
+            //------------------------------------------------------------  # 60個
+
+
+
 
 
         }
@@ -854,7 +902,7 @@ namespace vcs_RichTextBox1
 
         private void bt_search_Click(object sender, EventArgs e)
         {
-            //在RTF檔內搜尋
+            //在richTextBox內搜尋文字
             richTextBox1.Find("雨", RichTextBoxFinds.MatchCase);
             richTextBox1.SelectionFont = new Font("標楷體", 30, FontStyle.Bold);
             richTextBox1.SelectionColor = Color.Red;
@@ -1284,14 +1332,12 @@ namespace vcs_RichTextBox1
         }
 
         //------------------------------------------------------------  # 60個
-
     }
 }
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
@@ -1342,30 +1388,6 @@ public RichTextBox RichTxtBox
                 MessageBox.Show(ex.Message);
             }
 
-RTB load rtf 檔
-            openFileDialog1.DefaultExt = "*.rtf";
-            openFileDialog1.Filter = "RTF檔|*.rtf";
-
-            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK && openFileDialog1.FileName.Length > 0)
-            {
-                richTextBox1.LoadFile(openFileDialog1.FileName);
-            }
-
-
-            saveFileDialog1.Filter = "RTF檔|*.rtf";
-
-            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK && saveFileDialog1.FileName.Length > 0)
-            {
-                richTextBox1.SaveFile(saveFileDialog1.FileName);
-            }
-
-            saveFileDialog1.Filter = "RTF檔|*.rtf";
-
-            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK && saveFileDialog1.FileName.Length > 0)
-            {
-                richTextBox1.LoadFile(saveFileDialog1.FileName, RichTextBoxStreamType.PlainText);
-            }
-
 //------------------------------------------------------------  # 60個
 
         private void Form1_Load(object sender, EventArgs e)
@@ -1409,28 +1431,35 @@ RTB load rtf 檔
 
 //------------------------------------------------------------  # 60個
 
-            //RTB的操作 貼上
-            richTextBox2.Paste();
+            //尋找字串在RTB中的位置
+            int position = richTextBox1.Find("搜尋的字串");
 
-            //RTB的操作 全選 拷貝
+RTB 的 LinkClicked
+        private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(e.LinkText);
+        }
 
-            if (richTextBox1.SelectionLength == 0)
-            {
-                richTextBox1.SelectAll();
-            }
-            richTextBox1.Copy();
+            richTextBox1.SelectionStart = 20;
+            richTextBox1.Focus();
 
 
-            //RTB的操作 全選 剪下
-            if (richTextBox1.SelectionLength == 0)
-            {
-                richTextBox1.SelectAll();
-            }
-            richTextBox1.Cut();
+            richTextBox1.ScrollToCaret();
+            richTextBox1.Focus();
 
 //------------------------------------------------------------  # 60個
 
 
-*/
+            //尋找RTB裡面的位置
+            string text = "david";
+            int indexToText = richTextBox1.Find(text);
+            MessageBox.Show(indexToText.ToString());
 
+
+
+vcs RTB
+richtextbox裡，如何知道目前游標所在的line與position
+
+
+*/
 
