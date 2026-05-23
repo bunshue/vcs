@@ -28,7 +28,6 @@ namespace vcs_Struct
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -56,6 +55,8 @@ namespace vcs_Struct
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         // 定義Product產品結構資料型別
         struct Product
@@ -174,7 +175,7 @@ namespace vcs_Struct
         {
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         struct person
         {
@@ -201,7 +202,7 @@ namespace vcs_Struct
             richTextBox1.Text += "收入：" + female1.mary.salary + "\n";
             richTextBox1.Text += "膚色：" + female1.mary.skin + "\n";
             richTextBox1.Text += "髮型：" + female1.hair + "\n";
-       }
+        }
 
         enum Animal { mouse, ox, tiger, rabbit, dragon, snake, horse, goat, monkey, chicken, dog, pig };
         private void button5_Click(object sender, EventArgs e)
@@ -216,7 +217,7 @@ namespace vcs_Struct
             richTextBox1.Text += my_animal.ToString() + "的列舉值為 : " + animalNo + "\n";
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         enum Products { HardDrive = 0, PenDrive = 4, Keyboard = 8 };
 
@@ -366,7 +367,7 @@ namespace vcs_Struct
             Console.WriteLine((person2.Skill & Skill.Cook) == Skill.Cook); //結果為True
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         // The enumerated type.
         private enum MealType
@@ -407,3 +408,21 @@ namespace vcs_Struct
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+

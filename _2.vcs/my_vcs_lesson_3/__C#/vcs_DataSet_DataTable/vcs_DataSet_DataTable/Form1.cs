@@ -78,21 +78,32 @@ namespace vcs_DataSet_DataTable
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //建立DataTable 1
-            //1.創建表實例
+            richTextBox1.Text += "DataTable 0\n";
+
+            // 建立DataTable
             DataTable dt = new DataTable();
 
             // 建立資料表結構, 預設格式為字串
             dt.Columns.Add("座號");
             dt.Columns.Add("姓名");
             dt.Columns.Add("分數");
+            // 建立資料表結構, 格式為字串
+            // dt.Columns.Add("座號", typeof(string));  // 加入欄位名稱為座號, 格式為字串
+            // dt.Columns.Add("姓名", typeof(string));  // 加入欄位名稱為姓名, 格式為字串
+            // dt.Columns.Add("分數", typeof(string));  // 加入欄位名稱為座號, 格式為字串
 
-            // 創建新行, 並為新行賦值 並 添加到DataTable
+            // 建立新行, 賦值, 添加到DataTable
             DataRow dr1 = dt.NewRow();
             dr1[0] = "1";
             dr1[1] = "david";
             dr1[2] = "100";
             dt.Rows.Add(dr1);
+
+            // same
+            // dr1["座號"] = "1";
+            // dr1["姓名"] = "david";
+            // dr1["座號"] = "100";
+            // dt.Rows.Add(dr1);
 
             DataRow dr2 = dt.NewRow();
             dr2[0] = "5";
@@ -106,95 +117,7 @@ namespace vcs_DataSet_DataTable
             dr3[2] = "92";
             dt.Rows.Add(dr3);
 
-            show_DataTable(dt);  // 顯示 DataTable 的內容
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //創建一個 DataTable 來存放資料庫
-
-            DataTable dt = new DataTable();
-
-            //加入所需要欄位
-
-            // 建立資料表結構, 格式為字串
-            dt.Columns.Add("學號", typeof(string));  // 加入欄位名稱為學號，是字串型別
-            dt.Columns.Add("姓名", typeof(string));  // 加入欄位名稱為姓名，是字串型別
-            dt.Columns.Add("座號", typeof(string));  // 加入欄位名稱為座號，是字串型別
-
-            //欄位新增完成，加入內容
-
-            DataRow datarow1 = dt.NewRow();
-            datarow1["學號"] = "001";   //指定加入學號為001
-            datarow1["姓名"] = "大熊";  //指定加入姓名為大熊
-            datarow1["座號"] = "01";   //指定加入座號為01
-            dt.Rows.Add(datarow1);       //將 datarow1 的內容加入到 dt.Rows 裡
-
-            show_DataTable(dt);  // 顯示 DataTable 的內容
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //動態處理DataTable
-
-            //1.創建表實例
-            DataTable dt = new DataTable();
-
-            // 建立資料表結構, 預設格式為字串
-            dt.Columns.Add("ID");
-            dt.Columns.Add("Name");
-
-            //3.創建新行
-            DataRow dr = dt.NewRow();
-
-            //4.為新行賦值
-            dr[0] = "1";
-            dr[1] = "林林";
-
-            //5.將新行添加到表
-            dt.Rows.Add(dr);
-
-            /*
-            //1.創建表實例
-            DataTable dt = new DataTable();
-
-            // 建立資料表結構, 預設格式為字串
-            dt.Columns.Add("ID");
-            dt.Columns.Add("Name");
-
-            //3.添加新行
-            dt.Rows.Add("1", "Name");
-            */
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            DataTable dt = new DataTable();
-            // 建立資料表結構, 格式為布林
-            dt.Columns.Add("A", typeof(bool));
-            dt.Columns.Add("B", typeof(bool));
-            dt.Columns.Add("C", typeof(bool));
-
-            dt.Rows.Add(true, false, true);
-            //dt.Rows.Add(true, true, false);
-            //dt.Rows.Add(false, true, false);
-            //dt.Rows.Add(false, false, true);
-
-            show_DataTable(dt);  // 顯示 DataTable 的內容
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //建立DataTable 2
-            //1.創建表實例
-            DataTable dt = new DataTable();
-
-            // 建立資料表結構, 預設格式為字串
-            dt.Columns.Add("座號");
-            dt.Columns.Add("姓名");
-            dt.Columns.Add("分數");
-
-            //3.添加新行
+            // 添加新行
             dt.Rows.Add("1", "david", "100");
             dt.Rows.Add("5", "john", "80");
             dt.Rows.Add("12", "mary", "92");
@@ -211,6 +134,7 @@ namespace vcs_DataSet_DataTable
 
             richTextBox1.Text += "刪除第1項後DataTable :\n";
             dt.Rows.RemoveAt(1);
+
             show_DataTable(dt);  // 顯示 DataTable 的內容
 
             richTextBox1.Text += "由 姓名 項列出資料\n";
@@ -219,29 +143,67 @@ namespace vcs_DataSet_DataTable
             {
                 richTextBox1.Text += "找到\t" + dt.Rows[i]["姓名"].ToString() + "\n";
             }
+
+            //3030
+
+            richTextBox1.Text += "去除DataTable中的重複項\n";
+
+            //加一筆重複資料
+
+            // 建立新行, 賦值, 添加到DataTable
+            DataRow dr4 = dt.NewRow();
+
+            dr4[0] = "5";
+            dr4[1] = "john";
+            dr4[2] = "80";
+            dt.Rows.Add(dr4);
+
+            richTextBox1.Text += "原資料:\n";
+            show_DataTable(dt);  // 顯示 DataTable 的內容
+
+            richTextBox1.Text += "\n去除DataTable中的重複項\n\n";
+
+            DeleteSameRow(dt, "座號");    //後面是比較項目, Columns資料, "座號", "姓名", "分數"
+
+            richTextBox1.Text += "新資料:\n";
+            show_DataTable(dt);  // 顯示 DataTable 的內容
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "DataTable 1\n";
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "DataTable 2\n";
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "DataTable 3\n";
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "DataTable 4\n";
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "構建DataTable，給列名添加公式\n";
+            richTextBox1.Text += "DataTable 5\n";
 
-            //計算公式
-            string expression1 = "a+b*(c-d)";
-            string expression2 = "a+b-c-d";
-
-            //構建 DataTable
+            // 建立DataTable
             DataTable dt = new DataTable();
+
             // 建立資料表結構, 格式為整數
             dt.Columns.Add("a", typeof(int));
             dt.Columns.Add("b", typeof(int));
             dt.Columns.Add("c", typeof(int));
             dt.Columns.Add("d", typeof(int));
-            dt.Columns.Add("e1", typeof(int));//公式列
-            dt.Columns.Add("e2", typeof(int));//公式列
-
-            //添加公式
-            dt.Columns["e1"].Expression = expression1;
-            dt.Columns["e2"].Expression = expression2;
 
             //添加一行並賦值
             DataRow row = dt.Rows.Add();
@@ -249,9 +211,6 @@ namespace vcs_DataSet_DataTable
             row["b"] = 2;
             row["c"] = 4;
             row["d"] = 3;
-
-            dt.BeginLoadData();
-            dt.EndLoadData();
 
             int C = dt.Columns.Count;
             for (int i = 0; i < C; i++)
@@ -275,6 +234,7 @@ namespace vcs_DataSet_DataTable
             /*
             //使用DataTable的Compute()方法
 
+            // 建立DataTable
             DataTable dt = new DataTable();
             string value = dt.Compute("1+2*(4-3)", "").ToString();
             Console.WriteLine(value);
@@ -286,23 +246,26 @@ namespace vcs_DataSet_DataTable
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //DataTable用法
+            richTextBox1.Text += "DataTable 6\n";
 
-            //初始化一個DataTable, 並給定名稱
+            // 建立DataTable, 並給定名稱
             DataTable dt = new DataTable("第一資料表");
 
             //添加資料1
             // 建立資料表結構, 格式為字串
             dt.Columns.Add("column0", Type.GetType("System.String"));
+
             //添加資料2
             // 建立資料表結構, 格式為布林
             DataColumn dc = new DataColumn("column1", Type.GetType("System.Boolean"));
             dt.Columns.Add(dc);
 
+            // 建立新行, 賦值, 添加到DataTable
             DataRow dr = dt.NewRow();
             dr["column0"] = "AX";
             dr["column1"] = true;
             dt.Rows.Add(dr);
+
             //Doesn't initialize the row
             DataRow dr1 = dt.NewRow();
             dt.Rows.Add(dr1);
@@ -335,27 +298,46 @@ namespace vcs_DataSet_DataTable
 
         private void button7_Click(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
-            // 建立資料表結構
-            dt.Columns.Add("id", typeof(string));
-            dt.Columns.Add("value", typeof(int));
+            richTextBox1.Text += "DataTable 7\n";
 
-            for (int i = 1; i <= 5; i++)
-            {
-                DataRow dRow = dt.NewRow();
-                dRow["id"] = "id" + i.ToString();
-                dRow["value"] = i;
-                dt.Rows.Add(dRow);
-            }
+            // 建立DataTable
+            DataTable dt = new DataTable();
+
+            // 建立資料表結構, 並設定格式
+            dt.Columns.Add("第一欄", typeof(string));
+            dt.Columns.Add("第二欄", typeof(int));
+            dt.Columns.Add("第三欄", typeof(bool));
+
+            DataRow dr1 = dt.NewRow();
+            dr1["第一欄"] = "鼠";
+            dr1["第二欄"] = 3;
+            dr1["第三欄"] = true;
+            dt.Rows.Add(dr1);
+
+            DataRow dr2 = dt.NewRow();
+            dr2["第一欄"] = "牛";
+            dr2["第二欄"] = 48;
+            dr2["第三欄"] = false;
+            dt.Rows.Add(dr2);
+
+            DataRow dr3 = dt.NewRow();
+            dr3["第一欄"] = "虎";
+            dr3["第二欄"] = 33;
+            dr3["第三欄"] = true;
+            dt.Rows.Add(dr3);
+
+            dt.Rows.Add("兔", 8, false);
 
             show_DataTable(dt);  // 顯示 DataTable 的內容
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //DataTable用法
+            richTextBox1.Text += "DataTable 8\n";
 
+            // 建立DataTable
             DataTable dt = new DataTable();
+
             // 建立資料表結構, 預設格式為字串
             dt.Columns.Add("第一欄");
             string data = string.Empty;
@@ -371,7 +353,9 @@ namespace vcs_DataSet_DataTable
 
         private void button9_Click(object sender, EventArgs e)
         {
-            //DataTable用法
+            richTextBox1.Text += "DataTable 9\n";
+
+            // 建立DataTable
             DataTable dt = new DataTable();
 
             // 建立資料表結構, 3欄
@@ -392,6 +376,7 @@ namespace vcs_DataSet_DataTable
 
             Random r = new Random();
 
+            // 建立新行, 賦值, 添加到DataTable
             for (int i = 0; i < 10; i++)
             {
                 DataRow dr;//创建数据行变量
@@ -444,6 +429,8 @@ namespace vcs_DataSet_DataTable
             richTextBox1.Text += "\n";
 
             richTextBox1.Text += "向DataTable中添加數據\n";
+
+            // 建立新行, 賦值, 添加到DataTable
             DataRow dr2;
             for (int i = 0; i < 5; i++)
             {
@@ -508,14 +495,17 @@ namespace vcs_DataSet_DataTable
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //DataTable用法
+            richTextBox1.Text += "DataTable 10\n";
 
+            // 建立DataTable, 並給定名稱
             DataTable dt = new DataTable("第一資料表");
+
             // 建立資料表結構, 格式為字串
             dt.Columns.Add("第一欄", Type.GetType("System.String"));
             dt.Columns.Add("第二欄", Type.GetType("System.String"));
             dt.Columns.Add("第三欄", Type.GetType("System.String"));
 
+            // 建立新行, 賦值, 添加到DataTable
             DataRow dr;
 
             dr = dt.NewRow();
@@ -541,14 +531,16 @@ namespace vcs_DataSet_DataTable
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //DataTable用法 11
+            richTextBox1.Text += "DataTable 11\n";
 
+            // 建立DataTable, 並給定名稱
             DataTable dt = new DataTable("第一資料表");
 
             // 建立資料表結構, 預設格式為字串
             DataColumn column = new DataColumn("第一欄");
             dt.Columns.Add(column);
 
+            // 建立新行, 賦值, 添加到DataTable
             DataRow row;
 
             for (int i = 0; i < 5; i++)
@@ -580,22 +572,24 @@ namespace vcs_DataSet_DataTable
 
         private void button12_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "DataTable 12\n";
+
             //DataTable中使用Order By排序與Where過濾
 
-            richTextBox1.Text += "DataTable\n";
-
-            //這裡構造一個數據源
+            // 建立DataTable
             DataTable dt = new DataTable();
 
             // 建立資料表結構, 格式為字串
-            dt.Columns.Add("ID", typeof(String));
-            dt.Columns.Add("uName", typeof(String));
-            dt.Columns.Add("uDate", typeof(DateTime));
+            dt.Columns.Add("第一欄", typeof(String));
+            dt.Columns.Add("第二欄", typeof(String));
+            dt.Columns.Add("第三欄", typeof(DateTime));
+
+            // 建立新行, 賦值, 添加到DataTable
             for (int i = 0; i < 10; i++)
             {
                 DataRow dr = dt.NewRow();
-                dr["ID"] = i.ToString();
-                dr["uName"] = "name" + i;
+                dr["第一欄"] = i.ToString();
+                dr["第二欄"] = "name" + i;
                 dt.Rows.Add(dr);
             }
             dt.DefaultView.Sort = "ID asc";//相當於Order By
@@ -607,56 +601,6 @@ namespace vcs_DataSet_DataTable
 
         private void button13_Click(object sender, EventArgs e)
         {
-            //去除DataTable中的重複項
-
-            //建立DataTable 1
-            //1.創建表實例
-            DataTable dt = new DataTable();
-
-            // 建立資料表結構, 預設格式為字串
-            dt.Columns.Add("座號");
-            dt.Columns.Add("姓名");
-            dt.Columns.Add("分數");
-
-            // 創建新行, 並為新行賦值 並 添加到DataTable
-            DataRow dr1 = dt.NewRow();
-            dr1[0] = "1";
-            dr1[1] = "david";
-            dr1[2] = "100";
-            dt.Rows.Add(dr1);
-
-            DataRow dr2 = dt.NewRow();
-            dr2[0] = "5";
-            dr2[1] = "john";
-            dr2[2] = "80";
-            dt.Rows.Add(dr2);
-
-            DataRow dr3 = dt.NewRow();
-            dr3[0] = "12";
-            dr3[1] = "mary";
-            dr3[2] = "92";
-            dt.Rows.Add(dr3);
-
-            //加一筆重複資料
-
-            //3.創建新行
-            DataRow dr4 = dt.NewRow();
-
-            //4.為新行賦值 並 添加到DataTable
-            dr4[0] = "5";
-            dr4[1] = "john";
-            dr4[2] = "80";
-            dt.Rows.Add(dr4);
-
-            richTextBox1.Text += "原資料:\n";
-            show_DataTable(dt);  // 顯示 DataTable 的內容
-
-            richTextBox1.Text += "\n去除DataTable中的重複項\n\n";
-
-            DeleteSameRow(dt, "座號");    //後面是比較項目, Columns資料, "座號", "姓名", "分數"
-
-            richTextBox1.Text += "新資料:\n";
-            show_DataTable(dt);  // 顯示 DataTable 的內容
         }
 
         ///
@@ -714,31 +658,31 @@ namespace vcs_DataSet_DataTable
 
         private void button14_Click(object sender, EventArgs e)
         {
-            //DataTable常用方法
-            richTextBox1.Text += "DataTable常用方法\n";
+            richTextBox1.Text += "DataTable 14 常用方法\n";
 
+            // 建立DataTable, 並給定名稱
             DataTable dt = new DataTable("第一資料表");
 
             // 建立資料表結構, 3欄
             DataColumn column1 = new DataColumn();
             column1.DataType = Type.GetType("System.Int32");
-            column1.ColumnName = "id";
+            column1.ColumnName = "第一欄";
             column1.ReadOnly = true;
             dt.Columns.Add(column1);
 
             DataColumn column2 = new DataColumn();
             column2.DataType = Type.GetType("System.String");
-            column2.ColumnName = "Name";
+            column2.ColumnName = "第二欄";
             dt.Columns.Add(column2);
 
             DataColumn column3 = new DataColumn();
             column3.DataType = Type.GetType("System.DateTime");
-            column3.ColumnName = "Timer";
+            column3.ColumnName = "第三欄";
             dt.Columns.Add(column3);
 
             //// 主键的创建
             //DataColumn[] PrimaryKeyColumns = new DataColumn[1];
-            //PrimaryKeyColumns[0] = dt.Columns["id"];
+            //PrimaryKeyColumns[0] = dt.Columns["第一欄"];
             //dt.PrimaryKey = PrimaryKeyColumns;
 
             dt.PrimaryKey = new DataColumn[] { column1 };
@@ -746,89 +690,82 @@ namespace vcs_DataSet_DataTable
             DataRow dr;
 
             dr = dt.NewRow();
-            dr["id"] = 1;
-            dr["Name"] = "Name";
-            dr["Timer"] = DateTime.Now.AddSeconds(10);
+            dr["第一欄"] = 1;
+            dr["第二欄"] = "Name";
+            dr["第三欄"] = DateTime.Now.AddSeconds(10);
             dt.Rows.Add(dr);
 
             dr = dt.NewRow();
-            dr["id"] = 11;
-            dr["Name"] = "Name11";
-            dr["Timer"] = DateTime.Now.AddSeconds(8);
+            dr["第一欄"] = 11;
+            dr["第二欄"] = "Name11";
+            dr["第三欄"] = DateTime.Now.AddSeconds(8);
             dt.Rows.Add(dr);
 
             dr = dt.NewRow();
-            dr["id"] = 111;
-            dr["Name"] = "Name111";
-            dr["Timer"] = DateTime.Now.AddSeconds(5);
+            dr["第一欄"] = 111;
+            dr["第二欄"] = "Name111";
+            dr["第三欄"] = DateTime.Now.AddSeconds(5);
             dt.Rows.Add(dr);
 
             dr = dt.NewRow();
-            dr["id"] = 2;
-            dr["Name"] = "Name2";
-            dr["Timer"] = DateTime.Now.AddSeconds(3);
+            dr["第一欄"] = 2;
+            dr["第二欄"] = "Name2";
+            dr["第三欄"] = DateTime.Now.AddSeconds(3);
             dt.Rows.Add(dr);
-
-            StringBuilder sb = new StringBuilder();
 
             string sortOrder = "Timer asc";
 
             //foreach (DataColumn dc in dt.Columns)
             //{
-            //    //sb.Append(dc.ColumnName+"<br/>");    
+            //    richTextBox1.Text += dc.ColumnName+"\n";
             //}
 
             //foreach (DataRow dr in dt.Rows)
             //{
             //    foreach (DataColumn dc in dt.Columns)
             //    {
-            //        sb.Append(dr[dc] + "|");
+            //        richTextBox1.Text +=  dr[dc] + "|" + "\n";
             //    }
-            //    sb.Append("<br/>");
             //}
 
             dt = DeleteRows("11", dt);
 
-            string expression;
-            expression = "id>0";
-            DataRow[] foundRows;
-
-            foundRows = dt.Select(expression, sortOrder);
-
+            string expression = "id>0";
+            DataRow[] foundRows = dt.Select(expression, sortOrder);
             for (int i = 0; i < foundRows.Length; i++)
             {
-                sb.Append(foundRows[i]["Name"] + "=" + foundRows[i]["Timer"] + "<br/>");
+                richTextBox1.Text += foundRows[i]["第二欄"] + "=" + foundRows[i]["第三欄"] + "\n";
             }
 
             //if (UpdataNews("1", dt, "xiaohu"))
             //{
-            //    sb.Append("update true");
+            //    richTextBox1.Text +="update true\n";
             //}
             //else
             //{
-            //    sb.Append("update False");
+            //    richTextBox1.Text +="update False\n";
             //}
 
-            sb.Append("====================================<br/>");
+            richTextBox1.Text += "\n";
 
             dt = DeleteRows("1", dt);
+
             expression = "id>0";
             foundRows = dt.Select(expression, sortOrder);
             for (int i = 0; i < foundRows.Length; i++)
             {
-                sb.Append(foundRows[i]["Name"] + "=" + foundRows[i]["Timer"] + "<br/>");
+                richTextBox1.Text += foundRows[i]["第二欄"] + "=" + foundRows[i]["第三欄"] + "\n";
             }
 
             // 用户判断当前的ID是不是存在
             if (CheckIDBool("1", dt))
             {
-                sb.Append("Bool true");
+                richTextBox1.Text += "Bool true\n";
             }
             else
             {
-                sb.Append("Bool false");
+                richTextBox1.Text += "Bool false\n";
             }
-            richTextBox1.Text += sb.ToString() + "\n";
         }
 
         /// <summary>
@@ -893,8 +830,8 @@ namespace vcs_DataSet_DataTable
             {
                 DataRow[] customerRow =
                 dt.Select(strKey);
-                customerRow[0]["Name"] = name;
-                customerRow[0]["Timer"] = DateTime.Now.AddYears(-1);
+                customerRow[0]["第二欄"] = name;
+                customerRow[0]["第三欄"] = DateTime.Now.AddYears(-1);
                 rs = true;
             }
             return rs;
@@ -930,6 +867,7 @@ namespace vcs_DataSet_DataTable
             // 建構DataSet及其組成的資料表1
             DataSet ds = new DataSet("學生資料集");
 
+            // 建立DataTable, 並給定名稱
             DataTable dt = new DataTable("學生資料表");
 
             // 這個資料表的資料列中的初始開始大小。預設值為 50。
@@ -944,7 +882,7 @@ namespace vcs_DataSet_DataTable
             column1.DataType = Type.GetType("System.Int32");
             column1.AutoIncrement = true;
 
-            // 建立資料表結構, 3欄
+            // 建立資料表結構, 3欄, 預設格式為字串
             dt.Columns.Add(column1);
             dt.Columns.Add(column2);
             dt.Columns.Add(column3);
@@ -1038,6 +976,7 @@ namespace vcs_DataSet_DataTable
 
             // 建立兩個 DataTable dt1 dt2
 
+            // 建立DataTable1, 並給定名稱
             DataTable dt1 = new DataTable("第一資料表");
 
             // 建立資料表結構, 2欄
@@ -1077,7 +1016,9 @@ namespace vcs_DataSet_DataTable
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
+            // 建立DataTable2, 並給定名稱
             DataTable dt2 = new DataTable("第二資料表");
+
             DataRow datarow2;
 
             // 建立資料表結構, 3欄
@@ -1294,7 +1235,8 @@ DataTable可以加標題 比較像EXCEL表單
 
 public static DataTable ToDataTable(List<NetworkAdapterInformation> list)
 {
-	DataTable dt = new DataTable();
+    // 建立DataTable
+    DataTable dt = new DataTable();
 	if (list.Count > 0)
 	{
 		PropertyInfo[] propertys = list[0].GetType().GetProperties();

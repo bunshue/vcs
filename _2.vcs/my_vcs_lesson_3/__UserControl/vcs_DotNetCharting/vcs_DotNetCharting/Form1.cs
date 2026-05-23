@@ -12,7 +12,6 @@ using dotnetCHARTING;
 //需要 改成 .Net Framework 4
 //需要 參考/加入參考/.NET/System.Web
 
-
 namespace vcs_DotNetCharting
 {
     public partial class Form1 : Form
@@ -25,8 +24,7 @@ namespace vcs_DotNetCharting
         private void Form1_Load(object sender, EventArgs e)
         {
             //调用说明及范例#region 调用说明及范例  
-            //在要显示统计图的页面代码直接调用，方法类似如下：  
-
+            //在要显示统计图的页面代码直接调用，方法类似如下：
 
             DataTable dt = new DataTable();
             dt.Columns.Add("月份");
@@ -45,6 +43,7 @@ namespace vcs_DotNetCharting
             show.SeriesName = "具体详情";
             show.PhaysicalImagePath = "ChartImages";
             show.DataSource = dt;
+
             //show.CreateColumn(this.Chart1);
 
 
@@ -58,7 +57,7 @@ namespace vcs_DotNetCharting
     /// </summary>  
     public class ShowData
     {
-        #region 属性
+        //#region 属性
         private string _phaysicalimagepath;//图片存放路径  
         private string _title; //图片标题  
         private string _xtitle;//图片x座标名称  
@@ -133,9 +132,9 @@ namespace vcs_DotNetCharting
             set { _dt = value; }
             get { return _dt; }
         }
-        #endregion
+        //#endregion
 
-        #region 构造函数
+        //#region 构造函数
         public ShowData()
         {
             //  
@@ -151,9 +150,9 @@ namespace vcs_DotNetCharting
             _ytitle = YTitle;
             _seriesname = SeriesName;
         }
-        #endregion
+        //#endregion
 
-        #region 输出柱形图
+        //#region 输出柱形图
         /// <summary>  
         /// 柱形图  
         /// </summary>  
@@ -176,9 +175,9 @@ namespace vcs_DotNetCharting
             chart.Use3D = false;
             chart.Series.DefaultElement.ShowValue = true;
         }
-        #endregion
+        //#endregion
 
-        #region 输出饼图
+        //#region 输出饼图
         /// <summary>  
         /// 饼图  
         /// </summary>  
@@ -225,9 +224,9 @@ namespace vcs_DotNetCharting
             }
             return SC;
         }
-        #endregion
+        //#endregion
 
-        #region 输出曲线图
+        //#region 输出曲线图
         /// <summary>  
         /// 曲线图  
         /// </summary>  
@@ -250,8 +249,6 @@ namespace vcs_DotNetCharting
             chart.Use3D = false;
             chart.Series.DefaultElement.ShowValue = true;
         }
-        #endregion
-
+        //#endregion
     }
 }
-

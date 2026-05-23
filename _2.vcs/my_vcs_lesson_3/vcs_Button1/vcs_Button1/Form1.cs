@@ -459,6 +459,7 @@ namespace vcs_Button1
             if (btn_flip.Text == "左右顛倒")
             {
                 btn_flip.Text = "恢復";
+                Application.DoEvents();
 
                 //臨江仙 幾度夕陽紅 左右顛倒
 

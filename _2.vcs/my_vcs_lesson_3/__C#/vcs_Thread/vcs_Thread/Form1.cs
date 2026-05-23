@@ -45,6 +45,10 @@ namespace vcs_Thread
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
             //C# 跨 Thread 存取 UI
             //Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效	same
             Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
@@ -53,8 +57,6 @@ namespace vcs_Thread
             get_cpu_useage();
 
             Thread.CurrentThread.Name = "MainThread";
-
-            show_item_location();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -220,6 +222,8 @@ namespace vcs_Thread
             richTextBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         //Thread使用範例0 ST
 
         private void ThreadProc_ex0()
@@ -284,6 +288,7 @@ namespace vcs_Thread
         }
         //Thread使用範例0 SP
 
+        //------------------------------------------------------------  # 60個
 
         //Thread使用範例1 ST
 
@@ -341,6 +346,7 @@ namespace vcs_Thread
         }
         //Thread使用範例1 SP
 
+        //------------------------------------------------------------  # 60個
 
         //Thread使用範例2 ST
 
@@ -453,6 +459,7 @@ namespace vcs_Thread
         }
         //Thread使用範例2 SP
 
+        //------------------------------------------------------------  # 60個
 
         //Thread使用範例3 ST
 
@@ -481,6 +488,8 @@ namespace vcs_Thread
 
         }
         //Thread使用範例3 SP
+
+        //------------------------------------------------------------  # 60個
 
         //Thread使用範例4 ST
 
@@ -537,6 +546,7 @@ namespace vcs_Thread
 
         //Thread使用範例4 SP
 
+        //------------------------------------------------------------  # 60個
 
         //Thread使用範例5 ST
 
@@ -558,6 +568,7 @@ namespace vcs_Thread
         }
         //Thread使用範例5 SP
 
+        //------------------------------------------------------------  # 60個
 
         //Thread使用範例6 ST
 
@@ -593,6 +604,8 @@ namespace vcs_Thread
 
         }
         //Thread使用範例6 SP
+
+        //------------------------------------------------------------  # 60個
 
         //Thread使用範例7 ST
 
@@ -658,6 +671,8 @@ namespace vcs_Thread
 
         }
         //Thread使用範例7 SP
+
+        //------------------------------------------------------------  # 60個
 
         //Thread使用範例8 ST
 
@@ -753,6 +768,7 @@ namespace vcs_Thread
 
         //Thread使用範例8 SP
 
+        //------------------------------------------------------------  # 60個
 
         //Thread使用範例9 ST
 
@@ -797,6 +813,8 @@ namespace vcs_Thread
 
         }
         //Thread使用範例9 SP
+
+        //------------------------------------------------------------  # 60個
 
         delegate void Delegate_do();
 
@@ -855,6 +873,8 @@ namespace vcs_Thread
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         //Thread使用範例 時鐘 ST
 
         //委派function
@@ -903,6 +923,7 @@ namespace vcs_Thread
 
         //Thread使用範例 時鐘 SP
 
+        //------------------------------------------------------------  # 60個
 
         //Thread使用範例 CPU使用率 ST
         Thread thread_cpu;
@@ -943,6 +964,8 @@ namespace vcs_Thread
             thread_cpu.Start();
         }
         //Thread使用範例 CPU使用率 SP
+
+        //------------------------------------------------------------  # 60個
 
         private void button110_Click(object sender, EventArgs e)
         {
@@ -1209,7 +1232,6 @@ namespace vcs_Thread
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
