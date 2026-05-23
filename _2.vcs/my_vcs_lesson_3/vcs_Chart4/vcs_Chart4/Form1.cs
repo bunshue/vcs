@@ -102,6 +102,66 @@ namespace vcs_Chart4
 
         void draw_chart0()
         {
+            string title = "chart0";
+            chart_init(chart0, title);
+
+            //PieChart
+
+            string[] xValues = { "0-20", "20-30", "30-40", "40-50", "50-60", "> 60", "unknow" };
+            int[] yValues = { 5, 18, 45, 17, 2, 1, 162 };
+
+            //ChartAreas,Series,Legends 基本設定-------------------------------------------------
+
+            //chart0.ChartAreas.Add("ChartArea1"); //圖表區域集合
+            chart0.Legends.Add("Legends1"); //圖例集合說明
+            chart0.Series.Add("Series1"); //數據序列集合
+
+            //設定 Chart
+
+            //設定 ChartArea1
+            chart0.ChartAreas[0].Area3DStyle.Enable3D = true; //3D效果
+            chart0.ChartAreas[0].AxisX.Interval = 1;
+
+            //設定 Legends
+            //chart0.Legends[Legends1].DockedToChartArea = ChartArea1; //顯示在圖表內
+            //chart0.Legends[Legends1].Docking = Docking.Bottom; //自訂顯示位置
+            //背景色
+            chart0.Legends["Legends1"].BackColor = Color.FromArgb(235, 235, 235);
+            //斜線背景
+            chart0.Legends["Legends1"].BackHatchStyle = ChartHatchStyle.DarkDownwardDiagonal;
+            chart0.Legends["Legends1"].BorderWidth = 1;
+            chart0.Legends["Legends1"].BorderColor = Color.FromArgb(200, 200, 200);
+
+            //設定 Series1
+            chart0.Series[0].ChartType = SeriesChartType.Pie;
+            //chart0.Series[0].ChartType = SeriesChartType.Doughnut;
+            chart0.Series[0].Points.DataBindXY(xValues, yValues);  // xx, yy 皆為一維陣列
+            chart0.Series[0].LegendText = "Aaaaaa";   //#VALX:    [ #PERCENT{P1} ]; //X軸 + 百分比
+            chart0.Series[0].Label = "bbbb";  //#VALX#PERCENT{P1}; //X軸 + 百分比
+            //chart0.Series[0].LabelForeColor = Color.FromArgb(0, 90, 255); //字體顏色
+            //字體設定
+            chart0.Series[0].Font = new System.Drawing.Font("Trebuchet MS", 10, System.Drawing.FontStyle.Bold);
+            chart0.Series[0].Points.FindMaxByValue().LabelForeColor = Color.Red;
+            //chart0.Series[0].Points.FindMaxByValue().Color = Color.Red;
+            //chart0.Series[0].Points.FindMaxByValue()[Exploded] = true;
+            chart0.Series[0].BorderColor = Color.FromArgb(255, 101, 101, 101);
+
+            //chart0.Series[0][DoughnutRadius] = 80; // ChartType為Doughnut時，Set Doughnut hole size
+            //chart0.Series[0][PieLabelStyle] = Inside; //數值顯示在圓餅內
+            ////chart0.Series[0][PieLabelStyle] = Outside; //數值顯示在圓餅外
+            //chart0.Series[0][PieLabelStyle] = Disabled; //不顯示數值
+            //設定圓餅效果，除 Default 外其他效果3D不適用
+            ////chart0.Series[0][PieDrawingStyle] = Default;
+            //chart0.Series[0][PieDrawingStyle] = SoftEdge;
+            //chart0.Series[0][PieDrawingStyle] = Concave;
+
+            //Random rnd = new Random();  //亂數產生區塊顏色
+            //foreach (DataPoint point in chart0.Series[Series1].Points)
+            //{
+            //    //pie 顏色
+            //    point.Color = Color.FromArgb(150, rnd.Next(0, 255), rnd.Next(0, 255), rnd.Next(0, 255)); 
+            //}
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -161,81 +221,12 @@ namespace vcs_Chart4
 
         void draw_chart3()
         {
-            int draw_mode = 1;  //0:畫chart, 固定邊界 1:畫chart, 變動邊界
-
-            //折線圖, 固定邊界 / 變動邊界
-
-            string title = "";
-            chart_init(chart3, title);
-
-            int N = 10;
-            Random r = new Random();
-            int[] number = new int[N];
-            for (int i = 0; i < N; i++)
-            {
-                number[i] = r.Next(350);
-            }
-
-            // 設定數列1 的 大小與外觀
-            Series series1 = new Series("Di0", 500); //初始畫線條(名稱，最大值)
-            series1.Color = Color.Blue; //設定線條顏色
-            series1.Font = new Font("新細明體", 10); //設定字型
-            series1.ChartType = SeriesChartType.Line;  // 折線圖
-            //chart3.ChartAreas[0].AxisY.Enabled= AxisEnabled.False; //隱藏Y 軸標示
-            //chart3.ChartAreas[0].AxisY.MajorGrid.Enabled= true;  //隱藏Y軸標線
-            series1.IsValueShownAsLabel = true; //是否把數值顯示在線上
-            //把值加入X 軸Y 軸
-            series1.Points.AddXY("A", number[0]);
-            series1.Points.AddXY("B", number[1]);
-            series1.Points.AddXY("C", number[2]);
-            series1.Points.AddXY("D", number[3]);
-            series1.Points.AddXY("E", number[4]);
-            series1.Points.AddXY("F", number[5]);
-            series1.Points.AddXY("G", number[6]);
-            series1.Points.AddXY("H", number[7]);
-            series1.Points.AddXY("I", number[8]);
-            series1.Points.AddXY("J", number[9]);
-            series1.LegendText = "折線圖";  // 圖例文字
-
-            // 將數列新增到chart上
-            chart3.Series.Add(series1);
-
-            if (draw_mode == 0)
-            {
-                //固定邊界
-                richTextBox1.Text += "固定邊界\n";
-                chart3.ChartAreas[0].AxisY.Minimum = 0;//設定Y軸最小值
-                chart3.ChartAreas[0].AxisY.Maximum = 500;//設定Y軸最大值
-            }
-            else if (draw_mode == 1)
-            {
-                //變動邊界
-                richTextBox1.Text += "變動邊界\n";
-                chart3.ChartAreas[0].AxisY.Minimum = number.Min() - 10;//設定Y軸最小值
-                chart3.ChartAreas[0].AxisY.Maximum = number.Max() + 10;//設定Y軸最大值
-            }
-            else
-            {
-                richTextBox1.Text += "XXXXXXXXXXXXXXXXXXXXXXX\n";
-            }
         }
 
         //------------------------------------------------------------  # 60個
 
         void draw_chart4()
         {
-            string[] xx = { "一月", "二月", "三月", "四月", "五月", "六月", "七月" };
-            int[] yy = { 25, 18, 30, 24, 35, 50, 40 };
-            // NG Series objSeries = chart4.Series.Add("月溫度​℃");
-            var objSeries = chart4.Series.First();
-            chart4.Series[0].ChartType = SeriesChartType.Point;  // 點狀圖
-            objSeries.Points.DataBindXY(xx, yy);  // xx, yy 皆為一維陣列
-
-            //設定邊界
-            //chart4.ChartAreas[0].AxisX.Minimum = 0;//設定Y軸最小值
-            //chart4.ChartAreas[0].AxisX.Maximum = 8;//設定Y軸最大值
-            chart4.ChartAreas[0].AxisY.Minimum = 0;//設定Y軸最小值
-            chart4.ChartAreas[0].AxisY.Maximum = 60;//設定Y軸最大值
         }
 
         //------------------------------------------------------------  # 60個
@@ -326,7 +317,7 @@ namespace vcs_Chart4
             richTextBox1.Text += "靜畫範例1, 用獨立數組做\n";
 
             // 設定數列1 的 大小與外觀
-            Series series1 = new Series("sin", 500); //初始畫線條(標題，最大數值)
+            Series series1 = new Series("sin", 500);  // 初始化數列1(名稱, 最大值)
             series1.Color = Color.Red; //設定線條顏色
             series1.BorderColor = Color.Navy;  //設置數據邊框的顏色
             series1.BorderWidth = 3;    //線寬
@@ -356,7 +347,7 @@ namespace vcs_Chart4
             */
 
             // 設定數列2 的 大小與外觀
-            Series series2 = new Series("cos", 500); //初始畫線條(標題，最大數值)
+            Series series2 = new Series("cos", 500);  // 初始化數列1(名稱, 最大值)
             series2.Color = Color.Green; //設定線條顏色
             series2.BorderColor = Color.Navy;  //設置數據邊框的顏色
             series2.BorderWidth = 3;    //線寬
@@ -370,7 +361,7 @@ namespace vcs_Chart4
             series2.ShadowColor = Color.Orange; //設置陰影顏色
 
             // 設定數列3 的 大小與外觀
-            Series series3 = new Series("sin + cos", 500); //初始畫線條(標題，最大數值)
+            Series series3 = new Series("sin + cos", 500);  // 初始化數列3(名稱, 最大值)
             series3.Color = Color.Blue; //設定線條顏色
             series3.BorderColor = Color.Navy;  //設置數據邊框的顏色
             series3.BorderWidth = 3;    //線寬
@@ -435,7 +426,7 @@ namespace vcs_Chart4
             richTextBox1.Text += "靜畫範例2, 用數組陣列做\n\r";
 
             // 設定數列1 的 大小與外觀
-            Series[] series = new Series[3];       //預先建立3個數組
+            Series[] series = new Series[3];  // 初始化3數列
             double[] _y = new double[] { 77, 35, 131 };
             Color[] colors = new Color[] { Color.Red, Color.Green, Color.Blue };
             String[] curves = new String[] { "sin", "cos", "sin+cos" };
@@ -492,4 +483,98 @@ namespace vcs_Chart4
 /*  可搬出
 
 */
+
+
+
+
+
+/*
+//應該效果不太好
+            //Random rnd = new Random();  //亂數產生區塊顏色
+            //foreach (DataPoint point in Chart1.Series[Series1].Points)
+            //{
+            //    //pie 顏色
+            //    point.Color = Color.FromArgb(150, rnd.Next(0, 255), rnd.Next(0, 255), rnd.Next(0, 255)); 
+            //}
+
+//------------------------------------------------------------  # 60個
+
+
+//------------------------------------------------------------  # 60個
+
+      
+//------------------------------------------------------------  # 60個
+
+
+Chart
+隨意建立3組數據(Sin,Cos,Sin+Cos)
+Chart 的屬性 / Series / 打開Series集合編輯器 / 原本有Series 1, 加入Series 2 Series 3
+點選Series 1 Series 2 Series 3 把ChartType改成Spline    亦可修改線的粗細顏色等
+
+
+Chart 的屬性
+Title是在圖表上方增加標題 或著也可以想說說明圖表的文字,從屬性裡的Text可以修改文字,也可以修改字型大小位置等..
+Legend是圖表右邊說明每一條線代表的文字,若不想要可以從Enabled改成False即可
+ChartAreas是可以在同一圖表裡建立2種以上圖
+從Series裡可以選擇哪一組數據要放在哪個ChartAreas上
+
+//------------------------------------------------------------  # 60個
+
+chart
+
+http://kgood9999.blogspot.com/2010/04/c-chart.html
+https://wayhome23.pixnet.net/blog/post/124267643-%5Bc%23%5D-chart-%E5%9F%BA%E7%A4%8E%E7%AF%87
+
+chart放在
+通用Silverlight控制項內
+
+//------------------------------------------------------------  # 60個
+
+*/
+
+//數列加入資料點的方法
+//series1.Points.AddXY(index, r.Next(10) * 50);
+//objSeries.Points.DataBindXY(xx, yy);  // xx, yy 皆為一維陣列
+
+/*
+            save_chart_image_to_drive();
+        void save_chart_image_to_drive()
+        {
+            if (chart1 != null)
+            {
+                string filename = Application.StartupPath + "\\CHART_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                String filename1 = filename + ".jpg";
+                String filename2 = filename + ".bmp";
+                String filename3 = filename + ".png";
+
+                try
+                {
+                    chart1.SaveImage(@filename1, ChartImageFormat.Jpeg);
+                    chart1.SaveImage(@filename2, ChartImageFormat.Bmp);
+                    chart1.SaveImage(@filename3, ChartImageFormat.Png);
+
+                    richTextBox1.Text += "存檔成功\n";
+                    richTextBox1.Text += "已存檔 : " + filename1 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename3 + "\n";
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "無圖可存\n";
+            }
+        }
+*/
+
+
+/*
+chart1.Series[0].Points.Clear();
+chart1.Series[1].Points.Clear();
+chart1.Series[2].Points.Clear();
+*/
+
 

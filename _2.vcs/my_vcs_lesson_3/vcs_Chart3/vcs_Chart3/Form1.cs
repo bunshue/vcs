@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Windows.Forms.DataVisualization;
-using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms.DataVisualization.Charting;  // for Series, Chart
 
 /*
 拉一個Chart控件
@@ -25,6 +25,9 @@ chart5屬性
 ChartAreas 移除 ChartArea1
 Series 移除 Series1
 */
+
+//x軸只顯示一條，只要將資料都加入到一個序列內即可
+//而x軸顯示多條，則需要使用多個序列存放資料
 
 namespace vcs_Chart3
 {
@@ -108,133 +111,39 @@ namespace vcs_Chart3
             chart1.Series.Clear();
             chart1.Titles.Clear();
 
-            chart1.Titles.Add(title);  // 標題
             chart1.Size = new Size(W, H);  // 設定chart大小
 
+            Title chart_title = new Title();
+            chart_title.Text = title;
+            chart_title.Alignment = ContentAlignment.MiddleCenter;
+            chart_title.Font = new Font("Trebuchet MS", 14F, FontStyle.Bold);
+            chart1.Titles.Add(chart_title);  // 標題
         }
 
         void draw_chart0()
         {
-            string title = "直條圖 Total Income";
+            string title = "直條圖";
             chart_init(chart0, title);
 
+            //------------------------------  # 30個
+
             // 設定數列1 的 大小與外觀
-            Series series1 = chart0.Series.Add("平均高溫​℃");
+            Series series1 = new Series("體重1");
             series1.ChartType = SeriesChartType.Column;  // 直條圖
             //series1.ChartType = SeriesChartType.Line;  // 折線圖
 
-            // 設定數列2 的 大小與外觀
-            Series series2 = chart0.Series.Add("平均低溫​℃");
-            series2.ChartType = SeriesChartType.Column;  // 直條圖
-            //series2.ChartType = SeriesChartType.Line;  // 折線圖
-
-            /*
-            series.Points.AddXY("September", 100);
-            series.Points.AddXY("Obtober", 300);
-            series.Points.AddXY("November", 800);
-            series.Points.AddXY("December", 200);
-            series.Points.AddXY("January", 600);
-            series.Points.AddXY("February", 400);
-            */
-
-            string[] month = new string[] { "1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月" };
-            double[] temperature_average_high = new double[] { 18.9, 19.4, 21.4, 25.2, 28.6, 31.0, 32.9, 32.6, 31.0, 27.8, 24.9, 21.2 };
-            double[] temperature_average_low = new double[] { 12.9, 13.4, 15.2, 18.8, 21.8, 24.4, 25.7, 25.6, 24.1, 21.6, 18.5, 15.0 };
-
-            for (int i = 0; i < 12; i++)
-            {
-                series1.Points.AddXY(month[i], temperature_average_high[i]);
-                series2.Points.AddXY(month[i], temperature_average_low[i]);
-            }
-        }
-
-        void draw_chart1()
-        {
-            // 直條圖
-
-            string title = "直條圖 Animals";
-            chart_init(chart1, title);
-
-            // Data arrays
-            string[] seriesArray = { "Cat", "Dog", "Bird", "Monkey" };
-            int[] pointsArray = { 2, 1, 7, 5 };
-
-            // Set palette
-            chart1.Palette = ChartColorPalette.EarthTones;
-
-            // Add series.
-            for (int i = 0; i < seriesArray.Length; i++)
-            {
-                // 設定數列i 的 大小與外觀
-                Series series = chart1.Series.Add(seriesArray[i]);
-                series.Points.Add(pointsArray[i]);
-            }
-        }
-
-        void draw_chart2()
-        {
-            string title = "長條圖, 自定義座標軸刻度標籤";
-            chart_init(chart2, title);
-
-            chart2.ChartAreas[0].AxisX.CustomLabels.Clear();
-
-            //不知道如何自動邊界
-
-            // 設定數列1
-            Series series1 = new Series();
-            // 設定數列2
-            Series series2 = new Series();
-
-            Random r = new Random();
-            for (int i = 1; i < 13; i++)
-            {
-                series1.Points.AddXY(i, r.Next(20, 30));
-                series2.Points.AddXY(i, r.Next(10, 30));
-            }
-
-            // 將數列新增到chart上
-            chart2.Series.Add(series1);
-            chart2.Series.Add(series2);
-
-            chart2.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Green;
-
-            DateTime dt = DateTime.Parse("8:30");
-            for (int i = 1; i < 26; i++)
-            {
-                if (i % 2 == 1)
-                {
-                    CustomLabel label = new CustomLabel();
-                    label.Text = dt.ToShortTimeString();
-                    label.ToPosition = i;
-                    chart2.ChartAreas[0].AxisX.CustomLabels.Add(label);
-                    label.GridTicks = GridTickTypes.Gridline;
-                    dt = dt.AddHours(1);
-                }
-            }
-        }
-
-        void draw_chart3()
-        {
-            string title = "";
-            chart_init(chart3, title);
-
-            // 設定數列1 的 大小與外觀
-            Series series1 = new Series("Di0", 500); //初始畫線條(名稱，最大值)
-            series1.Color = Color.Blue; //設定線條顏色
-            series1.Font = new System.Drawing.Font("新細明體", 10); //設定字型
-            series1.ChartType = SeriesChartType.Column;  // 直條圖
-            //chart3.ChartAreas[0].AxisY.Minimum = 0;//設定Y軸最小值
-            //chart3.ChartAreas[0].AxisY.Maximum = 500;//設定Y軸最大值
-            //chart3.ChartAreas[0].AxisY.Enabled= AxisEnabled.False; //隱藏Y 軸標示
-            //chart3.ChartAreas[0].AxisY.MajorGrid.Enabled= true;  //隱藏Y軸標線
-            series1.IsValueShownAsLabel = true; //是否把數值顯示在線上
-            //把值加入X 軸Y 軸
-            series1.Points.AddXY("John", 200);
-            series1.Points.AddXY("Carol", 100);
-            series1.Points.AddXY("David", 100);
-            series1.Points.AddXY("Tom", 30);
-            series1.Points.AddXY("James", 300);
-            series1.Points.AddXY("Larry", 70);
+            series1.Points.AddXY("鼠", 3);
+            series1.Points.AddXY("牛", 48);
+            series1.Points.AddXY("虎", 33);
+            series1.Points.AddXY("兔", 8);
+            series1.Points.AddXY("龍", 38);
+            series1.Points.AddXY("蛇", 16);
+            series1.Points.AddXY("馬", 31);
+            series1.Points.AddXY("羊", 29);
+            series1.Points.AddXY("猴", 22);
+            series1.Points.AddXY("雞", 5);
+            series1.Points.AddXY("狗", 17);
+            series1.Points.AddXY("豬", 42);
 
             int count = series1.Points.Count;
             richTextBox1.Text += "共有 " + count.ToString() + " 筆資料\n";
@@ -244,13 +153,127 @@ namespace vcs_Chart3
                 richTextBox1.Text += "Y[" + i.ToString() + "] = " + series1.Points[i].YValues[0].ToString() + "\n";
             }
 
-            //設定邊界
-            chart3.ChartAreas[0].AxisX.Minimum = 0;//設定Y軸最小值
-            chart3.ChartAreas[0].AxisX.Maximum = 8;//設定Y軸最大值
-            chart3.ChartAreas[0].AxisY.Minimum = 0;//設定Y軸最小值
-            chart3.ChartAreas[0].AxisY.Maximum = 400;//設定Y軸最大值
+            // 設定邊界
+            chart1.ChartAreas[0].AxisX.Minimum = 0;  // 設定X軸最小值
+            chart1.ChartAreas[0].AxisX.Maximum = 14;  // 設定X軸最大值
+            chart1.ChartAreas[0].AxisY.Minimum = 0;  // 設定Y軸最小值
+            chart1.ChartAreas[0].AxisY.Maximum = 60;  // 設定Y軸最大值
 
-            // 將數列新增到chart上
+            //------------------------------  # 30個
+
+            // 設定數列2 的 大小與外觀
+            Series series2 = new Series("體重2", 500);  // 初始化數列2(名稱，最大值)
+            //series2.ChartType = SeriesChartType.Column;  // 直條圖
+            series2.ChartType = SeriesChartType.Line;  // 折線圖
+            //series2.Name = "體重";  // 數列名稱
+            //series2.Color = Color.Red;
+            //series2.IsValueShownAsLabel = true;  // 是否把數值顯示在線上
+
+            string[] name = new string[] { "鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬" };
+            int[] weight = new int[] { 3, 48, 33, 8, 38, 16, 31, 29, 22, 5, 17, 42 };
+            for (int i = 0; i < name.Length; i++)
+            {
+                //series2.Points.Add(weight[i]);  // Add 一維加入
+                series2.Points.AddXY(name[i], weight[i]);  // AddXY 二維加入
+            }
+
+            chart0.Series.Add(series1);  // 將數列1新增到chart0上
+            chart0.Series.Add(series2);  // 將數列2新增到chart0上
+
+            //設定邊界
+            chart0.ChartAreas[0].AxisX.Minimum = 0;  // 設定X軸最小值
+            chart0.ChartAreas[0].AxisX.Maximum = 14;  // 設定X軸最大值
+            chart0.ChartAreas[0].AxisY.Minimum = 0;  // 設定Y軸最小值
+            chart0.ChartAreas[0].AxisY.Maximum = 60;  // 設定Y軸最大值
+        }
+
+        void draw_chart1()
+        {
+            string title = "直條圖";
+            chart_init(chart1, title);
+
+            // 設定數列1 的 大小與外觀
+            Series series1 = new Series("體重", 500);  // 初始化數列1(名稱, 最大值)
+            series1.Color = Color.Blue; //設定線條顏色
+            series1.Font = new Font("新細明體", 10); //設定字型
+            series1.ChartType = SeriesChartType.Column;  // 直條圖
+            //chart1.ChartAreas[0].AxisY.Enabled= AxisEnabled.False; //隱藏Y 軸標示
+            //chart1.ChartAreas[0].AxisY.MajorGrid.Enabled= true;  //隱藏Y軸標線
+            series1.IsValueShownAsLabel = true;  // 是否把數值顯示在線上
+
+            //把值加入X 軸Y 軸
+            series1.Points.AddXY("鼠", 3);
+            series1.Points.AddXY("牛", 48);
+            series1.Points.AddXY("虎", 33);
+            series1.Points.AddXY("兔", 8);
+            series1.Points.AddXY("龍", 38);
+            series1.Points.AddXY("蛇", 16);
+            series1.Points.AddXY("馬", 31);
+            series1.Points.AddXY("羊", 29);
+            series1.Points.AddXY("猴", 22);
+            series1.Points.AddXY("雞", 5);
+            series1.Points.AddXY("狗", 17);
+            series1.Points.AddXY("豬", 42);
+
+            chart1.Series.Add(series1);  // 將數列1新增到chart1上
+        }
+
+        void draw_chart2()
+        {
+            string title = "長條圖, 自定義座標軸刻度標籤";
+            chart_init(chart2, title);
+
+            chart2.ChartAreas[0].AxisX.CustomLabels.Clear();
+
+            // 設定數列1
+            Series series1 = new Series();  // 初始化數列1
+            series1.Points.AddXY("鼠", 3);
+            series1.Points.AddXY("牛", 48);
+            series1.Points.AddXY("虎", 33);
+            series1.Points.AddXY("兔", 8);
+            series1.Points.AddXY("龍", 38);
+            series1.Points.AddXY("蛇", 16);
+            series1.Points.AddXY("馬", 31);
+            series1.Points.AddXY("羊", 29);
+            series1.Points.AddXY("猴", 22);
+            series1.Points.AddXY("雞", 5);
+            series1.Points.AddXY("狗", 17);
+            series1.Points.AddXY("豬", 42);
+
+            // 設定數列2
+            Series series2 = new Series();  // 初始化數列2
+            series2.Points.AddXY("鼠", 3);
+            series2.Points.AddXY("牛", 48);
+            series2.Points.AddXY("虎", 33);
+            series2.Points.AddXY("兔", 8);
+            series2.Points.AddXY("龍", 38);
+            series2.Points.AddXY("蛇", 16);
+            series2.Points.AddXY("馬", 31);
+            series2.Points.AddXY("羊", 29);
+            series2.Points.AddXY("猴", 22);
+            series2.Points.AddXY("雞", 5);
+            series2.Points.AddXY("狗", 17);
+            series2.Points.AddXY("豬", 42);
+
+            chart2.Series.Add(series1);  // 將數列1新增到chart2上
+            chart2.Series.Add(series2);  // 將數列2新增到chart2上
+
+            chart2.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Green;
+        }
+
+        void draw_chart3()
+        {
+            string title = "圓餅圖";
+            chart_init(chart3, title);
+
+            Series series1 = new Series();  // 初始化數列1
+            double[] _y = new double[] { 77, 35, 131, 55, 77, 66 };
+            Color[] _colors = new Color[] { Color.Peru, Color.PowderBlue, Color.RosyBrown, Color.Salmon, Color.Sienna, Color.SlateBlue };
+            String[] _users = new String[] { "小王", "小風", "小明", "小姿", "小玉", "小蟹" };
+
+            series1.ChartType = SeriesChartType.Pie;
+            series1.IsValueShownAsLabel = true;
+            series1.Points.DataBindXY(_users, _y);  // xx, yy 皆為一維陣列
             chart3.Series.Add(series1);
         }
 
@@ -269,7 +292,7 @@ namespace vcs_Chart3
                 chart4.Legends.Add(new Legend("Legends2")); //圖例集合說明
             }
             chart4.ChartAreas.Add("ChartArea2");  // 圖表區域集合
-            // chart4.Series.Add("Series3");  // 數據序列集合
+            // chart4.Series.Add("Series3");  // 將數列新增到chart上  // 數據序列集合
             // chart4.Legends.Add("Legends2");  // 圖例集合
 
             //標題集合
@@ -314,7 +337,7 @@ namespace vcs_Chart3
             //chart4.Series["Series4b"].ChartType = SeriesChartType.Doughnut;  // 環圈圖
             chart4.Series["Series4b"].Points.DataBindXY(xValues, yValues);  // xx, yy 皆為一維陣列
             chart4.Series["Series4b"].Legend = "Legends2";  // 設定要呈現哪個圖例
-            // chart4.Series["Series4b"].IsValueShownAsLabel = true; // Show data points labels
+            // chart4.Series["Series4b"].IsValueShownAsLabel = true;  // 是否把數值顯示在線上
             chart4.Series["Series4b"].XValueType = ChartValueType.String; //X軸的資料格式
             chart4.Series["Series4b"].LegendText = "#VALX :[ #PERCENT{P1} ]"; //X軸 + 百分比
             chart4.Series["Series4b"].Label = "#VALX\n#PERCENT{P1}"; //X軸 + 百分比
@@ -381,7 +404,7 @@ namespace vcs_Chart3
             double[] yValues = { 20, 19, 64, 128, 8, 48, 58, 21, 18, 27, 17, 11, 4, 24, 23, 58, 5, 9, 23, 4 };
 
             chart5.ChartAreas.Add("ChartArea1");  // 圖表區域集合
-            chart5.Series.Add("Series1");  // 數據序列集合
+            chart5.Series.Add("Series1");  // 將數列1新增到chart5上
             chart5.Legends.Add("Legends1");  // 圖例集合
 
             // 標題集合
@@ -442,12 +465,12 @@ namespace vcs_Chart3
             chart5.Series["Series1"].LabelForeColor = Color.FromArgb(0, 90, 255); //字體顏色
 
             //字體設定
-            chart5.Series["Series1"].Font = new Font("Trebuchet MS", 10, System.Drawing.FontStyle.Bold);
+            chart5.Series["Series1"].Font = new Font("Trebuchet MS", 10, FontStyle.Bold);
 
             //Label 背景色
             chart5.Series["Series1"].LabelBackColor = Color.FromArgb(150, 255, 255, 255);
             chart5.Series["Series1"].Color = Color.FromArgb(240, 65, 140, 240); //背景色
-            chart5.Series["Series1"].IsValueShownAsLabel = true; // Show data points labels
+            chart5.Series["Series1"].IsValueShownAsLabel = true;  // 是否把數值顯示在線上
 
             /*  
             chart5.Series["Series2"].Points.DataBindXY(xValue, yValues);  // xx, yy 皆為一維陣列
@@ -456,10 +479,10 @@ namespace vcs_Chart3
             chart5.Series["Series2"].LabelFormat = "#.###"; //小數點
             chart5.Series["Series2"].MarkerSize = 8; //Label 範圍大小
             chart5.Series["Series2"].LabelForeColor = Color.FromArgb(255, 103, 0);
-            chart5.Series["Series2"].Font = new System.Drawing.Font("Trebuchet MS", 10, FontStyle.Bold);
+            chart5.Series["Series2"].Font = new Font("Trebuchet MS", 10, FontStyle.Bold);
             chart5.Series["Series2"].LabelBackColor = Color.FromArgb(150, 255, 255, 255);
             chart5.Series["Series2"].Color = Color.FromArgb(240, 252, 180, 65); //背景色
-            chart5.Series["Series2"].IsValueShownAsLabel = true; //顯示數據
+            chart5.Series["Series2"].IsValueShownAsLabel = true;  // 是否把數值顯示在線上
             */
         }
 
@@ -467,41 +490,62 @@ namespace vcs_Chart3
 
         void draw_chart6()
         {
-            // 直條圖
+            //折線圖, 固定邊界 / 變動邊界
 
-            string title = "直條圖";
+            int draw_mode = 1;  //0:畫chart, 固定邊界 1:畫chart, 變動邊界
+
+            string title = "折線圖";
             chart_init(chart6, title);
 
-            //x軸只顯示一條，只要將資料都加入到一個序列內即可
-            //而x軸顯示多條，則需要使用多個序列存放資料
+            int N = 10;
+            Random r = new Random();
+            int[] number = new int[N];
+            for (int i = 0; i < N; i++)
+            {
+                number[i] = r.Next(350);
+            }
 
             // 設定數列1 的 大小與外觀
-            Series[] series1 = new Series[3];  // 預先建立3個數組   應該是不太好
-            double[] _y = new double[] { 77, 35, 131 };
-            Color[] colors = new Color[] { Color.Peru, Color.PowderBlue, Color.RosyBrown };
-            String[] users = new String[] { "小王", "小風", "小明" };
+            Series series1 = new Series("Di0", 500);  // 初始化數列1(名稱, 最大值)
+            series1.Color = Color.Blue; //設定線條顏色
+            series1.Font = new Font("新細明體", 10); //設定字型
+            series1.ChartType = SeriesChartType.Line;  // 折線圖
+            //chart6.ChartAreas[0].AxisY.Enabled= AxisEnabled.False; //隱藏Y 軸標示
+            //chart6.ChartAreas[0].AxisY.MajorGrid.Enabled= true;  //隱藏Y軸標線
+            series1.IsValueShownAsLabel = true; //是否把數值顯示在線上
+            //把值加入X 軸Y 軸
+            series1.Points.AddXY("A", number[0]);
+            series1.Points.AddXY("B", number[1]);
+            series1.Points.AddXY("C", number[2]);
+            series1.Points.AddXY("D", number[3]);
+            series1.Points.AddXY("E", number[4]);
+            series1.Points.AddXY("F", number[5]);
+            series1.Points.AddXY("G", number[6]);
+            series1.Points.AddXY("H", number[7]);
+            series1.Points.AddXY("I", number[8]);
+            series1.Points.AddXY("J", number[9]);
+            series1.LegendText = "折線圖";  // 圖例文字
 
-            int len = users.Length;
+            // 將數列新增到chart上
+            chart6.Series.Add(series1);
 
-            for (int index = 0; index < len; index++)
+            if (draw_mode == 0)
             {
-                series1[index] = new Series(users[index]);
-                series1[index].ChartType = SeriesChartType.Column;  // 直條圖
-                series1[index].Color = colors[index];
-                series1[index].IsValueShownAsLabel = true;
+                //固定邊界
+                richTextBox1.Text += "固定邊界\n";
+                chart6.ChartAreas[0].AxisY.Minimum = 0;//設定Y軸最小值
+                chart6.ChartAreas[0].AxisY.Maximum = 500;//設定Y軸最大值
             }
-
-            for (int index = 0; index < 6; index++)
+            else if (draw_mode == 1)
             {
-                series1[0].Points.AddXY(index, _y[0] - index);
-                series1[1].Points.AddXY(index, _y[1] - index);
-                series1[2].Points.AddXY(index, _y[2] - index);
+                //變動邊界
+                richTextBox1.Text += "變動邊界\n";
+                chart6.ChartAreas[0].AxisY.Minimum = number.Min() - 10;//設定Y軸最小值
+                chart6.ChartAreas[0].AxisY.Maximum = number.Max() + 10;//設定Y軸最大值
             }
-
-            foreach (Series s in series1)
+            else
             {
-                // 將數列新增到chart上
-                chart6.Series.Add(s);
+                richTextBox1.Text += "XXXXXXXXXXXXXXXXXXXXXXX\n";
             }
         }
 
@@ -509,46 +553,22 @@ namespace vcs_Chart3
 
         void draw_chart7()
         {
-            string title = "直條圖";
-            chart_init(chart7, title);
+            string title = "點狀圖";
+            // NG chart_init(chart7, title);
 
-            // 設定數列1 的 大小與外觀
-            Series[] series1 = null;
-            double[] _y = new double[] { 100, 57, 93, 26, 77, 88 };
-            Color[] _colors = new Color[] { Color.Peru, Color.PowderBlue, Color.RosyBrown, Color.Salmon, Color.Sienna, Color.SlateBlue };
-            String[] _users = new String[] { "小王", "小風", "小明", "小姿", "小玉", "小蟹" };
+            string[] xx = { "一月", "二月", "三月", "四月", "五月", "六月", "七月" };
+            int[] yy = { 25, 18, 30, 24, 35, 50, 40 };
+            // NG Series objSeries = chart7.Series.Add("月溫度​℃");
+            var objSeries = chart7.Series.First();
+            chart7.Series[0].ChartType = SeriesChartType.Point;  // 點狀圖
+            objSeries.Points.DataBindXY(xx, yy);  // xx, yy 皆為一維陣列
 
-            int _length = _y.Length;
-            series1 = new Series[_length];
-            for (int index = 0; index < _length; index++)
-            {
-                series1[index] = new Series();
-                series1[index].Color = _colors[index];
-                series1[index].ChartType = SeriesChartType.Column;  // 直條圖
-                series1[index].Name = _users[index];
-                series1[index].IsValueShownAsLabel = true;
-                series1[index].Points.Add(_y[index]);
-                // 將數列新增到chart上
-                chart7.Series.Add(series1[index]);
-            }
-
-            /* print data TBD
-            int i;
-            int count = series1.Points.Count;
-            richTextBox1.Text += "共有 " + count.ToString() + " 筆資料\n";
-            for (i = 0; i < count; i++)
-            {
-                richTextBox1.Text += "X[" + i.ToString() + "] = " + series1.Points[i].XValue.ToString() + "\t";
-                richTextBox1.Text += "Y[" + i.ToString() + "] = " + series1.Points[i].YValues[0].ToString() + "\n";
-            }
-            */
-            /*
             //設定邊界
-            chart2.ChartAreas[0].AxisX.Minimum = 0;//設定Y軸最小值
-            chart2.ChartAreas[0].AxisX.Maximum = 8;//設定Y軸最大值
-            chart2.ChartAreas[0].AxisY.Minimum = 0;//設定Y軸最小值
-            chart2.ChartAreas[0].AxisY.Maximum = 120;//設定Y軸最大值
-            */
+            //chart7.ChartAreas[0].AxisX.Minimum = 0;//設定Y軸最小值
+            //chart7.ChartAreas[0].AxisX.Maximum = 8;//設定Y軸最大值
+            chart7.ChartAreas[0].AxisY.Minimum = 0;//設定Y軸最小值
+            chart7.ChartAreas[0].AxisY.Maximum = 60;//設定Y軸最大值
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -564,7 +584,7 @@ namespace vcs_Chart3
 
         private void FillChart()
         {
-            string title = "";
+            string title = "用滑鼠指線 顯示數值";
             chart_init(chart8, title);
 
             var rand = new Random(123);
@@ -651,3 +671,25 @@ namespace vcs_Chart3
 /*  可搬出
 
 */
+
+
+            //設定調色板
+//            chart0.Palette = ChartColorPalette.EarthTones;
+
+
+/*
+
+建立數列 與 加入到 chart, 使用後者
+1.
+建立數列並加入到chart
+Series series1 = chart0.Series.Add("體重1");
+Series series2 = chart0.Series.Add("體重2");
+2.
+建立數列
+Series series1 = new Series("體重", 500);
+加入chart
+chart1.Series.Add(series1);  // 將數列1新增到chart1上
+
+*/
+
+//chart1.ChartAreas.Clear();
