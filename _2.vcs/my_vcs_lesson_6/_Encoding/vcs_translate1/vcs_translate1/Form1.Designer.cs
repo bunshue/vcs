@@ -116,7 +116,7 @@
             this.label1.Size = new System.Drawing.Size(682, 21);
             this.label1.TabIndex = 5;
             this.label1.Text = "Unicode                                               gb2312                     " +
-                "                                  big5";
+    "                                  big5";
             // 
             // button2
             // 
@@ -517,6 +517,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "簡體亂碼轉換";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

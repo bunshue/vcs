@@ -42,9 +42,10 @@
             // 
             // pictureBox_spotlight1
             // 
-            this.pictureBox_spotlight1.Location = new System.Drawing.Point(377, 77);
+            this.pictureBox_spotlight1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_spotlight1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox_spotlight1.Name = "pictureBox_spotlight1";
-            this.pictureBox_spotlight1.Size = new System.Drawing.Size(219, 206);
+            this.pictureBox_spotlight1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox_spotlight1.TabIndex = 0;
             this.pictureBox_spotlight1.TabStop = false;
             this.pictureBox_spotlight1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_spotlight1_Paint);
@@ -53,7 +54,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1061, 769);
+            this.ClientSize = new System.Drawing.Size(1005, 650);
             this.Controls.Add(this.pictureBox_spotlight1);
             this.DoubleBuffered = true;
             this.Name = "Form1";

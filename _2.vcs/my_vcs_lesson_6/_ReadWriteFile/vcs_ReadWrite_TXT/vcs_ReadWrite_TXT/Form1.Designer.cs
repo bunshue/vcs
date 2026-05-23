@@ -404,9 +404,10 @@
             // 
             // bt_clear1
             // 
+            this.bt_clear1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_clear1.Location = new System.Drawing.Point(855, 35);
             this.bt_clear1.Name = "bt_clear1";
-            this.bt_clear1.Size = new System.Drawing.Size(70, 35);
+            this.bt_clear1.Size = new System.Drawing.Size(72, 36);
             this.bt_clear1.TabIndex = 32;
             this.bt_clear1.Text = "Clear";
             this.bt_clear1.UseVisualStyleBackColor = true;

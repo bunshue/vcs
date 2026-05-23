@@ -55,6 +55,8 @@ namespace vcs_ImageProcessing1
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             pictureBox1.Image = Image.FromFile(filename);
         }
 
@@ -65,7 +67,6 @@ namespace vcs_ImageProcessing1
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -76,7 +77,6 @@ namespace vcs_ImageProcessing1
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -114,6 +114,8 @@ namespace vcs_ImageProcessing1
             pictureBox1.Image = Image.FromFile(filename);
             Application.DoEvents();
         }
+
+        //------------------------------------------------------------  # 60個
 
         //各種影像處理速度比較 ST
         private void button0_Click(object sender, EventArgs e)
@@ -843,7 +845,6 @@ namespace vcs_ImageProcessing1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
@@ -851,8 +852,6 @@ namespace vcs_ImageProcessing1
 
 //1515
 //---------------  # 15個
-
-
 
 
 /*

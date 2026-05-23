@@ -6,8 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-using System.Drawing.Imaging;
 using System.IO;
+using System.Drawing.Imaging;
 
 namespace vcs_Warholizer
 {
@@ -17,6 +17,13 @@ namespace vcs_Warholizer
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
 
         // Warholize.
         private void btnGo_Click(object sender, EventArgs e)
@@ -108,9 +115,7 @@ namespace vcs_Warholizer
                 pictureBox2.Image = null;
                 pictureBox2.Left = pictureBox1.Right + margin;
                 pictureBox2.ClientSize = pictureBox1.ClientSize;
-                this.ClientSize = new Size(
-                    pictureBox2.Right + margin,
-                    pictureBox2.Bottom + margin);
+                this.ClientSize = new Size(pictureBox2.Right + margin, pictureBox2.Bottom + margin);
             }
         }
 
@@ -214,3 +219,21 @@ namespace vcs_Warholizer
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+

@@ -101,7 +101,7 @@
             // 
             this.mnuColorsSet2.Name = "mnuColorsSet2";
             this.mnuColorsSet2.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D2)));
-            this.mnuColorsSet2.Size = new System.Drawing.Size(152, 22);
+            this.mnuColorsSet2.Size = new System.Drawing.Size(144, 22);
             this.mnuColorsSet2.Text = "Set &2";
             this.mnuColorsSet2.Click += new System.EventHandler(this.mnuColorsSet2_Click);
             // 
@@ -119,7 +119,7 @@
             // 
             this.mnuColorsSet1.Name = "mnuColorsSet1";
             this.mnuColorsSet1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D1)));
-            this.mnuColorsSet1.Size = new System.Drawing.Size(152, 22);
+            this.mnuColorsSet1.Size = new System.Drawing.Size(144, 22);
             this.mnuColorsSet1.Text = "Set &1";
             this.mnuColorsSet1.Click += new System.EventHandler(this.mnuColorsSet1_Click);
             // 
@@ -148,7 +148,7 @@
             // 
             this.mnuColorsSet3.Name = "mnuColorsSet3";
             this.mnuColorsSet3.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D3)));
-            this.mnuColorsSet3.Size = new System.Drawing.Size(152, 22);
+            this.mnuColorsSet3.Size = new System.Drawing.Size(144, 22);
             this.mnuColorsSet3.Text = "Set &3";
             this.mnuColorsSet3.Click += new System.EventHandler(this.mnuColorsSet3_Click);
             // 
@@ -156,7 +156,7 @@
             // 
             this.mnuColorsSet4.Name = "mnuColorsSet4";
             this.mnuColorsSet4.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D4)));
-            this.mnuColorsSet4.Size = new System.Drawing.Size(152, 22);
+            this.mnuColorsSet4.Size = new System.Drawing.Size(144, 22);
             this.mnuColorsSet4.Text = "Set &4";
             this.mnuColorsSet4.Click += new System.EventHandler(this.mnuColorsSet4_Click);
             // 
@@ -350,6 +350,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Name = "Form1";
             this.Text = "vcs_Warholizer";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picToColor4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picToColor3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picToColor2)).EndInit();

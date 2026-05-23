@@ -31,9 +31,11 @@ namespace vcs_ImageProcessing3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            reset_pictureBox();
-
             show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
+            reset_pictureBox();
         }
 
         void reset_pictureBox()
@@ -219,6 +221,8 @@ namespace vcs_ImageProcessing3
         {
             reset_pictureBox();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void bt_edge_detection0_Click(object sender, EventArgs e)
         {
@@ -3091,3 +3095,21 @@ namespace vcs_ImageProcessing3
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Drawing2D; //for DashStyle
+using System.Drawing.Drawing2D;  // for DashStyle
 
 namespace vcs_DrawD_Map
 {
@@ -72,13 +72,33 @@ namespace vcs_DrawD_Map
 
         void show_item_location()
         {
-            this.Size = new Size(pictureBox1.Image.Size.Width + 200, pictureBox1.Image.Size.Height + 50);
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+
             button1.Location = new Point(pictureBox1.Image.Width + 20, 10);
             button2.Location = new Point(pictureBox1.Image.Width + 20 + 80, 10);
 
-            richTextBox1.Location = new Point(pictureBox1.Image.Width + 20, 60);
-            richTextBox1.Size = new Size(150, pictureBox1.Size.Height - 60);
+            richTextBox1.Size = new Size(150, 690);
+            richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 1);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1673, 950);
+            this.Text = "vcs_DrawD_Map";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -223,4 +243,21 @@ namespace vcs_DrawD_Map
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
 

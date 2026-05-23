@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Drawing.Drawing2D;
 
 namespace vcs_Spotlight1
@@ -29,6 +30,7 @@ namespace vcs_Spotlight1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.Size = new Size(900, 700);
             this.pictureBox_spotlight1.ClientSize = new Size(600, 600);
 
             bitmap1 = new Bitmap(filename1);
@@ -73,7 +75,24 @@ namespace vcs_Spotlight1
             GraphicsPath gp2 = new GraphicsPath();
             gp2.AddPolygon(pArr2a);
             e.Graphics.FillPath(brush2a, gp2);
-
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+

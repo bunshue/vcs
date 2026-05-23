@@ -26,16 +26,11 @@ namespace vcs_Draw_Histogram
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 200 + 5;
-            dy = 60 + 5;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
 
             //richTextBox1.Size = new Size(790, 295);
             //richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 7 + 60);
@@ -53,6 +48,8 @@ namespace vcs_Draw_Histogram
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -163,7 +160,6 @@ namespace vcs_Draw_Histogram
             //richTextBox1.Text += "y_st = " + y_st.ToString() + "\n";
 
             //先考慮滿框狀態
-
 
             // Make a Bitmap.
             Bitmap bitmap1 = new Bitmap(W, H);
@@ -356,3 +352,22 @@ namespace vcs_Draw_Histogram
         //原本範例 SP
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+
+

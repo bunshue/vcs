@@ -36,6 +36,7 @@ namespace vcs_Spotlight2
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.Size = new Size(900, 700);
             this.pictureBox_spotlight2.ClientSize = new Size(600, 600);
 
             mp1 = new Point(450, 600);
@@ -86,9 +87,7 @@ namespace vcs_Spotlight2
 
             e.Graphics.FillEllipse(Brushes.Red, mp1.X - 10, mp1.Y - 10, 20, 20);
             e.Graphics.FillEllipse(Brushes.Red, mp2.X - 10, mp2.Y - 10, 20, 20);
-
         }
-
 
         private void pictureBox_spotlight2_MouseDown(object sender, MouseEventArgs e)
         {
@@ -108,7 +107,6 @@ namespace vcs_Spotlight2
                 dx2 = e.X - mp2.X;
                 dy2 = e.Y - mp2.Y;
             }
-
         }
 
         private void pictureBox_spotlight2_MouseMove(object sender, MouseEventArgs e)
@@ -131,7 +129,24 @@ namespace vcs_Spotlight2
             Selected1 = false;
             Selected2 = false;
         }
-
-
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+
+

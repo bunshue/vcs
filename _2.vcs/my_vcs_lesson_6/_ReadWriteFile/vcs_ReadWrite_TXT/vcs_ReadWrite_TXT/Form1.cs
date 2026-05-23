@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;    //for File
+using System.IO;  // for File
 using System.Text.RegularExpressions;
 
 namespace vcs_ReadWrite_TXT
@@ -95,6 +95,8 @@ namespace vcs_ReadWrite_TXT
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -1660,15 +1662,10 @@ namespace vcs_ReadWrite_TXT
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-//richTextBox1.Text += "------------------------------\n";  // 30個
-//richTextBox1.Text += "---------------\n";  // 15個
-
-
-//6060
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
 //1515
@@ -1677,32 +1674,25 @@ namespace vcs_ReadWrite_TXT
 
 /*  可搬出
 
+*/
 
+/*
                 string[] strArray = line.Split('\t');
                 for (int i = 0; i < strArray.Length; i++)
                 {
                     richTextBox1.Text += strArray[i] + "\n";
                 }
-
-
 */
-
-
 
 /*
 StreamReader sr 的方法
 sr.ReadLine()   // 讀出一行
 sr.ReadToEnd()  //讀取所有文字內容
-
-
 */
-
 
 //創建一個讀取器
 
 //琵琶 filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\琵琶行.txt";
-
-
 /*
             string filename = @"D:\_git\vcs\_1.data\______test_files1\my_2d_array.txt";
             String line;
@@ -1720,8 +1710,6 @@ sr.ReadToEnd()  //讀取所有文字內容
             }
             sr.Close();
 
-
-
             string filename = "tmp_my_2d_array_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
             StreamWriter sw = File.CreateText(filename);
 
@@ -1738,8 +1726,7 @@ sr.ReadToEnd()  //讀取所有文字內容
             sw.Close();
             richTextBox1.Text += "存檔檔名: " + filename + "\n";
 
-richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
 
             int len = richTextBox1.Lines.Length;
             //richTextBox1.Text += "lines = " + len.ToString() + "\n";
@@ -1748,12 +1735,7 @@ richTextBox1.Text += "----------------------------------------------------------
                 //richTextBox1.Text += "i = " + i.ToString() + " : " + richTextBox1.Lines[i] + "\n";
                 sw.WriteLine(richTextBox1.Lines[i]); // 寫入一行
             }
-
-
 */
-
-
-
 
 
 /*

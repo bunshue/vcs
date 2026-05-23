@@ -46,7 +46,6 @@
             this.button18 = new System.Windows.Forms.Button();
             this.bt_info = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
-            this.bt_exit = new System.Windows.Forms.Button();
             this.bt_save = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
@@ -77,6 +76,7 @@
             // 
             // richTextBox1
             // 
+            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox1.Location = new System.Drawing.Point(168, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
@@ -250,24 +250,14 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(195, 33);
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(183, 33);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(61, 35);
+            this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 25;
             this.bt_clear.Text = "clear";
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
-            // 
-            // bt_exit
-            // 
-            this.bt_exit.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_exit.Location = new System.Drawing.Point(962, 273);
-            this.bt_exit.Name = "bt_exit";
-            this.bt_exit.Size = new System.Drawing.Size(50, 50);
-            this.bt_exit.TabIndex = 27;
-            this.bt_exit.UseVisualStyleBackColor = true;
-            this.bt_exit.Click += new System.EventHandler(this.bt_exit_Click);
             // 
             // bt_save
             // 
@@ -440,7 +430,6 @@
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.bt_exit);
             this.Controls.Add(this.bt_save);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.bt_info);
@@ -488,7 +477,6 @@
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button bt_info;
         private System.Windows.Forms.Button bt_clear;
-        private System.Windows.Forms.Button bt_exit;
         private System.Windows.Forms.Button bt_save;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button0;

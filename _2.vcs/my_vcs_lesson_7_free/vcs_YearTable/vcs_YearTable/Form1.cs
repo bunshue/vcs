@@ -54,6 +54,10 @@ namespace vcs_YearTable
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             p = new Pen(Color.Red, 3);
             sb = new SolidBrush(Color.Red);
@@ -64,8 +68,6 @@ namespace vcs_YearTable
 
             this.Location = new Point(0, 0);
             this.BackColor = Color.Pink;
-
-            show_item_location();
         }
 
         void show_item_location()
@@ -113,34 +115,16 @@ namespace vcs_YearTable
             bt_info.Location = new Point(x_st + dx * 7, y_st + dy * 2);
             bt_save.Location = new Point(x_st + dx * 8, y_st + dy * 2);
 
-            richTextBox1.Location = new Point(x_st + dx * 10, y_st + dy * 0);
             richTextBox1.Size = new Size(700, 170);
-
-            //控件位置
+            richTextBox1.Location = new Point(x_st + dx * 10, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
-
-            bt_exit.Size = new Size(w, h);
-            bt_exit.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            g.DrawLine(p, 0, 0, w - 1, h - 1);
-            g.DrawLine(p, w - 1, 0, 0, h - 1);
-            bt_exit.Image = bmp;
-
-            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
-            bt_exit.BringToFront();     //移到最上層
 
             panel1.Location = new Point(0, 0);
             panel1.Size = new Size(1920 - 50, 800);
             pictureBox1.Location = new Point(20, 20);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private class eraNameList
         {
@@ -151,7 +135,6 @@ namespace vcs_YearTable
         }
 
         List<eraNameList> eraName = new List<eraNameList>();
-
 
         void load_eraData()
         {
@@ -1670,3 +1653,20 @@ namespace vcs_YearTable
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+

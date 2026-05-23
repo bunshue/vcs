@@ -28,6 +28,8 @@ namespace vcs_ImageProcessing5
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             Bitmap bitmap1 = new Bitmap(filename);
             pictureBox1.Image = bitmap1;
         }
@@ -38,8 +40,7 @@ namespace vcs_ImageProcessing5
             int x_st = 10;
             int y_st = 10;
             int dx = 200 + 10;
-            int dy = 60 + 10;
-            
+            int dy = 60 + 10;            
             btnEmboss1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             btnEmboss2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             btnEmboss3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -110,6 +111,8 @@ namespace vcs_ImageProcessing5
             Bitmap bitmap1 = new Bitmap(filename);
             pictureBox1.Image = bitmap1;
         }
+
+        //------------------------------------------------------------  # 60個
 
         // Apply a filter.
         private void ApplyFilter(Bitmap32.Filter filter)
@@ -722,3 +725,21 @@ namespace vcs_ImageProcessing5
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+

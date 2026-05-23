@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Runtime.InteropServices;   //for DllImport
-using System.IO;                        //for FileAccess, File
+using System.IO;  // for FileAccess, File
+using System.Runtime.InteropServices;  // for DllImport
 
 namespace vcs_translate1
 {
@@ -18,6 +18,29 @@ namespace vcs_translate1
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+
+            this.Size = new Size(1500, 980);
+            this.Text = "簡體亂碼轉換";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private string Big5toGB2312(string strBig5)
         {
@@ -846,10 +869,25 @@ namespace vcs_translate1
             richTextBox7.Text += "Unicode (UTF-8)解碼\t\t\t";
             str = Encoding.GetEncoding("utf-8").GetString(byteArray);	//指名使用Unicode (UTF-8)解碼, 把拜列轉成字串
             richTextBox7.Text += str + "\n";
-
         }
-
-
-
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+
+

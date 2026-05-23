@@ -49,6 +49,8 @@ namespace vcs_ImageProcessing6
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             pictureBox0.Image = Image.FromFile(filename);
             pictureBox1.Image = Image.FromFile(filename);
             pictureBox2.Image = Image.FromFile(filename);
@@ -162,6 +164,8 @@ namespace vcs_ImageProcessing6
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         // Return a Rectangle with these points as corners.
         private Rectangle MakeRectangle(int x0, int y0, int x1, int y1)
@@ -479,3 +483,21 @@ namespace vcs_ImageProcessing6
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+

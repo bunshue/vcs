@@ -97,6 +97,11 @@ namespace vcs_translate_TCSC
             bt_copy_sc.Location = new Point(richTextBox_sc.Location.X + richTextBox_sc.Size.Width - bt_clear_sc.Size.Width - bt_copy_sc.Size.Width, richTextBox_sc.Location.Y + richTextBox_sc.Size.Height - bt_copy_sc.Size.Height);
 
             this.ClientSize = new Size(border + W + dx + W + border, border + H + border);
+            this.Text = "正中簡中轉換程式";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_tc_sc_Click(object sender, EventArgs e)
@@ -138,3 +143,22 @@ namespace vcs_translate_TCSC
         }
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+

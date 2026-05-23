@@ -40,22 +40,18 @@ namespace vcs_System1
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             CheckForIllegalCrossThreadCalls = false;
         }
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 200 + 10;
-            dy = 60 + 10;
-
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -66,7 +62,6 @@ namespace vcs_System1
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -77,7 +72,6 @@ namespace vcs_System1
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-
             button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
@@ -88,7 +82,6 @@ namespace vcs_System1
             button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-
             button30.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
             button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
@@ -99,7 +92,6 @@ namespace vcs_System1
             button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
             button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
             button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
-
             button40.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             button41.Location = new Point(x_st + dx * 4, y_st + dy * 1);
             button42.Location = new Point(x_st + dx * 4, y_st + dy * 2);
@@ -130,6 +122,8 @@ namespace vcs_System1
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         //關閉程式時，系統會問是否確認，只需要加下面這段就好 ST
         protected override void WndProc(ref Message m)
@@ -567,9 +561,6 @@ namespace vcs_System1
             richTextBox1.Text += "lpMinimumApplicationAddress" + cpuInfo.lpMinimumApplicationAddress + "\n";
             richTextBox1.Text += "CPU類型：" + cpuInfo.dwProcessorType + "\n";
 
-
-            return;
-
             MemoryInfo memoryInfo = systemInfo.GetMemoryInfo();
 
             richTextBox1.Text += "可用交換文件大小：" + memoryInfo.dwAvailPageFile + "\n";
@@ -618,7 +609,6 @@ namespace vcs_System1
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //讀取組件資訊
             // 讀取組件資訊
             // 專案/右鍵/屬性/應用程式/組件資訊/
 
@@ -715,9 +705,6 @@ namespace vcs_System1
 
             //------------------------------------------------------------  # 60個
 
-
-            //------------------------------------------------------------  # 60個
-
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -738,9 +725,13 @@ namespace vcs_System1
             // Check the status of the firewall.
 
             if (FWManager.LocalPolicy.CurrentProfile.FirewallEnabled == true)
+            {
                 richTextBox1.Text += "防火牆已開啟\n";
+            }
             else
+            {
                 richTextBox1.Text += "防火牆未開啟\n";
+            }
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -910,8 +901,8 @@ namespace vcs_System1
             int a = 123;
             int b = 456;
 
-            System.Diagnostics.Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！" + a.ToString());
-            System.Diagnostics.Debug.WriteLine("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！" + b.ToString());
+            Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！" + a.ToString());
+            Debug.WriteLine("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！" + b.ToString());
 
             Debug.Print("aaaaaaaaaaaaaaaaaaaaaaaaaa無換行符號1");
             Debug.Print("aaaaaaaaaaaaaaaaaaaaaaaaaa無換行符號2");
@@ -981,16 +972,16 @@ namespace vcs_System1
         private void button30_Click(object sender, EventArgs e)
         {
             //打開控制面板中的程序_桌面設定
-            System.Diagnostics.Process.Start("desk.cpl");
+            Process.Start("desk.cpl");
 
             //打開控制面板中的程序_滑鼠游標設定
-            System.Diagnostics.Process.Start("main.cpl");
+            Process.Start("main.cpl");
 
             //打開控制面板中的程序_網路連接
-            System.Diagnostics.Process.Start("ncpa.cpl");
+            Process.Start("ncpa.cpl");
 
             //打開控制面板中的程序_聲音設定
-            System.Diagnostics.Process.Start("mmsys.cpl");
+            Process.Start("mmsys.cpl");
         }
 
         //光碟機開關 ST
@@ -1141,8 +1132,6 @@ namespace vcs_System1
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
             richTextBox1.Text += "讀取電源狀態\n";
 
-
-
             PowerStatus status = SystemInformation.PowerStatus;
             float percent = status.BatteryLifePercent;
 
@@ -1195,8 +1184,6 @@ namespace vcs_System1
             {
                 richTextBox1.Text += "Life Remaining (sec):\t" + status.BatteryLifeRemaining.ToString() + "\n";
             }
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
         }
 
         private void button41_Click(object sender, EventArgs e)
@@ -1223,7 +1210,6 @@ namespace vcs_System1
             }
             return sqlFlag;
         }
-
 
         private void button42_Click(object sender, EventArgs e)
         {
@@ -1264,7 +1250,6 @@ namespace vcs_System1
                 //Application.DoEvents()的作用：处理当前在消息队列中的所有 Windows 消息。
                 //加Application.DoEvents可以防止界面停止响应
             }
-
         }
 
         private void button44_Click(object sender, EventArgs e)
@@ -1374,6 +1359,8 @@ namespace vcs_System1
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         [DllImport("User32")]
         internal extern static bool GetCursorPos(out MousePoint point);
 
@@ -1450,10 +1437,7 @@ namespace vcs_System1
         //#endregion
     }
 
-
-    //6060
-
-
+    //------------------------------------------------------------  # 60個
 
     /// <summary>
     ///取得計算機的系統信息
@@ -1543,9 +1527,7 @@ namespace vcs_System1
         public ushort wMilliseconds;
     }
 
-
-
-    //6060
+    //------------------------------------------------------------  # 60個
 
     /*
     * LayoutKind.Automatic：為了提高效率允許運行態對類型成員重新排序
@@ -1764,7 +1746,6 @@ namespace vcs_System1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
@@ -1777,4 +1758,5 @@ namespace vcs_System1
 /*  可搬出
 
 */
+
 

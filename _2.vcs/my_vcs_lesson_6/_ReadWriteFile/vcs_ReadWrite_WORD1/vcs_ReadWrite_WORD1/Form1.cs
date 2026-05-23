@@ -41,6 +41,8 @@ namespace vcs_ReadWrite_WORD1
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             // Load the timezone lists.
             // Select the current date.
             dtpDate.Value = DateTime.Now;
@@ -59,17 +61,11 @@ namespace vcs_ReadWrite_WORD1
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 200 + 5;
-            dy = 60 + 5;
-
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
             button0.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 2);
@@ -80,7 +76,6 @@ namespace vcs_ReadWrite_WORD1
             button7.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 9);
-
             button10.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 1);
             button12.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 2);
@@ -91,7 +86,6 @@ namespace vcs_ReadWrite_WORD1
             button17.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new System.Drawing.Point(x_st + dx * 1, y_st + dy * 9);
-
             button20.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 0);
             button21.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 1);
             button22.Location = new System.Drawing.Point(x_st + dx * 2, y_st + dy * 2);
@@ -124,6 +118,8 @@ namespace vcs_ReadWrite_WORD1
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         // Select an item containing the target string.
         private void SelectItemContaining(ComboBox cbo, string target)
@@ -757,6 +753,25 @@ namespace vcs_ReadWrite_WORD1
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+
+
 
 /*
                 //保存Word文件

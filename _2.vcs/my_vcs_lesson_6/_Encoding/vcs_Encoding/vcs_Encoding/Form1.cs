@@ -20,6 +20,8 @@ namespace vcs_Encoding
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             Get_Unicode();
         }
 
@@ -30,7 +32,6 @@ namespace vcs_Encoding
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -74,6 +75,8 @@ namespace vcs_Encoding
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -460,7 +463,6 @@ namespace vcs_Encoding
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
@@ -473,6 +475,4 @@ namespace vcs_Encoding
 /*  可搬出
 
 */
-
-
 
