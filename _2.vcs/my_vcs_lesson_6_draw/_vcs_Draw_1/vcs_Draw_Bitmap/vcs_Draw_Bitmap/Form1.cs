@@ -32,6 +32,8 @@ namespace vcs_Draw_Bitmap
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             button7.BackColor = Color.Pink;
 
             p = new Pen(Color.Red, 3);
@@ -54,7 +56,6 @@ namespace vcs_Draw_Bitmap
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -102,6 +103,8 @@ namespace vcs_Draw_Bitmap
             richTextBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void bt_reset_Click(object sender, EventArgs e)
         {
             //指定畫布大小
@@ -138,6 +141,8 @@ namespace vcs_Draw_Bitmap
                 g.DrawLine(Pens.Gray, 0, j, W, j);//水平線
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -744,7 +749,7 @@ namespace vcs_Draw_Bitmap
             */
             richTextBox1.Text += "存檔完成, 檔名：" + filename + "\n";
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
             //把PictureBox/Form上的東西匯出至檔案
             //Control就有一個 DrawToBitmap 的Method可以用
@@ -776,7 +781,7 @@ namespace vcs_Draw_Bitmap
                 richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
             //把PictureBox/Form上的東西匯出至檔案
             //Control就有一個 DrawToBitmap 的Method可以用
@@ -898,15 +903,10 @@ namespace vcs_Draw_Bitmap
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
             Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height, PixelFormat.Format32bppRgb);

@@ -22,6 +22,8 @@ namespace vcs_test_all_02_String
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             show_numbers();
         }
 
@@ -32,7 +34,6 @@ namespace vcs_test_all_02_String
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -43,7 +44,6 @@ namespace vcs_test_all_02_String
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -54,7 +54,6 @@ namespace vcs_test_all_02_String
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-
             button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
@@ -111,6 +110,8 @@ namespace vcs_test_all_02_String
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -1232,7 +1233,6 @@ namespace vcs_test_all_02_String
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
@@ -1271,6 +1271,4 @@ Console.WriteLine("錯誤之處       :{0}", ex.StackTrace);
 var str = $"我的名字叫{"张三"}，我今年{23}岁。";
 Console.WriteLine(str);
 
-
 */
-

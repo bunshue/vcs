@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Drawing2D;     //for HatchBrush, LinearGradientBrush
+using System.Drawing.Drawing2D;  // for HatchBrush, LinearGradientBrush
 
 //使用TextureBrush類繪製圖像
 
@@ -29,12 +29,15 @@ namespace vcs_Draw_Brush
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             //以塗刷新增畫筆, 刮刮樂效果 ST
             image = new Bitmap(filename);
             textureBrush = new TextureBrush(image);
             p = new Pen(textureBrush, 40);
             //以塗刷新增畫筆, 刮刮樂效果 SP
 
+            //------------------------------------------------------------  # 60個
 
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             pen = new Pen(Color.Red, 3);
@@ -160,6 +163,8 @@ namespace vcs_Draw_Brush
             pictureBox1.Image = null;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button0_Click(object sender, EventArgs e)
         {
             draw_TextureBrush();
@@ -233,7 +238,6 @@ namespace vcs_Draw_Brush
             tb = new TextureBrush(bmp, rect);  // 使用的影像
             g.FillEllipse(tb, 320, 20, 400, 200); //塗刷填滿橢圓形區域
             g.DrawEllipse(Pens.Black, 320, 20, 400, 200);  //畫出橢圓形外框
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -769,15 +773,10 @@ namespace vcs_Draw_Brush
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 //Font f = new Font("黑體", 30, FontStyle.Italic);
 //lgb.SetSigmaBellShape(0.5f);

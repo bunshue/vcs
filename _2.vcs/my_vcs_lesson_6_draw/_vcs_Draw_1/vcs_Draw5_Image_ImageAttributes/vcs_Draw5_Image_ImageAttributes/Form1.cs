@@ -108,6 +108,8 @@ namespace vcs_Draw5_Image_ImageAttributes
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             //指定畫布大小
             bitmap1 = new Bitmap(W, H);
             g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
@@ -149,7 +151,7 @@ namespace vcs_Draw5_Image_ImageAttributes
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
+
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -303,6 +305,8 @@ namespace vcs_Draw5_Image_ImageAttributes
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -1589,16 +1593,10 @@ namespace vcs_Draw5_Image_ImageAttributes
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
-//richTextBox1.Text += "---------------\n";  // 15個
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//richTextBox1.Text += "---------------\n";  // 15個
-//---------------  # 15個
 
 /*
             Image tmp = Image.FromFile(filename);

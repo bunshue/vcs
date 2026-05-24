@@ -40,16 +40,18 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
-            this.button16 = new System.Windows.Forms.Button();
-            this.button17 = new System.Windows.Forms.Button();
-            this.button18 = new System.Windows.Forms.Button();
-            this.button19 = new System.Windows.Forms.Button();
+            this.listBox0 = new System.Windows.Forms.ListBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listBox_left = new System.Windows.Forms.ListBox();
+            this.listBox_right = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label0 = new System.Windows.Forms.Label();
+            this.label_right = new System.Windows.Forms.Label();
+            this.label_left = new System.Windows.Forms.Label();
+            this.bt_left = new System.Windows.Forms.Button();
+            this.bt_left_all = new System.Windows.Forms.Button();
+            this.bt_right_all = new System.Windows.Forms.Button();
+            this.bt_right = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button9
@@ -84,10 +86,10 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(453, 553);
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(364, 417);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(66, 40);
+            this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 131;
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
@@ -165,128 +167,152 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(433, 519);
+            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.richTextBox1.Location = new System.Drawing.Point(344, 383);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 122;
             this.richTextBox1.Text = "";
             // 
-            // button10
+            // listBox0
             // 
-            this.button10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button10.Location = new System.Drawing.Point(216, 10);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(200, 60);
-            this.button10.TabIndex = 135;
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
+            this.listBox0.FormattingEnabled = true;
+            this.listBox0.ItemHeight = 12;
+            this.listBox0.Location = new System.Drawing.Point(216, 45);
+            this.listBox0.Name = "listBox0";
+            this.listBox0.Size = new System.Drawing.Size(100, 100);
+            this.listBox0.TabIndex = 135;
             // 
-            // button11
+            // listBox1
             // 
-            this.button11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button11.Location = new System.Drawing.Point(216, 73);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(200, 60);
-            this.button11.TabIndex = 136;
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 12;
+            this.listBox1.Location = new System.Drawing.Point(364, 45);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(100, 100);
+            this.listBox1.TabIndex = 136;
             // 
-            // button12
+            // listBox_left
             // 
-            this.button12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button12.Location = new System.Drawing.Point(216, 134);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(200, 60);
-            this.button12.TabIndex = 137;
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
+            this.listBox_left.FormattingEnabled = true;
+            this.listBox_left.ItemHeight = 12;
+            this.listBox_left.Location = new System.Drawing.Point(218, 217);
+            this.listBox_left.Name = "listBox_left";
+            this.listBox_left.Size = new System.Drawing.Size(100, 100);
+            this.listBox_left.TabIndex = 137;
+            this.listBox_left.SelectedIndexChanged += new System.EventHandler(this.listBox_left_right_SelectedIndexChanged);
             // 
-            // button13
+            // listBox_right
             // 
-            this.button13.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button13.Location = new System.Drawing.Point(216, 195);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(200, 60);
-            this.button13.TabIndex = 138;
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
+            this.listBox_right.FormattingEnabled = true;
+            this.listBox_right.ItemHeight = 12;
+            this.listBox_right.Location = new System.Drawing.Point(344, 217);
+            this.listBox_right.Name = "listBox_right";
+            this.listBox_right.Size = new System.Drawing.Size(100, 100);
+            this.listBox_right.TabIndex = 138;
+            this.listBox_right.SelectedIndexChanged += new System.EventHandler(this.listBox_left_right_SelectedIndexChanged);
             // 
-            // button14
+            // label1
             // 
-            this.button14.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button14.Location = new System.Drawing.Point(216, 256);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(200, 60);
-            this.button14.TabIndex = 139;
-            this.button14.UseVisualStyleBackColor = true;
-            this.button14.Click += new System.EventHandler(this.button14_Click);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Location = new System.Drawing.Point(360, 10);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(58, 21);
+            this.label1.TabIndex = 140;
+            this.label1.Text = "label1";
             // 
-            // button15
+            // label0
             // 
-            this.button15.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button15.Location = new System.Drawing.Point(216, 316);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(200, 60);
-            this.button15.TabIndex = 140;
-            this.button15.UseVisualStyleBackColor = true;
-            this.button15.Click += new System.EventHandler(this.button15_Click);
+            this.label0.AutoSize = true;
+            this.label0.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label0.Location = new System.Drawing.Point(220, 10);
+            this.label0.Name = "label0";
+            this.label0.Size = new System.Drawing.Size(58, 21);
+            this.label0.TabIndex = 139;
+            this.label0.Text = "label0";
             // 
-            // button16
+            // label_right
             // 
-            this.button16.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button16.Location = new System.Drawing.Point(216, 377);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(200, 60);
-            this.button16.TabIndex = 141;
-            this.button16.UseVisualStyleBackColor = true;
-            this.button16.Click += new System.EventHandler(this.button16_Click);
+            this.label_right.AutoSize = true;
+            this.label_right.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label_right.Location = new System.Drawing.Point(340, 185);
+            this.label_right.Name = "label_right";
+            this.label_right.Size = new System.Drawing.Size(58, 21);
+            this.label_right.TabIndex = 142;
+            this.label_right.Text = "label2";
             // 
-            // button17
+            // label_left
             // 
-            this.button17.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button17.Location = new System.Drawing.Point(216, 437);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(200, 60);
-            this.button17.TabIndex = 142;
-            this.button17.UseVisualStyleBackColor = true;
-            this.button17.Click += new System.EventHandler(this.button17_Click);
+            this.label_left.AutoSize = true;
+            this.label_left.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label_left.Location = new System.Drawing.Point(220, 185);
+            this.label_left.Name = "label_left";
+            this.label_left.Size = new System.Drawing.Size(58, 21);
+            this.label_left.TabIndex = 141;
+            this.label_left.Text = "label3";
             // 
-            // button18
+            // bt_left
             // 
-            this.button18.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button18.Location = new System.Drawing.Point(216, 498);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(200, 60);
-            this.button18.TabIndex = 143;
-            this.button18.UseVisualStyleBackColor = true;
-            this.button18.Click += new System.EventHandler(this.button18_Click);
+            this.bt_left.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_left.Location = new System.Drawing.Point(218, 446);
+            this.bt_left.Name = "bt_left";
+            this.bt_left.Size = new System.Drawing.Size(60, 35);
+            this.bt_left.TabIndex = 146;
+            this.bt_left.Text = "<";
+            this.bt_left.UseVisualStyleBackColor = true;
+            this.bt_left.Click += new System.EventHandler(this.bt_left_Click);
             // 
-            // button19
+            // bt_left_all
             // 
-            this.button19.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button19.Location = new System.Drawing.Point(216, 559);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(200, 60);
-            this.button19.TabIndex = 144;
-            this.button19.UseVisualStyleBackColor = true;
-            this.button19.Click += new System.EventHandler(this.button19_Click);
+            this.bt_left_all.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_left_all.Location = new System.Drawing.Point(218, 405);
+            this.bt_left_all.Name = "bt_left_all";
+            this.bt_left_all.Size = new System.Drawing.Size(60, 35);
+            this.bt_left_all.TabIndex = 145;
+            this.bt_left_all.Text = "<<";
+            this.bt_left_all.UseVisualStyleBackColor = true;
+            this.bt_left_all.Click += new System.EventHandler(this.bt_left_all_Click);
+            // 
+            // bt_right_all
+            // 
+            this.bt_right_all.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_right_all.Location = new System.Drawing.Point(218, 364);
+            this.bt_right_all.Name = "bt_right_all";
+            this.bt_right_all.Size = new System.Drawing.Size(60, 35);
+            this.bt_right_all.TabIndex = 144;
+            this.bt_right_all.Text = ">>";
+            this.bt_right_all.UseVisualStyleBackColor = true;
+            this.bt_right_all.Click += new System.EventHandler(this.bt_right_all_Click);
+            // 
+            // bt_right
+            // 
+            this.bt_right.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_right.Location = new System.Drawing.Point(218, 323);
+            this.bt_right.Name = "bt_right";
+            this.bt_right.Size = new System.Drawing.Size(60, 35);
+            this.bt_right.TabIndex = 143;
+            this.bt_right.Text = ">";
+            this.bt_right.UseVisualStyleBackColor = true;
+            this.bt_right.Click += new System.EventHandler(this.bt_right_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(771, 642);
-            this.Controls.Add(this.button19);
-            this.Controls.Add(this.button18);
-            this.Controls.Add(this.button17);
-            this.Controls.Add(this.button16);
-            this.Controls.Add(this.button15);
-            this.Controls.Add(this.button14);
-            this.Controls.Add(this.button13);
-            this.Controls.Add(this.button12);
-            this.Controls.Add(this.button11);
-            this.Controls.Add(this.button10);
+            this.ClientSize = new System.Drawing.Size(589, 631);
+            this.Controls.Add(this.bt_left);
+            this.Controls.Add(this.bt_left_all);
+            this.Controls.Add(this.bt_right_all);
+            this.Controls.Add(this.bt_right);
+            this.Controls.Add(this.label_right);
+            this.Controls.Add(this.label_left);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label0);
+            this.Controls.Add(this.listBox_right);
+            this.Controls.Add(this.listBox_left);
+            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.listBox0);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
@@ -303,6 +329,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -320,16 +347,18 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.Button button14;
-        private System.Windows.Forms.Button button15;
-        private System.Windows.Forms.Button button16;
-        private System.Windows.Forms.Button button17;
-        private System.Windows.Forms.Button button18;
-        private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.ListBox listBox0;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listBox_left;
+        private System.Windows.Forms.ListBox listBox_right;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label0;
+        private System.Windows.Forms.Label label_right;
+        private System.Windows.Forms.Label label_left;
+        private System.Windows.Forms.Button bt_left;
+        private System.Windows.Forms.Button bt_left_all;
+        private System.Windows.Forms.Button bt_right_all;
+        private System.Windows.Forms.Button bt_right;
     }
 }
 

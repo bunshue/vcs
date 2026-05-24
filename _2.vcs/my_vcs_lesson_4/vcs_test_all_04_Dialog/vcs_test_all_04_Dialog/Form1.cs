@@ -32,6 +32,8 @@ namespace vcs_test_all_04_Dialog
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             old_font_name = label1.Font.FontFamily;
 
             label1.Text = "春雁	王恭\n春风一夜到衡阳，楚水燕山万里长。\n莫道春来便归去，江南虽好是他乡。";
@@ -65,7 +67,7 @@ namespace vcs_test_all_04_Dialog
             // Make the background dialog open with the custom colors displayed.
             colorDialog_backcolor.FullOpen = true;
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
             // Make the PictureBox the right size.
             pictureBox1.ClientSize =
@@ -235,6 +237,8 @@ namespace vcs_test_all_04_Dialog
             richTextBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button00_Click(object sender, EventArgs e)
         {
             //選取資料夾
@@ -277,7 +281,6 @@ namespace vcs_test_all_04_Dialog
                 //取得瀏覽資料夾對話方塊所選取的路徑
                 string folderName = folderBrowserDialog1.SelectedPath;
             }
-
         }
 
         private void button02_Click(object sender, EventArgs e)
@@ -380,9 +383,7 @@ namespace vcs_test_all_04_Dialog
             else
             {
                 richTextBox1.Text += "未選取檔案\n";
-
             }
-
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -759,7 +760,6 @@ namespace vcs_test_all_04_Dialog
             {
                 richTextBox1.Text = "未選取資料夾\n";
             }
-
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -804,7 +804,9 @@ namespace vcs_test_all_04_Dialog
             float old_font_size = label1.Font.Size;
             old_font_size -= 4;
             if (old_font_size < 10)
+            {
                 old_font_size = 10;
+            }
 
             //實例化字體
             Font f = new Font(old_font_name, old_font_size);
@@ -865,15 +867,10 @@ namespace vcs_test_all_04_Dialog
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 
@@ -903,10 +900,7 @@ richTextBox1.Text += "----------------------------------------------------------
             {
                 richTextBox1.Text += "未選取檔案\n";
             }
-
-
 另外
-
             OpenFileDialog P_OpenFileDialog = new OpenFileDialog();
             if (P_OpenFileDialog.ShowDialog() == DialogResult.OK)
             {

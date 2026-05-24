@@ -89,6 +89,7 @@
             // 
             // richTextBox1
             // 
+            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox1.Location = new System.Drawing.Point(117, 210);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
@@ -415,6 +416,7 @@
             // 
             // panel1
             // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Location = new System.Drawing.Point(117, 104);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(100, 100);
@@ -445,9 +447,9 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(144, 268);
+            this.bt_clear.Location = new System.Drawing.Point(135, 251);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(60, 30);
+            this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 49;
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
@@ -498,6 +500,7 @@
             // 
             // pictureBox_uac
             // 
+            this.pictureBox_uac.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_uac.Location = new System.Drawing.Point(12, 114);
             this.pictureBox_uac.Name = "pictureBox_uac";
             this.pictureBox_uac.Size = new System.Drawing.Size(90, 90);
@@ -624,7 +627,7 @@
             // pictureBox_count
             // 
             this.pictureBox_count.BackColor = System.Drawing.Color.LightPink;
-            this.pictureBox_count.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox_count.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_count.Location = new System.Drawing.Point(117, 8);
             this.pictureBox_count.Name = "pictureBox_count";
             this.pictureBox_count.Size = new System.Drawing.Size(100, 100);

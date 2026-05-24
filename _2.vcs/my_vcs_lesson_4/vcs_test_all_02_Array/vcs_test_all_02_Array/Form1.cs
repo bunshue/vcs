@@ -31,7 +31,6 @@ namespace vcs_test_all_02_Array
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -42,7 +41,6 @@ namespace vcs_test_all_02_Array
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -93,6 +91,8 @@ namespace vcs_test_all_02_Array
         {
             richTextBox1.Clear();
         }
+
+        //6060
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -1537,7 +1537,6 @@ namespace vcs_test_all_02_Array
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
@@ -1550,9 +1549,6 @@ namespace vcs_test_all_02_Array
 /*  可搬出
 
 */
-
-
-
 
 /*
 //獲取二維陣列的長度

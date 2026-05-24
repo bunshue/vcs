@@ -33,6 +33,7 @@ namespace vcs_Draw1
             this.ResizeRedraw = true;
 
             show_item_location();
+
             comboBox1.SelectedIndex = 1;
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             p = new Pen(Color.Red, 3);
@@ -2787,15 +2788,10 @@ namespace vcs_Draw1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

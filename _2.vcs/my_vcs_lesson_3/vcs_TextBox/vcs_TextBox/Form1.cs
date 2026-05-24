@@ -23,6 +23,8 @@ namespace vcs_TextBox
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             textBox1.ShortcutsEnabled = false;   // 不啟用快速鍵, 限制 TextBox 上不使用快速鍵與滑鼠右鍵表單
             textBox_use_scrollbar.ScrollBars = ScrollBars.Both;
 
@@ -63,17 +65,11 @@ namespace vcs_TextBox
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 200 + 5;
-            dy = 60 + 5;
-
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
             int W = 300;
             int H = 160;
 
@@ -104,6 +100,8 @@ namespace vcs_TextBox
         {
             richTextBox2.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -154,11 +152,7 @@ namespace vcs_TextBox
             }
         }
 
-
-
-
-
-
+        //------------------------------------------------------------  # 60個
 
         // Make the TextBox fit its new contents.
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -283,7 +277,24 @@ namespace vcs_TextBox
                 i++;
             }
             richTextBox2.Text += "共有 " + i + " 列文字：" + textBox_multiline.Text + "\n";
-
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+

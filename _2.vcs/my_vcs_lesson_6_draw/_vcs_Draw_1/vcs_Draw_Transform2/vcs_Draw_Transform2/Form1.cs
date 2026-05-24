@@ -31,6 +31,8 @@ namespace vcs_Draw_Transform2
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_angry_bird\AB_red.jpg";
             bitmap0 = (Bitmap)Bitmap.FromFile(filename);
         }
@@ -78,6 +80,8 @@ namespace vcs_Draw_Transform2
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void timer0_Tick(object sender, EventArgs e)
         {
@@ -172,15 +176,10 @@ namespace vcs_Draw_Transform2
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

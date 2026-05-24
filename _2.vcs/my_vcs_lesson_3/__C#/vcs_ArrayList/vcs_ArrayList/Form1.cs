@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
-using System.Collections;   //for ArrayList
+using System.Collections;  // for ArrayList
 
 /*
 方案右鍵/屬性/設定
@@ -37,6 +37,8 @@ namespace vcs_ArrayList
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             label1.Text = "共有 " + ArrayListData.Count.ToString() + " 個項目";
 
             richTextBox1.Text += "讀出系統變數至ArrayList\n";
@@ -46,32 +48,22 @@ namespace vcs_ArrayList
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy; ;
-
-            //button
-            x_st = 20;
-            y_st = 30;
-            dx = 130;
-            dy = 80;
-
-            /*
-            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            */
-
-            richTextBox1.Size = new Size(300, 600);
-            richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+            groupBox1.Size = new Size(350, 460);
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            groupBox2.Size = new Size(350, 580);
+            groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            richTextBox1.Size = new Size(300, 690);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
+            //groupbox 裡面
             x_st = 10;
             y_st = 20;
-            dx = 100 + 10;
+            dx = 160 + 10;
             dy = 60 + 10;
             bt_arrayList00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_arrayList01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -90,7 +82,7 @@ namespace vcs_ArrayList
             bt_arrayList14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
             bt_arrayList15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
 
-            this.Size = new Size(1000, 700);
+            this.Size = new Size(1180, 750);
             this.Text = "vcs_ArrayList";
 
             //設定執行後的表單起始位置, 正中央
@@ -102,6 +94,8 @@ namespace vcs_ArrayList
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -437,6 +431,7 @@ namespace vcs_ArrayList
             Console.Read();
         }
 
+        //------------------------------------------------------------  # 60個
 
         // "走訪串列所有元素
         public static void PrintOut(IEnumerable tAryLst)
@@ -534,6 +529,8 @@ namespace vcs_ArrayList
             Console.WriteLine(" ----------------------------------");
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void bt_arrayList11_Click(object sender, EventArgs e)
         {
 
@@ -572,3 +569,21 @@ namespace vcs_ArrayList
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
+
+

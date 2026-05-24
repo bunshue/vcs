@@ -50,10 +50,10 @@
             this.listBox9 = new System.Windows.Forms.ListBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.drawListBox1 = new vcs_ListBox1.DrawListBox();
-            this.drawListBox0 = new vcs_ListBox1.DrawListBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.drawListBox1 = new vcs_ListBox1.DrawListBox();
+            this.drawListBox0 = new vcs_ListBox1.DrawListBox();
             this.SuspendLayout();
             // 
             // listBox1
@@ -94,6 +94,7 @@
             // 
             // richTextBox1
             // 
+            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox1.Location = new System.Drawing.Point(12, 224);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
@@ -102,12 +103,12 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_clear.Location = new System.Drawing.Point(30, 264);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(61, 32);
+            this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 47;
-            this.bt_clear.Text = "clear";
+            this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
@@ -265,6 +266,26 @@
             this.label9.TabIndex = 63;
             this.label9.Text = "label9";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label10.Location = new System.Drawing.Point(432, 229);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(68, 21);
+            this.label10.TabIndex = 66;
+            this.label10.Text = "label10";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label11.Location = new System.Drawing.Point(436, 264);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(68, 21);
+            this.label11.TabIndex = 67;
+            this.label11.Text = "label11";
+            // 
             // drawListBox1
             // 
             this.drawListBox1.Color1 = System.Drawing.Color.CornflowerBlue;
@@ -311,26 +332,6 @@
             this.drawListBox0.Name = "drawListBox0";
             this.drawListBox0.Size = new System.Drawing.Size(100, 95);
             this.drawListBox0.TabIndex = 64;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label10.Location = new System.Drawing.Point(432, 229);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(68, 21);
-            this.label10.TabIndex = 66;
-            this.label10.Text = "label10";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label11.Location = new System.Drawing.Point(436, 264);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(68, 21);
-            this.label11.TabIndex = 67;
-            this.label11.Text = "label11";
             // 
             // Form1
             // 

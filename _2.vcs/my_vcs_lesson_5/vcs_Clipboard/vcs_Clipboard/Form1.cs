@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;                //for Directory
-using System.Drawing.Imaging;   //for ImageFormat
+using System.IO;  // for Directory
+using System.Drawing.Imaging;  // for ImageFormat
 using System.Threading;
 
 namespace vcs_Clipboard
@@ -24,6 +24,8 @@ namespace vcs_Clipboard
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             webBrowser_clipboard.Navigate("about:blank");
             richTextBox1.Text += "\n";
 
@@ -38,7 +40,6 @@ namespace vcs_Clipboard
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -49,7 +50,6 @@ namespace vcs_Clipboard
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -71,6 +71,7 @@ namespace vcs_Clipboard
             int H = 350;
             richTextBox1.Size = new Size(W, H);
             richTextBox1.Location = new Point(x_st + dx * 4 + 50, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             richTextBox2.Size = new Size(W, H);
             richTextBox2.Location = new Point(x_st + dx * 4 + 50, y_st + dy * 6);
 
@@ -86,8 +87,6 @@ namespace vcs_Clipboard
             richTextBoxp_clipboard.Location = new Point(x_st + dx * 6, y_st + dy * 6);
             webBrowser_clipboard.Location = new Point(x_st + dx * 6, y_st + dy * 9);
 
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
             this.Size = new Size(1680, 910);
             this.Text = "vcs_Clipboard";
 
@@ -100,6 +99,8 @@ namespace vcs_Clipboard
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         //檢查剪貼簿內的資料內容 ST
         private void button0_Click(object sender, EventArgs e)
@@ -135,7 +136,7 @@ namespace vcs_Clipboard
                 //pictureBox1.Image = image1;
             }
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
             pictureBox_clipboard.Image = null;
             textBox_clipboard.Clear();
@@ -678,15 +679,10 @@ namespace vcs_Clipboard
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

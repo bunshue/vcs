@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;    //for FileStream
-using System.Drawing.Imaging;   //for PropertyItem
+using System.IO;  // for FileStream
+using System.Drawing.Imaging;  // for PropertyItem
 
 //方案總管/加入/現有項目/選取ExifStuff.cs, 把 namespace 改成 vcs_Exif
 
@@ -25,7 +25,7 @@ namespace vcs_Exif
         {
             show_item_location();
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
             label3.Text = "取得圖片內的方向值,\n自動轉換圖片方向";
 
@@ -70,6 +70,13 @@ namespace vcs_Exif
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
+
         private void button1_Click(object sender, EventArgs e)
         {
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_icon\IMG_20180228_215525.jpg";
@@ -108,11 +115,6 @@ namespace vcs_Exif
             }
             Bitmap bitmap1 = new Bitmap(filename);
             pictureBox1.Image = bitmap1;
-        }
-
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -891,15 +893,10 @@ namespace vcs_Exif
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

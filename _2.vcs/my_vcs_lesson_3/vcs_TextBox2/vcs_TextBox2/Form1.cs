@@ -20,6 +20,8 @@ namespace vcs_TextBox2
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             //設定 TextBox 之 自動完成字串
             //設定自定義來源字串
             AutoCompleteStringCollection source = new AutoCompleteStringCollection();
@@ -137,7 +139,6 @@ namespace vcs_TextBox2
             label3b.Text = "";
             label1.Text = "TextBox只允許僅允許\n數字, Enter, Backspace, +-*/()";
 
-
             x_st = 10;
             y_st = 20;
             dx = 60;
@@ -165,6 +166,8 @@ namespace vcs_TextBox2
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void textBox0_TextChanged(object sender, EventArgs e)
         {
@@ -441,4 +444,21 @@ namespace vcs_TextBox2
         }
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+//1515
+//---------------  # 15個
+
+
+/*  可搬出
+
+*/
 

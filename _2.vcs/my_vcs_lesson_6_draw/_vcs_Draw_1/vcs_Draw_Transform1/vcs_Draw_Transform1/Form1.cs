@@ -57,6 +57,8 @@ namespace vcs_Draw_Transform1
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             reset_pictureBox();
 
             bmp = new Bitmap(filename);
@@ -69,7 +71,6 @@ namespace vcs_Draw_Transform1
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -120,6 +121,8 @@ namespace vcs_Draw_Transform1
             reset_pictureBox();
         }
 
+        //------------------------------------------------------------  # 60個
+
         void reset_pictureBox()
         {
             pictureBox1.Size = new Size(820, 880);
@@ -154,6 +157,8 @@ namespace vcs_Draw_Transform1
             richTextBox1.Text += mtx.Elements[2].ToString() + "\t" + mtx.Elements[3].ToString() + "\n";
             richTextBox1.Text += mtx.Elements[4].ToString() + "\t" + mtx.Elements[5].ToString() + "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         //平移, 旋轉
         private void button0_Click(object sender, EventArgs e)
@@ -1462,15 +1467,10 @@ namespace vcs_Draw_Transform1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

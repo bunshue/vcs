@@ -32,6 +32,8 @@ namespace vcs_ListBox1
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             apply_listBox0();
             apply_listBox1();
             apply_listBox2();
@@ -436,7 +438,6 @@ namespace vcs_ListBox1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
@@ -450,9 +451,7 @@ namespace vcs_ListBox1
 
 */
 
-
 /*
-
             //字串一維陣列
             String[] weekday = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
 
@@ -461,6 +460,5 @@ namespace vcs_ListBox1
             listBox1.Items.Clear();
 
             listBox1.DataSource = weekday;
-
 */
 

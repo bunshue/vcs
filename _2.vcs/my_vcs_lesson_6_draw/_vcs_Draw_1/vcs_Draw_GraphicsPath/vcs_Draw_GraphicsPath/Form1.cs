@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Drawing2D; //for GraphicsPath
+using System.Drawing.Drawing2D;  // for GraphicsPath
 
 /*
 GraphicsPath 圖形路徑
@@ -34,6 +34,8 @@ namespace vcs_Draw_GraphicsPath
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             g = pictureBox1.CreateGraphics();
             g.Clear(SystemColors.ControlLight);
             p = new Pen(Color.Red, 5);     //default pen
@@ -46,7 +48,6 @@ namespace vcs_Draw_GraphicsPath
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -57,7 +58,6 @@ namespace vcs_Draw_GraphicsPath
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -92,6 +92,8 @@ namespace vcs_Draw_GraphicsPath
             richTextBox1.Clear();
             g.Clear(SystemColors.ControlLight);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -412,8 +414,6 @@ namespace vcs_Draw_GraphicsPath
             g.DrawPath(p, gp);  // 繪出GraphicsPath物件
 
             richTextBox1.Text += "------------------------------\n";  // 30個
-
-
         }
 
         //DrawHelper的创建圆角矩形函数
@@ -1040,7 +1040,7 @@ namespace vcs_Draw_GraphicsPath
 
         }
 
-        #region 引用方法:為窗體繪製圓角(新增至窗體Resize事件)
+        //#region 引用方法:為窗體繪製圓角(新增至窗體Resize事件)
         //此方法設定窗體有效區域為圓角矩形
         public void SetWindowRegion()
         {
@@ -1082,7 +1082,7 @@ namespace vcs_Draw_GraphicsPath
         {
             SetWindowRegion();
         }
-        #endregion
+        //#endregion
 
         private void cb_grid_CheckedChanged(object sender, EventArgs e)
         {
@@ -1103,15 +1103,10 @@ namespace vcs_Draw_GraphicsPath
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*
 
@@ -1125,8 +1120,6 @@ namespace vcs_Draw_GraphicsPath
 
 //  Pen penJoin = new Pen(Color.Red, 5);
 //  penJoin.LineJoin = LineJoin.Bevel;//看不出效果
-
-
 
 /*
         //繪製圓角矩形 DrawRoundRetangle
@@ -1145,7 +1138,6 @@ namespace vcs_Draw_GraphicsPath
             roundedRect.CloseFigure();
             return roundedRect;
         }
-
 */
 
 

@@ -88,6 +88,8 @@ namespace vcs_Chart3
             chart6.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             chart7.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             chart8.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            bt_chart6.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_chart6.BringToFront();
 
             richTextBox1.Size = new Size(275, 950);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
@@ -243,7 +245,7 @@ namespace vcs_Chart3
 
             //設定 Legends
             //chart1.Legends["Legends1"].DockedToChartArea = ChartArea1; //顯示在圖表內
-            chart1.Legends["Legends1"].Docking = Docking.Bottom; //自訂顯示位置
+            chart1.Legends["Legends1"].Docking = Docking.Bottom;  // 設定圖例的顯示位置, 預設靠右
             //背景色
             chart1.Legends["Legends1"].BackColor = Color.FromArgb(235, 235, 235);
             //斜線背景
@@ -255,9 +257,9 @@ namespace vcs_Chart3
 
             // 設定數列1 的 大小與外觀
             Series series1 = new Series("體重", 500);  // 初始化數列1(名稱, 最大值)
-            series1.Color = Color.Blue; // 設定線條顏色
-            series1.Font = new Font("新細明體", 10); //設定字型
             series1.ChartType = SeriesChartType.Column;  // 直條圖
+            series1.Color = Color.Blue; // 設定線條顏色
+            series1.Font = new Font("新細明體", 10); //設定字型            
             series1.IsValueShownAsLabel = true;  // 是否把數值顯示在線上
 
             //把值加入X 軸Y 軸
@@ -299,7 +301,7 @@ namespace vcs_Chart3
 
             chart2.Series.Add(series1);  // 將數列1新增到chart2上
 
-            //3030
+            //------------------------------  # 30個
 
             // 設定數列2
             Series series2 = new Series("體重2");  // 初始化數列2
@@ -368,11 +370,13 @@ namespace vcs_Chart3
             //ChartAreas, Series, Legends 基本設定
             if (chart4.Legends.FindByName("Legends2") == null) //如果chart4沒有包含Legends2才將其Add
             {
+                // 設定圖例.Legends
                 chart4.Legends.Add(new Legend("Legends2")); //圖例集合說明
             }
             chart4.ChartAreas.Add("ChartArea2");  // 將圖表區2新增到chart4上
 
             // chart4.Series.Add("Series3");  // 將數列新增到chart上  // 數據序列集合
+            // 設定圖例.Legends
             // chart4.Legends.Add("Legends2");  // 圖例集合
 
             string title = "各區比例";
@@ -388,14 +392,14 @@ namespace vcs_Chart3
             chart4.ChartAreas["ChartArea2"].Area3DStyle.WallWidth = 0; //外牆寬度
             chart4.ChartAreas["ChartArea2"].Area3DStyle.LightStyle = LightStyle.Realistic; //光源
 
-            // 設定Title2
+            // 設定標題2, Title2
             chart4.Titles["Title2"].DockedToChartArea = "ChartArea2"; //設定標題停駐的ChartArea
             chart4.Titles["Title2"].IsDockedInsideChartArea = false; //設定顯示在圖表的內外部
 
             // 設定圖例.Legends
             chart4.Legends["Legends2"].DockedToChartArea = "ChartArea2"; //設定要顯示在哪個圖表
             chart4.Legends["Legends2"].IsDockedInsideChartArea = false; //設定要顯示在圖表的內外部
-            chart4.Legends["Legends2"].Docking = Docking.Left;  // 設定圖例顯示位置, 預設靠右
+            chart4.Legends["Legends2"].Docking = Docking.Left;  // 設定圖例的顯示位置, 預設靠右
             chart4.Legends["Legends2"].BackColor = Color.FromArgb(235, 235, 235);
             chart4.Legends["Legends2"].BackHatchStyle = ChartHatchStyle.DarkDownwardDiagonal;
             chart4.Legends["Legends2"].BorderWidth = 1;
@@ -461,6 +465,8 @@ namespace vcs_Chart3
             chart5.ChartAreas.Add("ChartArea1");  // 將圖表區1新增到chart5上
 
             chart5.Series.Add("Series1");  // 將數列1新增到chart5上
+
+            // 設定圖例.Legends
             chart5.Legends.Add("Legends1");  // 圖例集合
 
             //設定 ChartArea1
@@ -487,13 +493,13 @@ namespace vcs_Chart3
             chart5.ChartAreas["ChartArea1"].Area3DStyle.WallWidth = 0; //外牆寬度
             chart5.ChartAreas["ChartArea1"].Area3DStyle.LightStyle = LightStyle.Realistic; //光源
 
-            // 設定Title1
+            // 設定標題1, Title1
             chart5.Titles["Title1"].DockedToChartArea = "ChartArea1";  // 設定要顯示在哪個圖表
             chart5.Titles["Title1"].IsDockedInsideChartArea = false;  // 設定要顯示在圖表的內外部
 
             // 設定圖例.Legends
             chart5.Legends["Legends1"].DockedToChartArea = "ChartArea1"; //顯示在圖表內
-            chart5.Legends["Legends1"].Docking = Docking.Right;  // 設定圖例顯示位置, 預設靠右
+            chart5.Legends["Legends1"].Docking = Docking.Right;  // 設定圖例的顯示位置, 預設靠右
             chart5.Legends["Legends1"].BackColor = Color.FromArgb(235, 235, 235); //背景色
             chart5.Legends["Legends1"].BackHatchStyle = ChartHatchStyle.DarkDownwardDiagonal;
             chart5.Legends["Legends1"].BorderWidth = 1;
@@ -533,8 +539,6 @@ namespace vcs_Chart3
 
         //------------------------------------------------------------  # 60個
 
-
-
         private double rad(double d)
         {
             return d * Math.PI / 180.0;
@@ -550,88 +554,92 @@ namespace vcs_Chart3
             return Math.Cos(d * Math.PI / 180.0);
         }
 
-        //定義Chart大小與外觀
-        private const int AXIS_X_MIN = 0;
-        private const int AXIS_X_MAX = 360;
-        private const int AXIS_Y_MIN = -200;
-        private const int AXIS_Y_MAX = 200;
-
-        void chart_init2(Chart chart)
-        {
-            chart.Titles.Add("三角函數");  // 標題
-            chart.Size = new Size(500, 400);  // 設定chart大小
-
-            //X軸
-            chart.ChartAreas[0].AxisX.Minimum = AXIS_X_MIN;        //設定X軸最小值
-            chart.ChartAreas[0].AxisX.Maximum = AXIS_X_MAX;        //設定X軸最大值
-            chart.ChartAreas[0].AxisX.Title = "角度";              //設定X軸名稱
-            chart.ChartAreas[0].AxisX.TitleForeColor = Color.Blue; //設定X軸名稱的字體顏色
-            chart.ChartAreas[0].AxisX.Enabled = AxisEnabled.True;  //顯示 或 隱藏 X 軸標示
-            chart.ChartAreas[0].AxisX.MajorGrid.Enabled = true;    //顯示 或 隱藏 X 軸標線
-            chart.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Trebuchet MS", 15, FontStyle.Bold);   //設定X軸刻度的字型
-            chart.ChartAreas[0].AxisX.LabelStyle.Interval = 60;    //設置X軸刻度間隔的大小
-            chart.ChartAreas[0].AxisX.LabelStyle.IntervalType = DateTimeIntervalType.Number;//設置間隔大小的度量單位
-            chart.ChartAreas[0].AxisX.LineColor = Color.White;//設置X軸的線條顏色
-            chart.ChartAreas[0].AxisX.MajorGrid.Interval = 100;//設置主網格線與次要網格線的間隔
-            chart.ChartAreas[0].AxisX.MajorGrid.IntervalType = DateTimeIntervalType.Number;//設置主網格線與次網格線的間隔的度量單位
-            chart.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Snow;//設置網格線的顏色
-            chart.ChartAreas[0].AxisX.MajorTickMark.Interval = 20;//設置刻度線的間隔
-            chart.ChartAreas[0].AxisX.MajorTickMark.IntervalType = DateTimeIntervalType.Number;//設置刻度線的間隔的度量單位
-
-            //Y軸
-            chart.ChartAreas[0].AxisY.Minimum = AXIS_Y_MIN;        //設定Y軸最小值
-            chart.ChartAreas[0].AxisY.Maximum = AXIS_Y_MAX;        //設定Y軸最大值
-            chart.ChartAreas[0].AxisY.Title = "數值";              //設定Y軸名稱
-            chart.ChartAreas[0].AxisY.TitleForeColor = Color.Blue; //設定Y軸名稱的字體顏色
-            chart.ChartAreas[0].AxisY.Enabled = AxisEnabled.True;  //顯示 或 隱藏 Y 軸標示
-            chart.ChartAreas[0].AxisY.MajorGrid.Enabled = true;    //顯示 或 隱藏 Y 軸標線
-
-            chart.ChartAreas[0].AxisY.LabelStyle.Font = new Font("Trebuchet MS", 8.25F, FontStyle.Bold);//設置Y軸左側的提示信息的字體屬性
-            chart.ChartAreas[0].AxisY.LineColor = Color.DarkBlue;//設置軸的線條顏色
-            chart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.White;//設置網格線顏色
-
-            // 圖表樣式
-            chart.BackGradientStyle = GradientStyle.TopBottom;//指定圖表元素的漸變樣式(中心向外，從左到右，從上到下等等)
-            chart.BackSecondaryColor = Color.Yellow;//設置背景的輔助顏色
-            chart.BorderlineColor = Color.Yellow;//設置圖像邊框的顏色
-            chart.BorderlineDashStyle = ChartDashStyle.Solid;//設置圖像邊框線的樣式(實線、虛線、點線)
-            chart.BorderlineWidth = 2;//設置圖像的邊框寬度
-            chart.BorderSkin.SkinStyle = BorderSkinStyle.Emboss;//設置圖像的邊框外觀樣式
-            chart.BackColor = Color.Yellow;//設置圖表的背景顏色
-
-            chart.Titles[0].Font = new Font("標楷體", 30f);//设置图表标题字体样式和大小
-            chart.Legends["Legend1"].Docking = Docking.Right;  //設定圖標顯示停靠的位置
-        }
-
         void draw_chart6()
         {
+            string title = "完整範例";
+
             // 清除圖表
             chart6.Series.Clear();
             chart6.Titles.Clear();
 
-            //靜畫範例1
-            chart_init2(chart6);
-            richTextBox1.Text += "靜畫範例1, 用獨立數組做\n";
+            chart6.Size = new Size(W, H);  // 設定chart大小
+
+            // 畫標題的方法1
+            Title chart_title = new Title();
+            chart_title.Text = title;
+            chart_title.Alignment = ContentAlignment.MiddleCenter;
+            chart_title.Font = new Font("標楷體", 24F, FontStyle.Bold);
+            chart6.Titles.Add(chart_title);  // 標題
+
+            // 畫標題的方法2
+            Title chart_title2 = new Title
+            {
+                Text = title,
+                Alignment = ContentAlignment.MiddleCenter,
+                Font = new Font("Trebuchet MS", 14F, FontStyle.Bold)
+            };
+            //chart6.Titles.Add(chart_title2);
+
+            //圖表區設定, X軸
+            chart6.ChartAreas[0].AxisX.Minimum = 0;  // 設定X軸最小值
+            chart6.ChartAreas[0].AxisX.Maximum = 360;  // 設定X軸最大值
+            chart6.ChartAreas[0].AxisX.Title = "角度";  // 設定X軸名稱
+            chart6.ChartAreas[0].AxisX.TitleForeColor = Color.Blue;  // 設定X軸名稱的字體顏色
+            chart6.ChartAreas[0].AxisX.Enabled = AxisEnabled.True;  // 顯示 或 隱藏 X 軸標示
+            chart6.ChartAreas[0].AxisX.MajorGrid.Enabled = true;  // 顯示 或 隱藏 X 軸標線
+            chart6.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Trebuchet MS", 15, FontStyle.Bold);  // 設定X軸刻度的字型
+            chart6.ChartAreas[0].AxisX.LabelStyle.Interval = 60;  // 設置X軸刻度間隔的大小
+            chart6.ChartAreas[0].AxisX.LabelStyle.IntervalType = DateTimeIntervalType.Number;  // 設置間隔大小的度量單位
+            chart6.ChartAreas[0].AxisX.LineColor = Color.White;  // 設置X軸的線條顏色
+            chart6.ChartAreas[0].AxisX.MajorGrid.Interval = 100;  // 設置主網格線與次要網格線的間隔
+            chart6.ChartAreas[0].AxisX.MajorGrid.IntervalType = DateTimeIntervalType.Number;  // 設置主網格線與次網格線的間隔的度量單位
+            chart6.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Snow;  // 設置網格線的顏色
+            chart6.ChartAreas[0].AxisX.MajorTickMark.Interval = 20;  // 設置刻度線的間隔
+            chart6.ChartAreas[0].AxisX.MajorTickMark.IntervalType = DateTimeIntervalType.Number;  // 設置刻度線的間隔的度量單位
+
+            //圖表區設定, Y軸
+            chart6.ChartAreas[0].AxisY.Minimum = -200;  // 設定Y軸最小值
+            chart6.ChartAreas[0].AxisY.Maximum = 200;  // 設定Y軸最大值
+            chart6.ChartAreas[0].AxisY.Title = "數值";  // 設定Y軸名稱
+            chart6.ChartAreas[0].AxisY.TitleForeColor = Color.Blue;  // 設定Y軸名稱的字體顏色
+            chart6.ChartAreas[0].AxisY.Enabled = AxisEnabled.True;  // 顯示 或 隱藏 Y 軸標示
+            chart6.ChartAreas[0].AxisY.MajorGrid.Enabled = true;  // 顯示 或 隱藏 Y 軸標線
+            chart6.ChartAreas[0].AxisY.LabelStyle.Font = new Font("Trebuchet MS", 8.25F, FontStyle.Bold);  // 設置Y軸左側的提示信息的字體屬性
+            chart6.ChartAreas[0].AxisY.LineColor = Color.DarkBlue;  // 設置軸的線條顏色
+            chart6.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.White;  // 設置網格線顏色
+
+            // 圖表樣式
+            chart6.BackGradientStyle = GradientStyle.TopBottom;  // 指定圖表元素的漸變樣式(中心向外，從左到右，從上到下等等)
+            chart6.BackSecondaryColor = Color.Yellow;  // 設置背景的輔助顏色
+            chart6.BorderlineColor = Color.Yellow;  // 設置圖像邊框的顏色
+            chart6.BorderlineDashStyle = ChartDashStyle.Solid;  // 設置圖像邊框線的樣式(實線、虛線、點線)
+            chart6.BorderlineWidth = 2;  // 設置圖像的邊框寬度
+            chart6.BorderSkin.SkinStyle = BorderSkinStyle.Emboss;  // 設置圖像的邊框外觀樣式
+            chart6.BackColor = Color.Yellow;  // 設置圖表的背景顏色
+
+            // 設定圖例.Legends
+            chart6.Legends["Legend1"].Docking = Docking.Right;  // 設定圖例的顯示位置, 預設靠右
+
+            //------------------------------  # 30個
 
             // 設定數列1 的 大小與外觀
             Series series1 = new Series("sin", 500);  // 初始化數列1(名稱, 最大值)
+            series1.ChartType = SeriesChartType.Point;  // 點狀圖
             series1.Color = Color.Red; //設定線條顏色
             series1.BorderColor = Color.Navy;  //設置數據邊框的顏色
             series1.BorderWidth = 3;    //線寬
             series1.Font = new Font("新細明體", 10); //設定字型
-            series1.ChartType = SeriesChartType.Point;  // 點狀圖
             series1.MarkerSize = 5;     //圖標大小
             series1.IsValueShownAsLabel = false;   //將數值顯示在線上 是否在Chart中顯示座標點值
             series1.LegendText = "sin";  // 圖例文字
             series1.Name = "sine";      //設置數據名稱
-            series1.ShadowOffset = 10;   //設置陰影偏移量
-            series1.ShadowColor = Color.Orange; //設置陰影顏色
-            series1.ToolTip = "百分比" + "#PERCENT";//鼠标移动显示数据 //TBD
-            series1.Label = "#VALY" + "/" + "#TOTAL" + "#LEGENDTEXT";//直接显示各项数据
+            //series1.ShadowOffset = 10;   //設置陰影偏移量
+            //series1.ShadowColor = Color.Orange; //設置陰影顏色
+            //series1.ToolTip = "百分比" + "#PERCENT";//鼠标移动显示数据 //TBD
+            //series1.Label = "#VALY" + "/" + "#TOTAL" + "#LEGENDTEXT";//直接显示各项数据
 
             /*
             MsChart的Label的值的转义字符
-
             #VALX 显示当前图例的X轴的对应文本(或数据)
             #VAL, #VALY, 显示当前图例的Y轴的对应文本(或数据)
             #VALY2, #VALY3, 显示当前图例的辅助Y轴的对应文本(或数据)
@@ -645,57 +653,53 @@ namespace vcs_Chart3
 
             // 設定數列2 的 大小與外觀
             Series series2 = new Series("cos", 500);  // 初始化數列1(名稱, 最大值)
+            series2.ChartType = SeriesChartType.Point;  // 點狀圖
             series2.Color = Color.Green; //設定線條顏色
             series2.BorderColor = Color.Navy;  //設置數據邊框的顏色
             series2.BorderWidth = 3;    //線寬
             series2.Font = new Font("標楷體", 12); //設定字型
-            series2.ChartType = SeriesChartType.Point;  // 點狀圖
             series2.MarkerSize = 5;     //圖標大小
             series2.IsValueShownAsLabel = false;   //將數值顯示在線上 是否在Chart中顯示座標點值
             series2.LegendText = "cos";  // 圖例文字
             series2.Name = "cos";      //設置數據名稱
-            series2.ShadowOffset = 10;   //設置陰影偏移量
-            series2.ShadowColor = Color.Orange; //設置陰影顏色
+            //series2.ShadowOffset = 10;   //設置陰影偏移量
+            //series2.ShadowColor = Color.Orange; //設置陰影顏色
 
             // 設定數列3 的 大小與外觀
             Series series3 = new Series("sin + cos", 500);  // 初始化數列3(名稱, 最大值)
+            series3.ChartType = SeriesChartType.Point;  // 點狀圖
             series3.Color = Color.Blue; //設定線條顏色
             series3.BorderColor = Color.Navy;  //設置數據邊框的顏色
             series3.BorderWidth = 3;    //線寬
             series3.Font = new Font("標楷體", 12); //設定字型
-            series3.ChartType = SeriesChartType.Point;  // 點狀圖
             series3.MarkerSize = 5;     //圖標大小
             series3.IsValueShownAsLabel = false;   //將數值顯示在線上 是否在Chart中顯示座標點值
             series3.LegendText = "sin + cos";  // 圖例文字
             series3.Name = "sine + cos";      //設置數據名稱
-            series3.ShadowOffset = 10;   //設置陰影偏移量
-            series3.ShadowColor = Color.Orange; //設置陰影顏色
+            //series3.ShadowOffset = 10;   //設置陰影偏移量
+            //series3.ShadowColor = Color.Orange; //設置陰影顏色
 
-            int[] array_x = new int[37];
+            int[] array_xx = new int[37];
             int[] array_y1 = new int[37];
             int[] array_y2 = new int[37];
             int[] array_y3 = new int[37];
 
             for (int i = 0; i <= 360; i += 10)
             {
-                array_x[i / 10] = i;
+                array_xx[i / 10] = i;
                 array_y1[i / 10] = (int)(110 * sind(i));
                 array_y2[i / 10] = (int)(110 * cosd(i));
                 array_y3[i / 10] = (int)(110 * sind(i) + 110 * cosd(i));
                 //richTextBox1.Text += "len = " + chart6.Series[0].Points.Count.ToString() + "\n";
-                //chart6.Series[0].Points.AddXY(array_x[i / 10], array_y1[i / 10]);
-                series1.Points.AddXY(array_x[i / 10], array_y1[i / 10]);    //將數值1新增至數列1
-                series2.Points.AddXY(array_x[i / 10], array_y2[i / 10]);    //將數值2新增至數列2
-                series3.Points.AddXY(array_x[i / 10], array_y3[i / 10]);    //將數值3新增至數列3
+                //chart6.Series[0].Points.AddXY(array_xx[i / 10], array_y1[i / 10]);
+                series1.Points.AddXY(array_xx[i / 10], array_y1[i / 10]);    //將數值1新增至數列1
+                series2.Points.AddXY(array_xx[i / 10], array_y2[i / 10]);    //將數值2新增至數列2
+                series3.Points.AddXY(array_xx[i / 10], array_y3[i / 10]);    //將數值3新增至數列3
             }
 
-            //經過chart6.Series.Clear()後, chart6.Series.Count = 0
             chart6.Series.Add(series1);  // 將數列1新增到chart6上
-            //此時, chart6.Series.Count = 1
             chart6.Series.Add(series2);  // 將數列2新增到chart6上
-            //此時, chart6.Series.Count = 2
             chart6.Series.Add(series3);  // 將數列3新增到chart6上
-            //此時, chart6.Series.Count = 3
 
             richTextBox1.Text += "顯示資料\n";
             int count = series1.Points.Count;
@@ -713,44 +717,8 @@ namespace vcs_Chart3
 
         void draw_chart7()
         {
-            // 清除圖表
-            chart7.Series.Clear();
-            chart7.Titles.Clear();
-
-            //靜畫範例2
-            chart_init2(chart7);
-            richTextBox1.Text += "靜畫範例2, 用數組陣列做\n\r";
-
-            // 設定數列1 的 大小與外觀
-            Series[] series = new Series[3];  // 初始化3數列
-            double[] _y = new double[] { 77, 35, 131 };
-            Color[] colors = new Color[] { Color.Red, Color.Green, Color.Blue };
-            String[] curves = new String[] { "sin", "cos", "sin+cos" };
-
-            int len = curves.Length;
-
-            for (int i = 0; i < len; i++)
-            {
-                series[i] = new Series(curves[i]);
-                series[i].Color = colors[i];
-                series[i].Font = new Font("新細明體", 10); //設定字型
-                series[i].ChartType = SeriesChartType.Point;  // 點狀圖
-                series[i].MarkerSize = 5;     //圖標大小
-                series[i].IsValueShownAsLabel = false;  //將數值顯示在線上
-            }
-
-            for (int i = 0; i <= 360; i += 10)
-            {
-                series[0].Points.AddXY(i, (int)(110 * sind(i)));                        //將數值1新增至數組陣列0
-                series[1].Points.AddXY(i, (int)(110 * cosd(i)));                        //將數值1新增至數組陣列1
-                series[2].Points.AddXY(i, (int)(110 * sind(i)) + (int)(110 * cosd(i))); //將數值1新增至數組陣列2
-            }
-
-            foreach (Series s in series)
-            {
-                chart7.Series.Add(s);  // 將數列s新增到chart7上
-            }
         }
+
 
         //------------------------------------------------------------  # 60個
 
@@ -774,9 +742,9 @@ namespace vcs_Chart3
             // 設定數列1 的 大小與外觀
             Series series1 = new Series("體重1", 500);  // 初始化數列2(名稱，最大值)
             series1.ChartType = SeriesChartType.Line;  // 折線圖
+            series1.Color = Color.Red;
             series1.XValueMember = "X";
             series1.YValueMembers = "Y";
-            series1.Color = Color.Red;
 
             // 設定數列2 的 大小與外觀
             Series series2 = new Series("體重2", 500);  // 初始化數列2(名稱，最大值)
@@ -834,6 +802,24 @@ namespace vcs_Chart3
         }
 
         //------------------------------------------------------------  # 60個
+
+        private void bt_chart6_Click(object sender, EventArgs e)
+        {
+            int x_st = 10;
+            int y_st = 10;
+            int dx = W + 10;
+            int dy = H + 10;
+            chart6.Size = new Size(W * 2, H * 2);
+            chart6.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            chart6.BringToFront();
+
+            W = 500 * 2;
+            H = 310 * 2;
+
+            draw_chart6();
+        }
+
+        //------------------------------------------------------------  # 60個
     }
 }
 
@@ -854,8 +840,8 @@ namespace vcs_Chart3
 */
 
 
-            //設定調色板
-//            chart0.Palette = ChartColorPalette.EarthTones;
+// 設定調色板
+// chart0.Palette = ChartColorPalette.EarthTones;
 
 
 /*
@@ -875,15 +861,7 @@ chart1.Series.Add(series1);  // 將數列1新增到chart1上
 
 //chart7.ChartAreas.Add("ChartArea1");  // 將圖表區1新增到chart7上
 
-
 //series1.LegendText = "體重";  // 圖例文字
-
-
-
-
-
-
-
 
 /*
 Chart
@@ -949,10 +927,8 @@ chart放在
         }
 */
 
-
 /*
 chart1.Series[0].Points.Clear();
 chart1.Series[1].Points.Clear();
 chart1.Series[2].Points.Clear();
 */
-

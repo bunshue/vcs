@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;        //for Directory, File
-using System.Diagnostics;   //for Process
+using System.IO;  // for Directory, File
+using System.Diagnostics;  // for Process
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Concurrent;    //for ConcurrentQueue
+using System.Collections.Concurrent;  // for ConcurrentQueue
 
 namespace vcs_LOG
 {
@@ -27,6 +27,8 @@ namespace vcs_LOG
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            //------------------------------------------------------------  # 60個
 
             LogFileName = "tmp_log_" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
             richTextBox1.Text += "用Timer1自動存Log中.....\n";
@@ -70,6 +72,8 @@ namespace vcs_LOG
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         int aa = 0;
         private void button1_Click(object sender, EventArgs e)
@@ -160,20 +164,22 @@ namespace vcs_LOG
         private void WriteLog(string text)
         {
             string path = AppDomain.CurrentDomain.BaseDirectory;
-            path = System.IO.Path.Combine(path, "OutputStreamLogs\\" + DateTime.Now.ToString("yy-MM-dd"));
+            path = Path.Combine(path, "OutputStreamLogs\\" + DateTime.Now.ToString("yy-MM-dd"));
 
-            if (!System.IO.Directory.Exists(path))
+            if (!Directory.Exists(path))
             {
-                System.IO.Directory.CreateDirectory(path);
+                Directory.CreateDirectory(path);
             }
-            string fileFullName = System.IO.Path.Combine(path, string.Format("{0}.log", DateTime.Now.ToString("yyMMdd-HHmmss")));
+            string fileFullName = Path.Combine(path, string.Format("{0}.log", DateTime.Now.ToString("yyMMdd-HHmmss")));
 
-            using (StreamWriter output = System.IO.File.AppendText(fileFullName))
+            using (StreamWriter output = File.AppendText(fileFullName))
             {
                 output.WriteLine(text);
                 output.Close();
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         int i3 = 0;
         private void button3_Click(object sender, EventArgs e)
@@ -204,8 +210,8 @@ namespace vcs_LOG
             string LogFile = myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day + "\\" + myName;
             if (!File.Exists(LogFile))
             {
-                System.IO.StreamWriter myFile;
-                myFile = System.IO.File.AppendText(LogFile);
+                StreamWriter myFile;
+                myFile = File.AppendText(LogFile);
                 myFile.Close();
             }
 
@@ -225,6 +231,8 @@ namespace vcs_LOG
                 }
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         //用隊列寫log ST
         /// <summary>
@@ -419,6 +427,8 @@ namespace vcs_LOG
         }
         //用隊列寫log SP
 
+        //------------------------------------------------------------  # 60個
+
         int i4 = 0;
         private void button9_Click(object sender, EventArgs e)
         {
@@ -498,6 +508,8 @@ namespace vcs_LOG
         }
     }
 
+    //------------------------------------------------------------  # 60個
+
     public class LogAPI
     {
         private static string myPath = "";
@@ -530,8 +542,8 @@ namespace vcs_LOG
             string LogFile = myPath + "\\LogFiles\\" + Year + "_" + Month + "\\" + Year + "_" + Month + "_" + Day + "\\" + myName;
             if (!File.Exists(LogFile))
             {
-                System.IO.StreamWriter myFile;
-                myFile = System.IO.File.AppendText(LogFile);
+                StreamWriter myFile;
+                myFile = File.AppendText(LogFile);
                 myFile.Close();
             }
 
@@ -552,6 +564,8 @@ namespace vcs_LOG
             }
         }
     }
+
+    //------------------------------------------------------------  # 60個
 
     public class LogConsole
     {
@@ -613,15 +627,10 @@ namespace vcs_LOG
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 
