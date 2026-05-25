@@ -16,22 +16,13 @@ using System.Windows.Forms.DataVisualization.Charting;  // for Series, Chart
 
 /*
 拉一個Chart控件
-
-chart4屬性
-Series 加 Series4a 和 Series4a
-Titles 加 Title1 Title2
-*/
-
-/*
-拉一個Chart控件
-
 chart5屬性
 ChartAreas 移除 ChartArea1
 Series 移除 Series1
 */
 
-//x軸只顯示一條，只要將資料都加入到一個序列內即可
-//而x軸顯示多條，則需要使用多個序列存放資料
+// x軸只顯示一條，只要將資料都加入到一個序列內即可
+// 而x軸顯示多條，則需要使用多個序列存放資料
 
 namespace vcs_Chart3
 {
@@ -116,7 +107,7 @@ namespace vcs_Chart3
         {
             // 清除圖表
             chart1.Series.Clear();
-            chart1.Titles.Clear();
+            chart1.Titles.Clear();  // 清除所有標題
 
             chart1.Size = new Size(W, H);  // 設定chart大小
 
@@ -125,7 +116,7 @@ namespace vcs_Chart3
             chart_title.Text = title;
             chart_title.Alignment = ContentAlignment.MiddleCenter;
             chart_title.Font = new Font("Trebuchet MS", 14F, FontStyle.Bold);
-            chart1.Titles.Add(chart_title);  // 標題
+            chart1.Titles.Add(chart_title);  // 將標題新增到圖表上
 
             // 畫標題的方法2
             Title chart_title2 = new Title
@@ -134,7 +125,7 @@ namespace vcs_Chart3
                 Alignment = ContentAlignment.MiddleCenter,
                 Font = new Font("Trebuchet MS", 14F, FontStyle.Bold)
             };
-            //chart1.Titles.Add(chart_title2);
+            //chart1.Titles.Add(chart_title2);  // 將標題新增到圖表上
 
             //圖表區設定
             chart1.ChartAreas[0].BackColor = Color.Pink;  // 圖表區背景色
@@ -169,7 +160,6 @@ namespace vcs_Chart3
             chart1.ChartAreas[0].Area3DStyle.WallWidth = 0; //外牆寬度
             chart1.ChartAreas[0].Area3DStyle.LightStyle = LightStyle.Realistic; //光源
             */
-
         }
 
         void draw_chart0()
@@ -197,7 +187,7 @@ namespace vcs_Chart3
             series1.Points.AddXY("豬", 42);
 
             Random rnd = new Random();  //亂數產生區塊顏色
-            int count = series1.Points.Count;
+            int count = series1.Points.Count;  // 數列1內的資料個數
             richTextBox1.Text += "共有 " + count.ToString() + " 筆資料\n";
             for (int i = 0; i < count; i++)
             {
@@ -241,10 +231,10 @@ namespace vcs_Chart3
             //------------------------------  # 30個
 
             // 設定圖例.Legends
-            chart1.Legends.Add("Legends1"); //圖例集合說明
+            chart1.Legends.Add("Legends1");  // 將圖例新增到圖表上
 
             //設定 Legends
-            //chart1.Legends["Legends1"].DockedToChartArea = ChartArea1; //顯示在圖表內
+            //chart1.Legends["Legends1"].DockedToChartArea = ChartArea1;  // 設定圖例要顯示在哪個圖表區
             chart1.Legends["Legends1"].Docking = Docking.Bottom;  // 設定圖例的顯示位置, 預設靠右
             //背景色
             chart1.Legends["Legends1"].BackColor = Color.FromArgb(235, 235, 235);
@@ -276,7 +266,7 @@ namespace vcs_Chart3
             series1.Points.AddXY("狗", 17);
             series1.Points.AddXY("豬", 42);
 
-            chart1.Series.Add(series1);  // 將數列1新增到chart1上
+            chart1.Series.Add(series1);  // 將數列1新增到圖表上
         }
 
         void draw_chart2()
@@ -299,7 +289,7 @@ namespace vcs_Chart3
             series1.Points.AddXY("狗", 17);
             series1.Points.AddXY("豬", 42);
 
-            chart2.Series.Add(series1);  // 將數列1新增到chart2上
+            chart2.Series.Add(series1);  // 將數列1新增到圖表上
 
             //------------------------------  # 30個
 
@@ -318,7 +308,7 @@ namespace vcs_Chart3
             series2.Points.AddXY("狗", 17);
             series2.Points.AddXY("豬", 42);
 
-            chart2.Series.Add(series2);  // 將數列2新增到chart2上
+            chart2.Series.Add(series2);  // 將數列2新增到圖表上
         }
 
         void draw_chart3()
@@ -355,32 +345,27 @@ namespace vcs_Chart3
             //series1[PieDrawingStyle] = SoftEdge;
             //series1[PieDrawingStyle] = Concave;
 
-            chart3.Series.Add(series1);  // 將數列1新增到chart3上
+            chart3.Series.Add(series1);  // 將數列1新增到圖表上
         }
 
         void draw_chart4()
         {
-            // 清除圖表
-            //chart4.Series.Clear();
-            //chart4.Titles.Clear();
+            string title = "各區比例";
+            chart_init(chart4, title);
 
             string[] name = { "AAA", "BBB", "CCC", "DDD", "EEE" };
             int[] weight = { 137, 63, 87, 98, 74 };
 
-            //ChartAreas, Series, Legends 基本設定
+            //ChartAreas, Legends 基本設定
             if (chart4.Legends.FindByName("Legends2") == null) //如果chart4沒有包含Legends2才將其Add
             {
                 // 設定圖例.Legends
-                chart4.Legends.Add(new Legend("Legends2")); //圖例集合說明
+                chart4.Legends.Add(new Legend("Legends2"));  // 將圖例新增到圖表上
             }
-            chart4.ChartAreas.Add("ChartArea2");  // 將圖表區2新增到chart4上
+            chart4.ChartAreas.Add("ChartArea2");  // 將圖表區2新增到圖表上
 
-            // chart4.Series.Add("Series3");  // 將數列新增到chart上  // 數據序列集合
             // 設定圖例.Legends
-            // chart4.Legends.Add("Legends2");  // 圖例集合
-
-            string title = "各區比例";
-            chart4.Titles.Add(title);  // 標題
+            // chart4.Legends.Add("Legends2");  // 將圖例新增到圖表上
 
             //設定 ChartArea2
             //設定3D
@@ -392,12 +377,13 @@ namespace vcs_Chart3
             chart4.ChartAreas["ChartArea2"].Area3DStyle.WallWidth = 0; //外牆寬度
             chart4.ChartAreas["ChartArea2"].Area3DStyle.LightStyle = LightStyle.Realistic; //光源
 
-            // 設定標題2, Title2
-            chart4.Titles["Title2"].DockedToChartArea = "ChartArea2"; //設定標題停駐的ChartArea
+            // 設定標題2
+            chart4.Titles.Add("Title2");  // 將標題新增到圖表上
+            chart4.Titles["Title2"].DockedToChartArea = "ChartArea2";  // 設定標題要顯示在哪個圖表區
             chart4.Titles["Title2"].IsDockedInsideChartArea = false; //設定顯示在圖表的內外部
 
             // 設定圖例.Legends
-            chart4.Legends["Legends2"].DockedToChartArea = "ChartArea2"; //設定要顯示在哪個圖表
+            chart4.Legends["Legends2"].DockedToChartArea = "ChartArea2";  // 設定圖例要顯示在哪個圖表區
             chart4.Legends["Legends2"].IsDockedInsideChartArea = false; //設定要顯示在圖表的內外部
             chart4.Legends["Legends2"].Docking = Docking.Left;  // 設定圖例的顯示位置, 預設靠右
             chart4.Legends["Legends2"].BackColor = Color.FromArgb(235, 235, 235);
@@ -405,33 +391,36 @@ namespace vcs_Chart3
             chart4.Legends["Legends2"].BorderWidth = 1;
             chart4.Legends["Legends2"].BorderColor = Color.FromArgb(200, 200, 200);
 
-            //設定 Series4b
-            chart4.Series["Series4b"].ChartArea = "ChartArea2";  // 設定要呈現的ChartArea
-            chart4.Series["Series4b"].ChartType = SeriesChartType.Pie;  // 圓形圖
-            //chart4.Series["Series4b"].ChartType = SeriesChartType.Doughnut;  // 環圈圖
-            chart4.Series["Series4b"].Points.DataBindXY(name, weight);  // xx, yy 皆為一維陣列
-            chart4.Series["Series4b"].Legend = "Legends2";  // 設定要呈現哪個圖例
-            // chart4.Series["Series4b"].IsValueShownAsLabel = true;  // 是否把數值顯示在線上
-            chart4.Series["Series4b"].XValueType = ChartValueType.String; //X軸的資料格式
-            chart4.Series["Series4b"].LegendText = "#VALX :[ #PERCENT{P1} ]"; //X軸 + 百分比
-            chart4.Series["Series4b"].Label = "#VALX\n#PERCENT{P1}"; //X軸 + 百分比
-            //chart4.Series["Series4b"].LabelForeColor = Color.FromArgb(0, 90, 255); //字體顏色
+            // 設定數列1 的 大小與外觀
+            Series series1 = new Series("體重1");
+            series1.ChartType = SeriesChartType.Pie;  // 圓形圖
+            series1.ChartArea = "ChartArea2";  // 設定要呈現的ChartArea
+            //series1.ChartType = SeriesChartType.Doughnut;  // 環圈圖
+            series1.Points.DataBindXY(name, weight);  // xx, yy 皆為一維陣列
+            series1.Legend = "Legends2";  // 設定要呈現哪個圖例
+            // series1.IsValueShownAsLabel = true;  // 是否把數值顯示在線上
+            series1.XValueType = ChartValueType.String; //X軸的資料格式
+            series1.LegendText = "#VALX :[ #PERCENT{P1} ]"; //X軸 + 百分比
+            series1.Label = "#VALX\n#PERCENT{P1}"; //X軸 + 百分比
+            //series1.LabelForeColor = Color.FromArgb(0, 90, 255); //字體顏色
 
             //字體設定
-            chart4.Series["Series4b"].Font = new Font("Trebuchet MS", 10, FontStyle.Bold);
-            chart4.Series["Series4b"].Points.FindMaxByValue().LabelForeColor = Color.Red; //設定特定數字之字體
-            //chart4.Series["Series4b"].Points.FindMaxByValue().Color = Color.Red; //設定數值最大的餅的顏色
-            //chart4.Series["Series4b"].Points.FindMaxByValue()["Exploded"] = "true";  // 設定數值最大的餅是否分離出去
-            chart4.Series["Series4b"].BorderColor = Color.FromArgb(255, 101, 101, 101);
-            //chart4.Series["Series4b"]["DoughnutRadius"] = "80"; // ChartType為Doughnut時，Set Doughnut hole size
-            //chart4.Series["Series4b"]["PieLabelStyle"] = "Inside"; //數值顯示在圓餅內
-            chart4.Series["Series4b"]["PieLabelStyle"] = "Outside"; //數值顯示在圓餅外
-            //chart4.Series["Series4b"]["PieLabelStyle"] = "Disabled"; //不顯示數值
+            series1.Font = new Font("Trebuchet MS", 10, FontStyle.Bold);
+            series1.Points.FindMaxByValue().LabelForeColor = Color.Red; //設定特定數字之字體
+            //series1.Points.FindMaxByValue().Color = Color.Red; //設定數值最大的餅的顏色
+            //series1.Points.FindMaxByValue()["Exploded"] = "true";  // 設定數值最大的餅是否分離出去
+            series1.BorderColor = Color.FromArgb(255, 101, 101, 101);
+            //series1["DoughnutRadius"] = "80"; // ChartType為Doughnut時，Set Doughnut hole size
+            //series1["PieLabelStyle"] = "Inside"; //數值顯示在圓餅內
+            series1["PieLabelStyle"] = "Outside"; //數值顯示在圓餅外
+            //series1["PieLabelStyle"] = "Disabled"; //不顯示數值
 
             //設定圓餅效果，除 Default 外其他效果3D不適用
-            //chart4.Series["Series4b"]["PieDrawingStyle"] = "Default";
-            //chart4.Series["Series4b"]["PieDrawingStyle"] = "SoftEdge";
-            //chart4.Series["Series4b"]["PieDrawingStyle"] = "Concave";
+            //series1["PieDrawingStyle"] = "Default";
+            //series1["PieDrawingStyle"] = "SoftEdge";
+            //series1["PieDrawingStyle"] = "Concave";
+
+            chart4.Series.Add(series1);  // 將數列1新增到圖表上
         }
 
         void draw_chart5()
@@ -440,8 +429,8 @@ namespace vcs_Chart3
             chart_init(chart5, title);
 
             // 清除圖表
-            chart5.ChartAreas.Clear();
-            chart5.Legends.Clear();
+            chart5.ChartAreas.Clear();  // 清除所有圖表區
+            chart5.Legends.Clear();  // 清除所有圖例
 
             List<String> name = new List<string>
             {
@@ -459,15 +448,12 @@ namespace vcs_Chart3
                 "澎湖縣"
         };
 
-            string[] titleArr = { "體重" };
             double[] weight = { 20, 19, 64, 128, 8, 48, 58, 21, 18, 27, 17, 11 };
 
-            chart5.ChartAreas.Add("ChartArea1");  // 將圖表區1新增到chart5上
-
-            chart5.Series.Add("Series1");  // 將數列1新增到chart5上
+            chart5.ChartAreas.Add("ChartArea1");  // 將圖表區1新增到圖表上
 
             // 設定圖例.Legends
-            chart5.Legends.Add("Legends1");  // 圖例集合
+            chart5.Legends.Add("Legends1");  // 將圖例新增到圖表上
 
             //設定 ChartArea1
             chart5.ChartAreas["ChartArea1"].AxisX.Interval = 1;  // 設定X軸坐標的間隔
@@ -493,48 +479,61 @@ namespace vcs_Chart3
             chart5.ChartAreas["ChartArea1"].Area3DStyle.WallWidth = 0; //外牆寬度
             chart5.ChartAreas["ChartArea1"].Area3DStyle.LightStyle = LightStyle.Realistic; //光源
 
-            // 設定標題1, Title1
-            chart5.Titles["Title1"].DockedToChartArea = "ChartArea1";  // 設定要顯示在哪個圖表
+            // 設定標題1, Title1, 設定要顯示在哪個圖表
+            chart5.Titles["Title1"].DockedToChartArea = "ChartArea1";  // 設定標題要顯示在哪個圖表區
             chart5.Titles["Title1"].IsDockedInsideChartArea = false;  // 設定要顯示在圖表的內外部
 
             // 設定圖例.Legends
-            chart5.Legends["Legends1"].DockedToChartArea = "ChartArea1"; //顯示在圖表內
+            chart5.Legends["Legends1"].DockedToChartArea = "ChartArea1";  // 設定圖例要顯示在哪個圖表區
             chart5.Legends["Legends1"].Docking = Docking.Right;  // 設定圖例的顯示位置, 預設靠右
             chart5.Legends["Legends1"].BackColor = Color.FromArgb(235, 235, 235); //背景色
             chart5.Legends["Legends1"].BackHatchStyle = ChartHatchStyle.DarkDownwardDiagonal;
             chart5.Legends["Legends1"].BorderWidth = 1;
             chart5.Legends["Legends1"].BorderColor = Color.FromArgb(200, 200, 200);
 
+            // 設定數列1 的 大小與外觀
+            Series series1 = new Series("體重1");
+            series1.ChartType = SeriesChartType.Pie;  // 圓形圖
+            series1.ChartType = SeriesChartType.Column; //直條圖(Column),折線圖(Line),橫條圖(Bar)
+
             //設定 Series1
-            chart5.Series["Series1"].ChartArea = "ChartArea1";  // 設定要呈現的ChartArea
-            //chart5.Series["Series1"].ChartType = SeriesChartType.Line; //直條圖(Column),折線圖(Line),橫條圖(Bar)
-            chart5.Series["Series1"].Points.DataBindXY(name, weight);//Series1的XY數值放入圖中  // xx, yy 皆為一維陣列
-            chart5.Series["Series1"].Legend = "Legends1";  // 設定要呈現哪個圖例
-            chart5.Series["Series1"].LegendText = titleArr[0]; //設定圖例文字
-            chart5.Series["Series1"].LabelFormat = "#.###"; //小數點
-            chart5.Series["Series1"].MarkerSize = 8; //Label 範圍大小
-            chart5.Series["Series1"].LabelForeColor = Color.FromArgb(0, 90, 255); //字體顏色
+            series1.ChartArea = "ChartArea1";  // 設定要呈現的ChartArea
+            series1.Points.DataBindXY(name, weight);//Series1的XY數值放入圖中  // xx, yy 皆為一維陣列
+            series1.Legend = "Legends1";  // 設定要呈現哪個圖例
+            series1.LegendText = "體重1";  // 設定圖例文字
+            series1.LabelFormat = "#.###"; //小數點
+            series1.MarkerSize = 8; //Label 範圍大小
+            series1.LabelForeColor = Color.FromArgb(0, 90, 255); //字體顏色
 
             //字體設定
-            chart5.Series["Series1"].Font = new Font("Trebuchet MS", 10, FontStyle.Bold);
+            series1.Font = new Font("Trebuchet MS", 10, FontStyle.Bold);
 
             //Label 背景色
-            chart5.Series["Series1"].LabelBackColor = Color.FromArgb(150, 255, 255, 255);
-            chart5.Series["Series1"].Color = Color.FromArgb(240, 65, 140, 240); //背景色
-            chart5.Series["Series1"].IsValueShownAsLabel = true;  // 是否把數值顯示在線上
+            series1.LabelBackColor = Color.FromArgb(150, 255, 255, 255);
+            series1.Color = Color.FromArgb(240, 65, 140, 240); //背景色
+            series1.IsValueShownAsLabel = true;  // 是否把數值顯示在線上
 
-            /*  
-            chart5.Series["Series2"].Points.DataBindXY(name, weight);  // xx, yy 皆為一維陣列
-            chart5.Series["Series2"].Legend = "Legends1";
-            chart5.Series["Series2"].LegendText = titleArr[1];
-            chart5.Series["Series2"].LabelFormat = "#.###"; //小數點
-            chart5.Series["Series2"].MarkerSize = 8; //Label 範圍大小
-            chart5.Series["Series2"].LabelForeColor = Color.FromArgb(255, 103, 0);
-            chart5.Series["Series2"].Font = new Font("Trebuchet MS", 10, FontStyle.Bold);
-            chart5.Series["Series2"].LabelBackColor = Color.FromArgb(150, 255, 255, 255);
-            chart5.Series["Series2"].Color = Color.FromArgb(240, 252, 180, 65); //背景色
-            chart5.Series["Series2"].IsValueShownAsLabel = true;  // 是否把數值顯示在線上
-            */
+            chart5.Series.Add(series1);  // 將數列1新增到圖表上
+
+            //------------------------------  # 30個
+
+            // 設定數列2 的 大小與外觀
+            Series series2 = new Series("體重2");
+            series2.ChartType = SeriesChartType.Pie;  // 圓形圖
+            series2.ChartType = SeriesChartType.Column; //直條圖(Column),折線圖(Line),橫條圖(Bar)
+
+            series2.Points.DataBindXY(name, weight);  // xx, yy 皆為一維陣列
+            series2.Legend = "Legends1";
+            series2.LegendText = "體重2";
+            series2.LabelFormat = "#.###"; //小數點
+            series2.MarkerSize = 8; //Label 範圍大小
+            series2.LabelForeColor = Color.FromArgb(255, 103, 0);
+            series2.Font = new Font("Trebuchet MS", 10, FontStyle.Bold);
+            series2.LabelBackColor = Color.FromArgb(150, 255, 255, 255);
+            series2.Color = Color.FromArgb(240, 252, 180, 65); //背景色
+            series2.IsValueShownAsLabel = true;  // 是否把數值顯示在線上
+
+            chart5.Series.Add(series2);  // 將數列2新增到圖表上
         }
 
         //------------------------------------------------------------  # 60個
@@ -560,7 +559,7 @@ namespace vcs_Chart3
 
             // 清除圖表
             chart6.Series.Clear();
-            chart6.Titles.Clear();
+            chart6.Titles.Clear();  // 清除所有標題
 
             chart6.Size = new Size(W, H);  // 設定chart大小
 
@@ -569,7 +568,7 @@ namespace vcs_Chart3
             chart_title.Text = title;
             chart_title.Alignment = ContentAlignment.MiddleCenter;
             chart_title.Font = new Font("標楷體", 24F, FontStyle.Bold);
-            chart6.Titles.Add(chart_title);  // 標題
+            chart6.Titles.Add(chart_title);  // 將標題新增到圖表上
 
             // 畫標題的方法2
             Title chart_title2 = new Title
@@ -578,7 +577,7 @@ namespace vcs_Chart3
                 Alignment = ContentAlignment.MiddleCenter,
                 Font = new Font("Trebuchet MS", 14F, FontStyle.Bold)
             };
-            //chart6.Titles.Add(chart_title2);
+            //chart6.Titles.Add(chart_title2);  // 將標題新增到圖表上
 
             //圖表區設定, X軸
             chart6.ChartAreas[0].AxisX.Minimum = 0;  // 設定X軸最小值
@@ -651,6 +650,8 @@ namespace vcs_Chart3
             #LEGENDTEXT  圖例文字
             */
 
+            //------------------------------  # 30個
+
             // 設定數列2 的 大小與外觀
             Series series2 = new Series("cos", 500);  // 初始化數列1(名稱, 最大值)
             series2.ChartType = SeriesChartType.Point;  // 點狀圖
@@ -690,19 +691,17 @@ namespace vcs_Chart3
                 array_y1[i / 10] = (int)(110 * sind(i));
                 array_y2[i / 10] = (int)(110 * cosd(i));
                 array_y3[i / 10] = (int)(110 * sind(i) + 110 * cosd(i));
-                //richTextBox1.Text += "len = " + chart6.Series[0].Points.Count.ToString() + "\n";
-                //chart6.Series[0].Points.AddXY(array_xx[i / 10], array_y1[i / 10]);
                 series1.Points.AddXY(array_xx[i / 10], array_y1[i / 10]);    //將數值1新增至數列1
                 series2.Points.AddXY(array_xx[i / 10], array_y2[i / 10]);    //將數值2新增至數列2
                 series3.Points.AddXY(array_xx[i / 10], array_y3[i / 10]);    //將數值3新增至數列3
             }
 
-            chart6.Series.Add(series1);  // 將數列1新增到chart6上
-            chart6.Series.Add(series2);  // 將數列2新增到chart6上
-            chart6.Series.Add(series3);  // 將數列3新增到chart6上
+            chart6.Series.Add(series1);  // 將數列1新增到圖表上
+            chart6.Series.Add(series2);  // 將數列2新增到圖表上
+            chart6.Series.Add(series3);  // 將數列3新增到圖表上
 
             richTextBox1.Text += "顯示資料\n";
-            int count = series1.Points.Count;
+            int count = series1.Points.Count;  // 數列1內的資料個數
             richTextBox1.Text += "共有 " + count.ToString() + " 筆資料\n";
             for (int i = 0; i < count; i++)
             {
@@ -718,7 +717,6 @@ namespace vcs_Chart3
         void draw_chart7()
         {
         }
-
 
         //------------------------------------------------------------  # 60個
 
@@ -746,6 +744,8 @@ namespace vcs_Chart3
             series1.XValueMember = "X";
             series1.YValueMembers = "Y";
 
+            //------------------------------  # 30個
+
             // 設定數列2 的 大小與外觀
             Series series2 = new Series("體重2", 500);  // 初始化數列2(名稱，最大值)
             //series2.ChartType = SeriesChartType.Column;  // 直條圖
@@ -762,8 +762,8 @@ namespace vcs_Chart3
                 series2.Points.AddXY(xx[i], weight[i]);  // AddXY 二維加入
             }
 
-            chart8.Series.Add(series1);  // 將數列1新增到chart8上
-            chart8.Series.Add(series2);  // 將數列2新增到chart8上
+            chart8.Series.Add(series1);  // 將數列1新增到圖表上
+            chart8.Series.Add(series2);  // 將數列2新增到圖表上
         }
 
         Point? prevPosition = null;     //好奇怪的寫法?
@@ -831,18 +831,13 @@ namespace vcs_Chart3
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-//1515
-//---------------  # 15個
-
-
 /*  可搬出
 
 */
 
 
-// 設定調色板
+// 設定調色板, 看不出效果
 // chart0.Palette = ChartColorPalette.EarthTones;
-
 
 /*
 建立數列 與 加入到 chart, 使用後者
@@ -854,12 +849,35 @@ Series series2 = chart0.Series.Add("體重2");
 建立數列
 Series series1 = new Series("體重", 500);
 加入chart
-chart1.Series.Add(series1);  // 將數列1新增到chart1上
+chart1.Series.Add(series1);  // 將數列1新增到圖表上
 */
 
-//chart1.ChartAreas.Clear();
+//chart1.ChartAreas.Clear();  // 清除所有圖表區
+//chart1.ChartAreas.Add("ChartArea1");  // 將圖表區1新增到圖表上
+//chart1.ChartAreas[0]  //內建的圖表區
 
-//chart7.ChartAreas.Add("ChartArea1");  // 將圖表區1新增到chart7上
+//chart1.Titles.Clear();  // 清除所有標題
+//chart1.Titles.Add(chart_title);  // 將標題新增到圖表上
+
+//chart1.Legends.Clear();  // 清除所有圖例
+//chart1.Legends.Add("Legends1");  // 將圖例新增到圖表上
+
+//chart1.Series.Clear();
+//chart1.Series.Add(series1);  // 將數列1新增到圖表上
+
+//series1.Points.Clear();  // 清除數列1內的所有資料
+//series1.Points.AddXY(xx, yy);  // 將資料新增到數列1裏
+//series1.Points.Count      // 數列1內的資料個數
+
+/*
+共通
+Form        表單
+Chart       圖表
+ChartAreas  圖表區
+Titles      標題
+Legends     圖例
+Series      數列
+*/
 
 //series1.LegendText = "體重";  // 圖例文字
 
@@ -894,7 +912,7 @@ chart放在
 //objSeries.Points.DataBindXY(xx, yy);  // xx, yy 皆為一維陣列
 
 /*
-            save_chart_image_to_drive();
+             save_chart_image_to_drive();
         void save_chart_image_to_drive()
         {
             if (chart1 != null)
@@ -927,8 +945,3 @@ chart放在
         }
 */
 
-/*
-chart1.Series[0].Points.Clear();
-chart1.Series[1].Points.Clear();
-chart1.Series[2].Points.Clear();
-*/

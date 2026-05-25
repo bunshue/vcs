@@ -1,4 +1,4 @@
-﻿namespace vcs_Draw_Trigonometry2
+﻿namespace vcs_Chart2b
 {
     partial class Form1
     {

@@ -32,17 +32,24 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.bt_clear = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.button0 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(12, 342);
+            this.button5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button5.Location = new System.Drawing.Point(215, 11);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(139, 54);
+            this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 11;
             this.button5.Text = "Info";
             this.button5.UseVisualStyleBackColor = true;
@@ -50,9 +57,10 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(12, 258);
+            this.button4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button4.Location = new System.Drawing.Point(10, 266);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(139, 54);
+            this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 10;
             this.button4.Text = "關閉";
             this.button4.UseVisualStyleBackColor = true;
@@ -60,27 +68,21 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(12, 178);
+            this.button3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button3.Location = new System.Drawing.Point(10, 200);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(139, 54);
+            this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 9;
             this.button3.Text = "寫入";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(181, 12);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(674, 589);
-            this.richTextBox1.TabIndex = 8;
-            this.richTextBox1.Text = "";
-            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 97);
+            this.button2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button2.Location = new System.Drawing.Point(10, 135);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(139, 54);
+            this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 7;
             this.button2.Text = "讀取";
             this.button2.UseVisualStyleBackColor = true;
@@ -88,23 +90,100 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
+            this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button1.Location = new System.Drawing.Point(10, 73);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(139, 62);
+            this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 6;
             this.button1.Text = "連線";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // bt_clear
+            // 
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(437, 50);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(72, 36);
+            this.bt_clear.TabIndex = 13;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.richTextBox1.Location = new System.Drawing.Point(421, 10);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
+            this.richTextBox1.TabIndex = 12;
+            this.richTextBox1.Text = "";
+            // 
+            // button0
+            // 
+            this.button0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button0.Location = new System.Drawing.Point(10, 10);
+            this.button0.Name = "button0";
+            this.button0.Size = new System.Drawing.Size(200, 60);
+            this.button0.TabIndex = 14;
+            this.button0.UseVisualStyleBackColor = true;
+            this.button0.Click += new System.EventHandler(this.button0_Click);
+            // 
+            // button6
+            // 
+            this.button6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button6.Location = new System.Drawing.Point(215, 72);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(200, 60);
+            this.button6.TabIndex = 15;
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button7.Location = new System.Drawing.Point(215, 136);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(200, 60);
+            this.button7.TabIndex = 16;
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button8
+            // 
+            this.button8.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button8.Location = new System.Drawing.Point(216, 202);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(200, 60);
+            this.button8.TabIndex = 17;
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button9
+            // 
+            this.button9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button9.Location = new System.Drawing.Point(216, 268);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(200, 60);
+            this.button9.TabIndex = 18;
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(867, 613);
+            this.ClientSize = new System.Drawing.Size(832, 598);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.button0);
+            this.Controls.Add(this.bt_clear);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
@@ -119,10 +198,16 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.IO.Ports.SerialPort serialPort1;
+        private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button button0;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
     }
 }
 

@@ -130,7 +130,7 @@
             this.groupBox20.Controls.Add(this.bt_temperature_on);
             this.groupBox20.Location = new System.Drawing.Point(640, 6);
             this.groupBox20.Name = "groupBox20";
-            this.groupBox20.Size = new System.Drawing.Size(319, 84);
+            this.groupBox20.Size = new System.Drawing.Size(355, 84);
             this.groupBox20.TabIndex = 187;
             this.groupBox20.TabStop = false;
             // 
@@ -139,7 +139,7 @@
             this.bt_temperature_off.BackColor = System.Drawing.SystemColors.Control;
             this.bt_temperature_off.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_temperature_off.ForeColor = System.Drawing.Color.Red;
-            this.bt_temperature_off.Location = new System.Drawing.Point(180, 46);
+            this.bt_temperature_off.Location = new System.Drawing.Point(202, 46);
             this.bt_temperature_off.Name = "bt_temperature_off";
             this.bt_temperature_off.Size = new System.Drawing.Size(118, 32);
             this.bt_temperature_off.TabIndex = 184;
@@ -163,7 +163,7 @@
             this.bt_temperature_on.BackColor = System.Drawing.SystemColors.Control;
             this.bt_temperature_on.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_temperature_on.ForeColor = System.Drawing.Color.Red;
-            this.bt_temperature_on.Location = new System.Drawing.Point(180, 13);
+            this.bt_temperature_on.Location = new System.Drawing.Point(202, 13);
             this.bt_temperature_on.Name = "bt_temperature_on";
             this.bt_temperature_on.Size = new System.Drawing.Size(118, 32);
             this.bt_temperature_on.TabIndex = 183;
@@ -191,6 +191,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(682, 148);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(604, 477);

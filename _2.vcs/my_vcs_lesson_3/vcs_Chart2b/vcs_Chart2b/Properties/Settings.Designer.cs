@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_Draw_Trigonometry2.Properties {
+namespace vcs_Chart2b.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

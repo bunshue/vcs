@@ -78,6 +78,13 @@ namespace vcs_Process_Start
 
         void show_item_location()
         {
+            /*
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+            */
             int BORDER = 20;
             int x_st = BORDER;
             int y_st = BORDER;
@@ -149,13 +156,25 @@ namespace vcs_Process_Start
             button44.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button45.Location = new Point(x_st + dx * 0, y_st + dy * 3);
 
+
+            //richTextBox1.Size = new Size(300, 690);
+            //richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            //this.Size = new Size(1273, 750);
+            this.Text = "vcs_Process_Start";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -679,6 +698,70 @@ namespace vcs_Process_Start
             //打開顯示屬性屬性() 
             Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL desk.cpl,,3");
         }
-
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
+/*
+ProcessStartInfo psi = new ProcessStartInfo();
+psi.FileName = @"cmd.exe";
+psi.Arguments = @"/c net use " + Name + " " + Path + "";
+psi.WindowStyle = ProcessWindowStyle.Hidden;
+Process.Start(psi);
+
+//------------------------------------------------------------  # 60個
+
+//開啟檔案總管到指定的目錄
+string Path = @"C:\dddddddddd";
+Process.Start("explorer.exe", Path);
+
+Process.Start(textBox1.Text);//打开文件夹进行查看
+
+//------------------------------------------------------------  # 60個
+
+//C#啟動另外一個C#程序，並傳遞參數
+string filename = @"C:\______test_files\aaaaa4.txt";
+Process.Start("notepad.exe", filename);
+
+//------------------------------------------------------------  # 60個
+
+Windows Task Scheduler). I am currently using Process.Start() to launch the file (or exe) required by th
+
+Process myProcess = Process.Start("param1", "param2");
+if (myProcess != null && !myProcess.HasExited)
+    newProcess.Kill();
+  
+if ((myProcess != null) && (!myProcess.HasExited))
+    myProcess.Kill();
+
+process.start加參數
+  
+proc = Process.Start("C:\Program Files\Windows Media Player\wmplayer.exe", filename)
+
+Then you can kill it normally.
+
+proc.Kill()
+  
+//------------------------------------------------------------  # 60個
+
+[C#]開啟EXE檔並輸入EXE檔的參數
+
+在程式裡放入下列程式
+Process.Start("路徑", "參數"); 
+
+//------------------------------------------------------------  # 60個
+
+*/
+

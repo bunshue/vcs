@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.Windows.Forms.DataVisualization.Charting;  //for Chart
 
-namespace vcs_Draw_Trigonometry2
+namespace vcs_Chart2b
 {
     public partial class Form1 : Form
     {

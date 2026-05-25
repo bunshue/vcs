@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_Draw_Trigonometry2
+namespace vcs_Chart2b
 {
     static class Program
     {

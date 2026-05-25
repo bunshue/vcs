@@ -27,21 +27,22 @@ namespace vcs_Comport2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.BackColor = Color.Yellow;
             show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
+            this.BackColor = Color.Yellow;
             Comport_Scan();
         }
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 12;
-            y_st = 12;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+            //button
             dx = 170;
             dy = 48;
 
@@ -60,13 +61,24 @@ namespace vcs_Comport2
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             */
 
+            richTextBox1.Size = new Size(300, 690);
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1273, 750);
+            this.Text = "vcs_Comport2";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -83,7 +95,6 @@ namespace vcs_Comport2
                 serialPort1.Write(data, 0, 5);
                 richTextBox1.Text += "send message ok\n";
             }
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -103,9 +114,7 @@ namespace vcs_Comport2
                 serialPort1.Write(data, 0, 7);
                 richTextBox1.Text += "send message ok\n";
             }
-
         }
-
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -121,8 +130,6 @@ namespace vcs_Comport2
                 if (BytesToRead > 0)
                 {
                     //richTextBox1.Text += "BytesToRead = " + BytesToRead.ToString() + "\n";
-
-
 
                     Byte[] receive_buffer = new Byte[2048];		//接收資料緩衝區
 
@@ -141,7 +148,6 @@ namespace vcs_Comport2
                     {
                         input += (char)receive_buffer[i];
                     }
-
                     richTextBox1.Text += input + "\n";
                 }
             }
@@ -222,7 +228,6 @@ namespace vcs_Comport2
 
         public bool Send_IMS_Data(byte cc, byte xx, byte yy, byte zz)
         {
-
             byte[] data = new byte[5];
 
             data[0] = cc;
@@ -289,15 +294,12 @@ namespace vcs_Comport2
             {
                 if (textBox1.TextLength > 0)
                 {
-
                     richTextBox1.Text += "len = " + textBox1.TextLength.ToString() + "\n";
 
                     // Convert a C# string to a byte array  
                     byte[] data1 = Encoding.ASCII.GetBytes(textBox1.Text);   //字串 轉 拜列
 
                     byte[] data2 = Encoding.Default.GetBytes(textBox1.Text);
-
-
 
                     //string str = Encoding.ASCII.GetString(data1); //拜列 轉 字串
                     //richTextBox1.Text += "str = " + str + "\n";
@@ -331,8 +333,6 @@ namespace vcs_Comport2
                 input += (char)receive_buffer[i];
 
             byte[] data = new byte[5];
-            int temperature_data = 0;
-
 
             data[0] = (byte)input[0];
             data[1] = (byte)input[1];
@@ -347,196 +347,7 @@ namespace vcs_Comport2
 
             if (input[0] == 0xA1)
             {
-                if (input[1] == 0xCD)
-                {
-                    if (flag_show_cpu_temperature == true)
-                    {
-                        //溫度偵測顯示
-                        temperature_data = input[2] * 256 + input[3];
-                        //richTextBox1.Text += temperature_data.ToString("X4") + "  ";
-                        float temperature = ((((float)(temperature_data) / 65536.0f) / 0.00198421639f) - 273.15f);
-                        //richTextBox1.Text += temperature.ToString()+" C ";
 
-                        if (temperature > 70)
-                            lb_temperature.ForeColor = Color.Red;
-                        else
-                            lb_temperature.ForeColor = Color.Blue;
-
-                        lb_temperature.Text = temperature.ToString("#0.000") + " C ";
-
-                        /*
-                        #define XAdcPs_RawToTemperature(AdcData)				\
-                        ((((float)(AdcData)/65536.0f)/0.00198421639f ) - 273.15f)
-                        */
-
-                        //溫度偵測圖表
-                        // Define some variables
-                        int numberOfPointsInChart = 15;
-                        int numberOfPointsAfterRemoval = 15;
-
-                        // Simulate adding new data points
-                        float x = pointIndex + 1;
-                        //int y = (int)(2500 * Math.Sin(Math.PI * x * 40 / 180) + 2500);
-                        float y = temperature;
-
-                        chart_temperature.Series[0].Points.AddXY(x, y);
-                        ++pointIndex;
-
-                        // Adjust Y & X axis scale
-                        chart_temperature.ResetAutoValues();
-                        if (chart_temperature.ChartAreas["Default"].AxisX.Maximum < pointIndex)
-                        {
-                            chart_temperature.ChartAreas["Default"].AxisX.Maximum = pointIndex;
-                        }
-
-                        // Keep a constant number of points by removing them from the left
-                        while (chart_temperature.Series[0].Points.Count > numberOfPointsInChart)
-                        {
-                            // Remove data points on the left side
-                            while (chart_temperature.Series[0].Points.Count > numberOfPointsAfterRemoval)
-                            {
-                                chart_temperature.Series[0].Points.RemoveAt(0);
-                            }
-
-                            // Adjust X axis scale
-                            chart_temperature.ChartAreas["Default"].AxisX.Minimum = pointIndex - numberOfPointsAfterRemoval;
-                            chart_temperature.ChartAreas["Default"].AxisX.Maximum = chart_temperature.ChartAreas["Default"].AxisX.Minimum + numberOfPointsInChart;
-                        }
-
-                        // Redraw chart
-                        chart_temperature.Invalidate();
-                    }
-
-                }
-
-            }
-
-
-        }
-
-        //ims 溫度偵測 ST
-
-
-        bool flag_show_cpu_temperature = false;
-
-        //溫度偵測圖表
-        private int pointIndex = 0;
-        Chart chart_temperature = new RealtimeChart().GetChart;
-
-        private void bt_temperature_on_Click(object sender, EventArgs e)
-        {
-            if (serialPort1.IsOpen == false)
-            {
-                richTextBox1.Text += "無連線\n";
-                return;
-            }
-
-            if (flag_show_cpu_temperature == false)
-            {
-                flag_show_cpu_temperature = true;
-                SerialPortTimer100ms.Enabled = true;
-                //溫度偵測 ON
-                Send_IMS_Data(0xFF, 0xCC, 0xFF, 0xAA);
-
-                this.Controls.Add(chart_temperature);
-            }
-        }
-
-        private void bt_temperature_off_Click(object sender, EventArgs e)
-        {
-            if (serialPort1.IsOpen == false)
-            {
-                richTextBox1.Text += "無連線\n";
-                return;
-            }
-
-            if (flag_show_cpu_temperature == true)
-            {
-                flag_show_cpu_temperature = false;
-                SerialPortTimer100ms.Enabled = false;
-                //溫度偵測 OFF
-                Send_IMS_Data(0xFF, 0xCC, 0xFF, 0x55);
-                lb_temperature.Text = "";
-                this.Controls.Remove(chart_temperature);
-            }
-        }
-
-        //溫度偵測圖表
-        //繪圖類別
-        public class RealtimeChart
-        {
-            private Chart chart1 = null;
-            private int chartWidth = 640;
-            private int chartHeight = 480;
-            private string nameAxisX = "時間";
-            private string nameAxisY = "溫度";
-
-            public RealtimeChart()
-            {
-                chart1 = new Chart();
-
-                ChartArea ctArea = new ChartArea();
-                Legend legend = new Legend();
-                Series series = new Series();
-
-                chart1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(223)))), ((int)(((byte)(193)))));
-                chart1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
-                chart1.BorderlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(64)))), ((int)(((byte)(1)))));
-                chart1.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
-                chart1.BorderlineWidth = 2;
-                chart1.BorderSkin.SkinStyle = System.Windows.Forms.DataVisualization.Charting.BorderSkinStyle.Emboss;
-                chart1.Location = new System.Drawing.Point(100, 100);
-                chart1.Name = "chart1";
-                chart1.Size = new System.Drawing.Size(chartWidth, chartHeight);
-                chart1.TabIndex = 1;
-                chart1.Dock = DockStyle.None;
-
-                ctArea.Area3DStyle.Inclination = 15;
-                ctArea.Area3DStyle.IsClustered = true;
-                ctArea.Area3DStyle.IsRightAngleAxes = false;
-                ctArea.Area3DStyle.Perspective = 10;
-                ctArea.Area3DStyle.Rotation = 10;
-                ctArea.Area3DStyle.WallWidth = 0;
-                ctArea.AxisX.IsLabelAutoFit = false;
-                ctArea.AxisX.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
-                ctArea.AxisX.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                ctArea.AxisX.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                ctArea.AxisX.MinorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-                ctArea.AxisX.Title = nameAxisX;
-                ctArea.AxisY.IsLabelAutoFit = false;
-                ctArea.AxisY.LabelStyle.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
-                ctArea.AxisY.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                ctArea.AxisY.MajorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                ctArea.AxisY.Maximum = 80D;
-                ctArea.AxisY.Minimum = 60D;
-                ctArea.AxisY.Title = nameAxisY;
-                ctArea.BackColor = System.Drawing.Color.OldLace;
-                ctArea.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
-                ctArea.BackSecondaryColor = System.Drawing.Color.White;
-                ctArea.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                ctArea.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
-                ctArea.Name = "Default";
-                ctArea.ShadowColor = System.Drawing.Color.Transparent;
-                chart1.ChartAreas.Add(ctArea);
-
-                legend.BackColor = System.Drawing.Color.Transparent;
-                legend.Enabled = false;
-                legend.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold);
-                legend.IsTextAutoFit = false;
-                legend.Name = "Default";
-                chart1.Legends.Add(legend);
-
-                series.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(26)))), ((int)(((byte)(59)))), ((int)(((byte)(105)))));
-                series.ChartArea = "Default";
-                series.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-                series.Legend = "Default";
-                series.Name = "Default";
-                chart1.Series.Add(series);
-            }
-
-            public Chart GetChart
-            {
-                get { return chart1; }
             }
         }
 
@@ -545,66 +356,41 @@ namespace vcs_Comport2
         public int BytesToRead = 0;							//緩衝區內可接收資料數
         string input = "";
 
-        //ims 溫度偵測 SP
-
         private void SerialPortTimer100ms_Tick(object sender, EventArgs e)
         {
-            if (flag_show_cpu_temperature == true)
+            //richTextBox1.Text += "a";
+            //計算serialPort1中有多少位元組 
+            BytesToRead = serialPort1.BytesToRead;
+
+            //richTextBox1.Text += BytesToRead.ToString() + " ";
+            if (BytesToRead > 0)
             {
-                //ims 溫度偵測
-                //計算serialPort1中有多少位元組 
-                int BytesToRead = serialPort1.BytesToRead;
-
-                if (BytesToRead == UART_BUF_LENGTH)
+                input = "";
+                for (int i = 0; i < BytesToRead; i++)
                 {
-                    //serialPort1.Read(放置的位元陣列 , 從第幾個位置開始存放 , 共需存放多少位元)
-                    serialPort1.Read(receive_buffer, 0, BytesToRead);
-                    SpyMonitorRX();
-                }
-                else if (BytesToRead > 0)
-                {
-                    richTextBox1.Text += "丟棄UART buffer內的資料\n";
-                    serialPort1.DiscardInBuffer();  //丟棄UART buffer內的資料
-                }
-            }
-            else
-            {
-                //richTextBox1.Text += "a";
-                //計算serialPort1中有多少位元組 
-                BytesToRead = serialPort1.BytesToRead;
-
-
-
-                //richTextBox1.Text += BytesToRead.ToString() + " ";
-                if (BytesToRead > 0)
-                {
-                    input = "";
-                    for (int i = 0; i < BytesToRead; i++)
+                    if ((i >= 1) && (receive_buffer[i - 1] != 0x0a) && (receive_buffer[i] != 0x0d))
                     {
-                        if ((i >= 1) && (receive_buffer[i - 1] != 0x0a) && (receive_buffer[i] != 0x0d))
-                        {
-                            //MessageBox.Show("got data : " + receive_buffer[i].ToString());
-                            input += (char)receive_buffer[i];
-                        }
-                        if (i == 0)
-                            input += (char)receive_buffer[i];
-                        /*
-                        if (i >= 1)
-                        {
-                            if ((receive_buffer[i - 1] == 0x0a) && (receive_buffer[i] == 0x0d))
-                            {
-                                receive_buffer[i] = (byte)'~';
-                            }
-                        }
+                        //MessageBox.Show("got data : " + receive_buffer[i].ToString());
                         input += (char)receive_buffer[i];
-                        */
                     }
-                    input += "aaaaaa\n";
-
-                    richTextBox1.Text += "bbbbbbbb ";
-                    richTextBox1.AppendText(input);     //打印一般文字訊息
-                    richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
+                    if (i == 0)
+                        input += (char)receive_buffer[i];
+                    /*
+                    if (i >= 1)
+                    {
+                        if ((receive_buffer[i - 1] == 0x0a) && (receive_buffer[i] == 0x0d))
+                        {
+                            receive_buffer[i] = (byte)'~';
+                        }
+                    }
+                    input += (char)receive_buffer[i];
+                    */
                 }
+                input += "aaaaaa\n";
+
+                richTextBox1.Text += "bbbbbbbb ";
+                richTextBox1.AppendText(input);     //打印一般文字訊息
+                richTextBox1.ScrollToCaret();       //RichTextBox顯示訊息自動捲動，顯示最後一行
             }
         }
 
@@ -668,7 +454,6 @@ namespace vcs_Comport2
             return 1;
         }
 
-
         private void bt_comport_disconnect_Click(object sender, EventArgs e)
         {
             if (serialPort1.IsOpen == true)
@@ -702,7 +487,6 @@ namespace vcs_Comport2
             // Set the KeyPress event as handled so the character won't
             // display locally. If you want it to display, omit the next line.
             e.Handled = true;
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -729,7 +513,6 @@ namespace vcs_Comport2
             //write 2
             string cmd = "systeminfo";
             serialPort1.WriteLine(cmd);
-
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -770,4 +553,18 @@ namespace vcs_Comport2
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
 

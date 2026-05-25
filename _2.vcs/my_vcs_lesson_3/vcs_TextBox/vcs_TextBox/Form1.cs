@@ -289,11 +289,138 @@ namespace vcs_TextBox
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-//1515
-//---------------  # 15個
-
-
 /*  可搬出
+
+*/
+
+
+/*
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十六進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || ((e.KeyChar >= 'A') && (e.KeyChar <= 'F')) || ((e.KeyChar >= 'a') && (e.KeyChar <= 'f')) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 限制 TextBox只能輸入十進位碼、Backspace、Enter
+            // e.KeyChar == (Char)48 ~ 57 -----> 0~9
+            // e.KeyChar == (Char)8 -----------> Backspace
+            // e.KeyChar == (Char)13-----------> Enter            
+            if ((e.KeyChar >= (Char)48 && e.KeyChar <= (Char)57) || (e.KeyChar == (Char)13) || (e.KeyChar == (Char)8))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+        
+
+textBox 的 KeyPress
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != 13)
+            {
+                e.Handled = true;
+            }
+            else if (e.KeyChar == 13)
+            {
+                int textSize = int.Parse(textBox2.Text);
+                //ApplyTextSize(textSize);
+
+                e.Handled = true;
+                this.richTextBox1.Focus();
+            }
+        }
+
+ C# 限定textbox只能輸入數字 
+ 
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (((int)e.KeyChar < 48 | (int)e.KeyChar > 57) & (int)e.KeyChar != 8)
+            {
+                e.Handled = true;
+            }
+        }
+
+
+
+//------------------------------------------------------------  # 60個
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (Char)Keys.Return)						//如果按下回车键
+            {
+                if (textBox1.Text.Length > 8)							//如果位数大于8
+                {
+                    textBox1.Text = textBox1.Text.Substring(0, 8);			//获取前8位数
+                }
+                else
+                {
+                    int j = 8 - textBox1.Text.Length;						//确定增加的位数
+                    for (int i = 0; i < j; i++)
+                    {
+                        textBox1.Text = "0" + textBox1.Text;
+                    }
+                }
+            }
+        }
+
+
+
+KeyPress 之 e.Handled的意義
+
+private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+{
+    if (e.KeyChar == (Char)48 || e.KeyChar == (Char)49 ||
+        e.KeyChar == (Char)50 || e.KeyChar == (Char)51 ||
+        e.KeyChar == (Char)52 || e.KeyChar == (Char)53 ||
+        e.KeyChar == (Char)54 || e.KeyChar == (Char)55 ||
+        e.KeyChar == (Char)56 || e.KeyChar == (Char)57 ||
+        e.KeyChar == (Char)8  || e.KeyChar == (Char)46)
+    {
+        e.Handled = false;  //允許textBox1物件接受按鍵
+    }
+    else
+    {
+        e.Handled = true;   //不允許textBox1物件接受按鍵
+    }
+	
+	if (e.KeyChar == (char)8) //允许输入回退键
+	{
+		e.Handled = false;
+	}
+	else
+	{
+		e.Handled = true;//为true时表示已经处理了事件（即不处理当前键盘事件  不接受）
+	}
+}
+
+//------------------------------------------------------------  # 60個
+
+private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+{
+	if (!(e.KeyChar >= '0' && e.KeyChar <= '9'))
+	{
+		e.Handled = true;
+	}
+}
+說明：這裡的textBox1，會排除0~9以外的文字，換句話說就是只顯示數字
+
+//------------------------------------------------------------  # 60個
 
 */
 

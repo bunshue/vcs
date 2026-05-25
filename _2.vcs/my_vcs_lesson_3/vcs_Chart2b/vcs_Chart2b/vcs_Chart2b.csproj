@@ -8,8 +8,8 @@
     <ProjectGuid>{82885FAA-E858-4CE8-B630-C406A8B1CACB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_Draw_Trigonometry2</RootNamespace>
-    <AssemblyName>vcs_Draw_Trigonometry2</AssemblyName>
+    <RootNamespace>vcs_Chart2b</RootNamespace>
+    <AssemblyName>vcs_Chart2b</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

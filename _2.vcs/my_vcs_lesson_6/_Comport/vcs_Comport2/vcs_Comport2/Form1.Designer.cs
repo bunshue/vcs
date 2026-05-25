@@ -39,10 +39,6 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.groupBox20 = new System.Windows.Forms.GroupBox();
-            this.bt_temperature_off = new System.Windows.Forms.Button();
-            this.lb_temperature = new System.Windows.Forms.Label();
-            this.bt_temperature_on = new System.Windows.Forms.Button();
             this.SerialPortTimer100ms = new System.Windows.Forms.Timer(this.components);
             this.groupBox_comport = new System.Windows.Forms.GroupBox();
             this.comboBox_comport = new System.Windows.Forms.ComboBox();
@@ -57,7 +53,6 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
-            this.groupBox20.SuspendLayout();
             this.groupBox_comport.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport)).BeginInit();
             this.SuspendLayout();
@@ -84,6 +79,7 @@
             // 
             // richTextBox1
             // 
+            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox1.Location = new System.Drawing.Point(853, 65);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(255, 483);
@@ -117,9 +113,10 @@
             // 
             // bt_clear
             // 
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_clear.Location = new System.Drawing.Point(962, 445);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(75, 23);
+            this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 13;
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
@@ -152,54 +149,6 @@
             this.textBox1.Size = new System.Drawing.Size(173, 22);
             this.textBox1.TabIndex = 17;
             this.textBox1.Text = "This is an ims test message.";
-            // 
-            // groupBox20
-            // 
-            this.groupBox20.Controls.Add(this.bt_temperature_off);
-            this.groupBox20.Controls.Add(this.lb_temperature);
-            this.groupBox20.Controls.Add(this.bt_temperature_on);
-            this.groupBox20.Location = new System.Drawing.Point(12, 625);
-            this.groupBox20.Name = "groupBox20";
-            this.groupBox20.Size = new System.Drawing.Size(172, 136);
-            this.groupBox20.TabIndex = 187;
-            this.groupBox20.TabStop = false;
-            // 
-            // bt_temperature_off
-            // 
-            this.bt_temperature_off.BackColor = System.Drawing.SystemColors.Control;
-            this.bt_temperature_off.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_temperature_off.ForeColor = System.Drawing.Color.Red;
-            this.bt_temperature_off.Location = new System.Drawing.Point(33, 95);
-            this.bt_temperature_off.Name = "bt_temperature_off";
-            this.bt_temperature_off.Size = new System.Drawing.Size(118, 32);
-            this.bt_temperature_off.TabIndex = 184;
-            this.bt_temperature_off.Text = "溫度偵測 OFF";
-            this.bt_temperature_off.UseVisualStyleBackColor = false;
-            this.bt_temperature_off.Click += new System.EventHandler(this.bt_temperature_off_Click);
-            // 
-            // lb_temperature
-            // 
-            this.lb_temperature.AutoSize = true;
-            this.lb_temperature.Font = new System.Drawing.Font("Arial", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_temperature.ForeColor = System.Drawing.Color.Red;
-            this.lb_temperature.Location = new System.Drawing.Point(11, 16);
-            this.lb_temperature.Name = "lb_temperature";
-            this.lb_temperature.Size = new System.Drawing.Size(37, 41);
-            this.lb_temperature.TabIndex = 185;
-            this.lb_temperature.Text = "c";
-            // 
-            // bt_temperature_on
-            // 
-            this.bt_temperature_on.BackColor = System.Drawing.SystemColors.Control;
-            this.bt_temperature_on.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_temperature_on.ForeColor = System.Drawing.Color.Red;
-            this.bt_temperature_on.Location = new System.Drawing.Point(33, 60);
-            this.bt_temperature_on.Name = "bt_temperature_on";
-            this.bt_temperature_on.Size = new System.Drawing.Size(118, 32);
-            this.bt_temperature_on.TabIndex = 183;
-            this.bt_temperature_on.Text = "溫度偵測 ON";
-            this.bt_temperature_on.UseVisualStyleBackColor = false;
-            this.bt_temperature_on.Click += new System.EventHandler(this.bt_temperature_on_Click);
             // 
             // SerialPortTimer100ms
             // 
@@ -353,7 +302,6 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.groupBox_comport);
-            this.Controls.Add(this.groupBox20);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
@@ -366,8 +314,6 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.groupBox20.ResumeLayout(false);
-            this.groupBox20.PerformLayout();
             this.groupBox_comport.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport)).EndInit();
             this.ResumeLayout(false);
@@ -387,10 +333,6 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.GroupBox groupBox20;
-        private System.Windows.Forms.Button bt_temperature_off;
-        private System.Windows.Forms.Label lb_temperature;
-        private System.Windows.Forms.Button bt_temperature_on;
         private System.Windows.Forms.Timer SerialPortTimer100ms;
         private System.Windows.Forms.GroupBox groupBox_comport;
         private System.Windows.Forms.ComboBox comboBox_comport;
