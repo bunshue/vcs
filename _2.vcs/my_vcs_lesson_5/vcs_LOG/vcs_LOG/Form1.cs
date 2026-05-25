@@ -51,10 +51,15 @@ namespace vcs_LOG
         void show_item_location()
         {
             //button
+            int W = 200;
+            int H = 300;
             int x_st = 10;
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
+
+            //groupBox1.Size = new Size(W, H);
+            //groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
             richTextBox1.Size = new Size(400, 690);
             richTextBox1.Location = new Point(x_st + dx * 2 + 50, y_st + dy * 0);

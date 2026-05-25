@@ -62,12 +62,12 @@ namespace vcs_Remove_Bin_Obj
             //取得目前所在路徑
             string currentPath = Directory.GetCurrentDirectory();
 
-            this.Text = "目前位置 : " + currentPath;
             search_path = currentPath;
             specified_search_path = currentPath;
             lb_main_mesg.Text = "";
 
             this.Size = new Size(1200, 650);
+            this.Text = "目前位置 : " + currentPath;
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
@@ -79,6 +79,8 @@ namespace vcs_Remove_Bin_Obj
             result_str = "";
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -866,3 +868,16 @@ namespace vcs_Remove_Bin_Obj
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+

@@ -223,8 +223,6 @@ comboBox自行繪制顯示的內容，在這邊需要將comboBox中的屬性'Dra
 使用即時運算視窗
 System.Diagnostics.Debug.WriteLine("aaaaaaaaaaaaaaaaaaaaaaa");
 
-
-
 using System.Diagnostics;           //for Debug
             Debug.Assert(Math.Abs(total) < 0.001f);
  
@@ -1520,9 +1518,6 @@ g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;//使画出
             pictureBox1.Location = new Point((this.Width - pictureBox1.Image.Width) / 2, (this.Height - pictureBox1.Image.Height) / 2);
 
 //------------------------------------------------------------  # 60個
-
-string filename = Application.StartupPath + "\\word_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".doc";
-string filename = Application.StartupPath + "\\gif_"  + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".gif";
 
 _filename = Path.GetFullPath(Path.Combine(Application.StartupPath, "..\\..")) + "\\test.png";
 filename1 = Path.GetFullPath(Path.Combine(System.Windows.Forms.Application.StartupPath, @"..\..")) + @"\Step.doc";
@@ -11196,12 +11191,8 @@ MediaPlay 9
 
 右擊工具箱->選擇項(I)... -> 顯示"選擇工具箱項" -> COM組件 -> Windows Media Player   wmp.dll 添加
 
-
-
 僅支持 ims 相機
 移除Cam時  應順道移除事件
-
-複製webp圖片  可以直接在網頁上按右鍵選"複製圖片" 用vcs_Clipboard貼上並存成檔案
 
 用clone的方法 用圖像鏡射旋轉方法 應該很容易用來處理一般圖片
 
@@ -11265,14 +11256,6 @@ Ctrl + Shift + P
     雙擊截圖區域  儲存圖片到剪貼簿
     滑鼠右鍵點選
     退出截圖模式
-
-//------------------------------------------------------------  # 60個
-
-Clipboard
-
-Clipboard內的影像[全部]顯示在pbx上、影像另存新檔	done
-Clipboard內的影像[部分]顯示在pbx上、影像另存新檔	done	目前無法放大/縮小 目前只能做矩形
-測試一下網頁中的"複製圖片"，是否可以用此方法變成檔案	可
 
 //------------------------------------------------------------  # 60個
 
@@ -13584,12 +13567,6 @@ string dir = Application.StartupPath + "\\";
 
 File.Create(Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt");
 
-                    richTextBox1.Text += "存檔成功\n";
-                    richTextBox1.Text += "已存檔 : " + filename + "\n";
-
-			//控件位置
-			bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-			
 //把Form大小設定跟圖片大小一樣
 //ClientSize = new Size(pictureBox1.Right + pictureBox1.Left, pictureBox1.Bottom + pictureBox1.Left);
 
@@ -14561,9 +14538,6 @@ rotateImage.Save(@filename, ImageFormat.Jpeg);
 richTextBox1.Text += "影像旋轉，存檔完成，檔名：" + filename + "\n";
 */
 
-
-
-
 pictureBox圖像直接存檔
 pictureBox1.Image.Save(filename);
 
@@ -14589,7 +14563,4 @@ pictureBox1.Image.Save(filename);
                             break;
                     }
                     fs.Close();         					//關閉文件流
-
-
-
 

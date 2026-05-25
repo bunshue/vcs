@@ -11,8 +11,6 @@ namespace vcs_BarcodeScanner
 {
     public partial class Form1 : Form
     {
-        private const int BORDER = 30;
-
         public Form1()
         {
             InitializeComponent();
@@ -25,28 +23,30 @@ namespace vcs_BarcodeScanner
 
         void show_item_location()
         {
-            /*
-            int W = 640;
-            int H = 480;
-            int x_st = BORDER;
-            int y_st = BORDER;
-            int dx = 140 + 50;
-            int dy = 50 + 15;
-            */
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
 
-            //pictureBox1.Size = new Size(W, H);
-            //pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-
-            //richTextBox1.Size = new Size(300, 600);
-            //richTextBox1.Location = new Point(x_st + dx * 4 + 70, y_st + dy * 0);
-
+            richTextBox1.Size = new Size(730, 200);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            //this.Size = new Size(1273, 750);
+            this.Text = "vcs_BarcodeScanner";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         int ccc = 0;
         int timer_cnt = 0;
@@ -121,4 +121,15 @@ namespace vcs_BarcodeScanner
     }
 }
 
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
 

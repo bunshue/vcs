@@ -320,7 +320,21 @@ namespace vcs_SendTo_All
 
             bt_open_folder.BackgroundImage = vcs_SendTo_All.Properties.Resources.folder_open;
             bt_refresh.BackgroundImage = vcs_SendTo_All.Properties.Resources.refresh;
+
+            //this.Size = new Size(1273, 750);
+            //this.Text = "vcs_test_all_00_Usually";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         void show_listView()
         {
@@ -712,3 +726,16 @@ namespace vcs_SendTo_All
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
