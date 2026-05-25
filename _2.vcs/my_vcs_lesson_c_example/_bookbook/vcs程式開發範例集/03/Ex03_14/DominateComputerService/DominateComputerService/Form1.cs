@@ -27,7 +27,7 @@ namespace DominateComputerService
         {
             serviceController1.MachineName = ".";
             serviceController1.ServiceName = "IISAdmin";//Iis 服務
-             if (serviceController1.Status == ServiceControllerStatus.Running)
+            if (serviceController1.Status == ServiceControllerStatus.Running)
             {
                 MessageBox.Show(serviceController1.DisplayName + "  服務正在運行");
                 button2.Enabled = false;
@@ -37,7 +37,7 @@ namespace DominateComputerService
             }
             else
             {
-                
+
                 serviceController1.Start();
                 MessageBox.Show(serviceController1.DisplayName + "  服務已開啟");
                 button2.Enabled = false;
@@ -59,21 +59,21 @@ namespace DominateComputerService
                     MessageBox.Show(serviceController1.DisplayName + "  服務已開啟");
                     button2.Enabled = true;
                     button3.Enabled = false;
-             
+
                 }
                 else
                 {
                     MessageBox.Show(serviceController1.DisplayName + "服務已停止");
                     button3.Enabled = false;
                     button1.Enabled = true;
-                 
+
                 }
             }
             catch (Exception ee)
             { MessageBox.Show(ee.Message); }
 
         }
-  
+
         //停止IIS服務的狀態
         private void button2_Click(object sender, EventArgs e)
         {
@@ -89,7 +89,7 @@ namespace DominateComputerService
                     button3.Enabled = false;
                     button1.Enabled = false;
                     Application.Exit();
-                 }
+                }
                 else
                 {
                     MessageBox.Show(serviceController1.DisplayName + "不可以停止");
@@ -97,12 +97,14 @@ namespace DominateComputerService
                     button3.Enabled = false;
                     button1.Enabled = false;
                     Application.Exit();
-                 
+
                 }
             }
             catch (Exception ee)
-                { MessageBox.Show(ee.Message); }
-       
+            { MessageBox.Show(ee.Message); }
+
         }
     }
 }
+
+

@@ -46,5 +46,3 @@ namespace VerdictEconomyLogWetherAmendOrNot
         }
     }
 }
-
-

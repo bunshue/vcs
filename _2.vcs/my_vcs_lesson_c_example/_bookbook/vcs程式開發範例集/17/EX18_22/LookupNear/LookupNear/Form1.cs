@@ -25,6 +25,11 @@ namespace LookupNear
 
         }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+
+        }
+
         public string LOCATE(int[] XX, int N, int X)//N數值的個數，M尋找的數值
         {
             int tem_n;//定義變數

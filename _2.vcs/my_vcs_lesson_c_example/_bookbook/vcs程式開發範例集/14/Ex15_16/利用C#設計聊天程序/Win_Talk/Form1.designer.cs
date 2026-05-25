@@ -62,7 +62,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(72, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 21;
             this.label1.Text = "使用者名：";
             // 
@@ -107,7 +107,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(131, 7);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(188, 21);
+            this.textBox1.Size = new System.Drawing.Size(188, 22);
             this.textBox1.TabIndex = 16;
             // 
             // button1
@@ -124,7 +124,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(395, 236);
+            this.ClientSize = new System.Drawing.Size(666, 537);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);

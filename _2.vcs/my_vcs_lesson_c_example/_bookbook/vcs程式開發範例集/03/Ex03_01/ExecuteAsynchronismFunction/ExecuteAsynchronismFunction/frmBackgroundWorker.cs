@@ -56,7 +56,6 @@ namespace ExecuteAsynchronismFunction
 
         private void startAsyncButton_Click(object sender, EventArgs e)
         {
-
             resultLabel.Text = String.Empty;
             this.numericUpDown1.Enabled = false;
             this.startAsyncButton.Enabled = false;
@@ -64,7 +63,6 @@ namespace ExecuteAsynchronismFunction
             numberToCompute = (int)numericUpDown1.Value;
             highestPercentageReached = 0;
             backgroundWorker1.RunWorkerAsync(numberToCompute);
-
         }
 
         long ComputeFibonacci(int n, BackgroundWorker worker, DoWorkEventArgs e)

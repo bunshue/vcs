@@ -6,8 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;
 using System.Security.Cryptography;
+
 namespace 利用圖片加密文件
 {
     public partial class Form1 : Form
@@ -109,7 +111,6 @@ namespace 利用圖片加密文件
             {
                 MessageBox.Show(ex.Message);
                 richTextBox1.Text += ex.Message + "\n";
-
             }
         }
 

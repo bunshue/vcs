@@ -166,7 +166,7 @@ namespace TheEntryOfControl
             // button1
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(132, 168);
+            this.button1.Location = new System.Drawing.Point(130, 181);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 18;
@@ -178,7 +178,7 @@ namespace TheEntryOfControl
             // button2
             // 
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(227, 168);
+            this.button2.Location = new System.Drawing.Point(225, 181);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 19;

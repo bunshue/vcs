@@ -46,12 +46,13 @@
             this.txtInputDir = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.bt_clear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtUrlPrefix
             // 
-            this.txtUrlPrefix.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtUrlPrefix.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtUrlPrefix.Location = new System.Drawing.Point(105, 84);
             this.txtUrlPrefix.Name = "txtUrlPrefix";
             this.txtUrlPrefix.Size = new System.Drawing.Size(662, 22);
@@ -114,8 +115,8 @@
             // 
             // txtWebPage
             // 
-            this.txtWebPage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtWebPage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtWebPage.Location = new System.Drawing.Point(105, 60);
             this.txtWebPage.Name = "txtWebPage";
             this.txtWebPage.Size = new System.Drawing.Size(662, 22);
@@ -145,8 +146,8 @@
             // 
             // txtOutputDir
             // 
-            this.txtOutputDir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtOutputDir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtOutputDir.Location = new System.Drawing.Point(105, 35);
             this.txtOutputDir.Name = "txtOutputDir";
             this.txtOutputDir.Size = new System.Drawing.Size(662, 22);
@@ -175,8 +176,8 @@
             // 
             // txtInputDir
             // 
-            this.txtInputDir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtInputDir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtInputDir.Location = new System.Drawing.Point(105, 11);
             this.txtInputDir.Name = "txtInputDir";
             this.txtInputDir.Size = new System.Drawing.Size(662, 22);
@@ -199,12 +200,24 @@
             this.richTextBox1.TabIndex = 33;
             this.richTextBox1.Text = "";
             // 
+            // bt_clear
+            // 
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(27, 191);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(72, 36);
+            this.bt_clear.TabIndex = 34;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnGo;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(808, 535);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.txtUrlPrefix);
             this.Controls.Add(this.label6);
@@ -248,6 +261,7 @@
         private System.Windows.Forms.TextBox txtInputDir;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button bt_clear;
     }
 }
 

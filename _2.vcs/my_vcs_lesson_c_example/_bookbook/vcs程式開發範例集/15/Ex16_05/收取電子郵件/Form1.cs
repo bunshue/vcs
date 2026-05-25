@@ -7,30 +7,28 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-
 //using System.Net;
 using System.Net.Sockets;
 using System.IO;
 
-
 namespace 收取電子郵件
 {
-
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-        private void Form1_Load(object sender, EventArgs e)
-        {
-        }
-
         TcpClient server;//接服務器
         string sendstring;//用於儲存POP3服務命令參數
         byte[] bufferstring;//用於儲存POP3服務命令參數字節數
         NetworkStream networkstream;//接服務器與服務器進行數據交互
         StreamReader streamreader;//讀取訊息數據
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -126,3 +124,4 @@ namespace 收取電子郵件
         }
     }
 }
+

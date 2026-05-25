@@ -21,6 +21,7 @@ namespace EstablishDummyCatalog
         {
 
         }
+
         public void getFilter(string strPath, string strName)
         {
             string virtualDirName = strName;//虛擬目錄名稱
@@ -67,3 +68,4 @@ namespace EstablishDummyCatalog
         }
     }
 }
+

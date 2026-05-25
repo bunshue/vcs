@@ -23,18 +23,18 @@ namespace win_talkClient
         bool flag = true;
         #endregion
 
-       
 
-       #region//聲名委託
+
+        #region//聲名委託
         delegate void SetTextCallback(string text);
         private void SetText(string text)
         {
-           textBox2.AppendText(text + "\r\n");
-       }
+            textBox2.AppendText(text + "\r\n");
+        }
         #endregion
 
-       #region//程序
-       private void Proccess()
+        #region//程序
+        private void Proccess()
         {
             if (socket.Connected)
             {
@@ -43,18 +43,18 @@ namespace win_talkClient
                     byte[] receiveByte = new byte[64];
                     socket.Receive(receiveByte, receiveByte.Length, 0);
                     string strInfo = Encoding.BigEndianUnicode.GetString(receiveByte);
-                    this.Invoke(new SetTextCallback(SetText),new object[]{strInfo});  
+                    this.Invoke(new SetTextCallback(SetText), new object[] { strInfo });
                 }
             }
         }
-       #endregion
+        #endregion
 
         private void button2_Click(object sender, EventArgs e)
         {
             try
             {
                 Byte[] sendByte = new Byte[64];
-                string sendStr = this.textBox1.Text + "：" + this.textBox3.Text+"\r\n";
+                string sendStr = this.textBox1.Text + "：" + this.textBox3.Text + "\r\n";
                 sendByte = Encoding.BigEndianUnicode.GetBytes(sendStr.ToCharArray());
                 socket.Send(sendByte, sendByte.Length, 0);
 
@@ -62,34 +62,34 @@ namespace win_talkClient
             }
             catch { }
         }
-        
+
         public Form1()
-            {
-                InitializeComponent();
-            }
+        {
+            InitializeComponent();
+        }
 
         private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            HostIP = IPAddress.Parse(textBox1.Text.Trim());
+            try
             {
+                point = new IPEndPoint(HostIP, Int32.Parse("11000"));
+                socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                socket.Connect(point);
 
+                Thread thread = new Thread(new ThreadStart(Proccess));
+                thread.Start();
             }
-
-         private void button1_Click(object sender, EventArgs e)
+            catch (Exception ey)
             {
-                HostIP = IPAddress.Parse(textBox1.Text.Trim());
-                try
-                {
-                    point = new IPEndPoint(HostIP, Int32.Parse("11000"));
-                    socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                    socket.Connect(point);
-
-                    Thread thread = new Thread(new ThreadStart(Proccess));
-                    thread.Start();
-                }
-                catch(Exception ey)
-                {
-                    MessageBox.Show("服務器沒有開啟\r\n"+ey.Message);
-                }
+                MessageBox.Show("服務器沒有開啟\r\n" + ey.Message);
             }
+        }
 
         private void button3_Click(object sender, EventArgs e)
         {

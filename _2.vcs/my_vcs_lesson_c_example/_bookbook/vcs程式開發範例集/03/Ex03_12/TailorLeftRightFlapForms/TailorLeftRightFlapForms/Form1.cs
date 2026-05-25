@@ -26,18 +26,15 @@ namespace TailorLeftRightFlapForms
             Rectangle rect = new Rectangle();
             rect = Screen.GetWorkingArea(this);
 
-
             if (this.Left != (rect.Width - this.Width))
             {
                 this.Left++;
                 this.Top += 1;
-
             }
             else
             {
                 timer1.Enabled = false;
                 timer2.Enabled = true;
-
             }
         }
 

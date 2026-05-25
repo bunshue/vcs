@@ -23,23 +23,23 @@ namespace Win_Talk
         {
         }
 
-        #region//定義變數
+        //#region//定義變數
         IPAddress HostIP = IPAddress.Parse("127.0.0.1");
         IPEndPoint point;
         Socket socket;
         bool flag = true;
         Socket acceptedSocket;
-        #endregion
+        //#endregion
 
-        #region//聲名委託
+        //#region//聲名委託
         delegate void SetTextCallback(string text);
         private void SetText(string text)
         {
             textBox2.AppendText(text + "\r\n");
         }
-        #endregion
+        //#endregion
 
-        #region//程序方法
+        //#region//程序方法
         private void Proccess()
         {
             if (acceptedSocket.Connected)
@@ -54,7 +54,7 @@ namespace Win_Talk
                 }
             }
         }
-        #endregion
+        //#endregion
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -94,3 +94,4 @@ namespace Win_Talk
         }
     }
 }
+

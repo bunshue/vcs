@@ -26,11 +26,13 @@ namespace howto_print_form
 
         private void btnForm_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "列印全表單\n";
             ShowControlImage(this);
         }
 
         private void btnClientArea_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "列印表單的客戶區\n";
             using (Bitmap bm = GetFormImageWithoutBorders(this))
             {
                 PrintImage(bm);
@@ -39,11 +41,14 @@ namespace howto_print_form
 
         private void btnGroupBox_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "列印表單的GroupBox\n";
             ShowControlImage(groupBox1);
         }
 
         private void btnPage1_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "列印tabControl的第一頁\n";
+
             int selected = tabControl1.SelectedIndex;
             tabControl1.SelectedIndex = 0;
 
@@ -54,6 +59,8 @@ namespace howto_print_form
 
         private void btnPage2_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "列印tabControl的第二頁\n";
+
             int selected = tabControl1.SelectedIndex;
             tabControl1.SelectedIndex = 1;
 
@@ -127,3 +134,4 @@ namespace howto_print_form
         }
     }
 }
+

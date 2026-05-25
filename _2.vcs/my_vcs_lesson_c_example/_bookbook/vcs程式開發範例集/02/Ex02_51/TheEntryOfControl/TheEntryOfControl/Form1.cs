@@ -17,7 +17,10 @@ namespace TheEntryOfControl
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            textBox1.Text = "david";
+            textBox5.Text = "22";
+            textBox7.Text = "B";
+            radioButton1.Checked = true;
         }
 
         protected override void OnKeyPress(KeyPressEventArgs e)

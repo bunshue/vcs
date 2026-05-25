@@ -23,8 +23,17 @@ namespace vcs_ListBox2
             //------------------------------------------------------------  # 60個
 
             //字串一維陣列
-            string[] ZodiacSign = { "水瓶座", "雙魚座", "牡羊座", "金牛座", "雙子座", "巨蟹座" };
-            listBox_left.Items.AddRange(ZodiacSign);
+            //string[] ZodiacSign = { "水瓶座", "雙魚座", "牡羊座", "金牛座", "雙子座", "巨蟹座" };
+            //listBox_left.Items.AddRange(ZodiacSign);
+
+            string[] animals = { "米老鼠", "班尼牛", "跳跳虎", "彼得兔", "豆豆龍", "貪吃蛇", "草泥馬", "喜羊羊", "山道猴", "肯德雞", "貴賓狗", "佩佩豬" };
+
+            //listBox_left.DataSource = animals;   //list用了DataSource, 內容不可改變
+            foreach (string animal in animals)
+            {
+                listBox_left.Items.Add(animal);
+            }
+
 
             SetButtonsEditable();
         }
@@ -148,25 +157,61 @@ namespace vcs_ListBox2
         // Move selected items to listBox_right.
         private void bt_right_Click(object sender, EventArgs e)
         {
-            MoveSelectedItems(listBox_left, listBox_right);
+            //單個添加到選擇的項中
+
+            //MoveSelectedItems(listBox_left, listBox_right);
+
+            if (listBox_left.SelectedIndex != -1)
+            {
+                this.listBox_right.Items.Add(this.listBox_left.SelectedItem.ToString());
+                this.listBox_left.Items.Remove(this.listBox_left.SelectedItem);
+            }
+
+
         }
 
         // Move all items to listBox_right.
         private void bt_right_all_Click(object sender, EventArgs e)
         {
-            MoveAllItems(listBox_left, listBox_right);
+            //全部添加到選擇的項中
+
+            //MoveAllItems(listBox_left, listBox_right);
+
+            for (int i = 0; i < listBox_left.Items.Count; i++)
+            {
+                listBox_left.SelectedIndex = i;
+                listBox_right.Items.Add(listBox_left.SelectedItem.ToString());
+            }
+            listBox_left.Items.Clear();
         }
 
         // Move all items to listBox_left.
         private void bt_left_all_Click(object sender, EventArgs e)
         {
-            MoveAllItems(listBox_right, listBox_left);
+            //全部添加到數據源中
+
+            //MoveAllItems(listBox_right, listBox_left);
+
+            for (int i = 0; i < listBox_right.Items.Count; i++)
+            {
+                listBox_right.SelectedIndex = i;
+                listBox_left.Items.Add(listBox_right.SelectedItem.ToString());
+            }
+            listBox_right.Items.Clear();
         }
 
         // Move selected items to listBox_left.
         private void bt_left_Click(object sender, EventArgs e)
         {
-            MoveSelectedItems(listBox_right, listBox_left);
+            //單個添加到數據源中
+
+            //MoveSelectedItems(listBox_right, listBox_left);
+
+            if (listBox_right.SelectedIndex != -1)
+            {
+                this.listBox_left.Items.Add(this.listBox_right.SelectedItem.ToString());
+                this.listBox_right.Items.Remove(this.listBox_right.SelectedItem);
+            }
         }
 
         // Move selected items from one ListBox to another.

@@ -41,9 +41,9 @@ namespace vcs_Chart2
 
             //開始
             chart1 = new RealtimeChart().GetChart;
-            timer1.Enabled = true;
             this.Controls.Add(chart1);
-            chart1.BringToFront();
+
+            timer1.Enabled = true;
         }
 
         void show_item_location()
@@ -52,7 +52,6 @@ namespace vcs_Chart2
             int y_st = 10;
             int dx = W + 10;
             int dy = H + 10;
-
             chart0.Size = new Size(W, H);
             chart0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox1.Size = new Size(W, H);

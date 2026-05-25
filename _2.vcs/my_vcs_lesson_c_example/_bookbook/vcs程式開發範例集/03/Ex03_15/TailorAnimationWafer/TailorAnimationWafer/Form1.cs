@@ -15,26 +15,24 @@ namespace TailorAnimationWafer
             InitializeComponent();
         }
 
-        public int intImage =0;//控件圖片索引
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            if (intImage != 11)
-            {
-                
-                pictureBox1.Image = imageList1.Images[intImage];
-                intImage++;
-                
-            }
-            if (intImage == 11)
-            {
-                intImage = 0;
-            }
-            //
-        }
-
         private void Form2_Load(object sender, EventArgs e)
         {
             timer1.Enabled = true;
         }
+
+        public int index = 0;//控件圖片索引
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (index != 11)
+            {
+                pictureBox1.Image = imageList1.Images[index];
+                index++;
+            }
+            if (index == 11)
+            {
+                index = 0;
+            }
+        }
     }
 }
+

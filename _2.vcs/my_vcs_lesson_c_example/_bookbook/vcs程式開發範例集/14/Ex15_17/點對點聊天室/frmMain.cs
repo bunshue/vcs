@@ -6,20 +6,24 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Net.Sockets;
+
 using System.Threading;
 using System.IO;
 using System.Net;
+using System.Net.Sockets;
+
 namespace 點對點聊天室
 {
     public partial class frmMain : Form
     {
+        private Thread td;
+        private TcpListener tcpListener;
+
         public frmMain()
         {
             InitializeComponent();
         }
-        private Thread td;
-        private TcpListener tcpListener;
+
         private void frmMain_Load(object sender, EventArgs e)
         {
             td = new Thread(new ThreadStart(this.StartListen));
@@ -36,7 +40,7 @@ namespace 點對點聊天室
             try
             {
                 IPAddress[] ip = Dns.GetHostAddresses(Dns.GetHostName());
-                string message = " "+txtName.Text + "("+ip[0].ToString()+") "+DateTime.Now.ToLongTimeString()+"\n" +"  "+ this.rtbSend.Text + "\n";
+                string message = " " + txtName.Text + "(" + ip[0].ToString() + ") " + DateTime.Now.ToLongTimeString() + "\n" + "  " + this.rtbSend.Text + "\n";
                 TcpClient client = new TcpClient(txtIP.Text, 888);
                 NetworkStream netstream = client.GetStream();
                 StreamWriter wstream = new StreamWriter(netstream, Encoding.Default);
@@ -94,7 +98,7 @@ namespace 點對點聊天室
         {
             if (e.KeyChar == '\r')
             {
-                button2_Click(sender,e);
+                button2_Click(sender, e);
             }
         }
     }
