@@ -1,4 +1,5 @@
-﻿陣列 一維陣列 二維陣列
+﻿
+陣列 一維陣列 二維陣列
 
 //string[] names = new string[] { "張三", "李四", "王五" };
 //string[] items = new string[] { "螢幕", "滑鼠", "鍵盤" };
@@ -219,9 +220,97 @@ comboBox自行繪制顯示的內容，在這邊需要將comboBox中的屬性'Dra
 
 //------------------------------------------------------------  # 60個
 
-
 使用即時運算視窗
 System.Diagnostics.Debug.WriteLine("aaaaaaaaaaaaaaaaaaaaaaa");
+
+
+
+using System.Diagnostics;           //for Debug
+            Debug.Assert(Math.Abs(total) < 0.001f);
+ 
+//------------------------------------------------------------  # 60個
+
+C# Debug的方法，可以將debug msg在『輸出』視窗觀看
+
+using System.Diagnostics;
+ 
+Debug.Print("欲輸出訊息");
+
+"即時運算視窗"
+
+勾選 
+【工具】→【選項】→【偵錯】→【將所有輸出視窗文字重新導向到即時運算視窗】
+
+
+//------------------------------------------------------------  # 60個
+
+不用richTextBox的debug方法            
+
+寫
+System.Diagnostics.Debug.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+
+到【輸出】視窗看輸出資料
+
+先到專案/右鍵/屬性/建置 勾選 定義DEBUG常數
+
+//------------------------------------------------------------  # 60個
+
+//using System.Diagnostics;
+                // Validation.
+                //Debug.Assert(Math.Abs(y1 - y2) < small);
+
+//------------------------------------------------------------  # 60個
+
+Debug.Assert 的用法   方案總管/屬性/建置/要勾選"定義DEBUG常數"
+
+            // Prove it worked.
+            switch (user_type)
+            {
+                case UserTypes.SalesAndShippingClerk:
+                    lblSelectedType.Text = "You selected sales && shipping clerk.";
+                    break;
+                case UserTypes.ShiftSupervisor:
+                    lblSelectedType.Text = "You selected shift supervisor.";
+                    break;
+                case UserTypes.StoreManager:
+                    lblSelectedType.Text = "You selected store manager.";
+                    break;
+                default:
+                    // Tell the developer there's a problem.
+                    Debug.Assert(false, "Unhandled UserTypes value " + user_type.ToString());
+
+                    // Use the safest user type.
+                    lblSelectedType.Text = "";
+                    user_type = UserTypes.SalesAndShippingClerk;
+                    break;
+            }
+
+//------------------------------------------------------------  # 60個
+
+執行 System.Diagnostics.Debug.WriteLine 時在【輸出】視窗沒有輸出資料，該如何處理？
+
+ 問題的發生原因
+
+可能是【定義 DEBUG 常數】屬性沒有勾選所導致。
+
+在您的專案上按滑鼠右鍵，選擇【屬性】。
+ 2. 切換到【建置】頁籤，勾選【定義 DEBUG 常數】後儲存。
+
+//------------------------------------------------------------  # 60個
+
+vcs打印訊息
+有無可能作成像是console模式
+最多打印5行 超過5行的 顯示最後5行
+
+vcs 使用 即時運算視窗
+
+using System.Diagnostics;   //即時運算視窗
+
+                Debug.Print("AAAAAAAAAAAAAAAAAAaa i = " + i.ToString());
+
+若找不到"即時運算視窗"
+ 
+在【工具】→【選項】→【偵錯】→最下面有【將所有輸出視窗文字重新導向到即時運算視窗】勾起來
 
 //------------------------------------------------------------  # 60個
 
@@ -1046,10 +1135,6 @@ textBox 屬性設定
             char key = '\u0308';
             WriteLine($"字元 {key}");
 
-
-            toolStripStatusLabel1.Text = "目前時間：" + DateTime.Now.ToLongTimeString();
-            this.Text = "當前時間:" + DateTime.Now.ToLongTimeString();
-
 //------------------------------------------------------------  # 60個
 
 0x16 : 最大垂直圖形尺寸 (單位為公分)。
@@ -1436,15 +1521,8 @@ g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;//使画出
 
 //------------------------------------------------------------  # 60個
 
-using System.Diagnostics;           //for Debug
-            Debug.Assert(Math.Abs(total) < 0.001f);
- 
-//------------------------------------------------------------  # 60個
-
-
-object filename = Application.StartupPath + "\\word_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".doc";
-		  Application.StartupPath + "\\test_word_file.doc";
-string filename = Application.StartupPath + "\\gif_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".gif";
+string filename = Application.StartupPath + "\\word_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".doc";
+string filename = Application.StartupPath + "\\gif_"  + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".gif";
 
 _filename = Path.GetFullPath(Path.Combine(Application.StartupPath, "..\\..")) + "\\test.png";
 filename1 = Path.GetFullPath(Path.Combine(System.Windows.Forms.Application.StartupPath, @"..\..")) + @"\Step.doc";
@@ -4059,23 +4137,12 @@ vcs
             {
                 listBox1.Items.RemoveAt(listBox1.SelectedIndices[0]);
             }
-            
 
 listBox屬性
             listBox1.SelectionMode = SelectionMode.MultiExtended;
             listBox1.HorizontalScrollbar = true;
 
-
 —index of hemoglobin (IHb) imaging
-
-excel/excel7_item.xlsx  新舊有何不同\
-
-
-public void ShowTxt(string a)
-{
-	this.textBox1.AppendText(DateTime.Now.ToString() + | + a + );
-  
-} 
 
 pictureCrop 標準版
 
@@ -7800,10 +7867,6 @@ if (Thd.IsAlive)
 2022-04-14 10:26:13 ERROR :Data stream corruption, compressedSize=2810554238, uncompressedSize=2827462782
 2022-04-14 10:26:25 INFO  :Server ping timeout, shutting down connection 1...
 
-
-
-
-
 //C# 寫日志文件
 
 public static void WriteLog(string txt)
@@ -8303,18 +8366,6 @@ this.tcResult.MouseWheel += new MouseEventHandler(tcResult_MouseWheel);
 
 //------------------------------------------------------------  # 60個
 
-C# Debug的方法，可以將debug msg在『輸出』視窗觀看
-
-using System.Diagnostics;
- 
-Debug.Print("欲輸出訊息");
-
-"即時運算視窗"
-
-勾選 
-【工具】→【選項】→【偵錯】→【將所有輸出視窗文字重新導向到即時運算視窗】
-
-
 [C#]將指定的檔案刪除並送到資源回收桶
 
 
@@ -8383,12 +8434,15 @@ Console.WriteLine(loadingWatch.ElapsedMilliseconds);
 //------------------------------------------------------------  # 60個
 
 待測
-//File.AppendAllText("E:\\Time\\新建文檔夾 (2)"+"/"+strname,DateTime.Now+"\r\n");
+//File.AppendAllText("E:\\Time\\新建文檔夾 (2)" + "/" + strname, DateTime.Now+"\r\n");
 
 //------------------------------------------------------------  # 60個
 
 根據時間建立文件
 File.Create("C:\\______test_files\\" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".jpg");//建立文件
+
+建立臨時檔案
+File.Create("tmp_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".txt");//創建文件
 
 //------------------------------------------------------------  # 60個
 
@@ -8475,15 +8529,6 @@ Encoding.GetString 方法 : 將位元組序列解碼成字串。
             // Encoding.GetString方法，將 Byte 序列 轉為 String
             string byteConvStrig = Encoding.Default.GetString(stringConvByte);
             
-
-不用richTextBox的debug方法            
-
-寫
-System.Diagnostics.Debug.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-
-到【輸出】視窗看輸出資料
-
-先到專案/右鍵/屬性/建置 勾選 定義DEBUG常數
 
 //------------------------------------------------------------  # 60個
 
@@ -8856,48 +8901,6 @@ s.Substring(0,1).ToUpper()+s.Substring(1);
 
 //------------------------------------------------------------  # 60個
 
-DateTime類型中 DayOfWeek時的英文如何轉換成中文
-
-1.這是一种最笨的方法 
-
-Code highlighting produced by Actipro CodeHighlighter (freeware)http://www.CodeHighlighter.com/-->int   i=(int)DateTime.Today.DayOfWeek;  
- switch(i)  
- {  
-          case   0:  
-                      txtDate.Text="星期天"；  
-                      break；  
-          case   1:  
-                      txtDate.Text="星期一"；  
-                      break；  
-          case   2:  
-                      txtDate.Text="星期二"；  
-                      break；  
-          case   3:  
-                      txtDate.Text="星期三"；  
-                      break；  
-          case   4:  
-                      txtDate.Text="星期四"；  
-                      break；  
-          case   5:  
-                      txtDate.Text="星期五"；  
-                      break；  
-          case   6:  
-                      txtDate.Text="星期六"；  
-                      break；  
-          ……  
- }
- 
- 
- 
-2.聰明的方法：
-string strWeek = "星期"+"日一二三四五六".Substring((int)System.DateTime.Now.DayOfWeek,1); 
-
-
-3.最好的方法： 
-string dateString = System.DateTime.Today.ToString("yyyy-M-d dddd", new System.Globalization.CultureInfo("zh-CN")); 
-
-//------------------------------------------------------------  # 60個
-
 用方向鍵移動picturebox在form上的位置
 
         private void Form1_Load(object sender, EventArgs e)
@@ -8928,7 +8931,7 @@ string dateString = System.DateTime.Today.ToString("yyyy-M-d dddd", new System.G
             }
         }
 
-
+//------------------------------------------------------------  # 60個
 
 	//C# 取得資料夾下的所有檔案(包括子目錄)
 	//顯示每個檔案的資訊
@@ -9191,24 +9194,6 @@ C#語言下路徑指定方式有兩種:
             g.ReleaseHdc(dc1); 
             myImage.Save(@"c:\screen0.jpg");
             
-
-瞭解程式執行時間 
-
-using System.Diagnostics;
-//-------------------------------------------
-Stopwatch sw = new Stopwatch();
-long num = 0;
-sw.Reset();
-sw = Stopwatch.StartNew();
-//要測速的程式放這裡
-sw.Stop();
-TimeSpan el = sw.Elapsed;
-Console.WriteLine("花費 {0} ", el);
-long ms = sw.ElapsedMilliseconds;
-Console.WriteLine("花費 {0} 毫秒", ms);
-
-補充說明: 不一定每次測到的時間都相同喔!
-建議值: 超過100毫秒就有點太慢囉…. (電腦爛會Lag更長)
 
 //------------------------------------------------------------  # 60個
 
@@ -9984,12 +9969,6 @@ Form2的元件的Modifiers要改成Internal, 預設為private
 
 //------------------------------------------------------------  # 60個
 
-建立臨時檔案
-
-File.Create("tmp_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".txt");//創建文件
-
-//------------------------------------------------------------  # 60個
-
 計算時間間隔
 dtpicker_first dtpicker_second 為DateTimePicker
             MessageBox.Show("間隔 "+
@@ -10532,12 +10511,6 @@ http://www.shaoqun.com/m/a/250267.html
         {
             SetStyle(ControlStyles.Opaque, true);
         }
-
-
-
-//using System.Diagnostics;
-                // Validation.
-                //Debug.Assert(Math.Abs(y1 - y2) < small);
 
 
 
@@ -12260,35 +12233,6 @@ pictureCard
 可以給定牌號找出牌面
 
 
-
-Debug.Assert 的用法   方案總管/屬性/建置/要勾選"定義DEBUG常數"
-
-            // Prove it worked.
-            switch (user_type)
-            {
-                case UserTypes.SalesAndShippingClerk:
-                    lblSelectedType.Text = "You selected sales && shipping clerk.";
-                    break;
-                case UserTypes.ShiftSupervisor:
-                    lblSelectedType.Text = "You selected shift supervisor.";
-                    break;
-                case UserTypes.StoreManager:
-                    lblSelectedType.Text = "You selected store manager.";
-                    break;
-                default:
-                    // Tell the developer there's a problem.
-                    Debug.Assert(false, "Unhandled UserTypes value " + user_type.ToString());
-
-                    // Use the safest user type.
-                    lblSelectedType.Text = "";
-                    user_type = UserTypes.SalesAndShippingClerk;
-                    break;
-            }
-
-
-
-
-
 Normal  = 0,
 StretchImage = 1,
 AutoSize = 2,
@@ -12534,49 +12478,6 @@ Form的設定
             MessageBox.Show(pic.Name);
         }
         */
-
-//量測時間1  用 Stopwatch
-	using System.Diagnostics;	//for Stopwatch
-	Stopwatch sw = new Stopwatch();
-	
-	sw.Start();
-	XXXXXXXXXXX	//do something
-	sw.Stop();
-	richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.00") + " 秒\n";
-	
-	sw.Reset();	//碼表歸零
-	
-	sw.Start();
-	XXXXXXXXXXX	//do something
-	sw.Stop();
-	richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.00") + " 秒\n";
-	richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString() + " 秒\n";
-	richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalMilliseconds.ToString() + " 毫秒\n";
-
-//紀錄開始的時間
-	Stopwatch sw = new Stopwatch();
-
-	sw.Reset();//時間歸零
-	sw.Start();
-	XXXXXXXXXXX	//do something
-	sw.Stop();
-
-	richTextBox1.Text += "經過時間: " 
-	+ sw.Elapsed.Hours.ToString().PadLeft(2,'0') + ":"
-	+ sw.Elapsed.Minutes.ToString().PadLeft(2, '0') + ":"
-	+ sw.Elapsed.Seconds.ToString().PadLeft(2, '0');
-				
-
-
-//量測時間2  用 TimeSpan
-	DateTime start_time = DateTime.Now;
-	XXXXXXXXXXX	//do something
-	DateTime stop_time = DateTime.Now;
-	TimeSpan elapsed = stop_time - start_time;
-
-	richTextBox1.Text += "經過時間 : " + elapsed.TotalSeconds.ToString("0.00") + " 秒\n";
-
-//------------------------------------------------------------  # 60個
 
             for (int x = 0; x < mask_bm32.Width; x++)
             {
@@ -12920,17 +12821,6 @@ APIC	附圖	image/jpeg??JFIF?髟CC_PROFILE懸pplmntrRGB XYZ ?
 在空白圖上畫上小圖
 在空白圖上畫上文字
 
-執行 System.Diagnostics.Debug.WriteLine 時在【輸出】視窗沒有輸出資料，該如何處理？
-
- 問題的發生原因
-
-可能是【定義 DEBUG 常數】屬性沒有勾選所導致。
-
-在您的專案上按滑鼠右鍵，選擇【屬性】。
- 2. 切換到【建置】頁籤，勾選【定義 DEBUG 常數】後儲存。
-
-
-
 不同的控件使用同樣的方法
 
         public Form1()
@@ -12990,21 +12880,6 @@ richtextbox datagridview一次寫入數千行
 有無可能做到圖層概念，不要每次都重畫，要移動時，整個移動，像是OSD一樣。或是移動滑鼠鼠標一樣。
 
 //------------------------------------------------------------  # 60個
-
-vcs打印訊息
-有無可能作成像是console模式
-最多打印5行 超過5行的 顯示最後5行
-
-vcs 使用 即時運算視窗
-
-using System.Diagnostics;   //即時運算視窗
-
-                Debug.Print("AAAAAAAAAAAAAAAAAAaa i = " + i.ToString());
-
-若找不到"即時運算視窗"
- 
-在【工具】→【選項】→【偵錯】→最下面有【將所有輸出視窗文字重新導向到即時運算視窗】勾起來
-
 
 如何改變TextBox之邊框的顏色?
 
@@ -14647,7 +14522,7 @@ csc/?	查看編譯選項
 /define:<symbol list>	//定義條件編譯符號   (縮寫:   /d)   
 /doc:<file>		//要生成的   XML   文檔文件 
 
-6060
+//------------------------------------------------------------  # 60個
 
 實現pictureBox的內容令存新檔
 
@@ -14667,7 +14542,7 @@ csc/?	查看編譯選項
                     ////********************照片另存*********************************
                 }
 
-6060
+//------------------------------------------------------------  # 60個
 
 JSON 实例
 {
@@ -14778,5 +14653,7 @@ pictureBox1.Image.Save(filename);
                             break;
                     }
                     fs.Close();         					//關閉文件流
+
+
 
 

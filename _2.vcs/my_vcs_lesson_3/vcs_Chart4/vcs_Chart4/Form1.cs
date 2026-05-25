@@ -87,18 +87,22 @@ namespace vcs_Chart4
 
         void chart_init(Chart chart1, string title)
         {
-            // 清除圖表
-            chart1.Series.Clear();
-            chart1.Titles.Clear();
+            // 清除圖表內的元件, 清除後要先新增才能使用
 
             chart1.Size = new Size(W, H);  // 設定chart大小
+            chart1.Titles.Clear();  // 清除所有標題
+            chart1.Legends.Clear();  // 清除所有圖例
+            chart1.ChartAreas.Clear();  // 清除所有圖表區
+            chart1.Series.Clear();  // 清除所有數列
+
+            //------------------------------  # 30個
 
             // 畫標題的方法1
             Title chart_title = new Title();
             chart_title.Text = title;
             chart_title.Alignment = ContentAlignment.MiddleCenter;
             chart_title.Font = new Font("Trebuchet MS", 14F, FontStyle.Bold);
-            chart1.Titles.Add(chart_title);  // 標題
+            chart1.Titles.Add(chart_title);  // 將標題新增到圖表上
 
             // 畫標題的方法2
             Title chart_title2 = new Title
@@ -107,7 +111,60 @@ namespace vcs_Chart4
                 Alignment = ContentAlignment.MiddleCenter,
                 Font = new Font("Trebuchet MS", 14F, FontStyle.Bold)
             };
-            //chart1.Titles.Add(chart_title2);
+            //chart1.Titles.Add(chart_title2);  // 將標題新增到圖表上
+
+            //------------------------------  # 30個
+
+            // 設定圖例.Legends
+            chart1.Legends.Add("Legends1");  // 將圖例新增到圖表上
+
+            //設定 Legends
+            //chart1.Legends["Legends1"].DockedToChartArea = ChartArea1;  // 設定圖例要顯示在哪個圖表區
+            chart1.Legends["Legends1"].Docking = Docking.Right;  // 設定圖例的顯示位置, 預設靠右
+            //背景色
+            chart1.Legends["Legends1"].BackColor = Color.FromArgb(235, 235, 235);
+            //斜線背景
+            chart1.Legends["Legends1"].BackHatchStyle = ChartHatchStyle.DarkDownwardDiagonal;
+            chart1.Legends["Legends1"].BorderWidth = 1;
+            chart1.Legends["Legends1"].BorderColor = Color.FromArgb(200, 200, 200);
+
+            //------------------------------  # 30個
+            //圖表區設定
+            ChartArea chartarea = new ChartArea("ChartArea1");
+            chart1.ChartAreas.Add(chartarea);  // 將圖表區新增到圖表上
+
+            chartarea.BackColor = Color.Pink;  // 圖表區背景色
+            chartarea.AxisX.MajorGrid.LineColor = Color.Red;  // X軸主格線顏色
+
+            chartarea.AxisY.MajorGrid.LineColor = Color.Green;  // Y軸主格線顏色
+            chartarea.AxisY.MajorGrid.Enabled = true;  // 顯示Y軸主格線
+            chartarea.AxisY.Enabled = AxisEnabled.True; // 啟動Y軸標示
+
+            chartarea.AxisX.Title = "種類";  // 設定X軸的標題
+            chartarea.AxisY.Title = "體重(公斤)";  //設定Y軸的標題
+
+            /*
+            // 設定邊界
+            chartarea.AxisX.Minimum = 0;  // 設定X軸最小值
+            chartarea.AxisX.Maximum = 20;  // 設定X軸最大值
+            chartarea.AxisY.Minimum = 0;  // 設定Y軸最小值
+            chartarea.AxisY.Maximum = 100;  // 設定Y軸最大值
+            */
+
+            //chartarea.AxisX.CustomLabels.Clear();
+
+            //chartarea.AxisX.Interval = 1;  // 設定X軸坐標的間隔
+
+            //設定3D
+            /*
+            chartarea.Area3DStyle.Enable3D = true;  // 設定圖表區3D顯示
+            chartarea.Area3DStyle.IsClustered = true; //並排顯示
+            chartarea.Area3DStyle.Rotation = 40; //垂直角度
+            chartarea.Area3DStyle.Inclination = 50; //水平角度
+            chartarea.Area3DStyle.PointDepth = 10; //數據條厚度
+            chartarea.Area3DStyle.WallWidth = 0; //外牆寬度
+            chartarea.Area3DStyle.LightStyle = LightStyle.Realistic; //光源
+            */
         }
 
         void draw_chart0()
@@ -118,57 +175,12 @@ namespace vcs_Chart4
 
         void draw_chart1()
         {
-            string title = "雷達圖";
-            chart_init(chart1, title);
-
-            chart1.ChartAreas.Clear();
-
-            ChartArea area = chart1.ChartAreas.Add("NewArea");
-
-            // 設定數列1 的 大小與外觀
-            Series series1 = chart1.Series.Add("雷達資料");
-            series1.ChartArea = "NewArea";
-            series1.ChartType = SeriesChartType.Radar;  // 雷達圖
-            area.AxisY.LineColor = Color.Red;
-            area.AxisY.LineWidth = 1;
-
-            // 點的數值
-            series1.Points.AddXY(1, 248);
-            series1.Points.AddXY(2, 234);
-            series1.Points.AddXY(3, 438);
-            series1.Points.AddXY(4, 345);
-            series1.Points.AddXY(1, 222);
-
-            // 點的名稱
-            series1.Points[0].Label = "A";
-            series1.Points[1].Label = "B";
-            series1.Points[2].Label = "C";
-            series1.Points[3].Label = "D";
-            series1.Points[4].Label = "E";
         }
 
         //------------------------------------------------------------  # 60個
 
         void draw_chart2()
         {
-            string title = "雷達圖";
-            chart_init(chart2, title);
-
-            chart2.ChartAreas.Clear();
-
-            ChartArea area = chart2.ChartAreas.Add("NewArea");
-
-            // 設定數列1 的 大小與外觀
-            Series series1 = chart2.Series.Add("雷達資料");
-            series1.ChartArea = "NewArea";
-            series1.ChartType = SeriesChartType.Radar;  // 雷達圖
-            area.AxisY.LineColor = Color.Red;
-            area.AxisY.LineWidth = 1;
-
-            for (Int32 j = 0; j <= 72; j++)
-            {
-                series1.Points.AddXY(5 * j, 5 + j % 9);
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -209,7 +221,6 @@ namespace vcs_Chart4
         }
 
         //------------------------------------------------------------  # 60個
-
     }
 }
 
@@ -220,10 +231,6 @@ namespace vcs_Chart4
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

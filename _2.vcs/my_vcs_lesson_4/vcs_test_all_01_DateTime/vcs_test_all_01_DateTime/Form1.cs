@@ -39,6 +39,8 @@ namespace vcs_test_all_01_DateTime
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             LoginTime = DateTime.Now; //取得目前登入的時間
             richTextBox1.Text += "登入時間： " + LoginTime.ToString() + "\n";
 
@@ -2482,13 +2484,118 @@ DateTime date2 = new DateTime(2003, 2,13, 23,59,59, DateTimeKind.Local);
 TimeSpan s = new TimeSpan(date1.Ticks - date2.Ticks);    
 
 //------------------------------------------------------------  # 60個
+            toolStripStatusLabel1.Text = "目前時間：" + DateTime.Now.ToLongTimeString();
+            this.Text = "當前時間:" + DateTime.Now.ToLongTimeString();
+
+
+DateTime類型中 DayOfWeek時的英文如何轉換成中文
+
+1.這是一种最笨的方法 
+
+Code highlighting produced by Actipro CodeHighlighter (freeware)http://www.CodeHighlighter.com/-->int   i=(int)DateTime.Today.DayOfWeek;  
+ switch(i)  
+ {  
+          case   0:  
+                      txtDate.Text="星期天"；  
+                      break；  
+          case   1:  
+                      txtDate.Text="星期一"；  
+                      break；  
+          case   2:  
+                      txtDate.Text="星期二"；  
+                      break；  
+          case   3:  
+                      txtDate.Text="星期三"；  
+                      break；  
+          case   4:  
+                      txtDate.Text="星期四"；  
+                      break；  
+          case   5:  
+                      txtDate.Text="星期五"；  
+                      break；  
+          case   6:  
+                      txtDate.Text="星期六"；  
+                      break；  
+          ……  
+ }
+ 
+ 
+ 
+2.聰明的方法：
+string strWeek = "星期"+"日一二三四五六".Substring((int)System.DateTime.Now.DayOfWeek,1); 
+
+
+3.最好的方法： 
+string dateString = System.DateTime.Today.ToString("yyyy-M-d dddd", new System.Globalization.CultureInfo("zh-CN")); 
+
+//------------------------------------------------------------  # 60個
+
+
+//量測時間1  用 Stopwatch
+	using System.Diagnostics;	//for Stopwatch
+	Stopwatch sw = new Stopwatch();
+	
+	sw.Start();
+	XXXXXXXXXXX	//do something
+	sw.Stop();
+	richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.00") + " 秒\n";
+	
+	sw.Reset();	//碼表歸零
+	
+	sw.Start();
+	XXXXXXXXXXX	//do something
+	sw.Stop();
+	richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.00") + " 秒\n";
+	richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString() + " 秒\n";
+	richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalMilliseconds.ToString() + " 毫秒\n";
+
+//紀錄開始的時間
+	Stopwatch sw = new Stopwatch();
+
+	sw.Reset();//時間歸零
+	sw.Start();
+	XXXXXXXXXXX	//do something
+	sw.Stop();
+
+	richTextBox1.Text += "經過時間: " 
+	+ sw.Elapsed.Hours.ToString().PadLeft(2,'0') + ":"
+	+ sw.Elapsed.Minutes.ToString().PadLeft(2, '0') + ":"
+	+ sw.Elapsed.Seconds.ToString().PadLeft(2, '0');
+				
+
+
+//量測時間2  用 TimeSpan
+	DateTime start_time = DateTime.Now;
+	XXXXXXXXXXX	//do something
+	DateTime stop_time = DateTime.Now;
+	TimeSpan elapsed = stop_time - start_time;
+
+	richTextBox1.Text += "經過時間 : " + elapsed.TotalSeconds.ToString("0.00") + " 秒\n";
+
+//------------------------------------------------------------  # 60個
+
+
+
+瞭解程式執行時間 
+
+using System.Diagnostics;
+//-------------------------------------------
+Stopwatch sw = new Stopwatch();
+long num = 0;
+sw.Reset();
+sw = Stopwatch.StartNew();
+//要測速的程式放這裡
+sw.Stop();
+TimeSpan el = sw.Elapsed;
+Console.WriteLine("花費 {0} ", el);
+long ms = sw.ElapsedMilliseconds;
+Console.WriteLine("花費 {0} 毫秒", ms);
+
+補充說明: 不一定每次測到的時間都相同喔!
+建議值: 超過100毫秒就有點太慢囉…. (電腦爛會Lag更長)
+
 
 
 */
-
-
-
-
-
 
 

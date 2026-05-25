@@ -176,7 +176,18 @@ namespace vcs__small
             int W = this.ClientSize.Width;
             int H = this.ClientSize.Height;
             e.Graphics.Clear(Color.White);
-            e.Graphics.DrawRectangle(Pens.Red, 10, 10, W - 10 * 2, H - 10 * 2);
+            e.Graphics.DrawRectangle(Pens.Red, 0, 0, W - 1, H - 1);
+
+            int dx = W / 4;
+            int dy = H / 3;
+            for (int xx = 0; xx < W; xx += dx)
+            {
+                e.Graphics.DrawLine(Pens.Red, xx, 0, xx, H);  // 直線
+            }
+            for (int yy = 0; yy < H; yy += dy)
+            {
+                e.Graphics.DrawLine(Pens.Red, 0, yy, W, yy);  // 橫線
+            }
 
             Font f = new Font("微軟正黑體", 22, FontStyle.Bold);//建立字體物件
             Rectangle rect = new Rectangle(100, 100, 500, f.Height);
@@ -512,7 +523,6 @@ namespace vcs__small
             {
                 checkedListBox1.SetItemChecked(i, false);
             }
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -523,15 +533,10 @@ namespace vcs__small
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

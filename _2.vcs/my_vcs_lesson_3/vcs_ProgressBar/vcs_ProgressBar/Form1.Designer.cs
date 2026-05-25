@@ -31,12 +31,12 @@
             this.components = new System.ComponentModel.Container();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox0 = new System.Windows.Forms.GroupBox();
+            this.lb_status0 = new System.Windows.Forms.Label();
             this.bt_stop = new System.Windows.Forms.Button();
             this.bt_start = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.progressBar0 = new System.Windows.Forms.ProgressBar();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.lb_status0 = new System.Windows.Forms.Label();
             this.groupBox0.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,7 +44,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(20, 185);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
+            this.richTextBox1.Size = new System.Drawing.Size(547, 288);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -59,6 +59,15 @@
             this.groupBox0.TabIndex = 4;
             this.groupBox0.TabStop = false;
             this.groupBox0.Text = "ProgressBar";
+            // 
+            // lb_status0
+            // 
+            this.lb_status0.AutoSize = true;
+            this.lb_status0.Location = new System.Drawing.Point(22, 70);
+            this.lb_status0.Name = "lb_status0";
+            this.lb_status0.Size = new System.Drawing.Size(33, 12);
+            this.lb_status0.TabIndex = 13;
+            this.lb_status0.Text = "label1";
             // 
             // bt_stop
             // 
@@ -82,7 +91,7 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(42, 226);
+            this.bt_clear.Location = new System.Drawing.Point(498, 441);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(69, 32);
             this.bt_clear.TabIndex = 9;
@@ -102,20 +111,11 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // lb_status0
-            // 
-            this.lb_status0.AutoSize = true;
-            this.lb_status0.Location = new System.Drawing.Point(22, 70);
-            this.lb_status0.Name = "lb_status0";
-            this.lb_status0.Size = new System.Drawing.Size(33, 12);
-            this.lb_status0.TabIndex = 13;
-            this.lb_status0.Text = "label1";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(661, 384);
+            this.ClientSize = new System.Drawing.Size(681, 485);
             this.Controls.Add(this.progressBar0);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.groupBox0);

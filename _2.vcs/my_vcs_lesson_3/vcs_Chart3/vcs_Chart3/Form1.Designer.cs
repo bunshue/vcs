@@ -67,6 +67,7 @@
             this.chart8 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.bt_chart6 = new System.Windows.Forms.Button();
             this.chart4 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.bt_chart7 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart3)).BeginInit();
@@ -254,11 +255,23 @@
             this.chart4.TabIndex = 67;
             this.chart4.Text = "chart4";
             // 
+            // bt_chart7
+            // 
+            this.bt_chart7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_chart7.Location = new System.Drawing.Point(331, 171);
+            this.bt_chart7.Name = "bt_chart7";
+            this.bt_chart7.Size = new System.Drawing.Size(72, 46);
+            this.bt_chart7.TabIndex = 68;
+            this.bt_chart7.Text = "雷達圖";
+            this.bt_chart7.UseVisualStyleBackColor = true;
+            this.bt_chart7.Click += new System.EventHandler(this.bt_chart7_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(589, 475);
+            this.Controls.Add(this.bt_chart7);
             this.Controls.Add(this.chart4);
             this.Controls.Add(this.bt_chart6);
             this.Controls.Add(this.chart8);
@@ -301,6 +314,7 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chart8;
         private System.Windows.Forms.Button bt_chart6;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart4;
+        private System.Windows.Forms.Button bt_chart7;
     }
 }
 
