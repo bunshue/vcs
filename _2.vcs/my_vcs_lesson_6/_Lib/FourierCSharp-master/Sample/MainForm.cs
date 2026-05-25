@@ -27,6 +27,23 @@ namespace FourierTransform
             InitializeComponent();
         }
 
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            //this.Size = new Size(1273, 750);
+            this.Text = "FourierTransform";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        //------------------------------------------------------------  # 60個
+
         private void mnuFileLoadData_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -34,7 +51,10 @@ namespace FourierTransform
             //ofd.InitialDirectory = Path.Combine(Application.StartupPath, @"..\..\csv");
             ofd.InitialDirectory = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\csv"));
 
-            if (ofd.ShowDialog() == DialogResult.Cancel) return;
+            if (ofd.ShowDialog() == DialogResult.Cancel)
+            {
+                return;
+            }
 
             this.Text = System.IO.Path.GetFileName(ofd.FileName) + appName;
 
@@ -46,12 +66,14 @@ namespace FourierTransform
 
             // データの表示
             DrawGraph();
-
         }
 
         private void mnuFileSaveFourierData_Click(object sender, EventArgs e)
         {
-            if (_complexDst == null) return;
+            if (_complexDst == null)
+            {
+                return;
+            }
 
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "CSV(*.csv;*.htm)|*.csv";
@@ -98,7 +120,10 @@ namespace FourierTransform
 
         private void mnuWindowHamming_Click(object sender, EventArgs e)
         {
-            if (_complexSrc == null) return;
+            if (_complexSrc == null)
+            {
+                return;
+            }
 
             // ハミング窓
             FourierCSharp.FourierTransform.Hamming(_complexSrc);
@@ -110,8 +135,11 @@ namespace FourierTransform
 
         private void mnuWindowHanning_Click(object sender, EventArgs e)
         {
-            if (_complexSrc == null) return;
-     
+            if (_complexSrc == null)
+            {
+                return;
+            }
+
             // ハミング窓
             FourierCSharp.FourierTransform.Hanning(_complexSrc);
             // フーリエ変換
@@ -122,8 +150,11 @@ namespace FourierTransform
 
         private void mnuWindowBlackman_Click(object sender, EventArgs e)
         {
-            if (_complexSrc == null) return;
-      
+            if (_complexSrc == null)
+            {
+                return;
+            }
+
             // ブラックマン窓
             FourierCSharp.FourierTransform.Blackman(_complexSrc);
             // フーリエ変換
@@ -131,7 +162,6 @@ namespace FourierTransform
             // データの表示
             DrawGraph();
         }
-
 
         private Complex[] LoadData(string filename)
         {
@@ -142,7 +172,10 @@ namespace FourierTransform
 
             for (int i = 0; i < lines.Length; i++)
             {
-                if (lines[i] == "") continue;
+                if (lines[i] == "")
+                {
+                    continue;
+                }
 
                 var lineData = lines[i].Split(',');
                 if (lineData.Length == 1)
@@ -156,13 +189,15 @@ namespace FourierTransform
                     dataList.Add(new Complex(double.Parse(lineData[0]), double.Parse(lineData[1])));
                 }
             }
-
             return dataList.ToArray();
         }
 
         private void SaveComplexData(string filename, Complex[] complex)
         {
-            if (complex == null) return;
+            if (complex == null)
+            {
+                return;
+            }
 
             using (var sw = new System.IO.StreamWriter(filename, false))
             {
@@ -178,7 +213,10 @@ namespace FourierTransform
         /// </summary>
         private void DrawGraph()
         {
-            if (_complexSrc == null) return;
+            if (_complexSrc == null)
+            {
+                return;
+            }
 
             // 変換前データのグラフ描画
             DrawRealData(_complexSrc);
@@ -197,7 +235,10 @@ namespace FourierTransform
         /// <param name="data"></param>
         private void DrawRealData(Complex[] data)
         {
-            if (data == null) return;
+            if (data == null)
+            {
+                return;
+            }
 
             // /////////////////////////////////////////////////////
             // Chartコントロール内のグラフ、凡例、目盛り領域を削除
@@ -215,15 +256,14 @@ namespace FourierTransform
             ca.AxisX.Title = "Index";  // タイトル
             ca.AxisX.Minimum = 0;         // 最大値
             ca.AxisX.Maximum = data.Length;         // 最大値
-                                            // Y軸
+            // Y軸
             ca.AxisY.Title = "Data";
 
             // 虚部の描画
             // グラフの系列を追加
             var seriesIm = chtData.Series.Add("Imaginary");
             // グラフの種類を折れ線に設定する
-            seriesIm.ChartType
-                = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            seriesIm.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             // 線幅
             seriesIm.BorderWidth = 3;
             seriesIm.Color = Color.HotPink;
@@ -238,18 +278,16 @@ namespace FourierTransform
             // グラフの系列を追加
             var seriesRe = chtData.Series.Add("Real");
             // グラフの種類を折れ線に設定する
-            seriesRe.ChartType
-                = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            seriesRe.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             // 線幅
             seriesRe.BorderWidth = 3;
             seriesRe.Color = Color.DodgerBlue;
-            
+
             // データ設定
             for (int i = 0; i < data.Length; i++)
             {
                 seriesRe.Points.AddXY(i, data[i].Real);
             }
-
         }
 
         /// <summary>
@@ -258,7 +296,10 @@ namespace FourierTransform
         /// <param name="data">複素数の配列</param>
         private void DrawMagnitudeData(Complex[] data)
         {
-            if (data == null) return;
+            if (data == null)
+            {
+                return;
+            }
 
             // /////////////////////////////////////////////////////
             // Chartコントロール内のグラフ、凡例、目盛り領域を削除
@@ -277,7 +318,7 @@ namespace FourierTransform
             ca.AxisX.Title = "Frequency";  // タイトル
             ca.AxisX.Minimum = 0;           // 最小値0
             ca.AxisX.Maximum = data.Length;         // 最大値
-            
+
             // Y軸
             ca.AxisY.Title = "Magnitude";
             ca.AxisY.Minimum = 0;
@@ -303,7 +344,10 @@ namespace FourierTransform
         /// <param name="data">複素数のデータ</param>
         private void SetDataGridViewData(DataGridView dgv, Complex[] data)
         {
-            if (data == null) return;
+            if (data == null)
+            {
+                return;
+            }
 
             // データ削除
             dgv.Rows.Clear();
@@ -327,7 +371,19 @@ namespace FourierTransform
 
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells; // 列の幅の自動調整
         }
-
-
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

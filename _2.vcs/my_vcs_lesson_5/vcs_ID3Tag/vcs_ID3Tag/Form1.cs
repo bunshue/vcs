@@ -236,7 +236,7 @@ namespace vcs_ID3Tag
             int currentIndex = 0;//Info的當前索引值
 
             int k = 0;
-            while(true)
+            while (true)
             {
                 k++;
                 if (cb_raw_data.Checked == true)
@@ -507,6 +507,21 @@ namespace vcs_ID3Tag
             }
             return data;
         }
+
+        /*
+        //C# 獲取MP3 資訊
+        //所以，我們只要把MP3檔的最後128個位元組分段讀出來並保存到該結構裡就可以了。函式定義如下：
+        1，Tag这个属性是留给程序员自己用的，也就是说你可以自己做点标记   
+
+        比如说一个窗体上有N个控件，你让TextBox1.Tag   =   "123";   Button1.Tag   =   "123";   
+        将来你可以遍历窗体的控件，如果某个控件的Tag   =   "123";，你就可以做点事情，比如把他们都禁用，所以说他们就像是给你留的一个标记
+
+        2，我的习惯是把一个对象赋值给tag。比如文本框显示员工姓名，那么这个文本框的tag就是   
+        那个员工对象，这样我就很容易知道名字是谁的。
+
+        tag本身是“标签”的意思，顾名思义，就是给控件打上标签。
+        当项目中有很多类型名称各不相同的控件时，可以将这些控件打上相同的标签，即，将控件的tag值设置为同一个值，如，hide、TLB等等，然后用一段代码，进行相应的操作，如下：
+        */
 
         //再對上面返回的位元組陣列分段取出，並保存到Mp3InfoV1結構中返回:
         private Mp3InfoV1 getMp3InfoV1(byte[] Info)
@@ -1729,7 +1744,7 @@ namespace vcs_ID3Tag
             textBox39b.Location = new Point(x_st + offset_x * 5, y_st + offset_y * 8);
 
             textBox_filename.Location = new Point(x_st + offset_x * 0, y_st - offset_y * 1);
-            button4.Location = new Point(x_st + offset_x * 6-button4.Size.Width-5, y_st - offset_y * 1);
+            button4.Location = new Point(x_st + offset_x * 6 - button4.Size.Width - 5, y_st - offset_y * 1);
 
             label0.Text = "Filename";
             label1.Text = "Header";
@@ -1754,14 +1769,24 @@ namespace vcs_ID3Tag
             label8.Location = new Point(x_st - left, y_st + offset_y * 7);
             label9.Location = new Point(x_st - left, y_st + offset_y * 8);
 
-            richTextBox1.Location = new Point(x_st, y_st + offset_y * 10);
-
             richTextBox1.Size = new Size(250 * 6 + 5 * 5, 300);
+            richTextBox1.Location = new Point(x_st, y_st + offset_y * 10);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1650, 920);
+            this.Text = "vcs_ID3Tag";
 
-
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button10_Click(object sender, EventArgs e)
         {
@@ -1774,7 +1799,7 @@ namespace vcs_ID3Tag
         {
             string str = null;
             //richTextBox1.Text += "check_frame_id_dataunicode, currentIndex = " + currentIndex.ToString() + ", tag_size = " + tag_size.ToString() + "\n";
-            if ((Info[currentIndex + 1] == 0xFF) && (Info[currentIndex+2] == 0xFE))
+            if ((Info[currentIndex + 1] == 0xFF) && (Info[currentIndex + 2] == 0xFE))
             {
                 //獲取字串資料
                 byte[] data = new byte[tag_size - 3];
@@ -1997,3 +2022,16 @@ namespace vcs_ID3Tag
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+

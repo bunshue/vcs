@@ -24,6 +24,8 @@ namespace vcs_NAudio3_WaveViewer
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             /* 要先清掉 chart1的東西
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
@@ -46,7 +48,6 @@ namespace vcs_NAudio3_WaveViewer
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -62,7 +63,7 @@ namespace vcs_NAudio3_WaveViewer
             waveViewer1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
 
             chart1.Size = new Size(750, 160);
-            chart1.Location = new Point(x_st + dx * 1, y_st + dy * 0+170);
+            chart1.Location = new Point(x_st + dx * 1, y_st + dy * 0 + 170);
 
             richTextBox1.Size = new Size(750, 340);
             richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 5);
@@ -80,6 +81,8 @@ namespace vcs_NAudio3_WaveViewer
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -106,7 +109,6 @@ namespace vcs_NAudio3_WaveViewer
                     chart1.Series["wave"].Points.Add(BitConverter.ToSingle(buffer, i * 4));
                 }
             }
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -154,3 +156,19 @@ namespace vcs_NAudio3_WaveViewer
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
+
+

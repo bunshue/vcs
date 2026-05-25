@@ -117,6 +117,7 @@
             this.cb_id3v21b = new System.Windows.Forms.CheckBox();
             this.cb_id3v31 = new System.Windows.Forms.CheckBox();
             this.cb_id3v31b = new System.Windows.Forms.CheckBox();
+            this.bt_clear = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -127,9 +128,9 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(10, 660);
+            this.richTextBox1.Location = new System.Drawing.Point(10, 592);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(1413, 171);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -929,11 +930,23 @@
             this.cb_id3v31b.UseVisualStyleBackColor = true;
             this.cb_id3v31b.CheckedChanged += new System.EventHandler(this.cb_id3v31b_CheckedChanged);
             // 
+            // bt_clear
+            // 
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(24, 607);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(72, 36);
+            this.bt_clear.TabIndex = 89;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1676, 876);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.cb_id3v31b);
             this.Controls.Add(this.cb_id3v31);
             this.Controls.Add(this.cb_id3v21b);
@@ -1120,6 +1133,7 @@
         private System.Windows.Forms.CheckBox cb_id3v21b;
         private System.Windows.Forms.CheckBox cb_id3v31;
         private System.Windows.Forms.CheckBox cb_id3v31b;
+        private System.Windows.Forms.Button bt_clear;
     }
 }
 

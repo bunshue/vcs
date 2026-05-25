@@ -79,33 +79,33 @@
             this.toolStripMenuItem1,
             this.mnuFileExit});
             this.mnuFile.Name = "mnuFile";
-            this.mnuFile.Size = new System.Drawing.Size(37, 20);
+            this.mnuFile.Size = new System.Drawing.Size(38, 20);
             this.mnuFile.Text = "File";
             // 
             // mnuFileLoadData
             // 
             this.mnuFileLoadData.Name = "mnuFileLoadData";
             this.mnuFileLoadData.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.mnuFileLoadData.Size = new System.Drawing.Size(199, 22);
+            this.mnuFileLoadData.Size = new System.Drawing.Size(208, 22);
             this.mnuFileLoadData.Text = "LoadData(*.csv)";
             this.mnuFileLoadData.Click += new System.EventHandler(this.mnuFileLoadData_Click);
             // 
             // mnuFileSaveFourierData
             // 
             this.mnuFileSaveFourierData.Name = "mnuFileSaveFourierData";
-            this.mnuFileSaveFourierData.Size = new System.Drawing.Size(199, 22);
+            this.mnuFileSaveFourierData.Size = new System.Drawing.Size(208, 22);
             this.mnuFileSaveFourierData.Text = "Save Fourier Data";
             this.mnuFileSaveFourierData.Click += new System.EventHandler(this.mnuFileSaveFourierData_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(196, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(205, 6);
             // 
             // mnuFileExit
             // 
             this.mnuFileExit.Name = "mnuFileExit";
-            this.mnuFileExit.Size = new System.Drawing.Size(199, 22);
+            this.mnuFileExit.Size = new System.Drawing.Size(208, 22);
             this.mnuFileExit.Text = "Exit";
             this.mnuFileExit.Click += new System.EventHandler(this.mnuFileExit_Click);
             // 
@@ -115,7 +115,7 @@
             this.mnuFourierForward,
             this.mnuFourierBackward});
             this.mnuFourier.Name = "mnuFourier";
-            this.mnuFourier.Size = new System.Drawing.Size(106, 20);
+            this.mnuFourier.Size = new System.Drawing.Size(111, 20);
             this.mnuFourier.Text = "Fourier direction";
             // 
             // mnuFourierForward
@@ -124,7 +124,7 @@
             this.mnuFourierForward.CheckOnClick = true;
             this.mnuFourierForward.CheckState = System.Windows.Forms.CheckState.Checked;
             this.mnuFourierForward.Name = "mnuFourierForward";
-            this.mnuFourierForward.Size = new System.Drawing.Size(125, 22);
+            this.mnuFourierForward.Size = new System.Drawing.Size(128, 22);
             this.mnuFourierForward.Text = "Forward";
             this.mnuFourierForward.Click += new System.EventHandler(this.mnuFourierForward_Click);
             // 
@@ -132,7 +132,7 @@
             // 
             this.mnuFourierBackward.CheckOnClick = true;
             this.mnuFourierBackward.Name = "mnuFourierBackward";
-            this.mnuFourierBackward.Size = new System.Drawing.Size(125, 22);
+            this.mnuFourierBackward.Size = new System.Drawing.Size(128, 22);
             this.mnuFourierBackward.Text = "Backward";
             this.mnuFourierBackward.Click += new System.EventHandler(this.mnuFourierBackward_Click);
             // 
@@ -143,27 +143,27 @@
             this.mnuWindowHanning,
             this.mnuWindowBlackman});
             this.mnuWindow.Name = "mnuWindow";
-            this.mnuWindow.Size = new System.Drawing.Size(63, 20);
+            this.mnuWindow.Size = new System.Drawing.Size(66, 20);
             this.mnuWindow.Text = "Window";
             // 
             // mnuWindowHamming
             // 
             this.mnuWindowHamming.Name = "mnuWindowHamming";
-            this.mnuWindowHamming.Size = new System.Drawing.Size(126, 22);
+            this.mnuWindowHamming.Size = new System.Drawing.Size(130, 22);
             this.mnuWindowHamming.Text = "Hamming";
             this.mnuWindowHamming.Click += new System.EventHandler(this.mnuWindowHamming_Click);
             // 
             // mnuWindowHanning
             // 
             this.mnuWindowHanning.Name = "mnuWindowHanning";
-            this.mnuWindowHanning.Size = new System.Drawing.Size(126, 22);
+            this.mnuWindowHanning.Size = new System.Drawing.Size(130, 22);
             this.mnuWindowHanning.Text = "Hanning";
             this.mnuWindowHanning.Click += new System.EventHandler(this.mnuWindowHanning_Click);
             // 
             // mnuWindowBlackman
             // 
             this.mnuWindowBlackman.Name = "mnuWindowBlackman";
-            this.mnuWindowBlackman.Size = new System.Drawing.Size(126, 22);
+            this.mnuWindowBlackman.Size = new System.Drawing.Size(130, 22);
             this.mnuWindowBlackman.Text = "Blackman";
             this.mnuWindowBlackman.Click += new System.EventHandler(this.mnuWindowBlackman_Click);
             // 
@@ -254,6 +254,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Fourier Transform";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chtData)).EndInit();

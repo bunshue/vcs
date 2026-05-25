@@ -8285,7 +8285,6 @@ Details:可以顯示任意數量的列。只有第一列可以包含圖示
 
 Tile:(只用於WindowsXp和較新的Windwos平臺)顯示一個大圖示和一個標籤,在圖示的右邊顯示子項資訊
 
-
 BeginUpdate
 
 開始更新,直到呼叫EndUpdate為止。當一次插入多個選項使用這個方法很有用,因為它會禁止檢視閃爍,並可以大大提高速度
@@ -8305,34 +8304,6 @@ IsDigit
                         else
                             richTextBox1.Text += ". ";
                     }
-
-
-        //C# 獲取MP3 資訊
-            //所以，我們只要把MP3檔的最後128個位元組分段讀出來並保存到該結構裡就可以了。函式定義如下：
-            private byte[] getLast128(string FileName)
-            {
-                FileStream fs = new FileStream(FileName, FileMode.Open, FileAccess.Read);
-                Stream stream = fs;
-                stream.Seek(-128, SeekOrigin.End);
-                const int seekPos = 128;
-                int rl = 0;
-                byte[] Info = new byte[seekPos];
-                rl = stream.Read(Info, 0, seekPos);
-                fs.Close();
-                stream.Close();
-                return Info;
-            }
-
-1，Tag这个属性是留给程序员自己用的，也就是说你可以自己做点标记   
-
-比如说一个窗体上有N个控件，你让TextBox1.Tag   =   "123";   Button1.Tag   =   "123";   
-将来你可以遍历窗体的控件，如果某个控件的Tag   =   "123";，你就可以做点事情，比如把他们都禁用，所以说他们就像是给你留的一个标记
-
-2，我的习惯是把一个对象赋值给tag。比如文本框显示员工姓名，那么这个文本框的tag就是   
-那个员工对象，这样我就很容易知道名字是谁的。
-
- tag本身是“标签”的意思，顾名思义，就是给控件打上标签。
-当项目中有很多类型名称各不相同的控件时，可以将这些控件打上相同的标签，即，将控件的tag值设置为同一个值，如，hide、TLB等等，然后用一段代码，进行相应的操作，如下：
 
 //------------------------------------------------------------  # 60個
 
@@ -8368,23 +8339,15 @@ this.tcResult.MouseWheel += new MouseEventHandler(tcResult_MouseWheel);
 
 [C#]將指定的檔案刪除並送到資源回收桶
 
-
 參考/加入參考/.NET/Microsoft.VisualBasic
 
 FileSystem.DeleteFile(openFileDialog1.FileName,
 		UIOption.OnlyErrorDialogs,
 		RecycleOption.SendToRecycleBin);
 
-
 .Dll加入參考。
 
-
-            if (flag_search_place == false)
-                flag_search_place = true;
-            else
-                flag_search_place = false;
-
-
+//------------------------------------------------------------  # 60個
 
 [C#] 圖片檔讀取：非鎖定檔方法 [Image.FromFile 釋放]
 
@@ -8567,35 +8530,10 @@ s= "0"+s;
 變更滑鼠鼠標圖案 ( 有效範圍在Form內 )。
 this.Cursor = new Cursor("C:\\test.ico"); // "C:\\test.ico" 改成您的圖檔，接受的影像格式為cur與ico
 
-
-
-
-
+//------------------------------------------------------------  # 60個
 
 [ C# ] WinForm 顯示於延伸螢幕之方法
 https://georgiosky2000.wordpress.com/2014/03/19/c-winform-%e9%a1%af%e7%a4%ba%e6%96%bc%e5%bb%b6%e4%bc%b8%e8%9e%a2%e5%b9%95%e4%b9%8b%e6%96%b9%e6%b3%95/
-
-
-        Graphics g;
-        Pen p;
-
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            p = new Pen(Color.Red, 6);
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            g = this.CreateGraphics();
-            g.DrawString("驗證完成", new Font("標楷體", 60), new SolidBrush(Color.Blue), new PointF(20, 20));
-
-        }
 
 //------------------------------------------------------------  # 60個
 
@@ -8706,9 +8644,7 @@ Hexadecimal value of ? is 003F
 Hexadecimal value of ? is 003F
 Hexadecimal value of ? is 003F
 
-
-
-'
+//------------------------------------------------------------  # 60個
 
 vcs
 http://cs0.wikidot.com/introduction
@@ -8725,7 +8661,7 @@ https://debbiedbaby.pixnet.net/blog/post/426657881-%E3%80%90c%23%E3%80%91-emgucv
 如何自訂右鍵工具選單
 http://davidhsu666.com/archives/context_menu/
 
-
+//------------------------------------------------------------  # 60個
 
 c# Delay 1秒鐘寫法
 
@@ -8822,7 +8758,7 @@ Bitmap br = new Bitmap("My Documents\\我的圖片\\Waterfall.jpg");
 //並指定圖片要放置的位置，(X,Y) = (0,0)
 g.DrawImage(br, 0, 0);
 
-
+//------------------------------------------------------------  # 60個
 
 在Windows Mobile 6 上用C# 畫點與點之間的線段，方法有二! 
 
@@ -8851,7 +8787,7 @@ g.DrawImage(br, 0, 0);
       g.DrawLines(pen, points);
 
 
-
+//------------------------------------------------------------  # 60個
 
 在Windows Mobile 6 上用C# 畫實心圓圈，就是把圈圈填滿，方法有二!
 

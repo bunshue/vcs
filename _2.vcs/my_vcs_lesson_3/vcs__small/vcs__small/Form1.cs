@@ -24,6 +24,8 @@ namespace vcs__small
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             // pictureBox1顯示圖片
             pictureBox1.Image = new Bitmap(filename);
@@ -87,7 +89,7 @@ namespace vcs__small
 
             lb_time_interval.Text = "------------";
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
             // 建立Product陣列用來存放產品
             string[] Product = new string[] { "火影忍者", "航海王",
@@ -126,7 +128,23 @@ namespace vcs__small
             checkedListBox1.CheckOnClick = true;
             */
 
-            //6060
+            //------------------------------------------------------------  # 60個
+
+            // 設定進度列的最大值與最小值
+            progressBar0.Maximum = 100;
+            progressBar0.Minimum = 0;
+
+            // 設定Timer每一秒鐘會執行Tick事件一次
+            timer1.Interval = 1000;
+
+            // 跑馬燈式的進度列會一直有動畫，
+            // 為避免誤解，當進度為0時，將其樣式更改為Block
+            if (progressBar0.Minimum == 0)
+            {
+                progressBar0.Style = ProgressBarStyle.Blocks;
+            }
+
+            //------------------------------------------------------------  # 60個
         }
 
         void show_item_location()
@@ -149,9 +167,15 @@ namespace vcs__small
             groupBox_radiobutton1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             groupBox_radiobutton2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox_radiobutton3.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            groupBox_numericupdown.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            groupBox_trackbar.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            groupBox_domainupdown.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            groupBox_numericupdown.Location = new Point(x_st + dx * 2 + 20, y_st + dy * 0);
+            groupBox_trackbar.Location = new Point(x_st + dx * 2 + 20, y_st + dy * 1);
+            groupBox_domainupdown.Location = new Point(x_st + dx * 4 + 60, y_st + dy * 0);
+
+            groupBox_dtp1.Location = new Point(x_st + dx * 2 + 20, y_st + dy * 2);
+            groupBox_dtp2.Location = new Point(x_st + dx * 2 + 20, y_st + dy * 3 + 50);
+            groupBox_dtp3.Location = new Point(x_st + dx * 4 - 70, y_st + dy * 3 + 50);
+            groupBox_checkedlistbox.Location = new Point(x_st + dx * 2 + 20, y_st + dy * 5 - 20);
+            groupBox_progress.Location = new Point(x_st + dx * 4 + 60, y_st + dy * 1);
 
             richTextBox1.Size = new Size(300, 690);
             richTextBox1.Location = new Point(1100, 10);
@@ -169,6 +193,8 @@ namespace vcs__small
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         //重定義基類OnPaint()方法
         protected override void OnPaint(PaintEventArgs e)
@@ -477,7 +503,6 @@ namespace vcs__small
         private void bt_clb1_Click(object sender, EventArgs e)
         {
             //勾選狀態
-            //勾選狀態
             string result;
             foreach (int indexChecked in checkedListBox1.CheckedIndices)
             {
@@ -491,7 +516,7 @@ namespace vcs__small
                 richTextBox1.Text += result + "\n";
             }
 
-            //3030
+            //------------------------------------------------------------  # 60個
 
             richTextBox1.Text += "訂購產品如下\n";
             // 逐一檢查每一個核取方塊是否被選取
@@ -516,13 +541,43 @@ namespace vcs__small
                 checkedListBox1.SetItemChecked(y, false);
             }
 
-            //3030
+            //------------------------------------------------------------  # 60個
 
             // 設定所有核取方塊不勾選
             for (int i = 0; i < checkedListBox1.Items.Count; i++)
             {
                 checkedListBox1.SetItemChecked(i, false);
             }
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void timer_progress_Tick(object sender, EventArgs e)
+        {
+            if (progressBar0.Value >= progressBar0.Maximum)
+            {
+                timer_progress.Stop();
+                lb_status0.Text = "完成";
+                progressBar0.Value = 0;
+                progressBar0.Style = ProgressBarStyle.Blocks;
+            }
+            else
+            {
+                progressBar0.Value += 10;
+                lb_status0.Text = progressBar0.Value.ToString() + "%";
+            }
+
+        }
+
+        private void bt_start_Click(object sender, EventArgs e)
+        {
+            progressBar0.Style = ProgressBarStyle.Marquee;
+            timer_progress.Start();
+        }
+
+        private void bt_stop_Click(object sender, EventArgs e)
+        {
+            timer_progress.Stop();
         }
 
         //------------------------------------------------------------  # 60個
