@@ -1,4 +1,30 @@
 ﻿
+//量測時間
+            int start = 0;
+
+            start = Environment.TickCount;
+
+
+            // Do stuff
+            int duration = Environment.TickCount - start;
+
+            richTextBox1.Text += "耗時 : " + (duration / 1000).ToString() + "." + (duration % 1000).ToString("D3") + " 秒\n";
+
+6060
+
+計算程式執行的時間
+
+int URms = System.Environment.TickCount;
+
+XXXXXXXXX
+
+Console.WriteLine("花費 {0} ms 完成!!!", Environment.TickCount - URms);
+				
+//------------------------------------------------------------  # 60個
+            
+vcs待尋找
+目前用webbrowser顯示pdf檔案, 無法用程式的方法得知此時看到第幾頁 也無法得知目前頁面顯示比例
+
 
 控件StatusStrip
 加選ProgressBar
@@ -10,7 +36,6 @@
             toolStripProgressBar1.Value = 30;
 
 //------------------------------------------------------------  # 60個
-
 
 陣列 一維陣列 二維陣列
 
@@ -317,7 +342,7 @@ vcs 使用 即時運算視窗
 
 using System.Diagnostics;   //即時運算視窗
 
-                Debug.Print("AAAAAAAAAAAAAAAAAAaa i = " + i.ToString());
+Debug.Print("AAAAAAAAAAAAAAAAAAaa i = " + i.ToString());
 
 若找不到"即時運算視窗"
  
@@ -6365,11 +6390,6 @@ if(isprint(ch))
 
 函式 abs dec2hex hex2dec print9X9_Table
 
-VC#
-資料型態	string(字串) bool(布耳)
-各種控件	button richTextBox pictureBox timer
-
-
 colsole mode的scanf        
         
             // 宣告字串資料型別ProductName變數，用來存放品名
@@ -6588,15 +6608,6 @@ MainMenu選了之後會有打勾記號
 
 //------------------------------------------------------------  # 60個
 
-計算程式執行的時間
-
-int URms = System.Environment.TickCount;
-
-XXXXXXXXX
-
-Console.WriteLine("花費 {0} ms 完成!!!", Environment.TickCount - URms);
-				
-
 做一個我的 Transform範例
 
 角度-180~+180
@@ -6630,6 +6641,7 @@ for(i=0; i<360;i++)
  y_new = y_old*180;
 }
 
+//------------------------------------------------------------  # 60個
 
             e.Graphics.Clear(picGraph.BackColor);
             if (Balance.Count < 2) return;
@@ -6990,12 +7002,6 @@ $ 匹配一行的結束。 例如正則表達式 food$ 能夠匹配到 “he's  
 
 //------------------------------------------------------------  # 60個
 
-
-//------------------------------------------------------------  # 60個
-
-
-//------------------------------------------------------------  # 60個
-
 typedef double point[3];
 
 point v[] =
@@ -7251,10 +7257,6 @@ void runAutoTest(int argc, char** argv, const char* filename, int kernel_param)
     exit(EXIT_SUCCESS);
 #endif
 
-
-
-
-
 // Device code: 送入GPU執行的部分
 
 __global__ void VecAdd(float* A, float* B, float* C)
@@ -7328,25 +7330,19 @@ gluLookAt
  
 2.將gluLookAt的后三個參數設置為（0.0,-1.0,0.0）,即y軸為-1,其余為0。這樣表示腦袋向下，即人眼倒著看
 
-
-
 3.修改gluLookAt的后三個參數為（1.0,0.0,0.0）;
 x軸為1，其余為0.
 即人的腦袋像右歪90度來看，即順時針轉90度（換個角度思考就是壺逆時針轉90度）
 ，猜想看到的結果應該是壺嘴在上，壺蓋在右，壺底在左，壺柄在下。如下圖：
-
- 
  
 gluLookAt的參數，
 前三個參數表示的是腦袋的位置，
 中間三個參數是人眼的朝向，
 后三個位置表示的是腦袋朝向的方向。
-
  
 在默認情況下，照相機位于原點，指向z軸的負方向，朝上向量為(0,1,0)。
  
 可以修改原來的代碼。把視圖變換函數gluLookAt()函數，改為模型變換函數glTranslatef(),并使用參數(0.0,0.0,-5.0)。這個函數的效果和使用gluLookAt()函數的效果是完全相同的，原因：
-
 
 gluLookAt()函數是通過移動照相機（使用試圖變換）來觀察這個立方體，
 glTranslatef()函數是通過移動茶壺（使用模型變換）。
@@ -7383,7 +7379,7 @@ openGL
         }
     }
     
-    
+//------------------------------------------------------------  # 60個
 
 .net(C#)從html中提取中文字（正則表達式）
 用正則表達式提取html中的純文本,代碼實現如下: 
@@ -7399,11 +7395,6 @@ using System.Text.RegularExpressions;
             strOutput = strOutput.Replace("&nbsp;", "");
             return strOutput;
         }
-    
-
-//------------------------------------------------------------  # 60個
-
-
 
 //-----wmp----------------------------------------------------  # 60個        				
 
@@ -7470,15 +7461,9 @@ for(var i=0; i < atCount; i++){
    myText.value += "\n";
 }
 
-
-
-
-
-
-
+//------------------------------------------------------------  # 60個
 
 //C#中如何禁止WindowsMediaPlayer双击全屏显示
-
 
 private void AxWindowsMediaPlayer1_MouseDownEvent(object sender, AxWMPLib._WMPOCXEvents_MouseDownEvent e)
 {
@@ -7486,18 +7471,9 @@ private void AxWindowsMediaPlayer1_MouseDownEvent(object sender, AxWMPLib._WMPOC
         axWindowsMediaPlayer1.fullScreen = false;
 } 
 
-
-
-
-
-
-
-
-
-
+//------------------------------------------------------------  # 60個
 
 axWindowsMediaPlayer1
-
 
 uiMode	//播放器介面模式
 //Full, 有影像, 完整播放器介面
@@ -10805,19 +10781,7 @@ DuplicateList = DuplicateList.Distinct().ToList();
 Color的另一種寫法
 this.BackColor = Color.FromKnownColor(KnownColor.GrayText);
 
-
-
-//量測時間
-            int start = 0;
-
-            start = Environment.TickCount;
-
-
-            // Do stuff
-            int duration = Environment.TickCount - start;
-
-            richTextBox1.Text += "耗時 : " + (duration / 1000).ToString() + "." + (duration % 1000).ToString("D3") + " 秒\n";
-
+//6060
 
 建立一方案多專案的做法	TBD
 
@@ -14450,4 +14414,41 @@ pictureBox1.Image.Save(filename);
 
 
 //------------------------------------------------------------  # 60個
+
+主程式持續進行，開啟thread做一些事，thread做事時，主程式依舊不耽擱
+
+thread工作型態
+1. 建立一個thread，讓他無限迴圈地等待做一件事，直到外面叫他停止		印表機、
+2. 建立一個thread，只做一件事，做完即結束				去搬便當、
+
+停止 thread 的3個方法
+1. 強制停止 .Abort()
+2. 使用 flag 讓 thread 中斷運行
+3. 事情做完 thread即停止
+
+//無限迴圈
+richTextBox1.Text += "0";
+Thread.Sleep(500);
+
+
+//建立一個Thread 到 偵錯/視窗/即時運算 看結果
+
+System.Diagnostics.Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！ title = " + title + "  " + aa.ToString());
+
+6060
+
+             /* info
+            richTextBox1.Text += "aaa: " + pfc.Families.Length.ToString() + "\n";
+            for (int i = 0; i < pfc.Families.Length; i++)
+            {
+                richTextBox1.Text += "aaa: " + pfc.Families[i].Name + "\n";
+            }
+
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += f.FontFamily.ToString() + "\n";
+            richTextBox1.Text += "字型名稱: " + f.FontFamily.Name + "\n";
+            //richTextBox1.Text += "字型名稱: " + f.Name + "\n";    same
+            */
+
+
 

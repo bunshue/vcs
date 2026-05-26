@@ -30,6 +30,9 @@ namespace vcs_VisualBasic
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
             CheckForIllegalCrossThreadCalls = false;
 
             //for Interaction,          //參考/加入參考/.NET/Microsoft.VisualBasic
@@ -53,7 +56,6 @@ namespace vcs_VisualBasic
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -65,6 +67,8 @@ namespace vcs_VisualBasic
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 5);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
+            label4.Text = "";
+
             this.Size = new Size(900, 750);
             this.Text = "vcs_VisualBasic";
 
@@ -75,8 +79,10 @@ namespace vcs_VisualBasic
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         [DllImport("kernel32.dll")]
         private static extern int SetComputerName(string ipComputerName);//重寫API函數
@@ -134,9 +140,8 @@ namespace vcs_VisualBasic
             label1.Text = "可用物理內存（M）：" + Convert.ToString(myComputer.Info.AvailablePhysicalMemory / 1024 / 1024);
             label2.Text = "虛擬內存總量（M）：" + Convert.ToString(myComputer.Info.TotalVirtualMemory / 1024 / 1024);
             label3.Text = "可用虛擬內存（M）：" + Convert.ToString(myComputer.Info.AvailableVirtualMemory / 1024 / 1024);
-            label4.Text = "系統啟動後經過的時間： " + (Environment.TickCount / 1000).ToString() + " 秒";
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
             //得到當前系統時間
             DateTime dt = DateTime.Now;
@@ -216,7 +221,20 @@ namespace vcs_VisualBasic
             //GetMemoryInfo();
             td = new Thread(new ThreadStart(GetMemoryInfo));
             td.Start();
-
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

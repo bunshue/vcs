@@ -192,8 +192,8 @@ namespace vcs_System1
             richTextBox1.Text += "修訂元件值：" + Environment.Version.Revision + "\n";
             richTextBox1.Text += "實際記憶體數量：" + Environment.WorkingSet + "\n";
 
-            richTextBox1.Text += "系統啟動後的毫秒數：" + Environment.TickCount + "\t系統啟動後經過的Tick數, 1個tick為1msec\n";
-            richTextBox1.Text += "系統啟動後經過的時間(電腦開機時間)： " + (Environment.TickCount / 1000).ToString() + " 秒\n";
+            //Environment.TickCount 是上次 Windows 更新或休眠恢復的時間, 不是「真正的冷開機」, 只能保證 24.9 天內的時間差是可靠的
+            richTextBox1.Text += "系統TickCount數："    + Environment.TickCount + " msec\n";
 
             richTextBox1.Text += "SystemPageSize： " + Environment.SystemPageSize + "\n";
 

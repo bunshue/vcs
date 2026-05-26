@@ -575,9 +575,23 @@ namespace vcs_Mix00
             richTextBox1.Text += "\n";
         }
 
+        [DllImport("kernel32")]
+        extern static ulong GetTickCount64();
+
         private void button9_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //測試系統開機時間
+
+            //呼叫 Windows API (GetTickCount64)
+            //如果你想要更底層的方式，可以透過 P/Invoke 呼叫 Win32 API：
+
+            ulong uptimeMillis = GetTickCount64();
+            DateTime bootTime = DateTime.Now - TimeSpan.FromMilliseconds(uptimeMillis);
+
+            Console.WriteLine("系統開機時間: " + bootTime);
+            richTextBox1.Text += "系統開機時間: " + bootTime + "\n";
+
         }
 
         //局部圖像放大

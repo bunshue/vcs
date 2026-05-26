@@ -128,8 +128,8 @@ namespace vcs_WMI__new
                 richTextBox1.Text += "LastBootUpTime : " + mo["LastBootUpTime"].ToString().Substring(0, 14) + "\n";
                 richTextBox1.Text += "LocalDateTime : " + mo["LocalDateTime"].ToString() + "\n";
 
-                string lastBootUpTime = mo["LastBootUpTime"].ToString();
-                // 將 WMI 格式轉換成 DateTime
+                string lastBootUpTime = mo["LastBootUpTime"].ToString();  // WMI 格式的時間字串
+                // 將 WMI格式的時間字串 轉換成 DateTime 物件
                 DateTime bootTime = ManagementDateTimeConverter.ToDateTime(lastBootUpTime);
                 richTextBox1.Text += "系統開機時間: " + bootTime + "\n";
 

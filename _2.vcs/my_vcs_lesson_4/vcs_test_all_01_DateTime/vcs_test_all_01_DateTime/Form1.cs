@@ -155,6 +155,17 @@ namespace vcs_test_all_01_DateTime
 
         private void button1_Click(object sender, EventArgs e)
         {
+            DateTime bootTime = new DateTime(2026, 3, 11);//指定時間, 年月日
+            TimeSpan difft = DateTime.Now - bootTime;
+
+            //richTextBox1 +="已開機時間: {0} 天 {1} 小時 {2} 分鐘", uptime.Days, uptime.Hours, uptime.Minutes+"\n";
+            richTextBox1.Text += "已開機時間 : " + String.Format("{0} 日 {1} 時 {2} 分 {3} 秒 {4} 毫秒", difft.Days, difft.Hours, difft.Minutes, difft.Seconds, difft.Milliseconds) + "\n";
+            richTextBox1.Text += "總日數 : " + difft.TotalDays + "\n";
+            richTextBox1.Text += "總時數 : " + difft.TotalHours + "\n";
+            richTextBox1.Text += "總分數 : " + difft.TotalMinutes + "\n";
+            richTextBox1.Text += "總秒數 : " + difft.TotalSeconds + "\n";
+            richTextBox1.Text += "總毫秒數 : " + difft.TotalMilliseconds + "\n";
+
             //時間差計算, 使用 TimeSpan
             DateTime dt1 = new DateTime(2019, 1, 1, 0, 0, 0);
             DateTime dt2 = new DateTime(2037, 12, 30, 12, 34, 56, 15);
@@ -414,6 +425,28 @@ namespace vcs_test_all_01_DateTime
             dt2 = DateTime.Now;
             diff = DateDiff(dt1, dt2);
             richTextBox1.Text += "時間間隔 : " + diff + "\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            richTextBox1.Text += "計算時間往回推 1天 2小時 3分 4秒\n";
+
+            uint elapssed_time_msec = 1000 * (60 * 60 * 24 * 1 + 60 * 60 * 2 + 60 * 3 + 4);  // msec
+
+            // 換算成 DateTime
+            TimeSpan uptime = TimeSpan.FromMilliseconds(elapssed_time_msec);
+            Console.WriteLine("已開機時間: {0} 天 {1} 小時 {2} 分鐘", uptime.Days, uptime.Hours, uptime.Minutes);
+
+            DateTime before_time = DateTime.Now - TimeSpan.FromMilliseconds(elapssed_time_msec);
+
+            richTextBox1.Text += "計算時間往回推 : " + before_time + "\n";
+
+            richTextBox1.Text += "計算時間往回推 1天 2小時 3分 4秒\n";
+
+            uint elapssed_time = 60 * 60 * 24 * 1 + 60 * 60 * 2 + 60 * 3 + 4;  // sec
+
+            before_time = DateTime.Now - TimeSpan.FromSeconds(elapssed_time);
+
+            richTextBox1.Text += "計算時間往回推 : " + before_time + "\n";
         }
 
         /// 計算兩個日期的時間間隔
@@ -2257,10 +2290,6 @@ namespace vcs_test_all_01_DateTime
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-//1515
-//---------------  # 15個
-
-
 /*  可搬出
             message += "显示中文格式的日期、星期几\n";
             message += "//该语句显示的为英文格式\n";
@@ -2401,10 +2430,7 @@ String to DateTime
 2. TryParse ：將指定的日期時間字串，轉換成相對應的 DateTime 型別，回傳值表示轉換是否成功。
 3. ParseExact ：將指定的日期時間字串，轉換成相對應的 DateTime 型別，字串表示的格式必須完全符合指定的格式，否則會擲回例外狀況。
 4. TryParseExact ：將指定的日期時間字串，轉換成相對應的 DateTime 型別，字串表示的格式必須完全符合指定的格式，回傳值表示轉換是否成功。
-
   
-richTextBox1.Text += "系統啟動後經過的時間： " + (Environment.TickCount / 1000).ToString() + "秒" + "\n";
-
 richTextBox1.Text += "程式啟動時間: " + start_time.ToString() + " 秒\n";
 
 //------------------------------------------------------------  # 60個
@@ -2604,8 +2630,6 @@ Console.WriteLine("花費 {0} 毫秒", ms);
 
 補充說明: 不一定每次測到的時間都相同喔!
 建議值: 超過100毫秒就有點太慢囉…. (電腦爛會Lag更長)
-
-
 
 */
 
