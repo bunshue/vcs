@@ -109,6 +109,10 @@ namespace vcs_test_all_00_Usually
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
             //網頁protocol	解決  要求已經中止: 無法建立 SSL/TLS 的安全通道。
             // Allow TLS 1.1 and TLS 1.2 protocols for file download.
             //for Sugar     3840 Romeo也可用
@@ -118,8 +122,6 @@ namespace vcs_test_all_00_Usually
             //C# 跨 Thread 存取 UI
             //Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效	same
             Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
-
-            show_item_location();
 
             /*
             //讀取圖檔

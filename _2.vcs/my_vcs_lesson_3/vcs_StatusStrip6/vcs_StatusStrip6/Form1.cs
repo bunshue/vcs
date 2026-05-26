@@ -157,3 +157,4 @@ namespace vcs_StatusStrip6
         }
     }
 }
+

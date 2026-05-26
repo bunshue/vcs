@@ -40,50 +40,11 @@ namespace vcs_WMI__new
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-            int w = 320;
-            int h = 64;
-
             //button
-            x_st = 12;
-            y_st = 12;
-            dx = w + 5;
-            dy = h + 5;
-
-            button0.Size = new Size(w, h);
-            button1.Size = new Size(w, h);
-            button2.Size = new Size(w, h);
-            button3.Size = new Size(w, h);
-            button4.Size = new Size(w, h);
-            button5.Size = new Size(w, h);
-            button6.Size = new Size(w, h);
-            button7.Size = new Size(w, h);
-            button8.Size = new Size(w, h);
-            button9.Size = new Size(w, h);
-            button10.Size = new Size(w, h);
-            button11.Size = new Size(w, h);
-            button12.Size = new Size(w, h);
-            button13.Size = new Size(w, h);
-            button14.Size = new Size(w, h);
-            button15.Size = new Size(w, h);
-            button16.Size = new Size(w, h);
-            button17.Size = new Size(w, h);
-            button18.Size = new Size(w, h);
-            button19.Size = new Size(w, h);
-            button20.Size = new Size(w, h);
-            button21.Size = new Size(w, h);
-            button22.Size = new Size(w, h);
-            button23.Size = new Size(w, h);
-            button24.Size = new Size(w, h);
-            button25.Size = new Size(w, h);
-            button26.Size = new Size(w, h);
-            button27.Size = new Size(w, h);
-            button28.Size = new Size(w, h);
-            button29.Size = new Size(w, h);
-
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -115,19 +76,24 @@ namespace vcs_WMI__new
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            richTextBox1.Size = new Size(500, 685);
+            richTextBox1.Size = new Size(530, 690);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            //設定表單Client的大小
-            this.SetClientSizeCore(1500, 710);
+            this.Size = new Size(1200, 750);
+            this.Text = "vcs_WMI__new";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -144,7 +110,7 @@ namespace vcs_WMI__new
                 richTextBox1.Text += "位元: " + mo["OSArchitecture"].ToString() + "\n";
                 richTextBox1.Text += "OS製造商 : " + mo["Manufacturer"].ToString() + "\n";
                 richTextBox1.Text += "版本號 : " + mo["Version"].ToString() + "\n";
-                richTextBox1.Text += "CSDVersion: " + mo["CSDVersion"].ToString() + "\n";//獲取SP
+                //richTextBox1.Text += "CSDVersion: " + mo["CSDVersion"].ToString() + "\n";//獲取SP
                 richTextBox1.Text += "SP主號 : " + mo["ServicePackMajorVersion"].ToString() + "\n";
                 richTextBox1.Text += "SP次號 : " + mo["ServicePackMinorVersion"].ToString() + "\n";
                 richTextBox1.Text += "OS序號 : " + mo["SerialNumber"].ToString() + "\n";
@@ -161,6 +127,11 @@ namespace vcs_WMI__new
                 richTextBox1.Text += "LastBootUpTime : " + mo["LastBootUpTime"].ToString() + "\n";
                 richTextBox1.Text += "LastBootUpTime : " + mo["LastBootUpTime"].ToString().Substring(0, 14) + "\n";
                 richTextBox1.Text += "LocalDateTime : " + mo["LocalDateTime"].ToString() + "\n";
+
+                string lastBootUpTime = mo["LastBootUpTime"].ToString();
+                // 將 WMI 格式轉換成 DateTime
+                DateTime bootTime = ManagementDateTimeConverter.ToDateTime(lastBootUpTime);
+                richTextBox1.Text += "系統開機時間: " + bootTime + "\n";
 
                 richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -1663,19 +1634,19 @@ namespace vcs_WMI__new
     }
 }
 
-/*
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
 
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-//---------------  # 15個
+/*  可搬出
 
-6060
-richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-3030
-richTextBox1.Text += "------------------------------\n";  // 30個
-1515
-richTextBox1.Text += "---------------\n";  // 15個
+*/
+
+/*
 all
 richTextBox1.Text += "全部 :\n" + mo.GetText(TextFormat.Mof) + "\n";  // 全部
 
@@ -1690,5 +1661,103 @@ richTextBox1.Text += "CPU序號 : " + mo.Properties["ProcessorId"].Value.ToStrin
 
 查詢語法 製造商不是Microsoft 且 MAC位址不為空
 mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((MACAddress Is Not NULL) AND (Manufacturer <> 'Microsoft'))");
+*/
+
+
+/*
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("select * from Win32_Processor");
+            foreach (ManagementObject myobject in searcher.Get())
+            {
+                lblCPU.Text = myobject["LoadPercentage"].ToString() + " %";
+                //label2.Text = lblCPU.Text;
+                label2.Text = "CPU使用率：" + lblCPU.Text;
+                mheight = Convert.ToInt32(myobject["LoadPercentage"].ToString());
+                if (mheight == 100)
+                    panel3.Height = 100;
+                CreateImage();
+            }
+
+//------------------------------------------------------------  # 60個
+
+            //取得顯示設備相關資訊
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from win32_VideoController");//聲明一個用于檢索設備管理信息的對象
+            foreach (ManagementObject mo in mos.Get())//循環遍歷WMI實例中的每一個對象
+            {
+                richTextBox1.Text += "顯示設備名稱 : " + mo["name"].ToString() + "\n";  //在文本框中顯示顯示設備的名稱
+                richTextBox1.Text += "PNPDeviceID : " + mo["PNPDeviceID"].ToString() + "\n"; //在文本框中顯示顯示設備的PNPDeviceID
+
+                richTextBox1.Text += "最大更新率 : " + mo["MaxRefreshRate"].ToString() + "\n"; //在當前文本框中顯示最大刷新率
+                richTextBox1.Text += "最小更新率 : " + mo["MinRefreshRate"].ToString() + "\n"; //在當前文本框中顯示最小刷新率
+                richTextBox1.Text += "目前更新率 : " + mo["CurrentRefreshRate"].ToString() + "\n"; //在當前文本框中顯示當前刷新率
+
+                richTextBox1.Text += "顯示模式 : " + mo["VideoModeDescription"].ToString() + "\n"; //在文本框中顯示設備的當前顯示模式
+            }
+
+//------------------------------------------------------------  # 60個
+
+            //取得計算機的顯示設備訊息
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from Win32_VideoController");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                richTextBox1.Text += "顯示設備訊息\n";
+                richTextBox1.Text += "顯示設備名稱：" + mo["Name"].ToString() + "\n";//顯示設備名稱
+                richTextBox1.Text += "顯示設備PNPDeviceID：" + mo["PNPDeviceID"].ToString() + "\n";//顯示設備的PNPDeviceID
+                richTextBox1.Text += "顯示設備驅動程序文件：" + mo["InstalledDisplayDrivers"].ToString() + "\n";//顯示設備的驅動程序文件
+                richTextBox1.Text += "顯示設備驅動版本號：" + mo["DriverVersion"].ToString() + "\n";//顯示設備的驅動版本號
+                richTextBox1.Text += "顯示設備的顯示處理器：" + mo["VideoProcessor"].ToString() + "\n";//顯示設備的顯示處理器
+                richTextBox1.Text += "顯示設備的最大更新率：" + mo["MaxRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
+                richTextBox1.Text += "顯示設備的最小更新率：" + mo["MinRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
+                richTextBox1.Text += "顯示設備目前顯示模式：" + mo["VideoModeDescription"].ToString() + "\n";//顯示設備目前顯示模式
+            }
+
+//------------------------------------------------------------  # 60個
+
+            //取得音效設備相關資訊
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from Win32_SoundDevice");//聲明一個用于檢索設備管理信息的對象
+            foreach (ManagementObject mo in mos.Get())//循環遍歷WMI實例中的每一個對象
+            {
+                richTextBox1.Text += "音效設備名稱 : " + mo["ProductName"].ToString() + "\n"; //在當前文本框中顯示聲音設備的名稱
+                richTextBox1.Text += "PNPDeviceID : " + mo["PNPDeviceID"].ToString() + "\n";//在當前文本框中顯示聲音設備的PNPDeviceID
+            }
+
+//------------------------------------------------------------  # 60個
+
+            //取得映射驅動器路徑
+            //映射驅動器 = 網路芳鄰硬碟的連結
+
+            SelectQuery selectQuery = new SelectQuery("select * from win32_logicaldisk");
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher(selectQuery);
+            int i = 0;
+            foreach (ManagementObject disk in searcher.Get())
+            {
+                string DriveType;
+                DriveType = disk["DriveType"].ToString();
+
+                richTextBox1.Text += "磁盤名稱：" + disk["Name"].ToString() + "\n";
+                //獲得硬盤的可用空間
+
+                long mb = 1048576;
+                double free = 0;
+                double use = 0;
+                double total = 0;
+                free = Convert.ToInt64(disk["FreeSpace"]) / mb;
+                //獲得硬盤的已用空間
+                use = (Convert.ToInt64(disk["Size"]) - Convert.ToInt64(disk["FreeSpace"])) / mb;
+                //獲得硬盤的合計空間
+                total = Convert.ToInt64(disk["Size"]) / mb;
+                richTextBox1.Text += " 總計：" + total.ToString() + "MB\n";
+                richTextBox1.Text += "已用空間：" + use.ToString() + "MB\n";
+                richTextBox1.Text += "可用空間：" + free.ToString() + "MB\n";
+
+                if (DriveType == "4")
+                {
+                    richTextBox1.Text += "取得 : " + disk["Name"].ToString() + "\n";
+                }
+                i++;
+            }
+
+//------------------------------------------------------------  # 60個
+
 
 */
+

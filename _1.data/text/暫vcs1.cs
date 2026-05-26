@@ -1,4 +1,17 @@
 ﻿
+
+控件StatusStrip
+加選ProgressBar
+
+會出現toolStripProgressBar1
+
+            toolStripProgressBar1.Style = ProgressBarStyle.Marquee;  //進度條一直重複跑
+            toolStripProgressBar1.Style = ProgressBarStyle.Blocks;  //依Value顯示進度
+            toolStripProgressBar1.Value = 30;
+
+//------------------------------------------------------------  # 60個
+
+
 陣列 一維陣列 二維陣列
 
 //string[] names = new string[] { "張三", "李四", "王五" };
@@ -3374,7 +3387,7 @@ Download specified number of pictures from “ http://browse.deviantart.com/cust
         }
 
 
-print('------------------------------------------------------------')	#60個
+//------------------------------------------------------------  # 60個
 
 MotionDetection1_CheckedChanged(object sender, EventArgs e)
 this.toggleOption(0, 0, true);
@@ -3388,9 +3401,7 @@ BeepOnMotionCheck1_CheckedChanged(object sender, EventArgs e)
 this.toggleOption(0, 2, true);
 this.toggleOption(0, 2, false);
 
-print('------------------------------------------------------------')	#60個
-
-        
+//------------------------------------------------------------  # 60個
 
         public FilterInfoCollection USBWebcams = null;
         public VideoCaptureDevice Cam = null;
@@ -3444,12 +3455,9 @@ print('------------------------------------------------------------')	#60個
                 //button12.Enabled = true;
                 //richTextBox1.Text += "無影像裝置\n";
             }
-
-
         }
 
-
-print('------------------------------------------------------------')	#60個
+//------------------------------------------------------------  # 60個
 
 plt.savefig('tmp_event.png', dpi=300) 	# 將圓餅圖出成圖片，檔名為event.png 
 
@@ -3483,22 +3491,7 @@ bt_stop_Click()
 bt_record_start_Click()
 bt_record_stop_Click()
 
-
-print('------------------------------------------------------------')	#60個
-
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("select * from Win32_Processor");
-            foreach (ManagementObject myobject in searcher.Get())
-            {
-                lblCPU.Text = myobject["LoadPercentage"].ToString() + " %";
-                //label2.Text = lblCPU.Text;
-                label2.Text = "CPU使用率：" + lblCPU.Text;
-                mheight = Convert.ToInt32(myobject["LoadPercentage"].ToString());
-                if (mheight == 100)
-                    panel3.Height = 100;
-                CreateImage();
-            }
-
-print('------------------------------------------------------------')	#60個
+//------------------------------------------------------------  # 60個
 
 //vcs最小化錄影
 
@@ -3868,85 +3861,6 @@ pikasa
 
    return strOutput;
   }
-
-//------------------------------------------------------------  # 60個
-
-            //取得顯示設備相關資訊
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from win32_VideoController");//聲明一個用于檢索設備管理信息的對象
-            foreach (ManagementObject mo in mos.Get())//循環遍歷WMI實例中的每一個對象
-            {
-                richTextBox1.Text += "顯示設備名稱 : " + mo["name"].ToString() + "\n";  //在文本框中顯示顯示設備的名稱
-                richTextBox1.Text += "PNPDeviceID : " + mo["PNPDeviceID"].ToString() + "\n"; //在文本框中顯示顯示設備的PNPDeviceID
-
-                richTextBox1.Text += "最大更新率 : " + mo["MaxRefreshRate"].ToString() + "\n"; //在當前文本框中顯示最大刷新率
-                richTextBox1.Text += "最小更新率 : " + mo["MinRefreshRate"].ToString() + "\n"; //在當前文本框中顯示最小刷新率
-                richTextBox1.Text += "目前更新率 : " + mo["CurrentRefreshRate"].ToString() + "\n"; //在當前文本框中顯示當前刷新率
-
-                richTextBox1.Text += "顯示模式 : " + mo["VideoModeDescription"].ToString() + "\n"; //在文本框中顯示設備的當前顯示模式
-            }
-
-//------------------------------------------------------------  # 60個
-
-            //取得計算機的顯示設備訊息
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from Win32_VideoController");
-            foreach (ManagementObject mo in mos.Get())
-            {
-                richTextBox1.Text += "顯示設備訊息\n";
-                richTextBox1.Text += "顯示設備名稱：" + mo["Name"].ToString() + "\n";//顯示設備名稱
-                richTextBox1.Text += "顯示設備PNPDeviceID：" + mo["PNPDeviceID"].ToString() + "\n";//顯示設備的PNPDeviceID
-                richTextBox1.Text += "顯示設備驅動程序文件：" + mo["InstalledDisplayDrivers"].ToString() + "\n";//顯示設備的驅動程序文件
-                richTextBox1.Text += "顯示設備驅動版本號：" + mo["DriverVersion"].ToString() + "\n";//顯示設備的驅動版本號
-                richTextBox1.Text += "顯示設備的顯示處理器：" + mo["VideoProcessor"].ToString() + "\n";//顯示設備的顯示處理器
-                richTextBox1.Text += "顯示設備的最大更新率：" + mo["MaxRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
-                richTextBox1.Text += "顯示設備的最小更新率：" + mo["MinRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
-                richTextBox1.Text += "顯示設備目前顯示模式：" + mo["VideoModeDescription"].ToString() + "\n";//顯示設備目前顯示模式
-            }
-
-//------------------------------------------------------------  # 60個
-
-            //取得音效設備相關資訊
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from Win32_SoundDevice");//聲明一個用于檢索設備管理信息的對象
-            foreach (ManagementObject mo in mos.Get())//循環遍歷WMI實例中的每一個對象
-            {
-                richTextBox1.Text += "音效設備名稱 : " + mo["ProductName"].ToString() + "\n"; //在當前文本框中顯示聲音設備的名稱
-                richTextBox1.Text += "PNPDeviceID : " + mo["PNPDeviceID"].ToString() + "\n";//在當前文本框中顯示聲音設備的PNPDeviceID
-            }
-
-//------------------------------------------------------------  # 60個
-
-            //取得映射驅動器路徑
-            //映射驅動器 = 網路芳鄰硬碟的連結
-
-            SelectQuery selectQuery = new SelectQuery("select * from win32_logicaldisk");
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(selectQuery);
-            int i = 0;
-            foreach (ManagementObject disk in searcher.Get())
-            {
-                string DriveType;
-                DriveType = disk["DriveType"].ToString();
-
-                richTextBox1.Text += "磁盤名稱：" + disk["Name"].ToString() + "\n";
-                //獲得硬盤的可用空間
-
-                long mb = 1048576;
-                double free = 0;
-                double use = 0;
-                double total = 0;
-                free = Convert.ToInt64(disk["FreeSpace"]) / mb;
-                //獲得硬盤的已用空間
-                use = (Convert.ToInt64(disk["Size"]) - Convert.ToInt64(disk["FreeSpace"])) / mb;
-                //獲得硬盤的合計空間
-                total = Convert.ToInt64(disk["Size"]) / mb;
-                richTextBox1.Text += " 總計：" + total.ToString() + "MB\n";
-                richTextBox1.Text += "已用空間：" + use.ToString() + "MB\n";
-                richTextBox1.Text += "可用空間：" + free.ToString() + "MB\n";
-
-                if (DriveType == "4")
-                {
-                    richTextBox1.Text += "取得 : " + disk["Name"].ToString() + "\n";
-                }
-                i++;
-            }
 
 //------------------------------------------------------------  # 60個
 
@@ -8811,9 +8725,6 @@ https://dreamtails.pixnet.net/blog/post/22318000
 
 //------------------------------------------------------------  # 60個
 
-韓戰
-1950年6月25日－1953年7月27日
-（3年1個月又2天）
 
 //------------------------------------------------------------  # 60個
 
@@ -10469,18 +10380,6 @@ http://www.microsoft.com/download/en/details.aspx?id=10121
 http://www.microsoft.com/download/en/details.aspx?id=10121
 
 
-
-控件StatusStrip
-加選ProgressBar
-
-會出現toolStripProgressBar1
-
-            toolStripProgressBar1.Style = ProgressBarStyle.Marquee;  //進度條一直重複跑
-            toolStripProgressBar1.Style = ProgressBarStyle.Blocks;  //依Value顯示進度
-            toolStripProgressBar1.Value = 30;
-
-
-
 ZPhotoEngine
 圖像濾鏡藝術---保留細節的磨皮之C#程序實現
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/185974.html
@@ -11439,21 +11338,7 @@ Remotion.Data.Linq.dll
 雙擊滑鼠左鍵 放大
 雙擊滑鼠右鍵 縮小
 
-hhhh
-第一次世界大戰
-日期	1914年7月28日－1918年11月11日
-（4年3個月又2周） 
-
-第二次世界大戰
-日期	1939年9月1日—1945年9月2日
-（6年又1天）
-
-韓戰
-	1950年6月25日－1953年7月27日
-（3年1個月又2天）
-
-日俄戰爭
-1904年2月8日－1905年9月5日
+//------------------------------------------------------------  # 60個
 
 vcs特有的寫法與解釋
 Application.DoEvents();	//是讓程式在跑迴圈時還能去傾聽其他的事件
@@ -13848,7 +13733,6 @@ http://vincecc.blogspot.com/2013/11/
 vcs helper
 http://csharphelper.com/blog/
 
-
 抓到:
 	Use VBA code to add and remove a watermark on all pages in a Word document
 	Posted on March 10, 2021 by RodStephens
@@ -14563,4 +14447,7 @@ pictureBox1.Image.Save(filename);
                             break;
                     }
                     fs.Close();         					//關閉文件流
+
+
+//------------------------------------------------------------  # 60個
 

@@ -21,7 +21,7 @@ namespace vcs_StatusStrip2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            #region AddStatusStrip
+            //#region AddStatusStrip
             //1. 定義要增加的StatusStrip
             //StatusStrip statusStrip1 = new StatusStrip();
 
@@ -42,7 +42,7 @@ namespace vcs_StatusStrip2
 
             //5. 將StatusStrip加入到窗體中
             this.Controls.Add(statusStrip1);
-            #endregion
+            //#endregion
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -51,3 +51,4 @@ namespace vcs_StatusStrip2
         }
     }
 }
+
