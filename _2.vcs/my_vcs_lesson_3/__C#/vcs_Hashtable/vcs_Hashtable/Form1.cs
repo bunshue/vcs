@@ -88,6 +88,7 @@ namespace vcs_Hashtable
         {
             richTextBox1.Text += "Hashtable的用法0\n";
             Hashtable ht = new Hashtable();
+            //    key  value
             ht.Add(5, "Apple");
             ht.Add(1, "Banana");
             ht.Add(4, "Cat");
@@ -126,9 +127,6 @@ namespace vcs_Hashtable
             {
                 richTextBox1.Text += "無此項\n";
             }
-
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -138,6 +136,7 @@ namespace vcs_Hashtable
             Hashtable ht = new Hashtable();
 
             richTextBox1.Text += "加入資料到HashTable, key不能重複, value可以重複\n";
+            //     key  value
             ht.Add("鼠", 3);
             ht.Add("牛", 48);
             ht.Add("虎", 48);
@@ -201,6 +200,7 @@ namespace vcs_Hashtable
             Hashtable ht = new Hashtable(); // 建立ht為一個屬於Hashtable的實體
 
             Console.WriteLine("\n 1.置入四筆 Key & Value 鍵值到 HashTable 內.");
+            //        key      value
             ht.Add("iPhone5S", 22000);  //添加 key&value鍵值對
             ht.Add("iPhone5C", 18000);  //添加 key&value鍵值對
             ht.Add("iPad2", 12500);     //添加 key&value鍵值對
@@ -241,7 +241,7 @@ namespace vcs_Hashtable
         private void button3_Click(object sender, EventArgs e)
         {
             Hashtable ht = new Hashtable();  // 非泛型
-
+            //       key     value
             ht.Add("David", new Member() { Name = "David", Select = true, Score = 70 });
             ht.Add("Mary", new Member() { Name = "Mary", Select = false, Score = 65 });
             ht.Add("Tom", new Member() { Name = "Tom", Select = true, Score = 85 });
@@ -261,6 +261,7 @@ namespace vcs_Hashtable
 
             Hashtable ht = new Hashtable();
             ht.Clear();
+            //      key   value
             ht.Add("aaa", 123);
             ht.Add("bbb", 456);
             ht.Add("ccc", 789);
@@ -278,6 +279,7 @@ namespace vcs_Hashtable
             ht.Clear();
             for (int i = 0; i < 10; i++)
             {
+                //      key     value
                 ht.Add("aaa" + i.ToString(), 123);  // 加入到 Hashtable, Key不能重複
             }
 
@@ -285,7 +287,6 @@ namespace vcs_Hashtable
             {
                 richTextBox1.Text += "de.Value = " + de.Value + "\tde.Key = " + de.Key + "\n";
             }
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -306,6 +307,8 @@ namespace vcs_Hashtable
         {
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         //Hashtable 測試 ST
 
@@ -484,7 +487,7 @@ namespace vcs_Hashtable
             Hashtable ht = new Hashtable();
 
             richTextBox1.Text += "給Hashtable賦值, key是唯一, value不唯一\n";
-            //            key     value
+            //      key     value
             ht.Add("txt", "notepad.exe");
             ht.Add("bmp", "paint.exe");
             ht.Add("dib", "paint.exe");
@@ -496,7 +499,6 @@ namespace vcs_Hashtable
             {
                 richTextBox1.Text += var.Key + "\t" + var.Value + "\n";
             }
-
         }
 
         private void ht8_Click(object sender, EventArgs e)
@@ -505,6 +507,7 @@ namespace vcs_Hashtable
 
             Hashtable ht = new Hashtable();
 
+            //       key     value
             ht.Add("first", "Beijing");
             ht.Add("second", "Shanghai");
             ht.Add("third", "Hangzhou");
@@ -552,6 +555,8 @@ namespace vcs_Hashtable
             Hashtable ht = new Hashtable(); //創建一個Hashtable實例
 
             //key值唯一,value值可以重複.
+
+            //     key  value
             ht.Add("E", "e");//添加key/鍵值對
             ht.Add("A", "a");
             ht.Add("C", "c");
@@ -575,20 +580,17 @@ namespace vcs_Hashtable
             richTextBox1.Text += "輸出 : " + ht["A"] + "\n";  //此處將不會有任何輸出
 
             //遍歷哈希表
-            //遍歷哈希表需要用到DictionaryEntry Object，代碼如下：
+            //遍歷哈希表需要用到DictionaryEntry Object
             foreach (DictionaryEntry de in ht)
             {
-                Console.WriteLine(de.Key);//de.Key對應于key/value鍵值對key
-                Console.WriteLine(de.Value);//de.Key對應于key/value鍵值對value
-
+                Console.WriteLine(de.Key);  // de.Key對應于key/value鍵值對key
+                Console.WriteLine(de.Value);  // de.Key對應于key/value鍵值對value
             }
 
-
-
-            //對哈希表進行排序
-            /*
-            對哈希表進行排序在這里的定義是對key/value鍵值對中的key按一定規則重新排列，但是實際上這個定義是不能實現的，因為我們無法直接在Hashtable進行對key進行重新排列，如果需要Hashtable提供某種規則的輸出，可以采用一種變通的做法：
-            */
+            // 對哈希表進行排序
+            // 對哈希表進行排序在這里的定義是對key/value鍵值對中的key按一定規則重新排列，
+            // 但是實際上這個定義是不能實現的，因為我們無法直接在Hashtable進行對key進行重新排列，
+            // 如果需要Hashtable提供某種規則的輸出，可以采用一種變通的做法：
             ArrayList akeys = new ArrayList(ht.Keys);
             akeys.Sort(); //按字母順序進行排序
             foreach (string skey in akeys)
@@ -596,7 +598,6 @@ namespace vcs_Hashtable
                 Console.Write(skey + ":");
                 Console.WriteLine(ht[skey]);//排序後輸出
             }
-
         }
 
         private void ht10_Click(object sender, EventArgs e)
@@ -621,6 +622,8 @@ namespace vcs_Hashtable
         //Hashtable 測試 SP
     }
 
+    //------------------------------------------------------------  # 60個
+
     class Member
     {
         public string Name { get; set; }      // 姓名屬性          
@@ -641,10 +644,6 @@ namespace vcs_Hashtable
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

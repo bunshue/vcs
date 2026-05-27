@@ -193,7 +193,7 @@ namespace vcs_System1
             richTextBox1.Text += "實際記憶體數量：" + Environment.WorkingSet + "\n";
 
             //Environment.TickCount 是上次 Windows 更新或休眠恢復的時間, 不是「真正的冷開機」, 只能保證 24.9 天內的時間差是可靠的
-            richTextBox1.Text += "系統TickCount數："    + Environment.TickCount + " msec\n";
+            richTextBox1.Text += "系統TickCount數：" + Environment.TickCount + " msec\n";
 
             richTextBox1.Text += "SystemPageSize： " + Environment.SystemPageSize + "\n";
 
@@ -692,6 +692,10 @@ namespace vcs_System1
             string appPath = Application.ExecutablePath;
             richTextBox1.Text += "程式所在位置" + appPath + "\n";
 
+            //獲取文件版本
+            FileVersionInfo myFileVersion = FileVersionInfo.GetVersionInfo(Application.ExecutablePath);
+            richTextBox1.Text += myFileVersion.FileVersion + "\n";
+
             //------------------------------------------------------------  # 60個
 
             //系統路徑
@@ -704,7 +708,6 @@ namespace vcs_System1
             richTextBox1.Text += "取得運用程序所在目錄 : " + Application.StartupPath + "\n";
 
             //------------------------------------------------------------  # 60個
-
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -768,12 +771,95 @@ namespace vcs_System1
 
             richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
+            //------------------------------------------------------------  # 60個
 
             richTextBox1.Text += "使用 GetSystemMetrics\n";
             W = GetSystemMetrics(0);
             H = GetSystemMetrics(1);
             richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            //獲取屏幕的分辨率，也就是顯示器屏幕的大小。
+            W = SystemInformation.PrimaryMonitorSize.Width;
+            H = SystemInformation.PrimaryMonitorSize.Height;
+
+            richTextBox1.Text += "W = " + W.ToString() + " H = " + H.ToString() + "\n";
+
+            richTextBox1.Text += "取得桌面大小\n";
+            richTextBox1.Text += "桌面寬度 : \t" + Screen.PrimaryScreen.WorkingArea.Width.ToString() + "\n";
+            richTextBox1.Text += "桌面高度 : \t" + Screen.PrimaryScreen.WorkingArea.Height.ToString() + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            //取得螢幕解析度資料
+            System.Windows.Forms.Screen scr = System.Windows.Forms.Screen.PrimaryScreen;//PrimaryScreen 属性：获取主显示设备
+            richTextBox1.Text += "Bounds:\t\t" + scr.Bounds.ToString() + "\n"; //获取屏幕的边界。属性值是一个Rectangle结构的值
+            richTextBox1.Text += "DeviceName:\t" + scr.DeviceName.ToString() + "\n"; //获取与显示关联的设备名称
+            richTextBox1.Text += "Primary:\t\t" + scr.Primary.ToString() + "\n";   //该值指示某个显示是否为主设备
+            richTextBox1.Text += "WorkingArea:\t" + scr.WorkingArea.ToString() + "\n";   //获取显示器的工作区, 属性值是一个Rectangle结构的值
+            richTextBox1.Text += "BitsPerPixel:\t" + scr.BitsPerPixel.ToString() + "\n"; //获取与数据的一个像素相关联的内存位数
+
+            //------------------------------------------------------------  # 60個
+
+            //螢幕解析度 與 可工作區域
+            //取得螢幕解析度
+            int ScreenWidth = Screen.PrimaryScreen.Bounds.Width;
+            int ScreenHeight = Screen.PrimaryScreen.Bounds.Height;
+
+            richTextBox1.Text += "螢幕解析度 : " + ScreenWidth.ToString() + " X " + ScreenHeight.ToString() + "\n";
+
+            //取得可工作區域大小
+            int WorkingAreaWidth = Screen.PrimaryScreen.WorkingArea.Width;
+            int WorkingAreaHeight = Screen.PrimaryScreen.WorkingArea.Height;
+
+            richTextBox1.Text += "可工作區域大小 : " + WorkingAreaWidth.ToString() + " X " + WorkingAreaHeight.ToString() + "\n";
+
+            foreach (Screen screen in System.Windows.Forms.Screen.AllScreens)
+            {
+                richTextBox1.Text += "Screen " + screen.DeviceName + "\n";
+                richTextBox1.Text += "\tPrimary " + screen.Primary + "\n";
+                richTextBox1.Text += "\tBounds: " + screen.Bounds + "\n";
+                richTextBox1.Text += "\tWorking Area: " + screen.WorkingArea + "\n";
+                richTextBox1.Text += "\tBitsPerPixel: " + screen.BitsPerPixel + "\n";
+            }
+
+            //------------------------------------------------------------  # 60個
+
+            //螢幕資訊
+            richTextBox1.Text += "AllScreens.Length = " + Screen.AllScreens.Length.ToString() + "\n";
+
+            richTextBox1.Text += "W = " + Screen.AllScreens[0].Bounds.Width.ToString() + ", H = " + Screen.AllScreens[0].Bounds.Height.ToString() + "\n";
+            richTextBox1.Text += "Bounds = " + Screen.AllScreens[0].Bounds.Size.ToString() + "\n";
+            richTextBox1.Text += "Rank = " + Screen.AllScreens.Rank.ToString() + "\n";
+
+            richTextBox1.Text += "DeviceName = " + Screen.PrimaryScreen.DeviceName + "\n";
+            richTextBox1.Text += "BitsPerPixel = " + Screen.PrimaryScreen.BitsPerPixel.ToString() + "\n";
+            richTextBox1.Text += "Bounds = " + Screen.PrimaryScreen.Bounds.ToString() + "\n";
+            richTextBox1.Text += "WorkingArea = " + Screen.PrimaryScreen.WorkingArea.ToString() + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            Rectangle WorkArea = Screen.GetWorkingArea(this);//屏幕顯示區域
+            W = WorkArea.Width; //屏幕寬度
+            H = WorkArea.Height; //屏幕高度
+            richTextBox1.Text += "W = " + W.ToString() + "\n";
+            richTextBox1.Text += "H = " + H.ToString() + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            // 根據桌面大小調整視窗大小 
+            int DeskWidth = Screen.PrimaryScreen.WorkingArea.Width; //PrimaryScreen為取得主顯示器，WorkingArea可取得顯示器的工作區(不包含工作列…等)
+            int DeskHeight = Screen.PrimaryScreen.WorkingArea.Height;
+            this.Width = Convert.ToInt32(DeskWidth * 0.8);
+            this.Height = Convert.ToInt32(DeskHeight * 0.8);
+
+            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+            richTextBox1.AppendText("螢幕解析度 : " + screenWidth.ToString() + "*" + screenHeight.ToString() + "\n");
+
+            //------------------------------------------------------------  # 60個
+
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -1150,7 +1236,7 @@ namespace vcs_System1
                 richTextBox1.Text += "Offline, " + percent_text + " remaining\n";
             }
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
+            //------------------------------------------------------------  # 60個
 
             status = SystemInformation.PowerStatus;
 
@@ -1163,7 +1249,7 @@ namespace vcs_System1
             richTextBox1.Text += "電源線狀態 : " + status.PowerLineStatus.ToString() + "\n";
             richTextBox1.Text += "電池充電狀態 : " + status.BatteryChargeStatus.ToString() + "\n";
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
+            //------------------------------------------------------------  # 60個
 
             richTextBox1.Text += "BatteryFullLifetime : " + status.BatteryFullLifetime.ToString() + "\n";
             if (status.BatteryFullLifetime == -1)
@@ -1751,12 +1837,34 @@ namespace vcs_System1
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-//1515
-//---------------  # 15個
-
-
 /*  可搬出
 
+*/
+
+/*
+Environment.SpecialFolder.MyComputer
+
+folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
+folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyDocuments;
+folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyMusic;
+folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyPictures;
+folderBrowserDialog1.RootFolder = Environment.SpecialFolder.Desktop;
+folderBrowserDialog1.RootFolder = Environment.SpecialFolder.ProgramFiles;
+folderBrowserDialog1.RootFolder = Environment.SpecialFolder.StartMenu;
+folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
+
+//目前的工作目錄:
+System.Environment.CurrentDirectory
+Console.WriteLine("目前的工作目錄:");
+Console.WriteLine(Directory.GetCurrentDirectory());
+
+//設定工作目錄
+Directory.SetCurrentDirectory("D:\\");
+Console.WriteLine("更改後的工作目錄:");
+Console.WriteLine(Directory.GetCurrentDirectory());
+
+//桌面路徑
+string directory = System.Environment.GetFolderPath(System.Environment.SpecialFolder.DesktopDirectory);
 */
 
 

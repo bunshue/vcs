@@ -1,16 +1,44 @@
-﻿
+﻿搜尋
+ProcessDirectory
+
+畫圖相關
+
+ffff dddd 檔案與資料夾
+
+目錄下檔名轉出純文字程式
+
+rwrw 檔案讀寫
+
+tttt time datetime
+
+cccc 控件相關
+cccc 控件使用類 要搬到 my_vcs_lesson_3 單項控件使用介紹與應用 的
+
+cscs vcs語法類 要搬到 my_vcs_lesson_3 / __C# 的
+
+ssss 字串相關 打印格式
+
+pppp 打印相關
+
+     系統相關
+
+rtb
+            string sign = new string('*', 30);
+            Console.WriteLine(sign);
+
+//------------------------------------------------------------  # 60個
+
 //量測時間
             int start = 0;
 
             start = Environment.TickCount;
-
 
             // Do stuff
             int duration = Environment.TickCount - start;
 
             richTextBox1.Text += "耗時 : " + (duration / 1000).ToString() + "." + (duration % 1000).ToString("D3") + " 秒\n";
 
-6060
+//------------------------------------------------------------  # 60個
 
 計算程式執行的時間
 
@@ -83,35 +111,6 @@ Points1 為 已知點數
 
             //int[] gray = new int[220];
             //g.DrawLines(Pens.Red, gray.ToArray());
-
-//------------------------------------------------------------  # 60個
-
-畫圖相關
-
-ffff dddd 檔案與資料夾
-
-目錄下檔名轉出純文字程式
-
-
-搜尋
-ProcessDirectory
-
-rwrw 檔案讀寫
-
-
-tttt time datetime
-
-
-ssss 字串相關 打印格式
-
-pppp 打印相關
-	系統相關
-
-cccc 控件相關
-
-rtb
-            string sign = new string('*', 30);
-            Console.WriteLine(sign);
 
 //------------------------------------------------------------  # 60個
 
@@ -773,37 +772,23 @@ richTextBox1.Text += p.A.ToString("X2") + p.R.ToString("X2") + p.G.ToString("X2"
 
 
 //------------------------------------------------------------  # 60個
+cccc
+            numericUpDown1.Maximum = new System.Decimal(new int[] { 150, 0, 0, 0 });
 
 
 //------------------------------------------------------------  # 60個
 
-            numericUpDown1.Maximum = new System.Decimal(new int[] { 150, 0, 0, 0 });
+vcs_test_all_04_Dialog
 
-FBD
-
-/*
             // 設定FolderBrowserDialog的初值
             folderBrowserDialog1.ShowNewFolderButton = false;
-            folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
+            folderBrowserDialog1.RootFolder = "xxxx";  // 設定FBD預設路徑
             folderBrowserDialog1.Description = "----資料夾瀏覽對話方塊----" + "\n請選擇所要開啟的檔案所在的資料夾";
 
 //待測試
     folderBrowserDialog1.ShowNewFolderButton = checkBox1.Checked;
 
-*/
-
-/*
-            // 設定FBD預設路徑
-            folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
-            folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyDocuments;
-            folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyMusic;
-            folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyPictures;
-            folderBrowserDialog1.RootFolder = Environment.SpecialFolder.Desktop;
-            folderBrowserDialog1.RootFolder = Environment.SpecialFolder.ProgramFiles;
-            folderBrowserDialog1.RootFolder = Environment.SpecialFolder.StartMenu;
-            folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
-*/
-
+//------------------------------------------------------------  # 60個
 
 複利率本利和試算
         //Cal 方法可計算配息方式
@@ -932,11 +917,11 @@ label
 
             if (Control.IsKeyLocked(Keys.NumLock))
             {
-                label1.Text += Environment.NewLine + "數字鎖鍵已按下";
+                label1.Text += "數字鎖鍵已按下";
             }
             else
             {
-                label1.Text = Environment.NewLine + "數字鎖鍵已取消";
+                label1.Text = "數字鎖鍵已取消";
             }
 
 
@@ -1194,22 +1179,21 @@ KPI: 關鍵 績效 指標
 
 對應方法
 
-            員工BindingSource.Sort = "識別碼 ASC"; // ASC，即為ascending表示升冪
-            員工BindingSource.Sort = "識別碼 DESC";// DESC，即為descening表示降冪
+員工BindingSource.Sort = "識別碼 ASC"; // ASC，即為ascending表示升冪
+員工BindingSource.Sort = "識別碼 DESC";// DESC，即為descening表示降冪
 
-
-            if (MessageBox.Show("是否刪除？", "小心", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-            {
-            }
-            if (MessageBox.Show("是否要刪除？", "小心", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-            {
-                員工BindingSource.RemoveCurrent();
-            }
+if (MessageBox.Show("是否刪除？", "小心", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+{
+}
+if (MessageBox.Show("是否要刪除？", "小心", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+{
+	員工BindingSource.RemoveCurrent();
+}
 
 //------------------------------------------------------------  # 60個
 
-                //取得Click事件的訊息
-                tsmiFile.PerformClick();
+//取得Click事件的訊息
+tsmiFile.PerformClick();
 
 //------------------------------------------------------------  # 60個
 
@@ -1537,7 +1521,6 @@ g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;//使画出
 
 單一圖片模式
 
-
             button1.Visible = false;
             richTextBox1.Visible = false;
             //this.FormBorderStyle = FormBorderStyle.None;
@@ -1557,6 +1540,7 @@ g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;//使画出
 
 //------------------------------------------------------------  # 60個
 
+dddd
 _filename = Path.GetFullPath(Path.Combine(Application.StartupPath, "..\\..")) + "\\test.png";
 filename1 = Path.GetFullPath(Path.Combine(System.Windows.Forms.Application.StartupPath, @"..\..")) + @"\Step.doc";
 
@@ -1638,15 +1622,7 @@ vcs_ListView3_ContextMenuStrip
 
 //------------------------------------------------------------  # 60個
 
-//把控件當引數傳遞
-result = image_processing19(pictureBox1, cx, cy, R, 150F);
-
-//函數部分
-public Image image_processing19(string filename, int x, int y, int R, float better)
-{
-    Bitmap bitmap1 = new Bitmap(Pict.Image, Pict.Image.Width, Pict.Image.Height);//根據圖像實例化Bitmap類
-    
-//------------------------------------------------------------  # 60個
+cccc    
 
 vcs 之 radioButton 可以用Image, Text設為空
 
@@ -2273,14 +2249,11 @@ this.ShowCtiServer();
 
 逐步解說：使用 C 撰寫複合控制項#
 
-
 複合控制項提供可以建立及重複使用自訂圖形介面的方法。 複合控制項基本上是具有視覺表示的元件。 因此，它可能包含一或多個 Windows Forms 控制項、元件或程式碼區塊，可以藉由驗證使用者輸入、修改顯示屬性，或執行作者需要的其他工作來擴充功能。 複合控制項可以放在 Windows Forms 上，與其他控制項的方式相同。 在本逐步解說的第一個部分中，您可以建立簡單的複合控制項，稱為 ctlClock。 在逐步解說的第二個部分中，您透過繼承擴充 ctlClock 的功能。
 建立專案
 
 當您建立新的專案時，您會指定其名稱以設定根命名空間、組件名稱和專案名稱，並且確定預設元件將會在正確的命名空間中。
 建立 ctlClockLib 控制項程式庫和 ctlClock 控制項
-
-
 
     在 Visual Studio 中，建立新的Windows Forms 控制項程式庫專案，並將它命名為ctlClockLib。
 
@@ -3169,16 +3142,7 @@ richTextBox1.Text += "下載 : " + filename + "\tOK\n";
 
 //多用於大量數據時，多分一個線程去搜索數據，然後存儲到緩存裡，頁面再用異步獲取緩存中的數據。
 
-
-
-
-
-
-
-
-
-
-
+//------------------------------------------------------------  # 60個
 
 BTW, if the HtmlNode has a “ID”, like “<div id='post_list'>value</div>”, call GetElementbyId() is OK for getting the HtmlNode, then get the value by HtmlNode.InnerText or HtmlNode.Attribute.
 
@@ -3592,9 +3556,8 @@ if (frames.Count > 0)
                 checkedListBox1.SetItemChecked(i, false);
             }
 
-
 //------------------------------------------------------------  # 60個
-ffff
+ffff dddd
 檔名資料夾名處理 大整理 在 vcs_Mix00
 
                 richTextBox1.Text += "原完整檔名 : " + textBox1.Text + "\n";
@@ -3606,8 +3569,6 @@ ffff
 取得檔案副檔名:
 string extension = Path.GetExtension("C:\\soar.jpg");
 string extension = Path.GetExtension(filename);
-
-
         
         private string CurrentDir = new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName;
 
@@ -3726,75 +3687,6 @@ pikasa
                      return(char.IsDigit(input));   //检查是否为数字
               }
         				
-//------------------------------------------------------------  # 60個
-
-            //獲取屏幕的分辨率
-            //獲取屏幕的分辨率，也就是顯示器屏幕的大小。
-            int W = SystemInformation.PrimaryMonitorSize.Width;
-            int H = SystemInformation.PrimaryMonitorSize.Height;
-
-            richTextBox1.Text += "W = " + W.ToString() + " H = " + H.ToString() + "\n";
-
-            richTextBox1.Text += "取得桌面大小\n";
-            richTextBox1.Text += "桌面寬度 : \t" + Screen.PrimaryScreen.WorkingArea.Width.ToString() + "\n";
-            richTextBox1.Text += "桌面高度 : \t" + Screen.PrimaryScreen.WorkingArea.Height.ToString() + "\n";
-
-
-
-
-            //取得螢幕解析度資料
-            System.Windows.Forms.Screen scr = System.Windows.Forms.Screen.PrimaryScreen;//PrimaryScreen 属性：获取主显示设备
-            richTextBox1.Text += "Bounds:\t\t" + scr.Bounds.ToString() + "\n"; //获取屏幕的边界。属性值是一个Rectangle结构的值
-            richTextBox1.Text += "DeviceName:\t" + scr.DeviceName.ToString() + "\n"; //获取与显示关联的设备名称
-            richTextBox1.Text += "Primary:\t\t" + scr.Primary.ToString() + "\n";   //该值指示某个显示是否为主设备
-            richTextBox1.Text += "WorkingArea:\t" + scr.WorkingArea.ToString() + "\n";   //获取显示器的工作区, 属性值是一个Rectangle结构的值
-            richTextBox1.Text += "BitsPerPixel:\t" + scr.BitsPerPixel.ToString() + "\n"; //获取与数据的一个像素相关联的内存位数
-
-
-螢幕解析度 與 可工作區域
-            //取得螢幕解析度
-            int ScreenWidth = Screen.PrimaryScreen.Bounds.Width;
-            int ScreenHeight = Screen.PrimaryScreen.Bounds.Height;
-
-            richTextBox1.Text += "螢幕解析度 : " + ScreenWidth.ToString() + " X " + ScreenHeight.ToString() + "\n";
-
-            //取得可工作區域大小
-            int WorkingAreaWidth = Screen.PrimaryScreen.WorkingArea.Width;
-            int WorkingAreaHeight = Screen.PrimaryScreen.WorkingArea.Height;
-
-            richTextBox1.Text += "可工作區域大小 : " + WorkingAreaWidth.ToString() + " X " + WorkingAreaHeight.ToString() + "\n";
-
-            foreach (Screen screen in System.Windows.Forms.Screen.AllScreens)
-            {
-                richTextBox1.Text += "Screen " + screen.DeviceName + "\n";
-                richTextBox1.Text += "\tPrimary " + screen.Primary + "\n";
-                richTextBox1.Text += "\tBounds: " + screen.Bounds + "\n";
-                richTextBox1.Text += "\tWorking Area: " + screen.WorkingArea + "\n";
-                richTextBox1.Text += "\tBitsPerPixel: " + screen.BitsPerPixel + "\n";
-            }
-
-
-
-            //螢幕資訊
-            richTextBox1.Text += "AllScreens.Length = " + Screen.AllScreens.Length.ToString() + "\n";
-
-            richTextBox1.Text += "W = " + Screen.AllScreens[0].Bounds.Width.ToString() + ", H = " + Screen.AllScreens[0].Bounds.Height.ToString() + "\n";
-            richTextBox1.Text += "Bounds = " + Screen.AllScreens[0].Bounds.Size.ToString() + "\n";
-            richTextBox1.Text += "Rank = " + Screen.AllScreens.Rank.ToString() + "\n";
-
-            richTextBox1.Text += "DeviceName = " + Screen.PrimaryScreen.DeviceName + "\n";
-            richTextBox1.Text += "BitsPerPixel = " + Screen.PrimaryScreen.BitsPerPixel.ToString() + "\n";
-            richTextBox1.Text += "Bounds = " + Screen.PrimaryScreen.Bounds.ToString() + "\n";
-            richTextBox1.Text += "WorkingArea = " + Screen.PrimaryScreen.WorkingArea.ToString() + "\n";
-
-
-
-            Rectangle WorkArea = Screen.GetWorkingArea(this);//屏幕顯示區域
-            int W = WorkArea.Width; //屏幕寬度
-            int H = WorkArea.Height; //屏幕高度
-            richTextBox1.Text += "W = " + W.ToString() + "\n";
-            richTextBox1.Text += "H = " + H.ToString() + "\n";
-
 //------------------------------------------------------------  # 60個
 
             richTextBox1.Text += "取得網頁資料\n";
@@ -4553,55 +4445,31 @@ https://www.zhangshengrong.com/p/yOXD5ejR1B/
         const int MOUSEEVENTF_XUP = 0x1000;
         const int MOUSEEVENTF_HWHEEL = 0x01000;
 
-
-
             int dx = 100;
             int dy = 100;
             mouse_event(MOUSEEVENTF_MOVE, dx, dy, 0, 0);
         
-        
-
-
 　/// 應用程序的主入口點。
-
 　///
-
 　[STAThread]
-
 　static void Main(string[] args)
-
 　{
-
 　　if(args.Length==1)
 
 　　　if(args[0].Substring(0,2).Equals("/c"))
-
 　　　{
-
 　　　　MessageBox.Show("沒有設置項功能","C# Screen Saver");
-
 　　　　Application.Exit();
-
 　　　}
-
 　　　else if(args[0]=="/s")
-
 　　　Application.Run(new screen());
-
 　　else if(args[0]=="/a")
-
 　　{
-
 　　　MessageBox.Show("沒有口令功能","C# Screen saver");
-
 　　　Application.Exit();
-
 　　}
-
 　　else
-
 　　Application.Run(new screen());
-
 　}
 　　最後運行該程序，把screen_saver.exe改為screen_saver.scr，拷入Windows系統目錄中，這樣就可以運行該屏幕保護程序。
         
@@ -5157,8 +5025,8 @@ C#處理圖像有三種方法:像素法、內存法和指針法。
 
 下面介紹用內存法對圖像處理的基本方法。
 
-首先在處理圖像的窗體類中定義一個字符串(圖像文件名)和一個Bitmap類型的數據成員(圖像對象),然後可以利用OpenFileDialog選擇圖像文件並讀取文件名,再使用Image.FromFile創建圖形對象。比如:
-
+首先在處理圖像的窗體類中定義一個字符串(圖像文件名)和一個Bitmap類型的數據成員(圖像對象),
+然後可以利用OpenFileDialog選擇圖像文件並讀取文件名,再使用Image.FromFile創建圖形對象。
 
 Image.FromFile可開啟影像檔:
  "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.tif,*.wmf|*.jpg;*.jpeg;*.bmp;*.gif;*.ico;*.png;*.tif;*.wmf";
@@ -5255,14 +5123,16 @@ public class User
 
 P2P，英文Peer-to-Peer的縮寫，中譯為對等互聯或點對點技術。
 
+//------------------------------------------------------------  # 60個
 
+vcs_test_all_04_Dialog
                 saveFileDialog1.CreatePrompt = true;	//如果指定不存在的文件，提示允許創建該文件
                 saveFileDialog1.OverwritePrompt = true;//如果用戶指定的文件名已存在，顯示警告
 
+//------------------------------------------------------------  # 60個
 
 鼠標相關的事件大致有六種，分別是 ：
 "MouseHover"、"MouseLeave"、"MouseEnter"、"MouseMove"、"MouseDown"和"MouseUp"。
-
 
 對於上述的前三個事件，是用以下語法來定義的：
 "組件名稱"."事件名稱"+= new System.EventHandler（"事件名稱"）；
@@ -8750,7 +8620,7 @@ s.Substring(0,1).ToUpper()+s.Substring(1);
         }
 
 //------------------------------------------------------------  # 60個
-
+dddd
 	//C# 取得資料夾下的所有檔案(包括子目錄)
 	//顯示每個檔案的資訊
         private void button1_Click(object sender, EventArgs e)
@@ -8786,8 +8656,7 @@ s.Substring(0,1).ToUpper()+s.Substring(1);
 
         }
 
-
-
+//------------------------------------------------------------  # 60個
 
 除去換行符號
             //置換換行符號為空白，讓messagebox秀出輸入的字串
@@ -8799,18 +8668,6 @@ s.Substring(0,1).ToUpper()+s.Substring(1);
         
 //------------------------------------------------------------  # 60個
         
- C# 根據桌面大小調整視窗大小 
-             int DeskWidth = Screen.PrimaryScreen.WorkingArea.Width; //PrimaryScreen為取得主顯示器，WorkingArea可取得顯示器的工作區(不包含工作列…等)
-            int DeskHeight = Screen.PrimaryScreen.WorkingArea.Height;
-            this.Width = Convert.ToInt32(DeskWidth * 0.8);
-            this.Height = Convert.ToInt32(DeskHeight * 0.8);
-
-            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
-            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
-            richTextBox1.AppendText("螢幕解析度 : " + screenWidth.ToString() + "*" + screenHeight.ToString() + "\n");
-
-//------------------------------------------------------------  # 60個
-
 bitmap.maketransparent
 bmp.MakeTransparent(Color.Magenta);
 
@@ -8996,14 +8853,14 @@ C#語言下路徑指定方式有兩種:
     第二種是在路徑前加上@符號，例如    @"C:\Test.txt"
 
 
-
+dddd
 取得硬碟資訊
             System.IO.DriveInfo di = new System.IO.DriveInfo(@"C:\");
             richTextBox1.Text += "TotalFreeSpace : " + di.TotalFreeSpace.ToString() + "\n";
             richTextBox1.Text += "VolumeLabel : " + di.VolumeLabel + "\n";
 
 
-
+//------------------------------------------------------------  # 60個
 
          Bitmap myImage = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height); 
             Graphics g = Graphics.FromImage(myImage); 
@@ -9011,7 +8868,6 @@ C#語言下路徑指定方式有兩種:
             IntPtr dc1 = g.GetHdc(); 
             g.ReleaseHdc(dc1); 
             myImage.Save(@"c:\screen0.jpg");
-            
 
 //------------------------------------------------------------  # 60個
 
@@ -9463,8 +9319,7 @@ windows media player
 //Wait
 System.Threading.Thread.Sleep( 5000 ); // wait 5 seconds (5000 milliseconds)
 
-//Take a screenshot 
-
+// Take a screenshot 
 // Take a screenshot
 // By Ali Hamdar (http://alihamdar.com/)
 // http://social.msdn.microsoft.com/Forums/en/csharpgeneral/thread/79efecc4-fa6d-4078-afe4-bb1379bb968b
@@ -9568,6 +9423,9 @@ vcs不可畫點，用畫橢圓取代
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
 
+//------------------------------------------------------------  # 60個
+
+vcs_test_all_04_Dialog
 
 openFileDialog1.Filter = "XML設定檔|*.xml";
 openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.wmf|*.jpg;*.jpeg;*.bmp;*.gif;*.ico;*.png;*.wmf";
@@ -10364,16 +10222,13 @@ http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/185974.html
 C# Windows 7任務欄開發之進度條(Progress Bar)
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/187145.html
 
-
-
-
-
+cccc
 textBox內的換行符號 要 \r\n  只有\n是不行的  而且textBox的屬性的Multiline要改成True
 或是 Environment.NewLine
 
+//------------------------------------------------------------  # 60個
 
 查詢XPATH可以利用GOOGLE CHROME F12
-
 
 HtmlAgilityPack.dll
 
@@ -10446,12 +10301,6 @@ Git操作指南，git權威指南
 https://git-scm.com/book/zh/v2
 
 
-二、獲取文件版本
-using System.Diagnostics;
-FileVersionInfo myFileVersion = FileVersionInfo.GetVersionInfo (System.Windows.Forms.Application.ExecutablePath);
-label版本.Text = myFileVersion.FileVersion; 
-
-
 C#短時間內產生大量不重復的隨機數
 用種子Guid.NewGuid().GetHashCode()，在短時間裡不會出現大量重復。 
 
@@ -10459,7 +10308,7 @@ C#短時間內產生大量不重復的隨機數
 CSharp编程大全
 https://cloud.tencent.com/developer/column/88848
 
-
+//------------------------------------------------------------  # 60個
 
 C# DoubleClick與MouseDoubleClick區別，雙擊事件引發順序
 DoubleClick 事件 在雙擊控件時發生。處理時不包含任何事件數據.
@@ -10477,8 +10326,7 @@ DoubleClick 事件。
 MouseDoubleClick 事件。
 MouseUp 事件。 
 
-
-
+//------------------------------------------------------------  # 60個
 
 VCS 分類 範圍
 1. C#語法、console使用
@@ -10499,7 +10347,7 @@ EMGU類、AForge類、OpenCV類
 
 使用DLL
 
-
+//------------------------------------------------------------  # 60個
 
 不錯的範例 多
 https://www.cnblogs.com/wwwzzg168/tag/C%23%20%20asp.net/
@@ -10695,24 +10543,17 @@ this.CamMonitor[1] = new CameraMonitor(xxxx, yyyy, zzzz);
 this.CamMonitor[2] = new CameraMonitor(xxxx, yyyy, zzzz);
 this.CamMonitor[3] = new CameraMonitor(xxxx, yyyy, zzzz);
 
-
-
-	
-
+//------------------------------------------------------------  # 60個
 
 "C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\vcsexpress.exe"
 
 "C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\vcsexpress.exe"
-
 
 
 string[] engNum = new string[] { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten" };
 
 
 lblShow.Text = "英文：" + engNum[n];  
-
-
-
 
 Image<Bgr, byte> image1 = new Image<Bgr, byte>(480, 320, new Bgr(0, 255, 0));
 
@@ -10770,6 +10611,7 @@ RS232/RS422/RS485 是屬於串列埠(COM Port)的一種接口，
 RS232是一對一的通訊
 RS422/RS485是可以一對多的通訊
 
+//------------------------------------------------------------  # 60個
 
 似乎表單是不能大於螢幕寬度的
 
@@ -10777,11 +10619,10 @@ List<String> DuplicateList = new List();
 DuplicateList = DuplicateList.Distinct().ToList();
 //利用 Distinct 去除 List 中重複的資料
 
-
 Color的另一種寫法
 this.BackColor = Color.FromKnownColor(KnownColor.GrayText);
 
-//6060
+//------------------------------------------------------------  # 60個
 
 建立一方案多專案的做法	TBD
 
@@ -10823,13 +10664,9 @@ for ( int i = 0; i < 1000; i++ )
 }
 writer.Close( );
 
-
-
 core highgui imgproc video
 
-
-
-
+//------------------------------------------------------------  # 60個
 
 Convex Hull 凸面 殼體
 Left/Right Edges 左右邊緣
@@ -10837,6 +10674,7 @@ Top/Bottom Edges 上下邊緣
 Quadrilateral 四邊形的
 
 
+//------------------------------------------------------------  # 60個
 
 FiltersDemo
 
@@ -10961,7 +10799,6 @@ if (flag_function == FUNCTION_FIND_SMALL_FOLDER)
         private const int FUNCTION_FIND_EMPTY_FOLDERS = 0x05;   //找空資料夾
         private const int FUNCTION_FIND_BIG_FILES = 0x06;   //找大檔案
         private const int FUNCTION_SEARCH_TEXT = 0x07;       //搜尋關鍵字, vcs, python, matlab...
-
 		
         private const int FUNCTION_TEST = 0xFF;         //測試
 
@@ -10972,6 +10809,7 @@ if (flag_function == FUNCTION_FIND_SMALL_FOLDER)
 
         int flag_function = FUNCTION_NONE;
 
+//------------------------------------------------------------  # 60個
 
 目前WebCam錄影部分 EMGU OK, 但是AForge不可用
 
@@ -10985,8 +10823,7 @@ namespace AForge.Video.FFMPEG.VideoWriter
 videoWriter = new VideoFileWriter();
 不可用
 	  
-	  
-
+//------------------------------------------------------------  # 60個
 
 有沒有AForge的專案有用到 opencv_core231.dll opencv_highgui231.dll opencv_ffmpeg_64.dll 的?
 若有 就可以引入 opencv_ffmpeg_64.dll 做錄影
@@ -11003,14 +10840,13 @@ video.WriteFrame<Bgr, byte>(image); //將每張圖片製作成影片
 
 有些WebCam的影像處理也是要用到Image結構 那就只能用EMGU做
 
-
+//------------------------------------------------------------  # 60個
 
 Windows內建的影片播放器似乎不支援一次播放多個檔案的語法, 如下
 target : 
 all_filename :  "C:\_git\vcs\_1.data\______test_files1\191128-1014.DV特調2a.mp4" "C:\_git\vcs\_1.data\______test_files1\胃カメラによる上部消化管検査 [720p].mp4" "C:\_git\vcs\_1.data\______test_files1\enka.avi"
 
-
-
+//------------------------------------------------------------  # 60個
 
 有缺項的結構要怎麼做~~~~~
 
@@ -11169,7 +11005,7 @@ Ctrl+Alt+i鍵：進入「即時運算視窗」。要用到三個鍵
             ((TextBox)sender).BackColor = Color.White;
         }
 
-
+//------------------------------------------------------------  # 60個
 
 系統預設路徑與名稱
 
@@ -11178,20 +11014,6 @@ Application.ExecutablePath
 
 目前執行檔的檔案的所在路徑
 Application.StartupPath
-
-
-目前的工作目錄:
-	System.Environment.CurrentDirectory
-
-        Console.WriteLine("目前的工作目錄:");
-        Console.WriteLine(Directory.GetCurrentDirectory());
-
-//設定工作目錄
-        Directory.SetCurrentDirectory("D:\\");
-        Console.WriteLine("更改後的工作目錄:");
-        Console.WriteLine(Directory.GetCurrentDirectory());
-
-
 
 kilo sugar 使用網路 參考 C:\_git\vcs\_2.vcs\my_vcs_lesson_5\vcs_SatelliteImages
 這個範例 看起來 kilo 和 romeo 都不能用
@@ -11407,6 +11229,7 @@ https://github.com/kiang/covid19
 
 滑鼠右鍵選單
 
+cccc
                 if (textBox1.Text != "") // 如果不是第一行 就加入 新行字串
                 {
                     textBox1.Text = textBox1.Text + Environment.NewLine;  // "\r\n"
@@ -11647,19 +11470,16 @@ label1.Text = "(" + Control.MousePosition.X.ToString() + ", " + Control.MousePos
 //在控件上的滑鼠位置
 ????
 
-
+//------------------------------------------------------------  # 60個
 
 textBox2.Text = Path.GetDirectoryName(saveFileDialog1.FileName) + @"\" + Path.GetFileName(saveFileDialog1.FileName);//获取文件路径
-
-                textBox2.Text = Path.GetDirectoryName(saveFileDialog1.FileName) + @"\" + Path.GetFileName(saveFileDialog1.FileName);//获取文件路径
+textBox2.Text = Path.GetDirectoryName(saveFileDialog1.FileName) + @"\" + Path.GetFileName(saveFileDialog1.FileName);//获取文件路径
 
 vcs_PicPick	還要能夠用鼠標移動表單		目前有些問題
 
             DialogResult result;
 
-            result = MessageBox.Show("確定結束程式嗎?",
-                "詢問", MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
+            result = MessageBox.Show("確定結束程式嗎?", "詢問", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
@@ -12192,11 +12012,11 @@ this.ClientSize = new Size(btnClickMe.Right, btnClickMe.Bottom);
         {
             if (ofdImage.ShowDialog() == DialogResult.OK)
             {
-				foreach (string filename in ofdImage.FileNames)
-				{
-					ImageInfo image = new ImageInfo(filename);
-					Images.Add(image);
-				}
+		foreach (string filename in ofdImage.FileNames)
+		{
+			ImageInfo image = new ImageInfo(filename);
+			Images.Add(image);
+		}
                 picImages.Refresh();
             }
         }
@@ -12218,7 +12038,7 @@ Form的設定
             // Maximize.
             this.Bounds = Screen.PrimaryScreen.Bounds;
             
-            
+//------------------------------------------------------------  # 60個
 
 //計算兩點的距離
         // Calculate the distance between the points.
@@ -12364,13 +12184,11 @@ FileSystem.DeleteFile("D:\\test.txt", UIOption.OnlyErrorDialogs, RecycleOption.S
                         補充說明一下：UIOption.OnlyErrorDialogs會自動選取要丟入回收桶，只在錯誤時顯示錯誤方塊，
                                                    如果是 FileIO.RecycleOption.SendToRecycleBin則是會跳窗問要不要丟入回收桶
 
-
 	//使用資源回收筒刪除檔案
 	FileSystem.DeleteFile("C:\\______test_files\\237.html", UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
 	richTextBox1.Text += "已將檔案移至資源回收筒\n";
 
-
-
+//------------------------------------------------------------  # 60個
 
 new 一個 bitmap
 
@@ -13027,6 +12845,9 @@ Paint
 
 
 ----------------Dialog語法 ST----------------
+
+vcs_test_all_04_Dialog
+
 filter all
 
 開啟檔案對話的filter的寫法
@@ -13112,28 +12933,17 @@ openFileDialog1.Filter = "jpg (*.jpg)|*.jpg|bmp (*.bmp)|*.bmp|png (*.png)|*.png"
 
 
 ----------------Git相關 ST----------------
-
+gggg
 git 如何做到只看看有無新的check in，而不先去update?
-
-
-
-
-
-
 
  Git 不追蹤特定檔案或資料夾
 在某些特定程式語言編譯時，會產生極為龐大程式檔案，或是不必要的追蹤檔案
 這時候可以將不想追蹤的檔案名稱寫入『.gitignore』
 
-
-
  Git stash
 最近用VS在開發案子，有時只是想review一下Code或Layout，VS Project file就會有異動
 或者是Code寫到一半時，可能需要Checkout到其他Branch，Git會要你Commit
 那我們可以先用git stash將異動存起來，之後在透過git stash pop將異動提出
-
-
-
 
 ----------------Git相關 SP----------------
 
@@ -13540,12 +13350,8 @@ g.DrawString("Graphic繪制圖形的例子", new Font("宋體", 20, FontStyle.It
 							Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
 						}
 
-//桌面路徑
-string directory = System.Environment.GetFolderPath(System.Environment.SpecialFolder.DesktopDirectory);
-
 //依日期製作資料夾
 string foldername = @"C:\dddddddddd\_screen_capture_" + DateTime.Now.ToString("yyyy-MM-dd");
-
 			
 ----------------常用的程式片段 SP----------------
 
@@ -14005,6 +13811,7 @@ XML 是被設計用來傳輸和存儲數據的,
 
 .htc:一個HTML文件,包含腳本和定義組件的一系列HTC特定元素.htc提供在腳本中implement組件的機制。
 
+//------------------------------------------------------------  # 60個
 
 C# 之程序退出的方法，
 
@@ -14012,7 +13819,6 @@ C# 之程序退出的方法，
 2.Application.Exit();  強制所有消息中止，退出所有的窗體，但是若有托管線程（非主線程），也無法乾淨地退出；
 3.Application.ExitThread(); 強制中止調用線程上的所有消息，同樣面臨其它線程無法正確退出的問題；
 4.System.Environment.Exit(0);   這是最徹底的退出方式，不管什麼線程都被強制退出，把程序結束的很乾淨。
-
 
 ----------------特定字解釋與縮寫 SP CLR----------------
 
@@ -14140,10 +13946,8 @@ http://www.aspphp.online/bianchen/cyuyan/gycyy/201701/81821.html
 C#封裝的海康DVR客戶端SDK
 http://www.aspphp.online/bianchen/dnet/cxiapu/gycxp/201701/10999.html
 
-
 Sqlite官方下載對應版本注意細節，sqlite官方下載
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/186015.html
-
 
 Kinect for Windows SDK開發入門(三)基礎知識 下
 http://www.aspphp.online/bianchen/dnet/gydnet/201701/13736.html
@@ -14151,35 +13955,23 @@ http://www.aspphp.online/bianchen/dnet/gydnet/201701/13736.html
 Kinect 1.8 體感開發，手勢，姿態（Pose） 捕捉判斷方法以及一些輔方法，kinectpose
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/184902.html
 
-
 registry 
 實戰基礎技能(13)--------C#代碼實現隱藏任務欄、開始菜單和禁用任務管理器，
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/188621.html
 
-
-
 DS-4000HC
 
-
-
 海康威視 Hikvision DS-4000 DS-4000HC/HCS/HC+/HF/HS ...
-
-
 
 C# 視頻監控系列（1）：准備(3)
 http://www.aspphp.online/bianchen/cyuyan/gycyy/201701/81820.html
 
-
-
 C#实现在注册表中保存信息
 https://www.cnblogs.com/zxtceq/p/5319568.html
-
 
 C# ??屏幕?? (ScreenKeyboard)
 ScreenKeyboard.zip
 https://www.cnblogs.com/youzai/archive/2008/05/19/1202732.Html
-
-
 
 C#中改變顯示器的分辨率和刷新率
 http://www.aspphp.online/bianchen/cyuyan/gycyy/201701/82983.html
@@ -14211,14 +14003,11 @@ https://www.cnblogs.com/mq0036/
 zzg168
 https://www.cnblogs.com/wwwzzg168/tag/C%23%20%20asp.net/
 
-
 someone
 https://www.cnblogs.com/litao4047/
 
-
 C# 實現IP視頻監控（攝像頭）畫面推送（簡單的不能再簡單的DEMO），
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/187117.html
-
 
 C#調用Google Earth Com API開發（二）(2)
 http://www.aspphp.online/bianchen/cyuyan/gycyy/201701/82062.html
@@ -14243,13 +14032,11 @@ IIS
 用Visual C#發送電子郵件（1）
 http://www.aspphp.online/bianchen/cyuyan/gycyy/201701/79380.html
 
-
 每日一個C#小實例之---C#開機自動執行程序
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/191746.html
 
 zzg168
 https://www.cnblogs.com/wwwzzg168/tag/C%23%20%20asp.net/
-
 
 西夏普的部落格
 https://einboch.pixnet.net/blog
@@ -14265,11 +14052,7 @@ https://dotblogs.com.tw/jackbgova
 
 ----------------用kilo/romeo測一下	網路server 系統設定 Registry 無線網路 藍芽 SP ----------------
 
-
-
-
 vcs命令列作法
-
 
 開始/Microsoft Visual Studio 2010 Express/Visual Studio 命令提示字元 (2010)/
 
@@ -14435,7 +14218,7 @@ Thread.Sleep(500);
 
 System.Diagnostics.Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！ title = " + title + "  " + aa.ToString());
 
-6060
+//------------------------------------------------------------  # 60個
 
              /* info
             richTextBox1.Text += "aaa: " + pfc.Families.Length.ToString() + "\n";
