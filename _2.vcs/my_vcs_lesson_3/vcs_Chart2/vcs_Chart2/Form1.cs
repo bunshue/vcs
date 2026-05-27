@@ -19,11 +19,19 @@ namespace vcs_Chart2
 {
     public partial class Form1 : Form
     {
-        int W = 640;
+        int W = 720;
         int H = 400;
 
+        Series series00 = new Series();
+        Series series10 = new Series();
+
         private int pointIndex1 = 0;
+        private int pointIndexA = 0;
+        private int pointIndexB = 0;
+
         Chart chart1 = new RealtimeChart().GetChart;
+        Chart chart_temperatureA = new RealtimeChart().GetChart;  // 溫度偵測圖表 comport
+        Chart chart_temperatureB = new RealtimeChart().GetChart;  // 溫度偵測圖表 demo
 
         //------------------------------------------------------------  # 60個
 
@@ -40,11 +48,8 @@ namespace vcs_Chart2
         string input = "";
         int flag_need_to_merge_data = 0;
         bool flag_read_connection_again = true;
-        bool flag_show_cpu_temperature = false;
-
-        //溫度偵測圖表
-        private int pointIndex = 0;
-        Chart chart_temperature = new RealtimeChart_temperature().GetChart;
+        bool flag_show_cpu_temperatureA = false;
+        bool flag_show_cpu_temperatureB = false;
 
         public Form1()
         {
@@ -59,17 +64,32 @@ namespace vcs_Chart2
 
             draw_chart0();
 
+            draw_chart1();
+
             //------------------------------------------------------------  # 60個
 
             //開始
-            chart1 = new RealtimeChart().GetChart;
             this.Controls.Add(chart1);
+            chart1.Location = new Point(10, 10 + 400 + 10);
+            chart1.ChartAreas[0].AxisY.Maximum = 5000D;
+            chart1.ChartAreas[0].AxisY.Minimum = 0D;
 
-            timer1.Enabled = true;
+            this.Controls.Add(chart_temperatureA);
+            chart_temperatureA.Location = new Point(10 + 720 + 10, 10);
+            chart_temperatureA.ChartAreas[0].AxisX.Title = "時間";
+            chart_temperatureA.ChartAreas[0].AxisY.Title = "溫度";
+            chart_temperatureA.ChartAreas[0].AxisY.Maximum = 80D;
+            chart_temperatureA.ChartAreas[0].AxisY.Minimum = 60D;
+
+            this.Controls.Add(chart_temperatureB);
+            chart_temperatureB.Location = new Point(10 + 720 + 10, 10 + 400 + 10);
+            chart_temperatureB.ChartAreas[0].AxisX.Title = "時間";
+            chart_temperatureB.ChartAreas[0].AxisY.Title = "溫度";
+            chart_temperatureB.ChartAreas[0].AxisY.Maximum = 80D;
+            chart_temperatureB.ChartAreas[0].AxisY.Minimum = 60D;
 
             //------------------------------------------------------------  # 60個
 
-            lb_temperature.Text = "";
             this.BackColor = Color.Yellow;
         }
 
@@ -81,25 +101,25 @@ namespace vcs_Chart2
             int dy = H + 10;
             chart0.Size = new Size(W, H);
             chart0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            pictureBox1.Size = new Size(W, H);
-            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            pictureBox2.Size = new Size(W - 100, H - 50);
-            groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            pictureBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 150);
-            richTextBox1.Size = new Size(W - 100, H - 100);
+            groupBoxA.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            groupBoxB.Location = new Point(x_st + dx * 2, y_st + dy * 1 - 30);
+            richTextBox1.Size = new Size(W - 360, H - 100);
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 100);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            groupBox1.Size = new Size(430, 130);
-            lb_temperature.Location = new Point(10, 30);
-            x_st = 180;
-            y_st = 20;
+            groupBoxA.Size = new Size(140, 230);
+            groupBoxB.Size = new Size(140, 120);
+            lb_temperatureA.Location = new Point(6, 20);
+            lb_temperatureB.Location = new Point(6, 20);
+            lb_temperatureA.Text = "";
+            lb_temperatureB.Text = "";
+            x_st = 10;
+            y_st = 60;
             bt_temperature_on.Location = new Point(x_st + 0, y_st);
             bt_temperature_off.Location = new Point(x_st + 0, y_st + 45 + 10);
-            x_st += 130;
+            bt_comport.Location = new Point(x_st + 0 + 10, y_st + 45 + 10 + 45 + 10);
+            bt_comport_disconnect.Location = new Point(x_st + 45 + 10 + 10, y_st + 45 + 10 + 45 + 10);
             bt_demo.Location = new Point(x_st + 0, y_st);
-            bt_comport.Location = new Point(x_st + 0, y_st + 45 + 10);
-            bt_comport_disconnect.Location = new Point(x_st + 45 + 10, y_st + 45 + 10);
 
             this.Size = new Size(1880, 870);
             this.Text = "vcs_Chart2";
@@ -125,11 +145,21 @@ namespace vcs_Chart2
             //使用客製畫面
             //chart_init(chart0);
 
-            Series series0 = new Series();
-            chart0.Series.Add(series0);
-            chart0.Series[0].ChartType = SeriesChartType.Point;  // 圖表種類 : 點狀圖
-            //series1.ChartType = SeriesChartType.Point;  // 圖表種類 : 點狀圖
-            timer0.Enabled = true;
+            series00.ChartType = SeriesChartType.Point;  // 圖表種類 : 點狀圖
+            chart0.Series.Add(series00);
+        }
+
+        void draw_chart1()
+        {
+            //清除圖表
+            chart1.Series.Clear();
+            chart1.Titles.Clear();
+
+            //使用客製畫面
+            //chart_init(chart1);
+
+            series10.ChartType = SeriesChartType.Point;  // 圖表種類 : 點狀圖
+            chart1.Series.Add(series10);
         }
 
         //------------------------------------------------------------  # 60個
@@ -155,92 +185,9 @@ namespace vcs_Chart2
                 chart1.BorderlineDashStyle = ChartDashStyle.Solid;
                 chart1.BorderlineWidth = 2;
                 chart1.BorderSkin.SkinStyle = BorderSkinStyle.Emboss;
-                chart1.Location = new Point(10 + 640 + 10, 10 + 400 + 10);
+                chart1.Location = new Point(100, 100);
                 chart1.Name = "chart1";
-                chart1.Size = new Size(640, 400);
-                chart1.TabIndex = 1;
-                chart1.Dock = System.Windows.Forms.DockStyle.None;
-
-                ctArea.Area3DStyle.Inclination = 15;
-                ctArea.Area3DStyle.IsClustered = true;
-                ctArea.Area3DStyle.IsRightAngleAxes = false;
-                ctArea.Area3DStyle.Perspective = 10;
-                ctArea.Area3DStyle.Rotation = 10;
-                ctArea.Area3DStyle.WallWidth = 0;
-                ctArea.AxisX.IsLabelAutoFit = false;
-                ctArea.AxisX.LabelStyle.Font = new Font("Trebuchet MS", 8.25F, FontStyle.Bold);
-                ctArea.AxisX.LineColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                ctArea.AxisX.MajorGrid.LineColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                ctArea.AxisX.MinorGrid.LineDashStyle = ChartDashStyle.Dash;
-                ctArea.AxisX.Title = nameAxisX;
-                ctArea.AxisY.IsLabelAutoFit = false;
-                ctArea.AxisY.LabelStyle.Font = new Font("Trebuchet MS", 8.25F, FontStyle.Bold);
-                ctArea.AxisY.LineColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                ctArea.AxisY.MajorGrid.LineColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                ctArea.AxisY.Maximum = 5000D;
-                ctArea.AxisY.Minimum = 0D;
-                ctArea.AxisY.Title = nameAxisY;
-                ctArea.BackColor = Color.OldLace;
-                ctArea.BackGradientStyle = GradientStyle.TopBottom;
-                ctArea.BackSecondaryColor = Color.White;
-                ctArea.BorderColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                ctArea.BorderDashStyle = ChartDashStyle.Solid;
-                ctArea.Name = "Default";
-                ctArea.ShadowColor = Color.Transparent;
-                chart1.ChartAreas.Add(ctArea);
-
-                legend.BackColor = Color.Transparent;
-                legend.Enabled = false;
-                legend.Font = new Font("Trebuchet MS", 8.25F, FontStyle.Bold);
-                legend.IsTextAutoFit = false;
-                legend.Name = "Default";
-                chart1.Legends.Add(legend);
-
-                series.BorderColor = Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(26)))), ((int)(((byte)(59)))), ((int)(((byte)(105)))));
-                series.ChartArea = "Default";
-                series.ChartType = SeriesChartType.Line;
-                series.Legend = "Default";
-                series.Name = "Default";
-                chart1.Series.Add(series);
-            }
-
-            public Chart GetChart
-            {
-                get { return chart1; }
-            }
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        //溫度偵測圖表
-        //繪圖類別
-        public class RealtimeChart_temperature
-        {
-            private Chart chart1 = null;
-            private int chartWidth = 640;
-            private int chartHeight = 480;
-            private string nameAxisX = "時間";
-            private string nameAxisY = "溫度";
-
-            public RealtimeChart_temperature()
-            {
-                chart1 = new Chart();
-
-                ChartArea ctArea = new ChartArea();
-                Legend legend = new Legend();
-                Series series = new Series();
-
-                chart1.BackColor = Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(223)))), ((int)(((byte)(193)))));
-                chart1.BackGradientStyle = GradientStyle.TopBottom;
-                chart1.BorderlineColor = Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(64)))), ((int)(((byte)(1)))));
-                chart1.BorderlineDashStyle = ChartDashStyle.Solid;
-                chart1.BorderlineWidth = 2;
-                chart1.BorderSkin.SkinStyle = BorderSkinStyle.Emboss;
-                //chart1.Location = new Point(850, 300);
-                chart1.Location = new Point(10 + 640 + 10, 10);
-                chart1.Name = "chart1";
-                //chart1.Size = new Size(chartWidth, chartHeight);
-                chart1.Size = new Size(640, 400);
+                chart1.Size = new Size(720, 400);
                 chart1.TabIndex = 1;
                 chart1.Dock = DockStyle.None;
 
@@ -260,8 +207,8 @@ namespace vcs_Chart2
                 ctArea.AxisY.LabelStyle.Font = new Font("Trebuchet MS", 8.25F, FontStyle.Bold);
                 ctArea.AxisY.LineColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
                 ctArea.AxisY.MajorGrid.LineColor = Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-                ctArea.AxisY.Maximum = 80D;
-                ctArea.AxisY.Minimum = 60D;
+                ctArea.AxisY.Maximum = 5000D;
+                ctArea.AxisY.Minimum = 0D;
                 ctArea.AxisY.Title = nameAxisY;
                 ctArea.BackColor = Color.OldLace;
                 ctArea.BackGradientStyle = GradientStyle.TopBottom;
@@ -378,13 +325,13 @@ namespace vcs_Chart2
             double y0;
             y0 = 110 * sind(x0);
 
-            chart0.Series[0].Points.AddXY(x0, y0);
+            series00.Points.AddXY(x0, y0);
 
-            if (chart0.Series[0].Points.Count > POINTS_IN_AXIS0)
-                chart0.Series[0].Points.RemoveAt(0);
+            if (series00.Points.Count > POINTS_IN_AXIS0)
+                series00.Points.RemoveAt(0);
 
             //製作動畫
-            chart0.ChartAreas[0].AxisX.Minimum = chart0.Series[0].Points[0].XValue;
+            chart0.ChartAreas[0].AxisX.Minimum = series00.Points[0].XValue;
             chart0.ChartAreas[0].AxisX.Maximum = x0;
 
             x0 += 26;
@@ -394,8 +341,6 @@ namespace vcs_Chart2
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            //this.pictureBox1.Invalidate();
-
             // Define some variables
             int numberOfPointsInChart = 15;
             int numberOfPointsAfterRemoval = 15;
@@ -430,63 +375,6 @@ namespace vcs_Chart2
 
             // Redraw chart
             chart1.Invalidate();
-            pictureBox1.Invalidate();
-        }
-
-        private void DrawCircle(Graphics g, PointF center, int radius, int linewidth, Color c)
-        {
-            // Create a new pen.
-            //顏色、線寬分開寫
-            //Pen p = new Pen(c);
-            // Set the pen's width.
-            //p.Width = linewidth;
-
-            //顏色、線寬寫在一起
-            Pen p = new Pen(c, linewidth);
-            // Draw the circle
-            g.DrawEllipse(p, center.X - radius, center.Y - radius, radius * 2, radius * 2);
-            //Dispose of the pen.
-            p.Dispose();
-        }
-
-        private void FillCircle(Graphics g, PointF center, int radius, Color c)
-        {
-            SolidBrush sb = new SolidBrush(c);
-
-            // Fill the circle
-            g.FillEllipse(sb, new RectangleF(center.X - radius, center.Y - radius, radius * 2, radius * 2));
-
-            //Dispose of the brush
-            sb.Dispose();
-        }
-
-        double angle = 0;
-        int x_st = 100;
-        int y_st = 100;
-        int L = 170;
-        int cx = 200;
-        int cy = 200;
-        PointF pt = new PointF();
-
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.DrawLine(new Pen(Color.Black, 2), cx - 200, cy, cx + 200, cy);
-            e.Graphics.DrawLine(new Pen(Color.Black, 2), cx, cy - 200, cx, cy + 200);
-
-            pt = new PointF(cx, cy);
-            //e.Graphics.DrawEllipse(new Pen(Color.Red, 3), x_st, y_st, L, L);
-            DrawCircle(e.Graphics, pt, L, 3, Color.Yellow);
-
-            x_st = cx + (int)(L * cosd(angle));
-            y_st = cy + (int)(L * sind(angle));
-
-            e.Graphics.DrawLine(new Pen(Color.Black, 2), 200, y_st, x_st, y_st);
-            e.Graphics.DrawLine(new Pen(Color.Black, 2), x_st, 200, x_st, y_st);
-
-            pt = new PointF(x_st, y_st);
-            FillCircle(e.Graphics, pt, 10, Color.Red);
-
-            angle -= 6;
         }
 
         //------------------------------------------------------------  # 60個
@@ -600,25 +488,23 @@ namespace vcs_Chart2
 
         private void bt_temperature_on_Click(object sender, EventArgs e)
         {
-            if (flag_show_cpu_temperature == false)
+            if (flag_show_cpu_temperatureA == false)
             {
-                flag_show_cpu_temperature = true;
+                flag_show_cpu_temperatureA = true;
                 //溫度偵測 ON
                 Send_IMS_Data(0xFF, 0xCC, 0xFF, 0xAA);
-                richTextBox1.Text += "aaaaaaaaaaaaaaaaaaaaaaaa\n";
-                this.Controls.Add(chart_temperature);
+                lb_temperatureA.Text = "";
             }
         }
 
         private void bt_temperature_off_Click(object sender, EventArgs e)
         {
-            if (flag_show_cpu_temperature == true)
+            if (flag_show_cpu_temperatureA == true)
             {
-                flag_show_cpu_temperature = false;
+                flag_show_cpu_temperatureA = false;
                 //溫度偵測 OFF
                 Send_IMS_Data(0xFF, 0xCC, 0xFF, 0x55);
-                lb_temperature.Text = "";
-                this.Controls.Remove(chart_temperature);
+                lb_temperatureA.Text = "";
             }
         }
 
@@ -630,15 +516,12 @@ namespace vcs_Chart2
             //溫度偵測顯示
             int temperature_data = hh * 256 + ll;
 
-            draw_chart_temperature(temperature_data);
+            draw_chart_temperature(chart_temperatureB, temperature_data);
             //richTextBox1.Text += hh.ToString() + " " + ll.ToString() + "\n";
-
-            draw_temperature_picture(temperature_data);
         }
 
         private void SerialPortTimer100ms_Tick(object sender, EventArgs e)
         {
-
             if (flag_comport_ok == true)
             {
                 //計算serialPort1中有多少位元組 
@@ -850,12 +733,12 @@ namespace vcs_Chart2
                     }
                     else if (input[1] == 0xCD)
                     {
-                        if (flag_show_cpu_temperature == true)
+                        if (flag_show_cpu_temperatureA == true)
                         {
                             //溫度偵測顯示
                             int temperature_data = input[2] * 256 + input[3];
 
-                            draw_chart_temperature(temperature_data);
+                            draw_chart_temperature(chart_temperatureA, temperature_data);
                             //richTextBox1.Text += ((int)input[2]).ToString() + " " + ((int)input[3]).ToString() + "\n";
                         }
                     }
@@ -893,49 +776,47 @@ namespace vcs_Chart2
 
         private void bt_demo_Click(object sender, EventArgs e)
         {
-            if (flag_show_cpu_temperature == false)
+            if (flag_show_cpu_temperatureB == false)
             {
-                flag_show_cpu_temperature = true;
+                flag_show_cpu_temperatureB = true;
                 //溫度偵測 ON
 
                 //demo
                 timer_demo.Enabled = true;
-
-                this.Controls.Add(chart_temperature);
             }
             else
             {
-                flag_show_cpu_temperature = false;
+                flag_show_cpu_temperatureB = false;
                 //溫度偵測 OFF
 
                 //demo
                 timer_demo.Enabled = false;
-
-                lb_temperature.Text = "";
-                this.Controls.Remove(chart_temperature);
-
-                Graphics g = pictureBox2.CreateGraphics();
-                g.Clear(Color.Yellow);
-                //順道清掉舊資料
-                for (int i = 0; i < (N); i++)
-                {
-                    temp_data[i] = 0;
-                }
             }
+            lb_temperatureB.Text = "";
         }
 
-        void draw_chart_temperature(int temperature_data)
+        void draw_chart_temperature(Chart chart, int temperature_data)
         {
             //richTextBox1.Text += temperature_data.ToString() + "  ";
             float temperature = ((((float)(temperature_data) / 65536.0f) / 0.00198421639f) - 273.15f);
             //richTextBox1.Text += temperature.ToString()+" C ";
 
-            if (temperature > 70)
-                lb_temperature.ForeColor = Color.Red;
+            if (chart == chart_temperatureA)
+            {
+                if (temperature > 70)
+                    lb_temperatureA.ForeColor = Color.Red;
+                else
+                    lb_temperatureA.ForeColor = Color.Blue;
+                lb_temperatureA.Text = temperature.ToString("#0.000") + " C";
+            }
             else
-                lb_temperature.ForeColor = Color.Blue;
-
-            lb_temperature.Text = temperature.ToString("#0.000") + " C ";
+            {
+                if (temperature > 70)
+                    lb_temperatureB.ForeColor = Color.Red;
+                else
+                    lb_temperatureB.ForeColor = Color.Blue;
+                lb_temperatureB.Text = temperature.ToString("#0.000") + " C";
+            }
 
             /*
             #define XAdcPs_RawToTemperature(AdcData)				\
@@ -948,171 +829,37 @@ namespace vcs_Chart2
             int numberOfPointsAfterRemoval = 15;
 
             // Simulate adding new data points
-            float x = pointIndex + 1;
+            float x = pointIndexB + 1;
             //int y = (int)(2500 * Math.Sin(Math.PI * x * 40 / 180) + 2500);
             float y = temperature;
 
-            chart_temperature.Series[0].Points.AddXY(x, y);
-            ++pointIndex;
+            chart.Series[0].Points.AddXY(x, y);
+            ++pointIndexB;
 
             // Adjust Y & X axis scale
-            chart_temperature.ResetAutoValues();
-            if (chart_temperature.ChartAreas["Default"].AxisX.Maximum < pointIndex)
+            chart.ResetAutoValues();
+            if (chart.ChartAreas["Default"].AxisX.Maximum < pointIndexB)
             {
-                chart_temperature.ChartAreas["Default"].AxisX.Maximum = pointIndex;
+                chart.ChartAreas["Default"].AxisX.Maximum = pointIndexB;
             }
 
             // Keep a constant number of points by removing them from the left
-            while (chart_temperature.Series[0].Points.Count > numberOfPointsInChart)
+            while (chart.Series[0].Points.Count > numberOfPointsInChart)
             {
                 // Remove data points on the left side
-                while (chart_temperature.Series[0].Points.Count > numberOfPointsAfterRemoval)
+                while (chart.Series[0].Points.Count > numberOfPointsAfterRemoval)
                 {
-                    chart_temperature.Series[0].Points.RemoveAt(0);
+                    chart.Series[0].Points.RemoveAt(0);
                 }
 
                 // Adjust X axis scale
-                chart_temperature.ChartAreas["Default"].AxisX.Minimum = pointIndex - numberOfPointsAfterRemoval;
-                chart_temperature.ChartAreas["Default"].AxisX.Maximum = chart_temperature.ChartAreas["Default"].AxisX.Minimum + numberOfPointsInChart;
+                chart.ChartAreas["Default"].AxisX.Minimum = pointIndexB - numberOfPointsAfterRemoval;
+                chart.ChartAreas["Default"].AxisX.Maximum = chart.ChartAreas["Default"].AxisX.Minimum + numberOfPointsInChart;
             }
-
-            // Redraw chart
-            chart_temperature.Invalidate();
+            chart.Invalidate();
         }
 
-        private const int N = 15;
-
-        int[] temp_data = new int[N];
-
-        //int demo_duty = 36;
-        void draw_temperature_picture(int temperature_data)
-        {
-            /*
-            demo_duty++;
-            if (demo_duty >= 100)
-                demo_duty = 36;
-            */
-
-            richTextBox1.Text += "a ";
-            Graphics g = pictureBox2.CreateGraphics();
-            //g.Clear(BackColor);
-            g.Clear(Color.White);
-            DrawXY();
-            //DrawXLine();
-            //DrawYLine();
-            g.Dispose();
-
-            demo_record_function(temperature_data);
-        }
-
-        void demo_record_function(int temperature_data)
-        {
-            //richTextBox1.Text += temperature_data.ToString() + "  ";
-            float temperature = ((((float)(temperature_data) / 65536.0f) / 0.00198421639f) - 273.15f);
-            //richTextBox1.Text += temperature.ToString() + " C ";
-
-            int W = pictureBox2.Width;
-            int H = pictureBox2.Height;
-
-            int temp_value = 0;
-            int ratio = 0;
-
-            int x_st = 0;
-            int x_step = 0;
-            int h_st = 0;
-
-            x_st = W * 10 / 100;
-            x_step = W * 80 / 100 / (N - 1);
-            h_st = H * 90 / 100;
-
-            //ratio = (H * 80 / 100) / 100;
-            ratio = 80960 / (H * 80 / 100) + 2;
-
-            //richTextBox1.Text += "a " + H.ToString() + " ";
-            //richTextBox1.Text += "b "+ratio.ToString() + " ";
-
-            temp_value = temperature_data / ratio;
-
-            for (int i = 0; i < 14; i++)
-            {
-                temp_data[i] = temp_data[i + 1];
-            }
-            temp_data[14] = temp_value;
-
-            Graphics g = pictureBox2.CreateGraphics();
-            // Create pens.
-            Pen greenPen = new Pen(Color.Green, 3);
-
-            // Create points that define curve.
-            Point point0 = new Point(x_st + x_step * 0, h_st - temp_data[0]);
-            Point point1 = new Point(x_st + x_step * 1, h_st - temp_data[1]);
-            Point point2 = new Point(x_st + x_step * 2, h_st - temp_data[2]);
-            Point point3 = new Point(x_st + x_step * 3, h_st - temp_data[3]);
-            Point point4 = new Point(x_st + x_step * 4, h_st - temp_data[4]);
-            Point point5 = new Point(x_st + x_step * 5, h_st - temp_data[5]);
-            Point point6 = new Point(x_st + x_step * 6, h_st - temp_data[6]);
-            Point point7 = new Point(x_st + x_step * 7, h_st - temp_data[7]);
-            Point point8 = new Point(x_st + x_step * 8, h_st - temp_data[8]);
-            Point point9 = new Point(x_st + x_step * 9, h_st - temp_data[9]);
-            Point point10 = new Point(x_st + x_step * 10, h_st - temp_data[10]);
-            Point point11 = new Point(x_st + x_step * 11, h_st - temp_data[11]);
-            Point point12 = new Point(x_st + x_step * 12, h_st - temp_data[12]);
-            Point point13 = new Point(x_st + x_step * 13, h_st - temp_data[13]);
-            Point point14 = new Point(x_st + x_step * 14, h_st - temp_data[14]);
-
-            Point[] curvePoints = { point0, point1, point2, point3, point4, point5, point6, point7, point8, point9, point10, point11, point12, point13, point14 };
-
-            // Draw lines between original points to screen.
-            //g.DrawLines(greenPen, curvePoints);   //畫直線
-
-            // Draw curve to screen.
-            g.DrawCurve(greenPen, curvePoints); //畫曲線
-
-            g.Dispose();
-        }
-
-        //以下為自己畫的
-        private void DrawXY()//画X轴Y轴
-        {
-            int W = pictureBox2.Width;
-            int H = pictureBox2.Height;
-
-            Graphics g = this.pictureBox2.CreateGraphics();
-            Point px1 = new Point(W * 10 / 100, H * 90 / 100);
-            Point px2 = new Point(W * 90 / 100, H * 90 / 100);
-            g.DrawLine(new Pen(Brushes.Black, 5), px1, px2);
-            Point py1 = new Point(W * 10 / 100, H * 90 / 100);
-            Point py2 = new Point(W * 10 / 100, H * 10 / 100);
-            g.DrawLine(new Pen(Brushes.Black, 5), py1, py2);
-            g.Dispose();
-        }
-
-        private void DrawXLine()    //画X轴平行线
-        {
-            int W = pictureBox2.Width;
-            int H = pictureBox2.Height;
-
-            Graphics g = this.pictureBox2.CreateGraphics();
-            for (int i = 1; i < 9; i++)
-            {
-                Point px1 = new Point(0, H - i * 50);
-                Point px2 = new Point(W, H - i * 50);
-                g.DrawLine(new Pen(Brushes.Black, 1), px1, px2);
-            }
-            g.Dispose();
-        }
-        private void DrawYLine()    //画X轴刻度
-        {
-            int H = pictureBox2.Height;
-            Graphics g = this.pictureBox2.CreateGraphics();
-            for (int i = 1; i < 9; i++)
-            {
-                Point py1 = new Point(100 * i, H - 5);
-                Point py2 = new Point(100 * i, H);
-                g.DrawLine(new Pen(Brushes.Red, 1), py1, py2);
-            }
-            g.Dispose();
-        }
+        //------------------------------------------------------------  # 60個
 
         private void bt_comport_Click(object sender, EventArgs e)
         {
@@ -1200,7 +947,6 @@ namespace vcs_Chart2
                 //開啟程式時, 把所有serialPort的資料讀出來, 並丟棄之
                 serialPort1.DiscardInBuffer();  //丟棄UART buffer內的資料
             }
-
         }
 
         private void bt_comport_disconnect_Click(object sender, EventArgs e)

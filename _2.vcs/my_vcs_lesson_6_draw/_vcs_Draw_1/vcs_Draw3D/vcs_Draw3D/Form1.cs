@@ -59,6 +59,8 @@ namespace vcs_Draw3D
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             //展示板 DisplayBoard ST
             //高低展示板 (亂數上下呈現)
             // 新增 一個展示板物件
@@ -184,6 +186,8 @@ namespace vcs_Draw3D
             Environment.Exit(0);
         }
 
+        //------------------------------------------------------------  # 60個
+
         //展示板 DisplayBoard ST
         //高低展示板 (亂數上下呈現)
         private void pictureBox0_Paint(object sender, PaintEventArgs e)
@@ -217,6 +221,7 @@ namespace vcs_Draw3D
         }
         //展示板 DisplayBoard SP
 
+        //------------------------------------------------------------  # 60個
 
         //展示板 DisplayBoard2 ST
         //高低展示板 (波浪上下呈現)
@@ -239,15 +244,79 @@ namespace vcs_Draw3D
 
         //展示板 DisplayBoard2 SP
 
+        //------------------------------------------------------------  # 60個
 
+        private double sind(double d)
+        {
+            return Math.Sin(d * Math.PI / 180.0);
+        }
+
+        private double cosd(double d)
+        {
+            return Math.Cos(d * Math.PI / 180.0);
+        }
+
+        private void DrawCircle(Graphics g, PointF center, int radius, int linewidth, Color c)
+        {
+            // Create a new pen.
+            //顏色、線寬分開寫
+            //Pen p = new Pen(c);
+            // Set the pen's width.
+            //p.Width = linewidth;
+
+            //顏色、線寬寫在一起
+            Pen p = new Pen(c, linewidth);
+            // Draw the circle
+            g.DrawEllipse(p, center.X - radius, center.Y - radius, radius * 2, radius * 2);
+            //Dispose of the pen.
+            p.Dispose();
+        }
+
+        private void FillCircle(Graphics g, PointF center, int radius, Color c)
+        {
+            SolidBrush sb = new SolidBrush(c);
+
+            // Fill the circle
+            g.FillEllipse(sb, new RectangleF(center.X - radius, center.Y - radius, radius * 2, radius * 2));
+
+            //Dispose of the brush
+            sb.Dispose();
+        }
+
+        double angle2 = 0;
+        int x_st = 100;
+        int y_st = 100;
+        int L = 250 / 2 * 17 / 20;
+        int cx = 250 / 2;
+        int cy = 250 / 2;
+        PointF pt2 = new PointF();
         private void pictureBox2_Paint(object sender, PaintEventArgs e)
         {
+            e.Graphics.DrawLine(new Pen(Color.Black, 2), cx - 250 / 2, cy, cx + 250 / 2, cy);
+            e.Graphics.DrawLine(new Pen(Color.Black, 2), cx, cy - 250 / 2, cx, cy + 250 / 2);
+
+            pt2 = new PointF(cx, cy);
+            //e.Graphics.DrawEllipse(new Pen(Color.Red, 3), x_st, y_st, L, L);
+            DrawCircle(e.Graphics, pt2, L, 3, Color.Yellow);
+
+            x_st = cx + (int)(L * cosd(angle2));
+            y_st = cy + (int)(L * sind(angle2));
+
+            e.Graphics.DrawLine(new Pen(Color.Black, 2), 250 / 2, y_st, x_st, y_st);
+            e.Graphics.DrawLine(new Pen(Color.Black, 2), x_st, 250 / 2, x_st, y_st);
+
+            pt2 = new PointF(x_st, y_st);
+            FillCircle(e.Graphics, pt2, 10, Color.Red);
+
+            angle2 -= 6;
         }
 
         private void timer2_Tick(object sender, EventArgs e)
         {
+            pictureBox2.Invalidate();
         }
 
+        //------------------------------------------------------------  # 60個
 
         private void pictureBox3_Paint(object sender, PaintEventArgs e)
         {
@@ -260,6 +329,8 @@ namespace vcs_Draw3D
             g3.DrawArc(new Pen(Color.FromArgb(r.Next(0, 256), r.Next(0, 256), r.Next(0, 256))), 10, 10, W - 20, H - 20, angle, angle + 5);  //r.Next(0, 256) 產出0~255之間的整數
             angle += 5;
         }
+
+        //------------------------------------------------------------  # 60個
 
         //投票比例繪圖程式 ST
 
@@ -450,6 +521,8 @@ namespace vcs_Draw3D
             return bitmap1;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void pictureBox5_Paint(object sender, PaintEventArgs e)
         {
         }
@@ -463,6 +536,7 @@ namespace vcs_Draw3D
             pictureBox9.Image = draw_random_pattern(5); //亂數
         }
 
+        //------------------------------------------------------------  # 60個
 
         private void pictureBox6_Paint(object sender, PaintEventArgs e)
         {
@@ -472,6 +546,7 @@ namespace vcs_Draw3D
         {
         }
 
+        //------------------------------------------------------------  # 60個
 
         private void pictureBox7_Paint(object sender, PaintEventArgs e)
         {
@@ -481,6 +556,7 @@ namespace vcs_Draw3D
         {
         }
 
+        //------------------------------------------------------------  # 60個
 
         private void pictureBox8_Paint(object sender, PaintEventArgs e)
         {
@@ -490,6 +566,7 @@ namespace vcs_Draw3D
         {
         }
 
+        //------------------------------------------------------------  # 60個
 
         private void pictureBox9_Paint(object sender, PaintEventArgs e)
         {
@@ -498,6 +575,8 @@ namespace vcs_Draw3D
         private void timer9_Tick(object sender, EventArgs e)
         {
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void pictureBox10_Paint(object sender, PaintEventArgs e)
         {
@@ -549,8 +628,9 @@ namespace vcs_Draw3D
             //richTextBox1.Text += ratio_x.ToString() + "\t" + ratio_y.ToString() + "\n";
 
             Application.DoEvents();
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void pictureBox11_Paint(object sender, PaintEventArgs e)
         {
@@ -720,6 +800,7 @@ namespace vcs_Draw3D
         }
         //for random color SP
 
+        //------------------------------------------------------------  # 60個
 
         private void pictureBox13_Paint(object sender, PaintEventArgs e)
         {
@@ -727,8 +808,10 @@ namespace vcs_Draw3D
 
         private void timer13_Tick(object sender, EventArgs e)
         {
+
         }
 
+        //------------------------------------------------------------  # 60個
 
         private void pictureBox14_Paint(object sender, PaintEventArgs e)
         {
@@ -737,5 +820,19 @@ namespace vcs_Draw3D
         private void timer14_Tick(object sender, EventArgs e)
         {
         }
+
+        //------------------------------------------------------------  # 60個
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/

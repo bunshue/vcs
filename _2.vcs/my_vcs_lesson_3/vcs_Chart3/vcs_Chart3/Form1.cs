@@ -116,7 +116,7 @@ namespace vcs_Chart3
             chart1.ChartAreas.Clear();  // 清除所有圖表區
             chart1.Series.Clear();  // 清除所有數列
 
-           //------------------------------  # 30個
+            //------------------------------  # 30個
 
             // 畫標題的方法1
             Title chart_title = new Title();
@@ -196,9 +196,13 @@ namespace vcs_Chart3
             //------------------------------  # 30個
 
             // 設定數列1 的 大小與外觀
-            Series series1 = new Series("體重1");
+            Series series1 = new Series("體重1", 500);  // 初始化數列1(名稱, 最大值)
             series1.ChartType = SeriesChartType.Column;  // 直條圖
+            series1.Color = Color.Blue; // 設定線條顏色
+            series1.Font = new Font("新細明體", 10); //設定字型            
+            series1.IsValueShownAsLabel = true;  // 是否把數值顯示在線上
 
+            //把值加入X 軸Y 軸
             series1.Points.AddXY("鼠", 3);
             series1.Points.AddXY("牛", 48);
             series1.Points.AddXY("虎", 33);
@@ -250,75 +254,11 @@ namespace vcs_Chart3
 
         void draw_chart1()
         {
-            string title = "直條圖";
-            chart_init(chart1, title);
-
-            //------------------------------  # 30個
-
-            // 設定數列1 的 大小與外觀
-            Series series1 = new Series("體重", 500);  // 初始化數列1(名稱, 最大值)
-            series1.ChartType = SeriesChartType.Column;  // 直條圖
-            series1.Color = Color.Blue; // 設定線條顏色
-            series1.Font = new Font("新細明體", 10); //設定字型            
-            series1.IsValueShownAsLabel = true;  // 是否把數值顯示在線上
-
-            //把值加入X 軸Y 軸
-            series1.Points.AddXY("鼠", 3);
-            series1.Points.AddXY("牛", 48);
-            series1.Points.AddXY("虎", 33);
-            series1.Points.AddXY("兔", 8);
-            series1.Points.AddXY("龍", 38);
-            series1.Points.AddXY("蛇", 16);
-            series1.Points.AddXY("馬", 31);
-            series1.Points.AddXY("羊", 29);
-            series1.Points.AddXY("猴", 22);
-            series1.Points.AddXY("雞", 5);
-            series1.Points.AddXY("狗", 17);
-            series1.Points.AddXY("豬", 42);
-
-            chart1.Series.Add(series1);  // 將數列1新增到圖表上
         }
 
         void draw_chart2()
         {
-            string title = "長條圖, 自定義座標軸刻度標籤";
-            chart_init(chart2, title);
 
-            // 設定數列1
-            Series series1 = new Series("體重1");  // 初始化數列1
-            series1.Points.AddXY("鼠", 3);
-            series1.Points.AddXY("牛", 48);
-            series1.Points.AddXY("虎", 33);
-            series1.Points.AddXY("兔", 8);
-            series1.Points.AddXY("龍", 38);
-            series1.Points.AddXY("蛇", 16);
-            series1.Points.AddXY("馬", 31);
-            series1.Points.AddXY("羊", 29);
-            series1.Points.AddXY("猴", 22);
-            series1.Points.AddXY("雞", 5);
-            series1.Points.AddXY("狗", 17);
-            series1.Points.AddXY("豬", 42);
-
-            chart2.Series.Add(series1);  // 將數列1新增到圖表上
-
-            //------------------------------  # 30個
-
-            // 設定數列2
-            Series series2 = new Series("體重2");  // 初始化數列2
-            series2.Points.AddXY("鼠", 3);
-            series2.Points.AddXY("牛", 48);
-            series2.Points.AddXY("虎", 33);
-            series2.Points.AddXY("兔", 8);
-            series2.Points.AddXY("龍", 38);
-            series2.Points.AddXY("蛇", 16);
-            series2.Points.AddXY("馬", 31);
-            series2.Points.AddXY("羊", 29);
-            series2.Points.AddXY("猴", 22);
-            series2.Points.AddXY("雞", 5);
-            series2.Points.AddXY("狗", 17);
-            series2.Points.AddXY("豬", 42);
-
-            chart2.Series.Add(series2);  // 將數列2新增到圖表上
         }
 
         void draw_chart3()
@@ -326,8 +266,11 @@ namespace vcs_Chart3
             string title = "圓形圖";
             chart_init(chart3, title);
 
-            string[] name = new string[] { "鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬" };
-            int[] weight = new int[] { 3, 48, 33, 8, 38, 16, 31, 29, 22, 5, 17, 42 };
+            //string[] name = new string[] { "鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬" };
+            //int[] weight = new int[] { 3, 48, 33, 8, 38, 16, 31, 29, 22, 5, 17, 42 };
+            string[] name = { "AAA", "BBB", "CCC", "DDD", "EEE" };
+            int[] weight = { 137, 63, 87, 98, 74 };
+
 
             Series series1 = new Series("體重", 500);  // 初始化數列1
             series1.ChartType = SeriesChartType.Pie;  // 圓形圖
@@ -340,7 +283,7 @@ namespace vcs_Chart3
             //series1.Label = "bbbb";  //#VALX#PERCENT{P1}; //X軸 + 百分比
             series1.LabelForeColor = Color.Red; //字體顏色
             //字體設定
-            series1.Font = new System.Drawing.Font("Trebuchet MS", 10, System.Drawing.FontStyle.Bold);
+            series1.Font = new Font("Trebuchet MS", 10, FontStyle.Bold);
             series1.Points.FindMaxByValue().LabelForeColor = Color.Red;
             //series1.Points.FindMaxByValue().Color = Color.Red;
             //series1.Points.FindMaxByValue()[Exploded] = true;
@@ -373,16 +316,6 @@ namespace vcs_Chart3
                 chart4.Legends.Add(new Legend("Legends1"));  // 將圖例新增到圖表上
             }
             //chart4.ChartAreas.Add("ChartArea1");  // 將圖表區2新增到圖表上
-
-            //設定 ChartArea1
-            //設定3D
-            chart4.ChartAreas["ChartArea1"].Area3DStyle.Enable3D = true;  // 設定圖表區3D顯示
-            chart4.ChartAreas["ChartArea1"].Area3DStyle.IsClustered = true; //並排顯示
-            chart4.ChartAreas["ChartArea1"].Area3DStyle.Rotation = 40; //垂直角度
-            chart4.ChartAreas["ChartArea1"].Area3DStyle.Inclination = 50; //水平角度
-            chart4.ChartAreas["ChartArea1"].Area3DStyle.PointDepth = 10; //數據條厚度
-            chart4.ChartAreas["ChartArea1"].Area3DStyle.WallWidth = 0; //外牆寬度
-            chart4.ChartAreas["ChartArea1"].Area3DStyle.LightStyle = LightStyle.Realistic; //光源
 
             // 設定標題2
             chart4.Titles.Add("Title1");  // 將標題新增到圖表上
@@ -433,33 +366,18 @@ namespace vcs_Chart3
 
         void draw_chart5()
         {
-            string title = "各縣市統計";
+            string title = "直條圖";
             chart_init(chart5, title);
 
-            List<String> name = new List<string>
-            {
-                "宜蘭縣",
-                "花蓮縣",
-                "南投縣",
-                "屏東縣",
-                "苗栗縣",
-                "桃園市",
-                "高雄市",
-                "基隆市",
-                "雲林縣",
-                "新北市",
-                "新竹市",
-                "澎湖縣"
-        };
-
-            double[] weight = { 20, 19, 64, 128, 8, 48, 58, 21, 18, 27, 17, 11 };
+            string[] name = { "AAA", "BBB", "CCC", "DDD", "EEE" };
+            int[] weight = { 137, 63, 87, 98, 74 };
 
             //設定 ChartArea1
             chart5.ChartAreas["ChartArea1"].AxisX.Interval = 1;  // 設定X軸坐標的間隔
             chart5.ChartAreas["ChartArea1"].AxisX.IntervalOffset = 1;  //設置X軸坐標偏移為1
             chart5.ChartAreas["ChartArea1"].AxisX.LabelStyle.IsStaggered = true;   //設置是否交錯顯示,比如數據多的時間分成兩行來顯示
-            chart5.ChartAreas["ChartArea1"].AxisX.Title = "縣市";  // 設定X軸的標題
-            chart5.ChartAreas["ChartArea1"].AxisY.Title = "人數";  //設定Y軸的標題
+            chart5.ChartAreas["ChartArea1"].AxisX.Title = "種類";  // 設定X軸的標題
+            chart5.ChartAreas["ChartArea1"].AxisY.Title = "體重";  //設定Y軸的標題
             chart5.ChartAreas["ChartArea1"].BackColor = Color.FromArgb(240, 240, 240); //背景色
             chart5.ChartAreas["ChartArea1"].AxisX.Enabled = AxisEnabled.True;
             chart5.ChartAreas["ChartArea1"].AxisX2.Enabled = AxisEnabled.False; //隱藏 X2 標示
@@ -468,15 +386,6 @@ namespace vcs_Chart3
             chart5.ChartAreas["ChartArea1"].AxisX.MajorGrid.LineColor = Color.FromArgb(150, 150, 150);//X 軸線顏色
             chart5.ChartAreas["ChartArea1"].AxisY.MajorGrid.LineColor = Color.FromArgb(150, 150, 150);//Y 軸線顏色
             chart5.ChartAreas["ChartArea1"].AxisY.LabelStyle.Format = "#.###";//設定小數點
-
-            //設定3D
-            chart5.ChartAreas["ChartArea1"].Area3DStyle.Enable3D = true;  // 設定圖表區3D顯示
-            chart5.ChartAreas["ChartArea1"].Area3DStyle.IsClustered = true; //並排顯示
-            chart5.ChartAreas["ChartArea1"].Area3DStyle.Rotation = 40; //垂直角度
-            chart5.ChartAreas["ChartArea1"].Area3DStyle.Inclination = 50; //水平角度
-            chart5.ChartAreas["ChartArea1"].Area3DStyle.PointDepth = 10; //數據條厚度
-            chart5.ChartAreas["ChartArea1"].Area3DStyle.WallWidth = 0; //外牆寬度
-            chart5.ChartAreas["ChartArea1"].Area3DStyle.LightStyle = LightStyle.Realistic; //光源
 
             // 設定標題1, Title1, 設定要顯示在哪個圖表
             chart5.Titles["Title1"].DockedToChartArea = "ChartArea1";  // 設定標題要顯示在哪個圖表區
@@ -498,6 +407,7 @@ namespace vcs_Chart3
             //設定 Series1
             series1.ChartArea = "ChartArea1";  // 設定要呈現的圖表區
             series1.Points.DataBindXY(name, weight);//Series1的XY數值放入圖中  // xx, yy 皆為一維陣列
+
             series1.Legend = "Legends1";  // 設定要呈現哪個圖例
             series1.LegendText = "體重1";  // 設定圖例文字
             series1.LabelFormat = "#.###"; //小數點
@@ -522,6 +432,7 @@ namespace vcs_Chart3
             series2.ChartType = SeriesChartType.Column; //直條圖(Column),折線圖(Line),橫條圖(Bar)
 
             series2.Points.DataBindXY(name, weight);  // xx, yy 皆為一維陣列
+
             series2.Legend = "Legends1";
             series2.LegendText = "體重2";
             series2.LabelFormat = "#.###"; //小數點
