@@ -158,7 +158,7 @@ namespace vcs_System1
             //------------------------------------------------------------  # 60個
 
             richTextBox1.Text += "處理序的命令列：" + Environment.CommandLine + "\n";
-            richTextBox1.Text += "工作目錄的完整路徑：" + Environment.CurrentDirectory + "\n";
+            richTextBox1.Text += "目前工作目錄的完整路徑：" + Environment.CurrentDirectory + "\n";
             richTextBox1.Text += "目前程式執行目錄：" + Environment.CurrentDirectory + "\n";//取得目前程式執行目錄
             richTextBox1.Text += "處理序的結束代碼：" + Environment.ExitCode + "\n";
             richTextBox1.Text += "是否正常關機：" + Environment.HasShutdownStarted + "\n";
@@ -211,19 +211,9 @@ namespace vcs_System1
 
             //------------------------------------------------------------  # 60個
 
-            richTextBox1.Text += "系統特殊資料夾的路徑：" + Environment.GetFolderPath(Environment.SpecialFolder.System) + "\n";
-            richTextBox1.Text += "[傳送到]資料夾位置 GetFolderPath SendTo: " + Environment.GetFolderPath(Environment.SpecialFolder.SendTo) + "\n";
-            richTextBox1.Text += "GetFolderPath StartMenu: " + Environment.GetFolderPath(Environment.SpecialFolder.StartMenu) + "\n";
-            richTextBox1.Text += "[我的文件夾]位置 GetFolderPath Personal: " + Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\n";
-            richTextBox1.Text += "GetFolderPath MyMusic: " + Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) + "\n";
-            richTextBox1.Text += "GetFolderPath MyComputer: " + Environment.GetFolderPath(Environment.SpecialFolder.MyComputer) + "\n";
+            // herehere
+            // Environment.SpecialFolder
 
-            //Environment.SpecialFolder
-            foreach (Environment.SpecialFolder folder_type in Enum.GetValues(typeof(Environment.SpecialFolder)))
-            {
-                //many
-                //richTextBox1.AppendText(String.Format("{0,-25}", folder_type.ToString()) + Environment.GetFolderPath(folder_type) + "\r\n");
-            }
 
             //------------------------------------------------------------  # 60個
 
@@ -354,11 +344,7 @@ namespace vcs_System1
             richTextBox1.Text += "Service Pack:" + os.ServicePack + "\n";
             richTextBox1.Text += "Version: " + os.Version + "\n";
             richTextBox1.Text += "VersionString: " + os.VersionString + "\n";
-            richTextBox1.Text += "CLR Version: " + System.Environment.Version + "\n";
-            richTextBox1.Text += "Version：" + Environment.Version + "\n";
-            richTextBox1.Text += "Version： " + Environment.Version + "\n";
-            richTextBox1.Text += "Version:\t" + Environment.Version + "\n";
-
+            richTextBox1.Text += "CLR Version : " + Environment.Version + "\n";
             richTextBox1.Text += "目前系統版本： " + os.ToString() + "\n";
             richTextBox1.Text += "目前系統版本.Version： " + os.Version.ToString() + "\n";
             richTextBox1.Text += "目前系統版本.Platform： " + os.Platform.ToString() + "\n";
@@ -1442,7 +1428,44 @@ namespace vcs_System1
 
         private void button49_Click(object sender, EventArgs e)
         {
+            //test
 
+            richTextBox1.Text += "aaa : " + Environment.SpecialFolder.MyDocuments + "\n";
+            richTextBox1.Text += "aaa : " + Environment.SpecialFolder.MyMusic + "\n";
+            richTextBox1.Text += "aaa : " + Environment.SpecialFolder.MyPictures + "\n";
+            richTextBox1.Text += "aaa : " + Environment.SpecialFolder.Desktop + "\n";
+            richTextBox1.Text += "aaa : " + Environment.SpecialFolder.ProgramFiles + "\n";
+            richTextBox1.Text += "aaa : " + Environment.SpecialFolder.StartMenu + "\n";
+            richTextBox1.Text += "aaa : " + Environment.SpecialFolder.MyComputer + "\n";
+
+            //桌面路徑
+            string directory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+
+            richTextBox1.Text += "系統特殊資料夾的路徑：" + Environment.GetFolderPath(Environment.SpecialFolder.System) + "\n";
+            richTextBox1.Text += "[傳送到]資料夾位置 GetFolderPath SendTo: " + Environment.GetFolderPath(Environment.SpecialFolder.SendTo) + "\n";
+            richTextBox1.Text += "GetFolderPath StartMenu: " + Environment.GetFolderPath(Environment.SpecialFolder.StartMenu) + "\n";
+            richTextBox1.Text += "[我的文件夾]位置 GetFolderPath Personal: " + Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\n";
+            richTextBox1.Text += "GetFolderPath MyMusic: " + Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) + "\n";
+            richTextBox1.Text += "GetFolderPath MyComputer: " + Environment.GetFolderPath(Environment.SpecialFolder.MyComputer) + "\n";
+
+            //Environment.SpecialFolder
+            foreach (Environment.SpecialFolder folder_type in Enum.GetValues(typeof(Environment.SpecialFolder)))
+            {
+                //many
+                //richTextBox1.AppendText(String.Format("{0,-25}", folder_type.ToString()) + Environment.GetFolderPath(folder_type) + "\r\n");
+            }
+
+            /*
+            //目前的工作目錄:
+            //Environment.CurrentDirectory
+            //目前的工作目錄:
+            //Directory.GetCurrentDirectory()
+
+            //設定工作目錄
+            Directory.SetCurrentDirectory("D:\\");
+            //"更改後的工作目錄:
+            //Directory.GetCurrentDirectory()
+            */
         }
 
         //------------------------------------------------------------  # 60個
@@ -1840,31 +1863,3 @@ namespace vcs_System1
 /*  可搬出
 
 */
-
-/*
-Environment.SpecialFolder.MyComputer
-
-folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
-folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyDocuments;
-folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyMusic;
-folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyPictures;
-folderBrowserDialog1.RootFolder = Environment.SpecialFolder.Desktop;
-folderBrowserDialog1.RootFolder = Environment.SpecialFolder.ProgramFiles;
-folderBrowserDialog1.RootFolder = Environment.SpecialFolder.StartMenu;
-folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
-
-//目前的工作目錄:
-System.Environment.CurrentDirectory
-Console.WriteLine("目前的工作目錄:");
-Console.WriteLine(Directory.GetCurrentDirectory());
-
-//設定工作目錄
-Directory.SetCurrentDirectory("D:\\");
-Console.WriteLine("更改後的工作目錄:");
-Console.WriteLine(Directory.GetCurrentDirectory());
-
-//桌面路徑
-string directory = System.Environment.GetFolderPath(System.Environment.SpecialFolder.DesktopDirectory);
-*/
-
-

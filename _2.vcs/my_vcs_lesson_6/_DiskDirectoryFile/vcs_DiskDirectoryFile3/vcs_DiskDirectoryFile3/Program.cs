@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs__Mix00
+namespace vcs_DiskDirectoryFile3
 {
     static class Program
     {

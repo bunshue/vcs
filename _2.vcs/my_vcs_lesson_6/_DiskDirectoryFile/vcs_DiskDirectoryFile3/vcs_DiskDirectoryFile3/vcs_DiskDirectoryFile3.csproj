@@ -8,8 +8,8 @@
     <ProjectGuid>{EFFFF04A-47BB-45A6-99C4-714F252A757F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs__Mix00</RootNamespace>
-    <AssemblyName>vcs__Mix00</AssemblyName>
+    <RootNamespace>vcs_DiskDirectoryFile3</RootNamespace>
+    <AssemblyName>vcs_DiskDirectoryFile3</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

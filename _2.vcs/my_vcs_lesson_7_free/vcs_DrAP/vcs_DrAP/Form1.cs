@@ -3445,10 +3445,13 @@ namespace vcs_DrAP
             }
         }
 
-        private void bt_open_with_vcs_Click(object sender, EventArgs e)
+        //6060
+
+       private void bt_open_with_vcs_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "aaaaaaaabbbb 轉出一層\n";
-            return;
+            richTextBox1.Text += "用vcs開啟\n";
+
+            result_str = "";
 
             int cnt = listView1.SelectedItems.Count;
             if (cnt > 0)
@@ -3463,16 +3466,39 @@ namespace vcs_DrAP
                 string fullname = listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].SubItems[0].Text;
                 result_str += "全檔名:\t" + fullname + "\n";
 
-                /*
-                //C# 呼叫檔案總管開啟某個資料夾，並讓某個檔案或資料夾呈現反白的樣子
-                string file = @"C:\Windows\explorer.exe";
-                string argument = @"/select, " + foldername;
-                Process.Start(file, argument);
-                */
-                Process.Start(foldername);
+                richTextBox1.Text += result_str + "\n";
 
+                //撈出資料夾內特定類型的檔案
+                string searchDirectory = foldername;
+                string searchPattern = "*.csproj";
+
+                richTextBox1.Text += "撈出資料夾內特定類型的檔案\t單層\tPattern : " + searchPattern + "\n";
+
+                List<string> filenames = new List<string>();
+                string[] pattern_array = searchPattern.Split(';');
+
+                // Search.
+                System.IO.SearchOption search_option = System.IO.SearchOption.TopDirectoryOnly;
+                foreach (string pattern in pattern_array)
+                {
+                    foreach (string filename in Directory.GetFiles(searchDirectory, pattern, search_option))
+                    {
+                        if (!filenames.Contains(filename))
+                        {
+                            filenames.Add(filename);
+                        }
+                    }
+                }
+
+                foreach (string filename in filenames)
+                {
+                    richTextBox1.Text += "找到 : " + filename + "\n";
+                    Process.Start(filename);
+                }
             }
         }
+
+        //6060
 
         private void bt_clear3_Click(object sender, EventArgs e)
         {

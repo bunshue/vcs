@@ -10,10 +10,10 @@ using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
-using System.Diagnostics;   //for FileVersionInfo
+using System.Diagnostics;  // for FileVersionInfo
 using System.Runtime.InteropServices;
 
-namespace vcs__Mix00
+namespace vcs_DiskDirectoryFile3
 {
     public partial class Form1 : Form
     {
@@ -27,6 +27,8 @@ namespace vcs__Mix00
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            //------------------------------------------------------------  # 60個
 
             //string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
@@ -104,7 +106,7 @@ namespace vcs__Mix00
             groupBox1.Size = new Size(500, 170);
 
             this.Size = new Size(1500, 750);
-            this.Text = "vcs__Mix00";
+            this.Text = "vcs_DiskDirectoryFile3";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
@@ -115,6 +117,8 @@ namespace vcs__Mix00
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -143,14 +147,9 @@ namespace vcs__Mix00
             //取得資料夾路徑
             string foldername = full_filename.Substring(0, full_filename.LastIndexOf("\\") + 1);
             //取得檔案名稱
-            string short_filename =
-                full_filename.Substring(full_filename.LastIndexOf("\\") + 1,
-                full_filename.LastIndexOf(".") -
-                (full_filename.LastIndexOf("\\") + 1));
+            string short_filename = full_filename.Substring(full_filename.LastIndexOf("\\") + 1, full_filename.LastIndexOf(".") - (full_filename.LastIndexOf("\\") + 1));
             //取得副檔名
-            string ext_filename =
-                full_filename.Substring(full_filename.LastIndexOf(".") + 1,
-                full_filename.Length - full_filename.LastIndexOf(".") - 1);
+            string ext_filename = full_filename.Substring(full_filename.LastIndexOf(".") + 1, full_filename.Length - full_filename.LastIndexOf(".") - 1);
 
             richTextBox1.Text += "檔案完整路徑:\t" + full_filename + "\n";
             richTextBox1.Text += "資料夾路徑:\t" + foldername + "\n";
@@ -203,7 +202,7 @@ namespace vcs__Mix00
             }
             else
             {
-                StreamWriter Sw = File.CreateText(filename);
+                StreamWriter sw = File.CreateText(filename);
                 richTextBox1.Text += "新增檔案 完成\n";
             }
 
@@ -357,6 +356,8 @@ namespace vcs__Mix00
             copy_file(MODE2);
         }
 
+        //------------------------------------------------------------  # 60個
+
         [DllImport("kernel32.dll")]
         private static extern long GetVolumeInformation(
             string PathName,
@@ -380,11 +381,7 @@ namespace vcs__Mix00
             UInt32 file_system_flags = new UInt32();
             StringBuilder sb_file_system_name = new StringBuilder(256);
 
-            if (GetVolumeInformation(drive_letter, sb_volume_name,
-                (UInt32)sb_volume_name.Capacity, ref serial_number,
-                ref max_component_length, ref file_system_flags,
-                sb_file_system_name,
-                (UInt32)sb_file_system_name.Capacity) == 0)
+            if (GetVolumeInformation(drive_letter, sb_volume_name, (UInt32)sb_volume_name.Capacity, ref serial_number, ref max_component_length, ref file_system_flags, sb_file_system_name, (UInt32)sb_file_system_name.Capacity) == 0)
             {
                 richTextBox1.Text += "無法取得磁碟資訊\n";
             }
@@ -476,10 +473,11 @@ namespace vcs__Mix00
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button17_Click(object sender, EventArgs e)
         {
-            //拷貝檔案, 限定拷貝大小
-            //拷貝檔案, 每次拷貝1024拜
+            //拷貝檔案, 限定拷貝大小, 每次拷貝1024拜
 
             string filename1 = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
@@ -540,6 +538,8 @@ namespace vcs__Mix00
             richTextBox1.Text += "文件複製完成\n";
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button18_Click(object sender, EventArgs e)
         {
             //偵測原始檔案類型
@@ -567,10 +567,8 @@ namespace vcs__Mix00
                     return;
                 }
 
-
                 len = 10;
                 int[] data = new int[len];
-
                 string builtHex = string.Empty;
                 using (Stream S = File.OpenRead(openFileDialog1.FileName))
                 {
@@ -635,15 +633,10 @@ namespace vcs__Mix00
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

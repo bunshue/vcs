@@ -80,6 +80,12 @@ namespace vcs_Process8
 
         private void button0_Click(object sender, EventArgs e)
         {
+            /*
+            //C# 呼叫檔案總管開啟某個資料夾，並讓某個檔案或資料夾呈現反白的樣子
+            string file = @"C:\Windows\explorer.exe";
+            string argument = @"/select, " + foldername;
+            Process.Start(file, argument);
+            */
         }
 
         private void button1_Click(object sender, EventArgs e)

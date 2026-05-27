@@ -35,14 +35,12 @@ namespace vcs_MyCalculator
             dy = 60 + 10;
 
             textBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            groupBox_type1.Location = new Point(x_st + dx * 1, y_st + dy * 0-15);
-            label0.Location = new Point(x_st + dx * 1+100, y_st + dy * 0);
-            textBox1.Location = new Point(x_st + dx * 3-50, y_st + dy * 0);
+            groupBox_type1.Location = new Point(x_st + dx * 1, y_st + dy * 0 - 15);
+            label0.Location = new Point(x_st + dx * 1 + 100, y_st + dy * 0);
+            textBox1.Location = new Point(x_st + dx * 3 - 50, y_st + dy * 0);
             label1.Location = new Point(x_st + dx * 3 - 100, y_st + dy * 0);
             bt_calculate0.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            textBox2.Location = new Point(x_st + dx * 4+80, y_st + dy * 0);
-
-
+            textBox2.Location = new Point(x_st + dx * 4 + 80, y_st + dy * 0);
 
             richTextBox1.Size = new Size(500, 400);
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 4);
@@ -56,6 +54,8 @@ namespace vcs_MyCalculator
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         bool check_textbox_number(KeyPressEventArgs e)
         {
@@ -178,7 +178,20 @@ namespace vcs_MyCalculator
         {
             textBox1.SelectAll();
         }
-
-
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

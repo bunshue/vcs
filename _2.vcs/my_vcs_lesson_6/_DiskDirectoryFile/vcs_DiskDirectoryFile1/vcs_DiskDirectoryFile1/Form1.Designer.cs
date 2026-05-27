@@ -101,7 +101,7 @@
             // 
             // bt_file12
             // 
-            this.bt_file12.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_file12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_file12.Location = new System.Drawing.Point(13, 623);
             this.bt_file12.Name = "bt_file12";
             this.bt_file12.Size = new System.Drawing.Size(200, 50);
@@ -189,7 +189,7 @@
             // 
             // bt_file04
             // 
-            this.bt_file04.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_file04.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_file04.Location = new System.Drawing.Point(13, 229);
             this.bt_file04.Name = "bt_file04";
             this.bt_file04.Size = new System.Drawing.Size(200, 50);
@@ -200,7 +200,7 @@
             // 
             // bt_file03
             // 
-            this.bt_file03.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_file03.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_file03.Location = new System.Drawing.Point(13, 179);
             this.bt_file03.Name = "bt_file03";
             this.bt_file03.Size = new System.Drawing.Size(200, 50);
@@ -273,7 +273,7 @@
             // 
             // bt_dir08
             // 
-            this.bt_dir08.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_dir08.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_dir08.Location = new System.Drawing.Point(220, 427);
             this.bt_dir08.Name = "bt_dir08";
             this.bt_dir08.Size = new System.Drawing.Size(200, 50);
@@ -294,7 +294,7 @@
             // 
             // bt_dir01
             // 
-            this.bt_dir01.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_dir01.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_dir01.Location = new System.Drawing.Point(219, 80);
             this.bt_dir01.Name = "bt_dir01";
             this.bt_dir01.Size = new System.Drawing.Size(200, 50);
@@ -371,7 +371,7 @@
             // 
             // bt_files12
             // 
-            this.bt_files12.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_files12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_files12.Location = new System.Drawing.Point(425, 624);
             this.bt_files12.Name = "bt_files12";
             this.bt_files12.Size = new System.Drawing.Size(200, 50);
@@ -382,7 +382,7 @@
             // 
             // bt_files11
             // 
-            this.bt_files11.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_files11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_files11.Location = new System.Drawing.Point(425, 573);
             this.bt_files11.Name = "bt_files11";
             this.bt_files11.Size = new System.Drawing.Size(200, 50);
@@ -458,7 +458,7 @@
             // 
             // bt_files09
             // 
-            this.bt_files09.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_files09.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_files09.Location = new System.Drawing.Point(425, 476);
             this.bt_files09.Name = "bt_files09";
             this.bt_files09.Size = new System.Drawing.Size(200, 50);
@@ -480,7 +480,7 @@
             // 
             // bt_files08
             // 
-            this.bt_files08.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_files08.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_files08.Location = new System.Drawing.Point(425, 426);
             this.bt_files08.Name = "bt_files08";
             this.bt_files08.Size = new System.Drawing.Size(200, 50);
@@ -502,7 +502,7 @@
             // 
             // bt_files07
             // 
-            this.bt_files07.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_files07.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_files07.Location = new System.Drawing.Point(425, 377);
             this.bt_files07.Name = "bt_files07";
             this.bt_files07.Size = new System.Drawing.Size(200, 50);
@@ -514,11 +514,11 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(674, 47);
+            this.bt_clear.Location = new System.Drawing.Point(660, 40);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(60, 40);
+            this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 62;
-            this.bt_clear.Text = "clear";
+            this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 

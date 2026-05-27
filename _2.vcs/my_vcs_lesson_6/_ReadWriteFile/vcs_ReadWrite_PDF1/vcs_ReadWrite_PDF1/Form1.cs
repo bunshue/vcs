@@ -41,17 +41,11 @@ namespace vcs_ReadWrite_PDF1
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 200 + 5;
-            dy = 60 + 5;
-
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -62,7 +56,6 @@ namespace vcs_ReadWrite_PDF1
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -78,14 +71,15 @@ namespace vcs_ReadWrite_PDF1
             groupBox1.Size = new Size(200, 630);
             groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
-            //richTextBox1.Clear();
             richTextBox1.Size = new Size(600, 250);
-            richTextBox2.Size = new Size(600, 250);
-            webBrowser1.Size = new Size(600, 150);
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            richTextBox2.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            webBrowser1.Location = new Point(x_st + dx * 2, y_st + dy * 7 + 70);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            richTextBox2.Size = new Size(600, 250);
+            richTextBox2.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+
+            webBrowser1.Size = new Size(600, 150);
+            webBrowser1.Location = new Point(x_st + dx * 2, y_st + dy * 7 + 70);
 
             y_st = 20;
             dx = 200 + 5;
@@ -114,22 +108,21 @@ namespace vcs_ReadWrite_PDF1
             button29.Enabled = false;
             button30.Enabled = false;
 
-            this.Size = new Size(1080, 740);
+            this.Size = new Size(1080, 780);
+            this.Text = "vcs_ReadWrite_PDF1";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         void show_item_location2()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 200 + 5;
-            dy = 60 + 5;
-
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
             button0.Visible = false;
             button1.Visible = false;
             button2.Visible = false;
@@ -201,6 +194,8 @@ namespace vcs_ReadWrite_PDF1
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -722,3 +717,17 @@ namespace vcs_ReadWrite_PDF1
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

@@ -30,9 +30,12 @@ namespace vcs_DiskDirectoryFile1
         {
             //button
             int x_st = 10;
-            int y_st = 30;
+            int y_st = 10;
             int dx = 200 + 10;
-            int dy = 50 + 5;
+            int dy = 60 + 10;
+
+            y_st = 30;
+            dy = 50 + 5;
 
             label0.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 20);
             label1.Location = new Point(x_st + dx * 1, y_st + dy * 0 - 20);
@@ -81,10 +84,10 @@ namespace vcs_DiskDirectoryFile1
             bt_files12.Location = new Point(x_st + dx * 2, y_st + dy * 12);
 
             richTextBox1.Size = new Size(430, 710);
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + 0);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1100, 800);
+            this.Size = new Size(1400, 800);
             this.Text = "vcs_DiskDirectoryFile1";
 
             //設定執行後的表單起始位置, 正中央
@@ -96,6 +99,8 @@ namespace vcs_DiskDirectoryFile1
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         public bool DeleteDirectory(string target_dir)
         {
@@ -1286,14 +1291,10 @@ namespace vcs_DiskDirectoryFile1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
 
 
 /*  可搬出
