@@ -48,6 +48,7 @@ namespace vcs_ArrayList
 
         void show_item_location()
         {
+            //button
             int x_st = 10;
             int y_st = 10;
             int dx = 200 + 10;
@@ -577,10 +578,6 @@ namespace vcs_ArrayList
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

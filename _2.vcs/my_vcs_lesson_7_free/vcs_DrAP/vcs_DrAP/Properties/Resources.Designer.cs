@@ -203,6 +203,16 @@ namespace vcs_DrAP.Properties {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
+        internal static System.Drawing.Bitmap vcs2 {
+            get {
+                object obj = ResourceManager.GetObject("vcs2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
         internal static System.Drawing.Bitmap winmerge {
             get {
                 object obj = ResourceManager.GetObject("winmerge", resourceCulture);

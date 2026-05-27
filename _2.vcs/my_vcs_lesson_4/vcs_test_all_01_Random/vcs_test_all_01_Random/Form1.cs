@@ -29,6 +29,8 @@ namespace vcs_test_all_01_Random
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             //任意陣列
             // Initialize the array and list.
             ItemArray = new string[] { "Apple", "Banana", "Cherry", "Date", "Eagle", "Fish", "Golf", "Harp", "Ibex", "Jackel", "Kangaroo" };
@@ -154,6 +156,8 @@ namespace vcs_test_all_01_Random
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void bt_random0_Click(object sender, EventArgs e)
         {
@@ -1867,14 +1871,10 @@ namespace vcs_test_all_01_Random
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
 
 
 /*  可搬出

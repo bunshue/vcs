@@ -7,12 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_LINQ2
+namespace vcs_Process8
 {
     public partial class Form1 : Form
     {
-        //string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
-
         public Form1()
         {
             InitializeComponent();
@@ -61,31 +59,12 @@ namespace vcs_LINQ2
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            int dd = 26;
-            dataGridView1.Size = new Size(500, 380);
-            dataGridView2.Size = new Size(500, 380);
-            dataGridView3.Size = new Size(300, 380);
-            dataGridView4.Size = new Size(300, 380);
-
-            lb_dgv1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            dataGridView1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + dd);
-            lb_dgv2.Location = new Point(x_st + dx * 3, y_st + dy * 6);
-            dataGridView2.Location = new Point(x_st + dx * 3, y_st + dy * 6 + dd);
-            lb_dgv3.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 0);
-            dataGridView3.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 0 + dd);
-            lb_dgv4.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 6);
-            dataGridView4.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 6 + dd);
-            lb_dgv1.Text = "dataGridView1";
-            lb_dgv2.Text = "dataGridView2";
-            lb_dgv3.Text = "dataGridView3";
-            lb_dgv4.Text = "dataGridView4";
-
-            richTextBox1.Size = new Size(400, 820);
-            richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
+            richTextBox1.Size = new Size(400, 690);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1910, 890);
-            this.Text = "vcs_LINQ2";
+            this.Size = new Size(1070, 750);
+            this.Text = "vcs_Process8";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
@@ -95,44 +74,6 @@ namespace vcs_LINQ2
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        void sql_read_database(string db_filename, string sqlstr, DataGridView dgv)
-        {
-            string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
-
-            // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);
-
-            //讀取資料庫至DGV
-            try
-            {
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += ex.Message + "\n";
-            }
-        }
-
-        void sql_write_database(string db_filename, string sqlstr)
-        {
-            //依傳入的SQL陳述式對指定的資料表進行新增、修改、刪除 應該都只是操作 並不能取出資料
-
-            string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
-
-            // 連接字串
-            string cnstr = string.Format(db_cnstr, db_filename);
-
-            //對資料庫操作 增茶改山
-            try
-            {
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += ex.Message + "\n";
-            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -159,6 +100,7 @@ namespace vcs_LINQ2
 
         private void button5_Click(object sender, EventArgs e)
         {
+
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -227,7 +169,6 @@ namespace vcs_LINQ2
 
         private void button22_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -268,7 +209,50 @@ namespace vcs_LINQ2
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-
 /*  可搬出
 
- */
+*/
+
+/*
+C#調用默認浏覽器打開網頁的幾種方法
+
+方法一：從注冊表中讀取默認浏覽器可執行文件路徑
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //從注冊表中讀取默認浏覽器可執行文件路徑
+            RegistryKey key = Registry.ClassesRoot.OpenSubKey(@httpshellopencommand);
+            string s = key.GetValue().ToString();
+
+            //s就是你的默認浏覽器，不過後面帶了參數，把它截去，不過需要注意的是：不同的浏覽器後面的參數不一樣！
+            //D:Program Files (x86)GoogleChromeApplicationchrome.exe -- %1
+            System.Diagnostics.Process.Start(s.Substring(0, s.Length - 8), http://blog.csdn.net/testcs_dn);
+        }
+方法二：
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //調用系統默認的浏覽器 
+            System.Diagnostics.Process.Start(explorer.exe, http://blog.csdn.net/testcs_dn);
+        }
+方法三：
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //調用系統默認的浏覽器 
+            System.Diagnostics.Process.Start(http://blog.csdn.net/testcs_dn);
+        }
+
+方法四：調用IE浏覽器
+
+從原理上來講，方法二和方法三應該是一樣的，不過方法三的代碼更短一點。 
+
+//------------------------------------------------------------  # 60個
+
+//打开注册表
+string regeditstr = Environment.GetEnvironmentVariable("WinDir");//WinDir系统环境变量的名称
+Process.Start(regeditstr + "\\regedit.exe");//打开注册表
+
+//------------------------------------------------------------  # 60個
+
+
+*/
+

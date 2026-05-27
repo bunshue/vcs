@@ -13,8 +13,6 @@ namespace AccessGuideExcel
 {
     public partial class Form1 : Form
     {
-
-
         public Form1()
         {
             InitializeComponent();
@@ -99,3 +97,9 @@ namespace AccessGuideExcel
         }
     }
 }
+
+
+//------------------------------------------------------------  # 60個
+
+//------------------------------------------------------------  # 60個
+

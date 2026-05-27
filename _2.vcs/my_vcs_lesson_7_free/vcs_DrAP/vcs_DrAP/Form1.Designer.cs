@@ -101,6 +101,7 @@
             this.bt_start_files = new System.Windows.Forms.Button();
             this.bt_open_dir = new System.Windows.Forms.Button();
             this.bt_save_data = new System.Windows.Forms.Button();
+            this.bt_open_with_vcs = new System.Windows.Forms.Button();
             this.groupBox_video.SuspendLayout();
             this.groupBox_file.SuspendLayout();
             this.groupbox_python.SuspendLayout();
@@ -929,11 +930,24 @@
             this.bt_save_data.UseVisualStyleBackColor = true;
             this.bt_save_data.Click += new System.EventHandler(this.bt_save_data_Click);
             // 
+            // bt_open_with_vcs
+            // 
+            this.bt_open_with_vcs.BackgroundImage = global::vcs_DrAP.Properties.Resources.vcs2;
+            this.bt_open_with_vcs.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_open_with_vcs.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_open_with_vcs.Location = new System.Drawing.Point(1573, 63);
+            this.bt_open_with_vcs.Name = "bt_open_with_vcs";
+            this.bt_open_with_vcs.Size = new System.Drawing.Size(50, 50);
+            this.bt_open_with_vcs.TabIndex = 70;
+            this.bt_open_with_vcs.UseVisualStyleBackColor = true;
+            this.bt_open_with_vcs.Click += new System.EventHandler(this.bt_open_with_vcs_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1886, 1008);
+            this.Controls.Add(this.bt_open_with_vcs);
             this.Controls.Add(this.bt_replace);
             this.Controls.Add(this.bt_compare);
             this.Controls.Add(this.groupbox_result);
@@ -1081,6 +1095,7 @@
         private System.Windows.Forms.Label lb_search_result1;
         private System.Windows.Forms.Button bt_compare;
         private System.Windows.Forms.Button bt_replace;
+        private System.Windows.Forms.Button bt_open_with_vcs;
     }
 }
 

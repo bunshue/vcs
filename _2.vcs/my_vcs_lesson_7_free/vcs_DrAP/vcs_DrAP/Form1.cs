@@ -143,6 +143,8 @@ namespace vcs_DrAP
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             update_default_setting();
 
             //search_path = @"D:\vcs\astro\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
@@ -242,7 +244,6 @@ namespace vcs_DrAP
             x_st += bt_help.Size.Width + dx;
             bt_delete_file.Location = new Point(x_st - 8, y_st + dy * 0);
 
-
             x_st = 1000;
             y_st = 15;
 
@@ -273,6 +274,7 @@ namespace vcs_DrAP
             bt_search_pattern_vcs.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_search_pattern_cuda.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             bt_search_pattern_opengl.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            bt_open_with_vcs.Location = new Point(x_st + dx * -1, y_st + dy * 1);
 
             bt_open_dir2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             bt_save_file_data.Location = new Point(x_st + dx * 1, y_st + dy * 1);
@@ -410,6 +412,8 @@ namespace vcs_DrAP
             Properties.Settings.Default.search_path = save_path;
             Properties.Settings.Default.Save();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void bt_search_one_layer_files_Click(object sender, EventArgs e)
         {
@@ -3438,6 +3442,34 @@ namespace vcs_DrAP
                 Process.Start(file, argument);
                 */
                 Process.Start(foldername);
+            }
+        }
+
+        private void bt_open_with_vcs_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "aaaaaaaabbbb 轉出一層\n";
+            return;
+
+            int cnt = listView1.SelectedItems.Count;
+            if (cnt > 0)
+            {
+                int selNdx = listView1.SelectedIndices[0];
+
+                result_str += "aaaa b3你選擇了檔名3:\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
+
+                string foldername = listView1.Items[selNdx].SubItems[1].Text;
+                result_str += "資料夾:\t" + foldername + "\n";
+
+                string fullname = listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].SubItems[0].Text;
+                result_str += "全檔名:\t" + fullname + "\n";
+
+                /*
+                //C# 呼叫檔案總管開啟某個資料夾，並讓某個檔案或資料夾呈現反白的樣子
+                string file = @"C:\Windows\explorer.exe";
+                string argument = @"/select, " + foldername;
+                Process.Start(file, argument);
+                */
+                Process.Start(foldername);
 
             }
         }
@@ -3472,3 +3504,17 @@ namespace vcs_DrAP
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

@@ -53,6 +53,8 @@ namespace vcs_SqlConnection1
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             string pic_filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             pictureBox1.Image = Image.FromFile(pic_filename);
         }
@@ -156,6 +158,8 @@ namespace vcs_SqlConnection1
             lb_dgv3b.Text = "";
             lb_dgv4b.Text = "";
         }
+
+        //------------------------------------------------------------  # 60個
 
         void sql_read_database_dr(string db_filename, string sqlstr)
         {
@@ -302,6 +306,8 @@ namespace vcs_SqlConnection1
                 return obj;
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -739,7 +745,7 @@ namespace vcs_SqlConnection1
             sql_read_database(db_filename, sqlstr, dataGridView1);
             lb_dgv1.Text = "十二生肖全部資料";
 
-            richTextBox1.Text += "---------------\n";  // 15個
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             // 資料庫檔案
             db_filename = "animals3_db.mdf";
@@ -801,7 +807,7 @@ namespace vcs_SqlConnection1
                 richTextBox1.Text += "dddddddddd\n";
             }
 
-            richTextBox1.Text += "---------------\n";  // 15個
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             // 資料庫檔案
             db_filename = "animals3_db.mdf";
@@ -1108,7 +1114,7 @@ namespace vcs_SqlConnection1
 
                     while (dr.Read())  // 讀取一筆資料到dr
                     {
-                        richTextBox1.Text += "---------------\n";  // 15個
+                        richTextBox1.Text += "------------------------------\n";  // 30個
 
                         richTextBox1.Text += "欄數 dr.FieldCount = " + dr.FieldCount.ToString() + "\t欄位名稱 :\n";
                         for (int i = 0; i < dr.FieldCount; i++)
@@ -1131,7 +1137,7 @@ namespace vcs_SqlConnection1
                             }
                         }
                     }
-                    richTextBox1.Text += "---------------\n";  // 15個
+                    richTextBox1.Text += "------------------------------\n";  // 30個
                 }
             }
 
@@ -1312,7 +1318,7 @@ namespace vcs_SqlConnection1
             sql_read_database(db_filename, sqlstr, dataGridView3);
             lb_dgv1.Text = "全部資料 員工訊息";
 
-            richTextBox1.Text += "---------------\n";  // 15個
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             //向資料庫存入圖片
 
@@ -1373,7 +1379,7 @@ namespace vcs_SqlConnection1
                 lb_dgv2.Text = "全部資料 員工訊息, 添加資料後";
             }
 
-            richTextBox1.Text += "---------------\n";  // 15個
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             string str = "P1002";
             // 查詢字串
@@ -2510,15 +2516,10 @@ namespace vcs_SqlConnection1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//richTextBox1.Text += "---------------\n";  // 15個
-//---------------  # 15個
 
 
 /*  可搬出

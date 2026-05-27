@@ -39,7 +39,6 @@ namespace vcs_LINQ1
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -107,6 +106,8 @@ namespace vcs_LINQ1
             richTextBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         void sql_read_database(string db_filename, string sqlstr, DataGridView dgv)
         {
             string db_cnstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\{0};Integrated Security=True;Connect Timeout=30";
@@ -142,6 +143,8 @@ namespace vcs_LINQ1
                 richTextBox1.Text += ex.Message + "\n";
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -1125,16 +1128,12 @@ namespace vcs_LINQ1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-//1515
-//---------------  # 15個
-
-
 /*  可搬出
 
  */
+

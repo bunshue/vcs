@@ -6131,48 +6131,13 @@ public static string GetHtml(string URL)
 【戌時】黃昏，又名日夕、日暮、日晚等：此時太陽已經落山，天將黑未黑。天地昏黃，萬物朦胧 ，故稱黃昏。（19時至21時）。
 【亥時】人定，又名定昏等：此時夜色已深，人們也已經停止活動，安歇睡眠了。人定也就是人靜 。（21時至23時）。
 
-
 開關檔案 使用指定的編碼
 StreamWriter outStream = new StreamWriter(filepath, false, Encoding.GetEncoding(950));
 using (StreamReader sr = new StreamReader(filepath, Encoding.GetEncoding(936)))
 
 用C＃實現在客戶區拖動窗體
 
-C#調用默認浏覽器打開網頁的幾種方法
-
 //------------------------------------------------------------  # 60個
-
-方法一：從注冊表中讀取默認浏覽器可執行文件路徑
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //從注冊表中讀取默認浏覽器可執行文件路徑
-            RegistryKey key = Registry.ClassesRoot.OpenSubKey(@httpshellopencommand);
-            string s = key.GetValue().ToString();
-
-            //s就是你的默認浏覽器，不過後面帶了參數，把它截去，不過需要注意的是：不同的浏覽器後面的參數不一樣！
-            //D:Program Files (x86)GoogleChromeApplicationchrome.exe -- %1
-            System.Diagnostics.Process.Start(s.Substring(0, s.Length - 8), http://blog.csdn.net/testcs_dn);
-        }
-方法二：
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //調用系統默認的浏覽器 
-            System.Diagnostics.Process.Start(explorer.exe, http://blog.csdn.net/testcs_dn);
-        }
-方法三：
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //調用系統默認的浏覽器 
-            System.Diagnostics.Process.Start(http://blog.csdn.net/testcs_dn);
-        }
-
-方法四：調用IE浏覽器
-
-
-從原理上來講，方法二和方法三應該是一樣的，不過方法三的代碼更短一點。 
-
-命令行msinfo32
 
 三、添加office相關引用
 Microsoft.Office.Interop.Word 12.0.0.0
@@ -6415,10 +6380,6 @@ Console.WriteLine(text);
 FileInfo fileinfo = new FileInfo("dark.jpg");
 Console.WriteLine(fileinfo.Length);
 FileInfo 類提供了用於在 C# 中建立，開啟，複製，刪除和移動檔案的方法。
-
-//打开注册表
-string regeditstr = Environment.GetEnvironmentVariable("WinDir");//WinDir系统环境变量的名称
-Process.Start(regeditstr + "\\regedit.exe");//打开注册表
 
 //------------------------------------------------------------  # 60個
 
@@ -11136,11 +11097,11 @@ this.Cursor = Cursors.WaitCursor;
 
 
 做了甚麼事後 要Refresh 這樣才能看得到
-            this.Cursor = Cursors.WaitCursor;
-            this.Refresh();
+this.Cursor = Cursors.WaitCursor;
+this.Refresh();
 
-                    txtProcessing.Text = file_info.Name;
-                    txtProcessing.Refresh();
+txtProcessing.Text = file_info.Name;
+txtProcessing.Refresh();
 
 this.Invalidate(); // 要求表單重畫
 

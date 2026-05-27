@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B9ED0697-3358-4F46-8677-981F2918029A}</ProjectGuid>
+    <ProjectGuid>{0631D702-EC3B-432A-B439-CBD735957F0E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_DrAP</RootNamespace>
-    <AssemblyName>vcs_DrAP</AssemblyName>
+    <RootNamespace>vcs_Process8</RootNamespace>
+    <AssemblyName>vcs_Process8</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -33,13 +33,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MediaInfoNET">
-      <HintPath>.\MediaInfoNET.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -58,29 +52,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Replace.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_Replace.Designer.cs">
-      <DependentUpon>Form_Replace.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form_Setup.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_Setup.Designer.cs">
-      <DependentUpon>Form_Setup.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_Replace.resx">
-      <DependentUpon>Form_Replace.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_Setup.resx">
-      <DependentUpon>Form_Setup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -92,7 +68,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -102,43 +77,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\open_folder.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\save_file.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\potplayer.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\delete.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\power.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\vcs.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\A.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="icon.ico" />
-    <None Include="img\setup.png" />
-    <None Include="img\clipboard.png" />
-    <None Include="img\cuda.png" />
-    <None Include="img\opengl.bmp" />
-    <None Include="img\python2.png" />
-    <None Include="img\winmerge.png" />
-    <Content Include="img\vcs2.png" />
-    <Content Include="MediaInfo.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="img\matlab.png" />
-    <None Include="img\ultraedit.jpg" />
-    <None Include="img\python.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

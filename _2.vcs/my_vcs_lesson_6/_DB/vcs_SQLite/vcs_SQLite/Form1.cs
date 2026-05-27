@@ -30,6 +30,8 @@ namespace vcs_SQLite
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             richTextBox1.Text += "path : " + path + "\n";
             richTextBox1.Text += "cs : " + cs + "\n";
 
@@ -44,7 +46,6 @@ namespace vcs_SQLite
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -68,6 +69,8 @@ namespace vcs_SQLite
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void data_show()
         {
@@ -106,6 +109,8 @@ namespace vcs_SQLite
                 return;
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -197,3 +202,19 @@ namespace vcs_SQLite
         }
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+
+/*  可搬出
+
+ */
+
+
