@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
-using System.Security.Cryptography;  // for RijndaelManaged
+using System.Security.Cryptography;  // for RijndaelManaged, RNGCryptoServiceProvider
 
 //文件校驗工具的開發及問題，校驗工具開發
 
@@ -42,18 +42,17 @@ namespace vcs_Cryptography4
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             groupBox1.Size = new Size(1100, 180);
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox6.Size = new Size(1100, 300);
-            groupBox6.Location = new Point(x_st + dx * 0, y_st + dy * 3-30);
+            groupBox6.Location = new Point(x_st + dx * 0, y_st + dy * 3 - 30);
             groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            groupBox3.Location = new Point(x_st + dx * 0, y_st + dy * 9+30);
-            groupBox4.Location = new Point(x_st + dx * 1+80, y_st + dy * 7);
-            groupBox5.Location = new Point(x_st + dx * 2+70, y_st + dy * 7);
+            groupBox3.Location = new Point(x_st + dx * 0, y_st + dy * 9 + 30);
+            groupBox4.Location = new Point(x_st + dx * 1 + 80, y_st + dy * 7);
+            groupBox5.Location = new Point(x_st + dx * 2 + 70, y_st + dy * 7);
 
             richTextBox1.Size = new Size(400, 600);
-            richTextBox1.Location = new Point(x_st + dx * 5+100, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             x_st = 20;
@@ -66,8 +65,8 @@ namespace vcs_Cryptography4
             richTextBox_rot13a.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             richTextBox_rot13b.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             richTextBox_rot13c.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 2-50, y_st + dy * 1 + 60);
-            button2.Location = new Point(x_st + dx * 4-50, y_st + dy * 1 + 60);
+            button1.Location = new Point(x_st + dx * 2 - 50, y_st + dy * 1 + 60);
+            button2.Location = new Point(x_st + dx * 4 - 50, y_st + dy * 1 + 60);
             button1.BringToFront();
             button2.BringToFront();
 
@@ -83,6 +82,8 @@ namespace vcs_Cryptography4
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         public string ROT13Encode(string InputText)
         {
@@ -196,7 +197,6 @@ namespace vcs_Cryptography4
             {
                 data[i] ^= key[i % key.Length];
             }
-
             return data;
         }
 
@@ -208,7 +208,6 @@ namespace vcs_Cryptography4
             {
                 data[i] ^= key[i % key.Length];
             }
-
             return new string(data);
         }
 
@@ -254,7 +253,6 @@ namespace vcs_Cryptography4
                 fsOut.Close();
 
                 richTextBox1.Text += "加密完成\n";
-
             }
             catch (Exception ee)
             {
@@ -347,8 +345,6 @@ namespace vcs_Cryptography4
             //發送數據
             //serial.Write(bytSendData, 0, 5);
 
-
-
             //byte bytRtuDataFlag = 0;
             //byte bytRtuDataIdx;
             byte[] bytRtuData = new byte[8];
@@ -368,24 +364,15 @@ namespace vcs_Cryptography4
 
             richTextBox1.Text += result + "\n";
 
-
-            //bytSendData[3 + lngDataNum * 2] = (byte)(intCRC16 & 0xFF);                    //CRC校驗低位
-            //bytSendData[4 + lngDataNum * 2] = (byte)((intCRC16 >> 8) & 0xff);             //CRC校驗高位                  
-
+            //bytSendData[3 + lngDataNum * 2] = (byte)(intCRC16 & 0xFF);  // CRC校驗低位
+            //bytSendData[4 + lngDataNum * 2] = (byte)((intCRC16 >> 8) & 0xff);  // CRC校驗高位
 
             //intCRC16 = GetCheckCode(bytSendData, 3);
-            //bytSendData[3] = (byte)(intCRC16 & 0xFF); &nbsp;               //CRC校驗低位
-            //bytSendData[4] = (byte)((intCRC16 >> 8) & 0xff);                //CRC校驗高位
+            //bytSendData[3] = (byte)(intCRC16 & 0xFF); &nbsp;  // CRC校驗低位
+            //bytSendData[4] = (byte)((intCRC16 >> 8) & 0xff);  // CRC校驗高位
 
-
-
-            //CRC16校驗檢驗
+            // CRC16校驗檢驗
             //if (bytRtuData[8 - 2] == (intCRC16 & 0xFF) && bytRtuData[8 - 1] == ((intCRC16 >> 8) & 0xff))
-
-
-
-
-
         }
 
         //CRC16校驗
@@ -404,7 +391,9 @@ namespace vcs_Cryptography4
                         crc ^= 0xA001;
                     }
                     else
+                    {
                         crc >>= 1;
+                    }
                 }
             }
             return crc;
@@ -537,7 +526,6 @@ namespace vcs_Cryptography4
             result2 = ciphertext.Decrypt(password);
             richTextBox1.Text += "編碼經使用密碼解密後 : \t" + result2 + "\n";
             tb_decrypted.Text = result2;
-
         }
 
         // Encrypt the text.
@@ -572,7 +560,6 @@ namespace DESFile
     public class DESFileClass
     {
         private const ulong FC_TAG = 0xFC010203040506CF;
-
         private const int BUFFER_SIZE = 128 * 1024;
 
         /// <summary>
@@ -588,7 +575,9 @@ namespace DESFile
                 for (int i = 0; i < b1.Length; ++i)
                 {
                     if (b1[i] != b2[i])
+                    {
                         return false;
+                    }
                 }
                 return true;
             }
@@ -717,7 +706,9 @@ namespace DESFile
                     lSize = br.ReadInt64();
                     ulong tag = br.ReadUInt64();
                     if (FC_TAG != tag)
+                    {
                         throw new CryptoHelpException("文件被破壞");
+                    }
                     long numReads = lSize / BUFFER_SIZE;
                     long slack = (long)lSize % BUFFER_SIZE;
                     for (int i = 0; i < numReads; ++i)
@@ -761,17 +752,49 @@ namespace DESFile
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 
 */
+
+
+/*
+            //創建唯一的檔案名, 考慮時間因素
+            for (int i = 0; i < 10; i++)
+            {
+                string filename = string.Format("{0}{1}", DateTime.Now.ToString("yyyyMMddHHmmss"), GetUniqueKey());
+                richTextBox1.Text += filename + "\n";
+            }
+
+        //使用RNGCryptoServiceProvider類創建唯一的最多8位數字符串。
+        private static string GetUniqueKey()
+        {
+            int maxSize = 8;
+            //int minSize = 5;
+            char[] chars = new char[62];
+            string a;
+            a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            chars = a.ToCharArray();
+            int size = maxSize;
+            byte[] data = new byte[1];
+            RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider();
+            crypto.GetNonZeroBytes(data);
+            size = maxSize;
+            data = new byte[size];
+            crypto.GetNonZeroBytes(data);
+            StringBuilder result = new StringBuilder(size);
+            foreach (byte b in data)
+            {
+                result.Append(chars[b % (chars.Length - 1)]);
+            }
+            return result.ToString();
+        }
+//------------------------------------------------------------  # 60個
+*/
+
 

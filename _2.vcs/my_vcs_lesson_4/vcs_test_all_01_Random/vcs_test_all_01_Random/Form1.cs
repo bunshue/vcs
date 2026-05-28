@@ -48,12 +48,13 @@ namespace vcs_test_all_01_Random
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
-            groupBox1.Size = new Size(430, 710);
+            groupBox1.Size = new Size(410, 720);
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            groupBox4.Location = new Point(x_st + dx * 2 + 30, y_st + dy * 0);
-            groupBox3.Location = new Point(x_st + dx * 2 + 30, y_st + dy * 3);
+            groupBox4.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            groupBox3.Location = new Point(x_st + dx * 2, y_st + dy * 3);
 
+            dx = 190 + 10;
+            y_st = 20;
             bt_random0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_random1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             bt_random2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -76,7 +77,7 @@ namespace vcs_test_all_01_Random
             bt_random18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             bt_random19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            richTextBox1.Size = new Size(450, 900);
+            richTextBox1.Size = new Size(450, 860);
             richTextBox1.Location = new Point(x_st + dx * 5 + 50, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -97,7 +98,7 @@ namespace vcs_test_all_01_Random
 
             int w = 280;
             int h = 50;
-            x_st = 500;
+            x_st = 430;
             y_st = 430;
             dx = w + 10;
             dy = 46;
@@ -144,7 +145,7 @@ namespace vcs_test_all_01_Random
             tb_random_text18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             tb_random_text19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            this.Size = new Size(1590, 960);
+            this.Size = new Size(1540, 930);
             this.Text = "vcs_test_all_01_Random";
 
             //設定執行後的表單起始位置, 正中央

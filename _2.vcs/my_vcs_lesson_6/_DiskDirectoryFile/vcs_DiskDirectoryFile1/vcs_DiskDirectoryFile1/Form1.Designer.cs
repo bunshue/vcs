@@ -95,7 +95,6 @@
             this.bt_file00.Name = "bt_file00";
             this.bt_file00.Size = new System.Drawing.Size(200, 50);
             this.bt_file00.TabIndex = 60;
-            this.bt_file00.Text = "確認檔案是否存在";
             this.bt_file00.UseVisualStyleBackColor = true;
             this.bt_file00.Click += new System.EventHandler(this.bt_file00_Click);
             // 
@@ -117,7 +116,6 @@
             this.bt_file11.Name = "bt_file11";
             this.bt_file11.Size = new System.Drawing.Size(200, 50);
             this.bt_file11.TabIndex = 58;
-            this.bt_file11.Text = "建立臨時檔案";
             this.bt_file11.UseVisualStyleBackColor = true;
             this.bt_file11.Click += new System.EventHandler(this.bt_file11_Click);
             // 
@@ -128,7 +126,6 @@
             this.bt_file01.Name = "bt_file01";
             this.bt_file01.Size = new System.Drawing.Size(200, 50);
             this.bt_file01.TabIndex = 9;
-            this.bt_file01.Text = "建立檔案";
             this.bt_file01.UseVisualStyleBackColor = true;
             this.bt_file01.Click += new System.EventHandler(this.bt_file01_Click);
             // 
@@ -139,7 +136,7 @@
             this.bt_file06.Name = "bt_file06";
             this.bt_file06.Size = new System.Drawing.Size(200, 50);
             this.bt_file06.TabIndex = 6;
-            this.bt_file06.Text = "取得檔案資訊1";
+            this.bt_file06.Text = "Path";
             this.bt_file06.UseVisualStyleBackColor = true;
             this.bt_file06.Click += new System.EventHandler(this.bt_file06_Click);
             // 
@@ -150,7 +147,6 @@
             this.bt_file07.Name = "bt_file07";
             this.bt_file07.Size = new System.Drawing.Size(200, 50);
             this.bt_file07.TabIndex = 57;
-            this.bt_file07.Text = "取得檔案資訊2";
             this.bt_file07.UseVisualStyleBackColor = true;
             this.bt_file07.Click += new System.EventHandler(this.bt_file07_Click);
             // 
@@ -172,7 +168,7 @@
             this.bt_file09.Name = "bt_file09";
             this.bt_file09.Size = new System.Drawing.Size(200, 50);
             this.bt_file09.TabIndex = 53;
-            this.bt_file09.Text = "取得檔名與副檔名2";
+            this.bt_file09.Text = "取得檔名與副檔名";
             this.bt_file09.UseVisualStyleBackColor = true;
             this.bt_file09.Click += new System.EventHandler(this.bt_file09_Click);
             // 
@@ -183,7 +179,6 @@
             this.bt_file02.Name = "bt_file02";
             this.bt_file02.Size = new System.Drawing.Size(200, 50);
             this.bt_file02.TabIndex = 10;
-            this.bt_file02.Text = "拷貝檔案";
             this.bt_file02.UseVisualStyleBackColor = true;
             this.bt_file02.Click += new System.EventHandler(this.bt_file02_Click);
             // 
@@ -216,7 +211,6 @@
             this.bt_file08.Name = "bt_file08";
             this.bt_file08.Size = new System.Drawing.Size(200, 50);
             this.bt_file08.TabIndex = 20;
-            this.bt_file08.Text = "取得檔名與副檔名1";
             this.bt_file08.UseVisualStyleBackColor = true;
             this.bt_file08.Click += new System.EventHandler(this.bt_file08_Click);
             // 
@@ -227,7 +221,7 @@
             this.bt_file05.Name = "bt_file05";
             this.bt_file05.Size = new System.Drawing.Size(200, 50);
             this.bt_file05.TabIndex = 45;
-            this.bt_file05.Text = "移動檔案";
+            this.bt_file05.Text = "檔案時間";
             this.bt_file05.UseVisualStyleBackColor = true;
             this.bt_file05.Click += new System.EventHandler(this.bt_file05_Click);
             // 
@@ -238,6 +232,7 @@
             this.bt_dir12.Name = "bt_dir12";
             this.bt_dir12.Size = new System.Drawing.Size(200, 50);
             this.bt_dir12.TabIndex = 50;
+            this.bt_dir12.Text = "File.Exists()";
             this.bt_dir12.UseVisualStyleBackColor = true;
             this.bt_dir12.Click += new System.EventHandler(this.bt_dir12_Click);
             // 

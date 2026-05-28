@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;    //for StreamReader, SearchOption
-using System.Security.Cryptography; //for RNGCryptoServiceProvider
 using System.Runtime.InteropServices;   //for DllImport, Marshal, StructLayout
 
 namespace vcs_DiskDirectoryFile2
@@ -552,38 +551,8 @@ namespace vcs_DiskDirectoryFile2
             */
         }
 
-        //使用RNGCryptoServiceProvider類創建唯一的最多8位數字符串。
-        private static string GetUniqueKey()
-        {
-            int maxSize = 8;
-            //int minSize = 5;
-            char[] chars = new char[62];
-            string a;
-            a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-            chars = a.ToCharArray();
-            int size = maxSize;
-            byte[] data = new byte[1];
-            RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider();
-            crypto.GetNonZeroBytes(data);
-            size = maxSize;
-            data = new byte[size];
-            crypto.GetNonZeroBytes(data);
-            StringBuilder result = new StringBuilder(size);
-            foreach (byte b in data)
-            {
-                result.Append(chars[b % (chars.Length - 1)]);
-            }
-            return result.ToString();
-        }
-
         private void button15_Click(object sender, EventArgs e)
         {
-            //創建唯一的檔案名, 考慮時間因素
-            for (int i = 0; i < 10; i++)
-            {
-                string filename = string.Format("{0}{1}", DateTime.Now.ToString("yyyyMMddHHmmss"), GetUniqueKey());
-                richTextBox1.Text += filename + "\n";
-            }
         }
 
         //根據文件頭判斷上傳的文件類型 ST

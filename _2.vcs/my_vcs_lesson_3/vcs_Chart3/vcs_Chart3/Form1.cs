@@ -912,3 +912,66 @@ chart放在
 //chart5.ChartAreas.Add("ChartArea1");  // 將圖表區1新增到圖表上
 //chart5.ChartAreas.Add("ChartArea1");  // 將圖表區1新增到圖表上
 
+
+
+/*
+        //定義Chart大小與外觀
+        private const int AXIS_X_MIN = 0;
+        private const int AXIS_X_MAX = 360;
+        private const int AXIS_Y_MIN = -200;
+        private const int AXIS_Y_MAX = 200;
+
+        void chart_init(Chart chart)
+        {
+            //清除圖表
+            chart.Series.Clear();
+            chart.Titles.Clear();
+
+            //設定Chart大小與外觀
+            //全圖
+            chart.Size = new Size(740, 370);  // 設定chart大小
+            chart.Titles.Add("三角函數");
+
+            //X軸
+            chart.ChartAreas[0].AxisX.Minimum = AXIS_X_MIN;        //設定X軸最小值
+            chart.ChartAreas[0].AxisX.Maximum = AXIS_X_MAX;        //設定X軸最大值
+            chart.ChartAreas[0].AxisX.Title = "X軸標題";              //設定X軸名稱
+            chart.ChartAreas[0].AxisX.TitleForeColor = Color.Blue; //設定X軸名稱的字體顏色
+            chart.ChartAreas[0].AxisX.Enabled = AxisEnabled.True;  //顯示 或 隱藏 X 軸標示
+            chart.ChartAreas[0].AxisX.MajorGrid.Enabled = true;    //顯示 或 隱藏 X 軸標線
+            chart.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Trebuchet MS", 15, FontStyle.Bold);   //設定X軸刻度的字型
+            chart.ChartAreas[0].AxisX.LabelStyle.Interval = 60;    //設置X軸刻度間隔的大小
+            chart.ChartAreas[0].AxisX.LabelStyle.IntervalType = DateTimeIntervalType.Number;//設置間隔大小的度量單位
+            chart.ChartAreas[0].AxisX.LineColor = Color.White;//設置X軸的線條顏色
+            chart.ChartAreas[0].AxisX.MajorGrid.Interval = 100;//設置主網格線與次要網格線的間隔
+            chart.ChartAreas[0].AxisX.MajorGrid.IntervalType = DateTimeIntervalType.Number;//設置主網格線與次網格線的間隔的度量單位
+            chart.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Snow;//設置網格線的顏色
+            chart.ChartAreas[0].AxisX.MajorTickMark.Interval = 20;//設置刻度線的間隔
+            chart.ChartAreas[0].AxisX.MajorTickMark.IntervalType = DateTimeIntervalType.Number;//設置刻度線的間隔的度量單位
+
+            //Y軸
+            chart.ChartAreas[0].AxisY.Minimum = AXIS_Y_MIN;        //設定Y軸最小值
+            chart.ChartAreas[0].AxisY.Maximum = AXIS_Y_MAX;        //設定Y軸最大值
+            chart.ChartAreas[0].AxisY.Title = "Y軸標題";              //設定Y軸名稱
+            chart.ChartAreas[0].AxisY.TitleForeColor = Color.Blue; //設定Y軸名稱的字體顏色
+            chart.ChartAreas[0].AxisY.Enabled = AxisEnabled.True;  //顯示 或 隱藏 Y 軸標示
+            chart.ChartAreas[0].AxisY.MajorGrid.Enabled = true;    //顯示 或 隱藏 Y 軸標線
+
+            chart.ChartAreas[0].AxisY.LabelStyle.Font = new Font("Trebuchet MS", 8.25F, FontStyle.Bold);//設置Y軸左側的提示信息的字體屬性
+            chart.ChartAreas[0].AxisY.LineColor = Color.DarkBlue;//設置軸的線條顏色
+            chart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.White;//設置網格線顏色
+
+            // 圖表樣式
+            chart.BackGradientStyle = GradientStyle.TopBottom;//指定圖表元素的漸變樣式(中心向外，從左到右，從上到下等等)
+            chart.BackSecondaryColor = Color.Yellow;//設置背景的輔助顏色
+            chart.BorderlineColor = Color.Yellow;//設置圖像邊框的顏色
+            chart.BorderlineDashStyle = ChartDashStyle.Solid;//設置圖像邊框線的樣式(實線、虛線、點線)
+            chart.BorderlineWidth = 2;//設置圖像的邊框寬度
+            chart.BorderSkin.SkinStyle = BorderSkinStyle.Emboss;//設置圖像的邊框外觀樣式
+            chart.BackColor = Color.Yellow;//設置圖表的背景顏色
+
+            chart.Titles[0].Font = new Font("標楷體", 20f);//设置图表标题字体样式和大小
+            chart.Legends["Legend1"].Docking = Docking.Right;  //設定圖標顯示停靠的位置
+        }
+
+*/

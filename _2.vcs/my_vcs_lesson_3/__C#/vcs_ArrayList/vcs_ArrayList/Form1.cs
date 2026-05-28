@@ -21,8 +21,8 @@ namespace vcs_ArrayList
 {
     public partial class Form1 : Form
     {
-        ArrayList ArrayListData = new ArrayList();
-        ArrayList pdf_filename_ArrayListData = new ArrayList();
+        ArrayList myArrayList1 = new ArrayList();
+        ArrayList myArrayList2 = new ArrayList();
 
         string current_directory_pdf = Directory.GetCurrentDirectory();
         string pdf_filename = string.Empty;
@@ -39,10 +39,10 @@ namespace vcs_ArrayList
 
             //------------------------------------------------------------  # 60個
 
-            label1.Text = "共有 " + ArrayListData.Count.ToString() + " 個項目";
+            label1.Text = "共有 " + myArrayList1.Count.ToString() + " 個項目";
 
             richTextBox1.Text += "讀出系統變數至ArrayList\n";
-            pdf_filename_ArrayListData = Properties.Settings.Default.pdf_filenames;
+            myArrayList2 = Properties.Settings.Default.pdf_filenames;
             //show_pdf_filename_ArrayListData(); NG
         }
 
@@ -53,9 +53,9 @@ namespace vcs_ArrayList
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            groupBox1.Size = new Size(350, 460);
+            groupBox1.Size = new Size(410, 460);
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            groupBox2.Size = new Size(350, 580);
+            groupBox2.Size = new Size(410, 580);
             groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             richTextBox1.Size = new Size(300, 690);
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
@@ -64,7 +64,7 @@ namespace vcs_ArrayList
             //groupbox 裡面
             x_st = 10;
             y_st = 20;
-            dx = 160 + 10;
+            dx = 190 + 10;
             dy = 60 + 10;
             bt_arrayList00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_arrayList01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -100,21 +100,21 @@ namespace vcs_ArrayList
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ArrayListData.Add(textBox1.Text);
-            label1.Text = "共有 " + ArrayListData.Count.ToString() + " 個項目";
+            myArrayList1.Add(textBox1.Text);
+            label1.Text = "共有 " + myArrayList1.Count.ToString() + " 個項目";
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             int i;
             /*
-            for (i = 0; i < ArrayListData.Count; i++)
+            for (i = 0; i < myArrayList1.Count; i++)
             {
-                richTextBox1.Text += (i+1).ToString() + " : " + ArrayListData[i] + "\n";
+                richTextBox1.Text += (i+1).ToString() + " : " + myArrayList1[i] + "\n";
             }
             */
             i = 0;
-            foreach (string str_name in ArrayListData)
+            foreach (string str_name in myArrayList1)
             {
                 i++;
                 richTextBox1.Text += i.ToString() + " : " + str_name + "\n";
@@ -127,27 +127,27 @@ namespace vcs_ArrayList
 
         private void button4_Click(object sender, EventArgs e)
         {
-            ArrayListData.Remove(textBox1.Text);
-            label1.Text = "共有 " + ArrayListData.Count.ToString() + " 個項目";
+            myArrayList1.Remove(textBox1.Text);
+            label1.Text = "共有 " + myArrayList1.Count.ToString() + " 個項目";
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             int item = int.Parse(textBox2.Text);
-            if ((item > 0) && (item <= ArrayListData.Count))
+            if ((item > 0) && (item <= myArrayList1.Count))
             {
-                ArrayListData.RemoveAt(item - 1);      //刪除特定項目
+                myArrayList1.RemoveAt(item - 1);      //刪除特定項目
             }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            ArrayListData.Sort();
+            myArrayList1.Sort();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            ArrayListData.Reverse();
+            myArrayList1.Reverse();
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -156,120 +156,36 @@ namespace vcs_ArrayList
             if (textBox3.Text == "")
                 return;
             tmp = textBox3.Text;  //取得所輸入的資料
-            if (ArrayListData.IndexOf(tmp) < 0)
+            if (myArrayList1.IndexOf(tmp) < 0)
             {
                 //若超過陣列索引值則表示找不到符合的資料
                 richTextBox1.Text += "找不到您所輸入的資料\n";
             }
             else
             {
-                richTextBox1.Text += "您所尋找的資料在第 " + (ArrayListData.IndexOf(tmp) + 1).ToString() + " 筆\n";
+                richTextBox1.Text += "您所尋找的資料在第 " + (myArrayList1.IndexOf(tmp) + 1).ToString() + " 筆\n";
             }
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            ArrayListData.Insert(3, "David"); //插入一個元素
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            //建立一個ArrayList
-
-            ArrayList list = new ArrayList();
-
-            list.Add("alive");
-            list.Add("silver");
-            list.Add("dog");
-            list.Add("Ftp");
-
-            //d.SetData("para", list);
-
-            //將制定的值賦值給應用程序域的屬性
-
-            //foreach (string s in (ArrayList)d.GetData("para"))
-            {// 獲取存在當前應用程序域中的值
-
-                //Console.WriteLine("you will see" + s);
-            }
-
-            //顯示在 listBox 上
-            listBox1.DataSource = list;
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-            //建立和初始化 ArrayList ，以及顯示其值
-
-            // Creates and initializes a new ArrayList.
-            ArrayList myAL = new ArrayList();
-            myAL.Add("Hello");
-            myAL.Add("World");
-            myAL.Add("!");
-
-            // Displays the properties and values of the ArrayList.
-            Console.WriteLine("myAL");
-            Console.WriteLine("    Count:    {0}", myAL.Count);
-            Console.WriteLine("    Capacity: {0}", myAL.Capacity);
-            Console.Write("    Values:");
-            PrintValues(myAL);
-
-            richTextBox1.Text += "顯示ArrayList的內容:\n";
-            richTextBox1.Text += "myAL\n";
-            richTextBox1.Text += "    Count:    " + myAL.Count.ToString() + "\n";
-            richTextBox1.Text += "    Capacity: " + myAL.Capacity.ToString() + "\n";
-            richTextBox1.Text += "    Values: ";
-
-            foreach (Object obj in myAL)
-            {
-                richTextBox1.Text += "   " + obj.ToString() + " ";
-            }
-            richTextBox1.Text += "\n";
-        }
-
-        public static void PrintValues(IEnumerable myList)
-        {
-            foreach (Object obj in myList)
-            {
-                Console.Write("   {0}", obj);
-            }
-            Console.WriteLine();
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-            //ArrayList 測試
-            ArrayList animal = new ArrayList();
-            string name_of_animal = string.Empty;
-            name_of_animal = "mouse";
-            animal.Add(name_of_animal);
-            name_of_animal = "ox";
-            animal.Add(name_of_animal);
-            name_of_animal = "tiger";
-            animal.Add(name_of_animal);
-            name_of_animal = "rabbit";
-            animal.Add(name_of_animal);
-
-            foreach (string temp in animal)
-            {
-                richTextBox1.Text += temp + "\n";
-            }
+            myArrayList1.Insert(3, "David"); //插入一個元素
         }
 
         void show_pdf_filename_ArrayListData()
         {
             richTextBox1.Text += "顯示ArrayList資料\n";
-            richTextBox1.Text += "共有 " + pdf_filename_ArrayListData.Count.ToString() + " 個項目\n";
+            richTextBox1.Text += "共有 " + myArrayList2.Count.ToString() + " 個項目\n";
 
             int i = 0;
             /*
-            for (i = 0; i < pdf_filename_ArrayListData.Count; i++)
+            for (i = 0; i < myArrayList2.Count; i++)
             {
-                richTextBox1.Text += (i+1).ToString() + " : " + pdf_filename_ArrayListData[i] + "\n";
+                richTextBox1.Text += (i+1).ToString() + " : " + myArrayList2[i] + "\n";
             }
             */
             i = 0;
-            foreach (string str_name in pdf_filename_ArrayListData)
+            foreach (string str_name in myArrayList2)
             {
                 i++;
                 richTextBox1.Text += i.ToString() + " : " + str_name + "\n";
@@ -281,7 +197,7 @@ namespace vcs_ArrayList
             new_data = "2024/1/27 上午 03:41:01";
 
             bool flag_file_exists = false;
-            foreach (string str_name in pdf_filename_ArrayListData)
+            foreach (string str_name in myArrayList2)
             {
                 if (new_data == str_name)
                 {
@@ -294,9 +210,9 @@ namespace vcs_ArrayList
                 richTextBox1.Text += "找到一樣的項目\n";
                 richTextBox1.Text += "將此項目刪除\n";
 
-                pdf_filename_ArrayListData.Remove(new_data);
+                myArrayList2.Remove(new_data);
 
-                pdf_filename_ArrayListData.Insert(0, new_data); //插入一個元素
+                myArrayList2.Insert(0, new_data); //插入一個元素
             }
         }
 
@@ -313,15 +229,15 @@ namespace vcs_ArrayList
         private void bt_arrayList02_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "加入一筆資料至ArrayList\n";
-            //pdf_filename_ArrayListData.Add(DateTime.Now.ToString());
-            pdf_filename_ArrayListData.Insert(0, DateTime.Now.ToString()); //插入一個元素
-            richTextBox1.Text += "目前ArrayList內共有 " + pdf_filename_ArrayListData.Count.ToString() + " 個項目\n";
+            //myArrayList2.Add(DateTime.Now.ToString());
+            myArrayList2.Insert(0, DateTime.Now.ToString()); //插入一個元素
+            richTextBox1.Text += "目前ArrayList內共有 " + myArrayList2.Count.ToString() + " 個項目\n";
         }
 
         private void bt_arrayList03_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "將ArrayList寫入系統變數\n";
-            Properties.Settings.Default.pdf_filenames = pdf_filename_ArrayListData;
+            Properties.Settings.Default.pdf_filenames = myArrayList2;
             Properties.Settings.Default.Save();
         }
 
@@ -337,7 +253,7 @@ namespace vcs_ArrayList
             //  string save_data_path = Properties.Settings.Default.save_data_path;
             //            richTextBox1.Text += Properties.Settings.Default.pdf_filenames + "\n";
 
-            pdf_filename_ArrayListData = Properties.Settings.Default.pdf_filenames;
+            myArrayList2 = Properties.Settings.Default.pdf_filenames;
 
             show_pdf_filename_ArrayListData();
         }
@@ -388,8 +304,8 @@ namespace vcs_ArrayList
                 richTextBox1.Text += "短檔名 : " + pdf_filename_short.ToString() + "\n";
 
                 richTextBox1.Text += "加入一筆資料至ArrayList\n";
-                pdf_filename_ArrayListData.Insert(0, pdf_filename); //插入一個元素
-                richTextBox1.Text += "目前ArrayList內共有 " + pdf_filename_ArrayListData.Count.ToString() + " 個項目\n";
+                myArrayList2.Insert(0, pdf_filename); //插入一個元素
+                richTextBox1.Text += "目前ArrayList內共有 " + myArrayList2.Count.ToString() + " 個項目\n";
             }
             else
             {
@@ -408,17 +324,17 @@ namespace vcs_ArrayList
         private void bt_arrayList08_Click(object sender, EventArgs e)
         {
             //ArrayList 1
-            ArrayList m = new ArrayList();   // 非泛型
+            ArrayList myArrayList = new ArrayList();   // 非泛型
 
-            //SortedList<string, Member> m = new SortedList<string, Member>();
+            //SortedList<string, Member> myArrayList = new SortedList<string, Member>();
 
-            m.Add(new Member() { Name = "David", Select = true, Score = 70 });
-            m.Add(new Member() { Name = "Mary", Select = false, Score = 65 });
-            m.Add(new Member() { Name = "Tom", Select = true, Score = 85 });
-            m.Add(new Member() { Name = "Jack", Select = true, Score = 95 });
+            myArrayList.Add(new Member() { Name = "David", Select = true, Score = 70 });
+            myArrayList.Add(new Member() { Name = "Mary", Select = false, Score = 65 });
+            myArrayList.Add(new Member() { Name = "Tom", Select = true, Score = 85 });
+            myArrayList.Add(new Member() { Name = "Jack", Select = true, Score = 95 });
 
             Console.WriteLine("=== 非泛型陣列操作需強制轉換 .... \n");
-            foreach (var item in m)
+            foreach (var item in myArrayList)
             {
                 if (item is Member)
                 {
@@ -449,58 +365,58 @@ namespace vcs_ArrayList
         {
             //ArrayList 2
 
-            ArrayList myAryLst = new ArrayList { "Jack", 20, true }; // 元素為不同資料型別  
+            ArrayList myArrayList = new ArrayList { "Jack", 20, true }; // 元素為不同資料型別  
             Console.WriteLine("1.設定 AryLst串列內初值 :");
-            PrintOut(myAryLst);
+            PrintOut(myArrayList);
             Console.WriteLine("---------------------------------------");
 
             //插入串列的最後面
             Console.WriteLine("2.插入 \"大學\" 到串列的最後面 :");
-            myAryLst.Add("大學");
-            PrintOut(myAryLst);
+            myArrayList.Add("大學");
+            PrintOut(myArrayList);
             Console.WriteLine("---------------------------------------");
 
             //多筆資料採陣列方式插入到串列最後面
             Console.WriteLine("3.插入\"台北\" , \"101\" 兩個元素到串列的最後面 :");
-            myAryLst.AddRange(new string[] { "台北", "101" });
-            PrintOut(myAryLst);
+            myArrayList.AddRange(new string[] { "台北", "101" });
+            PrintOut(myArrayList);
             Console.WriteLine("---------------------------------------");
 
             //插入到串列的第2個元素後面
             Console.WriteLine("4.插入\"Wu\" 到串列的第2個元素後面");
-            myAryLst.Insert(1, "Wu");
-            PrintOut(myAryLst);
+            myArrayList.Insert(1, "Wu");
+            PrintOut(myArrayList);
             Console.WriteLine("---------------------------------------");
 
             //刪除串列中 "Wu" 佇個元素
             Console.WriteLine("5.移除串列中元素為 Wu");
-            myAryLst.Remove("Wu");
-            PrintOut(myAryLst);
+            myArrayList.Remove("Wu");
+            PrintOut(myArrayList);
             Console.WriteLine("---------------------------------------");
 
             //移除串列中第3個元素
             Console.WriteLine("6.移除串列中第3個元素");
-            myAryLst.RemoveAt(2);
-            PrintOut(myAryLst);
+            myArrayList.RemoveAt(2);
+            PrintOut(myArrayList);
             Console.WriteLine("---------------------------------------");
 
             // 移除串列中從第3個元素開始共兩個元素
             Console.WriteLine("7.移除串列中從第3個元素開始共兩個元素");
-            myAryLst.RemoveRange(2, 2);
-            PrintOut(myAryLst);
+            myArrayList.RemoveRange(2, 2);
+            PrintOut(myArrayList);
             Console.WriteLine("---------------------------------------");
 
             // 移除串列中所有元素
             Console.WriteLine("8.移除串列中所有元素");
-            myAryLst.Clear();
-            Console.WriteLine("  目前 AryList 串列元素總個數 : ", myAryLst.Count);
+            myArrayList.Clear();
+            Console.WriteLine("  目前 AryList 串列元素總個數 : ", myArrayList.Count);
             Console.WriteLine("---------------------------------------");
         }
 
-        public static void PrintOut2(IEnumerable myAryLst)
+        public static void PrintOut2(IEnumerable myArrayList)
         {
             int i = 0;
-            foreach (Object obj in myAryLst)
+            foreach (Object obj in myArrayList)
             {
                 Console.WriteLine("\t第{0}個元素 : {1} ", ++i, obj);
             }
@@ -509,24 +425,24 @@ namespace vcs_ArrayList
         private void bt_arrayList10_Click(object sender, EventArgs e)
         {
             //ArrayList 3
-            ArrayList myAryLst = new ArrayList { "Jack", "Ford", "Bob", "David" };
+            ArrayList myArrayList = new ArrayList { "Jack", "Ford", "Bob", "David" };
 
             // 顯示ArrayList串列的初值內容(排序前）：
             Console.WriteLine(" 1. 顯示串列初值設定內容(排序前）:");
-            PrintOut2(myAryLst);
+            PrintOut2(myArrayList);
             Console.WriteLine(" ---------------------------------");
 
             // 顯示ArrayList串列排序後內容
-            myAryLst.Sort();
+            myArrayList.Sort();
 
-            Console.WriteLine(" 2.  myAryLst.Sort()由小而大做遞增排序 :");
-            PrintOut2(myAryLst);
+            Console.WriteLine(" 2.  myArrayList.Sort()由小而大做遞增排序 :");
+            PrintOut2(myArrayList);
             Console.WriteLine(" ----------------------------------");
 
             // 顯示ArrayList串列排序後內容
-            myAryLst.Reverse();
-            Console.WriteLine(" 3. myAryLst.Reverse()由大而小做遞減排序 :");
-            PrintOut2(myAryLst);
+            myArrayList.Reverse();
+            Console.WriteLine(" 3. myArrayList.Reverse()由大而小做遞減排序 :");
+            PrintOut2(myArrayList);
             Console.WriteLine(" ----------------------------------");
         }
 
@@ -534,17 +450,57 @@ namespace vcs_ArrayList
 
         private void bt_arrayList11_Click(object sender, EventArgs e)
         {
+            //ArrayList 4
+            richTextBox1.Text += "建立一個ArrayList\n";
 
+            ArrayList myArrayList = new ArrayList();
+
+            myArrayList.Add("alive");
+            myArrayList.Add("silver");
+            myArrayList.Add("dog");
+            myArrayList.Add("Ftp");
+
+            //顯示在 listBox 上
+            listBox1.DataSource = myArrayList;
         }
 
         private void bt_arrayList12_Click(object sender, EventArgs e)
         {
+            //ArrayList 5
+            richTextBox1.Text += "建立一個ArrayList\n";
 
+            ArrayList myArrayList = new ArrayList();
+
+            myArrayList.Add("Hello");
+            myArrayList.Add("World");
+            myArrayList.Add("!");
+
+            richTextBox1.Text += "顯示ArrayList的內容:\n";
+            richTextBox1.Text += "myArrayList\n";
+            richTextBox1.Text += "    Count:    " + myArrayList.Count.ToString() + "\n";
+            richTextBox1.Text += "    Capacity: " + myArrayList.Capacity.ToString() + "\n";
+
+            richTextBox1.Text += "內容 :\n";
+            foreach (Object obj in myArrayList)
+            {
+                richTextBox1.Text += obj.ToString() + "\n";
+            }
         }
 
         private void bt_arrayList13_Click(object sender, EventArgs e)
         {
+            //ArrayList 6
+            //ArrayList 測試
+            ArrayList myArrayList = new ArrayList();
+            myArrayList.Add("mouse");
+            myArrayList.Add("ox");
+            myArrayList.Add("tiger");
+            myArrayList.Add("rabbit");
 
+            foreach (string temp in myArrayList)
+            {
+                richTextBox1.Text += temp + "\n";
+            }
         }
 
         private void bt_arrayList14_Click(object sender, EventArgs e)

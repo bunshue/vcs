@@ -16,6 +16,11 @@ namespace vcs_GeneratePassword
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         // Required implies allowed.
         private void chkRequireLowercase_CheckedChanged(object sender, EventArgs e)
         {
@@ -124,25 +129,25 @@ namespace vcs_GeneratePassword
             string password = "";
             if (chkRequireLowercase.Checked &&
                 (password.IndexOfAny(LOWER.ToCharArray()) == -1))
-                    password += RandomChar(LOWER);
+                password += RandomChar(LOWER);
             if (chkRequireUppercase.Checked &&
                 (password.IndexOfAny(UPPER.ToCharArray()) == -1))
-                    password += RandomChar(UPPER);
+                password += RandomChar(UPPER);
             if (chkRequireNumber.Checked &&
                 (password.IndexOfAny(NUMBER.ToCharArray()) == -1))
-                    password += RandomChar(NUMBER);
+                password += RandomChar(NUMBER);
             if (chkRequireSpecial.Checked &&
                 (password.IndexOfAny(SPECIAL.ToCharArray()) == -1))
-                    password += RandomChar(SPECIAL);
+                password += RandomChar(SPECIAL);
             if (chkRequireUnderscore.Checked &&
                 (password.IndexOfAny("_".ToCharArray()) == -1))
-                    password += "_";
+                password += "_";
             if (chkRequireSpace.Checked &&
                 (password.IndexOfAny(" ".ToCharArray()) == -1))
-                    password += " ";
+                password += " ";
             if (chkRequireOther.Checked &&
                 (password.IndexOfAny(other.ToCharArray()) == -1))
-                    password += RandomChar(other);
+                password += RandomChar(other);
 
             // Add the remaining characters randomly.
             while (password.Length < num_chars)
@@ -175,3 +180,4 @@ namespace vcs_GeneratePassword
         }
     }
 }
+

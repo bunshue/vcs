@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;            //for DriveInfo
-using System.Globalization; //for CultureInfo
+using System.IO;  // for DriveInfo
+using System.Globalization;  // for CultureInfo
 
 namespace vcs_DriveInfo
 {
@@ -18,6 +18,43 @@ namespace vcs_DriveInfo
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
+            HDD_Scan();
+        }
+
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+
+            comboBox_drive.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            richTextBox1.Size = new Size(600, 400);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 36);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(660, 750);
+            this.Text = "vcs_test_all_00_Usually";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void HDD_Scan()
         {
@@ -42,7 +79,9 @@ namespace vcs_DriveInfo
                 comboBox_drive.Text = comboBox_drive.Items[0].ToString();
             */
             if (drives.Length > 0)
+            {
                 comboBox_drive.Text = drives[0].ToString();
+            }
 
             comboBox_drive.Items.Clear();
 
@@ -50,18 +89,15 @@ namespace vcs_DriveInfo
             //comboBox_drive.Text = comboBox_drive.Items[0].ToString();
 
             if (drives.Length > 0)
+            {
                 comboBox_drive.Text = drives[0].ToString();
+            }
 
             //same
             if (comboBox_drive.Items.Count > 0)
             {
                 comboBox_drive.Text = comboBox_drive.Items[0].ToString();
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            HDD_Scan();
         }
 
         const Int64 TB = (Int64)GB * 1024;//定義TB的計算常量
@@ -133,11 +169,6 @@ namespace vcs_DriveInfo
             {
                 richTextBox1.Text += "磁碟未Ready\n";
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -325,3 +356,16 @@ namespace vcs_DriveInfo
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+

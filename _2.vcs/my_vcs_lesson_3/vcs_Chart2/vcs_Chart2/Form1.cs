@@ -22,16 +22,16 @@ namespace vcs_Chart2
         int W = 720;
         int H = 400;
 
-        Series series00 = new Series();
-        Series series10 = new Series();
-
-        private int pointIndex1 = 0;
-        private int pointIndexA = 0;
-        private int pointIndexB = 0;
+        //兩種圖表比較
 
         Chart chart1 = new RealtimeChart().GetChart;
-        Chart chart_temperatureA = new RealtimeChart().GetChart;  // 溫度偵測圖表 comport
-        Chart chart_temperatureB = new RealtimeChart().GetChart;  // 溫度偵測圖表 demo
+        Series series00 = new Series();  // 一般chart
+        Series series10 = new Series();  // realtime-chart
+
+        //量測溫度 A:ims B:demo
+
+        private int pointIndexB = 0;
+        Chart chart_temperature = new RealtimeChart().GetChart;  // 溫度偵測圖表
 
         //------------------------------------------------------------  # 60個
 
@@ -62,31 +62,21 @@ namespace vcs_Chart2
 
             //------------------------------------------------------------  # 60個
 
-            draw_chart0();
+            draw_chart01();  // 一般chart 和 realtime-chart
 
-            draw_chart1();
+            this.Controls.Add(chart1);
+            chart1.Location = new Point(10, 10 + 400 + 10);
+            chart1.ChartAreas[0].AxisY.Maximum = 150D;
+            chart1.ChartAreas[0].AxisY.Minimum = -150D;
 
             //------------------------------------------------------------  # 60個
 
-            //開始
-            this.Controls.Add(chart1);
-            chart1.Location = new Point(10, 10 + 400 + 10);
-            chart1.ChartAreas[0].AxisY.Maximum = 5000D;
-            chart1.ChartAreas[0].AxisY.Minimum = 0D;
-
-            this.Controls.Add(chart_temperatureA);
-            chart_temperatureA.Location = new Point(10 + 720 + 10, 10);
-            chart_temperatureA.ChartAreas[0].AxisX.Title = "時間";
-            chart_temperatureA.ChartAreas[0].AxisY.Title = "溫度";
-            chart_temperatureA.ChartAreas[0].AxisY.Maximum = 80D;
-            chart_temperatureA.ChartAreas[0].AxisY.Minimum = 60D;
-
-            this.Controls.Add(chart_temperatureB);
-            chart_temperatureB.Location = new Point(10 + 720 + 10, 10 + 400 + 10);
-            chart_temperatureB.ChartAreas[0].AxisX.Title = "時間";
-            chart_temperatureB.ChartAreas[0].AxisY.Title = "溫度";
-            chart_temperatureB.ChartAreas[0].AxisY.Maximum = 80D;
-            chart_temperatureB.ChartAreas[0].AxisY.Minimum = 60D;
+            this.Controls.Add(chart_temperature);
+            chart_temperature.Location = new Point(10 + 720 + 10, 10);
+            chart_temperature.ChartAreas[0].AxisX.Title = "時間";
+            chart_temperature.ChartAreas[0].AxisY.Title = "溫度";
+            chart_temperature.ChartAreas[0].AxisY.Maximum = 80D;
+            chart_temperature.ChartAreas[0].AxisY.Minimum = 50D;
 
             //------------------------------------------------------------  # 60個
 
@@ -101,25 +91,25 @@ namespace vcs_Chart2
             int dy = H + 10;
             chart0.Size = new Size(W, H);
             chart0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            groupBoxA.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            groupBoxB.Location = new Point(x_st + dx * 2, y_st + dy * 1 - 30);
+            groupBox_temperature.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             richTextBox1.Size = new Size(W - 360, H - 100);
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 100);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            groupBoxA.Size = new Size(140, 230);
-            groupBoxB.Size = new Size(140, 120);
-            lb_temperatureA.Location = new Point(6, 20);
-            lb_temperatureB.Location = new Point(6, 20);
-            lb_temperatureA.Text = "";
-            lb_temperatureB.Text = "";
+            groupBox_temperature.Size = new Size(140, 280);
+            lb_temperature.Location = new Point(6, 20);
+            lb_temperature.Text = "";
             x_st = 10;
             y_st = 60;
             bt_temperature_on.Location = new Point(x_st + 0, y_st);
             bt_temperature_off.Location = new Point(x_st + 0, y_st + 45 + 10);
             bt_comport.Location = new Point(x_st + 0 + 10, y_st + 45 + 10 + 45 + 10);
             bt_comport_disconnect.Location = new Point(x_st + 45 + 10 + 10, y_st + 45 + 10 + 45 + 10);
-            bt_demo.Location = new Point(x_st + 0, y_st);
+            bt_demo.Location = new Point(x_st + 0, y_st + 45 + 10 + 45 + 10 + 45 + 10);
+
+            bt_temperature_on.Enabled = false;
+            bt_temperature_off.Enabled = false;
+            bt_comport_disconnect.Enabled = false;
 
             this.Size = new Size(1880, 870);
             this.Text = "vcs_Chart2";
@@ -136,27 +126,20 @@ namespace vcs_Chart2
 
         //------------------------------------------------------------  # 60個
 
-        void draw_chart0()
+        void draw_chart01()
         {
             //清除圖表
             chart0.Series.Clear();
             chart0.Titles.Clear();
 
-            //使用客製畫面
-            //chart_init(chart0);
-
             series00.ChartType = SeriesChartType.Point;  // 圖表種類 : 點狀圖
             chart0.Series.Add(series00);
-        }
 
-        void draw_chart1()
-        {
+            //3030
+
             //清除圖表
             chart1.Series.Clear();
             chart1.Titles.Clear();
-
-            //使用客製畫面
-            //chart_init(chart1);
 
             series10.ChartType = SeriesChartType.Point;  // 圖表種類 : 點狀圖
             chart1.Series.Add(series10);
@@ -257,124 +240,44 @@ namespace vcs_Chart2
             return Math.Cos(d * Math.PI / 180.0);
         }
 
-        //定義Chart大小與外觀
-        private const int AXIS_X_MIN = 0;
-        private const int AXIS_X_MAX = 360;
-        private const int AXIS_Y_MIN = -200;
-        private const int AXIS_Y_MAX = 200;
-
-        void chart_init(Chart chart)
-        {
-            //清除圖表
-            chart.Series.Clear();
-            chart.Titles.Clear();
-
-            //設定Chart大小與外觀
-            //全圖
-            chart.Size = new Size(740, 370);  // 設定chart大小
-            chart.Titles.Add("三角函數");
-
-            //X軸
-            chart.ChartAreas[0].AxisX.Minimum = AXIS_X_MIN;        //設定X軸最小值
-            chart.ChartAreas[0].AxisX.Maximum = AXIS_X_MAX;        //設定X軸最大值
-            chart.ChartAreas[0].AxisX.Title = "X軸標題";              //設定X軸名稱
-            chart.ChartAreas[0].AxisX.TitleForeColor = Color.Blue; //設定X軸名稱的字體顏色
-            chart.ChartAreas[0].AxisX.Enabled = AxisEnabled.True;  //顯示 或 隱藏 X 軸標示
-            chart.ChartAreas[0].AxisX.MajorGrid.Enabled = true;    //顯示 或 隱藏 X 軸標線
-            chart.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Trebuchet MS", 15, FontStyle.Bold);   //設定X軸刻度的字型
-            chart.ChartAreas[0].AxisX.LabelStyle.Interval = 60;    //設置X軸刻度間隔的大小
-            chart.ChartAreas[0].AxisX.LabelStyle.IntervalType = DateTimeIntervalType.Number;//設置間隔大小的度量單位
-            chart.ChartAreas[0].AxisX.LineColor = Color.White;//設置X軸的線條顏色
-            chart.ChartAreas[0].AxisX.MajorGrid.Interval = 100;//設置主網格線與次要網格線的間隔
-            chart.ChartAreas[0].AxisX.MajorGrid.IntervalType = DateTimeIntervalType.Number;//設置主網格線與次網格線的間隔的度量單位
-            chart.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Snow;//設置網格線的顏色
-            chart.ChartAreas[0].AxisX.MajorTickMark.Interval = 20;//設置刻度線的間隔
-            chart.ChartAreas[0].AxisX.MajorTickMark.IntervalType = DateTimeIntervalType.Number;//設置刻度線的間隔的度量單位
-
-            //Y軸
-            chart.ChartAreas[0].AxisY.Minimum = AXIS_Y_MIN;        //設定Y軸最小值
-            chart.ChartAreas[0].AxisY.Maximum = AXIS_Y_MAX;        //設定Y軸最大值
-            chart.ChartAreas[0].AxisY.Title = "Y軸標題";              //設定Y軸名稱
-            chart.ChartAreas[0].AxisY.TitleForeColor = Color.Blue; //設定Y軸名稱的字體顏色
-            chart.ChartAreas[0].AxisY.Enabled = AxisEnabled.True;  //顯示 或 隱藏 Y 軸標示
-            chart.ChartAreas[0].AxisY.MajorGrid.Enabled = true;    //顯示 或 隱藏 Y 軸標線
-
-            chart.ChartAreas[0].AxisY.LabelStyle.Font = new Font("Trebuchet MS", 8.25F, FontStyle.Bold);//設置Y軸左側的提示信息的字體屬性
-            chart.ChartAreas[0].AxisY.LineColor = Color.DarkBlue;//設置軸的線條顏色
-            chart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.White;//設置網格線顏色
-
-            // 圖表樣式
-            chart.BackGradientStyle = GradientStyle.TopBottom;//指定圖表元素的漸變樣式(中心向外，從左到右，從上到下等等)
-            chart.BackSecondaryColor = Color.Yellow;//設置背景的輔助顏色
-            chart.BorderlineColor = Color.Yellow;//設置圖像邊框的顏色
-            chart.BorderlineDashStyle = ChartDashStyle.Solid;//設置圖像邊框線的樣式(實線、虛線、點線)
-            chart.BorderlineWidth = 2;//設置圖像的邊框寬度
-            chart.BorderSkin.SkinStyle = BorderSkinStyle.Emboss;//設置圖像的邊框外觀樣式
-            chart.BackColor = Color.Yellow;//設置圖表的背景顏色
-
-            chart.Titles[0].Font = new Font("標楷體", 20f);//设置图表标题字体样式和大小
-            chart.Legends["Legend1"].Docking = Docking.Right;  //設定圖標顯示停靠的位置
-        }
-
         //------------------------------------------------------------  # 60個
 
-        double x0 = 0;
-        private const int POINTS_IN_AXIS0 = 36;      //製作動畫時X軸要保留的點數
+        double x = 0;
+        private const int POINTS_IN_AXIS = 36;      //製作動畫時X軸要保留的點數
         private void timer0_Tick(object sender, EventArgs e)
         {
-            double y0;
-            y0 = 110 * sind(x0);
+            double y;
+            y = 110 * sind(x);
 
-            series00.Points.AddXY(x0, y0);
+            series00.Points.AddXY(x, y);  // AddXY 二維加入chart0, 一般Chart
+            series10.Points.AddXY(x, y);  // AddXY 二維加入chart1, realtime_chart
 
-            if (series00.Points.Count > POINTS_IN_AXIS0)
+            if (series00.Points.Count > POINTS_IN_AXIS)
                 series00.Points.RemoveAt(0);
 
-            //製作動畫
+            richTextBox1.Text += series00.Points.Count.ToString() + " ";
+
+            //設定X軸邊界, 保存最新36點
             chart0.ChartAreas[0].AxisX.Minimum = series00.Points[0].XValue;
-            chart0.ChartAreas[0].AxisX.Maximum = x0;
+            chart0.ChartAreas[0].AxisX.Maximum = x;
 
-            x0 += 26;
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            // Define some variables
-            int numberOfPointsInChart = 15;
-            int numberOfPointsAfterRemoval = 15;
-
-            // Simulate adding new data points
-            int x = pointIndex1 + 1;
-            int y = (int)(2500 * Math.Sin(Math.PI * x * 40 / 180) + 2500);
-
-            chart1.Series[0].Points.AddXY(x, y);
-            ++pointIndex1;
 
             // Adjust Y & X axis scale
-            chart1.ResetAutoValues();
-            if (chart1.ChartAreas["Default"].AxisX.Maximum < pointIndex1)
-            {
-                chart1.ChartAreas["Default"].AxisX.Maximum = pointIndex1;
-            }
+            //chart1.ResetAutoValues(); 有沒有看起來一樣
 
-            // Keep a constant number of points by removing them from the left
-            while (chart1.Series[0].Points.Count > numberOfPointsInChart)
-            {
-                // Remove data points on the left side
-                while (chart1.Series[0].Points.Count > numberOfPointsAfterRemoval)
-                {
-                    chart1.Series[0].Points.RemoveAt(0);
-                }
+            if (series10.Points.Count > POINTS_IN_AXIS)
+                series10.Points.RemoveAt(0);
 
-                // Adjust X axis scale
-                chart1.ChartAreas["Default"].AxisX.Minimum = pointIndex1 - numberOfPointsAfterRemoval;
-                chart1.ChartAreas["Default"].AxisX.Maximum = chart1.ChartAreas["Default"].AxisX.Minimum + numberOfPointsInChart;
-            }
+            //richTextBox1.Text += series10.Points.Count.ToString() + " ";
 
-            // Redraw chart
-            chart1.Invalidate();
+            //設定X軸邊界, 保存最新36點
+            chart1.ChartAreas[0].AxisX.Minimum = series10.Points[0].XValue;
+            chart1.ChartAreas[0].AxisX.Maximum = x;
+            //設定X軸邊界, 保存最新36點
+            //chart1.ChartAreas[0].AxisX.Minimum = series10.Points[0].XValue;
+            //chart1.ChartAreas[0].AxisX.Maximum = x1;
+
+            x += 26;
         }
 
         //------------------------------------------------------------  # 60個
@@ -493,7 +396,7 @@ namespace vcs_Chart2
                 flag_show_cpu_temperatureA = true;
                 //溫度偵測 ON
                 Send_IMS_Data(0xFF, 0xCC, 0xFF, 0xAA);
-                lb_temperatureA.Text = "";
+                lb_temperature.Text = "";
             }
         }
 
@@ -504,7 +407,7 @@ namespace vcs_Chart2
                 flag_show_cpu_temperatureA = false;
                 //溫度偵測 OFF
                 Send_IMS_Data(0xFF, 0xCC, 0xFF, 0x55);
-                lb_temperatureA.Text = "";
+                lb_temperature.Text = "";
             }
         }
 
@@ -516,7 +419,7 @@ namespace vcs_Chart2
             //溫度偵測顯示
             int temperature_data = hh * 256 + ll;
 
-            draw_chart_temperature(chart_temperatureB, temperature_data);
+            draw_chart_temperature(chart_temperature, temperature_data);
             //richTextBox1.Text += hh.ToString() + " " + ll.ToString() + "\n";
         }
 
@@ -738,7 +641,7 @@ namespace vcs_Chart2
                             //溫度偵測顯示
                             int temperature_data = input[2] * 256 + input[3];
 
-                            draw_chart_temperature(chart_temperatureA, temperature_data);
+                            draw_chart_temperature(chart_temperature, temperature_data);
                             //richTextBox1.Text += ((int)input[2]).ToString() + " " + ((int)input[3]).ToString() + "\n";
                         }
                     }
@@ -783,6 +686,11 @@ namespace vcs_Chart2
 
                 //demo
                 timer_demo.Enabled = true;
+
+                bt_temperature_on.Enabled = false;
+                bt_temperature_off.Enabled = false;
+                bt_comport.Enabled = false;
+                bt_comport_disconnect.Enabled = false;
             }
             else
             {
@@ -791,8 +699,12 @@ namespace vcs_Chart2
 
                 //demo
                 timer_demo.Enabled = false;
+
+                bt_temperature_on.Enabled = true;
+                bt_temperature_off.Enabled = true;
+                bt_comport.Enabled = true;
+                bt_comport_disconnect.Enabled = true;
             }
-            lb_temperatureB.Text = "";
         }
 
         void draw_chart_temperature(Chart chart, int temperature_data)
@@ -801,22 +713,11 @@ namespace vcs_Chart2
             float temperature = ((((float)(temperature_data) / 65536.0f) / 0.00198421639f) - 273.15f);
             //richTextBox1.Text += temperature.ToString()+" C ";
 
-            if (chart == chart_temperatureA)
-            {
-                if (temperature > 70)
-                    lb_temperatureA.ForeColor = Color.Red;
-                else
-                    lb_temperatureA.ForeColor = Color.Blue;
-                lb_temperatureA.Text = temperature.ToString("#0.000") + " C";
-            }
+            if (temperature > 70)
+                lb_temperature.ForeColor = Color.Red;
             else
-            {
-                if (temperature > 70)
-                    lb_temperatureB.ForeColor = Color.Red;
-                else
-                    lb_temperatureB.ForeColor = Color.Blue;
-                lb_temperatureB.Text = temperature.ToString("#0.000") + " C";
-            }
+                lb_temperature.ForeColor = Color.Blue;
+            lb_temperature.Text = temperature.ToString("#0.000") + " C";
 
             /*
             #define XAdcPs_RawToTemperature(AdcData)				\
@@ -825,7 +726,7 @@ namespace vcs_Chart2
 
             //溫度偵測圖表
             // Define some variables
-            int numberOfPointsInChart = 15;
+            //int numberOfPointsInChart = 15;
             int numberOfPointsAfterRemoval = 15;
 
             // Simulate adding new data points
@@ -833,18 +734,18 @@ namespace vcs_Chart2
             //int y = (int)(2500 * Math.Sin(Math.PI * x * 40 / 180) + 2500);
             float y = temperature;
 
-            chart.Series[0].Points.AddXY(x, y);
+            chart.Series[0].Points.AddXY(x, y);  // AddXY 二維加入
             ++pointIndexB;
 
             // Adjust Y & X axis scale
             chart.ResetAutoValues();
-            if (chart.ChartAreas["Default"].AxisX.Maximum < pointIndexB)
+            if (chart.ChartAreas[0].AxisX.Maximum < pointIndexB)
             {
-                chart.ChartAreas["Default"].AxisX.Maximum = pointIndexB;
+                chart.ChartAreas[0].AxisX.Maximum = pointIndexB;
             }
 
             // Keep a constant number of points by removing them from the left
-            while (chart.Series[0].Points.Count > numberOfPointsInChart)
+            while (chart.Series[0].Points.Count > 15)
             {
                 // Remove data points on the left side
                 while (chart.Series[0].Points.Count > numberOfPointsAfterRemoval)
@@ -853,8 +754,8 @@ namespace vcs_Chart2
                 }
 
                 // Adjust X axis scale
-                chart.ChartAreas["Default"].AxisX.Minimum = pointIndexB - numberOfPointsAfterRemoval;
-                chart.ChartAreas["Default"].AxisX.Maximum = chart.ChartAreas["Default"].AxisX.Minimum + numberOfPointsInChart;
+                chart.ChartAreas[0].AxisX.Minimum = pointIndexB - numberOfPointsAfterRemoval;
+                chart.ChartAreas[0].AxisX.Maximum = chart.ChartAreas[0].AxisX.Minimum + 15;
             }
             chart.Invalidate();
         }
@@ -885,6 +786,11 @@ namespace vcs_Chart2
                     richTextBox1.Text += "已連上\n";
 
                     this.BackColor = SystemColors.ControlLight;
+                    bt_temperature_on.Enabled = true;
+                    bt_temperature_off.Enabled = true;
+                    bt_comport.Enabled = false;
+                    bt_comport_disconnect.Enabled = true;
+                    bt_demo.Enabled = false;
 
                     serialPort1.DtrEnable = true;   //白話地說就是通知儀器說我(電腦)這邊已經準備好了
                     //MessageBox.Show("已經連上" + serialPort1.PortName);
@@ -956,6 +862,12 @@ namespace vcs_Chart2
             flag_comport_ok = false;
             //show_main_message1("COM未連線", S_FALSE, 100);
             //toolTip1.SetToolTip(pictureBox_comport1b, "COM未連線");
+
+            bt_temperature_on.Enabled = false;
+            bt_temperature_off.Enabled = false;
+            bt_comport.Enabled = true;
+            bt_comport_disconnect.Enabled = false;
+            bt_demo.Enabled = true;
         }
 
         //------------------------------------------------------------  # 60個

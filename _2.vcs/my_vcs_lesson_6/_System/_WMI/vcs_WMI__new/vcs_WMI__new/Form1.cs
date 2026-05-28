@@ -295,6 +295,22 @@ namespace vcs_WMI__new
                 }
             }
 
+            //3030
+
+            /*
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+            foreach (ManagementObject myobject in searcher.Get())
+            {
+                lblCPU.Text = myobject["LoadPercentage"].ToString() + " %";
+                //label2.Text = lblCPU.Text;
+                label2.Text = "CPU使用率：" + lblCPU.Text;
+                mheight = Convert.ToInt32(myobject["LoadPercentage"].ToString());
+                if (mheight == 100)
+                    panel3.Height = 100;
+                CreateImage();
+            }
+            */
+
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             // 或透過 ManagementObject 類別直接存取特定 CPU 序號
@@ -396,6 +412,11 @@ namespace vcs_WMI__new
                 }
             }
 
+            /*
+//查詢語法 製造商不是Microsoft 且 MAC位址不為空
+mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((MACAddress Is Not NULL) AND (Manufacturer <> 'Microsoft'))");
+            */
+
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             richTextBox1.Text += "Win32_NetworkAdapterConfiguration 網絡適配器設置 獲取網卡MAC位址\n";
@@ -429,6 +450,7 @@ namespace vcs_WMI__new
         private void button5_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "Win32_VideoController 獲取顯示卡資訊\n";
+
             ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController");
             //ManagementObjectSearcher mos = new ManagementObjectSearcher(@"root\CIMV2", "SELECT * FROM Win32_VideoController");
             foreach (ManagementObject mo in mos.Get())
@@ -453,6 +475,39 @@ namespace vcs_WMI__new
                 richTextBox1.Text += "描述" + mo["Description"].ToString() + "\n";
             }
 
+            //3030
+
+            //取得顯示設備相關資訊
+            mos = new ManagementObjectSearcher("SELECT * FROM win32_VideoController");//聲明一個用于檢索設備管理信息的對象
+            foreach (ManagementObject mo in mos.Get())//循環遍歷WMI實例中的每一個對象
+            {
+                richTextBox1.Text += "顯示設備名稱 : " + mo["name"].ToString() + "\n";  //在文本框中顯示顯示設備的名稱
+                richTextBox1.Text += "PNPDeviceID : " + mo["PNPDeviceID"].ToString() + "\n"; //在文本框中顯示顯示設備的PNPDeviceID
+
+                richTextBox1.Text += "最大更新率 : " + mo["MaxRefreshRate"].ToString() + "\n"; //在當前文本框中顯示最大刷新率
+                richTextBox1.Text += "最小更新率 : " + mo["MinRefreshRate"].ToString() + "\n"; //在當前文本框中顯示最小刷新率
+                richTextBox1.Text += "目前更新率 : " + mo["CurrentRefreshRate"].ToString() + "\n"; //在當前文本框中顯示當前刷新率
+
+                richTextBox1.Text += "顯示模式 : " + mo["VideoModeDescription"].ToString() + "\n"; //在文本框中顯示設備的當前顯示模式
+            }
+
+            //3030
+
+            //取得計算機的顯示設備訊息
+            mos = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                richTextBox1.Text += "顯示設備訊息\n";
+                richTextBox1.Text += "顯示設備名稱：" + mo["Name"].ToString() + "\n";//顯示設備名稱
+                richTextBox1.Text += "顯示設備PNPDeviceID：" + mo["PNPDeviceID"].ToString() + "\n";//顯示設備的PNPDeviceID
+                richTextBox1.Text += "顯示設備驅動程序文件：" + mo["InstalledDisplayDrivers"].ToString() + "\n";//顯示設備的驅動程序文件
+                richTextBox1.Text += "顯示設備驅動版本號：" + mo["DriverVersion"].ToString() + "\n";//顯示設備的驅動版本號
+                richTextBox1.Text += "顯示設備的顯示處理器：" + mo["VideoProcessor"].ToString() + "\n";//顯示設備的顯示處理器
+                richTextBox1.Text += "顯示設備的最大更新率：" + mo["MaxRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
+                richTextBox1.Text += "顯示設備的最小更新率：" + mo["MinRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
+                richTextBox1.Text += "顯示設備目前顯示模式：" + mo["VideoModeDescription"].ToString() + "\n";//顯示設備目前顯示模式
+            }
+
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             richTextBox1.Text += "Win32_VideoSettings 顯卡支持的顯示模式\n";
@@ -474,13 +529,17 @@ namespace vcs_WMI__new
 
             richTextBox1.Text += "Win32_SoundDevice\n";
             richTextBox1.Text += "獲取音效卡資訊 PNPDeviceID\n";
-            mos = new ManagementObjectSearcher("SELECT * FROM Win32_SoundDevice");
-            foreach (ManagementObject mo in mos.Get())
+
+            //取得音效設備相關資訊
+            mos = new ManagementObjectSearcher("SELECT * FROM Win32_SoundDevice");//聲明一個用于檢索設備管理信息的對象
+            foreach (ManagementObject mo in mos.Get())//循環遍歷WMI實例中的每一個對象
             {
                 richTextBox1.Text += "------------------------------\n";  // 30個
-                richTextBox1.Text += "音效設備名稱：" + mo["ProductName"].ToString() + "\n"; //在当前文本框中显示声音设备的名称
-                richTextBox1.Text += "PNPDeviceID：" + mo["PNPDeviceID"].ToString() + "\n";//在当前文本框中显示声音设备的PNPDeviceID
+                richTextBox1.Text += "音效設備名稱 : " + mo["ProductName"].ToString() + "\n"; //在當前文本框中顯示聲音設備的名稱
+                richTextBox1.Text += "PNPDeviceID : " + mo["PNPDeviceID"].ToString() + "\n";//在當前文本框中顯示聲音設備的PNPDeviceID
             }
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -1173,6 +1232,40 @@ namespace vcs_WMI__new
             ManagementObject account = new ManagementObject("Win32_Account.Domain=\"KILO\",Name=\"Administrators\"");
             account.Get();
             richTextBox1.Text += "取得帳號名 : " + account + "\n";
+
+            //6060
+
+            //取得映射驅動器路徑
+            //映射驅動器 = 網路芳鄰硬碟的連結
+
+            SelectQuery selectQuery = new SelectQuery("SELECT * FROM Win32_LogicalDisk");
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher(selectQuery);
+            foreach (ManagementObject disk in searcher.Get())
+            {
+                string DriveType;
+                DriveType = disk["DriveType"].ToString();
+
+                richTextBox1.Text += "磁盤名稱：" + disk["Name"].ToString() + "\n";
+                //獲得硬盤的可用空間
+
+                long mb = 1048576;
+                double free = 0;
+                double use = 0;
+                double total = 0;
+                free = Convert.ToInt64(disk["FreeSpace"]) / mb;
+                //獲得硬盤的已用空間
+                use = (Convert.ToInt64(disk["Size"]) - Convert.ToInt64(disk["FreeSpace"])) / mb;
+                //獲得硬盤的合計空間
+                total = Convert.ToInt64(disk["Size"]) / mb;
+                richTextBox1.Text += " 總計：" + total.ToString() + "MB\n";
+                richTextBox1.Text += "已用空間：" + use.ToString() + "MB\n";
+                richTextBox1.Text += "可用空間：" + free.ToString() + "MB\n";
+
+                if (DriveType == "4")
+                {
+                    richTextBox1.Text += "取得 : " + disk["Name"].ToString() + "\n";
+                }
+            }
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -1625,9 +1718,13 @@ namespace vcs_WMI__new
                     //richTextBox1.Text +=  + " : " + prop.Value + "\n";
                     richTextBox1.Text += prop.Name + " : ";
                     if (prop.Value == null)
+                    {
                         richTextBox1.Text += "\t無資料\n";
+                    }
                     else
+                    {
                         richTextBox1.Text += "\t" + prop.Value.ToString() + "\n";
+                    }
                 }
             }
         }
@@ -1657,107 +1754,6 @@ richTextBox1.Text += "CPU序號 : " + mo.Properties["ProcessorId"].Value.ToStrin
 // 空資料的處理
 // sub_i1a.Text = (prop.Value == null) ? String.Empty : prop.Value.ToString();
 // 其實要改成不等於null才可以ToString()
-
-
-查詢語法 製造商不是Microsoft 且 MAC位址不為空
-mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((MACAddress Is Not NULL) AND (Manufacturer <> 'Microsoft'))");
-*/
-
-
-/*
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("select * from Win32_Processor");
-            foreach (ManagementObject myobject in searcher.Get())
-            {
-                lblCPU.Text = myobject["LoadPercentage"].ToString() + " %";
-                //label2.Text = lblCPU.Text;
-                label2.Text = "CPU使用率：" + lblCPU.Text;
-                mheight = Convert.ToInt32(myobject["LoadPercentage"].ToString());
-                if (mheight == 100)
-                    panel3.Height = 100;
-                CreateImage();
-            }
-
-//------------------------------------------------------------  # 60個
-
-            //取得顯示設備相關資訊
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from win32_VideoController");//聲明一個用于檢索設備管理信息的對象
-            foreach (ManagementObject mo in mos.Get())//循環遍歷WMI實例中的每一個對象
-            {
-                richTextBox1.Text += "顯示設備名稱 : " + mo["name"].ToString() + "\n";  //在文本框中顯示顯示設備的名稱
-                richTextBox1.Text += "PNPDeviceID : " + mo["PNPDeviceID"].ToString() + "\n"; //在文本框中顯示顯示設備的PNPDeviceID
-
-                richTextBox1.Text += "最大更新率 : " + mo["MaxRefreshRate"].ToString() + "\n"; //在當前文本框中顯示最大刷新率
-                richTextBox1.Text += "最小更新率 : " + mo["MinRefreshRate"].ToString() + "\n"; //在當前文本框中顯示最小刷新率
-                richTextBox1.Text += "目前更新率 : " + mo["CurrentRefreshRate"].ToString() + "\n"; //在當前文本框中顯示當前刷新率
-
-                richTextBox1.Text += "顯示模式 : " + mo["VideoModeDescription"].ToString() + "\n"; //在文本框中顯示設備的當前顯示模式
-            }
-
-//------------------------------------------------------------  # 60個
-
-            //取得計算機的顯示設備訊息
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from Win32_VideoController");
-            foreach (ManagementObject mo in mos.Get())
-            {
-                richTextBox1.Text += "顯示設備訊息\n";
-                richTextBox1.Text += "顯示設備名稱：" + mo["Name"].ToString() + "\n";//顯示設備名稱
-                richTextBox1.Text += "顯示設備PNPDeviceID：" + mo["PNPDeviceID"].ToString() + "\n";//顯示設備的PNPDeviceID
-                richTextBox1.Text += "顯示設備驅動程序文件：" + mo["InstalledDisplayDrivers"].ToString() + "\n";//顯示設備的驅動程序文件
-                richTextBox1.Text += "顯示設備驅動版本號：" + mo["DriverVersion"].ToString() + "\n";//顯示設備的驅動版本號
-                richTextBox1.Text += "顯示設備的顯示處理器：" + mo["VideoProcessor"].ToString() + "\n";//顯示設備的顯示處理器
-                richTextBox1.Text += "顯示設備的最大更新率：" + mo["MaxRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
-                richTextBox1.Text += "顯示設備的最小更新率：" + mo["MinRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
-                richTextBox1.Text += "顯示設備目前顯示模式：" + mo["VideoModeDescription"].ToString() + "\n";//顯示設備目前顯示模式
-            }
-
-//------------------------------------------------------------  # 60個
-
-            //取得音效設備相關資訊
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from Win32_SoundDevice");//聲明一個用于檢索設備管理信息的對象
-            foreach (ManagementObject mo in mos.Get())//循環遍歷WMI實例中的每一個對象
-            {
-                richTextBox1.Text += "音效設備名稱 : " + mo["ProductName"].ToString() + "\n"; //在當前文本框中顯示聲音設備的名稱
-                richTextBox1.Text += "PNPDeviceID : " + mo["PNPDeviceID"].ToString() + "\n";//在當前文本框中顯示聲音設備的PNPDeviceID
-            }
-
-//------------------------------------------------------------  # 60個
-
-            //取得映射驅動器路徑
-            //映射驅動器 = 網路芳鄰硬碟的連結
-
-            SelectQuery selectQuery = new SelectQuery("select * from win32_logicaldisk");
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(selectQuery);
-            int i = 0;
-            foreach (ManagementObject disk in searcher.Get())
-            {
-                string DriveType;
-                DriveType = disk["DriveType"].ToString();
-
-                richTextBox1.Text += "磁盤名稱：" + disk["Name"].ToString() + "\n";
-                //獲得硬盤的可用空間
-
-                long mb = 1048576;
-                double free = 0;
-                double use = 0;
-                double total = 0;
-                free = Convert.ToInt64(disk["FreeSpace"]) / mb;
-                //獲得硬盤的已用空間
-                use = (Convert.ToInt64(disk["Size"]) - Convert.ToInt64(disk["FreeSpace"])) / mb;
-                //獲得硬盤的合計空間
-                total = Convert.ToInt64(disk["Size"]) / mb;
-                richTextBox1.Text += " 總計：" + total.ToString() + "MB\n";
-                richTextBox1.Text += "已用空間：" + use.ToString() + "MB\n";
-                richTextBox1.Text += "可用空間：" + free.ToString() + "MB\n";
-
-                if (DriveType == "4")
-                {
-                    richTextBox1.Text += "取得 : " + disk["Name"].ToString() + "\n";
-                }
-                i++;
-            }
-
-//------------------------------------------------------------  # 60個
-
 
 */
 

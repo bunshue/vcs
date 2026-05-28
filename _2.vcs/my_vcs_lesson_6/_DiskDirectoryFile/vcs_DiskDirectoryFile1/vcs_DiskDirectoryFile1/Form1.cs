@@ -7,9 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;    //for Directory
-using System.Collections;   //for ArrayList
-
+using System.IO;  // for Directory
+using System.Collections;  // for ArrayList
 using Microsoft.VisualBasic.FileIO;
 
 namespace vcs_DiskDirectoryFile1
@@ -183,12 +182,14 @@ namespace vcs_DiskDirectoryFile1
         public static double DirSize(DirectoryInfo d)
         {
             double Size = 0;
+
             // Add file sizes.
             FileInfo[] fis = d.GetFiles();
             foreach (FileInfo fi in fis)
             {
                 Size += fi.Length;
             }
+
             // Add subdirectory sizes.
             DirectoryInfo[] dis = d.GetDirectories();
             foreach (DirectoryInfo di in dis)
@@ -211,7 +212,7 @@ namespace vcs_DiskDirectoryFile1
                 message += fi.Name;
                 message += "\t";
                 message += fi.Length.ToString(); ;
-                message += Environment.NewLine;
+                message += "\n";
                 filesize_all += fi.Length;
             }
             // Add subdirectory sizes.
@@ -223,149 +224,35 @@ namespace vcs_DiskDirectoryFile1
                     GetAllFileNames(di);   //利用遞迴把子資料夾也加進來
                 }
             }
-            message += Environment.NewLine;
+            message += "\n";
         }
 
         private void bt_file00_Click(object sender, EventArgs e)
         {
-            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\aaaaaaa.txt";
-            string filename2 = @"D:/_git/vcs/_1.data/______test_files2/aaaa.txt";
-
-            if (File.Exists(filename1) == false)            //確認檔案是否存在
-            {
-                richTextBox1.Text += "檔案: " + filename1 + " 不存在\n";
-            }
-            else
-            {
-                richTextBox1.Text += "檔案: " + filename1 + " 存在\n";
-            }
-
-            if (File.Exists(filename2) == false)  //確認檔案是否存在
-            {
-                richTextBox1.Text += "檔案: " + filename2 + " 不存在\n";
-            }
-            else
-            {
-                richTextBox1.Text += "檔案: " + filename2 + " 存在\n";
-            }
         }
 
         private void bt_file01_Click(object sender, EventArgs e)
         {
-            //建立檔案
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\aaaaaaab.txt";
-            if (File.Exists(filename) == false)         //確認檔案是否存在
-            {
-                File.Create(filename);
-                richTextBox1.Text += "檔案: " + filename + " 不存在, 已建立\n";
-            }
-            else
-            {
-                richTextBox1.Text += "檔案: " + filename + " 已存在, 無法再建立\n";
-            }
-
-            //建立檔案
-            string destFileName = @"D:\_git\vcs\_1.data\______test_files1\picture1a.jpg";
-            FileStream fs = File.Create(destFileName);
-            fs.Close();
-            richTextBox1.Text += "已建立檔案: " + destFileName + "\n";
 
         }
 
         private void bt_file02_Click(object sender, EventArgs e)
         {
-            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\aaaaaaa.txt";
-            string filename2 = @"D:\_git\vcs\_1.data\______test_files1\aaaaaaab.txt";
-
-            if (File.Exists(filename1) == false)    //確認原始檔案是否存在
-            {
-                richTextBox1.Text += "原始檔案: " + filename1 + " 不存在, 無法拷貝\n";
-                return;
-            }
-            if (File.Exists(filename2) == false)    //確認目標檔案是否存在
-            {
-                // Copy the file.
-                File.Copy(filename1, filename2);
-                richTextBox1.Text += "目標檔案: " + filename2 + " 不存在, 已拷貝\n";
-            }
-            else
-            {
-                richTextBox1.Text += "檔案: " + filename2 + " 已存在, 無法再拷貝\n";
-            }
-
-            //複製檔案，從 sourceFileName 複製到 destFileName
-            string sourceFileName = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            string destFileName = @"D:\_git\vcs\_1.data\______test_files1\picture1a.jpg";
-
-            if (File.Exists(sourceFileName))    //確認原始檔案是否存在
-            {
-                if (!File.Exists(destFileName)) //確認目標檔案是否存在
-                {
-                    File.Copy(sourceFileName, destFileName);
-                    richTextBox1.Text += "已複製檔案: " + sourceFileName + " 到 " + destFileName + "\n";
-                }
-                else
-                {
-                    richTextBox1.Text += "目標檔案: " + destFileName + " 已存在，無法複製\n";
-                }
-            }
-            else
-            {
-                richTextBox1.Text += "原始檔案: " + sourceFileName + " 不存在，無法複製\n";
-            }
         }
 
         private void bt_file03_Click(object sender, EventArgs e)
         {
             //刪除檔案
-            //法一
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\aaaaaaab.txt";
-            if (File.Exists(filename) == false)     //確認檔案是否存在
-            {
-                richTextBox1.Text += "檔案: " + filename + " 不存在, 無法刪除\n";
-            }
-            else
-            {
-                File.Delete(filename);
-                richTextBox1.Text += "檔案: " + filename + " 存在, 已刪除\n";
-            }
 
-            //刪除檔案
-            //法二
-            FileInfo f = new FileInfo(@"D:\_git\vcs\_1.data\______test_files1\vcs_test.txt");
-            if (f.Exists)       //確認檔案是否存在
+            FileInfo fi = new FileInfo(@"D:\_git\vcs\_1.data\______test_files1\vcs_test.txt");
+            if (fi.Exists)       //確認檔案是否存在
             {
-                f.Delete();
+                fi.Delete();
                 richTextBox1.Text += "檔案刪除成功\n";
             }
             else
             {
                 richTextBox1.Text += "找不到檔案\n";
-            }
-
-            string destFileName = @"D:\_git\vcs\_1.data\______test_files1\picture1a.jpg";
-            string destFileName2 = @"D:\_git\vcs\_1.data\______test_files1\picture1b.jpg";
-
-            //刪除檔案
-            if (File.Exists(destFileName))      //確認檔案是否存在
-            {
-                File.Delete(destFileName);
-                richTextBox1.Text += "已刪除檔案: " + destFileName + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "檔案: " + destFileName + " 不存在，無法刪除\n";
-            }
-
-            //刪除檔案
-            if (File.Exists(destFileName2))     //確認檔案是否存在
-            {
-                File.Delete(destFileName2);
-                richTextBox1.Text += "已刪除檔案: " + destFileName2 + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "檔案: " + destFileName2 + " 不存在，無法刪除\n";
             }
         }
 
@@ -388,139 +275,15 @@ namespace vcs_DiskDirectoryFile1
             }
         }
 
-        private void bt_file05_Click(object sender, EventArgs e)
-        {
-            string sourceFileName = @"D:\_git\vcs\_1.data\______test_files1\picture1a.jpg";
-            string destFileName = @"D:\_git\vcs\_1.data\______test_files1\picture1b.jpg";
-
-            //移動檔案，從 sourceFileName 移動到 destFileName
-            if (File.Exists(sourceFileName))        //確認原始檔案是否存在
-            {
-                if (!File.Exists(destFileName))     //確認目標檔案是否存在
-                {
-                    File.Move(sourceFileName, destFileName);
-                    richTextBox1.Text += "已移動檔案: " + sourceFileName + " 到 " + destFileName + "\n";
-                }
-                else
-                {
-                    richTextBox1.Text += "檔案: " + destFileName + " 已存在，無法移動\n";
-                }
-            }
-            else
-            {
-                richTextBox1.Text += "檔案: " + sourceFileName + " 不存在，無法移動\n";
-            }
-        }
-
-        private void bt_file06_Click(object sender, EventArgs e)
-        {
-            //取得檔案資訊
-            //法一
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\vcs_test.old.txt";
-            if (File.Exists(filename) == false)   //確認檔案是否存在
-            {
-                richTextBox1.Text += "檔案: " + filename + " 不存在\n";
-            }
-            else
-            {
-                //建立日期 2016  3 31 020339
-                //修改日期 2016  7 18 010548
-                //存取日期 2016  3 31 020339
-                richTextBox1.Text += "檔案: " + filename + " 已存在\n";
-                richTextBox1.Text += "建立時間: " + File.GetCreationTime(filename) + "\n";
-                richTextBox1.Text += "修改時間: " + File.GetLastWriteTime(filename) + "\n";
-                richTextBox1.Text += "存取時間: " + File.GetLastAccessTime(filename) + "\n";
-                richTextBox1.Text += "檔案屬性: " + File.GetAttributes(filename).ToString() + "\n";
-            }
-
-            //法二
-            FileInfo fi = new FileInfo(filename);
-            if (fi.Exists == true)      //確認檔案是否存在
-            {
-                richTextBox1.Text += "資料夾：" + fi.Directory + Environment.NewLine;
-                richTextBox1.Text += "檔名：" + fi.Name + Environment.NewLine;
-                richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + Environment.NewLine;
-                richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + Environment.NewLine;
-                richTextBox1.Text += "建立時間2：" + fi.CreationTimeUtc.ToString() + Environment.NewLine;
-                richTextBox1.Text += "最近寫入時間：" + fi.LastWriteTime.ToString() + Environment.NewLine;
-            }
-            else
-            {
-                richTextBox1.Text += "檔案: " + filename + " 不存在\n";
-            }
-        }
-
-        private void bt_file07_Click(object sender, EventArgs e)
-        {
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\_case1\_case1a\_case1bb\eula.3086b.txt";
-            if (File.Exists(filename))      //確認檔案是否存在
-            {
-                richTextBox1.Text += "取得完整路徑檔名:\t" + Path.GetFullPath(filename) + "\n";
-                richTextBox1.Text += "取得路徑:\t\t" + Path.GetDirectoryName(filename) + "\n";
-                richTextBox1.Text += "取得檔名(包含附檔名):\t" + Path.GetFileName(filename) + "\n";
-                richTextBox1.Text += "取得檔名(不包含附檔名):\t" + Path.GetFileNameWithoutExtension(filename) + "\n";
-                richTextBox1.Text += "取得副檔名:\t\t" + Path.GetExtension(filename) + "\n";
-                richTextBox1.Text += "資料根目錄:\t\t" + Path.GetPathRoot(filename) + "\n";
-                richTextBox1.Text += "修改成完整時間檔名:\t" + Path.GetDirectoryName(filename) + "\\" + Path.GetFileNameWithoutExtension(filename) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + Path.GetExtension(filename) + "\n";
-                richTextBox1.Text += "修改成時間檔名:\t\t" + Path.GetFileNameWithoutExtension(filename) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + Path.GetExtension(filename) + "\n";
-            }
-            richTextBox1.ScrollToCaret();   //RichTextBox顯示訊息自動捲動，顯示最後一行
-        }
-
-        private void bt_file08_Click(object sender, EventArgs e)
-        {
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\_case1\_case1a\eula.3085.txt";
-            if (File.Exists(filename))  //確認檔案是否存在
-            {
-                richTextBox1.Text += "檔名(包含副檔名)： " + Path.GetFileName(filename) + "\n";
-                richTextBox1.Text += "檔名(不包含副檔名)： " + Path.GetFileNameWithoutExtension(filename) + "\n";
-                richTextBox1.Text += "副檔名： " + Path.GetExtension(filename) + "\n";
-                richTextBox1.Text += "根目錄： " + Path.GetPathRoot(filename) + "\n";
-                richTextBox1.Text += "路徑： " + Path.GetFullPath(filename) + "\n";
-                richTextBox1.Text += "路徑： " + Path.GetDirectoryName(filename) + "\n";
-                richTextBox1.Text += "取得任意檔名： " + Path.GetRandomFileName() + "\n";
-                richTextBox1.Text += "取得臨時檔名： " + Path.GetTempFileName() + "\n";
-                richTextBox1.Text += "取得臨時路徑： " + Path.GetTempPath() + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "檔案: " + filename + " 不存在\n";
-            }
-        }
-
-        private void bt_file09_Click(object sender, EventArgs e)
-        {
-            string pathname = @"D:\_git\vcs\_1.data\______test_files1\_case1\_case1a\_case1bb\";
-            string foldername = "";
-            int got_slash = 0;
-            richTextBox1.Text += "length = " + pathname.Length.ToString() + "\n";
-            for (int i = (pathname.Length - 1); i >= 0; i--)
-            {
-                if (pathname[i] == '\\')
-                {
-                    got_slash++;
-                    if (got_slash == 2)
-                    {
-                        richTextBox1.Text += "got \\ in length = " + i.ToString() + "\n";
-                        //foldername = pathname.Substring(i,pathname.Length-2);
-                        foldername = pathname.Substring(i + 1, pathname.Length - i - 2);
-                        richTextBox1.Text += "path name = " + pathname + "\n";
-                        richTextBox1.Text += "folder name = " + foldername + "\n";
-
-                        break;
-                    }
-                }
-            }
-            richTextBox1.ScrollToCaret();   //RichTextBox顯示訊息自動捲動，顯示最後一行
-
-        }
+        //------------------------------------------------------------  # 60個
 
         int attr = 0;
-        private void bt_file10_Click(object sender, EventArgs e)
+        private void bt_file05_Click(object sender, EventArgs e)
         {
+            //檔案時間
             //修改檔案時間 屬性
             string filename = @"D:\_git\vcs\_1.data\______test_files1\article.txt";
-            if (File.Exists(filename) == false) //確認檔案是否存在
+            if (File.Exists(filename) == false)  // 確認檔案是否存在
             {
                 richTextBox1.Text += "檔案: " + filename + " 不存在\n";
                 return;
@@ -568,20 +331,11 @@ namespace vcs_DiskDirectoryFile1
                 richTextBox1.Text += "存取時間: " + File.GetLastAccessTime(filename) + "\n";
                 richTextBox1.Text += "檔案屬性: " + File.GetAttributes(filename).ToString() + "\n";
             }
-        }
 
-        private void bt_file11_Click(object sender, EventArgs e)
-        {
-            string RandomFileName = Path.GetRandomFileName();
-            richTextBox1.Text += "建立隨機檔案: " + RandomFileName + "\n";
-            string TempFileName = Path.GetTempFileName();
-            richTextBox1.Text += "建立暫存檔案: " + TempFileName + "\n";
-        }
+            //------------------------------------------------------------  # 60個
 
-        private void bt_file12_Click(object sender, EventArgs e)
-        {
             //讀取設定檔案時間
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\mega.txt";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\mega.txt";
 
             richTextBox1.Text += "檔案: " + filename + "\t原讀寫時間\n";
             richTextBox1.Text += "CreationTime\t" + File.GetCreationTime(filename).ToString() + "\n";
@@ -600,6 +354,121 @@ namespace vcs_DiskDirectoryFile1
             richTextBox1.Text += "SetCreationTime\t" + dt_new1 + "\n";
             richTextBox1.Text += "SetLastWriteTime\t" + dt_new2 + "\n";
             richTextBox1.Text += "SetLastAccessTime\t" + dt_new3 + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            //取得檔案資訊
+            filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
+            FileInfo fi = new FileInfo(filename);
+            if (fi.Exists == false)      //確認檔案是否存在
+            {
+                richTextBox1.Text += "檔案: " + filename + " 不存在\n";
+            }
+            else
+            {
+                richTextBox1.Text += "資料夾：" + fi.Directory + "\n";
+                richTextBox1.Text += "檔名：" + fi.Name + "\n";
+                richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + "\n";
+                richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + "\n";
+                richTextBox1.Text += "建立時間2：" + fi.CreationTimeUtc.ToString() + "\n";
+                richTextBox1.Text += "最近寫入時間：" + fi.LastWriteTime.ToString() + "\n";
+            }
+
+            //------------------------------------------------------------  # 60個
+
+            if (File.Exists(filename) == false)  // 確認檔案是否存在
+            {
+                richTextBox1.Text += "檔案: " + filename + " 不存在\n";
+            }
+            else
+            {
+                richTextBox1.Text += "檔案: " + filename + " 已存在\n";
+                richTextBox1.Text += "建立時間: " + File.GetCreationTime(filename) + "\n";
+                richTextBox1.Text += "修改時間: " + File.GetLastWriteTime(filename) + "\n";
+                richTextBox1.Text += "存取時間: " + File.GetLastAccessTime(filename) + "\n";
+                richTextBox1.Text += "檔案屬性: " + File.GetAttributes(filename).ToString() + "\n";
+            }
+
+            //------------------------------------------------------------  # 60個
+
+
+        }
+
+        private void bt_file06_Click(object sender, EventArgs e)
+        {
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+
+            if (File.Exists(filename))  // 確認檔案是否存在
+            {
+                richTextBox1.Text += "完整路徑檔名 : " + Path.GetFullPath(filename) + "\n";
+                richTextBox1.Text += "路徑 : " + Path.GetDirectoryName(filename) + "\n";
+                richTextBox1.Text += "檔名(包含副檔名) : " + Path.GetFileName(filename) + "\n";
+                richTextBox1.Text += "檔名(不包含副檔名) : " + Path.GetFileNameWithoutExtension(filename) + "\n";
+                richTextBox1.Text += "副檔名 : " + Path.GetExtension(filename) + "\n";
+                richTextBox1.Text += "根目錄 : " + Path.GetPathRoot(filename) + "\n";
+
+                richTextBox1.Text += "修改成完整時間檔名 : " + Path.GetDirectoryName(filename) + "\\" + Path.GetFileNameWithoutExtension(filename) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + Path.GetExtension(filename) + "\n";
+                richTextBox1.Text += "修改成時間檔名 : " + Path.GetFileNameWithoutExtension(filename) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + Path.GetExtension(filename) + "\n";
+            }
+
+            richTextBox1.Text += "取得任意檔名 : " + Path.GetRandomFileName() + "\n";
+            richTextBox1.Text += "取得臨時檔名 : " + Path.GetTempFileName() + "\n";
+            richTextBox1.Text += "取得臨時路徑 : " + Path.GetTempPath() + "\n";
+
+            string RandomFileName = Path.GetRandomFileName();
+            richTextBox1.Text += "建立隨機檔案: " + RandomFileName + "\n";
+            string TempFileName = Path.GetTempFileName();
+            richTextBox1.Text += "建立暫存檔案: " + TempFileName + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+
+
+        }
+
+        private void bt_file07_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void bt_file08_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void bt_file09_Click(object sender, EventArgs e)
+        {
+            string pathname = @"D:\_git\vcs\_1.data\______test_files1\_case1\_case1a\_case1bb\";
+            string foldername = "";
+            int got_slash = 0;
+            richTextBox1.Text += "length = " + pathname.Length.ToString() + "\n";
+            for (int i = (pathname.Length - 1); i >= 0; i--)
+            {
+                if (pathname[i] == '\\')
+                {
+                    got_slash++;
+                    if (got_slash == 2)
+                    {
+                        richTextBox1.Text += "got \\ in length = " + i.ToString() + "\n";
+                        //foldername = pathname.Substring(i,pathname.Length-2);
+                        foldername = pathname.Substring(i + 1, pathname.Length - i - 2);
+                        richTextBox1.Text += "path name = " + pathname + "\n";
+                        richTextBox1.Text += "folder name = " + foldername + "\n";
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void bt_file10_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void bt_file11_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void bt_file12_Click(object sender, EventArgs e)
+        {
         }
 
         private void bt_dir00_Click(object sender, EventArgs e)
@@ -786,8 +655,162 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_dir12_Click(object sender, EventArgs e)
         {
+            //File.Exists()
+
+            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\aaaaaaa.txt";
+            string filename2 = @"D:/_git/vcs/_1.data/______test_files2/aaaa.txt";
+
+            if (File.Exists(filename1) == false)  // 確認檔案是否存在
+            {
+                richTextBox1.Text += "檔案: " + filename1 + " 不存在\n";
+            }
+            else
+            {
+                richTextBox1.Text += "檔案: " + filename1 + " 存在\n";
+            }
+
+            if (File.Exists(filename2) == false)  // 確認檔案是否存在
+            {
+                richTextBox1.Text += "檔案: " + filename2 + " 不存在\n";
+            }
+            else
+            {
+                richTextBox1.Text += "檔案: " + filename2 + " 存在\n";
+            }
+
+            //------------------------------------------------------------  # 60個
+
+            //建立檔案
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\aaaaaaab.txt";
+
+            if (File.Exists(filename) == false)  // 確認檔案是否存在
+            {
+                File.Create(filename);
+                richTextBox1.Text += "檔案: " + filename + " 不存在, 已建立\n";
+            }
+            else
+            {
+                richTextBox1.Text += "檔案: " + filename + " 已存在, 無法再建立\n";
+            }
+
+            //建立檔案
+            string destFileName = @"D:\_git\vcs\_1.data\______test_files1\picture1a.jpg";
+            FileStream fs = File.Create(destFileName);
+            fs.Close();
+            richTextBox1.Text += "已建立檔案: " + destFileName + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            filename1 = @"D:\_git\vcs\_1.data\______test_files1\aaaaaaa.txt";
+            filename2 = @"D:\_git\vcs\_1.data\______test_files1\aaaaaaab.txt";
+
+            if (File.Exists(filename1) == false)  // 確認原始檔案是否存在
+            {
+                richTextBox1.Text += "原始檔案: " + filename1 + " 不存在, 無法拷貝\n";
+                return;
+            }
+            if (File.Exists(filename2) == false)  // 確認目標檔案是否存在
+            {
+                // Copy the file.
+                File.Copy(filename1, filename2);
+                richTextBox1.Text += "目標檔案: " + filename2 + " 不存在, 已拷貝\n";
+            }
+            else
+            {
+                richTextBox1.Text += "檔案: " + filename2 + " 已存在, 無法再拷貝\n";
+            }
+
+            //複製檔案，從 sourceFileName 複製到 destFileName
+            string sourceFileName = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            destFileName = @"D:\_git\vcs\_1.data\______test_files1\picture1a.jpg";
+
+            if (File.Exists(sourceFileName))    //確認原始檔案是否存在
+            {
+                if (!File.Exists(destFileName)) //確認目標檔案是否存在
+                {
+                    File.Copy(sourceFileName, destFileName);
+                    richTextBox1.Text += "已複製檔案: " + sourceFileName + " 到 " + destFileName + "\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "目標檔案: " + destFileName + " 已存在，無法複製\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "原始檔案: " + sourceFileName + " 不存在，無法複製\n";
+            }
+
+            //------------------------------------------------------------  # 60個
+
+            //刪除檔案
+            //法一
+            filename = @"D:\_git\vcs\_1.data\______test_files1\aaaaaaab.txt";
+            if (File.Exists(filename) == false)  // 確認檔案是否存在
+            {
+                richTextBox1.Text += "檔案: " + filename + " 不存在, 無法刪除\n";
+            }
+            else
+            {
+                File.Delete(filename);
+                richTextBox1.Text += "檔案: " + filename + " 存在, 已刪除\n";
+            }
+
+            //------------------------------------------------------------  # 60個
+
+            destFileName = @"D:\_git\vcs\_1.data\______test_files1\picture1a.jpg";
+            string destFileName2 = @"D:\_git\vcs\_1.data\______test_files1\picture1b.jpg";
+
+            //刪除檔案
+            if (File.Exists(destFileName))      //確認檔案是否存在
+            {
+                File.Delete(destFileName);
+                richTextBox1.Text += "已刪除檔案: " + destFileName + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "檔案: " + destFileName + " 不存在，無法刪除\n";
+            }
+
+            //刪除檔案
+            if (File.Exists(destFileName2))     //確認檔案是否存在
+            {
+                File.Delete(destFileName2);
+                richTextBox1.Text += "已刪除檔案: " + destFileName2 + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "檔案: " + destFileName2 + " 不存在，無法刪除\n";
+            }
+
+            //------------------------------------------------------------  # 60個
+
+            sourceFileName = @"D:\_git\vcs\_1.data\______test_files1\picture1a.jpg";
+            destFileName = @"D:\_git\vcs\_1.data\______test_files1\picture1b.jpg";
+
+            //移動檔案，從 sourceFileName 移動到 destFileName
+            if (File.Exists(sourceFileName))        //確認原始檔案是否存在
+            {
+                if (!File.Exists(destFileName))     //確認目標檔案是否存在
+                {
+                    File.Move(sourceFileName, destFileName);
+                    richTextBox1.Text += "已移動檔案: " + sourceFileName + " 到 " + destFileName + "\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "檔案: " + destFileName + " 已存在，無法移動\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "檔案: " + sourceFileName + " 不存在，無法移動\n";
+            }
+
+            //------------------------------------------------------------  # 60個
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void bt_files00_Click(object sender, EventArgs e)
         {
@@ -849,18 +872,14 @@ namespace vcs_DiskDirectoryFile1
                     break;
             }
 
-            //message += size.ToString();
-            //message += Environment.NewLine;
+            //message += size.ToString() + "\n";
 
-            //message += "Get All FileNames";
-            //message += Environment.NewLine;
+            //message += "Get All FileNames\n";
             GetAllFileNames(d);
             message += "Total filesize: " + filesize_all.ToString() + " Bytes.\n";
             message += "Total filesize: " + size.ToString() + " Bytes.\n";
-            message += Environment.NewLine;
             //richTextBox1.Text += message;     //無法捲到最後一行
             richTextBox1.AppendText(message);   //可以捲到最後一行
-            richTextBox1.ScrollToCaret();   //RichTextBox顯示訊息自動捲動，顯示最後一行
         }
 
         private void bt_files03_Click(object sender, EventArgs e)
@@ -901,17 +920,15 @@ namespace vcs_DiskDirectoryFile1
             // Get the root directory and print out some information about it.
             DirectoryInfo dirInfo = di.RootDirectory;
             message += "data: ";
-            message += dirInfo.Attributes.ToString();
-            message += Environment.NewLine;
+            message += dirInfo.Attributes.ToString() + "\n";
 
             // Get the files in the directory and print out some information about them.
-            FileInfo[] fileNames = dirInfo.GetFiles("*.*");
+            FileInfo[] fis = dirInfo.GetFiles("*.*");
 
-            foreach (FileInfo fi in fileNames)
+            foreach (FileInfo fi in fis)
             {
                 message += "data: ";
-                message += fi.Name + "   " + fi.LastAccessTime + "   " + fi.Length;
-                message += Environment.NewLine;
+                message += fi.Name + "   " + fi.LastAccessTime + "   " + fi.Length + "\n";
             }
 
             // Get the subdirectories directly that is under the root.
@@ -921,8 +938,7 @@ namespace vcs_DiskDirectoryFile1
 
             foreach (DirectoryInfo d in dirInfos)
             {
-                message += "data: " + "   " + d.Name;
-                message += Environment.NewLine;
+                message += "data: " + "   " + d.Name + "\n";
             }
             richTextBox1.Text += message;
         }
@@ -934,8 +950,7 @@ namespace vcs_DiskDirectoryFile1
             DirectoryInfo DIFO = new DirectoryInfo(strFolderPath);
             if (DIFO.Exists)        //確認資料夾是否存在
             {
-                message += "資料夾";
-                message += Environment.NewLine;
+                message += "資料夾\n";
                 foreach (DirectoryInfo di in DIFO.GetDirectories())
                 {
                     //資料夾資訊
@@ -979,20 +994,14 @@ namespace vcs_DiskDirectoryFile1
                             message += ddi.Name;
                             message += "  ";
                         }
-                        message += Environment.NewLine;
                     }
                     else
-                        message += Environment.NewLine;
-                     */
-
-                    message += Environment.NewLine;
-                    message += Environment.NewLine;
+                    */
+                    message += "\n";
                 }
 
                 /*  檢查每個檔案的資訊
-                message += Environment.NewLine;
-                message += "檔案";
-                message += Environment.NewLine;
+                message += "檔案\n";
                 foreach (FileInfo di in DIFO.GetFiles())
                 {
                     message += "全檔名：";
@@ -1041,9 +1050,7 @@ namespace vcs_DiskDirectoryFile1
                     message += di.DirectoryName;
 
                     message += "  唯讀：";
-                    message += di.IsReadOnly;
-
-                    message += Environment.NewLine;
+                    message += di.IsReadOnly + "\n";
                 }
                 */
             }
@@ -1051,8 +1058,7 @@ namespace vcs_DiskDirectoryFile1
             {
                 MessageBox.Show("No Exist");
             }
-            message += Environment.NewLine;
-            richTextBox1.Text += message;
+            richTextBox1.Text += message + "\n";
         }
 
         private void bt_files06_Click(object sender, EventArgs e)
@@ -1079,17 +1085,11 @@ namespace vcs_DiskDirectoryFile1
                     break;
             }
 
-            message += size.ToString();
-            message += Environment.NewLine;
-
-            message += Environment.NewLine;
-            message += Environment.NewLine;
-            message += "Get All FileNames";
-            message += Environment.NewLine;
+            message += size.ToString() + "\n";
+            message += "Get All FileNames\n";
             GetAllFileNames(d);
-            message += "Total filesize: " + filesize_all.ToString();
-            message += Environment.NewLine;
-            richTextBox1.Text += message;
+            message += "Total filesize: " + filesize_all.ToString() + "\n";
+            richTextBox1.Text += message + "\n";
         }
 
         //讀取資料夾下所有資料夾
@@ -1186,8 +1186,6 @@ namespace vcs_DiskDirectoryFile1
         {
             //撈出資料夾內所有jpg檔
             var dirnames = Directory.GetDirectories(@"D:\_git\vcs\_1.data\______test_files1");
-            int i = 0;
-
             try
             {
                 foreach (var dir in dirnames)
@@ -1196,13 +1194,9 @@ namespace vcs_DiskDirectoryFile1
                     var fnames = Directory.GetFiles(dir, "*.jpg").Select(Path.GetFileName);
 
                     DirectoryInfo d = new DirectoryInfo(dir);
-                    FileInfo[] finfo = d.GetFiles("*.jpg");
-
+                    FileInfo[] fis = d.GetFiles("*.jpg");
                     foreach (var f in fnames)
                     {
-                        i++;
-                        //richTextBox1.Text += "The number of the file being renamed is: " + i.ToString() + "\n";
-
                         richTextBox1.Text += f + "\n";
 
                         if (!File.Exists(Path.Combine(dir, f.ToString().Replace("(", "").Replace(")", ""))))
@@ -1212,9 +1206,9 @@ namespace vcs_DiskDirectoryFile1
                         else
                         {
                             richTextBox1.Text += "The file you are attempting to rename already exists! The file path is " + dir + "\n";
-                            foreach (FileInfo fi in finfo)
+                            foreach (FileInfo fi in fis)
                             {
-                                //richTextBox1.Text += "The file modify date is: " + File.GetLastWriteTime(dir) + "\n";
+                                richTextBox1.Text += "The file modify date is: " + File.GetLastWriteTime(dir) + "\n";
                             }
                         }
                     }
@@ -1300,5 +1294,4 @@ namespace vcs_DiskDirectoryFile1
 /*  可搬出
 
 */
-
 

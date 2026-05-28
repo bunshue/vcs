@@ -144,7 +144,7 @@ namespace vcs_DataSet_DataTable
                 richTextBox1.Text += "找到\t" + dt.Rows[i]["姓名"].ToString() + "\n";
             }
 
-            //3030
+            //------------------------------  # 30個
 
             richTextBox1.Text += "去除DataTable中的重複項\n";
 
@@ -1141,9 +1141,6 @@ namespace vcs_DataSet_DataTable
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
 
 
 /*  可搬出

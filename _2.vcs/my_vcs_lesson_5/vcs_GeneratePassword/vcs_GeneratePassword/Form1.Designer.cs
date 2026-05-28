@@ -386,7 +386,7 @@
             this.AcceptButton = this.btnGenerate;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(515, 454);
+            this.ClientSize = new System.Drawing.Size(759, 602);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.Label11);
             this.Controls.Add(this.btnGenerate);
@@ -398,6 +398,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Form1";
             this.Text = "vcs_GeneratePassword";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.GroupBox1.ResumeLayout(false);
             this.GroupBox1.PerformLayout();
             this.ResumeLayout(false);

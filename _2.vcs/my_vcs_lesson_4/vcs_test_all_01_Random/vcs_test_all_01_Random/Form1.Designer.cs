@@ -30,6 +30,26 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt_random19 = new System.Windows.Forms.Button();
+            this.bt_random18 = new System.Windows.Forms.Button();
+            this.bt_random17 = new System.Windows.Forms.Button();
+            this.bt_random16 = new System.Windows.Forms.Button();
+            this.bt_random15 = new System.Windows.Forms.Button();
+            this.bt_random14 = new System.Windows.Forms.Button();
+            this.bt_random13 = new System.Windows.Forms.Button();
+            this.bt_random0 = new System.Windows.Forms.Button();
+            this.bt_random12 = new System.Windows.Forms.Button();
+            this.bt_random11 = new System.Windows.Forms.Button();
+            this.bt_random10 = new System.Windows.Forms.Button();
+            this.bt_random9 = new System.Windows.Forms.Button();
+            this.bt_random8 = new System.Windows.Forms.Button();
+            this.bt_random7 = new System.Windows.Forms.Button();
+            this.bt_random2 = new System.Windows.Forms.Button();
+            this.bt_random6 = new System.Windows.Forms.Button();
+            this.bt_random5 = new System.Windows.Forms.Button();
+            this.bt_random4 = new System.Windows.Forms.Button();
+            this.bt_random3 = new System.Windows.Forms.Button();
+            this.bt_random1 = new System.Windows.Forms.Button();
             this.tb_random_text19 = new System.Windows.Forms.TextBox();
             this.tb_random_text18 = new System.Windows.Forms.TextBox();
             this.tb_random_text17 = new System.Windows.Forms.TextBox();
@@ -50,20 +70,11 @@
             this.tb_random_text4 = new System.Windows.Forms.TextBox();
             this.tb_random_text3 = new System.Windows.Forms.TextBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.bt_random19 = new System.Windows.Forms.Button();
-            this.bt_random18 = new System.Windows.Forms.Button();
-            this.bt_random17 = new System.Windows.Forms.Button();
-            this.bt_random16 = new System.Windows.Forms.Button();
-            this.bt_random15 = new System.Windows.Forms.Button();
-            this.bt_random14 = new System.Windows.Forms.Button();
-            this.bt_random13 = new System.Windows.Forms.Button();
-            this.bt_random0 = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.tb_random_text2 = new System.Windows.Forms.TextBox();
             this.tb_random_text1 = new System.Windows.Forms.TextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.bt_random12 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnRandomize = new System.Windows.Forms.Button();
@@ -75,17 +86,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnPick = new System.Windows.Forms.Button();
             this.txtNames = new System.Windows.Forms.TextBox();
-            this.bt_random11 = new System.Windows.Forms.Button();
-            this.bt_random10 = new System.Windows.Forms.Button();
-            this.bt_random9 = new System.Windows.Forms.Button();
-            this.bt_random8 = new System.Windows.Forms.Button();
-            this.bt_random7 = new System.Windows.Forms.Button();
-            this.bt_random2 = new System.Windows.Forms.Button();
-            this.bt_random6 = new System.Windows.Forms.Button();
-            this.bt_random5 = new System.Windows.Forms.Button();
-            this.bt_random4 = new System.Windows.Forms.Button();
-            this.bt_random3 = new System.Windows.Forms.Button();
-            this.bt_random1 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -123,10 +123,227 @@
             this.groupBox1.Controls.Add(this.bt_random1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(442, 693);
+            this.groupBox1.Size = new System.Drawing.Size(410, 690);
             this.groupBox1.TabIndex = 27;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "亂數";
+            // 
+            // bt_random19
+            // 
+            this.bt_random19.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_random19.Location = new System.Drawing.Point(208, 618);
+            this.bt_random19.Name = "bt_random19";
+            this.bt_random19.Size = new System.Drawing.Size(190, 60);
+            this.bt_random19.TabIndex = 60;
+            this.bt_random19.Text = "批量生成隨機密碼, 存檔";
+            this.bt_random19.UseVisualStyleBackColor = true;
+            this.bt_random19.Click += new System.EventHandler(this.bt_random19_Click);
+            // 
+            // bt_random18
+            // 
+            this.bt_random18.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_random18.Location = new System.Drawing.Point(208, 552);
+            this.bt_random18.Name = "bt_random18";
+            this.bt_random18.Size = new System.Drawing.Size(190, 60);
+            this.bt_random18.TabIndex = 59;
+            this.bt_random18.Text = "生成大量隨機碼";
+            this.bt_random18.UseVisualStyleBackColor = true;
+            this.bt_random18.Click += new System.EventHandler(this.bt_random18_Click);
+            // 
+            // bt_random17
+            // 
+            this.bt_random17.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_random17.Location = new System.Drawing.Point(208, 486);
+            this.bt_random17.Name = "bt_random17";
+            this.bt_random17.Size = new System.Drawing.Size(190, 60);
+            this.bt_random17.TabIndex = 58;
+            this.bt_random17.Text = "來電震動視窗4";
+            this.bt_random17.UseVisualStyleBackColor = true;
+            this.bt_random17.Click += new System.EventHandler(this.bt_random17_Click);
+            // 
+            // bt_random16
+            // 
+            this.bt_random16.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_random16.Location = new System.Drawing.Point(208, 416);
+            this.bt_random16.Name = "bt_random16";
+            this.bt_random16.Size = new System.Drawing.Size(190, 60);
+            this.bt_random16.TabIndex = 57;
+            this.bt_random16.Text = "來電震動視窗3";
+            this.bt_random16.UseVisualStyleBackColor = true;
+            this.bt_random16.Click += new System.EventHandler(this.bt_random16_Click);
+            // 
+            // bt_random15
+            // 
+            this.bt_random15.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_random15.Location = new System.Drawing.Point(208, 350);
+            this.bt_random15.Name = "bt_random15";
+            this.bt_random15.Size = new System.Drawing.Size(190, 60);
+            this.bt_random15.TabIndex = 56;
+            this.bt_random15.Text = "來電震動視窗2";
+            this.bt_random15.UseVisualStyleBackColor = true;
+            this.bt_random15.Click += new System.EventHandler(this.bt_random15_Click);
+            // 
+            // bt_random14
+            // 
+            this.bt_random14.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_random14.Location = new System.Drawing.Point(208, 284);
+            this.bt_random14.Name = "bt_random14";
+            this.bt_random14.Size = new System.Drawing.Size(190, 60);
+            this.bt_random14.TabIndex = 55;
+            this.bt_random14.Text = "來電震動視窗1";
+            this.bt_random14.UseVisualStyleBackColor = true;
+            this.bt_random14.Click += new System.EventHandler(this.bt_random14_Click);
+            // 
+            // bt_random13
+            // 
+            this.bt_random13.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_random13.Location = new System.Drawing.Point(208, 218);
+            this.bt_random13.Name = "bt_random13";
+            this.bt_random13.Size = new System.Drawing.Size(190, 60);
+            this.bt_random13.TabIndex = 54;
+            this.bt_random13.Text = "建立亂七八糟陣列";
+            this.bt_random13.UseVisualStyleBackColor = true;
+            this.bt_random13.Click += new System.EventHandler(this.bt_random13_Click);
+            // 
+            // bt_random0
+            // 
+            this.bt_random0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_random0.Location = new System.Drawing.Point(17, 20);
+            this.bt_random0.Name = "bt_random0";
+            this.bt_random0.Size = new System.Drawing.Size(190, 60);
+            this.bt_random0.TabIndex = 53;
+            this.bt_random0.Text = "取得亂數的方法";
+            this.bt_random0.UseVisualStyleBackColor = true;
+            this.bt_random0.Click += new System.EventHandler(this.bt_random0_Click);
+            // 
+            // bt_random12
+            // 
+            this.bt_random12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_random12.Location = new System.Drawing.Point(208, 152);
+            this.bt_random12.Name = "bt_random12";
+            this.bt_random12.Size = new System.Drawing.Size(190, 60);
+            this.bt_random12.TabIndex = 36;
+            this.bt_random12.Text = "亂數方法比較";
+            this.bt_random12.UseVisualStyleBackColor = true;
+            this.bt_random12.Click += new System.EventHandler(this.bt_random12_Click);
+            // 
+            // bt_random11
+            // 
+            this.bt_random11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_random11.Location = new System.Drawing.Point(208, 86);
+            this.bt_random11.Name = "bt_random11";
+            this.bt_random11.Size = new System.Drawing.Size(190, 60);
+            this.bt_random11.TabIndex = 32;
+            this.bt_random11.UseVisualStyleBackColor = true;
+            this.bt_random11.Click += new System.EventHandler(this.bt_random11_Click);
+            // 
+            // bt_random10
+            // 
+            this.bt_random10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_random10.Location = new System.Drawing.Point(208, 21);
+            this.bt_random10.Name = "bt_random10";
+            this.bt_random10.Size = new System.Drawing.Size(190, 60);
+            this.bt_random10.TabIndex = 31;
+            this.bt_random10.Text = "整個string array都變成亂數陣列";
+            this.bt_random10.UseVisualStyleBackColor = true;
+            this.bt_random10.Click += new System.EventHandler(this.bt_random10_Click);
+            // 
+            // bt_random9
+            // 
+            this.bt_random9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_random9.Location = new System.Drawing.Point(17, 619);
+            this.bt_random9.Name = "bt_random9";
+            this.bt_random9.Size = new System.Drawing.Size(190, 60);
+            this.bt_random9.TabIndex = 30;
+            this.bt_random9.Text = "整個int array都變成亂數陣列";
+            this.bt_random9.UseVisualStyleBackColor = true;
+            this.bt_random9.Click += new System.EventHandler(this.bt_random9_Click);
+            // 
+            // bt_random8
+            // 
+            this.bt_random8.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_random8.Location = new System.Drawing.Point(17, 553);
+            this.bt_random8.Name = "bt_random8";
+            this.bt_random8.Size = new System.Drawing.Size(190, 60);
+            this.bt_random8.TabIndex = 29;
+            this.bt_random8.Text = "整個array都變成亂數陣列";
+            this.bt_random8.UseVisualStyleBackColor = true;
+            this.bt_random8.Click += new System.EventHandler(this.bt_random8_Click);
+            // 
+            // bt_random7
+            // 
+            this.bt_random7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_random7.Location = new System.Drawing.Point(17, 486);
+            this.bt_random7.Name = "bt_random7";
+            this.bt_random7.Size = new System.Drawing.Size(190, 60);
+            this.bt_random7.TabIndex = 28;
+            this.bt_random7.Text = "統計字母出現次數";
+            this.bt_random7.UseVisualStyleBackColor = true;
+            this.bt_random7.Click += new System.EventHandler(this.bt_random7_Click);
+            // 
+            // bt_random2
+            // 
+            this.bt_random2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_random2.Location = new System.Drawing.Point(17, 152);
+            this.bt_random2.Name = "bt_random2";
+            this.bt_random2.Size = new System.Drawing.Size(190, 60);
+            this.bt_random2.TabIndex = 27;
+            this.bt_random2.Text = "產生不重複亂數";
+            this.bt_random2.UseVisualStyleBackColor = true;
+            this.bt_random2.Click += new System.EventHandler(this.bt_random2_Click);
+            // 
+            // bt_random6
+            // 
+            this.bt_random6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_random6.Location = new System.Drawing.Point(17, 416);
+            this.bt_random6.Name = "bt_random6";
+            this.bt_random6.Size = new System.Drawing.Size(190, 60);
+            this.bt_random6.TabIndex = 26;
+            this.bt_random6.Text = "name score";
+            this.bt_random6.UseVisualStyleBackColor = true;
+            this.bt_random6.Click += new System.EventHandler(this.bt_random6_Click);
+            // 
+            // bt_random5
+            // 
+            this.bt_random5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_random5.Location = new System.Drawing.Point(17, 350);
+            this.bt_random5.Name = "bt_random5";
+            this.bt_random5.Size = new System.Drawing.Size(190, 60);
+            this.bt_random5.TabIndex = 25;
+            this.bt_random5.UseVisualStyleBackColor = true;
+            this.bt_random5.Click += new System.EventHandler(this.bt_random5_Click);
+            // 
+            // bt_random4
+            // 
+            this.bt_random4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_random4.Location = new System.Drawing.Point(17, 284);
+            this.bt_random4.Name = "bt_random4";
+            this.bt_random4.Size = new System.Drawing.Size(190, 60);
+            this.bt_random4.TabIndex = 24;
+            this.bt_random4.Text = "產生亂數的方式";
+            this.bt_random4.UseVisualStyleBackColor = true;
+            this.bt_random4.Click += new System.EventHandler(this.bt_random4_Click);
+            // 
+            // bt_random3
+            // 
+            this.bt_random3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_random3.Location = new System.Drawing.Point(17, 218);
+            this.bt_random3.Name = "bt_random3";
+            this.bt_random3.Size = new System.Drawing.Size(190, 60);
+            this.bt_random3.TabIndex = 23;
+            this.bt_random3.UseVisualStyleBackColor = true;
+            this.bt_random3.Click += new System.EventHandler(this.bt_random3_Click);
+            // 
+            // bt_random1
+            // 
+            this.bt_random1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_random1.Location = new System.Drawing.Point(17, 86);
+            this.bt_random1.Name = "bt_random1";
+            this.bt_random1.Size = new System.Drawing.Size(190, 60);
+            this.bt_random1.TabIndex = 22;
+            this.bt_random1.Text = "亂數";
+            this.bt_random1.UseVisualStyleBackColor = true;
+            this.bt_random1.Click += new System.EventHandler(this.bt_random1_Click);
             // 
             // tb_random_text19
             // 
@@ -290,94 +507,6 @@
             this.pictureBox4.TabIndex = 65;
             this.pictureBox4.TabStop = false;
             // 
-            // bt_random19
-            // 
-            this.bt_random19.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random19.Location = new System.Drawing.Point(225, 618);
-            this.bt_random19.Name = "bt_random19";
-            this.bt_random19.Size = new System.Drawing.Size(200, 60);
-            this.bt_random19.TabIndex = 60;
-            this.bt_random19.Text = "批量生成隨機密碼, 存檔";
-            this.bt_random19.UseVisualStyleBackColor = true;
-            this.bt_random19.Click += new System.EventHandler(this.bt_random19_Click);
-            // 
-            // bt_random18
-            // 
-            this.bt_random18.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random18.Location = new System.Drawing.Point(225, 552);
-            this.bt_random18.Name = "bt_random18";
-            this.bt_random18.Size = new System.Drawing.Size(200, 60);
-            this.bt_random18.TabIndex = 59;
-            this.bt_random18.Text = "生成大量隨機碼";
-            this.bt_random18.UseVisualStyleBackColor = true;
-            this.bt_random18.Click += new System.EventHandler(this.bt_random18_Click);
-            // 
-            // bt_random17
-            // 
-            this.bt_random17.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random17.Location = new System.Drawing.Point(225, 486);
-            this.bt_random17.Name = "bt_random17";
-            this.bt_random17.Size = new System.Drawing.Size(200, 60);
-            this.bt_random17.TabIndex = 58;
-            this.bt_random17.Text = "來電震動視窗4";
-            this.bt_random17.UseVisualStyleBackColor = true;
-            this.bt_random17.Click += new System.EventHandler(this.bt_random17_Click);
-            // 
-            // bt_random16
-            // 
-            this.bt_random16.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random16.Location = new System.Drawing.Point(225, 416);
-            this.bt_random16.Name = "bt_random16";
-            this.bt_random16.Size = new System.Drawing.Size(200, 60);
-            this.bt_random16.TabIndex = 57;
-            this.bt_random16.Text = "來電震動視窗3";
-            this.bt_random16.UseVisualStyleBackColor = true;
-            this.bt_random16.Click += new System.EventHandler(this.bt_random16_Click);
-            // 
-            // bt_random15
-            // 
-            this.bt_random15.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random15.Location = new System.Drawing.Point(225, 350);
-            this.bt_random15.Name = "bt_random15";
-            this.bt_random15.Size = new System.Drawing.Size(200, 60);
-            this.bt_random15.TabIndex = 56;
-            this.bt_random15.Text = "來電震動視窗2";
-            this.bt_random15.UseVisualStyleBackColor = true;
-            this.bt_random15.Click += new System.EventHandler(this.bt_random15_Click);
-            // 
-            // bt_random14
-            // 
-            this.bt_random14.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random14.Location = new System.Drawing.Point(225, 284);
-            this.bt_random14.Name = "bt_random14";
-            this.bt_random14.Size = new System.Drawing.Size(200, 60);
-            this.bt_random14.TabIndex = 55;
-            this.bt_random14.Text = "來電震動視窗1";
-            this.bt_random14.UseVisualStyleBackColor = true;
-            this.bt_random14.Click += new System.EventHandler(this.bt_random14_Click);
-            // 
-            // bt_random13
-            // 
-            this.bt_random13.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random13.Location = new System.Drawing.Point(225, 218);
-            this.bt_random13.Name = "bt_random13";
-            this.bt_random13.Size = new System.Drawing.Size(200, 60);
-            this.bt_random13.TabIndex = 54;
-            this.bt_random13.Text = "建立亂七八糟陣列";
-            this.bt_random13.UseVisualStyleBackColor = true;
-            this.bt_random13.Click += new System.EventHandler(this.bt_random13_Click);
-            // 
-            // bt_random0
-            // 
-            this.bt_random0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random0.Location = new System.Drawing.Point(17, 20);
-            this.bt_random0.Name = "bt_random0";
-            this.bt_random0.Size = new System.Drawing.Size(200, 60);
-            this.bt_random0.TabIndex = 53;
-            this.bt_random0.Text = "取得亂數的方法";
-            this.bt_random0.UseVisualStyleBackColor = true;
-            this.bt_random0.Click += new System.EventHandler(this.bt_random0_Click);
-            // 
             // pictureBox3
             // 
             this.pictureBox3.BackColor = System.Drawing.Color.LightGray;
@@ -421,17 +550,6 @@
             this.pictureBox1.TabIndex = 47;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
-            // 
-            // bt_random12
-            // 
-            this.bt_random12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random12.Location = new System.Drawing.Point(225, 152);
-            this.bt_random12.Name = "bt_random12";
-            this.bt_random12.Size = new System.Drawing.Size(200, 60);
-            this.bt_random12.TabIndex = 36;
-            this.bt_random12.Text = "亂數方法比較";
-            this.bt_random12.UseVisualStyleBackColor = true;
-            this.bt_random12.Click += new System.EventHandler(this.bt_random12_Click);
             // 
             // groupBox4
             // 
@@ -541,134 +659,16 @@
             // 
             // txtNames
             // 
-            this.txtNames.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtNames.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.txtNames.Location = new System.Drawing.Point(16, 27);
             this.txtNames.Multiline = true;
             this.txtNames.Name = "txtNames";
             this.txtNames.Size = new System.Drawing.Size(100, 124);
             this.txtNames.TabIndex = 4;
             this.txtNames.Text = "Ann\r\nBob\r\nCindy\r\nDan\r\nEdwina\r\nFrank\r\nGina\r\nHarry\r\nIvy\r\nJack\r\nKlaudia\r\nLeonard\r\nMa" +
-    "rcie\r\nNate\r\nOlivia\r\nPaul\r\nQueenie\r\nRussell\r\nSally\r\nTim\r\nUma\r\nVern\r\nWendy\r\nXavier" +
-    "\r\nYoko\r\nZack";
-            // 
-            // bt_random11
-            // 
-            this.bt_random11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random11.Location = new System.Drawing.Point(225, 86);
-            this.bt_random11.Name = "bt_random11";
-            this.bt_random11.Size = new System.Drawing.Size(200, 60);
-            this.bt_random11.TabIndex = 32;
-            this.bt_random11.UseVisualStyleBackColor = true;
-            this.bt_random11.Click += new System.EventHandler(this.bt_random11_Click);
-            // 
-            // bt_random10
-            // 
-            this.bt_random10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random10.Location = new System.Drawing.Point(225, 21);
-            this.bt_random10.Name = "bt_random10";
-            this.bt_random10.Size = new System.Drawing.Size(200, 60);
-            this.bt_random10.TabIndex = 31;
-            this.bt_random10.Text = "整個string array都變成亂數陣列";
-            this.bt_random10.UseVisualStyleBackColor = true;
-            this.bt_random10.Click += new System.EventHandler(this.bt_random10_Click);
-            // 
-            // bt_random9
-            // 
-            this.bt_random9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random9.Location = new System.Drawing.Point(17, 619);
-            this.bt_random9.Name = "bt_random9";
-            this.bt_random9.Size = new System.Drawing.Size(200, 60);
-            this.bt_random9.TabIndex = 30;
-            this.bt_random9.Text = "整個int array都變成亂數陣列";
-            this.bt_random9.UseVisualStyleBackColor = true;
-            this.bt_random9.Click += new System.EventHandler(this.bt_random9_Click);
-            // 
-            // bt_random8
-            // 
-            this.bt_random8.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random8.Location = new System.Drawing.Point(17, 553);
-            this.bt_random8.Name = "bt_random8";
-            this.bt_random8.Size = new System.Drawing.Size(200, 60);
-            this.bt_random8.TabIndex = 29;
-            this.bt_random8.Text = "整個array都變成亂數陣列";
-            this.bt_random8.UseVisualStyleBackColor = true;
-            this.bt_random8.Click += new System.EventHandler(this.bt_random8_Click);
-            // 
-            // bt_random7
-            // 
-            this.bt_random7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random7.Location = new System.Drawing.Point(17, 486);
-            this.bt_random7.Name = "bt_random7";
-            this.bt_random7.Size = new System.Drawing.Size(200, 60);
-            this.bt_random7.TabIndex = 28;
-            this.bt_random7.Text = "統計字母出現次數";
-            this.bt_random7.UseVisualStyleBackColor = true;
-            this.bt_random7.Click += new System.EventHandler(this.bt_random7_Click);
-            // 
-            // bt_random2
-            // 
-            this.bt_random2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random2.Location = new System.Drawing.Point(17, 152);
-            this.bt_random2.Name = "bt_random2";
-            this.bt_random2.Size = new System.Drawing.Size(200, 60);
-            this.bt_random2.TabIndex = 27;
-            this.bt_random2.Text = "產生不重複亂數";
-            this.bt_random2.UseVisualStyleBackColor = true;
-            this.bt_random2.Click += new System.EventHandler(this.bt_random2_Click);
-            // 
-            // bt_random6
-            // 
-            this.bt_random6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random6.Location = new System.Drawing.Point(17, 416);
-            this.bt_random6.Name = "bt_random6";
-            this.bt_random6.Size = new System.Drawing.Size(200, 60);
-            this.bt_random6.TabIndex = 26;
-            this.bt_random6.Text = "name score";
-            this.bt_random6.UseVisualStyleBackColor = true;
-            this.bt_random6.Click += new System.EventHandler(this.bt_random6_Click);
-            // 
-            // bt_random5
-            // 
-            this.bt_random5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random5.Location = new System.Drawing.Point(17, 350);
-            this.bt_random5.Name = "bt_random5";
-            this.bt_random5.Size = new System.Drawing.Size(200, 60);
-            this.bt_random5.TabIndex = 25;
-            this.bt_random5.UseVisualStyleBackColor = true;
-            this.bt_random5.Click += new System.EventHandler(this.bt_random5_Click);
-            // 
-            // bt_random4
-            // 
-            this.bt_random4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random4.Location = new System.Drawing.Point(17, 284);
-            this.bt_random4.Name = "bt_random4";
-            this.bt_random4.Size = new System.Drawing.Size(200, 60);
-            this.bt_random4.TabIndex = 24;
-            this.bt_random4.Text = "產生亂數的方式";
-            this.bt_random4.UseVisualStyleBackColor = true;
-            this.bt_random4.Click += new System.EventHandler(this.bt_random4_Click);
-            // 
-            // bt_random3
-            // 
-            this.bt_random3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random3.Location = new System.Drawing.Point(17, 218);
-            this.bt_random3.Name = "bt_random3";
-            this.bt_random3.Size = new System.Drawing.Size(200, 60);
-            this.bt_random3.TabIndex = 23;
-            this.bt_random3.UseVisualStyleBackColor = true;
-            this.bt_random3.Click += new System.EventHandler(this.bt_random3_Click);
-            // 
-            // bt_random1
-            // 
-            this.bt_random1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_random1.Location = new System.Drawing.Point(17, 86);
-            this.bt_random1.Name = "bt_random1";
-            this.bt_random1.Size = new System.Drawing.Size(200, 60);
-            this.bt_random1.TabIndex = 22;
-            this.bt_random1.Text = "亂數";
-            this.bt_random1.UseVisualStyleBackColor = true;
-            this.bt_random1.Click += new System.EventHandler(this.bt_random1_Click);
+                "rcie\r\nNate\r\nOlivia\r\nPaul\r\nQueenie\r\nRussell\r\nSally\r\nTim\r\nUma\r\nVern\r\nWendy\r\nXavier" +
+                "\r\nYoko\r\nZack";
             // 
             // bt_clear
             // 

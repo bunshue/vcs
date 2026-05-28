@@ -42,10 +42,7 @@
             this.button8 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.button9 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.bt_arrayList15 = new System.Windows.Forms.Button();
@@ -72,7 +69,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(718, 11);
+            this.richTextBox1.Location = new System.Drawing.Point(813, 11);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 0;
@@ -210,32 +207,10 @@
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
-            // button10
-            // 
-            this.button10.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button10.Location = new System.Drawing.Point(19, 305);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(120, 64);
-            this.button10.TabIndex = 14;
-            this.button10.Text = "建立一個ArrayList";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
-            // 
-            // button11
-            // 
-            this.button11.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button11.Location = new System.Drawing.Point(177, 305);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(120, 64);
-            this.button11.TabIndex = 15;
-            this.button11.Text = "建立一個ArrayList";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
-            // 
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(738, 39);
+            this.bt_clear.Location = new System.Drawing.Point(833, 39);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 16;
@@ -243,26 +218,12 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
-            // button12
-            // 
-            this.button12.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button12.Location = new System.Drawing.Point(19, 386);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(120, 64);
-            this.button12.TabIndex = 17;
-            this.button12.Text = "建立一個ArrayList";
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.button12);
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.button11);
             this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.button10);
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.button9);
             this.groupBox1.Controls.Add(this.button4);
@@ -274,7 +235,7 @@
             this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(314, 465);
+            this.groupBox1.Size = new System.Drawing.Size(314, 363);
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ArrayList";
@@ -299,7 +260,7 @@
             this.groupBox2.Controls.Add(this.bt_arrayList03);
             this.groupBox2.Location = new System.Drawing.Point(348, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(348, 566);
+            this.groupBox2.Size = new System.Drawing.Size(442, 597);
             this.groupBox2.TabIndex = 19;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "ArrayList";
@@ -307,9 +268,9 @@
             // bt_arrayList15
             // 
             this.bt_arrayList15.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_arrayList15.Location = new System.Drawing.Point(172, 489);
+            this.bt_arrayList15.Location = new System.Drawing.Point(212, 489);
             this.bt_arrayList15.Name = "bt_arrayList15";
-            this.bt_arrayList15.Size = new System.Drawing.Size(160, 60);
+            this.bt_arrayList15.Size = new System.Drawing.Size(190, 60);
             this.bt_arrayList15.TabIndex = 16;
             this.bt_arrayList15.UseVisualStyleBackColor = true;
             this.bt_arrayList15.Click += new System.EventHandler(this.bt_arrayList15_Click);
@@ -317,9 +278,9 @@
             // bt_arrayList14
             // 
             this.bt_arrayList14.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_arrayList14.Location = new System.Drawing.Point(172, 423);
+            this.bt_arrayList14.Location = new System.Drawing.Point(212, 423);
             this.bt_arrayList14.Name = "bt_arrayList14";
-            this.bt_arrayList14.Size = new System.Drawing.Size(160, 60);
+            this.bt_arrayList14.Size = new System.Drawing.Size(190, 60);
             this.bt_arrayList14.TabIndex = 15;
             this.bt_arrayList14.UseVisualStyleBackColor = true;
             this.bt_arrayList14.Click += new System.EventHandler(this.bt_arrayList14_Click);
@@ -327,39 +288,42 @@
             // bt_arrayList13
             // 
             this.bt_arrayList13.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_arrayList13.Location = new System.Drawing.Point(172, 357);
+            this.bt_arrayList13.Location = new System.Drawing.Point(212, 357);
             this.bt_arrayList13.Name = "bt_arrayList13";
-            this.bt_arrayList13.Size = new System.Drawing.Size(160, 60);
+            this.bt_arrayList13.Size = new System.Drawing.Size(190, 60);
             this.bt_arrayList13.TabIndex = 14;
+            this.bt_arrayList13.Text = "ArrayList 6";
             this.bt_arrayList13.UseVisualStyleBackColor = true;
             this.bt_arrayList13.Click += new System.EventHandler(this.bt_arrayList13_Click);
             // 
             // bt_arrayList12
             // 
             this.bt_arrayList12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_arrayList12.Location = new System.Drawing.Point(172, 291);
+            this.bt_arrayList12.Location = new System.Drawing.Point(212, 291);
             this.bt_arrayList12.Name = "bt_arrayList12";
-            this.bt_arrayList12.Size = new System.Drawing.Size(160, 60);
+            this.bt_arrayList12.Size = new System.Drawing.Size(190, 60);
             this.bt_arrayList12.TabIndex = 13;
+            this.bt_arrayList12.Text = "ArrayList 5";
             this.bt_arrayList12.UseVisualStyleBackColor = true;
             this.bt_arrayList12.Click += new System.EventHandler(this.bt_arrayList12_Click);
             // 
             // bt_arrayList11
             // 
             this.bt_arrayList11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_arrayList11.Location = new System.Drawing.Point(172, 225);
+            this.bt_arrayList11.Location = new System.Drawing.Point(212, 225);
             this.bt_arrayList11.Name = "bt_arrayList11";
-            this.bt_arrayList11.Size = new System.Drawing.Size(160, 60);
+            this.bt_arrayList11.Size = new System.Drawing.Size(190, 60);
             this.bt_arrayList11.TabIndex = 12;
+            this.bt_arrayList11.Text = "ArrayList 4";
             this.bt_arrayList11.UseVisualStyleBackColor = true;
             this.bt_arrayList11.Click += new System.EventHandler(this.bt_arrayList11_Click);
             // 
             // bt_arrayList10
             // 
             this.bt_arrayList10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_arrayList10.Location = new System.Drawing.Point(172, 159);
+            this.bt_arrayList10.Location = new System.Drawing.Point(212, 159);
             this.bt_arrayList10.Name = "bt_arrayList10";
-            this.bt_arrayList10.Size = new System.Drawing.Size(160, 60);
+            this.bt_arrayList10.Size = new System.Drawing.Size(190, 60);
             this.bt_arrayList10.TabIndex = 11;
             this.bt_arrayList10.Text = "ArrayList 3";
             this.bt_arrayList10.UseVisualStyleBackColor = true;
@@ -368,9 +332,9 @@
             // bt_arrayList09
             // 
             this.bt_arrayList09.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_arrayList09.Location = new System.Drawing.Point(172, 93);
+            this.bt_arrayList09.Location = new System.Drawing.Point(212, 93);
             this.bt_arrayList09.Name = "bt_arrayList09";
-            this.bt_arrayList09.Size = new System.Drawing.Size(160, 60);
+            this.bt_arrayList09.Size = new System.Drawing.Size(190, 60);
             this.bt_arrayList09.TabIndex = 10;
             this.bt_arrayList09.Text = "ArrayList 2";
             this.bt_arrayList09.UseVisualStyleBackColor = true;
@@ -379,11 +343,11 @@
             // bt_arrayList08
             // 
             this.bt_arrayList08.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_arrayList08.Location = new System.Drawing.Point(172, 27);
+            this.bt_arrayList08.Location = new System.Drawing.Point(212, 27);
             this.bt_arrayList08.Name = "bt_arrayList08";
-            this.bt_arrayList08.Size = new System.Drawing.Size(160, 60);
+            this.bt_arrayList08.Size = new System.Drawing.Size(190, 60);
             this.bt_arrayList08.TabIndex = 9;
-            this.bt_arrayList08.Text = "ArrayList 1";
+            this.bt_arrayList08.Text = "ArrayList 1 Member";
             this.bt_arrayList08.UseVisualStyleBackColor = true;
             this.bt_arrayList08.Click += new System.EventHandler(this.bt_arrayList08_Click);
             // 
@@ -392,7 +356,7 @@
             this.bt_arrayList07.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_arrayList07.Location = new System.Drawing.Point(6, 489);
             this.bt_arrayList07.Name = "bt_arrayList07";
-            this.bt_arrayList07.Size = new System.Drawing.Size(160, 60);
+            this.bt_arrayList07.Size = new System.Drawing.Size(190, 60);
             this.bt_arrayList07.TabIndex = 8;
             this.bt_arrayList07.UseVisualStyleBackColor = true;
             this.bt_arrayList07.Click += new System.EventHandler(this.bt_arrayList07_Click);
@@ -402,7 +366,7 @@
             this.bt_arrayList06.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_arrayList06.Location = new System.Drawing.Point(6, 423);
             this.bt_arrayList06.Name = "bt_arrayList06";
-            this.bt_arrayList06.Size = new System.Drawing.Size(160, 60);
+            this.bt_arrayList06.Size = new System.Drawing.Size(190, 60);
             this.bt_arrayList06.TabIndex = 7;
             this.bt_arrayList06.Text = "開啟檔案";
             this.bt_arrayList06.UseVisualStyleBackColor = true;
@@ -413,7 +377,7 @@
             this.bt_arrayList05.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_arrayList05.Location = new System.Drawing.Point(6, 357);
             this.bt_arrayList05.Name = "bt_arrayList05";
-            this.bt_arrayList05.Size = new System.Drawing.Size(160, 60);
+            this.bt_arrayList05.Size = new System.Drawing.Size(190, 60);
             this.bt_arrayList05.TabIndex = 6;
             this.bt_arrayList05.Text = "檢查ArrayList";
             this.bt_arrayList05.UseVisualStyleBackColor = true;
@@ -424,7 +388,7 @@
             this.bt_arrayList00.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_arrayList00.Location = new System.Drawing.Point(6, 27);
             this.bt_arrayList00.Name = "bt_arrayList00";
-            this.bt_arrayList00.Size = new System.Drawing.Size(160, 60);
+            this.bt_arrayList00.Size = new System.Drawing.Size(190, 60);
             this.bt_arrayList00.TabIndex = 5;
             this.bt_arrayList00.Text = "清除ArrayList";
             this.bt_arrayList00.UseVisualStyleBackColor = true;
@@ -435,7 +399,7 @@
             this.bt_arrayList01.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_arrayList01.Location = new System.Drawing.Point(6, 93);
             this.bt_arrayList01.Name = "bt_arrayList01";
-            this.bt_arrayList01.Size = new System.Drawing.Size(160, 60);
+            this.bt_arrayList01.Size = new System.Drawing.Size(190, 60);
             this.bt_arrayList01.TabIndex = 0;
             this.bt_arrayList01.Text = "顯示ArrayList資料";
             this.bt_arrayList01.UseVisualStyleBackColor = true;
@@ -446,7 +410,7 @@
             this.bt_arrayList04.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_arrayList04.Location = new System.Drawing.Point(6, 291);
             this.bt_arrayList04.Name = "bt_arrayList04";
-            this.bt_arrayList04.Size = new System.Drawing.Size(160, 60);
+            this.bt_arrayList04.Size = new System.Drawing.Size(190, 60);
             this.bt_arrayList04.TabIndex = 4;
             this.bt_arrayList04.Text = "讀出系統變數";
             this.bt_arrayList04.UseVisualStyleBackColor = true;
@@ -457,7 +421,7 @@
             this.bt_arrayList02.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_arrayList02.Location = new System.Drawing.Point(6, 159);
             this.bt_arrayList02.Name = "bt_arrayList02";
-            this.bt_arrayList02.Size = new System.Drawing.Size(160, 60);
+            this.bt_arrayList02.Size = new System.Drawing.Size(190, 60);
             this.bt_arrayList02.TabIndex = 1;
             this.bt_arrayList02.Text = "加入一筆資料至ArrayList";
             this.bt_arrayList02.UseVisualStyleBackColor = true;
@@ -468,7 +432,7 @@
             this.bt_arrayList03.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_arrayList03.Location = new System.Drawing.Point(6, 225);
             this.bt_arrayList03.Name = "bt_arrayList03";
-            this.bt_arrayList03.Size = new System.Drawing.Size(160, 60);
+            this.bt_arrayList03.Size = new System.Drawing.Size(190, 60);
             this.bt_arrayList03.TabIndex = 3;
             this.bt_arrayList03.Text = "寫入系統變數";
             this.bt_arrayList03.UseVisualStyleBackColor = true;
@@ -487,7 +451,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1006, 641);
+            this.ClientSize = new System.Drawing.Size(936, 641);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -519,10 +483,7 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button bt_clear;
-        private System.Windows.Forms.Button button12;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button bt_arrayList09;
