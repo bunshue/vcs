@@ -156,7 +156,6 @@ namespace vcs_Chart3
 
             chartarea.BackColor = Color.Pink;  // 圖表區背景色
             chartarea.AxisX.MajorGrid.LineColor = Color.Red;  // X軸主格線顏色
-
             chartarea.AxisY.MajorGrid.LineColor = Color.Green;  // Y軸主格線顏色
             chartarea.AxisY.MajorGrid.Enabled = true;  // 顯示Y軸主格線
             chartarea.AxisY.Enabled = AxisEnabled.True; // 啟動Y軸標示
@@ -306,17 +305,6 @@ namespace vcs_Chart3
             string title = "各區比例";
             chart_init(chart4, title);
 
-            string[] name = { "AAA", "BBB", "CCC", "DDD", "EEE" };
-            int[] weight = { 137, 63, 87, 98, 74 };
-
-            //ChartAreas, Legends 基本設定
-            if (chart4.Legends.FindByName("Legends1") == null) //如果chart4沒有包含Legends2才將其Add
-            {
-                // 設定圖例.Legends
-                chart4.Legends.Add(new Legend("Legends1"));  // 將圖例新增到圖表上
-            }
-            //chart4.ChartAreas.Add("ChartArea1");  // 將圖表區2新增到圖表上
-
             // 設定標題2
             chart4.Titles.Add("Title1");  // 將標題新增到圖表上
             chart4.Titles["Title1"].DockedToChartArea = "ChartArea1";  // 設定標題要顯示在哪個圖表區
@@ -331,6 +319,9 @@ namespace vcs_Chart3
             chart4.Legends["Legends1"].BackHatchStyle = ChartHatchStyle.DarkDownwardDiagonal;
             chart4.Legends["Legends1"].BorderWidth = 1;
             chart4.Legends["Legends1"].BorderColor = Color.FromArgb(200, 200, 200);
+
+            string[] name = { "AAA", "BBB", "CCC", "DDD", "EEE" };
+            int[] weight = { 137, 63, 87, 98, 74 };
 
             // 設定數列1 的 大小與外觀
             Series series1 = new Series("體重1");
