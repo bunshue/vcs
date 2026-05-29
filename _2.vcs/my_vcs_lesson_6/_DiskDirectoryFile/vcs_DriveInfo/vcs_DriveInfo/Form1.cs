@@ -369,3 +369,11 @@ namespace vcs_DriveInfo
 
 */
 
+/*
+dddd
+取得硬碟資訊
+            System.IO.DriveInfo di = new System.IO.DriveInfo(@"C:\");
+            richTextBox1.Text += "TotalFreeSpace : " + di.TotalFreeSpace.ToString() + "\n";
+            richTextBox1.Text += "VolumeLabel : " + di.VolumeLabel + "\n";
+
+*/

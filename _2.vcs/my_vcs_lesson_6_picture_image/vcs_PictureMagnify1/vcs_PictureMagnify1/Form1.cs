@@ -39,7 +39,6 @@ namespace vcs_PictureMagnify1
             img = new Bitmap(filename);
 
             show_item_location();
-
         }
 
         void show_item_location()
@@ -49,7 +48,7 @@ namespace vcs_PictureMagnify1
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
+
             groupBox1.Size = new Size(100, 120);
             groupBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
 
@@ -59,7 +58,12 @@ namespace vcs_PictureMagnify1
             rb_magnifying_type1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             rb_magnifying_type2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
 
-            this.ClientSize = new Size(img.Width + 200, img.Height + 200);// 調整視窗客戶區寬高
+            this.Size = new Size(1300, 680);
+            this.Text = "呈現部分影像";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         // 表單重畫事件

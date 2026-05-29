@@ -41,6 +41,8 @@ namespace vcs_Mix00
         {
             show_item_location();
 
+            //6060
+
             //網頁protocol	解決  要求已經中止: 無法建立 SSL/TLS 的安全通道。
             // Allow TLS 1.1 and TLS 1.2 protocols for file download.
             //for Sugar     3840 Romeo也可用
@@ -209,17 +211,14 @@ namespace vcs_Mix00
             richTextBox1.Text += "開啟 滑鼠 設定\n";
             //Process.Start("main.cpl");
 
-
             richTextBox1.Text += "開啟 網路連線 設定\n";
             //Process.Start("ncpa.cpl");
-
 
             richTextBox1.Text += "開啟 聲音 設定\n";
             //Process.Start("mmsys.cpl");
 
             richTextBox1.Text += "開啟 寄信程式\n";
             //Process.Start("mailto:david@insighteyes.com");
-
 
             //NG
             //Process.Start(Environment.SystemDirectory + "/osk.exe");
@@ -235,7 +234,6 @@ namespace vcs_Mix00
 
             richTextBox1.Text += "開啟 小畫家\n";
             //Process.Start("mspaint.exe");
-
 
             richTextBox1.Text += "開啟 WordPad\n";
             //Process.Start("write.exe");
@@ -615,60 +613,6 @@ namespace vcs_Mix00
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //DirectoryInfo 測試
-
-            // 建立DirectoryInfo類別的dir物件，可用來操作資料夾目錄
-            DirectoryInfo dir = new DirectoryInfo("D:\\_git\\vcs\\CSharp");
-            if (dir.Exists)
-            {	// 判斷目錄是否存在
-                richTextBox1.Text += "D:\\_git\\vcs\\CSharp 路徑存在, 不建立目錄\n";
-            }
-            else
-            {
-                richTextBox1.Text += "D:\\_git\\vcs\\CSharp 路徑不存在，建立目錄\n";
-                dir.Create();	// 建立目錄
-                dir.Refresh();	// 重新整理目錄
-            }
-            richTextBox1.Text += dir.FullName + " 檔案資訊如下 :\n";
-            richTextBox1.Text += "建立時間 : " + dir.CreationTime + "\n";
-            richTextBox1.Text += "存取時間 : " + dir.LastAccessTime + "\n";
-            richTextBox1.Text += "資料夾名稱 : " + dir.Name + "\n";
-            richTextBox1.Text += "根目錄 : " + dir.Parent + "\n";
-
-            Console.Write("是否刪除 D:\\_git\\vcs\\CSharp 資料夾   1.刪除  2.不刪除->");
-            if (Console.ReadLine() == "1")
-            {
-                try
-                {
-                    dir.Delete();	       // 刪除檔案
-                    richTextBox1.Text += "刪除成功" + "\n";
-                }
-                catch (Exception ex)   // 刪除檔案失敗會產生例外
-                {
-                    richTextBox1.Text += "刪除失敗" + "\n";
-                    richTextBox1.Text += ex.Message + "\n";  // 顯示例外訊息
-                }
-            }
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            //Console.Write("請輸入路徑->");
-            //string fpath = Console.ReadLine();
-
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1\_case1";
-
-            DirectoryInfo dir2 = new DirectoryInfo(foldername);
-            if (!dir2.Exists)	//判斷路徑是否不存在
-            {
-                richTextBox1.Text += "路徑不存在" + "\n";
-                return;
-            }
-            richTextBox1.Text += dir2.FullName + ", 資料夾下的子資料夾如下 :\n";
-            DirectoryInfo[] subdir = dir2.GetDirectories();
-            foreach (DirectoryInfo r in subdir)
-            {
-                richTextBox1.Text += "完整路徑 : " + r.FullName + "\t建立時間 : " + r.CreationTime + "\n";
-            }
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -759,7 +703,6 @@ namespace vcs_Mix00
             }
             richTextBox1.Text += "\n";
 
-
             //data_to_write = camera_serial_data.Substring(0, 16); //原本是這一行，改寫成以下。
             try
             {   //可能會產生錯誤的程式區段
@@ -779,7 +722,6 @@ namespace vcs_Mix00
                 richTextBox1.Text += "data_to_write : " + data_to_write + "\n";
                 richTextBox1.Text += "\nlen = " + data_to_write.Length.ToString() + "\n";
             }
-
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -1022,17 +964,6 @@ namespace vcs_Mix00
 
         private void button20_Click(object sender, EventArgs e)
         {
-            //FileInfo
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            FileAttributes attr = (new FileInfo(filename)).Attributes;
-            if ((attr & FileAttributes.ReadOnly) > 0)
-            {
-                richTextBox1.Text += "唯讀檔案\n";
-            }
-            else
-            {
-                richTextBox1.Text += "一般檔案\n";
-            }
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -1213,6 +1144,8 @@ namespace vcs_Mix00
             }
         }
         */
+
+        //6060
 
         private void button23_Click(object sender, EventArgs e)
         {
@@ -1733,42 +1666,6 @@ namespace vcs_Mix00
 
         private void button36_Click(object sender, EventArgs e)
         {
-            string input, sel;
-            StreamReader sr;
-            StreamWriter sw;
-            FileInfo f;
-            string filename = "tmp_aaaa.txt";
-
-            f = new FileInfo(filename);
-
-            Console.Write("請選擇功能->1.寫入  2.附加   其他.離開：");
-
-            sel = "1";
-            if (sel == "1")
-            {
-                sw = f.CreateText();  //開啟新檔
-                input = "寫入AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
-                //將輸入的資料覆蓋原檔並重新寫入
-                sw.WriteLine(input);
-                sw.Flush();
-                sw.Close();
-
-            }
-            else if (sel == "2")
-            {
-                sw = f.AppendText();   //開啟舊檔
-                input = "附加AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
-                //將輸入的資料附加到資料檔的最後
-                sw.WriteLine(input);
-                sw.Flush();
-                sw.Close();
-            }
-
-            sr = f.OpenText();  //以唯讀模式開檔
-            Console.WriteLine("資料檔內容如下：");
-            Console.WriteLine(sr.ReadToEnd());//讀出資料
-            sr.Close();
-            Console.WriteLine("================================");
         }
 
         private void button37_Click(object sender, EventArgs e)

@@ -224,7 +224,6 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(200, 60);
             this.button10.TabIndex = 110;
-            this.button10.Text = "DirectoryInfo測試";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -333,7 +332,6 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(200, 60);
             this.button20.TabIndex = 120;
-            this.button20.Text = "FileInfo";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -507,7 +505,6 @@
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(200, 60);
             this.button36.TabIndex = 136;
-            this.button36.Text = "讀寫檔案";
             this.button36.UseVisualStyleBackColor = true;
             this.button36.Click += new System.EventHandler(this.button36_Click);
             // 

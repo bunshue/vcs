@@ -26,6 +26,16 @@ rtb
             string sign = new string('*', 30);
             Console.WriteLine(sign);
 
+表單相關 Form
+
+mmmm滑鼠相關
+kkkk鍵盤相關
+vvvv影音相關
+gggg git相關
+
+
+
+
 //------------------------------------------------------------  # 60個
 
 //量測時間
@@ -39,7 +49,7 @@ rtb
             richTextBox1.Text += "耗時 : " + (duration / 1000).ToString() + "." + (duration % 1000).ToString("D3") + " 秒\n";
 
 //------------------------------------------------------------  # 60個
-'
+
 計算程式執行的時間
 
 int URms = System.Environment.TickCount;
@@ -52,7 +62,6 @@ Console.WriteLine("花費 {0} ms 完成!!!", Environment.TickCount - URms);
             
 vcs待尋找
 目前用webbrowser顯示pdf檔案, 無法用程式的方法得知此時看到第幾頁 也無法得知目前頁面顯示比例
-
 
 控件StatusStrip
 加選ProgressBar
@@ -126,15 +135,10 @@ Points1 為 已知點數
 //------------------------------------------------------------  # 60個
 
 'Microsoft.ACE.OLEDB.12.0' 提供者並未登錄於本機電腦上。
-
 使用触发器删除相关联的两表间的数据
-
 --判断是否存在名为‘tri_delete_laborage’的触发器
-
 select name from sysobjects where name='tri_delete_laborage' and type='TR')
-
 drop trigger tri_delete_laborage--删除已经存在的触发器
-
 
 select name from sysobjects where name='proc_TransInProc'and type='p'
 
@@ -174,8 +178,6 @@ public Point? GetIntersectionWith(Line secondLine);
             Matrix3x3 matrix = Matrix3x3.CreateFromRows(row0, row1, row2);
             */
 
-
-
             //CreateFromColumnsTest
             Vector3 column0 = new Vector3(1, 4, 7);
             Vector3 column1 = new Vector3(2, 5, 8);
@@ -195,24 +197,6 @@ public Point? GetIntersectionWith(Line secondLine);
             //matrix.GetColumn(-1);
             //matrix.GetColumn(3);
             
-//------------------------------------------------------------  # 60個
-
-            //使用递归法删除文件夹中的所有文件
-            string foldername = @"D:\_git\vcs\_1.data\______test_files2\_book_magazine";
-
-            int file_no = 0;
-            DirectoryInfo DInfo = new DirectoryInfo(foldername);//创建DirectoryInfo对象
-            FileSystemInfo[] FSInfo = DInfo.GetFileSystemInfos();  // 獲取所有的文件
-            for (int i = 0; i < FSInfo.Length; i++)//遍歷獲取到的文件
-            {
-                FileInfo FInfo = new FileInfo(foldername + "\\" + FSInfo[i].ToString());//创建FileInfo对象
-                //FInfo.Delete();//删除文件
-                richTextBox1.Text += "偽刪除 " + foldername + "\\" + FSInfo[i].ToString() + "\n";
-                file_no++;
-            }
-            richTextBox1.Text += "删除成功\n共刪除 " + file_no.ToString() + " 個檔案\n";
-
-
 //------------------------------------------------------------  # 60個
 
 Windows 的 文字轉語音 (Text-to-Speech) 功能，或使用螢幕閱讀器 (Narrator) 來朗讀我的回答。
@@ -261,21 +245,15 @@ using System.Diagnostics;           //for Debug
 //------------------------------------------------------------  # 60個
 
 C# Debug的方法，可以將debug msg在『輸出』視窗觀看
-
 using System.Diagnostics;
- 
 Debug.Print("欲輸出訊息");
-
 "即時運算視窗"
-
 勾選 
 【工具】→【選項】→【偵錯】→【將所有輸出視窗文字重新導向到即時運算視窗】
-
 
 //------------------------------------------------------------  # 60個
 
 不用richTextBox的debug方法            
-
 寫
 System.Diagnostics.Debug.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 
@@ -363,16 +341,16 @@ Debug.Print("AAAAAAAAAAAAAAAAAAaa i = " + i.ToString());
 
 //------------------------------------------------------------  # 60個
 
-每逢整點時跳一個clock顯示5秒即消失
-
 poem+一頁模式
-
-this.acceptButton = btn.....
 
 //------------------------------------------------------------  # 60個
 
-TextBox設定星號
+cccc
+this.acceptButton = btn.....
 
+//------------------------------------------------------------  # 60個
+cccc
+TextBox設定星號
             toolStripTextBox3.TextBox.PasswordChar = '*';
 
 //------------------------------------------------------------  # 60個
@@ -411,238 +389,6 @@ TextBox設定星號
 		   }
 		   sr.Close ();
 		   sw.Close ();
-
-//------------------------------------------------------------  # 60個
-
-dddd
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string path2 = @"../../data";
-            string fnShow = "檔案清單---<*.TXT>";
-            try
-            {
-                //取得檔案路徑訊息
-                DirectoryInfo currentDir = new
-                   DirectoryInfo(path2);
-                //從指定路徑傳回指定的檔案類型
-                FileInfo[] listFile = currentDir.GetFiles("*.txt");
-                //設定檔案的標題
-                //string header = fnShow + "\n" + $"{"檔名",-16}{"檔案長度",-12}{"修改日期"}" + "\n";
-                string header = fnShow + "\n" + "檔名" + "檔案長度" + "修改日期" + "\n";
-                richTextBox1.Text = header;
-
-                /* 讀取資料夾中有關於 --檔名(Name)、長度(Length)
-                   和修改日期(LastWriteTime)*/
-                foreach (FileInfo getInfo in listFile)
-                {
-                    /*
-                    richTextBox1.Text += $"{getInfo.Name,-15}" +
-                       $"{getInfo.Length.ToString(),-11}" +
-                       $"{getInfo.LastWriteTime.ToShortDateString(),15}" + "\n";
-                    */
-                    richTextBox1.Text += getInfo.Name + "\t" + getInfo.Length.ToString() + "\t" + getInfo.LastWriteTime.ToShortDateString() + "\n";
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //新增檔案
-            //指定路徑建立檔案
-            string path = @"_tmp_aaaa.txt";
-            FileInfo createFile = new FileInfo(path);
-            //以Create方法新增一個檔案
-            FileStream fs = createFile.Create();
-            fs.Close();//關閉檔案
-
-            //複製檔案
-            path = @"_tmp_aaaa.txt";
-            //目的檔案「Text.txttmp」
-            String tagPath = path + "tmp";
-            FileInfo copyFile = new FileInfo(path);
-            try
-            {
-                //以CopyTo方法複製檔案
-                copyFile.CopyTo(tagPath);
-                richTextBox1.Text = path + " 已複製";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            //刪除檔案
-            path = @"_tmp_aaaa.txt";
-            copyFile = new FileInfo(path);
-            if (copyFile.Exists == false)//查看檔案是否存在
-            {
-                MessageBox.Show("無此檔案");
-            }
-            else
-            {
-                copyFile.Delete();//刪除檔案
-            }
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            string path = @"_tmp_bbbb.txt";
-            string str;
-            FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
-            StreamWriter sw = new StreamWriter(fs, Encoding.Unicode);
-
-            //想儲存的文字
-            str = "aaaaaaaaa";
-            sw.WriteLine(str);  //將資料寫入檔案
-            sw.Close();   //關閉sw資料流
-
-            //檔案內所輸入的文字為
-            FileStream f = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Read);
-            StreamReader sr = new StreamReader(f, Encoding.Unicode);
-            sr.BaseStream.Seek(0, SeekOrigin.Begin);
-            while (sr.Peek() > -1)
-            {
-                richTextBox1.Text += sr.ReadLine() + "\n";//讀出檔案
-            }
-            sr.Close();  //關閉資料流
-        }
-
-dddd
-        private void button4_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string path = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook\";
-                //取得資料夾最後一次被存取的時間
-                DateTime dt = Directory.GetLastWriteTime(path);
-                //如果資料夾不存在就建立資料夾
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-                else
-                {
-                    richTextBox1.Text += "資料夾建立的時間 : " + dt + "\n";
-                }
-                //更新時間
-                Directory.SetLastWriteTime(path, DateTime.Now);
-                dt = Directory.GetLastWriteTime(path);
-                richTextBox1.Text += "最後存取時間 : " + dt + "\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "無法建立 : " + e.ToString() + "\n";
-            }
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            //BinaryReader
-
-            BinaryReader readBit;
-            FileStream objStream;
-            //設定欲讀取檔案的路徑
-            string path = @"D:\_git\vcs\_1.data\______test_files1\__RW\_bin\vcs_ReadWrite_BIN.bin";
-
-            int count = 0;
-            try
-            {
-                objStream = new FileStream(path, FileMode.Open, FileAccess.Read);
-
-                //使用using陳述詞，確保資源的釋放
-                using (readBit = new BinaryReader(objStream))
-                {
-                    do
-                    {
-                        //以位元組為單位讀取檔案內容，16進位方式顯示
-                        richTextBox1.Text += readBit.ReadByte().ToString() + " ";
-                        count += 1;
-                        //'** 換行
-                        if (count == 10)
-                        {
-                            richTextBox1.Text += "\n";
-                            count = 0;
-                        }
-                    } while (true);
-                }
-            }
-            catch (IndexOutOfRangeException ex)
-            {
-                richTextBox1.Text += "沒有指定檔案\n";
-            }
-
-            catch (EndOfStreamException ex)
-            {
-                richTextBox1.Text += "檔案讀取完畢\n";
-            }
-
-            catch (Exception ex)
-            {
-                richTextBox1.Text += ex.Message + "\n";
-            }
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            //BinaryWriter
-
-            BinaryWriter objWriter;
-            FileStream objStream;
-            string path = @"tmp_BinaryWriter.txt";
-            try
-            {
-                objStream = new FileStream(path, FileMode.Append, FileAccess.Write);
-                //使用using敘詞，寫入完墓會自動釋放資源
-                using (objWriter = new BinaryWriter(objStream))
-                {
-                    // 寫入字串
-                    objWriter.Write("空山不見人");
-                    objWriter.Write("Visual C# 7.0");
-                    // 寫入數值
-                    objWriter.Write(640526);
-                }
-            }
-            catch (IndexOutOfRangeException ex)
-            {
-                richTextBox1.Text += "沒有指定檔案\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += ex.Message + "\n";
-            }
-
-            //------------------------------------------------------------  # 60個
-
-            BinaryReader objReader;
-            //FileStream objStream;
-            path = @"tmp_03aa.txt";
-            try
-            {
-                objStream = new FileStream(path, FileMode.Open, FileAccess.Read);
-                objReader = new BinaryReader(objStream);
-                richTextBox1.Text += objReader.ReadString() + "\n";
-                richTextBox1.Text += objReader.ReadInt32() + "\n";
-                objReader.Close();
-            }
-            catch (IndexOutOfRangeException ex)
-            {
-                richTextBox1.Text += "沒有指定檔案\n";
-            }
-
-            catch (EndOfStreamException ex)
-            {
-                richTextBox1.Text += "檔案讀取完畢\n";
-            }
-
-            catch (Exception ex)
-            {
-                richTextBox1.Text += ex.Message + "\n";
-            }
-        }
 
 //------------------------------------------------------------  # 60個
 
@@ -1086,7 +832,6 @@ printDocument_pascal
 //------------------------------------------------------------  # 60個
 
 textBox 屬性設定
-            txtShow.Dock = DockStyle.Fill; // txtShow文字方塊填滿整個標籤頁
             // txtShow 字型大小11
             txtShow.Font = new Font(txtShow.Font.FontFamily, 11, FontStyle.Regular);
             txtShow.ReadOnly = true;
@@ -1499,7 +1244,7 @@ g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;//使画出
             //same
             pictureBox1.Image = new Bitmap(filename);
 
-            //pictureBox1.ImageLocation = filename;   //可顯示圖片 但無法抓出圖片的相關資訊
+            //pictureBox1.ImageLocation = filename;
 
             /*
             int width = pictureBox1.Image.Width;
@@ -1523,21 +1268,19 @@ g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;//使画出
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;     //讓表單大小可以自動隨著圖片大小變化。
             this.TransparencyKey = SystemColors.ControlLight;   //將表單的TransparencyKey設為Control，這樣可以去掉桌面小玩意外圍多餘的部份
             this.ShowInTaskbar = false;
-            //this.StartPosition = FormStartPosition.CenterScreen;
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
             this.BackColor = Color.Black;
 
-            //pictureBox1.Dock = DockStyle..Fill;      //停駐於父容器中
             pictureBox1.Location = new Point((this.Width - pictureBox1.Image.Width) / 2, (this.Height - pictureBox1.Image.Height) / 2);
 
 //------------------------------------------------------------  # 60個
 
 dddd
 _filename = Path.GetFullPath(Path.Combine(Application.StartupPath, "..\\..")) + "\\test.png";
-filename1 = Path.GetFullPath(Path.Combine(System.Windows.Forms.Application.StartupPath, @"..\..")) + @"\Step.doc";
+filename1 = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\Step.doc";
 
 //string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\Step.doc";
 //string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\bmp_format.docx";
@@ -2130,13 +1873,13 @@ this.notifyIcon1.Visible = false;
 主窗體中拖入一個ContextMenu控件NicontextMenu，點中控件，在上下文菜單中添加菜單，notifyIcon1的ContextMenu行為中選中NicontextMenu 作為上下文菜單。
 代碼如下：
 
-this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-this.NicontextMenu = new System.Windows.Forms.ContextMenu();
-this.menuItem_Hide = new System.Windows.Forms.MenuItem();
+this.notifyIcon1 = new NotifyIcon(this.components);
+this.NicontextMenu = new ContextMenu();
+this.menuItem_Hide = new MenuItem();
 
-this.menuItem_Show = new System.Windows.Forms.MenuItem();
-this.menuItem_Aubot = new System.Windows.Forms.MenuItem();
-this.menuItem_Exit = new System.Windows.Forms.MenuItem();
+this.menuItem_Show = new MenuItem();
+this.menuItem_Aubot = new MenuItem();
+this.menuItem_Exit = new MenuItem();
 this.notifyIcon1.ContextMenu = this.NicontextMenu;
 this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject( "NotifyIcon.Icon ")));
 this.notifyIcon1.Text = " ";
@@ -2144,7 +1887,7 @@ this.notifyIcon1.Visible = true;
 this.notifyIcon1.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
 this.notifyIcon1.Click += new System.EventHandler(this.notifyIcon1_Click);
 this.NicontextMenu.MenuItems.AddRange(
-	new System.Windows.Forms.MenuItem[]
+	new MenuItem[]
 	{
 		this.menuItem_Hide,
 		this.menuItem_Show,
@@ -3413,26 +3156,6 @@ this.toggleOption(0, 2, false);
 
                 webcam_name = USBWebcams[0].Name + " " + Cam.VideoCapabilities[0].FrameSize.Width.ToString() + " X " + Cam.VideoCapabilities[0].FrameSize.Height.ToString() + " @ " + Cam.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
                 this.Text = webcam_name;
-
-                if (Screen.PrimaryScreen.Bounds.Width == 1920)
-                {
-                    if (ww >= Screen.PrimaryScreen.Bounds.Width)
-                    {
-                        pictureBox1.Size = new Size(1920, 1080);
-                        pictureBox1.Location = new Point(0, 0);
-                        this.FormBorderStyle = FormBorderStyle.None;
-                        this.WindowState = FormWindowState.Maximized;
-                        //this.Size = new Size(pictureBox1.Size.Width + 200, pictureBox1.Size.Height + 200);
-                    }
-                    else if (ww < Screen.PrimaryScreen.Bounds.Width)
-                    {
-                        pictureBox1.Size = new Size(ww, hh);
-                        pictureBox1.Location = new Point(140, 60);
-                        this.FormBorderStyle = FormBorderStyle.FixedSingle;
-                        this.WindowState = FormWindowState.Normal;
-                        this.ClientSize = new Size(pictureBox1.Location.X + pictureBox1.Width + 50, pictureBox1.Location.Y + pictureBox1.Height + 50);
-                    }
-                }
             }
             else
             {
@@ -3617,13 +3340,14 @@ txtFile.Text = Application.ExecutablePath;
             richTextBox1.Text += "BBB = " + SystemInformation.FrameBorderSize.Height.ToString() + "\n"; //8
             richTextBox1.Text += "CCC = " + SystemInformation.CaptionHeight.ToString() + "\n";          //23
 
+6060
 
 ScreenSaver最簡版
 只要能顯示一張圖 或用label顯示時間
 
 移動滑鼠 或 鍵盤按鍵 離開螢幕保護程式
 
-
+6060
 
 vcs_bitmap_tmp
 
@@ -3670,10 +3394,6 @@ clone語法
 Bitmap/Image存檔
 
 //------------------------------------------------------------  # 60個
-pikasa
-            this.ShowInTaskbar = false;
-            this.MaximizeBox = false;
-            this.StartPosition = FormStartPosition.CenterScreen;
 
 //------------------------------------------------------------  # 60個
 
@@ -3975,9 +3695,7 @@ pictureCrop 標準版
 
 WebClient不能處理特定於任何協議的任何特性，例如Cookie等。如果需要使用這些特性，需要使用.net中的HttpWebRequest類。
 
-
 The Sacred Geometry of the Yin Yang
-
 
 MyScreenSaver.rar
 C#制作簡易屏保，
@@ -3993,7 +3711,6 @@ ProgressBar類是密封(sealed)的，不能再被繼承。
 pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
 pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
 pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
-
 
 private int intStartX = 0;
 private int intStartY = 0;
@@ -5126,6 +4843,7 @@ vcs_test_all_04_Dialog
 
 //------------------------------------------------------------  # 60個
 
+mmmm
 鼠標相關的事件大致有六種，分別是 ：
 "MouseHover"、"MouseLeave"、"MouseEnter"、"MouseMove"、"MouseDown"和"MouseUp"。
 
@@ -6079,12 +5797,6 @@ public bool IsAdministrator()
 
 //------------------------------------------------------------  # 60個
 
-C# 文件創建時間，修改時間，
-
-FileInfo fi = new FileInfo(@"D:\site\EKECMS\skin\Grey\default#.html");
-Response.Write("修改時間：" + fi.LastWriteTime.ToString() + "<br>");
-Response.Write("創建時間：" + fi.CreationTime.ToString() + "<br>");
-
 //在代碼中設置控件的padding 設置Label的字體
 如果要在代碼中設置margin，可以使用如下代碼：
 this.label1.Padding = new Padding(20,8,20,8);
@@ -6092,9 +5804,6 @@ this.label1.Padding = new Padding(20,8,20,8);
 
 設置Label的字體代碼：
 this.label1.Font = new Font(label1.Font.FontFamily,10f);
-
-設置Label的背景色代碼：
-this.label1.BackColor = Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(238)))), ((int)(((byte)(255)))));
 
 //------------------------------------------------------------  # 60個
 
@@ -6370,11 +6079,6 @@ Console.WriteLine(text);
 StreamReader fileReader = new StreamReader(@"C:\File\file.txt");
 string text = fileReader.ReadToEnd();
 Console.WriteLine(text);			
-
-使用 C# 中的 FileInfo.Length 屬性獲取檔案大小
-FileInfo fileinfo = new FileInfo("dark.jpg");
-Console.WriteLine(fileinfo.Length);
-FileInfo 類提供了用於在 C# 中建立，開啟，複製，刪除和移動檔案的方法。
 
 //------------------------------------------------------------  # 60個
 
@@ -6863,41 +6567,6 @@ void normal(point p)
 
 //------------------------------------------------------------  # 60個
 
-            string dir1 = @"C:\______test_files\compare1";
-
-            string[] file_names1 = Directory.GetFiles(dir1);
-            for (int i = 0; i < file_names1.Length; i++)
-            {
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + file_names1[i] + "\n";
-                file_names1[i] = file_names1[i].Replace(dir1, "");
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + file_names1[i] + "\n";
-            }
-            Array.Sort(file_names1);
-
-            List<string> name_list = new List<string>();
-            for (int i = 0; i < file_names1.Length; i++)
-            {
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + file_names1[i] + "\n";
-                name_list.Add(file_names1[i]);
-
-            }
-
-
-            DirectoryInfo dir1_info = new DirectoryInfo(dir1);
-            FileInfo[] fi = dir1_info.GetFiles();
-
-            int len = fi.Length;
-            richTextBox1.Text += "len = " + len.ToString() + "\n";
-
-            for (int i = 0; i < len; i++)
-            {
-                richTextBox1.Text += fi[i].Name + "\n";
-
-            }
-
-
-
-
 //以下未預設值, 寫不寫都一樣
 //gluOrtho2D(-1.0, 1.0, -1.0, 1.0);   //窗口座標範圍2D, 顯示範圍 : X軸(-1.0 ~ 1.0) Y軸(-1.0 ~ 1.0), 左下為原點
 
@@ -6952,12 +6621,8 @@ typedef unsigned char      BOOLEAN;
 #define READ_REG_INT8U(Addr)         *((INT8U*)(Addr))
 #define WRITE_REG_INT8U(Addr,Value)  *((INT8U*)(Addr))=Value
 
-
-
 bool animate = true;
-
         animate ^= 1;
-
 
 // display image to the screen as textured quad
 void displayImage(GLuint texture)
@@ -8441,7 +8106,7 @@ Console.WriteLine(x[4]); //o
             pictureBox1.Cursor = Cursors.HSplit;
             pictureBox1.Cursor = Cursors.No;
             
-            this.Cursor = System.Windows.Forms.Cursors.Help;
+            this.Cursor = Cursors.Help;
             this.Cursor = Cursors.Help; 
             
             this.Cursor = Cursors.WaitCursor;	//等待標記
@@ -8576,43 +8241,6 @@ s.Substring(0,1).ToUpper()+s.Substring(1);
         }
 
 //------------------------------------------------------------  # 60個
-dddd
-	//C# 取得資料夾下的所有檔案(包括子目錄)
-	//顯示每個檔案的資訊
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string path = String.Empty;
-            string filetype = String.Empty;
-            filetype = "*.*";
-
-            //path = @"D:\_DATA2\_VIDEO_全為備份\百家??_清十二帝疑案";
-            path = @"C:\______test_files";
-
-            //C# 取得資料夾下的所有檔案(包括子目錄)
-            string[] files = System.IO.Directory.GetFiles(path, filetype, System.IO.SearchOption.AllDirectories);
-            foreach (string filename in files)
-            {
-                richTextBox1.Text += "原撈到的檔案 : " + filename + "\n";
-                FileInfo fi = new FileInfo(filename);
-                richTextBox1.Text += "Name :" + fi.Name + "\n";
-                richTextBox1.Text += "FullName :" + fi.FullName + "\n";
-                richTextBox1.Text += "Directory :" + fi.Directory + "\n";
-                richTextBox1.Text += "DirectoryName :" + fi.DirectoryName + "\n";
-                richTextBox1.Text += "Extension :" + fi.Extension + "\n";
-                richTextBox1.Text += "Length :" + fi.Length.ToString() + "\n";
-                //C# 取得檔案建立日期,及最後修改日期 
-                richTextBox1.Text += "檔案建立日期" + fi.CreationTime.ToString() + "\n";
-                richTextBox1.Text += "檔案最後修改日期" + fi.LastWriteTime.ToString() + "\n";
-                //C# 取得檔案路徑、副檔名、檔案大小
-                richTextBox1.Text += "檔案路徑： " + filename.ToString() + "\n";
-                richTextBox1.Text += "副檔名： " + filename.Substring(filename.LastIndexOf(".") + 1, filename.Length - filename.LastIndexOf(".") - 1) + "\n";    //取得副檔名
-                richTextBox1.Text += "檔案大小： " + File.Open(filename, FileMode.Open).Length.ToString() + " 位元組\n";
-                richTextBox1.Text += "\n";
-            }
-
-        }
-
-//------------------------------------------------------------  # 60個
 
 除去換行符號
             //置換換行符號為空白，讓messagebox秀出輸入的字串
@@ -8714,12 +8342,11 @@ bool res;
 res = my_string.ToLower().Replace(" ", "").Contains(str2.ToLower().Replace("-", ""));
 richTextBox1.Text += "result = " + res.ToString() + "\n";
 
-
+6060
 
 在Windows上，[路徑]必須<248拜，[檔名加路徑]名必須<260拜
 
 	List<Point> points = new List<Point>(); // 紀錄滑鼠軌跡的陣列。	
-
 	List<MyFileInfo> fileinfos = new List<MyFileInfo>();             
 
 1維list宣告
@@ -8792,29 +8419,17 @@ https://blog.csdn.net/m_buddy/article/details/62417912
             return false;
         }
 
-
+6060
 
 一些vcs資料
 http://createps.pixnet.net/blog/category/1630969/2
 
-g.DrawString("直接設定字型與大小", new Font("宋体", 30), Brushes.Red, 10, 10);
-
-
-C# - 取得隨機字串的快速方法 
-
+6060
 
 C#語言下路徑指定方式有兩種:
 
     是使用兩個斜線，例如    "C:\\Test.txt"
     第二種是在路徑前加上@符號，例如    @"C:\Test.txt"
-
-
-dddd
-取得硬碟資訊
-            System.IO.DriveInfo di = new System.IO.DriveInfo(@"C:\");
-            richTextBox1.Text += "TotalFreeSpace : " + di.TotalFreeSpace.ToString() + "\n";
-            richTextBox1.Text += "VolumeLabel : " + di.VolumeLabel + "\n";
-
 
 //------------------------------------------------------------  # 60個
 
@@ -8835,19 +8450,18 @@ data : 10.0.17134.220 (WinBuild.160101.0800)
 
 //------------------------------------------------------------  # 60個
 
-this.Cursor = System.Windows.Forms.Cursors.Hand;
-
+this.Cursor = Cursors.Hand;
 
 改變鼠標
 
         private void panel1_MouseHover(object sender, EventArgs e)
         {
-            this.Cursor = System.Windows.Forms.Cursors.VSplit;
+            this.Cursor = Cursors.VSplit;
         }
 
         private void panel1_MouseLeave(object sender, EventArgs e)
         {
-            this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Cursor = Cursors.Default;
         }
         
 21. 變更滑鼠鼠標圖案 ( 有效範圍在Form內 )。
@@ -9281,8 +8895,8 @@ System.Threading.Thread.Sleep( 5000 ); // wait 5 seconds (5000 milliseconds)
 // http://social.msdn.microsoft.com/Forums/en/csharpgeneral/thread/79efecc4-fa6d-4078-afe4-bb1379bb968b
 
 // Default values for full screen
-int width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
-int height = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+int width = Screen.PrimaryScreen.Bounds.Width;
+int height = Screen.PrimaryScreen.Bounds.Height;
 int top = 0;
 int left = 0;
 
@@ -9376,11 +8990,6 @@ vcs不可畫點，用畫橢圓取代
 
 //------------------------------------------------------------  # 60個
 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-
-//------------------------------------------------------------  # 60個
-
 vcs_test_all_04_Dialog
 
 openFileDialog1.Filter = "XML設定檔|*.xml";
@@ -9407,8 +9016,7 @@ openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.wmf|*.jpg;*.jpe
 
 //------------------------------------------------------------  # 60個
 
-改變pictureBox大小改變表單位置
-
+RTB
 改變部分字體顏色
             richTextBox1.SelectionStart = 10;
             richTextBox1.SelectionLength = 5;
@@ -9607,30 +9215,6 @@ dtpicker_first dtpicker_second 為DateTimePicker
                 DateAndTime.DateDiff(	//使用DateDiff方法獲取日期間隔
                 DateInterval.Day, dtpicker_first.Value, dtpicker_second.Value,
                 FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1).ToString()+" 天", "間隔時間");
-
-//------------------------------------------------------------  # 60個
-
-計算GB MB KB
-
-        const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
-        const int MB = 1024 * 1024;//定義MBW的計算常量
-        const int KB = 1024;//定義KB的計算常量
-        public string ByteConversionGBMBKB(Int64 KSize)
-        {
-            if (KSize / GB >= 1)
-                return (Math.Round(KSize / (float)GB, 2)).ToString() + "GB";
-            else if (KSize / MB >= 1)
-                return (Math.Round(KSize / (float)MB, 2)).ToString() + "MB";
-            else if (KSize / KB >= 1)
-                return (Math.Round(KSize / (float)KB, 2)).ToString() + "KB";
-            else
-                return KSize.ToString() + "Byte";//顯示Byte值
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += ByteConversionGBMBKB(Convert.ToInt64(textBox1.Text)) + "\n";
-        }
 
 //------------------------------------------------------------  # 60個
 
@@ -10144,25 +9728,19 @@ http://www.shaoqun.com/m/a/250267.html
             SetStyle(ControlStyles.Opaque, true);
         }
 
-
+//------------------------------------------------------------  # 60個
 
 最後運行該程序，把screen_saver.exe改為screen_saver.scr，拷入Windows系統目錄中，這樣就可以運行該屏幕保護程序。
 
-
 C# Jumony 應由Tango重做
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/184808.html
-
 
 重抓放GD
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/185887.html
 文檔下載：http://pan.baidu.com/s/1pJ7lZWf
 
-
-
 中文漢字的編碼原理。
 1980年，漢字編碼的國家標准： GB2312-80《信息交換用漢字編碼字符集》基本集，簡稱GB2312，
-
-
 
 　　1. Windows Speech SDK 5.1版本支持xp系統和server 2003系統，需要下載安裝。XP系統默認只帶了個Microsoft Sam英文男聲語音庫，想要中文引擎就需要安裝Windows Speech SDK 5.1。
 下載地址：
@@ -10241,12 +9819,9 @@ https://www.aisoutu.com/
 
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/189394.html
 
-
-
 https://www.open-open.com/lib/view/open1385008631375.html
 
- 
- 
+//------------------------------------------------------------  # 60個
 
 bookbook
 http://www.tsnien.idv.tw/Internet_WebBook/
@@ -10312,7 +9887,7 @@ https://www.cnblogs.com/wwwzzg168/tag/C%23%20%20asp.net/
 C#編程使用Managed Wifi API連接無線SSID
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/193137.html
 
-
+//------------------------------------------------------------  # 60個
 
 委托
 使用delegate定义委托，将一个方法作为参数传给另一个方法。
@@ -10554,14 +10129,10 @@ Image<Bgr, byte> image1 = new Image<Bgr, byte>(480, 320, new Bgr(0, 255, 0));
             CvInvoke.MorphologyEx(src, src, MorphOp.Close, struct_element, new Point(-1, -1), 3, BorderType.Default, new MCvScalar(0, 0, 0));
             CvInvoke.Imshow("Erode Image", src);
 
-
-
 C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_System\vcs_RegisterHotKey_PrintScreen
 julia不可用 先把pickpick關掉 可能是按鍵有衝突
 
-
 pictureBox用Zoom, 改變pictureBox的大小達到縮放圖片的功能
-
 			
 RS232/RS422/RS485 是屬於串列埠(COM Port)的一種接口，
 RS232是一對一的通訊
@@ -11000,7 +10571,7 @@ this.ClientSize = new Size(lblEvent.Bounds.Right, lblEvent.Bounds.Bottom);
 
 表單大小自動調整 成跟每個控件相接, 預設是GrowOnly
 this.AutoSize = true;
-this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
 
 textBox內換行要\r\n   ?!?!
 
@@ -11137,7 +10708,7 @@ https://github.com/kiang/covid19
                 i = 0;
 			}
 
-
+//------------------------------------------------------------  # 60個
 
 //設定滑鼠座標到視窗客戶區正中心
             Point pt = new Point(this.ClientSize.Width / 2, this.ClientSize.Height / 2);
@@ -11219,7 +10790,7 @@ MessageBox.Show("輸入的ASCII碼為" + Convert.ToByte(e.KeyChar).ToString());
 
             Form Form2 = new Form();
 
-            Form2.Cursor = System.Windows.Forms.Cursors.Cross;
+            Form2.Cursor = Cursors.Cross;
             Form2.FormBorderStyle = FormBorderStyle.Sizable;
             Form2.Width = 800;
             Form2.Height = 800;
@@ -11789,25 +11360,23 @@ Normal StretchImage AutoSize CenterImage Zoom
 e
     {
         // 摘要:
-        //     影像放置在 System.Windows.Forms.PictureBox 的左上角。如果影像大於包含它的 System.Windows.Forms.PictureBox，就會裁剪影像。
+        //     影像放置在 PictureBox 的左上角。如果影像大於包含它的 PictureBox，就會裁剪影像。
         Normal = 0,
-
 
         //
         // 摘要:
-        //     System.Windows.Forms.PictureBox 內的影像會延伸或縮小，以調整成最適合 System.Windows.Forms.PictureBox
+        //     PictureBox 內的影像會延伸或縮小，以調整成最適合 PictureBox
         //     的大小。
         StretchImage = 1,
 
-
         //
         // 摘要:
-        //     將 System.Windows.Forms.PictureBox 的大小調整成與其所包含影像的大小相等。
+        //     將 PictureBox 的大小調整成與其所包含影像的大小相等。
         AutoSize = 2,
         //
         // 摘要:
-        //     如果 System.Windows.Forms.PictureBox 大於影像，影像即置中顯示。如果影像大於 System.Windows.Forms.PictureBox，圖片即放在
-        //     System.Windows.Forms.PictureBox 的中央，而外緣被裁剪。
+        //     如果 PictureBox 大於影像，影像即置中顯示。如果影像大於 PictureBox，圖片即放在
+        //     PictureBox 的中央，而外緣被裁剪。
 
         CenterImage = 3,
         //
@@ -12201,8 +11770,7 @@ g.DrawEllipse(new Pen(Color.Red, 1), 10, 10, 100, 100);		//作畫於其上
         {
             this.Cursor = Cursors.VSplit;
             //label2.Text = "(" + MousePosition.X.ToString() + ", " + MousePosition.Y.ToString();
-            //label2.Text = "(" + System.Windows.Forms.Cursor.Position.X.ToString() + ", " + System.Windows.Forms.Cursor.Position.Y.ToString() + ")";
-
+            //label2.Text = "(" + Cursor.Position.X.ToString() + ", " + Cursor.Position.Y.ToString() + ")";
         }
 
 google map api key
@@ -13390,17 +12958,6 @@ Cursor.Show(); // 顯示滑鼠游標
 
 //------------------------------------------------------------  # 60個
 
-設定檔案屬性
-string filename = @"C:\_git\vcs\_1.data\______test_files1\cat\cat1.png";
-
-FileInfo f = new FileInfo(filename);
-f.Attributes = FileAttributes.ReadOnly;	//唯讀
-f.Attributes = FileAttributes.System;	//系統
-f.Attributes = FileAttributes.Archive;	//存檔
-f.Attributes = FileAttributes.Hidden;	//隱藏
-
-//------------------------------------------------------------  # 60個
-
             richTextBox1.Text += "double之最大值 : \t" + double.MaxValue.ToString() + "\n";
             richTextBox1.Text += "double之最小值 : \t" + double.MinValue.ToString() + "\n";
             richTextBox1.Text += "double之Epsilon值 : \t" + double.Epsilon.ToString() + "\n";
@@ -14198,5 +13755,32 @@ draw dddd
             //g.DrawLines(Pens.Red, gray.ToArray());
 
 //------------------------------------------------------------  # 60個
+// 欲刪除關鍵字
+//------------------------------------------------------------  # 60個
+
+表單相關 ffff
+
+this.FormBorderStyle = FormBorderStyle.None;
+this.WindowState = FormWindowState.Maximized;
+this.FormBorderStyle = FormBorderStyle.FixedSingle;
+this.WindowState = FormWindowState.Normal;
+
+
+this.StartPosition = FormStartPosition.Manual;
+
+//this.StartPosition = FormStartPosition.CenterScreen;
+this.StartPosition = FormStartPosition.CenterScreen;  // 單獨寫致中，看似無效
+
+
+pikasa
+this.ShowInTaskbar = false;
+this.MaximizeBox = false;
+this.StartPosition = FormStartPosition.CenterScreen;  // 單獨寫致中，看似無效
+
+
+
+
+
+g.DrawString("直接設定字型與大小", new Font("宋体", 30), Brushes.Red, 10, 10);
 
 

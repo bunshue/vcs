@@ -23,6 +23,7 @@ namespace vcs_Chart2
         int H = 400;
 
         //兩種圖表比較
+        Chart chart1 = new Chart();
         Chart chart2 = new RealtimeChart().GetChart;
         Series series00 = new Series();  // 一般chart
         Series series10 = new Series();  // realtime-chart
@@ -61,6 +62,11 @@ namespace vcs_Chart2
             //------------------------------------------------------------  # 60個
 
             draw_chart12();  // 一般chart 和 realtime-chart
+
+            this.Controls.Add(chart1);
+            chart1.Location = new Point(10, 10);
+            chart1.ChartAreas[0].AxisY.Maximum = 150D;
+            chart1.ChartAreas[0].AxisY.Minimum = -150D;
 
             this.Controls.Add(chart2);
             chart2.Location = new Point(10, 10 + 400 + 10);
@@ -132,6 +138,9 @@ namespace vcs_Chart2
 
             series00.ChartType = SeriesChartType.Point;  // 圖表種類 : 點狀圖
             chart1.Series.Add(series00);
+
+            ChartArea ctArea = new ChartArea();
+            chart1.ChartAreas.Add(ctArea);
 
             //------------------------------------------------------------  # 60個
 

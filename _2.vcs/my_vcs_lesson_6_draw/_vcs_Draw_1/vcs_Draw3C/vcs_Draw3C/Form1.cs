@@ -18,6 +18,8 @@ namespace vcs_Draw3C
         int W = 250;
         int H = 250;
 
+        //------------------------------------------------------------  # 60個
+
         //數字 8 雙扭線 (Lemniscate of Bernoulli) ST
         G2D_LemniscateOfBernoulli lob;
 
@@ -27,16 +29,22 @@ namespace vcs_Draw3C
         int radius0; // 半徑
         //數字 8 雙扭線 (Lemniscate of Bernoulli) SP
 
+        //------------------------------------------------------------  # 60個
+
         //Maurer Rose 玫瑰線 ST
         double rose_x0, rose_y0, rose_x1, rose_y1;
         float k_rose = 2;  // 係數
         float d_rose = 29; // 係數
         //Maurer Rose 玫瑰線 SP
 
+        //------------------------------------------------------------  # 60個
+
         //picturebox11 蝴蝶曲線 Butterfly curve ST
         double butterfly_x0, butterfly_y0, butterfly_x1, butterfly_y1;  // 兩個點畫一直線
         int butterfly_n = 1;   // 畫幾圈 蝴蝶曲線
         //picturebox11 蝴蝶曲線 Butterfly curve SP
+
+        //------------------------------------------------------------  # 60個
 
         //picturebox12 蝴蝶曲線 Butterfly curve ST
         G2D_Butterfly butterfly; // 蝴蝶物件
@@ -44,16 +52,21 @@ namespace vcs_Draw3C
         int eY = 100;
         //picturebox12 蝴蝶曲線 Butterfly curve SP
 
+        //------------------------------------------------------------  # 60個
 
         //追逐滑鼠游標的蝴蝶 ST
         NPC npc;
         Point MousePos = new Point();
         //追逐滑鼠游標的蝴蝶 SP
 
+        //------------------------------------------------------------  # 60個
+
         //漫遊演算法 ST
         GC_2D_Wander gc; // 宣告一個物件
         GC_2D_MovableCircle cir;
         //漫遊演算法 SP
+
+        //------------------------------------------------------------  # 60個
 
         //橢圓形的軌跡 ST
         G2D_Circle_Grad cir01;
@@ -61,6 +74,8 @@ namespace vcs_Draw3C
         PointF center;
         float theta = 0;
         //橢圓形的軌跡 SP
+
+        //------------------------------------------------------------  # 60個
 
         //在多點網格移動的小球 ST
         List<ClassMovingPoint> mpList = new List<ClassMovingPoint>(); // 可移動點的動態陣列
@@ -74,13 +89,19 @@ namespace vcs_Draw3C
         BallInNet ball; // 
         //在多點網格移動的小球 SP
 
+        //------------------------------------------------------------  # 60個
+
         //雷達圖 pictureBox6 ST
         G2D_Radar rada;
         //雷達圖 pictureBox6 SP
 
+        //------------------------------------------------------------  # 60個
+
         //雷達圖 pictureBox7 ST
         G2D_Radar2 rada2;
         //雷達圖 pictureBox7 SP
+
+        //------------------------------------------------------------  # 60個
 
         //直線和圓的互動 ST
         G2D_OvalLine ovalLine01;
@@ -95,6 +116,8 @@ namespace vcs_Draw3C
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             //數字 8 雙扭線 (Lemniscate of Bernoulli) ST
             this.pictureBox1.ClientSize = new Size(250, 250);
             cx0 = this.pictureBox1.ClientSize.Width / 2;
@@ -104,9 +127,13 @@ namespace vcs_Draw3C
             lob = new G2D_LemniscateOfBernoulli(radius0);
             //數字 8 雙扭線 (Lemniscate of Bernoulli) SP
 
+            //------------------------------------------------------------  # 60個
+
             //picturebox12 蝴蝶曲線 Butterfly curve ST
             butterfly = new G2D_Butterfly(3, 30);
             //picturebox12 蝴蝶曲線 Butterfly curve SP
+
+            //------------------------------------------------------------  # 60個
 
             //追逐滑鼠游標的蝴蝶 ST
             this.pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
@@ -122,6 +149,8 @@ namespace vcs_Draw3C
 
             //追逐滑鼠游標的蝴蝶 SP
 
+            //------------------------------------------------------------  # 60個
+
             //漫遊演算法 ST
             string filename2 = @"D:\_git\vcs\_1.data\______test_files1\__RW\_png\ladybug.png";
             gc = new GC_2D_Wander(new Bitmap(filename2));
@@ -129,11 +158,15 @@ namespace vcs_Draw3C
             gc.Update();
             //漫遊演算法 SP
 
+            //------------------------------------------------------------  # 60個
+
             //橢圓形的軌跡 ST
             cir01 = new G2D_Circle_Grad(128, 0.1f, Color.White);
             center = new PointF(300 / 2, 200 / 2);
             ellipsePath = new G2D_EllipsePath(center, 200 / 3, 100 / 3);
             //橢圓形的軌跡 SP
+
+            //------------------------------------------------------------  # 60個
 
             //在多點網格移動的小球 ST
 
@@ -178,13 +211,19 @@ namespace vcs_Draw3C
 
             //在多點網格移動的小球 SP
 
+            //------------------------------------------------------------  # 60個
+
             //雷達圖 pictureBox6 ST
             rada = new G2D_Radar(120, 120, 240);
             //雷達圖 pictureBox6 SP
 
+            //------------------------------------------------------------  # 60個
+
             //雷達圖 pictureBox7 ST
             rada2 = new G2D_Radar2(120, 120, 240);
             //雷達圖 pictureBox7 SP
+
+            //------------------------------------------------------------  # 60個
 
             //直線和圓的互動 ST
             int Cx2 = this.pictureBox4.ClientSize.Width / 2;
@@ -195,20 +234,10 @@ namespace vcs_Draw3C
 
         void show_item_location()
         {
-            //設定執行後的表單起始位置, 指定位置
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(0, 0);
-
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
-            x_st = 20;
-            y_st = 20;
-            dx = 160;
-            dy = 50;
-
+            int x_st = 10;
+            int y_st = 10;
+            int dx = W + 70;
+            int dy = H + 45;
             pictureBox0.Size = new Size(W, H);
             pictureBox1.Size = new Size(W, H);
             pictureBox2.Size = new Size(W, H);
@@ -224,12 +253,6 @@ namespace vcs_Draw3C
             pictureBox12.Size = new Size(W, H);
             pictureBox13.Size = new Size(W, H);
             pictureBox14.Size = new Size(W, H);
-
-            x_st = 10;
-            y_st = 10;
-            dx = W + 70;
-            dy = H + 45;
-
             pictureBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
@@ -267,6 +290,10 @@ namespace vcs_Draw3C
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
             bt_exit_setup();
+
+            //設定執行後的表單起始位置, 指定位置
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new System.Drawing.Point(0, 0);
         }
 
         void bt_exit_setup()
@@ -310,6 +337,8 @@ namespace vcs_Draw3C
             Environment.Exit(0);
         }
 
+        //------------------------------------------------------------  # 60個
+
         //數字 8 雙扭線 (Lemniscate of Bernoulli) ST
 
         // http://en.wikipedia.org/wiki/Lemniscate_of_Bernoulli
@@ -336,6 +365,8 @@ namespace vcs_Draw3C
             this.pictureBox0.Invalidate();
         }
         //數字 8 雙扭線 (Lemniscate of Bernoulli) SP
+
+        //------------------------------------------------------------  # 60個
 
         //追逐滑鼠游標的蝴蝶 ST
         private void timer1_Tick(object sender, EventArgs e)
@@ -373,6 +404,8 @@ namespace vcs_Draw3C
             }
         }
         //追逐滑鼠游標的蝴蝶 SP
+
+        //------------------------------------------------------------  # 60個
 
         //Maurer Rose 玫瑰線 ST
 
@@ -444,6 +477,7 @@ namespace vcs_Draw3C
         }
         //Maurer Rose 玫瑰線 SP
 
+        //------------------------------------------------------------  # 60個
 
         //蝴蝶曲線 Butterfly curve ST
         // http://en.wikipedia.org/wiki/Butterfly_curve_(transcendental)
@@ -488,8 +522,9 @@ namespace vcs_Draw3C
 
             this.pictureBox11.Invalidate();
         }
-
         //蝴蝶曲線 Butterfly curve SP
+
+        //------------------------------------------------------------  # 60個
 
         //picturebox12 蝴蝶曲線 Butterfly curve ST
         // http://en.wikipedia.org/wiki/Butterfly_curve_(transcendental)
@@ -514,8 +549,9 @@ namespace vcs_Draw3C
             butterfly.Update(eX, eY);
             this.pictureBox12.Invalidate();
         }
-
         //picturebox12 蝴蝶曲線 Butterfly curve SP
+
+        //------------------------------------------------------------  # 60個
 
         //漫遊演算法 ST
         private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
@@ -546,13 +582,12 @@ namespace vcs_Draw3C
             gc.Update();
             this.pictureBox2.Invalidate();
         }
-
         //漫遊演算法 SP
 
+        //------------------------------------------------------------  # 60個
+
         //派形風扇 ST
-
         int startAngle = -10; // 開始的角度
-
         private void timer5_Tick(object sender, EventArgs e)
         {
             startAngle = startAngle + 1; // 更新開始的角度
@@ -575,8 +610,9 @@ namespace vcs_Draw3C
                 }
             }
         }
-
         //派形風扇 SP
+
+        //------------------------------------------------------------  # 60個
 
         //橢圓形的軌跡 ST
         private void pictureBox9_Paint(object sender, PaintEventArgs e)
@@ -594,9 +630,9 @@ namespace vcs_Draw3C
         }
         //橢圓形的軌跡 SP
 
+        //------------------------------------------------------------  # 60個
 
         //在多點網格移動的小球 ST
-
         private void pictureBox3_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
@@ -658,9 +694,7 @@ namespace vcs_Draw3C
         }
         //在多點網格移動的小球 SP
 
-
-
-
+        //------------------------------------------------------------  # 60個
 
         //雷達圖 pictureBox6 ST
         private void timer6_Tick(object sender, EventArgs e)
@@ -674,8 +708,9 @@ namespace vcs_Draw3C
             rada.Draw(e.Graphics);
 
         }
-
         //雷達圖 pictureBox6 SP
+
+        //------------------------------------------------------------  # 60個
 
         //雷達圖 pictureBox7 ST
         private void pictureBox7_Paint(object sender, PaintEventArgs e)
@@ -689,6 +724,7 @@ namespace vcs_Draw3C
         }
         //雷達圖 pictureBox7 SP
 
+        //------------------------------------------------------------  # 60個
 
         //直線和圓的互動 ST
         private void timer4_Tick(object sender, EventArgs e)
@@ -772,10 +808,9 @@ namespace vcs_Draw3C
                 e.Graphics.FillPath(myBrush3, gp); //填滿形狀區域
             }
             e.Graphics.DrawPath(Pens.Black, gp); //繪出圖形軌跡
-
-
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         //GraphicsPath - AddEllipse() 加入橢圓形 ST
 
@@ -809,8 +844,9 @@ namespace vcs_Draw3C
             richTextBox1.Text += Gap.ToString() + " ";
             this.pictureBox8.Invalidate();
         }
-
         //GraphicsPath - AddEllipse() 加入橢圓形 SP
+
+        //------------------------------------------------------------  # 60個
 
         //點對點連線 ST
         List<Point> pt = new List<Point>(); // 紀錄點座標的 動態陣列
@@ -871,3 +907,17 @@ namespace vcs_Draw3C
         //點對點連線 SP
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
