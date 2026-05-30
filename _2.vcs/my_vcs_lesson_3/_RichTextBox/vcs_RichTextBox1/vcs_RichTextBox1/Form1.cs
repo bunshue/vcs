@@ -504,7 +504,6 @@ namespace vcs_RichTextBox1
             }
             richTextBox1.Copy();
 
-
             //RTB的操作 全選 剪下
             if (richTextBox1.SelectionLength == 0)
             {
@@ -622,7 +621,6 @@ namespace vcs_RichTextBox1
                 richTextBox1.LoadFile(openFileDialog1.FileName);
             }
 
-
             saveFileDialog1.Filter = "RTF檔|*.rtf";
 
             if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK && saveFileDialog1.FileName.Length > 0)
@@ -638,11 +636,6 @@ namespace vcs_RichTextBox1
             }
             */
             //------------------------------------------------------------  # 60個
-
-
-
-
-
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -943,11 +936,8 @@ namespace vcs_RichTextBox1
         private void richTextBox1_MouseMove(object sender, MouseEventArgs e)
         {
             lb_richtextbox1_text.Text = WordUnderMouse(richTextBox1, e.X, e.Y);
-
             char ch = richTextBox1.GetCharFromPosition(e.Location);     //取得指定位置的字元
-
             int nn = richTextBox1.GetCharIndexFromPosition(e.Location); //指定位置處的以零起始的字元索引
-
             lb_richtextbox1_fx5.Text = "MouseMove : " + ch.ToString() + " @ " + nn.ToString();
         }
 
@@ -1085,8 +1075,8 @@ namespace vcs_RichTextBox1
             int index = rbox.Find(str, 0, rboxL, RichTextBoxFinds.Reverse);
 
             richTextBox2.Text += "index = " + index.ToString() + "\t" +
-    "rboxL = " + rboxL.ToString() + "\t" +
-    "sum = " + sum.ToString() + "\n";
+                "rboxL = " + rboxL.ToString() + "\t" +
+                "sum = " + sum.ToString() + "\n";
 
             if (index > -1)
             {
@@ -1239,7 +1229,6 @@ namespace vcs_RichTextBox1
             }
         }
 
-
         /// <summary> 消息提示,提示用户查找结果<para>　<para>
         /// 参数1(str):用户指定要查找的字符串</para></para> </summary>
         /// <param name="str">用户指定要查找的字符串</param>
@@ -1254,7 +1243,6 @@ namespace vcs_RichTextBox1
                 richTextBox2.Text += "搜尋的字串找不到!\t\"" + str + "\"\n";
             }
         }
-
 
         /// <summary> 全部替换指定〖字符 或 字符串〗<para>　<para>
         /// 参数1(rbox):要替换内容的文本框,指定为 RichTextBox 文本框类型<para>
@@ -1343,16 +1331,9 @@ namespace vcs_RichTextBox1
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-//1515
-//---------------  # 15個
-
-
 /*  可搬出
 
 */
-
-
-
 
 
 /*
@@ -1366,8 +1347,8 @@ public RichTextBox RichTxtBox
 */
 
 /*
-                            //PlainText-代表OLE物件的純文字資料流，文字中允許有空格
-                            richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.PlainText);
+            //PlainText-代表OLE物件的純文字資料流，文字中允許有空格
+            richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.PlainText);
 
             // 使用try{...}catch{...}來補捉沒有檔案可能發生的例外
             try
@@ -1437,28 +1418,46 @@ public RichTextBox RichTxtBox
 RTB 的 LinkClicked
         private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start(e.LinkText);
+            Process.Start(e.LinkText);
         }
 
             richTextBox1.SelectionStart = 20;
             richTextBox1.Focus();
-
 
             richTextBox1.ScrollToCaret();
             richTextBox1.Focus();
 
 //------------------------------------------------------------  # 60個
 
-
             //尋找RTB裡面的位置
             string text = "david";
             int indexToText = richTextBox1.Find(text);
             MessageBox.Show(indexToText.ToString());
 
-
-
+//------------------------------------------------------------  # 60個
 vcs RTB
 richtextbox裡，如何知道目前游標所在的line與position
+
+//------------------------------------------------------------  # 60個
+
+如何得知richtextbox當時的游標位置
+
+這樣才可以從特定點開始搜尋，不用總是從頭開始搜尋
+
+richtextbox範例 for 搜尋
+
+load一檔
+從頭搜尋到尾 搜尋到的字串變色。
+
+//------------------------------------------------------------  # 60個
+
+改變部分字體顏色
+            richTextBox1.SelectionStart = 10;
+            richTextBox1.SelectionLength = 5;
+            richTextBox1.SelectionColor = Color.Red;
+            richTextBox1.SelectionBackColor = Color.Green;
+
+//------------------------------------------------------------  # 60個
 
 
 */

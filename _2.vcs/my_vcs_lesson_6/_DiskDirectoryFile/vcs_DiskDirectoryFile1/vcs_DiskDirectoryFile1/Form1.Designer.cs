@@ -96,6 +96,7 @@
             this.bt_file00.Name = "bt_file00";
             this.bt_file00.Size = new System.Drawing.Size(200, 60);
             this.bt_file00.TabIndex = 60;
+            this.bt_file00.Text = "File的方法";
             this.bt_file00.UseVisualStyleBackColor = true;
             this.bt_file00.Click += new System.EventHandler(this.bt_file00_Click);
             // 
@@ -106,6 +107,7 @@
             this.bt_file01.Name = "bt_file01";
             this.bt_file01.Size = new System.Drawing.Size(200, 60);
             this.bt_file01.TabIndex = 9;
+            this.bt_file01.Text = "FileInfo的方法";
             this.bt_file01.UseVisualStyleBackColor = true;
             this.bt_file01.Click += new System.EventHandler(this.bt_file01_Click);
             // 
@@ -169,7 +171,6 @@
             this.bt_file03.Name = "bt_file03";
             this.bt_file03.Size = new System.Drawing.Size(200, 60);
             this.bt_file03.TabIndex = 12;
-            this.bt_file03.Text = "刪除檔案 (不使用資源回收筒)";
             this.bt_file03.UseVisualStyleBackColor = true;
             this.bt_file03.Click += new System.EventHandler(this.bt_file03_Click);
             // 
@@ -201,7 +202,6 @@
             this.bt_dir09.Name = "bt_dir09";
             this.bt_dir09.Size = new System.Drawing.Size(200, 60);
             this.bt_dir09.TabIndex = 41;
-            this.bt_dir09.Text = "File.Exists()";
             this.bt_dir09.UseVisualStyleBackColor = true;
             this.bt_dir09.Click += new System.EventHandler(this.bt_dir09_Click);
             // 

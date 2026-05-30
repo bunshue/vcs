@@ -33,9 +33,6 @@ kkkk鍵盤相關
 vvvv影音相關
 gggg git相關
 
-
-
-
 //------------------------------------------------------------  # 60個
 
 //量測時間
@@ -7603,19 +7600,6 @@ timer中斷中
 
 //------------------------------------------------------------  # 60個
 
-rtb
-如何得知richtextbox當時的游標位置
-
-這樣才可以從特定點開始搜尋，不用總是從頭開始搜尋
-
-
-richtextbox範例 for 搜尋
-
-load一檔
-從頭搜尋到尾 搜尋到的字串變色。
-
-//------------------------------------------------------------  # 60個
-
 this.close() ; //關閉視窗
 Application.Exit() ; //結束程序
 
@@ -9013,15 +8997,6 @@ openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.wmf|*.jpg;*.jpe
         //pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;/*AutoSize可能無法縮小圖片*/
         //先改成等比例縮小圖片SizeMode
         pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-
-//------------------------------------------------------------  # 60個
-
-RTB
-改變部分字體顏色
-            richTextBox1.SelectionStart = 10;
-            richTextBox1.SelectionLength = 5;
-            richTextBox1.SelectionColor = Color.Red;
-            richTextBox1.SelectionBackColor = Color.Green;
 
 //------------------------------------------------------------  # 60個
 
@@ -13776,8 +13751,6 @@ pikasa
 this.ShowInTaskbar = false;
 this.MaximizeBox = false;
 this.StartPosition = FormStartPosition.CenterScreen;  // 單獨寫致中，看似無效
-
-
 
 
 

@@ -85,6 +85,8 @@ namespace vcs_Chart2
             //------------------------------------------------------------  # 60個
 
             this.BackColor = Color.Yellow;
+
+            bt_demo.PerformClick();
         }
 
         void show_item_location()

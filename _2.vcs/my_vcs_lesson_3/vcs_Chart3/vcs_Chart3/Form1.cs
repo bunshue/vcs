@@ -34,6 +34,19 @@ namespace vcs_Chart3
         bool flag_show_value = true;
         int flag_show_radar_type = 0;
 
+        Font titles_font = new Font("Trebuchet MS", 14F, FontStyle.Bold);  // 標題的字型
+        Font xlabel_font = new Font("Trebuchet MS", 15, FontStyle.Bold);  // 設定X軸刻度的字型
+        Font ylabel_font = new Font("Trebuchet MS", 8.25F, FontStyle.Bold);  // 設置Y軸左側的提示信息的字體屬性
+        Font series_font = new Font("Trebuchet MS", 10, FontStyle.Bold);  // 數列series顯示數值的字型
+
+        SeriesChartType chartType = SeriesChartType.Point;
+
+        //定義Chart大小與外觀
+        private const int AXIS_X_MIN = 0;
+        private const int AXIS_X_MAX = 360;
+        private const int AXIS_Y_MIN = -200;
+        private const int AXIS_Y_MAX = 200;
+
         public Form1()
         {
             InitializeComponent();
@@ -84,10 +97,122 @@ namespace vcs_Chart3
             bt_chart6.BringToFront();
             bt_chart7.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             bt_chart7.BringToFront();
+            bt_chart_type.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_chart_type.BringToFront();
+            groupBox1.Visible = false;
 
             richTextBox1.Size = new Size(275, 950);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            x_st = 20;
+            y_st = 40;
+            dx = 190;
+            dy = 36;
+            radioButton0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            radioButton1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            radioButton2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            radioButton3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            radioButton4.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            radioButton5.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            radioButton6.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            radioButton7.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            radioButton8.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            radioButton9.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            radioButton10.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            radioButton11.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            radioButton12.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            radioButton13.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            radioButton14.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            radioButton15.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            radioButton16.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            radioButton17.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            radioButton18.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            radioButton19.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            radioButton20.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            radioButton21.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            radioButton22.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            radioButton23.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            radioButton24.Location = new Point(x_st + dx * 4, y_st + dy * 4);
+            radioButton25.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            radioButton26.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            radioButton27.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            radioButton28.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            radioButton29.Location = new Point(x_st + dx * 4, y_st + dy * 5);
+            radioButton30.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            radioButton31.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            radioButton32.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            radioButton33.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            radioButton34.Location = new Point(x_st + dx * 4, y_st + dy * 6);
+            radioButton0.Text = "點狀圖";
+            radioButton1.Text = "FastPoint 圖表";
+            radioButton2.Text = "泡泡圖";
+            radioButton3.Text = "折線圖";
+            radioButton4.Text = "曲線圖";
+            radioButton5.Text = "StepLine 圖表";
+            radioButton6.Text = "FastLine 圖表";
+            radioButton7.Text = "橫條圖";
+            radioButton8.Text = "堆疊橫條圖";
+            radioButton9.Text = "100% 堆疊橫條圖";
+            radioButton10.Text = "直條圖";
+            radioButton11.Text = "堆疊直條圖";
+            radioButton12.Text = "100% 堆疊直條圖";
+            radioButton13.Text = "區域圖表";
+            radioButton14.Text = "曲線區域圖";
+            radioButton15.Text = "堆疊區域圖";
+            radioButton16.Text = "100% 堆疊區域圖";
+            radioButton18.Text = "環圈圖";
+            radioButton19.Text = "股票圖";
+            radioButton20.Text = "K 線圖";
+            radioButton21.Text = "範圍圖";
+            radioButton22.Text = "曲線範圍圖";
+            radioButton23.Text = "範圍橫條圖";
+            radioButton24.Text = "範圍直條圖";
+            radioButton25.Text = "雷達圖";
+            radioButton26.Text = "極座標圖";
+            radioButton27.Text = "誤差長條圖";
+            radioButton28.Text = "盒狀圖";
+            radioButton29.Text = "磚形圖";
+            radioButton30.Text = "ThreeLineBreak 圖表";
+            radioButton31.Text = "Kagi 圖表";
+            radioButton32.Text = "PointAndFigure 圖表";
+            radioButton33.Text = "漏斗圖";
+            radioButton34.Text = "金字塔圖";
+            radioButton0.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton1.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton2.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton3.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton4.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton5.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton6.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton7.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton8.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton9.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton10.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton11.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton12.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton13.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton14.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton15.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton16.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton17.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton18.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton19.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton20.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton21.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton22.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton23.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton24.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton25.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton26.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton27.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton28.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton29.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton30.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton31.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton32.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton33.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
+            radioButton34.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
 
             this.Size = new Size(1840, 1010);
             this.Text = "vcs_Chart3";
@@ -122,7 +247,7 @@ namespace vcs_Chart3
             Title chart_title = new Title();
             chart_title.Text = title;
             chart_title.Alignment = ContentAlignment.MiddleCenter;
-            chart_title.Font = new Font("Trebuchet MS", 14F, FontStyle.Bold);
+            chart_title.Font = titles_font;
             chart1.Titles.Add(chart_title);  // 將標題新增到圖表上
 
             // 畫標題的方法2
@@ -130,7 +255,7 @@ namespace vcs_Chart3
             {
                 Text = title,
                 Alignment = ContentAlignment.MiddleCenter,
-                Font = new Font("Trebuchet MS", 14F, FontStyle.Bold)
+                Font = titles_font
             };
             //chart1.Titles.Add(chart_title2);  // 將標題新增到圖表上
 
@@ -172,7 +297,6 @@ namespace vcs_Chart3
             */
 
             //chartarea.AxisX.CustomLabels.Clear();
-
             //chartarea.AxisX.Interval = 1;  // 設定X軸坐標的間隔
 
             //設定3D
@@ -187,37 +311,33 @@ namespace vcs_Chart3
             */
         }
 
-        void draw_chart0()
+        void series_point_add_data(Series series1)
         {
-            string title = "直條圖 + 折線圖";
-            chart_init(chart0, title);
+            string[] name = new string[] { "鼠", "牛", "虎", "兔", "龍" };
+            int[] weight = new int[] { 3, 48, 33, 8, 38 };
 
-            //------------------------------  # 30個
+            //1. DataBindXY
+            //series1.Points.DataBindXY(name, weight);  // xx, yy 皆為一維陣列, same
 
-            // 設定數列1 的 大小與外觀
-            Series series1 = new Series("體重1", 500);  // 初始化數列1(名稱, 最大值)
-            series1.ChartType = SeriesChartType.Column;  // 直條圖
-            series1.Color = Color.Blue; // 設定線條顏色
-            series1.Font = new Font("新細明體", 10); //設定字型            
-            series1.IsValueShownAsLabel = true;  // 是否把數值顯示在線上
-
+            //2. 一個一個加入 AddXY
+            /*
             //把值加入X 軸Y 軸
             series1.Points.AddXY("鼠", 3);
             series1.Points.AddXY("牛", 48);
             series1.Points.AddXY("虎", 33);
             series1.Points.AddXY("兔", 8);
             series1.Points.AddXY("龍", 38);
-            series1.Points.AddXY("蛇", 16);
-            series1.Points.AddXY("馬", 31);
-            series1.Points.AddXY("羊", 29);
-            series1.Points.AddXY("猴", 22);
-            series1.Points.AddXY("雞", 5);
-            series1.Points.AddXY("狗", 17);
-            series1.Points.AddXY("豬", 42);
+            */
+            for (int i = 0; i < name.Length; i++)
+            {
+                //series1.Points.Add(weight[i]);  // Add 一維加入
+                series1.Points.AddXY(name[i], weight[i]);  // AddXY 二維加入
+            }
 
+            //為每個點加入顏色
             Random rnd = new Random();  //亂數產生區塊顏色
             int count = series1.Points.Count;  // 數列1內的資料個數
-            richTextBox1.Text += "共有 " + count.ToString() + " 筆資料\n";
+            //richTextBox1.Text += "共有 " + count.ToString() + " 筆資料\n";
             for (int i = 0; i < count; i++)
             {
                 series1.Points[i].BorderColor = Color.Red;  // 邊框顏色 for 直條圖
@@ -226,63 +346,253 @@ namespace vcs_Chart3
                 //richTextBox1.Text += "Y[" + i.ToString() + "] = " + series1.Points[i].YValues[0].ToString() + "\n";
             }
 
-            chart0.Series.Add(series1);  // 將數列1新增到chart0上
+        }
 
-            //------------------------------  # 30個
+        void chart_add_series0a(Chart chart1)
+        {
+            // 設定數列1 的 大小與外觀
+            Series series1 = new Series("體重1", 500);  // 初始化數列1(名稱, 最大值)
+            series1.ChartType = SeriesChartType.Column;  // 直條圖
+            series1.Color = Color.Blue; // 設定線條顏色
+            series1.Font = series_font;
+            series1.IsValueShownAsLabel = true;  // 是否把數值顯示在線上
 
-            // 設定數列2 的 大小與外觀
-            Series series2 = new Series("體重2", 500);  // 初始化數列2(名稱，最大值)
-            series2.ChartType = SeriesChartType.Line;  // 折線圖
-            series2.Color = Color.Red; // 設定線條顏色
-            series2.BorderWidth = 5;  // 折線圖線寬
-            //series2.Name = "體重";  // 數列名稱
-            //series2.Font = new Font("新細明體", 10); //設定字型
-            //series2.IsValueShownAsLabel = true;  // 是否把數值顯示在線上
+            series_point_add_data(series1);
 
-            string[] name = new string[] { "鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬" };
-            int[] weight = new int[] { 3, 48, 33, 8, 38, 16, 31, 29, 22, 5, 17, 42 };
+            chart1.Series.Add(series1);  // 將數列1新增到chart上
+        }
 
-            for (int i = 0; i < name.Length; i++)
-            {
-                //series2.Points.Add(weight[i]);  // Add 一維加入
-                series2.Points.AddXY(name[i], weight[i]);  // AddXY 二維加入
-            }
+        //------------------------------------------------------------  # 60個
 
-            chart0.Series.Add(series2);  // 將數列2新增到chart0上
+        void chart_add_series0b(Chart chart1)
+        {
+            // 設定數列1 的 大小與外觀
+            Series series1 = new Series("體重2x", 500);  // 初始化數列2(名稱，最大值)
+            series1.ChartType = SeriesChartType.Line;  // 折線圖
+            series1.Color = Color.Red; // 設定線條顏色
+            series1.BorderWidth = 5;  // 折線圖線寬
+            //series1.Name = "體重";  // 數列名稱
+            //series1.Font = series_font;
+            //series1.IsValueShownAsLabel = true;  // 是否把數值顯示在線上
+
+            series_point_add_data(series1);
+
+            chart1.Series.Add(series1);  // 將數列2新增到chart上
+        }
+
+        void draw_chart0()
+        {
+            string title = "直條圖 + 折線圖";
+            chart_init(chart0, title);
+
+            chart_add_series0a(chart0);
+            chart_add_series0b(chart0);
         }
 
         void draw_chart1()
         {
         }
 
+        //6060
+
+        void chart_add_series2a(Chart chart1)
+        {
+            // 設定數列1 的 大小與外觀
+            Series series1 = new Series("體重1", 500);  // 初始化數列1(名稱, 最大值)
+            series1.ChartType = SeriesChartType.Pie;  // 圓形圖
+            series1.ChartType = SeriesChartType.Column; //直條圖(Column),折線圖(Line),橫條圖(Bar)
+
+            //設定 Series1
+            series1.ChartArea = "ChartArea1";  // 設定要呈現的圖表區
+
+            series_point_add_data(series1);
+
+            series1.Legend = "Legends1";  // 設定要呈現哪個圖例
+            series1.LegendText = "體重1";  // 設定圖例文字
+            series1.LabelFormat = "#.###"; //小數點
+            series1.MarkerSize = 8; //Label 範圍大小
+            series1.LabelForeColor = Color.FromArgb(0, 90, 255); //字體顏色
+
+            series1.Font = series_font;
+
+            //Label 背景色
+            series1.LabelBackColor = Color.FromArgb(150, 255, 255, 255);
+            series1.Color = Color.FromArgb(240, 65, 140, 240); //背景色
+            series1.IsValueShownAsLabel = true;  // 是否把數值顯示在線上
+
+            chart1.Series.Add(series1);  // 將數列1新增到圖表上
+        }
+
+        void chart_add_series2b(Chart chart1)
+        {
+            // 設定數列1 的 大小與外觀
+            Series series1 = new Series("體重2", 500);  // 初始化數列1(名稱, 最大值)
+            series1.ChartType = SeriesChartType.Pie;  // 圓形圖
+            series1.ChartType = SeriesChartType.Column; //直條圖(Column),折線圖(Line),橫條圖(Bar)
+
+            series_point_add_data(series1);
+
+            series1.Legend = "Legends1";
+            series1.LegendText = "體重2";
+            series1.LabelFormat = "#.###"; //小數點
+            series1.MarkerSize = 8; //Label 範圍大小
+            series1.LabelForeColor = Color.FromArgb(255, 103, 0);
+            series1.Font = series_font;
+            series1.LabelBackColor = Color.FromArgb(150, 255, 255, 255);
+            series1.Color = Color.FromArgb(240, 252, 180, 65); //背景色
+            series1.IsValueShownAsLabel = true;  // 是否把數值顯示在線上
+
+            chart1.Series.Add(series1);  // 將數列2新增到圖表上
+        }
+
         void draw_chart2()
         {
+            string title = "直條圖";
+            chart_init(chart2, title);
 
+            //設定 ChartArea1
+            chart2.ChartAreas["ChartArea1"].AxisX.Interval = 1;  // 設定X軸坐標的間隔
+            chart2.ChartAreas["ChartArea1"].AxisX.IntervalOffset = 1;  //設置X軸坐標偏移為1
+            chart2.ChartAreas["ChartArea1"].AxisX.LabelStyle.IsStaggered = true;   //設置是否交錯顯示,比如數據多的時間分成兩行來顯示
+            chart2.ChartAreas["ChartArea1"].AxisX.Title = "種類";  // 設定X軸的標題
+            chart2.ChartAreas["ChartArea1"].AxisY.Title = "體重(公斤)";  //設定Y軸的標題
+            chart2.ChartAreas["ChartArea1"].BackColor = Color.FromArgb(240, 240, 240); //背景色
+            chart2.ChartAreas["ChartArea1"].AxisX.Enabled = AxisEnabled.True;
+            chart2.ChartAreas["ChartArea1"].AxisX2.Enabled = AxisEnabled.False; //隱藏 X2 標示
+            chart2.ChartAreas["ChartArea1"].AxisY2.Enabled = AxisEnabled.False; //隱藏 Y2 標示
+            chart2.ChartAreas["ChartArea1"].AxisY2.MajorGrid.Enabled = false;   //隱藏 Y2 軸線
+            chart2.ChartAreas["ChartArea1"].AxisX.MajorGrid.LineColor = Color.FromArgb(150, 150, 150);//X 軸線顏色
+            chart2.ChartAreas["ChartArea1"].AxisY.MajorGrid.LineColor = Color.FromArgb(150, 150, 150);//Y 軸線顏色
+            chart2.ChartAreas["ChartArea1"].AxisY.LabelStyle.Format = "#.###";//設定小數點
+
+            // 設定標題1, Title1, 設定要顯示在哪個圖表
+            chart2.Titles["Title1"].DockedToChartArea = "ChartArea1";  // 設定標題要顯示在哪個圖表區
+            chart2.Titles["Title1"].IsDockedInsideChartArea = false;  // 設定要顯示在圖表的內外部
+
+            // 設定圖例.Legends
+            chart2.Legends["Legends1"].DockedToChartArea = "ChartArea1";  // 設定圖例要顯示在哪個圖表區
+            chart2.Legends["Legends1"].Docking = Docking.Right;  // 設定圖例的顯示位置, 預設靠右
+            chart2.Legends["Legends1"].BackColor = Color.FromArgb(235, 235, 235); //背景色
+            chart2.Legends["Legends1"].BackHatchStyle = ChartHatchStyle.DarkDownwardDiagonal;
+            chart2.Legends["Legends1"].BorderWidth = 1;
+            chart2.Legends["Legends1"].BorderColor = Color.FromArgb(200, 200, 200);
+
+            //------------------------------  # 30個
+
+            chart_add_series2a(chart2);
+            chart_add_series2b(chart2);
         }
+
+        //------------------------------------------------------------  # 60個
 
         void draw_chart3()
         {
-            string title = "圓形圖";
-            chart_init(chart3, title);
+            // 各種圖表類型
 
-            //string[] name = new string[] { "鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬" };
-            //int[] weight = new int[] { 3, 48, 33, 8, 38, 16, 31, 29, 22, 5, 17, 42 };
-            string[] name = { "AAA", "BBB", "CCC", "DDD", "EEE" };
-            int[] weight = { 137, 63, 87, 98, 74 };
+            // 清除圖表
+            chart3.Series.Clear();
+            chart3.Titles.Clear();
 
+            // 全圖設定
+            chart3.Titles.Add("各種圖表類型, 3數列");  // 標題
+            //chart3.Size = new Size(1000, 500);  // 設定chart大小
 
+            // X軸設定
+            chart3.ChartAreas[0].AxisX.Minimum = AXIS_X_MIN;  // 設定X軸最小值
+            chart3.ChartAreas[0].AxisX.Maximum = AXIS_X_MAX;  // 設定X軸最大值
+            chart3.ChartAreas[0].AxisX.Title = "角度";
+            chart3.ChartAreas[0].AxisX.Enabled = AxisEnabled.True;  // 顯示 或 隱藏 X 軸標示
+            chart3.ChartAreas[0].AxisX.MajorGrid.Enabled = true;  // 顯示 或 隱藏 X 軸標線
+
+            // Y軸設定
+            chart3.ChartAreas[0].AxisY.Minimum = AXIS_Y_MIN;  // 設定Y軸最小值
+            chart3.ChartAreas[0].AxisY.Maximum = AXIS_Y_MAX;  // 設定Y軸最大值
+            chart3.ChartAreas[0].AxisY.Title = "高度";
+            chart3.ChartAreas[0].AxisY.Enabled = AxisEnabled.True;  // 顯示 或 隱藏 Y 軸標示
+            chart3.ChartAreas[0].AxisY.MajorGrid.Enabled = true;  // 顯示 或 隱藏 Y 軸標線
+
+            // 設定數列1 的 大小與外觀
+            Series series1 = new Series("sin", 500);  // 初始畫線條(標題，最大值)
+            series1.Color = Color.Red;  // 設定線條顏色
+            series1.Font = new Font("新細明體", 10);  // 設定顯示數值的字型
+            series1.ChartType = chartType;  // 設定線條種類
+            series1.MarkerSize = 5;  // 圖標大小
+            series1.IsValueShownAsLabel = false;  // 將數值顯示在線上
+
+            // 設定數列2 的 大小與外觀
+            Series series2 = new Series("cos", 500);  // 初始畫線條(標題，最大值)
+            series2.Color = Color.Green;  // 設定線條顏色
+            series2.Font = new Font("標楷體", 12);  // 設定顯示數值的字型
+            series2.ChartType = chartType;  // 設定線條種類
+            series2.MarkerSize = 5;  // 圖標大小
+            series2.IsValueShownAsLabel = false;  // 將數值顯示在線上
+
+            // 設定數列3 的 大小與外觀
+            Series series3 = new Series("sin + cos", 500);  // 初始畫線條(標題，最大值)
+            series3.Color = Color.Blue;  // 設定線條顏色
+            series3.Font = new Font("標楷體", 12);  // 設定顯示數值的字型
+            series3.ChartType = chartType;  // 設定線條種類
+            series3.MarkerSize = 5;  // 圖標大小
+            series3.IsValueShownAsLabel = false;  // 將數值顯示在線上
+
+            // 設定 數列1 數列2 數列3 的 數值
+
+            int[] array_xx = new int[37];
+            int[] array_y1 = new int[37];
+            int[] array_y2 = new int[37];
+            int[] array_y3 = new int[37];
+            for (int i = 0; i <= 360; i += 10)
+            {
+                array_xx[i / 10] = i;
+                array_y1[i / 10] = (int)(110 * sind(i));
+                array_y2[i / 10] = (int)(110 * cosd(i));
+                array_y3[i / 10] = (int)(110 * sind(i) + 110 * cosd(i));
+                //chart1.Series[0].Points.AddXY(array_xx[i / 10], array_y1[i / 10]);
+                series1.Points.AddXY(array_xx[i / 10], array_y1[i / 10]);  // 將數值1新增至數列1
+                series2.Points.AddXY(array_xx[i / 10], array_y2[i / 10]);  // 將數值2新增至數列2
+                series3.Points.AddXY(array_xx[i / 10], array_y3[i / 10]);  // 將數值3新增至數列3
+            }
+
+            // 將數列新增到chart上
+            chart3.Series.Add(series1);
+            chart3.Series.Add(series2);
+            chart3.Series.Add(series3);
+            richTextBox1.Text += "目前 chart1 上的數列數  : " + chart3.Series.Count.ToString() + "\n";
+            richTextBox1.Text += "目前 Series[0] 上的點數 : " + chart3.Series[0].Points.Count.ToString() + "\n";
+            richTextBox1.Text += "目前 Series[1] 上的點數 : " + chart3.Series[1].Points.Count.ToString() + "\n";
+            richTextBox1.Text += "目前 Series[2] 上的點數 : " + chart3.Series[2].Points.Count.ToString() + "\n";
+
+            /*
+            richTextBox1.Text += "顯示資料\n";
+            int count = series1.Points.Count;
+            richTextBox1.Text += "共有 " + count.ToString() + " 筆資料\n";
+            for (int i = 0; i < count; i++)
+            {
+                richTextBox1.Text += "x[" + i.ToString() + "] = " + series1.Points[i].XValue.ToString() + "\t";
+                richTextBox1.Text += "sin[" + i.ToString() + "] = " + series1.Points[i].YValues[0].ToString() + "\t";
+                richTextBox1.Text += "cos[" + i.ToString() + "] = " + series2.Points[i].YValues[0].ToString() + "\t";
+                richTextBox1.Text += "sin[" + i.ToString() + "] + " + "cos[" + i.ToString() + "] = " + series3.Points[i].YValues[0].ToString() + "\n";
+            }
+            */
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        void chart_add_series4(Chart chart1)
+        {
+            // 設定數列1 的 大小與外觀
             Series series1 = new Series("體重", 500);  // 初始化數列1
             series1.ChartType = SeriesChartType.Pie;  // 圓形圖
             //series1.ChartType = SeriesChartType.Doughnut;  // 環圈圖
             series1.IsValueShownAsLabel = true;  // 是否把數值顯示在線上
 
-            series1.Points.DataBindXY(name, weight);  // xx, yy 皆為一維陣列
+            series_point_add_data(series1);
 
             //series1.LegendText = "體重";   //#VALX:    [ #PERCENT{P1} ]; //X軸 + 百分比
             //series1.Label = "bbbb";  //#VALX#PERCENT{P1}; //X軸 + 百分比
             series1.LabelForeColor = Color.Red; //字體顏色
             //字體設定
-            series1.Font = new Font("Trebuchet MS", 10, FontStyle.Bold);
+            series1.Font = series_font;
             series1.Points.FindMaxByValue().LabelForeColor = Color.Red;
             //series1.Points.FindMaxByValue().Color = Color.Red;
             //series1.Points.FindMaxByValue()[Exploded] = true;
@@ -297,38 +607,29 @@ namespace vcs_Chart3
             //series1[PieDrawingStyle] = SoftEdge;
             //series1[PieDrawingStyle] = Concave;
 
-            chart3.Series.Add(series1);  // 將數列1新增到圖表上
+            chart1.Series.Add(series1);  // 將數列1新增到圖表上
         }
 
         void draw_chart4()
         {
-            string title = "各區比例";
+            string title = "圓形圖";
             chart_init(chart4, title);
 
-            // 設定標題2
-            chart4.Titles.Add("Title1");  // 將標題新增到圖表上
-            chart4.Titles["Title1"].DockedToChartArea = "ChartArea1";  // 設定標題要顯示在哪個圖表區
-            chart4.Titles["Title1"].IsDockedInsideChartArea = false; //設定顯示在圖表的內外部
-            chart4.Titles["Title1"].Text = "各區比例";
+            chart_add_series4(chart4);
+        }
 
-            // 設定圖例.Legends
-            chart4.Legends["Legends1"].DockedToChartArea = "ChartArea1";  // 設定圖例要顯示在哪個圖表區
-            chart4.Legends["Legends1"].IsDockedInsideChartArea = false; //設定要顯示在圖表的內外部
-            chart4.Legends["Legends1"].Docking = Docking.Right;  // 設定圖例的顯示位置, 預設靠右
-            chart4.Legends["Legends1"].BackColor = Color.FromArgb(235, 235, 235);
-            chart4.Legends["Legends1"].BackHatchStyle = ChartHatchStyle.DarkDownwardDiagonal;
-            chart4.Legends["Legends1"].BorderWidth = 1;
-            chart4.Legends["Legends1"].BorderColor = Color.FromArgb(200, 200, 200);
+        //------------------------------------------------------------  # 60個
 
-            string[] name = { "AAA", "BBB", "CCC", "DDD", "EEE" };
-            int[] weight = { 137, 63, 87, 98, 74 };
-
+        void chart_add_series5(Chart chart1)
+        {
             // 設定數列1 的 大小與外觀
-            Series series1 = new Series("體重1");
+            Series series1 = new Series("體重1", 500);  // 初始化數列1(名稱, 最大值)
             series1.ChartType = SeriesChartType.Pie;  // 圓形圖
             series1.ChartArea = "ChartArea1";  // 設定要呈現的ChartArea
             //series1.ChartType = SeriesChartType.Doughnut;  // 環圈圖
-            series1.Points.DataBindXY(name, weight);  // xx, yy 皆為一維陣列
+
+            series_point_add_data(series1);
+
             series1.Legend = "Legends1";  // 設定要呈現哪個圖例
             // series1.IsValueShownAsLabel = true;  // 是否把數值顯示在線上
             series1.XValueType = ChartValueType.String; //X軸的資料格式
@@ -336,8 +637,7 @@ namespace vcs_Chart3
             series1.Label = "#VALX\n#PERCENT{P1}"; //X軸 + 百分比
             //series1.LabelForeColor = Color.FromArgb(0, 90, 255); //字體顏色
 
-            //字體設定
-            series1.Font = new Font("Trebuchet MS", 10, FontStyle.Bold);
+            series1.Font = series_font;
             series1.Points.FindMaxByValue().LabelForeColor = Color.Red; //設定特定數字之字體
             //series1.Points.FindMaxByValue().Color = Color.Red; //設定數值最大的餅的顏色
             //series1.Points.FindMaxByValue()["Exploded"] = "true";  // 設定數值最大的餅是否分離出去
@@ -352,89 +652,32 @@ namespace vcs_Chart3
             //series1["PieDrawingStyle"] = "SoftEdge";
             //series1["PieDrawingStyle"] = "Concave";
 
-            chart4.Series.Add(series1);  // 將數列1新增到圖表上
+            chart1.Series.Add(series1);  // 將數列1新增到圖表上
         }
 
         void draw_chart5()
         {
-            string title = "直條圖";
+
+
+            string title = "各區比例";
             chart_init(chart5, title);
 
-            string[] name = { "AAA", "BBB", "CCC", "DDD", "EEE" };
-            int[] weight = { 137, 63, 87, 98, 74 };
-
-            //設定 ChartArea1
-            chart5.ChartAreas["ChartArea1"].AxisX.Interval = 1;  // 設定X軸坐標的間隔
-            chart5.ChartAreas["ChartArea1"].AxisX.IntervalOffset = 1;  //設置X軸坐標偏移為1
-            chart5.ChartAreas["ChartArea1"].AxisX.LabelStyle.IsStaggered = true;   //設置是否交錯顯示,比如數據多的時間分成兩行來顯示
-            chart5.ChartAreas["ChartArea1"].AxisX.Title = "種類";  // 設定X軸的標題
-            chart5.ChartAreas["ChartArea1"].AxisY.Title = "體重";  //設定Y軸的標題
-            chart5.ChartAreas["ChartArea1"].BackColor = Color.FromArgb(240, 240, 240); //背景色
-            chart5.ChartAreas["ChartArea1"].AxisX.Enabled = AxisEnabled.True;
-            chart5.ChartAreas["ChartArea1"].AxisX2.Enabled = AxisEnabled.False; //隱藏 X2 標示
-            chart5.ChartAreas["ChartArea1"].AxisY2.Enabled = AxisEnabled.False; //隱藏 Y2 標示
-            chart5.ChartAreas["ChartArea1"].AxisY2.MajorGrid.Enabled = false;   //隱藏 Y2 軸線
-            chart5.ChartAreas["ChartArea1"].AxisX.MajorGrid.LineColor = Color.FromArgb(150, 150, 150);//X 軸線顏色
-            chart5.ChartAreas["ChartArea1"].AxisY.MajorGrid.LineColor = Color.FromArgb(150, 150, 150);//Y 軸線顏色
-            chart5.ChartAreas["ChartArea1"].AxisY.LabelStyle.Format = "#.###";//設定小數點
-
-            // 設定標題1, Title1, 設定要顯示在哪個圖表
+            // 設定標題2
+            chart5.Titles.Add("Title1");  // 將標題新增到圖表上
             chart5.Titles["Title1"].DockedToChartArea = "ChartArea1";  // 設定標題要顯示在哪個圖表區
-            chart5.Titles["Title1"].IsDockedInsideChartArea = false;  // 設定要顯示在圖表的內外部
+            chart5.Titles["Title1"].IsDockedInsideChartArea = false; //設定顯示在圖表的內外部
+            chart5.Titles["Title1"].Text = "各區比例";
 
             // 設定圖例.Legends
             chart5.Legends["Legends1"].DockedToChartArea = "ChartArea1";  // 設定圖例要顯示在哪個圖表區
+            chart5.Legends["Legends1"].IsDockedInsideChartArea = false; //設定要顯示在圖表的內外部
             chart5.Legends["Legends1"].Docking = Docking.Right;  // 設定圖例的顯示位置, 預設靠右
-            chart5.Legends["Legends1"].BackColor = Color.FromArgb(235, 235, 235); //背景色
+            chart5.Legends["Legends1"].BackColor = Color.FromArgb(235, 235, 235);
             chart5.Legends["Legends1"].BackHatchStyle = ChartHatchStyle.DarkDownwardDiagonal;
             chart5.Legends["Legends1"].BorderWidth = 1;
             chart5.Legends["Legends1"].BorderColor = Color.FromArgb(200, 200, 200);
 
-            // 設定數列1 的 大小與外觀
-            Series series1 = new Series("體重1");
-            series1.ChartType = SeriesChartType.Pie;  // 圓形圖
-            series1.ChartType = SeriesChartType.Column; //直條圖(Column),折線圖(Line),橫條圖(Bar)
-
-            //設定 Series1
-            series1.ChartArea = "ChartArea1";  // 設定要呈現的圖表區
-            series1.Points.DataBindXY(name, weight);//Series1的XY數值放入圖中  // xx, yy 皆為一維陣列
-
-            series1.Legend = "Legends1";  // 設定要呈現哪個圖例
-            series1.LegendText = "體重1";  // 設定圖例文字
-            series1.LabelFormat = "#.###"; //小數點
-            series1.MarkerSize = 8; //Label 範圍大小
-            series1.LabelForeColor = Color.FromArgb(0, 90, 255); //字體顏色
-
-            //字體設定
-            series1.Font = new Font("Trebuchet MS", 10, FontStyle.Bold);
-
-            //Label 背景色
-            series1.LabelBackColor = Color.FromArgb(150, 255, 255, 255);
-            series1.Color = Color.FromArgb(240, 65, 140, 240); //背景色
-            series1.IsValueShownAsLabel = true;  // 是否把數值顯示在線上
-
-            chart5.Series.Add(series1);  // 將數列1新增到圖表上
-
-            //------------------------------  # 30個
-
-            // 設定數列2 的 大小與外觀
-            Series series2 = new Series("體重2");
-            series2.ChartType = SeriesChartType.Pie;  // 圓形圖
-            series2.ChartType = SeriesChartType.Column; //直條圖(Column),折線圖(Line),橫條圖(Bar)
-
-            series2.Points.DataBindXY(name, weight);  // xx, yy 皆為一維陣列
-
-            series2.Legend = "Legends1";
-            series2.LegendText = "體重2";
-            series2.LabelFormat = "#.###"; //小數點
-            series2.MarkerSize = 8; //Label 範圍大小
-            series2.LabelForeColor = Color.FromArgb(255, 103, 0);
-            series2.Font = new Font("Trebuchet MS", 10, FontStyle.Bold);
-            series2.LabelBackColor = Color.FromArgb(150, 255, 255, 255);
-            series2.Color = Color.FromArgb(240, 252, 180, 65); //背景色
-            series2.IsValueShownAsLabel = true;  // 是否把數值顯示在線上
-
-            chart5.Series.Add(series2);  // 將數列2新增到圖表上
+            chart_add_series5(chart5);
         }
 
         //------------------------------------------------------------  # 60個
@@ -462,13 +705,11 @@ namespace vcs_Chart3
             chart6.Series.Clear();  // 清除所有數列
             chart6.Titles.Clear();  // 清除所有標題
 
-            chart6.Size = new Size(W, H);  // 設定chart大小
-
             // 畫標題的方法1
             Title chart_title = new Title();
             chart_title.Text = title;
             chart_title.Alignment = ContentAlignment.MiddleCenter;
-            chart_title.Font = new Font("標楷體", 24F, FontStyle.Bold);
+            chart_title.Font = titles_font;
             chart6.Titles.Add(chart_title);  // 將標題新增到圖表上
 
             // 畫標題的方法2
@@ -476,7 +717,7 @@ namespace vcs_Chart3
             {
                 Text = title,
                 Alignment = ContentAlignment.MiddleCenter,
-                Font = new Font("Trebuchet MS", 14F, FontStyle.Bold)
+                Font = titles_font
             };
             //chart6.Titles.Add(chart_title2);  // 將標題新增到圖表上
 
@@ -487,7 +728,7 @@ namespace vcs_Chart3
             chart6.ChartAreas[0].AxisX.TitleForeColor = Color.Blue;  // 設定X軸名稱的字體顏色
             chart6.ChartAreas[0].AxisX.Enabled = AxisEnabled.True;  // 顯示 或 隱藏 X 軸標示
             chart6.ChartAreas[0].AxisX.MajorGrid.Enabled = true;  // 顯示 或 隱藏 X 軸標線
-            chart6.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Trebuchet MS", 15, FontStyle.Bold);  // 設定X軸刻度的字型
+            chart6.ChartAreas[0].AxisX.LabelStyle.Font = xlabel_font;
             chart6.ChartAreas[0].AxisX.LabelStyle.Interval = 60;  // 設置X軸刻度間隔的大小
             chart6.ChartAreas[0].AxisX.LabelStyle.IntervalType = DateTimeIntervalType.Number;  // 設置間隔大小的度量單位
             chart6.ChartAreas[0].AxisX.LineColor = Color.White;  // 設置X軸的線條顏色
@@ -504,7 +745,7 @@ namespace vcs_Chart3
             chart6.ChartAreas[0].AxisY.TitleForeColor = Color.Blue;  // 設定Y軸名稱的字體顏色
             chart6.ChartAreas[0].AxisY.Enabled = AxisEnabled.True;  // 顯示 或 隱藏 Y 軸標示
             chart6.ChartAreas[0].AxisY.MajorGrid.Enabled = true;  // 顯示 或 隱藏 Y 軸標線
-            chart6.ChartAreas[0].AxisY.LabelStyle.Font = new Font("Trebuchet MS", 8.25F, FontStyle.Bold);  // 設置Y軸左側的提示信息的字體屬性
+            chart6.ChartAreas[0].AxisY.LabelStyle.Font = ylabel_font;
             chart6.ChartAreas[0].AxisY.LineColor = Color.DarkBlue;  // 設置軸的線條顏色
             chart6.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.White;  // 設置網格線顏色
 
@@ -528,7 +769,7 @@ namespace vcs_Chart3
             series1.Color = Color.Red; //設定線條顏色
             series1.BorderColor = Color.Navy;  //設置數據邊框的顏色
             series1.BorderWidth = 3;    //線寬
-            series1.Font = new Font("新細明體", 10); //設定字型
+            series1.Font = series_font;
             series1.MarkerSize = 5;     //圖標大小
             series1.IsValueShownAsLabel = false;   //將數值顯示在線上 是否在Chart中顯示座標點值
             series1.LegendText = "sin";  // 圖例文字
@@ -554,12 +795,12 @@ namespace vcs_Chart3
             //------------------------------  # 30個
 
             // 設定數列2 的 大小與外觀
-            Series series2 = new Series("cos", 500);  // 初始化數列1(名稱, 最大值)
+            Series series2 = new Series("cos", 500);  // 初始化數列2(名稱, 最大值)
             series2.ChartType = SeriesChartType.Point;  // 點狀圖
             series2.Color = Color.Green; //設定線條顏色
             series2.BorderColor = Color.Navy;  //設置數據邊框的顏色
             series2.BorderWidth = 3;    //線寬
-            series2.Font = new Font("標楷體", 12); //設定字型
+            series2.Font = series_font;
             series2.MarkerSize = 5;     //圖標大小
             series2.IsValueShownAsLabel = false;   //將數值顯示在線上 是否在Chart中顯示座標點值
             series2.LegendText = "cos";  // 圖例文字
@@ -573,7 +814,7 @@ namespace vcs_Chart3
             series3.Color = Color.Blue; //設定線條顏色
             series3.BorderColor = Color.Navy;  //設置數據邊框的顏色
             series3.BorderWidth = 3;    //線寬
-            series3.Font = new Font("標楷體", 12); //設定字型
+            series3.Font = series_font;
             series3.MarkerSize = 5;     //圖標大小
             series3.IsValueShownAsLabel = false;   //將數值顯示在線上 是否在Chart中顯示座標點值
             series3.LegendText = "sin + cos";  // 圖例文字
@@ -601,9 +842,14 @@ namespace vcs_Chart3
             chart6.Series.Add(series2);  // 將數列2新增到圖表上
             chart6.Series.Add(series3);  // 將數列3新增到圖表上
 
+            print_series_data(series1, series2, series3);
+        }
+
+        void print_series_data(Series series1, Series series2, Series series3)
+        {
             richTextBox1.Text += "顯示資料\n";
             int count = series1.Points.Count;  // 數列1內的資料個數
-            richTextBox1.Text += "共有 " + count.ToString() + " 筆資料\n";
+            //richTextBox1.Text += "共有 " + count.ToString() + " 筆資料\n";
             for (int i = 0; i < count; i++)
             {
                 richTextBox1.Text += "x[" + i.ToString() + "] = " + series1.Points[i].XValue.ToString() + "\t";
@@ -671,12 +917,12 @@ namespace vcs_Chart3
             string title = "用滑鼠指線 顯示數值";
             chart_init(chart8, title);
 
-            string[] name = new string[] { "鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬" };
-            int[] xx = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
-            int[] weight = new int[] { 3, 48, 33, 8, 38, 16, 31, 29, 22, 5, 17, 42 };
+            string[] name = new string[] { "鼠", "牛", "虎", "兔", "龍" };
+            int[] xx = new int[] { 0, 1, 2, 3, 4 };
+            int[] weight = new int[] { 3, 48, 33, 8, 38 };
 
             // 設定數列1 的 大小與外觀
-            Series series1 = new Series("體重1", 500);  // 初始化數列2(名稱，最大值)
+            Series series1 = new Series("體重1", 500);  // 初始化數列1(名稱，最大值)
             series1.ChartType = SeriesChartType.Line;  // 折線圖
             series1.Color = Color.Red;
             series1.XValueMember = "X";
@@ -770,6 +1016,209 @@ namespace vcs_Chart3
                 flag_show_radar_type = 0;
             }
             draw_chart7();
+        }
+
+        //6060
+
+        void radioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton0.Checked == true)
+            {
+                chartType = SeriesChartType.Point;
+                richTextBox1.Text += "點狀圖類型\n";
+            }
+            else if (radioButton1.Checked == true)
+            {
+                chartType = SeriesChartType.FastPoint;
+                richTextBox1.Text += "FastPoint 圖表類型\n";
+            }
+            else if (radioButton2.Checked == true)
+            {
+                chartType = SeriesChartType.Bubble;
+                richTextBox1.Text += "泡泡圖類型\n";
+            }
+            else if (radioButton3.Checked == true)
+            {
+                chartType = SeriesChartType.Line;
+                richTextBox1.Text += "折線圖類型\n";
+            }
+            else if (radioButton4.Checked == true)
+            {
+                chartType = SeriesChartType.Spline;
+                richTextBox1.Text += "曲線圖類型\n";
+            }
+            else if (radioButton5.Checked == true)
+            {
+                chartType = SeriesChartType.StepLine;
+                richTextBox1.Text += "StepLine 圖表類型\n";
+            }
+            else if (radioButton6.Checked == true)
+            {
+                chartType = SeriesChartType.FastLine;
+                richTextBox1.Text += "FastLine 圖表類型\n";
+            }
+            else if (radioButton7.Checked == true)
+            {
+                chartType = SeriesChartType.Bar;
+                richTextBox1.Text += "橫條圖類型\n";
+            }
+            else if (radioButton8.Checked == true)
+            {
+                chartType = SeriesChartType.StackedBar;
+                richTextBox1.Text += "堆疊橫條圖類型\n";
+            }
+            else if (radioButton9.Checked == true)
+            {
+                chartType = SeriesChartType.StackedBar100;
+                richTextBox1.Text += "100% 堆疊橫條圖類型\n";
+            }
+            else if (radioButton10.Checked == true)
+            {
+                chartType = SeriesChartType.Column;
+                richTextBox1.Text += "直條圖類型\n";
+            }
+            else if (radioButton11.Checked == true)
+            {
+                chartType = SeriesChartType.StackedColumn;
+                richTextBox1.Text += "堆疊直條圖類型\n";
+            }
+            else if (radioButton12.Checked == true)
+            {
+                chartType = SeriesChartType.StackedColumn100;
+                richTextBox1.Text += "100% 堆疊直條圖類型\n";
+            }
+            else if (radioButton13.Checked == true)
+            {
+                chartType = SeriesChartType.Area;
+                richTextBox1.Text += "區域圖表類型\n";
+            }
+            else if (radioButton14.Checked == true)
+            {
+                chartType = SeriesChartType.SplineArea;
+                richTextBox1.Text += "曲線區域圖類型\n";
+            }
+            else if (radioButton15.Checked == true)
+            {
+                chartType = SeriesChartType.StackedArea;
+                richTextBox1.Text += "堆疊區域圖類型\n";
+            }
+            else if (radioButton16.Checked == true)
+            {
+                chartType = SeriesChartType.StackedArea100;
+                richTextBox1.Text += "100% 堆疊區域圖類型\n";
+            }
+            else if (radioButton17.Checked == true)
+            {
+                chartType = SeriesChartType.Pie;
+                richTextBox1.Text += "圓形圖類型\n";
+            }
+            else if (radioButton18.Checked == true)
+            {
+                chartType = SeriesChartType.Doughnut;
+                richTextBox1.Text += "環圈圖類型\n";
+            }
+            else if (radioButton19.Checked == true)
+            {
+                chartType = SeriesChartType.Stock;
+                richTextBox1.Text += "股票圖類型\n";
+            }
+            else if (radioButton20.Checked == true)
+            {
+                chartType = SeriesChartType.Candlestick;
+                richTextBox1.Text += "K 線圖類型\n";
+            }
+            else if (radioButton21.Checked == true)
+            {
+                chartType = SeriesChartType.Range;
+                richTextBox1.Text += "範圍圖類型\n";
+            }
+            else if (radioButton22.Checked == true)
+            {
+                chartType = SeriesChartType.SplineRange;
+                richTextBox1.Text += "曲線範圍圖類型\n";
+            }
+            else if (radioButton23.Checked == true)
+            {
+                chartType = SeriesChartType.RangeBar;
+                richTextBox1.Text += "範圍橫條圖類型\n";
+            }
+            else if (radioButton24.Checked == true)
+            {
+                chartType = SeriesChartType.RangeColumn;
+                richTextBox1.Text += "範圍直條圖類型\n";
+            }
+            else if (radioButton25.Checked == true)
+            {
+                chartType = SeriesChartType.Radar;
+                richTextBox1.Text += "雷達圖類型\n";
+            }
+            else if (radioButton26.Checked == true)
+            {
+                chartType = SeriesChartType.Polar;
+                richTextBox1.Text += "極座標圖類型\n";
+            }
+            else if (radioButton27.Checked == true)
+            {
+                chartType = SeriesChartType.ErrorBar;
+                richTextBox1.Text += "誤差長條圖類型\n";
+            }
+            else if (radioButton28.Checked == true)
+            {
+                chartType = SeriesChartType.BoxPlot;
+                richTextBox1.Text += "盒狀圖類型\n";
+            }
+            else if (radioButton29.Checked == true)
+            {
+                chartType = SeriesChartType.Renko;
+                richTextBox1.Text += "磚形圖類型\n";
+            }
+            else if (radioButton30.Checked == true)
+            {
+                chartType = SeriesChartType.ThreeLineBreak;
+                richTextBox1.Text += "ThreeLineBreak 圖表類型\n";
+            }
+            else if (radioButton31.Checked == true)
+            {
+                chartType = SeriesChartType.Kagi;
+                richTextBox1.Text += "Kagi 圖表類型\n";
+            }
+            else if (radioButton32.Checked == true)
+            {
+                chartType = SeriesChartType.PointAndFigure;
+                richTextBox1.Text += "PointAndFigure 圖表類型\n";
+            }
+            else if (radioButton33.Checked == true)
+            {
+                chartType = SeriesChartType.Funnel;
+                richTextBox1.Text += "漏斗圖類型\n";
+            }
+            else if (radioButton34.Checked == true)
+            {
+                chartType = SeriesChartType.Pyramid;
+                richTextBox1.Text += "金字塔圖類型\n";
+            }
+            draw_chart3();
+        }
+
+        private void bt_chart_type_Click(object sender, EventArgs e)
+        {
+            int x_st = 10;
+            int y_st = 10;
+            int dx = W + 10;
+            int dy = H + 10;
+
+            chart3.Size = new Size(W * 2 + 10, H * 2 + 10);
+            chart3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            chart3.BringToFront();
+            groupBox1.Size = new Size(W * 2 + 10, H * 1);
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            groupBox1.BringToFront();
+            groupBox1.Visible = true;
+
+            W = 500 * 2;
+            H = 310 * 2;
+
+            draw_chart3();
         }
 
         //------------------------------------------------------------  # 60個
@@ -930,7 +1379,7 @@ chart放在
             chart.ChartAreas[0].AxisX.TitleForeColor = Color.Blue; //設定X軸名稱的字體顏色
             chart.ChartAreas[0].AxisX.Enabled = AxisEnabled.True;  //顯示 或 隱藏 X 軸標示
             chart.ChartAreas[0].AxisX.MajorGrid.Enabled = true;    //顯示 或 隱藏 X 軸標線
-            chart.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Trebuchet MS", 15, FontStyle.Bold);   //設定X軸刻度的字型
+            chart.ChartAreas[0].AxisX.LabelStyle.Font = xlabel_font;
             chart.ChartAreas[0].AxisX.LabelStyle.Interval = 60;    //設置X軸刻度間隔的大小
             chart.ChartAreas[0].AxisX.LabelStyle.IntervalType = DateTimeIntervalType.Number;//設置間隔大小的度量單位
             chart.ChartAreas[0].AxisX.LineColor = Color.White;//設置X軸的線條顏色
@@ -948,7 +1397,7 @@ chart放在
             chart.ChartAreas[0].AxisY.Enabled = AxisEnabled.True;  //顯示 或 隱藏 Y 軸標示
             chart.ChartAreas[0].AxisY.MajorGrid.Enabled = true;    //顯示 或 隱藏 Y 軸標線
 
-            chart.ChartAreas[0].AxisY.LabelStyle.Font = new Font("Trebuchet MS", 8.25F, FontStyle.Bold);//設置Y軸左側的提示信息的字體屬性
+            chart.ChartAreas[0].AxisY.LabelStyle.Font = ylabel_font;
             chart.ChartAreas[0].AxisY.LineColor = Color.DarkBlue;//設置軸的線條顏色
             chart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.White;//設置網格線顏色
 
@@ -961,7 +1410,7 @@ chart放在
             chart.BorderSkin.SkinStyle = BorderSkinStyle.Emboss;//設置圖像的邊框外觀樣式
             chart.BackColor = Color.Yellow;//設置圖表的背景顏色
 
-            chart.Titles[0].Font = new Font("標楷體", 20f);//设置图表标题字体样式和大小
+            chart.Titles[0].Font = titles_font;
             chart.Legends["Legend1"].Docking = Docking.Right;  //設定圖標顯示停靠的位置
         }
 
