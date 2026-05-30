@@ -41,7 +41,7 @@ namespace vcs_Mix00
         {
             show_item_location();
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
             //網頁protocol	解決  要求已經中止: 無法建立 SSL/TLS 的安全通道。
             // Allow TLS 1.1 and TLS 1.2 protocols for file download.
@@ -66,7 +66,6 @@ namespace vcs_Mix00
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -157,6 +156,8 @@ namespace vcs_Mix00
             Button btn = ((Button)sender);//sender轉Button類別物件，接著再指定給btn
             richTextBox1.Text += btn.Text + "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -1145,7 +1146,7 @@ namespace vcs_Mix00
         }
         */
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button23_Click(object sender, EventArgs e)
         {
@@ -2848,15 +2849,10 @@ namespace vcs_Mix00
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

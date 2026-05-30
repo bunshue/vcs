@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_Process8
+namespace vcs_Chart1
 {
     static class Program
     {

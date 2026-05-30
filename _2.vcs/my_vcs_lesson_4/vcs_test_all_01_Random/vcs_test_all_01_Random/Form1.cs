@@ -96,11 +96,11 @@ namespace vcs_test_all_01_Random
             pictureBox5.Size = new Size(256 / 2, 50);
             pictureBox5.Location = new Point(800 + 256 / 2, 20 + 256 + 10 + 50 + 10);
 
-            int w = 280;
+            int w = 270;
             int h = 50;
             x_st = 430;
             y_st = 430;
-            dx = w + 10;
+            dx = w + 30;
             dy = 46;
 
             tb_random_text0.Size = new Size(w, h);
@@ -124,26 +124,70 @@ namespace vcs_test_all_01_Random
             tb_random_text18.Size = new Size(w, h);
             tb_random_text19.Size = new Size(w, h);
 
-            tb_random_text0.Location = new Point(x_st, y_st + dy * 0);
-            tb_random_text1.Location = new Point(x_st, y_st + dy * 1);
-            tb_random_text2.Location = new Point(x_st, y_st + dy * 2);
-            tb_random_text3.Location = new Point(x_st, y_st + dy * 3);
-            tb_random_text4.Location = new Point(x_st, y_st + dy * 4);
-            tb_random_text5.Location = new Point(x_st, y_st + dy * 5);
-            tb_random_text6.Location = new Point(x_st, y_st + dy * 6);
-            tb_random_text7.Location = new Point(x_st, y_st + dy * 7);
-            tb_random_text8.Location = new Point(x_st, y_st + dy * 8);
-            tb_random_text9.Location = new Point(x_st, y_st + dy * 9);
-            tb_random_text10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            tb_random_text11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            tb_random_text12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            tb_random_text13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            tb_random_text14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            tb_random_text15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            tb_random_text16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            tb_random_text17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            tb_random_text18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            tb_random_text19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+
+            lb_random0.Location = new Point(x_st, y_st + dy * 0);
+            lb_random1.Location = new Point(x_st, y_st + dy * 1);
+            lb_random2.Location = new Point(x_st, y_st + dy * 2);
+            lb_random3.Location = new Point(x_st, y_st + dy * 3);
+            lb_random4.Location = new Point(x_st, y_st + dy * 4);
+            lb_random5.Location = new Point(x_st, y_st + dy * 5);
+            lb_random6.Location = new Point(x_st, y_st + dy * 6);
+            lb_random7.Location = new Point(x_st, y_st + dy * 7);
+            lb_random8.Location = new Point(x_st, y_st + dy * 8);
+            lb_random9.Location = new Point(x_st, y_st + dy * 9);
+            lb_random10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            lb_random11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            lb_random12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            lb_random13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            lb_random14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            lb_random15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            lb_random16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            lb_random17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            lb_random18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            lb_random19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+
+            int ddx = 20;
+            tb_random_text0.Location = new Point(x_st + ddx, y_st + dy * 0);
+            tb_random_text1.Location = new Point(x_st + ddx, y_st + dy * 1);
+            tb_random_text2.Location = new Point(x_st + ddx, y_st + dy * 2);
+            tb_random_text3.Location = new Point(x_st + ddx, y_st + dy * 3);
+            tb_random_text4.Location = new Point(x_st + ddx, y_st + dy * 4);
+            tb_random_text5.Location = new Point(x_st + ddx, y_st + dy * 5);
+            tb_random_text6.Location = new Point(x_st + ddx, y_st + dy * 6);
+            tb_random_text7.Location = new Point(x_st + ddx, y_st + dy * 7);
+            tb_random_text8.Location = new Point(x_st + ddx, y_st + dy * 8);
+            tb_random_text9.Location = new Point(x_st + ddx, y_st + dy * 9);
+            tb_random_text10.Location = new Point(x_st + dx * 1 + ddx, y_st + dy * 0);
+            tb_random_text11.Location = new Point(x_st + dx * 1 + ddx, y_st + dy * 1);
+            tb_random_text12.Location = new Point(x_st + dx * 1 + ddx, y_st + dy * 2);
+            tb_random_text13.Location = new Point(x_st + dx * 1 + ddx, y_st + dy * 3);
+            tb_random_text14.Location = new Point(x_st + dx * 1 + ddx, y_st + dy * 4);
+            tb_random_text15.Location = new Point(x_st + dx * 1 + ddx, y_st + dy * 5);
+            tb_random_text16.Location = new Point(x_st + dx * 1 + ddx, y_st + dy * 6);
+            tb_random_text17.Location = new Point(x_st + dx * 1 + ddx, y_st + dy * 7);
+            tb_random_text18.Location = new Point(x_st + dx * 1 + ddx, y_st + dy * 8);
+            tb_random_text19.Location = new Point(x_st + dx * 1 + ddx, y_st + dy * 9);
+
+            lb_random0.Text = "0";
+            lb_random1.Text = "1";
+            lb_random2.Text = "2";
+            lb_random3.Text = "3";
+            lb_random4.Text = "4";
+            lb_random5.Text = "5";
+            lb_random6.Text = "6";
+            lb_random7.Text = "7";
+            lb_random8.Text = "8";
+            lb_random9.Text = "9";
+            lb_random10.Text = "10";
+            lb_random11.Text = "11";
+            lb_random12.Text = "12";
+            lb_random13.Text = "13";
+            lb_random14.Text = "14";
+            lb_random15.Text = "15";
+            lb_random16.Text = "16";
+            lb_random17.Text = "17";
+            lb_random18.Text = "18";
+            lb_random19.Text = "19";
 
             this.Size = new Size(1540, 930);
             this.Text = "vcs_test_all_01_Random";
@@ -1015,10 +1059,8 @@ namespace vcs_test_all_01_Random
             pictureBox5.BackColor = GetRandomColor5();
 
             tb_random_text0.Text = RandomText0();
-
             tb_random_text1.Text = RandomText1();
             tb_random_text2.Text = RandomText2();
-
             tb_random_text5.Text = RandomText5(10);
             tb_random_text6.Text = RandomText6(10);
             tb_random_text7.Text = RandomText7();

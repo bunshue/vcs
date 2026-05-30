@@ -89,6 +89,26 @@
             this.bt_clear = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lb_random0 = new System.Windows.Forms.Label();
+            this.lb_random1 = new System.Windows.Forms.Label();
+            this.lb_random3 = new System.Windows.Forms.Label();
+            this.lb_random2 = new System.Windows.Forms.Label();
+            this.lb_random13 = new System.Windows.Forms.Label();
+            this.lb_random12 = new System.Windows.Forms.Label();
+            this.lb_random11 = new System.Windows.Forms.Label();
+            this.lb_random10 = new System.Windows.Forms.Label();
+            this.lb_random17 = new System.Windows.Forms.Label();
+            this.lb_random16 = new System.Windows.Forms.Label();
+            this.lb_random15 = new System.Windows.Forms.Label();
+            this.lb_random14 = new System.Windows.Forms.Label();
+            this.lb_random7 = new System.Windows.Forms.Label();
+            this.lb_random6 = new System.Windows.Forms.Label();
+            this.lb_random5 = new System.Windows.Forms.Label();
+            this.lb_random4 = new System.Windows.Forms.Label();
+            this.lb_random19 = new System.Windows.Forms.Label();
+            this.lb_random18 = new System.Windows.Forms.Label();
+            this.lb_random9 = new System.Windows.Forms.Label();
+            this.lb_random8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -659,16 +679,16 @@
             // 
             // txtNames
             // 
-            this.txtNames.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtNames.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.txtNames.Location = new System.Drawing.Point(16, 27);
             this.txtNames.Multiline = true;
             this.txtNames.Name = "txtNames";
             this.txtNames.Size = new System.Drawing.Size(100, 124);
             this.txtNames.TabIndex = 4;
             this.txtNames.Text = "Ann\r\nBob\r\nCindy\r\nDan\r\nEdwina\r\nFrank\r\nGina\r\nHarry\r\nIvy\r\nJack\r\nKlaudia\r\nLeonard\r\nMa" +
-                "rcie\r\nNate\r\nOlivia\r\nPaul\r\nQueenie\r\nRussell\r\nSally\r\nTim\r\nUma\r\nVern\r\nWendy\r\nXavier" +
-                "\r\nYoko\r\nZack";
+    "rcie\r\nNate\r\nOlivia\r\nPaul\r\nQueenie\r\nRussell\r\nSally\r\nTim\r\nUma\r\nVern\r\nWendy\r\nXavier" +
+    "\r\nYoko\r\nZack";
             // 
             // bt_clear
             // 
@@ -696,11 +716,211 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // lb_random0
+            // 
+            this.lb_random0.AutoSize = true;
+            this.lb_random0.Location = new System.Drawing.Point(584, 397);
+            this.lb_random0.Name = "lb_random0";
+            this.lb_random0.Size = new System.Drawing.Size(33, 12);
+            this.lb_random0.TabIndex = 85;
+            this.lb_random0.Text = "label1";
+            // 
+            // lb_random1
+            // 
+            this.lb_random1.AutoSize = true;
+            this.lb_random1.Location = new System.Drawing.Point(586, 422);
+            this.lb_random1.Name = "lb_random1";
+            this.lb_random1.Size = new System.Drawing.Size(33, 12);
+            this.lb_random1.TabIndex = 86;
+            this.lb_random1.Text = "label2";
+            // 
+            // lb_random3
+            // 
+            this.lb_random3.AutoSize = true;
+            this.lb_random3.Location = new System.Drawing.Point(588, 471);
+            this.lb_random3.Name = "lb_random3";
+            this.lb_random3.Size = new System.Drawing.Size(33, 12);
+            this.lb_random3.TabIndex = 88;
+            this.lb_random3.Text = "label5";
+            // 
+            // lb_random2
+            // 
+            this.lb_random2.AutoSize = true;
+            this.lb_random2.Location = new System.Drawing.Point(586, 446);
+            this.lb_random2.Name = "lb_random2";
+            this.lb_random2.Size = new System.Drawing.Size(33, 12);
+            this.lb_random2.TabIndex = 87;
+            this.lb_random2.Text = "label6";
+            // 
+            // lb_random13
+            // 
+            this.lb_random13.AutoSize = true;
+            this.lb_random13.Location = new System.Drawing.Point(627, 471);
+            this.lb_random13.Name = "lb_random13";
+            this.lb_random13.Size = new System.Drawing.Size(33, 12);
+            this.lb_random13.TabIndex = 92;
+            this.lb_random13.Text = "label7";
+            // 
+            // lb_random12
+            // 
+            this.lb_random12.AutoSize = true;
+            this.lb_random12.Location = new System.Drawing.Point(625, 446);
+            this.lb_random12.Name = "lb_random12";
+            this.lb_random12.Size = new System.Drawing.Size(33, 12);
+            this.lb_random12.TabIndex = 91;
+            this.lb_random12.Text = "label8";
+            // 
+            // lb_random11
+            // 
+            this.lb_random11.AutoSize = true;
+            this.lb_random11.Location = new System.Drawing.Point(625, 422);
+            this.lb_random11.Name = "lb_random11";
+            this.lb_random11.Size = new System.Drawing.Size(33, 12);
+            this.lb_random11.TabIndex = 90;
+            this.lb_random11.Text = "label9";
+            // 
+            // lb_random10
+            // 
+            this.lb_random10.AutoSize = true;
+            this.lb_random10.Location = new System.Drawing.Point(623, 397);
+            this.lb_random10.Name = "lb_random10";
+            this.lb_random10.Size = new System.Drawing.Size(39, 12);
+            this.lb_random10.TabIndex = 89;
+            this.lb_random10.Text = "label10";
+            // 
+            // lb_random17
+            // 
+            this.lb_random17.AutoSize = true;
+            this.lb_random17.Location = new System.Drawing.Point(627, 562);
+            this.lb_random17.Name = "lb_random17";
+            this.lb_random17.Size = new System.Drawing.Size(39, 12);
+            this.lb_random17.TabIndex = 100;
+            this.lb_random17.Text = "label11";
+            // 
+            // lb_random16
+            // 
+            this.lb_random16.AutoSize = true;
+            this.lb_random16.Location = new System.Drawing.Point(625, 537);
+            this.lb_random16.Name = "lb_random16";
+            this.lb_random16.Size = new System.Drawing.Size(39, 12);
+            this.lb_random16.TabIndex = 99;
+            this.lb_random16.Text = "label12";
+            // 
+            // lb_random15
+            // 
+            this.lb_random15.AutoSize = true;
+            this.lb_random15.Location = new System.Drawing.Point(625, 513);
+            this.lb_random15.Name = "lb_random15";
+            this.lb_random15.Size = new System.Drawing.Size(39, 12);
+            this.lb_random15.TabIndex = 98;
+            this.lb_random15.Text = "label13";
+            // 
+            // lb_random14
+            // 
+            this.lb_random14.AutoSize = true;
+            this.lb_random14.Location = new System.Drawing.Point(623, 488);
+            this.lb_random14.Name = "lb_random14";
+            this.lb_random14.Size = new System.Drawing.Size(39, 12);
+            this.lb_random14.TabIndex = 97;
+            this.lb_random14.Text = "label14";
+            // 
+            // lb_random7
+            // 
+            this.lb_random7.AutoSize = true;
+            this.lb_random7.Location = new System.Drawing.Point(588, 562);
+            this.lb_random7.Name = "lb_random7";
+            this.lb_random7.Size = new System.Drawing.Size(39, 12);
+            this.lb_random7.TabIndex = 96;
+            this.lb_random7.Text = "label15";
+            // 
+            // lb_random6
+            // 
+            this.lb_random6.AutoSize = true;
+            this.lb_random6.Location = new System.Drawing.Point(586, 537);
+            this.lb_random6.Name = "lb_random6";
+            this.lb_random6.Size = new System.Drawing.Size(39, 12);
+            this.lb_random6.TabIndex = 95;
+            this.lb_random6.Text = "label16";
+            // 
+            // lb_random5
+            // 
+            this.lb_random5.AutoSize = true;
+            this.lb_random5.Location = new System.Drawing.Point(586, 513);
+            this.lb_random5.Name = "lb_random5";
+            this.lb_random5.Size = new System.Drawing.Size(39, 12);
+            this.lb_random5.TabIndex = 94;
+            this.lb_random5.Text = "label17";
+            // 
+            // lb_random4
+            // 
+            this.lb_random4.AutoSize = true;
+            this.lb_random4.Location = new System.Drawing.Point(584, 488);
+            this.lb_random4.Name = "lb_random4";
+            this.lb_random4.Size = new System.Drawing.Size(39, 12);
+            this.lb_random4.TabIndex = 93;
+            this.lb_random4.Text = "label18";
+            // 
+            // lb_random19
+            // 
+            this.lb_random19.AutoSize = true;
+            this.lb_random19.Location = new System.Drawing.Point(629, 611);
+            this.lb_random19.Name = "lb_random19";
+            this.lb_random19.Size = new System.Drawing.Size(39, 12);
+            this.lb_random19.TabIndex = 104;
+            this.lb_random19.Text = "label19";
+            // 
+            // lb_random18
+            // 
+            this.lb_random18.AutoSize = true;
+            this.lb_random18.Location = new System.Drawing.Point(627, 586);
+            this.lb_random18.Name = "lb_random18";
+            this.lb_random18.Size = new System.Drawing.Size(39, 12);
+            this.lb_random18.TabIndex = 103;
+            this.lb_random18.Text = "label20";
+            // 
+            // lb_random9
+            // 
+            this.lb_random9.AutoSize = true;
+            this.lb_random9.Location = new System.Drawing.Point(590, 611);
+            this.lb_random9.Name = "lb_random9";
+            this.lb_random9.Size = new System.Drawing.Size(39, 12);
+            this.lb_random9.TabIndex = 102;
+            this.lb_random9.Text = "label21";
+            // 
+            // lb_random8
+            // 
+            this.lb_random8.AutoSize = true;
+            this.lb_random8.Location = new System.Drawing.Point(588, 586);
+            this.lb_random8.Name = "lb_random8";
+            this.lb_random8.Size = new System.Drawing.Size(39, 12);
+            this.lb_random8.TabIndex = 101;
+            this.lb_random8.Text = "label22";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1352, 721);
+            this.ClientSize = new System.Drawing.Size(918, 721);
+            this.Controls.Add(this.lb_random19);
+            this.Controls.Add(this.lb_random18);
+            this.Controls.Add(this.lb_random9);
+            this.Controls.Add(this.lb_random8);
+            this.Controls.Add(this.lb_random17);
+            this.Controls.Add(this.lb_random16);
+            this.Controls.Add(this.lb_random15);
+            this.Controls.Add(this.lb_random14);
+            this.Controls.Add(this.lb_random7);
+            this.Controls.Add(this.lb_random6);
+            this.Controls.Add(this.lb_random5);
+            this.Controls.Add(this.lb_random4);
+            this.Controls.Add(this.lb_random13);
+            this.Controls.Add(this.lb_random12);
+            this.Controls.Add(this.lb_random11);
+            this.Controls.Add(this.lb_random10);
+            this.Controls.Add(this.lb_random3);
+            this.Controls.Add(this.lb_random2);
+            this.Controls.Add(this.lb_random1);
+            this.Controls.Add(this.lb_random0);
             this.Controls.Add(this.tb_random_text19);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.tb_random_text18);
@@ -811,6 +1031,26 @@
         private System.Windows.Forms.TextBox tb_random_text12;
         private System.Windows.Forms.TextBox tb_random_text11;
         private System.Windows.Forms.TextBox tb_random_text10;
+        private System.Windows.Forms.Label lb_random0;
+        private System.Windows.Forms.Label lb_random1;
+        private System.Windows.Forms.Label lb_random3;
+        private System.Windows.Forms.Label lb_random2;
+        private System.Windows.Forms.Label lb_random13;
+        private System.Windows.Forms.Label lb_random12;
+        private System.Windows.Forms.Label lb_random11;
+        private System.Windows.Forms.Label lb_random10;
+        private System.Windows.Forms.Label lb_random17;
+        private System.Windows.Forms.Label lb_random16;
+        private System.Windows.Forms.Label lb_random15;
+        private System.Windows.Forms.Label lb_random14;
+        private System.Windows.Forms.Label lb_random7;
+        private System.Windows.Forms.Label lb_random6;
+        private System.Windows.Forms.Label lb_random5;
+        private System.Windows.Forms.Label lb_random4;
+        private System.Windows.Forms.Label lb_random19;
+        private System.Windows.Forms.Label lb_random18;
+        private System.Windows.Forms.Label lb_random9;
+        private System.Windows.Forms.Label lb_random8;
     }
 }
 

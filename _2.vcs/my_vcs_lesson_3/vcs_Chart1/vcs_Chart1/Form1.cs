@@ -24,7 +24,7 @@ Series 移除 Series1
 // x軸只顯示一條，只要將資料都加入到一個序列內即可
 // 而x軸顯示多條，則需要使用多個序列存放資料
 
-namespace vcs_Chart3
+namespace vcs_Chart1
 {
     public partial class Form1 : Form
     {
@@ -215,7 +215,7 @@ namespace vcs_Chart3
             radioButton34.CheckedChanged += new EventHandler(radioButton_CheckedChanged);
 
             this.Size = new Size(1840, 1010);
-            this.Text = "vcs_Chart3";
+            this.Text = "vcs_Chart1";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;

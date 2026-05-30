@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_Chart3", "vcs_Chart3\vcs_Chart3.csproj", "{60BAFADD-8F22-4297-9DD5-A69C7A4EEA69}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_Chart1", "vcs_Chart1\vcs_Chart1.csproj", "{60BAFADD-8F22-4297-9DD5-A69C7A4EEA69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,4 @@
-﻿namespace vcs_Chart3
+﻿namespace vcs_Chart1
 {
     partial class Form1
     {

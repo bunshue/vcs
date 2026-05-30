@@ -42,6 +42,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.process1 = new System.Diagnostics.Process();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox1
@@ -165,11 +167,33 @@
             this.richTextBox1.TabIndex = 16;
             this.richTextBox1.Text = "";
             // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(713, 119);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(100, 40);
+            this.button7.TabIndex = 17;
+            this.button7.Text = "button7";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(713, 190);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(100, 40);
+            this.button8.TabIndex = 18;
+            this.button8.Text = "button8";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(769, 549);
+            this.ClientSize = new System.Drawing.Size(1135, 549);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button6);
@@ -202,6 +226,8 @@
         private System.Windows.Forms.Button button1;
         private System.Diagnostics.Process process1;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button7;
     }
 }
 

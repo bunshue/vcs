@@ -32,7 +32,6 @@ namespace vcs_Assembly
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -60,6 +59,8 @@ namespace vcs_Assembly
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -345,8 +346,20 @@ namespace vcs_Assembly
     }
 }
 
-/*
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
 
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
+/*
 private void AboutBox_Load(object sender, EventArgs e)
 {
 	AssemblyInfoClass myAssembly = new AssemblyInfoClass();
@@ -397,15 +410,11 @@ C#讀取exe版本號
 	
             //取得 namespaceName
             string namespaceName = Assembly.GetExecutingAssembly().GetName().Name.ToString();
-
             richTextBox1.Text += namespaceName + "\n";
-
             richTextBox1.Text += Assembly.GetExecutingAssembly().Location + "\n";
-
 
 一、獲取程序集版本
 label版本.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-
 
 使用資源檔的圖片
 
@@ -414,15 +423,11 @@ label版本.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 點選picture1.jpg, 屬性
 建置動作 改成 內嵌資源
 
-
             Assembly asm = this.GetType().Assembly;
             Stream stream = asm.GetManifestResourceStream("vcs_test.Resources.picture1.jpg");
             this.BackgroundImage = new Bitmap(stream);
-
 */
 /*
-
             var RootDirectory = AppDomain.CurrentDomain.BaseDirectory ?? System.Reflection.Assembly.GetExecutingAssembly().Location;
             richTextBox1.Text += "RootDirectory = " + RootDirectory + "\n";
 */
-

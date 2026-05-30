@@ -101,5 +101,37 @@ namespace vcs_Process7
             {
             }
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Process currentProcess = Process.GetCurrentProcess();
+            MessageBox.Show("電腦名稱：" + currentProcess.MachineName + Environment.NewLine + "處理序名稱：" + currentProcess.ProcessName);
+
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            process1 = Process.Start("Notepad.exe");
+            for (int i = 0; i < 5; i++)
+            {
+                if (!process1.HasExited)
+                {
+                    process1.Refresh();
+                    richTextBox1.Text += "實體記憶體的耗用： " + process1.WorkingSet64.ToString() + "\n";
+                    process1.WaitForExit(3000);
+                }
+                else
+                {
+                    break;
+                }
+            }
+            process1.CloseMainWindow();
+            richTextBox1.Text += "執行了CloseMainWindow()方法\n";
+
+            process1.Close();
+            richTextBox1.Text += "執行了Close()方法\n";
+
+        }
     }
 }
