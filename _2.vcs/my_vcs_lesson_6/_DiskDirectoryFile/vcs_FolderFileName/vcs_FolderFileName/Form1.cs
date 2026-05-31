@@ -14,12 +14,6 @@ namespace vcs_FolderFileName
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-            comboBox1.SelectedIndex = 0;
-        }
-
         string path = String.Empty;
         int filetype = 0;
         string filetype2 = String.Empty;
@@ -43,6 +37,16 @@ namespace vcs_FolderFileName
         // 以下List 裡為MyFileInfo 型態
 
         List<MyFileInfo> fileinfos = new List<MyFileInfo>();
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            comboBox1.SelectedIndex = 0;
+        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -583,3 +587,15 @@ namespace vcs_FolderFileName
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/

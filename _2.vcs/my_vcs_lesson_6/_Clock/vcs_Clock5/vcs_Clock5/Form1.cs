@@ -25,13 +25,10 @@ namespace vcs_Clock5
             const float cell_height = 80;
             const float led_thickness = 7;
             const float gap = 1.5f;
-            TimeLedText = new LedText(cell_width,
-                cell_height, led_thickness, gap);
+            TimeLedText = new LedText(cell_width, cell_height, led_thickness, gap);
 
             const float scale = 0.95f;
-            DateLedText = new LedText(scale * cell_width,
-                scale * cell_height, scale * led_thickness,
-                scale * gap);
+            DateLedText = new LedText(scale * cell_width, scale * cell_height, scale * led_thickness, scale * gap);
         }
 
         private void tmrTick_Tick(object sender, EventArgs e)
@@ -60,11 +57,7 @@ namespace vcs_Clock5
                 Pen used_pen = Pens.Transparent;
                 Pen unused_pen = Pens.Transparent;
 
-                TimeLedText.DrawText(gr, bg_brush,
-                    used_brush, used_pen,
-                    unused_brush, unused_pen,
-                    position, 1.2f,
-                    DateTime.Now.ToLongTimeString());
+                TimeLedText.DrawText(gr, bg_brush, used_brush, used_pen, unused_brush, unused_pen, position, 1.2f, DateTime.Now.ToLongTimeString());
             }
 
             using (Brush unused_brush = new SolidBrush(Color.FromArgb(0, 0, 60)))
@@ -75,21 +68,13 @@ namespace vcs_Clock5
                 Pen used_pen = Pens.Transparent;
                 Pen unused_pen = Pens.Transparent;
 
-                position.Y += TimeLedText.CellHeight +
-                    4 * TimeLedText.LedThickness;
+                position.Y += TimeLedText.CellHeight + 4 * TimeLedText.LedThickness;
 
                 // Draw the day and date.
-                string date_string =
-                    DateTime.Now.DayOfWeek.ToString();
+                string date_string = DateTime.Now.DayOfWeek.ToString();
                 date_string = date_string.ToUpper().Substring(0, 3);
-                date_string += " " +
-                    DateTime.Now.Day.ToString() + "/" +
-                    DateTime.Now.Year.ToString().Substring(0, 2);
-                DateLedText.DrawText(gr, bg_brush,
-                    used_brush, used_pen,
-                    unused_brush, unused_pen,
-                    position, 1.2f,
-                    date_string);
+                date_string += " " + DateTime.Now.Day.ToString() + "/" + DateTime.Now.Year.ToString().Substring(0, 2);
+                DateLedText.DrawText(gr, bg_brush, used_brush, used_pen, unused_brush, unused_pen, position, 1.2f, date_string);
             }
         }
     }

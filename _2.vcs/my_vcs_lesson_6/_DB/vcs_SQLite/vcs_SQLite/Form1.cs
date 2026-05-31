@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
 using System.Data.SQLite;
 
 namespace vcs_SQLite
@@ -91,7 +92,7 @@ namespace vcs_SQLite
         // 建立資料庫
         private void Create_db()
         {
-            if (!System.IO.File.Exists(path))
+            if (File.Exists(path) == false)
             {
                 richTextBox1.Text += "資料庫不存在, 建立之\n";
                 SQLiteConnection.CreateFile(path);
@@ -203,7 +204,6 @@ namespace vcs_SQLite
     }
 }
 
-
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
@@ -212,9 +212,8 @@ namespace vcs_SQLite
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-
 /*  可搬出
 
- */
+*/
 
 

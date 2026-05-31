@@ -288,10 +288,7 @@ namespace vcs_ReadWrite_EXCEL1
             //匯出資料至Excel, 並存檔
             //搬移中 TBD, 從 vcs_ReadWrite_EXCEL5
 
-
             return;
-
-            //System.Diagnostics.Debug.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 
             // Create a list of accounts.
             var bankAccounts = new List<Account> 
@@ -497,7 +494,9 @@ namespace vcs_ReadWrite_EXCEL1
         public bool ExportDataGridview(DataGridView dgv, bool isShowExcle)
         {
             if (dgv.Rows.Count == 0)
+            {
                 return false;
+            }
             //建立Excel對像
             Excel.Application excel = new Excel.Application();
             excel.Application.Workbooks.Add(true);
@@ -576,9 +575,7 @@ namespace vcs_ReadWrite_EXCEL1
             if (sheet == null)
             {
                 // Add the worksheet at the end.
-                sheet = (Excel.Worksheet)workbook.Sheets.Add(
-                    Type.Missing, workbook.Sheets[workbook.Sheets.Count],
-                    1, Excel.XlSheetType.xlWorksheet);
+                sheet = (Excel.Worksheet)workbook.Sheets.Add(Type.Missing, workbook.Sheets[workbook.Sheets.Count], 1, Excel.XlSheetType.xlWorksheet);
                 sheet.Name = sheet_name;
             }
 
@@ -609,7 +606,6 @@ namespace vcs_ReadWrite_EXCEL1
 
             string filename2 = Application.StartupPath + "\\pdf_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".pdf";
 
-
             const int xlQualityStandard = 0;
             sheet.ExportAsFixedFormat(Excel.XlFixedFormatType.xlTypePDF, filename2, xlQualityStandard, true, false, Type.Missing, Type.Missing, true, Type.Missing);
 
@@ -627,7 +623,10 @@ namespace vcs_ReadWrite_EXCEL1
         {
             foreach (Excel.Worksheet sheet in workbook.Sheets)
             {
-                if (sheet.Name == sheet_name) return sheet;
+                if (sheet.Name == sheet_name)
+                {
+                    return sheet;
+                }
             }
             return null;
         }
@@ -834,21 +833,14 @@ namespace vcs_ReadWrite_EXCEL1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-//1515
-//---------------  # 15個
-
-
 /*  可搬出
 
 */
-
-
 
 
 /*
@@ -879,7 +871,6 @@ namespace vcs_ReadWrite_EXCEL1
                             }
                         }
                     }
-
                     excel.Workbooks[1].SaveCopyAs(fileName);//保存
                 }
                 finally
@@ -887,6 +878,6 @@ namespace vcs_ReadWrite_EXCEL1
                     excel.Quit();
                 }
                 return;
-
-
 */
+
+

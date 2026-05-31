@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;
 
-namespace vcs_ReadWrite_RTF
+namespace vcs_RichTextBox5_RTF1
 {
     public partial class Form1 : Form
     {
@@ -30,7 +30,7 @@ namespace vcs_ReadWrite_RTF
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
+
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -46,7 +46,7 @@ namespace vcs_ReadWrite_RTF
             //bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //this.Size = new Size(1273, 750);
-            this.Text = "vcs_ReadWrite_RTF";
+            this.Text = "vcs_RichTextBox5_RTF1";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
@@ -205,19 +205,13 @@ namespace vcs_ReadWrite_RTF
     }
 }
 
-
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

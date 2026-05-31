@@ -1,4 +1,4 @@
-﻿namespace vcs_ReadWrite_RTF
+﻿namespace vcs_RichTextBox5_RTF1
 {
     partial class Form1
     {

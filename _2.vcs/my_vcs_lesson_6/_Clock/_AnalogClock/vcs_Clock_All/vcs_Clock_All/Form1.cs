@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Drawing2D; //for SmoothingMode
+using System.Drawing.Drawing2D;  // for SmoothingMode, LineCap
 
 namespace vcs_Clock_All
 {
@@ -45,6 +45,8 @@ namespace vcs_Clock_All
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             this.DoubleBuffered = true;//避免閃爍
 
             //pictureBox0 ST
@@ -70,10 +72,29 @@ namespace vcs_Clock_All
             timer0_Tick(sender, e);
             //pictureBox0 SP
 
+            //------------------------------------------------------------  # 60個
+
             //pictureBox3 ST
 
 
             //pictureBox3 SP
+
+            //------------------------------------------------------------  # 60個
+
+            //pictureBox4 ST
+            MyPen_H.EndCap = LineCap.ArrowAnchor;  // 時針用箭頭
+            MyPen_M.EndCap = LineCap.ArrowAnchor;  // 分針用箭頭
+            MyPen_S.EndCap = LineCap.ArrowAnchor;  // 秒針用箭頭
+            //pictureBox4 SP
+
+            //------------------------------------------------------------  # 60個
+
+            //pictureBox5 ST
+            MyPen_H2.EndCap = LineCap.ArrowAnchor;
+            MyPen_M2.EndCap = LineCap.ArrowAnchor;
+            MyPen_S2.EndCap = LineCap.ArrowAnchor;
+            MyPen_AL.EndCap = LineCap.RoundAnchor;
+            //pictureBox5 SP
         }
 
         void show_item_location()
@@ -142,6 +163,8 @@ namespace vcs_Clock_All
         private void pictureBox0_Paint(object sender, PaintEventArgs e)
         {
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -236,6 +259,8 @@ namespace vcs_Clock_All
             g.DrawLine(hourPen, 0, 0, 35, 0);
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void pictureBox2_MouseClick(object sender, MouseEventArgs e)
         {
         }
@@ -256,6 +281,8 @@ namespace vcs_Clock_All
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void pictureBox3_MouseDown(object sender, MouseEventArgs e)
         {
         }
@@ -272,6 +299,8 @@ namespace vcs_Clock_All
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void pictureBox4_MouseDown(object sender, MouseEventArgs e)
         {
         }
@@ -284,9 +313,68 @@ namespace vcs_Clock_All
         {
         }
 
+        Pen MyPen_H = new Pen(Color.Blue, 8); // 時針使用的筆
+        Pen MyPen_M = new Pen(Color.Green, 8); // 分針使用的筆
+        Pen MyPen_S = new Pen(Color.Red, 6);   // 秒針使用的筆
+        Pen MyPen_Frame = new Pen(Color.Black, 1); // 時鐘框架使用的筆
         private void pictureBox4_Paint(object sender, PaintEventArgs e)
         {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            e.Graphics.ResetTransform(); // 表單畫布 設為預設值
+            // 表單畫布的原點 平移到 視窗客戶區的 中心點
+            e.Graphics.TranslateTransform(this.pictureBox4.ClientSize.Width / 2,
+                                          this.pictureBox4.ClientSize.Height / 2);
+            // 繪出 時鐘的圓形
+            e.Graphics.DrawEllipse(MyPen_Frame, -110, -110, 220, 220);
+
+            // 繪出 時鐘的 12 個刻度
+            for (int i = 0; i < 360; i = i + 30)
+            {
+                e.Graphics.ResetTransform();
+                e.Graphics.TranslateTransform(this.pictureBox4.ClientSize.Width / 2, this.pictureBox4.ClientSize.Height / 2);
+                e.Graphics.RotateTransform(i); // 旋轉表單畫布 (每次30度)
+                e.Graphics.DrawLine(MyPen_Frame, 100, 0, 110, 0); // 繪出 刻度
+            }
+
+            DateTime t = DateTime.Now; // 目前的時間
+
+            // 繪出 時針
+            e.Graphics.ResetTransform();
+            e.Graphics.TranslateTransform(this.pictureBox4.ClientSize.Width / 2, this.pictureBox4.ClientSize.Height / 2);
+            // 旋轉表單畫布 1個小時為30度 要把分鐘轉為小時的小數部分 
+            e.Graphics.RotateTransform(((t.Hour % 12) + (t.Minute / 60.0f)) * 30.0f);
+            e.Graphics.DrawLine(MyPen_H, 0, 0, 0, -60);
+
+            // 繪出 分針
+            e.Graphics.ResetTransform();
+            e.Graphics.TranslateTransform(this.pictureBox4.ClientSize.Width / 2, this.pictureBox4.ClientSize.Height / 2);
+            // 旋轉表單畫布 1分鐘為6度 要把秒數轉為分鐘的小數部分
+            e.Graphics.RotateTransform((t.Minute + t.Second / 60.0f) * 6.0f);
+            e.Graphics.DrawLine(MyPen_M, 0, 0, 0, -75);
+
+            // 繪出 秒針
+            e.Graphics.ResetTransform();
+            e.Graphics.TranslateTransform(this.pictureBox4.ClientSize.Width / 2, this.pictureBox4.ClientSize.Height / 2);
+            // 旋轉表單畫布 1秒鐘為6度
+            e.Graphics.RotateTransform(t.Second * 6.0f);
+            e.Graphics.DrawLine(MyPen_S, 0, 0, 0, -100);
+
+            // 繪出 時鐘中心的小圓圈
+            e.Graphics.ResetTransform();
+            e.Graphics.TranslateTransform(this.pictureBox4.ClientSize.Width / 2, this.pictureBox4.ClientSize.Height / 2);
+            e.Graphics.FillEllipse(Brushes.Brown, -10, -10, 20, 20);
         }
+
+        //------------------------------------------------------------  # 60個
+
+        Pen MyPen_H2 = new Pen(Color.Blue, 8); // 時針使用的筆
+        Pen MyPen_M2 = new Pen(Color.Green, 8); // 分針使用的筆
+        Pen MyPen_S2 = new Pen(Color.Red, 6);   // 秒針使用的筆
+        Pen MyPen_AL = new Pen(Color.Black, 6);   // 秒針使用的筆
+        float alarm_Angle = 0; // 
+        Point current = new Point(); // 滑鼠游標 目前的座標
+        Pen MyPen_Frame2 = new Pen(Color.Black, 1); // 時鐘框架使用的筆
 
         private void pictureBox5_MouseDown(object sender, MouseEventArgs e)
         {
@@ -294,6 +382,42 @@ namespace vcs_Clock_All
 
         private void pictureBox5_MouseMove(object sender, MouseEventArgs e)
         {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (e.X >= this.pictureBox5.ClientSize.Width / 2) // 在右方
+                {
+                    if (e.Y < current.Y)  // 滑鼠往上
+                        alarm_Angle -= 1;
+                    else if (e.Y > current.Y)  // 滑鼠往下
+                        alarm_Angle += 1;
+                }
+                else // 在左方 
+                {
+                    if (e.Y < current.Y)  // 滑鼠往上
+                        alarm_Angle += 1;
+                    else if (e.Y > current.Y) // 滑鼠往下
+                        alarm_Angle -= 1;
+                }
+
+                if (e.Y <= this.pictureBox5.ClientSize.Height / 2) // 在上方
+                {
+                    if (e.X < current.X)  // 滑鼠往左
+                        alarm_Angle -= 1;
+                    else if (e.X > current.X) // 滑鼠往右
+                        alarm_Angle += 1;
+                }
+                else // 在下方 
+                {
+                    if (e.X < current.X)  // 滑鼠往左
+                        alarm_Angle += 1;
+                    else if (e.X > current.X)  // 滑鼠往右
+                        alarm_Angle -= 1;
+                }
+
+                current.X = e.X;
+                current.Y = e.Y;
+                this.pictureBox5.Invalidate();
+            }
         }
 
         private void pictureBox5_MouseUp(object sender, MouseEventArgs e)
@@ -302,7 +426,57 @@ namespace vcs_Clock_All
 
         private void pictureBox5_Paint(object sender, PaintEventArgs e)
         {
+            e.Graphics.ResetTransform(); // 表單畫布 設為預設值
+            // 表單畫布的原點 平移到 視窗客戶區的 中心點
+            e.Graphics.TranslateTransform(this.pictureBox5.ClientSize.Width / 2, this.pictureBox5.ClientSize.Height / 2);
+            // 繪出 時鐘的圓形
+            e.Graphics.DrawEllipse(MyPen_Frame2, -110, -110, 220, 220);
+
+            // 繪出 時鐘的 12 個刻度
+            for (int i = 0; i < 360; i = i + 30)
+            {
+                e.Graphics.ResetTransform();
+                e.Graphics.TranslateTransform(this.pictureBox5.ClientSize.Width / 2, this.pictureBox5.ClientSize.Height / 2);
+                e.Graphics.RotateTransform(i); // 旋轉表單畫布 (每次30度)
+                e.Graphics.DrawLine(MyPen_Frame2, 100, 0, 110, 0); // 繪出 刻度
+            }
+
+            DateTime t = DateTime.Now; // 目前的時間
+
+            // 繪出 時針
+            e.Graphics.ResetTransform();
+            e.Graphics.TranslateTransform(this.pictureBox5.ClientSize.Width / 2, this.pictureBox5.ClientSize.Height / 2);
+            // 旋轉表單畫布 1個小時為30度 要把分鐘轉為小時的小數部分 
+            e.Graphics.RotateTransform(((t.Hour % 12) + (t.Minute / 60.0f)) * 30.0f);
+            e.Graphics.DrawLine(MyPen_H2, 0, 0, 0, -60);
+
+            // 繪出 分針
+            e.Graphics.ResetTransform();
+            e.Graphics.TranslateTransform(this.pictureBox5.ClientSize.Width / 2, this.pictureBox5.ClientSize.Height / 2);
+            // 旋轉表單畫布 1分鐘為6度 要把秒數轉為分鐘的小數部分
+            e.Graphics.RotateTransform((t.Minute + t.Second / 60.0f) * 6.0f);
+            e.Graphics.DrawLine(MyPen_M2, 0, 0, 0, -75);
+
+            // 繪出 秒針
+            e.Graphics.ResetTransform();
+            e.Graphics.TranslateTransform(this.pictureBox5.ClientSize.Width / 2, this.pictureBox5.ClientSize.Height / 2);
+            // 旋轉表單畫布 1秒鐘為6度
+            e.Graphics.RotateTransform(t.Second * 6.0f);
+            e.Graphics.DrawLine(MyPen_S2, 0, 0, 0, -100);
+
+            // 繪出 鬧鐘針
+            e.Graphics.ResetTransform();
+            e.Graphics.TranslateTransform(this.pictureBox5.ClientSize.Width / 2, this.pictureBox5.ClientSize.Height / 2);
+            e.Graphics.RotateTransform(alarm_Angle);
+            e.Graphics.DrawLine(MyPen_AL, 0, 0, 0, -100);
+
+            // 繪出 時鐘中心的小圓圈
+            e.Graphics.ResetTransform();
+            e.Graphics.TranslateTransform(this.pictureBox5.ClientSize.Width / 2, this.pictureBox5.ClientSize.Height / 2);
+            e.Graphics.FillEllipse(Brushes.Brown, -10, -10, 20, 20);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void timer0_Tick(object sender, EventArgs e)
         {
@@ -509,12 +683,12 @@ namespace vcs_Clock_All
 
         private void timer4_Tick(object sender, EventArgs e)
         {
-
+            this.pictureBox4.Invalidate();
         }
 
         private void timer5_Tick(object sender, EventArgs e)
         {
-
+            this.pictureBox5.Invalidate();
         }
     }
 }
@@ -522,15 +696,10 @@ namespace vcs_Clock_All
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

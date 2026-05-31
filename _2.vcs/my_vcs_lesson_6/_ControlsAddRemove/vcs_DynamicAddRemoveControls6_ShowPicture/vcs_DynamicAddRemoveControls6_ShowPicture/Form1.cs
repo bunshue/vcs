@@ -245,8 +245,7 @@ namespace vcs_DynamicAddRemoveControls6_ShowPicture
         void removeAllPictureBox()
         {
             bool remove_item = false;
-            int i;
-            for (i = 0; i < 10; i++)
+            for (int i = 0; i < 10; i++)
             {
                 remove_item = false;
                 foreach (Control item in this.Controls.OfType<PictureBox>())

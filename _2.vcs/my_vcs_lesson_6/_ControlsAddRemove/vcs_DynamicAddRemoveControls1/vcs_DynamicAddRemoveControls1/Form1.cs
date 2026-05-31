@@ -1176,11 +1176,11 @@ namespace vcs_DynamicAddRemoveControls1
             y_st = 310;
             e.Graphics.DrawString("4", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st, y_st));
 
-            x_st = 620-20;
+            x_st = 620 - 20;
             y_st = 510;
             e.Graphics.DrawString("5", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st, y_st));
 
-            x_st = 620-20;
+            x_st = 620 - 20;
             y_st = 710;
             e.Graphics.DrawString("6", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st, y_st));
 
@@ -1198,14 +1198,10 @@ namespace vcs_DynamicAddRemoveControls1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
 
 /*
 調整位置
@@ -1248,12 +1244,7 @@ myButton.BringToFront() 或 myButton.SendToBack() 調整。
 */
 
 
-
-
-
-
 /*
-
         //清空文本框
         private void btnReset_Click(object sender, EventArgs e)
         {
@@ -1284,9 +1275,8 @@ myButton.BringToFront() 或 myButton.SendToBack() 調整。
 
 //------------------------------------------------------------  # 60個
 
-                    ControlInfo(true);
-            ControlInfo(false);
-
+ControlInfo(true);
+ControlInfo(false);
 
         private void ControlInfo(Boolean B)
         {
@@ -1330,7 +1320,6 @@ myButton.BringToFront() 或 myButton.SendToBack() 調整。
             }
         }
 
-
         private Boolean TextClear()
         {
             foreach (Control c in this.groupBox1.Controls)
@@ -1350,7 +1339,6 @@ myButton.BringToFront() 或 myButton.SendToBack() 調整。
             return true;
         }
 
-
         private void clearText()
         {
             foreach (Control cl in this.groupBox1.Controls)
@@ -1361,7 +1349,6 @@ myButton.BringToFront() 或 myButton.SendToBack() 調整。
                 }
             }
         }
-
 
         private Boolean TextInfo()
         {
@@ -1382,8 +1369,6 @@ myButton.BringToFront() 或 myButton.SendToBack() 調整。
             return true;
         }
 
-
-
         private void clearText()
         {
             foreach (Control c in groupBox1.Controls)
@@ -1398,8 +1383,5 @@ myButton.BringToFront() 或 myButton.SendToBack() 調整。
 
 //------------------------------------------------------------  # 60個
 
-
-
 */
-
 

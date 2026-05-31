@@ -131,7 +131,6 @@ namespace vcs_FileManagement
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -160,7 +159,7 @@ namespace vcs_FileManagement
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 5);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1280, 820);
+            this.Size = new Size(1280, 750);
             this.Text = "vcs_FileManagement";
 
             //設定執行後的表單起始位置, 正中央
@@ -174,6 +173,8 @@ namespace vcs_FileManagement
             listView1.Clear();
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -1119,4 +1120,18 @@ namespace vcs_FileManagement
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
 

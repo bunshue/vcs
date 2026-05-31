@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_ReadWrite_RTF", "vcs_ReadWrite_RTF\vcs_ReadWrite_RTF.csproj", "{D67292E9-3DF3-4C2C-9840-1959E563975A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_RichTextBox5_RTF1", "vcs_RichTextBox5_RTF1\vcs_RichTextBox5_RTF1.csproj", "{D67292E9-3DF3-4C2C-9840-1959E563975A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

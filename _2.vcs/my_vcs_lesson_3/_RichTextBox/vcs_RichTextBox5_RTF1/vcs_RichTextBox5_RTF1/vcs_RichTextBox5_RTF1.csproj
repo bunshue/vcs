@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{50525AB6-0DBA-4861-9BE0-08E7D7610720}</ProjectGuid>
+    <ProjectGuid>{D67292E9-3DF3-4C2C-9840-1959E563975A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_ClockB1</RootNamespace>
-    <AssemblyName>vcs_ClockB1</AssemblyName>
+    <RootNamespace>vcs_RichTextBox5_RTF1</RootNamespace>
+    <AssemblyName>vcs_RichTextBox5_RTF1</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
