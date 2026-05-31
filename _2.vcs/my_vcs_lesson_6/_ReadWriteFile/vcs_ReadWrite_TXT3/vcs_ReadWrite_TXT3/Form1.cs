@@ -21,6 +21,10 @@ namespace vcs_ReadWrite_TXT3
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
             DataGridView1.ColumnHeadersVisible = true;
             // 設定欄標題樣式。
             DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle();
@@ -59,6 +63,33 @@ namespace vcs_ReadWrite_TXT3
             string text = File.ReadAllText("../../test.txt");
             richTextBox1.Text += "文字檔內容 :\n" + text + "\n";
         }
+
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+
+            richTextBox1.Size = new Size(300, 690);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1273, 750);
+            this.Text = "解析含有多種格式的文本文件";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void btnParseTextFiles_Click(object sender, EventArgs e)
         {
@@ -120,9 +151,6 @@ namespace vcs_ReadWrite_TXT3
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
 
 
 /*  可搬出

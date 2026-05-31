@@ -121,6 +121,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 12;
+            this.button4.Text = "DriveInfo";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -131,7 +132,9 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 13;
+            this.button5.Text = "偵測磁碟裝置型態";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
             // 
@@ -141,6 +144,7 @@
             this.button6.Size = new System.Drawing.Size(200, 60);
             this.button6.TabIndex = 14;
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button7
             // 
@@ -150,6 +154,7 @@
             this.button7.Size = new System.Drawing.Size(200, 60);
             this.button7.TabIndex = 15;
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // bt_clear
             // 

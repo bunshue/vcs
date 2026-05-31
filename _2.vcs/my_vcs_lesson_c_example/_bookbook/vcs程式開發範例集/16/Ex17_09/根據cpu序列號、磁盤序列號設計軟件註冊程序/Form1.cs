@@ -24,6 +24,8 @@ namespace 根據cpu序列號_磁盤序列號設計軟件註冊程序
 
         }
 
+        //6060
+
         // 取得設備硬盤的卷標號
         public string GetDiskVolumeSerialNumber()
         {
@@ -169,3 +171,4 @@ namespace 根據cpu序列號_磁盤序列號設計軟件註冊程序
         }
     }
 }
+

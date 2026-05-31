@@ -26,7 +26,7 @@ namespace vcs_test_all_04_Font
         {
             show_item_location();
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
             WordSize = 15;
             SelectFont = 1;
@@ -41,6 +41,7 @@ namespace vcs_test_all_04_Font
 
             //獲取系統字體
             InstalledFontCollection fc = new InstalledFontCollection();
+
             var font_names =
                 from family in fc.Families
                 select family.Name;
@@ -87,7 +88,7 @@ namespace vcs_test_all_04_Font
             richTextBox1.Clear();
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         void search_installed_font()
         {
@@ -95,6 +96,7 @@ namespace vcs_test_all_04_Font
 
             //獲取系統字體
             InstalledFontCollection fc = new InstalledFontCollection();
+
             foreach (FontFamily font in fc.Families)
             {
                 if (cb_chinese.Checked == true)
@@ -411,20 +413,13 @@ namespace vcs_test_all_04_Font
             InstalledFontCollection fc = new InstalledFontCollection();
             foreach (FontFamily font in fc.Families)
             {
+                richTextBox1.AppendText(font.Name + "\n");
+                richTextBox1.Text += "get font : " + font.Name + "\n";
                 comboBox_font.Items.Add(font.Name);
             }
             comboBox_font.SelectedIndex = 0;
-            //在Visual Studio 2012下編譯執行後就會在comboBox中顯示目前安裝的所有字體。
-        }
 
-        private void button12_Click(object sender, EventArgs e)
-        {
-            //獲取系統字體
-            InstalledFontCollection fc = new InstalledFontCollection();
-            foreach (FontFamily font in fc.Families)
-            {
-                richTextBox1.AppendText(font.Name + "\n");
-            }
+            //在comboBox中顯示目前安裝的所有字體
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -548,16 +543,6 @@ namespace vcs_test_all_04_Font
             DrawSamples(e.Graphics, TextRenderingHint.SystemDefault, x, ref y);
         }
 
-        private void button14_Click(object sender, EventArgs e)
-        {
-            //獲取系統字體
-            InstalledFontCollection fc = new InstalledFontCollection();
-            foreach (FontFamily font in fc.Families)
-            {
-                richTextBox1.Text += "get font : " + font.Name + "\n";
-            }
-        }
-
         private void button15_Click(object sender, EventArgs e)
         {
             search_installed_font();
@@ -570,7 +555,6 @@ namespace vcs_test_all_04_Font
     }
 }
 
-
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
@@ -579,12 +563,6 @@ namespace vcs_test_all_04_Font
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-//1515
-//---------------  # 15個
-
-
 /*  可搬出
 
 */
-
-

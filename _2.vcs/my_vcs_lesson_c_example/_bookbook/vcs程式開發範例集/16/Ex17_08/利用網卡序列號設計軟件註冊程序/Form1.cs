@@ -30,6 +30,26 @@ namespace 利用網卡序列號設計軟件註冊程序
             label4.Text = GetNetCardMacAddress();//得到網卡訊息
         }
 
+        //6060
+
+        //獲得網卡訊息函數
+        public string GetNetCardMacAddress()
+        {
+            ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
+            ManagementObjectCollection moc = mc.GetInstances();
+            string str = "";
+            foreach (ManagementObject mo in moc)
+            {
+                if ((bool)mo["IPEnabled"] == true)
+                {
+                    str = mo["MacAddress"].ToString();
+                }
+            }
+            return str;
+        }
+
+        //6060
+
         private void button1_Click(object sender, EventArgs e)
         {
             //把網卡訊息轉換成字串
@@ -62,22 +82,7 @@ namespace 利用網卡序列號設計軟件註冊程序
             }
         }
 
-        //獲得網卡訊息函數
-        public string GetNetCardMacAddress()
-        {
-
-            ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
-            ManagementObjectCollection moc = mc.GetInstances();
-            string str = "";
-            foreach (ManagementObject mo in moc)
-            {
-                if ((bool)mo["IPEnabled"] == true)
-                {
-                    str = mo["MacAddress"].ToString();
-                }
-            }
-            return str;
-        }
+        //6060
 
         //註冊
         private void button2_Click(object sender, EventArgs e)

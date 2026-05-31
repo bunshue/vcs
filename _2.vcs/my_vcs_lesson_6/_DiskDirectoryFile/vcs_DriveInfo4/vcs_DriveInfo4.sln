@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_DriveInfo", "vcs_DriveInfo\vcs_DriveInfo.csproj", "{76B407AA-A3C0-453D-AD07-FACB35B00A72}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_DriveInfo4", "vcs_DriveInfo4\vcs_DriveInfo4.csproj", "{76B407AA-A3C0-453D-AD07-FACB35B00A72}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -150,6 +150,7 @@
             this.bt_file02.Name = "bt_file02";
             this.bt_file02.Size = new System.Drawing.Size(200, 60);
             this.bt_file02.TabIndex = 10;
+            this.bt_file02.Text = "新增資料夾/新增檔案/複製檔案";
             this.bt_file02.UseVisualStyleBackColor = true;
             this.bt_file02.Click += new System.EventHandler(this.bt_file02_Click);
             // 
@@ -222,7 +223,7 @@
             this.bt_dir00.Name = "bt_dir00";
             this.bt_dir00.Size = new System.Drawing.Size(200, 60);
             this.bt_dir00.TabIndex = 0;
-            this.bt_dir00.Text = "取得目前所在路徑";
+            this.bt_dir00.Text = "Directory的方法";
             this.bt_dir00.UseVisualStyleBackColor = true;
             this.bt_dir00.Click += new System.EventHandler(this.bt_dir00_Click);
             // 
@@ -233,7 +234,7 @@
             this.bt_dir01.Name = "bt_dir01";
             this.bt_dir01.Size = new System.Drawing.Size(200, 60);
             this.bt_dir01.TabIndex = 2;
-            this.bt_dir01.Text = "確認資料夾是否存在";
+            this.bt_dir01.Text = "DirectoryInfo的方法";
             this.bt_dir01.UseVisualStyleBackColor = true;
             this.bt_dir01.Click += new System.EventHandler(this.bt_dir01_Click);
             // 
@@ -244,7 +245,6 @@
             this.bt_dir02.Name = "bt_dir02";
             this.bt_dir02.Size = new System.Drawing.Size(200, 60);
             this.bt_dir02.TabIndex = 3;
-            this.bt_dir02.Text = "刪除資料夾";
             this.bt_dir02.UseVisualStyleBackColor = true;
             this.bt_dir02.Click += new System.EventHandler(this.bt_dir02_Click);
             // 
@@ -255,7 +255,6 @@
             this.bt_dir04.Name = "bt_dir04";
             this.bt_dir04.Size = new System.Drawing.Size(200, 60);
             this.bt_dir04.TabIndex = 3;
-            this.bt_dir04.Text = "建立資料夾";
             this.bt_dir04.UseVisualStyleBackColor = true;
             this.bt_dir04.Click += new System.EventHandler(this.bt_dir04_Click);
             // 
@@ -266,7 +265,6 @@
             this.bt_dir07.Name = "bt_dir07";
             this.bt_dir07.Size = new System.Drawing.Size(200, 60);
             this.bt_dir07.TabIndex = 4;
-            this.bt_dir07.Text = "刪除資料夾";
             this.bt_dir07.UseVisualStyleBackColor = true;
             this.bt_dir07.Click += new System.EventHandler(this.bt_dir07_Click);
             // 
@@ -277,7 +275,6 @@
             this.bt_dir06.Name = "bt_dir06";
             this.bt_dir06.Size = new System.Drawing.Size(200, 60);
             this.bt_dir06.TabIndex = 14;
-            this.bt_dir06.Text = "移動/更名資料夾";
             this.bt_dir06.UseVisualStyleBackColor = true;
             this.bt_dir06.Click += new System.EventHandler(this.bt_dir06_Click);
             // 
@@ -288,7 +285,6 @@
             this.bt_dir05.Name = "bt_dir05";
             this.bt_dir05.Size = new System.Drawing.Size(200, 60);
             this.bt_dir05.TabIndex = 15;
-            this.bt_dir05.Text = "拷貝資料夾";
             this.bt_dir05.UseVisualStyleBackColor = true;
             this.bt_dir05.Click += new System.EventHandler(this.bt_dir05_Click);
             // 
@@ -310,7 +306,6 @@
             this.bt_files12.Name = "bt_files12";
             this.bt_files12.Size = new System.Drawing.Size(200, 60);
             this.bt_files12.TabIndex = 57;
-            this.bt_files12.Text = "撈出資料夾內特定類型的檔案";
             this.bt_files12.UseVisualStyleBackColor = true;
             this.bt_files12.Click += new System.EventHandler(this.bt_files12_Click);
             // 
@@ -321,7 +316,6 @@
             this.bt_files11.Name = "bt_files11";
             this.bt_files11.Size = new System.Drawing.Size(200, 60);
             this.bt_files11.TabIndex = 56;
-            this.bt_files11.Text = "撈出資料夾內所有jpg檔";
             this.bt_files11.UseVisualStyleBackColor = true;
             this.bt_files11.Click += new System.EventHandler(this.bt_files11_Click);
             // 
@@ -397,7 +391,6 @@
             this.bt_files09.Name = "bt_files09";
             this.bt_files09.Size = new System.Drawing.Size(200, 60);
             this.bt_files09.TabIndex = 5;
-            this.bt_files09.Text = "撈出資料夾內所有檔案";
             this.bt_files09.UseVisualStyleBackColor = true;
             this.bt_files09.Click += new System.EventHandler(this.bt_files09_Click);
             // 
@@ -408,7 +401,6 @@
             this.bt_files10.Name = "bt_files10";
             this.bt_files10.Size = new System.Drawing.Size(200, 60);
             this.bt_files10.TabIndex = 38;
-            this.bt_files10.Text = "搜尋檔案";
             this.bt_files10.UseVisualStyleBackColor = true;
             this.bt_files10.Click += new System.EventHandler(this.bt_files10_Click);
             // 
@@ -419,7 +411,6 @@
             this.bt_files08.Name = "bt_files08";
             this.bt_files08.Size = new System.Drawing.Size(200, 60);
             this.bt_files08.TabIndex = 50;
-            this.bt_files08.Text = "讀取資料夾下所有檔案";
             this.bt_files08.UseVisualStyleBackColor = true;
             this.bt_files08.Click += new System.EventHandler(this.bt_files08_Click);
             // 
@@ -430,7 +421,7 @@
             this.bt_files06.Name = "bt_files06";
             this.bt_files06.Size = new System.Drawing.Size(200, 60);
             this.bt_files06.TabIndex = 39;
-            this.bt_files06.Text = "取得磁碟檔案資料3";
+            this.bt_files06.Text = "讀取資料夾下所有資料夾";
             this.bt_files06.UseVisualStyleBackColor = true;
             this.bt_files06.Click += new System.EventHandler(this.bt_files06_Click);
             // 
@@ -441,7 +432,7 @@
             this.bt_files07.Name = "bt_files07";
             this.bt_files07.Size = new System.Drawing.Size(200, 60);
             this.bt_files07.TabIndex = 49;
-            this.bt_files07.Text = "讀取資料夾下所有資料夾";
+            this.bt_files07.Text = "撈出資料夾內所有jpg檔";
             this.bt_files07.UseVisualStyleBackColor = true;
             this.bt_files07.Click += new System.EventHandler(this.bt_files07_Click);
             // 

@@ -1566,9 +1566,31 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
             }
         }
 
+        //6060
+
         private void button23_Click(object sender, EventArgs e)
         {
+            //你的網卡序號
+            //获得网卡信息函数
+            richTextBox1.Text += "你的網卡序號 : " + GetNetCardMacAddress() + "\n";
         }
+
+        //获得网卡信息函数
+        public string GetNetCardMacAddress()
+        {
+            //创建ManagementClass对象
+            ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
+            ManagementObjectCollection moc = mc.GetInstances();//创建ManagementObjectCollection对象
+            string str = "";//用于存储网卡序列号
+            foreach (ManagementObject mo in moc)//遍历得到的集合
+            {
+                if ((bool)mo["IPEnabled"] == true)//判断IPEnabled属性是否为true
+                    str = mo["MacAddress"].ToString();//获取网卡序列号
+            }
+            return str;//返回网卡序列号
+        }
+
+        //6060
 
         private void button24_Click(object sender, EventArgs e)
         {

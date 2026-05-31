@@ -1,4 +1,4 @@
-﻿namespace vcs_Cryptography4
+﻿namespace vcs_Cryptography3
 {
     partial class Form1
     {

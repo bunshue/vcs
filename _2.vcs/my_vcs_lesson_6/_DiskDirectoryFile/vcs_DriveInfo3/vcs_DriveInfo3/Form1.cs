@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
 using System.Runtime.InteropServices;  // for DllImport, StructLayout
 
 namespace vcs_DriveInfo3
@@ -90,7 +91,7 @@ namespace vcs_DriveInfo3
             return freeBytesAvailable;
         }
 
-        //------------------------------------------------------------
+        //------------------------------------------------------------  # 60個
 
         [DllImport("kernel32.dll", EntryPoint = "GetDiskFreeSpaceEx")]
         public static extern int GetDiskFreeSpaceEx(string lpDirectoryName, out long lpFreeBytesAvailable, out long lpTotalNumberOfBytes, out long lpTotalNumberOfFreeBytes);
@@ -119,7 +120,7 @@ namespace vcs_DriveInfo3
             }
         }
 
-        //------------------------------------------------------------
+        //------------------------------------------------------------  # 60個
 
         //取得硬碟資訊 ST
         // TBD [DllImport("kernel32.dll", EntryPoint = "GetDiskFreeSpaceEx")]
@@ -169,25 +170,114 @@ namespace vcs_DriveInfo3
         }
         //取得硬碟資訊 SP
 
-        //------------------------------------------------------------
-
+        //------------------------------------------------------------  # 60個
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //GetLogicalDrives 1
+            // 取得目前本機所有的磁碟機, GetLogicalDrives
 
+            richTextBox1.Text += "列出Logical Drives\n";
+            foreach (string drive in Environment.GetLogicalDrives())
+            {
+                richTextBox1.Text += "\t" + drive + "\n";
+            }
+
+            string[] drives = Environment.GetLogicalDrives();
+            richTextBox1.Text += "系統磁碟機：" + string.Join(", ", drives) + "\n";
+
+            richTextBox1.Text += string.Format("系統磁碟機：{0}", string.Join(", ", drives)) + "\n";
+
+            //取得所有邏輯分區
+            //取得本地磁盤目錄
+            richTextBox1.Text += "取得所有邏輯分區\n";
+            string[] logicdrives = Directory.GetLogicalDrives();
+            for (int i = 0; i < logicdrives.Length; i++)
+            {
+                richTextBox1.Text += "取得: " + logicdrives[i] + "\n";
+            }
         }
 
-        //------------------------------------------------------------
+        //------------------------------------------------------------  # 60個
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            //GetLogicalDrives 2
+            //顯示所有邏輯磁碟機
+            GetLogicalDrives();
         }
+
+        // Print out all logical drives on the system.
+        void GetLogicalDrives()
+        {
+            try
+            {
+                string[] drives = System.IO.Directory.GetLogicalDrives();
+
+                foreach (string str in drives)
+                {
+                    System.Console.WriteLine(str);
+                    richTextBox1.Text += "drive : " + str + "\n";
+                }
+            }
+            catch (System.IO.IOException)
+            {
+                System.Console.WriteLine("An I/O error occurs.");
+            }
+            catch (System.Security.SecurityException)
+            {
+                System.Console.WriteLine("The caller does not have the required permission.");
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button5_Click(object sender, EventArgs e)
         {
-
+            //GetLogicalDrives 3
+            string[] drive = Environment.GetLogicalDrives();
+            for (int i = 0; i < drive.Length; i++)
+            {
+                richTextBox1.Text += "磁碟名稱 :" + drive[i] + "\n";
+                richTextBox1.Text += "全部大小 :" + GetHardDiskTotalSize(i).ToString() + " G" + "\n";
+                richTextBox1.Text += "可用大小 :" + GetHardDiskFreeSize(i).ToString() + " G" + "\n";
+            }
         }
+
+        /// <summary>
+        /// 獲取磁盤總空間
+        /// </summary>
+        /// <param name="i">獲取磁盤需要的下標 0 c盤 1 d盤</param>
+        /// <returns>磁盤總空間 long類型</returns>
+        public static long GetHardDiskTotalSize(int i)
+        {
+            long totalSize = new long();
+            System.IO.DriveInfo[] drives = System.IO.DriveInfo.GetDrives();
+            if (drives[i].IsReady == true)
+            {
+                totalSize = drives[i].TotalSize / (1024L * 1024 * 1024);
+                return totalSize;
+            }
+            else
+                return 0;
+        }
+
+        public static long GetHardDiskFreeSize(int i)
+        {
+            long freeSize = new long();
+            System.IO.DriveInfo[] drives = System.IO.DriveInfo.GetDrives();
+            if (drives[i].IsReady == true)
+            {
+                freeSize = drives[i].AvailableFreeSpace / (1024 * 1024 * 1024);
+                return freeSize;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button6_Click(object sender, EventArgs e)
         {

@@ -22,32 +22,33 @@ namespace 遠程控制計算機
         {
 
         }
+
         //首先新增對 System.Management的引用 
-        private void CloseComputer(string strname,string strpwd,string ip,string doinfo)
+        private void CloseComputer(string strname, string strpwd, string ip, string doinfo)
         {
-            ConnectionOptions op = new ConnectionOptions ( ) ; 
-            op.Username =strname;//''或者你的帳號（注意要有管理員的權限） 
+            ConnectionOptions op = new ConnectionOptions();
+            op.Username = strname;//''或者你的帳號（注意要有管理員的權限） 
             op.Password = strpwd; //''你的密碼 
-            ManagementScope scope = new ManagementScope("\\\\" + ip + "\\root\\cimv2:Win32_Service", op); 
-            try 
-            { 
-                scope.Connect ( ) ; 
-                ObjectQuery oq = new ObjectQuery ( "SELECT * FROM Win32_OperatingSystem" ) ; 
-                ManagementObjectSearcher query1 = new ManagementObjectSearcher (scope,oq) ; 
+            ManagementScope scope = new ManagementScope("\\\\" + ip + "\\root\\cimv2:Win32_Service", op);
+            try
+            {
+                scope.Connect();
+                ObjectQuery oq = new ObjectQuery("SELECT * FROM Win32_OperatingSystem");
+                ManagementObjectSearcher query1 = new ManagementObjectSearcher(scope, oq);
                 //得到WMI控制 
-                ManagementObjectCollection queryCollection1 = query1.Get ( ) ; 
-                foreach ( ManagementObject mobj in queryCollection1 ) 
-                { 
-                    string [ ] str= {""} ;
-                    mobj.InvokeMethod(doinfo, str); 
+                ManagementObjectCollection queryCollection1 = query1.Get();
+                foreach (ManagementObject mobj in queryCollection1)
+                {
+                    string[] str = { "" };
+                    mobj.InvokeMethod(doinfo, str);
                 }
                 MessageBox.Show("操作成功");
-            } 
-            catch(Exception ey)
+            }
+            catch (Exception ey)
             {
                 MessageBox.Show(ey.Message);
                 this.button1.PerformClick();
-            } 
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

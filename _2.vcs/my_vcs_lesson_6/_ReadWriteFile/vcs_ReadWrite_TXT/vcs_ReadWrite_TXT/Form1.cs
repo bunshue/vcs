@@ -34,7 +34,6 @@ namespace vcs_ReadWrite_TXT
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -45,7 +44,6 @@ namespace vcs_ReadWrite_TXT
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -56,7 +54,6 @@ namespace vcs_ReadWrite_TXT
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-
             button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
@@ -67,7 +64,6 @@ namespace vcs_ReadWrite_TXT
             button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-
             button30.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
             button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
@@ -247,49 +243,13 @@ namespace vcs_ReadWrite_TXT
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //StreamReader 大全
-
-            //sr.ReadToEnd()  //讀取所有文字內容
-
-            string filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\琵琶行.txt";
-            filename = @"D:\_git\vcs\_1.data\______test_files1\read_file.txt";
-            StreamReader sr = new StreamReader(filename, Encoding.Default);    //Windows預設, 就是big5
-            sr = new StreamReader(filename, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
-            //FileInfo fi = new FileInfo(filename);same
-            //sr = fi.OpenText();same            
-
-            string all_text = sr.ReadToEnd();  //讀取所有文字內容
-            richTextBox1.Text += all_text + "\n";
-            sr.Close();
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            //StreamWriter 大全
-
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private const int ENCODING_1 = 1;	//encoding type 1, big5
         private const int ENCODING_2 = 2;	//encoding type 2, gb2312
@@ -511,7 +471,6 @@ namespace vcs_ReadWrite_TXT
 
         private void button13_Click(object sender, EventArgs e)
         {
-            //File.ReadAllBytes
             richTextBox1.Text += "File.ReadAllBytes()\n";
 
             string filename1 = @"D:\_git\vcs\_1.data\______test_files1\test_ReadAllBytes.bmp";
@@ -595,7 +554,8 @@ namespace vcs_ReadWrite_TXT
 
         private void button14_Click(object sender, EventArgs e)
         {
-            //File.WriteAllBytes
+            richTextBox1.Text += "File.WriteAllBytes()\n";
+
             int i;
             byte[] data = new byte[16];     //for TC, SC, JP
             byte[] data2 = new byte[18];    //for unicode
@@ -664,9 +624,51 @@ namespace vcs_ReadWrite_TXT
 
         private void button17_Click(object sender, EventArgs e)
         {
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            //StreamWriter / StreamReader
+            //StreamReader + StreamWriter 大全
+
+            int i;
+            int N = 5;
+            string filename = "tmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+
+            FileInfo fi1 = new FileInfo(filename);
+            StreamWriter sw = fi1.CreateText();
+            for (i = 0; i < N; i++)
+            {
+                sw.WriteLine("aaa" + i.ToString());
+                sw.WriteLine("bbb" + i.ToString());
+                sw.WriteLine("ccc" + i.ToString());
+            }
+            sw.Flush();
+            sw.Close();
+
+            richTextBox1.Text += "已存檔 : " + filename + "\n";
+
+            FileInfo fi2 = new FileInfo(filename);
+            StreamReader sr = fi2.OpenText();
+
+            i = 0;
+            while (sr.Peek() >= 0)
+            {
+                richTextBox1.Text += "第1筆資料 : " + sr.ReadLine() + "\n";
+                richTextBox1.Text += "第2筆資料 : " + sr.ReadLine() + "\n";
+                richTextBox1.Text += "第3筆資料 : " + sr.ReadLine() + "\n";
+                i++;
+            }
+            sr.Close();
+            richTextBox1.Text += "共取得了 " + i.ToString() + " 筆資料\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
             //文字檔的整行寫入與讀出
-            //WriteLine 一次寫入檔案內一行資料
-            //ReadLine  一次讀取檔案內一行資料
+            //StreamWriter.WriteLine 一次寫入檔案內一行資料
+            //StreamReader.ReadLine  一次讀取檔案內一行資料
+
             richTextBox1.Text += "WriteLine寫入一行 / ReadLine讀出一行\n";
 
             string string1 = "白日依山盡";
@@ -674,9 +676,9 @@ namespace vcs_ReadWrite_TXT
             string string3 = "欲窮千里目";
             string string4 = "更上一層樓";
 
-            string filename = "tmp_poem.txt";
-            //StreamWriter sw = new StreamWriter(filename); // true 是資料可附加至檔案, open write
-            StreamWriter sw = new StreamWriter(filename, true); // true 是資料可附加至檔案 open write append
+            filename = "tmp_poem.txt";
+            //sw = new StreamWriter(filename); // true 是資料可附加至檔案, open write
+            sw = new StreamWriter(filename, true); // true 是資料可附加至檔案 open write append
 
             sw.WriteLine("王之渙登鸛鵲樓"); // 寫入一行
             sw.Flush();
@@ -702,7 +704,7 @@ namespace vcs_ReadWrite_TXT
             string string5b = string.Empty;
 
             filename = "tmp_poem.txt";
-            StreamReader sr = new StreamReader(filename);
+            sr = new StreamReader(filename);
 
             string1b = sr.ReadLine();// 讀出一行
             string2b = sr.ReadLine();// 讀出一行
@@ -757,7 +759,7 @@ namespace vcs_ReadWrite_TXT
             //sr = new StreamReader(filename, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
             sr = new StreamReader(filename);
 
-            int i = 0;
+            i = 0;
             while (!sr.EndOfStream)
             {               // 每次讀取一行, 直到檔尾
                 i++;
@@ -773,55 +775,36 @@ namespace vcs_ReadWrite_TXT
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
+            //StreamReader 大全
 
+            //sr.ReadToEnd()  //讀取所有文字內容
 
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            filename = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\琵琶行.txt";
+            filename = @"D:\_git\vcs\_1.data\______test_files1\read_file.txt";
+            sr = new StreamReader(filename, Encoding.Default);    //Windows預設, 就是big5
+            sr = new StreamReader(filename, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
+            //FileInfo fi = new FileInfo(filename);same
+            //sr = fi.OpenText();same            
 
-
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-        }
-
-        private void button18_Click(object sender, EventArgs e)
-        {
-            //StreamReader + StreamWriter 大全
-
-            int i;
-            int N = 5;
-            string filename = "tmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
-
-            FileInfo fi1 = new FileInfo(filename);
-            StreamWriter sw = fi1.CreateText();
-            for (i = 0; i < N; i++)
-            {
-                sw.WriteLine("aaa" + i.ToString());
-                sw.WriteLine("bbb" + i.ToString());
-                sw.WriteLine("ccc" + i.ToString());
-            }
-            sw.Flush();
-            sw.Close();
-
-            richTextBox1.Text += "已存檔 : " + filename + "\n";
-
-            FileInfo fi2 = new FileInfo(filename);
-            StreamReader sr = fi2.OpenText();
-
-            i = 0;
-            while (sr.Peek() >= 0)
-            {
-                richTextBox1.Text += "第1筆資料 : " + sr.ReadLine() + "\n";
-                richTextBox1.Text += "第2筆資料 : " + sr.ReadLine() + "\n";
-                richTextBox1.Text += "第3筆資料 : " + sr.ReadLine() + "\n";
-                i++;
-            }
+            string all_text = sr.ReadToEnd();  //讀取所有文字內容
+            richTextBox1.Text += all_text + "\n";
             sr.Close();
-            richTextBox1.Text += "共取得了 " + i.ToString() + " 筆資料\n";
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -1189,85 +1172,13 @@ namespace vcs_ReadWrite_TXT
 
         private void button28_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "各種 Directory/File 操作\n";
-
-            // 目前路徑
-            string folderpath = Directory.GetCurrentDirectory();
-            richTextBox1.Text += "目前路徑: " + folderpath + "\n";
-
-            string filename1 = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\article.txt";
-            string filename2 = "tmp_article.txt";
-            string filename3 = "tmp_article_new.txt";
-
-            string path = @"D:\_git\vcs\_1.data\______test_files1\";
-
-            if (Directory.Exists(path) == false)
-            {
-                richTextBox1.Text += "路徑不存在, 建立之。\n";
-                Directory.CreateDirectory(path);
-            }
-
-            if (File.Exists(path + filename1) == false)
-            {
-                richTextBox1.Text += "檔案不存在, 建立之。\n";
-            }
-
-            if (File.Exists(filename2) == false)
-            {
-                richTextBox1.Text += "檔案 : " + filename2 + ", 不存在, 建立之\n";
-                File.Copy(filename1, filename2);
-            }
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            richTextBox1.Text += "將檔案 : " + filename2 + ", 改檔名成 : " + filename3 + "\n";
-            File.Move(filename2, filename3);
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            if (File.Exists(filename3) == true)
-            {
-                richTextBox1.Text += "檔案 : " + filename3 + ", 已存在, 刪除之\n";
-                richTextBox1.Text += "直接刪除, 不放進垃圾桶\n";
-                File.Delete(filename3);
-            }
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
-
-            richTextBox1.Text += File.GetAttributes(filename) + "\n";
-            File.SetAttributes(filename, FileAttributes.ReadOnly);
-            //File.SetAttributes(filename, FileAttributes.Hidden);//隱藏
-            richTextBox1.Text += File.GetAttributes(filename) + "\n";
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
-            //取得檔案資訊 FileInfo
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_txt\article.txt";
-
-            FileInfo fi = new FileInfo(filename);
-            richTextBox1.Text += "Name : " + fi.Name + "\n";
-            richTextBox1.Text += "FullName : " + fi.FullName + "\n";
-            richTextBox1.Text += "Extension : " + fi.Extension + "\n";
-            richTextBox1.Text += "Directory : " + fi.Directory + "\n";
-            richTextBox1.Text += "DirectoryName : " + fi.DirectoryName + "\n";
-            richTextBox1.Text += "長度 : " + fi.Length.ToString() + "\n";
-            richTextBox1.Text += "IsReadOnly : " + fi.IsReadOnly + "\n";
-            richTextBox1.Text += "CreationTime : " + fi.CreationTime + "\n";
-            richTextBox1.Text += "CreationTimeUtc : " + fi.CreationTimeUtc + "\n";
-            richTextBox1.Text += "LastAccessTime : " + fi.LastAccessTime + "\n";
-            richTextBox1.Text += "LastAccessTimeUtc : " + fi.LastAccessTimeUtc + "\n";
-            richTextBox1.Text += "LastWriteTime : " + fi.LastWriteTime + "\n";
-            richTextBox1.Text += "LastWriteTimeUtc : " + fi.LastWriteTimeUtc + "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private const int SEARCH_LEN_MAX = 20;	//搜尋最大長度
         private const int SEARCH_LEN_MIN = 4;	//搜尋最短長度
@@ -1667,10 +1578,6 @@ namespace vcs_ReadWrite_TXT
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

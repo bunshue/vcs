@@ -632,11 +632,6 @@ radioButton1屬性
 
 
 
-取得目前可用字型，顯示於ListBox。
-this.listBox1.Items.AddRange(FontFamily.Families);
-
-
-
 
 
 label
@@ -819,15 +814,8 @@ printPreviewDialog1 控件要在 Document 設定 printDocument
 printDocument_grid
 printDocument_pascal
 
-
-            //列出已安裝的字型
-            foreach (FontFamily oneFontFamily in FontFamily.Families)
-            {
-                listBox1.Items.Add(oneFontFamily.Name);
-            }
-
 //------------------------------------------------------------  # 60個
-
+cccc
 textBox 屬性設定
             // txtShow 字型大小11
             txtShow.Font = new Font(txtShow.Font.FontFamily, 11, FontStyle.Regular);
@@ -2970,7 +2958,6 @@ namespace RegexPractice
             //{
             //    hotNewsList.Add(m.Groups["hotNews"].Value);
             //}
-
 
             //Regex replaceRegex = new Regex("</?font.*?>");
             //for (int i = 0; i < hotNewsList.Count;i++ )
@@ -5706,25 +5693,16 @@ C# TabControl標簽的隱藏
 	當你想要隱藏的時候
 	
 	if (this.tabMain.TabPages[ "tabpageThePage "] != null)
-	
 	{
-	
 	this.tabMain.TabPages.Remove(tabpageThePage);
-	
 	}
 	
 	當你想要顯示的時候
 	
 	if (this.tabMain.TabPages[ "tabpageThePage "] == null)
-	
 	{
-	
 	this.tabMain.TabPages.Add(tabpageThePage);
-	
 	}
-
-
-
 
 int len = 10;                       
 int x = 0;
@@ -5733,7 +5711,6 @@ Point[] pntArr = new Point[3];
 pntArr[0] = new Point(x, y);
 pntArr[1] = new Point(x - len, y);
 pntArr[2] = new Point(x - len / 2, (int)(len * Math.Sqrt(3) / 2 + y));
-
 
         protected override void OnPaintBackground(PaintEventArgs e)
         {
@@ -6421,7 +6398,6 @@ for(i=0; i<360;i++)
                 sr.Close();
             }
         }
-
         				
 //------------------------------------------------------------  # 60個
 
@@ -8425,6 +8401,9 @@ C#語言下路徑指定方式有兩種:
             myImage.Save(@"c:\screen0.jpg");
 
 //------------------------------------------------------------  # 60個
+
+ssss
+richTextBox1.Text += "你的計算機名稱 : " + Environment.MachineName.ToString() + "\n";
 
 ssss
 C# 取得檔案版本資訊

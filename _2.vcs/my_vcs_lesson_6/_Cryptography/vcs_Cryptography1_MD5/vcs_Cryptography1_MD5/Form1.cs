@@ -61,11 +61,11 @@ namespace vcs_Cryptography1_MD5
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            richTextBox1.Size = new Size(540, 690);
+            richTextBox1.Size = new Size(740, 690);
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1000, 750);
+            this.Size = new Size(1200, 750);
             this.Text = "vcs_Cryptography1_MD5";
 
             //設定執行後的表單起始位置, 正中央
@@ -97,55 +97,52 @@ namespace vcs_Cryptography1_MD5
         {
             //MD5(用自建函數)
 
-            str_encrypted_text = MD5_Ecnrypt06_small(str_clear_text);
-            richTextBox1.Text += "06明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\t\t16位MD5\n";
-
             //以此為標準
             str_encrypted_text = MD5_Ecnrypt07(str_clear_text);
-            richTextBox1.Text += "07明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
-
-            str_encrypted_text = MD5_Ecnrypt14(str_clear_text);
-            richTextBox1.Text += "14明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
-
-            str_encrypted_text = MD5_Ecnrypt15(str_clear_text);
-            richTextBox1.Text += "15明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
-
-            str_encrypted_text = MD5_Ecnrypt16(str_clear_text);
-            richTextBox1.Text += "16明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
-
-            str_encrypted_text = MD5_Ecnrypt18(str_clear_text);
-            richTextBox1.Text += "18明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
+            richTextBox1.Text += "01明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
 
             str_encrypted_text = MD5_Ecnrypt20(str_clear_text);
-            richTextBox1.Text += "20明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
+            richTextBox1.Text += "03明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
+
+            str_encrypted_text = MD5_Ecnrypt23(str_clear_text, new UTF8Encoding());
+            richTextBox1.Text += "04明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
+
+            int code_length = 32;
+            str_encrypted_text = MD5_Ecnrypt22(str_clear_text, code_length);
+            richTextBox1.Text += "12明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
+
+            str_encrypted_text = MD5_Ecnrypt16(str_clear_text);
+            richTextBox1.Text += "08明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
+
+            str_encrypted_text = MD5_Ecnrypt06_small(str_clear_text);
+            richTextBox1.Text += "05明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\t\t16位MD5\n";
 
             //16位的MD5加密
             str_encrypted_text = MD5_Ecnrypt21_16(str_clear_text);
-            richTextBox1.Text += "21明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
+            richTextBox1.Text += "09明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
+
+            code_length = 16;
+            str_encrypted_text = MD5_Ecnrypt22(str_clear_text, code_length);
+            richTextBox1.Text += "11明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
+
+            str_encrypted_text = MD5_Ecnrypt15(str_clear_text);
+            richTextBox1.Text += "07明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
+
+            str_encrypted_text = MD5_Ecnrypt25(str_clear_text);
+            richTextBox1.Text += "14明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
+
+            str_encrypted_text = MD5_Ecnrypt23(str_clear_text, Encoding.Unicode);
+            richTextBox1.Text += "13明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
+
+            str_encrypted_text = MD5_Ecnrypt14(str_clear_text);
+            richTextBox1.Text += "06明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
 
             //64位的MD5加密
             str_encrypted_text = MD5_Ecnrypt21_64(str_clear_text);
-            richTextBox1.Text += "21明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
-
-            int code_length = 16;
-            str_encrypted_text = MD5_Ecnrypt22(str_clear_text, code_length);
-            richTextBox1.Text += "22明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
-
-            code_length = 32;
-            str_encrypted_text = MD5_Ecnrypt22(str_clear_text, code_length);
-            richTextBox1.Text += "22明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
-
-            str_encrypted_text = MD5_Ecnrypt23(str_clear_text, new UTF8Encoding());
-            richTextBox1.Text += "23明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
-
-            str_encrypted_text = MD5_Ecnrypt23(str_clear_text, Encoding.Unicode);
-            richTextBox1.Text += "23明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
-
-            str_encrypted_text = MD5_Ecnrypt25(str_clear_text);
-            richTextBox1.Text += "25明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
+            richTextBox1.Text += "10明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
 
             str_encrypted_text = MD5_Ecnrypt28(str_clear_text);
-            richTextBox1.Text += "28明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
+            richTextBox1.Text += "15明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -218,16 +215,28 @@ namespace vcs_Cryptography1_MD5
             return md5Result;
         }
 
+        //MD5加密, 以此為標準
         public static string MD5_Ecnrypt07(string str)
         {
-            //以此為標準
             MD5 md5 = MD5.Create();  // 創建MD5對象
-
             byte[] input = Encoding.Default.GetBytes(str);  // 字串轉拜列
             //byte[] input = Encoding.UTF8.GetBytes(str); //字串轉拜列   222
             //byte[] input = Encoding.ASCII.GetBytes(str);
             //byte[] input = Encoding.Unicode.GetBytes(str);
             //byte[] input = ASCIIEncoding.ASCII.GetBytes(str);   //字串轉拜列
+            byte[] md5Hash = md5.ComputeHash(input);  // 算拜列之Hash值
+            string md5Result = BytesToString(md5Hash);  //Hash轉字串
+            return md5Result;
+        }
+
+        /// MD5加密
+        /// <param name="input">需要加密的字符串</param>
+        /// <param name="encode">字符的編碼</param>
+        /// MD5_Ecnrypt07
+        public static string MD5_Ecnrypt23(string str, Encoding encode)
+        {
+            MD5 md5 = MD5.Create();  // 創建MD5對象
+            byte[] input = encode.GetBytes(str); //字串轉拜列
             byte[] md5Hash = md5.ComputeHash(input);  // 算拜列之Hash值
             string md5Result = BytesToString(md5Hash);  //Hash轉字串
             return md5Result;
@@ -600,24 +609,11 @@ namespace vcs_Cryptography1_MD5
             byte[] input = Encoding.Default.GetBytes(str);  // 字串轉拜列
             byte[] md5Hash = md5.ComputeHash(input);  // 算拜列之Hash值
 
-            for (int i = 0; i < md5Hash.Length - 1; i++)//遍歷Byte數組
+            for (int i = 0; i < md5Hash.Length; i++)//遍歷Byte數組
             {
                 md5Result += md5Hash[i].ToString("X2").PadLeft(2, '0');//對遍歷到的Byte進行加密  // 轉2位的16進制字串
             }
-
             return md5Result;//返回得到的加密字串
-        }
-
-        public static string MD5_Ecnrypt18(string str)
-        {
-            MD5 md5 = MD5.Create();  // 創建MD5對象
-
-            byte[] input = Encoding.Default.GetBytes(str);  // 字串轉拜列
-            byte[] md5Hash = md5.ComputeHash(input);  // 算拜列之Hash值
-
-            string md5Result = BytesToString(md5Hash);  //Hash轉字串
-
-            return md5Result;
         }
 
         /*
@@ -632,9 +628,7 @@ namespace vcs_Cryptography1_MD5
         {
             byte[] input = Encoding.Default.GetBytes(str);  // 字串轉拜列
             byte[] md5Hash = ((HashAlgorithm)CryptoConfig.CreateFromName("MD5")).ComputeHash(input);
-
             string md5Result = BytesToString(md5Hash);  //Hash轉字串
-
             return md5Result;
         }
 
@@ -690,21 +684,6 @@ namespace vcs_Cryptography1_MD5
             {
                 return string.Empty;
             }
-        }
-
-        /// MD5加密
-        /// <param name="input">需要加密的字符串</param>
-        /// <param name="encode">字符的編碼</param>
-        public static string MD5_Ecnrypt23(string str, Encoding encode)
-        {
-            MD5 md5 = MD5.Create();  // 創建MD5對象
-
-            byte[] input = encode.GetBytes(str); //字串轉拜列
-            byte[] md5Hash = md5.ComputeHash(input);  // 算拜列之Hash值
-
-            string md5Result = BytesToString(md5Hash);  //Hash轉字串
-
-            return md5Result;
         }
 
         public string MD5_Ecnrypt25(string str)

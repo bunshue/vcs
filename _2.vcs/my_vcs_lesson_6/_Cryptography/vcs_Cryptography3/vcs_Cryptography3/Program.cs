@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_GetLogicalDrives
+namespace vcs_Cryptography3
 {
     static class Program
     {

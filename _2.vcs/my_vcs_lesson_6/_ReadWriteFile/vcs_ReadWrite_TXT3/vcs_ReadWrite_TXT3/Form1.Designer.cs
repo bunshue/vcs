@@ -33,6 +33,7 @@
             this.DataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnParseTextFiles = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.bt_clear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView1)).BeginInit();
@@ -76,11 +77,12 @@
             // 
             // btnParseTextFiles
             // 
+            this.btnParseTextFiles.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnParseTextFiles.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnParseTextFiles.Location = new System.Drawing.Point(11, 470);
             this.btnParseTextFiles.Margin = new System.Windows.Forms.Padding(2);
             this.btnParseTextFiles.Name = "btnParseTextFiles";
-            this.btnParseTextFiles.Size = new System.Drawing.Size(174, 59);
+            this.btnParseTextFiles.Size = new System.Drawing.Size(283, 60);
             this.btnParseTextFiles.TabIndex = 18;
             this.btnParseTextFiles.Text = "將內含多重格式的文本文件顯示在 DataGridView 控件中";
             this.btnParseTextFiles.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -89,17 +91,30 @@
             // 
             // richTextBox1
             // 
+            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox1.Location = new System.Drawing.Point(407, 11);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(453, 518);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 23;
             this.richTextBox1.Text = "";
+            // 
+            // bt_clear
+            // 
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(421, 27);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(72, 36);
+            this.bt_clear.TabIndex = 24;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(889, 550);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.DataGridView3);
             this.Controls.Add(this.DataGridView2);
@@ -126,5 +141,6 @@
         internal System.Windows.Forms.DataGridView DataGridView1;
         internal System.Windows.Forms.Button btnParseTextFiles;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button bt_clear;
     }
 }

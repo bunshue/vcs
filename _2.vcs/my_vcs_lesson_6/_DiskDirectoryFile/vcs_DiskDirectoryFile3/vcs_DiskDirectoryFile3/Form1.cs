@@ -122,22 +122,6 @@ namespace vcs_DiskDirectoryFile3
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //DriveInfo測試
-
-            DriveInfo[] allDrives = DriveInfo.GetDrives();
-
-            foreach (DriveInfo d in allDrives)
-            {
-                richTextBox1.Text += "磁碟名稱 : " + d.Name + "\n";
-                richTextBox1.Text += "  磁碟類型 : " + d.DriveType + "\n";
-                if (d.IsReady == true)
-                {
-                    richTextBox1.Text += "  檔案系統名稱 : " + d.DriveFormat + "\n";
-                    richTextBox1.Text += "  目前可用空間量: \t{0, 15} bytes" + d.AvailableFreeSpace + "\n";
-                    richTextBox1.Text += "  可用空間總量: \t{0, 15} bytes" + d.TotalFreeSpace + "\n";
-                    richTextBox1.Text += "  可儲存空間總量: \t{0, 15} bytes " + d.TotalSize + "\n";
-                }
-            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -159,64 +143,10 @@ namespace vcs_DiskDirectoryFile3
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //檔名處理
-
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-
-            richTextBox1.Text += "全檔名 : " + filename + "\n";
-
-            string d_name = Path.GetDirectoryName(filename);
-            string f_name = Path.GetFileNameWithoutExtension(filename);
-            string ext_name = Path.GetExtension(filename);
-
-            string filename2 = "tmp_" + f_name + "_new" + ext_name;
-
-            richTextBox1.Text += "新全檔名 : " + filename2 + "\n";
-
-            //自動檔名 與 存檔語法
-            string filename3 = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            richTextBox1.Text += "新全檔名 : " + filename3 + "\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //新增資料夾
-            string new_foldername = "FFFFFFF/AAA/BBB/CCC/DDD";
-
-            if (Directory.Exists(new_foldername) == true)
-            {
-                richTextBox1.Text += "資料夾已存在, 無法重新建立\n";
-            }
-            else
-            {
-                //新增資料夾
-                Directory.CreateDirectory(new_foldername);
-                richTextBox1.Text += "新增資料夾 完成\n";
-            }
-
-            //新增檔案
-            string filename = "tmp_new_file.txt";
-            if (File.Exists(filename) == true)
-            {
-                richTextBox1.Text += "檔案已存在, 無法重新建立\n";
-            }
-            else
-            {
-                StreamWriter sw = File.CreateText(filename);
-                richTextBox1.Text += "新增檔案 完成\n";
-            }
-
-            //複製檔案
-            string new_filename = "aaaaa.cs";
-            if (File.Exists(new_filename) == true)
-            {
-                richTextBox1.Text += "檔案已存在, 無法複製檔案\n";
-            }
-            else
-            {
-                File.Copy(@"../../Form1.cs", new_filename);
-                richTextBox1.Text += "複製檔案完成\n";
-            }
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -410,17 +340,6 @@ namespace vcs_DiskDirectoryFile3
 
         private void button15_Click(object sender, EventArgs e)
         {
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__text";
-
-            foreach (String a in Directory.GetDirectories(foldername))
-            {
-                richTextBox1.Text += "找到資料夾\t" + a + "\n";
-            }
-
-            foreach (String a in Directory.GetFiles(foldername))
-            {
-                richTextBox1.Text += "找到檔案\t" + a + "\n";
-            }
         }
 
         private void bt_rename_Click(object sender, EventArgs e)
@@ -442,35 +361,6 @@ namespace vcs_DiskDirectoryFile3
 
         private void button16_Click(object sender, EventArgs e)
         {
-            //偵測磁碟裝置型態
-
-            DriveInfo[] allDrives = DriveInfo.GetDrives();
-
-            foreach (DriveInfo d in allDrives)
-            {
-                richTextBox1.Text += "Drive : " + d.Name + "\tFile type : " + d.DriveType + "\n";
-                if (d.DriveType == DriveType.Removable)
-                {
-                    richTextBox1.Text += "Removable Device : " + d.Name + "\n";
-                }
-            }
-
-            //獲取計算機磁盤空間
-            //在System.IO命名空間下的DriveInfo類的GetDrives()方法可以用來獲得計算機上的所有邏輯驅動器的名稱。DriveInfo類的TotalSize屬性可義獲得磁盤的空間大小。
-
-            for (int i = 0; i < allDrives.Length; i++)
-            {
-                richTextBox1.Text += "取得磁碟 : " + allDrives[i].Name;
-
-                if (allDrives[i].IsReady == true)
-                {
-                    richTextBox1.Text += "\t空間 : " + Convert.ToString(allDrives[i].TotalSize / 1024 / 1024 / 1024) + "GB\n";
-                }
-                else
-                {
-                    richTextBox1.Text += "\n";
-                }
-            }
         }
 
         //------------------------------------------------------------  # 60個

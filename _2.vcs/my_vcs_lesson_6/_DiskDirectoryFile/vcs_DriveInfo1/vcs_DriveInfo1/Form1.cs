@@ -178,6 +178,66 @@ namespace vcs_DriveInfo1
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //DriveInfo測試
+
+            DriveInfo[] allDrives = DriveInfo.GetDrives();
+
+            foreach (DriveInfo d in allDrives)
+            {
+                richTextBox1.Text += "磁碟名稱 : " + d.Name + "\n";
+                richTextBox1.Text += "  磁碟類型 : " + d.DriveType + "\n";
+                if (d.IsReady == true)
+                {
+                    richTextBox1.Text += "  檔案系統名稱 : " + d.DriveFormat + "\n";
+                    richTextBox1.Text += "  目前可用空間量: \t{0, 15} bytes" + d.AvailableFreeSpace + "\n";
+                    richTextBox1.Text += "  可用空間總量: \t{0, 15} bytes" + d.TotalFreeSpace + "\n";
+                    richTextBox1.Text += "  可儲存空間總量: \t{0, 15} bytes " + d.TotalSize + "\n";
+                }
+            }
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //偵測磁碟裝置型態
+
+            DriveInfo[] allDrives = DriveInfo.GetDrives();
+
+            foreach (DriveInfo d in allDrives)
+            {
+                richTextBox1.Text += "Drive : " + d.Name + "\tFile type : " + d.DriveType + "\n";
+                if (d.DriveType == DriveType.Removable)
+                {
+                    richTextBox1.Text += "Removable Device : " + d.Name + "\n";
+                }
+            }
+
+            //獲取計算機磁盤空間
+            //在System.IO命名空間下的DriveInfo類的GetDrives()方法可以用來獲得計算機上的所有邏輯驅動器的名稱。DriveInfo類的TotalSize屬性可義獲得磁盤的空間大小。
+
+            for (int i = 0; i < allDrives.Length; i++)
+            {
+                richTextBox1.Text += "取得磁碟 : " + allDrives[i].Name;
+
+                if (allDrives[i].IsReady == true)
+                {
+                    richTextBox1.Text += "\t空間 : " + Convert.ToString(allDrives[i].TotalSize / 1024 / 1024 / 1024) + "GB\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "\n";
+                }
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

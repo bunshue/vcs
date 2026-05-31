@@ -157,7 +157,6 @@ namespace vcs_Encoding
             {
                 richTextBox1.Text += charData[i].ToString() + "\n";
             }
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -184,8 +183,8 @@ namespace vcs_Encoding
 
             /*
             以程式列出 中文字 與 BIG5 內碼 的對應表
-
-            由 Big 5 內碼表 得知，我們要的中文字自 A440 開始，換成 10 進位 = 42048，所以 for 迴圈起始值設為 42048，結束值為 63964。
+            由 Big 5 內碼表 得知，我們要的中文字自 A440 開始，換成 10 進位 = 42048，
+            所以 for 迴圈起始值設為 42048，結束值為 63964。
             */
 
             richTextBox1.Clear();   // 用來顯示 10 進位 ←→ 16 進位 對應
@@ -282,7 +281,7 @@ namespace vcs_Encoding
             string string_by_ascii = "有限"; //使用 ASCII 的字串
             string string_by_default = "公司"; //使用 預設編碼 的字串
 
-            byte[] bytes_big5;      //存放 big5 轉換出來的拜列
+            //byte[] bytes_big5;      //存放 big5 轉換出來的拜列
             byte[] bytes_gb2312;    //存放 gb2312 轉換出來的拜列
             byte[] bytes_utf8;      //存放 UTF8 轉換出來的拜列
             byte[] bytes_ascii;     //存放 ASCII 轉換出來的拜列
@@ -398,7 +397,7 @@ namespace vcs_Encoding
 
         private void bt_string2hex_Click(object sender, EventArgs e)
         {
-            //字串轉十六進位
+            // 字串轉十六進位
             // Convert the string into bytes.
             UnicodeEncoding ascii_encoder = new UnicodeEncoding();
             byte[] bytes = ascii_encoder.GetBytes(richTextBox_string1.Text);
@@ -467,10 +466,6 @@ namespace vcs_Encoding
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

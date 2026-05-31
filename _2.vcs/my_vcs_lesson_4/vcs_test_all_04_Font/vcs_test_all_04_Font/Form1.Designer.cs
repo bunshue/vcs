@@ -53,7 +53,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.button37 = new System.Windows.Forms.Button();
             this.comboBox_font = new System.Windows.Forms.ComboBox();
-            this.button12 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
@@ -69,7 +68,6 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button14 = new System.Windows.Forms.Button();
             this.cb_chinese = new System.Windows.Forms.CheckBox();
             this.button15 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -265,6 +263,7 @@
             // 
             // richTextBox1
             // 
+            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox1.Location = new System.Drawing.Point(1073, 168);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
@@ -346,17 +345,6 @@
             this.comboBox_font.Size = new System.Drawing.Size(200, 32);
             this.comboBox_font.TabIndex = 48;
             this.comboBox_font.Text = "搜尋本機字型";
-            // 
-            // button12
-            // 
-            this.button12.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button12.Location = new System.Drawing.Point(283, 453);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(200, 40);
-            this.button12.TabIndex = 49;
-            this.button12.Text = "取得本機所有字體";
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // groupBox2
             // 
@@ -526,17 +514,6 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             // 
-            // button14
-            // 
-            this.button14.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button14.Location = new System.Drawing.Point(283, 369);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(200, 40);
-            this.button14.TabIndex = 56;
-            this.button14.Text = "搜尋本機字型";
-            this.button14.UseVisualStyleBackColor = true;
-            this.button14.Click += new System.EventHandler(this.button14_Click);
-            // 
             // cb_chinese
             // 
             this.cb_chinese.Checked = true;
@@ -571,9 +548,9 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(1096, 231);
+            this.bt_clear.Location = new System.Drawing.Point(1096, 207);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(70, 32);
+            this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 15;
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
@@ -630,14 +607,12 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.cb_chinese);
-            this.Controls.Add(this.button14);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.button13);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.button12);
             this.Controls.Add(this.comboBox_font);
             this.Controls.Add(this.button37);
             this.Controls.Add(this.groupBox1);
@@ -690,7 +665,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button37;
         private System.Windows.Forms.ComboBox comboBox_font;
-        private System.Windows.Forms.Button button12;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.RichTextBox richTextBox2;
@@ -705,7 +679,6 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button14;
         internal System.Windows.Forms.CheckBox cb_chinese;
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Label label7;

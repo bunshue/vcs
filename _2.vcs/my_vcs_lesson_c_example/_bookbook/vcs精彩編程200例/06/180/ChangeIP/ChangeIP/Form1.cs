@@ -22,6 +22,8 @@ namespace ChangeIP
             ShowInfo();
         }
 
+        //6060
+
         private void button1_Click(object sender, EventArgs e)
         {
             ManagementBaseObject myInMBO = null;
@@ -56,7 +58,7 @@ namespace ChangeIP
             Application.Exit();
         }
 
-        #region 显示本地连接信息
+        //#region 显示本地连接信息
         /// <summary>
         /// 显示本地连接信息
         /// </summary>
@@ -125,6 +127,6 @@ namespace ChangeIP
                 catch { }
             }
         }
-        #endregion
+        //#endregion
     }
 }

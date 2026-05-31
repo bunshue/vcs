@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.IO;  // for DriveInfo
 using System.Globalization;  // for CultureInfo
 
-namespace vcs_DriveInfo
+namespace vcs_DriveInfo4
 {
     public partial class Form1 : Form
     {

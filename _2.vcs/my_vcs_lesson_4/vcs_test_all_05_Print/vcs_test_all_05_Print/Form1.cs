@@ -30,6 +30,8 @@ namespace vcs_test_all_05_Print
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             //紙張大小
             comboBox_PageSize.SelectedIndex = 0;
 
@@ -52,7 +54,6 @@ namespace vcs_test_all_05_Print
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -109,6 +110,8 @@ namespace vcs_test_all_05_Print
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         string use_printer = string.Empty;
         private void button0_Click(object sender, EventArgs e)
@@ -1511,7 +1514,9 @@ namespace vcs_test_all_05_Print
                 {
                     string txt = data.Name;
                     if (data.Value != null)
+                    {
                         txt += ": " + data.Value.ToString();
+                    }
                     Console.WriteLine(txt);
                 }
             }
@@ -1520,14 +1525,16 @@ namespace vcs_test_all_05_Print
         // If the data is not null and has a value, return it.
         private string GetPropertyValue(PropertyData data)
         {
-            if ((data == null) || (data.Value == null)) return "";
+            if ((data == null) || (data.Value == null))
+            {
+                return "";
+            }
             return data.Value.ToString();
         }
 
 
         // At design time set:
         //      printPreviewDialog_control.Document = printDocument_control
-
         // Display a print preview.
         private void bt_print_control_Click(object sender, EventArgs e)
         {
@@ -1573,9 +1580,7 @@ namespace vcs_test_all_05_Print
 
             // Display the dialog.
             printPreviewDialog_control.ShowDialog();
-
         }
-
 
         // Print the document's pages.
         private int m_NextPage = 0;
@@ -1601,8 +1606,7 @@ namespace vcs_test_all_05_Print
             {
                 using (Brush the_brush = new SolidBrush(Color.Black))
                 {
-                    e.Graphics.DrawString(String.Format("{0}", m_NextPage + 1),
-                        the_font, the_brush, e.MarginBounds, sf);
+                    e.Graphics.DrawString(String.Format("{0}", m_NextPage + 1), the_font, the_brush, e.MarginBounds, sf);
                 }
             }
 
@@ -1620,7 +1624,7 @@ namespace vcs_test_all_05_Print
             m_NextPage = 0;
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void bt_print_Click(object sender, EventArgs e)
         {
@@ -1647,7 +1651,7 @@ namespace vcs_test_all_05_Print
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void bt_print2_Click(object sender, EventArgs e)
         {
@@ -1734,22 +1738,16 @@ namespace vcs_test_all_05_Print
             dgp.PageAspect = Aspect;//设置横向打印
         }
         //#endregion
-
     }
 }
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

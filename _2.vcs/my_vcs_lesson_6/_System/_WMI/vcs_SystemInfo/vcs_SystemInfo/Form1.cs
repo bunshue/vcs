@@ -17,8 +17,6 @@ namespace vcs_SystemInfo
 {
     public partial class Form1 : Form
     {
-
-
         //1、實體類
         //***************BIOS
         public class BIOSInfoEntity
@@ -105,8 +103,8 @@ namespace vcs_SystemInfo
         //***************cpu信息
         public class CPUInfoEntity
         {
-            #region　屬性
-            #region　CPU名稱
+            //#region　屬性
+            //#region　CPU名稱
             string strCPUName = string.Empty;
             /// <summary>
             /// CPU名稱
@@ -116,9 +114,9 @@ namespace vcs_SystemInfo
                 get { return strCPUName; }
                 set { strCPUName = value; }
             }
-            #endregion
+            //#endregion
 
-            #region　CPU序列號
+            //#region　CPU序列號
             string strCPUID = string.Empty;
             /// <summary>
             /// CPU序列號
@@ -128,9 +126,9 @@ namespace vcs_SystemInfo
                 get { return strCPUID; }
                 set { strCPUID = value; }
             }
-            #endregion
+            //#endregion
 
-            #region　CPU個數
+            //#region　CPU個數
             int nCPUCount = 0;
             /// <summary>
             /// CPU個數
@@ -140,9 +138,9 @@ namespace vcs_SystemInfo
                 get { return nCPUCount; }
                 set { nCPUCount = value; }
             }
-            #endregion
+            //#endregion
 
-            #region　CPU制造商
+            //#region　CPU制造商
             string strCPUManufacturer = string.Empty;
             /// <summary>
             /// CPU制造商
@@ -152,9 +150,9 @@ namespace vcs_SystemInfo
                 get { return strCPUManufacturer; }
                 set { strCPUManufacturer = value; }
             }
-            #endregion
+            //#endregion
 
-            #region　當前時鐘頻率
+            //#region　當前時鐘頻率
             string strCPUCurrentClockSpeed = string.Empty;
             /// <summary>
             /// 當前時鐘頻率
@@ -164,9 +162,9 @@ namespace vcs_SystemInfo
                 get { return strCPUCurrentClockSpeed; }
                 set { strCPUCurrentClockSpeed = value; }
             }
-            #endregion
+            //#endregion
 
-            #region　最大時鐘頻率
+            //#region　最大時鐘頻率
             string strCPUMaxClockSpeed = string.Empty;
             /// <summary>
             /// 最大時鐘頻率
@@ -176,9 +174,9 @@ namespace vcs_SystemInfo
                 get { return strCPUMaxClockSpeed; }
                 set { strCPUMaxClockSpeed = value; }
             }
-            #endregion
+            //#endregion
 
-            #region　外部頻率
+            //#region　外部頻率
             string strCPUExtClock = string.Empty;
             /// <summary>
             /// 外部頻率
@@ -188,9 +186,9 @@ namespace vcs_SystemInfo
                 get { return strCPUExtClock; }
                 set { strCPUExtClock = value; }
             }
-            #endregion
+            //#endregion
 
-            #region　當前電壓
+            //#region　當前電壓
             string strCPUCurrentVoltage = string.Empty;
             /// <summary>
             /// 當前電壓
@@ -200,9 +198,9 @@ namespace vcs_SystemInfo
                 get { return strCPUCurrentVoltage; }
                 set { strCPUCurrentVoltage = value; }
             }
-            #endregion
+            //#endregion
 
-            #region　二級緩存
+            //#region　二級緩存
             string strCPUL2CacheSize = string.Empty;
             /// <summary>
             /// 二級緩存
@@ -212,9 +210,9 @@ namespace vcs_SystemInfo
                 get { return strCPUL2CacheSize; }
                 set { strCPUL2CacheSize = value; }
             }
-            #endregion
+            //#endregion
 
-            #region　數據帶寬
+            //#region　數據帶寬
             string strCPUDataWidth = string.Empty;
             /// <summary>
             /// 數據帶寬
@@ -224,9 +222,9 @@ namespace vcs_SystemInfo
                 get { return strCPUDataWidth; }
                 set { strCPUDataWidth = value; }
             }
-            #endregion
+            //#endregion
 
-            #region　地址帶寬
+            //#region　地址帶寬
             string strCPUAddressWidth = string.Empty;
             /// <summary>
             /// 地址帶寬
@@ -236,9 +234,9 @@ namespace vcs_SystemInfo
                 get { return strCPUAddressWidth; }
                 set { strCPUAddressWidth = value; }
             }
-            #endregion
+            //#endregion
 
-            #region　使用百分比
+            //#region　使用百分比
             float fCPUUsedPercent;
             /// <summary>
             /// 使用百分比
@@ -248,9 +246,9 @@ namespace vcs_SystemInfo
                 get { return fCPUUsedPercent; }
                 set { fCPUUsedPercent = value; }
             }
-            #endregion
+            //#endregion
 
-            #region　CPU溫度
+            //#region　CPU溫度
             double strCPUTemperature;
             /// <summary>
             /// CPU溫度
@@ -260,9 +258,9 @@ namespace vcs_SystemInfo
                 get { return strCPUTemperature; }
                 set { strCPUTemperature = value; }
             }
-            #endregion
+            //#endregion
 
-            #region CPU內核
+            //#region CPU內核
             string strNumberOfCores = "";
             /// <summary>
             /// CPU內核
@@ -272,9 +270,9 @@ namespace vcs_SystemInfo
                 get { return strNumberOfCores; }
                 set { strNumberOfCores = value; }
             }
-            #endregion
+            //#endregion
 
-            #region CPU邏輯處理器
+            //#region CPU邏輯處理器
             string strNumberOfLogicalProcessors = "";
             /// <summary>
             /// CPU邏輯處理器
@@ -284,9 +282,9 @@ namespace vcs_SystemInfo
                 get { return strNumberOfLogicalProcessors; }
                 set { strNumberOfLogicalProcessors = value; }
             }
-            #endregion
+            //#endregion
 
-            #endregion
+            //#endregion
         }
 
 
@@ -294,16 +292,16 @@ namespace vcs_SystemInfo
         //*********************內存信息
         public class MemoryInfoEntity
         {
-            #region 總的物理內存
+            //#region 總的物理內存
             string strTotalVisibleMemorySize = string.Empty;  //總的物理內存
             public string TotalVisibleMemorySize
             {
                 get { return strTotalVisibleMemorySize; }
                 set { strTotalVisibleMemorySize = value; }
             }
-            #endregion
+            //#endregion
 
-            #region 可用物理內存
+            //#region 可用物理內存
             string strFreePhysicalMemory = string.Empty;  //可用物理內存
 
             public string FreePhysicalMemory
@@ -311,9 +309,9 @@ namespace vcs_SystemInfo
                 get { return strFreePhysicalMemory; }
                 set { strFreePhysicalMemory = value; }
             }
-            #endregion
+            //#endregion
 
-            #region 總的虛擬內存
+            //#region 總的虛擬內存
             string strTotalVirtualMemorySize = string.Empty;  //總的虛擬內存
 
             public string TotalVirtualMemorySize
@@ -321,9 +319,9 @@ namespace vcs_SystemInfo
                 get { return strTotalVirtualMemorySize; }
                 set { strTotalVirtualMemorySize = value; }
             }
-            #endregion
+            //#endregion
 
-            #region 可用虛擬內存
+            //#region 可用虛擬內存
             string strFreeVirtualMemory = string.Empty;  //可用虛擬內存
 
             public string FreeVirtualMemory
@@ -331,9 +329,9 @@ namespace vcs_SystemInfo
                 get { return strFreeVirtualMemory; }
                 set { strFreeVirtualMemory = value; }
             }
-            #endregion
+            //#endregion
 
-            #region 頁面文件大小
+            //#region 頁面文件大小
             string strSizeStoredInPagingFiles = string.Empty;  //頁面文件大小
 
             public string SizeStoredInPagingFiles
@@ -341,9 +339,9 @@ namespace vcs_SystemInfo
                 get { return strSizeStoredInPagingFiles; }
                 set { strSizeStoredInPagingFiles = value; }
             }
-            #endregion
+            //#endregion
 
-            #region 可用頁面文件大小
+            //#region 可用頁面文件大小
             string strFreeSpaceInPagingFiles = string.Empty;
 
             public string FreeSpaceInPagingFiles
@@ -351,17 +349,14 @@ namespace vcs_SystemInfo
                 get { return strFreeSpaceInPagingFiles; }
                 set { strFreeSpaceInPagingFiles = value; }
             }
-            #endregion
-
-
+            //#endregion
         }
-
 
         //*****************系統信息
         public class SystemInfoEntity
         {
-            #region　屬性
-            #region　OS名稱
+            //#region　屬性
+            //#region　OS名稱
             string strOSName = string.Empty;　　//OS名稱
             /// <summary>
             /// OS名稱
@@ -371,8 +366,8 @@ namespace vcs_SystemInfo
                 get { return strOSName; }
                 set { strOSName = value; }
             }
-            #endregion
-            #region　OS版本
+            //#endregion
+            //#region　OS版本
             string strOSVersion = string.Empty;　　//OS版本
             /// <summary>
             /// OS版本
@@ -382,8 +377,8 @@ namespace vcs_SystemInfo
                 get { return strOSVersion; }
                 set { strOSVersion = value; }
             }
-            #endregion
-            #region　OS制造商
+            //#endregion
+            //#region　OS制造商
             string strOSManufacturer = string.Empty;　　//OS制造商
             /// <summary>
             /// OS制造商
@@ -393,9 +388,9 @@ namespace vcs_SystemInfo
                 get { return strOSManufacturer; }
                 set { strOSManufacturer = value; }
             }
-            #endregion
+            //#endregion
 
-            #region SP包版本
+            //#region SP包版本
             /// <summary>
             /// SP包版本
             /// </summary>
@@ -405,18 +400,18 @@ namespace vcs_SystemInfo
                 get { return strOSCSDVersion; }
                 set { strOSCSDVersion = value; }
             }
-            #endregion
+            //#endregion
 
-            #region //Build版本
+            //#region //Build版本
             string str0SBuildNumber = string.Empty;
             public string OSBuildNumber
             {
                 get { return str0SBuildNumber; }
                 set { str0SBuildNumber = value; }
             }
-            #endregion
+            //#endregion
 
-            #region　Windows　目錄
+            //#region　Windows　目錄
             string strWindowsDirectory = string.Empty;
             /// <summary>
             /// Windows　目錄
@@ -426,8 +421,8 @@ namespace vcs_SystemInfo
                 get { return strWindowsDirectory; }
                 set { strWindowsDirectory = value; }
             }
-            #endregion
-            #region　系統目錄
+            //#endregion
+            //#region　系統目錄
             string strSystemDirectory = string.Empty;　　//系統目錄
             /// <summary>
             /// 系統目錄
@@ -437,8 +432,8 @@ namespace vcs_SystemInfo
                 get { return strSystemDirectory; }
                 set { strSystemDirectory = value; }
             }
-            #endregion
-            #region　啟動設備
+            //#endregion
+            //#region　啟動設備
             string strBootDevice = string.Empty;　　//啟動設備
             /// <summary>
             /// //啟動設備
@@ -448,8 +443,8 @@ namespace vcs_SystemInfo
                 get { return strBootDevice; }
                 set { strBootDevice = value; }
             }
-            #endregion
-            #region　地區
+            //#endregion
+            //#region　地區
             string strCountry = string.Empty;　　//地區
             /// <summary>
             /// 地區
@@ -459,8 +454,8 @@ namespace vcs_SystemInfo
                 get { return strCountry; }
                 set { strCountry = value; }
             }
-            #endregion
-            #region　時區
+            //#endregion
+            //#region　時區
             string strTimeZone = string.Empty;　　//時區
             /// <summary>
             /// 時區
@@ -470,8 +465,8 @@ namespace vcs_SystemInfo
                 get { return strTimeZone; }
                 set { strTimeZone = value; }
             }
-            #endregion
-            #region　總的物理內存
+            //#endregion
+            //#region　總的物理內存
             string strTotalVisibleMemorySize = string.Empty;　　//總的物理內存
             /// <summary>
             /// 總的物理內存
@@ -481,8 +476,8 @@ namespace vcs_SystemInfo
                 get { return strTotalVisibleMemorySize; }
                 set { strTotalVisibleMemorySize = value; }
             }
-            #endregion
-            #region　可用物理內存
+            //#endregion
+            //#region　可用物理內存
             string strFreePhysicalMemory = string.Empty;　　//可用物理內存
             /// <summary>
             /// 可用物理內存
@@ -492,8 +487,8 @@ namespace vcs_SystemInfo
                 get { return strFreePhysicalMemory; }
                 set { strFreePhysicalMemory = value; }
             }
-            #endregion
-            #region　總的虛擬內存
+            //#endregion
+            //#region　總的虛擬內存
             string strTotalVirtualMemorySize = string.Empty;　　//總的虛擬內存
             /// <summary>
             /// 總的虛擬內存
@@ -503,8 +498,8 @@ namespace vcs_SystemInfo
                 get { return strTotalVirtualMemorySize; }
                 set { strTotalVirtualMemorySize = value; }
             }
-            #endregion
-            #region　可用虛擬內存
+            //#endregion
+            //#region　可用虛擬內存
             string strFreeVirtualMemory = string.Empty;　　//可用虛擬內存
             /// <summary>
             /// 可用虛擬內存
@@ -514,8 +509,8 @@ namespace vcs_SystemInfo
                 get { return strFreeVirtualMemory; }
                 set { strFreeVirtualMemory = value; }
             }
-            #endregion
-            #region　頁面文件大小
+            //#endregion
+            //#region　頁面文件大小
             string strSizeStoredInPagingFiles = string.Empty;　　//頁面文件大小
             /// <summary>
             /// 頁面文件大小
@@ -525,9 +520,9 @@ namespace vcs_SystemInfo
                 get { return strSizeStoredInPagingFiles; }
                 set { strSizeStoredInPagingFiles = value; }
             }
-            #endregion
+            //#endregion
 
-            #region 可用頁面文件大小
+            //#region 可用頁面文件大小
             string strFreeSpaceInPagingFiles = string.Empty;
             /// <summary>
             /// 可用頁面文件大小
@@ -537,9 +532,9 @@ namespace vcs_SystemInfo
                 get { return strFreeSpaceInPagingFiles; }
                 set { strFreeSpaceInPagingFiles = value; }
             }
-            #endregion
+            //#endregion
 
-            #region 頁面文件大小
+            //#region 頁面文件大小
             string strFileSize = string.Empty;
             /// <summary>
             /// 頁面文件大小
@@ -549,9 +544,9 @@ namespace vcs_SystemInfo
                 get { return strFileSize; }
                 set { strFileSize = value; }
             }
-            #endregion
+            //#endregion
 
-            #region 頁面文件
+            //#region 頁面文件
             string strFileName = string.Empty;
             /// <summary>
             /// 頁面文件大小
@@ -561,14 +556,13 @@ namespace vcs_SystemInfo
                 get { return strFileName; }
                 set { strFileName = value; }
             }
-            #endregion
-            #endregion
-
+            //#endregion
+            //#endregion
         }
 
         //2、核心實現類
 
-        #region//獲取CPU參數
+        //#region//獲取CPU參數
         /// <summary>
         /// 獲取CPU參數
         /// </summary>
@@ -633,9 +627,9 @@ namespace vcs_SystemInfo
             }
             return cpuInfoList;
         }
-        #endregion
+        //#endregion
 
-        #region//獲取操作系統參數
+        //#region//獲取操作系統參數
         /// <summary>
         /// 獲取操作系統參數
         /// </summary>
@@ -690,9 +684,9 @@ namespace vcs_SystemInfo
             //
             return systemInfoList;
         }
-        #endregion
+        //#endregion
 
-        #region//獲取時間區域
+        //#region//獲取時間區域
         /// <summary>
         /// 獲取時間區域
         /// </summary>
@@ -736,9 +730,9 @@ namespace vcs_SystemInfo
             //
             return systemInfoList;
         }
-        #endregion
+        //#endregion
 
-        #region//獲取頁面文件
+        //#region//獲取頁面文件
         /// <summary>
         /// 獲取頁面文件
         /// </summary>
@@ -785,9 +779,9 @@ namespace vcs_SystemInfo
             //
             return systemInfoList;
         }
-        #endregion
+        //#endregion
 
-        #region//獲取BIOS信息
+        //#region//獲取BIOS信息
         /// <summary>
         /// 獲取BIOS信息
         /// </summary>
@@ -835,9 +829,9 @@ namespace vcs_SystemInfo
             //
             return BIOSInfoList;
         }
-        #endregion
+        //#endregion
 
-        #region//獲取計算機信息
+        //#region//獲取計算機信息
         /// <summary>
         /// 獲取計算機信息
         /// </summary>
@@ -884,15 +878,14 @@ namespace vcs_SystemInfo
             //
             return ComputerInfoList;
         }
-        #endregion
+        //#endregion
 
         private static string getDateTimeFromDmtfDate(string dateTime)
         {
             return ManagementDateTimeConverter.ToDateTime(dateTime).ToString();
         }
 
-
-
+        //------------------------------------------------------------  # 60個
 
         public Form1()
         {
@@ -903,6 +896,8 @@ namespace vcs_SystemInfo
         {
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -933,62 +928,36 @@ namespace vcs_SystemInfo
         [StructLayout(LayoutKind.Sequential)]
         public struct SYSTEM_INFO
         {
-
             public uint dwOemId;
-
             public uint dwPageSize;
-
             public uint lpMinimumApplicationAddress;
-
             public uint lpMaximumApplicationAddress;
-
             public uint dwActiveProcessorMask;
-
             public uint dwNumberOfProcessors;
-
             public uint dwProcessorType;
-
             public uint dwAllocationGranularity;
-
             public uint dwProcessorLevel;
-
             public uint dwProcessorRevision;
-
         }
 
         //struct 收集內存情況
-
         [StructLayout(LayoutKind.Sequential)]
-
         public struct MEMORYSTATUS
         {
-
             public uint dwLength;
-
             public uint dwMemoryLoad;
-
             public uint dwTotalPhys;
-
             public uint dwAvailPhys;
-
             public uint dwTotalPageFile;
-
             public uint dwAvailPageFile;
-
             public uint dwTotalVirtual;
-
             public uint dwAvailVirtual;
-
         }
 
         //private System.ComponentModel.Container components;
-
         //private System.WinForms.MenuItem menuAbout;
-
         //private System.WinForms.MainMenu mainMenu1;
-
         //private System.WinForms.ListBox listBox1;
-
         //private System.WinForms.Button button1;
 
         //获取系统信息
@@ -1003,17 +972,11 @@ namespace vcs_SystemInfo
         static extern void GlobalMemoryStatus(ref MEMORYSTATUS buf);
 
         //处理器类型
-
         public const int PROCESSOR_INTEL_386 = 386;
-
         public const int PROCESSOR_INTEL_486 = 486;
-
         public const int PROCESSOR_INTEL_PENTIUM = 586;
-
         public const int PROCESSOR_MIPS_R4000 = 4000;
-
         public const int PROCESSOR_ALPHA_21064 = 21064;
-
         private void button2_Click(object sender, EventArgs e)
         {
             /*
@@ -1021,14 +984,8 @@ namespace vcs_SystemInfo
             {
                 SYSTEM_INFO pSI = new SYSTEM_INFO();
                 GetSystemInfo(ref pSI);
-                //
-                //
-                //
                 //一旦你接收到返回的結構體，那麼就可以以返回的參數來執行操作了。
                 //e.g.listBox1.InsertItem (0,pSI.dwActiveProcessorMask.ToString());:
-                //
-                //
-                //
             }
             catch (Exception er)
             {
@@ -1091,4 +1048,3 @@ namespace vcs_SystemInfo
         }
     }
 }
-

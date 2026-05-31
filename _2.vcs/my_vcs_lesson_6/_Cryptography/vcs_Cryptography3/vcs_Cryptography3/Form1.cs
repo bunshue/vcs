@@ -21,7 +21,7 @@ using CryptoStuffNamespace;
     編碼經使用密碼解密後 Deciphered
 */
 
-namespace vcs_Cryptography4
+namespace vcs_Cryptography3
 {
     public partial class Form1 : Form
     {
@@ -71,7 +71,7 @@ namespace vcs_Cryptography4
             button2.BringToFront();
 
             this.Size = new Size(1600, 900);
-            this.Text = "vcs_Cryptography4";
+            this.Text = "vcs_Cryptography3";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
@@ -796,5 +796,3 @@ namespace DESFile
         }
 //------------------------------------------------------------  # 60個
 */
-
-
