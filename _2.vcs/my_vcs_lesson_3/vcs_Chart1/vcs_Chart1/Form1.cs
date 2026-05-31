@@ -75,15 +75,15 @@ namespace vcs_Chart1
             int y_st = 10;
             int dx = W + 10;
             int dy = H + 10;
-            chart0.Size = new Size(W, H);
-            chart1.Size = new Size(W, H);
-            chart2.Size = new Size(W, H);
-            chart3.Size = new Size(W, H);
-            chart4.Size = new Size(W, H);
-            chart5.Size = new Size(W, H);
-            chart6.Size = new Size(W, H);
-            chart7.Size = new Size(W, H);
-            chart8.Size = new Size(W, H);
+            chart0.Size = new Size(W, H);  // 設定chart大小
+            chart1.Size = new Size(W, H);  // 設定chart大小
+            chart2.Size = new Size(W, H);  // 設定chart大小
+            chart3.Size = new Size(W, H);  // 設定chart大小
+            chart4.Size = new Size(W, H);  // 設定chart大小
+            chart5.Size = new Size(W, H);  // 設定chart大小
+            chart6.Size = new Size(W, H);  // 設定chart大小
+            chart7.Size = new Size(W, H);  // 設定chart大小
+            chart8.Size = new Size(W, H);  // 設定chart大小
             chart0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             chart1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             chart2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
@@ -251,32 +251,71 @@ namespace vcs_Chart1
             chart1.ChartAreas.Add(chartarea);  // 將圖表區新增到圖表上
 
             chartarea.BackColor = Color.Pink;  // 圖表區背景色
+            chartarea.BackColor = Color.FromArgb(240, 240, 240);  // 圖表區背景色
 
             //X軸設定
-
+            //chartarea.AxisX.CustomLabels.Clear();
+            chartarea.AxisX.Enabled = AxisEnabled.True;
+            chartarea.AxisX2.Enabled = AxisEnabled.False; //隱藏 X2 標示
             chartarea.AxisX.MajorGrid.LineColor = Color.Red;  // X軸主格線顏色
+            chartarea.AxisX.Title = "種類";  // 設定X軸的標題
+            chartarea.AxisX.Interval = 1;  // 設定X軸坐標的間隔
+            chartarea.AxisX.IntervalOffset = 1;  //設置X軸坐標偏移為1
+            chartarea.AxisX.LabelStyle.IsStaggered = true;   //設置是否交錯顯示,比如數據多的時間分成兩行來顯示
+            chartarea.AxisX.MajorGrid.LineColor = Color.FromArgb(150, 150, 150);//X 軸線顏色
+            // 設定邊界
+            //chartarea.AxisX.Minimum = 0;  // 設定X軸最小值
+            //chartarea.AxisX.Maximum = 20;  // 設定X軸最大值
+
+            /*
+            //X軸 new
+            chartarea.AxisX.Minimum = AXIS_X_MIN;        //設定X軸最小值
+            chartarea.AxisX.Maximum = AXIS_X_MAX;        //設定X軸最大值
+            chartarea.AxisX.Title = "X軸標題";              //設定X軸名稱
+            chartarea.AxisX.TitleForeColor = Color.Blue; //設定X軸名稱的字體顏色
+            chartarea.AxisX.Enabled = AxisEnabled.True;  //顯示 或 隱藏 X 軸標示
+            chartarea.AxisX.MajorGrid.Enabled = true;    //顯示 或 隱藏 X 軸標線
+            chartarea.AxisX.LabelStyle.Font = xlabel_font;
+            chartarea.AxisX.LabelStyle.Interval = 60;    //設置X軸刻度間隔的大小
+            chartarea.AxisX.LabelStyle.IntervalType = DateTimeIntervalType.Number;//設置間隔大小的度量單位
+            chartarea.AxisX.LineColor = Color.White;//設置X軸的線條顏色
+            chartarea.AxisX.MajorGrid.Interval = 100;//設置主網格線與次要網格線的間隔
+            chartarea.AxisX.MajorGrid.IntervalType = DateTimeIntervalType.Number;//設置主網格線與次網格線的間隔的度量單位
+            chartarea.AxisX.MajorGrid.LineColor = Color.Snow;//設置網格線的顏色
+            chartarea.AxisX.MajorTickMark.Interval = 20;//設置刻度線的間隔
+            chartarea.AxisX.MajorTickMark.IntervalType = DateTimeIntervalType.Number;//設置刻度線的間隔的度量單位
+            */
 
             //Y軸設定
             chartarea.AxisY.MajorGrid.LineColor = Color.Green;  // Y軸主格線顏色
             chartarea.AxisY.MajorGrid.Enabled = true;  // 顯示Y軸主格線
             chartarea.AxisY.Enabled = AxisEnabled.True; // 啟動Y軸標示
-
-            chartarea.AxisX.Title = "種類";  // 設定X軸的標題
             chartarea.AxisY.Title = "體重(公斤)";  //設定Y軸的標題
-
             chartarea.AxisY.LineColor = Color.Red;
             chartarea.AxisY.LineWidth = 1;
+            chartarea.AxisY2.Enabled = AxisEnabled.False; //隱藏 Y2 標示
+            chartarea.AxisY2.MajorGrid.Enabled = false;   //隱藏 Y2 軸線
+            chartarea.AxisY.MajorGrid.LineColor = Color.FromArgb(150, 150, 150);//Y 軸線顏色
+            chartarea.AxisY.LabelStyle.Format = "#.###";//設定小數點
+            // 設定邊界
+            //chartarea.AxisY.Minimum = 0;  // 設定Y軸最小值
+            //chartarea.AxisY.Maximum = 100;  // 設定Y軸最大值
 
             /*
-            // 設定邊界
-            chartarea.AxisX.Minimum = 0;  // 設定X軸最小值
-            chartarea.AxisX.Maximum = 20;  // 設定X軸最大值
-            chartarea.AxisY.Minimum = 0;  // 設定Y軸最小值
-            chartarea.AxisY.Maximum = 100;  // 設定Y軸最大值
+            //Y軸 new
+            chartarea.AxisY.Minimum = AXIS_Y_MIN;        //設定Y軸最小值
+            chartarea.AxisY.Maximum = AXIS_Y_MAX;        //設定Y軸最大值
+            chartarea.AxisY.Title = "Y軸標題";              //設定Y軸名稱
+            chartarea.AxisY.TitleForeColor = Color.Blue; //設定Y軸名稱的字體顏色
+            chartarea.AxisY.Enabled = AxisEnabled.True;  //顯示 或 隱藏 Y 軸標示
+            chartarea.AxisY.MajorGrid.Enabled = true;    //顯示 或 隱藏 Y 軸標線
+
+            chartarea.AxisY.LabelStyle.Font = ylabel_font;
+            chartarea.AxisY.LineColor = Color.DarkBlue;//設置軸的線條顏色
+            chartarea.AxisY.MajorGrid.LineColor = Color.White;//設置網格線顏色
             */
 
-            //chartarea.AxisX.CustomLabels.Clear();
-            //chartarea.AxisX.Interval = 1;  // 設定X軸坐標的間隔
+
 
             //設定3D
             /*
@@ -466,21 +505,6 @@ namespace vcs_Chart1
             string title = "直條圖";
             chart_init(chart2, title);
 
-            //設定 ChartArea1
-            chart2.ChartAreas["ChartArea1"].AxisX.Interval = 1;  // 設定X軸坐標的間隔
-            chart2.ChartAreas["ChartArea1"].AxisX.IntervalOffset = 1;  //設置X軸坐標偏移為1
-            chart2.ChartAreas["ChartArea1"].AxisX.LabelStyle.IsStaggered = true;   //設置是否交錯顯示,比如數據多的時間分成兩行來顯示
-            chart2.ChartAreas["ChartArea1"].AxisX.Title = "種類";  // 設定X軸的標題
-            chart2.ChartAreas["ChartArea1"].AxisY.Title = "體重(公斤)";  //設定Y軸的標題
-            chart2.ChartAreas["ChartArea1"].BackColor = Color.FromArgb(240, 240, 240); //背景色
-            chart2.ChartAreas["ChartArea1"].AxisX.Enabled = AxisEnabled.True;
-            chart2.ChartAreas["ChartArea1"].AxisX2.Enabled = AxisEnabled.False; //隱藏 X2 標示
-            chart2.ChartAreas["ChartArea1"].AxisY2.Enabled = AxisEnabled.False; //隱藏 Y2 標示
-            chart2.ChartAreas["ChartArea1"].AxisY2.MajorGrid.Enabled = false;   //隱藏 Y2 軸線
-            chart2.ChartAreas["ChartArea1"].AxisX.MajorGrid.LineColor = Color.FromArgb(150, 150, 150);//X 軸線顏色
-            chart2.ChartAreas["ChartArea1"].AxisY.MajorGrid.LineColor = Color.FromArgb(150, 150, 150);//Y 軸線顏色
-            chart2.ChartAreas["ChartArea1"].AxisY.LabelStyle.Format = "#.###";//設定小數點
-
             //------------------------------  # 30個
 
             chart_add_series2a(chart2);
@@ -493,13 +517,17 @@ namespace vcs_Chart1
         {
             // 各種圖表類型
 
+            string title = "各種圖表類型";
+            //chart_init(chart3, title);
+
+            //------------------------------  # 30個
+
             // 清除圖表
-            chart3.Series.Clear();
-            chart3.Titles.Clear();
+            chart3.Series.Clear();  // 清除所有數列
+            chart3.Titles.Clear();  // 清除所有標題
 
             // 全圖設定
-            chart3.Titles.Add("各種圖表類型, 3數列");  // 標題
-            //chart3.Size = new Size(1000, 500);  // 設定chart大小
+            chart3.Titles.Add("各種圖表類型, 3數列");  // 將標題新增到圖表上
 
             // X軸設定
             chart3.ChartAreas[0].AxisX.Minimum = AXIS_X_MIN;  // 設定X軸最小值
@@ -561,23 +589,27 @@ namespace vcs_Chart1
             chart3.Series.Add(series1);
             chart3.Series.Add(series2);
             chart3.Series.Add(series3);
-            richTextBox1.Text += "目前 chart1 上的數列數  : " + chart3.Series.Count.ToString() + "\n";
-            richTextBox1.Text += "目前 Series[0] 上的點數 : " + chart3.Series[0].Points.Count.ToString() + "\n";
-            richTextBox1.Text += "目前 Series[1] 上的點數 : " + chart3.Series[1].Points.Count.ToString() + "\n";
-            richTextBox1.Text += "目前 Series[2] 上的點數 : " + chart3.Series[2].Points.Count.ToString() + "\n";
 
-            /*
+            show_series_data(chart3);
+        }
+
+        void show_series_data(Chart chart1)
+        {
+            richTextBox1.Text += "目前 chart1 上的數列數  : " + chart1.Series.Count.ToString() + "\n";
+            richTextBox1.Text += "目前 Series[0] 上的點數 : " + chart1.Series[0].Points.Count.ToString() + "\n";
+            richTextBox1.Text += "目前 Series[1] 上的點數 : " + chart1.Series[1].Points.Count.ToString() + "\n";
+            richTextBox1.Text += "目前 Series[2] 上的點數 : " + chart1.Series[2].Points.Count.ToString() + "\n";
+
             richTextBox1.Text += "顯示資料\n";
-            int count = series1.Points.Count;
+            int count = chart1.Series[0].Points.Count;
             richTextBox1.Text += "共有 " + count.ToString() + " 筆資料\n";
             for (int i = 0; i < count; i++)
             {
-                richTextBox1.Text += "x[" + i.ToString() + "] = " + series1.Points[i].XValue.ToString() + "\t";
-                richTextBox1.Text += "sin[" + i.ToString() + "] = " + series1.Points[i].YValues[0].ToString() + "\t";
-                richTextBox1.Text += "cos[" + i.ToString() + "] = " + series2.Points[i].YValues[0].ToString() + "\t";
-                richTextBox1.Text += "sin[" + i.ToString() + "] + " + "cos[" + i.ToString() + "] = " + series3.Points[i].YValues[0].ToString() + "\n";
+                richTextBox1.Text += "x[" + i.ToString() + "] = " + chart1.Series[0].Points[i].XValue.ToString() + "\t";
+                richTextBox1.Text += "sin[" + i.ToString() + "] = " + chart1.Series[0].Points[i].YValues[0].ToString() + "\t";
+                richTextBox1.Text += "cos[" + i.ToString() + "] = " + chart1.Series[1].Points[i].YValues[0].ToString() + "\t";
+                richTextBox1.Text += "sin[" + i.ToString() + "] + " + "cos[" + i.ToString() + "] = " + chart1.Series[2].Points[i].YValues[0].ToString() + "\n";
             }
-            */
         }
 
         //------------------------------------------------------------  # 60個
@@ -1198,7 +1230,7 @@ namespace vcs_Chart1
             int dx = W + 10;
             int dy = H + 10;
 
-            chart3.Size = new Size(W * 2 + 10, H * 2 + 10);
+            chart3.Size = new Size(W * 2 + 10, H * 2 + 10);  // 設定chart大小
             chart3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             chart3.BringToFront();
             groupBox1.Size = new Size(W * 2 + 10, H * 1);
@@ -1339,52 +1371,8 @@ chart放在
 */
 
 /*
-        //定義Chart大小與外觀
-        private const int AXIS_X_MIN = 0;
-        private const int AXIS_X_MAX = 360;
-        private const int AXIS_Y_MIN = -200;
-        private const int AXIS_Y_MAX = 200;
-
         void chart_init(Chart chart)
         {
-            //清除圖表
-            chart.Series.Clear();
-            chart.Titles.Clear();
-
-            //設定Chart大小與外觀
-            //全圖
-            chart.Size = new Size(740, 370);  // 設定chart大小
-            chart.Titles.Add("三角函數");
-
-            //X軸
-            chart.ChartAreas[0].AxisX.Minimum = AXIS_X_MIN;        //設定X軸最小值
-            chart.ChartAreas[0].AxisX.Maximum = AXIS_X_MAX;        //設定X軸最大值
-            chart.ChartAreas[0].AxisX.Title = "X軸標題";              //設定X軸名稱
-            chart.ChartAreas[0].AxisX.TitleForeColor = Color.Blue; //設定X軸名稱的字體顏色
-            chart.ChartAreas[0].AxisX.Enabled = AxisEnabled.True;  //顯示 或 隱藏 X 軸標示
-            chart.ChartAreas[0].AxisX.MajorGrid.Enabled = true;    //顯示 或 隱藏 X 軸標線
-            chart.ChartAreas[0].AxisX.LabelStyle.Font = xlabel_font;
-            chart.ChartAreas[0].AxisX.LabelStyle.Interval = 60;    //設置X軸刻度間隔的大小
-            chart.ChartAreas[0].AxisX.LabelStyle.IntervalType = DateTimeIntervalType.Number;//設置間隔大小的度量單位
-            chart.ChartAreas[0].AxisX.LineColor = Color.White;//設置X軸的線條顏色
-            chart.ChartAreas[0].AxisX.MajorGrid.Interval = 100;//設置主網格線與次要網格線的間隔
-            chart.ChartAreas[0].AxisX.MajorGrid.IntervalType = DateTimeIntervalType.Number;//設置主網格線與次網格線的間隔的度量單位
-            chart.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Snow;//設置網格線的顏色
-            chart.ChartAreas[0].AxisX.MajorTickMark.Interval = 20;//設置刻度線的間隔
-            chart.ChartAreas[0].AxisX.MajorTickMark.IntervalType = DateTimeIntervalType.Number;//設置刻度線的間隔的度量單位
-
-            //Y軸
-            chart.ChartAreas[0].AxisY.Minimum = AXIS_Y_MIN;        //設定Y軸最小值
-            chart.ChartAreas[0].AxisY.Maximum = AXIS_Y_MAX;        //設定Y軸最大值
-            chart.ChartAreas[0].AxisY.Title = "Y軸標題";              //設定Y軸名稱
-            chart.ChartAreas[0].AxisY.TitleForeColor = Color.Blue; //設定Y軸名稱的字體顏色
-            chart.ChartAreas[0].AxisY.Enabled = AxisEnabled.True;  //顯示 或 隱藏 Y 軸標示
-            chart.ChartAreas[0].AxisY.MajorGrid.Enabled = true;    //顯示 或 隱藏 Y 軸標線
-
-            chart.ChartAreas[0].AxisY.LabelStyle.Font = ylabel_font;
-            chart.ChartAreas[0].AxisY.LineColor = Color.DarkBlue;//設置軸的線條顏色
-            chart.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.White;//設置網格線顏色
-
             // 圖表樣式
             chart.BackGradientStyle = GradientStyle.TopBottom;//指定圖表元素的漸變樣式(中心向外，從左到右，從上到下等等)
             chart.BackSecondaryColor = Color.Yellow;//設置背景的輔助顏色
@@ -1397,5 +1385,4 @@ chart放在
             chart.Titles[0].Font = titles_font;
             chart.Legends["Legend1"].Docking = Docking.Right;  //設定圖標顯示停靠的位置
         }
-
 */
