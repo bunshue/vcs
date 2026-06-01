@@ -129,15 +129,6 @@ namespace vcs_DiskDirectoryFile2
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //撈出資料夾內的檔案(多層)
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1";
-
-            //單一搜尋pattern
-            string[] filename = Directory.GetFiles(foldername, "*.*", SearchOption.AllDirectories);
-            foreach (string fname in filename)
-            {
-                richTextBox1.Text += fname + "\n";
-            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -149,17 +140,61 @@ namespace vcs_DiskDirectoryFile2
             {
                 richTextBox1.Text += filename + "\n";
             }
-        }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
+            //6060
+
             //撈出資料夾內的TXT檔案(一層), 限定 *.txt
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1";
+            foldername = @"D:\_git\vcs\_1.data\______test_files1";
 
             foreach (string filename in Directory.GetFileSystemEntries(foldername, "*.txt"))
             {
                 richTextBox1.Text += filename + "\n";
             }
+
+            //6060
+
+            //取得一層檔案
+            foldername = @"D:\_git\vcs\_1.data\______test_files1";
+
+            DirectoryInfo dir = new DirectoryInfo(foldername);
+            FileInfo[] files = dir.GetFiles();
+            StringBuilder sb = new StringBuilder();
+            foreach (FileInfo file in files)
+            {
+                richTextBox1.Text += file.Name + "\n";
+            }
+
+            //6060
+
+            //撈出資料夾內的檔案(一層)
+            foldername = @"D:\_git\vcs\_1.data\______test_files1";
+            /*
+            string[] files = Directory.GetFiles(foldername);
+            for (int i = 0; i < files.Length; i++)
+            {
+                richTextBox1.Text += files[i] + "\n";
+                //textBox2.Lines = files;
+            }
+            */
+
+            //6060
+
+            //撈出資料夾內的檔案(多層)
+            foldername = @"D:\_git\vcs\_1.data\______test_files1";
+
+            /*
+            //單一搜尋pattern
+            string[] filename = Directory.GetFiles(foldername, "*.*", SearchOption.AllDirectories);
+            foreach (string fname in filename)
+            {
+                richTextBox1.Text += fname + "\n";
+            }
+            */
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -195,29 +230,10 @@ namespace vcs_DiskDirectoryFile2
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //取得一層檔案
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1";
-
-            DirectoryInfo dir = new DirectoryInfo(foldername);
-            FileInfo[] files = dir.GetFiles();
-            StringBuilder sb = new StringBuilder();
-            foreach (FileInfo file in files)
-            {
-                richTextBox1.Text += file.Name + "\n";
-            }
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //撈出資料夾內的檔案(一層)
-            string foldername = @"D:\_git\vcs\_1.data\______test_files1";
-
-            string[] files = Directory.GetFiles(foldername);
-            for (int i = 0; i < files.Length; i++)
-            {
-                richTextBox1.Text += files[i] + "\n";
-                //textBox2.Lines = files;
-            }
         }
 
         private void button8_Click(object sender, EventArgs e)

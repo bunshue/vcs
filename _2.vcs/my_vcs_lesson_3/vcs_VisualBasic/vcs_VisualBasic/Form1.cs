@@ -8,9 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 
 //for Interaction,          //參考/加入參考/.NET/Microsoft.VisualBasic
-using Microsoft.VisualBasic;    //for DateAndTime
-using Microsoft.VisualBasic.Devices;    //for Computer
-using System.Runtime.InteropServices;   //for DllImport, StructLayout
+using Microsoft.VisualBasic;  // for DateAndTime
+using Microsoft.VisualBasic.Devices;  // for Computer
+using System.Runtime.InteropServices;  // for DllImport, StructLayout
 using System.Threading;
 
 namespace vcs_VisualBasic
@@ -64,12 +64,12 @@ namespace vcs_VisualBasic
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
 
             richTextBox1.Size = new Size(400, 300);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 5);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             label4.Text = "";
 
-            this.Size = new Size(900, 750);
+            this.Size = new Size(1100, 750);
             this.Text = "vcs_VisualBasic";
 
             //設定執行後的表單起始位置, 正中央
@@ -112,7 +112,26 @@ namespace vcs_VisualBasic
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //DateAndTime
 
+            string dt_target = "2026/6/2 12:34:56";
+
+            DateTime get_time1 = Convert.ToDateTime(DateTime.Now.ToString());
+            DateTime sta_ontime1 = Convert.ToDateTime(Convert.ToDateTime(dt_target));
+            TimeSpan sta1 = TimeSpan.FromHours(0);
+            long dat = DateAndTime.DateDiff("s", get_time1, sta_ontime1, FirstDayOfWeek.Sunday, FirstWeekOfYear.FirstFourDays);
+            richTextBox1.Text += "000剩餘" + dat.ToString() + "秒\n";
+
+            if (dat > 0)
+            {
+                richTextBox1.Text += "111剩餘" + dat.ToString() + "秒\n";
+            }
+            else
+            {
+                long hour = 24 * 3600 + dat;
+                richTextBox1.Text += "222剩餘" + hour.ToString() + "秒\n";
+                richTextBox1.Text += "222剩餘" + dat.ToString() + "秒\n";
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)

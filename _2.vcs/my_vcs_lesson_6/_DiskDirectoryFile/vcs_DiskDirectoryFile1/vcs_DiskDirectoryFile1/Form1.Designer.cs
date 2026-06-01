@@ -118,7 +118,7 @@
             this.bt_file06.Name = "bt_file06";
             this.bt_file06.Size = new System.Drawing.Size(200, 60);
             this.bt_file06.TabIndex = 6;
-            this.bt_file06.Text = "Path";
+            this.bt_file06.Text = "Path.Get";
             this.bt_file06.UseVisualStyleBackColor = true;
             this.bt_file06.Click += new System.EventHandler(this.bt_file06_Click);
             // 
@@ -192,7 +192,7 @@
             this.bt_file05.Name = "bt_file05";
             this.bt_file05.Size = new System.Drawing.Size(200, 60);
             this.bt_file05.TabIndex = 45;
-            this.bt_file05.Text = "檔案時間";
+            this.bt_file05.Text = "檔案時間 File.Get";
             this.bt_file05.UseVisualStyleBackColor = true;
             this.bt_file05.Click += new System.EventHandler(this.bt_file05_Click);
             // 
@@ -245,6 +245,7 @@
             this.bt_dir02.Name = "bt_dir02";
             this.bt_dir02.Size = new System.Drawing.Size(200, 60);
             this.bt_dir02.TabIndex = 3;
+            this.bt_dir02.Text = "Directory.GetFiles()";
             this.bt_dir02.UseVisualStyleBackColor = true;
             this.bt_dir02.Click += new System.EventHandler(this.bt_dir02_Click);
             // 

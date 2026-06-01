@@ -27,30 +27,6 @@ namespace vcs_DiskDirectoryFile3
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
-
-            //------------------------------------------------------------  # 60個
-
-            //string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-
-            var GetFileName = Path.GetFileName(filename);
-            var GetFileNameWithoutExtension = Path.GetFileNameWithoutExtension(filename);
-            var GetDirectoryName = Path.GetDirectoryName(filename);
-            var GetFullPath = Path.GetFullPath(filename);
-
-            //richTextBox1.Text += "filename\t" + filename + "\n";
-            richTextBox1.Text += "GetFullPath\t" + GetFullPath + "\n";
-            richTextBox1.Text += "GetDirectoryName\t" + GetDirectoryName + "\n";
-            //richTextBox1.Text += "GetFileName\t" + GetFileName + "\n";
-            richTextBox1.Text += "GetFileNameWithoutExtension\t" + GetFileNameWithoutExtension + "\n";
-
-            label1.Text = "原檔名 :";
-            textBox1.Text = filename;
-
-            label2.Text = "檔名 :";
-            textBox2.Text = GetFileNameWithoutExtension;
-
-            label3.Text = "新檔名 :";
-            textBox3.Text = GetFileNameWithoutExtension;
         }
 
         void show_item_location()
@@ -81,8 +57,6 @@ namespace vcs_DiskDirectoryFile3
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-
             listView1.Size = new Size(300, 240);
             listView1.Location = new Point(x_st + dx * 2, y_st + dy * 3 - 20);
 
@@ -92,18 +66,6 @@ namespace vcs_DiskDirectoryFile3
             richTextBox1.Size = new Size(390, 690);
             richTextBox1.Location = new Point(x_st + dx * 5 + 20, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-            x_st = 10;
-            y_st = 10;
-            dy = 25;
-            label1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            label2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            label3.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            textBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            textBox2.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            textBox3.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            bt_rename.Location = new Point(x_st + dx * 2 - 34, y_st + dy * 4);
-            groupBox1.Size = new Size(500, 170);
 
             this.Size = new Size(1500, 750);
             this.Text = "vcs_DiskDirectoryFile3";
@@ -155,41 +117,6 @@ namespace vcs_DiskDirectoryFile3
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //檔案資訊
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-
-            var GetFileName = Path.GetFileName(filename);
-            var GetFileNameWithoutExtension = Path.GetFileNameWithoutExtension(filename);
-            var GetExtension = Path.GetExtension(filename);
-            var GetDirectoryName = Path.GetDirectoryName(filename);
-            var GetFullPath = Path.GetFullPath(filename);
-
-            var GetPathRoot = Path.GetPathRoot(filename);
-            var GetRandomFileName = Path.GetRandomFileName();
-
-            richTextBox1.Text += "filename\t" + filename + "\n";
-            richTextBox1.Text += "GetFullPath\t" + GetFullPath + "\n";
-            richTextBox1.Text += "GetDirectoryName\t" + GetDirectoryName + "\n";
-            richTextBox1.Text += "GetFileName\t" + GetFileName + "\n";
-            richTextBox1.Text += "GetFileNameWithoutExtension\t" + GetFileNameWithoutExtension + "\n";
-            richTextBox1.Text += "副檔名 GetExtension\t" + GetExtension + "\n";
-            richTextBox1.Text += "GetPathRoot\t" + GetPathRoot + "\n";
-            richTextBox1.Text += "GetRandomFileName\t" + GetRandomFileName + "\n";
-
-            //檔案資訊
-            //string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_word\word_for_vcs_ReadWrite_WORD.doc";
-
-            FileInfo fileInfo = new FileInfo(filename);
-            string fileSize = (fileInfo.Length / 1024).ToString() + " KB";
-            string temp = filename.Remove(filename.LastIndexOf('.'));
-            string fileName = Path.GetFileNameWithoutExtension(filename);
-            string fileExtension = Path.GetExtension(filename);
-
-            richTextBox1.Text += "filename = " + filename + "\n";
-            richTextBox1.Text += "fileSize = " + fileSize + "\n";
-            richTextBox1.Text += "temp = " + temp + "\n";
-            richTextBox1.Text += "fileName = " + fileName + "\n";
-            richTextBox1.Text += "fileExtension = " + fileExtension + "\n";
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -340,23 +267,6 @@ namespace vcs_DiskDirectoryFile3
 
         private void button15_Click(object sender, EventArgs e)
         {
-        }
-
-        private void bt_rename_Click(object sender, EventArgs e)
-        {
-            var GetFileName = Path.GetFileName(filename);
-            var GetFileNameWithoutExtension = Path.GetFileNameWithoutExtension(filename);
-            var GetExtension = Path.GetExtension(filename);
-            var GetDirectoryName = Path.GetDirectoryName(filename);
-            var GetFullPath = Path.GetFullPath(filename);
-
-            richTextBox1.Text += "GetFullPath\t" + GetFullPath + "\n";
-            richTextBox1.Text += "GetDirectoryName\t" + GetDirectoryName + "\n";
-            richTextBox1.Text += "GetFileName\t" + GetFileName + "\n";
-            richTextBox1.Text += "GetFileNameWithoutExtension\t" + GetFileNameWithoutExtension + "\n";
-            richTextBox1.Text += "GetExtension\t" + GetExtension + "\n";
-
-            richTextBox1.Text += "新全檔名 : " + GetDirectoryName + "\\" + textBox3.Text + GetExtension + "\n";
         }
 
         private void button16_Click(object sender, EventArgs e)

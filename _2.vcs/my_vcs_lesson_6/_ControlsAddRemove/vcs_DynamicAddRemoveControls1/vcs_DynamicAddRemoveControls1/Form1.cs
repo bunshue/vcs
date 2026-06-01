@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;    //for Directory
+using System.IO;  // for Directory
 
 //所有的PNG檔要選屬性/複製到輸出目錄/選 有更新時才複製
 
@@ -506,9 +506,9 @@ namespace vcs_DynamicAddRemoveControls1
 
             foreach (Control con in this.Controls)
             {
-                System.String strControl = con.GetType().ToString();  // 获得控件的类型
-                System.String strControlName = con.Name.ToString();  // 获得控件的名称
-                //System.String strControlTag = con.Tag.ToString();  // 获得控件的標籤, 不能用此, 因為不一定有Tag可以ToString
+                String strControl = con.GetType().ToString();  // 获得控件的类型
+                String strControlName = con.Name.ToString();  // 获得控件的名称
+                //String strControlTag = con.Tag.ToString();  // 获得控件的標籤, 不能用此, 因為不一定有Tag可以ToString
 
                 //richTextBox1.Text += "Type:\t" + strControl + "\tName:\t" + strControlName + "\tColor:\t" + con.BackColor + "\n";
 
@@ -545,9 +545,9 @@ namespace vcs_DynamicAddRemoveControls1
         {
             foreach (Control con in this.Controls)
             {
-                System.String strControl = con.GetType().ToString();//获得控件的类型
-                System.String strControlName = con.Name.ToString();//获得控件的名称
-                //System.String strControlTag = con.Tag.ToString();//获得控件的標籤, 不能用此, 因為不一定有Tag可以ToString
+                String strControl = con.GetType().ToString();//获得控件的类型
+                String strControlName = con.Name.ToString();//获得控件的名称
+                //String strControlTag = con.Tag.ToString();//获得控件的標籤, 不能用此, 因為不一定有Tag可以ToString
 
                 //richTextBox1.Text += "Type:\t" + strControl + "\tName:\t" + strControlName + "\tColor:\t" + con.BackColor + "\n";
 
@@ -584,11 +584,9 @@ namespace vcs_DynamicAddRemoveControls1
 
         void draw2D_Array()
         {
-            int i;
-            int j;
-            for (j = 0; j < ROWS; j++)
+            for (int j = 0; j < ROWS; j++)
             {
-                for (i = 0; i < COLUMNS; i++)
+                for (int i = 0; i < COLUMNS; i++)
                 {
                     richTextBox1.Text += gray[i, j].ToString() + " ";
                 }
@@ -662,9 +660,9 @@ namespace vcs_DynamicAddRemoveControls1
 
                 foreach (Control con in this.Controls)
                 {
-                    System.String strControl = con.GetType().ToString();//获得控件的类型
-                    System.String strControlName = con.Name.ToString();//获得控件的名称
-                    //System.String strControlTag = con.Tag.ToString();//获得控件的標籤, 不能用此, 因為不一定有Tag可以ToString
+                    String strControl = con.GetType().ToString();//获得控件的类型
+                    String strControlName = con.Name.ToString();//获得控件的名称
+                    //String strControlTag = con.Tag.ToString();//获得控件的標籤, 不能用此, 因為不一定有Tag可以ToString
 
                     //richTextBox1.Text += "Type:\t" + strControl + "\tName:\t" + strControlName + "\tColor:\t" + con.BackColor + "\n";
                     if (con.Tag != null)
@@ -734,11 +732,9 @@ namespace vcs_DynamicAddRemoveControls1
         private void button4_Click(object sender, EventArgs e)
         {
             //Clear
-            int i;
-            int j;
-            for (j = 0; j < ROWS; j++)
+            for (int j = 0; j < ROWS; j++)
             {
-                for (i = 0; i < COLUMNS; i++)
+                for (int i = 0; i < COLUMNS; i++)
                 {
                     gray[i, j] = 0;
                 }
@@ -746,9 +742,9 @@ namespace vcs_DynamicAddRemoveControls1
 
             foreach (Control con in this.Controls)
             {
-                System.String strControl = con.GetType().ToString();  // 获得控件的类型
-                System.String strControlName = con.Name.ToString();  // 获得控件的名称
-                //System.String strControlTag = con.Tag.ToString();  // 获得控件的標籤, 不能用此, 因為不一定有Tag可以ToString
+                String strControl = con.GetType().ToString();  // 获得控件的类型
+                String strControlName = con.Name.ToString();  // 获得控件的名称
+                //String strControlTag = con.Tag.ToString();  // 获得控件的標籤, 不能用此, 因為不一定有Tag可以ToString
 
                 //richTextBox1.Text += "Type:\t" + strControl + "\tName:\t" + strControlName + "\tColor:\t" + con.BackColor + "\n";
                 //if (strControlTag == "dynamic")
@@ -758,8 +754,8 @@ namespace vcs_DynamicAddRemoveControls1
                     {
                         if (con.Tag.ToString().Substring(0, 7) == "dynamic")
                         {
-                            i = int.Parse(con.Tag.ToString().Substring(7, 2));
-                            j = int.Parse(con.Tag.ToString().Substring(10, 2));
+                            int i = int.Parse(con.Tag.ToString().Substring(7, 2));
+                            int j = int.Parse(con.Tag.ToString().Substring(10, 2));
 
                             /*
                             richTextBox1.Text += "Type:\t" + strControl + "\tName:\t" + strControlName + "\tColor:\t" + con.BackColor + "\t";
@@ -883,7 +879,6 @@ namespace vcs_DynamicAddRemoveControls1
         private void button9_Click(object sender, EventArgs e)
         {
             //建立控件
-            //建立控件
 
             int x_st = 250;
             int y_st = 50;
@@ -894,13 +889,13 @@ namespace vcs_DynamicAddRemoveControls1
             Label[] label_array = new Label[] { label0, label1, label2, label3, label4, label5, label6, label7 };
             for (int i = 0; i < 8; i++)
             {
-                label_array[i].BackColor = System.Drawing.SystemColors.ActiveBorder;
-                label_array[i].FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-                label_array[i].Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-                label_array[i].Size = new System.Drawing.Size(72, 90);
+                label_array[i].BackColor = SystemColors.ActiveBorder;
+                label_array[i].FlatStyle = FlatStyle.Popup;
+                label_array[i].Font = new Font("微軟正黑體", 14.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(136)));
+                label_array[i].Size = new Size(72, 90);
                 label_array[i].Text = i.ToString();
                 label_array[i].Name = "label" + i.ToString();
-                label_array[i].TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+                label_array[i].TextAlign = ContentAlignment.MiddleCenter;
                 label_array[i].Location = new Point(x_st + dx * (i % 4), y_st + dy * (i / 4));
                 this.Controls.Add(label_array[i]);
             }
@@ -984,7 +979,7 @@ namespace vcs_DynamicAddRemoveControls1
             {
                 if (x.GetType().ToString() == "System.Windows.Forms.Button")
                 {
-                    Button Button = (System.Windows.Forms.Button)x;
+                    Button Button = (Button)x;
                     Button.BackColor = Color.Pink;
                 }
             }
@@ -993,9 +988,9 @@ namespace vcs_DynamicAddRemoveControls1
         private void button14_Click(object sender, EventArgs e)
         {
             //將 toolStripContainer1 加入 表單
-            toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            toolStripContainer1 = new ToolStripContainer();
 
-            toolStrip1 = new System.Windows.Forms.ToolStrip();
+            toolStrip1 = new ToolStrip();
             toolStrip1.Items.Add("新增檔案");
             toolStrip1.Items.Add("開啟檔案");
             toolStrip1.Items.Add("儲存檔案");
@@ -1284,29 +1279,6 @@ ControlInfo(false);
             {
                 if (ct is TextBox)
                 {
-                    if (B)
-                    {
-                        ct.Enabled = true;
-                    }
-                    else
-                    {
-                        ct.Enabled = false;
-                    }
-                }
-            }
-        }
-
-//------------------------------------------------------------  # 60個
-
-            ControlInfo(false);
-            ControlInfo(false);
-            ControlInfo(true);
-        private void ControlInfo(Boolean B)
-        {
-            foreach (Control ct in this.groupBox1.Controls)
-            {
-                if (ct is TextBox)
-                {
                     ct.Text = "";
                     if (B)
                     {
@@ -1367,18 +1339,6 @@ ControlInfo(false);
                 }
             }
             return true;
-        }
-
-        private void clearText()
-        {
-            foreach (Control c in groupBox1.Controls)
-            {
-                if (c is TextBox)
-                {
-                    c.Text = "";
-                }
-            }
-            pictureBox1.Image = null;
         }
 
 //------------------------------------------------------------  # 60個

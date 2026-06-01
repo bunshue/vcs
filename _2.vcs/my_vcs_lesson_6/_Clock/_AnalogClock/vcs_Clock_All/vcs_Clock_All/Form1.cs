@@ -14,8 +14,6 @@ namespace vcs_Clock_All
     public partial class Form1 : Form
     {
         //pictureBox0 ST
-        Bitmap bmp0;
-        Graphics g0;
 
         //int WIDTH = 150, HEIGHT = 150;
         int WIDTH = 250, HEIGHT = 250;
@@ -27,6 +25,8 @@ namespace vcs_Clock_All
         int cx;
         int cy;
         //pictureBox0 SP
+
+        //------------------------------------------------------------  # 60個
 
         //pictureBox3 ST
         const int s_pinlen = 100;//秒針長度
@@ -49,6 +49,8 @@ namespace vcs_Clock_All
 
             this.DoubleBuffered = true;//避免閃爍
 
+            //------------------------------------------------------------  # 60個
+
             //pictureBox0 ST
             //中心
             cx = WIDTH / 2;
@@ -66,10 +68,6 @@ namespace vcs_Clock_All
             pictureBox0.Size = new Size(WIDTH + 50, HEIGHT + 50);
             pictureBox0.BackColor = Color.Pink;
 
-            //create bitmap
-            bmp0 = new Bitmap(WIDTH + 1, HEIGHT + 1);
-
-            timer0_Tick(sender, e);
             //pictureBox0 SP
 
             //------------------------------------------------------------  # 60個
@@ -95,6 +93,15 @@ namespace vcs_Clock_All
             MyPen_S2.EndCap = LineCap.ArrowAnchor;
             MyPen_AL.EndCap = LineCap.RoundAnchor;
             //pictureBox5 SP
+
+            //------------------------------------------------------------  # 60個
+
+            timer0_Tick(sender, e);
+            timer1_Tick(sender, e);
+            timer2_Tick(sender, e);
+            timer3_Tick(sender, e);
+            timer4_Tick(sender, e);
+            timer5_Tick(sender, e);
         }
 
         void show_item_location()
@@ -130,11 +137,17 @@ namespace vcs_Clock_All
             label3.Text = "";
             label4.Text = "";
             label5.Text = "";
+
             richTextBox1.Size = new Size(W - 200, H * 2 + 60);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
             this.Size = new Size(1740, 940);
             this.Text = "vcs_Clock_All";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -147,6 +160,8 @@ namespace vcs_Clock_All
         {
             Environment.Exit(0);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void pictureBox0_MouseDown(object sender, MouseEventArgs e)
         {
@@ -162,6 +177,119 @@ namespace vcs_Clock_All
 
         private void pictureBox0_Paint(object sender, PaintEventArgs e)
         {
+            Graphics g = e.Graphics;
+
+            //get time
+            int ms = DateTime.Now.Millisecond;
+            int ss = DateTime.Now.Second;
+            int mm = DateTime.Now.Minute;
+            int hh = DateTime.Now.Hour;
+
+            int[] handCoord = new int[2];
+            float[] handCoordf = new float[2];
+
+            g.Clear(Color.White);
+
+            g.DrawRectangle(Pens.Red, 0, 0, WIDTH / 2, HEIGHT / 2);
+
+            //draw circle
+            g.DrawEllipse(new Pen(Color.Black, 1f), 0, 0, WIDTH, HEIGHT);
+
+            //draw figure
+            g.DrawString("12", new Font("Arial", 12), Brushes.Black, new PointF(64 * WIDTH / 150, 1 * HEIGHT / 150));
+            g.DrawString("3", new Font("Arial", 12), Brushes.Black, new PointF(138 * WIDTH / 150, 68 * HEIGHT / 150));
+            g.DrawString("6", new Font("Arial", 12), Brushes.Black, new PointF(68 * WIDTH / 150, 133 * HEIGHT / 150));
+            g.DrawString("9", new Font("Arial", 12), Brushes.Black, new PointF(0 * WIDTH / 150, 68 * HEIGHT / 150));
+
+            //second hand
+            //handCoord = msCoord(ss, secHAND); //old
+            handCoordf = msCoordf(ss, ms, secHAND);
+            //g.DrawLine(new Pen(Color.Red, 1f), new Point(cx, cy), new Point(handCoord[0], handCoord[1])); //old
+            g.DrawLine(new Pen(Color.Red, 1f), new Point(cx, cy), new Point((int)handCoordf[0], (int)handCoordf[1]));
+            //richTextBox1.Text += "(" + (handCoordf[0] - cx).ToString() + ", " + (handCoordf[1] - cy).ToString() + ")\n";
+
+            //minute hand
+            handCoord = msCoord(mm, minHAND);
+            g.DrawLine(new Pen(Color.Black, 2f), new Point(cx, cy), new Point(handCoord[0], handCoord[1]));
+
+            //hour hand
+            handCoord = hrCoord(hh % 12, mm, hrHAND);
+            g.DrawLine(new Pen(Color.Gray, 3f), new Point(cx, cy), new Point(handCoord[0], handCoord[1]));
+        }
+
+        //coord for minute and second hand
+        private int[] msCoord(int val, int hlen)
+        {
+            int[] coord = new int[2];
+            val *= 6;   //each minute and second make 6 degree
+
+            if (val >= 0 && val <= 180)
+            {
+                coord[0] = cx + (int)(hlen * Math.Sin(Math.PI * val / 180));
+                coord[1] = cy - (int)(hlen * Math.Cos(Math.PI * val / 180));
+            }
+            else
+            {
+                coord[0] = cx - (int)(hlen * -Math.Sin(Math.PI * val / 180));
+                coord[1] = cy - (int)(hlen * Math.Cos(Math.PI * val / 180));
+            }
+            return coord;
+        }
+
+        //coord for minute and second hand
+        private float[] msCoordf(int val1, int val2, int hlen)
+        {
+            float[] coord = new float[2];
+            if (hlen == 70 * WIDTH / 150)
+            {
+                //richTextBox1.Text += "sec val = " + val.ToString() + "\t";
+            }
+            float val;
+            val = (float)val1 + (float)val2 / 1000;
+
+            val *= 6;   //each minute and second make 6 degree
+
+            if (val >= 0 && val <= 180)
+            {
+                coord[0] = cx + (float)(hlen * Math.Sin(Math.PI * val / 180));
+                coord[1] = cy - (float)(hlen * Math.Cos(Math.PI * val / 180));
+                if (hlen == 70 * WIDTH / 150)
+                {
+                    //richTextBox1.Text += "111 sec val = " + val.ToString() + "coord[0] = " + coord[0].ToString() + " coord[1] = " + coord[1].ToString() + "\t";
+                }
+            }
+            else
+            {
+                coord[0] = cx - (float)(hlen * -Math.Sin(Math.PI * val / 180));
+                coord[1] = cy - (float)(hlen * Math.Cos(Math.PI * val / 180));
+                if (hlen == 70 * WIDTH / 150)
+                {
+                    //richTextBox1.Text += "222 sec val = " + val.ToString() + "coord[0] = " + coord[0].ToString() + " coord[1] = " + coord[1].ToString() + "\t";
+                }
+            }
+            return coord;
+        }
+
+        //coord for hour hand
+        private int[] hrCoord(int hval, int mval, int hlen)
+        {
+            int[] coord = new int[2];
+
+            //each hour makes 30 degree
+            //each min makes 0.5 degree
+            int val = (int)((hval * 30) + (mval * 0.5));
+
+            if (val >= 0 && val <= 180)
+            {
+                coord[0] = cx + (int)(hlen * Math.Sin(Math.PI * val / 180));
+                coord[1] = cy - (int)(hlen * Math.Cos(Math.PI * val / 180));
+            }
+            else
+            {
+                coord[0] = cx - (int)(hlen * -Math.Sin(Math.PI * val / 180));
+                coord[1] = cy - (int)(hlen * Math.Cos(Math.PI * val / 180));
+            }
+            return coord;
         }
 
         //------------------------------------------------------------  # 60個
@@ -181,8 +309,7 @@ namespace vcs_Clock_All
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            Graphics g = e.Graphics;      //定义g为该窗体控件的画布
-            // Graphics g = this.CreateGraphics(); //避免使用此方法，会出现闪烁
+            Graphics g = e.Graphics;
 
             //解决闪烁
             //方法二  占用内存
@@ -279,6 +406,28 @@ namespace vcs_Clock_All
 
         private void pictureBox2_Paint(object sender, PaintEventArgs e)
         {
+            int hh = DateTime.Now.Hour;
+            int mm = DateTime.Now.Minute;
+            int ss = DateTime.Now.Second;
+
+            int h_pinlen = 50;//時針
+            int m_pinlen = 75;//分針
+            int s_pinlen = 100;//秒針
+
+            Graphics g = e.Graphics;
+
+            g.Clear(Color.White);
+            Pen p = new Pen(Color.Black, 1);
+            g.DrawEllipse(p, pictureBox2.ClientRectangle);
+            Point CPoint = new Point(pictureBox2.ClientRectangle.Width / 2, pictureBox2.ClientRectangle.Height / 2);
+            Point SPoint = new Point((int)(CPoint.X + (Math.Sin(6 * ss * Math.PI / 180)) * s_pinlen), (int)(CPoint.Y - (Math.Cos(6 * ss * Math.PI / 180)) * s_pinlen));
+            Point MPoint = new Point((int)(CPoint.X + (Math.Sin(6 * mm * Math.PI / 180)) * m_pinlen), (int)(CPoint.Y - (Math.Cos(6 * mm * Math.PI / 180)) * m_pinlen));
+            Point HPoint = new Point((int)(CPoint.X + (Math.Sin(((30 * hh) + (mm / 2)) * Math.PI / 180)) * h_pinlen), (int)(CPoint.Y - (Math.Cos(((30 * hh) + (mm / 2)) * Math.PI / 180)) * h_pinlen));
+            g.DrawLine(p, CPoint, SPoint);
+            p = new Pen(Color.Black, 2);
+            g.DrawLine(p, CPoint, MPoint);
+            p = new Pen(Color.Black, 4);
+            g.DrawLine(p, CPoint, HPoint);
         }
 
         //------------------------------------------------------------  # 60個
@@ -295,8 +444,49 @@ namespace vcs_Clock_All
         {
         }
 
+        //　　方法AngleToPos是根據角度和百分比計算出一個點的坐標函數
+        PointF AngleToPos(int angle, float percent)
+        {
+            PointF pos = new PointF();
+            double radian = angle * Math.PI / 180;
+            pos.Y = center.Y - s_pinlen * percent * (float)Math.Sin(radian);
+            pos.X = center.X + s_pinlen * percent * (float)Math.Cos(radian);
+            return pos;
+        }
+
         private void pictureBox3_Paint(object sender, PaintEventArgs e)
         {
+            //pictureBox3_Paint
+
+            int h = DateTime.Now.Hour;
+            int m = DateTime.Now.Minute;
+            int s = DateTime.Now.Second;
+
+            Pen pDisk = new Pen(Color.Orange, 3);//時鐘背景的筆
+            Pen pScale = new Pen(Color.Coral);//刻度的筆
+
+            Graphics g = e.Graphics;
+
+            g.Clear(Color.White);
+            Pen p = new Pen(Color.Black, 2);
+            Point CPoint = new Point(s_pinlen, s_pinlen);
+            Point SPoint = new Point((int)(CPoint.X + (Math.Sin(6 * s * Math.PI / 180)) * s_pinlen), (int)(CPoint.Y - (Math.Cos(6 * s * Math.PI / 180)) * s_pinlen));
+            Point MPoint = new Point((int)(CPoint.X + (Math.Sin(6 * m * Math.PI / 180)) * m_pinlen), (int)(CPoint.Y - (Math.Cos(6 * m * Math.PI / 180)) * m_pinlen));
+            Point HPoint = new Point((int)(CPoint.X + (Math.Sin(((30 * h) + (m / 2)) * Math.PI / 180)) * h_pinlen), (int)(CPoint.Y - (Math.Cos(((30 * h) + (m / 2)) * Math.PI / 180)) * h_pinlen));
+            g.FillEllipse(sb, center.X - 8, center.Y - 7, 14, 14);
+            g.DrawLine(p, CPoint, SPoint);
+            p = new Pen(Color.Blue, 4);
+            g.DrawLine(p, CPoint, MPoint);
+            p = new Pen(Color.Green, 6);
+            g.DrawLine(p, CPoint, HPoint);
+            g.DrawEllipse(pDisk, 1, 1, s_pinlen * 2, s_pinlen * 2);//畫刻度
+            for (int i = 0; i < 360; i += 6)
+            {
+                Pen tempPen = (i % 30 == 0) ? pDisk : pScale;
+                PointF qidian = AngleToPos(i, 0.87f);
+                PointF zhongdian = AngleToPos(i, 1.0f);
+                g.DrawLine(tempPen, qidian, zhongdian);
+            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -480,125 +670,7 @@ namespace vcs_Clock_All
 
         private void timer0_Tick(object sender, EventArgs e)
         {
-            //create graphics
-            g0 = Graphics.FromImage(bmp0);
-
-            //get time
-            int ms = DateTime.Now.Millisecond;
-            int ss = DateTime.Now.Second;
-            int mm = DateTime.Now.Minute;
-            int hh = DateTime.Now.Hour;
-
-            int[] handCoord = new int[2];
-            float[] handCoordf = new float[2];
-
-            //clear
-            g0.Clear(Color.White);
-
-            g0.DrawRectangle(Pens.Red, 0, 0, WIDTH / 2, HEIGHT / 2);
-
-            //draw circle
-            g0.DrawEllipse(new Pen(Color.Black, 1f), 0, 0, WIDTH, HEIGHT);
-
-            //draw figure
-            g0.DrawString("12", new Font("Arial", 12), Brushes.Black, new PointF(64 * WIDTH / 150, 1 * HEIGHT / 150));
-            g0.DrawString("3", new Font("Arial", 12), Brushes.Black, new PointF(138 * WIDTH / 150, 68 * HEIGHT / 150));
-            g0.DrawString("6", new Font("Arial", 12), Brushes.Black, new PointF(68 * WIDTH / 150, 133 * HEIGHT / 150));
-            g0.DrawString("9", new Font("Arial", 12), Brushes.Black, new PointF(0 * WIDTH / 150, 68 * HEIGHT / 150));
-
-            //second hand
-            //handCoord = msCoord(ss, secHAND); //old
-            handCoordf = msCoordf(ss, ms, secHAND);
-            //g0.DrawLine(new Pen(Color.Red, 1f), new Point(cx, cy), new Point(handCoord[0], handCoord[1])); //old
-            g0.DrawLine(new Pen(Color.Red, 1f), new Point(cx, cy), new Point((int)handCoordf[0], (int)handCoordf[1]));
-            //richTextBox1.Text += "(" + (handCoordf[0] - cx).ToString() + ", " + (handCoordf[1] - cy).ToString() + ")\n";
-
-            //minute hand
-            handCoord = msCoord(mm, minHAND);
-            g0.DrawLine(new Pen(Color.Black, 2f), new Point(cx, cy), new Point(handCoord[0], handCoord[1]));
-
-            //hour hand
-            handCoord = hrCoord(hh % 12, mm, hrHAND);
-            g0.DrawLine(new Pen(Color.Gray, 3f), new Point(cx, cy), new Point(handCoord[0], handCoord[1]));
-
-            pictureBox0.Image = bmp0;
-
-            g0.Dispose();
-        }
-
-        //coord for minute and second hand
-        private int[] msCoord(int val, int hlen)
-        {
-            int[] coord = new int[2];
-            val *= 6;   //each minute and second make 6 degree
-
-            if (val >= 0 && val <= 180)
-            {
-                coord[0] = cx + (int)(hlen * Math.Sin(Math.PI * val / 180));
-                coord[1] = cy - (int)(hlen * Math.Cos(Math.PI * val / 180));
-            }
-            else
-            {
-                coord[0] = cx - (int)(hlen * -Math.Sin(Math.PI * val / 180));
-                coord[1] = cy - (int)(hlen * Math.Cos(Math.PI * val / 180));
-            }
-            return coord;
-        }
-
-        //coord for minute and second hand
-        private float[] msCoordf(int val1, int val2, int hlen)
-        {
-            float[] coord = new float[2];
-            if (hlen == 70 * WIDTH / 150)
-            {
-                //richTextBox1.Text += "sec val = " + val.ToString() + "\t";
-            }
-            float val;
-            val = (float)val1 + (float)val2 / 1000;
-
-            val *= 6;   //each minute and second make 6 degree
-
-            if (val >= 0 && val <= 180)
-            {
-                coord[0] = cx + (float)(hlen * Math.Sin(Math.PI * val / 180));
-                coord[1] = cy - (float)(hlen * Math.Cos(Math.PI * val / 180));
-                if (hlen == 70 * WIDTH / 150)
-                {
-                    //richTextBox1.Text += "111 sec val = " + val.ToString() + "coord[0] = " + coord[0].ToString() + " coord[1] = " + coord[1].ToString() + "\t";
-                }
-            }
-            else
-            {
-                coord[0] = cx - (float)(hlen * -Math.Sin(Math.PI * val / 180));
-                coord[1] = cy - (float)(hlen * Math.Cos(Math.PI * val / 180));
-                if (hlen == 70 * WIDTH / 150)
-                {
-                    //richTextBox1.Text += "222 sec val = " + val.ToString() + "coord[0] = " + coord[0].ToString() + " coord[1] = " + coord[1].ToString() + "\t";
-                }
-            }
-            return coord;
-        }
-
-        //coord for hour hand
-        private int[] hrCoord(int hval, int mval, int hlen)
-        {
-            int[] coord = new int[2];
-
-            //each hour makes 30 degree
-            //each min makes 0.5 degree
-            int val = (int)((hval * 30) + (mval * 0.5));
-
-            if (val >= 0 && val <= 180)
-            {
-                coord[0] = cx + (int)(hlen * Math.Sin(Math.PI * val / 180));
-                coord[1] = cy - (int)(hlen * Math.Cos(Math.PI * val / 180));
-            }
-            else
-            {
-                coord[0] = cx - (int)(hlen * -Math.Sin(Math.PI * val / 180));
-                coord[1] = cy - (int)(hlen * Math.Cos(Math.PI * val / 180));
-            }
-            return coord;
+            this.pictureBox0.Invalidate();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -608,77 +680,12 @@ namespace vcs_Clock_All
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            int hh = DateTime.Now.Hour;
-            int mm = DateTime.Now.Minute;
-            int ss = DateTime.Now.Second;
-            myClock2(hh, mm, ss);
+            this.pictureBox2.Invalidate();
         }
-
-        private void myClock2(int hh, int mm, int ss)
-        {
-            int h_pinlen = 50;//時針            
-            int m_pinlen = 75;//分針
-            int s_pinlen = 100;//秒針            
-
-            Graphics g = pictureBox2.CreateGraphics();
-            g.Clear(Color.White);
-            Pen p = new Pen(Color.Black, 1);
-            g.DrawEllipse(p, pictureBox2.ClientRectangle);
-            Point CPoint = new Point(pictureBox2.ClientRectangle.Width / 2, pictureBox2.ClientRectangle.Height / 2);
-            Point SPoint = new Point((int)(CPoint.X + (Math.Sin(6 * ss * Math.PI / 180)) * s_pinlen), (int)(CPoint.Y - (Math.Cos(6 * ss * Math.PI / 180)) * s_pinlen));
-            Point MPoint = new Point((int)(CPoint.X + (Math.Sin(6 * mm * Math.PI / 180)) * m_pinlen), (int)(CPoint.Y - (Math.Cos(6 * mm * Math.PI / 180)) * m_pinlen));
-            Point HPoint = new Point((int)(CPoint.X + (Math.Sin(((30 * hh) + (mm / 2)) * Math.PI / 180)) * h_pinlen), (int)(CPoint.Y - (Math.Cos(((30 * hh) + (mm / 2)) * Math.PI / 180)) * h_pinlen));
-            g.DrawLine(p, CPoint, SPoint);
-            p = new Pen(Color.Black, 2);
-            g.DrawLine(p, CPoint, MPoint);
-            p = new Pen(Color.Black, 4);
-            g.DrawLine(p, CPoint, HPoint);
-        }
-
 
         private void timer3_Tick(object sender, EventArgs e)
         {
-            int h = DateTime.Now.Hour;
-            int m = DateTime.Now.Minute;
-            int s = DateTime.Now.Second;
-            myClock3(h, m, s);//調用畫時鐘表的方法
-        }
-
-        //　　方法AngleToPos是根據角度和百分比計算出一個點的坐標函數
-        PointF AngleToPos(int angle, float percent)
-        {
-            PointF pos = new PointF();
-            double radian = angle * Math.PI / 180;
-            pos.Y = center.Y - s_pinlen * percent * (float)Math.Sin(radian);
-            pos.X = center.X + s_pinlen * percent * (float)Math.Cos(radian);
-            return pos;
-        }
-
-        void myClock3(int h, int m, int s)
-        {
-            Pen pDisk = new Pen(Color.Orange, 3);//時鐘背景的筆
-            Pen pScale = new Pen(Color.Coral);//刻度的筆
-            Graphics g = pictureBox3.CreateGraphics();
-            g.Clear(Color.White);
-            Pen p = new Pen(Color.Black, 2);
-            Point CPoint = new Point(s_pinlen, s_pinlen);
-            Point SPoint = new Point((int)(CPoint.X + (Math.Sin(6 * s * Math.PI / 180)) * s_pinlen), (int)(CPoint.Y - (Math.Cos(6 * s * Math.PI / 180)) * s_pinlen));
-            Point MPoint = new Point((int)(CPoint.X + (Math.Sin(6 * m * Math.PI / 180)) * m_pinlen), (int)(CPoint.Y - (Math.Cos(6 * m * Math.PI / 180)) * m_pinlen));
-            Point HPoint = new Point((int)(CPoint.X + (Math.Sin(((30 * h) + (m / 2)) * Math.PI / 180)) * h_pinlen), (int)(CPoint.Y - (Math.Cos(((30 * h) + (m / 2)) * Math.PI / 180)) * h_pinlen));
-            g.FillEllipse(sb, center.X - 8, center.Y - 7, 14, 14);
-            g.DrawLine(p, CPoint, SPoint);
-            p = new Pen(Color.Blue, 4);
-            g.DrawLine(p, CPoint, MPoint);
-            p = new Pen(Color.Green, 6);
-            g.DrawLine(p, CPoint, HPoint);
-            g.DrawEllipse(pDisk, 1, 1, s_pinlen * 2, s_pinlen * 2);//畫刻度
-            for (int i = 0; i < 360; i += 6)
-            {
-                Pen tempPen = (i % 30 == 0) ? pDisk : pScale;
-                PointF qidian = AngleToPos(i, 0.87f);
-                PointF zhongdian = AngleToPos(i, 1.0f);
-                g.DrawLine(tempPen, qidian, zhongdian);
-            }
+            this.pictureBox3.Invalidate();
         }
 
         private void timer4_Tick(object sender, EventArgs e)

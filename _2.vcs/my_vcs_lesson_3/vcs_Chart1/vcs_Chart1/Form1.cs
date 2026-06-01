@@ -379,16 +379,16 @@ namespace vcs_Chart1
             int[] weight = new int[] { 3, 48, 33, 8, 38 };
 
             //1. DataBindXY
-            //series1.Points.DataBindXY(name, weight);  // xx, yy 皆為一維陣列, same
+            //series1.Points.DataBindXY(name, weight);  // xx, yy 皆為一維陣列, 二維綁定, same
 
             //2. 一個一個加入 AddXY
             /*
             //把值加入X 軸Y 軸
-            series1.Points.AddXY("鼠", 3);
-            series1.Points.AddXY("牛", 48);
-            series1.Points.AddXY("虎", 33);
-            series1.Points.AddXY("兔", 8);
-            series1.Points.AddXY("龍", 38);
+            series1.Points.AddXY("鼠", 3);  // AddXY 二維加入
+            series1.Points.AddXY("牛", 48);  // AddXY 二維加入
+            series1.Points.AddXY("虎", 33);  // AddXY 二維加入
+            series1.Points.AddXY("兔", 8);  // AddXY 二維加入
+            series1.Points.AddXY("龍", 38);  // AddXY 二維加入
             */
             for (int i = 0; i < name.Length; i++)
             {
@@ -600,7 +600,7 @@ namespace vcs_Chart1
             chart3.Series.Add(series2);
             chart3.Series.Add(series3);
 
-            show_series_data(chart3);
+            //show_series_data(chart3);
         }
 
         void show_series_data(Chart chart1)
@@ -913,11 +913,11 @@ namespace vcs_Chart1
             if (flag_show_radar_type == 0)
             {
                 // 點的數值
-                series1.Points.AddXY(1, 248);
-                series1.Points.AddXY(2, 234);
-                series1.Points.AddXY(3, 438);
-                series1.Points.AddXY(4, 345);
-                series1.Points.AddXY(1, 222);
+                series1.Points.AddXY(1, 248);  // AddXY 二維加入
+                series1.Points.AddXY(2, 234);  // AddXY 二維加入
+                series1.Points.AddXY(3, 438);  // AddXY 二維加入
+                series1.Points.AddXY(4, 345);  // AddXY 二維加入
+                series1.Points.AddXY(1, 222);  // AddXY 二維加入
 
                 // 點的名稱
                 series1.Points[0].Label = "A";
@@ -930,7 +930,7 @@ namespace vcs_Chart1
             {
                 for (Int32 j = 0; j <= 72; j++)
                 {
-                    series1.Points.AddXY(5 * j, 5 + j % 9);
+                    series1.Points.AddXY(5 * j, 5 + j % 9);  // AddXY 二維加入
                 }
             }
         }
@@ -1254,7 +1254,7 @@ namespace vcs_Chart1
             draw_chart3();
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void bt_chart_save_Click(object sender, EventArgs e)
         {
@@ -1379,8 +1379,3 @@ chart放在
 //------------------------------------------------------------  # 60個
 
 */
-
-//數列加入資料點的方法
-//series1.Points.AddXY(i, r.Next(10) * 50);
-//objSeries.Points.DataBindXY(xx, yy);  // xx, yy 皆為一維陣列
-

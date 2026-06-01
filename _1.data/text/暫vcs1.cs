@@ -1,4 +1,20 @@
-﻿搜尋
+﻿            //設定ListView與設定欄位
+            listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.FullRowSelect = true; //整行一起選取
+            listView1.GridLines = true; //顯示格線
+
+            listView1.GridLines = true;
+            listView1.View = View.Details;
+            //listView1.Columns.Add(new ColumnHeader("aaaa"));
+
+            //設定欄位
+            ColumnHeader ch1 = new ColumnHeader();
+            ch1.Text = "檔案名稱";
+            ch1.Width = 500;
+            listView1.Columns.Add(ch1);
+            
+            
+搜尋
 ProcessDirectory
 
 畫圖相關
