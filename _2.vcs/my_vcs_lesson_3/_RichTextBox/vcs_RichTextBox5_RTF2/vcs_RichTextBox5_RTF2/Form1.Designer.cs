@@ -1,4 +1,4 @@
-namespace vcs_ReadWrite_RTF2
+namespace vcs_RichTextBox5_RTF2
 {
     partial class Form1
     {
@@ -111,7 +111,7 @@ namespace vcs_ReadWrite_RTF2
             // justifyRight
             // 
             this.justifyRight.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.justifyRight.Image = global::PlantTextAlignMode.Properties.Resources.align_right;
+            this.justifyRight.Image = Properties.Resources.align_right;
             this.justifyRight.Location = new System.Drawing.Point(301, 24);
             this.justifyRight.Name = "justifyRight";
             this.justifyRight.Size = new System.Drawing.Size(37, 25);
@@ -122,7 +122,7 @@ namespace vcs_ReadWrite_RTF2
             // justifyCenter
             // 
             this.justifyCenter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.justifyCenter.Image = global::PlantTextAlignMode.Properties.Resources.align_center;
+            this.justifyCenter.Image = Properties.Resources.align_center;
             this.justifyCenter.Location = new System.Drawing.Point(184, 24);
             this.justifyCenter.Name = "justifyCenter";
             this.justifyCenter.Size = new System.Drawing.Size(37, 25);
@@ -133,7 +133,7 @@ namespace vcs_ReadWrite_RTF2
             // justifyLeft
             // 
             this.justifyLeft.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.justifyLeft.Image = global::PlantTextAlignMode.Properties.Resources.align_left;
+            this.justifyLeft.Image = Properties.Resources.align_left;
             this.justifyLeft.Location = new System.Drawing.Point(68, 24);
             this.justifyLeft.Name = "justifyLeft";
             this.justifyLeft.Size = new System.Drawing.Size(37, 25);

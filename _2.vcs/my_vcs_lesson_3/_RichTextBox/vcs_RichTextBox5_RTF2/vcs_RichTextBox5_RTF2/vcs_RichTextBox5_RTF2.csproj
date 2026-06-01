@@ -8,8 +8,8 @@
     <ProjectGuid>{2A945AB1-DA15-4B24-83A9-53DDC808BF8C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PlantTextAlignMode</RootNamespace>
-    <AssemblyName>PlantTextAlignMode</AssemblyName>
+    <RootNamespace>vcs_RichTextBox5_RTF2</RootNamespace>
+    <AssemblyName>vcs_RichTextBox5_RTF2</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -123,13 +123,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="align_center.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="align_left.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="align_right.bmp" />
+    <Content Include="img\align_center.bmp" />
+    <Content Include="img\align_left.bmp" />
+    <Content Include="img\align_right.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

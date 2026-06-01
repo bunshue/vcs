@@ -276,9 +276,9 @@
             // listView1
             // 
             this.listView1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.listView1.Location = new System.Drawing.Point(581, 51);
+            this.listView1.Location = new System.Drawing.Point(258, 161);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(221, 217);
+            this.listView1.Size = new System.Drawing.Size(100, 100);
             this.listView1.TabIndex = 146;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -299,7 +299,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(955, 678);
+            this.ClientSize = new System.Drawing.Size(759, 678);
             this.Controls.Add(this.bt_open_dir2);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.groupBox_remove);

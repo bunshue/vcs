@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;//需引用命名空間Using System.IO
+using System.IO;  // 需引用命名空間Using System.IO
 
-namespace vcs_ReadWrite_RTF2
+namespace vcs_RichTextBox5_RTF2
 {
     public partial class Form1 : Form
     {

@@ -861,7 +861,7 @@ namespace vcs_DiskDirectoryFile1
                 richTextBox1.Text += "找到檔案\t" + a + "\n";
             }
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
 
 
@@ -1791,6 +1791,208 @@ for (int i = 0; i < len; i++)
             Console.WriteLine("================================");
 
 //------------------------------------------------------------  # 60個
+
+file.
+            //拷貝臨時數據庫到目標數據庫(覆蓋)
+            File.Copy(temp, strPathMdb, true);
+            
+            //最後刪除臨時數據庫
+            File.Delete(temp);
+
+//------------------------------------------------------------  # 60個
+
+textBox1.Text = File.ReadAllText(@"C:\鹿柴.txt");
+textBox1.Text = File.ReadAllText(@"C:\鹿柴.txt");
+textBox1.Text = File.ReadAllText(@"C:\春曉.txt");
+textBox1.Text = File.ReadAllText(@"C:\夜思.txt");
+
+            if (File.ReadAllText("setting.txt") != null)
+            {
+                folderPath = File.ReadAllText("setting.txt");
+            }
+            else
+            {
+
+                    File.WriteAllText(@"setting.txt", folderPath);
+//------------------------------------------------------------  # 60個
+
+在 C# 中使用 File.ReadAllText() 方法將檔案讀取為字串
+string text = File.ReadAllText(@"C:\File\file.txt");
+Console.WriteLine(text);
+
+在 C# 中使用 StreamReader.ReadToEnd() 方法將檔案讀取為字串
+StreamReader fileReader = new StreamReader(@"C:\File\file.txt");
+string text = fileReader.ReadToEnd();
+Console.WriteLine(text);			
+
+//------------------------------------------------------------  # 60個
+
+            string filename = @"C:\______test_files\_case1\pic1.jpg";
+            FileStream fs = File.OpenRead(filename); //OpenRead[二進位讀檔]
+            int filelength = 0;
+            filelength = (int)fs.Length; //獲得檔長度
+            Byte[] image = new Byte[filelength]; //建立一個位元組陣列
+            fs.Read(image, 0, filelength); //按位元組流讀取
+            System.Drawing.Image result = System.Drawing.Image.FromStream(fs);
+            fs.Close();
+
+            //pictureBox1.Image = (Image)image;
+
+//------------------------------------------------------------  # 60個
+
+[C#] 圖片檔讀取：非鎖定檔方法 [Image.FromFile 釋放]
+
+content from http://jashliao.pixnet.net/blog/post/223534989
+
+
+FileStream fs = File.OpenRead(StrDestFilePath); //OpenRead[二進位讀檔]
+int filelength = 0;
+filelength = (int)fs.Length; //獲得檔長度
+Byte[] image = new Byte[filelength]; //建立一個位元組陣列
+fs.Read(image, 0, filelength); //按位元組流讀取
+System.Drawing.Image result = System.Drawing.Image.FromStream(fs);
+fs.Close();
+
+//------------------------------------------------------------  # 60個
+
+    [C#] 幾個常用的取路徑及檔名的方法
+
+string file = @"d:\abc\123.txt"
+
+Path.GetFileNameWithoutExtension(file) 取得檔案名,不包含副檔名,本例得到123
+
+Path.GetExtension(file) 取得副檔名txt
+
+Path.GetPathRoot(file) 取得根目錄
+
+Path.GetFullPath(file) 取得路徑
+
+//------------------------------------------------------------  # 60個
+
+待測
+//File.AppendAllText("E:\\Time\\新建文檔夾 (2)" + "/" + strname, DateTime.Now+"\r\n");
+
+//------------------------------------------------------------  # 60個
+
+根據時間建立文件
+File.Create("C:\\______test_files\\" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".jpg");//建立文件
+
+建立臨時檔案
+File.Create("tmp_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".txt");//創建文件
+
+//------------------------------------------------------------  # 60個
+
+//開啟檔案
+FileStream myFile = File.Open(@"C:\myWriter.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+
+BinaryReader myReader = new BinaryReader(myFile);
+
+int dl = System.Convert.ToInt16(myFile.Length);
+//讀取位元陣列
+
+byte[] myData = myReader.ReadBytes(dl);
+//釋放資源
+
+myReader.Close();
+
+myFile.Close();
+
+//------------------------------------------------------------  # 60個
+
+            //資料夾改名
+            Directory.Move(textBox1.Text,textBox2.Text);
+            //檔案改名
+            File.Move(textBox1.Text+"\\"+listBox1.SelectedItem.ToString(), textBox1.Text+"\\"+textBox2.Text);
+
+//------------------------------------------------------------  # 60個
+
+用C#重命名文件
+File.Move("oldfilename", "newfilename");
+File.Move(oldNameFullPath, newNameFullPath);
+
+//Delete the file if exists, else no exception thrown.
+
+File.Delete(newFileName); // Delete the existing file if exists
+File.Move(oldFileName,newFileName); // Rename the oldFileName into newFileName
+
+//------------------------------------------------------------  # 60個
+
+您可以将其复制为新文件，然后使用File类删除旧文件：
+
+if (File.Exists(oldName))
+{
+    File.Copy(oldName, newName, true);
+    File.Delete(oldName);
+}
+
+using System.IO;
+
+string oldFilePath = @"C:\OldFile.txt"; // Full path of old file
+string newFilePath = @"C:\NewFile.txt"; // Full path of new file
+
+if (File.Exists(newFilePath))
+{
+    File.Delete(newFilePath);
+}
+File.Move(oldFilePath, newFilePath);
+
+//------------------------------------------------------------  # 60個
+
+Directory.
+            //撈出一層jpg檔
+            string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1";
+            string[] filenames = Directory.GetFiles(foldername, "*.jpg");
+
+            foreach (string filename in filenames)
+            {
+                richTextBox1.Text += "取得檔案 : " + filename + "\n";
+            }
+
+//------------------------------------------------------------  # 60個
+
+ffff dddd
+檔名資料夾名處理 大整理 在 vcs_Mix00
+
+                richTextBox1.Text += "原完整檔名 : " + textBox1.Text + "\n";
+                string filename = textBox1.Text;
+                filename = filename.Substring(filename.LastIndexOf("\\") + 1, filename.Length - filename.LastIndexOf("\\") - 1);
+                richTextBox1.Text += "原簡單檔名 : " + filename + "\n";
+
+
+取得檔案副檔名:
+string extension = Path.GetExtension("C:\\soar.jpg");
+string extension = Path.GetExtension(filename);
+        
+        private string CurrentDir = new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName;
+
+            richTextBox1.Text += "CurrentDir1 = " + Environment.CurrentDirectory + "\n";
+            richTextBox1.Text += "CurrentDir2 = " + new DirectoryInfo(Environment.CurrentDirectory).Parent + "\n";
+            richTextBox1.Text += "CurrentDir3 = " + new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent + "\n";
+            richTextBox1.Text += "CurrentDir4 = " + new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName + "\n";
+            richTextBox1.Text += "CurrentDir5 = " + CurrentDir + "\n";
+
+            CurrentDir1 = C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Network\vcs_GMap\vcs_GMap\bin\Debug
+            CurrentDir2 = bin
+            CurrentDir3 = vcs_GMap
+            CurrentDir4 = C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Network\vcs_GMap\vcs_GMap
+            CurrentDir5 = C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Network\vcs_GMap\vcs_GMap
+
+            //private string CurrentDir = new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName;
+
+string[] s = Directory.GetFiles(@"D:\項目\Web\Images\shiji"); //獲得文件夾目錄下所有文件全路徑
+string[] s = Directory.GetFiles(@"D:\項目\Web\Images\shiji","*.jpg"); //獲得文件夾目錄下指定後綴名文件全路徑
+string[] s = Directory.GetDirectories(@"D:\項目\Web\Images"); //獲得文件夾目錄下的文件夾的全路徑
+
+//附隨檔案的寫法
+string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\AAAAA.BBBBB";
+string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\excel_20210602_131921.xls";
+string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\excel_20210602_131921.xls";
+
+richTextBox1.Text += filename + "\n\n";
+
+//------------------------------------------------------------  # 60個
+
+
 
 */
 

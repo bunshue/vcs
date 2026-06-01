@@ -123,6 +123,7 @@ Points1 為 已知點數
 
             // Make the form big enough to show the ListView.
             Rectangle item_rect = listView1.GetItemRect(listView1.Items.Count - 1);
+
             this.ClientSize = new Size(
                 item_rect.Left + item_rect.Width + 25,
                 item_rect.Top + item_rect.Height + 75);
@@ -151,12 +152,7 @@ drop proc proc_TransInProc  --删除存储过程
             string temp2 = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + temp;
             string sMdb2 = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + strPathMdb;
 
-
-            //拷貝臨時數據庫到目標數據庫(覆蓋)
-            File.Copy(temp, strPathMdb, true);
-            //最後刪除臨時數據庫
-            File.Delete(temp);
-
+6060
 
 .MakeTransparent(bmp.GetPixel(10, 10));  // 設定邊角點的顏色為透明色
 
@@ -233,40 +229,7 @@ comboBox自行繪制顯示的內容，在這邊需要將comboBox中的屬性'Dra
 
 //------------------------------------------------------------  # 60個
 
-使用即時運算視窗
-System.Diagnostics.Debug.WriteLine("aaaaaaaaaaaaaaaaaaaaaaa");
-
-using System.Diagnostics;           //for Debug
-            Debug.Assert(Math.Abs(total) < 0.001f);
- 
-//------------------------------------------------------------  # 60個
-
-C# Debug的方法，可以將debug msg在『輸出』視窗觀看
-using System.Diagnostics;
-Debug.Print("欲輸出訊息");
-"即時運算視窗"
-勾選 
-【工具】→【選項】→【偵錯】→【將所有輸出視窗文字重新導向到即時運算視窗】
-
-//------------------------------------------------------------  # 60個
-
-不用richTextBox的debug方法            
-寫
-System.Diagnostics.Debug.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-
-到【輸出】視窗看輸出資料
-
-先到專案/右鍵/屬性/建置 勾選 定義DEBUG常數
-
-//------------------------------------------------------------  # 60個
-
-//using System.Diagnostics;
-                // Validation.
-                //Debug.Assert(Math.Abs(y1 - y2) < small);
-
-//------------------------------------------------------------  # 60個
-
-Debug.Assert 的用法   方案總管/屬性/建置/要勾選"定義DEBUG常數"
+//Debug.Assert 的用法   方案總管/屬性/建置/要勾選"定義DEBUG常數"
 
             // Prove it worked.
             switch (user_type)
@@ -292,30 +255,9 @@ Debug.Assert 的用法   方案總管/屬性/建置/要勾選"定義DEBUG常數"
 
 //------------------------------------------------------------  # 60個
 
-執行 System.Diagnostics.Debug.WriteLine 時在【輸出】視窗沒有輸出資料，該如何處理？
-
- 問題的發生原因
-
-可能是【定義 DEBUG 常數】屬性沒有勾選所導致。
-
-在您的專案上按滑鼠右鍵，選擇【屬性】。
- 2. 切換到【建置】頁籤，勾選【定義 DEBUG 常數】後儲存。
-
-//------------------------------------------------------------  # 60個
-
 vcs打印訊息
 有無可能作成像是console模式
 最多打印5行 超過5行的 顯示最後5行
-
-vcs 使用 即時運算視窗
-
-using System.Diagnostics;   //即時運算視窗
-
-Debug.Print("AAAAAAAAAAAAAAAAAAaa i = " + i.ToString());
-
-若找不到"即時運算視窗"
- 
-在【工具】→【選項】→【偵錯】→最下面有【將所有輸出視窗文字重新導向到即時運算視窗】勾起來
 
 //------------------------------------------------------------  # 60個
 
@@ -329,7 +271,6 @@ Debug.Print("AAAAAAAAAAAAAAAAAAaa i = " + i.ToString());
                 }
                 return (Bitmap)lastFrame.Clone();
             }
-
 
             lock (locker)
             {
@@ -370,7 +311,6 @@ TextBox設定星號
             }
             sr.Close();
             sw.Close();
-
 
 //程式碼加入行號
            string str;
@@ -751,12 +691,6 @@ LinkLabel + ToolTip
 
 
 使用 Validating + Validated
-
-
-            textBox1.Text = File.ReadAllText(@"C:\鹿柴.txt");
-                textBox1.Text = File.ReadAllText(@"C:\鹿柴.txt");
-                textBox1.Text = File.ReadAllText(@"C:\春曉.txt");
-                textBox1.Text = File.ReadAllText(@"C:\夜思.txt");
 
 //------------------------------------------------------------  # 60個
 
@@ -1348,18 +1282,6 @@ vcs_ListView3_ContextMenuStrip
 cccc    
 
 vcs 之 radioButton 可以用Image, Text設為空
-
-//------------------------------------------------------------  # 60個
-
-            //撈出一層jpg檔
-
-            string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1";
-            string[] filenames = Directory.GetFiles(foldername, "*.jpg");
-
-            foreach (string filename in filenames)
-            {
-                richTextBox1.Text += "取得檔案 : " + filename + "\n";
-            }
 
 //------------------------------------------------------------  # 60個
 
@@ -2428,8 +2350,7 @@ namespace vcs_
                     MessageBox.Show("Unknown error\t" + ex.Message);
                 }
             }
-            Application.DoEvents();
-
+            
             string url_file2 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
             //string url_file2 = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
             using(client2 = new ())     // Create a web client
@@ -2453,8 +2374,7 @@ namespace vcs_
                     MessageBox.Show("Unknown error\t" + ex.Message);
                 }
             }
-            Application.DoEvents();
-
+            
             string url_weather = @"http://api.openweathermap.org/data/2.5/weather?q=Hsinchu&mode=xml&units=imperial&APPID=e8edf79325ae8948a635efd0e076a8bc";
             using(  = new ())     // Create a web client
             {
@@ -2473,8 +2393,7 @@ namespace vcs_
                     MessageBox.Show("Unknown error\t" + ex.Message);
                 }
             }
-            Application.DoEvents();
-
+            
             string img_src_url = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
             richTextBox1.Text += "圖片所在網址 : " + img_src_url + "\n";
             try
@@ -2482,22 +2401,18 @@ namespace vcs_
                 //圖片下載並存檔
                 DownloadImage(img_src_url);
                 richTextBox1.Text += "圖片下載並存檔\tOK\n";
-                Application.DoEvents();
-
+                
                 //圖片下來並顯示
                 Image img = GetPicture(img_src_url);
                 pictureBox1.Image = img;
                 richTextBox1.Text += "圖片下來並顯示\tOK\n";
-                Application.DoEvents();
-            }
+                            }
             catch (Exception ex)
             {
                 richTextBox1.Text += "*** Download Error" + "\n";
                 richTextBox1.Text += "*** " + ex.Message + "\n";
             }
-            Application.DoEvents();
-
-
+            
             //下載COVID-19資料
 
             // Compose the local data file name.
@@ -2507,14 +2422,11 @@ namespace vcs_
             string url = "https://covidtracking.com/api/v1/states/daily.csv";
 
             richTextBox1.Text += "LoadData \tURL : " + url + "\tfile : " + filename_covid19a + "\n";
-            Application.DoEvents();
-
+            
             DownloadFile(url, filename_covid19a);
 
-
             richTextBox1.Text += "Loading case data...\n";
-            Application.DoEvents();
-
+            
             // Compose the local data file name.
             string filename_covid19b = "cases" + DateTime.Now.ToString("yyyy_MM_dd") + ".csv";
 
@@ -2657,8 +2569,6 @@ private void button1_Click(object sender, EventArgs e)
 	}
 }
 
-Application.DoEvents();
-
 string url_file2 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
 //string url_file2 = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
 using(client2 = new ())     // Create a web client
@@ -2682,7 +2592,6 @@ catch (Exception ex)
 	MessageBox.Show("Unknown error\t" + ex.Message);
 }
 }
-Application.DoEvents();
 
 string url_weather = @"http://api.openweathermap.org/data/2.5/weather?q=Hsinchu&mode=xml&units=imperial&APPID=e8edf79325ae8948a635efd0e076a8bc";
 using( = new ())     // Create a web client
@@ -2702,8 +2611,7 @@ using( = new ())     // Create a web client
 	MessageBox.Show("Unknown error\t" + ex.Message);
 	}
 	}
-	Application.DoEvents();
-
+	
 string img_src_url = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
 richTextBox1.Text += "圖片所在網址 : " + img_src_url + "\n";
 try
@@ -2711,21 +2619,17 @@ try
 //圖片下載並存檔
 DownloadImage(img_src_url);
 richTextBox1.Text += "圖片下載並存檔\tOK\n";
-Application.DoEvents();
 
 //圖片下來並顯示
 Image img = GetPicture(img_src_url);
 pictureBox1.Image = img;
 richTextBox1.Text += "圖片下來並顯示\tOK\n";
-Application.DoEvents();
 }
 catch (Exception ex)
 {
 richTextBox1.Text += "*** Download Error" + "\n";
 richTextBox1.Text += "*** " + ex.Message + "\n";
 }
-Application.DoEvents();
-
 
 //下載COVID-19資料
 
@@ -2736,13 +2640,10 @@ string filename_covid19a = "state_data" + DateTime.Now.ToString("yyyy_MM_dd") + 
 string url = "https://covidtracking.com/api/v1/states/daily.csv";
 
 richTextBox1.Text += "LoadData \tURL : " + url + "\tfile : " + filename_covid19a + "\n";
-Application.DoEvents();
 
 DownloadFile(url, filename_covid19a);
 
-
 richTextBox1.Text += "Loading case data...\n";
-Application.DoEvents();
 
 // Compose the local data file name.
 string filename_covid19b = "cases" + DateTime.Now.ToString("yyyy_MM_dd") + ".csv";
@@ -3259,51 +3160,6 @@ if (frames.Count > 0)
             }
 
 //------------------------------------------------------------  # 60個
-ffff dddd
-檔名資料夾名處理 大整理 在 vcs_Mix00
-
-                richTextBox1.Text += "原完整檔名 : " + textBox1.Text + "\n";
-                string filename = textBox1.Text;
-                filename = filename.Substring(filename.LastIndexOf("\\") + 1, filename.Length - filename.LastIndexOf("\\") - 1);
-                richTextBox1.Text += "原簡單檔名 : " + filename + "\n";
-
-
-取得檔案副檔名:
-string extension = Path.GetExtension("C:\\soar.jpg");
-string extension = Path.GetExtension(filename);
-        
-        private string CurrentDir = new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName;
-
-            richTextBox1.Text += "CurrentDir1 = " + Environment.CurrentDirectory + "\n";
-            richTextBox1.Text += "CurrentDir2 = " + new DirectoryInfo(Environment.CurrentDirectory).Parent + "\n";
-            richTextBox1.Text += "CurrentDir3 = " + new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent + "\n";
-            richTextBox1.Text += "CurrentDir4 = " + new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName + "\n";
-            richTextBox1.Text += "CurrentDir5 = " + CurrentDir + "\n";
-
-            /*
-            CurrentDir1 = C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Network\vcs_GMap\vcs_GMap\bin\Debug
-            CurrentDir2 = bin
-            CurrentDir3 = vcs_GMap
-            CurrentDir4 = C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Network\vcs_GMap\vcs_GMap
-            CurrentDir5 = C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Network\vcs_GMap\vcs_GMap
-
-            //private string CurrentDir = new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName;
-            */
-
-string[] s = Directory.GetFiles(@"D:\項目\Web\Images\shiji"); //獲得文件夾目錄下所有文件全路徑
-string[] s = Directory.GetFiles(@"D:\項目\Web\Images\shiji","*.jpg"); //獲得文件夾目錄下指定後綴名文件全路徑
-string[] s = Directory.GetDirectories(@"D:\項目\Web\Images"); //獲得文件夾目錄下的文件夾的全路徑
-
-
-//附隨檔案的寫法
-string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\AAAAA.BBBBB";
-string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\excel_20210602_131921.xls";
-string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\excel_20210602_131921.xls";
-
-richTextBox1.Text += filename + "\n\n";
-
-//------------------------------------------------------------  # 60個
-
 注意：Image用后请手动释放pictureBox.Image.Dispose();否则图片大些的话，转转下内存就猛升了（一点经验，敬请笑纳）。
 
 
@@ -4300,15 +4156,6 @@ AForge用的 vcs_VideoFileWriter OK 但是在WebCam上有些問題 總是Memory�
 
 VideoWriter
 EMGU用的 在sugar使用OK
-
-            if (File.ReadAllText("setting.txt") != null)
-            {
-                folderPath = File.ReadAllText("setting.txt");
-            }
-            else
-            {
-
-                    File.WriteAllText(@"setting.txt", folderPath);
 
 //------------------------------------------------------------  # 60個
 
@@ -6045,15 +5892,6 @@ fileFullPath : C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_video\OperateCamera\b
             }
         }		
 
-在 C# 中使用 File.ReadAllText() 方法將檔案讀取為字串
-string text = File.ReadAllText(@"C:\File\file.txt");
-Console.WriteLine(text);
-
-在 C# 中使用 StreamReader.ReadToEnd() 方法將檔案讀取為字串
-StreamReader fileReader = new StreamReader(@"C:\File\file.txt");
-string text = fileReader.ReadToEnd();
-Console.WriteLine(text);			
-
 //------------------------------------------------------------  # 60個
 
 MainMenu選了之後會有打勾記號
@@ -7431,33 +7269,15 @@ old 暫存一下
 
 //------------------------------------------------------------  # 60個
 
-            string filename = @"C:\______test_files\_case1\pic1.jpg";
-            FileStream fs = File.OpenRead(filename); //OpenRead[二進位讀檔]
-            int filelength = 0;
-            filelength = (int)fs.Length; //獲得檔長度
-            Byte[] image = new Byte[filelength]; //建立一個位元組陣列
-            fs.Read(image, 0, filelength); //按位元組流讀取
-            System.Drawing.Image result = System.Drawing.Image.FromStream(fs);
-            fs.Close();
-
-            //pictureBox1.Image = (Image)image;
-
-//------------------------------------------------------------  # 60個
-
-
 .Net 知識家
 https://dotblogs.com.tw/hung-chin
-
-
 
 vcs的textBox、richTextBox顯示文字都是用Unicode顯示，這樣才可以顯示各種編碼文字
 也可利用打印unicode編碼打印出各種特殊文字
 
 可指明其他編碼打印文字
 
-
-
-
+6060
 
 經緯度距離計算
 http://m4.hhlink.com/%E7%BB%8F%E7%BA%AC%E5%BA%A6
@@ -7685,39 +7505,7 @@ FileSystem.DeleteFile(openFileDialog1.FileName,
 
 //------------------------------------------------------------  # 60個
 
-[C#] 圖片檔讀取：非鎖定檔方法 [Image.FromFile 釋放]
-
-content from http://jashliao.pixnet.net/blog/post/223534989
-
-
-FileStream fs = File.OpenRead(StrDestFilePath); //OpenRead[二進位讀檔]
-int filelength = 0;
-filelength = (int)fs.Length; //獲得檔長度
-Byte[] image = new Byte[filelength]; //建立一個位元組陣列
-fs.Read(image, 0, filelength); //按位元組流讀取
-System.Drawing.Image result = System.Drawing.Image.FromStream(fs);
-fs.Close();
-
-//------------------------------------------------------------  # 60個
-
-    [C#] 幾個常用的取路徑及檔名的方法
-
-分享: facebook PLURK twitter 
- 
-
-string file = @"d:\abc\123.txt"
-
-Path.GetFileNameWithoutExtension(file) 取得檔案名,不包含副檔名,本例得到123
-
-Path.GetExtension(file) 取得副檔名txt
-
-Path.GetPathRoot(file) 取得根目錄
-
-Path.GetFullPath(file) 取得路徑
-
-
 [C#] 觀察程式執行時間 StopWatch
-
 
 Stopwatch loadingWatch = new Stopwatch();
 loadingWatch.Start();
@@ -7729,19 +7517,6 @@ loadingWatch.Stop();
 Console.WriteLine(loadingWatch.ElapsedMilliseconds);
 
 可以使用Reset()來重置計算時間.
-
-//------------------------------------------------------------  # 60個
-
-待測
-//File.AppendAllText("E:\\Time\\新建文檔夾 (2)" + "/" + strname, DateTime.Now+"\r\n");
-
-//------------------------------------------------------------  # 60個
-
-根據時間建立文件
-File.Create("C:\\______test_files\\" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".jpg");//建立文件
-
-建立臨時檔案
-File.Create("tmp_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".txt");//創建文件
 
 //------------------------------------------------------------  # 60個
 
@@ -8930,21 +8705,6 @@ Wmf Image (.wmf)|*.wmf
 vcs開啟一個純文字檔到richtextbox裡面
 目前沒辦法處理正中、簡中、日文同時存在的純文字檔
 
-//開啟檔案
-FileStream myFile = File.Open(@"C:\myWriter.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
-
-BinaryReader myReader = new BinaryReader(myFile);
-
-int dl = System.Convert.ToInt16(myFile.Length);
-//讀取位元陣列
-
-byte[] myData = myReader.ReadBytes(dl);
-//釋放資源
-
-myReader.Close();
-
-myFile.Close();
-
 //------------------------------------------------------------  # 60個
 
 ImageViewer	研究選單架構
@@ -9631,11 +9391,12 @@ this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInW
 this.UpdateStyles();
 //以上兩句是為了設置控件樣式為雙緩沖，這可以有效減少圖片閃爍的問題
 
-
+//------------------------------------------------------------  # 60個
 
             txtFile.Text = Application.StartupPath + "\\Test.docx";
             txtFile.Select(txtFile.Text.Length, 0);
 
+//------------------------------------------------------------  # 60個
 
 vcs_ReadWrite_EXCEL2
 vcs_ReadWrite_WORD1
@@ -10801,12 +10562,7 @@ save_image_to_drive();	=>	save_crop_picture_to_drive();
 
 private Graphics SelectedGraphics = null;	=>	Graphics g2
 
-            //資料夾改名
-            Directory.Move(textBox1.Text,textBox2.Text);
-            //檔案改名
-            File.Move(textBox1.Text+"\\"+listBox1.SelectedItem.ToString(), textBox1.Text+"\\"+textBox2.Text);
-
-
+//------------------------------------------------------------  # 60個
 		
 progressBar1自動走一個Step, 看起來trackBar並沒有Step這種參數
 
@@ -10830,7 +10586,7 @@ progressBar1自動走一個Step, 看起來trackBar並沒有Step這種參數
                 this.progressBar1.PerformStep();//按指定的增量增加進度條中的進度塊
             }
 
-
+//------------------------------------------------------------  # 60個
 
 沒有標題但是可以改變大小的視窗
 ControlBox = false;
@@ -10844,6 +10600,7 @@ ControlBox = false;
 
 映射驅動器 = 網路芳鄰硬碟的連結
 
+//------------------------------------------------------------  # 60個
 
 映射的驅動器只是實際位於不同計算機上的驅動器的快捷方式。 
 
@@ -11382,7 +11139,6 @@ string dirname = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\
 
 讀Form1.cs所在位置的檔案純文字檔：
 
-
             string file_path = Path.Combine(Application.StartupPath, "..\\..");
             file_path = new FileInfo(file_path).FullName;
 
@@ -11396,7 +11152,7 @@ txtCiphertextFile.Text = file_path + "\\ciphertext.dat";
             // Display the result.
             txtCiphertext.Text = File.ReadAllBytes(txtCiphertextFile.Text).ToHex(' ');
 
-
+//------------------------------------------------------------  # 60個
 
 駝峰式大小寫（Camel-Case，Camel Case，camel case）
 單字之間不以空格斷開（例：camel case）或連接號（-，例：camel-case）、底線（_，例：camel_case）連結，有兩種格式：
@@ -11740,15 +11496,7 @@ https://maps.googleapis.com/maps/api/staticmap?center=25.052019,121.513987&zoom=
 
 https://maps.googleapis.com/maps/api/staticmap?center=25.052019,121.513987&zoom=15&size=320x240&language=zh-TW&maptype=roadmap&markers=color:red|label:A|25.052019,121.513987&key=AIzaSyCEU4vCIYtilSvu-UicMv9JNEDBi9bax1c
 
-
-用C#重命名文件
-File.Move("oldfilename", "newfilename");
-File.Move(oldNameFullPath, newNameFullPath);
-
-/* Delete the file if exists, else no exception thrown. */
-
-File.Delete(newFileName); // Delete the existing file if exists
-File.Move(oldFileName,newFileName); // Rename the oldFileName into newFileName
+//------------------------------------------------------------  # 60個
 
 或者用try catch包围它以避免异常。
 
@@ -11767,27 +11515,6 @@ namespace System.IO
 
 FileInfo file = new FileInfo("c:\test.txt");
 file.Rename("test2.txt");
-
-
-
-您可以将其复制为新文件，然后使用File类删除旧文件：
-
-if (File.Exists(oldName))
-{
-    File.Copy(oldName, newName, true);
-    File.Delete(oldName);
-}
-
-using System.IO;
-
-string oldFilePath = @"C:\OldFile.txt"; // Full path of old file
-string newFilePath = @"C:\NewFile.txt"; // Full path of new file
-
-if (File.Exists(newFilePath))
-{
-    File.Delete(newFilePath);
-}
-File.Move(oldFilePath, newFilePath);
 
 //------------------------------------------------------------  # 60個
 
@@ -12703,6 +12430,8 @@ string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yy
 string dir = Application.StartupPath + "\\";
 
 File.Create(Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt");
+
+//------------------------------------------------------------  # 60個
 
 //把Form大小設定跟圖片大小一樣
 //ClientSize = new Size(pictureBox1.Right + pictureBox1.Left, pictureBox1.Bottom + pictureBox1.Left);
@@ -13680,11 +13409,6 @@ thread工作型態
 richTextBox1.Text += "0";
 Thread.Sleep(500);
 
-
-//建立一個Thread 到 偵錯/視窗/即時運算 看結果
-
-System.Diagnostics.Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！ title = " + title + "  " + aa.ToString());
-
 //------------------------------------------------------------  # 60個
 
              /* info
@@ -13699,9 +13423,6 @@ System.Diagnostics.Debug.Print("即時運算視窗輸出除錯訊息 測試訊�
             richTextBox1.Text += "字型名稱: " + f.FontFamily.Name + "\n";
             //richTextBox1.Text += "字型名稱: " + f.Name + "\n";    same
             */
-
-
-
 
 //------------------------------------------------------------  # 60個
 draw dddd
@@ -13725,20 +13446,13 @@ this.StartPosition = FormStartPosition.Manual;
 //this.StartPosition = FormStartPosition.CenterScreen;
 this.StartPosition = FormStartPosition.CenterScreen;  // 單獨寫致中，看似無效
 
-
 pikasa
 this.ShowInTaskbar = false;
 this.MaximizeBox = false;
 this.StartPosition = FormStartPosition.CenterScreen;  // 單獨寫致中，看似無效
 
-
-
 g.DrawString("直接設定字型與大小", new Font("宋体", 30), Brushes.Red, 10, 10);
 
 
-
-//System.Diagnostics.Debug.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-
-
-
+//------------------------------------------------------------  # 60個
 

@@ -358,10 +358,7 @@ namespace vcs_Cryptography3
             //信息處理
             intCRC16 = GetCheckCode(bytRtuData, 8 - 2);
 
-            //Debug.Print("CRC:" + bytRtuData[8 - 2].ToString() + " " + ((byte)(intCRC16 & 0xFF)).ToString() +"|" + bytRtuData[8 - 1].ToString() + " " + ((byte)((intCRC16 >> 8) & 0xff)).ToString());
-
             string result = "CRC:" + bytRtuData[8 - 2].ToString() + " " + ((byte)(intCRC16 & 0xFF)).ToString() + "|" + bytRtuData[8 - 1].ToString() + " " + ((byte)((intCRC16 >> 8) & 0xff)).ToString();
-
             richTextBox1.Text += result + "\n";
 
             //bytSendData[3 + lngDataNum * 2] = (byte)(intCRC16 & 0xFF);  // CRC校驗低位
@@ -756,7 +753,6 @@ namespace DESFile
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
 
 /*  可搬出
 

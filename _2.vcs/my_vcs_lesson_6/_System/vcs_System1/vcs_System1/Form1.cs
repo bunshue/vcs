@@ -13,7 +13,7 @@ using System.IO.Ports;  //for serial ports
 using System.Collections;   //for DictionaryEntry
 using System.Globalization;
 using System.Runtime.InteropServices;   //for DllImport, StructLayout
-using System.Diagnostics;       //for Process
+using System.Diagnostics;       //for Process, Debug
 using System.Reflection;        //for Assembly
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Threading;
@@ -967,18 +967,66 @@ namespace vcs_System1
 
         private void button23_Click(object sender, EventArgs e)
         {
+            //使用 即時運算視窗
+
             richTextBox1.Text += "到 【偵錯】→【視窗】→【即時運算】 看結果\n\r";
             richTextBox1.Text += "要勾選 【工具】→【選項】→【偵錯】→【將所有輸出視窗文字重新導向到即時運算視窗】\n\r";
 
             int a = 123;
             int b = 456;
 
+            Debug.Print("欲輸出訊息");
             Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！" + a.ToString());
             Debug.WriteLine("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！" + b.ToString());
+            Debug.WriteLine("aaaaaaaaaaaaaaaaaaaaaaa");
+            Debug.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 
             Debug.Print("aaaaaaaaaaaaaaaaaaaaaaaaaa無換行符號1");
             Debug.Print("aaaaaaaaaaaaaaaaaaaaaaaaaa無換行符號2");
             Debug.Print("aaaaaaaaaaaaaaaaaaaaaaaaaa無換行符號3");
+            //Debug.Print("CRC:" + bytRtuData[8 - 2].ToString() + " " + ((byte)(intCRC16 & 0xFF)).ToString() + "|" + bytRtuData[8 - 1].ToString() + " " + ((byte)((intCRC16 >> 8) & 0xff)).ToString());
+
+            //Debug.Assert(Math.Abs(total) < 0.001f);
+
+            //C# Debug的方法，可以將debug msg在『輸出』視窗觀看
+            //"即時運算視窗"
+            //勾選 
+            //【工具】→【選項】→【偵錯】→【將所有輸出視窗文字重新導向到即時運算視窗】
+
+            //------------------------------------------------------------  # 60個
+
+            //到【輸出】視窗看輸出資料
+            //先到專案/右鍵/屬性/建置 勾選 定義DEBUG常數
+
+            //------------------------------------------------------------  # 60個
+
+            // Validation.
+            //Debug.Assert(Math.Abs(y1 - y2) < small);
+
+            //------------------------------------------------------------  # 60個
+
+            /*
+            執行 Debug.WriteLine 時在【輸出】視窗沒有輸出資料，該如何處理？
+             問題的發生原因
+            可能是【定義 DEBUG 常數】屬性沒有勾選所導致。
+            在您的專案上按滑鼠右鍵，選擇【屬性】。
+             2. 切換到【建置】頁籤，勾選【定義 DEBUG 常數】後儲存。
+            */
+/*
+
+
+
+若找不到"即時運算視窗"
+ 
+在【工具】→【選項】→【偵錯】→最下面有【將所有輸出視窗文字重新導向到即時運算視窗】勾起來
+
+
+    //建立一個Thread 到 偵錯/視窗/即時運算 看結果
+Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！ title = " + title + "  " + aa.ToString());
+*/
+
+            //Debug.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+
         }
 
         private void button24_Click(object sender, EventArgs e)

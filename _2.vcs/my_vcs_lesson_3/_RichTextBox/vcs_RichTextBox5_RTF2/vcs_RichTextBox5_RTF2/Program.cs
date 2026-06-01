@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_ReadWrite_RTF2
+namespace vcs_RichTextBox5_RTF2
 {
     static class Program
     {

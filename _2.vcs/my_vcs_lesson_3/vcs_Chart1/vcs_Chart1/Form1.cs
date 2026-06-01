@@ -104,6 +104,7 @@ namespace vcs_Chart1
             richTextBox1.Size = new Size(275, 950);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            bt_chart_save.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y);
 
             x_st = 20;
             y_st = 40;
@@ -234,15 +235,24 @@ namespace vcs_Chart1
         void chart_init(Chart chart1, string title)
         {
             // 清除圖表內的元件, 清除後要先新增才能使用
-
-            chart1.Size = new Size(W, H);  // 設定chart大小
-
             //C T L S
-
             chart1.ChartAreas.Clear();  // 清除所有圖表區
             chart1.Titles.Clear();  // 清除所有標題
             chart1.Legends.Clear();  // 清除所有圖例
             chart1.Series.Clear();  // 清除所有數列
+
+            //------------------------------  # 30個
+
+            chart1.Size = new Size(W, H);  // 設定chart大小
+
+            // 圖表樣式
+            chart1.BackGradientStyle = GradientStyle.TopBottom;//指定圖表元素的漸變樣式(中心向外，從左到右，從上到下等等)
+            chart1.BackSecondaryColor = Color.Yellow;//設置背景的輔助顏色
+            chart1.BorderlineColor = Color.Yellow;//設置圖像邊框的顏色
+            chart1.BorderlineDashStyle = ChartDashStyle.Solid;//設置圖像邊框線的樣式(實線、虛線、點線)
+            chart1.BorderlineWidth = 2;//設置圖像的邊框寬度
+            chart1.BorderSkin.SkinStyle = BorderSkinStyle.Emboss;//設置圖像的邊框外觀樣式
+            chart1.BackColor = Color.Yellow;//設置圖表的背景顏色
 
             //------------------------------  # 30個
 
@@ -355,7 +365,7 @@ namespace vcs_Chart1
             // 設定圖例.Legends
             chart1.Legends.Add("Legends1");  // 將圖例新增到圖表上
             chart1.Legends["Legends1"].DockedToChartArea = "ChartArea1";  // 設定圖例要顯示在哪個圖表區
-            chart1.Legends["Legends1"].Docking = Docking.Right;  // 設定圖例的顯示位置, 預設靠右
+            chart1.Legends["Legends1"].Docking = Docking.Right;  // 設定圖例的顯示停靠的位置, 預設靠右
             chart1.Legends["Legends1"].BackColor = Color.FromArgb(235, 235, 235);  // 背景色
             chart1.Legends["Legends1"].BackHatchStyle = ChartHatchStyle.DarkDownwardDiagonal;  // 斜線背景
             chart1.Legends["Legends1"].BorderWidth = 1;
@@ -784,7 +794,7 @@ namespace vcs_Chart1
             chart6.BackColor = Color.Yellow;  // 設置圖表的背景顏色
 
             // 設定圖例.Legends
-            chart6.Legends["Legend1"].Docking = Docking.Right;  // 設定圖例的顯示位置, 預設靠右
+            chart6.Legends["Legend1"].Docking = Docking.Right;  // 設定圖例的顯示停靠的位置, 預設靠右
 
             //------------------------------  # 30個
 
@@ -1244,6 +1254,44 @@ namespace vcs_Chart1
             draw_chart3();
         }
 
+        //6060
+
+        private void bt_chart_save_Click(object sender, EventArgs e)
+        {
+            save_chart_image_to_drive(chart0);
+        }
+
+        void save_chart_image_to_drive(Chart chart1)
+        {
+            if (chart1 != null)
+            {
+                string filename = Application.StartupPath + "\\CHART_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                //String filename1 = filename + ".jpg";
+                //String filename2 = filename + ".bmp";
+                String filename3 = filename + ".png";
+
+                try
+                {
+                    //chart1.SaveImage(@filename1, ChartImageFormat.Jpeg);
+                    //chart1.SaveImage(@filename2, ChartImageFormat.Bmp);
+                    chart1.SaveImage(@filename3, ChartImageFormat.Png);
+
+                    richTextBox1.Text += "存檔成功, ";
+                    //richTextBox1.Text += "已存檔 : " + filename1 + "\n";
+                    //richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename3 + "\n";
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "無圖可存\n";
+            }
+        }
+
         //------------------------------------------------------------  # 60個
     }
 }
@@ -1336,53 +1384,3 @@ chart放在
 //series1.Points.AddXY(i, r.Next(10) * 50);
 //objSeries.Points.DataBindXY(xx, yy);  // xx, yy 皆為一維陣列
 
-/*
-             save_chart_image_to_drive();
-        void save_chart_image_to_drive()
-        {
-            if (chart1 != null)
-            {
-                string filename = Application.StartupPath + "\\CHART_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                String filename1 = filename + ".jpg";
-                String filename2 = filename + ".bmp";
-                String filename3 = filename + ".png";
-
-                try
-                {
-                    chart1.SaveImage(@filename1, ChartImageFormat.Jpeg);
-                    chart1.SaveImage(@filename2, ChartImageFormat.Bmp);
-                    chart1.SaveImage(@filename3, ChartImageFormat.Png);
-
-                    richTextBox1.Text += "存檔成功\n";
-                    richTextBox1.Text += "已存檔 : " + filename1 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename3 + "\n";
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                }
-            }
-            else
-            {
-                richTextBox1.Text += "無圖可存\n";
-            }
-        }
-*/
-
-/*
-        void chart_init(Chart chart)
-        {
-            // 圖表樣式
-            chart.BackGradientStyle = GradientStyle.TopBottom;//指定圖表元素的漸變樣式(中心向外，從左到右，從上到下等等)
-            chart.BackSecondaryColor = Color.Yellow;//設置背景的輔助顏色
-            chart.BorderlineColor = Color.Yellow;//設置圖像邊框的顏色
-            chart.BorderlineDashStyle = ChartDashStyle.Solid;//設置圖像邊框線的樣式(實線、虛線、點線)
-            chart.BorderlineWidth = 2;//設置圖像的邊框寬度
-            chart.BorderSkin.SkinStyle = BorderSkinStyle.Emboss;//設置圖像的邊框外觀樣式
-            chart.BackColor = Color.Yellow;//設置圖表的背景顏色
-
-            chart.Titles[0].Font = titles_font;
-            chart.Legends["Legend1"].Docking = Docking.Right;  //設定圖標顯示停靠的位置
-        }
-*/

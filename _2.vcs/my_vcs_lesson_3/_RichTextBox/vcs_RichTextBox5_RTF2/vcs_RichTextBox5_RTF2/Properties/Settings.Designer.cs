@@ -8,8 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_ReadWrite_RTF2.Properties
-{
+namespace vcs_RichTextBox5_RTF2.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
