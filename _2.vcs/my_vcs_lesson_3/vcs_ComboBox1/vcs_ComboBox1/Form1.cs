@@ -192,19 +192,23 @@ namespace vcs_ComboBox1
             int h = 150;
 
             groupBox1.Size = new Size(w, h * 4 + 120);
+            groupBox2.Size = new Size(w, h * 2 / 2);
             groupBox6.Size = new Size(w, h * 3 / 2);
+            groupBox3.Size = new Size(w, h * 4);
 
             x_st = 10;
             y_st = 10;
             dx = w + 10;
             dy = h + 10;
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            groupBox6.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            groupBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            groupBox6.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            groupBox3.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox1.Size = new Size(200, 150);
             pictureBox1.BackColor = Color.Pink;
 
-            richTextBox1.Size = new Size(420, 600);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            richTextBox1.Size = new Size(320, 600);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //groupBox內部的
@@ -231,7 +235,7 @@ namespace vcs_ComboBox1
             cboColor.Location = new Point(x_st + dx * 0, y_st + dy * 7 + dd);
             cboFace.Location = new Point(x_st + dx * 0 + 150, y_st + dy * 7 + dd);
 
-            this.Size = new Size(1200, 800);
+            this.Size = new Size(1600, 800);
             this.Text = "vcs_ComboBox1";
 
             //設定執行後的表單起始位置, 正中央
@@ -243,6 +247,8 @@ namespace vcs_ComboBox1
         {
             richTextBox1.Clear();
         }
+
+        //6060
 
         private void comboBox8_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -559,20 +565,12 @@ namespace vcs_ComboBox1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-//1515
-//---------------  # 15個
-
-
 /*  可搬出
 
 */
-
-
-
 
