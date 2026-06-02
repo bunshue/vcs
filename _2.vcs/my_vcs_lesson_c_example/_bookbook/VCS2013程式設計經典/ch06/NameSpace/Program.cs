@@ -30,6 +30,7 @@ namespace NameSpace
         {
             // 使用IBM命名空間下的Notebook類別建立A物件
             IBM.Notebook A = new IBM.Notebook();
+
             // 使用Apple命名空間下的Notebook類別建立B物件
             Apple.Notebook B = new Apple.Notebook();
         }

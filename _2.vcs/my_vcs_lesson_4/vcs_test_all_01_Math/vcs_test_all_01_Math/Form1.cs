@@ -32,6 +32,8 @@ namespace vcs_test_all_01_Math
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             textBox2.Text = "123";
         }
 
@@ -42,7 +44,6 @@ namespace vcs_test_all_01_Math
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -114,6 +115,8 @@ namespace vcs_test_all_01_Math
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -239,6 +242,8 @@ namespace vcs_test_all_01_Math
             g.DrawString(angle.ToString() + " 度", f, Brushes.Magenta, pt);
         }
 
+        //------------------------------------------------------------  # 60個
+
         /// <summary> 
         /// 標準差(StandardDifference) 
         /// </summary> 
@@ -329,6 +334,8 @@ namespace vcs_test_all_01_Math
             sd = SD2(arrays);
             richTextBox1.Text += "SD = " + sd.ToString() + "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private const int CNT = 70;
         private void button6_Click(object sender, EventArgs e)
@@ -1690,14 +1697,10 @@ namespace vcs_test_all_01_Math
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
 
 
 /*  可搬出

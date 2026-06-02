@@ -561,12 +561,6 @@ radioButton1屬性
             richTextBox1.Text += "第5項 PictureBox\n";
             e.Graphics.DrawImage(bitmap1, 0, 0); // 呈現原圖
 
-
-
-
-
-
-
 label
             //將兩個標籤的文字對齊以垂直置中，水平置中
             lblMouse.TextAlign = ContentAlignment.MiddleCenter;
@@ -948,106 +942,6 @@ private void Form1_Load(object sender, EventArgs e)
             Console.WriteLine("測試多型（Polymorphism）");
             hi();
             hi("lion-mouse");
-
-//------------------------------------------------------------  # 60個
-
-            Graphics g;
-
-            //新建圖檔, 初始化畫布
-            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
-            pictureBox1.Image = bitmap1;
-
-            int i;
-            double gamma;
-
-            int[] data_in = new int[256];
-            int[] data_out = new int[256];
-            Point[] curvePoints = new Point[256];    //一維陣列內有 N 個Point
-
-            Pen gammaPen = new Pen(Color.Red, 2);
-            /*
-                                                        gamma = 2.2;
-                                                        //畫出真正的Gamma 2.2曲線
-                                                        for (i = 0; i < 256; i++)
-                                                        {
-                                                            data_in[i] = i;
-                                                            data_out[i] = (int)(Math.Pow(((double)data_in[i]) / 255, 1 / gamma) * 255);
-
-                                                            curvePoints[i].X = data_in[i] * 3;
-                                                            curvePoints[i].Y = 256 * 2 - 1 - data_out[i] * 2;
-                                                        }
-                                                        g.DrawLines(gammaPen, curvePoints);   //畫直線
-            */
-
-
-//另存新檔
-SaveBitmapUsingExtension(RotatedBitmap, sfdFile.FileName);
-
-vcs helper的  根據副檔名 決定檔案儲存格式
-
-public void SaveBitmapUsingExtension(Bitmap bitmap1, string filename)
-{
-    string extension = Path.GetExtension(filename);
-    switch (extension.ToLower())
-    {
-        case ".bmp":
-            bitmap1.Save(filename, ImageFormat.Bmp);
-            break;
-        case ".exif":
-            bitmap1.Save(filename, ImageFormat.Exif);
-            break;
-        case ".gif":
-            bitmap1.Save(filename, ImageFormat.Gif);
-            break;
-        case ".jpg":
-        case ".jpeg":
-            bitmap1.Save(filename, ImageFormat.Jpeg);
-            break;
-        case ".png":
-            bitmap1.Save(filename, ImageFormat.Png);
-            break;
-        case ".tif":
-        case ".tiff":
-            bitmap1.Save(filename, ImageFormat.Tiff);
-            break;
-        default:
-            throw new NotSupportedException(
-                "Unknown file extension " + extension);
-    }
-}
-
-
-
-
-
-
-
-
-        private void bt_save_Click(object sender, EventArgs e)
-        {
-            // Make a copy of the result image.
-            using (Bitmap bmp = (Bitmap)pictureBox0.Image.Clone())
-            {
-                save_image_to_drive(bmp);
-            }
-        }
-
-        void save_image_to_drive(Bitmap bitmap1)
-        {
-            if (bitmap1 != null)
-            {
-                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
-                bitmap1.Save(@filename, ImageFormat.Png);
-
-                richTextBox1.Text += "已存檔 : " + filename + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "無圖可存\n";
-            }
-        }
 
 //------------------------------------------------------------  # 60個
 
@@ -12058,22 +11952,6 @@ opencv-4.5.2	有python但無vcs
 			richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
 		}
 
-//由pictureBox1建立繪圖物件
-
-//新建圖檔, 初始化畫布
-Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-Graphics g = Graphics.FromImage(bitmap1);
-g.Clear(Color.White);
-pictureBox1.Image = bitmap1;
-
-//新建圖檔, 初始化畫布
-string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-Bitmap bitmap1 = new Bitmap(filename);
-Graphics g = Graphics.FromImage(bitmap1);
-pictureBox1.Image = bitmap1;
-
-
-
 //最大化螢幕
 this.FormBorderStyle = FormBorderStyle.None;
 this.WindowState = FormWindowState.Maximized;
@@ -13086,6 +12964,14 @@ this.ShowInTaskbar = false;
 this.MaximizeBox = false;
 this.StartPosition = FormStartPosition.CenterScreen;  // 單獨寫致中，看似無效
 
+
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+            this.pictureBox1.Focus();
+
+
+//------------------------------------------------------------  # 60個
+//------------------------------------------------------------  # 60個
 //------------------------------------------------------------  # 60個
 
 g.Clear(BackColor);     //清除整個繪圖介面，並使用指定的背景色彩填滿它。
@@ -13102,17 +12988,124 @@ g.FillRectangle(Brushes.Wheat, ClientRectangle);
 //清空畫布並用透明色填充
 g.Clear(Color.Transparent);
 
-                //擷取部分圖片貼上
-                //            貼上位置與大小,擷取部分圖片位置與大小,單位
-                g.DrawImage(img, destRect1, srcRect, units);
+//擷取部分圖片貼上
+//            貼上位置與大小,擷取部分圖片位置與大小,單位
+g.DrawImage(img, destRect1, srcRect, units);
 
 
-plt.savefig('tmp_event.png', dpi=300) 	# 將圓餅圖出成圖片，檔名為event.png 
+6060
 
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            this.pictureBox1.Focus();
 
+            Graphics g;
+
+            //新建圖檔, 初始化畫布
+            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+            pictureBox1.Image = bitmap1;
+
+            int i;
+            double gamma;
+
+            int[] data_in = new int[256];
+            int[] data_out = new int[256];
+            Point[] curvePoints = new Point[256];    //一維陣列內有 N 個Point
+
+            Pen gammaPen = new Pen(Color.Red, 2);
+            /*
+                                                        gamma = 2.2;
+                                                        //畫出真正的Gamma 2.2曲線
+                                                        for (i = 0; i < 256; i++)
+                                                        {
+                                                            data_in[i] = i;
+                                                            data_out[i] = (int)(Math.Pow(((double)data_in[i]) / 255, 1 / gamma) * 255);
+
+                                                            curvePoints[i].X = data_in[i] * 3;
+                                                            curvePoints[i].Y = 256 * 2 - 1 - data_out[i] * 2;
+                                                        }
+                                                        g.DrawLines(gammaPen, curvePoints);   //畫直線
+            */
+
+
+//另存新檔
+SaveBitmapUsingExtension(RotatedBitmap, sfdFile.FileName);
+
+vcs helper的  根據副檔名 決定檔案儲存格式
+
+public void SaveBitmapUsingExtension(Bitmap bitmap1, string filename)
+{
+    string extension = Path.GetExtension(filename);
+    switch (extension.ToLower())
+    {
+        case ".bmp":
+            bitmap1.Save(filename, ImageFormat.Bmp);
+            break;
+        case ".exif":
+            bitmap1.Save(filename, ImageFormat.Exif);
+            break;
+        case ".gif":
+            bitmap1.Save(filename, ImageFormat.Gif);
+            break;
+        case ".jpg":
+        case ".jpeg":
+            bitmap1.Save(filename, ImageFormat.Jpeg);
+            break;
+        case ".png":
+            bitmap1.Save(filename, ImageFormat.Png);
+            break;
+        case ".tif":
+        case ".tiff":
+            bitmap1.Save(filename, ImageFormat.Tiff);
+            break;
+        default:
+            throw new NotSupportedException(
+                "Unknown file extension " + extension);
+    }
+}
+
+
+        private void bt_save_Click(object sender, EventArgs e)
+        {
+            // Make a copy of the result image.
+            using (Bitmap bmp = (Bitmap)pictureBox0.Image.Clone())
+            {
+                save_image_to_drive(bmp);
+            }
+        }
+
+        void save_image_to_drive(Bitmap bitmap1)
+        {
+            if (bitmap1 != null)
+            {
+                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".png";
+                bitmap1.Save(@filename, ImageFormat.Png);
+
+                richTextBox1.Text += "已存檔 : " + filename + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "無圖可存\n";
+            }
+        }
+
+//------------------------------------------------------------  # 60個
+
+//由pictureBox1建立繪圖物件
+
+//新建圖檔, 初始化畫布
+Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+Graphics g = Graphics.FromImage(bitmap1);
+g.Clear(Color.White);
+pictureBox1.Image = bitmap1;
+
+//新建圖檔, 初始化畫布
+string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+Bitmap bitmap1 = new Bitmap(filename);
+Graphics g = Graphics.FromImage(bitmap1);
+pictureBox1.Image = bitmap1;
+
+
+6060
 
 
 

@@ -30,9 +30,11 @@ namespace vcs_Draw1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.ResizeRedraw = true;
-
             show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
+            this.ResizeRedraw = true;
 
             comboBox1.SelectedIndex = 1;
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
@@ -1897,6 +1899,8 @@ namespace vcs_Draw1
 
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         void reset_bitmap1(int W, int H)
         {
