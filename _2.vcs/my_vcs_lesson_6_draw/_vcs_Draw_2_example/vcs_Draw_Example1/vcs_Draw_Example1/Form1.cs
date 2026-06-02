@@ -45,6 +45,8 @@ namespace vcs_Draw_Example1
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             int W = pictureBox1.ClientSize.Width;
             int H = pictureBox1.ClientSize.Height;
 
@@ -464,6 +466,8 @@ namespace vcs_Draw_Example1
             }
         }
         //繪製螞蟻線 SP
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -2410,299 +2414,13 @@ namespace vcs_Draw_Example1
             pictureBox1.Image = bitmap1;
         }
 
-        void DrawCircle(Graphics g, Pen p, int cx, int cy, int r)
-        {
-            g.DrawEllipse(p, cx - r, cy - r, r * 2, r * 2);
-        }
-
         private void button12_Click(object sender, EventArgs e)
         {
-            int W = 340;
-            int H = 543;
-            int x_st;
-            int y_st;
-            int w;
-            int h;
-
-            Graphics g;
-
-            //新建圖檔, 初始化畫布
-            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
-            pictureBox1.Image = bitmap1;
-
-            sb = new SolidBrush(Color.Red);
-            w = 30; h = 6; g.FillRectangle(sb, new Rectangle(0, 0, w, h));
-            w = 30; h = 6; g.FillRectangle(sb, new Rectangle(W - w, 0, w, h));
-            w = 30; h = 6; g.FillRectangle(sb, new Rectangle(0, H - h, w, h));
-            w = 30; h = 6; g.FillRectangle(sb, new Rectangle(W - w, H - h, w, h));
-
-            //door
-            x_st = 0; y_st = 6 + 205; w = 10; h = 88; g.DrawRectangle(new Pen(Color.Red), new Rectangle(x_st, y_st, w, h));
-
-            //window
-            x_st = W - 10; y_st = 6 + 66; w = 10; h = 205; g.DrawRectangle(new Pen(Color.Red), new Rectangle(x_st, y_st, w, h));
-
-            Font f;
-            f = new Font("Times New Roman", 14);
-            sb = new SolidBrush(Color.Black);
-            g.DrawString("205", f, sb, new PointF(0, 205 / 2));
-            g.DrawString("268", f, sb, new PointF(0, 573 - 6 - 268 + 268 / 2));
-            g.DrawString("66", f, sb, new PointF(W - 30, 66 / 2));
-            g.DrawString("290", f, sb, new PointF(W - 40, 573 - 6 - 290 + 290 / 2));
-
-            Pen p = new Pen(Color.Black, 5);
-            p.StartCap = LineCap.ArrowAnchor;
-            p.EndCap = LineCap.ArrowAnchor;  //EndCap設定 這支筆的結尾會是個箭頭
-
-            g.DrawLine(p, 0, H + 10, W, H + 10);
-            g.DrawLine(p, W + 10, 0, W + 10, H);
-            g.DrawString("340", f, sb, new PointF(W / 2, H + 15));
-            g.DrawString("573", f, sb, new PointF(W + 15, H / 2));
-
-            int dw;
-            int dh;
-
-            //draw desk
-            dw = 152;
-            dh = 78;
-
-            x_st = (W - dw) / 2;
-            //y_st = (H - dh) / 2;
-            y_st = 205 + 6 - dh;
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dw, dh));
-            //g.DrawEllipse(new Pen(Color.Red, 3), cx - r, cy - r, r * 2, r * 2);
-            int cx = W / 2;
-            int cy = 90;
-            int r = 30;
-            DrawCircle(g, new Pen(Color.Black), cx, cy, r);
-
-            /*
-            x_st = W - dh - 12;
-            y_st = 6 + 66 + 205;
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dh, dw));
-            g.DrawString("138", f, sb, new PointF(W + 15, H - 152 / 2));
-            */
-
-            //draw sofa
-            dw = 180;
-            dh = 86;
-            x_st = 0;
-            y_st = H - dh;
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dw, dh));
-            g.DrawString("180", f, sb, new PointF(180 / 2 - 10, H - 86));
-            g.DrawString("86", f, sb, new PointF(180, H - 86 / 2 - 10));
-
-            g.DrawRectangle(new Pen(Color.Red), new Rectangle(0, 0, W, H));
-            //p = new Pen(Color.Black, 1);
-            //g.DrawLine(p, 0, 0, W, H);
-            //g.DrawLine(p, W, 0, 0, H);
-
-            pictureBox1.Image = bitmap1;
-        }
-
-        void draw_bookshelf(Graphics g, int x_st, int y_st, int M, int N)
-        {
-            //M     //橫向
-            //N     //高
-            int i;
-            int j;
-            int d = 7;
-            int D = 28;
-            //int x_sp;
-            //int y_sp;
-            int w = 0;
-            int h = 0;
-
-            p = new Pen(Color.Black, 1);
-
-            w = M * D + (M + 1) * d;
-            h = N * D + (N + 1) * d;
-
-            //x_sp = x_st + M * D + (M + 1) * d;
-            //y_sp = y_st + N * D + (N + 1) * d;
-
-            for (i = 0; i <= M; i++)
-            {
-                g.DrawLine(p, x_st + i * (d + D), y_st, x_st + i * (d + D), y_st + h);
-                g.DrawLine(p, x_st + i * (d + D) + d, y_st, x_st + i * (d + D) + d, y_st + h);
-            }
-
-            for (j = 0; j <= N; j++)
-            {
-                g.DrawLine(p, x_st, y_st + j * (d + D), x_st + w, y_st + j * (d + D));
-                g.DrawLine(p, x_st, y_st + j * (d + D) + d, x_st + w, y_st + j * (d + D) + d);
-            }
 
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-            int W = 532;
-            int H = 543;
-            int x_st;
-            int y_st;
-            int w;
-            int h;
-
-            Graphics g;
-
-            //新建圖檔, 初始化畫布
-            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
-            pictureBox1.Image = bitmap1;
-
-            sb = new SolidBrush(Color.Red);
-            w = 30; h = 6; g.FillRectangle(sb, new Rectangle(0, 0, w, h));
-            w = 30; h = 6; g.FillRectangle(sb, new Rectangle(W - w, 0, w, h));
-            w = 30; h = 6; g.FillRectangle(sb, new Rectangle(0, H - h, w, h));
-            w = 30; h = 6; g.FillRectangle(sb, new Rectangle(W - w, H - h, w, h));
-
-            //door1
-            x_st = W - 10; y_st = 6 + 205; w = 10; h = 90; g.DrawRectangle(new Pen(Color.Red), new Rectangle(x_st, y_st, w, h));
-
-            //door2
-            x_st = W - 10; y_st = 6 + 205 + 90 + 12; w = 10; h = 75; g.DrawRectangle(new Pen(Color.Red), new Rectangle(x_st, y_st, w, h));
-
-            //window1
-            x_st = 0; y_st = 6 + 65; w = 10; h = 90; g.DrawRectangle(new Pen(Color.Red), new Rectangle(x_st, y_st, w, h));
-
-            //window2
-            x_st = 0; y_st = 6 + 65 + 90 + 126; w = 10; h = 200; g.DrawRectangle(new Pen(Color.Red), new Rectangle(x_st, y_st, w, h));
-
-            Font f;
-            f = new Font("Times New Roman", 14);
-            sb = new SolidBrush(Color.Black);
-            //g.DrawString("205", f, sb, new PointF(0, 205 / 2));
-            //g.DrawString("268", f, sb, new PointF(0, 573 - 6 - 268 + 268 / 2));
-            //g.DrawString("66", f, sb, new PointF(W - 30, 66 / 2));
-            //g.DrawString("290", f, sb, new PointF(W - 40, 573 - 6 - 290 + 290 / 2));
-
-            Pen p = new Pen(Color.Black, 5);
-            p.StartCap = LineCap.ArrowAnchor;
-            p.EndCap = LineCap.ArrowAnchor;  //EndCap設定 這支筆的結尾會是個箭頭
-
-            g.DrawLine(p, 0, H + 10, W, H + 10);
-            g.DrawLine(p, W + 10, 0, W + 10, H);
-            g.DrawString("532", f, sb, new PointF(W / 2, H + 15));
-            g.DrawString("573", f, sb, new PointF(W + 15, H / 2 + 100));
-
-            int dw;
-            int dh;
-
-            //draw desk
-            dw = 140;
-            dh = 78;
-
-            //x_st = (W - dw) / 2;
-            x_st = 30;
-            //y_st = (H - dh) / 2;
-            y_st = 6;
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dw, dh));
-            g.DrawString(dw.ToString(), f, sb, new PointF(x_st + dw / 3, y_st));
-            g.DrawString(dh.ToString(), f, sb, new PointF(x_st, dh / 2));
-
-
-            int cx = 30 + dw / 2;
-            int cy = dh + 50;
-            int r = 30;
-            DrawCircle(g, new Pen(Color.Black), cx, cy, r);
-
-            /*
-            x_st = W - dh - 12;
-            y_st = 6 + 66 + 205;
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dh, dw));
-            g.DrawString("138", f, sb, new PointF(W + 15, H - 152 / 2));
-            */
-
-            //draw sofa
-            dw = 190;
-            dh = 86;
-            x_st = W - dh;
-            //y_st = 6 + 205 - dw;
-            y_st = 6;
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dh, dw));
-            //g.DrawString("180", f, sb, new PointF(180 / 2 - 10, H - 86));
-            //g.DrawString("86", f, sb, new PointF(180, H - 86 / 2 - 10));
-
-            //draw bed
-            dw = 204;
-            dh = 225;
-            x_st = (W - dw) / 2;
-            //y_st = (6 + 205 + 90 + 12 + 75 + 183 + 6) - 225;
-            y_st = H - dh;
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dw, dh));
-
-            Bitmap bmp = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\__pic\BMW.jfif");
-
-            Rectangle destRect1 = new Rectangle(x_st + 12, y_st + 10, 180, 180);
-
-            float x = 0;
-            float y = 0;
-            float width = bmp.Width;
-            float height = bmp.Height;
-
-            GraphicsUnit units = GraphicsUnit.Pixel;
-            g.DrawImage(bmp, destRect1, x, y, width, height, units);
-
-            //draw pillow
-            dw = 204 - 50;
-            dh = 25;
-            x_st = (W - dw) / 2;
-            //y_st = (6 + 205 + 90 + 12 + 75 + 183 + 6) - 225;
-            y_st = H - dh;
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dw, dh));
-
-            //床頭櫃 dw=45,dh=45
-            dw = 60;
-            dh = 60;
-            x_st = (W - 204) / 2 - dw;
-            //y_st = (6 + 205 + 90 + 12 + 75 + 183 + 6) - 225;
-            y_st = H - dh;
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dw, dh));
-
-            x_st = (W + 204) / 2;
-            //y_st = (6 + 205 + 90 + 12 + 75 + 183 + 6) - 225;
-            y_st = H - dh;
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dw, dh));
-
-            //draw cabinet1  dw=147,dh=39
-            dw = 147;
-            dh = 39;
-            x_st = W - dw - 100;
-            y_st = 0;
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dw, dh));
-
-            //draw cabinet1  dw=112,dh=39
-            dw = 112;
-            dh = 39;
-            x_st = W - dw - 100 - 147;
-            y_st = 0;
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dw, dh));
-
-            //draw division  dw=200,dh=40
-            dw = 30 + 140;
-            dh = 40;
-            x_st = 0;
-            y_st = 220;
-            g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dw, dh));
-
-
-            draw_bookshelf(g, 560, 50, 3, 3);
-            draw_bookshelf(g, 560, 50 + 112, 3, 3);
-            draw_bookshelf(g, 560 + 112, 50, 4, 3);
-            draw_bookshelf(g, 560 + 112, 50 + 112, 4, 3);
-
-            //draw_bookshelf(600, 200, 5, 2);
-
-            g.DrawRectangle(new Pen(Color.Red), new Rectangle(0, 0, W, H));
-            //p = new Pen(Color.Black, 1);
-            //g.DrawLine(p, 0, 0, W, H);
-            //g.DrawLine(p, W, 0, 0, H);
-
-            pictureBox1.Image = bitmap1;
         }
 
         void open_test_file()
@@ -3230,21 +2948,16 @@ namespace vcs_Draw_Example1
 
         private void button17_Click(object sender, EventArgs e)
         {
-            pictureBox1.Size = new Size(268, 186);
+            pictureBox1.Size = new Size(250, 250);
+
             Font Var_Font = new Font("Arial", 12, FontStyle.Bold);//定義字符串的字體樣式
             Rectangle rect = new Rectangle(10, 10, 160, 160);//實例化Rectangle類
 
-            int tem_Line = 0;//記錄圓的直徑
+            int tem_Line = 250;//記錄圓的直徑
             int circularity_W = 4;//設置圓畫筆的粗細
-            if (pictureBox1.Width >= pictureBox1.Height)//如果pictureBox1控件的寬度大於等於高度
-            {
-                tem_Line = pictureBox1.Height;//設置高度為圓的直徑
-            }
-            else
-            {
-                tem_Line = pictureBox1.Width;//設置寬度為圓的直徑
-            }
-            rect = new Rectangle(circularity_W, circularity_W, tem_Line - circularity_W * 2, tem_Line - circularity_W * 2);//設置圓的繪製區域
+
+            rect = new Rectangle(circularity_W, circularity_W, tem_Line - circularity_W * 2 - 10, tem_Line - circularity_W * 2 - 10);//設置圓的繪製區域
+
             Font star_Font = new Font("Arial", 30, FontStyle.Regular);//設置星號的字體樣式
             string star_Str = "★";
             Graphics g = this.pictureBox1.CreateGraphics();//實例化Graphics類
@@ -7855,14 +7568,10 @@ namespace vcs_Draw_Example1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
 
 //arc
 //g.DrawArc(Pens.Red, 100, 100, 20, 10, -190, -160);
@@ -7959,3 +7668,4 @@ ddddd
 
             g.DrawString(header, new Font("宋體", 12, FontStyle.Bold), Brushes.Black, new Point(75, 10));
 */
+

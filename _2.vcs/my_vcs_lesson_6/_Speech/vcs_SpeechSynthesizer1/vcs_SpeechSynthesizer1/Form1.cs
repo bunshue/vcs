@@ -34,6 +34,8 @@ namespace vcs_SpeechSynthesizer1
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
 
             synth = new SpeechSynthesizer();
@@ -109,6 +111,8 @@ namespace vcs_SpeechSynthesizer1
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -396,3 +400,17 @@ namespace vcs_SpeechSynthesizer1
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

@@ -18,87 +18,6 @@ namespace vcs_SystemInfo
     public partial class Form1 : Form
     {
         //1、實體類
-        //***************BIOS
-        public class BIOSInfoEntity
-        {
-            //BIOS版本
-            private string strBIOSVersion = string.Empty;
-            /// <summary>
-            /// BIOS版本
-            /// </summary>
-            public string BIOSVersion
-            {
-                get { return strBIOSVersion; }
-                set { strBIOSVersion = value; }
-            }
-            //日期
-            private string strBIOSReleaseDate = string.Empty;
-            /// <summary>
-            /// 日期
-            /// </summary>
-            public string BIOSReleaseDate
-            {
-                get { return strBIOSReleaseDate; }
-                set { strBIOSReleaseDate = value; }
-            }
-            //SMBIOS
-            private string strSMBIOS = string.Empty;
-            /// <summary>
-            /// SMBIOS
-            /// </summary>
-            public string SMBIOS
-            {
-                get { return strSMBIOS; }
-                set { strSMBIOS = value; }
-            }
-        }
-
-        //*****************計算機系統信息
-        public class ComputerInfoEntity
-        {
-            //系統名稱:Name
-            private string strName = string.Empty;
-            /// <summary>
-            /// 系統名稱
-            /// </summary>
-            public string ComputerSystemName
-            {
-                get { return strName; }
-                set { strName = value; }
-            }
-            //系統制造商:Manufacturer
-            private string strManufacturer = string.Empty;
-            /// <summary>
-            /// 系統制造商
-            /// </summary>
-            public string ComputerManufacturer
-            {
-                get { return strManufacturer; }
-                set { strManufacturer = value; }
-            }
-
-            //系統模式:Model
-            private string strModel = string.Empty;
-            /// <summary>
-            /// 系統模式
-            /// </summary>
-            public string ComputerSystemModel
-            {
-                get { return strModel; }
-                set { strModel = value; }
-            }
-
-            //系統類型:SystemType
-            private string strType = string.Empty;
-            /// <summary>
-            /// 系統類型
-            /// </summary>
-            public string ComputerSystemType
-            {
-                get { return strType; }
-                set { strType = value; }
-            }
-        }
 
         //***************cpu信息
         public class CPUInfoEntity
@@ -287,70 +206,6 @@ namespace vcs_SystemInfo
             //#endregion
         }
 
-
-
-        //*********************內存信息
-        public class MemoryInfoEntity
-        {
-            //#region 總的物理內存
-            string strTotalVisibleMemorySize = string.Empty;  //總的物理內存
-            public string TotalVisibleMemorySize
-            {
-                get { return strTotalVisibleMemorySize; }
-                set { strTotalVisibleMemorySize = value; }
-            }
-            //#endregion
-
-            //#region 可用物理內存
-            string strFreePhysicalMemory = string.Empty;  //可用物理內存
-
-            public string FreePhysicalMemory
-            {
-                get { return strFreePhysicalMemory; }
-                set { strFreePhysicalMemory = value; }
-            }
-            //#endregion
-
-            //#region 總的虛擬內存
-            string strTotalVirtualMemorySize = string.Empty;  //總的虛擬內存
-
-            public string TotalVirtualMemorySize
-            {
-                get { return strTotalVirtualMemorySize; }
-                set { strTotalVirtualMemorySize = value; }
-            }
-            //#endregion
-
-            //#region 可用虛擬內存
-            string strFreeVirtualMemory = string.Empty;  //可用虛擬內存
-
-            public string FreeVirtualMemory
-            {
-                get { return strFreeVirtualMemory; }
-                set { strFreeVirtualMemory = value; }
-            }
-            //#endregion
-
-            //#region 頁面文件大小
-            string strSizeStoredInPagingFiles = string.Empty;  //頁面文件大小
-
-            public string SizeStoredInPagingFiles
-            {
-                get { return strSizeStoredInPagingFiles; }
-                set { strSizeStoredInPagingFiles = value; }
-            }
-            //#endregion
-
-            //#region 可用頁面文件大小
-            string strFreeSpaceInPagingFiles = string.Empty;
-
-            public string FreeSpaceInPagingFiles
-            {
-                get { return strFreeSpaceInPagingFiles; }
-                set { strFreeSpaceInPagingFiles = value; }
-            }
-            //#endregion
-        }
 
         //*****************系統信息
         public class SystemInfoEntity
@@ -560,6 +415,157 @@ namespace vcs_SystemInfo
             //#endregion
         }
 
+        //*****************計算機系統信息
+        public class ComputerInfoEntity
+        {
+            //系統名稱:Name
+            private string strName = string.Empty;
+            /// <summary>
+            /// 系統名稱
+            /// </summary>
+            public string ComputerSystemName
+            {
+                get { return strName; }
+                set { strName = value; }
+            }
+            //系統制造商:Manufacturer
+            private string strManufacturer = string.Empty;
+            /// <summary>
+            /// 系統制造商
+            /// </summary>
+            public string ComputerManufacturer
+            {
+                get { return strManufacturer; }
+                set { strManufacturer = value; }
+            }
+
+            //系統模式:Model
+            private string strModel = string.Empty;
+            /// <summary>
+            /// 系統模式
+            /// </summary>
+            public string ComputerSystemModel
+            {
+                get { return strModel; }
+                set { strModel = value; }
+            }
+
+            //系統類型:SystemType
+            private string strType = string.Empty;
+            /// <summary>
+            /// 系統類型
+            /// </summary>
+            public string ComputerSystemType
+            {
+                get { return strType; }
+                set { strType = value; }
+            }
+        }
+
+
+
+        //***************BIOS
+        public class BIOSInfoEntity
+        {
+            //BIOS版本
+            private string strBIOSVersion = string.Empty;
+            /// <summary>
+            /// BIOS版本
+            /// </summary>
+            public string BIOSVersion
+            {
+                get { return strBIOSVersion; }
+                set { strBIOSVersion = value; }
+            }
+            //日期
+            private string strBIOSReleaseDate = string.Empty;
+            /// <summary>
+            /// 日期
+            /// </summary>
+            public string BIOSReleaseDate
+            {
+                get { return strBIOSReleaseDate; }
+                set { strBIOSReleaseDate = value; }
+            }
+            //SMBIOS
+            private string strSMBIOS = string.Empty;
+            /// <summary>
+            /// SMBIOS
+            /// </summary>
+            public string SMBIOS
+            {
+                get { return strSMBIOS; }
+                set { strSMBIOS = value; }
+            }
+        }
+
+
+
+        //*********************內存信息
+        public class MemoryInfoEntity
+        {
+            //#region 總的物理內存
+            string strTotalVisibleMemorySize = string.Empty;  //總的物理內存
+            public string TotalVisibleMemorySize
+            {
+                get { return strTotalVisibleMemorySize; }
+                set { strTotalVisibleMemorySize = value; }
+            }
+            //#endregion
+
+            //#region 可用物理內存
+            string strFreePhysicalMemory = string.Empty;  //可用物理內存
+
+            public string FreePhysicalMemory
+            {
+                get { return strFreePhysicalMemory; }
+                set { strFreePhysicalMemory = value; }
+            }
+            //#endregion
+
+            //#region 總的虛擬內存
+            string strTotalVirtualMemorySize = string.Empty;  //總的虛擬內存
+
+            public string TotalVirtualMemorySize
+            {
+                get { return strTotalVirtualMemorySize; }
+                set { strTotalVirtualMemorySize = value; }
+            }
+            //#endregion
+
+            //#region 可用虛擬內存
+            string strFreeVirtualMemory = string.Empty;  //可用虛擬內存
+
+            public string FreeVirtualMemory
+            {
+                get { return strFreeVirtualMemory; }
+                set { strFreeVirtualMemory = value; }
+            }
+            //#endregion
+
+            //#region 頁面文件大小
+            string strSizeStoredInPagingFiles = string.Empty;  //頁面文件大小
+
+            public string SizeStoredInPagingFiles
+            {
+                get { return strSizeStoredInPagingFiles; }
+                set { strSizeStoredInPagingFiles = value; }
+            }
+            //#endregion
+
+            //#region 可用頁面文件大小
+            string strFreeSpaceInPagingFiles = string.Empty;
+
+            public string FreeSpaceInPagingFiles
+            {
+                get { return strFreeSpaceInPagingFiles; }
+                set { strFreeSpaceInPagingFiles = value; }
+            }
+            //#endregion
+        }
+
+
+
         //2、核心實現類
 
         //#region//獲取CPU參數
@@ -767,16 +773,13 @@ namespace vcs_SystemInfo
                         //計算
                         systemInfoList.FileSize = (FileSize / 1024 / 1024).ToString("#0.00") + "G";
                         systemInfoList.FileName = mObject["Name"].ToString();　　//頁面文件
-
                     }
-
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            //
             return systemInfoList;
         }
         //#endregion
@@ -801,7 +804,6 @@ namespace vcs_SystemInfo
                     ManagementClass mClass = new ManagementClass("Win32_BIOS");
                     //獲取Win32_Processor這個類的所有實例
                     moCollection = mClass.GetInstances();
-
                 }
                 //循環
                 if (moCollection != null)
@@ -810,23 +812,16 @@ namespace vcs_SystemInfo
 
                     foreach (ManagementObject mObject in moCollection)
                     {
-
-                        BIOSInfoList.BIOSReleaseDate = mObject["ReleaseDate"] == null ? string.Empty :
-                          getDateTimeFromDmtfDate(mObject["ReleaseDate"].ToString());　　//時間
-
+                        BIOSInfoList.BIOSReleaseDate = mObject["ReleaseDate"] == null ? string.Empty : getDateTimeFromDmtfDate(mObject["ReleaseDate"].ToString());　　//時間
                         BIOSInfoList.BIOSVersion = mObject["Manufacturer"].ToString();　　//Manufacturer
-
                         BIOSInfoList.SMBIOS = mObject["SMBIOSBIOSVersion"].ToString();　　//SMBIOSBIOSVersion
-
                     }
-
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            //
             return BIOSInfoList;
         }
         //#endregion
@@ -865,17 +860,13 @@ namespace vcs_SystemInfo
                         ComputerInfoList.ComputerManufacturer = mObject["Manufacturer"].ToString();//系統制造商
                         ComputerInfoList.ComputerSystemModel = mObject["Model"].ToString();//系統模式
                         ComputerInfoList.ComputerSystemType = mObject["SystemType"].ToString();//系統類型
-
-
                     }
-
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            //
             return ComputerInfoList;
         }
         //#endregion

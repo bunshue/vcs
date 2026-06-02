@@ -40,7 +40,7 @@
             // 
             this.button1.Location = new System.Drawing.Point(12, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(115, 48);
+            this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 0;
             this.button1.Text = "取得檔案圖標";
             this.button1.UseVisualStyleBackColor = true;
@@ -50,7 +50,7 @@
             // 
             this.button2.Location = new System.Drawing.Point(12, 86);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(115, 48);
+            this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 1;
             this.button2.Text = "顯示下一個檔案圖標";
             this.button2.UseVisualStyleBackColor = true;
@@ -58,6 +58,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(12, 162);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(128, 128);
@@ -77,9 +78,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(195, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(218, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(528, 515);
+            this.richTextBox1.Size = new System.Drawing.Size(505, 515);
             this.richTextBox1.TabIndex = 4;
             this.richTextBox1.Text = "";
             // 

@@ -9,8 +9,6 @@ using System.Windows.Forms;
 
 using System.Threading; //for Mutex
 
-//使用Mutex禁止程式重複啟動
-
 namespace vcs_Mutex
 {
     public partial class Form1 : Form
@@ -22,6 +20,7 @@ namespace vcs_Mutex
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //使用Mutex禁止程式重複啟動 ST
             bool Exist = false; //定義一個變量, 用來表示是否已經運行
             //建立一個Mutex
             Mutex mutex = new Mutex(true, "僅一次", out Exist);
@@ -34,6 +33,8 @@ namespace vcs_Mutex
                 MessageBox.Show("本程式禁止重複啟動", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
+            //使用Mutex禁止程式重複啟動 SP
         }
     }
 }
+

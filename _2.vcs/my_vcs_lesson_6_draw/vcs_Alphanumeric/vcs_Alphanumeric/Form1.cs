@@ -462,7 +462,7 @@ namespace vcs_Alphanumeric
             draw_alphanumeric0(g, str, size, forecolor, backcolor, x_st, y_st);
         }
 
-        void draw_alphanumeric0(Graphics g,string str, int size, Color forecolor, Color backcolor, int x_st, int y_st)
+        void draw_alphanumeric0(Graphics g, string str, int size, Color forecolor, Color backcolor, int x_st, int y_st)
         {
             bool[,] word = new bool[5, 7];
 
@@ -584,7 +584,7 @@ namespace vcs_Alphanumeric
             Color forecolor = Color.Red;
             Color backcolor = Color.Gray;
 
-            draw_alphanumeric0(g1,s1, size, forecolor, backcolor, x_st + dx * 0, y_st + dy * 0);
+            draw_alphanumeric0(g1, s1, size, forecolor, backcolor, x_st + dx * 0, y_st + dy * 0);
             draw_alphanumeric0(g1, s2, size, forecolor, backcolor, x_st + dx * 1, y_st + dy * 0);
             draw_alphanumeric0(g1, s3, size, forecolor, backcolor, x_st + dx * 2, y_st + dy * 0);
             draw_alphanumeric0(g1, s4, size, forecolor, backcolor, x_st + dx * 3, y_st + dy * 0);
@@ -649,7 +649,7 @@ namespace vcs_Alphanumeric
             int y_st = 20;
             int dx = size * 7 + 10;
 
-            draw_string(g1,str, size, forecolor, backcolor, x_st, y_st, dx);
+            draw_string(g1, str, size, forecolor, backcolor, x_st, y_st, dx);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -671,4 +671,3 @@ namespace vcs_Alphanumeric
         }
     }
 }
-

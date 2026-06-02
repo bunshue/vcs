@@ -178,6 +178,8 @@ namespace vcs_Speech_DotNetSpeech
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button1_Click(object sender, EventArgs e)
         {
             var text = "In compupting, a system call is the mechanism used by an application program to request service from the operating system.";
@@ -380,3 +382,17 @@ namespace vcs_Speech_DotNetSpeech
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
