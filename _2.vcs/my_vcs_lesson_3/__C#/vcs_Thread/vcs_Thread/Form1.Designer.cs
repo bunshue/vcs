@@ -117,9 +117,10 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(786, 324);
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(869, 474);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(71, 30);
+            this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 27;
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
@@ -127,7 +128,8 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(766, 282);
+            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.richTextBox1.Location = new System.Drawing.Point(849, 432);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 26;
@@ -140,16 +142,17 @@
             this.groupBox0.Controls.Add(this.button00);
             this.groupBox0.Location = new System.Drawing.Point(12, 13);
             this.groupBox0.Name = "groupBox0";
-            this.groupBox0.Size = new System.Drawing.Size(180, 180);
+            this.groupBox0.Size = new System.Drawing.Size(200, 200);
             this.groupBox0.TabIndex = 28;
             this.groupBox0.TabStop = false;
             this.groupBox0.Text = "Thread使用範例0";
             // 
             // button02
             // 
-            this.button02.Location = new System.Drawing.Point(23, 104);
+            this.button02.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button02.Location = new System.Drawing.Point(14, 130);
             this.button02.Name = "button02";
-            this.button02.Size = new System.Drawing.Size(90, 30);
+            this.button02.Size = new System.Drawing.Size(180, 50);
             this.button02.TabIndex = 2;
             this.button02.Text = "狀態";
             this.button02.UseVisualStyleBackColor = true;
@@ -157,9 +160,10 @@
             // 
             // button01
             // 
-            this.button01.Location = new System.Drawing.Point(23, 59);
+            this.button01.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button01.Location = new System.Drawing.Point(14, 78);
             this.button01.Name = "button01";
-            this.button01.Size = new System.Drawing.Size(90, 30);
+            this.button01.Size = new System.Drawing.Size(180, 50);
             this.button01.TabIndex = 1;
             this.button01.Text = "停止";
             this.button01.UseVisualStyleBackColor = true;
@@ -167,9 +171,10 @@
             // 
             // button00
             // 
-            this.button00.Location = new System.Drawing.Point(23, 21);
+            this.button00.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button00.Location = new System.Drawing.Point(14, 22);
             this.button00.Name = "button00";
-            this.button00.Size = new System.Drawing.Size(90, 30);
+            this.button00.Size = new System.Drawing.Size(180, 50);
             this.button00.TabIndex = 0;
             this.button00.Text = "啟動";
             this.button00.UseVisualStyleBackColor = true;
@@ -180,18 +185,19 @@
             this.groupBox1.Controls.Add(this.button12);
             this.groupBox1.Controls.Add(this.button11);
             this.groupBox1.Controls.Add(this.button10);
-            this.groupBox1.Location = new System.Drawing.Point(198, 12);
+            this.groupBox1.Location = new System.Drawing.Point(218, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(180, 180);
+            this.groupBox1.Size = new System.Drawing.Size(200, 200);
             this.groupBox1.TabIndex = 29;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thread使用範例1";
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(23, 104);
+            this.button12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button12.Location = new System.Drawing.Point(14, 131);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(90, 30);
+            this.button12.Size = new System.Drawing.Size(180, 50);
             this.button12.TabIndex = 2;
             this.button12.Text = "狀態";
             this.button12.UseVisualStyleBackColor = true;
@@ -199,9 +205,10 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(23, 59);
+            this.button11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button11.Location = new System.Drawing.Point(14, 77);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(90, 30);
+            this.button11.Size = new System.Drawing.Size(180, 50);
             this.button11.TabIndex = 1;
             this.button11.Text = "停止";
             this.button11.UseVisualStyleBackColor = true;
@@ -209,9 +216,10 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(23, 21);
+            this.button10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button10.Location = new System.Drawing.Point(14, 23);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(90, 30);
+            this.button10.Size = new System.Drawing.Size(180, 50);
             this.button10.TabIndex = 0;
             this.button10.Text = "啟動";
             this.button10.UseVisualStyleBackColor = true;
@@ -222,18 +230,19 @@
             this.groupBox2.Controls.Add(this.button22);
             this.groupBox2.Controls.Add(this.button21);
             this.groupBox2.Controls.Add(this.button20);
-            this.groupBox2.Location = new System.Drawing.Point(383, 12);
+            this.groupBox2.Location = new System.Drawing.Point(424, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(180, 180);
+            this.groupBox2.Size = new System.Drawing.Size(200, 200);
             this.groupBox2.TabIndex = 30;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thread使用範例2";
             // 
             // button22
             // 
-            this.button22.Location = new System.Drawing.Point(23, 104);
+            this.button22.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button22.Location = new System.Drawing.Point(14, 131);
             this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(90, 30);
+            this.button22.Size = new System.Drawing.Size(180, 50);
             this.button22.TabIndex = 2;
             this.button22.Text = "狀態";
             this.button22.UseVisualStyleBackColor = true;
@@ -241,9 +250,10 @@
             // 
             // button21
             // 
-            this.button21.Location = new System.Drawing.Point(23, 59);
+            this.button21.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button21.Location = new System.Drawing.Point(14, 79);
             this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(90, 30);
+            this.button21.Size = new System.Drawing.Size(180, 50);
             this.button21.TabIndex = 1;
             this.button21.Text = "停止";
             this.button21.UseVisualStyleBackColor = true;
@@ -251,9 +261,10 @@
             // 
             // button20
             // 
-            this.button20.Location = new System.Drawing.Point(23, 21);
+            this.button20.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button20.Location = new System.Drawing.Point(14, 23);
             this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(90, 30);
+            this.button20.Size = new System.Drawing.Size(180, 50);
             this.button20.TabIndex = 0;
             this.button20.Text = "啟動";
             this.button20.UseVisualStyleBackColor = true;
@@ -264,18 +275,19 @@
             this.groupBox3.Controls.Add(this.button32);
             this.groupBox3.Controls.Add(this.button31);
             this.groupBox3.Controls.Add(this.button30);
-            this.groupBox3.Location = new System.Drawing.Point(568, 13);
+            this.groupBox3.Location = new System.Drawing.Point(630, 13);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(180, 180);
+            this.groupBox3.Size = new System.Drawing.Size(200, 200);
             this.groupBox3.TabIndex = 30;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Thread使用範例3";
             // 
             // button32
             // 
-            this.button32.Location = new System.Drawing.Point(23, 104);
+            this.button32.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button32.Location = new System.Drawing.Point(14, 130);
             this.button32.Name = "button32";
-            this.button32.Size = new System.Drawing.Size(90, 30);
+            this.button32.Size = new System.Drawing.Size(180, 50);
             this.button32.TabIndex = 2;
             this.button32.Text = "狀態";
             this.button32.UseVisualStyleBackColor = true;
@@ -283,9 +295,10 @@
             // 
             // button31
             // 
-            this.button31.Location = new System.Drawing.Point(23, 59);
+            this.button31.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button31.Location = new System.Drawing.Point(14, 78);
             this.button31.Name = "button31";
-            this.button31.Size = new System.Drawing.Size(90, 30);
+            this.button31.Size = new System.Drawing.Size(180, 50);
             this.button31.TabIndex = 1;
             this.button31.Text = "停止";
             this.button31.UseVisualStyleBackColor = true;
@@ -293,9 +306,10 @@
             // 
             // button30
             // 
-            this.button30.Location = new System.Drawing.Point(23, 21);
+            this.button30.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button30.Location = new System.Drawing.Point(14, 22);
             this.button30.Name = "button30";
-            this.button30.Size = new System.Drawing.Size(90, 30);
+            this.button30.Size = new System.Drawing.Size(180, 50);
             this.button30.TabIndex = 0;
             this.button30.Text = "啟動";
             this.button30.UseVisualStyleBackColor = true;
@@ -306,18 +320,19 @@
             this.groupBox7.Controls.Add(this.button72);
             this.groupBox7.Controls.Add(this.button71);
             this.groupBox7.Controls.Add(this.button70);
-            this.groupBox7.Location = new System.Drawing.Point(568, 197);
+            this.groupBox7.Location = new System.Drawing.Point(630, 219);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(180, 180);
+            this.groupBox7.Size = new System.Drawing.Size(200, 200);
             this.groupBox7.TabIndex = 33;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Thread使用範例7";
             // 
             // button72
             // 
-            this.button72.Location = new System.Drawing.Point(23, 104);
+            this.button72.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button72.Location = new System.Drawing.Point(14, 131);
             this.button72.Name = "button72";
-            this.button72.Size = new System.Drawing.Size(90, 30);
+            this.button72.Size = new System.Drawing.Size(180, 50);
             this.button72.TabIndex = 2;
             this.button72.Text = "狀態";
             this.button72.UseVisualStyleBackColor = true;
@@ -325,9 +340,10 @@
             // 
             // button71
             // 
-            this.button71.Location = new System.Drawing.Point(23, 59);
+            this.button71.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button71.Location = new System.Drawing.Point(14, 75);
             this.button71.Name = "button71";
-            this.button71.Size = new System.Drawing.Size(90, 30);
+            this.button71.Size = new System.Drawing.Size(180, 50);
             this.button71.TabIndex = 1;
             this.button71.Text = "停止";
             this.button71.UseVisualStyleBackColor = true;
@@ -335,9 +351,10 @@
             // 
             // button70
             // 
-            this.button70.Location = new System.Drawing.Point(23, 21);
+            this.button70.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button70.Location = new System.Drawing.Point(14, 21);
             this.button70.Name = "button70";
-            this.button70.Size = new System.Drawing.Size(90, 30);
+            this.button70.Size = new System.Drawing.Size(180, 50);
             this.button70.TabIndex = 0;
             this.button70.Text = "啟動";
             this.button70.UseVisualStyleBackColor = true;
@@ -348,18 +365,19 @@
             this.groupBox6.Controls.Add(this.button62);
             this.groupBox6.Controls.Add(this.button61);
             this.groupBox6.Controls.Add(this.button60);
-            this.groupBox6.Location = new System.Drawing.Point(383, 196);
+            this.groupBox6.Location = new System.Drawing.Point(424, 218);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(180, 180);
+            this.groupBox6.Size = new System.Drawing.Size(200, 200);
             this.groupBox6.TabIndex = 34;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Thread使用範例6";
             // 
             // button62
             // 
-            this.button62.Location = new System.Drawing.Point(23, 104);
+            this.button62.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button62.Location = new System.Drawing.Point(14, 132);
             this.button62.Name = "button62";
-            this.button62.Size = new System.Drawing.Size(90, 30);
+            this.button62.Size = new System.Drawing.Size(180, 50);
             this.button62.TabIndex = 2;
             this.button62.Text = "狀態";
             this.button62.UseVisualStyleBackColor = true;
@@ -367,9 +385,10 @@
             // 
             // button61
             // 
-            this.button61.Location = new System.Drawing.Point(23, 59);
+            this.button61.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button61.Location = new System.Drawing.Point(14, 76);
             this.button61.Name = "button61";
-            this.button61.Size = new System.Drawing.Size(90, 30);
+            this.button61.Size = new System.Drawing.Size(180, 50);
             this.button61.TabIndex = 1;
             this.button61.Text = "停止";
             this.button61.UseVisualStyleBackColor = true;
@@ -377,9 +396,10 @@
             // 
             // button60
             // 
-            this.button60.Location = new System.Drawing.Point(23, 21);
+            this.button60.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button60.Location = new System.Drawing.Point(14, 22);
             this.button60.Name = "button60";
-            this.button60.Size = new System.Drawing.Size(90, 30);
+            this.button60.Size = new System.Drawing.Size(180, 50);
             this.button60.TabIndex = 0;
             this.button60.Text = "啟動";
             this.button60.UseVisualStyleBackColor = true;
@@ -390,18 +410,19 @@
             this.groupBox5.Controls.Add(this.button52);
             this.groupBox5.Controls.Add(this.button51);
             this.groupBox5.Controls.Add(this.button50);
-            this.groupBox5.Location = new System.Drawing.Point(198, 196);
+            this.groupBox5.Location = new System.Drawing.Point(218, 218);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(180, 180);
+            this.groupBox5.Size = new System.Drawing.Size(200, 200);
             this.groupBox5.TabIndex = 32;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Thread使用範例5";
             // 
             // button52
             // 
-            this.button52.Location = new System.Drawing.Point(23, 104);
+            this.button52.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button52.Location = new System.Drawing.Point(14, 132);
             this.button52.Name = "button52";
-            this.button52.Size = new System.Drawing.Size(90, 30);
+            this.button52.Size = new System.Drawing.Size(180, 50);
             this.button52.TabIndex = 2;
             this.button52.Text = "狀態";
             this.button52.UseVisualStyleBackColor = true;
@@ -409,9 +430,10 @@
             // 
             // button51
             // 
-            this.button51.Location = new System.Drawing.Point(23, 59);
+            this.button51.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button51.Location = new System.Drawing.Point(14, 76);
             this.button51.Name = "button51";
-            this.button51.Size = new System.Drawing.Size(90, 30);
+            this.button51.Size = new System.Drawing.Size(180, 50);
             this.button51.TabIndex = 1;
             this.button51.Text = "停止";
             this.button51.UseVisualStyleBackColor = true;
@@ -419,9 +441,10 @@
             // 
             // button50
             // 
-            this.button50.Location = new System.Drawing.Point(23, 21);
+            this.button50.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button50.Location = new System.Drawing.Point(14, 22);
             this.button50.Name = "button50";
-            this.button50.Size = new System.Drawing.Size(90, 30);
+            this.button50.Size = new System.Drawing.Size(180, 50);
             this.button50.TabIndex = 0;
             this.button50.Text = "啟動";
             this.button50.UseVisualStyleBackColor = true;
@@ -435,9 +458,9 @@
             this.groupBox4.Controls.Add(this.button41);
             this.groupBox4.Controls.Add(this.lb_R);
             this.groupBox4.Controls.Add(this.button40);
-            this.groupBox4.Location = new System.Drawing.Point(12, 197);
+            this.groupBox4.Location = new System.Drawing.Point(12, 219);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(180, 180);
+            this.groupBox4.Size = new System.Drawing.Size(200, 200);
             this.groupBox4.TabIndex = 31;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Thread使用範例4";
@@ -447,7 +470,7 @@
             this.lb_B.AutoSize = true;
             this.lb_B.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_B.ForeColor = System.Drawing.Color.Blue;
-            this.lb_B.Location = new System.Drawing.Point(103, 105);
+            this.lb_B.Location = new System.Drawing.Point(149, 141);
             this.lb_B.Name = "lb_B";
             this.lb_B.Size = new System.Drawing.Size(26, 24);
             this.lb_B.TabIndex = 18;
@@ -456,9 +479,10 @@
             // 
             // button42
             // 
-            this.button42.Location = new System.Drawing.Point(23, 104);
+            this.button42.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button42.Location = new System.Drawing.Point(14, 131);
             this.button42.Name = "button42";
-            this.button42.Size = new System.Drawing.Size(70, 30);
+            this.button42.Size = new System.Drawing.Size(120, 50);
             this.button42.TabIndex = 2;
             this.button42.Text = "狀態";
             this.button42.UseVisualStyleBackColor = true;
@@ -469,7 +493,7 @@
             this.lb_G.AutoSize = true;
             this.lb_G.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_G.ForeColor = System.Drawing.Color.Green;
-            this.lb_G.Location = new System.Drawing.Point(102, 65);
+            this.lb_G.Location = new System.Drawing.Point(148, 91);
             this.lb_G.Name = "lb_G";
             this.lb_G.Size = new System.Drawing.Size(27, 24);
             this.lb_G.TabIndex = 17;
@@ -478,9 +502,10 @@
             // 
             // button41
             // 
-            this.button41.Location = new System.Drawing.Point(23, 59);
+            this.button41.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button41.Location = new System.Drawing.Point(14, 75);
             this.button41.Name = "button41";
-            this.button41.Size = new System.Drawing.Size(70, 30);
+            this.button41.Size = new System.Drawing.Size(120, 50);
             this.button41.TabIndex = 1;
             this.button41.Text = "停止";
             this.button41.UseVisualStyleBackColor = true;
@@ -491,7 +516,7 @@
             this.lb_R.AutoSize = true;
             this.lb_R.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lb_R.ForeColor = System.Drawing.Color.Red;
-            this.lb_R.Location = new System.Drawing.Point(102, 29);
+            this.lb_R.Location = new System.Drawing.Point(149, 41);
             this.lb_R.Name = "lb_R";
             this.lb_R.Size = new System.Drawing.Size(26, 24);
             this.lb_R.TabIndex = 16;
@@ -500,9 +525,10 @@
             // 
             // button40
             // 
-            this.button40.Location = new System.Drawing.Point(23, 21);
+            this.button40.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button40.Location = new System.Drawing.Point(14, 19);
             this.button40.Name = "button40";
-            this.button40.Size = new System.Drawing.Size(70, 30);
+            this.button40.Size = new System.Drawing.Size(120, 50);
             this.button40.TabIndex = 0;
             this.button40.Text = "啟動";
             this.button40.UseVisualStyleBackColor = true;
@@ -515,18 +541,19 @@
             this.groupBox8.Controls.Add(this.button82);
             this.groupBox8.Controls.Add(this.button81a);
             this.groupBox8.Controls.Add(this.button80a);
-            this.groupBox8.Location = new System.Drawing.Point(12, 379);
+            this.groupBox8.Location = new System.Drawing.Point(12, 421);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(180, 180);
+            this.groupBox8.Size = new System.Drawing.Size(200, 200);
             this.groupBox8.TabIndex = 34;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Thread使用範例8";
             // 
             // button81b
             // 
-            this.button81b.Location = new System.Drawing.Point(84, 59);
+            this.button81b.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button81b.Location = new System.Drawing.Point(107, 73);
             this.button81b.Name = "button81b";
-            this.button81b.Size = new System.Drawing.Size(50, 30);
+            this.button81b.Size = new System.Drawing.Size(80, 50);
             this.button81b.TabIndex = 4;
             this.button81b.Text = "停止B";
             this.button81b.UseVisualStyleBackColor = true;
@@ -534,9 +561,10 @@
             // 
             // button80b
             // 
-            this.button80b.Location = new System.Drawing.Point(84, 21);
+            this.button80b.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button80b.Location = new System.Drawing.Point(107, 21);
             this.button80b.Name = "button80b";
-            this.button80b.Size = new System.Drawing.Size(50, 30);
+            this.button80b.Size = new System.Drawing.Size(80, 50);
             this.button80b.TabIndex = 3;
             this.button80b.Text = "啟動B";
             this.button80b.UseVisualStyleBackColor = true;
@@ -544,9 +572,10 @@
             // 
             // button82
             // 
-            this.button82.Location = new System.Drawing.Point(23, 104);
+            this.button82.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button82.Location = new System.Drawing.Point(23, 136);
             this.button82.Name = "button82";
-            this.button82.Size = new System.Drawing.Size(90, 30);
+            this.button82.Size = new System.Drawing.Size(120, 50);
             this.button82.TabIndex = 2;
             this.button82.Text = "狀態";
             this.button82.UseVisualStyleBackColor = true;
@@ -554,9 +583,10 @@
             // 
             // button81a
             // 
-            this.button81a.Location = new System.Drawing.Point(23, 59);
+            this.button81a.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button81a.Location = new System.Drawing.Point(23, 73);
             this.button81a.Name = "button81a";
-            this.button81a.Size = new System.Drawing.Size(50, 30);
+            this.button81a.Size = new System.Drawing.Size(80, 50);
             this.button81a.TabIndex = 1;
             this.button81a.Text = "停止A";
             this.button81a.UseVisualStyleBackColor = true;
@@ -564,9 +594,10 @@
             // 
             // button80a
             // 
+            this.button80a.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button80a.Location = new System.Drawing.Point(23, 21);
             this.button80a.Name = "button80a";
-            this.button80a.Size = new System.Drawing.Size(50, 30);
+            this.button80a.Size = new System.Drawing.Size(80, 50);
             this.button80a.TabIndex = 0;
             this.button80a.Text = "啟動A";
             this.button80a.UseVisualStyleBackColor = true;
@@ -583,18 +614,19 @@
             this.groupBox9.Controls.Add(this.button92);
             this.groupBox9.Controls.Add(this.button91);
             this.groupBox9.Controls.Add(this.button90);
-            this.groupBox9.Location = new System.Drawing.Point(198, 379);
+            this.groupBox9.Location = new System.Drawing.Point(218, 421);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(180, 180);
+            this.groupBox9.Size = new System.Drawing.Size(200, 200);
             this.groupBox9.TabIndex = 33;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Thread使用範例9";
             // 
             // button92
             // 
-            this.button92.Location = new System.Drawing.Point(23, 104);
+            this.button92.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button92.Location = new System.Drawing.Point(14, 144);
             this.button92.Name = "button92";
-            this.button92.Size = new System.Drawing.Size(90, 30);
+            this.button92.Size = new System.Drawing.Size(180, 50);
             this.button92.TabIndex = 2;
             this.button92.Text = "狀態";
             this.button92.UseVisualStyleBackColor = true;
@@ -602,9 +634,10 @@
             // 
             // button91
             // 
-            this.button91.Location = new System.Drawing.Point(23, 59);
+            this.button91.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button91.Location = new System.Drawing.Point(14, 88);
             this.button91.Name = "button91";
-            this.button91.Size = new System.Drawing.Size(90, 30);
+            this.button91.Size = new System.Drawing.Size(180, 50);
             this.button91.TabIndex = 1;
             this.button91.Text = "停止";
             this.button91.UseVisualStyleBackColor = true;
@@ -612,9 +645,10 @@
             // 
             // button90
             // 
-            this.button90.Location = new System.Drawing.Point(23, 21);
+            this.button90.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button90.Location = new System.Drawing.Point(14, 32);
             this.button90.Name = "button90";
-            this.button90.Size = new System.Drawing.Size(90, 30);
+            this.button90.Size = new System.Drawing.Size(180, 50);
             this.button90.TabIndex = 0;
             this.button90.Text = "啟動";
             this.button90.UseVisualStyleBackColor = true;
@@ -629,9 +663,9 @@
             this.groupBox11.Controls.Add(this.label2);
             this.groupBox11.Controls.Add(this.label4);
             this.groupBox11.Controls.Add(this.label3);
-            this.groupBox11.Location = new System.Drawing.Point(12, 564);
+            this.groupBox11.Location = new System.Drawing.Point(839, 226);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(374, 88);
+            this.groupBox11.Size = new System.Drawing.Size(198, 148);
             this.groupBox11.TabIndex = 35;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "時鐘";
@@ -639,7 +673,7 @@
             // bt_clock_sp
             // 
             this.bt_clock_sp.Font = new System.Drawing.Font("新細明體", 14F);
-            this.bt_clock_sp.Location = new System.Drawing.Point(281, 22);
+            this.bt_clock_sp.Location = new System.Drawing.Point(100, 84);
             this.bt_clock_sp.Name = "bt_clock_sp";
             this.bt_clock_sp.Size = new System.Drawing.Size(70, 56);
             this.bt_clock_sp.TabIndex = 9;
@@ -650,7 +684,7 @@
             // bt_clock_st
             // 
             this.bt_clock_st.Font = new System.Drawing.Font("新細明體", 14F);
-            this.bt_clock_st.Location = new System.Drawing.Point(197, 21);
+            this.bt_clock_st.Location = new System.Drawing.Point(16, 83);
             this.bt_clock_st.Name = "bt_clock_st";
             this.bt_clock_st.Size = new System.Drawing.Size(70, 56);
             this.bt_clock_st.TabIndex = 8;
@@ -710,9 +744,9 @@
             // 
             this.groupBox12.Controls.Add(this.lb_cpu2);
             this.groupBox12.Controls.Add(this.panel1);
-            this.groupBox12.Location = new System.Drawing.Point(766, 12);
+            this.groupBox12.Location = new System.Drawing.Point(837, 12);
             this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(133, 264);
+            this.groupBox12.Size = new System.Drawing.Size(200, 200);
             this.groupBox12.TabIndex = 34;
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "CPU使用率";
@@ -764,27 +798,29 @@
             // 
             this.groupBox10.Controls.Add(this.button101);
             this.groupBox10.Controls.Add(this.button100);
-            this.groupBox10.Location = new System.Drawing.Point(383, 379);
+            this.groupBox10.Location = new System.Drawing.Point(424, 421);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(180, 180);
+            this.groupBox10.Size = new System.Drawing.Size(200, 200);
             this.groupBox10.TabIndex = 34;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Thread使用範例10";
             // 
             // button101
             // 
+            this.button101.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button101.Location = new System.Drawing.Point(23, 104);
             this.button101.Name = "button101";
-            this.button101.Size = new System.Drawing.Size(90, 30);
+            this.button101.Size = new System.Drawing.Size(120, 51);
             this.button101.TabIndex = 1;
             this.button101.UseVisualStyleBackColor = true;
             this.button101.Click += new System.EventHandler(this.button101_Click);
             // 
             // button100
             // 
+            this.button100.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button100.Location = new System.Drawing.Point(23, 21);
             this.button100.Name = "button100";
-            this.button100.Size = new System.Drawing.Size(90, 68);
+            this.button100.Size = new System.Drawing.Size(132, 68);
             this.button100.TabIndex = 0;
             this.button100.Text = "定時檢測子線程是否已經完成";
             this.button100.UseVisualStyleBackColor = true;
@@ -795,18 +831,19 @@
             this.groupBox13.Controls.Add(this.button112);
             this.groupBox13.Controls.Add(this.button111);
             this.groupBox13.Controls.Add(this.button110);
-            this.groupBox13.Location = new System.Drawing.Point(568, 379);
+            this.groupBox13.Location = new System.Drawing.Point(630, 421);
             this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(180, 180);
+            this.groupBox13.Size = new System.Drawing.Size(200, 200);
             this.groupBox13.TabIndex = 34;
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "Thread使用範例11";
             // 
             // button112
             // 
-            this.button112.Location = new System.Drawing.Point(23, 104);
+            this.button112.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button112.Location = new System.Drawing.Point(14, 144);
             this.button112.Name = "button112";
-            this.button112.Size = new System.Drawing.Size(90, 30);
+            this.button112.Size = new System.Drawing.Size(180, 50);
             this.button112.TabIndex = 2;
             this.button112.Text = "狀態";
             this.button112.UseVisualStyleBackColor = true;
@@ -814,18 +851,20 @@
             // 
             // button111
             // 
-            this.button111.Location = new System.Drawing.Point(23, 59);
+            this.button111.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button111.Location = new System.Drawing.Point(14, 84);
             this.button111.Name = "button111";
-            this.button111.Size = new System.Drawing.Size(90, 30);
+            this.button111.Size = new System.Drawing.Size(180, 50);
             this.button111.TabIndex = 1;
             this.button111.UseVisualStyleBackColor = true;
             this.button111.Click += new System.EventHandler(this.button111_Click);
             // 
             // button110
             // 
-            this.button110.Location = new System.Drawing.Point(23, 21);
+            this.button110.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button110.Location = new System.Drawing.Point(14, 28);
             this.button110.Name = "button110";
-            this.button110.Size = new System.Drawing.Size(90, 30);
+            this.button110.Size = new System.Drawing.Size(180, 50);
             this.button110.TabIndex = 0;
             this.button110.Text = "啟動";
             this.button110.UseVisualStyleBackColor = true;
@@ -835,7 +874,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(928, 659);
+            this.ClientSize = new System.Drawing.Size(1090, 696);
             this.Controls.Add(this.groupBox13);
             this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.groupBox12);

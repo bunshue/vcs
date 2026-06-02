@@ -38,7 +38,6 @@
             this.bt_open2 = new System.Windows.Forms.Button();
             this.bt_font = new System.Windows.Forms.Button();
             this.bt_clear2 = new System.Windows.Forms.Button();
-            this.richTextBox_rtf = new System.Windows.Forms.RichTextBox();
             this.bt_save2 = new System.Windows.Forms.Button();
             this.lb_richtextbox1 = new System.Windows.Forms.Label();
             this.lb_richtextbox2 = new System.Windows.Forms.Label();
@@ -104,7 +103,6 @@
             this.button0 = new System.Windows.Forms.Button();
             this.lb_richtextbox_lines = new System.Windows.Forms.Label();
             this.richTextBox_lines = new System.Windows.Forms.RichTextBox();
-            this.lb_richtextbox_rtf = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -183,15 +181,6 @@
             this.bt_clear2.Text = "clear";
             this.bt_clear2.UseVisualStyleBackColor = true;
             this.bt_clear2.Click += new System.EventHandler(this.bt_clear2_Click);
-            // 
-            // richTextBox_rtf
-            // 
-            this.richTextBox_rtf.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox_rtf.Location = new System.Drawing.Point(524, 533);
-            this.richTextBox_rtf.Name = "richTextBox_rtf";
-            this.richTextBox_rtf.Size = new System.Drawing.Size(100, 100);
-            this.richTextBox_rtf.TabIndex = 89;
-            this.richTextBox_rtf.Text = "";
             // 
             // bt_save2
             // 
@@ -765,7 +754,6 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(200, 60);
             this.button19.TabIndex = 47;
-            this.button19.Text = "讀寫RTF檔";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -896,16 +884,6 @@
             this.richTextBox_lines.TabIndex = 135;
             this.richTextBox_lines.Text = "";
             // 
-            // lb_richtextbox_rtf
-            // 
-            this.lb_richtextbox_rtf.AutoSize = true;
-            this.lb_richtextbox_rtf.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_richtextbox_rtf.Location = new System.Drawing.Point(413, 365);
-            this.lb_richtextbox_rtf.Name = "lb_richtextbox_rtf";
-            this.lb_richtextbox_rtf.Size = new System.Drawing.Size(154, 21);
-            this.lb_richtextbox_rtf.TabIndex = 102;
-            this.lb_richtextbox_rtf.Text = "lb_richtextbox_rtf";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -939,11 +917,9 @@
             this.Controls.Add(this.lb_richtextbox1_fx2);
             this.Controls.Add(this.lb_richtextbox1_fx1);
             this.Controls.Add(this.lb_richtextbox1_text);
-            this.Controls.Add(this.lb_richtextbox_rtf);
             this.Controls.Add(this.lb_richtextbox2);
             this.Controls.Add(this.lb_richtextbox1);
             this.Controls.Add(this.bt_save2);
-            this.Controls.Add(this.richTextBox_rtf);
             this.Controls.Add(this.bt_clear2);
             this.Controls.Add(this.bt_font);
             this.Controls.Add(this.bt_open2);
@@ -993,7 +969,6 @@
         private System.Windows.Forms.Button bt_open2;
         private System.Windows.Forms.Button bt_font;
         private System.Windows.Forms.Button bt_clear2;
-        private System.Windows.Forms.RichTextBox richTextBox_rtf;
         private System.Windows.Forms.Button bt_save2;
         private System.Windows.Forms.Label lb_richtextbox1;
         private System.Windows.Forms.Label lb_richtextbox2;
@@ -1059,7 +1034,6 @@
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.Label lb_richtextbox_lines;
         private System.Windows.Forms.RichTextBox richTextBox_lines;
-        private System.Windows.Forms.Label lb_richtextbox_rtf;
     }
 }
 

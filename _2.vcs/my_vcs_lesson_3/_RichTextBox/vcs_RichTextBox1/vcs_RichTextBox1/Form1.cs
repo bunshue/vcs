@@ -23,6 +23,8 @@ namespace vcs_RichTextBox1
         {
             show_item_location();
 
+            //6060
+
             show_richtextbox_font();
 
             //RichTextBox 字數統計
@@ -126,10 +128,6 @@ namespace vcs_RichTextBox1
             richTextBox2.Size = new Size(350, 160);
             richTextBox2.Location = new Point(x_st + dx * 2, y_st + dy * 6 + 40 + dd);
 
-            lb_richtextbox_rtf.Location = new Point(x_st + dx * 4 - 60, y_st + dy * 6 + 40);
-            richTextBox_rtf.Size = new Size(350, 340);
-            richTextBox_rtf.Location = new Point(x_st + dx * 4 - 60, y_st + dy * 6 + 40 + dd);
-
             lb_richtextbox_lines.Location = new Point(x_st + dx * 2, y_st + dy * 8 + 86);
             richTextBox_lines.Size = new Size(350, 160);
             richTextBox_lines.Location = new Point(x_st + dx * 2, y_st + dy * 8 + 86 + dd);
@@ -156,7 +154,6 @@ namespace vcs_RichTextBox1
 
             lb_richtextbox1.Text = "richTextBox1";
             lb_richtextbox2.Text = "richTextBox2 message";
-            lb_richtextbox_rtf.Text = "讀寫RTF檔";
             lb_richtextbox1_text.Text = "抓出游標所指的字";
 
             this.Size = new Size(1800, 890);
@@ -566,76 +563,6 @@ namespace vcs_RichTextBox1
 
         private void button19_Click(object sender, EventArgs e)
         {
-            //讀寫RTF檔
-
-            //富文字格式（Rich Text Format）即RTF格式，又稱多文字格式
-
-            string rtf_filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf\text.rtf";
-            //string rtf_filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf\SAMPO(PA63)變頻分離式室外機功能規格書_2014.08.18doc.rtf";
-
-            richTextBox_rtf.LoadFile(rtf_filename);
-
-            //另存RTF檔
-            rtf_filename = "tmp_rtf_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".rtf";
-            richTextBox_rtf.SaveFile(rtf_filename);
-            //richTextBox_rtf.SaveFile(rtf_filename, RichTextBoxStreamType.RichText);
-            richTextBox2.Text += "已存檔 : " + rtf_filename + "\n";
-
-            /*
-            //開啟 .rtf 檔 至 RTB
-            rtxtShow.LoadFile("../../../Demo01.rtf");
-            //取得載入檔案的總字串長度
-            int result = rtxtShow.TextLength;
-            richTextBox1.Text += "字串長度 : " + result.ToString() + "\n";
-
-            //將 RTB 儲存至 .rtf 檔
-            rtxtShow.SaveFile("../../../tmp_Change.rtf", RichTextBoxStreamType.RichText);
-            int result = rtxtShow.TextLength;
-            richTextBox1.Text += "字串長度 : " + result.ToString() + "\n";
-
-            rtxtShow.LoadFile("../../../Demo01.rtf");
-            rtxtShow.SaveFile("tmp_Demo02.rtf");
-            */
-
-            // 將test.rtf檔的內容載入到richTextBox1豐富文字方塊內
-            // richTextBox1.LoadFile("../../../GOTOP.rtf", RichTextBoxStreamType.RichText);
-
-            // 將test.rtf檔的內容載入到richTextBox1豐富文字方塊內
-            richTextBox1.LoadFile("GOTOP.rtf", RichTextBoxStreamType.RichText);
-
-            // 將richTextBox1豐富文字方塊內的資料儲存到test.rtf檔
-            richTextBox1.SaveFile("GOTOP.rtf", RichTextBoxStreamType.RichText);
-
-            // 將richTextBox1豐富文字方塊內的資料儲存到test.rtf檔
-            // richTextBox1.SaveFile("tmp_GOTOP.rtf", RichTextBoxStreamType.RichText);
-
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_rtf\VS2013Express.rtf";
-
-            /*
-            RTB load rtf 檔
-            openFileDialog1.DefaultExt = "*.rtf";
-            openFileDialog1.Filter = "RTF檔|*.rtf";
-
-            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK && openFileDialog1.FileName.Length > 0)
-            {
-                richTextBox1.LoadFile(openFileDialog1.FileName);
-            }
-
-            saveFileDialog1.Filter = "RTF檔|*.rtf";
-
-            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK && saveFileDialog1.FileName.Length > 0)
-            {
-                richTextBox1.SaveFile(saveFileDialog1.FileName);
-            }
-
-            saveFileDialog1.Filter = "RTF檔|*.rtf";
-
-            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK && saveFileDialog1.FileName.Length > 0)
-            {
-                richTextBox1.LoadFile(saveFileDialog1.FileName, RichTextBoxStreamType.PlainText);
-            }
-            */
-            //------------------------------------------------------------  # 60個
         }
 
         private void button20_Click(object sender, EventArgs e)

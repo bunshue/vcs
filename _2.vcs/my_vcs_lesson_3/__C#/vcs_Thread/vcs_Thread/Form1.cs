@@ -7,10 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Threading;   //匯入多執行緒功能函數
-using System.Diagnostics;   //for Process
-
-using System.Timers;    //for ElapsedEventHandler
+using System.Threading;  // 匯入多執行緒功能函數
+using System.Diagnostics;  // for Process
+using System.Timers;  // for ElapsedEventHandler
 
 namespace vcs_Thread
 {
@@ -19,8 +18,6 @@ namespace vcs_Thread
 
     public partial class Form1 : Form
     {
-        private const int BORDER = 10;
-
         private Thread thread_ex0;
         static Thread thread_ex2a = null;
         static Thread thread_ex2b = null;
@@ -126,15 +123,15 @@ namespace vcs_Thread
         {
             int W = 640;
             int H = 480;
-            int x_st = BORDER;
-            int y_st = BORDER;
+            int x_st = 10;
+            int y_st = 10;
             int dx = 140 + 50;
             int dy = 50 + 15;
 
-            W = 180;
-            H = 180;
-            dx = W + BORDER;
-            dy = H + BORDER;
+            W = 200;
+            H = 220;
+            dx = W + 10;
+            dy = H + 10;
 
             groupBox0.Size = new Size(W, H);
             groupBox1.Size = new Size(W, H);
@@ -148,7 +145,7 @@ namespace vcs_Thread
             groupBox9.Size = new Size(W, H);
             groupBox10.Size = new Size(W, H);
             groupBox13.Size = new Size(W, H);
-            groupBox12.Size = new Size(W * 2 / 3, H + 40);
+            groupBox12.Size = new Size(W, H);
 
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
@@ -163,17 +160,18 @@ namespace vcs_Thread
             groupBox9.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             groupBox10.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             groupBox13.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            groupBox11.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            richTextBox1.Size = new Size(370, 690);
-            richTextBox1.Location = new Point(x_st + dx * 4 + 130, y_st + dy * 0);
+            groupBox11.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+
+            richTextBox1.Size = new Size(400, 690);
+            richTextBox1.Location = new Point(x_st + dx * 6 - 100, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            x_st = BORDER * 2;
-            y_st = BORDER * 2;
-            W = 90;
-            H = 30;
-            dx = W + BORDER;
-            dy = H + BORDER;
+            x_st = 10;
+            y_st = 20;
+            W = 180;
+            H = 50;
+            dx = W + 10;
+            dy = H + 10;
             button00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -200,16 +198,19 @@ namespace vcs_Thread
             button72.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button80a.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button81a.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button80b.Location = new Point(x_st + dx * 0 + 50 + 10, y_st + dy * 0);
-            button81b.Location = new Point(x_st + dx * 0 + 50 + 10, y_st + dy * 1);
+            button80b.Location = new Point(x_st + dx * 0 + 90, y_st + dy * 0);
+            button81b.Location = new Point(x_st + dx * 0 + 90, y_st + dy * 1);
             button82.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button90.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button91.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button92.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button100.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button101.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            lb_R.Location = new Point(x_st + dx * 0 + 130, y_st + dy * 0);
+            lb_G.Location = new Point(x_st + dx * 0 + 130, y_st + dy * 1);
+            lb_B.Location = new Point(x_st + dx * 0 + 130, y_st + dy * 2);
 
-            this.Size = new Size(1300, 750);
+            this.Size = new Size(1600, 750);
             this.Text = "vcs_Thread";
 
             //設定執行後的表單起始位置, 正中央
@@ -542,7 +543,6 @@ namespace vcs_Thread
             lb_G.Text = _G.ToString();
             lb_B.Text = _B.ToString();
         }
-
 
         //Thread使用範例4 SP
 
@@ -1181,7 +1181,7 @@ namespace vcs_Thread
                     form.Invoke(new Form1.InvokeFunction(form.setTime), new object[] { h, m, s });
                 }
                 //一秒執行一次
-                System.Threading.Thread.Sleep(1000);//停一秒
+                Thread.Sleep(1000);//停一秒
             }
         }
     }
@@ -1237,14 +1237,9 @@ namespace vcs_Thread
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-//1515
-//---------------  # 15個
-
-
 /*  可搬出
 
 */
-
 
 
 /*
@@ -1255,6 +1250,45 @@ Thread.Sleep(1000); //停一秒
 //richTextBox1.Text += "XX ";
 Console.Write("XX ");
 
+//------------------------------------------------------------  # 60個
+
+程式只能同時運行一個  在Form1_Load加入:
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            bool Exist;//定義一個bool變量 用來表示是否已經運行
+            //創建Mutex互斥對象
+            System.Threading.Mutex newMutex = new System.Threading.Mutex(true, "僅一次", out Exist);
+            if (Exist)//如果沒有運行
+            {
+                newMutex.ReleaseMutex();//運行新窗体
+            }
+            else
+            {
+                MessageBox.Show("本程式一次只能運行一個實例！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);//彈出提示信息
+                this.Close();//關閉當前窗体
+            }
+
+        }
+
+//------------------------------------------------------------  # 60個
+
+主程式持續進行，開啟thread做一些事，thread做事時，主程式依舊不耽擱
+
+thread工作型態
+1. 建立一個thread，讓他無限迴圈地等待做一件事，直到外面叫他停止		印表機、
+2. 建立一個thread，只做一件事，做完即結束				去搬便當、
+
+停止 thread 的3個方法
+1. 強制停止 .Abort()
+2. 使用 flag 讓 thread 中斷運行
+3. 事情做完 thread即停止
+
+//無限迴圈
+richTextBox1.Text += "0";
+Thread.Sleep(500);
+
+//------------------------------------------------------------  # 60個
+
 
 */
-
