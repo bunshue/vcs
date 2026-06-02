@@ -23,6 +23,10 @@ namespace vcs_Draw3E
         float Tension = 0; // 張力 0 ~ 1
         float Tension_D = 0.05f; // 張力增減值
 
+        List<Point> Points1 = new List<Point>();
+        List<Point> Points2 = new List<Point>();
+        float Tension0b = 0.5f;
+
         public Form1()
         {
             InitializeComponent();
@@ -31,6 +35,20 @@ namespace vcs_Draw3E
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
+            Points1.Clear();
+            Points1.Add(new Point(20, 100));
+            Points1.Add(new Point(20, 150));
+            Points1.Add(new Point(100, 150));
+            Points1.Add(new Point(100, 100));
+
+            Points2.Clear();
+            Points2.Add(new Point(150, 50));
+            Points2.Add(new Point(150, 150));
+            Points2.Add(new Point(220, 150));
+            Points2.Add(new Point(220, 50));
         }
 
         void show_item_location()
@@ -180,6 +198,44 @@ namespace vcs_Draw3E
             {
                 e.Graphics.DrawEllipse(Pens.Black, pt[i].X - 2, pt[i].Y - 2, 4, 4);
             }
+
+            //------------------------------------------------------------  # 60個
+
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+            // Draw the points.
+            foreach (Point point in Points1)
+            {
+                e.Graphics.FillEllipse(Brushes.Black, point.X - 3, point.Y - 3, 5, 5);
+            }
+
+            if (Points1.Count < 2)
+            {
+                return;
+            }
+
+            e.Graphics.DrawCurve(Pens.Red, Points1.ToArray(), Tension0b);
+
+            //------------------------------------------------------------  # 60個
+
+            foreach (Point point in Points2)
+            {
+                e.Graphics.FillEllipse(Brushes.Black, point.X - 3, point.Y - 3, 5, 5);
+            }
+
+            if (Points2.Count < 2)
+            {
+                return;
+            }
+
+            using (Pen pen = new Pen(Color.Red))
+            {
+                for (int t = 0; t <= 20; t += 2)
+                {
+                    pen.Color = Color.FromArgb(255 * t / 20, 0, 255 - 255 * t / 20);
+                    e.Graphics.DrawCurve(pen, Points2.ToArray(), t / 10f);
+                }
+            }
         }
 
         private void timer0_Tick(object sender, EventArgs e)
@@ -189,6 +245,11 @@ namespace vcs_Draw3E
             {
                 Tension0 = 0;
             }
+
+            Tension0b += 1.0f;
+            if (Tension0b > 5.0f)
+                Tension0b = 0;
+
             this.pictureBox0.Invalidate();
         }
 
@@ -375,11 +436,7 @@ namespace vcs_Draw3E
         {
         }
 
-
-
-
-
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private int RetrievRandomCorners(int minCorners, int maxCorners)
         {
@@ -545,18 +602,12 @@ namespace vcs_Draw3E
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-//1515
-//---------------  # 15個
-
-
 /*  可搬出
 
 */
-
 

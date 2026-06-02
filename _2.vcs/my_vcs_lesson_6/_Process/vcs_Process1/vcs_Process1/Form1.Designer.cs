@@ -494,6 +494,7 @@
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(200, 60);
             this.button36.TabIndex = 37;
+            this.button36.Text = "Process";
             this.button36.UseVisualStyleBackColor = true;
             this.button36.Click += new System.EventHandler(this.button36_Click);
             // 
@@ -504,6 +505,7 @@
             this.button37.Name = "button37";
             this.button37.Size = new System.Drawing.Size(200, 60);
             this.button37.TabIndex = 38;
+            this.button37.Text = "test";
             this.button37.UseVisualStyleBackColor = true;
             this.button37.Click += new System.EventHandler(this.button37_Click);
             // 

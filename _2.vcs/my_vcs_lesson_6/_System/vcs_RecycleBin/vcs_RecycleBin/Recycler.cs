@@ -52,10 +52,11 @@ namespace vcs_RecycleBin
             UIOption ui_option = UIOption.OnlyErrorDialogs;
             if (confirm) ui_option = UIOption.AllDialogs;
 
-            RecycleOption recycle_option =
-                recycle_option = RecycleOption.SendToRecycleBin;
+            RecycleOption recycle_option = recycle_option = RecycleOption.SendToRecycleBin;
             if (delete_permanently)
+            {
                 recycle_option = RecycleOption.DeletePermanently;
+            }
 
             try
             {
@@ -63,8 +64,7 @@ namespace vcs_RecycleBin
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error deleting file.\n" + ex.Message,
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error deleting file.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -74,10 +74,11 @@ namespace vcs_RecycleBin
             UIOption ui_option = UIOption.OnlyErrorDialogs;
             if (confirm) ui_option = UIOption.AllDialogs;
 
-            RecycleOption recycle_option =
-                recycle_option = RecycleOption.SendToRecycleBin;
+            RecycleOption recycle_option = recycle_option = RecycleOption.SendToRecycleBin;
             if (delete_permanently)
+            {
                 recycle_option = RecycleOption.DeletePermanently;
+            }
 
             try
             {
@@ -85,8 +86,7 @@ namespace vcs_RecycleBin
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error deleting directory.\n" + ex.Message,
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error deleting directory.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -102,8 +102,8 @@ namespace vcs_RecycleBin
         {
             RecycleFlags options = 0;
             if (!show_progress) options = options | RecycleFlags.SHERB_NOPROGRESSUI;
-            if (!play_sound)    options = options | RecycleFlags.SHERB_NOSOUND;
-            if (!confirm)       options = options | RecycleFlags.SHERB_NOCONFIRMATION;
+            if (!play_sound) options = options | RecycleFlags.SHERB_NOSOUND;
+            if (!confirm) options = options | RecycleFlags.SHERB_NOCONFIRMATION;
 
             try
             {
@@ -111,8 +111,7 @@ namespace vcs_RecycleBin
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error emptying wastebasket.\n" + ex.Message,
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error emptying wastebasket.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

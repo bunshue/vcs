@@ -97,7 +97,6 @@ namespace vcs_VisualBasic
 
             richTextBox1.Text += "偽執行 計算機名稱修改, 須重啟計算機使之生效\n";
             //SetComputerName("lion-mouse");//修改計算機名稱
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -106,8 +105,7 @@ namespace vcs_VisualBasic
 
             string i;   //記錄使用者輸入的資料
             double num; //使用者輸入資料轉成double的值
-            i = Microsoft.VisualBasic.Interaction.InputBox
-                ("請輸入數值：", "求平方");
+            i = Microsoft.VisualBasic.Interaction.InputBox("請輸入數值：", "求平方");
             num = Convert.ToDouble(i); //將使用者輸入的資料轉成double
             MessageBox.Show(i + "的平方等於" + (num * num).ToString() + "\n", "平方");
         }
@@ -184,7 +182,6 @@ namespace vcs_VisualBasic
                                 richTextBox1.Text += "\n3取得 : " + CurrentRow + "\n";
                                 foreach (string a in CurrentRow)
                                     richTextBox1.Text += a + "\t";
-
                                 break;
                         }
                     }
@@ -312,5 +309,4 @@ namespace vcs_VisualBasic
 /*  可搬出
 
 */
-
 

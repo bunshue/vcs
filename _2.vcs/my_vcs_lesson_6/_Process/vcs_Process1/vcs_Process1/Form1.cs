@@ -109,8 +109,8 @@ namespace vcs_Process1
             button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
             label1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            bt_kill_process.Location = new Point(x_st + dx * 6-80, y_st + dy * 0-10);
-            listBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0+40);
+            bt_kill_process.Location = new Point(x_st + dx * 6 - 80, y_st + dy * 0 - 10);
+            listBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0 + 40);
             listBox1.Size = new Size(410, 360);
 
             richTextBox1.Size = new Size(360, 690);
@@ -980,11 +980,46 @@ Process.Start("desk.cpl");
 
         private void button36_Click(object sender, EventArgs e)
         {
+            // 先執行 記事本，這樣才看得到效果
+
+            //單一程式的記憶體資訊
+            Process[] localByName = Process.GetProcessesByName("notepad");
+            foreach (Process p in localByName)
+            {
+                richTextBox1.Text += "名稱 : " + p.ProcessName + "\n";
+                richTextBox1.Text += "識別項 : " + p.Id.ToString() + "\n";
+                richTextBox1.Text += "私有記憶體 : " + (p.PrivateMemorySize64 / 1024) + "Kbyte\n";
+                richTextBox1.Text += "虛擬記憶體 : " + (p.VirtualMemorySize64 / 1024) + "byte\n";
+            }
+
+            //所有程式的記憶體資訊
+            foreach (Process p in Process.GetProcesses())
+            {
+                richTextBox1.Text += "名稱 : " + p.ProcessName + "\n";
+                richTextBox1.Text += "識別項 : " + p.Id.ToString() + "\n";
+                richTextBox1.Text += "私有記憶體 : " + (p.PrivateMemorySize64 / 1024) + "Kbyte\n";
+                richTextBox1.Text += "虛擬記憶體 : " + (p.VirtualMemorySize64 / 1024) + "byte\n";
+            }
         }
 
         private void button37_Click(object sender, EventArgs e)
         {
+            //test
+            string fileName = @"D:\_git\vcs\_1.data\______test_files1\__RW\_word\bmp_format.docx";
+            ProcessStartInfo startInfo = new ProcessStartInfo(fileName);
 
+            if (File.Exists(fileName))
+            {
+                int i = 0;
+                foreach (String verb in startInfo.Verbs)
+                {
+                    listBox1.Items.Add(string.Format("  {0}. {1}", i.ToString(), verb));
+                    i++;
+                }
+            }
+            else
+            {
+            }
         }
 
         private void button38_Click(object sender, EventArgs e)
