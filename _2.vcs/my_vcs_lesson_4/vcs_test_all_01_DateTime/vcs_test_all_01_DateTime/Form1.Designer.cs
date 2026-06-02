@@ -340,7 +340,6 @@
             this.bt_special_05.Name = "bt_special_05";
             this.bt_special_05.Size = new System.Drawing.Size(120, 35);
             this.bt_special_05.TabIndex = 87;
-            this.bt_special_05.Text = "農曆";
             this.bt_special_05.UseVisualStyleBackColor = true;
             this.bt_special_05.Click += new System.EventHandler(this.bt_special_05_Click);
             // 
@@ -395,7 +394,7 @@
             this.bt_special_00.Name = "bt_special_00";
             this.bt_special_00.Size = new System.Drawing.Size(120, 35);
             this.bt_special_00.TabIndex = 82;
-            this.bt_special_00.Text = "民國";
+            this.bt_special_00.Text = "特殊曆法";
             this.bt_special_00.UseVisualStyleBackColor = true;
             this.bt_special_00.Click += new System.EventHandler(this.bt_special_00_Click);
             // 

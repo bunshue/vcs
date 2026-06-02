@@ -567,6 +567,9 @@ Process.Start("desk.cpl");
             string argument = @"/select, " + foldername;
             Process.Start(file, argument);
             */
+
+            Process.Start("IExplore.exe", "tw.yahoo.com");
+            Process.Start("chrome.exe", "C:\\Read_Cht.htm");
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -933,11 +936,46 @@ Process.Start("desk.cpl");
 
         private void button34_Click(object sender, EventArgs e)
         {
+            //開啟記事本
+            Process process1 = new Process();
+            process1.StartInfo.UseShellExecute = false;
+            process1.StartInfo.FileName = "notepad";
+            process1.StartInfo.CreateNoWindow = true;
+            process1.Start();
+
+            int process_id = process1.Id;
+            richTextBox1.Text += process_id.ToString() + "\n";
+
+            //3030
+
+            Process localById = Process.GetProcessById(process_id);
+            richTextBox1.Text += "電腦名稱：" + localById.MachineName + Environment.NewLine + "處理序名稱：" + localById.ProcessName + "\n";
+
+            Process currentProcess = Process.GetCurrentProcess();
+            MessageBox.Show("電腦名稱：" + currentProcess.MachineName + Environment.NewLine + "處理序名稱：" + currentProcess.ProcessName);
         }
 
         private void button35_Click(object sender, EventArgs e)
         {
+            Process process1 = Process.Start("Notepad.exe");
+            for (int i = 0; i < 5; i++)
+            {
+                if (!process1.HasExited)
+                {
+                    process1.Refresh();
+                    richTextBox1.Text += "實體記憶體的耗用： " + process1.WorkingSet64.ToString() + "\n";
+                    process1.WaitForExit(3000);
+                }
+                else
+                {
+                    break;
+                }
+            }
+            process1.CloseMainWindow();
+            richTextBox1.Text += "執行了CloseMainWindow()方法\n";
 
+            process1.Close();
+            richTextBox1.Text += "執行了Close()方法\n";
         }
 
         private void button36_Click(object sender, EventArgs e)
@@ -1213,19 +1251,19 @@ C#調用默認浏覽器打開網頁的幾種方法
 
             //s就是你的默認浏覽器，不過後面帶了參數，把它截去，不過需要注意的是：不同的浏覽器後面的參數不一樣！
             //D:Program Files (x86)GoogleChromeApplicationchrome.exe -- %1
-            System.Diagnostics.Process.Start(s.Substring(0, s.Length - 8), http://blog.csdn.net/testcs_dn);
+            Process.Start(s.Substring(0, s.Length - 8), http://blog.csdn.net/testcs_dn);
         }
 方法二：
         private void button2_Click(object sender, EventArgs e)
         {
             //調用系統默認的浏覽器 
-            System.Diagnostics.Process.Start(explorer.exe, http://blog.csdn.net/testcs_dn);
+            Process.Start(explorer.exe, http://blog.csdn.net/testcs_dn);
         }
 方法三：
         private void button3_Click(object sender, EventArgs e)
         {
             //調用系統默認的浏覽器 
-            System.Diagnostics.Process.Start(http://blog.csdn.net/testcs_dn);
+            Process.Start(http://blog.csdn.net/testcs_dn);
         }
 
 方法四：調用IE浏覽器

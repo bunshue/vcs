@@ -51,28 +51,6 @@ gggg git相關
 
 //------------------------------------------------------------  # 60個
 
-//量測時間
-            int start = 0;
-
-            start = Environment.TickCount;
-
-            // Do stuff
-            int duration = Environment.TickCount - start;
-
-            richTextBox1.Text += "耗時 : " + (duration / 1000).ToString() + "." + (duration % 1000).ToString("D3") + " 秒\n";
-
-//------------------------------------------------------------  # 60個
-
-計算程式執行的時間
-
-int URms = System.Environment.TickCount;
-
-XXXXXXXXX
-
-Console.WriteLine("花費 {0} ms 完成!!!", Environment.TickCount - URms);
-				
-//------------------------------------------------------------  # 60個
-            
 vcs待尋找
 目前用webbrowser顯示pdf檔案, 無法用程式的方法得知此時看到第幾頁 也無法得知目前頁面顯示比例
 
@@ -757,9 +735,7 @@ printPreviewDialog_grid .ShowDialog();
 printPreviewDialog_grid2.ShowDialog();
 printPreviewDialog_pages.ShowDialog();
 
-
 printPreviewDialog1 控件要在 Document 設定 printDocument
-
 
 printDocument_grid
 printDocument_pascal
@@ -992,7 +968,6 @@ private void Form1_Load(object sender, EventArgs e)
             int[] data_in = new int[256];
             int[] data_out = new int[256];
             Point[] curvePoints = new Point[256];    //一維陣列內有 N 個Point
-
 
             Pen gammaPen = new Pen(Color.Red, 2);
             /*
@@ -1964,7 +1939,7 @@ this.ShowCtiServer();
 
 protected void timer1_Tick(object sender, System.EventArgs e)
 {
-    lblDisplay.Text = DateTime.Now.ToLongTimeString();
+	//do something
 }
 
 此程式碼會造成目前時間在 lblDisplay 中顯示。 因為 timer1 的間隔設為 1000，每一千毫秒便會發生此事件，因此每秒會更新目前時間。
@@ -3524,21 +3499,6 @@ TBGBMBKB
 儲存圖檔
 移動控件mousedown-mousemove-mouseup
 
-vcs
-
-            if (listBox1.SelectedItems.Count > 0)
-
-
-移除多選的項目
-            while (listBox1.SelectedIndices.Count > 0)
-            {
-                listBox1.Items.RemoveAt(listBox1.SelectedIndices[0]);
-            }
-
-listBox屬性
-            listBox1.SelectionMode = SelectionMode.MultiExtended;
-            listBox1.HorizontalScrollbar = true;
-
 —index of hemoglobin (IHb) imaging
 
 pictureCrop 標準版
@@ -4145,9 +4105,6 @@ https://www.zhangshengrong.com/p/yOXD5ejR1B/
 
             Bitmap bitmap1 = new Bitmap(w, h);
             Graphics g = Graphics.FromImage(bitmap1);
-
-            //重置背景顏色,可以自定義
-            g.Clear(Color.White);
 
             g.SmoothingMode = SmoothingMode.AntiAlias;//消除鋸齒
             g.CompositingQuality = CompositingQuality.HighQuality;
@@ -5478,16 +5435,11 @@ public byte[] ConvertImage(Image image)
      return ms.ToArray();
 }
 
-
-
-
 C# GUID介紹和的使用，
 
 GUID（全局統一標識符）是指在一台機器上生成的數字，它保證對在同一時空中的所有機器都是唯一的。通常平台會提供生成GUID的API。生成算法很有意思，用到了以太網卡地址、納秒級時間、芯片ID碼和許多可能的數字。GUID的唯一缺陷在於生成的結果串會比較大。
 
 GUID永遠是方便的; 對於程序開發的各個方面，.NET Framework簡化了建立和處理GUID數值的過程。在.NET程序需要的地方，這一功能很容易地生成唯一的數值。
-
- 
 
 1. 一個GUID為一個128位的整數(16字節)，在使用唯一標識符的情況下，你可以在所有計算機和網絡之間使用這一整數。
 
@@ -5708,11 +5660,8 @@ using System.Reflection;
  C# 修改啟始Form [複製鏈接]
 打開program.cs，修改Application.Run(new Form1());，將Form1改為要啟始的頁面即可!
 
-
 網際網路時間伺服器，
 從原來的 time.windows.com 改為 time.nist.gov，
-
-
 
 3. 如何为一个窗体设置一个默认按钮？（How to set the default button for a form?）
 
@@ -7521,21 +7470,6 @@ FileSystem.DeleteFile(openFileDialog1.FileName,
 
 //------------------------------------------------------------  # 60個
 
-[C#] 觀察程式執行時間 StopWatch
-
-Stopwatch loadingWatch = new Stopwatch();
-loadingWatch.Start();
-
-XXXXXXXXX
-
-loadingWatch.Stop();
-
-Console.WriteLine(loadingWatch.ElapsedMilliseconds);
-
-可以使用Reset()來重置計算時間.
-
-//------------------------------------------------------------  # 60個
-
 windows media player
 // 播放歌曲
             axWMP.URL = @"D:\Music\02.AVRIL LAVIGNE 酷到骨子裡 MY HAPPY ENDING.mp3";
@@ -8939,15 +8873,6 @@ Form2的元件的Modifiers要改成Internal, 預設為private
 
 //------------------------------------------------------------  # 60個
 
-計算時間間隔
-dtpicker_first dtpicker_second 為DateTimePicker
-            MessageBox.Show("間隔 "+
-                DateAndTime.DateDiff(	//使用DateDiff方法獲取日期間隔
-                DateInterval.Day, dtpicker_first.Value, dtpicker_second.Value,
-                FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1).ToString()+" 天", "間隔時間");
-
-//------------------------------------------------------------  # 60個
-
 程式只能同時運行一個  在Form1_Load加入:
 
         private void Form1_Load(object sender, EventArgs e)
@@ -9056,26 +8981,6 @@ dtpicker_first dtpicker_second 為DateTimePicker
 畫圓球
 e.Graphics.FillEllipse(new SolidBrush(aBall.color), aBall.pt.X - 10, aBall.pt.Y - 10, 20, 20);
 e.Graphics.DrawEllipse(Pens.Black, aBall.pt.X - 10, aBall.pt.Y - 10, 20, 20);
-
-
-
-//表單全填滿特定顏色
-g.FillRectangle(Brushes.Wheat, ClientRectangle);
-
- 
-//清空畫布並用透明色填充
-g.Clear(Color.Transparent);
-
-
-
-
-                //擷取部分圖片貼上
-                //            貼上位置與大小,擷取部分圖片位置與大小,單位
-                g.DrawImage(img, destRect1, srcRect, units);
-
-
-
-
 
 
 imageList1屬性/Images/集合/加入圖片
@@ -10924,8 +10829,6 @@ e.Graphics.DrawLines(Pens.Black, points.ToArray());
 
 //------------------------------------------------------------  # 60個
 
-DateTime.Parse   DateTime.TryParse	在處理西元1~99年會處理成20XX年
-
 this.Refresh();         //加上.Refresh()才可以讓人看清楚字的變化
 
 lblLoading.Text = "Loading case data...";
@@ -11032,7 +10935,7 @@ string expr = expression.Replace(" ", "");
     <RootNamespace>qqqqq22222</RootNamespace>	//預設命名空間
     <AssemblyName>qqqqq11111</AssemblyName>		//組件名稱
 	
-	
+//------------------------------------------------------------  # 60個
 
 Form Panel PictureBox RichTextBox NotifyIcon的屬性
 可以在 ContextMenuStrip 加入 contextMenuStrip1
@@ -11048,13 +10951,6 @@ FixedSingle
 NotifyIcon測試\nnotifyIcon1屬性的ContextMenuStrip加入contextMenuStrip1
 
 ShowInTaskbar
-
-
-可以填滿透明的顏色~~~~~~
-
-DrawDiamond(gr, bounds, diamond_pen, Brushes.Transparent);
-
-g.Clear(Color.Transparent);
 
 
 把TextBox的每一行數字解出到數值陣列裏
@@ -11680,10 +11576,6 @@ null的東西 或許可以打印 但不可轉為字串 .ToString()
 
 //------------------------------------------------------------  # 60個
 
-vcs
-richtextbox datagridview一次寫入數千行
-拉動scroll bar會不會遲緩
-
 有無可能做到圖層概念，不要每次都重畫，要移動時，整個移動，像是OSD一樣。或是移動滑鼠鼠標一樣。
 
 //------------------------------------------------------------  # 60個
@@ -11922,32 +11814,7 @@ if (double.TryParse(textBox1.Text, out i))
 else
  MessageBox.Show("非數值!!");
 
-
-		//建立線上名單
-        private string OnlineList()
-        {
-            string L = "L";             //代表線上名單的命令碼(字頭)
-            for (int i = 0; i < listBox1.Items.Count; i++)
-            {
-                L += listBox1.Items[i]; //逐一將成員名單加入L字串
-                //不是最後一個成員要加上","區隔
-                if (i < listBox1.Items.Count - 1)
-                {
-                    L += ",";
-                }
-            }
-            return L;
-        }
-
-
-g.Clear(BackColor);     //清除整個繪圖介面，並使用指定的背景色彩填滿它。
-
-
 ----------------準備加到vcs範例裏 SP vcs vcs----------------
-
-
-
-
 
 hhhh
 莫罕達斯·卡拉姆昌德·甘地（古吉拉特語：??????? ?????? ?????；印地語：??????? ?????? ?????；英語：Mohandas Karamchand Gandhi，台語舊譯顏智（臺灣話：gan5-ti3），1869年10月2日－1948年1月30日），尊稱聖雄甘地
@@ -13384,7 +13251,6 @@ richTextBox1.Text += "影像旋轉，存檔完成，檔名：" + filename + "\n"
 pictureBox圖像直接存檔
 pictureBox1.Image.Save(filename);
 
-
 寫圖片至檔案
             //write image
            bitmap1.Save("C:\\Output.png");
@@ -13467,8 +13333,24 @@ this.ShowInTaskbar = false;
 this.MaximizeBox = false;
 this.StartPosition = FormStartPosition.CenterScreen;  // 單獨寫致中，看似無效
 
-g.DrawString("直接設定字型與大小", new Font("宋体", 30), Brushes.Red, 10, 10);
-
-
 //------------------------------------------------------------  # 60個
+
+g.Clear(BackColor);     //清除整個繪圖介面，並使用指定的背景色彩填滿它。
+
+可以填滿透明的顏色~~~~~~
+
+DrawDiamond(gr, bounds, diamond_pen, Brushes.Transparent);
+
+g.Clear(Color.Transparent);
+
+//表單全填滿特定顏色
+g.FillRectangle(Brushes.Wheat, ClientRectangle);
+
+//清空畫布並用透明色填充
+g.Clear(Color.Transparent);
+
+                //擷取部分圖片貼上
+                //            貼上位置與大小,擷取部分圖片位置與大小,單位
+                g.DrawImage(img, destRect1, srcRect, units);
+
 

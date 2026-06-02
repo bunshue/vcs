@@ -130,4 +130,40 @@
   <data name="d" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\img\d.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Earth" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\Earth.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Jupiter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\Jupiter.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Mars" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\Mars.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Mercury" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\Mercury.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Neptune" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\Neptune.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Saturn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\Saturn.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Uranus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\Uranus.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Venus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\Venus.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="face1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\face1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="face2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\face2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="face3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\face3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="face4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\img\face4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

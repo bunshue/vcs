@@ -46,12 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComboBoxTools.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="ImageAndText.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -88,6 +90,44 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="img\d.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="img\angry_bird\AB_black.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\angry_bird\AB_blue.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\angry_bird\AB_pig1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\angry_bird\AB_pig2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\angry_bird\AB_pig3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\angry_bird\AB_pig4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\angry_bird\AB_red.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\angry_bird\AB_yellow.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="img\Earth.jpg" />
+    <Content Include="img\face1.png" />
+    <Content Include="img\face2.png" />
+    <Content Include="img\face3.png" />
+    <Content Include="img\face4.png" />
+    <Content Include="img\Jupiter.jpg" />
+    <Content Include="img\Mars.jpg" />
+    <Content Include="img\Mercury.jpg" />
+    <Content Include="img\Neptune.jpg" />
+    <Content Include="img\Saturn.jpg" />
+    <Content Include="img\Uranus.jpg" />
+    <Content Include="img\Venus.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

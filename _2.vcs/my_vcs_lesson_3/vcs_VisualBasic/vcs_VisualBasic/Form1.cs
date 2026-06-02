@@ -9,9 +9,11 @@ using System.Windows.Forms;
 
 //for Interaction,          //參考/加入參考/.NET/Microsoft.VisualBasic
 using Microsoft.VisualBasic;  // for DateAndTime
+using Microsoft.VisualBasic.FileIO;
 using Microsoft.VisualBasic.Devices;  // for Computer
 using System.Runtime.InteropServices;  // for DllImport, StructLayout
 using System.Threading;
+using System.IO;
 
 namespace vcs_VisualBasic
 {
@@ -63,13 +65,13 @@ namespace vcs_VisualBasic
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
 
-            richTextBox1.Size = new Size(400, 300);
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            richTextBox1.Size = new Size(400, 690);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             label4.Text = "";
 
-            this.Size = new Size(1100, 750);
+            this.Size = new Size(1300, 750);
             this.Text = "vcs_VisualBasic";
 
             //設定執行後的表單起始位置, 正中央
@@ -136,7 +138,62 @@ namespace vcs_VisualBasic
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //一次讀出
+            string text = File.ReadAllText("../../test.txt");
+            richTextBox1.Text += "文字檔內容 :\n" + text + "\n";
 
+            //------------------------------------------------------------  # 60個
+
+            //特殊讀取純文字檔格式的方法
+
+            using (TextFieldParser myReader = new TextFieldParser("../../test.txt"))
+            {
+                // 定義三種格式之各欄的寬度與分隔字符。
+                int[] FirstFormat = { 5, 10, -1 };
+                int[] SecondFormat = { 6, 10, 17, -1 };
+                string[] ThirdFormat = { "," };
+
+                string[] CurrentRow;
+                while (!myReader.EndOfData)
+                {
+                    try
+                    {
+                        string RowType = myReader.PeekChars(2);
+                        switch (RowType)
+                        {
+                            case "CK":
+                                myReader.TextFieldType = FieldType.FixedWidth;
+                                myReader.FieldWidths = FirstFormat; // 或是 myReader.SetFieldWidths(FirstFormat);
+                                CurrentRow = myReader.ReadFields();
+                                richTextBox1.Text += "\n1取得 : " + CurrentRow + "\n";
+                                foreach (string a in CurrentRow)
+                                    richTextBox1.Text += a + "\t";
+                                break;
+                            case "PB":
+                                myReader.TextFieldType = FieldType.FixedWidth;
+                                myReader.FieldWidths = SecondFormat; // 或是 myReader.SetFieldWidths(SecondFormat);
+                                CurrentRow = myReader.ReadFields();
+                                richTextBox1.Text += "\n2取得 : " + CurrentRow + "\n";
+                                foreach (string a in CurrentRow)
+                                    richTextBox1.Text += a + "\t";
+                                break;
+                            case "SP":
+                                myReader.TextFieldType = FieldType.Delimited;
+                                myReader.Delimiters = ThirdFormat; // 或是 myReader.SetDelimiters(ThirdFormat);
+                                CurrentRow = myReader.ReadFields();
+                                richTextBox1.Text += "\n3取得 : " + CurrentRow + "\n";
+                                foreach (string a in CurrentRow)
+                                    richTextBox1.Text += a + "\t";
+
+                                break;
+                        }
+                    }
+                    catch (MalformedLineException ex)
+                    {
+                        MessageBox.Show("行 " + ex.Message + " 是無效的。略過。");
+                    }
+                }
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)

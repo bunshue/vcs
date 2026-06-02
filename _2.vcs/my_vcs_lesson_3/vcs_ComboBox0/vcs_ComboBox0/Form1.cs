@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Collections;   //for IEnumerable
+using System.IO;
+using System.Collections;   //for Hashtable, IEnumerable
 
 namespace vcs_ComboBox0
 {
@@ -24,15 +25,7 @@ namespace vcs_ComboBox0
         {
             show_item_location();
 
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            G_ImageList = new ImageList();//創建ImageList對象
-            G_ImageList.Images.Add(Properties.Resources.a);//添加圖片
-            G_ImageList.Images.Add(Properties.Resources.b);//添加圖片
-            G_ImageList.Images.Add(Properties.Resources.c);//添加圖片
-            G_ImageList.Images.Add(Properties.Resources.d);//添加圖片
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            //------------------------------------------------------------  # 60個
 
             //字串一維陣列轉comboBox
             //初始化字串一維陣列，再以AddRange()方法加入
@@ -46,7 +39,7 @@ namespace vcs_ComboBox0
             //預設選項包含關鍵字
             comboBox0.SelectedItem = FindItemContaining(comboBox0.Items, "竹");
 
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            //------------------------------------------------------------  # 60個
 
             // 建構 comboBox1 物件，並設定相關的屬性
             //comboBox1.Location = new System.Drawing.Point(15, 15);
@@ -62,7 +55,7 @@ namespace vcs_ComboBox0
             // 預設ComboBox物件的Text為第1個選項
             comboBox1.SelectedIndex = 0;
 
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            //------------------------------------------------------------  # 60個
 
             //從陣列抓資料到combobox清單內
             //系統內建的全部滑鼠游標圖形
@@ -83,7 +76,7 @@ namespace vcs_ComboBox0
                 comboBox2.Items.Add(cursor);  // 加入到 comboBox1b 清單內
             }
 
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            //------------------------------------------------------------  # 60個
 
             //用ComboBox控制元件製作類似瀏覽器的網址輸入框
             comboBox3.Items.Add("http://www.yahoo.com/");//向ComboBox控件中添加網址「http://www.baidu.com/」
@@ -92,16 +85,16 @@ namespace vcs_ComboBox0
             comboBox3.Items.Add("http://www.microsoft.com/");//向ComboBox控件中添加網址「http://www.qq.com/」
 
             /*
-            //comboBox7
-            comboBox7.Items.Add("https://www.google.com/");
-            comboBox7.Items.Add("http://www.yahoo.com.tw/");
-            comboBox7.Items.Add("http://www.baidu.com/");
-            comboBox7.Items.Add("http://www.sina.com.cn/");
-            comboBox7.Items.Add("http://www.163.com/");
-            comboBox7.Items.Add("http://www.qq.com/");
+            //comboBox3b
+            comboBox3b.Items.Add("https://www.google.com/");
+            comboBox3b.Items.Add("http://www.yahoo.com.tw/");
+            comboBox3b.Items.Add("http://www.baidu.com/");
+            comboBox3b.Items.Add("http://www.sina.com.cn/");
+            comboBox3b.Items.Add("http://www.163.com/");
+            comboBox3b.Items.Add("http://www.qq.com/");
             */
 
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            //------------------------------------------------------------  # 60個
 
             // 使用 DataSource
             // 取得或設定此 ComboBox資料來源
@@ -119,14 +112,145 @@ namespace vcs_ComboBox0
             };
             this.Controls.Add(comboBox4);
 
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            //------------------------------------------------------------  # 60個
 
             //comboBox4b
 
             string[] strCall = { "AAA", "BBB", "CCC", "DDD" };
             comboBox4b.DataSource = strCall;
 
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            //------------------------------------------------------------  # 60個
+
+            setup_comboBox5();
+
+            //------------------------------------------------------------  # 60個
+
+            comboBox6.DrawMode = DrawMode.OwnerDrawFixed;//設置繪制元素方式
+            comboBox6.DropDownStyle = ComboBoxStyle.DropDownList; //設置組合框樣式
+            comboBox6.Items.Add("小車");//添加項
+            comboBox6.Items.Add("卡車");//添加項
+            comboBox6.Items.Add("工具");//添加項
+            comboBox6.Items.Add("朋友");//添加項
+            G_ImageList = new ImageList();//創建ImageList對象
+            G_ImageList.Images.Add(Properties.Resources.a);//添加圖片
+            G_ImageList.Images.Add(Properties.Resources.b);//添加圖片
+            G_ImageList.Images.Add(Properties.Resources.c);//添加圖片
+            G_ImageList.Images.Add(Properties.Resources.d);//添加圖片
+
+            //------------------------------------------------------------  # 60個
+
+            //添加項 
+            comboBox7.Items.Add(new MyItem("000000", Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_angry_bird\AB_red.jpg")));
+            comboBox7.Items.Add(new MyItem("111111", Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_angry_bird\AB_yellow.jpg")));
+            comboBox7.Items.Add(new MyItem("222222", Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_angry_bird\AB_blue.jpg")));
+            comboBox7.Items.Add(new MyItem("333333", Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_angry_bird\AB_black.jpg")));
+
+            //默認選中項索引 
+            comboBox7.SelectedIndex = 0;
+
+            //自繪組合框需要設置的一些屬性 
+            comboBox7.DrawMode = DrawMode.OwnerDrawFixed;
+            comboBox7.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox7.ItemHeight = 50;
+            comboBox7.Width = 200;
+
+            //添加DrawItem事件處理函數 
+            comboBox7.DrawItem += comboBox7_DrawItem;
+
+            //------------------------------------------------------------  # 60個
+
+            imageList8.Images.Add(new Bitmap("img/angry_bird/AB_red.jpg"));
+            imageList8.Images.Add(new Bitmap("img/angry_bird/AB_yellow.jpg"));
+            imageList8.Images.Add(new Bitmap("img/angry_bird/AB_blue.jpg"));
+            imageList8.Images.Add(new Bitmap("img/angry_bird/AB_black.jpg"));
+            imageList8.Images.Add(new Bitmap("img/angry_bird/AB_pig1.jpg"));
+            imageList8.Images.Add(new Bitmap("img/angry_bird/AB_pig2.jpg"));
+            imageList8.Images.Add(new Bitmap("img/angry_bird/AB_pig3.jpg"));
+            imageList8.Images.Add(new Bitmap("img/angry_bird/AB_pig4.jpg"));
+
+            richTextBox1.Text += "imageList8 共有 : " + imageList8.Images.Count.ToString() + " 張圖片\n";
+
+            comboBox8.Size = new Size(300, 100);
+            comboBox8.DrawMode = DrawMode.OwnerDrawFixed;
+            comboBox8.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            comboBox8.Items.Add("紅鳥");
+            comboBox8.Items.Add("黃鳥");
+            comboBox8.Items.Add("藍鳥");
+            comboBox8.Items.Add("黑鳥");
+            comboBox8.Items.Add("小豬1");
+            comboBox8.Items.Add("小豬2");
+            comboBox8.Items.Add("小豬3");
+            comboBox8.Items.Add("小豬4");
+            comboBox8.SelectedIndex = 0;//設置ComboBox控件默認選中第一項
+
+            //comboBox8.DrawItem += new DrawItemEventHandler(comboBox8_DrawItem);
+
+            //------------------------------------------------------------  # 60個
+
+            comboBox9.Items.Clear();
+            comboBox9.Items.Add("Arial");
+            comboBox9.Items.Add("Arial Black");
+            comboBox9.Items.Add("Arial Narrow");
+            comboBox9.Items.Add("Arial Rounded MT Bold");
+            comboBox9.Items.Add("Arial Unicode MS");
+            comboBox9.Items.Add("Bahnschrift");
+            comboBox9.Items.Add("Bahnschrift Condensed");
+            comboBox9.Items.Add("Bahnschrift Light");
+            comboBox9.Items.Add("Bahnschrift Light Condensed");
+            comboBox9.Items.Add("Bahnschrift Light SemiCondensed");
+            comboBox9.Items.Add("Bahnschrift SemiBold");
+            comboBox9.Items.Add("Bahnschrift SemiBold Condensed");
+            comboBox9.Items.Add("Bahnschrift SemiBold SemiConden");
+            comboBox9.Items.Add("Bahnschrift SemiCondensed");
+            comboBox9.Items.Add("Segoe UI");
+            comboBox9.Items.Add("Segoe UI Black");
+            comboBox9.Items.Add("Segoe UI Emoji");
+            comboBox9.Items.Add("Segoe UI Historic");
+            comboBox9.Items.Add("Segoe UI Light");
+            comboBox9.Items.Add("Segoe UI Semibold");
+            comboBox9.Items.Add("Segoe UI Semilight");
+            comboBox9.Items.Add("Segoe UI Symbol");
+            comboBox9.Items.Add("新細明體");
+            comboBox9.Items.Add("新細明體-ExtB");
+            comboBox9.Items.Add("細明體");
+            comboBox9.Items.Add("細明體-ExtB");
+            comboBox9.Items.Add("細明體_HKSCS");
+            comboBox9.Items.Add("細明體_HKSCS-ExtB");
+
+            //------------------------------------------------------------  # 60個
+
+            // Colors.
+            Color[] colors =
+            {
+                Color.Red,
+                Color.Orange,
+                Color.Yellow,
+                Color.Green,
+                Color.Blue,
+                Color.Indigo,
+                Color.Purple,
+            };
+            cboColor.DisplayColorSamples(colors);
+            cboColor.SelectedIndex = 0;
+
+            // Faces.
+            Image[] images = 
+            {
+                Properties.Resources.face1,
+                Properties.Resources.face2,
+                Properties.Resources.face3,
+                Properties.Resources.face4,
+            };
+            cboFace.DisplayImages(images);
+            cboFace.SelectedIndex = 0;
+            cboFace.DropDownHeight = 200;
+
+            //------------------------------------------------------------  # 60個
+
+
+
+
         }
 
         void show_item_location()
@@ -148,10 +272,29 @@ namespace vcs_ComboBox0
             comboBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1 + dd);
             label2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             comboBox2.Location = new Point(x_st + dx * 0, y_st + dy * 2 + dd);
-            label3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            label3.Location = new Point(x_st + dx * 0, y_st + dy * 3 - 10);
             comboBox3.Location = new Point(x_st + dx * 0, y_st + dy * 3 + dd);
             label4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             comboBox4b.Location = new Point(x_st + dx * 0, y_st + dy * 5 + dd);
+
+            label5.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            comboBox5.Location = new Point(x_st + dx * 1, y_st + dy * 0 + dd);
+
+            label6.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            comboBox6.Location = new Point(x_st + dx * 1, y_st + dy * 1 + dd);
+            label7.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            comboBox7.Location = new Point(x_st + dx * 1, y_st + dy * 2 + dd);
+
+            comboBox8.Location = new Point(x_st + dx * 1, y_st + dy * 3 + dd);
+
+            label9.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            comboBox9.Location = new Point(x_st + dx * 1, y_st + dy * 4 + dd);
+
+            cboColor.Location = new Point(x_st + dx * 1, y_st + dy * 5 + dd);
+            cboFace.Location = new Point(x_st + dx * 1 + 150, y_st + dy * 5 + dd);
+
+
+            label3.Text = "用ComboBox控制元件製作\n類似瀏覽器的網址輸入框";
 
             int w = 400;
             int h = 150;
@@ -162,10 +305,10 @@ namespace vcs_ComboBox0
             dy = h + 10;
 
             richTextBox1.Size = new Size(320, 600);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 3 - 110, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1180, 800);
+            this.Size = new Size(1480, 800);
             this.Text = "vcs_ComboBox0";
 
             //設定執行後的表單起始位置, 正中央
@@ -177,6 +320,8 @@ namespace vcs_ComboBox0
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private object FindItemContaining(IEnumerable items, string target)
         {
@@ -190,7 +335,7 @@ namespace vcs_ComboBox0
             return null;
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void comboBox1_DropDown(object sender, EventArgs e)
         {
@@ -245,7 +390,7 @@ namespace vcs_ComboBox0
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private bool EditState = false;//定義一個全局變量標識
         private void comboBox3_KeyDown(object sender, KeyEventArgs e)
@@ -272,30 +417,260 @@ namespace vcs_ComboBox0
 
         /*
         private bool State = false;//定义一个全局变量标识
-        private void comboBox7_TextChanged(object sender, EventArgs e)
+        private void comboBox3b_TextChanged(object sender, EventArgs e)
         {
             if (State == true)//当变量的值为真时
             {
-                string importText = comboBox7.Text;//获得输入的文本
-                int index = comboBox7.FindString(importText);//在ComboBox集合中查找匹配的文本
+                string importText = comboBox3b.Text;//获得输入的文本
+                int index = comboBox3b.FindString(importText);//在ComboBox集合中查找匹配的文本
                 if (index >= 0)//当有查找结果时 
                 {
                     State = false;//关闭编辑状态
-                    comboBox7.SelectedIndex = index;//找到对应项
+                    comboBox3b.SelectedIndex = index;//找到对应项
                     State = true;//打开编辑状态
-                    comboBox7.Select(importText.Length, comboBox7.Text.Length);//设定文本的选择长度
+                    comboBox3b.Select(importText.Length, comboBox3b.Text.Length);//设定文本的选择长度
                 }
             }
 
         }
 
-        private void comboBox7_KeyDown(object sender, KeyEventArgs e)
+        private void comboBox3b_KeyDown(object sender, KeyEventArgs e)
         {
             State = (e.KeyCode != Keys.Back && e.KeyCode != Keys.Delete);//当按键既不是Back键又不是Delete键时
-            comboBox7.DroppedDown = true;//当有按键被按下时显示下拉列表
+            comboBox3b.DroppedDown = true;//当有按键被按下时显示下拉列表
         }
         */
 
+        //------------------------------------------------------------  # 60個
 
+        void setup_comboBox5()
+        {
+            // Make a font for the item text.
+            Font font = new Font("Times New Roman", 14);
+
+            // Make image and text data.
+            ImageAndText[] planets =
+            {
+                new ImageAndText(Properties.Resources.Mercury,
+                    "Name: Mercury" + '\n' +
+                    "Distance: 0.31-0.47" + '\n' +
+                    "Distance: 0.31-0.47" + '\n' +
+                    "Mass: 0.06" + '\n' +
+                    "Diameter: 0.382" + '\n' +
+                    "Year: 0.24" + '\n' +
+                    "Day: 58.64",
+                    font),
+                new ImageAndText(Properties.Resources.Venus,
+                    "Name: Venus" + '\n' +
+                    "Distance: 0.72" + '\n' +
+                    "Mass: 0.82" + '\n' +
+                    "Diameter: 0.949" + '\n' +
+                    "Year: 0.62" + '\n' +
+                    "Day: -243.02",
+                    font),
+                new ImageAndText(Properties.Resources.Earth,
+                    "Name: Earth" + '\n' +
+                    "Distance: 1" + '\n' +
+                    "Mass: 1" + '\n' +
+                    "Diameter: 1" + '\n' +
+                    "Year: 1" + '\n' +
+                    "Day: 1",
+                    font),
+                new ImageAndText(Properties.Resources.Mars,
+                    "Name: Mars" + '\n' +
+                    "Distance: 1.52" + '\n' +
+                    "Mass: 0.11" + '\n' +
+                    "Diameter: 0.532" + '\n' +
+                    "Year: 1.88" + '\n' +
+                    "Day: 1.03",
+                    font),
+                new ImageAndText(Properties.Resources.Jupiter,
+                    "Name: Jupiter" + '\n' +
+                    "Distance: 5.2" + '\n' +
+                    "Mass: 317.8" + '\n' +
+                    "Diameter: 11.209" + '\n' +
+                    "Year: 11.86" + '\n' +
+                    "Day: 0.41",
+                    font),
+                new ImageAndText(Properties.Resources.Saturn,
+                    "Name: Saturn" + '\n' +
+                    "Distance: 9.54" + '\n' +
+                    "Mass: 95.2" + '\n' +
+                    "Diameter: 9.449" + '\n' +
+                    "Year: 29.46" + '\n' +
+                    "Day: 0.43",
+                    font),
+                new ImageAndText(Properties.Resources.Uranus,
+                    "Name: Uranus" + '\n' +
+                    "Distance: 19.22" + '\n' +
+                    "Mass: 14.6" + '\n' +
+                    "Diameter: 4.007" + '\n' +
+                    "Year: 84.01" + '\n' +
+                    "Day: −0.72",
+                    font),
+                new ImageAndText(Properties.Resources.Neptune,
+                    "Name: Neptune" + '\n' +
+                    "Distance: 30.06" + '\n' +
+                    "Mass: 17.2" + '\n' +
+                    "Diameter: 3.883" + '\n' +
+                    "Year: 164.8" + '\n' +
+                    "Day: 0.67",
+                    font),
+            };
+
+            comboBox5.DisplayImagesAndText(planets);
+            comboBox5.SelectedIndex = 0;
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void comboBox6_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (G_ImageList != null)//判斷ImageList是否為空
+            {
+                Graphics g = e.Graphics;//得到繪圖對象
+                Rectangle r = e.Bounds;//得到繪圖范圍
+                Size imageSize = G_ImageList.ImageSize;//獲取圖像大小
+                if (e.Index >= 0)//判斷是否有繪制項
+                {
+                    Font fn = new Font("標楷體", 30, FontStyle.Bold);//創建字體對象
+                    string s = comboBox6.Items[e.Index].ToString();//得到繪制項的字符串
+                    DrawItemState dis = e.State;
+                    if (e.State == (DrawItemState.NoAccelerator | DrawItemState.NoFocusRect))
+                    {
+                        e.Graphics.FillRectangle(new SolidBrush(Color.LightYellow), r);//畫條目背景
+                        G_ImageList.Draw(e.Graphics, r.Left, r.Top, e.Index);//繪制圖像
+                        e.Graphics.DrawString(s, fn, new SolidBrush(Color.Black), r.Left + imageSize.Width, r.Top);
+                        e.DrawFocusRectangle();//顯示取得焦點時的虛線框
+                    }
+                    else
+                    {
+                        e.Graphics.FillRectangle(new SolidBrush(Color.LightGreen), r);//畫條目背景
+                        G_ImageList.Draw(e.Graphics, r.Left, r.Top, e.Index);//繪制圖像
+                        e.Graphics.DrawString(s, fn, new SolidBrush(Color.Black), r.Left + imageSize.Width, r.Top);
+                        e.DrawFocusRectangle();//顯示取得焦點時的虛線框 
+                    }
+                }
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void comboBox7_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            //鼠標選中在這個項上
+            if ((e.State & DrawItemState.Selected) != 0)
+            {
+                //填充區域, 畫選中項目的背景色
+                Rectangle borderRect = new Rectangle(3, e.Bounds.Y, e.Bounds.Width - 5, e.Bounds.Height - 2);
+                e.Graphics.FillRectangle(Brushes.Pink, borderRect);
+
+                //畫邊框
+                Pen pen = new Pen(Color.FromArgb(229, 195, 101));
+                e.Graphics.DrawRectangle(pen, borderRect);
+            }
+            else
+            {
+                SolidBrush brush = new SolidBrush(Color.FromArgb(255, 255, 255));
+                e.Graphics.FillRectangle(brush, e.Bounds);
+            }
+
+            //獲得項圖片,繪制圖片 
+            MyItem item = (MyItem)comboBox7.Items[e.Index];
+            Image img = item.Img;
+
+            //圖片繪制的區域 
+            Rectangle imgRect = new Rectangle(6, e.Bounds.Y + 3, 45, 45);
+            e.Graphics.DrawImage(img, imgRect);
+
+            //文本內容顯示區域 
+            Rectangle textRect = new Rectangle(imgRect.Right + 2, imgRect.Y, e.Bounds.Width - imgRect.Width, e.Bounds.Height - 2);
+
+            //獲得項文本內容,繪制文本 
+            String itemText = comboBox7.Items[e.Index].ToString();
+
+            //文本格式垂直居中 
+            StringFormat strFormat = new StringFormat();
+            strFormat.LineAlignment = StringAlignment.Center;
+            e.Graphics.DrawString(itemText, new Font("微軟雅黑", 12), Brushes.Black, textRect, strFormat);
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void comboBox8_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            Graphics gComboBox = e.Graphics;//聲明一個GDI+繪圖圖面類的對象
+            Rectangle rComboBox = e.Bounds;//聲明一個表示矩形的位置和大小類的對象
+            Size imageSize = imageList8.ImageSize;//聲明一個有序整數對的對象
+            FontDialog typeFace = new FontDialog();//定義一個字體類對像
+            Font Style = typeFace.Font;//定義一個定義特定的文本格式類對像
+            if (e.Index >= 0)//當繪製的索引項存在時
+            {
+                string temp = (string)comboBox8.Items[e.Index];//獲取ComboBox控件索引項下的文本內容
+                StringFormat stringFormat = new StringFormat();//定義一個封裝文本佈局信息類的對象
+                stringFormat.Alignment = StringAlignment.Near;//設定文本的佈局方式
+                if (e.State == (DrawItemState.NoAccelerator | DrawItemState.NoFocusRect))//當繪製項沒有鍵盤加速鍵和焦點可視化提示時
+                {
+                    e.Graphics.FillRectangle(new SolidBrush(Color.Red), rComboBox);//用指定的顏色填充自定義矩形的內部
+                    imageList8.Draw(e.Graphics, rComboBox.Left, rComboBox.Top, e.Index);//在指定位置繪製指定索引的圖片
+                    e.Graphics.DrawString(temp, Style, new SolidBrush(Color.Black), rComboBox.Left + imageSize.Width, rComboBox.Top);//在指定的位置並且用指定的Font對像繪製指定的文本字符串
+                    e.DrawFocusRectangle();//在指定的邊界範圍內繪製聚焦框
+                }
+                else //當繪製項有鍵盤加速鍵或者焦點可視化提示時
+                {
+                    e.Graphics.FillRectangle(new SolidBrush(Color.LightBlue), rComboBox);//用指定的顏色填充自定義矩形的內部
+                    imageList8.Draw(e.Graphics, rComboBox.Left, rComboBox.Top, e.Index);//在指定位置繪製指定索引的圖片
+                    e.Graphics.DrawString(temp, Style, new SolidBrush(Color.Black), rComboBox.Left + imageSize.Width, rComboBox.Top);//在指定的位置並且用指定的Font對像繪製指定的文本字符串
+                    e.DrawFocusRectangle();//在指定的邊界範圍內繪製聚焦框
+                }
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void bt_apply_Click(object sender, EventArgs e)
+        {
+            //設置自動完成的模式
+            comboBox9.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //設置自動完成字串的來源
+            comboBox9.AutoCompleteSource = AutoCompleteSource.ListItems;
+        }
+    }
+
+    //自定義組合框項 
+    class MyItem
+    {
+        //項文本內容 
+        private String Text;
+
+        //項圖片 
+        public Image Img;
+
+        //構造函數 
+        public MyItem(String text, Image img)
+        {
+            Text = text;
+            Img = img;
+        }
+
+        //重寫ToString函數，返回項文本 
+        public override string ToString()
+        {
+            return Text;
+        }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

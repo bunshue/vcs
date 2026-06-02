@@ -118,6 +118,7 @@ namespace vcs_Button1
             button1b.Location = new Point(220, 0);
             button1b.SetBounds(button1b.Location.X, button1b.Location.Y, 200, 200);	//SetBounds : 設定控件的位置與大小
 
+            //------------------------------------------------------------  # 60個
 
             //文字化按鈕 bt_text ST
             GraphicsPath gp_text = new GraphicsPath();
@@ -187,7 +188,6 @@ namespace vcs_Button1
             bt_puzzle2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             bt_puzzle3.Location = new Point(x_st + dx * 1, y_st + dy * 1);
 
-
             //button
             x_st = 220;
             y_st = 210;
@@ -256,6 +256,8 @@ namespace vcs_Button1
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         int long_click = 0;
         private void button0_Click(object sender, EventArgs e)
@@ -368,7 +370,7 @@ namespace vcs_Button1
 
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -872,15 +874,10 @@ namespace vcs_Button1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

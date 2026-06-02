@@ -253,11 +253,41 @@ namespace vcs_ListBox2
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-//1515
-//---------------  # 15個
-
-
 /*  可搬出
+
+*/
+/*
+
+            if (listBox1.SelectedItems.Count > 0)
+
+
+移除多選的項目
+            while (listBox1.SelectedIndices.Count > 0)
+            {
+                listBox1.Items.RemoveAt(listBox1.SelectedIndices[0]);
+            }
+
+listBox屬性
+            listBox1.SelectionMode = SelectionMode.MultiExtended;
+            listBox1.HorizontalScrollbar = true;
+
+6060
+
+		//建立線上名單
+        private string OnlineList()
+        {
+            string L = "L";             //代表線上名單的命令碼(字頭)
+            for (int i = 0; i < listBox1.Items.Count; i++)
+            {
+                L += listBox1.Items[i]; //逐一將成員名單加入L字串
+                //不是最後一個成員要加上","區隔
+                if (i < listBox1.Items.Count - 1)
+                {
+                    L += ",";
+                }
+            }
+            return L;
+        }
 
 */
 

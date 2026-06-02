@@ -1368,12 +1368,8 @@ namespace vcs_ReadWrite_TXT
                                     richTextBox1.Text += txt[i + t];
                                 }
                                 richTextBox1.Text += "\" 共 " + same_count.ToString() + " 個\n";
-
                                 pattern = txt.Substring(i, (k + 1));
-
                                 word_statistics.Add(new WordInfo(k, pattern, same_count));
-
-
                             }
                         }
                     }

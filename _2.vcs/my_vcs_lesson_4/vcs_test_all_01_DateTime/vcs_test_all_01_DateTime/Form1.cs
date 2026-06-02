@@ -7,14 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Globalization; //for CultureInfo   //for 民國記年 農曆   //for DateTimeStyles
-using System.Collections;   //for IEnumerable
-using Microsoft.VisualBasic;    //for DateAndTime, 需要 參考/加入參考/.NET/Microsoft.VisualBasic
+using System.Globalization;  // for CultureInfo, TaiwanCalendar, TaiwanLunisolarCalendar, 民國記年 農曆   //for DateTimeStyles
+using System.Collections;  // for IEnumerable
+using Microsoft.VisualBasic;  // for DateAndTime, 需要 參考/加入參考/.NET/Microsoft.VisualBasic
+using System.Diagnostics;  // for Stopwatch
 
-/*
-DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元9999年12月31日23點59分59秒之間的具體日期時刻。
-因此，你可以用DateTime值類型來描述任何在想象范圍之內的時間。
-*/
+//DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元9999年12月31日23點59分59秒之間的具體日期時刻
 
 namespace vcs_test_all_01_DateTime
 {
@@ -136,7 +134,7 @@ namespace vcs_test_all_01_DateTime
         private void button0_Click(object sender, EventArgs e)
         {
             //建立DateTime
-            DateTime dt = DateTime.Now;//現在時間
+            DateTime dt = DateTime.Now;
             //DateTime dt = new DateTime(年, 月, 日);
             //DateTime dt = new DateTime(年, 月, 日, 時, 分, 秒);
             //DateTime dt = new DateTime(年, 月, 日, 時, 分, 秒, 毫秒);
@@ -544,7 +542,7 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             dt = new DateTime(2006, 3, 11, 9, 15, 23, 34);//指定時間
-            dt = DateTime.Now;//現在時間
+            dt = DateTime.Now;
 
             richTextBox1.Text += "Now : " + DateTime.Now + "\n";
             richTextBox1.Text += "Today : " + DateTime.Today + "\n";//當天時間
@@ -726,7 +724,7 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Text += "日期 1:\t" + dt.Equals("2005-11-6 16:11:04").ToString() + "\n";//False
             richTextBox1.Text += "日期 1:\t" + dt.Equals(dt).ToString() + "\n";//True
             richTextBox1.Text += "日期 1:\t" + dt.GetHashCode().ToString() + "\n";//1474088234
-            richTextBox1.Text += "日期 1:\t" + dt.GetType().ToString() + "\n";//System.DateTime
+            richTextBox1.Text += "日期 1:\t" + dt.GetType().ToString() + "\n";//DateTime
             richTextBox1.Text += "日期 1:\t" + dt.GetTypeCode().ToString() + "\n";//DateTime
 
             /*
@@ -807,7 +805,7 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Text += dt.Equals("2005-11-6 16:11:04").ToString() + "\n";//False
             richTextBox1.Text += dt.Equals(dt).ToString() + "\n";//True
             richTextBox1.Text += dt.GetHashCode().ToString() + "\n";//1474088234
-            richTextBox1.Text += dt.GetType().ToString() + "\n";//System.DateTime
+            richTextBox1.Text += dt.GetType().ToString() + "\n";//DateTime
             richTextBox1.Text += dt.GetTypeCode().ToString() + "\n";//DateTime
 
             richTextBox1.Text += dt.GetDateTimeFormats('s')[0].ToString() + "\n";//2005-11-05T14:06:25
@@ -1090,7 +1088,7 @@ namespace vcs_test_all_01_DateTime
             show_calendar();
         }
 
-        //實現小小的日歷 ST
+        //實現小小的日曆 ST
         void show_calendar()
         {
             DateTime dt = DateTime.Now;
@@ -1207,7 +1205,7 @@ namespace vcs_test_all_01_DateTime
             }
             richTextBox1.Text += "\n";
         }
-        //實現小小的日歷 SP
+        //實現小小的日曆 SP
 
         private void button11_Click(object sender, EventArgs e)
         {
@@ -1293,8 +1291,7 @@ namespace vcs_test_all_01_DateTime
             //MessageBox.Show(dt1.ToString());
 
             string str2 = "20091014223600";
-            //DateTime dt2;
-            DateTime dtNow = DateTime.Now;
+            dt = DateTime.Now;
             richTextBox1.Text += "原字串:\t" + str2 + "\n";
             //IFormatProvider ifp = new CultureInfo("zh-TW", true);
             if (DateTime.TryParseExact(str2, "yyyyMMddHHmmss", ifp, DateTimeStyles.None, out dt2) == true)
@@ -1304,8 +1301,8 @@ namespace vcs_test_all_01_DateTime
             }
             else
             {
-                richTextBox1.Text += "解讀後2:\t" + dtNow.ToString() + "\n";
-                //MessageBox.Show(dtNow.ToString());
+                richTextBox1.Text += "解讀後2:\t" + dt.ToString() + "\n";
+                //MessageBox.Show(dt.ToString());
                 richTextBox1.Text += "取得DateTime失敗 2\n";
             }
 
@@ -1454,6 +1451,44 @@ namespace vcs_test_all_01_DateTime
             num = 525948.76 * (y - 1900) + sTermInfo[i - 1];
             newDate = baseDateAndTime.AddMinutes(num);//按分钟计算
             */
+
+            //test
+            richTextBox1.Text += "年：" + dt.Year.ToString() + "\n";
+            richTextBox1.Text += "月：" + dt.Month.ToString() + "\n";
+            richTextBox1.Text += "日：" + dt.Day.ToString() + "\n";
+            richTextBox1.Text += "天：" + dt.DayOfYear.ToString() + "\n";
+            richTextBox1.Text += "星：" + dt.DayOfWeek.ToString() + "\n";
+            richTextBox1.Text += "時：" + dt.Hour.ToString() + "\n";
+            richTextBox1.Text += "分：" + dt.Minute.ToString() + "\n";
+            richTextBox1.Text += "秒：" + dt.Second.ToString() + "\n";
+            richTextBox1.Text += "毫秒：" + dt.Millisecond.ToString() + "\n";
+            richTextBox1.Text += "Ticks：" + dt.Ticks.ToString() + "\n";
+            richTextBox1.Text += "TimeOfDay：" + dt.TimeOfDay.ToString() + "\n";
+
+            dt = DateTime.Now;
+            string message = "";
+            message += string.Format("{0}", dt.Year) + "\n";
+            message += ("西元年:" + dt.Year.ToString()) + "\n";
+            message += (string.Format("西元:{0}/{1}/{2}", dt.Year, dt.Month, dt.Day)) + "\n";
+
+            dt = DateTime.Now;
+            richTextBox1.Text += "現在日期： " + dt.ToLongDateString() + Environment.NewLine;
+            richTextBox1.Text += "現在時間： " + dt.ToLongTimeString() + Environment.NewLine;
+
+            //現在日期加天數寫法(本例為加5天):
+            DateTime Add5Day = dt.AddDays(5);
+            richTextBox1.Text += "現在日期加5天： " + Add5Day.ToLongDateString() + Environment.NewLine;
+
+            //現在時間加小時寫法(本例為加12個小時):
+            DateTime Add12Hours = dt.AddHours(12);
+            richTextBox1.Text += "現在時間加12小時： " + Add12Hours.ToLongTimeString() + Environment.NewLine;
+
+            //現在時間減分鐘寫法(本例為減30分鐘):
+            DateTime Minus30Minutes = dt.AddMinutes(-30);
+            richTextBox1.Text += "現在時間減30分鐘： " + Minus30Minutes.ToLongTimeString() + Environment.NewLine;
+
+            //------------------------------------------------------------  # 60個
+
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -1624,9 +1659,9 @@ namespace vcs_test_all_01_DateTime
             cuinfo.DateTimeFormat.Calendar = cuinfo.OptionalCalendars[2];
             //TextBox1.Text = dt.ToString("yyyy/MM/dd", cuinfo);
 
-            DateTime dt = DateTime.Now;//現在時間
-            string mesg = string.Empty;
+            DateTime dt = DateTime.Now;
 
+            string mesg = string.Empty;
             mesg += dt.ToString() + "\n";
             mesg += dt.ToString("yyyy/MM/dd", cuinfo) + "\n";
             mesg += dt.ToString("HH:mm:ss") + "\n";
@@ -1955,7 +1990,7 @@ namespace vcs_test_all_01_DateTime
         //本年第幾周
         private int WeekOfYear()
         {
-            var dt = DateTime.Now;
+            DateTime dt = DateTime.Now;
             int firstWeekend = Convert.ToInt32(DateTime.Parse(dt.Year + "-1-1").DayOfWeek);
             int weekDay = firstWeekend == 0 ? 1 : (7 - firstWeekend + 1);
             int currentDay = dt.DayOfYear;
@@ -1967,14 +2002,14 @@ namespace vcs_test_all_01_DateTime
         private void FEDayInLastWeek()
         {
             int N = 3;//前幾周引數
-            DateTime Today = DateTime.Now;
-            int daysInWeek = (int)Today.DayOfWeek == 0 ? 7 : (int)Today.DayOfWeek;//當前周第幾天,注釋:周日為0
+            DateTime dt = DateTime.Now;
+            int daysInWeek = (int)dt.DayOfWeek == 0 ? 7 : (int)dt.DayOfWeek;//當前周第幾天,注釋:周日為0
 
             for (int i = N; i > 0; i--)
             {
                 //起始日期
-                DateTime firstDay = Today.AddDays(1 - (7 * i + daysInWeek));
-                DateTime lastDay = Today.AddDays(7 - (7 * i + daysInWeek));
+                DateTime firstDay = dt.AddDays(1 - (7 * i + daysInWeek));
+                DateTime lastDay = dt.AddDays(7 - (7 * i + daysInWeek));
             }
         }
 
@@ -1990,7 +2025,27 @@ namespace vcs_test_all_01_DateTime
 
         private void bt_special_00_Click(object sender, EventArgs e)
         {
-            DateTime dt = new DateTime(2006, 3, 11);
+            //特殊曆法
+
+            //萬年曆 農曆 節日 節氣
+            DateTime dt = DateTime.Now;
+            TaiwanCalendar TC = new TaiwanCalendar();
+            TaiwanLunisolarCalendar TA = new TaiwanLunisolarCalendar();
+            richTextBox1.Text += string.Format("{0}", dt.Year) + "\n";
+            richTextBox1.Text += ("西元年:" + dt.Year.ToString()) + "\n";
+            richTextBox1.Text += ("民國年:" + TC.GetYear(dt)) + "\n";
+            richTextBox1.Text += (string.Format("西元:{0}/{1}/{2}", dt.Year, dt.Month, dt.Day)) + "\n";
+            richTextBox1.Text += (string.Format("民國:{0}/{1}/{2}", TC.GetYear(dt), TC.GetMonth(dt), TC.GetDayOfMonth(dt))) + "\n";
+            richTextBox1.Text += (string.Format("農曆:{0}/{1}/{2}", TA.GetYear(dt), TA.GetMonth(dt), TA.GetDayOfMonth(dt))) + "\n";
+
+            TaiwanLunisolarCalendar tlc = new TaiwanLunisolarCalendar();
+            // 取得目前支援的農曆日曆到幾年幾月幾日( 2051-02-10 )
+            richTextBox1.Text += "取得目前支援的農曆日曆 : " + tlc.MaxSupportedDateTime.ToShortDateString() + "\n";
+            // 取得今天的農曆年月日
+            richTextBox1.Text += "農曆 : " + tlc.GetYear(DateTime.Now).ToString() + " 年 " + tlc.GetMonth(DateTime.Now).ToString() + " 月 " + tlc.GetDayOfMonth(DateTime.Now).ToString() + " 日\n";
+
+            //找特定日期的農曆日期
+            dt = new DateTime(2006, 3, 11);
             TaiwanCalendar tc = new TaiwanCalendar();
 
             int year = tc.GetYear(dt);
@@ -1998,10 +2053,17 @@ namespace vcs_test_all_01_DateTime
             int dayOfMonth = tc.GetDayOfMonth(dt);             //日
             int daysInMonth = tc.GetDaysInMonth(year, month);   //整個月的天數
             richTextBox1.Text += "民國" + year.ToString() + "年" + month.ToString() + "月" + dayOfMonth.ToString() + "日\n";
-        }
 
-        private void bt_special_01_Click(object sender, EventArgs e)
-        {
+            //------------------------------------------------------------  # 60個
+
+            //取得時辰
+            dt = DateTime.Now;
+
+            string ctime = getChineseTime(dt.Hour);
+            richTextBox1.Text += "目前時辰 : " + ctime + "\n";
+
+            //------------------------------------------------------------  # 60個
+
             var japaneseCal = new JapaneseCalendar();
             var jaJp = new CultureInfo("ja-JP");
             jaJp.DateTimeFormat.Calendar = japaneseCal;
@@ -2021,40 +2083,14 @@ namespace vcs_test_all_01_DateTime
 
             CultureInfo culture = new CultureInfo("ja-JP", true);
             culture.DateTimeFormat.Calendar = new JapaneseCalendar();
-            DateTime today = DateTime.Today;//當天時間
+            DateTime dt_today = DateTime.Today;//當天時間
 
             // 西暦の出力方法
-            richTextBox1.Text += today + "\n";
-            richTextBox1.Text += today.ToString("yyyy/MM/dd") + "\n";
+            richTextBox1.Text += dt_today + "\n";
+            richTextBox1.Text += dt_today.ToString("yyyy/MM/dd") + "\n";
 
             // 和暦の出力方法
-            richTextBox1.Text += today.ToString("ggyy年MM月dd日(ddd)", culture) + "\n";
-        }
-
-        private void bt_special_02_Click(object sender, EventArgs e)
-        {
-            TaiwanLunisolarCalendar tlc = new TaiwanLunisolarCalendar();
-
-            // 取得目前支援的農曆日曆到幾年幾月幾日( 2051-02-10 )
-            tlc.MaxSupportedDateTime.ToShortDateString();
-
-            // 取得今天的農曆年月日
-            /*
-            txtContent.Text =
-            tlc.GetYear(DateTime.Now).ToString() + "-" +
-            tlc.GetMonth(DateTime.Now).ToString() + "-" +
-            tlc.GetDayOfMonth(DateTime.Now).ToString();
-            */
-            richTextBox1.Text += "農曆" + tlc.GetYear(DateTime.Now).ToString() + "年" + tlc.GetMonth(DateTime.Now).ToString() + "月" + tlc.GetDayOfMonth(DateTime.Now).ToString() + "日\n";
-        }
-
-        private void bt_special_03_Click(object sender, EventArgs e)
-        {
-            //取得時辰
-            DateTime dt = DateTime.Now;
-
-            string ctime = getChineseTime(dt.Hour);
-            richTextBox1.Text += "目前時辰 : " + ctime + "\n";
+            richTextBox1.Text += dt_today.ToString("ggyy年MM月dd日(ddd)", culture) + "\n";
         }
 
         string getChineseTime(int hour)
@@ -2064,11 +2100,24 @@ namespace vcs_test_all_01_DateTime
             return "【" + CTime[hour / 2] + "時】";
         }
 
+
+        private void bt_special_01_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void bt_special_02_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void bt_special_03_Click(object sender, EventArgs e)
+        {
+        }
+
         private void bt_special_04_Click(object sender, EventArgs e)
         {
             //生肖/星座
 
-            //創建日歷對象ChineseLunisolarCalendar,將時間分成多個部分來表示，如分成年、月和日。 年按農歷計算，而日和月按陰陽歷計算。
+            //創建日曆對象ChineseLunisolarCalendar,將時間分成多個部分來表示，如分成年、月和日。 年按農曆計算，而日和月按陰陽曆計算。
             ChineseLunisolarCalendar chinseCaleander = new ChineseLunisolarCalendar();
             string TreeYear = "鼠牛虎兔龍蛇馬羊猴雞狗豬";//創建字符串對象
             int intYear = chinseCaleander.GetSexagenaryYear(DateTime.Now);//計算年信息,GetSexagenaryYear計算與指定日期對應的甲子（60 年）循環中的年。
@@ -2090,18 +2139,6 @@ namespace vcs_test_all_01_DateTime
 
         private void bt_special_05_Click(object sender, EventArgs e)
         {
-            //萬年曆農曆節日節氣
-
-            DateTime dt = DateTime.Now;
-            TaiwanCalendar TC = new TaiwanCalendar();
-            TaiwanLunisolarCalendar TA = new TaiwanLunisolarCalendar();
-
-            richTextBox1.Text += string.Format("{0}", dt.Year) + "\n";
-            richTextBox1.Text += ("西元年:" + dt.Year.ToString()) + "\n";
-            richTextBox1.Text += ("民國年:" + TC.GetYear(dt)) + "\n";
-            richTextBox1.Text += (string.Format("西元:{0}/{1}/{2}", dt.Year, dt.Month, dt.Day)) + "\n";
-            richTextBox1.Text += (string.Format("民國:{0}/{1}/{2}", TC.GetYear(dt), TC.GetMonth(dt), TC.GetDayOfMonth(dt))) + "\n";
-            richTextBox1.Text += (string.Format("農曆:{0}/{1}/{2}", TA.GetYear(dt), TA.GetMonth(dt), TA.GetDayOfMonth(dt))) + "\n";
         }
 
         //由日期找出星座
@@ -2370,15 +2407,6 @@ Console.WriteLine("您在此停留{StayTime.Hours,2}" + " 小時，{StayTime.Min
 
 //------------------------------------------------------------  # 60個
 
-            DateTime dt = DateTime.Now; //取得當前時間
-            $"登入時間 {dt.ToShortTimeString()}";
-
-//------------------------------------------------------------  # 60個
-
-label1.Text = "目前系統時間:" + DateTime.Now.ToLongTimeString();
-
-//------------------------------------------------------------  # 60個
-
 DateTime
 
         // Parse a dater with format 20200517.
@@ -2444,7 +2472,7 @@ string filename = "imsLink_log." + DateTime.Now.ToString("yyyy.MMdd.HHmm.ss") + 
 
 //------------------------------------------------------------  # 60個
 
-richTextBox1.Text += System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "\n";
+richTextBox1.Text += DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "\n";
 2019/05/21 14:52:41
 
 richTextBox1.Text += DateTime.Now.ToString() + "\n";
@@ -2452,52 +2480,11 @@ richTextBox1.Text += DateTime.Now.ToString() + "\n";
 
 //------------------------------------------------------------  # 60個
 
-            richTextBox1.Text += "年：" + dt.Year.ToString() + "\n";
-            richTextBox1.Text += "月：" + dt.Month.ToString() + "\n";
-            richTextBox1.Text += "日：" + dt.Day.ToString() + "\n";
-            richTextBox1.Text += "天：" + dt.DayOfYear.ToString() + "\n";
-            richTextBox1.Text += "星：" + dt.DayOfWeek.ToString() + "\n";
-            richTextBox1.Text += "時：" + dt.Hour.ToString() + "\n";
-            richTextBox1.Text += "分：" + dt.Minute.ToString() + "\n";
-            richTextBox1.Text += "秒：" + dt.Second.ToString() + "\n";
-            richTextBox1.Text += "毫秒：" + dt.Millisecond.ToString() + "\n";
-            richTextBox1.Text += "Ticks：" + dt.Ticks.ToString() + "\n";
-            richTextBox1.Text += "TimeOfDay：" + dt.TimeOfDay.ToString() + "\n";
-
-            System.Globalization.TaiwanCalendar TC = new System.Globalization.TaiwanCalendar();
-            System.Globalization.TaiwanLunisolarCalendar TA = new System.Globalization.TaiwanLunisolarCalendar();
-
-            DateTime dt = DateTime.Now;
-            string message = "";
-            message += string.Format("{0}", dt.Year) + "\n";
-            message += ("西元年:" + dt.Year.ToString()) + "\n";
-            message += ("民國年:" + TC.GetYear(dt)) + "\n";
-            message += (string.Format("西元:{0}/{1}/{2}", dt.Year, dt.Month, dt.Day)) + "\n";
-            message += (string.Format("民國:{0}/{1}/{2}", TC.GetYear(dt), TC.GetMonth(dt), TC.GetDayOfMonth(dt))) + "\n";
-            message += (string.Format("農曆:{0}/{1}/{2}", TA.GetYear(dt), TA.GetMonth(dt), TA.GetDayOfMonth(dt))) + "\n";
-
-            System.DateTime dt = System.DateTime.Now;
-            richTextBox1.Text += "現在日期： " + dt.ToLongDateString() + Environment.NewLine;
-            richTextBox1.Text += "現在時間： " + dt.ToLongTimeString() + Environment.NewLine;
-
-            //現在日期加天數寫法(本例為加5天):
-            System.DateTime Add5Day = dt.AddDays(5);
-            richTextBox1.Text += "現在日期加5天： " + Add5Day.ToLongDateString() + Environment.NewLine;
-
-            //現在時間加小時寫法(本例為加12個小時):
-            System.DateTime Add12Hours = dt.AddHours(12);
-            richTextBox1.Text += "現在時間加12小時： " + Add12Hours.ToLongTimeString() + Environment.NewLine;
-
-            //現在時間減分鐘寫法(本例為減30分鐘):
-            System.DateTime Minus30Minutes = dt.AddMinutes(-30);
-            richTextBox1.Text += "現在時間減30分鐘： " + Minus30Minutes.ToLongTimeString() + Environment.NewLine;
-
-//------------------------------------------------------------  # 60個
-
 星期幾
-            string[] Day = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
-            string week = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
-            richTextBox1.Text += week + "\n";
+string[] Day = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+string week = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
+richTextBox1.Text += week + "\n";
+
 //------------------------------------------------------------  # 60個
 
 C# 如何取得兩個 DateTime 日期之間的天數
@@ -2521,9 +2508,6 @@ DateTime date2 = new DateTime(2003, 2,13, 23,59,59, DateTimeKind.Local);
 TimeSpan s = new TimeSpan(date1.Ticks - date2.Ticks);    
 
 //------------------------------------------------------------  # 60個
-            toolStripStatusLabel1.Text = "目前時間：" + DateTime.Now.ToLongTimeString();
-            this.Text = "當前時間:" + DateTime.Now.ToLongTimeString();
-
 
 DateTime類型中 DayOfWeek時的英文如何轉換成中文
 
@@ -2556,20 +2540,15 @@ Code highlighting produced by Actipro CodeHighlighter (freeware)http://www.CodeH
           ……  
  }
  
- 
- 
 2.聰明的方法：
-string strWeek = "星期"+"日一二三四五六".Substring((int)System.DateTime.Now.DayOfWeek,1); 
-
+string strWeek = "星期"+"日一二三四五六".Substring((int)DateTime.Now.DayOfWeek,1); 
 
 3.最好的方法： 
-string dateString = System.DateTime.Today.ToString("yyyy-M-d dddd", new System.Globalization.CultureInfo("zh-CN")); 
+string dateString = DateTime.Today.ToString("yyyy-M-d dddd", new CultureInfo("zh-CN")); 
 
 //------------------------------------------------------------  # 60個
 
-
 //量測時間1  用 Stopwatch
-	using System.Diagnostics;	//for Stopwatch
 	Stopwatch sw = new Stopwatch();
 	
 	sw.Start();
@@ -2598,8 +2577,6 @@ string dateString = System.DateTime.Today.ToString("yyyy-M-d dddd", new System.G
 	+ sw.Elapsed.Hours.ToString().PadLeft(2,'0') + ":"
 	+ sw.Elapsed.Minutes.ToString().PadLeft(2, '0') + ":"
 	+ sw.Elapsed.Seconds.ToString().PadLeft(2, '0');
-				
-
 
 //量測時間2  用 TimeSpan
 	DateTime start_time = DateTime.Now;
@@ -2611,12 +2588,8 @@ string dateString = System.DateTime.Today.ToString("yyyy-M-d dddd", new System.G
 
 //------------------------------------------------------------  # 60個
 
-
-
 瞭解程式執行時間 
 
-using System.Diagnostics;
-//-------------------------------------------
 Stopwatch sw = new Stopwatch();
 long num = 0;
 sw.Reset();
@@ -2631,6 +2604,53 @@ Console.WriteLine("花費 {0} 毫秒", ms);
 補充說明: 不一定每次測到的時間都相同喔!
 建議值: 超過100毫秒就有點太慢囉…. (電腦爛會Lag更長)
 
-*/
+//量測時間
+            int start = 0;
+            start = Environment.TickCount;
+            // Do stuff
+            int duration = Environment.TickCount - start;
+            richTextBox1.Text += "耗時 : " + (duration / 1000).ToString() + "." + (duration % 1000).ToString("D3") + " 秒\n";
 
+//------------------------------------------------------------  # 60個
+
+計算程式執行的時間
+
+int URms = System.Environment.TickCount;
+
+XXXXXXXXX
+
+Console.WriteLine("花費 {0} ms 完成!!!", Environment.TickCount - URms);
+				
+//------------------------------------------------------------  # 60個
+
+[C#] 觀察程式執行時間 StopWatch
+
+Stopwatch loadingWatch = new Stopwatch();
+loadingWatch.Start();
+
+XXXXXXXXX
+
+loadingWatch.Stop();
+
+Console.WriteLine(loadingWatch.ElapsedMilliseconds);
+
+可以使用Reset()來重置計算時間.
+
+//------------------------------------------------------------  # 60個
+
+計算時間間隔
+dtpicker_first dtpicker_second 為DateTimePicker
+            MessageBox.Show("間隔 "+
+                DateAndTime.DateDiff(	//使用DateDiff方法獲取日期間隔
+                DateInterval.Day, dtpicker_first.Value, dtpicker_second.Value,
+                FirstDayOfWeek.Sunday, FirstWeekOfYear.Jan1).ToString()+" 天", "間隔時間");
+
+    lblDisplay.Text = DateTime.Now.ToLongTimeString();
+
+DateTime.Parse   DateTime.TryParse	在處理西元1~99年會處理成20XX年
+
+
+//------------------------------------------------------------  # 60個
+
+*/
 

@@ -20,6 +20,8 @@ namespace vcs_DataGridView1
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             //DGV的共同設定
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;  //設置如何選中單元格 整行一起選取
 
@@ -1123,15 +1125,10 @@ namespace vcs_DataGridView1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 
@@ -1150,7 +1147,7 @@ dgv1
             //foreach (DataGridViewColumn col in dataGridView1.Columns)
             //    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
-//3030
+//------------------------------------------------------------  # 60個
 
 直接把DataTable的資料貼到DataGridView上
 
@@ -1192,9 +1189,6 @@ for (int i = 0; i < R; i++)//循環遍歷數據表中的每一行數據
     }
     dataGridView1.Rows.Add(item);//向DataGridView中添加數據
 }
-
-//------------------------------------------------------------  # 60個
-
 
 //------------------------------------------------------------  # 60個
 
@@ -1241,5 +1235,70 @@ cell_style.Format = "C2";
 dataGridView1.Columns[3].DefaultCellStyle = cell_style;
 */
 
+
+/*
+            DataGridView1.ColumnHeadersVisible = true;
+            // 設定欄標題樣式。
+            DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle();
+            columnHeaderStyle.BackColor = Color.Beige;
+            columnHeaderStyle.Font = new Font("Verdana", 9, FontStyle.Bold);
+            DataGridView1.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
+            // 設定 DataGridView 控件的字段數目。
+            DataGridView1.ColumnCount = 3;
+            // 設定各欄的標題名稱。
+            DataGridView1.Columns[0].Name = "類別編號";
+            DataGridView1.Columns[1].Name = "類別名稱";
+            DataGridView1.Columns[2].Name = "說明";
+            DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            DataGridView2.ColumnHeadersVisible = true;
+            DataGridView2.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
+            // 設定 DataGridView 控件的字段數目。
+            DataGridView2.ColumnCount = 4;
+            // 設定各欄的標題名稱。
+            DataGridView2.Columns[0].Name = "產品編號";
+            DataGridView2.Columns[1].Name = "產品名稱";
+            DataGridView2.Columns[2].Name = "單位數量";
+            DataGridView2.Columns[3].Name = "單價";
+            DataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            DataGridView3.ColumnHeadersVisible = true;
+            DataGridView3.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
+            // 設定 DataGridView 控件的字段數目。
+            DataGridView3.ColumnCount = 3;
+            // 設定各欄的標題名稱。
+            DataGridView3.Columns[0].Name = "貨運公司編號";
+            DataGridView3.Columns[1].Name = "貨運公司名稱";
+            DataGridView3.Columns[2].Name = "電話";
+            DataGridView3.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+
+
+
+                this.DataGridView1.Rows.Clear();
+                this.DataGridView2.Rows.Clear();
+                this.DataGridView3.Rows.Clear();
+
+
+
+                                this.DataGridView1.Rows.Add(CurrentRow);
+                                this.DataGridView2.Rows.Add(CurrentRow);
+                                this.DataGridView3.Rows.Add(CurrentRow);
+
+                // 排序各個 DataGridView 控件的內容。
+                DataGridView1.Sort(DataGridView1.Columns[0], System.ComponentModel.ListSortDirection.Ascending);
+                DataGridView2.Sort(DataGridView2.Columns[0], System.ComponentModel.ListSortDirection.Ascending);
+                DataGridView3.Sort(DataGridView3.Columns[0], System.ComponentModel.ListSortDirection.Ascending);
+
+*/
+
+
+
+/*
+vcs
+richtextbox datagridview一次寫入數千行
+拉動scroll bar會不會遲緩
+
+*/
 
 

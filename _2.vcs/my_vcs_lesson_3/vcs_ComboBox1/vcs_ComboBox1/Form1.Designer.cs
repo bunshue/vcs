@@ -28,25 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.cboFace = new System.Windows.Forms.ComboBox();
-            this.cboColor = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.comboBox8 = new System.Windows.Forms.ComboBox();
-            this.imageList8 = new System.Windows.Forms.ImageList(this.components);
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
@@ -61,82 +47,10 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // cboFace
-            // 
-            this.cboFace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboFace.Font = new System.Drawing.Font("Arial", 16F);
-            this.cboFace.FormattingEnabled = true;
-            this.cboFace.Location = new System.Drawing.Point(157, 383);
-            this.cboFace.Name = "cboFace";
-            this.cboFace.Size = new System.Drawing.Size(121, 32);
-            this.cboFace.TabIndex = 5;
-            // 
-            // cboColor
-            // 
-            this.cboColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboColor.Font = new System.Drawing.Font("Arial", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboColor.FormattingEnabled = true;
-            this.cboColor.Location = new System.Drawing.Point(18, 383);
-            this.cboColor.Name = "cboColor";
-            this.cboColor.Size = new System.Drawing.Size(121, 32);
-            this.cboColor.TabIndex = 4;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(18, 44);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 8;
-            this.comboBox2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBox2_DrawItem);
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(18, 104);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(209, 29);
-            this.comboBox3.TabIndex = 11;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(240, 106);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(77, 29);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "設置";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // comboBox4
-            // 
-            this.comboBox4.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(18, 182);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(121, 21);
-            this.comboBox4.TabIndex = 13;
-            // 
-            // comboBox5
-            // 
-            this.comboBox5.DropDownHeight = 400;
-            this.comboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.IntegralHeight = false;
-            this.comboBox5.Location = new System.Drawing.Point(17, 236);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(329, 54);
-            this.comboBox5.TabIndex = 15;
             // 
             // pictureBox1
             // 
@@ -153,7 +67,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(393, 447);
+            this.richTextBox1.Location = new System.Drawing.Point(385, 17);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 20;
@@ -179,67 +93,6 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // comboBox8
-            // 
-            this.comboBox8.FormattingEnabled = true;
-            this.comboBox8.Location = new System.Drawing.Point(18, 320);
-            this.comboBox8.Name = "comboBox8";
-            this.comboBox8.Size = new System.Drawing.Size(248, 20);
-            this.comboBox8.TabIndex = 24;
-            this.comboBox8.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBox8_DrawItem);
-            // 
-            // imageList8
-            // 
-            this.imageList8.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList8.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList8.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.comboBox8);
-            this.groupBox1.Controls.Add(this.comboBox3);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.comboBox5);
-            this.groupBox1.Controls.Add(this.cboColor);
-            this.groupBox1.Controls.Add(this.cboFace);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.comboBox4);
-            this.groupBox1.Controls.Add(this.comboBox2);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(362, 624);
-            this.groupBox1.TabIndex = 25;
-            this.groupBox1.TabStop = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 89);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(113, 12);
-            this.label3.TabIndex = 13;
-            this.label3.Text = "設置自動完成的模式";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 158);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(127, 12);
-            this.label4.TabIndex = 14;
-            this.label4.Text = "combobox表頭顯示圖片";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 26);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(127, 12);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "combobox表頭顯示圖片";
-            // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.label5);
@@ -248,7 +101,7 @@
             this.groupBox6.Controls.Add(this.pictureBox1);
             this.groupBox6.Controls.Add(this.button3);
             this.groupBox6.Controls.Add(this.button4);
-            this.groupBox6.Location = new System.Drawing.Point(393, 196);
+            this.groupBox6.Location = new System.Drawing.Point(12, 187);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(350, 231);
             this.groupBox6.TabIndex = 26;
@@ -285,7 +138,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(406, 494);
+            this.bt_clear.Location = new System.Drawing.Point(398, 64);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 68;
@@ -379,39 +232,26 @@
             this.groupBox2.Controls.Add(this.comboBox_year);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Location = new System.Drawing.Point(393, 21);
+            this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(350, 161);
             this.groupBox2.TabIndex = 75;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "groupBox2";
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Location = new System.Drawing.Point(749, 21);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(434, 600);
-            this.groupBox3.TabIndex = 76;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "groupBox3";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1240, 648);
-            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.groupBox6);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.richTextBox1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -422,28 +262,15 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cboFace;
-        private System.Windows.Forms.ComboBox cboColor;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.ComboBox comboBox5;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.ComboBox comboBox8;
-        private System.Windows.Forms.ImageList imageList8;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ComboBox comboBox6;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBox_add;
         private System.Windows.Forms.Button bt_add;
         private System.Windows.Forms.ComboBox comboBox_day;
@@ -453,7 +280,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox3;
     }
 }
 

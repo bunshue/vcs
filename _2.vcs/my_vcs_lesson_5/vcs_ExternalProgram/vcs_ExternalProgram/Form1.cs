@@ -29,6 +29,8 @@ namespace vcs_ExternalProgram
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button1_Click(object sender, EventArgs e)
         {
             panel1.Location = new Point(200, 10);
@@ -41,7 +43,6 @@ namespace vcs_ExternalProgram
             //string sPath = Environment.GetEnvironmentVariable("windir");//獲取系統變量 windir(windows)    
             const string exe_filename = "C:\\Program Files\\Windows NT\\Accessories\\wordpad.exe";
             InsertWindow insertwin = new InsertWindow(panel1, exe_filename);
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -51,7 +52,7 @@ namespace vcs_ExternalProgram
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
 
             panel1.Location = new Point(200, 10);
-            panel1.Size = new Size(300, 400);
+            panel1.Size = new Size(400, 400);
             //panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             Controls.Add(this.panel1);
 
@@ -62,6 +63,8 @@ namespace vcs_ExternalProgram
             InsertWindow insertwin = new InsertWindow(panel1, exe_filename);
         }
     }
+
+    //------------------------------------------------------------  # 60個
 
     class InsertWindow
     {
@@ -85,11 +88,8 @@ namespace vcs_ExternalProgram
             }
         }
 
-        #region  函數和變量聲明
-        /* 
-            * 聲明 Win32 API 
-            */
-
+        //#region  函數和變量聲明
+        //聲明 Win32 API 
         [DllImport("user32.dll")]
         static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
 
@@ -109,9 +109,8 @@ namespace vcs_ExternalProgram
             UInt32 uFlags
         );
 
-        /* 
-         * 定義 Win32 常數 
-         */
+        // 定義 Win32 常數 
+
         const Int32 GWL_STYLE = -16;
         const Int32 WS_BORDER = (Int32)0x00800000L;
         const Int32 WS_THICKFRAME = (Int32)0x00040000L;
@@ -126,9 +125,9 @@ namespace vcs_ExternalProgram
 
         // 目標應用程序的進程.  
         Process process = null;
-        #endregion
+        //#endregion
 
-        #region  容器
+        //#region  容器
         private Panel pan = null;
         public Panel panel1
         {
@@ -147,9 +146,9 @@ namespace vcs_ExternalProgram
             IntPtr innerWnd = process.MainWindowHandle;
             SetWindowPos(innerWnd, IntPtr.Zero, 0, 0, panel1.ClientSize.Width, panel1.ClientSize.Height, SWP_NOZORDER);
         }
-        #endregion
+        //#endregion
 
-        #region  相應事件
+        //#region  相應事件
         private void LoadEvent(string exe_filename)
         {
             // 啟動目標應用程序.  
@@ -174,7 +173,19 @@ namespace vcs_ExternalProgram
             // 在Resize事件中更新目標應用程序的窗體尺寸.  
             panel1_Resize(panel1, null);
         }
-        #endregion
+        //#endregion
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
 
