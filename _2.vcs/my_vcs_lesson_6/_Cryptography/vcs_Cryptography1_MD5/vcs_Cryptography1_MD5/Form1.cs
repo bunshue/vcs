@@ -169,7 +169,6 @@ namespace vcs_Cryptography1_MD5
             richTextBox1.Text += "明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
         }
 
-
         // MD5加密
         string Encrypt(string text)
         {
@@ -1241,10 +1240,9 @@ string md5Result = Encoding.Default.GetString(md5Hash); //Hash轉字串
             //作為密碼方式加密
             //需要改用.NetFramework4.0 且 參考/加入參考 .NET /System.Web
             //md5Result = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(str, "MD5");
-*/
 
+//------------------------------------------------------------  # 60個
 
-/*
         //MD5，SHA1，SHA256，SHA512 ST
 
         // 使用DES加密（Added by niehl 2005-4-6）
