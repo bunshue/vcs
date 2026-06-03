@@ -31,6 +31,8 @@ namespace vcs_Draw6_String
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             p = new Pen(Color.Red, 3);
 
@@ -46,7 +48,7 @@ namespace vcs_Draw6_String
             int y_st = 40;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
+
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -1014,6 +1016,8 @@ namespace vcs_Draw6_String
             Application.Exit();
         }
 
+        //------------------------------------------------------------  # 60個
+
         void open_new_file()
         {
             //指定畫布大小
@@ -1444,3 +1448,17 @@ namespace vcs_Draw6_String
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

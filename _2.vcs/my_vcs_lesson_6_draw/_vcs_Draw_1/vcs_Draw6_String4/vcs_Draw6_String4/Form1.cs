@@ -46,6 +46,8 @@ namespace vcs_Draw6_String4
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             string Path;
             //檢查存圖的資料夾
             Path = Application.StartupPath + "\\png2gif";
@@ -100,7 +102,7 @@ namespace vcs_Draw6_String4
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
+
             //this.Size = new Size(1700, 960);
             this.Text = "vcs_Draw6_String4";
 
@@ -489,6 +491,8 @@ namespace vcs_Draw6_String4
             */
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void bt_background_color_Click(object sender, EventArgs e)
         {
             colorDialog1.AllowFullOpen = true;  //可以使用該對話框定義自定義顏色
@@ -674,15 +678,10 @@ namespace vcs_Draw6_String4
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*
 

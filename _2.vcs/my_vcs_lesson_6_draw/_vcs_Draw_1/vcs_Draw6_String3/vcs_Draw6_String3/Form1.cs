@@ -51,8 +51,28 @@ namespace vcs_Draw6_String3
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
             pictureBox3.Paint += new PaintEventHandler(pictureBox3_Paint);
             pictureBox3.Resize += new EventHandler(pictureBox3_Resize);
+        }
+
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+
+            this.Size = new Size(800, 650);
+            this.Text = "vcs_Draw6_String3";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         // Draw justified text on the PictureBox.
@@ -62,9 +82,7 @@ namespace vcs_Draw6_String3
             e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
 
             // Draw within a rectangle excluding the margins.
-            RectangleF rect = new RectangleF(TextMargin.Left, TextMargin.Top,
-                pictureBox3.ClientSize.Width - TextMargin.Left - TextMargin.Right,
-                pictureBox3.ClientSize.Height - TextMargin.Top - TextMargin.Bottom);
+            RectangleF rect = new RectangleF(TextMargin.Left, TextMargin.Top, pictureBox3.ClientSize.Width - TextMargin.Left - TextMargin.Right, pictureBox3.ClientSize.Height - TextMargin.Top - TextMargin.Bottom);
 
             /*
             // Get the desired alignment.
@@ -82,20 +100,16 @@ namespace vcs_Draw6_String3
             {
                 if ((justification == TextJustification.Right) || (justification == TextJustification.Center))
                 {
-                    rect = DrawParagraphs(e.Graphics, rect, font, Brushes.Green, MessageText, justification,
-                        LineSpacing, 0, ExtraParagraphSpacing);
+                    rect = DrawParagraphs(e.Graphics, rect, font, Brushes.Green, MessageText, justification, LineSpacing, 0, ExtraParagraphSpacing);
                 }
                 else
                 {
-                    rect = DrawParagraphs(e.Graphics, rect, font, Brushes.Green, MessageText, justification,
-                        LineSpacing, ParagraphIndent, ExtraParagraphSpacing);
+                    rect = DrawParagraphs(e.Graphics, rect, font, Brushes.Green, MessageText, justification, LineSpacing, ParagraphIndent, ExtraParagraphSpacing);
                 }
             }
 
             // Show the text drawing area.
-            rect = new RectangleF(TextMargin.Left, TextMargin.Top,
-                pictureBox3.ClientSize.Width - TextMargin.Left - TextMargin.Right,
-                pictureBox3.ClientSize.Height - TextMargin.Top - TextMargin.Bottom);
+            rect = new RectangleF(TextMargin.Left, TextMargin.Top, pictureBox3.ClientSize.Width - TextMargin.Left - TextMargin.Right, pictureBox3.ClientSize.Height - TextMargin.Top - TextMargin.Bottom);
             e.Graphics.DrawRectangle(Pens.Silver, Rectangle.Round(rect));
         }
         private void pictureBox3_Resize(object sender, EventArgs e)
@@ -104,8 +118,7 @@ namespace vcs_Draw6_String3
         }
 
         // Draw justified text on the Graphics object in the indicated Rectangle.
-        private RectangleF DrawParagraphs(Graphics gr, RectangleF rect, Font font, Brush brush, string text,
-            TextJustification justification, float line_spacing, float indent, float paragraph_spacing)
+        private RectangleF DrawParagraphs(Graphics gr, RectangleF rect, Font font, Brush brush, string text, TextJustification justification, float line_spacing, float indent, float paragraph_spacing)
         {
             // Split the text into paragraphs.
             string[] paragraphs = text.Split('\n');
@@ -128,8 +141,7 @@ namespace vcs_Draw6_String3
         // Draw a paragraph by lines inside the Rectangle.
         // Return a RectangleF representing any unused
         // space in the original RectangleF.
-        private RectangleF DrawParagraph(Graphics gr, RectangleF rect, Font font, Brush brush, string text,
-            TextJustification justification, float line_spacing, float indent, float extra_paragraph_spacing)
+        private RectangleF DrawParagraph(Graphics gr, RectangleF rect, Font font, Brush brush, string text, TextJustification justification, float line_spacing, float indent, float extra_paragraph_spacing)
         {
             // Get the coordinates for the first line.
             float y = rect.Top;
@@ -321,3 +333,17 @@ namespace vcs_Draw6_String3
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

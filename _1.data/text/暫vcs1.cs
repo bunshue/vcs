@@ -835,7 +835,7 @@ if (MessageBox.Show("是否要刪除？", "小心", MessageBoxButtons.YesNo, Mes
 //------------------------------------------------------------  # 60個
 
 //取得Click事件的訊息
-tsmiFile.PerformClick();
+button1.PerformClick();
 
 //------------------------------------------------------------  # 60個
 
@@ -2127,17 +2127,16 @@ private bool blnColorTicker;
 
 //------------------------------------------------------------  # 60個
 
+WebClient wc = new WebClient();
 
-//------------------------------------------------------------  # 60個
+wc.DownloadFile(url, filename);
+string data = wc.DownloadString(url_file1);          //抓網頁資料到記憶體
+              wc.DownloadFile(url_file2, filename_local);          //抓網頁資料到本地檔案
+string xml =  wc.DownloadString(url_weather);        //抓資料
 
-client.DownloadFile(url, filename);
-string data = client1.DownloadString(url_file1);          //抓網頁資料到記憶體
-client2.DownloadFile(url_file2, filename_local);          //抓網頁資料到本地檔案
-string xml = client3.DownloadString(url_weather);        //抓資料
+MemoryStream image_stream = new MemoryStream(wc.DownloadData(url));
 
-MemoryStream image_stream = new MemoryStream(client.DownloadData(url));
-
-byte[] bd = client.DownloadData(sURL);
+byte[] bd = wc.DownloadData(sURL);
 
 //------------------------------------------------------------  # 60個
 
@@ -2180,7 +2179,7 @@ namespace vcs_
             string url_file1 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
             //string url_file = @"http://antwrp.gsfc.nasa.gov/apod/";
 
-            using(client1 = new ())     // Create a web client
+            using(WebClient wc = new WebClient())     // Create a web client
             {
                 try  // Get the response string from the URL.
                 {
@@ -2199,7 +2198,7 @@ namespace vcs_
             
             string url_file2 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
             //string url_file2 = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
-            using(client2 = new ())     // Create a web client
+            using(WebClient wc = new WebClient())     // Create a web client
             {
                 try  // Get the response string from the URL.
                 {
@@ -2222,7 +2221,7 @@ namespace vcs_
             }
             
             string url_weather = @"http://api.openweathermap.org/data/2.5/weather?q=Hsinchu&mode=xml&units=imperial&APPID=e8edf79325ae8948a635efd0e076a8bc";
-            using(  = new ())     // Create a web client
+            using(WebClient wc = new WebClient())     // Create a web client
             {
                 try  // Get the response string from the URL.
                 {
@@ -2281,13 +2280,12 @@ namespace vcs_
             DownloadFile(url, filename_covid19b);
         }
 
-        // Download the indicated file.
+        // Download the indicated file
         private void DownloadImage(string url)
         {
             //richTextBox1.Text += "下載圖片 : " + url + "\n";
 
-            // Make a .
-             client = new ();
+             WebClient wc = new WebClient();
 
             /*
             int pos = url.LastIndexOf('/');
@@ -2306,8 +2304,8 @@ namespace vcs_
             // For .NET Framework 4.0 through 4.4:
             ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
-            // Download the file.
-            client.DownloadFile(url, filename);
+            // Download the file
+            wc.DownloadFile(url, filename);
         }
 
         // Download a file from the internet.
@@ -2316,13 +2314,13 @@ namespace vcs_
         {
             try
             {
-                 client = new ();
+                 WebClient wc = new WebClient();
 
                 // Use one of the following.
                 //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
 
-                MemoryStream image_stream = new MemoryStream(client.DownloadData(url));
+                MemoryStream image_stream = new MemoryStream(wc.DownloadData(url));
                 return Image.FromStream(image_stream);
             }
             catch (Exception ex)
@@ -2336,11 +2334,10 @@ namespace vcs_
         {
             try
             {
-                // Make a .
-                 client = new ();
+                 WebClient wc = new WebClient();
 
-                // Download the file.
-                client.DownloadFile(url, filename);
+                // Download the file
+                wc.DownloadFile(url, filename);
             }
             catch (Exception ex)
             {
@@ -2391,7 +2388,7 @@ private void button1_Click(object sender, EventArgs e)
 	string url_file1 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
 	//string url_file = @"http://antwrp.gsfc.nasa.gov/apod/";
 	
-	using(client1 = new ())     // Create a web client
+	using(WebClient wc = new WebClient())     // Create a web client
 	{
 	try  // Get the response string from the URL.
 	{
@@ -2410,7 +2407,7 @@ private void button1_Click(object sender, EventArgs e)
 
 string url_file2 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
 //string url_file2 = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
-using(client2 = new ())     // Create a web client
+using(WebClient wc = new WebClient())     // Create a web client
 {
 	try  // Get the response string from the URL.
 {
@@ -2433,41 +2430,41 @@ catch (Exception ex)
 }
 
 string url_weather = @"http://api.openweathermap.org/data/2.5/weather?q=Hsinchu&mode=xml&units=imperial&APPID=e8edf79325ae8948a635efd0e076a8bc";
-using( = new ())     // Create a web client
+using(WebClient wc = new WebClient())     // Create a web client
 {
 	try  // Get the response string from the URL.
 	{
-	// Get the response string from the URL.
-	//richTextBox1.Text += "data\n" + xml + "\n";
-	richTextBox1.Text += "抓網頁查詢資料到記憶體\tOK\n";
+		// Get the response string from the URL.
+		//richTextBox1.Text += "data\n" + xml + "\n";
+		richTextBox1.Text += "抓網頁查詢資料到記憶體\tOK\n";
 	}
 	catch (WebException ex)
 	{
-	MessageBox.Show("WebException\t" + ex.Message);
+		MessageBox.Show("WebException\t" + ex.Message);
 	}
 	catch (Exception ex)
 	{
-	MessageBox.Show("Unknown error\t" + ex.Message);
+		MessageBox.Show("Unknown error\t" + ex.Message);
 	}
-	}
+}
 	
 string img_src_url = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
 richTextBox1.Text += "圖片所在網址 : " + img_src_url + "\n";
 try
 {
-//圖片下載並存檔
-DownloadImage(img_src_url);
-richTextBox1.Text += "圖片下載並存檔\tOK\n";
-
-//圖片下來並顯示
-Image img = GetPicture(img_src_url);
-pictureBox1.Image = img;
-richTextBox1.Text += "圖片下來並顯示\tOK\n";
+	//圖片下載並存檔
+	DownloadImage(img_src_url);
+	richTextBox1.Text += "圖片下載並存檔\tOK\n";
+	
+	//圖片下來並顯示
+	Image img = GetPicture(img_src_url);
+	pictureBox1.Image = img;
+	richTextBox1.Text += "圖片下來並顯示\tOK\n";
 }
 catch (Exception ex)
 {
-richTextBox1.Text += "*** Download Error" + "\n";
-richTextBox1.Text += "*** " + ex.Message + "\n";
+	richTextBox1.Text += "*** Download Error" + "\n";
+	richTextBox1.Text += "*** " + ex.Message + "\n";
 }
 
 //下載COVID-19資料
@@ -2492,13 +2489,12 @@ url = "https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2F
 DownloadFile(url, filename_covid19b);
 }
 
-// Download the indicated file.
+// Download the indicated file
 private void DownloadImage(string url)
 {
 //richTextBox1.Text += "下載圖片 : " + url + "\n";
 
-// Make a Web
- client = new ();
+ WebClient wc = new WebClient();
 
 /*
 int pos = url.LastIndexOf('/');
@@ -2516,8 +2512,6 @@ richTextBox1.Text += "下載圖片, 本地圖片檔名 : " + filename + "\n";
 //    SecurityProtocolType.Tls12;
 // For .NET Framework 4.0 through 4.4:
 ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
-
-// Download the file.
 }
 
 // Download a file from the internet.
@@ -2526,7 +2520,7 @@ private Image GetPicture(string url)
 {
 try
 {
- client = new ();
+	WebClient wc = new WebClient();
 
 // Use one of the following.
 //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
@@ -2543,21 +2537,7 @@ return null;
 
 private void DownloadFile(string url, string filename)
 {
-try
-{
-	// Make a Web
-	 client = new ();
-	// Download the file.
-}
-catch (Exception ex)
-{
-	MessageBox.Show(ex.Message, "Download Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-}
-finally
-{
-}
-
-
+	 WebClient wc = new WebClient();
 }
 
 //------------------------------------------------------------  # 60個
@@ -4053,6 +4033,7 @@ File: Camera.cs Project: alienwow/CSharpProjects
             drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
             g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
+            
             if (!Directory.Exists(videoPath))
                 Directory.CreateDirectory(videoPath);
 
@@ -4099,6 +4080,7 @@ writer.Open(filename, width, height, this.Videofps, VideoCodec.MPEG4);
 要輸入帳號密碼的 WebClient
                         // Upload the file to the server.
                         WebClient myWebClient = new WebClient();
+                        WebClient wc = new WebClient();
                         NetworkCredential myCredentials = new NetworkCredential("snijhof", "MKD7529s09");
                         myWebClient.Credentials = myCredentials;
                         byte[] responseArray = myWebClient.UploadFile("ftp://student.aii.avans.nl/GRP/42IN11EWd/Videos/" + fileName, filePath);
@@ -4311,7 +4293,7 @@ voice.Speak(this.textBox1.Text, spFlags);
 C#代碼 
 CheckForIllegalCrossThreadCalls = false; 
 
-6060
+//------------------------------------------------------------  # 60個
 
 2 C#圖像處理的基本方法
 
@@ -4473,7 +4455,7 @@ button1.MouseLeave += new Syetem.EvenHandler（button1_MLeave）；
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-6060
+//------------------------------------------------------------  # 60個
 
 停止一個線程
 
@@ -4557,11 +4539,11 @@ This is Main.2
 This is F2.1
 This is F1.1
  
-6060
+//------------------------------------------------------------  # 60個
 
 EXIF，是英文Exchangeable Image File
 
-6060
+//------------------------------------------------------------  # 60個
 
 哪些事需要快捷鍵??
 全螢幕截圖
@@ -8624,7 +8606,7 @@ Form2的元件的Modifiers要改成Internal, 預設為private
                 System.Threading.Thread.Sleep(50);//使线程休眠50毫秒
             }
 
-6060
+//------------------------------------------------------------  # 60個
 
 常用圖形的繪制方法
 
@@ -10741,6 +10723,7 @@ this.CenterToScreen();       //將表單置中顯示
 
 如何在程式忙碌時還可以停掉這個程式
 
+6060
 
 //取得本程式之Form1.cs所在的資料夾
 string dirname = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\"));
@@ -10786,7 +10769,6 @@ this.ClientSize = new Size(btnClickMe.Right, btnClickMe.Bottom);
 
 
 新建一個按鍵
-            // Make a new button similar to the old one.
             Button btn = new Button();
             btn.Text = button1.Text;
             btn.Size = button1.Size;
@@ -10801,11 +10783,9 @@ this.ClientSize = new Size(btnClickMe.Right, btnClickMe.Bottom);
             // Place the button inside the GroupBox.
             btn.Parent = groupBox1;
             
-            
 //製作一個PictureBox Array
             // Make an array holding the PictureBoxes.
             PictureBox[] pics = { PictureBox1, PictureBox2, PictureBox3, PictureBox4 };
-
 
 //製作一個CheckBox Array
         // Arrays of controls.
@@ -10974,7 +10954,7 @@ Form的設定
                     }
                 }
 
-6060
+//------------------------------------------------------------  # 60個
 
  Thread.Sleep()方法用於將當前線程休眠一定時間,時間單位是毫秒。在阻塞時線程狀態是 ThreadState.WaitSleepJoin， 在休眠的時間裡讓其他等待線程先執行，可以減少CPU的占用時間。
 
@@ -12003,13 +11983,6 @@ File.Create(Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd
 
 ClientSize = new Size(button2.Right + 20, richTextBox1.Bottom + 20);    //自動表單邊界
 
-//檔案不存在的寫法
-            if (File.Exists(filename) == false)
-            {
-                richTextBox1.Text += "檔案 " + filename + " 不存在，離開。\n";
-                return;
-            }
-
 							//離開按鈕的寫法
 							            //最大化螢幕
 							            this.FormBorderStyle = FormBorderStyle.None;
@@ -12992,9 +12965,7 @@ g.Clear(Color.Transparent);
 //            貼上位置與大小,擷取部分圖片位置與大小,單位
 g.DrawImage(img, destRect1, srcRect, units);
 
-
-6060
-
+//------------------------------------------------------------  # 60個
 
             Graphics g;
 
@@ -13063,7 +13034,6 @@ public void SaveBitmapUsingExtension(Bitmap bitmap1, string filename)
     }
 }
 
-
         private void bt_save_Click(object sender, EventArgs e)
         {
             // Make a copy of the result image.
@@ -13104,8 +13074,20 @@ Bitmap bitmap1 = new Bitmap(filename);
 Graphics g = Graphics.FromImage(bitmap1);
 pictureBox1.Image = bitmap1;
 
-
 6060
 
+file.
+directory.
 
-
+//檔案不存在的寫法
+            if (File.Exists(filename) == false)
+            {
+                richTextBox1.Text += "檔案 " + filename + " 不存在，離開。\n";
+                return;
+            }
+
+
+建立臨時檔案
+
+
+

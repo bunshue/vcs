@@ -69,9 +69,9 @@ namespace vcs_Draw2
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 5);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            int width = 920;
-            int height = 680;
-            pictureBox1.Size = new Size(width, height);
+            int W = 920;
+            int H = 690;
+            pictureBox1.Size = new Size(W, H);
             pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
             this.Size = new Size(1600, 750);
@@ -180,7 +180,6 @@ namespace vcs_Draw2
             p.EndCap = LineCap.Triangle;
             g.DrawLine(p, x_st, y_st, x_st + w, y_st);
             g.DrawString("Triangle 指定三角形線條端點", f, sb, new PointF(x_st + dx, y_st));
-
 
             x_st = 50;
             y_st = 50;

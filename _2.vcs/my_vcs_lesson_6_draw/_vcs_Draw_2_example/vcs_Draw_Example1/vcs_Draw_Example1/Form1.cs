@@ -1319,7 +1319,7 @@ namespace vcs_Draw_Example1
 
             //OK，這時我們就可以開始畫了，先把根部畫出來。
 
-            #region  畫樹根
+            //#region  畫樹根
             sizeF = g.MeasureString(parentTree, font);
             sizeF.Width += 10;
             s = sizeF.ToSize();
@@ -1332,11 +1332,11 @@ namespace vcs_Draw_Example1
             rect = new Rectangle(loc, s);
             g.DrawRectangle(Pens.Black, rect);
             g.DrawString(parentTree, font, Brushes.Black, rect, sf);
-            #endregion
+            //#endregion
 
             //再把樹根的子樹畫出來。
 
-            #region  畫子樹
+            //#region  畫子樹
             foreach (object o in midTree)
             {
                 int picXMid = picX / midTreeCount;
@@ -1360,11 +1360,11 @@ namespace vcs_Draw_Example1
                 if (midCountFlag == 1)
                     tempP = new Point(endP.X, endP.Y + s.Height);
             }
-            #endregion
+            //#endregion
 
             //畫出子樹的樹枝。
 
-            #region  畫子樹的樹枝
+            //#region  畫子樹的樹枝
 
             startP = tempP;
 
@@ -1395,7 +1395,7 @@ namespace vcs_Draw_Example1
                     g.DrawLine(redPen, startP, endP);
                 }
             }
-            #endregion
+            //#endregion
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -2986,182 +2986,42 @@ namespace vcs_Draw_Example1
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button18_Click(object sender, EventArgs e)
         {
-            //從DataTable畫曲線圖1
+            //從DataTable畫曲線圖
 
-            //建立DataTable
-
+            //建立DataTable, 建立表結構
             DataTable dt = new DataTable();
-
-            Random r = new Random();
-
-            //2.建立表結構
             dt.Columns.Add("月份");
             dt.Columns.Add("數量");
 
-            //3.創建新行
-            DataRow dr1 = dt.NewRow();
-            DataRow dr2 = dt.NewRow();
-            DataRow dr3 = dt.NewRow();
-            DataRow dr4 = dt.NewRow();
-            DataRow dr5 = dt.NewRow();
-            DataRow dr6 = dt.NewRow();
-            DataRow dr7 = dt.NewRow();
-            DataRow dr8 = dt.NewRow();
-            DataRow dr9 = dt.NewRow();
-            DataRow dr10 = dt.NewRow();
-            DataRow dr11 = dt.NewRow();
-            DataRow dr12 = dt.NewRow();
+            Random r = new Random();
 
-            //4.為新行賦值 並 添加到DataTable
-            dr1[0] = "1";
-            dr1[1] = r.Next(30).ToString();
-            dr2[0] = "2";
-            dr2[1] = r.Next(30).ToString();
-            dr3[0] = "3";
-            dr3[1] = r.Next(30).ToString();
-            dr4[0] = "4";
-            dr4[1] = r.Next(30).ToString();
-            dr5[0] = "5";
-            dr5[1] = r.Next(30).ToString();
-            dr6[0] = "6";
-            dr6[1] = r.Next(30).ToString();
-            dr7[0] = "7";
-            dr7[1] = r.Next(30).ToString();
-            dr8[0] = "8";
-            dr8[1] = r.Next(30).ToString();
-            dr9[0] = "9";
-            dr9[1] = r.Next(30).ToString();
-            dr10[0] = "10";
-            dr10[1] = r.Next(30).ToString();
-            dr11[0] = "11";
-            dr11[1] = r.Next(30).ToString();
-            dr12[0] = "12";
-            dr12[1] = r.Next(30).ToString();
-
-            dt.Rows.Add(dr1);
-            dt.Rows.Add(dr2);
-            dt.Rows.Add(dr3);
-            dt.Rows.Add(dr4);
-            dt.Rows.Add(dr5);
-            dt.Rows.Add(dr6);
-            dt.Rows.Add(dr7);
-            dt.Rows.Add(dr8);
-            dt.Rows.Add(dr9);
-            dt.Rows.Add(dr10);
-            dt.Rows.Add(dr11);
-            dt.Rows.Add(dr12);
+            //3.創建新行, 為新行賦值 並 添加到DataTable
+            for (int i = 0; i < 12; i++)
+            {
+                DataRow dr = dt.NewRow();
+                dr[0] = (i + 1).ToString();
+                dr[1] = r.Next(30).ToString();
+                dt.Rows.Add(dr);
+            }
 
             //建立DrawingCurve, 並把剛剛建立的DataTable給他用
             DrawingCurve MyDc = new DrawingCurve();
-
             MyDc.tbData = dt;
 
             Bitmap bitmap1 = new Bitmap(100, 100);
-
             bitmap1 = MyDc.DrawingImg();
-
-            Graphics g = Graphics.FromImage(MyDc.DrawingImg());
-            //显示图形
             pictureBox1.Image = bitmap1;
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
-            //從DataTable畫曲線圖2
-
-            DrawingCurve MyDc = new DrawingCurve();
-
-            MyDc.tbData = create_datatable_data();
-
-            Bitmap img = new Bitmap(100, 100);
-
-            img = MyDc.DrawingImg();
-
-            pictureBox1.Image = img;
-
-            //Graphics g = Graphics.FromImage(MyDc.DrawingImg());
-
-            //显示图形
-
-            //pictureBox1.Image = bitmap1;
-
-            //Response.Write("<br>" + MyDc.intData.ToString());
         }
 
-        public DataTable create_datatable_data()
-        {
-            DataTable dt = new DataTable();
-            //2.建立表結構
-            dt.Columns.Add("月份");
-            dt.Columns.Add("數量");
-
-            //3.創建新行
-            DataRow dr1 = dt.NewRow();
-            DataRow dr2 = dt.NewRow();
-            DataRow dr3 = dt.NewRow();
-            DataRow dr4 = dt.NewRow();
-            DataRow dr5 = dt.NewRow();
-            DataRow dr6 = dt.NewRow();
-            DataRow dr7 = dt.NewRow();
-            DataRow dr8 = dt.NewRow();
-            DataRow dr9 = dt.NewRow();
-            DataRow dr10 = dt.NewRow();
-            DataRow dr11 = dt.NewRow();
-            DataRow dr12 = dt.NewRow();
-
-            //4.為新行賦值 並 添加到DataTable
-            dr1[0] = "1";
-            dr1[1] = "20";
-            dt.Rows.Add(dr1);
-
-            dr2[0] = "2";
-            dr2[1] = "15";
-            dt.Rows.Add(dr2);
-
-            dr3[0] = "3";
-            dr3[1] = "18";
-            dt.Rows.Add(dr3);
-
-            dr4[0] = "4";
-            dr4[1] = "18";
-            dt.Rows.Add(dr4);
-
-            dr5[0] = "5";
-            dr5[1] = "18";
-            dt.Rows.Add(dr5);
-
-            dr6[0] = "6";
-            dr6[1] = "18";
-            dt.Rows.Add(dr6);
-
-            dr7[0] = "7";
-            dr7[1] = "18";
-            dt.Rows.Add(dr7);
-
-            dr8[0] = "8";
-            dr8[1] = "18";
-            dt.Rows.Add(dr8);
-
-            dr9[0] = "9";
-            dr9[1] = "18";
-            dt.Rows.Add(dr9);
-
-            dr10[0] = "10";
-            dr10[1] = "18";
-            dt.Rows.Add(dr10);
-
-            dr11[0] = "11";
-            dr11[1] = "20";
-            dt.Rows.Add(dr11);
-
-            dr12[0] = "12";
-            dr12[1] = "15";
-            dt.Rows.Add(dr12);
-
-            return dt;
-        }
+        //------------------------------------------------------------  # 60個
 
         //Pie Chart 1 ST
         private void button20_Click(object sender, EventArgs e)
@@ -3659,7 +3519,7 @@ namespace vcs_Draw_Example1
         public static float Asash = 3;//標識文字名邊框的寬度
         public static float temXLeft = 0;//X軸的左端點初始化
 
-        #region 繪製餅形圖(Area)
+        //#region 繪製餅形圖(Area)
         public static float AreaXMaxWidth = 0;//取得字串的寬度
         public static float AreaXMaxHeight = 0;//取得字串的高度
         //取得餅形圖的標識文字
@@ -3752,9 +3612,9 @@ namespace vcs_Draw_Example1
             else
                 return;
         }
-        #endregion
+        //#endregion
 
-        #region 繪製餅形圖標識(Area)
+        //#region 繪製餅形圖標識(Area)
         public void ProAreaSign(Graphics g, PictureBox pbx)
         {
             AreaValue();//儲存最長的名稱
@@ -3867,7 +3727,7 @@ namespace vcs_Draw_Example1
             else
                 return;
         }
-        #endregion
+        //#endregion
 
         private void button27_Click(object sender, EventArgs e)
         {
@@ -6724,28 +6584,20 @@ namespace vcs_Draw_Example1
 
         private double TurnNumber(string str)
         {
-
             double dubReturn;
 
             try
             {
-
                 dubReturn = Convert.ToDouble(str);
-
             }
 
             catch
             {
-
                 dubReturn = 0;
-
             }
-
             return dubReturn;
         }
     }
-
-
 
     public class PieChart
     {
@@ -6899,6 +6751,7 @@ namespace vcs_Draw_Example1
             bm.Dispose();
         }
     }
+
     public class ChartUtil
     {
         public ChartUtil()
@@ -6987,7 +6840,7 @@ namespace vcs_Draw_Example1
         private float fltYRotateAngle = 0f; //Y軸文字旋轉角度
         private int intCurveSize = 2; //曲線線條大小
         private int intFontSpace = 0; //intFontSpace 是字體大小和距離調整出來的一個比較適合的數字
-        #region 公共屬性
+        //#region 公共屬性
         /// <summary>
 
         /// 圖像的寬度
@@ -7289,7 +7142,7 @@ namespace vcs_Draw_Example1
             set { intCurveSize = value; }
         }
 
-        #endregion
+        //#endregion
         /// <summary>
         /// 自動根據參數調整圖像大小
         /// 根據數據自動計算邊距和字體等

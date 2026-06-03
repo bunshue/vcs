@@ -29,6 +29,8 @@ namespace vcs_Draw5_Image2
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             Image img = Image.FromFile(filename);
 
             W = img.Width;
@@ -49,12 +51,19 @@ namespace vcs_Draw5_Image2
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
+
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox1.Size = new System.Drawing.Size(450, 450);
             pictureBox1.Location = new Point(20, 100);
             pictureBox2.Size = new Size(300, 300);
             pictureBox2.Location = new Point(20 + 450 + 10, 100);
+
+            this.Size = new Size(1000, 750);
+            this.Text = "vcs_Draw5_Image2";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         void pictureBox1_KeyDown(object sender, KeyEventArgs e)

@@ -38,6 +38,8 @@ namespace vcs_Draw3B
         Rectangle boxRect; // 宣告 一個箱子的位置與寬高
         //箱中球 SP
 
+        //------------------------------------------------------------  # 60個
+
         //雙圓旋轉 ST
         Pen pen01 = new Pen(Color.Red, 4); // 內圓 的筆刷
         Pen pen02 = new Pen(Color.Blue, 4);// 外圓 的筆刷
@@ -94,12 +96,16 @@ namespace vcs_Draw3B
                                 30, Color.Green);
             //三顆跳跳球 SP
 
+            //------------------------------------------------------------  # 60個
+
             //箱中球 ST
             // 設定 箱子的位置與寬高
             boxRect = new Rectangle(20, 20, 200, 150);
             // 新增 一個箱中球 物件
             ball = new BallInABox(new Point(100, 100), new Point(2, 3), boxRect, 20);
             //箱中球 SP
+
+            //------------------------------------------------------------  # 60個
 
             //雙圓旋轉 ST
             // 內外圓 的筆刷樣式設定
@@ -166,6 +172,8 @@ namespace vcs_Draw3B
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         //delay 10000 約 10秒
         //C# 不lag的延遲時間
@@ -393,6 +401,8 @@ namespace vcs_Draw3B
 
         //畫圓內接正多邊形 SP
 
+        //------------------------------------------------------------  # 60個
+
         void draw_color_rectangles()
         {
             int W = pictureBox_rectangle.ClientSize.Width;
@@ -427,6 +437,8 @@ namespace vcs_Draw3B
             draw_color_rectangles();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void timer_progressbar_Tick(object sender, EventArgs e)
         {
             //graphics
@@ -457,6 +469,8 @@ namespace vcs_Draw3B
                 Complete_progressbar = 0;
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         //指南針ST
         private void pictureBox_compass2_Paint(object sender, PaintEventArgs e)
@@ -754,6 +768,8 @@ namespace vcs_Draw3B
         }
         //指南針SP
 
+        //------------------------------------------------------------  # 60個
+
         int cnt = 0;
         void draw_spin_signal()
         {
@@ -888,6 +904,8 @@ namespace vcs_Draw3B
         }
         //三顆跳跳球 SP
 
+        //------------------------------------------------------------  # 60個
+
         //箱中球 ST
         private void pictureBox_ball_in_box_Paint(object sender, PaintEventArgs e)
         {
@@ -904,6 +922,8 @@ namespace vcs_Draw3B
             this.pictureBox_ball_in_box.Invalidate();   // 向作業系統要求重畫
         }
         //箱中球 SP
+
+        //------------------------------------------------------------  # 60個
 
         //雙圓旋轉 ST
 
@@ -1000,3 +1020,17 @@ namespace vcs_Draw3B
         //雙圓旋轉 SP
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

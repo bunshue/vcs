@@ -305,7 +305,7 @@ namespace vcs_WMI__new
                 }
             }
 
-            //3030
+            //------------------------------------------------------------  # 60個
 
             /*
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
@@ -485,7 +485,7 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
                 richTextBox1.Text += "描述" + mo["Description"].ToString() + "\n";
             }
 
-            //3030
+            //------------------------------------------------------------  # 60個
 
             //取得顯示設備相關資訊
             mos = new ManagementObjectSearcher("SELECT * FROM win32_VideoController");//聲明一個用于檢索設備管理信息的對象
@@ -501,7 +501,7 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
                 richTextBox1.Text += "顯示模式 : " + mo["VideoModeDescription"].ToString() + "\n"; //在文本框中顯示設備的當前顯示模式
             }
 
-            //3030
+            //------------------------------------------------------------  # 60個
 
             //取得計算機的顯示設備訊息
             mos = new ManagementObjectSearcher("SELECT * FROM Win32_VideoController");
@@ -1243,7 +1243,7 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
             account.Get();
             richTextBox1.Text += "取得帳號名 : " + account + "\n";
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
             //取得映射驅動器路徑
             //映射驅動器 = 網路芳鄰硬碟的連結
@@ -1576,7 +1576,7 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button23_Click(object sender, EventArgs e)
         {
@@ -1600,7 +1600,7 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
             return str;//返回网卡序列号
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button24_Click(object sender, EventArgs e)
         {
@@ -1796,13 +1796,159 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
 
         }
 
+        //6060
+
         private void button37_Click(object sender, EventArgs e)
         {
+            //取得系統資訊1
+            SystemInfoEntity r1 = GetSystemInfo();
 
+            richTextBox1.Text += "aaaaa = " + r1.FreePhysicalMemory.ToString() + "\n";
+
+            SystemInfoEntity r2 = GetTimeZoneInfo();
+            richTextBox1.Text += "aaaaa = " + r2.OSName.ToString() + "\n";
+
+            SystemInfoEntity r3 = GetPageFileInfo();
+            richTextBox1.Text += "aaaaa = " + r3.OSName.ToString() + "\n";
+
+            BIOSInfoEntity r4 = GetBIOSInfo();
+            richTextBox1.Text += "aaaaa = " + r4.BIOSVersion.ToString() + "\n";
+
+            ComputerInfoEntity r5 = GetComputerInfo();
+            richTextBox1.Text += "aaaaa = " + r5.ComputerSystemName.ToString() + "\n";
+
+            List<CPUInfoEntity> r6 = GetCPUInfo();
+            richTextBox1.Text += "len = " + r6.Count.ToString() + "\n";
+            //richTextBox1.Text += "aaaaa = " + r2.OSName.ToString() + "\n";
         }
+
+        //6060
+        //聲明一個結構體，它將做為GetSystemInfo的一個參數：
+        //Struct 收集系統信息
+        [StructLayout(LayoutKind.Sequential)]
+        public struct SYSTEM_INFO
+        {
+            public uint dwOemId;
+            public uint dwPageSize;
+            public uint lpMinimumApplicationAddress;
+            public uint lpMaximumApplicationAddress;
+            public uint dwActiveProcessorMask;
+            public uint dwNumberOfProcessors;
+            public uint dwProcessorType;
+            public uint dwAllocationGranularity;
+            public uint dwProcessorLevel;
+            public uint dwProcessorRevision;
+        }
+
+        //struct 收集內存情況
+        [StructLayout(LayoutKind.Sequential)]
+        public struct MEMORYSTATUS
+        {
+            public uint dwLength;
+            public uint dwMemoryLoad;
+            public uint dwTotalPhys;
+            public uint dwAvailPhys;
+            public uint dwTotalPageFile;
+            public uint dwAvailPageFile;
+            public uint dwTotalVirtual;
+            public uint dwAvailVirtual;
+        }
+
+        //private System.ComponentModel.Container components;
+        //private System.WinForms.MenuItem menuAbout;
+        //private System.WinForms.MainMenu mainMenu1;
+        //private System.WinForms.ListBox listBox1;
+        //private System.WinForms.Button button1;
+
+        //获取系统信息
+
+        [DllImport("kernel32")]
+        static extern void GetSystemInfo(ref SYSTEM_INFO pSI);
+
+        //获取内存信息
+
+        [DllImport("kernel32")]
+
+        static extern void GlobalMemoryStatus(ref MEMORYSTATUS buf);
+
+        //处理器类型
+        public const int PROCESSOR_INTEL_386 = 386;
+        public const int PROCESSOR_INTEL_486 = 486;
+        public const int PROCESSOR_INTEL_PENTIUM = 586;
+        public const int PROCESSOR_MIPS_R4000 = 4000;
+        public const int PROCESSOR_ALPHA_21064 = 21064;
 
         private void button38_Click(object sender, EventArgs e)
         {
+
+            //取得系統資訊2
+            /*
+            try
+            {
+                SYSTEM_INFO pSI = new SYSTEM_INFO();
+                GetSystemInfo(ref pSI);
+                //一旦你接收到返回的結構體，那麼就可以以返回的參數來執行操作了。
+                //e.g.listBox1.InsertItem (0,pSI.dwActiveProcessorMask.ToString());:
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message);
+            }
+            */
+
+            try
+            {
+                SYSTEM_INFO pSI = new SYSTEM_INFO();
+                GetSystemInfo(ref pSI);
+                string CPUType;
+                switch (pSI.dwProcessorType)
+                {
+                    case PROCESSOR_INTEL_386:
+                        CPUType = "Intel 386";
+                        break;
+                    case PROCESSOR_INTEL_486:
+                        CPUType = "Intel 486";
+                        break;
+                    case PROCESSOR_INTEL_PENTIUM:
+                        CPUType = "Intel Pentium";
+                        break;
+                    case PROCESSOR_MIPS_R4000:
+                        CPUType = "MIPS R4000";
+                        break;
+                    case PROCESSOR_ALPHA_21064:
+                        CPUType = "DEC Alpha 21064";
+                        break;
+                    default:
+                        CPUType = "(unknown)";
+                        break;
+                }
+                richTextBox1.Text += "Active Processor Mask :" + pSI.dwActiveProcessorMask.ToString() + "\n";
+                richTextBox1.Text += "Allocation Granularity :" + pSI.dwAllocationGranularity.ToString() + "\n";
+                richTextBox1.Text += "Number Of Processors :" + pSI.dwNumberOfProcessors.ToString() + "\n";
+                richTextBox1.Text += "OEM ID :" + pSI.dwOemId.ToString() + "\n";
+                richTextBox1.Text += "Page Size:" + pSI.dwPageSize.ToString() + "\n";
+                richTextBox1.Text += "Processor Level Value:" + pSI.dwProcessorLevel.ToString() + "\n";
+                richTextBox1.Text += "Processor Revision:" + pSI.dwProcessorRevision.ToString() + "\n";
+                richTextBox1.Text += "CPU type:" + CPUType + "\n";
+                richTextBox1.Text += "Maximum Application Address: " + pSI.lpMaximumApplicationAddress.ToString() + "\n";
+                richTextBox1.Text += "Minimum Application Address:" + pSI.lpMinimumApplicationAddress.ToString() + "\n";
+                /************** 从 GlobalMemoryStatus 获取返回值****************/
+                MEMORYSTATUS memSt = new MEMORYSTATUS();
+                GlobalMemoryStatus(ref memSt);
+                richTextBox1.Text += "Available Page File :" + (memSt.dwAvailPageFile / 1024).ToString() + "\n";
+                richTextBox1.Text += "Available Physical Memory : " + (memSt.dwAvailPhys / 1024).ToString() + "\n";
+                richTextBox1.Text += "Available Virtual Memory:" + (memSt.dwAvailVirtual / 1024).ToString() + "\n";
+                richTextBox1.Text += "Size of structur :" + memSt.dwLength.ToString() + "\n";
+                richTextBox1.Text += "Memory In Use :" + memSt.dwMemoryLoad.ToString() + "\n";
+                richTextBox1.Text += "Total Page Size :" + (memSt.dwTotalPageFile / 1024).ToString() + "\n";
+                richTextBox1.Text += "Total Physical Memory :" + (memSt.dwTotalPhys / 1024).ToString() + "\n";
+                richTextBox1.Text += "Total Virtual Memory :" + (memSt.dwTotalVirtual / 1024).ToString() + "\n";
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message);
+            }
+
 
         }
 
@@ -1824,7 +1970,7 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         //1、實體類
 
@@ -2221,7 +2367,7 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
                 set { strFileName = value; }
             }
             //#endregion
-            ///#endregion
+            //#endregion
         }
 
         //*****************計算機系統信息
@@ -2369,7 +2515,7 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
             //#endregion
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         //2、核心實現類
 
@@ -2412,7 +2558,6 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
                     foreach (ManagementObject mObject in moCollection)
                     {
                         CPUInfoEntity cpuInfo = new CPUInfoEntity();
-
                         cpuInfo.CPUCount = moCollection.Count;
                         cpuInfo.CPUName = mObject["Name"].ToString();　//獲取CPU名稱
                         cpuInfo.CPUID = mObject["ProcessorId"].ToString();　//獲取　CPU　ID
@@ -2439,8 +2584,9 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
             }
             return cpuInfoList;
         }
+        //#endregion
 
-        //獲取操作系統參數
+        //#region//獲取操作系統參數
         /// <summary>
         /// 獲取操作系統參數
         /// </summary>
@@ -2474,6 +2620,8 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
                 //循環
                 if (moCollection != null)
                 {
+                    //foreach
+
                     foreach (ManagementObject mObject in moCollection)
                     {
                         systemInfoList.OSName = mObject["Caption"].ToString();　　//獲取OS　名稱
@@ -2484,7 +2632,7 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
                         systemInfoList.SystemDirectory = mObject["SystemDirectory"].ToString();　　//獲取系統目錄
                         systemInfoList.BootDevice = mObject["BootDevice"].ToString();　　//獲取啟動設備
                         systemInfoList.OSVersion = mObject["Version"].ToString();//獲取版本
-                        systemInfoList.OSCSDVersion = mObject["CSDVersion"].ToString();//獲取SP
+                        systemInfoList.OSCSDVersion = mObject["CSDVersion"].ToString();//獲取SP 不可用此
                         systemInfoList.OSBuildNumber = mObject["BuildNumber"].ToString();//獲取builderNumber
                         systemInfoList.TotalVisibleMemorySize = ((ulong)mObject["TotalVisibleMemorySize"] / 1024.0 / 1024).ToString("#0.00") + "G";　　//獲取總的物理內存
                         systemInfoList.FreePhysicalMemory = ((ulong)mObject["FreePhysicalMemory"] / 1024.0 / 1024).ToString("#0.00") + "G";　　//獲取可用物理內存
@@ -2500,8 +2648,9 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
             }
             return systemInfoList;
         }
+        //#endregion
 
-        //獲取時間區域
+        //#region//獲取時間區域
         /// <summary>
         /// 獲取時間區域
         /// </summary>
@@ -2550,8 +2699,9 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
             }
             return systemInfoList;
         }
+        //#endregion
 
-        //獲取頁面文件
+        //#region//獲取頁面文件
         /// <summary>
         /// 獲取頁面文件
         /// </summary>
@@ -2585,6 +2735,8 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
                 //循環
                 if (moCollection != null)
                 {
+                    //foreach
+
                     foreach (ManagementObject mObject in moCollection)
                     {
                         long FileSize = mObject["FileSize"] == null ? 0 : long.Parse(mObject["FileSize"].ToString());//頁面文件大小
@@ -2600,8 +2752,9 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
             }
             return systemInfoList;
         }
+        //#endregion
 
-        //獲取BIOS信息
+        //#region//獲取BIOS信息
         /// <summary>
         /// 獲取BIOS信息
         /// </summary>
@@ -2650,24 +2803,9 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
             }
             return BIOSInfoList;
         }
+        //#endregion
 
-        private static string getDmtfFromDateTime(DateTime dateTime)
-        {
-            return ManagementDateTimeConverter.ToDmtfDateTime(dateTime);
-        }
-
-        private static string getDmtfFromDateTime(string dateTime)
-        {
-            DateTime dateTimeValue = Convert.ToDateTime(dateTime);
-            return getDmtfFromDateTime(dateTimeValue);
-        }
-
-        private static string getDateTimeFromDmtfDate(string dateTime)
-        {
-            return ManagementDateTimeConverter.ToDateTime(dateTime).ToString();
-        }
-
-        //獲取計算機信息
+        //#region//獲取計算機信息
         /// <summary>
         /// 獲取計算機信息
         /// </summary>
@@ -2702,6 +2840,8 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
                 //循環
                 if (moCollection != null)
                 {
+
+                    //foreach
                     foreach (ManagementObject mObject in moCollection)
                     {
                         ComputerInfoList.ComputerSystemName = mObject["Name"].ToString();//系統名稱
@@ -2717,6 +2857,28 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
             }
             return ComputerInfoList;
         }
+        //#endregion
+
+        private static string getDmtfFromDateTime(DateTime dateTime)
+        {
+            return ManagementDateTimeConverter.ToDmtfDateTime(dateTime);
+        }
+
+        private static string getDmtfFromDateTime(string dateTime)
+        {
+            DateTime dateTimeValue = Convert.ToDateTime(dateTime);
+            return getDmtfFromDateTime(dateTimeValue);
+        }
+
+        private static string getDateTimeFromDmtfDate(string dateTime)
+        {
+            return ManagementDateTimeConverter.ToDateTime(dateTime).ToString();
+        }
+
+
+
+
+
     }
 }
 

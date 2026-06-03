@@ -30,6 +30,8 @@ namespace vcs_Draw3D
         PointF pt = new PointF(10, 10); // 展示板物件 左上角的座標
         //展示板 DisplayBoard SP
 
+        //------------------------------------------------------------  # 60個
+
         //展示板 DisplayBoard2 ST
         //高低展示板 (波浪上下呈現)
         DisplayBoard db2; // 展示板物件
@@ -40,6 +42,8 @@ namespace vcs_Draw3D
         int WW2 = 230, HH2 = 230;  // 展示板 的 寬高
         //展示板 DisplayBoard2 SP
 
+        //------------------------------------------------------------  # 60個
+
         //for random color ST
         //Reference : https://home.gamer.com.tw/creationDetail.php?sn=4281924
         private Label[] lb_color = new Label[101];
@@ -47,6 +51,8 @@ namespace vcs_Draw3D
         private int _R = 0, _G = 0, _B = 0;
         private int lb_color_x = 0, lb_color_y = 0;
         //for random color SP
+
+        //------------------------------------------------------------  # 60個
 
         Graphics g3;
 
@@ -79,6 +85,8 @@ namespace vcs_Draw3D
             db.Update(values); // 更新 展示板 每行的高度
             //展示板 DisplayBoard SP
 
+            //------------------------------------------------------------  # 60個
+
             //展示板 DisplayBoard2 ST
             //高低展示板 (波浪上下呈現)
             // 新增 一個展示板物件
@@ -91,6 +99,8 @@ namespace vcs_Draw3D
             db2.Update(values2);
             //展示板 DisplayBoard2 SP
 
+            //------------------------------------------------------------  # 60個
+
             //投票比例繪圖程式 ST
             this.c1 = 0;
             this.c2 = 0;
@@ -99,6 +109,8 @@ namespace vcs_Draw3D
             this.green_b = new SolidBrush(Color.Green);
             this.red_b = new SolidBrush(Color.Red);
             //投票比例繪圖程式 SP
+
+            //------------------------------------------------------------  # 60個
 
             draw_random_color();
 
@@ -367,6 +379,8 @@ namespace vcs_Draw3D
             this.pictureBox4.Refresh();
         }
         //投票比例繪圖程式 SP
+
+        //------------------------------------------------------------  # 60個
 
         Bitmap draw_random_pattern(int type)
         {
@@ -758,6 +772,8 @@ namespace vcs_Draw3D
             draw_random_2d_array();
         }
         //pictureBox11 SP
+
+        //------------------------------------------------------------  # 60個
 
         //for random color ST
         void draw_random_color()

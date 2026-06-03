@@ -27,9 +27,9 @@ namespace vcs_PictureOverlay
         private void Form1_Load(object sender, EventArgs e)
         {
             DoubleBuffered = true;  // Reduce flicker.
-
-
         }
+
+        //6060
 
         //開啟底圖
         private void button1_Click(object sender, EventArgs e)
@@ -103,3 +103,4 @@ namespace vcs_PictureOverlay
         }
     }
 }
+

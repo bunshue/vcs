@@ -141,6 +141,11 @@ namespace vcs_Draw3E
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1740, 940);
+            this.Text = "vcs_Draw3E";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -153,6 +158,8 @@ namespace vcs_Draw3E
         {
             Environment.Exit(0);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void pictureBox0_Paint(object sender, PaintEventArgs e)
         {

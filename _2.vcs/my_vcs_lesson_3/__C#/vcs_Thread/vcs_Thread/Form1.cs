@@ -121,18 +121,12 @@ namespace vcs_Thread
 
         void show_item_location()
         {
-            int W = 640;
-            int H = 480;
+            int W = 200;
+            int H = 240;
             int x_st = 10;
             int y_st = 10;
-            int dx = 140 + 50;
-            int dy = 50 + 15;
-
-            W = 200;
-            H = 220;
-            dx = W + 10;
-            dy = H + 10;
-
+            int dx = W + 10;
+            int dy = H + 10;
             groupBox0.Size = new Size(W, H);
             groupBox1.Size = new Size(W, H);
             groupBox2.Size = new Size(W, H);
@@ -146,7 +140,6 @@ namespace vcs_Thread
             groupBox10.Size = new Size(W, H);
             groupBox13.Size = new Size(W, H);
             groupBox12.Size = new Size(W, H);
-
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
@@ -162,14 +155,14 @@ namespace vcs_Thread
             groupBox13.Location = new Point(x_st + dx * 3, y_st + dy * 2);
             groupBox11.Location = new Point(x_st + dx * 4, y_st + dy * 1);
 
-            richTextBox1.Size = new Size(400, 690);
+            richTextBox1.Size = new Size(400, 690+50);
             richTextBox1.Location = new Point(x_st + dx * 6 - 100, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             x_st = 10;
             y_st = 20;
             W = 180;
-            H = 50;
+            H = 60;
             dx = W + 10;
             dy = H + 10;
             button00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -210,7 +203,7 @@ namespace vcs_Thread
             lb_G.Location = new Point(x_st + dx * 0 + 130, y_st + dy * 1);
             lb_B.Location = new Point(x_st + dx * 0 + 130, y_st + dy * 2);
 
-            this.Size = new Size(1600, 750);
+            this.Size = new Size(1600, 750+50);
             this.Text = "vcs_Thread";
 
             //設定執行後的表單起始位置, 正中央
