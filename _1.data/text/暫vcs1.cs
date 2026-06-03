@@ -2722,10 +2722,6 @@ Download specified number of pictures from “ http://browse.deviantart.com/cust
 	        //Save image to local file    
 	        public static void SavaImagesToFile(string url,string dirPath,string fileName)  
 	        {  
-	            if(!Directory.Exists(dirPath))  
-	            {  
-	                Directory.CreateDirectory(dirPath);  
-	            }  
 	            WebClient wc = new WebClient();  
 	            wc.DownloadFile(url, Path.Combine(dirPath, fileName + Guid.NewGuid().ToString()));  
 	        }  
@@ -3597,40 +3593,6 @@ https://www.cnblogs.com/wpwen/archive/2009/01/01/1366719.html
 
 C# 以MP3的格式將錄製的音頻數據寫入文件流
 https://www.twblogs.net/a/5f02b56e9644181341a1b6e0
-
-//------------------------------------------------------------  # 60個
-
-    class UtilityFunctions
-    {
-        /// <summary>
-        /// Removes a directory, including all the files in it.
-        /// </summary>
-        /// <param name="pPath">The directory to remove</param>
-        /// <returns>A blank string upon success, or a warning upon error.  If the directory does not exist, that is not an error.</returns>
-        public static String DeleteDir(String pPath)
-        {
-            String retval = "";
-
-            if (Directory.Exists(pPath))
-            {
-                try
-                {
-                    // Delete all the files
-                    String[] filenames = Directory.GetFiles(pPath);
-                    foreach (String filename in filenames)
-                        File.Delete(filename);
-                    // Delete the directory
-                    Directory.Delete(pPath, true);
-                }
-                catch (System.Exception exc)
-                {
-                    retval = exc.Message;
-                }
-            }
-
-            return retval;
-        }
-    }
 
 //------------------------------------------------------------  # 60個
 
@@ -6770,11 +6732,8 @@ if (Thd.IsAlive)
 
 //C# 寫日志文件
 
-public static void WriteLog(string txt)
-
+	public static void WriteLog(string txt)
         {
-            try
-            {
                 string path = Application.StartupPath + @"\log\" + DateTime.Now.ToString("yyyy-MM-dd") + @"\";
                 if (!Directory.Exists(path))
                 {
@@ -6792,11 +6751,6 @@ public static void WriteLog(string txt)
                 sw.Write(DateTime.Now.ToString("HH:mm:ss") + " " + txt + "\r\n");
                 sw.Close();
                 fs.Close();
-            }
-            catch (Exception ex)
-            {
-                WriteLog("程序發生異常（WriteLog）。詳情：" + ex.Message);
-            }
         }
 
 //------------------------------------------------------------  # 60個
@@ -7818,23 +7772,6 @@ https://blog.csdn.net/m_buddy/article/details/62417912
                 richTextBox1.Text += j.ToString() + "  ";
             }
             richTextBox1.Text += "\n";
-
-
-        }
-
-        //C# 是否為JPG檔案 record
-
-        private bool 是否為JPG檔案(string 檔案)
-        {
-            if (!File.Exists(檔案))
-                return false;
-
-            using (System.Drawing.Image img = System.Drawing.Image.FromFile(檔案))
-            {
-                if (img.RawFormat.Equals(System.Drawing.Imaging.ImageFormat.Jpeg))
-                    return true;
-            }
-            return false;
         }
 
 //------------------------------------------------------------  # 60個
@@ -13079,15 +13016,20 @@ pictureBox1.Image = bitmap1;
 file.
 directory.
 
-//檔案不存在的寫法
-            if (File.Exists(filename) == false)
-            {
-                richTextBox1.Text += "檔案 " + filename + " 不存在，離開。\n";
-                return;
-            }
-
-
 建立臨時檔案
 
+	            if(!Directory.Exists(dirPath))  
+	            {  
+	                Directory.CreateDirectory(dirPath);  
+	            }  
 
+		String retval = "";
+		
+		// Delete all the files
+		String[] filenames = Directory.GetFiles(pPath);
+		foreach (String filename in filenames)
+			File.Delete(filename);
+		// Delete the directory
+		Directory.Delete(pPath, true);
+		return retval;
 
