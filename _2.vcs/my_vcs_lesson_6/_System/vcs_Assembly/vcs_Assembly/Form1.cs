@@ -64,31 +64,10 @@ namespace vcs_Assembly
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //Get APP Info
-            string result = appInfo();
-            richTextBox1.Text += result + "\n";
-        }
-
-        public static string appInfo()
-        {
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-            string result = "File Version: " + fvi.FileVersion
-                + Environment.NewLine + "Company Name: " + fvi.CompanyName
-                + Environment.NewLine + "Comments: " + fvi.Comments
-                + Environment.NewLine + "Product Name: " + fvi.ProductName
-                + Environment.NewLine + "Copyright: " + fvi.LegalCopyright
-                + Environment.NewLine + "File Name: " + fvi.FileName
-                + Environment.NewLine + "Original File Name: " + fvi.OriginalFilename
-                + Environment.NewLine + "Product Version: " + fvi.ProductVersion
-                + Environment.NewLine + "Special build: " + fvi.SpecialBuild
-                + Environment.NewLine + "" + fvi.CompanyName;
-            return result;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //讀取exe版本號
             //讀取exe版本號
 
             string filename = @"D:\_git\vcs\_1.data\______test_files1\_material\_dll\AForge.Video.dll";

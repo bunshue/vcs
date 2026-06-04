@@ -83,14 +83,14 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 0;
-            this.button1.Text = "時間差計算1 TimeSpan";
+            this.button1.Text = "時間間隔 TimeSpan";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(954, 504);
+            this.richTextBox1.Location = new System.Drawing.Point(747, 342);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 1;
@@ -291,11 +291,11 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(965, 549);
+            this.bt_clear.Location = new System.Drawing.Point(758, 387);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 67;
-            this.bt_clear.Text = "clear";
+            this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
@@ -322,7 +322,7 @@
             // groupBox9
             // 
             this.groupBox9.Controls.Add(this.lb_time);
-            this.groupBox9.Location = new System.Drawing.Point(848, 504);
+            this.groupBox9.Location = new System.Drawing.Point(641, 342);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(100, 100);
             this.groupBox9.TabIndex = 88;
@@ -350,7 +350,7 @@
             this.groupBox13.Controls.Add(this.btn_moon_ok);
             this.groupBox13.Controls.Add(this.textBox4);
             this.groupBox13.Controls.Add(this.pictureBox1);
-            this.groupBox13.Location = new System.Drawing.Point(642, 258);
+            this.groupBox13.Location = new System.Drawing.Point(641, 15);
             this.groupBox13.Name = "groupBox13";
             this.groupBox13.Size = new System.Drawing.Size(296, 190);
             this.groupBox13.TabIndex = 112;
@@ -404,7 +404,7 @@
             // 
             this.lb_time2.AutoSize = true;
             this.lb_time2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_time2.Location = new System.Drawing.Point(644, 507);
+            this.lb_time2.Location = new System.Drawing.Point(643, 264);
             this.lb_time2.Name = "lb_time2";
             this.lb_time2.Size = new System.Drawing.Size(52, 21);
             this.lb_time2.TabIndex = 58;
@@ -439,6 +439,7 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(200, 60);
             this.button22.TabIndex = 116;
+            this.button22.Text = "量測經歷時間 碼表";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -509,6 +510,7 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(200, 60);
             this.button29.TabIndex = 123;
+            this.button29.Text = "test";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
@@ -516,7 +518,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1089, 681);
+            this.ClientSize = new System.Drawing.Size(973, 681);
             this.Controls.Add(this.button29);
             this.Controls.Add(this.button28);
             this.Controls.Add(this.button27);

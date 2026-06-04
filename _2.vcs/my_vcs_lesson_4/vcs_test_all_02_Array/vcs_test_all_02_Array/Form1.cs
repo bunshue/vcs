@@ -92,7 +92,7 @@ namespace vcs_test_all_02_Array
             richTextBox1.Clear();
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -1541,10 +1541,6 @@ namespace vcs_test_all_02_Array
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

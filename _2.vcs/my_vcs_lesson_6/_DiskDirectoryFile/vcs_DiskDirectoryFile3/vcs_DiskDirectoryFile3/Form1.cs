@@ -129,11 +129,6 @@ namespace vcs_DiskDirectoryFile3
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //獲取文件的版本信息
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\_material\_dll\AForge.Video.dll";
-
-            FileVersionInfo myFileVersionInfo1 = FileVersionInfo.GetVersionInfo(filename);
-            richTextBox1.Text += "版本號: " + myFileVersionInfo1.FileVersion + "\n";
         }
 
         private const int MODE1 = 0x01;

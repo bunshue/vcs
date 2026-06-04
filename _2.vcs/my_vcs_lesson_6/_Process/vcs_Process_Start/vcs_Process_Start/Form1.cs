@@ -65,6 +65,7 @@ namespace vcs_Process_Start
         private const int SW_HIDE = 0;//API參數表示隱藏窗口
         private const int SW_SHOW = 5;//API參數表示用當前的大小和位置顯示窗口
 
+        Panel panel1 = new Panel();
 
         public Form1()
         {
@@ -78,43 +79,33 @@ namespace vcs_Process_Start
 
         void show_item_location()
         {
-            /*
             //button
+            int W = 200;
+            int H = 580;
             int x_st = 10;
             int y_st = 10;
-            int dx = 200 + 10;
-            int dy = 60 + 10;
-            */
-            int BORDER = 20;
-            int x_st = BORDER;
-            int y_st = BORDER;
-            int w = 150;
-            int h = 50;
-            int dx = w + 10;
-            int dy = h + 10;
-
-            int W = BORDER + w + BORDER;
-            int H = BORDER + h * 10 + 10 * 9 + BORDER;
-
+            int dx = W + 10;
+            int dy = H + 10;
             groupBox1.Size = new Size(W, H);
             groupBox2.Size = new Size(W, H);
             groupBox5.Size = new Size(W, H);
-
-            W = BORDER + w + BORDER;
-            groupBox3.Size = new Size(W, 160);
+            groupBox3.Size = new Size(W, 200 - 40);
             groupBox4.Size = new Size(W, 300);
+            groupBox6.Size = new Size(W, 200 - 40);
+            groupBox1.Location = new Point(x_st, y_st + dy * 0);
+            groupBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            groupBox5.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            groupBox3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            groupBox4.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 170);
+            groupBox6.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 170 + 310);
 
-            groupBox1.Location = new Point(x_st, y_st);
-            dx = W;
-            groupBox2.Location = new Point(x_st + dx * 1 + BORDER, y_st);
-            groupBox5.Location = new Point(x_st + dx * 2 + BORDER * 2, y_st);
-            groupBox3.Location = new Point(x_st + dx * 3 + BORDER * 3, y_st);
-            groupBox4.Location = new Point(x_st + dx * 3 + BORDER * 3, 210);
-            richTextBox1.Size = new Size(400, H);
-            richTextBox1.Location = new Point(x_st + dx * 4 + BORDER * 4, y_st);
+            richTextBox1.Size = new Size(500, 300);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0 + 380);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            dx = w + 10;
-            dy = h + 10;
+            y_st = 20;
+            dx = 180 + 10;
+            dy = 60 + 10;
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -123,9 +114,6 @@ namespace vcs_Process_Start
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-
             button10.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -134,9 +122,6 @@ namespace vcs_Process_Start
             button15.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button16.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             button17.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button18.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            button19.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-
             button20.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button22.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -145,8 +130,6 @@ namespace vcs_Process_Start
             button25.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button26.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             button27.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button28.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            button29.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
             button40.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button41.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -156,12 +139,10 @@ namespace vcs_Process_Start
             button44.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button45.Location = new Point(x_st + dx * 0, y_st + dy * 3);
 
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
-            //richTextBox1.Size = new Size(300, 690);
-            //richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-            //this.Size = new Size(1273, 750);
+            this.Size = new Size(1400, 750);
             this.Text = "vcs_Process_Start";
 
             //設定執行後的表單起始位置, 正中央
@@ -276,15 +257,6 @@ namespace vcs_Process_Start
             richTextBox1.Text += "Id : " + process.Id.ToString() + "\n";
         }
 
-        private void button8_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button10_Click(object sender, EventArgs e)
         {
             //開啟IE, 指名網址
@@ -357,15 +329,7 @@ namespace vcs_Process_Start
 
         }
 
-        private void button18_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button19_Click(object sender, EventArgs e)
-        {
-
-        }
+        //------------------------------------------------------------  # 60個
 
         private void button20_Click(object sender, EventArgs e)
         {
@@ -568,15 +532,7 @@ namespace vcs_Process_Start
 
         }
 
-        private void button28_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button29_Click(object sender, EventArgs e)
-        {
-
-        }
+        //------------------------------------------------------------  # 60個
 
         private void button40_Click(object sender, EventArgs e)
         {
@@ -698,6 +654,157 @@ namespace vcs_Process_Start
             //打開顯示屬性屬性() 
             Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL desk.cpl,,3");
         }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //開啟外部程式並內嵌至表單中
+            //將程序窗口嵌入到任務欄中
+            panel1.Location = new Point(900, 10);
+            panel1.Size = new Size(400, 400);
+            //panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            Controls.Add(this.panel1);
+
+            //通過 WIN32 API 實現嵌入程序窗體，win32api
+
+            //string sPath = Environment.GetEnvironmentVariable("windir");//獲取系統變量 windir(windows)    
+            const string exe_filename = "C:\\Program Files\\Windows NT\\Accessories\\wordpad.exe";
+            InsertWindow insertwin = new InsertWindow(panel1, exe_filename);
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //開啟外部程式並內嵌至表單中
+            //想做一個開啟pdf的, 目前無法指名檔案
+            const string exe_filename = @"C:\Program Files\Adobe\Acrobat DC\Acrobat\Acrobat.exe";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
+
+            panel1.Location = new Point(900, 10);
+            panel1.Size = new Size(400, 400);
+            //panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            Controls.Add(this.panel1);
+
+            //通過 WIN32 API 實現嵌入程序窗體，win32api
+
+            //string sPath = Environment.GetEnvironmentVariable("windir");//獲取系統變量 windir(windows)    
+            //InsertWindow insertwin = new InsertWindow(panel1, exe_filename + " " + filename);
+            InsertWindow insertwin = new InsertWindow(panel1, exe_filename);
+        }
+
+        //------------------------------------------------------------  # 60個
+    }
+
+    //------------------------------------------------------------  # 60個
+
+    class InsertWindow
+    {
+        /// <summary>  
+        /// 將程序嵌入窗體  
+        /// </summary>  
+        /// <param name="pW">容器</param>  
+        /// <param name="appname">程序名</param>  
+        public InsertWindow(Panel pW, string exe_filename)
+        {
+            this.pan = pW;
+            this.LoadEvent(exe_filename);
+            pane();
+        }
+
+        ~InsertWindow()
+        {
+            if (process != null)
+            {
+                process.Dispose();
+            }
+        }
+
+        //#region  函數和變量聲明
+        //聲明 Win32 API 
+        [DllImport("user32.dll")]
+        static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
+
+        [DllImport("user32.dll")]
+        static extern Int32 GetWindowLong(IntPtr hWnd, Int32 nIndex);
+
+        [DllImport("user32.dll")]
+        static extern Int32 SetWindowLong(IntPtr hWnd, Int32 nIndex, Int32 dwNewLong);
+
+        [DllImport("user32.dll")]
+        static extern Int32 SetWindowPos(IntPtr hWnd,
+            IntPtr hWndInsertAfter,
+            Int32 X,
+            Int32 Y,
+            Int32 cx,
+            Int32 cy,
+            UInt32 uFlags
+        );
+
+        // 定義 Win32 常數 
+
+        const Int32 GWL_STYLE = -16;
+        const Int32 WS_BORDER = (Int32)0x00800000L;
+        const Int32 WS_THICKFRAME = (Int32)0x00040000L;
+
+        const Int32 SWP_NOMOVE = 0x0002;
+        const Int32 SWP_NOSIZE = 0x0001;
+        const Int32 SWP_NOZORDER = 0x0004;
+        const Int32 SWP_FRAMECHANGED = 0x0020;
+
+        const Int32 SW_MAXIMIZE = 3;
+        IntPtr HWND_NOTOPMOST = new IntPtr(-2);
+
+        // 目標應用程序的進程.  
+        Process process = null;
+        //#endregion
+
+        //#region  容器
+        private Panel pan = null;
+        public Panel panel1
+        {
+            set { pan = value; }
+            get { return pan; }
+        }
+        private void pane()
+        {
+            panel1.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
+            panel1.Resize += new EventHandler(panel1_Resize);
+        }
+        private void panel1_Resize(object sender, EventArgs e)
+        {
+            // 設置目標應用程序的窗體樣式.  
+
+            IntPtr innerWnd = process.MainWindowHandle;
+            SetWindowPos(innerWnd, IntPtr.Zero, 0, 0, panel1.ClientSize.Width, panel1.ClientSize.Height, SWP_NOZORDER);
+        }
+        //#endregion
+
+        //#region  相應事件
+        private void LoadEvent(string exe_filename)
+        {
+            // 啟動目標應用程序.  
+            process = Process.Start(exe_filename);
+            process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden; //隱藏  
+            // 等待, 直到那個程序已經完全啟動.   
+            process.WaitForInputIdle();
+
+            // 目標應用程序的主窗體.  
+            IntPtr innerWnd = process.MainWindowHandle;
+
+            // 設置目標應用程序的主窗體的父親(為我們的窗體).  
+            SetParent(innerWnd, panel1.Handle);
+
+            // 除去窗體邊框.  
+            Int32 wndStyle = GetWindowLong(innerWnd, GWL_STYLE);
+            wndStyle &= ~WS_BORDER;
+            wndStyle &= ~WS_THICKFRAME;
+            SetWindowLong(innerWnd, GWL_STYLE, wndStyle);
+            SetWindowPos(innerWnd, IntPtr.Zero, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
+
+            // 在Resize事件中更新目標應用程序的窗體尺寸.  
+            panel1_Resize(panel1, null);
+        }
+        //#endregion
     }
 }
 

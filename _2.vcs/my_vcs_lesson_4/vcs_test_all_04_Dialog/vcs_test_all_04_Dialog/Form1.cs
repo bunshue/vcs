@@ -140,31 +140,26 @@ namespace vcs_test_all_04_Dialog
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-            int W = 170;
-            int H = 320;
-
-            x_st = 20;
-            y_st = 20;
-            dx = W + 20;
-            dy = H + 20;
-
+            int W = 200;
+            int H = 380;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = W + 10;
+            int dy = H + 10;
             groupBox0.Size = new Size(W, H);
             groupBox1.Size = new Size(W, H);
             groupBox2.Size = new Size(W, H);
             groupBox3.Size = new Size(W, H);
             groupBox4.Size = new Size(W, H);
-
+            pictureBox1.Size = new Size(460, 300);
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             groupBox3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             groupBox4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            pictureBox1.Size = new Size(460, 300);
+            richTextBox1.Size = new Size(300, 320);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 1);
 
             groupBox0.Font = new Font("Arial", 11);
             groupBox1.Font = new Font("Arial", 11);
@@ -173,8 +168,7 @@ namespace vcs_test_all_04_Dialog
             groupBox4.Font = new Font("Arial", 9);
 
             label1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            richTextBox1.Size = new Size(300, 320);
-            richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 1);
+
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             bt_open_folder.Location = new Point(x_st + dx * 3, y_st + dy * 1 - 105);
             bt_open_folder.BackgroundImage = Properties.Resources.open_folder;
@@ -192,39 +186,35 @@ namespace vcs_test_all_04_Dialog
 
             x_st = 10;
             y_st = 20;
-            dx = 150 + 10;
-            dy = 50 + 10;
+            dx = 180 + 10;
+            dy = 60 + 10;
             button00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button03.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button04.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
             button10.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button13.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button14.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
             button20.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button22.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button23.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button24.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
             button30.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button31.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button32.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button33.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button34.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
             button40.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button41.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button42.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button43.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button44.Location = new Point(x_st + dx * 0, y_st + dy * 4);
 
-            this.Size = new Size(1210, 740);
+            this.Size = new Size(1400, 830);
             this.Text = "vcs_test_all_04_Dialog";
 
             //設定執行後的表單起始位置, 正中央

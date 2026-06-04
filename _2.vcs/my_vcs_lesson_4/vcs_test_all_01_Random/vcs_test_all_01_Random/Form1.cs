@@ -1924,3 +1924,23 @@ namespace vcs_test_all_01_Random
 
 */
 
+
+/*
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            Random 亂數 = new Random();//亂數種子
+            int i = 亂數.Next(0, 100);//回傳0-99的亂數
+            如果用for 或其它回圈抓亂數，一定要把 Random 亂數 = new Random();//亂數種子 放在回圈外面。
+
+            Random 亂數 = new Random();//亂數種子
+            for (int i = 0; i < 100; i++)
+            {
+                int j = 亂數.Next(0, 100);
+                richTextBox1.Text += j.ToString() + "  ";
+            }
+            richTextBox1.Text += "\n";
+        }
+
+*/
+

@@ -118,7 +118,7 @@
             this.bt_file06.Name = "bt_file06";
             this.bt_file06.Size = new System.Drawing.Size(200, 60);
             this.bt_file06.TabIndex = 6;
-            this.bt_file06.Text = "Path.Get";
+            this.bt_file06.Text = "Path的方法";
             this.bt_file06.UseVisualStyleBackColor = true;
             this.bt_file06.Click += new System.EventHandler(this.bt_file06_Click);
             // 
@@ -182,6 +182,7 @@
             this.bt_file08.Name = "bt_file08";
             this.bt_file08.Size = new System.Drawing.Size(200, 60);
             this.bt_file08.TabIndex = 20;
+            this.bt_file08.Text = "Path.Combine()";
             this.bt_file08.UseVisualStyleBackColor = true;
             this.bt_file08.Click += new System.EventHandler(this.bt_file08_Click);
             // 

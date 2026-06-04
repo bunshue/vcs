@@ -658,6 +658,25 @@ namespace vcs_System1
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
+        public static string appInfo()
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+            string result = "File Version: " + fvi.FileVersion
+                + Environment.NewLine + "Company Name: " + fvi.CompanyName
+                + Environment.NewLine + "Comments: " + fvi.Comments
+                + Environment.NewLine + "Product Name: " + fvi.ProductName
+                + Environment.NewLine + "Copyright: " + fvi.LegalCopyright
+                + Environment.NewLine + "File Name: " + fvi.FileName
+                + Environment.NewLine + "Original File Name: " + fvi.OriginalFilename
+                + Environment.NewLine + "Product Version: " + fvi.ProductVersion
+                + Environment.NewLine + "Special build: " + fvi.SpecialBuild
+                + Environment.NewLine + "" + fvi.CompanyName;
+            return result;
+        }
+
         private void button9_Click(object sender, EventArgs e)
         {
             //Application, Path, 物件
@@ -682,6 +701,18 @@ namespace vcs_System1
             FileVersionInfo myFileVersion = FileVersionInfo.GetVersionInfo(Application.ExecutablePath);
             richTextBox1.Text += myFileVersion.FileVersion + "\n";
 
+
+            //獲取文件的版本信息
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\_material\_dll\AForge.Video.dll";
+
+            FileVersionInfo myFileVersionInfo1 = FileVersionInfo.GetVersionInfo(filename);
+            richTextBox1.Text += "版本號: " + myFileVersionInfo1.FileVersion + "\n";
+
+
+            //Get APP Info
+            string result = appInfo();
+            richTextBox1.Text += result + "\n";
+
             //------------------------------------------------------------  # 60個
 
             //系統路徑
@@ -695,6 +726,8 @@ namespace vcs_System1
 
             //------------------------------------------------------------  # 60個
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button10_Click(object sender, EventArgs e)
         {
@@ -1911,3 +1944,4 @@ Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！�
 /*  可搬出
 
 */
+

@@ -446,7 +446,6 @@ richTextBox1.Text += p.A.ToString("X2") + p.R.ToString("X2") + p.G.ToString("X2"
 cccc
             numericUpDown1.Maximum = new System.Decimal(new int[] { 150, 0, 0, 0 });
 
-
 //------------------------------------------------------------  # 60個
 
 vcs_test_all_04_Dialog
@@ -3912,7 +3911,7 @@ static bool ValidateEmailAccount(string server, int port, string userName, strin
             } 
             return true; 
         } 
- 調用
+調用
 
 string errorMessage; 
 
@@ -4210,11 +4209,8 @@ PreviousSibling　　　　　　　　　　获取前一个兄弟节点
 StreamPosition　　　　　　　　　　该节点位于整个Html文档的字符位置
 XPath　　　　　　　　　　　　　　  根据节点返回该节点的XPath
 
-
-
 http://bsubramanyamraju.blogspot.com/2019/03/htmlagilitypack-html-parsing-in.html
 https://github.com/SubramanymRajuB/Xamarin.Forms/tree/master/HtmlParsing
-
 
 c# - C#htmlagilitypack Node.InnerHTML不正确区分大小写，如何拉正确大小写 
 
@@ -6718,43 +6714,6 @@ if (Thd.IsAlive)
 
 //------------------------------------------------------------  # 60個
 
-寫日誌範例 : 
-2022-04-14 10:03:13 INFO  :VirtualHere Client 5.2.9 starting (Compiled: Feb 14 2022 07:50:45)
-2022-04-14 10:03:13 INFO  :Client OS is Windows 10 (build 19044), 64-bit edition
-2022-04-14 10:03:13 INFO  :Using config at C:\Users\070601\AppData\Roaming\vhui.ini
-2022-04-14 10:03:13 INFO  :IPC available at \\.\pipe\vhclient
-2022-04-14 10:03:13 INFO  :Auto-find (Bonjour) on
-2022-04-14 10:03:13 INFO  :Auto-find (Bonjour SSL) on
-2022-04-14 10:03:15 INFO  :Drivers are up-to-date
-2022-04-14 10:03:15 INFO  :Connected to the VirtualHere Client Driver (Version 2)
-2022-04-14 10:26:13 ERROR :Data stream corruption, compressedSize=2810554238, uncompressedSize=2827462782
-2022-04-14 10:26:25 INFO  :Server ping timeout, shutting down connection 1...
-
-//C# 寫日志文件
-
-	public static void WriteLog(string txt)
-        {
-                string path = Application.StartupPath + @"\log\" + DateTime.Now.ToString("yyyy-MM-dd") + @"\";
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-                path +=  DateTime.Now.ToString("yyyyMMdd") + "-" + DateTime.Now.ToString("HH") + ".txt";
-                if (!File.Exists(path))
-                {
-                    File.Create(path);
-                }
-                FileStream fs;
-                StreamWriter sw;
-                fs = new FileStream(path, FileMode.Append);
-                sw = new StreamWriter(fs, Encoding.Default);
-                sw.Write(DateTime.Now.ToString("HH:mm:ss") + " " + txt + "\r\n");
-                sw.Close();
-                fs.Close();
-        }
-
-//------------------------------------------------------------  # 60個
-
 randomrandom
 
 使用 Random 方法產生不重複亂數 
@@ -6961,18 +6920,13 @@ r=6371;
 周長	40,075.017 km（24,901.461 mi）赤道
 40,007.86 km（24,859.73 mi）子午線
 
-
 vcs進行圖像處理的幾種方法
 C#進行圖像處理的幾種方法（bitmap，bitmapData,IntPtr）
 https://www.twblogs.net/a/5b8a94922b71775d1ce7e03d
 
-
 JPG 檔案：開頭 Byte 為 FF D8
-
 BMP 檔案：開頭 Byte 為 42 4D
-
 GIF 檔案：開頭 Byte 為 47 49 46
-
 PNG 檔案：開頭 Byte 為 89 50 4E 47 0D 0A 1A 0A
 
 Encoding.GetEncoding big5 gb2312 shift_jis UTF-8 unicode
@@ -7224,7 +7178,7 @@ picturebox + keydown
 https://zhidao.baidu.com/question/495903236489591124.html
 
 //------------------------------------------------------------  # 60個
-vcs
+
 https://jojosula001.pixnet.net/blog/category/2297573
 
 //------------------------------------------------------------  # 60個
@@ -7580,9 +7534,6 @@ https://dreamtails.pixnet.net/blog/post/22318000
 
 //------------------------------------------------------------  # 60個
 
-
-//------------------------------------------------------------  # 60個
-
 記得在((TextBox)sender).SelectAll();後邊加上一句e.SuppressKeyPress = true;
 
 否則鍵盤消息還會繼續傳遞到基礎控件，傳出難听的“叮”一聲
@@ -7748,7 +7699,6 @@ http://frank1025.pixnet.net/blog/post/347251643-%5Bc%23%5D-list
 C# axWindowsMediaPlayer制作播放器
 http://www.mamicode.com/info-detail-986551.html
 
-
 AxWindowsMediaPlayer媒体文件主要方法屬性
 https://blog.csdn.net/ivan_ljf/article/details/9774231
 
@@ -7756,23 +7706,6 @@ https://blog.csdn.net/ivan_ljf/article/details/9774231
 
 AForge Webcam 錄影
 https://blog.csdn.net/m_buddy/article/details/62417912
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            /*
-            Random 亂數 = new Random();//亂數種子
-            int i = 亂數.Next(0, 100);//回傳0-99的亂數
-            如果用for 或其它回圈抓亂數，一定要把 Random 亂數 = new Random();//亂數種子 放在回圈外面。
-            */
-
-            Random 亂數 = new Random();//亂數種子
-            for (int i = 0; i < 100; i++)
-            {
-                int j = 亂數.Next(0, 100);
-                richTextBox1.Text += j.ToString() + "  ";
-            }
-            richTextBox1.Text += "\n";
-        }
 
 //------------------------------------------------------------  # 60個
 
@@ -7877,7 +7810,9 @@ vcs_MD5
 D:\Xilinx_SDK_2018.3_1207_2324_Win64.exe :   0E83E8251D76B51B5D311EEA2B2FB8FC
 D:\Xilinx_SDK_2018.3_1207_2324_Win64.exe :   0E83E8251D76B51B5D311EEA2B2FB8FC
 
+//------------------------------------------------------------  # 60個
 
+ssss
 不足位元補零 十進位及十六進位
 
 byte byteValue = 254;
@@ -7885,10 +7820,7 @@ byte byteValue = 254;
 // Display integer values by calling the ToString method.
 richTextBox1.Text += byteValue.ToString("D8").ToString() + "\t" + byteValue.ToString("X8") + "\n";
 
-
-
-
-
+//------------------------------------------------------------  # 60個
 
 vcs AForge
 
@@ -7971,11 +7903,8 @@ vcs的QR code編碼解碼
 先下載一個開放的函示庫(DLL) "Zxing"
 http://zxingnet.codeplex.com/
 
-
-
 C#中使用SendMessage進行進程通信的實例
 https://blog.csdn.net/yl2isoft/article/details/20227421
-
 
 (C#)WinAPI的SendMessage傳送
 
@@ -8192,21 +8121,12 @@ zero-byte[7] 	1 	If a track number is stored, this byte contains a binary 0.
 track[7] 	1 	The number of the track on the album, or 0. Invalid, if previous byte is not a binary 0.
 genre 	1 	Index in a list of genres, or 255 
 
-
-
-
-
-
-
-
-
-
-
+//------------------------------------------------------------  # 60個
 
 看範例學C# 系列
 https://ithelp.ithome.com.tw/users/20044155/ironman/241
 
-
+//------------------------------------------------------------  # 60個
 
 wmp改變視窗大小
 https://blog.csdn.net/ivan_ljf/article/details/9774231
@@ -8328,7 +8248,6 @@ openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp,*.gif,*.ico,*.png,*.wmf|*.jpg;*.jpe
 
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "jpg (*.jpg)|*.jpg|bmp (*.bmp)|*.bmp|png (*.png)|*.png";
-
 
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "jpg (*.jpg)|*.jpg|bmp (*.bmp)|*.bmp|png (*.png)|*.png";
@@ -8827,15 +8746,12 @@ kilo OK
 sugar OK
 using Word = Microsoft.Office.Interop.Word;
 
-
 vcs_ReadWrite_WORD6_Replace
 kilo 不可用
 sugar OK
 
-
 contextMenuStrip1/Items 展開集合/加入 MenuItem 或 Seperator
 MenuItem 加入 ToolStripMenuItem，修改Text，修改觸發事件
-
 
 vcs
 用C#實現貪吃蛇遊戲
@@ -8855,8 +8771,6 @@ http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/187208.html
 如果代碼沒有包，請從NuGet上下載Dataflow包。
 
 代碼下載：http://files.cnblogs.com/files/qugangf/WordStatistics.rar
-
-
 
 Jumony快速抓取網頁
 
@@ -9025,7 +8939,7 @@ HtmlAgilityPack.dll
 	https://exfast.me/2016/07/c-use-the-htmlagilitypack-to-collect-web-pages/	原價屋 OK
 	https://docs.microsoft.com/zh-tw/previous-versions/ee787055(v=msdn.10)?redirectedfrom=MSDN	M$範例 1好一壞 W3C/鴻海
 
-
+//------------------------------------------------------------  # 60個
 
 C#對HTML文檔的解析
 https://www.twblogs.net/a/5e52ff9cbd9eee2117c354ce
@@ -9166,11 +9080,9 @@ C#網絡編程：http://wenku.baidu.com/view/819b150931126edb6f1a10cb.html
 其他網站
 https://sample.diary.tw/lucky-draw/
 
-
+//------------------------------------------------------------  # 60個
 
 https://www.cnblogs.com/ChangTan/archive/2012/07/20/2601801.html
-
-
 
 
 https://www.cnblogs.com/zxlovenet/tag/C%23/
@@ -9180,8 +9092,6 @@ http://jengting.blogspot.com/2021/01/c.html
 
 https://www.cnblogs.com/sosoft/p/kaifajishu.html
 https://www.cnblogs.com/flyinghigher/archive/2012/03/20/2408874.html
-
-
 
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/184235.html
 
@@ -9282,7 +9192,6 @@ https://www.ginifab.com.tw/
 程式語言教學誌
 http://kaiching.org/index.html
 http://kaiching.org/pydoing/index.html
-
 
 程式語言教學誌 FB, YouTube: PYDOING 
 https://pydoing.blogspot.com/2012/10/csharp-tutorial.html
@@ -9537,10 +9446,8 @@ button25.Text = "Texture";
 s.FileName = "default_filename";// Default file name
 s.DefaultExt = ".jpg";// Default file extension
 
-
 OpenFileDialog.SafeFileName 屬性
 取得對話方塊中選取之檔案的檔案名稱和副檔名。 檔案名稱不包含路徑。
-
 
 搜尋字串模式1_vcs
 搜尋字串模式2_python
@@ -10071,7 +9978,6 @@ g.DrawImage(image, 10, 50, image.Width, image.Height);
 int w = 100;	//預縮放的圖的寬度
 Image imgThumbnail = image1.GetThumbnailImage(w, (int)(w * image1.Height / image1.Width), null, (IntPtr)0);
 
-
 imgName = Path.GetFileNameWithoutExtension(openFileDialogImg.FileName);
 
 var desktop1 = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -10160,6 +10066,7 @@ hypotrochoid 長短輻圓內旋輪線；次內擺線
 網路芳鄰 密碼查詢
 如何知道網路芳鄰的密碼
 
+//------------------------------------------------------------  # 60個
 
 需要為每個構建配置設置不同的ApplicationIcon
 
@@ -10271,6 +10178,8 @@ vcs_PicPick	還要能夠用鼠標移動表單		目前有些問題
                 }
             }
 
+//------------------------------------------------------------  # 60個
+
 textbox把資料拉到最下方
 
             txtMessage.Text += output + "\r\n";
@@ -10309,9 +10218,7 @@ textbox把資料拉到最下方
             res += "最高分 = " + max + "\r\n";
             res += "最低分 = " + min + "\r\n";
 
-
-
-
+//------------------------------------------------------------  # 60個
 
 C# 無法解析遠端名稱
 http://jerryyang-wxy.blogspot.com/2014/08/blog-post.html
@@ -10660,7 +10567,7 @@ this.CenterToScreen();       //將表單置中顯示
 
 如何在程式忙碌時還可以停掉這個程式
 
-6060
+//------------------------------------------------------------  # 60個
 
 //取得本程式之Form1.cs所在的資料夾
 string dirname = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\"));
@@ -13011,7 +12918,7 @@ Bitmap bitmap1 = new Bitmap(filename);
 Graphics g = Graphics.FromImage(bitmap1);
 pictureBox1.Image = bitmap1;
 
-6060
+//------------------------------------------------------------  # 60個
 
 file.
 directory.

@@ -52,18 +52,57 @@ namespace vcs_LOG
         {
             //button
             int W = 200;
-            int H = 300;
+            int H = 90;
             int x_st = 10;
             int y_st = 10;
-            int dx = 200 + 10;
-            int dy = 60 + 10;
+            int dx = W + 10;
+            int dy = H + 10;
 
-            //groupBox1.Size = new Size(W, H);
-            //groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            groupBox1.Size = new Size(W, H);
+            groupBox2.Size = new Size(W, H);
+            groupBox3.Size = new Size(W, H);
+            groupBox4.Size = new Size(W, H * 4);
+            groupBox5.Size = new Size(W, H);
+            groupBox6.Size = new Size(W, H * 2);
+            groupBox7.Size = new Size(W, H);
+            groupBox8.Size = new Size(W, H);
+            groupBox9.Size = new Size(W, H * 2);
+
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            groupBox3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            groupBox4.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            groupBox5.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            groupBox6.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            groupBox7.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            groupBox8.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            groupBox9.Location = new Point(x_st + dx * 1, y_st + dy * 5);
 
             richTextBox1.Size = new Size(400, 690);
-            richTextBox1.Location = new Point(x_st + dx * 2 + 50, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            x_st = 10;
+            y_st = 20;
+            W = 180;
+            H = 60;
+            dx = W + 10;
+            dy = H + 10;
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button13.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button14.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button15.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
             this.Size = new Size(920, 750);
             this.Text = "vcs_LOG";
@@ -251,7 +290,6 @@ namespace vcs_LOG
             Warn,
             Fatal
         }
-
 
         /// <summary>
         /// 日志内容
@@ -478,11 +516,15 @@ namespace vcs_LOG
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         int i5 = 0;
         private void button12_Click(object sender, EventArgs e)
         {
             LogAPI.WriteLog("寫log的方法5 " + (i5++).ToString());
         }
+
+        //------------------------------------------------------------  # 60個
 
         int i6 = 0;
         private void button13_Click(object sender, EventArgs e)
@@ -589,6 +631,8 @@ namespace vcs_LOG
         }
     }
 
+    //------------------------------------------------------------  # 60個
+
     public class Logger
     {
         // 寫入日志.
@@ -640,4 +684,45 @@ namespace vcs_LOG
 /*  可搬出
 
 */
+
+
+/*
+寫日誌範例 :
+2022-04-14 10:03:13 INFO  :VirtualHere Client 5.2.9 starting (Compiled: Feb 14 2022 07:50:45)
+2022-04-14 10:03:13 INFO  :Client OS is Windows 10 (build 19044), 64-bit edition
+2022-04-14 10:03:13 INFO  :Using config at C:\Users\070601\AppData\Roaming\vhui.ini
+2022-04-14 10:03:13 INFO  :IPC available at \\.\pipe\vhclient
+2022-04-14 10:03:13 INFO  :Auto-find (Bonjour) on
+2022-04-14 10:03:13 INFO  :Auto-find (Bonjour SSL) on
+2022-04-14 10:03:15 INFO  :Drivers are up-to-date
+2022-04-14 10:03:15 INFO  :Connected to the VirtualHere Client Driver (Version 2)
+2022-04-14 10:26:13 ERROR :Data stream corruption, compressedSize=2810554238, uncompressedSize=2827462782
+2022-04-14 10:26:25 INFO  :Server ping timeout, shutting down connection 1...
+
+//C# 寫日志文件
+
+	public static void WriteLog(string txt)
+        {
+                string path = Application.StartupPath + @"\log\" + DateTime.Now.ToString("yyyy-MM-dd") + @"\";
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                path +=  DateTime.Now.ToString("yyyyMMdd") + "-" + DateTime.Now.ToString("HH") + ".txt";
+                if (!File.Exists(path))
+                {
+                    File.Create(path);
+                }
+                FileStream fs;
+                StreamWriter sw;
+                fs = new FileStream(path, FileMode.Append);
+                sw = new StreamWriter(fs, Encoding.Default);
+                sw.Write(DateTime.Now.ToString("HH:mm:ss") + " " + txt + "\r\n");
+                sw.Close();
+                fs.Close();
+        }
+
+//------------------------------------------------------------  # 60個
+*/
+
 

@@ -155,7 +155,7 @@ namespace vcs_Thread
             groupBox13.Location = new Point(x_st + dx * 3, y_st + dy * 2);
             groupBox11.Location = new Point(x_st + dx * 4, y_st + dy * 1);
 
-            richTextBox1.Size = new Size(400, 690+50);
+            richTextBox1.Size = new Size(400, 690 + 50);
             richTextBox1.Location = new Point(x_st + dx * 6 - 100, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -203,7 +203,7 @@ namespace vcs_Thread
             lb_G.Location = new Point(x_st + dx * 0 + 130, y_st + dy * 1);
             lb_B.Location = new Point(x_st + dx * 0 + 130, y_st + dy * 2);
 
-            this.Size = new Size(1600, 750+50);
+            this.Size = new Size(1600, 750 + 50);
             this.Text = "vcs_Thread";
 
             //設定執行後的表單起始位置, 正中央
@@ -1282,6 +1282,5 @@ richTextBox1.Text += "0";
 Thread.Sleep(500);
 
 //------------------------------------------------------------  # 60個
-
 
 */
