@@ -21,6 +21,10 @@ namespace vcs_BackgroundWorker
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
             //C# 跨 Thread 存取 UI
             Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效
             Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
@@ -28,6 +32,33 @@ namespace vcs_BackgroundWorker
             label1.Text = "";
             label2.Text = "";
         }
+
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+
+            richTextBox1.Size = new Size(300, 690);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1273, 750);
+            this.Text = "vcs_test_all_00_Usually";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         // Use the BackgroundWorker to perform a long task.
         private void button1_Click(object sender, EventArgs e)
@@ -130,6 +161,10 @@ namespace vcs_BackgroundWorker
             //啟動BackgroundWorker3
             BackgroundWorkerInit.BackgroundWorker1_Init();
         }
+
+        //6060
+
+
     }
 
     public class BackgroundWorkerInit
@@ -227,3 +262,16 @@ namespace vcs_BackgroundWorker
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+

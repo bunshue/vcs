@@ -111,6 +111,8 @@ namespace vcs_LINQ
             richTextBox1.Text += "\n";
         }
 
+        //------------------------------------------------------------  # 60個
+
         class Student
         {
             public string Name { get; set; }
@@ -118,6 +120,7 @@ namespace vcs_LINQ
             public string City { get; set; }
             public List<int> Scores { get; set; }
         }
+
         class Teacher
         {
             public int Id { get; set; }
@@ -413,13 +416,7 @@ namespace vcs_LINQ
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-//1515
-//---------------  # 15個
-
-
 /*  可搬出
 
 */
-
-
 

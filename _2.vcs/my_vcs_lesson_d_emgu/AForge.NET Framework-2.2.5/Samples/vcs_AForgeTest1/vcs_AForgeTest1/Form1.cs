@@ -136,6 +136,8 @@ namespace vcs_AForgeTest1
             richTextBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button0_Click(object sender, EventArgs e)
         {
             string csv_filename1 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\AForge.NET Framework-2.2.5\Samples\vcs_AForgeTest1\vcs_AForgeTest1\data\sample1.csv";
@@ -566,15 +568,10 @@ namespace vcs_AForgeTest1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

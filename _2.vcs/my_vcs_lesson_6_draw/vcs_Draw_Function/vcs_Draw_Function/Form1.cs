@@ -129,7 +129,9 @@ namespace vcs_Draw_Function
                         gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
                         List<PointF> ints = new List<PointF>();
                         for (int x = (int)wxmin; x <= wxmax; x++)
+                        {
                             ints.Add(new PointF(x, -2 * tick_dy));
+                        }
                         PointF[] ints_array = ints.ToArray();
                         transform.TransformPoints(ints_array);
 
@@ -140,8 +142,7 @@ namespace vcs_Draw_Function
                             int index = 0;
                             for (int x = (int)wxmin; x <= wxmax; x++)
                             {
-                                gr.DrawString(x.ToString(), font, Brushes.Black,
-                                    ints_array[index++], sf);
+                                gr.DrawString(x.ToString(), font, Brushes.Black, ints_array[index++], sf);
                             }
                         }
 
@@ -162,7 +163,9 @@ namespace vcs_Draw_Function
                         gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
                         ints = new List<PointF>();
                         for (float y = 0.25f; y < wymax; y += 0.25f)
+                        {
                             ints.Add(new PointF(2 * tick_dx, y));
+                        }
                         if (ints.Count > 0)
                         {
                             ints_array = ints.ToArray();
@@ -176,8 +179,7 @@ namespace vcs_Draw_Function
                             int index = 0;
                             for (float y = 0.25f; y < wymax; y += 0.25f)
                             {
-                                gr.DrawString(y.ToString("0.00"), font, Brushes.Black,
-                                    ints_array[index++], sf);
+                                gr.DrawString(y.ToString("0.00"), font, Brushes.Black, ints_array[index++], sf);
                             }
                         }
 
@@ -221,10 +223,7 @@ namespace vcs_Draw_Function
                     double ymax = double.Parse(txtYmax.Text);
 
                     // Scale to make the area fit the PictureBox.
-                    RectangleF world_coords = new RectangleF(
-                        (float)xmin, (float)ymax,
-                        (float)(xmax - xmin),
-                        (float)(ymin - ymax));
+                    RectangleF world_coords = new RectangleF((float)xmin, (float)ymax, (float)(xmax - xmin), (float)(ymin - ymax));
                     PointF[] device_coords =
                     {
                         new PointF(0, 0),
@@ -237,6 +236,7 @@ namespace vcs_Draw_Function
                     // Start at the multiple of Pi < xmin.
                     double start_x = Math.PI * ((int)(xmin - 1));
                     gr.DrawLine(thin_pen, (float)xmin, 0, (float)xmax, 0);
+
                     float dy = (float)((ymax - ymin) / 30.0);
                     for (double x = start_x; x <= xmax; x += Math.PI)
                     {
@@ -251,6 +251,7 @@ namespace vcs_Draw_Function
                     // Start at the multiple of 1 < ymin.
                     double start_y = (int)ymin - 1;
                     gr.DrawLine(thin_pen, 0, (float)ymin, 0, (float)ymax);
+
                     float dx = (float)((xmax - xmin) / 60.0);
                     for (double y = start_y; y <= ymax; y += 1.0)
                     {
@@ -310,11 +311,12 @@ namespace vcs_Draw_Function
                     {
                         // See if we're at a discontinuity.
                         double new_value = Math.Tan(x);
-                        if ((Math.Abs(new_value - old_value) > 10) &&
-                            (Math.Sign(new_value) != Math.Sign(old_value)))
+                        if ((Math.Abs(new_value - old_value) > 10) && (Math.Sign(new_value) != Math.Sign(old_value)))
                         {
                             if (tangent_points.Count > 1)
+                            {
                                 gr.DrawLines(thin_pen, tangent_points.ToArray());
+                            }
                             tangent_points = new List<PointF>();
                         }
                         else
@@ -385,7 +387,9 @@ namespace vcs_Draw_Function
                         gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
                         List<PointF> ints = new List<PointF>();
                         for (int x = (int)wxmin; x <= wxmax; x++)
+                        {
                             ints.Add(new PointF(x, -0.07f));
+                        }
                         PointF[] ints_array = ints.ToArray();
                         transform.TransformPoints(ints_array);
 
@@ -396,8 +400,7 @@ namespace vcs_Draw_Function
                             int index = 0;
                             for (int x = (int)wxmin; x <= wxmax; x++)
                             {
-                                gr.DrawString(x.ToString(), font, Brushes.Black,
-                                    ints_array[index++], sf);
+                                gr.DrawString(x.ToString(), font, Brushes.Black, ints_array[index++], sf);
                             }
                         }
 
@@ -418,7 +421,9 @@ namespace vcs_Draw_Function
                         gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
                         ints = new List<PointF>();
                         for (float y = 0.25f; y < 1.01; y += 0.25f)
+                        {
                             ints.Add(new PointF(0.2f, y));
+                        }
                         ints_array = ints.ToArray();
                         transform.TransformPoints(ints_array);
 
@@ -429,16 +434,14 @@ namespace vcs_Draw_Function
                             int index = 0;
                             foreach (float y in new float[] { 0.25f, 0.5f, 0.75f, 1.0f })
                             {
-                                gr.DrawString(y.ToString("0.00"), font, Brushes.Black,
-                                    ints_array[index++], sf);
+                                gr.DrawString(y.ToString("0.00"), font, Brushes.Black, ints_array[index++], sf);
                             }
                         }
 
                         // Draw the curve.
                         gr.Transform = transform;
                         List<PointF> points = new List<PointF>();
-                        float one_over_2pi =
-                            (float)(1.0 / (stddev * Math.Sqrt(2 * Math.PI)));
+                        float one_over_2pi = (float)(1.0 / (stddev * Math.Sqrt(2 * Math.PI)));
 
                         float dx = (wxmax - wxmin) / pictureBox1.ClientSize.Width;
                         for (float x = wxmin; x <= wxmax; x += dx)
@@ -471,10 +474,6 @@ namespace vcs_Draw_Function
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

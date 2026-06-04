@@ -150,27 +150,27 @@ namespace vcs_WMI__new
                 object property_obj = mo["TotalVisibleMemorySize"];
                 ulong property_value = (ulong)property_obj * 1024;
                 richTextBox1.Text += "TotalVisibleMemorySize : " + property_value.ToFileSizeApi() + "\n";
-                richTextBox1.Text += "---------------\n";  // 15個
+                richTextBox1.Text += "------------------------------\n";  // 30個
                 richTextBox1.Text += "FreePhysicalMemory : " + mo["FreePhysicalMemory"].ToString() + "\n";
                 property_obj = mo["FreePhysicalMemory"];
                 property_value = (ulong)property_obj * 1024;
                 richTextBox1.Text += "FreePhysicalMemory : " + property_value.ToFileSizeApi() + "\n";
-                richTextBox1.Text += "---------------\n";  // 15個
+                richTextBox1.Text += "------------------------------\n";  // 30個
                 richTextBox1.Text += "FreeVirtualMemory : " + mo["FreeVirtualMemory"].ToString() + "\n";
                 property_obj = mo["FreeVirtualMemory"];
                 property_value = (ulong)property_obj * 1024;
                 richTextBox1.Text += "FreeVirtualMemory : " + property_value.ToFileSizeApi() + "\n";
-                richTextBox1.Text += "---------------\n";  // 15個
+                richTextBox1.Text += "------------------------------\n";  // 30個
                 richTextBox1.Text += "TotalVirtualMemorySize : " + mo["TotalVirtualMemorySize"].ToString() + "\n";
                 property_obj = mo["TotalVirtualMemorySize"];
                 property_value = (ulong)property_obj * 1024;
                 richTextBox1.Text += "TotalVirtualMemorySize : " + property_value.ToFileSizeApi() + "\n";
-                richTextBox1.Text += "---------------\n";  // 15個
+                richTextBox1.Text += "------------------------------\n";  // 30個
                 richTextBox1.Text += "FreeSpaceInPagingFiles : " + mo["FreeSpaceInPagingFiles"].ToString() + "\n";
                 property_obj = mo["FreeSpaceInPagingFiles"];
                 property_value = (ulong)property_obj * 1024;
                 richTextBox1.Text += "FreeSpaceInPagingFiles : " + property_value.ToFileSizeApi() + "\n";
-                richTextBox1.Text += "---------------\n";  // 15個
+                richTextBox1.Text += "------------------------------\n";  // 30個
                 richTextBox1.Text += "SizeStoredInPagingFiles : " + mo["SizeStoredInPagingFiles"].ToString() + "\n";
                 property_obj = mo["SizeStoredInPagingFiles"];
                 property_value = (ulong)property_obj * 1024;
@@ -1680,7 +1680,7 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
             {
                 richTextBox1.Text += "------------------------------\n";  // 30個
                 //richTextBox1.Text += "全部 :\n" + mo.GetText(TextFormat.Mof) + "\n";  // 全部
-                //richTextBox1.Text += "---------------\n";  // 15個
+                //richTextBox1.Text += "------------------------------\n";  // 30個
                 richTextBox1.Text += "Caption : " + mo["Caption"] + "\n";
                 richTextBox1.Text += "Description : " + mo["Description"] + "\n";
                 richTextBox1.Text += "InstallDate : " + mo["InstallDate"] + "\n";
@@ -2874,11 +2874,6 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
         {
             return ManagementDateTimeConverter.ToDateTime(dateTime).ToString();
         }
-
-
-
-
-
     }
 }
 

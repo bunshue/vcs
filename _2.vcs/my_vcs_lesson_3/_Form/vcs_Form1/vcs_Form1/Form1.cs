@@ -42,6 +42,10 @@ namespace vcs_Form1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
             //建立一個新的視窗物件
             using (Form f = new Form())
             {
@@ -59,8 +63,6 @@ namespace vcs_Form1
             //視窗物件自動Dispose
 
             AnimateWindow(this.Handle, 300, AW_SLIDE + AW_VER_NEGATIVE);
-
-            show_item_location();
 
             // Initialize the form variables.
             // Make the Form2.
@@ -89,7 +91,6 @@ namespace vcs_Form1
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -184,6 +185,13 @@ namespace vcs_Form1
             this.Controls.Add(bt_exit); // 將按鈕加入表單
             bt_exit.BringToFront();     //移到最上層
         }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -591,10 +599,7 @@ namespace vcs_Form1
 
         }
 
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
+        //------------------------------------------------------------  # 60個
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -704,15 +709,10 @@ namespace vcs_Form1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

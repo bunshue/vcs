@@ -112,6 +112,7 @@
             // 
             // richTextBox2
             // 
+            this.richTextBox2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox2.Location = new System.Drawing.Point(628, 116);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.Size = new System.Drawing.Size(100, 100);
@@ -142,10 +143,10 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(649, 61);
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(637, 46);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(60, 32);
+            this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 36;
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
@@ -205,10 +206,10 @@
             // 
             // bt_clear2
             // 
-            this.bt_clear2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear2.Location = new System.Drawing.Point(649, 150);
+            this.bt_clear2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear2.Location = new System.Drawing.Point(637, 141);
             this.bt_clear2.Name = "bt_clear2";
-            this.bt_clear2.Size = new System.Drawing.Size(60, 32);
+            this.bt_clear2.Size = new System.Drawing.Size(72, 36);
             this.bt_clear2.TabIndex = 42;
             this.bt_clear2.Text = "Clear";
             this.bt_clear2.UseVisualStyleBackColor = true;

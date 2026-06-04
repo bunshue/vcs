@@ -79,6 +79,8 @@ namespace vcs_List
             richTextBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button0_Click(object sender, EventArgs e)
         {
             //類別List
@@ -274,6 +276,8 @@ namespace vcs_List
             richTextBox1.Text += "\n";
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button3_Click(object sender, EventArgs e)
         {
             //一維字串串列
@@ -391,9 +395,7 @@ namespace vcs_List
             stringList1.RemoveAt(3);
             richTextBox1.Text += "刪除此List之第3項";
 
-
             //顯示串列資料
-
             richTextBox1.Text += "共有 " + stringList1.Count.ToString() + " 個字串\n";
 
             // 取出單一個List 裡的值，如同陣列(Array)用法
@@ -408,11 +410,9 @@ namespace vcs_List
             {
                 richTextBox1.Text += sss + "\n";
             }
-
-
-
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -646,6 +646,8 @@ namespace vcs_List
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button7_Click(object sender, EventArgs e)
         {
             //一維字元串列 易經 六十四卦
@@ -709,9 +711,13 @@ namespace vcs_List
             pointList1 = new List<PointF>();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button9_Click(object sender, EventArgs e)
         {
         }
+
+        //------------------------------------------------------------  # 60個
 
         private class classList
         {
@@ -740,6 +746,8 @@ namespace vcs_List
                 richTextBox1.Text += showlist.ID + "\t->\t" + showlist.Name + "\t->\t" + showlist.Level + "\n";
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         public class classStudent
         {
@@ -832,8 +840,9 @@ namespace vcs_List
             {
                 richTextBox1.Text += classList3[i].EmpID + "\t" + classList3[i].EmpName + " \t" + classList3[i].EmpSex + "\t" + classList3[i].EmpIsMarry.ToString() + Environment.NewLine;
             }
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         public class tb_SensorRecordModel
         {
@@ -887,6 +896,8 @@ namespace vcs_List
             });
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button14_Click(object sender, EventArgs e)
         {
         }
@@ -906,6 +917,8 @@ namespace vcs_List
         private void button18_Click(object sender, EventArgs e)
         {
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button19_Click(object sender, EventArgs e)
         {
@@ -945,6 +958,8 @@ namespace vcs_List
                 // GetByIndex(i):取得 SortedList 物件中指定之索引處的值。
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button20_Click(object sender, EventArgs e)
         {
@@ -1027,6 +1042,8 @@ namespace vcs_List
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button23_Click(object sender, EventArgs e)
         {
         }
@@ -1034,6 +1051,8 @@ namespace vcs_List
         private void button24_Click(object sender, EventArgs e)
         {
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button25_Click(object sender, EventArgs e)
         {
@@ -1111,8 +1130,9 @@ namespace vcs_List
             ushort[] score = new ushort[] { 78, 65, 92, 55, 83 };
             Array.Sort(score);//遞增排序
             Array.Reverse(score);//遞減排序
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button28_Click(object sender, EventArgs e)
         {
@@ -1131,10 +1151,10 @@ namespace vcs_List
 
             //清除List資料
             //stringList1.Clear();
-
-
         }
     }
+
+    //------------------------------------------------------------  # 60個
 
     public class Person
     {
@@ -1194,15 +1214,10 @@ namespace vcs_List
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

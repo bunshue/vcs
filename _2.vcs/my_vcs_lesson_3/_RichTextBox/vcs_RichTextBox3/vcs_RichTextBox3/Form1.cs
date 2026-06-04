@@ -123,10 +123,14 @@ namespace vcs_RichTextBox3
             richTextBox2.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start(e.LinkText);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -529,15 +533,10 @@ namespace vcs_RichTextBox3
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

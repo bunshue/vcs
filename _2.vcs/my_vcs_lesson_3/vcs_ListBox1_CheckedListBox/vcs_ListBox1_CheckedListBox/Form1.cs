@@ -49,7 +49,6 @@ namespace vcs_ListBox1_CheckedListBox
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             richTextBox1.Location = new Point(x_st + dx * 4 - 100, y_st + dy * 0);
             richTextBox1.Size = new Size(300, 600);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -66,6 +65,8 @@ namespace vcs_ListBox1_CheckedListBox
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -335,19 +336,13 @@ namespace vcs_ListBox1_CheckedListBox
     }
 }
 
-
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

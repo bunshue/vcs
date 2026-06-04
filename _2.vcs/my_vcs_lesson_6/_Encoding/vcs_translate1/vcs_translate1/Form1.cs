@@ -80,6 +80,8 @@ namespace vcs_translate1
             return tTarget;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button1_Click(object sender, EventArgs e)
         {
             richTextBox5.Text = Big5toGB2312(this.richTextBox1.Text);
@@ -881,13 +883,6 @@ namespace vcs_translate1
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-//1515
-//---------------  # 15個
-
-
 /*  可搬出
 
 */
-
-
-

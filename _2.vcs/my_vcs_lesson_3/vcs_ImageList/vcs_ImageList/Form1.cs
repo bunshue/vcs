@@ -31,6 +31,8 @@ namespace vcs_ImageList
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             // 五張圖放入imageList影像清單控制項內 
             for (int i = 0; i <= photo.GetUpperBound(0); i++)
             {
@@ -75,7 +77,6 @@ namespace vcs_ImageList
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             pictureBox1.Size = new Size(640, 480);
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             lblShow.Location = new Point(x_st + dx * 3 + 40, y_st + dy * 0);
@@ -102,6 +103,8 @@ namespace vcs_ImageList
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -184,15 +187,10 @@ namespace vcs_ImageList
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

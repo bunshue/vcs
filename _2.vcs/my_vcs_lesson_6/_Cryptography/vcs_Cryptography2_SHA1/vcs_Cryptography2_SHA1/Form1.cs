@@ -77,6 +77,8 @@ namespace vcs_Cryptography2_SHA1
             richTextBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private string GetStringValue(byte[] Byte)
         {
             string tmpString = "";
@@ -127,6 +129,8 @@ namespace vcs_Cryptography2_SHA1
             sha512.Clear();
             return GetStringValue(tmpByte);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -588,10 +592,6 @@ namespace vcs_Cryptography2_SHA1
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

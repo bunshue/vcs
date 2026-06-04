@@ -86,6 +86,8 @@ namespace vcs_Class2
             richTextBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         class StudentScore
         {
             //第一個靜態方法-計算總分
@@ -116,6 +118,8 @@ namespace vcs_Class2
 
             Console.WriteLine(name = " " + "總分 : " + score + "\t平均 : " + avg);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -955,15 +959,10 @@ namespace vcs_Class2
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 
@@ -991,9 +990,7 @@ namespace vcs_Class2
         private void button4_Click(object sender, EventArgs e)
         {
             MyRectangle r1 = new MyRectangle();
-
         }
-
 
         public static class define  //define some constant
         {

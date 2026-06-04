@@ -43,7 +43,7 @@ namespace vcs_PictureCrop9
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
+
             pictureBox1.Size = new Size(850, 600);
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
@@ -80,6 +80,8 @@ namespace vcs_PictureCrop9
             richTextBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         void draw_grid(Graphics g)
         {
             int W = pictureBox1.Width;
@@ -114,7 +116,7 @@ namespace vcs_PictureCrop9
 
         void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (flag_select_area==false)
+            if (flag_select_area == false)
             {
                 return;
             }
@@ -133,7 +135,7 @@ namespace vcs_PictureCrop9
 
         void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            if (flag_select_area==false)
+            if (flag_select_area == false)
             {
                 return;
             }
@@ -205,16 +207,15 @@ namespace vcs_PictureCrop9
     }
 }
 
-
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-//1515
-//---------------  # 15個
+/*  可搬出
+
+*/
 

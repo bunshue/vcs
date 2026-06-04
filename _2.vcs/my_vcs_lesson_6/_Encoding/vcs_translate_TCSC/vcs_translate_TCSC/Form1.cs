@@ -104,6 +104,8 @@ namespace vcs_translate_TCSC
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void bt_tc_sc_Click(object sender, EventArgs e)
         {
             //正中轉簡中
@@ -144,7 +146,6 @@ namespace vcs_translate_TCSC
     }
 }
 
-
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
@@ -153,12 +154,7 @@ namespace vcs_translate_TCSC
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-//1515
-//---------------  # 15個
-
-
 /*  可搬出
 
 */
-
 

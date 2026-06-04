@@ -73,6 +73,8 @@ namespace vcs_RegistryKey3
             richTextBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button0_Click(object sender, EventArgs e)
         {
             //取得Owner與Company
@@ -321,10 +323,6 @@ namespace vcs_RegistryKey3
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-//1515
-//---------------  # 15個
-
-
 /*  可搬出
 
 */
@@ -390,7 +388,6 @@ https://barryhungmvp.pixnet.net/blog/post/88133155-c%23---%E5%A6%82%E4%BD%95%E8%
             string IEVersion = "目前IE瀏覽器的版本訊息：" + (String)mreg.GetValue("Version");
             mreg.Close();
             richTextBox1.Text += IEVersion + "\n";
-
         }
 
 //------------------------------------------------------------  # 60個

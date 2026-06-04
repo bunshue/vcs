@@ -90,7 +90,6 @@ namespace vcs_Struct
             richTextBox1.Text += "產品編號： " + cookie.No + "\n";
             richTextBox1.Text += "產品名稱： " + cookie.Name + "\n";
             richTextBox1.Text += "產品單價： " + cookie.Price + "\n";
-
         }
 
         struct circle
@@ -114,7 +113,6 @@ namespace vcs_Struct
             richTextBox1.Text += "輪胎半徑：" + wheel1.circle1.cRadius + "\n";
             richTextBox1.Text += "輪胎顏色：" + wheel1.circle1.cColor + "\n";
             richTextBox1.Text += "輪胎用途：" + wheel1.usage + "\n";
-
         }
 
         //結構與結構陣列的用法 ST
@@ -416,10 +414,6 @@ namespace vcs_Struct
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

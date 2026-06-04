@@ -40,7 +40,7 @@ namespace vcs_AForgeMathTest
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
+
             button0.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new System.Drawing.Point(x_st + dx * 0, y_st + dy * 2);
@@ -90,6 +90,8 @@ namespace vcs_AForgeMathTest
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         public void print_matrix3(Matrix3x3 matrix)
         {
@@ -410,7 +412,7 @@ namespace vcs_AForgeMathTest
             CreateRotationXTest(angle);
 
             CreateRotationYTest(angle);
-            
+
             CreateRotationZTest(angle);
 
             //第一张是绕x轴旋转pitch， 上下點頭
@@ -606,13 +608,13 @@ namespace vcs_AForgeMathTest
             richTextBox1.Text += "IsHorizontal :\t" + line.IsHorizontal + "\n";
             richTextBox1.Text += "IsVertical :\t" + line.IsVertical + "\n";
 
-            richTextBox1.Text += "---------------\n";  // 15個
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             // calculate radius
             float radius = pt.EuclideanNorm();
             richTextBox1.Text += "radius " + radius + "\n";
 
-            richTextBox1.Text += "---------------\n";  // 15個
+            richTextBox1.Text += "------------------------------\n";  // 30個
 
             // test R-Theta factory
             line = Line.FromRTheta(radius, theta);
@@ -884,7 +886,6 @@ namespace vcs_AForgeMathTest
 
             var ccc = Vector3.Cross(vector1, vector2);
             richTextBox1.Text += "外積測試 : " + ccc + "\n";
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -2285,20 +2286,13 @@ namespace vcs_AForgeMathTest
     }
 }
 
-
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//richTextBox1.Text += "---------------\n";  // 15個
-//---------------  # 15個
-
 
 /*  可搬出
 

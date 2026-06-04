@@ -63,8 +63,6 @@ namespace vcs_TabControl
             {
                 page.MouseClick += new MouseEventHandler(page_MouseClick);
             }
-
-
         }
 
         void show_item_location()
@@ -74,7 +72,7 @@ namespace vcs_TabControl
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
+
             label6.Location = new Point(tabControl2.Location.X, tabControl2.Location.Y - 30);
             richTextBox1.Size = new Size(300, 300);
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 4 + 60);
@@ -92,6 +90,8 @@ namespace vcs_TabControl
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
@@ -207,11 +207,9 @@ namespace vcs_TabControl
                 panel.Visible = false;
                 */
             }
-
-
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         // The user has clicked this tab page.
         private void page_MouseClick(object sender, MouseEventArgs e)
@@ -354,12 +352,13 @@ namespace vcs_TabControl
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-//1515
-//---------------  # 15個
+/*  可搬出
+
+*/
+
 

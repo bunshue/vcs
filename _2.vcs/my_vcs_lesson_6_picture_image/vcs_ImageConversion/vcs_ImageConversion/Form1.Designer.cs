@@ -71,6 +71,7 @@
             // 
             // richTextBox1
             // 
+            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox1.Location = new System.Drawing.Point(12, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(500, 500);
@@ -79,6 +80,7 @@
             // 
             // bt_clear1
             // 
+            this.bt_clear1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_clear1.Location = new System.Drawing.Point(444, 470);
             this.bt_clear1.Name = "bt_clear1";
             this.bt_clear1.Size = new System.Drawing.Size(68, 41);
@@ -89,6 +91,7 @@
             // 
             // richTextBox2
             // 
+            this.richTextBox2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox2.Location = new System.Drawing.Point(518, 307);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.Size = new System.Drawing.Size(500, 329);
@@ -141,6 +144,7 @@
             // 
             // bt_clear2
             // 
+            this.bt_clear2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_clear2.Location = new System.Drawing.Point(950, 595);
             this.bt_clear2.Name = "bt_clear2";
             this.bt_clear2.Size = new System.Drawing.Size(68, 41);

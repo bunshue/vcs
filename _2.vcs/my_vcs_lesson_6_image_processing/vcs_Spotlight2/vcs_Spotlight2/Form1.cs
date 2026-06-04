@@ -50,6 +50,8 @@ namespace vcs_Spotlight2
             pArr2b[2] = new Point(300 + 100, 600);
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void timer_spotlight2_Tick(object sender, EventArgs e)
         {
             if (pArr1b[1].X <= 0 || pArr1b[2].X >= 600)
@@ -140,13 +142,7 @@ namespace vcs_Spotlight2
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-//1515
-//---------------  # 15個
-
-
 /*  可搬出
 
 */
-
-
 

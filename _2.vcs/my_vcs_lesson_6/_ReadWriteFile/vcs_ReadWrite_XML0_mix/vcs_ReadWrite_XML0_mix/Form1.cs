@@ -80,6 +80,13 @@ namespace vcs_ReadWrite_XML0_mix
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
+
         private void button0_Click(object sender, EventArgs e)
         {
             //XML讀取
@@ -244,21 +251,21 @@ namespace vcs_ReadWrite_XML0_mix
                     Console.WriteLine(stu.学号.ToString() + "  " + stu.姓名 + "  " + stu.成绩.ToString());
                 }
             }
-            /**/
+
             /*
-    public void WriteXml()
-    {
-        XmlTextWriter writer = new XmlTextWriter(workDir + "\\test.xml", Encoding.Default);
-        writer.Formatting = Formatting.Indented;
-        writer.WriteStartDocument();           
-        writer.WriteStartElement("学员");
-        writer.WriteElementString("学号", "110");
-        writer.WriteEndElement();
-        writer.WriteEndDocument();
-        writer.Flush();
-        writer.Close();
-    }
-    */
+            public void WriteXml()
+            {
+                XmlTextWriter writer = new XmlTextWriter(workDir + "\\test.xml", Encoding.Default);
+                writer.Formatting = Formatting.Indented;
+                writer.WriteStartDocument();           
+                writer.WriteStartElement("学员");
+                writer.WriteElementString("学号", "110");
+                writer.WriteEndElement();
+                writer.WriteEndDocument();
+                writer.Flush();
+                writer.Close();
+            }
+            */
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -1474,8 +1481,7 @@ namespace vcs_ReadWrite_XML0_mix
             //
         }
 
-
-        #region XML文檔節點查詢和讀取
+        //#region XML文檔節點查詢和讀取
         ///<summary>
         /// 選擇匹配XPath表達式的第一個節點XmlNode.
         ///</summary>
@@ -1552,9 +1558,9 @@ namespace vcs_ReadWrite_XML0_mix
             }
             return xmlAttribute;
         }
-        #endregion
+        //#endregion
 
-        #region XML文檔創建和節點或屬性的添加、修改
+        //#region XML文檔創建和節點或屬性的添加、修改
         ///<summary>
         /// 創建一個XML文檔
         ///</summary>
@@ -1727,10 +1733,9 @@ namespace vcs_ReadWrite_XML0_mix
             }
             return isSuccess;
         }
-        #endregion
+        //#endregion
 
-
-        #region XML文檔節點或屬性的刪除
+        //#region XML文檔節點或屬性的刪除
         ///<summary>
         /// 刪除匹配XPath表達式的第一個節點(節點中的子元素同時會被刪除)
         ///</summary>
@@ -1835,23 +1840,17 @@ namespace vcs_ReadWrite_XML0_mix
             }
             return isSuccess;
         }
-        #endregion
-
+        //#endregion
     }
 }
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

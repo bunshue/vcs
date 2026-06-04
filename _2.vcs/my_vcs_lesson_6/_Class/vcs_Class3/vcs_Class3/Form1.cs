@@ -73,6 +73,8 @@ namespace vcs_Class3
             richTextBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         //Class 範例 0 ST
         public class Classmate  //事件訂閱者
         {
@@ -103,6 +105,8 @@ namespace vcs_Class3
         }
         //Class 範例 0 SP
 
+        //------------------------------------------------------------  # 60個
+
         //Class 範例 1 ST
         public class Person
         {
@@ -117,6 +121,8 @@ namespace vcs_Class3
             Person p = new Person() { Name = "Hong", Age = 25, Weight = 65, Height = 170 };
         }
         //Class 範例 1 SP
+
+        //------------------------------------------------------------  # 60個
 
         //Class 範例 2 ST
         public class Shoe
@@ -165,6 +171,8 @@ namespace vcs_Class3
         }
         //Class 範例 2 SP
 
+        //------------------------------------------------------------  # 60個
+
         //Class 範例 3 ST
         public class People
         {
@@ -201,6 +209,8 @@ namespace vcs_Class3
         }
         //Class 範例 3 SP
 
+        //------------------------------------------------------------  # 60個
+
         //Class 範例 4 ST
         class P
         {
@@ -226,6 +236,8 @@ namespace vcs_Class3
             Console.WriteLine(obj.Name);        //使用到get
         }
         //Class 範例 4 SP
+
+        //------------------------------------------------------------  # 60個
 
         //Class 範例 5 ST
         /*
@@ -424,6 +436,8 @@ namespace vcs_Class3
             }
         }
         //Class 範例 5 SP
+
+        //------------------------------------------------------------  # 60個
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -689,10 +703,6 @@ namespace vcs_Class3
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 

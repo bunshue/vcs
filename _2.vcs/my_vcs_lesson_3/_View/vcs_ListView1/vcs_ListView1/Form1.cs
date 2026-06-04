@@ -35,6 +35,8 @@ namespace vcs_ListView1
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             // listView1的共同設定, 設定ListView與設定欄位
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.FullRowSelect = true; //整行一起選取
@@ -61,7 +63,6 @@ namespace vcs_ListView1
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -117,6 +118,8 @@ namespace vcs_ListView1
             richTextBox1.Clear();
             flag_check_score_done = 0;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void listView1_MouseClick(object sender, MouseEventArgs e)
         {
@@ -177,6 +180,8 @@ namespace vcs_ListView1
             richTextBox1.Text += "e.Item : " + e.Item + "\t";
             richTextBox1.Text += "e.Label : " + e.Label + "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -1429,16 +1434,10 @@ namespace vcs_ListView1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//richTextBox1.Text += "---------------\n";  // 15個
-//---------------  # 15個
-
 
 /*  可搬出
 

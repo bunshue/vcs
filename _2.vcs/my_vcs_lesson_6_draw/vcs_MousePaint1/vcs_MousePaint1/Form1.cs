@@ -242,6 +242,8 @@ namespace vcs_MousePaint1
             Environment.Exit(0);
         }
 
+        //------------------------------------------------------------  # 60個
+
         // 檢查是哪一個點被 選到
         private void pictureBox0_MouseDown(object sender, MouseEventArgs e)
         {
@@ -722,26 +724,18 @@ namespace vcs_MousePaint1
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
 
-//1515
-//---------------  # 15個
-
-
 /*  可搬出
 
 */
 
-
 // Start selecting a rectangle.
 // Continue selecting a rectangle.
 // Finish selecting a rectangle.
-
-
 
 /*
 Bitmap bmp = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\BMW.jfif");

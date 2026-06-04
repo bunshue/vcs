@@ -90,6 +90,8 @@ namespace vcs_ReadWrite_CSV1
             richTextBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button0_Click(object sender, EventArgs e)
         {
             //建立
@@ -116,9 +118,6 @@ namespace vcs_ReadWrite_CSV1
             {
                 richTextBox1.Text += "目前List沒有項目\n";
             }
-
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -164,7 +163,6 @@ namespace vcs_ReadWrite_CSV1
                 richTextBox1.Text += "csv : " + csv + "\n";
             }
             richTextBox1.Text += "存檔檔名: " + filename + "\n";
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -2236,19 +2234,13 @@ namespace vcs_ReadWrite_CSV1
     }
 }
 
-
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個
 //------------------------------  # 30個
-
-//1515
-//---------------  # 15個
-
 
 /*  可搬出
 
