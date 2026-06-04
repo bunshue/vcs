@@ -88,19 +88,6 @@ namespace vcs_DiskDirectoryFile3
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //從檔案完整路徑分離出資料夾,檔案名稱,副檔名
-            string full_filename = @"D:\_git\vcs\_1.data\______test_files1\_case1\_case1a\_case1aa\eula.3081a.txt";
-            //取得資料夾路徑
-            string foldername = full_filename.Substring(0, full_filename.LastIndexOf("\\") + 1);
-            //取得檔案名稱
-            string short_filename = full_filename.Substring(full_filename.LastIndexOf("\\") + 1, full_filename.LastIndexOf(".") - (full_filename.LastIndexOf("\\") + 1));
-            //取得副檔名
-            string ext_filename = full_filename.Substring(full_filename.LastIndexOf(".") + 1, full_filename.Length - full_filename.LastIndexOf(".") - 1);
-
-            richTextBox1.Text += "檔案完整路徑:\t" + full_filename + "\n";
-            richTextBox1.Text += "資料夾路徑:\t" + foldername + "\n";
-            richTextBox1.Text += "檔案名稱:\t" + short_filename + "\n";
-            richTextBox1.Text += "副檔名:\t" + ext_filename + "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -484,63 +484,14 @@ namespace vcs_DiskDirectoryFile2
 
         private void button11_Click(object sender, EventArgs e)
         {
-            string filename_source = @"D:\_git\vcs\_1.data\______test_files1\bear.jpg";
-            string filename_destination = @"D:\_git\vcs\_1.data\______test_files1\_cpfile\ccc.jpg";   //要寫完整檔名
-
-            richTextBox1.Text += "檔案已存在的FileCopy/Move\n";
-            try
-            {
-                //File.Copy(filename_source, filename_destination);     //若檔案已存在, 會出現IOException
-                //File.Move(filename_source, filename_destination);     //若檔案已存在, 會出現IOException
-                File.Copy(filename_source, filename_destination, true); //覆蓋檔案
-                //File.Move(filename_source, filename_destination, true); //覆蓋檔案
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "xxx錯誤訊息m : " + ex.Message + "\n";
-            }
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            //Directory.Delete 目錄不是空的
-
-            string pathname = @"D:\_git\vcs\_1.data\______test_files1\_cpfile";
-
-            richTextBox1.Text += "Directory.Delete 目錄不是空的\n";
-            try
-            {
-                //Directory.Delete(pathname); //若目錄不是空的, 會出現IOException
-                Directory.Delete(pathname, true); //強制刪除不是空的目錄
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "xxx錯誤訊息m : " + ex.Message + "\n";
-            }
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-            //刪除資料夾下子資料夾(偽)
-            var pathstr = @"D:/_git/vcs/_1.data/______test_files1";
-            if (Directory.Exists(pathstr))
-            {
-                //var strname=DateTime.Now.ToShortDateString().Replace("/","-")+".txt";
-                var dt = DateTime.Now;
-                DirectoryInfo pathinfo = new DirectoryInfo(pathstr);
-                foreach (DirectoryInfo paths in pathinfo.GetDirectories())
-                {
-                    if (paths.CreationTime < Convert.ToDateTime(dt.AddDays(-(dt.Day) + 1)))
-                    {
-                        //paths.Delete();
-                        richTextBox1.Text += "path = " + paths + "\n";
-                    }
-                }
-            }
-            else
-            {
-                richTextBox1.Text += "資料夾 " + pathstr + " 不存在\n";
-            }
         }
 
         private void button14_Click(object sender, EventArgs e)

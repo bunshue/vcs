@@ -50,14 +50,24 @@ namespace vcs_DriveInfo3
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            comboBox_drive.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            comboBox_drive.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
-            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             richTextBox1.Size = new Size(450, 690 - 140);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(700, 750);
+            this.Size = new Size(900, 750);
             this.Text = "vcs_test_all_00_Usually";
 
             //設定執行後的表單起始位置, 正中央
@@ -283,7 +293,6 @@ namespace vcs_DriveInfo3
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //取得硬碟資訊
             //取得硬碟資訊
             long fb, ftb, tfb;
             string foldername = @"D:\_git\vcs\_1.data\______test_files1\__RW\_excel";
@@ -599,6 +608,58 @@ namespace vcs_DriveInfo3
 
         //------------------------------------------------------------  # 60個
 
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
     }
 
     //讀硬盤序列號
@@ -825,8 +886,6 @@ namespace vcs_DriveInfo3
 /*  可搬出
 
 */
-
-
 
 
 
