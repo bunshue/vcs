@@ -74,6 +74,7 @@
             this.button39 = new System.Windows.Forms.Button();
             this.bt_reset = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -223,6 +224,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(200, 60);
             this.button10.TabIndex = 110;
+            this.button10.Text = "測試網路連線狀態";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -554,6 +556,12 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 5000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -663,6 +671,7 @@
         private System.Windows.Forms.Button button39;
         private System.Windows.Forms.Button bt_reset;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

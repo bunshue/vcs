@@ -292,7 +292,7 @@ with tempfile.NamedTemporaryFile() as ntf:
     mixer.music.play()
     while mixer.music.get_busy():
         pass
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
@@ -320,12 +320,46 @@ print(aa*2/600)
 aa= 120 * 1.78 +210 * 2.55 +170 * 3.80 +100 * 5.14 +75
 print(aa)
 print(aa/600)
-
-
+'''
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
+import os
+import time
+import ctypes
+import requests
+
+def show_message(title, text):
+    # Windows 彈出訊息框
+    ctypes.windll.user32.MessageBoxW(0, text, title, 1)
+
+def check_internet():
+    try:
+        # 嘗試連線 Google
+        requests.get("https://www.google.com", timeout=3)
+        return True
+    except requests.RequestException:
+        return False
+
+def main():
+    last_status = None
+    while True:
+        status = check_internet()
+        if status and last_status == False:
+            print("✅ 網路已恢復連線")
+            show_message("網路狀態", "✅ 網路已恢復連線")
+        elif not status and last_status == True:
+            print("⚠️ 網路斷線")
+            show_message("網路狀態", "⚠️ 網路斷線")
+        elif last_status is None:
+            # 第一次檢查
+            print("目前網路狀態:", "連線中" if status else "已斷線")
+        last_status = status
+        time.sleep(5)  # 每 5 秒檢查一次
+
+if __name__ == "__main__":
+    main()
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

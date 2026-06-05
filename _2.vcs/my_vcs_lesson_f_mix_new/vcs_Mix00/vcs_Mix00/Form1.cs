@@ -32,6 +32,8 @@ namespace vcs_Mix00
         Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定義鼠標 
         Bitmap bitmap1;
 
+        bool lastStatus = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -540,6 +542,9 @@ namespace vcs_Mix00
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //測試網路連線狀態
+
+
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -1647,6 +1652,44 @@ namespace vcs_Mix00
             //輸出標頭
             String ch = new String('-', 58);
             richTextBox1.Text += ch + "\n";
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            bool status = CheckInternet();
+
+            if (status && lastStatus == false)
+            {
+                MessageBox.Show("✅ 網路已恢復連線", "網路狀態", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else if (!status && lastStatus == true)
+            {
+                MessageBox.Show("⚠️ 網路斷線", "網路狀態", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (lastStatus == null)
+            {
+                // 第一次檢查
+                MessageBox.Show(status ? "目前網路狀態: 連線中" : "目前網路狀態: 已斷線", "網路狀態", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            lastStatus = status;
+        }
+
+        private bool CheckInternet()
+        {
+            try
+            {
+                using (WebClient client = new WebClient())
+                {
+                    // 嘗試下載 Google 首頁 (只要能成功就代表有網路)
+                    client.DownloadString("https://www.google.com");
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 
