@@ -34,7 +34,10 @@ namespace vcs_Exif
             int orientation_index = Array.IndexOf(img.PropertyIdList, OrientationId);
 
             // If there is no such property, return Unknown.
-            if (orientation_index < 0) return ExifOrientations.Unknown;
+            if (orientation_index < 0)
+            {
+                return ExifOrientations.Unknown;
+            }
 
             // Return the orientation value.
             return (ExifOrientations)img.GetPropertyItem(OrientationId).Value[0];
@@ -94,7 +97,7 @@ namespace vcs_Exif
             img.SetPropertyItem(item);
         }
 
-                // Make an image to demonstrate orientations.
+        // Make an image to demonstrate orientations.
         public static Image OrientationImage(ExifOrientations orientation)
         {
             const int size = 64;
@@ -135,25 +138,21 @@ namespace vcs_Exif
                 }
 
                 // Translate the result to the center of the bitmap.
-                gr.TranslateTransform(
-                    size / 2, size / 2, MatrixOrder.Append);
+                gr.TranslateTransform(size / 2, size / 2, MatrixOrder.Append);
 
                 using (StringFormat string_format = new StringFormat())
                 {
                     string_format.LineAlignment = StringAlignment.Center;
                     string_format.Alignment = StringAlignment.Center;
-                    using (Font font = new Font("Times New Roman", 40,
-                        GraphicsUnit.Point))
+                    using (Font font = new Font("Times New Roman", 40, GraphicsUnit.Point))
                     {
                         if (orientation == ExifOrientations.Unknown)
                         {
-                            gr.DrawString("?", font, Brushes.Black,
-                                0, 0, string_format);
+                            gr.DrawString("?", font, Brushes.Black, 0, 0, string_format);
                         }
                         else
                         {
-                            gr.DrawString("F", font, Brushes.Black,
-                                0, 0, string_format);
+                            gr.DrawString("F", font, Brushes.Black, 0, 0, string_format);
                         }
                     }
                 }
@@ -577,13 +576,11 @@ namespace vcs_Exif
             {
                 case ExifPropertyDataTypes.ByteArray:
                 case ExifPropertyDataTypes.UByteArray:
-                    data.DataString =
-                        BitConverter.ToString(data.DataBuffer);
+                    data.DataString = BitConverter.ToString(data.DataBuffer);
                     break;
 
                 case ExifPropertyDataTypes.String:
-                    data.DataString = Encoding.UTF8.GetString(
-                        data.DataBuffer, 0, data.DataLength - 1);
+                    data.DataString = Encoding.UTF8.GetString(data.DataBuffer, 0, data.DataLength - 1);
                     break;
 
                 case ExifPropertyDataTypes.UShortArray:
@@ -592,11 +589,13 @@ namespace vcs_Exif
                     num_items = data.DataLength / item_size;
                     for (int i = 0; i < num_items; i++)
                     {
-                        ushort value = BitConverter.ToUInt16(
-                            data.DataBuffer, i * item_size); 
+                        ushort value = BitConverter.ToUInt16(data.DataBuffer, i * item_size);
                         result += ", " + value.ToString();
                     }
-                    if (result.Length > 0) result = result.Substring(2);
+                    if (result.Length > 0)
+                    {
+                        result = result.Substring(2);
+                    }
                     data.DataString = "[" + result + "]";
                     break;
 
@@ -606,11 +605,13 @@ namespace vcs_Exif
                     num_items = data.DataLength / item_size;
                     for (int i = 0; i < num_items; i++)
                     {
-                        uint value = BitConverter.ToUInt32(
-                            data.DataBuffer, i * item_size);
+                        uint value = BitConverter.ToUInt32(data.DataBuffer, i * item_size);
                         result += ", " + value.ToString();
                     }
-                    if (result.Length > 0) result = result.Substring(2);
+                    if (result.Length > 0)
+                    {
+                        result = result.Substring(2);
+                    }
                     data.DataString = "[" + result + "]";
                     break;
 
@@ -620,45 +621,47 @@ namespace vcs_Exif
                     num_items = data.DataLength / item_size;
                     for (int i = 0; i < num_items; i++)
                     {
-                        uint numerator = BitConverter.ToUInt32(
-                            data.DataBuffer, i * item_size);
-                        uint denominator = BitConverter.ToUInt32(
-                            data.DataBuffer, i * item_size + item_size / 2);
-                        result += ", " + numerator.ToString() +
-                            "/" + denominator.ToString();
+                        uint numerator = BitConverter.ToUInt32(data.DataBuffer, i * item_size);
+                        uint denominator = BitConverter.ToUInt32(data.DataBuffer, i * item_size + item_size / 2);
+                        result += ", " + numerator.ToString() + "/" + denominator.ToString();
                     }
-                    if (result.Length > 0) result = result.Substring(2);
+                    if (result.Length > 0)
+                    {
+                        result = result.Substring(2);
+                    }
                     data.DataString = "[" + result + "]";
                     break;
-                                
+
                 case ExifPropertyDataTypes.LongArray:
                     result = "";
                     item_size = 4;
                     num_items = data.DataLength / item_size;
                     for (int i = 0; i < num_items; i++)
                     {
-                        int value = BitConverter.ToInt32(
-                            data.DataBuffer, i * item_size);
+                        int value = BitConverter.ToInt32(data.DataBuffer, i * item_size);
                         result += ", " + value.ToString();
                     }
-                    if (result.Length > 0) result = result.Substring(2);
+                    if (result.Length > 0)
+                    {
+                        result = result.Substring(2);
+                    }
                     data.DataString = "[" + result + "]";
                     break;
-                
+
                 case ExifPropertyDataTypes.LongFractionArray:
                     result = "";
                     item_size = 8;
                     num_items = data.DataLength / item_size;
                     for (int i = 0; i < num_items; i++)
                     {
-                        int numerator = BitConverter.ToInt32(
-                            data.DataBuffer, i * item_size);
-                        int denominator = BitConverter.ToInt32(
-                            data.DataBuffer, i * item_size + item_size / 2);
-                        result += ", " + numerator.ToString() +
-                            "/" + denominator.ToString();
+                        int numerator = BitConverter.ToInt32(data.DataBuffer, i * item_size);
+                        int denominator = BitConverter.ToInt32(data.DataBuffer, i * item_size + item_size / 2);
+                        result += ", " + numerator.ToString() + "/" + denominator.ToString();
                     }
-                    if (result.Length > 0) result = result.Substring(2);
+                    if (result.Length > 0)
+                    {
+                        result = result.Substring(2);
+                    }
                     data.DataString = "[" + result + "]";
                     break;
             }

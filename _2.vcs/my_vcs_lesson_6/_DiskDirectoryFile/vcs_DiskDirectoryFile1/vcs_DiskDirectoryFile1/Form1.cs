@@ -80,11 +80,17 @@ namespace vcs_DiskDirectoryFile1
             bt_files18.Location = new Point(x_st + dx * 3, y_st + dy * 8);
             bt_files19.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
-            richTextBox1.Size = new Size(430, 690);
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + 0);
+            listView1.Size = new Size(400, 340);
+            listView1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+
+            listBox1.Size = new Size(400, 340);
+            listBox1.Location = new Point(x_st + dx * 4, y_st + dy * 5);
+
+            richTextBox1.Size = new Size(400, 690);
+            richTextBox1.Location = new Point(x_st + dx * 6, y_st + 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1400, 750 + 20);
+            this.Size = new Size(1700, 750 + 20);
             this.Text = "vcs_DiskDirectoryFile1";
 
             //設定執行後的表單起始位置, 正中央
@@ -1680,11 +1686,57 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_files13_Click(object sender, EventArgs e)
         {
+            //取得資料夾下所有圖片檔資訊
 
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
+
+            IEnumerable<FileInfo> images = null;
+            if (Directory.Exists(foldername) == true)
+            {
+                DirectoryInfo dirInfo = new DirectoryInfo(foldername);
+                images = dirInfo.EnumerateFiles("*.jpg").OrderBy(i => i.Name[0]).ThenBy(i => i.Name.Length).ThenBy(i => i.Name);
+
+                int len = images.Count();
+                richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+                if (images != null && images.Count() > 0)
+                {
+
+                }
+
+                foreach (var image in images)
+                {
+                    richTextBox1.Text += image.Name + "\n";
+                    richTextBox1.Text += image.FullName + "\n";
+                    richTextBox1.Text += image.Extension + "\n";
+                    richTextBox1.Text += image.Length.ToString() + "\n";
+                }
+            }
         }
 
         private void bt_files14_Click(object sender, EventArgs e)
         {
+            //取得上一層資料夾的名稱
+
+            richTextBox1.Text += "原目錄 : " + Application.StartupPath + "\n";
+
+            string str = Application.StartupPath;
+            string[] split_str = new string[20];
+            split_str = str.Split('\\'); //以\當分隔符號
+            //richTextBox1.Text += "\n";
+            //richTextBox1.Text += "共有 : " + split_str.Length.ToString() + " 個項目\n";
+
+            richTextBox1.Text += "上一層資料夾的名稱 : " + split_str[split_str.Length - 1] + "\n";
+
+            /*
+            int i = 0;
+            foreach (string tmp in split_str)
+            {
+                i++;
+                richTextBox1.Text += i.ToString() + "\t" + tmp + "\n";
+            }
+            */
+
 
         }
 
@@ -1693,20 +1745,124 @@ namespace vcs_DiskDirectoryFile1
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void bt_files16_Click(object sender, EventArgs e)
         {
+            //遍歷文件夾實例1
+            //遍歷文件夾實例1
+            //遍歷文件夾實例 1
+            //還沒加入listView之標題
 
+            listView1.Items.Clear();
+
+            //遍歷文件夾實例
+            //string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_book_magazine";
+            //實例化DirectoryInfo對象
+            DirectoryInfo dinfo = new DirectoryInfo(foldername);
+            //獲取指定目錄下的所有子目錄及文件類型
+            FileSystemInfo[] fsinfos = dinfo.GetFileSystemInfos();  // 獲取所有的文件
+            foreach (FileSystemInfo fsinfo in fsinfos)  // 遍歷獲取到的文件
+            {
+                if (fsinfo is DirectoryInfo)    //判斷是否文件夾
+                {
+                    //使用獲取的文件夾名稱實例化DirectoryInfo對象
+                    DirectoryInfo dirinfo = new DirectoryInfo(fsinfo.FullName);
+                    //為ListView控件添加文件夾信息
+                    listView1.Items.Add(dirinfo.Name);
+                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(dirinfo.FullName);
+                    listView1.Items[listView1.Items.Count - 1].SubItems.Add("");
+                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(dirinfo.CreationTime.ToShortDateString());
+                    richTextBox1.Text += dirinfo.Name + "\t" + dirinfo.FullName + "\t" + dirinfo.CreationTime.ToShortDateString() + "\n";
+                }
+                else
+                {
+                    //使用獲取的文件名稱實例化FileInfo對象
+                    FileInfo finfo = new FileInfo(fsinfo.FullName);
+                    //為ListView控件添加文件信息
+                    listView1.Items.Add(finfo.Name);
+                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.FullName);
+                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.Length.ToString());
+                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.CreationTime.ToShortDateString());
+                    richTextBox1.Text += finfo.Name + "\t" + finfo.FullName + "\t" + finfo.Length.ToString() + "\t" + finfo.CreationTime.ToShortDateString() + "\n";
+                }
+            }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void bt_files17_Click(object sender, EventArgs e)
         {
+            //遍歷文件夾實例2
 
+            //遍歷文件夾實例2
+            //遍歷文件夾實例 2
+            //string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_book_magazine";
+            DirectoryInfo TheFolder = new DirectoryInfo(foldername);
+
+            richTextBox1.Text += "遍歷文件夾\n";
+            //遍歷文件夾
+            foreach (DirectoryInfo NextFolder in TheFolder.GetDirectories())
+            {
+                this.listBox1.Items.Add(NextFolder.Name);
+                richTextBox1.Text += NextFolder.Name + "\n";
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "遍歷文件\n";
+            foreach (FileInfo NextFile in TheFolder.GetFiles())
+            {
+                this.listBox1.Items.Add(NextFile.Name);
+                richTextBox1.Text += NextFile.Name + "\n";
+            }
+            richTextBox1.Text += "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void bt_files18_Click(object sender, EventArgs e)
         {
+            //遍歷文件夾實例3
+            //遍歷文件夾實例3
+            //遍歷文件夾實例 3
+            //找出資料夾內所有檔案
+            //string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
+            string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_book_magazine";
+
+            // Enumerate the files.
+            DirectoryInfo dir_info = new DirectoryInfo(foldername);
+
+            foreach (DirectoryInfo d_info in dir_info.GetDirectories())
+            {
+                richTextBox1.Text += d_info.FullName + "\n";
+                richTextBox1.Text += d_info.Name + "\n";
+            }
+
+            richTextBox1.Text += "\n\n";
+
+            foreach (FileInfo file_info in dir_info.GetFiles())
+            {
+                try
+                {
+                    richTextBox1.Text += file_info.FullName + "\n";
+                    //richTextBox1.Text += file_info.Name + "\n";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error processing file '" +
+                        file_info.Name + "'\n" + ex.Message,
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            } // foreach file_info
+
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void bt_files19_Click(object sender, EventArgs e)
         {

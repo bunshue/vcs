@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Net;               //for WebClient
+using System.Net;  // for WebClient
 
 namespace vcs_IP_Power
 {
@@ -45,6 +45,7 @@ namespace vcs_IP_Power
                 richTextBox1.Size = new Size(400, 530);
                 richTextBox1.Location = new Point(x_st + dx * 2 + 10, y_st + dy * 0);
                 bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
                 this.Size = new Size(800, 590);
             }
             else
@@ -67,14 +68,22 @@ namespace vcs_IP_Power
                 richTextBox1.Size = new Size(400, 460);
                 richTextBox1.Location = new Point(x_st + dx * 2 + 10, y_st + dy * 0);
                 bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
                 this.Size = new Size(340, 520);
             }
+            this.Text = "vcs_IP_Power";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         //讓 WebClient 擁有 Timeout 功能
         public class MyWebClient : WebClient
@@ -282,7 +291,19 @@ namespace vcs_IP_Power
         private void button4_Click(object sender, EventArgs e)
         {
             Application.Exit();
-
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+

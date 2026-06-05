@@ -60,7 +60,6 @@
             this.btn_moon_ok = new System.Windows.Forms.Button();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lb_time2 = new System.Windows.Forms.Label();
             this.button20 = new System.Windows.Forms.Button();
             this.button21 = new System.Windows.Forms.Button();
             this.button22 = new System.Windows.Forms.Button();
@@ -90,7 +89,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(747, 342);
+            this.richTextBox1.Location = new System.Drawing.Point(747, 220);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 1;
@@ -157,6 +156,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(200, 60);
             this.button7.TabIndex = 7;
+            this.button7.Text = "VB的DateAndTime";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -289,7 +289,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(758, 387);
+            this.bt_clear.Location = new System.Drawing.Point(758, 265);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 67;
@@ -320,7 +320,7 @@
             // groupBox9
             // 
             this.groupBox9.Controls.Add(this.lb_time);
-            this.groupBox9.Location = new System.Drawing.Point(641, 342);
+            this.groupBox9.Location = new System.Drawing.Point(641, 220);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(100, 100);
             this.groupBox9.TabIndex = 88;
@@ -397,16 +397,6 @@
             this.pictureBox1.Size = new System.Drawing.Size(160, 160);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // lb_time2
-            // 
-            this.lb_time2.AutoSize = true;
-            this.lb_time2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_time2.Location = new System.Drawing.Point(643, 264);
-            this.lb_time2.Name = "lb_time2";
-            this.lb_time2.Size = new System.Drawing.Size(52, 21);
-            this.lb_time2.TabIndex = 58;
-            this.lb_time2.Text = "距今";
             // 
             // button20
             // 
@@ -527,7 +517,6 @@
             this.Controls.Add(this.button22);
             this.Controls.Add(this.button21);
             this.Controls.Add(this.button20);
-            this.Controls.Add(this.lb_time2);
             this.Controls.Add(this.groupBox13);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.comboBox1);
@@ -561,7 +550,6 @@
             this.groupBox13.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -598,7 +586,6 @@
         private System.Windows.Forms.Button btn_moon_ok;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label lb_time;
-        private System.Windows.Forms.Label lb_time2;
         private System.Windows.Forms.Button button20;
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.Button button22;

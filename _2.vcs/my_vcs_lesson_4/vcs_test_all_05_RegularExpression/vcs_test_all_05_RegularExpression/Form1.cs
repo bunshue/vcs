@@ -22,9 +22,10 @@ namespace vcs_test_all_05_RegularExpression
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             txtString_TextChanged(sender, e);
             txtTestString_TextChanged(sender, e);
-
 
             //For 驗證身份證字號
             txtInput2.MaxLength = 10;//設定字元數最大值
@@ -39,7 +40,6 @@ namespace vcs_test_all_05_RegularExpression
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -61,12 +61,18 @@ namespace vcs_test_all_05_RegularExpression
 
             this.Size = new Size(1400, 760);
             this.Text = "vcs_test_all_05_RegularExpression";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void txtString_TextChanged(object sender, EventArgs e)
         {
@@ -115,6 +121,8 @@ namespace vcs_test_all_05_RegularExpression
             Match match = reg.Match(url);
             return match.ToString();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -406,3 +414,17 @@ namespace vcs_test_all_05_RegularExpression
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

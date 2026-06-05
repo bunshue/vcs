@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Reflection;  // for BindingFlags  //刪除控件的事件的方法
 using System.Runtime.InteropServices;
-using System.Reflection;                //for BindingFlags  //刪除控件的事件的方法
 using System.Text.RegularExpressions;
 
 namespace vcs_test_all_01_Control
@@ -44,6 +44,8 @@ namespace vcs_test_all_01_Control
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            //------------------------------------------------------------  # 60個
 
             //不同Button共用一個事件
             button6.Click += new EventHandler(button6_Click);//按下button6觸發button1_Click
@@ -83,7 +85,7 @@ namespace vcs_test_all_01_Control
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             this.WindowState = FormWindowState.Maximized;
-            
+
             bt_exit_setup();
 
             Opacity = 0;//指定窗體完全透明
@@ -204,6 +206,13 @@ namespace vcs_test_all_01_Control
         {
             Application.Exit();
         }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         /*
         //移動控件 方法一 ST
@@ -546,11 +555,6 @@ namespace vcs_test_all_01_Control
             this.button14.FlatStyle = FlatStyle.Standard;
         }
 
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
-
         // Enlarge the button.
         private void flp_MouseEnter(object sender, EventArgs e)
         {
@@ -739,6 +743,8 @@ namespace vcs_test_all_01_Control
             richTextBox1.Text += "你按了 按鍵顯示訊息\n";
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button44_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "刪除指定控件的指定事件\n";
@@ -781,6 +787,8 @@ namespace vcs_test_all_01_Control
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button46_Click(object sender, EventArgs e)
         {
             //遍歷窗體找某一控件
@@ -820,6 +828,8 @@ namespace vcs_test_all_01_Control
                 }
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void bt_rtb_info_Click(object sender, EventArgs e)
         {
@@ -874,8 +884,6 @@ namespace vcs_test_all_01_Control
         {
             //在winform中查找控件
 
-            //在winform中查找控件
-
             //調用
             for (int i = 1; i <= 5; i++)
             {
@@ -885,11 +893,11 @@ namespace vcs_test_all_01_Control
                 btn.BackColor = Color.Pink;
                 //tb.Text = i.ToString();
 
-
                 richTextBox1.Text += "i = " + i.ToString() + "\n";
             }
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         [DllImportAttribute("user32.dll")]
         private extern static bool ReleaseCapture();
@@ -918,8 +926,6 @@ namespace vcs_test_all_01_Control
                 SendMessage(this.bt_move_control.Handle, 0xA1, 0x2, 0); //只有這行不一樣
                 this.Cursor = Cursors.Default;
             }
-
-
         }
 
         private void bt_move_form_Click(object sender, EventArgs e)
@@ -931,6 +937,8 @@ namespace vcs_test_all_01_Control
         {
             richTextBox1.Text += "控件在窗體內移動\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button33_Click(object sender, EventArgs e)
         {
@@ -1014,6 +1022,8 @@ namespace vcs_test_all_01_Control
         }
         */
     }
+
+    //------------------------------------------------------------  # 60個
 
     class MyRecordControlClass
     {
@@ -1142,9 +1152,7 @@ namespace vcs_test_all_01_Control
                 //c.Size.Width = c.Size.Width / 2;
                 //c.Size.Height = c.Size.Height / 2;
 
-
                 /*
-
                 //if (c.Controls.Count > 0)
                 //   AutoScaleControl(c, wScale, hScale);//窗体内其余控件还可能嵌套控件(比如panel),要单独抽出,因为要递归调用
                 ctrLeft0 = control_data[ctrlNo].Left;
@@ -1170,3 +1178,17 @@ namespace vcs_test_all_01_Control
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

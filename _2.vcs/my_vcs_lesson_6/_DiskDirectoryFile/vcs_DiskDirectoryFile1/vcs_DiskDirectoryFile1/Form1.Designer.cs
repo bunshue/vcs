@@ -74,6 +74,8 @@
             this.bt_files17 = new System.Windows.Forms.Button();
             this.bt_files18 = new System.Windows.Forms.Button();
             this.bt_files19 = new System.Windows.Forms.Button();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -489,6 +491,7 @@
             this.bt_files13.Name = "bt_files13";
             this.bt_files13.Size = new System.Drawing.Size(200, 60);
             this.bt_files13.TabIndex = 66;
+            this.bt_files13.Text = "取得資料夾下所有圖片檔資訊";
             this.bt_files13.UseVisualStyleBackColor = true;
             this.bt_files13.Click += new System.EventHandler(this.bt_files13_Click);
             // 
@@ -499,6 +502,7 @@
             this.bt_files14.Name = "bt_files14";
             this.bt_files14.Size = new System.Drawing.Size(200, 60);
             this.bt_files14.TabIndex = 67;
+            this.bt_files14.Text = "取得上一層資料夾的名稱";
             this.bt_files14.UseVisualStyleBackColor = true;
             this.bt_files14.Click += new System.EventHandler(this.bt_files14_Click);
             // 
@@ -519,6 +523,7 @@
             this.bt_files16.Name = "bt_files16";
             this.bt_files16.Size = new System.Drawing.Size(200, 60);
             this.bt_files16.TabIndex = 69;
+            this.bt_files16.Text = "遍歷文件夾實例1";
             this.bt_files16.UseVisualStyleBackColor = true;
             this.bt_files16.Click += new System.EventHandler(this.bt_files16_Click);
             // 
@@ -529,6 +534,7 @@
             this.bt_files17.Name = "bt_files17";
             this.bt_files17.Size = new System.Drawing.Size(200, 60);
             this.bt_files17.TabIndex = 70;
+            this.bt_files17.Text = "遍歷文件夾實例2";
             this.bt_files17.UseVisualStyleBackColor = true;
             this.bt_files17.Click += new System.EventHandler(this.bt_files17_Click);
             // 
@@ -539,6 +545,7 @@
             this.bt_files18.Name = "bt_files18";
             this.bt_files18.Size = new System.Drawing.Size(200, 60);
             this.bt_files18.TabIndex = 71;
+            this.bt_files18.Text = "遍歷文件夾實例3";
             this.bt_files18.UseVisualStyleBackColor = true;
             this.bt_files18.Click += new System.EventHandler(this.bt_files18_Click);
             // 
@@ -552,11 +559,31 @@
             this.bt_files19.UseVisualStyleBackColor = true;
             this.bt_files19.Click += new System.EventHandler(this.bt_files19_Click);
             // 
+            // listView1
+            // 
+            this.listView1.Location = new System.Drawing.Point(849, 135);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(100, 100);
+            this.listView1.TabIndex = 73;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 12;
+            this.listBox1.Location = new System.Drawing.Point(849, 241);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(100, 100);
+            this.listBox1.TabIndex = 74;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(976, 648);
+            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.bt_files19);
             this.Controls.Add(this.bt_files18);
             this.Controls.Add(this.bt_files17);
@@ -658,6 +685,8 @@
         private System.Windows.Forms.Button bt_files17;
         private System.Windows.Forms.Button bt_files18;
         private System.Windows.Forms.Button bt_files19;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 
