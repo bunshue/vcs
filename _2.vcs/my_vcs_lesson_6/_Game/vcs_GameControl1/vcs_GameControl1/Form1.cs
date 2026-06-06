@@ -6,7 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Diagnostics; // for Stopwatch 碼表
+
+using System.Diagnostics;  // for Stopwatch 碼表
 
 namespace vcs_GameControl1
 {
@@ -54,7 +55,7 @@ namespace vcs_GameControl1
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias; // 反鋸齒繪出
-            
+
             // 各個元件 繪出函數 的呼叫 都寫在這裡 ↓↓↓↓↓↓↓↓
             image_Plane.Draw(e.Graphics);     // <==== 示範
         }
@@ -66,3 +67,17 @@ namespace vcs_GameControl1
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

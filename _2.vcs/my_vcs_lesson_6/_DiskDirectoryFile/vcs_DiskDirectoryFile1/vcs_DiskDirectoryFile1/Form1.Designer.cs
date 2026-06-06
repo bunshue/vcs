@@ -216,6 +216,7 @@
             this.bt_dir08.Name = "bt_dir08";
             this.bt_dir08.Size = new System.Drawing.Size(200, 60);
             this.bt_dir08.TabIndex = 40;
+            this.bt_dir08.Text = "搜尋檔案內的文字";
             this.bt_dir08.UseVisualStyleBackColor = true;
             this.bt_dir08.Click += new System.EventHandler(this.bt_dir08_Click);
             // 
@@ -279,6 +280,7 @@
             this.bt_dir06.Name = "bt_dir06";
             this.bt_dir06.Size = new System.Drawing.Size(200, 60);
             this.bt_dir06.TabIndex = 14;
+            this.bt_dir06.Text = "DirectoryInfo";
             this.bt_dir06.UseVisualStyleBackColor = true;
             this.bt_dir06.Click += new System.EventHandler(this.bt_dir06_Click);
             // 

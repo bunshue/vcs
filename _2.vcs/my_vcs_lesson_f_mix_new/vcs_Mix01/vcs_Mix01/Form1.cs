@@ -90,6 +90,8 @@ namespace vcs_Mix01
             richTextBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             this.Text = "Mouse Down：" + e.X + " : " + e.Y;
@@ -119,46 +121,7 @@ namespace vcs_Mix01
         private void button0_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            /* 創建一個進程，並為進程傳入需要的參數    * 或者說是啟動一個外部程序，並為其傳入參數    * 等待退出或者強制關閉   */
 
-            //啟動一個外部程序
-            //聲明一個程序信息類，指定啟動進程是的參數信息                   
-            ProcessStartInfo Info = new ProcessStartInfo();
-            //設置外部程序名
-            Info.FileName = "notepad.exe";
-            //設置外部程序的啟動參數（命令行參數）為test.txt                   
-            Info.Arguments = "test.txt";
-            //設置外部程序工作目錄為  C:\                   
-            Info.WorkingDirectory = "C:\\";
-            //聲明一個程序類,也就是創建一個進程                   
-            Process Proc;
-            try
-            {
-                //                   //啟動外部程序                   
-                Proc = Process.Start(Info);
-            }
-            catch (System.ComponentModel.Win32Exception ex)
-            {
-                Console.WriteLine("系統找不到指定的程序文件。\r{0}", ex);
-                return;
-            }
-            //打印出外部程序的開始執行時間
-            Console.WriteLine("外部程序的開始執行時間：{0}", Proc.StartTime);
-
-            //等待3秒鐘                   
-            Proc.WaitForExit(3000);
-            //如果這個外部程序沒有結束運行則對其強行終止                   
-            if (Proc.HasExited == false)
-            {
-                Console.WriteLine("由主程序強行終止外部程序的運行！");
-                Proc.Kill();
-            }
-            else
-            {
-                Console.WriteLine("由外部程序正常退出！");
-            }
-            Console.WriteLine("外部程序的結束運行時間：{0}", Proc.ExitTime);
-            Console.WriteLine("外部程序在結束運行時的返回值：{0}", Proc.ExitCode);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -256,11 +219,7 @@ namespace vcs_Mix01
             for (int i = 0; i < len; i++)
             {
                 richTextBox1.Text += "i = " + i.ToString() + "\t" + (count_query.ToArray())[i].ToString() + "\n";
-
-
             }
-
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -269,16 +228,16 @@ namespace vcs_Mix01
 
             //分析文章
             string text =
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lobortis blandit mauris, a sagittis libero. Proin a posuere justo, vel scelerisque risus.\n" +
-"Sed condimentum suscipit est in sagittis. Maecenas ac nulla in metus gravida feugiat nec vel odio. Aenean vulputate urna vel gravida rhoncus.\n" +
-"Etiam vel lacinia urna, non ultrices arcu. Curabitur eget neque nec felis facilisis lacinia. Donec sit amet neque vel ligula scelerisque cursus et quis nisl.\n" +
-"Proin convallis metus elit, eu condimentum nunc ultrices vel. Maecenas elementum orci tellus, quis pretium risus fringilla non.\n" +
-"Quisque eget diam a erat vestibulum cursus ut nec nisi. Duis non velit quis augue mattis consectetur pharetra sed dolor.\n" +
-"Pellentesque luctus tempor ornare.\n" +
-"Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Proin pellentesque dolor in leo porttitor, dignissim sollicitudin nulla bibendum.\n" +
-"Nullam sit amet faucibus nunc, nec laoreet orci. Etiam nec rutrum mauris. Integer sapien felis, placerat id orci eu, fermentum porta dui.\n" +
-"Nam in pharetra orci, sed sollicitudin urna. Suspendisse sit amet tellus sagittis, lobortis ante quis, consectetur est.\n" +
-"Aliquam tempor ligula in augue facilisis, vehicula fermentum sem elementum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.";
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lobortis blandit mauris, a sagittis libero. Proin a posuere justo, vel scelerisque risus.\n" +
+                "Sed condimentum suscipit est in sagittis. Maecenas ac nulla in metus gravida feugiat nec vel odio. Aenean vulputate urna vel gravida rhoncus.\n" +
+                "Etiam vel lacinia urna, non ultrices arcu. Curabitur eget neque nec felis facilisis lacinia. Donec sit amet neque vel ligula scelerisque cursus et quis nisl.\n" +
+                "Proin convallis metus elit, eu condimentum nunc ultrices vel. Maecenas elementum orci tellus, quis pretium risus fringilla non.\n" +
+                "Quisque eget diam a erat vestibulum cursus ut nec nisi. Duis non velit quis augue mattis consectetur pharetra sed dolor.\n" +
+                "Pellentesque luctus tempor ornare.\n" +
+                "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Proin pellentesque dolor in leo porttitor, dignissim sollicitudin nulla bibendum.\n" +
+                "Nullam sit amet faucibus nunc, nec laoreet orci. Etiam nec rutrum mauris. Integer sapien felis, placerat id orci eu, fermentum porta dui.\n" +
+                "Nam in pharetra orci, sed sollicitudin urna. Suspendisse sit amet tellus sagittis, lobortis ante quis, consectetur est.\n" +
+                "Aliquam tempor ligula in augue facilisis, vehicula fermentum sem elementum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.";
 
             // Split the text into paragraphs.
             string[] paragraphs = text.Split('\n');
@@ -296,7 +255,6 @@ namespace vcs_Mix01
 
                 }
                 richTextBox1.Text += "\n";
-
                 i++;
             }
         }
@@ -310,35 +268,6 @@ namespace vcs_Mix01
         {
             show_button_text(sender);
 
-            //DirectoryInfo
-            //儲存要回傳的檔案路徑和檔案類型
-            string path2 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook";
-            string fnShow = "檔案清單---<*.jpg>\n\n";
-
-            //判斷資料夾是否存在，若是不存在會擲出例外情形
-            try
-            {    //取得檔案路徑訊息
-                DirectoryInfo currentDir = new DirectoryInfo(path2);
-                //從指定路徑傳回指定的檔案類型
-                FileInfo[] listFile = currentDir.GetFiles("*.jpg");
-                //設定檔案的標題
-                string sign = new string('-', 37);
-                string fnName = "檔名", fnLength = "檔案長度";
-                string fnDate = "修改日期";
-                string header = fnShow + "\t" + fnName + "\t" + fnLength + "\t" + fnDate + "\n";
-                richTextBox1.Text += header + "\n";
-                richTextBox1.Text += sign + "\n";
-
-                foreach (FileInfo getInfo in listFile)
-                {
-                    string dt = getInfo.LastWriteTime.ToShortDateString();
-                    richTextBox1.Text += getInfo.Name + "\t" + getInfo.Length.ToString() + "\t" + dt + "\n";
-                }
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "無此資料夾 : " + ex.Message + "\n";
-            }
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -671,47 +600,9 @@ namespace vcs_Mix01
         private void button12_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //搜尋檔案內的文字
-
-            string txtDirectory = @"D:\_git\vcs\_1.data\______test_files1\_case1";
-            string type = "*.*";
-            string pattern = "";
-
-            richTextBox1.Clear();
-            DirectoryInfo dir_info = new DirectoryInfo(txtDirectory);
-
-            ListFiles(type, dir_info, pattern);
         }
 
-        // Add the files in this directory's subtree 
-        // that match the pattern to the ListBox.
-        private void ListFiles(string pattern, DirectoryInfo dir_info, string target)
-        {
-            // Get the files in this directory.
-            FileInfo[] fs_infos = dir_info.GetFiles(pattern);
-            foreach (FileInfo fs_info in fs_infos)
-            {
-                if (target.Length == 0)
-                {
-                    richTextBox1.Text += fs_info.FullName + "\n";
-                }
-                else
-                {
-                    string txt = File.ReadAllText(fs_info.FullName);
-                    if (txt.IndexOf(target, StringComparison.OrdinalIgnoreCase) >= 0)
-                    {
-                        richTextBox1.Text += fs_info.FullName + "\n";
-                    }
-                }
-            }
-
-            // Search subdirectories.
-            DirectoryInfo[] subdirs = dir_info.GetDirectories();
-            foreach (DirectoryInfo subdir in subdirs)
-            {
-                ListFiles(pattern, subdir, target);
-            }
-        }
+        //------------------------------------------------------------  # 60個
 
         //多筆資料比較
         private const int CNT = 100;

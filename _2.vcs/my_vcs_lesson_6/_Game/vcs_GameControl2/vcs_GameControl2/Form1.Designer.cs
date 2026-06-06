@@ -55,6 +55,7 @@
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "天地草動";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.ResumeLayout(false);
 

@@ -31,6 +31,8 @@ namespace vcs_GuessNumberGame
             textBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button1_Click(object sender, EventArgs e)
         {
             int i = 0;
@@ -41,12 +43,17 @@ namespace vcs_GuessNumberGame
                 // 檢查有否和之前的數字重複 (線性搜尋)
                 bool isDuplicate = false; // 先假設未重複
                 for (int j = 0; j < i; j++)
+                {
                     if (answer[j] == answer[i])
                     {
                         isDuplicate = true;
                         break;
                     }
-                if (isDuplicate) continue; // 有重複，重新產生位置 i 的數字
+                }
+                if (isDuplicate)
+                {
+                    continue; // 有重複，重新產生位置 i 的數字
+                }
                 i = i + 1; // 沒有重複，處理下一個位置的數字
             }
 
@@ -80,18 +87,25 @@ namespace vcs_GuessNumberGame
                 int a; // 記錄answer陣列中的位置
 
                 for (a = 0; a < 4; a++)
+                {
                     if (answer[a] == num)
                     {
                         isFound = true;
                         break;
                     }
+                }
 
                 if (isFound)
                 { //找到該數字，判斷位置是否相同
-                    if (i == a) A++;
-                    else B++;
+                    if (i == a)
+                    {
+                        A++;
+                    }
+                    else
+                    {
+                        B++;
+                    }
                 }
-
             }
             message += A + "A" + B + "B"; // 串接「幾A幾B」的輸出資訊
 
@@ -121,3 +135,16 @@ namespace vcs_GuessNumberGame
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+

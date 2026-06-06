@@ -86,11 +86,11 @@ namespace vcs_WMI__new
             button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
             button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
-            richTextBox1.Size = new Size(530, 690);
+            richTextBox1.Size = new Size(630, 690);
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1410, 750);
+            this.Size = new Size(1510, 750);
             this.Text = "vcs_WMI__new";
 
             //設定執行後的表單起始位置, 正中央
@@ -265,6 +265,9 @@ namespace vcs_WMI__new
                     richTextBox1.Text += "全部 :\n" + mo.GetText(TextFormat.Mof) + "\n";  // 全部
                     richTextBox1.Text += "CPU名稱 : " + mo["Name"].ToString() + "\n";
                     richTextBox1.Text += "CPU序號 : " + mo["ProcessorId"].ToString() + "\n";
+                    richTextBox1.Text += "CPU序號 : " + mo["ProcessorId"].ToString() + "\n";
+                    richTextBox1.Text += "CPU序號 : " + mo.GetPropertyValue("ProcessorId").ToString() + "\n";
+                    richTextBox1.Text += "CPU序號 : " + mo.Properties["ProcessorId"].Value.ToString() + "\n";
                     richTextBox1.Text += "CPU製造商 : " + mo["Manufacturer"].ToString() + "\n";
                     richTextBox1.Text += "AddressWidth : " + mo["AddressWidth"].ToString() + "\n";　//獲取地址帶寬
                     richTextBox1.Text += "NumberOfLogicalProcessors : " + mo["NumberOfLogicalProcessors"].ToString() + "\n";    //邏輯處理器
@@ -305,22 +308,6 @@ namespace vcs_WMI__new
                 }
             }
 
-            //------------------------------------------------------------  # 60個
-
-            /*
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
-            foreach (ManagementObject myobject in searcher.Get())
-            {
-                lblCPU.Text = myobject["LoadPercentage"].ToString() + " %";
-                //label2.Text = lblCPU.Text;
-                label2.Text = "CPU使用率：" + lblCPU.Text;
-                mheight = Convert.ToInt32(myobject["LoadPercentage"].ToString());
-                if (mheight == 100)
-                    panel3.Height = 100;
-                CreateImage();
-            }
-            */
-
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
             // 或透過 ManagementObject 類別直接存取特定 CPU 序號
@@ -333,6 +320,8 @@ namespace vcs_WMI__new
 
             mos = new ManagementObjectSearcher(@"root\WMI", "SELECT * FROM MSAcpi_ThermalZoneTemperature");
 
+            // 以下NG
+            /*
             int cnt = 1;
             foreach (ManagementObject mo in mos.Get())
             {
@@ -345,6 +334,7 @@ namespace vcs_WMI__new
                 richTextBox1.Text += "CPU温度 : " + CPUtprt.ToString() + " °C\n";
             }
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            */
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -423,8 +413,8 @@ namespace vcs_WMI__new
             }
 
             /*
-//查詢語法 製造商不是Microsoft 且 MAC位址不為空
-mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((MACAddress Is Not NULL) AND (Manufacturer <> 'Microsoft'))");
+            //查詢語法 製造商不是Microsoft 且 MAC位址不為空
+            mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((MACAddress Is Not NULL) AND (Manufacturer <> 'Microsoft'))");
             */
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
@@ -455,7 +445,26 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
                 }
             }
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
+            //你的網卡序號
+            //获得网卡信息函数
+            richTextBox1.Text += "取得網卡序號 :\n";
+
+            //创建ManagementClass对象
+            ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
+            ManagementObjectCollection moc = mc.GetInstances();//创建ManagementObjectCollection对象
+            string str = "";//用于存储网卡序列号
+            foreach (ManagementObject mo in moc)//遍历得到的集合
+            {
+                if ((bool)mo["IPEnabled"] == true)//判断IPEnabled属性是否为true
+                {
+                    str = mo["MacAddress"].ToString();//获取网卡序列号
+                    richTextBox1.Text += "取得網卡序號 : " + str + "\n";
+                }
+            }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -1249,31 +1258,31 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
             //映射驅動器 = 網路芳鄰硬碟的連結
 
             SelectQuery selectQuery = new SelectQuery("SELECT * FROM Win32_LogicalDisk");
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(selectQuery);
-            foreach (ManagementObject disk in searcher.Get())
+            mos = new ManagementObjectSearcher(selectQuery);
+            foreach (ManagementObject mo in mos.Get())
             {
                 string DriveType;
-                DriveType = disk["DriveType"].ToString();
+                DriveType = mo["DriveType"].ToString();
 
-                richTextBox1.Text += "磁盤名稱：" + disk["Name"].ToString() + "\n";
+                richTextBox1.Text += "磁盤名稱：" + mo["Name"].ToString() + "\n";
                 //獲得硬盤的可用空間
 
                 long mb = 1048576;
                 double free = 0;
                 double use = 0;
                 double total = 0;
-                free = Convert.ToInt64(disk["FreeSpace"]) / mb;
+                free = Convert.ToInt64(mo["FreeSpace"]) / mb;
                 //獲得硬盤的已用空間
-                use = (Convert.ToInt64(disk["Size"]) - Convert.ToInt64(disk["FreeSpace"])) / mb;
+                use = (Convert.ToInt64(mo["Size"]) - Convert.ToInt64(mo["FreeSpace"])) / mb;
                 //獲得硬盤的合計空間
-                total = Convert.ToInt64(disk["Size"]) / mb;
+                total = Convert.ToInt64(mo["Size"]) / mb;
                 richTextBox1.Text += " 總計：" + total.ToString() + "MB\n";
                 richTextBox1.Text += "已用空間：" + use.ToString() + "MB\n";
                 richTextBox1.Text += "可用空間：" + free.ToString() + "MB\n";
 
                 if (DriveType == "4")
                 {
-                    richTextBox1.Text += "取得 : " + disk["Name"].ToString() + "\n";
+                    richTextBox1.Text += "取得 : " + mo["Name"].ToString() + "\n";
                 }
             }
         }
@@ -1580,24 +1589,6 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
 
         private void button23_Click(object sender, EventArgs e)
         {
-            //你的網卡序號
-            //获得网卡信息函数
-            richTextBox1.Text += "你的網卡序號 : " + GetNetCardMacAddress() + "\n";
-        }
-
-        //获得网卡信息函数
-        public string GetNetCardMacAddress()
-        {
-            //创建ManagementClass对象
-            ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
-            ManagementObjectCollection moc = mc.GetInstances();//创建ManagementObjectCollection对象
-            string str = "";//用于存储网卡序列号
-            foreach (ManagementObject mo in moc)//遍历得到的集合
-            {
-                if ((bool)mo["IPEnabled"] == true)//判断IPEnabled属性是否为true
-                    str = mo["MacAddress"].ToString();//获取网卡序列号
-            }
-            return str;//返回网卡序列号
         }
 
         //------------------------------------------------------------  # 60個
@@ -1796,7 +1787,7 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
 
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button37_Click(object sender, EventArgs e)
         {
@@ -1822,7 +1813,8 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
             //richTextBox1.Text += "aaaaa = " + r2.OSName.ToString() + "\n";
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
+
         //聲明一個結構體，它將做為GetSystemInfo的一個參數：
         //Struct 收集系統信息
         [StructLayout(LayoutKind.Sequential)]
@@ -2547,9 +2539,9 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
                     //設定通過WMI要查詢的內容
                     ObjectQuery Query = new ObjectQuery("select * from Win32_Processor");
                     //WQL語句，設定的WMI查詢內容和WMI的操作范圍，檢索WMI對象集合
-                    ManagementObjectSearcher Searcher = new ManagementObjectSearcher(Query);
+                    ManagementObjectSearcher mos = new ManagementObjectSearcher(Query);
                     //異步調用WMI查詢
-                    moCollection = Searcher.Get();
+                    moCollection = mos.Get();
                 }
                 //循環
                 if (moCollection != null)
@@ -2613,9 +2605,9 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
                     //設定通過WMI要查詢的內容
                     ObjectQuery Query = new ObjectQuery("select * from Win32_OperatingSystem");
                     //WQL語句，設定的WMI查詢內容和WMI的操作范圍，檢索WMI對象集合
-                    ManagementObjectSearcher Searcher = new ManagementObjectSearcher(Query);
+                    ManagementObjectSearcher mos = new ManagementObjectSearcher(Query);
                     //異步調用WMI查詢
-                    moCollection = Searcher.Get();
+                    moCollection = mos.Get();
                 }
                 //循環
                 if (moCollection != null)
@@ -2677,11 +2669,11 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
                     //設定通過WMI要查詢的內容
                     ObjectQuery Query = new ObjectQuery("select * from Win32_TimeZone");
                     //WQL語句，設定的WMI查詢內容和WMI的操作范圍，檢索WMI對象集合
-                    ManagementObjectSearcher Searcher = new ManagementObjectSearcher(Query);
-                    //ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select SerialNumber From Win32_BIOS");
+                    ManagementObjectSearcher mos = new ManagementObjectSearcher(Query);
+                    //ManagementObjectSearcher mos = new ManagementObjectSearcher("Select SerialNumber From Win32_BIOS");
 
                     //異步調用WMI查詢
-                    moCollection = Searcher.Get();
+                    moCollection = mos.Get();
                 }
                 //循環
                 if (moCollection != null)
@@ -2728,9 +2720,9 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
                     //設定通過WMI要查詢的內容
                     ObjectQuery Query = new ObjectQuery("select * from Win32_PageFile");
                     //WQL語句，設定的WMI查詢內容和WMI的操作范圍，檢索WMI對象集合
-                    ManagementObjectSearcher Searcher = new ManagementObjectSearcher(Query);
+                    ManagementObjectSearcher mos = new ManagementObjectSearcher(Query);
                     //異步調用WMI查詢
-                    moCollection = Searcher.Get();
+                    moCollection = mos.Get();
                 }
                 //循環
                 if (moCollection != null)
@@ -2781,9 +2773,9 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
                     //設定通過WMI要查詢的內容
                     ObjectQuery Query = new ObjectQuery("select * from Win32_BIOS");
                     //WQL語句，設定的WMI查詢內容和WMI的操作范圍，檢索WMI對象集合
-                    ManagementObjectSearcher Searcher = new ManagementObjectSearcher(Query);
+                    ManagementObjectSearcher mos = new ManagementObjectSearcher(Query);
                     //異步調用WMI查詢
-                    moCollection = Searcher.Get();
+                    moCollection = mos.Get();
                 }
                 //循環
                 if (moCollection != null)
@@ -2833,9 +2825,9 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
                     //設定通過WMI要查詢的內容
                     ObjectQuery Query = new ObjectQuery("select * from Win32_ComputerSystem");
                     //WQL語句，設定的WMI查詢內容和WMI的操作范圍，檢索WMI對象集合
-                    ManagementObjectSearcher Searcher = new ManagementObjectSearcher(Query);
+                    ManagementObjectSearcher mos = new ManagementObjectSearcher(Query);
                     //異步調用WMI查詢
-                    moCollection = Searcher.Get();
+                    moCollection = mos.Get();
                 }
                 //循環
                 if (moCollection != null)
@@ -2890,16 +2882,8 @@ mos = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter WHERE ((M
 */
 
 /*
-all
-richTextBox1.Text += "全部 :\n" + mo.GetText(TextFormat.Mof) + "\n";  // 全部
-
-richTextBox1.Text += "CPU序號 : " + mo["ProcessorId"].ToString() + "\n";
-richTextBox1.Text += "CPU序號 : " + mo.GetPropertyValue("ProcessorId").ToString() + "\n";
-richTextBox1.Text += "CPU序號 : " + mo.Properties["ProcessorId"].Value.ToString() + "\n";
-
 // 空資料的處理
 // sub_i1a.Text = (prop.Value == null) ? String.Empty : prop.Value.ToString();
 // 其實要改成不等於null才可以ToString()
-
 */
 

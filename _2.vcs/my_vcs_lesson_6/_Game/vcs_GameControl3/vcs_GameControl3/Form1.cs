@@ -23,10 +23,18 @@ namespace vcs_GameControl3
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             // 計算出 人物圖的 16張小圖的矩形區域
             for (int i = 0; i < 4; i++)
+            {
                 for (int j = 0; j < 4; j++)
+                {
                     r[i, j] = new Rectangle(j * 85, i * 153, 85, 153);
+                }
+            }
 
             // 上載三張背景圖
             BG[0] = new Bitmap(Properties.Resources.bg1);
@@ -34,50 +42,88 @@ namespace vcs_GameControl3
             BG[2] = new Bitmap(Properties.Resources.bg3);
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             // 重複繪出背景圖
             for (int i = -1; i <= this.ClientSize.Width / BG[k].Width + 1; i++)
+            {
                 for (int j = -1; j <= this.ClientSize.Height / BG[k].Height + 1; j++)
-                    e.Graphics.DrawImage(BG[k], i * BG[k].Width + (dx % BG[k].Width),
-                                             j * BG[k].Height + (dy % BG[k].Height));
-
+                {
+                    e.Graphics.DrawImage(BG[k], i * BG[k].Width + (dx % BG[k].Width), j * BG[k].Height + (dy % BG[k].Height));
+                }
+            }
             // 在視窗中心繪出人物小圖
-            e.Graphics.DrawImage(prince, this.ClientSize.Width / 2 - 85 / 2,
-                                         this.ClientSize.Height / 2 - 153 / 2,
-                                         r[dir, spriteStep], GraphicsUnit.Pixel);
+            e.Graphics.DrawImage(prince, this.ClientSize.Width / 2 - 85 / 2, this.ClientSize.Height / 2 - 153 / 2, r[dir, spriteStep], GraphicsUnit.Pixel);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             spriteStep = spriteStep + 1; // 下一張人物小圖
-            if (spriteStep > 3) spriteStep = 0;
-
+            if (spriteStep > 3)
+            {
+                spriteStep = 0;
+            }
             this.Invalidate();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Up) // 人物往上
+            {
                 dir = 1;
+            }
             else if (e.KeyData == Keys.Down)  // 人物往下 背景往上
+            {
                 dir = 0;
+            }
             else if (e.KeyData == Keys.Right) // 人物往右 背景往左
+            {
                 dir = 2;
+            }
             else if (e.KeyData == Keys.Left)  // 人物往左
+            {
                 dir = 3;
+            }
             else if (e.KeyData == Keys.Space) // 下一張背景圖
+            {
                 k = ++k % 3;
+            }
         }
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            if (dir == 0) dy = dy - 5;       // 背景往上 偏移値遞減
-            else if (dir == 1) dy = dy + 5;  // 背景往下 偏移値遞增
-            else if (dir == 2) dx = dx - 5;  // 背景往左 偏移値遞減
-            else if (dir == 3) dx = dx + 5;  // 背景往右 偏移値遞增
-
+            if (dir == 0)
+            {
+                dy = dy - 5;       // 背景往上 偏移値遞減
+            }
+            else if (dir == 1)
+            {
+                dy = dy + 5;  // 背景往下 偏移値遞增
+            }
+            else if (dir == 2)
+            {
+                dx = dx - 5;  // 背景往左 偏移値遞減
+            }
+            else if (dir == 3)
+            {
+                dx = dx + 5;  // 背景往右 偏移値遞增
+            }
             this.Invalidate();
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+

@@ -39,9 +39,10 @@ namespace vcs_test_all_01_DateTime
 {
     public partial class Form1 : Form
     {
+        DateTime bootup_time = DateTime.Now;  // 程式啟動時間
+
         DateTime LoginTime = DateTime.Now;
         DateTime dt_timer_st = DateTime.Now;
-        DateTime start_time = DateTime.Now;  // 程式啟動時間
         DateTime dtTarget;
 
         string string_datetime1 = "3/11/2006 9:15:30 AM";
@@ -111,10 +112,10 @@ namespace vcs_test_all_01_DateTime
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
             groupBox13.Size = new Size(300, 200);
-            groupBox13.Location = new Point(x_st + dx * 3, y_st + dy * 0);//月相
+            groupBox13.Location = new Point(x_st + dx * 3, y_st + dy * 0);  // 月相
 
-            groupBox9.Size = new Size(300, 260);
-            groupBox9.Location = new Point(x_st + dx * 3, y_st + dy * 4);//Timer顯示時間
+            groupBox9.Size = new Size(300, 360);
+            groupBox9.Location = new Point(x_st + dx * 3, y_st + dy * 3);  // Timer顯示時間
 
             richTextBox1.Size = new Size(520, 690);
             richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
@@ -208,6 +209,7 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Text += "月：" + dt.Month.ToString() + "\n";
             richTextBox1.Text += "日：" + dt.Day.ToString() + "\n";
             richTextBox1.Text += "天：" + dt.DayOfYear.ToString() + "\n";
+            richTextBox1.Text += "英文星期名稱 : " + dt.DayOfWeek + "\n";
             richTextBox1.Text += "星：" + dt.DayOfWeek.ToString() + "\n";  // 星期幾
             richTextBox1.Text += "時：" + dt.Hour.ToString() + "\n";
             richTextBox1.Text += "分：" + dt.Minute.ToString() + "\n";
@@ -444,6 +446,13 @@ namespace vcs_test_all_01_DateTime
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
+            dt = DateTime.Now;
+            ts = DateTime.Now - bootup_time;
+            richTextBox1.Text += "程式啟動時間: " + bootup_time.ToString() + " 秒\n";
+            richTextBox1.Text += "至今經歷時間: " + ts.ToString() + " 時分秒\n";
+
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
             //計算時間間隔
             //Timestamp 與 DateTime 互轉
             // 現在時間轉秒數
@@ -479,22 +488,6 @@ namespace vcs_test_all_01_DateTime
 
             richTextBox1.Text += "登出時間： " + dt.ToString() + "\n";
             richTextBox1.Text += "您在此停留了" + ts.Hours + "小時" + ts.Minutes + "分鐘" + ts.Seconds + "秒" + "\n";
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            string str = string.Empty;
-
-            dt = DateTime.Now;
-            ts = DateTime.Now - start_time;
-
-            richTextBox1.Text += "程式啟動時間: " + start_time.ToString() + " 秒\n";
-            richTextBox1.Text += "按鍵經歷時間: " + ts.ToString() + " 秒\n";
-            str = ts.ToString();
-            richTextBox1.Text += "相距時間: " + str + "\n";
-            str = str.Substring(0, str.IndexOf("."));
-            richTextBox1.Text += "相距時間(去掉尾數): " + str + "\n";
-
-            richTextBox1.Text += "程式開啟時間: " + (DateTime.Now - start_time).ToString() + "\n";
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -547,8 +540,6 @@ namespace vcs_test_all_01_DateTime
             before_time = DateTime.Now - TimeSpan.FromSeconds(elapssed_time);
 
             richTextBox1.Text += "計算時間往回推 : " + before_time + "\n";
-
-
         }
 
         //計算時間間隔, 傳回時間差的絕對值
@@ -781,7 +772,7 @@ namespace vcs_test_all_01_DateTime
 
             //五、本月第幾周
 
-            //int a = WeekOfMonth(dt, false);//
+            //int a = WeekOfMonth(dt, false);
             //richTextBox1.Text += "本月第幾周\t" + a + "\n";
         }
 
@@ -1031,8 +1022,11 @@ namespace vcs_test_all_01_DateTime
 
             DateTime dt1 = DateTime.ParseExact("2006/03/11", "yyyy/MM/dd", null);
             DateTime dt2 = DateTime.ParseExact("2018/02/01", "yyyy/MM/dd", null);
+            dt1 = DateTime.Parse("628年7月21日");
+            dt2 = DateTime.Parse("683年12月27日");
 
-            //DateTime Parse
+            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+
             string str1 = "20091014223600";
             IFormatProvider ifp = new CultureInfo("zh-TW", true);
             dt1 = DateTime.ParseExact(str1, "yyyyMMddHHmmss", ifp);
@@ -1058,7 +1052,6 @@ namespace vcs_test_all_01_DateTime
 
             string date_time1 = "21 July 1969, 20:17:40";
             string date_time2 = "14 December 1972, 19:54:57";
-
             richTextBox1.Text += "時間1 : " + date_time1 + "\n";
             richTextBox1.Text += "時間2 : " + date_time2 + "\n";
 
@@ -1137,11 +1130,6 @@ namespace vcs_test_all_01_DateTime
             dt1 = Convert.ToDateTime("1950/6/25");
             dt2 = Convert.ToDateTime("1953/7/27");
 
-
-            dt1 = DateTime.ParseExact("2007/07/01", "yyyy/MM/dd", null);
-            dt2 = DateTime.ParseExact("2007/07/07", "yyyy/MM/dd", null);
-            dt1 = DateTime.Parse("628年7月21日");
-            dt2 = DateTime.Parse("683年12月27日");
 
             dt1 = Convert.ToDateTime("1937-7-7");
             dt2 = Convert.ToDateTime("1945-08-15");
@@ -1320,7 +1308,7 @@ namespace vcs_test_all_01_DateTime
             dt = DateTime.Now;
 
             //獲得中文星期名稱
-            richTextBox1.Text += dt.DayOfWeek + "\n";
+            richTextBox1.Text += "英文星期名稱 : " + dt.DayOfWeek + "\n";
 
             /// 獲得中文星期名稱
             switch (dt.DayOfWeek)
@@ -1351,7 +1339,7 @@ namespace vcs_test_all_01_DateTime
                     break;
             }
 
-            richTextBox1.Text += "今天是 : " + weekday + "\n";
+            richTextBox1.Text += "中文星期名稱 : " + weekday + "\n";
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
@@ -1491,66 +1479,64 @@ namespace vcs_test_all_01_DateTime
 
             //------------------------------------------------------------  # 60個
 
+            dt = DateTime.Now;
+
             richTextBox1.Text += "民國記年\n";
 
             CultureInfo ci = new CultureInfo("zh-TW", true);
             ci.DateTimeFormat.Calendar = new TaiwanCalendar();
-            //改用datetime
-            //richTextBox1.Text += dateTimePicker1.Value.ToString("yy/M/d", ci) + "\n";
 
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            richTextBox1.Text += CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(dt.DayOfWeek) + "\n";
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            string[] month_names = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
-            foreach (string name in month_names)
-            {
-                if (name.Length > 0)
-                {
-                    richTextBox1.Text += name + " ";
-                }
-            }
-            richTextBox1.Text += "\n";
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            string[] day_names = CultureInfo.CurrentCulture.DateTimeFormat.DayNames;
-            foreach (string name in day_names)
-            {
-                if (name.Length > 0)
-                {
-                    richTextBox1.Text += name + " ";
-                }
-            }
-            richTextBox1.Text += "\n";
-
-            richTextBox1.Text += "------------------------------\n";  // 30個
-
-            for (int i = 0; i < 7; i++)
-            {
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + CultureInfo.CurrentCulture.DateTimeFormat.DayNames[i] + "\n";
-            }
-
-            //------------------------------------------------------------  # 60個
-
-            richTextBox1.Text += "CultureInfo相關, 月名星期名\n";
-
-            dt = DateTime.Now;
+            richTextBox1.Text += "民國記年 : " + dt.ToString("yy/M/d", ci) + "\n";
+            richTextBox1.Text += "民國記年 : " + dt.ToString("yyyy/MM/dd", ci) + "\n";
 
             ci = new CultureInfo("zh-TW");
             ci.DateTimeFormat.Calendar = ci.OptionalCalendars[2];
 
-            richTextBox1.Text += dt.ToString("yyyy/MM/dd", ci) + "\n";  // ??
+            richTextBox1.Text += "xxxx記年 : " + dt.ToString("yyyy/MM/dd", ci) + "\n";
 
-            string mesg = string.Empty;
-            mesg += dt.ToString() + "\n";
-            mesg += dt.ToString("yyyy/MM/dd", ci) + "\n";
-            mesg += dt.ToString("HH:mm:ss") + "\n";
-            mesg += dt.ToString("yyyy/MM/dd HH:mm:ss") + "\n";
+            richTextBox1.Text += "xxxx" + dt.ToString() + "\n";
+            richTextBox1.Text += "xxxx" + dt.ToString("yyyy/MM/dd", ci) + "\n";
+            richTextBox1.Text += "xxxx" + dt.ToString("HH:mm:ss") + "\n";
+            richTextBox1.Text += "xxxx" + dt.ToString("yyyy/MM/dd HH:mm:ss") + "\n";
 
-            richTextBox1.Text += mesg + "\n";
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            richTextBox1.Text += "CultureInfo.CurrentCulture.xxxx\n";
+
+            richTextBox1.Text += "中文星期名 :\n";
+            richTextBox1.Text += CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(dt.DayOfWeek) + "\n";
+
+            for (int weekday = 0; weekday < 7; weekday++)
+            {
+                richTextBox1.Text += "英/中文星期名 :\t";
+                richTextBox1.Text += ((DayOfWeek)weekday).ToString() + "\t";
+                richTextBox1.Text += CultureInfo.CurrentCulture.DateTimeFormat.GetDayName((DayOfWeek)weekday) + "\t";
+                richTextBox1.Text += CultureInfo.CurrentCulture.DateTimeFormat.DayNames[weekday] + "\n";
+            }
+
+            string[] month_names = CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;  // 取得13個中文月名(多一個)
+
+            foreach (string month_name in month_names)
+            {
+                if (month_name.Length > 0)  // 有一個長度為0的, 要排除
+                {
+                    richTextBox1.Text += month_name + " ";
+                }
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "------------------------------\n";  // 30個
+
+            string[] day_names = CultureInfo.CurrentCulture.DateTimeFormat.DayNames;  // 取得7個中文星期名
+
+            foreach (string day_name in day_names)
+            {
+                if (day_name.Length > 0)
+                {
+                    richTextBox1.Text += day_name + " ";
+                }
+            }
+            richTextBox1.Text += "\n";
 
             //------------------------------------------------------------  # 60個
 
@@ -1582,7 +1568,16 @@ namespace vcs_test_all_01_DateTime
 
             richTextBox1.Text += message + "\n";
 
-            string dateString = DateTime.Today.ToString("yyyy-M-d dddd", new CultureInfo("zh-CN"));
+            // 看起來都一樣
+            string dateString1 = DateTime.Today.ToString("yyyy-M-d dddd");
+            string dateString2 = DateTime.Today.ToString("yyyy-M-d dddd", new CultureInfo("zh-CN"));
+            richTextBox1.Text += "DateTime.Today dateString1 : " + dateString1 + "\n";
+            richTextBox1.Text += "DateTime.Today dateString2 : " + dateString2 + "\n";
+
+            dateString1 = dt.ToString("yyyy-M-d dddd");
+            dateString2 = dt.ToString("yyyy-M-d dddd", new CultureInfo("zh-CN"));
+            richTextBox1.Text += "DateTime.Now dateString1 : " + dateString1 + "\n";
+            richTextBox1.Text += "DateTime.Now dateString2 : " + dateString2 + "\n";
 
             //------------------------------------------------------------  # 60個
 
@@ -1673,6 +1668,8 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.00") + " 秒\n";  // 總秒數
             richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalMilliseconds.ToString() + " 毫秒\n";  // 總毫秒數
 
+            //------------------------------------------------------------  # 60個
+
             //瞭解程式執行時間 
 
             sw = new Stopwatch();
@@ -1689,6 +1686,8 @@ namespace vcs_test_all_01_DateTime
             //補充說明: 不一定每次測到的時間都相同喔!
             //建議值: 超過100毫秒就有點太慢囉…. (電腦爛會Lag更長)
 
+            //------------------------------------------------------------  # 60個
+
             Stopwatch loadingWatch = new Stopwatch();
             loadingWatch.Start();
 
@@ -1703,10 +1702,13 @@ namespace vcs_test_all_01_DateTime
             //------------------------------------------------------------  # 60個
 
             //量測時間2  用 TimeSpan
-            DateTime start_time = DateTime.Now;
+            DateTime start_time = DateTime.Now;  // 開始時間
+
             //XXXXXXXXXXX	//do something
-            DateTime stop_time = DateTime.Now;
-            TimeSpan elapsed = stop_time - start_time;
+
+            DateTime stop_time = DateTime.Now;  // 結束時間
+
+            TimeSpan elapsed = stop_time - start_time;  // 取時間間隔
 
             richTextBox1.Text += "經過時間 : " + elapsed.TotalSeconds.ToString("0.00") + " 秒\n";  // 總秒數
 
@@ -1744,6 +1746,9 @@ namespace vcs_test_all_01_DateTime
 
             LogoffTime = DateTime.Now;
             richTextBox1.Text += "登出時間 : " + LogoffTime + "\n";
+
+            //------------------------------------------------------------  # 60個
+
             /*
             DateTime結構的Subtract()方法計算時間間隔
             時間間隔(ts) = 登出時間 - 登入時間
@@ -1807,19 +1812,16 @@ namespace vcs_test_all_01_DateTime
 
             string mesg = string.Empty;
 
-            // Local Time / GMT
             dt = DateTime.Now;
-            mesg += "Local Time\n";
-            mesg += dt.ToLongTimeString() + "\n";
-            mesg += dt.ToShortDateString() + "\n";
+            mesg += "台灣本地時間\n";
+            mesg += "時間 : " + dt.ToLongTimeString() + "\n";
+            mesg += "日期 : " + dt.ToShortDateString() + "\n\n";
 
-            // Display the GMT time.
             DateTimeOffset local_offset = new DateTimeOffset(dt);
             DateTimeOffset utc_offset = local_offset.ToUniversalTime();
-
-            mesg += "GMT Time\n";
-            mesg += utc_offset.DateTime.ToLongTimeString() + "\n";
-            mesg += utc_offset.DateTime.ToShortDateString() + "\n";
+            mesg += "格林威治標準時間(GMT)\n";
+            mesg += "時間 : " + utc_offset.DateTime.ToLongTimeString() + "\n";
+            mesg += "日期 : " + utc_offset.DateTime.ToShortDateString() + "\n";
 
             lb_time.Text = mesg;
         }
@@ -2219,7 +2221,7 @@ String to DateTime
 string drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 string filename = "imsLink_log.long." + DateTime.Now.ToString("yyyy.MMdd.HHmm.ss") + 
 string drawDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-lb_time1.Text = "PC時間 : " + DateTime.Now.ToString("yyyy" + '/' + "MM" + '/' + "dd ") + weekday + DateTime.Now.ToString(" HH" + ':' + "mm" + ':' + "ss");
+richTextBox1.Text += "PC時間 : " + DateTime.Now.ToString("yyyy" + '/' + "MM" + '/' + "dd ") + weekday + DateTime.Now.ToString(" HH" + ':' + "mm" + ':' + "ss");
 string filename = "imsLink_log." + DateTime.Now.ToString("yyyy.MMdd.HHmm.ss") + ".txt";
 
 */

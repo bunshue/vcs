@@ -37,6 +37,8 @@ namespace vcs_Process2
             listBox1.DataSource = Process.GetProcesses();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             var selectedProcess = listBox1.SelectedItem as Process;
@@ -185,4 +187,18 @@ namespace vcs_Process2
         //#endregion
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
 

@@ -23,8 +23,14 @@ namespace vcs_Missile
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             landscape.Build(this.ClientSize.Width, this.ClientSize.Height);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
@@ -74,7 +80,10 @@ namespace vcs_Missile
             // 爆炸
             for (int i = boomList.Count - 1; i >= 0; i--)
             {
-                if (boomList[i].Current_Status == ClassBoom.status.die) boomList.RemoveAt(i);
+                if (boomList[i].Current_Status == ClassBoom.status.die)
+                {
+                    boomList.RemoveAt(i);
+                }
             }
 
             foreach (ClassBoom b in boomList)
@@ -91,7 +100,9 @@ namespace vcs_Missile
                     {
                         bomb.Falling = false;
                         if (boom.boom_Type == ClassBoom.BoomType.active)
+                        {
                             Gain++;
+                        }
                     }
                 }
             }
@@ -126,11 +137,7 @@ namespace vcs_Missile
         {
             if (rd.NextDouble() < 0.1)
             {
-                ClassBomb bomb = new ClassBomb(this.ClientSize.Width,
-                                            this.ClientSize.Height,
-                                            rd.Next(this.ClientSize.Width),
-                                            rd.Next(this.ClientSize.Width));
-
+                ClassBomb bomb = new ClassBomb(this.ClientSize.Width, this.ClientSize.Height, rd.Next(this.ClientSize.Width), rd.Next(this.ClientSize.Width));
                 bombList.Add(bomb);
             }
         }
@@ -146,3 +153,18 @@ namespace vcs_Missile
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
+

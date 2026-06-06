@@ -1504,20 +1504,6 @@ namespace vcs_Mix00
 
         private void button33_Click(object sender, EventArgs e)
         {
-            // send message to another computer
-            // 在局域網內發送訊息
-            // NG
-
-            string strIP = "192.168.1.106";
-            string strInfo = "send message to another computer";
-
-            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo();
-            psi.FileName = @"cmd.exe";
-            psi.Arguments = @"/c net send " + strIP + " " + strInfo + "";
-            psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            System.Diagnostics.Process.Start(psi);
-
-            richTextBox1.Text += "done\n";
         }
 
         private void CallOut(out int x, out int y)
@@ -1654,24 +1640,25 @@ namespace vcs_Mix00
             richTextBox1.Text += ch + "\n";
         }
 
+        int cnt = 0;
         private void timer1_Tick(object sender, EventArgs e)
         {
             bool status = CheckInternet();
 
+            cnt++;
+            if ((cnt % 10) == 0)
+            {
+                richTextBox1.Text += "網路狀態 : " + status.ToString() + ", 時間 : " + DateTime.Now.ToString() + "\n";
+            }
+
             if (status && lastStatus == false)
             {
-                MessageBox.Show("✅ 網路已恢復連線", "網路狀態", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                richTextBox1.Text += "✅ 網路已恢復連線, 時間 : " + DateTime.Now.ToString() + "\n";
             }
             else if (!status && lastStatus == true)
             {
-                MessageBox.Show("⚠️ 網路斷線", "網路狀態", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                richTextBox1.Text += "⚠️ 網路斷線, 時間 : " + DateTime.Now.ToString() + "\n";
             }
-            else if (lastStatus == null)
-            {
-                // 第一次檢查
-                MessageBox.Show(status ? "目前網路狀態: 連線中" : "目前網路狀態: 已斷線", "網路狀態", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-
             lastStatus = status;
         }
 

@@ -406,14 +406,17 @@ namespace vcs_TreeView1
             richTextBox1.Text += "雙擊 :" + e.Node.Text + "\n";
 
             if (e.Node.Tag == null)
+            {
                 Tem_Dir = "";
+            }
             else
+            {
                 Tem_Dir = e.Node.Tag.ToString();
+            }
             if (Tem_Dir == "")
             {
                 Tem_Dir = UpAndDown_Dir(tempstr) + "\\" + e.Node.FullPath;
                 richTextBox1.Text += "你點選了 " + Tem_Dir + "\n";
-                //System.Diagnostics.Process.Start(Tem_Dir);
             }
         }
 

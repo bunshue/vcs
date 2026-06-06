@@ -266,42 +266,7 @@ void WriteToSerialPort2(byte[] data, int offset, int count)
             {
                 //一定會被執行的程式區段
             }
-
 }
-
-
-
-
-//
-        // 摘要:
-        //     使用緩衝區中的資料，將指定的位元組數目寫入序列埠。
-        //
-        // 參數:
-        //   buffer:
-        //     包含要寫入通訊埠之資料的位元組陣列。
-        //
-        //   offset:
-        //     buffer 參數中以零起始的位元組位移，用來開始將位元組複製到通訊埠。
-        //
-        //   count:
-        //     要寫入的位元組數。
-        //
-        // 例外狀況:
-        //   System.ArgumentNullException:
-        //     傳遞的 buffer 為 null。
-        //
-        //   System.InvalidOperationException:
-        //     指定的連接埠未開啟。
-        //
-        //   System.ArgumentOutOfRangeException:
-        //     offset 或 count 參數超出所傳遞之 buffer 的有效區域以外。offset 或 count 小於零。
-        //
-        //   System.ArgumentException:
-        //     offset 加上 count 大於 buffer 的長度。
-        //
-        //   System.ServiceProcess.TimeoutException:
-        //     作業沒有在逾時期間結束之前完成。
-        
 
         public bool Get_IMS_Data(byte xx, byte yy, byte zz)
         {

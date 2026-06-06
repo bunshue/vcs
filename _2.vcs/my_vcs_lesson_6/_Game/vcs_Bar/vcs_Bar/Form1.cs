@@ -113,4 +113,3 @@ namespace vcs_Bar
         }
     }
 }
-

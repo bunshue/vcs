@@ -115,7 +115,6 @@ namespace vcs_Mix03_draw_image
         private void button0_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
         }
 
         List<String> filenames = new List<String>();
@@ -192,13 +191,13 @@ namespace vcs_Mix03_draw_image
             int len = filenames.Count;
             richTextBox1.Text += "len = " + len.ToString() + "\n";
 
-            int i;
-            for (i = 0; i < len; i++)
+            for (int i = 0; i < len; i++)
             {
                 richTextBox1.Text += filenames[i] + "\n";
             }
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -225,6 +224,7 @@ namespace vcs_Mix03_draw_image
             richTextBox1.Text += "共有 " + filenames.Count.ToString() + " 個檔案\n";
         }
 
+        //------------------------------------------------------------  # 60個
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -315,6 +315,7 @@ namespace vcs_Mix03_draw_image
             pictureBox1.Image = bitmap2;
         }
 
+        //------------------------------------------------------------  # 60個
 
         //聲明一個API函數
         [System.Runtime.InteropServices.DllImportAttribute("gdi32.dll")]
@@ -351,11 +352,12 @@ namespace vcs_Mix03_draw_image
             show_button_text(sender);
 
             //本程式截圖
-
             //執行螢幕截圖的操作
-            //本程式截圖
+
             SnatchScreen(this, "tmp_aaaaaaa.jpg");
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button7_Click(object sender, EventArgs e)
         {
@@ -401,6 +403,7 @@ namespace vcs_Mix03_draw_image
         private void button8_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
             int[] x = { 0, 40, 80, 120, 160, 200, 240, 280, 320, 360, 400, 440, 480, 520, 560, 600 };
             int[] y = { 200, 328, 396, 373, 268, 131, 26, 3, 71, 200, 328, 396, 373, 268, 131, 26 };
 
@@ -415,7 +418,6 @@ namespace vcs_Mix03_draw_image
             }
 
             pictureBox1.Image = bitmap1;
-            //MessageBox.Show("OK");
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -574,6 +576,8 @@ namespace vcs_Mix03_draw_image
             g.DrawPath(Pens.Black, gp2); // 圖形軌跡 繪出
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void PaintImage(Graphics g)
         {
             //绘图
@@ -611,6 +615,8 @@ namespace vcs_Mix03_draw_image
 
             pictureBox1.Image = localBitmap;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button14_Click(object sender, EventArgs e)
         {
@@ -672,6 +678,8 @@ namespace vcs_Mix03_draw_image
             return new RectangleF(x, y, wid, hgt);
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button15_Click(object sender, EventArgs e)
         {
             //一次畫一群長方形
@@ -693,9 +701,9 @@ namespace vcs_Mix03_draw_image
             g.DrawRectangles(pen, R1);
 
             pictureBox1.Image = bitmap1;
-
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button16_Click(object sender, EventArgs e)
         {

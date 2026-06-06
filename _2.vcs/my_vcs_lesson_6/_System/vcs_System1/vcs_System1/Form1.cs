@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;    //for DriveInfo
+using System.IO;
 using System.Net;   //for DNS
 using System.IO.Ports;  //for serial ports
 using System.Collections;   //for DictionaryEntry
@@ -660,23 +660,6 @@ namespace vcs_System1
 
         //------------------------------------------------------------  # 60個
 
-        public static string appInfo()
-        {
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-            string result = "File Version: " + fvi.FileVersion
-                + Environment.NewLine + "Company Name: " + fvi.CompanyName
-                + Environment.NewLine + "Comments: " + fvi.Comments
-                + Environment.NewLine + "Product Name: " + fvi.ProductName
-                + Environment.NewLine + "Copyright: " + fvi.LegalCopyright
-                + Environment.NewLine + "File Name: " + fvi.FileName
-                + Environment.NewLine + "Original File Name: " + fvi.OriginalFilename
-                + Environment.NewLine + "Product Version: " + fvi.ProductVersion
-                + Environment.NewLine + "Special build: " + fvi.SpecialBuild
-                + Environment.NewLine + "" + fvi.CompanyName;
-            return result;
-        }
-
         private void button9_Click(object sender, EventArgs e)
         {
             //Application, Path, 物件
@@ -688,7 +671,7 @@ namespace vcs_System1
             //------------------------------------------------------------  # 60個
 
             richTextBox1.Text += "系統預設路徑\n";
-            richTextBox1.Text += "StartupPath :\t" + Application.StartupPath + "\n";
+            richTextBox1.Text += "StartupPath :\t" + Application.StartupPath + "\n";  // 取得運用程序所在目錄
             richTextBox1.Text += "Form1.cs所在位置 :\t" + Path.GetFullPath(Path.Combine(Application.StartupPath, "..\\..")) + "\n";
 
             //------------------------------------------------------------  # 60個
@@ -701,17 +684,25 @@ namespace vcs_System1
             FileVersionInfo myFileVersion = FileVersionInfo.GetVersionInfo(Application.ExecutablePath);
             richTextBox1.Text += myFileVersion.FileVersion + "\n";
 
-
             //獲取文件的版本信息
             string filename = @"D:\_git\vcs\_1.data\______test_files1\_material\_dll\AForge.Video.dll";
 
             FileVersionInfo myFileVersionInfo1 = FileVersionInfo.GetVersionInfo(filename);
             richTextBox1.Text += "版本號: " + myFileVersionInfo1.FileVersion + "\n";
 
-
-            //Get APP Info
-            string result = appInfo();
-            richTextBox1.Text += result + "\n";
+            richTextBox1.Text += "程式版本資訊\n";
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+            richTextBox1.Text += "File Version: " + fvi.FileVersion + "\n";
+            richTextBox1.Text += "Company Name: " + fvi.CompanyName + "\n";
+            richTextBox1.Text += "Comments: " + fvi.Comments + "\n";
+            richTextBox1.Text += "Product Name: " + fvi.ProductName + "\n";
+            richTextBox1.Text += "Copyright: " + fvi.LegalCopyright + "\n";
+            richTextBox1.Text += "File Name: " + fvi.FileName + "\n";
+            richTextBox1.Text += "Original File Name: " + fvi.OriginalFilename + "\n";
+            richTextBox1.Text += "Product Version: " + fvi.ProductVersion + "\n";
+            richTextBox1.Text += "Special build: " + fvi.SpecialBuild + "\n";
+            richTextBox1.Text += fvi.CompanyName + "\n";
 
             //------------------------------------------------------------  # 60個
 
@@ -719,10 +710,8 @@ namespace vcs_System1
 
             richTextBox1.Text += "臨時文件目錄 : " + Path.GetTempPath() + "\n";
 
-            //string temp_filename = Path.GetTempFileName();
-            //richTextBox1.Text += temp_filename + "\n";
+            richTextBox1.Text += "臨時文件目錄 : " + Path.GetTempFileName() + "\n";
 
-            richTextBox1.Text += "取得運用程序所在目錄 : " + Application.StartupPath + "\n";
 
             //------------------------------------------------------------  # 60個
         }
@@ -1045,18 +1034,18 @@ namespace vcs_System1
             在您的專案上按滑鼠右鍵，選擇【屬性】。
              2. 切換到【建置】頁籤，勾選【定義 DEBUG 常數】後儲存。
             */
-/*
+            /*
 
 
 
-若找不到"即時運算視窗"
+            若找不到"即時運算視窗"
  
-在【工具】→【選項】→【偵錯】→最下面有【將所有輸出視窗文字重新導向到即時運算視窗】勾起來
+            在【工具】→【選項】→【偵錯】→最下面有【將所有輸出視窗文字重新導向到即時運算視窗】勾起來
 
 
-    //建立一個Thread 到 偵錯/視窗/即時運算 看結果
-Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！ title = " + title + "  " + aa.ToString());
-*/
+                //建立一個Thread 到 偵錯/視窗/即時運算 看結果
+            Debug.Print("即時運算視窗輸出除錯訊息 測試訊息！！！Form1！！！ title = " + title + "  " + aa.ToString());
+            */
 
             //Debug.WriteLine("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 

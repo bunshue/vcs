@@ -181,6 +181,8 @@ namespace vcs_DriveInfo2
             richTextBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         const Int64 TB = (Int64)GB * 1024;//定義TB的計算常量
         const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
         const int MB = 1024 * 1024;//定義MB的計算常量
@@ -387,6 +389,7 @@ namespace vcs_DriveInfo2
             }
             richTextBox1.Text += result + "\n";
 
+            //------------------------------------------------------------  # 60個
 
             string warning = "";
             foreach (string s in warning_directory)
@@ -436,7 +439,6 @@ namespace vcs_DriveInfo2
             g.DrawLine(new Pen(Color.Red, 4), x_st, y_st, x_st + ww, y_st + hh);
             g.DrawLine(new Pen(Color.Red, 4), x_st, y_st + hh, x_st + ww, y_st);
 
-
             Bitmap bmp = new Bitmap(Properties.Resources.setup);
             x_st = x_st - ww;
             Rectangle destRect1 = new Rectangle(x_st + 1, y_st + 1, ww - 2, hh - 2);
@@ -448,9 +450,10 @@ namespace vcs_DriveInfo2
             g.DrawImage(bmp, destRect1, x, y, width, height, units);
             g.DrawRectangle(new Pen(Color.Red, 4), x_st, y_st, ww, hh);
 
-
             g.DrawRectangle(Pens.Green, 0, 0, pictureBox1.Width - 1, pictureBox1.Height - 1);
         }
+
+        //------------------------------------------------------------  # 60個
 
         int cnt = 0;
         private void timer1_Tick(object sender, EventArgs e)
@@ -621,4 +624,17 @@ namespace vcs_DriveInfo2
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
 

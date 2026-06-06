@@ -1272,15 +1272,89 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_dir06_Click(object sender, EventArgs e)
         {
+            //DirectoryInfo
+
+            //儲存要回傳的檔案路徑和檔案類型
+            string path2 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_c_example\_bookbook";
+            string fnShow = "檔案清單---<*.jpg>\n\n";
+
+            //判斷資料夾是否存在，若是不存在會擲出例外情形
+            try
+            {    //取得檔案路徑訊息
+                DirectoryInfo currentDir = new DirectoryInfo(path2);
+                //從指定路徑傳回指定的檔案類型
+                FileInfo[] listFile = currentDir.GetFiles("*.jpg");
+                //設定檔案的標題
+                string sign = new string('-', 37);
+                string fnName = "檔名", fnLength = "檔案長度";
+                string fnDate = "修改日期";
+                string header = fnShow + "\t" + fnName + "\t" + fnLength + "\t" + fnDate + "\n";
+                richTextBox1.Text += header + "\n";
+                richTextBox1.Text += sign + "\n";
+
+                foreach (FileInfo getInfo in listFile)
+                {
+                    string dt = getInfo.LastWriteTime.ToShortDateString();
+                    richTextBox1.Text += getInfo.Name + "\t" + getInfo.Length.ToString() + "\t" + dt + "\n";
+                }
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "無此資料夾 : " + ex.Message + "\n";
+            }
         }
 
         private void bt_dir07_Click(object sender, EventArgs e)
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void bt_dir08_Click(object sender, EventArgs e)
         {
+            //搜尋檔案內的文字
+
+            string txtDirectory = @"D:\_git\vcs\_1.data\______test_files1\_case1";
+            string type = "*.*";
+            string pattern = "";
+
+            richTextBox1.Clear();
+            DirectoryInfo dir_info = new DirectoryInfo(txtDirectory);
+
+            ListFiles(type, dir_info, pattern);
         }
+
+        // Add the files in this directory's subtree 
+        // that match the pattern to the ListBox.
+        private void ListFiles(string pattern, DirectoryInfo dir_info, string target)
+        {
+            // Get the files in this directory.
+            FileInfo[] fs_infos = dir_info.GetFiles(pattern);
+            foreach (FileInfo fs_info in fs_infos)
+            {
+                if (target.Length == 0)
+                {
+                    richTextBox1.Text += fs_info.FullName + "\n";
+                }
+                else
+                {
+                    string txt = File.ReadAllText(fs_info.FullName);
+                    if (txt.IndexOf(target, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        richTextBox1.Text += fs_info.FullName + "\n";
+                    }
+                }
+            }
+
+            // Search subdirectories.
+            DirectoryInfo[] subdirs = dir_info.GetDirectories();
+            foreach (DirectoryInfo subdir in subdirs)
+            {
+                ListFiles(pattern, subdir, target);
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void bt_dir09_Click(object sender, EventArgs e)
         {

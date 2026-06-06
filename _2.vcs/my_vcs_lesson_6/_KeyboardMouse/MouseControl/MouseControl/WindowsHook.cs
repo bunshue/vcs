@@ -6,7 +6,6 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-
 namespace WindwosHook
 {
     /// <summary>
@@ -39,9 +38,13 @@ namespace WindwosHook
                 {
                     m_Enabled = value;
                     if (value)
+                    {
                         Install();
+                    }
                     else
+                    {
                         Uninstall();
+                    }
                 }
             }
         }
@@ -50,7 +53,6 @@ namespace WindwosHook
         private static int m_HookHandle = 0;
         private static Win32Native.Structures.HookProc m_HookProc;
 
-  
         /// <summary>
         /// 向Windows註冊Hook。
         /// </summary>
@@ -68,7 +70,9 @@ namespace WindwosHook
                 curProcess.Dispose();
 
                 if (m_HookHandle == 0)
+                {
                     throw new Exception("Install Hook Faild.");
+                }
             }
         }
         private static void Uninstall()
@@ -78,9 +82,13 @@ namespace WindwosHook
                 bool ret = Win32Native.Methods.UnhookWindowsHookEx(m_HookHandle);
 
                 if (ret)
+                {
                     m_HookHandle = 0;
+                }
                 else
+                {
                     throw new Exception("Uninstall Hook Faild.");
+                }
             }
         }
 
@@ -107,7 +115,9 @@ namespace WindwosHook
             }
 
             if (Monopolize || (e != null && e.Handled))
+            {
                 return -1;
+            }
             return Win32Native.Methods.CallNextHookEx(m_HookHandle, nCode, wParam, lParam);
         }
 
@@ -124,7 +134,7 @@ namespace WindwosHook
             /// 取得值，虛擬鍵盤碼的System.Windows.Forms.Keys表示。
             /// </summary>
             public System.Windows.Forms.Keys Keys { get { return (System.Windows.Forms.Keys)VirtualKeyCode; } }
-            
+
             /// <summary>
             /// 取得值，指出是否按下 ALT 鍵。
             /// </summary>
@@ -168,9 +178,13 @@ namespace WindwosHook
             private static bool KeyIsDown(int KeyCode)
             {
                 if ((Win32Native.Methods.GetKeyState(KeyCode) & 0x80) == 0x80)
+                {
                     return true;
+                }
                 else
+                {
                     return false;
+                }
             }
         }
     }

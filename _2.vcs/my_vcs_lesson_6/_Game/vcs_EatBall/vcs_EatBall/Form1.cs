@@ -23,11 +23,16 @@ namespace vcs_EatBall
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             this.ClientSize = new Size(800, 600);// 調整視窗客戶區寬高
 
-            BallPos = new Point(this.ClientSize.Width / 2,
-                                this.ClientSize.Height / 2);
+            BallPos = new Point(this.ClientSize.Width / 2, this.ClientSize.Height / 2);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
@@ -118,3 +123,18 @@ namespace vcs_EatBall
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
+

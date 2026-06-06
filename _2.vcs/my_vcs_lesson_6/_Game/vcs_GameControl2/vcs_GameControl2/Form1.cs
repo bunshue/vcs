@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Drawing.Drawing2D;
 
 namespace vcs_GameControl2
@@ -25,8 +26,14 @@ namespace vcs_GameControl2
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             this.ClientSize = new Size(640, 480);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
@@ -77,7 +84,10 @@ namespace vcs_GameControl2
         private void timer1_Tick(object sender, EventArgs e)
         {
             X++;
-            if (X > sky.Width) X = X - sky.Width;
+            if (X > sky.Width)
+            {
+                X = X - sky.Width;
+            }
             this.Invalidate();
         }
 
@@ -85,8 +95,25 @@ namespace vcs_GameControl2
         {
             windX = windX + windX_D;
 
-            if (windX > 20 || windX < -20) windX_D = -windX_D;
+            if (windX > 20 || windX < -20)
+            {
+                windX_D = -windX_D;
+            }
             this.Invalidate();
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
