@@ -47,6 +47,9 @@ namespace vcs_ListView2
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
             apply_listView1();
         }
 
@@ -89,6 +92,8 @@ namespace vcs_ListView2
             //listView1.Items.Clear();    //僅清除listView之列資料
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         void apply_listView1()
         {
@@ -287,3 +292,17 @@ namespace vcs_ListView2
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

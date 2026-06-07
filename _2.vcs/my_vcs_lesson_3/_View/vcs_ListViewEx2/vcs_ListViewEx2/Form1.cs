@@ -26,6 +26,8 @@ namespace vcs_ListViewEx2
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             apply_listView0();
         }
 
@@ -41,6 +43,8 @@ namespace vcs_ListViewEx2
 
             this.Size = new Size(900, 700);
         }
+
+        //------------------------------------------------------------  # 60個
 
         void apply_listView0()
         {
@@ -89,7 +93,6 @@ namespace vcs_ListViewEx2
             btn0.Click += new EventHandler(btn_Click);
             listView1.AddEmbeddedControl(btn0, 2, 0);
             */
-
 
             //基本設定
             //this.listViewEx1.AllowColumnReorder = true;
@@ -222,13 +225,24 @@ namespace vcs_ListViewEx2
                 int selNdx = listViewEx1.SelectedIndices[0];
                 listViewEx1.Items[selNdx].Selected = true;    //選到的項目
                 richTextBox1.Text += "你選了 " + selNdx.ToString() + "\n";
-
-
             }
-
-
-
             //richTextBox1.Text += listViewEx1.SelectedIndices[0].ToString() + "\n";
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
+
+

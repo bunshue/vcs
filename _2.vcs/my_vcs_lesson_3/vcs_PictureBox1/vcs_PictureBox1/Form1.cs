@@ -63,7 +63,7 @@ namespace vcs_PictureBox1
             int y_st = 10;
             int dx = 120 + 10;
             int dy = 40 + 10;
-            
+
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button7.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
@@ -102,15 +102,20 @@ namespace vcs_PictureBox1
             richTextBox1.Location = new Point(x_st + dx * 0, 650);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-
             this.Size = new Size(1100, 860);
             this.Text = "vcs_PictureBox1";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         void rb_size_mode_CheckedChanged(object sender, EventArgs e)
         {
@@ -692,3 +697,17 @@ namespace vcs_PictureBox1
         //做一個圓形的pictureBox SP
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

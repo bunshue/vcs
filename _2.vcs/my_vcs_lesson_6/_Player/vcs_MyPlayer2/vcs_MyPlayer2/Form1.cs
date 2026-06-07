@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.IO;    //FileInfo
 using System.Diagnostics;
 
@@ -13,12 +14,18 @@ namespace vcs_MyPlayer2
 {
     public partial class Form1 : Form
     {
+        string folder_name = String.Empty;
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        string folder_name = String.Empty;
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
             listView1.Clear();
@@ -71,7 +78,6 @@ namespace vcs_MyPlayer2
             {
                 //richTextBox1.Text = "未選取資料夾\n";
             }
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -83,7 +89,6 @@ namespace vcs_MyPlayer2
 
             if (folder_name != String.Empty)
             {
-
                 //C# 取得資料夾下的所有檔案(包括子目錄)
                 string[] files = System.IO.Directory.GetFiles(folder_name, "*.*", System.IO.SearchOption.AllDirectories);
                 foreach (string filename in files)
@@ -111,16 +116,13 @@ namespace vcs_MyPlayer2
                     listView1.Items.Add(i1);
                     //設置ListView最後一行可見
                     listView1.Items[listView1.Items.Count - 1].EnsureVisible();
-
-
                 }
             }
-
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -182,3 +184,16 @@ namespace vcs_MyPlayer2
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+

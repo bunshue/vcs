@@ -326,10 +326,6 @@ namespace vcs_Process1
                     bmp.Save(filename, ImageFormat.Jpeg);
                 }
             }
-
-
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -356,20 +352,18 @@ namespace vcs_Process1
                         // Refresh the current process property values.
                         process.Refresh();
 
-                        Console.WriteLine();
-
                         // Display current process statistics.
 
-                        Console.WriteLine("{0} -", process.ToString());
-                        Console.WriteLine("-------------------------------------");
-                        Console.WriteLine("  physical memory usage: {0}", process.WorkingSet64);
-                        Console.WriteLine("  base priority: {0}", process.BasePriority);
-                        Console.WriteLine("  priority class: {0}", process.PriorityClass);
-                        Console.WriteLine("  user processor time: {0}", process.UserProcessorTime);
-                        Console.WriteLine("  privileged processor time: {0}", process.PrivilegedProcessorTime);
-                        Console.WriteLine("  total processor time: {0}", process.TotalProcessorTime);
-                        Console.WriteLine("  PagedSystemMemorySize64: {0}", process.PagedSystemMemorySize64);
-                        Console.WriteLine("  PagedMemorySize64: {0}", process.PagedMemorySize64);
+                        richTextBox1.Text += process.ToString() + "\n";
+                        //3030
+                        richTextBox1.Text += "physical memory usage : " + process.WorkingSet64 + "\n";
+                        richTextBox1.Text += "base priority : " + process.BasePriority + "\n";
+                        richTextBox1.Text += "priority class : " + process.PriorityClass + "\n";
+                        richTextBox1.Text += "user processor time : " + process.UserProcessorTime + "\n";
+                        richTextBox1.Text += "privileged processor time : " + process.PrivilegedProcessorTime + "\n";
+                        richTextBox1.Text += "total processor time : " + process.TotalProcessorTime + "\n";
+                        richTextBox1.Text += "PagedSystemMemorySize64 : " + process.PagedSystemMemorySize64 + "\n";
+                        richTextBox1.Text += "PagedMemorySize64 : " + process.PagedMemorySize64 + "\n";
 
                         // Update the values for the overall peak memory statistics.
                         peakPagedMem = process.PeakPagedMemorySize64;
@@ -378,23 +372,22 @@ namespace vcs_Process1
 
                         if (process.Responding)
                         {
-                            Console.WriteLine("Status = Running");
+                            richTextBox1.Text += "Status = Running\n";
                         }
                         else
                         {
-                            Console.WriteLine("Status = Not Responding");
+                            richTextBox1.Text += "Status = Not Responding\n";
                         }
                     }
                 }
                 while (!process.WaitForExit(1000));
 
-                Console.WriteLine();
-                Console.WriteLine("Process exit code: {0}", process.ExitCode);
+                richTextBox1.Text += "Process exit code : " + process.ExitCode + "\n";
 
                 // Display peak memory statistics for the process.
-                Console.WriteLine("Peak physical memory usage of the process: {0}", peakWorkingSet);
-                Console.WriteLine("Peak paged memory usage of the process: {0}", peakPagedMem);
-                Console.WriteLine("Peak virtual memory usage of the process: {0}", peakVirtualMem);
+                richTextBox1.Text += "Peak physical memory usage of the process : " + peakWorkingSet + "\n";
+                richTextBox1.Text += "Peak paged memory usage of the process : " + peakPagedMem + "\n";
+                richTextBox1.Text += "Peak virtual memory usage of the process : " + peakVirtualMem + "\n";
             }
             finally
             {
@@ -472,8 +465,7 @@ namespace vcs_Process1
                             // Discard cached information about the process.
                             process.Refresh();
                             // Print working set to console.
-                            //Console.WriteLine($"Physical Memory Usage: {process.WorkingSet}");
-                            richTextBox1.Text += "Physical Memory Usage: " + process.WorkingSet64.ToString() + "\n";
+                            richTextBox1.Text += "Physical Memory Usage : " + process.WorkingSet64.ToString() + "\n";
                             //label1.Text = process.WorkingSet64.ToString();
                             // Wait 2 seconds.
                             Thread.Sleep(2000);
@@ -509,8 +501,6 @@ namespace vcs_Process1
 
             int process_id = process.Id;  // 進程ID
             richTextBox1.Text += process_id.ToString() + "\n";
-
-            //3030
 
             Process localById = Process.GetProcessById(process_id);
             richTextBox1.Text += "電腦名稱：" + localById.MachineName + Environment.NewLine + "處理序名稱：" + localById.ProcessName + "\n";
@@ -861,48 +851,6 @@ namespace vcs_Process1
 
         private void button20_Click(object sender, EventArgs e)
         {
-            //Process
-
-            /* 創建一個進程，並為進程傳入需要的參數    * 或者說是啟動一個外部程序，並為其傳入參數    * 等待退出或者強制關閉   */
-
-            //啟動一個外部程序
-            //聲明一個程序信息類，指定啟動進程是的參數信息                   
-            ProcessStartInfo Info = new ProcessStartInfo();
-            //設置外部程序名
-            Info.FileName = "notepad.exe";
-            //設置外部程序的啟動參數（命令行參數）為test.txt                   
-            Info.Arguments = "test.txt";
-            //設置外部程序工作目錄為  C:\                   
-            Info.WorkingDirectory = "C:\\";
-            //聲明一個程序類,也就是創建一個進程                   
-            Process Proc;
-            try
-            {
-                //                   //啟動外部程序                   
-                Proc = Process.Start(Info);
-            }
-            catch (System.ComponentModel.Win32Exception ex)
-            {
-                Console.WriteLine("系統找不到指定的程序文件。\r{0}", ex);
-                return;
-            }
-            //打印出外部程序的開始執行時間
-            Console.WriteLine("外部程序的開始執行時間：{0}", Proc.StartTime);
-
-            //等待3秒鐘                   
-            Proc.WaitForExit(3000);
-            //如果這個外部程序沒有結束運行則對其強行終止                   
-            if (Proc.HasExited == false)
-            {
-                Console.WriteLine("由主程序強行終止外部程序的運行！");
-                Proc.Kill();
-            }
-            else
-            {
-                Console.WriteLine("由外部程序正常退出！");
-            }
-            Console.WriteLine("外部程序的結束運行時間：{0}", Proc.ExitTime);
-            Console.WriteLine("外部程序在結束運行時的返回值：{0}", Proc.ExitCode);
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -923,23 +871,6 @@ namespace vcs_Process1
 
         private void button25_Click(object sender, EventArgs e)
         {
-            //在局域網內發送訊息
-            //NG
-            // send message to another computer
-            // 在局域網內發送訊息
-            // NG
-
-            string strIP = "192.168.1.106";
-            string strInfo = "send message to another computer";
-
-            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo();
-            psi.FileName = @"cmd.exe";
-            psi.Arguments = @"/c net send " + strIP + " " + strInfo + "";
-            psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            System.Diagnostics.Process.Start(psi);
-
-            richTextBox1.Text += "done\n";
-
         }
 
         private void button26_Click(object sender, EventArgs e)
@@ -988,8 +919,146 @@ namespace vcs_Process1
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button30_Click(object sender, EventArgs e)
         {
+            //ProcessStartInfo
+            //Process
+
+            /* 創建一個進程，並為進程傳入需要的參數
+             * 或者說是啟動一個外部程序，並為其傳入參數
+             * 等待退出或者強制關閉
+             */
+
+            //啟動一個外部程序
+            //聲明一個程序信息類，指定啟動進程是的參數信息
+            /*
+            ProcessStartInfo psi1 = new ProcessStartInfo();
+            //設置外部程序名
+            psi1.FileName = "notepad.exe";
+            //設置外部程序的啟動參數（命令行參數）為test.txt                   
+            psi1.Arguments = "test.txt";
+            //設置外部程序工作目錄為  D:\                   
+            psi1.WorkingDirectory = "D:\\";
+            //聲明一個程序類,也就是創建一個進程
+
+            Process Proc;
+            try
+            {
+                //啟動外部程序                   
+                Proc = Process.Start(psi1);
+            }
+            catch (System.ComponentModel.Win32Exception ex)
+            {
+                richTextBox1.Text += "系統找不到指定的程序文件。\t" + ex + "\n";
+                return;
+            }
+
+            richTextBox1.Text += "外部程序的開始執行時間 : " + Proc.StartTime + "\n";
+
+            Proc.WaitForExit(3000);  // 等待3秒鐘
+
+            //如果這個外部程序沒有結束運行則對其強行終止                   
+            if (Proc.HasExited == false)
+            {
+                richTextBox1.Text += "由主程序強行終止外部程序的運行！\n";
+                Proc.Kill();
+            }
+            else
+            {
+                richTextBox1.Text += "由外部程序正常退出！\n";
+            }
+            richTextBox1.Text += "外部程序的結束運行時間 : " + Proc.ExitTime + "\n";
+            richTextBox1.Text += "外部程序在結束運行時的返回值 : " + Proc.ExitCode + "\n";
+
+            return;
+            //------------------------------------------------------------  # 60個
+
+            //用WordPad編輯rtf檔
+            // Allow the user to edit the file with WordPad.
+
+            string rtf_filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf\text.rtf";
+
+            // Hide.
+            this.ShowInTaskbar = false;
+            this.Hide();
+
+            // We will open rtf_filename with wordpad.exe.
+            ProcessStartInfo psi2 = new ProcessStartInfo("wordpad.exe", rtf_filename);
+            psi2.WindowStyle = ProcessWindowStyle.Maximized;
+
+            // Open wordpad.
+            Process process = new Process();
+            process.StartInfo = psi2;
+            process.Start();
+
+            // Wait for wordpad to finish.
+            process.WaitForExit();
+
+            // Unhide.
+            this.ShowInTaskbar = true;
+            this.Show();
+
+            //------------------------------------------------------------  # 60個
+            */
+            //test
+            string fileName = @"D:\_git\vcs\_1.data\______test_files1\__RW\_word\bmp_format.docx";
+            ProcessStartInfo psi3 = new ProcessStartInfo(fileName);
+
+            if (File.Exists(fileName))
+            {
+                foreach (String verb in psi3.Verbs)
+                {
+                    richTextBox1.Text += "取得 Verb : " + verb + "\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "檔案不存在\n";
+            }
+
+            //------------------------------------------------------------  # 60個
+
+            //在局域網內發送訊息
+            //NG
+            // send message to another computer
+            // 在局域網內發送訊息
+            // NG
+
+            string strIP = "192.168.1.106";
+            string strInfo = "send message to another computer";
+
+            ProcessStartInfo psi4 = new ProcessStartInfo();
+            psi4.FileName = @"cmd.exe";
+            psi4.Arguments = @"/c net send " + strIP + " " + strInfo + "";
+            psi4.WindowStyle = ProcessWindowStyle.Hidden;
+            Process.Start(psi4);
+
+            richTextBox1.Text += "done\n";
+
+            //6060
+
+            /*
+            ProcessStartInfo pInfo = new ProcessStartInfo(target);
+            pInfo.Arguments = all_filename;
+
+            // debug mesg
+            result_str += "target : " + target + "\n";
+            result_str += "all_filename : " + all_filename + "\n";
+
+            using (Process process = new Process())
+            {
+                process.StartInfo = pInfo;
+                process.Start();
+            }
+            */
+
+            //6060
+
+
+
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -1022,30 +1091,6 @@ namespace vcs_Process1
 
         private void button33_Click(object sender, EventArgs e)
         {
-            //用WordPad編輯rtf檔
-            // Allow the user to edit the file with WordPad.
-
-            string rtf_filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_rtf\text.rtf";
-
-            // Hide.
-            this.ShowInTaskbar = false;
-            this.Hide();
-
-            // We will open rtf_filename with wordpad.exe.
-            ProcessStartInfo start_info = new ProcessStartInfo("wordpad.exe", rtf_filename);
-            start_info.WindowStyle = ProcessWindowStyle.Maximized;
-
-            // Open wordpad.
-            Process process = new Process();
-            process.StartInfo = start_info;
-            process.Start();
-
-            // Wait for wordpad to finish.
-            process.WaitForExit();
-
-            // Unhide.
-            this.ShowInTaskbar = true;
-            this.Show();
         }
 
         private void button34_Click(object sender, EventArgs e)
@@ -1062,22 +1107,6 @@ namespace vcs_Process1
 
         private void button37_Click(object sender, EventArgs e)
         {
-            //test
-            string fileName = @"D:\_git\vcs\_1.data\______test_files1\__RW\_word\bmp_format.docx";
-            ProcessStartInfo startInfo = new ProcessStartInfo(fileName);
-
-            if (File.Exists(fileName))
-            {
-                int i = 0;
-                foreach (String verb in startInfo.Verbs)
-                {
-                    listBox1.Items.Add(string.Format("  {0}. {1}", i.ToString(), verb));
-                    i++;
-                }
-            }
-            else
-            {
-            }
         }
 
         private void button38_Click(object sender, EventArgs e)
@@ -1309,7 +1338,6 @@ namespace vcs_Process1
                 baseAddress = p.MainModule.BaseAddress;
                 return p.Id;
             }
-
             return 0;
         }
 
@@ -1321,7 +1349,6 @@ namespace vcs_Process1
             {
                 return p.Id;
             }
-
             return 0;
         }
 

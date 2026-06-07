@@ -429,6 +429,7 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(200, 60);
             this.button30.TabIndex = 31;
+            this.button30.Text = "ProcessStartInfo";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
@@ -460,7 +461,6 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(200, 60);
             this.button33.TabIndex = 34;
-            this.button33.Text = "用WordPad編輯rtf檔";
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 

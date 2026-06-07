@@ -24,6 +24,8 @@ namespace vcs_TreeView2_ListView
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             TreeNode CountNode = new TreeNode("我的電腦");//初始化TreeView控件添加總結點
             treeView1.Nodes.Add(CountNode);
             ListViewShow(CountNode);	//初始化ListView控件
@@ -43,16 +45,21 @@ namespace vcs_TreeView2_ListView
             int dd = 30;
 
             treeView1.Size = new Size(W, H);
-            listView1.Size = new Size(W, H);
-            richTextBox1.Size = new Size(W, H);
-
             treeView1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + dd);
-            listView1.Location = new Point(x_st + dx * 1, y_st + dy * 0 + dd);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd);
 
+            listView1.Size = new Size(W, H);
+            listView1.Location = new Point(x_st + dx * 1, y_st + dy * 0 + dd);
+
+            richTextBox1.Size = new Size(W, H);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + dd);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1580, 840);
+            this.Size = new Size(1320, 660);
+            this.Text = "vcs_TreeView2_ListView";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -60,6 +67,7 @@ namespace vcs_TreeView2_ListView
             richTextBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
 
         private void ListViewShow(TreeNode NodeDir)//初始化ListView控件，把TrreView控件中的數據添加進來
         {
@@ -174,3 +182,17 @@ namespace vcs_TreeView2_ListView
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

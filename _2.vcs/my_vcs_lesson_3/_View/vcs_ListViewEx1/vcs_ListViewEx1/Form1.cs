@@ -7,50 +7,50 @@ using System.Data;
 
 namespace vcs_ListViewEx1
 {
-	/// <summary>
-	/// Zusammenfassung für Form1.
-	/// </summary>
-	public class Form1 : System.Windows.Forms.Form
-	{
-		private ListViewEx listView1;
-		private System.Windows.Forms.ColumnHeader columnHeader1;
-		private System.Windows.Forms.ColumnHeader columnHeader2;
-		private System.Windows.Forms.ColumnHeader columnHeader3;
-		private System.Windows.Forms.Timer timer1;
+    /// <summary>
+    /// Zusammenfassung für Form1.
+    /// </summary>
+    public class Form1 : System.Windows.Forms.Form
+    {
+        private ListViewEx listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ComboBox comboBox1;
-		private System.Windows.Forms.Label label1;
-		private System.ComponentModel.IContainer components;
+        private System.Windows.Forms.Label label1;
+        private System.ComponentModel.IContainer components;
 
-		public Form1()
-		{
-			//
-			// Erforderlich für die Windows Form-Designerunterstützung
-			//
-			InitializeComponent();
-		}
+        public Form1()
+        {
+            //
+            // Erforderlich für die Windows Form-Designerunterstützung
+            //
+            InitializeComponent();
+        }
 
-		/// <summary>
-		/// Die verwendeten Ressourcen bereinigen.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if (components != null) 
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+        /// <summary>
+        /// Die verwendeten Ressourcen bereinigen.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
-		#region Vom Windows Form-Designer generierter Code
-		/// <summary>
-		/// Erforderliche Methode für die Designerunterstützung. 
-		/// Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        #region Vom Windows Form-Designer generierter Code
+        /// <summary>
+        /// Erforderliche Methode für die Designerunterstützung. 
+        /// Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
+        /// </summary>
+        private void InitializeComponent()
+        {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Item1");
             System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Item2");
@@ -149,118 +149,135 @@ namespace vcs_ListViewEx1
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
-		}
-		#endregion
+        }
+        #endregion
 
-		/// <summary>
-		/// Der Haupteinstiegspunkt für die Anwendung.
-		/// </summary>
-		[STAThread]
-		static void Main() 
-		{
-			Application.EnableVisualStyles();
-			Application.Run(new Form1());
-		}
+        /// <summary>
+        /// Der Haupteinstiegspunkt für die Anwendung.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.Run(new Form1());
+        }
 
-		private void Form1_Load(object sender, System.EventArgs e)
-		{
-			// Create some controls and embed them in our ListView
+        private void Form1_Load(object sender, System.EventArgs e)
+        {
+            // Create some controls and embed them in our ListView
 
-			// First, a button:
-			Button b = new Button();
-			b.Text = "ClickMe";
-			b.BackColor = SystemColors.Control;
-			b.Font = this.Font;
-			b.Click += new EventHandler(b_Click);
-			// Put it in the first column of the fourth row
-			listView1.AddEmbeddedControl(b, 0, 3);
+            // First, a button:
+            Button b = new Button();
+            b.Text = "ClickMe";
+            b.BackColor = SystemColors.Control;
+            b.Font = this.Font;
+            b.Click += new EventHandler(b_Click);
+            // Put it in the first column of the fourth row
+            listView1.AddEmbeddedControl(b, 0, 3);
 
+            // Third, a number of ProcessBars that will be updated by a timer
+            Random r = new Random();
+            foreach (ListViewItem i in listView1.Items)
+            {
+                int cnt = r.Next(100);
+                i.SubItems.Add(cnt.ToString());
 
-			// Third, a number of ProcessBars that will be updated by a timer
-			Random r = new Random();
-			foreach (ListViewItem i in listView1.Items)
-			{
-				int cnt = r.Next(100);
-				i.SubItems.Add(cnt.ToString());
+                ProgressBar pb = new ProgressBar();
+                pb.Value = cnt;
+                pb.Click += new EventHandler(pb_Click);
 
-				ProgressBar pb = new ProgressBar();
-				pb.Value = cnt;
-				pb.Click += new EventHandler(pb_Click);
+                // Embed the ProgressBar in Column 2
+                listView1.AddEmbeddedControl(pb, 1, i.Index);
+            }
 
-				// Embed the ProgressBar in Column 2
-				listView1.AddEmbeddedControl(pb, 1, i.Index);
-			}
+            // Fill the View ComboBox
+            Array a = Enum.GetValues(typeof(View));
+            foreach (View v in a)
+            {
+                comboBox1.Items.Add(v.ToString());
+            }
+            // Default view is Details
+            comboBox1.Text = View.Details.ToString();
+        }
 
-			// Fill the View ComboBox
-			Array a = Enum.GetValues(typeof(View));
-			foreach (View v in a)
-			{
-				comboBox1.Items.Add(v.ToString());
-			}
-			// Default view is Details
-			comboBox1.Text = View.Details.ToString();
-		}
+        private void b_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(this, "Thank you!");
+        }
 
-		private void b_Click(object sender, EventArgs e)
-		{
-			MessageBox.Show(this, "Thank you!");
-		}
+        // Once an embedded ProgressBar is clicked, it's removed from the ListView.
+        // This way the ListViewSubItem's Text value becomes visible.
+        private void pb_Click(object sender, EventArgs e)
+        {
+            listView1.RemoveEmbeddedControl(sender as Control);
+        }
 
-		// Once an embedded ProgressBar is clicked, it's removed from the ListView.
-		// This way the ListViewSubItem's Text value becomes visible.
-		private void pb_Click(object sender, EventArgs e)
-		{
-			listView1.RemoveEmbeddedControl(sender as Control);
-		}
+        // Update embedded ProgressBars
+        private Random rnd = new Random();
+        private void timer1_Tick(object sender, System.EventArgs e)
+        {
+            int row = rnd.Next(listView1.Items.Count);
 
-		// Update embedded ProgressBars
-		private Random rnd = new Random();
-		private void timer1_Tick(object sender, System.EventArgs e)
-		{
-			int row = rnd.Next(listView1.Items.Count);
+            ProgressBar pb = listView1.GetEmbeddedControl(1, row) as ProgressBar;
+            if (pb == null)
+            {
+                int val = int.Parse(listView1.Items[row].SubItems[1].Text);
+                val += 5;
+                if (val > 100)
+                {
+                    val = 0;
+                }
 
-			ProgressBar pb = listView1.GetEmbeddedControl(1, row) as ProgressBar;
-			if (pb==null)
-			{
-				int val = int.Parse(listView1.Items[row].SubItems[1].Text);
-				val += 5;
-				if (val>100)
-					val=0;
+                listView1.Items[row].SubItems[1].Text = val.ToString();
+                return;
+            }
 
-				listView1.Items[row].SubItems[1].Text = val.ToString();
-				return;
-			}
+            if (pb.Value >= pb.Maximum - 5)
+            {
+                pb.Value = pb.Minimum;
+            }
+            else
+            {
+                pb.Value += 5;
+            }
+            listView1.Items[row].SubItems[1].Text = pb.Value.ToString();
+        }
 
-			if (pb.Value >= pb.Maximum-5)
-				pb.Value = pb.Minimum;
-			else
-				pb.Value += 5;
+        // Switch ListView View
+        private void comboBox1_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            View v = (View)Enum.Parse(typeof(View), comboBox1.Text, true);
+            listView1.View = v;
+        }
 
-			listView1.Items[row].SubItems[1].Text = pb.Value.ToString();
-		}
-
-
-		// Switch ListView View
-		private void comboBox1_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			View v = (View)Enum.Parse(typeof(View),comboBox1.Text,true);
-			listView1.View = v;
-		}
-
-		// Sort ListView
-		private void listView1_ColumnClick(object sender, System.Windows.Forms.ColumnClickEventArgs e)
-		{
-			switch (listView1.Sorting)
-			{
-				case SortOrder.None:
-				case SortOrder.Ascending:
-					listView1.Sorting = SortOrder.Descending;
-					break;
-				case SortOrder.Descending:
-					listView1.Sorting = SortOrder.Ascending;
-					break;
-			}
-		}
-
-	}
+        // Sort ListView
+        private void listView1_ColumnClick(object sender, System.Windows.Forms.ColumnClickEventArgs e)
+        {
+            switch (listView1.Sorting)
+            {
+                case SortOrder.None:
+                case SortOrder.Ascending:
+                    listView1.Sorting = SortOrder.Descending;
+                    break;
+                case SortOrder.Descending:
+                    listView1.Sorting = SortOrder.Ascending;
+                    break;
+            }
+        }
+    }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60­Ó
+//------------------------------------------------------------  # 60­Ó
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30­Ó
+//------------------------------  # 30­Ó
+
+/*  ¥i·h¥X
+
+*/
+
+
+

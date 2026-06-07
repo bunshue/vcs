@@ -21,6 +21,8 @@ namespace vcs_PictureBox4
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button1_Click(object sender, EventArgs e)
         {
             //讀取圖檔
@@ -31,6 +33,19 @@ namespace vcs_PictureBox4
             pictureBox1.Height = image.Height;
             pictureBox1.Width = image.Width;
         }
-
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

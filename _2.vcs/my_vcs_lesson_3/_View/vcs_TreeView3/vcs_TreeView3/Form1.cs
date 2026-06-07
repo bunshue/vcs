@@ -44,7 +44,6 @@ namespace vcs_TreeView3
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
-
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
@@ -203,6 +202,8 @@ namespace vcs_TreeView3
         }
     }
 
+    //------------------------------------------------------------  # 60個
+
     // 定義「顧客」類別
     public class Customer : System.Object
     {
@@ -222,6 +223,8 @@ namespace vcs_TreeView3
             get { return this.custOrders; }
         }
     }
+
+    //------------------------------------------------------------  # 60個
 
     // 定義「訂單」類別
     public class Order : System.Object

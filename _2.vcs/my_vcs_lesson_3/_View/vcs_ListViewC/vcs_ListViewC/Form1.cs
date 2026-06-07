@@ -73,10 +73,7 @@ namespace vcs_ListViewC
         private string ListViewToHtmlTable(ListView lvw, int border, int cell_spacing, int cell_padding)
         {
             // Open the <table> element.
-            string txt = "<table " +
-                "border=\"" + border.ToString() + "\" " +
-                "cellspacing=\"" + cell_spacing.ToString() + "\" " +
-                "cellpadding=\"" + cell_padding.ToString() + "\">\n";
+            string txt = "<table " + "border=\"" + border.ToString() + "\" " + "cellspacing=\"" + cell_spacing.ToString() + "\" " + "cellpadding=\"" + cell_padding.ToString() + "\">\n";
 
             // See how many columns there are.
             int num_cols = lvw.Columns.Count;
@@ -113,11 +110,7 @@ namespace vcs_ListViewC
             foreach (ListViewGroup grp in lvw.Groups)
             {
                 // Display the header.
-                txt += "  <tr><th " +
-                    "colspan=\"" + num_cols + "\" " +
-                    "align=\"" + grp.HeaderAlignment.ToString() + "\" " +
-                    "bgcolor=\"LightBlue\">" +
-                    grp.Header + "</th></tr>\n";
+                txt += "  <tr><th " + "colspan=\"" + num_cols + "\" " + "align=\"" + grp.HeaderAlignment.ToString() + "\" " + "bgcolor=\"LightBlue\">" + grp.Header + "</th></tr>\n";
 
                 // Display the column headers.
                 txt += ListViewColumnHeaderHtml(lvw);
@@ -140,10 +133,7 @@ namespace vcs_ListViewC
             foreach (ColumnHeader col in lvw.Columns)
             {
                 // Display this column header.
-                txt += "<th bgcolor=\"#CCFFFF\"" +
-                    "width=\"" + col.Width.ToString() + "\" " +
-                    "align=\"" + col.TextAlign.ToString() + "\">" +
-                    col.Text + "</th>";
+                txt += "<th bgcolor=\"#CCFFFF\"" + "width=\"" + col.Width.ToString() + "\" " + "align=\"" + col.TextAlign.ToString() + "\">" + col.Text + "</th>";
             }
             txt += "</tr>\n";
             return txt;
@@ -156,9 +146,7 @@ namespace vcs_ListViewC
             ListView lvw = item.ListView;
             for (int i = 0; i < item.SubItems.Count; i++)
             {
-                txt += "<td " +
-                    "align=\"" + lvw.Columns[i].TextAlign.ToString() + "\">" +
-                    item.SubItems[i].Text + "</td>";
+                txt += "<td " + "align=\"" + lvw.Columns[i].TextAlign.ToString() + "\">" + item.SubItems[i].Text + "</td>";
             }
             txt += "</tr>\n";
             return txt;
@@ -251,3 +239,18 @@ namespace vcs_ListViewC
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
+

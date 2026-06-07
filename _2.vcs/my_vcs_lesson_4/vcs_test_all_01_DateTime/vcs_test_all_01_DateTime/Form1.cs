@@ -578,27 +578,8 @@ namespace vcs_test_all_01_DateTime
         {
             // DateTime.Compare() 比較時間早晚
 
-            //string st1 = "2010/05/30 12:13:50";
-            //string st2 = "2018/09/20 14:14:30";
-            string st1 = "2010/05/30";
-            string st2 = "2018/09/20";
-            DateTime dt1 = Convert.ToDateTime(st1);
-            DateTime dt2 = Convert.ToDateTime(st2);
-
-            if (DateTime.Compare(dt1, dt2) > 0)
-            {
-                richTextBox1.Text += st1 + " 晚於 " + st2 + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += st1 + " 早於 " + st2 + "\n";
-            }
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
-
-            // DateTime.Compare() 比較時間早晚
-            dt1 = new DateTime(2016, 12, 9, 0, 0, 0);
-            dt2 = new DateTime(2016, 12, 9, 11, 0, 0);
+            DateTime dt1 = new DateTime(2016, 12, 9, 0, 0, 0);
+            DateTime dt2 = new DateTime(2016, 12, 9, 11, 0, 0);
             int result = DateTime.Compare(dt1, dt2);
 
             string relationship = string.Empty;
@@ -615,9 +596,9 @@ namespace vcs_test_all_01_DateTime
 
             /*
             //時間比較
-            DateTime.Compare( dt1, dt2 ) > 0 : dt1 > dt2
-            DateTime.Compare( dt1, dt2 ) == 0 : dt1 == dt2
-            DateTime.Compare( dt1, dt2 ) < 0 : dt1 < dt2       
+            DateTime.Compare(dt1, dt2) > 0 : dt1 > dt2
+            DateTime.Compare(dt1, dt2) == 0 : dt1 == dt2
+            DateTime.Compare(dt1, dt2) < 0 : dt1 < dt2       
             */
         }
 
@@ -1126,18 +1107,11 @@ namespace vcs_test_all_01_DateTime
             // 各種取得 DateTime 的方法
 
             dt1 = Convert.ToDateTime("2010-10-15 15:50:39");
-            dt2 = Convert.ToDateTime("2010-10-25 15:50:39");
-            dt1 = Convert.ToDateTime("1950/6/25");
-            dt2 = Convert.ToDateTime("1953/7/27");
-
-
-            dt1 = Convert.ToDateTime("1937-7-7");
-            dt2 = Convert.ToDateTime("1945-08-15");
+            dt1 = Convert.ToDateTime("2010/05/30 12:13:50");
+            dt2 = Convert.ToDateTime("1953/07/27");
 
             dt1 = new DateTime(2008, 12, 31, 23, 59, 59, DateTimeKind.Local);
             dt2 = new DateTime(2003, 11, 13, 23, 59, 59, DateTimeKind.Local);
-
-            dt1 = Convert.ToDateTime("2006/3/11");
 
         }
 
@@ -1247,9 +1221,6 @@ namespace vcs_test_all_01_DateTime
             //現在時間減分鐘寫法(本例為減30分鐘):
             DateTime Minus30Minutes = dt.AddMinutes(-30);
             richTextBox1.Text += "現在時間減30分鐘： " + Minus30Minutes.ToLongTimeString() + Environment.NewLine;
-
-            //------------------------------------------------------------  # 60個
-
         }
 
         private void button16_Click(object sender, EventArgs e)

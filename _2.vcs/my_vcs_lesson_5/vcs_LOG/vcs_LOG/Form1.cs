@@ -30,7 +30,7 @@ namespace vcs_LOG
 
             //------------------------------------------------------------  # 60個
 
-            LogFileName = "tmp_log_" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
+            LogFileName = "tmp_logA_" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
             richTextBox1.Text += "用Timer1自動存Log中.....\n";
 
             Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
@@ -168,7 +168,8 @@ namespace vcs_LOG
         {
             i++;
             string ttt = i.ToString() + " " + DateTime.Now.ToString();
-            WriteToLog(ttt, LogFileName, 100, 300);
+            richTextBox1.Text += i.ToString() + " ";
+            WriteToLog(ttt, LogFileName, 100, 300);  // 資料, 檔案, 最大, 備份
         }
 
         public static class EventLog

@@ -88,6 +88,7 @@
             // 
             // richTextBox1
             // 
+            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox1.Location = new System.Drawing.Point(131, 118);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
@@ -162,10 +163,10 @@
             // 
             // button6
             // 
-            this.button6.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button6.Location = new System.Drawing.Point(185, 80);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(90, 40);
+            this.button6.Size = new System.Drawing.Size(72, 36);
             this.button6.TabIndex = 6;
             this.button6.Text = "save";
             this.button6.UseVisualStyleBackColor = true;
@@ -211,9 +212,10 @@
             // 
             // button3
             // 
+            this.button3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button3.Location = new System.Drawing.Point(185, 26);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(90, 40);
+            this.button3.Size = new System.Drawing.Size(72, 36);
             this.button3.TabIndex = 5;
             this.button3.Text = "Info";
             this.button3.UseVisualStyleBackColor = true;
@@ -279,9 +281,10 @@
             // 
             // bt_clear
             // 
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_clear.Location = new System.Drawing.Point(162, 183);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(60, 32);
+            this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 18;
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
@@ -299,10 +302,10 @@
             // 
             // button0
             // 
-            this.button0.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button0.Location = new System.Drawing.Point(12, 229);
             this.button0.Name = "button0";
-            this.button0.Size = new System.Drawing.Size(90, 40);
+            this.button0.Size = new System.Drawing.Size(72, 36);
             this.button0.TabIndex = 20;
             this.button0.Text = "test";
             this.button0.UseVisualStyleBackColor = true;
@@ -410,10 +413,10 @@
             // 
             // bt_restore
             // 
-            this.bt_restore.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_restore.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_restore.Location = new System.Drawing.Point(149, 53);
             this.bt_restore.Name = "bt_restore";
-            this.bt_restore.Size = new System.Drawing.Size(80, 30);
+            this.bt_restore.Size = new System.Drawing.Size(72, 36);
             this.bt_restore.TabIndex = 28;
             this.bt_restore.Text = "恢復";
             this.bt_restore.UseVisualStyleBackColor = true;
@@ -461,10 +464,10 @@
             // 
             // bt_save2
             // 
-            this.bt_save2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_save2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_save2.Location = new System.Drawing.Point(149, 92);
             this.bt_save2.Name = "bt_save2";
-            this.bt_save2.Size = new System.Drawing.Size(80, 30);
+            this.bt_save2.Size = new System.Drawing.Size(72, 36);
             this.bt_save2.TabIndex = 23;
             this.bt_save2.Text = "save";
             this.bt_save2.UseVisualStyleBackColor = true;

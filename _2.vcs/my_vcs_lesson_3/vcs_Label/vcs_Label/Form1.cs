@@ -16,10 +16,9 @@ namespace vcs_Label
 {
     public partial class Form1 : Form
     {
-        int move_d = 1;   //記錄跑馬燈文字移動方向    0:向左 1:向右 2:向上 3:向下
-
         bool isPress = false;   //判斷是否有按下
         int oldX, oldY;         //記錄按下的位置
+        int move_d = 1;   //記錄跑馬燈文字移動方向    0:向左 1:向右 2:向上 3:向下
 
         public Form1()
         {
@@ -81,6 +80,8 @@ namespace vcs_Label
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
+        //------------------------------------------------------------  # 60個
+
         //使用滑鼠拖曳圖片 圖片藏在label裏 ST
         private void label_picture_MouseDown(object sender, MouseEventArgs e)
         {
@@ -119,6 +120,8 @@ namespace vcs_Label
             label_picture.Cursor = Cursors.Cross;    //移到控件上，改變鼠標
         }
         //使用滑鼠拖曳圖片 圖片藏在label裏 SP
+
+        //------------------------------------------------------------  # 60個
 
         // Draw rotated text.
         private void Form1_Paint(object sender, PaintEventArgs e)

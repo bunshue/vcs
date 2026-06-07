@@ -7,18 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+/*
+ * [C#]pictureBox隨滑鼠滾輪滾動改變大小
+ * pictureBox的Sizemode屬性設為Zoom
+ * 再添加事件
+ * this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);
+ */
+
 namespace vcs_PictureBox3
 {
     public partial class Form1 : Form
     {
-        /*
-         * [C#]pictureBox隨滑鼠滾輪滾動改變大小
-         * pictureBox的Sizemode屬性設為Zoom
-         * 再添加事件
-         * this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);
-         */
-
-
         public Form1()
         {
             InitializeComponent();
@@ -28,8 +27,9 @@ namespace vcs_PictureBox3
         {
             show_item_location();
 
-            this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);
+            //------------------------------------------------------------  # 60個
 
+            this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);
         }
 
         void show_item_location()
@@ -39,7 +39,6 @@ namespace vcs_PictureBox3
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -72,6 +71,8 @@ namespace vcs_PictureBox3
         {
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         void Form1_MouseWheel(object sender, MouseEventArgs e)
         {
@@ -127,3 +128,17 @@ namespace vcs_PictureBox3
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

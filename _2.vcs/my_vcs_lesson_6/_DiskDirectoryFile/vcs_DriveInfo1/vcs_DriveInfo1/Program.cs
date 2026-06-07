@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_DriveInfo3
+namespace vcs_DriveInfo1
 {
     static class Program
     {

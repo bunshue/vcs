@@ -123,13 +123,16 @@ namespace vcs_FileManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
+            update_default_setting();
+
             this.listView1.GridLines = true;
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.FullRowSelect = true; //整行一起選取
             listView1.Clear();
-
-            show_item_location();
-            update_default_setting();
 
             this.listBox1.Items.Clear();
             foreach (string sss in old_search_path)
@@ -194,7 +197,7 @@ namespace vcs_FileManager
 
             //設定執行後的表單大小
             this.Size = new Size(1920, 1040);
-            
+
             //設定執行後的表單起始位置, 指定位置
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new System.Drawing.Point(0, 0);
@@ -371,6 +374,8 @@ namespace vcs_FileManager
         {
             listView1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         // Process all files in the directory passed in, recurse on any directories 
         // that are found, and process the files they contain.
@@ -1911,6 +1916,18 @@ namespace vcs_FileManager
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
 
 
 //大檔資料存檔

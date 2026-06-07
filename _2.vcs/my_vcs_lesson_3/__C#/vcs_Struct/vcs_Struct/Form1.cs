@@ -115,6 +115,8 @@ namespace vcs_Struct
             richTextBox1.Text += "輪胎用途：" + wheel1.usage + "\n";
         }
 
+        //6060
+
         //結構與結構陣列的用法 ST
         struct Ball  // 結構
         {
@@ -168,6 +170,8 @@ namespace vcs_Struct
             }
         }
         //結構與結構陣列的用法 SP
+
+        //------------------------------------------------------------  # 60個
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -341,11 +345,7 @@ namespace vcs_Struct
             richTextBox1.Text += "星期三列舉常數值：" + (int)WeekDays.Wednesday + "\n";
             richTextBox1.Text += "星期五列舉常數值：" + (int)WeekDays.Friday + "\n";
 
-
             //ENUM的用法
-
-
-
 
             Person person1 = new Person();
             person1.Level = Level1.Employee;
@@ -395,15 +395,21 @@ namespace vcs_Struct
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button8_Click(object sender, EventArgs e)
         {
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button9_Click(object sender, EventArgs e)
         {
 
         }
+
+        //------------------------------------------------------------  # 60個
     }
 }
 

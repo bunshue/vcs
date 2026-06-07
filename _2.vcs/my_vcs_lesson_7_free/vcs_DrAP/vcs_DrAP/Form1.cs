@@ -1424,15 +1424,6 @@ namespace vcs_DrAP
 
             if (flag_search_vcs_pattern == 0)
             {
-                ProcessStartInfo pInfo = new ProcessStartInfo(target);
-                pInfo.Arguments = all_filename;
-
-                /*
-                // debug mesg
-                result_str += "target : " + target + "\n";
-                result_str += "all_filename : " + all_filename + "\n";
-                */
-
                 if (video_player_path == String.Empty)
                 {
                     all_filename = all_filename.Trim().Replace("\"", "");
@@ -1442,14 +1433,6 @@ namespace vcs_DrAP
                 {
                     Process.Start(video_player_path, all_filename);    //指名播放程式開啟
                 }
-
-                /*
-                using (Process process = new Process())
-                {
-                    process.StartInfo = pInfo;
-                    process.Start();
-                }
-                */
             }
             else
             {
@@ -1531,15 +1514,6 @@ namespace vcs_DrAP
 
             if (flag_search_vcs_pattern == 0)
             {
-                ProcessStartInfo pInfo = new ProcessStartInfo(target);
-                pInfo.Arguments = all_filename;
-
-                /*
-                // debug mesg
-                result_str += "target : " + target + "\n";
-                result_str += "all_filename : " + all_filename + "\n";
-                */
-
                 if (video_player_path == String.Empty)
                 {
                     all_filename = all_filename.Trim().Replace("\"", "");
@@ -1549,14 +1523,6 @@ namespace vcs_DrAP
                 {
                     Process.Start(video_player_path, all_filename);    //指名播放程式開啟
                 }
-
-                /*
-                using (Process process = new Process())
-                {
-                    process.StartInfo = pInfo;
-                    process.Start();
-                }
-                */
             }
             else
             {
@@ -1565,7 +1531,6 @@ namespace vcs_DrAP
                     Process.Start(text_editor_path, all_filename);
                 }
             }
-
         }
 
         private void listView1_KeyDown(object sender, KeyEventArgs e)
@@ -3447,7 +3412,7 @@ namespace vcs_DrAP
 
         //6060
 
-       private void bt_open_with_vcs_Click(object sender, EventArgs e)
+        private void bt_open_with_vcs_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "用vcs開啟\n";
 

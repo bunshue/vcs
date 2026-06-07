@@ -11,7 +11,7 @@ using System.IO;  // for DriveInfo
 using System.Globalization;  // for CultureInfo
 using System.Runtime.InteropServices;  // for DllImport, StructLayout
 
-namespace vcs_DriveInfo3
+namespace vcs_DriveInfo1
 {
     public partial class Form1 : Form
     {

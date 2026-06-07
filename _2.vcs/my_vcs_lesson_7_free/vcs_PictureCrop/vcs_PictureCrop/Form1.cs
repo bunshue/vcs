@@ -49,6 +49,10 @@ namespace vcs_PictureCrop
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
             //跟隨鼠標在 pictureBox 的圖片上畫矩形
             pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
             pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
@@ -58,8 +62,6 @@ namespace vcs_PictureCrop
             nud_y_st.ValueChanged += new EventHandler(select_crop_area);
             nud_w.ValueChanged += new EventHandler(select_crop_area);
             nud_h.ValueChanged += new EventHandler(select_crop_area);
-
-            show_item_location();
 
             reset_picture();
         }
@@ -125,19 +127,17 @@ namespace vcs_PictureCrop
             groupBox_resize.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 0 + 400 + 200);
             groupBox_resize.BringToFront();
 
-
             bt_open_folder.BackgroundImage = Properties.Resources.folder_open;
             bt_open_folder.BackgroundImageLayout = ImageLayout.Zoom;
 
             richTextBox1.Size = new Size(340, 250);
             richTextBox1.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 0 + groupBox_selection.Height + 400 + 200);
-
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             this.WindowState = FormWindowState.Maximized;
-            
+
             bt_open_file_setup();
             bt_exit_setup();
         }
@@ -238,6 +238,8 @@ namespace vcs_PictureCrop
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         void reset_picture()
         {
@@ -781,3 +783,17 @@ namespace vcs_PictureCrop
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

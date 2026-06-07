@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
-using System.Diagnostics;       //for Process
+using System.Diagnostics;  // for Process
 
 namespace vcs_Process_CommandLine
 {
@@ -24,9 +24,11 @@ namespace vcs_Process_CommandLine
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
-
             show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
+            Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
 
             richTextBox2.KeyUp += new KeyEventHandler(richTextBox2_KeyUp);
         }
@@ -71,6 +73,8 @@ namespace vcs_Process_CommandLine
         {
             richTextBox2.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -294,10 +298,7 @@ namespace vcs_Process_CommandLine
                     richTextBox1.Text += "i = " + i.ToString() + "\t" + cmd_output_data[i] + "\n";
                 }
                 //richTextBox1.Text += "len = " + cmd_output_data[i].Length.ToString() + "\n";
-
             }
-
-
         }
 
         //標準版Process使用
@@ -381,14 +382,14 @@ namespace vcs_Process_CommandLine
 
 
         /*
-                            process.Start();    //啟動程式
+        process.Start();    //啟動程式
 
-                    while (!process.HasExited)
-                    {
-                        richTextBox1.Text += "a ";
-                        process.WaitForExit(1000); //等待10秒
-                    }
-                    process.Dispose();
+        while (!process.HasExited)
+        {
+            richTextBox1.Text += "a ";
+            process.WaitForExit(1000); //等待10秒
+        }
+        process.Dispose();
         */
 
         public void exec_async(string exe_filename, string parameters)
@@ -504,10 +505,9 @@ namespace vcs_Process_CommandLine
 
             if (show_result_index < cmd_output_data.Count)
             {
-                int i;
                 int count = cmd_output_data.Count - show_result_index;
                 richTextBox1.Text += count.ToString() + " ";
-                for (i = 0; i < count; i++)
+                for (int i = 0; i < count; i++)
                 {
                     //richTextBox1.Text += "i = " + i.ToString() + "\t" + cmd_output_data[show_result_index] + "\n";
                     //Application.DoEvents();
@@ -517,3 +517,17 @@ namespace vcs_Process_CommandLine
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

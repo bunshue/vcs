@@ -115,7 +115,7 @@
             this.richTextBox1.Size = new System.Drawing.Size(411, 300);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "定風波\n三月七日，沙湖道中遇雨。雨具先去，同行皆狼狽，余獨不覺，已而遂晴，故作此詞。\n莫聽穿林打葉聲，何妨吟嘯且徐行。\n竹杖芒鞋輕勝馬，誰怕？一蓑煙雨任平生。\n料" +
-                "峭春風吹酒醒，微冷，山頭斜照卻相迎。\n回首向來蕭瑟處，歸去，也無風雨也無晴。\n ";
+    "峭春風吹酒醒，微冷，山頭斜照卻相迎。\n回首向來蕭瑟處，歸去，也無風雨也無晴。\n ";
             this.richTextBox1.SelectionChanged += new System.EventHandler(this.richTextBox1_SelectionChanged);
             this.richTextBox1.Click += new System.EventHandler(this.richTextBox1_Click);
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
@@ -178,7 +178,7 @@
             this.bt_clear2.Name = "bt_clear2";
             this.bt_clear2.Size = new System.Drawing.Size(60, 40);
             this.bt_clear2.TabIndex = 80;
-            this.bt_clear2.Text = "clear";
+            this.bt_clear2.Text = "Clear";
             this.bt_clear2.UseVisualStyleBackColor = true;
             this.bt_clear2.Click += new System.EventHandler(this.bt_clear2_Click);
             // 
@@ -299,12 +299,12 @@
             // 
             // bt_clear1
             // 
-            this.bt_clear1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_clear1.Location = new System.Drawing.Point(816, 264);
             this.bt_clear1.Name = "bt_clear1";
             this.bt_clear1.Size = new System.Drawing.Size(60, 40);
             this.bt_clear1.TabIndex = 114;
-            this.bt_clear1.Text = "clear";
+            this.bt_clear1.Text = "Clear";
             this.bt_clear1.UseVisualStyleBackColor = true;
             this.bt_clear1.Click += new System.EventHandler(this.bt_clear1_Click);
             // 

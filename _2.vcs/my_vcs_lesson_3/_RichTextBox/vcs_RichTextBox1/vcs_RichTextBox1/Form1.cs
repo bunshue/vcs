@@ -23,7 +23,7 @@ namespace vcs_RichTextBox1
         {
             show_item_location();
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
             show_richtextbox_font();
 

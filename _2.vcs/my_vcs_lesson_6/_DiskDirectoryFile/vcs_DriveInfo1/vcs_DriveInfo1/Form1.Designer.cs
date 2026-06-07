@@ -1,4 +1,4 @@
-﻿namespace vcs_DriveInfo3
+﻿namespace vcs_DriveInfo1
 {
     partial class Form1
     {

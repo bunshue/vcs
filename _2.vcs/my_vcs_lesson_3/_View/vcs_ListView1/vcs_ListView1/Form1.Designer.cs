@@ -158,7 +158,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(836, 78);
+            this.bt_clear.Location = new System.Drawing.Point(756, 29);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 115;
@@ -408,7 +408,7 @@
             this.listView1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.listView1.Location = new System.Drawing.Point(630, 5);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(150, 150);
+            this.listView1.Size = new System.Drawing.Size(100, 100);
             this.listView1.TabIndex = 138;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
@@ -429,9 +429,9 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(786, 5);
+            this.richTextBox1.Location = new System.Drawing.Point(740, 5);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(150, 150);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 139;
             this.richTextBox1.Text = "";
             // 
@@ -440,7 +440,7 @@
             this.lb_main_mesg0.AutoSize = true;
             this.lb_main_mesg0.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_main_mesg0.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg0.Location = new System.Drawing.Point(630, 164);
+            this.lb_main_mesg0.Location = new System.Drawing.Point(630, 128);
             this.lb_main_mesg0.Name = "lb_main_mesg0";
             this.lb_main_mesg0.Size = new System.Drawing.Size(78, 24);
             this.lb_main_mesg0.TabIndex = 140;
@@ -451,7 +451,7 @@
             this.lb_main_mesg1.AutoSize = true;
             this.lb_main_mesg1.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_main_mesg1.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg1.Location = new System.Drawing.Point(630, 206);
+            this.lb_main_mesg1.Location = new System.Drawing.Point(630, 164);
             this.lb_main_mesg1.Name = "lb_main_mesg1";
             this.lb_main_mesg1.Size = new System.Drawing.Size(78, 24);
             this.lb_main_mesg1.TabIndex = 142;
