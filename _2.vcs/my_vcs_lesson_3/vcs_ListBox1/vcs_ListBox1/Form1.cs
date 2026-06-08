@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+//ListBox看似只能顯示一欄資料
+
 //ListBox用多顏色背景表示
 //自建ListBox
 //加入/現有項目 選取DrawListBox.cs
@@ -301,6 +303,10 @@ namespace vcs_ListBox1
             string[] ZodiacSign = { "水瓶座", "雙魚座", "牡羊座", "金牛座", "雙子座", "巨蟹座" };
             listBox4.DataSource = ZodiacSign;//字串一維陣列直接餵給listBox
 
+            //字串一維陣列
+            //string[] weekday = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+            //listBox1.DataSource = weekday;
+
             //------------------------------  # 30個
 
             richTextBox1.Text += "字串一維陣列 轉 List 轉 listBox\n";
@@ -447,14 +453,5 @@ namespace vcs_ListBox1
 
 */
 
-/*
-            //字串一維陣列
-            String[] weekday = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
 
-            //清除listBox
-            listBox1.DataSource = null;
-            listBox1.Items.Clear();
-
-            listBox1.DataSource = weekday;
-*/
 

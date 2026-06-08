@@ -1020,18 +1020,18 @@ namespace vcs_ListView1
         private void button24_Click(object sender, EventArgs e)
         {
             //刪除資料
-            int selCount = listView1.SelectedIndices.Count;
-            if (selCount <= 0)  //總共選擇的個數
+            int len = listView1.SelectedIndices.Count;
+            if (len <= 0)  //總共選擇的個數
             {
                 richTextBox1.Text += "未選擇要刪除的項目\n";
                 return;
             }
-            richTextBox1.Text += "共選擇 " + selCount.ToString() + " 個項目, 分別是\n";
-            for (int i = (selCount - 1); i >= 0; i--)
+            richTextBox1.Text += "共選擇 " + len.ToString() + " 個項目, 分別是\n";
+            for (int i = (len - 1); i >= 0; i--)
             {
-                int selNdx = listView1.SelectedItems[i].Index;
-                richTextBox1.Text += "item : " + listView1.SelectedItems[i].Text + " index = " + selNdx.ToString() + "\n";
-                listView1.Items.RemoveAt(selNdx);
+                int index = listView1.SelectedItems[i].Index;
+                richTextBox1.Text += "item : " + listView1.SelectedItems[i].Text + " index = " + index.ToString() + "\n";
+                listView1.Items.RemoveAt(index);
             }
             return;
         }
@@ -1369,8 +1369,8 @@ namespace vcs_ListView1
                 */
             }
 
-            int selCount = listView1.SelectedIndices.Count;
-            richTextBox1.Text += "你目前選了 : " + selCount.ToString() + " 項\n";
+            int len = listView1.SelectedIndices.Count;
+            richTextBox1.Text += "你目前選了 : " + len.ToString() + " 項\n";
 
             if (R <= 0)
             {

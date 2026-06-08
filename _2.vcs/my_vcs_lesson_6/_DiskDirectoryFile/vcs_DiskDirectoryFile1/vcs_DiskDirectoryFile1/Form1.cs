@@ -143,9 +143,6 @@ namespace vcs_DiskDirectoryFile1
                 // 檢查檔案大小。如果兩個檔案的大小並不相同，則視為不相同。
                 if (fs1.Length != fs2.Length)
                 {
-                    // 關閉檔案。
-                    fs1.Close();
-                    fs2.Close();
                     return false;
                 }
 
@@ -158,9 +155,6 @@ namespace vcs_DiskDirectoryFile1
                     file2byte = fs2.ReadByte();
                 }
                 while ((file1byte == file2byte) && (file1byte != -1));
-                // 關閉檔案。
-                fs1.Close();
-                fs2.Close();
             }
 
             // 傳回比較的結果。在這個時候，只有當兩個檔案
@@ -1673,6 +1667,8 @@ namespace vcs_DiskDirectoryFile1
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void bt_files10_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "CurrentDir1 : " + Environment.CurrentDirectory + "\n";
@@ -1721,11 +1717,10 @@ namespace vcs_DiskDirectoryFile1
 
             //刪除資料夾下子資料夾(偽)
 
-            var pathstr = @"D:/_git/vcs/_1.data/______test_files1";
+            string pathstr = @"D:/_git/vcs/_1.data/______test_files1";
             if (Directory.Exists(pathstr))
             {
-                //var strname=DateTime.Now.ToShortDateString().Replace("/","-")+".txt";
-                var dt = DateTime.Now;
+                DateTime dt = DateTime.Now;
                 DirectoryInfo pathinfo = new DirectoryInfo(pathstr);
                 foreach (DirectoryInfo paths in pathinfo.GetDirectories())
                 {
@@ -1747,6 +1742,8 @@ namespace vcs_DiskDirectoryFile1
 
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void bt_files11_Click(object sender, EventArgs e)
         {
@@ -2279,4 +2276,4 @@ fs.Close();
             }
 */
 
-//1132
+//var strname=DateTime.Now.ToShortDateString().Replace("/","-")+".txt";

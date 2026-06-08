@@ -23,10 +23,11 @@ Close 釋放與此關聯的所有進程
 
 /*
 Process 的方法
-Process.GetProcesses()  // 取得所有程序
-Process.GetCurrentProcess()
 Process.Start()
-Process.GetProcessById()
+Process.GetCurrentProcess()  // 取得目前的process
+Process.GetProcesses()  // 取得所有程序
+Process.GetProcessesByName()  // 根據[process名稱]取得process
+Process.GetProcessById()  // 根據[process id]取得process
 */
 
 namespace vcs_Process1
@@ -64,6 +65,12 @@ namespace vcs_Process1
             //監控外部程序運行狀態 SP
 
             //------------------------------------------------------------  # 60個
+
+            listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.FullRowSelect = true; //整行一起選取
+            listView1.GridLines = true;  // 顯示格線
+            listView1.Columns.Add("PID", 150, HorizontalAlignment.Left);
+            listView1.Columns.Add("名稱", 250, HorizontalAlignment.Left);
 
             list_all_processes();
         }
@@ -105,30 +112,22 @@ namespace vcs_Process1
             button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-            button30.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button34.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            button35.Location = new Point(x_st + dx * 3, y_st + dy * 5);
-            button36.Location = new Point(x_st + dx * 3, y_st + dy * 6);
-            button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
-            button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
-            button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
-            label1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            bt_kill_process.Location = new Point(x_st + dx * 6 - 80, y_st + dy * 0 - 10);
-            listBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0 + 40);
-            listBox1.Size = new Size(410, 360);
+            label1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            bt_list_process.Location = new Point(x_st + dx * 5 - 80 - 80 - 80, y_st + dy * 0 - 10);
+            bt_open_process.Location = new Point(x_st + dx * 5 - 80 - 80, y_st + dy * 0 - 10);
+            bt_kill_process.Location = new Point(x_st + dx * 5 - 80, y_st + dy * 0 - 10);
+            listView1.Size = new Size(410, 400);
+            listView1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 40);
 
-            richTextBox1.Size = new Size(360, 690);
-            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            richTextBox1.Size = new Size(560, 690);
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             lb_monitor_process.Text = "監控外部程序運行狀態";
-            lb_monitor_process.Location = new Point(x_st + dx * 4, y_st + dy * 7 - 26);
-            richTextBox2.Size = new Size(190, 200);
-            richTextBox2.Location = new Point(x_st + dx * 4, y_st + dy * 7);
+            lb_monitor_process.Location = new Point(x_st + dx * 3, y_st + dy * 7 - 30);
+            richTextBox2.Size = new Size(410, 200);
+            richTextBox2.Location = new Point(x_st + dx * 3, y_st + dy * 7);
 
             this.Size = new Size(1650, 750);
             this.Text = "vcs_Process1";
@@ -148,19 +147,16 @@ namespace vcs_Process1
         private void button0_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "取得所有程序\n";
+
             Process[] processes = Process.GetProcesses();  // 取得所有程序
-            richTextBox1.Text += "系統中有： " + processes.Length.ToString() + " 個程序\n\n";
-
-            richTextBox1.Text += "僅列出 有視窗 的Process\n\n";
-
             foreach (Process process in processes)
             {
-                //richTextBox1.Text += "A\t" + process.ProcessName + "\t";
+                // 取得處理序的主視窗標題
                 if (process.MainWindowTitle.Length > 0)
                 {
                     //僅列出 有視窗 的Process
                     richTextBox1.Text += "處理序的名稱 :\t" + process.ProcessName.ToString().Trim() + "\n";//取得處理序的名稱
-                    richTextBox1.Text += "主視窗標題 :\t" + process.MainWindowTitle + "\n";   //取得處理序的主視窗標題
+                    richTextBox1.Text += "主視窗標題 :\t" + process.MainWindowTitle + "\n";  // 取得處理序的主視窗標題
                     richTextBox1.Text += "處理序啟動的時間 :\t" + process.StartTime.ToString() + "\n";   //取得處理序的主視窗標題
                     richTextBox1.Text += "這個處理序的總處理器時間 :\t" + process.TotalProcessorTime.ToString() + "\n";   //取得處理序的主視窗標題
 
@@ -191,11 +187,13 @@ namespace vcs_Process1
             //Environment.MachineName 屬性 : 取得這個本機電腦的 NetBIOS 名稱。
             //Process.GetProcesses 方法 (String) : 為指定電腦上的每個處理序資源建立新的 Process 元件。
             //Process.MainWindowHandle 屬性 : 取得相關處理序主視窗的視窗控制代碼。
-            foreach (Process process in Process.GetProcesses(Environment.MachineName))
+
+            //Process[]
+            processes = Process.GetProcesses(Environment.MachineName);  // 取得所有程序
+            foreach (Process process in processes)
             {
                 if (process.MainWindowHandle != IntPtr.Zero)  // 判斷 MainWindowHandle 為非零值的應用程式，表示有主視窗
                 {
-                    //listBox1.Items.Add(process.ToString());
                     richTextBox1.Text += process.ToString() + "\n";
                 }
             }
@@ -203,11 +201,10 @@ namespace vcs_Process1
             richTextBox1.Text += "取得所有程序\n";
 
             // 列出系統中所有的程序
-            //Process[] processes2 = Process.GetProcesses(Environment.MachineName);   //相同
-            Process[] processes2 = Process.GetProcesses();  // 取得所有程序
-            richTextBox1.Text += "系統中有： " + processes2.Length.ToString() + " 個程序\n";
-
-            foreach (Process process in processes2)
+            //Process[] processes = Process.GetProcesses(Environment.MachineName);   //相同
+            //Process[]
+            processes = Process.GetProcesses();  // 取得所有程序
+            foreach (Process process in processes)
             {
                 /*
                 // 因為使用 Idle 的 StartTime 會造成錯誤，因此先排除。對其他程序取時間也會造成錯誤，故不用。
@@ -233,48 +230,30 @@ namespace vcs_Process1
             // 獲得當前程序中正在運行的進程
 
             richTextBox1.Text += "取得所有程序\n";
-            Process[] AllProcesses = Process.GetProcesses();  // 取得所有程序
-            richTextBox1.Text += "進程數 : " + AllProcesses.Length.ToString() + "\n";
+            //Process[]
+            processes = Process.GetProcesses();  // 取得所有程序
+            richTextBox1.Text += "系統中有 : " + processes.Length.ToString() + " 個程序\n";
 
             //比對電腦的處理程序, 指定程序還原與置於前景視窗 
-            foreach (Process p in AllProcesses)  // 取得所有程序
+            foreach (Process process in processes)  // 取得所有程序
             {
-                //richTextBox1.Text += "找到 " + p.ProcessName + "\n";  // 進程名
-                if (p.ProcessName == "ACDSee32")  // 取得處理序名稱並與指定程序名稱比較
+                //richTextBox1.Text += "找到 " + process.ProcessName + "\n";  // 進程名
+                if (process.ProcessName == "ACDSee32")  // 取得處理序名稱並與指定程序名稱比較
                 {
                     richTextBox1.Text += "\t你開啟了ACDSee32，移到前台。\n";
-                    HandleRunningInstance(p);
+                    HandleRunningInstance(process);
                 }
-                //p.Kill(); //關閉所有進程.
+                //process.Kill();  // 指名刪除這個process
             }
 
             //------------------------------------------------------------  # 60個
-
-            //列出firefox的Process
-            //取出名字裡有特定字樣的process
-            //Process[]
-            processes = Process.GetProcessesByName("firefox");
-            richTextBox1.Text += "系統中有： " + processes.Length.ToString() + " 個程序\n";
-
-            //取出所有的process
-            //Process[] processes = Process.GetProcesses();  // 取得所有程序
-            foreach (Process process in processes)
-            {
-                //process.Kill(); 指名刪除這個process
-                richTextBox1.Text += process.ProcessName + "\n";
-                richTextBox1.Text += String.Format("{0} \tID:{1}", process.ProcessName, process.Id) + "\n";
-            }
-
-
-            //------------------------------------------------------------  # 60個
-
 
             //取得特定應用程式的資訊
             richTextBox1.Text += "取得所有程序\n";
             //Process[] processes = Process.GetProcesses(Environment.MachineName);   //相同
             //Process[]
             processes = Process.GetProcesses();  // 取得所有程序
-            richTextBox1.Text += "系統中有： " + processes.Length.ToString() + " 個程序\n";
+            richTextBox1.Text += "系統中有 : " + processes.Length.ToString() + " 個程序\n";
 
             foreach (Process process in processes)
             {
@@ -341,8 +320,7 @@ namespace vcs_Process1
 
             try
             {
-                //啟動程式
-                process = Process.Start("NotePad.exe");
+                process = Process.Start("NotePad.exe");  // 啟動程式
 
                 // Display the process statistics until the user closes the program. 
                 do
@@ -355,7 +333,9 @@ namespace vcs_Process1
                         // Display current process statistics.
 
                         richTextBox1.Text += process.ToString() + "\n";
-                        //3030
+
+                        //------------------------------  # 30個
+
                         richTextBox1.Text += "physical memory usage : " + process.WorkingSet64 + "\n";
                         richTextBox1.Text += "base priority : " + process.BasePriority + "\n";
                         richTextBox1.Text += "priority class : " + process.PriorityClass + "\n";
@@ -400,17 +380,7 @@ namespace vcs_Process1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            return;
 
-            //應該是要指名關閉哪個程式
-            if ((process != null) && (!process.HasExited))
-            {
-                process.Kill();
-            }
-            else
-            {
-                richTextBox1.Text += " already killed ";
-            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -454,8 +424,8 @@ namespace vcs_Process1
             //此範例會關閉進程（如果它仍然在10秒後執行）。
 
             try
-            {   //可能會產生錯誤的程式區段
-                using (Process process = Process.Start("Notepad.exe"))
+            {
+                using (Process process = Process.Start("Notepad.exe"))  // 啟動程式
                 {
                     // Display physical memory usage 5 times at intervals of 2 seconds.
                     for (int i = 0; i < 10; i++)
@@ -464,7 +434,6 @@ namespace vcs_Process1
                         {
                             // Discard cached information about the process.
                             process.Refresh();
-                            // Print working set to console.
                             richTextBox1.Text += "Physical Memory Usage : " + process.WorkingSet64.ToString() + "\n";
                             //label1.Text = process.WorkingSet64.ToString();
                             // Wait 2 seconds.
@@ -502,8 +471,9 @@ namespace vcs_Process1
             int process_id = process.Id;  // 進程ID
             richTextBox1.Text += process_id.ToString() + "\n";
 
-            Process localById = Process.GetProcessById(process_id);
-            richTextBox1.Text += "電腦名稱：" + localById.MachineName + Environment.NewLine + "處理序名稱：" + localById.ProcessName + "\n";
+            //Process
+            process = Process.GetProcessById(process_id);  // 根據[process id]取得process
+            richTextBox1.Text += "處理序名稱 : " + process.ProcessName + "\n";
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -526,9 +496,8 @@ namespace vcs_Process1
 
             //使用Process類調用外部exe程序
 
-            //Process process = Process.Start("notepad.exe");
+            //Process process = Process.Start("notepad.exe");  // 啟動程式
             //process.WaitForExit();//關鍵，等待外部程序退出後才能往下執行
-
 
             //------------------------------------------------------------  # 60個
 
@@ -605,6 +574,22 @@ namespace vcs_Process1
             richTextBox1.Text += "開啟 Chrome 指定網頁\n";
             //filename = @"D:\_git\vcs\_1.data\_html\朱冶蕙老師的電腦教室.html";
             //Process.Start("chrome.exe", filename);
+
+            //------------------------------------------------------------  # 60個
+
+            //Process.Start()
+
+            /*
+            //C# 呼叫檔案總管開啟某個資料夾，並讓某個檔案或資料夾呈現反白的樣子
+            string file = @"C:\Windows\explorer.exe";
+            string argument = @"/select, " + foldername;
+            Process.Start(file, argument);
+            */
+
+            Process.Start("IExplore.exe", "tw.yahoo.com");  // 啟動程式 + 參數
+            Process.Start("chrome.exe", "C:\\Read_Cht.htm");  // 啟動程式 + 參數
+
+
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -631,7 +616,7 @@ namespace vcs_Process1
             richTextBox1.Text += "cnt = " + cnt.ToString() + "\n";
 
             //通過C#還可以指定當前線程的運行在哪個CPU上。
-            //Process process = Process.GetCurrentProcess();
+            //Process process = Process.GetCurrentProcess();  // 取得目前的process
             //process.ProcessorAffinity = (IntPtr)0x0001;
             //Process.ProcessorAffinity 設置當前CPU的屏蔽字，0x0001表示選用一號CPU，0x0002表示選用2號CPU。
 
@@ -641,15 +626,6 @@ namespace vcs_Process1
 
         private void button8_Click(object sender, EventArgs e)
         {
-            /*
-            //C# 呼叫檔案總管開啟某個資料夾，並讓某個檔案或資料夾呈現反白的樣子
-            string file = @"C:\Windows\explorer.exe";
-            string argument = @"/select, " + foldername;
-            Process.Start(file, argument);
-            */
-
-            Process.Start("IExplore.exe", "tw.yahoo.com");
-            Process.Start("chrome.exe", "C:\\Read_Cht.htm");
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -661,36 +637,54 @@ namespace vcs_Process1
             // 取得 記憶體資訊
 
             // 先執行 記事本，這樣才看得到效果
-            //Process.Start("NotePad.exe");
+            //Process.Start("NotePad.exe");  // 啟動程式
 
             //單一程式的記憶體資訊, 記事本
-            Process[] localByName = Process.GetProcessesByName("NotePad");
+            Process[] processes = Process.GetProcessesByName("NotePad");  // 根據[process名稱]取得process
 
-            foreach (Process process in localByName)
+            foreach (Process process in processes)
             {
+                // 取得工作集 (Working Set) 記憶體大小，單位是位元組
+                //WorkingSet64 → 目前占用的實體記憶體 (RAM)。
+                //PrivateMemorySize64 → 只屬於此程式的記憶體大小。
+                //PagedMemorySize64 → 已分頁到虛擬記憶體的大小。
+
+                //PrivateMemorySize64	程式獨佔的記憶體，不含共用 DLL	Private Working Set	工作管理員「記憶體」欄位通常顯示這個數字。
+
                 richTextBox1.Text += "名稱 : " + process.ProcessName + "\n";
                 richTextBox1.Text += "識別項 : " + process.Id.ToString() + "\n";
-                richTextBox1.Text += "私有記憶體 : " + (process.PrivateMemorySize64 / 1024) + "Kbyte\n";
-                richTextBox1.Text += "虛擬記憶體 : " + (process.VirtualMemorySize64 / 1024) + "byte\n";
+                richTextBox1.Text += "私有記憶體 : " + (process.PrivateMemorySize64 / 1024) + " Kbyte\n";
+                richTextBox1.Text += "虛擬記憶體 : " + (process.VirtualMemorySize64 / 1024) + " Kbyte\n";
+
+                richTextBox1.Text += "程式目前使用記憶體 WorkingSet64 : " + (process.WorkingSet64 / 1024.0 / 1024.0).ToString("F2") + " MB\n";
+                richTextBox1.Text += "程式目前使用記憶體 PrivateMemorySize64 : " + (process.PrivateMemorySize64 / 1024.0 / 1024.0).ToString("F2") + " MB\n";
+                richTextBox1.Text += "程式目前使用記憶體 PagedMemorySize64 : " + (process.PagedMemorySize64 / 1024.0 / 1024.0).ToString("F2") + " MB\n";
             }
 
             return;
 
-
             //所有程式的記憶體資訊
-            foreach (Process process in Process.GetProcesses())  // 取得所有程序
+            //Process[]
+            processes = Process.GetProcesses();  // 取得所有程序
+            foreach (Process process in processes)
             {
                 richTextBox1.Text += "名稱 : " + process.ProcessName + "\n";
                 richTextBox1.Text += "識別項 : " + process.Id.ToString() + "\n";
-                richTextBox1.Text += "私有記憶體 : " + (process.PrivateMemorySize64 / 1024) + "Kbyte\n";
-                richTextBox1.Text += "虛擬記憶體 : " + (process.VirtualMemorySize64 / 1024) + "byte\n";
+                richTextBox1.Text += "私有記憶體 : " + (process.PrivateMemorySize64 / 1024) + " Kbyte\n";
+                richTextBox1.Text += "虛擬記憶體 : " + (process.VirtualMemorySize64 / 1024) + " Kbyte\n";
+
+                richTextBox1.Text += "程式目前使用記憶體 WorkingSet64 : " + (process.WorkingSet64 / 1024.0 / 1024.0).ToString("F2") + " MB\n";
+                richTextBox1.Text += "程式目前使用記憶體 PrivateMemorySize64 : " + (process.PrivateMemorySize64 / 1024.0 / 1024.0).ToString("F2") + " MB\n";
+                richTextBox1.Text += "程式目前使用記憶體 PagedMemorySize64 : " + (process.PagedMemorySize64 / 1024.0 / 1024.0).ToString("F2") + " MB\n";
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button11_Click(object sender, EventArgs e)
         {
             //當前進程資料, 取得目前的Process
-            using (Process process = Process.GetCurrentProcess())
+            using (Process process = Process.GetCurrentProcess())  // 取得目前的process
             {
                 richTextBox1.Text += "MainModule : " + process.MainModule + "\n";
                 richTextBox1.Text += "ProcessorAffinity : " + process.ProcessorAffinity + "\n";
@@ -698,41 +692,22 @@ namespace vcs_Process1
                 richTextBox1.Text += "處理序名稱 : " + process.ProcessName.ToString().Trim() + "\n";//取得處理序的名稱
                 richTextBox1.Text += "這個處理序的總處理器時間 : " + process.TotalProcessorTime.ToString() + "\n";
                 richTextBox1.Text += "當前進程 ID : " + process.Id.ToString() + "\n";
-                richTextBox1.Text += "當前進程 主視窗標題 : " + process.MainWindowTitle + "\n";   //取得處理序的主視窗標題
+                richTextBox1.Text += "當前進程 主視窗標題 : " + process.MainWindowTitle + "\n";  // 取得處理序的主視窗標題
                 richTextBox1.Text += "當前進程 SessionId : " + process.SessionId + "\n";
                 richTextBox1.Text += "當前進程 啟動時間 : " + process.StartTime.ToString() + "\n";
+                richTextBox1.Text += "電腦名稱 : " + process.MachineName + "\n";
 
-                richTextBox1.Text += "電腦名稱：" + process.MachineName + "\n";
-
-                richTextBox1.Text += "Min Working Set : " + process.MinWorkingSet + " 拜\n";
-                richTextBox1.Text += "Max Working Set : " + process.MaxWorkingSet + " 拜\n";
-                richTextBox1.Text += "Non-paged Memory Size : " + process.NonpagedSystemMemorySize64 + " 拜\n";
-                richTextBox1.Text += "Paged Memory Size : " + process.PagedMemorySize64 + " 拜\n";
-                richTextBox1.Text += "Paged System Memory Size : " + process.PagedSystemMemorySize64 + " 拜\n";
-
-                richTextBox1.Text += "Peak Paged Memory Size : " + process.PeakPagedMemorySize64 + " 拜\n";
-                richTextBox1.Text += "Peak Virtual Memory Size : " + process.PeakVirtualMemorySize64 + " 拜\n";
-                richTextBox1.Text += "Peak Working Set : " + process.PeakWorkingSet64 + " 拜\n";
-                richTextBox1.Text += "Virtual Memory Size : " + process.VirtualMemorySize64 + " 拜\n";
-                richTextBox1.Text += "Working Set : " + process.WorkingSet64 + " 拜\n";
-
-                //取得記憶體使用狀態
-
-                richTextBox1.Text += "Property\t\t\tValue\n";
+                richTextBox1.Text += "取得記憶體使用狀態\n";
                 richTextBox1.Text += "Min Working Set : " + ((double)process.MinWorkingSet).ToFileSize() + "\n";
                 richTextBox1.Text += "Max Working Set : " + ((double)process.MaxWorkingSet).ToFileSize() + "\n";
                 richTextBox1.Text += "Non-paged Memory Size : " + ((double)process.NonpagedSystemMemorySize64).ToFileSize() + "\n";
                 richTextBox1.Text += "Paged Memory Size : " + ((double)process.PagedMemorySize64).ToFileSize() + "\n";
                 richTextBox1.Text += "Paged System Memory Size : " + ((double)process.PagedSystemMemorySize64).ToFileSize() + "\n";
-
                 richTextBox1.Text += "Peak Paged Memory Size : " + ((double)process.PeakPagedMemorySize64).ToFileSize() + "\n";
                 richTextBox1.Text += "Peak Virtual Memory Size : " + ((double)process.PeakVirtualMemorySize64).ToFileSize() + "\n";
                 richTextBox1.Text += "Peak Working Set : " + ((double)process.PeakWorkingSet64).ToFileSize() + "\n";
                 richTextBox1.Text += "Virtual Memory Size : " + ((double)process.VirtualMemorySize64).ToFileSize() + "\n";
                 richTextBox1.Text += "Working Set : " + ((double)process.WorkingSet64).ToFileSize() + "\n";
-
-                //程序的退出
-                //process.Kill();
             }
         }
 
@@ -752,13 +727,14 @@ namespace vcs_Process1
 
         private void button13_Click(object sender, EventArgs e)
         {
-            Process process = Process.Start("Notepad.exe");
+            Process process = Process.Start("Notepad.exe");  // 啟動程式
+
             for (int i = 0; i < 5; i++)
             {
                 if (!process.HasExited)
                 {
                     process.Refresh();
-                    richTextBox1.Text += "實體記憶體的耗用： " + process.WorkingSet64.ToString() + "\n";
+                    richTextBox1.Text += "實體記憶體的耗用 : " + process.WorkingSet64.ToString() + "\n";
                     process.WaitForExit(3000);
                 }
                 else
@@ -773,9 +749,119 @@ namespace vcs_Process1
             richTextBox1.Text += "執行了Close()方法\n";
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button14_Click(object sender, EventArgs e)
         {
+            //取得Process資訊
+
+            //當前進程資料, 取得目前的Process
+            Process current_process = Process.GetCurrentProcess();  // 取得目前的process
+
+            //------------------------------------------------------------  # 60個
+
+            //獲取窗體的進程標識ID
+            string windowTitle = "Google";
+            int rs = 0;
+            Process[] processes = Process.GetProcesses();  // 取得所有程序
+            foreach (Process process in processes)
+            {
+                // 取得處理序的主視窗標題
+                if (process.MainWindowTitle.Length > 0)
+                {
+                    //richTextBox1.Text += "\n有窗體程序 : " + process.ProcessName + ", 窗體名稱 : " + process.MainWindowTitle + "\n";
+                }
+                else
+                {
+                    //richTextBox1.Text += "X ";
+
+                }
+
+                // 取得處理序的主視窗標題
+                if (process.MainWindowTitle.IndexOf(windowTitle) != -1)
+                {
+                    richTextBox1.Text += "aaaaaaaaaaaaaaaaaaaaaaaaaaa\n";
+                    rs = process.Id;
+
+                    richTextBox1.Text += "取得 name : " + process.ProcessName + "\n";
+                    richTextBox1.Text += "取得 id : " + process.Id + "\n";
+
+                    break;
+                }
+            }
+            richTextBox1.Text += "取得 process ID : " + rs.ToString() + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            //取出所有的process
+            //Process[] processes = Process.GetProcesses();  // 取得所有程序
+
+            //取出名字裡有特定字樣的process, "VCSExpress"
+            //Process[]
+            processes = Process.GetProcessesByName("VCSExpress");  // 根據[process名稱]取得process
+            richTextBox1.Text += "系統中有 : " + processes.Length.ToString() + " 個程序\n";
+
+            foreach (Process process in processes)
+            {
+                richTextBox1.Text += "ProcessName : " + process.ProcessName + "\n";
+                richTextBox1.Text += "Id : " + process.Id + "\n";
+
+                IntPtr baseAddress = process.MainModule.BaseAddress;
+                richTextBox1.Text += "BaseAddress : " + baseAddress.ToString() + "\n";
+            }
+
+            //------------------------------------------------------------  # 60個
+
+            //準備加入
+
+            //程序的退出
+            //process.Kill();  // 指名刪除這個process
+
+            /*
+            //關閉程式
+            //應該是要指名關閉哪個程式
+            if ((process != null) && (!process.HasExited))
+            {
+                process.Kill();  // 指名刪除這個process
+            }
+            else
+            {
+                richTextBox1.Text += " already killed ";
+            }
+            */
+
+            //------------------------------------------------------------  # 60個
+
+            string process_name = "ACDSee32";
+            richTextBox1.Text += "尋找並殺死process : " + process_name + "\n";
+            //string process_name = "TabTip";
+            //KillProcess(process_name);
         }
+
+        //尋找並殺死進程
+        private void KillProcess(string processName)
+        {
+            //得到所有打開的進程
+            try
+            {
+                Process[] processes = Process.GetProcessesByName(processName);  // 根據[process名稱]取得process
+                foreach (Process process in processes)
+                {
+                    richTextBox1.Text += "get process : " + process.ProcessName + "\n";
+                    if (!process.CloseMainWindow())
+                    {
+                        //process.Kill();  // 指名刪除這個process
+                        richTextBox1.Text += "殺死進程 : " + processName + "\n";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button15_Click(object sender, EventArgs e)
         {
@@ -820,7 +906,7 @@ namespace vcs_Process1
 
         private void button17_Click(object sender, EventArgs e)
         {
-            //在c#中，如果啟動了外部程序，一般也可以通過退出碼來確認程序的運行狀態：
+            //如果啟動了外部程序，一般也可以通過退出碼來確認程序的運行狀態
 
             Process process = Process.Start(@"D:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe");
 
@@ -851,78 +937,6 @@ namespace vcs_Process1
 
         private void button20_Click(object sender, EventArgs e)
         {
-        }
-
-        private void button21_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button22_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button24_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button25_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button26_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button27_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button28_Click(object sender, EventArgs e)
-        {
-            string process_name = "ACDSee32";
-
-            richTextBox1.Text += "尋找並殺死process : " + process_name + "\n";
-            //string process_name = "TabTip";
-            KillProcess(process_name);
-        }
-
-        //C#殺死進程
-        private void KillProcess(string processName)
-        {
-            //得到所有打開的進程
-            try
-            {
-                //foreach (Process processes in Process.GetProcesses())  // 取得所有程序
-                foreach (Process process in Process.GetProcessesByName(processName))   //指明特定名稱的程序
-                {
-                    richTextBox1.Text += "get process : " + process.ProcessName + "\n";
-                    if (!process.CloseMainWindow())
-                    {
-                        //process.Kill();
-                        richTextBox1.Text += "殺死進程 : " + processName + "\n";
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-            }
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button29_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button30_Click(object sender, EventArgs e)
-        {
             //ProcessStartInfo
             //Process
 
@@ -943,11 +957,11 @@ namespace vcs_Process1
             psi1.WorkingDirectory = "D:\\";
             //聲明一個程序類,也就是創建一個進程
 
-            Process Proc;
+            Process process;
             try
             {
                 //啟動外部程序                   
-                Proc = Process.Start(psi1);
+                process = Process.Start(psi1);
             }
             catch (System.ComponentModel.Win32Exception ex)
             {
@@ -955,22 +969,22 @@ namespace vcs_Process1
                 return;
             }
 
-            richTextBox1.Text += "外部程序的開始執行時間 : " + Proc.StartTime + "\n";
+            richTextBox1.Text += "外部程序的開始執行時間 : " + process.StartTime + "\n";
 
-            Proc.WaitForExit(3000);  // 等待3秒鐘
+            process.WaitForExit(3000);  // 等待3秒鐘
 
             //如果這個外部程序沒有結束運行則對其強行終止                   
-            if (Proc.HasExited == false)
+            if (process.HasExited == false)
             {
                 richTextBox1.Text += "由主程序強行終止外部程序的運行！\n";
-                Proc.Kill();
+                process.Kill();  // 指名刪除這個process
             }
             else
             {
                 richTextBox1.Text += "由外部程序正常退出！\n";
             }
-            richTextBox1.Text += "外部程序的結束運行時間 : " + Proc.ExitTime + "\n";
-            richTextBox1.Text += "外部程序在結束運行時的返回值 : " + Proc.ExitCode + "\n";
+            richTextBox1.Text += "外部程序的結束運行時間 : " + process.ExitTime + "\n";
+            richTextBox1.Text += "外部程序在結束運行時的返回值 : " + process.ExitCode + "\n";
 
             return;
             //------------------------------------------------------------  # 60個
@@ -1037,11 +1051,11 @@ namespace vcs_Process1
 
             richTextBox1.Text += "done\n";
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
             /*
-            ProcessStartInfo pInfo = new ProcessStartInfo(target);
-            pInfo.Arguments = all_filename;
+            ProcessStartInfo psi5 = new ProcessStartInfo(target);
+            psi5.Arguments = all_filename;
 
             // debug mesg
             result_str += "target : " + target + "\n";
@@ -1049,29 +1063,23 @@ namespace vcs_Process1
 
             using (Process process = new Process())
             {
-                process.StartInfo = pInfo;
+                process.StartInfo = psi5;
                 process.Start();
             }
             */
 
-            //6060
-
-
-
-
+            //------------------------------------------------------------  # 60個
         }
 
-        //------------------------------------------------------------  # 60個
-
-        private void button31_Click(object sender, EventArgs e)
+        private void button21_Click(object sender, EventArgs e)
         {
         }
 
-        private void button32_Click(object sender, EventArgs e)
+        private void button22_Click(object sender, EventArgs e)
         {
             //檢查本程式是否已在執行中
-            Process[] processes = Process.GetProcessesByName(Application.CompanyName);
-            richTextBox1.Text += "系統中有： " + processes.Length.ToString() + " 個程序\n";
+            Process[] processes = Process.GetProcessesByName(Application.CompanyName);  // 根據[process名稱]取得process
+            richTextBox1.Text += "系統中有 : " + processes.Length.ToString() + " 個程序\n";
 
             if (processes.Length > 1)
             {
@@ -1089,54 +1097,61 @@ namespace vcs_Process1
             }
         }
 
-        private void button33_Click(object sender, EventArgs e)
+        private void button23_Click(object sender, EventArgs e)
         {
         }
 
-        private void button34_Click(object sender, EventArgs e)
+        private void button24_Click(object sender, EventArgs e)
         {
         }
 
-        private void button35_Click(object sender, EventArgs e)
+        private void button25_Click(object sender, EventArgs e)
         {
-        }
 
-        private void button36_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button37_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button38_Click(object sender, EventArgs e)
-        {
 
         }
 
-        private void button39_Click(object sender, EventArgs e)
+        private void button26_Click(object sender, EventArgs e)
         {
+        }
 
+        private void button27_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button29_Click(object sender, EventArgs e)
+        {
         }
 
         //------------------------------------------------------------  # 60個
 
         void list_all_processes()
         {
-            listBox1.Items.Clear();
+            listView1.Items.Clear();
 
             richTextBox1.Text += "取得所有程序\n";
             Process[] processes = Process.GetProcesses();  // 取得所有程序
-            richTextBox1.Text += "系統中有： " + processes.Length.ToString() + " 個程序\n";
+            richTextBox1.Text += "系統中有 : " + processes.Length.ToString() + " 個程序\n";
 
             foreach (Process process in processes)
             {
-                //richTextBox1.Text += "A\t" + process.ProcessName + "\t";
+                // 取得處理序的主視窗標題
                 if (process.MainWindowTitle.Length > 0)
                 {
                     //僅列出 有視窗 的Process
-                    listBox1.Items.Add(process.ProcessName.ToString().Trim());
-                    richTextBox1.Text += "取得 有視窗 的Process : " + process.ProcessName.ToString().Trim() + "\n";
+
+                    //richTextBox1.Text += "取得 有視窗 的Process : " + process.Id.ToString() + "\n";
+                    //richTextBox1.Text += "取得 有視窗 的Process : " + process.ProcessName.ToString().Trim() + "\n";
+
+                    ListViewItem processItem = new ListViewItem(process.Id.ToString());//定義一個listView選擇項的實例
+                    processItem.SubItems.Add(process.ProcessName.ToString().Trim());
+                    listView1.Items.Add(processItem);//執行添加操作
                 }
                 else
                 {
@@ -1145,21 +1160,60 @@ namespace vcs_Process1
             }
         }
 
+        private void bt_list_process_Click(object sender, EventArgs e)
+        {
+            list_all_processes();
+        }
+
+        private void bt_open_process_Click(object sender, EventArgs e)
+        {
+            Process.Start("NotePad.exe");  // 啟動程式
+        }
+
         private void bt_kill_process_Click(object sender, EventArgs e)
         {
             //關閉外部已開啟的程序
 
-            if (listBox1.SelectedItem == null)
-                return;
-            richTextBox1.Text += "欲關閉程序名稱 : " + listBox1.SelectedItem.ToString().Trim() + "\n";
-            Process[] processes = Process.GetProcessesByName(listBox1.SelectedItem.ToString().Trim());
-            foreach (Process process in processes)
+            //刪除資料
+            int len = listView1.SelectedIndices.Count;
+            if (len <= 0)  //總共選擇的個數
             {
-                process.CloseMainWindow();
+                richTextBox1.Text += "未選擇要刪除的項目\n";
+                return;
             }
-            listBox1.Items.Remove(listBox1.SelectedItem);//從listBox1中移除listBox1中選定的項
+            richTextBox1.Text += "共選擇 " + len.ToString() + " 個項目, 分別是\n";
+            for (int i = (len - 1); i >= 0; i--)
+            {
+                int index = listView1.SelectedItems[i].Index;  // 取得欲刪除項目號
 
-            richTextBox1.Text += "程序已關閉\n";
+                richTextBox1.Text += "欲刪除項目號 : " + index.ToString() + "\n";
+                richTextBox1.Text += "欲關閉程序ID : " + listView1.SelectedItems[i].SubItems[0].Text + "\n";
+                richTextBox1.Text += "欲關閉程序名 : " + listView1.SelectedItems[i].SubItems[1].Text + "\n";
+
+                /*
+                //根據名稱刪除程序, 如果名稱相同就會一併被刪除
+                Process[] processes = Process.GetProcessesByName(listView1.SelectedItems[i].SubItems[1].Text);  // 根據[process名稱]取得process
+                foreach (Process process in processes)
+                {
+                    richTextBox1.Text += "取得程序名 : " + process.ProcessName + "\n";
+                    richTextBox1.Text += "取得程序ID : " + process.Id + "\n";
+                    process.CloseMainWindow();
+                }
+                */
+
+                //------------------------------  # 30個
+
+                //根據process id刪除程序, 就可以分開處理
+                Process process = Process.GetProcessById(int.Parse(listView1.SelectedItems[i].SubItems[0].Text));  // 根據[process id]取得process
+                richTextBox1.Text += "取得程序名 : " + process.ProcessName + "\n";
+                richTextBox1.Text += "取得程序ID : " + process.Id + "\n";
+                process.CloseMainWindow();
+
+                //------------------------------  # 30個
+
+                listView1.Items.RemoveAt(index);
+                richTextBox1.Text += "程序已關閉\n";
+            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -1205,7 +1259,7 @@ namespace vcs_Process1
                 }
             }
 
-            processes = Process.GetProcessesByName(program_name);//需要監控的程序名，該方法帶出該程序所有用到的進程
+            processes = Process.GetProcessesByName(program_name);//需要監控的程序名，該方法帶出該程序所有用到的進程  // 根據[process名稱]取得process
             foreach (Process process in processes)
             {
                 //richTextBox2.Text += process.ProcessName + "\r\n";
@@ -1230,6 +1284,7 @@ namespace vcs_Process1
             flag_EnableRaisingEvents = false;
             flag_program_running = false;
         }
+
         //監控外部程序運行狀態 SP
     }
 
@@ -1264,8 +1319,7 @@ namespace vcs_Process1
                 }
             }
 
-            return ThreeNonZeroDigits(value / Math.Pow(1024, suffixes.Length - 1)) +
-                " " + suffixes[suffixes.Length - 1];
+            return ThreeNonZeroDigits(value / Math.Pow(1024, suffixes.Length - 1)) + " " + suffixes[suffixes.Length - 1];
         }
 
         // Return the value formatted to include at most three
@@ -1311,52 +1365,10 @@ namespace vcs_Process1
 
 
 /*
-        //獲取窗體的進程標識ID
-        public static int GetPid(string windowTitle)
-        {
-            int rs = 0;
-            Process[] arrayProcess = Process.GetProcesses();  // 取得所有程序
-            foreach (Process p in arrayProcess)
-            {
-                if (p.MainWindowTitle.IndexOf(windowTitle) != -1)
-                {
-                    rs = p.Id;
-                    break;
-                }
-            }
-            return rs;
-        }
-
-//------------------------------------------------------------  # 60個
-
-        //根據進程名獲取PID
-        public static int GetPidByProcessName(string processName, ref IntPtr baseAddress)
-        {
-            Process[] arrayProcess = Process.GetProcessesByName(processName);
-            foreach (Process p in arrayProcess)
-            {
-                baseAddress = p.MainModule.BaseAddress;
-                return p.Id;
-            }
-            return 0;
-        }
-
-        //根據進程名獲取PID
-        public static int GetPidByProcessName(string processName)
-        {
-            Process[] arrayProcess = Process.GetProcessesByName(processName);
-            foreach (Process p in arrayProcess)
-            {
-                return p.Id;
-            }
-            return 0;
-        }
-
-//------------------------------------------------------------  # 60個
 
 C#調用默認浏覽器打開網頁的幾種方法
 
-方法一：從注冊表中讀取默認浏覽器可執行文件路徑
+方法一 : 從注冊表中讀取默認浏覽器可執行文件路徑
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -1364,24 +1376,24 @@ C#調用默認浏覽器打開網頁的幾種方法
             RegistryKey key = Registry.ClassesRoot.OpenSubKey(@httpshellopencommand);
             string s = key.GetValue().ToString();
 
-            //s就是你的默認浏覽器，不過後面帶了參數，把它截去，不過需要注意的是：不同的浏覽器後面的參數不一樣！
+            //s就是你的默認浏覽器，不過後面帶了參數，把它截去，不過需要注意的是 : 不同的浏覽器後面的參數不一樣！
             //D:Program Files (x86)GoogleChromeApplicationchrome.exe -- %1
             Process.Start(s.Substring(0, s.Length - 8), http://blog.csdn.net/testcs_dn);
         }
-方法二：
+方法二 :
         private void button2_Click(object sender, EventArgs e)
         {
             //調用系統默認的浏覽器 
             Process.Start(explorer.exe, http://blog.csdn.net/testcs_dn);
         }
-方法三：
+方法三 :
         private void button3_Click(object sender, EventArgs e)
         {
             //調用系統默認的浏覽器 
             Process.Start(http://blog.csdn.net/testcs_dn);
         }
 
-方法四：調用IE浏覽器
+方法四 : 調用IE浏覽器
 
 從原理上來講，方法二和方法三應該是一樣的，不過方法三的代碼更短一點。 
 
