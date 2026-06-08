@@ -25,7 +25,6 @@ using System.Windows.Forms;
 */
 
 using vcs_Class6XXX;    //Class1.cs之namespace不一樣, 要引用
-
 using CatTest;          //Cat.cs之namespace不一樣, 要引用
 using AnimalSpace;      //animal.cs cats.cs human.cs之namespace不一樣, 要引用
 
@@ -108,29 +107,6 @@ namespace vcs_Class1
             }
         }
 
-        //建立 Animal 類別
-        public class Animal
-        {
-            public int number;
-            public string type;
-            public string name;
-            public string recorder;
-            //A class被實例化時，會立即執行建構子內容，並且可以傳入參數
-            public string Show
-            {
-                // 可以透過 get 存取子，將字串進行判斷、處理.... 再返回結果
-                get { return name; }
-
-                // set含有特殊的keyword: value, 當有值傳入時，都會存入value中
-                set
-                {
-                    name = type;
-                    recorder = value;
-                    //Console.WriteLine("I am " + value);
-                }
-            }
-        }
-
         public class Product
         {
             public string Name;
@@ -163,35 +139,35 @@ namespace vcs_Class1
 
         void show_item_location()
         {
-            int w;
-            int h;
+            int W;
+            int H;
 
             //小的groupBox
-            w = 180;
-            h = 150;
-            groupBox2.Size = new Size(w, h);
-            groupBox3.Size = new Size(w, h);
-            groupBox1.Size = new Size(w, h);
-            groupBox5.Size = new Size(w, h);
-            groupBox6.Size = new Size(w, h);
-            groupBox8.Size = new Size(w, h);
-            groupBox10.Size = new Size(w, h);
-            groupBox11.Size = new Size(w, h);
-            groupBox12.Size = new Size(w, h);
-            groupBox13.Size = new Size(w, h);
+            W = 200;
+            H = 180;
+            groupBox2.Size = new Size(W, H);
+            groupBox3.Size = new Size(W, H);
+            groupBox1.Size = new Size(W, H);
+            groupBox5.Size = new Size(W, H);
+            groupBox6.Size = new Size(W, H);
+            groupBox8.Size = new Size(W, H);
+            groupBox10.Size = new Size(W, H);
+            groupBox11.Size = new Size(W, H);
+            groupBox12.Size = new Size(W, H);
+            groupBox13.Size = new Size(W, H);
 
             //大的groupBox
-            w = 180;
-            h = 250;
-            groupBox4.Size = new Size(w, h);
-            groupBox7.Size = new Size(w, h);
-            groupBox9.Size = new Size(w, h);
-            groupBox14.Size = new Size(w * 2, h);
+            W = 200;
+            H = 300;
+            groupBox4.Size = new Size(W, H);
+            groupBox7.Size = new Size(W, H);
+            groupBox9.Size = new Size(W, H);
+            groupBox14.Size = new Size(W * 2 + 10, H);
 
             int x_st = 10;
             int y_st = 10;
-            int dx = w + 10;
-            int dy = 150 + 10;
+            int dx = W + 10;
+            int dy = 180 + 10;
             groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox3.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
@@ -207,10 +183,14 @@ namespace vcs_Class1
             groupBox9.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             groupBox14.Location = new Point(x_st + dx * 3, y_st + dy * 2);
 
-            x_st = 15;
-            y_st = 15;
-            dx = 150;
-            dy = 50;
+            richTextBox1.Size = new Size(400, 690);
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            x_st = 10;
+            y_st = 20;
+            dx = 200 + 10;
+            dy = 60 + 10;
 
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -257,8 +237,8 @@ namespace vcs_Class1
             button23.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button24.Location = new Point(x_st + dx * 0, y_st + dy * 3);
 
-            int W = 305 / 3;
-            int H = 400 / 3;
+            W = 305 / 3;
+            H = 400 / 3;
             pictureBox0.Size = new Size(W, H);
             pictureBox1.Size = new Size(W, H);
             pictureBox2.Size = new Size(W, H);
@@ -266,11 +246,7 @@ namespace vcs_Class1
             pictureBox1.Location = new Point(x_st + dx * 0 + 70, y_st + dy * 0 + 40 + 10);
             pictureBox2.Location = new Point(x_st + dx * 0 + 140, y_st + dy * 0 + 80 + 10);
 
-            richTextBox1.Size = new Size(300, 690);
-            richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-            this.Size = new Size(1700, 750);
+            this.Size = new Size(1490, 750);
             this.Text = "vcs_Class1";
 
             //設定執行後的表單起始位置, 正中央
@@ -284,6 +260,29 @@ namespace vcs_Class1
         }
 
         //------------------------------------------------------------  # 60個
+
+        //建立 Animal 類別
+        public class Animal
+        {
+            public int number;
+            public string type;
+            public string name;
+            public string recorder;
+            //A class被實例化時，會立即執行建構子內容，並且可以傳入參數
+            public string Show
+            {
+                // 可以透過 get 存取子，將字串進行判斷、處理.... 再返回結果
+                get { return name; }
+
+                // set含有特殊的keyword: value, 當有值傳入時，都會存入value中
+                set
+                {
+                    name = type;
+                    recorder = value;
+                    //Console.WriteLine("I am " + value);
+                }
+            }
+        }
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -320,6 +319,8 @@ namespace vcs_Class1
         {
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         //Sale範例 ST
         List<Sale> SaleList = new List<Sale> { };    //銷售列表
@@ -375,6 +376,10 @@ namespace vcs_Class1
         }
         //Sale範例 SP
 
+        //------------------------------------------------------------  # 60個
+
+        //Person2 在另檔
+
         private void button10_Click(object sender, EventArgs e)
         {
             Person2 p1 = new Person2();
@@ -400,6 +405,13 @@ namespace vcs_Class1
             //p1.ADDR = "123"; ADDR不可寫，因此此行會顯示readonly無法編譯
         }
 
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //------------------------------------------------------------  # 60個
+
         //PersonData範例 ST
         private void button1_Click(object sender, EventArgs e)
         {
@@ -414,80 +426,55 @@ namespace vcs_Class1
             //Date date = new Date(d, m, y);
 
             richTextBox1.Text += date.show() + "\n";
-        }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
             string name = "david";
             int age = 18;
-
             char gender = '男';
-
-            int y = 2002;
-            int m = 3;
-            int d = 11;
-
-            Date date = new Date(d, m, y);
 
             Person p = new Person(name, age, gender, date);
 
             richTextBox1.Text += p.show() + "\n";
             richTextBox1.Text += "共有" + Person.counter() + "人\n";
-        }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            string name = "david";
-            int age = 18;
-
-            char gender = '男';
-
-            int y = 2003;
-            int m = 3;
-            int d = 11;
-
-            Date date = new Date(d, m, y);
+            //------------------------------  # 30個
 
             int c = 95;
             int ma = 87;
 
             Student s = new Student(name, age, gender, date, c, ma);
-
             richTextBox1.Text += s.show() + "\n";
 
-            String str = "共" + Person.counter() + "人, 學生: " + Student.counter() + "人\r\n";
-
+            String str = "共" + Person.counter() + "人, 學生: " + Student.counter() + "人\n";
             richTextBox1.Text += str + "\n";
 
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            string name = "john";
-            int age = 30;
-
-            char gender = '男';
-
-            int y = 1995;
-            int m = 5;
-            int d = 20;
-
-            Date date = new Date(d, m, y);
+            //------------------------------  # 30個
 
             string r = "senior";
 
             Teacher t = new Teacher(name, age, gender, date, r);
 
-            String str = "共" + Person.counter() + "人, 學生: " +
-                            Student.counter() + "人, 老師: " +
-                            Teacher.counter() + "人\r\n";
+            str = "共" + Person.counter() + "人, 學生: " + Student.counter() + "人, 老師: " + Teacher.counter() + "人\n";
 
             richTextBox1.Text += str + "\n";
             richTextBox1.Text += t.show() + "\n";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
 
         }
         //PersonData範例 SP
+
+        //------------------------------------------------------------  # 60個
 
         //圖形範例 ST
         private void button12_Click(object sender, EventArgs e)
@@ -506,6 +493,8 @@ namespace vcs_Class1
         }
 
         //圖形範例 SP
+
+        //------------------------------------------------------------  # 60個
 
         //MyTime範例 ST
         private void button14_Click(object sender, EventArgs e)
@@ -554,8 +543,6 @@ namespace vcs_Class1
             }
 
             //System.GC.Collect();
-
-
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -565,23 +552,46 @@ namespace vcs_Class1
 
         //MyTime範例 SP
 
+        //------------------------------------------------------------  # 60個
 
         //Student範例 ST
+
+        public class Student0    //將預設的class Class1 改成 class Student定義Student類別  
+        {
+            public string Name;       //Name姓名欄位
+            public int Score;         //Score成績欄位, 此時的Score無限制
+
+            public void ShowMsg()     //ShowMsg顯示姓名與成績的方法
+            {
+                MessageBox.Show(Name + "同學的分數是 " + Convert.ToString(Score));
+            }
+
+            public string GetMsg()   //GetMsg傳回姓名與成績的方法
+            {
+                return Name + "同學的分數是 " + Convert.ToString(Score);
+            }
+        }
+
         private void button15_Click(object sender, EventArgs e)
         {
             //類別範例
-            Student0 Jasper = new Student0();   //建立Jasper屬於Student類別的物件
+
+            Student0 Jasper = new Student0();  // 建立類別物件
             Jasper.Name = "賈思伯";             //設定Jasper物件的學生姓名
             Jasper.Score = 98;                  //設定Jasper物件的學生成績
-            //Jasper.ShowMsg();                   //呼叫ShowMsg()方法顯示學生姓名和分數
+
+            //Jasper.ShowMsg();  // 呼叫類別內的方法
             richTextBox1.Text += Jasper.GetMsg() + "\n";
 
-            Student0 Anita = new Student0();
+            Student0 Anita = new Student0();  // 建立類別物件
             Anita.Name = "愛妮達";
             Anita.Score = 85;
-            //Anita.ShowMsg();
+
+            //Anita.ShowMsg();  // 呼叫類別內的方法
             richTextBox1.Text += Anita.GetMsg() + "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button16_Click(object sender, EventArgs e)
         {
@@ -604,14 +614,14 @@ namespace vcs_Class1
 
             //呼叫StudentA類別的GetTotalStudent靜態方法取得目前有多少位學生
             richTextBox1.Text += StudentA.GetTotalStudent() + "\n";
-
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button17_Click(object sender, EventArgs e)
         {
             //物件檢查參數
-            //物件檢查參數
+
             //給錯誤參數, 讓系統自動訂正
             StudentA Jasper = new StudentA();
             Jasper.Name = "賈思伯";
@@ -621,17 +631,15 @@ namespace vcs_Class1
             Anita.Name = "愛妮達";
             Anita.Score = -100;
             Anita.ShowMsg();
-
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
             //使用靜態成員
-            //使用靜態成員
+
             StudentA Aaita = new StudentA("愛妮達", 100);
             StudentA Jasper = new StudentA("賈思伯", 56);
             StudentA Aliya = new StudentA("愛麗雅", 99);
-
 
             richTextBox1.Text += Aaita.GetMsg() + "\n";
             richTextBox1.Text += Jasper.GetMsg() + "\n";
@@ -642,6 +650,8 @@ namespace vcs_Class1
             richTextBox1.Text += StudentA.GetTotalStudent() + "\n";
         }
         //Student範例 SP
+
+        //------------------------------------------------------------  # 60個
 
         //繼承範例 ST
         private void button19_Click(object sender, EventArgs e)
@@ -658,8 +668,6 @@ namespace vcs_Class1
             Aliya.Bonus = 20000;    //Manager子類別新增的Bonus屬性
             //Manager子類別新增的GetTotal()方法
             richTextBox1.Text += Aliya.GetTotal() + "\n";
-
-
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -671,38 +679,26 @@ namespace vcs_Class1
         }
         //繼承範例 SP
 
-        //Stack範例 ST
-        MyStack stack;
+        //------------------------------------------------------------  # 60個
+
         private void button21_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "初始化20個stack\n";
-            stack = new MyStack(20);
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
-            //push
-            stack.Push(1);
-            stack.Push(3);
-            stack.Push(5);
-            stack.Push(7);
-            stack.Push(9);
-            stack.Push(11);
-            richTextBox1.Text += "Push 6 個stack : 1 3 5 7 9 11\n";
         }
 
         private void button23_Click(object sender, EventArgs e)
         {
-            //pop
-            int pop = stack.Pop();
-            richTextBox1.Text += "Pop 1 個stack : " + pop.ToString() + "\n";
         }
 
         private void button24_Click(object sender, EventArgs e)
         {
 
         }
-        //Stack範例 SP
+
+        //------------------------------------------------------------  # 60個
 
         //寵物範例 ST
         private void button25_Click(object sender, EventArgs e)
@@ -767,6 +763,8 @@ namespace vcs_Class1
         }
 
         //寵物範例 SP
+
+        //------------------------------------------------------------  # 60個
 
         private void button27_Click(object sender, EventArgs e)
         {
@@ -840,6 +838,8 @@ namespace vcs_Class1
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button29_Click(object sender, EventArgs e)
         {
             //從Class內印出資料
@@ -867,8 +867,9 @@ namespace vcs_Class1
             //解構子
             richTextBox1.Text += "銷毀\n";
             GC.Collect();       // Force garbage collection.
-
         }
+
+        //------------------------------------------------------------  # 60個
 
         void test_picture_class()
         {
@@ -885,6 +886,8 @@ namespace vcs_Class1
             c2g.Draw();
             pictureBox2.Image = c2g.bitmap3;
         }
+
+        //------------------------------------------------------------  # 60個
 
         //創建一個簡單的類來表示產品，產品有ID,類別，和價格
         public sealed class Product2
@@ -946,6 +949,7 @@ namespace vcs_Class1
         {
 
         }
+
     }
 }
 

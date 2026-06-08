@@ -24,6 +24,8 @@ namespace vcs_Class2
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             showCounter();
         }
 
@@ -34,7 +36,6 @@ namespace vcs_Class2
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -66,12 +67,21 @@ namespace vcs_Class2
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            groupBox1.Size = new Size(200, 340);
+            groupBox1.Size = new Size(200, 450);
             groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
             richTextBox1.Size = new Size(400, 690);
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            x_st = 10;
+            y_st = 100;
+            lb_count.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 80);
+            bt_class00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_class01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_class02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_class03.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            bt_class04.Location = new Point(x_st + dx * 0, y_st + dy * 4);
 
             this.Size = new Size(1300, 750);
             this.Text = "vcs_Class2";
@@ -106,17 +116,17 @@ namespace vcs_Class2
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //使用類別的靜態方法
+            //使用[類別的靜態方法], 外人可以直接使用
             string name = "david";
             uint math = 90;
-            uint eng = 82;
-            uint chin = 85;
+            uint eng = 80;
+            uint chin = 70;
 
             //直接以類別來呼叫靜態方法Total()、Average()
             uint score = StudentScore.Total(math, eng, chin);
             float avg = StudentScore.Average("平均分數", score);
 
-            Console.WriteLine(name = " " + "總分 : " + score + "\t平均 : " + avg);
+            richTextBox1.Text += "姓名 : " + name + "\t總分 : " + score + "\t平均 : " + avg + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -126,19 +136,19 @@ namespace vcs_Class2
             //class test
             Car1 Benz1 = new Car1();
             Benz1.SetSpeed(500);			// 速度值超過 200
-            richTextBox1.Text += "Benz1.GetSpeed() = {0}" + Benz1.GetSpeed() + "\n";	// 顯示速度最大值200
+            richTextBox1.Text += "Benz1.GetSpeed() = " + Benz1.GetSpeed() + "\n";	// 顯示速度最大值200
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
             Car2 Benz2 = new Car2();
             Benz2.Speed = 199;
-            richTextBox1.Text += "現在速度:{0}" + Benz2.Speed + "\n";
-            richTextBox1.Text += "加速 ..." + "\n";
+            richTextBox1.Text += "現在速度 : " + Benz2.Speed + "\n";
+            richTextBox1.Text += "加速 ...\n";
             Benz2.Accelerate();
-            richTextBox1.Text += "現在速度:{0}" + Benz2.Speed + "\n";
-            richTextBox1.Text += "加速 ..." + "\n";
+            richTextBox1.Text += "現在速度 : " + Benz2.Speed + "\n";
+            richTextBox1.Text += "加速 ...\n";
             Benz2.Accelerate();
-            richTextBox1.Text += "現在速度:{0}" + Benz2.Speed + "\n";
+            richTextBox1.Text += "現在速度 : " + Benz2.Speed + "\n";
 
             richTextBox1.Text += "------------------------------\n";  // 30個
 
@@ -184,8 +194,7 @@ namespace vcs_Class2
             //class book
             Book eng = new Book();
             eng.books = 10;
-            richTextBox1.Text += "目前英文類書籍共有{0}本" + eng.books + "\n";
-
+            richTextBox1.Text += "目前英文類書籍共有 : " + eng.books + " 本\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -214,23 +223,20 @@ namespace vcs_Class2
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //class
-
             PersonClass pern = new PersonClass() { Name = "王小風", Height = 176 };
 
             richTextBox1.Text += "By Value -> \n";
             //Passing By Value - 輸出王小風
             pern.showInfo(pern);
 
-            richTextBox1.Text += pern.Name + "\t" + pern.Height + "\n";
-            //Console.WriteLine($"{pern.Name}, " +               $"您的身高 {pern.Height}cm");
+            richTextBox1.Text += "姓名 : " + pern.Name + "\t身高 : " + pern.Height + "\n";
+
             richTextBox1.Text += "By Reference -> \n";
             //Passing By Reference - 輸出江大海
             pern.display(ref pern);
 
             richTextBox1.Text += pern.Name + "\t" + pern.Height + "\n";
-            //Console.WriteLine($"{pern.Name}, " +               $"您的身高 {pern.Height}cm");
-            //Console.ReadKey();
+            richTextBox1.Text += "姓名 : " + pern.Name + "\t身高 : " + pern.Height + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -246,7 +252,6 @@ namespace vcs_Class2
             foreach (int i in Choices)
             {
                 richTextBox1.Text += i.ToString() + " ";
-
             }
             richTextBox1.Text += "\n";
         }
@@ -344,8 +349,6 @@ namespace vcs_Class2
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //test class
-
             //string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             //Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
 
@@ -353,23 +356,22 @@ namespace vcs_Class2
             //Benz.ImageProcessing(100, 200);
 
             MyImage Benz = new MyImage();
-            Console.WriteLine("現在速度:{0}", Benz.Speed);
 
-            Console.WriteLine("加速 ...");
+            richTextBox1.Text += "現在速度 : " + Benz.Speed + "\n";
+
+            richTextBox1.Text += "加速 ...\n";
             Benz.Accelerate();		// 執行第一種加速方法
-            Console.WriteLine("現在速度:{0}", Benz.Speed);
-            Console.WriteLine("加速 10 ...");
+            richTextBox1.Text += "現在速度 : " + Benz.Speed + "\n";
+            richTextBox1.Text += "加速 10 ...\n";
             Benz.Accelerate(10);		// 執行第二種加速方法
-            Console.WriteLine("現在速度:{0}", Benz.Speed);
-            Console.WriteLine("停車 ...");
+            richTextBox1.Text += "現在速度 : " + Benz.Speed + "\n";
+            richTextBox1.Text += "停車 ...\n";
             Benz.Accelerate("STOP");	// 執行第三種加速方法
-            Console.WriteLine("現在速度:{0}", Benz.Speed);
-            Console.Read();
+            richTextBox1.Text += "現在速度 : " + Benz.Speed + "\n";
 
             //MyImage Benz = new MyImage();
             Benz.Speed = 500;			// 速度值超過 200
-            Console.WriteLine("Benz.Speed = {0}", Benz.Speed);
-            Console.Read();
+            richTextBox1.Text += "Benz.Speed = " + Benz.Speed + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -656,8 +658,8 @@ namespace vcs_Class2
 
         private void showCounter()
         {
-            lb_count.Text = "目前共有 " + Person.counter() + " 人, ";
-            lb_count.Text += "老師 " + Teacher.counter() + " 人, ";
+            lb_count.Text = "目前共有 " + Person.counter() + " 人\n";
+            lb_count.Text += "老師 " + Teacher.counter() + " 人\n";
             lb_count.Text += "學生 " + Student.counter() + " 人";
 
             richTextBox1.Text += "目前共有 " + Person.counter() + " 人, ";
@@ -1003,7 +1005,4 @@ namespace vcs_Class2
         }
 
 */
-
-
-
 

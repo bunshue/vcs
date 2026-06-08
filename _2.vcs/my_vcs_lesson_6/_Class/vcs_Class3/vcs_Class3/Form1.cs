@@ -33,7 +33,6 @@ namespace vcs_Class3
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -44,7 +43,6 @@ namespace vcs_Class3
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -197,7 +195,6 @@ namespace vcs_Class3
             //List<People> allPeople = new List<People>();
             //List<People> allPeople = new List<People>();
 
-
             /*
             List<People> allPeople = new List<People>()
             {
@@ -244,7 +241,9 @@ namespace vcs_Class3
         理解多態。
         首先，我們先來看下怎樣用虛方法實現多態
 
-        我們都知道，喜鵲（Magpie）、老鷹（Eagle）、企鵝（Penguin）都是屬於鳥類，我們可以根據這三者的共有特性提取出鳥類（Bird）做為父類，喜鵲喜歡吃蟲子，老鷹喜歡吃肉，企鵝喜歡吃魚。
+        我們都知道，喜鵲（Magpie）、老鷹（Eagle）、企鵝（Penguin）都是屬於鳥類，
+        我們可以根據這三者的共有特性提取出鳥類（Bird）做為父類，
+        喜鵲喜歡吃蟲子，老鷹喜歡吃肉，企鵝喜歡吃魚。
         */
 
         //創建基類Bird如下，添加一個虛方法Eat():
@@ -452,7 +451,6 @@ namespace vcs_Class3
             {
                 this.timer6.Enabled = true;
             }
-
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -555,6 +553,8 @@ namespace vcs_Class3
         }
     }
 
+    //------------------------------------------------------------  # 60個
+
     public class TimerAlarm
     {
         private int clockTime = 0;
@@ -624,6 +624,8 @@ namespace vcs_Class3
             timerClock.Enabled = false;
         }
     }
+
+    //------------------------------------------------------------  # 60個
 
     public class FormatConvert
     {
@@ -698,7 +700,6 @@ namespace vcs_Class3
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 //------------------------------------------------------------  # 60個
-//------------------------------------------------------------
 
 //3030
 //richTextBox1.Text += "------------------------------\n";  // 30個

@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Reflection;    //for PropertyInfo
-using System.Runtime.InteropServices;   //for dll
+using System.Reflection;  // for PropertyInfo
+using System.Runtime.InteropServices;  // for dll
 
 namespace vcs_ColorMap
 {
@@ -30,6 +30,8 @@ namespace vcs_ColorMap
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            //------------------------------------------------------------  # 60個
 
             //設定 comboBox1
             comboBox1.DrawItem += new DrawItemEventHandler(comboBox1_DrawItem);
@@ -85,8 +87,8 @@ namespace vcs_ColorMap
             //button
             x_st = 10;
             y_st = 80;
-            dx = 200+5;
-            dy = 60+5;
+            dx = 200 + 5;
+            dy = 60 + 5;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -123,7 +125,7 @@ namespace vcs_ColorMap
             pictureBox1.Size = new Size(W, H);
 
             richTextBox1.Size = new Size(400, 320);
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 11+26);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 11 + 26);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //最大化螢幕
@@ -169,6 +171,8 @@ namespace vcs_ColorMap
             richTextBox1.Clear();
             pictureBox1.Image = null;
         }
+
+        //------------------------------------------------------------  # 60個
 
         void drawBox(int i, int j, int w, int h, Color clr, string text)
         {
@@ -1767,4 +1771,16 @@ namespace vcs_ColorMap
         };
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
 

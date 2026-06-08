@@ -5,7 +5,6 @@ using System.Text;
 
 namespace vcs_Class1
 {
-
     class Circle
     {
         //protected int radius; // 子類別可以直接存取 
@@ -55,5 +54,4 @@ namespace vcs_Class1
             return 2 * ca + cl * length;
         }
     }
-
 }

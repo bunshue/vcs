@@ -7,22 +7,6 @@ using System.Windows.Forms;     //for MessageBox
 
 namespace vcs_Class1
 {
-    public class Student0    //將預設的class Class1 改成 class Student定義Student類別  
-    {
-        public string Name;       //Name姓名欄位
-        public int Score;         //Score成績欄位, 此時的Score無限制
-
-        public void ShowMsg()     //ShowMsg顯示姓名與成績的方法
-        {
-            MessageBox.Show(Name + "同學的分數是 " + Convert.ToString(Score));
-        }
-
-        public string GetMsg()   //GetMsg傳回姓名與成績的方法
-        {
-            return Name + "同學的分數是 " + Convert.ToString(Score);
-        }
-    }
-
     public class StudentA           //定義StudentA類別
     {
         public string Name;        //Name姓名欄位宣告為public

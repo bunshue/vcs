@@ -25,14 +25,14 @@ namespace vcs_Class7
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
-        private void showCounter()
-        {
-            lb_count.Text = ShapeManager.getCount().ToString();
-        }
-
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        private void showCounter()
+        {
+            lb_count.Text = ShapeManager.getCount().ToString();
         }
 
         //------------------------------------------------------------  # 60個

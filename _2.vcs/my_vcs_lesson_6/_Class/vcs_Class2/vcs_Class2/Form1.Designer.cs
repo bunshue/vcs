@@ -410,7 +410,7 @@
             this.groupBox1.Controls.Add(this.bt_class00);
             this.groupBox1.Location = new System.Drawing.Point(628, 10);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(198, 292);
+            this.groupBox1.Size = new System.Drawing.Size(200, 366);
             this.groupBox1.TabIndex = 156;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
@@ -418,9 +418,9 @@
             // bt_class04
             // 
             this.bt_class04.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_class04.Location = new System.Drawing.Point(22, 241);
+            this.bt_class04.Location = new System.Drawing.Point(14, 291);
             this.bt_class04.Name = "bt_class04";
-            this.bt_class04.Size = new System.Drawing.Size(152, 41);
+            this.bt_class04.Size = new System.Drawing.Size(180, 60);
             this.bt_class04.TabIndex = 19;
             this.bt_class04.Text = "匯入";
             this.bt_class04.UseVisualStyleBackColor = true;
@@ -429,9 +429,9 @@
             // bt_class03
             // 
             this.bt_class03.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_class03.Location = new System.Drawing.Point(22, 194);
+            this.bt_class03.Location = new System.Drawing.Point(14, 236);
             this.bt_class03.Name = "bt_class03";
-            this.bt_class03.Size = new System.Drawing.Size(152, 41);
+            this.bt_class03.Size = new System.Drawing.Size(180, 60);
             this.bt_class03.TabIndex = 18;
             this.bt_class03.Text = "儲存";
             this.bt_class03.UseVisualStyleBackColor = true;
@@ -450,9 +450,9 @@
             // bt_class02
             // 
             this.bt_class02.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_class02.Location = new System.Drawing.Point(22, 148);
+            this.bt_class02.Location = new System.Drawing.Point(14, 178);
             this.bt_class02.Name = "bt_class02";
-            this.bt_class02.Size = new System.Drawing.Size(152, 41);
+            this.bt_class02.Size = new System.Drawing.Size(180, 60);
             this.bt_class02.TabIndex = 16;
             this.bt_class02.Text = "info";
             this.bt_class02.UseVisualStyleBackColor = true;
@@ -461,9 +461,9 @@
             // bt_class01
             // 
             this.bt_class01.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_class01.Location = new System.Drawing.Point(22, 101);
+            this.bt_class01.Location = new System.Drawing.Point(14, 119);
             this.bt_class01.Name = "bt_class01";
-            this.bt_class01.Size = new System.Drawing.Size(152, 41);
+            this.bt_class01.Size = new System.Drawing.Size(180, 60);
             this.bt_class01.TabIndex = 15;
             this.bt_class01.Text = "新增學生資料";
             this.bt_class01.UseVisualStyleBackColor = true;
@@ -472,9 +472,9 @@
             // bt_class00
             // 
             this.bt_class00.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_class00.Location = new System.Drawing.Point(22, 54);
+            this.bt_class00.Location = new System.Drawing.Point(14, 63);
             this.bt_class00.Name = "bt_class00";
-            this.bt_class00.Size = new System.Drawing.Size(152, 41);
+            this.bt_class00.Size = new System.Drawing.Size(180, 60);
             this.bt_class00.TabIndex = 14;
             this.bt_class00.Text = "新增老師資料";
             this.bt_class00.UseVisualStyleBackColor = true;

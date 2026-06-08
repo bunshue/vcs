@@ -262,9 +262,4 @@ namespace vcs_Class1
             return str;
         }
     }
-
-
-
-
-
 }
