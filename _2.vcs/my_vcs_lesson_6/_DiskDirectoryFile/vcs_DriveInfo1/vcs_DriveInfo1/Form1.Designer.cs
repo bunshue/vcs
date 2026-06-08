@@ -52,7 +52,6 @@
             this.button18 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.bt_show_disk_info = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -170,7 +169,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(454, 231);
+            this.bt_clear.Location = new System.Drawing.Point(450, 155);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 69;
@@ -181,7 +180,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(439, 192);
+            this.richTextBox1.Location = new System.Drawing.Point(435, 116);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 68;
@@ -191,9 +190,9 @@
             // 
             this.comboBox_drive.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.comboBox_drive.FormattingEnabled = true;
-            this.comboBox_drive.Location = new System.Drawing.Point(439, 88);
+            this.comboBox_drive.Location = new System.Drawing.Point(435, 12);
             this.comboBox_drive.Name = "comboBox_drive";
-            this.comboBox_drive.Size = new System.Drawing.Size(264, 29);
+            this.comboBox_drive.Size = new System.Drawing.Size(200, 29);
             this.comboBox_drive.TabIndex = 70;
             this.comboBox_drive.SelectedIndexChanged += new System.EventHandler(this.comboBox_drive_SelectedIndexChanged);
             // 
@@ -204,7 +203,6 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(200, 60);
             this.button10.TabIndex = 71;
-            this.button10.Text = "DriveInfo";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -302,7 +300,7 @@
             // bt_show_disk_info
             // 
             this.bt_show_disk_info.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_show_disk_info.Location = new System.Drawing.Point(630, 23);
+            this.bt_show_disk_info.Location = new System.Drawing.Point(566, 46);
             this.bt_show_disk_info.Name = "bt_show_disk_info";
             this.bt_show_disk_info.Size = new System.Drawing.Size(69, 38);
             this.bt_show_disk_info.TabIndex = 83;
@@ -310,21 +308,11 @@
             this.bt_show_disk_info.UseVisualStyleBackColor = true;
             this.bt_show_disk_info.Click += new System.EventHandler(this.bt_show_disk_info_Click);
             // 
-            // comboBox1
-            // 
-            this.comboBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(501, 30);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(123, 27);
-            this.comboBox1.TabIndex = 82;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(435, 33);
+            this.label1.Location = new System.Drawing.Point(431, 56);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(66, 19);
             this.label1.TabIndex = 81;
@@ -333,7 +321,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(439, 312);
+            this.pictureBox1.Location = new System.Drawing.Point(435, 236);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.TabIndex = 84;
@@ -343,10 +331,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(802, 627);
+            this.ClientSize = new System.Drawing.Size(733, 627);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.bt_show_disk_info);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.button18);
@@ -406,7 +393,6 @@
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button bt_show_disk_info;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
     }

@@ -217,7 +217,7 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Text += "毫秒：" + dt.Millisecond.ToString() + "\n";
             richTextBox1.Text += "Ticks：" + dt.Ticks.ToString() + "\n";
             richTextBox1.Text += "TimeOfDay：" + dt.TimeOfDay.ToString() + "\n";
-            richTextBox1.Text += "日期 1:\t" + dt.Date.ToString() + "\n";//2005-11-5 0:00:00
+            richTextBox1.Text += "日期 1 : " + dt.Date.ToString() + "\n";//2005-11-5 0:00:00
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -273,58 +273,27 @@ namespace vcs_test_all_01_DateTime
 
             //string.Format 格式化日期
 
-            richTextBox1.Text += "日期 1:\t" + dt.CompareTo(dt).ToString() + "\n";//0
-            //richTextBox1.Text +="日期 1:\t"+ dt.Add(?).ToString()+"\n";//問號為一個時間段
-
-            richTextBox1.Text += "日期 1:\t" + dt.Equals("2005-11-6 16:11:04").ToString() + "\n";//False
-            richTextBox1.Text += "日期 1:\t" + dt.Equals(dt).ToString() + "\n";//True
-            richTextBox1.Text += "日期 1:\t" + dt.GetHashCode().ToString() + "\n";//1474088234
-            richTextBox1.Text += "日期 1:\t" + dt.GetType().ToString() + "\n";//DateTime
-            richTextBox1.Text += "日期 1:\t" + dt.GetTypeCode().ToString() + "\n";//DateTime
+            richTextBox1.Text += "日期 1 : " + dt.CompareTo(dt).ToString() + "\n";//0
+            //richTextBox1.Text +="日期 2 : "+ dt.Add(?).ToString()+"\n";//問號為一個時間段
+            richTextBox1.Text += "日期 3 : " + dt.Equals("2005-11-6 16:11:04").ToString() + "\n";//False
+            richTextBox1.Text += "日期 4 : " + dt.Equals(dt).ToString() + "\n";//True
+            richTextBox1.Text += "日期 5 : " + dt.GetHashCode().ToString() + "\n";//1474088234
+            richTextBox1.Text += "日期 6 : " + dt.GetType().ToString() + "\n";//DateTime
+            richTextBox1.Text += "日期 7 : " + dt.GetTypeCode().ToString() + "\n";//DateTime
 
             /*
-            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(s)[0].ToString() + "\n";//2005-11-05T14:06:25
-            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(t)[0].ToString() + "\n";//14:06
-            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(y)[0].ToString() + "\n";//2005年11月
-            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(D)[0].ToString() + "\n";//2005年11月5*
-            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(D)[1].ToString() + "\n";//2005 11 05
-            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(D)[2].ToString() + "\n";//星期六 2005 11 05
-            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(D)[3].ToString() + "\n";//星期六 2005年11月5*
-            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(M)[0].ToString() + "\n";//11月5*
-            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(f)[0].ToString() + "\n";//2005年11月5* 14:06
-            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(g)[0].ToString() + "\n";//2005-11-5 14:06
-            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(r)[0].ToString() + "\n";//Sat, 05 Nov 2005 14:06:25 GMT
+            richTextBox1.Text += "日期 01 : " + dt.GetDateTimeFormats(s)[0].ToString() + "\n";//2005-11-05T14:06:25
+            richTextBox1.Text += "日期 02 : " + dt.GetDateTimeFormats(t)[0].ToString() + "\n";//14:06
+            richTextBox1.Text += "日期 03 : " + dt.GetDateTimeFormats(y)[0].ToString() + "\n";//2005年11月
+            richTextBox1.Text += "日期 04 : " + dt.GetDateTimeFormats(D)[0].ToString() + "\n";//2005年11月5*
+            richTextBox1.Text += "日期 05 : " + dt.GetDateTimeFormats(D)[1].ToString() + "\n";//2005 11 05
+            richTextBox1.Text += "日期 06 : " + dt.GetDateTimeFormats(D)[2].ToString() + "\n";//星期六 2005 11 05
+            richTextBox1.Text += "日期 07 : " + dt.GetDateTimeFormats(D)[3].ToString() + "\n";//星期六 2005年11月5*
+            richTextBox1.Text += "日期 08 : " + dt.GetDateTimeFormats(M)[0].ToString() + "\n";//11月5*
+            richTextBox1.Text += "日期 09 : " + dt.GetDateTimeFormats(f)[0].ToString() + "\n";//2005年11月5* 14:06
+            richTextBox1.Text += "日期 10 : " + dt.GetDateTimeFormats(g)[0].ToString() + "\n";//2005-11-5 14:06
+            richTextBox1.Text += "日期 11 : " + dt.GetDateTimeFormats(r)[0].ToString() + "\n";//Sat, 05 Nov 2005 14:06:25 GMT
             */
-
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:d｝", dt) + "\n";//2005-11-5
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:D｝", dt) + "\n";//2005年11月5*
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:f｝", dt) + "\n";//2005年11月5* 14:23
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:F｝", dt) + "\n";//2005年11月5* 14:23:23
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:g｝", dt) + "\n";//2005-11-5 14:23
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:G｝", dt) + "\n";//2005-11-5 14:23:23
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:M｝", dt) + "\n";//11月5*
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:R｝", dt) + "\n";//Sat, 05 Nov 2005 14:23:23 GMT
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:s｝", dt) + "\n";//2005-11-05T14:23:23
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:t｝", dt) + "\n";//14:23
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:T｝", dt) + "\n";//14:23:23
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:u｝", dt) + "\n";//2005-11-05 14:23:23Z
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:U｝", dt) + "\n";//2005年11月5* 6:23:23
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:Y｝", dt) + "\n";//2005年11月
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0｝", dt) + "\n";//2005-11-5 14:23:23?
-            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:yyyyMMddHHmmssffff｝", dt) + "\n";
-            //yyyymm等可以設置,比如Label16.Text = string.Format("｛0:yyyyMMdd｝",dt)+"\n";
-            //綁定也適用:例:<%# string.Format("｛0:yyyy.MM.dd｝",eval_r("sj"))%>
-
-            //-------- same
-            richTextBox1.Text += dt.CompareTo(dt).ToString() + "\n";//0
-
-            //richTextBox1.Text += dt.Add(?).ToString() + "\n";//问号为一个时间段
-
-            richTextBox1.Text += dt.Equals("2005-11-6 16:11:04").ToString() + "\n";//False
-            richTextBox1.Text += dt.Equals(dt).ToString() + "\n";//True
-            richTextBox1.Text += dt.GetHashCode().ToString() + "\n";//1474088234
-            richTextBox1.Text += dt.GetType().ToString() + "\n";//DateTime
-            richTextBox1.Text += dt.GetTypeCode().ToString() + "\n";//DateTime
 
             richTextBox1.Text += dt.GetDateTimeFormats('s')[0].ToString() + "\n";//2005-11-05T14:06:25
             richTextBox1.Text += dt.GetDateTimeFormats('t')[0].ToString() + "\n";//14:06
@@ -338,35 +307,41 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Text += dt.GetDateTimeFormats('g')[0].ToString() + "\n";//2005-11-5 14:06
             richTextBox1.Text += dt.GetDateTimeFormats('r')[0].ToString() + "\n";//Sat, 05 Nov 2005 14:06:25 GMT
 
-            richTextBox1.Text += string.Format("{0:d}", dt) + "\n";//2005-11-5
-            richTextBox1.Text += string.Format("{0:D}", dt) + "\n";//2005年11月5日
-            richTextBox1.Text += string.Format("{0:f}", dt) + "\n";//2005年11月5日 14:23
-            richTextBox1.Text += string.Format("{0:F}", dt) + "\n";//2005年11月5日 14:23:23
-            richTextBox1.Text += string.Format("{0:g}", dt) + "\n";//2005-11-5 14:23
-            richTextBox1.Text += string.Format("{0:G}", dt) + "\n";//2005-11-5 14:23:23
-            richTextBox1.Text += string.Format("{0:M}", dt) + "\n";//11月5日
-            richTextBox1.Text += string.Format("{0:R}", dt) + "\n";//Sat, 05 Nov 2005 14:23:23 GMT
-            richTextBox1.Text += string.Format("{0:s}", dt) + "\n";//2005-11-05T14:23:23
-            richTextBox1.Text += string.Format("{0:t}", dt) + "\n";//14:23
-            richTextBox1.Text += string.Format("{0:T}", dt) + "\n";//14:23:23
-            richTextBox1.Text += string.Format("{0:u}", dt) + "\n";//2005-11-05 14:23:23Z
-            richTextBox1.Text += string.Format("{0:U}", dt) + "\n";//2005年11月5日 6:23:23
-            richTextBox1.Text += string.Format("{0:Y}", dt) + "\n";//2005年11月
-            richTextBox1.Text += string.Format("{0}", dt) + "\n";//2005-11-5 14:23:23
-            richTextBox1.Text += string.Format("{0:yyyyMMddHHmmssffff}", dt) + "\n";
-
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            richTextBox1.Text += "日期 01 : " + string.Format("{0:d}", dt) + "\n";//2005-11-5
+            richTextBox1.Text += "日期 02 : " + string.Format("{0:D}", dt) + "\n";//2005年11月5*
+            richTextBox1.Text += "日期 03 : " + string.Format("{0:f}", dt) + "\n";//2005年11月5* 14:23
+            richTextBox1.Text += "日期 04 : " + string.Format("{0:F}", dt) + "\n";//2005年11月5* 14:23:23
+            richTextBox1.Text += "日期 05 : " + string.Format("{0:g}", dt) + "\n";//2005-11-5 14:23
+            richTextBox1.Text += "日期 06 : " + string.Format("{0:G}", dt) + "\n";//2005-11-5 14:23:23
+            richTextBox1.Text += "日期 07 : " + string.Format("{0:M}", dt) + "\n";//11月5*
+            richTextBox1.Text += "日期 08 : " + string.Format("{0:R}", dt) + "\n";//Sat, 05 Nov 2005 14:23:23 GMT
+            richTextBox1.Text += "日期 09 : " + string.Format("{0:s}", dt) + "\n";//2005-11-05T14:23:23
+            richTextBox1.Text += "日期 10 : " + string.Format("{0:t}", dt) + "\n";//14:23
+            richTextBox1.Text += "日期 11 : " + string.Format("{0:T}", dt) + "\n";//14:23:23
+            richTextBox1.Text += "日期 12 : " + string.Format("{0:u}", dt) + "\n";//2005-11-05 14:23:23Z
+            richTextBox1.Text += "日期 13 : " + string.Format("{0:U}", dt) + "\n";//2005年11月5* 6:23:23
+            richTextBox1.Text += "日期 14 : " + string.Format("{0:Y}", dt) + "\n";//2005年11月
+            richTextBox1.Text += "日期 15 : " + string.Format("{0}", dt) + "\n";//2005-11-5 14:23:23?
+            richTextBox1.Text += "日期 16 : " + string.Format("{0:yyyyMMddHHmmssffff}", dt) + "\n";
+            //yyyymm等可以設置,比如Label16.Text = string.Format("{0:yyyyMMdd}",dt)+"\n";
+            //綁定也適用:例:<%# string.Format("{0:yyyy.MM.dd}",eval_r("sj"))%>
 
             //日期時間輸出
-            dt = DateTime.Now;
-            richTextBox1.Text += String.Format("{0:dddd, MMM d yyyy}", dt) + "\n";
-            richTextBox1.Text += String.Format("{0:HH:mm:ss}", dt) + "\n";
-            richTextBox1.Text += String.Format("{0:D}", dt) + "\n";
-            richTextBox1.Text += String.Format("{0:hh:mm:ss tt}", dt) + "\n";
-            richTextBox1.Text += String.Format("{0:T}", dt) + "\n";
-            richTextBox1.Text += String.Format("{0:h:m:s}", dt) + "\n";
+            richTextBox1.Text += string.Format("{0:dddd, MMM d yyyy}", dt) + "\n";
+            richTextBox1.Text += string.Format("{0:HH:mm:ss}", dt) + "\n";
+            richTextBox1.Text += string.Format("{0:hh:mm:ss tt}", dt) + "\n";
+            richTextBox1.Text += string.Format("{0:h:m:s}", dt) + "\n";
 
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            //-------- same
+            richTextBox1.Text += dt.CompareTo(dt).ToString() + "\n";//0
+
+            //richTextBox1.Text += dt.Add(?).ToString() + "\n";//问号为一个时间段
+
+            richTextBox1.Text += dt.Equals("2005-11-6 16:11:04").ToString() + "\n";//False
+            richTextBox1.Text += dt.Equals(dt).ToString() + "\n";//True
+            richTextBox1.Text += dt.GetHashCode().ToString() + "\n";//1474088234
+            richTextBox1.Text += dt.GetType().ToString() + "\n";//DateTime
+            richTextBox1.Text += dt.GetTypeCode().ToString() + "\n";//DateTime
 
         }
 
@@ -617,14 +592,14 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Text += "本月月底日期:" + ThisMonEndDay.Day.ToString() + "\n";
             richTextBox1.Text += "本月月底日期:" + DateTime.DaysInMonth(dt.Year, dt.Month).ToString() + "\n";
 
-            richTextBox1.Text += "日期 1:\t" + dt.AddYears(1).ToString() + "\n";//2006-11-5 13:47:04
-            richTextBox1.Text += "日期 1:\t" + dt.AddDays(1.1).ToString() + "\n";//2005-11-6 16:11:04
-            richTextBox1.Text += "日期 1:\t" + dt.AddHours(1.1).ToString() + "\n";//2005-11-5 14:53:04
-            richTextBox1.Text += "日期 1:\t" + dt.AddMilliseconds(1.1).ToString() + "\n";//2005-11-5 13:47:04
-            richTextBox1.Text += "日期 1:\t" + dt.AddMonths(1).ToString() + "\n";//2005-12-5 13:47:04
-            richTextBox1.Text += "日期 1:\t" + dt.AddSeconds(1.1).ToString() + "\n";//2005-11-5 13:47:05
-            richTextBox1.Text += "日期 1:\t" + dt.AddMinutes(1.1).ToString() + "\n";//2005-11-5 13:48:10
-            richTextBox1.Text += "日期 1:\t" + dt.AddTicks(1000).ToString() + "\n";//2005-11-5 13:47:04
+            richTextBox1.Text += "日期 1 : " + dt.AddYears(1).ToString() + "\n";//2006-11-5 13:47:04
+            richTextBox1.Text += "日期 2 : " + dt.AddDays(1.1).ToString() + "\n";//2005-11-6 16:11:04
+            richTextBox1.Text += "日期 3 : " + dt.AddHours(1.1).ToString() + "\n";//2005-11-5 14:53:04
+            richTextBox1.Text += "日期 4 : " + dt.AddMilliseconds(1.1).ToString() + "\n";//2005-11-5 13:47:04
+            richTextBox1.Text += "日期 5 : " + dt.AddMonths(1).ToString() + "\n";//2005-12-5 13:47:04
+            richTextBox1.Text += "日期 6 : " + dt.AddSeconds(1.1).ToString() + "\n";//2005-11-5 13:47:05
+            richTextBox1.Text += "日期 7 : " + dt.AddMinutes(1.1).ToString() + "\n";//2005-11-5 13:48:10
+            richTextBox1.Text += "日期 8 : " + dt.AddTicks(1000).ToString() + "\n";//2005-11-5 13:47:04
 
             //現在日期加天數寫法(本例為加5天):
             DateTime Add5Day = dt.AddDays(5);
@@ -1012,20 +987,20 @@ namespace vcs_test_all_01_DateTime
             IFormatProvider ifp = new CultureInfo("zh-TW", true);
             dt1 = DateTime.ParseExact(str1, "yyyyMMddHHmmss", ifp);
 
-            richTextBox1.Text += "原字串:\t" + str1 + "\n";
-            richTextBox1.Text += "解讀後:\t" + dt1.ToString() + "\n";
+            richTextBox1.Text += "原字串 : " + str1 + "\n";
+            richTextBox1.Text += "解讀後 : " + dt1.ToString() + "\n";
 
             string str2 = "20091014223600";
             dt = DateTime.Now;
-            richTextBox1.Text += "原字串:\t" + str2 + "\n";
+            richTextBox1.Text += "原字串 : " + str2 + "\n";
             //IFormatProvider ifp = new CultureInfo("zh-TW", true);
             if (DateTime.TryParseExact(str2, "yyyyMMddHHmmss", ifp, DateTimeStyles.None, out dt2) == true)
             {
-                richTextBox1.Text += "解讀後1:\t" + dt2.ToString() + "\n";
+                richTextBox1.Text += "解讀後1 : " + dt2.ToString() + "\n";
             }
             else
             {
-                richTextBox1.Text += "解讀後2:\t" + dt.ToString() + "\n";
+                richTextBox1.Text += "解讀後2 : " + dt.ToString() + "\n";
                 richTextBox1.Text += "取得DateTime失敗 2\n";
             }
 
@@ -1479,7 +1454,7 @@ namespace vcs_test_all_01_DateTime
 
             for (int weekday = 0; weekday < 7; weekday++)
             {
-                richTextBox1.Text += "英/中文星期名 :\t";
+                richTextBox1.Text += "英/中文星期名 : ";
                 richTextBox1.Text += ((DayOfWeek)weekday).ToString() + "\t";
                 richTextBox1.Text += CultureInfo.CurrentCulture.DateTimeFormat.GetDayName((DayOfWeek)weekday) + "\t";
                 richTextBox1.Text += CultureInfo.CurrentCulture.DateTimeFormat.DayNames[weekday] + "\n";

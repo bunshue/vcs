@@ -34,17 +34,10 @@ namespace vcs_DriveInfo1
 
             //------------------------------------------------------------  # 60個
 
-            // 找磁碟分割區
-            DriveInfo[] drives = DriveInfo.GetDrives();
+            DriveInfo[] drives = DriveInfo.GetDrives();  // 找磁碟分割區
             foreach (DriveInfo drive in drives)
             {
-                comboBox1.Items.Add(drive.ToString());
                 richTextBox1.Text += "抓到磁碟分割區 : " + drive.ToString() + "\n";
-            }
-
-            if (comboBox1.Items.Count > 0)
-            {
-                comboBox1.SelectedIndex = 0;
             }
         }
 
@@ -78,15 +71,14 @@ namespace vcs_DriveInfo1
 
             comboBox_drive.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
-            label1.Location = new Point(x_st + dx * 2, y_st + dy * 1-30);
-            comboBox1.Location = new Point(x_st + dx * 2 + 80, y_st + dy * 1 - 30);
-            bt_show_disk_info.Location = new Point(x_st + dx * 2 + 220, y_st + dy * 1 - 30);
+            label1.Location = new Point(x_st + dx * 2, y_st + dy * 1 - 30);
+            bt_show_disk_info.Location = new Point(x_st + dx * 2 + 130, y_st + dy * 1 - 30);
 
-            pictureBox1.Size = new Size(190, 190);
-            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 2-60);
+            pictureBox1.Size = new Size(300, 300);
+            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            richTextBox1.Size = new Size(550, 690 - 140-140);
+            richTextBox1.Size = new Size(550, 380);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 5 - 40);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1000, 750);
@@ -109,18 +101,11 @@ namespace vcs_DriveInfo1
             comboBox_drive.Items.Clear();
 
             //使用 DriveInfo 類別來顯示目前系統上所有磁片磁碟機的相關資訊
-            DriveInfo[] drives = DriveInfo.GetDrives();
-            foreach (DriveInfo d in drives)
+            DriveInfo[] drives = DriveInfo.GetDrives();  // 找磁碟分割區
+            foreach (DriveInfo drive in drives)
             {
-                comboBox_drive.Items.Add(d.Name);
+                comboBox_drive.Items.Add(drive.Name);
             }
-
-            /*  same
-            foreach (DriveInfo d in DriveInfo.GetDrives())
-            {
-                comboBox_drive.Items.Add(d.Name);
-            }
-            */
 
             /*   same
             if (comboBox_drive.Items.Count > 0)
@@ -171,10 +156,13 @@ namespace vcs_DriveInfo1
         {
             removeDrawDiskSpace();
 
+            int x_st = 430;
+            int y_st = 100;
+
             //產出panel, 畫硬碟使用空間占比圖
             Panel pnl = new Panel();
-            pnl.Left = this.ClientSize.Width - WIDTH - 10;
-            pnl.Top = 10;
+            pnl.Left = x_st;
+            pnl.Top = y_st;
             pnl.Width = WIDTH;
             pnl.Height = WIDTH;
             pnl.Tag = "show_disk_space";
@@ -376,7 +364,7 @@ namespace vcs_DriveInfo1
         {
             try
             {
-                string[] drives = System.IO.Directory.GetLogicalDrives();
+                string[] drives = Directory.GetLogicalDrives();
 
                 foreach (string str in drives)
                 {
@@ -384,7 +372,7 @@ namespace vcs_DriveInfo1
                     richTextBox1.Text += "drive : " + str + "\n";
                 }
             }
-            catch (System.IO.IOException)
+            catch (IOException)
             {
                 System.Console.WriteLine("An I/O error occurs.");
             }
@@ -416,20 +404,22 @@ namespace vcs_DriveInfo1
         public static long GetHardDiskTotalSize(int i)
         {
             long totalSize = new long();
-            System.IO.DriveInfo[] drives = System.IO.DriveInfo.GetDrives();
+            DriveInfo[] drives = DriveInfo.GetDrives();  // 找磁碟分割區
             if (drives[i].IsReady == true)
             {
                 totalSize = drives[i].TotalSize / (1024L * 1024 * 1024);
                 return totalSize;
             }
             else
+            {
                 return 0;
+            }
         }
 
         public static long GetHardDiskFreeSize(int i)
         {
             long freeSize = new long();
-            System.IO.DriveInfo[] drives = System.IO.DriveInfo.GetDrives();
+            DriveInfo[] drives = DriveInfo.GetDrives();  // 找磁碟分割區
             if (drives[i].IsReady == true)
             {
                 freeSize = drives[i].AvailableFreeSpace / (1024 * 1024 * 1024);
@@ -446,13 +436,13 @@ namespace vcs_DriveInfo1
         private void button6_Click(object sender, EventArgs e)
         {
             //取得磁碟資訊
-            //使用System.IO.DriveInfo來遍歷磁片及其分區資訊
-            //引用System.IO後即可調用DriveInfo類來對磁碟空間資訊進行遍歷了，此外DriveInfo只有在普通WINFORM中可以調用，WINCE專案中未封裝此類。
+            //使用DriveInfo來遍歷磁片及其分區資訊
+            //對磁碟空間資訊進行遍歷了，此外DriveInfo只有在普通WINFORM中可以調用，WINCE專案中未封裝此類。
             //獲取磁片設備
-            DriveInfo[] allDrives = DriveInfo.GetDrives();
-            richTextBox1.Text += "系統共有 " + allDrives.Length.ToString() + " 部磁碟機" + "\n";
+            DriveInfo[] drives = DriveInfo.GetDrives();  // 找磁碟分割區
+            richTextBox1.Text += "系統共有 " + drives.Length.ToString() + " 部磁碟機" + "\n";
             //遍歷磁片
-            foreach (DriveInfo drive in allDrives)
+            foreach (DriveInfo drive in drives)
             {
                 richTextBox1.Text += drive.Name + "        ";
             }
@@ -460,14 +450,20 @@ namespace vcs_DriveInfo1
             richTextBox1.Text += "\n";
 
             //取得單一磁碟資訊：
-            //System.IO.DriveInfo di = new System.IO.DriveInfo(@"C:\");
+            //DriveInfo drive = new DriveInfo(@"C:\");
+            //richTextBox1.Text += "TotalFreeSpace : " + drive.TotalFreeSpace.ToString() + "\n";
+            //richTextBox1.Text += "VolumeLabel : " + drive.VolumeLabel + "\n";
 
             //取得所有磁碟資訊：
-            foreach (DriveInfo drive in allDrives)
+            foreach (DriveInfo drive in drives)
             {
                 richTextBox1.Text += "磁碟分割號:  " + drive.Name + " 槽\n";
                 richTextBox1.Text += "RootDirectory:  " + drive.RootDirectory + "\n";
                 richTextBox1.Text += "DriveType:  " + drive.DriveType;
+
+                richTextBox1.Text += "磁碟名稱 : " + drive.Name + "\n";
+                richTextBox1.Text += "  磁碟類型 : " + drive.DriveType + "\n";
+
                 if (drive.IsReady == true)  //使用IsReady屬性判斷裝置是否就緒
                 {
                     richTextBox1.Text += "\n";
@@ -488,15 +484,22 @@ namespace vcs_DriveInfo1
             }
 
             String result = "";
-            foreach (DriveInfo di in DriveInfo.GetDrives())
+            //DriveInfo[]
+            drives = DriveInfo.GetDrives();  // 找磁碟分割區
+            foreach (DriveInfo drive in drives)
             {
                 //取得磁碟的資訊，並逐一列出
-                if (di.IsReady)
+                if (drive.IsReady)
+                {
                     //表示有東西，若不是可能是光碟、軟碟機
-                    result += String.Format("{0}\t{1}\t{2}\t{3}\r\n", di.Name, di.DriveType, di.TotalSize, di.TotalFreeSpace);
-                //印出資訊
+                    result += String.Format("{0}\t{1}\t{2}\t{3}\r\n", drive.Name, drive.DriveType, drive.TotalSize, drive.TotalFreeSpace);
+                    //印出資訊
+                }
                 else
-                    result += String.Format("{0}\t{1}\r\n", di.Name, di.DriveType);
+                {
+                    result += String.Format("{0}\t{1}\r\n", drive.Name, drive.DriveType);
+                    richTextBox1.Text += "磁碟 " + drive.ToString() + "未就緒" + "\n";
+                }
             }
             richTextBox1.Text += result + "\n";
         }
@@ -506,7 +509,7 @@ namespace vcs_DriveInfo1
         private void button7_Click(object sender, EventArgs e)
         {
             //找資料夾所在的硬碟的標籤
-            //找資料夾所在的硬碟的標籤
+
             string path = String.Empty;
 
             path = @"D:\_git\vcs\_1.data\______test_files1\_case1";
@@ -520,16 +523,16 @@ namespace vcs_DriveInfo1
             }
             else if (Directory.Exists(path))
             {
-                DirectoryInfo d = new DirectoryInfo(path);//輸入檔案夾
+                DirectoryInfo di = new DirectoryInfo(path);//輸入檔案夾
                 /*
                 // This path is a directory
-                richTextBox1.Text += "Name : " + d.Name + "\n";
-                richTextBox1.Text += "FullName : " + d.FullName + "\n";
-                richTextBox1.Text += "Parent : " + d.Parent + "\n";
-                richTextBox1.Text += "Root : " + d.Root + "\n";
+                richTextBox1.Text += "Name : " + di.Name + "\n";
+                richTextBox1.Text += "FullName : " + di.FullName + "\n";
+                richTextBox1.Text += "Parent : " + di.Parent + "\n";
+                richTextBox1.Text += "Root : " + di.Root + "\n";
                 */
 
-                DriveInfo drive = new DriveInfo(d.Root.ToString());
+                DriveInfo drive = new DriveInfo(di.Root.ToString());
 
                 if (drive.IsReady == true)
                 {
@@ -569,11 +572,16 @@ namespace vcs_DriveInfo1
         private void comboBox_drive_SelectedIndexChanged(object sender, EventArgs e)
         {
             richTextBox1.Text += "選中 : " + comboBox_drive.Text + "\n";
-            //richTextBox1.Clear();
+
             //DriveInfo drive = new DriveInfo(comboBox_drive.Text); //same
             DriveInfo drive = new DriveInfo(comboBox_drive.SelectedItem.ToString());
             if (drive.IsReady == true)
             {
+                richTextBox1.Text += "  檔案系統名稱 : " + drive.DriveFormat + "\n";
+                richTextBox1.Text += "  目前可用空間量: \t{0, 15} bytes" + drive.AvailableFreeSpace + "\n";
+                richTextBox1.Text += "  可用空間總量: \t{0, 15} bytes" + drive.TotalFreeSpace + "\n";
+                richTextBox1.Text += "  可儲存空間總量: \t{0, 15} bytes " + drive.TotalSize + "\n";
+
                 richTextBox1.Text += "磁碟 : " + drive.ToString() + "\n";
                 richTextBox1.Text += "名稱 : " + drive.Name + "\n";
                 richTextBox1.Text += "標籤 : " + drive.VolumeLabel + "\n";
@@ -598,24 +606,36 @@ namespace vcs_DriveInfo1
             string drive_letter = comboBox_drive.Text.Substring(0, 1);
             richTextBox1.Text += "drive_letter\t" + drive_letter + "\n";
 
-            DriveInfo di = new DriveInfo(drive_letter);
+            //DriveInfo
+            drive = new DriveInfo(drive_letter);
 
-            richTextBox1.Text += "IsReady\t" + di.IsReady + "\n";
-            richTextBox1.Text += "DriveType\t" + di.DriveType + "\n";
-            richTextBox1.Text += "Name\t" + di.Name + "\n";
-            richTextBox1.Text += "RootDirectory\t" + di.RootDirectory.Name + "\n";
+            richTextBox1.Text += "IsReady\t" + drive.IsReady + "\n";
+            richTextBox1.Text += "DriveType\t" + drive.DriveType + "\n";
+            richTextBox1.Text += "Name\t" + drive.Name + "\n";
+            richTextBox1.Text += "RootDirectory\t" + drive.RootDirectory.Name + "\n";
 
-            if (di.IsReady)
+            if (drive.IsReady)
             {
-                richTextBox1.Text += "DriveFormat\t" + di.DriveFormat + "\n";
-                richTextBox1.Text += "AvailableFreeSpace\t" + di.AvailableFreeSpace.ToString() + "\n";
-                richTextBox1.Text += "TotalFreeSize\t" + di.TotalFreeSpace.ToString() + "\n";
-                richTextBox1.Text += "TotalSize\t" + di.TotalSize.ToString() + "\n";
-                richTextBox1.Text += "VolumeLabel\t" + di.VolumeLabel + "\n";
+                richTextBox1.Text += "DriveFormat\t" + drive.DriveFormat + "\n";
+                richTextBox1.Text += "AvailableFreeSpace\t" + drive.AvailableFreeSpace.ToString() + "\n";
+                richTextBox1.Text += "TotalFreeSize\t" + drive.TotalFreeSpace.ToString() + "\n";
+                richTextBox1.Text += "TotalSize\t" + drive.TotalSize.ToString() + "\n";
+                richTextBox1.Text += "VolumeLabel\t" + drive.VolumeLabel + "\n";
+                richTextBox1.Text += "磁碟 : " + drive.ToString() + "\n";
+                richTextBox1.Text += "標籤 : " + drive.VolumeLabel + "\n";
+                richTextBox1.Text += "名稱 : " + drive.Name + "\n";
+                richTextBox1.Text += "可用空間 : " + drive.AvailableFreeSpace + "\n";
+                richTextBox1.Text += "可用大小 : " + drive.TotalSize + "\n";
+                richTextBox1.Text += "可用總空間 : " + drive.TotalFreeSpace + "\n";
+                richTextBox1.Text += "格式 : " + drive.DriveFormat + "\n";
+                richTextBox1.Text += "型態 : " + drive.DriveType + "\n";
+                richTextBox1.Text += "根目錄 : " + drive.RootDirectory + "\n";
+
             }
             else
             {
                 richTextBox1.Text += "磁碟未Ready\n";
+                richTextBox1.Text += "磁碟 " + drive.ToString() + "未就緒" + "\n";
             }
         }
 
@@ -632,51 +652,38 @@ namespace vcs_DriveInfo1
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //DriveInfo測試
-
-            DriveInfo[] allDrives = DriveInfo.GetDrives();
-
-            foreach (DriveInfo d in allDrives)
-            {
-                richTextBox1.Text += "磁碟名稱 : " + d.Name + "\n";
-                richTextBox1.Text += "  磁碟類型 : " + d.DriveType + "\n";
-                if (d.IsReady == true)
-                {
-                    richTextBox1.Text += "  檔案系統名稱 : " + d.DriveFormat + "\n";
-                    richTextBox1.Text += "  目前可用空間量: \t{0, 15} bytes" + d.AvailableFreeSpace + "\n";
-                    richTextBox1.Text += "  可用空間總量: \t{0, 15} bytes" + d.TotalFreeSpace + "\n";
-                    richTextBox1.Text += "  可儲存空間總量: \t{0, 15} bytes " + d.TotalSize + "\n";
-                }
-            }
         }
 
         //------------------------------------------------------------  # 60個
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //偵測磁碟裝置型態
+            //DriveInfo測試, 偵測磁碟裝置型態
 
-            DriveInfo[] allDrives = DriveInfo.GetDrives();
+            DriveInfo[] drives = DriveInfo.GetDrives();  // 找磁碟分割區
 
-            foreach (DriveInfo d in allDrives)
+            foreach (DriveInfo drive in drives)
             {
-                richTextBox1.Text += "Drive : " + d.Name + "\tFile type : " + d.DriveType + "\n";
-                if (d.DriveType == DriveType.Removable)
+                richTextBox1.Text += "Drive : " + drive.Name + "\tFile type : " + drive.DriveType + "\n";
+                if (drive.DriveType == DriveType.Removable)
                 {
-                    richTextBox1.Text += "Removable Device : " + d.Name + "\n";
+                    richTextBox1.Text += "Removable Device : " + drive.Name + "\n";
                 }
             }
 
+            //------------------------------------------------------------  # 60個
+
             //獲取計算機磁盤空間
-            //在System.IO命名空間下的DriveInfo類的GetDrives()方法可以用來獲得計算機上的所有邏輯驅動器的名稱。DriveInfo類的TotalSize屬性可義獲得磁盤的空間大小。
+            //DriveInfo類的GetDrives()方法可以用來獲得計算機上的所有邏輯驅動器的名稱。
+            //DriveInfo類的TotalSize屬性可義獲得磁盤的空間大小。
 
-            for (int i = 0; i < allDrives.Length; i++)
+            for (int i = 0; i < drives.Length; i++)
             {
-                richTextBox1.Text += "取得磁碟 : " + allDrives[i].Name;
+                richTextBox1.Text += "取得磁碟 : " + drives[i].Name;
 
-                if (allDrives[i].IsReady == true)
+                if (drives[i].IsReady == true)
                 {
-                    richTextBox1.Text += "\t空間 : " + Convert.ToString(allDrives[i].TotalSize / 1024 / 1024 / 1024) + "GB\n";
+                    richTextBox1.Text += "\t空間 : " + Convert.ToString(drives[i].TotalSize / 1024 / 1024 / 1024) + "GB\n";
                 }
                 else
                 {
@@ -731,64 +738,48 @@ namespace vcs_DriveInfo1
 
         private void bt_show_disk_info_Click(object sender, EventArgs e)
         {
-            draw_drive_info(comboBox1.Text);
+            draw_drive_info(comboBox_drive.Text);
         }
 
-        void draw_drive_info(string drive)
+        void draw_drive_info(string drive_name)
         {
-            richTextBox1.Text += drive + "\n";
-            Graphics g = this.pictureBox1.CreateGraphics();//创建Graphics绘图对象
+            richTextBox1.Text += drive_name + "\n";
+            Graphics g = this.pictureBox1.CreateGraphics();  // 创建Graphics绘图对象
             g.Clear(Color.White);
 
-            DriveInfo dinfo = new DriveInfo(drive);//实例化DriveInfo
-            if (dinfo.IsReady == true)
+            DriveInfo drive = new DriveInfo(drive_name);  // 实例化DriveInfo
+            if (drive.IsReady == true)
             {
-                float tsize = dinfo.TotalSize;//获得磁盘的总容量
-                float fsize = dinfo.TotalFreeSpace;//获取剩余容量
-                Pen pen1 = new Pen(Color.Red);//创建画笔对象
-                Brush brush1 = new SolidBrush(Color.WhiteSmoke);//创建笔刷
-                Brush brush2 = new SolidBrush(Color.LimeGreen);//创建笔刷
-                Brush brush3 = new SolidBrush(Color.RoyalBlue);//创建笔刷
-                Font font1 = new Font("Courier New", 16, FontStyle.Bold);//设置字体
-                Font font2 = new Font("標楷體", 9);//设置字体
-                g.DrawString("磁碟容量分析", font1, brush2, new Point(60, 50));//绘制文本
-                float angle1 = Convert.ToSingle((360 * (Convert.ToSingle(fsize / 100000000000) / Convert.ToSingle(tsize / 100000000000))));//计算绿色饼形图的范围
-                float angle2 = Convert.ToSingle((360 * (Convert.ToSingle((tsize - fsize) / 100000000000) / Convert.ToSingle(tsize / 100000000000))));//计算蓝色饼形图的范围
-                //调用Graphics对象的FillPie方法绘制饼形图
+                float tsize = drive.TotalSize;  // 获得磁盘的总容量
+                float fsize = drive.TotalFreeSpace;  // 获取剩余容量
+                Pen pen1 = new Pen(Color.Red);  // 创建画笔对象
+                Brush brush1 = new SolidBrush(Color.WhiteSmoke);  // 创建笔刷
+                Brush brush2 = new SolidBrush(Color.LimeGreen);  // 创建笔刷
+                Brush brush3 = new SolidBrush(Color.RoyalBlue);  // 创建笔刷
+                Font font1 = new Font("Courier New", 16, FontStyle.Bold);  // 设置字体
+                Font font2 = new Font("標楷體", 9);  // 设置字体
+                g.DrawString("磁碟容量分析", font1, brush2, new Point(60, 50));  // 绘制文本
+                float angle1 = Convert.ToSingle((360 * (Convert.ToSingle(fsize / 100000000000) / Convert.ToSingle(tsize / 100000000000))));  // 计算绿色饼形图的范围
+                float angle2 = Convert.ToSingle((360 * (Convert.ToSingle((tsize - fsize) / 100000000000) / Convert.ToSingle(tsize / 100000000000))));  // 计算蓝色饼形图的范围
+                // 调用Graphics对象的FillPie方法绘制饼形图
                 g.FillPie(brush2, 60, 80, 150, 150, 0, angle1);
                 g.FillPie(brush3, 60, 80, 150, 150, angle1, angle2);
                 g.DrawRectangle(pen1, 30, 235, 200, 50);
                 g.FillRectangle(brush2, 35, 245, 20, 10);
-                g.DrawString("磁碟剩餘容量:" + dinfo.TotalFreeSpace / 1000 + "KB", font2, brush2, 55, 245);
+                g.DrawString("磁碟剩餘容量:" + drive.TotalFreeSpace / 1000 + "KB", font2, brush2, 55, 245);
                 g.FillRectangle(brush3, 35, 265, 20, 10);
-                g.DrawString("磁碟已用容量:" + (dinfo.TotalSize - dinfo.TotalFreeSpace) / 1000 + "KB", font2, brush3, 55, 265);
+                g.DrawString("磁碟已用容量:" + (drive.TotalSize - drive.TotalFreeSpace) / 1000 + "KB", font2, brush3, 55, 265);
             }
             else
             {
-                richTextBox1.Text += "硬碟 : " + drive + " 未Ready\n";
-                g.DrawString("硬碟 : " + drive + " 未Ready", new Font("標楷體", 24), new SolidBrush(Color.Blue), new PointF(10, 60));
+                richTextBox1.Text += "硬碟 : " + drive_name + " 未Ready\n";
+                g.DrawString("硬碟 : " + drive_name + " 未Ready", new Font("標楷體", 24), new SolidBrush(Color.Blue), new PointF(10, 60));
             }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DriveInfo drive = new DriveInfo(comboBox1.SelectedItem.ToString());
-            if (drive.IsReady)
-            {
-                richTextBox1.Text += "磁碟 : " + drive.ToString() + "\n";
-                richTextBox1.Text += "標籤 : " + drive.VolumeLabel + "\n";
-                richTextBox1.Text += "名稱 : " + drive.Name + "\n";
-                richTextBox1.Text += "可用空間 : " + drive.AvailableFreeSpace + "\n";
-                richTextBox1.Text += "可用大小 : " + drive.TotalSize + "\n";
-                richTextBox1.Text += "可用總空間 : " + drive.TotalFreeSpace + "\n";
-                richTextBox1.Text += "格式 : " + drive.DriveFormat + "\n";
-                richTextBox1.Text += "型態 : " + drive.DriveType + "\n";
-                richTextBox1.Text += "根目錄 : " + drive.RootDirectory + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "磁碟 " + drive.ToString() + "未就緒" + "\n";
-            }
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -1019,17 +1010,4 @@ namespace vcs_DriveInfo1
 /*  可搬出
 
 */
-
-
-
-
-/*
-dddd
-取得硬碟資訊
-            System.IO.DriveInfo di = new System.IO.DriveInfo(@"C:\");
-            richTextBox1.Text += "TotalFreeSpace : " + di.TotalFreeSpace.ToString() + "\n";
-            richTextBox1.Text += "VolumeLabel : " + di.VolumeLabel + "\n";
-
-*/
-
 
