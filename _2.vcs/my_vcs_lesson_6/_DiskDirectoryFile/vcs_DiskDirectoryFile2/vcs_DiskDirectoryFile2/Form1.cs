@@ -725,6 +725,8 @@ namespace vcs_DiskDirectoryFile2
         }
         //取得檔案類型 SP
 
+        //------------------------------------------------------------  # 60個
+
         private void button18_Click(object sender, EventArgs e)
         {
 
@@ -744,8 +746,49 @@ namespace vcs_DiskDirectoryFile2
             UInt32 FileSystemNameSize
         );
 
+        [DllImport("kernel32.dll")]
+        private static extern int GetVolumeInformation(
+            string lpRootPathName,
+            string lpVolumeNameBuffer,
+            int nVolumeNameSize,
+            ref int lpVolumeSerialNumber,
+            int lpMaximumComponentLength,
+            int lpFileSystemFlags,
+            string lpFileSystemNameBuffer,
+            int nFileSystemNameSize
+            );
+
+        public static string GetVolOf(string drvID)
+        {
+            const int MAX_FILENAME_LEN = 256;
+            int retVal = 0;
+            int a = 0;
+            int b = 0;
+            string str1 = null;
+            string str2 = null;
+
+            int i = GetVolumeInformation(
+            drvID + @":\",
+            str1,
+            MAX_FILENAME_LEN,
+            ref retVal,
+            a,
+            b,
+            str2,
+            MAX_FILENAME_LEN
+            );
+
+            return retVal.ToString("x");
+        }
+
         private void button19_Click(object sender, EventArgs e)
         {
+            //C#獲取硬盤序列號
+            string sVol = GetVolOf("C");
+            richTextBox1.Text += "xxx : " + sVol + "\n";
+
+            //------------------------------------------------------------  # 60個
+
             //取得磁碟資訊
             string drive_letter = "C:";
 
@@ -841,7 +884,7 @@ namespace vcs_DiskDirectoryFile2
         private void button21_Click(object sender, EventArgs e)
         {
             //偵測原始檔案類型
-            //偵測原始檔案類型
+
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Title = "偵測原始檔案類型";
             //openFileDialog1.ShowHelp = true;

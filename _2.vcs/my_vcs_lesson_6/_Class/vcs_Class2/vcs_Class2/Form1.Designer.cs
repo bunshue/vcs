@@ -63,11 +63,17 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.bt_class04 = new System.Windows.Forms.Button();
             this.bt_class03 = new System.Windows.Forms.Button();
-            this.lb_count = new System.Windows.Forms.Label();
+            this.lb_count1 = new System.Windows.Forms.Label();
             this.bt_class02 = new System.Windows.Forms.Button();
             this.bt_class01 = new System.Windows.Forms.Button();
             this.bt_class00 = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lb_count2 = new System.Windows.Forms.Label();
+            this.bt_class12 = new System.Windows.Forms.Button();
+            this.bt_class11 = new System.Windows.Forms.Button();
+            this.bt_class10 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button9
@@ -404,7 +410,7 @@
             // 
             this.groupBox1.Controls.Add(this.bt_class04);
             this.groupBox1.Controls.Add(this.bt_class03);
-            this.groupBox1.Controls.Add(this.lb_count);
+            this.groupBox1.Controls.Add(this.lb_count1);
             this.groupBox1.Controls.Add(this.bt_class02);
             this.groupBox1.Controls.Add(this.bt_class01);
             this.groupBox1.Controls.Add(this.bt_class00);
@@ -437,15 +443,15 @@
             this.bt_class03.UseVisualStyleBackColor = true;
             this.bt_class03.Click += new System.EventHandler(this.bt_class03_Click);
             // 
-            // lb_count
+            // lb_count1
             // 
-            this.lb_count.AutoSize = true;
-            this.lb_count.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_count.Location = new System.Drawing.Point(18, 18);
-            this.lb_count.Name = "lb_count";
-            this.lb_count.Size = new System.Drawing.Size(37, 24);
-            this.lb_count.TabIndex = 17;
-            this.lb_count.Text = "cnt";
+            this.lb_count1.AutoSize = true;
+            this.lb_count1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_count1.Location = new System.Drawing.Point(18, 18);
+            this.lb_count1.Name = "lb_count1";
+            this.lb_count1.Size = new System.Drawing.Size(37, 24);
+            this.lb_count1.TabIndex = 17;
+            this.lb_count1.Text = "cnt";
             // 
             // bt_class02
             // 
@@ -480,11 +486,68 @@
             this.bt_class00.UseVisualStyleBackColor = true;
             this.bt_class00.Click += new System.EventHandler(this.bt_class00_Click);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.lb_count2);
+            this.groupBox2.Controls.Add(this.bt_class12);
+            this.groupBox2.Controls.Add(this.bt_class11);
+            this.groupBox2.Controls.Add(this.bt_class10);
+            this.groupBox2.Location = new System.Drawing.Point(834, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(200, 366);
+            this.groupBox2.TabIndex = 157;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "groupBox2";
+            // 
+            // lb_count2
+            // 
+            this.lb_count2.AutoSize = true;
+            this.lb_count2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_count2.Location = new System.Drawing.Point(18, 18);
+            this.lb_count2.Name = "lb_count2";
+            this.lb_count2.Size = new System.Drawing.Size(37, 24);
+            this.lb_count2.TabIndex = 17;
+            this.lb_count2.Text = "cnt";
+            // 
+            // bt_class12
+            // 
+            this.bt_class12.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class12.Location = new System.Drawing.Point(14, 178);
+            this.bt_class12.Name = "bt_class12";
+            this.bt_class12.Size = new System.Drawing.Size(180, 60);
+            this.bt_class12.TabIndex = 16;
+            this.bt_class12.Text = "info";
+            this.bt_class12.UseVisualStyleBackColor = true;
+            this.bt_class12.Click += new System.EventHandler(this.bt_class12_Click);
+            // 
+            // bt_class11
+            // 
+            this.bt_class11.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class11.Location = new System.Drawing.Point(14, 119);
+            this.bt_class11.Name = "bt_class11";
+            this.bt_class11.Size = new System.Drawing.Size(180, 60);
+            this.bt_class11.TabIndex = 15;
+            this.bt_class11.Text = "新增矩形";
+            this.bt_class11.UseVisualStyleBackColor = true;
+            this.bt_class11.Click += new System.EventHandler(this.bt_class11_Click);
+            // 
+            // bt_class10
+            // 
+            this.bt_class10.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class10.Location = new System.Drawing.Point(14, 63);
+            this.bt_class10.Name = "bt_class10";
+            this.bt_class10.Size = new System.Drawing.Size(180, 60);
+            this.bt_class10.TabIndex = 14;
+            this.bt_class10.Text = "新增三角形";
+            this.bt_class10.UseVisualStyleBackColor = true;
+            this.bt_class10.Click += new System.EventHandler(this.bt_class10_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(921, 642);
+            this.ClientSize = new System.Drawing.Size(1157, 642);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button29);
             this.Controls.Add(this.button28);
@@ -523,6 +586,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -564,10 +629,15 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button bt_class04;
         private System.Windows.Forms.Button bt_class03;
-        private System.Windows.Forms.Label lb_count;
+        private System.Windows.Forms.Label lb_count1;
         private System.Windows.Forms.Button bt_class02;
         private System.Windows.Forms.Button bt_class01;
         private System.Windows.Forms.Button bt_class00;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label lb_count2;
+        private System.Windows.Forms.Button bt_class12;
+        private System.Windows.Forms.Button bt_class11;
+        private System.Windows.Forms.Button bt_class10;
     }
 }
 

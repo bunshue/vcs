@@ -632,83 +632,83 @@ namespace vcs_Process1
         {
         }
 
+        //6060
+
         private void button10_Click(object sender, EventArgs e)
         {
-            // 取得 記憶體資訊
+            //取得Process資訊
+            //取得Process資訊
+            //1. 當前進程資料, 取得目前的Process
+            Process process = Process.GetCurrentProcess();  // 取得目前的process
+            show_process_info(process);
 
-            // 先執行 記事本，這樣才看得到效果
-            //Process.Start("NotePad.exe");  // 啟動程式
+            //------------------------------  # 30個
 
-            //單一程式的記憶體資訊, 記事本
+            /*
+            //2. 單一程式的記憶體資訊, 記事本
             Process[] processes = Process.GetProcessesByName("NotePad");  // 根據[process名稱]取得process
-
             foreach (Process process in processes)
             {
-                // 取得工作集 (Working Set) 記憶體大小，單位是位元組
-                //WorkingSet64 → 目前占用的實體記憶體 (RAM)。
-                //PrivateMemorySize64 → 只屬於此程式的記憶體大小。
-                //PagedMemorySize64 → 已分頁到虛擬記憶體的大小。
-
-                //PrivateMemorySize64	程式獨佔的記憶體，不含共用 DLL	Private Working Set	工作管理員「記憶體」欄位通常顯示這個數字。
-
-                richTextBox1.Text += "名稱 : " + process.ProcessName + "\n";
-                richTextBox1.Text += "識別項 : " + process.Id.ToString() + "\n";
-                richTextBox1.Text += "私有記憶體 : " + (process.PrivateMemorySize64 / 1024) + " Kbyte\n";
-                richTextBox1.Text += "虛擬記憶體 : " + (process.VirtualMemorySize64 / 1024) + " Kbyte\n";
-
-                richTextBox1.Text += "程式目前使用記憶體 WorkingSet64 : " + (process.WorkingSet64 / 1024.0 / 1024.0).ToString("F2") + " MB\n";
-                richTextBox1.Text += "程式目前使用記憶體 PrivateMemorySize64 : " + (process.PrivateMemorySize64 / 1024.0 / 1024.0).ToString("F2") + " MB\n";
-                richTextBox1.Text += "程式目前使用記憶體 PagedMemorySize64 : " + (process.PagedMemorySize64 / 1024.0 / 1024.0).ToString("F2") + " MB\n";
+                show_process_info(process);
             }
 
-            return;
+            //------------------------------  # 30個
 
-            //所有程式的記憶體資訊
-            //Process[]
-            processes = Process.GetProcesses();  // 取得所有程序
+            //3. 所有的Process
+            Process[] processes = Process.GetProcesses();  // 取得所有程序
             foreach (Process process in processes)
             {
-                richTextBox1.Text += "名稱 : " + process.ProcessName + "\n";
-                richTextBox1.Text += "識別項 : " + process.Id.ToString() + "\n";
-                richTextBox1.Text += "私有記憶體 : " + (process.PrivateMemorySize64 / 1024) + " Kbyte\n";
-                richTextBox1.Text += "虛擬記憶體 : " + (process.VirtualMemorySize64 / 1024) + " Kbyte\n";
-
-                richTextBox1.Text += "程式目前使用記憶體 WorkingSet64 : " + (process.WorkingSet64 / 1024.0 / 1024.0).ToString("F2") + " MB\n";
-                richTextBox1.Text += "程式目前使用記憶體 PrivateMemorySize64 : " + (process.PrivateMemorySize64 / 1024.0 / 1024.0).ToString("F2") + " MB\n";
-                richTextBox1.Text += "程式目前使用記憶體 PagedMemorySize64 : " + (process.PagedMemorySize64 / 1024.0 / 1024.0).ToString("F2") + " MB\n";
+                show_process_info(process);
             }
+            */
         }
 
-        //------------------------------------------------------------  # 60個
+        void show_process_info(Process process)
+        {
+            richTextBox1.Text += "MainModule : " + process.MainModule + "\n";
+            richTextBox1.Text += "ProcessorAffinity : " + process.ProcessorAffinity + "\n";
+            richTextBox1.Text += "處理序名稱 : " + process.ProcessName + "\n";
+            richTextBox1.Text += "處理序名稱 : " + process.ProcessName.ToString().Trim() + "\n";//取得處理序的名稱
+            richTextBox1.Text += "這個處理序的總處理器時間 : " + process.TotalProcessorTime.ToString() + "\n";
+            richTextBox1.Text += "當前進程 ID : " + process.Id.ToString() + "\n";
+            richTextBox1.Text += "當前進程 主視窗標題 : " + process.MainWindowTitle + "\n";  // 取得處理序的主視窗標題
+            richTextBox1.Text += "當前進程 SessionId : " + process.SessionId + "\n";
+            richTextBox1.Text += "當前進程 啟動時間 : " + process.StartTime.ToString() + "\n";
+            richTextBox1.Text += "電腦名稱 : " + process.MachineName + "\n";
+
+            richTextBox1.Text += "取得記憶體使用狀態\n";
+            richTextBox1.Text += "Min Working Set : " + ((double)process.MinWorkingSet).ToFileSize() + "\n";
+            richTextBox1.Text += "Max Working Set : " + ((double)process.MaxWorkingSet).ToFileSize() + "\n";
+            richTextBox1.Text += "Non-paged Memory Size : " + ((double)process.NonpagedSystemMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Paged Memory Size : " + ((double)process.PagedMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Paged System Memory Size : " + ((double)process.PagedSystemMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Peak Paged Memory Size : " + ((double)process.PeakPagedMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Peak Virtual Memory Size : " + ((double)process.PeakVirtualMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Peak Working Set : " + ((double)process.PeakWorkingSet64).ToFileSize() + "\n";
+            richTextBox1.Text += "Virtual Memory Size : " + ((double)process.VirtualMemorySize64).ToFileSize() + "\n";
+            richTextBox1.Text += "Working Set : " + ((double)process.WorkingSet64).ToFileSize() + "\n";
+
+            // 記憶體部分
+            // 取得工作集 (Working Set) 記憶體大小，單位是位元組
+            //WorkingSet64 → 目前占用的實體記憶體 (RAM)。
+            //PrivateMemorySize64 → 只屬於此程式的記憶體大小。
+            //PagedMemorySize64 → 已分頁到虛擬記憶體的大小。
+            //PrivateMemorySize64	程式獨佔的記憶體，不含共用 DLL	Private Working Set	工作管理員「記憶體」欄位通常顯示這個數字。
+
+            richTextBox1.Text += "名稱 : " + process.ProcessName + "\n";
+            richTextBox1.Text += "識別項 : " + process.Id.ToString() + "\n";
+            richTextBox1.Text += "私有記憶體 : " + (process.PrivateMemorySize64 / 1024) + " Kbyte\n";
+            richTextBox1.Text += "虛擬記憶體 : " + (process.VirtualMemorySize64 / 1024) + " Kbyte\n";
+
+            richTextBox1.Text += "程式目前使用記憶體 WorkingSet64 : " + (process.WorkingSet64 / 1024.0 / 1024.0).ToString("F2") + " MB\n";
+            richTextBox1.Text += "程式目前使用記憶體 PrivateMemorySize64 : " + (process.PrivateMemorySize64 / 1024.0 / 1024.0).ToString("F2") + " MB\n";
+            richTextBox1.Text += "程式目前使用記憶體 PagedMemorySize64 : " + (process.PagedMemorySize64 / 1024.0 / 1024.0).ToString("F2") + " MB\n";
+        }
+
+        //6060
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //當前進程資料, 取得目前的Process
-            using (Process process = Process.GetCurrentProcess())  // 取得目前的process
-            {
-                richTextBox1.Text += "MainModule : " + process.MainModule + "\n";
-                richTextBox1.Text += "ProcessorAffinity : " + process.ProcessorAffinity + "\n";
-                richTextBox1.Text += "處理序名稱 : " + process.ProcessName + "\n";
-                richTextBox1.Text += "處理序名稱 : " + process.ProcessName.ToString().Trim() + "\n";//取得處理序的名稱
-                richTextBox1.Text += "這個處理序的總處理器時間 : " + process.TotalProcessorTime.ToString() + "\n";
-                richTextBox1.Text += "當前進程 ID : " + process.Id.ToString() + "\n";
-                richTextBox1.Text += "當前進程 主視窗標題 : " + process.MainWindowTitle + "\n";  // 取得處理序的主視窗標題
-                richTextBox1.Text += "當前進程 SessionId : " + process.SessionId + "\n";
-                richTextBox1.Text += "當前進程 啟動時間 : " + process.StartTime.ToString() + "\n";
-                richTextBox1.Text += "電腦名稱 : " + process.MachineName + "\n";
-
-                richTextBox1.Text += "取得記憶體使用狀態\n";
-                richTextBox1.Text += "Min Working Set : " + ((double)process.MinWorkingSet).ToFileSize() + "\n";
-                richTextBox1.Text += "Max Working Set : " + ((double)process.MaxWorkingSet).ToFileSize() + "\n";
-                richTextBox1.Text += "Non-paged Memory Size : " + ((double)process.NonpagedSystemMemorySize64).ToFileSize() + "\n";
-                richTextBox1.Text += "Paged Memory Size : " + ((double)process.PagedMemorySize64).ToFileSize() + "\n";
-                richTextBox1.Text += "Paged System Memory Size : " + ((double)process.PagedSystemMemorySize64).ToFileSize() + "\n";
-                richTextBox1.Text += "Peak Paged Memory Size : " + ((double)process.PeakPagedMemorySize64).ToFileSize() + "\n";
-                richTextBox1.Text += "Peak Virtual Memory Size : " + ((double)process.PeakVirtualMemorySize64).ToFileSize() + "\n";
-                richTextBox1.Text += "Peak Working Set : " + ((double)process.PeakWorkingSet64).ToFileSize() + "\n";
-                richTextBox1.Text += "Virtual Memory Size : " + ((double)process.VirtualMemorySize64).ToFileSize() + "\n";
-                richTextBox1.Text += "Working Set : " + ((double)process.WorkingSet64).ToFileSize() + "\n";
-            }
         }
 
         private void button12_Click(object sender, EventArgs e)

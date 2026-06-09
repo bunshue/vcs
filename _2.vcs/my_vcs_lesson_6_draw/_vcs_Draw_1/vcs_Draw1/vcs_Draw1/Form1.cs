@@ -1655,6 +1655,8 @@ namespace vcs_Draw1
         }
         //畫 sin SP
 
+        //------------------------------------------------------------  # 60個
+
         private void button15_Click(object sender, EventArgs e)
         {
             string filename = @"D:\_git\vcs\_1.data\______test_files1\step2.png";
@@ -2204,8 +2206,39 @@ namespace vcs_Draw1
 
         }
 
+        //------------------------------------------------------------  # 60個
+
+        public class GDI
+        {
+            [System.Runtime.InteropServices.DllImport("gdi32.dll")]
+            internal static extern bool Rectangle(
+               IntPtr hdc,
+               int ulCornerX, int ulCornerY,
+               int lrCornerX, int lrCornerY);
+        }
+
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+            //測試GDI ST
+            Pen redPen = new Pen(Color.Red, 8);
+
+            // Draw rectangle with GDI+.
+            e.Graphics.DrawRectangle(redPen, 1700, 800, 100, 50);
+
+            // Get handle to device context.
+            // Graphics.GetHdc 方法 可以 獲得關聯的設備上下文的句柄
+            IntPtr hdc = e.Graphics.GetHdc();
+
+            // Draw rectangle with GDI using default pen.
+            GDI.Rectangle(hdc, 1700, 900, 1700 + 100, 900 + 50);
+
+            // Release handle to device context.
+            e.Graphics.ReleaseHdc(hdc);
+
+            //測試GDI SP
+
+            //------------------------------------------------------------  # 60個
+
             int x_st = 200;
             int y_st = 800;
 
@@ -2240,6 +2273,8 @@ namespace vcs_Draw1
                 e.Graphics.DrawRectangle(the_pen, rect2);
             }
 
+            //------------------------------------------------------------  # 60個
+
             //表單底部畫字 ST
             // Transform.
             e.Graphics.ScaleTransform(1.5f, 1.5f, MatrixOrder.Append);
@@ -2266,7 +2301,12 @@ namespace vcs_Draw1
                 e.Graphics.DrawString(the_text, the_font, Brushes.Brown, x_st, y_st);
             }
             //表單底部畫字 SP
+
+            //------------------------------------------------------------  # 60個
+
         }
+
+        //------------------------------------------------------------  # 60個
 
         // Draw samples.
         private const int column_width = 150;
@@ -2656,6 +2696,8 @@ namespace vcs_Draw1
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
         bool flag_eraser = false;
         private void bt_eraser_Click(object sender, EventArgs e)
         {
@@ -2812,7 +2854,5 @@ bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0, 0, 0));
                         Color p = bitmap1.GetPixel(xx, yy);
                         //richTextBox1.Text += p.ToString() + " ";
                         richTextBox1.Text += p.A.ToString("X2") + p.R.ToString("X2") + p.G.ToString("X2") + p.B.ToString("X2") + " ";
- 
  */
-
 

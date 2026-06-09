@@ -894,9 +894,22 @@ namespace vcs_Mix00
         {
         }
 
+        //6060
+
+        // 設定滑鼠
+        [DllImport("user32.dll")]
+        static extern void SetCursorPos(int x, int y);
+
         private void button20_Click(object sender, EventArgs e)
         {
+            //移動滑鼠位置
+            int x_st = this.Location.X + button21.Location.X + 100;
+            int y_st = this.Location.Y + button21.Location.Y + 60;
+
+            SetCursorPos(x_st, y_st);
         }
+
+        //6060
 
         private void button21_Click(object sender, EventArgs e)
         {

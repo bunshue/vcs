@@ -32,7 +32,7 @@ namespace vcs_Class7
 
         private void showCounter()
         {
-            lb_count.Text = ShapeManager.getCount().ToString();
+            lb_count2.Text = ShapeManager.getCount().ToString();
         }
 
         //------------------------------------------------------------  # 60個

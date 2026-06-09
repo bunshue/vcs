@@ -33,7 +33,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
-            this.lb_count = new System.Windows.Forms.Label();
+            this.lb_count2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -89,22 +89,22 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
-            // lb_count
+            // lb_count2
             // 
-            this.lb_count.AutoSize = true;
-            this.lb_count.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_count.Location = new System.Drawing.Point(48, 12);
-            this.lb_count.Name = "lb_count";
-            this.lb_count.Size = new System.Drawing.Size(37, 24);
-            this.lb_count.TabIndex = 5;
-            this.lb_count.Text = "cnt";
+            this.lb_count2.AutoSize = true;
+            this.lb_count2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_count2.Location = new System.Drawing.Point(48, 12);
+            this.lb_count2.Name = "lb_count2";
+            this.lb_count2.Size = new System.Drawing.Size(37, 24);
+            this.lb_count2.TabIndex = 5;
+            this.lb_count2.Text = "cnt";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 561);
-            this.Controls.Add(this.lb_count);
+            this.Controls.Add(this.lb_count2);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -125,7 +125,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button bt_clear;
-        private System.Windows.Forms.Label lb_count;
+        private System.Windows.Forms.Label lb_count2;
     }
 }
 

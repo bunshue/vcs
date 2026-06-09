@@ -71,19 +71,19 @@ namespace vcs_Class2
             groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
             richTextBox1.Size = new Size(400, 690);
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             x_st = 10;
             y_st = 100;
-            lb_count.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 80);
+            lb_count1.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 80);
             bt_class00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_class01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             bt_class02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             bt_class03.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             bt_class04.Location = new Point(x_st + dx * 0, y_st + dy * 4);
 
-            this.Size = new Size(1300, 750);
+            this.Size = new Size(1510, 750);
             this.Text = "vcs_Class2";
 
             //設定執行後的表單起始位置, 正中央
@@ -658,9 +658,9 @@ namespace vcs_Class2
 
         private void showCounter()
         {
-            lb_count.Text = "目前共有 " + Person.counter() + " 人\n";
-            lb_count.Text += "老師 " + Teacher.counter() + " 人\n";
-            lb_count.Text += "學生 " + Student.counter() + " 人";
+            lb_count1.Text = "目前共有 " + Person.counter() + " 人\n";
+            lb_count1.Text += "老師 " + Teacher.counter() + " 人\n";
+            lb_count1.Text += "學生 " + Student.counter() + " 人";
 
             richTextBox1.Text += "目前共有 " + Person.counter() + " 人, ";
             richTextBox1.Text += "老師 " + Teacher.counter() + " 人, ";
@@ -797,6 +797,26 @@ namespace vcs_Class2
             fs.Close();
 
             showCounter();
+        }
+
+        //6060
+
+        private void bt_class10_Click(object sender, EventArgs e)
+        {
+            //新增三角形
+
+        }
+
+        private void bt_class11_Click(object sender, EventArgs e)
+        {
+            //新增矩形
+
+        }
+
+        private void bt_class12_Click(object sender, EventArgs e)
+        {
+            //info
+
         }
 
         //6060
