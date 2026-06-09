@@ -33,6 +33,8 @@ namespace vcs_Network1
 
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             richTextBox1.Text += "本機IP : " + MyIP() + "\n";
 
             //取得自己的 IP
@@ -166,6 +168,8 @@ namespace vcs_Network1
             richTextBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button0_Click(object sender, EventArgs e)
         {
             //連線到Google，使用預設的browser
@@ -176,6 +180,28 @@ namespace vcs_Network1
         {
             //連線到Google，使用IE
             Process.Start("IExplore.exe", "http://www.google.com");
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        // Return true if a ping to Google works.
+        private bool IsInternetConnected(String host)
+        {
+            return IsInternetConnected(host, 1000);
+        }
+
+        private bool IsInternetConnected(String host, int timeout)
+        {
+            try
+            {
+                Ping ping = new Ping();
+                PingReply reply = ping.Send(host, timeout);
+                return (reply.Status == IPStatus.Success);
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         //檢查網路連線
@@ -197,6 +223,8 @@ namespace vcs_Network1
             else
                 richTextBox1.Text += host + "\t無法連線\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         //網路連線狀態
         [DllImport("wininet.dll", EntryPoint = "InternetGetConnectedState")]
@@ -270,6 +298,8 @@ namespace vcs_Network1
             richTextBox1.Text += "host name : " + ip3.HostName + "\n";
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button6_Click(object sender, EventArgs e)
         {
             //獲取gateway和IP
@@ -339,9 +369,13 @@ namespace vcs_Network1
             start.Close();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button7_Click(object sender, EventArgs e)
         {
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button8_Click(object sender, EventArgs e)
         {
@@ -361,6 +395,8 @@ namespace vcs_Network1
                     let ipAddress = AddressInfo.Address.ToString()
                     select ipAddress);
         }
+
+        //------------------------------------------------------------  # 60個
 
         string pic1 = "http://www.myson.com.tw/images/index/ad01.jpg";
         string pic2 = "http://www.myson.com.tw/images/index/ad02.jpg";
@@ -389,6 +425,8 @@ namespace vcs_Network1
                 select = 1;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button10_Click(object sender, EventArgs e)
         {
             //[c#] 取得src內的網址
@@ -397,6 +435,8 @@ namespace vcs_Network1
             string res = m.Groups[1].Value;
             richTextBox1.Text += res;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button11_Click(object sender, EventArgs e)
         {
@@ -434,12 +474,14 @@ namespace vcs_Network1
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button12_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "使用HTTP頭檢測網絡資源是否有效\n";
             /*
-我們有時候，需要知道某個網絡資源是否有效、可用，但是我們並不想打開或下載這個資源，因為這個資源可能很大（例如需要下載的某個文件）
-一種行之有效的方式，就是利用HTTP頭返回的狀態碼來確定資源的可用性；我們通常的WEB訪問，使用的是 GET 和 POST， 這裡使用的是 HEAD 方式
+            我們有時候，需要知道某個網絡資源是否有效、可用，但是我們並不想打開或下載這個資源，因為這個資源可能很大（例如需要下載的某個文件）
+            一種行之有效的方式，就是利用HTTP頭返回的狀態碼來確定資源的可用性；我們通常的WEB訪問，使用的是 GET 和 POST， 這裡使用的是 HEAD 方式
             */
 
             string url1 = @"http://hovertree.com/themes/hvtimages/hwqlogo.png";
@@ -480,6 +522,8 @@ namespace vcs_Network1
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button13_Click(object sender, EventArgs e)
         {
             //C# 網路連線檢查
@@ -502,25 +546,7 @@ namespace vcs_Network1
             }
         }
 
-        // Return true if a ping to Google works.
-        private bool IsInternetConnected(String host)
-        {
-            return IsInternetConnected(host, 1000);
-        }
-
-        private bool IsInternetConnected(String host, int timeout)
-        {
-            try
-            {
-                Ping ping = new Ping();
-                PingReply reply = ping.Send(host, timeout);
-                return (reply.Status == IPStatus.Success);
-            }
-            catch
-            {
-                return false;
-            }
-        }
+        //------------------------------------------------------------  # 60個
 
         private void button14_Click(object sender, EventArgs e)
         {
@@ -615,6 +641,8 @@ namespace vcs_Network1
             richTextBox1.Text += "IP位址 : " + ip_addr + "\n";
             richTextBox1.Text += "電腦名稱 : " + hostInfo.HostName + "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private MemoryStream GetResponse(string url)
         {
@@ -734,28 +762,6 @@ namespace vcs_Network1
 
         //------------------------------------------------------------  # 60個
 
-        private void button23_Click(object sender, EventArgs e)
-        {
-            //取得網頁原始碼
-
-            string url = "https://www.google.com.tw/";
-
-            if (ValidateDate1(url))//检查输入网址是否合法
-            {
-                url = url.ToLower();
-
-                string strS = GetSource(url);//调用方法提取网页内容
-                if (strS.Length > 1)
-                {
-                    richTextBox1.Text += strS + "\n";  // 显示网页内容
-                }
-            }
-            else
-            {
-                MessageBox.Show("输入网址不正确请重新输入");
-            }
-        }
-
         //验证网址是否正确
         public bool ValidateDate1(string input)
         {
@@ -784,6 +790,28 @@ namespace vcs_Network1
                 MessageBox.Show(WebExcp.Message, "error", MessageBoxButtons.OK);
             }
             return strSource.ToString();
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            //取得網頁原始碼
+
+            string url = "https://www.google.com.tw/";
+
+            if (ValidateDate1(url))//检查输入网址是否合法
+            {
+                url = url.ToLower();
+
+                string strS = GetSource(url);//调用方法提取网页内容
+                if (strS.Length > 1)
+                {
+                    richTextBox1.Text += strS + "\n";  // 显示网页内容
+                }
+            }
+            else
+            {
+                MessageBox.Show("输入网址不正确请重新输入");
+            }
         }
 
         //------------------------------------------------------------  # 60個
@@ -912,6 +940,8 @@ namespace vcs_Network1
         }
     }
 
+    //------------------------------------------------------------  # 60個
+
     public class Protocols
     {
         public const SecurityProtocolType
@@ -962,9 +992,6 @@ vcs抓網路上的檔案
             }
         
 //------------------------------------------------------------  # 60個
-
-
-
 
 
 */

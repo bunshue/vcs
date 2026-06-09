@@ -27,6 +27,8 @@ namespace vcs_WebClient
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             // Allow TLS 1.1 and TLS 1.2 protocols for file download.
             //for Sugar     3840 Romeo也可用
             ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
@@ -48,13 +50,11 @@ namespace vcs_WebClient
 
         void show_item_location()
         {
+            //button
             int x_st = 10;
             int y_st = 10;
-            int w = 200;
-            int h = 50;
-            int dx = w + 10;
-            int dy = h + 10;
-
+            int dx = 200 + 10;
+            int dy = 60 + 10;
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -86,18 +86,17 @@ namespace vcs_WebClient
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            richTextBox1.Size = new Size(840, 540);
+            richTextBox1.Size = new Size(840, 480);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-
-            webBrowser1.Size = new Size(600, 250);
-            webBrowser1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-
-            pictureBox1.Size = new Size(600, 250);
-            pictureBox1.Location = new Point(x_st + dx * 4, y_st + dy * 10);
-
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1600, 930);
+            webBrowser1.Size = new Size(400, 250);
+            webBrowser1.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+
+            pictureBox1.Size = new Size(400, 250);
+            pictureBox1.Location = new Point(x_st + dx * 5, y_st + dy * 7);
+
+            this.Size = new Size(1510, 820);
             this.Text = "vcs_WebClient";
 
             //設定執行後的表單起始位置, 正中央
@@ -109,6 +108,8 @@ namespace vcs_WebClient
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -206,7 +207,6 @@ namespace vcs_WebClient
                 richTextBox1.Text += "Error\t" + ex.Message + "\n";
             }
 
-
             richTextBox1.Text += "\nWebClient DownloadString 4\t網路下載純文字檔案......\n";
 
             string url2 = "http://jsonplaceholder.typicode.com/posts";
@@ -222,6 +222,8 @@ namespace vcs_WebClient
             richTextBox1.Text += "\nWebClient DownloadString 測試\t完成\n";
             this.Cursor = Cursors.Default;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void DownloadFile(string url, string filename)
         {
@@ -286,6 +288,8 @@ namespace vcs_WebClient
             this.Cursor = Cursors.Default;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private WebClient wc = new WebClient();     // 建立 WebClient
         private void button3_Click(object sender, EventArgs e)
         {
@@ -347,6 +351,8 @@ namespace vcs_WebClient
                 //MessageBox.Show("请输入正确的文件地址");
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -480,6 +486,8 @@ namespace vcs_WebClient
             this.Cursor = Cursors.Default;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button6_Click(object sender, EventArgs e)
         {
             //WebClient OpenRead
@@ -554,6 +562,8 @@ namespace vcs_WebClient
             this.Cursor = Cursors.Default;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button7_Click(object sender, EventArgs e)
         {
             //WebClient DownloadFile
@@ -610,11 +620,11 @@ namespace vcs_WebClient
             catch (Exception ex)
             {
                 richTextBox1.Text += ex.Message + "\n";
-
             }
-
             this.Cursor = Cursors.Default;
         }
+
+        //------------------------------------------------------------  # 60個
 
         //讓 WebClient 擁有 Timeout 功能 ST
         public class MyWebClient : WebClient
@@ -641,6 +651,8 @@ namespace vcs_WebClient
             this.Cursor = Cursors.Default;
         }
         //讓 WebClient 擁有 Timeout 功能 SP
+
+        //------------------------------------------------------------  # 60個
 
         //下載NASA網頁的圖片 ST
         private void button5_Click(object sender, EventArgs e)
@@ -743,9 +755,13 @@ namespace vcs_WebClient
 
         //下載NASA網頁的圖片 SP
 
+        //------------------------------------------------------------  # 60個
+
         private void button8_Click(object sender, EventArgs e)
         {
         }
+
+        //------------------------------------------------------------  # 60個
 
         //提取並保存網頁源碼 ST
         string url = @"http://www.google.com";
@@ -774,7 +790,6 @@ namespace vcs_WebClient
             richTextBox1.Text += strS;   //顯示網頁內容
         }
 
-
         //保存網頁訊息
         private void saveInfo(string strPath, string strDown)
         {
@@ -787,13 +802,13 @@ namespace vcs_WebClient
         {
             return Regex.IsMatch(input, "http(s)?://([\\w-]+\\.)+[\\w-]+(//[\\w- .//?%&=]*)?");
         }
+
         //提取網頁內容。
         public string GetSource(string webAddress)
         {
             StringBuilder strSource = new StringBuilder("");
             try
             {
-
                 WebRequest WReq = WebRequest.Create(webAddress);//對URl地址發出請求
                 WebResponse WResp = WReq.GetResponse();//傳回服務器的響應
                 StreamReader sr = new StreamReader(WResp.GetResponseStream(), Encoding.ASCII);//從數據流中讀取數據
@@ -823,6 +838,8 @@ namespace vcs_WebClient
         }
         //提取並保存網頁源碼 SP
 
+        //------------------------------------------------------------  # 60個
+
         private void button11_Click(object sender, EventArgs e)
         {
             // 網頁抓取星座占卜資料
@@ -845,6 +862,8 @@ namespace vcs_WebClient
                 richTextBox1.Text += "Keys = " + n + "\tValues = " + fate.Datas[n] + "\n";
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button12_Click(object sender, EventArgs e)
         {
@@ -879,6 +898,8 @@ namespace vcs_WebClient
             });
         }
 
+        //------------------------------------------------------------  # 60個
+
         public string[] GetCSVData()
         {
             WebClient wc = new WebClient();     // 建立 WebClient
@@ -896,6 +917,8 @@ namespace vcs_WebClient
                 richTextBox1.Text += r + "\n";
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button14_Click(object sender, EventArgs e)
         {
@@ -934,6 +957,8 @@ namespace vcs_WebClient
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button15_Click(object sender, EventArgs e)
         {
             //WebClient 2
@@ -963,6 +988,8 @@ namespace vcs_WebClient
                 Console.WriteLine("{0} - {1}", allExp.GetType(), allExp.Message);
             }
         }
+
+        //------------------------------------------------------------  # 60個
 
         public string SendSms(List<string> mobiles)
         {
@@ -1003,6 +1030,8 @@ namespace vcs_WebClient
             string result = SendSms(mobiles);
             richTextBox1.Text += "result = " + result + "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button17_Click(object sender, EventArgs e)
         {
@@ -1046,6 +1075,8 @@ namespace vcs_WebClient
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         public void LoadData()
         {
             WebClient wc = new WebClient();     // 建立 WebClient
@@ -1062,6 +1093,8 @@ namespace vcs_WebClient
         {
             LoadData();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button19_Click(object sender, EventArgs e)
         {
@@ -1154,6 +1187,8 @@ namespace vcs_WebClient
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button25_Click(object sender, EventArgs e)
         {
             //test
@@ -1183,6 +1218,7 @@ namespace vcs_WebClient
             */
         }
 
+        //------------------------------------------------------------  # 60個
 
         private void button26_Click(object sender, EventArgs e)
         {
@@ -1201,6 +1237,8 @@ namespace vcs_WebClient
             richTextBox1.Text += "My public IP Address is: " + publicIp + "\n";
             Console.WriteLine("My public IP Address is: {0}", publicIp);
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button29_Click(object sender, EventArgs e)
         {
@@ -1221,7 +1259,11 @@ namespace vcs_WebClient
             return (SecurityProtocolType)result;
         }
 
+        //------------------------------------------------------------  # 60個
+
     }
+
+    //------------------------------------------------------------  # 60個
 
     public static class StarSignsUtil
     {
@@ -1355,6 +1397,8 @@ namespace vcs_WebClient
         }
     }
 
+    //------------------------------------------------------------  # 60個
+
     public class Protocols
     {
         public const SecurityProtocolType
@@ -1377,5 +1421,19 @@ namespace vcs_WebClient
         }
 
 */
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
 
 
