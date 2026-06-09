@@ -258,13 +258,12 @@ namespace vcs_Chart2
             double y;
             y = 110 * sind(x);
 
+            //------------------------------  # 30個
+
             series00.Points.AddXY(x, y);  // AddXY 二維加入chart1, 一般Chart
-            series10.Points.AddXY(x, y);  // AddXY 二維加入chart2, realtime_chart
 
             if (series00.Points.Count > POINTS_IN_AXIS)
                 series00.Points.RemoveAt(0);
-
-            richTextBox1.Text += series00.Points.Count.ToString() + " ";
 
             //設定X軸邊界, 保存最新36點
             chart1.ChartAreas[0].AxisX.Minimum = series00.Points[0].XValue;
@@ -273,17 +272,18 @@ namespace vcs_Chart2
             // Adjust Y & X axis scale
             //chart1.ResetAutoValues(); 有沒有看起來一樣
 
+            //------------------------------  # 30個
+
+            series10.Points.AddXY(x, y);  // AddXY 二維加入chart2, realtime_chart
+
             if (series10.Points.Count > POINTS_IN_AXIS)
                 series10.Points.RemoveAt(0);
-
-            //richTextBox1.Text += series10.Points.Count.ToString() + " ";
 
             //設定X軸邊界, 保存最新36點
             chart2.ChartAreas[0].AxisX.Minimum = series10.Points[0].XValue;
             chart2.ChartAreas[0].AxisX.Maximum = x;
-            //設定X軸邊界, 保存最新36點
-            //chart2.ChartAreas[0].AxisX.Minimum = series10.Points[0].XValue;
-            //chart2.ChartAreas[0].AxisX.Maximum = x1;
+
+            //------------------------------  # 30個
 
             x += 26;
         }
