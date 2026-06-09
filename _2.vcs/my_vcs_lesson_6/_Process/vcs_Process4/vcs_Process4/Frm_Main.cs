@@ -53,11 +53,16 @@ namespace vcs_Process4
 
         private void 刷新ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "右鍵選單/刷新\n";
             getProcessInfo();
         }
 
         private void 結束進程ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "右鍵選單/結束進程\n";
+
+            return;
+
             try
             {
                 if (MessageBox.Show("警告:終止進程會導致不希望發生的結果，\r包括數據丟失和系統不穩定。在被終止前，\r進程將沒有機會保存其狀態和數據。確實\r想終止該進程嗎?", "任務管理器警告", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
@@ -101,6 +106,8 @@ namespace vcs_Process4
         {
             richTextBox1.Text += "設定優先序 i = " + i.ToString() + "\n";
 
+            return;
+
             string ProcessName = listView1.SelectedItems[0].Text;
             Process[] processes = Process.GetProcessesByName(ProcessName);
             switch (i)
@@ -116,32 +123,39 @@ namespace vcs_Process4
         }
         private void 實時ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "右鍵選單/設置優先級/實時\n";
             SetBasePriority(3);
         }
 
         private void 高ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "右鍵選單/設置優先級/高\n";
             SetBasePriority(2);
         }
 
         private void 高于標準ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "右鍵選單/設置優先級/高於標準\n";
             SetBasePriority(4);
         }
 
         private void 標準ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "右鍵選單/設置優先級/標準\n";
             SetBasePriority(1);
         }
 
         private void 低于標準ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "右鍵選單/設置優先級/低於標準\n";
             SetBasePriority(5);
         }
 
         private void 低ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "右鍵選單/設置優先級/低\n";
             SetBasePriority(0);
         }
     }
 }
+

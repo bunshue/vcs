@@ -48,6 +48,10 @@ namespace vcs_Process1
 
             //------------------------------------------------------------  # 60個
 
+            process = Process.Start("NotePad.exe");  // 啟動程式
+
+            //------------------------------------------------------------  # 60個
+
             //監控外部程序運行狀態 ST
             //C# 跨 Thread 存取 UI
             Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效
@@ -122,8 +126,8 @@ namespace vcs_Process1
 
             listView1.Size = new Size(560, 290);
             listView1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
-            richTextBox1.Size = new Size(560, 690-300);
-            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0+300);
+            richTextBox1.Size = new Size(560, 690 - 300);
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0 + 300);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             lb_monitor_process.Text = "監控外部程序運行狀態";
@@ -432,7 +436,7 @@ namespace vcs_Process1
             //使用Process類調用外部exe程序
 
             //Process process = Process.Start("notepad.exe");  // 啟動程式
-            //process.WaitForExit();//關鍵，等待外部程序退出後才能往下執行
+            //process.WaitForExit();  // 關鍵，等待外部程序退出後才能往下執行
 
             //------------------------------------------------------------  # 60個
 
@@ -567,7 +571,7 @@ namespace vcs_Process1
         {
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button10_Click(object sender, EventArgs e)
         {
@@ -597,78 +601,60 @@ namespace vcs_Process1
             }
             */
 
+            //------------------------------------------------------------  # 60個
 
-            //6060
-
-
-            //偵測程式執行時的記憶體用量
+            richTextBox1.Text += "偵測程式執行時的記憶體用量\n";
 
             // Define variables to track the peak memory usage of the process. 
             long peakPagedMem = 0;
             long peakWorkingSet = 0;
             long peakVirtualMem = 0;
 
-            Process process = new Process();    //創建一個進程用於調用外部程序
-
-            try
+            if (!process.HasExited)
             {
-                process = Process.Start("NotePad.exe");  // 啟動程式
+                richTextBox1.Text += "此程式的PID : " + process.Id.ToString() + "\n";
 
-                // Display the process statistics until the user closes the program. 
-                do
+                // Refresh the current process property values.
+                process.Refresh();
+
+                // Display current process statistics.
+
+                richTextBox1.Text += process.ToString() + "\n";
+
+                //------------------------------  # 30個
+
+                richTextBox1.Text += "physical memory usage : " + process.WorkingSet64 + "\n";
+                richTextBox1.Text += "base priority : " + process.BasePriority + "\n";
+                richTextBox1.Text += "priority class : " + process.PriorityClass + "\n";
+                richTextBox1.Text += "user processor time : " + process.UserProcessorTime + "\n";
+                richTextBox1.Text += "privileged processor time : " + process.PrivilegedProcessorTime + "\n";
+                richTextBox1.Text += "total processor time : " + process.TotalProcessorTime + "\n";
+                richTextBox1.Text += "PagedSystemMemorySize64 : " + process.PagedSystemMemorySize64 + "\n";
+                richTextBox1.Text += "PagedMemorySize64 : " + process.PagedMemorySize64 + "\n";
+
+                // Update the values for the overall peak memory statistics.
+                peakPagedMem = process.PeakPagedMemorySize64;
+                peakVirtualMem = process.PeakVirtualMemorySize64;
+                peakWorkingSet = process.PeakWorkingSet64;
+
+                if (process.Responding)  // 使用者介面是否正在回應
                 {
-                    if (!process.HasExited)
-                    {
-                        // Refresh the current process property values.
-                        process.Refresh();
-
-                        // Display current process statistics.
-
-                        richTextBox1.Text += process.ToString() + "\n";
-
-                        //------------------------------  # 30個
-
-                        richTextBox1.Text += "physical memory usage : " + process.WorkingSet64 + "\n";
-                        richTextBox1.Text += "base priority : " + process.BasePriority + "\n";
-                        richTextBox1.Text += "priority class : " + process.PriorityClass + "\n";
-                        richTextBox1.Text += "user processor time : " + process.UserProcessorTime + "\n";
-                        richTextBox1.Text += "privileged processor time : " + process.PrivilegedProcessorTime + "\n";
-                        richTextBox1.Text += "total processor time : " + process.TotalProcessorTime + "\n";
-                        richTextBox1.Text += "PagedSystemMemorySize64 : " + process.PagedSystemMemorySize64 + "\n";
-                        richTextBox1.Text += "PagedMemorySize64 : " + process.PagedMemorySize64 + "\n";
-
-                        // Update the values for the overall peak memory statistics.
-                        peakPagedMem = process.PeakPagedMemorySize64;
-                        peakVirtualMem = process.PeakVirtualMemorySize64;
-                        peakWorkingSet = process.PeakWorkingSet64;
-
-                        if (process.Responding)
-                        {
-                            richTextBox1.Text += "Status = Running\n";
-                        }
-                        else
-                        {
-                            richTextBox1.Text += "Status = Not Responding\n";
-                        }
-                    }
+                    richTextBox1.Text += "Status = Running\n";
                 }
-                while (!process.WaitForExit(1000));
-
-                richTextBox1.Text += "Process exit code : " + process.ExitCode + "\n";
-
-                // Display peak memory statistics for the process.
-                richTextBox1.Text += "Peak physical memory usage of the process : " + peakWorkingSet + "\n";
-                richTextBox1.Text += "Peak paged memory usage of the process : " + peakPagedMem + "\n";
-                richTextBox1.Text += "Peak virtual memory usage of the process : " + peakVirtualMem + "\n";
-            }
-            finally
-            {
-                if (process != null)
+                else
                 {
-                    process.Close();
+                    richTextBox1.Text += "Status = Not Responding\n";
                 }
             }
+            else
+            {
+                richTextBox1.Text += "程式已結束, ExitCode : " + process.ExitCode + "\n";
+            }
 
+            // Display peak memory statistics for the process.
+            richTextBox1.Text += "Peak physical memory usage of the process : " + peakWorkingSet + "\n";
+            richTextBox1.Text += "Peak paged memory usage of the process : " + peakPagedMem + "\n";
+            richTextBox1.Text += "Peak virtual memory usage of the process : " + peakVirtualMem + "\n";
         }
 
         void show_process_info(Process process)
@@ -713,7 +699,7 @@ namespace vcs_Process1
             richTextBox1.Text += "程式目前使用記憶體 PagedMemorySize64 : " + (process.PagedMemorySize64 / 1024.0 / 1024.0).ToString("F2") + " MB\n";
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button11_Click(object sender, EventArgs e)
         {
@@ -919,6 +905,7 @@ namespace vcs_Process1
             Process process = Process.Start(@"D:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe");
 
             process.WaitForExit();
+
             if (process.ExitCode == 0)
             {
                 //richTextBox1.Text += "11111111111111111111\n";
@@ -1172,7 +1159,7 @@ namespace vcs_Process1
         {
             list_all_processes();
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
             getProcessInfo();
         }
@@ -1297,12 +1284,11 @@ namespace vcs_Process1
                         richTextBox2.Text += "\n已100秒 開啟\n";
 
                         // 啟動程式
-                        Process process = new Process();    //創建一個進程用於調用外部程序
+                        Process process = new Process();  // 創建一個進程用於調用外部程序
                         process = Process.Start(program_path);  // 啟動程式
                     }
                 }
             }
-
 
             processes = Process.GetProcessesByName(program_name);//需要監控的程序名，該方法帶出該程序所有用到的進程  // 根據[process名稱]取得process
             foreach (Process process in processes)
@@ -1451,4 +1437,7 @@ Process.Start(regeditstr + "\\regedit.exe");//打开注册表
 //------------------------------------------------------------  # 60個
 
 */
+
+
+//while (!process.WaitForExit(1000));
 
