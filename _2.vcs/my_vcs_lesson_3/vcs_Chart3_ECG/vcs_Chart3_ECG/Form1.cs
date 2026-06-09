@@ -20,10 +20,19 @@ namespace vcs_Chart3_ECG
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // 初始化 Chart
-            chart1.ChartAreas.Add(new ChartArea("ECG"));
-            chart1.Series.Add("ECGWave");
-            chart1.Series["ECGWave"].ChartType = SeriesChartType.Line;
+            richTextBox1.Size = new Size(300, 500);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            chart1.ChartAreas.Clear();  // 清除所有圖表區
+            chart1.Series.Clear();  // 清除所有數列
+
+            //圖表區設定
+            ChartArea chartarea = new ChartArea("ChartArea1");
+            chart1.ChartAreas.Add(chartarea);  // 將圖表區新增到圖表上
+
+            Series series1 = new Series("心電圖", 500);  // 初始化數列1(名稱, 最大值)
+            series1.ChartType = SeriesChartType.Line;
+            chart1.Series.Add(series1);  // 將數列1新增到chart上
 
             // 產生模擬心電圖資料
             List<double> ecgData = GenerateECG(3, 500, 75); // 10秒, 取樣率500Hz, 心率75 bpm
@@ -31,8 +40,13 @@ namespace vcs_Chart3_ECG
             // 畫出心電圖
             for (int i = 0; i < ecgData.Count; i++)
             {
-                chart1.Series["ECGWave"].Points.AddXY(i / 500.0, ecgData[i]);
+                chart1.Series[0].Points.AddXY(i / 500.0, ecgData[i]);
             }
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private List<double> GenerateECG(double durationSec, int fs, int hr)

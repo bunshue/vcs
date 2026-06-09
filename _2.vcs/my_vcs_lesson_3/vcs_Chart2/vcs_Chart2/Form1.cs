@@ -138,7 +138,7 @@ namespace vcs_Chart2
             chart1.Series.Clear();
             chart1.Titles.Clear();
 
-            series00.ChartType = SeriesChartType.Point;  // 圖表種類 : 點狀圖
+            series00.ChartType = SeriesChartType.Line;  // 圖表種類
             chart1.Series.Add(series00);
 
             ChartArea ctArea = new ChartArea();
@@ -150,7 +150,7 @@ namespace vcs_Chart2
             chart2.Series.Clear();
             chart2.Titles.Clear();
 
-            series10.ChartType = SeriesChartType.Point;  // 圖表種類 : 點狀圖
+            series10.ChartType = SeriesChartType.Line;  // 圖表種類
             chart2.Series.Add(series10);
         }
 
@@ -252,14 +252,40 @@ namespace vcs_Chart2
         //------------------------------------------------------------  # 60個
 
         double x = 0;
-        private const int POINTS_IN_AXIS = 36;      //製作動畫時X軸要保留的點數
-        private void timer1_Tick(object sender, EventArgs e)
+        double y = 0;
+        private void FunctionGenerator(out double xx, out double yy)
         {
-            double y;
-            y = 110 * sind(x);
+            /* 正弦波
+            xx = x;
+            yy = 110 * sind(x);
+            x += 26;
+            */
 
-            //------------------------------  # 30個
+            /*
+            // 三角波
+            xx = x;
+            if ((x % 100) < 50)
+                yy = x % 100;
+            else
+                yy = 100 - (x % 100);
+            x += 10;
+            */
 
+            // 方波
+            xx = x;
+            if ((x % 100) < 50)
+                yy = 50;
+            else
+                yy = 10;
+            x += 10;
+
+
+        }
+
+        private const int POINTS_IN_AXIS = 36;      //製作動畫時X軸要保留的點數
+
+        void update_chart12(double x, double y)
+        {
             series00.Points.AddXY(x, y);  // AddXY 二維加入chart1, 一般Chart
 
             if (series00.Points.Count > POINTS_IN_AXIS)
@@ -268,6 +294,8 @@ namespace vcs_Chart2
             //設定X軸邊界, 保存最新36點
             chart1.ChartAreas[0].AxisX.Minimum = series00.Points[0].XValue;
             chart1.ChartAreas[0].AxisX.Maximum = x;
+            chart1.ChartAreas[0].AxisY.Minimum = -10;
+            chart1.ChartAreas[0].AxisY.Maximum = 70;
 
             // Adjust Y & X axis scale
             //chart1.ResetAutoValues(); 有沒有看起來一樣
@@ -282,10 +310,20 @@ namespace vcs_Chart2
             //設定X軸邊界, 保存最新36點
             chart2.ChartAreas[0].AxisX.Minimum = series10.Points[0].XValue;
             chart2.ChartAreas[0].AxisX.Maximum = x;
+            chart2.ChartAreas[0].AxisY.Minimum = -10;
+            chart2.ChartAreas[0].AxisY.Maximum = 70;
 
             //------------------------------  # 30個
 
-            x += 26;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            double xx;
+            double yy;
+            FunctionGenerator(out xx, out yy);
+
+            update_chart12(xx, yy);
         }
 
         //------------------------------------------------------------  # 60個

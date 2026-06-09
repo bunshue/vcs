@@ -10,10 +10,10 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Globalization; //for CultureInfo
+using System.Globalization;  // for CultureInfo
 using System.Threading;
-using System.Diagnostics;   //for StackTrace
-using System.Reflection;    //for MethodInfo
+using System.Diagnostics;  // for StackTrace
+using System.Reflection;  // for MethodInfo
 
 namespace vcs_test_all_03_Syntax
 {
@@ -288,23 +288,13 @@ namespace vcs_test_all_03_Syntax
             }
         }
 
-        //swap範例 ST
-        private void Swap(ref int n1, ref int n2)
-        {
-            int temp = n1;
-            n1 = n2;
-            n2 = temp;
-        }
+        //------------------------------------------------------------  # 60個
 
         private void button6_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "swap範例\n";
-            int a = 10, b = 15;
-            richTextBox1.Text += "主程式:呼叫Swap方法前: a = " + a.ToString() + "  b = " + b.ToString() + "\n";
-            Swap(ref a, ref b);
-            richTextBox1.Text += "主程式:呼叫Swap方法後: a = " + a.ToString() + "  b = " + b.ToString() + "\n";
         }
-        //swap範例 SP
+
+        //------------------------------------------------------------  # 60個
 
         private void button7_Click(object sender, EventArgs e)
         {
@@ -355,48 +345,10 @@ namespace vcs_test_all_03_Syntax
             }
         }
 
-        int[] pcLot = new int[6];
-
-        // SetLot可用來設定num個min~max之間的亂數，並將亂數值放入choose陣列內
-        void SetLot(ref  int[] choose, int min, int max, int num)
-        {
-            int[] lot = new int[50];//陣列元素為lot[0]~lot[49],lot[49]省略不用 
-            int max_dim, choice;
-            int i, j;
-            max_dim = max - min + 1;
-            for (i = 0; i < max_dim; i++)
-            {
-                lot[i] = min + i;
-            }
-            Random rndObj = new Random();  // 建立亂數物件rndObj
-            for (i = 0; i < num; i++)
-            {
-                choice = rndObj.Next(0, max_dim);
-                choose[i] = lot[choice];
-                for (j = choice; j < max_dim; j++)
-                {
-                    lot[j] = lot[j + 1];
-                }
-                max_dim--;
-            }
-        }
+        //------------------------------------------------------------  # 60個
 
         private void button9_Click(object sender, EventArgs e)
         {
-            //測試 ref
-
-            // 呼叫SetLot方法， 產生本期大樂透6個號碼並放入pcLot陣列內
-            SetLot(ref pcLot, 1, 49, pcLot.Length);
-
-            // 將pcLot陣列內的大樂透號碼進行遞增排序，以方便比對是否中獎
-            Array.Sort(pcLot);
-
-            string pcNumStr = "";
-            // 將本期大樂透號碼逐一指定給pcNumStr字串變數
-            for (int i = 0; i <= pcLot.GetUpperBound(0); i++)
-            {
-                pcNumStr += pcLot[i].ToString() + ", ";
-            }
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -580,12 +532,106 @@ namespace vcs_test_all_03_Syntax
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button22_Click(object sender, EventArgs e)
         {
+            //函數中ref語法
+
+            richTextBox1.Text += "swap範例\n";
+            int a = 10;
+            int b = 15;
+            richTextBox1.Text += "主程式:呼叫Swap方法前: a = " + a.ToString() + "  b = " + b.ToString() + "\n";
+            Swap(ref a, ref b);
+            richTextBox1.Text += "主程式:呼叫Swap方法後: a = " + a.ToString() + "  b = " + b.ToString() + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            richTextBox1.Text += "傳值呼叫 vs 傳址呼叫\n";
+
+            a = 10;
+            b = 5;
+
+            richTextBox1.Text += "原本 a = " + a.ToString() + ", b = " + b.ToString() + "\n";
+            swap(a, b);
+            richTextBox1.Text += "傳值呼叫後, a = " + a.ToString() + ", b = " + b.ToString() + "\n";
+
+            a = 10;
+            b = 5;
+            richTextBox1.Text += "原本 a = " + a.ToString() + ", b = " + b.ToString() + "\n";
+            swap(ref a, ref b);
+            richTextBox1.Text += "傳址呼叫後, a = " + a.ToString() + ", b = " + b.ToString() + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            //測試 ref
+
+            // 呼叫SetLot方法， 產生本期大樂透6個號碼並放入pcLot陣列內
+            SetLot(ref pcLot, 1, 49, pcLot.Length);
+
+            // 將pcLot陣列內的大樂透號碼進行遞增排序，以方便比對是否中獎
+            Array.Sort(pcLot);
+
+            string pcNumStr = "";
+            // 將本期大樂透號碼逐一指定給pcNumStr字串變數
+            for (int i = 0; i <= pcLot.GetUpperBound(0); i++)
+            {
+                pcNumStr += pcLot[i].ToString() + ", ";
+            }
         }
+
+        private void Swap(ref int n1, ref int n2)
+        {
+            int temp = n1;
+            n1 = n2;
+            n2 = temp;
+        }
+
+        void swap(int a, int b)
+        {
+            int t = a;
+            a = b;
+            b = t;
+        }
+
+        void swap(ref int a, ref int b)
+        {
+            int t = a;
+            a = b;
+            b = t;
+        }
+
+        int[] pcLot = new int[6];
+
+        // SetLot可用來設定num個min~max之間的亂數，並將亂數值放入choose陣列內
+        void SetLot(ref int[] choose, int min, int max, int num)
+        {
+            int[] lot = new int[50];//陣列元素為lot[0]~lot[49],lot[49]省略不用 
+            int max_dim, choice;
+            int i, j;
+            max_dim = max - min + 1;
+            for (i = 0; i < max_dim; i++)
+            {
+                lot[i] = min + i;
+            }
+            Random rndObj = new Random();  // 建立亂數物件rndObj
+            for (i = 0; i < num; i++)
+            {
+                choice = rndObj.Next(0, max_dim);
+                choose[i] = lot[choice];
+                for (j = choice; j < max_dim; j++)
+                {
+                    lot[j] = lot[j + 1];
+                }
+                max_dim--;
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void button23_Click(object sender, EventArgs e)
         {
+            //函數中out語法, 一個函數回傳多個變數
             int a = 3;
             int b = 5;
             int c = 6;
@@ -594,49 +640,26 @@ namespace vcs_test_all_03_Syntax
             GetAverageProduct(a, b, c, out avg, out prod);
             richTextBox1.Text += "average = \t" + avg.ToString() + "\n";
             richTextBox1.Text += "product = \t" + prod.ToString() + "\n";
-        }
 
-        private void GetAverageProduct(int a, int b, int c, out float average, out int product)
-        {
-            average = (a + b + c) / (float)3;
-            product = a * b * c;
-        }
+            //------------------------------------------------------------  # 60個
 
-        private void button24_Click(object sender, EventArgs e)
-        {
-            //搜尋指定字串的位置
-            //使用System.Text.RegularExpressions來搜尋指定字串
-            //準備要搜尋的來源字串
-            string strTxt = "彩袖殷勤捧玉鍾，當筵拚卻醉顏紅。舞低楊柳樓心月，歌盡桃花扇底風。從別後，憶相逢，幾回魂夢與君同。今宵賸把銀釭照，猶恐相逢是夢中。";
-            //指定字串
-            string strKey = "，";
-            System.Text.RegularExpressions.MatchCollection matches = System.Text.RegularExpressions.Regex.Matches(strTxt, strKey);
-            foreach (System.Text.RegularExpressions.Match m in matches)
-            {
-                richTextBox1.Text += "找到在 " + m.Index.ToString() + "\n";
-            }
-        }
-
-        private void button25_Click(object sender, EventArgs e)
-        {
             richTextBox1.Text += "\nout 語法 1\n";
-            int r = 0;
+            int remainder = 0;
             for (int i = 1; i < 10; i++)
             {
-                Math.DivRem(i, 7, out r);
-                richTextBox1.Text += i.ToString() + " 除以 7 的餘數 " + r.ToString() + "\n";
+                Math.DivRem(i, 7, out remainder);
+                richTextBox1.Text += i.ToString() + " 除以 7 的餘數 " + remainder.ToString() + "\n";
             }
-        }
 
-        private void button26_Click(object sender, EventArgs e)
-        {
+            //------------------------------------------------------------  # 60個
+
             richTextBox1.Text += "\nout 語法 2\t呼叫一個函數 回傳兩個變數\n";
-            int i;
-            Random r = new Random();
+
+            Random rnd = new Random();
             int[] array = new int[15];
-            for (i = 0; i < array.Length; i++)
+            for (int i = 0; i < array.Length; i++)
             {
-                array[i] = r.Next(100);
+                array[i] = rnd.Next(100);
                 richTextBox1.Text += array[i].ToString() + " ";
             }
 
@@ -647,6 +670,15 @@ namespace vcs_test_all_03_Syntax
             GetDataValueRange(array, out y_min, out y_max);
 
             richTextBox1.Text += "y_min = " + y_min.ToString() + "\t" + "y_max = " + y_max.ToString() + "\n";
+
+            //------------------------------------------------------------  # 60個
+        }
+
+        private void GetAverageProduct(int a, int b, int c, out float average, out int product)
+        {
+            //3進2出的函數
+            average = (a + b + c) / (float)3;
+            product = a * b * c;
         }
 
         void GetDataValueRange(int[] array, out int y_min, out int y_max)
@@ -666,8 +698,36 @@ namespace vcs_test_all_03_Syntax
                     y_max = array[i];
                 }
             }
-
         }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            //搜尋指定字串的位置
+            //使用System.Text.RegularExpressions來搜尋指定字串
+            //準備要搜尋的來源字串
+            string strTxt = "彩袖殷勤捧玉鍾，當筵拚卻醉顏紅。舞低楊柳樓心月，歌盡桃花扇底風。從別後，憶相逢，幾回魂夢與君同。今宵賸把銀釭照，猶恐相逢是夢中。";
+            //指定字串
+            string strKey = "，";
+            System.Text.RegularExpressions.MatchCollection matches = System.Text.RegularExpressions.Regex.Matches(strTxt, strKey);
+            foreach (System.Text.RegularExpressions.Match m in matches)
+            {
+                richTextBox1.Text += "找到在 " + m.Index.ToString() + "\n";
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+        }
+
+        //------------------------------------------------------------  # 60個
 
         //ASCII Table ST
         internal string TenToBinary(long value)//將十進制轉換為二進制
@@ -796,39 +856,13 @@ namespace vcs_test_all_03_Syntax
         {
         }
 
-        //傳值呼叫 vs 傳址呼叫 ST
-        void swap(int a, int b)
-        {
-            int t = a;
-            a = b;
-            b = t;
-        }
-
-        void swap(ref int a, ref int b)
-        {
-            int t = a;
-            a = b;
-            b = t;
-        }
+        //------------------------------------------------------------  # 60個
 
         private void button34_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "傳值呼叫 vs 傳址呼叫\n";
-
-            int a = 10;
-            int b = 5;
-
-            richTextBox1.Text += "原本 a = " + a.ToString() + ", b = " + b.ToString() + "\n";
-            swap(a, b);
-            richTextBox1.Text += "傳值呼叫後, a = " + a.ToString() + ", b = " + b.ToString() + "\n";
-
-            a = 10;
-            b = 5;
-            richTextBox1.Text += "原本 a = " + a.ToString() + ", b = " + b.ToString() + "\n";
-            swap(ref a, ref b);
-            richTextBox1.Text += "傳址呼叫後, a = " + a.ToString() + ", b = " + b.ToString() + "\n";
         }
-        //傳值呼叫 vs 傳址呼叫 SP
+
+        //------------------------------------------------------------  # 60個
 
         private void button35_Click(object sender, EventArgs e)
         {
@@ -1170,6 +1204,8 @@ namespace vcs_test_all_03_Syntax
             }
         }
     }
+
+    //------------------------------------------------------------  # 60個
 
     public static partial class Extensions
     {
