@@ -41,22 +41,12 @@ namespace vcs_ReadWrite_XML1A
 
         void show_item_location()
         {
-            //設定執行後的表單起始位置, 指定位置
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(0, 0);
-
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-            int W = 170;
-            int H = 320;
-
-            x_st = 20;
-            y_st = 20;
-            dx = W + 20;
-            dy = H + 20;
-
+            int W = 200;
+            int H = 370;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = W + 10;
+            int dy = H + 10;
             groupBox0.Size = new Size(W, H);
             groupBox1.Size = new Size(W, H);
             groupBox2.Size = new Size(W, H);
@@ -65,7 +55,6 @@ namespace vcs_ReadWrite_XML1A
             groupBox5.Size = new Size(W, H);
             groupBox6.Size = new Size(W, H);
             groupBox7.Size = new Size(W, H);
-
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
@@ -75,69 +64,69 @@ namespace vcs_ReadWrite_XML1A
             groupBox6.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             groupBox7.Location = new Point(x_st + dx * 3, y_st + dy * 1);
 
-            richTextBox1.Size = new Size(400, 660);
+            richTextBox1.Size = new Size(420, 750);
             richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             x_st = 10;
             y_st = 20;
-            dx = 150 + 10;
-            dy = 50 + 10;
+            dx = 180 + 10;
+            dy = 60 + 10;
             button00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button03.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button04.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
             button10.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button13.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button14.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
             button20.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button22.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button23.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button24.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
             button30.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button31.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button32.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button33.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button34.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
             button40.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button41.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button42.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button43.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button44.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
             button50.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button51.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button52.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button53.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button54.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
             button60.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button61.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button62.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button63.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button64.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
             button70.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button71.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button72.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button73.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button74.Location = new Point(x_st + dx * 0, y_st + dy * 4);
 
-            this.Size = new Size(1210, 740);
+            this.Size = new Size(1300, 810);
+            this.Text = "vcs_ReadWrite_XML1A";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         //XML操作0
         string filename0 = @"D:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\data\_xml\vcs_ReadWrite_XML1.xml";
@@ -896,3 +885,18 @@ namespace vcs_ReadWrite_XML1A
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
+

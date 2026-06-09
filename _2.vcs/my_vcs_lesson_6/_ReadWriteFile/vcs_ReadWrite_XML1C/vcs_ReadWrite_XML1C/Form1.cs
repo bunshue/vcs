@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;    //for FILE
+using System.IO;  // for FILE
 using System.Xml;
 
 using System.Xml.Linq;  //for XDocument, XElement
@@ -35,112 +35,76 @@ namespace vcs_ReadWrite_XML1C
 
         void show_item_location()
         {
-            //設定執行後的表單起始位置, 指定位置
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(0, 0);
-
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
-            //button
-            x_st = 20;
-            y_st = 20;
-            dx = 240;
-            dy = 460;
-
+            int W = 200;
+            int H = 370;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = W + 10;
+            int dy = H + 10;
+            groupBox0.Size = new Size(W * 2 + 10, H);
+            groupBox2.Size = new Size(W, H);
+            groupBox3.Size = new Size(W, H);
+            groupBox4.Size = new Size(W, H);
+            groupBox5.Size = new Size(W, H);
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             groupBox3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             groupBox4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             groupBox5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
 
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            richTextBox1.Size = new Size(800, 1000);
+            richTextBox1.Size = new Size(500, H * 2+10);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            x_st = 20;
+            x_st = 10;
             y_st = 20;
-            dx = 180;
-            dy = 80;
+            dx = 180+10;
+            dy = 60+10;
             button00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button03.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button04.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
             button05.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button06.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button07.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             button08.Location = new Point(x_st + dx * 1, y_st + dy * 3);
             button09.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-
             button20.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button22.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button23.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button24.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
             button30.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button31.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button32.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button33.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button34.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
             button40.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button41.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button42.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button43.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button44.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
             button50.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button51.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button52.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button53.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button54.Location = new Point(x_st + dx * 0, y_st + dy * 4);
 
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            this.Size = new Size(1170, 810);
+            this.Text = "vcs_ReadWrite_XML1C";
 
-            //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
-            bt_exit_setup();
-        }
-
-        void bt_exit_setup()
-        {
-            int width = 5;
-            int w = 50; //設定按鈕大小 W
-            int h = 50; //設定按鈕大小 H
-
-            Button bt_exit = new Button();  // 實例化按鈕
-            bt_exit.Size = new Size(w, h);
-            bt_exit.Text = "";
-            Bitmap bmp = new Bitmap(w, h);
-            Graphics g = Graphics.FromImage(bmp);
-            Pen p = new Pen(Color.Red, width);
-            g.Clear(Color.Pink);
-            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
-            g.DrawLine(p, 0, 0, w - 1, h - 1);
-            g.DrawLine(p, w - 1, 0, 0, h - 1);
-            bt_exit.Image = bmp;
-
-            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
-            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
-
-            this.Controls.Add(bt_exit); // 將按鈕加入表單
-            bt_exit.BringToFront();     //移到最上層
-        }
-
-        private void bt_exit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         //XML操作0
         XmlDocument xmldoc;
@@ -501,6 +465,8 @@ namespace vcs_ReadWrite_XML1C
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         //XML操作3
 
         private void button30_Click(object sender, EventArgs e)
@@ -664,14 +630,16 @@ namespace vcs_ReadWrite_XML1C
         {
 
         }
-
     }
+
+    //------------------------------------------------------------  # 60個
+
     /// <summary>
     /// Xml的操作公共類
     /// </summary>    
     public class XmlHelper
     {
-        #region 字段定義
+        //#region 字段定義
         /// <summary>
         /// XML文件的物理路徑
         /// </summary>
@@ -684,9 +652,9 @@ namespace vcs_ReadWrite_XML1C
         /// XML的根節點
         /// </summary>
         private XmlElement _element;
-        #endregion
+        //#endregion
 
-        #region 構造方法
+        //#region 構造方法
         /// <summary>
         /// 實例化XmlHelper對象
         /// </summary>
@@ -696,9 +664,9 @@ namespace vcs_ReadWrite_XML1C
             //獲取XML文件的絕對路徑
             _filePath = xmlFilePath;
         }
-        #endregion
+        //#endregion
 
-        #region 創建XML的根節點
+        //#region 創建XML的根節點
         /// <summary>
         /// 創建XML的根節點
         /// </summary>
@@ -718,9 +686,9 @@ namespace vcs_ReadWrite_XML1C
             //為XML的根節點賦值
             _element = _xml.DocumentElement;
         }
-        #endregion
+        ///#endregion
 
-        #region 獲取指定XPath表達式的節點對象
+        //#region 獲取指定XPath表達式的節點對象
         /// <summary>
         /// 獲取指定XPath表達式的節點對象
         /// </summary>        
@@ -737,9 +705,9 @@ namespace vcs_ReadWrite_XML1C
             //返回XPath節點
             return _element.SelectSingleNode(xPath);
         }
-        #endregion
+        //#endregion
 
-        #region 獲取指定XPath表達式節點的值
+        //#region 獲取指定XPath表達式節點的值
         /// <summary>
         /// 獲取指定XPath表達式節點的值
         /// </summary>
@@ -756,9 +724,9 @@ namespace vcs_ReadWrite_XML1C
             //返回XPath節點的值
             return _element.SelectSingleNode(xPath).InnerText;
         }
-        #endregion
+        //#endregion
 
-        #region 獲取指定XPath表達式節點的屬性值
+        //#region 獲取指定XPath表達式節點的屬性值
         /// <summary>
         /// 獲取指定XPath表達式節點的屬性值
         /// </summary>
@@ -776,9 +744,9 @@ namespace vcs_ReadWrite_XML1C
             //返回XPath節點的屬性值
             return _element.SelectSingleNode(xPath).Attributes[attributeName].Value;
         }
-        #endregion
+        //#endregion
 
-        #region 新增節點
+        //#region 新增節點
         /// <summary>
         /// 1. 功能：新增節點。
         /// 2. 使用條件：將任意節點插入到當前Xml文件中。
@@ -812,9 +780,9 @@ namespace vcs_ReadWrite_XML1C
             //將節點插入到根節點下
             AppendNode(node);
         }
-        #endregion
+        //#endregion
 
-        #region 刪除節點
+        //#region 刪除節點
         /// <summary>
         /// 刪除指定XPath表達式的節點
         /// </summary>        
@@ -834,9 +802,9 @@ namespace vcs_ReadWrite_XML1C
             //刪除節點
             _element.RemoveChild(node);
         }
-        #endregion //刪除節點
+        //#endregion //刪除節點
 
-        #region 保存XML文件
+        //#region 保存XML文件
         /// <summary>
         /// 保存XML文件
         /// </summary>        
@@ -848,11 +816,11 @@ namespace vcs_ReadWrite_XML1C
             //保存XML文件
             _xml.Save(this._filePath);
         }
-        #endregion //保存XML文件
+        //#endregion //保存XML文件
 
-        #region 靜態方法
+        //#region 靜態方法
 
-        #region 創建根節點對象
+        //#region 創建根節點對象
         /// <summary>
         /// 創建根節點對象
         /// </summary>
@@ -873,9 +841,9 @@ namespace vcs_ReadWrite_XML1C
             //返回根節點
             return xmlDocument.DocumentElement;
         }
-        #endregion
+        //#endregion
 
-        #region 獲取指定XPath表達式節點的值
+        //#region 獲取指定XPath表達式節點的值
         /// <summary>
         /// 獲取指定XPath表達式節點的值
         /// </summary>
@@ -893,9 +861,9 @@ namespace vcs_ReadWrite_XML1C
             //返回XPath節點的值
             return rootElement.SelectSingleNode(xPath).InnerText;
         }
-        #endregion
+        //#endregion
 
-        #region 獲取指定XPath表達式節點的屬性值
+        //#region 獲取指定XPath表達式節點的屬性值
         /// <summary>
         /// 獲取指定XPath表達式節點的屬性值
         /// </summary>
@@ -914,9 +882,9 @@ namespace vcs_ReadWrite_XML1C
             //返回XPath節點的屬性值
             return rootElement.SelectSingleNode(xPath).Attributes[attributeName].Value;
         }
-        #endregion
+        //#endregion
 
-        #endregion
+        //#endregion
 
         public static void SetValue(string xmlFilePath, string xPath, string newtext)
         {
@@ -934,3 +902,19 @@ namespace vcs_ReadWrite_XML1C
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
+
+

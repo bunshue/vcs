@@ -7,7 +7,28 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Diagnostics;   //for Debug
+using System.Diagnostics;  // for Debug
+
+/*
+Math 的參數和方法
+Math.E
+Math.PI
+Math.Exp()
+Math.Pow()
+Math.Abs()
+Math.Max()
+Math.Min()
+Math.Sin()
+Math.Cos()
+Math.Acos()
+Math.Sqrt()
+Math.Round()
+Math.Floor()
+Math.Ceiling()
+Math.Log()
+Math.Log10()
+Math.DivRem()
+*/
 
 namespace vcs_test_all_01_Math
 {

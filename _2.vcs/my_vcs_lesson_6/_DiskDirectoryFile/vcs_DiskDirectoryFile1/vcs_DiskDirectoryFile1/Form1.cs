@@ -1509,26 +1509,15 @@ namespace vcs_DiskDirectoryFile1
             //------------------------------------------------------------  # 60個
 
             //搜尋檔案
-            if (GetFile() == true)
-            {
-                MessageBox.Show("有找到");
-            }
-            else
-            {
-                MessageBox.Show("沒有找到");
-            }
-        }
-
-        private Boolean GetFile()
-        {
             richTextBox1.Text += "尋找檔案 IMG_20180228_215525.jpg\n";
             DirectoryInfo dinfo8 = new DirectoryInfo(@"D:\_git\vcs\_1.data\______test_files1");
             foreach (FileInfo info in dinfo8.GetFiles("IMG_20180228_215525.jpg"))
             {
-                return true;
+                MessageBox.Show("有找到");
             }
-            return false;
         }
+
+        //------------------------------------------------------------  # 60個
 
         //讀取資料夾下所有資料夾
         private ArrayList GetDirectories(string foldername)
@@ -1820,9 +1809,8 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_files16_Click(object sender, EventArgs e)
         {
-            //遍歷文件夾實例1
-            //遍歷文件夾實例1
             //遍歷文件夾實例 1
+
             //還沒加入listView之標題
 
             listView1.Items.Clear();
@@ -1895,9 +1883,8 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_files18_Click(object sender, EventArgs e)
         {
-            //遍歷文件夾實例3
-            //遍歷文件夾實例3
             //遍歷文件夾實例 3
+
             //找出資料夾內所有檔案
             //string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
             string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_book_magazine";
@@ -1922,15 +1909,9 @@ namespace vcs_DiskDirectoryFile1
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error processing file '" +
-                        file_info.Name + "'\n" + ex.Message,
-                        "Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
+                    MessageBox.Show("Error processing file '" + file_info.Name + "'\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             } // foreach file_info
-
-
         }
 
         //------------------------------------------------------------  # 60個

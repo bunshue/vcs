@@ -29,21 +29,18 @@ namespace vcs_ReadWrite_XML2
 
         void show_item_location()
         {
-            //設定執行後的表單起始位置, 指定位置
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(0, 0);
-
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
-            //button
-            x_st = 20;
-            y_st = 20;
-            dx = 240;
-            dy = 460;
-
+            int W = 200;
+            int H = 370;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = W + 10;
+            int dy = H + 10;
+            groupBox0.Size = new Size(W, H);
+            groupBox1.Size = new Size(W, H);
+            groupBox2.Size = new Size(W, H);
+            groupBox3.Size = new Size(W, H);
+            groupBox4.Size = new Size(W, H);
+            groupBox5.Size = new Size(W, H);
             groupBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             groupBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
@@ -51,58 +48,57 @@ namespace vcs_ReadWrite_XML2
             groupBox4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             groupBox5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
 
+            dataGridView1.Size = new Size(410, 360);
             dataGridView1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            dataGridView1.Size = new Size(400, 400);
 
-            treeView1.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            treeView1.Size = new Size(400, 400);
+            treeView1.Size = new Size(410, 360);
+            treeView1.Location = new Point(x_st + dx * 3, y_st + dy * 1 + 10);
 
+            richTextBox1.Size = new Size(300, 750);
             richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
-            richTextBox1.Size = new Size(300, 860);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            x_st = 20;
+            x_st = 10;
             y_st = 20;
-            dx = 100;
-            dy = 80;
+            dx = 180 + 10;
+            dy = 60 + 10;
             button00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button03.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button04.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
             button10.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button13.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button14.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
             button20.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button22.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button23.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button24.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
             button30.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button31.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button32.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button33.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button34.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
             button40.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button41.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button42.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button43.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button44.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
             button50.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button51.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button52.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button53.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button54.Location = new Point(x_st + dx * 0, y_st + dy * 4);
 
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            this.Size = new Size(1390, 810);
+            this.Text = "vcs_ReadWrite_XML2";
 
-            this.Size = new Size(1600, 960);
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -409,6 +405,8 @@ namespace vcs_ReadWrite_XML2
             return xmlString;
         }
 
+        //------------------------------------------------------------  # 60個
+
         //XML To TreeView ST
         //讀取XML文檔 →獲取XML根元素→ 遞歸添加根元素的子元素(因為樹形的結構和XML很像)
         private void button22_Click(object sender, EventArgs e)
@@ -452,6 +450,8 @@ namespace vcs_ReadWrite_XML2
             return null;
         }
         //XML To TreeView SP
+
+        //------------------------------------------------------------  # 60個
 
         private void button23_Click(object sender, EventArgs e)
         {

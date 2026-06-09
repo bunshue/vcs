@@ -76,17 +76,18 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(1028, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(959, 21);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(424, 705);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(1108, 450);
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(975, 30);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(75, 39);
+            this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 1;
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
@@ -97,7 +98,7 @@
             this.button01.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button01.Location = new System.Drawing.Point(17, 88);
             this.button01.Name = "button01";
-            this.button01.Size = new System.Drawing.Size(160, 60);
+            this.button01.Size = new System.Drawing.Size(180, 60);
             this.button01.TabIndex = 2;
             this.button01.Text = "讀取XML檔案";
             this.button01.UseVisualStyleBackColor = true;
@@ -108,7 +109,7 @@
             this.button02.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button02.Location = new System.Drawing.Point(17, 162);
             this.button02.Name = "button02";
-            this.button02.Size = new System.Drawing.Size(160, 60);
+            this.button02.Size = new System.Drawing.Size(180, 60);
             this.button02.TabIndex = 3;
             this.button02.UseVisualStyleBackColor = true;
             this.button02.Click += new System.EventHandler(this.button02_Click);
@@ -118,7 +119,7 @@
             this.button00.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button00.Location = new System.Drawing.Point(17, 18);
             this.button00.Name = "button00";
-            this.button00.Size = new System.Drawing.Size(160, 60);
+            this.button00.Size = new System.Drawing.Size(180, 60);
             this.button00.TabIndex = 4;
             this.button00.Text = "建立XML檔案";
             this.button00.UseVisualStyleBackColor = true;
@@ -129,7 +130,7 @@
             this.button03.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button03.Location = new System.Drawing.Point(17, 239);
             this.button03.Name = "button03";
-            this.button03.Size = new System.Drawing.Size(160, 60);
+            this.button03.Size = new System.Drawing.Size(180, 60);
             this.button03.TabIndex = 5;
             this.button03.UseVisualStyleBackColor = true;
             this.button03.Click += new System.EventHandler(this.button03_Click);
@@ -139,7 +140,7 @@
             this.button04.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button04.Location = new System.Drawing.Point(17, 305);
             this.button04.Name = "button04";
-            this.button04.Size = new System.Drawing.Size(160, 60);
+            this.button04.Size = new System.Drawing.Size(180, 60);
             this.button04.TabIndex = 6;
             this.button04.UseVisualStyleBackColor = true;
             this.button04.Click += new System.EventHandler(this.button04_Click);
@@ -177,7 +178,7 @@
             this.button10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button10.Location = new System.Drawing.Point(17, 18);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(160, 60);
+            this.button10.Size = new System.Drawing.Size(180, 60);
             this.button10.TabIndex = 4;
             this.button10.Text = "建立XML檔案";
             this.button10.UseVisualStyleBackColor = true;
@@ -188,7 +189,7 @@
             this.button11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button11.Location = new System.Drawing.Point(17, 88);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(160, 60);
+            this.button11.Size = new System.Drawing.Size(180, 60);
             this.button11.TabIndex = 2;
             this.button11.Text = "新增XML資料";
             this.button11.UseVisualStyleBackColor = true;
@@ -199,7 +200,7 @@
             this.button12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button12.Location = new System.Drawing.Point(17, 162);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(160, 60);
+            this.button12.Size = new System.Drawing.Size(180, 60);
             this.button12.TabIndex = 3;
             this.button12.Text = "修改資料";
             this.button12.UseVisualStyleBackColor = true;
@@ -210,7 +211,7 @@
             this.button14.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button14.Location = new System.Drawing.Point(17, 305);
             this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(160, 60);
+            this.button14.Size = new System.Drawing.Size(180, 60);
             this.button14.TabIndex = 6;
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
@@ -220,7 +221,7 @@
             this.button13.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button13.Location = new System.Drawing.Point(17, 239);
             this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(160, 60);
+            this.button13.Size = new System.Drawing.Size(180, 60);
             this.button13.TabIndex = 5;
             this.button13.Text = "刪除資料";
             this.button13.UseVisualStyleBackColor = true;
@@ -245,7 +246,7 @@
             this.button20.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button20.Location = new System.Drawing.Point(17, 18);
             this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(160, 60);
+            this.button20.Size = new System.Drawing.Size(180, 60);
             this.button20.TabIndex = 4;
             this.button20.Text = "建立XML檔案";
             this.button20.UseVisualStyleBackColor = true;
@@ -256,7 +257,7 @@
             this.button21.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button21.Location = new System.Drawing.Point(17, 88);
             this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(160, 60);
+            this.button21.Size = new System.Drawing.Size(180, 60);
             this.button21.TabIndex = 2;
             this.button21.Text = "讀取XML檔案";
             this.button21.UseVisualStyleBackColor = true;
@@ -267,7 +268,7 @@
             this.button22.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button22.Location = new System.Drawing.Point(17, 162);
             this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(160, 60);
+            this.button22.Size = new System.Drawing.Size(180, 60);
             this.button22.TabIndex = 3;
             this.button22.Text = "新增XML節點";
             this.button22.UseVisualStyleBackColor = true;
@@ -278,7 +279,7 @@
             this.button24.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button24.Location = new System.Drawing.Point(17, 305);
             this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(160, 60);
+            this.button24.Size = new System.Drawing.Size(180, 60);
             this.button24.TabIndex = 6;
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
@@ -288,7 +289,7 @@
             this.button23.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button23.Location = new System.Drawing.Point(17, 239);
             this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(160, 60);
+            this.button23.Size = new System.Drawing.Size(180, 60);
             this.button23.TabIndex = 5;
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
@@ -312,7 +313,7 @@
             this.button30.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button30.Location = new System.Drawing.Point(17, 18);
             this.button30.Name = "button30";
-            this.button30.Size = new System.Drawing.Size(160, 60);
+            this.button30.Size = new System.Drawing.Size(180, 60);
             this.button30.TabIndex = 4;
             this.button30.Text = "載入XML檔案";
             this.button30.UseVisualStyleBackColor = true;
@@ -323,7 +324,7 @@
             this.button31.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button31.Location = new System.Drawing.Point(17, 88);
             this.button31.Name = "button31";
-            this.button31.Size = new System.Drawing.Size(160, 60);
+            this.button31.Size = new System.Drawing.Size(180, 60);
             this.button31.TabIndex = 2;
             this.button31.Text = "向XML中新增資料";
             this.button31.UseVisualStyleBackColor = true;
@@ -334,7 +335,7 @@
             this.button32.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button32.Location = new System.Drawing.Point(17, 162);
             this.button32.Name = "button32";
-            this.button32.Size = new System.Drawing.Size(160, 60);
+            this.button32.Size = new System.Drawing.Size(180, 60);
             this.button32.TabIndex = 3;
             this.button32.Text = "修改XML內容";
             this.button32.UseVisualStyleBackColor = true;
@@ -345,7 +346,7 @@
             this.button34.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button34.Location = new System.Drawing.Point(17, 305);
             this.button34.Name = "button34";
-            this.button34.Size = new System.Drawing.Size(160, 60);
+            this.button34.Size = new System.Drawing.Size(180, 60);
             this.button34.TabIndex = 6;
             this.button34.Text = "刪除節點";
             this.button34.UseVisualStyleBackColor = true;
@@ -356,7 +357,7 @@
             this.button33.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button33.Location = new System.Drawing.Point(17, 239);
             this.button33.Name = "button33";
-            this.button33.Size = new System.Drawing.Size(160, 60);
+            this.button33.Size = new System.Drawing.Size(180, 60);
             this.button33.TabIndex = 5;
             this.button33.Text = "尋找節點";
             this.button33.UseVisualStyleBackColor = true;
@@ -381,7 +382,7 @@
             this.button40.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button40.Location = new System.Drawing.Point(17, 18);
             this.button40.Name = "button40";
-            this.button40.Size = new System.Drawing.Size(160, 60);
+            this.button40.Size = new System.Drawing.Size(180, 60);
             this.button40.TabIndex = 4;
             this.button40.Text = "建立XML 1";
             this.button40.UseVisualStyleBackColor = true;
@@ -392,7 +393,7 @@
             this.button41.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button41.Location = new System.Drawing.Point(17, 88);
             this.button41.Name = "button41";
-            this.button41.Size = new System.Drawing.Size(160, 60);
+            this.button41.Size = new System.Drawing.Size(180, 60);
             this.button41.TabIndex = 2;
             this.button41.Text = "建立XML 2";
             this.button41.UseVisualStyleBackColor = true;
@@ -403,7 +404,7 @@
             this.button42.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button42.Location = new System.Drawing.Point(17, 162);
             this.button42.Name = "button42";
-            this.button42.Size = new System.Drawing.Size(160, 60);
+            this.button42.Size = new System.Drawing.Size(180, 60);
             this.button42.TabIndex = 3;
             this.button42.Text = "對XML檔案的新增";
             this.button42.UseVisualStyleBackColor = true;
@@ -414,7 +415,7 @@
             this.button44.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button44.Location = new System.Drawing.Point(17, 305);
             this.button44.Name = "button44";
-            this.button44.Size = new System.Drawing.Size(160, 60);
+            this.button44.Size = new System.Drawing.Size(180, 60);
             this.button44.TabIndex = 6;
             this.button44.UseVisualStyleBackColor = true;
             this.button44.Click += new System.EventHandler(this.button44_Click);
@@ -424,7 +425,7 @@
             this.button43.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button43.Location = new System.Drawing.Point(17, 239);
             this.button43.Name = "button43";
-            this.button43.Size = new System.Drawing.Size(160, 60);
+            this.button43.Size = new System.Drawing.Size(180, 60);
             this.button43.TabIndex = 5;
             this.button43.UseVisualStyleBackColor = true;
             this.button43.Click += new System.EventHandler(this.button43_Click);
@@ -448,7 +449,7 @@
             this.button50.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button50.Location = new System.Drawing.Point(17, 18);
             this.button50.Name = "button50";
-            this.button50.Size = new System.Drawing.Size(160, 60);
+            this.button50.Size = new System.Drawing.Size(180, 60);
             this.button50.TabIndex = 4;
             this.button50.Text = "載入XML檔案";
             this.button50.UseVisualStyleBackColor = true;
@@ -459,7 +460,7 @@
             this.button51.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button51.Location = new System.Drawing.Point(17, 88);
             this.button51.Name = "button51";
-            this.button51.Size = new System.Drawing.Size(160, 60);
+            this.button51.Size = new System.Drawing.Size(180, 60);
             this.button51.TabIndex = 2;
             this.button51.Text = "修改XML檔案";
             this.button51.UseVisualStyleBackColor = true;
@@ -470,7 +471,7 @@
             this.button52.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button52.Location = new System.Drawing.Point(17, 162);
             this.button52.Name = "button52";
-            this.button52.Size = new System.Drawing.Size(160, 60);
+            this.button52.Size = new System.Drawing.Size(180, 60);
             this.button52.TabIndex = 3;
             this.button52.Text = "其他操作";
             this.button52.UseVisualStyleBackColor = true;
@@ -481,7 +482,7 @@
             this.button54.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button54.Location = new System.Drawing.Point(17, 305);
             this.button54.Name = "button54";
-            this.button54.Size = new System.Drawing.Size(160, 60);
+            this.button54.Size = new System.Drawing.Size(180, 60);
             this.button54.TabIndex = 6;
             this.button54.UseVisualStyleBackColor = true;
             this.button54.Click += new System.EventHandler(this.button54_Click);
@@ -491,7 +492,7 @@
             this.button53.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button53.Location = new System.Drawing.Point(17, 239);
             this.button53.Name = "button53";
-            this.button53.Size = new System.Drawing.Size(160, 60);
+            this.button53.Size = new System.Drawing.Size(180, 60);
             this.button53.TabIndex = 5;
             this.button53.UseVisualStyleBackColor = true;
             this.button53.Click += new System.EventHandler(this.button53_Click);

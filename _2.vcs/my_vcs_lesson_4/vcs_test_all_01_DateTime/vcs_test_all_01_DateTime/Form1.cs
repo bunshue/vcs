@@ -170,7 +170,7 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Text += dt.ToUniversalTime().ToString() + "\n";
             richTextBox1.Text += "全部格式4：" + dt.ToBinary().ToString() + "\n";
 
-            richTextBox1.Text += "当前是否公历闰年 : " + DateTime.IsLeapYear(dt.Year) + "\n";
+            richTextBox1.Text += "當前是否公曆閏年 : " + DateTime.IsLeapYear(dt.Year) + "\n";
 
             richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
 
@@ -335,7 +335,7 @@ namespace vcs_test_all_01_DateTime
             //-------- same
             richTextBox1.Text += dt.CompareTo(dt).ToString() + "\n";//0
 
-            //richTextBox1.Text += dt.Add(?).ToString() + "\n";//问号为一个时间段
+            //richTextBox1.Text += dt.Add(?).ToString() + "\n";//問號為一個時間段
 
             richTextBox1.Text += dt.Equals("2005-11-6 16:11:04").ToString() + "\n";//False
             richTextBox1.Text += dt.Equals(dt).ToString() + "\n";//True
@@ -1114,13 +1114,13 @@ namespace vcs_test_all_01_DateTime
 
         }
 
-        private const int GanZhiStartYear = 0; //干支计算起始年
+        private const int GanZhiStartYear = 0; //干支計算起始年
         private static string ganStr = "甲乙丙丁戊己庚辛壬癸";
         private static string zhiStr = "子丑寅卯辰巳午未申酉戌亥";
 
         string GanZhiYearString(int year)
         {
-            int i = (year - GanZhiStartYear) % 60; //计算干支
+            int i = (year - GanZhiStartYear) % 60; //計算干支
             string tempStr = ganStr[i % 10].ToString() + zhiStr[i % 12].ToString() + "年";
             return tempStr;
         }
@@ -1172,7 +1172,7 @@ namespace vcs_test_all_01_DateTime
             DateTime dt3 = new DateTime(1900, 1, 6, 2, 5, 0); //#1/6/1900 2:05:00 AM#
             DateTime dt4;
             num = 525948.76 * (y - 1900) + sTermInfo[i - 1];
-            dt4 = dt3.AddMinutes(num);//按分钟计算
+            dt4 = dt3.AddMinutes(num);//按分鐘計算
             */
 
             dt = DateTime.Now;
@@ -1487,15 +1487,15 @@ namespace vcs_test_all_01_DateTime
             //------------------------------------------------------------  # 60個
 
             string message = "";
-            message += "显示中文格式的日期、星期几\n";
-            message += "//该语句显示的为英文格式\n";
+            message += "顯示中文格式的日期、星期幾\n";
+            message += "//該語句顯示的為英文格式\n";
             message += DateTime.Now.DayOfWeek.ToString() + "\n";
 
             message += "//顯示中文格式星期幾 簡中1\n";
             message += DateTime.Now.ToString("ddd", new CultureInfo("zh-cn")) + "\n";      //3個d
 
             message += "//顯示中文格式星期幾 簡中2\n";
-            message += DateTime.Now.ToString("dddd", new CultureInfo("zh-cn")) + "\n";     //更新简捷的显示中文格式星期几用4个dddd就可以搞定了，不需任何拼凑
+            message += DateTime.Now.ToString("dddd", new CultureInfo("zh-cn")) + "\n";     //更新簡捷的顯示中文格式星期幾用4個dddd就可以搞定了，不需任何拼湊
 
             message += "//顯示中文格式星期幾 正中1\n";
             message += DateTime.Now.ToString("ddd", new CultureInfo("zh-tw")) + "\n";      //3個d
@@ -1509,7 +1509,7 @@ namespace vcs_test_all_01_DateTime
             message += "//顯示美語格式星期幾\n";
             message += DateTime.Now.ToString("ddd", new CultureInfo("en-us")) + "\n";
 
-            message += "//VS2005後显示星期的新方法是\n";
+            message += "//VS2005後顯示星期的新方法是\n";
             message += "星期" + DateTime.Now.DayOfWeek.ToString(("d")) + "\n";
 
             richTextBox1.Text += message + "\n";
@@ -1759,7 +1759,7 @@ namespace vcs_test_all_01_DateTime
             string mesg = string.Empty;
 
             dt = DateTime.Now;
-            mesg += "台灣本地時間\n";
+            mesg += "臺灣本地時間\n";
             mesg += "時間 : " + dt.ToLongTimeString() + "\n";
             mesg += "日期 : " + dt.ToShortDateString() + "\n\n";
 
@@ -1782,7 +1782,7 @@ namespace vcs_test_all_01_DateTime
             }
 
             // Select a default value
-            comboBox1.SelectedItem = FindItemContaining(comboBox1.Items, "台北");
+            comboBox1.SelectedItem = FindItemContaining(comboBox1.Items, "臺北");
 
             TimeZoneInfo zone1 = comboBox1.SelectedItem as TimeZoneInfo;
             string name1 = zone1.DisplayName;
@@ -2192,4 +2192,3 @@ richTextBox1.Text += "一戰經歷時間 : " + ww1_time.ToString("T") + "\n";
 //日俄戰爭
 //1904年2月8日－1905年9月5日
 */
-

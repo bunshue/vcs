@@ -58,7 +58,7 @@
             // 
             this.btnAllUpdate.Location = new System.Drawing.Point(305, 126);
             this.btnAllUpdate.Name = "btnAllUpdate";
-            this.btnAllUpdate.Size = new System.Drawing.Size(75, 26);
+            this.btnAllUpdate.Size = new System.Drawing.Size(72, 36);
             this.btnAllUpdate.TabIndex = 24;
             this.btnAllUpdate.Text = "整批更新";
             this.btnAllUpdate.UseVisualStyleBackColor = true;
@@ -68,7 +68,7 @@
             // 
             this.btnDel.Location = new System.Drawing.Point(305, 89);
             this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(75, 26);
+            this.btnDel.Size = new System.Drawing.Size(72, 36);
             this.btnDel.TabIndex = 23;
             this.btnDel.Text = "刪除";
             this.btnDel.UseVisualStyleBackColor = true;
@@ -78,7 +78,7 @@
             // 
             this.btnUpdate.Location = new System.Drawing.Point(305, 52);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(75, 26);
+            this.btnUpdate.Size = new System.Drawing.Size(72, 36);
             this.btnUpdate.TabIndex = 22;
             this.btnUpdate.Text = "修改";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -88,7 +88,7 @@
             // 
             this.btnAdd.Location = new System.Drawing.Point(305, 15);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 26);
+            this.btnAdd.Size = new System.Drawing.Size(72, 36);
             this.btnAdd.TabIndex = 21;
             this.btnAdd.Text = "新增";
             this.btnAdd.UseVisualStyleBackColor = true;

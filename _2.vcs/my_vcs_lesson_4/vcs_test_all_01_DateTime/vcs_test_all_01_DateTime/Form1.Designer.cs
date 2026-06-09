@@ -357,24 +357,24 @@
             // 
             // btn_moon_today
             // 
-            this.btn_moon_today.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.btn_moon_today.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_moon_today.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btn_moon_today.Location = new System.Drawing.Point(171, 118);
             this.btn_moon_today.Name = "btn_moon_today";
             this.btn_moon_today.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btn_moon_today.Size = new System.Drawing.Size(75, 28);
+            this.btn_moon_today.Size = new System.Drawing.Size(72, 36);
             this.btn_moon_today.TabIndex = 21;
             this.btn_moon_today.Text = "今日";
             this.btn_moon_today.Click += new System.EventHandler(this.btn_moon_today_Click);
             // 
             // btn_moon_ok
             // 
-            this.btn_moon_ok.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.btn_moon_ok.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_moon_ok.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btn_moon_ok.Location = new System.Drawing.Point(169, 70);
             this.btn_moon_ok.Name = "btn_moon_ok";
             this.btn_moon_ok.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btn_moon_ok.Size = new System.Drawing.Size(75, 28);
+            this.btn_moon_ok.Size = new System.Drawing.Size(72, 36);
             this.btn_moon_ok.TabIndex = 20;
             this.btn_moon_ok.Text = "選取";
             this.btn_moon_ok.Click += new System.EventHandler(this.btn_moon_ok_Click);

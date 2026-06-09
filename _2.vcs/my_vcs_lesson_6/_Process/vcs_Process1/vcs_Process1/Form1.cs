@@ -66,11 +66,11 @@ namespace vcs_Process1
 
             //------------------------------------------------------------  # 60個
 
-            listView1.View = View.Details;  //定義列表顯示的方式
-            listView1.FullRowSelect = true; //整行一起選取
-            listView1.GridLines = true;  // 顯示格線
-            listView1.Columns.Add("PID", 150, HorizontalAlignment.Left);
-            listView1.Columns.Add("名稱", 250, HorizontalAlignment.Left);
+            listView2.View = View.Details;  //定義列表顯示的方式
+            listView2.FullRowSelect = true; //整行一起選取
+            listView2.GridLines = true;  // 顯示格線
+            listView2.Columns.Add("PID", 150, HorizontalAlignment.Left);
+            listView2.Columns.Add("名稱", 250, HorizontalAlignment.Left);
 
             list_all_processes();
         }
@@ -117,11 +117,13 @@ namespace vcs_Process1
             bt_list_process.Location = new Point(x_st + dx * 5 - 80 - 80 - 80, y_st + dy * 0 - 10);
             bt_open_process.Location = new Point(x_st + dx * 5 - 80 - 80, y_st + dy * 0 - 10);
             bt_kill_process.Location = new Point(x_st + dx * 5 - 80, y_st + dy * 0 - 10);
-            listView1.Size = new Size(410, 400);
-            listView1.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 40);
+            listView2.Size = new Size(410, 400);
+            listView2.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 40);
 
-            richTextBox1.Size = new Size(560, 690);
-            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            listView1.Size = new Size(560, 290);
+            listView1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            richTextBox1.Size = new Size(560, 690-300);
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0+300);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             lb_monitor_process.Text = "監控外部程序運行狀態";
@@ -309,73 +311,6 @@ namespace vcs_Process1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //偵測程式執行時的記憶體用量
-
-            // Define variables to track the peak memory usage of the process. 
-            long peakPagedMem = 0;
-            long peakWorkingSet = 0;
-            long peakVirtualMem = 0;
-
-            Process process = new Process();    //創建一個進程用於調用外部程序
-
-            try
-            {
-                process = Process.Start("NotePad.exe");  // 啟動程式
-
-                // Display the process statistics until the user closes the program. 
-                do
-                {
-                    if (!process.HasExited)
-                    {
-                        // Refresh the current process property values.
-                        process.Refresh();
-
-                        // Display current process statistics.
-
-                        richTextBox1.Text += process.ToString() + "\n";
-
-                        //------------------------------  # 30個
-
-                        richTextBox1.Text += "physical memory usage : " + process.WorkingSet64 + "\n";
-                        richTextBox1.Text += "base priority : " + process.BasePriority + "\n";
-                        richTextBox1.Text += "priority class : " + process.PriorityClass + "\n";
-                        richTextBox1.Text += "user processor time : " + process.UserProcessorTime + "\n";
-                        richTextBox1.Text += "privileged processor time : " + process.PrivilegedProcessorTime + "\n";
-                        richTextBox1.Text += "total processor time : " + process.TotalProcessorTime + "\n";
-                        richTextBox1.Text += "PagedSystemMemorySize64 : " + process.PagedSystemMemorySize64 + "\n";
-                        richTextBox1.Text += "PagedMemorySize64 : " + process.PagedMemorySize64 + "\n";
-
-                        // Update the values for the overall peak memory statistics.
-                        peakPagedMem = process.PeakPagedMemorySize64;
-                        peakVirtualMem = process.PeakVirtualMemorySize64;
-                        peakWorkingSet = process.PeakWorkingSet64;
-
-                        if (process.Responding)
-                        {
-                            richTextBox1.Text += "Status = Running\n";
-                        }
-                        else
-                        {
-                            richTextBox1.Text += "Status = Not Responding\n";
-                        }
-                    }
-                }
-                while (!process.WaitForExit(1000));
-
-                richTextBox1.Text += "Process exit code : " + process.ExitCode + "\n";
-
-                // Display peak memory statistics for the process.
-                richTextBox1.Text += "Peak physical memory usage of the process : " + peakWorkingSet + "\n";
-                richTextBox1.Text += "Peak paged memory usage of the process : " + peakPagedMem + "\n";
-                richTextBox1.Text += "Peak virtual memory usage of the process : " + peakVirtualMem + "\n";
-            }
-            finally
-            {
-                if (process != null)
-                {
-                    process.Close();
-                }
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -639,8 +574,8 @@ namespace vcs_Process1
             //取得Process資訊
             //取得Process資訊
             //1. 當前進程資料, 取得目前的Process
-            Process process = Process.GetCurrentProcess();  // 取得目前的process
-            show_process_info(process);
+            //Process process = Process.GetCurrentProcess();  // 取得目前的process
+            //show_process_info(process);
 
             //------------------------------  # 30個
 
@@ -661,6 +596,79 @@ namespace vcs_Process1
                 show_process_info(process);
             }
             */
+
+
+            //6060
+
+
+            //偵測程式執行時的記憶體用量
+
+            // Define variables to track the peak memory usage of the process. 
+            long peakPagedMem = 0;
+            long peakWorkingSet = 0;
+            long peakVirtualMem = 0;
+
+            Process process = new Process();    //創建一個進程用於調用外部程序
+
+            try
+            {
+                process = Process.Start("NotePad.exe");  // 啟動程式
+
+                // Display the process statistics until the user closes the program. 
+                do
+                {
+                    if (!process.HasExited)
+                    {
+                        // Refresh the current process property values.
+                        process.Refresh();
+
+                        // Display current process statistics.
+
+                        richTextBox1.Text += process.ToString() + "\n";
+
+                        //------------------------------  # 30個
+
+                        richTextBox1.Text += "physical memory usage : " + process.WorkingSet64 + "\n";
+                        richTextBox1.Text += "base priority : " + process.BasePriority + "\n";
+                        richTextBox1.Text += "priority class : " + process.PriorityClass + "\n";
+                        richTextBox1.Text += "user processor time : " + process.UserProcessorTime + "\n";
+                        richTextBox1.Text += "privileged processor time : " + process.PrivilegedProcessorTime + "\n";
+                        richTextBox1.Text += "total processor time : " + process.TotalProcessorTime + "\n";
+                        richTextBox1.Text += "PagedSystemMemorySize64 : " + process.PagedSystemMemorySize64 + "\n";
+                        richTextBox1.Text += "PagedMemorySize64 : " + process.PagedMemorySize64 + "\n";
+
+                        // Update the values for the overall peak memory statistics.
+                        peakPagedMem = process.PeakPagedMemorySize64;
+                        peakVirtualMem = process.PeakVirtualMemorySize64;
+                        peakWorkingSet = process.PeakWorkingSet64;
+
+                        if (process.Responding)
+                        {
+                            richTextBox1.Text += "Status = Running\n";
+                        }
+                        else
+                        {
+                            richTextBox1.Text += "Status = Not Responding\n";
+                        }
+                    }
+                }
+                while (!process.WaitForExit(1000));
+
+                richTextBox1.Text += "Process exit code : " + process.ExitCode + "\n";
+
+                // Display peak memory statistics for the process.
+                richTextBox1.Text += "Peak physical memory usage of the process : " + peakWorkingSet + "\n";
+                richTextBox1.Text += "Peak paged memory usage of the process : " + peakPagedMem + "\n";
+                richTextBox1.Text += "Peak virtual memory usage of the process : " + peakVirtualMem + "\n";
+            }
+            finally
+            {
+                if (process != null)
+                {
+                    process.Close();
+                }
+            }
+
         }
 
         void show_process_info(Process process)
@@ -1133,7 +1141,7 @@ namespace vcs_Process1
 
         void list_all_processes()
         {
-            listView1.Items.Clear();
+            listView2.Items.Clear();
 
             richTextBox1.Text += "取得所有程序\n";
             Process[] processes = Process.GetProcesses();  // 取得所有程序
@@ -1151,7 +1159,7 @@ namespace vcs_Process1
 
                     ListViewItem processItem = new ListViewItem(process.Id.ToString());//定義一個listView選擇項的實例
                     processItem.SubItems.Add(process.ProcessName.ToString().Trim());
-                    listView1.Items.Add(processItem);//執行添加操作
+                    listView2.Items.Add(processItem);//執行添加操作
                 }
                 else
                 {
@@ -1163,6 +1171,10 @@ namespace vcs_Process1
         private void bt_list_process_Click(object sender, EventArgs e)
         {
             list_all_processes();
+
+            //6060
+
+            getProcessInfo();
         }
 
         private void bt_open_process_Click(object sender, EventArgs e)
@@ -1175,7 +1187,7 @@ namespace vcs_Process1
             //關閉外部已開啟的程序
 
             //刪除資料
-            int len = listView1.SelectedIndices.Count;
+            int len = listView2.SelectedIndices.Count;
             if (len <= 0)  //總共選擇的個數
             {
                 richTextBox1.Text += "未選擇要刪除的項目\n";
@@ -1184,15 +1196,15 @@ namespace vcs_Process1
             richTextBox1.Text += "共選擇 " + len.ToString() + " 個項目, 分別是\n";
             for (int i = (len - 1); i >= 0; i--)
             {
-                int index = listView1.SelectedItems[i].Index;  // 取得欲刪除項目號
+                int index = listView2.SelectedItems[i].Index;  // 取得欲刪除項目號
 
                 richTextBox1.Text += "欲刪除項目號 : " + index.ToString() + "\n";
-                richTextBox1.Text += "欲關閉程序ID : " + listView1.SelectedItems[i].SubItems[0].Text + "\n";
-                richTextBox1.Text += "欲關閉程序名 : " + listView1.SelectedItems[i].SubItems[1].Text + "\n";
+                richTextBox1.Text += "欲關閉程序ID : " + listView2.SelectedItems[i].SubItems[0].Text + "\n";
+                richTextBox1.Text += "欲關閉程序名 : " + listView2.SelectedItems[i].SubItems[1].Text + "\n";
 
                 /*
                 //根據名稱刪除程序, 如果名稱相同就會一併被刪除
-                Process[] processes = Process.GetProcessesByName(listView1.SelectedItems[i].SubItems[1].Text);  // 根據[process名稱]取得process
+                Process[] processes = Process.GetProcessesByName(listView2.SelectedItems[i].SubItems[1].Text);  // 根據[process名稱]取得process
                 foreach (Process process in processes)
                 {
                     richTextBox1.Text += "取得程序名 : " + process.ProcessName + "\n";
@@ -1204,15 +1216,46 @@ namespace vcs_Process1
                 //------------------------------  # 30個
 
                 //根據process id刪除程序, 就可以分開處理
-                Process process = Process.GetProcessById(int.Parse(listView1.SelectedItems[i].SubItems[0].Text));  // 根據[process id]取得process
+                Process process = Process.GetProcessById(int.Parse(listView2.SelectedItems[i].SubItems[0].Text));  // 根據[process id]取得process
                 richTextBox1.Text += "取得程序名 : " + process.ProcessName + "\n";
                 richTextBox1.Text += "取得程序ID : " + process.Id + "\n";
                 process.CloseMainWindow();
 
                 //------------------------------  # 30個
 
-                listView1.Items.RemoveAt(index);
+                listView2.Items.RemoveAt(index);
                 richTextBox1.Text += "程序已關閉\n";
+            }
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void getProcessInfo()
+        {
+            richTextBox1.Text += "取得進程資訊\n";
+
+            try
+            {
+                listView1.Items.Clear();
+                Process[] processes = Process.GetProcesses(); //取得所有程序
+                richTextBox1.Text += "系統中有： " + processes.Length.ToString() + " 個程序\n";
+
+                string[] Minfo = new string[6];
+                foreach (Process process in processes)
+                {
+                    Minfo[0] = process.ProcessName;
+                    Minfo[1] = process.Id.ToString();
+                    Minfo[2] = process.Threads.Count.ToString();
+                    Minfo[3] = process.BasePriority.ToString();
+                    Minfo[4] = Convert.ToString(process.WorkingSet64 / 1024) + "K";
+                    Minfo[5] = Convert.ToString(process.VirtualMemorySize64 / 1024) + "K";
+                    ListViewItem lvi = new ListViewItem(Minfo, "process");
+                    listView1.Items.Add(lvi);
+                }
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息e01 : " + ex.Message + "\n";
             }
         }
 
@@ -1221,11 +1264,12 @@ namespace vcs_Process1
         //監控外部程序運行狀態 ST
 
         bool flag_keep_program_running = true;
-        string program_name = "AMCAP";
-        string program_path = @"C:\Program Files (x86)\Noel Danjou\AMCap\AMCap.exe";
-
+        //string program_name = "AMCAP";
+        //string program_path = @"C:\Program Files (x86)\Noel Danjou\AMCap\AMCap.exe";
         //string program_name = "MegaDownloader";
         //string program_path = @"C:\____backup\MegaDownloaderNoinstall_1.8_azo\MegaDownloaderNoinstall\MegaDownloader.exe";
+        string program_name = "記事本";
+        string program_path = @"NotePad.exe";
 
         bool flag_program_running = false;
 
@@ -1252,12 +1296,13 @@ namespace vcs_Process1
                         count = 0;
                         richTextBox2.Text += "\n已100秒 開啟\n";
 
-                        //開啟imsLink
+                        // 啟動程式
                         Process process = new Process();    //創建一個進程用於調用外部程序
-                        process = Process.Start(program_path);
+                        process = Process.Start(program_path);  // 啟動程式
                     }
                 }
             }
+
 
             processes = Process.GetProcessesByName(program_name);//需要監控的程序名，該方法帶出該程序所有用到的進程  // 根據[process名稱]取得process
             foreach (Process process in processes)

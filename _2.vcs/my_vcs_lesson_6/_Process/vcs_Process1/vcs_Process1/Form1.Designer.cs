@@ -69,17 +69,23 @@
             this.bt_kill_process = new System.Windows.Forms.Button();
             this.bt_open_process = new System.Windows.Forms.Button();
             this.bt_list_process = new System.Windows.Forms.Button();
+            this.listView2 = new System.Windows.Forms.ListView();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.Location = new System.Drawing.Point(12, 76);
+            this.button1.Location = new System.Drawing.Point(12, 75);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 0;
-            this.button1.Text = "偵測程式執行時的記憶體用量";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -129,7 +135,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(629, 262);
+            this.richTextBox1.Location = new System.Drawing.Point(639, 342);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 5;
@@ -185,7 +191,7 @@
             // button10
             // 
             this.button10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button10.Location = new System.Drawing.Point(215, 12);
+            this.button10.Location = new System.Drawing.Point(217, 12);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(200, 60);
             this.button10.TabIndex = 10;
@@ -196,7 +202,7 @@
             // button11
             // 
             this.button11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button11.Location = new System.Drawing.Point(215, 76);
+            this.button11.Location = new System.Drawing.Point(216, 75);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(200, 60);
             this.button11.TabIndex = 11;
@@ -280,7 +286,7 @@
             // button0
             // 
             this.button0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button0.Location = new System.Drawing.Point(12, 12);
+            this.button0.Location = new System.Drawing.Point(12, 14);
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(200, 60);
             this.button0.TabIndex = 19;
@@ -291,7 +297,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(646, 302);
+            this.bt_clear.Location = new System.Drawing.Point(656, 382);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 20;
@@ -312,7 +318,7 @@
             // button20
             // 
             this.button20.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button20.Location = new System.Drawing.Point(423, 12);
+            this.button20.Location = new System.Drawing.Point(418, 12);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(200, 60);
             this.button20.TabIndex = 22;
@@ -323,7 +329,7 @@
             // button21
             // 
             this.button21.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button21.Location = new System.Drawing.Point(419, 76);
+            this.button21.Location = new System.Drawing.Point(420, 75);
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(200, 60);
             this.button21.TabIndex = 23;
@@ -414,7 +420,7 @@
             // richTextBox2
             // 
             this.richTextBox2.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox2.Location = new System.Drawing.Point(735, 262);
+            this.richTextBox2.Location = new System.Drawing.Point(745, 342);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.Size = new System.Drawing.Size(100, 100);
             this.richTextBox2.TabIndex = 45;
@@ -424,7 +430,7 @@
             // 
             this.lb_monitor_process.AutoSize = true;
             this.lb_monitor_process.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_monitor_process.Location = new System.Drawing.Point(751, 302);
+            this.lb_monitor_process.Location = new System.Drawing.Point(761, 382);
             this.lb_monitor_process.Name = "lb_monitor_process";
             this.lb_monitor_process.Size = new System.Drawing.Size(53, 19);
             this.lb_monitor_process.TabIndex = 111;
@@ -440,7 +446,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(625, 12);
+            this.label1.Location = new System.Drawing.Point(635, 140);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(160, 19);
             this.label1.TabIndex = 113;
@@ -449,7 +455,7 @@
             // bt_kill_process
             // 
             this.bt_kill_process.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_kill_process.Location = new System.Drawing.Point(746, 159);
+            this.bt_kill_process.Location = new System.Drawing.Point(756, 287);
             this.bt_kill_process.Name = "bt_kill_process";
             this.bt_kill_process.Size = new System.Drawing.Size(72, 50);
             this.bt_kill_process.TabIndex = 114;
@@ -460,7 +466,7 @@
             // bt_open_process
             // 
             this.bt_open_process.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_open_process.Location = new System.Drawing.Point(746, 103);
+            this.bt_open_process.Location = new System.Drawing.Point(756, 231);
             this.bt_open_process.Name = "bt_open_process";
             this.bt_open_process.Size = new System.Drawing.Size(72, 50);
             this.bt_open_process.TabIndex = 115;
@@ -471,7 +477,7 @@
             // bt_list_process
             // 
             this.bt_list_process.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_list_process.Location = new System.Drawing.Point(746, 47);
+            this.bt_list_process.Location = new System.Drawing.Point(756, 175);
             this.bt_list_process.Name = "bt_list_process";
             this.bt_list_process.Size = new System.Drawing.Size(72, 50);
             this.bt_list_process.TabIndex = 116;
@@ -479,13 +485,60 @@
             this.bt_list_process.UseVisualStyleBackColor = true;
             this.bt_list_process.Click += new System.EventHandler(this.bt_list_process_Click);
             // 
+            // listView2
+            // 
+            this.listView2.Location = new System.Drawing.Point(639, 175);
+            this.listView2.Name = "listView2";
+            this.listView2.Size = new System.Drawing.Size(100, 100);
+            this.listView2.TabIndex = 117;
+            this.listView2.UseCompatibleStateImageBehavior = false;
+            // 
             // listView1
             // 
-            this.listView1.Location = new System.Drawing.Point(629, 47);
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader11,
+            this.columnHeader12,
+            this.columnHeader13,
+            this.columnHeader14,
+            this.columnHeader15,
+            this.columnHeader16});
+            this.listView1.FullRowSelect = true;
+            this.listView1.GridLines = true;
+            this.listView1.Location = new System.Drawing.Point(639, 12);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(100, 100);
-            this.listView1.TabIndex = 117;
+            this.listView1.TabIndex = 118;
             this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader11
+            // 
+            this.columnHeader11.Text = "映像名稱";
+            this.columnHeader11.Width = 100;
+            // 
+            // columnHeader12
+            // 
+            this.columnHeader12.Text = "進程ID";
+            this.columnHeader12.Width = 70;
+            // 
+            // columnHeader13
+            // 
+            this.columnHeader13.Text = "線程數";
+            this.columnHeader13.Width = 70;
+            // 
+            // columnHeader14
+            // 
+            this.columnHeader14.Text = "優先級";
+            // 
+            // columnHeader15
+            // 
+            this.columnHeader15.Text = "物理內存";
+            this.columnHeader15.Width = 89;
+            // 
+            // columnHeader16
+            // 
+            this.columnHeader16.Text = "虛擬內存";
+            this.columnHeader16.Width = 128;
             // 
             // Form1
             // 
@@ -493,6 +546,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(972, 650);
             this.Controls.Add(this.listView1);
+            this.Controls.Add(this.listView2);
             this.Controls.Add(this.bt_list_process);
             this.Controls.Add(this.bt_open_process);
             this.Controls.Add(this.bt_kill_process);
@@ -581,7 +635,14 @@
         private System.Windows.Forms.Button bt_kill_process;
         private System.Windows.Forms.Button bt_open_process;
         private System.Windows.Forms.Button bt_list_process;
+        private System.Windows.Forms.ListView listView2;
         private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader11;
+        private System.Windows.Forms.ColumnHeader columnHeader12;
+        private System.Windows.Forms.ColumnHeader columnHeader13;
+        private System.Windows.Forms.ColumnHeader columnHeader14;
+        private System.Windows.Forms.ColumnHeader columnHeader15;
+        private System.Windows.Forms.ColumnHeader columnHeader16;
     }
 }
 

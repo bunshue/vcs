@@ -34,14 +34,13 @@ namespace vcs_Process4
                 foreach (Process process in processes)
                 {
                     Minfo[0] = process.ProcessName;
-                    Minfo[1] = process.MainModule.ModuleName;
+                    Minfo[1] = process.Id.ToString();
                     Minfo[2] = process.Threads.Count.ToString();
                     Minfo[3] = process.BasePriority.ToString();
-                    Minfo[4] = Convert.ToString(process.WorkingSet / 1024) + "K";
-                    Minfo[5] = Convert.ToString(process.VirtualMemorySize / 1024) + "K";
+                    Minfo[4] = Convert.ToString(process.WorkingSet64 / 1024) + "K";
+                    Minfo[5] = Convert.ToString(process.VirtualMemorySize64 / 1024) + "K";
                     ListViewItem lvi = new ListViewItem(Minfo, "process");
                     listView1.Items.Add(lvi);
-                    richTextBox1.Text += "加入一項\n";
                 }
             }
             catch { }
