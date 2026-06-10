@@ -25,8 +25,9 @@ namespace vcs_Chart3_ECG3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            richTextBox1.Size = new Size(300, 500);
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            show_item_location();
+
+            //------------------------------------------------------------  # 60個
 
             chart1.ChartAreas.Clear();  // 清除所有圖表區
             chart1.Series.Clear();  // 清除所有數列
@@ -35,9 +36,9 @@ namespace vcs_Chart3_ECG3
             ChartArea chartarea = new ChartArea("ChartArea1");
             chart1.ChartAreas.Add(chartarea);  // 將圖表區新增到圖表上
 
-            // 設定邊界, 設定 X 軸顯示範圍 (例如 2 秒)
+            // 設定邊界, 設定 X 軸顯示範圍 (例如 3 秒, 畫面保持最後 3 秒)
             chartarea.AxisX.Minimum = 0;  // 設定X軸最小值
-            chartarea.AxisX.Maximum = 10;  // 設定X軸最大值
+            chartarea.AxisX.Maximum = 3;  // 設定X軸最大值(秒)
             chartarea.AxisY.Minimum = -1.5;  // 設定Y軸最小值
             chartarea.AxisY.Maximum = 1.5;  // 設定Y軸最大值
 
@@ -49,13 +50,53 @@ namespace vcs_Chart3_ECG3
             trackBar1.Minimum = 40;
             trackBar1.Maximum = 120;
             trackBar1.Value = hr;
-            //trackBar1.Scroll += TrackBar1_Scroll;
             label1.Text = "心率 : " + hr + " bpm";
+
+            trackBar2.Minimum = 100;
+            trackBar2.Maximum = 1000;
+            trackBar2.Value = fs;
+            label2.Text = "取樣率 : " + fs + " Hz";
+
+
+            label3.Text = "更新率 : " + fs + " Hz";
 
             // 啟動 Timer
             timer1.Interval = 20; // 每 20ms 更新一次
             //timer1.Tick += Timer1_Tick;
             timer1.Start();
+        }
+
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+
+            chart1.Size = new Size(600, 480);
+            chart1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+
+            groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+
+            trackBar1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            trackBar2.Location = new Point(x_st + dx * 4, y_st + dy * 0 + 50);
+            trackBar3.Location = new Point(x_st + dx * 4, y_st + dy * 0 + 100);
+            label1.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 0);
+            label2.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 0 + 50);
+            label3.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 0 + 100);
+            label4.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 0 + 150);
+
+            richTextBox1.Size = new Size(720, 480);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1400, 750);
+            this.Text = "vcs_Chart3_ECG3";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -69,6 +110,14 @@ namespace vcs_Chart3_ECG3
             label1.Text = "心率 : " + hr + " bpm";
         }
 
+        private void trackBar2_Scroll(object sender, EventArgs e)
+        {
+            fs = trackBar2.Value;
+            label2.Text = "取樣率 : " + fs + " Hz";
+        }
+
+        //------------------------------------------------------------  # 60個
+
         int index = 0;
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -80,14 +129,14 @@ namespace vcs_Chart3_ECG3
             {
                 double value = GenerateECGPoint(t, hr);
                 ecgBuffer.Enqueue(value);
-                t += 1.0 / fs;
+                t += 1.0 / fs;  // 每一格的時間 為 1/fs
 
-                // 保持 buffer 長度在 10 秒內
-                if (ecgBuffer.Count > 10 * fs)
+                // 保持 buffer 長度在 3 秒內
+                if (ecgBuffer.Count > 3 * fs)
                     ecgBuffer.Dequeue();
             }
 
-            label2.Text = samplesPerTick.ToString() + "   " + ecgBuffer.Count.ToString();
+            label4.Text = samplesPerTick.ToString() + "   " + ecgBuffer.Count.ToString();
 
             // 更新 Chart
             chart1.Series[0].Points.Clear();
@@ -100,14 +149,14 @@ namespace vcs_Chart3_ECG3
                 index++;
             }
 
-            chart1.ChartAreas[0].AxisX.Minimum = xx - 10;
+            chart1.ChartAreas[0].AxisX.Minimum = xx - 3;  // 畫面保持最後 3 秒
             chart1.ChartAreas[0].AxisX.Maximum = xx;
         }
 
         private double GenerateECGPoint(double time, int hr)
         {
-            double rrInterval = 60.0 / hr;
-            double beatTime = time % rrInterval;
+            double Period = 60.0 / hr;  // 一次心跳的時間, 一個週期
+            double beatTime = time % Period;  // 測試時間
             double value = 0.0;
 
             // P 波
@@ -123,5 +172,50 @@ namespace vcs_Chart3_ECG3
 
             return value;
         }
+
+        private double GenerateSignal(double time, int hr)
+        {
+            double Period = 60.0 / hr;  // 一次心跳的時間, 一個週期
+            double beatTime = time % Period;  // 測試時間
+            double value = 0.0;
+
+            /*
+            if (beatTime < Period/2)
+                value = beatTime;
+            else
+                value = 1.0 - beatTime;
+            */
+
+            value = Math.Sin(2 * Math.PI * beatTime / Period);
+
+            /*
+            // P 波
+            value += Math.Exp(-Math.Pow((beatTime - 0.1) / 0.01, 2)) * 0.1;
+            // Q 波
+            value += -Math.Exp(-Math.Pow((beatTime - 0.2) / 0.002, 2)) * 0.15;
+            // R 波
+            value += Math.Exp(-Math.Pow((beatTime - 0.22) / 0.002, 2)) * 1.0;
+            // S 波
+            value += -Math.Exp(-Math.Pow((beatTime - 0.25) / 0.002, 2)) * 0.25;
+            // T 波
+            value += Math.Exp(-Math.Pow((beatTime - 0.4) / 0.02, 2)) * 0.35;
+            */
+            return value;
+        }
+
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

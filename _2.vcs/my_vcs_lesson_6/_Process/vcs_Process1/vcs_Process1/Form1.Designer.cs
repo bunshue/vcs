@@ -50,7 +50,7 @@
             this.button17 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
-            this.bt_clear = new System.Windows.Forms.Button();
+            this.bt_clear1 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.button20 = new System.Windows.Forms.Button();
             this.button21 = new System.Windows.Forms.Button();
@@ -77,6 +77,7 @@
             this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.bt_clear2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -294,16 +295,16 @@
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
-            // bt_clear
+            // bt_clear1
             // 
-            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(656, 382);
-            this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(72, 36);
-            this.bt_clear.TabIndex = 20;
-            this.bt_clear.Text = "Clear";
-            this.bt_clear.UseVisualStyleBackColor = true;
-            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            this.bt_clear1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear1.Location = new System.Drawing.Point(656, 382);
+            this.bt_clear1.Name = "bt_clear1";
+            this.bt_clear1.Size = new System.Drawing.Size(72, 36);
+            this.bt_clear1.TabIndex = 20;
+            this.bt_clear1.Text = "Clear";
+            this.bt_clear1.UseVisualStyleBackColor = true;
+            this.bt_clear1.Click += new System.EventHandler(this.bt_clear1_Click);
             // 
             // button19
             // 
@@ -343,7 +344,6 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(200, 60);
             this.button22.TabIndex = 24;
-            this.button22.Text = "檢查本程式是否已在執行中";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -414,12 +414,13 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(200, 60);
             this.button29.TabIndex = 30;
+            this.button29.Text = "關閉所有記事本";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.richTextBox2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox2.Location = new System.Drawing.Point(745, 342);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.Size = new System.Drawing.Size(100, 100);
@@ -540,11 +541,23 @@
             this.columnHeader16.Text = "虛擬內存";
             this.columnHeader16.Width = 128;
             // 
+            // bt_clear2
+            // 
+            this.bt_clear2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear2.Location = new System.Drawing.Point(765, 398);
+            this.bt_clear2.Name = "bt_clear2";
+            this.bt_clear2.Size = new System.Drawing.Size(72, 36);
+            this.bt_clear2.TabIndex = 119;
+            this.bt_clear2.Text = "Clear";
+            this.bt_clear2.UseVisualStyleBackColor = true;
+            this.bt_clear2.Click += new System.EventHandler(this.bt_clear2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(972, 650);
+            this.Controls.Add(this.bt_clear2);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.listView2);
             this.Controls.Add(this.bt_list_process);
@@ -564,7 +577,7 @@
             this.Controls.Add(this.button21);
             this.Controls.Add(this.button20);
             this.Controls.Add(this.button19);
-            this.Controls.Add(this.bt_clear);
+            this.Controls.Add(this.bt_clear1);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.button18);
             this.Controls.Add(this.button17);
@@ -616,7 +629,7 @@
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button0;
-        private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Button bt_clear1;
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button button20;
         private System.Windows.Forms.Button button21;
@@ -643,6 +656,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader14;
         private System.Windows.Forms.ColumnHeader columnHeader15;
         private System.Windows.Forms.ColumnHeader columnHeader16;
+        private System.Windows.Forms.Button bt_clear2;
     }
 }
 

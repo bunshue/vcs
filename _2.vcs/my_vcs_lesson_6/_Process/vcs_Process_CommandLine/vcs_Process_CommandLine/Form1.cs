@@ -35,18 +35,24 @@ namespace vcs_Process_CommandLine
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
             //button
-            x_st = 15;
-            y_st = 22;
-            dx = 200;
-            dy = 70;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
 
-            groupBox1.Location = new Point(10, 10);
+            groupBox1.Size = new Size(200, 690);
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
+            label1.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 0);
+            richTextBox1.Size = new Size(500, 690);
+            richTextBox2.Size = new Size(500, 660);
+            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            richTextBox2.Location = new Point(x_st + dx * 3 + 100, y_st + dy * 0 + 30);
+            bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear1.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear1.Size.Height);
+            bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Size.Width - bt_clear2.Size.Width, richTextBox2.Location.Y + richTextBox2.Size.Height - bt_clear2.Size.Height);
+
+            y_st = 20;
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -55,16 +61,15 @@ namespace vcs_Process_CommandLine
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
 
-            richTextBox1.Location = new Point(10 + dx * 1 + 60, 10);
-            richTextBox2.Location = new Point(10 + dx * 4 - 90 + 60, 10 + 30);
-            label1.Location = new Point(10 + dx * 4 - 90 + 60, 10);
+            this.Size = new Size(1300, 750);
+            this.Text = "vcs_Process_CommandLine";
 
-            //控件位置
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-            bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Size.Width - bt_clear2.Size.Width, richTextBox2.Location.Y + richTextBox2.Size.Height - bt_clear2.Size.Height);
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
-        private void bt_clear_Click(object sender, EventArgs e)
+        private void bt_clear1_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
         }
@@ -529,5 +534,4 @@ namespace vcs_Process_CommandLine
 /*  可搬出
 
 */
-
 

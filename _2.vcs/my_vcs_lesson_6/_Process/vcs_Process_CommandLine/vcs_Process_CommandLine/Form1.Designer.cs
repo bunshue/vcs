@@ -38,7 +38,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.bt_clear = new System.Windows.Forms.Button();
+            this.bt_clear1 = new System.Windows.Forms.Button();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.bt_clear2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -57,7 +57,7 @@
             this.groupBox1.Controls.Add(this.button0);
             this.groupBox1.Location = new System.Drawing.Point(10, 10);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(230, 640);
+            this.groupBox1.Size = new System.Drawing.Size(200, 640);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Command LIne";
@@ -65,9 +65,9 @@
             // button6
             // 
             this.button6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button6.Location = new System.Drawing.Point(19, 408);
+            this.button6.Location = new System.Drawing.Point(8, 412);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(200, 60);
+            this.button6.Size = new System.Drawing.Size(180, 60);
             this.button6.TabIndex = 6;
             this.button6.Text = "非同步測試2";
             this.button6.UseVisualStyleBackColor = true;
@@ -76,9 +76,9 @@
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button5.Location = new System.Drawing.Point(19, 338);
+            this.button5.Location = new System.Drawing.Point(8, 347);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(200, 60);
+            this.button5.Size = new System.Drawing.Size(180, 60);
             this.button5.TabIndex = 5;
             this.button5.Text = "非同步測試1";
             this.button5.UseVisualStyleBackColor = true;
@@ -87,9 +87,9 @@
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button4.Location = new System.Drawing.Point(19, 272);
+            this.button4.Location = new System.Drawing.Point(8, 279);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(200, 60);
+            this.button4.Size = new System.Drawing.Size(180, 60);
             this.button4.TabIndex = 4;
             this.button4.Text = "轉出檔案";
             this.button4.UseVisualStyleBackColor = true;
@@ -98,9 +98,9 @@
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button3.Location = new System.Drawing.Point(19, 207);
+            this.button3.Location = new System.Drawing.Point(8, 214);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(200, 60);
+            this.button3.Size = new System.Drawing.Size(180, 60);
             this.button3.TabIndex = 3;
             this.button3.Text = "ping";
             this.button3.UseVisualStyleBackColor = true;
@@ -109,9 +109,9 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.Location = new System.Drawing.Point(19, 151);
+            this.button2.Location = new System.Drawing.Point(8, 149);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(200, 60);
+            this.button2.Size = new System.Drawing.Size(180, 60);
             this.button2.TabIndex = 2;
             this.button2.Text = "關閉與重啟計算機(偽)";
             this.button2.UseVisualStyleBackColor = true;
@@ -120,9 +120,9 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.Location = new System.Drawing.Point(19, 95);
+            this.button1.Location = new System.Drawing.Point(8, 87);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(200, 60);
+            this.button1.Size = new System.Drawing.Size(180, 60);
             this.button1.TabIndex = 1;
             this.button1.Text = "執行CommandLine指令, 並取回結果 2";
             this.button1.UseVisualStyleBackColor = true;
@@ -131,9 +131,9 @@
             // button0
             // 
             this.button0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button0.Location = new System.Drawing.Point(19, 27);
+            this.button0.Location = new System.Drawing.Point(8, 24);
             this.button0.Name = "button0";
-            this.button0.Size = new System.Drawing.Size(200, 60);
+            this.button0.Size = new System.Drawing.Size(180, 60);
             this.button0.TabIndex = 0;
             this.button0.Text = "執行CommandLine指令, 並取回結果 1";
             this.button0.UseVisualStyleBackColor = true;
@@ -142,38 +142,38 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(269, 14);
+            this.richTextBox1.Location = new System.Drawing.Point(221, 15);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(500, 650);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
-            // bt_clear
+            // bt_clear1
             // 
-            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(557, 617);
-            this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(75, 39);
-            this.bt_clear.TabIndex = 3;
-            this.bt_clear.Text = "Clear";
-            this.bt_clear.UseVisualStyleBackColor = true;
-            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            this.bt_clear1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear1.Location = new System.Drawing.Point(232, 34);
+            this.bt_clear1.Name = "bt_clear1";
+            this.bt_clear1.Size = new System.Drawing.Size(72, 36);
+            this.bt_clear1.TabIndex = 3;
+            this.bt_clear1.Text = "Clear";
+            this.bt_clear1.UseVisualStyleBackColor = true;
+            this.bt_clear1.Click += new System.EventHandler(this.bt_clear1_Click);
             // 
             // richTextBox2
             // 
             this.richTextBox2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox2.Location = new System.Drawing.Point(775, 40);
+            this.richTextBox2.Location = new System.Drawing.Point(327, 15);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(500, 620);
+            this.richTextBox2.Size = new System.Drawing.Size(100, 100);
             this.richTextBox2.TabIndex = 4;
             this.richTextBox2.Text = "";
             // 
             // bt_clear2
             // 
             this.bt_clear2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear2.Location = new System.Drawing.Point(1197, 611);
+            this.bt_clear2.Location = new System.Drawing.Point(341, 34);
             this.bt_clear2.Name = "bt_clear2";
-            this.bt_clear2.Size = new System.Drawing.Size(75, 39);
+            this.bt_clear2.Size = new System.Drawing.Size(72, 36);
             this.bt_clear2.TabIndex = 5;
             this.bt_clear2.Text = "Clear";
             this.bt_clear2.UseVisualStyleBackColor = true;
@@ -183,7 +183,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(776, 8);
+            this.label1.Location = new System.Drawing.Point(444, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(200, 24);
             this.label1.TabIndex = 34;
@@ -197,11 +197,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1284, 671);
+            this.ClientSize = new System.Drawing.Size(855, 671);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.bt_clear2);
             this.Controls.Add(this.richTextBox2);
-            this.Controls.Add(this.bt_clear);
+            this.Controls.Add(this.bt_clear1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
@@ -224,7 +224,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Button bt_clear1;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Button bt_clear2;
         private System.Windows.Forms.Label label1;

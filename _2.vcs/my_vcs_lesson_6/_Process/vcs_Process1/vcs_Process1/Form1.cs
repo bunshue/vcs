@@ -17,13 +17,13 @@ using System.Drawing.Imaging;  // for PixelFormat
 /*
 Start 啟動進程資源將其與process類關聯
 Kill立即關閉進程
-waitforExit 在等待關聯進程的退出
+waitforExit 在等待關聯進程的退出   // 會等到這個程式結束為止
 Close 釋放與此關聯的所有進程 
 */
 
 /*
 Process 的方法
-Process.Start()
+Process.Start()  // 啟動程式
 Process.GetCurrentProcess()  // 取得目前的process
 Process.GetProcesses()  // 取得所有程序
 Process.GetProcessesByName()  // 根據[process名稱]取得process
@@ -58,11 +58,11 @@ namespace vcs_Process1
 
             if (flag_keep_program_running == true)
             {
-                richTextBox2.Text += "維持程式運行模式\n";
+                richTextBox2.Text += "\n維持程式運行模式\n";
             }
             else
             {
-                richTextBox2.Text += "監控模式\n";
+                richTextBox2.Text += "\n監控模式\n";
             }
             lb_monitor_process.Text = "偵測程式 : " + program_name;
             richTextBox2.Text += "偵測程式 : " + program_name + " 開始, 時間 : " + DateTime.Now.ToString() + "\n";
@@ -121,19 +121,20 @@ namespace vcs_Process1
             bt_list_process.Location = new Point(x_st + dx * 5 - 80 - 80 - 80, y_st + dy * 0 - 10);
             bt_open_process.Location = new Point(x_st + dx * 5 - 80 - 80, y_st + dy * 0 - 10);
             bt_kill_process.Location = new Point(x_st + dx * 5 - 80, y_st + dy * 0 - 10);
-            listView2.Size = new Size(410, 400);
+            listView2.Size = new Size(410, 300);
             listView2.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 40);
 
             listView1.Size = new Size(560, 290);
             listView1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             richTextBox1.Size = new Size(560, 690 - 300);
             richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0 + 300);
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear1.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear1.Size.Height);
 
             lb_monitor_process.Text = "監控外部程序運行狀態";
-            lb_monitor_process.Location = new Point(x_st + dx * 3, y_st + dy * 7 - 30);
-            richTextBox2.Size = new Size(410, 200);
-            richTextBox2.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            lb_monitor_process.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            richTextBox2.Size = new Size(410, 310);
+            richTextBox2.Location = new Point(x_st + dx * 3, y_st + dy * 5+30);
+            bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Size.Width - bt_clear2.Size.Width, richTextBox2.Location.Y + richTextBox2.Size.Height - bt_clear2.Size.Height);
 
             this.Size = new Size(1650, 750);
             this.Text = "vcs_Process1";
@@ -143,9 +144,14 @@ namespace vcs_Process1
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
-        private void bt_clear_Click(object sender, EventArgs e)
+        private void bt_clear1_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        private void bt_clear2_Click(object sender, EventArgs e)
+        {
+            richTextBox2.Clear();
         }
 
         //------------------------------------------------------------  # 60個
@@ -404,8 +410,8 @@ namespace vcs_Process1
             Process process = new Process();
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.FileName = "notepad";
-            process.StartInfo.CreateNoWindow = true;
-            process.Start();
+            process.StartInfo.CreateNoWindow = true;  // 是否顯示程序視窗, true:不顯示, false:顯示
+            process.Start();  // 啟動程式
 
             int process_id = process.Id;  // 進程ID
             richTextBox1.Text += process_id.ToString() + "\n";
@@ -417,7 +423,7 @@ namespace vcs_Process1
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //Process.Start()
+            //Process.Start()  // 啟動程式
 
             //開啟檔案總管 給定參數
 
@@ -429,14 +435,14 @@ namespace vcs_Process1
             Process process = new Process();
             process.StartInfo.FileName = @"C:\Windows\explorer.exe";    //設定要啟動的程式
             process.StartInfo.Arguments = @"/n,/e,D:\";
-            process.Start();
+            process.Start();  // 啟動程式
 
             //------------------------------------------------------------  # 60個
 
             //使用Process類調用外部exe程序
 
             //Process process = Process.Start("notepad.exe");  // 啟動程式
-            //process.WaitForExit();  // 關鍵，等待外部程序退出後才能往下執行
+            //process.WaitForExit();  // 會等到這個程式結束為止
 
             //------------------------------------------------------------  # 60個
 
@@ -516,7 +522,7 @@ namespace vcs_Process1
 
             //------------------------------------------------------------  # 60個
 
-            //Process.Start()
+            //Process.Start()  // 啟動程式
 
             /*
             //C# 呼叫檔案總管開啟某個資料夾，並讓某個檔案或資料夾呈現反白的樣子
@@ -527,8 +533,6 @@ namespace vcs_Process1
 
             Process.Start("IExplore.exe", "tw.yahoo.com");  // 啟動程式 + 參數
             Process.Start("chrome.exe", "C:\\Read_Cht.htm");  // 啟動程式 + 參數
-
-
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -540,11 +544,11 @@ namespace vcs_Process1
             Process process = new Process();    //創建一個進程用於調用外部程序
             process.StartInfo.FileName = "cmd.exe";//設定要啟動的程式
             process.StartInfo.UseShellExecute = false;  // 是否指定操作系統外殼進程啟動程序
-            process.StartInfo.RedirectStandardInput = true;//可能接受來自調用程序的輸入信息, 重定向標准輸入
-            process.StartInfo.RedirectStandardOutput = true;//重定向標准輸出
-            process.StartInfo.RedirectStandardError = true;//重定向錯誤輸出
+            process.StartInfo.RedirectStandardInput = true;  // 重定向標準輸入, 可能接受來自調用程序的輸入信息
+            process.StartInfo.RedirectStandardOutput = true;  // 重定向標準輸出, 由調用程序獲取輸出信息
+            process.StartInfo.RedirectStandardError = true;  // 重定向錯誤輸出
             process.StartInfo.CreateNoWindow = true;  // 是否顯示程序視窗, true:不顯示, false:顯示
-            process.Start();//啟動程序
+            process.Start();  // 啟動程式
             //process.StandardInput.WriteLine("net start mssqlserver");//輸入命令
             //process.StandardInput.WriteLine("exit");//一定要關閉。
 
@@ -648,7 +652,9 @@ namespace vcs_Process1
             }
             else
             {
-                richTextBox1.Text += "程式已結束, ExitCode : " + process.ExitCode + "\n";
+
+                richTextBox1.Text += "程式已結束, 退出碼 : " + process.ExitCode + "\n";
+                richTextBox1.Text += "退出時間 : " + process.ExitTime + "\n";
             }
 
             // Display peak memory statistics for the process.
@@ -729,7 +735,7 @@ namespace vcs_Process1
                 {
                     process.Refresh();
                     richTextBox1.Text += "實體記憶體的耗用 : " + process.WorkingSet64.ToString() + "\n";
-                    process.WaitForExit(3000);
+                    process.WaitForExit(3000);  // 等待3秒鐘
                 }
                 else
                 {
@@ -902,18 +908,10 @@ namespace vcs_Process1
         {
             //如果啟動了外部程序，一般也可以通過退出碼來確認程序的運行狀態
 
-            Process process = Process.Start(@"D:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe");
+            Process process = Process.Start(@"C:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe");
 
-            process.WaitForExit();
+            process.WaitForExit();  // 會等到這個程式結束為止
 
-            if (process.ExitCode == 0)
-            {
-                //richTextBox1.Text += "11111111111111111111\n";
-            }
-            else
-            {
-                //richTextBox1.Text += "222222222222222222222\n";
-            }
             richTextBox1.Text += "退出碼 : " + process.ExitCode.ToString() + "\n";
             richTextBox1.Text += "退出時間 : " + process.ExitTime + "\n";
         }
@@ -942,7 +940,7 @@ namespace vcs_Process1
 
             //啟動一個外部程序
             //聲明一個程序信息類，指定啟動進程是的參數信息
-            /*
+
             ProcessStartInfo psi1 = new ProcessStartInfo();
             //設置外部程序名
             psi1.FileName = "notepad.exe";
@@ -955,8 +953,7 @@ namespace vcs_Process1
             Process process;
             try
             {
-                //啟動外部程序                   
-                process = Process.Start(psi1);
+                process = Process.Start(psi1);  // 啟動外部程序
             }
             catch (System.ComponentModel.Win32Exception ex)
             {
@@ -981,7 +978,9 @@ namespace vcs_Process1
             richTextBox1.Text += "外部程序的結束運行時間 : " + process.ExitTime + "\n";
             richTextBox1.Text += "外部程序在結束運行時的返回值 : " + process.ExitCode + "\n";
 
-            return;
+            richTextBox1.Text += "退出碼 : " + process.ExitCode.ToString() + "\n";
+            richTextBox1.Text += "退出時間 : " + process.ExitTime + "\n";
+
             //------------------------------------------------------------  # 60個
 
             //用WordPad編輯rtf檔
@@ -998,20 +997,19 @@ namespace vcs_Process1
             psi2.WindowStyle = ProcessWindowStyle.Maximized;
 
             // Open wordpad.
-            Process process = new Process();
+            process = new Process();
             process.StartInfo = psi2;
-            process.Start();
+            process.Start();  // 啟動程式
 
             // Wait for wordpad to finish.
-            process.WaitForExit();
+            process.WaitForExit();  // 會等到這個程式結束為止
 
             // Unhide.
             this.ShowInTaskbar = true;
             this.Show();
 
             //------------------------------------------------------------  # 60個
-            */
-            //test
+
             string fileName = @"D:\_git\vcs\_1.data\______test_files1\__RW\_word\bmp_format.docx";
             ProcessStartInfo psi3 = new ProcessStartInfo(fileName);
 
@@ -1042,27 +1040,25 @@ namespace vcs_Process1
             psi4.FileName = @"cmd.exe";
             psi4.Arguments = @"/c net send " + strIP + " " + strInfo + "";
             psi4.WindowStyle = ProcessWindowStyle.Hidden;
-            Process.Start(psi4);
+            Process.Start(psi4);  // 啟動外部程序
 
             richTextBox1.Text += "done\n";
 
             //------------------------------------------------------------  # 60個
 
-            /*
+            //指定應用程式路徑
+            string target = @"C:\Program Files\DAUM\PotPlayer\PotPlayerMini.exe";
+            string all_filename = "aaaaaaaaaaaaaaa";
             ProcessStartInfo psi5 = new ProcessStartInfo(target);
             psi5.Arguments = all_filename;
 
-            // debug mesg
-            result_str += "target : " + target + "\n";
-            result_str += "all_filename : " + all_filename + "\n";
-
-            using (Process process = new Process())
-            {
-                process.StartInfo = psi5;
-                process.Start();
-            }
+            richTextBox1.Text += "target : " + target + "\n";
+            richTextBox1.Text += "all_filename : " + all_filename + "\n";
+            /*
+            Process process = new Process();
+            process.StartInfo = psi5;
+            process.Start();  // 啟動程式
             */
-
             //------------------------------------------------------------  # 60個
         }
 
@@ -1072,24 +1068,6 @@ namespace vcs_Process1
 
         private void button22_Click(object sender, EventArgs e)
         {
-            //檢查本程式是否已在執行中
-            Process[] processes = Process.GetProcessesByName(Application.CompanyName);  // 根據[process名稱]取得process
-            richTextBox1.Text += "系統中有 : " + processes.Length.ToString() + " 個程序\n";
-
-            if (processes.Length > 1)
-            {
-                richTextBox1.Text += "本程式已在執行中\n";
-                MessageBox.Show("應用程序已經在運行中。");
-                //Thread.Sleep(1000);
-                //System.Environment.Exit(1);
-            }
-            else
-            {
-                richTextBox1.Text += "本程式尚未被其他執行\n";
-                //Application.EnableVisualStyles();
-                //Application.SetCompatibleTextRenderingDefault(false);
-                //Application.Run(new Form1());
-            }
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -1122,6 +1100,8 @@ namespace vcs_Process1
 
         private void button29_Click(object sender, EventArgs e)
         {
+            //關閉所有記事本
+
         }
 
         //------------------------------------------------------------  # 60個
@@ -1267,7 +1247,7 @@ namespace vcs_Process1
         int count = 0;
         private void timer_monitor_process_Tick(object sender, EventArgs e)
         {
-            richTextBox2.Text += "A ";
+            richTextBox2.Text += ".";
             if (flag_keep_program_running == true)
             {
                 if (flag_program_running == true)
@@ -1299,7 +1279,7 @@ namespace vcs_Process1
                     if (process.ProcessName.ToLower() == program_name.ToLower())
                     {
                         flag_EnableRaisingEvents = true;
-                        richTextBox2.Text += "\n第 " + (program_executed_time++).ToString() + " 次偵測到程式 " + program_name + " 被開啟, 時間 : " + DateTime.Now.ToString() + "\n";
+                        richTextBox2.Text += "\n第 " + (program_executed_time++).ToString() + " 次偵測到程式 : " + program_name + " 被開啟, 時間 : " + DateTime.Now.ToString() + "\n";
                         process.EnableRaisingEvents = true;//設置進程終止時觸發的時間
                         process.Exited += new EventHandler(process_exited);//發現外部程序關閉即觸發方法process_exited
                         flag_program_running = true;
@@ -1438,6 +1418,13 @@ Process.Start(regeditstr + "\\regedit.exe");//打开注册表
 
 */
 
+//richTextBox1.Text += "本程式名稱 : " + Application.CompanyName + "\n";
 
-//while (!process.WaitForExit(1000));
+            //Thread.Sleep(1000);
+            //System.Environment.Exit(1);
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new Form1());
+
+
 

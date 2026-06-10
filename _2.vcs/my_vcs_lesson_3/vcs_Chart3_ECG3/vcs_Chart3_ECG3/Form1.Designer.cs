@@ -39,8 +39,20 @@
             this.label2 = new System.Windows.Forms.Label();
             this.bt_clear = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.trackBar2 = new System.Windows.Forms.TrackBar();
+            this.label3 = new System.Windows.Forms.Label();
+            this.trackBar3 = new System.Windows.Forms.TrackBar();
+            this.label4 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButton0 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // chart1
@@ -66,7 +78,7 @@
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(12, 639);
+            this.trackBar1.Location = new System.Drawing.Point(966, 12);
             this.trackBar1.Maximum = 120;
             this.trackBar1.Minimum = 40;
             this.trackBar1.Name = "trackBar1";
@@ -78,9 +90,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(357, 649);
+            this.label1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Location = new System.Drawing.Point(1252, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 12);
+            this.label1.Size = new System.Drawing.Size(53, 19);
             this.label1.TabIndex = 2;
             this.label1.Text = "label1";
             // 
@@ -88,7 +101,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(838, 35);
+            this.label2.Location = new System.Drawing.Point(1250, 54);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 19);
             this.label2.TabIndex = 3;
@@ -97,7 +110,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(858, 115);
+            this.bt_clear.Location = new System.Drawing.Point(846, 272);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 10;
@@ -108,17 +121,118 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(842, 75);
+            this.richTextBox1.Location = new System.Drawing.Point(830, 232);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 9;
             this.richTextBox1.Text = "";
             // 
+            // trackBar2
+            // 
+            this.trackBar2.Location = new System.Drawing.Point(966, 63);
+            this.trackBar2.Maximum = 1000;
+            this.trackBar2.Minimum = 100;
+            this.trackBar2.Name = "trackBar2";
+            this.trackBar2.Size = new System.Drawing.Size(280, 45);
+            this.trackBar2.TabIndex = 11;
+            this.trackBar2.Value = 500;
+            this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label3.Location = new System.Drawing.Point(1252, 92);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 19);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "label3";
+            // 
+            // trackBar3
+            // 
+            this.trackBar3.Location = new System.Drawing.Point(966, 114);
+            this.trackBar3.Maximum = 1000;
+            this.trackBar3.Minimum = 100;
+            this.trackBar3.Name = "trackBar3";
+            this.trackBar3.Size = new System.Drawing.Size(280, 45);
+            this.trackBar3.TabIndex = 13;
+            this.trackBar3.Value = 500;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label4.Location = new System.Drawing.Point(1252, 131);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 19);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "label4";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.radioButton3);
+            this.groupBox1.Controls.Add(this.radioButton2);
+            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Controls.Add(this.radioButton0);
+            this.groupBox1.Location = new System.Drawing.Point(989, 207);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(120, 173);
+            this.groupBox1.TabIndex = 15;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "信號選擇";
+            // 
+            // radioButton0
+            // 
+            this.radioButton0.AutoSize = true;
+            this.radioButton0.Checked = true;
+            this.radioButton0.Location = new System.Drawing.Point(17, 25);
+            this.radioButton0.Name = "radioButton0";
+            this.radioButton0.Size = new System.Drawing.Size(59, 16);
+            this.radioButton0.TabIndex = 0;
+            this.radioButton0.TabStop = true;
+            this.radioButton0.Text = "心電圖";
+            this.radioButton0.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(17, 59);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(59, 16);
+            this.radioButton1.TabIndex = 1;
+            this.radioButton1.Text = "正弦波";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(17, 92);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(59, 16);
+            this.radioButton2.TabIndex = 2;
+            this.radioButton2.Text = "三角波";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(17, 126);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(47, 16);
+            this.radioButton3.TabIndex = 3;
+            this.radioButton3.Text = "方波";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1172, 696);
+            this.ClientSize = new System.Drawing.Size(1323, 696);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.trackBar3);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.trackBar2);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label2);
@@ -130,6 +244,10 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -144,6 +262,15 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.TrackBar trackBar2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TrackBar trackBar3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radioButton0;
     }
 }
 
