@@ -37,7 +37,7 @@ namespace vcs_Chart3_ECG3
 
             // 設定邊界, 設定 X 軸顯示範圍 (例如 2 秒)
             chartarea.AxisX.Minimum = 0;  // 設定X軸最小值
-            chartarea.AxisX.Maximum = 2;  // 設定X軸最大值
+            chartarea.AxisX.Maximum = 10;  // 設定X軸最大值
             chartarea.AxisY.Minimum = -1.5;  // 設定Y軸最小值
             chartarea.AxisY.Maximum = 1.5;  // 設定Y軸最大值
 
@@ -69,6 +69,8 @@ namespace vcs_Chart3_ECG3
             label1.Text = "心率 : " + hr + " bpm";
         }
 
+        int index = 0;
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             // 每次更新加入一些新點
@@ -80,8 +82,8 @@ namespace vcs_Chart3_ECG3
                 ecgBuffer.Enqueue(value);
                 t += 1.0 / fs;
 
-                // 保持 buffer 長度在 2 秒內
-                if (ecgBuffer.Count > 2 * fs)
+                // 保持 buffer 長度在 10 秒內
+                if (ecgBuffer.Count > 10 * fs)
                     ecgBuffer.Dequeue();
             }
 
@@ -90,12 +92,16 @@ namespace vcs_Chart3_ECG3
             // 更新 Chart
             chart1.Series[0].Points.Clear();
 
-            int index = 0;
+            double xx = 0;
             foreach (var v in ecgBuffer)
             {
-                chart1.Series[0].Points.AddXY(index / (double)fs, v);  // AddXY 二維加入
+                xx = index / (double)fs;
+                chart1.Series[0].Points.AddXY(xx, v);  // AddXY 二維加入
                 index++;
             }
+
+            chart1.ChartAreas[0].AxisX.Minimum = xx - 10;
+            chart1.ChartAreas[0].AxisX.Maximum = xx;
         }
 
         private double GenerateECGPoint(double time, int hr)

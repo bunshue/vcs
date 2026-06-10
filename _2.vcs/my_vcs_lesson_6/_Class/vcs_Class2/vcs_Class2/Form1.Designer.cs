@@ -109,7 +109,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(686, 553);
+            this.bt_clear.Location = new System.Drawing.Point(1064, 46);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 131;
@@ -197,7 +197,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(666, 519);
+            this.richTextBox1.Location = new System.Drawing.Point(1044, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 122;
@@ -419,7 +419,7 @@
             this.groupBox1.Size = new System.Drawing.Size(200, 366);
             this.groupBox1.TabIndex = 156;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Text = "人員管理";
             // 
             // bt_class04
             // 
@@ -497,7 +497,7 @@
             this.groupBox2.Size = new System.Drawing.Size(200, 366);
             this.groupBox2.TabIndex = 157;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
+            this.groupBox2.Text = "圖形管理";
             // 
             // lb_count2
             // 

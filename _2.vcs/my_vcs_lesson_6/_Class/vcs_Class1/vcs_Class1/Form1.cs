@@ -23,7 +23,7 @@ using System.Timers;
 
 /*
 方案總管 / 右鍵 / 加入 / 新增項目 選 類別
-把 Class1.cs 改成 Color2Gray.cs
+把 Class1.cs 改成 MyClass.cs
 */
 
 using AnimalSpace;      //animal.cs cats.cs human.cs之namespace不一樣, 要引用

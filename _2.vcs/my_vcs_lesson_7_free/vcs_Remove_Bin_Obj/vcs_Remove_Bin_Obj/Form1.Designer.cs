@@ -200,6 +200,8 @@
             // checkBox10
             // 
             this.checkBox10.AutoSize = true;
+            this.checkBox10.Checked = true;
+            this.checkBox10.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox10.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.checkBox10.Location = new System.Drawing.Point(15, 301);
             this.checkBox10.Name = "checkBox10";

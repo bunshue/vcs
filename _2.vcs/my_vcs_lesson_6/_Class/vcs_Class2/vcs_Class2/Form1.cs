@@ -14,6 +14,7 @@ namespace vcs_Class2
     public partial class Form1 : Form
     {
         Person[] person_data = new Person[100];  //統一管理物件
+        ShapeCollection ShapeManager = new ShapeCollection();
 
         public Form1()
         {
@@ -26,7 +27,8 @@ namespace vcs_Class2
 
             //------------------------------------------------------------  # 60個
 
-            showCounter();
+            showCounter1();
+            showCounter2();
         }
 
         private void show_item_location()
@@ -69,9 +71,11 @@ namespace vcs_Class2
 
             groupBox1.Size = new Size(200, 450);
             groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            groupBox2.Size = new Size(200, 310);
+            groupBox2.Location = new Point(x_st + dx * 3, y_st + dy * 6+30);
 
-            richTextBox1.Size = new Size(400, 690);
-            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            richTextBox1.Size = new Size(400, 760);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             x_st = 10;
@@ -82,8 +86,12 @@ namespace vcs_Class2
             bt_class02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             bt_class03.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             bt_class04.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            lb_count2.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 80);
+            bt_class10.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_class11.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_class12.Location = new Point(x_st + dx * 0, y_st + dy * 2);
 
-            this.Size = new Size(1510, 750);
+            this.Size = new Size(1280, 820);
             this.Text = "vcs_Class2";
 
             //設定執行後的表單起始位置, 正中央
@@ -654,9 +662,9 @@ namespace vcs_Class2
         {
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
-        private void showCounter()
+        private void showCounter1()
         {
             lb_count1.Text = "目前共有 " + Person.counter() + " 人\n";
             lb_count1.Text += "老師 " + Teacher.counter() + " 人\n";
@@ -677,7 +685,7 @@ namespace vcs_Class2
                 int pos = Person.counter() - 1;
                 person_data[pos] = tf.tObj;
                 richTextBox1.Text += "新增的老師\r\n" + person_data[pos].show() + "\n";
-                showCounter();
+                showCounter1();
             }
             else
             {
@@ -696,7 +704,7 @@ namespace vcs_Class2
                 int pos = Person.counter() - 1;
                 person_data[pos] = sf.sObj;
                 richTextBox1.Text += "新增的學生\r\n" + person_data[pos].show() + "\n";
-                showCounter();
+                showCounter1();
             }
             else
             {
@@ -796,30 +804,67 @@ namespace vcs_Class2
             br.Close();
             fs.Close();
 
-            showCounter();
+            showCounter1();
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
+
+        private void showCounter2()
+        {
+            lb_count2.Text = ShapeManager.getCount().ToString();
+        }
 
         private void bt_class10_Click(object sender, EventArgs e)
         {
             //新增三角形
+            richTextBox1.Text += "新增三角形, 建立新表單, 若按OK, 回傳新表單的資料\n";
+            TriangleForm tForm = new TriangleForm();
 
+            if (tForm.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.Text += "新增三角形 OK\t加入tForm資料之內部物件\n";
+                ShapeManager.add(tForm.tObj);
+                richTextBox1.Text += "內容\t" + tForm.tObj.show() + "\n";
+                showCounter2();
+            }
+            else
+            {
+                richTextBox1.Text += "新增三角形 Cancel\n";
+            }
+            tForm.Dispose();
         }
 
         private void bt_class11_Click(object sender, EventArgs e)
         {
             //新增矩形
+            richTextBox1.Text += "新增矩形, 建立新表單, 若按OK, 回傳新表單的資料\n";
+            RectangleForm rForm = new RectangleForm();
 
+            if (rForm.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.Text += "新增矩形 OK\t加入rForm資料之內部物件\n";
+                ShapeManager.add(rForm.rObj);
+                richTextBox1.Text += "內容\t" + rForm.rObj.show() + "\n";
+                showCounter2();
+            }
+            else
+            {
+                richTextBox1.Text += "新增矩形 Cancel\n";
+            }
+            rForm.Dispose();
         }
 
         private void bt_class12_Click(object sender, EventArgs e)
         {
             //info
-
+            richTextBox1.Text += "目前共有 " + ShapeManager.getCount() + " 個圖形\n";
+            richTextBox1.Text += "內容:\n";
+            richTextBox1.Text += ShapeManager.listing() + "\n";
+            richTextBox1.Text += "圖形次序: " + ShapeManager.rankShape() + "\n";
+            richTextBox1.Text += "最大圖形: " + ShapeManager.maxShape() + "\n";
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
     }
 
     //不重複之陣列

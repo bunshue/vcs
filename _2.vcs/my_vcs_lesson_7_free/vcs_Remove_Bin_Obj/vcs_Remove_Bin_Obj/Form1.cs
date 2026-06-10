@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;    //for Directory
+using System.IO;  // for Directory
 
 namespace vcs_Remove_Bin_Obj
 {
@@ -30,6 +30,20 @@ namespace vcs_Remove_Bin_Obj
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
+            //取得目前所在路徑
+            string currentPath = Directory.GetCurrentDirectory();
+            search_path = currentPath;
+            specified_search_path = currentPath;
+            lb_main_mesg.Text = "";
+            this.Text = "目前位置 : " + currentPath;
+        }
+
+        void show_item_location()
+        {
             int x_st = 15;
             int y_st = 15;
             int dx = 230;
@@ -50,24 +64,16 @@ namespace vcs_Remove_Bin_Obj
             bt_open_dir2.Location = new Point(x_st + 115 + 50, y_st + dy * 10 - 60);
             groupBox_remove.Location = new Point(x_st + 170, y_st + dy * 0);
 
-            lb_main_mesg.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-
+            lb_main_mesg.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 0);
             listView1.Size = new Size(570, 550);
             listView1.Location = new Point(x_st + dx * 1 + 50, y_st + dy * 1);
 
-            richTextBox1.Size = new Size(300, 550);
+            richTextBox1.Size = new Size(500, 550);
             richTextBox1.Location = new Point(x_st + dx * 1 + 630, y_st + dy * 1);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            //取得目前所在路徑
-            string currentPath = Directory.GetCurrentDirectory();
-
-            search_path = currentPath;
-            specified_search_path = currentPath;
-            lb_main_mesg.Text = "";
-
-            this.Size = new Size(1200, 650);
-            this.Text = "目前位置 : " + currentPath;
+            this.Size = new Size(1400, 650);
+            this.Text = "vcs_Remove_Bin_Obj";
 
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
@@ -144,6 +150,7 @@ namespace vcs_Remove_Bin_Obj
             if (checkBox10.Checked == true)
             {
                 result_str += "共刪除空資料夾 : " + total_delete_empty_folder_cnt.ToString() + " 個\n";
+                lb_main_mesg.Text += ", 刪除空資料夾 : " + total_delete_empty_folder_cnt.ToString() + " 個";
             }
             richTextBox1.Text += result_str;
         }
@@ -392,7 +399,8 @@ namespace vcs_Remove_Bin_Obj
                     flag_rename_fail = true;
                 }
             }
-            lb_main_mesg.Text = "欲刪除個數 : " + len + ", 完成";
+
+            lb_main_mesg.Text = "刪除檔案 : " + len + " 個, 完成";
             if (flag_rename_fail == true)
             {
                 lb_main_mesg.Text += "\t有錯誤";

@@ -1255,7 +1255,7 @@ namespace vcs_Process1
         //string program_path = @"C:\Program Files (x86)\Noel Danjou\AMCap\AMCap.exe";
         //string program_name = "MegaDownloader";
         //string program_path = @"C:\____backup\MegaDownloaderNoinstall_1.8_azo\MegaDownloaderNoinstall\MegaDownloader.exe";
-        string program_name = "記事本";
+        string program_name = "notepad";
         string program_path = @"NotePad.exe";
 
         bool flag_program_running = false;

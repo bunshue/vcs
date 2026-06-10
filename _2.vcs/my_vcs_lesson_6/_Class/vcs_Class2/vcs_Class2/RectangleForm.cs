@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_Class7
+namespace vcs_Class2
 {
     public partial class RectangleForm : Form
     {

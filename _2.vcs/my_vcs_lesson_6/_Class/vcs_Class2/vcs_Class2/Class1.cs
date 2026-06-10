@@ -9,6 +9,252 @@ namespace vcs_Class2
     {
     }
 
+    //------------------------------------------------------------  # 60個
+
+    abstract class Shape
+    {
+        private string type;
+        public Shape(string type)
+        {
+            this.type = type;
+        }
+        public string getType()
+        {
+            return type;
+        }
+        public virtual string show() { return type; }
+        abstract public double area();
+    }
+
+    interface Comparable
+    {
+        int compareTo(Object obj);
+    }
+
+    class Triangle : Shape, Comparable
+    {
+        private double tbase;
+        private double height;
+        public Triangle(double tbase, double height)
+            : base("Triangle")
+        {
+            this.tbase = tbase;
+            this.height = height;
+        }
+
+        public override string show()
+        {
+            return base.show() + ": 底 = " + tbase + ", 高 = " + height;
+        }
+
+        public override double area()
+        {
+            return 0.5 * tbase * height;
+        }
+
+        public int compareTo(Object obj)
+        {
+            double myArea = area();
+            double sArea = ((Shape)obj).area();
+
+            if (myArea == sArea)
+            {
+                return 0;
+            }
+            else if (myArea < sArea)
+            {
+                return -1;
+            }
+            else
+            {
+                return 1;
+            }
+        }
+    }
+
+    class Rectangle : Shape, Comparable
+    {
+        private double width;
+        private double height;
+        public Rectangle(double width, double height)
+            : base("Rectangle")
+        {
+            this.width = width;
+            this.height = height;
+        }
+        public override string show()
+        {
+            return base.show() + ": 寬 = " + width + ", 高 = " + height;
+        }
+        public override double area()
+        {
+            return width * height;
+        }
+
+        public int compareTo(Object obj)
+        {
+            double myArea = area();
+            double sArea = ((Shape)obj).area();
+
+            if (myArea == sArea)
+            {
+                return 0;
+            }
+            else if (myArea < sArea)
+            {
+                return -1;
+            }
+            else
+            {
+                return 1;
+            }
+        }
+    }
+
+    class ShapeCollection
+    {
+        private int count = 0;
+        private Shape[] shapeArray = new Shape[100];
+
+        public ShapeCollection() { }
+
+        public int getCount() { return count; }
+
+        public void add(Shape s)
+        {
+            if (s != null && count < 100)
+            {
+                shapeArray[count++] = s;
+            }
+        }
+
+        public string listing()
+        {
+            string res = "";
+
+            for (int i = 0; i < count; i++)
+            {   // polymorphism
+                Shape s = shapeArray[i];
+                res += s.show() + ", 面積 = " + s.area() + "\r\n";
+            }
+
+            return res;
+        }
+        /*
+         * 使用interface Comparable的compareTo(Object obj)方法取得比較的結果
+         */
+        public string maxShape()
+        {
+            if (count == 0)
+            {
+                return "尚未有圖形";
+            }
+
+            string res = "";
+
+            Shape max = shapeArray[0];
+
+            for (int i = 1; i < count; i++)
+            {
+                Shape cObj = shapeArray[i];
+                if (((Comparable)cObj).compareTo(max) > 0)
+                {
+                    max = cObj;
+                }
+            }
+            res = max.show();
+            return res;
+        }
+
+        public string rankShape()
+        {
+            string res = "[ ";
+
+            if (count == 0)
+            {
+                return res + "]";
+            }
+
+            int[] rank = new int[count];
+
+            for (int i = 0; i < count; i++)
+            {
+                rank[i] = 1;
+                Shape iShape = shapeArray[i];
+
+                for (int j = 0; j < count; j++)
+                {
+                    Shape jShape = shapeArray[j];
+                    if (((Comparable)jShape).compareTo(iShape) > 0)
+                    {
+                        rank[i]++;
+                    }
+                }
+            }
+
+            for (int i = 0; i < count; i++)
+            {
+                res += rank[i] + " ";
+            }
+            return res + "]";
+        }
+
+        /*
+         * 直接使用area()方法來進行比較
+        */
+        /*
+        public string maxShape()
+        {
+            if (count == 0) return "尚未有圖形";
+
+            string res = "";
+
+            Shape max = shapeArray[0];
+
+            for (int i = 1; i < count; i++)
+            {
+                Shape cObj = shapeArray[i];
+
+                if (cObj.area() > max.area())
+                    max = cObj;
+            }
+
+            res = max.show();
+
+            return res;
+        }
+
+        public string rankShape()
+        {
+            string res = "[ ";
+
+            if (count == 0) return res + "]";
+
+            int[] rank = new int[count];
+
+            for (int i = 0; i < count; i++)
+            {
+                rank[i] = 1;
+                Shape iShape = shapeArray[i];
+
+                for (int j = 0; j < count; j++)
+                {
+                    Shape jShape = shapeArray[j];
+                    if (jShape.area() > iShape.area())
+                        rank[i]++;
+                }
+            }
+
+            for (int i = 0; i < count; i++)
+                res += rank[i] + " ";
+
+            return res + "]";
+        }
+        */
+    }
+
+    //------------------------------------------------------------  # 60個
+
     class Date
     {
         private int day;
@@ -18,22 +264,27 @@ namespace vcs_Class2
         { // default constructor
             day = 1; month = 1; year = 2000;
         }
+
         /*
         public Date():this(1,1,2000) { // default constructor            
         }
         */
+
         public Date(int d, int m, int y)
         {  //constructor
             day = d; month = m; year = y;
         }
+
         public void setDate(int d, int m, int y)
         {
             day = d; month = m; year = y;
         }
+
         public string show()
         {
             return month + "-" + day + "-" + year;
         }
+
         public int getDay() { return day; }
         public int getMonth() { return month; }
         public int getYear() { return year; }
@@ -45,13 +296,13 @@ namespace vcs_Class2
         private int age;
         private char gender;
         private Date date;
-
         private static int ctr = 0;
 
         public static int counter()
         {
             return ctr;
         }
+
         // constructors
         public Person()
         {
@@ -79,40 +330,49 @@ namespace vcs_Class2
             date = d;
             ctr++;
         }
+
         // setter methods
         public void setName(string n)
         {
             name = n;
         }
+
         public void setAge(int a)
         {
             age = a;
         }
+
         public void setGender(char g)
         {
             gender = g;
         }
+
         public void setDate(Date d)
         {
             date = d;
         }
+
         // getter methods
         public string getName()
         {
             return name;
         }
+
         public int getAge()
         {
             return age;
         }
+
         public char getGender()
         {
             return gender;
         }
+
         public Date getDate()
         {
             return date;
         }
+
         public virtual string show()
         {
             string str = "名字 = " + name + "\r\n";
@@ -139,9 +399,6 @@ namespace vcs_Class2
 
     } // class Person
 
-
-
-
     class Student : Person
     {
         private int Chinese;  //新增私有的資料成員
@@ -159,6 +416,7 @@ namespace vcs_Class2
             Chinese = Math = 0;  //預設值是0
             ctr++;
         }
+
         public Student(string n, int a, char g)
             : base(n, a, g)
         {
@@ -171,6 +429,7 @@ namespace vcs_Class2
             Chinese = Math = 0;
             ctr++;
         }
+
         public Student(string n, int a, char g, int c, int m)
             : base(n, a, g)
         {
@@ -178,6 +437,7 @@ namespace vcs_Class2
             Math = m;
             ctr++;
         }
+
         public Student(string n, int a, char g, Date d, int c, int m)
             : base(n, a, g, d)
         {
@@ -185,22 +445,27 @@ namespace vcs_Class2
             Math = m;
             ctr++;
         }
+
         public void setChinese(int c)
         {
             Chinese = c;
         }
+
         public void setMath(int m)
         {
             Math = m;
         }
+
         public int getChinese()
         {
             return Chinese;
         }
+
         public int getMath()
         {
             return Math;
         }
+
         // 利用base.show()呼叫父類別Person的show()以取得Person的資訊
         public /*new*/ override string show()
         {
@@ -211,7 +476,6 @@ namespace vcs_Class2
 
             return str;
         }
-
     }
 
     class Teacher : Person
@@ -269,7 +533,7 @@ namespace vcs_Class2
             return str;
         }
     }
-
-
-
 }
+
+//------------------------------------------------------------  # 60個
+

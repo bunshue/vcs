@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using System.Drawing;  // for Graphics, Color
+using System.Windows.Forms;     //for MessageBox
+
 namespace MyClass     //預設namespace同Form1.cs之namespace
 {
     class Class1
@@ -262,6 +265,7 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
             }
         }
     }
+
     //Manager經理類別繼承自Empolyee員工類別
     public class Manager : Empolyee
     {
@@ -347,6 +351,107 @@ namespace MyClass     //預設namespace同Form1.cs之namespace
         public string GetMsg()
         {
             return "名稱:" + this.name + " 品種:" + this.type + " 體重:" + this.weight;
+        }
+    }
+
+    //------------------------------------------------------------  # 60個
+
+    public class StudentA           //定義StudentA類別
+    {
+        public string Name;        //Name姓名欄位宣告為public
+        private int _Score;        //_Score成績欄位宣告為private
+        private static int _Total = 0;  //_Total用來計算共產生多少個物件，宣告為static和private
+
+        public StudentA()                //建構式1, 無參數, 不做任何事
+        {
+            _Total++;                 //_Total++，物件總數加1
+        }
+
+        public StudentA(string _vName)  //建構式2, 可設定姓名
+        {
+            Name = _vName;
+            _Total++;                 //_Total++，物件總數加1
+        }
+
+        public StudentA(string _vName, int _vScore) //建構式3, 可設定姓名和分數
+        {
+            Name = _vName;
+            Score = _vScore;
+            _Total++;                 //_Total++，物件總數加1
+        }
+
+        public int Score              //建立Score屬性，此屬性限制在0~100
+        {
+            get
+            {
+                return _Score;
+            }
+            set
+            {
+                if (value > 100)
+                    value = 100;   //Score屬性最大值為100
+                if (value < 0)
+                    value = 0;       //Score屬性最小值為0
+                _Score = value;
+            }
+        }
+
+        public void ShowMsg()      //ShowMsg顯示姓名與成績的方法
+        {
+            MessageBox.Show(Name + "同學的分數是 " + Convert.ToString(Score));
+        }
+
+        public string GetMsg()   //GetMsg傳回姓名與成績的方法
+        {
+            return Name + "同學的分數是 " + Convert.ToString(Score);
+        }
+
+        public static string GetTotalStudent()   //傳回共產生多少學生物件
+        {
+            return "本班共有 " + Convert.ToString(_Total) + " 位同學";
+        }
+    }
+
+    //------------------------------------------------------------  # 60個
+
+    class Color2Gray
+    {
+        public Bitmap bitmap1; // 原圖形
+        public Bitmap bitmap2; // 新圖形
+        public Bitmap bitmap3; // 新圖形
+
+        public Color2Gray(Bitmap bmp)
+        {
+            this.bitmap1 = bmp;
+            bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
+            bitmap3 = bmp;
+        }
+
+        public void do_Color2Gray()
+        {
+            int xx;
+            int yy;
+
+            for (yy = 0; yy < bitmap1.Height; yy++)
+            {
+                for (xx = 0; xx < bitmap1.Width; xx++)
+                {
+                    byte rrr = bitmap1.GetPixel(xx, yy).R;
+                    byte ggg = bitmap1.GetPixel(xx, yy).G;
+                    byte bbb = bitmap1.GetPixel(xx, yy).B;
+
+                    int Gray = (rrr * 299 + ggg * 587 + bbb * 114 + 500) / 1000;
+                    Color zz = Color.FromArgb(255, Gray, Gray, Gray);
+
+                    bitmap2.SetPixel(xx, yy, zz);
+                }
+            }
+        }
+
+        public void Draw()
+        {
+            Graphics g = Graphics.FromImage(bitmap3);
+            g.DrawRectangle(Pens.Red, 10, 10, 100, 100);
         }
     }
 

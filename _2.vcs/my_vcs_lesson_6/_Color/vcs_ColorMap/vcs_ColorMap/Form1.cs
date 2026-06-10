@@ -79,17 +79,11 @@ namespace vcs_ColorMap
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 80;
-            dx = 200 + 5;
-            dy = 60 + 5;
-
+            int x_st = 10;
+            int y_st = 80;
+            int dx = 200 + 5;
+            int dy = 60 + 5;
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -100,13 +94,11 @@ namespace vcs_ColorMap
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            label1.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            label2.Location = new Point(x_st + dx * 0, y_st + dy * 10 + 30);
-            label3.Location = new Point(x_st + dx * 0, y_st + dy * 10 + 60);
+            label2.Location = new Point(x_st + dx * 0 + 80, y_st + dy * 10);
+            label3.Location = new Point(x_st + dx * 0, y_st + dy * 10);
             label1.Text = "";
             label2.Text = "";
-            label3.Text = "";
-
+            label3.Text = "分析一張圖的畫素的顏色";
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -120,6 +112,7 @@ namespace vcs_ColorMap
 
             y_st = 10;
             comboBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            label1.Location = new Point(x_st + dx * 0 + 280, y_st + dy * 0);
 
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox1.Size = new Size(W, H);
