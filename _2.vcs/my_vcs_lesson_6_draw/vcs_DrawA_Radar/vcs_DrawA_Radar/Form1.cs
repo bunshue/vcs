@@ -12,47 +12,19 @@ using System.Drawing.Text;
 
 namespace vcs_DrawA_Radar
 {
-    public class CarData
-    {
-        public string Name;
-        public Color Color;
-        public float[] Values;
-        public PointF[] Points = null;
-
-        public CarData(string name, Color color, params float[] values)
-        {
-            Name = name;
-            Color = color;
-            Values = (float[])values.Clone();
-        }
-    }
-
-    public class AxisInfo
-    {
-        public string Name, FormatString;
-        public float Min, Max;
-
-        public AxisInfo(string name, string format_string, float min, float max)
-        {
-            Name = name;
-            FormatString = format_string;
-            Min = min;
-            Max = max;
-        }
-    }
-
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         private List<CarData> Cars = null;
         private List<AxisInfo> AxisInfos = null;
 
         // Initialize the car data.
         // From https://www.edmunds.com/electric-car/.
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             Cars = new List<CarData>();
@@ -197,7 +169,6 @@ namespace vcs_DrawA_Radar
                 sf.LineAlignment = StringAlignment.Center;
                 gr.DrawString(text, font, brush, 0, 0, sf);
             }
-
             gr.Restore(state);
         }
 
@@ -292,4 +263,49 @@ namespace vcs_DrawA_Radar
             DrawCharts(e.Graphics, chkFillAreas.Checked);
         }
     }
+
+    //------------------------------------------------------------  # 60個
+
+    public class CarData
+    {
+        public string Name;
+        public Color Color;
+        public float[] Values;
+        public PointF[] Points = null;
+
+        public CarData(string name, Color color, params float[] values)
+        {
+            Name = name;
+            Color = color;
+            Values = (float[])values.Clone();
+        }
+    }
+
+    public class AxisInfo
+    {
+        public string Name, FormatString;
+        public float Min, Max;
+
+        public AxisInfo(string name, string format_string, float min, float max)
+        {
+            Name = name;
+            FormatString = format_string;
+            Min = min;
+            Max = max;
+        }
+    }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

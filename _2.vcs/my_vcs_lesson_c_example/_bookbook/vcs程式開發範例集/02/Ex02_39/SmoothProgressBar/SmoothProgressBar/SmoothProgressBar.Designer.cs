@@ -44,7 +44,7 @@ namespace SmoothProgressBar
             this.smoothProgressBar1.Minimum = 0;
             this.smoothProgressBar1.Name = "smoothProgressBar1";
             this.smoothProgressBar1.ProgressBarColor = System.Drawing.Color.Blue;
-            this.smoothProgressBar1.Size = new System.Drawing.Size(150, 30);
+            this.smoothProgressBar1.Size = new System.Drawing.Size(394, 30);
             this.smoothProgressBar1.TabIndex = 4;
             this.smoothProgressBar1.Value = 0;
             // 
@@ -56,7 +56,7 @@ namespace SmoothProgressBar
             this.smoothProgressBar2.Minimum = 0;
             this.smoothProgressBar2.Name = "smoothProgressBar2";
             this.smoothProgressBar2.ProgressBarColor = System.Drawing.Color.MediumSpringGreen;
-            this.smoothProgressBar2.Size = new System.Drawing.Size(150, 30);
+            this.smoothProgressBar2.Size = new System.Drawing.Size(394, 30);
             this.smoothProgressBar2.TabIndex = 3;
             this.smoothProgressBar2.Value = 0;
             // 

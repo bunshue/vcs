@@ -26,6 +26,8 @@ namespace vcs_Picasa
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             //新建圖檔, 初始化畫布
             int W = 1920;
             int H = 1080;
@@ -51,8 +53,8 @@ namespace vcs_Picasa
             angle = 0;
             draw_bitmap_with_angle(filename, g, cx, cy, angle);
 
-            cx = 0+200;
-            cy = 0+200;
+            cx = 0 + 200;
+            cy = 0 + 200;
             draw_bitmap_with_angle(filename, g, cx, cy, angle);
 
             this.BackgroundImageLayout = ImageLayout.None;
@@ -64,7 +66,7 @@ namespace vcs_Picasa
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
             this.WindowState = FormWindowState.Maximized;
-            
+
             bt_exit_setup();
         }
 
@@ -97,6 +99,8 @@ namespace vcs_Picasa
             this.Controls.Add(bt_exit); // 將按鈕加入表單
             bt_exit.BringToFront();     //移到最上層
         }
+
+        //------------------------------------------------------------  # 60個
 
         void draw_bitmap_with_angle(string filename, Graphics g, int cx, int cy, int angle)
         {
@@ -141,12 +145,20 @@ namespace vcs_Picasa
             }
             g.DrawImage(bitmap1, 0, 0, w, h);
             g.DrawRectangle(p, 0, 0, w, h);
-
-
-
-
         }
-
-
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

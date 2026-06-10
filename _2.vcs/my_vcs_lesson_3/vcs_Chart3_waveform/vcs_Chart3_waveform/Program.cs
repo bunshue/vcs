@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_Process4
+namespace vcs_Chart3_waveform
 {
     static class Program
     {
         /// <summary>
-        /// 應用程序的主入口點。
+        /// 應用程式的主要進入點。
         /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Frm_Main());
+            Application.Run(new Form1());
         }
     }
 }

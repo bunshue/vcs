@@ -385,13 +385,9 @@ namespace vcs_Alphanumeric
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            pictureBox1.Size = new Size(830, 980);
-            pictureBox1.Location = new Point(10, 10);
-            pictureBox2.Size = new Size(480, 150);
-            pictureBox2.Location = new Point(840, 10);
+            show_item_location();
 
-            this.Size = new Size(1400, 1040);
-            this.Location = new Point(50, 10);
+            //------------------------------------------------------------  # 60個
 
             //新建圖檔, 初始化畫布
             bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
@@ -407,6 +403,38 @@ namespace vcs_Alphanumeric
             g2.Clear(BackColor);
             pictureBox2.Image = bitmap2;
         }
+
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+
+            pictureBox1.Size = new Size(830, 980);
+            pictureBox1.Location = new Point(10, 10);
+            pictureBox2.Size = new Size(480, 150);
+            pictureBox2.Location = new Point(840, 10);
+
+            richTextBox1.Size = new Size(400, 500);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 6);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1400, 1040);
+            this.Text = "vcs_test_all_00_Usually";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         string get_alphanumeric_string(char c)
         {
@@ -671,3 +699,16 @@ namespace vcs_Alphanumeric
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+

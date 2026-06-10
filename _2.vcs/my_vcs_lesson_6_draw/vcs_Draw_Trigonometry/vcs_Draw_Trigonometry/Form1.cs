@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Drawing2D;
+
 namespace vcs_Draw_Trigonometry
 {
     public partial class Form1 : Form
@@ -17,6 +19,8 @@ namespace vcs_Draw_Trigonometry
         int pt_selected = -1;  // 動態陣列 的 第幾個 被選到
         bool flag_dragging_x = false; // 是否拖拉中
         bool flag_dragging_y = false; // 是否拖拉中
+        SolidBrush sb = new SolidBrush(Color.Green);
+        Font f = new Font("標楷體", 20);
         Pen p1 = new Pen(Color.Green, 1);
         Pen p2 = new Pen(Color.Blue, 1);
         Point[] pts = new Point[N];
@@ -56,52 +60,55 @@ namespace vcs_Draw_Trigonometry
             {
                 array_sin[i] = (int)(A * sind(i));
                 array_cos[i] = (int)(A * cosd(i));
-
             }
-
 
             for (i = 0; i <= 90; i++)
             {
                 //richTextBox1.Text += ((int)(100*sind(i))).ToString() + " ";
                 richTextBox1.Text += array_sin[i].ToString() + " ";
             }
-
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
             int radius = 10;
             int W = 600;
             int H = 600;
 
             if (flag_dragging_x == true)
+            {
                 e.Graphics.DrawPolygon(p1, pts);
+            }
             else if (flag_dragging_y == true)
+            {
                 e.Graphics.DrawPolygon(p1, pts);
+            }
             else
+            {
                 e.Graphics.DrawPolygon(p2, pts);
+            }
 
             FillCircle(e.Graphics, pts[0], radius, Color.Green);
             FillCircle(e.Graphics, pts[1], radius, Color.Red);
             FillCircle(e.Graphics, pts[2], radius, Color.Green);
-            //e.Graphics.DrawString("移動圓點", new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(10, 370));
+            //e.Graphics.DrawString("移動圓點", f, sb, new PointF(10, 370));
 
-            e.Graphics.DrawString("B(" + pts[0].X.ToString() + ", " + (H - pts[0].Y).ToString() + ")", new Font("標楷體", 20), new SolidBrush(Color.Black), new PointF(pts[0].X - 70, pts[0].Y - 40));
-            e.Graphics.DrawString("A(" + pts[1].X.ToString() + ", " + (H - pts[1].Y).ToString() + ")", new Font("標楷體", 20), new SolidBrush(Color.Black), new PointF(pts[1].X - 10 - 30, pts[1].Y + 15));
-            e.Graphics.DrawString("C(" + pts[2].X.ToString() + ", " + (H - pts[2].Y).ToString() + ")", new Font("標楷體", 20), new SolidBrush(Color.Black), new PointF(pts[2].X - 10 - 70, pts[2].Y + 15));
+            e.Graphics.DrawString("B(" + pts[0].X.ToString() + ", " + (H - pts[0].Y).ToString() + ")", f, new SolidBrush(Color.Black), new PointF(pts[0].X - 70, pts[0].Y - 40));
+            e.Graphics.DrawString("A(" + pts[1].X.ToString() + ", " + (H - pts[1].Y).ToString() + ")", f, new SolidBrush(Color.Black), new PointF(pts[1].X - 10 - 30, pts[1].Y + 15));
+            e.Graphics.DrawString("C(" + pts[2].X.ToString() + ", " + (H - pts[2].Y).ToString() + ")", f, new SolidBrush(Color.Black), new PointF(pts[2].X - 10 - 70, pts[2].Y + 15));
 
             double AB = Math.Sqrt((pts[0].X - pts[1].X) * (pts[0].X - pts[1].X) + (pts[0].Y - pts[1].Y) * (pts[0].Y - pts[1].Y));
             double BC = Math.Sqrt((pts[0].X - pts[2].X) * (pts[0].X - pts[2].X) + (pts[0].Y - pts[2].Y) * (pts[0].Y - pts[2].Y));
             double CA = Math.Sqrt((pts[2].X - pts[1].X) * (pts[2].X - pts[1].X) + (pts[2].Y - pts[1].Y) * (pts[2].Y - pts[1].Y));
 
-            e.Graphics.DrawString(AB.ToString("n2"), new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF((pts[0].X + pts[1].X) / 2, (pts[0].Y + pts[1].Y) / 2));
-            e.Graphics.DrawString(BC.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF((pts[0].X + pts[2].X) / 2, (pts[0].Y + pts[2].Y) / 2));
-            e.Graphics.DrawString(CA.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF((pts[2].X + pts[1].X) / 2 - 20, (pts[2].Y + pts[1].Y) / 2 + 10));
+            e.Graphics.DrawString(AB.ToString("n2"), f, new SolidBrush(Color.Blue), new PointF((pts[0].X + pts[1].X) / 2, (pts[0].Y + pts[1].Y) / 2));
+            e.Graphics.DrawString(BC.ToString(), f, new SolidBrush(Color.Blue), new PointF((pts[0].X + pts[2].X) / 2, (pts[0].Y + pts[2].Y) / 2));
+            e.Graphics.DrawString(CA.ToString(), f, new SolidBrush(Color.Blue), new PointF((pts[2].X + pts[1].X) / 2 - 20, (pts[2].Y + pts[1].Y) / 2 + 10));
 
             double angle = Math.Acos(CA / AB) * 180 / Math.PI;
-            e.Graphics.DrawString("θ=" + angle.ToString("n2") + "°", new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(pts[1].X + 20, pts[1].Y - 25));
+            e.Graphics.DrawString("θ=" + angle.ToString("n2") + "°", f, sb, new PointF(pts[1].X + 20, pts[1].Y - 25));
 
             //XY軸
             e.Graphics.DrawLine(new Pen(Color.Black, 6), 3, 0, 3, H);
@@ -111,71 +118,45 @@ namespace vcs_Draw_Trigonometry
             int y_st = 100;
             int dy = 100;
 
-            e.Graphics.DrawString("sin(θ)=       =         = " + (BC / AB).ToString("n6"), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st, y_st));
-            e.Graphics.DrawString("cos(θ)=       =         = " + (CA / AB).ToString("n6"), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st, y_st + dy * 1));
-            e.Graphics.DrawString("tan(θ)=       =         = " + (BC / CA).ToString("n6"), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st, y_st + dy * 2));
-            e.Graphics.DrawString("cot(θ)=       =         = " + (CA / BC).ToString("n6"), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st, y_st + dy * 3));
-            e.Graphics.DrawString("sec(θ)=       =         = " + (AB / CA).ToString("n6"), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st, y_st + dy * 4));
-            e.Graphics.DrawString("csc(θ)=       =         = " + (AB / BC).ToString("n6"), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st, y_st + dy * 5));
+            e.Graphics.DrawString("sin(θ)=       =         = " + (BC / AB).ToString("n6"), f, sb, new PointF(x_st, y_st));
+            e.Graphics.DrawString("cos(θ)=       =         = " + (CA / AB).ToString("n6"), f, sb, new PointF(x_st, y_st + dy * 1));
+            e.Graphics.DrawString("tan(θ)=       =         = " + (BC / CA).ToString("n6"), f, sb, new PointF(x_st, y_st + dy * 2));
+            e.Graphics.DrawString("cot(θ)=       =         = " + (CA / BC).ToString("n6"), f, sb, new PointF(x_st, y_st + dy * 3));
+            e.Graphics.DrawString("sec(θ)=       =         = " + (AB / CA).ToString("n6"), f, sb, new PointF(x_st, y_st + dy * 4));
+            e.Graphics.DrawString("csc(θ)=       =         = " + (AB / BC).ToString("n6"), f, sb, new PointF(x_st, y_st + dy * 5));
 
-            e.Graphics.DrawLine(Pens.Green, x_st + 120, y_st + 12, x_st + 140 + 60, y_st + 12);
-            e.Graphics.DrawLine(Pens.Green, x_st + 120, y_st + 12 + dy * 1, x_st + 140 + 60, y_st + 12 + dy * 1);
-            e.Graphics.DrawLine(Pens.Green, x_st + 120, y_st + 12 + dy * 2, x_st + 140 + 60, y_st + 12 + dy * 2);
-            e.Graphics.DrawLine(Pens.Green, x_st + 120, y_st + 12 + dy * 3, x_st + 140 + 60, y_st + 12 + dy * 3);
-            e.Graphics.DrawLine(Pens.Green, x_st + 120, y_st + 12 + dy * 4, x_st + 140 + 60, y_st + 12 + dy * 4);
-            e.Graphics.DrawLine(Pens.Green, x_st + 120, y_st + 12 + dy * 5, x_st + 140 + 60, y_st + 12 + dy * 5);
+            e.Graphics.DrawLine(p1, x_st + 120, y_st + 12, x_st + 140 + 60, y_st + 12);
+            e.Graphics.DrawLine(p1, x_st + 120, y_st + 12 + dy * 1, x_st + 140 + 60, y_st + 12 + dy * 1);
+            e.Graphics.DrawLine(p1, x_st + 120, y_st + 12 + dy * 2, x_st + 140 + 60, y_st + 12 + dy * 2);
+            e.Graphics.DrawLine(p1, x_st + 120, y_st + 12 + dy * 3, x_st + 140 + 60, y_st + 12 + dy * 3);
+            e.Graphics.DrawLine(p1, x_st + 120, y_st + 12 + dy * 4, x_st + 140 + 60, y_st + 12 + dy * 4);
+            e.Graphics.DrawLine(p1, x_st + 120, y_st + 12 + dy * 5, x_st + 140 + 60, y_st + 12 + dy * 5);
 
             int dx = 115;
-            e.Graphics.DrawLine(Pens.Green, x_st + 120 + dx, y_st + 12, x_st + 140 + 80 + dx, y_st + 12);
-            e.Graphics.DrawLine(Pens.Green, x_st + 120 + dx, y_st + 12 + dy * 1, x_st + 140 + 80 + dx, y_st + 12 + dy * 1);
-            e.Graphics.DrawLine(Pens.Green, x_st + 120 + dx, y_st + 12 + dy * 2, x_st + 140 + 80 + dx, y_st + 12 + dy * 2);
-            e.Graphics.DrawLine(Pens.Green, x_st + 120 + dx, y_st + 12 + dy * 3, x_st + 140 + 80 + dx, y_st + 12 + dy * 3);
-            e.Graphics.DrawLine(Pens.Green, x_st + 120 + dx, y_st + 12 + dy * 4, x_st + 140 + 80 + dx, y_st + 12 + dy * 4);
-            e.Graphics.DrawLine(Pens.Green, x_st + 120 + dx, y_st + 12 + dy * 5, x_st + 140 + 80 + dx, y_st + 12 + dy * 5);
+            e.Graphics.DrawLine(p1, x_st + 120 + dx, y_st + 12, x_st + 140 + 80 + dx, y_st + 12);
+            e.Graphics.DrawLine(p1, x_st + 120 + dx, y_st + 12 + dy * 1, x_st + 140 + 80 + dx, y_st + 12 + dy * 1);
+            e.Graphics.DrawLine(p1, x_st + 120 + dx, y_st + 12 + dy * 2, x_st + 140 + 80 + dx, y_st + 12 + dy * 2);
+            e.Graphics.DrawLine(p1, x_st + 120 + dx, y_st + 12 + dy * 3, x_st + 140 + 80 + dx, y_st + 12 + dy * 3);
+            e.Graphics.DrawLine(p1, x_st + 120 + dx, y_st + 12 + dy * 4, x_st + 140 + 80 + dx, y_st + 12 + dy * 4);
+            e.Graphics.DrawLine(p1, x_st + 120 + dx, y_st + 12 + dy * 5, x_st + 140 + 80 + dx, y_st + 12 + dy * 5);
 
-            e.Graphics.DrawString("對邊     " + BC.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + 130, y_st - 20));
-            e.Graphics.DrawString("斜邊    " + AB.ToString("n2"), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + 130, y_st + 20));
+            e.Graphics.DrawString("對邊     " + BC.ToString(), f, sb, new PointF(x_st + 130, y_st - 20));
+            e.Graphics.DrawString("斜邊    " + AB.ToString("n2"), f, sb, new PointF(x_st + 130, y_st + 20));
 
-            e.Graphics.DrawString("鄰邊     " + CA.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + 130, y_st - 20 + dy * 1));
-            e.Graphics.DrawString("斜邊    " + AB.ToString("n2"), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + 130, y_st + 20 + dy * 1));
+            e.Graphics.DrawString("鄰邊     " + CA.ToString(), f, sb, new PointF(x_st + 130, y_st - 20 + dy * 1));
+            e.Graphics.DrawString("斜邊    " + AB.ToString("n2"), f, sb, new PointF(x_st + 130, y_st + 20 + dy * 1));
 
-            e.Graphics.DrawString("對邊     " + BC.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + 130, y_st - 20 + dy * 2));
-            e.Graphics.DrawString("鄰邊     " + CA.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + 130, y_st + 20 + dy * 2));
+            e.Graphics.DrawString("對邊     " + BC.ToString(), f, sb, new PointF(x_st + 130, y_st - 20 + dy * 2));
+            e.Graphics.DrawString("鄰邊     " + CA.ToString(), f, sb, new PointF(x_st + 130, y_st + 20 + dy * 2));
 
+            e.Graphics.DrawString("鄰邊     " + CA.ToString(), f, sb, new PointF(x_st + 130, y_st - 20 + dy * 3));
+            e.Graphics.DrawString("對邊     " + BC.ToString(), f, sb, new PointF(x_st + 130, y_st + 20 + dy * 3));
 
+            e.Graphics.DrawString("斜邊    " + AB.ToString("n2"), f, sb, new PointF(x_st + 130, y_st - 20 + dy * 4));
+            e.Graphics.DrawString("鄰邊     " + CA.ToString(), f, sb, new PointF(x_st + 130, y_st + 20 + dy * 4));
 
-            e.Graphics.DrawString("鄰邊     " + CA.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + 130, y_st - 20 + dy * 3));
-            e.Graphics.DrawString("對邊     " + BC.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + 130, y_st + 20 + dy * 3));
-
-            e.Graphics.DrawString("斜邊    " + AB.ToString("n2"), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + 130, y_st - 20 + dy * 4));
-            e.Graphics.DrawString("鄰邊     " + CA.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + 130, y_st + 20 + dy * 4));
-
-            e.Graphics.DrawString("斜邊    " + AB.ToString("n2"), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + 130, y_st - 20 + dy * 5));
-            e.Graphics.DrawString("對邊     " + BC.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + 130, y_st + 20 + dy * 5));
-
-            /*
-
-            x_st = 1200;
-            y_st = 50;
-            Point[] curvePoints = new Point[91];    //一維陣列內有 91 個Point
-            int i;
-            for (i = 0; i < 91; i++)
-            {
-                curvePoints[i].X = x_st + i;
-                curvePoints[i].Y = 300 - (array_sin[i] + A);
-
-
-            }
-            e.Graphics.DrawCurve(new Pen(Color.Red, 3), curvePoints);
-            //g3.DrawCurve(bluePen, curvePoints); //畫曲線
-
-            //array_sin[i] = (int)sind(i);
-            //array_sin[i] = (int)cosd(i);
-
-            */
-
-
-
+            e.Graphics.DrawString("斜邊    " + AB.ToString("n2"), f, sb, new PointF(x_st + 130, y_st - 20 + dy * 5));
+            e.Graphics.DrawString("對邊     " + BC.ToString(), f, sb, new PointF(x_st + 130, y_st + 20 + dy * 5));
         }
 
         // 檢查是哪一個點被 選到

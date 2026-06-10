@@ -20,8 +20,19 @@ namespace howto_stego_images_tiled2
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         // Hide and then recover the image.
         private void btnGo_Click(object sender, EventArgs e)
@@ -31,13 +42,7 @@ namespace howto_stego_images_tiled2
 
             // Hide the image3.
             Bitmap combined;
-            combined = HideResizedTiledImages(
-                (Bitmap)picMainOriginal.Image,
-                (Bitmap)picHiddenOriginal1.Image,
-                (Bitmap)picHiddenOriginal2.Image,
-                (Bitmap)picHiddenOriginal3.Image,
-                (Bitmap)picHiddenOriginal4.Image,
-                num_bits);
+            combined = HideResizedTiledImages((Bitmap)picMainOriginal.Image, (Bitmap)picHiddenOriginal1.Image, (Bitmap)picHiddenOriginal2.Image, (Bitmap)picHiddenOriginal3.Image, (Bitmap)picHiddenOriginal4.Image, num_bits);
             picCombined.Image = combined;
 
             // Recover the hidden images.
@@ -307,10 +312,7 @@ namespace howto_stego_images_tiled2
             int space_available = bm.Width * bm.Height;
             if (message_length + 4 > space_available)
             {
-                throw new InvalidDataException(
-                    "Message length " + message_bytes.Length +
-                    " is too long. This image can hold only " +
-                    space_available + " bytes.");
+                throw new InvalidDataException("Message length " + message_bytes.Length + " is too long. This image can hold only " + space_available + " bytes.");
             }
 
             int total_length = message_length + 4;
@@ -510,3 +512,17 @@ namespace howto_stego_images_tiled2
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

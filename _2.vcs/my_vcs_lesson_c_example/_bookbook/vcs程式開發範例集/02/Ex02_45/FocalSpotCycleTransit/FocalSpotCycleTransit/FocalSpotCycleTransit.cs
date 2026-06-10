@@ -21,6 +21,8 @@ namespace FocalSpotCycleTransit
 
         }
 
+        //6060
+
         private void AllControl_Enter(object sender, EventArgs e)
         {
             ((TextBox)sender).BackColor = Color.CornflowerBlue;//當當前控件成為活動控件時設置它的背景顏色為藍色

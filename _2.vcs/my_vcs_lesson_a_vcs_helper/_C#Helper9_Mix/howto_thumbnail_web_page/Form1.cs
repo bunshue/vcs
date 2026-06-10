@@ -22,6 +22,14 @@ namespace howto_thumbnail_web_page
         // Select default directories.
         private void Form1_Load(object sender, EventArgs e)
         {
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+
+            //------------------------------------------------------------  # 60個
+
             DirectoryInfo dir_info;
             dir_info = new DirectoryInfo(Path.Combine(Application.StartupPath, "..\\..\\Input"));
             txtInputDir.Text = dir_info.FullName;
@@ -29,6 +37,13 @@ namespace howto_thumbnail_web_page
             dir_info = new DirectoryInfo(Path.Combine(Application.StartupPath, "..\\..\\Output"));
             txtOutputDir.Text = dir_info.FullName;
         }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         // Let the user select the input directory.
         private void btnPickInputDirectory_Click(object sender, EventArgs e)
@@ -164,3 +179,17 @@ namespace howto_thumbnail_web_page
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

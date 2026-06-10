@@ -26,6 +26,8 @@ namespace howto_stego_bytes
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         // Encode the message.
         private void btnEncode_Click(object sender, EventArgs e)
         {
@@ -54,10 +56,7 @@ namespace howto_stego_bytes
             int space_available = bm.Width * bm.Height;
             if (message_length + 4 > space_available)
             {
-                throw new InvalidDataException(
-                    "Message length " + message_bytes.Length +
-                    " is too long. This image can hold only " +
-                    space_available + " bytes.");
+                throw new InvalidDataException("Message length " + message_bytes.Length + " is too long. This image can hold only " + space_available + " bytes.");
             }
 
             int total_length = message_length + 4;
@@ -272,3 +271,17 @@ namespace howto_stego_bytes
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

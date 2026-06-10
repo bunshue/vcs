@@ -35,14 +35,17 @@ namespace howto_bouncing_balls
             for (int i = 0; i < num_balls; i++)
             {
                 int width = rand.Next(10, 40);
-                BallLocation[i] = new Rectangle(
-                    rand.Next(0, ClientSize.Width - 2 * width),
-                    rand.Next(0, ClientSize.Height - 2 * width),
-                    width, width);
+                BallLocation[i] = new Rectangle(rand.Next(0, ClientSize.Width - 2 * width), rand.Next(0, ClientSize.Height - 2 * width), width, width);
                 int vx = rand.Next(2, 10);
                 int vy = rand.Next(2, 10);
-                if (rand.Next(0, 2) == 0) vx = -vx;
-                if (rand.Next(0, 2) == 0) vy = -vy;
+                if (rand.Next(0, 2) == 0)
+                {
+                    vx = -vx;
+                }
+                if (rand.Next(0, 2) == 0)
+                {
+                    vy = -vy;
+                }
                 BallVelocity[i] = new Point(vx, vy);
             }
 
@@ -50,11 +53,7 @@ namespace howto_bouncing_balls
             FormSize = ClientSize;
 
             // Use double buffering to reduce flicker.
-            this.SetStyle(
-                ControlStyles.AllPaintingInWmPaint |
-                ControlStyles.UserPaint |
-                ControlStyles.DoubleBuffer,
-                true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
             this.UpdateStyles();
         }
 
@@ -63,6 +62,8 @@ namespace howto_bouncing_balls
         {
             Environment.Exit(0);
         }
+
+        //------------------------------------------------------------  # 60個
 
         // Draw the ball at its current location.
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -105,10 +106,7 @@ namespace howto_bouncing_balls
                     Boing();
                 }
 
-                BallLocation[ball_num] = new Rectangle(
-                    new_x, new_y,
-                    BallLocation[ball_num].Width,
-                    BallLocation[ball_num].Height);
+                BallLocation[ball_num] = new Rectangle(new_x, new_y, BallLocation[ball_num].Width, BallLocation[ball_num].Height);
             }
             Refresh();
         }
@@ -123,4 +121,18 @@ namespace howto_bouncing_balls
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
 

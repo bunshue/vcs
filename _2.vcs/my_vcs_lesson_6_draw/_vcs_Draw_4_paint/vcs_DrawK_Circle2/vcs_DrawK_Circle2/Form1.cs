@@ -9,11 +9,6 @@ namespace vcs_DrawK_Circle2
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         // A rectangle that define the circle.
         private bool GotCircle = false;
         private Rectangle Circle;
@@ -24,6 +19,11 @@ namespace vcs_DrawK_Circle2
 
         // The circle's equation.
         private float Dx, Dy, R;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -50,8 +50,7 @@ namespace vcs_DrawK_Circle2
                     radicand = R * R - radicand * radicand;
                     if (radicand >= 0f)
                     {
-                        points.Add(new PointF(
-                            x, (float)(Dy + Math.Sqrt(radicand))));
+                        points.Add(new PointF(x, (float)(Dy + Math.Sqrt(radicand))));
                     }
                 }
                 for (float x = Dx + R; x >= Dx - R; x--)
@@ -60,8 +59,7 @@ namespace vcs_DrawK_Circle2
                     radicand = R * R - radicand * radicand;
                     if (radicand > 0f)
                     {
-                        points.Add(new PointF(
-                            x, (float)(Dy - Math.Sqrt(radicand))));
+                        points.Add(new PointF(x, (float)(Dy - Math.Sqrt(radicand))));
                     }
                 }
                 e.Graphics.DrawPolygon(Pens.Blue, points.ToArray());
@@ -95,7 +93,9 @@ namespace vcs_DrawK_Circle2
 
             // Do nothing if we are not drawing.
             if (!DrawingCircle)
+            {
                 return;
+            }
 
             EndX = e.X;
             EndY = e.Y;
@@ -119,11 +119,8 @@ namespace vcs_DrawK_Circle2
                 richTextBox1.Text += "Up :   \t(" + EndX.ToString() + ", " + EndY.ToString() + ")\n";
 
                 // Make it a circle.
-                int circle_radius = Math.Max(
-                    Math.Abs(StartX - EndX), Math.Abs(StartY - EndY));
-                Circle = new Rectangle(
-                    Math.Min(StartX, EndX), Math.Min(StartY, EndY),
-                    circle_radius, circle_radius);
+                int circle_radius = Math.Max(Math.Abs(StartX - EndX), Math.Abs(StartY - EndY));
+                Circle = new Rectangle(Math.Min(StartX, EndX), Math.Min(StartY, EndY), circle_radius, circle_radius);
                 GotCircle = true;
 
                 // Find and display the circle's formula.
@@ -131,11 +128,9 @@ namespace vcs_DrawK_Circle2
                 GetCircleFormula(Circle, out Dx, out Dy, out R);
                 richTextBox1.Text += "圓心 (" + Dx.ToString() + ", " + Dy.ToString() + "), 半徑 = " + R.ToString() + "\n";
             }
-
             // We are no longer drawing a new circle.
             DrawingCircle = false;
 
-            // Redraw.
             this.Refresh();
         }
 
@@ -148,3 +143,4 @@ namespace vcs_DrawK_Circle2
         }
     }
 }
+

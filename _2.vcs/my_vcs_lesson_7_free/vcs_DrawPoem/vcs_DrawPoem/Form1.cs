@@ -1434,7 +1434,7 @@ namespace vcs_DrawPoem
             drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
 
             this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
-            
+
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.Location = new System.Drawing.Point(0, 0);
 
@@ -1794,7 +1794,7 @@ namespace vcs_DrawPoem
             drawFormat.FormatFlags = StringFormatFlags.DirectionVertical;
 
             this.FormBorderStyle = FormBorderStyle.None;  // 設定無邊框
-            
+
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.Location = new System.Drawing.Point(0, 0);
 
@@ -2494,3 +2494,17 @@ namespace vcs_DrawPoem
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

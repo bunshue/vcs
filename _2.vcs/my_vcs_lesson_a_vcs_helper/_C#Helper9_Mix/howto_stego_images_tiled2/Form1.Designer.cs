@@ -59,6 +59,7 @@
             this.nudHiddenBits = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.bt_clear = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMainOriginal)).BeginInit();
@@ -108,10 +109,11 @@
             // 
             // picMainOriginal
             // 
+            this.picMainOriginal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picMainOriginal.Image = global::howto_stego_images_tiled2.Properties.Resources.usmapsmall;
             this.picMainOriginal.Location = new System.Drawing.Point(6, 18);
             this.picMainOriginal.Name = "picMainOriginal";
-            this.picMainOriginal.Size = new System.Drawing.Size(363, 233);
+            this.picMainOriginal.Size = new System.Drawing.Size(365, 235);
             this.picMainOriginal.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.picMainOriginal.TabIndex = 3;
             this.picMainOriginal.TabStop = false;
@@ -134,7 +136,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(379, 426);
+            this.tabPage2.Size = new System.Drawing.Size(523, 551);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Hidden 1";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -184,7 +186,7 @@
             this.tabPage3.Controls.Add(this.picHiddenOriginal2);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(379, 426);
+            this.tabPage3.Size = new System.Drawing.Size(523, 551);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Hidden 2";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -234,7 +236,7 @@
             this.tabPage4.Controls.Add(this.label10);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(379, 426);
+            this.tabPage4.Size = new System.Drawing.Size(523, 551);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Hidden 3";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -284,7 +286,7 @@
             this.tabPage5.Controls.Add(this.picHiddenOriginal4);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(379, 426);
+            this.tabPage5.Size = new System.Drawing.Size(523, 551);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Hidden 4";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -338,6 +340,7 @@
             // 
             // picCombined
             // 
+            this.picCombined.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.picCombined.Location = new System.Drawing.Point(12, 76);
             this.picCombined.Name = "picCombined";
             this.picCombined.Size = new System.Drawing.Size(363, 233);
@@ -388,11 +391,23 @@
             this.richTextBox1.TabIndex = 25;
             this.richTextBox1.Text = "";
             // 
+            // bt_clear
+            // 
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(26, 336);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(72, 36);
+            this.bt_clear.TabIndex = 26;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(924, 625);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnGo);
@@ -462,6 +477,7 @@
         private System.Windows.Forms.NumericUpDown nudHiddenBits;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button bt_clear;
     }
 }
 

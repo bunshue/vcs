@@ -133,7 +133,7 @@ namespace vcs_Process1
             lb_monitor_process.Text = "監控外部程序運行狀態";
             lb_monitor_process.Location = new Point(x_st + dx * 3, y_st + dy * 5);
             richTextBox2.Size = new Size(410, 310);
-            richTextBox2.Location = new Point(x_st + dx * 3, y_st + dy * 5+30);
+            richTextBox2.Location = new Point(x_st + dx * 3, y_st + dy * 5 + 30);
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Size.Width - bt_clear2.Size.Width, richTextBox2.Location.Y + richTextBox2.Size.Height - bt_clear2.Size.Height);
 
             this.Size = new Size(1650, 750);
@@ -533,6 +533,40 @@ namespace vcs_Process1
 
             Process.Start("IExplore.exe", "tw.yahoo.com");  // 啟動程式 + 參數
             Process.Start("chrome.exe", "C:\\Read_Cht.htm");  // 啟動程式 + 參數
+
+            //開啟IE, 指名網址
+            //Process.Start("IExplore.exe", "www.google.com.tw");   //same
+            Process.Start("iexplore.exe", "www.google.com.tw");
+
+            //開啟FireFox, 指名網址
+            Process.Start("Firefox.exe", "www.google.com.tw");
+
+
+            //用Adobe開啟pdf檔案
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
+            //Process
+            process = new Process();    //創建一個進程用於調用外部程序
+            process = Process.Start(filename);
+            process.WaitForExit();  //需等開啟的程式結束後才可以回到表單
+
+
+
+            //檔案總管 C槽
+            //開啟檔案總管
+            String pathname = "C:\\";
+            Process.Start(pathname);
+            /*
+            if (Directory.Exists(this.FolderPath))
+            {
+                Process.Start(this.FolderPath);
+                return true;
+            }
+            else
+                return false;
+             */
+
+
+
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -571,8 +605,101 @@ namespace vcs_Process1
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button9_Click(object sender, EventArgs e)
         {
+            //打開註冊表/控制面板
+
+            //打開註冊表
+            Process.Start("regedit.exe");
+
+            //打開控制面板1
+            //打開播放器() 
+            Process.Start("mplayer2.exe");
+
+            //打開資源管理器() 
+            Process.Start("explorer.exe");
+
+            //打開任務管理器() 
+            Process.Start("taskmgr.exe");
+
+            //打開事件檢視器() 
+            Process.Start("eventvwr.exe");
+
+            //打開系統信息() fail
+            //Process.Start("winmsd.exe");
+
+            //打開備份還原() fail
+            //Process.Start("ntbackup.exe");
+
+            //打開Windows版本() 
+            Process.Start("winver.exe");
+
+            //打開控制面板2
+            //打開控制面板() 
+            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL");
+
+            //打開控制面板輔助選項鍵盤() 
+            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL access.cpl,,1");
+
+            //打開控制面板輔助選項聲音() 
+            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL access.cpl,,2");
+
+            //打開控制面板輔助選項顯示() 
+            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL access.cpl,,3");
+
+            //打開控制面板輔助選項鼠標() 
+            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL access.cpl,,4");
+
+            //打開控制面板輔助選項常規() 
+            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL access.cpl,,5");
+
+            //打開控制面板添加新硬件向導() 
+            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL sysdm.cpl @1");
+
+            //打開控制面板添加新打印機向導() 
+            Process.Start("rundll32.exe", "shell32.dll,SHHelpShortcuts_RunDLL AddPrinter");
+
+            //打開控制面板3
+            //打開控制面板添加刪除程序安裝卸載面板() 
+            Process.Start("rundll32.exe", "shell32.dll,shell32.dll,Control_RunDLL appwiz.cpl,,1");
+
+            //打開控制面板添加刪除程序安裝Windows面板() 
+            Process.Start("rundll32.exe", "shell32.dll,shell32.dll,Control_RunDLL appwiz.cpl,,2");
+
+            //打開控制面板添加刪除程序啟動盤面板() 
+            Process.Start("rundll32.exe", "shell32.dll,shell32.dll,Control_RunDLL appwiz.cpl,,3");
+
+            //打開建立快捷方式對話框() 
+            Process.Start("rundll32.exe", " appwiz.cpl,NewLinkHere %1");
+
+            //打開日期時間選項() 
+            Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL timedate.cpl,,0");
+
+            //打開時區選項() 
+            Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL timedate.cpl,,1");
+
+            //建立公文包() 
+            Process.Start("rundll32.exe", " syncui.dll,Briefcase_Create");
+
+            //打開復制軟碟窗口() 
+            Process.Start("rundll32.exe", " diskcopy.dll,DiskCopyRunDll");
+
+            //打開新建撥號連接() 
+            Process.Start("rundll32.exe", " rnaui.dll,RnaWizard");
+
+            //打開顯示屬性背景() 
+            Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL desk.cpl,,0");
+
+            //打開顯示屬性屏幕保護() 
+            Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL desk.cpl,,1");
+
+            //打開顯示屬性外觀() 
+            Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL desk.cpl,,2");
+
+            //打開顯示屬性屬性() 
+            Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL desk.cpl,,3");
         }
 
         //------------------------------------------------------------  # 60個
@@ -914,6 +1041,21 @@ namespace vcs_Process1
 
             richTextBox1.Text += "退出碼 : " + process.ExitCode.ToString() + "\n";
             richTextBox1.Text += "退出時間 : " + process.ExitTime + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            //開啟imsLink
+            //Process.Start(@"C:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe");
+
+            //開啟imsLink
+            //Process
+            process = new Process();    //創建一個進程用於調用外部程序
+            process = Process.Start(@"C:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe");
+
+            richTextBox1.Text += "ProcessName : " + process.ProcessName + "\n";
+            richTextBox1.Text += "SessionId : " + process.SessionId.ToString() + "\n";
+            richTextBox1.Text += "StartTime : " + process.StartTime + "\n";
+            richTextBox1.Text += "Id : " + process.Id.ToString() + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -1064,6 +1206,20 @@ namespace vcs_Process1
 
         private void button21_Click(object sender, EventArgs e)
         {
+            //new 1
+            string exe_filename = "notepad.exe";
+            Process process = new Process();    //創建一個進程用於調用外部程序
+            try
+            {
+                process.StartInfo.FileName = exe_filename;
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.CreateNoWindow = true;
+                process.Start();    //啟動程式
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -1295,8 +1451,117 @@ namespace vcs_Process1
             flag_EnableRaisingEvents = false;
             flag_program_running = false;
         }
-
         //監控外部程序運行狀態 SP
+
+        //------------------------------------------------------------  # 60個
+
+        private void 刷新ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "右鍵選單/刷新\n";
+            getProcessInfo();
+        }
+
+        private void 結束進程ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "右鍵選單/結束進程\n";
+
+            return;
+
+            try
+            {
+                if (MessageBox.Show("警告:終止進程會導致不希望發生的結果，\r包括數據丟失和系統不穩定。在被終止前，\r進程將沒有機會保存其狀態和數據。確實\r想終止該進程嗎?", "任務管理器警告", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                {
+                    string ProcessName = listView1.SelectedItems[0].Text;
+                    Process[] processes = Process.GetProcessesByName(ProcessName);
+                    processes[0].Kill();
+                    getProcessInfo();
+                }
+                else
+                { }
+            }
+            catch
+            {
+                string ProcessName = listView1.SelectedItems[0].Text;
+                Process[] processes = Process.GetProcessesByName(ProcessName);
+
+                Process process = new Process();
+                //設定程序名
+                process.StartInfo.FileName = "cmd.exe";
+                //關閉Shell的使用
+                process.StartInfo.UseShellExecute = false;
+                //重定向標準輸入
+                process.StartInfo.RedirectStandardInput = true;
+                //重定向標準輸出
+                process.StartInfo.RedirectStandardOutput = true;
+                //重定向錯誤輸出
+                process.StartInfo.RedirectStandardError = true;
+                //設置不顯示窗口
+                process.StartInfo.CreateNoWindow = true;
+                //執行強制結束命令
+
+                process.Start();
+                process.StandardInput.WriteLine("ntsd -c q -p " + (processes[0].Id).ToString());
+                process.StandardInput.WriteLine("Exit");
+                getProcessInfo();
+            }
+        }
+
+        private void SetBasePriority(int i)
+        {
+            richTextBox1.Text += "設定優先序 i = " + i.ToString() + "\n";
+
+            return;
+
+            string ProcessName = listView1.SelectedItems[0].Text;
+            Process[] processes = Process.GetProcessesByName(ProcessName);
+            switch (i)
+            {
+                case 0: processes[0].PriorityClass = ProcessPriorityClass.Idle; break;//低
+                case 1: processes[0].PriorityClass = ProcessPriorityClass.Normal; break;//標準
+                case 2: processes[0].PriorityClass = ProcessPriorityClass.High; break;//高
+                case 3: processes[0].PriorityClass = ProcessPriorityClass.RealTime; break;//實時
+                case 4: processes[0].PriorityClass = ProcessPriorityClass.AboveNormal; break;//高于標準
+                case 5: processes[0].PriorityClass = ProcessPriorityClass.BelowNormal; break;//低于標準
+            }
+            getProcessInfo();
+        }
+        private void 實時ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "右鍵選單/設置優先級/實時\n";
+            SetBasePriority(3);
+        }
+
+        private void 高ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "右鍵選單/設置優先級/高\n";
+            SetBasePriority(2);
+        }
+
+        private void 高于標準ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "右鍵選單/設置優先級/高於標準\n";
+            SetBasePriority(4);
+        }
+
+        private void 標準ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "右鍵選單/設置優先級/標準\n";
+            SetBasePriority(1);
+        }
+
+        private void 低于標準ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "右鍵選單/設置優先級/低於標準\n";
+            SetBasePriority(5);
+        }
+
+        private void 低ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "右鍵選單/設置優先級/低\n";
+            SetBasePriority(0);
+        }
+
+        //------------------------------------------------------------  # 60個
     }
 
     //------------------------------------------------------------  # 60個

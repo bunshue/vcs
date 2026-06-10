@@ -57,7 +57,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(470, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(749, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -69,14 +69,14 @@
             this.toolStripMenuItem1,
             this.mnuFileExit});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // mnuFileOpen
             // 
             this.mnuFileOpen.Name = "mnuFileOpen";
             this.mnuFileOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.mnuFileOpen.Size = new System.Drawing.Size(186, 22);
+            this.mnuFileOpen.Size = new System.Drawing.Size(192, 22);
             this.mnuFileOpen.Text = "&Open Picture";
             this.mnuFileOpen.Click += new System.EventHandler(this.mnuFileOpen_Click);
             // 
@@ -84,28 +84,28 @@
             // 
             this.mnuFileSave.Name = "mnuFileSave";
             this.mnuFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.mnuFileSave.Size = new System.Drawing.Size(186, 22);
+            this.mnuFileSave.Size = new System.Drawing.Size(192, 22);
             this.mnuFileSave.Text = "&Save Picture";
             this.mnuFileSave.Click += new System.EventHandler(this.mnuFileSave_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(183, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(189, 6);
             // 
             // mnuFileExit
             // 
             this.mnuFileExit.Name = "mnuFileExit";
-            this.mnuFileExit.Size = new System.Drawing.Size(186, 22);
+            this.mnuFileExit.Size = new System.Drawing.Size(192, 22);
             this.mnuFileExit.Text = "E&xit";
             this.mnuFileExit.Click += new System.EventHandler(this.mnuFileExit_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 56);
+            this.label1.Location = new System.Drawing.Point(12, 52);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 13);
+            this.label1.Size = new System.Drawing.Size(47, 12);
             this.label1.TabIndex = 1;
             this.label1.Text = "Message:";
             // 
@@ -113,15 +113,16 @@
             // 
             this.txtMessage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMessage.Location = new System.Drawing.Point(74, 53);
+            this.txtMessage.Location = new System.Drawing.Point(74, 49);
             this.txtMessage.Name = "txtMessage";
-            this.txtMessage.Size = new System.Drawing.Size(384, 20);
+            this.txtMessage.Size = new System.Drawing.Size(663, 22);
             this.txtMessage.TabIndex = 1;
             this.txtMessage.Text = "This is the secret message!";
             // 
             // picImage
             // 
-            this.picImage.Location = new System.Drawing.Point(12, 108);
+            this.picImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.picImage.Location = new System.Drawing.Point(12, 100);
             this.picImage.Name = "picImage";
             this.picImage.Size = new System.Drawing.Size(89, 80);
             this.picImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -131,9 +132,9 @@
             // btnEncode
             // 
             this.btnEncode.Enabled = false;
-            this.btnEncode.Location = new System.Drawing.Point(12, 79);
+            this.btnEncode.Location = new System.Drawing.Point(12, 73);
             this.btnEncode.Name = "btnEncode";
-            this.btnEncode.Size = new System.Drawing.Size(75, 23);
+            this.btnEncode.Size = new System.Drawing.Size(75, 21);
             this.btnEncode.TabIndex = 2;
             this.btnEncode.Text = "Encode";
             this.btnEncode.UseVisualStyleBackColor = true;
@@ -142,9 +143,9 @@
             // btnDecode
             // 
             this.btnDecode.Enabled = false;
-            this.btnDecode.Location = new System.Drawing.Point(93, 79);
+            this.btnDecode.Location = new System.Drawing.Point(93, 73);
             this.btnDecode.Name = "btnDecode";
-            this.btnDecode.Size = new System.Drawing.Size(75, 23);
+            this.btnDecode.Size = new System.Drawing.Size(75, 21);
             this.btnDecode.TabIndex = 3;
             this.btnDecode.Text = "Decode";
             this.btnDecode.UseVisualStyleBackColor = true;
@@ -166,36 +167,36 @@
             // 
             this.txtPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPassword.Location = new System.Drawing.Point(74, 27);
+            this.txtPassword.Location = new System.Drawing.Point(74, 25);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(384, 20);
+            this.txtPassword.Size = new System.Drawing.Size(663, 22);
             this.txtPassword.TabIndex = 0;
             this.txtPassword.Text = "Password";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 30);
+            this.label2.Location = new System.Drawing.Point(12, 28);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 13);
+            this.label2.Size = new System.Drawing.Size(51, 12);
             this.label2.TabIndex = 6;
             this.label2.Text = "Password:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(174, 84);
+            this.label3.Location = new System.Drawing.Point(174, 78);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 13);
+            this.label3.Size = new System.Drawing.Size(34, 12);
             this.label3.TabIndex = 7;
             this.label3.Text = "Show:";
             // 
             // radOriginal
             // 
             this.radOriginal.AutoSize = true;
-            this.radOriginal.Location = new System.Drawing.Point(217, 82);
+            this.radOriginal.Location = new System.Drawing.Point(217, 76);
             this.radOriginal.Name = "radOriginal";
-            this.radOriginal.Size = new System.Drawing.Size(60, 17);
+            this.radOriginal.Size = new System.Drawing.Size(61, 16);
             this.radOriginal.TabIndex = 8;
             this.radOriginal.TabStop = true;
             this.radOriginal.Text = "Original";
@@ -205,9 +206,9 @@
             // radEncoded
             // 
             this.radEncoded.AutoSize = true;
-            this.radEncoded.Location = new System.Drawing.Point(283, 82);
+            this.radEncoded.Location = new System.Drawing.Point(283, 76);
             this.radEncoded.Name = "radEncoded";
-            this.radEncoded.Size = new System.Drawing.Size(68, 17);
+            this.radEncoded.Size = new System.Drawing.Size(64, 16);
             this.radEncoded.TabIndex = 9;
             this.radEncoded.TabStop = true;
             this.radEncoded.Text = "Encoded";
@@ -217,9 +218,9 @@
             // radMarked
             // 
             this.radMarked.AutoSize = true;
-            this.radMarked.Location = new System.Drawing.Point(357, 82);
+            this.radMarked.Location = new System.Drawing.Point(357, 76);
             this.radMarked.Name = "radMarked";
-            this.radMarked.Size = new System.Drawing.Size(61, 17);
+            this.radMarked.Size = new System.Drawing.Size(59, 16);
             this.radMarked.TabIndex = 10;
             this.radMarked.TabStop = true;
             this.radMarked.Text = "Marked";
@@ -228,9 +229,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(470, 264);
+            this.ClientSize = new System.Drawing.Size(749, 526);
             this.Controls.Add(this.radMarked);
             this.Controls.Add(this.radEncoded);
             this.Controls.Add(this.radOriginal);
@@ -246,6 +247,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "howto_steganography";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picImage)).EndInit();

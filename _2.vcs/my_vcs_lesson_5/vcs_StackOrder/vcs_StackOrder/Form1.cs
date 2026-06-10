@@ -23,6 +23,11 @@ namespace vcs_StackOrder
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         void show_info(object sender)
         {
             Button btn = sender as Button;
@@ -59,7 +64,6 @@ namespace vcs_StackOrder
                     break;
             }
 
-
             richTextBox1.Text += "順序:\t" + button1.Parent.Controls.GetChildIndex(button1).ToString() + " " +
                 button2.Parent.Controls.GetChildIndex(button2).ToString() + " " +
                 button3.Parent.Controls.GetChildIndex(button3).ToString() + " " +
@@ -69,54 +73,46 @@ namespace vcs_StackOrder
                 button7.Parent.Controls.GetChildIndex(button7).ToString() + "\n";
         }
 
-
         private void button1_Click(object sender, EventArgs e)
         {
             move_status = MOVE_TO_TOP_ONE;
             show_info(sender);
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             move_status = MOVE_TO_TOP_MOST;
             show_info(sender);
-
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             move_status = MOVE_TO_BUTTON_ONE;
             show_info(sender);
-
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             move_status = MOVE_TO_TOP_MOST;
             show_info(sender);
-
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             move_status = MOVE_TO_BUTTON_ONE;
             show_info(sender);
-
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             move_status = MOVE_TO_BUTTOM_MOST;
             show_info(sender);
-
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
             move_status = MOVE_TO_BUTTOM_MOST;
             show_info(sender);
-
         }
     }
 }

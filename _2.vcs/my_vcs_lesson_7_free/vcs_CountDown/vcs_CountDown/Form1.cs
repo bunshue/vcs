@@ -37,7 +37,6 @@ namespace vcs_CountDown
             bt_minimize_setup();
 
             show_item_location();
-
         }
 
         TrackBar tbar0 = new TrackBar();
@@ -50,7 +49,6 @@ namespace vcs_CountDown
 
         void show_item_location()
         {
-
             int x_st = 50;
             int y_st = 50;
             int dx = 100;
@@ -176,6 +174,8 @@ namespace vcs_CountDown
             this.WindowState = FormWindowState.Minimized;   //設定表單最小化
         }
 
+        //------------------------------------------------------------  # 60個
+
         //重定義基類OnPaint()方法
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -201,7 +201,6 @@ namespace vcs_CountDown
             g.FillEllipse(Brushes.Red, new Rectangle(100, 100, 50, 50));
         }
 
-
         private void setup_timer(object sender, EventArgs e)
         {
             int hh = (int)nud_hh.Value;
@@ -210,14 +209,7 @@ namespace vcs_CountDown
 
             int current_time = hh * 60 * 60 + mm * 60 + ss;
             rtb.Text += "設定時間 : " + current_time.ToString() + "\n";
-
-
-
-
         }
-
-
-
 
         int cnt = 0;
         private void timer1_Tick(object sender, EventArgs e)
@@ -230,8 +222,22 @@ namespace vcs_CountDown
                 cnt = 0;
                 this.TopMost = true;
                 this.WindowState = FormWindowState.Normal;
-
             }
         }
     }
 }
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

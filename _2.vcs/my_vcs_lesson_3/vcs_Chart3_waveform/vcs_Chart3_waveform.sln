@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_Chart3_ECG3", "vcs_Chart3_ECG3\vcs_Chart3_ECG3.csproj", "{3D363797-A0CC-4724-AE15-DE3695507BDD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_Chart3_waveform", "vcs_Chart3_waveform\vcs_Chart3_waveform.csproj", "{3D363797-A0CC-4724-AE15-DE3695507BDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

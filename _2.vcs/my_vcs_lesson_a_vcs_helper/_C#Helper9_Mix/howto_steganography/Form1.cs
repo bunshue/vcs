@@ -14,22 +14,27 @@ namespace howto_steganography
 {
     public partial class Form1 : Form
     {
+        // The unmodified and modified pictures.
+        private Bitmap OriginalImage = null;
+        private Bitmap EncodedImage = null;
+        private Bitmap MarkedImage = null;
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        // The unmodified and modified pictures.
-        private Bitmap 
-            OriginalImage = null,
-            EncodedImage = null,
-            MarkedImage = null;
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
-        // Exit.
+        }
+
         private void mnuFileExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+        //------------------------------------------------------------  # 60個
 
         // Load a picture.
         private void mnuFileOpen_Click(object sender, EventArgs e)
@@ -48,10 +53,8 @@ namespace howto_steganography
                     btnDecode.Enabled = true;
 
                     // Size to show the whole picture.
-                    int wid = Math.Max(this.ClientSize.Width,
-                        picImage.Bounds.Right + picImage.Left);
-                    int hgt = Math.Max(this.ClientSize.Height,
-                        picImage.Bounds.Bottom + picImage.Left);
+                    int wid = Math.Max(this.ClientSize.Width, picImage.Bounds.Right + picImage.Left);
+                    int hgt = Math.Max(this.ClientSize.Height, picImage.Bounds.Bottom + picImage.Left);
                     this.ClientSize = new Size(wid, hgt);
                 }
                 catch (Exception ex)
@@ -117,8 +120,7 @@ namespace howto_steganography
             // Encode.
             try
             {
-                EncodeMessageInImage(EncodedImage, MarkedImage,
-                    txtPassword.Text, txtMessage.Text);
+                EncodeMessageInImage(EncodedImage, MarkedImage, txtPassword.Text, txtMessage.Text);
             }
             catch (Exception ex)
             {
@@ -144,7 +146,7 @@ namespace howto_steganography
 
             // Encode the message length.
             byte[] bytes = BitConverter.GetBytes(message.Length);
-            for (int i=0; i < bytes.Length; i++)
+            for (int i = 0; i < bytes.Length; i++)
             {
                 EncodeByte(bm, visible_bm, rand, bytes[i], used_positions);
             }
@@ -158,8 +160,7 @@ namespace howto_steganography
         }
 
         // Encode a byte in the picture.
-        private void EncodeByte(Bitmap bm, Bitmap visible_bm, Random rand,
-            byte value, HashSet<string> used_positions)
+        private void EncodeByte(Bitmap bm, Bitmap visible_bm, Random rand, byte value, HashSet<string> used_positions)
         {
             for (int i = 0; i < 8; i++)
             {
@@ -175,8 +176,11 @@ namespace howto_steganography
 
                 // Get the next bit to store.
                 int bit = 0;
-                if ((value & 1) == 1) bit = 1;
-                
+                if ((value & 1) == 1)
+                {
+                    bit = 1;
+                }
+
                 // Update the color.
                 switch (pix)
                 {
@@ -202,11 +206,9 @@ namespace howto_steganography
         }
 
         // Pick an unused (r, c, pixel) combination.
-        private void PickPosition(Bitmap bm, Random rand,
-            HashSet<string> used_positions,
-            out int row, out int col, out int pix)
+        private void PickPosition(Bitmap bm, Random rand, HashSet<string> used_positions, out int row, out int col, out int pix)
         {
-            for ( ; ; )
+            for (; ; )
             {
                 // Pick random r, c, and pix.
                 row = rand.Next(0, bm.Width);
@@ -214,11 +216,8 @@ namespace howto_steganography
                 pix = rand.Next(0, 3);
 
                 // See if this location is available.
-                string key = 
-                    row.ToString() + "/" +
-                    col.ToString() + "/" +
-                    pix.ToString();
-                if (!used_positions.Contains(key)) 
+                string key = row.ToString() + "/" + col.ToString() + "/" + pix.ToString();
+                if (!used_positions.Contains(key))
                 {
                     used_positions.Add(key);
                     return;
@@ -247,7 +246,7 @@ namespace howto_steganography
                 shift1 = (shift1 + 7) % 19;
                 shift2 = (shift2 + 13) % 23;
             }
-            return value;            
+            return value;
         }
 
         // Display the appropriate image.
@@ -307,9 +306,7 @@ namespace howto_steganography
             // Sanity check.
             if (len > 10000)
             {
-                throw new InvalidDataException(
-                    "Message length " + len.ToString() +
-                    " is too big to make sense. Invalid password.");
+                throw new InvalidDataException("Message length " + len.ToString() + " is too big to make sense. Invalid password.");
             }
 
             // Decode the message bytes.
@@ -357,8 +354,21 @@ namespace howto_steganography
                 // Move to the next bit.
                 value_mask <<= 1;
             }
-
             return value;
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

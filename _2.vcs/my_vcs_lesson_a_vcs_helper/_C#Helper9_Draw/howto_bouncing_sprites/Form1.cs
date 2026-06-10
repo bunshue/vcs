@@ -37,11 +37,7 @@ namespace howto_bouncing_sprites
             FormSize = ClientSize;
 
             // Use double buffering to reduce flicker.
-            this.SetStyle(
-                ControlStyles.AllPaintingInWmPaint |
-                ControlStyles.UserPaint |
-                ControlStyles.DoubleBuffer,
-                true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
             this.UpdateStyles();
         }
 
@@ -50,6 +46,8 @@ namespace howto_bouncing_sprites
         {
             Environment.Exit(0);
         }
+
+        //------------------------------------------------------------  # 60個
 
         // Redraw.
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -73,3 +71,18 @@ namespace howto_bouncing_sprites
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
+

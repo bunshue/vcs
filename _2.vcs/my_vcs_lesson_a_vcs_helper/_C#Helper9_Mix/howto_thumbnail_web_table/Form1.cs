@@ -58,7 +58,7 @@ namespace howto_thumbnail_web_table
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Clear();
         }
 
         //------------------------------------------------------------  # 60個

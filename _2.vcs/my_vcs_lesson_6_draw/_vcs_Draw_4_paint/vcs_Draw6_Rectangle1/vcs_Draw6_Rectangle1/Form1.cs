@@ -83,13 +83,11 @@ namespace vcs_Draw6_Rectangle1
                 g.Clear(Color.White);
                 g.DrawImage(theImage, this.ClientRectangle);
             }
-
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
             this.Form1_Paint(this, new PaintEventArgs(this.CreateGraphics(), this.ClientRectangle));
         }
-
     }
 }

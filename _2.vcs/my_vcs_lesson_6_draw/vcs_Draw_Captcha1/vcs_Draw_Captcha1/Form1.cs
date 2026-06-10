@@ -189,6 +189,8 @@ namespace vcs_Draw_Captcha1
             draw_captcha29();   //for pictureBox29
         }
 
+        //------------------------------------------------------------  # 60個
+
         //Captcha 00 ST
         private void draw_captcha00()
         {
@@ -201,6 +203,8 @@ namespace vcs_Draw_Captcha1
             pictureBox00.Image = bitmap1;
         }
         //Captcha 00 SP
+
+        //------------------------------------------------------------  # 60個
 
         //Captcha 01 ST
         private void draw_captcha01()
@@ -341,6 +345,8 @@ namespace vcs_Draw_Captcha1
         }
         //Captcha 01 SP
 
+        //------------------------------------------------------------  # 60個
+
         //Captcha 02 ST
         void draw_captcha02()
         {
@@ -441,6 +447,8 @@ namespace vcs_Draw_Captcha1
         }
         //Captcha 02 SP
 
+        //------------------------------------------------------------  # 60個
+
         //Captcha 03 ST
         private void draw_captcha03()
         {
@@ -526,6 +534,8 @@ namespace vcs_Draw_Captcha1
         }
         //Captcha 03 SP
 
+        //------------------------------------------------------------  # 60個
+
         //Captcha 04 ST
         void draw_captcha04()
         {
@@ -538,6 +548,8 @@ namespace vcs_Draw_Captcha1
             //pictureBox4.Image = bitmap2;  //改變大小
         }
         //Captcha 04 SP
+
+        //------------------------------------------------------------  # 60個
 
         //Captcha 05 ST
         void draw_captcha05()
@@ -628,8 +640,9 @@ namespace vcs_Draw_Captcha1
             //bitmap1.Dispose();
             return ms;
         }
-
         //Captcha 05 SP
+
+        //------------------------------------------------------------  # 60個
 
         //Captcha 06 ST
         void draw_captcha06()
@@ -676,6 +689,8 @@ namespace vcs_Draw_Captcha1
         }
         //Captcha 06 SP
 
+        //------------------------------------------------------------  # 60個
+
         //Captcha 07 ST
         void draw_captcha07()
         {
@@ -719,6 +734,8 @@ namespace vcs_Draw_Captcha1
             pictureBox07.Image = bitmap1;
         }
         //Captcha 07 SP
+
+        //------------------------------------------------------------  # 60個
 
         //Captcha 08 ST
         void draw_captcha08()
@@ -772,6 +789,8 @@ namespace vcs_Draw_Captcha1
             return bitmap1;
         }
         //Captcha 08 SP
+
+        //------------------------------------------------------------  # 60個
 
         //Captcha 09 ST
         void draw_captcha09()
@@ -841,6 +860,8 @@ namespace vcs_Draw_Captcha1
         }
         //Captcha 09 SP
 
+        //------------------------------------------------------------  # 60個
+
         //Captcha 10 ST
         void draw_captcha10()
         {
@@ -880,6 +901,8 @@ namespace vcs_Draw_Captcha1
         }
         //Captcha 10 SP
 
+        //------------------------------------------------------------  # 60個
+
         //Captcha 11 ST
         void draw_captcha11()
         {
@@ -893,6 +916,8 @@ namespace vcs_Draw_Captcha1
             pictureBox11.Image = img;
         }
         //Captcha 11 SP
+
+        //------------------------------------------------------------  # 60個
 
         //Captcha 12 ST
         void draw_captcha12()
@@ -971,6 +996,8 @@ namespace vcs_Draw_Captcha1
         }
         //Captcha 12 SP
 
+        //------------------------------------------------------------  # 60個
+
         //Captcha 13 ST
         void draw_captcha13()
         {
@@ -1037,6 +1064,8 @@ namespace vcs_Draw_Captcha1
         }
         //Captcha 13 SP
 
+        //------------------------------------------------------------  # 60個
+
         //Captcha 14 ST
         void draw_captcha14()
         {
@@ -1057,6 +1086,8 @@ namespace vcs_Draw_Captcha1
             pictureBox14.Image = bitmap1;
         }
         //Captcha 14 SP
+
+        //------------------------------------------------------------  # 60個
 
         //Captcha 15 ST
         void draw_captcha15()
@@ -1149,6 +1180,8 @@ namespace vcs_Draw_Captcha1
         }
         //Captcha 15 SP
 
+        //------------------------------------------------------------  # 60個
+
         //Captcha 16 ST
         void draw_captcha16()
         {
@@ -1229,6 +1262,8 @@ namespace vcs_Draw_Captcha1
         }
         //Captcha 16 SP
 
+        //------------------------------------------------------------  # 60個
+
         //Captcha 17 ST
         void draw_captcha17()
         {
@@ -1237,6 +1272,9 @@ namespace vcs_Draw_Captcha1
             Bitmap bitmap1 = capt.GetImage();
             pictureBox17.Image = bitmap1;
         }
+        //Captcha 17 SP
+
+        //------------------------------------------------------------  # 60個
 
         //Captcha 18 ST
         void draw_captcha18()
@@ -1306,12 +1344,16 @@ namespace vcs_Draw_Captcha1
         }
         //Captcha 18 SP
 
+        //------------------------------------------------------------  # 60個
+
         //Captcha 19 ST
         void draw_captcha19()
         {
             //pictureBox19
         }
         //Captcha 19 SP
+
+        //------------------------------------------------------------  # 60個
 
         //Captcha 20 ST
         //中文驗證法碼 ST
@@ -1430,6 +1472,8 @@ namespace vcs_Draw_Captcha1
         //中文驗證法碼 SP
 
         //Captcha 20 SP
+
+        //------------------------------------------------------------  # 60個
 
         //Captcha 21 ST
         void draw_captcha21()
@@ -1659,6 +1703,8 @@ namespace vcs_Draw_Captcha1
         }
         //Captcha 21 SP
 
+        //------------------------------------------------------------  # 60個
+
         //Captcha 22 ST
         void draw_captcha22()
         {
@@ -1749,6 +1795,8 @@ namespace vcs_Draw_Captcha1
         }
         //Captcha 22 SP
 
+        //------------------------------------------------------------  # 60個
+
         //Captcha 23 ST
         void draw_captcha23()
         {
@@ -1778,6 +1826,8 @@ namespace vcs_Draw_Captcha1
             return bitmap1;
         }
         //Captcha 23 SP
+
+        //------------------------------------------------------------  # 60個
 
         //Captcha 24 ST
         private void draw_captcha24()
@@ -1833,17 +1883,23 @@ namespace vcs_Draw_Captcha1
 
         //Captcha 24 SP
 
+        //------------------------------------------------------------  # 60個
+
         //Captcha 25 ST
         void draw_captcha25()
         {
         }
         //Captcha 25 SP
 
+        //------------------------------------------------------------  # 60個
+
         //Captcha 26 ST
         void draw_captcha26()
         {
         }
         //Captcha 26 SP
+
+        //------------------------------------------------------------  # 60個
 
         //Captcha 27 ST
         void draw_captcha27()
@@ -1852,17 +1908,23 @@ namespace vcs_Draw_Captcha1
 
         //Captcha 27 SP
 
+        //------------------------------------------------------------  # 60個
+
         //Captcha 28 ST
         void draw_captcha28()
         {
         }
         //Captcha 28 SP
 
+        //------------------------------------------------------------  # 60個
+
         //Captcha 29 ST
         void draw_captcha29()
         {
         }
         //Captcha 29 SP
+
+        //------------------------------------------------------------  # 60個
     }
 
     /// <summary>
@@ -2054,6 +2116,8 @@ namespace vcs_Draw_Captcha1
         //#endregion
     }
 
+    //------------------------------------------------------------  # 60個
+
     /// <summary>
     /// VryImgGen 的摘要說明
     /// </summary>
@@ -2215,6 +2279,8 @@ namespace vcs_Draw_Captcha1
             return bitmap1;
         }
         //#endregion
+
+        //------------------------------------------------------------  # 60個
 
         /// <summary>
         /// 生成校驗碼圖片

@@ -90,17 +90,15 @@ namespace vcs_Process_Start
             groupBox2.Size = new Size(W, H);
             groupBox5.Size = new Size(W, H);
             groupBox3.Size = new Size(W, 200 - 40);
-            groupBox4.Size = new Size(W, 300);
             groupBox6.Size = new Size(W, 200 - 40);
             groupBox1.Location = new Point(x_st, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             groupBox5.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             groupBox3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            groupBox4.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 170);
-            groupBox6.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 170 + 310);
+            groupBox6.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 170);
 
-            richTextBox1.Size = new Size(500, 300);
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0 + 380);
+            richTextBox1.Size = new Size(500, 690);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             y_st = 20;
@@ -133,11 +131,6 @@ namespace vcs_Process_Start
 
             button40.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button41.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-
-            button42.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button43.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button44.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button45.Location = new Point(x_st + dx * 0, y_st + dy * 3);
 
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -242,76 +235,26 @@ namespace vcs_Process_Start
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //開啟imsLink
-            //Process.Start(@"D:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe");
-
-            //or
-
-            //開啟imsLink
-            Process process = new Process();    //創建一個進程用於調用外部程序
-            process = Process.Start(@"D:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe");
-
-            richTextBox1.Text += "ProcessName : " + process.ProcessName + "\n";
-            richTextBox1.Text += "SessionId : " + process.SessionId.ToString() + "\n";
-            richTextBox1.Text += "StartTime : " + process.StartTime + "\n";
-            richTextBox1.Text += "Id : " + process.Id.ToString() + "\n";
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //開啟IE, 指名網址
-            //Process.Start("IExplore.exe", "www.google.com.tw");   //same
-            Process.Start("iexplore.exe", "www.google.com.tw");
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //開啟FireFox, 指名網址
-            Process.Start("Firefox.exe", "www.google.com.tw");
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            //用Adobe開啟pdf檔案
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
-            Process process = new Process();    //創建一個進程用於調用外部程序
-            process = Process.Start(filename);
-            process.WaitForExit();  //需等開啟的程式結束後才可以回到表單
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-            //檔案總管 C槽
-            //開啟檔案總管
-            String pathname = "C:\\";
-            Process.Start(pathname);
-            /*
-            if (Directory.Exists(this.FolderPath))
-            {
-                Process.Start(this.FolderPath);
-                return true;
-            }
-            else
-                return false;
-             */
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-            string exe_filename = "notepad.exe";
-            Process process = new Process();    //創建一個進程用於調用外部程序
-            try
-            {
-                process.StartInfo.FileName = exe_filename;
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.CreateNoWindow = true;
-                process.Start();    //啟動程式
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -551,108 +494,6 @@ namespace vcs_Process_Start
                 process.WaitForExit(3000);
                 process.Close();
             }
-        }
-
-        private void button42_Click(object sender, EventArgs e)
-        {
-            //打開註冊表
-            Process.Start("regedit.exe");
-        }
-
-        private void button43_Click(object sender, EventArgs e)
-        {
-            //打開控制面板1
-            //打開播放器() 
-            Process.Start("mplayer2.exe");
-
-            //打開資源管理器() 
-            Process.Start("explorer.exe");
-
-            //打開任務管理器() 
-            Process.Start("taskmgr.exe");
-
-            //打開事件檢視器() 
-            Process.Start("eventvwr.exe");
-
-            //打開系統信息() fail
-            //Process.Start("winmsd.exe");
-
-            //打開備份還原() fail
-            //Process.Start("ntbackup.exe");
-
-            //打開Windows版本() 
-            Process.Start("winver.exe");
-        }
-
-        private void button44_Click(object sender, EventArgs e)
-        {
-            //打開控制面板2
-            //打開控制面板() 
-            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL");
-
-            //打開控制面板輔助選項鍵盤() 
-            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL access.cpl,,1");
-
-            //打開控制面板輔助選項聲音() 
-            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL access.cpl,,2");
-
-            //打開控制面板輔助選項顯示() 
-            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL access.cpl,,3");
-
-            //打開控制面板輔助選項鼠標() 
-            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL access.cpl,,4");
-
-            //打開控制面板輔助選項常規() 
-            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL access.cpl,,5");
-
-            //打開控制面板添加新硬件向導() 
-            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL sysdm.cpl @1");
-
-            //打開控制面板添加新打印機向導() 
-            Process.Start("rundll32.exe", "shell32.dll,SHHelpShortcuts_RunDLL AddPrinter");
-        }
-
-        private void button45_Click(object sender, EventArgs e)
-        {
-            //打開控制面板3
-            //打開控制面板添加刪除程序安裝卸載面板() 
-            Process.Start("rundll32.exe", "shell32.dll,shell32.dll,Control_RunDLL appwiz.cpl,,1");
-
-            //打開控制面板添加刪除程序安裝Windows面板() 
-            Process.Start("rundll32.exe", "shell32.dll,shell32.dll,Control_RunDLL appwiz.cpl,,2");
-
-            //打開控制面板添加刪除程序啟動盤面板() 
-            Process.Start("rundll32.exe", "shell32.dll,shell32.dll,Control_RunDLL appwiz.cpl,,3");
-
-            //打開建立快捷方式對話框() 
-            Process.Start("rundll32.exe", " appwiz.cpl,NewLinkHere %1");
-
-            //打開日期時間選項() 
-            Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL timedate.cpl,,0");
-
-            //打開時區選項() 
-            Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL timedate.cpl,,1");
-
-            //建立公文包() 
-            Process.Start("rundll32.exe", " syncui.dll,Briefcase_Create");
-
-            //打開復制軟碟窗口() 
-            Process.Start("rundll32.exe", " diskcopy.dll,DiskCopyRunDll");
-
-            //打開新建撥號連接() 
-            Process.Start("rundll32.exe", " rnaui.dll,RnaWizard");
-
-            //打開顯示屬性背景() 
-            Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL desk.cpl,,0");
-
-            //打開顯示屬性屏幕保護() 
-            Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL desk.cpl,,1");
-
-            //打開顯示屬性外觀() 
-            Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL desk.cpl,,2");
-
-            //打開顯示屬性屬性() 
-            Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL desk.cpl,,3");
         }
 
         //------------------------------------------------------------  # 60個

@@ -40,10 +40,9 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(316, 223);
-            this.button7.Margin = new System.Windows.Forms.Padding(4);
+            this.button7.Location = new System.Drawing.Point(237, 178);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(123, 595);
+            this.button7.Size = new System.Drawing.Size(92, 476);
             this.button7.TabIndex = 13;
             this.button7.Text = "到最下層";
             this.button7.UseVisualStyleBackColor = true;
@@ -51,10 +50,9 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(53, 313);
-            this.button6.Margin = new System.Windows.Forms.Padding(4);
+            this.button6.Location = new System.Drawing.Point(40, 250);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(471, 156);
+            this.button6.Size = new System.Drawing.Size(353, 125);
             this.button6.TabIndex = 12;
             this.button6.Text = "到最下層";
             this.button6.UseVisualStyleBackColor = true;
@@ -62,10 +60,9 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(463, 319);
-            this.button5.Margin = new System.Windows.Forms.Padding(4);
+            this.button5.Location = new System.Drawing.Point(347, 255);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(323, 169);
+            this.button5.Size = new System.Drawing.Size(242, 135);
             this.button5.TabIndex = 11;
             this.button5.Text = "往下一層";
             this.button5.UseVisualStyleBackColor = true;
@@ -73,10 +70,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(417, 248);
-            this.button4.Margin = new System.Windows.Forms.Padding(4);
+            this.button4.Location = new System.Drawing.Point(313, 198);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(289, 114);
+            this.button4.Size = new System.Drawing.Size(217, 91);
             this.button4.TabIndex = 10;
             this.button4.Text = "到最上層";
             this.button4.UseVisualStyleBackColor = true;
@@ -84,10 +80,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(264, 13);
-            this.button3.Margin = new System.Windows.Forms.Padding(4);
+            this.button3.Location = new System.Drawing.Point(198, 10);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(289, 392);
+            this.button3.Size = new System.Drawing.Size(217, 314);
             this.button3.TabIndex = 9;
             this.button3.Text = "往下一層";
             this.button3.UseVisualStyleBackColor = true;
@@ -95,10 +90,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(341, 177);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Location = new System.Drawing.Point(256, 142);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(289, 114);
+            this.button2.Size = new System.Drawing.Size(217, 91);
             this.button2.TabIndex = 8;
             this.button2.Text = "到最上層";
             this.button2.UseVisualStyleBackColor = true;
@@ -106,10 +100,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(20, 177);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Location = new System.Drawing.Point(15, 142);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(401, 185);
+            this.button1.Size = new System.Drawing.Size(301, 148);
             this.button1.TabIndex = 7;
             this.button1.Text = "往上一層";
             this.button1.UseVisualStyleBackColor = true;
@@ -117,18 +110,17 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(813, 13);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.richTextBox1.Location = new System.Drawing.Point(610, 10);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(345, 735);
+            this.richTextBox1.Size = new System.Drawing.Size(260, 589);
             this.richTextBox1.TabIndex = 14;
             this.richTextBox1.Text = "";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1171, 827);
+            this.ClientSize = new System.Drawing.Size(878, 662);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
@@ -137,8 +129,10 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }
