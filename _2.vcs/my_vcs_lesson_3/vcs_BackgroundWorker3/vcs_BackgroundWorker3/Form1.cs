@@ -57,7 +57,6 @@ namespace vcs_BackgroundWorker3
             label3.Text = "";
             this.progressBar1.Style = ProgressBarStyle.Marquee;
             work.RunWorkerAsync();
-
         }
 
         //delay 10000 約 10秒

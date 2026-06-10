@@ -31,7 +31,7 @@ DateTime.TryParse()
 DateTime.TryParseExact()
 DateTime.IsLeapYear()
 DateTime.Compare()
-DateTime.DaysInMonth()
+DateTime.DaysInMonth()  // 某個月的天數
 DateTime.FromOADate()
 */
 
@@ -553,17 +553,23 @@ namespace vcs_test_all_01_DateTime
         {
             // DateTime.Compare() 比較時間早晚
 
+            richTextBox1.Text += "比較時間早晚\n";
+
             DateTime dt1 = new DateTime(2016, 12, 9, 0, 0, 0);
             DateTime dt2 = new DateTime(2016, 12, 9, 11, 0, 0);
+
+            richTextBox1.Text += "時間1 : " + dt1.ToString() + "\n";
+            richTextBox1.Text += "時間2 : " + dt2.ToString() + "\n";
+
             int result = DateTime.Compare(dt1, dt2);
 
             string relationship = string.Empty;
             if (result < 0)
-                relationship = "is earlier than";
+                relationship = " 早於 ";
             else if (result == 0)
-                relationship = "is the same time as";
+                relationship = " 同時 ";
             else
-                relationship = "is later than";
+                relationship = " 晚於 ";
 
             richTextBox1.Text += dt1 + " " + relationship + " " + dt2 + "\n";
 
@@ -701,6 +707,38 @@ namespace vcs_test_all_01_DateTime
             dt = DateTime.Now;
             richTextBox1.Text += "現在日期 : " + dt.ToLongDateString() + "\n";
             richTextBox1.Text += "現在時間 : " + dt.ToLongTimeString() + "\n";
+
+            //6060
+
+            //時間相關
+            //中時間相關知識點小結
+
+            //二、當月第一天和最後一天
+
+            DateTime ThisMonth_Frist = dt.AddDays(1 - dt.Day).Date;
+            richTextBox1.Text += "當月第一天\t" + ThisMonth_Frist + "\n";
+
+            DateTime ThisMOnth_Last = dt.AddDays(1 - dt.Day).Date.AddMonths(1).AddSeconds(-1);
+            richTextBox1.Text += "當月最後一天\t" + ThisMOnth_Last + "\n";
+
+            //三、上月第一天和最後一天
+
+            DateTime Today = DateTime.Today;//當天時間
+            DateTime ThisMonth = new DateTime(Today.Year, Today.Month, 1);//當前月第一天時間
+
+            DateTime LastMonth_First = ThisMonth.AddMonths(-1);//上月第一天時間
+            richTextBox1.Text += "上月第一天\t" + LastMonth_First + "\n";
+
+            DateTime LastMonth_Last = ThisMonth.AddDays(-1);//上月最後一天時間
+            richTextBox1.Text += "上月最後一天\t" + LastMonth_Last + "\n";
+
+            //四、本周第幾天
+
+            int daysInWeek1 = (int)dt.DayOfWeek;//注意 : 此處周日時回傳0
+            richTextBox1.Text += "本周第幾天\t" + daysInWeek1.ToString() + "\n";
+
+            int daysInWeek2 = (int)dt.DayOfWeek == 0 ? 7 : (int)dt.DayOfWeek;//當前周第幾天,注釋:周日為0
+            richTextBox1.Text += "本周第幾天\t" + daysInWeek2.ToString() + "\n";
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -732,213 +770,19 @@ namespace vcs_test_all_01_DateTime
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //時間相關
-            //中時間相關知識點小結
-
-            //一、月份英文簡寫
-
-            DateTime dt = DateTime.Now;
-
-            string MM = dt.AddMonths(-1).ToString("MMM", new CultureInfo("en-us"));  // 月英文縮寫 : Jul
-            richTextBox1.Text += "月份英文簡寫\t" + MM + "\n";
-
-            //二、當月第一天和最後一天
-
-            DateTime ThisMonth_Frist = dt.AddDays(1 - dt.Day).Date;
-            DateTime ThisMOnth_Last = dt.AddDays(1 - dt.Day).Date.AddMonths(1).AddSeconds(-1);
-            richTextBox1.Text += "當月第一天\t" + ThisMonth_Frist + "\n";
-            richTextBox1.Text += "當月最後一天\t" + ThisMOnth_Last + "\n";
-
-            //三、上月第一天和最後一天
-
-            DateTime Today = DateTime.Today;//當天時間
-            DateTime ThisMonth = new DateTime(Today.Year, Today.Month, 1);//當前月第一天時間
-            DateTime LastMonth_First = ThisMonth.AddMonths(-1);//上月第一天時間
-            DateTime LastMonth_Last = ThisMonth.AddDays(-1);//上月最後一天時間
-            richTextBox1.Text += "上月第一天\t" + LastMonth_First + "\n";
-            richTextBox1.Text += "上月最後一天\t" + LastMonth_Last + "\n";
-
-            //四、本周第幾天
-
-            int daysInWeek1 = (int)dt.DayOfWeek;//注意 : 此處周,日時回傳0，
-            int daysInWeek2 = (int)dt.DayOfWeek == 0 ? 7 : (int)dt.DayOfWeek;//當前周第幾天,注釋:周日為0
-            richTextBox1.Text += "本周第幾天\t" + daysInWeek1.ToString() + "\n";
-            richTextBox1.Text += "本周第幾天\t" + daysInWeek2.ToString() + "\n";
         }
+
+        //6060
 
         private void button9_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "印出今年年曆\n";
-
-            DateTime dt = DateTime.Now;
-
-            int year = dt.Year;
-
-            int nextlinecount;//使用一個計數器沒過一天就加1，逢7換行
-            for (int month = 1; month <= 12; month++)
-            {
-                nextlinecount = 0;//計數器每個月開始需要進行初始化
-                richTextBox1.Text += year.ToString() + "年" + month.ToString() + "月\n";
-                richTextBox1.Text += "星期天\t 星期一\t 星期二\t 星期三\t 星期四\t 星期五\t 星期六\n";
-
-                //獲取每個月第一天是星期幾然後輸出對應次數的空格
-                for (int count = 1; count <= GetWeekByDay(year, month, 1); count++)
-                {
-                    richTextBox1.Text += " \t ";
-                    nextlinecount++;//計數器增加，這里的空的是上個月的日子
-                }
-
-                for (int day = 1; day <= GetMonthDay(year, month); day++)
-                {
-                    if (nextlinecount % 7 == 0)//每次列印日期前先判斷是否為周六，逢7換行
-                    {
-                        richTextBox1.Text += "\n";
-                    }
-                    richTextBox1.Text += day + "\t ";
-                    nextlinecount++;
-                }
-                richTextBox1.Text += "\n\n=========================================================================\n\n";
-            }
         }
 
-        /// 輸入年月日，得到這天是星期幾
-        private static int GetWeekByDay(int year, int month, int day)
-        {
-            DateTime dt = new DateTime(year, month, day);
-            return (int)dt.DayOfWeek;
-        }
-
-        /// 獲取某個月的天數，輸入(int)年份，月份，回傳天數(int)
-        private static int GetMonthDay(int year, int month)
-        {
-            int thismonthdays = DateTime.DaysInMonth(year, month);
-            return thismonthdays;
-        }
+        //6060
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //實現小小的日曆
-            show_calendar();
         }
-
-        //實現小小的日曆 ST
-        void show_calendar()
-        {
-            DateTime dt = DateTime.Now;
-
-            int year = dt.Year;
-            int month = dt.Month;
-            int day = 0;
-            int sum = 0;
-            int i;
-            for (i = 1900; i < year; i++)
-            {
-                if (i % 4 == 0 && i % 100 != 0 || i % 400 == 0)
-                {
-                    sum += 366;
-                }
-                else
-                {
-                    sum += 365;
-                }
-            }
-
-            switch (month)
-            {
-                case 12:
-                    day = 31;
-                    break;
-                case 11:
-                    day = 30;
-                    break;
-                case 10:
-                    day = 31;
-                    break;
-                case 9:
-                    day = 30;
-                    break;
-                case 8:
-                    day = 31;
-                    break;
-                case 7:
-                    day = 31;
-                    break;
-                case 6:
-                    day = 30;
-                    break;
-                case 5:
-                    day = 31;
-                    break;
-                case 4:
-                    day = 30;
-                    break;
-                case 3:
-                    day = 31;
-                    break;
-                case 2:
-                    if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
-                        day = 29;
-                    else
-                        day = 28;
-                    break;
-                case 1:
-                    day = 31;
-                    break;
-            }
-
-            int leap;
-            /*先計算某月以前月份的總天數*/
-            switch (month)
-            {
-                case 1: sum += 0; break;
-                case 2: sum += 31; break;
-                case 3: sum += 59; break;
-                case 4: sum += 90; break;
-                case 5: sum += 120; break;
-                case 6: sum += 151; break;
-                case 7: sum += 181; break;
-                case 8: sum += 212; break;
-                case 9: sum += 243; break;
-                case 10: sum += 273; break;
-                case 11: sum += 304; break;
-                case 12: sum += 334; break;
-            }
-            //判斷是不是閏年
-            if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))
-            {
-                leap = 1;
-            }
-            else
-            {
-                leap = 0;
-            }
-
-            //如果是閏年且月份大於2,總天數應該加一天
-            if (leap == 1 && month > 2)
-            {
-                sum++;
-            }
-
-            int space = (sum + 1) % 7;
-            richTextBox1.Text += "日\t一\t二\t三\t四\t五\t六\n";
-            for (i = 1; i <= (space + day); i++)
-            {
-                if (i <= space)
-                {
-                    richTextBox1.Text += "\t";
-                }
-                else
-                {
-                    richTextBox1.Text += i - space + "\t";
-                }
-                if (i % 7 == 0)
-                {
-                    richTextBox1.Text += "\n";
-                }
-            }
-            richTextBox1.Text += "\n";
-        }
-        //實現小小的日曆 SP
 
         private void button11_Click(object sender, EventArgs e)
         {
@@ -1252,7 +1096,7 @@ namespace vcs_test_all_01_DateTime
             //獲得中文星期名稱
             richTextBox1.Text += "英文星期名稱 : " + dt.DayOfWeek + "\n";
 
-            /// 獲得中文星期名稱
+            // 獲得中文星期名稱
             switch (dt.DayOfWeek)
             {
                 case DayOfWeek.Sunday:
@@ -1374,11 +1218,25 @@ namespace vcs_test_all_01_DateTime
                 richTextBox1.Text += info + "\n";
             }
 
-            //取得系統的時區資訊
-            get_system_time_zone();
+            //------------------------------------------------------------  # 60個
 
-            richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+            //取得系統的時區資訊
+            // Initialize the time zone lists.
+            foreach (TimeZoneInfo info in TimeZoneInfo.GetSystemTimeZones())
+            {
+                comboBox1.Items.Add(info);
+                richTextBox1.Text += info + "\n";
+            }
+
+            // Select a default value
+            comboBox1.SelectedItem = FindItemContaining(comboBox1.Items, "臺北");
+
+            TimeZoneInfo zone1 = comboBox1.SelectedItem as TimeZoneInfo;
+            string name1 = zone1.DisplayName;
+            richTextBox1.Text += "name1 = " + name1 + "\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button20_Click(object sender, EventArgs e)
         {
@@ -1410,6 +1268,21 @@ namespace vcs_test_all_01_DateTime
             int dayOfMonth = tc.GetDayOfMonth(dt);             //日
             int daysInMonth = tc.GetDaysInMonth(year, month);   //整個月的天數
             richTextBox1.Text += "民國" + year.ToString() + "年" + month.ToString() + "月" + dayOfMonth.ToString() + "日\n";
+
+            //------------------------------------------------------------  # 60個
+
+            //創建日曆對象ChineseLunisolarCalendar,將時間分成多個部分來表示，如分成年、月和日。 年按農曆計算，而日和月按陰陽曆計算。
+            ChineseLunisolarCalendar chinseCaleander = new ChineseLunisolarCalendar();
+            string TreeYear = "鼠牛虎兔龍蛇馬羊猴雞狗豬";//創建字符串對象
+            int intYear = chinseCaleander.GetSexagenaryYear(DateTime.Now);//計算年信息,GetSexagenaryYear計算與指定日期對應的甲子（60 年）循環中的年。
+
+            //得到生肖信息
+            string Tree = TreeYear.Substring(chinseCaleander.GetTerrestrialBranch(intYear) - 1, 1);//GetTerrestrialBranch計算甲子（60 年）循環中指定年份的地支,
+            //Substring(x,y)從此實例檢索子字符串。 子字符串從指定的字符位置開始且具有指定的長度
+            richTextBox1.Text += "今年是十二生肖 " + Tree + " 年\n";
+
+            //顯示星期信息
+            richTextBox1.Text += "今天是 : " + DateTime.Now.ToString("dddd") + "\n";//dddd是星期日,ddd是日,dd是01
 
             //------------------------------------------------------------  # 60個
 
@@ -1482,33 +1355,31 @@ namespace vcs_test_all_01_DateTime
 
             //------------------------------------------------------------  # 60個
 
-            string message = "";
-            message += "顯示中文格式的日期、星期幾\n";
-            message += "//該語句顯示的為英文格式\n";
-            message += DateTime.Now.DayOfWeek.ToString() + "\n";
+            richTextBox1.Text += "顯示中文格式的日期、星期幾\n";
+            richTextBox1.Text += "//該語句顯示的為英文格式\n";
+            richTextBox1.Text += dt.DayOfWeek.ToString() + "\n";
 
-            message += "//顯示中文格式星期幾 簡中1\n";
-            message += DateTime.Now.ToString("ddd", new CultureInfo("zh-cn")) + "\n";      //3個d
+            richTextBox1.Text += "//顯示中文格式星期幾 簡中1\n";
+            richTextBox1.Text += dt.ToString("ddd", new CultureInfo("zh-cn")) + "\n";      //3個d
 
-            message += "//顯示中文格式星期幾 簡中2\n";
-            message += DateTime.Now.ToString("dddd", new CultureInfo("zh-cn")) + "\n";     //更新簡捷的顯示中文格式星期幾用4個dddd就可以搞定了，不需任何拼湊
+            richTextBox1.Text += "//顯示中文格式星期幾 簡中2\n";
+            richTextBox1.Text += dt.ToString("dddd", new CultureInfo("zh-cn")) + "\n";     //更新簡捷的顯示中文格式星期幾用4個dddd就可以搞定了，不需任何拼湊
 
-            message += "//顯示中文格式星期幾 正中1\n";
-            message += DateTime.Now.ToString("ddd", new CultureInfo("zh-tw")) + "\n";      //3個d
+            richTextBox1.Text += "//顯示中文格式星期幾 正中1\n";
+            richTextBox1.Text += dt.ToString("ddd", new CultureInfo("zh-tw")) + "\n";      //3個d
 
-            message += "//顯示中文格式星期幾 正中2\n";
-            message += DateTime.Now.ToString("dddd", new CultureInfo("zh-tw")) + "\n";     //4個d
+            richTextBox1.Text += "//顯示中文格式星期幾 正中2\n";
+            richTextBox1.Text += dt.ToString("dddd", new CultureInfo("zh-tw")) + "\n";     //4個d
 
-            message += "//顯示日文格式星期幾\n";
-            message += DateTime.Now.ToString("ddd", new CultureInfo("ja")) + "\n";
+            richTextBox1.Text += "//顯示日文格式星期幾\n";
+            richTextBox1.Text += dt.ToString("ddd", new CultureInfo("ja")) + "\n";
 
-            message += "//顯示美語格式星期幾\n";
-            message += DateTime.Now.ToString("ddd", new CultureInfo("en-us")) + "\n";
+            richTextBox1.Text += "//顯示美語格式星期幾\n";
+            richTextBox1.Text += dt.ToString("ddd", new CultureInfo("en-us")) + "\n";
+            richTextBox1.Text += dt.ToString("MMM", new CultureInfo("en-us")) + "\n";  // 月份英文簡寫 : Jul
 
-            message += "//VS2005後顯示星期的新方法是\n";
-            message += "星期" + DateTime.Now.DayOfWeek.ToString(("d")) + "\n";
-
-            richTextBox1.Text += message + "\n";
+            richTextBox1.Text += "//VS2005後顯示星期的新方法是\n";
+            richTextBox1.Text += "星期" + dt.DayOfWeek.ToString(("d")) + "\n";
 
             // 看起來都一樣
             string dateString1 = DateTime.Today.ToString("yyyy-M-d dddd");
@@ -1563,26 +1434,6 @@ namespace vcs_test_all_01_DateTime
 
         private void button21_Click(object sender, EventArgs e)
         {
-            //生肖/星座
-
-            //創建日曆對象ChineseLunisolarCalendar,將時間分成多個部分來表示，如分成年、月和日。 年按農曆計算，而日和月按陰陽曆計算。
-            ChineseLunisolarCalendar chinseCaleander = new ChineseLunisolarCalendar();
-            string TreeYear = "鼠牛虎兔龍蛇馬羊猴雞狗豬";//創建字符串對象
-            int intYear = chinseCaleander.GetSexagenaryYear(DateTime.Now);//計算年信息,GetSexagenaryYear計算與指定日期對應的甲子（60 年）循環中的年。
-
-            //得到生肖信息
-            string Tree = TreeYear.Substring(chinseCaleander.GetTerrestrialBranch(intYear) - 1, 1);//GetTerrestrialBranch計算甲子（60 年）循環中指定年份的地支,
-            //Substring(x,y)從此實例檢索子字符串。 子字符串從指定的字符位置開始且具有指定的長度
-            richTextBox1.Text += "今年是十二生肖 " + Tree + " 年\n";
-
-            //顯示星期信息
-            richTextBox1.Text += "今天是 : " + DateTime.Now.ToString("dddd") + "\n";//dddd是星期日,ddd是日,dd是01
-
-            //由日期找出星座
-            int month = 3;
-            int day = 11;
-            string astro_name = getAstro(month, day);
-            richTextBox1.Text += astro_name + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -1768,28 +1619,15 @@ namespace vcs_test_all_01_DateTime
             lb_time.Text = mesg;
         }
 
-        void get_system_time_zone()
-        {
-            // Initialize the time zone lists.
-            foreach (TimeZoneInfo info in TimeZoneInfo.GetSystemTimeZones())
-            {
-                comboBox1.Items.Add(info);
-                richTextBox1.Text += info + "\n";
-            }
-
-            // Select a default value
-            comboBox1.SelectedItem = FindItemContaining(comboBox1.Items, "臺北");
-
-            TimeZoneInfo zone1 = comboBox1.SelectedItem as TimeZoneInfo;
-            string name1 = zone1.DisplayName;
-            richTextBox1.Text += "name1 = " + name1 + "\n";
-        }
+        //------------------------------------------------------------  # 60個
 
         /*
         實現的根據年月日計算星期幾的函數
         基姆拉爾森計算公式
         W= (d 2*m 3*(m 1)/5 y y/4-y/100 y/400) mod 7
-        在公式中d表示日期中的日數，m表示月份數，y表示年數。注意 : 在公式中有個與其他公式不同的地方 : 把一月和二月看成是上一年的十三月和十四月，例 : 如果是2004-1-10則換算成 : 2003-13-10來代入公式計算。
+        在公式中d表示日期中的日數，m表示月份數，y表示年數。
+        注意 : 在公式中有個與其他公式不同的地方 : 把一月和二月看成是上一年的十三月和十四月，
+        例 : 如果是2004-1-10則換算成 : 2003-13-10來代入公式計算。
         */
 
         //根據年月日計算星期幾的函數
@@ -1800,8 +1638,14 @@ namespace vcs_test_all_01_DateTime
 
         string CalculateWeekDay(int y, int m, int d)
         {
-            if (m == 1) m = 13;
-            if (m == 2) m = 14;
+            if (m == 1)
+            {
+                m = 13;
+            }
+            if (m == 2)
+            {
+                m = 14;
+            }
             int week = (d + 2 * m + 3 * (m + 1) / 5 + y + y / 4 - y / 100 + y / 400 + 1) % 7;
 
             string weekstr = "";
@@ -1945,22 +1789,6 @@ namespace vcs_test_all_01_DateTime
         }
 
         //------------------------------------------------------------  # 60個
-
-        //由日期找出星座
-        private static String getAstro(int month, int day)
-        {
-            String[] starArr = { "魔羯座", "水瓶座", "雙魚座", "牡羊座", "金牛座", "雙子座", "巨蟹座", "獅子座", "處女座", "天秤座", "天蠍座", "射手座" };
-            int[] DayArr = { 22, 20, 19, 21, 21, 21, 22, 23, 23, 23, 23, 22 };  // 兩個星座分割日
-            int index = month;
-            // 所查詢日期在分割日之前，索引-1，否則不變
-            if (day < DayArr[month - 1])
-            {
-                index = index - 1;
-            }
-            index = index % 12;
-            // 返回索引指向的星座string
-            return starArr[index];
-        }
 
         private void timer_countdown_Tick(object sender, EventArgs e)
         {
@@ -2188,3 +2016,4 @@ richTextBox1.Text += "一戰經歷時間 : " + ww1_time.ToString("T") + "\n";
 //日俄戰爭
 //1904年2月8日－1905年9月5日
 */
+

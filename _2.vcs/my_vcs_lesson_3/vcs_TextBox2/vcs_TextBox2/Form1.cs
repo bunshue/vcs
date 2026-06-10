@@ -79,19 +79,13 @@ namespace vcs_TextBox2
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
+            //button
             int W = 300;
             int H = 160;
-
-            //button
-            x_st = 10;
-            y_st = 10;
-            dx = W + 10;
-            dy = H + 10;
-
+            int x_st = 10;
+            int y_st = 10;
+            int dx = W + 10;
+            int dy = H + 10;
             groupBox0.Size = new Size(W, H);
             groupBox1.Size = new Size(W, H);
             groupBox2.Size = new Size(W, H);

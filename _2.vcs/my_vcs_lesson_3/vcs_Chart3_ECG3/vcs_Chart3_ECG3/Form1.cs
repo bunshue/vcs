@@ -77,6 +77,7 @@ namespace vcs_Chart3_ECG3
             chart1.Size = new Size(600, 480);
             chart1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
+            groupBox1.Size = new Size(120, 160);
             groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
             trackBar1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
@@ -90,6 +91,15 @@ namespace vcs_Chart3_ECG3
             richTextBox1.Size = new Size(720, 480);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 3);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            y_st = 25;
+            dy = 25;
+            radioButton0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            radioButton1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            radioButton2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            radioButton3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            radioButton4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+
 
             this.Size = new Size(1400, 750);
             this.Text = "vcs_Chart3_ECG3";
@@ -127,7 +137,7 @@ namespace vcs_Chart3_ECG3
 
             for (int i = 0; i < samplesPerTick; i++)
             {
-                double value = GenerateECGPoint(t, hr);
+                double value = GenerateSignal(t, hr);
                 ecgBuffer.Enqueue(value);
                 t += 1.0 / fs;  // 每一格的時間 為 1/fs
 
@@ -148,29 +158,8 @@ namespace vcs_Chart3_ECG3
                 chart1.Series[0].Points.AddXY(xx, v);  // AddXY 二維加入
                 index++;
             }
-
             chart1.ChartAreas[0].AxisX.Minimum = xx - 3;  // 畫面保持最後 3 秒
             chart1.ChartAreas[0].AxisX.Maximum = xx;
-        }
-
-        private double GenerateECGPoint(double time, int hr)
-        {
-            double Period = 60.0 / hr;  // 一次心跳的時間, 一個週期
-            double beatTime = time % Period;  // 測試時間
-            double value = 0.0;
-
-            // P 波
-            value += Math.Exp(-Math.Pow((beatTime - 0.1) / 0.01, 2)) * 0.1;
-            // Q 波
-            value += -Math.Exp(-Math.Pow((beatTime - 0.2) / 0.002, 2)) * 0.15;
-            // R 波
-            value += Math.Exp(-Math.Pow((beatTime - 0.22) / 0.002, 2)) * 1.0;
-            // S 波
-            value += -Math.Exp(-Math.Pow((beatTime - 0.25) / 0.002, 2)) * 0.25;
-            // T 波
-            value += Math.Exp(-Math.Pow((beatTime - 0.4) / 0.02, 2)) * 0.35;
-
-            return value;
         }
 
         private double GenerateSignal(double time, int hr)
@@ -179,30 +168,42 @@ namespace vcs_Chart3_ECG3
             double beatTime = time % Period;  // 測試時間
             double value = 0.0;
 
-            /*
-            if (beatTime < Period/2)
-                value = beatTime;
-            else
-                value = 1.0 - beatTime;
-            */
+            if (radioButton0.Checked == true)
+            {
+                //心電圖
+                // P 波
+                value += Math.Exp(-Math.Pow((beatTime - 0.1) / 0.01, 2)) * 0.1;
+                // Q 波
+                value += -Math.Exp(-Math.Pow((beatTime - 0.2) / 0.002, 2)) * 0.15;
+                // R 波
+                value += Math.Exp(-Math.Pow((beatTime - 0.22) / 0.002, 2)) * 1.0;
+                // S 波
+                value += -Math.Exp(-Math.Pow((beatTime - 0.25) / 0.002, 2)) * 0.25;
+                // T 波
+                value += Math.Exp(-Math.Pow((beatTime - 0.4) / 0.02, 2)) * 0.35;
+            }
+            else if (radioButton1.Checked == true)
+            {
+                //正弦波
+                value = Math.Sin(2 * Math.PI * beatTime / Period);
 
-            value = Math.Sin(2 * Math.PI * beatTime / Period);
+            }
+            else if (radioButton2.Checked == true)
+            {
+                //三角波
+            }
+            else if (radioButton2.Checked == true)
+            {
+                //方波
 
-            /*
-            // P 波
-            value += Math.Exp(-Math.Pow((beatTime - 0.1) / 0.01, 2)) * 0.1;
-            // Q 波
-            value += -Math.Exp(-Math.Pow((beatTime - 0.2) / 0.002, 2)) * 0.15;
-            // R 波
-            value += Math.Exp(-Math.Pow((beatTime - 0.22) / 0.002, 2)) * 1.0;
-            // S 波
-            value += -Math.Exp(-Math.Pow((beatTime - 0.25) / 0.002, 2)) * 0.25;
-            // T 波
-            value += Math.Exp(-Math.Pow((beatTime - 0.4) / 0.02, 2)) * 0.35;
-            */
+            }
+            else if (radioButton2.Checked == true)
+            {
+                //市電
+
+            }
             return value;
         }
-
     }
 }
 

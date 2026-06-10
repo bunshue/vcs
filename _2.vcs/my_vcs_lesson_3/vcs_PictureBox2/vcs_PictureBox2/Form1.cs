@@ -31,11 +31,11 @@ namespace vcs_PictureBox2
 
             OpenImageFile(filename);
             /*
-                                    image_filename = filename;
-                                    Image image = Image.FromFile(filename);
-                                    pictureBox1.Image = image;
-                                    pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-                                    pictureBox1.Location = new Point((W - w) / 2, (H - h) / 2);
+            image_filename = filename;
+            Image image = Image.FromFile(filename);
+            pictureBox1.Image = image;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.Location = new Point((W - w) / 2, (H - h) / 2);
             */
             //pictureBox1.Size = new Size(image.Width, image.Height);
 

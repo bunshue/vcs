@@ -23,7 +23,6 @@ namespace vcs_BackgroundWorker4
             backgroundWorker1.WorkerSupportsCancellation = true;//設置能夠取消
             backgroundWorker1.WorkerReportsProgress = true;//是否報告進度
 
-
             progressBar1.Value = 85;
         }
 
@@ -49,3 +48,4 @@ namespace vcs_BackgroundWorker4
         }
     }
 }
+

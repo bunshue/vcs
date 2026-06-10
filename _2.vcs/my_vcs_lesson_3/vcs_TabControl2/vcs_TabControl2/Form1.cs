@@ -20,7 +20,7 @@ namespace vcs_TabControl2
         private void Form1_Load(object sender, EventArgs e)
         {
             ImageList myImages = new ImageList();
-            myImages.Images.Add(new Bitmap(@"c:\user_red32x32.png", true));
+            myImages.Images.Add(new Bitmap(@"D:\user_red32x32.png", true));
             tabControl1.ImageList = myImages;
 
             tabControl1.TabPages[0].ImageIndex = 0;

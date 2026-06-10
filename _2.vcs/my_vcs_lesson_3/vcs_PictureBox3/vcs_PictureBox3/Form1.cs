@@ -29,6 +29,21 @@ namespace vcs_PictureBox3
 
             //------------------------------------------------------------  # 60個
 
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+
+            //1. 載入圖檔，由資源檔
+            pictureBox1.Image = Resource1.bear;
+
+            //2. picturebox載入一圖
+            //pictureBox1.Image = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg"); //載入圖檔，由檔案
+
+            //3. picturebox顯示圖檔
+            //Image img = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg");
+            //pictureBox1.Image = img;
+
+            //pictureBox1.Height = 800; 設定圖片高度和寬度
+            //pictureBox1.Width = 600;
+
             this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);
         }
 
@@ -94,20 +109,6 @@ namespace vcs_PictureBox3
 
         private void button1_Click(object sender, EventArgs e)
         {
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-
-            //1. 載入圖檔，由資源檔
-            pictureBox1.Image = Resource1.bear;
-
-            //2. picturebox載入一圖
-            //pictureBox1.Image = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg"); //載入圖檔，由檔案
-
-            //3. picturebox顯示圖檔
-            //Image img = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\picture1.jpg");
-            //pictureBox1.Image = img;
-
-            //pictureBox1.Height = 800; 設定圖片高度和寬度
-            //pictureBox1.Width = 600;
         }
 
         private void button3_Click(object sender, EventArgs e)
