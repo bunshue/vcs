@@ -78,7 +78,7 @@ namespace vcs_Chart3_waveform
             chart1.Size = new Size(600, 480);
             chart1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
-            groupBox1.Size = new Size(120, 160);
+            groupBox1.Size = new Size(110, 200);
             groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
             trackBar1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
@@ -101,6 +101,8 @@ namespace vcs_Chart3_waveform
             radioButton2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             radioButton3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             radioButton4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            btn_play.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            btn_pause.Location = new Point(x_st + dx * 0+50, y_st + dy * 5);
 
             this.Size = new Size(1400, 750);
             this.Text = "vcs_Chart3_waveform";
@@ -257,6 +259,16 @@ namespace vcs_Chart3_waveform
             {
                 richTextBox1.Text += "XXXXXX\n";
             }
+        }
+
+        private void btn_play_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = true;
+        }
+
+        private void btn_pause_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = false;
         }
     }
 }

@@ -522,6 +522,35 @@ namespace vcs_Process1
 
             //------------------------------------------------------------  # 60個
 
+            /*
+            //開啟Office程式   (偽)
+            Process.Start("EXCEL.exe");  //啟動Excel
+
+            //打開Word
+            Process.Start(@"C:\Program Files\Microsoft Office\OFFICE15\winword.exe");
+
+            //打開Excel
+            Process.Start(@"C:\Program Files\Microsoft Office\OFFICE15\excel.exe");
+
+            //打開Access fail
+            //Process.Start(@"C:\Program Files\Microsoft Office\OFFICE15\msaccess.exe");
+
+            //打開PowerPoint
+            Process.Start(@"C:\Program Files\Microsoft Office\OFFICE15\powerpnt.exe");
+
+            //打開OutLook
+            Process.Start(@"C:\Program Files\Microsoft Office\OFFICE15\outlook.exe");
+            */
+
+            //6060
+
+
+            //開啟各種程式
+            Process.Start("Firefox.exe");
+
+            //開啟特定程式 1
+            Process.Start(@"C:\___small\imagesweeper5.1影像清潔工.exe");
+
             //Process.Start()  // 啟動程式
 
             /*
@@ -874,6 +903,24 @@ namespace vcs_Process1
 
             process.Close();
             richTextBox1.Text += "執行了Close()方法\n";
+
+            //------------------------------------------------------------  # 60個
+
+            /*
+            //開啟Notepad程序
+            Process process1 = new Process();
+            process1.StartInfo.FileName = "notepad.exe";
+            process1.Start();
+
+            //關閉Notepad程序
+            Process[] processes = Process.GetProcessesByName("Notepad");
+            foreach (Process process in processes)
+            {
+                process.CloseMainWindow();
+                process.WaitForExit(3000);
+                process.Close();
+            }
+            */
         }
 
         //------------------------------------------------------------  # 60個
@@ -1224,6 +1271,34 @@ namespace vcs_Process1
 
         private void button22_Click(object sender, EventArgs e)
         {
+            //開啟Windows小程式
+            //開啟小算盤應用程式
+            //Process.Start(@"C:\WINDOWS\system32\calc.exe");   same
+            Process.Start("calc");  //打開計算機
+
+            /*
+            //開啟記事本程式
+            //Process.Start("notepad.exe"); //same
+            Process.Start("notepad");   //打開記事本
+
+            //小畫家
+            Process.Start("mspaint.exe");
+
+            //小作家(WordPad)
+            Process.Start("write.exe");
+
+            //啟動Windows Media Player
+            Process.Start("dvdplay.exe");
+
+            //打開Windows版本信息
+            Process.Start("winver.exe ");
+
+            //cmd命令列
+            Process.Start("cmd.exe");
+
+            //打開D槽
+            Process.Start("d:");
+            */
         }
 
         private void button23_Click(object sender, EventArgs e)

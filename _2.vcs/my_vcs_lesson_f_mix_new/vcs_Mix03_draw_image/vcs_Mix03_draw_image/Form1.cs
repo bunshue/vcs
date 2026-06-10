@@ -283,6 +283,36 @@ namespace vcs_Mix03_draw_image
         private void button4_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //sinc
+            g.DrawRectangle(Pens.Red, 0, 0, 600, 600);
+            g.DrawLine(Pens.Red, 300, 0, 300, 600);
+            g.DrawLine(Pens.Red, 0, 300, 600, 300);
+
+            Pen pen = new Pen(Color.Blue, 2);
+
+            int centerX = 600 / 2;
+            int centerY = 600 / 2;
+            double scaleX = 20; // 每單位 x 對應像素
+            double scaleY = 200; // 每單位 y 對應像素
+
+            PointF? prevPoint = null;
+            for (double x = -10; x <= 10; x += 0.01)
+            {
+                double y = (x == 0) ? 1.0 : Math.Sin(x) / x;
+                float px = (float)(centerX + x * scaleX);
+                float py = (float)(centerY - y * scaleY);
+
+                PointF point = new PointF(px, py);
+                if (prevPoint != null)
+                    g.DrawLine(pen, prevPoint.Value, point);
+
+                prevPoint = point;
+            }
+
+
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button5_Click(object sender, EventArgs e)

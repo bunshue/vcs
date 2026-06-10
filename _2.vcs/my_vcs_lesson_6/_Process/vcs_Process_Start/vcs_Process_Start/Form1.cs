@@ -86,40 +86,18 @@ namespace vcs_Process_Start
             int y_st = 10;
             int dx = W + 10;
             int dy = H + 10;
-            groupBox1.Size = new Size(W, H);
-            groupBox2.Size = new Size(W, H);
             groupBox5.Size = new Size(W, H);
-            groupBox3.Size = new Size(W, 200 - 40);
             groupBox6.Size = new Size(W, 200 - 40);
-            groupBox1.Location = new Point(x_st, y_st + dy * 0);
-            groupBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            groupBox5.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            groupBox3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            groupBox6.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 170);
+            groupBox5.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            groupBox6.Location = new Point(x_st + dx * 1, y_st + dy * 0);
 
             richTextBox1.Size = new Size(500, 690);
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             y_st = 20;
             dx = 180 + 10;
             dy = 60 + 10;
-            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button10.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button11.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button12.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button13.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button14.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button15.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button16.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button17.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button20.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button22.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -128,9 +106,6 @@ namespace vcs_Process_Start
             button25.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button26.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             button27.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-
-            button40.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button41.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -146,130 +121,6 @@ namespace vcs_Process_Start
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button0_Click(object sender, EventArgs e)
-        {
-            //開啟Windows小程式
-            //開啟小算盤應用程式
-            //Process.Start(@"C:\WINDOWS\system32\calc.exe");   same
-            Process.Start("calc");  //打開計算機
-
-            /*
-            //開啟記事本程式
-            //Process.Start("notepad.exe"); //same
-            Process.Start("notepad");   //打開記事本
-
-            //小畫家
-            Process.Start("mspaint.exe");
-
-            //小作家(WordPad)
-            Process.Start("write.exe");
-
-            //啟動Windows Media Player
-            Process.Start("dvdplay.exe");
-
-            //打開Windows版本信息
-            Process.Start("winver.exe ");
-
-            //cmd命令列
-            Process.Start("cmd.exe");
-
-            //打開D槽
-            Process.Start("d:");
-            */
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            /*
-            //開啟Office程式   (偽)
-            Process.Start("EXCEL.exe");  //啟動Excel
-
-            //打開Word
-            Process.Start(@"C:\Program Files\Microsoft Office\OFFICE15\winword.exe");
-
-            //打開Excel
-            Process.Start(@"C:\Program Files\Microsoft Office\OFFICE15\excel.exe");
-
-            //打開Access fail
-            //Process.Start(@"C:\Program Files\Microsoft Office\OFFICE15\msaccess.exe");
-
-            //打開PowerPoint
-            Process.Start(@"C:\Program Files\Microsoft Office\OFFICE15\powerpnt.exe");
-
-            //打開OutLook
-            Process.Start(@"C:\Program Files\Microsoft Office\OFFICE15\outlook.exe");
-            */
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //開啟各種程式
-            Process.Start("Firefox.exe");
-
-            //開啟特定程式 1
-            Process.Start(@"C:\___small\imagesweeper5.1影像清潔工.exe");
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button17_Click(object sender, EventArgs e)
-        {
-
         }
 
         //------------------------------------------------------------  # 60個
@@ -473,27 +324,6 @@ namespace vcs_Process_Start
         private void button27_Click(object sender, EventArgs e)
         {
 
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button40_Click(object sender, EventArgs e)
-        {
-            //開啟Notepad程序
-            process1.StartInfo.FileName = "notepad.exe";
-            process1.Start();
-        }
-
-        private void button41_Click(object sender, EventArgs e)
-        {
-            //關閉Notepad程序
-            Process[] processes = Process.GetProcessesByName("Notepad");
-            foreach (Process process in processes)
-            {
-                process.CloseMainWindow();
-                process.WaitForExit(3000);
-                process.Close();
-            }
         }
 
         //------------------------------------------------------------  # 60個
