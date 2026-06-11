@@ -42,17 +42,11 @@ namespace vcs_ReadWrite_CSV1
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 200 + 5;
-            dy = 60 + 5;
-
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -78,11 +72,16 @@ namespace vcs_ReadWrite_CSV1
             pictureBox1.Size = new Size(600, 200);
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
 
-            richTextBox1.Size = new Size(600, 430);
+            richTextBox1.Size = new Size(600, 480);
             richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 210);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1060, 700);
+            this.Size = new Size(1060, 750);
+            this.Text = "vcs_ReadWrite_CSV1";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -230,6 +229,8 @@ namespace vcs_ReadWrite_CSV1
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         private const int LENGTH = 500;
         private const int PICTURE_WIDTH = 500;
         private const int PICTURE_HEIGHT = 500;
@@ -280,9 +281,7 @@ namespace vcs_ReadWrite_CSV1
                 //k++;
                 //if (k == LENGTH)
                 //break;
-
             }
-
 
             // 實例化圖片方塊
             PictureBox pictureBox1 = new PictureBox();
@@ -316,7 +315,6 @@ namespace vcs_ReadWrite_CSV1
                 //curvePoints[i].Y = H - (offset_y + (int)y1_data[i] + h / 2);
             }
 
-
             Graphics g;
             Pen p;
             SolidBrush sb;
@@ -330,12 +328,13 @@ namespace vcs_ReadWrite_CSV1
 
             g.Clear(Color.Gray);     //清除整個繪圖介面，並使用指定的背景色彩填滿它。
 
-
             // Draw curve to screen.
             g.DrawCurve(p, curvePoints); //畫曲線
 
             pictureBox1.Image = bitmap1;
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button5_Click(object sender, EventArgs e)
         {

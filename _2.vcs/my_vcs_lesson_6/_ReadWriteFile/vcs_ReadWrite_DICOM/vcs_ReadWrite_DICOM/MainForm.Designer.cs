@@ -51,9 +51,10 @@
             // 
             // bnOpen1
             // 
+            this.bnOpen1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bnOpen1.Location = new System.Drawing.Point(24, 8);
             this.bnOpen1.Name = "bnOpen1";
-            this.bnOpen1.Size = new System.Drawing.Size(150, 50);
+            this.bnOpen1.Size = new System.Drawing.Size(200, 60);
             this.bnOpen1.TabIndex = 0;
             this.bnOpen1.Text = "Open DICOM Image 1";
             this.bnOpen1.UseVisualStyleBackColor = true;
@@ -61,9 +62,10 @@
             // 
             // bnSave
             // 
+            this.bnSave.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bnSave.Location = new System.Drawing.Point(24, 174);
             this.bnSave.Name = "bnSave";
-            this.bnSave.Size = new System.Drawing.Size(150, 50);
+            this.bnSave.Size = new System.Drawing.Size(200, 60);
             this.bnSave.TabIndex = 2;
             this.bnSave.Text = "Save as PNG";
             this.bnSave.UseVisualStyleBackColor = true;
@@ -71,9 +73,10 @@
             // 
             // bnTags
             // 
+            this.bnTags.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bnTags.Location = new System.Drawing.Point(24, 118);
             this.bnTags.Name = "bnTags";
-            this.bnTags.Size = new System.Drawing.Size(150, 50);
+            this.bnTags.Size = new System.Drawing.Size(200, 60);
             this.bnTags.TabIndex = 1;
             this.bnTags.Text = "View DICOM Tags";
             this.bnTags.UseVisualStyleBackColor = true;
@@ -81,9 +84,10 @@
             // 
             // bnResetWL
             // 
+            this.bnResetWL.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bnResetWL.Location = new System.Drawing.Point(24, 231);
             this.bnResetWL.Name = "bnResetWL";
-            this.bnResetWL.Size = new System.Drawing.Size(150, 50);
+            this.bnResetWL.Size = new System.Drawing.Size(200, 60);
             this.bnResetWL.TabIndex = 3;
             this.bnResetWL.Text = "Reset Window/Level";
             this.bnResetWL.UseVisualStyleBackColor = true;
@@ -94,7 +98,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label5.Location = new System.Drawing.Point(19, 577);
+            this.label5.Location = new System.Drawing.Point(19, 625);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(124, 13);
             this.label5.TabIndex = 9;
@@ -106,7 +110,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label6.Location = new System.Drawing.Point(22, 592);
+            this.label6.Location = new System.Drawing.Point(22, 640);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(108, 13);
             this.label6.TabIndex = 9;
@@ -118,7 +122,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label7.Location = new System.Drawing.Point(19, 615);
+            this.label7.Location = new System.Drawing.Point(19, 663);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(114, 13);
             this.label7.TabIndex = 11;
@@ -130,7 +134,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label8.Location = new System.Drawing.Point(19, 629);
+            this.label8.Location = new System.Drawing.Point(19, 677);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(127, 13);
             this.label8.TabIndex = 12;
@@ -142,7 +146,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label9.Location = new System.Drawing.Point(19, 642);
+            this.label9.Location = new System.Drawing.Point(19, 690);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(124, 13);
             this.label9.TabIndex = 13;
@@ -154,7 +158,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label10.Location = new System.Drawing.Point(19, 656);
+            this.label10.Location = new System.Drawing.Point(19, 704);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(129, 13);
             this.label10.TabIndex = 14;
@@ -165,9 +169,9 @@
             // 
             this.gbViewSettings.Controls.Add(this.rbZoomfit);
             this.gbViewSettings.Controls.Add(this.rbZoom1_1);
-            this.gbViewSettings.Location = new System.Drawing.Point(24, 291);
+            this.gbViewSettings.Location = new System.Drawing.Point(18, 351);
             this.gbViewSettings.Name = "gbViewSettings";
-            this.gbViewSettings.Size = new System.Drawing.Size(145, 58);
+            this.gbViewSettings.Size = new System.Drawing.Size(145, 50);
             this.gbViewSettings.TabIndex = 5;
             this.gbViewSettings.TabStop = false;
             this.gbViewSettings.Text = "View Settings";
@@ -198,7 +202,8 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(329, 5);
+            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.richTextBox1.Location = new System.Drawing.Point(341, 6);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 15;
@@ -206,9 +211,10 @@
             // 
             // bnOpen2
             // 
+            this.bnOpen2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bnOpen2.Location = new System.Drawing.Point(24, 63);
             this.bnOpen2.Name = "bnOpen2";
-            this.bnOpen2.Size = new System.Drawing.Size(150, 50);
+            this.bnOpen2.Size = new System.Drawing.Size(200, 60);
             this.bnOpen2.TabIndex = 16;
             this.bnOpen2.Text = "Open DICOM Image 2";
             this.bnOpen2.UseVisualStyleBackColor = true;
@@ -216,9 +222,10 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(349, 31);
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(361, 32);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(75, 38);
+            this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 17;
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
@@ -226,7 +233,8 @@
             // 
             // windowLevelControl
             // 
-            this.windowLevelControl.Location = new System.Drawing.Point(10, 355);
+            this.windowLevelControl.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.windowLevelControl.Location = new System.Drawing.Point(10, 403);
             this.windowLevelControl.Name = "windowLevelControl";
             this.windowLevelControl.Size = new System.Drawing.Size(165, 217);
             this.windowLevelControl.TabIndex = 10;
@@ -237,7 +245,7 @@
             this.imagePanelControl.BackColor = System.Drawing.SystemColors.Control;
             this.imagePanelControl.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.imagePanelControl.CausesValidation = false;
-            this.imagePanelControl.Location = new System.Drawing.Point(205, 8);
+            this.imagePanelControl.Location = new System.Drawing.Point(230, 8);
             this.imagePanelControl.Name = "imagePanelControl";
             this.imagePanelControl.Size = new System.Drawing.Size(100, 100);
             this.imagePanelControl.TabIndex = 1;

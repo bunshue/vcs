@@ -566,5 +566,3 @@ namespace vcs_Comport2
 
 */
 
-
-

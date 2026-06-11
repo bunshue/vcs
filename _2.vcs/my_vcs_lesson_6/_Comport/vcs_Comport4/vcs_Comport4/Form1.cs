@@ -21,6 +21,43 @@ namespace vcs_Comport4
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
+            Comport_Scan();
+        }
+
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+            //button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+
+            //richTextBox1.Size = new Size(300, 690);
+            //richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            //this.Size = new Size(1273, 750);
+            this.Text = "vcs_Comport4";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
+
         private void button1_Click(object sender, EventArgs e)
         {
             serialPort1.PortName = comboBox1.Text;
@@ -115,22 +152,25 @@ namespace vcs_Comport4
                 comboBox1.Text = COM_Ports_NameArr[0];
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            Comport_Scan();
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
-
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
             //RichTextBox顯示訊息自動捲動 顯示最後一行
             richTextBox1.SelectionStart = richTextBox1.TextLength;
             richTextBox1.ScrollToCaret();
-
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

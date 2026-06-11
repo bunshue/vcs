@@ -59,6 +59,8 @@ namespace vcs_ReadWrite_GIF1
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             bitmap1 = new Bitmap(filename1);
             bitmap3 = new Bitmap(filename1);
 
@@ -74,6 +76,65 @@ namespace vcs_ReadWrite_GIF1
             SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
             image2.Play();
         }
+
+        void show_item_location()
+        {
+            //button
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
+            int pbx_w = 320;
+            int pbx_h = 320;
+            int dx_pbx = pbx_w + 10;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button5.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+
+            pictureBox1.Size = new Size(pbx_w, pbx_h);
+            pictureBox1.Location = new Point(x_st + dx_pbx * 0, y_st + dy * 0);
+            bt_pause.Location = new Point(x_st + dx_pbx * 0 + pbx_w - 80, y_st + dy * 0);
+
+            pictureBox2.Size = new Size(pbx_w, pbx_h);
+            pictureBox2.Location = new Point(x_st + dx_pbx * 1, y_st + dy * 0);
+            bt_stop.Location = new Point(x_st + dx_pbx * 1 + pbx_w - 80, y_st + dy * 0);
+            bt_reset.Location = new Point(x_st + dx_pbx * 1 + pbx_w - 80, y_st + dy * 0 + 50);
+
+            pictureBox3.Size = new Size(pbx_w, pbx_h);
+            pictureBox3.Location = new Point(x_st + dx_pbx * 2, y_st + dy * 0);
+            bt_stop3.Location = new Point(x_st + dx_pbx * 2 + pbx_w - 80, y_st + dy * 0);
+            bt_start3.Location = new Point(x_st + dx_pbx * 2 + pbx_w - 80, y_st + dy * 0 + 50);
+
+            richTextBox1.Size = new Size(560, 340);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            pictureBox1.BackColor = Color.LightPink;
+            pictureBox2.BackColor = Color.LightGreen;
+            pictureBox3.BackColor = Color.LightBlue;
+
+            this.Size = new Size(1020, 750);
+            this.Text = "vcs_ReadWrite_GIF1";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
@@ -108,64 +169,6 @@ namespace vcs_ReadWrite_GIF1
             {
                 e.Graphics.DrawImage(image2.Image, new Point(0, 0));
             }
-        }
-
-        void show_item_location()
-        {
-            int pbx_w = 320;
-            int pbx_h = 320;
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-            int dx_pbx = pbx_w + 10;
-
-            //button
-            x_st = 10;
-            y_st = 10;
-            dx = 200 + 5;
-            dy = 60 + 5;
-
-            button0.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button2.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-
-            button5.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button6.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button7.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button8.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button9.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-
-            pictureBox1.Size = new Size(pbx_w, pbx_h);
-            pictureBox1.Location = new Point(x_st + dx_pbx * 0, y_st + dy * 0);
-            bt_pause.Location = new Point(x_st + dx_pbx * 0 + pbx_w - 80, y_st + dy * 0);
-
-            pictureBox2.Size = new Size(pbx_w, pbx_h);
-            pictureBox2.Location = new Point(x_st + dx_pbx * 1, y_st + dy * 0);
-            bt_stop.Location = new Point(x_st + dx_pbx * 1 + pbx_w - 80, y_st + dy * 0);
-            bt_reset.Location = new Point(x_st + dx_pbx * 1 + pbx_w - 80, y_st + dy * 0 + 50);
-
-            pictureBox3.Size = new Size(pbx_w, pbx_h);
-            pictureBox3.Location = new Point(x_st + dx_pbx * 2, y_st + dy * 0);
-            bt_stop3.Location = new Point(x_st + dx_pbx * 2 + pbx_w - 80, y_st + dy * 0);
-            bt_start3.Location = new Point(x_st + dx_pbx * 2 + pbx_w - 80, y_st + dy * 0 + 50);
-
-            richTextBox1.Size = new Size(570, 320);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-            pictureBox1.BackColor = Color.LightPink;
-            pictureBox2.BackColor = Color.LightGreen;
-            pictureBox3.BackColor = Color.LightBlue;
-
-            this.Size = new Size(1020, 700);
-        }
-
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
         }
 
         //------------------------------------------------------------  # 60個

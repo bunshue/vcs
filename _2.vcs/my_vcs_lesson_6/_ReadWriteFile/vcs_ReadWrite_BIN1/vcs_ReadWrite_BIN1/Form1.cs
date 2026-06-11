@@ -25,17 +25,11 @@ namespace vcs_ReadWrite_BIN1
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
             //button
-            x_st = 10;
-            y_st = 10;
-            dx = 200 + 5;
-            dy = 60 + 5;
-
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 200 + 10;
+            int dy = 60 + 10;
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -46,7 +40,6 @@ namespace vcs_ReadWrite_BIN1
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -57,7 +50,6 @@ namespace vcs_ReadWrite_BIN1
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-
             button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
@@ -69,17 +61,24 @@ namespace vcs_ReadWrite_BIN1
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            richTextBox1.Size = new Size(600, 640);
+            richTextBox1.Size = new Size(600, 690);
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1260, 700);
+            this.Size = new Size(1270, 750);
+            this.Text = "vcs_ReadWrite_BIN1";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -802,7 +801,114 @@ namespace vcs_ReadWrite_BIN1
                 richTextBox1.Text += "Auto save time set to: " + autoSaveTime.ToString() + "\n";
                 richTextBox1.Text += "Show status bar: " + showStatusBar.ToString() + "\n";
             }
+
+            //------------------------------------------------------------  # 60個
+
+            //BinaryWriter
+
+            BinaryWriter objWriter;
+            FileStream objStream;
+            filename = @"tmp_BinaryWriter.txt";
+            try
+            {
+                objStream = new FileStream(filename, FileMode.Append, FileAccess.Write);
+                //使用using敘詞，寫入完會自動釋放資源
+                using (objWriter = new BinaryWriter(objStream))
+                {
+                    // 寫入字串
+                    objWriter.Write("空山不見人");
+                    objWriter.Write("Visual C# 7.0");
+                    // 寫入數值
+                    objWriter.Write(640526);
+                }
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                richTextBox1.Text += "沒有指定檔案\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.Message + "\n";
+            }
+
+            //------------------------------------------------------------  # 60個
+
+            BinaryReader objReader;
+            //FileStream objStream;
+            filename = @"tmp_03aa.txt";
+            try
+            {
+                objStream = new FileStream(filename, FileMode.Open, FileAccess.Read);
+                objReader = new BinaryReader(objStream);
+                richTextBox1.Text += objReader.ReadString() + "\n";
+                richTextBox1.Text += objReader.ReadInt32() + "\n";
+                objReader.Close();
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                richTextBox1.Text += "沒有指定檔案\n";
+            }
+
+            catch (EndOfStreamException ex)
+            {
+                richTextBox1.Text += "檔案讀取完畢\n";
+            }
+
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.Message + "\n";
+            }
+
+            //------------------------------------------------------------  # 60個
+
+            //BinaryReader
+
+            BinaryReader readBit;
+            //FileStream objStream;
+            //設定欲讀取檔案的路徑
+            filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_bin\vcs_ReadWrite_BIN.bin";
+
+            int count = 0;
+            try
+            {
+                objStream = new FileStream(filename, FileMode.Open, FileAccess.Read);
+
+                //使用using陳述詞，確保資源的釋放
+                using (readBit = new BinaryReader(objStream))
+                {
+                    do
+                    {
+                        //以位元組為單位讀取檔案內容，16進位方式顯示
+                        richTextBox1.Text += readBit.ReadByte().ToString() + " ";
+                        count += 1;
+                        //'** 換行
+                        if (count == 10)
+                        {
+                            richTextBox1.Text += "\n";
+                            count = 0;
+                        }
+                    } while (true);
+                }
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                richTextBox1.Text += "沒有指定檔案\n";
+            }
+
+            catch (EndOfStreamException ex)
+            {
+                richTextBox1.Text += "檔案讀取完畢\n";
+            }
+
+            catch (Exception ex)
+            {
+                richTextBox1.Text += ex.Message + "\n";
+            }
+
+
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button12_Click(object sender, EventArgs e)
         {
@@ -1181,3 +1287,34 @@ namespace vcs_ReadWrite_BIN1
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
+//------------------------------------------------------------  # 60個
+/*
+//開啟檔案
+FileStream fs = File.Open(@"D:\myWriter.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+BinaryReader myReader = new BinaryReader(fs);
+int dl = System.Convert.ToInt16(fs.Length);
+//讀取位元陣列
+byte[] myData = myReader.ReadBytes(dl);
+//釋放資源
+myReader.Close();
+fs.Close();
+
+//------------------------------------------------------------  # 60個
+
+*/
+
+

@@ -1978,9 +1978,8 @@ namespace vcs_test_all_01_DateTime
 
 */
 
-/*
 
-//------------------------------------------------------------  # 60個
+/*
 
 "-123年4月5日"
 先自己解看看
@@ -2025,4 +2024,10 @@ richTextBox1.Text += "一戰經歷時間 : " + ww1_time.ToString("T") + "\n";
 //日俄戰爭
 //1904年2月8日－1905年9月5日
 */
+
+
+
+
+//var strname=DateTime.Now.ToShortDateString().Replace("/","-")+".txt";
+
 
