@@ -1566,8 +1566,16 @@ namespace vcs_Class1
                 strPath = strDicPath + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt";
             }
 
-            if (!Directory.Exists(strDicPath)) Directory.CreateDirectory(strDicPath);
-            if (!File.Exists(strPath)) using (FileStream fs = File.Create(strPath)) { }
+            if (!Directory.Exists(strDicPath))
+            {
+                Directory.CreateDirectory(strDicPath);
+            }
+            if (!File.Exists(strPath))
+            {
+                using (FileStream fs = File.Create(strPath))
+                {
+                }
+            }
             string str = File.ReadAllText(strPath);
             StringBuilder sb = new StringBuilder();
             foreach (var item in strList)

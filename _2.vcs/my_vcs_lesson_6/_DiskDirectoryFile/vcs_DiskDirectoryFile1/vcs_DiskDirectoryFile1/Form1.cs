@@ -1461,23 +1461,20 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_files04_Click(object sender, EventArgs e)
         {
-            message = "";
-
             // 由檔案取得檔案所在磁碟
             DriveInfo di = new DriveInfo(@"D:\_git\vcs\_1.data\______test_files1");
             richTextBox1.Text += "由檔案取得檔案所在磁碟 : " + di.RootDirectory + "\n";
 
             // Get the root directory and print out some information about it.
             DirectoryInfo dinfo9 = di.RootDirectory;
-            message += "根目錄 : ";
-            message += dinfo9.Attributes.ToString() + "\n";
+            richTextBox1.Text += "根目錄 : " + dinfo9.Attributes.ToString() + "\n";
 
             // Get the files in the directory and print out some information about them.
             FileInfo[] fis = dinfo9.GetFiles("*.*");
 
             foreach (FileInfo fi in fis)
             {
-                message += "檔案 : " + fi.Name + "   " + fi.LastAccessTime + "   " + fi.Length + "\n";
+                richTextBox1.Text += "檔案 : " + fi.Name + "   " + fi.LastAccessTime + "   " + fi.Length + "\n";
             }
 
             // Get the subdirectories directly that is under the root.
@@ -1487,7 +1484,7 @@ namespace vcs_DiskDirectoryFile1
 
             foreach (DirectoryInfo dinfo in dirInfos)
             {
-                message += "資料夾 : " + "   " + dinfo.Name + "\n";
+                richTextBox1.Text += "資料夾 : " + "   " + dinfo.Name + "\n";
             }
             richTextBox1.Text += message;
         }
@@ -1799,8 +1796,6 @@ namespace vcs_DiskDirectoryFile1
                 richTextBox1.Text += i.ToString() + "\t" + tmp + "\n";
             }
             */
-
-
         }
 
         private void bt_files15_Click(object sender, EventArgs e)
@@ -1818,7 +1813,6 @@ namespace vcs_DiskDirectoryFile1
 
             listView1.Items.Clear();
 
-            //遍歷文件夾實例
             //string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
             string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_book_magazine";
             //實例化DirectoryInfo對象
@@ -1856,9 +1850,6 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_files17_Click(object sender, EventArgs e)
         {
-            //遍歷文件夾實例2
-
-            //遍歷文件夾實例2
             //遍歷文件夾實例 2
             //string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic";
             string foldername = @"D:\_git\vcs\_1.data\______test_files1\__pic\_book_magazine";

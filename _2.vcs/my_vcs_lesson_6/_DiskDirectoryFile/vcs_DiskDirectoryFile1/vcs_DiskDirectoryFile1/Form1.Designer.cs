@@ -312,7 +312,6 @@
             this.bt_files12.Name = "bt_files12";
             this.bt_files12.Size = new System.Drawing.Size(200, 60);
             this.bt_files12.TabIndex = 57;
-            this.bt_files12.Text = "new 3";
             this.bt_files12.UseVisualStyleBackColor = true;
             this.bt_files12.Click += new System.EventHandler(this.bt_files12_Click);
             // 
@@ -323,7 +322,6 @@
             this.bt_files11.Name = "bt_files11";
             this.bt_files11.Size = new System.Drawing.Size(200, 60);
             this.bt_files11.TabIndex = 56;
-            this.bt_files11.Text = "new 2";
             this.bt_files11.UseVisualStyleBackColor = true;
             this.bt_files11.Click += new System.EventHandler(this.bt_files11_Click);
             // 
@@ -377,7 +375,6 @@
             this.bt_files05.Name = "bt_files05";
             this.bt_files05.Size = new System.Drawing.Size(200, 60);
             this.bt_files05.TabIndex = 52;
-            this.bt_files05.Text = "取得磁碟檔案資料2";
             this.bt_files05.UseVisualStyleBackColor = true;
             this.bt_files05.Click += new System.EventHandler(this.bt_files05_Click);
             // 
@@ -388,7 +385,7 @@
             this.bt_files04.Name = "bt_files04";
             this.bt_files04.Size = new System.Drawing.Size(200, 60);
             this.bt_files04.TabIndex = 51;
-            this.bt_files04.Text = "取得磁碟檔案資料1";
+            this.bt_files04.Text = "取得磁碟檔案資料";
             this.bt_files04.UseVisualStyleBackColor = true;
             this.bt_files04.Click += new System.EventHandler(this.bt_files04_Click);
             // 

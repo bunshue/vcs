@@ -1300,6 +1300,23 @@ namespace vcs_Process1
 
         private void button21_Click(object sender, EventArgs e)
         {
+            // 不允許重複執行本程式 的作法
+            // 在 Program.cs 裡面先檢查, 若 processes.Length > 1 , 即重複執行, 警示完離開程式
+
+            string MName = Process.GetCurrentProcess().MainModule.ModuleName;
+            string PName = Path.GetFileNameWithoutExtension(MName);
+
+            richTextBox1.Text += "MName : " + MName + "\n";
+            richTextBox1.Text += "PName : " + PName + "\n";
+
+            Process[] processes = Process.GetProcessesByName(PName);
+
+            richTextBox1.Text += "本程式執行次數 : " + processes.Length.ToString() + "\n";
+
+            if (processes.Length > 1)
+            {
+                MessageBox.Show("不允許重複執行本程式", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -1770,6 +1787,4 @@ Process.Start(regeditstr + "\\regedit.exe");//打开注册表
             //Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Form1());
-
-
 

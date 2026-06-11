@@ -346,6 +346,7 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(200, 60);
             this.button21.TabIndex = 23;
+            this.button21.Text = "不允許重複執行本程式";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
