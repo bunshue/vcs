@@ -863,7 +863,13 @@ namespace vcs_test_all_00_Usually
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //使用不同的NameSpace
 
+            // 使用IBM命名空間下的Notebook類別建立A物件
+            IBM.Notebook A = new IBM.Notebook();
+
+            // 使用Apple命名空間下的Notebook類別建立B物件
+            Apple.Notebook B = new Apple.Notebook();
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -1016,6 +1022,27 @@ namespace vcs_test_all_00_Usually
             protocol_Tls12 = (SecurityProtocolType)3072;
     }
 }
+
+//------------------------------------------------------------  # 60個
+
+// 定義 IBM 命名空間
+namespace IBM
+{
+    class Notebook
+    {
+
+    }
+}
+
+// 定義 Apple命名空間
+namespace Apple
+{
+    class Notebook
+    {
+
+    }
+}
+
 
 //6060
 //richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
