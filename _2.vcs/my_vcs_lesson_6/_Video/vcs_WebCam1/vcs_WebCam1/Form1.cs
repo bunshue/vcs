@@ -53,20 +53,6 @@ namespace vcs_WebCam1  //以此為準
             show_item_location();
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //Stop_Webcam();
-            if (Cam != null)
-            {
-                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
-                {
-                    Cam.Stop();   // WebCam stops capturing images.
-                    Cam.SignalToStop();
-                    Cam.WaitForStop();
-                }
-            }
-        }
-
         void show_item_location()
         {
             pictureBox1.Paint += new PaintEventHandler(DrawMessage);
@@ -75,6 +61,7 @@ namespace vcs_WebCam1  //以此為準
 
             richTextBox1.Location = new Point(BORDER + W_pictureBox1 + BORDER, BORDER);
             richTextBox1.Size = new Size(W_richTextBox1, H_richTextBox1);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             int dx = 80;
             int offset_y = 3;
@@ -87,8 +74,35 @@ namespace vcs_WebCam1  //以此為準
             groupBox1.Size = new Size(W_groupBox1, H_groupBox1);
             groupBox1.Location = new Point(BORDER + dx * 0, BORDER + H_pictureBox1 + BORDER);
 
+            //this.Size = new Size(1273, 750);
             this.Text = "";
+
             this.ClientSize = new Size(BORDER + W_pictureBox1 + BORDER + W_richTextBox1 + BORDER, BORDER + H_pictureBox1 + BORDER + H_groupBox1 + BORDER);
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //Stop_Webcam();
+            if (Cam != null)
+            {
+                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                {
+                    Cam.Stop();   // WebCam stops capturing images.
+                    Cam.SignalToStop();
+                    Cam.WaitForStop();
+                }
+            }
         }
 
         private void DrawMessage(object sender, PaintEventArgs e)
@@ -308,3 +322,16 @@ namespace vcs_WebCam1  //以此為準
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+

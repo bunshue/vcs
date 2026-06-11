@@ -36,6 +36,7 @@
             this.bt_record_stop = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt_open_folder = new System.Windows.Forms.Button();
             this.lb_main_mesg = new System.Windows.Forms.Label();
             this.bt_refresh = new System.Windows.Forms.Button();
             this.bt_exit = new System.Windows.Forms.Button();
@@ -43,7 +44,6 @@
             this.bt_snapshot = new System.Windows.Forms.Button();
             this.bt_start = new System.Windows.Forms.Button();
             this.timer_display = new System.Windows.Forms.Timer(this.components);
-            this.bt_open_folder = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -51,6 +51,7 @@
             // 
             // richTextBox1
             // 
+            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox1.Location = new System.Drawing.Point(130, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
@@ -95,9 +96,10 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(159, 82);
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(142, 50);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(71, 30);
+            this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 24;
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
@@ -120,6 +122,16 @@
             this.groupBox1.Size = new System.Drawing.Size(512, 141);
             this.groupBox1.TabIndex = 25;
             this.groupBox1.TabStop = false;
+            // 
+            // bt_open_folder
+            // 
+            this.bt_open_folder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_open_folder.Location = new System.Drawing.Point(446, 20);
+            this.bt_open_folder.Name = "bt_open_folder";
+            this.bt_open_folder.Size = new System.Drawing.Size(60, 60);
+            this.bt_open_folder.TabIndex = 60;
+            this.bt_open_folder.UseVisualStyleBackColor = true;
+            this.bt_open_folder.Click += new System.EventHandler(this.bt_open_folder_Click);
             // 
             // lb_main_mesg
             // 
@@ -191,20 +203,10 @@
             // 
             this.timer_display.Tick += new System.EventHandler(this.timer_display_Tick);
             // 
-            // bt_open_folder
-            // 
-            this.bt_open_folder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_open_folder.Location = new System.Drawing.Point(446, 20);
-            this.bt_open_folder.Name = "bt_open_folder";
-            this.bt_open_folder.Size = new System.Drawing.Size(60, 60);
-            this.bt_open_folder.TabIndex = 60;
-            this.bt_open_folder.UseVisualStyleBackColor = true;
-            this.bt_open_folder.Click += new System.EventHandler(this.bt_open_folder_Click);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.White;
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);

@@ -78,10 +78,24 @@ namespace vcs_WebCam5
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H + BORDER);
             button2.Location = new Point(x_st + dx * 0 + 150, y_st + dy * 0 + H + BORDER);
-            richTextBox1.Size = new Size(200, H);
+            richTextBox1.Size = new Size(300, H);
             richTextBox1.Location = new Point(W + 50, BORDER);
-            this.ClientSize = new Size(W + 300, H + 100);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.ClientSize = new Size(W + 360, H + 100);
+            this.Text = "vcs_WebCam5";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -130,3 +144,18 @@ namespace vcs_WebCam5
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
+

@@ -31,6 +31,8 @@ namespace vcs_WebCam5c
         {
             show_item_location();
 
+            //6060
+
             //檢查錄影存檔的資料夾
             string Path = @"C:\dddddddddd";
             if (Directory.Exists(Path) == false)     //確認資料夾是否存在
@@ -88,12 +90,26 @@ namespace vcs_WebCam5c
             int dy = H + 50;
 
             pictureBox1.Size = new Size(W, H);
-
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
             richTextBox1.Size = new Size(200, 600);
             richTextBox1.Location = new Point(1000, 70);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            //this.Size = new Size(1000, 750);
+            this.Text = "vcs_WebCam5c";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -111,7 +127,6 @@ namespace vcs_WebCam5c
             }
         }
 
-
         private void toggleOption(int camIndex, int optionIndex, bool value)
         {
             switch (optionIndex)
@@ -127,7 +142,18 @@ namespace vcs_WebCam5c
                     break;
             }
         }
-
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
 

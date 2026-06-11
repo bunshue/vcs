@@ -56,22 +56,10 @@ namespace vcs_WebCam4_MotionDetection  // 標準 移動偵測
         {
             show_item_location();
 
+            //------------------------------------------------------------  # 60個
+
             Init_WebcamSetup();
             Start_Webcam();
-        }
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //Stop_Webcam();
-            if (Cam != null)
-            {
-                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
-                {
-                    Cam.Stop();   // WebCam stops capturing images.
-                    Cam.SignalToStop();
-                    Cam.WaitForStop();
-                }
-            }
         }
 
         void show_item_location()
@@ -89,8 +77,36 @@ namespace vcs_WebCam4_MotionDetection  // 標準 移動偵測
             bt_motion_detection.Location = new Point(x_st + W + BORDER, 10);
             richTextBox1.Size = new Size(250, H - 40);
             richTextBox1.Location = new Point(x_st + W + BORDER, 50);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.ClientSize = new Size(W + 250 + BORDER * 3, H + BORDER * 2);
+            //this.Size = new Size(1273, 750);
+            this.Text = "";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //Stop_Webcam();
+            if (Cam != null)
+            {
+                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                {
+                    Cam.Stop();   // WebCam stops capturing images.
+                    Cam.SignalToStop();
+                    Cam.WaitForStop();
+                }
+            }
         }
 
         void Init_WebcamSetup() //最小化WebCam設定
@@ -211,3 +227,16 @@ namespace vcs_WebCam4_MotionDetection  // 標準 移動偵測
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+

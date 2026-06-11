@@ -40,18 +40,6 @@ namespace vcs_WebCam5b
             show_item_location();
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //離開程式前, 關閉相機
-            try
-            {
-                this.webcam.StopCapture();
-            }
-            catch (Exception ex)
-            {
-            }
-        }
-
         void show_item_location()
         {
             pictureBox1.Size = new Size(W_pictureBox1, H_pictureBox1);
@@ -59,6 +47,7 @@ namespace vcs_WebCam5b
 
             richTextBox1.Location = new Point(BORDER + W_pictureBox1 + BORDER, BORDER);
             richTextBox1.Size = new Size(W_richTextBox1, H_richTextBox1);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             int dx = 80;
             int offset_y = 3;
@@ -71,8 +60,31 @@ namespace vcs_WebCam5b
             groupBox1.Size = new Size(W_groupBox1, H_groupBox1);
             groupBox1.Location = new Point(BORDER + dx * 0, BORDER + H_pictureBox1 + BORDER);
 
-            this.Text = "";
             this.ClientSize = new Size(BORDER + W_pictureBox1 + BORDER + W_richTextBox1 + BORDER, BORDER + H_pictureBox1 + BORDER + H_groupBox1 + BORDER);
+            this.Text = "";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //離開程式前, 關閉相機
+            try
+            {
+                this.webcam.StopCapture();
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -168,7 +180,6 @@ namespace vcs_WebCam5b
             }
             */
         }
-
     }
 
     class WebCam
@@ -236,3 +247,16 @@ namespace vcs_WebCam5b
         int Height = 0;
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+

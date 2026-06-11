@@ -174,38 +174,6 @@ namespace vcs_WebCam2
             Init_WebcamSetup();
         }
 
-        //窗口關閉事件
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            try
-            {
-                if (Cam != null)
-                {
-                    //關閉WebCam
-                    if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
-                    {
-                        Cam.Stop();   // WebCam stops capturing images.
-                        Cam.SignalToStop();
-                        Cam.WaitForStop();
-                        while (Cam.IsRunning)
-                        {
-                        }
-                        Cam = null;
-                    }
-                }
-                //System.Environment.Exit(0);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            //C# 強制關閉 Process
-            Process.GetCurrentProcess().Kill();
-
-            Application.Exit();
-        }
-
         void show_item_location()
         {
             int x_st;
@@ -223,17 +191,8 @@ namespace vcs_WebCam2
             richTextBox1.Size = new Size(W_richTextBox1, H_richTextBox1);
             richTextBox1.Location = new Point(BORDER + W_pictureBox1 + BORDER, BORDER + H_groupBox_webcam + BORDER);
 
-            int w = BORDER + W_groupBox_webcam + BORDER;
-            int h = BORDER + H_groupBox_webcam + BORDER + H_pictureBox1 + BORDER;
-            this.ClientSize = new Size(w, h);
-
-            int W = Screen.PrimaryScreen.WorkingArea.Width;
-            int H = Screen.PrimaryScreen.WorkingArea.Height;
-
-            this.Location = new Point((W - w) / 2, (H - h) / 2);    //置中顯示
-
-            w = (W_groupBox_webcam - BORDER * 5 - 100) / 4;
-            h = 190;
+            int w = (W_groupBox_webcam - BORDER * 5 - 100) / 4;
+            int h = 190;
             groupBox1.Size = new Size(w, h);
             groupBox2.Size = new Size(w + 120, h);
             groupBox3.Size = new Size(w + 120, h);
@@ -332,6 +291,11 @@ namespace vcs_WebCam2
             bt_start.Enabled = true;
             bt_stop.Enabled = false;
 
+
+            w = BORDER + W_groupBox_webcam + BORDER;
+            h = BORDER + H_groupBox_webcam + BORDER + H_pictureBox1 + BORDER;
+            this.ClientSize = new Size(w, h);
+
             //設定執行後的表單起始位置, 正中央
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
@@ -340,6 +304,40 @@ namespace vcs_WebCam2
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        //窗口關閉事件
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                if (Cam != null)
+                {
+                    //關閉WebCam
+                    if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                    {
+                        Cam.Stop();   // WebCam stops capturing images.
+                        Cam.SignalToStop();
+                        Cam.WaitForStop();
+                        while (Cam.IsRunning)
+                        {
+                        }
+                        Cam = null;
+                    }
+                }
+                //System.Environment.Exit(0);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            //C# 強制關閉 Process
+            Process.GetCurrentProcess().Kill();
+
+            Application.Exit();
         }
 
         void Init_WebcamSetup()         //讀出目前相機資訊 存在各list, comboBox1~3和richTextBox1裏
@@ -1691,5 +1689,19 @@ class CameraMonitor
 
 }
  */
+
+
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
 
 

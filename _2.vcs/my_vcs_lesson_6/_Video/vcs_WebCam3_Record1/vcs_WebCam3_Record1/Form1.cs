@@ -63,45 +63,16 @@ namespace vcs_WebCam3_Record1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
             int time = Properties.Settings.Default.limit_record_time_sec;
             if ((time >= 5) && (time <= 50))
                 limit_record_time_sec = time;
             numericUpDown_limit_record_time.Value = limit_record_time_sec;
             cb_show_time.Checked = Properties.Settings.Default.show_time;
-
-            show_item_location();
             //bt_start_Click(sender, e);
-        }
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Properties.Settings.Default.show_time = cb_show_time.Checked;
-            Properties.Settings.Default.Save();
-
-            //離開程式前, 關閉相機(錄影與播放)
-            ///先關閉錄影  再關閉播放
-
-            if (flag_recording == true)
-            {
-                try
-                {
-                    bt_record_stop_Click(sender, e);
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "xxx錯誤訊息e01 : " + ex.Message + "\n";
-                }
-            }
-
-            if (Cam != null)
-            {
-                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
-                {
-                    Cam.Stop();   // WebCam stops capturing images.
-                    Cam.SignalToStop();
-                    Cam.WaitForStop();
-                }
-            }
         }
 
         void show_item_location()
@@ -125,7 +96,6 @@ namespace vcs_WebCam3_Record1
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + H + BORDER);
 
             bt_record_stop.Enabled = false;
-            this.Size = new Size(1000, 750);
             x_st = 10;
             y_st = 20;
             dx = 70 + 8;
@@ -169,11 +139,51 @@ namespace vcs_WebCam3_Record1
             bt_record_start.Enabled = false;
             bt_record_stop.Enabled = false;
             bt_record_limit_time.Enabled = false;
+
+            this.Size = new Size(1000, 750);
+            this.Text = "vcs_WebCam3_Record1";
+
+            //設定執行後的表單起始位置, 正中央
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((Screen.PrimaryScreen.Bounds.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.Bounds.Height - this.Size.Height) / 2);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.show_time = cb_show_time.Checked;
+            Properties.Settings.Default.Save();
+
+            //離開程式前, 關閉相機(錄影與播放)
+            ///先關閉錄影  再關閉播放
+
+            if (flag_recording == true)
+            {
+                try
+                {
+                    bt_record_stop_Click(sender, e);
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "xxx錯誤訊息e01 : " + ex.Message + "\n";
+                }
+            }
+
+            if (Cam != null)
+            {
+                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                {
+                    Cam.Stop();   // WebCam stops capturing images.
+                    Cam.SignalToStop();
+                    Cam.WaitForStop();
+                }
+            }
         }
 
         private void bt_open_folder_Click(object sender, EventArgs e)
@@ -1055,3 +1065,18 @@ namespace vcs_WebCam3_Record1
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+
+
