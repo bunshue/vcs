@@ -46,6 +46,7 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -256,11 +257,20 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(567, 12);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(432, 620);
+            this.richTextBox1.TabIndex = 9;
+            this.richTextBox1.Text = "";
+            // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1011, 644);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.splitContainer1);
@@ -302,6 +312,7 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

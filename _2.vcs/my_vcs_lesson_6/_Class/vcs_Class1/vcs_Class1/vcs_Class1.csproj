@@ -59,7 +59,6 @@
     <Compile Include="MyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PersonData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

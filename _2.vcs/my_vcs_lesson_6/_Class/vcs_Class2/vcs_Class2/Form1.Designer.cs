@@ -124,7 +124,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(200, 60);
             this.button0.TabIndex = 129;
-            this.button0.Text = "使用類別的靜態方法";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -157,7 +156,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 126;
-            this.button5.Text = "class my_book";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -190,7 +188,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 123;
-            this.button2.Text = "class book";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 

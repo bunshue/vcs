@@ -26,11 +26,11 @@ namespace 利用網卡序列號設計軟件註冊程序
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            label2.Text = Environment.MachineName.ToString();//得到計算機名
-            label4.Text = GetNetCardMacAddress();//得到網卡訊息
+            richTextBox1.Text += "計算機名 : " + Environment.MachineName.ToString() + "\n";
+            richTextBox1.Text += "網卡位址 : " + GetNetCardMacAddress() + "\n";
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         //獲得網卡訊息函數
         public string GetNetCardMacAddress()
@@ -48,7 +48,7 @@ namespace 利用網卡序列號設計軟件註冊程序
             return str;
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -82,7 +82,7 @@ namespace 利用網卡序列號設計軟件註冊程序
             }
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         //註冊
         private void button2_Click(object sender, EventArgs e)
@@ -158,3 +158,17 @@ namespace 利用網卡序列號設計軟件註冊程序
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

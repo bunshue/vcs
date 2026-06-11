@@ -106,35 +106,8 @@ namespace vcs_Class2
 
         //------------------------------------------------------------  # 60個
 
-        class StudentScore
-        {
-            //第一個靜態方法-計算總分
-            public static uint Total(uint a, uint b, uint c)
-            {
-                uint sum = a + b + c;//總分
-                return sum;//回傳加總結果         
-            }
-            //第二個靜態方法-算平均分數
-            public static float Average(string word, uint number)
-            {
-                float result = number / 3.0F;//平均
-                return result;
-            }
-        }
-
         private void button0_Click(object sender, EventArgs e)
         {
-            //使用[類別的靜態方法], 外人可以直接使用
-            string name = "david";
-            uint math = 90;
-            uint eng = 80;
-            uint chin = 70;
-
-            //直接以類別來呼叫靜態方法Total()、Average()
-            uint score = StudentScore.Total(math, eng, chin);
-            float avg = StudentScore.Average("平均分數", score);
-
-            richTextBox1.Text += "姓名 : " + name + "\t總分 : " + score + "\t平均 : " + avg + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -192,17 +165,10 @@ namespace vcs_Class2
             Mary3.GetShow();
         }
 
-        class Book
-        {
-            public int books; //宣告books為公用變數
-        }
+        //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //class book
-            Book eng = new Book();
-            eng.books = 10;
-            richTextBox1.Text += "目前英文類書籍共有 : " + eng.books + " 本\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -266,23 +232,8 @@ namespace vcs_Class2
 
         //------------------------------------------------------------  # 60個
 
-        public class MyBook
-        {
-            public string Id { get; set; }
-            public string BkName { get; set; }
-            public int Price { get; set; }
-            public string Img { get; set; }
-        }
-
         private void button5_Click(object sender, EventArgs e)
         {
-            //class 範例
-            MyBook[] bk = new MyBook[]
-            {
-                new MyBook(){ Id="AEL014200", BkName="Visual C# 2012 程式設計經典", Price=650, Img="images/cs2012.jpg"},
-                new MyBook(){ Id="AEL009400", BkName="Visual C# 2012 基礎必修課", Price=520, Img="images/cs2010.jpg"},
-                new MyBook(){ Id="AEL009500", BkName="Visual Basic 2010 程式設計經典", Price=520, Img="images/vb2010.jpg"}
-            };
         }
 
         //------------------------------------------------------------  # 60個

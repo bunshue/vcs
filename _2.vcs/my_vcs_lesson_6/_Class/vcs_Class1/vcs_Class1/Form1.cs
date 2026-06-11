@@ -13,8 +13,6 @@ using System.Threading;
 
 //方案總管/右鍵/加入/類別/預設Class1.cs改成MyClass.cs
 
-//方案總管/右鍵/加入/類別/預設Class1.cs改成PersonData.cs
-
 //方案總管/右鍵/加入/Windows Form/預設Form2.cs改成MyForm.cs
 //方案總管 點選MyForm.Designer.cs 刪除之
 //修改MyForm.cs
@@ -149,10 +147,8 @@ namespace vcs_Class1
             //小的groupBox
             W = 200;
             H = 180;
-            groupBox2.Size = new Size(W, H);
-            groupBox3.Size = new Size(W, H);
+            groupBox2.Size = new Size(W*3+20, H);
             groupBox1.Size = new Size(W, H);
-            groupBox5.Size = new Size(W, H);
             groupBox6.Size = new Size(W, H);
             groupBox8.Size = new Size(W, H);
             groupBox10.Size = new Size(W, H);
@@ -174,9 +170,7 @@ namespace vcs_Class1
             int dx = W + 10;
             int dy = 180 + 10;
             groupBox2.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            groupBox3.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            groupBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            groupBox5.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            groupBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             groupBox6.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             groupBox8.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             groupBox10.Location = new Point(x_st + dx * 1, y_st + dy * 1);
@@ -195,20 +189,21 @@ namespace vcs_Class1
 
             x_st = 10;
             y_st = 20;
-            dx = 200 + 10;
+            dx = 180 + 10;
             dy = 60 + 10;
 
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
-            button10.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button9.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button9.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+
+            button12.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 2, y_st + dy * 1);
 
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
-            button12.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button11.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
             button14.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button13.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -306,31 +301,38 @@ namespace vcs_Class1
 
         private void button6_Click(object sender, EventArgs e)
         {
-            // 實例化Animal類別
-            // 建立物件, 修改屬性, 使用方法
+            // 實例化Animal類別, 建立物件, 修改屬性, 使用方法, 2種寫法
 
             Animal dog1 = new Animal();
-
             dog1.number = 1;
-            dog1.type = "Poodle";	//貴賓犬
+            dog1.type = "Poodle";  // 貴賓犬
             dog1.name = "Peter";
             dog1.Show = "貴賓犬";
             richTextBox1.Text += "取出名稱 : " + dog1.Show + "\n";
             richTextBox1.Text += "取出參數 : " + dog1.recorder + "\n";
 
-            Animal dog2 = new Animal();
-
-            dog2.number = 2;
-            dog2.type = "Maltese";	//馬爾濟斯
-            dog2.name = "Mary";
-            dog2.Show = "馬爾濟斯";
+            Animal dog2 = new Animal()
+            {
+                number = 2,
+                type = "Maltese",  // 馬爾濟斯
+                name = "Mary",
+                Show = "馬爾濟斯",
+            };
             richTextBox1.Text += "取出名稱 : " + dog2.Show + "\n";
             richTextBox1.Text += "取出參數 : " + dog2.recorder + "\n";
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //圖形範例
 
+            richTextBox1.Text += "新增一個Circle物件, 給定參數2\n";
+            Circle c1 = new Circle(2);
+            richTextBox1.Text += "圓c1的半徑 = " + c1.getRadius() + "\t" + "圓c1的面積 = " + c1.getArea() + "\n";
+
+            richTextBox1.Text += "新增一個Cylinder物件, 給定參數5, 10\n";
+            Cylinder cy1 = new Cylinder(5, 10);
+            richTextBox1.Text += "圓柱體cy1的半徑 = " + cy1.getRadius() + "\t" + "圓柱體cy1的高度 = " + cy1.getLength() + "\t" + "圓柱體cy1的表面積 = " + cy1.getArea() + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -421,14 +423,25 @@ namespace vcs_Class1
             //p1.ADDR = "123"; ADDR不可寫，因此此行會顯示readonly無法編譯
         }
 
+        //------------------------------------------------------------  # 60個
+
+        class Book
+        {
+            public int books; //宣告books為公用變數
+        }
+
         private void button9_Click(object sender, EventArgs e)
         {
-
+            //class book
+            Book eng = new Book();
+            eng.books = 10;
+            richTextBox1.Text += "目前英文類書籍共有 : " + eng.books + " 本\n";
         }
 
         //------------------------------------------------------------  # 60個
 
-        //PersonData範例 ST
+        //Class 範例 ST
+        //類別的定義在 MyClass.cs
         private void button1_Click(object sender, EventArgs e)
         {
             int y = 2006;
@@ -488,30 +501,34 @@ namespace vcs_Class1
         {
 
         }
-        //PersonData範例 SP
+        //Class 範例 SP
 
         //------------------------------------------------------------  # 60個
 
-        //圖形範例 ST
-
-        //類別的定義在 MyClass.cs
+        public class MyBook
+        {
+            public string Id { get; set; }
+            public string BkName { get; set; }
+            public int Price { get; set; }
+            public string Img { get; set; }
+        }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "新增一個Circle物件, 給定參數2\n";
-            Circle c1 = new Circle(2);
-            richTextBox1.Text += "圓c1的半徑 = " + c1.getRadius() + "\t" + "圓c1的面積 = " + c1.getArea() + "\n";
-
-            richTextBox1.Text += "新增一個Cylinder物件, 給定參數5, 10\n";
-            Cylinder cy1 = new Cylinder(5, 10);
-            richTextBox1.Text += "圓柱體cy1的半徑 = " + cy1.getRadius() + "\t" + "圓柱體cy1的高度 = " + cy1.getLength() + "\t" + "圓柱體cy1的表面積 = " + cy1.getArea() + "\n";
+            //class 範例
+            MyBook[] bk = new MyBook[]
+            {
+                new MyBook(){ Id="AEL014200", BkName="Visual C# 2012 程式設計經典", Price=650, Img="images/cs2012.jpg"},
+                new MyBook(){ Id="AEL009400", BkName="Visual C# 2012 基礎必修課", Price=520, Img="images/cs2010.jpg"},
+                new MyBook(){ Id="AEL009500", BkName="Visual Basic 2010 程式設計經典", Price=520, Img="images/vb2010.jpg"}
+            };
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button11_Click(object sender, EventArgs e)
         {
         }
-
-        //圖形範例 SP
 
         //------------------------------------------------------------  # 60個
 
@@ -1379,9 +1396,37 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
+        class StudentScore
+        {
+            //第一個靜態方法-計算總分
+            public static uint Total(uint a, uint b, uint c)
+            {
+                uint sum = a + b + c;//總分
+                return sum;//回傳加總結果         
+            }
+            //第二個靜態方法-算平均分數
+            public static float Average(string word, uint number)
+            {
+                float result = number / 3.0F;//平均
+                return result;
+            }
+        }
+
         private void bt_class_new_08_Click(object sender, EventArgs e)
         {
+            //使用類別的靜態方法
 
+            //使用[類別的靜態方法], 外人可以直接使用
+            string name = "david";
+            uint math = 90;
+            uint eng = 80;
+            uint chin = 70;
+
+            //直接以類別來呼叫靜態方法Total()、Average()
+            uint score = StudentScore.Total(math, eng, chin);
+            float avg = StudentScore.Average("平均分數", score);
+
+            richTextBox1.Text += "姓名 : " + name + "\t總分 : " + score + "\t平均 : " + avg + "\n";
         }
 
         //------------------------------------------------------------  # 60個
@@ -1560,10 +1605,11 @@ namespace vcs_Class1
                 strDicPath = Application.StartupPath + "//";
                 strPath = strDicPath + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt";
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 strDicPath = "C:/temp/log/";
                 strPath = strDicPath + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt";
+                Console.WriteLine(ex.Message);
             }
 
             if (!Directory.Exists(strDicPath))

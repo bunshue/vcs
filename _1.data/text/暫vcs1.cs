@@ -1,4 +1,38 @@
 ﻿
+
+撈出一層檔案
+撈出多層檔案
+
+撈出多層檔案 標準版 僅顯示檔名
+
+
+命令行 msinfo32
+
+
+DataTable
+1. 建立DataTable物件
+2. 建立DataTable頁面
+3. 加入DataTable欄位
+4. 加入DataTable資料
+
+
+
+
+this.FormBorderStyle = FormBorderStyle.None;//設定無邊框
+this.FormBorderStyle = FormBorderStyle.None;//設定無邊框
+
+
+測試Thread，使用thread播放聲音，這樣就不會占用主程序
+
+pictureBox1 能夠顯示部分圖片 然後接收空白鍵 換圖片的下一部份
+
+
+
+
+
+
+
+
             Tension = trkTension.Value / 10f;
             txtTension.Text = Tension.ToString("0.0");
 

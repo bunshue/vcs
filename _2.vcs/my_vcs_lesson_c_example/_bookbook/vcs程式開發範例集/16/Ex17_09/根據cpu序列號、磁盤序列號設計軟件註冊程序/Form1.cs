@@ -24,7 +24,7 @@ namespace 根據cpu序列號_磁盤序列號設計軟件註冊程序
 
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         // 取得設備硬盤的卷標號
         public string GetDiskVolumeSerialNumber()
@@ -54,6 +54,7 @@ namespace 根據cpu序列號_磁盤序列號設計軟件註冊程序
         {
             label2.Text = getCpu() + GetDiskVolumeSerialNumber();//獲得24位Cpu和硬盤序列號
 
+            richTextBox1.Text += "獲得24位Cpu和硬盤序列號 : " + getCpu() + GetDiskVolumeSerialNumber() + "\n";
             richTextBox1.Text += "CPU : " + getCpu() + "\n";
             richTextBox1.Text += "HDD : " + GetDiskVolumeSerialNumber() + "\n";
 
@@ -88,6 +89,8 @@ namespace 根據cpu序列號_磁盤序列號設計軟件註冊程序
         //產生註冊碼
         private void button2_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "產生註冊碼\n";
+
             if (label2.Text != "")
             {
                 //把機器碼存入數組中
@@ -141,6 +144,8 @@ namespace 根據cpu序列號_磁盤序列號設計軟件註冊程序
         //註冊
         private void button3_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "註冊\n";
+
             if (label3.Text != "")
             {
                 if (textBox1.Text.TrimEnd().Equals(label3.Text.TrimEnd()))
@@ -171,4 +176,17 @@ namespace 根據cpu序列號_磁盤序列號設計軟件註冊程序
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
 

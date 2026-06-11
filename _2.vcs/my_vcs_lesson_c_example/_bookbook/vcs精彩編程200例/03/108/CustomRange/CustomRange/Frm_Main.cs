@@ -41,7 +41,7 @@ namespace SetPrintRange
         private void Form1_Load(object sender, EventArgs e)
         {
             //txt_Range.Text = "1,2,3-5";
-            txt_Range.Text = "1-2";
+            txt_Range.Text = "2-3";
 
             add_datagridview(dataGridView1);
 
@@ -60,6 +60,8 @@ namespace SetPrintRange
             richTextBox1.Text += "資料總數 : " + (R - 2).ToString() + " 行\n";
             richTextBox1.Text += "總頁數 : " + intPage.ToString() + " 頁\n";
         }
+
+        //------------------------------------------------------------  # 60個
 
         //标识全部打印
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -341,5 +343,18 @@ namespace SetPrintRange
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
 
 

@@ -53,6 +53,8 @@ namespace GetDataStruct
             }
         }
 
+        //------------------------------------------------------------  # 60個
+
         public void ExportData(DataGridView srcDgv, string fileName)//導出數據,傳入一個datagridview和一個文件路徑
         {
             string type = fileName.Substring(fileName.IndexOf(".") + 1);//獲得數據類型
@@ -206,3 +208,17 @@ namespace GetDataStruct
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

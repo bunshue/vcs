@@ -24,6 +24,8 @@ namespace CorporationEmployeeICCard
             richTextBox1.Text += "lblTime : " + DateTime.Now.ToString() + "\n";//当进行考勤的时候在窗体中显示当前时间
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void 添加员工ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form2 frm2 = new Form2();
@@ -139,3 +141,17 @@ namespace CorporationEmployeeICCard
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

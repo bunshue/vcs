@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using Microsoft.Win32;
 
 namespace QuickStartup
@@ -21,6 +22,8 @@ namespace QuickStartup
         {
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -40,3 +43,17 @@ namespace QuickStartup
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

@@ -34,17 +34,15 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button9 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -94,9 +92,7 @@
             this.timer6 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox8.SuspendLayout();
@@ -125,7 +121,7 @@
             // 
             this.groupBox1.Controls.Add(this.button8);
             this.groupBox1.Controls.Add(this.button7);
-            this.groupBox1.Location = new System.Drawing.Point(423, 6);
+            this.groupBox1.Location = new System.Drawing.Point(623, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(200, 192);
             this.groupBox1.TabIndex = 8;
@@ -156,14 +152,29 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button11);
+            this.groupBox2.Controls.Add(this.button9);
             this.groupBox2.Controls.Add(this.button5);
+            this.groupBox2.Controls.Add(this.button12);
+            this.groupBox2.Controls.Add(this.button10);
             this.groupBox2.Controls.Add(this.button6);
             this.groupBox2.Location = new System.Drawing.Point(12, 6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 192);
+            this.groupBox2.Size = new System.Drawing.Size(575, 192);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Animal範例";
+            this.groupBox2.Text = "簡單使用類別";
+            // 
+            // button9
+            // 
+            this.button9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button9.Location = new System.Drawing.Point(206, 81);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(180, 60);
+            this.button9.TabIndex = 9;
+            this.button9.Text = "增加物件";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button5
             // 
@@ -172,8 +183,20 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(180, 60);
             this.button5.TabIndex = 9;
+            this.button5.Text = "增加物件";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button10
+            // 
+            this.button10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button10.Location = new System.Drawing.Point(206, 21);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(180, 60);
+            this.button10.TabIndex = 8;
+            this.button10.Text = "增加物件";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button6
             // 
@@ -185,38 +208,6 @@
             this.button6.Text = "增加物件";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.button9);
-            this.groupBox3.Controls.Add(this.button10);
-            this.groupBox3.Location = new System.Drawing.Point(218, 6);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(200, 192);
-            this.groupBox3.TabIndex = 11;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Person範例";
-            // 
-            // button9
-            // 
-            this.button9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button9.Location = new System.Drawing.Point(15, 81);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(180, 60);
-            this.button9.TabIndex = 9;
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
-            // 
-            // button10
-            // 
-            this.button10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button10.Location = new System.Drawing.Point(15, 21);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(180, 60);
-            this.button10.TabIndex = 8;
-            this.button10.Text = "增加物件";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // groupBox4
             // 
@@ -272,21 +263,10 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.button11);
-            this.groupBox5.Controls.Add(this.button12);
-            this.groupBox5.Location = new System.Drawing.Point(629, 6);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(200, 192);
-            this.groupBox5.TabIndex = 11;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "圖形範例";
-            // 
             // button11
             // 
             this.button11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button11.Location = new System.Drawing.Point(15, 81);
+            this.button11.Location = new System.Drawing.Point(389, 81);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(180, 60);
             this.button11.TabIndex = 9;
@@ -296,7 +276,7 @@
             // button12
             // 
             this.button12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button12.Location = new System.Drawing.Point(15, 21);
+            this.button12.Location = new System.Drawing.Point(389, 21);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(180, 60);
             this.button12.TabIndex = 8;
@@ -688,6 +668,7 @@
             this.bt_class_new_08.Name = "bt_class_new_08";
             this.bt_class_new_08.Size = new System.Drawing.Size(180, 60);
             this.bt_class_new_08.TabIndex = 17;
+            this.bt_class_new_08.Text = "使用類別的靜態方法";
             this.bt_class_new_08.UseVisualStyleBackColor = true;
             this.bt_class_new_08.Click += new System.EventHandler(this.bt_class_new_08_Click);
             // 
@@ -810,9 +791,7 @@
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.groupBox6);
-            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.richTextBox1);
@@ -821,9 +800,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
@@ -850,7 +827,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.GroupBox groupBox4;
@@ -858,7 +834,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.GroupBox groupBox6;
