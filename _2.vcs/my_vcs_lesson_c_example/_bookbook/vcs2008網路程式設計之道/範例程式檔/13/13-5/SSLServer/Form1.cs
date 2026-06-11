@@ -12,43 +12,48 @@ using System.Threading;
 
 namespace SSLServer
 {
-  public partial class Form1 : Form
-  {
-    public Form1()
+    public partial class Form1 : Form
     {
-      InitializeComponent();
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string hostname = Dns.GetHostName();
+                IPAddress serverIP = Dns.Resolve(hostname).AddressList[0];
+
+                // 設定SSL通訊協定之通訊通訊埠為443
+                string Port = "443";
+
+                TcpListener tcpListener = new TcpListener(serverIP, Int32.Parse(Port));
+
+                tcpListener.Start();
+
+                ListBox1.Items.Clear();
+
+                ListBox1.Items.Add("SSL server started at: " + serverIP.ToString() + ":" + Port);
+
+                ListenClient lc = new ListenClient(tcpListener, this);
+
+                // 執行緒
+                ThreadStart serverThreadStart = new ThreadStart(lc.ServerThreadProc);
+                Thread serverthread = new Thread(serverThreadStart);
+
+                serverthread.Start();
+            }
+            catch (Exception ex)
+            {
+                ListBox1.Items.Add(ex.StackTrace.ToString());
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
-
-    private void btnStart_Click(object sender, EventArgs e)
-    {
-      try
-      {
-        string hostname = Dns.GetHostName();
-        IPAddress serverIP = Dns.Resolve(hostname).AddressList[0];
-
-        // 設定SSL通訊協定之通訊通訊埠為443
-        string Port = "443";
-
-        TcpListener tcpListener = new TcpListener(serverIP, Int32.Parse(Port));
-
-        tcpListener.Start();
-
-        ListBox1.Items.Clear();
-
-        ListBox1.Items.Add("SSL server started at: " + serverIP.ToString() + ":" + Port);
-
-        ListenClient lc = new ListenClient(tcpListener, this);
-
-        // 執行緒
-        ThreadStart serverThreadStart = new ThreadStart(lc.ServerThreadProc);
-        Thread serverthread = new Thread(serverThreadStart);
-
-        serverthread.Start();
-      }
-      catch (Exception ex)
-      {
-        ListBox1.Items.Add(ex.StackTrace.ToString());
-      }
-    }
-  }
 }

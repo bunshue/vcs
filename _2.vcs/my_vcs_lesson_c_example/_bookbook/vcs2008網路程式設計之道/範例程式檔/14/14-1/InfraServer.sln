@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfraServer", "InfraServer\InfraServer.csproj", "{4CED2E63-ED86-43DC-8432-52DF055A3428}"
 EndProject
 Global

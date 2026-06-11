@@ -325,18 +325,6 @@ TextBox設定星號
 
 //------------------------------------------------------------  # 60個
 
-helpProvider1 的用法
-
-            helpProvider1.SetShowHelp(textBox1, true);
-            helpProvider1.SetHelpString(textBox1, "請輸入帳號！");
-
-            helpProvider1.SetShowHelp(textBox2, true);
-            helpProvider1.SetHelpString(textBox2, "請輸入密碼！");
-
-            helpProvider1.SetShowHelp(button1, true);
-            helpProvider1.SetHelpString(button1, "帳號輸入後，點這裡喔！");
-
-
 TrackBar範例
 
             trackBar1.Minimum = 0;

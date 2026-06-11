@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoIP", "VoIP\VoIP.csproj", "{F247DCC2-3C6B-49A2-B577-71D65DB27DB8}"
 EndProject
 Global

@@ -8,38 +8,38 @@ using System.Threading;
 
 namespace FTPServer
 {
-  class FTPServer
-  {
-    static void Main(string[] args)
+    class FTPServer
     {
-      try
-      {
-        string hostname = Dns.GetHostName();
-        IPAddress serverIP = Dns.Resolve(hostname).AddressList[0];
+        static void Main(string[] args)
+        {
+            try
+            {
+                string hostname = Dns.GetHostName();
+                IPAddress serverIP = Dns.Resolve(hostname).AddressList[0];
 
-        // Port = 21
-        string Port = "21";
+                // Port = 21
+                string Port = "21";
 
-        IPEndPoint serverhost = new IPEndPoint(serverIP, Int32.Parse(Port));
+                IPEndPoint serverhost = new IPEndPoint(serverIP, Int32.Parse(Port));
 
-        System.Net.Sockets.TcpListener tcpListener = new TcpListener(serverIP, Int32.Parse(Port));
+                System.Net.Sockets.TcpListener tcpListener = new TcpListener(serverIP, Int32.Parse(Port));
 
-        tcpListener.Start();
+                tcpListener.Start();
 
-        Console.WriteLine("FTP server started at: " + serverIP.ToString() + ":" + Port);
+                Console.WriteLine("FTP server started at: " + serverIP.ToString() + ":" + Port);
 
-        FTPSession ftpSession = new FTPSession(tcpListener);
+                FTPSession ftpSession = new FTPSession(tcpListener);
 
-        // °õ¦æºü
-        ThreadStart serverThreadStart = new ThreadStart(ftpSession.FTPSessionThread);
-        Thread serverthread = new Thread(serverThreadStart);
+                // °õ¦æºü
+                ThreadStart serverThreadStart = new ThreadStart(ftpSession.FTPSessionThread);
+                Thread serverthread = new Thread(serverThreadStart);
 
-        serverthread.Start();
-      }
-      catch (Exception ex)
-      {
-        Console.WriteLine(ex.StackTrace.ToString());
-      }
+                serverthread.Start();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace.ToString());
+            }
+        }
     }
-  }
 }

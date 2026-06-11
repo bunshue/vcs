@@ -8,39 +8,39 @@ using System.Threading;
 
 namespace WebServer
 {
-  class WebServer
-  {
-    static void Main(string[] args)
+    class WebServer
     {
-      try
-      {
-        //IPAddress serverIP = IPAddress.Parse("127.0.0.1") ;
-        string hostname = Dns.GetHostName();
-        IPAddress serverIP = Dns.Resolve(hostname).AddressList[0];
+        static void Main(string[] args)
+        {
+            try
+            {
+                //IPAddress serverIP = IPAddress.Parse("127.0.0.1") ;
+                string hostname = Dns.GetHostName();
+                IPAddress serverIP = Dns.Resolve(hostname).AddressList[0];
 
-        // HTTP Server Port = 80
-        string Port = "80";
+                // HTTP Server Port = 80
+                string Port = "80";
 
-        IPEndPoint serverhost = new IPEndPoint(serverIP, Int32.Parse(Port));
+                IPEndPoint serverhost = new IPEndPoint(serverIP, Int32.Parse(Port));
 
-        System.Net.Sockets.TcpListener tcpListener = new TcpListener(serverIP, Int32.Parse(Port));
+                System.Net.Sockets.TcpListener tcpListener = new TcpListener(serverIP, Int32.Parse(Port));
 
-        tcpListener.Start();
+                tcpListener.Start();
 
-        Console.WriteLine("HTTP server started at: " + serverIP.ToString() + ":" + Port);
+                Console.WriteLine("HTTP server started at: " + serverIP.ToString() + ":" + Port);
 
-        HTTPSession httpSession = new HTTPSession(tcpListener);
+                HTTPSession httpSession = new HTTPSession(tcpListener);
 
-        // °õ¦æºü
-        ThreadStart serverThreadStart = new ThreadStart(httpSession.HTTPSessionThread);
-        Thread serverthread = new Thread(serverThreadStart);
+                // °õ¦æºü
+                ThreadStart serverThreadStart = new ThreadStart(httpSession.HTTPSessionThread);
+                Thread serverthread = new Thread(serverThreadStart);
 
-        serverthread.Start();
-      }
-      catch (Exception ex)
-      {
-        Console.WriteLine(ex.StackTrace.ToString());
-      }
+                serverthread.Start();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace.ToString());
+            }
+        }
     }
-  }
 }

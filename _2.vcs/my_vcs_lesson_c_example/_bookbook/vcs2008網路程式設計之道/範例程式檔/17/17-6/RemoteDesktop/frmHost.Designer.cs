@@ -97,6 +97,7 @@ namespace RemoteDesktop
             this.Name = "frmHost";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Remote Host Profile";
+            this.Load += new System.EventHandler(this.frmHost_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

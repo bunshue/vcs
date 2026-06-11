@@ -8,36 +8,36 @@ using System.Threading;
 
 namespace SSLServer
 {
-  class SSLServer
-  {
-    static void Main(string[] args)
+    class SSLServer
     {
-      try
-      {
-        string hostname = Dns.GetHostName();
-        IPAddress serverIP = Dns.Resolve(hostname).AddressList[0];
+        static void Main(string[] args)
+        {
+            try
+            {
+                string hostname = Dns.GetHostName();
+                IPAddress serverIP = Dns.Resolve(hostname).AddressList[0];
 
-        // 設定SSL通訊協定之通訊通訊埠為443
-        string Port = "443";
+                // 設定SSL通訊協定之通訊通訊埠為443
+                string Port = "443";
 
-        TcpListener tcpListener = new TcpListener(serverIP, Int32.Parse(Port));
+                TcpListener tcpListener = new TcpListener(serverIP, Int32.Parse(Port));
 
-        tcpListener.Start();
+                tcpListener.Start();
 
-        Console.WriteLine("SSL server started at: " + serverIP.ToString() + ":" + Port);
+                Console.WriteLine("SSL server started at: " + serverIP.ToString() + ":" + Port);
 
-        ListenClient lc = new ListenClient(tcpListener);
+                ListenClient lc = new ListenClient(tcpListener);
 
-        // 執行緒
-        ThreadStart serverThreadStart = new ThreadStart(lc.ServerThreadProc);
-        Thread serverthread = new Thread(serverThreadStart);
+                // 執行緒
+                ThreadStart serverThreadStart = new ThreadStart(lc.ServerThreadProc);
+                Thread serverthread = new Thread(serverThreadStart);
 
-        serverthread.Start();
-      }
-      catch (Exception ex)
-      {
-        Console.WriteLine(ex.StackTrace.ToString());
-      }
+                serverthread.Start();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace.ToString());
+            }
+        }
     }
-  }
 }

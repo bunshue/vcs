@@ -28,184 +28,185 @@ namespace RemoteDesktop
         /// </summary>
         private void InitializeComponent()
         {
-          this.components = new System.ComponentModel.Container();
-          System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-          this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
-          this.mnuFile = new System.Windows.Forms.MenuItem();
-          this.mnuSlave = new System.Windows.Forms.MenuItem();
-          this.mnuSlaveStart = new System.Windows.Forms.MenuItem();
-          this.mnuSlaveStop = new System.Windows.Forms.MenuItem();
-          this.mnuMaster = new System.Windows.Forms.MenuItem();
-          this.mnuMasterStart = new System.Windows.Forms.MenuItem();
-          this.mnuMasterStop = new System.Windows.Forms.MenuItem();
-          this.menuItem10 = new System.Windows.Forms.MenuItem();
-          this.mnuExit = new System.Windows.Forms.MenuItem();
-          this.mnuView = new System.Windows.Forms.MenuItem();
-          this.mnuNormal = new System.Windows.Forms.MenuItem();
-          this.mnuFull = new System.Windows.Forms.MenuItem();
-          this.desktopPicture = new System.Windows.Forms.PictureBox();
-          this.timer1 = new System.Windows.Forms.Timer(this.components);
-          this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-          this.contextMenu1 = new System.Windows.Forms.ContextMenu();
-          this.mnuSlaveStop1 = new System.Windows.Forms.MenuItem();
-          this.menuItem1 = new System.Windows.Forms.MenuItem();
-          this.mnuExit1 = new System.Windows.Forms.MenuItem();
-          ((System.ComponentModel.ISupportInitialize)(this.desktopPicture)).BeginInit();
-          this.SuspendLayout();
-          // 
-          // mainMenu1
-          // 
-          this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
+            this.mnuFile = new System.Windows.Forms.MenuItem();
+            this.mnuSlave = new System.Windows.Forms.MenuItem();
+            this.mnuSlaveStart = new System.Windows.Forms.MenuItem();
+            this.mnuSlaveStop = new System.Windows.Forms.MenuItem();
+            this.mnuMaster = new System.Windows.Forms.MenuItem();
+            this.mnuMasterStart = new System.Windows.Forms.MenuItem();
+            this.mnuMasterStop = new System.Windows.Forms.MenuItem();
+            this.menuItem10 = new System.Windows.Forms.MenuItem();
+            this.mnuExit = new System.Windows.Forms.MenuItem();
+            this.mnuView = new System.Windows.Forms.MenuItem();
+            this.mnuNormal = new System.Windows.Forms.MenuItem();
+            this.mnuFull = new System.Windows.Forms.MenuItem();
+            this.desktopPicture = new System.Windows.Forms.PictureBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenu1 = new System.Windows.Forms.ContextMenu();
+            this.mnuSlaveStop1 = new System.Windows.Forms.MenuItem();
+            this.menuItem1 = new System.Windows.Forms.MenuItem();
+            this.mnuExit1 = new System.Windows.Forms.MenuItem();
+            ((System.ComponentModel.ISupportInitialize)(this.desktopPicture)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // mainMenu1
+            // 
+            this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.mnuFile,
             this.mnuView});
-          // 
-          // mnuFile
-          // 
-          this.mnuFile.Index = 0;
-          this.mnuFile.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            // 
+            // mnuFile
+            // 
+            this.mnuFile.Index = 0;
+            this.mnuFile.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.mnuSlave,
             this.mnuMaster,
             this.menuItem10,
             this.mnuExit});
-          this.mnuFile.Text = "&File";
-          // 
-          // mnuSlave
-          // 
-          this.mnuSlave.Index = 0;
-          this.mnuSlave.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.mnuFile.Text = "&File";
+            // 
+            // mnuSlave
+            // 
+            this.mnuSlave.Index = 0;
+            this.mnuSlave.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.mnuSlaveStart,
             this.mnuSlaveStop});
-          this.mnuSlave.Text = "砆北狠";
-          // 
-          // mnuSlaveStart
-          // 
-          this.mnuSlaveStart.Index = 0;
-          this.mnuSlaveStart.Text = "Start";
-          this.mnuSlaveStart.Click += new System.EventHandler(this.mnuSlaveStart_Click);
-          // 
-          // mnuSlaveStop
-          // 
-          this.mnuSlaveStop.Enabled = false;
-          this.mnuSlaveStop.Index = 1;
-          this.mnuSlaveStop.Text = "Stop";
-          this.mnuSlaveStop.Click += new System.EventHandler(this.mnuSlaveStop_Click);
-          // 
-          // mnuMaster
-          // 
-          this.mnuMaster.Index = 1;
-          this.mnuMaster.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.mnuSlave.Text = "砆北狠";
+            // 
+            // mnuSlaveStart
+            // 
+            this.mnuSlaveStart.Index = 0;
+            this.mnuSlaveStart.Text = "Start";
+            this.mnuSlaveStart.Click += new System.EventHandler(this.mnuSlaveStart_Click);
+            // 
+            // mnuSlaveStop
+            // 
+            this.mnuSlaveStop.Enabled = false;
+            this.mnuSlaveStop.Index = 1;
+            this.mnuSlaveStop.Text = "Stop";
+            this.mnuSlaveStop.Click += new System.EventHandler(this.mnuSlaveStop_Click);
+            // 
+            // mnuMaster
+            // 
+            this.mnuMaster.Index = 1;
+            this.mnuMaster.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.mnuMasterStart,
             this.mnuMasterStop});
-          this.mnuMaster.Text = "北狠";
-          // 
-          // mnuMasterStart
-          // 
-          this.mnuMasterStart.Index = 0;
-          this.mnuMasterStart.Text = "Start";
-          this.mnuMasterStart.Click += new System.EventHandler(this.mnuMasterStart_Click);
-          // 
-          // mnuMasterStop
-          // 
-          this.mnuMasterStop.Enabled = false;
-          this.mnuMasterStop.Index = 1;
-          this.mnuMasterStop.Text = "Stop";
-          this.mnuMasterStop.Click += new System.EventHandler(this.mnuMasterStop_Click);
-          // 
-          // menuItem10
-          // 
-          this.menuItem10.Index = 2;
-          this.menuItem10.Text = "-";
-          // 
-          // mnuExit
-          // 
-          this.mnuExit.Index = 3;
-          this.mnuExit.Text = "E&xit";
-          this.mnuExit.Click += new System.EventHandler(this.mnuExit_Click);
-          // 
-          // mnuView
-          // 
-          this.mnuView.Index = 1;
-          this.mnuView.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.mnuMaster.Text = "北狠";
+            // 
+            // mnuMasterStart
+            // 
+            this.mnuMasterStart.Index = 0;
+            this.mnuMasterStart.Text = "Start";
+            this.mnuMasterStart.Click += new System.EventHandler(this.mnuMasterStart_Click);
+            // 
+            // mnuMasterStop
+            // 
+            this.mnuMasterStop.Enabled = false;
+            this.mnuMasterStop.Index = 1;
+            this.mnuMasterStop.Text = "Stop";
+            this.mnuMasterStop.Click += new System.EventHandler(this.mnuMasterStop_Click);
+            // 
+            // menuItem10
+            // 
+            this.menuItem10.Index = 2;
+            this.menuItem10.Text = "-";
+            // 
+            // mnuExit
+            // 
+            this.mnuExit.Index = 3;
+            this.mnuExit.Text = "E&xit";
+            this.mnuExit.Click += new System.EventHandler(this.mnuExit_Click);
+            // 
+            // mnuView
+            // 
+            this.mnuView.Index = 1;
+            this.mnuView.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.mnuNormal,
             this.mnuFull});
-          this.mnuView.Text = "&View";
-          this.mnuView.Visible = false;
-          // 
-          // mnuNormal
-          // 
-          this.mnuNormal.Index = 0;
-          this.mnuNormal.Shortcut = System.Windows.Forms.Shortcut.CtrlZ;
-          this.mnuNormal.Text = "&Normal Size";
-          this.mnuNormal.Click += new System.EventHandler(this.mnuNormal_Click);
-          // 
-          // mnuFull
-          // 
-          this.mnuFull.Index = 1;
-          this.mnuFull.Shortcut = System.Windows.Forms.Shortcut.CtrlF;
-          this.mnuFull.Text = "&Full Screen";
-          this.mnuFull.Click += new System.EventHandler(this.mnuFull_Click);
-          // 
-          // desktopPicture
-          // 
-          this.desktopPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-          this.desktopPicture.Dock = System.Windows.Forms.DockStyle.Fill;
-          this.desktopPicture.Location = new System.Drawing.Point(0, 0);
-          this.desktopPicture.Name = "desktopPicture";
-          this.desktopPicture.Size = new System.Drawing.Size(634, 435);
-          this.desktopPicture.TabIndex = 0;
-          this.desktopPicture.TabStop = false;
-          this.desktopPicture.MouseMove += new System.Windows.Forms.MouseEventHandler(this.desktopPicture_MouseMove);
-          this.desktopPicture.MouseDown += new System.Windows.Forms.MouseEventHandler(this.desktopPicture_MouseDown);
-          this.desktopPicture.MouseUp += new System.Windows.Forms.MouseEventHandler(this.desktopPicture_MouseUp);
-          // 
-          // timer1
-          // 
-          this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-          // 
-          // notifyIcon1
-          // 
-          this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-          this.notifyIcon1.Text = "Remote Desktop - 砆北狠";
-          // 
-          // contextMenu1
-          // 
-          this.contextMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.mnuView.Text = "&View";
+            this.mnuView.Visible = false;
+            // 
+            // mnuNormal
+            // 
+            this.mnuNormal.Index = 0;
+            this.mnuNormal.Shortcut = System.Windows.Forms.Shortcut.CtrlZ;
+            this.mnuNormal.Text = "&Normal Size";
+            this.mnuNormal.Click += new System.EventHandler(this.mnuNormal_Click);
+            // 
+            // mnuFull
+            // 
+            this.mnuFull.Index = 1;
+            this.mnuFull.Shortcut = System.Windows.Forms.Shortcut.CtrlF;
+            this.mnuFull.Text = "&Full Screen";
+            this.mnuFull.Click += new System.EventHandler(this.mnuFull_Click);
+            // 
+            // desktopPicture
+            // 
+            this.desktopPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.desktopPicture.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.desktopPicture.Location = new System.Drawing.Point(0, 0);
+            this.desktopPicture.Name = "desktopPicture";
+            this.desktopPicture.Size = new System.Drawing.Size(634, 435);
+            this.desktopPicture.TabIndex = 0;
+            this.desktopPicture.TabStop = false;
+            this.desktopPicture.MouseDown += new System.Windows.Forms.MouseEventHandler(this.desktopPicture_MouseDown);
+            this.desktopPicture.MouseMove += new System.Windows.Forms.MouseEventHandler(this.desktopPicture_MouseMove);
+            this.desktopPicture.MouseUp += new System.Windows.Forms.MouseEventHandler(this.desktopPicture_MouseUp);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "Remote Desktop - 砆北狠";
+            // 
+            // contextMenu1
+            // 
+            this.contextMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.mnuSlaveStop1,
             this.menuItem1,
             this.mnuExit1});
-          // 
-          // mnuSlaveStop1
-          // 
-          this.mnuSlaveStop1.Index = 0;
-          this.mnuSlaveStop1.Text = "Stop";
-          this.mnuSlaveStop1.Click += new System.EventHandler(this.mnuSlaveStop1_Click);
-          // 
-          // menuItem1
-          // 
-          this.menuItem1.Index = 1;
-          this.menuItem1.Text = "-";
-          // 
-          // mnuExit1
-          // 
-          this.mnuExit1.Index = 2;
-          this.mnuExit1.Text = "Exit";
-          this.mnuExit1.Click += new System.EventHandler(this.mnuExit_Click);
-          // 
-          // MainForm
-          // 
-          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-          this.ClientSize = new System.Drawing.Size(634, 435);
-          this.Controls.Add(this.desktopPicture);
-          this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-          this.MaximizeBox = false;
-          this.Menu = this.mainMenu1;
-          this.Name = "MainForm";
-          this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-          this.Text = "Remote Desktop";
-          this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
-          ((System.ComponentModel.ISupportInitialize)(this.desktopPicture)).EndInit();
-          this.ResumeLayout(false);
+            // 
+            // mnuSlaveStop1
+            // 
+            this.mnuSlaveStop1.Index = 0;
+            this.mnuSlaveStop1.Text = "Stop";
+            this.mnuSlaveStop1.Click += new System.EventHandler(this.mnuSlaveStop1_Click);
+            // 
+            // menuItem1
+            // 
+            this.menuItem1.Index = 1;
+            this.menuItem1.Text = "-";
+            // 
+            // mnuExit1
+            // 
+            this.mnuExit1.Index = 2;
+            this.mnuExit1.Text = "Exit";
+            this.mnuExit1.Click += new System.EventHandler(this.mnuExit_Click);
+            // 
+            // MainForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(634, 435);
+            this.Controls.Add(this.desktopPicture);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.Menu = this.mainMenu1;
+            this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Remote Desktop";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.desktopPicture)).EndInit();
+            this.ResumeLayout(false);
 
         }
 

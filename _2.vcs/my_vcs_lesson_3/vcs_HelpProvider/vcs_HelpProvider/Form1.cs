@@ -30,6 +30,34 @@ namespace vcs_HelpProvider
 
             richTextBox1.Text += "filename = " + strpath + "\n";
 
+            //------------------------------------------------------------  # 60個
+
+            helpProvider2.SetShowHelp(textBox_id, true);
+            helpProvider2.SetHelpString(textBox_id, "請輸入帳號！");
+
+            helpProvider2.SetShowHelp(textBox_password, true);
+            helpProvider2.SetHelpString(textBox_password, "請輸入密碼！");
+
+            helpProvider2.SetShowHelp(bt_login, true);
+            helpProvider2.SetHelpString(bt_login, "帳號輸入後，點這裡喔！");
+
+            //------------------------------------------------------------  # 60個
+
+            richTextBox1.Text += "先按上面的問號\n";
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+
+

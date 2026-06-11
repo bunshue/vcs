@@ -81,16 +81,16 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox0 = new System.Windows.Forms.PictureBox();
             this.groupBox_new = new System.Windows.Forms.GroupBox();
-            this.bt_class_new_00 = new System.Windows.Forms.Button();
-            this.bt_class_new_01 = new System.Windows.Forms.Button();
-            this.bt_class_new_02 = new System.Windows.Forms.Button();
-            this.bt_class_new_03 = new System.Windows.Forms.Button();
+            this.bt_class_new_08 = new System.Windows.Forms.Button();
+            this.bt_class_new_09 = new System.Windows.Forms.Button();
             this.bt_class_new_04 = new System.Windows.Forms.Button();
             this.bt_class_new_05 = new System.Windows.Forms.Button();
             this.bt_class_new_06 = new System.Windows.Forms.Button();
             this.bt_class_new_07 = new System.Windows.Forms.Button();
-            this.bt_class_new_08 = new System.Windows.Forms.Button();
-            this.bt_class_new_09 = new System.Windows.Forms.Button();
+            this.bt_class_new_00 = new System.Windows.Forms.Button();
+            this.bt_class_new_01 = new System.Windows.Forms.Button();
+            this.bt_class_new_02 = new System.Windows.Forms.Button();
+            this.bt_class_new_03 = new System.Windows.Forms.Button();
             this.timer6 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -681,6 +681,70 @@
             this.groupBox_new.TabStop = false;
             this.groupBox_new.Text = "新進";
             // 
+            // bt_class_new_08
+            // 
+            this.bt_class_new_08.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class_new_08.Location = new System.Drawing.Point(9, 526);
+            this.bt_class_new_08.Name = "bt_class_new_08";
+            this.bt_class_new_08.Size = new System.Drawing.Size(180, 60);
+            this.bt_class_new_08.TabIndex = 17;
+            this.bt_class_new_08.UseVisualStyleBackColor = true;
+            this.bt_class_new_08.Click += new System.EventHandler(this.bt_class_new_08_Click);
+            // 
+            // bt_class_new_09
+            // 
+            this.bt_class_new_09.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class_new_09.Location = new System.Drawing.Point(9, 590);
+            this.bt_class_new_09.Name = "bt_class_new_09";
+            this.bt_class_new_09.Size = new System.Drawing.Size(180, 60);
+            this.bt_class_new_09.TabIndex = 16;
+            this.bt_class_new_09.UseVisualStyleBackColor = true;
+            this.bt_class_new_09.Click += new System.EventHandler(this.bt_class_new_09_Click);
+            // 
+            // bt_class_new_04
+            // 
+            this.bt_class_new_04.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class_new_04.Location = new System.Drawing.Point(9, 273);
+            this.bt_class_new_04.Name = "bt_class_new_04";
+            this.bt_class_new_04.Size = new System.Drawing.Size(180, 60);
+            this.bt_class_new_04.TabIndex = 15;
+            this.bt_class_new_04.Text = "Class 範例 4";
+            this.bt_class_new_04.UseVisualStyleBackColor = true;
+            this.bt_class_new_04.Click += new System.EventHandler(this.bt_class_new_04_Click);
+            // 
+            // bt_class_new_05
+            // 
+            this.bt_class_new_05.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class_new_05.Location = new System.Drawing.Point(9, 335);
+            this.bt_class_new_05.Name = "bt_class_new_05";
+            this.bt_class_new_05.Size = new System.Drawing.Size(180, 60);
+            this.bt_class_new_05.TabIndex = 14;
+            this.bt_class_new_05.Text = "Class 範例 5";
+            this.bt_class_new_05.UseVisualStyleBackColor = true;
+            this.bt_class_new_05.Click += new System.EventHandler(this.bt_class_new_05_Click);
+            // 
+            // bt_class_new_06
+            // 
+            this.bt_class_new_06.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class_new_06.Location = new System.Drawing.Point(9, 399);
+            this.bt_class_new_06.Name = "bt_class_new_06";
+            this.bt_class_new_06.Size = new System.Drawing.Size(180, 60);
+            this.bt_class_new_06.TabIndex = 13;
+            this.bt_class_new_06.Text = "Class 範例 6 TimerAlarm";
+            this.bt_class_new_06.UseVisualStyleBackColor = true;
+            this.bt_class_new_06.Click += new System.EventHandler(this.bt_class_new_06_Click);
+            // 
+            // bt_class_new_07
+            // 
+            this.bt_class_new_07.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_class_new_07.Location = new System.Drawing.Point(9, 463);
+            this.bt_class_new_07.Name = "bt_class_new_07";
+            this.bt_class_new_07.Size = new System.Drawing.Size(180, 60);
+            this.bt_class_new_07.TabIndex = 12;
+            this.bt_class_new_07.Text = "使用 類別方法 Logger";
+            this.bt_class_new_07.UseVisualStyleBackColor = true;
+            this.bt_class_new_07.Click += new System.EventHandler(this.bt_class_new_07_Click);
+            // 
             // bt_class_new_00
             // 
             this.bt_class_new_00.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -724,69 +788,6 @@
             this.bt_class_new_03.Text = "Class 範例 3";
             this.bt_class_new_03.UseVisualStyleBackColor = true;
             this.bt_class_new_03.Click += new System.EventHandler(this.bt_class_new_03_Click);
-            // 
-            // bt_class_new_04
-            // 
-            this.bt_class_new_04.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_class_new_04.Location = new System.Drawing.Point(9, 273);
-            this.bt_class_new_04.Name = "bt_class_new_04";
-            this.bt_class_new_04.Size = new System.Drawing.Size(180, 60);
-            this.bt_class_new_04.TabIndex = 15;
-            this.bt_class_new_04.Text = "Class 範例 4";
-            this.bt_class_new_04.UseVisualStyleBackColor = true;
-            this.bt_class_new_04.Click += new System.EventHandler(this.bt_class_new_04_Click);
-            // 
-            // bt_class_new_05
-            // 
-            this.bt_class_new_05.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_class_new_05.Location = new System.Drawing.Point(9, 335);
-            this.bt_class_new_05.Name = "bt_class_new_05";
-            this.bt_class_new_05.Size = new System.Drawing.Size(180, 60);
-            this.bt_class_new_05.TabIndex = 14;
-            this.bt_class_new_05.Text = "Class 範例 5";
-            this.bt_class_new_05.UseVisualStyleBackColor = true;
-            this.bt_class_new_05.Click += new System.EventHandler(this.bt_class_new_05_Click);
-            // 
-            // bt_class_new_06
-            // 
-            this.bt_class_new_06.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_class_new_06.Location = new System.Drawing.Point(9, 399);
-            this.bt_class_new_06.Name = "bt_class_new_06";
-            this.bt_class_new_06.Size = new System.Drawing.Size(180, 60);
-            this.bt_class_new_06.TabIndex = 13;
-            this.bt_class_new_06.Text = "Class 範例 6 TimerAlarm";
-            this.bt_class_new_06.UseVisualStyleBackColor = true;
-            this.bt_class_new_06.Click += new System.EventHandler(this.bt_class_new_06_Click);
-            // 
-            // bt_class_new_07
-            // 
-            this.bt_class_new_07.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_class_new_07.Location = new System.Drawing.Point(9, 463);
-            this.bt_class_new_07.Name = "bt_class_new_07";
-            this.bt_class_new_07.Size = new System.Drawing.Size(180, 60);
-            this.bt_class_new_07.TabIndex = 12;
-            this.bt_class_new_07.UseVisualStyleBackColor = true;
-            this.bt_class_new_07.Click += new System.EventHandler(this.bt_class_new_07_Click);
-            // 
-            // bt_class_new_08
-            // 
-            this.bt_class_new_08.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_class_new_08.Location = new System.Drawing.Point(9, 526);
-            this.bt_class_new_08.Name = "bt_class_new_08";
-            this.bt_class_new_08.Size = new System.Drawing.Size(180, 60);
-            this.bt_class_new_08.TabIndex = 17;
-            this.bt_class_new_08.UseVisualStyleBackColor = true;
-            this.bt_class_new_08.Click += new System.EventHandler(this.bt_class_new_08_Click);
-            // 
-            // bt_class_new_09
-            // 
-            this.bt_class_new_09.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_class_new_09.Location = new System.Drawing.Point(9, 590);
-            this.bt_class_new_09.Name = "bt_class_new_09";
-            this.bt_class_new_09.Size = new System.Drawing.Size(180, 60);
-            this.bt_class_new_09.TabIndex = 16;
-            this.bt_class_new_09.UseVisualStyleBackColor = true;
-            this.bt_class_new_09.Click += new System.EventHandler(this.bt_class_new_09_Click);
             // 
             // timer6
             // 

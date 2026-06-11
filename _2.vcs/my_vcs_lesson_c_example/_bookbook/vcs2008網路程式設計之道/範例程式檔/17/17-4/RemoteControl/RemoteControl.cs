@@ -206,4 +206,3 @@ public class RemoteControl : System.MarshalByRefObject
         return memStream.GetBuffer();
     }
 }
-

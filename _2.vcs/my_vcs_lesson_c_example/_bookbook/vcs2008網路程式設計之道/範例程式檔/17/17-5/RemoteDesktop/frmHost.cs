@@ -8,18 +8,23 @@ using System.Windows.Forms;
 
 namespace RemoteDesktop
 {
-  public partial class frmHost : Form
-  {
-    public string Host = "";
-
-    public frmHost()
+    public partial class frmHost : Form
     {
-      InitializeComponent();
-    }
+        public string Host = "";
 
-    private void btnOK_Click(object sender, EventArgs e)
-    {
-      Host = txtIP.Text;
+        public frmHost()
+        {
+            InitializeComponent();
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            Host = txtIP.Text;
+        }
+
+        private void frmHost_Load(object sender, EventArgs e)
+        {
+
+        }
     }
-  }
 }

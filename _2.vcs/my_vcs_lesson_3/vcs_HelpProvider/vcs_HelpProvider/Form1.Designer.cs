@@ -31,6 +31,10 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.textBox_id = new System.Windows.Forms.TextBox();
+            this.textBox_password = new System.Windows.Forms.TextBox();
+            this.bt_login = new System.Windows.Forms.Button();
+            this.helpProvider2 = new System.Windows.Forms.HelpProvider();
             this.SuspendLayout();
             // 
             // textBox1
@@ -46,17 +50,45 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(23, 195);
+            this.richTextBox1.Location = new System.Drawing.Point(23, 316);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(542, 350);
+            this.richTextBox1.Size = new System.Drawing.Size(542, 229);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
+            // 
+            // textBox_id
+            // 
+            this.textBox_id.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox_id.Location = new System.Drawing.Point(23, 99);
+            this.textBox_id.Name = "textBox_id";
+            this.textBox_id.Size = new System.Drawing.Size(200, 30);
+            this.textBox_id.TabIndex = 2;
+            // 
+            // textBox_password
+            // 
+            this.textBox_password.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox_password.Location = new System.Drawing.Point(23, 154);
+            this.textBox_password.Name = "textBox_password";
+            this.textBox_password.Size = new System.Drawing.Size(200, 30);
+            this.textBox_password.TabIndex = 3;
+            // 
+            // bt_login
+            // 
+            this.bt_login.Location = new System.Drawing.Point(23, 212);
+            this.bt_login.Name = "bt_login";
+            this.bt_login.Size = new System.Drawing.Size(200, 60);
+            this.bt_login.TabIndex = 4;
+            this.bt_login.Text = "button1";
+            this.bt_login.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(591, 559);
+            this.Controls.Add(this.bt_login);
+            this.Controls.Add(this.textBox_password);
+            this.Controls.Add(this.textBox_id);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.textBox1);
             this.HelpButton = true;
@@ -75,6 +107,10 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.HelpProvider helpProvider1;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.TextBox textBox_id;
+        private System.Windows.Forms.TextBox textBox_password;
+        private System.Windows.Forms.Button bt_login;
+        private System.Windows.Forms.HelpProvider helpProvider2;
     }
 }
 

@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Threading;
+using System.IO;
 using System.Timers;
+using System.Threading;
 
 //方案總管/右鍵/加入/類別/預設Class1.cs改成MyClass.cs
 
@@ -1367,7 +1368,13 @@ namespace vcs_Class1
 
         private void bt_class_new_07_Click(object sender, EventArgs e)
         {
+            richTextBox1.AppendText("使用 類別方法 Logger\n");
 
+            Logger.WriteLog("偵測不到PLC訊號, timeout, 清除信號, 等待使用者確認1");
+            Logger.WriteLog("使用者確認, 回到原點, 開始偵測PLC訊號1");
+
+            Logger.WriteLog("偵測不到PLC訊號, timeout, 清除信號, 等待使用者確認2");
+            Logger.WriteLog("使用者確認, 回到原點, 開始偵測PLC訊號2");
         }
 
         //------------------------------------------------------------  # 60個
@@ -1528,6 +1535,47 @@ namespace vcs_Class1
                 strSeconds = "0" + strSeconds;
 
             return strHours + ":" + strMinutes + ":" + strSeconds;
+        }
+    }
+
+    //------------------------------------------------------------  # 60個
+
+    public class Logger
+    {
+        /// <summary>
+        /// 寫入日志.
+        /// </summary>
+        /// <param name="strList">The STR list.</param>
+        /// <remarks> </remarks>
+        /// <Description></Description>
+        //public static void WriteLog(string ex)
+        public static void WriteLog(params object[] strList)
+        {
+            if (strList.Count() == 0) return;
+            string strDicPath = "";
+            string strPath = "";
+            try
+            {
+                //LogFileName = Application.StartupPath + "\\log_" + DateTime.Now.ToString("yyyyMMdd") + ".txt";
+                strDicPath = Application.StartupPath + "//";
+                strPath = strDicPath + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt";
+            }
+            catch (Exception e)
+            {
+                strDicPath = "C:/temp/log/";
+                strPath = strDicPath + string.Format("{0:yyyy年-MM月-dd日}", DateTime.Now) + "日誌記錄.txt";
+            }
+
+            if (!Directory.Exists(strDicPath)) Directory.CreateDirectory(strDicPath);
+            if (!File.Exists(strPath)) using (FileStream fs = File.Create(strPath)) { }
+            string str = File.ReadAllText(strPath);
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in strList)
+            {
+                sb.Append(DateTime.Now.ToString() + "-----" + item + "\n");
+            }
+
+            File.WriteAllText(strPath, str + sb.ToString());
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPConfiguration", "IPConfiguration\IPConfiguration.csproj", "{8EF3DB4B-739A-45D1-9FD1-984BCE2226A2}"
 EndProject
 Global

@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleNearMe", "PeopleNearMe\PeopleNearMe.csproj", "{795F4197-1658-4D30-A7B3-AA2D0459ED79}"
 EndProject
 Global
