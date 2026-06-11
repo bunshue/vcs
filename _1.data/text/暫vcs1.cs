@@ -1,5 +1,4 @@
 ﻿
-
             Tension = trkTension.Value / 10f;
             txtTension.Text = Tension.ToString("0.0");
 
@@ -534,9 +533,7 @@ radioButton1屬性
 
 北風.accdb
 
-            richTextBox1.Text += dateTimePicker1.Value.ToString() + "\n";
-            richTextBox1.Text += dateTimePicker1.Value.ToShortDateString() + "\n";
-
+//------------------------------------------------------------  # 60個
 
 各種 DrawImage
             richTextBox1.Text += "第1項 PictureBox\n";
@@ -670,9 +667,7 @@ syntax
             this.AutoSize = true;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             
-            
 LinkLabel + ToolTip
-
 
 使用 Validating + Validated
 
@@ -697,6 +692,77 @@ pictureBox 顯示圖片的方法(4)
 
             button1.Text = "衛星雲圖";
             pictureBox1.ImageLocation = "http://www.cwb.gov.tw/V7/observe/satellite/Data/s3p/s3p-2013-01-20-01-00.jpg";
+
+
+            image1 = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic1.jpg");
+            pictureBox1.Image = image1;
+
+            image1 = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\_case1\\pic2.jpg", true);
+            pictureBox1.Image = image1;
+
+            //法一
+            //ImageLocation	取得或設定路徑或影像 URL 中顯示 PictureBox
+            //pictureBox1.ImageLocation = @"D:\_git\vcs\_1.data\______test_files1\_case1\pic3.jpg";
+
+            //法二
+            //Load()		顯示所指定的影像 ImageLocation 屬性 PictureBox。
+            //string ImageLocation = @"D:\_git\vcs\_1.data\______test_files1\_case1\pic3.jpg";
+            //pictureBox1.Load(ImageLocation);
+
+            //法三
+            //Load(String)	設定 ImageLocation 到指定的 URL，並顯示所指出的影像。
+            pictureBox1.Load(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic3.jpg");
+
+            //NG
+            pictureBox1.ImageLocation = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Taipei_101_2009_amk-EditMylius.jpg/500px-Taipei_101_2009_amk-EditMylius.jpg";
+
+
+            //錯誤的寫法, 可能會出現"記憶體不足"
+            //pictureBox1.Image = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\bear.bmp");
+
+            //正確的寫法
+            FileStream fs = File.OpenRead(@"D:\_git\vcs\_1.data\______test_files1\bear.jpg");
+            pictureBox1.Image = Image.FromStream(fs);
+            fs.Close();
+
+
+//清除
+            pictureBox1.Image = null;
+
+
+        //做一個圓形的pictureBox ST
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_computer\burn1.jpg";
+            pictureBox1.Image = Image.FromFile(filename);
+            pictureBox1.BackColor = Color.Pink;
+
+            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+
+            //做一個圓形的pictureBox
+            // Make a Rectangle that defines the circular area.
+            Rectangle rect = new Rectangle(15, 15, 200, 200);
+
+            // Make a GraphicsPath and add the circle.
+            GraphicsPath path = new GraphicsPath();
+            path.AddEllipse(rect);
+
+            // Convert the GraphicsPath into a Region.
+            Region region = new Region(path);
+
+            // Restrict the PictureBoxes to the Region.
+            pictureBox1.Region = region;
+        }
+        //做一個圓形的pictureBox SP
+
+
+                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+                pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+                pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
+                pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
 
 //------------------------------------------------------------  # 60個
 
@@ -2126,427 +2192,10 @@ private bool blnColorTicker;
 
 //------------------------------------------------------------  # 60個
 
-WebClient wc = new WebClient();
-
-wc.DownloadFile(url, filename);
-string data = wc.DownloadString(url_file1);          //抓網頁資料到記憶體
-              wc.DownloadFile(url_file2, filename_local);          //抓網頁資料到本地檔案
-string xml =  wc.DownloadString(url_weather);        //抓資料
-
-MemoryStream image_stream = new MemoryStream(wc.DownloadData(url));
-
-byte[] bd = wc.DownloadData(sURL);
-
-//------------------------------------------------------------  # 60個
-
-Stream stream = client.OpenRead(URLAddress);
-
-client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705; Combat;)");
-
-using System.Net;
-using System.IO;    //for MemoryStream
-
-namespace vcs_
-{
-    public partial class Form1 : Form
-    {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            // Allow TLS 1.1 and TLS 1.2 protocols for file download.
-            //for Sugar     3840 Romeo也可用
-            ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
-            richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
-
-            //for Romeo and Sugar    3072
-            //ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
-            //ServicePointManager.SecurityProtocol = (SecurityProtocolType)3840;
-            //richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            /*
-            //加入這段語法忽略憑證
-            ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
-            */
-
-            string url_file1 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
-            //string url_file = @"http://antwrp.gsfc.nasa.gov/apod/";
-
-            using(WebClient wc = new WebClient())     // Create a web client
-            {
-                try  // Get the response string from the URL.
-                {
-                    //richTextBox1.Text += data + "\n";
-                    richTextBox1.Text += "抓網頁資料到記憶體\tOK\n";
-                }
-                catch (WebException ex)
-                {
-                    MessageBox.Show("WebException\t" + ex.Message);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Unknown error\t" + ex.Message);
-                }
-            }
-            
-            string url_file2 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
-            //string url_file2 = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
-            using(WebClient wc = new WebClient())     // Create a web client
-            {
-                try  // Get the response string from the URL.
-                {
-                    //string filename_local = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
-                    int pos1 = url_file2.LastIndexOf('/');
-                    int pos2 = url_file2.LastIndexOf('.');
-                    string filename_local = url_file2.Substring(pos1 + 1, pos2 - pos1 - 1) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + url_file2.Substring(pos2);
-                    richTextBox1.Text += "下載檔案, 本地檔案檔名 : " + filename_local + "\n";
-
-                    richTextBox1.Text += "抓網頁資料到本地檔案\tOK\n";
-                }
-                catch (WebException ex)
-                {
-                    MessageBox.Show("WebException\t" + ex.Message);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Unknown error\t" + ex.Message);
-                }
-            }
-            
-            string url_weather = @"http://api.openweathermap.org/data/2.5/weather?q=Hsinchu&mode=xml&units=imperial&APPID=e8edf79325ae8948a635efd0e076a8bc";
-            using(WebClient wc = new WebClient())     // Create a web client
-            {
-                try  // Get the response string from the URL.
-                {
-                    // Get the response string from the URL.
-                    //richTextBox1.Text += "data\n" + xml + "\n";
-                    richTextBox1.Text += "抓網頁查詢資料到記憶體\tOK\n";
-                }
-                catch (WebException ex)
-                {
-                    MessageBox.Show("WebException\t" + ex.Message);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Unknown error\t" + ex.Message);
-                }
-            }
-            
-            string img_src_url = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
-            richTextBox1.Text += "圖片所在網址 : " + img_src_url + "\n";
-            try
-            {
-                //圖片下載並存檔
-                DownloadImage(img_src_url);
-                richTextBox1.Text += "圖片下載並存檔\tOK\n";
-                
-                //圖片下來並顯示
-                Image img = GetPicture(img_src_url);
-                pictureBox1.Image = img;
-                richTextBox1.Text += "圖片下來並顯示\tOK\n";
-                            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "*** Download Error" + "\n";
-                richTextBox1.Text += "*** " + ex.Message + "\n";
-            }
-            
-            //下載COVID-19資料
-
-            // Compose the local data file name.
-            string filename_covid19a = "state_data" + DateTime.Now.ToString("yyyy_MM_dd") + ".csv";
-
-            // Download today's data.
-            string url = "https://covidtracking.com/api/v1/states/daily.csv";
-
-            richTextBox1.Text += "LoadData \tURL : " + url + "\tfile : " + filename_covid19a + "\n";
-            
-            DownloadFile(url, filename_covid19a);
-
-            richTextBox1.Text += "Loading case data...\n";
-            
-            // Compose the local data file name.
-            string filename_covid19b = "cases" + DateTime.Now.ToString("yyyy_MM_dd") + ".csv";
-
-            // Download today's data.
-            url = "https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_confirmed_global.csv&filename=time_series_covid19_confirmed_global.csv";
-            DownloadFile(url, filename_covid19b);
-        }
-
-        // Download the indicated file
-        private void DownloadImage(string url)
-        {
-            //richTextBox1.Text += "下載圖片 : " + url + "\n";
-
-             WebClient wc = new WebClient();
-
-            /*
-            int pos = url.LastIndexOf('/');
-            string filename = url.Substring(pos + 1);
-            */
-
-            int pos1 = url.LastIndexOf('/');
-            int pos2 = url.LastIndexOf('.');
-            string filename = url.Substring(pos1 + 1, pos2 - pos1 - 1) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + url.Substring(pos2);
-            richTextBox1.Text += "下載圖片, 本地圖片檔名 : " + filename + "\n";
-
-            // Use one of the following.
-            // For .NET Framework 4.5 and later:
-            //ServicePointManager.SecurityProtocol =
-            //    SecurityProtocolType.Tls12;
-            // For .NET Framework 4.0 through 4.4:
-            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
-
-            // Download the file
-            wc.DownloadFile(url, filename);
-        }
-
-        // Download a file from the internet.
-        // Get the picture at a given URL.
-        private Image GetPicture(string url)
-        {
-            try
-            {
-                 WebClient wc = new WebClient();
-
-                // Use one of the following.
-                //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
-
-                MemoryStream image_stream = new MemoryStream(wc.DownloadData(url));
-                return Image.FromStream(image_stream);
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "Error downloading picture " + url + '\n' + ex.Message + "\n";
-                return null;
-            }
-        }
-
-        private void DownloadFile(string url, string filename)
-        {
-            try
-            {
-                 WebClient wc = new WebClient();
-
-                // Download the file
-                wc.DownloadFile(url, filename);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Download Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            finally
-            {
-                    richTextBox1.Text += "下載 : " + filename + "\tNG\n";
-            }
-        }
-    }
-}
-
-
-
-using System.Net;
-using System.IO;    //for MemoryStream
-
-namespace vcs_
-{
-public partial class Form1 : Form
-{
-	public Form1()
-	{
-		InitializeComponent();
-	}
-	
-	private void Form1_Load(object sender, EventArgs e)
-	{
-		// Allow TLS 1.1 and TLS 1.2 protocols for file download.
-		//for Sugar     3840 Romeo也可用
-		ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
-		richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
-		
-		//for Romeo and Sugar    3072
-		//ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
-		//ServicePointManager.SecurityProtocol = (SecurityProtocolType)3840;
-		//richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
-	}
-
-private void button1_Click(object sender, EventArgs e)
-{
-	/*
-	//加入這段語法忽略憑證
-	ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
-	*/
-
-	string url_file1 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
-	//string url_file = @"http://antwrp.gsfc.nasa.gov/apod/";
-	
-	using(WebClient wc = new WebClient())     // Create a web client
-	{
-	try  // Get the response string from the URL.
-	{
-	//richTextBox1.Text += data + "\n";
-	richTextBox1.Text += "抓網頁資料到記憶體\tOK\n";
-	}
-	catch (WebException ex)
-	{
-	MessageBox.Show("WebException\t" + ex.Message);
-	}
-	catch (Exception ex)
-	{
-	MessageBox.Show("Unknown error\t" + ex.Message);
-	}
-}
-
-string url_file2 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
-//string url_file2 = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
-using(WebClient wc = new WebClient())     // Create a web client
-{
-	try  // Get the response string from the URL.
-{
-//string filename_local = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
-int pos1 = url_file2.LastIndexOf('/');
-int pos2 = url_file2.LastIndexOf('.');
-string filename_local = url_file2.Substring(pos1 + 1, pos2 - pos1 - 1) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + url_file2.Substring(pos2);
-richTextBox1.Text += "下載檔案, 本地檔案檔名 : " + filename_local + "\n";
-
-richTextBox1.Text += "抓網頁資料到本地檔案\tOK\n";
-}
-catch (WebException ex)
-{
-	MessageBox.Show("WebException\t" + ex.Message);
-}
-catch (Exception ex)
-{
-	MessageBox.Show("Unknown error\t" + ex.Message);
-}
-}
-
-string url_weather = @"http://api.openweathermap.org/data/2.5/weather?q=Hsinchu&mode=xml&units=imperial&APPID=e8edf79325ae8948a635efd0e076a8bc";
-using(WebClient wc = new WebClient())     // Create a web client
-{
-	try  // Get the response string from the URL.
-	{
-		// Get the response string from the URL.
-		//richTextBox1.Text += "data\n" + xml + "\n";
-		richTextBox1.Text += "抓網頁查詢資料到記憶體\tOK\n";
-	}
-	catch (WebException ex)
-	{
-		MessageBox.Show("WebException\t" + ex.Message);
-	}
-	catch (Exception ex)
-	{
-		MessageBox.Show("Unknown error\t" + ex.Message);
-	}
-}
-	
-string img_src_url = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
-richTextBox1.Text += "圖片所在網址 : " + img_src_url + "\n";
-try
-{
-	//圖片下載並存檔
-	DownloadImage(img_src_url);
-	richTextBox1.Text += "圖片下載並存檔\tOK\n";
-	
-	//圖片下來並顯示
-	Image img = GetPicture(img_src_url);
-	pictureBox1.Image = img;
-	richTextBox1.Text += "圖片下來並顯示\tOK\n";
-}
-catch (Exception ex)
-{
-	richTextBox1.Text += "*** Download Error" + "\n";
-	richTextBox1.Text += "*** " + ex.Message + "\n";
-}
-
-//下載COVID-19資料
-
-// Compose the local data file name.
-string filename_covid19a = "state_data" + DateTime.Now.ToString("yyyy_MM_dd") + ".csv";
-
-// Download today's data.
-string url = "https://covidtracking.com/api/v1/states/daily.csv";
-
-richTextBox1.Text += "LoadData \tURL : " + url + "\tfile : " + filename_covid19a + "\n";
-
-DownloadFile(url, filename_covid19a);
-
-richTextBox1.Text += "Loading case data...\n";
-
-// Compose the local data file name.
-string filename_covid19b = "cases" + DateTime.Now.ToString("yyyy_MM_dd") + ".csv";
-
-// Download today's data.
-url = "https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_confirmed_global.csv&filename=time_series_covid19_confirmed_global.csv";
-DownloadFile(url, filename_covid19b);
-}
-
-// Download the indicated file
-private void DownloadImage(string url)
-{
-//richTextBox1.Text += "下載圖片 : " + url + "\n";
-
- WebClient wc = new WebClient();
-
-/*
-int pos = url.LastIndexOf('/');
-string filename = url.Substring(pos + 1);
-*/
-
-int pos1 = url.LastIndexOf('/');
-int pos2 = url.LastIndexOf('.');
-string filename = url.Substring(pos1 + 1, pos2 - pos1 - 1) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + url.Substring(pos2);
-richTextBox1.Text += "下載圖片, 本地圖片檔名 : " + filename + "\n";
-
-// Use one of the following.
-// For .NET Framework 4.5 and later:
-//ServicePointManager.SecurityProtocol =
-//    SecurityProtocolType.Tls12;
-// For .NET Framework 4.0 through 4.4:
-ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
-}
-
-// Download a file from the internet.
-// Get the picture at a given URL.
-private Image GetPicture(string url)
-{
-try
-{
-	WebClient wc = new WebClient();
-
-// Use one of the following.
-//ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
-
-return Image.FromStream(image_stream);
-}
-catch (Exception ex)
-{
-richTextBox1.Text += "Error downloading picture " + url + '\n' + ex.Message + "\n";
-return null;
-}
-}
-
-private void DownloadFile(string url, string filename)
-{
-	 WebClient wc = new WebClient();
-}
-
-//------------------------------------------------------------  # 60個
-
-進程
-
+進程 :
 我們可以把計算機中每一個運行的應用程序當作是一個進程
 
-線程
-
+線程 :
 每一個進程是由多個線程組成的。
 單線程：讓程序做多件事時，會引發卡死 假死狀態。
 多線程：讓一個程序同時處理多個事情，後台運行程序，提高程序的運行效率。
@@ -2572,216 +2221,6 @@ private void DownloadFile(string url, string filename)
 
 //------------------------------------------------------------  # 60個
 
-BTW, if the HtmlNode has a “ID”, like “<div id='post_list'>value</div>”, call GetElementbyId() is OK for getting the HtmlNode, then get the value by HtmlNode.InnerText or HtmlNode.Attribute.
-
-Please see the following C# code snippet.
-
-Code snippet:
-
- //get HtmlAgilityPack.HtmlDocument object   
- HtmlDocument doc = new HtmlDocument();  
- //load HTML   
-doc.LoadHtml(pageSource);         
-//get HtmlNode by ID   
- HtmlNode navNode = doc.GetElementbyId("post_list");	//測這個
-
-//------------------------------------------------------------  # 60個
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Net;
-using System.Text.RegularExpressions;
-using HtmlAgilityPack;
-
-namespace RegexPractice
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            string pageUrl = "http://top.baidu.com/buzz.php?p=top_keyword";
-            WebClient wc = new WebClient();
-            byte[] pageSourceBytes = wc.DownloadData(new Uri(pageUrl));
-            string pageSource = Encoding.GetEncoding("gb2312").GetString(pageSourceBytes);
-
-            //Regex searchKeyRegex = new Regex("<td class=\"key\">.*?target=\"_blank\">(?<keyWord>.*?)</a></td>");
-            //MatchCollection mc = searchKeyRegex.Matches(pageSource);
-            //List<string> keyWordList = new List<string>();
-            //foreach(Match m in mc)
-            //{
-            //    keyWordList.Add(m.Groups["keyWord"].Value);
-            //}
-
-            HtmlDocument doc = new HtmlDocument();
-            doc.LoadHtml(pageSource);
-
-            HtmlNodeCollection keyNodes = doc.DocumentNode.SelectNodes("//td[@class='key']/a[@ target='_blank']");
-            List<string> keyWords = new List<string>();
-            foreach (HtmlNode keyNode in keyNodes)
-            {
-                keyWords.Add(keyNode.InnerText);
-            }
-
-            //HtmlDocument doc = new HtmlDocument();
-            //doc.LoadHtml(pageSource);
-
-            //HtmlNode ulNode = doc.DocumentNode.SelectSingleNode("//ul[@class='hotnews']");
-
-            //HtmlNodeCollection liNodes = ulNode.SelectNodes("li");
-
-            //List<string> topList = new List<string>();
-            //List<string> subList = new List<string>();
-
-            //foreach (HtmlNode liNode in liNodes)
-            //{
-            //    if (liNode.Attributes["class"] != null && liNode.Attributes["class"].Value == "top")
-            //    {
-            //        topList.Add(liNode.InnerText);
-            //    }
-            //    else
-            //    {
-            //        if (subList.Count < topList.Count)
-            //        {
-            //            subList.Add(liNode.InnerText);
-            //        }
-            //        else
-            //        {
-            //            subList[subList.Count - 1] = subList[subList.Count - 1] + liNode.InnerText;
-            //        }
-            //    }
-            //}
-
-            return;
-
-            //Regex hotTopNewsRegex = new Regex("class=\"a3\".*?>(?<hotNews>.*)<");
-            //MatchCollection topMc = hotTopNewsRegex.Matches(pageSource);
-
-            //List<string> hotNewsList = new List<string>();
-            //foreach (Match m in topMc)
-            //{
-            //    hotNewsList.Add(m.Groups["hotNews"].Value);
-            //}
-
-            //Regex replaceRegex = new Regex("</?font.*?>");
-            //for (int i = 0; i < hotNewsList.Count;i++ )
-            //{
-            //    hotNewsList[i] = replaceRegex.Replace(hotNewsList[i], "");
-            //}
-
-            //Regex hotSubNewsRegex = new Regex("(?s)class=\"top\"(?<subNews>.*?)class=\"top\"");
-            //MatchCollection subMc = hotSubNewsRegex.Matches(pageSource);
-            //int temp = subMc.Count;
-
-            //List<string> subNewsList = new List<string>();
-            //foreach (Match m in subMc)
-            //{
-            //    subNewsList.Add(m.Groups["subNews"].Value);
-            //}
-        }
-    }
-}
-
-//------------------------------------------------------------  # 60個
-
-Another code snippet
-Download specified number of pictures from “ http://browse.deviantart.com/customization/wallpaper/widescreen/?order=15” and save to local files.
-
-	using System;  
-	using System.Collections.Generic;  
-	using System.Linq;  
-	using System.Text;  
-	using System.Net;  
-	using System.Text.RegularExpressions;  
-	using HtmlAgilityPack;  
-	using System.IO;  
-	  
-	namespace RegexPractice  
-	{  
-	    public class Util  
-	    {  
-	  
-	        //Get byte[] format page source    
-	        public static byte[] GetPageSourceBytes(string url)  
-	        {  
-	            WebClient wc = new WebClient();  
-	            byte[] pageSourceBytes = wc.DownloadData(new Uri(url));  
-	            return pageSourceBytes;  
-	        }  
-	  
-	        //get string format page source    
-	        public static string GetPageSource(string url, string encodingType)  
-	        {  
-	            byte[] pageSourceBytes = GetPageSourceBytes(url);  
-	            string pageSource = Encoding.GetEncoding(encodingType).GetString(pageSourceBytes);  
-	            return pageSource;  
-	        }  
-	  
-	        //Save image to local file    
-	        public static void SavaImagesToFile(string url,string dirPath,string fileName)  
-	        {  
-	            WebClient wc = new WebClient();  
-	            wc.DownloadFile(url, Path.Combine(dirPath, fileName + Guid.NewGuid().ToString()));  
-	        }  
-	    }  
-	  
-	    public class ImageInfo  
-	    {  
-	        public string Title;  
-	        public string SrcPath;  
-	
-	    class Program  
-	    {  
-	        static void Main(string[] args)  
-	        {  
-							            int sumCount = 100;  
-							            string baseUrl = "http://browse.deviantart.com/customization/wallpaper/widescreen/?order=15";  
-							  
-							            List<ImageInfo> imageInfoList = new List<ImageInfo>();  
-							            imageInfoList = GetSumImageInfoList(sumCount, baseUrl);  
-							  
-							            foreach (ImageInfo imageInfo in imageInfoList)  
-							            {  
-							                Util.SavaImagesToFile(imageInfo.SrcPath, @"c:\Images", GetValidFilename(imageInfo.Title));  
-							            }  
-							  
-							            return;  
-							        }  
-							  
-							        static string GetValidFilename(string filename)  
-							        {  
-							            foreach (char c in Path.GetInvalidFileNameChars())  
-							            {  
-							                filename = filename.Replace(c, '_');  
-							            }  
-							            return filename;  
-							        }  
-							  
-							        static List<ImageInfo> GetSumImageInfoList(int sum, string baseUri)  
-							        {  
-							            List<ImageInfo> resultList = new List<ImageInfo>();  
-							            int c = (sum - 1) / 24 + 1;  
-							            for (int i = 0; i < c; i++)  
-							            {  
-							                int offset = i * 24;  
-							                string url = string.Format("{0}&offset={1}", baseUri, offset);  
-							                List<ImageInfo> curResultList = ImageInfo.GetImageInfoList(url);  
-							                foreach (ImageInfo imageInfo in curResultList)  
-							                {  
-							                    if (resultList.Count < sum)  
-							                    {  
-							                        resultList.Add(imageInfo);  
-							                    }  
-							                }  
-							            }  
-							            return resultList;  
-							        }             
-	    }  
-	 }  
-
-//------------------------------------------------------------  # 60個
-
         private void toggleOption(int camIndex, int optionIndex, bool value)
         {
             switch (optionIndex)
@@ -2797,7 +2236,6 @@ Download specified number of pictures from “ http://browse.deviantart.com/cust
                     break;
             }
         }
-
 
 //------------------------------------------------------------  # 60個
 
@@ -4038,24 +3476,11 @@ writer.Open(filename, width, height, this.Videofps, VideoCodec.MPEG4);
 
 //------------------------------------------------------------  # 60個
 
-要輸入帳號密碼的 WebClient
-                        // Upload the file to the server.
-                        WebClient myWebClient = new WebClient();
-                        WebClient wc = new WebClient();
-                        NetworkCredential myCredentials = new NetworkCredential("snijhof", "MKD7529s09");
-                        myWebClient.Credentials = myCredentials;
-                        byte[] responseArray = myWebClient.UploadFile("ftp://student.aii.avans.nl/GRP/42IN11EWd/Videos/" + fileName, filePath);
-
-                        String temp = Encoding.ASCII.GetString(responseArray);
-
-                        // Decode and display the response.
-                        Console.WriteLine("\nResponse Received.The contents of the file uploaded are:\n{0}", Encoding.ASCII.GetString(responseArray));
-
-
             textBox1.ShortcutsEnabled = false;   // 不啟用快速鍵, 限制 TextBox 上不使用快速鍵與滑鼠右鍵表單
             textBox5.ShortcutsEnabled = false;   // 不啟用快速鍵, 限制 TextBox 上不使用快速鍵與滑鼠右鍵表單
 
-        
+//------------------------------------------------------------  # 60個
+
         public double hex2dec(string hex_data)
         {
             byte value = 0;
@@ -4155,21 +3580,6 @@ MyPlayer3
 	PageUp/PageDown 同資料夾、依檔名排序的上一個、下一個檔案
 	
 ----------------vcs +++ SP----------------
-
-HtmlAgilityPack 訊息
-
-            WebClient wc = new WebClient();
-            wc.BaseAddress = "http://www.juedui100.com/";
-            wc.Encoding = Encoding.UTF8;
-            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            string html = wc.DownloadString("aaaa.html");
-            doc.LoadHtml(html);
-            HtmlNode node = doc.DocumentNode.SelectSingleNode("/html/body/div[4]/div[1]/div[2]/ul[1]");     //根据XPath查找节点，跟XmlNode差不多
-            Console.WriteLine(node.InnerText);  //输出节点内容      年龄：21～30之间 婚史：未婚 ......      与InnerHtml的区别在于，它不会输出HTML代码
-            Console.WriteLine(node.InnerHtml);  //输出节点Html <li>年龄：21～30之间</li> <li>婚史：未婚</li> ....
-            Console.WriteLine(node.Name);       //输出 ul    Html元素名 
-
-//------------------------------------------------------------  # 60個
 
 Name　　　　　　　　　　　　　　  Html元素名
 Id　　　　　　　　　　　　　　　　 获取该节点的Id属性
@@ -4431,7 +3841,7 @@ thread.Priority = ThreadPriority.Highest;
 
 if (thread.ThreadState = ThreadState.Running )
 {
-thread.Suspend();
+	thread.Suspend();
 } 
 
 喚起一個線程
@@ -6554,125 +5964,6 @@ currentPlaylist.Item[integer]; 獲取或設置指定項目媒體信息，其子�
 
 //------------------------------------------------------------  # 60個
 
-利用线程的方法 做延时 不卡界面
-
-Thread t = new Thread(o => Thread.Sleep(500));
-                    t.Start(this);
-                    while (t.IsAlive)
-                    {
-                        Application.DoEvents();
-                    }
-
- 不用线程 也可以这样不卡界面 
-public static void Delay(int mm)
-        {
-            DateTime current = DateTime.Now;
-            while (current.AddMilliseconds(mm) > DateTime.Now)
-            {
-                Application.DoEvents();
-            }
-            return;
-        } 
-
-//------------------------------------------------------------  # 60個
-
-//线程常用的方法
-
-/// <summary>
-/// 一个示例方法 - 无参数
-/// </summary>
-private void TestMethod()
-{
-    Console.WriteLine("我是测试线程");
-}
-//无参数线程的创建
-Thread Thd = new Thread(TestMethod);
-
-/// <summary>
-/// 一个示例方法 - 有参数
-/// </summary>
-private void TestMethod(int Obj)
-{
-    Console.WriteLine("我是测试线程");
-}
-//有参数线程的创建
-int Obj = 0;
-Thread Thd = new Thread(() => TestMethod(Obj));
-
-//如果要设置线程为MTA模型
-Thd.SetApartmentState(ApartmentState.MTA);
-
-//如果设置线程为后台线程（有人说这个就是MTA模型的线程，不过未经考证）
-Thd.IsBackground = true;
-
-//设置这个线程的名字
-Thd.Name = "MyThread";
-
-//线程激活
-Thd.Start();
-
-//线程挂起（类似线程暂停）
-Thd.Suspend();
-
-//线程恢复（将挂起线程恢复运行状态）
-Thd.Resume();
-
-//线程强制终止（强制退出）
-Thd.Abort();
-//为了保证线程被终止，要加入一句Join
-Thd.Join();
-
-//得到当前线程的名字
-string MyThreadName = Thread.CurrentThread.Name;
-
-//判断线程是否存活
-if (Thd.IsAlive)
-{
-    //如果存活，则执行....
-}
-
-//------------------------------------------------------------  # 60個
-
-randomrandom
-
-使用 Random 方法產生不重複亂數 
-
-//取得非常random的數字
-Random rd = new Random((int)DateTime.Now.Ticks);
-
-/// <summary> 
- /// 生成隨機字符串 
- /// </summary> 
- private class RandomStringGenerator 
- { 
-     static readonly Random r = new Random(); 
-     const string _chars = "0123456789"; 
-     public static string GetRandomString() 
-     { 
-         char[] buffer = new char[5]; 
-         for (int i = 0; i < 5; i++) 
-         { 
-             buffer[i] = _chars[r.Next(_chars.Length)]; 
-          } 
-          return new string(buffer); 
-      } 
- }
-
-        public static string GetRandomString2(int length)
-        {
-            var str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            //var next = new Random();
-            Random Rnd = new Random(); //加入Random，產生的數字不會重覆
-            var builder = new StringBuilder();
-            for (var i = 0; i < length; i++)
-            {
-                builder.Append(str[Rnd.Next(0, str.Length)]);
-            }
-            return builder.ToString();
-        }
-
-//------------------------------------------------------------  # 60個
-
 ffmpeg的用法
 
 //從開始分割600秒視頻命令如下：
@@ -6689,11 +5980,8 @@ ffmpeg.exe -i sample.mp4 -ss 00:01:00 -t 00:03:00 -acodec copy -vcodec copy cut.
 //-acodec copy : 音訊編碼格式和來源檔案相同
 //-vcodec copy : 影像編碼格式和來源檔案相同
 
-
-
 //查看視頻文件的音視頻編解碼格式，視頻時長，比特率等，如下：
 ffmpeg.exe -i sample.mp4
-
 
 ffmpeg.exe -i xxx.mp4 -f mp3 -vn xxx.mp3并回車。
 參數解釋：-i表示input，-f表示format，-vn表示video not
@@ -7299,12 +6587,6 @@ https://debbiedbaby.pixnet.net/blog/post/426657881-%E3%80%90c%23%E3%80%91-emgucv
 http://davidhsu666.com/archives/context_menu/
 
 //------------------------------------------------------------  # 60個
-
-c# Delay 1秒鐘寫法
-
-using System.Threading;
-Thread.Sleep(1000); //Delay 1秒，不好用，因為這段時間會卡住
-
 
 codepage
 http://www.lingoes.net/en/translator/codepage.htm
@@ -8072,7 +7354,7 @@ windows media player
          }
 
 //Wait
-System.Threading.Thread.Sleep( 5000 ); // wait 5 seconds (5000 milliseconds)
+System.Threading.Thread.Sleep(5000); // wait 5 seconds (5000 milliseconds)
 
 // Take a screenshot 
 // Take a screenshot
@@ -8695,28 +7977,25 @@ Jumony快速抓取網頁
 
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/188975.html
 
-
-
-
+6060
 
 vcs
 Random walk如何避走已經走過的路徑？
 如何做到完全的Random？
 可能可以由畫下所有走過的軌跡得到
 
-
+6060
 
 vcs
 Windows檔案總管，點選資料夾，按右鍵，
 出現右鍵選單，加一項 列印出資訊夾內所有檔案資訊
 	
-
+6060
 
 Click = MouseClick = Click + MouseClick
 DoubleClick = Click + MouseClick + MouseDoubleClick
 
-
-
+6060
 
 簡易存資料
 XXXU盤之SN
@@ -8783,9 +8062,7 @@ RW/Excel中的
 
 G: C#程序未能找到引用的組件VBIDE解決過程
 
-
-開啟一個thread, 做一件很忙碌的事
-主thread可以讓user操作 主thread可以中斷子thread
+6060
 
 //剪下 = 複製到剪貼簿 + 把選取區域塗成背景色  SolidBrush br = new SolidBrush(pictureBox1.BackColor)
 
@@ -10717,18 +9994,11 @@ Form的設定
 
 //------------------------------------------------------------  # 60個
 
- Thread.Sleep()方法用於將當前線程休眠一定時間,時間單位是毫秒。在阻塞時線程狀態是 ThreadState.WaitSleepJoin， 在休眠的時間裡讓其他等待線程先執行，可以減少CPU的占用時間。
-
-System.Threading.Thread.Sleep(2000);當前休眠2秒，
-
-System.Threading.Thread.Sleep(5000);當前休眠5秒，
-
 full screen
 
 A.新建一個窗體．命名為Catch.然後設置這個窗體的FormBorderStyle為None,WindowState為Maximized．
 
 B.我們對代碼進行編輯：
-
 
         private void Form1_Load(object sender, EventArgs e)
         {

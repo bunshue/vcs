@@ -2258,3 +2258,14 @@ fs.Close();
 */
 
 //var strname=DateTime.Now.ToShortDateString().Replace("/","-")+".txt";
+
+
+/*
+//目前的工作目錄:
+//Directory.GetCurrentDirectory()
+
+//設定工作目錄
+Directory.SetCurrentDirectory("D:\\");
+//"更改後的工作目錄:
+//Directory.GetCurrentDirectory()
+*/

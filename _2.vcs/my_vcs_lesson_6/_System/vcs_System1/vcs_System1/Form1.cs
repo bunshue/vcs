@@ -211,9 +211,32 @@ namespace vcs_System1
 
             //------------------------------------------------------------  # 60個
 
-            // herehere
             // Environment.SpecialFolder
 
+            richTextBox1.Text += "aaa : " + Environment.SpecialFolder.MyDocuments + "\n";
+            richTextBox1.Text += "aaa : " + Environment.SpecialFolder.MyMusic + "\n";
+            richTextBox1.Text += "aaa : " + Environment.SpecialFolder.MyPictures + "\n";
+            richTextBox1.Text += "aaa : " + Environment.SpecialFolder.Desktop + "\n";
+            richTextBox1.Text += "aaa : " + Environment.SpecialFolder.ProgramFiles + "\n";
+            richTextBox1.Text += "aaa : " + Environment.SpecialFolder.StartMenu + "\n";
+            richTextBox1.Text += "aaa : " + Environment.SpecialFolder.MyComputer + "\n";
+
+            //桌面路徑
+            string directory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+
+            richTextBox1.Text += "系統特殊資料夾的路徑：" + Environment.GetFolderPath(Environment.SpecialFolder.System) + "\n";
+            richTextBox1.Text += "[傳送到]資料夾位置 GetFolderPath SendTo: " + Environment.GetFolderPath(Environment.SpecialFolder.SendTo) + "\n";
+            richTextBox1.Text += "GetFolderPath StartMenu: " + Environment.GetFolderPath(Environment.SpecialFolder.StartMenu) + "\n";
+            richTextBox1.Text += "[我的文件夾]位置 GetFolderPath Personal: " + Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\n";
+            richTextBox1.Text += "GetFolderPath MyMusic: " + Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) + "\n";
+            richTextBox1.Text += "GetFolderPath MyComputer: " + Environment.GetFolderPath(Environment.SpecialFolder.MyComputer) + "\n";
+
+            //Environment.SpecialFolder
+            foreach (Environment.SpecialFolder folder_type in Enum.GetValues(typeof(Environment.SpecialFolder)))
+            {
+                //many
+                //richTextBox1.AppendText(String.Format("{0,-25}", folder_type.ToString()) + Environment.GetFolderPath(folder_type) + "\r\n");
+            }
 
             //------------------------------------------------------------  # 60個
 
@@ -503,6 +526,8 @@ namespace vcs_System1
 
         }
 
+        //6060
+
         //是否安裝音效卡 ST
         [DllImport("winmm.dll", EntryPoint = "waveOutGetNumDevs")]
         public static extern int waveOutGetNumDevs();
@@ -518,6 +543,8 @@ namespace vcs_System1
             }
         }
         //是否安裝音效卡 SP
+
+        //6060
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -1498,44 +1525,6 @@ namespace vcs_System1
 
         private void button49_Click(object sender, EventArgs e)
         {
-            //test
-
-            richTextBox1.Text += "aaa : " + Environment.SpecialFolder.MyDocuments + "\n";
-            richTextBox1.Text += "aaa : " + Environment.SpecialFolder.MyMusic + "\n";
-            richTextBox1.Text += "aaa : " + Environment.SpecialFolder.MyPictures + "\n";
-            richTextBox1.Text += "aaa : " + Environment.SpecialFolder.Desktop + "\n";
-            richTextBox1.Text += "aaa : " + Environment.SpecialFolder.ProgramFiles + "\n";
-            richTextBox1.Text += "aaa : " + Environment.SpecialFolder.StartMenu + "\n";
-            richTextBox1.Text += "aaa : " + Environment.SpecialFolder.MyComputer + "\n";
-
-            //桌面路徑
-            string directory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-
-            richTextBox1.Text += "系統特殊資料夾的路徑：" + Environment.GetFolderPath(Environment.SpecialFolder.System) + "\n";
-            richTextBox1.Text += "[傳送到]資料夾位置 GetFolderPath SendTo: " + Environment.GetFolderPath(Environment.SpecialFolder.SendTo) + "\n";
-            richTextBox1.Text += "GetFolderPath StartMenu: " + Environment.GetFolderPath(Environment.SpecialFolder.StartMenu) + "\n";
-            richTextBox1.Text += "[我的文件夾]位置 GetFolderPath Personal: " + Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\n";
-            richTextBox1.Text += "GetFolderPath MyMusic: " + Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) + "\n";
-            richTextBox1.Text += "GetFolderPath MyComputer: " + Environment.GetFolderPath(Environment.SpecialFolder.MyComputer) + "\n";
-
-            //Environment.SpecialFolder
-            foreach (Environment.SpecialFolder folder_type in Enum.GetValues(typeof(Environment.SpecialFolder)))
-            {
-                //many
-                //richTextBox1.AppendText(String.Format("{0,-25}", folder_type.ToString()) + Environment.GetFolderPath(folder_type) + "\r\n");
-            }
-
-            /*
-            //目前的工作目錄:
-            //Environment.CurrentDirectory
-            //目前的工作目錄:
-            //Directory.GetCurrentDirectory()
-
-            //設定工作目錄
-            Directory.SetCurrentDirectory("D:\\");
-            //"更改後的工作目錄:
-            //Directory.GetCurrentDirectory()
-            */
         }
 
         //------------------------------------------------------------  # 60個

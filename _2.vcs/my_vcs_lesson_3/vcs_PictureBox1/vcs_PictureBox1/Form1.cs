@@ -63,40 +63,10 @@ namespace vcs_PictureBox1
             int y_st = 10;
             int dx = 120 + 10;
             int dy = 40 + 10;
-
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button7.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button4.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            button6.Location = new Point(x_st + dx * 5, y_st + dy * 0);
-            groupBox_SizeMode.Location = new Point(x_st + dx * 6, y_st + dy * 0);
-            button5.Location = new Point(x_st + dx * 7, y_st + dy * 0);
-
             x_st = 10;
             y_st = 20;
             dx = 200 + 10;
             dy = 20;
-
-            groupBox_SizeMode.Size = new Size(120, 130);
-            rb_size_mode0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            rb_size_mode1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            rb_size_mode2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            rb_size_mode3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            rb_size_mode4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
-            rb_size_mode0.Text = "Zoom";
-            rb_size_mode1.Text = "Normal";
-            rb_size_mode2.Text = "AutoSize";
-            rb_size_mode3.Text = "CenterImage";
-            rb_size_mode4.Text = "StretchImage";
-
-            rb_size_mode0.CheckedChanged += new EventHandler(rb_size_mode_CheckedChanged);
-            rb_size_mode1.CheckedChanged += new EventHandler(rb_size_mode_CheckedChanged);
-            rb_size_mode2.CheckedChanged += new EventHandler(rb_size_mode_CheckedChanged);
-            rb_size_mode3.CheckedChanged += new EventHandler(rb_size_mode_CheckedChanged);
-            rb_size_mode4.CheckedChanged += new EventHandler(rb_size_mode_CheckedChanged);
-            rb_size_mode0.Checked = true;
 
             richTextBox1.Size = new Size(1000, 160);
             richTextBox1.Location = new Point(x_st + dx * 0, 650);
@@ -116,34 +86,6 @@ namespace vcs_PictureBox1
         }
 
         //------------------------------------------------------------  # 60個
-
-        void rb_size_mode_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rb_size_mode0.Checked == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            }
-            else if (rb_size_mode1.Checked == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
-            }
-            else if (rb_size_mode2.Checked == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
-            }
-            else if (rb_size_mode3.Checked == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
-            }
-            else if (rb_size_mode4.Checked == true)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            }
-            else
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            }
-        }
 
         void reset_picturebox_setting()
         {
@@ -186,56 +128,6 @@ namespace vcs_PictureBox1
                 g.DrawImage(bmp2, 0, 0);
                 */
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            image1 = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic1.jpg");
-            pictureBox1.Image = image1;
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            image1 = new Bitmap(@"D:\_git\vcs\_1.data\______test_files1\_case1\\pic2.jpg", true);
-            pictureBox1.Image = image1;
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //法一
-            //ImageLocation	取得或設定路徑或影像 URL 中顯示 PictureBox
-            //pictureBox1.ImageLocation = @"D:\_git\vcs\_1.data\______test_files1\_case1\pic3.jpg";
-
-            //法二
-            //Load()		顯示所指定的影像 ImageLocation 屬性 PictureBox。
-            //string ImageLocation = @"D:\_git\vcs\_1.data\______test_files1\_case1\pic3.jpg";
-            //pictureBox1.Load(ImageLocation);
-
-            //法三
-            //Load(String)	設定 ImageLocation 到指定的 URL，並顯示所指出的影像。
-            pictureBox1.Load(@"D:\_git\vcs\_1.data\______test_files1\_case1\pic3.jpg");
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //NG
-            pictureBox1.ImageLocation = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Taipei_101_2009_amk-EditMylius.jpg/500px-Taipei_101_2009_amk-EditMylius.jpg";
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            pictureBox1.Image = null;
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            //錯誤的寫法, 可能會出現"記憶體不足"
-            //pictureBox1.Image = Image.FromFile(@"D:\_git\vcs\_1.data\______test_files1\bear.bmp");
-
-            //正確的寫法
-            FileStream fs = File.OpenRead(@"D:\_git\vcs\_1.data\______test_files1\bear.jpg");
-            pictureBox1.Image = Image.FromStream(fs);
-            fs.Close();
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -670,31 +562,6 @@ namespace vcs_PictureBox1
                 richTextBox1.Text += "unknown mode\n";
             }
         }
-        //做一個圓形的pictureBox ST
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_computer\burn1.jpg";
-            pictureBox1.Image = Image.FromFile(filename);
-            pictureBox1.BackColor = Color.Pink;
-
-            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
-
-            //做一個圓形的pictureBox
-            // Make a Rectangle that defines the circular area.
-            Rectangle rect = new Rectangle(15, 15, 200, 200);
-
-            // Make a GraphicsPath and add the circle.
-            GraphicsPath path = new GraphicsPath();
-            path.AddEllipse(rect);
-
-            // Convert the GraphicsPath into a Region.
-            Region region = new Region(path);
-
-            // Restrict the PictureBoxes to the Region.
-            pictureBox1.Region = region;
-        }
-        //做一個圓形的pictureBox SP
     }
 }
 

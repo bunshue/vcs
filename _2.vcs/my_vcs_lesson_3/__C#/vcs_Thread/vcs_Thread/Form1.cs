@@ -1283,4 +1283,102 @@ Thread.Sleep(500);
 
 //------------------------------------------------------------  # 60個
 
+利用线程的方法 做延时 不卡界面
+
+Thread t = new Thread(o => Thread.Sleep(500));
+                    t.Start(this);
+                    while (t.IsAlive)
+                    {
+                        Application.DoEvents();
+                    }
+
+ 不用线程 也可以这样不卡界面 
+public static void Delay(int mm)
+        {
+            DateTime current = DateTime.Now;
+            while (current.AddMilliseconds(mm) > DateTime.Now)
+            {
+                Application.DoEvents();
+            }
+            return;
+        } 
+
+//------------------------------------------------------------  # 60個
+
+//线程常用的方法
+
+/// <summary>
+/// 一个示例方法 - 无参数
+/// </summary>
+private void TestMethod()
+{
+    Console.WriteLine("我是测试线程");
+}
+//无参数线程的创建
+Thread Thd = new Thread(TestMethod);
+
+/// <summary>
+/// 一个示例方法 - 有参数
+/// </summary>
+private void TestMethod(int Obj)
+{
+    Console.WriteLine("我是测试线程");
+}
+//有参数线程的创建
+int Obj = 0;
+Thread Thd = new Thread(() => TestMethod(Obj));
+
+//如果要设置线程为MTA模型
+Thd.SetApartmentState(ApartmentState.MTA);
+
+//如果设置线程为后台线程（有人说这个就是MTA模型的线程，不过未经考证）
+Thd.IsBackground = true;
+
+//设置这个线程的名字
+Thd.Name = "MyThread";
+
+//线程激活
+Thd.Start();
+
+//线程挂起（类似线程暂停）
+Thd.Suspend();
+
+//线程恢复（将挂起线程恢复运行状态）
+Thd.Resume();
+
+//线程强制终止（强制退出）
+Thd.Abort();
+//为了保证线程被终止，要加入一句Join
+Thd.Join();
+
+//得到当前线程的名字
+string MyThreadName = Thread.CurrentThread.Name;
+
+//判断线程是否存活
+if (Thd.IsAlive)
+{
+    //如果存活，则执行....
+}
+
+//------------------------------------------------------------  # 60個
+
+c# Delay 1秒鐘寫法
+using System.Threading;
+Thread.Sleep(1000); //Delay 1秒，不好用，因為這段時間會卡住
+
+System.Threading.Thread.Sleep( 5000 ); // wait 5 seconds (5000 milliseconds)
+
+//------------------------------------------------------------  # 60個
+
+開啟一個thread, 做一件很忙碌的事
+主thread可以讓user操作 主thread可以中斷子thread
+
+Thread.Sleep()方法用於將當前線程休眠一定時間,時間單位是毫秒。在阻塞時線程狀態是 ThreadState.WaitSleepJoin， 在休眠的時間裡讓其他等待線程先執行，可以減少CPU的占用時間。
+
+System.Threading.Thread.Sleep(2000);當前休眠2秒，
+
+System.Threading.Thread.Sleep(5000);當前休眠5秒，
+
 */
+
+

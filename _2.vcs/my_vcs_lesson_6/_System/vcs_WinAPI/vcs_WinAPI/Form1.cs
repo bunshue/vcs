@@ -25,6 +25,9 @@ namespace vcs_WinAPI
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            //------------------------------------------------------------  # 60個
+
             Microsoft.Win32.SystemEvents.TimeChanged += new EventHandler(SystemEvents_TimeChanged); //for 設定系統時間
         }
 
@@ -35,7 +38,6 @@ namespace vcs_WinAPI
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
-            
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -84,10 +86,14 @@ namespace vcs_WinAPI
             richTextBox1.Clear();
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button0_Click(object sender, EventArgs e)
         {
 
         }
+
+        //------------------------------------------------------------  # 60個
 
         //鼠標 ST
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
@@ -108,6 +114,8 @@ namespace vcs_WinAPI
             bool setRight = SetCursorPos(1920 / 2, 1080 / 2);
         }
         //鼠標 SP
+
+        //------------------------------------------------------------  # 60個
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -225,6 +233,8 @@ namespace vcs_WinAPI
         }
         //C#如何獲得 WINDOWS 版本 SP
 
+        //------------------------------------------------------------  # 60個
+
         //設定音量1, 2  ST
 
         //winmm控制方式，涉及Xp系統波形聲音的左右聲道，高位為左聲道，低位為右聲道：
@@ -283,6 +293,8 @@ namespace vcs_WinAPI
         }
         //設定音量1, 2  SP
 
+        //------------------------------------------------------------  # 60個
+
         //切換鼠標左右鍵 ST
         //C#切換鼠標左右鍵習慣無需控制面板中修改
 
@@ -307,10 +319,10 @@ namespace vcs_WinAPI
                 SwapMouseButton(false);//設置成右手
                 richTextBox1.Text += "換成右手\n";
             }
-
         }
-
         //切換鼠標左右鍵 SP
+
+        //------------------------------------------------------------  # 60個
 
         //長檔名轉短檔名 ST
         [DllImport("Kernel32.dll")]//声明API函数
@@ -326,8 +338,9 @@ namespace vcs_WinAPI
         }
         //長檔名轉短檔名 SP
 
-        //格式化磁盤 ST
+        //------------------------------------------------------------  # 60個
 
+        //格式化磁盤 ST
         [DllImport("shell32.dll")]
         private static extern int SHFormatDrive(IntPtr hWnd, int drive, long fmtID, int Options);
         public const long SHFMT_ID_DEFAULT = 0xFFFF;
@@ -350,9 +363,10 @@ namespace vcs_WinAPI
         }
         //格式化磁盤 SP
 
-        //取得mp3播放長度 ST
+        //------------------------------------------------------------  # 60個
 
-        #region  获取文件的播放时间，并在列表中进行显示
+        //取得mp3播放長度 ST
+        //#region  获取文件的播放时间，并在列表中进行显示
         /// <summary>
         /// 获取文件的播放时间，并在列表中进行显示
         /// </summary>
@@ -384,9 +398,9 @@ namespace vcs_WinAPI
                 t = Convert.ToInt32(tem_str);//重新设定变量t的值
             return t;//返回变量t的值
         }
-        #endregion
+        //#endregion
 
-        #region  获取文件的播放时间，并按指定格式进行显示
+        //#region  获取文件的播放时间，并按指定格式进行显示
         /// <summary>
         /// 获取文件的播放时间，并按指定格式进行显示
         /// </summary>
@@ -414,9 +428,7 @@ namespace vcs_WinAPI
                 Tem_Time = Tem_min.ToString("00") + ":" + Tem_sec.ToString("00"); //设置事件的显示格式
             return Tem_Time;//返回变量Tem_Time
         }
-        #endregion
-
-
+        //#endregion
 
         private void button9_Click(object sender, EventArgs e)
         {
@@ -428,6 +440,7 @@ namespace vcs_WinAPI
         }
         //取得mp3播放長度 SP
 
+        //------------------------------------------------------------  # 60個
 
         private const uint WM_SYSCOMMAND = 0x112;                    //系统消息
         private const int SC_MONITORPOWER = 0xF170;                  //关闭显示器的系统命令
@@ -542,9 +555,9 @@ namespace vcs_WinAPI
             Console.WriteLine("使用IsNetworkAlive對網絡連接方式進行判斷");
             Console.WriteLine(Fun_IsNetworkAlive());
         }
-
         //使用API即時判斷當前的網絡的連接方式 SP
 
+        //------------------------------------------------------------  # 60個
 
         [DllImport("User32.dll")]
         public extern static System.IntPtr GetDC(System.IntPtr hWnd);
@@ -635,11 +648,13 @@ namespace vcs_WinAPI
 
         //設定系統時間 SP
 
-        #region 取得目前的桌面路徑
+        //------------------------------------------------------------  # 60個
+
+        //#region 取得目前的桌面路徑
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern int SystemParametersInfo(int uAction, int uParam, StringBuilder lpvParam, int fuWinIni);
         private const int SPI_GETDESKWALLPAPER = 0x0073;
-        #endregion
+        //#endregion
 
         private void button17_Click(object sender, EventArgs e)
         {
@@ -659,13 +674,14 @@ namespace vcs_WinAPI
             {
                 richTextBox1.Text += "桌布路徑 : " + wallpaper_path + "\n";
             }
-
         }
 
-        #region 取系統的硬盤分區的盤符，用API函數：GetDriveType
+        //------------------------------------------------------------  # 60個
+
+        //#region 取系統的硬盤分區的盤符，用API函數：GetDriveType
         [DllImport("kernel32.dll", EntryPoint = "GetDriveType")]
         public static extern int GetDriveType(string nDrive);
-        #endregion
+        //#endregion
 
         private void button18_Click(object sender, EventArgs e)
         {
@@ -811,3 +827,16 @@ namespace vcs_WinAPI
         }
     }
 }
+
+//6060
+//richTextBox1.Text += "------------------------------------------------------------\n";  // 60個
+//------------------------------------------------------------  # 60個
+
+//3030
+//richTextBox1.Text += "------------------------------\n";  // 30個
+//------------------------------  # 30個
+
+/*  可搬出
+
+*/
+

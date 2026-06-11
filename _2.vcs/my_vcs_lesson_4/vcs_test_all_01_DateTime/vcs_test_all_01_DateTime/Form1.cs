@@ -19,7 +19,7 @@ using Microsoft.VisualBasic;  // for DateAndTime, 需要 參考/加入參考/.NE
 /* DateTime 的方法
 DateTime.Now
 DateTime.Now.Date
-DateTime.Now.Ticks;
+DateTime.Now.Ticks;  // 從西元1年1月1日至今的Ticks數, 一秒 1千萬 個 Ticks
 DateTime.Now.DayOfWeek
 DateTime.Today
 DateTime.Today.DayOfWeek
@@ -532,6 +532,8 @@ namespace vcs_test_all_01_DateTime
         long ticks_old = 0;
         private void button2_Click(object sender, EventArgs e)
         {
+            // DateTime.Now.Ticks;  // 從西元1年1月1日至今的Ticks數, 一秒 1千萬 個 Ticks
+
             long seconds = DateTime.Now.Ticks / TimeSpan.TicksPerSecond;
 
             richTextBox1.Text += "現在時間用Ticks表示 : " + DateTime.Now.Ticks.ToString() + "\n";  // 一秒 1千萬 個 Ticks
@@ -708,7 +710,7 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Text += "現在日期 : " + dt.ToLongDateString() + "\n";
             richTextBox1.Text += "現在時間 : " + dt.ToLongTimeString() + "\n";
 
-            //6060
+            //------------------------------------------------------------  # 60個
 
             //時間相關
             //中時間相關知識點小結
@@ -772,13 +774,21 @@ namespace vcs_test_all_01_DateTime
         {
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //依時間建立檔案
+            DateTime dt = DateTime.Now;
+
+            string filename = String.Format("{0}-{1}-{2}_{3}-{4}-{5}", dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second);
+            richTextBox1.Text += "依時間建立檔案 :" + filename + "\n";
+
+            string m_fileName = dt.ToFileTime().ToString() + ".jpg";
+            richTextBox1.Text += "依時間建立檔案 :" + m_fileName + "\n";
         }
 
-        //6060
+        //------------------------------------------------------------  # 60個
 
         private void button10_Click(object sender, EventArgs e)
         {
@@ -786,17 +796,6 @@ namespace vcs_test_all_01_DateTime
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //依時間建立檔案
-            DateTime dt = DateTime.Now;
-
-            string filename = String.Format("{0}-{1}-{2}_{3}-{4}-{5}", dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second);
-
-            richTextBox1.Text += "依時間建立檔案 :" + filename + "\n";
-
-            string m_fileName = dt.ToFileTime().ToString() + ".jpg";
-            richTextBox1.Text += "依時間建立檔案 :" + m_fileName + "\n";
-
-            richTextBox1.Text += "Conversion finished @ " + dt.ToString() + "\n";
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -968,40 +967,14 @@ namespace vcs_test_all_01_DateTime
 
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button13_Click(object sender, EventArgs e)
         {
-            //干支
-            for (int i = 0; i < 20; i++)
-            {
-                richTextBox1.Text += GanZhiYearString(i) + "\n";
-            }
-
-            //------------------------------------------------------------  # 60個
-
-            //干支
-            string chineseEra;
-            string sky = "甲乙丙丁戊已庚辛壬癸";        //天干
-            string earth = "子丑寅卯辰巳午未申酉戌亥";  //地支
-
-            for (int i = 0; i < 60; i++)
-            {
-                chineseEra = sky.Substring(i % 10, 1) + earth.Substring(i % 12, 1);
-                richTextBox1.Text += chineseEra + "  ";
-            }
-            richTextBox1.Text += "\n";
 
         }
 
-        private const int GanZhiStartYear = 0; //干支計算起始年
-        private static string ganStr = "甲乙丙丁戊己庚辛壬癸";
-        private static string zhiStr = "子丑寅卯辰巳午未申酉戌亥";
-
-        string GanZhiYearString(int year)
-        {
-            int i = (year - GanZhiStartYear) % 60; //計算干支
-            string tempStr = ganStr[i % 10].ToString() + zhiStr[i % 12].ToString() + "年";
-            return tempStr;
-        }
+        //------------------------------------------------------------  # 60個
 
         private void button14_Click(object sender, EventArgs e)
         {
@@ -1206,6 +1179,8 @@ namespace vcs_test_all_01_DateTime
         {
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button18_Click(object sender, EventArgs e)
         {
             //列出全球時區
@@ -1229,11 +1204,24 @@ namespace vcs_test_all_01_DateTime
             }
 
             // Select a default value
-            comboBox1.SelectedItem = FindItemContaining(comboBox1.Items, "臺北");
+            comboBox1.SelectedItem = FindItemContaining(comboBox1.Items, "台北");
 
             TimeZoneInfo zone1 = comboBox1.SelectedItem as TimeZoneInfo;
             string name1 = zone1.DisplayName;
             richTextBox1.Text += "name1 = " + name1 + "\n";
+        }
+
+        // Select an item containing the target string.
+        private object FindItemContaining(IEnumerable items, string target)
+        {
+            foreach (object item in items)
+            {
+                if (item.ToString().Contains(target))
+                {
+                    return item;
+                }
+            }
+            return null;
         }
 
         //------------------------------------------------------------  # 60個
@@ -1421,6 +1409,29 @@ namespace vcs_test_all_01_DateTime
 
             // 和暦の出力方法
             richTextBox1.Text += dt_today.ToString("ggyy年MM月dd日(ddd)", ci) + "\n";
+
+            //------------------------------------------------------------  # 60個
+
+            //干支
+
+            for (int i = 0; i < 20; i++)
+            {
+                richTextBox1.Text += GanZhiYearString(i) + "\n";
+            }
+
+            //------------------------------------------------------------  # 60個
+
+            //干支
+            string chineseEra;
+            string sky = "甲乙丙丁戊已庚辛壬癸";        //天干
+            string earth = "子丑寅卯辰巳午未申酉戌亥";  //地支
+
+            for (int i = 0; i < 60; i++)
+            {
+                chineseEra = sky.Substring(i % 10, 1) + earth.Substring(i % 12, 1);
+                richTextBox1.Text += chineseEra + "  ";
+            }
+            richTextBox1.Text += "\n";
         }
 
         string getChineseTime(int hour)
@@ -1428,6 +1439,17 @@ namespace vcs_test_all_01_DateTime
             //地支時間做成數組
             string[] CTime = "子|丑|寅|卯|辰|巳|午|未|申|酉|戌|亥".Split('|');
             return "【" + CTime[hour / 2] + "時】";
+        }
+
+        private const int GanZhiStartYear = 0; //干支計算起始年
+        private static string ganStr = "甲乙丙丁戊己庚辛壬癸";
+        private static string zhiStr = "子丑寅卯辰巳午未申酉戌亥";
+
+        string GanZhiYearString(int year)
+        {
+            int i = (year - GanZhiStartYear) % 60; //計算干支
+            string tempStr = ganStr[i % 10].ToString() + zhiStr[i % 12].ToString() + "年";
+            return tempStr;
         }
 
         //------------------------------------------------------------  # 60個
@@ -1737,19 +1759,6 @@ namespace vcs_test_all_01_DateTime
                 case 6: weekstr = "星期六"; break;
                 case 7: weekstr = "星期日"; break;
             } return weekstr;
-        }
-
-        // Select an item containing the target string.
-        private object FindItemContaining(IEnumerable items, string target)
-        {
-            foreach (object item in items)
-            {
-                if (item.ToString().Contains(target))
-                {
-                    return item;
-                }
-            }
-            return null;
         }
 
         //本年第幾周

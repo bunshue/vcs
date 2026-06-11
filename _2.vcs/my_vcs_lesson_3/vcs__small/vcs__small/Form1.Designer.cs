@@ -95,10 +95,10 @@
             this.bt_clb0 = new System.Windows.Forms.Button();
             this.timer_progress = new System.Windows.Forms.Timer(this.components);
             this.groupBox_progress = new System.Windows.Forms.GroupBox();
+            this.progressBar0 = new System.Windows.Forms.ProgressBar();
             this.lb_status0 = new System.Windows.Forms.Label();
             this.bt_stop = new System.Windows.Forms.Button();
             this.bt_start = new System.Windows.Forms.Button();
-            this.progressBar0 = new System.Windows.Forms.ProgressBar();
             this.groupBox_radiobutton3.SuspendLayout();
             this.groupBox_radiobutton2.SuspendLayout();
             this.groupBox_radiobutton1.SuspendLayout();
@@ -120,9 +120,9 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(728, 458);
+            this.bt_clear.Location = new System.Drawing.Point(714, 457);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(69, 32);
+            this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 10;
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
@@ -131,7 +131,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(707, 426);
+            this.richTextBox1.Location = new System.Drawing.Point(709, 421);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 9;
@@ -816,6 +816,14 @@
             this.groupBox_progress.TabStop = false;
             this.groupBox_progress.Text = "ProgressBar";
             // 
+            // progressBar0
+            // 
+            this.progressBar0.Location = new System.Drawing.Point(14, 23);
+            this.progressBar0.Name = "progressBar0";
+            this.progressBar0.Size = new System.Drawing.Size(215, 23);
+            this.progressBar0.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar0.TabIndex = 14;
+            // 
             // lb_status0
             // 
             this.lb_status0.AutoSize = true;
@@ -844,14 +852,6 @@
             this.bt_start.Text = "開始";
             this.bt_start.UseVisualStyleBackColor = true;
             this.bt_start.Click += new System.EventHandler(this.bt_start_Click);
-            // 
-            // progressBar0
-            // 
-            this.progressBar0.Location = new System.Drawing.Point(14, 23);
-            this.progressBar0.Name = "progressBar0";
-            this.progressBar0.Size = new System.Drawing.Size(215, 23);
-            this.progressBar0.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.progressBar0.TabIndex = 14;
             // 
             // Form1
             // 

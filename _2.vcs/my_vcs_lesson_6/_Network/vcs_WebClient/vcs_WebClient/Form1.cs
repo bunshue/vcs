@@ -11,7 +11,6 @@ using System.IO;    //for Path, MemoryStream
 using System.Net;
 using System.Xml;
 using System.Threading; //for Thread
-
 using System.Text.RegularExpressions;   //for Regex
 
 namespace vcs_WebClient
@@ -1435,5 +1434,635 @@ namespace vcs_WebClient
 
 */
 
+/*
+WebClient wc = new WebClient();
+
+wc.DownloadFile(url, filename);
+string data = wc.DownloadString(url_file1);          //抓網頁資料到記憶體
+              wc.DownloadFile(url_file2, filename_local);          //抓網頁資料到本地檔案
+string xml =  wc.DownloadString(url_weather);        //抓資料
+
+MemoryStream image_stream = new MemoryStream(wc.DownloadData(url));
+
+byte[] bd = wc.DownloadData(sURL);
+
+//------------------------------------------------------------  # 60個
+
+Stream stream = client.OpenRead(URLAddress);
+
+client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705; Combat;)");
+
+namespace vcs_
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // Allow TLS 1.1 and TLS 1.2 protocols for file download.
+            //for Sugar     3840 Romeo也可用
+            ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
+            richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
+
+            //for Romeo and Sugar    3072
+            //ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+            //ServicePointManager.SecurityProtocol = (SecurityProtocolType)3840;
+            //richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //加入這段語法忽略憑證
+            //ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+
+            string url_file1 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
+            //string url_file = @"http://antwrp.gsfc.nasa.gov/apod/";
+
+            using(WebClient wc = new WebClient())     // Create a web client
+            {
+                try  // Get the response string from the URL.
+                {
+                    //richTextBox1.Text += data + "\n";
+                    richTextBox1.Text += "抓網頁資料到記憶體\tOK\n";
+                }
+                catch (WebException ex)
+                {
+                    MessageBox.Show("WebException\t" + ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Unknown error\t" + ex.Message);
+                }
+            }
+            
+            string url_file2 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
+            //string url_file2 = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
+            using(WebClient wc = new WebClient())     // Create a web client
+            {
+                try  // Get the response string from the URL.
+                {
+                    //string filename_local = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+                    int pos1 = url_file2.LastIndexOf('/');
+                    int pos2 = url_file2.LastIndexOf('.');
+                    string filename_local = url_file2.Substring(pos1 + 1, pos2 - pos1 - 1) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + url_file2.Substring(pos2);
+                    richTextBox1.Text += "下載檔案, 本地檔案檔名 : " + filename_local + "\n";
+
+                    richTextBox1.Text += "抓網頁資料到本地檔案\tOK\n";
+                }
+                catch (WebException ex)
+                {
+                    MessageBox.Show("WebException\t" + ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Unknown error\t" + ex.Message);
+                }
+            }
+            
+            string url_weather = @"http://api.openweathermap.org/data/2.5/weather?q=Hsinchu&mode=xml&units=imperial&APPID=e8edf79325ae8948a635efd0e076a8bc";
+            using(WebClient wc = new WebClient())     // Create a web client
+            {
+                try  // Get the response string from the URL.
+                {
+                    // Get the response string from the URL.
+                    //richTextBox1.Text += "data\n" + xml + "\n";
+                    richTextBox1.Text += "抓網頁查詢資料到記憶體\tOK\n";
+                }
+                catch (WebException ex)
+                {
+                    MessageBox.Show("WebException\t" + ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Unknown error\t" + ex.Message);
+                }
+            }
+            
+            string img_src_url = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
+            richTextBox1.Text += "圖片所在網址 : " + img_src_url + "\n";
+            try
+            {
+                //圖片下載並存檔
+                DownloadImage(img_src_url);
+                richTextBox1.Text += "圖片下載並存檔\tOK\n";
+                
+                //圖片下來並顯示
+                Image img = GetPicture(img_src_url);
+                pictureBox1.Image = img;
+                richTextBox1.Text += "圖片下來並顯示\tOK\n";
+                            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "*** Download Error" + "\n";
+                richTextBox1.Text += "*** " + ex.Message + "\n";
+            }
+            
+            //下載COVID-19資料
+
+            // Compose the local data file name.
+            string filename_covid19a = "state_data" + DateTime.Now.ToString("yyyy_MM_dd") + ".csv";
+
+            // Download today's data.
+            string url = "https://covidtracking.com/api/v1/states/daily.csv";
+
+            richTextBox1.Text += "LoadData \tURL : " + url + "\tfile : " + filename_covid19a + "\n";
+            
+            DownloadFile(url, filename_covid19a);
+
+            richTextBox1.Text += "Loading case data...\n";
+            
+            // Compose the local data file name.
+            string filename_covid19b = "cases" + DateTime.Now.ToString("yyyy_MM_dd") + ".csv";
+
+            // Download today's data.
+            url = "https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_confirmed_global.csv&filename=time_series_covid19_confirmed_global.csv";
+            DownloadFile(url, filename_covid19b);
+        }
+
+        // Download the indicated file
+        private void DownloadImage(string url)
+        {
+            //richTextBox1.Text += "下載圖片 : " + url + "\n";
+
+             WebClient wc = new WebClient();
+
+            //int pos = url.LastIndexOf('/');
+            //string filename = url.Substring(pos + 1);
+
+            int pos1 = url.LastIndexOf('/');
+            int pos2 = url.LastIndexOf('.');
+            string filename = url.Substring(pos1 + 1, pos2 - pos1 - 1) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + url.Substring(pos2);
+            richTextBox1.Text += "下載圖片, 本地圖片檔名 : " + filename + "\n";
+
+            // Use one of the following.
+            // For .NET Framework 4.5 and later:
+            //ServicePointManager.SecurityProtocol =
+            //    SecurityProtocolType.Tls12;
+            // For .NET Framework 4.0 through 4.4:
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+
+            // Download the file
+            wc.DownloadFile(url, filename);
+        }
+
+        // Download a file from the internet.
+        // Get the picture at a given URL.
+        private Image GetPicture(string url)
+        {
+            try
+            {
+                 WebClient wc = new WebClient();
+
+                // Use one of the following.
+                //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+
+                MemoryStream image_stream = new MemoryStream(wc.DownloadData(url));
+                return Image.FromStream(image_stream);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "Error downloading picture " + url + '\n' + ex.Message + "\n";
+                return null;
+            }
+        }
+
+        private void DownloadFile(string url, string filename)
+        {
+            try
+            {
+                 WebClient wc = new WebClient();
+
+                // Download the file
+                wc.DownloadFile(url, filename);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Download Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            finally
+            {
+                    richTextBox1.Text += "下載 : " + filename + "\tNG\n";
+            }
+        }
+    }
+}
+
+//------------------------------------------------------------  # 60個
+
+namespace vcs_
+{
+public partial class Form1 : Form
+{
+	public Form1()
+	{
+		InitializeComponent();
+	}
+	
+	private void Form1_Load(object sender, EventArgs e)
+	{
+		// Allow TLS 1.1 and TLS 1.2 protocols for file download.
+		//for Sugar     3840 Romeo也可用
+		ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
+		richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
+		
+		//for Romeo and Sugar    3072
+		//ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+		//ServicePointManager.SecurityProtocol = (SecurityProtocolType)3840;
+		//richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
+	}
+
+private void button1_Click(object sender, EventArgs e)
+{
+	//加入這段語法忽略憑證
+	//ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+
+	string url_file1 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
+	//string url_file = @"http://antwrp.gsfc.nasa.gov/apod/";
+	
+	using(WebClient wc = new WebClient())     // Create a web client
+	{
+	try  // Get the response string from the URL.
+	{
+	//richTextBox1.Text += data + "\n";
+	richTextBox1.Text += "抓網頁資料到記憶體\tOK\n";
+	}
+	catch (WebException ex)
+	{
+	MessageBox.Show("WebException\t" + ex.Message);
+	}
+	catch (Exception ex)
+	{
+	MessageBox.Show("Unknown error\t" + ex.Message);
+	}
+}
+
+string url_file2 = @"http://snowball.tartarus.org/otherlangs/english_cpp.txt";
+//string url_file2 = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
+using(WebClient wc = new WebClient())     // Create a web client
+{
+	try  // Get the response string from the URL.
+{
+//string filename_local = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+int pos1 = url_file2.LastIndexOf('/');
+int pos2 = url_file2.LastIndexOf('.');
+string filename_local = url_file2.Substring(pos1 + 1, pos2 - pos1 - 1) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + url_file2.Substring(pos2);
+richTextBox1.Text += "下載檔案, 本地檔案檔名 : " + filename_local + "\n";
+
+richTextBox1.Text += "抓網頁資料到本地檔案\tOK\n";
+}
+catch (WebException ex)
+{
+	MessageBox.Show("WebException\t" + ex.Message);
+}
+catch (Exception ex)
+{
+	MessageBox.Show("Unknown error\t" + ex.Message);
+}
+}
+
+string url_weather = @"http://api.openweathermap.org/data/2.5/weather?q=Hsinchu&mode=xml&units=imperial&APPID=e8edf79325ae8948a635efd0e076a8bc";
+using(WebClient wc = new WebClient())     // Create a web client
+{
+	try  // Get the response string from the URL.
+	{
+		// Get the response string from the URL.
+		//richTextBox1.Text += "data\n" + xml + "\n";
+		richTextBox1.Text += "抓網頁查詢資料到記憶體\tOK\n";
+	}
+	catch (WebException ex)
+	{
+		MessageBox.Show("WebException\t" + ex.Message);
+	}
+	catch (Exception ex)
+	{
+		MessageBox.Show("Unknown error\t" + ex.Message);
+	}
+}
+	
+string img_src_url = @"https://apod.nasa.gov/apod/image/2103/VolcanoStars_Vella_1080.jpg";
+richTextBox1.Text += "圖片所在網址 : " + img_src_url + "\n";
+try
+{
+	//圖片下載並存檔
+	DownloadImage(img_src_url);
+	richTextBox1.Text += "圖片下載並存檔\tOK\n";
+	
+	//圖片下來並顯示
+	Image img = GetPicture(img_src_url);
+	pictureBox1.Image = img;
+	richTextBox1.Text += "圖片下來並顯示\tOK\n";
+}
+catch (Exception ex)
+{
+	richTextBox1.Text += "*** Download Error" + "\n";
+	richTextBox1.Text += "*** " + ex.Message + "\n";
+}
+
+//下載COVID-19資料
+
+// Compose the local data file name.
+string filename_covid19a = "state_data" + DateTime.Now.ToString("yyyy_MM_dd") + ".csv";
+
+// Download today's data.
+string url = "https://covidtracking.com/api/v1/states/daily.csv";
+
+richTextBox1.Text += "LoadData \tURL : " + url + "\tfile : " + filename_covid19a + "\n";
+
+DownloadFile(url, filename_covid19a);
+
+richTextBox1.Text += "Loading case data...\n";
+
+// Compose the local data file name.
+string filename_covid19b = "cases" + DateTime.Now.ToString("yyyy_MM_dd") + ".csv";
+
+// Download today's data.
+url = "https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_confirmed_global.csv&filename=time_series_covid19_confirmed_global.csv";
+DownloadFile(url, filename_covid19b);
+}
+
+// Download the indicated file
+private void DownloadImage(string url)
+{
+//richTextBox1.Text += "下載圖片 : " + url + "\n";
+
+ WebClient wc = new WebClient();
+
+//int pos = url.LastIndexOf('/');
+//string filename = url.Substring(pos + 1);
+
+int pos1 = url.LastIndexOf('/');
+int pos2 = url.LastIndexOf('.');
+string filename = url.Substring(pos1 + 1, pos2 - pos1 - 1) + DateTime.Now.ToString("_yyyyMMdd_HHmmss") + url.Substring(pos2);
+richTextBox1.Text += "下載圖片, 本地圖片檔名 : " + filename + "\n";
+
+// Use one of the following.
+// For .NET Framework 4.5 and later:
+//ServicePointManager.SecurityProtocol =
+//    SecurityProtocolType.Tls12;
+// For .NET Framework 4.0 through 4.4:
+ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+}
+
+// Download a file from the internet.
+// Get the picture at a given URL.
+private Image GetPicture(string url)
+{
+try
+{
+	WebClient wc = new WebClient();
+
+// Use one of the following.
+//ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+
+return Image.FromStream(image_stream);
+}
+catch (Exception ex)
+{
+richTextBox1.Text += "Error downloading picture " + url + '\n' + ex.Message + "\n";
+return null;
+}
+}
+
+private void DownloadFile(string url, string filename)
+{
+	 WebClient wc = new WebClient();
+}
+
+//------------------------------------------------------------  # 60個
+
+BTW, if the HtmlNode has a “ID”, like “<div id='post_list'>value</div>”, call GetElementbyId() is OK for getting the HtmlNode, then get the value by HtmlNode.InnerText or HtmlNode.Attribute.
+
+Please see the following C# code snippet.
+
+Code snippet:
+
+ //get HtmlAgilityPack.HtmlDocument object   
+ HtmlDocument doc = new HtmlDocument();  
+ //load HTML   
+doc.LoadHtml(pageSource);         
+//get HtmlNode by ID   
+ HtmlNode navNode = doc.GetElementbyId("post_list");	//測這個
+
+//------------------------------------------------------------  # 60個
+
+using HtmlAgilityPack;
+
+namespace RegexPractice
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string pageUrl = "http://top.baidu.com/buzz.php?p=top_keyword";
+            WebClient wc = new WebClient();
+            byte[] pageSourceBytes = wc.DownloadData(new Uri(pageUrl));
+            string pageSource = Encoding.GetEncoding("gb2312").GetString(pageSourceBytes);
+
+            //Regex searchKeyRegex = new Regex("<td class=\"key\">.*?target=\"_blank\">(?<keyWord>.*?)</a></td>");
+            //MatchCollection mc = searchKeyRegex.Matches(pageSource);
+            //List<string> keyWordList = new List<string>();
+            //foreach(Match m in mc)
+            //{
+            //    keyWordList.Add(m.Groups["keyWord"].Value);
+            //}
+
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(pageSource);
+
+            HtmlNodeCollection keyNodes = doc.DocumentNode.SelectNodes("//td[@class='key']/a[@ target='_blank']");
+            List<string> keyWords = new List<string>();
+            foreach (HtmlNode keyNode in keyNodes)
+            {
+                keyWords.Add(keyNode.InnerText);
+            }
+
+            //HtmlDocument doc = new HtmlDocument();
+            //doc.LoadHtml(pageSource);
+
+            //HtmlNode ulNode = doc.DocumentNode.SelectSingleNode("//ul[@class='hotnews']");
+
+            //HtmlNodeCollection liNodes = ulNode.SelectNodes("li");
+
+            //List<string> topList = new List<string>();
+            //List<string> subList = new List<string>();
+
+            //foreach (HtmlNode liNode in liNodes)
+            //{
+            //    if (liNode.Attributes["class"] != null && liNode.Attributes["class"].Value == "top")
+            //    {
+            //        topList.Add(liNode.InnerText);
+            //    }
+            //    else
+            //    {
+            //        if (subList.Count < topList.Count)
+            //        {
+            //            subList.Add(liNode.InnerText);
+            //        }
+            //        else
+            //        {
+            //            subList[subList.Count - 1] = subList[subList.Count - 1] + liNode.InnerText;
+            //        }
+            //    }
+            //}
+
+            return;
+
+            //Regex hotTopNewsRegex = new Regex("class=\"a3\".*?>(?<hotNews>.*)<");
+            //MatchCollection topMc = hotTopNewsRegex.Matches(pageSource);
+
+            //List<string> hotNewsList = new List<string>();
+            //foreach (Match m in topMc)
+            //{
+            //    hotNewsList.Add(m.Groups["hotNews"].Value);
+            //}
+
+            //Regex replaceRegex = new Regex("</?font.*?>");
+            //for (int i = 0; i < hotNewsList.Count;i++ )
+            //{
+            //    hotNewsList[i] = replaceRegex.Replace(hotNewsList[i], "");
+            //}
+
+            //Regex hotSubNewsRegex = new Regex("(?s)class=\"top\"(?<subNews>.*?)class=\"top\"");
+            //MatchCollection subMc = hotSubNewsRegex.Matches(pageSource);
+            //int temp = subMc.Count;
+
+            //List<string> subNewsList = new List<string>();
+            //foreach (Match m in subMc)
+            //{
+            //    subNewsList.Add(m.Groups["subNews"].Value);
+            //}
+        }
+    }
+}
+
+//------------------------------------------------------------  # 60個
+
+Another code snippet
+Download specified number of pictures from “ http://browse.deviantart.com/customization/wallpaper/widescreen/?order=15” and save to local files.
+
+	using HtmlAgilityPack;  
+	  
+	namespace RegexPractice  
+	{  
+	    public class Util  
+	    {  
+	  
+	        //Get byte[] format page source    
+	        public static byte[] GetPageSourceBytes(string url)  
+	        {  
+	            WebClient wc = new WebClient();  
+	            byte[] pageSourceBytes = wc.DownloadData(new Uri(url));  
+	            return pageSourceBytes;  
+	        }  
+	  
+	        //get string format page source    
+	        public static string GetPageSource(string url, string encodingType)  
+	        {  
+	            byte[] pageSourceBytes = GetPageSourceBytes(url);  
+	            string pageSource = Encoding.GetEncoding(encodingType).GetString(pageSourceBytes);  
+	            return pageSource;  
+	        }  
+	  
+	        //Save image to local file    
+	        public static void SavaImagesToFile(string url,string dirPath,string fileName)  
+	        {  
+	            WebClient wc = new WebClient();  
+	            wc.DownloadFile(url, Path.Combine(dirPath, fileName + Guid.NewGuid().ToString()));  
+	        }  
+	    }  
+	  
+	    public class ImageInfo  
+	    {  
+	        public string Title;  
+	        public string SrcPath;  
+	
+	    class Program  
+	    {  
+	        static void Main(string[] args)  
+	        {  
+							            int sumCount = 100;  
+							            string baseUrl = "http://browse.deviantart.com/customization/wallpaper/widescreen/?order=15";  
+							  
+							            List<ImageInfo> imageInfoList = new List<ImageInfo>();  
+							            imageInfoList = GetSumImageInfoList(sumCount, baseUrl);  
+							  
+							            foreach (ImageInfo imageInfo in imageInfoList)  
+							            {  
+							                Util.SavaImagesToFile(imageInfo.SrcPath, @"c:\Images", GetValidFilename(imageInfo.Title));  
+							            }  
+							  
+							            return;  
+							        }  
+							  
+							        static string GetValidFilename(string filename)  
+							        {  
+							            foreach (char c in Path.GetInvalidFileNameChars())  
+							            {  
+							                filename = filename.Replace(c, '_');  
+							            }  
+							            return filename;  
+							        }  
+							  
+							        static List<ImageInfo> GetSumImageInfoList(int sum, string baseUri)  
+							        {  
+							            List<ImageInfo> resultList = new List<ImageInfo>();  
+							            int c = (sum - 1) / 24 + 1;  
+							            for (int i = 0; i < c; i++)  
+							            {  
+							                int offset = i * 24;  
+							                string url = string.Format("{0}&offset={1}", baseUri, offset);  
+							                List<ImageInfo> curResultList = ImageInfo.GetImageInfoList(url);  
+							                foreach (ImageInfo imageInfo in curResultList)  
+							                {  
+							                    if (resultList.Count < sum)  
+							                    {  
+							                        resultList.Add(imageInfo);  
+							                    }  
+							                }  
+							            }  
+							            return resultList;  
+							        }             
+	    }  
+	 }  
+
+//------------------------------------------------------------  # 60個
+
+要輸入帳號密碼的 WebClient
+                        // Upload the file to the server.
+                        WebClient myWebClient = new WebClient();
+                        WebClient wc = new WebClient();
+                        NetworkCredential myCredentials = new NetworkCredential("snijhof", "MKD7529s09");
+                        myWebClient.Credentials = myCredentials;
+                        byte[] responseArray = myWebClient.UploadFile("ftp://student.aii.avans.nl/GRP/42IN11EWd/Videos/" + fileName, filePath);
+
+                        String temp = Encoding.ASCII.GetString(responseArray);
+
+                        // Decode and display the response.
+                        Console.WriteLine("\nResponse Received.The contents of the file uploaded are:\n{0}", Encoding.ASCII.GetString(responseArray));
+
+//------------------------------------------------------------  # 60個
+
+HtmlAgilityPack 訊息
+
+            WebClient wc = new WebClient();
+            wc.BaseAddress = "http://www.juedui100.com/";
+            wc.Encoding = Encoding.UTF8;
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            string html = wc.DownloadString("aaaa.html");
+            doc.LoadHtml(html);
+            HtmlNode node = doc.DocumentNode.SelectSingleNode("/html/body/div[4]/div[1]/div[2]/ul[1]");     //根据XPath查找节点，跟XmlNode差不多
+            Console.WriteLine(node.InnerText);  //输出节点内容      年龄：21～30之间 婚史：未婚 ......      与InnerHtml的区别在于，它不会输出HTML代码
+            Console.WriteLine(node.InnerHtml);  //输出节点Html <li>年龄：21～30之间</li> <li>婚史：未婚</li> ....
+            Console.WriteLine(node.Name);       //输出 ul    Html元素名 
+
+//------------------------------------------------------------  # 60個
+
+*/
 
 

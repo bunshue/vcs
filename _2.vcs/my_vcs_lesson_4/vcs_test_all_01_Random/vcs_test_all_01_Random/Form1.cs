@@ -124,7 +124,6 @@ namespace vcs_test_all_01_Random
             tb_random_text18.Size = new Size(w, h);
             tb_random_text19.Size = new Size(w, h);
 
-
             lb_random0.Location = new Point(x_st, y_st + dy * 0);
             lb_random1.Location = new Point(x_st, y_st + dy * 1);
             lb_random2.Location = new Point(x_st, y_st + dy * 2);
@@ -1942,5 +1941,47 @@ namespace vcs_test_all_01_Random
             richTextBox1.Text += "\n";
         }
 
+6060
+
+使用 Random 方法產生不重複亂數 
+
+//取得非常random的數字
+Random rd = new Random((int)DateTime.Now.Ticks);
+
+/// <summary> 
+ /// 生成隨機字符串 
+ /// </summary> 
+ private class RandomStringGenerator 
+ { 
+     static readonly Random r = new Random(); 
+     const string _chars = "0123456789"; 
+     public static string GetRandomString() 
+     { 
+         char[] buffer = new char[5]; 
+         for (int i = 0; i < 5; i++) 
+         { 
+             buffer[i] = _chars[r.Next(_chars.Length)]; 
+          } 
+          return new string(buffer); 
+      } 
+ }
+
+        public static string GetRandomString2(int length)
+        {
+            var str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            //var next = new Random();
+            Random Rnd = new Random(); //加入Random，產生的數字不會重覆
+            var builder = new StringBuilder();
+            for (var i = 0; i < length; i++)
+            {
+                builder.Append(str[Rnd.Next(0, str.Length)]);
+            }
+            return builder.ToString();
+        }
+
+//------------------------------------------------------------  # 60個
+
+
 */
+
 

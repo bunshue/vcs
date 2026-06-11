@@ -406,6 +406,8 @@ namespace vcs_Process1
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //使用Process的StartInfo
+
             //開啟記事本
             Process process = new Process();
             process.StartInfo.UseShellExecute = false;
@@ -419,6 +421,25 @@ namespace vcs_Process1
             //Process
             process = Process.GetProcessById(process_id);  // 根據[process id]取得process
             richTextBox1.Text += "處理序名稱 : " + process.ProcessName + "\n";
+
+            //6060
+
+            string exe_filename = "notepad.exe";
+            //Process
+            process = new Process();    //創建一個進程用於調用外部程序
+            try
+            {
+                process.StartInfo.FileName = exe_filename;
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.CreateNoWindow = true;
+                process.Start();    //啟動程式
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -447,12 +468,137 @@ namespace vcs_Process1
             //------------------------------------------------------------  # 60個
 
             /*
+            richTextBox1.Text += "開啟 Chrome 指定網頁\n";
+            //filename = @"D:\_git\vcs\_1.data\_html\朱冶蕙老師的電腦教室.html";
+            //Process.Start("chrome.exe", filename);
+
+            //------------------------------------------------------------  # 60個
+
+            //開啟各種程式
+            Process.Start("Firefox.exe");
+
+            //開啟特定程式 1
+            Process.Start(@"C:\___small\imagesweeper5.1影像清潔工.exe");
+
+            //Process.Start()  // 啟動程式
+
+            /*
+            //C# 呼叫檔案總管開啟某個資料夾，並讓某個檔案或資料夾呈現反白的樣子
+            string file = @"C:\Windows\explorer.exe";
+            string argument = @"/select, " + foldername;
+            Process.Start(file, argument);
+            */
+
+            Process.Start("IExplore.exe", "tw.yahoo.com");  // 啟動程式 + 參數
+            Process.Start("chrome.exe", "C:\\Read_Cht.htm");  // 啟動程式 + 參數
+
+            //開啟IE, 指名網址
+            //Process.Start("IExplore.exe", "www.google.com.tw");   //same
+            Process.Start("iexplore.exe", "www.google.com.tw");
+
+            //開啟FireFox, 指名網址
+            Process.Start("Firefox.exe", "www.google.com.tw");
+
+            //用Adobe開啟pdf檔案
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
+            //Process
+            process = new Process();    //創建一個進程用於調用外部程序
+            process = Process.Start(filename);
+            process.WaitForExit();  //需等開啟的程式結束後才可以回到表單
+
+            //開啟檔案總管, C槽
+            String pathname = "C:\\";
+            Process.Start(pathname);
+            /*
+            if (Directory.Exists(this.FolderPath))
+            {
+                Process.Start(this.FolderPath);
+                return true;
+            }
+            else
+                return false;
+             */
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //Process
+
+            //test Process()
+            //在cmd控制台輸入命令
+            Process process = new Process();    //創建一個進程用於調用外部程序
+            process.StartInfo.FileName = "cmd.exe";//設定要啟動的程式
+            process.StartInfo.UseShellExecute = false;  // 是否指定操作系統外殼進程啟動程序
+            process.StartInfo.RedirectStandardInput = true;  // 重定向標準輸入, 可能接受來自調用程序的輸入信息
+            process.StartInfo.RedirectStandardOutput = true;  // 重定向標準輸出, 由調用程序獲取輸出信息
+            process.StartInfo.RedirectStandardError = true;  // 重定向錯誤輸出
+            process.StartInfo.CreateNoWindow = true;  // 是否顯示程序視窗, true:不顯示, false:顯示
+            process.Start();  // 啟動程式
+            //process.StandardInput.WriteLine("net start mssqlserver");//輸入命令
+            //process.StandardInput.WriteLine("exit");//一定要關閉。
+
+            //------------------------------------------------------------  # 60個
+
+            //取得系統處理器數目
+            int cnt = Environment.ProcessorCount;
+            richTextBox1.Text += "cnt = " + cnt.ToString() + "\n";
+
+            //通過C#還可以指定當前線程的運行在哪個CPU上。
+            //Process process = Process.GetCurrentProcess();  // 取得目前的process
+            //process.ProcessorAffinity = (IntPtr)0x0001;
+            //Process.ProcessorAffinity 設置當前CPU的屏蔽字，0x0001表示選用一號CPU，0x0002表示選用2號CPU。
+
+            //------------------------------------------------------------  # 60個
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //打開Windows小程式/註冊表/控制面板
+
+            //calc
+
+            //開啟Windows小程式
+            //開啟小算盤應用程式
+            //Process.Start(@"C:\WINDOWS\system32\calc.exe");   same
+            Process.Start("calc");  //打開計算機
+
+            /*
+            //開啟記事本程式
+            //Process.Start("notepad.exe"); //same
+            Process.Start("notepad");   //打開記事本
+
+            //小畫家
+            Process.Start("mspaint.exe");
+
+            //小作家(WordPad)
+            Process.Start("write.exe");
+
+            //啟動Windows Media Player
+            Process.Start("dvdplay.exe");
+
+            //打開Windows版本信息
+            Process.Start("winver.exe ");
+
+            //cmd命令列
+            Process.Start("cmd.exe");
+
+            //打開D槽
+            Process.Start("d:");
+            */
+
             richTextBox1.Text += "開啟 系統資訊 設定\n";
             Process.Start("MSINFO32.EXE");
 
             richTextBox1.Text += "開啟 顯示器 設定\n";
             Process.Start("desk.cpl");
-            */
+
             richTextBox1.Text += "開啟 滑鼠 設定\n";
             //Process.Start("main.cpl");
 
@@ -516,11 +662,6 @@ namespace vcs_Process1
             //NG
             //Process.Start("ntbackup.exe");
 
-            richTextBox1.Text += "開啟 Chrome 指定網頁\n";
-            //filename = @"D:\_git\vcs\_1.data\_html\朱冶蕙老師的電腦教室.html";
-            //Process.Start("chrome.exe", filename);
-
-            //------------------------------------------------------------  # 60個
 
             /*
             //開啟Office程式   (偽)
@@ -542,103 +683,20 @@ namespace vcs_Process1
             Process.Start(@"C:\Program Files\Microsoft Office\OFFICE15\outlook.exe");
             */
 
-            //6060
-
-
-            //開啟各種程式
-            Process.Start("Firefox.exe");
-
-            //開啟特定程式 1
-            Process.Start(@"C:\___small\imagesweeper5.1影像清潔工.exe");
-
-            //Process.Start()  // 啟動程式
-
-            /*
-            //C# 呼叫檔案總管開啟某個資料夾，並讓某個檔案或資料夾呈現反白的樣子
-            string file = @"C:\Windows\explorer.exe";
-            string argument = @"/select, " + foldername;
-            Process.Start(file, argument);
-            */
-
-            Process.Start("IExplore.exe", "tw.yahoo.com");  // 啟動程式 + 參數
-            Process.Start("chrome.exe", "C:\\Read_Cht.htm");  // 啟動程式 + 參數
-
-            //開啟IE, 指名網址
-            //Process.Start("IExplore.exe", "www.google.com.tw");   //same
-            Process.Start("iexplore.exe", "www.google.com.tw");
-
-            //開啟FireFox, 指名網址
-            Process.Start("Firefox.exe", "www.google.com.tw");
-
-
-            //用Adobe開啟pdf檔案
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
-            //Process
-            process = new Process();    //創建一個進程用於調用外部程序
-            process = Process.Start(filename);
-            process.WaitForExit();  //需等開啟的程式結束後才可以回到表單
-
-
-
-            //檔案總管 C槽
-            //開啟檔案總管
-            String pathname = "C:\\";
-            Process.Start(pathname);
-            /*
-            if (Directory.Exists(this.FolderPath))
-            {
-                Process.Start(this.FolderPath);
-                return true;
-            }
-            else
-                return false;
-             */
-
-
-
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            //Process
-
-            //test Process()
-            //在cmd控制台輸入命令
-            Process process = new Process();    //創建一個進程用於調用外部程序
-            process.StartInfo.FileName = "cmd.exe";//設定要啟動的程式
-            process.StartInfo.UseShellExecute = false;  // 是否指定操作系統外殼進程啟動程序
-            process.StartInfo.RedirectStandardInput = true;  // 重定向標準輸入, 可能接受來自調用程序的輸入信息
-            process.StartInfo.RedirectStandardOutput = true;  // 重定向標準輸出, 由調用程序獲取輸出信息
-            process.StartInfo.RedirectStandardError = true;  // 重定向錯誤輸出
-            process.StartInfo.CreateNoWindow = true;  // 是否顯示程序視窗, true:不顯示, false:顯示
-            process.Start();  // 啟動程式
-            //process.StandardInput.WriteLine("net start mssqlserver");//輸入命令
-            //process.StandardInput.WriteLine("exit");//一定要關閉。
-
             //------------------------------------------------------------  # 60個
 
-            //取得系統處理器數目
-            int cnt = Environment.ProcessorCount;
-            richTextBox1.Text += "cnt = " + cnt.ToString() + "\n";
+            //關機/註銷/重啟
 
-            //通過C#還可以指定當前線程的運行在哪個CPU上。
-            //Process process = Process.GetCurrentProcess();  // 取得目前的process
-            //process.ProcessorAffinity = (IntPtr)0x0001;
-            //Process.ProcessorAffinity 設置當前CPU的屏蔽字，0x0001表示選用一號CPU，0x0002表示選用2號CPU。
+            richTextBox1.Text += "(偽)關機\n";
+            //Process.Start("shutdown", "-s -t 0");
+
+            richTextBox1.Text += "(偽)註銷\n";
+            //Process.Start("shutdown", "-l ");
+
+            richTextBox1.Text += "(偽)重啟\n";
+            //Process.Start("shutdown", "-r -t 0");
 
             //------------------------------------------------------------  # 60個
-
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-        }
-
-        //------------------------------------------------------------  # 60個
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            //打開註冊表/控制面板
 
             //打開註冊表
             Process.Start("regedit.exe");
@@ -735,7 +793,6 @@ namespace vcs_Process1
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //取得Process資訊
             //取得Process資訊
             //1. 當前進程資料, 取得目前的Process
             //Process process = Process.GetCurrentProcess();  // 取得目前的process
@@ -869,16 +926,6 @@ namespace vcs_Process1
 
         private void button12_Click(object sender, EventArgs e)
         {
-            //關機/註銷/重啟
-
-            richTextBox1.Text += "(偽)關機\n";
-            //Process.Start("shutdown", "-s -t 0");
-
-            richTextBox1.Text += "(偽)註銷\n";
-            //Process.Start("shutdown", "-l ");
-
-            richTextBox1.Text += "(偽)重啟\n";
-            //Process.Start("shutdown", "-r -t 0");
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -1253,52 +1300,10 @@ namespace vcs_Process1
 
         private void button21_Click(object sender, EventArgs e)
         {
-            //new 1
-            string exe_filename = "notepad.exe";
-            Process process = new Process();    //創建一個進程用於調用外部程序
-            try
-            {
-                process.StartInfo.FileName = exe_filename;
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.CreateNoWindow = true;
-                process.Start();    //啟動程式
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
-            //開啟Windows小程式
-            //開啟小算盤應用程式
-            //Process.Start(@"C:\WINDOWS\system32\calc.exe");   same
-            Process.Start("calc");  //打開計算機
-
-            /*
-            //開啟記事本程式
-            //Process.Start("notepad.exe"); //same
-            Process.Start("notepad");   //打開記事本
-
-            //小畫家
-            Process.Start("mspaint.exe");
-
-            //小作家(WordPad)
-            Process.Start("write.exe");
-
-            //啟動Windows Media Player
-            Process.Start("dvdplay.exe");
-
-            //打開Windows版本信息
-            Process.Start("winver.exe ");
-
-            //cmd命令列
-            Process.Start("cmd.exe");
-
-            //打開D槽
-            Process.Start("d:");
-            */
         }
 
         private void button23_Click(object sender, EventArgs e)

@@ -28,12 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
@@ -52,92 +46,18 @@
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.groupBox_SizeMode = new System.Windows.Forms.GroupBox();
-            this.rb_size_mode4 = new System.Windows.Forms.RadioButton();
-            this.rb_size_mode3 = new System.Windows.Forms.RadioButton();
-            this.rb_size_mode2 = new System.Windows.Forms.RadioButton();
-            this.rb_size_mode1 = new System.Windows.Forms.RadioButton();
-            this.rb_size_mode0 = new System.Windows.Forms.RadioButton();
             this.bt_clear = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox1.SuspendLayout();
-            this.groupBox_SizeMode.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.Location = new System.Drawing.Point(12, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(120, 40);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "LoadPicture 1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.Location = new System.Drawing.Point(234, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(120, 40);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "LoadPicture 3";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button3
-            // 
-            this.button3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button3.Location = new System.Drawing.Point(345, 12);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(120, 40);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "LoadPicture 4";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button4
-            // 
-            this.button4.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button4.Location = new System.Drawing.Point(456, 12);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(120, 40);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "LoadPicture 5";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button5
-            // 
-            this.button5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button5.Location = new System.Drawing.Point(854, 10);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(120, 40);
-            this.button5.TabIndex = 5;
-            this.button5.Text = "Clear";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button7
-            // 
-            this.button7.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button7.Location = new System.Drawing.Point(123, 12);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(120, 40);
-            this.button7.TabIndex = 8;
-            this.button7.Text = "LoadPicture 2";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(856, 70);
+            this.richTextBox1.Location = new System.Drawing.Point(839, 162);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 9;
@@ -181,7 +101,7 @@
             // button8
             // 
             this.button8.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button8.Location = new System.Drawing.Point(804, 520);
+            this.button8.Location = new System.Drawing.Point(840, 121);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(74, 37);
             this.button8.TabIndex = 13;
@@ -195,7 +115,7 @@
             this.button18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button18.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button18.ForeColor = System.Drawing.Color.Black;
-            this.button18.Location = new System.Drawing.Point(738, 409);
+            this.button18.Location = new System.Drawing.Point(774, 10);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(60, 60);
             this.button18.TabIndex = 203;
@@ -208,7 +128,7 @@
             this.button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button17.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button17.ForeColor = System.Drawing.Color.Black;
-            this.button17.Location = new System.Drawing.Point(666, 409);
+            this.button17.Location = new System.Drawing.Point(702, 10);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(60, 60);
             this.button17.TabIndex = 202;
@@ -250,7 +170,7 @@
             this.btnCenter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnCenter.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnCenter.ForeColor = System.Drawing.Color.Black;
-            this.btnCenter.Location = new System.Drawing.Point(712, 521);
+            this.btnCenter.Location = new System.Drawing.Point(748, 122);
             this.btnCenter.Name = "btnCenter";
             this.btnCenter.Size = new System.Drawing.Size(40, 40);
             this.btnCenter.TabIndex = 212;
@@ -263,7 +183,7 @@
             this.btnRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnRight.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnRight.ForeColor = System.Drawing.Color.Black;
-            this.btnRight.Location = new System.Drawing.Point(758, 520);
+            this.btnRight.Location = new System.Drawing.Point(794, 121);
             this.btnRight.Name = "btnRight";
             this.btnRight.Size = new System.Drawing.Size(40, 40);
             this.btnRight.TabIndex = 211;
@@ -276,7 +196,7 @@
             this.btnLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnLeft.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnLeft.ForeColor = System.Drawing.Color.Black;
-            this.btnLeft.Location = new System.Drawing.Point(666, 520);
+            this.btnLeft.Location = new System.Drawing.Point(702, 121);
             this.btnLeft.Name = "btnLeft";
             this.btnLeft.Size = new System.Drawing.Size(40, 40);
             this.btnLeft.TabIndex = 210;
@@ -289,7 +209,7 @@
             this.btnDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnDown.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnDown.ForeColor = System.Drawing.Color.Black;
-            this.btnDown.Location = new System.Drawing.Point(712, 567);
+            this.btnDown.Location = new System.Drawing.Point(748, 168);
             this.btnDown.Name = "btnDown";
             this.btnDown.Size = new System.Drawing.Size(40, 40);
             this.btnDown.TabIndex = 209;
@@ -302,7 +222,7 @@
             this.btnUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnUp.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.btnUp.ForeColor = System.Drawing.Color.Black;
-            this.btnUp.Location = new System.Drawing.Point(712, 475);
+            this.btnUp.Location = new System.Drawing.Point(748, 76);
             this.btnUp.Name = "btnUp";
             this.btnUp.Size = new System.Drawing.Size(40, 40);
             this.btnUp.TabIndex = 208;
@@ -322,9 +242,9 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox2.Location = new System.Drawing.Point(722, 204);
             this.pictureBox2.Name = "pictureBox2";
@@ -345,89 +265,10 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Mode";
             // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(582, 12);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(120, 40);
-            this.button6.TabIndex = 217;
-            this.button6.Text = "做一個圓形的pictureBox";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // groupBox_SizeMode
-            // 
-            this.groupBox_SizeMode.Controls.Add(this.rb_size_mode4);
-            this.groupBox_SizeMode.Controls.Add(this.rb_size_mode3);
-            this.groupBox_SizeMode.Controls.Add(this.rb_size_mode2);
-            this.groupBox_SizeMode.Controls.Add(this.rb_size_mode1);
-            this.groupBox_SizeMode.Controls.Add(this.rb_size_mode0);
-            this.groupBox_SizeMode.Location = new System.Drawing.Point(722, 12);
-            this.groupBox_SizeMode.Name = "groupBox_SizeMode";
-            this.groupBox_SizeMode.Size = new System.Drawing.Size(100, 100);
-            this.groupBox_SizeMode.TabIndex = 218;
-            this.groupBox_SizeMode.TabStop = false;
-            this.groupBox_SizeMode.Text = "SizeMode";
-            // 
-            // rb_size_mode4
-            // 
-            this.rb_size_mode4.AutoSize = true;
-            this.rb_size_mode4.Location = new System.Drawing.Point(20, 110);
-            this.rb_size_mode4.Name = "rb_size_mode4";
-            this.rb_size_mode4.Size = new System.Drawing.Size(85, 16);
-            this.rb_size_mode4.TabIndex = 4;
-            this.rb_size_mode4.TabStop = true;
-            this.rb_size_mode4.Text = "radioButton9";
-            this.rb_size_mode4.UseVisualStyleBackColor = true;
-            // 
-            // rb_size_mode3
-            // 
-            this.rb_size_mode3.AutoSize = true;
-            this.rb_size_mode3.Location = new System.Drawing.Point(20, 88);
-            this.rb_size_mode3.Name = "rb_size_mode3";
-            this.rb_size_mode3.Size = new System.Drawing.Size(85, 16);
-            this.rb_size_mode3.TabIndex = 3;
-            this.rb_size_mode3.TabStop = true;
-            this.rb_size_mode3.Text = "radioButton8";
-            this.rb_size_mode3.UseVisualStyleBackColor = true;
-            // 
-            // rb_size_mode2
-            // 
-            this.rb_size_mode2.AutoSize = true;
-            this.rb_size_mode2.Location = new System.Drawing.Point(20, 66);
-            this.rb_size_mode2.Name = "rb_size_mode2";
-            this.rb_size_mode2.Size = new System.Drawing.Size(85, 16);
-            this.rb_size_mode2.TabIndex = 2;
-            this.rb_size_mode2.TabStop = true;
-            this.rb_size_mode2.Text = "radioButton7";
-            this.rb_size_mode2.UseVisualStyleBackColor = true;
-            // 
-            // rb_size_mode1
-            // 
-            this.rb_size_mode1.AutoSize = true;
-            this.rb_size_mode1.Location = new System.Drawing.Point(20, 44);
-            this.rb_size_mode1.Name = "rb_size_mode1";
-            this.rb_size_mode1.Size = new System.Drawing.Size(85, 16);
-            this.rb_size_mode1.TabIndex = 1;
-            this.rb_size_mode1.TabStop = true;
-            this.rb_size_mode1.Text = "radioButton6";
-            this.rb_size_mode1.UseVisualStyleBackColor = true;
-            // 
-            // rb_size_mode0
-            // 
-            this.rb_size_mode0.AutoSize = true;
-            this.rb_size_mode0.Location = new System.Drawing.Point(20, 22);
-            this.rb_size_mode0.Name = "rb_size_mode0";
-            this.rb_size_mode0.Size = new System.Drawing.Size(85, 16);
-            this.rb_size_mode0.TabIndex = 0;
-            this.rb_size_mode0.TabStop = true;
-            this.rb_size_mode0.Text = "radioButton5";
-            this.rb_size_mode0.UseVisualStyleBackColor = true;
-            // 
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(869, 80);
+            this.bt_clear.Location = new System.Drawing.Point(852, 172);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 219;
@@ -438,7 +279,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 55);
+            this.pictureBox1.Location = new System.Drawing.Point(10, 10);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(640, 480);
             this.pictureBox1.TabIndex = 3;
@@ -450,8 +291,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(993, 667);
             this.Controls.Add(this.bt_clear);
-            this.Controls.Add(this.groupBox_SizeMode);
-            this.Controls.Add(this.button6);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.btnCenter);
@@ -466,13 +305,7 @@
             this.Controls.Add(this.button8);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -480,8 +313,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox_SizeMode.ResumeLayout(false);
-            this.groupBox_SizeMode.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -490,12 +321,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.RadioButton radioButton1;
@@ -514,13 +339,6 @@
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.GroupBox groupBox_SizeMode;
-        private System.Windows.Forms.RadioButton rb_size_mode4;
-        private System.Windows.Forms.RadioButton rb_size_mode3;
-        private System.Windows.Forms.RadioButton rb_size_mode2;
-        private System.Windows.Forms.RadioButton rb_size_mode1;
-        private System.Windows.Forms.RadioButton rb_size_mode0;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.PictureBox pictureBox1;
     }

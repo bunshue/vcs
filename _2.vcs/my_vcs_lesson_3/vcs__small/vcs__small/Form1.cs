@@ -597,3 +597,12 @@ namespace vcs__small
 
 */
 
+
+
+/*
+
+            richTextBox1.Text += dateTimePicker1.Value.ToString() + "\n";
+            richTextBox1.Text += dateTimePicker1.Value.ToShortDateString() + "\n";
+
+*/
+
