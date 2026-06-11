@@ -50,6 +50,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.button0 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picOriginal)).BeginInit();
@@ -58,10 +59,10 @@
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.Location = new System.Drawing.Point(12, 12);
+            this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button1.Location = new System.Drawing.Point(12, 78);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(111, 88);
+            this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 0;
             this.button1.Text = "讀取照片的Exif資料";
             this.button1.UseVisualStyleBackColor = true;
@@ -75,9 +76,9 @@
             this.columnHeader3,
             this.columnHeader4,
             this.columnHeader5});
-            this.listView1.Location = new System.Drawing.Point(827, 12);
+            this.listView1.Location = new System.Drawing.Point(1001, 21);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(644, 376);
+            this.listView1.Size = new System.Drawing.Size(100, 100);
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -85,7 +86,7 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Property";
-            this.columnHeader1.Width = 160;
+            this.columnHeader1.Width = 120;
             // 
             // columnHeader2
             // 
@@ -94,12 +95,11 @@
             // columnHeader3
             // 
             this.columnHeader3.Text = "Data Type";
-            this.columnHeader3.Width = 170;
+            this.columnHeader3.Width = 120;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "Data Length";
-            this.columnHeader4.Width = 80;
             // 
             // columnHeader5
             // 
@@ -109,9 +109,9 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(828, 394);
+            this.richTextBox1.Location = new System.Drawing.Point(1108, 18);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(644, 325);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "ListView的用法:\n1. 插入ListView控件\n2. listView1屬性/Columns打開(集合)/ColumnHeader集合編輯器加入5個項目" +
                 ",\n   修改顯示文字(Text)及顯示寬度(Width)\n3. listView1屬性/View/改成Details\n \n ";
@@ -119,7 +119,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(853, 525);
+            this.bt_clear.Location = new System.Drawing.Point(1120, 30);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 3;
@@ -130,7 +130,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 219);
+            this.pictureBox1.Location = new System.Drawing.Point(228, 150);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(400, 500);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -139,10 +139,10 @@
             // 
             // button2
             // 
-            this.button2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.Location = new System.Drawing.Point(129, 12);
+            this.button2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button2.Location = new System.Drawing.Point(12, 144);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(111, 88);
+            this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 5;
             this.button2.Text = "讀取照片的拍攝時間";
             this.button2.UseVisualStyleBackColor = true;
@@ -150,10 +150,10 @@
             // 
             // button3
             // 
-            this.button3.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button3.Location = new System.Drawing.Point(363, 12);
+            this.button3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button3.Location = new System.Drawing.Point(12, 210);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(111, 88);
+            this.button3.Size = new System.Drawing.Size(200, 60);
             this.button3.TabIndex = 6;
             this.button3.Text = "取得圖片的EXIF資料";
             this.button3.UseVisualStyleBackColor = true;
@@ -161,10 +161,10 @@
             // 
             // button4
             // 
-            this.button4.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button4.Location = new System.Drawing.Point(246, 12);
+            this.button4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button4.Location = new System.Drawing.Point(12, 276);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(111, 88);
+            this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 7;
             this.button4.Text = "取得拍照時間";
             this.button4.UseVisualStyleBackColor = true;
@@ -172,10 +172,10 @@
             // 
             // button5
             // 
-            this.button5.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button5.Location = new System.Drawing.Point(480, 12);
+            this.button5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button5.Location = new System.Drawing.Point(12, 342);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(111, 88);
+            this.button5.Size = new System.Drawing.Size(200, 60);
             this.button5.TabIndex = 8;
             this.button5.Text = "取得圖片的EXIF資料";
             this.button5.UseVisualStyleBackColor = true;
@@ -184,7 +184,7 @@
             // pictureBox2
             // 
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox2.Location = new System.Drawing.Point(418, 219);
+            this.pictureBox2.Location = new System.Drawing.Point(634, 150);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(400, 500);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -194,7 +194,7 @@
             // button6
             // 
             this.button6.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button6.Location = new System.Drawing.Point(301, 119);
+            this.button6.Location = new System.Drawing.Point(511, 39);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(111, 88);
             this.button6.TabIndex = 10;
@@ -204,9 +204,8 @@
             // 
             // picOriginal
             // 
-            this.picOriginal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picOriginal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.picOriginal.Location = new System.Drawing.Point(561, 119);
+            this.picOriginal.Location = new System.Drawing.Point(754, 21);
             this.picOriginal.Name = "picOriginal";
             this.picOriginal.Size = new System.Drawing.Size(114, 97);
             this.picOriginal.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -215,9 +214,8 @@
             // 
             // picOrientation
             // 
-            this.picOrientation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picOrientation.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.picOrientation.Location = new System.Drawing.Point(681, 119);
+            this.picOrientation.Location = new System.Drawing.Point(874, 21);
             this.picOrientation.Name = "picOrientation";
             this.picOrientation.Size = new System.Drawing.Size(121, 97);
             this.picOrientation.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -226,8 +224,9 @@
             // 
             // lblOrientation
             // 
+            this.lblOrientation.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblOrientation.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOrientation.Location = new System.Drawing.Point(435, 135);
+            this.lblOrientation.Location = new System.Drawing.Point(628, 37);
             this.lblOrientation.Name = "lblOrientation";
             this.lblOrientation.Size = new System.Drawing.Size(120, 59);
             this.lblOrientation.TabIndex = 24;
@@ -237,7 +236,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label3.Location = new System.Drawing.Point(26, 128);
+            this.label3.Location = new System.Drawing.Point(224, 12);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(430, 24);
             this.label3.TabIndex = 27;
@@ -247,7 +246,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(421, 186);
+            this.label2.Location = new System.Drawing.Point(637, 117);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 24);
             this.label2.TabIndex = 29;
@@ -257,17 +256,29 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(26, 186);
+            this.label1.Location = new System.Drawing.Point(242, 117);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 24);
             this.label1.TabIndex = 28;
             this.label1.Text = "原圖";
             // 
+            // button0
+            // 
+            this.button0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button0.Location = new System.Drawing.Point(12, 12);
+            this.button0.Name = "button0";
+            this.button0.Size = new System.Drawing.Size(200, 60);
+            this.button0.TabIndex = 30;
+            this.button0.Text = "印上拍照日期";
+            this.button0.UseVisualStyleBackColor = true;
+            this.button0.Click += new System.EventHandler(this.button0_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1484, 731);
+            this.ClientSize = new System.Drawing.Size(1226, 666);
+            this.Controls.Add(this.button0);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
@@ -321,6 +332,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button0;
     }
 }
 

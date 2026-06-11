@@ -27,6 +27,8 @@ namespace vcs_Exif
 
             //------------------------------------------------------------  # 60個
 
+            CheckForIllegalCrossThreadCalls = false;
+
             label3.Text = "取得圖片內的方向值,\n自動轉換圖片方向";
 
             string filename = @"D:\_git\vcs\_1.data\______test_files1\orient1.jpg";
@@ -54,12 +56,17 @@ namespace vcs_Exif
             int y_st = 10;
             int dx = 200 + 10;
             int dy = 60 + 10;
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
 
-            listView1.Size = new Size(640, 400);
-            listView1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 0);
-
-            richTextBox1.Size = new Size(640, 320);
-            richTextBox1.Location = new Point(x_st + dx * 4 + 100, y_st + dy * 6);
+            listView1.Size = new Size(500, 400);
+            listView1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            richTextBox1.Size = new Size(500, 320);
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 6);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             this.Size = new Size(1620, 800);
@@ -73,6 +80,96 @@ namespace vcs_Exif
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        //------------------------------------------------------------  # 60個
+
+        PropertyItem[] pi;
+        string TakePicDateTime;
+        int SpaceLocation;
+        string pdt;
+        string ptm;
+        Bitmap bitmap1;
+        Graphics g;
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            //印上拍照日期
+
+            richTextBox1.Text += "印上拍照日期\n";
+            richTextBox1.Text += "开始添加数码相片拍摄日期\n";
+
+            Font normalContentFont = new Font("宋体", 36, FontStyle.Bold);
+            Color normalContentColor = Color.Red;
+
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\p3.jpg";
+
+            richTextBox1.Text += filename + "\n";
+
+            return;
+
+            pi = GetExif(filename);
+            //获取元数据中的拍照日期时间，以字符串形式保存
+            TakePicDateTime = GetDateTime(pi);
+            richTextBox1.Text += "1取得相片的拍攝時間 : " + TakePicDateTime + "\n";
+
+            //分析字符串分别保存拍照日期和时间的标准格式
+            SpaceLocation = TakePicDateTime.IndexOf(" ");
+            pdt = TakePicDateTime.Substring(0, SpaceLocation);
+            pdt = pdt.Replace(":", "-");
+            ptm = TakePicDateTime.Substring(SpaceLocation + 1, TakePicDateTime.Length - SpaceLocation - 2);
+            TakePicDateTime = pdt + " " + ptm;
+            //由列表中的文件创建内存位图对象
+            bitmap1 = new Bitmap(filename);
+            //由位图对象创建Graphics对象的实例
+            g = Graphics.FromImage(bitmap1);
+
+            //绘制数码照片的日期/时间
+            richTextBox1.Text += "\n2取得相片的拍攝時間 : " + TakePicDateTime + "\n";
+
+            g.DrawString(TakePicDateTime, normalContentFont, new SolidBrush(normalContentColor), 10, bitmap1.Height - 40);
+            g.DrawString("西江月製作", normalContentFont, new SolidBrush(normalContentColor), 10, bitmap1.Height - 80);
+
+            //将添加日期/时间戳后的图像进行保存
+
+            string filename2 = Application.StartupPath + "\\" + Path.GetFileName(filename);
+            bitmap1.Save(filename2);
+            richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+
+            //释放内存位图对象
+            bitmap1.Dispose();
+
+            //System.Threading.Thread.Sleep(3500);
+            //Application.DoEvents();
+
+            richTextBox1.Text += "全部数码相片拍摄日期添加成功\n";
+        }
+
+        // 获取数码相片的拍摄日期
+        // 获取图像文件的所有元数据属性，保存倒PropertyItem数组
+        public static PropertyItem[] GetExif(string filename)
+        {
+            FileStream Mystream = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            //通过指定的数据流来创建Image
+            Image image = Image.FromStream(Mystream, true, false);
+            return image.PropertyItems;
+        }
+
+        //遍历所有元数据，获取拍照日期/时间
+        private string GetDateTime(PropertyItem[] parr)
+        {
+            Encoding ascii = Encoding.ASCII;
+            //遍历图像文件元数据，检索所有属性
+            foreach (PropertyItem pp in parr)
+            {
+                //如果是PropertyTagDateTime，则返回该属性所对应的值
+                if (pp.Id == 0x0132)
+                {
+                    return ascii.GetString(pp.Value);
+                }
+            }
+            //若没有相关的EXIF信息则返回N/A
+            return "N/A";
         }
 
         //------------------------------------------------------------  # 60個
@@ -130,33 +227,7 @@ namespace vcs_Exif
             richTextBox1.Text += "取得相片拍攝時間:\t" + TakePicDateTime + "\n";
         }
 
-        //#region 获取数码相片的拍摄日期
-        //获取图像文件的所有元数据属性，保存倒PropertyItem数组
-        public static PropertyItem[] GetExif(string fileName)
-        {
-            FileStream Mystream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-            //通过指定的数据流来创建Image
-            Image image = Image.FromStream(Mystream, true, false);
-            return image.PropertyItems;
-        }
-
-        //遍历所有元数据，获取拍照日期/时间
-        private string GetDateTime(System.Drawing.Imaging.PropertyItem[] parr)
-        {
-            Encoding ascii = Encoding.ASCII;
-            //遍历图像文件元数据，检索所有属性
-            foreach (PropertyItem pp in parr)
-            {
-                //如果是PropertyTagDateTime，则返回该属性所对应的值
-                if (pp.Id == 0x0132)
-                {
-                    return ascii.GetString(pp.Value);
-                }
-            }
-            //若没有相关的EXIF信息则返回N/A
-            return "N/A";
-        }
-        //#endregion
+        //------------------------------------------------------------  # 60個
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -167,8 +238,6 @@ namespace vcs_Exif
             //获取元数据中的拍照日期时间，以字符串形式保存
             string TakePicDateTime = GetDateTime2(pi);
             richTextBox1.Text += "1取得相片的拍攝時間 : " + TakePicDateTime + "\n";
-
-
 
             GetInfo(pi);
         }
@@ -209,6 +278,8 @@ namespace vcs_Exif
             return;
         }
 
+        //------------------------------------------------------------  # 60個
+
         private void button4_Click(object sender, EventArgs e)
         {
             //取得拍照時間
@@ -242,11 +313,11 @@ namespace vcs_Exif
         }
 
         //遍歷所有元數據，獲取拍照日期/時間
-        private string GetTakePicDateTime(System.Drawing.Imaging.PropertyItem[] parr)
+        private string GetTakePicDateTime(PropertyItem[] parr)
         {
             Encoding ascii = Encoding.ASCII;
             //遍歷圖像文件元數據，檢索所有屬性
-            foreach (System.Drawing.Imaging.PropertyItem p in parr)
+            foreach (PropertyItem p in parr)
             {
                 //如果是PropertyTagDateTime，則返回該屬性所對應的值
                 if (p.Id == 0x0132)
@@ -286,15 +357,12 @@ namespace vcs_Exif
             richTextBox1.Text += "aaaaa : " + aperture + "\n\n";
             richTextBox1.Text += "aaaaa : " + shutter + "\n\n";
             richTextBox1.Text += "aaaaa : " + sensitive + "\n\n";
-
-
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             //檢查圖片的方向
             string filename = @"D:\_git\vcs\_1.data\______test_files1\orient1.jpg";
-
 
             // Open the file.
             Bitmap bm = new Bitmap(filename);
@@ -305,12 +373,10 @@ namespace vcs_Exif
             lblOrientation.Text = orientation.ToString();
             richTextBox1.Text += orientation.ToString() + "\n";
             picOrientation.Image = ExifStuff.OrientationImage(orientation);
-
-
-
-
         }
     }
+
+    //------------------------------------------------------------  # 60個
 
     public class Picturexif
     {
