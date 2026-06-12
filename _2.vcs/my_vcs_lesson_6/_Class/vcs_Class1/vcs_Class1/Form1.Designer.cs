@@ -180,6 +180,7 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(180, 60);
             this.button23.TabIndex = 9;
+            this.button23.Text = "建構子和解構子";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -699,6 +700,7 @@
             this.bt_class_new_01.Name = "bt_class_new_01";
             this.bt_class_new_01.Size = new System.Drawing.Size(180, 60);
             this.bt_class_new_01.TabIndex = 10;
+            this.bt_class_new_01.Text = "Class 新進";
             this.bt_class_new_01.UseVisualStyleBackColor = true;
             this.bt_class_new_01.Click += new System.EventHandler(this.bt_class_new_01_Click);
             // 

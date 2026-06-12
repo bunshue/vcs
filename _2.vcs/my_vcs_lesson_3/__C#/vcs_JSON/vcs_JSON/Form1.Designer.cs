@@ -45,7 +45,7 @@
             this.richTextBox1.Size = new System.Drawing.Size(550, 500);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "1. 參考/加入參考/瀏覽/ ..... \\Json120r3\\Bin\\net40\\Newtonsoft.Json.dll\n2. 加 using Newtonso" +
-    "ft.Json;\n\n";
+                "ft.Json;\n\n";
             // 
             // button1
             // 
@@ -110,6 +110,7 @@
             this.button0.Size = new System.Drawing.Size(200, 60);
             this.button0.TabIndex = 10;
             this.button0.UseVisualStyleBackColor = true;
+            this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
             // Form1
             // 

@@ -128,7 +128,7 @@ namespace vcs_ImageProcessing1
             richTextBox1.Text += "各種影像處理速度比較 ST\n";
             Application.DoEvents();
 
-            //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
+            //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_哆啦A夢\doraemon1.jpg";
             //string filename = @"D:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_image_processing\pic6_children2.png";
 
@@ -176,7 +176,7 @@ namespace vcs_ImageProcessing1
 
             richTextBox1.Text += "像素法\n";
 
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_哆啦A夢\doraemon1.jpg";
             Bitmap bmp = image_process_pixel1(filename);
             pictureBox1.Image = bmp;
         }
@@ -213,7 +213,7 @@ namespace vcs_ImageProcessing1
         private void button2_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "內存法\n";
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_哆啦A夢\doraemon1.jpg";
             Bitmap bmp = image_process_memory1(filename);
             pictureBox1.Image = bmp;
         }
@@ -290,7 +290,7 @@ namespace vcs_ImageProcessing1
         private void button3_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "指針法3\n";
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_哆啦A夢\doraemon1.jpg";
             Bitmap bmp = image_process_pointer1(filename);
             pictureBox1.Image = bmp;
         }
@@ -608,7 +608,7 @@ namespace vcs_ImageProcessing1
             //MemoryStream 2 圖片 轉 拜列
             richTextBox1.Text += "圖片 轉 拜列\n";
 
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\doraemon1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_哆啦A夢\doraemon1.jpg";
             //string filename = @"D:\_git\vcs\_1.data\______test_files1\pic_256X10.bmp";
             Image image = Image.FromFile(filename);//檔案 轉 Image
 

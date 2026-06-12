@@ -75,6 +75,12 @@ namespace vcs_JSON
 
         //------------------------------------------------------------  # 60個
 
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             Introduction intro = new Introduction

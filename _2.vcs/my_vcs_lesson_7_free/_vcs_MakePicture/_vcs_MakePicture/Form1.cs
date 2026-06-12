@@ -3007,7 +3007,7 @@ namespace _vcs_MakePicture
             //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_01.jpg";
             //string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_book\20161226161423441.jpg";
             //string filename = @"D:\_git\vcs\_1.data\______test_files1\elephant.jpg";
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime/doraemon1.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_哆啦A夢\doraemon1.jpg";
 
             int sx = 175;//抓圖位置
             int sy = 465;

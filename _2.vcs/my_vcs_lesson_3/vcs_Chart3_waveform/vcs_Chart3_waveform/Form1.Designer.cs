@@ -45,14 +45,15 @@
             this.trackBar3 = new System.Windows.Forms.TrackBar();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn_pause = new System.Windows.Forms.Button();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.btn_play = new System.Windows.Forms.Button();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton0 = new System.Windows.Forms.RadioButton();
             this.numericUpDown_time = new System.Windows.Forms.NumericUpDown();
-            this.btn_play = new System.Windows.Forms.Button();
-            this.btn_pause = new System.Windows.Forms.Button();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
@@ -79,7 +80,7 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 20;
+            this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // trackBar1
@@ -116,7 +117,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(1148, 186);
+            this.bt_clear.Location = new System.Drawing.Point(1121, 194);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(72, 36);
             this.bt_clear.TabIndex = 10;
@@ -127,7 +128,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(1132, 157);
+            this.richTextBox1.Location = new System.Drawing.Point(1105, 165);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 9;
@@ -176,6 +177,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.radioButton5);
             this.groupBox1.Controls.Add(this.btn_pause);
             this.groupBox1.Controls.Add(this.radioButton4);
             this.groupBox1.Controls.Add(this.btn_play);
@@ -183,28 +185,50 @@
             this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Controls.Add(this.radioButton1);
             this.groupBox1.Controls.Add(this.radioButton0);
-            this.groupBox1.Location = new System.Drawing.Point(830, 12);
+            this.groupBox1.Location = new System.Drawing.Point(819, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(120, 220);
+            this.groupBox1.Size = new System.Drawing.Size(148, 162);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "信號選擇";
             // 
+            // btn_pause
+            // 
+            this.btn_pause.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_pause.BackgroundImage")));
+            this.btn_pause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_pause.Location = new System.Drawing.Point(63, 111);
+            this.btn_pause.Name = "btn_pause";
+            this.btn_pause.Size = new System.Drawing.Size(40, 40);
+            this.btn_pause.TabIndex = 122;
+            this.btn_pause.UseVisualStyleBackColor = true;
+            this.btn_pause.Click += new System.EventHandler(this.btn_pause_Click);
+            // 
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(17, 151);
+            this.radioButton4.Location = new System.Drawing.Point(17, 89);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(47, 16);
+            this.radioButton4.Size = new System.Drawing.Size(59, 16);
             this.radioButton4.TabIndex = 4;
-            this.radioButton4.Text = "市電";
+            this.radioButton4.Text = "梯形波";
             this.radioButton4.UseVisualStyleBackColor = true;
             this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            // 
+            // btn_play
+            // 
+            this.btn_play.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_play.BackgroundImage")));
+            this.btn_play.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_play.Location = new System.Drawing.Point(17, 111);
+            this.btn_play.Name = "btn_play";
+            this.btn_play.Size = new System.Drawing.Size(40, 40);
+            this.btn_play.TabIndex = 121;
+            this.btn_play.UseVisualStyleBackColor = true;
+            this.btn_play.Click += new System.EventHandler(this.btn_play_Click);
             // 
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(17, 126);
+            this.radioButton3.Location = new System.Drawing.Point(80, 57);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(47, 16);
             this.radioButton3.TabIndex = 3;
@@ -215,7 +239,7 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(17, 92);
+            this.radioButton2.Location = new System.Drawing.Point(17, 56);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(59, 16);
             this.radioButton2.TabIndex = 2;
@@ -226,7 +250,7 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(17, 59);
+            this.radioButton1.Location = new System.Drawing.Point(80, 25);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(59, 16);
             this.radioButton1.TabIndex = 1;
@@ -250,7 +274,7 @@
             // numericUpDown_time
             // 
             this.numericUpDown_time.Font = new System.Drawing.Font("Arial Narrow", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown_time.Location = new System.Drawing.Point(966, 163);
+            this.numericUpDown_time.Location = new System.Drawing.Point(976, 163);
             this.numericUpDown_time.Maximum = new decimal(new int[] {
             10,
             0,
@@ -272,27 +296,16 @@
             0});
             this.numericUpDown_time.ValueChanged += new System.EventHandler(this.numericUpDown_time_ValueChanged);
             // 
-            // btn_play
+            // radioButton5
             // 
-            this.btn_play.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_play.BackgroundImage")));
-            this.btn_play.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn_play.Location = new System.Drawing.Point(17, 174);
-            this.btn_play.Name = "btn_play";
-            this.btn_play.Size = new System.Drawing.Size(40, 40);
-            this.btn_play.TabIndex = 121;
-            this.btn_play.UseVisualStyleBackColor = true;
-            this.btn_play.Click += new System.EventHandler(this.btn_play_Click);
-            // 
-            // btn_pause
-            // 
-            this.btn_pause.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_pause.BackgroundImage")));
-            this.btn_pause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn_pause.Location = new System.Drawing.Point(63, 174);
-            this.btn_pause.Name = "btn_pause";
-            this.btn_pause.Size = new System.Drawing.Size(40, 40);
-            this.btn_pause.TabIndex = 122;
-            this.btn_pause.UseVisualStyleBackColor = true;
-            this.btn_pause.Click += new System.EventHandler(this.btn_pause_Click);
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Location = new System.Drawing.Point(80, 89);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(47, 16);
+            this.radioButton5.TabIndex = 123;
+            this.radioButton5.Text = "市電";
+            this.radioButton5.UseVisualStyleBackColor = true;
+            this.radioButton5.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
             // Form1
             // 
@@ -348,6 +361,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDown_time;
         private System.Windows.Forms.Button btn_pause;
         private System.Windows.Forms.Button btn_play;
+        private System.Windows.Forms.RadioButton radioButton5;
     }
 }
 

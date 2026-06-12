@@ -1043,9 +1043,37 @@ namespace vcs_Class1
 
         //------------------------------------------------------------  # 60個
 
+        public class Introduction
+        {
+            public string Name { get; set; }         //名稱
+            public int Age { get; set; }             //年紀
+            public bool Marry { get; set; }          //結婚
+            public List<string> Habit { get; set; }  //興趣
+        }
+
         private void bt_class_new_01_Click(object sender, EventArgs e)
         {
-
+            Introduction intro = new Introduction
+            {
+                Name = "Berry",
+                Age = 18,
+                Marry = false,
+                Habit = new List<string>
+                {
+                    "Sing",
+                    "Dance",
+                    "Code",
+                    "Sleep"
+                }
+            };
+            richTextBox1.Text += "Name : " + intro.Name + "\n";
+            richTextBox1.Text += "Age : " + intro.Age + "\n";
+            richTextBox1.Text += "Marry : " + intro.Marry + "\n";
+            richTextBox1.Text += "Habit :\n";
+            foreach (string hh in intro.Habit)
+            {
+                richTextBox1.Text += hh + "\n";
+            }
         }
 
         //------------------------------------------------------------  # 60個

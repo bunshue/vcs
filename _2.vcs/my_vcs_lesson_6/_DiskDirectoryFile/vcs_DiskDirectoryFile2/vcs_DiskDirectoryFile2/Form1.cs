@@ -576,7 +576,7 @@ namespace vcs_DiskDirectoryFile2
         private void button16_Click(object sender, EventArgs e)
         {
             //根據文件頭判斷上傳的文件類型
-            string filename = @"D:\_git\vcs\_1.data\______test_files1\doraemon.jpg";
+            string filename = @"D:\_git\vcs\_1.data\______test_files1\__pic\_anime\_哆啦A夢\doraemon1.jpg";
             string result = getFileType(filename);
             richTextBox1.Text += "File Type : " + result + "\n";
         }
